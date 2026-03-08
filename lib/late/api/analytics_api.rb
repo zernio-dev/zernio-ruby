@@ -571,7 +571,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get LinkedIn post reactions (who reacted)
+    # Get LinkedIn post reactions
     # Returns individual reactions for a specific LinkedIn post, including reactor profiles (name, headline/job title, profile picture, profile URL, reaction type). Only works for **organization/company page** accounts. LinkedIn restricts reaction data for personal profiles (r_member_social_feed is a closed permission). 
     # @param account_id [String] The ID of the LinkedIn organization account
     # @param urn [String] The LinkedIn post URN
@@ -584,7 +584,7 @@ module Late
       data
     end
 
-    # Get LinkedIn post reactions (who reacted)
+    # Get LinkedIn post reactions
     # Returns individual reactions for a specific LinkedIn post, including reactor profiles (name, headline/job title, profile picture, profile URL, reaction type). Only works for **organization/company page** accounts. LinkedIn restricts reaction data for personal profiles (r_member_social_feed is a closed permission). 
     # @param account_id [String] The ID of the LinkedIn organization account
     # @param urn [String] The LinkedIn post URN

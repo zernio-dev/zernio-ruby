@@ -11,7 +11,7 @@ All URIs are relative to *https://getlate.dev/api*
 | [**get_follower_stats**](AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**get_linked_in_aggregate_analytics**](AnalyticsApi.md#get_linked_in_aggregate_analytics) | **GET** /v1/accounts/{accountId}/linkedin-aggregate-analytics | Get LinkedIn aggregate stats |
 | [**get_linked_in_post_analytics**](AnalyticsApi.md#get_linked_in_post_analytics) | **GET** /v1/accounts/{accountId}/linkedin-post-analytics | Get LinkedIn post stats |
-| [**get_linked_in_post_reactions**](AnalyticsApi.md#get_linked_in_post_reactions) | **GET** /v1/accounts/{accountId}/linkedin-post-reactions | Get LinkedIn post reactions (who reacted) |
+| [**get_linked_in_post_reactions**](AnalyticsApi.md#get_linked_in_post_reactions) | **GET** /v1/accounts/{accountId}/linkedin-post-reactions | Get LinkedIn post reactions |
 | [**get_post_timeline**](AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline |
 | [**get_posting_frequency**](AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get posting frequency vs engagement |
 | [**get_you_tube_daily_views**](AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views |
@@ -568,7 +568,7 @@ end
 
 > <GetLinkedInPostReactions200Response> get_linked_in_post_reactions(account_id, urn, opts)
 
-Get LinkedIn post reactions (who reacted)
+Get LinkedIn post reactions
 
 Returns individual reactions for a specific LinkedIn post, including reactor profiles (name, headline/job title, profile picture, profile URL, reaction type). Only works for **organization/company page** accounts. LinkedIn restricts reaction data for personal profiles (r_member_social_feed is a closed permission). 
 
@@ -592,7 +592,7 @@ opts = {
 }
 
 begin
-  # Get LinkedIn post reactions (who reacted)
+  # Get LinkedIn post reactions
   result = api_instance.get_linked_in_post_reactions(account_id, urn, opts)
   p result
 rescue Late::ApiError => e
@@ -608,7 +608,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get LinkedIn post reactions (who reacted)
+  # Get LinkedIn post reactions
   data, status_code, headers = api_instance.get_linked_in_post_reactions_with_http_info(account_id, urn, opts)
   p status_code # => 2xx
   p headers # => { ... }
