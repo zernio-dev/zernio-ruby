@@ -14,22 +14,21 @@ require 'date'
 require 'time'
 
 module Late
-  class GetPostReactions200Response < ApiModelBase
-    attr_accessor :status
+  class GetLinkedInPostReactions200ResponsePagination < ApiModelBase
+    attr_accessor :has_more
 
-    attr_accessor :reactions
+    # Offset for next page
+    attr_accessor :cursor
 
-    attr_accessor :pagination
-
-    attr_accessor :meta
+    # Total number of reactions (when available)
+    attr_accessor :total
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'reactions' => :'reactions',
-        :'pagination' => :'pagination',
-        :'meta' => :'meta'
+        :'has_more' => :'hasMore',
+        :'cursor' => :'cursor',
+        :'total' => :'total'
       }
     end
 
@@ -46,10 +45,9 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'reactions' => :'Array<GetPostReactions200ResponseReactionsInner>',
-        :'pagination' => :'GetPostReactions200ResponsePagination',
-        :'meta' => :'GetPostReactions200ResponseMeta'
+        :'has_more' => :'Boolean',
+        :'cursor' => :'String',
+        :'total' => :'Integer'
       }
     end
 
@@ -63,34 +61,28 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetPostReactions200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetLinkedInPostReactions200ResponsePagination` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetPostReactions200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetLinkedInPostReactions200ResponsePagination`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
       end
 
-      if attributes.key?(:'reactions')
-        if (value = attributes[:'reactions']).is_a?(Array)
-          self.reactions = value
-        end
+      if attributes.key?(:'cursor')
+        self.cursor = attributes[:'cursor']
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
-      end
-
-      if attributes.key?(:'meta')
-        self.meta = attributes[:'meta']
+      if attributes.key?(:'total')
+        self.total = attributes[:'total']
       end
     end
 
@@ -114,10 +106,9 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          reactions == o.reactions &&
-          pagination == o.pagination &&
-          meta == o.meta
+          has_more == o.has_more &&
+          cursor == o.cursor &&
+          total == o.total
     end
 
     # @see the `==` method
@@ -129,7 +120,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, reactions, pagination, meta].hash
+      [has_more, cursor, total].hash
     end
 
     # Builds the object from hash

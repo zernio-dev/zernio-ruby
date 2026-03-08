@@ -142,6 +142,21 @@ describe 'AnalyticsApi' do
     end
   end
 
+  # unit tests for get_linked_in_post_reactions
+  # Get LinkedIn post reactions (who reacted)
+  # Returns individual reactions for a specific LinkedIn post, including reactor profiles (name, headline/job title, profile picture, profile URL, reaction type). Only works for **organization/company page** accounts. LinkedIn restricts reaction data for personal profiles (r_member_social_feed is a closed permission). 
+  # @param account_id The ID of the LinkedIn organization account
+  # @param urn The LinkedIn post URN
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Maximum number of reactions to return per page
+  # @option opts [String] :cursor Offset-based pagination start index
+  # @return [GetLinkedInPostReactions200Response]
+  describe 'get_linked_in_post_reactions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_post_timeline
   # Get post analytics timeline
   # Returns a daily timeline of analytics metrics for a specific post, showing how impressions, likes, and other metrics evolved day-by-day since publishing. Each row represents one day of data per platform. For multi-platform Late posts, returns separate rows for each platform. Requires the Analytics add-on. 

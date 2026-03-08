@@ -14,21 +14,34 @@ require 'date'
 require 'time'
 
 module Late
-  class GetPostReactions200ResponsePagination < ApiModelBase
-    attr_accessor :has_more
+  class GetLinkedInPostReactions200ResponseReactionsInnerFrom < ApiModelBase
+    # LinkedIn person or organization URN
+    attr_accessor :urn
 
-    # Offset for next page
-    attr_accessor :cursor
+    # Reactor's display name
+    attr_accessor :name
 
-    # Total number of reactions (when available)
-    attr_accessor :total
+    # Reactor's headline/job title
+    attr_accessor :headline
+
+    # LinkedIn vanity name
+    attr_accessor :username
+
+    # Profile picture URL
+    attr_accessor :profile_picture
+
+    # Direct link to LinkedIn profile
+    attr_accessor :profile_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'has_more' => :'hasMore',
-        :'cursor' => :'cursor',
-        :'total' => :'total'
+        :'urn' => :'urn',
+        :'name' => :'name',
+        :'headline' => :'headline',
+        :'username' => :'username',
+        :'profile_picture' => :'profilePicture',
+        :'profile_url' => :'profileUrl'
       }
     end
 
@@ -45,9 +58,12 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'has_more' => :'Boolean',
-        :'cursor' => :'String',
-        :'total' => :'Integer'
+        :'urn' => :'String',
+        :'name' => :'String',
+        :'headline' => :'String',
+        :'username' => :'String',
+        :'profile_picture' => :'String',
+        :'profile_url' => :'String'
       }
     end
 
@@ -61,28 +77,40 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetPostReactions200ResponsePagination` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetLinkedInPostReactions200ResponseReactionsInnerFrom` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetPostReactions200ResponsePagination`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetLinkedInPostReactions200ResponseReactionsInnerFrom`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'has_more')
-        self.has_more = attributes[:'has_more']
+      if attributes.key?(:'urn')
+        self.urn = attributes[:'urn']
       end
 
-      if attributes.key?(:'cursor')
-        self.cursor = attributes[:'cursor']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'total')
-        self.total = attributes[:'total']
+      if attributes.key?(:'headline')
+        self.headline = attributes[:'headline']
+      end
+
+      if attributes.key?(:'username')
+        self.username = attributes[:'username']
+      end
+
+      if attributes.key?(:'profile_picture')
+        self.profile_picture = attributes[:'profile_picture']
+      end
+
+      if attributes.key?(:'profile_url')
+        self.profile_url = attributes[:'profile_url']
       end
     end
 
@@ -106,9 +134,12 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          has_more == o.has_more &&
-          cursor == o.cursor &&
-          total == o.total
+          urn == o.urn &&
+          name == o.name &&
+          headline == o.headline &&
+          username == o.username &&
+          profile_picture == o.profile_picture &&
+          profile_url == o.profile_url
     end
 
     # @see the `==` method
@@ -120,7 +151,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [has_more, cursor, total].hash
+      [urn, name, headline, username, profile_picture, profile_url].hash
     end
 
     # Builds the object from hash

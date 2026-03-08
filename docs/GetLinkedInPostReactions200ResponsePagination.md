@@ -1,4 +1,4 @@
-# Late::GetPostReactions200ResponsePagination
+# Late::GetLinkedInPostReactions200ResponsePagination
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'late'
 
-instance = Late::GetPostReactions200ResponsePagination.new(
+instance = Late::GetLinkedInPostReactions200ResponsePagination.new(
   has_more: null,
   cursor: null,
   total: null

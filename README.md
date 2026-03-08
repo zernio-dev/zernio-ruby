@@ -116,12 +116,12 @@ Class | Method | HTTP request | Description
 *Late::AnalyticsApi* | [**get_follower_stats**](docs/AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
 *Late::AnalyticsApi* | [**get_linked_in_aggregate_analytics**](docs/AnalyticsApi.md#get_linked_in_aggregate_analytics) | **GET** /v1/accounts/{accountId}/linkedin-aggregate-analytics | Get LinkedIn aggregate stats
 *Late::AnalyticsApi* | [**get_linked_in_post_analytics**](docs/AnalyticsApi.md#get_linked_in_post_analytics) | **GET** /v1/accounts/{accountId}/linkedin-post-analytics | Get LinkedIn post stats
+*Late::AnalyticsApi* | [**get_linked_in_post_reactions**](docs/AnalyticsApi.md#get_linked_in_post_reactions) | **GET** /v1/accounts/{accountId}/linkedin-post-reactions | Get LinkedIn post reactions (who reacted)
 *Late::AnalyticsApi* | [**get_post_timeline**](docs/AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline
 *Late::AnalyticsApi* | [**get_posting_frequency**](docs/AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get posting frequency vs engagement
 *Late::AnalyticsApi* | [**get_you_tube_daily_views**](docs/AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views
 *Late::CommentsApi* | [**delete_inbox_comment**](docs/CommentsApi.md#delete_inbox_comment) | **DELETE** /v1/inbox/comments/{postId} | Delete comment
 *Late::CommentsApi* | [**get_inbox_post_comments**](docs/CommentsApi.md#get_inbox_post_comments) | **GET** /v1/inbox/comments/{postId} | Get post comments
-*Late::CommentsApi* | [**get_post_reactions**](docs/CommentsApi.md#get_post_reactions) | **GET** /v1/inbox/reactions/{postId} | Get post reactions (who reacted)
 *Late::CommentsApi* | [**hide_inbox_comment**](docs/CommentsApi.md#hide_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/hide | Hide comment
 *Late::CommentsApi* | [**like_inbox_comment**](docs/CommentsApi.md#like_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/like | Like comment
 *Late::CommentsApi* | [**list_inbox_comments**](docs/CommentsApi.md#list_inbox_comments) | **GET** /v1/inbox/comments | List commented posts
@@ -375,6 +375,11 @@ Class | Method | HTTP request | Description
  - [Late::GetLinkedInPostAnalytics200ResponseAnalytics](docs/GetLinkedInPostAnalytics200ResponseAnalytics.md)
  - [Late::GetLinkedInPostAnalytics400Response](docs/GetLinkedInPostAnalytics400Response.md)
  - [Late::GetLinkedInPostAnalytics403Response](docs/GetLinkedInPostAnalytics403Response.md)
+ - [Late::GetLinkedInPostReactions200Response](docs/GetLinkedInPostReactions200Response.md)
+ - [Late::GetLinkedInPostReactions200ResponsePagination](docs/GetLinkedInPostReactions200ResponsePagination.md)
+ - [Late::GetLinkedInPostReactions200ResponseReactionsInner](docs/GetLinkedInPostReactions200ResponseReactionsInner.md)
+ - [Late::GetLinkedInPostReactions200ResponseReactionsInnerFrom](docs/GetLinkedInPostReactions200ResponseReactionsInnerFrom.md)
+ - [Late::GetLinkedInPostReactions400Response](docs/GetLinkedInPostReactions400Response.md)
  - [Late::GetMediaPresignedUrl200Response](docs/GetMediaPresignedUrl200Response.md)
  - [Late::GetMediaPresignedUrlRequest](docs/GetMediaPresignedUrlRequest.md)
  - [Late::GetMessengerMenu200Response](docs/GetMessengerMenu200Response.md)
@@ -384,11 +389,6 @@ Class | Method | HTTP request | Description
  - [Late::GetPinterestBoards200Response](docs/GetPinterestBoards200Response.md)
  - [Late::GetPinterestBoards200ResponseBoardsInner](docs/GetPinterestBoards200ResponseBoardsInner.md)
  - [Late::GetPostLogs200Response](docs/GetPostLogs200Response.md)
- - [Late::GetPostReactions200Response](docs/GetPostReactions200Response.md)
- - [Late::GetPostReactions200ResponseMeta](docs/GetPostReactions200ResponseMeta.md)
- - [Late::GetPostReactions200ResponsePagination](docs/GetPostReactions200ResponsePagination.md)
- - [Late::GetPostReactions200ResponseReactionsInner](docs/GetPostReactions200ResponseReactionsInner.md)
- - [Late::GetPostReactions200ResponseReactionsInnerFrom](docs/GetPostReactions200ResponseReactionsInnerFrom.md)
  - [Late::GetPostTimeline200Response](docs/GetPostTimeline200Response.md)
  - [Late::GetPostTimeline200ResponseTimelineInner](docs/GetPostTimeline200ResponseTimelineInner.md)
  - [Late::GetPostTimeline400Response](docs/GetPostTimeline400Response.md)

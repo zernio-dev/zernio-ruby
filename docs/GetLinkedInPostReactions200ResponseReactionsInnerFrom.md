@@ -1,4 +1,4 @@
-# Late::GetPostReactions200ResponseReactionsInnerFrom
+# Late::GetLinkedInPostReactions200ResponseReactionsInnerFrom
 
 ## Properties
 
@@ -6,17 +6,17 @@
 | ---- | ---- | ----------- | ----- |
 | **urn** | **String** | LinkedIn person or organization URN | [optional] |
 | **name** | **String** | Reactor&#39;s display name | [optional] |
-| **headline** | **String** | Reactor&#39;s headline/job title (LinkedIn only) | [optional] |
+| **headline** | **String** | Reactor&#39;s headline/job title | [optional] |
 | **username** | **String** | LinkedIn vanity name | [optional] |
 | **profile_picture** | **String** | Profile picture URL | [optional] |
-| **profile_url** | **String** | Direct link to reactor&#39;s LinkedIn profile | [optional] |
+| **profile_url** | **String** | Direct link to LinkedIn profile | [optional] |
 
 ## Example
 
 ```ruby
 require 'late'
 
-instance = Late::GetPostReactions200ResponseReactionsInnerFrom.new(
+instance = Late::GetLinkedInPostReactions200ResponseReactionsInnerFrom.new(
   urn: null,
   name: null,
   headline: null,

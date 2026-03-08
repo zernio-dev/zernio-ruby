@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  class GetPostReactions200ResponseReactionsInner < ApiModelBase
+  class GetLinkedInPostReactions200ResponseReactionsInner < ApiModelBase
     # LinkedIn reaction enum (LIKE, PRAISE, EMPATHY, INTEREST, APPRECIATION, ENTERTAINMENT)
     attr_accessor :reaction_type
 
@@ -51,7 +51,7 @@ module Late
         :'reaction_type' => :'String',
         :'reaction_label' => :'String',
         :'reacted_at' => :'Time',
-        :'from' => :'GetPostReactions200ResponseReactionsInnerFrom'
+        :'from' => :'GetLinkedInPostReactions200ResponseReactionsInnerFrom'
       }
     end
 
@@ -65,14 +65,14 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetPostReactions200ResponseReactionsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetLinkedInPostReactions200ResponseReactionsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetPostReactions200ResponseReactionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetLinkedInPostReactions200ResponseReactionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }

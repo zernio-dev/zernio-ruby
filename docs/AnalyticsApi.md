@@ -11,6 +11,7 @@ All URIs are relative to *https://getlate.dev/api*
 | [**get_follower_stats**](AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**get_linked_in_aggregate_analytics**](AnalyticsApi.md#get_linked_in_aggregate_analytics) | **GET** /v1/accounts/{accountId}/linkedin-aggregate-analytics | Get LinkedIn aggregate stats |
 | [**get_linked_in_post_analytics**](AnalyticsApi.md#get_linked_in_post_analytics) | **GET** /v1/accounts/{accountId}/linkedin-post-analytics | Get LinkedIn post stats |
+| [**get_linked_in_post_reactions**](AnalyticsApi.md#get_linked_in_post_reactions) | **GET** /v1/accounts/{accountId}/linkedin-post-reactions | Get LinkedIn post reactions (who reacted) |
 | [**get_post_timeline**](AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline |
 | [**get_posting_frequency**](AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get posting frequency vs engagement |
 | [**get_you_tube_daily_views**](AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views |
@@ -552,6 +553,83 @@ end
 ### Return type
 
 [**GetLinkedInPostAnalytics200Response**](GetLinkedInPostAnalytics200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_linked_in_post_reactions
+
+> <GetLinkedInPostReactions200Response> get_linked_in_post_reactions(account_id, urn, opts)
+
+Get LinkedIn post reactions (who reacted)
+
+Returns individual reactions for a specific LinkedIn post, including reactor profiles (name, headline/job title, profile picture, profile URL, reaction type). Only works for **organization/company page** accounts. LinkedIn restricts reaction data for personal profiles (r_member_social_feed is a closed permission). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::AnalyticsApi.new
+account_id = 'account_id_example' # String | The ID of the LinkedIn organization account
+urn = 'urn:li:share:7123456789012345678' # String | The LinkedIn post URN
+opts = {
+  limit: 56, # Integer | Maximum number of reactions to return per page
+  cursor: 'cursor_example' # String | Offset-based pagination start index
+}
+
+begin
+  # Get LinkedIn post reactions (who reacted)
+  result = api_instance.get_linked_in_post_reactions(account_id, urn, opts)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling AnalyticsApi->get_linked_in_post_reactions: #{e}"
+end
+```
+
+#### Using the get_linked_in_post_reactions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetLinkedInPostReactions200Response>, Integer, Hash)> get_linked_in_post_reactions_with_http_info(account_id, urn, opts)
+
+```ruby
+begin
+  # Get LinkedIn post reactions (who reacted)
+  data, status_code, headers = api_instance.get_linked_in_post_reactions_with_http_info(account_id, urn, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetLinkedInPostReactions200Response>
+rescue Late::ApiError => e
+  puts "Error when calling AnalyticsApi->get_linked_in_post_reactions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of the LinkedIn organization account |  |
+| **urn** | **String** | The LinkedIn post URN |  |
+| **limit** | **Integer** | Maximum number of reactions to return per page | [optional][default to 25] |
+| **cursor** | **String** | Offset-based pagination start index | [optional] |
+
+### Return type
+
+[**GetLinkedInPostReactions200Response**](GetLinkedInPostReactions200Response.md)
 
 ### Authorization
 

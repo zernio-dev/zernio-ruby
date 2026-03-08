@@ -571,6 +571,90 @@ module Late
       return data, status_code, headers
     end
 
+    # Get LinkedIn post reactions (who reacted)
+    # Returns individual reactions for a specific LinkedIn post, including reactor profiles (name, headline/job title, profile picture, profile URL, reaction type). Only works for **organization/company page** accounts. LinkedIn restricts reaction data for personal profiles (r_member_social_feed is a closed permission). 
+    # @param account_id [String] The ID of the LinkedIn organization account
+    # @param urn [String] The LinkedIn post URN
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Maximum number of reactions to return per page (default to 25)
+    # @option opts [String] :cursor Offset-based pagination start index
+    # @return [GetLinkedInPostReactions200Response]
+    def get_linked_in_post_reactions(account_id, urn, opts = {})
+      data, _status_code, _headers = get_linked_in_post_reactions_with_http_info(account_id, urn, opts)
+      data
+    end
+
+    # Get LinkedIn post reactions (who reacted)
+    # Returns individual reactions for a specific LinkedIn post, including reactor profiles (name, headline/job title, profile picture, profile URL, reaction type). Only works for **organization/company page** accounts. LinkedIn restricts reaction data for personal profiles (r_member_social_feed is a closed permission). 
+    # @param account_id [String] The ID of the LinkedIn organization account
+    # @param urn [String] The LinkedIn post URN
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Maximum number of reactions to return per page (default to 25)
+    # @option opts [String] :cursor Offset-based pagination start index
+    # @return [Array<(GetLinkedInPostReactions200Response, Integer, Hash)>] GetLinkedInPostReactions200Response data, response status code and response headers
+    def get_linked_in_post_reactions_with_http_info(account_id, urn, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_linked_in_post_reactions ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_linked_in_post_reactions"
+      end
+      # verify the required parameter 'urn' is set
+      if @api_client.config.client_side_validation && urn.nil?
+        fail ArgumentError, "Missing the required parameter 'urn' when calling AnalyticsApi.get_linked_in_post_reactions"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AnalyticsApi.get_linked_in_post_reactions, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AnalyticsApi.get_linked_in_post_reactions, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/linkedin-post-reactions'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'urn'] = urn
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetLinkedInPostReactions200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_linked_in_post_reactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_linked_in_post_reactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get post analytics timeline
     # Returns a daily timeline of analytics metrics for a specific post, showing how impressions, likes, and other metrics evolved day-by-day since publishing. Each row represents one day of data per platform. For multi-platform Late posts, returns separate rows for each platform. Requires the Analytics add-on. 
     # @param post_id [String] The post to fetch timeline for. Accepts an ExternalPost ID, a platformPostId, or a Late Post ID. 

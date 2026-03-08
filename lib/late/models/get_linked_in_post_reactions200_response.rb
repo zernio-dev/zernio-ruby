@@ -14,21 +14,33 @@ require 'date'
 require 'time'
 
 module Late
-  class GetPostReactions200ResponseMeta < ApiModelBase
+  class GetLinkedInPostReactions200Response < ApiModelBase
+    attr_accessor :account_id
+
     attr_accessor :platform
 
-    attr_accessor :post_id
+    attr_accessor :account_type
 
-    attr_accessor :account_id
+    attr_accessor :username
+
+    attr_accessor :post_urn
+
+    attr_accessor :reactions
+
+    attr_accessor :pagination
 
     attr_accessor :last_updated
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'platform' => :'platform',
-        :'post_id' => :'postId',
         :'account_id' => :'accountId',
+        :'platform' => :'platform',
+        :'account_type' => :'accountType',
+        :'username' => :'username',
+        :'post_urn' => :'postUrn',
+        :'reactions' => :'reactions',
+        :'pagination' => :'pagination',
         :'last_updated' => :'lastUpdated'
       }
     end
@@ -46,9 +58,13 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'platform' => :'String',
-        :'post_id' => :'String',
         :'account_id' => :'String',
+        :'platform' => :'String',
+        :'account_type' => :'String',
+        :'username' => :'String',
+        :'post_urn' => :'String',
+        :'reactions' => :'Array<GetLinkedInPostReactions200ResponseReactionsInner>',
+        :'pagination' => :'GetLinkedInPostReactions200ResponsePagination',
         :'last_updated' => :'Time'
       }
     end
@@ -63,28 +79,46 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetPostReactions200ResponseMeta` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetLinkedInPostReactions200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetPostReactions200ResponseMeta`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetLinkedInPostReactions200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
       end
 
-      if attributes.key?(:'post_id')
-        self.post_id = attributes[:'post_id']
+      if attributes.key?(:'account_type')
+        self.account_type = attributes[:'account_type']
       end
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
+      if attributes.key?(:'username')
+        self.username = attributes[:'username']
+      end
+
+      if attributes.key?(:'post_urn')
+        self.post_urn = attributes[:'post_urn']
+      end
+
+      if attributes.key?(:'reactions')
+        if (value = attributes[:'reactions']).is_a?(Array)
+          self.reactions = value
+        end
+      end
+
+      if attributes.key?(:'pagination')
+        self.pagination = attributes[:'pagination']
       end
 
       if attributes.key?(:'last_updated')
@@ -112,9 +146,13 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          platform == o.platform &&
-          post_id == o.post_id &&
           account_id == o.account_id &&
+          platform == o.platform &&
+          account_type == o.account_type &&
+          username == o.username &&
+          post_urn == o.post_urn &&
+          reactions == o.reactions &&
+          pagination == o.pagination &&
           last_updated == o.last_updated
     end
 
@@ -127,7 +165,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, post_id, account_id, last_updated].hash
+      [account_id, platform, account_type, username, post_urn, reactions, pagination, last_updated].hash
     end
 
     # Builds the object from hash
