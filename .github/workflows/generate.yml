@@ -43,6 +43,7 @@ jobs:
       - name: Clean generated files
         run: |
           rm -rf lib/late/models lib/late/api docs spec
+          rm -f late.gemspec
 
       - name: Generate SDK
         run: |
@@ -51,7 +52,7 @@ jobs:
             -g ruby \
             -o . \
             --skip-validate-spec \
-            --additional-properties=gemName=late,moduleName=Late,gemVersion=0.1.0 \
+            --additional-properties=gemName=late-sdk,moduleName=Late,gemVersion=0.1.0 \
             --inline-schema-name-mappings "getGoogleBusinessLocationDetails_200_response_specialHours_specialHourPeriods_inner_startDate=GbpSpecialHourPeriodStartDate,getGoogleBusinessLocationDetails_200_response_specialHours_specialHourPeriods_inner=GbpSpecialHourPeriod" \
             --git-user-id=getlate-dev \
             --git-repo-id=late-ruby
@@ -85,7 +86,7 @@ jobs:
       - name: Update gem version
         if: steps.changes.outputs.has_changes == 'true'
         run: |
-          sed -i "s/gem.version.*/gem.version = '${{ steps.version.outputs.gem_version }}'/" late.gemspec || true
+          sed -i "s/gem.version.*/gem.version = '${{ steps.version.outputs.gem_version }}'/" late-sdk.gemspec || true
 
       - name: Commit and push
         if: steps.changes.outputs.has_changes == 'true'
@@ -101,7 +102,7 @@ jobs:
 
       - name: Build gem
         if: steps.changes.outputs.has_changes == 'true'
-        run: gem build late.gemspec
+        run: gem build late-sdk.gemspec
 
       - name: Publish to RubyGems
         if: steps.changes.outputs.has_changes == 'true'
@@ -109,7 +110,7 @@ jobs:
           mkdir -p ~/.gem
           echo -e "---\n:rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}" > ~/.gem/credentials
           chmod 0600 ~/.gem/credentials
-          gem push late-${{ steps.version.outputs.gem_version }}.gem
+          gem push late-sdk-${{ steps.version.outputs.gem_version }}.gem
         continue-on-error: true
 
       - name: Create GitHub Release
@@ -123,7 +124,7 @@ jobs:
             ## Auto-generated SDK Update
 
             ```bash
-            gem install late
+            gem install late-sdk
             ```
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
