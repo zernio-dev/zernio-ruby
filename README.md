@@ -234,14 +234,10 @@ Class | Method | HTTP request | Description
 *Late::WhatsAppApi* | [**update_whats_app_business_profile**](docs/WhatsAppApi.md#update_whats_app_business_profile) | **POST** /v1/whatsapp/business-profile | Update business profile
 *Late::WhatsAppApi* | [**update_whats_app_contact**](docs/WhatsAppApi.md#update_whats_app_contact) | **PUT** /v1/whatsapp/contacts/{contactId} | Update contact
 *Late::WhatsAppApi* | [**update_whats_app_template**](docs/WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template
-*Late::WhatsAppPhoneNumbersApi* | [**get_preverified_whats_app_numbers**](docs/WhatsAppPhoneNumbersApi.md#get_preverified_whats_app_numbers) | **GET** /v1/whatsapp/phone-numbers/preverified | Get pre-verified numbers
 *Late::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_number) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number
 *Late::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_numbers**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers
 *Late::WhatsAppPhoneNumbersApi* | [**purchase_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number
 *Late::WhatsAppPhoneNumbersApi* | [**release_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number
-*Late::WhatsAppPhoneNumbersApi* | [**request_whats_app_verification_code**](docs/WhatsAppPhoneNumbersApi.md#request_whats_app_verification_code) | **POST** /v1/whatsapp/phone-numbers/{phoneNumberId}/request-code | Request OTP
-*Late::WhatsAppPhoneNumbersApi* | [**search_available_whats_app_numbers**](docs/WhatsAppPhoneNumbersApi.md#search_available_whats_app_numbers) | **GET** /v1/whatsapp/phone-numbers/available | Search available numbers
-*Late::WhatsAppPhoneNumbersApi* | [**verify_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#verify_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/{phoneNumberId}/verify | Verify OTP
 
 
 ## Documentation for Models
@@ -430,8 +426,6 @@ Class | Method | HTTP request | Description
  - [Late::GetPostTimeline404Response](docs/GetPostTimeline404Response.md)
  - [Late::GetPostingFrequency200Response](docs/GetPostingFrequency200Response.md)
  - [Late::GetPostingFrequency200ResponseFrequencyInner](docs/GetPostingFrequency200ResponseFrequencyInner.md)
- - [Late::GetPreverifiedWhatsAppNumbers200Response](docs/GetPreverifiedWhatsAppNumbers200Response.md)
- - [Late::GetPreverifiedWhatsAppNumbers200ResponseNumbersInner](docs/GetPreverifiedWhatsAppNumbers200ResponseNumbersInner.md)
  - [Late::GetProfile200Response](docs/GetProfile200Response.md)
  - [Late::GetRedditFeed200Response](docs/GetRedditFeed200Response.md)
  - [Late::GetRedditFlairs200Response](docs/GetRedditFlairs200Response.md)
@@ -605,12 +599,9 @@ Class | Method | HTTP request | Description
  - [Late::ReplyToInboxReview200Response](docs/ReplyToInboxReview200Response.md)
  - [Late::ReplyToInboxReview200ResponseReply](docs/ReplyToInboxReview200ResponseReply.md)
  - [Late::ReplyToInboxReviewRequest](docs/ReplyToInboxReviewRequest.md)
- - [Late::RequestWhatsAppVerificationCode200Response](docs/RequestWhatsAppVerificationCode200Response.md)
- - [Late::RequestWhatsAppVerificationCodeRequest](docs/RequestWhatsAppVerificationCodeRequest.md)
  - [Late::ScheduleWhatsAppBroadcast200Response](docs/ScheduleWhatsAppBroadcast200Response.md)
  - [Late::ScheduleWhatsAppBroadcast200ResponseBroadcast](docs/ScheduleWhatsAppBroadcast200ResponseBroadcast.md)
  - [Late::ScheduleWhatsAppBroadcastRequest](docs/ScheduleWhatsAppBroadcastRequest.md)
- - [Late::SearchAvailableWhatsAppNumbers200Response](docs/SearchAvailableWhatsAppNumbers200Response.md)
  - [Late::SearchReddit200Response](docs/SearchReddit200Response.md)
  - [Late::SearchReddit200ResponsePostsInner](docs/SearchReddit200ResponsePostsInner.md)
  - [Late::SelectFacebookPage200Response](docs/SelectFacebookPage200Response.md)
@@ -739,8 +730,6 @@ Class | Method | HTTP request | Description
  - [Late::ValidateSubreddit200ResponseOneOf](docs/ValidateSubreddit200ResponseOneOf.md)
  - [Late::ValidateSubreddit200ResponseOneOf1](docs/ValidateSubreddit200ResponseOneOf1.md)
  - [Late::ValidateSubreddit200ResponseOneOfSubreddit](docs/ValidateSubreddit200ResponseOneOfSubreddit.md)
- - [Late::VerifyWhatsAppPhoneNumber200Response](docs/VerifyWhatsAppPhoneNumber200Response.md)
- - [Late::VerifyWhatsAppPhoneNumberRequest](docs/VerifyWhatsAppPhoneNumberRequest.md)
  - [Late::Webhook](docs/Webhook.md)
  - [Late::WebhookLog](docs/WebhookLog.md)
  - [Late::WebhookPayloadAccountConnected](docs/WebhookPayloadAccountConnected.md)

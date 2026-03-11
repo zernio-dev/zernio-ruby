@@ -32,18 +32,6 @@ describe 'WhatsAppPhoneNumbersApi' do
     end
   end
 
-  # unit tests for get_preverified_whats_app_numbers
-  # Get pre-verified numbers
-  # Returns the user&#39;s pre-verified phone number IDs that are ready for OTP-free Embedded Signup. Only returns numbers with verified Meta status and non-expired verification. 
-  # @param profile_id Profile ID to filter by
-  # @param [Hash] opts the optional parameters
-  # @return [GetPreverifiedWhatsAppNumbers200Response]
-  describe 'get_preverified_whats_app_numbers test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for get_whats_app_phone_number
   # Get phone number
   # Retrieve the current status of a purchased phone number. Used to poll for Meta pre-verification completion after purchase. 
@@ -88,47 +76,6 @@ describe 'WhatsAppPhoneNumbersApi' do
   # @param [Hash] opts the optional parameters
   # @return [ReleaseWhatsAppPhoneNumber200Response]
   describe 'release_whats_app_phone_number test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for request_whats_app_verification_code
-  # Request OTP
-  # Request a new OTP verification code from Meta for a pre-verified phone number. Useful when the initial SMS did not arrive or when re-verifying before the 90-day expiry. 
-  # @param phone_number_id Phone number record ID
-  # @param [Hash] opts the optional parameters
-  # @option opts [RequestWhatsAppVerificationCodeRequest] :request_whats_app_verification_code_request 
-  # @return [RequestWhatsAppVerificationCode200Response]
-  describe 'request_whats_app_verification_code test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for search_available_whats_app_numbers
-  # Search available numbers
-  # Search for available US phone numbers that can be purchased for WhatsApp Business. Requires a paid plan. Numbers are sourced from Telnyx. 
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :prefix Area code to search (e.g., \&quot;212\&quot; for New York)
-  # @option opts [String] :locality City name (e.g., \&quot;New York\&quot;)
-  # @option opts [String] :contains Pattern to match within the phone number
-  # @option opts [Integer] :limit Maximum results (default 20, max 100)
-  # @return [SearchAvailableWhatsAppNumbers200Response]
-  describe 'search_available_whats_app_numbers test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for verify_whats_app_phone_number
-  # Verify OTP
-  # Manually verify a phone number by entering the OTP code received via SMS or voice call. This is a fallback for when the auto-verification webhook does not capture the code. Verification is valid for 90 days. 
-  # @param phone_number_id Phone number record ID
-  # @param verify_whats_app_phone_number_request 
-  # @param [Hash] opts the optional parameters
-  # @return [VerifyWhatsAppPhoneNumber200Response]
-  describe 'verify_whats_app_phone_number test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -203,8 +203,6 @@ docs/GetPostTimeline403Response.md
 docs/GetPostTimeline404Response.md
 docs/GetPostingFrequency200Response.md
 docs/GetPostingFrequency200ResponseFrequencyInner.md
-docs/GetPreverifiedWhatsAppNumbers200Response.md
-docs/GetPreverifiedWhatsAppNumbers200ResponseNumbersInner.md
 docs/GetProfile200Response.md
 docs/GetRedditFeed200Response.md
 docs/GetRedditFlairs200Response.md
@@ -387,13 +385,10 @@ docs/ReplyToInboxPostRequest.md
 docs/ReplyToInboxReview200Response.md
 docs/ReplyToInboxReview200ResponseReply.md
 docs/ReplyToInboxReviewRequest.md
-docs/RequestWhatsAppVerificationCode200Response.md
-docs/RequestWhatsAppVerificationCodeRequest.md
 docs/ReviewsApi.md
 docs/ScheduleWhatsAppBroadcast200Response.md
 docs/ScheduleWhatsAppBroadcast200ResponseBroadcast.md
 docs/ScheduleWhatsAppBroadcastRequest.md
-docs/SearchAvailableWhatsAppNumbers200Response.md
 docs/SearchReddit200Response.md
 docs/SearchReddit200ResponsePostsInner.md
 docs/SelectFacebookPage200Response.md
@@ -526,8 +521,6 @@ docs/ValidateSubreddit200Response.md
 docs/ValidateSubreddit200ResponseOneOf.md
 docs/ValidateSubreddit200ResponseOneOf1.md
 docs/ValidateSubreddit200ResponseOneOfSubreddit.md
-docs/VerifyWhatsAppPhoneNumber200Response.md
-docs/VerifyWhatsAppPhoneNumberRequest.md
 docs/Webhook.md
 docs/WebhookLog.md
 docs/WebhookPayloadAccountConnected.md
@@ -781,8 +774,6 @@ lib/late-sdk/models/get_post_timeline403_response.rb
 lib/late-sdk/models/get_post_timeline404_response.rb
 lib/late-sdk/models/get_posting_frequency200_response.rb
 lib/late-sdk/models/get_posting_frequency200_response_frequency_inner.rb
-lib/late-sdk/models/get_preverified_whats_app_numbers200_response.rb
-lib/late-sdk/models/get_preverified_whats_app_numbers200_response_numbers_inner.rb
 lib/late-sdk/models/get_profile200_response.rb
 lib/late-sdk/models/get_reddit_feed200_response.rb
 lib/late-sdk/models/get_reddit_flairs200_response.rb
@@ -956,12 +947,9 @@ lib/late-sdk/models/reply_to_inbox_post_request.rb
 lib/late-sdk/models/reply_to_inbox_review200_response.rb
 lib/late-sdk/models/reply_to_inbox_review200_response_reply.rb
 lib/late-sdk/models/reply_to_inbox_review_request.rb
-lib/late-sdk/models/request_whats_app_verification_code200_response.rb
-lib/late-sdk/models/request_whats_app_verification_code_request.rb
 lib/late-sdk/models/schedule_whats_app_broadcast200_response.rb
 lib/late-sdk/models/schedule_whats_app_broadcast200_response_broadcast.rb
 lib/late-sdk/models/schedule_whats_app_broadcast_request.rb
-lib/late-sdk/models/search_available_whats_app_numbers200_response.rb
 lib/late-sdk/models/search_reddit200_response.rb
 lib/late-sdk/models/search_reddit200_response_posts_inner.rb
 lib/late-sdk/models/select_facebook_page200_response.rb
@@ -1090,8 +1078,6 @@ lib/late-sdk/models/validate_subreddit200_response.rb
 lib/late-sdk/models/validate_subreddit200_response_one_of.rb
 lib/late-sdk/models/validate_subreddit200_response_one_of1.rb
 lib/late-sdk/models/validate_subreddit200_response_one_of_subreddit.rb
-lib/late-sdk/models/verify_whats_app_phone_number200_response.rb
-lib/late-sdk/models/verify_whats_app_phone_number_request.rb
 lib/late-sdk/models/webhook.rb
 lib/late-sdk/models/webhook_log.rb
 lib/late-sdk/models/webhook_payload_account_connected.rb
@@ -1336,8 +1322,6 @@ spec/models/get_post_timeline403_response_spec.rb
 spec/models/get_post_timeline404_response_spec.rb
 spec/models/get_posting_frequency200_response_frequency_inner_spec.rb
 spec/models/get_posting_frequency200_response_spec.rb
-spec/models/get_preverified_whats_app_numbers200_response_numbers_inner_spec.rb
-spec/models/get_preverified_whats_app_numbers200_response_spec.rb
 spec/models/get_profile200_response_spec.rb
 spec/models/get_reddit_feed200_response_spec.rb
 spec/models/get_reddit_flairs200_response_flairs_inner_spec.rb
@@ -1511,12 +1495,9 @@ spec/models/reply_to_inbox_post_request_spec.rb
 spec/models/reply_to_inbox_review200_response_reply_spec.rb
 spec/models/reply_to_inbox_review200_response_spec.rb
 spec/models/reply_to_inbox_review_request_spec.rb
-spec/models/request_whats_app_verification_code200_response_spec.rb
-spec/models/request_whats_app_verification_code_request_spec.rb
 spec/models/schedule_whats_app_broadcast200_response_broadcast_spec.rb
 spec/models/schedule_whats_app_broadcast200_response_spec.rb
 spec/models/schedule_whats_app_broadcast_request_spec.rb
-spec/models/search_available_whats_app_numbers200_response_spec.rb
 spec/models/search_reddit200_response_posts_inner_spec.rb
 spec/models/search_reddit200_response_spec.rb
 spec/models/select_facebook_page200_response_account_spec.rb
@@ -1645,8 +1626,6 @@ spec/models/validate_subreddit200_response_one_of1_spec.rb
 spec/models/validate_subreddit200_response_one_of_spec.rb
 spec/models/validate_subreddit200_response_one_of_subreddit_spec.rb
 spec/models/validate_subreddit200_response_spec.rb
-spec/models/verify_whats_app_phone_number200_response_spec.rb
-spec/models/verify_whats_app_phone_number_request_spec.rb
 spec/models/webhook_log_spec.rb
 spec/models/webhook_payload_account_connected_account_spec.rb
 spec/models/webhook_payload_account_connected_spec.rb
