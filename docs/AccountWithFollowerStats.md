@@ -19,6 +19,7 @@
 | **growth** | **Float** | Follower change over period | [optional] |
 | **growth_percentage** | **Float** | Percentage growth | [optional] |
 | **data_points** | **Float** | Number of historical snapshots | [optional] |
+| **account_stats** | [**AccountWithFollowerStatsAllOfAccountStats**](AccountWithFollowerStatsAllOfAccountStats.md) |  | [optional] |
 
 ## Example
 
@@ -40,7 +41,8 @@ instance = Late::AccountWithFollowerStats.new(
   last_updated: null,
   growth: null,
   growth_percentage: null,
-  data_points: null
+  data_points: null,
+  account_stats: null
 )
 ```
 

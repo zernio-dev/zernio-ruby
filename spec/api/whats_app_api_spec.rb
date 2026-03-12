@@ -250,6 +250,18 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for get_whats_app_display_name
+  # Get display name and review status
+  # Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppDisplayName200Response]
+  describe 'get_whats_app_display_name test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_whats_app_groups
   # List contact groups
   # List all contact groups for a WhatsApp account with contact counts. Groups are derived from the groups field on contacts, not stored as separate documents. 
@@ -386,6 +398,18 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for update_whats_app_display_name
+  # Request display name change
+  # Submit a display name change request for the WhatsApp Business account. The new name must follow WhatsApp naming guidelines (3-512 characters, must represent your business). Changes require Meta review and approval, which typically takes 1-3 business days. 
+  # @param update_whats_app_display_name_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateWhatsAppDisplayName200Response]
+  describe 'update_whats_app_display_name test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_whats_app_template
   # Update template
   # Update a message template&#39;s components. Only certain fields can be updated depending on the template&#39;s current approval state. Approved templates can only have components updated. 
@@ -394,6 +418,19 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateWhatsAppTemplate200Response]
   describe 'update_whats_app_template test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for upload_whats_app_profile_photo
+  # Upload profile picture
+  # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta&#39;s resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle. 
+  # @param account_id WhatsApp social account ID
+  # @param file Image file (JPEG or PNG, max 5MB, recommended 640x640)
+  # @param [Hash] opts the optional parameters
+  # @return [UnpublishPost200Response]
+  describe 'upload_whats_app_profile_photo test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

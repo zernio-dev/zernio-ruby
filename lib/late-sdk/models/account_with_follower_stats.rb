@@ -52,6 +52,8 @@ module Late
     # Number of historical snapshots
     attr_accessor :data_points
 
+    attr_accessor :account_stats
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -69,7 +71,8 @@ module Late
         :'last_updated' => :'lastUpdated',
         :'growth' => :'growth',
         :'growth_percentage' => :'growthPercentage',
-        :'data_points' => :'dataPoints'
+        :'data_points' => :'dataPoints',
+        :'account_stats' => :'accountStats'
       }
     end
 
@@ -100,7 +103,8 @@ module Late
         :'last_updated' => :'Time',
         :'growth' => :'Float',
         :'growth_percentage' => :'Float',
-        :'data_points' => :'Float'
+        :'data_points' => :'Float',
+        :'account_stats' => :'AccountWithFollowerStatsAllOfAccountStats'
       }
     end
 
@@ -192,6 +196,10 @@ module Late
       if attributes.key?(:'data_points')
         self.data_points = attributes[:'data_points']
       end
+
+      if attributes.key?(:'account_stats')
+        self.account_stats = attributes[:'account_stats']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -228,7 +236,8 @@ module Late
           last_updated == o.last_updated &&
           growth == o.growth &&
           growth_percentage == o.growth_percentage &&
-          data_points == o.data_points
+          data_points == o.data_points &&
+          account_stats == o.account_stats
     end
 
     # @see the `==` method
@@ -240,7 +249,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, profile_picture, current_followers, last_updated, growth, growth_percentage, data_points].hash
+      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, profile_picture, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
     end
 
     # Builds the object from hash

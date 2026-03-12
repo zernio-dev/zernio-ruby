@@ -1189,6 +1189,70 @@ module Late
       return data, status_code, headers
     end
 
+    # Get display name and review status
+    # Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [GetWhatsAppDisplayName200Response]
+    def get_whats_app_display_name(account_id, opts = {})
+      data, _status_code, _headers = get_whats_app_display_name_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get display name and review status
+    # Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsAppDisplayName200Response, Integer, Hash)>] GetWhatsAppDisplayName200Response data, response status code and response headers
+    def get_whats_app_display_name_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.get_whats_app_display_name ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.get_whats_app_display_name"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/business-profile/display-name'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppDisplayName200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.get_whats_app_display_name",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#get_whats_app_display_name\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List contact groups
     # List all contact groups for a WhatsApp account with contact counts. Groups are derived from the groups field on contacts, not stored as separate documents. 
     # @param account_id [String] WhatsApp social account ID
@@ -1944,6 +2008,74 @@ module Late
       return data, status_code, headers
     end
 
+    # Request display name change
+    # Submit a display name change request for the WhatsApp Business account. The new name must follow WhatsApp naming guidelines (3-512 characters, must represent your business). Changes require Meta review and approval, which typically takes 1-3 business days. 
+    # @param update_whats_app_display_name_request [UpdateWhatsAppDisplayNameRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateWhatsAppDisplayName200Response]
+    def update_whats_app_display_name(update_whats_app_display_name_request, opts = {})
+      data, _status_code, _headers = update_whats_app_display_name_with_http_info(update_whats_app_display_name_request, opts)
+      data
+    end
+
+    # Request display name change
+    # Submit a display name change request for the WhatsApp Business account. The new name must follow WhatsApp naming guidelines (3-512 characters, must represent your business). Changes require Meta review and approval, which typically takes 1-3 business days. 
+    # @param update_whats_app_display_name_request [UpdateWhatsAppDisplayNameRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateWhatsAppDisplayName200Response, Integer, Hash)>] UpdateWhatsAppDisplayName200Response data, response status code and response headers
+    def update_whats_app_display_name_with_http_info(update_whats_app_display_name_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.update_whats_app_display_name ...'
+      end
+      # verify the required parameter 'update_whats_app_display_name_request' is set
+      if @api_client.config.client_side_validation && update_whats_app_display_name_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_whats_app_display_name_request' when calling WhatsAppApi.update_whats_app_display_name"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/business-profile/display-name'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_whats_app_display_name_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateWhatsAppDisplayName200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.update_whats_app_display_name",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#update_whats_app_display_name\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update template
     # Update a message template's components. Only certain fields can be updated depending on the template's current approval state. Approved templates can only have components updated. 
     # @param template_name [String] Template name
@@ -2014,6 +2146,82 @@ module Late
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppApi#update_whats_app_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Upload profile picture
+    # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta's resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param file [File] Image file (JPEG or PNG, max 5MB, recommended 640x640)
+    # @param [Hash] opts the optional parameters
+    # @return [UnpublishPost200Response]
+    def upload_whats_app_profile_photo(account_id, file, opts = {})
+      data, _status_code, _headers = upload_whats_app_profile_photo_with_http_info(account_id, file, opts)
+      data
+    end
+
+    # Upload profile picture
+    # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta&#39;s resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param file [File] Image file (JPEG or PNG, max 5MB, recommended 640x640)
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
+    def upload_whats_app_profile_photo_with_http_info(account_id, file, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.upload_whats_app_profile_photo ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.upload_whats_app_profile_photo"
+      end
+      # verify the required parameter 'file' is set
+      if @api_client.config.client_side_validation && file.nil?
+        fail ArgumentError, "Missing the required parameter 'file' when calling WhatsAppApi.upload_whats_app_profile_photo"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/business-profile/photo'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['multipart/form-data'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+      form_params['accountId'] = account_id
+      form_params['file'] = file
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UnpublishPost200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.upload_whats_app_profile_photo",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#upload_whats_app_profile_photo\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
