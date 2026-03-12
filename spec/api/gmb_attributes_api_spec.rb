@@ -37,6 +37,7 @@ describe 'GMBAttributesApi' do
   # Returns GBP location attributes (amenities, services, accessibility, payment types). Available attributes vary by business category.
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [GetGoogleBusinessAttributes200Response]
   describe 'get_google_business_attributes test' do
     it 'should work' do
@@ -50,6 +51,7 @@ describe 'GMBAttributesApi' do
   # @param account_id 
   # @param update_google_business_attributes_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [UpdateGoogleBusinessAttributes200Response]
   describe 'update_google_business_attributes test' do
     it 'should work' do

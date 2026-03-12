@@ -11,7 +11,7 @@ All URIs are relative to *https://getlate.dev/api*
 
 ## create_google_business_media
 
-> <CreateGoogleBusinessMedia200Response> create_google_business_media(account_id, create_google_business_media_request)
+> <CreateGoogleBusinessMedia200Response> create_google_business_media(account_id, create_google_business_media_request, opts)
 
 Upload photo
 
@@ -31,10 +31,13 @@ end
 api_instance = Late::GMBMediaApi.new
 account_id = 'account_id_example' # String | 
 create_google_business_media_request = Late::CreateGoogleBusinessMediaRequest.new({source_url: 'source_url_example'}) # CreateGoogleBusinessMediaRequest | 
+opts = {
+  location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Upload photo
-  result = api_instance.create_google_business_media(account_id, create_google_business_media_request)
+  result = api_instance.create_google_business_media(account_id, create_google_business_media_request, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBMediaApi->create_google_business_media: #{e}"
@@ -45,12 +48,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateGoogleBusinessMedia200Response>, Integer, Hash)> create_google_business_media_with_http_info(account_id, create_google_business_media_request)
+> <Array(<CreateGoogleBusinessMedia200Response>, Integer, Hash)> create_google_business_media_with_http_info(account_id, create_google_business_media_request, opts)
 
 ```ruby
 begin
   # Upload photo
-  data, status_code, headers = api_instance.create_google_business_media_with_http_info(account_id, create_google_business_media_request)
+  data, status_code, headers = api_instance.create_google_business_media_with_http_info(account_id, create_google_business_media_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateGoogleBusinessMedia200Response>
@@ -65,6 +68,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
 | **create_google_business_media_request** | [**CreateGoogleBusinessMediaRequest**](CreateGoogleBusinessMediaRequest.md) |  |  |
+| **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 
@@ -82,7 +86,7 @@ end
 
 ## delete_google_business_media
 
-> <DeleteGoogleBusinessMedia200Response> delete_google_business_media(account_id, media_id)
+> <DeleteGoogleBusinessMedia200Response> delete_google_business_media(account_id, media_id, opts)
 
 Delete photo
 
@@ -102,10 +106,13 @@ end
 api_instance = Late::GMBMediaApi.new
 account_id = 'account_id_example' # String | 
 media_id = 'media_id_example' # String | The media item ID to delete
+opts = {
+  location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Delete photo
-  result = api_instance.delete_google_business_media(account_id, media_id)
+  result = api_instance.delete_google_business_media(account_id, media_id, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBMediaApi->delete_google_business_media: #{e}"
@@ -116,12 +123,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteGoogleBusinessMedia200Response>, Integer, Hash)> delete_google_business_media_with_http_info(account_id, media_id)
+> <Array(<DeleteGoogleBusinessMedia200Response>, Integer, Hash)> delete_google_business_media_with_http_info(account_id, media_id, opts)
 
 ```ruby
 begin
   # Delete photo
-  data, status_code, headers = api_instance.delete_google_business_media_with_http_info(account_id, media_id)
+  data, status_code, headers = api_instance.delete_google_business_media_with_http_info(account_id, media_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteGoogleBusinessMedia200Response>
@@ -136,6 +143,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
 | **media_id** | **String** | The media item ID to delete |  |
+| **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 
@@ -173,6 +181,7 @@ end
 api_instance = Late::GMBMediaApi.new
 account_id = 'account_id_example' # String | 
 opts = {
+  location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
   page_size: 56, # Integer | Number of items to return (max 100)
   page_token: 'page_token_example' # String | Pagination token from previous response
 }
@@ -209,6 +218,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **location_id** | **String** | Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 | **page_size** | **Integer** | Number of items to return (max 100) | [optional][default to 100] |
 | **page_token** | **String** | Pagination token from previous response | [optional] |
 

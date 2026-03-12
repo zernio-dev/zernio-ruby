@@ -30,6 +30,7 @@ end
 api_instance = Late::GMBLocationDetailsApi.new
 account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
 opts = {
+  location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
   read_mask: 'read_mask_example' # String | Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, profile, openInfo, metadata, moreHours.
 }
 
@@ -65,6 +66,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
+| **location_id** | **String** | Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 | **read_mask** | **String** | Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, profile, openInfo, metadata, moreHours. | [optional] |
 
 ### Return type
@@ -83,7 +85,7 @@ end
 
 ## update_google_business_location_details
 
-> <UpdateGoogleBusinessLocationDetails200Response> update_google_business_location_details(account_id, update_google_business_location_details_request)
+> <UpdateGoogleBusinessLocationDetails200Response> update_google_business_location_details(account_id, update_google_business_location_details_request, opts)
 
 Update location details
 
@@ -103,10 +105,13 @@ end
 api_instance = Late::GMBLocationDetailsApi.new
 account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
 update_google_business_location_details_request = Late::UpdateGoogleBusinessLocationDetailsRequest.new({update_mask: 'update_mask_example'}) # UpdateGoogleBusinessLocationDetailsRequest | 
+opts = {
+  location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Update location details
-  result = api_instance.update_google_business_location_details(account_id, update_google_business_location_details_request)
+  result = api_instance.update_google_business_location_details(account_id, update_google_business_location_details_request, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBLocationDetailsApi->update_google_business_location_details: #{e}"
@@ -117,12 +122,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateGoogleBusinessLocationDetails200Response>, Integer, Hash)> update_google_business_location_details_with_http_info(account_id, update_google_business_location_details_request)
+> <Array(<UpdateGoogleBusinessLocationDetails200Response>, Integer, Hash)> update_google_business_location_details_with_http_info(account_id, update_google_business_location_details_request, opts)
 
 ```ruby
 begin
   # Update location details
-  data, status_code, headers = api_instance.update_google_business_location_details_with_http_info(account_id, update_google_business_location_details_request)
+  data, status_code, headers = api_instance.update_google_business_location_details_with_http_info(account_id, update_google_business_location_details_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateGoogleBusinessLocationDetails200Response>
@@ -137,6 +142,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
 | **update_google_business_location_details_request** | [**UpdateGoogleBusinessLocationDetailsRequest**](UpdateGoogleBusinessLocationDetailsRequest.md) |  |  |
+| **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 

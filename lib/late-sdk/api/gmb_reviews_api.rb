@@ -23,6 +23,7 @@ module Late
     # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.
     # @param account_id [String] The Late account ID (from /v1/accounts)
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @option opts [Integer] :page_size Number of reviews to fetch per page (max 50) (default to 50)
     # @option opts [String] :page_token Pagination token from previous response
     # @return [GetGoogleBusinessReviews200Response]
@@ -35,6 +36,7 @@ module Late
     # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.
     # @param account_id [String] The Late account ID (from /v1/accounts)
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @option opts [Integer] :page_size Number of reviews to fetch per page (max 50) (default to 50)
     # @option opts [String] :page_token Pagination token from previous response
     # @return [Array<(GetGoogleBusinessReviews200Response, Integer, Hash)>] GetGoogleBusinessReviews200Response data, response status code and response headers
@@ -59,6 +61,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
       query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
       query_params[:'pageToken'] = opts[:'page_token'] if !opts[:'page_token'].nil?
 

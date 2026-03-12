@@ -29,6 +29,7 @@ end
 api_instance = Late::GMBReviewsApi.new
 account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
 opts = {
+  location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
   page_size: 56, # Integer | Number of reviews to fetch per page (max 50)
   page_token: 'page_token_example' # String | Pagination token from previous response
 }
@@ -65,6 +66,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
+| **location_id** | **String** | Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 | **page_size** | **Integer** | Number of reviews to fetch per page (max 50) | [optional][default to 50] |
 | **page_token** | **String** | Pagination token from previous response | [optional] |
 

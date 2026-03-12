@@ -23,6 +23,7 @@ module Late
     # Returns GBP location attributes (amenities, services, accessibility, payment types). Available attributes vary by business category.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [GetGoogleBusinessAttributes200Response]
     def get_google_business_attributes(account_id, opts = {})
       data, _status_code, _headers = get_google_business_attributes_with_http_info(account_id, opts)
@@ -33,6 +34,7 @@ module Late
     # Returns GBP location attributes (amenities, services, accessibility, payment types). Available attributes vary by business category.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [Array<(GetGoogleBusinessAttributes200Response, Integer, Hash)>] GetGoogleBusinessAttributes200Response data, response status code and response headers
     def get_google_business_attributes_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -47,6 +49,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -87,6 +90,7 @@ module Late
     # @param account_id [String] 
     # @param update_google_business_attributes_request [UpdateGoogleBusinessAttributesRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [UpdateGoogleBusinessAttributes200Response]
     def update_google_business_attributes(account_id, update_google_business_attributes_request, opts = {})
       data, _status_code, _headers = update_google_business_attributes_with_http_info(account_id, update_google_business_attributes_request, opts)
@@ -98,6 +102,7 @@ module Late
     # @param account_id [String] 
     # @param update_google_business_attributes_request [UpdateGoogleBusinessAttributesRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [Array<(UpdateGoogleBusinessAttributes200Response, Integer, Hash)>] UpdateGoogleBusinessAttributes200Response data, response status code and response headers
     def update_google_business_attributes_with_http_info(account_id, update_google_business_attributes_request, opts = {})
       if @api_client.config.debugging
@@ -116,6 +121,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

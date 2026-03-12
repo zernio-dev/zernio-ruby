@@ -37,6 +37,7 @@ describe 'GMBReviewsApi' do
   # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.
   # @param account_id The Late account ID (from /v1/accounts)
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @option opts [Integer] :page_size Number of reviews to fetch per page (max 50)
   # @option opts [String] :page_token Pagination token from previous response
   # @return [GetGoogleBusinessReviews200Response]

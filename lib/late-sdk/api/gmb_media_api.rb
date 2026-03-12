@@ -24,6 +24,7 @@ module Late
     # @param account_id [String] 
     # @param create_google_business_media_request [CreateGoogleBusinessMediaRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [CreateGoogleBusinessMedia200Response]
     def create_google_business_media(account_id, create_google_business_media_request, opts = {})
       data, _status_code, _headers = create_google_business_media_with_http_info(account_id, create_google_business_media_request, opts)
@@ -35,6 +36,7 @@ module Late
     # @param account_id [String] 
     # @param create_google_business_media_request [CreateGoogleBusinessMediaRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [Array<(CreateGoogleBusinessMedia200Response, Integer, Hash)>] CreateGoogleBusinessMedia200Response data, response status code and response headers
     def create_google_business_media_with_http_info(account_id, create_google_business_media_request, opts = {})
       if @api_client.config.debugging
@@ -53,6 +55,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -98,6 +101,7 @@ module Late
     # @param account_id [String] 
     # @param media_id [String] The media item ID to delete
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [DeleteGoogleBusinessMedia200Response]
     def delete_google_business_media(account_id, media_id, opts = {})
       data, _status_code, _headers = delete_google_business_media_with_http_info(account_id, media_id, opts)
@@ -109,6 +113,7 @@ module Late
     # @param account_id [String] 
     # @param media_id [String] The media item ID to delete
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [Array<(DeleteGoogleBusinessMedia200Response, Integer, Hash)>] DeleteGoogleBusinessMedia200Response data, response status code and response headers
     def delete_google_business_media_with_http_info(account_id, media_id, opts = {})
       if @api_client.config.debugging
@@ -128,6 +133,7 @@ module Late
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'mediaId'] = media_id
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -167,6 +173,7 @@ module Late
     # Lists media items (photos) for a Google Business Profile location. Returns photo URLs, descriptions, categories, and metadata. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @option opts [Integer] :page_size Number of items to return (max 100) (default to 100)
     # @option opts [String] :page_token Pagination token from previous response
     # @return [ListGoogleBusinessMedia200Response]
@@ -179,6 +186,7 @@ module Late
     # Lists media items (photos) for a Google Business Profile location. Returns photo URLs, descriptions, categories, and metadata. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @option opts [Integer] :page_size Number of items to return (max 100) (default to 100)
     # @option opts [String] :page_token Pagination token from previous response
     # @return [Array<(ListGoogleBusinessMedia200Response, Integer, Hash)>] ListGoogleBusinessMedia200Response data, response status code and response headers
@@ -199,6 +207,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
       query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
       query_params[:'pageToken'] = opts[:'page_token'] if !opts[:'page_token'].nil?
 

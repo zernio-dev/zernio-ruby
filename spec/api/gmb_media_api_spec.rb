@@ -38,6 +38,7 @@ describe 'GMBMediaApi' do
   # @param account_id 
   # @param create_google_business_media_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [CreateGoogleBusinessMedia200Response]
   describe 'create_google_business_media test' do
     it 'should work' do
@@ -51,6 +52,7 @@ describe 'GMBMediaApi' do
   # @param account_id 
   # @param media_id The media item ID to delete
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [DeleteGoogleBusinessMedia200Response]
   describe 'delete_google_business_media test' do
     it 'should work' do
@@ -63,6 +65,7 @@ describe 'GMBMediaApi' do
   # Lists media items (photos) for a Google Business Profile location. Returns photo URLs, descriptions, categories, and metadata. 
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @option opts [Integer] :page_size Number of items to return (max 100)
   # @option opts [String] :page_token Pagination token from previous response
   # @return [ListGoogleBusinessMedia200Response]

@@ -23,6 +23,7 @@ module Late
     # Returns detailed GBP location info (hours, description, phone, website, categories). Use readMask to request specific fields.
     # @param account_id [String] The Late account ID (from /v1/accounts)
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @option opts [String] :read_mask Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, profile, openInfo, metadata, moreHours.
     # @return [GetGoogleBusinessLocationDetails200Response]
     def get_google_business_location_details(account_id, opts = {})
@@ -34,6 +35,7 @@ module Late
     # Returns detailed GBP location info (hours, description, phone, website, categories). Use readMask to request specific fields.
     # @param account_id [String] The Late account ID (from /v1/accounts)
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @option opts [String] :read_mask Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, profile, openInfo, metadata, moreHours.
     # @return [Array<(GetGoogleBusinessLocationDetails200Response, Integer, Hash)>] GetGoogleBusinessLocationDetails200Response data, response status code and response headers
     def get_google_business_location_details_with_http_info(account_id, opts = {})
@@ -49,6 +51,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
       query_params[:'readMask'] = opts[:'read_mask'] if !opts[:'read_mask'].nil?
 
       # header parameters
@@ -90,6 +93,7 @@ module Late
     # @param account_id [String] The Late account ID (from /v1/accounts)
     # @param update_google_business_location_details_request [UpdateGoogleBusinessLocationDetailsRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [UpdateGoogleBusinessLocationDetails200Response]
     def update_google_business_location_details(account_id, update_google_business_location_details_request, opts = {})
       data, _status_code, _headers = update_google_business_location_details_with_http_info(account_id, update_google_business_location_details_request, opts)
@@ -101,6 +105,7 @@ module Late
     # @param account_id [String] The Late account ID (from /v1/accounts)
     # @param update_google_business_location_details_request [UpdateGoogleBusinessLocationDetailsRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [Array<(UpdateGoogleBusinessLocationDetails200Response, Integer, Hash)>] UpdateGoogleBusinessLocationDetails200Response data, response status code and response headers
     def update_google_business_location_details_with_http_info(account_id, update_google_business_location_details_request, opts = {})
       if @api_client.config.debugging
@@ -119,6 +124,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

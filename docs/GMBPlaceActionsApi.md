@@ -11,7 +11,7 @@ All URIs are relative to *https://getlate.dev/api*
 
 ## create_google_business_place_action
 
-> <CreateGoogleBusinessPlaceAction200Response> create_google_business_place_action(account_id, create_google_business_place_action_request)
+> <CreateGoogleBusinessPlaceAction200Response> create_google_business_place_action(account_id, create_google_business_place_action_request, opts)
 
 Create action link
 
@@ -31,10 +31,13 @@ end
 api_instance = Late::GMBPlaceActionsApi.new
 account_id = 'account_id_example' # String | 
 create_google_business_place_action_request = Late::CreateGoogleBusinessPlaceActionRequest.new({uri: 'uri_example', place_action_type: 'APPOINTMENT'}) # CreateGoogleBusinessPlaceActionRequest | 
+opts = {
+  location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Create action link
-  result = api_instance.create_google_business_place_action(account_id, create_google_business_place_action_request)
+  result = api_instance.create_google_business_place_action(account_id, create_google_business_place_action_request, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->create_google_business_place_action: #{e}"
@@ -45,12 +48,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateGoogleBusinessPlaceAction200Response>, Integer, Hash)> create_google_business_place_action_with_http_info(account_id, create_google_business_place_action_request)
+> <Array(<CreateGoogleBusinessPlaceAction200Response>, Integer, Hash)> create_google_business_place_action_with_http_info(account_id, create_google_business_place_action_request, opts)
 
 ```ruby
 begin
   # Create action link
-  data, status_code, headers = api_instance.create_google_business_place_action_with_http_info(account_id, create_google_business_place_action_request)
+  data, status_code, headers = api_instance.create_google_business_place_action_with_http_info(account_id, create_google_business_place_action_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateGoogleBusinessPlaceAction200Response>
@@ -65,6 +68,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
 | **create_google_business_place_action_request** | [**CreateGoogleBusinessPlaceActionRequest**](CreateGoogleBusinessPlaceActionRequest.md) |  |  |
+| **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 
@@ -82,7 +86,7 @@ end
 
 ## delete_google_business_place_action
 
-> <DeleteGoogleBusinessPlaceAction200Response> delete_google_business_place_action(account_id, name)
+> <DeleteGoogleBusinessPlaceAction200Response> delete_google_business_place_action(account_id, name, opts)
 
 Delete action link
 
@@ -102,10 +106,13 @@ end
 api_instance = Late::GMBPlaceActionsApi.new
 account_id = 'account_id_example' # String | 
 name = 'name_example' # String | The resource name of the place action link (e.g. locations/123/placeActionLinks/456)
+opts = {
+  location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Delete action link
-  result = api_instance.delete_google_business_place_action(account_id, name)
+  result = api_instance.delete_google_business_place_action(account_id, name, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->delete_google_business_place_action: #{e}"
@@ -116,12 +123,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteGoogleBusinessPlaceAction200Response>, Integer, Hash)> delete_google_business_place_action_with_http_info(account_id, name)
+> <Array(<DeleteGoogleBusinessPlaceAction200Response>, Integer, Hash)> delete_google_business_place_action_with_http_info(account_id, name, opts)
 
 ```ruby
 begin
   # Delete action link
-  data, status_code, headers = api_instance.delete_google_business_place_action_with_http_info(account_id, name)
+  data, status_code, headers = api_instance.delete_google_business_place_action_with_http_info(account_id, name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteGoogleBusinessPlaceAction200Response>
@@ -136,6 +143,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
 | **name** | **String** | The resource name of the place action link (e.g. locations/123/placeActionLinks/456) |  |
+| **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 
@@ -173,6 +181,7 @@ end
 api_instance = Late::GMBPlaceActionsApi.new
 account_id = 'account_id_example' # String | 
 opts = {
+  location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
   page_size: 56, # Integer | 
   page_token: 'page_token_example' # String | 
 }
@@ -209,6 +218,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **location_id** | **String** | Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 | **page_size** | **Integer** |  | [optional][default to 100] |
 | **page_token** | **String** |  | [optional] |
 

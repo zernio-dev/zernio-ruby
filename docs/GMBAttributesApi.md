@@ -10,7 +10,7 @@ All URIs are relative to *https://getlate.dev/api*
 
 ## get_google_business_attributes
 
-> <GetGoogleBusinessAttributes200Response> get_google_business_attributes(account_id)
+> <GetGoogleBusinessAttributes200Response> get_google_business_attributes(account_id, opts)
 
 Get attributes
 
@@ -29,10 +29,13 @@ end
 
 api_instance = Late::GMBAttributesApi.new
 account_id = 'account_id_example' # String | 
+opts = {
+  location_id: 'location_id_example' # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Get attributes
-  result = api_instance.get_google_business_attributes(account_id)
+  result = api_instance.get_google_business_attributes(account_id, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBAttributesApi->get_google_business_attributes: #{e}"
@@ -43,12 +46,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetGoogleBusinessAttributes200Response>, Integer, Hash)> get_google_business_attributes_with_http_info(account_id)
+> <Array(<GetGoogleBusinessAttributes200Response>, Integer, Hash)> get_google_business_attributes_with_http_info(account_id, opts)
 
 ```ruby
 begin
   # Get attributes
-  data, status_code, headers = api_instance.get_google_business_attributes_with_http_info(account_id)
+  data, status_code, headers = api_instance.get_google_business_attributes_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGoogleBusinessAttributes200Response>
@@ -62,6 +65,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **location_id** | **String** | Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 
@@ -79,7 +83,7 @@ end
 
 ## update_google_business_attributes
 
-> <UpdateGoogleBusinessAttributes200Response> update_google_business_attributes(account_id, update_google_business_attributes_request)
+> <UpdateGoogleBusinessAttributes200Response> update_google_business_attributes(account_id, update_google_business_attributes_request, opts)
 
 Update attributes
 
@@ -99,10 +103,13 @@ end
 api_instance = Late::GMBAttributesApi.new
 account_id = 'account_id_example' # String | 
 update_google_business_attributes_request = Late::UpdateGoogleBusinessAttributesRequest.new({attributes: [Late::UpdateGoogleBusinessAttributesRequestAttributesInner.new], attribute_mask: 'attribute_mask_example'}) # UpdateGoogleBusinessAttributesRequest | 
+opts = {
+  location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Update attributes
-  result = api_instance.update_google_business_attributes(account_id, update_google_business_attributes_request)
+  result = api_instance.update_google_business_attributes(account_id, update_google_business_attributes_request, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBAttributesApi->update_google_business_attributes: #{e}"
@@ -113,12 +120,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateGoogleBusinessAttributes200Response>, Integer, Hash)> update_google_business_attributes_with_http_info(account_id, update_google_business_attributes_request)
+> <Array(<UpdateGoogleBusinessAttributes200Response>, Integer, Hash)> update_google_business_attributes_with_http_info(account_id, update_google_business_attributes_request, opts)
 
 ```ruby
 begin
   # Update attributes
-  data, status_code, headers = api_instance.update_google_business_attributes_with_http_info(account_id, update_google_business_attributes_request)
+  data, status_code, headers = api_instance.update_google_business_attributes_with_http_info(account_id, update_google_business_attributes_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateGoogleBusinessAttributes200Response>
@@ -133,6 +140,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
 | **update_google_business_attributes_request** | [**UpdateGoogleBusinessAttributesRequest**](UpdateGoogleBusinessAttributesRequest.md) |  |  |
+| **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 

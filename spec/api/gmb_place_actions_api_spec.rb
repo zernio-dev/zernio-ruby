@@ -38,6 +38,7 @@ describe 'GMBPlaceActionsApi' do
   # @param account_id 
   # @param create_google_business_place_action_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [CreateGoogleBusinessPlaceAction200Response]
   describe 'create_google_business_place_action test' do
     it 'should work' do
@@ -51,6 +52,7 @@ describe 'GMBPlaceActionsApi' do
   # @param account_id 
   # @param name The resource name of the place action link (e.g. locations/123/placeActionLinks/456)
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [DeleteGoogleBusinessPlaceAction200Response]
   describe 'delete_google_business_place_action test' do
     it 'should work' do
@@ -63,6 +65,7 @@ describe 'GMBPlaceActionsApi' do
   # Lists place action links for a Google Business Profile location.  Place actions are the booking, ordering, and reservation buttons that appear on your listing. 
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @option opts [Integer] :page_size 
   # @option opts [String] :page_token 
   # @return [ListGoogleBusinessPlaceActions200Response]

@@ -37,6 +37,7 @@ describe 'GMBLocationDetailsApi' do
   # Returns detailed GBP location info (hours, description, phone, website, categories). Use readMask to request specific fields.
   # @param account_id The Late account ID (from /v1/accounts)
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @option opts [String] :read_mask Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, profile, openInfo, metadata, moreHours.
   # @return [GetGoogleBusinessLocationDetails200Response]
   describe 'get_google_business_location_details test' do
@@ -51,6 +52,7 @@ describe 'GMBLocationDetailsApi' do
   # @param account_id The Late account ID (from /v1/accounts)
   # @param update_google_business_location_details_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [UpdateGoogleBusinessLocationDetails200Response]
   describe 'update_google_business_location_details test' do
     it 'should work' do

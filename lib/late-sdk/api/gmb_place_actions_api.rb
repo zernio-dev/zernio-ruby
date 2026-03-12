@@ -24,6 +24,7 @@ module Late
     # @param account_id [String] 
     # @param create_google_business_place_action_request [CreateGoogleBusinessPlaceActionRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [CreateGoogleBusinessPlaceAction200Response]
     def create_google_business_place_action(account_id, create_google_business_place_action_request, opts = {})
       data, _status_code, _headers = create_google_business_place_action_with_http_info(account_id, create_google_business_place_action_request, opts)
@@ -35,6 +36,7 @@ module Late
     # @param account_id [String] 
     # @param create_google_business_place_action_request [CreateGoogleBusinessPlaceActionRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [Array<(CreateGoogleBusinessPlaceAction200Response, Integer, Hash)>] CreateGoogleBusinessPlaceAction200Response data, response status code and response headers
     def create_google_business_place_action_with_http_info(account_id, create_google_business_place_action_request, opts = {})
       if @api_client.config.debugging
@@ -53,6 +55,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -98,6 +101,7 @@ module Late
     # @param account_id [String] 
     # @param name [String] The resource name of the place action link (e.g. locations/123/placeActionLinks/456)
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [DeleteGoogleBusinessPlaceAction200Response]
     def delete_google_business_place_action(account_id, name, opts = {})
       data, _status_code, _headers = delete_google_business_place_action_with_http_info(account_id, name, opts)
@@ -109,6 +113,7 @@ module Late
     # @param account_id [String] 
     # @param name [String] The resource name of the place action link (e.g. locations/123/placeActionLinks/456)
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @return [Array<(DeleteGoogleBusinessPlaceAction200Response, Integer, Hash)>] DeleteGoogleBusinessPlaceAction200Response data, response status code and response headers
     def delete_google_business_place_action_with_http_info(account_id, name, opts = {})
       if @api_client.config.debugging
@@ -128,6 +133,7 @@ module Late
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'name'] = name
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -167,6 +173,7 @@ module Late
     # Lists place action links for a Google Business Profile location.  Place actions are the booking, ordering, and reservation buttons that appear on your listing. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @option opts [Integer] :page_size  (default to 100)
     # @option opts [String] :page_token 
     # @return [ListGoogleBusinessPlaceActions200Response]
@@ -179,6 +186,7 @@ module Late
     # Lists place action links for a Google Business Profile location.  Place actions are the booking, ordering, and reservation buttons that appear on your listing. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
     # @option opts [Integer] :page_size  (default to 100)
     # @option opts [String] :page_token 
     # @return [Array<(ListGoogleBusinessPlaceActions200Response, Integer, Hash)>] ListGoogleBusinessPlaceActions200Response data, response status code and response headers
@@ -199,6 +207,7 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
       query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
       query_params[:'pageToken'] = opts[:'page_token'] if !opts[:'page_token'].nil?
 

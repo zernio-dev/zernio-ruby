@@ -37,6 +37,7 @@ describe 'GMBFoodMenusApi' do
   # Returns food menus for a GBP location including sections, items, pricing, and dietary info. Only for locations with food menu support.
   # @param account_id The Late account ID (from /v1/accounts)
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [GetGoogleBusinessFoodMenus200Response]
   describe 'get_google_business_food_menus test' do
     it 'should work' do
@@ -50,6 +51,7 @@ describe 'GMBFoodMenusApi' do
   # @param account_id The Late account ID (from /v1/accounts)
   # @param update_google_business_food_menus_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
   # @return [UpdateGoogleBusinessFoodMenus200Response]
   describe 'update_google_business_food_menus test' do
     it 'should work' do

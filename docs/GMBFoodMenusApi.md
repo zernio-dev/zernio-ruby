@@ -10,7 +10,7 @@ All URIs are relative to *https://getlate.dev/api*
 
 ## get_google_business_food_menus
 
-> <GetGoogleBusinessFoodMenus200Response> get_google_business_food_menus(account_id)
+> <GetGoogleBusinessFoodMenus200Response> get_google_business_food_menus(account_id, opts)
 
 Get food menus
 
@@ -29,10 +29,13 @@ end
 
 api_instance = Late::GMBFoodMenusApi.new
 account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
+opts = {
+  location_id: 'location_id_example' # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Get food menus
-  result = api_instance.get_google_business_food_menus(account_id)
+  result = api_instance.get_google_business_food_menus(account_id, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBFoodMenusApi->get_google_business_food_menus: #{e}"
@@ -43,12 +46,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetGoogleBusinessFoodMenus200Response>, Integer, Hash)> get_google_business_food_menus_with_http_info(account_id)
+> <Array(<GetGoogleBusinessFoodMenus200Response>, Integer, Hash)> get_google_business_food_menus_with_http_info(account_id, opts)
 
 ```ruby
 begin
   # Get food menus
-  data, status_code, headers = api_instance.get_google_business_food_menus_with_http_info(account_id)
+  data, status_code, headers = api_instance.get_google_business_food_menus_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGoogleBusinessFoodMenus200Response>
@@ -62,6 +65,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
+| **location_id** | **String** | Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 
@@ -79,7 +83,7 @@ end
 
 ## update_google_business_food_menus
 
-> <UpdateGoogleBusinessFoodMenus200Response> update_google_business_food_menus(account_id, update_google_business_food_menus_request)
+> <UpdateGoogleBusinessFoodMenus200Response> update_google_business_food_menus(account_id, update_google_business_food_menus_request, opts)
 
 Update food menus
 
@@ -99,10 +103,13 @@ end
 api_instance = Late::GMBFoodMenusApi.new
 account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
 update_google_business_food_menus_request = Late::UpdateGoogleBusinessFoodMenusRequest.new({menus: [Late::FoodMenu.new({labels: [Late::FoodMenuLabel.new({display_name: 'display_name_example'})]})]}) # UpdateGoogleBusinessFoodMenusRequest | 
+opts = {
+  location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
 
 begin
   # Update food menus
-  result = api_instance.update_google_business_food_menus(account_id, update_google_business_food_menus_request)
+  result = api_instance.update_google_business_food_menus(account_id, update_google_business_food_menus_request, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling GMBFoodMenusApi->update_google_business_food_menus: #{e}"
@@ -113,12 +120,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateGoogleBusinessFoodMenus200Response>, Integer, Hash)> update_google_business_food_menus_with_http_info(account_id, update_google_business_food_menus_request)
+> <Array(<UpdateGoogleBusinessFoodMenus200Response>, Integer, Hash)> update_google_business_food_menus_with_http_info(account_id, update_google_business_food_menus_request, opts)
 
 ```ruby
 begin
   # Update food menus
-  data, status_code, headers = api_instance.update_google_business_food_menus_with_http_info(account_id, update_google_business_food_menus_request)
+  data, status_code, headers = api_instance.update_google_business_food_menus_with_http_info(account_id, update_google_business_food_menus_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateGoogleBusinessFoodMenus200Response>
@@ -133,6 +140,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
 | **update_google_business_food_menus_request** | [**UpdateGoogleBusinessFoodMenusRequest**](UpdateGoogleBusinessFoodMenusRequest.md) |  |  |
+| **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
 
