@@ -31,7 +31,7 @@ module Late
     # Optional MIME type (e.g. image/jpeg, video/mp4)
     attr_accessor :mime_type
 
-    # Optional thumbnail image URL for videos
+    # Optional custom thumbnail/cover image URL for videos. Supported for Facebook video posts, Facebook Reels, and regular video uploads. Max 10MB, JPG/PNG recommended.
     attr_accessor :thumbnail
 
     # Optional custom cover image URL for Instagram Reels
