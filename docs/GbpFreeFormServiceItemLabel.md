@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerFreeFormServiceItemLabel
+# Late::GbpFreeFormServiceItemLabel
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'late-sdk'
 
-instance = Late::GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerFreeFormServiceItemLabel.new(
+instance = Late::GbpFreeFormServiceItemLabel.new(
   display_name: null,
   language_code: null
 )

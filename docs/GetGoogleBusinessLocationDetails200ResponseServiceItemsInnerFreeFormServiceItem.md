@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **category** | **String** |  | [optional] |
-| **label** | [**GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerFreeFormServiceItemLabel**](GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerFreeFormServiceItemLabel.md) |  | [optional] |
+| **label** | [**GbpFreeFormServiceItemLabel**](GbpFreeFormServiceItemLabel.md) |  | [optional] |
 
 ## Example
 
