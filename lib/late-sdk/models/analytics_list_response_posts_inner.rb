@@ -39,6 +39,7 @@ module Late
 
     attr_accessor :media_type
 
+    # All media items for this post. Carousel posts contain one entry per slide.
     attr_accessor :media_items
 
     class EnumAttributeValidator
@@ -107,7 +108,7 @@ module Late
         :'is_external' => :'Boolean',
         :'thumbnail_url' => :'String',
         :'media_type' => :'String',
-        :'media_items' => :'Array<MediaItem>'
+        :'media_items' => :'Array<AnalyticsSinglePostResponseMediaItemsInner>'
       }
     end
 
@@ -202,7 +203,7 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      media_type_validator = EnumAttributeValidator.new('String', ["image", "video", "gif", "document"])
+      media_type_validator = EnumAttributeValidator.new('String', ["image", "video", "gif", "document", "carousel", "text"])
       return false unless media_type_validator.valid?(@media_type)
       true
     end
@@ -210,7 +211,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] media_type Object to be assigned
     def media_type=(media_type)
-      validator = EnumAttributeValidator.new('String', ["image", "video", "gif", "document"])
+      validator = EnumAttributeValidator.new('String', ["image", "video", "gif", "document", "carousel", "text"])
       unless validator.valid?(media_type)
         fail ArgumentError, "invalid value for \"media_type\", must be one of #{validator.allowable_values}."
       end

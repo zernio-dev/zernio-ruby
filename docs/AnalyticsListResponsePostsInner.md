@@ -16,7 +16,7 @@
 | **is_external** | **Boolean** |  | [optional] |
 | **thumbnail_url** | **String** |  | [optional] |
 | **media_type** | **String** |  | [optional] |
-| **media_items** | [**Array&lt;MediaItem&gt;**](MediaItem.md) |  | [optional] |
+| **media_items** | [**Array&lt;AnalyticsSinglePostResponseMediaItemsInner&gt;**](AnalyticsSinglePostResponseMediaItemsInner.md) | All media items for this post. Carousel posts contain one entry per slide. | [optional] |
 
 ## Example
 

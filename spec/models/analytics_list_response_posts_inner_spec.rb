@@ -96,7 +96,7 @@ describe Late::AnalyticsListResponsePostsInner do
   describe 'test attribute "media_type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["image", "video", "gif", "document"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["image", "video", "gif", "document", "carousel", "text"])
       # validator.allowable_values.each do |value|
       #   expect { instance.media_type = value }.not_to raise_error
       # end

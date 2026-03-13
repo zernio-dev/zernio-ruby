@@ -14,6 +14,9 @@
 | **platform** | **String** |  | [optional] |
 | **platform_post_url** | **String** |  | [optional] |
 | **is_external** | **Boolean** |  | [optional] |
+| **thumbnail_url** | **String** |  | [optional] |
+| **media_type** | **String** |  | [optional] |
+| **media_items** | [**Array&lt;AnalyticsSinglePostResponseMediaItemsInner&gt;**](AnalyticsSinglePostResponseMediaItemsInner.md) | All media items for this post. Carousel posts contain one entry per slide. | [optional] |
 
 ## Example
 
@@ -30,7 +33,10 @@ instance = Late::AnalyticsSinglePostResponse.new(
   platform_analytics: null,
   platform: null,
   platform_post_url: null,
-  is_external: null
+  is_external: null,
+  thumbnail_url: null,
+  media_type: null,
+  media_items: null
 )
 ```
 

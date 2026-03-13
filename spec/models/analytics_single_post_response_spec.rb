@@ -87,4 +87,26 @@ describe Late::AnalyticsSinglePostResponse do
     end
   end
 
+  describe 'test attribute "thumbnail_url"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "media_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["image", "video", "carousel", "text"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.media_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "media_items"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

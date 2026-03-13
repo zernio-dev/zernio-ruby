@@ -257,6 +257,7 @@ Class | Method | HTTP request | Description
  - [Late::AnalyticsListResponsePostsInner](docs/AnalyticsListResponsePostsInner.md)
  - [Late::AnalyticsOverview](docs/AnalyticsOverview.md)
  - [Late::AnalyticsSinglePostResponse](docs/AnalyticsSinglePostResponse.md)
+ - [Late::AnalyticsSinglePostResponseMediaItemsInner](docs/AnalyticsSinglePostResponseMediaItemsInner.md)
  - [Late::ApiKey](docs/ApiKey.md)
  - [Late::ApiKeyProfileIdsInner](docs/ApiKeyProfileIdsInner.md)
  - [Late::BlueskyPlatformData](docs/BlueskyPlatformData.md)

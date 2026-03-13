@@ -35,6 +35,35 @@ module Late
 
     attr_accessor :is_external
 
+    attr_accessor :thumbnail_url
+
+    attr_accessor :media_type
+
+    # All media items for this post. Carousel posts contain one entry per slide.
+    attr_accessor :media_items
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -47,7 +76,10 @@ module Late
         :'platform_analytics' => :'platformAnalytics',
         :'platform' => :'platform',
         :'platform_post_url' => :'platformPostUrl',
-        :'is_external' => :'isExternal'
+        :'is_external' => :'isExternal',
+        :'thumbnail_url' => :'thumbnailUrl',
+        :'media_type' => :'mediaType',
+        :'media_items' => :'mediaItems'
       }
     end
 
@@ -73,7 +105,10 @@ module Late
         :'platform_analytics' => :'Array<PlatformAnalytics>',
         :'platform' => :'String',
         :'platform_post_url' => :'String',
-        :'is_external' => :'Boolean'
+        :'is_external' => :'Boolean',
+        :'thumbnail_url' => :'String',
+        :'media_type' => :'String',
+        :'media_items' => :'Array<AnalyticsSinglePostResponseMediaItemsInner>'
       }
     end
 
@@ -140,6 +175,20 @@ module Late
       if attributes.key?(:'is_external')
         self.is_external = attributes[:'is_external']
       end
+
+      if attributes.key?(:'thumbnail_url')
+        self.thumbnail_url = attributes[:'thumbnail_url']
+      end
+
+      if attributes.key?(:'media_type')
+        self.media_type = attributes[:'media_type']
+      end
+
+      if attributes.key?(:'media_items')
+        if (value = attributes[:'media_items']).is_a?(Array)
+          self.media_items = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -154,7 +203,19 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      media_type_validator = EnumAttributeValidator.new('String', ["image", "video", "carousel", "text"])
+      return false unless media_type_validator.valid?(@media_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] media_type Object to be assigned
+    def media_type=(media_type)
+      validator = EnumAttributeValidator.new('String', ["image", "video", "carousel", "text"])
+      unless validator.valid?(media_type)
+        fail ArgumentError, "invalid value for \"media_type\", must be one of #{validator.allowable_values}."
+      end
+      @media_type = media_type
     end
 
     # Checks equality by comparing each attribute.
@@ -171,7 +232,10 @@ module Late
           platform_analytics == o.platform_analytics &&
           platform == o.platform &&
           platform_post_url == o.platform_post_url &&
-          is_external == o.is_external
+          is_external == o.is_external &&
+          thumbnail_url == o.thumbnail_url &&
+          media_type == o.media_type &&
+          media_items == o.media_items
     end
 
     # @see the `==` method
@@ -183,7 +247,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, status, content, scheduled_for, published_at, analytics, platform_analytics, platform, platform_post_url, is_external].hash
+      [post_id, status, content, scheduled_for, published_at, analytics, platform_analytics, platform, platform_post_url, is_external, thumbnail_url, media_type, media_items].hash
     end
 
     # Builds the object from hash
