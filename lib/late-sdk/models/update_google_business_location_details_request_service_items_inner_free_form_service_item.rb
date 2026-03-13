@@ -43,7 +43,7 @@ module Late
     def self.openapi_types
       {
         :'category' => :'String',
-        :'label' => :'UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerFreeFormServiceItemLabel'
+        :'label' => :'GbpUpdateFreeFormServiceItemLabel'
       }
     end
 
