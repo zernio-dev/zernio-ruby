@@ -28,6 +28,7 @@ module Late
 
     attr_accessor :publish_now
 
+    # When true, saves the post as a draft. When none of scheduledFor, publishNow, or queuedFromProfile are provided, the post defaults to draft automatically.
     attr_accessor :is_draft
 
     attr_accessor :timezone
