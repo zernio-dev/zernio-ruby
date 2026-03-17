@@ -1,6 +1,6 @@
 # Late::ConnectApi
 
-All URIs are relative to *https://getlate.dev/api*
+All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -248,7 +248,7 @@ end
 
 Get OAuth connect URL
 
-Initiate an OAuth connection flow. Returns an authUrl to redirect the user to. Standard flow: Late hosts the selection UI, then redirects to your redirect_url. Headless mode (headless=true): user is redirected to your redirect_url with OAuth data for custom UI. Use the platform-specific selection endpoints to complete. 
+Initiate an OAuth connection flow. Returns an authUrl to redirect the user to. Standard flow: Zernio hosts the selection UI, then redirects to your redirect_url. Headless mode (headless=true): user is redirected to your redirect_url with OAuth data for custom UI. Use the platform-specific selection endpoints to complete. 
 
 ### Examples
 
@@ -263,10 +263,10 @@ end
 
 api_instance = Late::ConnectApi.new
 platform = 'facebook' # String | Social media platform to connect
-profile_id = 'profile_id_example' # String | Your Late profile ID (get from /v1/profiles)
+profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles)
 opts = {
   redirect_url: 'redirect_url_example', # String | Your custom redirect URL after connection completes. Standard mode appends ?connected={platform}&profileId=X&accountId=Y&username=Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.
-  headless: true # Boolean | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Late's default account selection UI. Use this to build a custom connect experience.
+  headless: true # Boolean | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio's default account selection UI. Use this to build a custom connect experience.
 }
 
 begin
@@ -301,9 +301,9 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** | Social media platform to connect |  |
-| **profile_id** | **String** | Your Late profile ID (get from /v1/profiles) |  |
+| **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles) |  |
 | **redirect_url** | **String** | Your custom redirect URL after connection completes. Standard mode appends ?connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId. | [optional] |
-| **headless** | **Boolean** | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Late&#39;s default account selection UI. Use this to build a custom connect experience. | [optional][default to false] |
+| **headless** | **Boolean** | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. | [optional][default to false] |
 
 ### Return type
 
@@ -1256,7 +1256,7 @@ end
 
 api_instance = Late::ConnectApi.new
 x_connect_token = 'x_connect_token_example' # String | Short-lived connect token from the OAuth redirect
-profile_id = 'profile_id_example' # String | Your Late profile ID
+profile_id = 'profile_id_example' # String | Your Zernio profile ID
 temp_token = 'temp_token_example' # String | Temporary Pinterest access token from the OAuth callback redirect
 
 begin
@@ -1291,7 +1291,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **x_connect_token** | **String** | Short-lived connect token from the OAuth redirect |  |
-| **profile_id** | **String** | Your Late profile ID |  |
+| **profile_id** | **String** | Your Zernio profile ID |  |
 | **temp_token** | **String** | Temporary Pinterest access token from the OAuth callback redirect |  |
 
 ### Return type
@@ -1329,7 +1329,7 @@ end
 
 api_instance = Late::ConnectApi.new
 x_connect_token = 'x_connect_token_example' # String | Short-lived connect token from the OAuth redirect
-profile_id = 'profile_id_example' # String | Your Late profile ID
+profile_id = 'profile_id_example' # String | Your Zernio profile ID
 temp_token = 'temp_token_example' # String | Temporary Snapchat access token from the OAuth callback redirect
 
 begin
@@ -1364,7 +1364,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **x_connect_token** | **String** | Short-lived connect token from the OAuth redirect |  |
-| **profile_id** | **String** | Your Late profile ID |  |
+| **profile_id** | **String** | Your Zernio profile ID |  |
 | **temp_token** | **String** | Temporary Snapchat access token from the OAuth callback redirect |  |
 
 ### Return type

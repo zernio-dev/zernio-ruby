@@ -1,6 +1,6 @@
 # Late::ValidateApi
 
-All URIs are relative to *https://getlate.dev/api*
+All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -168,7 +168,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::ValidateApi.new
-validate_post_length_request = Late::ValidatePostLengthRequest.new({text: 'Check out https://getlate.dev for scheduling posts!'}) # ValidatePostLengthRequest | 
+validate_post_length_request = Late::ValidatePostLengthRequest.new({text: 'Check out https://zernio.com for scheduling posts!'}) # ValidatePostLengthRequest | 
 
 begin
   # Validate post character count

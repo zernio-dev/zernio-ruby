@@ -12,7 +12,7 @@
 require 'late-sdk'
 
 instance = Late::ValidatePostLengthRequest.new(
-  text: Check out https://getlate.dev for scheduling posts!
+  text: Check out https://zernio.com for scheduling posts!
 )
 ```
 

@@ -1,6 +1,6 @@
 # Late::GMBLocationDetailsApi
 
-All URIs are relative to *https://getlate.dev/api*
+All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -28,7 +28,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::GMBLocationDetailsApi.new
-account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
 opts = {
   location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
   read_mask: 'read_mask_example' # String | Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, serviceItems, profile, openInfo, metadata, moreHours.
@@ -65,7 +65,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
 | **location_id** | **String** | Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 | **read_mask** | **String** | Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, serviceItems, profile, openInfo, metadata, moreHours. | [optional] |
 
@@ -103,7 +103,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::GMBLocationDetailsApi.new
-account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
 update_google_business_location_details_request = Late::UpdateGoogleBusinessLocationDetailsRequest.new({update_mask: 'update_mask_example'}) # UpdateGoogleBusinessLocationDetailsRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
@@ -140,7 +140,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
 | **update_google_business_location_details_request** | [**UpdateGoogleBusinessLocationDetailsRequest**](UpdateGoogleBusinessLocationDetailsRequest.md) |  |  |
 | **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 

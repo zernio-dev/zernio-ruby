@@ -1,6 +1,6 @@
 # Late::GMBFoodMenusApi
 
-All URIs are relative to *https://getlate.dev/api*
+All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -28,7 +28,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::GMBFoodMenusApi.new
-account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
 opts = {
   location_id: 'location_id_example' # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
 }
@@ -64,7 +64,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
 | **location_id** | **String** | Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
 ### Return type
@@ -101,7 +101,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::GMBFoodMenusApi.new
-account_id = 'account_id_example' # String | The Late account ID (from /v1/accounts)
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
 update_google_business_food_menus_request = Late::UpdateGoogleBusinessFoodMenusRequest.new({menus: [Late::FoodMenu.new({labels: [Late::FoodMenuLabel.new({display_name: 'display_name_example'})]})]}) # UpdateGoogleBusinessFoodMenusRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
@@ -138,7 +138,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The Late account ID (from /v1/accounts) |  |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
 | **update_google_business_food_menus_request** | [**UpdateGoogleBusinessFoodMenusRequest**](UpdateGoogleBusinessFoodMenusRequest.md) |  |  |
 | **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
 
