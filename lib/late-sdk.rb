@@ -624,3 +624,6 @@ module Late
     end
   end
 end
+
+# Zernio alias for backwards compatibility during rebrand
+Zernio = Late unless defined?(Zernio)
