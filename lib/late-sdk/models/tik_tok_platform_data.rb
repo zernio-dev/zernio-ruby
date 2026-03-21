@@ -52,7 +52,7 @@ module Late
     # Optional for video posts. Timestamp in milliseconds to select which frame to use as thumbnail (defaults to 1000ms/1 second). Ignored when videoCoverImageUrl is provided.
     attr_accessor :video_cover_timestamp_ms
 
-    # Optional for video posts. URL of a custom thumbnail image (JPG, PNG, or WebP, max 20MB). The image is prepended as a 1-second still frame to the video and used as the cover. Overrides videoCoverTimestampMs when provided.
+    # Optional for video posts. URL of a custom thumbnail image (JPG, PNG, or WebP, max 20MB). The image is stitched as a single frame at the start of the video and used as the cover. Overrides videoCoverTimestampMs when provided.
     attr_accessor :video_cover_image_url
 
     # Optional for photo carousels. Index of image to use as cover, 0-based (defaults to 0/first image).
