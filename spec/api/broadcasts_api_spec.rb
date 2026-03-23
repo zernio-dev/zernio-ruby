@@ -59,7 +59,7 @@ describe 'BroadcastsApi' do
   # Create a broadcast draft
   # @param create_broadcast_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [CreateBroadcast200Response]
   describe 'create_broadcast test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

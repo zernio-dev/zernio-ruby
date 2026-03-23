@@ -85,7 +85,7 @@ end
 
 ## create_sequence
 
-> create_sequence(create_sequence_request)
+> <CreateSequence200Response> create_sequence(create_sequence_request)
 
 Create a sequence
 
@@ -105,7 +105,8 @@ create_sequence_request = Late::CreateSequenceRequest.new({profile_id: 'profile_
 
 begin
   # Create a sequence
-  api_instance.create_sequence(create_sequence_request)
+  result = api_instance.create_sequence(create_sequence_request)
+  p result
 rescue Late::ApiError => e
   puts "Error when calling SequencesApi->create_sequence: #{e}"
 end
@@ -113,9 +114,9 @@ end
 
 #### Using the create_sequence_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> create_sequence_with_http_info(create_sequence_request)
+> <Array(<CreateSequence200Response>, Integer, Hash)> create_sequence_with_http_info(create_sequence_request)
 
 ```ruby
 begin
@@ -123,7 +124,7 @@ begin
   data, status_code, headers = api_instance.create_sequence_with_http_info(create_sequence_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <CreateSequence200Response>
 rescue Late::ApiError => e
   puts "Error when calling SequencesApi->create_sequence_with_http_info: #{e}"
 end
@@ -137,7 +138,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**CreateSequence200Response**](CreateSequence200Response.md)
 
 ### Authorization
 

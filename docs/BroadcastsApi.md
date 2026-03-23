@@ -154,7 +154,7 @@ end
 
 ## create_broadcast
 
-> create_broadcast(create_broadcast_request)
+> <CreateBroadcast200Response> create_broadcast(create_broadcast_request)
 
 Create a broadcast draft
 
@@ -174,7 +174,8 @@ create_broadcast_request = Late::CreateBroadcastRequest.new({profile_id: 'profil
 
 begin
   # Create a broadcast draft
-  api_instance.create_broadcast(create_broadcast_request)
+  result = api_instance.create_broadcast(create_broadcast_request)
+  p result
 rescue Late::ApiError => e
   puts "Error when calling BroadcastsApi->create_broadcast: #{e}"
 end
@@ -182,9 +183,9 @@ end
 
 #### Using the create_broadcast_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> create_broadcast_with_http_info(create_broadcast_request)
+> <Array(<CreateBroadcast200Response>, Integer, Hash)> create_broadcast_with_http_info(create_broadcast_request)
 
 ```ruby
 begin
@@ -192,7 +193,7 @@ begin
   data, status_code, headers = api_instance.create_broadcast_with_http_info(create_broadcast_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <CreateBroadcast200Response>
 rescue Late::ApiError => e
   puts "Error when calling BroadcastsApi->create_broadcast_with_http_info: #{e}"
 end
@@ -206,7 +207,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**CreateBroadcast200Response**](CreateBroadcast200Response.md)
 
 ### Authorization
 

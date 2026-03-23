@@ -155,16 +155,16 @@ module Late
     # Create a broadcast draft
     # @param create_broadcast_request [CreateBroadcastRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [CreateBroadcast200Response]
     def create_broadcast(create_broadcast_request, opts = {})
-      create_broadcast_with_http_info(create_broadcast_request, opts)
-      nil
+      data, _status_code, _headers = create_broadcast_with_http_info(create_broadcast_request, opts)
+      data
     end
 
     # Create a broadcast draft
     # @param create_broadcast_request [CreateBroadcastRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(CreateBroadcast200Response, Integer, Hash)>] CreateBroadcast200Response data, response status code and response headers
     def create_broadcast_with_http_info(create_broadcast_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: BroadcastsApi.create_broadcast ...'
@@ -196,7 +196,7 @@ module Late
       post_body = opts[:debug_body] || @api_client.object_to_http_body(create_broadcast_request)
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'CreateBroadcast200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

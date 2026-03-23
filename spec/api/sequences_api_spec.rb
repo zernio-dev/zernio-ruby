@@ -47,7 +47,7 @@ describe 'SequencesApi' do
   # Create a sequence
   # @param create_sequence_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [CreateSequence200Response]
   describe 'create_sequence test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

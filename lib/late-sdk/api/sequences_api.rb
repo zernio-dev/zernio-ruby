@@ -83,16 +83,16 @@ module Late
     # Create a sequence
     # @param create_sequence_request [CreateSequenceRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [CreateSequence200Response]
     def create_sequence(create_sequence_request, opts = {})
-      create_sequence_with_http_info(create_sequence_request, opts)
-      nil
+      data, _status_code, _headers = create_sequence_with_http_info(create_sequence_request, opts)
+      data
     end
 
     # Create a sequence
     # @param create_sequence_request [CreateSequenceRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(CreateSequence200Response, Integer, Hash)>] CreateSequence200Response data, response status code and response headers
     def create_sequence_with_http_info(create_sequence_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SequencesApi.create_sequence ...'
@@ -124,7 +124,7 @@ module Late
       post_body = opts[:debug_body] || @api_client.object_to_http_body(create_sequence_request)
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'CreateSequence200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
