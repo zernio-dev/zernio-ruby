@@ -18,6 +18,9 @@ module Late
     # Specific contact IDs to add
     attr_accessor :contact_ids
 
+    # Raw phone numbers (auto-creates contacts). Useful for WhatsApp/Telegram manual entry
+    attr_accessor :phones
+
     # Auto-populate from broadcast segment filters
     attr_accessor :use_segment
 
@@ -25,6 +28,7 @@ module Late
     def self.attribute_map
       {
         :'contact_ids' => :'contactIds',
+        :'phones' => :'phones',
         :'use_segment' => :'useSegment'
       }
     end
@@ -43,6 +47,7 @@ module Late
     def self.openapi_types
       {
         :'contact_ids' => :'Array<String>',
+        :'phones' => :'Array<String>',
         :'use_segment' => :'Boolean'
       }
     end
@@ -75,6 +80,12 @@ module Late
         end
       end
 
+      if attributes.key?(:'phones')
+        if (value = attributes[:'phones']).is_a?(Array)
+          self.phones = value
+        end
+      end
+
       if attributes.key?(:'use_segment')
         self.use_segment = attributes[:'use_segment']
       end
@@ -101,6 +112,7 @@ module Late
       return true if self.equal?(o)
       self.class == o.class &&
           contact_ids == o.contact_ids &&
+          phones == o.phones &&
           use_segment == o.use_segment
     end
 
@@ -113,7 +125,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [contact_ids, use_segment].hash
+      [contact_ids, phones, use_segment].hash
     end
 
     # Builds the object from hash
