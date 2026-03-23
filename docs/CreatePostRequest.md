@@ -7,7 +7,7 @@
 | **title** | **String** |  | [optional] |
 | **content** | **String** | Post caption/text. Optional when media is attached or all platforms have customContent. Required for text-only posts. | [optional] |
 | **media_items** | [**Array&lt;CreatePostRequestMediaItemsInner&gt;**](CreatePostRequestMediaItemsInner.md) |  | [optional] |
-| **platforms** | [**Array&lt;CreatePostRequestPlatformsInner&gt;**](CreatePostRequestPlatformsInner.md) |  | [optional] |
+| **platforms** | [**Array&lt;CreatePostRequestPlatformsInner&gt;**](CreatePostRequestPlatformsInner.md) | Target platforms and accounts for this post. Required for non-draft posts (returns 400 if empty). Drafts can omit platforms. | [optional] |
 | **scheduled_for** | **Time** |  | [optional] |
 | **publish_now** | **Boolean** |  | [optional][default to false] |
 | **is_draft** | **Boolean** | When true, saves the post as a draft. When none of scheduledFor, publishNow, or queuedFromProfile are provided, the post defaults to draft automatically. | [optional][default to false] |

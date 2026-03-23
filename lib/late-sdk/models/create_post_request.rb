@@ -22,6 +22,7 @@ module Late
 
     attr_accessor :media_items
 
+    # Target platforms and accounts for this post. Required for non-draft posts (returns 400 if empty). Drafts can omit platforms.
     attr_accessor :platforms
 
     attr_accessor :scheduled_for
