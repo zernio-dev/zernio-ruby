@@ -6,6 +6,8 @@
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Social account ID |  |
 | **message** | **String** | Message text | [optional] |
+| **attachment_url** | **String** | URL of the attachment to send (image, video, audio, or file). The URL must be publicly accessible. For binary file uploads, use multipart/form-data instead. | [optional] |
+| **attachment_type** | **String** | Type of attachment. Defaults to file if not specified. | [optional] |
 | **quick_replies** | [**Array&lt;SendInboxMessageRequestQuickRepliesInner&gt;**](SendInboxMessageRequestQuickRepliesInner.md) | Quick reply buttons. Mutually exclusive with buttons. Max 13 items. | [optional] |
 | **buttons** | [**Array&lt;SendInboxMessageRequestButtonsInner&gt;**](SendInboxMessageRequestButtonsInner.md) | Action buttons. Mutually exclusive with quickReplies. Max 3 items. | [optional] |
 | **template** | [**SendInboxMessageRequestTemplate**](SendInboxMessageRequestTemplate.md) |  | [optional] |
@@ -22,6 +24,8 @@ require 'late-sdk'
 instance = Late::SendInboxMessageRequest.new(
   account_id: null,
   message: null,
+  attachment_url: null,
+  attachment_type: null,
   quick_replies: null,
   buttons: null,
   template: null,

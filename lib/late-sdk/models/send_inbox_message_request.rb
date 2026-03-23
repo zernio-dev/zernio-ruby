@@ -21,6 +21,12 @@ module Late
     # Message text
     attr_accessor :message
 
+    # URL of the attachment to send (image, video, audio, or file). The URL must be publicly accessible. For binary file uploads, use multipart/form-data instead.
+    attr_accessor :attachment_url
+
+    # Type of attachment. Defaults to file if not specified.
+    attr_accessor :attachment_type
+
     # Quick reply buttons. Mutually exclusive with buttons. Max 13 items.
     attr_accessor :quick_replies
 
@@ -67,6 +73,8 @@ module Late
       {
         :'account_id' => :'accountId',
         :'message' => :'message',
+        :'attachment_url' => :'attachmentUrl',
+        :'attachment_type' => :'attachmentType',
         :'quick_replies' => :'quickReplies',
         :'buttons' => :'buttons',
         :'template' => :'template',
@@ -92,6 +100,8 @@ module Late
       {
         :'account_id' => :'String',
         :'message' => :'String',
+        :'attachment_url' => :'String',
+        :'attachment_type' => :'String',
         :'quick_replies' => :'Array<SendInboxMessageRequestQuickRepliesInner>',
         :'buttons' => :'Array<SendInboxMessageRequestButtonsInner>',
         :'template' => :'SendInboxMessageRequestTemplate',
@@ -132,6 +142,14 @@ module Late
 
       if attributes.key?(:'message')
         self.message = attributes[:'message']
+      end
+
+      if attributes.key?(:'attachment_url')
+        self.attachment_url = attributes[:'attachment_url']
+      end
+
+      if attributes.key?(:'attachment_type')
+        self.attachment_type = attributes[:'attachment_type']
       end
 
       if attributes.key?(:'quick_replies')
@@ -192,6 +210,8 @@ module Late
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
+      attachment_type_validator = EnumAttributeValidator.new('String', ["image", "video", "audio", "file"])
+      return false unless attachment_type_validator.valid?(@attachment_type)
       return false if !@quick_replies.nil? && @quick_replies.length > 13
       return false if !@buttons.nil? && @buttons.length > 3
       messaging_type_validator = EnumAttributeValidator.new('String', ["RESPONSE", "UPDATE", "MESSAGE_TAG"])
@@ -209,6 +229,16 @@ module Late
       end
 
       @account_id = account_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] attachment_type Object to be assigned
+    def attachment_type=(attachment_type)
+      validator = EnumAttributeValidator.new('String', ["image", "video", "audio", "file"])
+      unless validator.valid?(attachment_type)
+        fail ArgumentError, "invalid value for \"attachment_type\", must be one of #{validator.allowable_values}."
+      end
+      @attachment_type = attachment_type
     end
 
     # Custom attribute writer method with validation
@@ -266,6 +296,8 @@ module Late
       self.class == o.class &&
           account_id == o.account_id &&
           message == o.message &&
+          attachment_url == o.attachment_url &&
+          attachment_type == o.attachment_type &&
           quick_replies == o.quick_replies &&
           buttons == o.buttons &&
           template == o.template &&
@@ -284,7 +316,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, quick_replies, buttons, template, reply_markup, messaging_type, message_tag, reply_to].hash
+      [account_id, message, attachment_url, attachment_type, quick_replies, buttons, template, reply_markup, messaging_type, message_tag, reply_to].hash
     end
 
     # Builds the object from hash
