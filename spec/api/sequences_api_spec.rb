@@ -109,7 +109,7 @@ describe 'SequencesApi' do
   # @option opts [String] :status 
   # @option opts [Integer] :limit 
   # @option opts [Integer] :skip 
-  # @return [nil]
+  # @return [ListSequences200Response]
   describe 'list_sequences test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

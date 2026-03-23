@@ -424,7 +424,7 @@ nil (empty response body)
 
 ## list_broadcasts
 
-> list_broadcasts(opts)
+> <ListBroadcasts200Response> list_broadcasts(opts)
 
 List broadcasts
 
@@ -450,7 +450,8 @@ opts = {
 
 begin
   # List broadcasts
-  api_instance.list_broadcasts(opts)
+  result = api_instance.list_broadcasts(opts)
+  p result
 rescue Late::ApiError => e
   puts "Error when calling BroadcastsApi->list_broadcasts: #{e}"
 end
@@ -458,9 +459,9 @@ end
 
 #### Using the list_broadcasts_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> list_broadcasts_with_http_info(opts)
+> <Array(<ListBroadcasts200Response>, Integer, Hash)> list_broadcasts_with_http_info(opts)
 
 ```ruby
 begin
@@ -468,7 +469,7 @@ begin
   data, status_code, headers = api_instance.list_broadcasts_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <ListBroadcasts200Response>
 rescue Late::ApiError => e
   puts "Error when calling BroadcastsApi->list_broadcasts_with_http_info: #{e}"
 end
@@ -486,7 +487,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**ListBroadcasts200Response**](ListBroadcasts200Response.md)
 
 ### Authorization
 
@@ -568,7 +569,7 @@ nil (empty response body)
 
 ## send_broadcast
 
-> send_broadcast(broadcast_id)
+> <SendBroadcast200Response> send_broadcast(broadcast_id)
 
 Trigger immediate send
 
@@ -588,7 +589,8 @@ broadcast_id = 'broadcast_id_example' # String |
 
 begin
   # Trigger immediate send
-  api_instance.send_broadcast(broadcast_id)
+  result = api_instance.send_broadcast(broadcast_id)
+  p result
 rescue Late::ApiError => e
   puts "Error when calling BroadcastsApi->send_broadcast: #{e}"
 end
@@ -596,9 +598,9 @@ end
 
 #### Using the send_broadcast_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> send_broadcast_with_http_info(broadcast_id)
+> <Array(<SendBroadcast200Response>, Integer, Hash)> send_broadcast_with_http_info(broadcast_id)
 
 ```ruby
 begin
@@ -606,7 +608,7 @@ begin
   data, status_code, headers = api_instance.send_broadcast_with_http_info(broadcast_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <SendBroadcast200Response>
 rescue Late::ApiError => e
   puts "Error when calling BroadcastsApi->send_broadcast_with_http_info: #{e}"
 end
@@ -620,7 +622,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**SendBroadcast200Response**](SendBroadcast200Response.md)
 
 ### Authorization
 

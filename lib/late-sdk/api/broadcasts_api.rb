@@ -421,10 +421,10 @@ module Late
     # @option opts [String] :platform 
     # @option opts [Integer] :limit  (default to 50)
     # @option opts [Integer] :skip  (default to 0)
-    # @return [nil]
+    # @return [ListBroadcasts200Response]
     def list_broadcasts(opts = {})
-      list_broadcasts_with_http_info(opts)
-      nil
+      data, _status_code, _headers = list_broadcasts_with_http_info(opts)
+      data
     end
 
     # List broadcasts
@@ -434,7 +434,7 @@ module Late
     # @option opts [String] :platform 
     # @option opts [Integer] :limit  (default to 50)
     # @option opts [Integer] :skip  (default to 0)
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(ListBroadcasts200Response, Integer, Hash)>] ListBroadcasts200Response data, response status code and response headers
     def list_broadcasts_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: BroadcastsApi.list_broadcasts ...'
@@ -466,7 +466,7 @@ module Late
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'ListBroadcasts200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -563,16 +563,16 @@ module Late
     # Trigger immediate send
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [SendBroadcast200Response]
     def send_broadcast(broadcast_id, opts = {})
-      send_broadcast_with_http_info(broadcast_id, opts)
-      nil
+      data, _status_code, _headers = send_broadcast_with_http_info(broadcast_id, opts)
+      data
     end
 
     # Trigger immediate send
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(SendBroadcast200Response, Integer, Hash)>] SendBroadcast200Response data, response status code and response headers
     def send_broadcast_with_http_info(broadcast_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: BroadcastsApi.send_broadcast ...'
@@ -599,7 +599,7 @@ module Late
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'SendBroadcast200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

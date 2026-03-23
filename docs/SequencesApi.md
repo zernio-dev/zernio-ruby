@@ -424,7 +424,7 @@ nil (empty response body)
 
 ## list_sequences
 
-> list_sequences(opts)
+> <ListSequences200Response> list_sequences(opts)
 
 List sequences
 
@@ -449,7 +449,8 @@ opts = {
 
 begin
   # List sequences
-  api_instance.list_sequences(opts)
+  result = api_instance.list_sequences(opts)
+  p result
 rescue Late::ApiError => e
   puts "Error when calling SequencesApi->list_sequences: #{e}"
 end
@@ -457,9 +458,9 @@ end
 
 #### Using the list_sequences_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> list_sequences_with_http_info(opts)
+> <Array(<ListSequences200Response>, Integer, Hash)> list_sequences_with_http_info(opts)
 
 ```ruby
 begin
@@ -467,7 +468,7 @@ begin
   data, status_code, headers = api_instance.list_sequences_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <ListSequences200Response>
 rescue Late::ApiError => e
   puts "Error when calling SequencesApi->list_sequences_with_http_info: #{e}"
 end
@@ -484,7 +485,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**ListSequences200Response**](ListSequences200Response.md)
 
 ### Authorization
 

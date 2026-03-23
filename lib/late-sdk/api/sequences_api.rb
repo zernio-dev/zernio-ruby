@@ -420,10 +420,10 @@ module Late
     # @option opts [String] :status 
     # @option opts [Integer] :limit  (default to 50)
     # @option opts [Integer] :skip  (default to 0)
-    # @return [nil]
+    # @return [ListSequences200Response]
     def list_sequences(opts = {})
-      list_sequences_with_http_info(opts)
-      nil
+      data, _status_code, _headers = list_sequences_with_http_info(opts)
+      data
     end
 
     # List sequences
@@ -432,7 +432,7 @@ module Late
     # @option opts [String] :status 
     # @option opts [Integer] :limit  (default to 50)
     # @option opts [Integer] :skip  (default to 0)
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(ListSequences200Response, Integer, Hash)>] ListSequences200Response data, response status code and response headers
     def list_sequences_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SequencesApi.list_sequences ...'
@@ -463,7 +463,7 @@ module Late
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'ListSequences200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

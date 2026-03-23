@@ -110,7 +110,7 @@ describe 'BroadcastsApi' do
   # @option opts [String] :platform 
   # @option opts [Integer] :limit 
   # @option opts [Integer] :skip 
-  # @return [nil]
+  # @return [ListBroadcasts200Response]
   describe 'list_broadcasts test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -133,7 +133,7 @@ describe 'BroadcastsApi' do
   # Trigger immediate send
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [SendBroadcast200Response]
   describe 'send_broadcast test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
