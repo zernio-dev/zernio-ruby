@@ -486,6 +486,7 @@ docs/TranscriptResponse.md
 docs/TranscriptSegment.md
 docs/TwitterEngagementApi.md
 docs/TwitterPlatformData.md
+docs/TwitterPlatformDataPoll.md
 docs/TwitterPlatformDataThreadItemsInner.md
 docs/UndoRetweet200Response.md
 docs/UnfollowUser200Response.md
@@ -1098,6 +1099,7 @@ lib/late-sdk/models/tik_tok_platform_data.rb
 lib/late-sdk/models/transcript_response.rb
 lib/late-sdk/models/transcript_segment.rb
 lib/late-sdk/models/twitter_platform_data.rb
+lib/late-sdk/models/twitter_platform_data_poll.rb
 lib/late-sdk/models/twitter_platform_data_thread_items_inner.rb
 lib/late-sdk/models/undo_retweet200_response.rb
 lib/late-sdk/models/unfollow_user200_response.rb
@@ -1697,6 +1699,7 @@ spec/models/threads_platform_data_spec.rb
 spec/models/tik_tok_platform_data_spec.rb
 spec/models/transcript_response_spec.rb
 spec/models/transcript_segment_spec.rb
+spec/models/twitter_platform_data_poll_spec.rb
 spec/models/twitter_platform_data_spec.rb
 spec/models/twitter_platform_data_thread_items_inner_spec.rb
 spec/models/undo_retweet200_response_spec.rb

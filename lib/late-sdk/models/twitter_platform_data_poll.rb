@@ -14,47 +14,19 @@ require 'date'
 require 'time'
 
 module Late
-  class TwitterPlatformData < ApiModelBase
-    # ID of an existing tweet to reply to. The published tweet will appear as a reply in that tweet's thread. For threads, only the first tweet replies to the target; subsequent tweets chain normally.
-    attr_accessor :reply_to_tweet_id
+  # Create a poll with this tweet. Mutually exclusive with media attachments and threads.
+  class TwitterPlatformDataPoll < ApiModelBase
+    # Poll options (2-4 choices, max 25 characters each)
+    attr_accessor :options
 
-    # Controls who can reply to the tweet. \"following\" allows only people you follow, \"mentionedUsers\" allows only mentioned users, \"subscribers\" allows only subscribers, \"verified\" allows only verified users. Omit for default (everyone can reply). For threads, applies to the first tweet only. Cannot be combined with replyToTweetId.
-    attr_accessor :reply_settings
-
-    # Sequence of tweets in a thread. First item is the root tweet.
-    attr_accessor :thread_items
-
-    attr_accessor :poll
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Poll duration in minutes (5 min to 7 days)
+    attr_accessor :duration_minutes
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'reply_to_tweet_id' => :'replyToTweetId',
-        :'reply_settings' => :'replySettings',
-        :'thread_items' => :'threadItems',
-        :'poll' => :'poll'
+        :'options' => :'options',
+        :'duration_minutes' => :'duration_minutes'
       }
     end
 
@@ -71,10 +43,8 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'reply_to_tweet_id' => :'String',
-        :'reply_settings' => :'String',
-        :'thread_items' => :'Array<TwitterPlatformDataThreadItemsInner>',
-        :'poll' => :'TwitterPlatformDataPoll'
+        :'options' => :'Array<String>',
+        :'duration_minutes' => :'Integer'
       }
     end
 
@@ -88,34 +58,30 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::TwitterPlatformData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::TwitterPlatformDataPoll` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::TwitterPlatformData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::TwitterPlatformDataPoll`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'reply_to_tweet_id')
-        self.reply_to_tweet_id = attributes[:'reply_to_tweet_id']
-      end
-
-      if attributes.key?(:'reply_settings')
-        self.reply_settings = attributes[:'reply_settings']
-      end
-
-      if attributes.key?(:'thread_items')
-        if (value = attributes[:'thread_items']).is_a?(Array)
-          self.thread_items = value
+      if attributes.key?(:'options')
+        if (value = attributes[:'options']).is_a?(Array)
+          self.options = value
         end
+      else
+        self.options = nil
       end
 
-      if attributes.key?(:'poll')
-        self.poll = attributes[:'poll']
+      if attributes.key?(:'duration_minutes')
+        self.duration_minutes = attributes[:'duration_minutes']
+      else
+        self.duration_minutes = nil
       end
     end
 
@@ -124,6 +90,30 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @options.nil?
+        invalid_properties.push('invalid value for "options", options cannot be nil.')
+      end
+
+      if @options.length > 4
+        invalid_properties.push('invalid value for "options", number of items must be less than or equal to 4.')
+      end
+
+      if @options.length < 2
+        invalid_properties.push('invalid value for "options", number of items must be greater than or equal to 2.')
+      end
+
+      if @duration_minutes.nil?
+        invalid_properties.push('invalid value for "duration_minutes", duration_minutes cannot be nil.')
+      end
+
+      if @duration_minutes > 10080
+        invalid_properties.push('invalid value for "duration_minutes", must be smaller than or equal to 10080.')
+      end
+
+      if @duration_minutes < 5
+        invalid_properties.push('invalid value for "duration_minutes", must be greater than or equal to 5.')
+      end
+
       invalid_properties
     end
 
@@ -131,19 +121,49 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      reply_settings_validator = EnumAttributeValidator.new('String', ["following", "mentionedUsers", "subscribers", "verified"])
-      return false unless reply_settings_validator.valid?(@reply_settings)
+      return false if @options.nil?
+      return false if @options.length > 4
+      return false if @options.length < 2
+      return false if @duration_minutes.nil?
+      return false if @duration_minutes > 10080
+      return false if @duration_minutes < 5
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] reply_settings Object to be assigned
-    def reply_settings=(reply_settings)
-      validator = EnumAttributeValidator.new('String', ["following", "mentionedUsers", "subscribers", "verified"])
-      unless validator.valid?(reply_settings)
-        fail ArgumentError, "invalid value for \"reply_settings\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] options Value to be assigned
+    def options=(options)
+      if options.nil?
+        fail ArgumentError, 'options cannot be nil'
       end
-      @reply_settings = reply_settings
+
+      if options.length > 4
+        fail ArgumentError, 'invalid value for "options", number of items must be less than or equal to 4.'
+      end
+
+      if options.length < 2
+        fail ArgumentError, 'invalid value for "options", number of items must be greater than or equal to 2.'
+      end
+
+      @options = options
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] duration_minutes Value to be assigned
+    def duration_minutes=(duration_minutes)
+      if duration_minutes.nil?
+        fail ArgumentError, 'duration_minutes cannot be nil'
+      end
+
+      if duration_minutes > 10080
+        fail ArgumentError, 'invalid value for "duration_minutes", must be smaller than or equal to 10080.'
+      end
+
+      if duration_minutes < 5
+        fail ArgumentError, 'invalid value for "duration_minutes", must be greater than or equal to 5.'
+      end
+
+      @duration_minutes = duration_minutes
     end
 
     # Checks equality by comparing each attribute.
@@ -151,10 +171,8 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          reply_to_tweet_id == o.reply_to_tweet_id &&
-          reply_settings == o.reply_settings &&
-          thread_items == o.thread_items &&
-          poll == o.poll
+          options == o.options &&
+          duration_minutes == o.duration_minutes
     end
 
     # @see the `==` method
@@ -166,7 +184,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [reply_to_tweet_id, reply_settings, thread_items, poll].hash
+      [options, duration_minutes].hash
     end
 
     # Builds the object from hash

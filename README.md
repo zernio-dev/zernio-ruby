@@ -710,6 +710,7 @@ Class | Method | HTTP request | Description
  - [Late::TranscriptResponse](docs/TranscriptResponse.md)
  - [Late::TranscriptSegment](docs/TranscriptSegment.md)
  - [Late::TwitterPlatformData](docs/TwitterPlatformData.md)
+ - [Late::TwitterPlatformDataPoll](docs/TwitterPlatformDataPoll.md)
  - [Late::TwitterPlatformDataThreadItemsInner](docs/TwitterPlatformDataThreadItemsInner.md)
  - [Late::UndoRetweet200Response](docs/UndoRetweet200Response.md)
  - [Late::UnfollowUser200Response](docs/UnfollowUser200Response.md)
