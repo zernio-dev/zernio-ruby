@@ -14,22 +14,39 @@ require 'date'
 require 'time'
 
 module Late
-  class CreateSequenceRequestStepsInner < ApiModelBase
-    attr_accessor :order
+  class CreateSequenceRequestStepsInnerTemplateVariableMappingValue < ApiModelBase
+    attr_accessor :field
 
-    attr_accessor :delay_minutes
+    # Static value when field is \"custom\"
+    attr_accessor :custom_value
 
-    attr_accessor :message
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    attr_accessor :template
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'order' => :'order',
-        :'delay_minutes' => :'delayMinutes',
-        :'message' => :'message',
-        :'template' => :'template'
+        :'field' => :'field',
+        :'custom_value' => :'customValue'
       }
     end
 
@@ -46,10 +63,8 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'order' => :'Integer',
-        :'delay_minutes' => :'Integer',
-        :'message' => :'CreateSequenceRequestStepsInnerMessage',
-        :'template' => :'CreateSequenceRequestStepsInnerTemplate'
+        :'field' => :'String',
+        :'custom_value' => :'String'
       }
     end
 
@@ -63,36 +78,24 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::CreateSequenceRequestStepsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::CreateSequenceRequestStepsInnerTemplateVariableMappingValue` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::CreateSequenceRequestStepsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::CreateSequenceRequestStepsInnerTemplateVariableMappingValue`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'order')
-        self.order = attributes[:'order']
-      else
-        self.order = nil
+      if attributes.key?(:'field')
+        self.field = attributes[:'field']
       end
 
-      if attributes.key?(:'delay_minutes')
-        self.delay_minutes = attributes[:'delay_minutes']
-      else
-        self.delay_minutes = nil
-      end
-
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
-      end
-
-      if attributes.key?(:'template')
-        self.template = attributes[:'template']
+      if attributes.key?(:'custom_value')
+        self.custom_value = attributes[:'custom_value']
       end
     end
 
@@ -101,14 +104,6 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @order.nil?
-        invalid_properties.push('invalid value for "order", order cannot be nil.')
-      end
-
-      if @delay_minutes.nil?
-        invalid_properties.push('invalid value for "delay_minutes", delay_minutes cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -116,29 +111,19 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @order.nil?
-      return false if @delay_minutes.nil?
+      field_validator = EnumAttributeValidator.new('String', ["name", "phone", "email", "company", "custom"])
+      return false unless field_validator.valid?(@field)
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] order Value to be assigned
-    def order=(order)
-      if order.nil?
-        fail ArgumentError, 'order cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] field Object to be assigned
+    def field=(field)
+      validator = EnumAttributeValidator.new('String', ["name", "phone", "email", "company", "custom"])
+      unless validator.valid?(field)
+        fail ArgumentError, "invalid value for \"field\", must be one of #{validator.allowable_values}."
       end
-
-      @order = order
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] delay_minutes Value to be assigned
-    def delay_minutes=(delay_minutes)
-      if delay_minutes.nil?
-        fail ArgumentError, 'delay_minutes cannot be nil'
-      end
-
-      @delay_minutes = delay_minutes
+      @field = field
     end
 
     # Checks equality by comparing each attribute.
@@ -146,10 +131,8 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          order == o.order &&
-          delay_minutes == o.delay_minutes &&
-          message == o.message &&
-          template == o.template
+          field == o.field &&
+          custom_value == o.custom_value
     end
 
     # @see the `==` method
@@ -161,7 +144,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [order, delay_minutes, message, template].hash
+      [field, custom_value].hash
     end
 
     # Builds the object from hash

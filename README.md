@@ -372,6 +372,8 @@ Class | Method | HTTP request | Description
  - [Late::CreateSequenceRequest](docs/CreateSequenceRequest.md)
  - [Late::CreateSequenceRequestStepsInner](docs/CreateSequenceRequestStepsInner.md)
  - [Late::CreateSequenceRequestStepsInnerMessage](docs/CreateSequenceRequestStepsInnerMessage.md)
+ - [Late::CreateSequenceRequestStepsInnerTemplate](docs/CreateSequenceRequestStepsInnerTemplate.md)
+ - [Late::CreateSequenceRequestStepsInnerTemplateVariableMappingValue](docs/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md)
  - [Late::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
  - [Late::CreateWhatsAppBroadcast200Response](docs/CreateWhatsAppBroadcast200Response.md)
  - [Late::CreateWhatsAppBroadcast200ResponseBroadcast](docs/CreateWhatsAppBroadcast200ResponseBroadcast.md)

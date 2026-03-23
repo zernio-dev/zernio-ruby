@@ -94,6 +94,8 @@ docs/CreateQueueSlotRequest.md
 docs/CreateSequenceRequest.md
 docs/CreateSequenceRequestStepsInner.md
 docs/CreateSequenceRequestStepsInnerMessage.md
+docs/CreateSequenceRequestStepsInnerTemplate.md
+docs/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md
 docs/CreateWebhookSettingsRequest.md
 docs/CreateWhatsAppBroadcast200Response.md
 docs/CreateWhatsAppBroadcast200ResponseBroadcast.md
@@ -755,6 +757,8 @@ lib/late-sdk/models/create_queue_slot_request.rb
 lib/late-sdk/models/create_sequence_request.rb
 lib/late-sdk/models/create_sequence_request_steps_inner.rb
 lib/late-sdk/models/create_sequence_request_steps_inner_message.rb
+lib/late-sdk/models/create_sequence_request_steps_inner_template.rb
+lib/late-sdk/models/create_sequence_request_steps_inner_template_variable_mapping_value.rb
 lib/late-sdk/models/create_webhook_settings_request.rb
 lib/late-sdk/models/create_whats_app_broadcast200_response.rb
 lib/late-sdk/models/create_whats_app_broadcast200_response_broadcast.rb
@@ -1384,6 +1388,8 @@ spec/models/create_queue_slot_request_spec.rb
 spec/models/create_sequence_request_spec.rb
 spec/models/create_sequence_request_steps_inner_message_spec.rb
 spec/models/create_sequence_request_steps_inner_spec.rb
+spec/models/create_sequence_request_steps_inner_template_spec.rb
+spec/models/create_sequence_request_steps_inner_template_variable_mapping_value_spec.rb
 spec/models/create_webhook_settings_request_spec.rb
 spec/models/create_whats_app_broadcast200_response_broadcast_spec.rb
 spec/models/create_whats_app_broadcast200_response_spec.rb
