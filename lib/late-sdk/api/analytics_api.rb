@@ -25,6 +25,7 @@ module Late
     # @option opts [String] :post_id Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics.
     # @option opts [String] :platform Filter by platform (default \&quot;all\&quot;)
     # @option opts [String] :profile_id Filter by profile ID (default \&quot;all\&quot;)
+    # @option opts [String] :account_id Filter by social account ID
     # @option opts [String] :source Filter by post source: late (posted via Zernio API), external (synced from platform), all (default) (default to 'all')
     # @option opts [Date] :from_date Inclusive lower bound (YYYY-MM-DD). Defaults to 90 days ago if omitted. Max range is 366 days.
     # @option opts [Date] :to_date Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
@@ -44,6 +45,7 @@ module Late
     # @option opts [String] :post_id Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics.
     # @option opts [String] :platform Filter by platform (default \&quot;all\&quot;)
     # @option opts [String] :profile_id Filter by profile ID (default \&quot;all\&quot;)
+    # @option opts [String] :account_id Filter by social account ID
     # @option opts [String] :source Filter by post source: late (posted via Zernio API), external (synced from platform), all (default) (default to 'all')
     # @option opts [Date] :from_date Inclusive lower bound (YYYY-MM-DD). Defaults to 90 days ago if omitted. Max range is 366 days.
     # @option opts [Date] :to_date Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
@@ -88,6 +90,7 @@ module Late
       query_params[:'postId'] = opts[:'post_id'] if !opts[:'post_id'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'source'] = opts[:'source'] if !opts[:'source'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
@@ -275,6 +278,7 @@ module Late
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
     # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+    # @option opts [String] :account_id Filter by social account ID
     # @option opts [Time] :from_date Inclusive start date (ISO 8601). Defaults to 180 days ago.
     # @option opts [Time] :to_date Inclusive end date (ISO 8601). Defaults to now.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
@@ -289,6 +293,7 @@ module Late
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
     # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+    # @option opts [String] :account_id Filter by social account ID
     # @option opts [Time] :from_date Inclusive start date (ISO 8601). Defaults to 180 days ago.
     # @option opts [Time] :to_date Inclusive end date (ISO 8601). Defaults to now.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
@@ -308,6 +313,7 @@ module Late
       query_params = opts[:query_params] || {}
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
       query_params[:'source'] = opts[:'source'] if !opts[:'source'].nil?

@@ -39,6 +39,7 @@ describe 'AnalyticsApi' do
   # @option opts [String] :post_id Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics.
   # @option opts [String] :platform Filter by platform (default \&quot;all\&quot;)
   # @option opts [String] :profile_id Filter by profile ID (default \&quot;all\&quot;)
+  # @option opts [String] :account_id Filter by social account ID
   # @option opts [String] :source Filter by post source: late (posted via Zernio API), external (synced from platform), all (default)
   # @option opts [Date] :from_date Inclusive lower bound (YYYY-MM-DD). Defaults to 90 days ago if omitted. Max range is 366 days.
   # @option opts [Date] :to_date Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
@@ -87,6 +88,7 @@ describe 'AnalyticsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
   # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+  # @option opts [String] :account_id Filter by social account ID
   # @option opts [Time] :from_date Inclusive start date (ISO 8601). Defaults to 180 days ago.
   # @option opts [Time] :to_date Inclusive end date (ISO 8601). Defaults to now.
   # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms.

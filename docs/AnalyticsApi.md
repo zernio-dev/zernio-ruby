@@ -43,6 +43,7 @@ opts = {
   post_id: 'post_id_example', # String | Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics.
   platform: 'platform_example', # String | Filter by platform (default \"all\")
   profile_id: 'profile_id_example', # String | Filter by profile ID (default \"all\")
+  account_id: 'account_id_example', # String | Filter by social account ID
   source: 'all', # String | Filter by post source: late (posted via Zernio API), external (synced from platform), all (default)
   from_date: Date.parse('2013-10-20'), # Date | Inclusive lower bound (YYYY-MM-DD). Defaults to 90 days ago if omitted. Max range is 366 days.
   to_date: Date.parse('2013-10-20'), # Date | Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
@@ -86,6 +87,7 @@ end
 | **post_id** | **String** | Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics. | [optional] |
 | **platform** | **String** | Filter by platform (default \&quot;all\&quot;) | [optional] |
 | **profile_id** | **String** | Filter by profile ID (default \&quot;all\&quot;) | [optional] |
+| **account_id** | **String** | Filter by social account ID | [optional] |
 | **source** | **String** | Filter by post source: late (posted via Zernio API), external (synced from platform), all (default) | [optional][default to &#39;all&#39;] |
 | **from_date** | **Date** | Inclusive lower bound (YYYY-MM-DD). Defaults to 90 days ago if omitted. Max range is 366 days. | [optional] |
 | **to_date** | **Date** | Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted. | [optional] |
@@ -281,6 +283,7 @@ api_instance = Late::AnalyticsApi.new
 opts = {
   platform: 'platform_example', # String | Filter by platform (e.g. \"instagram\", \"tiktok\"). Omit for all platforms.
   profile_id: 'profile_id_example', # String | Filter by profile ID. Omit for all profiles.
+  account_id: 'account_id_example', # String | Filter by social account ID
   from_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Inclusive start date (ISO 8601). Defaults to 180 days ago.
   to_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Inclusive end date (ISO 8601). Defaults to now.
   source: 'all' # String | Filter by post origin. \"late\" for posts published via Zernio, \"external\" for posts imported from platforms.
@@ -319,6 +322,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** | Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms. | [optional] |
 | **profile_id** | **String** | Filter by profile ID. Omit for all profiles. | [optional] |
+| **account_id** | **String** | Filter by social account ID | [optional] |
 | **from_date** | **Time** | Inclusive start date (ISO 8601). Defaults to 180 days ago. | [optional] |
 | **to_date** | **Time** | Inclusive end date (ISO 8601). Defaults to now. | [optional] |
 | **source** | **String** | Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. | [optional][default to &#39;all&#39;] |
