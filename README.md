@@ -100,6 +100,22 @@ Class | Method | HTTP request | Description
 *Late::AnalyticsApi* | [**get_post_timeline**](docs/AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline
 *Late::AnalyticsApi* | [**get_posting_frequency**](docs/AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get posting frequency vs engagement
 *Late::AnalyticsApi* | [**get_you_tube_daily_views**](docs/AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views
+*Late::BroadcastsApi* | [**add_broadcast_recipients**](docs/BroadcastsApi.md#add_broadcast_recipients) | **POST** /v1/broadcasts/{broadcastId}/recipients | Add recipients to a broadcast
+*Late::BroadcastsApi* | [**cancel_broadcast**](docs/BroadcastsApi.md#cancel_broadcast) | **POST** /v1/broadcasts/{broadcastId}/cancel | Cancel a broadcast
+*Late::BroadcastsApi* | [**create_broadcast**](docs/BroadcastsApi.md#create_broadcast) | **POST** /v1/broadcasts | Create a broadcast draft
+*Late::BroadcastsApi* | [**delete_broadcast**](docs/BroadcastsApi.md#delete_broadcast) | **DELETE** /v1/broadcasts/{broadcastId} | Delete a broadcast (draft only)
+*Late::BroadcastsApi* | [**get_broadcast**](docs/BroadcastsApi.md#get_broadcast) | **GET** /v1/broadcasts/{broadcastId} | Get broadcast details
+*Late::BroadcastsApi* | [**list_broadcast_recipients**](docs/BroadcastsApi.md#list_broadcast_recipients) | **GET** /v1/broadcasts/{broadcastId}/recipients | List broadcast recipients
+*Late::BroadcastsApi* | [**list_broadcasts**](docs/BroadcastsApi.md#list_broadcasts) | **GET** /v1/broadcasts | List broadcasts
+*Late::BroadcastsApi* | [**schedule_broadcast**](docs/BroadcastsApi.md#schedule_broadcast) | **POST** /v1/broadcasts/{broadcastId}/schedule | Schedule broadcast for later
+*Late::BroadcastsApi* | [**send_broadcast**](docs/BroadcastsApi.md#send_broadcast) | **POST** /v1/broadcasts/{broadcastId}/send | Trigger immediate send
+*Late::BroadcastsApi* | [**update_broadcast**](docs/BroadcastsApi.md#update_broadcast) | **PATCH** /v1/broadcasts/{broadcastId} | Update a broadcast
+*Late::CommentAutomationsApi* | [**create_comment_automation**](docs/CommentAutomationsApi.md#create_comment_automation) | **POST** /v1/comment-automations | Create a comment-to-DM automation
+*Late::CommentAutomationsApi* | [**delete_comment_automation**](docs/CommentAutomationsApi.md#delete_comment_automation) | **DELETE** /v1/comment-automations/{automationId} | Delete automation and all logs
+*Late::CommentAutomationsApi* | [**get_comment_automation**](docs/CommentAutomationsApi.md#get_comment_automation) | **GET** /v1/comment-automations/{automationId} | Get automation details with recent logs
+*Late::CommentAutomationsApi* | [**list_comment_automation_logs**](docs/CommentAutomationsApi.md#list_comment_automation_logs) | **GET** /v1/comment-automations/{automationId}/logs | List trigger logs for an automation
+*Late::CommentAutomationsApi* | [**list_comment_automations**](docs/CommentAutomationsApi.md#list_comment_automations) | **GET** /v1/comment-automations | List comment-to-DM automations
+*Late::CommentAutomationsApi* | [**update_comment_automation**](docs/CommentAutomationsApi.md#update_comment_automation) | **PATCH** /v1/comment-automations/{automationId} | Update automation settings
 *Late::CommentsApi* | [**delete_inbox_comment**](docs/CommentsApi.md#delete_inbox_comment) | **DELETE** /v1/inbox/comments/{postId} | Delete comment
 *Late::CommentsApi* | [**get_inbox_post_comments**](docs/CommentsApi.md#get_inbox_post_comments) | **GET** /v1/inbox/comments/{postId} | Get post comments
 *Late::CommentsApi* | [**hide_inbox_comment**](docs/CommentsApi.md#hide_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/hide | Hide comment
@@ -138,6 +154,19 @@ Class | Method | HTTP request | Description
 *Late::ConnectApi* | [**update_linked_in_organization**](docs/ConnectApi.md#update_linked_in_organization) | **PUT** /v1/accounts/{accountId}/linkedin-organization | Switch LinkedIn account type
 *Late::ConnectApi* | [**update_pinterest_boards**](docs/ConnectApi.md#update_pinterest_boards) | **PUT** /v1/accounts/{accountId}/pinterest-boards | Set default Pinterest board
 *Late::ConnectApi* | [**update_reddit_subreddits**](docs/ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit
+*Late::ContactsApi* | [**bulk_create_contacts**](docs/ContactsApi.md#bulk_create_contacts) | **POST** /v1/contacts/bulk | Bulk create contacts
+*Late::ContactsApi* | [**create_contact**](docs/ContactsApi.md#create_contact) | **POST** /v1/contacts | Create a contact
+*Late::ContactsApi* | [**delete_contact**](docs/ContactsApi.md#delete_contact) | **DELETE** /v1/contacts/{contactId} | Delete a contact
+*Late::ContactsApi* | [**get_contact**](docs/ContactsApi.md#get_contact) | **GET** /v1/contacts/{contactId} | Get contact with channels
+*Late::ContactsApi* | [**get_contact_channels**](docs/ContactsApi.md#get_contact_channels) | **GET** /v1/contacts/{contactId}/channels | List channels for a contact
+*Late::ContactsApi* | [**list_contacts**](docs/ContactsApi.md#list_contacts) | **GET** /v1/contacts | List contacts
+*Late::ContactsApi* | [**update_contact**](docs/ContactsApi.md#update_contact) | **PATCH** /v1/contacts/{contactId} | Update a contact
+*Late::CustomFieldsApi* | [**clear_contact_field_value**](docs/CustomFieldsApi.md#clear_contact_field_value) | **DELETE** /v1/contacts/{contactId}/fields/{slug} | Clear a custom field value
+*Late::CustomFieldsApi* | [**create_custom_field**](docs/CustomFieldsApi.md#create_custom_field) | **POST** /v1/custom-fields | Create a custom field definition
+*Late::CustomFieldsApi* | [**delete_custom_field**](docs/CustomFieldsApi.md#delete_custom_field) | **DELETE** /v1/custom-fields/{fieldId} | Delete a custom field definition
+*Late::CustomFieldsApi* | [**list_custom_fields**](docs/CustomFieldsApi.md#list_custom_fields) | **GET** /v1/custom-fields | List custom field definitions
+*Late::CustomFieldsApi* | [**set_contact_field_value**](docs/CustomFieldsApi.md#set_contact_field_value) | **PUT** /v1/contacts/{contactId}/fields/{slug} | Set a custom field value
+*Late::CustomFieldsApi* | [**update_custom_field**](docs/CustomFieldsApi.md#update_custom_field) | **PATCH** /v1/custom-fields/{fieldId} | Update a custom field definition
 *Late::GMBAttributesApi* | [**get_google_business_attributes**](docs/GMBAttributesApi.md#get_google_business_attributes) | **GET** /v1/accounts/{accountId}/gmb-attributes | Get attributes
 *Late::GMBAttributesApi* | [**update_google_business_attributes**](docs/GMBAttributesApi.md#update_google_business_attributes) | **PUT** /v1/accounts/{accountId}/gmb-attributes | Update attributes
 *Late::GMBFoodMenusApi* | [**get_google_business_food_menus**](docs/GMBFoodMenusApi.md#get_google_business_food_menus) | **GET** /v1/accounts/{accountId}/gmb-food-menus | Get food menus
@@ -187,6 +216,16 @@ Class | Method | HTTP request | Description
 *Late::ReviewsApi* | [**delete_inbox_review_reply**](docs/ReviewsApi.md#delete_inbox_review_reply) | **DELETE** /v1/inbox/reviews/{reviewId}/reply | Delete review reply
 *Late::ReviewsApi* | [**list_inbox_reviews**](docs/ReviewsApi.md#list_inbox_reviews) | **GET** /v1/inbox/reviews | List reviews
 *Late::ReviewsApi* | [**reply_to_inbox_review**](docs/ReviewsApi.md#reply_to_inbox_review) | **POST** /v1/inbox/reviews/{reviewId}/reply | Reply to review
+*Late::SequencesApi* | [**activate_sequence**](docs/SequencesApi.md#activate_sequence) | **POST** /v1/sequences/{sequenceId}/activate | Activate a sequence
+*Late::SequencesApi* | [**create_sequence**](docs/SequencesApi.md#create_sequence) | **POST** /v1/sequences | Create a sequence
+*Late::SequencesApi* | [**delete_sequence**](docs/SequencesApi.md#delete_sequence) | **DELETE** /v1/sequences/{sequenceId} | Delete a sequence
+*Late::SequencesApi* | [**enroll_contacts**](docs/SequencesApi.md#enroll_contacts) | **POST** /v1/sequences/{sequenceId}/enroll | Enroll contacts in a sequence
+*Late::SequencesApi* | [**get_sequence**](docs/SequencesApi.md#get_sequence) | **GET** /v1/sequences/{sequenceId} | Get sequence with steps
+*Late::SequencesApi* | [**list_sequence_enrollments**](docs/SequencesApi.md#list_sequence_enrollments) | **GET** /v1/sequences/{sequenceId}/enrollments | List enrollments for a sequence
+*Late::SequencesApi* | [**list_sequences**](docs/SequencesApi.md#list_sequences) | **GET** /v1/sequences | List sequences
+*Late::SequencesApi* | [**pause_sequence**](docs/SequencesApi.md#pause_sequence) | **POST** /v1/sequences/{sequenceId}/pause | Pause a sequence
+*Late::SequencesApi* | [**unenroll_contact**](docs/SequencesApi.md#unenroll_contact) | **DELETE** /v1/sequences/{sequenceId}/enroll/{contactId} | Unenroll a contact from a sequence
+*Late::SequencesApi* | [**update_sequence**](docs/SequencesApi.md#update_sequence) | **PATCH** /v1/sequences/{sequenceId} | Update a sequence
 *Late::ToolsApi* | [**check_instagram_hashtags**](docs/ToolsApi.md#check_instagram_hashtags) | **POST** /v1/tools/instagram/hashtag-checker | Check IG hashtag bans
 *Late::ToolsApi* | [**download_bluesky_media**](docs/ToolsApi.md#download_bluesky_media) | **GET** /v1/tools/bluesky/download | Download Bluesky media
 *Late::ToolsApi* | [**download_facebook_video**](docs/ToolsApi.md#download_facebook_video) | **GET** /v1/tools/facebook/download | Download Facebook video
@@ -259,6 +298,7 @@ Class | Method | HTTP request | Description
  - [Late::AccountWithFollowerStats](docs/AccountWithFollowerStats.md)
  - [Late::AccountWithFollowerStatsAllOfAccountStats](docs/AccountWithFollowerStatsAllOfAccountStats.md)
  - [Late::AccountsListResponse](docs/AccountsListResponse.md)
+ - [Late::AddBroadcastRecipientsRequest](docs/AddBroadcastRecipientsRequest.md)
  - [Late::AddWhatsAppBroadcastRecipients200Response](docs/AddWhatsAppBroadcastRecipients200Response.md)
  - [Late::AddWhatsAppBroadcastRecipientsRequest](docs/AddWhatsAppBroadcastRecipientsRequest.md)
  - [Late::AddWhatsAppBroadcastRecipientsRequestRecipientsInner](docs/AddWhatsAppBroadcastRecipientsRequestRecipientsInner.md)
@@ -273,6 +313,8 @@ Class | Method | HTTP request | Description
  - [Late::BlueskyPlatformData](docs/BlueskyPlatformData.md)
  - [Late::BookmarkPost200Response](docs/BookmarkPost200Response.md)
  - [Late::BookmarkPostRequest](docs/BookmarkPostRequest.md)
+ - [Late::BulkCreateContactsRequest](docs/BulkCreateContactsRequest.md)
+ - [Late::BulkCreateContactsRequestContactsInner](docs/BulkCreateContactsRequestContactsInner.md)
  - [Late::BulkDeleteWhatsAppContacts200Response](docs/BulkDeleteWhatsAppContacts200Response.md)
  - [Late::BulkDeleteWhatsAppContactsRequest](docs/BulkDeleteWhatsAppContactsRequest.md)
  - [Late::BulkUpdateWhatsAppContacts200Response](docs/BulkUpdateWhatsAppContacts200Response.md)
@@ -303,6 +345,14 @@ Class | Method | HTTP request | Description
  - [Late::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
  - [Late::CreateApiKey201Response](docs/CreateApiKey201Response.md)
  - [Late::CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
+ - [Late::CreateBroadcastRequest](docs/CreateBroadcastRequest.md)
+ - [Late::CreateBroadcastRequestMessage](docs/CreateBroadcastRequestMessage.md)
+ - [Late::CreateBroadcastRequestMessageAttachmentsInner](docs/CreateBroadcastRequestMessageAttachmentsInner.md)
+ - [Late::CreateBroadcastRequestSegmentFilters](docs/CreateBroadcastRequestSegmentFilters.md)
+ - [Late::CreateBroadcastRequestTemplate](docs/CreateBroadcastRequestTemplate.md)
+ - [Late::CreateCommentAutomationRequest](docs/CreateCommentAutomationRequest.md)
+ - [Late::CreateContactRequest](docs/CreateContactRequest.md)
+ - [Late::CreateCustomFieldRequest](docs/CreateCustomFieldRequest.md)
  - [Late::CreateGoogleBusinessMedia200Response](docs/CreateGoogleBusinessMedia200Response.md)
  - [Late::CreateGoogleBusinessMediaRequest](docs/CreateGoogleBusinessMediaRequest.md)
  - [Late::CreateGoogleBusinessPlaceAction200Response](docs/CreateGoogleBusinessPlaceAction200Response.md)
@@ -319,6 +369,9 @@ Class | Method | HTTP request | Description
  - [Late::CreateProfileRequest](docs/CreateProfileRequest.md)
  - [Late::CreateQueueSlot201Response](docs/CreateQueueSlot201Response.md)
  - [Late::CreateQueueSlotRequest](docs/CreateQueueSlotRequest.md)
+ - [Late::CreateSequenceRequest](docs/CreateSequenceRequest.md)
+ - [Late::CreateSequenceRequestStepsInner](docs/CreateSequenceRequestStepsInner.md)
+ - [Late::CreateSequenceRequestStepsInnerMessage](docs/CreateSequenceRequestStepsInnerMessage.md)
  - [Late::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
  - [Late::CreateWhatsAppBroadcast200Response](docs/CreateWhatsAppBroadcast200Response.md)
  - [Late::CreateWhatsAppBroadcast200ResponseBroadcast](docs/CreateWhatsAppBroadcast200ResponseBroadcast.md)
@@ -354,6 +407,7 @@ Class | Method | HTTP request | Description
  - [Late::EditInboxMessageRequest](docs/EditInboxMessageRequest.md)
  - [Late::EditInboxMessageRequestReplyMarkup](docs/EditInboxMessageRequestReplyMarkup.md)
  - [Late::EditInboxMessageRequestReplyMarkupKeyboardInnerInner](docs/EditInboxMessageRequestReplyMarkupKeyboardInnerInner.md)
+ - [Late::EnrollContactsRequest](docs/EnrollContactsRequest.md)
  - [Late::ErrorResponse](docs/ErrorResponse.md)
  - [Late::Expired](docs/Expired.md)
  - [Late::FacebookPlatformData](docs/FacebookPlatformData.md)
@@ -554,6 +608,9 @@ Class | Method | HTTP request | Description
  - [Late::ListAccountGroups200ResponseGroupsInner](docs/ListAccountGroups200ResponseGroupsInner.md)
  - [Late::ListAccounts200Response](docs/ListAccounts200Response.md)
  - [Late::ListApiKeys200Response](docs/ListApiKeys200Response.md)
+ - [Late::ListCommentAutomations200Response](docs/ListCommentAutomations200Response.md)
+ - [Late::ListCommentAutomations200ResponseAutomationsInner](docs/ListCommentAutomations200ResponseAutomationsInner.md)
+ - [Late::ListCommentAutomations200ResponseAutomationsInnerStats](docs/ListCommentAutomations200ResponseAutomationsInnerStats.md)
  - [Late::ListConnectionLogs200Response](docs/ListConnectionLogs200Response.md)
  - [Late::ListFacebookPages200Response](docs/ListFacebookPages200Response.md)
  - [Late::ListFacebookPages200ResponsePagesInner](docs/ListFacebookPages200ResponsePagesInner.md)
@@ -651,6 +708,7 @@ Class | Method | HTTP request | Description
  - [Late::ReplyToInboxReviewRequest](docs/ReplyToInboxReviewRequest.md)
  - [Late::RetweetPost200Response](docs/RetweetPost200Response.md)
  - [Late::RetweetPostRequest](docs/RetweetPostRequest.md)
+ - [Late::ScheduleBroadcastRequest](docs/ScheduleBroadcastRequest.md)
  - [Late::ScheduleWhatsAppBroadcast200Response](docs/ScheduleWhatsAppBroadcast200Response.md)
  - [Late::ScheduleWhatsAppBroadcast200ResponseBroadcast](docs/ScheduleWhatsAppBroadcast200ResponseBroadcast.md)
  - [Late::ScheduleWhatsAppBroadcastRequest](docs/ScheduleWhatsAppBroadcastRequest.md)
@@ -695,6 +753,7 @@ Class | Method | HTTP request | Description
  - [Late::SendWhatsAppBulkRequest](docs/SendWhatsAppBulkRequest.md)
  - [Late::SendWhatsAppBulkRequestRecipientsInner](docs/SendWhatsAppBulkRequestRecipientsInner.md)
  - [Late::SendWhatsAppBulkRequestTemplate](docs/SendWhatsAppBulkRequestTemplate.md)
+ - [Late::SetContactFieldValueRequest](docs/SetContactFieldValueRequest.md)
  - [Late::SetInstagramIceBreakersRequest](docs/SetInstagramIceBreakersRequest.md)
  - [Late::SetInstagramIceBreakersRequestIceBreakersInner](docs/SetInstagramIceBreakersRequestIceBreakersInner.md)
  - [Late::SetMessengerMenuRequest](docs/SetMessengerMenuRequest.md)
@@ -721,6 +780,9 @@ Class | Method | HTTP request | Description
  - [Late::UpdateAccountGroup200Response](docs/UpdateAccountGroup200Response.md)
  - [Late::UpdateAccountGroupRequest](docs/UpdateAccountGroupRequest.md)
  - [Late::UpdateAccountRequest](docs/UpdateAccountRequest.md)
+ - [Late::UpdateCommentAutomationRequest](docs/UpdateCommentAutomationRequest.md)
+ - [Late::UpdateContactRequest](docs/UpdateContactRequest.md)
+ - [Late::UpdateCustomFieldRequest](docs/UpdateCustomFieldRequest.md)
  - [Late::UpdateFacebookPage200Response](docs/UpdateFacebookPage200Response.md)
  - [Late::UpdateFacebookPage200ResponseSelectedPage](docs/UpdateFacebookPage200ResponseSelectedPage.md)
  - [Late::UpdateFacebookPageRequest](docs/UpdateFacebookPageRequest.md)

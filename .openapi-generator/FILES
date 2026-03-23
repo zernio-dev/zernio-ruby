@@ -14,6 +14,7 @@ docs/AccountWithFollowerStats.md
 docs/AccountWithFollowerStatsAllOfAccountStats.md
 docs/AccountsApi.md
 docs/AccountsListResponse.md
+docs/AddBroadcastRecipientsRequest.md
 docs/AddWhatsAppBroadcastRecipients200Response.md
 docs/AddWhatsAppBroadcastRecipientsRequest.md
 docs/AddWhatsAppBroadcastRecipientsRequestRecipientsInner.md
@@ -29,6 +30,9 @@ docs/ApiKeyProfileIdsInner.md
 docs/BlueskyPlatformData.md
 docs/BookmarkPost200Response.md
 docs/BookmarkPostRequest.md
+docs/BroadcastsApi.md
+docs/BulkCreateContactsRequest.md
+docs/BulkCreateContactsRequestContactsInner.md
 docs/BulkDeleteWhatsAppContacts200Response.md
 docs/BulkDeleteWhatsAppContactsRequest.md
 docs/BulkUpdateWhatsAppContacts200Response.md
@@ -43,6 +47,7 @@ docs/CheckInstagramHashtags200Response.md
 docs/CheckInstagramHashtags200ResponseResultsInner.md
 docs/CheckInstagramHashtags200ResponseSummary.md
 docs/CheckInstagramHashtagsRequest.md
+docs/CommentAutomationsApi.md
 docs/CommentsApi.md
 docs/CompleteTelegramConnect200Response.md
 docs/ConnectApi.md
@@ -57,10 +62,19 @@ docs/ConnectionLog.md
 docs/ConnectionLogContext.md
 docs/ConnectionLogError.md
 docs/ConnectionLogSuccess.md
+docs/ContactsApi.md
 docs/CreateAccountGroup201Response.md
 docs/CreateAccountGroupRequest.md
 docs/CreateApiKey201Response.md
 docs/CreateApiKeyRequest.md
+docs/CreateBroadcastRequest.md
+docs/CreateBroadcastRequestMessage.md
+docs/CreateBroadcastRequestMessageAttachmentsInner.md
+docs/CreateBroadcastRequestSegmentFilters.md
+docs/CreateBroadcastRequestTemplate.md
+docs/CreateCommentAutomationRequest.md
+docs/CreateContactRequest.md
+docs/CreateCustomFieldRequest.md
 docs/CreateGoogleBusinessMedia200Response.md
 docs/CreateGoogleBusinessMediaRequest.md
 docs/CreateGoogleBusinessPlaceAction200Response.md
@@ -77,6 +91,9 @@ docs/CreatePostRequestPlatformsInnerPlatformSpecificData.md
 docs/CreateProfileRequest.md
 docs/CreateQueueSlot201Response.md
 docs/CreateQueueSlotRequest.md
+docs/CreateSequenceRequest.md
+docs/CreateSequenceRequestStepsInner.md
+docs/CreateSequenceRequestStepsInnerMessage.md
 docs/CreateWebhookSettingsRequest.md
 docs/CreateWhatsAppBroadcast200Response.md
 docs/CreateWhatsAppBroadcast200ResponseBroadcast.md
@@ -90,6 +107,7 @@ docs/CreateWhatsAppTemplate200ResponseTemplate.md
 docs/CreateWhatsAppTemplateRequest.md
 docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner.md
 docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.md
+docs/CustomFieldsApi.md
 docs/DeleteAccountGroup200Response.md
 docs/DeleteGoogleBusinessMedia200Response.md
 docs/DeleteGoogleBusinessPlaceAction200Response.md
@@ -112,6 +130,7 @@ docs/EditInboxMessage200ResponseData.md
 docs/EditInboxMessageRequest.md
 docs/EditInboxMessageRequestReplyMarkup.md
 docs/EditInboxMessageRequestReplyMarkupKeyboardInnerInner.md
+docs/EnrollContactsRequest.md
 docs/ErrorResponse.md
 docs/Expired.md
 docs/FacebookPlatformData.md
@@ -320,6 +339,9 @@ docs/ListAccountGroups200Response.md
 docs/ListAccountGroups200ResponseGroupsInner.md
 docs/ListAccounts200Response.md
 docs/ListApiKeys200Response.md
+docs/ListCommentAutomations200Response.md
+docs/ListCommentAutomations200ResponseAutomationsInner.md
+docs/ListCommentAutomations200ResponseAutomationsInnerStats.md
 docs/ListConnectionLogs200Response.md
 docs/ListFacebookPages200Response.md
 docs/ListFacebookPages200ResponsePagesInner.md
@@ -425,6 +447,7 @@ docs/ReplyToInboxReviewRequest.md
 docs/RetweetPost200Response.md
 docs/RetweetPostRequest.md
 docs/ReviewsApi.md
+docs/ScheduleBroadcastRequest.md
 docs/ScheduleWhatsAppBroadcast200Response.md
 docs/ScheduleWhatsAppBroadcast200ResponseBroadcast.md
 docs/ScheduleWhatsAppBroadcastRequest.md
@@ -469,6 +492,8 @@ docs/SendWhatsAppBulk200ResponseSummary.md
 docs/SendWhatsAppBulkRequest.md
 docs/SendWhatsAppBulkRequestRecipientsInner.md
 docs/SendWhatsAppBulkRequestTemplate.md
+docs/SequencesApi.md
+docs/SetContactFieldValueRequest.md
 docs/SetInstagramIceBreakersRequest.md
 docs/SetInstagramIceBreakersRequestIceBreakersInner.md
 docs/SetMessengerMenuRequest.md
@@ -497,6 +522,9 @@ docs/UpdateAccount200Response.md
 docs/UpdateAccountGroup200Response.md
 docs/UpdateAccountGroupRequest.md
 docs/UpdateAccountRequest.md
+docs/UpdateCommentAutomationRequest.md
+docs/UpdateContactRequest.md
+docs/UpdateCustomFieldRequest.md
 docs/UpdateFacebookPage200Response.md
 docs/UpdateFacebookPage200ResponseSelectedPage.md
 docs/UpdateFacebookPageRequest.md
@@ -614,8 +642,12 @@ lib/late-sdk/api/account_settings_api.rb
 lib/late-sdk/api/accounts_api.rb
 lib/late-sdk/api/analytics_api.rb
 lib/late-sdk/api/api_keys_api.rb
+lib/late-sdk/api/broadcasts_api.rb
+lib/late-sdk/api/comment_automations_api.rb
 lib/late-sdk/api/comments_api.rb
 lib/late-sdk/api/connect_api.rb
+lib/late-sdk/api/contacts_api.rb
+lib/late-sdk/api/custom_fields_api.rb
 lib/late-sdk/api/gmb_attributes_api.rb
 lib/late-sdk/api/gmb_food_menus_api.rb
 lib/late-sdk/api/gmb_location_details_api.rb
@@ -632,6 +664,7 @@ lib/late-sdk/api/profiles_api.rb
 lib/late-sdk/api/queue_api.rb
 lib/late-sdk/api/reddit_search_api.rb
 lib/late-sdk/api/reviews_api.rb
+lib/late-sdk/api/sequences_api.rb
 lib/late-sdk/api/tools_api.rb
 lib/late-sdk/api/twitter_engagement_api.rb
 lib/late-sdk/api/usage_api.rb
@@ -648,6 +681,7 @@ lib/late-sdk/models/account_get_response.rb
 lib/late-sdk/models/account_with_follower_stats.rb
 lib/late-sdk/models/account_with_follower_stats_all_of_account_stats.rb
 lib/late-sdk/models/accounts_list_response.rb
+lib/late-sdk/models/add_broadcast_recipients_request.rb
 lib/late-sdk/models/add_whats_app_broadcast_recipients200_response.rb
 lib/late-sdk/models/add_whats_app_broadcast_recipients_request.rb
 lib/late-sdk/models/add_whats_app_broadcast_recipients_request_recipients_inner.rb
@@ -662,6 +696,8 @@ lib/late-sdk/models/api_key_profile_ids_inner.rb
 lib/late-sdk/models/bluesky_platform_data.rb
 lib/late-sdk/models/bookmark_post200_response.rb
 lib/late-sdk/models/bookmark_post_request.rb
+lib/late-sdk/models/bulk_create_contacts_request.rb
+lib/late-sdk/models/bulk_create_contacts_request_contacts_inner.rb
 lib/late-sdk/models/bulk_delete_whats_app_contacts200_response.rb
 lib/late-sdk/models/bulk_delete_whats_app_contacts_request.rb
 lib/late-sdk/models/bulk_update_whats_app_contacts200_response.rb
@@ -692,6 +728,14 @@ lib/late-sdk/models/create_account_group201_response.rb
 lib/late-sdk/models/create_account_group_request.rb
 lib/late-sdk/models/create_api_key201_response.rb
 lib/late-sdk/models/create_api_key_request.rb
+lib/late-sdk/models/create_broadcast_request.rb
+lib/late-sdk/models/create_broadcast_request_message.rb
+lib/late-sdk/models/create_broadcast_request_message_attachments_inner.rb
+lib/late-sdk/models/create_broadcast_request_segment_filters.rb
+lib/late-sdk/models/create_broadcast_request_template.rb
+lib/late-sdk/models/create_comment_automation_request.rb
+lib/late-sdk/models/create_contact_request.rb
+lib/late-sdk/models/create_custom_field_request.rb
 lib/late-sdk/models/create_google_business_media200_response.rb
 lib/late-sdk/models/create_google_business_media_request.rb
 lib/late-sdk/models/create_google_business_place_action200_response.rb
@@ -708,6 +752,9 @@ lib/late-sdk/models/create_post_request_platforms_inner_platform_specific_data.r
 lib/late-sdk/models/create_profile_request.rb
 lib/late-sdk/models/create_queue_slot201_response.rb
 lib/late-sdk/models/create_queue_slot_request.rb
+lib/late-sdk/models/create_sequence_request.rb
+lib/late-sdk/models/create_sequence_request_steps_inner.rb
+lib/late-sdk/models/create_sequence_request_steps_inner_message.rb
 lib/late-sdk/models/create_webhook_settings_request.rb
 lib/late-sdk/models/create_whats_app_broadcast200_response.rb
 lib/late-sdk/models/create_whats_app_broadcast200_response_broadcast.rb
@@ -743,6 +790,7 @@ lib/late-sdk/models/edit_inbox_message200_response_data.rb
 lib/late-sdk/models/edit_inbox_message_request.rb
 lib/late-sdk/models/edit_inbox_message_request_reply_markup.rb
 lib/late-sdk/models/edit_inbox_message_request_reply_markup_keyboard_inner_inner.rb
+lib/late-sdk/models/enroll_contacts_request.rb
 lib/late-sdk/models/error_response.rb
 lib/late-sdk/models/expired.rb
 lib/late-sdk/models/facebook_platform_data.rb
@@ -943,6 +991,9 @@ lib/late-sdk/models/list_account_groups200_response.rb
 lib/late-sdk/models/list_account_groups200_response_groups_inner.rb
 lib/late-sdk/models/list_accounts200_response.rb
 lib/late-sdk/models/list_api_keys200_response.rb
+lib/late-sdk/models/list_comment_automations200_response.rb
+lib/late-sdk/models/list_comment_automations200_response_automations_inner.rb
+lib/late-sdk/models/list_comment_automations200_response_automations_inner_stats.rb
 lib/late-sdk/models/list_connection_logs200_response.rb
 lib/late-sdk/models/list_facebook_pages200_response.rb
 lib/late-sdk/models/list_facebook_pages200_response_pages_inner.rb
@@ -1040,6 +1091,7 @@ lib/late-sdk/models/reply_to_inbox_review200_response_reply.rb
 lib/late-sdk/models/reply_to_inbox_review_request.rb
 lib/late-sdk/models/retweet_post200_response.rb
 lib/late-sdk/models/retweet_post_request.rb
+lib/late-sdk/models/schedule_broadcast_request.rb
 lib/late-sdk/models/schedule_whats_app_broadcast200_response.rb
 lib/late-sdk/models/schedule_whats_app_broadcast200_response_broadcast.rb
 lib/late-sdk/models/schedule_whats_app_broadcast_request.rb
@@ -1084,6 +1136,7 @@ lib/late-sdk/models/send_whats_app_bulk200_response_summary.rb
 lib/late-sdk/models/send_whats_app_bulk_request.rb
 lib/late-sdk/models/send_whats_app_bulk_request_recipients_inner.rb
 lib/late-sdk/models/send_whats_app_bulk_request_template.rb
+lib/late-sdk/models/set_contact_field_value_request.rb
 lib/late-sdk/models/set_instagram_ice_breakers_request.rb
 lib/late-sdk/models/set_instagram_ice_breakers_request_ice_breakers_inner.rb
 lib/late-sdk/models/set_messenger_menu_request.rb
@@ -1110,6 +1163,9 @@ lib/late-sdk/models/update_account200_response.rb
 lib/late-sdk/models/update_account_group200_response.rb
 lib/late-sdk/models/update_account_group_request.rb
 lib/late-sdk/models/update_account_request.rb
+lib/late-sdk/models/update_comment_automation_request.rb
+lib/late-sdk/models/update_contact_request.rb
+lib/late-sdk/models/update_custom_field_request.rb
 lib/late-sdk/models/update_facebook_page200_response.rb
 lib/late-sdk/models/update_facebook_page200_response_selected_page.rb
 lib/late-sdk/models/update_facebook_page_request.rb
@@ -1219,8 +1275,12 @@ spec/api/account_settings_api_spec.rb
 spec/api/accounts_api_spec.rb
 spec/api/analytics_api_spec.rb
 spec/api/api_keys_api_spec.rb
+spec/api/broadcasts_api_spec.rb
+spec/api/comment_automations_api_spec.rb
 spec/api/comments_api_spec.rb
 spec/api/connect_api_spec.rb
+spec/api/contacts_api_spec.rb
+spec/api/custom_fields_api_spec.rb
 spec/api/gmb_attributes_api_spec.rb
 spec/api/gmb_food_menus_api_spec.rb
 spec/api/gmb_location_details_api_spec.rb
@@ -1237,6 +1297,7 @@ spec/api/profiles_api_spec.rb
 spec/api/queue_api_spec.rb
 spec/api/reddit_search_api_spec.rb
 spec/api/reviews_api_spec.rb
+spec/api/sequences_api_spec.rb
 spec/api/tools_api_spec.rb
 spec/api/twitter_engagement_api_spec.rb
 spec/api/usage_api_spec.rb
@@ -1249,6 +1310,7 @@ spec/models/account_get_response_spec.rb
 spec/models/account_with_follower_stats_all_of_account_stats_spec.rb
 spec/models/account_with_follower_stats_spec.rb
 spec/models/accounts_list_response_spec.rb
+spec/models/add_broadcast_recipients_request_spec.rb
 spec/models/add_whats_app_broadcast_recipients200_response_spec.rb
 spec/models/add_whats_app_broadcast_recipients_request_recipients_inner_spec.rb
 spec/models/add_whats_app_broadcast_recipients_request_spec.rb
@@ -1263,6 +1325,8 @@ spec/models/api_key_spec.rb
 spec/models/bluesky_platform_data_spec.rb
 spec/models/bookmark_post200_response_spec.rb
 spec/models/bookmark_post_request_spec.rb
+spec/models/bulk_create_contacts_request_contacts_inner_spec.rb
+spec/models/bulk_create_contacts_request_spec.rb
 spec/models/bulk_delete_whats_app_contacts200_response_spec.rb
 spec/models/bulk_delete_whats_app_contacts_request_spec.rb
 spec/models/bulk_update_whats_app_contacts200_response_spec.rb
@@ -1293,6 +1357,14 @@ spec/models/create_account_group201_response_spec.rb
 spec/models/create_account_group_request_spec.rb
 spec/models/create_api_key201_response_spec.rb
 spec/models/create_api_key_request_spec.rb
+spec/models/create_broadcast_request_message_attachments_inner_spec.rb
+spec/models/create_broadcast_request_message_spec.rb
+spec/models/create_broadcast_request_segment_filters_spec.rb
+spec/models/create_broadcast_request_spec.rb
+spec/models/create_broadcast_request_template_spec.rb
+spec/models/create_comment_automation_request_spec.rb
+spec/models/create_contact_request_spec.rb
+spec/models/create_custom_field_request_spec.rb
 spec/models/create_google_business_media200_response_spec.rb
 spec/models/create_google_business_media_request_spec.rb
 spec/models/create_google_business_place_action200_response_spec.rb
@@ -1309,6 +1381,9 @@ spec/models/create_post_request_spec.rb
 spec/models/create_profile_request_spec.rb
 spec/models/create_queue_slot201_response_spec.rb
 spec/models/create_queue_slot_request_spec.rb
+spec/models/create_sequence_request_spec.rb
+spec/models/create_sequence_request_steps_inner_message_spec.rb
+spec/models/create_sequence_request_steps_inner_spec.rb
 spec/models/create_webhook_settings_request_spec.rb
 spec/models/create_whats_app_broadcast200_response_broadcast_spec.rb
 spec/models/create_whats_app_broadcast200_response_spec.rb
@@ -1344,6 +1419,7 @@ spec/models/edit_inbox_message200_response_spec.rb
 spec/models/edit_inbox_message_request_reply_markup_keyboard_inner_inner_spec.rb
 spec/models/edit_inbox_message_request_reply_markup_spec.rb
 spec/models/edit_inbox_message_request_spec.rb
+spec/models/enroll_contacts_request_spec.rb
 spec/models/error_response_spec.rb
 spec/models/expired_spec.rb
 spec/models/facebook_platform_data_spec.rb
@@ -1544,6 +1620,9 @@ spec/models/list_account_groups200_response_groups_inner_spec.rb
 spec/models/list_account_groups200_response_spec.rb
 spec/models/list_accounts200_response_spec.rb
 spec/models/list_api_keys200_response_spec.rb
+spec/models/list_comment_automations200_response_automations_inner_spec.rb
+spec/models/list_comment_automations200_response_automations_inner_stats_spec.rb
+spec/models/list_comment_automations200_response_spec.rb
 spec/models/list_connection_logs200_response_spec.rb
 spec/models/list_facebook_pages200_response_pages_inner_spec.rb
 spec/models/list_facebook_pages200_response_spec.rb
@@ -1641,6 +1720,7 @@ spec/models/reply_to_inbox_review200_response_spec.rb
 spec/models/reply_to_inbox_review_request_spec.rb
 spec/models/retweet_post200_response_spec.rb
 spec/models/retweet_post_request_spec.rb
+spec/models/schedule_broadcast_request_spec.rb
 spec/models/schedule_whats_app_broadcast200_response_broadcast_spec.rb
 spec/models/schedule_whats_app_broadcast200_response_spec.rb
 spec/models/schedule_whats_app_broadcast_request_spec.rb
@@ -1685,6 +1765,7 @@ spec/models/send_whats_app_bulk200_response_summary_spec.rb
 spec/models/send_whats_app_bulk_request_recipients_inner_spec.rb
 spec/models/send_whats_app_bulk_request_spec.rb
 spec/models/send_whats_app_bulk_request_template_spec.rb
+spec/models/set_contact_field_value_request_spec.rb
 spec/models/set_instagram_ice_breakers_request_ice_breakers_inner_spec.rb
 spec/models/set_instagram_ice_breakers_request_spec.rb
 spec/models/set_messenger_menu_request_spec.rb
@@ -1711,6 +1792,9 @@ spec/models/update_account200_response_spec.rb
 spec/models/update_account_group200_response_spec.rb
 spec/models/update_account_group_request_spec.rb
 spec/models/update_account_request_spec.rb
+spec/models/update_comment_automation_request_spec.rb
+spec/models/update_contact_request_spec.rb
+spec/models/update_custom_field_request_spec.rb
 spec/models/update_facebook_page200_response_selected_page_spec.rb
 spec/models/update_facebook_page200_response_spec.rb
 spec/models/update_facebook_page_request_spec.rb
