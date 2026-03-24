@@ -17,7 +17,7 @@ module Late
   class AnalyticsListResponsePostsInner < ApiModelBase
     attr_accessor :_id
 
-    # Original Late post ID if scheduled via Late
+    # Original Zernio post ID if scheduled via Zernio
     attr_accessor :late_post_id
 
     attr_accessor :content

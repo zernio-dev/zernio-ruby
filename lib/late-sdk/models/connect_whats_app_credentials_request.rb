@@ -15,7 +15,7 @@ require 'time'
 
 module Late
   class ConnectWhatsAppCredentialsRequest < ApiModelBase
-    # Your Late profile ID
+    # Your Zernio profile ID
     attr_accessor :profile_id
 
     # Permanent System User access token from Meta Business Suite

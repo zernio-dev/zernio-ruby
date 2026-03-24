@@ -17,7 +17,7 @@ module Late
   class AnalyticsSinglePostResponse < ApiModelBase
     attr_accessor :post_id
 
-    # Original Late post ID if scheduled via Late
+    # Original Zernio post ID if scheduled via Zernio
     attr_accessor :late_post_id
 
     # Overall post status. \"partial\" when some platforms published and others failed.
