@@ -11,6 +11,7 @@
 | **status** | **String** |  | [optional] |
 | **participant_name** | **String** |  | [optional] |
 | **participant_id** | **String** |  | [optional] |
+| **participant_verified_type** | **String** | X/Twitter verified badge type. Only present for Twitter/X conversations. | [optional] |
 | **last_message** | **String** |  | [optional] |
 | **last_message_at** | **Time** |  | [optional] |
 | **updated_time** | **Time** |  | [optional] |
@@ -30,6 +31,7 @@ instance = Late::GetInboxConversation200ResponseData.new(
   status: null,
   participant_name: null,
   participant_id: null,
+  participant_verified_type: null,
   last_message: null,
   last_message_at: null,
   updated_time: null,

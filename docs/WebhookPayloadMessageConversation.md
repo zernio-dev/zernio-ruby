@@ -10,6 +10,7 @@
 | **participant_name** | **String** |  | [optional] |
 | **participant_username** | **String** |  | [optional] |
 | **participant_picture** | **String** |  | [optional] |
+| **participant_verified_type** | **String** | X/Twitter verified badge type. Only present for Twitter/X conversations. | [optional] |
 | **status** | **String** |  | [optional] |
 
 ## Example
@@ -24,6 +25,7 @@ instance = Late::WebhookPayloadMessageConversation.new(
   participant_name: null,
   participant_username: null,
   participant_picture: null,
+  participant_verified_type: null,
   status: null
 )
 ```

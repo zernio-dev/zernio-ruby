@@ -29,6 +29,9 @@ module Late
 
     attr_accessor :sender_name
 
+    # X/Twitter verified badge type. Only present for Twitter/X messages.
+    attr_accessor :sender_verified_type
+
     attr_accessor :direction
 
     attr_accessor :created_at
@@ -76,6 +79,7 @@ module Late
         :'message' => :'message',
         :'sender_id' => :'senderId',
         :'sender_name' => :'senderName',
+        :'sender_verified_type' => :'senderVerifiedType',
         :'direction' => :'direction',
         :'created_at' => :'createdAt',
         :'attachments' => :'attachments',
@@ -105,6 +109,7 @@ module Late
         :'message' => :'String',
         :'sender_id' => :'String',
         :'sender_name' => :'String',
+        :'sender_verified_type' => :'String',
         :'direction' => :'String',
         :'created_at' => :'Time',
         :'attachments' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner>',
@@ -164,6 +169,10 @@ module Late
         self.sender_name = attributes[:'sender_name']
       end
 
+      if attributes.key?(:'sender_verified_type')
+        self.sender_verified_type = attributes[:'sender_verified_type']
+      end
+
       if attributes.key?(:'direction')
         self.direction = attributes[:'direction']
       end
@@ -203,9 +212,21 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      sender_verified_type_validator = EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
+      return false unless sender_verified_type_validator.valid?(@sender_verified_type)
       direction_validator = EnumAttributeValidator.new('String', ["incoming", "outgoing"])
       return false unless direction_validator.valid?(@direction)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sender_verified_type Object to be assigned
+    def sender_verified_type=(sender_verified_type)
+      validator = EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
+      unless validator.valid?(sender_verified_type)
+        fail ArgumentError, "invalid value for \"sender_verified_type\", must be one of #{validator.allowable_values}."
+      end
+      @sender_verified_type = sender_verified_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -230,6 +251,7 @@ module Late
           message == o.message &&
           sender_id == o.sender_id &&
           sender_name == o.sender_name &&
+          sender_verified_type == o.sender_verified_type &&
           direction == o.direction &&
           created_at == o.created_at &&
           attachments == o.attachments &&
@@ -247,7 +269,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, conversation_id, account_id, platform, message, sender_id, sender_name, direction, created_at, attachments, subject, story_reply, is_story_mention].hash
+      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention].hash
     end
 
     # Builds the object from hash

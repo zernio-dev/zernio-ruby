@@ -29,6 +29,9 @@ module Late
 
     attr_accessor :participant_picture
 
+    # X/Twitter verified badge type. Only present for Twitter/X conversations.
+    attr_accessor :participant_verified_type
+
     attr_accessor :last_message
 
     attr_accessor :updated_time
@@ -75,6 +78,7 @@ module Late
         :'participant_id' => :'participantId',
         :'participant_name' => :'participantName',
         :'participant_picture' => :'participantPicture',
+        :'participant_verified_type' => :'participantVerifiedType',
         :'last_message' => :'lastMessage',
         :'updated_time' => :'updatedTime',
         :'status' => :'status',
@@ -104,6 +108,7 @@ module Late
         :'participant_id' => :'String',
         :'participant_name' => :'String',
         :'participant_picture' => :'String',
+        :'participant_verified_type' => :'String',
         :'last_message' => :'String',
         :'updated_time' => :'Time',
         :'status' => :'String',
@@ -163,6 +168,10 @@ module Late
         self.participant_picture = attributes[:'participant_picture']
       end
 
+      if attributes.key?(:'participant_verified_type')
+        self.participant_verified_type = attributes[:'participant_verified_type']
+      end
+
       if attributes.key?(:'last_message')
         self.last_message = attributes[:'last_message']
       end
@@ -200,9 +209,21 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      participant_verified_type_validator = EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
+      return false unless participant_verified_type_validator.valid?(@participant_verified_type)
       status_validator = EnumAttributeValidator.new('String', ["active", "archived"])
       return false unless status_validator.valid?(@status)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] participant_verified_type Object to be assigned
+    def participant_verified_type=(participant_verified_type)
+      validator = EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
+      unless validator.valid?(participant_verified_type)
+        fail ArgumentError, "invalid value for \"participant_verified_type\", must be one of #{validator.allowable_values}."
+      end
+      @participant_verified_type = participant_verified_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -227,6 +248,7 @@ module Late
           participant_id == o.participant_id &&
           participant_name == o.participant_name &&
           participant_picture == o.participant_picture &&
+          participant_verified_type == o.participant_verified_type &&
           last_message == o.last_message &&
           updated_time == o.updated_time &&
           status == o.status &&
@@ -244,7 +266,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, participant_id, participant_name, participant_picture, last_message, updated_time, status, unread_count, url, instagram_profile].hash
+      [id, platform, account_id, account_username, participant_id, participant_name, participant_picture, participant_verified_type, last_message, updated_time, status, unread_count, url, instagram_profile].hash
     end
 
     # Builds the object from hash

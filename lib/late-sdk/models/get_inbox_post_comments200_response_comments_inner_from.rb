@@ -25,6 +25,31 @@ module Late
 
     attr_accessor :is_owner
 
+    # X/Twitter verified badge type. Only present for Twitter/X comments.
+    attr_accessor :verified_type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -32,7 +57,8 @@ module Late
         :'name' => :'name',
         :'username' => :'username',
         :'picture' => :'picture',
-        :'is_owner' => :'isOwner'
+        :'is_owner' => :'isOwner',
+        :'verified_type' => :'verifiedType'
       }
     end
 
@@ -53,7 +79,8 @@ module Late
         :'name' => :'String',
         :'username' => :'String',
         :'picture' => :'String',
-        :'is_owner' => :'Boolean'
+        :'is_owner' => :'Boolean',
+        :'verified_type' => :'String'
       }
     end
 
@@ -98,6 +125,10 @@ module Late
       if attributes.key?(:'is_owner')
         self.is_owner = attributes[:'is_owner']
       end
+
+      if attributes.key?(:'verified_type')
+        self.verified_type = attributes[:'verified_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -112,7 +143,19 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      verified_type_validator = EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
+      return false unless verified_type_validator.valid?(@verified_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] verified_type Object to be assigned
+    def verified_type=(verified_type)
+      validator = EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
+      unless validator.valid?(verified_type)
+        fail ArgumentError, "invalid value for \"verified_type\", must be one of #{validator.allowable_values}."
+      end
+      @verified_type = verified_type
     end
 
     # Checks equality by comparing each attribute.
@@ -124,7 +167,8 @@ module Late
           name == o.name &&
           username == o.username &&
           picture == o.picture &&
-          is_owner == o.is_owner
+          is_owner == o.is_owner &&
+          verified_type == o.verified_type
     end
 
     # @see the `==` method
@@ -136,7 +180,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, username, picture, is_owner].hash
+      [id, name, username, picture, is_owner, verified_type].hash
     end
 
     # Builds the object from hash

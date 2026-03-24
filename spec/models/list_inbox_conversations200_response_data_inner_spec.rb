@@ -69,6 +69,16 @@ describe Late::ListInboxConversations200ResponseDataInner do
     end
   end
 
+  describe 'test attribute "participant_verified_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.participant_verified_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "last_message"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

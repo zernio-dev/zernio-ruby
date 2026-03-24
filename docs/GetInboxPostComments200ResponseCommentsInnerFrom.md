@@ -9,6 +9,7 @@
 | **username** | **String** |  | [optional] |
 | **picture** | **String** |  | [optional] |
 | **is_owner** | **Boolean** |  | [optional] |
+| **verified_type** | **String** | X/Twitter verified badge type. Only present for Twitter/X comments. | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Late::GetInboxPostComments200ResponseCommentsInnerFrom.new(
   name: null,
   username: null,
   picture: null,
-  is_owner: null
+  is_owner: null,
+  verified_type: null
 )
 ```
 

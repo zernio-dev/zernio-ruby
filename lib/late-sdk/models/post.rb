@@ -39,6 +39,7 @@ module Late
 
     attr_accessor :hashtags
 
+    # Stored for reference only. This field does NOT automatically create @mentions when publishing. For LinkedIn @mentions, use the /v1/accounts/{accountId}/linkedin-mentions endpoint to resolve profile URLs to URNs, then embed the returned mentionFormat directly in the post content field.
     attr_accessor :mentions
 
     attr_accessor :visibility

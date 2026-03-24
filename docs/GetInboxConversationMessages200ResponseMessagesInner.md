@@ -11,6 +11,7 @@
 | **message** | **String** |  | [optional] |
 | **sender_id** | **String** |  | [optional] |
 | **sender_name** | **String** |  | [optional] |
+| **sender_verified_type** | **String** | X/Twitter verified badge type. Only present for Twitter/X messages. | [optional] |
 | **direction** | **String** |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
 | **attachments** | [**Array&lt;GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner&gt;**](GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner.md) |  | [optional] |
@@ -31,6 +32,7 @@ instance = Late::GetInboxConversationMessages200ResponseMessagesInner.new(
   message: null,
   sender_id: null,
   sender_name: null,
+  sender_verified_type: null,
   direction: null,
   created_at: null,
   attachments: null,

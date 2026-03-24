@@ -69,6 +69,16 @@ describe Late::GetInboxConversationMessages200ResponseMessagesInner do
     end
   end
 
+  describe 'test attribute "sender_verified_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.sender_verified_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "direction"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
