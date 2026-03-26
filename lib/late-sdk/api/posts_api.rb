@@ -601,5 +601,79 @@ module Late
       end
       return data, status_code, headers
     end
+
+    # Update post metadata
+    # Updates metadata of an already-published post on the specified platform without re-uploading the media. Currently only supported for YouTube videos (title, description, tags, category, privacy status). The post must have \"published\" status on the target platform. At least one updatable field is required. 
+    # @param post_id [String] 
+    # @param update_post_metadata_request [UpdatePostMetadataRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdatePostMetadata200Response]
+    def update_post_metadata(post_id, update_post_metadata_request, opts = {})
+      data, _status_code, _headers = update_post_metadata_with_http_info(post_id, update_post_metadata_request, opts)
+      data
+    end
+
+    # Update post metadata
+    # Updates metadata of an already-published post on the specified platform without re-uploading the media. Currently only supported for YouTube videos (title, description, tags, category, privacy status). The post must have \&quot;published\&quot; status on the target platform. At least one updatable field is required. 
+    # @param post_id [String] 
+    # @param update_post_metadata_request [UpdatePostMetadataRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdatePostMetadata200Response, Integer, Hash)>] UpdatePostMetadata200Response data, response status code and response headers
+    def update_post_metadata_with_http_info(post_id, update_post_metadata_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PostsApi.update_post_metadata ...'
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling PostsApi.update_post_metadata"
+      end
+      # verify the required parameter 'update_post_metadata_request' is set
+      if @api_client.config.client_side_validation && update_post_metadata_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_post_metadata_request' when calling PostsApi.update_post_metadata"
+      end
+      # resource path
+      local_var_path = '/v1/posts/{postId}/update-metadata'.sub('{' + 'postId' + '}', CGI.escape(post_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_post_metadata_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdatePostMetadata200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PostsApi.update_post_metadata",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PostsApi#update_post_metadata\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end

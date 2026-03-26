@@ -200,6 +200,7 @@ Class | Method | HTTP request | Description
 *Late::PostsApi* | [**retry_post**](docs/PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post
 *Late::PostsApi* | [**unpublish_post**](docs/PostsApi.md#unpublish_post) | **POST** /v1/posts/{postId}/unpublish | Unpublish post
 *Late::PostsApi* | [**update_post**](docs/PostsApi.md#update_post) | **PUT** /v1/posts/{postId} | Update post
+*Late::PostsApi* | [**update_post_metadata**](docs/PostsApi.md#update_post_metadata) | **POST** /v1/posts/{postId}/update-metadata | Update post metadata
 *Late::ProfilesApi* | [**create_profile**](docs/ProfilesApi.md#create_profile) | **POST** /v1/profiles | Create profile
 *Late::ProfilesApi* | [**delete_profile**](docs/ProfilesApi.md#delete_profile) | **DELETE** /v1/profiles/{profileId} | Delete profile
 *Late::ProfilesApi* | [**get_profile**](docs/ProfilesApi.md#get_profile) | **GET** /v1/profiles/{profileId} | Get profile
@@ -868,6 +869,8 @@ Class | Method | HTTP request | Description
  - [Late::UpdateInboxConversationRequest](docs/UpdateInboxConversationRequest.md)
  - [Late::UpdateLinkedInOrganizationRequest](docs/UpdateLinkedInOrganizationRequest.md)
  - [Late::UpdatePinterestBoardsRequest](docs/UpdatePinterestBoardsRequest.md)
+ - [Late::UpdatePostMetadata200Response](docs/UpdatePostMetadata200Response.md)
+ - [Late::UpdatePostMetadataRequest](docs/UpdatePostMetadataRequest.md)
  - [Late::UpdatePostRequest](docs/UpdatePostRequest.md)
  - [Late::UpdateProfile200Response](docs/UpdateProfile200Response.md)
  - [Late::UpdateProfileRequest](docs/UpdateProfileRequest.md)

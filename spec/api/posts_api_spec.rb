@@ -141,4 +141,17 @@ describe 'PostsApi' do
     end
   end
 
+  # unit tests for update_post_metadata
+  # Update post metadata
+  # Updates metadata of an already-published post on the specified platform without re-uploading the media. Currently only supported for YouTube videos (title, description, tags, category, privacy status). The post must have \&quot;published\&quot; status on the target platform. At least one updatable field is required. 
+  # @param post_id 
+  # @param update_post_metadata_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdatePostMetadata200Response]
+  describe 'update_post_metadata test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

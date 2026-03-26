@@ -12,6 +12,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**retry_post**](PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post |
 | [**unpublish_post**](PostsApi.md#unpublish_post) | **POST** /v1/posts/{postId}/unpublish | Unpublish post |
 | [**update_post**](PostsApi.md#update_post) | **PUT** /v1/posts/{postId} | Update post |
+| [**update_post_metadata**](PostsApi.md#update_post_metadata) | **POST** /v1/posts/{postId}/update-metadata | Update post metadata |
 
 
 ## bulk_upload_posts
@@ -585,6 +586,77 @@ end
 ### Return type
 
 [**PostUpdateResponse**](PostUpdateResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_post_metadata
+
+> <UpdatePostMetadata200Response> update_post_metadata(post_id, update_post_metadata_request)
+
+Update post metadata
+
+Updates metadata of an already-published post on the specified platform without re-uploading the media. Currently only supported for YouTube videos (title, description, tags, category, privacy status). The post must have \"published\" status on the target platform. At least one updatable field is required. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::PostsApi.new
+post_id = 'post_id_example' # String | 
+update_post_metadata_request = Late::UpdatePostMetadataRequest.new({platform: 'youtube'}) # UpdatePostMetadataRequest | 
+
+begin
+  # Update post metadata
+  result = api_instance.update_post_metadata(post_id, update_post_metadata_request)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling PostsApi->update_post_metadata: #{e}"
+end
+```
+
+#### Using the update_post_metadata_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdatePostMetadata200Response>, Integer, Hash)> update_post_metadata_with_http_info(post_id, update_post_metadata_request)
+
+```ruby
+begin
+  # Update post metadata
+  data, status_code, headers = api_instance.update_post_metadata_with_http_info(post_id, update_post_metadata_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdatePostMetadata200Response>
+rescue Late::ApiError => e
+  puts "Error when calling PostsApi->update_post_metadata_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **update_post_metadata_request** | [**UpdatePostMetadataRequest**](UpdatePostMetadataRequest.md) |  |  |
+
+### Return type
+
+[**UpdatePostMetadata200Response**](UpdatePostMetadata200Response.md)
 
 ### Authorization
 
