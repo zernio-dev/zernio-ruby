@@ -43,7 +43,7 @@ jobs:
       - name: Clean generated files
         run: |
           rm -rf lib/late-sdk/models lib/late-sdk/api docs spec
-          rm -rf lib/late lib/late.rb late.gemspec
+          rm -rf lib/late lib/late.rb lib/late-sdk.rb late.gemspec
 
       - name: Generate SDK
         run: |
