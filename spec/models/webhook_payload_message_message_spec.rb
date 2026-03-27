@@ -42,7 +42,7 @@ describe Late::WebhookPayloadMessageMessage do
   describe 'test attribute "platform"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "bluesky", "reddit"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "whatsapp"])
       # validator.allowable_values.each do |value|
       #   expect { instance.platform = value }.not_to raise_error
       # end
@@ -58,7 +58,7 @@ describe Late::WebhookPayloadMessageMessage do
   describe 'test attribute "direction"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["incoming"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["incoming", "outgoing"])
       # validator.allowable_values.each do |value|
       #   expect { instance.direction = value }.not_to raise_error
       # end

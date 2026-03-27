@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Internal post ID | [optional] |
-| **platform_post_id** | **String** | Platform&#39;s post ID | [optional] |
+| **id** | **String** | Internal post ID |  |
+| **platform_post_id** | **String** | Platform&#39;s post ID |  |
 
 ## Example
 

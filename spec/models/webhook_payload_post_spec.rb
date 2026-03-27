@@ -27,10 +27,16 @@ describe Late::WebhookPayloadPost do
     end
   end
 
+  describe 'test attribute "id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "event"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["post.scheduled", "post.published", "post.failed", "post.partial", "post.recycled"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["post.scheduled", "post.published", "post.failed", "post.partial", "post.cancelled", "post.recycled"])
       # validator.allowable_values.each do |value|
       #   expect { instance.event = value }.not_to raise_error
       # end

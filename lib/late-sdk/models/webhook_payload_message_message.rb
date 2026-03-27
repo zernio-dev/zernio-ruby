@@ -127,44 +127,64 @@ module Late
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      else
+        self.id = nil
       end
 
       if attributes.key?(:'conversation_id')
         self.conversation_id = attributes[:'conversation_id']
+      else
+        self.conversation_id = nil
       end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
+      else
+        self.platform = nil
       end
 
       if attributes.key?(:'platform_message_id')
         self.platform_message_id = attributes[:'platform_message_id']
+      else
+        self.platform_message_id = nil
       end
 
       if attributes.key?(:'direction')
         self.direction = attributes[:'direction']
+      else
+        self.direction = nil
       end
 
       if attributes.key?(:'text')
         self.text = attributes[:'text']
+      else
+        self.text = nil
       end
 
       if attributes.key?(:'attachments')
         if (value = attributes[:'attachments']).is_a?(Array)
           self.attachments = value
         end
+      else
+        self.attachments = nil
       end
 
       if attributes.key?(:'sender')
         self.sender = attributes[:'sender']
+      else
+        self.sender = nil
       end
 
       if attributes.key?(:'sent_at')
         self.sent_at = attributes[:'sent_at']
+      else
+        self.sent_at = nil
       end
 
       if attributes.key?(:'is_read')
         self.is_read = attributes[:'is_read']
+      else
+        self.is_read = nil
       end
     end
 
@@ -173,6 +193,46 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @conversation_id.nil?
+        invalid_properties.push('invalid value for "conversation_id", conversation_id cannot be nil.')
+      end
+
+      if @platform.nil?
+        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
+      end
+
+      if @platform_message_id.nil?
+        invalid_properties.push('invalid value for "platform_message_id", platform_message_id cannot be nil.')
+      end
+
+      if @direction.nil?
+        invalid_properties.push('invalid value for "direction", direction cannot be nil.')
+      end
+
+      if @text.nil?
+        invalid_properties.push('invalid value for "text", text cannot be nil.')
+      end
+
+      if @attachments.nil?
+        invalid_properties.push('invalid value for "attachments", attachments cannot be nil.')
+      end
+
+      if @sender.nil?
+        invalid_properties.push('invalid value for "sender", sender cannot be nil.')
+      end
+
+      if @sent_at.nil?
+        invalid_properties.push('invalid value for "sent_at", sent_at cannot be nil.')
+      end
+
+      if @is_read.nil?
+        invalid_properties.push('invalid value for "is_read", is_read cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -180,31 +240,121 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      platform_validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "bluesky", "reddit"])
+      return false if @id.nil?
+      return false if @conversation_id.nil?
+      return false if @platform.nil?
+      platform_validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "whatsapp"])
       return false unless platform_validator.valid?(@platform)
-      direction_validator = EnumAttributeValidator.new('String', ["incoming"])
+      return false if @platform_message_id.nil?
+      return false if @direction.nil?
+      direction_validator = EnumAttributeValidator.new('String', ["incoming", "outgoing"])
       return false unless direction_validator.valid?(@direction)
+      return false if @text.nil?
+      return false if @attachments.nil?
+      return false if @sender.nil?
+      return false if @sent_at.nil?
+      return false if @is_read.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
+      end
+
+      @id = id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] conversation_id Value to be assigned
+    def conversation_id=(conversation_id)
+      if conversation_id.nil?
+        fail ArgumentError, 'conversation_id cannot be nil'
+      end
+
+      @conversation_id = conversation_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "bluesky", "reddit"])
+      validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "whatsapp"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] platform_message_id Value to be assigned
+    def platform_message_id=(platform_message_id)
+      if platform_message_id.nil?
+        fail ArgumentError, 'platform_message_id cannot be nil'
+      end
+
+      @platform_message_id = platform_message_id
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] direction Object to be assigned
     def direction=(direction)
-      validator = EnumAttributeValidator.new('String', ["incoming"])
+      validator = EnumAttributeValidator.new('String', ["incoming", "outgoing"])
       unless validator.valid?(direction)
         fail ArgumentError, "invalid value for \"direction\", must be one of #{validator.allowable_values}."
       end
       @direction = direction
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] text Value to be assigned
+    def text=(text)
+      if text.nil?
+        fail ArgumentError, 'text cannot be nil'
+      end
+
+      @text = text
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] attachments Value to be assigned
+    def attachments=(attachments)
+      if attachments.nil?
+        fail ArgumentError, 'attachments cannot be nil'
+      end
+
+      @attachments = attachments
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sender Value to be assigned
+    def sender=(sender)
+      if sender.nil?
+        fail ArgumentError, 'sender cannot be nil'
+      end
+
+      @sender = sender
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sent_at Value to be assigned
+    def sent_at=(sent_at)
+      if sent_at.nil?
+        fail ArgumentError, 'sent_at cannot be nil'
+      end
+
+      @sent_at = sent_at
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] is_read Value to be assigned
+    def is_read=(is_read)
+      if is_read.nil?
+        fail ArgumentError, 'is_read cannot be nil'
+      end
+
+      @is_read = is_read
     end
 
     # Checks equality by comparing each attribute.

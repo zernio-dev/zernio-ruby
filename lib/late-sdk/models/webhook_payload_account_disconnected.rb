@@ -16,6 +16,9 @@ require 'time'
 module Late
   # Webhook payload for account disconnected events
   class WebhookPayloadAccountDisconnected < ApiModelBase
+    # Stable webhook event ID
+    attr_accessor :id
+
     attr_accessor :event
 
     attr_accessor :account
@@ -47,6 +50,7 @@ module Late
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'event' => :'event',
         :'account' => :'account',
         :'timestamp' => :'timestamp'
@@ -66,6 +70,7 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
         :'event' => :'String',
         :'account' => :'WebhookPayloadAccountDisconnectedAccount',
         :'timestamp' => :'Time'
@@ -94,16 +99,28 @@ module Late
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      else
+        self.id = nil
+      end
+
       if attributes.key?(:'event')
         self.event = attributes[:'event']
+      else
+        self.event = nil
       end
 
       if attributes.key?(:'account')
         self.account = attributes[:'account']
+      else
+        self.account = nil
       end
 
       if attributes.key?(:'timestamp')
         self.timestamp = attributes[:'timestamp']
+      else
+        self.timestamp = nil
       end
     end
 
@@ -112,6 +129,22 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @event.nil?
+        invalid_properties.push('invalid value for "event", event cannot be nil.')
+      end
+
+      if @account.nil?
+        invalid_properties.push('invalid value for "account", account cannot be nil.')
+      end
+
+      if @timestamp.nil?
+        invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -119,9 +152,23 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @id.nil?
+      return false if @event.nil?
       event_validator = EnumAttributeValidator.new('String', ["account.disconnected"])
       return false unless event_validator.valid?(@event)
+      return false if @account.nil?
+      return false if @timestamp.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
+      end
+
+      @id = id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -134,11 +181,32 @@ module Late
       @event = event
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] account Value to be assigned
+    def account=(account)
+      if account.nil?
+        fail ArgumentError, 'account cannot be nil'
+      end
+
+      @account = account
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] timestamp Value to be assigned
+    def timestamp=(timestamp)
+      if timestamp.nil?
+        fail ArgumentError, 'timestamp cannot be nil'
+      end
+
+      @timestamp = timestamp
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           event == o.event &&
           account == o.account &&
           timestamp == o.timestamp
@@ -153,7 +221,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [event, account, timestamp].hash
+      [id, event, account, timestamp].hash
     end
 
     # Builds the object from hash

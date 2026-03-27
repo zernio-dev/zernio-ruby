@@ -14,8 +14,11 @@ require 'date'
 require 'time'
 
 module Late
-  # Webhook payload for message received events (DMs from Instagram, Facebook, Telegram, Bluesky, Reddit)
+  # Webhook payload for message received events
   class WebhookPayloadMessage < ApiModelBase
+    # Stable webhook event ID
+    attr_accessor :id
+
     attr_accessor :event
 
     attr_accessor :message
@@ -53,6 +56,7 @@ module Late
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'event' => :'event',
         :'message' => :'message',
         :'conversation' => :'conversation',
@@ -75,6 +79,7 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
         :'event' => :'String',
         :'message' => :'WebhookPayloadMessageMessage',
         :'conversation' => :'WebhookPayloadMessageConversation',
@@ -106,20 +111,34 @@ module Late
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      else
+        self.id = nil
+      end
+
       if attributes.key?(:'event')
         self.event = attributes[:'event']
+      else
+        self.event = nil
       end
 
       if attributes.key?(:'message')
         self.message = attributes[:'message']
+      else
+        self.message = nil
       end
 
       if attributes.key?(:'conversation')
         self.conversation = attributes[:'conversation']
+      else
+        self.conversation = nil
       end
 
       if attributes.key?(:'account')
         self.account = attributes[:'account']
+      else
+        self.account = nil
       end
 
       if attributes.key?(:'metadata')
@@ -128,6 +147,8 @@ module Late
 
       if attributes.key?(:'timestamp')
         self.timestamp = attributes[:'timestamp']
+      else
+        self.timestamp = nil
       end
     end
 
@@ -136,6 +157,30 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @event.nil?
+        invalid_properties.push('invalid value for "event", event cannot be nil.')
+      end
+
+      if @message.nil?
+        invalid_properties.push('invalid value for "message", message cannot be nil.')
+      end
+
+      if @conversation.nil?
+        invalid_properties.push('invalid value for "conversation", conversation cannot be nil.')
+      end
+
+      if @account.nil?
+        invalid_properties.push('invalid value for "account", account cannot be nil.')
+      end
+
+      if @timestamp.nil?
+        invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -143,9 +188,25 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @id.nil?
+      return false if @event.nil?
       event_validator = EnumAttributeValidator.new('String', ["message.received"])
       return false unless event_validator.valid?(@event)
+      return false if @message.nil?
+      return false if @conversation.nil?
+      return false if @account.nil?
+      return false if @timestamp.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
+      end
+
+      @id = id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -158,11 +219,52 @@ module Late
       @event = event
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] message Value to be assigned
+    def message=(message)
+      if message.nil?
+        fail ArgumentError, 'message cannot be nil'
+      end
+
+      @message = message
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] conversation Value to be assigned
+    def conversation=(conversation)
+      if conversation.nil?
+        fail ArgumentError, 'conversation cannot be nil'
+      end
+
+      @conversation = conversation
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] account Value to be assigned
+    def account=(account)
+      if account.nil?
+        fail ArgumentError, 'account cannot be nil'
+      end
+
+      @account = account
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] timestamp Value to be assigned
+    def timestamp=(timestamp)
+      if timestamp.nil?
+        fail ArgumentError, 'timestamp cannot be nil'
+      end
+
+      @timestamp = timestamp
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           event == o.event &&
           message == o.message &&
           conversation == o.conversation &&
@@ -180,7 +282,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [event, message, conversation, account, metadata, timestamp].hash
+      [id, event, message, conversation, account, metadata, timestamp].hash
     end
 
     # Builds the object from hash

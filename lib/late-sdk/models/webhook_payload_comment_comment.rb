@@ -125,38 +125,56 @@ module Late
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      else
+        self.id = nil
       end
 
       if attributes.key?(:'post_id')
         self.post_id = attributes[:'post_id']
+      else
+        self.post_id = nil
       end
 
       if attributes.key?(:'platform_post_id')
         self.platform_post_id = attributes[:'platform_post_id']
+      else
+        self.platform_post_id = nil
       end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
+      else
+        self.platform = nil
       end
 
       if attributes.key?(:'text')
         self.text = attributes[:'text']
+      else
+        self.text = nil
       end
 
       if attributes.key?(:'author')
         self.author = attributes[:'author']
+      else
+        self.author = nil
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
+      else
+        self.created_at = nil
       end
 
       if attributes.key?(:'is_reply')
         self.is_reply = attributes[:'is_reply']
+      else
+        self.is_reply = nil
       end
 
       if attributes.key?(:'parent_comment_id')
         self.parent_comment_id = attributes[:'parent_comment_id']
+      else
+        self.parent_comment_id = nil
       end
     end
 
@@ -165,6 +183,42 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @post_id.nil?
+        invalid_properties.push('invalid value for "post_id", post_id cannot be nil.')
+      end
+
+      if @platform_post_id.nil?
+        invalid_properties.push('invalid value for "platform_post_id", platform_post_id cannot be nil.')
+      end
+
+      if @platform.nil?
+        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
+      end
+
+      if @text.nil?
+        invalid_properties.push('invalid value for "text", text cannot be nil.')
+      end
+
+      if @author.nil?
+        invalid_properties.push('invalid value for "author", author cannot be nil.')
+      end
+
+      if @created_at.nil?
+        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+      end
+
+      if @is_reply.nil?
+        invalid_properties.push('invalid value for "is_reply", is_reply cannot be nil.')
+      end
+
+      if @parent_comment_id.nil?
+        invalid_properties.push('invalid value for "parent_comment_id", parent_comment_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -172,9 +226,48 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @id.nil?
+      return false if @post_id.nil?
+      return false if @platform_post_id.nil?
+      return false if @platform.nil?
       platform_validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "twitter", "youtube", "linkedin", "bluesky", "reddit"])
       return false unless platform_validator.valid?(@platform)
+      return false if @text.nil?
+      return false if @author.nil?
+      return false if @created_at.nil?
+      return false if @is_reply.nil?
+      return false if @parent_comment_id.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
+      end
+
+      @id = id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] post_id Value to be assigned
+    def post_id=(post_id)
+      if post_id.nil?
+        fail ArgumentError, 'post_id cannot be nil'
+      end
+
+      @post_id = post_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] platform_post_id Value to be assigned
+    def platform_post_id=(platform_post_id)
+      if platform_post_id.nil?
+        fail ArgumentError, 'platform_post_id cannot be nil'
+      end
+
+      @platform_post_id = platform_post_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -185,6 +278,56 @@ module Late
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] text Value to be assigned
+    def text=(text)
+      if text.nil?
+        fail ArgumentError, 'text cannot be nil'
+      end
+
+      @text = text
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] author Value to be assigned
+    def author=(author)
+      if author.nil?
+        fail ArgumentError, 'author cannot be nil'
+      end
+
+      @author = author
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] created_at Value to be assigned
+    def created_at=(created_at)
+      if created_at.nil?
+        fail ArgumentError, 'created_at cannot be nil'
+      end
+
+      @created_at = created_at
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] is_reply Value to be assigned
+    def is_reply=(is_reply)
+      if is_reply.nil?
+        fail ArgumentError, 'is_reply cannot be nil'
+      end
+
+      @is_reply = is_reply
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] parent_comment_id Value to be assigned
+    def parent_comment_id=(parent_comment_id)
+      if parent_comment_id.nil?
+        fail ArgumentError, 'parent_comment_id cannot be nil'
+      end
+
+      @parent_comment_id = parent_comment_id
     end
 
     # Checks equality by comparing each attribute.

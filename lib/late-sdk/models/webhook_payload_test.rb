@@ -14,14 +14,15 @@ require 'date'
 require 'time'
 
 module Late
-  # Webhook payload for post events
-  class WebhookPayloadPost < ApiModelBase
+  # Webhook payload for test deliveries
+  class WebhookPayloadTest < ApiModelBase
     # Stable webhook event ID
     attr_accessor :id
 
     attr_accessor :event
 
-    attr_accessor :post
+    # Human-readable test message
+    attr_accessor :message
 
     attr_accessor :timestamp
 
@@ -52,7 +53,7 @@ module Late
       {
         :'id' => :'id',
         :'event' => :'event',
-        :'post' => :'post',
+        :'message' => :'message',
         :'timestamp' => :'timestamp'
       }
     end
@@ -72,7 +73,7 @@ module Late
       {
         :'id' => :'String',
         :'event' => :'String',
-        :'post' => :'WebhookPayloadPostPost',
+        :'message' => :'String',
         :'timestamp' => :'Time'
       }
     end
@@ -87,14 +88,14 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::WebhookPayloadPost` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::WebhookPayloadTest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::WebhookPayloadPost`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::WebhookPayloadTest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -111,10 +112,10 @@ module Late
         self.event = nil
       end
 
-      if attributes.key?(:'post')
-        self.post = attributes[:'post']
+      if attributes.key?(:'message')
+        self.message = attributes[:'message']
       else
-        self.post = nil
+        self.message = nil
       end
 
       if attributes.key?(:'timestamp')
@@ -137,8 +138,8 @@ module Late
         invalid_properties.push('invalid value for "event", event cannot be nil.')
       end
 
-      if @post.nil?
-        invalid_properties.push('invalid value for "post", post cannot be nil.')
+      if @message.nil?
+        invalid_properties.push('invalid value for "message", message cannot be nil.')
       end
 
       if @timestamp.nil?
@@ -154,9 +155,9 @@ module Late
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @id.nil?
       return false if @event.nil?
-      event_validator = EnumAttributeValidator.new('String', ["post.scheduled", "post.published", "post.failed", "post.partial", "post.cancelled", "post.recycled"])
+      event_validator = EnumAttributeValidator.new('String', ["webhook.test"])
       return false unless event_validator.valid?(@event)
-      return false if @post.nil?
+      return false if @message.nil?
       return false if @timestamp.nil?
       true
     end
@@ -174,7 +175,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] event Object to be assigned
     def event=(event)
-      validator = EnumAttributeValidator.new('String', ["post.scheduled", "post.published", "post.failed", "post.partial", "post.cancelled", "post.recycled"])
+      validator = EnumAttributeValidator.new('String', ["webhook.test"])
       unless validator.valid?(event)
         fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
       end
@@ -182,13 +183,13 @@ module Late
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] post Value to be assigned
-    def post=(post)
-      if post.nil?
-        fail ArgumentError, 'post cannot be nil'
+    # @param [Object] message Value to be assigned
+    def message=(message)
+      if message.nil?
+        fail ArgumentError, 'message cannot be nil'
       end
 
-      @post = post
+      @message = message
     end
 
     # Custom attribute writer method with validation
@@ -208,7 +209,7 @@ module Late
       self.class == o.class &&
           id == o.id &&
           event == o.event &&
-          post == o.post &&
+          message == o.message &&
           timestamp == o.timestamp
     end
 
@@ -221,7 +222,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event, post, timestamp].hash
+      [id, event, message, timestamp].hash
     end
 
     # Builds the object from hash

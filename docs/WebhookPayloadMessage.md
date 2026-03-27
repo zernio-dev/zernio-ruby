@@ -4,12 +4,13 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **event** | **String** |  | [optional] |
-| **message** | [**WebhookPayloadMessageMessage**](WebhookPayloadMessageMessage.md) |  | [optional] |
-| **conversation** | [**WebhookPayloadMessageConversation**](WebhookPayloadMessageConversation.md) |  | [optional] |
-| **account** | [**WebhookPayloadMessageAccount**](WebhookPayloadMessageAccount.md) |  | [optional] |
+| **id** | **String** | Stable webhook event ID |  |
+| **event** | **String** |  |  |
+| **message** | [**WebhookPayloadMessageMessage**](WebhookPayloadMessageMessage.md) |  |  |
+| **conversation** | [**WebhookPayloadMessageConversation**](WebhookPayloadMessageConversation.md) |  |  |
+| **account** | [**WebhookPayloadMessageAccount**](WebhookPayloadMessageAccount.md) |  |  |
 | **metadata** | [**WebhookPayloadMessageMetadata**](WebhookPayloadMessageMetadata.md) |  | [optional] |
-| **timestamp** | **Time** |  | [optional] |
+| **timestamp** | **Time** |  |  |
 
 ## Example
 
@@ -17,6 +18,7 @@
 require 'late-sdk'
 
 instance = Late::WebhookPayloadMessage.new(
+  id: null,
   event: null,
   message: null,
   conversation: null,

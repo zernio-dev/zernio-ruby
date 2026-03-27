@@ -4,15 +4,15 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Platform comment ID | [optional] |
-| **post_id** | **String** | Internal post ID | [optional] |
-| **platform_post_id** | **String** | Platform&#39;s post ID | [optional] |
-| **platform** | **String** |  | [optional] |
-| **text** | **String** | Comment text content | [optional] |
-| **author** | [**WebhookPayloadCommentCommentAuthor**](WebhookPayloadCommentCommentAuthor.md) |  | [optional] |
-| **created_at** | **Time** |  | [optional] |
-| **is_reply** | **Boolean** | Whether this is a reply to another comment | [optional] |
-| **parent_comment_id** | **String** | Parent comment ID if this is a reply | [optional] |
+| **id** | **String** | Platform comment ID |  |
+| **post_id** | **String** | Internal post ID |  |
+| **platform_post_id** | **String** | Platform&#39;s post ID |  |
+| **platform** | **String** |  |  |
+| **text** | **String** | Comment text content |  |
+| **author** | [**WebhookPayloadCommentCommentAuthor**](WebhookPayloadCommentCommentAuthor.md) |  |  |
+| **created_at** | **Time** |  |  |
+| **is_reply** | **Boolean** | Whether this is a reply to another comment |  |
+| **parent_comment_id** | **String** | Parent comment ID if this is a reply |  |
 
 ## Example
 

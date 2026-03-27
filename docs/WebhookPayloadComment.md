@@ -4,11 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **event** | **String** |  | [optional] |
-| **comment** | [**WebhookPayloadCommentComment**](WebhookPayloadCommentComment.md) |  | [optional] |
-| **post** | [**WebhookPayloadCommentPost**](WebhookPayloadCommentPost.md) |  | [optional] |
-| **account** | [**WebhookPayloadCommentAccount**](WebhookPayloadCommentAccount.md) |  | [optional] |
-| **timestamp** | **Time** |  | [optional] |
+| **id** | **String** | Stable webhook event ID |  |
+| **event** | **String** |  |  |
+| **comment** | [**WebhookPayloadCommentComment**](WebhookPayloadCommentComment.md) |  |  |
+| **post** | [**WebhookPayloadCommentPost**](WebhookPayloadCommentPost.md) |  |  |
+| **account** | [**WebhookPayloadCommentAccount**](WebhookPayloadCommentAccount.md) |  |  |
+| **timestamp** | **Time** |  |  |
 
 ## Example
 
@@ -16,6 +17,7 @@
 require 'late-sdk'
 
 instance = Late::WebhookPayloadComment.new(
+  id: null,
   event: null,
   comment: null,
   post: null,

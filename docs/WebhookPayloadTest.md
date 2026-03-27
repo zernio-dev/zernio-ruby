@@ -1,4 +1,4 @@
-# Late::WebhookPayloadAccountDisconnected
+# Late::WebhookPayloadTest
 
 ## Properties
 
@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Stable webhook event ID |  |
 | **event** | **String** |  |  |
-| **account** | [**WebhookPayloadAccountDisconnectedAccount**](WebhookPayloadAccountDisconnectedAccount.md) |  |  |
+| **message** | **String** | Human-readable test message |  |
 | **timestamp** | **Time** |  |  |
 
 ## Example
@@ -14,10 +14,10 @@
 ```ruby
 require 'late-sdk'
 
-instance = Late::WebhookPayloadAccountDisconnected.new(
+instance = Late::WebhookPayloadTest.new(
   id: null,
   event: null,
-  account: null,
+  message: null,
   timestamp: null
 )
 ```

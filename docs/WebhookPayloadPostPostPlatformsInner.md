@@ -4,8 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **platform** | **String** |  | [optional] |
-| **status** | **String** |  | [optional] |
+| **platform** | **String** |  |  |
+| **status** | **String** |  |  |
+| **platform_post_id** | **String** |  | [optional] |
 | **published_url** | **String** |  | [optional] |
 | **error** | **String** |  | [optional] |
 
@@ -17,6 +18,7 @@ require 'late-sdk'
 instance = Late::WebhookPayloadPostPostPlatformsInner.new(
   platform: null,
   status: null,
+  platform_post_id: null,
   published_url: null,
   error: null
 )

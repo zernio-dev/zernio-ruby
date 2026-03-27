@@ -4,16 +4,16 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Internal message ID | [optional] |
-| **conversation_id** | **String** | Internal conversation ID | [optional] |
-| **platform** | **String** |  | [optional] |
-| **platform_message_id** | **String** | Platform&#39;s message ID | [optional] |
-| **direction** | **String** |  | [optional] |
-| **text** | **String** | Message text content | [optional] |
-| **attachments** | [**Array&lt;WebhookPayloadMessageMessageAttachmentsInner&gt;**](WebhookPayloadMessageMessageAttachmentsInner.md) |  | [optional] |
-| **sender** | [**WebhookPayloadMessageMessageSender**](WebhookPayloadMessageMessageSender.md) |  | [optional] |
-| **sent_at** | **Time** |  | [optional] |
-| **is_read** | **Boolean** |  | [optional] |
+| **id** | **String** | Internal message ID |  |
+| **conversation_id** | **String** | Internal conversation ID |  |
+| **platform** | **String** |  |  |
+| **platform_message_id** | **String** | Platform&#39;s message ID |  |
+| **direction** | **String** |  |  |
+| **text** | **String** | Message text content |  |
+| **attachments** | [**Array&lt;WebhookPayloadMessageMessageAttachmentsInner&gt;**](WebhookPayloadMessageMessageAttachmentsInner.md) |  |  |
+| **sender** | [**WebhookPayloadMessageMessageSender**](WebhookPayloadMessageMessageSender.md) |  |  |
+| **sent_at** | **Time** |  |  |
+| **is_read** | **Boolean** |  |  |
 
 ## Example
 

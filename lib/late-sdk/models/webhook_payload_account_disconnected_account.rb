@@ -115,18 +115,26 @@ module Late
 
       if attributes.key?(:'account_id')
         self.account_id = attributes[:'account_id']
+      else
+        self.account_id = nil
       end
 
       if attributes.key?(:'profile_id')
         self.profile_id = attributes[:'profile_id']
+      else
+        self.profile_id = nil
       end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
+      else
+        self.platform = nil
       end
 
       if attributes.key?(:'username')
         self.username = attributes[:'username']
+      else
+        self.username = nil
       end
 
       if attributes.key?(:'display_name')
@@ -135,10 +143,14 @@ module Late
 
       if attributes.key?(:'disconnection_type')
         self.disconnection_type = attributes[:'disconnection_type']
+      else
+        self.disconnection_type = nil
       end
 
       if attributes.key?(:'reason')
         self.reason = attributes[:'reason']
+      else
+        self.reason = nil
       end
     end
 
@@ -147,6 +159,30 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
+      if @profile_id.nil?
+        invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
+      end
+
+      if @platform.nil?
+        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
+      end
+
+      if @username.nil?
+        invalid_properties.push('invalid value for "username", username cannot be nil.')
+      end
+
+      if @disconnection_type.nil?
+        invalid_properties.push('invalid value for "disconnection_type", disconnection_type cannot be nil.')
+      end
+
+      if @reason.nil?
+        invalid_properties.push('invalid value for "reason", reason cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -154,9 +190,55 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @account_id.nil?
+      return false if @profile_id.nil?
+      return false if @platform.nil?
+      return false if @username.nil?
+      return false if @disconnection_type.nil?
       disconnection_type_validator = EnumAttributeValidator.new('String', ["intentional", "unintentional"])
       return false unless disconnection_type_validator.valid?(@disconnection_type)
+      return false if @reason.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] account_id Value to be assigned
+    def account_id=(account_id)
+      if account_id.nil?
+        fail ArgumentError, 'account_id cannot be nil'
+      end
+
+      @account_id = account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] profile_id Value to be assigned
+    def profile_id=(profile_id)
+      if profile_id.nil?
+        fail ArgumentError, 'profile_id cannot be nil'
+      end
+
+      @profile_id = profile_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] platform Value to be assigned
+    def platform=(platform)
+      if platform.nil?
+        fail ArgumentError, 'platform cannot be nil'
+      end
+
+      @platform = platform
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] username Value to be assigned
+    def username=(username)
+      if username.nil?
+        fail ArgumentError, 'username cannot be nil'
+      end
+
+      @username = username
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -167,6 +249,16 @@ module Late
         fail ArgumentError, "invalid value for \"disconnection_type\", must be one of #{validator.allowable_values}."
       end
       @disconnection_type = disconnection_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] reason Value to be assigned
+    def reason=(reason)
+      if reason.nil?
+        fail ArgumentError, 'reason cannot be nil'
+      end
+
+      @reason = reason
     end
 
     # Checks equality by comparing each attribute.

@@ -4,9 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **event** | **String** |  | [optional] |
-| **post** | [**WebhookPayloadPostPost**](WebhookPayloadPostPost.md) |  | [optional] |
-| **timestamp** | **Time** |  | [optional] |
+| **id** | **String** | Stable webhook event ID |  |
+| **event** | **String** |  |  |
+| **post** | [**WebhookPayloadPostPost**](WebhookPayloadPostPost.md) |  |  |
+| **timestamp** | **Time** |  |  |
 
 ## Example
 
@@ -14,6 +15,7 @@
 require 'late-sdk'
 
 instance = Late::WebhookPayloadPost.new(
+  id: null,
   event: null,
   post: null,
   timestamp: null

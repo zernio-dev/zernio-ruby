@@ -27,9 +27,6 @@ module Late
 
     attr_accessor :participant_picture
 
-    # X/Twitter verified badge type. Only present for Twitter/X conversations.
-    attr_accessor :participant_verified_type
-
     attr_accessor :status
 
     class EnumAttributeValidator
@@ -63,7 +60,6 @@ module Late
         :'participant_name' => :'participantName',
         :'participant_username' => :'participantUsername',
         :'participant_picture' => :'participantPicture',
-        :'participant_verified_type' => :'participantVerifiedType',
         :'status' => :'status'
       }
     end
@@ -87,7 +83,6 @@ module Late
         :'participant_name' => :'String',
         :'participant_username' => :'String',
         :'participant_picture' => :'String',
-        :'participant_verified_type' => :'String',
         :'status' => :'String'
       }
     end
@@ -116,10 +111,14 @@ module Late
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      else
+        self.id = nil
       end
 
       if attributes.key?(:'platform_conversation_id')
         self.platform_conversation_id = attributes[:'platform_conversation_id']
+      else
+        self.platform_conversation_id = nil
       end
 
       if attributes.key?(:'participant_id')
@@ -138,12 +137,10 @@ module Late
         self.participant_picture = attributes[:'participant_picture']
       end
 
-      if attributes.key?(:'participant_verified_type')
-        self.participant_verified_type = attributes[:'participant_verified_type']
-      end
-
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      else
+        self.status = nil
       end
     end
 
@@ -152,6 +149,18 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @platform_conversation_id.nil?
+        invalid_properties.push('invalid value for "platform_conversation_id", platform_conversation_id cannot be nil.')
+      end
+
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -159,21 +168,32 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      participant_verified_type_validator = EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
-      return false unless participant_verified_type_validator.valid?(@participant_verified_type)
+      return false if @id.nil?
+      return false if @platform_conversation_id.nil?
+      return false if @status.nil?
       status_validator = EnumAttributeValidator.new('String', ["active", "archived"])
       return false unless status_validator.valid?(@status)
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] participant_verified_type Object to be assigned
-    def participant_verified_type=(participant_verified_type)
-      validator = EnumAttributeValidator.new('String', ["blue", "government", "business", "none"])
-      unless validator.valid?(participant_verified_type)
-        fail ArgumentError, "invalid value for \"participant_verified_type\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
       end
-      @participant_verified_type = participant_verified_type
+
+      @id = id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] platform_conversation_id Value to be assigned
+    def platform_conversation_id=(platform_conversation_id)
+      if platform_conversation_id.nil?
+        fail ArgumentError, 'platform_conversation_id cannot be nil'
+      end
+
+      @platform_conversation_id = platform_conversation_id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -197,7 +217,6 @@ module Late
           participant_name == o.participant_name &&
           participant_username == o.participant_username &&
           participant_picture == o.participant_picture &&
-          participant_verified_type == o.participant_verified_type &&
           status == o.status
     end
 
@@ -210,7 +229,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform_conversation_id, participant_id, participant_name, participant_username, participant_picture, participant_verified_type, status].hash
+      [id, platform_conversation_id, participant_id, participant_name, participant_username, participant_picture, status].hash
     end
 
     # Builds the object from hash

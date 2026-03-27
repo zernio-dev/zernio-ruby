@@ -85,18 +85,26 @@ module Late
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      else
+        self.id = nil
       end
 
       if attributes.key?(:'content')
         self.content = attributes[:'content']
+      else
+        self.content = nil
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      else
+        self.status = nil
       end
 
       if attributes.key?(:'scheduled_for')
         self.scheduled_for = attributes[:'scheduled_for']
+      else
+        self.scheduled_for = nil
       end
 
       if attributes.key?(:'published_at')
@@ -107,6 +115,8 @@ module Late
         if (value = attributes[:'platforms']).is_a?(Array)
           self.platforms = value
         end
+      else
+        self.platforms = nil
       end
     end
 
@@ -115,6 +125,26 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @content.nil?
+        invalid_properties.push('invalid value for "content", content cannot be nil.')
+      end
+
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      end
+
+      if @scheduled_for.nil?
+        invalid_properties.push('invalid value for "scheduled_for", scheduled_for cannot be nil.')
+      end
+
+      if @platforms.nil?
+        invalid_properties.push('invalid value for "platforms", platforms cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -122,7 +152,62 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @id.nil?
+      return false if @content.nil?
+      return false if @status.nil?
+      return false if @scheduled_for.nil?
+      return false if @platforms.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
+      end
+
+      @id = id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] content Value to be assigned
+    def content=(content)
+      if content.nil?
+        fail ArgumentError, 'content cannot be nil'
+      end
+
+      @content = content
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] status Value to be assigned
+    def status=(status)
+      if status.nil?
+        fail ArgumentError, 'status cannot be nil'
+      end
+
+      @status = status
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] scheduled_for Value to be assigned
+    def scheduled_for=(scheduled_for)
+      if scheduled_for.nil?
+        fail ArgumentError, 'scheduled_for cannot be nil'
+      end
+
+      @scheduled_for = scheduled_for
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] platforms Value to be assigned
+    def platforms=(platforms)
+      if platforms.nil?
+        fail ArgumentError, 'platforms cannot be nil'
+      end
+
+      @platforms = platforms
     end
 
     # Checks equality by comparing each attribute.

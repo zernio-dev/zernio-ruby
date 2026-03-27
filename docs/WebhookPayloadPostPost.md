@@ -4,12 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  | [optional] |
-| **content** | **String** |  | [optional] |
-| **status** | **String** |  | [optional] |
-| **scheduled_for** | **Time** |  | [optional] |
+| **id** | **String** |  |  |
+| **content** | **String** |  |  |
+| **status** | **String** |  |  |
+| **scheduled_for** | **Time** |  |  |
 | **published_at** | **Time** |  | [optional] |
-| **platforms** | [**Array&lt;WebhookPayloadPostPostPlatformsInner&gt;**](WebhookPayloadPostPostPlatformsInner.md) |  | [optional] |
+| **platforms** | [**Array&lt;WebhookPayloadPostPostPlatformsInner&gt;**](WebhookPayloadPostPostPlatformsInner.md) |  |  |
 
 ## Example
 

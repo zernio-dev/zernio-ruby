@@ -4,9 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **event** | **String** |  | [optional] |
-| **account** | [**WebhookPayloadAccountConnectedAccount**](WebhookPayloadAccountConnectedAccount.md) |  | [optional] |
-| **timestamp** | **Time** |  | [optional] |
+| **id** | **String** | Stable webhook event ID |  |
+| **event** | **String** |  |  |
+| **account** | [**WebhookPayloadAccountConnectedAccount**](WebhookPayloadAccountConnectedAccount.md) |  |  |
+| **timestamp** | **Time** |  |  |
 
 ## Example
 
@@ -14,6 +15,7 @@
 require 'late-sdk'
 
 instance = Late::WebhookPayloadAccountConnected.new(
+  id: null,
   event: null,
   account: null,
   timestamp: null

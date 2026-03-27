@@ -19,6 +19,8 @@ module Late
 
     attr_accessor :status
 
+    attr_accessor :platform_post_id
+
     attr_accessor :published_url
 
     attr_accessor :error
@@ -28,6 +30,7 @@ module Late
       {
         :'platform' => :'platform',
         :'status' => :'status',
+        :'platform_post_id' => :'platformPostId',
         :'published_url' => :'publishedUrl',
         :'error' => :'error'
       }
@@ -48,6 +51,7 @@ module Late
       {
         :'platform' => :'String',
         :'status' => :'String',
+        :'platform_post_id' => :'String',
         :'published_url' => :'String',
         :'error' => :'String'
       }
@@ -77,10 +81,18 @@ module Late
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
+      else
+        self.platform = nil
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      else
+        self.status = nil
+      end
+
+      if attributes.key?(:'platform_post_id')
+        self.platform_post_id = attributes[:'platform_post_id']
       end
 
       if attributes.key?(:'published_url')
@@ -97,6 +109,14 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @platform.nil?
+        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
+      end
+
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -104,7 +124,29 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @platform.nil?
+      return false if @status.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] platform Value to be assigned
+    def platform=(platform)
+      if platform.nil?
+        fail ArgumentError, 'platform cannot be nil'
+      end
+
+      @platform = platform
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] status Value to be assigned
+    def status=(status)
+      if status.nil?
+        fail ArgumentError, 'status cannot be nil'
+      end
+
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -114,6 +156,7 @@ module Late
       self.class == o.class &&
           platform == o.platform &&
           status == o.status &&
+          platform_post_id == o.platform_post_id &&
           published_url == o.published_url &&
           error == o.error
     end
@@ -127,7 +170,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, status, published_url, error].hash
+      [platform, status, platform_post_id, published_url, error].hash
     end
 
     # Builds the object from hash
