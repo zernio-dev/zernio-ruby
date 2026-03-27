@@ -21,3 +21,6 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# Skip webhook event specs - generator creates specs but no API class for webhook operations
+spec/api/webhook_events_api_spec.rb
