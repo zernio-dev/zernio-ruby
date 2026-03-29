@@ -186,12 +186,17 @@ Class | Method | HTTP request | Description
 *Late::LogsApi* | [**list_connection_logs**](docs/LogsApi.md#list_connection_logs) | **GET** /v1/connections/logs | List connection logs
 *Late::LogsApi* | [**list_posts_logs**](docs/LogsApi.md#list_posts_logs) | **GET** /v1/posts/logs | List publishing logs
 *Late::MediaApi* | [**get_media_presigned_url**](docs/MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get presigned upload URL
+*Late::MessagesApi* | [**add_message_reaction**](docs/MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction
+*Late::MessagesApi* | [**delete_inbox_message**](docs/MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message
 *Late::MessagesApi* | [**edit_inbox_message**](docs/MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message
 *Late::MessagesApi* | [**get_inbox_conversation**](docs/MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation
 *Late::MessagesApi* | [**get_inbox_conversation_messages**](docs/MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages
 *Late::MessagesApi* | [**list_inbox_conversations**](docs/MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations
+*Late::MessagesApi* | [**remove_message_reaction**](docs/MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction
 *Late::MessagesApi* | [**send_inbox_message**](docs/MessagesApi.md#send_inbox_message) | **POST** /v1/inbox/conversations/{conversationId}/messages | Send message
+*Late::MessagesApi* | [**send_typing_indicator**](docs/MessagesApi.md#send_typing_indicator) | **POST** /v1/inbox/conversations/{conversationId}/typing | Send typing indicator
 *Late::MessagesApi* | [**update_inbox_conversation**](docs/MessagesApi.md#update_inbox_conversation) | **PUT** /v1/inbox/conversations/{conversationId} | Update conversation status
+*Late::MessagesApi* | [**upload_media_direct**](docs/MessagesApi.md#upload_media_direct) | **POST** /v1/media/upload-direct | Upload media file
 *Late::PostsApi* | [**bulk_upload_posts**](docs/PostsApi.md#bulk_upload_posts) | **POST** /v1/posts/bulk-upload | Bulk upload from CSV
 *Late::PostsApi* | [**create_post**](docs/PostsApi.md#create_post) | **POST** /v1/posts | Create post
 *Late::PostsApi* | [**delete_post**](docs/PostsApi.md#delete_post) | **DELETE** /v1/posts/{postId} | Delete post
@@ -313,6 +318,7 @@ Class | Method | HTTP request | Description
  - [Late::ActivateSequence200Response](docs/ActivateSequence200Response.md)
  - [Late::AddBroadcastRecipients200Response](docs/AddBroadcastRecipients200Response.md)
  - [Late::AddBroadcastRecipientsRequest](docs/AddBroadcastRecipientsRequest.md)
+ - [Late::AddMessageReactionRequest](docs/AddMessageReactionRequest.md)
  - [Late::AddWhatsAppBroadcastRecipients200Response](docs/AddWhatsAppBroadcastRecipients200Response.md)
  - [Late::AddWhatsAppBroadcastRecipientsRequest](docs/AddWhatsAppBroadcastRecipientsRequest.md)
  - [Late::AddWhatsAppBroadcastRecipientsRequestRecipientsInner](docs/AddWhatsAppBroadcastRecipientsRequestRecipientsInner.md)
@@ -825,6 +831,7 @@ Class | Method | HTTP request | Description
  - [Late::SendInboxMessageRequestTemplateElementsInnerButtonsInner](docs/SendInboxMessageRequestTemplateElementsInnerButtonsInner.md)
  - [Late::SendPrivateReplyToComment200Response](docs/SendPrivateReplyToComment200Response.md)
  - [Late::SendPrivateReplyToCommentRequest](docs/SendPrivateReplyToCommentRequest.md)
+ - [Late::SendTypingIndicatorRequest](docs/SendTypingIndicatorRequest.md)
  - [Late::SendWhatsAppBroadcast200Response](docs/SendWhatsAppBroadcast200Response.md)
  - [Late::SendWhatsAppBulk200Response](docs/SendWhatsAppBulk200Response.md)
  - [Late::SendWhatsAppBulk200ResponseResultsInner](docs/SendWhatsAppBulk200ResponseResultsInner.md)
@@ -921,6 +928,7 @@ Class | Method | HTTP request | Description
  - [Late::UpdateWhatsAppTemplate200Response](docs/UpdateWhatsAppTemplate200Response.md)
  - [Late::UpdateWhatsAppTemplate200ResponseTemplate](docs/UpdateWhatsAppTemplate200ResponseTemplate.md)
  - [Late::UpdateWhatsAppTemplateRequest](docs/UpdateWhatsAppTemplateRequest.md)
+ - [Late::UploadMediaDirect200Response](docs/UploadMediaDirect200Response.md)
  - [Late::UploadTokenResponse](docs/UploadTokenResponse.md)
  - [Late::UploadTokenStatusResponse](docs/UploadTokenStatusResponse.md)
  - [Late::UploadedFile](docs/UploadedFile.md)

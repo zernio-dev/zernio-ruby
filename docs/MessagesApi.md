@@ -4,12 +4,163 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**add_message_reaction**](MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction |
+| [**delete_inbox_message**](MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message |
 | [**edit_inbox_message**](MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message |
 | [**get_inbox_conversation**](MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation |
 | [**get_inbox_conversation_messages**](MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages |
 | [**list_inbox_conversations**](MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations |
+| [**remove_message_reaction**](MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction |
 | [**send_inbox_message**](MessagesApi.md#send_inbox_message) | **POST** /v1/inbox/conversations/{conversationId}/messages | Send message |
+| [**send_typing_indicator**](MessagesApi.md#send_typing_indicator) | **POST** /v1/inbox/conversations/{conversationId}/typing | Send typing indicator |
 | [**update_inbox_conversation**](MessagesApi.md#update_inbox_conversation) | **PUT** /v1/inbox/conversations/{conversationId} | Update conversation status |
+| [**upload_media_direct**](MessagesApi.md#upload_media_direct) | **POST** /v1/media/upload-direct | Upload media file |
+
+
+## add_message_reaction
+
+> <UpdateRedditSubreddits200Response> add_message_reaction(conversation_id, message_id, add_message_reaction_request)
+
+Add reaction
+
+Add an emoji reaction to a message. Platform support: - **Telegram**: Supports a subset of Unicode emoji reactions - **WhatsApp**: Supports any standard emoji (one reaction per message per sender) - **All others**: Returns 400 (not supported) 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | The conversation ID
+message_id = 'message_id_example' # String | The platform message ID to react to
+add_message_reaction_request = Late::AddMessageReactionRequest.new({account_id: 'account_id_example', emoji: '👍'}) # AddMessageReactionRequest | 
+
+begin
+  # Add reaction
+  result = api_instance.add_message_reaction(conversation_id, message_id, add_message_reaction_request)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->add_message_reaction: #{e}"
+end
+```
+
+#### Using the add_message_reaction_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request)
+
+```ruby
+begin
+  # Add reaction
+  data, status_code, headers = api_instance.add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateRedditSubreddits200Response>
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->add_message_reaction_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | The conversation ID |  |
+| **message_id** | **String** | The platform message ID to react to |  |
+| **add_message_reaction_request** | [**AddMessageReactionRequest**](AddMessageReactionRequest.md) |  |  |
+
+### Return type
+
+[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## delete_inbox_message
+
+> <UpdateRedditSubreddits200Response> delete_inbox_message(conversation_id, message_id, account_id)
+
+Delete message
+
+Delete a message from a conversation. Platform support varies: - **Telegram**: Full delete (bot's own messages anytime, others if admin) - **X/Twitter**: Full delete (own DM events only) - **Bluesky**: Delete for self only (recipient still sees it) - **Reddit**: Delete from sender's view only - **Facebook, Instagram, WhatsApp**: Not supported (returns 400) 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | The conversation ID
+message_id = 'message_id_example' # String | The platform message ID to delete
+account_id = 'account_id_example' # String | Social account ID
+
+begin
+  # Delete message
+  result = api_instance.delete_inbox_message(conversation_id, message_id, account_id)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->delete_inbox_message: #{e}"
+end
+```
+
+#### Using the delete_inbox_message_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> delete_inbox_message_with_http_info(conversation_id, message_id, account_id)
+
+```ruby
+begin
+  # Delete message
+  data, status_code, headers = api_instance.delete_inbox_message_with_http_info(conversation_id, message_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateRedditSubreddits200Response>
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->delete_inbox_message_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | The conversation ID |  |
+| **message_id** | **String** | The platform message ID to delete |  |
+| **account_id** | **String** | Social account ID |  |
+
+### Return type
+
+[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## edit_inbox_message
@@ -310,6 +461,79 @@ end
 - **Accept**: application/json
 
 
+## remove_message_reaction
+
+> <UpdateRedditSubreddits200Response> remove_message_reaction(conversation_id, message_id, account_id)
+
+Remove reaction
+
+Remove a reaction from a message. Platform support: - **Telegram**: Send empty reaction array to clear - **WhatsApp**: Send empty emoji to remove - **All others**: Returns 400 (not supported) 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | The conversation ID
+message_id = 'message_id_example' # String | The platform message ID
+account_id = 'account_id_example' # String | Social account ID
+
+begin
+  # Remove reaction
+  result = api_instance.remove_message_reaction(conversation_id, message_id, account_id)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->remove_message_reaction: #{e}"
+end
+```
+
+#### Using the remove_message_reaction_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> remove_message_reaction_with_http_info(conversation_id, message_id, account_id)
+
+```ruby
+begin
+  # Remove reaction
+  data, status_code, headers = api_instance.remove_message_reaction_with_http_info(conversation_id, message_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateRedditSubreddits200Response>
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->remove_message_reaction_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | The conversation ID |  |
+| **message_id** | **String** | The platform message ID |  |
+| **account_id** | **String** | Social account ID |  |
+
+### Return type
+
+[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## send_inbox_message
 
 > <SendInboxMessage200Response> send_inbox_message(conversation_id, send_inbox_message_request)
@@ -381,6 +605,77 @@ end
 - **Accept**: application/json
 
 
+## send_typing_indicator
+
+> <UpdateRedditSubreddits200Response> send_typing_indicator(conversation_id, send_typing_indicator_request)
+
+Send typing indicator
+
+Show a typing indicator in a conversation. Platform support: - **Facebook Messenger**: Shows \"Page is typing...\" for 20 seconds - **Telegram**: Shows \"Bot is typing...\" for 5 seconds - **All others**: Returns 200 but no-op (platform doesn't support it)  Typing indicators are best-effort. The endpoint always returns 200 even if the platform call fails. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | The conversation ID
+send_typing_indicator_request = Late::SendTypingIndicatorRequest.new({account_id: 'account_id_example'}) # SendTypingIndicatorRequest | 
+
+begin
+  # Send typing indicator
+  result = api_instance.send_typing_indicator(conversation_id, send_typing_indicator_request)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->send_typing_indicator: #{e}"
+end
+```
+
+#### Using the send_typing_indicator_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request)
+
+```ruby
+begin
+  # Send typing indicator
+  data, status_code, headers = api_instance.send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateRedditSubreddits200Response>
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->send_typing_indicator_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | The conversation ID |  |
+| **send_typing_indicator_request** | [**SendTypingIndicatorRequest**](SendTypingIndicatorRequest.md) |  |  |
+
+### Return type
+
+[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_inbox_conversation
 
 > <UpdateInboxConversation200Response> update_inbox_conversation(conversation_id, update_inbox_conversation_request)
@@ -449,5 +744,78 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## upload_media_direct
+
+> <UploadMediaDirect200Response> upload_media_direct(file, opts)
+
+Upload media file
+
+Upload a media file using API key authentication and get back a publicly accessible URL. The URL can be used as `attachmentUrl` when sending inbox messages.  Files are stored in temporary storage and auto-delete after 7 days. Maximum file size is 25MB.  Unlike `/v1/media/upload` (which uses upload tokens for end-user flows), this endpoint uses standard Bearer token authentication for programmatic use. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::MessagesApi.new
+file = File.new('/path/to/some/file') # File | The file to upload (max 25MB)
+opts = {
+  content_type: 'content_type_example' # String | Override MIME type (e.g. \\\"image/jpeg\\\"). Auto-detected from file if not provided.
+}
+
+begin
+  # Upload media file
+  result = api_instance.upload_media_direct(file, opts)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->upload_media_direct: #{e}"
+end
+```
+
+#### Using the upload_media_direct_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UploadMediaDirect200Response>, Integer, Hash)> upload_media_direct_with_http_info(file, opts)
+
+```ruby
+begin
+  # Upload media file
+  data, status_code, headers = api_instance.upload_media_direct_with_http_info(file, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UploadMediaDirect200Response>
+rescue Late::ApiError => e
+  puts "Error when calling MessagesApi->upload_media_direct_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **file** | **File** | The file to upload (max 25MB) |  |
+| **content_type** | **String** | Override MIME type (e.g. \\\&quot;image/jpeg\\\&quot;). Auto-detected from file if not provided. | [optional] |
+
+### Return type
+
+[**UploadMediaDirect200Response**](UploadMediaDirect200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 

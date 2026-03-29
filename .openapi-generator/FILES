@@ -17,6 +17,7 @@ docs/AccountsListResponse.md
 docs/ActivateSequence200Response.md
 docs/AddBroadcastRecipients200Response.md
 docs/AddBroadcastRecipientsRequest.md
+docs/AddMessageReactionRequest.md
 docs/AddWhatsAppBroadcastRecipients200Response.md
 docs/AddWhatsAppBroadcastRecipientsRequest.md
 docs/AddWhatsAppBroadcastRecipientsRequestRecipientsInner.md
@@ -552,6 +553,7 @@ docs/SendInboxMessageRequestTemplateElementsInner.md
 docs/SendInboxMessageRequestTemplateElementsInnerButtonsInner.md
 docs/SendPrivateReplyToComment200Response.md
 docs/SendPrivateReplyToCommentRequest.md
+docs/SendTypingIndicatorRequest.md
 docs/SendWhatsAppBroadcast200Response.md
 docs/SendWhatsAppBulk200Response.md
 docs/SendWhatsAppBulk200ResponseResultsInner.md
@@ -651,6 +653,7 @@ docs/UpdateWhatsAppGroupChatRequest.md
 docs/UpdateWhatsAppTemplate200Response.md
 docs/UpdateWhatsAppTemplate200ResponseTemplate.md
 docs/UpdateWhatsAppTemplateRequest.md
+docs/UploadMediaDirect200Response.md
 docs/UploadTokenResponse.md
 docs/UploadTokenStatusResponse.md
 docs/UploadedFile.md
@@ -767,6 +770,7 @@ lib/late-sdk/models/accounts_list_response.rb
 lib/late-sdk/models/activate_sequence200_response.rb
 lib/late-sdk/models/add_broadcast_recipients200_response.rb
 lib/late-sdk/models/add_broadcast_recipients_request.rb
+lib/late-sdk/models/add_message_reaction_request.rb
 lib/late-sdk/models/add_whats_app_broadcast_recipients200_response.rb
 lib/late-sdk/models/add_whats_app_broadcast_recipients_request.rb
 lib/late-sdk/models/add_whats_app_broadcast_recipients_request_recipients_inner.rb
@@ -1279,6 +1283,7 @@ lib/late-sdk/models/send_inbox_message_request_template_elements_inner.rb
 lib/late-sdk/models/send_inbox_message_request_template_elements_inner_buttons_inner.rb
 lib/late-sdk/models/send_private_reply_to_comment200_response.rb
 lib/late-sdk/models/send_private_reply_to_comment_request.rb
+lib/late-sdk/models/send_typing_indicator_request.rb
 lib/late-sdk/models/send_whats_app_broadcast200_response.rb
 lib/late-sdk/models/send_whats_app_bulk200_response.rb
 lib/late-sdk/models/send_whats_app_bulk200_response_results_inner.rb
@@ -1375,6 +1380,7 @@ lib/late-sdk/models/update_whats_app_group_chat_request.rb
 lib/late-sdk/models/update_whats_app_template200_response.rb
 lib/late-sdk/models/update_whats_app_template200_response_template.rb
 lib/late-sdk/models/update_whats_app_template_request.rb
+lib/late-sdk/models/upload_media_direct200_response.rb
 lib/late-sdk/models/upload_token_response.rb
 lib/late-sdk/models/upload_token_status_response.rb
 lib/late-sdk/models/uploaded_file.rb
@@ -1477,6 +1483,7 @@ spec/models/accounts_list_response_spec.rb
 spec/models/activate_sequence200_response_spec.rb
 spec/models/add_broadcast_recipients200_response_spec.rb
 spec/models/add_broadcast_recipients_request_spec.rb
+spec/models/add_message_reaction_request_spec.rb
 spec/models/add_whats_app_broadcast_recipients200_response_spec.rb
 spec/models/add_whats_app_broadcast_recipients_request_recipients_inner_spec.rb
 spec/models/add_whats_app_broadcast_recipients_request_spec.rb
@@ -1989,6 +1996,7 @@ spec/models/send_inbox_message_request_template_elements_inner_spec.rb
 spec/models/send_inbox_message_request_template_spec.rb
 spec/models/send_private_reply_to_comment200_response_spec.rb
 spec/models/send_private_reply_to_comment_request_spec.rb
+spec/models/send_typing_indicator_request_spec.rb
 spec/models/send_whats_app_broadcast200_response_spec.rb
 spec/models/send_whats_app_bulk200_response_results_inner_spec.rb
 spec/models/send_whats_app_bulk200_response_spec.rb
@@ -2085,6 +2093,7 @@ spec/models/update_whats_app_group_chat_request_spec.rb
 spec/models/update_whats_app_template200_response_spec.rb
 spec/models/update_whats_app_template200_response_template_spec.rb
 spec/models/update_whats_app_template_request_spec.rb
+spec/models/upload_media_direct200_response_spec.rb
 spec/models/upload_token_response_spec.rb
 spec/models/upload_token_status_response_spec.rb
 spec/models/uploaded_file_spec.rb

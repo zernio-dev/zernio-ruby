@@ -32,6 +32,34 @@ describe 'MessagesApi' do
     end
   end
 
+  # unit tests for add_message_reaction
+  # Add reaction
+  # Add an emoji reaction to a message. Platform support: - **Telegram**: Supports a subset of Unicode emoji reactions - **WhatsApp**: Supports any standard emoji (one reaction per message per sender) - **All others**: Returns 400 (not supported) 
+  # @param conversation_id The conversation ID
+  # @param message_id The platform message ID to react to
+  # @param add_message_reaction_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateRedditSubreddits200Response]
+  describe 'add_message_reaction test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_inbox_message
+  # Delete message
+  # Delete a message from a conversation. Platform support varies: - **Telegram**: Full delete (bot&#39;s own messages anytime, others if admin) - **X/Twitter**: Full delete (own DM events only) - **Bluesky**: Delete for self only (recipient still sees it) - **Reddit**: Delete from sender&#39;s view only - **Facebook, Instagram, WhatsApp**: Not supported (returns 400) 
+  # @param conversation_id The conversation ID
+  # @param message_id The platform message ID to delete
+  # @param account_id Social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateRedditSubreddits200Response]
+  describe 'delete_inbox_message test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for edit_inbox_message
   # Edit message
   # Edit the text and/or reply markup of a previously sent Telegram message. Only supported for Telegram. Returns 400 for other platforms. 
@@ -90,6 +118,20 @@ describe 'MessagesApi' do
     end
   end
 
+  # unit tests for remove_message_reaction
+  # Remove reaction
+  # Remove a reaction from a message. Platform support: - **Telegram**: Send empty reaction array to clear - **WhatsApp**: Send empty emoji to remove - **All others**: Returns 400 (not supported) 
+  # @param conversation_id The conversation ID
+  # @param message_id The platform message ID
+  # @param account_id Social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateRedditSubreddits200Response]
+  describe 'remove_message_reaction test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for send_inbox_message
   # Send message
   # Send a message in a conversation. Supports text, attachments, quick replies, buttons, and message tags. Attachment and interactive message support varies by platform.
@@ -103,6 +145,19 @@ describe 'MessagesApi' do
     end
   end
 
+  # unit tests for send_typing_indicator
+  # Send typing indicator
+  # Show a typing indicator in a conversation. Platform support: - **Facebook Messenger**: Shows \&quot;Page is typing...\&quot; for 20 seconds - **Telegram**: Shows \&quot;Bot is typing...\&quot; for 5 seconds - **All others**: Returns 200 but no-op (platform doesn&#39;t support it)  Typing indicators are best-effort. The endpoint always returns 200 even if the platform call fails. 
+  # @param conversation_id The conversation ID
+  # @param send_typing_indicator_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateRedditSubreddits200Response]
+  describe 'send_typing_indicator test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_inbox_conversation
   # Update conversation status
   # Archive or activate a conversation. Requires accountId in request body.
@@ -111,6 +166,19 @@ describe 'MessagesApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateInboxConversation200Response]
   describe 'update_inbox_conversation test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for upload_media_direct
+  # Upload media file
+  # Upload a media file using API key authentication and get back a publicly accessible URL. The URL can be used as &#x60;attachmentUrl&#x60; when sending inbox messages.  Files are stored in temporary storage and auto-delete after 7 days. Maximum file size is 25MB.  Unlike &#x60;/v1/media/upload&#x60; (which uses upload tokens for end-user flows), this endpoint uses standard Bearer token authentication for programmatic use. 
+  # @param file The file to upload (max 25MB)
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :content_type Override MIME type (e.g. \\\&quot;image/jpeg\\\&quot;). Auto-detected from file if not provided.
+  # @return [UploadMediaDirect200Response]
+  describe 'upload_media_direct test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

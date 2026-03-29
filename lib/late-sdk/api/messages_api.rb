@@ -19,6 +19,162 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Add reaction
+    # Add an emoji reaction to a message. Platform support: - **Telegram**: Supports a subset of Unicode emoji reactions - **WhatsApp**: Supports any standard emoji (one reaction per message per sender) - **All others**: Returns 400 (not supported) 
+    # @param conversation_id [String] The conversation ID
+    # @param message_id [String] The platform message ID to react to
+    # @param add_message_reaction_request [AddMessageReactionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateRedditSubreddits200Response]
+    def add_message_reaction(conversation_id, message_id, add_message_reaction_request, opts = {})
+      data, _status_code, _headers = add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request, opts)
+      data
+    end
+
+    # Add reaction
+    # Add an emoji reaction to a message. Platform support: - **Telegram**: Supports a subset of Unicode emoji reactions - **WhatsApp**: Supports any standard emoji (one reaction per message per sender) - **All others**: Returns 400 (not supported) 
+    # @param conversation_id [String] The conversation ID
+    # @param message_id [String] The platform message ID to react to
+    # @param add_message_reaction_request [AddMessageReactionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    def add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.add_message_reaction ...'
+      end
+      # verify the required parameter 'conversation_id' is set
+      if @api_client.config.client_side_validation && conversation_id.nil?
+        fail ArgumentError, "Missing the required parameter 'conversation_id' when calling MessagesApi.add_message_reaction"
+      end
+      # verify the required parameter 'message_id' is set
+      if @api_client.config.client_side_validation && message_id.nil?
+        fail ArgumentError, "Missing the required parameter 'message_id' when calling MessagesApi.add_message_reaction"
+      end
+      # verify the required parameter 'add_message_reaction_request' is set
+      if @api_client.config.client_side_validation && add_message_reaction_request.nil?
+        fail ArgumentError, "Missing the required parameter 'add_message_reaction_request' when calling MessagesApi.add_message_reaction"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions'.sub('{' + 'conversationId' + '}', CGI.escape(conversation_id.to_s)).sub('{' + 'messageId' + '}', CGI.escape(message_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(add_message_reaction_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.add_message_reaction",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#add_message_reaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete message
+    # Delete a message from a conversation. Platform support varies: - **Telegram**: Full delete (bot's own messages anytime, others if admin) - **X/Twitter**: Full delete (own DM events only) - **Bluesky**: Delete for self only (recipient still sees it) - **Reddit**: Delete from sender's view only - **Facebook, Instagram, WhatsApp**: Not supported (returns 400) 
+    # @param conversation_id [String] The conversation ID
+    # @param message_id [String] The platform message ID to delete
+    # @param account_id [String] Social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateRedditSubreddits200Response]
+    def delete_inbox_message(conversation_id, message_id, account_id, opts = {})
+      data, _status_code, _headers = delete_inbox_message_with_http_info(conversation_id, message_id, account_id, opts)
+      data
+    end
+
+    # Delete message
+    # Delete a message from a conversation. Platform support varies: - **Telegram**: Full delete (bot&#39;s own messages anytime, others if admin) - **X/Twitter**: Full delete (own DM events only) - **Bluesky**: Delete for self only (recipient still sees it) - **Reddit**: Delete from sender&#39;s view only - **Facebook, Instagram, WhatsApp**: Not supported (returns 400) 
+    # @param conversation_id [String] The conversation ID
+    # @param message_id [String] The platform message ID to delete
+    # @param account_id [String] Social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    def delete_inbox_message_with_http_info(conversation_id, message_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.delete_inbox_message ...'
+      end
+      # verify the required parameter 'conversation_id' is set
+      if @api_client.config.client_side_validation && conversation_id.nil?
+        fail ArgumentError, "Missing the required parameter 'conversation_id' when calling MessagesApi.delete_inbox_message"
+      end
+      # verify the required parameter 'message_id' is set
+      if @api_client.config.client_side_validation && message_id.nil?
+        fail ArgumentError, "Missing the required parameter 'message_id' when calling MessagesApi.delete_inbox_message"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling MessagesApi.delete_inbox_message"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/conversations/{conversationId}/messages/{messageId}'.sub('{' + 'conversationId' + '}', CGI.escape(conversation_id.to_s)).sub('{' + 'messageId' + '}', CGI.escape(message_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.delete_inbox_message",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#delete_inbox_message\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Edit message
     # Edit the text and/or reply markup of a previously sent Telegram message. Only supported for Telegram. Returns 400 for other platforms. 
     # @param conversation_id [String] The conversation ID
@@ -337,6 +493,82 @@ module Late
       return data, status_code, headers
     end
 
+    # Remove reaction
+    # Remove a reaction from a message. Platform support: - **Telegram**: Send empty reaction array to clear - **WhatsApp**: Send empty emoji to remove - **All others**: Returns 400 (not supported) 
+    # @param conversation_id [String] The conversation ID
+    # @param message_id [String] The platform message ID
+    # @param account_id [String] Social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateRedditSubreddits200Response]
+    def remove_message_reaction(conversation_id, message_id, account_id, opts = {})
+      data, _status_code, _headers = remove_message_reaction_with_http_info(conversation_id, message_id, account_id, opts)
+      data
+    end
+
+    # Remove reaction
+    # Remove a reaction from a message. Platform support: - **Telegram**: Send empty reaction array to clear - **WhatsApp**: Send empty emoji to remove - **All others**: Returns 400 (not supported) 
+    # @param conversation_id [String] The conversation ID
+    # @param message_id [String] The platform message ID
+    # @param account_id [String] Social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    def remove_message_reaction_with_http_info(conversation_id, message_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.remove_message_reaction ...'
+      end
+      # verify the required parameter 'conversation_id' is set
+      if @api_client.config.client_side_validation && conversation_id.nil?
+        fail ArgumentError, "Missing the required parameter 'conversation_id' when calling MessagesApi.remove_message_reaction"
+      end
+      # verify the required parameter 'message_id' is set
+      if @api_client.config.client_side_validation && message_id.nil?
+        fail ArgumentError, "Missing the required parameter 'message_id' when calling MessagesApi.remove_message_reaction"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling MessagesApi.remove_message_reaction"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions'.sub('{' + 'conversationId' + '}', CGI.escape(conversation_id.to_s)).sub('{' + 'messageId' + '}', CGI.escape(message_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.remove_message_reaction",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#remove_message_reaction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Send message
     # Send a message in a conversation. Supports text, attachments, quick replies, buttons, and message tags. Attachment and interactive message support varies by platform.
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
@@ -411,6 +643,80 @@ module Late
       return data, status_code, headers
     end
 
+    # Send typing indicator
+    # Show a typing indicator in a conversation. Platform support: - **Facebook Messenger**: Shows \"Page is typing...\" for 20 seconds - **Telegram**: Shows \"Bot is typing...\" for 5 seconds - **All others**: Returns 200 but no-op (platform doesn't support it)  Typing indicators are best-effort. The endpoint always returns 200 even if the platform call fails. 
+    # @param conversation_id [String] The conversation ID
+    # @param send_typing_indicator_request [SendTypingIndicatorRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateRedditSubreddits200Response]
+    def send_typing_indicator(conversation_id, send_typing_indicator_request, opts = {})
+      data, _status_code, _headers = send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request, opts)
+      data
+    end
+
+    # Send typing indicator
+    # Show a typing indicator in a conversation. Platform support: - **Facebook Messenger**: Shows \&quot;Page is typing...\&quot; for 20 seconds - **Telegram**: Shows \&quot;Bot is typing...\&quot; for 5 seconds - **All others**: Returns 200 but no-op (platform doesn&#39;t support it)  Typing indicators are best-effort. The endpoint always returns 200 even if the platform call fails. 
+    # @param conversation_id [String] The conversation ID
+    # @param send_typing_indicator_request [SendTypingIndicatorRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    def send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.send_typing_indicator ...'
+      end
+      # verify the required parameter 'conversation_id' is set
+      if @api_client.config.client_side_validation && conversation_id.nil?
+        fail ArgumentError, "Missing the required parameter 'conversation_id' when calling MessagesApi.send_typing_indicator"
+      end
+      # verify the required parameter 'send_typing_indicator_request' is set
+      if @api_client.config.client_side_validation && send_typing_indicator_request.nil?
+        fail ArgumentError, "Missing the required parameter 'send_typing_indicator_request' when calling MessagesApi.send_typing_indicator"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/conversations/{conversationId}/typing'.sub('{' + 'conversationId' + '}', CGI.escape(conversation_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(send_typing_indicator_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.send_typing_indicator",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#send_typing_indicator\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update conversation status
     # Archive or activate a conversation. Requires accountId in request body.
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
@@ -481,6 +787,78 @@ module Late
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: MessagesApi#update_inbox_conversation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Upload media file
+    # Upload a media file using API key authentication and get back a publicly accessible URL. The URL can be used as `attachmentUrl` when sending inbox messages.  Files are stored in temporary storage and auto-delete after 7 days. Maximum file size is 25MB.  Unlike `/v1/media/upload` (which uses upload tokens for end-user flows), this endpoint uses standard Bearer token authentication for programmatic use. 
+    # @param file [File] The file to upload (max 25MB)
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :content_type Override MIME type (e.g. \\\&quot;image/jpeg\\\&quot;). Auto-detected from file if not provided.
+    # @return [UploadMediaDirect200Response]
+    def upload_media_direct(file, opts = {})
+      data, _status_code, _headers = upload_media_direct_with_http_info(file, opts)
+      data
+    end
+
+    # Upload media file
+    # Upload a media file using API key authentication and get back a publicly accessible URL. The URL can be used as &#x60;attachmentUrl&#x60; when sending inbox messages.  Files are stored in temporary storage and auto-delete after 7 days. Maximum file size is 25MB.  Unlike &#x60;/v1/media/upload&#x60; (which uses upload tokens for end-user flows), this endpoint uses standard Bearer token authentication for programmatic use. 
+    # @param file [File] The file to upload (max 25MB)
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :content_type Override MIME type (e.g. \\\&quot;image/jpeg\\\&quot;). Auto-detected from file if not provided.
+    # @return [Array<(UploadMediaDirect200Response, Integer, Hash)>] UploadMediaDirect200Response data, response status code and response headers
+    def upload_media_direct_with_http_info(file, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.upload_media_direct ...'
+      end
+      # verify the required parameter 'file' is set
+      if @api_client.config.client_side_validation && file.nil?
+        fail ArgumentError, "Missing the required parameter 'file' when calling MessagesApi.upload_media_direct"
+      end
+      # resource path
+      local_var_path = '/v1/media/upload-direct'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['multipart/form-data'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+      form_params['file'] = file
+      form_params['contentType'] = opts[:'content_type'] if !opts[:'content_type'].nil?
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UploadMediaDirect200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.upload_media_direct",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#upload_media_direct\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
