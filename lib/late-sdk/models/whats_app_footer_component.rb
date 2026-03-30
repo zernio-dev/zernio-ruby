@@ -131,7 +131,7 @@ module Late
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["FOOTER"])
+      type_validator = EnumAttributeValidator.new('String', ["footer"])
       return false unless type_validator.valid?(@type)
       return false if !@code_expiration_minutes.nil? && @code_expiration_minutes < 1
       true
@@ -140,7 +140,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["FOOTER"])
+      validator = EnumAttributeValidator.new('String', ["footer"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

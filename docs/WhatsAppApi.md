@@ -2975,7 +2975,7 @@ end
 
 api_instance = Late::WhatsAppApi.new
 template_name = 'template_name_example' # String | Template name
-update_whats_app_template_request = Late::UpdateWhatsAppTemplateRequest.new({account_id: 'account_id_example', components: [Late::WhatsAppBodyComponent.new({type: 'BODY', text: 'text_example'})]}) # UpdateWhatsAppTemplateRequest | 
+update_whats_app_template_request = Late::UpdateWhatsAppTemplateRequest.new({account_id: 'account_id_example', components: [Late::WhatsAppBodyComponent.new({type: 'body', text: 'text_example'})]}) # UpdateWhatsAppTemplateRequest | 
 
 begin
   # Update template

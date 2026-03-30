@@ -27,7 +27,7 @@ module Late
     # Template language code (e.g., en_US)
     attr_accessor :language
 
-    # Template components (HEADER, BODY, FOOTER, BUTTONS). Required for custom templates, omit when using library_template_name.
+    # Template components (header, body, footer, buttons). Required for custom templates, omit when using library_template_name.
     attr_accessor :components
 
     # Name of a pre-built template from Meta's template library (e.g., \"appointment_reminder\", \"auto_pay_reminder_1\", \"address_update\"). When provided, the template is pre-approved by Meta with no review wait. Omit `components` when using this field. 

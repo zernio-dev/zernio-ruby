@@ -30,7 +30,7 @@ describe Late::WhatsAppTemplateButton do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["QUICK_REPLY", "URL", "PHONE_NUMBER", "OTP", "FLOW", "MPM", "CATALOG"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "flow", "mpm", "catalog"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end
@@ -64,7 +64,7 @@ describe Late::WhatsAppTemplateButton do
   describe 'test attribute "otp_type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["COPY_CODE", "ONE_TAP", "ZERO_TAP"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["copy_code", "one_tap", "zero_tap"])
       # validator.allowable_values.each do |value|
       #   expect { instance.otp_type = value }.not_to raise_error
       # end

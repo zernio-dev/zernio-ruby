@@ -25,10 +25,10 @@ module Late
     # Example values for URL suffix variables
     attr_accessor :example
 
-    # Required when type is PHONE_NUMBER
+    # Required when type is phone_number
     attr_accessor :phone_number
 
-    # Required when type is OTP
+    # Required when type is otp
     attr_accessor :otp_type
 
     attr_accessor :autofill_text
@@ -225,10 +225,10 @@ module Late
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["QUICK_REPLY", "URL", "PHONE_NUMBER", "OTP", "FLOW", "MPM", "CATALOG"])
+      type_validator = EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "flow", "mpm", "catalog"])
       return false unless type_validator.valid?(@type)
       return false if @text.nil?
-      otp_type_validator = EnumAttributeValidator.new('String', ["COPY_CODE", "ONE_TAP", "ZERO_TAP"])
+      otp_type_validator = EnumAttributeValidator.new('String', ["copy_code", "one_tap", "zero_tap"])
       return false unless otp_type_validator.valid?(@otp_type)
       true
     end
@@ -236,7 +236,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["QUICK_REPLY", "URL", "PHONE_NUMBER", "OTP", "FLOW", "MPM", "CATALOG"])
+      validator = EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "flow", "mpm", "catalog"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -256,7 +256,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] otp_type Object to be assigned
     def otp_type=(otp_type)
-      validator = EnumAttributeValidator.new('String', ["COPY_CODE", "ONE_TAP", "ZERO_TAP"])
+      validator = EnumAttributeValidator.new('String', ["copy_code", "one_tap", "zero_tap"])
       unless validator.valid?(otp_type)
         fail ArgumentError, "invalid value for \"otp_type\", must be one of #{validator.allowable_values}."
       end

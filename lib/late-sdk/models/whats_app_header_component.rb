@@ -140,10 +140,10 @@ module Late
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["HEADER"])
+      type_validator = EnumAttributeValidator.new('String', ["header"])
       return false unless type_validator.valid?(@type)
       return false if @format.nil?
-      format_validator = EnumAttributeValidator.new('String', ["TEXT", "IMAGE", "VIDEO", "GIF", "DOCUMENT", "LOCATION"])
+      format_validator = EnumAttributeValidator.new('String', ["text", "image", "video", "gif", "document", "location"])
       return false unless format_validator.valid?(@format)
       true
     end
@@ -151,7 +151,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["HEADER"])
+      validator = EnumAttributeValidator.new('String', ["header"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -161,7 +161,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] format Object to be assigned
     def format=(format)
-      validator = EnumAttributeValidator.new('String', ["TEXT", "IMAGE", "VIDEO", "GIF", "DOCUMENT", "LOCATION"])
+      validator = EnumAttributeValidator.new('String', ["text", "image", "video", "gif", "document", "location"])
       unless validator.valid?(format)
         fail ArgumentError, "invalid value for \"format\", must be one of #{validator.allowable_values}."
       end

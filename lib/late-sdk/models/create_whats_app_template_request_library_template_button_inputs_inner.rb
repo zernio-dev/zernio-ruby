@@ -118,7 +118,7 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["QUICK_REPLY", "URL", "PHONE_NUMBER"])
+      type_validator = EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number"])
       return false unless type_validator.valid?(@type)
       true
     end
@@ -126,7 +126,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["QUICK_REPLY", "URL", "PHONE_NUMBER"])
+      validator = EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

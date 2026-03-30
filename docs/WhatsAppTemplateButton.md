@@ -8,8 +8,8 @@
 | **text** | **String** |  |  |
 | **url** | **String** | Required when type is URL | [optional] |
 | **example** | **Array&lt;String&gt;** | Example values for URL suffix variables | [optional] |
-| **phone_number** | **String** | Required when type is PHONE_NUMBER | [optional] |
-| **otp_type** | **String** | Required when type is OTP | [optional] |
+| **phone_number** | **String** | Required when type is phone_number | [optional] |
+| **otp_type** | **String** | Required when type is otp | [optional] |
 | **autofill_text** | **String** |  | [optional] |
 | **package_name** | **String** |  | [optional] |
 | **signature_hash** | **String** |  | [optional] |

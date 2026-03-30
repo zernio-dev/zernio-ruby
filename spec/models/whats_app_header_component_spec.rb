@@ -30,7 +30,7 @@ describe Late::WhatsAppHeaderComponent do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["HEADER"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["header"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end
@@ -40,7 +40,7 @@ describe Late::WhatsAppHeaderComponent do
   describe 'test attribute "format"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["TEXT", "IMAGE", "VIDEO", "GIF", "DOCUMENT", "LOCATION"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["text", "image", "video", "gif", "document", "location"])
       # validator.allowable_values.each do |value|
       #   expect { instance.format = value }.not_to raise_error
       # end
