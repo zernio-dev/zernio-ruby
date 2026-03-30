@@ -14,18 +14,14 @@ require 'date'
 require 'time'
 
 module Late
-  class UpdateWhatsAppTemplateRequest < ApiModelBase
-    # WhatsApp social account ID
-    attr_accessor :account_id
-
-    # Updated template components
-    attr_accessor :components
+  class WhatsAppBodyComponentExample < ApiModelBase
+    # Sample values for body variables (array of arrays)
+    attr_accessor :body_text
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
-        :'components' => :'components'
+        :'body_text' => :'body_text'
       }
     end
 
@@ -42,8 +38,7 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
-        :'components' => :'Array<WhatsAppTemplateComponent>'
+        :'body_text' => :'Array<Array<String>>'
       }
     end
 
@@ -57,30 +52,22 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::UpdateWhatsAppTemplateRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::WhatsAppBodyComponentExample` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::UpdateWhatsAppTemplateRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::WhatsAppBodyComponentExample`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      else
-        self.account_id = nil
-      end
-
-      if attributes.key?(:'components')
-        if (value = attributes[:'components']).is_a?(Array)
-          self.components = value
+      if attributes.key?(:'body_text')
+        if (value = attributes[:'body_text']).is_a?(Array)
+          self.body_text = value
         end
-      else
-        self.components = nil
       end
     end
 
@@ -89,18 +76,6 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
-      if @components.nil?
-        invalid_properties.push('invalid value for "components", components cannot be nil.')
-      end
-
-      if @components.length < 1
-        invalid_properties.push('invalid value for "components", number of items must be greater than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -108,34 +83,7 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
-      return false if @components.nil?
-      return false if @components.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
-      end
-
-      @account_id = account_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] components Value to be assigned
-    def components=(components)
-      if components.nil?
-        fail ArgumentError, 'components cannot be nil'
-      end
-
-      if components.length < 1
-        fail ArgumentError, 'invalid value for "components", number of items must be greater than or equal to 1.'
-      end
-
-      @components = components
     end
 
     # Checks equality by comparing each attribute.
@@ -143,8 +91,7 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          components == o.components
+          body_text == o.body_text
     end
 
     # @see the `==` method
@@ -156,7 +103,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, components].hash
+      [body_text].hash
     end
 
     # Builds the object from hash

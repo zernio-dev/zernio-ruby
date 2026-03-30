@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | WhatsApp social account ID |  |
-| **components** | **Array&lt;Object&gt;** | Updated template components |  |
+| **components** | [**Array&lt;WhatsAppTemplateComponent&gt;**](WhatsAppTemplateComponent.md) | Updated template components |  |
 
 ## Example
 

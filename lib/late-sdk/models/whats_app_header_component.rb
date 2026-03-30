@@ -14,18 +14,45 @@ require 'date'
 require 'time'
 
 module Late
-  class UpdateWhatsAppTemplateRequest < ApiModelBase
-    # WhatsApp social account ID
-    attr_accessor :account_id
+  class WhatsAppHeaderComponent < ApiModelBase
+    attr_accessor :type
 
-    # Updated template components
-    attr_accessor :components
+    attr_accessor :format
+
+    # Header text (may include {{1}} variable). Used when format is TEXT.
+    attr_accessor :text
+
+    attr_accessor :example
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
-        :'components' => :'components'
+        :'type' => :'type',
+        :'format' => :'format',
+        :'text' => :'text',
+        :'example' => :'example'
       }
     end
 
@@ -42,8 +69,10 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
-        :'components' => :'Array<WhatsAppTemplateComponent>'
+        :'type' => :'String',
+        :'format' => :'String',
+        :'text' => :'String',
+        :'example' => :'WhatsAppHeaderComponentExample'
       }
     end
 
@@ -57,30 +86,36 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::UpdateWhatsAppTemplateRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::WhatsAppHeaderComponent` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::UpdateWhatsAppTemplateRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::WhatsAppHeaderComponent`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       else
-        self.account_id = nil
+        self.type = nil
       end
 
-      if attributes.key?(:'components')
-        if (value = attributes[:'components']).is_a?(Array)
-          self.components = value
-        end
+      if attributes.key?(:'format')
+        self.format = attributes[:'format']
       else
-        self.components = nil
+        self.format = nil
+      end
+
+      if attributes.key?(:'text')
+        self.text = attributes[:'text']
+      end
+
+      if attributes.key?(:'example')
+        self.example = attributes[:'example']
       end
     end
 
@@ -89,16 +124,12 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
-      if @components.nil?
-        invalid_properties.push('invalid value for "components", components cannot be nil.')
-      end
-
-      if @components.length < 1
-        invalid_properties.push('invalid value for "components", number of items must be greater than or equal to 1.')
+      if @format.nil?
+        invalid_properties.push('invalid value for "format", format cannot be nil.')
       end
 
       invalid_properties
@@ -108,34 +139,33 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
-      return false if @components.nil?
-      return false if @components.length < 1
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["HEADER"])
+      return false unless type_validator.valid?(@type)
+      return false if @format.nil?
+      format_validator = EnumAttributeValidator.new('String', ["TEXT", "IMAGE", "VIDEO", "GIF", "DOCUMENT", "LOCATION"])
+      return false unless format_validator.valid?(@format)
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["HEADER"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
-
-      @account_id = account_id
+      @type = type
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] components Value to be assigned
-    def components=(components)
-      if components.nil?
-        fail ArgumentError, 'components cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] format Object to be assigned
+    def format=(format)
+      validator = EnumAttributeValidator.new('String', ["TEXT", "IMAGE", "VIDEO", "GIF", "DOCUMENT", "LOCATION"])
+      unless validator.valid?(format)
+        fail ArgumentError, "invalid value for \"format\", must be one of #{validator.allowable_values}."
       end
-
-      if components.length < 1
-        fail ArgumentError, 'invalid value for "components", number of items must be greater than or equal to 1.'
-      end
-
-      @components = components
+      @format = format
     end
 
     # Checks equality by comparing each attribute.
@@ -143,8 +173,10 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          components == o.components
+          type == o.type &&
+          format == o.format &&
+          text == o.text &&
+          example == o.example
     end
 
     # @see the `==` method
@@ -156,7 +188,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, components].hash
+      [type, format, text, example].hash
     end
 
     # Builds the object from hash

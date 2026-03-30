@@ -14,18 +14,46 @@ require 'date'
 require 'time'
 
 module Late
-  class UpdateWhatsAppTemplateRequest < ApiModelBase
-    # WhatsApp social account ID
-    attr_accessor :account_id
+  class WhatsAppBodyComponent < ApiModelBase
+    attr_accessor :type
 
-    # Updated template components
-    attr_accessor :components
+    # Body text with optional {{n}} variables
+    attr_accessor :text
+
+    # Add security recommendation text (authentication templates only)
+    attr_accessor :add_security_recommendation
+
+    attr_accessor :example
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
-        :'components' => :'components'
+        :'type' => :'type',
+        :'text' => :'text',
+        :'add_security_recommendation' => :'add_security_recommendation',
+        :'example' => :'example'
       }
     end
 
@@ -42,8 +70,10 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
-        :'components' => :'Array<WhatsAppTemplateComponent>'
+        :'type' => :'String',
+        :'text' => :'String',
+        :'add_security_recommendation' => :'Boolean',
+        :'example' => :'WhatsAppBodyComponentExample'
       }
     end
 
@@ -57,30 +87,36 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::UpdateWhatsAppTemplateRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::WhatsAppBodyComponent` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::UpdateWhatsAppTemplateRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::WhatsAppBodyComponent`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       else
-        self.account_id = nil
+        self.type = nil
       end
 
-      if attributes.key?(:'components')
-        if (value = attributes[:'components']).is_a?(Array)
-          self.components = value
-        end
+      if attributes.key?(:'text')
+        self.text = attributes[:'text']
       else
-        self.components = nil
+        self.text = nil
+      end
+
+      if attributes.key?(:'add_security_recommendation')
+        self.add_security_recommendation = attributes[:'add_security_recommendation']
+      end
+
+      if attributes.key?(:'example')
+        self.example = attributes[:'example']
       end
     end
 
@@ -89,16 +125,12 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
-      if @components.nil?
-        invalid_properties.push('invalid value for "components", components cannot be nil.')
-      end
-
-      if @components.length < 1
-        invalid_properties.push('invalid value for "components", number of items must be greater than or equal to 1.')
+      if @text.nil?
+        invalid_properties.push('invalid value for "text", text cannot be nil.')
       end
 
       invalid_properties
@@ -108,34 +140,31 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
-      return false if @components.nil?
-      return false if @components.length < 1
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["BODY"])
+      return false unless type_validator.valid?(@type)
+      return false if @text.nil?
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["BODY"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
-
-      @account_id = account_id
+      @type = type
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] components Value to be assigned
-    def components=(components)
-      if components.nil?
-        fail ArgumentError, 'components cannot be nil'
+    # @param [Object] text Value to be assigned
+    def text=(text)
+      if text.nil?
+        fail ArgumentError, 'text cannot be nil'
       end
 
-      if components.length < 1
-        fail ArgumentError, 'invalid value for "components", number of items must be greater than or equal to 1.'
-      end
-
-      @components = components
+      @text = text
     end
 
     # Checks equality by comparing each attribute.
@@ -143,8 +172,10 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          components == o.components
+          type == o.type &&
+          text == o.text &&
+          add_security_recommendation == o.add_security_recommendation &&
+          example == o.example
     end
 
     # @see the `==` method
@@ -156,7 +187,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, components].hash
+      [type, text, add_security_recommendation, example].hash
     end
 
     # Builds the object from hash

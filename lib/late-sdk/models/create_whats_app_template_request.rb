@@ -27,7 +27,7 @@ module Late
     # Template language code (e.g., en_US)
     attr_accessor :language
 
-    # Template components (header, body, footer, buttons). Required for custom templates, omit when using library_template_name.
+    # Template components (HEADER, BODY, FOOTER, BUTTONS). Required for custom templates, omit when using library_template_name.
     attr_accessor :components
 
     # Name of a pre-built template from Meta's template library (e.g., \"appointment_reminder\", \"auto_pay_reminder_1\", \"address_update\"). When provided, the template is pre-approved by Meta with no review wait. Omit `components` when using this field. 
@@ -92,7 +92,7 @@ module Late
         :'name' => :'String',
         :'category' => :'String',
         :'language' => :'String',
-        :'components' => :'Array<Object>',
+        :'components' => :'Array<WhatsAppTemplateComponent>',
         :'library_template_name' => :'String',
         :'library_template_body_inputs' => :'Object',
         :'library_template_button_inputs' => :'Array<CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner>'
@@ -192,6 +192,10 @@ module Late
         invalid_properties.push('invalid value for "language", language cannot be nil.')
       end
 
+      if !@components.nil? && @components.length < 1
+        invalid_properties.push('invalid value for "components", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -206,6 +210,7 @@ module Late
       category_validator = EnumAttributeValidator.new('String', ["AUTHENTICATION", "MARKETING", "UTILITY"])
       return false unless category_validator.valid?(@category)
       return false if @language.nil?
+      return false if !@components.nil? && @components.length < 1
       true
     end
 
@@ -252,6 +257,20 @@ module Late
       end
 
       @language = language
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] components Value to be assigned
+    def components=(components)
+      if components.nil?
+        fail ArgumentError, 'components cannot be nil'
+      end
+
+      if components.length < 1
+        fail ArgumentError, 'invalid value for "components", number of items must be greater than or equal to 1.'
+      end
+
+      @components = components
     end
 
     # Checks equality by comparing each attribute.
