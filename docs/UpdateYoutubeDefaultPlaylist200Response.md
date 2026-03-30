@@ -1,4 +1,4 @@
-# Late::UpdateRedditSubreddits200Response
+# Late::UpdateYoutubeDefaultPlaylist200Response
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'late-sdk'
 
-instance = Late::UpdateRedditSubreddits200Response.new(
+instance = Late::UpdateYoutubeDefaultPlaylist200Response.new(
   success: null
 )
 ```

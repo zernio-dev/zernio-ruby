@@ -83,7 +83,7 @@ end
 
 ## delete_webhook_settings
 
-> <UpdateRedditSubreddits200Response> delete_webhook_settings(id)
+> <UpdateYoutubeDefaultPlaylist200Response> delete_webhook_settings(id)
 
 Delete webhook
 
@@ -116,7 +116,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> delete_webhook_settings_with_http_info(id)
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> delete_webhook_settings_with_http_info(id)
 
 ```ruby
 begin
@@ -124,7 +124,7 @@ begin
   data, status_code, headers = api_instance.delete_webhook_settings_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateRedditSubreddits200Response>
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
 rescue Late::ApiError => e
   puts "Error when calling WebhooksApi->delete_webhook_settings_with_http_info: #{e}"
 end
@@ -138,7 +138,7 @@ end
 
 ### Return type
 
-[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 

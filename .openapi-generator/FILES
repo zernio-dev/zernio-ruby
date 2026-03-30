@@ -340,6 +340,8 @@ docs/GetYouTubeDailyViews403Response.md
 docs/GetYouTubeDailyViews500Response.md
 docs/GetYouTubeTranscript200Response.md
 docs/GetYouTubeTranscript200ResponseSegmentsInner.md
+docs/GetYoutubePlaylists200Response.md
+docs/GetYoutubePlaylists200ResponsePlaylistsInner.md
 docs/GoogleBusinessPlatformData.md
 docs/GoogleBusinessPlatformDataCallToAction.md
 docs/HandleOAuthCallbackRequest.md
@@ -636,7 +638,6 @@ docs/UpdateProfile200Response.md
 docs/UpdateProfileRequest.md
 docs/UpdateQueueSlot200Response.md
 docs/UpdateQueueSlotRequest.md
-docs/UpdateRedditSubreddits200Response.md
 docs/UpdateRedditSubredditsRequest.md
 docs/UpdateSequence200Response.md
 docs/UpdateSequence200ResponseSequence.md
@@ -653,6 +654,8 @@ docs/UpdateWhatsAppGroupChatRequest.md
 docs/UpdateWhatsAppTemplate200Response.md
 docs/UpdateWhatsAppTemplate200ResponseTemplate.md
 docs/UpdateWhatsAppTemplateRequest.md
+docs/UpdateYoutubeDefaultPlaylist200Response.md
+docs/UpdateYoutubeDefaultPlaylistRequest.md
 docs/UploadMediaDirect200Response.md
 docs/UploadTokenResponse.md
 docs/UploadTokenStatusResponse.md
@@ -1080,6 +1083,8 @@ lib/late-sdk/models/get_you_tube_daily_views403_response.rb
 lib/late-sdk/models/get_you_tube_daily_views500_response.rb
 lib/late-sdk/models/get_you_tube_transcript200_response.rb
 lib/late-sdk/models/get_you_tube_transcript200_response_segments_inner.rb
+lib/late-sdk/models/get_youtube_playlists200_response.rb
+lib/late-sdk/models/get_youtube_playlists200_response_playlists_inner.rb
 lib/late-sdk/models/google_business_platform_data.rb
 lib/late-sdk/models/google_business_platform_data_call_to_action.rb
 lib/late-sdk/models/handle_o_auth_callback_request.rb
@@ -1363,7 +1368,6 @@ lib/late-sdk/models/update_profile200_response.rb
 lib/late-sdk/models/update_profile_request.rb
 lib/late-sdk/models/update_queue_slot200_response.rb
 lib/late-sdk/models/update_queue_slot_request.rb
-lib/late-sdk/models/update_reddit_subreddits200_response.rb
 lib/late-sdk/models/update_reddit_subreddits_request.rb
 lib/late-sdk/models/update_sequence200_response.rb
 lib/late-sdk/models/update_sequence200_response_sequence.rb
@@ -1380,6 +1384,8 @@ lib/late-sdk/models/update_whats_app_group_chat_request.rb
 lib/late-sdk/models/update_whats_app_template200_response.rb
 lib/late-sdk/models/update_whats_app_template200_response_template.rb
 lib/late-sdk/models/update_whats_app_template_request.rb
+lib/late-sdk/models/update_youtube_default_playlist200_response.rb
+lib/late-sdk/models/update_youtube_default_playlist_request.rb
 lib/late-sdk/models/upload_media_direct200_response.rb
 lib/late-sdk/models/upload_token_response.rb
 lib/late-sdk/models/upload_token_status_response.rb
@@ -1793,6 +1799,8 @@ spec/models/get_you_tube_daily_views403_response_spec.rb
 spec/models/get_you_tube_daily_views500_response_spec.rb
 spec/models/get_you_tube_transcript200_response_segments_inner_spec.rb
 spec/models/get_you_tube_transcript200_response_spec.rb
+spec/models/get_youtube_playlists200_response_playlists_inner_spec.rb
+spec/models/get_youtube_playlists200_response_spec.rb
 spec/models/google_business_platform_data_call_to_action_spec.rb
 spec/models/google_business_platform_data_spec.rb
 spec/models/handle_o_auth_callback_request_spec.rb
@@ -2076,7 +2084,6 @@ spec/models/update_profile200_response_spec.rb
 spec/models/update_profile_request_spec.rb
 spec/models/update_queue_slot200_response_spec.rb
 spec/models/update_queue_slot_request_spec.rb
-spec/models/update_reddit_subreddits200_response_spec.rb
 spec/models/update_reddit_subreddits_request_spec.rb
 spec/models/update_sequence200_response_sequence_spec.rb
 spec/models/update_sequence200_response_spec.rb
@@ -2093,6 +2100,8 @@ spec/models/update_whats_app_group_chat_request_spec.rb
 spec/models/update_whats_app_template200_response_spec.rb
 spec/models/update_whats_app_template200_response_template_spec.rb
 spec/models/update_whats_app_template_request_spec.rb
+spec/models/update_youtube_default_playlist200_response_spec.rb
+spec/models/update_youtube_default_playlist_request_spec.rb
 spec/models/upload_media_direct200_response_spec.rb
 spec/models/upload_token_response_spec.rb
 spec/models/upload_token_status_response_spec.rb

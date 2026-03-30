@@ -34,6 +34,9 @@ module Late
     # YouTube video category ID. Defaults to 22 (People & Blogs). Common: 1 (Film), 2 (Autos), 10 (Music), 15 (Pets), 17 (Sports), 20 (Gaming), 23 (Comedy), 24 (Entertainment), 25 (News), 26 (Howto), 27 (Education), 28 (Science & Tech).
     attr_accessor :category_id
 
+    # Optional YouTube playlist ID to add the video to after upload (e.g. 'PLxxxxxxxxxxxxx'). Use GET /v1/accounts/{id}/youtube-playlists to list available playlists. Works for both immediate and scheduled uploads. Quota cost: 50 YouTube API units per call.
+    attr_accessor :playlist_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -64,7 +67,8 @@ module Late
         :'made_for_kids' => :'madeForKids',
         :'first_comment' => :'firstComment',
         :'contains_synthetic_media' => :'containsSyntheticMedia',
-        :'category_id' => :'categoryId'
+        :'category_id' => :'categoryId',
+        :'playlist_id' => :'playlistId'
       }
     end
 
@@ -86,7 +90,8 @@ module Late
         :'made_for_kids' => :'Boolean',
         :'first_comment' => :'String',
         :'contains_synthetic_media' => :'Boolean',
-        :'category_id' => :'String'
+        :'category_id' => :'String',
+        :'playlist_id' => :'String'
       }
     end
 
@@ -142,6 +147,10 @@ module Late
         self.category_id = attributes[:'category_id']
       else
         self.category_id = '22'
+      end
+
+      if attributes.key?(:'playlist_id')
+        self.playlist_id = attributes[:'playlist_id']
       end
     end
 
@@ -220,7 +229,8 @@ module Late
           made_for_kids == o.made_for_kids &&
           first_comment == o.first_comment &&
           contains_synthetic_media == o.contains_synthetic_media &&
-          category_id == o.category_id
+          category_id == o.category_id &&
+          playlist_id == o.playlist_id
     end
 
     # @see the `==` method
@@ -232,7 +242,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, visibility, made_for_kids, first_comment, contains_synthetic_media, category_id].hash
+      [title, visibility, made_for_kids, first_comment, contains_synthetic_media, category_id, playlist_id].hash
     end
 
     # Builds the object from hash

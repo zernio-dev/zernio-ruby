@@ -14,13 +14,16 @@ require 'date'
 require 'time'
 
 module Late
-  class UpdateRedditSubreddits200Response < ApiModelBase
-    attr_accessor :success
+  class GetYoutubePlaylists200Response < ApiModelBase
+    attr_accessor :playlists
+
+    attr_accessor :default_playlist_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success'
+        :'playlists' => :'playlists',
+        :'default_playlist_id' => :'defaultPlaylistId'
       }
     end
 
@@ -37,7 +40,8 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean'
+        :'playlists' => :'Array<GetYoutubePlaylists200ResponsePlaylistsInner>',
+        :'default_playlist_id' => :'String'
       }
     end
 
@@ -51,20 +55,26 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::UpdateRedditSubreddits200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetYoutubePlaylists200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::UpdateRedditSubreddits200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetYoutubePlaylists200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'playlists')
+        if (value = attributes[:'playlists']).is_a?(Array)
+          self.playlists = value
+        end
+      end
+
+      if attributes.key?(:'default_playlist_id')
+        self.default_playlist_id = attributes[:'default_playlist_id']
       end
     end
 
@@ -88,7 +98,8 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success
+          playlists == o.playlists &&
+          default_playlist_id == o.default_playlist_id
     end
 
     # @see the `==` method
@@ -100,7 +111,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success].hash
+      [playlists, default_playlist_id].hash
     end
 
     # Builds the object from hash

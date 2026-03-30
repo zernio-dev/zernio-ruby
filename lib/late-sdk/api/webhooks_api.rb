@@ -91,7 +91,7 @@ module Late
     # Permanently delete a webhook configuration.
     # @param id [String] Webhook ID to delete
     # @param [Hash] opts the optional parameters
-    # @return [UpdateRedditSubreddits200Response]
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
     def delete_webhook_settings(id, opts = {})
       data, _status_code, _headers = delete_webhook_settings_with_http_info(id, opts)
       data
@@ -101,7 +101,7 @@ module Late
     # Permanently delete a webhook configuration.
     # @param id [String] Webhook ID to delete
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
     def delete_webhook_settings_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WebhooksApi.delete_webhook_settings ...'
@@ -129,7 +129,7 @@ module Late
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

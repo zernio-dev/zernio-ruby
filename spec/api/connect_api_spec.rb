@@ -180,6 +180,18 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for get_youtube_playlists
+  # List YouTube playlists
+  # Returns the playlists available for a connected YouTube account. Use this to get a playlist ID when creating a YouTube post with the &#x60;playlistId&#x60; field.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetYoutubePlaylists200Response]
+  describe 'get_youtube_playlists test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for handle_o_auth_callback
   # Complete OAuth callback
   # Exchange the OAuth authorization code for tokens and connect the account to the specified profile.
@@ -391,8 +403,21 @@ describe 'ConnectApi' do
   # @param account_id 
   # @param update_reddit_subreddits_request 
   # @param [Hash] opts the optional parameters
-  # @return [UpdateRedditSubreddits200Response]
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'update_reddit_subreddits test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_youtube_default_playlist
+  # Set default YouTube playlist
+  # Sets the default playlist used when publishing videos for this account. When a post does not specify a &#x60;playlistId&#x60;, the default playlist is not automatically used (it is stored for client-side convenience).
+  # @param account_id 
+  # @param update_youtube_default_playlist_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'update_youtube_default_playlist test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

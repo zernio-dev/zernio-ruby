@@ -49,7 +49,7 @@ describe 'WebhooksApi' do
   # Permanently delete a webhook configuration.
   # @param id Webhook ID to delete
   # @param [Hash] opts the optional parameters
-  # @return [UpdateRedditSubreddits200Response]
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'delete_webhook_settings test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

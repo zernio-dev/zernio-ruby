@@ -25,7 +25,7 @@ module Late
     # @param message_id [String] The platform message ID to react to
     # @param add_message_reaction_request [AddMessageReactionRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [UpdateRedditSubreddits200Response]
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
     def add_message_reaction(conversation_id, message_id, add_message_reaction_request, opts = {})
       data, _status_code, _headers = add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request, opts)
       data
@@ -37,7 +37,7 @@ module Late
     # @param message_id [String] The platform message ID to react to
     # @param add_message_reaction_request [AddMessageReactionRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
     def add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: MessagesApi.add_message_reaction ...'
@@ -77,7 +77,7 @@ module Late
       post_body = opts[:debug_body] || @api_client.object_to_http_body(add_message_reaction_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -105,7 +105,7 @@ module Late
     # @param message_id [String] The platform message ID to delete
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
-    # @return [UpdateRedditSubreddits200Response]
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
     def delete_inbox_message(conversation_id, message_id, account_id, opts = {})
       data, _status_code, _headers = delete_inbox_message_with_http_info(conversation_id, message_id, account_id, opts)
       data
@@ -117,7 +117,7 @@ module Late
     # @param message_id [String] The platform message ID to delete
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
     def delete_inbox_message_with_http_info(conversation_id, message_id, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: MessagesApi.delete_inbox_message ...'
@@ -153,7 +153,7 @@ module Late
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -499,7 +499,7 @@ module Late
     # @param message_id [String] The platform message ID
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
-    # @return [UpdateRedditSubreddits200Response]
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
     def remove_message_reaction(conversation_id, message_id, account_id, opts = {})
       data, _status_code, _headers = remove_message_reaction_with_http_info(conversation_id, message_id, account_id, opts)
       data
@@ -511,7 +511,7 @@ module Late
     # @param message_id [String] The platform message ID
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
     def remove_message_reaction_with_http_info(conversation_id, message_id, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: MessagesApi.remove_message_reaction ...'
@@ -547,7 +547,7 @@ module Late
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -648,7 +648,7 @@ module Late
     # @param conversation_id [String] The conversation ID
     # @param send_typing_indicator_request [SendTypingIndicatorRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [UpdateRedditSubreddits200Response]
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
     def send_typing_indicator(conversation_id, send_typing_indicator_request, opts = {})
       data, _status_code, _headers = send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request, opts)
       data
@@ -659,7 +659,7 @@ module Late
     # @param conversation_id [String] The conversation ID
     # @param send_typing_indicator_request [SendTypingIndicatorRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
     def send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: MessagesApi.send_typing_indicator ...'
@@ -695,7 +695,7 @@ module Late
       post_body = opts[:debug_body] || @api_client.object_to_http_body(send_typing_indicator_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

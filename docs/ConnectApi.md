@@ -16,6 +16,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_reddit_flairs**](ConnectApi.md#get_reddit_flairs) | **GET** /v1/accounts/{accountId}/reddit-flairs | List subreddit flairs |
 | [**get_reddit_subreddits**](ConnectApi.md#get_reddit_subreddits) | **GET** /v1/accounts/{accountId}/reddit-subreddits | List Reddit subreddits |
 | [**get_telegram_connect_status**](ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code |
+| [**get_youtube_playlists**](ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists |
 | [**handle_o_auth_callback**](ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback |
 | [**initiate_telegram_connect**](ConnectApi.md#initiate_telegram_connect) | **POST** /v1/connect/telegram | Connect Telegram directly |
 | [**list_facebook_pages**](ConnectApi.md#list_facebook_pages) | **GET** /v1/connect/facebook/select-page | List Facebook pages |
@@ -33,6 +34,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_linked_in_organization**](ConnectApi.md#update_linked_in_organization) | **PUT** /v1/accounts/{accountId}/linkedin-organization | Switch LinkedIn account type |
 | [**update_pinterest_boards**](ConnectApi.md#update_pinterest_boards) | **PUT** /v1/accounts/{accountId}/pinterest-boards | Set default Pinterest board |
 | [**update_reddit_subreddits**](ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit |
+| [**update_youtube_default_playlist**](ConnectApi.md#update_youtube_default_playlist) | **PUT** /v1/accounts/{accountId}/youtube-playlists | Set default YouTube playlist |
 
 
 ## complete_telegram_connect
@@ -862,6 +864,75 @@ end
 ### Return type
 
 [**GetTelegramConnectStatus200Response**](GetTelegramConnectStatus200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_youtube_playlists
+
+> <GetYoutubePlaylists200Response> get_youtube_playlists(account_id)
+
+List YouTube playlists
+
+Returns the playlists available for a connected YouTube account. Use this to get a playlist ID when creating a YouTube post with the `playlistId` field.
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::ConnectApi.new
+account_id = 'account_id_example' # String | 
+
+begin
+  # List YouTube playlists
+  result = api_instance.get_youtube_playlists(account_id)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling ConnectApi->get_youtube_playlists: #{e}"
+end
+```
+
+#### Using the get_youtube_playlists_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetYoutubePlaylists200Response>, Integer, Hash)> get_youtube_playlists_with_http_info(account_id)
+
+```ruby
+begin
+  # List YouTube playlists
+  data, status_code, headers = api_instance.get_youtube_playlists_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetYoutubePlaylists200Response>
+rescue Late::ApiError => e
+  puts "Error when calling ConnectApi->get_youtube_playlists_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**GetYoutubePlaylists200Response**](GetYoutubePlaylists200Response.md)
 
 ### Authorization
 
@@ -2026,7 +2097,7 @@ end
 
 ## update_reddit_subreddits
 
-> <UpdateRedditSubreddits200Response> update_reddit_subreddits(account_id, update_reddit_subreddits_request)
+> <UpdateYoutubeDefaultPlaylist200Response> update_reddit_subreddits(account_id, update_reddit_subreddits_request)
 
 Set default subreddit
 
@@ -2060,7 +2131,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> update_reddit_subreddits_with_http_info(account_id, update_reddit_subreddits_request)
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> update_reddit_subreddits_with_http_info(account_id, update_reddit_subreddits_request)
 
 ```ruby
 begin
@@ -2068,7 +2139,7 @@ begin
   data, status_code, headers = api_instance.update_reddit_subreddits_with_http_info(account_id, update_reddit_subreddits_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateRedditSubreddits200Response>
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
 rescue Late::ApiError => e
   puts "Error when calling ConnectApi->update_reddit_subreddits_with_http_info: #{e}"
 end
@@ -2083,7 +2154,78 @@ end
 
 ### Return type
 
-[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_youtube_default_playlist
+
+> <UpdateYoutubeDefaultPlaylist200Response> update_youtube_default_playlist(account_id, update_youtube_default_playlist_request)
+
+Set default YouTube playlist
+
+Sets the default playlist used when publishing videos for this account. When a post does not specify a `playlistId`, the default playlist is not automatically used (it is stored for client-side convenience).
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::ConnectApi.new
+account_id = 'account_id_example' # String | 
+update_youtube_default_playlist_request = Late::UpdateYoutubeDefaultPlaylistRequest.new({default_playlist_id: 'default_playlist_id_example'}) # UpdateYoutubeDefaultPlaylistRequest | 
+
+begin
+  # Set default YouTube playlist
+  result = api_instance.update_youtube_default_playlist(account_id, update_youtube_default_playlist_request)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling ConnectApi->update_youtube_default_playlist: #{e}"
+end
+```
+
+#### Using the update_youtube_default_playlist_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> update_youtube_default_playlist_with_http_info(account_id, update_youtube_default_playlist_request)
+
+```ruby
+begin
+  # Set default YouTube playlist
+  data, status_code, headers = api_instance.update_youtube_default_playlist_with_http_info(account_id, update_youtube_default_playlist_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Late::ApiError => e
+  puts "Error when calling ConnectApi->update_youtube_default_playlist_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **update_youtube_default_playlist_request** | [**UpdateYoutubeDefaultPlaylistRequest**](UpdateYoutubeDefaultPlaylistRequest.md) |  |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 

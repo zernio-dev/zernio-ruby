@@ -19,7 +19,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## add_message_reaction
 
-> <UpdateRedditSubreddits200Response> add_message_reaction(conversation_id, message_id, add_message_reaction_request)
+> <UpdateYoutubeDefaultPlaylist200Response> add_message_reaction(conversation_id, message_id, add_message_reaction_request)
 
 Add reaction
 
@@ -54,7 +54,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request)
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request)
 
 ```ruby
 begin
@@ -62,7 +62,7 @@ begin
   data, status_code, headers = api_instance.add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateRedditSubreddits200Response>
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
 rescue Late::ApiError => e
   puts "Error when calling MessagesApi->add_message_reaction_with_http_info: #{e}"
 end
@@ -78,7 +78,7 @@ end
 
 ### Return type
 
-[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 
@@ -92,7 +92,7 @@ end
 
 ## delete_inbox_message
 
-> <UpdateRedditSubreddits200Response> delete_inbox_message(conversation_id, message_id, account_id)
+> <UpdateYoutubeDefaultPlaylist200Response> delete_inbox_message(conversation_id, message_id, account_id)
 
 Delete message
 
@@ -127,7 +127,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> delete_inbox_message_with_http_info(conversation_id, message_id, account_id)
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> delete_inbox_message_with_http_info(conversation_id, message_id, account_id)
 
 ```ruby
 begin
@@ -135,7 +135,7 @@ begin
   data, status_code, headers = api_instance.delete_inbox_message_with_http_info(conversation_id, message_id, account_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateRedditSubreddits200Response>
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
 rescue Late::ApiError => e
   puts "Error when calling MessagesApi->delete_inbox_message_with_http_info: #{e}"
 end
@@ -151,7 +151,7 @@ end
 
 ### Return type
 
-[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 
@@ -463,7 +463,7 @@ end
 
 ## remove_message_reaction
 
-> <UpdateRedditSubreddits200Response> remove_message_reaction(conversation_id, message_id, account_id)
+> <UpdateYoutubeDefaultPlaylist200Response> remove_message_reaction(conversation_id, message_id, account_id)
 
 Remove reaction
 
@@ -498,7 +498,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> remove_message_reaction_with_http_info(conversation_id, message_id, account_id)
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> remove_message_reaction_with_http_info(conversation_id, message_id, account_id)
 
 ```ruby
 begin
@@ -506,7 +506,7 @@ begin
   data, status_code, headers = api_instance.remove_message_reaction_with_http_info(conversation_id, message_id, account_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateRedditSubreddits200Response>
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
 rescue Late::ApiError => e
   puts "Error when calling MessagesApi->remove_message_reaction_with_http_info: #{e}"
 end
@@ -522,7 +522,7 @@ end
 
 ### Return type
 
-[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 
@@ -607,7 +607,7 @@ end
 
 ## send_typing_indicator
 
-> <UpdateRedditSubreddits200Response> send_typing_indicator(conversation_id, send_typing_indicator_request)
+> <UpdateYoutubeDefaultPlaylist200Response> send_typing_indicator(conversation_id, send_typing_indicator_request)
 
 Send typing indicator
 
@@ -641,7 +641,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateRedditSubreddits200Response>, Integer, Hash)> send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request)
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request)
 
 ```ruby
 begin
@@ -649,7 +649,7 @@ begin
   data, status_code, headers = api_instance.send_typing_indicator_with_http_info(conversation_id, send_typing_indicator_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateRedditSubreddits200Response>
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
 rescue Late::ApiError => e
   puts "Error when calling MessagesApi->send_typing_indicator_with_http_info: #{e}"
 end
@@ -664,7 +664,7 @@ end
 
 ### Return type
 
-[**UpdateRedditSubreddits200Response**](UpdateRedditSubreddits200Response.md)
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 

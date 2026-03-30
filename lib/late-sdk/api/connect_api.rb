@@ -813,6 +813,69 @@ module Late
       return data, status_code, headers
     end
 
+    # List YouTube playlists
+    # Returns the playlists available for a connected YouTube account. Use this to get a playlist ID when creating a YouTube post with the `playlistId` field.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetYoutubePlaylists200Response]
+    def get_youtube_playlists(account_id, opts = {})
+      data, _status_code, _headers = get_youtube_playlists_with_http_info(account_id, opts)
+      data
+    end
+
+    # List YouTube playlists
+    # Returns the playlists available for a connected YouTube account. Use this to get a playlist ID when creating a YouTube post with the &#x60;playlistId&#x60; field.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetYoutubePlaylists200Response, Integer, Hash)>] GetYoutubePlaylists200Response data, response status code and response headers
+    def get_youtube_playlists_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.get_youtube_playlists ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.get_youtube_playlists"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/youtube-playlists'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetYoutubePlaylists200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.get_youtube_playlists",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#get_youtube_playlists\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Complete OAuth callback
     # Exchange the OAuth authorization code for tokens and connect the account to the specified profile.
     # @param platform [String] 
@@ -1968,7 +2031,7 @@ module Late
     # @param account_id [String] 
     # @param update_reddit_subreddits_request [UpdateRedditSubredditsRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [UpdateRedditSubreddits200Response]
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
     def update_reddit_subreddits(account_id, update_reddit_subreddits_request, opts = {})
       data, _status_code, _headers = update_reddit_subreddits_with_http_info(account_id, update_reddit_subreddits_request, opts)
       data
@@ -1979,7 +2042,7 @@ module Late
     # @param account_id [String] 
     # @param update_reddit_subreddits_request [UpdateRedditSubredditsRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateRedditSubreddits200Response, Integer, Hash)>] UpdateRedditSubreddits200Response data, response status code and response headers
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
     def update_reddit_subreddits_with_http_info(account_id, update_reddit_subreddits_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConnectApi.update_reddit_subreddits ...'
@@ -2015,7 +2078,7 @@ module Late
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_reddit_subreddits_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateRedditSubreddits200Response'
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -2033,6 +2096,80 @@ module Late
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#update_reddit_subreddits\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Set default YouTube playlist
+    # Sets the default playlist used when publishing videos for this account. When a post does not specify a `playlistId`, the default playlist is not automatically used (it is stored for client-side convenience).
+    # @param account_id [String] 
+    # @param update_youtube_default_playlist_request [UpdateYoutubeDefaultPlaylistRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def update_youtube_default_playlist(account_id, update_youtube_default_playlist_request, opts = {})
+      data, _status_code, _headers = update_youtube_default_playlist_with_http_info(account_id, update_youtube_default_playlist_request, opts)
+      data
+    end
+
+    # Set default YouTube playlist
+    # Sets the default playlist used when publishing videos for this account. When a post does not specify a &#x60;playlistId&#x60;, the default playlist is not automatically used (it is stored for client-side convenience).
+    # @param account_id [String] 
+    # @param update_youtube_default_playlist_request [UpdateYoutubeDefaultPlaylistRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def update_youtube_default_playlist_with_http_info(account_id, update_youtube_default_playlist_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.update_youtube_default_playlist ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.update_youtube_default_playlist"
+      end
+      # verify the required parameter 'update_youtube_default_playlist_request' is set
+      if @api_client.config.client_side_validation && update_youtube_default_playlist_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_youtube_default_playlist_request' when calling ConnectApi.update_youtube_default_playlist"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/youtube-playlists'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_youtube_default_playlist_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.update_youtube_default_playlist",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#update_youtube_default_playlist\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

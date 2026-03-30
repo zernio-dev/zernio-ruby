@@ -39,7 +39,7 @@ describe 'MessagesApi' do
   # @param message_id The platform message ID to react to
   # @param add_message_reaction_request 
   # @param [Hash] opts the optional parameters
-  # @return [UpdateRedditSubreddits200Response]
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'add_message_reaction test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -53,7 +53,7 @@ describe 'MessagesApi' do
   # @param message_id The platform message ID to delete
   # @param account_id Social account ID
   # @param [Hash] opts the optional parameters
-  # @return [UpdateRedditSubreddits200Response]
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'delete_inbox_message test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -125,7 +125,7 @@ describe 'MessagesApi' do
   # @param message_id The platform message ID
   # @param account_id Social account ID
   # @param [Hash] opts the optional parameters
-  # @return [UpdateRedditSubreddits200Response]
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'remove_message_reaction test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -151,7 +151,7 @@ describe 'MessagesApi' do
   # @param conversation_id The conversation ID
   # @param send_typing_indicator_request 
   # @param [Hash] opts the optional parameters
-  # @return [UpdateRedditSubreddits200Response]
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'send_typing_indicator test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
