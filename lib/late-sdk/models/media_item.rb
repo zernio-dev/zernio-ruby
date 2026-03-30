@@ -34,7 +34,7 @@ module Late
     # Optional custom thumbnail/cover image URL for videos. Supported for Facebook video posts, Facebook Reels, and regular video uploads. Max 10MB, JPG/PNG recommended.
     attr_accessor :thumbnail
 
-    # Optional custom cover image URL for Instagram Reels
+    # Custom cover image URL for Instagram Reels. Can also be set via platformSpecificData.instagramThumbnail or platformSpecificData.reelCover. Resolution order: this field > platformSpecificData.instagramThumbnail > platformSpecificData.reelCover > platformSpecificData.thumbnailUrl (legacy).
     attr_accessor :instagram_thumbnail
 
     # Internal flag indicating the image was resized for TikTok

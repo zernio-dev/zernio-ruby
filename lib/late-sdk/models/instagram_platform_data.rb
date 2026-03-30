@@ -36,8 +36,14 @@ module Late
     # Custom name for original audio in Reels. Replaces the default \"Original Audio\" label. Can only be set once.
     attr_accessor :audio_name
 
-    # Millisecond offset from video start for the Reel thumbnail. Ignored if a custom thumbnail URL is provided. Defaults to 0.
+    # Millisecond offset from video start for the Reel cover frame. Ignored when instagramThumbnail or reelCover is provided. Defaults to 0.
     attr_accessor :thumb_offset
+
+    # Custom cover image URL for Instagram Reels (JPG or PNG, publicly accessible). Overrides thumbOffset when provided. Also accepted as reelCover (alias).
+    attr_accessor :instagram_thumbnail
+
+    # Alias for instagramThumbnail. If both are provided, instagramThumbnail takes priority.
+    attr_accessor :reel_cover
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -71,7 +77,9 @@ module Late
         :'trial_params' => :'trialParams',
         :'user_tags' => :'userTags',
         :'audio_name' => :'audioName',
-        :'thumb_offset' => :'thumbOffset'
+        :'thumb_offset' => :'thumbOffset',
+        :'instagram_thumbnail' => :'instagramThumbnail',
+        :'reel_cover' => :'reelCover'
       }
     end
 
@@ -95,7 +103,9 @@ module Late
         :'trial_params' => :'InstagramPlatformDataTrialParams',
         :'user_tags' => :'Array<InstagramPlatformDataUserTagsInner>',
         :'audio_name' => :'String',
-        :'thumb_offset' => :'Integer'
+        :'thumb_offset' => :'Integer',
+        :'instagram_thumbnail' => :'String',
+        :'reel_cover' => :'String'
       }
     end
 
@@ -158,6 +168,14 @@ module Late
       if attributes.key?(:'thumb_offset')
         self.thumb_offset = attributes[:'thumb_offset']
       end
+
+      if attributes.key?(:'instagram_thumbnail')
+        self.instagram_thumbnail = attributes[:'instagram_thumbnail']
+      end
+
+      if attributes.key?(:'reel_cover')
+        self.reel_cover = attributes[:'reel_cover']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -218,7 +236,9 @@ module Late
           trial_params == o.trial_params &&
           user_tags == o.user_tags &&
           audio_name == o.audio_name &&
-          thumb_offset == o.thumb_offset
+          thumb_offset == o.thumb_offset &&
+          instagram_thumbnail == o.instagram_thumbnail &&
+          reel_cover == o.reel_cover
     end
 
     # @see the `==` method
@@ -230,7 +250,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, thumb_offset].hash
+      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, thumb_offset, instagram_thumbnail, reel_cover].hash
     end
 
     # Builds the object from hash

@@ -11,7 +11,9 @@
 | **trial_params** | [**InstagramPlatformDataTrialParams**](InstagramPlatformDataTrialParams.md) |  | [optional] |
 | **user_tags** | [**Array&lt;InstagramPlatformDataUserTagsInner&gt;**](InstagramPlatformDataUserTagsInner.md) | Tag Instagram users in photos by username and position. Not supported for stories or videos. For carousels, use mediaIndex to target specific slides (defaults to 0). Tags on video items are silently skipped. | [optional] |
 | **audio_name** | **String** | Custom name for original audio in Reels. Replaces the default \&quot;Original Audio\&quot; label. Can only be set once. | [optional] |
-| **thumb_offset** | **Integer** | Millisecond offset from video start for the Reel thumbnail. Ignored if a custom thumbnail URL is provided. Defaults to 0. | [optional] |
+| **thumb_offset** | **Integer** | Millisecond offset from video start for the Reel cover frame. Ignored when instagramThumbnail or reelCover is provided. Defaults to 0. | [optional] |
+| **instagram_thumbnail** | **String** | Custom cover image URL for Instagram Reels (JPG or PNG, publicly accessible). Overrides thumbOffset when provided. Also accepted as reelCover (alias). | [optional] |
+| **reel_cover** | **String** | Alias for instagramThumbnail. If both are provided, instagramThumbnail takes priority. | [optional] |
 
 ## Example
 
@@ -26,7 +28,9 @@ instance = Late::InstagramPlatformData.new(
   trial_params: null,
   user_tags: null,
   audio_name: My Podcast Intro,
-  thumb_offset: 5000
+  thumb_offset: 5000,
+  instagram_thumbnail: null,
+  reel_cover: null
 )
 ```
 
