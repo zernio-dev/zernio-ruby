@@ -36,6 +36,9 @@ module Late
     # Last time follower count was updated (only included if user has analytics add-on)
     attr_accessor :followers_last_updated
 
+    # Platform-specific metadata. Fields vary by platform. For WhatsApp accounts, includes: - `qualityRating`: Phone number quality rating from Meta (`GREEN`, `YELLOW`, `RED`, or `UNKNOWN`) - `nameStatus`: Display name review status (`APPROVED`, `PENDING_REVIEW`, `DECLINED`, or `NONE`). Messages cannot be sent until the display name is approved by Meta. - `messagingLimitTier`: Maximum unique business-initiated conversations per 24h rolling window (`TIER_250`, `TIER_1K`, `TIER_10K`, `TIER_100K`, or `TIER_UNLIMITED`). Scales automatically as quality rating improves. - `verifiedName`: Meta-verified business display name - `displayPhoneNumber`: Formatted phone number (e.g., \"+1 555-123-4567\") - `wabaId`: WhatsApp Business Account ID - `phoneNumberId`: Meta phone number ID 
+    attr_accessor :metadata
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -47,7 +50,8 @@ module Late
         :'profile_url' => :'profileUrl',
         :'is_active' => :'isActive',
         :'followers_count' => :'followersCount',
-        :'followers_last_updated' => :'followersLastUpdated'
+        :'followers_last_updated' => :'followersLastUpdated',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -72,7 +76,8 @@ module Late
         :'profile_url' => :'String',
         :'is_active' => :'Boolean',
         :'followers_count' => :'Float',
-        :'followers_last_updated' => :'Time'
+        :'followers_last_updated' => :'Time',
+        :'metadata' => :'Object'
       }
     end
 
@@ -133,6 +138,10 @@ module Late
       if attributes.key?(:'followers_last_updated')
         self.followers_last_updated = attributes[:'followers_last_updated']
       end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -163,7 +172,8 @@ module Late
           profile_url == o.profile_url &&
           is_active == o.is_active &&
           followers_count == o.followers_count &&
-          followers_last_updated == o.followers_last_updated
+          followers_last_updated == o.followers_last_updated &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -175,7 +185,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated].hash
+      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, metadata].hash
     end
 
     # Builds the object from hash

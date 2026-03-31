@@ -27,12 +27,8 @@ module Late
 
     attr_accessor :is_active
 
-    attr_accessor :phone_number
-
-    attr_accessor :verified_name
-
-    # GREEN, YELLOW, or RED
-    attr_accessor :quality_rating
+    # The connected phone number
+    attr_accessor :selected_phone_number
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -64,9 +60,7 @@ module Late
         :'username' => :'username',
         :'display_name' => :'displayName',
         :'is_active' => :'isActive',
-        :'phone_number' => :'phoneNumber',
-        :'verified_name' => :'verifiedName',
-        :'quality_rating' => :'qualityRating'
+        :'selected_phone_number' => :'selectedPhoneNumber'
       }
     end
 
@@ -88,9 +82,7 @@ module Late
         :'username' => :'String',
         :'display_name' => :'String',
         :'is_active' => :'Boolean',
-        :'phone_number' => :'String',
-        :'verified_name' => :'String',
-        :'quality_rating' => :'String'
+        :'selected_phone_number' => :'String'
       }
     end
 
@@ -136,16 +128,8 @@ module Late
         self.is_active = attributes[:'is_active']
       end
 
-      if attributes.key?(:'phone_number')
-        self.phone_number = attributes[:'phone_number']
-      end
-
-      if attributes.key?(:'verified_name')
-        self.verified_name = attributes[:'verified_name']
-      end
-
-      if attributes.key?(:'quality_rating')
-        self.quality_rating = attributes[:'quality_rating']
+      if attributes.key?(:'selected_phone_number')
+        self.selected_phone_number = attributes[:'selected_phone_number']
       end
     end
 
@@ -186,9 +170,7 @@ module Late
           username == o.username &&
           display_name == o.display_name &&
           is_active == o.is_active &&
-          phone_number == o.phone_number &&
-          verified_name == o.verified_name &&
-          quality_rating == o.quality_rating
+          selected_phone_number == o.selected_phone_number
     end
 
     # @see the `==` method
@@ -200,7 +182,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, platform, username, display_name, is_active, phone_number, verified_name, quality_rating].hash
+      [account_id, platform, username, display_name, is_active, selected_phone_number].hash
     end
 
     # Builds the object from hash
