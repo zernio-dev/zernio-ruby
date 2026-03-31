@@ -39,6 +39,9 @@ module Late
     # Video privacy setting
     attr_accessor :privacy_status
 
+    # Public URL of a custom thumbnail image (JPEG, PNG, or GIF, max 2 MB, recommended 1280x720). Works on any video you own, including existing videos not published through Zernio. The channel must be verified (phone verification) to set custom thumbnails.
+    attr_accessor :thumbnail_url
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -71,7 +74,8 @@ module Late
         :'description' => :'description',
         :'tags' => :'tags',
         :'category_id' => :'categoryId',
-        :'privacy_status' => :'privacyStatus'
+        :'privacy_status' => :'privacyStatus',
+        :'thumbnail_url' => :'thumbnailUrl'
       }
     end
 
@@ -95,7 +99,8 @@ module Late
         :'description' => :'String',
         :'tags' => :'Array<String>',
         :'category_id' => :'String',
-        :'privacy_status' => :'String'
+        :'privacy_status' => :'String',
+        :'thumbnail_url' => :'String'
       }
     end
 
@@ -155,6 +160,10 @@ module Late
 
       if attributes.key?(:'privacy_status')
         self.privacy_status = attributes[:'privacy_status']
+      end
+
+      if attributes.key?(:'thumbnail_url')
+        self.thumbnail_url = attributes[:'thumbnail_url']
       end
     end
 
@@ -233,7 +242,8 @@ module Late
           description == o.description &&
           tags == o.tags &&
           category_id == o.category_id &&
-          privacy_status == o.privacy_status
+          privacy_status == o.privacy_status &&
+          thumbnail_url == o.thumbnail_url
     end
 
     # @see the `==` method
@@ -245,7 +255,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, video_id, account_id, title, description, tags, category_id, privacy_status].hash
+      [platform, video_id, account_id, title, description, tags, category_id, privacy_status, thumbnail_url].hash
     end
 
     # Builds the object from hash

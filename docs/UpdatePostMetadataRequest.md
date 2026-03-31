@@ -12,6 +12,7 @@
 | **tags** | **Array&lt;String&gt;** | Array of keyword tags (max 500 characters combined for YouTube) | [optional] |
 | **category_id** | **String** | YouTube video category ID | [optional] |
 | **privacy_status** | **String** | Video privacy setting | [optional] |
+| **thumbnail_url** | **String** | Public URL of a custom thumbnail image (JPEG, PNG, or GIF, max 2 MB, recommended 1280x720). Works on any video you own, including existing videos not published through Zernio. The channel must be verified (phone verification) to set custom thumbnails. | [optional] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = Late::UpdatePostMetadataRequest.new(
   description: null,
   tags: null,
   category_id: null,
-  privacy_status: null
+  privacy_status: null,
+  thumbnail_url: null
 )
 ```
 
