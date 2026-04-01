@@ -87,6 +87,23 @@ Class | Method | HTTP request | Description
 *Late::AccountsApi* | [**get_tik_tok_creator_info**](docs/AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info
 *Late::AccountsApi* | [**list_accounts**](docs/AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts
 *Late::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
+*Late::AdAudiencesApi* | [**add_users_to_ad_audience**](docs/AdAudiencesApi.md#add_users_to_ad_audience) | **POST** /v1/ads/audiences/{audienceId}/users | Add users to a customer list audience
+*Late::AdAudiencesApi* | [**create_ad_audience**](docs/AdAudiencesApi.md#create_ad_audience) | **POST** /v1/ads/audiences | Create a custom audience (Meta only)
+*Late::AdAudiencesApi* | [**delete_ad_audience**](docs/AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete a custom audience
+*Late::AdAudiencesApi* | [**get_ad_audience**](docs/AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details
+*Late::AdAudiencesApi* | [**list_ad_audiences**](docs/AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences
+*Late::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns with aggregate metrics
+*Late::AdCampaignsApi* | [**update_ad_campaign_status**](docs/AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign
+*Late::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost an existing post as a paid ad
+*Late::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create a standalone ad with custom creative
+*Late::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
+*Late::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
+*Late::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics with daily breakdown
+*Late::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts for a social account
+*Late::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
+*Late::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
+*Late::AdsApi* | [**sync_external_ads**](docs/AdsApi.md#sync_external_ads) | **POST** /v1/ads/sync | Sync external ads from platform ad managers
+*Late::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad (pause/resume, budget, targeting, name)
 *Late::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Late::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
 *Late::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
@@ -318,9 +335,17 @@ Class | Method | HTTP request | Description
  - [Late::AccountWithFollowerStatsAllOfAccountStats](docs/AccountWithFollowerStatsAllOfAccountStats.md)
  - [Late::AccountsListResponse](docs/AccountsListResponse.md)
  - [Late::ActivateSequence200Response](docs/ActivateSequence200Response.md)
+ - [Late::Ad](docs/Ad.md)
+ - [Late::AdBudget](docs/AdBudget.md)
+ - [Late::AdCampaign](docs/AdCampaign.md)
+ - [Late::AdMetrics](docs/AdMetrics.md)
+ - [Late::AdSchedule](docs/AdSchedule.md)
  - [Late::AddBroadcastRecipients200Response](docs/AddBroadcastRecipients200Response.md)
  - [Late::AddBroadcastRecipientsRequest](docs/AddBroadcastRecipientsRequest.md)
  - [Late::AddMessageReactionRequest](docs/AddMessageReactionRequest.md)
+ - [Late::AddUsersToAdAudience200Response](docs/AddUsersToAdAudience200Response.md)
+ - [Late::AddUsersToAdAudienceRequest](docs/AddUsersToAdAudienceRequest.md)
+ - [Late::AddUsersToAdAudienceRequestUsersInner](docs/AddUsersToAdAudienceRequestUsersInner.md)
  - [Late::AddWhatsAppBroadcastRecipients200Response](docs/AddWhatsAppBroadcastRecipients200Response.md)
  - [Late::AddWhatsAppBroadcastRecipientsRequest](docs/AddWhatsAppBroadcastRecipientsRequest.md)
  - [Late::AddWhatsAppBroadcastRecipientsRequestRecipientsInner](docs/AddWhatsAppBroadcastRecipientsRequestRecipientsInner.md)
@@ -337,6 +362,10 @@ Class | Method | HTTP request | Description
  - [Late::BlueskyPlatformData](docs/BlueskyPlatformData.md)
  - [Late::BookmarkPost200Response](docs/BookmarkPost200Response.md)
  - [Late::BookmarkPostRequest](docs/BookmarkPostRequest.md)
+ - [Late::BoostPostRequest](docs/BoostPostRequest.md)
+ - [Late::BoostPostRequestBudget](docs/BoostPostRequestBudget.md)
+ - [Late::BoostPostRequestSchedule](docs/BoostPostRequestSchedule.md)
+ - [Late::BoostPostRequestTargeting](docs/BoostPostRequestTargeting.md)
  - [Late::BulkCreateContacts200Response](docs/BulkCreateContacts200Response.md)
  - [Late::BulkCreateContactsRequest](docs/BulkCreateContactsRequest.md)
  - [Late::BulkCreateContactsRequestContactsInner](docs/BulkCreateContactsRequestContactsInner.md)
@@ -370,6 +399,8 @@ Class | Method | HTTP request | Description
  - [Late::ConnectionLogSuccess](docs/ConnectionLogSuccess.md)
  - [Late::CreateAccountGroup201Response](docs/CreateAccountGroup201Response.md)
  - [Late::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
+ - [Late::CreateAdAudience201Response](docs/CreateAdAudience201Response.md)
+ - [Late::CreateAdAudienceRequest](docs/CreateAdAudienceRequest.md)
  - [Late::CreateApiKey201Response](docs/CreateApiKey201Response.md)
  - [Late::CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
  - [Late::CreateBroadcast200Response](docs/CreateBroadcast200Response.md)
@@ -411,6 +442,7 @@ Class | Method | HTTP request | Description
  - [Late::CreateSequenceRequestStepsInner](docs/CreateSequenceRequestStepsInner.md)
  - [Late::CreateSequenceRequestStepsInnerTemplate](docs/CreateSequenceRequestStepsInnerTemplate.md)
  - [Late::CreateSequenceRequestStepsInnerTemplateVariableMappingValue](docs/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md)
+ - [Late::CreateStandaloneAdRequest](docs/CreateStandaloneAdRequest.md)
  - [Late::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
  - [Late::CreateWhatsAppBroadcast200Response](docs/CreateWhatsAppBroadcast200Response.md)
  - [Late::CreateWhatsAppBroadcast200ResponseBroadcast](docs/CreateWhatsAppBroadcast200ResponseBroadcast.md)
@@ -472,6 +504,12 @@ Class | Method | HTTP request | Description
  - [Late::GetAccountHealth200ResponsePermissions](docs/GetAccountHealth200ResponsePermissions.md)
  - [Late::GetAccountHealth200ResponsePermissionsPostingInner](docs/GetAccountHealth200ResponsePermissionsPostingInner.md)
  - [Late::GetAccountHealth200ResponseTokenStatus](docs/GetAccountHealth200ResponseTokenStatus.md)
+ - [Late::GetAd200Response](docs/GetAd200Response.md)
+ - [Late::GetAdAnalytics200Response](docs/GetAdAnalytics200Response.md)
+ - [Late::GetAdAnalytics200ResponseAd](docs/GetAdAnalytics200ResponseAd.md)
+ - [Late::GetAdAnalytics200ResponseAnalytics](docs/GetAdAnalytics200ResponseAnalytics.md)
+ - [Late::GetAdAnalytics200ResponseAnalyticsDailyInner](docs/GetAdAnalytics200ResponseAnalyticsDailyInner.md)
+ - [Late::GetAdAudience200Response](docs/GetAdAudience200Response.md)
  - [Late::GetAllAccountsHealth200Response](docs/GetAllAccountsHealth200Response.md)
  - [Late::GetAllAccountsHealth200ResponseAccountsInner](docs/GetAllAccountsHealth200ResponseAccountsInner.md)
  - [Late::GetAllAccountsHealth200ResponseSummary](docs/GetAllAccountsHealth200ResponseSummary.md)
@@ -671,6 +709,12 @@ Class | Method | HTTP request | Description
  - [Late::ListAccountGroups200Response](docs/ListAccountGroups200Response.md)
  - [Late::ListAccountGroups200ResponseGroupsInner](docs/ListAccountGroups200ResponseGroupsInner.md)
  - [Late::ListAccounts200Response](docs/ListAccounts200Response.md)
+ - [Late::ListAdAccounts200Response](docs/ListAdAccounts200Response.md)
+ - [Late::ListAdAccounts200ResponseAccountsInner](docs/ListAdAccounts200ResponseAccountsInner.md)
+ - [Late::ListAdAudiences200Response](docs/ListAdAudiences200Response.md)
+ - [Late::ListAdAudiences200ResponseAudiencesInner](docs/ListAdAudiences200ResponseAudiencesInner.md)
+ - [Late::ListAdCampaigns200Response](docs/ListAdCampaigns200Response.md)
+ - [Late::ListAds200Response](docs/ListAds200Response.md)
  - [Late::ListApiKeys200Response](docs/ListApiKeys200Response.md)
  - [Late::ListBroadcastRecipients200Response](docs/ListBroadcastRecipients200Response.md)
  - [Late::ListBroadcastRecipients200ResponseRecipientsInner](docs/ListBroadcastRecipients200ResponseRecipientsInner.md)
@@ -800,6 +844,8 @@ Class | Method | HTTP request | Description
  - [Late::ScheduleWhatsAppBroadcast200Response](docs/ScheduleWhatsAppBroadcast200Response.md)
  - [Late::ScheduleWhatsAppBroadcast200ResponseBroadcast](docs/ScheduleWhatsAppBroadcast200ResponseBroadcast.md)
  - [Late::ScheduleWhatsAppBroadcastRequest](docs/ScheduleWhatsAppBroadcastRequest.md)
+ - [Late::SearchAdInterests200Response](docs/SearchAdInterests200Response.md)
+ - [Late::SearchAdInterests200ResponseInterestsInner](docs/SearchAdInterests200ResponseInterestsInner.md)
  - [Late::SearchReddit200Response](docs/SearchReddit200Response.md)
  - [Late::SearchReddit200ResponsePostsInner](docs/SearchReddit200ResponsePostsInner.md)
  - [Late::SelectFacebookPage200Response](docs/SelectFacebookPage200Response.md)
@@ -852,6 +898,7 @@ Class | Method | HTTP request | Description
  - [Late::SnapchatPlatformData](docs/SnapchatPlatformData.md)
  - [Late::SocialAccount](docs/SocialAccount.md)
  - [Late::SocialAccountProfileId](docs/SocialAccountProfileId.md)
+ - [Late::SyncExternalAds200Response](docs/SyncExternalAds200Response.md)
  - [Late::TelegramPlatformData](docs/TelegramPlatformData.md)
  - [Late::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Late::ThreadsPlatformData](docs/ThreadsPlatformData.md)
@@ -870,6 +917,12 @@ Class | Method | HTTP request | Description
  - [Late::UpdateAccountGroup200Response](docs/UpdateAccountGroup200Response.md)
  - [Late::UpdateAccountGroupRequest](docs/UpdateAccountGroupRequest.md)
  - [Late::UpdateAccountRequest](docs/UpdateAccountRequest.md)
+ - [Late::UpdateAd200Response](docs/UpdateAd200Response.md)
+ - [Late::UpdateAdCampaignStatus200Response](docs/UpdateAdCampaignStatus200Response.md)
+ - [Late::UpdateAdCampaignStatusRequest](docs/UpdateAdCampaignStatusRequest.md)
+ - [Late::UpdateAdRequest](docs/UpdateAdRequest.md)
+ - [Late::UpdateAdRequestBudget](docs/UpdateAdRequestBudget.md)
+ - [Late::UpdateAdRequestTargeting](docs/UpdateAdRequestTargeting.md)
  - [Late::UpdateBroadcast200Response](docs/UpdateBroadcast200Response.md)
  - [Late::UpdateBroadcast200ResponseBroadcast](docs/UpdateBroadcast200ResponseBroadcast.md)
  - [Late::UpdateCommentAutomation200Response](docs/UpdateCommentAutomation200Response.md)
