@@ -50,6 +50,7 @@ docs/BoostPostRequest.md
 docs/BoostPostRequestBudget.md
 docs/BoostPostRequestSchedule.md
 docs/BoostPostRequestTargeting.md
+docs/BoostPostRequestTracking.md
 docs/BroadcastsApi.md
 docs/BulkCreateContacts200Response.md
 docs/BulkCreateContactsRequest.md
@@ -852,6 +853,7 @@ lib/late-sdk/models/boost_post_request.rb
 lib/late-sdk/models/boost_post_request_budget.rb
 lib/late-sdk/models/boost_post_request_schedule.rb
 lib/late-sdk/models/boost_post_request_targeting.rb
+lib/late-sdk/models/boost_post_request_tracking.rb
 lib/late-sdk/models/bulk_create_contacts200_response.rb
 lib/late-sdk/models/bulk_create_contacts_request.rb
 lib/late-sdk/models/bulk_create_contacts_request_contacts_inner.rb
@@ -1615,6 +1617,7 @@ spec/models/boost_post_request_budget_spec.rb
 spec/models/boost_post_request_schedule_spec.rb
 spec/models/boost_post_request_spec.rb
 spec/models/boost_post_request_targeting_spec.rb
+spec/models/boost_post_request_tracking_spec.rb
 spec/models/bulk_create_contacts200_response_spec.rb
 spec/models/bulk_create_contacts_request_contacts_inner_spec.rb
 spec/models/bulk_create_contacts_request_spec.rb

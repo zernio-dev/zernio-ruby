@@ -14,6 +14,9 @@
 | **currency** | **String** |  | [optional] |
 | **schedule** | [**BoostPostRequestSchedule**](BoostPostRequestSchedule.md) |  | [optional] |
 | **targeting** | [**BoostPostRequestTargeting**](BoostPostRequestTargeting.md) |  | [optional] |
+| **bid_amount** | **Float** | Max bid cap (Meta only) | [optional] |
+| **tracking** | [**BoostPostRequestTracking**](BoostPostRequestTracking.md) |  | [optional] |
+| **special_ad_categories** | **Array&lt;String&gt;** | Meta only. Required for housing, employment, credit, or political ads. | [optional] |
 
 ## Example
 
@@ -30,7 +33,10 @@ instance = Late::BoostPostRequest.new(
   budget: null,
   currency: USD,
   schedule: null,
-  targeting: null
+  targeting: null,
+  bid_amount: null,
+  tracking: null,
+  special_ad_categories: null
 )
 ```
 

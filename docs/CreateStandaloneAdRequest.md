@@ -12,10 +12,13 @@
 | **budget_type** | **String** |  |  |
 | **currency** | **String** |  | [optional] |
 | **headline** | **String** | Required for most platforms. Max: Meta&#x3D;255, Google&#x3D;30, Pinterest&#x3D;100 | [optional] |
+| **long_headline** | **String** | Google Display only | [optional] |
 | **body** | **String** | Max: Google&#x3D;90, Pinterest&#x3D;500 |  |
 | **call_to_action** | **String** | Meta only | [optional] |
 | **link_url** | **String** |  | [optional] |
-| **image_url** | **String** | Image URL (or video URL for TikTok) |  |
+| **image_url** | **String** | Image URL (or video URL for TikTok). Not required for Google Search campaigns. | [optional] |
+| **business_name** | **String** | Google Display only | [optional] |
+| **board_id** | **String** | Pinterest only. Board ID (auto-creates if not provided). | [optional] |
 | **countries** | **Array&lt;String&gt;** |  | [optional] |
 | **age_min** | **Integer** |  | [optional] |
 | **age_max** | **Integer** |  | [optional] |
@@ -24,6 +27,8 @@
 | **audience_id** | **String** | Custom audience ID for targeting | [optional] |
 | **campaign_type** | **String** | Google only | [optional][default to &#39;display&#39;] |
 | **keywords** | **Array&lt;String&gt;** | Google Search only | [optional] |
+| **additional_headlines** | **Array&lt;String&gt;** | Google Search RSA only. Extra headlines. | [optional] |
+| **additional_descriptions** | **Array&lt;String&gt;** | Google Search RSA only. Extra descriptions. | [optional] |
 
 ## Example
 
@@ -39,10 +44,13 @@ instance = Late::CreateStandaloneAdRequest.new(
   budget_type: null,
   currency: null,
   headline: null,
+  long_headline: null,
   body: null,
   call_to_action: null,
   link_url: null,
   image_url: null,
+  business_name: null,
+  board_id: null,
   countries: null,
   age_min: null,
   age_max: null,
@@ -50,7 +58,9 @@ instance = Late::CreateStandaloneAdRequest.new(
   end_date: null,
   audience_id: null,
   campaign_type: null,
-  keywords: null
+  keywords: null,
+  additional_headlines: null,
+  additional_descriptions: null
 )
 ```
 

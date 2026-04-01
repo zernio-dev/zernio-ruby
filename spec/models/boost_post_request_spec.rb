@@ -91,4 +91,26 @@ describe Late::BoostPostRequest do
     end
   end
 
+  describe 'test attribute "bid_amount"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "tracking"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "special_ad_categories"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["HOUSING", "EMPLOYMENT", "CREDIT", "ISSUES_ELECTIONS_POLITICS"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.special_ad_categories = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

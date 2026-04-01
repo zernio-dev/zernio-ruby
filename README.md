@@ -366,6 +366,7 @@ Class | Method | HTTP request | Description
  - [Late::BoostPostRequestBudget](docs/BoostPostRequestBudget.md)
  - [Late::BoostPostRequestSchedule](docs/BoostPostRequestSchedule.md)
  - [Late::BoostPostRequestTargeting](docs/BoostPostRequestTargeting.md)
+ - [Late::BoostPostRequestTracking](docs/BoostPostRequestTracking.md)
  - [Late::BulkCreateContacts200Response](docs/BulkCreateContacts200Response.md)
  - [Late::BulkCreateContactsRequest](docs/BulkCreateContactsRequest.md)
  - [Late::BulkCreateContactsRequestContactsInner](docs/BulkCreateContactsRequestContactsInner.md)

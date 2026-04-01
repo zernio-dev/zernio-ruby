@@ -41,6 +41,12 @@ module Late
     # Required for lookalike audiences
     attr_accessor :ratio
 
+    # Pixel event rule for website audiences (optional)
+    attr_accessor :rule
+
+    # Data source declaration for GDPR compliance (customer_list only)
+    attr_accessor :customer_file_source
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -75,7 +81,9 @@ module Late
         :'retention_days' => :'retentionDays',
         :'source_audience_id' => :'sourceAudienceId',
         :'country' => :'country',
-        :'ratio' => :'ratio'
+        :'ratio' => :'ratio',
+        :'rule' => :'rule',
+        :'customer_file_source' => :'customerFileSource'
       }
     end
 
@@ -101,7 +109,9 @@ module Late
         :'retention_days' => :'Integer',
         :'source_audience_id' => :'String',
         :'country' => :'String',
-        :'ratio' => :'Float'
+        :'ratio' => :'Float',
+        :'rule' => :'Object',
+        :'customer_file_source' => :'String'
       }
     end
 
@@ -173,6 +183,14 @@ module Late
 
       if attributes.key?(:'ratio')
         self.ratio = attributes[:'ratio']
+      end
+
+      if attributes.key?(:'rule')
+        self.rule = attributes[:'rule']
+      end
+
+      if attributes.key?(:'customer_file_source')
+        self.customer_file_source = attributes[:'customer_file_source']
       end
     end
 
@@ -332,7 +350,9 @@ module Late
           retention_days == o.retention_days &&
           source_audience_id == o.source_audience_id &&
           country == o.country &&
-          ratio == o.ratio
+          ratio == o.ratio &&
+          rule == o.rule &&
+          customer_file_source == o.customer_file_source
     end
 
     # @see the `==` method
@@ -344,7 +364,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, description, type, pixel_id, retention_days, source_audience_id, country, ratio].hash
+      [account_id, ad_account_id, name, description, type, pixel_id, retention_days, source_audience_id, country, ratio, rule, customer_file_source].hash
     end
 
     # Builds the object from hash

@@ -105,7 +105,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::AdsApi.new
-create_standalone_ad_request = Late::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement', budget_amount: 3.56, budget_type: 'daily', body: 'body_example', image_url: 'image_url_example'}) # CreateStandaloneAdRequest | 
+create_standalone_ad_request = Late::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement', budget_amount: 3.56, budget_type: 'daily', body: 'body_example'}) # CreateStandaloneAdRequest | 
 
 begin
   # Create a standalone ad with custom creative

@@ -32,6 +32,9 @@ module Late
     # Required for most platforms. Max: Meta=255, Google=30, Pinterest=100
     attr_accessor :headline
 
+    # Google Display only
+    attr_accessor :long_headline
+
     # Max: Google=90, Pinterest=500
     attr_accessor :body
 
@@ -40,8 +43,14 @@ module Late
 
     attr_accessor :link_url
 
-    # Image URL (or video URL for TikTok)
+    # Image URL (or video URL for TikTok). Not required for Google Search campaigns.
     attr_accessor :image_url
+
+    # Google Display only
+    attr_accessor :business_name
+
+    # Pinterest only. Board ID (auto-creates if not provided).
+    attr_accessor :board_id
 
     attr_accessor :countries
 
@@ -62,6 +71,12 @@ module Late
 
     # Google Search only
     attr_accessor :keywords
+
+    # Google Search RSA only. Extra headlines.
+    attr_accessor :additional_headlines
+
+    # Google Search RSA only. Extra descriptions.
+    attr_accessor :additional_descriptions
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -96,10 +111,13 @@ module Late
         :'budget_type' => :'budgetType',
         :'currency' => :'currency',
         :'headline' => :'headline',
+        :'long_headline' => :'longHeadline',
         :'body' => :'body',
         :'call_to_action' => :'callToAction',
         :'link_url' => :'linkUrl',
         :'image_url' => :'imageUrl',
+        :'business_name' => :'businessName',
+        :'board_id' => :'boardId',
         :'countries' => :'countries',
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
@@ -107,7 +125,9 @@ module Late
         :'end_date' => :'endDate',
         :'audience_id' => :'audienceId',
         :'campaign_type' => :'campaignType',
-        :'keywords' => :'keywords'
+        :'keywords' => :'keywords',
+        :'additional_headlines' => :'additionalHeadlines',
+        :'additional_descriptions' => :'additionalDescriptions'
       }
     end
 
@@ -132,10 +152,13 @@ module Late
         :'budget_type' => :'String',
         :'currency' => :'String',
         :'headline' => :'String',
+        :'long_headline' => :'String',
         :'body' => :'String',
         :'call_to_action' => :'String',
         :'link_url' => :'String',
         :'image_url' => :'String',
+        :'business_name' => :'String',
+        :'board_id' => :'String',
         :'countries' => :'Array<String>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
@@ -143,7 +166,9 @@ module Late
         :'end_date' => :'Time',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
-        :'keywords' => :'Array<String>'
+        :'keywords' => :'Array<String>',
+        :'additional_headlines' => :'Array<String>',
+        :'additional_descriptions' => :'Array<String>'
       }
     end
 
@@ -213,6 +238,10 @@ module Late
         self.headline = attributes[:'headline']
       end
 
+      if attributes.key?(:'long_headline')
+        self.long_headline = attributes[:'long_headline']
+      end
+
       if attributes.key?(:'body')
         self.body = attributes[:'body']
       else
@@ -229,8 +258,14 @@ module Late
 
       if attributes.key?(:'image_url')
         self.image_url = attributes[:'image_url']
-      else
-        self.image_url = nil
+      end
+
+      if attributes.key?(:'business_name')
+        self.business_name = attributes[:'business_name']
+      end
+
+      if attributes.key?(:'board_id')
+        self.board_id = attributes[:'board_id']
       end
 
       if attributes.key?(:'countries')
@@ -272,6 +307,18 @@ module Late
           self.keywords = value
         end
       end
+
+      if attributes.key?(:'additional_headlines')
+        if (value = attributes[:'additional_headlines']).is_a?(Array)
+          self.additional_headlines = value
+        end
+      end
+
+      if attributes.key?(:'additional_descriptions')
+        if (value = attributes[:'additional_descriptions']).is_a?(Array)
+          self.additional_descriptions = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -307,12 +354,16 @@ module Late
         invalid_properties.push('invalid value for "budget_type", budget_type cannot be nil.')
       end
 
+      if !@long_headline.nil? && @long_headline.to_s.length > 90
+        invalid_properties.push('invalid value for "long_headline", the character length must be smaller than or equal to 90.')
+      end
+
       if @body.nil?
         invalid_properties.push('invalid value for "body", body cannot be nil.')
       end
 
-      if @image_url.nil?
-        invalid_properties.push('invalid value for "image_url", image_url cannot be nil.')
+      if !@business_name.nil? && @business_name.to_s.length > 25
+        invalid_properties.push('invalid value for "business_name", the character length must be smaller than or equal to 25.')
       end
 
       if !@age_min.nil? && @age_min > 65
@@ -349,10 +400,11 @@ module Late
       return false if @budget_type.nil?
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
+      return false if !@long_headline.nil? && @long_headline.to_s.length > 90
       return false if @body.nil?
       call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
       return false unless call_to_action_validator.valid?(@call_to_action)
-      return false if @image_url.nil?
+      return false if !@business_name.nil? && @business_name.to_s.length > 25
       return false if !@age_min.nil? && @age_min > 65
       return false if !@age_min.nil? && @age_min < 13
       return false if !@age_max.nil? && @age_max > 65
@@ -427,6 +479,20 @@ module Late
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] long_headline Value to be assigned
+    def long_headline=(long_headline)
+      if long_headline.nil?
+        fail ArgumentError, 'long_headline cannot be nil'
+      end
+
+      if long_headline.to_s.length > 90
+        fail ArgumentError, 'invalid value for "long_headline", the character length must be smaller than or equal to 90.'
+      end
+
+      @long_headline = long_headline
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] body Value to be assigned
     def body=(body)
       if body.nil?
@@ -447,13 +513,17 @@ module Late
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] image_url Value to be assigned
-    def image_url=(image_url)
-      if image_url.nil?
-        fail ArgumentError, 'image_url cannot be nil'
+    # @param [Object] business_name Value to be assigned
+    def business_name=(business_name)
+      if business_name.nil?
+        fail ArgumentError, 'business_name cannot be nil'
       end
 
-      @image_url = image_url
+      if business_name.to_s.length > 25
+        fail ArgumentError, 'invalid value for "business_name", the character length must be smaller than or equal to 25.'
+      end
+
+      @business_name = business_name
     end
 
     # Custom attribute writer method with validation
@@ -515,10 +585,13 @@ module Late
           budget_type == o.budget_type &&
           currency == o.currency &&
           headline == o.headline &&
+          long_headline == o.long_headline &&
           body == o.body &&
           call_to_action == o.call_to_action &&
           link_url == o.link_url &&
           image_url == o.image_url &&
+          business_name == o.business_name &&
+          board_id == o.board_id &&
           countries == o.countries &&
           age_min == o.age_min &&
           age_max == o.age_max &&
@@ -526,7 +599,9 @@ module Late
           end_date == o.end_date &&
           audience_id == o.audience_id &&
           campaign_type == o.campaign_type &&
-          keywords == o.keywords
+          keywords == o.keywords &&
+          additional_headlines == o.additional_headlines &&
+          additional_descriptions == o.additional_descriptions
     end
 
     # @see the `==` method
@@ -538,7 +613,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, body, call_to_action, link_url, image_url, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions].hash
     end
 
     # Builds the object from hash

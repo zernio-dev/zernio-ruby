@@ -14,6 +14,8 @@
 | **source_audience_id** | **String** | Required for lookalike audiences | [optional] |
 | **country** | **String** | 2-letter code, required for lookalike audiences | [optional] |
 | **ratio** | **Float** | Required for lookalike audiences | [optional] |
+| **rule** | **Object** | Pixel event rule for website audiences (optional) | [optional] |
+| **customer_file_source** | **String** | Data source declaration for GDPR compliance (customer_list only) | [optional] |
 
 ## Example
 
@@ -30,7 +32,9 @@ instance = Late::CreateAdAudienceRequest.new(
   retention_days: null,
   source_audience_id: null,
   country: null,
-  ratio: null
+  ratio: null,
+  rule: null,
+  customer_file_source: null
 )
 ```
 

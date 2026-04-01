@@ -39,6 +39,14 @@ module Late
 
     attr_accessor :targeting
 
+    # Max bid cap (Meta only)
+    attr_accessor :bid_amount
+
+    attr_accessor :tracking
+
+    # Meta only. Required for housing, employment, credit, or political ads.
+    attr_accessor :special_ad_categories
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -73,7 +81,10 @@ module Late
         :'budget' => :'budget',
         :'currency' => :'currency',
         :'schedule' => :'schedule',
-        :'targeting' => :'targeting'
+        :'targeting' => :'targeting',
+        :'bid_amount' => :'bidAmount',
+        :'tracking' => :'tracking',
+        :'special_ad_categories' => :'specialAdCategories'
       }
     end
 
@@ -99,7 +110,10 @@ module Late
         :'budget' => :'BoostPostRequestBudget',
         :'currency' => :'String',
         :'schedule' => :'BoostPostRequestSchedule',
-        :'targeting' => :'BoostPostRequestTargeting'
+        :'targeting' => :'BoostPostRequestTargeting',
+        :'bid_amount' => :'Float',
+        :'tracking' => :'BoostPostRequestTracking',
+        :'special_ad_categories' => :'Array<String>'
       }
     end
 
@@ -173,6 +187,20 @@ module Late
 
       if attributes.key?(:'targeting')
         self.targeting = attributes[:'targeting']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'tracking')
+        self.tracking = attributes[:'tracking']
+      end
+
+      if attributes.key?(:'special_ad_categories')
+        if (value = attributes[:'special_ad_categories']).is_a?(Array)
+          self.special_ad_categories = value
+        end
       end
     end
 
@@ -291,7 +319,10 @@ module Late
           budget == o.budget &&
           currency == o.currency &&
           schedule == o.schedule &&
-          targeting == o.targeting
+          targeting == o.targeting &&
+          bid_amount == o.bid_amount &&
+          tracking == o.tracking &&
+          special_ad_categories == o.special_ad_categories
     end
 
     # @see the `==` method
@@ -303,7 +334,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, bid_amount, tracking, special_ad_categories].hash
     end
 
     # Builds the object from hash
