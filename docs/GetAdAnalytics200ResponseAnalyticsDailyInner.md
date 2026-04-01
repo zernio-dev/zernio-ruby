@@ -12,7 +12,7 @@
 | **cpc** | **Float** | Cost per click | [optional] |
 | **cpm** | **Float** | Cost per 1000 impressions | [optional] |
 | **engagement** | **Integer** |  | [optional] |
-| **last_synced_at** | **Time** |  | [optional] |
+| **last_synced_at** | **Time** | Present on individual ads only, not on campaign aggregations | [optional] |
 | **date** | **Date** |  | [optional] |
 
 ## Example

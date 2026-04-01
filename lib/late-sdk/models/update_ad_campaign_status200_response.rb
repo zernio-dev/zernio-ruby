@@ -23,12 +23,16 @@ module Late
 
     attr_accessor :skipped_reasons
 
+    # Human-readable summary (present when no ads were actionable)
+    attr_accessor :message
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'updated' => :'updated',
         :'skipped' => :'skipped',
-        :'skipped_reasons' => :'skippedReasons'
+        :'skipped_reasons' => :'skippedReasons',
+        :'message' => :'message'
       }
     end
 
@@ -47,7 +51,8 @@ module Late
       {
         :'updated' => :'Integer',
         :'skipped' => :'Integer',
-        :'skipped_reasons' => :'Array<String>'
+        :'skipped_reasons' => :'Array<String>',
+        :'message' => :'String'
       }
     end
 
@@ -86,6 +91,10 @@ module Late
           self.skipped_reasons = value
         end
       end
+
+      if attributes.key?(:'message')
+        self.message = attributes[:'message']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,7 +119,8 @@ module Late
       self.class == o.class &&
           updated == o.updated &&
           skipped == o.skipped &&
-          skipped_reasons == o.skipped_reasons
+          skipped_reasons == o.skipped_reasons &&
+          message == o.message
     end
 
     # @see the `==` method
@@ -122,7 +132,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, skipped, skipped_reasons].hash
+      [updated, skipped, skipped_reasons, message].hash
     end
 
     # Builds the object from hash

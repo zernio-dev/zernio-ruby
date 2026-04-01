@@ -34,6 +34,7 @@ module Late
 
     attr_accessor :engagement
 
+    # Present on individual ads only, not on campaign aggregations
     attr_accessor :last_synced_at
 
     # Attribute mapping from ruby-style variable name to JSON key.

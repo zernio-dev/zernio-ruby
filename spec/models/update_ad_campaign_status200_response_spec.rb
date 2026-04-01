@@ -45,4 +45,10 @@ describe Late::UpdateAdCampaignStatus200Response do
     end
   end
 
+  describe 'test attribute "message"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

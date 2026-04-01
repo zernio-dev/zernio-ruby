@@ -20,7 +20,7 @@ module Late
     # New ads imported
     attr_accessor :synced
 
-    # Already-synced ads updated
+    # Already-known ads (skipped import
     attr_accessor :skipped
 
     # Failed ad imports
