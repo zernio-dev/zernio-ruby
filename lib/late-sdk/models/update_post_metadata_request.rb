@@ -42,6 +42,15 @@ module Late
     # Public URL of a custom thumbnail image (JPEG, PNG, or GIF, max 2 MB, recommended 1280x720). Works on any video you own, including existing videos not published through Zernio. The channel must be verified (phone verification) to set custom thumbnails.
     attr_accessor :thumbnail_url
 
+    # COPPA compliance flag. Set true for child-directed content (restricts comments, notifications, ad targeting).
+    attr_accessor :made_for_kids
+
+    # AI-generated content disclosure. Set true if the video contains synthetic content that could be mistaken for real. YouTube may add a label.
+    attr_accessor :contains_synthetic_media
+
+    # YouTube playlist ID to add the video to (e.g. 'PLxxxxxxxxxxxxx'). Use GET /v1/accounts/{id}/youtube-playlists to list available playlists. Only playlists owned by the channel are supported.
+    attr_accessor :playlist_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -75,7 +84,10 @@ module Late
         :'tags' => :'tags',
         :'category_id' => :'categoryId',
         :'privacy_status' => :'privacyStatus',
-        :'thumbnail_url' => :'thumbnailUrl'
+        :'thumbnail_url' => :'thumbnailUrl',
+        :'made_for_kids' => :'madeForKids',
+        :'contains_synthetic_media' => :'containsSyntheticMedia',
+        :'playlist_id' => :'playlistId'
       }
     end
 
@@ -100,7 +112,10 @@ module Late
         :'tags' => :'Array<String>',
         :'category_id' => :'String',
         :'privacy_status' => :'String',
-        :'thumbnail_url' => :'String'
+        :'thumbnail_url' => :'String',
+        :'made_for_kids' => :'Boolean',
+        :'contains_synthetic_media' => :'Boolean',
+        :'playlist_id' => :'String'
       }
     end
 
@@ -164,6 +179,18 @@ module Late
 
       if attributes.key?(:'thumbnail_url')
         self.thumbnail_url = attributes[:'thumbnail_url']
+      end
+
+      if attributes.key?(:'made_for_kids')
+        self.made_for_kids = attributes[:'made_for_kids']
+      end
+
+      if attributes.key?(:'contains_synthetic_media')
+        self.contains_synthetic_media = attributes[:'contains_synthetic_media']
+      end
+
+      if attributes.key?(:'playlist_id')
+        self.playlist_id = attributes[:'playlist_id']
       end
     end
 
@@ -243,7 +270,10 @@ module Late
           tags == o.tags &&
           category_id == o.category_id &&
           privacy_status == o.privacy_status &&
-          thumbnail_url == o.thumbnail_url
+          thumbnail_url == o.thumbnail_url &&
+          made_for_kids == o.made_for_kids &&
+          contains_synthetic_media == o.contains_synthetic_media &&
+          playlist_id == o.playlist_id
     end
 
     # @see the `==` method
@@ -255,7 +285,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, video_id, account_id, title, description, tags, category_id, privacy_status, thumbnail_url].hash
+      [platform, video_id, account_id, title, description, tags, category_id, privacy_status, thumbnail_url, made_for_kids, contains_synthetic_media, playlist_id].hash
     end
 
     # Builds the object from hash
