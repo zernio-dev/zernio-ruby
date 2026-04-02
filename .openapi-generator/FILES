@@ -20,6 +20,7 @@ docs/AdAudiencesApi.md
 docs/AdBudget.md
 docs/AdCampaign.md
 docs/AdCampaignsApi.md
+docs/AdCreative.md
 docs/AdMetrics.md
 docs/AdSchedule.md
 docs/AdTreeAdSet.md
@@ -806,6 +807,7 @@ lib/late-sdk/models/activate_sequence200_response.rb
 lib/late-sdk/models/ad.rb
 lib/late-sdk/models/ad_budget.rb
 lib/late-sdk/models/ad_campaign.rb
+lib/late-sdk/models/ad_creative.rb
 lib/late-sdk/models/ad_metrics.rb
 lib/late-sdk/models/ad_schedule.rb
 lib/late-sdk/models/ad_tree_ad_set.rb
@@ -1551,6 +1553,7 @@ spec/models/accounts_list_response_spec.rb
 spec/models/activate_sequence200_response_spec.rb
 spec/models/ad_budget_spec.rb
 spec/models/ad_campaign_spec.rb
+spec/models/ad_creative_spec.rb
 spec/models/ad_metrics_spec.rb
 spec/models/ad_schedule_spec.rb
 spec/models/ad_spec.rb

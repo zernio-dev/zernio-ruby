@@ -330,6 +330,7 @@ Class | Method | HTTP request | Description
  - [Late::Ad](docs/Ad.md)
  - [Late::AdBudget](docs/AdBudget.md)
  - [Late::AdCampaign](docs/AdCampaign.md)
+ - [Late::AdCreative](docs/AdCreative.md)
  - [Late::AdMetrics](docs/AdMetrics.md)
  - [Late::AdSchedule](docs/AdSchedule.md)
  - [Late::AdTreeAdSet](docs/AdTreeAdSet.md)

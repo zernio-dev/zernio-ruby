@@ -46,7 +46,6 @@ module Late
 
     attr_accessor :ad_set_name
 
-    # Platform-specific creative data
     attr_accessor :creative
 
     attr_accessor :targeting
@@ -136,7 +135,7 @@ module Late
         :'platform_ad_set_id' => :'String',
         :'campaign_name' => :'String',
         :'ad_set_name' => :'String',
-        :'creative' => :'Object',
+        :'creative' => :'AdCreative',
         :'targeting' => :'Object',
         :'schedule' => :'AdSchedule',
         :'rejection_reason' => :'String',
