@@ -19,6 +19,111 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Get nested campaign/ad-set/ad tree
+    # Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page Page number (1-based) (default to 1)
+    # @option opts [Integer] :limit Campaigns per page (default to 20)
+    # @option opts [String] :source  (default to 'zernio')
+    # @option opts [String] :platform 
+    # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+    # @option opts [String] :ad_account_id Platform ad account ID
+    # @option opts [String] :account_id Social account ID
+    # @option opts [String] :profile_id Profile ID
+    # @return [GetAdTree200Response]
+    def get_ad_tree(opts = {})
+      data, _status_code, _headers = get_ad_tree_with_http_info(opts)
+      data
+    end
+
+    # Get nested campaign/ad-set/ad tree
+    # Returns a nested Campaign &gt; Ad Set &gt; Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \&quot;Ungrouped\&quot; buckets. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page Page number (1-based) (default to 1)
+    # @option opts [Integer] :limit Campaigns per page (default to 20)
+    # @option opts [String] :source  (default to 'zernio')
+    # @option opts [String] :platform 
+    # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+    # @option opts [String] :ad_account_id Platform ad account ID
+    # @option opts [String] :account_id Social account ID
+    # @option opts [String] :profile_id Profile ID
+    # @return [Array<(GetAdTree200Response, Integer, Hash)>] GetAdTree200Response data, response status code and response headers
+    def get_ad_tree_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.get_ad_tree ...'
+      end
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling AdCampaignsApi.get_ad_tree, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdCampaignsApi.get_ad_tree, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdCampaignsApi.get_ad_tree, must be greater than or equal to 1.'
+      end
+
+      allowable_values = ["zernio", "all"]
+      if @api_client.config.client_side_validation && opts[:'source'] && !allowable_values.include?(opts[:'source'])
+        fail ArgumentError, "invalid value for \"source\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"]
+      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
+        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/ads/tree'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'source'] = opts[:'source'] if !opts[:'source'].nil?
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdTree200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.get_ad_tree",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#get_ad_tree\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List campaigns with aggregate metrics
     # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active > pending_review > paused > error > completed > cancelled > rejected). 
     # @param [Hash] opts the optional parameters

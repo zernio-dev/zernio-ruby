@@ -92,6 +92,7 @@ Class | Method | HTTP request | Description
 *Late::AdAudiencesApi* | [**delete_ad_audience**](docs/AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete a custom audience
 *Late::AdAudiencesApi* | [**get_ad_audience**](docs/AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details
 *Late::AdAudiencesApi* | [**list_ad_audiences**](docs/AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences
+*Late::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get nested campaign/ad-set/ad tree
 *Late::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns with aggregate metrics
 *Late::AdCampaignsApi* | [**update_ad_campaign_status**](docs/AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign
 *Late::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost an existing post as a paid ad
@@ -260,6 +261,10 @@ Class | Method | HTTP request | Description
 *Late::UsageApi* | [**get_usage_stats**](docs/UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage stats
 *Late::UsersApi* | [**get_user**](docs/UsersApi.md#get_user) | **GET** /v1/users/{userId} | Get user
 *Late::UsersApi* | [**list_users**](docs/UsersApi.md#list_users) | **GET** /v1/users | List users
+*Late::ValidateApi* | [**validate_media**](docs/ValidateApi.md#validate_media) | **POST** /v1/tools/validate/media | Validate media URL
+*Late::ValidateApi* | [**validate_post**](docs/ValidateApi.md#validate_post) | **POST** /v1/tools/validate/post | Validate post content
+*Late::ValidateApi* | [**validate_post_length**](docs/ValidateApi.md#validate_post_length) | **POST** /v1/tools/validate/post-length | Validate post character count
+*Late::ValidateApi* | [**validate_subreddit**](docs/ValidateApi.md#validate_subreddit) | **GET** /v1/tools/validate/subreddit | Check subreddit existence
 *Late::WebhooksApi* | [**create_webhook_settings**](docs/WebhooksApi.md#create_webhook_settings) | **POST** /v1/webhooks/settings | Create webhook
 *Late::WebhooksApi* | [**delete_webhook_settings**](docs/WebhooksApi.md#delete_webhook_settings) | **DELETE** /v1/webhooks/settings | Delete webhook
 *Late::WebhooksApi* | [**get_webhook_logs**](docs/WebhooksApi.md#get_webhook_logs) | **GET** /v1/webhooks/logs | Get delivery logs
@@ -327,6 +332,8 @@ Class | Method | HTTP request | Description
  - [Late::AdCampaign](docs/AdCampaign.md)
  - [Late::AdMetrics](docs/AdMetrics.md)
  - [Late::AdSchedule](docs/AdSchedule.md)
+ - [Late::AdTreeAdSet](docs/AdTreeAdSet.md)
+ - [Late::AdTreeCampaign](docs/AdTreeCampaign.md)
  - [Late::AddBroadcastRecipients200Response](docs/AddBroadcastRecipients200Response.md)
  - [Late::AddBroadcastRecipientsRequest](docs/AddBroadcastRecipientsRequest.md)
  - [Late::AddMessageReactionRequest](docs/AddMessageReactionRequest.md)
@@ -484,6 +491,7 @@ Class | Method | HTTP request | Description
  - [Late::GetAdAnalytics200ResponseAnalytics](docs/GetAdAnalytics200ResponseAnalytics.md)
  - [Late::GetAdAnalytics200ResponseAnalyticsDailyInner](docs/GetAdAnalytics200ResponseAnalyticsDailyInner.md)
  - [Late::GetAdAudience200Response](docs/GetAdAudience200Response.md)
+ - [Late::GetAdTree200Response](docs/GetAdTree200Response.md)
  - [Late::GetAllAccountsHealth200Response](docs/GetAllAccountsHealth200Response.md)
  - [Late::GetAllAccountsHealth200ResponseAccountsInner](docs/GetAllAccountsHealth200ResponseAccountsInner.md)
  - [Late::GetAllAccountsHealth200ResponseSummary](docs/GetAllAccountsHealth200ResponseSummary.md)
@@ -964,6 +972,25 @@ Class | Method | HTTP request | Description
  - [Late::User](docs/User.md)
  - [Late::UserGetResponse](docs/UserGetResponse.md)
  - [Late::UsersListResponse](docs/UsersListResponse.md)
+ - [Late::ValidateMedia200Response](docs/ValidateMedia200Response.md)
+ - [Late::ValidateMedia200ResponsePlatformLimitsValue](docs/ValidateMedia200ResponsePlatformLimitsValue.md)
+ - [Late::ValidateMediaRequest](docs/ValidateMediaRequest.md)
+ - [Late::ValidatePost200Response](docs/ValidatePost200Response.md)
+ - [Late::ValidatePost200ResponseOneOf](docs/ValidatePost200ResponseOneOf.md)
+ - [Late::ValidatePost200ResponseOneOf1](docs/ValidatePost200ResponseOneOf1.md)
+ - [Late::ValidatePost200ResponseOneOf1ErrorsInner](docs/ValidatePost200ResponseOneOf1ErrorsInner.md)
+ - [Late::ValidatePost200ResponseOneOfWarningsInner](docs/ValidatePost200ResponseOneOfWarningsInner.md)
+ - [Late::ValidatePostLength200Response](docs/ValidatePostLength200Response.md)
+ - [Late::ValidatePostLength200ResponsePlatformsValue](docs/ValidatePostLength200ResponsePlatformsValue.md)
+ - [Late::ValidatePostLengthRequest](docs/ValidatePostLengthRequest.md)
+ - [Late::ValidatePostRequest](docs/ValidatePostRequest.md)
+ - [Late::ValidatePostRequestMediaItemsInner](docs/ValidatePostRequestMediaItemsInner.md)
+ - [Late::ValidatePostRequestPlatformsInner](docs/ValidatePostRequestPlatformsInner.md)
+ - [Late::ValidatePostRequestPlatformsInnerCustomMediaInner](docs/ValidatePostRequestPlatformsInnerCustomMediaInner.md)
+ - [Late::ValidateSubreddit200Response](docs/ValidateSubreddit200Response.md)
+ - [Late::ValidateSubreddit200ResponseOneOf](docs/ValidateSubreddit200ResponseOneOf.md)
+ - [Late::ValidateSubreddit200ResponseOneOf1](docs/ValidateSubreddit200ResponseOneOf1.md)
+ - [Late::ValidateSubreddit200ResponseOneOfSubreddit](docs/ValidateSubreddit200ResponseOneOfSubreddit.md)
  - [Late::Webhook](docs/Webhook.md)
  - [Late::WebhookLog](docs/WebhookLog.md)
  - [Late::WebhookPayloadAccountConnected](docs/WebhookPayloadAccountConnected.md)

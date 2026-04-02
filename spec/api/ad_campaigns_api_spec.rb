@@ -32,6 +32,25 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for get_ad_tree
+  # Get nested campaign/ad-set/ad tree
+  # Returns a nested Campaign &gt; Ad Set &gt; Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \&quot;Ungrouped\&quot; buckets. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page Page number (1-based)
+  # @option opts [Integer] :limit Campaigns per page
+  # @option opts [String] :source 
+  # @option opts [String] :platform 
+  # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+  # @option opts [String] :ad_account_id Platform ad account ID
+  # @option opts [String] :account_id Social account ID
+  # @option opts [String] :profile_id Profile ID
+  # @return [GetAdTree200Response]
+  describe 'get_ad_tree test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_campaigns
   # List campaigns with aggregate metrics
   # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active &gt; pending_review &gt; paused &gt; error &gt; completed &gt; cancelled &gt; rejected). 
