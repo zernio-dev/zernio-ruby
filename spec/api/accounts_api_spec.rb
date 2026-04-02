@@ -101,11 +101,13 @@ describe 'AccountsApi' do
 
   # unit tests for list_accounts
   # List accounts
-  # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on.
+  # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :profile_id Filter accounts by profile ID
   # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
   # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles.
+  # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
+  # @option opts [Integer] :limit Page size. Required alongside page for pagination.
   # @return [ListAccounts200Response]
   describe 'list_accounts test' do
     it 'should work' do

@@ -384,7 +384,7 @@ end
 
 List accounts
 
-Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on.
+Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). 
 
 ### Examples
 
@@ -401,7 +401,9 @@ api_instance = Late::AccountsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter accounts by profile ID
   platform: 'platform_example', # String | Filter accounts by platform (e.g. \"instagram\", \"twitter\").
-  include_over_limit: true # Boolean | When true, includes accounts from over-limit profiles.
+  include_over_limit: true, # Boolean | When true, includes accounts from over-limit profiles.
+  page: 56, # Integer | Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
+  limit: 56 # Integer | Page size. Required alongside page for pagination.
 }
 
 begin
@@ -438,6 +440,8 @@ end
 | **profile_id** | **String** | Filter accounts by profile ID | [optional] |
 | **platform** | **String** | Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). | [optional] |
 | **include_over_limit** | **Boolean** | When true, includes accounts from over-limit profiles. | [optional][default to false] |
+| **page** | **Integer** | Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts. | [optional] |
+| **limit** | **Integer** | Page size. Required alongside page for pagination. | [optional] |
 
 ### Return type
 

@@ -366,11 +366,13 @@ module Late
     end
 
     # List accounts
-    # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on.
+    # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter accounts by profile ID
     # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
     # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles. (default to false)
+    # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
+    # @option opts [Integer] :limit Page size. Required alongside page for pagination.
     # @return [ListAccounts200Response]
     def list_accounts(opts = {})
       data, _status_code, _headers = list_accounts_with_http_info(opts)
@@ -378,16 +380,30 @@ module Late
     end
 
     # List accounts
-    # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on.
+    # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter accounts by profile ID
     # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
     # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles. (default to false)
+    # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
+    # @option opts [Integer] :limit Page size. Required alongside page for pagination.
     # @return [Array<(ListAccounts200Response, Integer, Hash)>] ListAccounts200Response data, response status code and response headers
     def list_accounts_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsApi.list_accounts ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling AccountsApi.list_accounts, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AccountsApi.list_accounts, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AccountsApi.list_accounts, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/accounts'
 
@@ -396,6 +412,8 @@ module Late
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'includeOverLimit'] = opts[:'include_over_limit'] if !opts[:'include_over_limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

@@ -20,11 +20,15 @@ module Late
     # Whether user has analytics add-on access
     attr_accessor :has_analytics_access
 
+    # Only present when page/limit params are provided
+    attr_accessor :pagination
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'accounts' => :'accounts',
-        :'has_analytics_access' => :'hasAnalyticsAccess'
+        :'has_analytics_access' => :'hasAnalyticsAccess',
+        :'pagination' => :'pagination'
       }
     end
 
@@ -42,7 +46,8 @@ module Late
     def self.openapi_types
       {
         :'accounts' => :'Array<SocialAccount>',
-        :'has_analytics_access' => :'Boolean'
+        :'has_analytics_access' => :'Boolean',
+        :'pagination' => :'Pagination'
       }
     end
 
@@ -77,6 +82,10 @@ module Late
       if attributes.key?(:'has_analytics_access')
         self.has_analytics_access = attributes[:'has_analytics_access']
       end
+
+      if attributes.key?(:'pagination')
+        self.pagination = attributes[:'pagination']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -100,7 +109,8 @@ module Late
       return true if self.equal?(o)
       self.class == o.class &&
           accounts == o.accounts &&
-          has_analytics_access == o.has_analytics_access
+          has_analytics_access == o.has_analytics_access &&
+          pagination == o.pagination
     end
 
     # @see the `==` method
@@ -112,7 +122,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accounts, has_analytics_access].hash
+      [accounts, has_analytics_access, pagination].hash
     end
 
     # Builds the object from hash
