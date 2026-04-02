@@ -11,5 +11,5 @@ Generator version: 7.19.0
 =end
 
 module Late
-  VERSION = '0.0.102'
+  VERSION = '0.0.103'
 end
