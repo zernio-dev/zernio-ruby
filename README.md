@@ -251,15 +251,6 @@ Class | Method | HTTP request | Description
 *Late::SequencesApi* | [**pause_sequence**](docs/SequencesApi.md#pause_sequence) | **POST** /v1/sequences/{sequenceId}/pause | Pause a sequence
 *Late::SequencesApi* | [**unenroll_contact**](docs/SequencesApi.md#unenroll_contact) | **DELETE** /v1/sequences/{sequenceId}/enroll/{contactId} | Unenroll a contact from a sequence
 *Late::SequencesApi* | [**update_sequence**](docs/SequencesApi.md#update_sequence) | **PATCH** /v1/sequences/{sequenceId} | Update a sequence
-*Late::ToolsApi* | [**check_instagram_hashtags**](docs/ToolsApi.md#check_instagram_hashtags) | **POST** /v1/tools/instagram/hashtag-checker | Check IG hashtag bans
-*Late::ToolsApi* | [**download_bluesky_media**](docs/ToolsApi.md#download_bluesky_media) | **GET** /v1/tools/bluesky/download | Download Bluesky media
-*Late::ToolsApi* | [**download_facebook_video**](docs/ToolsApi.md#download_facebook_video) | **GET** /v1/tools/facebook/download | Download Facebook video
-*Late::ToolsApi* | [**download_instagram_media**](docs/ToolsApi.md#download_instagram_media) | **GET** /v1/tools/instagram/download | Download Instagram media
-*Late::ToolsApi* | [**download_linked_in_video**](docs/ToolsApi.md#download_linked_in_video) | **GET** /v1/tools/linkedin/download | Download LinkedIn video
-*Late::ToolsApi* | [**download_tik_tok_video**](docs/ToolsApi.md#download_tik_tok_video) | **GET** /v1/tools/tiktok/download | Download TikTok video
-*Late::ToolsApi* | [**download_twitter_media**](docs/ToolsApi.md#download_twitter_media) | **GET** /v1/tools/twitter/download | Download Twitter/X media
-*Late::ToolsApi* | [**download_you_tube_video**](docs/ToolsApi.md#download_you_tube_video) | **GET** /v1/tools/youtube/download | Download YouTube video
-*Late::ToolsApi* | [**get_you_tube_transcript**](docs/ToolsApi.md#get_you_tube_transcript) | **GET** /v1/tools/youtube/transcript | Get YouTube transcript
 *Late::TwitterEngagementApi* | [**bookmark_post**](docs/TwitterEngagementApi.md#bookmark_post) | **POST** /v1/twitter/bookmark | Bookmark a tweet
 *Late::TwitterEngagementApi* | [**follow_user**](docs/TwitterEngagementApi.md#follow_user) | **POST** /v1/twitter/follow | Follow a user
 *Late::TwitterEngagementApi* | [**remove_bookmark**](docs/TwitterEngagementApi.md#remove_bookmark) | **DELETE** /v1/twitter/bookmark | Remove bookmark
@@ -269,10 +260,6 @@ Class | Method | HTTP request | Description
 *Late::UsageApi* | [**get_usage_stats**](docs/UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage stats
 *Late::UsersApi* | [**get_user**](docs/UsersApi.md#get_user) | **GET** /v1/users/{userId} | Get user
 *Late::UsersApi* | [**list_users**](docs/UsersApi.md#list_users) | **GET** /v1/users | List users
-*Late::ValidateApi* | [**validate_media**](docs/ValidateApi.md#validate_media) | **POST** /v1/tools/validate/media | Validate media URL
-*Late::ValidateApi* | [**validate_post**](docs/ValidateApi.md#validate_post) | **POST** /v1/tools/validate/post | Validate post content
-*Late::ValidateApi* | [**validate_post_length**](docs/ValidateApi.md#validate_post_length) | **POST** /v1/tools/validate/post-length | Validate post character count
-*Late::ValidateApi* | [**validate_subreddit**](docs/ValidateApi.md#validate_subreddit) | **GET** /v1/tools/validate/subreddit | Check subreddit existence
 *Late::WebhooksApi* | [**create_webhook_settings**](docs/WebhooksApi.md#create_webhook_settings) | **POST** /v1/webhooks/settings | Create webhook
 *Late::WebhooksApi* | [**delete_webhook_settings**](docs/WebhooksApi.md#delete_webhook_settings) | **DELETE** /v1/webhooks/settings | Delete webhook
 *Late::WebhooksApi* | [**get_webhook_logs**](docs/WebhooksApi.md#get_webhook_logs) | **GET** /v1/webhooks/logs | Get delivery logs
@@ -381,11 +368,6 @@ Class | Method | HTTP request | Description
  - [Late::CancelBroadcast200ResponseBroadcast](docs/CancelBroadcast200ResponseBroadcast.md)
  - [Late::CancelWhatsAppBroadcastSchedule200Response](docs/CancelWhatsAppBroadcastSchedule200Response.md)
  - [Late::CancelWhatsAppBroadcastSchedule200ResponseBroadcast](docs/CancelWhatsAppBroadcastSchedule200ResponseBroadcast.md)
- - [Late::CaptionResponse](docs/CaptionResponse.md)
- - [Late::CheckInstagramHashtags200Response](docs/CheckInstagramHashtags200Response.md)
- - [Late::CheckInstagramHashtags200ResponseResultsInner](docs/CheckInstagramHashtags200ResponseResultsInner.md)
- - [Late::CheckInstagramHashtags200ResponseSummary](docs/CheckInstagramHashtags200ResponseSummary.md)
- - [Late::CheckInstagramHashtagsRequest](docs/CheckInstagramHashtagsRequest.md)
  - [Late::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
  - [Late::ConnectBlueskyCredentials200Response](docs/ConnectBlueskyCredentials200Response.md)
  - [Late::ConnectBlueskyCredentialsRequest](docs/ConnectBlueskyCredentialsRequest.md)
@@ -469,15 +451,6 @@ Class | Method | HTTP request | Description
  - [Late::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
  - [Late::DeleteQueueSlot200Response](docs/DeleteQueueSlot200Response.md)
  - [Late::DeleteWhatsAppGroupRequest](docs/DeleteWhatsAppGroupRequest.md)
- - [Late::DownloadBlueskyMedia200Response](docs/DownloadBlueskyMedia200Response.md)
- - [Late::DownloadFacebookVideo200Response](docs/DownloadFacebookVideo200Response.md)
- - [Late::DownloadFormat](docs/DownloadFormat.md)
- - [Late::DownloadInstagramMedia200Response](docs/DownloadInstagramMedia200Response.md)
- - [Late::DownloadResponse](docs/DownloadResponse.md)
- - [Late::DownloadTikTokVideo200Response](docs/DownloadTikTokVideo200Response.md)
- - [Late::DownloadTikTokVideo200ResponseFormatsInner](docs/DownloadTikTokVideo200ResponseFormatsInner.md)
- - [Late::DownloadYouTubeVideo200Response](docs/DownloadYouTubeVideo200Response.md)
- - [Late::DownloadYouTubeVideo200ResponseFormatsInner](docs/DownloadYouTubeVideo200ResponseFormatsInner.md)
  - [Late::EditInboxMessage200Response](docs/EditInboxMessage200Response.md)
  - [Late::EditInboxMessage200ResponseData](docs/EditInboxMessage200ResponseData.md)
  - [Late::EditInboxMessageRequest](docs/EditInboxMessageRequest.md)
@@ -667,15 +640,11 @@ Class | Method | HTTP request | Description
  - [Late::GetYouTubeDailyViews400Response](docs/GetYouTubeDailyViews400Response.md)
  - [Late::GetYouTubeDailyViews403Response](docs/GetYouTubeDailyViews403Response.md)
  - [Late::GetYouTubeDailyViews500Response](docs/GetYouTubeDailyViews500Response.md)
- - [Late::GetYouTubeTranscript200Response](docs/GetYouTubeTranscript200Response.md)
- - [Late::GetYouTubeTranscript200ResponseSegmentsInner](docs/GetYouTubeTranscript200ResponseSegmentsInner.md)
  - [Late::GetYoutubePlaylists200Response](docs/GetYoutubePlaylists200Response.md)
  - [Late::GetYoutubePlaylists200ResponsePlaylistsInner](docs/GetYoutubePlaylists200ResponsePlaylistsInner.md)
  - [Late::GoogleBusinessPlatformData](docs/GoogleBusinessPlatformData.md)
  - [Late::GoogleBusinessPlatformDataCallToAction](docs/GoogleBusinessPlatformDataCallToAction.md)
  - [Late::HandleOAuthCallbackRequest](docs/HandleOAuthCallbackRequest.md)
- - [Late::HashtagCheckResponse](docs/HashtagCheckResponse.md)
- - [Late::HashtagInfo](docs/HashtagInfo.md)
  - [Late::HideInboxComment200Response](docs/HideInboxComment200Response.md)
  - [Late::HideInboxCommentRequest](docs/HideInboxCommentRequest.md)
  - [Late::ImportWhatsAppContacts200Response](docs/ImportWhatsAppContacts200Response.md)
@@ -904,8 +873,6 @@ Class | Method | HTTP request | Description
  - [Late::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Late::ThreadsPlatformData](docs/ThreadsPlatformData.md)
  - [Late::TikTokPlatformData](docs/TikTokPlatformData.md)
- - [Late::TranscriptResponse](docs/TranscriptResponse.md)
- - [Late::TranscriptSegment](docs/TranscriptSegment.md)
  - [Late::TwitterPlatformData](docs/TwitterPlatformData.md)
  - [Late::TwitterPlatformDataPoll](docs/TwitterPlatformDataPoll.md)
  - [Late::TwitterPlatformDataThreadItemsInner](docs/TwitterPlatformDataThreadItemsInner.md)
@@ -997,25 +964,6 @@ Class | Method | HTTP request | Description
  - [Late::User](docs/User.md)
  - [Late::UserGetResponse](docs/UserGetResponse.md)
  - [Late::UsersListResponse](docs/UsersListResponse.md)
- - [Late::ValidateMedia200Response](docs/ValidateMedia200Response.md)
- - [Late::ValidateMedia200ResponsePlatformLimitsValue](docs/ValidateMedia200ResponsePlatformLimitsValue.md)
- - [Late::ValidateMediaRequest](docs/ValidateMediaRequest.md)
- - [Late::ValidatePost200Response](docs/ValidatePost200Response.md)
- - [Late::ValidatePost200ResponseOneOf](docs/ValidatePost200ResponseOneOf.md)
- - [Late::ValidatePost200ResponseOneOf1](docs/ValidatePost200ResponseOneOf1.md)
- - [Late::ValidatePost200ResponseOneOf1ErrorsInner](docs/ValidatePost200ResponseOneOf1ErrorsInner.md)
- - [Late::ValidatePost200ResponseOneOfWarningsInner](docs/ValidatePost200ResponseOneOfWarningsInner.md)
- - [Late::ValidatePostLength200Response](docs/ValidatePostLength200Response.md)
- - [Late::ValidatePostLength200ResponsePlatformsValue](docs/ValidatePostLength200ResponsePlatformsValue.md)
- - [Late::ValidatePostLengthRequest](docs/ValidatePostLengthRequest.md)
- - [Late::ValidatePostRequest](docs/ValidatePostRequest.md)
- - [Late::ValidatePostRequestMediaItemsInner](docs/ValidatePostRequestMediaItemsInner.md)
- - [Late::ValidatePostRequestPlatformsInner](docs/ValidatePostRequestPlatformsInner.md)
- - [Late::ValidatePostRequestPlatformsInnerCustomMediaInner](docs/ValidatePostRequestPlatformsInnerCustomMediaInner.md)
- - [Late::ValidateSubreddit200Response](docs/ValidateSubreddit200Response.md)
- - [Late::ValidateSubreddit200ResponseOneOf](docs/ValidateSubreddit200ResponseOneOf.md)
- - [Late::ValidateSubreddit200ResponseOneOf1](docs/ValidateSubreddit200ResponseOneOf1.md)
- - [Late::ValidateSubreddit200ResponseOneOfSubreddit](docs/ValidateSubreddit200ResponseOneOfSubreddit.md)
  - [Late::Webhook](docs/Webhook.md)
  - [Late::WebhookLog](docs/WebhookLog.md)
  - [Late::WebhookPayloadAccountConnected](docs/WebhookPayloadAccountConnected.md)
