@@ -234,4 +234,19 @@ describe 'AnalyticsApi' do
     end
   end
 
+  # unit tests for get_you_tube_demographics
+  # Get YouTube audience demographics
+  # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
+  # @param account_id The Zernio SocialAccount ID for the YouTube account
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :breakdown Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
+  # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago. 
+  # @option opts [Date] :end_date End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
+  # @return [YouTubeDemographicsResponse]
+  describe 'get_you_tube_demographics test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

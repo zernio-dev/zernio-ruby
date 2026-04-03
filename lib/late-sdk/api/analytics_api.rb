@@ -1041,5 +1041,78 @@ module Late
       end
       return data, status_code, headers
     end
+
+    # Get YouTube audience demographics
+    # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the YouTube account
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :breakdown Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
+    # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago. 
+    # @option opts [Date] :end_date End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
+    # @return [YouTubeDemographicsResponse]
+    def get_you_tube_demographics(account_id, opts = {})
+      data, _status_code, _headers = get_you_tube_demographics_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get YouTube audience demographics
+    # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the YouTube account
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :breakdown Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
+    # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago. 
+    # @option opts [Date] :end_date End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
+    # @return [Array<(YouTubeDemographicsResponse, Integer, Hash)>] YouTubeDemographicsResponse data, response status code and response headers
+    def get_you_tube_demographics_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_you_tube_demographics ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_you_tube_demographics"
+      end
+      # resource path
+      local_var_path = '/v1/analytics/youtube/demographics'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'breakdown'] = opts[:'breakdown'] if !opts[:'breakdown'].nil?
+      query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'YouTubeDemographicsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_you_tube_demographics",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_you_tube_demographics\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end

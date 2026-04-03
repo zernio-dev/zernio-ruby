@@ -17,6 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_post_timeline**](AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline |
 | [**get_posting_frequency**](AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get posting frequency vs engagement |
 | [**get_you_tube_daily_views**](AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views |
+| [**get_you_tube_demographics**](AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube audience demographics |
 
 
 ## get_analytics
@@ -1021,6 +1022,83 @@ end
 ### Return type
 
 [**YouTubeDailyViewsResponse**](YouTubeDailyViewsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_you_tube_demographics
+
+> <YouTubeDemographicsResponse> get_you_tube_demographics(account_id, opts)
+
+Get YouTube audience demographics
+
+Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::AnalyticsApi.new
+account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the YouTube account
+opts = {
+  breakdown: 'breakdown_example', # String | Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
+  start_date: Date.parse('2013-10-20'), # Date | Start date in YYYY-MM-DD format. Defaults to 90 days ago. 
+  end_date: Date.parse('2013-10-20') # Date | End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
+}
+
+begin
+  # Get YouTube audience demographics
+  result = api_instance.get_you_tube_demographics(account_id, opts)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling AnalyticsApi->get_you_tube_demographics: #{e}"
+end
+```
+
+#### Using the get_you_tube_demographics_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<YouTubeDemographicsResponse>, Integer, Hash)> get_you_tube_demographics_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get YouTube audience demographics
+  data, status_code, headers = api_instance.get_you_tube_demographics_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <YouTubeDemographicsResponse>
+rescue Late::ApiError => e
+  puts "Error when calling AnalyticsApi->get_you_tube_demographics_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio SocialAccount ID for the YouTube account |  |
+| **breakdown** | **String** | Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted.  | [optional] |
+| **start_date** | **Date** | Start date in YYYY-MM-DD format. Defaults to 90 days ago.  | [optional] |
+| **end_date** | **Date** | End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency).  | [optional] |
+
+### Return type
+
+[**YouTubeDemographicsResponse**](YouTubeDemographicsResponse.md)
 
 ### Authorization
 

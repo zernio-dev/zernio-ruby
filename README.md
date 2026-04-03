@@ -118,6 +118,7 @@ Class | Method | HTTP request | Description
 *Late::AnalyticsApi* | [**get_post_timeline**](docs/AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline
 *Late::AnalyticsApi* | [**get_posting_frequency**](docs/AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get posting frequency vs engagement
 *Late::AnalyticsApi* | [**get_you_tube_daily_views**](docs/AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views
+*Late::AnalyticsApi* | [**get_you_tube_demographics**](docs/AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube audience demographics
 *Late::BroadcastsApi* | [**add_broadcast_recipients**](docs/BroadcastsApi.md#add_broadcast_recipients) | **POST** /v1/broadcasts/{broadcastId}/recipients | Add recipients to a broadcast
 *Late::BroadcastsApi* | [**cancel_broadcast**](docs/BroadcastsApi.md#cancel_broadcast) | **POST** /v1/broadcasts/{broadcastId}/cancel | Cancel a broadcast
 *Late::BroadcastsApi* | [**create_broadcast**](docs/BroadcastsApi.md#create_broadcast) | **POST** /v1/broadcasts | Create a broadcast draft
@@ -314,6 +315,16 @@ Class | Method | HTTP request | Description
 *Late::WhatsAppApi* | [**update_whats_app_group_chat**](docs/WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings
 *Late::WhatsAppApi* | [**update_whats_app_template**](docs/WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template
 *Late::WhatsAppApi* | [**upload_whats_app_profile_photo**](docs/WhatsAppApi.md#upload_whats_app_profile_photo) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture
+*Late::WhatsAppFlowsApi* | [**create_whats_app_flow**](docs/WhatsAppFlowsApi.md#create_whats_app_flow) | **POST** /v1/whatsapp/flows | Create flow
+*Late::WhatsAppFlowsApi* | [**delete_whats_app_flow**](docs/WhatsAppFlowsApi.md#delete_whats_app_flow) | **DELETE** /v1/whatsapp/flows/{flowId} | Delete flow
+*Late::WhatsAppFlowsApi* | [**deprecate_whats_app_flow**](docs/WhatsAppFlowsApi.md#deprecate_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/deprecate | Deprecate flow
+*Late::WhatsAppFlowsApi* | [**get_whats_app_flow**](docs/WhatsAppFlowsApi.md#get_whats_app_flow) | **GET** /v1/whatsapp/flows/{flowId} | Get flow
+*Late::WhatsAppFlowsApi* | [**get_whats_app_flow_json**](docs/WhatsAppFlowsApi.md#get_whats_app_flow_json) | **GET** /v1/whatsapp/flows/{flowId}/json | Get flow JSON asset
+*Late::WhatsAppFlowsApi* | [**list_whats_app_flows**](docs/WhatsAppFlowsApi.md#list_whats_app_flows) | **GET** /v1/whatsapp/flows | List flows
+*Late::WhatsAppFlowsApi* | [**publish_whats_app_flow**](docs/WhatsAppFlowsApi.md#publish_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/publish | Publish flow
+*Late::WhatsAppFlowsApi* | [**send_whats_app_flow_message**](docs/WhatsAppFlowsApi.md#send_whats_app_flow_message) | **POST** /v1/whatsapp/flows/send | Send flow message
+*Late::WhatsAppFlowsApi* | [**update_whats_app_flow**](docs/WhatsAppFlowsApi.md#update_whats_app_flow) | **PATCH** /v1/whatsapp/flows/{flowId} | Update flow
+*Late::WhatsAppFlowsApi* | [**upload_whats_app_flow_json**](docs/WhatsAppFlowsApi.md#upload_whats_app_flow_json) | **PUT** /v1/whatsapp/flows/{flowId}/json | Upload flow JSON
 *Late::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_number) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number
 *Late::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_numbers**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers
 *Late::WhatsAppPhoneNumbersApi* | [**purchase_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number
@@ -442,6 +453,9 @@ Class | Method | HTTP request | Description
  - [Late::CreateWhatsAppContact200Response](docs/CreateWhatsAppContact200Response.md)
  - [Late::CreateWhatsAppContact200ResponseContact](docs/CreateWhatsAppContact200ResponseContact.md)
  - [Late::CreateWhatsAppContactRequest](docs/CreateWhatsAppContactRequest.md)
+ - [Late::CreateWhatsAppFlow200Response](docs/CreateWhatsAppFlow200Response.md)
+ - [Late::CreateWhatsAppFlow200ResponseFlow](docs/CreateWhatsAppFlow200ResponseFlow.md)
+ - [Late::CreateWhatsAppFlowRequest](docs/CreateWhatsAppFlowRequest.md)
  - [Late::CreateWhatsAppGroupChat201Response](docs/CreateWhatsAppGroupChat201Response.md)
  - [Late::CreateWhatsAppGroupChat201ResponseGroup](docs/CreateWhatsAppGroupChat201ResponseGroup.md)
  - [Late::CreateWhatsAppGroupChatRequest](docs/CreateWhatsAppGroupChatRequest.md)
@@ -632,6 +646,11 @@ Class | Method | HTTP request | Description
  - [Late::GetWhatsAppContacts200ResponsePagination](docs/GetWhatsAppContacts200ResponsePagination.md)
  - [Late::GetWhatsAppDisplayName200Response](docs/GetWhatsAppDisplayName200Response.md)
  - [Late::GetWhatsAppDisplayName200ResponseDisplayName](docs/GetWhatsAppDisplayName200ResponseDisplayName.md)
+ - [Late::GetWhatsAppFlow200Response](docs/GetWhatsAppFlow200Response.md)
+ - [Late::GetWhatsAppFlow200ResponseFlow](docs/GetWhatsAppFlow200ResponseFlow.md)
+ - [Late::GetWhatsAppFlow200ResponseFlowPreview](docs/GetWhatsAppFlow200ResponseFlowPreview.md)
+ - [Late::GetWhatsAppFlowJson200Response](docs/GetWhatsAppFlowJson200Response.md)
+ - [Late::GetWhatsAppFlowJson200ResponseAssetsInner](docs/GetWhatsAppFlowJson200ResponseAssetsInner.md)
  - [Late::GetWhatsAppGroupChat200Response](docs/GetWhatsAppGroupChat200Response.md)
  - [Late::GetWhatsAppGroupChat200ResponseGroup](docs/GetWhatsAppGroupChat200ResponseGroup.md)
  - [Late::GetWhatsAppGroupChat200ResponseGroupParticipantsInner](docs/GetWhatsAppGroupChat200ResponseGroupParticipantsInner.md)
@@ -649,6 +668,8 @@ Class | Method | HTTP request | Description
  - [Late::GetYouTubeDailyViews400Response](docs/GetYouTubeDailyViews400Response.md)
  - [Late::GetYouTubeDailyViews403Response](docs/GetYouTubeDailyViews403Response.md)
  - [Late::GetYouTubeDailyViews500Response](docs/GetYouTubeDailyViews500Response.md)
+ - [Late::GetYouTubeDemographics412Response](docs/GetYouTubeDemographics412Response.md)
+ - [Late::GetYouTubeDemographics412ResponseScopeStatus](docs/GetYouTubeDemographics412ResponseScopeStatus.md)
  - [Late::GetYoutubePlaylists200Response](docs/GetYoutubePlaylists200Response.md)
  - [Late::GetYoutubePlaylists200ResponsePlaylistsInner](docs/GetYoutubePlaylists200ResponsePlaylistsInner.md)
  - [Late::GoogleBusinessPlatformData](docs/GoogleBusinessPlatformData.md)
@@ -748,6 +769,8 @@ Class | Method | HTTP request | Description
  - [Late::ListSnapchatProfiles200ResponsePublicProfilesInner](docs/ListSnapchatProfiles200ResponsePublicProfilesInner.md)
  - [Late::ListUsers200Response](docs/ListUsers200Response.md)
  - [Late::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
+ - [Late::ListWhatsAppFlows200Response](docs/ListWhatsAppFlows200Response.md)
+ - [Late::ListWhatsAppFlows200ResponseFlowsInner](docs/ListWhatsAppFlows200ResponseFlowsInner.md)
  - [Late::ListWhatsAppGroupChats200Response](docs/ListWhatsAppGroupChats200Response.md)
  - [Late::ListWhatsAppGroupChats200ResponseGroupsInner](docs/ListWhatsAppGroupChats200ResponseGroupsInner.md)
  - [Late::ListWhatsAppGroupChats200ResponsePaging](docs/ListWhatsAppGroupChats200ResponsePaging.md)
@@ -785,6 +808,7 @@ Class | Method | HTTP request | Description
  - [Late::ProfileGetResponse](docs/ProfileGetResponse.md)
  - [Late::ProfileUpdateResponse](docs/ProfileUpdateResponse.md)
  - [Late::ProfilesListResponse](docs/ProfilesListResponse.md)
+ - [Late::PublishWhatsAppFlowRequest](docs/PublishWhatsAppFlowRequest.md)
  - [Late::PurchaseWhatsAppPhoneNumber200Response](docs/PurchaseWhatsAppPhoneNumber200Response.md)
  - [Late::PurchaseWhatsAppPhoneNumber200ResponseOneOf](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf.md)
  - [Late::PurchaseWhatsAppPhoneNumber200ResponseOneOf1](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf1.md)
@@ -868,6 +892,10 @@ Class | Method | HTTP request | Description
  - [Late::SendWhatsAppBulkRequest](docs/SendWhatsAppBulkRequest.md)
  - [Late::SendWhatsAppBulkRequestRecipientsInner](docs/SendWhatsAppBulkRequestRecipientsInner.md)
  - [Late::SendWhatsAppBulkRequestTemplate](docs/SendWhatsAppBulkRequestTemplate.md)
+ - [Late::SendWhatsAppFlowMessage200Response](docs/SendWhatsAppFlowMessage200Response.md)
+ - [Late::SendWhatsAppFlowMessageRequest](docs/SendWhatsAppFlowMessageRequest.md)
+ - [Late::SendWhatsAppFlowMessageRequestFlowActionPayload](docs/SendWhatsAppFlowMessageRequestFlowActionPayload.md)
+ - [Late::SendWhatsAppFlowMessageRequestHeader](docs/SendWhatsAppFlowMessageRequestHeader.md)
  - [Late::SetContactFieldValueRequest](docs/SetContactFieldValueRequest.md)
  - [Late::SetInstagramIceBreakersRequest](docs/SetInstagramIceBreakersRequest.md)
  - [Late::SetInstagramIceBreakersRequestIceBreakersInner](docs/SetInstagramIceBreakersRequestIceBreakersInner.md)
@@ -957,6 +985,7 @@ Class | Method | HTTP request | Description
  - [Late::UpdateWhatsAppDisplayName200Response](docs/UpdateWhatsAppDisplayName200Response.md)
  - [Late::UpdateWhatsAppDisplayName200ResponseDisplayName](docs/UpdateWhatsAppDisplayName200ResponseDisplayName.md)
  - [Late::UpdateWhatsAppDisplayNameRequest](docs/UpdateWhatsAppDisplayNameRequest.md)
+ - [Late::UpdateWhatsAppFlowRequest](docs/UpdateWhatsAppFlowRequest.md)
  - [Late::UpdateWhatsAppGroupChatRequest](docs/UpdateWhatsAppGroupChatRequest.md)
  - [Late::UpdateWhatsAppTemplate200Response](docs/UpdateWhatsAppTemplate200Response.md)
  - [Late::UpdateWhatsAppTemplate200ResponseTemplate](docs/UpdateWhatsAppTemplate200ResponseTemplate.md)
@@ -966,6 +995,10 @@ Class | Method | HTTP request | Description
  - [Late::UploadMediaDirect200Response](docs/UploadMediaDirect200Response.md)
  - [Late::UploadTokenResponse](docs/UploadTokenResponse.md)
  - [Late::UploadTokenStatusResponse](docs/UploadTokenStatusResponse.md)
+ - [Late::UploadWhatsAppFlowJson200Response](docs/UploadWhatsAppFlowJson200Response.md)
+ - [Late::UploadWhatsAppFlowJson200ResponseValidationErrorsInner](docs/UploadWhatsAppFlowJson200ResponseValidationErrorsInner.md)
+ - [Late::UploadWhatsAppFlowJsonRequest](docs/UploadWhatsAppFlowJsonRequest.md)
+ - [Late::UploadWhatsAppFlowJsonRequestFlowJson](docs/UploadWhatsAppFlowJsonRequestFlowJson.md)
  - [Late::UploadedFile](docs/UploadedFile.md)
  - [Late::UsageStats](docs/UsageStats.md)
  - [Late::UsageStatsLimits](docs/UsageStatsLimits.md)
@@ -1027,6 +1060,9 @@ Class | Method | HTTP request | Description
  - [Late::YouTubeDailyViewsResponseDailyViewsInner](docs/YouTubeDailyViewsResponseDailyViewsInner.md)
  - [Late::YouTubeDailyViewsResponseDateRange](docs/YouTubeDailyViewsResponseDateRange.md)
  - [Late::YouTubeDailyViewsResponseScopeStatus](docs/YouTubeDailyViewsResponseScopeStatus.md)
+ - [Late::YouTubeDemographicsResponse](docs/YouTubeDemographicsResponse.md)
+ - [Late::YouTubeDemographicsResponseDateRange](docs/YouTubeDemographicsResponseDateRange.md)
+ - [Late::YouTubeDemographicsResponseDemographicsValueInner](docs/YouTubeDemographicsResponseDemographicsValueInner.md)
  - [Late::YouTubePlatformData](docs/YouTubePlatformData.md)
  - [Late::YouTubeScopeMissingResponse](docs/YouTubeScopeMissingResponse.md)
  - [Late::YouTubeScopeMissingResponseScopeStatus](docs/YouTubeScopeMissingResponseScopeStatus.md)
