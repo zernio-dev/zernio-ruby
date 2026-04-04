@@ -428,6 +428,159 @@ module Late
       return data, status_code, headers
     end
 
+    # Get Google Business Profile performance metrics
+    # Returns daily performance metrics for a Google Business Profile location. Metrics include impressions (Maps/Search, desktop/mobile), website clicks, call clicks, direction requests, conversations, bookings, and food orders. Data may be delayed 2-3 days. Max 18 months of historical data. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the Google Business Profile account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated metric names. Defaults to all available metrics. Valid values: BUSINESS_IMPRESSIONS_DESKTOP_MAPS, BUSINESS_IMPRESSIONS_DESKTOP_SEARCH, BUSINESS_IMPRESSIONS_MOBILE_MAPS, BUSINESS_IMPRESSIONS_MOBILE_SEARCH, BUSINESS_CONVERSATIONS, BUSINESS_DIRECTION_REQUESTS, CALL_CLICKS, WEBSITE_CLICKS, BUSINESS_BOOKINGS, BUSINESS_FOOD_ORDERS, BUSINESS_FOOD_MENU_CLICKS 
+    # @option opts [Date] :start_date Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back.
+    # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to today.
+    # @return [GetGoogleBusinessPerformance200Response]
+    def get_google_business_performance(account_id, opts = {})
+      data, _status_code, _headers = get_google_business_performance_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get Google Business Profile performance metrics
+    # Returns daily performance metrics for a Google Business Profile location. Metrics include impressions (Maps/Search, desktop/mobile), website clicks, call clicks, direction requests, conversations, bookings, and food orders. Data may be delayed 2-3 days. Max 18 months of historical data. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the Google Business Profile account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated metric names. Defaults to all available metrics. Valid values: BUSINESS_IMPRESSIONS_DESKTOP_MAPS, BUSINESS_IMPRESSIONS_DESKTOP_SEARCH, BUSINESS_IMPRESSIONS_MOBILE_MAPS, BUSINESS_IMPRESSIONS_MOBILE_SEARCH, BUSINESS_CONVERSATIONS, BUSINESS_DIRECTION_REQUESTS, CALL_CLICKS, WEBSITE_CLICKS, BUSINESS_BOOKINGS, BUSINESS_FOOD_ORDERS, BUSINESS_FOOD_MENU_CLICKS 
+    # @option opts [Date] :start_date Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back.
+    # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to today.
+    # @return [Array<(GetGoogleBusinessPerformance200Response, Integer, Hash)>] GetGoogleBusinessPerformance200Response data, response status code and response headers
+    def get_google_business_performance_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_google_business_performance ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_google_business_performance"
+      end
+      # resource path
+      local_var_path = '/v1/analytics/googlebusiness/performance'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'metrics'] = opts[:'metrics'] if !opts[:'metrics'].nil?
+      query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetGoogleBusinessPerformance200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_google_business_performance",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_google_business_performance\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get Google Business Profile search keywords
+    # Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords below a minimum impression threshold set by Google are excluded. Max 18 months of historical data. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the Google Business Profile account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :start_month Start month (YYYY-MM). Defaults to 3 months ago.
+    # @option opts [String] :end_month End month (YYYY-MM). Defaults to current month.
+    # @return [GetGoogleBusinessSearchKeywords200Response]
+    def get_google_business_search_keywords(account_id, opts = {})
+      data, _status_code, _headers = get_google_business_search_keywords_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get Google Business Profile search keywords
+    # Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords below a minimum impression threshold set by Google are excluded. Max 18 months of historical data. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the Google Business Profile account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :start_month Start month (YYYY-MM). Defaults to 3 months ago.
+    # @option opts [String] :end_month End month (YYYY-MM). Defaults to current month.
+    # @return [Array<(GetGoogleBusinessSearchKeywords200Response, Integer, Hash)>] GetGoogleBusinessSearchKeywords200Response data, response status code and response headers
+    def get_google_business_search_keywords_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_google_business_search_keywords ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_google_business_search_keywords"
+      end
+      pattern = Regexp.new(/^\d{4}-\d{2}$/)
+      if @api_client.config.client_side_validation && !opts[:'start_month'].nil? && opts[:'start_month'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"start_month\"]' when calling AnalyticsApi.get_google_business_search_keywords, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d{4}-\d{2}$/)
+      if @api_client.config.client_side_validation && !opts[:'end_month'].nil? && opts[:'end_month'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"end_month\"]' when calling AnalyticsApi.get_google_business_search_keywords, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/analytics/googlebusiness/search-keywords'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'startMonth'] = opts[:'start_month'] if !opts[:'start_month'].nil?
+      query_params[:'endMonth'] = opts[:'end_month'] if !opts[:'end_month'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetGoogleBusinessSearchKeywords200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_google_business_search_keywords",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_google_business_search_keywords\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Instagram account-level insights
     # Returns account-level Instagram insights such as reach, views, accounts engaged, and total interactions. These metrics reflect the entire account's performance across all content surfaces (feed, stories, explore, profile), and are fundamentally different from post-level metrics. Data may be delayed up to 48 hours. Max 90 days, defaults to last 30 days. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Instagram account

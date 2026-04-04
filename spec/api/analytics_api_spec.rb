@@ -115,6 +115,35 @@ describe 'AnalyticsApi' do
     end
   end
 
+  # unit tests for get_google_business_performance
+  # Get Google Business Profile performance metrics
+  # Returns daily performance metrics for a Google Business Profile location. Metrics include impressions (Maps/Search, desktop/mobile), website clicks, call clicks, direction requests, conversations, bookings, and food orders. Data may be delayed 2-3 days. Max 18 months of historical data. Requires the Analytics add-on. 
+  # @param account_id The Zernio SocialAccount ID for the Google Business Profile account.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :metrics Comma-separated metric names. Defaults to all available metrics. Valid values: BUSINESS_IMPRESSIONS_DESKTOP_MAPS, BUSINESS_IMPRESSIONS_DESKTOP_SEARCH, BUSINESS_IMPRESSIONS_MOBILE_MAPS, BUSINESS_IMPRESSIONS_MOBILE_SEARCH, BUSINESS_CONVERSATIONS, BUSINESS_DIRECTION_REQUESTS, CALL_CLICKS, WEBSITE_CLICKS, BUSINESS_BOOKINGS, BUSINESS_FOOD_ORDERS, BUSINESS_FOOD_MENU_CLICKS 
+  # @option opts [Date] :start_date Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back.
+  # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to today.
+  # @return [GetGoogleBusinessPerformance200Response]
+  describe 'get_google_business_performance test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_google_business_search_keywords
+  # Get Google Business Profile search keywords
+  # Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords below a minimum impression threshold set by Google are excluded. Max 18 months of historical data. Requires the Analytics add-on. 
+  # @param account_id The Zernio SocialAccount ID for the Google Business Profile account.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :start_month Start month (YYYY-MM). Defaults to 3 months ago.
+  # @option opts [String] :end_month End month (YYYY-MM). Defaults to current month.
+  # @return [GetGoogleBusinessSearchKeywords200Response]
+  describe 'get_google_business_search_keywords test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_instagram_account_insights
   # Get Instagram account-level insights
   # Returns account-level Instagram insights such as reach, views, accounts engaged, and total interactions. These metrics reflect the entire account&#39;s performance across all content surfaces (feed, stories, explore, profile), and are fundamentally different from post-level metrics. Data may be delayed up to 48 hours. Max 90 days, defaults to last 30 days. Requires the Analytics add-on. 

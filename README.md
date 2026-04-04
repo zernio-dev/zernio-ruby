@@ -110,6 +110,8 @@ Class | Method | HTTP request | Description
 *Late::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
 *Late::AnalyticsApi* | [**get_daily_metrics**](docs/AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics
 *Late::AnalyticsApi* | [**get_follower_stats**](docs/AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
+*Late::AnalyticsApi* | [**get_google_business_performance**](docs/AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get Google Business Profile performance metrics
+*Late::AnalyticsApi* | [**get_google_business_search_keywords**](docs/AnalyticsApi.md#get_google_business_search_keywords) | **GET** /v1/analytics/googlebusiness/search-keywords | Get Google Business Profile search keywords
 *Late::AnalyticsApi* | [**get_instagram_account_insights**](docs/AnalyticsApi.md#get_instagram_account_insights) | **GET** /v1/analytics/instagram/account-insights | Get Instagram account-level insights
 *Late::AnalyticsApi* | [**get_instagram_demographics**](docs/AnalyticsApi.md#get_instagram_demographics) | **GET** /v1/analytics/instagram/demographics | Get Instagram audience demographics
 *Late::AnalyticsApi* | [**get_linked_in_aggregate_analytics**](docs/AnalyticsApi.md#get_linked_in_aggregate_analytics) | **GET** /v1/accounts/{accountId}/linkedin-aggregate-analytics | Get LinkedIn aggregate stats
@@ -559,10 +561,19 @@ Class | Method | HTTP request | Description
  - [Late::GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerPrice](docs/GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerPrice.md)
  - [Late::GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerStructuredServiceItem](docs/GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerStructuredServiceItem.md)
  - [Late::GetGoogleBusinessLocationDetails200ResponseSpecialHours](docs/GetGoogleBusinessLocationDetails200ResponseSpecialHours.md)
+ - [Late::GetGoogleBusinessPerformance200Response](docs/GetGoogleBusinessPerformance200Response.md)
+ - [Late::GetGoogleBusinessPerformance200ResponseDateRange](docs/GetGoogleBusinessPerformance200ResponseDateRange.md)
+ - [Late::GetGoogleBusinessPerformance200ResponseMetricsValue](docs/GetGoogleBusinessPerformance200ResponseMetricsValue.md)
+ - [Late::GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner](docs/GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner.md)
+ - [Late::GetGoogleBusinessPerformance400Response](docs/GetGoogleBusinessPerformance400Response.md)
  - [Late::GetGoogleBusinessReviews200Response](docs/GetGoogleBusinessReviews200Response.md)
  - [Late::GetGoogleBusinessReviews200ResponseReviewsInner](docs/GetGoogleBusinessReviews200ResponseReviewsInner.md)
  - [Late::GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply](docs/GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply.md)
  - [Late::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer](docs/GetGoogleBusinessReviews200ResponseReviewsInnerReviewer.md)
+ - [Late::GetGoogleBusinessSearchKeywords200Response](docs/GetGoogleBusinessSearchKeywords200Response.md)
+ - [Late::GetGoogleBusinessSearchKeywords200ResponseKeywordsInner](docs/GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.md)
+ - [Late::GetGoogleBusinessSearchKeywords200ResponseMonthRange](docs/GetGoogleBusinessSearchKeywords200ResponseMonthRange.md)
+ - [Late::GetGoogleBusinessSearchKeywords400Response](docs/GetGoogleBusinessSearchKeywords400Response.md)
  - [Late::GetInboxConversation200Response](docs/GetInboxConversation200Response.md)
  - [Late::GetInboxConversation200ResponseData](docs/GetInboxConversation200ResponseData.md)
  - [Late::GetInboxConversationMessages200Response](docs/GetInboxConversationMessages200Response.md)

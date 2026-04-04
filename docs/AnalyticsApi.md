@@ -9,6 +9,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_content_decay**](AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay |
 | [**get_daily_metrics**](AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics |
 | [**get_follower_stats**](AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
+| [**get_google_business_performance**](AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get Google Business Profile performance metrics |
+| [**get_google_business_search_keywords**](AnalyticsApi.md#get_google_business_search_keywords) | **GET** /v1/analytics/googlebusiness/search-keywords | Get Google Business Profile search keywords |
 | [**get_instagram_account_insights**](AnalyticsApi.md#get_instagram_account_insights) | **GET** /v1/analytics/instagram/account-insights | Get Instagram account-level insights |
 | [**get_instagram_demographics**](AnalyticsApi.md#get_instagram_demographics) | **GET** /v1/analytics/instagram/demographics | Get Instagram audience demographics |
 | [**get_linked_in_aggregate_analytics**](AnalyticsApi.md#get_linked_in_aggregate_analytics) | **GET** /v1/accounts/{accountId}/linkedin-aggregate-analytics | Get LinkedIn aggregate stats |
@@ -410,6 +412,158 @@ end
 ### Return type
 
 [**GetFollowerStats200Response**](GetFollowerStats200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_google_business_performance
+
+> <GetGoogleBusinessPerformance200Response> get_google_business_performance(account_id, opts)
+
+Get Google Business Profile performance metrics
+
+Returns daily performance metrics for a Google Business Profile location. Metrics include impressions (Maps/Search, desktop/mobile), website clicks, call clicks, direction requests, conversations, bookings, and food orders. Data may be delayed 2-3 days. Max 18 months of historical data. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::AnalyticsApi.new
+account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Google Business Profile account.
+opts = {
+  metrics: 'metrics_example', # String | Comma-separated metric names. Defaults to all available metrics. Valid values: BUSINESS_IMPRESSIONS_DESKTOP_MAPS, BUSINESS_IMPRESSIONS_DESKTOP_SEARCH, BUSINESS_IMPRESSIONS_MOBILE_MAPS, BUSINESS_IMPRESSIONS_MOBILE_SEARCH, BUSINESS_CONVERSATIONS, BUSINESS_DIRECTION_REQUESTS, CALL_CLICKS, WEBSITE_CLICKS, BUSINESS_BOOKINGS, BUSINESS_FOOD_ORDERS, BUSINESS_FOOD_MENU_CLICKS 
+  start_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back.
+  end_date: Date.parse('2013-10-20') # Date | End date (YYYY-MM-DD). Defaults to today.
+}
+
+begin
+  # Get Google Business Profile performance metrics
+  result = api_instance.get_google_business_performance(account_id, opts)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling AnalyticsApi->get_google_business_performance: #{e}"
+end
+```
+
+#### Using the get_google_business_performance_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetGoogleBusinessPerformance200Response>, Integer, Hash)> get_google_business_performance_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get Google Business Profile performance metrics
+  data, status_code, headers = api_instance.get_google_business_performance_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetGoogleBusinessPerformance200Response>
+rescue Late::ApiError => e
+  puts "Error when calling AnalyticsApi->get_google_business_performance_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio SocialAccount ID for the Google Business Profile account. |  |
+| **metrics** | **String** | Comma-separated metric names. Defaults to all available metrics. Valid values: BUSINESS_IMPRESSIONS_DESKTOP_MAPS, BUSINESS_IMPRESSIONS_DESKTOP_SEARCH, BUSINESS_IMPRESSIONS_MOBILE_MAPS, BUSINESS_IMPRESSIONS_MOBILE_SEARCH, BUSINESS_CONVERSATIONS, BUSINESS_DIRECTION_REQUESTS, CALL_CLICKS, WEBSITE_CLICKS, BUSINESS_BOOKINGS, BUSINESS_FOOD_ORDERS, BUSINESS_FOOD_MENU_CLICKS  | [optional] |
+| **start_date** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. Max 18 months back. | [optional] |
+| **end_date** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
+
+### Return type
+
+[**GetGoogleBusinessPerformance200Response**](GetGoogleBusinessPerformance200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_google_business_search_keywords
+
+> <GetGoogleBusinessSearchKeywords200Response> get_google_business_search_keywords(account_id, opts)
+
+Get Google Business Profile search keywords
+
+Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords below a minimum impression threshold set by Google are excluded. Max 18 months of historical data. Requires the Analytics add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::AnalyticsApi.new
+account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Google Business Profile account.
+opts = {
+  start_month: 'start_month_example', # String | Start month (YYYY-MM). Defaults to 3 months ago.
+  end_month: 'end_month_example' # String | End month (YYYY-MM). Defaults to current month.
+}
+
+begin
+  # Get Google Business Profile search keywords
+  result = api_instance.get_google_business_search_keywords(account_id, opts)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling AnalyticsApi->get_google_business_search_keywords: #{e}"
+end
+```
+
+#### Using the get_google_business_search_keywords_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetGoogleBusinessSearchKeywords200Response>, Integer, Hash)> get_google_business_search_keywords_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Get Google Business Profile search keywords
+  data, status_code, headers = api_instance.get_google_business_search_keywords_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetGoogleBusinessSearchKeywords200Response>
+rescue Late::ApiError => e
+  puts "Error when calling AnalyticsApi->get_google_business_search_keywords_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio SocialAccount ID for the Google Business Profile account. |  |
+| **start_month** | **String** | Start month (YYYY-MM). Defaults to 3 months ago. | [optional] |
+| **end_month** | **String** | End month (YYYY-MM). Defaults to current month. | [optional] |
+
+### Return type
+
+[**GetGoogleBusinessSearchKeywords200Response**](GetGoogleBusinessSearchKeywords200Response.md)
 
 ### Authorization
 
