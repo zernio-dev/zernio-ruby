@@ -218,6 +218,80 @@ module Late
       return data, status_code, headers
     end
 
+    # Edit published post
+    # Edit a published post on a social media platform. Currently only supported for X (Twitter).  **Requirements:** - Connected X account must have an active X Premium subscription - Must be within 1 hour of original publish time - Maximum 5 edits per tweet (enforced by X) - Text-only edits (media changes are not supported)  The post record in Zernio is updated with the new content and edit history. 
+    # @param post_id [String] 
+    # @param edit_post_request [EditPostRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [EditPost200Response]
+    def edit_post(post_id, edit_post_request, opts = {})
+      data, _status_code, _headers = edit_post_with_http_info(post_id, edit_post_request, opts)
+      data
+    end
+
+    # Edit published post
+    # Edit a published post on a social media platform. Currently only supported for X (Twitter).  **Requirements:** - Connected X account must have an active X Premium subscription - Must be within 1 hour of original publish time - Maximum 5 edits per tweet (enforced by X) - Text-only edits (media changes are not supported)  The post record in Zernio is updated with the new content and edit history. 
+    # @param post_id [String] 
+    # @param edit_post_request [EditPostRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(EditPost200Response, Integer, Hash)>] EditPost200Response data, response status code and response headers
+    def edit_post_with_http_info(post_id, edit_post_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PostsApi.edit_post ...'
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling PostsApi.edit_post"
+      end
+      # verify the required parameter 'edit_post_request' is set
+      if @api_client.config.client_side_validation && edit_post_request.nil?
+        fail ArgumentError, "Missing the required parameter 'edit_post_request' when calling PostsApi.edit_post"
+      end
+      # resource path
+      local_var_path = '/v1/posts/{postId}/edit'.sub('{' + 'postId' + '}', CGI.escape(post_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(edit_post_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'EditPost200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PostsApi.edit_post",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PostsApi#edit_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get post
     # Fetch a single post by ID. For published posts, this returns platformPostUrl for each platform. 
     # @param post_id [String] 

@@ -210,6 +210,7 @@ Class | Method | HTTP request | Description
 *Late::LogsApi* | [**list_posts_logs**](docs/LogsApi.md#list_posts_logs) | **GET** /v1/posts/logs | List publishing logs
 *Late::MediaApi* | [**get_media_presigned_url**](docs/MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get presigned upload URL
 *Late::MessagesApi* | [**add_message_reaction**](docs/MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction
+*Late::MessagesApi* | [**create_inbox_conversation**](docs/MessagesApi.md#create_inbox_conversation) | **POST** /v1/inbox/conversations | Create conversation
 *Late::MessagesApi* | [**delete_inbox_message**](docs/MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message
 *Late::MessagesApi* | [**edit_inbox_message**](docs/MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message
 *Late::MessagesApi* | [**get_inbox_conversation**](docs/MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation
@@ -223,6 +224,7 @@ Class | Method | HTTP request | Description
 *Late::PostsApi* | [**bulk_upload_posts**](docs/PostsApi.md#bulk_upload_posts) | **POST** /v1/posts/bulk-upload | Bulk upload from CSV
 *Late::PostsApi* | [**create_post**](docs/PostsApi.md#create_post) | **POST** /v1/posts | Create post
 *Late::PostsApi* | [**delete_post**](docs/PostsApi.md#delete_post) | **DELETE** /v1/posts/{postId} | Delete post
+*Late::PostsApi* | [**edit_post**](docs/PostsApi.md#edit_post) | **POST** /v1/posts/{postId}/edit | Edit published post
 *Late::PostsApi* | [**get_post**](docs/PostsApi.md#get_post) | **GET** /v1/posts/{postId} | Get post
 *Late::PostsApi* | [**list_posts**](docs/PostsApi.md#list_posts) | **GET** /v1/posts | List posts
 *Late::PostsApi* | [**retry_post**](docs/PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post
@@ -428,6 +430,11 @@ Class | Method | HTTP request | Description
  - [Late::CreateGoogleBusinessMediaRequest](docs/CreateGoogleBusinessMediaRequest.md)
  - [Late::CreateGoogleBusinessPlaceAction200Response](docs/CreateGoogleBusinessPlaceAction200Response.md)
  - [Late::CreateGoogleBusinessPlaceActionRequest](docs/CreateGoogleBusinessPlaceActionRequest.md)
+ - [Late::CreateInboxConversation201Response](docs/CreateInboxConversation201Response.md)
+ - [Late::CreateInboxConversation201ResponseData](docs/CreateInboxConversation201ResponseData.md)
+ - [Late::CreateInboxConversation400Response](docs/CreateInboxConversation400Response.md)
+ - [Late::CreateInboxConversation422Response](docs/CreateInboxConversation422Response.md)
+ - [Late::CreateInboxConversationRequest](docs/CreateInboxConversationRequest.md)
  - [Late::CreateInviteToken201Response](docs/CreateInviteToken201Response.md)
  - [Late::CreateInviteTokenRequest](docs/CreateInviteTokenRequest.md)
  - [Late::CreatePost409Response](docs/CreatePost409Response.md)
@@ -480,6 +487,8 @@ Class | Method | HTTP request | Description
  - [Late::EditInboxMessageRequest](docs/EditInboxMessageRequest.md)
  - [Late::EditInboxMessageRequestReplyMarkup](docs/EditInboxMessageRequestReplyMarkup.md)
  - [Late::EditInboxMessageRequestReplyMarkupKeyboardInnerInner](docs/EditInboxMessageRequestReplyMarkupKeyboardInnerInner.md)
+ - [Late::EditPost200Response](docs/EditPost200Response.md)
+ - [Late::EditPostRequest](docs/EditPostRequest.md)
  - [Late::EnrollContacts200Response](docs/EnrollContacts200Response.md)
  - [Late::EnrollContactsRequest](docs/EnrollContactsRequest.md)
  - [Late::ErrorResponse](docs/ErrorResponse.md)

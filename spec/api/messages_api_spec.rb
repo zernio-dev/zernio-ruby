@@ -46,6 +46,18 @@ describe 'MessagesApi' do
     end
   end
 
+  # unit tests for create_inbox_conversation
+  # Create conversation
+  # Initiate a new direct message conversation with a specified user. If a conversation already exists with the recipient, the message is added to the existing thread.  **Currently supported platforms:** Twitter/X only. Other platforms will return &#x60;PLATFORM_NOT_SUPPORTED&#x60;.  **DM eligibility:** Before sending, the endpoint checks if the recipient accepts DMs from your account (via the &#x60;receives_your_dm&#x60; field). If not, a 422 error with code &#x60;DM_NOT_ALLOWED&#x60; is returned. You can skip this check with &#x60;skipDmCheck: true&#x60; if you have already verified eligibility.  **X API tier requirement:** DM write endpoints require X API Pro tier ($5,000/month) or Enterprise access. This applies to BYOK (Bring Your Own Key) users who provide their own X API credentials.  **Rate limits:** 200 requests per 15 minutes, 1,000 per 24 hours per user, 15,000 per 24 hours per app (shared across all DM endpoints). 
+  # @param create_inbox_conversation_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateInboxConversation201Response]
+  describe 'create_inbox_conversation test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for delete_inbox_message
   # Delete message
   # Delete a message from a conversation. Platform support varies: - **Telegram**: Full delete (bot&#39;s own messages anytime, others if admin) - **X/Twitter**: Full delete (own DM events only) - **Bluesky**: Delete for self only (recipient still sees it) - **Reddit**: Delete from sender&#39;s view only - **Facebook, Instagram, WhatsApp**: Not supported (returns 400) 

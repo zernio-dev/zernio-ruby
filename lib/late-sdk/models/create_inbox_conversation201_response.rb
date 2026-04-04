@@ -14,27 +14,16 @@ require 'date'
 require 'time'
 
 module Late
-  class UpdatePostRequest < ApiModelBase
-    attr_accessor :content
+  class CreateInboxConversation201Response < ApiModelBase
+    attr_accessor :success
 
-    attr_accessor :scheduled_for
-
-    # Root-level TikTok settings applied to all TikTok platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
-    attr_accessor :tiktok_settings
-
-    # Root-level Facebook settings applied to all Facebook platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
-    attr_accessor :facebook_settings
-
-    attr_accessor :recycling
+    attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'content' => :'content',
-        :'scheduled_for' => :'scheduledFor',
-        :'tiktok_settings' => :'tiktokSettings',
-        :'facebook_settings' => :'facebookSettings',
-        :'recycling' => :'recycling'
+        :'success' => :'success',
+        :'data' => :'data'
       }
     end
 
@@ -51,11 +40,8 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'content' => :'String',
-        :'scheduled_for' => :'Time',
-        :'tiktok_settings' => :'TikTokPlatformData',
-        :'facebook_settings' => :'FacebookPlatformData',
-        :'recycling' => :'RecyclingConfig'
+        :'success' => :'Boolean',
+        :'data' => :'CreateInboxConversation201ResponseData'
       }
     end
 
@@ -69,36 +55,24 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::UpdatePostRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::CreateInboxConversation201Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::UpdatePostRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::CreateInboxConversation201Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'content')
-        self.content = attributes[:'content']
+      if attributes.key?(:'success')
+        self.success = attributes[:'success']
       end
 
-      if attributes.key?(:'scheduled_for')
-        self.scheduled_for = attributes[:'scheduled_for']
-      end
-
-      if attributes.key?(:'tiktok_settings')
-        self.tiktok_settings = attributes[:'tiktok_settings']
-      end
-
-      if attributes.key?(:'facebook_settings')
-        self.facebook_settings = attributes[:'facebook_settings']
-      end
-
-      if attributes.key?(:'recycling')
-        self.recycling = attributes[:'recycling']
+      if attributes.key?(:'data')
+        self.data = attributes[:'data']
       end
     end
 
@@ -122,11 +96,8 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          content == o.content &&
-          scheduled_for == o.scheduled_for &&
-          tiktok_settings == o.tiktok_settings &&
-          facebook_settings == o.facebook_settings &&
-          recycling == o.recycling
+          success == o.success &&
+          data == o.data
     end
 
     # @see the `==` method
@@ -138,7 +109,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content, scheduled_for, tiktok_settings, facebook_settings, recycling].hash
+      [success, data].hash
     end
 
     # Builds the object from hash

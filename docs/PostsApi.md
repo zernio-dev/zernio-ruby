@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**bulk_upload_posts**](PostsApi.md#bulk_upload_posts) | **POST** /v1/posts/bulk-upload | Bulk upload from CSV |
 | [**create_post**](PostsApi.md#create_post) | **POST** /v1/posts | Create post |
 | [**delete_post**](PostsApi.md#delete_post) | **DELETE** /v1/posts/{postId} | Delete post |
+| [**edit_post**](PostsApi.md#edit_post) | **POST** /v1/posts/{postId}/edit | Edit published post |
 | [**get_post**](PostsApi.md#get_post) | **GET** /v1/posts/{postId} | Get post |
 | [**list_posts**](PostsApi.md#list_posts) | **GET** /v1/posts | List posts |
 | [**retry_post**](PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post |
@@ -223,6 +224,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## edit_post
+
+> <EditPost200Response> edit_post(post_id, edit_post_request)
+
+Edit published post
+
+Edit a published post on a social media platform. Currently only supported for X (Twitter).  **Requirements:** - Connected X account must have an active X Premium subscription - Must be within 1 hour of original publish time - Maximum 5 edits per tweet (enforced by X) - Text-only edits (media changes are not supported)  The post record in Zernio is updated with the new content and edit history. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::PostsApi.new
+post_id = 'post_id_example' # String | 
+edit_post_request = Late::EditPostRequest.new({platform: 'twitter', content: 'content_example'}) # EditPostRequest | 
+
+begin
+  # Edit published post
+  result = api_instance.edit_post(post_id, edit_post_request)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling PostsApi->edit_post: #{e}"
+end
+```
+
+#### Using the edit_post_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<EditPost200Response>, Integer, Hash)> edit_post_with_http_info(post_id, edit_post_request)
+
+```ruby
+begin
+  # Edit published post
+  data, status_code, headers = api_instance.edit_post_with_http_info(post_id, edit_post_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <EditPost200Response>
+rescue Late::ApiError => e
+  puts "Error when calling PostsApi->edit_post_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **edit_post_request** | [**EditPostRequest**](EditPostRequest.md) |  |  |
+
+### Return type
+
+[**EditPost200Response**](EditPost200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

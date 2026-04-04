@@ -14,27 +14,30 @@ require 'date'
 require 'time'
 
 module Late
-  class UpdatePostRequest < ApiModelBase
-    attr_accessor :content
+  class CreateInboxConversation201ResponseData < ApiModelBase
+    # Platform message ID (dm_event_id)
+    attr_accessor :message_id
 
-    attr_accessor :scheduled_for
+    # Platform conversation ID (dm_conversation_id)
+    attr_accessor :conversation_id
 
-    # Root-level TikTok settings applied to all TikTok platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
-    attr_accessor :tiktok_settings
+    # Twitter numeric user ID of the recipient
+    attr_accessor :participant_id
 
-    # Root-level Facebook settings applied to all Facebook platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
-    attr_accessor :facebook_settings
+    # Display name of the recipient
+    attr_accessor :participant_name
 
-    attr_accessor :recycling
+    # Twitter username of the recipient
+    attr_accessor :participant_username
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'content' => :'content',
-        :'scheduled_for' => :'scheduledFor',
-        :'tiktok_settings' => :'tiktokSettings',
-        :'facebook_settings' => :'facebookSettings',
-        :'recycling' => :'recycling'
+        :'message_id' => :'messageId',
+        :'conversation_id' => :'conversationId',
+        :'participant_id' => :'participantId',
+        :'participant_name' => :'participantName',
+        :'participant_username' => :'participantUsername'
       }
     end
 
@@ -51,11 +54,11 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'content' => :'String',
-        :'scheduled_for' => :'Time',
-        :'tiktok_settings' => :'TikTokPlatformData',
-        :'facebook_settings' => :'FacebookPlatformData',
-        :'recycling' => :'RecyclingConfig'
+        :'message_id' => :'String',
+        :'conversation_id' => :'String',
+        :'participant_id' => :'String',
+        :'participant_name' => :'String',
+        :'participant_username' => :'String'
       }
     end
 
@@ -69,36 +72,36 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::UpdatePostRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::CreateInboxConversation201ResponseData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::UpdatePostRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::CreateInboxConversation201ResponseData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'content')
-        self.content = attributes[:'content']
+      if attributes.key?(:'message_id')
+        self.message_id = attributes[:'message_id']
       end
 
-      if attributes.key?(:'scheduled_for')
-        self.scheduled_for = attributes[:'scheduled_for']
+      if attributes.key?(:'conversation_id')
+        self.conversation_id = attributes[:'conversation_id']
       end
 
-      if attributes.key?(:'tiktok_settings')
-        self.tiktok_settings = attributes[:'tiktok_settings']
+      if attributes.key?(:'participant_id')
+        self.participant_id = attributes[:'participant_id']
       end
 
-      if attributes.key?(:'facebook_settings')
-        self.facebook_settings = attributes[:'facebook_settings']
+      if attributes.key?(:'participant_name')
+        self.participant_name = attributes[:'participant_name']
       end
 
-      if attributes.key?(:'recycling')
-        self.recycling = attributes[:'recycling']
+      if attributes.key?(:'participant_username')
+        self.participant_username = attributes[:'participant_username']
       end
     end
 
@@ -122,11 +125,11 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          content == o.content &&
-          scheduled_for == o.scheduled_for &&
-          tiktok_settings == o.tiktok_settings &&
-          facebook_settings == o.facebook_settings &&
-          recycling == o.recycling
+          message_id == o.message_id &&
+          conversation_id == o.conversation_id &&
+          participant_id == o.participant_id &&
+          participant_name == o.participant_name &&
+          participant_username == o.participant_username
     end
 
     # @see the `==` method
@@ -138,7 +141,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content, scheduled_for, tiktok_settings, facebook_settings, recycling].hash
+      [message_id, conversation_id, participant_id, participant_name, participant_username].hash
     end
 
     # Builds the object from hash

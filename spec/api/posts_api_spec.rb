@@ -69,6 +69,19 @@ describe 'PostsApi' do
     end
   end
 
+  # unit tests for edit_post
+  # Edit published post
+  # Edit a published post on a social media platform. Currently only supported for X (Twitter).  **Requirements:** - Connected X account must have an active X Premium subscription - Must be within 1 hour of original publish time - Maximum 5 edits per tweet (enforced by X) - Text-only edits (media changes are not supported)  The post record in Zernio is updated with the new content and edit history. 
+  # @param post_id 
+  # @param edit_post_request 
+  # @param [Hash] opts the optional parameters
+  # @return [EditPost200Response]
+  describe 'edit_post test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_post
   # Get post
   # Fetch a single post by ID. For published posts, this returns platformPostUrl for each platform. 

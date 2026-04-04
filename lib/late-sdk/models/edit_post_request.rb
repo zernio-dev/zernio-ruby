@@ -14,20 +14,12 @@ require 'date'
 require 'time'
 
 module Late
-  class TwitterPlatformData < ApiModelBase
-    # ID of an existing tweet to reply to. The published tweet will appear as a reply in that tweet's thread. For threads, only the first tweet replies to the target; subsequent tweets chain normally.
-    attr_accessor :reply_to_tweet_id
+  class EditPostRequest < ApiModelBase
+    # The platform to edit the post on. Currently only twitter is supported.
+    attr_accessor :platform
 
-    # Controls who can reply to the tweet. \"following\" allows only people you follow, \"mentionedUsers\" allows only mentioned users, \"subscribers\" allows only subscribers, \"verified\" allows only verified users. Omit for default (everyone can reply). For threads, applies to the first tweet only. Cannot be combined with replyToTweetId.
-    attr_accessor :reply_settings
-
-    # Sequence of tweets in a thread. First item is the root tweet.
-    attr_accessor :thread_items
-
-    attr_accessor :poll
-
-    # Enable long video uploads (over 140 seconds) using amplify_video media category. Requires the connected X account to have an active X Premium subscription. When true, videos are uploaded with the amplify_video category which supports longer durations (up to 10 minutes via API). When false or omitted, the standard tweet_video category is used (140 second limit). Note that not all Premium accounts have API long-video access, as X may require separate allowlisting.
-    attr_accessor :long_video
+    # The new tweet text content
+    attr_accessor :content
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -54,11 +46,8 @@ module Late
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'reply_to_tweet_id' => :'replyToTweetId',
-        :'reply_settings' => :'replySettings',
-        :'thread_items' => :'threadItems',
-        :'poll' => :'poll',
-        :'long_video' => :'longVideo'
+        :'platform' => :'platform',
+        :'content' => :'content'
       }
     end
 
@@ -75,11 +64,8 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'reply_to_tweet_id' => :'String',
-        :'reply_settings' => :'String',
-        :'thread_items' => :'Array<TwitterPlatformDataThreadItemsInner>',
-        :'poll' => :'TwitterPlatformDataPoll',
-        :'long_video' => :'Boolean'
+        :'platform' => :'String',
+        :'content' => :'String'
       }
     end
 
@@ -93,40 +79,28 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::TwitterPlatformData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::EditPostRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::TwitterPlatformData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::EditPostRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'reply_to_tweet_id')
-        self.reply_to_tweet_id = attributes[:'reply_to_tweet_id']
-      end
-
-      if attributes.key?(:'reply_settings')
-        self.reply_settings = attributes[:'reply_settings']
-      end
-
-      if attributes.key?(:'thread_items')
-        if (value = attributes[:'thread_items']).is_a?(Array)
-          self.thread_items = value
-        end
-      end
-
-      if attributes.key?(:'poll')
-        self.poll = attributes[:'poll']
-      end
-
-      if attributes.key?(:'long_video')
-        self.long_video = attributes[:'long_video']
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
       else
-        self.long_video = false
+        self.platform = nil
+      end
+
+      if attributes.key?(:'content')
+        self.content = attributes[:'content']
+      else
+        self.content = nil
       end
     end
 
@@ -135,6 +109,14 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @platform.nil?
+        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
+      end
+
+      if @content.nil?
+        invalid_properties.push('invalid value for "content", content cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -142,19 +124,31 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      reply_settings_validator = EnumAttributeValidator.new('String', ["following", "mentionedUsers", "subscribers", "verified"])
-      return false unless reply_settings_validator.valid?(@reply_settings)
+      return false if @platform.nil?
+      platform_validator = EnumAttributeValidator.new('String', ["twitter"])
+      return false unless platform_validator.valid?(@platform)
+      return false if @content.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] reply_settings Object to be assigned
-    def reply_settings=(reply_settings)
-      validator = EnumAttributeValidator.new('String', ["following", "mentionedUsers", "subscribers", "verified"])
-      unless validator.valid?(reply_settings)
-        fail ArgumentError, "invalid value for \"reply_settings\", must be one of #{validator.allowable_values}."
+    # @param [Object] platform Object to be assigned
+    def platform=(platform)
+      validator = EnumAttributeValidator.new('String', ["twitter"])
+      unless validator.valid?(platform)
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
-      @reply_settings = reply_settings
+      @platform = platform
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] content Value to be assigned
+    def content=(content)
+      if content.nil?
+        fail ArgumentError, 'content cannot be nil'
+      end
+
+      @content = content
     end
 
     # Checks equality by comparing each attribute.
@@ -162,11 +156,8 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          reply_to_tweet_id == o.reply_to_tweet_id &&
-          reply_settings == o.reply_settings &&
-          thread_items == o.thread_items &&
-          poll == o.poll &&
-          long_video == o.long_video
+          platform == o.platform &&
+          content == o.content
     end
 
     # @see the `==` method
@@ -178,7 +169,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [reply_to_tweet_id, reply_settings, thread_items, poll, long_video].hash
+      [platform, content].hash
     end
 
     # Builds the object from hash

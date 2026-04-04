@@ -14,20 +14,10 @@ require 'date'
 require 'time'
 
 module Late
-  class TwitterPlatformData < ApiModelBase
-    # ID of an existing tweet to reply to. The published tweet will appear as a reply in that tweet's thread. For threads, only the first tweet replies to the target; subsequent tweets chain normally.
-    attr_accessor :reply_to_tweet_id
+  class CreateInboxConversation400Response < ApiModelBase
+    attr_accessor :error
 
-    # Controls who can reply to the tweet. \"following\" allows only people you follow, \"mentionedUsers\" allows only mentioned users, \"subscribers\" allows only subscribers, \"verified\" allows only verified users. Omit for default (everyone can reply). For threads, applies to the first tweet only. Cannot be combined with replyToTweetId.
-    attr_accessor :reply_settings
-
-    # Sequence of tweets in a thread. First item is the root tweet.
-    attr_accessor :thread_items
-
-    attr_accessor :poll
-
-    # Enable long video uploads (over 140 seconds) using amplify_video media category. Requires the connected X account to have an active X Premium subscription. When true, videos are uploaded with the amplify_video category which supports longer durations (up to 10 minutes via API). When false or omitted, the standard tweet_video category is used (140 second limit). Note that not all Premium accounts have API long-video access, as X may require separate allowlisting.
-    attr_accessor :long_video
+    attr_accessor :code
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -54,11 +44,8 @@ module Late
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'reply_to_tweet_id' => :'replyToTweetId',
-        :'reply_settings' => :'replySettings',
-        :'thread_items' => :'threadItems',
-        :'poll' => :'poll',
-        :'long_video' => :'longVideo'
+        :'error' => :'error',
+        :'code' => :'code'
       }
     end
 
@@ -75,11 +62,8 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'reply_to_tweet_id' => :'String',
-        :'reply_settings' => :'String',
-        :'thread_items' => :'Array<TwitterPlatformDataThreadItemsInner>',
-        :'poll' => :'TwitterPlatformDataPoll',
-        :'long_video' => :'Boolean'
+        :'error' => :'String',
+        :'code' => :'String'
       }
     end
 
@@ -93,40 +77,24 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::TwitterPlatformData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::CreateInboxConversation400Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::TwitterPlatformData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::CreateInboxConversation400Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'reply_to_tweet_id')
-        self.reply_to_tweet_id = attributes[:'reply_to_tweet_id']
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
       end
 
-      if attributes.key?(:'reply_settings')
-        self.reply_settings = attributes[:'reply_settings']
-      end
-
-      if attributes.key?(:'thread_items')
-        if (value = attributes[:'thread_items']).is_a?(Array)
-          self.thread_items = value
-        end
-      end
-
-      if attributes.key?(:'poll')
-        self.poll = attributes[:'poll']
-      end
-
-      if attributes.key?(:'long_video')
-        self.long_video = attributes[:'long_video']
-      else
-        self.long_video = false
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
     end
 
@@ -142,19 +110,19 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      reply_settings_validator = EnumAttributeValidator.new('String', ["following", "mentionedUsers", "subscribers", "verified"])
-      return false unless reply_settings_validator.valid?(@reply_settings)
+      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED"])
+      return false unless code_validator.valid?(@code)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] reply_settings Object to be assigned
-    def reply_settings=(reply_settings)
-      validator = EnumAttributeValidator.new('String', ["following", "mentionedUsers", "subscribers", "verified"])
-      unless validator.valid?(reply_settings)
-        fail ArgumentError, "invalid value for \"reply_settings\", must be one of #{validator.allowable_values}."
+    # @param [Object] code Object to be assigned
+    def code=(code)
+      validator = EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED"])
+      unless validator.valid?(code)
+        fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
       end
-      @reply_settings = reply_settings
+      @code = code
     end
 
     # Checks equality by comparing each attribute.
@@ -162,11 +130,8 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          reply_to_tweet_id == o.reply_to_tweet_id &&
-          reply_settings == o.reply_settings &&
-          thread_items == o.thread_items &&
-          poll == o.poll &&
-          long_video == o.long_video
+          error == o.error &&
+          code == o.code
     end
 
     # @see the `==` method
@@ -178,7 +143,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [reply_to_tweet_id, reply_settings, thread_items, poll, long_video].hash
+      [error, code].hash
     end
 
     # Builds the object from hash

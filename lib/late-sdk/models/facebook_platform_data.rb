@@ -16,13 +16,16 @@ require 'time'
 module Late
   # Feed posts support up to 10 images (no mixed video+image). Stories require single media (24h, no captions). Reels require single vertical video (9:16, 3-60s).
   class FacebookPlatformData < ApiModelBase
+    # When true, creates the post as an unpublished draft visible in Facebook Publishing Tools instead of publishing immediately. Supported for feed posts (text, link, image, video) and reels. Not supported for stories. Drafts expire after ~30 days.
+    attr_accessor :draft
+
     # Set to 'story' for Page Stories (24h ephemeral) or 'reel' for Reels (short vertical video). Defaults to feed post if omitted.
     attr_accessor :content_type
 
     # Reel title (only for contentType=reel). Separate from the caption/content field.
     attr_accessor :title
 
-    # Optional first comment to post immediately after publishing (feed posts only, not stories or reels)
+    # Optional first comment to post immediately after publishing (feed posts only, not stories or reels). Skipped when draft is true.
     attr_accessor :first_comment
 
     # Target Facebook Page ID for multi-page posting. If omitted, uses the default page. Use GET /v1/accounts/{id}/facebook-page to list pages.
@@ -53,6 +56,7 @@ module Late
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'draft' => :'draft',
         :'content_type' => :'contentType',
         :'title' => :'title',
         :'first_comment' => :'firstComment',
@@ -73,6 +77,7 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'draft' => :'Boolean',
         :'content_type' => :'String',
         :'title' => :'String',
         :'first_comment' => :'String',
@@ -101,6 +106,12 @@ module Late
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'draft')
+        self.draft = attributes[:'draft']
+      else
+        self.draft = false
+      end
 
       if attributes.key?(:'content_type')
         self.content_type = attributes[:'content_type']
@@ -151,6 +162,7 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          draft == o.draft &&
           content_type == o.content_type &&
           title == o.title &&
           first_comment == o.first_comment &&
@@ -166,7 +178,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content_type, title, first_comment, page_id].hash
+      [draft, content_type, title, first_comment, page_id].hash
     end
 
     # Builds the object from hash

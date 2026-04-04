@@ -99,6 +99,74 @@ module Late
       return data, status_code, headers
     end
 
+    # Create conversation
+    # Initiate a new direct message conversation with a specified user. If a conversation already exists with the recipient, the message is added to the existing thread.  **Currently supported platforms:** Twitter/X only. Other platforms will return `PLATFORM_NOT_SUPPORTED`.  **DM eligibility:** Before sending, the endpoint checks if the recipient accepts DMs from your account (via the `receives_your_dm` field). If not, a 422 error with code `DM_NOT_ALLOWED` is returned. You can skip this check with `skipDmCheck: true` if you have already verified eligibility.  **X API tier requirement:** DM write endpoints require X API Pro tier ($5,000/month) or Enterprise access. This applies to BYOK (Bring Your Own Key) users who provide their own X API credentials.  **Rate limits:** 200 requests per 15 minutes, 1,000 per 24 hours per user, 15,000 per 24 hours per app (shared across all DM endpoints). 
+    # @param create_inbox_conversation_request [CreateInboxConversationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateInboxConversation201Response]
+    def create_inbox_conversation(create_inbox_conversation_request, opts = {})
+      data, _status_code, _headers = create_inbox_conversation_with_http_info(create_inbox_conversation_request, opts)
+      data
+    end
+
+    # Create conversation
+    # Initiate a new direct message conversation with a specified user. If a conversation already exists with the recipient, the message is added to the existing thread.  **Currently supported platforms:** Twitter/X only. Other platforms will return &#x60;PLATFORM_NOT_SUPPORTED&#x60;.  **DM eligibility:** Before sending, the endpoint checks if the recipient accepts DMs from your account (via the &#x60;receives_your_dm&#x60; field). If not, a 422 error with code &#x60;DM_NOT_ALLOWED&#x60; is returned. You can skip this check with &#x60;skipDmCheck: true&#x60; if you have already verified eligibility.  **X API tier requirement:** DM write endpoints require X API Pro tier ($5,000/month) or Enterprise access. This applies to BYOK (Bring Your Own Key) users who provide their own X API credentials.  **Rate limits:** 200 requests per 15 minutes, 1,000 per 24 hours per user, 15,000 per 24 hours per app (shared across all DM endpoints). 
+    # @param create_inbox_conversation_request [CreateInboxConversationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateInboxConversation201Response, Integer, Hash)>] CreateInboxConversation201Response data, response status code and response headers
+    def create_inbox_conversation_with_http_info(create_inbox_conversation_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.create_inbox_conversation ...'
+      end
+      # verify the required parameter 'create_inbox_conversation_request' is set
+      if @api_client.config.client_side_validation && create_inbox_conversation_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_inbox_conversation_request' when calling MessagesApi.create_inbox_conversation"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/conversations'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json', 'multipart/form-data'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_inbox_conversation_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateInboxConversation201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.create_inbox_conversation",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#create_inbox_conversation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Delete message
     # Delete a message from a conversation. Platform support varies: - **Telegram**: Full delete (bot's own messages anytime, others if admin) - **X/Twitter**: Full delete (own DM events only) - **Bluesky**: Delete for self only (recipient still sees it) - **Reddit**: Delete from sender's view only - **Facebook, Instagram, WhatsApp**: Not supported (returns 400) 
     # @param conversation_id [String] The conversation ID
