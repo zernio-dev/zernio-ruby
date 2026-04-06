@@ -70,9 +70,10 @@ describe 'ValidateApi' do
 
   # unit tests for validate_subreddit
   # Check subreddit existence
-  # Check if a subreddit exists and return basic info (title, subscriber count, NSFW status, post types allowed).  Uses Reddit&#39;s public JSON API (no Reddit auth needed). Returns &#x60;exists: false&#x60; for private, banned, or nonexistent subreddits. 
+  # Check if a subreddit exists and return basic info (title, subscriber count, NSFW status, post types allowed).  When accountId is provided, uses authenticated Reddit OAuth API with automatic token refresh (recommended). Falls back to Reddit&#39;s public JSON API, which may be unreliable from server IPs. Returns &#x60;exists: false&#x60; for private, banned, or nonexistent subreddits. 
   # @param name Subreddit name (with or without \&quot;r/\&quot; prefix)
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :account_id Reddit social account ID for authenticated lookup (recommended for reliable results)
   # @return [ValidateSubreddit200Response]
   describe 'validate_subreddit test' do
     it 'should work' do

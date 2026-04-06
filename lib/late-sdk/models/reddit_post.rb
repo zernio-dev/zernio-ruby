@@ -14,37 +14,69 @@ require 'date'
 require 'time'
 
 module Late
-  class SearchReddit200ResponsePostsInner < ApiModelBase
+  # A normalized Reddit post returned by the feed and search endpoints
+  class RedditPost < ApiModelBase
+    # Reddit post ID (without type prefix)
     attr_accessor :id
 
-    attr_accessor :title
+    # Reddit fullname (e.g. t3_abc123)
+    attr_accessor :fullname
 
-    attr_accessor :selftext
+    attr_accessor :title
 
     attr_accessor :author
 
     attr_accessor :subreddit
 
+    # Post URL (may be a gallery URL
+    attr_accessor :url
+
+    # Full permalink to the Reddit post
+    attr_accessor :permalink
+
+    # Self-post body text (empty string for link posts)
+    attr_accessor :selftext
+
+    # Unix timestamp of post creation
+    attr_accessor :created_utc
+
     attr_accessor :score
 
     attr_accessor :num_comments
 
-    attr_accessor :created_utc
+    # Whether the post is marked NSFW
+    attr_accessor :over18
 
-    attr_accessor :permalink
+    attr_accessor :stickied
+
+    # Link flair text if set
+    attr_accessor :flair_text
+
+    # Whether the post is a gallery with multiple images
+    attr_accessor :is_gallery
+
+    # Individual image URLs for gallery posts (only present when isGallery is true)
+    attr_accessor :gallery_images
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
+        :'fullname' => :'fullname',
         :'title' => :'title',
-        :'selftext' => :'selftext',
         :'author' => :'author',
         :'subreddit' => :'subreddit',
+        :'url' => :'url',
+        :'permalink' => :'permalink',
+        :'selftext' => :'selftext',
+        :'created_utc' => :'createdUtc',
         :'score' => :'score',
-        :'num_comments' => :'num_comments',
-        :'created_utc' => :'created_utc',
-        :'permalink' => :'permalink'
+        :'num_comments' => :'numComments',
+        :'over18' => :'over18',
+        :'stickied' => :'stickied',
+        :'flair_text' => :'flairText',
+        :'is_gallery' => :'isGallery',
+        :'gallery_images' => :'galleryImages'
       }
     end
 
@@ -62,14 +94,21 @@ module Late
     def self.openapi_types
       {
         :'id' => :'String',
+        :'fullname' => :'String',
         :'title' => :'String',
-        :'selftext' => :'String',
         :'author' => :'String',
         :'subreddit' => :'String',
+        :'url' => :'String',
+        :'permalink' => :'String',
+        :'selftext' => :'String',
+        :'created_utc' => :'Float',
         :'score' => :'Integer',
         :'num_comments' => :'Integer',
-        :'created_utc' => :'Float',
-        :'permalink' => :'String'
+        :'over18' => :'Boolean',
+        :'stickied' => :'Boolean',
+        :'flair_text' => :'String',
+        :'is_gallery' => :'Boolean',
+        :'gallery_images' => :'Array<String>'
       }
     end
 
@@ -83,14 +122,14 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::SearchReddit200ResponsePostsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::RedditPost` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::SearchReddit200ResponsePostsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::RedditPost`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -99,12 +138,12 @@ module Late
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'title')
-        self.title = attributes[:'title']
+      if attributes.key?(:'fullname')
+        self.fullname = attributes[:'fullname']
       end
 
-      if attributes.key?(:'selftext')
-        self.selftext = attributes[:'selftext']
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       end
 
       if attributes.key?(:'author')
@@ -115,6 +154,22 @@ module Late
         self.subreddit = attributes[:'subreddit']
       end
 
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
+      end
+
+      if attributes.key?(:'permalink')
+        self.permalink = attributes[:'permalink']
+      end
+
+      if attributes.key?(:'selftext')
+        self.selftext = attributes[:'selftext']
+      end
+
+      if attributes.key?(:'created_utc')
+        self.created_utc = attributes[:'created_utc']
+      end
+
       if attributes.key?(:'score')
         self.score = attributes[:'score']
       end
@@ -123,12 +178,26 @@ module Late
         self.num_comments = attributes[:'num_comments']
       end
 
-      if attributes.key?(:'created_utc')
-        self.created_utc = attributes[:'created_utc']
+      if attributes.key?(:'over18')
+        self.over18 = attributes[:'over18']
       end
 
-      if attributes.key?(:'permalink')
-        self.permalink = attributes[:'permalink']
+      if attributes.key?(:'stickied')
+        self.stickied = attributes[:'stickied']
+      end
+
+      if attributes.key?(:'flair_text')
+        self.flair_text = attributes[:'flair_text']
+      end
+
+      if attributes.key?(:'is_gallery')
+        self.is_gallery = attributes[:'is_gallery']
+      end
+
+      if attributes.key?(:'gallery_images')
+        if (value = attributes[:'gallery_images']).is_a?(Array)
+          self.gallery_images = value
+        end
       end
     end
 
@@ -153,14 +222,21 @@ module Late
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          fullname == o.fullname &&
           title == o.title &&
-          selftext == o.selftext &&
           author == o.author &&
           subreddit == o.subreddit &&
+          url == o.url &&
+          permalink == o.permalink &&
+          selftext == o.selftext &&
+          created_utc == o.created_utc &&
           score == o.score &&
           num_comments == o.num_comments &&
-          created_utc == o.created_utc &&
-          permalink == o.permalink
+          over18 == o.over18 &&
+          stickied == o.stickied &&
+          flair_text == o.flair_text &&
+          is_gallery == o.is_gallery &&
+          gallery_images == o.gallery_images
     end
 
     # @see the `==` method
@@ -172,7 +248,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, title, selftext, author, subreddit, score, num_comments, created_utc, permalink].hash
+      [id, fullname, title, author, subreddit, url, permalink, selftext, created_utc, score, num_comments, over18, stickied, flair_text, is_gallery, gallery_images].hash
     end
 
     # Builds the object from hash

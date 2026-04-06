@@ -4,8 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **posts** | [**Array&lt;SearchReddit200ResponsePostsInner&gt;**](SearchReddit200ResponsePostsInner.md) |  | [optional] |
+| **items** | [**Array&lt;RedditPost&gt;**](RedditPost.md) |  | [optional] |
 | **after** | **String** |  | [optional] |
+| **before** | **String** |  | [optional] |
 
 ## Example
 
@@ -13,8 +14,9 @@
 require 'late-sdk'
 
 instance = Late::SearchReddit200Response.new(
-  posts: null,
-  after: null
+  items: null,
+  after: null,
+  before: null
 )
 ```
 

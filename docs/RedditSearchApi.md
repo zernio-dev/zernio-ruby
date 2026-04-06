@@ -10,7 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## get_reddit_feed
 
-> <GetRedditFeed200Response> get_reddit_feed(account_id, opts)
+> <SearchReddit200Response> get_reddit_feed(account_id, opts)
 
 Get subreddit feed
 
@@ -50,7 +50,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetRedditFeed200Response>, Integer, Hash)> get_reddit_feed_with_http_info(account_id, opts)
+> <Array(<SearchReddit200Response>, Integer, Hash)> get_reddit_feed_with_http_info(account_id, opts)
 
 ```ruby
 begin
@@ -58,7 +58,7 @@ begin
   data, status_code, headers = api_instance.get_reddit_feed_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetRedditFeed200Response>
+  p data # => <SearchReddit200Response>
 rescue Late::ApiError => e
   puts "Error when calling RedditSearchApi->get_reddit_feed_with_http_info: #{e}"
 end
@@ -77,7 +77,7 @@ end
 
 ### Return type
 
-[**GetRedditFeed200Response**](GetRedditFeed200Response.md)
+[**SearchReddit200Response**](SearchReddit200Response.md)
 
 ### Authorization
 

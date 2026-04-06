@@ -224,9 +224,10 @@ module Late
     end
 
     # Check subreddit existence
-    # Check if a subreddit exists and return basic info (title, subscriber count, NSFW status, post types allowed).  Uses Reddit's public JSON API (no Reddit auth needed). Returns `exists: false` for private, banned, or nonexistent subreddits. 
+    # Check if a subreddit exists and return basic info (title, subscriber count, NSFW status, post types allowed).  When accountId is provided, uses authenticated Reddit OAuth API with automatic token refresh (recommended). Falls back to Reddit's public JSON API, which may be unreliable from server IPs. Returns `exists: false` for private, banned, or nonexistent subreddits. 
     # @param name [String] Subreddit name (with or without \&quot;r/\&quot; prefix)
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :account_id Reddit social account ID for authenticated lookup (recommended for reliable results)
     # @return [ValidateSubreddit200Response]
     def validate_subreddit(name, opts = {})
       data, _status_code, _headers = validate_subreddit_with_http_info(name, opts)
@@ -234,9 +235,10 @@ module Late
     end
 
     # Check subreddit existence
-    # Check if a subreddit exists and return basic info (title, subscriber count, NSFW status, post types allowed).  Uses Reddit&#39;s public JSON API (no Reddit auth needed). Returns &#x60;exists: false&#x60; for private, banned, or nonexistent subreddits. 
+    # Check if a subreddit exists and return basic info (title, subscriber count, NSFW status, post types allowed).  When accountId is provided, uses authenticated Reddit OAuth API with automatic token refresh (recommended). Falls back to Reddit&#39;s public JSON API, which may be unreliable from server IPs. Returns &#x60;exists: false&#x60; for private, banned, or nonexistent subreddits. 
     # @param name [String] Subreddit name (with or without \&quot;r/\&quot; prefix)
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :account_id Reddit social account ID for authenticated lookup (recommended for reliable results)
     # @return [Array<(ValidateSubreddit200Response, Integer, Hash)>] ValidateSubreddit200Response data, response status code and response headers
     def validate_subreddit_with_http_info(name, opts = {})
       if @api_client.config.debugging
@@ -252,6 +254,7 @@ module Late
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'name'] = name
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

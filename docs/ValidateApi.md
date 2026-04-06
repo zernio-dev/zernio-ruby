@@ -219,11 +219,11 @@ end
 
 ## validate_subreddit
 
-> <ValidateSubreddit200Response> validate_subreddit(name)
+> <ValidateSubreddit200Response> validate_subreddit(name, opts)
 
 Check subreddit existence
 
-Check if a subreddit exists and return basic info (title, subscriber count, NSFW status, post types allowed).  Uses Reddit's public JSON API (no Reddit auth needed). Returns `exists: false` for private, banned, or nonexistent subreddits. 
+Check if a subreddit exists and return basic info (title, subscriber count, NSFW status, post types allowed).  When accountId is provided, uses authenticated Reddit OAuth API with automatic token refresh (recommended). Falls back to Reddit's public JSON API, which may be unreliable from server IPs. Returns `exists: false` for private, banned, or nonexistent subreddits. 
 
 ### Examples
 
@@ -238,10 +238,13 @@ end
 
 api_instance = Late::ValidateApi.new
 name = 'programming' # String | Subreddit name (with or without \"r/\" prefix)
+opts = {
+  account_id: 'account_id_example' # String | Reddit social account ID for authenticated lookup (recommended for reliable results)
+}
 
 begin
   # Check subreddit existence
-  result = api_instance.validate_subreddit(name)
+  result = api_instance.validate_subreddit(name, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling ValidateApi->validate_subreddit: #{e}"
@@ -252,12 +255,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ValidateSubreddit200Response>, Integer, Hash)> validate_subreddit_with_http_info(name)
+> <Array(<ValidateSubreddit200Response>, Integer, Hash)> validate_subreddit_with_http_info(name, opts)
 
 ```ruby
 begin
   # Check subreddit existence
-  data, status_code, headers = api_instance.validate_subreddit_with_http_info(name)
+  data, status_code, headers = api_instance.validate_subreddit_with_http_info(name, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ValidateSubreddit200Response>
@@ -271,6 +274,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **name** | **String** | Subreddit name (with or without \&quot;r/\&quot; prefix) |  |
+| **account_id** | **String** | Reddit social account ID for authenticated lookup (recommended for reliable results) | [optional] |
 
 ### Return type
 

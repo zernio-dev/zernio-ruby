@@ -15,15 +15,18 @@ require 'time'
 
 module Late
   class SearchReddit200Response < ApiModelBase
-    attr_accessor :posts
+    attr_accessor :items
 
     attr_accessor :after
+
+    attr_accessor :before
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'posts' => :'posts',
-        :'after' => :'after'
+        :'items' => :'items',
+        :'after' => :'after',
+        :'before' => :'before'
       }
     end
 
@@ -40,8 +43,9 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'posts' => :'Array<SearchReddit200ResponsePostsInner>',
-        :'after' => :'String'
+        :'items' => :'Array<RedditPost>',
+        :'after' => :'String',
+        :'before' => :'String'
       }
     end
 
@@ -67,14 +71,18 @@ module Late
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'posts')
-        if (value = attributes[:'posts']).is_a?(Array)
-          self.posts = value
+      if attributes.key?(:'items')
+        if (value = attributes[:'items']).is_a?(Array)
+          self.items = value
         end
       end
 
       if attributes.key?(:'after')
         self.after = attributes[:'after']
+      end
+
+      if attributes.key?(:'before')
+        self.before = attributes[:'before']
       end
     end
 
@@ -98,8 +106,9 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          posts == o.posts &&
-          after == o.after
+          items == o.items &&
+          after == o.after &&
+          before == o.before
     end
 
     # @see the `==` method
@@ -111,7 +120,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [posts, after].hash
+      [items, after, before].hash
     end
 
     # Builds the object from hash

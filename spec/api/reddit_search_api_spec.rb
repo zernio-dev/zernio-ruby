@@ -42,7 +42,7 @@ describe 'RedditSearchApi' do
   # @option opts [Integer] :limit 
   # @option opts [String] :after 
   # @option opts [String] :t 
-  # @return [GetRedditFeed200Response]
+  # @return [SearchReddit200Response]
   describe 'get_reddit_feed test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

@@ -316,7 +316,6 @@ docs/GetPostTimeline404Response.md
 docs/GetPostingFrequency200Response.md
 docs/GetPostingFrequency200ResponseFrequencyInner.md
 docs/GetProfile200Response.md
-docs/GetRedditFeed200Response.md
 docs/GetRedditFlairs200Response.md
 docs/GetRedditFlairs200ResponseFlairsInner.md
 docs/GetRedditSubreddits200Response.md
@@ -541,6 +540,7 @@ docs/QueueUpdateResponse.md
 docs/RecyclingConfig.md
 docs/RecyclingState.md
 docs/RedditPlatformData.md
+docs/RedditPost.md
 docs/RedditSearchApi.md
 docs/RejectWhatsAppGroupJoinRequestsRequest.md
 docs/ReleaseWhatsAppPhoneNumber200Response.md
@@ -569,7 +569,6 @@ docs/ScheduleWhatsAppBroadcastRequest.md
 docs/SearchAdInterests200Response.md
 docs/SearchAdInterests200ResponseInterestsInner.md
 docs/SearchReddit200Response.md
-docs/SearchReddit200ResponsePostsInner.md
 docs/SelectFacebookPage200Response.md
 docs/SelectFacebookPage200ResponseAccount.md
 docs/SelectFacebookPageRequest.md
@@ -1132,7 +1131,6 @@ lib/late-sdk/models/get_post_timeline404_response.rb
 lib/late-sdk/models/get_posting_frequency200_response.rb
 lib/late-sdk/models/get_posting_frequency200_response_frequency_inner.rb
 lib/late-sdk/models/get_profile200_response.rb
-lib/late-sdk/models/get_reddit_feed200_response.rb
 lib/late-sdk/models/get_reddit_flairs200_response.rb
 lib/late-sdk/models/get_reddit_flairs200_response_flairs_inner.rb
 lib/late-sdk/models/get_reddit_subreddits200_response.rb
@@ -1349,6 +1347,7 @@ lib/late-sdk/models/queue_update_response.rb
 lib/late-sdk/models/recycling_config.rb
 lib/late-sdk/models/recycling_state.rb
 lib/late-sdk/models/reddit_platform_data.rb
+lib/late-sdk/models/reddit_post.rb
 lib/late-sdk/models/reject_whats_app_group_join_requests_request.rb
 lib/late-sdk/models/release_whats_app_phone_number200_response.rb
 lib/late-sdk/models/release_whats_app_phone_number200_response_phone_number.rb
@@ -1375,7 +1374,6 @@ lib/late-sdk/models/schedule_whats_app_broadcast_request.rb
 lib/late-sdk/models/search_ad_interests200_response.rb
 lib/late-sdk/models/search_ad_interests200_response_interests_inner.rb
 lib/late-sdk/models/search_reddit200_response.rb
-lib/late-sdk/models/search_reddit200_response_posts_inner.rb
 lib/late-sdk/models/select_facebook_page200_response.rb
 lib/late-sdk/models/select_facebook_page200_response_account.rb
 lib/late-sdk/models/select_facebook_page_request.rb
@@ -1921,7 +1919,6 @@ spec/models/get_post_timeline404_response_spec.rb
 spec/models/get_posting_frequency200_response_frequency_inner_spec.rb
 spec/models/get_posting_frequency200_response_spec.rb
 spec/models/get_profile200_response_spec.rb
-spec/models/get_reddit_feed200_response_spec.rb
 spec/models/get_reddit_flairs200_response_flairs_inner_spec.rb
 spec/models/get_reddit_flairs200_response_spec.rb
 spec/models/get_reddit_subreddits200_response_spec.rb
@@ -2138,6 +2135,7 @@ spec/models/queue_update_response_spec.rb
 spec/models/recycling_config_spec.rb
 spec/models/recycling_state_spec.rb
 spec/models/reddit_platform_data_spec.rb
+spec/models/reddit_post_spec.rb
 spec/models/reject_whats_app_group_join_requests_request_spec.rb
 spec/models/release_whats_app_phone_number200_response_phone_number_spec.rb
 spec/models/release_whats_app_phone_number200_response_spec.rb
@@ -2163,7 +2161,6 @@ spec/models/schedule_whats_app_broadcast200_response_spec.rb
 spec/models/schedule_whats_app_broadcast_request_spec.rb
 spec/models/search_ad_interests200_response_interests_inner_spec.rb
 spec/models/search_ad_interests200_response_spec.rb
-spec/models/search_reddit200_response_posts_inner_spec.rb
 spec/models/search_reddit200_response_spec.rb
 spec/models/select_facebook_page200_response_account_spec.rb
 spec/models/select_facebook_page200_response_spec.rb
