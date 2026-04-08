@@ -147,6 +147,7 @@ Class | Method | HTTP request | Description
 *Late::CommentsApi* | [**unhide_inbox_comment**](docs/CommentsApi.md#unhide_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment
 *Late::CommentsApi* | [**unlike_inbox_comment**](docs/CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
 *Late::ConnectApi* | [**complete_telegram_connect**](docs/ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status
+*Late::ConnectApi* | [**connect_ads**](docs/ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform
 *Late::ConnectApi* | [**connect_bluesky_credentials**](docs/ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account
 *Late::ConnectApi* | [**connect_whats_app_credentials**](docs/ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials
 *Late::ConnectApi* | [**get_connect_url**](docs/ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL
@@ -207,6 +208,7 @@ Class | Method | HTTP request | Description
 *Late::LinkedInMentionsApi* | [**get_linked_in_mentions**](docs/LinkedInMentionsApi.md#get_linked_in_mentions) | **GET** /v1/accounts/{accountId}/linkedin-mentions | Resolve LinkedIn mention
 *Late::LogsApi* | [**get_post_logs**](docs/LogsApi.md#get_post_logs) | **GET** /v1/posts/{postId}/logs | Get post logs
 *Late::LogsApi* | [**list_connection_logs**](docs/LogsApi.md#list_connection_logs) | **GET** /v1/connections/logs | List connection logs
+*Late::LogsApi* | [**list_logs**](docs/LogsApi.md#list_logs) | **GET** /v1/logs | List activity logs
 *Late::LogsApi* | [**list_posts_logs**](docs/LogsApi.md#list_posts_logs) | **GET** /v1/posts/logs | List publishing logs
 *Late::MediaApi* | [**get_media_presigned_url**](docs/MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get presigned upload URL
 *Late::MessagesApi* | [**add_message_reaction**](docs/MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction
@@ -392,6 +394,9 @@ Class | Method | HTTP request | Description
  - [Late::CancelWhatsAppBroadcastSchedule200Response](docs/CancelWhatsAppBroadcastSchedule200Response.md)
  - [Late::CancelWhatsAppBroadcastSchedule200ResponseBroadcast](docs/CancelWhatsAppBroadcastSchedule200ResponseBroadcast.md)
  - [Late::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
+ - [Late::ConnectAds200Response](docs/ConnectAds200Response.md)
+ - [Late::ConnectAds200ResponseOneOf](docs/ConnectAds200ResponseOneOf.md)
+ - [Late::ConnectAds200ResponseOneOf1](docs/ConnectAds200ResponseOneOf1.md)
  - [Late::ConnectBlueskyCredentials200Response](docs/ConnectBlueskyCredentials200Response.md)
  - [Late::ConnectBlueskyCredentialsRequest](docs/ConnectBlueskyCredentialsRequest.md)
  - [Late::ConnectWhatsAppCredentials200Response](docs/ConnectWhatsAppCredentials200Response.md)
@@ -773,6 +778,9 @@ Class | Method | HTTP request | Description
  - [Late::ListInboxReviews200ResponseSummary](docs/ListInboxReviews200ResponseSummary.md)
  - [Late::ListLinkedInOrganizations200Response](docs/ListLinkedInOrganizations200Response.md)
  - [Late::ListLinkedInOrganizations200ResponseOrganizationsInner](docs/ListLinkedInOrganizations200ResponseOrganizationsInner.md)
+ - [Late::ListLogs200Response](docs/ListLogs200Response.md)
+ - [Late::ListLogs200ResponseLogsInner](docs/ListLogs200ResponseLogsInner.md)
+ - [Late::ListLogs200ResponsePagination](docs/ListLogs200ResponsePagination.md)
  - [Late::ListPinterestBoardsForSelection200Response](docs/ListPinterestBoardsForSelection200Response.md)
  - [Late::ListPinterestBoardsForSelection200ResponseBoardsInner](docs/ListPinterestBoardsForSelection200ResponseBoardsInner.md)
  - [Late::ListPostsLogs200Response](docs/ListPostsLogs200Response.md)

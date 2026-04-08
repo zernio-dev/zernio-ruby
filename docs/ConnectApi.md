@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**complete_telegram_connect**](ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status |
+| [**connect_ads**](ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform |
 | [**connect_bluesky_credentials**](ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account |
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
@@ -95,6 +96,85 @@ end
 ### Return type
 
 [**CompleteTelegramConnect200Response**](CompleteTelegramConnect200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## connect_ads
+
+> <ConnectAds200Response> connect_ads(platform, profile_id, opts)
+
+Connect ads for a platform
+
+Unified ads connection endpoint. Handles all platforms through a single route:  **Same-token platforms** (facebook, instagram, linkedin): If a posting account already exists, returns `alreadyConnected: true` immediately (no extra OAuth needed). If not, starts the normal OAuth flow, and the resulting account supports both posting and ads.  **Separate-token platforms** (tiktok, twitter, pinterest): Requires an existing posting account (`accountId` param). If ads are already connected, returns `alreadyConnected: true`. Otherwise, starts the platform-specific marketing API OAuth flow.  **Ads-only platforms** (googleads): If a Google Ads account exists, returns `alreadyConnected: true`. Otherwise, starts the Google Ads OAuth flow.  Use the `adsStatus` field from `GET /v1/accounts` to check which accounts need ads connection. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::ConnectApi.new
+platform = 'facebook' # String | Platform to connect ads for. Only platforms with ads support are accepted.
+profile_id = 'profile_id_example' # String | Your Zernio profile ID
+opts = {
+  account_id: 'account_id_example', # String | Existing SocialAccount ID. Required for separate-token platforms (tiktok, twitter, pinterest). Ignored for same-token and ads-only platforms.
+  redirect_url: 'redirect_url_example', # String | Custom redirect URL after OAuth completes (same-token platforms only)
+  headless: true # Boolean | Enable headless mode (same-token platforms only)
+}
+
+begin
+  # Connect ads for a platform
+  result = api_instance.connect_ads(platform, profile_id, opts)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling ConnectApi->connect_ads: #{e}"
+end
+```
+
+#### Using the connect_ads_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectAds200Response>, Integer, Hash)> connect_ads_with_http_info(platform, profile_id, opts)
+
+```ruby
+begin
+  # Connect ads for a platform
+  data, status_code, headers = api_instance.connect_ads_with_http_info(platform, profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectAds200Response>
+rescue Late::ApiError => e
+  puts "Error when calling ConnectApi->connect_ads_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **platform** | **String** | Platform to connect ads for. Only platforms with ads support are accepted. |  |
+| **profile_id** | **String** | Your Zernio profile ID |  |
+| **account_id** | **String** | Existing SocialAccount ID. Required for separate-token platforms (tiktok, twitter, pinterest). Ignored for same-token and ads-only platforms. | [optional] |
+| **redirect_url** | **String** | Custom redirect URL after OAuth completes (same-token platforms only) | [optional] |
+| **headless** | **Boolean** | Enable headless mode (same-token platforms only) | [optional][default to false] |
+
+### Return type
+
+[**ConnectAds200Response**](ConnectAds200Response.md)
 
 ### Authorization
 

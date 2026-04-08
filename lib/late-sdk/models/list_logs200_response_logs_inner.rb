@@ -14,32 +14,41 @@ require 'date'
 require 'time'
 
 module Late
-  class SocialAccount < ApiModelBase
-    attr_accessor :_id
+  class ListLogs200ResponseLogsInner < ApiModelBase
+    # Log category (publishing, connections, webhooks, messaging)
+    attr_accessor :type
+
+    # Specific action (post.published, message.sent, account.connected, etc.)
+    attr_accessor :action
+
+    attr_accessor :user_id
 
     attr_accessor :platform
 
-    attr_accessor :profile_id
+    attr_accessor :account_id
 
-    attr_accessor :username
+    attr_accessor :status
 
-    attr_accessor :display_name
+    attr_accessor :status_code
 
-    # Full profile URL for the connected account on its platform.
-    attr_accessor :profile_url
+    attr_accessor :error_message
 
-    attr_accessor :is_active
+    attr_accessor :error_code
 
-    # Follower count (only included if user has analytics add-on)
-    attr_accessor :followers_count
+    attr_accessor :duration_ms
 
-    # Last time follower count was updated (only included if user has analytics add-on)
-    attr_accessor :followers_last_updated
+    # The API endpoint that triggered this log
+    attr_accessor :endpoint
 
-    # Ads connection status for this account. - `connected`: Ads are ready to use (same-token platforms like Meta/LinkedIn, or separate ads token is present). - `not_connected`: Platform supports ads but requires a separate ads OAuth. Use `GET /v1/connect/{platform}/ads` to connect. - `not_available`: Platform does not support ads (e.g., YouTube, Reddit, Bluesky). 
-    attr_accessor :ads_status
+    # Request JSON (truncated to 5KB)
+    attr_accessor :request_body
 
-    # Platform-specific metadata. Fields vary by platform. For WhatsApp accounts, includes: - `qualityRating`: Phone number quality rating from Meta (`GREEN`, `YELLOW`, `RED`, or `UNKNOWN`) - `nameStatus`: Display name review status (`APPROVED`, `PENDING_REVIEW`, `DECLINED`, or `NONE`). Messages cannot be sent until the display name is approved by Meta. - `messagingLimitTier`: Maximum unique business-initiated conversations per 24h rolling window (`TIER_250`, `TIER_1K`, `TIER_10K`, `TIER_100K`, or `TIER_UNLIMITED`). Scales automatically as quality rating improves. - `verifiedName`: Meta-verified business display name - `displayPhoneNumber`: Formatted phone number (e.g., \"+1 555-123-4567\") - `wabaId`: WhatsApp Business Account ID - `phoneNumberId`: Meta phone number ID 
+    # Response JSON (truncated to 10KB)
+    attr_accessor :response_body
+
+    attr_accessor :created_at
+
+    # Additional context as JSON string
     attr_accessor :metadata
 
     class EnumAttributeValidator
@@ -67,16 +76,20 @@ module Late
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'_id' => :'_id',
+        :'type' => :'type',
+        :'action' => :'action',
+        :'user_id' => :'user_id',
         :'platform' => :'platform',
-        :'profile_id' => :'profileId',
-        :'username' => :'username',
-        :'display_name' => :'displayName',
-        :'profile_url' => :'profileUrl',
-        :'is_active' => :'isActive',
-        :'followers_count' => :'followersCount',
-        :'followers_last_updated' => :'followersLastUpdated',
-        :'ads_status' => :'adsStatus',
+        :'account_id' => :'account_id',
+        :'status' => :'status',
+        :'status_code' => :'status_code',
+        :'error_message' => :'error_message',
+        :'error_code' => :'error_code',
+        :'duration_ms' => :'duration_ms',
+        :'endpoint' => :'endpoint',
+        :'request_body' => :'request_body',
+        :'response_body' => :'response_body',
+        :'created_at' => :'created_at',
         :'metadata' => :'metadata'
       }
     end
@@ -94,17 +107,21 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'_id' => :'String',
+        :'type' => :'String',
+        :'action' => :'String',
+        :'user_id' => :'String',
         :'platform' => :'String',
-        :'profile_id' => :'SocialAccountProfileId',
-        :'username' => :'String',
-        :'display_name' => :'String',
-        :'profile_url' => :'String',
-        :'is_active' => :'Boolean',
-        :'followers_count' => :'Float',
-        :'followers_last_updated' => :'Time',
-        :'ads_status' => :'String',
-        :'metadata' => :'Object'
+        :'account_id' => :'String',
+        :'status' => :'String',
+        :'status_code' => :'Integer',
+        :'error_message' => :'String',
+        :'error_code' => :'String',
+        :'duration_ms' => :'Integer',
+        :'endpoint' => :'String',
+        :'request_body' => :'String',
+        :'response_body' => :'String',
+        :'created_at' => :'Time',
+        :'metadata' => :'String'
       }
     end
 
@@ -118,56 +135,72 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::SocialAccount` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::ListLogs200ResponseLogsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::SocialAccount`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::ListLogs200ResponseLogsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'_id')
-        self._id = attributes[:'_id']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'action')
+        self.action = attributes[:'action']
+      end
+
+      if attributes.key?(:'user_id')
+        self.user_id = attributes[:'user_id']
       end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
       end
 
-      if attributes.key?(:'profile_id')
-        self.profile_id = attributes[:'profile_id']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'status_code')
+        self.status_code = attributes[:'status_code']
       end
 
-      if attributes.key?(:'profile_url')
-        self.profile_url = attributes[:'profile_url']
+      if attributes.key?(:'error_message')
+        self.error_message = attributes[:'error_message']
       end
 
-      if attributes.key?(:'is_active')
-        self.is_active = attributes[:'is_active']
+      if attributes.key?(:'error_code')
+        self.error_code = attributes[:'error_code']
       end
 
-      if attributes.key?(:'followers_count')
-        self.followers_count = attributes[:'followers_count']
+      if attributes.key?(:'duration_ms')
+        self.duration_ms = attributes[:'duration_ms']
       end
 
-      if attributes.key?(:'followers_last_updated')
-        self.followers_last_updated = attributes[:'followers_last_updated']
+      if attributes.key?(:'endpoint')
+        self.endpoint = attributes[:'endpoint']
       end
 
-      if attributes.key?(:'ads_status')
-        self.ads_status = attributes[:'ads_status']
+      if attributes.key?(:'request_body')
+        self.request_body = attributes[:'request_body']
+      end
+
+      if attributes.key?(:'response_body')
+        self.response_body = attributes[:'response_body']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'metadata')
@@ -187,19 +220,19 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      ads_status_validator = EnumAttributeValidator.new('String', ["connected", "not_connected", "not_available"])
-      return false unless ads_status_validator.valid?(@ads_status)
+      status_validator = EnumAttributeValidator.new('String', ["success", "failed", "pending", "skipped"])
+      return false unless status_validator.valid?(@status)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] ads_status Object to be assigned
-    def ads_status=(ads_status)
-      validator = EnumAttributeValidator.new('String', ["connected", "not_connected", "not_available"])
-      unless validator.valid?(ads_status)
-        fail ArgumentError, "invalid value for \"ads_status\", must be one of #{validator.allowable_values}."
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["success", "failed", "pending", "skipped"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
-      @ads_status = ads_status
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -207,16 +240,20 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          _id == o._id &&
+          type == o.type &&
+          action == o.action &&
+          user_id == o.user_id &&
           platform == o.platform &&
-          profile_id == o.profile_id &&
-          username == o.username &&
-          display_name == o.display_name &&
-          profile_url == o.profile_url &&
-          is_active == o.is_active &&
-          followers_count == o.followers_count &&
-          followers_last_updated == o.followers_last_updated &&
-          ads_status == o.ads_status &&
+          account_id == o.account_id &&
+          status == o.status &&
+          status_code == o.status_code &&
+          error_message == o.error_message &&
+          error_code == o.error_code &&
+          duration_ms == o.duration_ms &&
+          endpoint == o.endpoint &&
+          request_body == o.request_body &&
+          response_body == o.response_body &&
+          created_at == o.created_at &&
           metadata == o.metadata
     end
 
@@ -229,7 +266,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, ads_status, metadata].hash
+      [type, action, user_id, platform, account_id, status, status_code, error_message, error_code, duration_ms, endpoint, request_body, response_body, created_at, metadata].hash
     end
 
     # Builds the object from hash

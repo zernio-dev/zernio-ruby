@@ -58,7 +58,7 @@ describe 'WebhooksApi' do
 
   # unit tests for get_webhook_logs
   # Get delivery logs
-  # Retrieve webhook delivery history. Logs are automatically deleted after 7 days. 
+  # **Deprecated.** Use &#x60;GET /v1/logs?type&#x3D;webhooks&#x60; instead. Retrieve webhook delivery history. Logs are retained for 90 days. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit Maximum number of logs to return (max 100)
   # @option opts [String] :status Filter by delivery status

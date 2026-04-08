@@ -94,7 +94,7 @@ module Late
     end
 
     # List connection logs
-    # Retrieve connection event logs showing account connection and disconnection history. Event types: connect_success, connect_failed, disconnect, reconnect_success, reconnect_failed. Logs are automatically deleted after 7 days. 
+    # **Deprecated.** Use `GET /v1/logs?type=connections` instead. Retrieve connection event logs. Logs are retained for 90 days. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform
     # @option opts [String] :event_type Filter by event type
@@ -109,7 +109,7 @@ module Late
     end
 
     # List connection logs
-    # Retrieve connection event logs showing account connection and disconnection history. Event types: connect_success, connect_failed, disconnect, reconnect_success, reconnect_failed. Logs are automatically deleted after 7 days. 
+    # **Deprecated.** Use &#x60;GET /v1/logs?type&#x3D;connections&#x60; instead. Retrieve connection event logs. Logs are retained for 90 days. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform
     # @option opts [String] :event_type Filter by event type
@@ -200,8 +200,121 @@ module Late
       return data, status_code, headers
     end
 
+    # List activity logs
+    # Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :type Log category to query (default to 'publishing')
+    # @option opts [String] :status Filter by status
+    # @option opts [String] :platform Filter by platform
+    # @option opts [String] :action Filter by action (e.g., post.published, message.sent, account.connected, webhook.delivered)
+    # @option opts [String] :search Free-text search across log fields
+    # @option opts [Integer] :days Number of days to look back (max 90) (default to 90)
+    # @option opts [Integer] :limit Maximum number of logs to return (max 100) (default to 50)
+    # @option opts [Integer] :skip Number of logs to skip (for pagination) (default to 0)
+    # @return [ListLogs200Response]
+    def list_logs(opts = {})
+      data, _status_code, _headers = list_logs_with_http_info(opts)
+      data
+    end
+
+    # List activity logs
+    # Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :type Log category to query (default to 'publishing')
+    # @option opts [String] :status Filter by status
+    # @option opts [String] :platform Filter by platform
+    # @option opts [String] :action Filter by action (e.g., post.published, message.sent, account.connected, webhook.delivered)
+    # @option opts [String] :search Free-text search across log fields
+    # @option opts [Integer] :days Number of days to look back (max 90) (default to 90)
+    # @option opts [Integer] :limit Maximum number of logs to return (max 100) (default to 50)
+    # @option opts [Integer] :skip Number of logs to skip (for pagination) (default to 0)
+    # @return [Array<(ListLogs200Response, Integer, Hash)>] ListLogs200Response data, response status code and response headers
+    def list_logs_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LogsApi.list_logs ...'
+      end
+      allowable_values = ["publishing", "connections", "webhooks", "messaging"]
+      if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
+        fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["success", "failed", "pending", "skipped", "all"]
+      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
+        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["tiktok", "instagram", "whatsapp", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "all"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'days'].nil? && opts[:'days'] > 90
+        fail ArgumentError, 'invalid value for "opts[:"days"]" when calling LogsApi.list_logs, must be smaller than or equal to 90.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'days'].nil? && opts[:'days'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"days"]" when calling LogsApi.list_logs, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LogsApi.list_logs, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LogsApi.list_logs, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'skip'].nil? && opts[:'skip'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"skip"]" when calling LogsApi.list_logs, must be greater than or equal to 0.'
+      end
+
+      # resource path
+      local_var_path = '/v1/logs'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'action'] = opts[:'action'] if !opts[:'action'].nil?
+      query_params[:'search'] = opts[:'search'] if !opts[:'search'].nil?
+      query_params[:'days'] = opts[:'days'] if !opts[:'days'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListLogs200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"LogsApi.list_logs",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LogsApi#list_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List publishing logs
-    # Retrieve publishing logs for all posts with detailed information about each publishing attempt. Filter by status, platform, or action. Logs are automatically deleted after 7 days. 
+    # **Deprecated.** Use `GET /v1/logs?type=publishing` instead. Retrieve publishing logs for all posts. Logs are retained for 90 days. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status Filter by log status
     # @option opts [String] :platform Filter by platform
@@ -217,7 +330,7 @@ module Late
     end
 
     # List publishing logs
-    # Retrieve publishing logs for all posts with detailed information about each publishing attempt. Filter by status, platform, or action. Logs are automatically deleted after 7 days. 
+    # **Deprecated.** Use &#x60;GET /v1/logs?type&#x3D;publishing&#x60; instead. Retrieve publishing logs for all posts. Logs are retained for 90 days. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status Filter by log status
     # @option opts [String] :platform Filter by platform

@@ -36,6 +36,9 @@ module Late
     # Last time follower count was updated (only included if user has analytics add-on)
     attr_accessor :followers_last_updated
 
+    # Ads connection status for this account. - `connected`: Ads are ready to use (same-token platforms like Meta/LinkedIn, or separate ads token is present). - `not_connected`: Platform supports ads but requires a separate ads OAuth. Use `GET /v1/connect/{platform}/ads` to connect. - `not_available`: Platform does not support ads (e.g., YouTube, Reddit, Bluesky). 
+    attr_accessor :ads_status
+
     # Platform-specific metadata. Fields vary by platform. For WhatsApp accounts, includes: - `qualityRating`: Phone number quality rating from Meta (`GREEN`, `YELLOW`, `RED`, or `UNKNOWN`) - `nameStatus`: Display name review status (`APPROVED`, `PENDING_REVIEW`, `DECLINED`, or `NONE`). Messages cannot be sent until the display name is approved by Meta. - `messagingLimitTier`: Maximum unique business-initiated conversations per 24h rolling window (`TIER_250`, `TIER_1K`, `TIER_10K`, `TIER_100K`, or `TIER_UNLIMITED`). Scales automatically as quality rating improves. - `verifiedName`: Meta-verified business display name - `displayPhoneNumber`: Formatted phone number (e.g., \"+1 555-123-4567\") - `wabaId`: WhatsApp Business Account ID - `phoneNumberId`: Meta phone number ID 
     attr_accessor :metadata
 
@@ -57,6 +60,28 @@ module Late
 
     attr_accessor :account_stats
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -69,6 +94,7 @@ module Late
         :'is_active' => :'isActive',
         :'followers_count' => :'followersCount',
         :'followers_last_updated' => :'followersLastUpdated',
+        :'ads_status' => :'adsStatus',
         :'metadata' => :'metadata',
         :'profile_picture' => :'profilePicture',
         :'current_followers' => :'currentFollowers',
@@ -102,6 +128,7 @@ module Late
         :'is_active' => :'Boolean',
         :'followers_count' => :'Float',
         :'followers_last_updated' => :'Time',
+        :'ads_status' => :'String',
         :'metadata' => :'Object',
         :'profile_picture' => :'String',
         :'current_followers' => :'Float',
@@ -178,6 +205,10 @@ module Late
         self.followers_last_updated = attributes[:'followers_last_updated']
       end
 
+      if attributes.key?(:'ads_status')
+        self.ads_status = attributes[:'ads_status']
+      end
+
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
@@ -223,7 +254,19 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      ads_status_validator = EnumAttributeValidator.new('String', ["connected", "not_connected", "not_available"])
+      return false unless ads_status_validator.valid?(@ads_status)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] ads_status Object to be assigned
+    def ads_status=(ads_status)
+      validator = EnumAttributeValidator.new('String', ["connected", "not_connected", "not_available"])
+      unless validator.valid?(ads_status)
+        fail ArgumentError, "invalid value for \"ads_status\", must be one of #{validator.allowable_values}."
+      end
+      @ads_status = ads_status
     end
 
     # Checks equality by comparing each attribute.
@@ -240,6 +283,7 @@ module Late
           is_active == o.is_active &&
           followers_count == o.followers_count &&
           followers_last_updated == o.followers_last_updated &&
+          ads_status == o.ads_status &&
           metadata == o.metadata &&
           profile_picture == o.profile_picture &&
           current_followers == o.current_followers &&
@@ -259,7 +303,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, metadata, profile_picture, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
+      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, ads_status, metadata, profile_picture, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
     end
 
     # Builds the object from hash

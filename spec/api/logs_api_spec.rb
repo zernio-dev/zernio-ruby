@@ -47,7 +47,7 @@ describe 'LogsApi' do
 
   # unit tests for list_connection_logs
   # List connection logs
-  # Retrieve connection event logs showing account connection and disconnection history. Event types: connect_success, connect_failed, disconnect, reconnect_success, reconnect_failed. Logs are automatically deleted after 7 days. 
+  # **Deprecated.** Use &#x60;GET /v1/logs?type&#x3D;connections&#x60; instead. Retrieve connection event logs. Logs are retained for 90 days. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :platform Filter by platform
   # @option opts [String] :event_type Filter by event type
@@ -62,9 +62,28 @@ describe 'LogsApi' do
     end
   end
 
+  # unit tests for list_logs
+  # List activity logs
+  # Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :type Log category to query
+  # @option opts [String] :status Filter by status
+  # @option opts [String] :platform Filter by platform
+  # @option opts [String] :action Filter by action (e.g., post.published, message.sent, account.connected, webhook.delivered)
+  # @option opts [String] :search Free-text search across log fields
+  # @option opts [Integer] :days Number of days to look back (max 90)
+  # @option opts [Integer] :limit Maximum number of logs to return (max 100)
+  # @option opts [Integer] :skip Number of logs to skip (for pagination)
+  # @return [ListLogs200Response]
+  describe 'list_logs test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_posts_logs
   # List publishing logs
-  # Retrieve publishing logs for all posts with detailed information about each publishing attempt. Filter by status, platform, or action. Logs are automatically deleted after 7 days. 
+  # **Deprecated.** Use &#x60;GET /v1/logs?type&#x3D;publishing&#x60; instead. Retrieve publishing logs for all posts. Logs are retained for 90 days. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :status Filter by log status
   # @option opts [String] :platform Filter by platform

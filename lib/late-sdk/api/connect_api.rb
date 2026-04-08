@@ -83,6 +83,90 @@ module Late
       return data, status_code, headers
     end
 
+    # Connect ads for a platform
+    # Unified ads connection endpoint. Handles all platforms through a single route:  **Same-token platforms** (facebook, instagram, linkedin): If a posting account already exists, returns `alreadyConnected: true` immediately (no extra OAuth needed). If not, starts the normal OAuth flow, and the resulting account supports both posting and ads.  **Separate-token platforms** (tiktok, twitter, pinterest): Requires an existing posting account (`accountId` param). If ads are already connected, returns `alreadyConnected: true`. Otherwise, starts the platform-specific marketing API OAuth flow.  **Ads-only platforms** (googleads): If a Google Ads account exists, returns `alreadyConnected: true`. Otherwise, starts the Google Ads OAuth flow.  Use the `adsStatus` field from `GET /v1/accounts` to check which accounts need ads connection. 
+    # @param platform [String] Platform to connect ads for. Only platforms with ads support are accepted.
+    # @param profile_id [String] Your Zernio profile ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :account_id Existing SocialAccount ID. Required for separate-token platforms (tiktok, twitter, pinterest). Ignored for same-token and ads-only platforms.
+    # @option opts [String] :redirect_url Custom redirect URL after OAuth completes (same-token platforms only)
+    # @option opts [Boolean] :headless Enable headless mode (same-token platforms only) (default to false)
+    # @return [ConnectAds200Response]
+    def connect_ads(platform, profile_id, opts = {})
+      data, _status_code, _headers = connect_ads_with_http_info(platform, profile_id, opts)
+      data
+    end
+
+    # Connect ads for a platform
+    # Unified ads connection endpoint. Handles all platforms through a single route:  **Same-token platforms** (facebook, instagram, linkedin): If a posting account already exists, returns &#x60;alreadyConnected: true&#x60; immediately (no extra OAuth needed). If not, starts the normal OAuth flow, and the resulting account supports both posting and ads.  **Separate-token platforms** (tiktok, twitter, pinterest): Requires an existing posting account (&#x60;accountId&#x60; param). If ads are already connected, returns &#x60;alreadyConnected: true&#x60;. Otherwise, starts the platform-specific marketing API OAuth flow.  **Ads-only platforms** (googleads): If a Google Ads account exists, returns &#x60;alreadyConnected: true&#x60;. Otherwise, starts the Google Ads OAuth flow.  Use the &#x60;adsStatus&#x60; field from &#x60;GET /v1/accounts&#x60; to check which accounts need ads connection. 
+    # @param platform [String] Platform to connect ads for. Only platforms with ads support are accepted.
+    # @param profile_id [String] Your Zernio profile ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :account_id Existing SocialAccount ID. Required for separate-token platforms (tiktok, twitter, pinterest). Ignored for same-token and ads-only platforms.
+    # @option opts [String] :redirect_url Custom redirect URL after OAuth completes (same-token platforms only)
+    # @option opts [Boolean] :headless Enable headless mode (same-token platforms only) (default to false)
+    # @return [Array<(ConnectAds200Response, Integer, Hash)>] ConnectAds200Response data, response status code and response headers
+    def connect_ads_with_http_info(platform, profile_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.connect_ads ...'
+      end
+      # verify the required parameter 'platform' is set
+      if @api_client.config.client_side_validation && platform.nil?
+        fail ArgumentError, "Missing the required parameter 'platform' when calling ConnectApi.connect_ads"
+      end
+      # verify enum value
+      allowable_values = ["facebook", "instagram", "linkedin", "tiktok", "twitter", "pinterest", "googleads"]
+      if @api_client.config.client_side_validation && !allowable_values.include?(platform)
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      # verify the required parameter 'profile_id' is set
+      if @api_client.config.client_side_validation && profile_id.nil?
+        fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConnectApi.connect_ads"
+      end
+      # resource path
+      local_var_path = '/v1/connect/{platform}/ads'.sub('{' + 'platform' + '}', CGI.escape(platform.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'profileId'] = profile_id
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'redirect_url'] = opts[:'redirect_url'] if !opts[:'redirect_url'].nil?
+      query_params[:'headless'] = opts[:'headless'] if !opts[:'headless'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ConnectAds200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.connect_ads",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#connect_ads\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Connect Bluesky account
     # Connect a Bluesky account using identifier (handle or email) and an app password. To get your userId for the state parameter, call GET /v1/users which includes a currentUserId field. 
     # @param connect_bluesky_credentials_request [ConnectBlueskyCredentialsRequest] 
