@@ -1090,41 +1090,36 @@ module Late
     end
 
     # List GBP locations
-    # For headless flows. Returns the list of GBP locations the user can manage. Use X-Connect-Token if connecting via API key.
-    # @param profile_id [String] Profile ID from your connection flow
-    # @param temp_token [String] Temporary Google access token from the OAuth callback redirect
+    # For headless flows. Returns the list of GBP locations the user can manage. Use pendingDataToken (from the OAuth callback redirect) to list locations without consuming the token, so it remains available for select-location. Use X-Connect-Token header if connecting via API key. 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :profile_id Profile ID from your connection flow. Required for auth validation when provided.
+    # @option opts [String] :pending_data_token Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required.
+    # @option opts [String] :temp_token Legacy. Direct Google access token. Use pendingDataToken instead when available.
     # @return [ListGoogleBusinessLocations200Response]
-    def list_google_business_locations(profile_id, temp_token, opts = {})
-      data, _status_code, _headers = list_google_business_locations_with_http_info(profile_id, temp_token, opts)
+    def list_google_business_locations(opts = {})
+      data, _status_code, _headers = list_google_business_locations_with_http_info(opts)
       data
     end
 
     # List GBP locations
-    # For headless flows. Returns the list of GBP locations the user can manage. Use X-Connect-Token if connecting via API key.
-    # @param profile_id [String] Profile ID from your connection flow
-    # @param temp_token [String] Temporary Google access token from the OAuth callback redirect
+    # For headless flows. Returns the list of GBP locations the user can manage. Use pendingDataToken (from the OAuth callback redirect) to list locations without consuming the token, so it remains available for select-location. Use X-Connect-Token header if connecting via API key. 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :profile_id Profile ID from your connection flow. Required for auth validation when provided.
+    # @option opts [String] :pending_data_token Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required.
+    # @option opts [String] :temp_token Legacy. Direct Google access token. Use pendingDataToken instead when available.
     # @return [Array<(ListGoogleBusinessLocations200Response, Integer, Hash)>] ListGoogleBusinessLocations200Response data, response status code and response headers
-    def list_google_business_locations_with_http_info(profile_id, temp_token, opts = {})
+    def list_google_business_locations_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConnectApi.list_google_business_locations ...'
-      end
-      # verify the required parameter 'profile_id' is set
-      if @api_client.config.client_side_validation && profile_id.nil?
-        fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConnectApi.list_google_business_locations"
-      end
-      # verify the required parameter 'temp_token' is set
-      if @api_client.config.client_side_validation && temp_token.nil?
-        fail ArgumentError, "Missing the required parameter 'temp_token' when calling ConnectApi.list_google_business_locations"
       end
       # resource path
       local_var_path = '/v1/connect/googlebusiness/locations'
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'profileId'] = profile_id
-      query_params[:'tempToken'] = temp_token
+      query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'pendingDataToken'] = opts[:'pending_data_token'] if !opts[:'pending_data_token'].nil?
+      query_params[:'tempToken'] = opts[:'temp_token'] if !opts[:'temp_token'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1456,7 +1451,7 @@ module Late
     end
 
     # Select GBP location
-    # Complete the headless flow by saving the user's selected GBP location. Include userProfile from the OAuth redirect (contains refresh token). Use X-Connect-Token if connecting via API key.
+    # Complete the headless GBP flow by saving the user's selected location. The pendingDataToken is returned in your redirect URL after OAuth completes (step=select_location). Tokens and profile data are stored server-side, so only the pendingDataToken is needed here. Use X-Connect-Token header if connecting via API key. 
     # @param select_google_business_location_request [SelectGoogleBusinessLocationRequest] 
     # @param [Hash] opts the optional parameters
     # @return [SelectGoogleBusinessLocation200Response]
@@ -1466,7 +1461,7 @@ module Late
     end
 
     # Select GBP location
-    # Complete the headless flow by saving the user&#39;s selected GBP location. Include userProfile from the OAuth redirect (contains refresh token). Use X-Connect-Token if connecting via API key.
+    # Complete the headless GBP flow by saving the user&#39;s selected location. The pendingDataToken is returned in your redirect URL after OAuth completes (step&#x3D;select_location). Tokens and profile data are stored server-side, so only the pendingDataToken is needed here. Use X-Connect-Token header if connecting via API key. 
     # @param select_google_business_location_request [SelectGoogleBusinessLocationRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SelectGoogleBusinessLocation200Response, Integer, Hash)>] SelectGoogleBusinessLocation200Response data, response status code and response headers

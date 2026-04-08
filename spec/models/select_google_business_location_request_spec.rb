@@ -39,13 +39,7 @@ describe Late::SelectGoogleBusinessLocationRequest do
     end
   end
 
-  describe 'test attribute "temp_token"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "user_profile"' do
+  describe 'test attribute "pending_data_token"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

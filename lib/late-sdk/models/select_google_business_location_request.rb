@@ -21,10 +21,8 @@ module Late
     # The Google Business location ID selected by the user
     attr_accessor :location_id
 
-    # Temporary Google access token from OAuth
-    attr_accessor :temp_token
-
-    attr_accessor :user_profile
+    # Token from the OAuth callback redirect (pendingDataToken query param). Tokens and profile data are retrieved server-side from this token.
+    attr_accessor :pending_data_token
 
     # Optional custom redirect URL to return to after selection
     attr_accessor :redirect_url
@@ -34,8 +32,7 @@ module Late
       {
         :'profile_id' => :'profileId',
         :'location_id' => :'locationId',
-        :'temp_token' => :'tempToken',
-        :'user_profile' => :'userProfile',
+        :'pending_data_token' => :'pendingDataToken',
         :'redirect_url' => :'redirect_url'
       }
     end
@@ -55,8 +52,7 @@ module Late
       {
         :'profile_id' => :'String',
         :'location_id' => :'String',
-        :'temp_token' => :'String',
-        :'user_profile' => :'SelectGoogleBusinessLocationRequestUserProfile',
+        :'pending_data_token' => :'String',
         :'redirect_url' => :'String'
       }
     end
@@ -95,14 +91,10 @@ module Late
         self.location_id = nil
       end
 
-      if attributes.key?(:'temp_token')
-        self.temp_token = attributes[:'temp_token']
+      if attributes.key?(:'pending_data_token')
+        self.pending_data_token = attributes[:'pending_data_token']
       else
-        self.temp_token = nil
-      end
-
-      if attributes.key?(:'user_profile')
-        self.user_profile = attributes[:'user_profile']
+        self.pending_data_token = nil
       end
 
       if attributes.key?(:'redirect_url')
@@ -123,8 +115,8 @@ module Late
         invalid_properties.push('invalid value for "location_id", location_id cannot be nil.')
       end
 
-      if @temp_token.nil?
-        invalid_properties.push('invalid value for "temp_token", temp_token cannot be nil.')
+      if @pending_data_token.nil?
+        invalid_properties.push('invalid value for "pending_data_token", pending_data_token cannot be nil.')
       end
 
       invalid_properties
@@ -136,7 +128,7 @@ module Late
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @profile_id.nil?
       return false if @location_id.nil?
-      return false if @temp_token.nil?
+      return false if @pending_data_token.nil?
       true
     end
 
@@ -161,13 +153,13 @@ module Late
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] temp_token Value to be assigned
-    def temp_token=(temp_token)
-      if temp_token.nil?
-        fail ArgumentError, 'temp_token cannot be nil'
+    # @param [Object] pending_data_token Value to be assigned
+    def pending_data_token=(pending_data_token)
+      if pending_data_token.nil?
+        fail ArgumentError, 'pending_data_token cannot be nil'
       end
 
-      @temp_token = temp_token
+      @pending_data_token = pending_data_token
     end
 
     # Checks equality by comparing each attribute.
@@ -177,8 +169,7 @@ module Late
       self.class == o.class &&
           profile_id == o.profile_id &&
           location_id == o.location_id &&
-          temp_token == o.temp_token &&
-          user_profile == o.user_profile &&
+          pending_data_token == o.pending_data_token &&
           redirect_url == o.redirect_url
     end
 
@@ -191,7 +182,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, location_id, temp_token, user_profile, redirect_url].hash
+      [profile_id, location_id, pending_data_token, redirect_url].hash
     end
 
     # Builds the object from hash

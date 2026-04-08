@@ -877,7 +877,6 @@ Class | Method | HTTP request | Description
  - [Late::SelectGoogleBusinessLocation200Response](docs/SelectGoogleBusinessLocation200Response.md)
  - [Late::SelectGoogleBusinessLocation200ResponseAccount](docs/SelectGoogleBusinessLocation200ResponseAccount.md)
  - [Late::SelectGoogleBusinessLocationRequest](docs/SelectGoogleBusinessLocationRequest.md)
- - [Late::SelectGoogleBusinessLocationRequestUserProfile](docs/SelectGoogleBusinessLocationRequestUserProfile.md)
  - [Late::SelectLinkedInOrganization200Response](docs/SelectLinkedInOrganization200Response.md)
  - [Late::SelectLinkedInOrganization200ResponseAccount](docs/SelectLinkedInOrganization200ResponseAccount.md)
  - [Late::SelectLinkedInOrganization200ResponseBulkRefresh](docs/SelectLinkedInOrganization200ResponseBulkRefresh.md)

@@ -1161,11 +1161,11 @@ end
 
 ## list_google_business_locations
 
-> <ListGoogleBusinessLocations200Response> list_google_business_locations(profile_id, temp_token)
+> <ListGoogleBusinessLocations200Response> list_google_business_locations(opts)
 
 List GBP locations
 
-For headless flows. Returns the list of GBP locations the user can manage. Use X-Connect-Token if connecting via API key.
+For headless flows. Returns the list of GBP locations the user can manage. Use pendingDataToken (from the OAuth callback redirect) to list locations without consuming the token, so it remains available for select-location. Use X-Connect-Token header if connecting via API key. 
 
 ### Examples
 
@@ -1184,12 +1184,15 @@ Late.configure do |config|
 end
 
 api_instance = Late::ConnectApi.new
-profile_id = 'profile_id_example' # String | Profile ID from your connection flow
-temp_token = 'temp_token_example' # String | Temporary Google access token from the OAuth callback redirect
+opts = {
+  profile_id: 'profile_id_example', # String | Profile ID from your connection flow. Required for auth validation when provided.
+  pending_data_token: 'pending_data_token_example', # String | Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required.
+  temp_token: 'temp_token_example' # String | Legacy. Direct Google access token. Use pendingDataToken instead when available.
+}
 
 begin
   # List GBP locations
-  result = api_instance.list_google_business_locations(profile_id, temp_token)
+  result = api_instance.list_google_business_locations(opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling ConnectApi->list_google_business_locations: #{e}"
@@ -1200,12 +1203,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListGoogleBusinessLocations200Response>, Integer, Hash)> list_google_business_locations_with_http_info(profile_id, temp_token)
+> <Array(<ListGoogleBusinessLocations200Response>, Integer, Hash)> list_google_business_locations_with_http_info(opts)
 
 ```ruby
 begin
   # List GBP locations
-  data, status_code, headers = api_instance.list_google_business_locations_with_http_info(profile_id, temp_token)
+  data, status_code, headers = api_instance.list_google_business_locations_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListGoogleBusinessLocations200Response>
@@ -1218,8 +1221,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **profile_id** | **String** | Profile ID from your connection flow |  |
-| **temp_token** | **String** | Temporary Google access token from the OAuth callback redirect |  |
+| **profile_id** | **String** | Profile ID from your connection flow. Required for auth validation when provided. | [optional] |
+| **pending_data_token** | **String** | Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required. | [optional] |
+| **temp_token** | **String** | Legacy. Direct Google access token. Use pendingDataToken instead when available. | [optional] |
 
 ### Return type
 
@@ -1532,7 +1536,7 @@ end
 
 Select GBP location
 
-Complete the headless flow by saving the user's selected GBP location. Include userProfile from the OAuth redirect (contains refresh token). Use X-Connect-Token if connecting via API key.
+Complete the headless GBP flow by saving the user's selected location. The pendingDataToken is returned in your redirect URL after OAuth completes (step=select_location). Tokens and profile data are stored server-side, so only the pendingDataToken is needed here. Use X-Connect-Token header if connecting via API key. 
 
 ### Examples
 
@@ -1551,7 +1555,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::ConnectApi.new
-select_google_business_location_request = Late::SelectGoogleBusinessLocationRequest.new({profile_id: 'profile_id_example', location_id: 'location_id_example', temp_token: 'temp_token_example'}) # SelectGoogleBusinessLocationRequest | 
+select_google_business_location_request = Late::SelectGoogleBusinessLocationRequest.new({profile_id: 'profile_id_example', location_id: 'location_id_example', pending_data_token: 'pending_data_token_example'}) # SelectGoogleBusinessLocationRequest | 
 
 begin
   # Select GBP location

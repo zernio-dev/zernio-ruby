@@ -576,7 +576,6 @@ docs/SelectFacebookPageRequestUserProfile.md
 docs/SelectGoogleBusinessLocation200Response.md
 docs/SelectGoogleBusinessLocation200ResponseAccount.md
 docs/SelectGoogleBusinessLocationRequest.md
-docs/SelectGoogleBusinessLocationRequestUserProfile.md
 docs/SelectLinkedInOrganization200Response.md
 docs/SelectLinkedInOrganization200ResponseAccount.md
 docs/SelectLinkedInOrganization200ResponseBulkRefresh.md
@@ -1381,7 +1380,6 @@ lib/late-sdk/models/select_facebook_page_request_user_profile.rb
 lib/late-sdk/models/select_google_business_location200_response.rb
 lib/late-sdk/models/select_google_business_location200_response_account.rb
 lib/late-sdk/models/select_google_business_location_request.rb
-lib/late-sdk/models/select_google_business_location_request_user_profile.rb
 lib/late-sdk/models/select_linked_in_organization200_response.rb
 lib/late-sdk/models/select_linked_in_organization200_response_account.rb
 lib/late-sdk/models/select_linked_in_organization200_response_bulk_refresh.rb
@@ -2169,7 +2167,6 @@ spec/models/select_facebook_page_request_user_profile_spec.rb
 spec/models/select_google_business_location200_response_account_spec.rb
 spec/models/select_google_business_location200_response_spec.rb
 spec/models/select_google_business_location_request_spec.rb
-spec/models/select_google_business_location_request_user_profile_spec.rb
 spec/models/select_linked_in_organization200_response_account_spec.rb
 spec/models/select_linked_in_organization200_response_bulk_refresh_spec.rb
 spec/models/select_linked_in_organization200_response_spec.rb
