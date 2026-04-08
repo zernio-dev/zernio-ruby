@@ -19,7 +19,7 @@ module Late
     # Topic tag for post categorization and discoverability on Threads. Must be 1-50 characters, cannot contain periods (.) or ampersands (&). Overrides auto-extraction from content hashtags when provided.
     attr_accessor :topic_tag
 
-    # Sequence of posts in a Threads thread (root then replies in order).
+    # Complete sequence of posts in a Threads thread. The first item becomes the root post, subsequent items are chained as replies. When threadItems is provided, the top-level content field is used only for display and search purposes, it is NOT published. You must include your first post as threadItems[0]. 
     attr_accessor :thread_items
 
     # Attribute mapping from ruby-style variable name to JSON key.

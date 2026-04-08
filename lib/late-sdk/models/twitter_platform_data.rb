@@ -21,7 +21,7 @@ module Late
     # Controls who can reply to the tweet. \"following\" allows only people you follow, \"mentionedUsers\" allows only mentioned users, \"subscribers\" allows only subscribers, \"verified\" allows only verified users. Omit for default (everyone can reply). For threads, applies to the first tweet only. Cannot be combined with replyToTweetId.
     attr_accessor :reply_settings
 
-    # Sequence of tweets in a thread. First item is the root tweet.
+    # Complete sequence of tweets in a thread. The first item becomes the root tweet, subsequent items are chained as replies. When threadItems is provided, the top-level content field is used only for display and search purposes, it is NOT published. You must include your first tweet as threadItems[0]. 
     attr_accessor :thread_items
 
     attr_accessor :poll
