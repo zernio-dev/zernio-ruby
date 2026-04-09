@@ -283,6 +283,72 @@ module Late
       return data, status_code, headers
     end
 
+    # Message sent event
+    # Fired when a message is sent via the API.
+    # @param webhook_payload_message_sent [WebhookPayloadMessageSent] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_message_sent(webhook_payload_message_sent, opts = {})
+      on_message_sent_with_http_info(webhook_payload_message_sent, opts)
+      nil
+    end
+
+    # Message sent event
+    # Fired when a message is sent via the API.
+    # @param webhook_payload_message_sent [WebhookPayloadMessageSent] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_message_sent_with_http_info(webhook_payload_message_sent, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_message_sent ...'
+      end
+      # verify the required parameter 'webhook_payload_message_sent' is set
+      if @api_client.config.client_side_validation && webhook_payload_message_sent.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_message_sent' when calling WebhookEventsApi.on_message_sent"
+      end
+      # resource path
+      local_var_path = '/message.sent'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_message_sent)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_message_sent",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_message_sent\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Post cancelled event
     # Fired when a post publishing job is cancelled.
     # @param webhook_payload_post [WebhookPayloadPost] 

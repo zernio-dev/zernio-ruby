@@ -8,6 +8,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
 | [**on_comment_received**](WebhookEventsApi.md#on_comment_received) | **POST** /comment.received | Comment received event |
 | [**on_message_received**](WebhookEventsApi.md#on_message_received) | **POST** /message.received | Message received event |
+| [**on_message_sent**](WebhookEventsApi.md#on_message_sent) | **POST** /message.sent | Message sent event |
 | [**on_post_cancelled**](WebhookEventsApi.md#on_post_cancelled) | **POST** /post.cancelled | Post cancelled event |
 | [**on_post_failed**](WebhookEventsApi.md#on_post_failed) | **POST** /post.failed | Post failed event |
 | [**on_post_partial**](WebhookEventsApi.md#on_post_partial) | **POST** /post.partial | Post partial event |
@@ -274,6 +275,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_message** | [**WebhookPayloadMessage**](WebhookPayloadMessage.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_message_sent
+
+> on_message_sent(webhook_payload_message_sent)
+
+Message sent event
+
+Fired when a message is sent via the API.
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::WebhookEventsApi.new
+webhook_payload_message_sent =  # WebhookPayloadMessageSent | 
+
+begin
+  # Message sent event
+  api_instance.on_message_sent(webhook_payload_message_sent)
+rescue Late::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_message_sent: #{e}"
+end
+```
+
+#### Using the on_message_sent_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_message_sent_with_http_info(webhook_payload_message_sent)
+
+```ruby
+begin
+  # Message sent event
+  data, status_code, headers = api_instance.on_message_sent_with_http_info(webhook_payload_message_sent)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Late::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_message_sent_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_message_sent** | [**WebhookPayloadMessageSent**](WebhookPayloadMessageSent.md) |  |  |
 
 ### Return type
 
