@@ -280,9 +280,11 @@ module Late
     end
 
     # Get ad analytics with daily breakdown
-    # Returns real-time analytics from the platform API (not cached). Includes summary metrics, daily breakdown, and optional demographic breakdowns (Meta and TikTok only). 
+    # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param ad_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
+    # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
     # @option opts [String] :breakdowns Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region. TikTok: gender, age, country_code, platform, ac, language.
     # @return [GetAdAnalytics200Response]
     def get_ad_analytics(ad_id, opts = {})
@@ -291,9 +293,11 @@ module Late
     end
 
     # Get ad analytics with daily breakdown
-    # Returns real-time analytics from the platform API (not cached). Includes summary metrics, daily breakdown, and optional demographic breakdowns (Meta and TikTok only). 
+    # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param ad_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
+    # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
     # @option opts [String] :breakdowns Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region. TikTok: gender, age, country_code, platform, ac, language.
     # @return [Array<(GetAdAnalytics200Response, Integer, Hash)>] GetAdAnalytics200Response data, response status code and response headers
     def get_ad_analytics_with_http_info(ad_id, opts = {})
@@ -309,6 +313,8 @@ module Late
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
       query_params[:'breakdowns'] = opts[:'breakdowns'] if !opts[:'breakdowns'].nil?
 
       # header parameters
@@ -410,7 +416,7 @@ module Late
     end
 
     # List ads
-    # Returns a paginated list of ads with cached metrics. Use `source=all` to include externally-synced ads from platform ad managers.
+    # Returns a paginated list of ads with metrics computed over an optional date range. Use `source=all` to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 50)
@@ -420,6 +426,8 @@ module Late
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
     # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
+    # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+    # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
     # @return [ListAds200Response]
     def list_ads(opts = {})
       data, _status_code, _headers = list_ads_with_http_info(opts)
@@ -427,7 +435,7 @@ module Late
     end
 
     # List ads
-    # Returns a paginated list of ads with cached metrics. Use &#x60;source&#x3D;all&#x60; to include externally-synced ads from platform ad managers.
+    # Returns a paginated list of ads with metrics computed over an optional date range. Use &#x60;source&#x3D;all&#x60; to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 50)
@@ -437,6 +445,8 @@ module Late
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
     # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
+    # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+    # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
     # @return [Array<(ListAds200Response, Integer, Hash)>] ListAds200Response data, response status code and response headers
     def list_ads_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -479,6 +489,8 @@ module Late
       query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -581,63 +593,6 @@ module Late
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#search_ad_interests\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Sync external ads from platform ad managers
-    # Discovers and imports ads created outside Zernio (e.g. in Meta Ads Manager, Google Ads). Upserts new ads and updates metrics/status for existing ones. Also runs automatically every 30 minutes.
-    # @param [Hash] opts the optional parameters
-    # @return [SyncExternalAds200Response]
-    def sync_external_ads(opts = {})
-      data, _status_code, _headers = sync_external_ads_with_http_info(opts)
-      data
-    end
-
-    # Sync external ads from platform ad managers
-    # Discovers and imports ads created outside Zernio (e.g. in Meta Ads Manager, Google Ads). Upserts new ads and updates metrics/status for existing ones. Also runs automatically every 30 minutes.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(SyncExternalAds200Response, Integer, Hash)>] SyncExternalAds200Response data, response status code and response headers
-    def sync_external_ads_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: AdsApi.sync_external_ads ...'
-      end
-      # resource path
-      local_var_path = '/v1/ads/sync'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'SyncExternalAds200Response'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['bearerAuth']
-
-      new_options = opts.merge(
-        :operation => :"AdsApi.sync_external_ads",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: AdsApi#sync_external_ads\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

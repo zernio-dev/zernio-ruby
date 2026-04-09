@@ -81,9 +81,11 @@ describe 'AdsApi' do
 
   # unit tests for get_ad_analytics
   # Get ad analytics with daily breakdown
-  # Returns real-time analytics from the platform API (not cached). Includes summary metrics, daily breakdown, and optional demographic breakdowns (Meta and TikTok only). 
+  # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
   # @param ad_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
+  # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
   # @option opts [String] :breakdowns Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region. TikTok: gender, age, country_code, platform, ac, language.
   # @return [GetAdAnalytics200Response]
   describe 'get_ad_analytics test' do
@@ -106,7 +108,7 @@ describe 'AdsApi' do
 
   # unit tests for list_ads
   # List ads
-  # Returns a paginated list of ads with cached metrics. Use &#x60;source&#x3D;all&#x60; to include externally-synced ads from platform ad managers.
+  # Returns a paginated list of ads with metrics computed over an optional date range. Use &#x60;source&#x3D;all&#x60; to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit 
@@ -116,6 +118,8 @@ describe 'AdsApi' do
   # @option opts [String] :account_id Social account ID
   # @option opts [String] :profile_id Profile ID
   # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
+  # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+  # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
   # @return [ListAds200Response]
   describe 'list_ads test' do
     it 'should work' do
@@ -131,17 +135,6 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [SearchAdInterests200Response]
   describe 'search_ad_interests test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for sync_external_ads
-  # Sync external ads from platform ad managers
-  # Discovers and imports ads created outside Zernio (e.g. in Meta Ads Manager, Google Ads). Upserts new ads and updates metrics/status for existing ones. Also runs automatically every 30 minutes.
-  # @param [Hash] opts the optional parameters
-  # @return [SyncExternalAds200Response]
-  describe 'sync_external_ads test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -14,25 +14,36 @@ require 'date'
 require 'time'
 
 module Late
-  class SyncExternalAds200Response < ApiModelBase
-    attr_accessor :success
+  class DisconnectAdsRequest < ApiModelBase
+    # The ads platform to disconnect
+    attr_accessor :ads_platform
 
-    # New ads imported
-    attr_accessor :synced
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # Already-known ads (skipped import
-    attr_accessor :skipped
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # Failed ad imports
-    attr_accessor :errors
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'synced' => :'synced',
-        :'skipped' => :'skipped',
-        :'errors' => :'errors'
+        :'ads_platform' => :'adsPlatform'
       }
     end
 
@@ -49,10 +60,7 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'synced' => :'Integer',
-        :'skipped' => :'Integer',
-        :'errors' => :'Integer'
+        :'ads_platform' => :'String'
       }
     end
 
@@ -66,32 +74,22 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::SyncExternalAds200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::DisconnectAdsRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::SyncExternalAds200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::DisconnectAdsRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
-      end
-
-      if attributes.key?(:'synced')
-        self.synced = attributes[:'synced']
-      end
-
-      if attributes.key?(:'skipped')
-        self.skipped = attributes[:'skipped']
-      end
-
-      if attributes.key?(:'errors')
-        self.errors = attributes[:'errors']
+      if attributes.key?(:'ads_platform')
+        self.ads_platform = attributes[:'ads_platform']
+      else
+        self.ads_platform = nil
       end
     end
 
@@ -100,6 +98,10 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @ads_platform.nil?
+        invalid_properties.push('invalid value for "ads_platform", ads_platform cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -107,7 +109,20 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @ads_platform.nil?
+      ads_platform_validator = EnumAttributeValidator.new('String', ["metaads", "linkedinads", "pinterestads", "tiktokads", "xads"])
+      return false unless ads_platform_validator.valid?(@ads_platform)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] ads_platform Object to be assigned
+    def ads_platform=(ads_platform)
+      validator = EnumAttributeValidator.new('String', ["metaads", "linkedinads", "pinterestads", "tiktokads", "xads"])
+      unless validator.valid?(ads_platform)
+        fail ArgumentError, "invalid value for \"ads_platform\", must be one of #{validator.allowable_values}."
+      end
+      @ads_platform = ads_platform
     end
 
     # Checks equality by comparing each attribute.
@@ -115,10 +130,7 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          synced == o.synced &&
-          skipped == o.skipped &&
-          errors == o.errors
+          ads_platform == o.ads_platform
     end
 
     # @see the `==` method
@@ -130,7 +142,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, synced, skipped, errors].hash
+      [ads_platform].hash
     end
 
     # Builds the object from hash

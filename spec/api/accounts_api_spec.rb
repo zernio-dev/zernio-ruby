@@ -44,6 +44,19 @@ describe 'AccountsApi' do
     end
   end
 
+  # unit tests for disconnect_ads
+  # Disconnect ads from an account
+  # Disconnects ads from a social account without removing the posting connection.  **Same-token platforms** (metaads, linkedinads, pinterestads): Sets an &#x60;adsOptOut&#x60; flag. The posting account and OAuth token are preserved. Reconnecting ads clears the flag.  **Separate-token platforms** (tiktokads, xads): Clears the ads-specific metadata (marketing API tokens). The posting account stays intact.  **Standalone platforms** (googleads): Do not use this endpoint. Use &#x60;DELETE /v1/accounts/{accountId}&#x60; instead, since Google Ads accounts are standalone. 
+  # @param account_id The SocialAccount ID (parent posting account for same-token/separate-token platforms)
+  # @param disconnect_ads_request 
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteAccountGroup200Response]
+  describe 'disconnect_ads test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_account_health
   # Check account health
   # Returns detailed health info for a specific account including token status, permissions, and recommendations.

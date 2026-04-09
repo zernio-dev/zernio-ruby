@@ -81,6 +81,7 @@ Class | Method | HTTP request | Description
 *Late::AccountSettingsApi* | [**set_messenger_menu**](docs/AccountSettingsApi.md#set_messenger_menu) | **PUT** /v1/accounts/{accountId}/messenger-menu | Set FB persistent menu
 *Late::AccountSettingsApi* | [**set_telegram_commands**](docs/AccountSettingsApi.md#set_telegram_commands) | **PUT** /v1/accounts/{accountId}/telegram-commands | Set TG bot commands
 *Late::AccountsApi* | [**delete_account**](docs/AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account
+*Late::AccountsApi* | [**disconnect_ads**](docs/AccountsApi.md#disconnect_ads) | **POST** /v1/accounts/{accountId}/disconnect-ads | Disconnect ads from an account
 *Late::AccountsApi* | [**get_account_health**](docs/AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health
 *Late::AccountsApi* | [**get_all_accounts_health**](docs/AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health
 *Late::AccountsApi* | [**get_follower_stats**](docs/AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
@@ -103,7 +104,6 @@ Class | Method | HTTP request | Description
 *Late::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts for a social account
 *Late::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Late::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
-*Late::AdsApi* | [**sync_external_ads**](docs/AdsApi.md#sync_external_ads) | **POST** /v1/ads/sync | Sync external ads from platform ad managers
 *Late::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad (pause/resume, budget, targeting, name)
 *Late::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Late::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
@@ -487,6 +487,7 @@ Class | Method | HTTP request | Description
  - [Late::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
  - [Late::DeleteQueueSlot200Response](docs/DeleteQueueSlot200Response.md)
  - [Late::DeleteWhatsAppGroupRequest](docs/DeleteWhatsAppGroupRequest.md)
+ - [Late::DisconnectAdsRequest](docs/DisconnectAdsRequest.md)
  - [Late::EditInboxMessage200Response](docs/EditInboxMessage200Response.md)
  - [Late::EditInboxMessage200ResponseData](docs/EditInboxMessage200ResponseData.md)
  - [Late::EditInboxMessageRequest](docs/EditInboxMessageRequest.md)
@@ -931,7 +932,6 @@ Class | Method | HTTP request | Description
  - [Late::SnapchatPlatformData](docs/SnapchatPlatformData.md)
  - [Late::SocialAccount](docs/SocialAccount.md)
  - [Late::SocialAccountProfileId](docs/SocialAccountProfileId.md)
- - [Late::SyncExternalAds200Response](docs/SyncExternalAds200Response.md)
  - [Late::TelegramPlatformData](docs/TelegramPlatformData.md)
  - [Late::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Late::ThreadsPlatformData](docs/ThreadsPlatformData.md)

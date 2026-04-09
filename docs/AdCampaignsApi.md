@@ -15,7 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Get nested campaign/ad-set/ad tree
 
-Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. 
+Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
 
 ### Examples
 
@@ -37,7 +37,9 @@ opts = {
   status: 'active', # String | Filter by derived campaign status (post-aggregation)
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID
   account_id: 'account_id_example', # String | Social account ID
-  profile_id: 'profile_id_example' # String | Profile ID
+  profile_id: 'profile_id_example', # String | Profile ID
+  from_date: Date.parse('2013-10-20'), # Date | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+  to_date: Date.parse('2013-10-20') # Date | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
 }
 
 begin
@@ -79,6 +81,8 @@ end
 | **ad_account_id** | **String** | Platform ad account ID | [optional] |
 | **account_id** | **String** | Social account ID | [optional] |
 | **profile_id** | **String** | Profile ID | [optional] |
+| **from_date** | **Date** | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
+| **to_date** | **Date** | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range. | [optional] |
 
 ### Return type
 

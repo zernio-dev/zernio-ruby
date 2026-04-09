@@ -113,7 +113,7 @@ end
 
 Connect ads for a platform
 
-Unified ads connection endpoint. Handles all platforms through a single route:  **Same-token platforms** (facebook, instagram, linkedin): If a posting account already exists, returns `alreadyConnected: true` immediately (no extra OAuth needed). If not, starts the normal OAuth flow, and the resulting account supports both posting and ads.  **Separate-token platforms** (tiktok, twitter, pinterest): Requires an existing posting account (`accountId` param). If ads are already connected, returns `alreadyConnected: true`. Otherwise, starts the platform-specific marketing API OAuth flow.  **Ads-only platforms** (googleads): If a Google Ads account exists, returns `alreadyConnected: true`. Otherwise, starts the Google Ads OAuth flow.  Use the `adsStatus` field from `GET /v1/accounts` to check which accounts need ads connection. 
+Unified ads connection endpoint. Handles all platforms through a single route:  **Same-token platforms** (facebook, instagram, linkedin, pinterest): If a posting account already exists, returns `alreadyConnected: true` immediately (no extra OAuth needed). If not, starts the normal OAuth flow, and the resulting account supports both posting and ads.  **Separate-token platforms** (tiktok, twitter): Requires an existing posting account (`accountId` param). If ads are already connected, returns `alreadyConnected: true`. Otherwise, starts the platform-specific marketing API OAuth flow.  **Ads-only platforms** (googleads): If a Google Ads account exists, returns `alreadyConnected: true`. Otherwise, starts the Google Ads OAuth flow.  Use the `adsStatus` field from `GET /v1/accounts` to check which accounts need ads connection. 
 
 ### Examples
 
@@ -130,7 +130,7 @@ api_instance = Late::ConnectApi.new
 platform = 'facebook' # String | Platform to connect ads for. Only platforms with ads support are accepted.
 profile_id = 'profile_id_example' # String | Your Zernio profile ID
 opts = {
-  account_id: 'account_id_example', # String | Existing SocialAccount ID. Required for separate-token platforms (tiktok, twitter, pinterest). Ignored for same-token and ads-only platforms.
+  account_id: 'account_id_example', # String | Existing SocialAccount ID. Required for separate-token platforms (tiktok, twitter). Ignored for same-token and ads-only platforms.
   redirect_url: 'redirect_url_example', # String | Custom redirect URL after OAuth completes (same-token platforms only)
   headless: true # Boolean | Enable headless mode (same-token platforms only)
 }
@@ -168,7 +168,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** | Platform to connect ads for. Only platforms with ads support are accepted. |  |
 | **profile_id** | **String** | Your Zernio profile ID |  |
-| **account_id** | **String** | Existing SocialAccount ID. Required for separate-token platforms (tiktok, twitter, pinterest). Ignored for same-token and ads-only platforms. | [optional] |
+| **account_id** | **String** | Existing SocialAccount ID. Required for separate-token platforms (tiktok, twitter). Ignored for same-token and ads-only platforms. | [optional] |
 | **redirect_url** | **String** | Custom redirect URL after OAuth completes (same-token platforms only) | [optional] |
 | **headless** | **Boolean** | Enable headless mode (same-token platforms only) | [optional][default to false] |
 

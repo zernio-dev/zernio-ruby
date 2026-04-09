@@ -12,7 +12,6 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts for a social account |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests |
-| [**sync_external_ads**](AdsApi.md#sync_external_ads) | **POST** /v1/ads/sync | Sync external ads from platform ad managers |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad (pause/resume, budget, targeting, name) |
 
 
@@ -296,7 +295,7 @@ end
 
 Get ad analytics with daily breakdown
 
-Returns real-time analytics from the platform API (not cached). Includes summary metrics, daily breakdown, and optional demographic breakdowns (Meta and TikTok only). 
+Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
 
 ### Examples
 
@@ -312,6 +311,8 @@ end
 api_instance = Late::AdsApi.new
 ad_id = 'ad_id_example' # String | 
 opts = {
+  from_date: Date.parse('2013-10-20'), # Date | Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End of date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
   breakdowns: 'breakdowns_example' # String | Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region. TikTok: gender, age, country_code, platform, ac, language.
 }
 
@@ -347,6 +348,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** |  |  |
+| **from_date** | **Date** | Start of date range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
+| **to_date** | **Date** | End of date range (YYYY-MM-DD). Defaults to today. Max 90-day range. | [optional] |
 | **breakdowns** | **String** | Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region. TikTok: gender, age, country_code, platform, ac, language. | [optional] |
 
 ### Return type
@@ -438,7 +441,7 @@ end
 
 List ads
 
-Returns a paginated list of ads with cached metrics. Use `source=all` to include externally-synced ads from platform ad managers.
+Returns a paginated list of ads with metrics computed over an optional date range. Use `source=all` to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
 
 ### Examples
 
@@ -460,7 +463,9 @@ opts = {
   platform: 'facebook', # String | 
   account_id: 'account_id_example', # String | Social account ID
   profile_id: 'profile_id_example', # String | Profile ID
-  campaign_id: 'campaign_id_example' # String | Platform campaign ID (filter ads within a campaign)
+  campaign_id: 'campaign_id_example', # String | Platform campaign ID (filter ads within a campaign)
+  from_date: Date.parse('2013-10-20'), # Date | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+  to_date: Date.parse('2013-10-20') # Date | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
 }
 
 begin
@@ -502,6 +507,8 @@ end
 | **account_id** | **String** | Social account ID | [optional] |
 | **profile_id** | **String** | Profile ID | [optional] |
 | **campaign_id** | **String** | Platform campaign ID (filter ads within a campaign) | [optional] |
+| **from_date** | **Date** | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
+| **to_date** | **Date** | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range. | [optional] |
 
 ### Return type
 
@@ -577,72 +584,6 @@ end
 ### Return type
 
 [**SearchAdInterests200Response**](SearchAdInterests200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## sync_external_ads
-
-> <SyncExternalAds200Response> sync_external_ads
-
-Sync external ads from platform ad managers
-
-Discovers and imports ads created outside Zernio (e.g. in Meta Ads Manager, Google Ads). Upserts new ads and updates metrics/status for existing ones. Also runs automatically every 30 minutes.
-
-### Examples
-
-```ruby
-require 'time'
-require 'late-sdk'
-# setup authorization
-Late.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Late::AdsApi.new
-
-begin
-  # Sync external ads from platform ad managers
-  result = api_instance.sync_external_ads
-  p result
-rescue Late::ApiError => e
-  puts "Error when calling AdsApi->sync_external_ads: #{e}"
-end
-```
-
-#### Using the sync_external_ads_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<SyncExternalAds200Response>, Integer, Hash)> sync_external_ads_with_http_info
-
-```ruby
-begin
-  # Sync external ads from platform ad managers
-  data, status_code, headers = api_instance.sync_external_ads_with_http_info
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <SyncExternalAds200Response>
-rescue Late::ApiError => e
-  puts "Error when calling AdsApi->sync_external_ads_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**SyncExternalAds200Response**](SyncExternalAds200Response.md)
 
 ### Authorization
 

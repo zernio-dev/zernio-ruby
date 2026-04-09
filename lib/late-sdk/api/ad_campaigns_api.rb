@@ -20,7 +20,7 @@ module Late
       @api_client = api_client
     end
     # Get nested campaign/ad-set/ad tree
-    # Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. 
+    # Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit Campaigns per page (default to 20)
@@ -30,6 +30,8 @@ module Late
     # @option opts [String] :ad_account_id Platform ad account ID
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
+    # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+    # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
     # @return [GetAdTree200Response]
     def get_ad_tree(opts = {})
       data, _status_code, _headers = get_ad_tree_with_http_info(opts)
@@ -37,7 +39,7 @@ module Late
     end
 
     # Get nested campaign/ad-set/ad tree
-    # Returns a nested Campaign &gt; Ad Set &gt; Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \&quot;Ungrouped\&quot; buckets. 
+    # Returns a nested Campaign &gt; Ad Set &gt; Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \&quot;Ungrouped\&quot; buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit Campaigns per page (default to 20)
@@ -47,6 +49,8 @@ module Late
     # @option opts [String] :ad_account_id Platform ad account ID
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
+    # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+    # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
     # @return [Array<(GetAdTree200Response, Integer, Hash)>] GetAdTree200Response data, response status code and response headers
     def get_ad_tree_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -89,6 +93,8 @@ module Late
       query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

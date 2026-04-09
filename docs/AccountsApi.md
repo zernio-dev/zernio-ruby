@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**delete_account**](AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account |
+| [**disconnect_ads**](AccountsApi.md#disconnect_ads) | **POST** /v1/accounts/{accountId}/disconnect-ads | Disconnect ads from an account |
 | [**get_account_health**](AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health |
 | [**get_all_accounts_health**](AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health |
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
@@ -79,6 +80,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## disconnect_ads
+
+> <DeleteAccountGroup200Response> disconnect_ads(account_id, disconnect_ads_request)
+
+Disconnect ads from an account
+
+Disconnects ads from a social account without removing the posting connection.  **Same-token platforms** (metaads, linkedinads, pinterestads): Sets an `adsOptOut` flag. The posting account and OAuth token are preserved. Reconnecting ads clears the flag.  **Separate-token platforms** (tiktokads, xads): Clears the ads-specific metadata (marketing API tokens). The posting account stays intact.  **Standalone platforms** (googleads): Do not use this endpoint. Use `DELETE /v1/accounts/{accountId}` instead, since Google Ads accounts are standalone. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::AccountsApi.new
+account_id = 'account_id_example' # String | The SocialAccount ID (parent posting account for same-token/separate-token platforms)
+disconnect_ads_request = Late::DisconnectAdsRequest.new({ads_platform: 'metaads'}) # DisconnectAdsRequest | 
+
+begin
+  # Disconnect ads from an account
+  result = api_instance.disconnect_ads(account_id, disconnect_ads_request)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling AccountsApi->disconnect_ads: #{e}"
+end
+```
+
+#### Using the disconnect_ads_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteAccountGroup200Response>, Integer, Hash)> disconnect_ads_with_http_info(account_id, disconnect_ads_request)
+
+```ruby
+begin
+  # Disconnect ads from an account
+  data, status_code, headers = api_instance.disconnect_ads_with_http_info(account_id, disconnect_ads_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteAccountGroup200Response>
+rescue Late::ApiError => e
+  puts "Error when calling AccountsApi->disconnect_ads_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The SocialAccount ID (parent posting account for same-token/separate-token platforms) |  |
+| **disconnect_ads_request** | [**DisconnectAdsRequest**](DisconnectAdsRequest.md) |  |  |
+
+### Return type
+
+[**DeleteAccountGroup200Response**](DeleteAccountGroup200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
