@@ -34,7 +34,7 @@ describe 'AnalyticsApi' do
 
   # unit tests for get_analytics
   # Get post analytics
-  # Returns analytics for posts. With postId, returns a single post. Without it, returns a paginated list with overview stats. Accepts both Zernio Post IDs and External Post IDs (auto-resolved). fromDate defaults to 90 days ago if omitted, max range 366 days. Single post lookups may return 202 (sync pending) or 424 (all platforms failed). For follower stats, use /v1/accounts/follower-stats. 
+  # Returns analytics for posts. With postId, returns a single post. Without it, returns a paginated list with overview stats. Accepts both Zernio Post IDs and External Post IDs (auto-resolved). fromDate defaults to 90 days ago if omitted, max range 366 days. Single post lookups may return 202 (sync pending) or 424 (all platforms failed). For follower stats, use /v1/accounts/follower-stats.  **LinkedIn personal accounts:** Analytics are only available for posts published through Zernio. LinkedIn&#39;s API only returns metrics for posts authored by the authenticated user. Organization/company page analytics work for all posts. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :post_id Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics.
   # @option opts [String] :platform Filter by platform (default \&quot;all\&quot;)
@@ -178,7 +178,7 @@ describe 'AnalyticsApi' do
 
   # unit tests for get_linked_in_aggregate_analytics
   # Get LinkedIn aggregate stats
-  # Returns aggregate analytics across all posts for a LinkedIn personal account. Org accounts should use /v1/analytics instead. Requires r_member_postAnalytics scope.
+  # Returns aggregate analytics across all posts for a LinkedIn personal account. Only includes posts published through Zernio (LinkedIn API limitation). Org accounts should use /v1/analytics instead. Requires r_member_postAnalytics scope.
   # @param account_id The ID of the LinkedIn personal account
   # @param [Hash] opts the optional parameters
   # @option opts [String] :aggregation TOTAL (default, lifetime totals) or DAILY (time series). MEMBERS_REACHED not available with DAILY.
