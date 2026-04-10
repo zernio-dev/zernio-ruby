@@ -46,10 +46,10 @@ describe 'AccountsApi' do
 
   # unit tests for disconnect_ads
   # Disconnect ads from an account
-  # Disconnects ads from a social account without removing the posting connection.  **Same-token platforms** (metaads, linkedinads, pinterestads): Sets an &#x60;adsOptOut&#x60; flag. The posting account and OAuth token are preserved. Reconnecting ads clears the flag.  **Separate-token platforms** (tiktokads, xads): Clears the ads-specific metadata (marketing API tokens). The posting account stays intact.  **Standalone platforms** (googleads): Do not use this endpoint. Use &#x60;DELETE /v1/accounts/{accountId}&#x60; instead, since Google Ads accounts are standalone. 
-  # @param account_id The SocialAccount ID (parent posting account for same-token/separate-token platforms)
-  # @param disconnect_ads_request 
+  # **Deprecated.** Ads accounts are now standalone SocialAccount documents. Use &#x60;DELETE /v1/accounts/{accountId}&#x60; instead, passing the ads account&#39;s own ID.  This endpoint is kept for backward compatibility. It soft-deletes the ads SocialAccount identified by &#x60;accountId&#x60; (which must be an ads account, not a posting account). The parent posting account is left untouched. 
+  # @param account_id The ads SocialAccount ID to disconnect
   # @param [Hash] opts the optional parameters
+  # @option opts [DisconnectAdsRequest] :disconnect_ads_request 
   # @return [DeleteAccountGroup200Response]
   describe 'disconnect_ads test' do
     it 'should work' do

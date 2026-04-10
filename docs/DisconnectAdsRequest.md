@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **ads_platform** | **String** | The ads platform to disconnect |  |
+| **ads_platform** | **String** | The ads platform (optional, used for logging only) | [optional] |
 
 ## Example
 

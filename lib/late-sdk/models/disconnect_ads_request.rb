@@ -15,7 +15,7 @@ require 'time'
 
 module Late
   class DisconnectAdsRequest < ApiModelBase
-    # The ads platform to disconnect
+    # The ads platform (optional, used for logging only)
     attr_accessor :ads_platform
 
     class EnumAttributeValidator
@@ -88,8 +88,6 @@ module Late
 
       if attributes.key?(:'ads_platform')
         self.ads_platform = attributes[:'ads_platform']
-      else
-        self.ads_platform = nil
       end
     end
 
@@ -98,10 +96,6 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @ads_platform.nil?
-        invalid_properties.push('invalid value for "ads_platform", ads_platform cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -109,7 +103,6 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @ads_platform.nil?
       ads_platform_validator = EnumAttributeValidator.new('String', ["metaads", "linkedinads", "pinterestads", "tiktokads", "xads"])
       return false unless ads_platform_validator.valid?(@ads_platform)
       true

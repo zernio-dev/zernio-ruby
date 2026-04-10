@@ -85,11 +85,11 @@ end
 
 ## disconnect_ads
 
-> <DeleteAccountGroup200Response> disconnect_ads(account_id, disconnect_ads_request)
+> <DeleteAccountGroup200Response> disconnect_ads(account_id, opts)
 
 Disconnect ads from an account
 
-Disconnects ads from a social account without removing the posting connection.  **Same-token platforms** (metaads, linkedinads, pinterestads): Sets an `adsOptOut` flag. The posting account and OAuth token are preserved. Reconnecting ads clears the flag.  **Separate-token platforms** (tiktokads, xads): Clears the ads-specific metadata (marketing API tokens). The posting account stays intact.  **Standalone platforms** (googleads): Do not use this endpoint. Use `DELETE /v1/accounts/{accountId}` instead, since Google Ads accounts are standalone. 
+**Deprecated.** Ads accounts are now standalone SocialAccount documents. Use `DELETE /v1/accounts/{accountId}` instead, passing the ads account's own ID.  This endpoint is kept for backward compatibility. It soft-deletes the ads SocialAccount identified by `accountId` (which must be an ads account, not a posting account). The parent posting account is left untouched. 
 
 ### Examples
 
@@ -103,12 +103,14 @@ Late.configure do |config|
 end
 
 api_instance = Late::AccountsApi.new
-account_id = 'account_id_example' # String | The SocialAccount ID (parent posting account for same-token/separate-token platforms)
-disconnect_ads_request = Late::DisconnectAdsRequest.new({ads_platform: 'metaads'}) # DisconnectAdsRequest | 
+account_id = 'account_id_example' # String | The ads SocialAccount ID to disconnect
+opts = {
+  disconnect_ads_request: Late::DisconnectAdsRequest.new # DisconnectAdsRequest | 
+}
 
 begin
   # Disconnect ads from an account
-  result = api_instance.disconnect_ads(account_id, disconnect_ads_request)
+  result = api_instance.disconnect_ads(account_id, opts)
   p result
 rescue Late::ApiError => e
   puts "Error when calling AccountsApi->disconnect_ads: #{e}"
@@ -119,12 +121,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteAccountGroup200Response>, Integer, Hash)> disconnect_ads_with_http_info(account_id, disconnect_ads_request)
+> <Array(<DeleteAccountGroup200Response>, Integer, Hash)> disconnect_ads_with_http_info(account_id, opts)
 
 ```ruby
 begin
   # Disconnect ads from an account
-  data, status_code, headers = api_instance.disconnect_ads_with_http_info(account_id, disconnect_ads_request)
+  data, status_code, headers = api_instance.disconnect_ads_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAccountGroup200Response>
@@ -137,8 +139,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The SocialAccount ID (parent posting account for same-token/separate-token platforms) |  |
-| **disconnect_ads_request** | [**DisconnectAdsRequest**](DisconnectAdsRequest.md) |  |  |
+| **account_id** | **String** | The ads SocialAccount ID to disconnect |  |
+| **disconnect_ads_request** | [**DisconnectAdsRequest**](DisconnectAdsRequest.md) |  | [optional] |
 
 ### Return type
 

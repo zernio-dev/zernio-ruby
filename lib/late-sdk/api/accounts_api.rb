@@ -83,33 +83,29 @@ module Late
     end
 
     # Disconnect ads from an account
-    # Disconnects ads from a social account without removing the posting connection.  **Same-token platforms** (metaads, linkedinads, pinterestads): Sets an `adsOptOut` flag. The posting account and OAuth token are preserved. Reconnecting ads clears the flag.  **Separate-token platforms** (tiktokads, xads): Clears the ads-specific metadata (marketing API tokens). The posting account stays intact.  **Standalone platforms** (googleads): Do not use this endpoint. Use `DELETE /v1/accounts/{accountId}` instead, since Google Ads accounts are standalone. 
-    # @param account_id [String] The SocialAccount ID (parent posting account for same-token/separate-token platforms)
-    # @param disconnect_ads_request [DisconnectAdsRequest] 
+    # **Deprecated.** Ads accounts are now standalone SocialAccount documents. Use `DELETE /v1/accounts/{accountId}` instead, passing the ads account's own ID.  This endpoint is kept for backward compatibility. It soft-deletes the ads SocialAccount identified by `accountId` (which must be an ads account, not a posting account). The parent posting account is left untouched. 
+    # @param account_id [String] The ads SocialAccount ID to disconnect
     # @param [Hash] opts the optional parameters
+    # @option opts [DisconnectAdsRequest] :disconnect_ads_request 
     # @return [DeleteAccountGroup200Response]
-    def disconnect_ads(account_id, disconnect_ads_request, opts = {})
-      data, _status_code, _headers = disconnect_ads_with_http_info(account_id, disconnect_ads_request, opts)
+    def disconnect_ads(account_id, opts = {})
+      data, _status_code, _headers = disconnect_ads_with_http_info(account_id, opts)
       data
     end
 
     # Disconnect ads from an account
-    # Disconnects ads from a social account without removing the posting connection.  **Same-token platforms** (metaads, linkedinads, pinterestads): Sets an &#x60;adsOptOut&#x60; flag. The posting account and OAuth token are preserved. Reconnecting ads clears the flag.  **Separate-token platforms** (tiktokads, xads): Clears the ads-specific metadata (marketing API tokens). The posting account stays intact.  **Standalone platforms** (googleads): Do not use this endpoint. Use &#x60;DELETE /v1/accounts/{accountId}&#x60; instead, since Google Ads accounts are standalone. 
-    # @param account_id [String] The SocialAccount ID (parent posting account for same-token/separate-token platforms)
-    # @param disconnect_ads_request [DisconnectAdsRequest] 
+    # **Deprecated.** Ads accounts are now standalone SocialAccount documents. Use &#x60;DELETE /v1/accounts/{accountId}&#x60; instead, passing the ads account&#39;s own ID.  This endpoint is kept for backward compatibility. It soft-deletes the ads SocialAccount identified by &#x60;accountId&#x60; (which must be an ads account, not a posting account). The parent posting account is left untouched. 
+    # @param account_id [String] The ads SocialAccount ID to disconnect
     # @param [Hash] opts the optional parameters
+    # @option opts [DisconnectAdsRequest] :disconnect_ads_request 
     # @return [Array<(DeleteAccountGroup200Response, Integer, Hash)>] DeleteAccountGroup200Response data, response status code and response headers
-    def disconnect_ads_with_http_info(account_id, disconnect_ads_request, opts = {})
+    def disconnect_ads_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsApi.disconnect_ads ...'
       end
       # verify the required parameter 'account_id' is set
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.disconnect_ads"
-      end
-      # verify the required parameter 'disconnect_ads_request' is set
-      if @api_client.config.client_side_validation && disconnect_ads_request.nil?
-        fail ArgumentError, "Missing the required parameter 'disconnect_ads_request' when calling AccountsApi.disconnect_ads"
       end
       # resource path
       local_var_path = '/v1/accounts/{accountId}/disconnect-ads'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
@@ -131,7 +127,7 @@ module Late
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(disconnect_ads_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'disconnect_ads_request'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'DeleteAccountGroup200Response'
