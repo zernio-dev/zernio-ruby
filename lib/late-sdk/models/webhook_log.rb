@@ -42,7 +42,7 @@ module Late
     # Error message if delivery failed
     attr_accessor :error_message
 
-    # Delivery attempt number (max 3 retries)
+    # Delivery attempt number (max 7 attempts)
     attr_accessor :attempt_number
 
     # Response time in milliseconds
