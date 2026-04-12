@@ -103,6 +103,8 @@ module Late
 
       if attributes.key?(:'user_profile')
         self.user_profile = attributes[:'user_profile']
+      else
+        self.user_profile = nil
       end
 
       if attributes.key?(:'redirect_url')
@@ -127,6 +129,10 @@ module Late
         invalid_properties.push('invalid value for "temp_token", temp_token cannot be nil.')
       end
 
+      if @user_profile.nil?
+        invalid_properties.push('invalid value for "user_profile", user_profile cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -137,6 +143,7 @@ module Late
       return false if @profile_id.nil?
       return false if @page_id.nil?
       return false if @temp_token.nil?
+      return false if @user_profile.nil?
       true
     end
 
@@ -168,6 +175,16 @@ module Late
       end
 
       @temp_token = temp_token
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] user_profile Value to be assigned
+    def user_profile=(user_profile)
+      if user_profile.nil?
+        fail ArgumentError, 'user_profile cannot be nil'
+      end
+
+      @user_profile = user_profile
     end
 
     # Checks equality by comparing each attribute.

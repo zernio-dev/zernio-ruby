@@ -7,7 +7,7 @@
 | **profile_id** | **String** | Profile ID from your connection flow |  |
 | **page_id** | **String** | The Facebook Page ID selected by the user |  |
 | **temp_token** | **String** | Temporary Facebook access token from OAuth |  |
-| **user_profile** | [**SelectFacebookPageRequestUserProfile**](SelectFacebookPageRequestUserProfile.md) |  | [optional] |
+| **user_profile** | [**SelectFacebookPageRequestUserProfile**](SelectFacebookPageRequestUserProfile.md) |  |  |
 | **redirect_url** | **String** | Optional custom redirect URL to return to after selection | [optional] |
 
 ## Example

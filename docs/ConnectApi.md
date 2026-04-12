@@ -1561,7 +1561,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::ConnectApi.new
-select_facebook_page_request = Late::SelectFacebookPageRequest.new({profile_id: 'profile_id_example', page_id: 'page_id_example', temp_token: 'temp_token_example'}) # SelectFacebookPageRequest | 
+select_facebook_page_request = Late::SelectFacebookPageRequest.new({profile_id: 'profile_id_example', page_id: 'page_id_example', temp_token: 'temp_token_example', user_profile: Late::SelectFacebookPageRequestUserProfile.new}) # SelectFacebookPageRequest | 
 
 begin
   # Select Facebook page
