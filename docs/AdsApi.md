@@ -462,6 +462,7 @@ opts = {
   status: 'active', # String | 
   platform: 'facebook', # String | 
   account_id: 'account_id_example', # String | Social account ID
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
   profile_id: 'profile_id_example', # String | Profile ID
   campaign_id: 'campaign_id_example', # String | Platform campaign ID (filter ads within a campaign)
   from_date: Date.parse('2013-10-20'), # Date | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
@@ -505,6 +506,7 @@ end
 | **status** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **account_id** | **String** | Social account ID | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. | [optional] |
 | **profile_id** | **String** | Profile ID | [optional] |
 | **campaign_id** | **String** | Platform campaign ID (filter ads within a campaign) | [optional] |
 | **from_date** | **Date** | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |

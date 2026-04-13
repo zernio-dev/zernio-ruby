@@ -424,6 +424,7 @@ module Late
     # @option opts [String] :status 
     # @option opts [String] :platform 
     # @option opts [String] :account_id Social account ID
+    # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
     # @option opts [String] :profile_id Profile ID
     # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
     # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
@@ -443,6 +444,7 @@ module Late
     # @option opts [String] :status 
     # @option opts [String] :platform 
     # @option opts [String] :account_id Social account ID
+    # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
     # @option opts [String] :profile_id Profile ID
     # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
     # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
@@ -487,6 +489,7 @@ module Late
       query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?

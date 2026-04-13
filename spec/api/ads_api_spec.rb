@@ -116,6 +116,7 @@ describe 'AdsApi' do
   # @option opts [String] :status 
   # @option opts [String] :platform 
   # @option opts [String] :account_id Social account ID
+  # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
   # @option opts [String] :profile_id Profile ID
   # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
   # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
