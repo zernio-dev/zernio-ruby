@@ -7,6 +7,7 @@ Gemfile
 README.md
 Rakefile
 docs/APIKeysApi.md
+docs/Account.md
 docs/AccountGetResponse.md
 docs/AccountGroupsApi.md
 docs/AccountSettingsApi.md
@@ -88,6 +89,7 @@ docs/ConnectionLogContext.md
 docs/ConnectionLogError.md
 docs/ConnectionLogSuccess.md
 docs/ContactsApi.md
+docs/Conversation.md
 docs/CreateAccountGroup201Response.md
 docs/CreateAccountGroupRequest.md
 docs/CreateAdAudience201Response.md
@@ -281,6 +283,9 @@ docs/GetInboxConversation200ResponseData.md
 docs/GetInboxConversationMessages200Response.md
 docs/GetInboxConversationMessages200ResponseMessagesInner.md
 docs/GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner.md
+docs/GetInboxConversationMessages200ResponseMessagesInnerDeliveryError.md
+docs/GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInner.md
+docs/GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner.md
 docs/GetInboxPostComments200Response.md
 docs/GetInboxPostComments200ResponseCommentsInner.md
 docs/GetInboxPostComments200ResponseCommentsInnerFrom.md
@@ -498,6 +503,7 @@ docs/LogsApi.md
 docs/MediaApi.md
 docs/MediaItem.md
 docs/MediaUploadResponse.md
+docs/Message.md
 docs/MessagesApi.md
 docs/Money.md
 docs/Pagination.md
@@ -768,6 +774,11 @@ docs/WebhookPayloadCommentPost.md
 docs/WebhookPayloadMessage.md
 docs/WebhookPayloadMessageAccount.md
 docs/WebhookPayloadMessageConversation.md
+docs/WebhookPayloadMessageDeleted.md
+docs/WebhookPayloadMessageDeliveryStatus.md
+docs/WebhookPayloadMessageDeliveryStatusError.md
+docs/WebhookPayloadMessageEdited.md
+docs/WebhookPayloadMessageEditedEditHistoryInner.md
 docs/WebhookPayloadMessageMessage.md
 docs/WebhookPayloadMessageMessageAttachmentsInner.md
 docs/WebhookPayloadMessageMessageSender.md
@@ -849,6 +860,7 @@ lib/late-sdk/api_client.rb
 lib/late-sdk/api_error.rb
 lib/late-sdk/api_model_base.rb
 lib/late-sdk/configuration.rb
+lib/late-sdk/models/account.rb
 lib/late-sdk/models/account_get_response.rb
 lib/late-sdk/models/account_with_follower_stats.rb
 lib/late-sdk/models/account_with_follower_stats_all_of_account_stats.rb
@@ -918,6 +930,7 @@ lib/late-sdk/models/connection_log.rb
 lib/late-sdk/models/connection_log_context.rb
 lib/late-sdk/models/connection_log_error.rb
 lib/late-sdk/models/connection_log_success.rb
+lib/late-sdk/models/conversation.rb
 lib/late-sdk/models/create_account_group201_response.rb
 lib/late-sdk/models/create_account_group_request.rb
 lib/late-sdk/models/create_ad_audience201_response.rb
@@ -1104,6 +1117,9 @@ lib/late-sdk/models/get_inbox_conversation200_response_data.rb
 lib/late-sdk/models/get_inbox_conversation_messages200_response.rb
 lib/late-sdk/models/get_inbox_conversation_messages200_response_messages_inner.rb
 lib/late-sdk/models/get_inbox_conversation_messages200_response_messages_inner_attachments_inner.rb
+lib/late-sdk/models/get_inbox_conversation_messages200_response_messages_inner_delivery_error.rb
+lib/late-sdk/models/get_inbox_conversation_messages200_response_messages_inner_edit_history_inner.rb
+lib/late-sdk/models/get_inbox_conversation_messages200_response_messages_inner_edit_history_inner_attachments_inner.rb
 lib/late-sdk/models/get_inbox_post_comments200_response.rb
 lib/late-sdk/models/get_inbox_post_comments200_response_comments_inner.rb
 lib/late-sdk/models/get_inbox_post_comments200_response_comments_inner_from.rb
@@ -1317,6 +1333,7 @@ lib/late-sdk/models/list_whats_app_group_join_requests200_response.rb
 lib/late-sdk/models/list_whats_app_group_join_requests200_response_join_requests_inner.rb
 lib/late-sdk/models/media_item.rb
 lib/late-sdk/models/media_upload_response.rb
+lib/late-sdk/models/message.rb
 lib/late-sdk/models/money.rb
 lib/late-sdk/models/pagination.rb
 lib/late-sdk/models/pending.rb
@@ -1575,6 +1592,11 @@ lib/late-sdk/models/webhook_payload_comment_post.rb
 lib/late-sdk/models/webhook_payload_message.rb
 lib/late-sdk/models/webhook_payload_message_account.rb
 lib/late-sdk/models/webhook_payload_message_conversation.rb
+lib/late-sdk/models/webhook_payload_message_deleted.rb
+lib/late-sdk/models/webhook_payload_message_delivery_status.rb
+lib/late-sdk/models/webhook_payload_message_delivery_status_error.rb
+lib/late-sdk/models/webhook_payload_message_edited.rb
+lib/late-sdk/models/webhook_payload_message_edited_edit_history_inner.rb
 lib/late-sdk/models/webhook_payload_message_message.rb
 lib/late-sdk/models/webhook_payload_message_message_attachments_inner.rb
 lib/late-sdk/models/webhook_payload_message_message_sender.rb
@@ -1646,6 +1668,7 @@ spec/api/whats_app_api_spec.rb
 spec/api/whats_app_flows_api_spec.rb
 spec/api/whats_app_phone_numbers_api_spec.rb
 spec/models/account_get_response_spec.rb
+spec/models/account_spec.rb
 spec/models/account_with_follower_stats_all_of_account_stats_spec.rb
 spec/models/account_with_follower_stats_spec.rb
 spec/models/accounts_list_response_spec.rb
@@ -1714,6 +1737,7 @@ spec/models/connection_log_context_spec.rb
 spec/models/connection_log_error_spec.rb
 spec/models/connection_log_spec.rb
 spec/models/connection_log_success_spec.rb
+spec/models/conversation_spec.rb
 spec/models/create_account_group201_response_spec.rb
 spec/models/create_account_group_request_spec.rb
 spec/models/create_ad_audience201_response_spec.rb
@@ -1898,6 +1922,9 @@ spec/models/get_google_business_search_keywords400_response_spec.rb
 spec/models/get_inbox_conversation200_response_data_spec.rb
 spec/models/get_inbox_conversation200_response_spec.rb
 spec/models/get_inbox_conversation_messages200_response_messages_inner_attachments_inner_spec.rb
+spec/models/get_inbox_conversation_messages200_response_messages_inner_delivery_error_spec.rb
+spec/models/get_inbox_conversation_messages200_response_messages_inner_edit_history_inner_attachments_inner_spec.rb
+spec/models/get_inbox_conversation_messages200_response_messages_inner_edit_history_inner_spec.rb
 spec/models/get_inbox_conversation_messages200_response_messages_inner_spec.rb
 spec/models/get_inbox_conversation_messages200_response_spec.rb
 spec/models/get_inbox_post_comments200_response_comments_inner_from_spec.rb
@@ -2113,6 +2140,7 @@ spec/models/list_whats_app_group_join_requests200_response_join_requests_inner_s
 spec/models/list_whats_app_group_join_requests200_response_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
+spec/models/message_spec.rb
 spec/models/money_spec.rb
 spec/models/pagination_spec.rb
 spec/models/pending_spec.rb
@@ -2369,6 +2397,11 @@ spec/models/webhook_payload_comment_post_spec.rb
 spec/models/webhook_payload_comment_spec.rb
 spec/models/webhook_payload_message_account_spec.rb
 spec/models/webhook_payload_message_conversation_spec.rb
+spec/models/webhook_payload_message_deleted_spec.rb
+spec/models/webhook_payload_message_delivery_status_error_spec.rb
+spec/models/webhook_payload_message_delivery_status_spec.rb
+spec/models/webhook_payload_message_edited_edit_history_inner_spec.rb
+spec/models/webhook_payload_message_edited_spec.rb
 spec/models/webhook_payload_message_message_attachments_inner_spec.rb
 spec/models/webhook_payload_message_message_sender_instagram_profile_spec.rb
 spec/models/webhook_payload_message_message_sender_spec.rb

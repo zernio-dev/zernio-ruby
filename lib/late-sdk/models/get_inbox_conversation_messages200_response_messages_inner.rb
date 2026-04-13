@@ -47,6 +47,35 @@ module Late
     # Instagram story mention
     attr_accessor :is_story_mention
 
+    # True if the sender has edited this message at least once.
+    attr_accessor :is_edited
+
+    # When the most recent edit happened.
+    attr_accessor :edited_at
+
+    # Total number of edits applied.
+    attr_accessor :edit_count
+
+    # Every prior version of the message, oldest first.
+    attr_accessor :edit_history
+
+    # True if the sender has deleted (unsent) this message. The original `message` and `attachments` fields remain populated.
+    attr_accessor :is_deleted
+
+    attr_accessor :deleted_at
+
+    # Lifecycle status for outgoing messages. Not all platforms emit every state (see webhook support matrix).
+    attr_accessor :delivery_status
+
+    attr_accessor :delivered_at
+
+    attr_accessor :read_at
+
+    # Original send time for outgoing messages (used for Messenger watermark queries).
+    attr_accessor :sent_at
+
+    attr_accessor :delivery_error
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -85,7 +114,18 @@ module Late
         :'attachments' => :'attachments',
         :'subject' => :'subject',
         :'story_reply' => :'storyReply',
-        :'is_story_mention' => :'isStoryMention'
+        :'is_story_mention' => :'isStoryMention',
+        :'is_edited' => :'isEdited',
+        :'edited_at' => :'editedAt',
+        :'edit_count' => :'editCount',
+        :'edit_history' => :'editHistory',
+        :'is_deleted' => :'isDeleted',
+        :'deleted_at' => :'deletedAt',
+        :'delivery_status' => :'deliveryStatus',
+        :'delivered_at' => :'deliveredAt',
+        :'read_at' => :'readAt',
+        :'sent_at' => :'sentAt',
+        :'delivery_error' => :'deliveryError'
       }
     end
 
@@ -115,7 +155,18 @@ module Late
         :'attachments' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner>',
         :'subject' => :'String',
         :'story_reply' => :'Boolean',
-        :'is_story_mention' => :'Boolean'
+        :'is_story_mention' => :'Boolean',
+        :'is_edited' => :'Boolean',
+        :'edited_at' => :'Time',
+        :'edit_count' => :'Integer',
+        :'edit_history' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInner>',
+        :'is_deleted' => :'Boolean',
+        :'deleted_at' => :'Time',
+        :'delivery_status' => :'String',
+        :'delivered_at' => :'Time',
+        :'read_at' => :'Time',
+        :'sent_at' => :'Time',
+        :'delivery_error' => :'GetInboxConversationMessages200ResponseMessagesInnerDeliveryError'
       }
     end
 
@@ -198,6 +249,52 @@ module Late
       if attributes.key?(:'is_story_mention')
         self.is_story_mention = attributes[:'is_story_mention']
       end
+
+      if attributes.key?(:'is_edited')
+        self.is_edited = attributes[:'is_edited']
+      end
+
+      if attributes.key?(:'edited_at')
+        self.edited_at = attributes[:'edited_at']
+      end
+
+      if attributes.key?(:'edit_count')
+        self.edit_count = attributes[:'edit_count']
+      end
+
+      if attributes.key?(:'edit_history')
+        if (value = attributes[:'edit_history']).is_a?(Array)
+          self.edit_history = value
+        end
+      end
+
+      if attributes.key?(:'is_deleted')
+        self.is_deleted = attributes[:'is_deleted']
+      end
+
+      if attributes.key?(:'deleted_at')
+        self.deleted_at = attributes[:'deleted_at']
+      end
+
+      if attributes.key?(:'delivery_status')
+        self.delivery_status = attributes[:'delivery_status']
+      end
+
+      if attributes.key?(:'delivered_at')
+        self.delivered_at = attributes[:'delivered_at']
+      end
+
+      if attributes.key?(:'read_at')
+        self.read_at = attributes[:'read_at']
+      end
+
+      if attributes.key?(:'sent_at')
+        self.sent_at = attributes[:'sent_at']
+      end
+
+      if attributes.key?(:'delivery_error')
+        self.delivery_error = attributes[:'delivery_error']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -216,6 +313,8 @@ module Late
       return false unless sender_verified_type_validator.valid?(@sender_verified_type)
       direction_validator = EnumAttributeValidator.new('String', ["incoming", "outgoing"])
       return false unless direction_validator.valid?(@direction)
+      delivery_status_validator = EnumAttributeValidator.new('String', ["sent", "delivered", "read", "failed", "deleted"])
+      return false unless delivery_status_validator.valid?(@delivery_status)
       true
     end
 
@@ -239,6 +338,16 @@ module Late
       @direction = direction
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] delivery_status Object to be assigned
+    def delivery_status=(delivery_status)
+      validator = EnumAttributeValidator.new('String', ["sent", "delivered", "read", "failed", "deleted"])
+      unless validator.valid?(delivery_status)
+        fail ArgumentError, "invalid value for \"delivery_status\", must be one of #{validator.allowable_values}."
+      end
+      @delivery_status = delivery_status
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -257,7 +366,18 @@ module Late
           attachments == o.attachments &&
           subject == o.subject &&
           story_reply == o.story_reply &&
-          is_story_mention == o.is_story_mention
+          is_story_mention == o.is_story_mention &&
+          is_edited == o.is_edited &&
+          edited_at == o.edited_at &&
+          edit_count == o.edit_count &&
+          edit_history == o.edit_history &&
+          is_deleted == o.is_deleted &&
+          deleted_at == o.deleted_at &&
+          delivery_status == o.delivery_status &&
+          delivered_at == o.delivered_at &&
+          read_at == o.read_at &&
+          sent_at == o.sent_at &&
+          delivery_error == o.delivery_error
     end
 
     # @see the `==` method
@@ -269,7 +389,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention].hash
+      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention, is_edited, edited_at, edit_count, edit_history, is_deleted, deleted_at, delivery_status, delivered_at, read_at, sent_at, delivery_error].hash
     end
 
     # Builds the object from hash
