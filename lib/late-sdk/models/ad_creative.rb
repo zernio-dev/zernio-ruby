@@ -22,6 +22,15 @@ module Late
     # Alternative image URL
     attr_accessor :image_url
 
+    # Meta video ID for VIDEO-type ads. Null for non-video ads. Callers that need an embeddable MP4 can call GET /{videoId}?fields=source with the page access token.
+    attr_accessor :video_id
+
+    # Public Facebook watch URL for VIDEO-type ads (https://www.facebook.com/watch/?v={videoId}). Null for non-video ads.
+    attr_accessor :video_url
+
+    # Meta creative object_type (e.g. SHARE, VIDEO, PRIVACY_CHECK_FAIL, POST_DELETED). Use this to render state-aware previews — when Meta moderation strips image/video fields, only thumbnailUrl at 64x64 is available.
+    attr_accessor :object_type
+
     # All media URLs for this ad (carousel images, multiple assets). Populated for Meta (carousel child_attachments), Google Ads (responsive display marketing_images), and LinkedIn (multi-image posts).
     attr_accessor :media_urls
 
@@ -48,6 +57,9 @@ module Late
       {
         :'thumbnail_url' => :'thumbnailUrl',
         :'image_url' => :'imageUrl',
+        :'video_id' => :'videoId',
+        :'video_url' => :'videoUrl',
+        :'object_type' => :'objectType',
         :'media_urls' => :'mediaUrls',
         :'body' => :'body',
         :'google_headline' => :'googleHeadline',
@@ -74,6 +86,9 @@ module Late
       {
         :'thumbnail_url' => :'String',
         :'image_url' => :'String',
+        :'video_id' => :'String',
+        :'video_url' => :'String',
+        :'object_type' => :'String',
         :'media_urls' => :'Array<String>',
         :'body' => :'String',
         :'google_headline' => :'String',
@@ -113,6 +128,18 @@ module Late
 
       if attributes.key?(:'image_url')
         self.image_url = attributes[:'image_url']
+      end
+
+      if attributes.key?(:'video_id')
+        self.video_id = attributes[:'video_id']
+      end
+
+      if attributes.key?(:'video_url')
+        self.video_url = attributes[:'video_url']
+      end
+
+      if attributes.key?(:'object_type')
+        self.object_type = attributes[:'object_type']
       end
 
       if attributes.key?(:'media_urls')
@@ -172,6 +199,9 @@ module Late
       self.class == o.class &&
           thumbnail_url == o.thumbnail_url &&
           image_url == o.image_url &&
+          video_id == o.video_id &&
+          video_url == o.video_url &&
+          object_type == o.object_type &&
           media_urls == o.media_urls &&
           body == o.body &&
           google_headline == o.google_headline &&
@@ -191,7 +221,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thumbnail_url, image_url, media_urls, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
+      [thumbnail_url, image_url, video_id, video_url, object_type, media_urls, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
     end
 
     # Builds the object from hash
