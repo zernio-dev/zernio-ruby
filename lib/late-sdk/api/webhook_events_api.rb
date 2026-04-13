@@ -217,6 +217,336 @@ module Late
       return data, status_code, headers
     end
 
+    # Message deleted event
+    # Fired when a sender deletes (unsends) a message. Supported on Instagram (incoming unsend) and WhatsApp (when the business deletes an outgoing message via the Cloud API). The payload retains the pre-delete `text` and `attachments` so API consumers can access the original content for moderation or compliance — the Zernio dashboard UI hides it. 
+    # @param webhook_payload_message_deleted [WebhookPayloadMessageDeleted] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_message_deleted(webhook_payload_message_deleted, opts = {})
+      on_message_deleted_with_http_info(webhook_payload_message_deleted, opts)
+      nil
+    end
+
+    # Message deleted event
+    # Fired when a sender deletes (unsends) a message. Supported on Instagram (incoming unsend) and WhatsApp (when the business deletes an outgoing message via the Cloud API). The payload retains the pre-delete &#x60;text&#x60; and &#x60;attachments&#x60; so API consumers can access the original content for moderation or compliance — the Zernio dashboard UI hides it. 
+    # @param webhook_payload_message_deleted [WebhookPayloadMessageDeleted] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_message_deleted_with_http_info(webhook_payload_message_deleted, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_message_deleted ...'
+      end
+      # verify the required parameter 'webhook_payload_message_deleted' is set
+      if @api_client.config.client_side_validation && webhook_payload_message_deleted.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_message_deleted' when calling WebhookEventsApi.on_message_deleted"
+      end
+      # resource path
+      local_var_path = '/message.deleted'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_message_deleted)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_message_deleted",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_message_deleted\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Message delivered event
+    # Fired when an outgoing message is delivered to the recipient. Supported on WhatsApp and Facebook Messenger. 
+    # @param webhook_payload_message_delivery_status [WebhookPayloadMessageDeliveryStatus] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_message_delivered(webhook_payload_message_delivery_status, opts = {})
+      on_message_delivered_with_http_info(webhook_payload_message_delivery_status, opts)
+      nil
+    end
+
+    # Message delivered event
+    # Fired when an outgoing message is delivered to the recipient. Supported on WhatsApp and Facebook Messenger. 
+    # @param webhook_payload_message_delivery_status [WebhookPayloadMessageDeliveryStatus] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_message_delivered_with_http_info(webhook_payload_message_delivery_status, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_message_delivered ...'
+      end
+      # verify the required parameter 'webhook_payload_message_delivery_status' is set
+      if @api_client.config.client_side_validation && webhook_payload_message_delivery_status.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_message_delivery_status' when calling WebhookEventsApi.on_message_delivered"
+      end
+      # resource path
+      local_var_path = '/message.delivered'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_message_delivery_status)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_message_delivered",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_message_delivered\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Message edited event
+    # Fired when a sender edits a previously-sent message. Supported on Instagram, Facebook Messenger, and Telegram. The payload includes the full `editHistory` so consumers can show prior versions. 
+    # @param webhook_payload_message_edited [WebhookPayloadMessageEdited] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_message_edited(webhook_payload_message_edited, opts = {})
+      on_message_edited_with_http_info(webhook_payload_message_edited, opts)
+      nil
+    end
+
+    # Message edited event
+    # Fired when a sender edits a previously-sent message. Supported on Instagram, Facebook Messenger, and Telegram. The payload includes the full &#x60;editHistory&#x60; so consumers can show prior versions. 
+    # @param webhook_payload_message_edited [WebhookPayloadMessageEdited] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_message_edited_with_http_info(webhook_payload_message_edited, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_message_edited ...'
+      end
+      # verify the required parameter 'webhook_payload_message_edited' is set
+      if @api_client.config.client_side_validation && webhook_payload_message_edited.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_message_edited' when calling WebhookEventsApi.on_message_edited"
+      end
+      # resource path
+      local_var_path = '/message.edited'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_message_edited)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_message_edited",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_message_edited\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Message delivery failed event
+    # Fired when an outgoing message fails to deliver. Currently only emitted for WhatsApp (other platforms don't expose per-message failure via webhook). The payload `error` object contains `code`, `title`, and `message` from the platform. 
+    # @param webhook_payload_message_delivery_status [WebhookPayloadMessageDeliveryStatus] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_message_failed(webhook_payload_message_delivery_status, opts = {})
+      on_message_failed_with_http_info(webhook_payload_message_delivery_status, opts)
+      nil
+    end
+
+    # Message delivery failed event
+    # Fired when an outgoing message fails to deliver. Currently only emitted for WhatsApp (other platforms don&#39;t expose per-message failure via webhook). The payload &#x60;error&#x60; object contains &#x60;code&#x60;, &#x60;title&#x60;, and &#x60;message&#x60; from the platform. 
+    # @param webhook_payload_message_delivery_status [WebhookPayloadMessageDeliveryStatus] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_message_failed_with_http_info(webhook_payload_message_delivery_status, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_message_failed ...'
+      end
+      # verify the required parameter 'webhook_payload_message_delivery_status' is set
+      if @api_client.config.client_side_validation && webhook_payload_message_delivery_status.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_message_delivery_status' when calling WebhookEventsApi.on_message_failed"
+      end
+      # resource path
+      local_var_path = '/message.failed'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_message_delivery_status)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_message_failed",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_message_failed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Message read event
+    # Fired when an outgoing message is read by the recipient. Supported on WhatsApp, Facebook Messenger, and Instagram. 
+    # @param webhook_payload_message_delivery_status [WebhookPayloadMessageDeliveryStatus] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_message_read(webhook_payload_message_delivery_status, opts = {})
+      on_message_read_with_http_info(webhook_payload_message_delivery_status, opts)
+      nil
+    end
+
+    # Message read event
+    # Fired when an outgoing message is read by the recipient. Supported on WhatsApp, Facebook Messenger, and Instagram. 
+    # @param webhook_payload_message_delivery_status [WebhookPayloadMessageDeliveryStatus] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_message_read_with_http_info(webhook_payload_message_delivery_status, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_message_read ...'
+      end
+      # verify the required parameter 'webhook_payload_message_delivery_status' is set
+      if @api_client.config.client_side_validation && webhook_payload_message_delivery_status.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_message_delivery_status' when calling WebhookEventsApi.on_message_read"
+      end
+      # resource path
+      local_var_path = '/message.read'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_message_delivery_status)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_message_read",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_message_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Message received event
     # Fired when a new inbox message is received.
     # @param webhook_payload_message [WebhookPayloadMessage] 
