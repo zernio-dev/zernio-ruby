@@ -10,7 +10,7 @@
 | **platform_message_id** | **String** | Platform&#39;s message ID |  |
 | **direction** | **String** |  |  |
 | **text** | **String** | Message text content |  |
-| **attachments** | [**Array&lt;WebhookPayloadMessageMessageAttachmentsInner&gt;**](WebhookPayloadMessageMessageAttachmentsInner.md) |  |  |
+| **attachments** | [**Array&lt;InboxWebhookMessageAttachmentsInner&gt;**](InboxWebhookMessageAttachmentsInner.md) |  |  |
 | **sender** | [**WebhookPayloadMessageSentMessageSender**](WebhookPayloadMessageSentMessageSender.md) |  |  |
 | **sent_at** | **Time** |  |  |
 | **is_read** | **Boolean** |  |  |

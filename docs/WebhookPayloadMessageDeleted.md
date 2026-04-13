@@ -6,10 +6,10 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  |  |
 | **event** | **String** |  |  |
-| **message** | [**WebhookPayloadMessageMessage**](WebhookPayloadMessageMessage.md) |  |  |
+| **message** | [**InboxWebhookMessage**](InboxWebhookMessage.md) |  |  |
 | **deleted_at** | **Time** |  |  |
-| **conversation** | [**WebhookPayloadMessageConversation**](WebhookPayloadMessageConversation.md) |  |  |
-| **account** | [**WebhookPayloadMessageAccount**](WebhookPayloadMessageAccount.md) |  |  |
+| **conversation** | [**InboxWebhookConversation**](InboxWebhookConversation.md) |  |  |
+| **account** | [**InboxWebhookAccount**](InboxWebhookAccount.md) |  |  |
 | **timestamp** | **Time** |  |  |
 
 ## Example

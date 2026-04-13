@@ -96,7 +96,7 @@ module Late
         :'platform_message_id' => :'String',
         :'direction' => :'String',
         :'text' => :'String',
-        :'attachments' => :'Array<WebhookPayloadMessageMessageAttachmentsInner>',
+        :'attachments' => :'Array<InboxWebhookMessageAttachmentsInner>',
         :'sender' => :'WebhookPayloadMessageMessageSender',
         :'sent_at' => :'Time',
         :'is_read' => :'Boolean'

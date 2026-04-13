@@ -80,10 +80,10 @@ module Late
       {
         :'id' => :'String',
         :'event' => :'String',
-        :'message' => :'WebhookPayloadMessageMessage',
+        :'message' => :'InboxWebhookMessage',
         :'deleted_at' => :'Time',
-        :'conversation' => :'WebhookPayloadMessageConversation',
-        :'account' => :'WebhookPayloadMessageAccount',
+        :'conversation' => :'InboxWebhookConversation',
+        :'account' => :'InboxWebhookAccount',
         :'timestamp' => :'Time'
       }
     end

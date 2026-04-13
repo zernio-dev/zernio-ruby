@@ -1,0 +1,26 @@
+# Late::InboxWebhookMessageSender
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+| **name** | **String** |  | [optional] |
+| **username** | **String** |  | [optional] |
+| **picture** | **String** |  | [optional] |
+| **instagram_profile** | [**InboxWebhookMessageSenderInstagramProfile**](InboxWebhookMessageSenderInstagramProfile.md) |  | [optional] |
+
+## Example
+
+```ruby
+require 'late-sdk'
+
+instance = Late::InboxWebhookMessageSender.new(
+  id: null,
+  name: null,
+  username: null,
+  picture: null,
+  instagram_profile: null
+)
+```
+

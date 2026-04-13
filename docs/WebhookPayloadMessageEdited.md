@@ -6,12 +6,12 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  |  |
 | **event** | **String** |  |  |
-| **message** | [**WebhookPayloadMessageMessage**](WebhookPayloadMessageMessage.md) |  |  |
+| **message** | [**InboxWebhookMessage**](InboxWebhookMessage.md) |  |  |
 | **edit_history** | [**Array&lt;WebhookPayloadMessageEditedEditHistoryInner&gt;**](WebhookPayloadMessageEditedEditHistoryInner.md) | Prior versions of the message, oldest first. |  |
 | **edit_count** | **Integer** | Total number of edits applied to this message. |  |
 | **edited_at** | **Time** | When the most recent edit happened. |  |
-| **conversation** | [**WebhookPayloadMessageConversation**](WebhookPayloadMessageConversation.md) |  |  |
-| **account** | [**WebhookPayloadMessageAccount**](WebhookPayloadMessageAccount.md) |  |  |
+| **conversation** | [**InboxWebhookConversation**](InboxWebhookConversation.md) |  |  |
+| **account** | [**InboxWebhookAccount**](InboxWebhookAccount.md) |  |  |
 | **timestamp** | **Time** |  |  |
 
 ## Example

@@ -1,4 +1,4 @@
-# Late::Message
+# Late::InboxWebhookMessage
 
 ## Properties
 
@@ -9,9 +9,9 @@
 | **platform** | **String** |  |  |
 | **platform_message_id** | **String** | Platform&#39;s message ID |  |
 | **direction** | **String** |  |  |
-| **text** | **String** | Message text content |  |
-| **attachments** | [**Array&lt;WebhookPayloadMessageMessageAttachmentsInner&gt;**](WebhookPayloadMessageMessageAttachmentsInner.md) |  |  |
-| **sender** | [**WebhookPayloadMessageMessageSender**](WebhookPayloadMessageMessageSender.md) |  |  |
+| **text** | **String** | Message text content (retained on deleted messages for API consumers; Zernio dashboard UI hides this) |  |
+| **attachments** | [**Array&lt;InboxWebhookMessageAttachmentsInner&gt;**](InboxWebhookMessageAttachmentsInner.md) |  |  |
+| **sender** | [**InboxWebhookMessageSender**](InboxWebhookMessageSender.md) |  |  |
 | **sent_at** | **Time** |  |  |
 | **is_read** | **Boolean** |  |  |
 
@@ -20,7 +20,7 @@
 ```ruby
 require 'late-sdk'
 
-instance = Late::Message.new(
+instance = Late::InboxWebhookMessage.new(
   id: null,
   conversation_id: null,
   platform: null,

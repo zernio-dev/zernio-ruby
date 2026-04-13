@@ -1,4 +1,4 @@
-# Late::Conversation
+# Late::InboxWebhookConversation
 
 ## Properties
 
@@ -17,7 +17,7 @@
 ```ruby
 require 'late-sdk'
 
-instance = Late::Conversation.new(
+instance = Late::InboxWebhookConversation.new(
   id: null,
   platform_conversation_id: null,
   participant_id: null,

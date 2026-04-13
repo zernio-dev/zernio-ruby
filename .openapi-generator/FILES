@@ -7,7 +7,6 @@ Gemfile
 README.md
 Rakefile
 docs/APIKeysApi.md
-docs/Account.md
 docs/AccountGetResponse.md
 docs/AccountGroupsApi.md
 docs/AccountSettingsApi.md
@@ -89,7 +88,6 @@ docs/ConnectionLogContext.md
 docs/ConnectionLogError.md
 docs/ConnectionLogSuccess.md
 docs/ContactsApi.md
-docs/Conversation.md
 docs/CreateAccountGroup201Response.md
 docs/CreateAccountGroupRequest.md
 docs/CreateAdAudience201Response.md
@@ -399,6 +397,12 @@ docs/ImportWhatsAppContacts200ResponseResultsInner.md
 docs/ImportWhatsAppContacts200ResponseSummary.md
 docs/ImportWhatsAppContactsRequest.md
 docs/ImportWhatsAppContactsRequestContactsInner.md
+docs/InboxWebhookAccount.md
+docs/InboxWebhookConversation.md
+docs/InboxWebhookMessage.md
+docs/InboxWebhookMessageAttachmentsInner.md
+docs/InboxWebhookMessageSender.md
+docs/InboxWebhookMessageSenderInstagramProfile.md
 docs/InitiateTelegramConnect200Response.md
 docs/InitiateTelegramConnect200ResponseAccount.md
 docs/InitiateTelegramConnectRequest.md
@@ -503,7 +507,6 @@ docs/LogsApi.md
 docs/MediaApi.md
 docs/MediaItem.md
 docs/MediaUploadResponse.md
-docs/Message.md
 docs/MessagesApi.md
 docs/Money.md
 docs/Pagination.md
@@ -780,7 +783,6 @@ docs/WebhookPayloadMessageDeliveryStatusError.md
 docs/WebhookPayloadMessageEdited.md
 docs/WebhookPayloadMessageEditedEditHistoryInner.md
 docs/WebhookPayloadMessageMessage.md
-docs/WebhookPayloadMessageMessageAttachmentsInner.md
 docs/WebhookPayloadMessageMessageSender.md
 docs/WebhookPayloadMessageMessageSenderInstagramProfile.md
 docs/WebhookPayloadMessageMetadata.md
@@ -860,7 +862,6 @@ lib/late-sdk/api_client.rb
 lib/late-sdk/api_error.rb
 lib/late-sdk/api_model_base.rb
 lib/late-sdk/configuration.rb
-lib/late-sdk/models/account.rb
 lib/late-sdk/models/account_get_response.rb
 lib/late-sdk/models/account_with_follower_stats.rb
 lib/late-sdk/models/account_with_follower_stats_all_of_account_stats.rb
@@ -930,7 +931,6 @@ lib/late-sdk/models/connection_log.rb
 lib/late-sdk/models/connection_log_context.rb
 lib/late-sdk/models/connection_log_error.rb
 lib/late-sdk/models/connection_log_success.rb
-lib/late-sdk/models/conversation.rb
 lib/late-sdk/models/create_account_group201_response.rb
 lib/late-sdk/models/create_account_group_request.rb
 lib/late-sdk/models/create_ad_audience201_response.rb
@@ -1233,6 +1233,12 @@ lib/late-sdk/models/import_whats_app_contacts200_response_results_inner.rb
 lib/late-sdk/models/import_whats_app_contacts200_response_summary.rb
 lib/late-sdk/models/import_whats_app_contacts_request.rb
 lib/late-sdk/models/import_whats_app_contacts_request_contacts_inner.rb
+lib/late-sdk/models/inbox_webhook_account.rb
+lib/late-sdk/models/inbox_webhook_conversation.rb
+lib/late-sdk/models/inbox_webhook_message.rb
+lib/late-sdk/models/inbox_webhook_message_attachments_inner.rb
+lib/late-sdk/models/inbox_webhook_message_sender.rb
+lib/late-sdk/models/inbox_webhook_message_sender_instagram_profile.rb
 lib/late-sdk/models/initiate_telegram_connect200_response.rb
 lib/late-sdk/models/initiate_telegram_connect200_response_account.rb
 lib/late-sdk/models/initiate_telegram_connect_request.rb
@@ -1333,7 +1339,6 @@ lib/late-sdk/models/list_whats_app_group_join_requests200_response.rb
 lib/late-sdk/models/list_whats_app_group_join_requests200_response_join_requests_inner.rb
 lib/late-sdk/models/media_item.rb
 lib/late-sdk/models/media_upload_response.rb
-lib/late-sdk/models/message.rb
 lib/late-sdk/models/money.rb
 lib/late-sdk/models/pagination.rb
 lib/late-sdk/models/pending.rb
@@ -1598,7 +1603,6 @@ lib/late-sdk/models/webhook_payload_message_delivery_status_error.rb
 lib/late-sdk/models/webhook_payload_message_edited.rb
 lib/late-sdk/models/webhook_payload_message_edited_edit_history_inner.rb
 lib/late-sdk/models/webhook_payload_message_message.rb
-lib/late-sdk/models/webhook_payload_message_message_attachments_inner.rb
 lib/late-sdk/models/webhook_payload_message_message_sender.rb
 lib/late-sdk/models/webhook_payload_message_message_sender_instagram_profile.rb
 lib/late-sdk/models/webhook_payload_message_metadata.rb
@@ -1668,7 +1672,6 @@ spec/api/whats_app_api_spec.rb
 spec/api/whats_app_flows_api_spec.rb
 spec/api/whats_app_phone_numbers_api_spec.rb
 spec/models/account_get_response_spec.rb
-spec/models/account_spec.rb
 spec/models/account_with_follower_stats_all_of_account_stats_spec.rb
 spec/models/account_with_follower_stats_spec.rb
 spec/models/accounts_list_response_spec.rb
@@ -1737,7 +1740,6 @@ spec/models/connection_log_context_spec.rb
 spec/models/connection_log_error_spec.rb
 spec/models/connection_log_spec.rb
 spec/models/connection_log_success_spec.rb
-spec/models/conversation_spec.rb
 spec/models/create_account_group201_response_spec.rb
 spec/models/create_account_group_request_spec.rb
 spec/models/create_ad_audience201_response_spec.rb
@@ -2040,6 +2042,12 @@ spec/models/import_whats_app_contacts200_response_spec.rb
 spec/models/import_whats_app_contacts200_response_summary_spec.rb
 spec/models/import_whats_app_contacts_request_contacts_inner_spec.rb
 spec/models/import_whats_app_contacts_request_spec.rb
+spec/models/inbox_webhook_account_spec.rb
+spec/models/inbox_webhook_conversation_spec.rb
+spec/models/inbox_webhook_message_attachments_inner_spec.rb
+spec/models/inbox_webhook_message_sender_instagram_profile_spec.rb
+spec/models/inbox_webhook_message_sender_spec.rb
+spec/models/inbox_webhook_message_spec.rb
 spec/models/initiate_telegram_connect200_response_account_spec.rb
 spec/models/initiate_telegram_connect200_response_spec.rb
 spec/models/initiate_telegram_connect_request_spec.rb
@@ -2140,7 +2148,6 @@ spec/models/list_whats_app_group_join_requests200_response_join_requests_inner_s
 spec/models/list_whats_app_group_join_requests200_response_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
-spec/models/message_spec.rb
 spec/models/money_spec.rb
 spec/models/pagination_spec.rb
 spec/models/pending_spec.rb
@@ -2402,7 +2409,6 @@ spec/models/webhook_payload_message_delivery_status_error_spec.rb
 spec/models/webhook_payload_message_delivery_status_spec.rb
 spec/models/webhook_payload_message_edited_edit_history_inner_spec.rb
 spec/models/webhook_payload_message_edited_spec.rb
-spec/models/webhook_payload_message_message_attachments_inner_spec.rb
 spec/models/webhook_payload_message_message_sender_instagram_profile_spec.rb
 spec/models/webhook_payload_message_message_sender_spec.rb
 spec/models/webhook_payload_message_message_spec.rb

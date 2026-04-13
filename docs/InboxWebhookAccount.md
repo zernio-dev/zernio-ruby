@@ -1,4 +1,4 @@
-# Late::Account
+# Late::InboxWebhookAccount
 
 ## Properties
 
@@ -14,7 +14,7 @@
 ```ruby
 require 'late-sdk'
 
-instance = Late::Account.new(
+instance = Late::InboxWebhookAccount.new(
   id: null,
   platform: null,
   username: null,

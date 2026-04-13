@@ -84,11 +84,11 @@ module Late
       {
         :'id' => :'String',
         :'event' => :'String',
-        :'message' => :'WebhookPayloadMessageMessage',
+        :'message' => :'InboxWebhookMessage',
         :'status_at' => :'Time',
         :'error' => :'WebhookPayloadMessageDeliveryStatusError',
-        :'conversation' => :'WebhookPayloadMessageConversation',
-        :'account' => :'WebhookPayloadMessageAccount',
+        :'conversation' => :'InboxWebhookConversation',
+        :'account' => :'InboxWebhookAccount',
         :'timestamp' => :'Time'
       }
     end

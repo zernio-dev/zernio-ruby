@@ -14,23 +14,25 @@ require 'date'
 require 'time'
 
 module Late
-  class Account < ApiModelBase
-    # Social account ID
+  class InboxWebhookMessageSender < ApiModelBase
     attr_accessor :id
 
-    attr_accessor :platform
+    attr_accessor :name
 
     attr_accessor :username
 
-    attr_accessor :display_name
+    attr_accessor :picture
+
+    attr_accessor :instagram_profile
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'platform' => :'platform',
+        :'name' => :'name',
         :'username' => :'username',
-        :'display_name' => :'displayName'
+        :'picture' => :'picture',
+        :'instagram_profile' => :'instagramProfile'
       }
     end
 
@@ -48,9 +50,10 @@ module Late
     def self.openapi_types
       {
         :'id' => :'String',
-        :'platform' => :'String',
+        :'name' => :'String',
         :'username' => :'String',
-        :'display_name' => :'String'
+        :'picture' => :'String',
+        :'instagram_profile' => :'InboxWebhookMessageSenderInstagramProfile'
       }
     end
 
@@ -64,14 +67,14 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::Account` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::InboxWebhookMessageSender` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::Account`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::InboxWebhookMessageSender`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -82,20 +85,20 @@ module Late
         self.id = nil
       end
 
-      if attributes.key?(:'platform')
-        self.platform = attributes[:'platform']
-      else
-        self.platform = nil
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.key?(:'username')
         self.username = attributes[:'username']
-      else
-        self.username = nil
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'picture')
+        self.picture = attributes[:'picture']
+      end
+
+      if attributes.key?(:'instagram_profile')
+        self.instagram_profile = attributes[:'instagram_profile']
       end
     end
 
@@ -108,14 +111,6 @@ module Late
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @platform.nil?
-        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
-      end
-
-      if @username.nil?
-        invalid_properties.push('invalid value for "username", username cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -124,8 +119,6 @@ module Late
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @id.nil?
-      return false if @platform.nil?
-      return false if @username.nil?
       true
     end
 
@@ -139,35 +132,16 @@ module Late
       @id = id
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] platform Value to be assigned
-    def platform=(platform)
-      if platform.nil?
-        fail ArgumentError, 'platform cannot be nil'
-      end
-
-      @platform = platform
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] username Value to be assigned
-    def username=(username)
-      if username.nil?
-        fail ArgumentError, 'username cannot be nil'
-      end
-
-      @username = username
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          platform == o.platform &&
+          name == o.name &&
           username == o.username &&
-          display_name == o.display_name
+          picture == o.picture &&
+          instagram_profile == o.instagram_profile
     end
 
     # @see the `==` method
@@ -179,7 +153,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, username, display_name].hash
+      [id, name, username, picture, instagram_profile].hash
     end
 
     # Builds the object from hash

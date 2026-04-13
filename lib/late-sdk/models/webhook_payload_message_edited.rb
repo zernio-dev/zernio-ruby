@@ -89,12 +89,12 @@ module Late
       {
         :'id' => :'String',
         :'event' => :'String',
-        :'message' => :'WebhookPayloadMessageMessage',
+        :'message' => :'InboxWebhookMessage',
         :'edit_history' => :'Array<WebhookPayloadMessageEditedEditHistoryInner>',
         :'edit_count' => :'Integer',
         :'edited_at' => :'Time',
-        :'conversation' => :'WebhookPayloadMessageConversation',
-        :'account' => :'WebhookPayloadMessageAccount',
+        :'conversation' => :'InboxWebhookConversation',
+        :'account' => :'InboxWebhookAccount',
         :'timestamp' => :'Time'
       }
     end

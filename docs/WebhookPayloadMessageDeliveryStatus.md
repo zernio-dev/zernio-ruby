@@ -6,11 +6,11 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  |  |
 | **event** | **String** |  |  |
-| **message** | [**WebhookPayloadMessageMessage**](WebhookPayloadMessageMessage.md) |  |  |
+| **message** | [**InboxWebhookMessage**](InboxWebhookMessage.md) |  |  |
 | **status_at** | **Time** | When the platform reported this status. |  |
 | **error** | [**WebhookPayloadMessageDeliveryStatusError**](WebhookPayloadMessageDeliveryStatusError.md) |  | [optional] |
-| **conversation** | [**WebhookPayloadMessageConversation**](WebhookPayloadMessageConversation.md) |  |  |
-| **account** | [**WebhookPayloadMessageAccount**](WebhookPayloadMessageAccount.md) |  |  |
+| **conversation** | [**InboxWebhookConversation**](InboxWebhookConversation.md) |  |  |
+| **account** | [**InboxWebhookAccount**](InboxWebhookAccount.md) |  |  |
 | **timestamp** | **Time** |  |  |
 
 ## Example

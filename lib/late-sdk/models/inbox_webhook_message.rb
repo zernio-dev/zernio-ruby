@@ -14,7 +14,8 @@ require 'date'
 require 'time'
 
 module Late
-  class Message < ApiModelBase
+  # The `message` object included in inbox webhook payloads.
+  class InboxWebhookMessage < ApiModelBase
     # Internal message ID
     attr_accessor :id
 
@@ -28,7 +29,7 @@ module Late
 
     attr_accessor :direction
 
-    # Message text content
+    # Message text content (retained on deleted messages for API consumers; Zernio dashboard UI hides this)
     attr_accessor :text
 
     attr_accessor :attachments
@@ -96,8 +97,8 @@ module Late
         :'platform_message_id' => :'String',
         :'direction' => :'String',
         :'text' => :'String',
-        :'attachments' => :'Array<WebhookPayloadMessageMessageAttachmentsInner>',
-        :'sender' => :'WebhookPayloadMessageMessageSender',
+        :'attachments' => :'Array<InboxWebhookMessageAttachmentsInner>',
+        :'sender' => :'InboxWebhookMessageSender',
         :'sent_at' => :'Time',
         :'is_read' => :'Boolean'
       }
@@ -113,14 +114,14 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::Message` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::InboxWebhookMessage` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::Message`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::InboxWebhookMessage`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }

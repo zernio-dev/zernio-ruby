@@ -1,4 +1,4 @@
-# Late::WebhookPayloadMessageMessageAttachmentsInner
+# Late::InboxWebhookMessageAttachmentsInner
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'late-sdk'
 
-instance = Late::WebhookPayloadMessageMessageAttachmentsInner.new(
+instance = Late::InboxWebhookMessageAttachmentsInner.new(
   type: null,
   url: null,
   payload: null
