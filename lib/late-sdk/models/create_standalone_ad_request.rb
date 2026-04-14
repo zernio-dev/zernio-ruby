@@ -58,6 +58,7 @@ module Late
 
     attr_accessor :age_max
 
+    # Interest objects from /v1/ads/interests. Each must include id and name.
     attr_accessor :interests
 
     # Required for lifetime budgets
@@ -162,7 +163,7 @@ module Late
         :'countries' => :'Array<String>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
-        :'interests' => :'Array<String>',
+        :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>',
         :'end_date' => :'Time',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',

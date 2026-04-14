@@ -881,6 +881,7 @@ Class | Method | HTTP request | Description
  - [Late::UpdateAdRequest](docs/UpdateAdRequest.md)
  - [Late::UpdateAdRequestBudget](docs/UpdateAdRequestBudget.md)
  - [Late::UpdateAdRequestTargeting](docs/UpdateAdRequestTargeting.md)
+ - [Late::UpdateAdRequestTargetingInterestsInner](docs/UpdateAdRequestTargetingInterestsInner.md)
  - [Late::UpdateBroadcast200Response](docs/UpdateBroadcast200Response.md)
  - [Late::UpdateBroadcast200ResponseBroadcast](docs/UpdateBroadcast200ResponseBroadcast.md)
  - [Late::UpdateCommentAutomation200Response](docs/UpdateCommentAutomation200Response.md)

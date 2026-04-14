@@ -14,24 +14,16 @@ require 'date'
 require 'time'
 
 module Late
-  # Meta-only. Targeting updates for other platforms are not supported after creation.
-  class UpdateAdRequestTargeting < ApiModelBase
-    attr_accessor :age_min
+  class UpdateAdRequestTargetingInterestsInner < ApiModelBase
+    attr_accessor :id
 
-    attr_accessor :age_max
-
-    attr_accessor :countries
-
-    # Interest objects from /v1/ads/interests. Each must include id and name.
-    attr_accessor :interests
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'age_min' => :'ageMin',
-        :'age_max' => :'ageMax',
-        :'countries' => :'countries',
-        :'interests' => :'interests'
+        :'id' => :'id',
+        :'name' => :'name'
       }
     end
 
@@ -48,10 +40,8 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'age_min' => :'Integer',
-        :'age_max' => :'Integer',
-        :'countries' => :'Array<String>',
-        :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>'
+        :'id' => :'String',
+        :'name' => :'String'
       }
     end
 
@@ -65,36 +55,28 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::UpdateAdRequestTargeting` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::UpdateAdRequestTargetingInterestsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::UpdateAdRequestTargeting`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::UpdateAdRequestTargetingInterestsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'age_min')
-        self.age_min = attributes[:'age_min']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      else
+        self.id = nil
       end
 
-      if attributes.key?(:'age_max')
-        self.age_max = attributes[:'age_max']
-      end
-
-      if attributes.key?(:'countries')
-        if (value = attributes[:'countries']).is_a?(Array)
-          self.countries = value
-        end
-      end
-
-      if attributes.key?(:'interests')
-        if (value = attributes[:'interests']).is_a?(Array)
-          self.interests = value
-        end
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
       end
     end
 
@@ -103,20 +85,12 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@age_min.nil? && @age_min > 65
-        invalid_properties.push('invalid value for "age_min", must be smaller than or equal to 65.')
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if !@age_min.nil? && @age_min < 13
-        invalid_properties.push('invalid value for "age_min", must be greater than or equal to 13.')
-      end
-
-      if !@age_max.nil? && @age_max > 65
-        invalid_properties.push('invalid value for "age_max", must be smaller than or equal to 65.')
-      end
-
-      if !@age_max.nil? && @age_max < 13
-        invalid_properties.push('invalid value for "age_max", must be greater than or equal to 13.')
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
       invalid_properties
@@ -126,47 +100,29 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@age_min.nil? && @age_min > 65
-      return false if !@age_min.nil? && @age_min < 13
-      return false if !@age_max.nil? && @age_max > 65
-      return false if !@age_max.nil? && @age_max < 13
+      return false if @id.nil?
+      return false if @name.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] age_min Value to be assigned
-    def age_min=(age_min)
-      if age_min.nil?
-        fail ArgumentError, 'age_min cannot be nil'
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
       end
 
-      if age_min > 65
-        fail ArgumentError, 'invalid value for "age_min", must be smaller than or equal to 65.'
-      end
-
-      if age_min < 13
-        fail ArgumentError, 'invalid value for "age_min", must be greater than or equal to 13.'
-      end
-
-      @age_min = age_min
+      @id = id
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] age_max Value to be assigned
-    def age_max=(age_max)
-      if age_max.nil?
-        fail ArgumentError, 'age_max cannot be nil'
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
       end
 
-      if age_max > 65
-        fail ArgumentError, 'invalid value for "age_max", must be smaller than or equal to 65.'
-      end
-
-      if age_max < 13
-        fail ArgumentError, 'invalid value for "age_max", must be greater than or equal to 13.'
-      end
-
-      @age_max = age_max
+      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -174,10 +130,8 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          age_min == o.age_min &&
-          age_max == o.age_max &&
-          countries == o.countries &&
-          interests == o.interests
+          id == o.id &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -189,7 +143,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [age_min, age_max, countries, interests].hash
+      [id, name].hash
     end
 
     # Builds the object from hash

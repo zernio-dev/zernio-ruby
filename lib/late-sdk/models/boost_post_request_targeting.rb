@@ -21,6 +21,7 @@ module Late
 
     attr_accessor :countries
 
+    # Interest objects from /v1/ads/interests. Each must include id and name.
     attr_accessor :interests
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -49,7 +50,7 @@ module Late
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'countries' => :'Array<String>',
-        :'interests' => :'Array<String>'
+        :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>'
       }
     end
 

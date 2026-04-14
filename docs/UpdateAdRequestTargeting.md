@@ -7,7 +7,7 @@
 | **age_min** | **Integer** |  | [optional] |
 | **age_max** | **Integer** |  | [optional] |
 | **countries** | **Array&lt;String&gt;** |  | [optional] |
-| **interests** | **Array&lt;String&gt;** |  | [optional] |
+| **interests** | [**Array&lt;UpdateAdRequestTargetingInterestsInner&gt;**](UpdateAdRequestTargetingInterestsInner.md) | Interest objects from /v1/ads/interests. Each must include id and name. | [optional] |
 
 ## Example
 

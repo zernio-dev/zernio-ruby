@@ -22,7 +22,7 @@
 | **countries** | **Array&lt;String&gt;** |  | [optional] |
 | **age_min** | **Integer** |  | [optional] |
 | **age_max** | **Integer** |  | [optional] |
-| **interests** | **Array&lt;String&gt;** |  | [optional] |
+| **interests** | [**Array&lt;UpdateAdRequestTargetingInterestsInner&gt;**](UpdateAdRequestTargetingInterestsInner.md) | Interest objects from /v1/ads/interests. Each must include id and name. | [optional] |
 | **end_date** | **Time** | Required for lifetime budgets | [optional] |
 | **audience_id** | **String** | Custom audience ID for targeting | [optional] |
 | **campaign_type** | **String** | Google only | [optional][default to &#39;display&#39;] |

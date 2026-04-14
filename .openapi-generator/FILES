@@ -606,6 +606,7 @@ docs/UpdateAdCampaignStatusRequest.md
 docs/UpdateAdRequest.md
 docs/UpdateAdRequestBudget.md
 docs/UpdateAdRequestTargeting.md
+docs/UpdateAdRequestTargetingInterestsInner.md
 docs/UpdateBroadcast200Response.md
 docs/UpdateBroadcast200ResponseBroadcast.md
 docs/UpdateCommentAutomation200Response.md
@@ -1370,6 +1371,7 @@ lib/late-sdk/models/update_ad_campaign_status_request.rb
 lib/late-sdk/models/update_ad_request.rb
 lib/late-sdk/models/update_ad_request_budget.rb
 lib/late-sdk/models/update_ad_request_targeting.rb
+lib/late-sdk/models/update_ad_request_targeting_interests_inner.rb
 lib/late-sdk/models/update_broadcast200_response.rb
 lib/late-sdk/models/update_broadcast200_response_broadcast.rb
 lib/late-sdk/models/update_comment_automation200_response.rb
@@ -2118,6 +2120,7 @@ spec/models/update_ad_campaign_status200_response_spec.rb
 spec/models/update_ad_campaign_status_request_spec.rb
 spec/models/update_ad_request_budget_spec.rb
 spec/models/update_ad_request_spec.rb
+spec/models/update_ad_request_targeting_interests_inner_spec.rb
 spec/models/update_ad_request_targeting_spec.rb
 spec/models/update_broadcast200_response_broadcast_spec.rb
 spec/models/update_broadcast200_response_spec.rb
