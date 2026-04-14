@@ -25,6 +25,9 @@ module Late
 
     attr_accessor :display_name
 
+    # URL to the account's profile picture on the platform. May be null if the platform does not provide one.
+    attr_accessor :profile_picture
+
     # Full profile URL for the connected account on its platform.
     attr_accessor :profile_url
 
@@ -44,8 +47,6 @@ module Late
 
     # Platform-specific metadata. Fields vary by platform. For WhatsApp accounts, includes: - `qualityRating`: Phone number quality rating from Meta (`GREEN`, `YELLOW`, `RED`, or `UNKNOWN`) - `nameStatus`: Display name review status (`APPROVED`, `PENDING_REVIEW`, `DECLINED`, or `NONE`). Messages cannot be sent until the display name is approved by Meta. - `messagingLimitTier`: Maximum unique business-initiated conversations per 24h rolling window (`TIER_250`, `TIER_1K`, `TIER_10K`, `TIER_100K`, or `TIER_UNLIMITED`). Scales automatically as quality rating improves. - `verifiedName`: Meta-verified business display name - `displayPhoneNumber`: Formatted phone number (e.g., \"+1 555-123-4567\") - `wabaId`: WhatsApp Business Account ID - `phoneNumberId`: Meta phone number ID 
     attr_accessor :metadata
-
-    attr_accessor :profile_picture
 
     # Current follower count
     attr_accessor :current_followers
@@ -93,6 +94,7 @@ module Late
         :'profile_id' => :'profileId',
         :'username' => :'username',
         :'display_name' => :'displayName',
+        :'profile_picture' => :'profilePicture',
         :'profile_url' => :'profileUrl',
         :'is_active' => :'isActive',
         :'followers_count' => :'followersCount',
@@ -100,7 +102,6 @@ module Late
         :'parent_account_id' => :'parentAccountId',
         :'enabled' => :'enabled',
         :'metadata' => :'metadata',
-        :'profile_picture' => :'profilePicture',
         :'current_followers' => :'currentFollowers',
         :'last_updated' => :'lastUpdated',
         :'growth' => :'growth',
@@ -128,6 +129,7 @@ module Late
         :'profile_id' => :'SocialAccountProfileId',
         :'username' => :'String',
         :'display_name' => :'String',
+        :'profile_picture' => :'String',
         :'profile_url' => :'String',
         :'is_active' => :'Boolean',
         :'followers_count' => :'Float',
@@ -135,7 +137,6 @@ module Late
         :'parent_account_id' => :'String',
         :'enabled' => :'Boolean',
         :'metadata' => :'Object',
-        :'profile_picture' => :'String',
         :'current_followers' => :'Float',
         :'last_updated' => :'Time',
         :'growth' => :'Float',
@@ -194,6 +195,10 @@ module Late
         self.display_name = attributes[:'display_name']
       end
 
+      if attributes.key?(:'profile_picture')
+        self.profile_picture = attributes[:'profile_picture']
+      end
+
       if attributes.key?(:'profile_url')
         self.profile_url = attributes[:'profile_url']
       end
@@ -220,10 +225,6 @@ module Late
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      end
-
-      if attributes.key?(:'profile_picture')
-        self.profile_picture = attributes[:'profile_picture']
       end
 
       if attributes.key?(:'current_followers')
@@ -288,6 +289,7 @@ module Late
           profile_id == o.profile_id &&
           username == o.username &&
           display_name == o.display_name &&
+          profile_picture == o.profile_picture &&
           profile_url == o.profile_url &&
           is_active == o.is_active &&
           followers_count == o.followers_count &&
@@ -295,7 +297,6 @@ module Late
           parent_account_id == o.parent_account_id &&
           enabled == o.enabled &&
           metadata == o.metadata &&
-          profile_picture == o.profile_picture &&
           current_followers == o.current_followers &&
           last_updated == o.last_updated &&
           growth == o.growth &&
@@ -313,7 +314,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, parent_account_id, enabled, metadata, profile_picture, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
+      [_id, platform, profile_id, username, display_name, profile_picture, profile_url, is_active, followers_count, followers_last_updated, parent_account_id, enabled, metadata, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
     end
 
     # Builds the object from hash

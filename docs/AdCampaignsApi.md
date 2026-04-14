@@ -4,8 +4,8 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get nested campaign/ad-set/ad tree |
-| [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns with aggregate metrics |
+| [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
+| [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
 | [**update_ad_campaign_status**](AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign |
 
 
@@ -13,7 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 
 > <GetAdTree200Response> get_ad_tree(opts)
 
-Get nested campaign/ad-set/ad tree
+Get campaign tree
 
 Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
 
@@ -43,7 +43,7 @@ opts = {
 }
 
 begin
-  # Get nested campaign/ad-set/ad tree
+  # Get campaign tree
   result = api_instance.get_ad_tree(opts)
   p result
 rescue Late::ApiError => e
@@ -59,7 +59,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get nested campaign/ad-set/ad tree
+  # Get campaign tree
   data, status_code, headers = api_instance.get_ad_tree_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -102,7 +102,7 @@ end
 
 > <ListAdCampaigns200Response> list_ad_campaigns(opts)
 
-List campaigns with aggregate metrics
+List campaigns
 
 Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active > pending_review > paused > error > completed > cancelled > rejected). 
 
@@ -130,7 +130,7 @@ opts = {
 }
 
 begin
-  # List campaigns with aggregate metrics
+  # List campaigns
   result = api_instance.list_ad_campaigns(opts)
   p result
 rescue Late::ApiError => e
@@ -146,7 +146,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List campaigns with aggregate metrics
+  # List campaigns
   data, status_code, headers = api_instance.list_ad_campaigns_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }

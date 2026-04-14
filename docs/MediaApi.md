@@ -4,14 +4,14 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_media_presigned_url**](MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get presigned upload URL |
+| [**get_media_presigned_url**](MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get upload URL |
 
 
 ## get_media_presigned_url
 
 > <GetMediaPresignedUrl200Response> get_media_presigned_url(get_media_presigned_url_request)
 
-Get presigned upload URL
+Get upload URL
 
 Get a presigned URL to upload files directly to cloud storage (up to 5GB). Returns an uploadUrl and publicUrl. PUT your file to the uploadUrl, then use the publicUrl in your posts.
 
@@ -30,7 +30,7 @@ api_instance = Late::MediaApi.new
 get_media_presigned_url_request = Late::GetMediaPresignedUrlRequest.new({filename: 'my-video.mp4', content_type: 'image/jpeg'}) # GetMediaPresignedUrlRequest | 
 
 begin
-  # Get presigned upload URL
+  # Get upload URL
   result = api_instance.get_media_presigned_url(get_media_presigned_url_request)
   p result
 rescue Late::ApiError => e
@@ -46,7 +46,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get presigned upload URL
+  # Get upload URL
   data, status_code, headers = api_instance.get_media_presigned_url_with_http_info(get_media_presigned_url_request)
   p status_code # => 2xx
   p headers # => { ... }

@@ -136,7 +136,7 @@ describe 'WhatsAppApi' do
   end
 
   # unit tests for get_whats_app_display_name
-  # Get display name and review status
+  # Get display name status
   # Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters

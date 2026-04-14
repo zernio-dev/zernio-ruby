@@ -4,10 +4,10 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**create_comment_automation**](CommentAutomationsApi.md#create_comment_automation) | **POST** /v1/comment-automations | Create a comment-to-DM automation |
-| [**delete_comment_automation**](CommentAutomationsApi.md#delete_comment_automation) | **DELETE** /v1/comment-automations/{automationId} | Delete automation and all logs |
-| [**get_comment_automation**](CommentAutomationsApi.md#get_comment_automation) | **GET** /v1/comment-automations/{automationId} | Get automation details with recent logs |
-| [**list_comment_automation_logs**](CommentAutomationsApi.md#list_comment_automation_logs) | **GET** /v1/comment-automations/{automationId}/logs | List trigger logs for an automation |
+| [**create_comment_automation**](CommentAutomationsApi.md#create_comment_automation) | **POST** /v1/comment-automations | Create comment-to-DM automation |
+| [**delete_comment_automation**](CommentAutomationsApi.md#delete_comment_automation) | **DELETE** /v1/comment-automations/{automationId} | Delete automation |
+| [**get_comment_automation**](CommentAutomationsApi.md#get_comment_automation) | **GET** /v1/comment-automations/{automationId} | Get automation details |
+| [**list_comment_automation_logs**](CommentAutomationsApi.md#list_comment_automation_logs) | **GET** /v1/comment-automations/{automationId}/logs | List automation logs |
 | [**list_comment_automations**](CommentAutomationsApi.md#list_comment_automations) | **GET** /v1/comment-automations | List comment-to-DM automations |
 | [**update_comment_automation**](CommentAutomationsApi.md#update_comment_automation) | **PATCH** /v1/comment-automations/{automationId} | Update automation settings |
 
@@ -16,7 +16,7 @@ All URIs are relative to *https://zernio.com/api*
 
 > <CreateCommentAutomation200Response> create_comment_automation(create_comment_automation_request)
 
-Create a comment-to-DM automation
+Create comment-to-DM automation
 
 Create a keyword-triggered DM automation on an Instagram or Facebook post. When someone comments a matching keyword, they automatically receive a DM. Only one active automation per post is allowed. 
 
@@ -35,7 +35,7 @@ api_instance = Late::CommentAutomationsApi.new
 create_comment_automation_request = Late::CreateCommentAutomationRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform_post_id: 'platform_post_id_example', name: 'name_example', dm_message: 'dm_message_example'}) # CreateCommentAutomationRequest | 
 
 begin
-  # Create a comment-to-DM automation
+  # Create comment-to-DM automation
   result = api_instance.create_comment_automation(create_comment_automation_request)
   p result
 rescue Late::ApiError => e
@@ -51,7 +51,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create a comment-to-DM automation
+  # Create comment-to-DM automation
   data, status_code, headers = api_instance.create_comment_automation_with_http_info(create_comment_automation_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -85,7 +85,7 @@ end
 
 > delete_comment_automation(automation_id)
 
-Delete automation and all logs
+Delete automation
 
 ### Examples
 
@@ -102,7 +102,7 @@ api_instance = Late::CommentAutomationsApi.new
 automation_id = 'automation_id_example' # String | 
 
 begin
-  # Delete automation and all logs
+  # Delete automation
   api_instance.delete_comment_automation(automation_id)
 rescue Late::ApiError => e
   puts "Error when calling CommentAutomationsApi->delete_comment_automation: #{e}"
@@ -117,7 +117,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # Delete automation and all logs
+  # Delete automation
   data, status_code, headers = api_instance.delete_comment_automation_with_http_info(automation_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -151,7 +151,7 @@ nil (empty response body)
 
 > <GetCommentAutomation200Response> get_comment_automation(automation_id)
 
-Get automation details with recent logs
+Get automation details
 
 ### Examples
 
@@ -168,7 +168,7 @@ api_instance = Late::CommentAutomationsApi.new
 automation_id = 'automation_id_example' # String | 
 
 begin
-  # Get automation details with recent logs
+  # Get automation details
   result = api_instance.get_comment_automation(automation_id)
   p result
 rescue Late::ApiError => e
@@ -184,7 +184,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get automation details with recent logs
+  # Get automation details
   data, status_code, headers = api_instance.get_comment_automation_with_http_info(automation_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -218,7 +218,7 @@ end
 
 > <ListCommentAutomationLogs200Response> list_comment_automation_logs(automation_id, opts)
 
-List trigger logs for an automation
+List automation logs
 
 Paginated list of every comment that triggered this automation, with send status and commenter info.
 
@@ -242,7 +242,7 @@ opts = {
 }
 
 begin
-  # List trigger logs for an automation
+  # List automation logs
   result = api_instance.list_comment_automation_logs(automation_id, opts)
   p result
 rescue Late::ApiError => e
@@ -258,7 +258,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List trigger logs for an automation
+  # List automation logs
   data, status_code, headers = api_instance.list_comment_automation_logs_with_http_info(automation_id, opts)
   p status_code # => 2xx
   p headers # => { ... }

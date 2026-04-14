@@ -33,7 +33,7 @@ describe 'AdsApi' do
   end
 
   # unit tests for boost_post
-  # Boost an existing post as a paid ad
+  # Boost post as ad
   # Creates a paid ad campaign from an existing published post. Creates the full platform campaign hierarchy (campaign, ad set, ad).
   # @param boost_post_request 
   # @param [Hash] opts the optional parameters
@@ -45,7 +45,7 @@ describe 'AdsApi' do
   end
 
   # unit tests for create_standalone_ad
-  # Create a standalone ad with custom creative
+  # Create standalone ad
   # Creates a paid ad with custom creative (headline, body, image/video, link). Creates the full platform campaign hierarchy.
   # @param create_standalone_ad_request 
   # @param [Hash] opts the optional parameters
@@ -80,7 +80,7 @@ describe 'AdsApi' do
   end
 
   # unit tests for get_ad_analytics
-  # Get ad analytics with daily breakdown
+  # Get ad analytics
   # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
   # @param ad_id 
   # @param [Hash] opts the optional parameters
@@ -95,7 +95,7 @@ describe 'AdsApi' do
   end
 
   # unit tests for list_ad_accounts
-  # List ad accounts for a social account
+  # List ad accounts
   # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).
   # @param account_id Social account ID
   # @param [Hash] opts the optional parameters
@@ -142,7 +142,7 @@ describe 'AdsApi' do
   end
 
   # unit tests for update_ad
-  # Update ad (pause/resume, budget, targeting, name)
+  # Update ad
   # Update one or more fields on an ad. Status changes and budget updates are propagated to the platform. Targeting updates are Meta-only.
   # @param ad_id 
   # @param update_ad_request 

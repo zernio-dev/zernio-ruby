@@ -12,7 +12,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_whats_app_group_chat**](WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group |
 | [**delete_whats_app_template**](WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template |
 | [**get_whats_app_business_profile**](WhatsAppApi.md#get_whats_app_business_profile) | **GET** /v1/whatsapp/business-profile | Get business profile |
-| [**get_whats_app_display_name**](WhatsAppApi.md#get_whats_app_display_name) | **GET** /v1/whatsapp/business-profile/display-name | Get display name and review status |
+| [**get_whats_app_display_name**](WhatsAppApi.md#get_whats_app_display_name) | **GET** /v1/whatsapp/business-profile/display-name | Get display name status |
 | [**get_whats_app_group_chat**](WhatsAppApi.md#get_whats_app_group_chat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info |
 | [**get_whats_app_template**](WhatsAppApi.md#get_whats_app_template) | **GET** /v1/whatsapp/templates/{templateName} | Get template |
 | [**get_whats_app_templates**](WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates |
@@ -597,7 +597,7 @@ end
 
 > <GetWhatsAppDisplayName200Response> get_whats_app_display_name(account_id)
 
-Get display name and review status
+Get display name status
 
 Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
 
@@ -616,7 +616,7 @@ api_instance = Late::WhatsAppApi.new
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
 begin
-  # Get display name and review status
+  # Get display name status
   result = api_instance.get_whats_app_display_name(account_id)
   p result
 rescue Late::ApiError => e
@@ -632,7 +632,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get display name and review status
+  # Get display name status
   data, status_code, headers = api_instance.get_whats_app_display_name_with_http_info(account_id)
   p status_code # => 2xx
   p headers # => { ... }

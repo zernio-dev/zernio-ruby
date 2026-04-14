@@ -33,7 +33,7 @@ describe 'MediaApi' do
   end
 
   # unit tests for get_media_presigned_url
-  # Get presigned upload URL
+  # Get upload URL
   # Get a presigned URL to upload files directly to cloud storage (up to 5GB). Returns an uploadUrl and publicUrl. PUT your file to the uploadUrl, then use the publicUrl in your posts.
   # @param get_media_presigned_url_request 
   # @param [Hash] opts the optional parameters

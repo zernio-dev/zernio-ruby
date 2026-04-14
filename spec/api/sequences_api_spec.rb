@@ -33,7 +33,7 @@ describe 'SequencesApi' do
   end
 
   # unit tests for activate_sequence
-  # Activate a sequence
+  # Activate sequence
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [ActivateSequence200Response]
@@ -44,7 +44,7 @@ describe 'SequencesApi' do
   end
 
   # unit tests for create_sequence
-  # Create a sequence
+  # Create sequence
   # @param create_sequence_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateSequence200Response]
@@ -55,7 +55,7 @@ describe 'SequencesApi' do
   end
 
   # unit tests for delete_sequence
-  # Delete a sequence
+  # Delete sequence
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -117,7 +117,7 @@ describe 'SequencesApi' do
   end
 
   # unit tests for pause_sequence
-  # Pause a sequence
+  # Pause sequence
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [ActivateSequence200Response]
@@ -128,7 +128,7 @@ describe 'SequencesApi' do
   end
 
   # unit tests for unenroll_contact
-  # Unenroll a contact from a sequence
+  # Unenroll contact
   # @param sequence_id 
   # @param contact_id 
   # @param [Hash] opts the optional parameters
@@ -140,7 +140,7 @@ describe 'SequencesApi' do
   end
 
   # unit tests for update_sequence
-  # Update a sequence
+  # Update sequence
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [UpdateSequence200Response]

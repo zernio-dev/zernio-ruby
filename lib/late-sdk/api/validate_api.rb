@@ -155,7 +155,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Validate post character count
+    # Validate character count
     # Check weighted character count per platform and whether the text is within each platform's limit.  Twitter/X uses weighted counting (URLs = 23 chars via t.co, emojis = 2 chars). All other platforms use plain character length.  Returns counts and limits for all 15 supported platform variants. 
     # @param validate_post_length_request [ValidatePostLengthRequest] 
     # @param [Hash] opts the optional parameters
@@ -165,7 +165,7 @@ module Late
       data
     end
 
-    # Validate post character count
+    # Validate character count
     # Check weighted character count per platform and whether the text is within each platform&#39;s limit.  Twitter/X uses weighted counting (URLs &#x3D; 23 chars via t.co, emojis &#x3D; 2 chars). All other platforms use plain character length.  Returns counts and limits for all 15 supported platform variants. 
     # @param validate_post_length_request [ValidatePostLengthRequest] 
     # @param [Hash] opts the optional parameters

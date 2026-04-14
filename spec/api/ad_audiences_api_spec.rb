@@ -33,7 +33,7 @@ describe 'AdAudiencesApi' do
   end
 
   # unit tests for add_users_to_ad_audience
-  # Add users to a customer list audience
+  # Add users to audience
   # Upload user data (emails and/or phone numbers) to a customer_list audience. Data is SHA256-hashed server-side before sending to Meta. Max 10,000 users per request.
   # @param audience_id 
   # @param add_users_to_ad_audience_request 
@@ -46,7 +46,7 @@ describe 'AdAudiencesApi' do
   end
 
   # unit tests for create_ad_audience
-  # Create a custom audience (Meta only)
+  # Create custom audience
   # Create a customer list, website retargeting, or lookalike audience on Meta (Facebook/Instagram).
   # @param create_ad_audience_request 
   # @param [Hash] opts the optional parameters
@@ -58,7 +58,7 @@ describe 'AdAudiencesApi' do
   end
 
   # unit tests for delete_ad_audience
-  # Delete a custom audience
+  # Delete custom audience
   # Deletes the audience from both Meta and the local database.
   # @param audience_id 
   # @param [Hash] opts the optional parameters

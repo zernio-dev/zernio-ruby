@@ -9,17 +9,17 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_content_decay**](AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay |
 | [**get_daily_metrics**](AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics |
 | [**get_follower_stats**](AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
-| [**get_google_business_performance**](AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get Google Business Profile performance metrics |
-| [**get_google_business_search_keywords**](AnalyticsApi.md#get_google_business_search_keywords) | **GET** /v1/analytics/googlebusiness/search-keywords | Get Google Business Profile search keywords |
-| [**get_instagram_account_insights**](AnalyticsApi.md#get_instagram_account_insights) | **GET** /v1/analytics/instagram/account-insights | Get Instagram account-level insights |
-| [**get_instagram_demographics**](AnalyticsApi.md#get_instagram_demographics) | **GET** /v1/analytics/instagram/demographics | Get Instagram audience demographics |
+| [**get_google_business_performance**](AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get GBP performance metrics |
+| [**get_google_business_search_keywords**](AnalyticsApi.md#get_google_business_search_keywords) | **GET** /v1/analytics/googlebusiness/search-keywords | Get GBP search keywords |
+| [**get_instagram_account_insights**](AnalyticsApi.md#get_instagram_account_insights) | **GET** /v1/analytics/instagram/account-insights | Get Instagram insights |
+| [**get_instagram_demographics**](AnalyticsApi.md#get_instagram_demographics) | **GET** /v1/analytics/instagram/demographics | Get Instagram demographics |
 | [**get_linked_in_aggregate_analytics**](AnalyticsApi.md#get_linked_in_aggregate_analytics) | **GET** /v1/accounts/{accountId}/linkedin-aggregate-analytics | Get LinkedIn aggregate stats |
 | [**get_linked_in_post_analytics**](AnalyticsApi.md#get_linked_in_post_analytics) | **GET** /v1/accounts/{accountId}/linkedin-post-analytics | Get LinkedIn post stats |
 | [**get_linked_in_post_reactions**](AnalyticsApi.md#get_linked_in_post_reactions) | **GET** /v1/accounts/{accountId}/linkedin-post-reactions | Get LinkedIn post reactions |
 | [**get_post_timeline**](AnalyticsApi.md#get_post_timeline) | **GET** /v1/analytics/post-timeline | Get post analytics timeline |
-| [**get_posting_frequency**](AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get posting frequency vs engagement |
+| [**get_posting_frequency**](AnalyticsApi.md#get_posting_frequency) | **GET** /v1/analytics/posting-frequency | Get frequency vs engagement |
 | [**get_you_tube_daily_views**](AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views |
-| [**get_you_tube_demographics**](AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube audience demographics |
+| [**get_you_tube_demographics**](AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube demographics |
 
 
 ## get_analytics
@@ -427,7 +427,7 @@ end
 
 > <GetGoogleBusinessPerformance200Response> get_google_business_performance(account_id, opts)
 
-Get Google Business Profile performance metrics
+Get GBP performance metrics
 
 Returns daily performance metrics for a Google Business Profile location. Metrics include impressions (Maps/Search, desktop/mobile), website clicks, call clicks, direction requests, conversations, bookings, and food orders. Data may be delayed 2-3 days. Max 18 months of historical data. Requires the Analytics add-on. 
 
@@ -451,7 +451,7 @@ opts = {
 }
 
 begin
-  # Get Google Business Profile performance metrics
+  # Get GBP performance metrics
   result = api_instance.get_google_business_performance(account_id, opts)
   p result
 rescue Late::ApiError => e
@@ -467,7 +467,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Google Business Profile performance metrics
+  # Get GBP performance metrics
   data, status_code, headers = api_instance.get_google_business_performance_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -504,7 +504,7 @@ end
 
 > <GetGoogleBusinessSearchKeywords200Response> get_google_business_search_keywords(account_id, opts)
 
-Get Google Business Profile search keywords
+Get GBP search keywords
 
 Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords below a minimum impression threshold set by Google are excluded. Max 18 months of historical data. Requires the Analytics add-on. 
 
@@ -527,7 +527,7 @@ opts = {
 }
 
 begin
-  # Get Google Business Profile search keywords
+  # Get GBP search keywords
   result = api_instance.get_google_business_search_keywords(account_id, opts)
   p result
 rescue Late::ApiError => e
@@ -543,7 +543,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Google Business Profile search keywords
+  # Get GBP search keywords
   data, status_code, headers = api_instance.get_google_business_search_keywords_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -579,7 +579,7 @@ end
 
 > <InstagramAccountInsightsResponse> get_instagram_account_insights(account_id, opts)
 
-Get Instagram account-level insights
+Get Instagram insights
 
 Returns account-level Instagram insights such as reach, views, accounts engaged, and total interactions. These metrics reflect the entire account's performance across all content surfaces (feed, stories, explore, profile), and are fundamentally different from post-level metrics. Data may be delayed up to 48 hours. Max 90 days, defaults to last 30 days. Requires the Analytics add-on. 
 
@@ -605,7 +605,7 @@ opts = {
 }
 
 begin
-  # Get Instagram account-level insights
+  # Get Instagram insights
   result = api_instance.get_instagram_account_insights(account_id, opts)
   p result
 rescue Late::ApiError => e
@@ -621,7 +621,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Instagram account-level insights
+  # Get Instagram insights
   data, status_code, headers = api_instance.get_instagram_account_insights_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -660,7 +660,7 @@ end
 
 > <InstagramDemographicsResponse> get_instagram_demographics(account_id, opts)
 
-Get Instagram audience demographics
+Get Instagram demographics
 
 Returns audience demographic insights for an Instagram account, broken down by age, city, country, and/or gender. Requires at least 100 followers. Returns top 45 entries per dimension. Data may be delayed up to 48 hours. Requires the Analytics add-on. 
 
@@ -684,7 +684,7 @@ opts = {
 }
 
 begin
-  # Get Instagram audience demographics
+  # Get Instagram demographics
   result = api_instance.get_instagram_demographics(account_id, opts)
   p result
 rescue Late::ApiError => e
@@ -700,7 +700,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get Instagram audience demographics
+  # Get Instagram demographics
   data, status_code, headers = api_instance.get_instagram_demographics_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -1039,7 +1039,7 @@ end
 
 > <GetPostingFrequency200Response> get_posting_frequency(opts)
 
-Get posting frequency vs engagement
+Get frequency vs engagement
 
 Returns the correlation between posting frequency (posts per week) and engagement rate, broken down by platform. Helps find the optimal posting cadence for each platform. Each row represents a specific (platform, posts_per_week) combination with the average engagement rate observed across all weeks matching that frequency. Requires the Analytics add-on. 
 
@@ -1062,7 +1062,7 @@ opts = {
 }
 
 begin
-  # Get posting frequency vs engagement
+  # Get frequency vs engagement
   result = api_instance.get_posting_frequency(opts)
   p result
 rescue Late::ApiError => e
@@ -1078,7 +1078,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get posting frequency vs engagement
+  # Get frequency vs engagement
   data, status_code, headers = api_instance.get_posting_frequency_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -1191,7 +1191,7 @@ end
 
 > <YouTubeDemographicsResponse> get_you_tube_demographics(account_id, opts)
 
-Get YouTube audience demographics
+Get YouTube demographics
 
 Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
 
@@ -1215,7 +1215,7 @@ opts = {
 }
 
 begin
-  # Get YouTube audience demographics
+  # Get YouTube demographics
   result = api_instance.get_you_tube_demographics(account_id, opts)
   p result
 rescue Late::ApiError => e
@@ -1231,7 +1231,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get YouTube audience demographics
+  # Get YouTube demographics
   data, status_code, headers = api_instance.get_you_tube_demographics_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }

@@ -19,7 +19,7 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Add users to a customer list audience
+    # Add users to audience
     # Upload user data (emails and/or phone numbers) to a customer_list audience. Data is SHA256-hashed server-side before sending to Meta. Max 10,000 users per request.
     # @param audience_id [String] 
     # @param add_users_to_ad_audience_request [AddUsersToAdAudienceRequest] 
@@ -30,7 +30,7 @@ module Late
       data
     end
 
-    # Add users to a customer list audience
+    # Add users to audience
     # Upload user data (emails and/or phone numbers) to a customer_list audience. Data is SHA256-hashed server-side before sending to Meta. Max 10,000 users per request.
     # @param audience_id [String] 
     # @param add_users_to_ad_audience_request [AddUsersToAdAudienceRequest] 
@@ -93,7 +93,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Create a custom audience (Meta only)
+    # Create custom audience
     # Create a customer list, website retargeting, or lookalike audience on Meta (Facebook/Instagram).
     # @param create_ad_audience_request [CreateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
@@ -103,7 +103,7 @@ module Late
       data
     end
 
-    # Create a custom audience (Meta only)
+    # Create custom audience
     # Create a customer list, website retargeting, or lookalike audience on Meta (Facebook/Instagram).
     # @param create_ad_audience_request [CreateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
@@ -161,7 +161,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Delete a custom audience
+    # Delete custom audience
     # Deletes the audience from both Meta and the local database.
     # @param audience_id [String] 
     # @param [Hash] opts the optional parameters
@@ -171,7 +171,7 @@ module Late
       data
     end
 
-    # Delete a custom audience
+    # Delete custom audience
     # Deletes the audience from both Meta and the local database.
     # @param audience_id [String] 
     # @param [Hash] opts the optional parameters

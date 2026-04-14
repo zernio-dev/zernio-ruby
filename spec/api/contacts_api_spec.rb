@@ -45,7 +45,7 @@ describe 'ContactsApi' do
   end
 
   # unit tests for create_contact
-  # Create a contact
+  # Create contact
   # Create a new contact. Optionally create a platform channel in the same request by providing accountId, platform, and platformIdentifier.
   # @param create_contact_request 
   # @param [Hash] opts the optional parameters
@@ -57,7 +57,7 @@ describe 'ContactsApi' do
   end
 
   # unit tests for delete_contact
-  # Delete a contact
+  # Delete contact
   # @param contact_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -68,7 +68,7 @@ describe 'ContactsApi' do
   end
 
   # unit tests for get_contact
-  # Get contact with channels
+  # Get contact
   # @param contact_id 
   # @param [Hash] opts the optional parameters
   # @return [GetContact200Response]
@@ -108,7 +108,7 @@ describe 'ContactsApi' do
   end
 
   # unit tests for update_contact
-  # Update a contact
+  # Update contact
   # @param contact_id 
   # @param [Hash] opts the optional parameters
   # @option opts [UpdateContactRequest] :update_contact_request 

@@ -87,7 +87,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Create a contact
+    # Create contact
     # Create a new contact. Optionally create a platform channel in the same request by providing accountId, platform, and platformIdentifier.
     # @param create_contact_request [CreateContactRequest] 
     # @param [Hash] opts the optional parameters
@@ -97,7 +97,7 @@ module Late
       data
     end
 
-    # Create a contact
+    # Create contact
     # Create a new contact. Optionally create a platform channel in the same request by providing accountId, platform, and platformIdentifier.
     # @param create_contact_request [CreateContactRequest] 
     # @param [Hash] opts the optional parameters
@@ -155,7 +155,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Delete a contact
+    # Delete contact
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -164,7 +164,7 @@ module Late
       nil
     end
 
-    # Delete a contact
+    # Delete contact
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -216,7 +216,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get contact with channels
+    # Get contact
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetContact200Response]
@@ -225,7 +225,7 @@ module Late
       data
     end
 
-    # Get contact with channels
+    # Get contact
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetContact200Response, Integer, Hash)>] GetContact200Response data, response status code and response headers
@@ -428,7 +428,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Update a contact
+    # Update contact
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateContactRequest] :update_contact_request 
@@ -438,7 +438,7 @@ module Late
       data
     end
 
-    # Update a contact
+    # Update contact
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateContactRequest] :update_contact_request 

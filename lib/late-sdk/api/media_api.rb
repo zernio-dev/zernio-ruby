@@ -19,7 +19,7 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Get presigned upload URL
+    # Get upload URL
     # Get a presigned URL to upload files directly to cloud storage (up to 5GB). Returns an uploadUrl and publicUrl. PUT your file to the uploadUrl, then use the publicUrl in your posts.
     # @param get_media_presigned_url_request [GetMediaPresignedUrlRequest] 
     # @param [Hash] opts the optional parameters
@@ -29,7 +29,7 @@ module Late
       data
     end
 
-    # Get presigned upload URL
+    # Get upload URL
     # Get a presigned URL to upload files directly to cloud storage (up to 5GB). Returns an uploadUrl and publicUrl. PUT your file to the uploadUrl, then use the publicUrl in your posts.
     # @param get_media_presigned_url_request [GetMediaPresignedUrlRequest] 
     # @param [Hash] opts the optional parameters

@@ -33,7 +33,7 @@ describe 'CustomFieldsApi' do
   end
 
   # unit tests for clear_contact_field_value
-  # Clear a custom field value
+  # Clear custom field value
   # @param contact_id 
   # @param slug 
   # @param [Hash] opts the optional parameters
@@ -45,7 +45,7 @@ describe 'CustomFieldsApi' do
   end
 
   # unit tests for create_custom_field
-  # Create a custom field definition
+  # Create custom field
   # @param create_custom_field_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateCustomField200Response]
@@ -56,7 +56,7 @@ describe 'CustomFieldsApi' do
   end
 
   # unit tests for delete_custom_field
-  # Delete a custom field definition
+  # Delete custom field
   # @param field_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -78,7 +78,7 @@ describe 'CustomFieldsApi' do
   end
 
   # unit tests for set_contact_field_value
-  # Set a custom field value
+  # Set custom field value
   # @param contact_id 
   # @param slug 
   # @param set_contact_field_value_request 
@@ -91,7 +91,7 @@ describe 'CustomFieldsApi' do
   end
 
   # unit tests for update_custom_field
-  # Update a custom field definition
+  # Update custom field
   # @param field_id 
   # @param [Hash] opts the optional parameters
   # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 

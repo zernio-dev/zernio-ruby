@@ -19,7 +19,7 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Activate a sequence
+    # Activate sequence
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [ActivateSequence200Response]
@@ -28,7 +28,7 @@ module Late
       data
     end
 
-    # Activate a sequence
+    # Activate sequence
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ActivateSequence200Response, Integer, Hash)>] ActivateSequence200Response data, response status code and response headers
@@ -80,7 +80,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Create a sequence
+    # Create sequence
     # @param create_sequence_request [CreateSequenceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateSequence200Response]
@@ -89,7 +89,7 @@ module Late
       data
     end
 
-    # Create a sequence
+    # Create sequence
     # @param create_sequence_request [CreateSequenceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateSequence200Response, Integer, Hash)>] CreateSequence200Response data, response status code and response headers
@@ -146,7 +146,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Delete a sequence
+    # Delete sequence
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -155,7 +155,7 @@ module Late
       nil
     end
 
-    # Delete a sequence
+    # Delete sequence
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -485,7 +485,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Pause a sequence
+    # Pause sequence
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [ActivateSequence200Response]
@@ -494,7 +494,7 @@ module Late
       data
     end
 
-    # Pause a sequence
+    # Pause sequence
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ActivateSequence200Response, Integer, Hash)>] ActivateSequence200Response data, response status code and response headers
@@ -546,7 +546,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Unenroll a contact from a sequence
+    # Unenroll contact
     # @param sequence_id [String] 
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
@@ -556,7 +556,7 @@ module Late
       nil
     end
 
-    # Unenroll a contact from a sequence
+    # Unenroll contact
     # @param sequence_id [String] 
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
@@ -613,7 +613,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Update a sequence
+    # Update sequence
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateSequence200Response]
@@ -622,7 +622,7 @@ module Late
       data
     end
 
-    # Update a sequence
+    # Update sequence
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateSequence200Response, Integer, Hash)>] UpdateSequence200Response data, response status code and response headers

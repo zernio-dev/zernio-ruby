@@ -91,7 +91,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Cancel a broadcast
+    # Cancel broadcast
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [CancelBroadcast200Response]
@@ -100,7 +100,7 @@ module Late
       data
     end
 
-    # Cancel a broadcast
+    # Cancel broadcast
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CancelBroadcast200Response, Integer, Hash)>] CancelBroadcast200Response data, response status code and response headers
@@ -152,7 +152,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Create a broadcast draft
+    # Create broadcast draft
     # @param create_broadcast_request [CreateBroadcastRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateBroadcast200Response]
@@ -161,7 +161,7 @@ module Late
       data
     end
 
-    # Create a broadcast draft
+    # Create broadcast draft
     # @param create_broadcast_request [CreateBroadcastRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateBroadcast200Response, Integer, Hash)>] CreateBroadcast200Response data, response status code and response headers
@@ -218,7 +218,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Delete a broadcast (draft only)
+    # Delete broadcast
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -227,7 +227,7 @@ module Late
       nil
     end
 
-    # Delete a broadcast (draft only)
+    # Delete broadcast
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -560,7 +560,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Trigger immediate send
+    # Send broadcast now
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [SendBroadcast200Response]
@@ -569,7 +569,7 @@ module Late
       data
     end
 
-    # Trigger immediate send
+    # Send broadcast now
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SendBroadcast200Response, Integer, Hash)>] SendBroadcast200Response data, response status code and response headers
@@ -621,7 +621,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Update a broadcast
+    # Update broadcast
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateBroadcast200Response]
@@ -630,7 +630,7 @@ module Late
       data
     end
 
-    # Update a broadcast
+    # Update broadcast
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateBroadcast200Response, Integer, Hash)>] UpdateBroadcast200Response data, response status code and response headers

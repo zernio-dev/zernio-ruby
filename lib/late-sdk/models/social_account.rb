@@ -25,6 +25,9 @@ module Late
 
     attr_accessor :display_name
 
+    # URL to the account's profile picture on the platform. May be null if the platform does not provide one.
+    attr_accessor :profile_picture
+
     # Full profile URL for the connected account on its platform.
     attr_accessor :profile_url
 
@@ -75,6 +78,7 @@ module Late
         :'profile_id' => :'profileId',
         :'username' => :'username',
         :'display_name' => :'displayName',
+        :'profile_picture' => :'profilePicture',
         :'profile_url' => :'profileUrl',
         :'is_active' => :'isActive',
         :'followers_count' => :'followersCount',
@@ -103,6 +107,7 @@ module Late
         :'profile_id' => :'SocialAccountProfileId',
         :'username' => :'String',
         :'display_name' => :'String',
+        :'profile_picture' => :'String',
         :'profile_url' => :'String',
         :'is_active' => :'Boolean',
         :'followers_count' => :'Float',
@@ -153,6 +158,10 @@ module Late
 
       if attributes.key?(:'display_name')
         self.display_name = attributes[:'display_name']
+      end
+
+      if attributes.key?(:'profile_picture')
+        self.profile_picture = attributes[:'profile_picture']
       end
 
       if attributes.key?(:'profile_url')
@@ -221,6 +230,7 @@ module Late
           profile_id == o.profile_id &&
           username == o.username &&
           display_name == o.display_name &&
+          profile_picture == o.profile_picture &&
           profile_url == o.profile_url &&
           is_active == o.is_active &&
           followers_count == o.followers_count &&
@@ -239,7 +249,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, parent_account_id, enabled, metadata].hash
+      [_id, platform, profile_id, username, display_name, profile_picture, profile_url, is_active, followers_count, followers_last_updated, parent_account_id, enabled, metadata].hash
     end
 
     # Builds the object from hash

@@ -4,23 +4,23 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**activate_sequence**](SequencesApi.md#activate_sequence) | **POST** /v1/sequences/{sequenceId}/activate | Activate a sequence |
-| [**create_sequence**](SequencesApi.md#create_sequence) | **POST** /v1/sequences | Create a sequence |
-| [**delete_sequence**](SequencesApi.md#delete_sequence) | **DELETE** /v1/sequences/{sequenceId} | Delete a sequence |
+| [**activate_sequence**](SequencesApi.md#activate_sequence) | **POST** /v1/sequences/{sequenceId}/activate | Activate sequence |
+| [**create_sequence**](SequencesApi.md#create_sequence) | **POST** /v1/sequences | Create sequence |
+| [**delete_sequence**](SequencesApi.md#delete_sequence) | **DELETE** /v1/sequences/{sequenceId} | Delete sequence |
 | [**enroll_contacts**](SequencesApi.md#enroll_contacts) | **POST** /v1/sequences/{sequenceId}/enroll | Enroll contacts in a sequence |
 | [**get_sequence**](SequencesApi.md#get_sequence) | **GET** /v1/sequences/{sequenceId} | Get sequence with steps |
 | [**list_sequence_enrollments**](SequencesApi.md#list_sequence_enrollments) | **GET** /v1/sequences/{sequenceId}/enrollments | List enrollments for a sequence |
 | [**list_sequences**](SequencesApi.md#list_sequences) | **GET** /v1/sequences | List sequences |
-| [**pause_sequence**](SequencesApi.md#pause_sequence) | **POST** /v1/sequences/{sequenceId}/pause | Pause a sequence |
-| [**unenroll_contact**](SequencesApi.md#unenroll_contact) | **DELETE** /v1/sequences/{sequenceId}/enroll/{contactId} | Unenroll a contact from a sequence |
-| [**update_sequence**](SequencesApi.md#update_sequence) | **PATCH** /v1/sequences/{sequenceId} | Update a sequence |
+| [**pause_sequence**](SequencesApi.md#pause_sequence) | **POST** /v1/sequences/{sequenceId}/pause | Pause sequence |
+| [**unenroll_contact**](SequencesApi.md#unenroll_contact) | **DELETE** /v1/sequences/{sequenceId}/enroll/{contactId} | Unenroll contact |
+| [**update_sequence**](SequencesApi.md#update_sequence) | **PATCH** /v1/sequences/{sequenceId} | Update sequence |
 
 
 ## activate_sequence
 
 > <ActivateSequence200Response> activate_sequence(sequence_id)
 
-Activate a sequence
+Activate sequence
 
 ### Examples
 
@@ -37,7 +37,7 @@ api_instance = Late::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
-  # Activate a sequence
+  # Activate sequence
   result = api_instance.activate_sequence(sequence_id)
   p result
 rescue Late::ApiError => e
@@ -53,7 +53,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Activate a sequence
+  # Activate sequence
   data, status_code, headers = api_instance.activate_sequence_with_http_info(sequence_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -87,7 +87,7 @@ end
 
 > <CreateSequence200Response> create_sequence(create_sequence_request)
 
-Create a sequence
+Create sequence
 
 ### Examples
 
@@ -104,7 +104,7 @@ api_instance = Late::SequencesApi.new
 create_sequence_request = Late::CreateSequenceRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform: 'instagram', name: 'name_example'}) # CreateSequenceRequest | 
 
 begin
-  # Create a sequence
+  # Create sequence
   result = api_instance.create_sequence(create_sequence_request)
   p result
 rescue Late::ApiError => e
@@ -120,7 +120,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create a sequence
+  # Create sequence
   data, status_code, headers = api_instance.create_sequence_with_http_info(create_sequence_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -154,7 +154,7 @@ end
 
 > delete_sequence(sequence_id)
 
-Delete a sequence
+Delete sequence
 
 ### Examples
 
@@ -171,7 +171,7 @@ api_instance = Late::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
-  # Delete a sequence
+  # Delete sequence
   api_instance.delete_sequence(sequence_id)
 rescue Late::ApiError => e
   puts "Error when calling SequencesApi->delete_sequence: #{e}"
@@ -186,7 +186,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # Delete a sequence
+  # Delete sequence
   data, status_code, headers = api_instance.delete_sequence_with_http_info(sequence_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -506,7 +506,7 @@ end
 
 > <ActivateSequence200Response> pause_sequence(sequence_id)
 
-Pause a sequence
+Pause sequence
 
 ### Examples
 
@@ -523,7 +523,7 @@ api_instance = Late::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
-  # Pause a sequence
+  # Pause sequence
   result = api_instance.pause_sequence(sequence_id)
   p result
 rescue Late::ApiError => e
@@ -539,7 +539,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Pause a sequence
+  # Pause sequence
   data, status_code, headers = api_instance.pause_sequence_with_http_info(sequence_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -573,7 +573,7 @@ end
 
 > unenroll_contact(sequence_id, contact_id)
 
-Unenroll a contact from a sequence
+Unenroll contact
 
 ### Examples
 
@@ -591,7 +591,7 @@ sequence_id = 'sequence_id_example' # String |
 contact_id = 'contact_id_example' # String | 
 
 begin
-  # Unenroll a contact from a sequence
+  # Unenroll contact
   api_instance.unenroll_contact(sequence_id, contact_id)
 rescue Late::ApiError => e
   puts "Error when calling SequencesApi->unenroll_contact: #{e}"
@@ -606,7 +606,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # Unenroll a contact from a sequence
+  # Unenroll contact
   data, status_code, headers = api_instance.unenroll_contact_with_http_info(sequence_id, contact_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -641,7 +641,7 @@ nil (empty response body)
 
 > <UpdateSequence200Response> update_sequence(sequence_id)
 
-Update a sequence
+Update sequence
 
 ### Examples
 
@@ -658,7 +658,7 @@ api_instance = Late::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
-  # Update a sequence
+  # Update sequence
   result = api_instance.update_sequence(sequence_id)
   p result
 rescue Late::ApiError => e
@@ -674,7 +674,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Update a sequence
+  # Update sequence
   data, status_code, headers = api_instance.update_sequence_with_http_info(sequence_id)
   p status_code # => 2xx
   p headers # => { ... }

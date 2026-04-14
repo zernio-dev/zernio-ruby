@@ -5,15 +5,15 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**add_broadcast_recipients**](BroadcastsApi.md#add_broadcast_recipients) | **POST** /v1/broadcasts/{broadcastId}/recipients | Add recipients to a broadcast |
-| [**cancel_broadcast**](BroadcastsApi.md#cancel_broadcast) | **POST** /v1/broadcasts/{broadcastId}/cancel | Cancel a broadcast |
-| [**create_broadcast**](BroadcastsApi.md#create_broadcast) | **POST** /v1/broadcasts | Create a broadcast draft |
-| [**delete_broadcast**](BroadcastsApi.md#delete_broadcast) | **DELETE** /v1/broadcasts/{broadcastId} | Delete a broadcast (draft only) |
+| [**cancel_broadcast**](BroadcastsApi.md#cancel_broadcast) | **POST** /v1/broadcasts/{broadcastId}/cancel | Cancel broadcast |
+| [**create_broadcast**](BroadcastsApi.md#create_broadcast) | **POST** /v1/broadcasts | Create broadcast draft |
+| [**delete_broadcast**](BroadcastsApi.md#delete_broadcast) | **DELETE** /v1/broadcasts/{broadcastId} | Delete broadcast |
 | [**get_broadcast**](BroadcastsApi.md#get_broadcast) | **GET** /v1/broadcasts/{broadcastId} | Get broadcast details |
 | [**list_broadcast_recipients**](BroadcastsApi.md#list_broadcast_recipients) | **GET** /v1/broadcasts/{broadcastId}/recipients | List broadcast recipients |
 | [**list_broadcasts**](BroadcastsApi.md#list_broadcasts) | **GET** /v1/broadcasts | List broadcasts |
 | [**schedule_broadcast**](BroadcastsApi.md#schedule_broadcast) | **POST** /v1/broadcasts/{broadcastId}/schedule | Schedule broadcast for later |
-| [**send_broadcast**](BroadcastsApi.md#send_broadcast) | **POST** /v1/broadcasts/{broadcastId}/send | Trigger immediate send |
-| [**update_broadcast**](BroadcastsApi.md#update_broadcast) | **PATCH** /v1/broadcasts/{broadcastId} | Update a broadcast |
+| [**send_broadcast**](BroadcastsApi.md#send_broadcast) | **POST** /v1/broadcasts/{broadcastId}/send | Send broadcast now |
+| [**update_broadcast**](BroadcastsApi.md#update_broadcast) | **PATCH** /v1/broadcasts/{broadcastId} | Update broadcast |
 
 
 ## add_broadcast_recipients
@@ -89,7 +89,7 @@ end
 
 > <CancelBroadcast200Response> cancel_broadcast(broadcast_id)
 
-Cancel a broadcast
+Cancel broadcast
 
 ### Examples
 
@@ -106,7 +106,7 @@ api_instance = Late::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
-  # Cancel a broadcast
+  # Cancel broadcast
   result = api_instance.cancel_broadcast(broadcast_id)
   p result
 rescue Late::ApiError => e
@@ -122,7 +122,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Cancel a broadcast
+  # Cancel broadcast
   data, status_code, headers = api_instance.cancel_broadcast_with_http_info(broadcast_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -156,7 +156,7 @@ end
 
 > <CreateBroadcast200Response> create_broadcast(create_broadcast_request)
 
-Create a broadcast draft
+Create broadcast draft
 
 ### Examples
 
@@ -173,7 +173,7 @@ api_instance = Late::BroadcastsApi.new
 create_broadcast_request = Late::CreateBroadcastRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform: 'instagram', name: 'name_example'}) # CreateBroadcastRequest | 
 
 begin
-  # Create a broadcast draft
+  # Create broadcast draft
   result = api_instance.create_broadcast(create_broadcast_request)
   p result
 rescue Late::ApiError => e
@@ -189,7 +189,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create a broadcast draft
+  # Create broadcast draft
   data, status_code, headers = api_instance.create_broadcast_with_http_info(create_broadcast_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -223,7 +223,7 @@ end
 
 > delete_broadcast(broadcast_id)
 
-Delete a broadcast (draft only)
+Delete broadcast
 
 ### Examples
 
@@ -240,7 +240,7 @@ api_instance = Late::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
-  # Delete a broadcast (draft only)
+  # Delete broadcast
   api_instance.delete_broadcast(broadcast_id)
 rescue Late::ApiError => e
   puts "Error when calling BroadcastsApi->delete_broadcast: #{e}"
@@ -255,7 +255,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # Delete a broadcast (draft only)
+  # Delete broadcast
   data, status_code, headers = api_instance.delete_broadcast_with_http_info(broadcast_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -577,7 +577,7 @@ end
 
 > <SendBroadcast200Response> send_broadcast(broadcast_id)
 
-Trigger immediate send
+Send broadcast now
 
 ### Examples
 
@@ -594,7 +594,7 @@ api_instance = Late::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
-  # Trigger immediate send
+  # Send broadcast now
   result = api_instance.send_broadcast(broadcast_id)
   p result
 rescue Late::ApiError => e
@@ -610,7 +610,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Trigger immediate send
+  # Send broadcast now
   data, status_code, headers = api_instance.send_broadcast_with_http_info(broadcast_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -644,7 +644,7 @@ end
 
 > <UpdateBroadcast200Response> update_broadcast(broadcast_id)
 
-Update a broadcast
+Update broadcast
 
 ### Examples
 
@@ -661,7 +661,7 @@ api_instance = Late::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
-  # Update a broadcast
+  # Update broadcast
   result = api_instance.update_broadcast(broadcast_id)
   p result
 rescue Late::ApiError => e
@@ -677,7 +677,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Update a broadcast
+  # Update broadcast
   data, status_code, headers = api_instance.update_broadcast_with_http_info(broadcast_id)
   p status_code # => 2xx
   p headers # => { ... }

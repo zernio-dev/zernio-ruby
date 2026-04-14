@@ -4,22 +4,22 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**boost_post**](AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost an existing post as a paid ad |
-| [**create_standalone_ad**](AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create a standalone ad with custom creative |
+| [**boost_post**](AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
+| [**create_standalone_ad**](AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad |
 | [**delete_ad**](AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**get_ad**](AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
-| [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics with daily breakdown |
-| [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts for a social account |
+| [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
+| [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests |
-| [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad (pause/resume, budget, targeting, name) |
+| [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 
 
 ## boost_post
 
 > <UpdateAd200Response> boost_post(boost_post_request)
 
-Boost an existing post as a paid ad
+Boost post as ad
 
 Creates a paid ad campaign from an existing published post. Creates the full platform campaign hierarchy (campaign, ad set, ad).
 
@@ -38,7 +38,7 @@ api_instance = Late::AdsApi.new
 boost_post_request = Late::BoostPostRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement', budget: Late::BoostPostRequestBudget.new({amount: 3.56, type: 'daily'})}) # BoostPostRequest | 
 
 begin
-  # Boost an existing post as a paid ad
+  # Boost post as ad
   result = api_instance.boost_post(boost_post_request)
   p result
 rescue Late::ApiError => e
@@ -54,7 +54,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Boost an existing post as a paid ad
+  # Boost post as ad
   data, status_code, headers = api_instance.boost_post_with_http_info(boost_post_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -88,7 +88,7 @@ end
 
 > <UpdateAd200Response> create_standalone_ad(create_standalone_ad_request)
 
-Create a standalone ad with custom creative
+Create standalone ad
 
 Creates a paid ad with custom creative (headline, body, image/video, link). Creates the full platform campaign hierarchy.
 
@@ -107,7 +107,7 @@ api_instance = Late::AdsApi.new
 create_standalone_ad_request = Late::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement', budget_amount: 3.56, budget_type: 'daily', body: 'body_example'}) # CreateStandaloneAdRequest | 
 
 begin
-  # Create a standalone ad with custom creative
+  # Create standalone ad
   result = api_instance.create_standalone_ad(create_standalone_ad_request)
   p result
 rescue Late::ApiError => e
@@ -123,7 +123,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create a standalone ad with custom creative
+  # Create standalone ad
   data, status_code, headers = api_instance.create_standalone_ad_with_http_info(create_standalone_ad_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -293,7 +293,7 @@ end
 
 > <GetAdAnalytics200Response> get_ad_analytics(ad_id, opts)
 
-Get ad analytics with daily breakdown
+Get ad analytics
 
 Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
 
@@ -317,7 +317,7 @@ opts = {
 }
 
 begin
-  # Get ad analytics with daily breakdown
+  # Get ad analytics
   result = api_instance.get_ad_analytics(ad_id, opts)
   p result
 rescue Late::ApiError => e
@@ -333,7 +333,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get ad analytics with daily breakdown
+  # Get ad analytics
   data, status_code, headers = api_instance.get_ad_analytics_with_http_info(ad_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -370,7 +370,7 @@ end
 
 > <ListAdAccounts200Response> list_ad_accounts(account_id)
 
-List ad accounts for a social account
+List ad accounts
 
 Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).
 
@@ -389,7 +389,7 @@ api_instance = Late::AdsApi.new
 account_id = 'account_id_example' # String | Social account ID
 
 begin
-  # List ad accounts for a social account
+  # List ad accounts
   result = api_instance.list_ad_accounts(account_id)
   p result
 rescue Late::ApiError => e
@@ -405,7 +405,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List ad accounts for a social account
+  # List ad accounts
   data, status_code, headers = api_instance.list_ad_accounts_with_http_info(account_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -601,7 +601,7 @@ end
 
 > <UpdateAd200Response> update_ad(ad_id, update_ad_request)
 
-Update ad (pause/resume, budget, targeting, name)
+Update ad
 
 Update one or more fields on an ad. Status changes and budget updates are propagated to the platform. Targeting updates are Meta-only.
 
@@ -621,7 +621,7 @@ ad_id = 'ad_id_example' # String |
 update_ad_request = Late::UpdateAdRequest.new # UpdateAdRequest | 
 
 begin
-  # Update ad (pause/resume, budget, targeting, name)
+  # Update ad
   result = api_instance.update_ad(ad_id, update_ad_request)
   p result
 rescue Late::ApiError => e
@@ -637,7 +637,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Update ad (pause/resume, budget, targeting, name)
+  # Update ad
   data, status_code, headers = api_instance.update_ad_with_http_info(ad_id, update_ad_request)
   p status_code # => 2xx
   p headers # => { ... }

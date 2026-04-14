@@ -45,7 +45,7 @@ describe 'BroadcastsApi' do
   end
 
   # unit tests for cancel_broadcast
-  # Cancel a broadcast
+  # Cancel broadcast
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [CancelBroadcast200Response]
@@ -56,7 +56,7 @@ describe 'BroadcastsApi' do
   end
 
   # unit tests for create_broadcast
-  # Create a broadcast draft
+  # Create broadcast draft
   # @param create_broadcast_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateBroadcast200Response]
@@ -67,7 +67,7 @@ describe 'BroadcastsApi' do
   end
 
   # unit tests for delete_broadcast
-  # Delete a broadcast (draft only)
+  # Delete broadcast
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -130,7 +130,7 @@ describe 'BroadcastsApi' do
   end
 
   # unit tests for send_broadcast
-  # Trigger immediate send
+  # Send broadcast now
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [SendBroadcast200Response]
@@ -141,7 +141,7 @@ describe 'BroadcastsApi' do
   end
 
   # unit tests for update_broadcast
-  # Update a broadcast
+  # Update broadcast
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [UpdateBroadcast200Response]

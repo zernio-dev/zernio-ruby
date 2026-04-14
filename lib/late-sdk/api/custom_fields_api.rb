@@ -19,7 +19,7 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Clear a custom field value
+    # Clear custom field value
     # @param contact_id [String] 
     # @param slug [String] 
     # @param [Hash] opts the optional parameters
@@ -29,7 +29,7 @@ module Late
       nil
     end
 
-    # Clear a custom field value
+    # Clear custom field value
     # @param contact_id [String] 
     # @param slug [String] 
     # @param [Hash] opts the optional parameters
@@ -86,7 +86,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Create a custom field definition
+    # Create custom field
     # @param create_custom_field_request [CreateCustomFieldRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateCustomField200Response]
@@ -95,7 +95,7 @@ module Late
       data
     end
 
-    # Create a custom field definition
+    # Create custom field
     # @param create_custom_field_request [CreateCustomFieldRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateCustomField200Response, Integer, Hash)>] CreateCustomField200Response data, response status code and response headers
@@ -152,7 +152,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Delete a custom field definition
+    # Delete custom field
     # @param field_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -161,7 +161,7 @@ module Late
       nil
     end
 
-    # Delete a custom field definition
+    # Delete custom field
     # @param field_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -271,7 +271,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Set a custom field value
+    # Set custom field value
     # @param contact_id [String] 
     # @param slug [String] 
     # @param set_contact_field_value_request [SetContactFieldValueRequest] 
@@ -282,7 +282,7 @@ module Late
       nil
     end
 
-    # Set a custom field value
+    # Set custom field value
     # @param contact_id [String] 
     # @param slug [String] 
     # @param set_contact_field_value_request [SetContactFieldValueRequest] 
@@ -349,7 +349,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Update a custom field definition
+    # Update custom field
     # @param field_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 
@@ -359,7 +359,7 @@ module Late
       data
     end
 
-    # Update a custom field definition
+    # Update custom field
     # @param field_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 

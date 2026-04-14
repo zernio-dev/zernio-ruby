@@ -19,7 +19,7 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Get nested campaign/ad-set/ad tree
+    # Get campaign tree
     # Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
@@ -38,7 +38,7 @@ module Late
       data
     end
 
-    # Get nested campaign/ad-set/ad tree
+    # Get campaign tree
     # Returns a nested Campaign &gt; Ad Set &gt; Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \&quot;Ungrouped\&quot; buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
@@ -130,7 +130,7 @@ module Late
       return data, status_code, headers
     end
 
-    # List campaigns with aggregate metrics
+    # List campaigns
     # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active > pending_review > paused > error > completed > cancelled > rejected). 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
@@ -147,7 +147,7 @@ module Late
       data
     end
 
-    # List campaigns with aggregate metrics
+    # List campaigns
     # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active &gt; pending_review &gt; paused &gt; error &gt; completed &gt; cancelled &gt; rejected). 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)

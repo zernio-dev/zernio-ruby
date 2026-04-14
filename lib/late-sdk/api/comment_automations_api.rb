@@ -19,7 +19,7 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Create a comment-to-DM automation
+    # Create comment-to-DM automation
     # Create a keyword-triggered DM automation on an Instagram or Facebook post. When someone comments a matching keyword, they automatically receive a DM. Only one active automation per post is allowed. 
     # @param create_comment_automation_request [CreateCommentAutomationRequest] 
     # @param [Hash] opts the optional parameters
@@ -29,7 +29,7 @@ module Late
       data
     end
 
-    # Create a comment-to-DM automation
+    # Create comment-to-DM automation
     # Create a keyword-triggered DM automation on an Instagram or Facebook post. When someone comments a matching keyword, they automatically receive a DM. Only one active automation per post is allowed. 
     # @param create_comment_automation_request [CreateCommentAutomationRequest] 
     # @param [Hash] opts the optional parameters
@@ -87,7 +87,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Delete automation and all logs
+    # Delete automation
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -96,7 +96,7 @@ module Late
       nil
     end
 
-    # Delete automation and all logs
+    # Delete automation
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -148,7 +148,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get automation details with recent logs
+    # Get automation details
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetCommentAutomation200Response]
@@ -157,7 +157,7 @@ module Late
       data
     end
 
-    # Get automation details with recent logs
+    # Get automation details
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetCommentAutomation200Response, Integer, Hash)>] GetCommentAutomation200Response data, response status code and response headers
@@ -209,7 +209,7 @@ module Late
       return data, status_code, headers
     end
 
-    # List trigger logs for an automation
+    # List automation logs
     # Paginated list of every comment that triggered this automation, with send status and commenter info.
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
@@ -222,7 +222,7 @@ module Late
       data
     end
 
-    # List trigger logs for an automation
+    # List automation logs
     # Paginated list of every comment that triggered this automation, with send status and commenter info.
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters

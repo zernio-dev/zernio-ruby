@@ -6,7 +6,7 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**validate_media**](ValidateApi.md#validate_media) | **POST** /v1/tools/validate/media | Validate media URL |
 | [**validate_post**](ValidateApi.md#validate_post) | **POST** /v1/tools/validate/post | Validate post content |
-| [**validate_post_length**](ValidateApi.md#validate_post_length) | **POST** /v1/tools/validate/post-length | Validate post character count |
+| [**validate_post_length**](ValidateApi.md#validate_post_length) | **POST** /v1/tools/validate/post-length | Validate character count |
 | [**validate_subreddit**](ValidateApi.md#validate_subreddit) | **GET** /v1/tools/validate/subreddit | Check subreddit existence |
 
 
@@ -152,7 +152,7 @@ end
 
 > <ValidatePostLength200Response> validate_post_length(validate_post_length_request)
 
-Validate post character count
+Validate character count
 
 Check weighted character count per platform and whether the text is within each platform's limit.  Twitter/X uses weighted counting (URLs = 23 chars via t.co, emojis = 2 chars). All other platforms use plain character length.  Returns counts and limits for all 15 supported platform variants. 
 
@@ -171,7 +171,7 @@ api_instance = Late::ValidateApi.new
 validate_post_length_request = Late::ValidatePostLengthRequest.new({text: 'Check out https://zernio.com for scheduling posts!'}) # ValidatePostLengthRequest | 
 
 begin
-  # Validate post character count
+  # Validate character count
   result = api_instance.validate_post_length(validate_post_length_request)
   p result
 rescue Late::ApiError => e
@@ -187,7 +187,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Validate post character count
+  # Validate character count
   data, status_code, headers = api_instance.validate_post_length_with_http_info(validate_post_length_request)
   p status_code # => 2xx
   p headers # => { ... }

@@ -591,7 +591,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get display name and review status
+    # Get display name status
     # Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
@@ -601,7 +601,7 @@ module Late
       data
     end
 
-    # Get display name and review status
+    # Get display name status
     # Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters

@@ -33,7 +33,7 @@ describe 'CommentAutomationsApi' do
   end
 
   # unit tests for create_comment_automation
-  # Create a comment-to-DM automation
+  # Create comment-to-DM automation
   # Create a keyword-triggered DM automation on an Instagram or Facebook post. When someone comments a matching keyword, they automatically receive a DM. Only one active automation per post is allowed. 
   # @param create_comment_automation_request 
   # @param [Hash] opts the optional parameters
@@ -45,7 +45,7 @@ describe 'CommentAutomationsApi' do
   end
 
   # unit tests for delete_comment_automation
-  # Delete automation and all logs
+  # Delete automation
   # @param automation_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -56,7 +56,7 @@ describe 'CommentAutomationsApi' do
   end
 
   # unit tests for get_comment_automation
-  # Get automation details with recent logs
+  # Get automation details
   # @param automation_id 
   # @param [Hash] opts the optional parameters
   # @return [GetCommentAutomation200Response]
@@ -67,7 +67,7 @@ describe 'CommentAutomationsApi' do
   end
 
   # unit tests for list_comment_automation_logs
-  # List trigger logs for an automation
+  # List automation logs
   # Paginated list of every comment that triggered this automation, with send status and commenter info.
   # @param automation_id 
   # @param [Hash] opts the optional parameters

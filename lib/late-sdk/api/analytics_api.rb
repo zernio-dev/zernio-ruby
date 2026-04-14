@@ -428,7 +428,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get Google Business Profile performance metrics
+    # Get GBP performance metrics
     # Returns daily performance metrics for a Google Business Profile location. Metrics include impressions (Maps/Search, desktop/mobile), website clicks, call clicks, direction requests, conversations, bookings, and food orders. Data may be delayed 2-3 days. Max 18 months of historical data. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Google Business Profile account.
     # @param [Hash] opts the optional parameters
@@ -441,7 +441,7 @@ module Late
       data
     end
 
-    # Get Google Business Profile performance metrics
+    # Get GBP performance metrics
     # Returns daily performance metrics for a Google Business Profile location. Metrics include impressions (Maps/Search, desktop/mobile), website clicks, call clicks, direction requests, conversations, bookings, and food orders. Data may be delayed 2-3 days. Max 18 months of historical data. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Google Business Profile account.
     # @param [Hash] opts the optional parameters
@@ -501,7 +501,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get Google Business Profile search keywords
+    # Get GBP search keywords
     # Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords below a minimum impression threshold set by Google are excluded. Max 18 months of historical data. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Google Business Profile account.
     # @param [Hash] opts the optional parameters
@@ -513,7 +513,7 @@ module Late
       data
     end
 
-    # Get Google Business Profile search keywords
+    # Get GBP search keywords
     # Returns search keywords that triggered impressions for a Google Business Profile location. Data is aggregated monthly. Keywords below a minimum impression threshold set by Google are excluded. Max 18 months of historical data. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Google Business Profile account.
     # @param [Hash] opts the optional parameters
@@ -581,7 +581,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get Instagram account-level insights
+    # Get Instagram insights
     # Returns account-level Instagram insights such as reach, views, accounts engaged, and total interactions. These metrics reflect the entire account's performance across all content surfaces (feed, stories, explore, profile), and are fundamentally different from post-level metrics. Data may be delayed up to 48 hours. Max 90 days, defaults to last 30 days. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Instagram account
     # @param [Hash] opts the optional parameters
@@ -596,7 +596,7 @@ module Late
       data
     end
 
-    # Get Instagram account-level insights
+    # Get Instagram insights
     # Returns account-level Instagram insights such as reach, views, accounts engaged, and total interactions. These metrics reflect the entire account&#39;s performance across all content surfaces (feed, stories, explore, profile), and are fundamentally different from post-level metrics. Data may be delayed up to 48 hours. Max 90 days, defaults to last 30 days. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Instagram account
     # @param [Hash] opts the optional parameters
@@ -664,7 +664,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get Instagram audience demographics
+    # Get Instagram demographics
     # Returns audience demographic insights for an Instagram account, broken down by age, city, country, and/or gender. Requires at least 100 followers. Returns top 45 entries per dimension. Data may be delayed up to 48 hours. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Instagram account
     # @param [Hash] opts the optional parameters
@@ -677,7 +677,7 @@ module Late
       data
     end
 
-    # Get Instagram audience demographics
+    # Get Instagram demographics
     # Returns audience demographic insights for an Instagram account, broken down by age, city, country, and/or gender. Requires at least 100 followers. Returns top 45 entries per dimension. Data may be delayed up to 48 hours. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Instagram account
     # @param [Hash] opts the optional parameters
@@ -1048,7 +1048,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get posting frequency vs engagement
+    # Get frequency vs engagement
     # Returns the correlation between posting frequency (posts per week) and engagement rate, broken down by platform. Helps find the optimal posting cadence for each platform. Each row represents a specific (platform, posts_per_week) combination with the average engagement rate observed across all weeks matching that frequency. Requires the Analytics add-on. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
@@ -1060,7 +1060,7 @@ module Late
       data
     end
 
-    # Get posting frequency vs engagement
+    # Get frequency vs engagement
     # Returns the correlation between posting frequency (posts per week) and engagement rate, broken down by platform. Helps find the optimal posting cadence for each platform. Each row represents a specific (platform, posts_per_week) combination with the average engagement rate observed across all weeks matching that frequency. Requires the Analytics add-on. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
@@ -1195,7 +1195,7 @@ module Late
       return data, status_code, headers
     end
 
-    # Get YouTube audience demographics
+    # Get YouTube demographics
     # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the YouTube account
     # @param [Hash] opts the optional parameters
@@ -1208,7 +1208,7 @@ module Late
       data
     end
 
-    # Get YouTube audience demographics
+    # Get YouTube demographics
     # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the YouTube account
     # @param [Hash] opts the optional parameters
