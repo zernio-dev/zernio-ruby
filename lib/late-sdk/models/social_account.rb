@@ -205,7 +205,7 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      platform_validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads"])
+      platform_validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads"])
       return false unless platform_validator.valid?(@platform)
       ads_status_validator = EnumAttributeValidator.new('String', ["connected", "not_connected", "not_available"])
       return false unless ads_status_validator.valid?(@ads_status)
@@ -215,7 +215,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads"])
+      validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end

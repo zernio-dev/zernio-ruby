@@ -238,7 +238,7 @@ module Late
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsApi.get_all_accounts_health ...'
       end
-      allowable_values = ["facebook", "instagram", "linkedin", "twitter", "tiktok", "youtube", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat"]
+      allowable_values = ["facebook", "instagram", "linkedin", "twitter", "tiktok", "youtube", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end

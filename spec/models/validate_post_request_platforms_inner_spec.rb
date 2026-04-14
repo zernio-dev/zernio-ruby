@@ -30,7 +30,7 @@ describe Late::ValidatePostRequestPlatformsInner do
   describe 'test attribute "platform"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["twitter", "instagram", "tiktok", "youtube", "facebook", "linkedin", "bluesky", "threads", "reddit", "pinterest", "telegram", "snapchat", "googlebusiness"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["twitter", "instagram", "tiktok", "youtube", "facebook", "linkedin", "bluesky", "threads", "reddit", "pinterest", "telegram", "snapchat", "googlebusiness", "discord"])
       # validator.allowable_values.each do |value|
       #   expect { instance.platform = value }.not_to raise_error
       # end
