@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **platform_ad_set_id** | **String** |  | [optional] |
 | **ad_set_name** | **String** |  | [optional] |
-| **status** | **String** | Derived from child ad statuses | [optional] |
+| **status** | [**AdStatus**](AdStatus.md) | Derived from child ad statuses | [optional] |
 | **ad_count** | **Integer** |  | [optional] |
 | **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
 | **metrics** | [**AdMetrics**](AdMetrics.md) |  | [optional] |

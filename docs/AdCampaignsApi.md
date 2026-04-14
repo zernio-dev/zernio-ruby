@@ -34,7 +34,7 @@ opts = {
   limit: 56, # Integer | Campaigns per page
   source: 'zernio', # String | 
   platform: 'facebook', # String | 
-  status: 'active', # String | Filter by derived campaign status (post-aggregation)
+  status: Late::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID
   account_id: 'account_id_example', # String | Social account ID
   profile_id: 'profile_id_example', # String | Profile ID
@@ -77,7 +77,7 @@ end
 | **limit** | **Integer** | Campaigns per page | [optional][default to 20] |
 | **source** | **String** |  | [optional][default to &#39;zernio&#39;] |
 | **platform** | **String** |  | [optional] |
-| **status** | **String** | Filter by derived campaign status (post-aggregation) | [optional] |
+| **status** | [**AdStatus**](.md) | Filter by derived campaign status (post-aggregation) | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID | [optional] |
 | **account_id** | **String** | Social account ID | [optional] |
 | **profile_id** | **String** | Profile ID | [optional] |
@@ -123,7 +123,7 @@ opts = {
   limit: 56, # Integer | 
   source: 'zernio', # String | 
   platform: 'facebook', # String | 
-  status: 'active', # String | Filter by derived campaign status (post-aggregation)
+  status: Late::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (e.g. act_123 for Meta)
   account_id: 'account_id_example', # String | Social account ID
   profile_id: 'profile_id_example' # String | Profile ID
@@ -164,7 +164,7 @@ end
 | **limit** | **Integer** |  | [optional][default to 20] |
 | **source** | **String** |  | [optional][default to &#39;zernio&#39;] |
 | **platform** | **String** |  | [optional] |
-| **status** | **String** | Filter by derived campaign status (post-aggregation) | [optional] |
+| **status** | [**AdStatus**](.md) | Filter by derived campaign status (post-aggregation) | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (e.g. act_123 for Meta) | [optional] |
 | **account_id** | **String** | Social account ID | [optional] |
 | **profile_id** | **String** | Profile ID | [optional] |

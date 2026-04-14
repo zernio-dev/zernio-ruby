@@ -114,7 +114,7 @@ describe 'AdsApi' do
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit 
   # @option opts [String] :source zernio &#x3D; Zernio-created only, all &#x3D; include external ads
-  # @option opts [String] :status 
+  # @option opts [AdStatus] :status 
   # @option opts [String] :platform 
   # @option opts [String] :account_id Social account ID
   # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.

@@ -40,7 +40,7 @@ describe 'AdCampaignsApi' do
   # @option opts [Integer] :limit Campaigns per page
   # @option opts [String] :source 
   # @option opts [String] :platform 
-  # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+  # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
   # @option opts [String] :ad_account_id Platform ad account ID
   # @option opts [String] :account_id Social account ID
   # @option opts [String] :profile_id Profile ID
@@ -61,7 +61,7 @@ describe 'AdCampaignsApi' do
   # @option opts [Integer] :limit 
   # @option opts [String] :source 
   # @option opts [String] :platform 
-  # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+  # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
   # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
   # @option opts [String] :account_id Social account ID
   # @option opts [String] :profile_id Profile ID

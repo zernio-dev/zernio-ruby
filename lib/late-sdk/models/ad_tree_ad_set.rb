@@ -93,7 +93,7 @@ module Late
       {
         :'platform_ad_set_id' => :'String',
         :'ad_set_name' => :'String',
-        :'status' => :'String',
+        :'status' => :'AdStatus',
         :'ad_count' => :'Integer',
         :'budget' => :'AdBudget',
         :'metrics' => :'AdMetrics',
@@ -181,19 +181,7 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"])
-      return false unless status_validator.valid?(@status)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.

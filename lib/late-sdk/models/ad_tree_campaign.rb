@@ -43,6 +43,7 @@ module Late
     # Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC)
     attr_accessor :platform_objective
 
+    # Meta optimization goal shared across ad sets, or comma-separated values when ad sets differ (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
     attr_accessor :optimization_goal
 
     # Campaign-level bid strategy (e.g. LOWEST_COST_WITHOUT_CAP, COST_CAP, LOWEST_COST_WITH_MIN_ROAS)
@@ -112,7 +113,7 @@ module Late
         :'platform_campaign_id' => :'String',
         :'platform' => :'String',
         :'campaign_name' => :'String',
-        :'status' => :'String',
+        :'status' => :'AdStatus',
         :'ad_count' => :'Integer',
         :'ad_set_count' => :'Integer',
         :'budget' => :'AdBudget',
@@ -121,7 +122,7 @@ module Late
         :'account_id' => :'String',
         :'profile_id' => :'String',
         :'platform_objective' => :'String',
-        :'optimization_goal' => :'AdTreeCampaignOptimizationGoal',
+        :'optimization_goal' => :'String',
         :'bid_strategy' => :'String',
         :'promoted_object' => :'AdTreeCampaignPromotedObject',
         :'ad_sets' => :'Array<AdTreeAdSet>'
@@ -231,8 +232,6 @@ module Late
       warn '[DEPRECATED] the `valid?` method is obsolete'
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter"])
       return false unless platform_validator.valid?(@platform)
-      status_validator = EnumAttributeValidator.new('String', ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"])
-      return false unless status_validator.valid?(@status)
       true
     end
 
@@ -244,16 +243,6 @@ module Late
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.

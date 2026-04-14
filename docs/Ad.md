@@ -7,7 +7,7 @@
 | **_id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
-| **status** | **String** |  | [optional] |
+| **status** | [**AdStatus**](AdStatus.md) |  | [optional] |
 | **ad_type** | **String** |  | [optional] |
 | **goal** | **String** |  | [optional] |
 | **is_external** | **Boolean** | True for ads synced from platform ad managers | [optional] |

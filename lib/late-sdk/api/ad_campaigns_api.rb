@@ -26,7 +26,7 @@ module Late
     # @option opts [Integer] :limit Campaigns per page (default to 20)
     # @option opts [String] :source  (default to 'zernio')
     # @option opts [String] :platform 
-    # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+    # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
     # @option opts [String] :ad_account_id Platform ad account ID
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
@@ -45,7 +45,7 @@ module Late
     # @option opts [Integer] :limit Campaigns per page (default to 20)
     # @option opts [String] :source  (default to 'zernio')
     # @option opts [String] :platform 
-    # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+    # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
     # @option opts [String] :ad_account_id Platform ad account ID
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
@@ -75,10 +75,6 @@ module Late
       allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"]
-      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
-        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
       # resource path
       local_var_path = '/v1/ads/tree'
@@ -137,7 +133,7 @@ module Late
     # @option opts [Integer] :limit  (default to 20)
     # @option opts [String] :source  (default to 'zernio')
     # @option opts [String] :platform 
-    # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+    # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
     # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
@@ -154,7 +150,7 @@ module Late
     # @option opts [Integer] :limit  (default to 20)
     # @option opts [String] :source  (default to 'zernio')
     # @option opts [String] :platform 
-    # @option opts [String] :status Filter by derived campaign status (post-aggregation)
+    # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
     # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
@@ -182,10 +178,6 @@ module Late
       allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"]
-      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
-        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
       # resource path
       local_var_path = '/v1/ads/campaigns'

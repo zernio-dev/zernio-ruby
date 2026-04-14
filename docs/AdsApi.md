@@ -461,7 +461,7 @@ opts = {
   page: 56, # Integer | Page number (1-based)
   limit: 56, # Integer | 
   source: 'zernio', # String | zernio = Zernio-created only, all = include external ads
-  status: 'active', # String | 
+  status: Late::AdStatus::ACTIVE, # AdStatus | 
   platform: 'facebook', # String | 
   account_id: 'account_id_example', # String | Social account ID
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
@@ -505,7 +505,7 @@ end
 | **page** | **Integer** | Page number (1-based) | [optional][default to 1] |
 | **limit** | **Integer** |  | [optional][default to 50] |
 | **source** | **String** | zernio &#x3D; Zernio-created only, all &#x3D; include external ads | [optional][default to &#39;zernio&#39;] |
-| **status** | **String** |  | [optional] |
+| **status** | [**AdStatus**](.md) |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **account_id** | **String** | Social account ID | [optional] |
 | **ad_account_id** | **String** | Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. | [optional] |

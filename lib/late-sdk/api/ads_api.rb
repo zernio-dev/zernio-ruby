@@ -423,7 +423,7 @@ module Late
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 50)
     # @option opts [String] :source zernio &#x3D; Zernio-created only, all &#x3D; include external ads (default to 'zernio')
-    # @option opts [String] :status 
+    # @option opts [AdStatus] :status 
     # @option opts [String] :platform 
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
@@ -443,7 +443,7 @@ module Late
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 50)
     # @option opts [String] :source zernio &#x3D; Zernio-created only, all &#x3D; include external ads (default to 'zernio')
-    # @option opts [String] :status 
+    # @option opts [AdStatus] :status 
     # @option opts [String] :platform 
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
@@ -471,10 +471,6 @@ module Late
       allowable_values = ["zernio", "all"]
       if @api_client.config.client_side_validation && opts[:'source'] && !allowable_values.include?(opts[:'source'])
         fail ArgumentError, "invalid value for \"source\", must be one of #{allowable_values}"
-      end
-      allowable_values = ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"]
-      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
-        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
       allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])

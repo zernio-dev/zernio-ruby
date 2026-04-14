@@ -138,7 +138,7 @@ module Late
         :'_id' => :'String',
         :'name' => :'String',
         :'platform' => :'String',
-        :'status' => :'String',
+        :'status' => :'AdStatus',
         :'ad_type' => :'String',
         :'goal' => :'String',
         :'is_external' => :'Boolean',
@@ -300,8 +300,6 @@ module Late
       warn '[DEPRECATED] the `valid?` method is obsolete'
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter"])
       return false unless platform_validator.valid?(@platform)
-      status_validator = EnumAttributeValidator.new('String', ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"])
-      return false unless status_validator.valid?(@status)
       ad_type_validator = EnumAttributeValidator.new('String', ["boost", "standalone"])
       return false unless ad_type_validator.valid?(@ad_type)
       goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views"])
@@ -317,16 +315,6 @@ module Late
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "paused", "pending_review", "rejected", "completed", "cancelled", "error"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
