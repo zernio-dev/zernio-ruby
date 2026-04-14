@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # The `message` object included in inbox webhook payloads.
+  # The message object included in inbox webhook payloads.
   class InboxWebhookMessage < ApiModelBase
     # Internal message ID
     attr_accessor :id

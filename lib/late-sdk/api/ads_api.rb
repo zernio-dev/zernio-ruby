@@ -219,6 +219,7 @@ module Late
     end
 
     # Get ad details
+    # Returns an ad with its creative, targeting, status, and performance metrics.
     # @param ad_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetAd200Response]
@@ -228,6 +229,7 @@ module Late
     end
 
     # Get ad details
+    # Returns an ad with its creative, targeting, status, and performance metrics.
     # @param ad_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetAd200Response, Integer, Hash)>] GetAd200Response data, response status code and response headers
@@ -416,7 +418,7 @@ module Late
     end
 
     # List ads
-    # Returns a paginated list of ads with metrics computed over an optional date range. Use `source=all` to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
+    # Returns a paginated list of ads with metrics computed over an optional date range. Use source=all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 50)
@@ -436,7 +438,7 @@ module Late
     end
 
     # List ads
-    # Returns a paginated list of ads with metrics computed over an optional date range. Use &#x60;source&#x3D;all&#x60; to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
+    # Returns a paginated list of ads with metrics computed over an optional date range. Use source&#x3D;all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 50)

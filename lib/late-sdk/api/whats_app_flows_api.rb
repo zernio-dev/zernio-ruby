@@ -158,7 +158,7 @@ module Late
     end
 
     # Deprecate flow
-    # Deprecate a PUBLISHED flow. **This is irreversible.** Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
+    # Deprecate a PUBLISHED flow. This is irreversible. Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
     # @param flow_id [String] Flow ID
     # @param publish_whats_app_flow_request [PublishWhatsAppFlowRequest] 
     # @param [Hash] opts the optional parameters
@@ -169,7 +169,7 @@ module Late
     end
 
     # Deprecate flow
-    # Deprecate a PUBLISHED flow. **This is irreversible.** Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
+    # Deprecate a PUBLISHED flow. This is irreversible. Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
     # @param flow_id [String] Flow ID
     # @param publish_whats_app_flow_request [PublishWhatsAppFlowRequest] 
     # @param [Hash] opts the optional parameters
@@ -439,7 +439,7 @@ module Late
     end
 
     # Publish flow
-    # Publish a DRAFT flow. **This is irreversible.** Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via `cloneFlowId`). 
+    # Publish a DRAFT flow. This is irreversible. Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via cloneFlowId). 
     # @param flow_id [String] Flow ID
     # @param publish_whats_app_flow_request [PublishWhatsAppFlowRequest] 
     # @param [Hash] opts the optional parameters
@@ -450,7 +450,7 @@ module Late
     end
 
     # Publish flow
-    # Publish a DRAFT flow. **This is irreversible.** Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via &#x60;cloneFlowId&#x60;). 
+    # Publish a DRAFT flow. This is irreversible. Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via cloneFlowId). 
     # @param flow_id [String] Flow ID
     # @param publish_whats_app_flow_request [PublishWhatsAppFlowRequest] 
     # @param [Hash] opts the optional parameters

@@ -156,6 +156,7 @@ module Late
     end
 
     # Delete contact
+    # Permanently deletes a contact and all associated channels.
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -165,6 +166,7 @@ module Late
     end
 
     # Delete contact
+    # Permanently deletes a contact and all associated channels.
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -217,6 +219,7 @@ module Late
     end
 
     # Get contact
+    # Returns a contact with all associated messaging channels.
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetContact200Response]
@@ -226,6 +229,7 @@ module Late
     end
 
     # Get contact
+    # Returns a contact with all associated messaging channels.
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetContact200Response, Integer, Hash)>] GetContact200Response data, response status code and response headers
@@ -278,6 +282,7 @@ module Late
     end
 
     # List channels for a contact
+    # Returns all messaging channels linked to a contact (e.g. Instagram DM, Telegram, WhatsApp).
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetContactChannels200Response]
@@ -287,6 +292,7 @@ module Late
     end
 
     # List channels for a contact
+    # Returns all messaging channels linked to a contact (e.g. Instagram DM, Telegram, WhatsApp).
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetContactChannels200Response, Integer, Hash)>] GetContactChannels200Response data, response status code and response headers
@@ -429,6 +435,7 @@ module Late
     end
 
     # Update contact
+    # Update one or more fields on a contact. Only provided fields are changed.
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateContactRequest] :update_contact_request 
@@ -439,6 +446,7 @@ module Late
     end
 
     # Update contact
+    # Update one or more fields on a contact. Only provided fields are changed.
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateContactRequest] :update_contact_request 

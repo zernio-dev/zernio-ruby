@@ -22,6 +22,8 @@ All URIs are relative to *https://zernio.com/api*
 
 Add recipients to a broadcast
 
+Add recipients by contact IDs, raw phone numbers, or from the broadcast's segment filters.
+
 ### Examples
 
 ```ruby
@@ -91,6 +93,8 @@ end
 
 Cancel broadcast
 
+Cancel a scheduled or in-progress broadcast. Already-sent messages are not affected.
+
 ### Examples
 
 ```ruby
@@ -157,6 +161,8 @@ end
 > <CreateBroadcast200Response> create_broadcast(create_broadcast_request)
 
 Create broadcast draft
+
+Create a broadcast in draft status. Add recipients and then send or schedule it.
 
 ### Examples
 
@@ -225,6 +231,8 @@ end
 
 Delete broadcast
 
+Permanently delete a broadcast. Only drafts can be deleted.
+
 ### Examples
 
 ```ruby
@@ -290,6 +298,8 @@ nil (empty response body)
 > <GetBroadcast200Response> get_broadcast(broadcast_id)
 
 Get broadcast details
+
+Returns a broadcast with its full configuration and delivery stats.
 
 ### Examples
 
@@ -357,6 +367,8 @@ end
 > <ListBroadcastRecipients200Response> list_broadcast_recipients(broadcast_id, opts)
 
 List broadcast recipients
+
+Returns recipients for a broadcast with individual delivery status. Filter by status.
 
 ### Examples
 
@@ -432,6 +444,8 @@ end
 > <ListBroadcasts200Response> list_broadcasts(opts)
 
 List broadcasts
+
+Returns broadcasts with delivery stats. Filter by status, platform, or profile.
 
 ### Examples
 
@@ -510,6 +524,8 @@ end
 
 Schedule broadcast for later
 
+Schedule a draft broadcast to be sent at a future date and time.
+
 ### Examples
 
 ```ruby
@@ -579,6 +595,8 @@ end
 
 Send broadcast now
 
+Immediately start sending a draft broadcast to its recipients.
+
 ### Examples
 
 ```ruby
@@ -645,6 +663,8 @@ end
 > <UpdateBroadcast200Response> update_broadcast(broadcast_id)
 
 Update broadcast
+
+Update a broadcast's name, message, template, or segment filters. Only draft broadcasts can be updated.
 
 ### Examples
 

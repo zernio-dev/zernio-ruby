@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # Populated only on `message.failed`.
+  # Populated only on message.failed.
   class WebhookPayloadMessageDeliveryStatusError < ApiModelBase
     attr_accessor :code
 

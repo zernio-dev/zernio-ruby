@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # The `conversation` context included in inbox webhook payloads.
+  # The conversation context included in inbox webhook payloads.
   class InboxWebhookConversation < ApiModelBase
     attr_accessor :id
 

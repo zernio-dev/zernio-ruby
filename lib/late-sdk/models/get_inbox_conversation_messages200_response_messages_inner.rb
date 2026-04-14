@@ -59,7 +59,7 @@ module Late
     # Every prior version of the message, oldest first.
     attr_accessor :edit_history
 
-    # True if the sender has deleted (unsent) this message. The original `message` and `attachments` fields remain populated.
+    # True if the sender has deleted (unsent) this message. The original message and attachments fields remain populated.
     attr_accessor :is_deleted
 
     attr_accessor :deleted_at

@@ -218,7 +218,7 @@ module Late
     end
 
     # Message deleted event
-    # Fired when a sender deletes (unsends) a message. Supported on Instagram (incoming unsend) and WhatsApp (when the business deletes an outgoing message via the Cloud API). The payload retains the pre-delete `text` and `attachments` so API consumers can access the original content for moderation or compliance — the Zernio dashboard UI hides it. 
+    # Fired when a sender deletes (unsends) a message. Supported on Instagram (incoming unsend) and WhatsApp (when the business deletes an outgoing message via the Cloud API). The payload retains the pre-delete text and attachments so API consumers can access the original content for moderation or compliance — the Zernio dashboard UI hides it. 
     # @param webhook_payload_message_deleted [WebhookPayloadMessageDeleted] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -228,7 +228,7 @@ module Late
     end
 
     # Message deleted event
-    # Fired when a sender deletes (unsends) a message. Supported on Instagram (incoming unsend) and WhatsApp (when the business deletes an outgoing message via the Cloud API). The payload retains the pre-delete &#x60;text&#x60; and &#x60;attachments&#x60; so API consumers can access the original content for moderation or compliance — the Zernio dashboard UI hides it. 
+    # Fired when a sender deletes (unsends) a message. Supported on Instagram (incoming unsend) and WhatsApp (when the business deletes an outgoing message via the Cloud API). The payload retains the pre-delete text and attachments so API consumers can access the original content for moderation or compliance — the Zernio dashboard UI hides it. 
     # @param webhook_payload_message_deleted [WebhookPayloadMessageDeleted] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -350,7 +350,7 @@ module Late
     end
 
     # Message edited event
-    # Fired when a sender edits a previously-sent message. Supported on Instagram, Facebook Messenger, and Telegram. The payload includes the full `editHistory` so consumers can show prior versions. 
+    # Fired when a sender edits a previously-sent message. Supported on Instagram, Facebook Messenger, and Telegram. The payload includes the full editHistory so consumers can show prior versions. 
     # @param webhook_payload_message_edited [WebhookPayloadMessageEdited] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -360,7 +360,7 @@ module Late
     end
 
     # Message edited event
-    # Fired when a sender edits a previously-sent message. Supported on Instagram, Facebook Messenger, and Telegram. The payload includes the full &#x60;editHistory&#x60; so consumers can show prior versions. 
+    # Fired when a sender edits a previously-sent message. Supported on Instagram, Facebook Messenger, and Telegram. The payload includes the full editHistory so consumers can show prior versions. 
     # @param webhook_payload_message_edited [WebhookPayloadMessageEdited] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -416,7 +416,7 @@ module Late
     end
 
     # Message delivery failed event
-    # Fired when an outgoing message fails to deliver. Currently only emitted for WhatsApp (other platforms don't expose per-message failure via webhook). The payload `error` object contains `code`, `title`, and `message` from the platform. 
+    # Fired when an outgoing message fails to deliver. Currently only emitted for WhatsApp (other platforms don't expose per-message failure via webhook). The payload error object contains code, title, and message from the platform. 
     # @param webhook_payload_message_delivery_status [WebhookPayloadMessageDeliveryStatus] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -426,7 +426,7 @@ module Late
     end
 
     # Message delivery failed event
-    # Fired when an outgoing message fails to deliver. Currently only emitted for WhatsApp (other platforms don&#39;t expose per-message failure via webhook). The payload &#x60;error&#x60; object contains &#x60;code&#x60;, &#x60;title&#x60;, and &#x60;message&#x60; from the platform. 
+    # Fired when an outgoing message fails to deliver. Currently only emitted for WhatsApp (other platforms don&#39;t expose per-message failure via webhook). The payload error object contains code, title, and message from the platform. 
     # @param webhook_payload_message_delivery_status [WebhookPayloadMessageDeliveryStatus] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

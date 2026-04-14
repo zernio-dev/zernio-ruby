@@ -34,6 +34,7 @@ describe 'CustomFieldsApi' do
 
   # unit tests for clear_contact_field_value
   # Clear custom field value
+  # Remove a custom field value from a contact. The field definition is not affected.
   # @param contact_id 
   # @param slug 
   # @param [Hash] opts the optional parameters
@@ -46,6 +47,7 @@ describe 'CustomFieldsApi' do
 
   # unit tests for create_custom_field
   # Create custom field
+  # Create a new custom field definition. Supported types are text, number, date, boolean, and select.
   # @param create_custom_field_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateCustomField200Response]
@@ -57,6 +59,7 @@ describe 'CustomFieldsApi' do
 
   # unit tests for delete_custom_field
   # Delete custom field
+  # Delete a custom field definition and remove its values from all contacts.
   # @param field_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -68,6 +71,7 @@ describe 'CustomFieldsApi' do
 
   # unit tests for list_custom_fields
   # List custom field definitions
+  # Returns all custom field definitions. Optionally filter by profile.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
   # @return [ListCustomFields200Response]
@@ -79,6 +83,7 @@ describe 'CustomFieldsApi' do
 
   # unit tests for set_contact_field_value
   # Set custom field value
+  # Set or overwrite a custom field value on a contact. The value type must match the field definition.
   # @param contact_id 
   # @param slug 
   # @param set_contact_field_value_request 
@@ -92,6 +97,7 @@ describe 'CustomFieldsApi' do
 
   # unit tests for update_custom_field
   # Update custom field
+  # Update a custom field definition. The field type cannot be changed after creation.
   # @param field_id 
   # @param [Hash] opts the optional parameters
   # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 

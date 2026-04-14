@@ -30,7 +30,7 @@ module Late
     # Template components (header, body, footer, buttons). Required for custom templates, omit when using library_template_name.
     attr_accessor :components
 
-    # Name of a pre-built template from Meta's template library (e.g., \"appointment_reminder\", \"auto_pay_reminder_1\", \"address_update\"). When provided, the template is pre-approved by Meta with no review wait. Omit `components` when using this field. 
+    # Name of a pre-built template from Meta's template library (e.g., \"appointment_reminder\", \"auto_pay_reminder_1\", \"address_update\"). When provided, the template is pre-approved by Meta with no review wait. Omit components when using this field. 
     attr_accessor :library_template_name
 
     # Optional body customizations for library templates. Available options depend on the template (e.g., add_contact_number, add_learn_more_link, add_security_recommendation, add_track_package_link, code_expiration_minutes). 

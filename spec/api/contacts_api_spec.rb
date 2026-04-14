@@ -58,6 +58,7 @@ describe 'ContactsApi' do
 
   # unit tests for delete_contact
   # Delete contact
+  # Permanently deletes a contact and all associated channels.
   # @param contact_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -69,6 +70,7 @@ describe 'ContactsApi' do
 
   # unit tests for get_contact
   # Get contact
+  # Returns a contact with all associated messaging channels.
   # @param contact_id 
   # @param [Hash] opts the optional parameters
   # @return [GetContact200Response]
@@ -80,6 +82,7 @@ describe 'ContactsApi' do
 
   # unit tests for get_contact_channels
   # List channels for a contact
+  # Returns all messaging channels linked to a contact (e.g. Instagram DM, Telegram, WhatsApp).
   # @param contact_id 
   # @param [Hash] opts the optional parameters
   # @return [GetContactChannels200Response]
@@ -109,6 +112,7 @@ describe 'ContactsApi' do
 
   # unit tests for update_contact
   # Update contact
+  # Update one or more fields on a contact. Only provided fields are changed.
   # @param contact_id 
   # @param [Hash] opts the optional parameters
   # @option opts [UpdateContactRequest] :update_contact_request 

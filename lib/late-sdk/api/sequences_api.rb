@@ -20,6 +20,7 @@ module Late
       @api_client = api_client
     end
     # Activate sequence
+    # Start a draft or paused sequence. The sequence must have at least one step.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [ActivateSequence200Response]
@@ -29,6 +30,7 @@ module Late
     end
 
     # Activate sequence
+    # Start a draft or paused sequence. The sequence must have at least one step.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ActivateSequence200Response, Integer, Hash)>] ActivateSequence200Response data, response status code and response headers
@@ -81,6 +83,7 @@ module Late
     end
 
     # Create sequence
+    # Create a multi-step messaging sequence. Each step has a delay and a message or WhatsApp template.
     # @param create_sequence_request [CreateSequenceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateSequence200Response]
@@ -90,6 +93,7 @@ module Late
     end
 
     # Create sequence
+    # Create a multi-step messaging sequence. Each step has a delay and a message or WhatsApp template.
     # @param create_sequence_request [CreateSequenceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateSequence200Response, Integer, Hash)>] CreateSequence200Response data, response status code and response headers
@@ -147,6 +151,7 @@ module Late
     end
 
     # Delete sequence
+    # Permanently delete a sequence. Active enrollments are stopped.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -156,6 +161,7 @@ module Late
     end
 
     # Delete sequence
+    # Permanently delete a sequence. Active enrollments are stopped.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -208,6 +214,7 @@ module Late
     end
 
     # Enroll contacts in a sequence
+    # Enroll one or more contacts into a sequence. Contacts already enrolled are skipped.
     # @param sequence_id [String] 
     # @param enroll_contacts_request [EnrollContactsRequest] 
     # @param [Hash] opts the optional parameters
@@ -218,6 +225,7 @@ module Late
     end
 
     # Enroll contacts in a sequence
+    # Enroll one or more contacts into a sequence. Contacts already enrolled are skipped.
     # @param sequence_id [String] 
     # @param enroll_contacts_request [EnrollContactsRequest] 
     # @param [Hash] opts the optional parameters
@@ -280,6 +288,7 @@ module Late
     end
 
     # Get sequence with steps
+    # Returns a sequence with all its steps and enrollment stats.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetSequence200Response]
@@ -289,6 +298,7 @@ module Late
     end
 
     # Get sequence with steps
+    # Returns a sequence with all its steps and enrollment stats.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetSequence200Response, Integer, Hash)>] GetSequence200Response data, response status code and response headers
@@ -341,6 +351,7 @@ module Late
     end
 
     # List enrollments for a sequence
+    # Returns enrolled contacts with their progress, status, and next scheduled step.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status 
@@ -353,6 +364,7 @@ module Late
     end
 
     # List enrollments for a sequence
+    # Returns enrolled contacts with their progress, status, and next scheduled step.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status 
@@ -415,6 +427,7 @@ module Late
     end
 
     # List sequences
+    # Returns sequences with enrollment stats. Filter by status, platform, or profile.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
     # @option opts [String] :status 
@@ -427,6 +440,7 @@ module Late
     end
 
     # List sequences
+    # Returns sequences with enrollment stats. Filter by status, platform, or profile.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
     # @option opts [String] :status 
@@ -486,6 +500,7 @@ module Late
     end
 
     # Pause sequence
+    # Pause an active sequence. Enrolled contacts stop receiving messages until the sequence is reactivated.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [ActivateSequence200Response]
@@ -495,6 +510,7 @@ module Late
     end
 
     # Pause sequence
+    # Pause an active sequence. Enrolled contacts stop receiving messages until the sequence is reactivated.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ActivateSequence200Response, Integer, Hash)>] ActivateSequence200Response data, response status code and response headers
@@ -547,6 +563,7 @@ module Late
     end
 
     # Unenroll contact
+    # Remove a contact from a sequence. No further messages will be sent to this contact.
     # @param sequence_id [String] 
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
@@ -557,6 +574,7 @@ module Late
     end
 
     # Unenroll contact
+    # Remove a contact from a sequence. No further messages will be sent to this contact.
     # @param sequence_id [String] 
     # @param contact_id [String] 
     # @param [Hash] opts the optional parameters
@@ -614,6 +632,7 @@ module Late
     end
 
     # Update sequence
+    # Update a sequence's name, steps, or exit conditions. Active sequences can be updated without pausing.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateSequence200Response]
@@ -623,6 +642,7 @@ module Late
     end
 
     # Update sequence
+    # Update a sequence&#39;s name, steps, or exit conditions. Active sequences can be updated without pausing.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateSequence200Response, Integer, Hash)>] UpdateSequence200Response data, response status code and response headers

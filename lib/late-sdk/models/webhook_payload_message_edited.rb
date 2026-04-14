@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # Webhook payload for `message.edited` events. Fires when the sender edits a previously-sent message. Supported platforms: Instagram, Facebook Messenger, Telegram. The `message` object reflects the LATEST state; `editHistory` contains every prior version in order (oldest first), so the last entry is the version immediately before the current content. 
+  # Webhook payload for message.edited events. Fires when the sender edits a previously-sent message. Supported platforms: Instagram, Facebook Messenger, Telegram. The message object reflects the LATEST state; editHistory contains every prior version in order (oldest first), so the last entry is the version immediately before the current content. 
   class WebhookPayloadMessageEdited < ApiModelBase
     attr_accessor :id
 

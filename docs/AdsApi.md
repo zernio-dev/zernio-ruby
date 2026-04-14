@@ -228,6 +228,8 @@ end
 
 Get ad details
 
+Returns an ad with its creative, targeting, status, and performance metrics.
+
 ### Examples
 
 ```ruby
@@ -441,7 +443,7 @@ end
 
 List ads
 
-Returns a paginated list of ads with metrics computed over an optional date range. Use `source=all` to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
+Returns a paginated list of ads with metrics computed over an optional date range. Use source=all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
 
 ### Examples
 

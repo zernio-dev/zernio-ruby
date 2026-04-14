@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # Shared payload for `message.delivered`, `message.read`, and `message.failed` events. Fires when the platform reports a new delivery state for an outgoing message.  Platform support:   * `message.delivered` — WhatsApp, Facebook Messenger.   * `message.read`      — WhatsApp, Facebook Messenger, Instagram.   * `message.failed`    — WhatsApp only (other platforms don't expose     per-message failure via webhook). 
+  # Shared payload for message.delivered, message.read, and message.failed events. Fires when the platform reports a new delivery state for an outgoing message.  Platform support:   * message.delivered — WhatsApp, Facebook Messenger.   * message.read      — WhatsApp, Facebook Messenger, Instagram.   * message.failed    — WhatsApp only (other platforms don't expose     per-message failure via webhook). 
   class WebhookPayloadMessageDeliveryStatus < ApiModelBase
     attr_accessor :id
 

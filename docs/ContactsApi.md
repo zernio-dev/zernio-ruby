@@ -157,6 +157,8 @@ end
 
 Delete contact
 
+Permanently deletes a contact and all associated channels.
+
 ### Examples
 
 ```ruby
@@ -222,6 +224,8 @@ nil (empty response body)
 > <GetContact200Response> get_contact(contact_id)
 
 Get contact
+
+Returns a contact with all associated messaging channels.
 
 ### Examples
 
@@ -289,6 +293,8 @@ end
 > <GetContactChannels200Response> get_contact_channels(contact_id)
 
 List channels for a contact
+
+Returns all messaging channels linked to a contact (e.g. Instagram DM, Telegram, WhatsApp).
 
 ### Examples
 
@@ -439,6 +445,8 @@ end
 > <UpdateContact200Response> update_contact(contact_id, opts)
 
 Update contact
+
+Update one or more fields on a contact. Only provided fields are changed.
 
 ### Examples
 

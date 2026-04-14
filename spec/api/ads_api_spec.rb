@@ -70,6 +70,7 @@ describe 'AdsApi' do
 
   # unit tests for get_ad
   # Get ad details
+  # Returns an ad with its creative, targeting, status, and performance metrics.
   # @param ad_id 
   # @param [Hash] opts the optional parameters
   # @return [GetAd200Response]
@@ -108,7 +109,7 @@ describe 'AdsApi' do
 
   # unit tests for list_ads
   # List ads
-  # Returns a paginated list of ads with metrics computed over an optional date range. Use &#x60;source&#x3D;all&#x60; to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
+  # Returns a paginated list of ads with metrics computed over an optional date range. Use source&#x3D;all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit 

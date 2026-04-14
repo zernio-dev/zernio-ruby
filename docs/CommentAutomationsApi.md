@@ -87,6 +87,8 @@ end
 
 Delete automation
 
+Permanently delete an automation and all its trigger logs.
+
 ### Examples
 
 ```ruby
@@ -152,6 +154,8 @@ nil (empty response body)
 > <GetCommentAutomation200Response> get_comment_automation(automation_id)
 
 Get automation details
+
+Returns an automation with its configuration, stats, and recent trigger logs.
 
 ### Examples
 
@@ -367,6 +371,8 @@ end
 > <UpdateCommentAutomation200Response> update_comment_automation(automation_id, opts)
 
 Update automation settings
+
+Update an automation's keywords, DM message, comment reply, or active status.
 
 ### Examples
 

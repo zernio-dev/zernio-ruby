@@ -88,6 +88,7 @@ module Late
     end
 
     # Delete automation
+    # Permanently delete an automation and all its trigger logs.
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -97,6 +98,7 @@ module Late
     end
 
     # Delete automation
+    # Permanently delete an automation and all its trigger logs.
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -149,6 +151,7 @@ module Late
     end
 
     # Get automation details
+    # Returns an automation with its configuration, stats, and recent trigger logs.
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetCommentAutomation200Response]
@@ -158,6 +161,7 @@ module Late
     end
 
     # Get automation details
+    # Returns an automation with its configuration, stats, and recent trigger logs.
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetCommentAutomation200Response, Integer, Hash)>] GetCommentAutomation200Response data, response status code and response headers
@@ -346,6 +350,7 @@ module Late
     end
 
     # Update automation settings
+    # Update an automation's keywords, DM message, comment reply, or active status.
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateCommentAutomationRequest] :update_comment_automation_request 
@@ -356,6 +361,7 @@ module Late
     end
 
     # Update automation settings
+    # Update an automation&#39;s keywords, DM message, comment reply, or active status.
     # @param automation_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateCommentAutomationRequest] :update_comment_automation_request 

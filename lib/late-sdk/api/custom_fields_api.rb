@@ -20,6 +20,7 @@ module Late
       @api_client = api_client
     end
     # Clear custom field value
+    # Remove a custom field value from a contact. The field definition is not affected.
     # @param contact_id [String] 
     # @param slug [String] 
     # @param [Hash] opts the optional parameters
@@ -30,6 +31,7 @@ module Late
     end
 
     # Clear custom field value
+    # Remove a custom field value from a contact. The field definition is not affected.
     # @param contact_id [String] 
     # @param slug [String] 
     # @param [Hash] opts the optional parameters
@@ -87,6 +89,7 @@ module Late
     end
 
     # Create custom field
+    # Create a new custom field definition. Supported types are text, number, date, boolean, and select.
     # @param create_custom_field_request [CreateCustomFieldRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateCustomField200Response]
@@ -96,6 +99,7 @@ module Late
     end
 
     # Create custom field
+    # Create a new custom field definition. Supported types are text, number, date, boolean, and select.
     # @param create_custom_field_request [CreateCustomFieldRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateCustomField200Response, Integer, Hash)>] CreateCustomField200Response data, response status code and response headers
@@ -153,6 +157,7 @@ module Late
     end
 
     # Delete custom field
+    # Delete a custom field definition and remove its values from all contacts.
     # @param field_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -162,6 +167,7 @@ module Late
     end
 
     # Delete custom field
+    # Delete a custom field definition and remove its values from all contacts.
     # @param field_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -214,6 +220,7 @@ module Late
     end
 
     # List custom field definitions
+    # Returns all custom field definitions. Optionally filter by profile.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
     # @return [ListCustomFields200Response]
@@ -223,6 +230,7 @@ module Late
     end
 
     # List custom field definitions
+    # Returns all custom field definitions. Optionally filter by profile.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
     # @return [Array<(ListCustomFields200Response, Integer, Hash)>] ListCustomFields200Response data, response status code and response headers
@@ -272,6 +280,7 @@ module Late
     end
 
     # Set custom field value
+    # Set or overwrite a custom field value on a contact. The value type must match the field definition.
     # @param contact_id [String] 
     # @param slug [String] 
     # @param set_contact_field_value_request [SetContactFieldValueRequest] 
@@ -283,6 +292,7 @@ module Late
     end
 
     # Set custom field value
+    # Set or overwrite a custom field value on a contact. The value type must match the field definition.
     # @param contact_id [String] 
     # @param slug [String] 
     # @param set_contact_field_value_request [SetContactFieldValueRequest] 
@@ -350,6 +360,7 @@ module Late
     end
 
     # Update custom field
+    # Update a custom field definition. The field type cannot be changed after creation.
     # @param field_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 
@@ -360,6 +371,7 @@ module Late
     end
 
     # Update custom field
+    # Update a custom field definition. The field type cannot be changed after creation.
     # @param field_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 

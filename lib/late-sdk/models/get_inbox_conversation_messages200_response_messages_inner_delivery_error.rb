@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # Populated when `deliveryStatus === \"failed\"`.
+  # Populated when deliveryStatus === \"failed\".
   class GetInboxConversationMessages200ResponseMessagesInnerDeliveryError < ApiModelBase
     attr_accessor :code
 

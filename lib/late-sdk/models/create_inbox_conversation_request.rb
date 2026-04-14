@@ -18,16 +18,16 @@ module Late
     # The social account ID to send from
     attr_accessor :account_id
 
-    # Twitter numeric user ID of the recipient. Provide either this or `participantUsername`.
+    # Twitter numeric user ID of the recipient. Provide either this or participantUsername.
     attr_accessor :participant_id
 
-    # Twitter username (with or without @) of the recipient. Resolved to a user ID via lookup. Provide either this or `participantId`.
+    # Twitter username (with or without @) of the recipient. Resolved to a user ID via lookup. Provide either this or participantId.
     attr_accessor :participant_username
 
-    # Text content of the message. At least one of `message` or attachment is required.
+    # Text content of the message. At least one of message or attachment is required.
     attr_accessor :message
 
-    # Skip the `receives_your_dm` eligibility check before sending. Use if you have already verified the recipient accepts DMs.
+    # Skip the receives_your_dm eligibility check before sending. Use if you have already verified the recipient accepts DMs.
     attr_accessor :skip_dm_check
 
     # Attribute mapping from ruby-style variable name to JSON key.

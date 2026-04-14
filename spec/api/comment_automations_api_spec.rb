@@ -46,6 +46,7 @@ describe 'CommentAutomationsApi' do
 
   # unit tests for delete_comment_automation
   # Delete automation
+  # Permanently delete an automation and all its trigger logs.
   # @param automation_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -57,6 +58,7 @@ describe 'CommentAutomationsApi' do
 
   # unit tests for get_comment_automation
   # Get automation details
+  # Returns an automation with its configuration, stats, and recent trigger logs.
   # @param automation_id 
   # @param [Hash] opts the optional parameters
   # @return [GetCommentAutomation200Response]
@@ -95,6 +97,7 @@ describe 'CommentAutomationsApi' do
 
   # unit tests for update_comment_automation
   # Update automation settings
+  # Update an automation&#39;s keywords, DM message, comment reply, or active status.
   # @param automation_id 
   # @param [Hash] opts the optional parameters
   # @option opts [UpdateCommentAutomationRequest] :update_comment_automation_request 

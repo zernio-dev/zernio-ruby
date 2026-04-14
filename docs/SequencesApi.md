@@ -22,6 +22,8 @@ All URIs are relative to *https://zernio.com/api*
 
 Activate sequence
 
+Start a draft or paused sequence. The sequence must have at least one step.
+
 ### Examples
 
 ```ruby
@@ -88,6 +90,8 @@ end
 > <CreateSequence200Response> create_sequence(create_sequence_request)
 
 Create sequence
+
+Create a multi-step messaging sequence. Each step has a delay and a message or WhatsApp template.
 
 ### Examples
 
@@ -156,6 +160,8 @@ end
 
 Delete sequence
 
+Permanently delete a sequence. Active enrollments are stopped.
+
 ### Examples
 
 ```ruby
@@ -221,6 +227,8 @@ nil (empty response body)
 > <EnrollContacts200Response> enroll_contacts(sequence_id, enroll_contacts_request)
 
 Enroll contacts in a sequence
+
+Enroll one or more contacts into a sequence. Contacts already enrolled are skipped.
 
 ### Examples
 
@@ -291,6 +299,8 @@ end
 
 Get sequence with steps
 
+Returns a sequence with all its steps and enrollment stats.
+
 ### Examples
 
 ```ruby
@@ -357,6 +367,8 @@ end
 > <ListSequenceEnrollments200Response> list_sequence_enrollments(sequence_id, opts)
 
 List enrollments for a sequence
+
+Returns enrolled contacts with their progress, status, and next scheduled step.
 
 ### Examples
 
@@ -433,6 +445,8 @@ end
 
 List sequences
 
+Returns sequences with enrollment stats. Filter by status, platform, or profile.
+
 ### Examples
 
 ```ruby
@@ -508,6 +522,8 @@ end
 
 Pause sequence
 
+Pause an active sequence. Enrolled contacts stop receiving messages until the sequence is reactivated.
+
 ### Examples
 
 ```ruby
@@ -574,6 +590,8 @@ end
 > unenroll_contact(sequence_id, contact_id)
 
 Unenroll contact
+
+Remove a contact from a sequence. No further messages will be sent to this contact.
 
 ### Examples
 
@@ -642,6 +660,8 @@ nil (empty response body)
 > <UpdateSequence200Response> update_sequence(sequence_id)
 
 Update sequence
+
+Update a sequence's name, steps, or exit conditions. Active sequences can be updated without pausing.
 
 ### Examples
 

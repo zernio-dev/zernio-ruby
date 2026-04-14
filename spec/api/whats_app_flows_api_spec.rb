@@ -59,7 +59,7 @@ describe 'WhatsAppFlowsApi' do
 
   # unit tests for deprecate_whats_app_flow
   # Deprecate flow
-  # Deprecate a PUBLISHED flow. **This is irreversible.** Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
+  # Deprecate a PUBLISHED flow. This is irreversible. Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
   # @param flow_id Flow ID
   # @param publish_whats_app_flow_request 
   # @param [Hash] opts the optional parameters
@@ -111,7 +111,7 @@ describe 'WhatsAppFlowsApi' do
 
   # unit tests for publish_whats_app_flow
   # Publish flow
-  # Publish a DRAFT flow. **This is irreversible.** Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via &#x60;cloneFlowId&#x60;). 
+  # Publish a DRAFT flow. This is irreversible. Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via cloneFlowId). 
   # @param flow_id Flow ID
   # @param publish_whats_app_flow_request 
   # @param [Hash] opts the optional parameters

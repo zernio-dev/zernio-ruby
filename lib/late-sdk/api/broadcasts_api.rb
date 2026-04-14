@@ -20,6 +20,7 @@ module Late
       @api_client = api_client
     end
     # Add recipients to a broadcast
+    # Add recipients by contact IDs, raw phone numbers, or from the broadcast's segment filters.
     # @param broadcast_id [String] 
     # @param add_broadcast_recipients_request [AddBroadcastRecipientsRequest] 
     # @param [Hash] opts the optional parameters
@@ -30,6 +31,7 @@ module Late
     end
 
     # Add recipients to a broadcast
+    # Add recipients by contact IDs, raw phone numbers, or from the broadcast&#39;s segment filters.
     # @param broadcast_id [String] 
     # @param add_broadcast_recipients_request [AddBroadcastRecipientsRequest] 
     # @param [Hash] opts the optional parameters
@@ -92,6 +94,7 @@ module Late
     end
 
     # Cancel broadcast
+    # Cancel a scheduled or in-progress broadcast. Already-sent messages are not affected.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [CancelBroadcast200Response]
@@ -101,6 +104,7 @@ module Late
     end
 
     # Cancel broadcast
+    # Cancel a scheduled or in-progress broadcast. Already-sent messages are not affected.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CancelBroadcast200Response, Integer, Hash)>] CancelBroadcast200Response data, response status code and response headers
@@ -153,6 +157,7 @@ module Late
     end
 
     # Create broadcast draft
+    # Create a broadcast in draft status. Add recipients and then send or schedule it.
     # @param create_broadcast_request [CreateBroadcastRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateBroadcast200Response]
@@ -162,6 +167,7 @@ module Late
     end
 
     # Create broadcast draft
+    # Create a broadcast in draft status. Add recipients and then send or schedule it.
     # @param create_broadcast_request [CreateBroadcastRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateBroadcast200Response, Integer, Hash)>] CreateBroadcast200Response data, response status code and response headers
@@ -219,6 +225,7 @@ module Late
     end
 
     # Delete broadcast
+    # Permanently delete a broadcast. Only drafts can be deleted.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -228,6 +235,7 @@ module Late
     end
 
     # Delete broadcast
+    # Permanently delete a broadcast. Only drafts can be deleted.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -280,6 +288,7 @@ module Late
     end
 
     # Get broadcast details
+    # Returns a broadcast with its full configuration and delivery stats.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetBroadcast200Response]
@@ -289,6 +298,7 @@ module Late
     end
 
     # Get broadcast details
+    # Returns a broadcast with its full configuration and delivery stats.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetBroadcast200Response, Integer, Hash)>] GetBroadcast200Response data, response status code and response headers
@@ -341,6 +351,7 @@ module Late
     end
 
     # List broadcast recipients
+    # Returns recipients for a broadcast with individual delivery status. Filter by status.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status 
@@ -353,6 +364,7 @@ module Late
     end
 
     # List broadcast recipients
+    # Returns recipients for a broadcast with individual delivery status. Filter by status.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status 
@@ -415,6 +427,7 @@ module Late
     end
 
     # List broadcasts
+    # Returns broadcasts with delivery stats. Filter by status, platform, or profile.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
     # @option opts [String] :status 
@@ -428,6 +441,7 @@ module Late
     end
 
     # List broadcasts
+    # Returns broadcasts with delivery stats. Filter by status, platform, or profile.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
     # @option opts [String] :status 
@@ -489,6 +503,7 @@ module Late
     end
 
     # Schedule broadcast for later
+    # Schedule a draft broadcast to be sent at a future date and time.
     # @param broadcast_id [String] 
     # @param schedule_broadcast_request [ScheduleBroadcastRequest] 
     # @param [Hash] opts the optional parameters
@@ -499,6 +514,7 @@ module Late
     end
 
     # Schedule broadcast for later
+    # Schedule a draft broadcast to be sent at a future date and time.
     # @param broadcast_id [String] 
     # @param schedule_broadcast_request [ScheduleBroadcastRequest] 
     # @param [Hash] opts the optional parameters
@@ -561,6 +577,7 @@ module Late
     end
 
     # Send broadcast now
+    # Immediately start sending a draft broadcast to its recipients.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [SendBroadcast200Response]
@@ -570,6 +587,7 @@ module Late
     end
 
     # Send broadcast now
+    # Immediately start sending a draft broadcast to its recipients.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SendBroadcast200Response, Integer, Hash)>] SendBroadcast200Response data, response status code and response headers
@@ -622,6 +640,7 @@ module Late
     end
 
     # Update broadcast
+    # Update a broadcast's name, message, template, or segment filters. Only draft broadcasts can be updated.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateBroadcast200Response]
@@ -631,6 +650,7 @@ module Late
     end
 
     # Update broadcast
+    # Update a broadcast&#39;s name, message, template, or segment filters. Only draft broadcasts can be updated.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateBroadcast200Response, Integer, Hash)>] UpdateBroadcast200Response data, response status code and response headers

@@ -34,6 +34,7 @@ describe 'SequencesApi' do
 
   # unit tests for activate_sequence
   # Activate sequence
+  # Start a draft or paused sequence. The sequence must have at least one step.
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [ActivateSequence200Response]
@@ -45,6 +46,7 @@ describe 'SequencesApi' do
 
   # unit tests for create_sequence
   # Create sequence
+  # Create a multi-step messaging sequence. Each step has a delay and a message or WhatsApp template.
   # @param create_sequence_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateSequence200Response]
@@ -56,6 +58,7 @@ describe 'SequencesApi' do
 
   # unit tests for delete_sequence
   # Delete sequence
+  # Permanently delete a sequence. Active enrollments are stopped.
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -67,6 +70,7 @@ describe 'SequencesApi' do
 
   # unit tests for enroll_contacts
   # Enroll contacts in a sequence
+  # Enroll one or more contacts into a sequence. Contacts already enrolled are skipped.
   # @param sequence_id 
   # @param enroll_contacts_request 
   # @param [Hash] opts the optional parameters
@@ -79,6 +83,7 @@ describe 'SequencesApi' do
 
   # unit tests for get_sequence
   # Get sequence with steps
+  # Returns a sequence with all its steps and enrollment stats.
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [GetSequence200Response]
@@ -90,6 +95,7 @@ describe 'SequencesApi' do
 
   # unit tests for list_sequence_enrollments
   # List enrollments for a sequence
+  # Returns enrolled contacts with their progress, status, and next scheduled step.
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :status 
@@ -104,6 +110,7 @@ describe 'SequencesApi' do
 
   # unit tests for list_sequences
   # List sequences
+  # Returns sequences with enrollment stats. Filter by status, platform, or profile.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
   # @option opts [String] :status 
@@ -118,6 +125,7 @@ describe 'SequencesApi' do
 
   # unit tests for pause_sequence
   # Pause sequence
+  # Pause an active sequence. Enrolled contacts stop receiving messages until the sequence is reactivated.
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [ActivateSequence200Response]
@@ -129,6 +137,7 @@ describe 'SequencesApi' do
 
   # unit tests for unenroll_contact
   # Unenroll contact
+  # Remove a contact from a sequence. No further messages will be sent to this contact.
   # @param sequence_id 
   # @param contact_id 
   # @param [Hash] opts the optional parameters
@@ -141,6 +150,7 @@ describe 'SequencesApi' do
 
   # unit tests for update_sequence
   # Update sequence
+  # Update a sequence&#39;s name, steps, or exit conditions. Active sequences can be updated without pausing.
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
   # @return [UpdateSequence200Response]

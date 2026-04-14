@@ -34,6 +34,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for add_broadcast_recipients
   # Add recipients to a broadcast
+  # Add recipients by contact IDs, raw phone numbers, or from the broadcast&#39;s segment filters.
   # @param broadcast_id 
   # @param add_broadcast_recipients_request 
   # @param [Hash] opts the optional parameters
@@ -46,6 +47,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for cancel_broadcast
   # Cancel broadcast
+  # Cancel a scheduled or in-progress broadcast. Already-sent messages are not affected.
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [CancelBroadcast200Response]
@@ -57,6 +59,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for create_broadcast
   # Create broadcast draft
+  # Create a broadcast in draft status. Add recipients and then send or schedule it.
   # @param create_broadcast_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateBroadcast200Response]
@@ -68,6 +71,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for delete_broadcast
   # Delete broadcast
+  # Permanently delete a broadcast. Only drafts can be deleted.
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -79,6 +83,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for get_broadcast
   # Get broadcast details
+  # Returns a broadcast with its full configuration and delivery stats.
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [GetBroadcast200Response]
@@ -90,6 +95,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for list_broadcast_recipients
   # List broadcast recipients
+  # Returns recipients for a broadcast with individual delivery status. Filter by status.
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :status 
@@ -104,6 +110,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for list_broadcasts
   # List broadcasts
+  # Returns broadcasts with delivery stats. Filter by status, platform, or profile.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
   # @option opts [String] :status 
@@ -119,6 +126,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for schedule_broadcast
   # Schedule broadcast for later
+  # Schedule a draft broadcast to be sent at a future date and time.
   # @param broadcast_id 
   # @param schedule_broadcast_request 
   # @param [Hash] opts the optional parameters
@@ -131,6 +139,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for send_broadcast
   # Send broadcast now
+  # Immediately start sending a draft broadcast to its recipients.
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [SendBroadcast200Response]
@@ -142,6 +151,7 @@ describe 'BroadcastsApi' do
 
   # unit tests for update_broadcast
   # Update broadcast
+  # Update a broadcast&#39;s name, message, template, or segment filters. Only draft broadcasts can be updated.
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
   # @return [UpdateBroadcast200Response]

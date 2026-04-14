@@ -18,6 +18,8 @@ All URIs are relative to *https://zernio.com/api*
 
 Clear custom field value
 
+Remove a custom field value from a contact. The field definition is not affected.
+
 ### Examples
 
 ```ruby
@@ -86,6 +88,8 @@ nil (empty response body)
 
 Create custom field
 
+Create a new custom field definition. Supported types are text, number, date, boolean, and select.
+
 ### Examples
 
 ```ruby
@@ -153,6 +157,8 @@ end
 
 Delete custom field
 
+Delete a custom field definition and remove its values from all contacts.
+
 ### Examples
 
 ```ruby
@@ -218,6 +224,8 @@ nil (empty response body)
 > <ListCustomFields200Response> list_custom_fields(opts)
 
 List custom field definitions
+
+Returns all custom field definitions. Optionally filter by profile.
 
 ### Examples
 
@@ -288,6 +296,8 @@ end
 
 Set custom field value
 
+Set or overwrite a custom field value on a contact. The value type must match the field definition.
+
 ### Examples
 
 ```ruby
@@ -357,6 +367,8 @@ nil (empty response body)
 > <UpdateCustomField200Response> update_custom_field(field_id, opts)
 
 Update custom field
+
+Update a custom field definition. The field type cannot be changed after creation.
 
 ### Examples
 

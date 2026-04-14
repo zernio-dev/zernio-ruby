@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # The `account` context included in inbox webhook payloads.
+  # The account context included in inbox webhook payloads.
   class InboxWebhookAccount < ApiModelBase
     # Social account ID
     attr_accessor :id
