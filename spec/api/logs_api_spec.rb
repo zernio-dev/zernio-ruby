@@ -32,19 +32,6 @@ describe 'LogsApi' do
     end
   end
 
-  # unit tests for get_post_logs
-  # Get post logs
-  # Retrieve all publishing logs for a specific post. Shows the complete history of publishing attempts for that post across all platforms. 
-  # @param post_id The post ID
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :limit Maximum number of logs to return (max 100)
-  # @return [GetPostLogs200Response]
-  describe 'get_post_logs test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for list_logs
   # List activity logs
   # Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 

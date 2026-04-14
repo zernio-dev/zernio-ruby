@@ -205,7 +205,6 @@ Class | Method | HTTP request | Description
 *Late::GMBReviewsApi* | [**get_google_business_reviews**](docs/GMBReviewsApi.md#get_google_business_reviews) | **GET** /v1/accounts/{accountId}/gmb-reviews | Get reviews
 *Late::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
 *Late::LinkedInMentionsApi* | [**get_linked_in_mentions**](docs/LinkedInMentionsApi.md#get_linked_in_mentions) | **GET** /v1/accounts/{accountId}/linkedin-mentions | Resolve LinkedIn mention
-*Late::LogsApi* | [**get_post_logs**](docs/LogsApi.md#get_post_logs) | **GET** /v1/posts/{postId}/logs | Get post logs
 *Late::LogsApi* | [**list_logs**](docs/LogsApi.md#list_logs) | **GET** /v1/logs | List activity logs
 *Late::MediaApi* | [**get_media_presigned_url**](docs/MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get presigned upload URL
 *Late::MessagesApi* | [**add_message_reaction**](docs/MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction
@@ -584,7 +583,6 @@ Class | Method | HTTP request | Description
  - [Late::GetPendingOAuthData200ResponseOrganizationsInner](docs/GetPendingOAuthData200ResponseOrganizationsInner.md)
  - [Late::GetPinterestBoards200Response](docs/GetPinterestBoards200Response.md)
  - [Late::GetPinterestBoards200ResponseBoardsInner](docs/GetPinterestBoards200ResponseBoardsInner.md)
- - [Late::GetPostLogs200Response](docs/GetPostLogs200Response.md)
  - [Late::GetPostTimeline200Response](docs/GetPostTimeline200Response.md)
  - [Late::GetPostTimeline200ResponseTimelineInner](docs/GetPostTimeline200ResponseTimelineInner.md)
  - [Late::GetPostTimeline400Response](docs/GetPostTimeline400Response.md)
@@ -761,11 +759,6 @@ Class | Method | HTTP request | Description
  - [Late::PostCreateResponse](docs/PostCreateResponse.md)
  - [Late::PostDeleteResponse](docs/PostDeleteResponse.md)
  - [Late::PostGetResponse](docs/PostGetResponse.md)
- - [Late::PostLog](docs/PostLog.md)
- - [Late::PostLogPostId](docs/PostLogPostId.md)
- - [Late::PostLogPostIdOneOf](docs/PostLogPostIdOneOf.md)
- - [Late::PostLogRequest](docs/PostLogRequest.md)
- - [Late::PostLogResponse](docs/PostLogResponse.md)
  - [Late::PostRetryResponse](docs/PostRetryResponse.md)
  - [Late::PostUpdateResponse](docs/PostUpdateResponse.md)
  - [Late::PostUserId](docs/PostUserId.md)
