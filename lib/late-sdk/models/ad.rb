@@ -46,6 +46,17 @@ module Late
 
     attr_accessor :ad_set_name
 
+    # Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC). Only present for Meta ads.
+    attr_accessor :platform_objective
+
+    # Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION, LINK_CLICKS). Only present for Meta ads.
+    attr_accessor :optimization_goal
+
+    # Bid strategy (e.g. LOWEST_COST_WITHOUT_CAP, COST_CAP, LOWEST_COST_WITH_MIN_ROAS). Ad set level overrides campaign level. Only present for Meta ads.
+    attr_accessor :bid_strategy
+
+    attr_accessor :promoted_object
+
     attr_accessor :creative
 
     attr_accessor :targeting
@@ -98,6 +109,10 @@ module Late
         :'platform_ad_set_id' => :'platformAdSetId',
         :'campaign_name' => :'campaignName',
         :'ad_set_name' => :'adSetName',
+        :'platform_objective' => :'platformObjective',
+        :'optimization_goal' => :'optimizationGoal',
+        :'bid_strategy' => :'bidStrategy',
+        :'promoted_object' => :'promotedObject',
         :'creative' => :'creative',
         :'targeting' => :'targeting',
         :'schedule' => :'schedule',
@@ -135,6 +150,10 @@ module Late
         :'platform_ad_set_id' => :'String',
         :'campaign_name' => :'String',
         :'ad_set_name' => :'String',
+        :'platform_objective' => :'String',
+        :'optimization_goal' => :'String',
+        :'bid_strategy' => :'String',
+        :'promoted_object' => :'AdPromotedObject',
         :'creative' => :'AdCreative',
         :'targeting' => :'Object',
         :'schedule' => :'AdSchedule',
@@ -224,6 +243,22 @@ module Late
 
       if attributes.key?(:'ad_set_name')
         self.ad_set_name = attributes[:'ad_set_name']
+      end
+
+      if attributes.key?(:'platform_objective')
+        self.platform_objective = attributes[:'platform_objective']
+      end
+
+      if attributes.key?(:'optimization_goal')
+        self.optimization_goal = attributes[:'optimization_goal']
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'promoted_object')
+        self.promoted_object = attributes[:'promoted_object']
       end
 
       if attributes.key?(:'creative')
@@ -334,6 +369,10 @@ module Late
           platform_ad_set_id == o.platform_ad_set_id &&
           campaign_name == o.campaign_name &&
           ad_set_name == o.ad_set_name &&
+          platform_objective == o.platform_objective &&
+          optimization_goal == o.optimization_goal &&
+          bid_strategy == o.bid_strategy &&
+          promoted_object == o.promoted_object &&
           creative == o.creative &&
           targeting == o.targeting &&
           schedule == o.schedule &&
@@ -351,7 +390,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, platform, status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
+      [_id, name, platform, status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, bid_strategy, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
     end
 
     # Builds the object from hash

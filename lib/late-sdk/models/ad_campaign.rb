@@ -36,6 +36,16 @@ module Late
 
     attr_accessor :profile_id
 
+    # Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC)
+    attr_accessor :platform_objective
+
+    attr_accessor :optimization_goal
+
+    # Campaign-level bid strategy (e.g. LOWEST_COST_WITHOUT_CAP, COST_CAP, LOWEST_COST_WITH_MIN_ROAS)
+    attr_accessor :bid_strategy
+
+    attr_accessor :promoted_object
+
     attr_accessor :earliest_ad
 
     attr_accessor :latest_ad
@@ -75,6 +85,10 @@ module Late
         :'platform_ad_account_id' => :'platformAdAccountId',
         :'account_id' => :'accountId',
         :'profile_id' => :'profileId',
+        :'platform_objective' => :'platformObjective',
+        :'optimization_goal' => :'optimizationGoal',
+        :'bid_strategy' => :'bidStrategy',
+        :'promoted_object' => :'promotedObject',
         :'earliest_ad' => :'earliestAd',
         :'latest_ad' => :'latestAd'
       }
@@ -103,6 +117,10 @@ module Late
         :'platform_ad_account_id' => :'String',
         :'account_id' => :'String',
         :'profile_id' => :'String',
+        :'platform_objective' => :'String',
+        :'optimization_goal' => :'AdTreeCampaignOptimizationGoal',
+        :'bid_strategy' => :'String',
+        :'promoted_object' => :'AdTreeCampaignPromotedObject',
         :'earliest_ad' => :'Time',
         :'latest_ad' => :'Time'
       }
@@ -170,6 +188,22 @@ module Late
         self.profile_id = attributes[:'profile_id']
       end
 
+      if attributes.key?(:'platform_objective')
+        self.platform_objective = attributes[:'platform_objective']
+      end
+
+      if attributes.key?(:'optimization_goal')
+        self.optimization_goal = attributes[:'optimization_goal']
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'promoted_object')
+        self.promoted_object = attributes[:'promoted_object']
+      end
+
       if attributes.key?(:'earliest_ad')
         self.earliest_ad = attributes[:'earliest_ad']
       end
@@ -233,6 +267,10 @@ module Late
           platform_ad_account_id == o.platform_ad_account_id &&
           account_id == o.account_id &&
           profile_id == o.profile_id &&
+          platform_objective == o.platform_objective &&
+          optimization_goal == o.optimization_goal &&
+          bid_strategy == o.bid_strategy &&
+          promoted_object == o.promoted_object &&
           earliest_ad == o.earliest_ad &&
           latest_ad == o.latest_ad
     end
@@ -246,7 +284,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_campaign_id, platform, campaign_name, status, ad_count, budget, metrics, platform_ad_account_id, account_id, profile_id, earliest_ad, latest_ad].hash
+      [platform_campaign_id, platform, campaign_name, status, ad_count, budget, metrics, platform_ad_account_id, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, promoted_object, earliest_ad, latest_ad].hash
     end
 
     # Builds the object from hash

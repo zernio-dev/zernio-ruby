@@ -10,6 +10,9 @@
 | **ad_count** | **Integer** |  | [optional] |
 | **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
 | **metrics** | [**AdMetrics**](AdMetrics.md) |  | [optional] |
+| **optimization_goal** | **String** | Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION) | [optional] |
+| **bid_strategy** | **String** | Bid strategy for this ad set (overrides campaign level when set) | [optional] |
+| **promoted_object** | [**AdTreeAdSetPromotedObject**](AdTreeAdSetPromotedObject.md) |  | [optional] |
 | **ads** | [**Array&lt;Ad&gt;**](Ad.md) | Individual ads within this ad set (capped at 100). Returns a subset of Ad fields from the aggregation (core fields like _id, name, platform, status, budget, metrics, creative, goal are included; targeting and schedule may be absent). | [optional] |
 
 ## Example
@@ -24,6 +27,9 @@ instance = Late::AdTreeAdSet.new(
   ad_count: null,
   budget: null,
   metrics: null,
+  optimization_goal: null,
+  bid_strategy: null,
+  promoted_object: null,
   ads: null
 )
 ```

@@ -40,6 +40,16 @@ module Late
 
     attr_accessor :profile_id
 
+    # Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC)
+    attr_accessor :platform_objective
+
+    attr_accessor :optimization_goal
+
+    # Campaign-level bid strategy (e.g. LOWEST_COST_WITHOUT_CAP, COST_CAP, LOWEST_COST_WITH_MIN_ROAS)
+    attr_accessor :bid_strategy
+
+    attr_accessor :promoted_object
+
     attr_accessor :ad_sets
 
     class EnumAttributeValidator
@@ -78,6 +88,10 @@ module Late
         :'platform_ad_account_id' => :'platformAdAccountId',
         :'account_id' => :'accountId',
         :'profile_id' => :'profileId',
+        :'platform_objective' => :'platformObjective',
+        :'optimization_goal' => :'optimizationGoal',
+        :'bid_strategy' => :'bidStrategy',
+        :'promoted_object' => :'promotedObject',
         :'ad_sets' => :'adSets'
       }
     end
@@ -106,6 +120,10 @@ module Late
         :'platform_ad_account_id' => :'String',
         :'account_id' => :'String',
         :'profile_id' => :'String',
+        :'platform_objective' => :'String',
+        :'optimization_goal' => :'AdTreeCampaignOptimizationGoal',
+        :'bid_strategy' => :'String',
+        :'promoted_object' => :'AdTreeCampaignPromotedObject',
         :'ad_sets' => :'Array<AdTreeAdSet>'
       }
     end
@@ -176,6 +194,22 @@ module Late
         self.profile_id = attributes[:'profile_id']
       end
 
+      if attributes.key?(:'platform_objective')
+        self.platform_objective = attributes[:'platform_objective']
+      end
+
+      if attributes.key?(:'optimization_goal')
+        self.optimization_goal = attributes[:'optimization_goal']
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'promoted_object')
+        self.promoted_object = attributes[:'promoted_object']
+      end
+
       if attributes.key?(:'ad_sets')
         if (value = attributes[:'ad_sets']).is_a?(Array)
           self.ad_sets = value
@@ -238,6 +272,10 @@ module Late
           platform_ad_account_id == o.platform_ad_account_id &&
           account_id == o.account_id &&
           profile_id == o.profile_id &&
+          platform_objective == o.platform_objective &&
+          optimization_goal == o.optimization_goal &&
+          bid_strategy == o.bid_strategy &&
+          promoted_object == o.promoted_object &&
           ad_sets == o.ad_sets
     end
 
@@ -250,7 +288,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_campaign_id, platform, campaign_name, status, ad_count, ad_set_count, budget, metrics, platform_ad_account_id, account_id, profile_id, ad_sets].hash
+      [platform_campaign_id, platform, campaign_name, status, ad_count, ad_set_count, budget, metrics, platform_ad_account_id, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, promoted_object, ad_sets].hash
     end
 
     # Builds the object from hash

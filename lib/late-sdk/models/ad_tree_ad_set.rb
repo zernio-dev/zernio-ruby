@@ -29,6 +29,14 @@ module Late
 
     attr_accessor :metrics
 
+    # Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
+    attr_accessor :optimization_goal
+
+    # Bid strategy for this ad set (overrides campaign level when set)
+    attr_accessor :bid_strategy
+
+    attr_accessor :promoted_object
+
     # Individual ads within this ad set (capped at 100). Returns a subset of Ad fields from the aggregation (core fields like _id, name, platform, status, budget, metrics, creative, goal are included; targeting and schedule may be absent).
     attr_accessor :ads
 
@@ -63,6 +71,9 @@ module Late
         :'ad_count' => :'adCount',
         :'budget' => :'budget',
         :'metrics' => :'metrics',
+        :'optimization_goal' => :'optimizationGoal',
+        :'bid_strategy' => :'bidStrategy',
+        :'promoted_object' => :'promotedObject',
         :'ads' => :'ads'
       }
     end
@@ -86,6 +97,9 @@ module Late
         :'ad_count' => :'Integer',
         :'budget' => :'AdBudget',
         :'metrics' => :'AdMetrics',
+        :'optimization_goal' => :'String',
+        :'bid_strategy' => :'String',
+        :'promoted_object' => :'AdTreeAdSetPromotedObject',
         :'ads' => :'Array<Ad>'
       }
     end
@@ -136,6 +150,18 @@ module Late
         self.metrics = attributes[:'metrics']
       end
 
+      if attributes.key?(:'optimization_goal')
+        self.optimization_goal = attributes[:'optimization_goal']
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'promoted_object')
+        self.promoted_object = attributes[:'promoted_object']
+      end
+
       if attributes.key?(:'ads')
         if (value = attributes[:'ads']).is_a?(Array)
           self.ads = value
@@ -181,6 +207,9 @@ module Late
           ad_count == o.ad_count &&
           budget == o.budget &&
           metrics == o.metrics &&
+          optimization_goal == o.optimization_goal &&
+          bid_strategy == o.bid_strategy &&
+          promoted_object == o.promoted_object &&
           ads == o.ads
     end
 
@@ -193,7 +222,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_ad_set_id, ad_set_name, status, ad_count, budget, metrics, ads].hash
+      [platform_ad_set_id, ad_set_name, status, ad_count, budget, metrics, optimization_goal, bid_strategy, promoted_object, ads].hash
     end
 
     # Builds the object from hash
