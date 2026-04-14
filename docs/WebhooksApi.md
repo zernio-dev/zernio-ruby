@@ -6,7 +6,6 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**create_webhook_settings**](WebhooksApi.md#create_webhook_settings) | **POST** /v1/webhooks/settings | Create webhook |
 | [**delete_webhook_settings**](WebhooksApi.md#delete_webhook_settings) | **DELETE** /v1/webhooks/settings | Delete webhook |
-| [**get_webhook_logs**](WebhooksApi.md#get_webhook_logs) | **GET** /v1/webhooks/logs | Get delivery logs |
 | [**get_webhook_settings**](WebhooksApi.md#get_webhook_settings) | **GET** /v1/webhooks/settings | List webhooks |
 | [**test_webhook**](WebhooksApi.md#test_webhook) | **POST** /v1/webhooks/test | Send test webhook |
 | [**update_webhook_settings**](WebhooksApi.md#update_webhook_settings) | **PUT** /v1/webhooks/settings | Update webhook |
@@ -139,83 +138,6 @@ end
 ### Return type
 
 [**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_webhook_logs
-
-> <GetWebhookLogs200Response> get_webhook_logs(opts)
-
-Get delivery logs
-
-**Deprecated.** Use `GET /v1/logs?type=webhooks` instead. Retrieve webhook delivery history. Logs are retained for 90 days. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'late-sdk'
-# setup authorization
-Late.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Late::WebhooksApi.new
-opts = {
-  limit: 56, # Integer | Maximum number of logs to return (max 100)
-  status: 'success', # String | Filter by delivery status
-  event: 'post.scheduled', # String | Filter by event type
-  webhook_id: 'webhook_id_example' # String | Filter by webhook ID
-}
-
-begin
-  # Get delivery logs
-  result = api_instance.get_webhook_logs(opts)
-  p result
-rescue Late::ApiError => e
-  puts "Error when calling WebhooksApi->get_webhook_logs: #{e}"
-end
-```
-
-#### Using the get_webhook_logs_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<GetWebhookLogs200Response>, Integer, Hash)> get_webhook_logs_with_http_info(opts)
-
-```ruby
-begin
-  # Get delivery logs
-  data, status_code, headers = api_instance.get_webhook_logs_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <GetWebhookLogs200Response>
-rescue Late::ApiError => e
-  puts "Error when calling WebhooksApi->get_webhook_logs_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | Maximum number of logs to return (max 100) | [optional][default to 50] |
-| **status** | **String** | Filter by delivery status | [optional] |
-| **event** | **String** | Filter by event type | [optional] |
-| **webhook_id** | **String** | Filter by webhook ID | [optional] |
-
-### Return type
-
-[**GetWebhookLogs200Response**](GetWebhookLogs200Response.md)
 
 ### Authorization
 

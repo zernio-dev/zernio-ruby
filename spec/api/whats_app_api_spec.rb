@@ -32,19 +32,6 @@ describe 'WhatsAppApi' do
     end
   end
 
-  # unit tests for add_whats_app_broadcast_recipients
-  # Add recipients
-  # **Deprecated.** Use &#x60;POST /v1/broadcasts/{id}/recipients&#x60; instead. Add recipients to a draft broadcast. Maximum 1000 recipients per request. Duplicate phone numbers are automatically skipped. 
-  # @param broadcast_id Broadcast ID
-  # @param add_whats_app_broadcast_recipients_request 
-  # @param [Hash] opts the optional parameters
-  # @return [AddWhatsAppBroadcastRecipients200Response]
-  describe 'add_whats_app_broadcast_recipients test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for add_whats_app_group_participants
   # Add participants
   # Add participants to a WhatsApp group. Maximum 8 participants per request. 
@@ -68,66 +55,6 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [UnpublishPost200Response]
   describe 'approve_whats_app_group_join_requests test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for bulk_delete_whats_app_contacts
-  # Bulk delete contacts
-  # **Deprecated.** Use &#x60;DELETE /v1/contacts/{id}&#x60; for individual deletes instead. Permanently delete multiple contacts at once (max 500 per request). 
-  # @param bulk_delete_whats_app_contacts_request 
-  # @param [Hash] opts the optional parameters
-  # @return [BulkDeleteWhatsAppContacts200Response]
-  describe 'bulk_delete_whats_app_contacts test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for bulk_update_whats_app_contacts
-  # Bulk update contacts
-  # **Deprecated.** Use &#x60;PATCH /v1/contacts/{id}&#x60; for individual updates instead. Perform bulk operations on multiple contacts (max 500 per request). Supported actions: addTags, removeTags, addGroups, removeGroups, optIn, optOut, block, unblock. 
-  # @param bulk_update_whats_app_contacts_request 
-  # @param [Hash] opts the optional parameters
-  # @return [BulkUpdateWhatsAppContacts200Response]
-  describe 'bulk_update_whats_app_contacts test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for cancel_whats_app_broadcast_schedule
-  # Cancel scheduled broadcast
-  # **Deprecated.** Use &#x60;POST /v1/broadcasts/{id}/cancel&#x60; instead. Cancel a scheduled broadcast and return it to draft status. Only broadcasts in scheduled status can be cancelled. 
-  # @param broadcast_id Broadcast ID
-  # @param [Hash] opts the optional parameters
-  # @return [CancelWhatsAppBroadcastSchedule200Response]
-  describe 'cancel_whats_app_broadcast_schedule test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for create_whats_app_broadcast
-  # Create broadcast
-  # **Deprecated.** Use &#x60;POST /v1/broadcasts&#x60; instead. Create a new draft broadcast. Optionally include initial recipients. After creation, add recipients and then send or schedule the broadcast. 
-  # @param create_whats_app_broadcast_request 
-  # @param [Hash] opts the optional parameters
-  # @return [CreateWhatsAppBroadcast200Response]
-  describe 'create_whats_app_broadcast test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for create_whats_app_contact
-  # Create contact
-  # **Deprecated.** Use &#x60;POST /v1/contacts&#x60; instead. Create a new WhatsApp contact. Phone number must be unique per account and in E.164 format (e.g., +1234567890). 
-  # @param create_whats_app_contact_request 
-  # @param [Hash] opts the optional parameters
-  # @return [CreateWhatsAppContact200Response]
-  describe 'create_whats_app_contact test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -170,42 +97,6 @@ describe 'WhatsAppApi' do
     end
   end
 
-  # unit tests for delete_whats_app_broadcast
-  # Delete broadcast
-  # **Deprecated.** Use &#x60;DELETE /v1/broadcasts/{id}&#x60; instead. Delete a broadcast. Only draft or cancelled broadcasts can be deleted. 
-  # @param broadcast_id Broadcast ID
-  # @param [Hash] opts the optional parameters
-  # @return [UnpublishPost200Response]
-  describe 'delete_whats_app_broadcast test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for delete_whats_app_contact
-  # Delete contact
-  # **Deprecated.** Use &#x60;DELETE /v1/contacts/{id}&#x60; instead. Permanently delete a WhatsApp contact. 
-  # @param contact_id Contact ID
-  # @param [Hash] opts the optional parameters
-  # @return [UnpublishPost200Response]
-  describe 'delete_whats_app_contact test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for delete_whats_app_group
-  # Delete group
-  # **Deprecated.** Use contact tags via &#x60;PATCH /v1/contacts/{id}&#x60; instead. Delete a contact group. This removes the group from all contacts but does not delete the contacts themselves. 
-  # @param delete_whats_app_group_request 
-  # @param [Hash] opts the optional parameters
-  # @return [RenameWhatsAppGroup200Response]
-  describe 'delete_whats_app_group test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for delete_whats_app_group_chat
   # Delete group
   # Delete a WhatsApp group and remove all participants. 
@@ -232,48 +123,6 @@ describe 'WhatsAppApi' do
     end
   end
 
-  # unit tests for get_whats_app_broadcast
-  # Get broadcast
-  # **Deprecated.** Use &#x60;GET /v1/broadcasts/{id}&#x60; instead. Retrieve detailed information about a single broadcast including delivery statistics. 
-  # @param broadcast_id Broadcast ID
-  # @param [Hash] opts the optional parameters
-  # @return [GetWhatsAppBroadcast200Response]
-  describe 'get_whats_app_broadcast test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for get_whats_app_broadcast_recipients
-  # List recipients
-  # **Deprecated.** Use &#x60;GET /v1/broadcasts/{id}/recipients&#x60; instead. List recipients of a broadcast with their delivery status. Supports filtering by delivery status and pagination. 
-  # @param broadcast_id Broadcast ID
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :status Filter by recipient delivery status
-  # @option opts [Integer] :limit Maximum results (default 100)
-  # @option opts [Integer] :skip Offset for pagination
-  # @return [GetWhatsAppBroadcastRecipients200Response]
-  describe 'get_whats_app_broadcast_recipients test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for get_whats_app_broadcasts
-  # List broadcasts
-  # **Deprecated.** Use &#x60;GET /v1/broadcasts?profileId&#x3D;{profileId}&#x60; instead. List all WhatsApp broadcasts for an account. Returns broadcasts sorted by creation date (newest first) without the full recipients list for performance. 
-  # @param account_id WhatsApp social account ID
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :status Filter by broadcast status
-  # @option opts [Integer] :limit Maximum results (default 50)
-  # @option opts [Integer] :skip Offset for pagination
-  # @return [GetWhatsAppBroadcasts200Response]
-  describe 'get_whats_app_broadcasts test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for get_whats_app_business_profile
   # Get business profile
   # Retrieve the WhatsApp Business profile for the account (about, address, description, email, websites, etc.). 
@@ -281,36 +130,6 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppBusinessProfile200Response]
   describe 'get_whats_app_business_profile test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for get_whats_app_contact
-  # Get contact
-  # **Deprecated.** Use &#x60;GET /v1/contacts/{id}&#x60; instead. Retrieve a single WhatsApp contact by ID with full details. 
-  # @param contact_id Contact ID
-  # @param [Hash] opts the optional parameters
-  # @return [GetWhatsAppContact200Response]
-  describe 'get_whats_app_contact test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for get_whats_app_contacts
-  # List contacts
-  # **Deprecated.** Use &#x60;GET /v1/contacts?profileId&#x3D;{profileId}&#x60; instead. List WhatsApp contacts for an account. Supports filtering by tags, groups, opt-in status, and text search. Returns contacts sorted by name with available filter options. 
-  # @param account_id WhatsApp social account ID
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :search Search contacts by name, phone, email, or company
-  # @option opts [String] :tag Filter by tag
-  # @option opts [String] :group Filter by group
-  # @option opts [String] :opted_in Filter by opt-in status
-  # @option opts [Integer] :limit Maximum results (default 50)
-  # @option opts [Integer] :skip Offset for pagination
-  # @return [GetWhatsAppContacts200Response]
-  describe 'get_whats_app_contacts test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -341,18 +160,6 @@ describe 'WhatsAppApi' do
     end
   end
 
-  # unit tests for get_whats_app_groups
-  # List contact groups
-  # **Deprecated.** Use contact tags via &#x60;GET /v1/contacts&#x60; for grouping instead. WhatsApp groups have no cross-platform equivalent. List all contact groups for a WhatsApp account with contact counts. Groups are derived from the groups field on contacts, not stored as separate documents. 
-  # @param account_id WhatsApp social account ID
-  # @param [Hash] opts the optional parameters
-  # @return [GetWhatsAppGroups200Response]
-  describe 'get_whats_app_groups test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for get_whats_app_template
   # Get template
   # Retrieve a single message template by name. 
@@ -373,18 +180,6 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppTemplates200Response]
   describe 'get_whats_app_templates test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for import_whats_app_contacts
-  # Bulk import contacts
-  # **Deprecated.** Use &#x60;POST /v1/contacts/bulk&#x60; instead. Import up to 1000 contacts at once. Each contact requires a phone number and name. Duplicates are skipped by default. Supports default tags and groups applied to all imported contacts. 
-  # @param import_whats_app_contacts_request 
-  # @param [Hash] opts the optional parameters
-  # @return [ImportWhatsAppContacts200Response]
-  describe 'import_whats_app_contacts test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -431,19 +226,6 @@ describe 'WhatsAppApi' do
     end
   end
 
-  # unit tests for remove_whats_app_broadcast_recipients
-  # Remove recipients
-  # **Deprecated.** Use &#x60;POST /v1/broadcasts/{id}/recipients&#x60; with removal flag instead. Remove recipients from a draft broadcast by phone number. 
-  # @param broadcast_id Broadcast ID
-  # @param remove_whats_app_broadcast_recipients_request 
-  # @param [Hash] opts the optional parameters
-  # @return [RemoveWhatsAppBroadcastRecipients200Response]
-  describe 'remove_whats_app_broadcast_recipients test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for remove_whats_app_group_participants
   # Remove participants
   # Remove participants from a WhatsApp group. 
@@ -458,55 +240,6 @@ describe 'WhatsAppApi' do
     end
   end
 
-  # unit tests for rename_whats_app_group
-  # Rename group
-  # **Deprecated.** Use contact tags via &#x60;PATCH /v1/contacts/{id}&#x60; instead. Rename a contact group. This updates the group name on all contacts that belong to the group. 
-  # @param rename_whats_app_group_request 
-  # @param [Hash] opts the optional parameters
-  # @return [RenameWhatsAppGroup200Response]
-  describe 'rename_whats_app_group test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for schedule_whats_app_broadcast
-  # Schedule broadcast
-  # **Deprecated.** Use &#x60;POST /v1/broadcasts/{id}/schedule&#x60; instead. Schedule a draft broadcast for future sending. The scheduled time must be in the future and no more than 30 days in advance. The broadcast must be in draft status and have recipients. 
-  # @param broadcast_id Broadcast ID
-  # @param schedule_whats_app_broadcast_request 
-  # @param [Hash] opts the optional parameters
-  # @return [ScheduleWhatsAppBroadcast200Response]
-  describe 'schedule_whats_app_broadcast test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for send_whats_app_broadcast
-  # Send broadcast
-  # **Deprecated.** Use &#x60;POST /v1/broadcasts/{id}/send&#x60; instead. Start sending a broadcast immediately. The broadcast must be in draft or scheduled status and have at least one recipient. Messages are sent sequentially with rate limiting. 
-  # @param broadcast_id Broadcast ID
-  # @param [Hash] opts the optional parameters
-  # @return [SendWhatsAppBroadcast200Response]
-  describe 'send_whats_app_broadcast test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for send_whats_app_bulk
-  # Bulk send template messages
-  # **Deprecated.** Use &#x60;POST /v1/broadcasts&#x60; to create a broadcast, &#x60;POST /v1/broadcasts/{id}/recipients&#x60; to add recipients, then &#x60;POST /v1/broadcasts/{id}/send&#x60; to send. Send a template message to multiple recipients in a single request. Maximum 100 recipients per request. Only template messages are supported for bulk sending (not free-form text).  Each recipient can have optional per-recipient template variables for personalization. Returns detailed results for each recipient. 
-  # @param send_whats_app_bulk_request 
-  # @param [Hash] opts the optional parameters
-  # @return [SendWhatsAppBulk200Response]
-  describe 'send_whats_app_bulk test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for update_whats_app_business_profile
   # Update business profile
   # Update the WhatsApp Business profile. All fields are optional; only provided fields will be updated. Constraints: about max 139 chars, description max 512 chars, max 2 websites. 
@@ -514,19 +247,6 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [UnpublishPost200Response]
   describe 'update_whats_app_business_profile test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for update_whats_app_contact
-  # Update contact
-  # **Deprecated.** Use &#x60;PATCH /v1/contacts/{id}&#x60; instead. Update an existing WhatsApp contact. All fields are optional; only provided fields will be updated. Custom fields are merged with existing values. Set a custom field to null to remove it. 
-  # @param contact_id Contact ID
-  # @param update_whats_app_contact_request 
-  # @param [Hash] opts the optional parameters
-  # @return [UpdateWhatsAppContact200Response]
-  describe 'update_whats_app_contact test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

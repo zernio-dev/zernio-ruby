@@ -56,21 +56,6 @@ describe 'WebhooksApi' do
     end
   end
 
-  # unit tests for get_webhook_logs
-  # Get delivery logs
-  # **Deprecated.** Use &#x60;GET /v1/logs?type&#x3D;webhooks&#x60; instead. Retrieve webhook delivery history. Logs are retained for 90 days. 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :limit Maximum number of logs to return (max 100)
-  # @option opts [String] :status Filter by delivery status
-  # @option opts [String] :event Filter by event type
-  # @option opts [String] :webhook_id Filter by webhook ID
-  # @return [GetWebhookLogs200Response]
-  describe 'get_webhook_logs test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for get_webhook_settings
   # List webhooks
   # Retrieve all configured webhooks for the authenticated user. Supports up to 10 webhooks per user.

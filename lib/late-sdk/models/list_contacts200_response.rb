@@ -49,7 +49,7 @@ module Late
         :'success' => :'Boolean',
         :'contacts' => :'Array<ListContacts200ResponseContactsInner>',
         :'filters' => :'ListContacts200ResponseFilters',
-        :'pagination' => :'GetWhatsAppContacts200ResponsePagination'
+        :'pagination' => :'ListContacts200ResponsePagination'
       }
     end
 

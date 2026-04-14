@@ -97,16 +97,6 @@ describe Late::AccountWithFollowerStats do
     end
   end
 
-  describe 'test attribute "ads_status"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["connected", "not_connected", "not_available"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.ads_status = value }.not_to raise_error
-      # end
-    end
-  end
-
   describe 'test attribute "metadata"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

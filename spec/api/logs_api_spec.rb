@@ -45,23 +45,6 @@ describe 'LogsApi' do
     end
   end
 
-  # unit tests for list_connection_logs
-  # List connection logs
-  # **Deprecated.** Use &#x60;GET /v1/logs?type&#x3D;connections&#x60; instead. Retrieve connection event logs. Logs are retained for 90 days. 
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :platform Filter by platform
-  # @option opts [String] :event_type Filter by event type
-  # @option opts [String] :status Filter by status (shorthand for event types)
-  # @option opts [Integer] :days Number of days to look back (max 7)
-  # @option opts [Integer] :limit Maximum number of logs to return (max 100)
-  # @option opts [Integer] :skip Number of logs to skip (for pagination)
-  # @return [ListConnectionLogs200Response]
-  describe 'list_connection_logs test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for list_logs
   # List activity logs
   # Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 
@@ -76,24 +59,6 @@ describe 'LogsApi' do
   # @option opts [Integer] :skip Number of logs to skip (for pagination)
   # @return [ListLogs200Response]
   describe 'list_logs test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for list_posts_logs
-  # List publishing logs
-  # **Deprecated.** Use &#x60;GET /v1/logs?type&#x3D;publishing&#x60; instead. Retrieve publishing logs for all posts. Logs are retained for 90 days. 
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :status Filter by log status
-  # @option opts [String] :platform Filter by platform
-  # @option opts [String] :action Filter by action type
-  # @option opts [Integer] :days Number of days to look back (max 7)
-  # @option opts [Integer] :limit Maximum number of logs to return (max 100)
-  # @option opts [Integer] :skip Number of logs to skip (for pagination)
-  # @option opts [String] :search Search through log entries by text content.
-  # @return [ListPostsLogs200Response]
-  describe 'list_posts_logs test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

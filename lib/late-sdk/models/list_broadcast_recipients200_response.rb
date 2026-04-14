@@ -45,7 +45,7 @@ module Late
       {
         :'success' => :'Boolean',
         :'recipients' => :'Array<ListBroadcastRecipients200ResponseRecipientsInner>',
-        :'pagination' => :'GetWhatsAppContacts200ResponsePagination'
+        :'pagination' => :'ListContacts200ResponsePagination'
       }
     end
 

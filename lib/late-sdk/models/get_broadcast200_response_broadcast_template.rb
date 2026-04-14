@@ -14,19 +14,16 @@ require 'date'
 require 'time'
 
 module Late
-  class ListSequenceEnrollments200Response < ApiModelBase
-    attr_accessor :success
+  class GetBroadcast200ResponseBroadcastTemplate < ApiModelBase
+    attr_accessor :name
 
-    attr_accessor :enrollments
-
-    attr_accessor :pagination
+    attr_accessor :language
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'enrollments' => :'enrollments',
-        :'pagination' => :'pagination'
+        :'name' => :'name',
+        :'language' => :'language'
       }
     end
 
@@ -43,9 +40,8 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'enrollments' => :'Array<ListSequenceEnrollments200ResponseEnrollmentsInner>',
-        :'pagination' => :'ListContacts200ResponsePagination'
+        :'name' => :'String',
+        :'language' => :'String'
       }
     end
 
@@ -59,30 +55,24 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::ListSequenceEnrollments200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GetBroadcast200ResponseBroadcastTemplate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::ListSequenceEnrollments200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GetBroadcast200ResponseBroadcastTemplate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'enrollments')
-        if (value = attributes[:'enrollments']).is_a?(Array)
-          self.enrollments = value
-        end
-      end
-
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
       end
     end
 
@@ -106,9 +96,8 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          enrollments == o.enrollments &&
-          pagination == o.pagination
+          name == o.name &&
+          language == o.language
     end
 
     # @see the `==` method
@@ -120,7 +109,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, enrollments, pagination].hash
+      [name, language].hash
     end
 
     # Builds the object from hash

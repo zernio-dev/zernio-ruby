@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
 | **broadcasts** | [**Array&lt;ListBroadcasts200ResponseBroadcastsInner&gt;**](ListBroadcasts200ResponseBroadcastsInner.md) |  | [optional] |
-| **pagination** | [**GetWhatsAppContacts200ResponsePagination**](GetWhatsAppContacts200ResponsePagination.md) |  | [optional] |
+| **pagination** | [**ListContacts200ResponsePagination**](ListContacts200ResponsePagination.md) |  | [optional] |
 
 ## Example
 

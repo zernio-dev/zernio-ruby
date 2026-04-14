@@ -42,9 +42,6 @@ module Late
     # Whether the user explicitly activated this account. false means the account was created as a side effect (e.g., posting account auto-created when user connected ads first). Posting UI and scheduler ignore accounts with enabled: false. 
     attr_accessor :enabled
 
-    # **Deprecated.** With the new ads account model, ads accounts are separate SocialAccount documents. Check for accounts with ads platform values (metaads, linkedinads, pinterestads, tiktokads, xads, googleads) instead.  Legacy behavior: - `connected`: Ads are ready to use (same-token platforms like Meta/LinkedIn, or separate ads token is present). - `not_connected`: Platform supports ads but requires a separate ads OAuth. Use `GET /v1/connect/{platform}/ads` to connect. - `not_available`: Platform does not support ads (e.g., YouTube, Reddit, Bluesky). 
-    attr_accessor :ads_status
-
     # Platform-specific metadata. Fields vary by platform. For WhatsApp accounts, includes: - `qualityRating`: Phone number quality rating from Meta (`GREEN`, `YELLOW`, `RED`, or `UNKNOWN`) - `nameStatus`: Display name review status (`APPROVED`, `PENDING_REVIEW`, `DECLINED`, or `NONE`). Messages cannot be sent until the display name is approved by Meta. - `messagingLimitTier`: Maximum unique business-initiated conversations per 24h rolling window (`TIER_250`, `TIER_1K`, `TIER_10K`, `TIER_100K`, or `TIER_UNLIMITED`). Scales automatically as quality rating improves. - `verifiedName`: Meta-verified business display name - `displayPhoneNumber`: Formatted phone number (e.g., \"+1 555-123-4567\") - `wabaId`: WhatsApp Business Account ID - `phoneNumberId`: Meta phone number ID 
     attr_accessor :metadata
 
@@ -102,7 +99,6 @@ module Late
         :'followers_last_updated' => :'followersLastUpdated',
         :'parent_account_id' => :'parentAccountId',
         :'enabled' => :'enabled',
-        :'ads_status' => :'adsStatus',
         :'metadata' => :'metadata',
         :'profile_picture' => :'profilePicture',
         :'current_followers' => :'currentFollowers',
@@ -138,7 +134,6 @@ module Late
         :'followers_last_updated' => :'Time',
         :'parent_account_id' => :'String',
         :'enabled' => :'Boolean',
-        :'ads_status' => :'String',
         :'metadata' => :'Object',
         :'profile_picture' => :'String',
         :'current_followers' => :'Float',
@@ -223,10 +218,6 @@ module Late
         self.enabled = attributes[:'enabled']
       end
 
-      if attributes.key?(:'ads_status')
-        self.ads_status = attributes[:'ads_status']
-      end
-
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
@@ -274,8 +265,6 @@ module Late
       warn '[DEPRECATED] the `valid?` method is obsolete'
       platform_validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads"])
       return false unless platform_validator.valid?(@platform)
-      ads_status_validator = EnumAttributeValidator.new('String', ["connected", "not_connected", "not_available"])
-      return false unless ads_status_validator.valid?(@ads_status)
       true
     end
 
@@ -287,16 +276,6 @@ module Late
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] ads_status Object to be assigned
-    def ads_status=(ads_status)
-      validator = EnumAttributeValidator.new('String', ["connected", "not_connected", "not_available"])
-      unless validator.valid?(ads_status)
-        fail ArgumentError, "invalid value for \"ads_status\", must be one of #{validator.allowable_values}."
-      end
-      @ads_status = ads_status
     end
 
     # Checks equality by comparing each attribute.
@@ -315,7 +294,6 @@ module Late
           followers_last_updated == o.followers_last_updated &&
           parent_account_id == o.parent_account_id &&
           enabled == o.enabled &&
-          ads_status == o.ads_status &&
           metadata == o.metadata &&
           profile_picture == o.profile_picture &&
           current_followers == o.current_followers &&
@@ -335,7 +313,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, parent_account_id, enabled, ads_status, metadata, profile_picture, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
+      [_id, platform, profile_id, username, display_name, profile_url, is_active, followers_count, followers_last_updated, parent_account_id, enabled, metadata, profile_picture, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
     end
 
     # Builds the object from hash

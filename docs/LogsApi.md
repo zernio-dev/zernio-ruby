@@ -5,9 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**get_post_logs**](LogsApi.md#get_post_logs) | **GET** /v1/posts/{postId}/logs | Get post logs |
-| [**list_connection_logs**](LogsApi.md#list_connection_logs) | **GET** /v1/connections/logs | List connection logs |
 | [**list_logs**](LogsApi.md#list_logs) | **GET** /v1/logs | List activity logs |
-| [**list_posts_logs**](LogsApi.md#list_posts_logs) | **GET** /v1/posts/logs | List publishing logs |
 
 
 ## get_post_logs
@@ -72,87 +70,6 @@ end
 ### Return type
 
 [**GetPostLogs200Response**](GetPostLogs200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## list_connection_logs
-
-> <ListConnectionLogs200Response> list_connection_logs(opts)
-
-List connection logs
-
-**Deprecated.** Use `GET /v1/logs?type=connections` instead. Retrieve connection event logs. Logs are retained for 90 days. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'late-sdk'
-# setup authorization
-Late.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Late::LogsApi.new
-opts = {
-  platform: 'tiktok', # String | Filter by platform
-  event_type: 'connect_success', # String | Filter by event type
-  status: 'success', # String | Filter by status (shorthand for event types)
-  days: 56, # Integer | Number of days to look back (max 7)
-  limit: 56, # Integer | Maximum number of logs to return (max 100)
-  skip: 56 # Integer | Number of logs to skip (for pagination)
-}
-
-begin
-  # List connection logs
-  result = api_instance.list_connection_logs(opts)
-  p result
-rescue Late::ApiError => e
-  puts "Error when calling LogsApi->list_connection_logs: #{e}"
-end
-```
-
-#### Using the list_connection_logs_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ListConnectionLogs200Response>, Integer, Hash)> list_connection_logs_with_http_info(opts)
-
-```ruby
-begin
-  # List connection logs
-  data, status_code, headers = api_instance.list_connection_logs_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ListConnectionLogs200Response>
-rescue Late::ApiError => e
-  puts "Error when calling LogsApi->list_connection_logs_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **platform** | **String** | Filter by platform | [optional] |
-| **event_type** | **String** | Filter by event type | [optional] |
-| **status** | **String** | Filter by status (shorthand for event types) | [optional] |
-| **days** | **Integer** | Number of days to look back (max 7) | [optional][default to 7] |
-| **limit** | **Integer** | Maximum number of logs to return (max 100) | [optional][default to 50] |
-| **skip** | **Integer** | Number of logs to skip (for pagination) | [optional][default to 0] |
-
-### Return type
-
-[**ListConnectionLogs200Response**](ListConnectionLogs200Response.md)
 
 ### Authorization
 
@@ -238,89 +155,6 @@ end
 ### Return type
 
 [**ListLogs200Response**](ListLogs200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## list_posts_logs
-
-> <ListPostsLogs200Response> list_posts_logs(opts)
-
-List publishing logs
-
-**Deprecated.** Use `GET /v1/logs?type=publishing` instead. Retrieve publishing logs for all posts. Logs are retained for 90 days. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'late-sdk'
-# setup authorization
-Late.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Late::LogsApi.new
-opts = {
-  status: 'success', # String | Filter by log status
-  platform: 'tiktok', # String | Filter by platform
-  action: 'publish', # String | Filter by action type
-  days: 56, # Integer | Number of days to look back (max 7)
-  limit: 56, # Integer | Maximum number of logs to return (max 100)
-  skip: 56, # Integer | Number of logs to skip (for pagination)
-  search: 'search_example' # String | Search through log entries by text content.
-}
-
-begin
-  # List publishing logs
-  result = api_instance.list_posts_logs(opts)
-  p result
-rescue Late::ApiError => e
-  puts "Error when calling LogsApi->list_posts_logs: #{e}"
-end
-```
-
-#### Using the list_posts_logs_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ListPostsLogs200Response>, Integer, Hash)> list_posts_logs_with_http_info(opts)
-
-```ruby
-begin
-  # List publishing logs
-  data, status_code, headers = api_instance.list_posts_logs_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ListPostsLogs200Response>
-rescue Late::ApiError => e
-  puts "Error when calling LogsApi->list_posts_logs_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **status** | **String** | Filter by log status | [optional] |
-| **platform** | **String** | Filter by platform | [optional] |
-| **action** | **String** | Filter by action type | [optional] |
-| **days** | **Integer** | Number of days to look back (max 7) | [optional][default to 7] |
-| **limit** | **Integer** | Maximum number of logs to return (max 100) | [optional][default to 50] |
-| **skip** | **Integer** | Number of logs to skip (for pagination) | [optional][default to 0] |
-| **search** | **String** | Search through log entries by text content. | [optional] |
-
-### Return type
-
-[**ListPostsLogs200Response**](ListPostsLogs200Response.md)
 
 ### Authorization
 

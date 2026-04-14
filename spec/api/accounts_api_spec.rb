@@ -44,19 +44,6 @@ describe 'AccountsApi' do
     end
   end
 
-  # unit tests for disconnect_ads
-  # Disconnect ads from an account
-  # **Deprecated.** Ads accounts are now standalone SocialAccount documents. Use &#x60;DELETE /v1/accounts/{accountId}&#x60; instead, passing the ads account&#39;s own ID.  This endpoint is kept for backward compatibility. It soft-deletes the ads SocialAccount identified by &#x60;accountId&#x60; (which must be an ads account, not a posting account). The parent posting account is left untouched. 
-  # @param account_id The ads SocialAccount ID to disconnect
-  # @param [Hash] opts the optional parameters
-  # @option opts [DisconnectAdsRequest] :disconnect_ads_request 
-  # @return [DeleteAccountGroup200Response]
-  describe 'disconnect_ads test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for get_account_health
   # Check account health
   # Returns detailed health info for a specific account including token status, permissions, and recommendations.

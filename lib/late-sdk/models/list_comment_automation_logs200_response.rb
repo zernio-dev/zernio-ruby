@@ -45,7 +45,7 @@ module Late
       {
         :'success' => :'Boolean',
         :'logs' => :'Array<GetCommentAutomation200ResponseLogsInner>',
-        :'pagination' => :'GetWhatsAppContacts200ResponsePagination'
+        :'pagination' => :'ListContacts200ResponsePagination'
       }
     end
 

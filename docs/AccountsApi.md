@@ -5,7 +5,6 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**delete_account**](AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account |
-| [**disconnect_ads**](AccountsApi.md#disconnect_ads) | **POST** /v1/accounts/{accountId}/disconnect-ads | Disconnect ads from an account |
 | [**get_account_health**](AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health |
 | [**get_all_accounts_health**](AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health |
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
@@ -80,79 +79,6 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## disconnect_ads
-
-> <DeleteAccountGroup200Response> disconnect_ads(account_id, opts)
-
-Disconnect ads from an account
-
-**Deprecated.** Ads accounts are now standalone SocialAccount documents. Use `DELETE /v1/accounts/{accountId}` instead, passing the ads account's own ID.  This endpoint is kept for backward compatibility. It soft-deletes the ads SocialAccount identified by `accountId` (which must be an ads account, not a posting account). The parent posting account is left untouched. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'late-sdk'
-# setup authorization
-Late.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Late::AccountsApi.new
-account_id = 'account_id_example' # String | The ads SocialAccount ID to disconnect
-opts = {
-  disconnect_ads_request: Late::DisconnectAdsRequest.new # DisconnectAdsRequest | 
-}
-
-begin
-  # Disconnect ads from an account
-  result = api_instance.disconnect_ads(account_id, opts)
-  p result
-rescue Late::ApiError => e
-  puts "Error when calling AccountsApi->disconnect_ads: #{e}"
-end
-```
-
-#### Using the disconnect_ads_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<DeleteAccountGroup200Response>, Integer, Hash)> disconnect_ads_with_http_info(account_id, opts)
-
-```ruby
-begin
-  # Disconnect ads from an account
-  data, status_code, headers = api_instance.disconnect_ads_with_http_info(account_id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <DeleteAccountGroup200Response>
-rescue Late::ApiError => e
-  puts "Error when calling AccountsApi->disconnect_ads_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The ads SocialAccount ID to disconnect |  |
-| **disconnect_ads_request** | [**DisconnectAdsRequest**](DisconnectAdsRequest.md) |  | [optional] |
-
-### Return type
-
-[**DeleteAccountGroup200Response**](DeleteAccountGroup200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 
