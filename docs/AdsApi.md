@@ -11,7 +11,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
+| [**list_conversion_destinations**](AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API |
 | [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests |
+| [**send_conversions**](AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 
 
@@ -528,6 +530,75 @@ end
 - **Accept**: application/json
 
 
+## list_conversion_destinations
+
+> <ListConversionDestinations200Response> list_conversion_destinations(account_id)
+
+List destinations for the Conversions API
+
+Returns the list of pixels (Meta) or conversion actions (Google) accessible to the connected ads account. Use the returned `id` as `destinationId` when posting to `POST /v1/ads/conversions`.  For Google, each destination's `type` reflects the conversion action's category (PURCHASE, LEAD, SIGN_UP, etc.) — the event type is locked to the destination. For Meta, `type` is absent: pixels accept any event name per request. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::AdsApi.new
+account_id = 'account_id_example' # String | SocialAccount ID (metaads or googleads).
+
+begin
+  # List destinations for the Conversions API
+  result = api_instance.list_conversion_destinations(account_id)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling AdsApi->list_conversion_destinations: #{e}"
+end
+```
+
+#### Using the list_conversion_destinations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListConversionDestinations200Response>, Integer, Hash)> list_conversion_destinations_with_http_info(account_id)
+
+```ruby
+begin
+  # List destinations for the Conversions API
+  data, status_code, headers = api_instance.list_conversion_destinations_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListConversionDestinations200Response>
+rescue Late::ApiError => e
+  puts "Error when calling AdsApi->list_conversion_destinations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | SocialAccount ID (metaads or googleads). |  |
+
+### Return type
+
+[**ListConversionDestinations200Response**](ListConversionDestinations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## search_ad_interests
 
 > <SearchAdInterests200Response> search_ad_interests(q, account_id)
@@ -596,6 +667,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## send_conversions
+
+> <SendConversions200Response> send_conversions(send_conversions_request)
+
+Send conversion events to an ad platform
+
+Relay one or more conversion events to the target ad platform's native Conversions API. Supported platforms: Meta (metaads) via Graph API, Google Ads (googleads) via Data Manager API `ingestEvents`.  Platform is inferred from the provided `accountId`. `destinationId` semantics differ per platform: - Meta: pixel (dataset) ID, e.g. \"123456789012345\" - Google: conversion action resource name, e.g.   \"customers/1234567890/conversionActions/987654321\"  Callers can list valid destinations via `GET /v1/accounts/{accountId}/conversion-destinations`.  All PII (email, phone, names, external IDs) is hashed with SHA-256 server-side per each platform's normalization spec (including Google's Gmail-specific dot/plus-suffix stripping). Send plaintext.  Requires the Ads add-on.  Batching: Meta caps at 1000 events per request and rejects the entire batch if any event is malformed. Google caps at 2000. Both are handled automatically by chunking.  Dedup: pass a stable `eventId` on every event. Meta uses it to dedupe against pixel events; Google maps it to transactionId. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::AdsApi.new
+send_conversions_request = Late::SendConversionsRequest.new({account_id: 'account_id_example', destination_id: 'destination_id_example', events: [Late::ConversionEvent.new({event_name: 'Purchase', event_time: 1744732800, event_id: 'order_abc_123', user: Late::ConversionEventUser.new})]}) # SendConversionsRequest | 
+
+begin
+  # Send conversion events to an ad platform
+  result = api_instance.send_conversions(send_conversions_request)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling AdsApi->send_conversions: #{e}"
+end
+```
+
+#### Using the send_conversions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SendConversions200Response>, Integer, Hash)> send_conversions_with_http_info(send_conversions_request)
+
+```ruby
+begin
+  # Send conversion events to an ad platform
+  data, status_code, headers = api_instance.send_conversions_with_http_info(send_conversions_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SendConversions200Response>
+rescue Late::ApiError => e
+  puts "Error when calling AdsApi->send_conversions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **send_conversions_request** | [**SendConversionsRequest**](SendConversionsRequest.md) |  |  |
+
+### Return type
+
+[**SendConversions200Response**](SendConversions200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

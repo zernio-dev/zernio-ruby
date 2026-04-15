@@ -79,6 +79,10 @@ docs/ConnectWhatsAppCredentialsRequest.md
 docs/Connected.md
 docs/ConnectedAccount.md
 docs/ContactsApi.md
+docs/ConversionEvent.md
+docs/ConversionEventItemsInner.md
+docs/ConversionEventUser.md
+docs/ConversionEventUserClickIds.md
 docs/CreateAccountGroup201Response.md
 docs/CreateAccountGroupRequest.md
 docs/CreateAdAudience201Response.md
@@ -410,6 +414,8 @@ docs/ListContacts200Response.md
 docs/ListContacts200ResponseContactsInner.md
 docs/ListContacts200ResponseFilters.md
 docs/ListContacts200ResponsePagination.md
+docs/ListConversionDestinations200Response.md
+docs/ListConversionDestinations200ResponseDestinationsInner.md
 docs/ListCustomFields200Response.md
 docs/ListCustomFields200ResponseFieldsInner.md
 docs/ListFacebookPages200Response.md
@@ -549,6 +555,11 @@ docs/SelectSnapchatProfile200ResponseAccount.md
 docs/SelectSnapchatProfileRequest.md
 docs/SelectSnapchatProfileRequestSelectedPublicProfile.md
 docs/SendBroadcast200Response.md
+docs/SendConversions200Response.md
+docs/SendConversions200ResponseFailuresInner.md
+docs/SendConversions200ResponseFailuresInnerCode.md
+docs/SendConversionsRequest.md
+docs/SendConversionsRequestConsent.md
 docs/SendInboxMessage200Response.md
 docs/SendInboxMessage200ResponseData.md
 docs/SendInboxMessage400Response.md
@@ -857,6 +868,10 @@ lib/late-sdk/models/connect_whats_app_credentials200_response_account.rb
 lib/late-sdk/models/connect_whats_app_credentials_request.rb
 lib/late-sdk/models/connected.rb
 lib/late-sdk/models/connected_account.rb
+lib/late-sdk/models/conversion_event.rb
+lib/late-sdk/models/conversion_event_items_inner.rb
+lib/late-sdk/models/conversion_event_user.rb
+lib/late-sdk/models/conversion_event_user_click_ids.rb
 lib/late-sdk/models/create_account_group201_response.rb
 lib/late-sdk/models/create_account_group_request.rb
 lib/late-sdk/models/create_ad_audience201_response.rb
@@ -1179,6 +1194,8 @@ lib/late-sdk/models/list_contacts200_response.rb
 lib/late-sdk/models/list_contacts200_response_contacts_inner.rb
 lib/late-sdk/models/list_contacts200_response_filters.rb
 lib/late-sdk/models/list_contacts200_response_pagination.rb
+lib/late-sdk/models/list_conversion_destinations200_response.rb
+lib/late-sdk/models/list_conversion_destinations200_response_destinations_inner.rb
 lib/late-sdk/models/list_custom_fields200_response.rb
 lib/late-sdk/models/list_custom_fields200_response_fields_inner.rb
 lib/late-sdk/models/list_facebook_pages200_response.rb
@@ -1310,6 +1327,11 @@ lib/late-sdk/models/select_snapchat_profile200_response_account.rb
 lib/late-sdk/models/select_snapchat_profile_request.rb
 lib/late-sdk/models/select_snapchat_profile_request_selected_public_profile.rb
 lib/late-sdk/models/send_broadcast200_response.rb
+lib/late-sdk/models/send_conversions200_response.rb
+lib/late-sdk/models/send_conversions200_response_failures_inner.rb
+lib/late-sdk/models/send_conversions200_response_failures_inner_code.rb
+lib/late-sdk/models/send_conversions_request.rb
+lib/late-sdk/models/send_conversions_request_consent.rb
 lib/late-sdk/models/send_inbox_message200_response.rb
 lib/late-sdk/models/send_inbox_message200_response_data.rb
 lib/late-sdk/models/send_inbox_message400_response.rb
@@ -1601,6 +1623,10 @@ spec/models/connect_whats_app_credentials200_response_spec.rb
 spec/models/connect_whats_app_credentials_request_spec.rb
 spec/models/connected_account_spec.rb
 spec/models/connected_spec.rb
+spec/models/conversion_event_items_inner_spec.rb
+spec/models/conversion_event_spec.rb
+spec/models/conversion_event_user_click_ids_spec.rb
+spec/models/conversion_event_user_spec.rb
 spec/models/create_account_group201_response_spec.rb
 spec/models/create_account_group_request_spec.rb
 spec/models/create_ad_audience201_response_spec.rb
@@ -1923,6 +1949,8 @@ spec/models/list_contacts200_response_contacts_inner_spec.rb
 spec/models/list_contacts200_response_filters_spec.rb
 spec/models/list_contacts200_response_pagination_spec.rb
 spec/models/list_contacts200_response_spec.rb
+spec/models/list_conversion_destinations200_response_destinations_inner_spec.rb
+spec/models/list_conversion_destinations200_response_spec.rb
 spec/models/list_custom_fields200_response_fields_inner_spec.rb
 spec/models/list_custom_fields200_response_spec.rb
 spec/models/list_facebook_pages200_response_pages_inner_spec.rb
@@ -2054,6 +2082,11 @@ spec/models/select_snapchat_profile200_response_spec.rb
 spec/models/select_snapchat_profile_request_selected_public_profile_spec.rb
 spec/models/select_snapchat_profile_request_spec.rb
 spec/models/send_broadcast200_response_spec.rb
+spec/models/send_conversions200_response_failures_inner_code_spec.rb
+spec/models/send_conversions200_response_failures_inner_spec.rb
+spec/models/send_conversions200_response_spec.rb
+spec/models/send_conversions_request_consent_spec.rb
+spec/models/send_conversions_request_spec.rb
 spec/models/send_inbox_message200_response_data_spec.rb
 spec/models/send_inbox_message200_response_spec.rb
 spec/models/send_inbox_message400_response_spec.rb

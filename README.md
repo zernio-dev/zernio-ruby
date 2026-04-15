@@ -102,7 +102,9 @@ Class | Method | HTTP request | Description
 *Late::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Late::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Late::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
+*Late::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API
 *Late::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
+*Late::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform
 *Late::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Late::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Late::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
@@ -372,6 +374,10 @@ Class | Method | HTTP request | Description
  - [Late::ConnectWhatsAppCredentialsRequest](docs/ConnectWhatsAppCredentialsRequest.md)
  - [Late::Connected](docs/Connected.md)
  - [Late::ConnectedAccount](docs/ConnectedAccount.md)
+ - [Late::ConversionEvent](docs/ConversionEvent.md)
+ - [Late::ConversionEventItemsInner](docs/ConversionEventItemsInner.md)
+ - [Late::ConversionEventUser](docs/ConversionEventUser.md)
+ - [Late::ConversionEventUserClickIds](docs/ConversionEventUserClickIds.md)
  - [Late::CreateAccountGroup201Response](docs/CreateAccountGroup201Response.md)
  - [Late::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
  - [Late::CreateAdAudience201Response](docs/CreateAdAudience201Response.md)
@@ -694,6 +700,8 @@ Class | Method | HTTP request | Description
  - [Late::ListContacts200ResponseContactsInner](docs/ListContacts200ResponseContactsInner.md)
  - [Late::ListContacts200ResponseFilters](docs/ListContacts200ResponseFilters.md)
  - [Late::ListContacts200ResponsePagination](docs/ListContacts200ResponsePagination.md)
+ - [Late::ListConversionDestinations200Response](docs/ListConversionDestinations200Response.md)
+ - [Late::ListConversionDestinations200ResponseDestinationsInner](docs/ListConversionDestinations200ResponseDestinationsInner.md)
  - [Late::ListCustomFields200Response](docs/ListCustomFields200Response.md)
  - [Late::ListCustomFields200ResponseFieldsInner](docs/ListCustomFields200ResponseFieldsInner.md)
  - [Late::ListFacebookPages200Response](docs/ListFacebookPages200Response.md)
@@ -825,6 +833,11 @@ Class | Method | HTTP request | Description
  - [Late::SelectSnapchatProfileRequest](docs/SelectSnapchatProfileRequest.md)
  - [Late::SelectSnapchatProfileRequestSelectedPublicProfile](docs/SelectSnapchatProfileRequestSelectedPublicProfile.md)
  - [Late::SendBroadcast200Response](docs/SendBroadcast200Response.md)
+ - [Late::SendConversions200Response](docs/SendConversions200Response.md)
+ - [Late::SendConversions200ResponseFailuresInner](docs/SendConversions200ResponseFailuresInner.md)
+ - [Late::SendConversions200ResponseFailuresInnerCode](docs/SendConversions200ResponseFailuresInnerCode.md)
+ - [Late::SendConversionsRequest](docs/SendConversionsRequest.md)
+ - [Late::SendConversionsRequestConsent](docs/SendConversionsRequestConsent.md)
  - [Late::SendInboxMessage200Response](docs/SendInboxMessage200Response.md)
  - [Late::SendInboxMessage200ResponseData](docs/SendInboxMessage200ResponseData.md)
  - [Late::SendInboxMessage400Response](docs/SendInboxMessage400Response.md)
