@@ -14,54 +14,23 @@ require 'date'
 require 'time'
 
 module Late
-  # Text and single image only (no videos). Supports STANDARD, EVENT, and OFFER post types. Posts appear on GBP, Google Search, and Maps. Use locationId for multi-location posting.
-  class GoogleBusinessPlatformData < ApiModelBase
-    # Target GBP location ID (e.g. \"locations/123456789\"). If omitted, uses the default location. Use GET /v1/accounts/{id}/gmb-locations to list locations.
-    attr_accessor :location_id
+  # Event date/time range. Uses Google's date format (NOT ISO 8601).
+  class GoogleBusinessPlatformDataEventSchedule < ApiModelBase
+    attr_accessor :start_date
 
-    # BCP 47 language code (e.g. \"en\", \"de\", \"es\"). Auto-detected if omitted. Set explicitly for short or mixed-language posts.
-    attr_accessor :language_code
+    attr_accessor :start_time
 
-    # Post type. STANDARD is a regular update. EVENT requires the event object. OFFER requires the offer object. Defaults to STANDARD if omitted.
-    attr_accessor :topic_type
+    attr_accessor :end_date
 
-    attr_accessor :call_to_action
-
-    attr_accessor :event
-
-    attr_accessor :offer
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :end_time
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'location_id' => :'locationId',
-        :'language_code' => :'languageCode',
-        :'topic_type' => :'topicType',
-        :'call_to_action' => :'callToAction',
-        :'event' => :'event',
-        :'offer' => :'offer'
+        :'start_date' => :'startDate',
+        :'start_time' => :'startTime',
+        :'end_date' => :'endDate',
+        :'end_time' => :'endTime'
       }
     end
 
@@ -78,12 +47,10 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'location_id' => :'String',
-        :'language_code' => :'String',
-        :'topic_type' => :'String',
-        :'call_to_action' => :'GoogleBusinessPlatformDataCallToAction',
-        :'event' => :'GoogleBusinessPlatformDataEvent',
-        :'offer' => :'GoogleBusinessPlatformDataOffer'
+        :'start_date' => :'GoogleBusinessPlatformDataEventScheduleStartDate',
+        :'start_time' => :'GoogleBusinessPlatformDataEventScheduleStartTime',
+        :'end_date' => :'GoogleBusinessPlatformDataEventScheduleEndDate',
+        :'end_time' => :'GoogleBusinessPlatformDataEventScheduleEndTime'
       }
     end
 
@@ -97,42 +64,36 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GoogleBusinessPlatformData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GoogleBusinessPlatformDataEventSchedule` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GoogleBusinessPlatformData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GoogleBusinessPlatformDataEventSchedule`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'location_id')
-        self.location_id = attributes[:'location_id']
-      end
-
-      if attributes.key?(:'language_code')
-        self.language_code = attributes[:'language_code']
-      end
-
-      if attributes.key?(:'topic_type')
-        self.topic_type = attributes[:'topic_type']
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
       else
-        self.topic_type = 'STANDARD'
+        self.start_date = nil
       end
 
-      if attributes.key?(:'call_to_action')
-        self.call_to_action = attributes[:'call_to_action']
+      if attributes.key?(:'start_time')
+        self.start_time = attributes[:'start_time']
       end
 
-      if attributes.key?(:'event')
-        self.event = attributes[:'event']
+      if attributes.key?(:'end_date')
+        self.end_date = attributes[:'end_date']
+      else
+        self.end_date = nil
       end
 
-      if attributes.key?(:'offer')
-        self.offer = attributes[:'offer']
+      if attributes.key?(:'end_time')
+        self.end_time = attributes[:'end_time']
       end
     end
 
@@ -141,6 +102,14 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @start_date.nil?
+        invalid_properties.push('invalid value for "start_date", start_date cannot be nil.')
+      end
+
+      if @end_date.nil?
+        invalid_properties.push('invalid value for "end_date", end_date cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -148,19 +117,29 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      topic_type_validator = EnumAttributeValidator.new('String', ["STANDARD", "EVENT", "OFFER"])
-      return false unless topic_type_validator.valid?(@topic_type)
+      return false if @start_date.nil?
+      return false if @end_date.nil?
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] topic_type Object to be assigned
-    def topic_type=(topic_type)
-      validator = EnumAttributeValidator.new('String', ["STANDARD", "EVENT", "OFFER"])
-      unless validator.valid?(topic_type)
-        fail ArgumentError, "invalid value for \"topic_type\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] start_date Value to be assigned
+    def start_date=(start_date)
+      if start_date.nil?
+        fail ArgumentError, 'start_date cannot be nil'
       end
-      @topic_type = topic_type
+
+      @start_date = start_date
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] end_date Value to be assigned
+    def end_date=(end_date)
+      if end_date.nil?
+        fail ArgumentError, 'end_date cannot be nil'
+      end
+
+      @end_date = end_date
     end
 
     # Checks equality by comparing each attribute.
@@ -168,12 +147,10 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          location_id == o.location_id &&
-          language_code == o.language_code &&
-          topic_type == o.topic_type &&
-          call_to_action == o.call_to_action &&
-          event == o.event &&
-          offer == o.offer
+          start_date == o.start_date &&
+          start_time == o.start_time &&
+          end_date == o.end_date &&
+          end_time == o.end_time
     end
 
     # @see the `==` method
@@ -185,7 +162,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [location_id, language_code, topic_type, call_to_action, event, offer].hash
+      [start_date, start_time, end_date, end_time].hash
     end
 
     # Builds the object from hash

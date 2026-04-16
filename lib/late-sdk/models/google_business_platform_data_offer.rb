@@ -14,22 +14,19 @@ require 'date'
 require 'time'
 
 module Late
-  # Text and single image only (no videos). Supports STANDARD, EVENT, and OFFER post types. Posts appear on GBP, Google Search, and Maps. Use locationId for multi-location posting.
-  class GoogleBusinessPlatformData < ApiModelBase
-    # Target GBP location ID (e.g. \"locations/123456789\"). If omitted, uses the default location. Use GET /v1/accounts/{id}/gmb-locations to list locations.
-    attr_accessor :location_id
+  # Offer details. Required when topicType is OFFER. All fields are optional per Google's API, but at least one is recommended.
+  class GoogleBusinessPlatformDataOffer < ApiModelBase
+    # Type of offer
+    attr_accessor :offer_type
 
-    # BCP 47 language code (e.g. \"en\", \"de\", \"es\"). Auto-detected if omitted. Set explicitly for short or mixed-language posts.
-    attr_accessor :language_code
+    # URL where the offer can be redeemed online
+    attr_accessor :redeem_online_url
 
-    # Post type. STANDARD is a regular update. EVENT requires the event object. OFFER requires the offer object. Defaults to STANDARD if omitted.
-    attr_accessor :topic_type
+    # Terms and conditions for the offer
+    attr_accessor :terms_conditions
 
-    attr_accessor :call_to_action
-
-    attr_accessor :event
-
-    attr_accessor :offer
+    # Coupon code for the offer
+    attr_accessor :coupon_code
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -56,12 +53,10 @@ module Late
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'location_id' => :'locationId',
-        :'language_code' => :'languageCode',
-        :'topic_type' => :'topicType',
-        :'call_to_action' => :'callToAction',
-        :'event' => :'event',
-        :'offer' => :'offer'
+        :'offer_type' => :'offerType',
+        :'redeem_online_url' => :'redeemOnlineUrl',
+        :'terms_conditions' => :'termsConditions',
+        :'coupon_code' => :'couponCode'
       }
     end
 
@@ -78,12 +73,10 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'location_id' => :'String',
-        :'language_code' => :'String',
-        :'topic_type' => :'String',
-        :'call_to_action' => :'GoogleBusinessPlatformDataCallToAction',
-        :'event' => :'GoogleBusinessPlatformDataEvent',
-        :'offer' => :'GoogleBusinessPlatformDataOffer'
+        :'offer_type' => :'String',
+        :'redeem_online_url' => :'String',
+        :'terms_conditions' => :'String',
+        :'coupon_code' => :'String'
       }
     end
 
@@ -97,42 +90,32 @@ module Late
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GoogleBusinessPlatformData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Late::GoogleBusinessPlatformDataOffer` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GoogleBusinessPlatformData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Late::GoogleBusinessPlatformDataOffer`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'location_id')
-        self.location_id = attributes[:'location_id']
+      if attributes.key?(:'offer_type')
+        self.offer_type = attributes[:'offer_type']
       end
 
-      if attributes.key?(:'language_code')
-        self.language_code = attributes[:'language_code']
+      if attributes.key?(:'redeem_online_url')
+        self.redeem_online_url = attributes[:'redeem_online_url']
       end
 
-      if attributes.key?(:'topic_type')
-        self.topic_type = attributes[:'topic_type']
-      else
-        self.topic_type = 'STANDARD'
+      if attributes.key?(:'terms_conditions')
+        self.terms_conditions = attributes[:'terms_conditions']
       end
 
-      if attributes.key?(:'call_to_action')
-        self.call_to_action = attributes[:'call_to_action']
-      end
-
-      if attributes.key?(:'event')
-        self.event = attributes[:'event']
-      end
-
-      if attributes.key?(:'offer')
-        self.offer = attributes[:'offer']
+      if attributes.key?(:'coupon_code')
+        self.coupon_code = attributes[:'coupon_code']
       end
     end
 
@@ -148,19 +131,19 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      topic_type_validator = EnumAttributeValidator.new('String', ["STANDARD", "EVENT", "OFFER"])
-      return false unless topic_type_validator.valid?(@topic_type)
+      offer_type_validator = EnumAttributeValidator.new('String', ["OFFER", "BUY_ONE_GET_ONE"])
+      return false unless offer_type_validator.valid?(@offer_type)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] topic_type Object to be assigned
-    def topic_type=(topic_type)
-      validator = EnumAttributeValidator.new('String', ["STANDARD", "EVENT", "OFFER"])
-      unless validator.valid?(topic_type)
-        fail ArgumentError, "invalid value for \"topic_type\", must be one of #{validator.allowable_values}."
+    # @param [Object] offer_type Object to be assigned
+    def offer_type=(offer_type)
+      validator = EnumAttributeValidator.new('String', ["OFFER", "BUY_ONE_GET_ONE"])
+      unless validator.valid?(offer_type)
+        fail ArgumentError, "invalid value for \"offer_type\", must be one of #{validator.allowable_values}."
       end
-      @topic_type = topic_type
+      @offer_type = offer_type
     end
 
     # Checks equality by comparing each attribute.
@@ -168,12 +151,10 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          location_id == o.location_id &&
-          language_code == o.language_code &&
-          topic_type == o.topic_type &&
-          call_to_action == o.call_to_action &&
-          event == o.event &&
-          offer == o.offer
+          offer_type == o.offer_type &&
+          redeem_online_url == o.redeem_online_url &&
+          terms_conditions == o.terms_conditions &&
+          coupon_code == o.coupon_code
     end
 
     # @see the `==` method
@@ -185,7 +166,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [location_id, language_code, topic_type, call_to_action, event, offer].hash
+      [offer_type, redeem_online_url, terms_conditions, coupon_code].hash
     end
 
     # Builds the object from hash
