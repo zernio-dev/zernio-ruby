@@ -15,6 +15,7 @@ Late::PlatformTargetPlatformSpecificData.openapi_one_of
 # =>
 # [
 #   :'BlueskyPlatformData',
+#   :'DiscordPlatformData',
 #   :'FacebookPlatformData',
 #   :'GoogleBusinessPlatformData',
 #   :'InstagramPlatformData',
@@ -55,6 +56,7 @@ Late::PlatformTargetPlatformSpecificData.build(data_that_doesnt_match)
 #### Return type
 
 - `BlueskyPlatformData`
+- `DiscordPlatformData`
 - `FacebookPlatformData`
 - `GoogleBusinessPlatformData`
 - `InstagramPlatformData`

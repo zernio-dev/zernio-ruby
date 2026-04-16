@@ -19,6 +19,9 @@ module Late
 
     attr_accessor :status
 
+    # The native post ID on the platform (e.g. Instagram media ID, tweet ID)
+    attr_accessor :platform_post_id
+
     attr_accessor :account_id
 
     attr_accessor :account_username
@@ -60,6 +63,7 @@ module Late
       {
         :'platform' => :'platform',
         :'status' => :'status',
+        :'platform_post_id' => :'platformPostId',
         :'account_id' => :'accountId',
         :'account_username' => :'accountUsername',
         :'analytics' => :'analytics',
@@ -84,6 +88,7 @@ module Late
       {
         :'platform' => :'String',
         :'status' => :'String',
+        :'platform_post_id' => :'String',
         :'account_id' => :'String',
         :'account_username' => :'String',
         :'analytics' => :'PostAnalytics',
@@ -121,6 +126,10 @@ module Late
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'platform_post_id')
+        self.platform_post_id = attributes[:'platform_post_id']
       end
 
       if attributes.key?(:'account_id')
@@ -194,6 +203,7 @@ module Late
       self.class == o.class &&
           platform == o.platform &&
           status == o.status &&
+          platform_post_id == o.platform_post_id &&
           account_id == o.account_id &&
           account_username == o.account_username &&
           analytics == o.analytics &&
@@ -211,7 +221,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, status, account_id, account_username, analytics, sync_status, platform_post_url, error_message].hash
+      [platform, status, platform_post_id, account_id, account_username, analytics, sync_status, platform_post_url, error_message].hash
     end
 
     # Builds the object from hash

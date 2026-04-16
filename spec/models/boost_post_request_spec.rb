@@ -60,7 +60,7 @@ describe Late::BoostPostRequest do
   describe 'test attribute "goal"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "conversions", "app_promotion"])
       # validator.allowable_values.each do |value|
       #   expect { instance.goal = value }.not_to raise_error
       # end

@@ -15,6 +15,7 @@ Late::CreatePostRequestPlatformsInnerPlatformSpecificData.openapi_one_of
 # =>
 # [
 #   :'BlueskyPlatformData',
+#   :'DiscordPlatformData',
 #   :'FacebookPlatformData',
 #   :'GoogleBusinessPlatformData',
 #   :'InstagramPlatformData',
@@ -55,6 +56,7 @@ Late::CreatePostRequestPlatformsInnerPlatformSpecificData.build(data_that_doesnt
 #### Return type
 
 - `BlueskyPlatformData`
+- `DiscordPlatformData`
 - `FacebookPlatformData`
 - `GoogleBusinessPlatformData`
 - `InstagramPlatformData`

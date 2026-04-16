@@ -21,6 +21,7 @@ module Late
 
     attr_accessor :name
 
+    # Available goals vary by platform. Meta (Facebook/Instagram) and TikTok support all 7. LinkedIn supports all except app_promotion. Twitter/X supports engagement, traffic, awareness, video_views, app_promotion. Pinterest and Google Ads support only engagement, traffic, awareness, video_views.
     attr_accessor :goal
 
     attr_accessor :budget_amount
@@ -395,7 +396,7 @@ module Late
       return false if @name.nil?
       return false if @name.to_s.length > 255
       return false if @goal.nil?
-      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views"])
+      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "conversions", "app_promotion"])
       return false unless goal_validator.valid?(@goal)
       return false if @budget_amount.nil?
       return false if @budget_type.nil?
@@ -452,7 +453,7 @@ module Late
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] goal Object to be assigned
     def goal=(goal)
-      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views"])
+      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "conversions", "app_promotion"])
       unless validator.valid?(goal)
         fail ArgumentError, "invalid value for \"goal\", must be one of #{validator.allowable_values}."
       end

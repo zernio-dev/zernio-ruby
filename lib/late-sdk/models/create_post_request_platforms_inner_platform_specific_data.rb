@@ -20,6 +20,7 @@ module Late
       def openapi_one_of
         [
           :'BlueskyPlatformData',
+          :'DiscordPlatformData',
           :'FacebookPlatformData',
           :'GoogleBusinessPlatformData',
           :'InstagramPlatformData',

@@ -9,7 +9,7 @@
 | **account_id** | **String** | Social account ID |  |
 | **ad_account_id** | **String** | Platform ad account ID |  |
 | **name** | **String** |  |  |
-| **goal** | **String** |  |  |
+| **goal** | **String** | Available goals vary by platform. Meta (Facebook/Instagram) and TikTok support all 7. LinkedIn supports all except app_promotion. Twitter/X supports engagement, traffic, awareness, video_views, app_promotion. Pinterest and Google Ads support only engagement, traffic, awareness, video_views. |  |
 | **budget** | [**BoostPostRequestBudget**](BoostPostRequestBudget.md) |  |  |
 | **currency** | **String** |  | [optional] |
 | **schedule** | [**BoostPostRequestSchedule**](BoostPostRequestSchedule.md) |  | [optional] |

@@ -192,6 +192,9 @@ Class | Method | HTTP request | Description
 *Late::CustomFieldsApi* | [**list_custom_fields**](docs/CustomFieldsApi.md#list_custom_fields) | **GET** /v1/custom-fields | List custom field definitions
 *Late::CustomFieldsApi* | [**set_contact_field_value**](docs/CustomFieldsApi.md#set_contact_field_value) | **PUT** /v1/contacts/{contactId}/fields/{slug} | Set custom field value
 *Late::CustomFieldsApi* | [**update_custom_field**](docs/CustomFieldsApi.md#update_custom_field) | **PATCH** /v1/custom-fields/{fieldId} | Update custom field
+*Late::DiscordApi* | [**get_discord_channels**](docs/DiscordApi.md#get_discord_channels) | **GET** /v1/accounts/{accountId}/discord-channels | List Discord guild channels
+*Late::DiscordApi* | [**get_discord_settings**](docs/DiscordApi.md#get_discord_settings) | **GET** /v1/accounts/{accountId}/discord-settings | Get Discord account settings
+*Late::DiscordApi* | [**update_discord_settings**](docs/DiscordApi.md#update_discord_settings) | **PATCH** /v1/accounts/{accountId}/discord-settings | Update Discord settings
 *Late::GMBAttributesApi* | [**get_google_business_attributes**](docs/GMBAttributesApi.md#get_google_business_attributes) | **GET** /v1/accounts/{accountId}/gmb-attributes | Get attributes
 *Late::GMBAttributesApi* | [**update_google_business_attributes**](docs/GMBAttributesApi.md#update_google_business_attributes) | **PUT** /v1/accounts/{accountId}/gmb-attributes | Update attributes
 *Late::GMBFoodMenusApi* | [**get_google_business_food_menus**](docs/GMBFoodMenusApi.md#get_google_business_food_menus) | **GET** /v1/accounts/{accountId}/gmb-food-menus | Get food menus
@@ -449,6 +452,17 @@ Class | Method | HTTP request | Description
  - [Late::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Late::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
  - [Late::DeleteQueueSlot200Response](docs/DeleteQueueSlot200Response.md)
+ - [Late::DiscordPlatformData](docs/DiscordPlatformData.md)
+ - [Late::DiscordPlatformDataEmbedsInner](docs/DiscordPlatformDataEmbedsInner.md)
+ - [Late::DiscordPlatformDataEmbedsInnerAuthor](docs/DiscordPlatformDataEmbedsInnerAuthor.md)
+ - [Late::DiscordPlatformDataEmbedsInnerFieldsInner](docs/DiscordPlatformDataEmbedsInnerFieldsInner.md)
+ - [Late::DiscordPlatformDataEmbedsInnerFooter](docs/DiscordPlatformDataEmbedsInnerFooter.md)
+ - [Late::DiscordPlatformDataEmbedsInnerImage](docs/DiscordPlatformDataEmbedsInnerImage.md)
+ - [Late::DiscordPlatformDataPoll](docs/DiscordPlatformDataPoll.md)
+ - [Late::DiscordPlatformDataPollAnswersInner](docs/DiscordPlatformDataPollAnswersInner.md)
+ - [Late::DiscordPlatformDataPollAnswersInnerPollMedia](docs/DiscordPlatformDataPollAnswersInnerPollMedia.md)
+ - [Late::DiscordPlatformDataPollQuestion](docs/DiscordPlatformDataPollQuestion.md)
+ - [Late::DiscordPlatformDataThreadFromMessage](docs/DiscordPlatformDataThreadFromMessage.md)
  - [Late::EditInboxMessage200Response](docs/EditInboxMessage200Response.md)
  - [Late::EditInboxMessage200ResponseData](docs/EditInboxMessage200ResponseData.md)
  - [Late::EditInboxMessageRequest](docs/EditInboxMessageRequest.md)
@@ -513,6 +527,10 @@ Class | Method | HTTP request | Description
  - [Late::GetDailyMetrics200ResponseDailyDataInner](docs/GetDailyMetrics200ResponseDailyDataInner.md)
  - [Late::GetDailyMetrics200ResponseDailyDataInnerMetrics](docs/GetDailyMetrics200ResponseDailyDataInnerMetrics.md)
  - [Late::GetDailyMetrics200ResponsePlatformBreakdownInner](docs/GetDailyMetrics200ResponsePlatformBreakdownInner.md)
+ - [Late::GetDiscordChannels200Response](docs/GetDiscordChannels200Response.md)
+ - [Late::GetDiscordChannels200ResponseChannelsInner](docs/GetDiscordChannels200ResponseChannelsInner.md)
+ - [Late::GetDiscordSettings200Response](docs/GetDiscordSettings200Response.md)
+ - [Late::GetDiscordSettings200ResponseAccount](docs/GetDiscordSettings200ResponseAccount.md)
  - [Late::GetFacebookPages200Response](docs/GetFacebookPages200Response.md)
  - [Late::GetFacebookPages200ResponsePagesInner](docs/GetFacebookPages200ResponsePagesInner.md)
  - [Late::GetFollowerStats200Response](docs/GetFollowerStats200Response.md)
@@ -899,6 +917,9 @@ Class | Method | HTTP request | Description
  - [Late::UpdateCustomField200Response](docs/UpdateCustomField200Response.md)
  - [Late::UpdateCustomField200ResponseField](docs/UpdateCustomField200ResponseField.md)
  - [Late::UpdateCustomFieldRequest](docs/UpdateCustomFieldRequest.md)
+ - [Late::UpdateDiscordSettings200Response](docs/UpdateDiscordSettings200Response.md)
+ - [Late::UpdateDiscordSettings200ResponseAccount](docs/UpdateDiscordSettings200ResponseAccount.md)
+ - [Late::UpdateDiscordSettingsRequest](docs/UpdateDiscordSettingsRequest.md)
  - [Late::UpdateFacebookPage200Response](docs/UpdateFacebookPage200Response.md)
  - [Late::UpdateFacebookPage200ResponseSelectedPage](docs/UpdateFacebookPage200ResponseSelectedPage.md)
  - [Late::UpdateFacebookPageRequest](docs/UpdateFacebookPageRequest.md)

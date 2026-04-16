@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** |  | [optional] |
 | **status** | **String** |  | [optional] |
+| **platform_post_id** | **String** | The native post ID on the platform (e.g. Instagram media ID, tweet ID) | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **account_username** | **String** |  | [optional] |
 | **analytics** | [**PostAnalytics**](PostAnalytics.md) |  | [optional] |
@@ -21,6 +22,7 @@ require 'late-sdk'
 instance = Late::PlatformAnalytics.new(
   platform: null,
   status: null,
+  platform_post_id: null,
   account_id: null,
   account_username: null,
   analytics: null,
