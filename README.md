@@ -488,6 +488,7 @@ Class | Method | HTTP request | Description
  - [Late::GbpSpecialHourPeriod](docs/GbpSpecialHourPeriod.md)
  - [Late::GbpSpecialHourPeriodStartDate](docs/GbpSpecialHourPeriodStartDate.md)
  - [Late::GbpUpdateFreeFormServiceItemLabel](docs/GbpUpdateFreeFormServiceItemLabel.md)
+ - [Late::GeoRestriction](docs/GeoRestriction.md)
  - [Late::GetAccountHealth200Response](docs/GetAccountHealth200Response.md)
  - [Late::GetAccountHealth200ResponsePermissions](docs/GetAccountHealth200ResponsePermissions.md)
  - [Late::GetAccountHealth200ResponsePermissionsPostingInner](docs/GetAccountHealth200ResponsePermissionsPostingInner.md)

@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module Late
+  # X (Twitter) geo-restriction applies at the media level. Media in geo-restricted tweets will be hidden for users outside the specified countries; the tweet text itself remains visible globally. Requires media to be attached (ignored for text-only tweets). 
   class TwitterPlatformData < ApiModelBase
     # ID of an existing tweet to reply to. The published tweet will appear as a reply in that tweet's thread. For threads, only the first tweet replies to the target; subsequent tweets chain normally.
     attr_accessor :reply_to_tweet_id
@@ -28,6 +29,8 @@ module Late
 
     # Enable long video uploads (over 140 seconds) using amplify_video media category. Requires the connected X account to have an active X Premium subscription. When true, videos are uploaded with the amplify_video category which supports longer durations (up to 10 minutes via API). When false or omitted, the standard tweet_video category is used (140 second limit). Note that not all Premium accounts have API long-video access, as X may require separate allowlisting.
     attr_accessor :long_video
+
+    attr_accessor :geo_restriction
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -58,7 +61,8 @@ module Late
         :'reply_settings' => :'replySettings',
         :'thread_items' => :'threadItems',
         :'poll' => :'poll',
-        :'long_video' => :'longVideo'
+        :'long_video' => :'longVideo',
+        :'geo_restriction' => :'geoRestriction'
       }
     end
 
@@ -79,7 +83,8 @@ module Late
         :'reply_settings' => :'String',
         :'thread_items' => :'Array<TwitterPlatformDataThreadItemsInner>',
         :'poll' => :'TwitterPlatformDataPoll',
-        :'long_video' => :'Boolean'
+        :'long_video' => :'Boolean',
+        :'geo_restriction' => :'GeoRestriction'
       }
     end
 
@@ -128,6 +133,10 @@ module Late
       else
         self.long_video = false
       end
+
+      if attributes.key?(:'geo_restriction')
+        self.geo_restriction = attributes[:'geo_restriction']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -166,7 +175,8 @@ module Late
           reply_settings == o.reply_settings &&
           thread_items == o.thread_items &&
           poll == o.poll &&
-          long_video == o.long_video
+          long_video == o.long_video &&
+          geo_restriction == o.geo_restriction
     end
 
     # @see the `==` method
@@ -178,7 +188,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [reply_to_tweet_id, reply_settings, thread_items, poll, long_video].hash
+      [reply_to_tweet_id, reply_settings, thread_items, poll, long_video, geo_restriction].hash
     end
 
     # Builds the object from hash

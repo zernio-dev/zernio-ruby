@@ -9,6 +9,7 @@
 | **title** | **String** | Reel title (only for contentType&#x3D;reel). Separate from the caption/content field. | [optional] |
 | **first_comment** | **String** | Optional first comment to post immediately after publishing (feed posts and reels, not stories). Skipped when draft is true. | [optional] |
 | **page_id** | **String** | Target Facebook Page ID for multi-page posting. If omitted, uses the default page. Use GET /v1/accounts/{id}/facebook-page to list pages. | [optional] |
+| **geo_restriction** | [**GeoRestriction**](GeoRestriction.md) |  | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Late::FacebookPlatformData.new(
   content_type: null,
   title: null,
   first_comment: null,
-  page_id: null
+  page_id: null,
+  geo_restriction: null
 )
 ```
 

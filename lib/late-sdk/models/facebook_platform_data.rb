@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # Feed posts support up to 10 images (no mixed video+image). Stories require single media (24h, no captions). Reels require single vertical video (9:16, 3-60s).
+  # Feed posts support up to 10 images (no mixed video+image). Stories require single media (24h, no captions). Reels require single vertical video (9:16, 3-60s). Geo-restriction is a hard visibility restriction: users outside the specified countries cannot see the post. Not supported for stories. 
   class FacebookPlatformData < ApiModelBase
     # When true, creates the post as an unpublished draft visible in Facebook Publishing Tools instead of publishing immediately. Supported for feed posts (text, link, image, video) and reels. Not supported for stories. Drafts expire after ~30 days.
     attr_accessor :draft
@@ -30,6 +30,8 @@ module Late
 
     # Target Facebook Page ID for multi-page posting. If omitted, uses the default page. Use GET /v1/accounts/{id}/facebook-page to list pages.
     attr_accessor :page_id
+
+    attr_accessor :geo_restriction
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -60,7 +62,8 @@ module Late
         :'content_type' => :'contentType',
         :'title' => :'title',
         :'first_comment' => :'firstComment',
-        :'page_id' => :'pageId'
+        :'page_id' => :'pageId',
+        :'geo_restriction' => :'geoRestriction'
       }
     end
 
@@ -81,7 +84,8 @@ module Late
         :'content_type' => :'String',
         :'title' => :'String',
         :'first_comment' => :'String',
-        :'page_id' => :'String'
+        :'page_id' => :'String',
+        :'geo_restriction' => :'GeoRestriction'
       }
     end
 
@@ -128,6 +132,10 @@ module Late
       if attributes.key?(:'page_id')
         self.page_id = attributes[:'page_id']
       end
+
+      if attributes.key?(:'geo_restriction')
+        self.geo_restriction = attributes[:'geo_restriction']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -166,7 +174,8 @@ module Late
           content_type == o.content_type &&
           title == o.title &&
           first_comment == o.first_comment &&
-          page_id == o.page_id
+          page_id == o.page_id &&
+          geo_restriction == o.geo_restriction
     end
 
     # @see the `==` method
@@ -178,7 +187,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [draft, content_type, title, first_comment, page_id].hash
+      [draft, content_type, title, first_comment, page_id, geo_restriction].hash
     end
 
     # Builds the object from hash
