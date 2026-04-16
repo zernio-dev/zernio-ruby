@@ -43,7 +43,7 @@ module Late
     # Facebook message tag for messaging outside 24h window. Requires messagingType MESSAGE_TAG. Instagram only supports HUMAN_AGENT.
     attr_accessor :message_tag
 
-    # Platform message ID to reply to (Telegram only).
+    # Platform message ID to quote-reply to. For WhatsApp, pass the wamid (available in message.platformMessageId from webhooks). For Telegram, pass the Telegram message ID.
     attr_accessor :reply_to
 
     class EnumAttributeValidator

@@ -14,7 +14,7 @@
 | **reply_markup** | [**SendInboxMessageRequestReplyMarkup**](SendInboxMessageRequestReplyMarkup.md) |  | [optional] |
 | **messaging_type** | **String** | Facebook messaging type. Required when using messageTag. | [optional] |
 | **message_tag** | **String** | Facebook message tag for messaging outside 24h window. Requires messagingType MESSAGE_TAG. Instagram only supports HUMAN_AGENT. | [optional] |
-| **reply_to** | **String** | Platform message ID to reply to (Telegram only). | [optional] |
+| **reply_to** | **String** | Platform message ID to quote-reply to. For WhatsApp, pass the wamid (available in message.platformMessageId from webhooks). For Telegram, pass the Telegram message ID. | [optional] |
 
 ## Example
 

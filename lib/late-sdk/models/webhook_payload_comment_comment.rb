@@ -18,7 +18,7 @@ module Late
     # Platform comment ID
     attr_accessor :id
 
-    # Internal post ID
+    # Internal post ID (null for posts not published through Zernio)
     attr_accessor :post_id
 
     # Platform's post ID

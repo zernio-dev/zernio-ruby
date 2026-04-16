@@ -15,7 +15,7 @@ require 'time'
 
 module Late
   class WebhookPayloadCommentPost < ApiModelBase
-    # Internal post ID
+    # Internal post ID (null for posts not published through Zernio)
     attr_accessor :id
 
     # Platform's post ID
