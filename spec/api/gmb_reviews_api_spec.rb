@@ -32,6 +32,19 @@ describe 'GMBReviewsApi' do
     end
   end
 
+  # unit tests for batch_get_google_business_reviews
+  # Batch get reviews
+  # Fetches reviews across multiple locations in a single request. More efficient than calling GET /gmb-reviews per location for multi-location businesses. Reviews are grouped by location in the response. 
+  # @param account_id 
+  # @param batch_get_google_business_reviews_request 
+  # @param [Hash] opts the optional parameters
+  # @return [BatchGetGoogleBusinessReviews200Response]
+  describe 'batch_get_google_business_reviews test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_google_business_reviews
   # Get reviews
   # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.

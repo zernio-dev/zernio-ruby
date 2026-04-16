@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_google_business_place_action**](GMBPlaceActionsApi.md#create_google_business_place_action) | **POST** /v1/accounts/{accountId}/gmb-place-actions | Create action link |
 | [**delete_google_business_place_action**](GMBPlaceActionsApi.md#delete_google_business_place_action) | **DELETE** /v1/accounts/{accountId}/gmb-place-actions | Delete action link |
 | [**list_google_business_place_actions**](GMBPlaceActionsApi.md#list_google_business_place_actions) | **GET** /v1/accounts/{accountId}/gmb-place-actions | List action links |
+| [**update_google_business_place_action**](GMBPlaceActionsApi.md#update_google_business_place_action) | **PATCH** /v1/accounts/{accountId}/gmb-place-actions | Update action link |
 
 
 ## create_google_business_place_action
@@ -233,5 +234,80 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## update_google_business_place_action
+
+> <UpdateGoogleBusinessPlaceAction200Response> update_google_business_place_action(account_id, update_google_business_place_action_request, opts)
+
+Update action link
+
+Updates a place action link (change URL or action type). Only the fields included in the request body will be updated. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'late-sdk'
+# setup authorization
+Late.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Late::GMBPlaceActionsApi.new
+account_id = 'account_id_example' # String | 
+update_google_business_place_action_request = Late::UpdateGoogleBusinessPlaceActionRequest.new({name: 'name_example'}) # UpdateGoogleBusinessPlaceActionRequest | 
+opts = {
+  location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location.
+}
+
+begin
+  # Update action link
+  result = api_instance.update_google_business_place_action(account_id, update_google_business_place_action_request, opts)
+  p result
+rescue Late::ApiError => e
+  puts "Error when calling GMBPlaceActionsApi->update_google_business_place_action: #{e}"
+end
+```
+
+#### Using the update_google_business_place_action_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateGoogleBusinessPlaceAction200Response>, Integer, Hash)> update_google_business_place_action_with_http_info(account_id, update_google_business_place_action_request, opts)
+
+```ruby
+begin
+  # Update action link
+  data, status_code, headers = api_instance.update_google_business_place_action_with_http_info(account_id, update_google_business_place_action_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateGoogleBusinessPlaceAction200Response>
+rescue Late::ApiError => e
+  puts "Error when calling GMBPlaceActionsApi->update_google_business_place_action_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **update_google_business_place_action_request** | [**UpdateGoogleBusinessPlaceActionRequest**](UpdateGoogleBusinessPlaceActionRequest.md) |  |  |
+| **location_id** | **String** | Override which location to target. If omitted, uses the account&#39;s selected location. | [optional] |
+
+### Return type
+
+[**UpdateGoogleBusinessPlaceAction200Response**](UpdateGoogleBusinessPlaceAction200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

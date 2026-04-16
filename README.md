@@ -207,7 +207,11 @@ Class | Method | HTTP request | Description
 *Late::GMBPlaceActionsApi* | [**create_google_business_place_action**](docs/GMBPlaceActionsApi.md#create_google_business_place_action) | **POST** /v1/accounts/{accountId}/gmb-place-actions | Create action link
 *Late::GMBPlaceActionsApi* | [**delete_google_business_place_action**](docs/GMBPlaceActionsApi.md#delete_google_business_place_action) | **DELETE** /v1/accounts/{accountId}/gmb-place-actions | Delete action link
 *Late::GMBPlaceActionsApi* | [**list_google_business_place_actions**](docs/GMBPlaceActionsApi.md#list_google_business_place_actions) | **GET** /v1/accounts/{accountId}/gmb-place-actions | List action links
+*Late::GMBPlaceActionsApi* | [**update_google_business_place_action**](docs/GMBPlaceActionsApi.md#update_google_business_place_action) | **PATCH** /v1/accounts/{accountId}/gmb-place-actions | Update action link
+*Late::GMBReviewsApi* | [**batch_get_google_business_reviews**](docs/GMBReviewsApi.md#batch_get_google_business_reviews) | **POST** /v1/accounts/{accountId}/gmb-reviews/batch | Batch get reviews
 *Late::GMBReviewsApi* | [**get_google_business_reviews**](docs/GMBReviewsApi.md#get_google_business_reviews) | **GET** /v1/accounts/{accountId}/gmb-reviews | Get reviews
+*Late::GMBServicesApi* | [**get_google_business_services**](docs/GMBServicesApi.md#get_google_business_services) | **GET** /v1/accounts/{accountId}/gmb-services | Get services
+*Late::GMBServicesApi* | [**update_google_business_services**](docs/GMBServicesApi.md#update_google_business_services) | **PUT** /v1/accounts/{accountId}/gmb-services | Replace services
 *Late::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
 *Late::LinkedInMentionsApi* | [**get_linked_in_mentions**](docs/LinkedInMentionsApi.md#get_linked_in_mentions) | **GET** /v1/accounts/{accountId}/linkedin-mentions | Resolve LinkedIn mention
 *Late::LogsApi* | [**list_logs**](docs/LogsApi.md#list_logs) | **GET** /v1/logs | List activity logs
@@ -350,6 +354,9 @@ Class | Method | HTTP request | Description
  - [Late::ApiKey](docs/ApiKey.md)
  - [Late::ApiKeyProfileIdsInner](docs/ApiKeyProfileIdsInner.md)
  - [Late::ApproveWhatsAppGroupJoinRequestsRequest](docs/ApproveWhatsAppGroupJoinRequestsRequest.md)
+ - [Late::BatchGetGoogleBusinessReviews200Response](docs/BatchGetGoogleBusinessReviews200Response.md)
+ - [Late::BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner](docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md)
+ - [Late::BatchGetGoogleBusinessReviewsRequest](docs/BatchGetGoogleBusinessReviewsRequest.md)
  - [Late::BlueskyPlatformData](docs/BlueskyPlatformData.md)
  - [Late::BookmarkPost200Response](docs/BookmarkPost200Response.md)
  - [Late::BookmarkPostRequest](docs/BookmarkPostRequest.md)
@@ -570,6 +577,11 @@ Class | Method | HTTP request | Description
  - [Late::GetGoogleBusinessSearchKeywords200ResponseKeywordsInner](docs/GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.md)
  - [Late::GetGoogleBusinessSearchKeywords200ResponseMonthRange](docs/GetGoogleBusinessSearchKeywords200ResponseMonthRange.md)
  - [Late::GetGoogleBusinessSearchKeywords400Response](docs/GetGoogleBusinessSearchKeywords400Response.md)
+ - [Late::GetGoogleBusinessServices200Response](docs/GetGoogleBusinessServices200Response.md)
+ - [Late::GetGoogleBusinessServices200ResponseServicesInner](docs/GetGoogleBusinessServices200ResponseServicesInner.md)
+ - [Late::GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem](docs/GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem.md)
+ - [Late::GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItemLabel](docs/GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItemLabel.md)
+ - [Late::GetGoogleBusinessServices200ResponseServicesInnerPrice](docs/GetGoogleBusinessServices200ResponseServicesInnerPrice.md)
  - [Late::GetInboxConversation200Response](docs/GetInboxConversation200Response.md)
  - [Late::GetInboxConversation200ResponseData](docs/GetInboxConversation200ResponseData.md)
  - [Late::GetInboxConversationMessages200Response](docs/GetInboxConversationMessages200Response.md)
@@ -950,6 +962,11 @@ Class | Method | HTTP request | Description
  - [Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerFreeFormServiceItem](docs/UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerFreeFormServiceItem.md)
  - [Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerPrice](docs/UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerPrice.md)
  - [Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerStructuredServiceItem](docs/UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerStructuredServiceItem.md)
+ - [Late::UpdateGoogleBusinessPlaceAction200Response](docs/UpdateGoogleBusinessPlaceAction200Response.md)
+ - [Late::UpdateGoogleBusinessPlaceActionRequest](docs/UpdateGoogleBusinessPlaceActionRequest.md)
+ - [Late::UpdateGoogleBusinessServices200Response](docs/UpdateGoogleBusinessServices200Response.md)
+ - [Late::UpdateGoogleBusinessServicesRequest](docs/UpdateGoogleBusinessServicesRequest.md)
+ - [Late::UpdateGoogleBusinessServicesRequestServiceItemsInner](docs/UpdateGoogleBusinessServicesRequestServiceItemsInner.md)
  - [Late::UpdateInboxConversation200Response](docs/UpdateInboxConversation200Response.md)
  - [Late::UpdateInboxConversation200ResponseData](docs/UpdateInboxConversation200ResponseData.md)
  - [Late::UpdateInboxConversationRequest](docs/UpdateInboxConversationRequest.md)

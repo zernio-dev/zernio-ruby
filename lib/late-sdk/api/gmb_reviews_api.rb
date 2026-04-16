@@ -19,6 +19,80 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Batch get reviews
+    # Fetches reviews across multiple locations in a single request. More efficient than calling GET /gmb-reviews per location for multi-location businesses. Reviews are grouped by location in the response. 
+    # @param account_id [String] 
+    # @param batch_get_google_business_reviews_request [BatchGetGoogleBusinessReviewsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [BatchGetGoogleBusinessReviews200Response]
+    def batch_get_google_business_reviews(account_id, batch_get_google_business_reviews_request, opts = {})
+      data, _status_code, _headers = batch_get_google_business_reviews_with_http_info(account_id, batch_get_google_business_reviews_request, opts)
+      data
+    end
+
+    # Batch get reviews
+    # Fetches reviews across multiple locations in a single request. More efficient than calling GET /gmb-reviews per location for multi-location businesses. Reviews are grouped by location in the response. 
+    # @param account_id [String] 
+    # @param batch_get_google_business_reviews_request [BatchGetGoogleBusinessReviewsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BatchGetGoogleBusinessReviews200Response, Integer, Hash)>] BatchGetGoogleBusinessReviews200Response data, response status code and response headers
+    def batch_get_google_business_reviews_with_http_info(account_id, batch_get_google_business_reviews_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: GMBReviewsApi.batch_get_google_business_reviews ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling GMBReviewsApi.batch_get_google_business_reviews"
+      end
+      # verify the required parameter 'batch_get_google_business_reviews_request' is set
+      if @api_client.config.client_side_validation && batch_get_google_business_reviews_request.nil?
+        fail ArgumentError, "Missing the required parameter 'batch_get_google_business_reviews_request' when calling GMBReviewsApi.batch_get_google_business_reviews"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/gmb-reviews/batch'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_get_google_business_reviews_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'BatchGetGoogleBusinessReviews200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"GMBReviewsApi.batch_get_google_business_reviews",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: GMBReviewsApi#batch_get_google_business_reviews\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get reviews
     # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)

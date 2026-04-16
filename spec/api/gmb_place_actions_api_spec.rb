@@ -75,4 +75,18 @@ describe 'GMBPlaceActionsApi' do
     end
   end
 
+  # unit tests for update_google_business_place_action
+  # Update action link
+  # Updates a place action link (change URL or action type). Only the fields included in the request body will be updated. 
+  # @param account_id 
+  # @param update_google_business_place_action_request 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to target. If omitted, uses the account&#39;s selected location.
+  # @return [UpdateGoogleBusinessPlaceAction200Response]
+  describe 'update_google_business_place_action test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end
