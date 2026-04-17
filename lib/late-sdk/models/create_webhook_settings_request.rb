@@ -15,19 +15,19 @@ require 'time'
 
 module Late
   class CreateWebhookSettingsRequest < ApiModelBase
-    # Webhook name (max 50 characters)
+    # Webhook name (1-50 characters)
     attr_accessor :name
 
-    # Webhook endpoint URL (must be HTTPS in production)
+    # Webhook endpoint URL (must be a valid URL, whitespace trimmed)
     attr_accessor :url
 
     # Secret key for HMAC-SHA256 signature verification
     attr_accessor :secret
 
-    # Events to subscribe to
+    # Events to subscribe to (at least one required)
     attr_accessor :events
 
-    # Enable or disable webhook delivery
+    # Enable or disable webhook delivery. Defaults to `true` when omitted.
     attr_accessor :is_active
 
     # Custom headers to include in webhook requests
@@ -113,10 +113,14 @@ module Late
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
       if attributes.key?(:'url')
         self.url = attributes[:'url']
+      else
+        self.url = nil
       end
 
       if attributes.key?(:'secret')
@@ -127,10 +131,14 @@ module Late
         if (value = attributes[:'events']).is_a?(Array)
           self.events = value
         end
+      else
+        self.events = nil
       end
 
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
+      else
+        self.is_active = true
       end
 
       if attributes.key?(:'custom_headers')
@@ -145,8 +153,28 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@name.nil? && @name.to_s.length > 50
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @name.to_s.length > 50
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 50.')
+      end
+
+      if @name.to_s.length < 1
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
+      end
+
+      if @url.nil?
+        invalid_properties.push('invalid value for "url", url cannot be nil.')
+      end
+
+      if @events.nil?
+        invalid_properties.push('invalid value for "events", events cannot be nil.')
+      end
+
+      if @events.length < 1
+        invalid_properties.push('invalid value for "events", number of items must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -156,7 +184,12 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@name.nil? && @name.to_s.length > 50
+      return false if @name.nil?
+      return false if @name.to_s.length > 50
+      return false if @name.to_s.length < 1
+      return false if @url.nil?
+      return false if @events.nil?
+      return false if @events.length < 1
       true
     end
 
@@ -171,7 +204,21 @@ module Late
         fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 50.'
       end
 
+      if name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 1.'
+      end
+
       @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] url Value to be assigned
+    def url=(url)
+      if url.nil?
+        fail ArgumentError, 'url cannot be nil'
+      end
+
+      @url = url
     end
 
     # Checks equality by comparing each attribute.

@@ -18,16 +18,16 @@ module Late
     # Webhook ID to update (required)
     attr_accessor :_id
 
-    # Webhook name (max 50 characters)
+    # Webhook name (1-50 characters). Must be non-empty if provided.
     attr_accessor :name
 
-    # Webhook endpoint URL (must be HTTPS in production)
+    # Webhook endpoint URL (must be a valid URL, whitespace trimmed). Must be a valid URL if provided.
     attr_accessor :url
 
     # Secret key for HMAC-SHA256 signature verification
     attr_accessor :secret
 
-    # Events to subscribe to
+    # Events to subscribe to. Must contain at least one event if provided.
     attr_accessor :events
 
     # Enable or disable webhook delivery
@@ -164,6 +164,14 @@ module Late
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 50.')
       end
 
+      if !@name.nil? && @name.to_s.length < 1
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
+      end
+
+      if !@events.nil? && @events.length < 1
+        invalid_properties.push('invalid value for "events", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -173,6 +181,8 @@ module Late
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @_id.nil?
       return false if !@name.nil? && @name.to_s.length > 50
+      return false if !@name.nil? && @name.to_s.length < 1
+      return false if !@events.nil? && @events.length < 1
       true
     end
 
@@ -195,6 +205,10 @@ module Late
 
       if name.to_s.length > 50
         fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 50.'
+      end
+
+      if name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 1.'
       end
 
       @name = name
