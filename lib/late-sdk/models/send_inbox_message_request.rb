@@ -35,6 +35,8 @@ module Late
 
     attr_accessor :template
 
+    attr_accessor :interactive
+
     attr_accessor :reply_markup
 
     # Facebook messaging type. Required when using messageTag.
@@ -78,6 +80,7 @@ module Late
         :'quick_replies' => :'quickReplies',
         :'buttons' => :'buttons',
         :'template' => :'template',
+        :'interactive' => :'interactive',
         :'reply_markup' => :'replyMarkup',
         :'messaging_type' => :'messagingType',
         :'message_tag' => :'messageTag',
@@ -105,6 +108,7 @@ module Late
         :'quick_replies' => :'Array<SendInboxMessageRequestQuickRepliesInner>',
         :'buttons' => :'Array<SendInboxMessageRequestButtonsInner>',
         :'template' => :'SendInboxMessageRequestTemplate',
+        :'interactive' => :'SendInboxMessageRequestInteractive',
         :'reply_markup' => :'SendInboxMessageRequestReplyMarkup',
         :'messaging_type' => :'String',
         :'message_tag' => :'String',
@@ -166,6 +170,10 @@ module Late
 
       if attributes.key?(:'template')
         self.template = attributes[:'template']
+      end
+
+      if attributes.key?(:'interactive')
+        self.interactive = attributes[:'interactive']
       end
 
       if attributes.key?(:'reply_markup')
@@ -301,6 +309,7 @@ module Late
           quick_replies == o.quick_replies &&
           buttons == o.buttons &&
           template == o.template &&
+          interactive == o.interactive &&
           reply_markup == o.reply_markup &&
           messaging_type == o.messaging_type &&
           message_tag == o.message_tag &&
@@ -316,7 +325,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, attachment_url, attachment_type, quick_replies, buttons, template, reply_markup, messaging_type, message_tag, reply_to].hash
+      [account_id, message, attachment_url, attachment_type, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to].hash
     end
 
     # Builds the object from hash

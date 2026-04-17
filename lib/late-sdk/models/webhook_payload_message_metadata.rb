@@ -16,17 +16,54 @@ require 'time'
 module Late
   # Interactive message metadata (present when message is a quick reply tap, postback button tap, or inline keyboard callback)
   class WebhookPayloadMessageMetadata < ApiModelBase
-    # Payload from a quick reply tap (Meta platforms)
+    # Payload from a quick reply tap (Facebook/Instagram Messenger).
     attr_accessor :quick_reply_payload
 
-    # Payload from a postback button tap (Meta platforms)
+    # Payload from a postback button tap (Facebook/Instagram Messenger).
     attr_accessor :postback_payload
 
-    # Title of the tapped postback button (Meta platforms)
+    # Title of the tapped postback button (Facebook/Instagram Messenger).
     attr_accessor :postback_title
 
-    # Callback data from an inline keyboard button tap (Telegram)
+    # Callback data from an inline keyboard button tap (Telegram).
     attr_accessor :callback_data
+
+    # WhatsApp only. Which kind of interactive reply the user sent: `button_reply` (tap on an interactive button), `list_reply` (tap on a list row), or `nfm_reply` (a WhatsApp Flow submission). 
+    attr_accessor :interactive_type
+
+    # WhatsApp only. The `id` of the tapped button or list row, matching the `id` you supplied when the message was sent. Not set for Flow responses. 
+    attr_accessor :interactive_id
+
+    # WhatsApp only. Payload attached to a tapped template button. Template buttons emit a plain `button` webhook (not an interactive reply), so `interactiveType` is empty while this field is populated. 
+    attr_accessor :button_payload
+
+    # WhatsApp only. Raw `nfm_reply.response_json` string returned by a Flow submission. Useful if you need the exact wire payload; for typed access use `flowResponseData` instead. 
+    attr_accessor :flow_response_json
+
+    # WhatsApp only. Parsed Flow response JSON. Populated when `flowResponseJson` is valid JSON; otherwise omitted. Keys and value types depend on the specific Flow that was submitted. 
+    attr_accessor :flow_response_data
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -34,7 +71,12 @@ module Late
         :'quick_reply_payload' => :'quickReplyPayload',
         :'postback_payload' => :'postbackPayload',
         :'postback_title' => :'postbackTitle',
-        :'callback_data' => :'callbackData'
+        :'callback_data' => :'callbackData',
+        :'interactive_type' => :'interactiveType',
+        :'interactive_id' => :'interactiveId',
+        :'button_payload' => :'buttonPayload',
+        :'flow_response_json' => :'flowResponseJson',
+        :'flow_response_data' => :'flowResponseData'
       }
     end
 
@@ -54,7 +96,12 @@ module Late
         :'quick_reply_payload' => :'String',
         :'postback_payload' => :'String',
         :'postback_title' => :'String',
-        :'callback_data' => :'String'
+        :'callback_data' => :'String',
+        :'interactive_type' => :'String',
+        :'interactive_id' => :'String',
+        :'button_payload' => :'String',
+        :'flow_response_json' => :'String',
+        :'flow_response_data' => :'Hash<String, Object>'
       }
     end
 
@@ -95,6 +142,28 @@ module Late
       if attributes.key?(:'callback_data')
         self.callback_data = attributes[:'callback_data']
       end
+
+      if attributes.key?(:'interactive_type')
+        self.interactive_type = attributes[:'interactive_type']
+      end
+
+      if attributes.key?(:'interactive_id')
+        self.interactive_id = attributes[:'interactive_id']
+      end
+
+      if attributes.key?(:'button_payload')
+        self.button_payload = attributes[:'button_payload']
+      end
+
+      if attributes.key?(:'flow_response_json')
+        self.flow_response_json = attributes[:'flow_response_json']
+      end
+
+      if attributes.key?(:'flow_response_data')
+        if (value = attributes[:'flow_response_data']).is_a?(Hash)
+          self.flow_response_data = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,7 +178,19 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      interactive_type_validator = EnumAttributeValidator.new('String', ["button_reply", "list_reply", "nfm_reply"])
+      return false unless interactive_type_validator.valid?(@interactive_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] interactive_type Object to be assigned
+    def interactive_type=(interactive_type)
+      validator = EnumAttributeValidator.new('String', ["button_reply", "list_reply", "nfm_reply"])
+      unless validator.valid?(interactive_type)
+        fail ArgumentError, "invalid value for \"interactive_type\", must be one of #{validator.allowable_values}."
+      end
+      @interactive_type = interactive_type
     end
 
     # Checks equality by comparing each attribute.
@@ -120,7 +201,12 @@ module Late
           quick_reply_payload == o.quick_reply_payload &&
           postback_payload == o.postback_payload &&
           postback_title == o.postback_title &&
-          callback_data == o.callback_data
+          callback_data == o.callback_data &&
+          interactive_type == o.interactive_type &&
+          interactive_id == o.interactive_id &&
+          button_payload == o.button_payload &&
+          flow_response_json == o.flow_response_json &&
+          flow_response_data == o.flow_response_data
     end
 
     # @see the `==` method
@@ -132,7 +218,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quick_reply_payload, postback_payload, postback_title, callback_data].hash
+      [quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data].hash
     end
 
     # Builds the object from hash

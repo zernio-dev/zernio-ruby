@@ -51,4 +51,38 @@ describe Late::WebhookPayloadMessageMetadata do
     end
   end
 
+  describe 'test attribute "interactive_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["button_reply", "list_reply", "nfm_reply"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.interactive_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "interactive_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "button_payload"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "flow_response_json"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "flow_response_data"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

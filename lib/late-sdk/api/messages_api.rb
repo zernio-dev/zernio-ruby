@@ -638,7 +638,7 @@ module Late
     end
 
     # Send message
-    # Send a message in a conversation. Supports text, attachments, quick replies, buttons, and message tags. Attachment and interactive message support varies by platform.
+    # Send a message in a conversation. Supports text, attachments, quick replies, buttons, templates, and message tags. Attachment and interactive message support varies by platform.  WhatsApp rich interactive messages (list, CTA URL, Flow) are available via the `interactive` field. Tap events are delivered through the `message.received` webhook with WhatsApp-specific `metadata` fields (`interactiveType`, `interactiveId`, `flowResponseJson`, `flowResponseData`). 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
     # @param send_inbox_message_request [SendInboxMessageRequest] 
     # @param [Hash] opts the optional parameters
@@ -649,7 +649,7 @@ module Late
     end
 
     # Send message
-    # Send a message in a conversation. Supports text, attachments, quick replies, buttons, and message tags. Attachment and interactive message support varies by platform.
+    # Send a message in a conversation. Supports text, attachments, quick replies, buttons, templates, and message tags. Attachment and interactive message support varies by platform.  WhatsApp rich interactive messages (list, CTA URL, Flow) are available via the &#x60;interactive&#x60; field. Tap events are delivered through the &#x60;message.received&#x60; webhook with WhatsApp-specific &#x60;metadata&#x60; fields (&#x60;interactiveType&#x60;, &#x60;interactiveId&#x60;, &#x60;flowResponseJson&#x60;, &#x60;flowResponseData&#x60;). 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
     # @param send_inbox_message_request [SendInboxMessageRequest] 
     # @param [Hash] opts the optional parameters
