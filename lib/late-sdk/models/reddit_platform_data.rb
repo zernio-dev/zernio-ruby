@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Late
-  # Posts are either link (with URL/media) or self (text-only). Use forceSelf to override. Subreddit defaults to the account's configured one. Some subreddits require a flair.
+  # Posts are either link (with URL/media), native video (via nativeVideo), or self (text-only). Use forceSelf to override. Subreddit defaults to the account's configured one. Some subreddits require a flair.
   class RedditPlatformData < ApiModelBase
     # Target subreddit name (without \"r/\" prefix). Overrides the default. Use GET /v1/accounts/{id}/reddit-subreddits to list options.
     attr_accessor :subreddit
@@ -31,6 +31,15 @@ module Late
     # Flair ID for the post. Required by some subreddits. Use GET /v1/accounts/{id}/reddit-flairs?subreddit=name to list flairs.
     attr_accessor :flair_id
 
+    # Controls Reddit's native video upload flow. When true (default for video mediaItems), the video is uploaded to Reddit's CDN and submitted with kind=video so it renders as an embedded Reddit video player. Reddit transcodes server-side (1080p/30fps cap). Set to false to fall back to a legacy link post. If the subreddit blocks video posts, the upload falls back to a link post automatically. 
+    attr_accessor :native_video
+
+    # When true (and nativeVideo is active), submits the video as a silent videogif (kind=videogif). Use for short looping clips without audio.
+    attr_accessor :videogif
+
+    # Optional poster/thumbnail image URL for native video posts. If omitted, the first frame of the video is extracted and used automatically.
+    attr_accessor :video_poster_url
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +47,10 @@ module Late
         :'title' => :'title',
         :'url' => :'url',
         :'force_self' => :'forceSelf',
-        :'flair_id' => :'flairId'
+        :'flair_id' => :'flairId',
+        :'native_video' => :'nativeVideo',
+        :'videogif' => :'videogif',
+        :'video_poster_url' => :'videoPosterUrl'
       }
     end
 
@@ -59,7 +71,10 @@ module Late
         :'title' => :'String',
         :'url' => :'String',
         :'force_self' => :'Boolean',
-        :'flair_id' => :'String'
+        :'flair_id' => :'String',
+        :'native_video' => :'Boolean',
+        :'videogif' => :'Boolean',
+        :'video_poster_url' => :'String'
       }
     end
 
@@ -103,6 +118,20 @@ module Late
 
       if attributes.key?(:'flair_id')
         self.flair_id = attributes[:'flair_id']
+      end
+
+      if attributes.key?(:'native_video')
+        self.native_video = attributes[:'native_video']
+      else
+        self.native_video = true
+      end
+
+      if attributes.key?(:'videogif')
+        self.videogif = attributes[:'videogif']
+      end
+
+      if attributes.key?(:'video_poster_url')
+        self.video_poster_url = attributes[:'video_poster_url']
       end
     end
 
@@ -149,7 +178,10 @@ module Late
           title == o.title &&
           url == o.url &&
           force_self == o.force_self &&
-          flair_id == o.flair_id
+          flair_id == o.flair_id &&
+          native_video == o.native_video &&
+          videogif == o.videogif &&
+          video_poster_url == o.video_poster_url
     end
 
     # @see the `==` method
@@ -161,7 +193,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [subreddit, title, url, force_self, flair_id].hash
+      [subreddit, title, url, force_self, flair_id, native_video, videogif, video_poster_url].hash
     end
 
     # Builds the object from hash
