@@ -24,13 +24,39 @@ module Late
     # Interest objects from /v1/ads/interests. Each must include id and name.
     attr_accessor :interests
 
+    # Meta only. 0 = disabled (default), 1 = enabled.
+    attr_accessor :advantage_audience
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
         :'countries' => :'countries',
-        :'interests' => :'interests'
+        :'interests' => :'interests',
+        :'advantage_audience' => :'advantage_audience'
       }
     end
 
@@ -50,7 +76,8 @@ module Late
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'countries' => :'Array<String>',
-        :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>'
+        :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>',
+        :'advantage_audience' => :'Integer'
       }
     end
 
@@ -95,6 +122,10 @@ module Late
           self.interests = value
         end
       end
+
+      if attributes.key?(:'advantage_audience')
+        self.advantage_audience = attributes[:'advantage_audience']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -129,6 +160,8 @@ module Late
       return false if !@age_min.nil? && @age_min < 13
       return false if !@age_max.nil? && @age_max > 65
       return false if !@age_max.nil? && @age_max < 13
+      advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
+      return false unless advantage_audience_validator.valid?(@advantage_audience)
       true
     end
 
@@ -168,6 +201,16 @@ module Late
       @age_max = age_max
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] advantage_audience Object to be assigned
+    def advantage_audience=(advantage_audience)
+      validator = EnumAttributeValidator.new('Integer', [0, 1])
+      unless validator.valid?(advantage_audience)
+        fail ArgumentError, "invalid value for \"advantage_audience\", must be one of #{validator.allowable_values}."
+      end
+      @advantage_audience = advantage_audience
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -176,7 +219,8 @@ module Late
           age_min == o.age_min &&
           age_max == o.age_max &&
           countries == o.countries &&
-          interests == o.interests
+          interests == o.interests &&
+          advantage_audience == o.advantage_audience
     end
 
     # @see the `==` method
@@ -188,7 +232,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [age_min, age_max, countries, interests].hash
+      [age_min, age_max, countries, interests, advantage_audience].hash
     end
 
     # Builds the object from hash

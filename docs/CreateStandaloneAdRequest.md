@@ -29,6 +29,7 @@
 | **keywords** | **Array&lt;String&gt;** | Google Search only | [optional] |
 | **additional_headlines** | **Array&lt;String&gt;** | Google Search RSA only. Extra headlines. | [optional] |
 | **additional_descriptions** | **Array&lt;String&gt;** | Google Search RSA only. Extra descriptions. | [optional] |
+| **advantage_audience** | **Integer** | Meta only. Controls the Advantage audience feature (targeting_automation). 0 &#x3D; disabled (default), 1 &#x3D; enabled. Meta Marketing API requires this field on all ad set creation requests. | [optional] |
 
 ## Example
 
@@ -60,7 +61,8 @@ instance = Late::CreateStandaloneAdRequest.new(
   campaign_type: null,
   keywords: null,
   additional_headlines: null,
-  additional_descriptions: null
+  additional_descriptions: null,
+  advantage_audience: null
 )
 ```
 

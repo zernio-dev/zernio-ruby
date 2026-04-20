@@ -80,6 +80,9 @@ module Late
     # Google Search RSA only. Extra descriptions.
     attr_accessor :additional_descriptions
 
+    # Meta only. Controls the Advantage audience feature (targeting_automation). 0 = disabled (default), 1 = enabled. Meta Marketing API requires this field on all ad set creation requests.
+    attr_accessor :advantage_audience
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -129,7 +132,8 @@ module Late
         :'campaign_type' => :'campaignType',
         :'keywords' => :'keywords',
         :'additional_headlines' => :'additionalHeadlines',
-        :'additional_descriptions' => :'additionalDescriptions'
+        :'additional_descriptions' => :'additionalDescriptions',
+        :'advantage_audience' => :'advantageAudience'
       }
     end
 
@@ -170,7 +174,8 @@ module Late
         :'campaign_type' => :'String',
         :'keywords' => :'Array<String>',
         :'additional_headlines' => :'Array<String>',
-        :'additional_descriptions' => :'Array<String>'
+        :'additional_descriptions' => :'Array<String>',
+        :'advantage_audience' => :'Integer'
       }
     end
 
@@ -321,6 +326,10 @@ module Late
           self.additional_descriptions = value
         end
       end
+
+      if attributes.key?(:'advantage_audience')
+        self.advantage_audience = attributes[:'advantage_audience']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -413,6 +422,8 @@ module Late
       return false if !@age_max.nil? && @age_max < 13
       campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search"])
       return false unless campaign_type_validator.valid?(@campaign_type)
+      advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
+      return false unless advantage_audience_validator.valid?(@advantage_audience)
       true
     end
 
@@ -574,6 +585,16 @@ module Late
       @campaign_type = campaign_type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] advantage_audience Object to be assigned
+    def advantage_audience=(advantage_audience)
+      validator = EnumAttributeValidator.new('Integer', [0, 1])
+      unless validator.valid?(advantage_audience)
+        fail ArgumentError, "invalid value for \"advantage_audience\", must be one of #{validator.allowable_values}."
+      end
+      @advantage_audience = advantage_audience
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -603,7 +624,8 @@ module Late
           campaign_type == o.campaign_type &&
           keywords == o.keywords &&
           additional_headlines == o.additional_headlines &&
-          additional_descriptions == o.additional_descriptions
+          additional_descriptions == o.additional_descriptions &&
+          advantage_audience == o.advantage_audience
     end
 
     # @see the `==` method
@@ -615,7 +637,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience].hash
     end
 
     # Builds the object from hash
