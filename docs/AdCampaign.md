@@ -7,9 +7,16 @@
 | **platform_campaign_id** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **campaign_name** | **String** |  | [optional] |
-| **status** | [**AdStatus**](AdStatus.md) | Derived from child ad statuses | [optional] |
+| **status** | [**AdStatus**](AdStatus.md) | Delivery status derived from child ad statuses. Distinct from &#x60;reviewStatus&#x60;. | [optional] |
+| **review_status** | **String** | Platform-side review state of the campaign. See AdTreeCampaign.reviewStatus for the full description. | [optional] |
+| **platform_campaign_status** | **String** | Raw platform-level campaign status (Meta &#x60;effective_status&#x60;). | [optional] |
+| **campaign_issues_info** | **Array&lt;Object&gt;** | Platform-reported campaign issues (Meta &#x60;issues_info[]&#x60;). | [optional] |
 | **ad_count** | **Integer** |  | [optional] |
-| **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
+| **budget** | [**AdCampaignBudget**](AdCampaignBudget.md) |  | [optional] |
+| **campaign_budget** | [**AdCampaignCampaignBudget**](AdCampaignCampaignBudget.md) |  | [optional] |
+| **budget_level** | **String** | Canonical CBO/ABO indicator. See AdTreeCampaign.budgetLevel. | [optional] |
+| **is_budget_schedule_enabled** | **Boolean** | Meta-only. Mirrors Campaign.is_budget_schedule_enabled. | [optional][default to false] |
+| **currency** | **String** | ISO 4217 currency code for all budget amounts. Budgets are NOT normalized to USD. | [optional] |
 | **metrics** | [**AdMetrics**](AdMetrics.md) |  | [optional] |
 | **platform_ad_account_id** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
@@ -31,8 +38,15 @@ instance = Late::AdCampaign.new(
   platform: null,
   campaign_name: null,
   status: null,
+  review_status: null,
+  platform_campaign_status: null,
+  campaign_issues_info: null,
   ad_count: null,
   budget: null,
+  campaign_budget: null,
+  budget_level: null,
+  is_budget_schedule_enabled: null,
+  currency: null,
   metrics: null,
   platform_ad_account_id: null,
   account_id: null,

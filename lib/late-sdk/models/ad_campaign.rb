@@ -21,12 +21,32 @@ module Late
 
     attr_accessor :campaign_name
 
-    # Derived from child ad statuses
+    # Delivery status derived from child ad statuses. Distinct from `reviewStatus`.
     attr_accessor :status
+
+    # Platform-side review state of the campaign. See AdTreeCampaign.reviewStatus for the full description.
+    attr_accessor :review_status
+
+    # Raw platform-level campaign status (Meta `effective_status`).
+    attr_accessor :platform_campaign_status
+
+    # Platform-reported campaign issues (Meta `issues_info[]`).
+    attr_accessor :campaign_issues_info
 
     attr_accessor :ad_count
 
     attr_accessor :budget
+
+    attr_accessor :campaign_budget
+
+    # Canonical CBO/ABO indicator. See AdTreeCampaign.budgetLevel.
+    attr_accessor :budget_level
+
+    # Meta-only. Mirrors Campaign.is_budget_schedule_enabled.
+    attr_accessor :is_budget_schedule_enabled
+
+    # ISO 4217 currency code for all budget amounts. Budgets are NOT normalized to USD.
+    attr_accessor :currency
 
     attr_accessor :metrics
 
@@ -80,8 +100,15 @@ module Late
         :'platform' => :'platform',
         :'campaign_name' => :'campaignName',
         :'status' => :'status',
+        :'review_status' => :'reviewStatus',
+        :'platform_campaign_status' => :'platformCampaignStatus',
+        :'campaign_issues_info' => :'campaignIssuesInfo',
         :'ad_count' => :'adCount',
         :'budget' => :'budget',
+        :'campaign_budget' => :'campaignBudget',
+        :'budget_level' => :'budgetLevel',
+        :'is_budget_schedule_enabled' => :'isBudgetScheduleEnabled',
+        :'currency' => :'currency',
         :'metrics' => :'metrics',
         :'platform_ad_account_id' => :'platformAdAccountId',
         :'account_id' => :'accountId',
@@ -112,8 +139,15 @@ module Late
         :'platform' => :'String',
         :'campaign_name' => :'String',
         :'status' => :'AdStatus',
+        :'review_status' => :'String',
+        :'platform_campaign_status' => :'String',
+        :'campaign_issues_info' => :'Array<Object>',
         :'ad_count' => :'Integer',
-        :'budget' => :'AdBudget',
+        :'budget' => :'AdCampaignBudget',
+        :'campaign_budget' => :'AdCampaignCampaignBudget',
+        :'budget_level' => :'String',
+        :'is_budget_schedule_enabled' => :'Boolean',
+        :'currency' => :'String',
         :'metrics' => :'AdMetrics',
         :'platform_ad_account_id' => :'String',
         :'account_id' => :'String',
@@ -165,12 +199,44 @@ module Late
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'review_status')
+        self.review_status = attributes[:'review_status']
+      end
+
+      if attributes.key?(:'platform_campaign_status')
+        self.platform_campaign_status = attributes[:'platform_campaign_status']
+      end
+
+      if attributes.key?(:'campaign_issues_info')
+        if (value = attributes[:'campaign_issues_info']).is_a?(Array)
+          self.campaign_issues_info = value
+        end
+      end
+
       if attributes.key?(:'ad_count')
         self.ad_count = attributes[:'ad_count']
       end
 
       if attributes.key?(:'budget')
         self.budget = attributes[:'budget']
+      end
+
+      if attributes.key?(:'campaign_budget')
+        self.campaign_budget = attributes[:'campaign_budget']
+      end
+
+      if attributes.key?(:'budget_level')
+        self.budget_level = attributes[:'budget_level']
+      end
+
+      if attributes.key?(:'is_budget_schedule_enabled')
+        self.is_budget_schedule_enabled = attributes[:'is_budget_schedule_enabled']
+      else
+        self.is_budget_schedule_enabled = false
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
       if attributes.key?(:'metrics')
@@ -228,6 +294,10 @@ module Late
       warn '[DEPRECATED] the `valid?` method is obsolete'
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter"])
       return false unless platform_validator.valid?(@platform)
+      review_status_validator = EnumAttributeValidator.new('String', ["in_review", "approved", "rejected", "with_issues"])
+      return false unless review_status_validator.valid?(@review_status)
+      budget_level_validator = EnumAttributeValidator.new('String', ["campaign", "adset"])
+      return false unless budget_level_validator.valid?(@budget_level)
       true
     end
 
@@ -241,6 +311,26 @@ module Late
       @platform = platform
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] review_status Object to be assigned
+    def review_status=(review_status)
+      validator = EnumAttributeValidator.new('String', ["in_review", "approved", "rejected", "with_issues"])
+      unless validator.valid?(review_status)
+        fail ArgumentError, "invalid value for \"review_status\", must be one of #{validator.allowable_values}."
+      end
+      @review_status = review_status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] budget_level Object to be assigned
+    def budget_level=(budget_level)
+      validator = EnumAttributeValidator.new('String', ["campaign", "adset"])
+      unless validator.valid?(budget_level)
+        fail ArgumentError, "invalid value for \"budget_level\", must be one of #{validator.allowable_values}."
+      end
+      @budget_level = budget_level
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -250,8 +340,15 @@ module Late
           platform == o.platform &&
           campaign_name == o.campaign_name &&
           status == o.status &&
+          review_status == o.review_status &&
+          platform_campaign_status == o.platform_campaign_status &&
+          campaign_issues_info == o.campaign_issues_info &&
           ad_count == o.ad_count &&
           budget == o.budget &&
+          campaign_budget == o.campaign_budget &&
+          budget_level == o.budget_level &&
+          is_budget_schedule_enabled == o.is_budget_schedule_enabled &&
+          currency == o.currency &&
           metrics == o.metrics &&
           platform_ad_account_id == o.platform_ad_account_id &&
           account_id == o.account_id &&
@@ -273,7 +370,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_campaign_id, platform, campaign_name, status, ad_count, budget, metrics, platform_ad_account_id, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, promoted_object, earliest_ad, latest_ad].hash
+      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, promoted_object, earliest_ad, latest_ad].hash
     end
 
     # Builds the object from hash

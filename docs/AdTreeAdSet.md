@@ -8,7 +8,8 @@
 | **ad_set_name** | **String** |  | [optional] |
 | **status** | [**AdStatus**](AdStatus.md) | Derived from child ad statuses | [optional] |
 | **ad_count** | **Integer** |  | [optional] |
-| **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
+| **budget** | [**AdTreeAdSetBudget**](AdTreeAdSetBudget.md) |  | [optional] |
+| **ad_set_budget** | [**AdTreeAdSetAdSetBudget**](AdTreeAdSetAdSetBudget.md) |  | [optional] |
 | **metrics** | [**AdMetrics**](AdMetrics.md) |  | [optional] |
 | **optimization_goal** | **String** | Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION) | [optional] |
 | **bid_strategy** | **String** | Bid strategy for this ad set (overrides campaign level when set) | [optional] |
@@ -26,6 +27,7 @@ instance = Late::AdTreeAdSet.new(
   status: null,
   ad_count: null,
   budget: null,
+  ad_set_budget: null,
   metrics: null,
   optimization_goal: null,
   bid_strategy: null,

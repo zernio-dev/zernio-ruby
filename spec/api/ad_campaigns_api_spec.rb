@@ -32,13 +32,51 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for bulk_update_ad_campaign_status
+  # Pause or resume many campaigns
+  # Process up to 50 campaigns in one call. Each campaign is updated concurrently and the response contains a per-campaign result so a single bad row does not fail the whole batch. 
+  # @param bulk_update_ad_campaign_status_request 
+  # @param [Hash] opts the optional parameters
+  # @return [BulkUpdateAdCampaignStatus200Response]
+  describe 'bulk_update_ad_campaign_status test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_ad_campaign
+  # Delete a campaign
+  # Deletes the whole campaign on the platform, cascading to its ad sets and ads. Locally, all Ad documents for this campaign are marked &#x60;status: cancelled&#x60;.  Meta-only for now. Other platforms return 501 Not Implemented — fall back to DELETE /v1/ads/{adId} per ad in the meantime. 
+  # @param campaign_id Platform campaign ID
+  # @param delete_ad_campaign_request 
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteAdCampaign200Response]
+  describe 'delete_ad_campaign test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for duplicate_ad_campaign
+  # Duplicate a campaign
+  # Duplicates a campaign, including its ad sets, ads, creatives, and targeting by default (&#x60;deepCopy: true&#x60;). On Meta, this uses &#x60;POST /{campaign-id}/copies&#x60;. The copy is created paused by default so callers can review before launching.  The platform&#39;s duplication is asynchronous from our side; once the copy is created on the platform, we trigger a sync discovery so the new hierarchy shows up in /v1/ads/tree. Set &#x60;syncAfter: false&#x60; to skip the discovery trigger and poll on your own cadence.  Meta-only for now. Other platforms return 501 Not Implemented. 
+  # @param campaign_id Source platform campaign ID
+  # @param duplicate_ad_campaign_request 
+  # @param [Hash] opts the optional parameters
+  # @return [DuplicateAdCampaign200Response]
+  describe 'duplicate_ad_campaign test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_ad_tree
   # Get campaign tree
   # Returns a nested Campaign &gt; Ad Set &gt; Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \&quot;Ungrouped\&quot; buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit Campaigns per page
-  # @option opts [String] :source 
+  # @option opts [String] :source &#x60;zernio&#x60; (default) returns only ads created via Zernio (isExternal&#x3D;false). &#x60;all&#x60; additionally returns ads discovered from the platform&#39;s ad manager (isExternal&#x3D;true). Status is NOT filtered by default — use the &#x60;status&#x60; param for that.
   # @option opts [String] :platform 
   # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
   # @option opts [String] :ad_account_id Platform ad account ID
@@ -59,7 +97,7 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit 
-  # @option opts [String] :source 
+  # @option opts [String] :source &#x60;zernio&#x60; (default) returns only ads created via Zernio (isExternal&#x3D;false). &#x60;all&#x60; additionally returns ads discovered from the platform&#39;s ad manager (isExternal&#x3D;true). Status is NOT filtered by default — use the &#x60;status&#x60; param for that.
   # @option opts [String] :platform 
   # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
   # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
@@ -67,6 +105,19 @@ describe 'AdCampaignsApi' do
   # @option opts [String] :profile_id Profile ID
   # @return [ListAdCampaigns200Response]
   describe 'list_ad_campaigns test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_campaign
+  # Update a campaign (budget)
+  # Campaign-level edits. Currently supports updating the CBO (Campaign Budget Optimization) budget. For ABO campaigns (where the budget lives on the ad set), use PUT /v1/ads/ad-sets/{adSetId} instead — this endpoint will return 409 with code BUDGET_LEVEL_MISMATCH.  Meta-only for now. Other platforms return 501 Not Implemented. 
+  # @param campaign_id Platform campaign ID
+  # @param update_ad_campaign_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdCampaign200Response]
+  describe 'update_ad_campaign test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -80,6 +131,32 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAdCampaignStatus200Response]
   describe 'update_ad_campaign_status test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_set
+  # Update an ad set (budget and/or status)
+  # Ad-set-level writes. Use this for ABO budget updates and ad-set-scoped pause/resume. Provide &#x60;budget&#x60; and/or &#x60;status&#x60; in the body.  When updating &#x60;budget&#x60; on an ABO campaign: if the parent campaign is CBO, the response is 409 with code BUDGET_LEVEL_MISMATCH — route to PUT /v1/ads/campaigns/{campaignId} instead. 
+  # @param ad_set_id Platform ad set ID
+  # @param update_ad_set_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdSet200Response]
+  describe 'update_ad_set test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_set_status
+  # Pause or resume a single ad set
+  # Ad-set-scoped pause/resume (doesn&#39;t touch sibling ad sets). Thin wrapper over PUT /v1/ads/ad-sets/{adSetId} for callers that only want the status toggle and prefer a symmetric URL to /v1/ads/campaigns/{campaignId}/status. 
+  # @param ad_set_id Platform ad set ID
+  # @param update_ad_campaign_status_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdSetStatus200Response]
+  describe 'update_ad_set_status test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

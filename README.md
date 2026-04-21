@@ -92,9 +92,15 @@ Class | Method | HTTP request | Description
 *Late::AdAudiencesApi* | [**delete_ad_audience**](docs/AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience
 *Late::AdAudiencesApi* | [**get_ad_audience**](docs/AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details
 *Late::AdAudiencesApi* | [**list_ad_audiences**](docs/AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences
+*Late::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
+*Late::AdCampaignsApi* | [**delete_ad_campaign**](docs/AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign
+*Late::AdCampaignsApi* | [**duplicate_ad_campaign**](docs/AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign
 *Late::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Late::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
+*Late::AdCampaignsApi* | [**update_ad_campaign**](docs/AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign (budget)
 *Late::AdCampaignsApi* | [**update_ad_campaign_status**](docs/AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign
+*Late::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set (budget and/or status)
+*Late::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
 *Late::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Late::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Late::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
@@ -329,14 +335,20 @@ Class | Method | HTTP request | Description
  - [Late::Ad](docs/Ad.md)
  - [Late::AdBudget](docs/AdBudget.md)
  - [Late::AdCampaign](docs/AdCampaign.md)
+ - [Late::AdCampaignBudget](docs/AdCampaignBudget.md)
+ - [Late::AdCampaignCampaignBudget](docs/AdCampaignCampaignBudget.md)
  - [Late::AdCreative](docs/AdCreative.md)
  - [Late::AdMetrics](docs/AdMetrics.md)
  - [Late::AdPromotedObject](docs/AdPromotedObject.md)
  - [Late::AdSchedule](docs/AdSchedule.md)
  - [Late::AdStatus](docs/AdStatus.md)
  - [Late::AdTreeAdSet](docs/AdTreeAdSet.md)
+ - [Late::AdTreeAdSetAdSetBudget](docs/AdTreeAdSetAdSetBudget.md)
+ - [Late::AdTreeAdSetBudget](docs/AdTreeAdSetBudget.md)
  - [Late::AdTreeAdSetPromotedObject](docs/AdTreeAdSetPromotedObject.md)
  - [Late::AdTreeCampaign](docs/AdTreeCampaign.md)
+ - [Late::AdTreeCampaignBudget](docs/AdTreeCampaignBudget.md)
+ - [Late::AdTreeCampaignCampaignBudget](docs/AdTreeCampaignCampaignBudget.md)
  - [Late::AdTreeCampaignPromotedObject](docs/AdTreeCampaignPromotedObject.md)
  - [Late::AddBroadcastRecipients200Response](docs/AddBroadcastRecipients200Response.md)
  - [Late::AddBroadcastRecipientsRequest](docs/AddBroadcastRecipientsRequest.md)
@@ -368,6 +380,11 @@ Class | Method | HTTP request | Description
  - [Late::BulkCreateContacts200Response](docs/BulkCreateContacts200Response.md)
  - [Late::BulkCreateContactsRequest](docs/BulkCreateContactsRequest.md)
  - [Late::BulkCreateContactsRequestContactsInner](docs/BulkCreateContactsRequestContactsInner.md)
+ - [Late::BulkUpdateAdCampaignStatus200Response](docs/BulkUpdateAdCampaignStatus200Response.md)
+ - [Late::BulkUpdateAdCampaignStatus200ResponseResultsInner](docs/BulkUpdateAdCampaignStatus200ResponseResultsInner.md)
+ - [Late::BulkUpdateAdCampaignStatus200ResponseTotals](docs/BulkUpdateAdCampaignStatus200ResponseTotals.md)
+ - [Late::BulkUpdateAdCampaignStatusRequest](docs/BulkUpdateAdCampaignStatusRequest.md)
+ - [Late::BulkUpdateAdCampaignStatusRequestCampaignsInner](docs/BulkUpdateAdCampaignStatusRequestCampaignsInner.md)
  - [Late::BulkUploadPosts200Response](docs/BulkUploadPosts200Response.md)
  - [Late::BulkUploadPosts200ResponseErrorsInner](docs/BulkUploadPosts200ResponseErrorsInner.md)
  - [Late::BulkUploadPosts429Response](docs/BulkUploadPosts429Response.md)
@@ -453,6 +470,8 @@ Class | Method | HTTP request | Description
  - [Late::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner](docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner.md)
  - [Late::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl](docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.md)
  - [Late::DeleteAccountGroup200Response](docs/DeleteAccountGroup200Response.md)
+ - [Late::DeleteAdCampaign200Response](docs/DeleteAdCampaign200Response.md)
+ - [Late::DeleteAdCampaignRequest](docs/DeleteAdCampaignRequest.md)
  - [Late::DeleteGoogleBusinessMedia200Response](docs/DeleteGoogleBusinessMedia200Response.md)
  - [Late::DeleteGoogleBusinessPlaceAction200Response](docs/DeleteGoogleBusinessPlaceAction200Response.md)
  - [Late::DeleteInboxComment200Response](docs/DeleteInboxComment200Response.md)
@@ -470,6 +489,8 @@ Class | Method | HTTP request | Description
  - [Late::DiscordPlatformDataPollAnswersInnerPollMedia](docs/DiscordPlatformDataPollAnswersInnerPollMedia.md)
  - [Late::DiscordPlatformDataPollQuestion](docs/DiscordPlatformDataPollQuestion.md)
  - [Late::DiscordPlatformDataThreadFromMessage](docs/DiscordPlatformDataThreadFromMessage.md)
+ - [Late::DuplicateAdCampaign200Response](docs/DuplicateAdCampaign200Response.md)
+ - [Late::DuplicateAdCampaignRequest](docs/DuplicateAdCampaignRequest.md)
  - [Late::EditInboxMessage200Response](docs/EditInboxMessage200Response.md)
  - [Late::EditInboxMessage200ResponseData](docs/EditInboxMessage200ResponseData.md)
  - [Late::EditInboxMessageRequest](docs/EditInboxMessageRequest.md)
@@ -934,12 +955,19 @@ Class | Method | HTTP request | Description
  - [Late::UpdateAccountGroupRequest](docs/UpdateAccountGroupRequest.md)
  - [Late::UpdateAccountRequest](docs/UpdateAccountRequest.md)
  - [Late::UpdateAd200Response](docs/UpdateAd200Response.md)
+ - [Late::UpdateAdCampaign200Response](docs/UpdateAdCampaign200Response.md)
+ - [Late::UpdateAdCampaignRequest](docs/UpdateAdCampaignRequest.md)
+ - [Late::UpdateAdCampaignRequestBudget](docs/UpdateAdCampaignRequestBudget.md)
  - [Late::UpdateAdCampaignStatus200Response](docs/UpdateAdCampaignStatus200Response.md)
  - [Late::UpdateAdCampaignStatusRequest](docs/UpdateAdCampaignStatusRequest.md)
  - [Late::UpdateAdRequest](docs/UpdateAdRequest.md)
  - [Late::UpdateAdRequestBudget](docs/UpdateAdRequestBudget.md)
  - [Late::UpdateAdRequestTargeting](docs/UpdateAdRequestTargeting.md)
  - [Late::UpdateAdRequestTargetingInterestsInner](docs/UpdateAdRequestTargetingInterestsInner.md)
+ - [Late::UpdateAdSet200Response](docs/UpdateAdSet200Response.md)
+ - [Late::UpdateAdSetRequest](docs/UpdateAdSetRequest.md)
+ - [Late::UpdateAdSetRequestBudget](docs/UpdateAdSetRequestBudget.md)
+ - [Late::UpdateAdSetStatus200Response](docs/UpdateAdSetStatus200Response.md)
  - [Late::UpdateBroadcast200Response](docs/UpdateBroadcast200Response.md)
  - [Late::UpdateBroadcast200ResponseBroadcast](docs/UpdateBroadcast200ResponseBroadcast.md)
  - [Late::UpdateCommentAutomation200Response](docs/UpdateCommentAutomation200Response.md)

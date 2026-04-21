@@ -27,6 +27,8 @@ module Late
 
     attr_accessor :budget
 
+    attr_accessor :ad_set_budget
+
     attr_accessor :metrics
 
     # Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
@@ -70,6 +72,7 @@ module Late
         :'status' => :'status',
         :'ad_count' => :'adCount',
         :'budget' => :'budget',
+        :'ad_set_budget' => :'adSetBudget',
         :'metrics' => :'metrics',
         :'optimization_goal' => :'optimizationGoal',
         :'bid_strategy' => :'bidStrategy',
@@ -95,7 +98,8 @@ module Late
         :'ad_set_name' => :'String',
         :'status' => :'AdStatus',
         :'ad_count' => :'Integer',
-        :'budget' => :'AdBudget',
+        :'budget' => :'AdTreeAdSetBudget',
+        :'ad_set_budget' => :'AdTreeAdSetAdSetBudget',
         :'metrics' => :'AdMetrics',
         :'optimization_goal' => :'String',
         :'bid_strategy' => :'String',
@@ -146,6 +150,10 @@ module Late
         self.budget = attributes[:'budget']
       end
 
+      if attributes.key?(:'ad_set_budget')
+        self.ad_set_budget = attributes[:'ad_set_budget']
+      end
+
       if attributes.key?(:'metrics')
         self.metrics = attributes[:'metrics']
       end
@@ -194,6 +202,7 @@ module Late
           status == o.status &&
           ad_count == o.ad_count &&
           budget == o.budget &&
+          ad_set_budget == o.ad_set_budget &&
           metrics == o.metrics &&
           optimization_goal == o.optimization_goal &&
           bid_strategy == o.bid_strategy &&
@@ -210,7 +219,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_ad_set_id, ad_set_name, status, ad_count, budget, metrics, optimization_goal, bid_strategy, promoted_object, ads].hash
+      [platform_ad_set_id, ad_set_name, status, ad_count, budget, ad_set_budget, metrics, optimization_goal, bid_strategy, promoted_object, ads].hash
     end
 
     # Builds the object from hash

@@ -19,12 +19,228 @@ module Late
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Pause or resume many campaigns
+    # Process up to 50 campaigns in one call. Each campaign is updated concurrently and the response contains a per-campaign result so a single bad row does not fail the whole batch. 
+    # @param bulk_update_ad_campaign_status_request [BulkUpdateAdCampaignStatusRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [BulkUpdateAdCampaignStatus200Response]
+    def bulk_update_ad_campaign_status(bulk_update_ad_campaign_status_request, opts = {})
+      data, _status_code, _headers = bulk_update_ad_campaign_status_with_http_info(bulk_update_ad_campaign_status_request, opts)
+      data
+    end
+
+    # Pause or resume many campaigns
+    # Process up to 50 campaigns in one call. Each campaign is updated concurrently and the response contains a per-campaign result so a single bad row does not fail the whole batch. 
+    # @param bulk_update_ad_campaign_status_request [BulkUpdateAdCampaignStatusRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BulkUpdateAdCampaignStatus200Response, Integer, Hash)>] BulkUpdateAdCampaignStatus200Response data, response status code and response headers
+    def bulk_update_ad_campaign_status_with_http_info(bulk_update_ad_campaign_status_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.bulk_update_ad_campaign_status ...'
+      end
+      # verify the required parameter 'bulk_update_ad_campaign_status_request' is set
+      if @api_client.config.client_side_validation && bulk_update_ad_campaign_status_request.nil?
+        fail ArgumentError, "Missing the required parameter 'bulk_update_ad_campaign_status_request' when calling AdCampaignsApi.bulk_update_ad_campaign_status"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/bulk-status'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(bulk_update_ad_campaign_status_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'BulkUpdateAdCampaignStatus200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.bulk_update_ad_campaign_status",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#bulk_update_ad_campaign_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete a campaign
+    # Deletes the whole campaign on the platform, cascading to its ad sets and ads. Locally, all Ad documents for this campaign are marked `status: cancelled`.  Meta-only for now. Other platforms return 501 Not Implemented — fall back to DELETE /v1/ads/{adId} per ad in the meantime. 
+    # @param campaign_id [String] Platform campaign ID
+    # @param delete_ad_campaign_request [DeleteAdCampaignRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [DeleteAdCampaign200Response]
+    def delete_ad_campaign(campaign_id, delete_ad_campaign_request, opts = {})
+      data, _status_code, _headers = delete_ad_campaign_with_http_info(campaign_id, delete_ad_campaign_request, opts)
+      data
+    end
+
+    # Delete a campaign
+    # Deletes the whole campaign on the platform, cascading to its ad sets and ads. Locally, all Ad documents for this campaign are marked &#x60;status: cancelled&#x60;.  Meta-only for now. Other platforms return 501 Not Implemented — fall back to DELETE /v1/ads/{adId} per ad in the meantime. 
+    # @param campaign_id [String] Platform campaign ID
+    # @param delete_ad_campaign_request [DeleteAdCampaignRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeleteAdCampaign200Response, Integer, Hash)>] DeleteAdCampaign200Response data, response status code and response headers
+    def delete_ad_campaign_with_http_info(campaign_id, delete_ad_campaign_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.delete_ad_campaign ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.delete_ad_campaign"
+      end
+      # verify the required parameter 'delete_ad_campaign_request' is set
+      if @api_client.config.client_side_validation && delete_ad_campaign_request.nil?
+        fail ArgumentError, "Missing the required parameter 'delete_ad_campaign_request' when calling AdCampaignsApi.delete_ad_campaign"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(delete_ad_campaign_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteAdCampaign200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.delete_ad_campaign",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#delete_ad_campaign\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Duplicate a campaign
+    # Duplicates a campaign, including its ad sets, ads, creatives, and targeting by default (`deepCopy: true`). On Meta, this uses `POST /{campaign-id}/copies`. The copy is created paused by default so callers can review before launching.  The platform's duplication is asynchronous from our side; once the copy is created on the platform, we trigger a sync discovery so the new hierarchy shows up in /v1/ads/tree. Set `syncAfter: false` to skip the discovery trigger and poll on your own cadence.  Meta-only for now. Other platforms return 501 Not Implemented. 
+    # @param campaign_id [String] Source platform campaign ID
+    # @param duplicate_ad_campaign_request [DuplicateAdCampaignRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [DuplicateAdCampaign200Response]
+    def duplicate_ad_campaign(campaign_id, duplicate_ad_campaign_request, opts = {})
+      data, _status_code, _headers = duplicate_ad_campaign_with_http_info(campaign_id, duplicate_ad_campaign_request, opts)
+      data
+    end
+
+    # Duplicate a campaign
+    # Duplicates a campaign, including its ad sets, ads, creatives, and targeting by default (&#x60;deepCopy: true&#x60;). On Meta, this uses &#x60;POST /{campaign-id}/copies&#x60;. The copy is created paused by default so callers can review before launching.  The platform&#39;s duplication is asynchronous from our side; once the copy is created on the platform, we trigger a sync discovery so the new hierarchy shows up in /v1/ads/tree. Set &#x60;syncAfter: false&#x60; to skip the discovery trigger and poll on your own cadence.  Meta-only for now. Other platforms return 501 Not Implemented. 
+    # @param campaign_id [String] Source platform campaign ID
+    # @param duplicate_ad_campaign_request [DuplicateAdCampaignRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DuplicateAdCampaign200Response, Integer, Hash)>] DuplicateAdCampaign200Response data, response status code and response headers
+    def duplicate_ad_campaign_with_http_info(campaign_id, duplicate_ad_campaign_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.duplicate_ad_campaign ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.duplicate_ad_campaign"
+      end
+      # verify the required parameter 'duplicate_ad_campaign_request' is set
+      if @api_client.config.client_side_validation && duplicate_ad_campaign_request.nil?
+        fail ArgumentError, "Missing the required parameter 'duplicate_ad_campaign_request' when calling AdCampaignsApi.duplicate_ad_campaign"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/duplicate'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(duplicate_ad_campaign_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DuplicateAdCampaign200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.duplicate_ad_campaign",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#duplicate_ad_campaign\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get campaign tree
     # Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit Campaigns per page (default to 20)
-    # @option opts [String] :source  (default to 'zernio')
+    # @option opts [String] :source &#x60;zernio&#x60; (default) returns only ads created via Zernio (isExternal&#x3D;false). &#x60;all&#x60; additionally returns ads discovered from the platform&#39;s ad manager (isExternal&#x3D;true). Status is NOT filtered by default — use the &#x60;status&#x60; param for that. (default to 'zernio')
     # @option opts [String] :platform 
     # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
     # @option opts [String] :ad_account_id Platform ad account ID
@@ -43,7 +259,7 @@ module Late
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit Campaigns per page (default to 20)
-    # @option opts [String] :source  (default to 'zernio')
+    # @option opts [String] :source &#x60;zernio&#x60; (default) returns only ads created via Zernio (isExternal&#x3D;false). &#x60;all&#x60; additionally returns ads discovered from the platform&#39;s ad manager (isExternal&#x3D;true). Status is NOT filtered by default — use the &#x60;status&#x60; param for that. (default to 'zernio')
     # @option opts [String] :platform 
     # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
     # @option opts [String] :ad_account_id Platform ad account ID
@@ -131,7 +347,7 @@ module Late
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 20)
-    # @option opts [String] :source  (default to 'zernio')
+    # @option opts [String] :source &#x60;zernio&#x60; (default) returns only ads created via Zernio (isExternal&#x3D;false). &#x60;all&#x60; additionally returns ads discovered from the platform&#39;s ad manager (isExternal&#x3D;true). Status is NOT filtered by default — use the &#x60;status&#x60; param for that. (default to 'zernio')
     # @option opts [String] :platform 
     # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
     # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
@@ -148,7 +364,7 @@ module Late
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 20)
-    # @option opts [String] :source  (default to 'zernio')
+    # @option opts [String] :source &#x60;zernio&#x60; (default) returns only ads created via Zernio (isExternal&#x3D;false). &#x60;all&#x60; additionally returns ads discovered from the platform&#39;s ad manager (isExternal&#x3D;true). Status is NOT filtered by default — use the &#x60;status&#x60; param for that. (default to 'zernio')
     # @option opts [String] :platform 
     # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
     # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
@@ -227,6 +443,80 @@ module Late
       return data, status_code, headers
     end
 
+    # Update a campaign (budget)
+    # Campaign-level edits. Currently supports updating the CBO (Campaign Budget Optimization) budget. For ABO campaigns (where the budget lives on the ad set), use PUT /v1/ads/ad-sets/{adSetId} instead — this endpoint will return 409 with code BUDGET_LEVEL_MISMATCH.  Meta-only for now. Other platforms return 501 Not Implemented. 
+    # @param campaign_id [String] Platform campaign ID
+    # @param update_ad_campaign_request [UpdateAdCampaignRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAdCampaign200Response]
+    def update_ad_campaign(campaign_id, update_ad_campaign_request, opts = {})
+      data, _status_code, _headers = update_ad_campaign_with_http_info(campaign_id, update_ad_campaign_request, opts)
+      data
+    end
+
+    # Update a campaign (budget)
+    # Campaign-level edits. Currently supports updating the CBO (Campaign Budget Optimization) budget. For ABO campaigns (where the budget lives on the ad set), use PUT /v1/ads/ad-sets/{adSetId} instead — this endpoint will return 409 with code BUDGET_LEVEL_MISMATCH.  Meta-only for now. Other platforms return 501 Not Implemented. 
+    # @param campaign_id [String] Platform campaign ID
+    # @param update_ad_campaign_request [UpdateAdCampaignRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAdCampaign200Response, Integer, Hash)>] UpdateAdCampaign200Response data, response status code and response headers
+    def update_ad_campaign_with_http_info(campaign_id, update_ad_campaign_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_ad_campaign ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.update_ad_campaign"
+      end
+      # verify the required parameter 'update_ad_campaign_request' is set
+      if @api_client.config.client_side_validation && update_ad_campaign_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_campaign_request' when calling AdCampaignsApi.update_ad_campaign"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_campaign_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAdCampaign200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.update_ad_campaign",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#update_ad_campaign\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Pause or resume a campaign
     # Updates the status of all ads in a campaign. Makes one platform API call (not per-ad) since status cascades through the campaign hierarchy. Ads in terminal statuses (rejected, completed, cancelled) are automatically skipped. 
     # @param campaign_id [String] Platform campaign ID
@@ -297,6 +587,154 @@ module Late
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdCampaignsApi#update_ad_campaign_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update an ad set (budget and/or status)
+    # Ad-set-level writes. Use this for ABO budget updates and ad-set-scoped pause/resume. Provide `budget` and/or `status` in the body.  When updating `budget` on an ABO campaign: if the parent campaign is CBO, the response is 409 with code BUDGET_LEVEL_MISMATCH — route to PUT /v1/ads/campaigns/{campaignId} instead. 
+    # @param ad_set_id [String] Platform ad set ID
+    # @param update_ad_set_request [UpdateAdSetRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAdSet200Response]
+    def update_ad_set(ad_set_id, update_ad_set_request, opts = {})
+      data, _status_code, _headers = update_ad_set_with_http_info(ad_set_id, update_ad_set_request, opts)
+      data
+    end
+
+    # Update an ad set (budget and/or status)
+    # Ad-set-level writes. Use this for ABO budget updates and ad-set-scoped pause/resume. Provide &#x60;budget&#x60; and/or &#x60;status&#x60; in the body.  When updating &#x60;budget&#x60; on an ABO campaign: if the parent campaign is CBO, the response is 409 with code BUDGET_LEVEL_MISMATCH — route to PUT /v1/ads/campaigns/{campaignId} instead. 
+    # @param ad_set_id [String] Platform ad set ID
+    # @param update_ad_set_request [UpdateAdSetRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAdSet200Response, Integer, Hash)>] UpdateAdSet200Response data, response status code and response headers
+    def update_ad_set_with_http_info(ad_set_id, update_ad_set_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_ad_set ...'
+      end
+      # verify the required parameter 'ad_set_id' is set
+      if @api_client.config.client_side_validation && ad_set_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_set_id' when calling AdCampaignsApi.update_ad_set"
+      end
+      # verify the required parameter 'update_ad_set_request' is set
+      if @api_client.config.client_side_validation && update_ad_set_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_set_request' when calling AdCampaignsApi.update_ad_set"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ad-sets/{adSetId}'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_set_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAdSet200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.update_ad_set",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#update_ad_set\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Pause or resume a single ad set
+    # Ad-set-scoped pause/resume (doesn't touch sibling ad sets). Thin wrapper over PUT /v1/ads/ad-sets/{adSetId} for callers that only want the status toggle and prefer a symmetric URL to /v1/ads/campaigns/{campaignId}/status. 
+    # @param ad_set_id [String] Platform ad set ID
+    # @param update_ad_campaign_status_request [UpdateAdCampaignStatusRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAdSetStatus200Response]
+    def update_ad_set_status(ad_set_id, update_ad_campaign_status_request, opts = {})
+      data, _status_code, _headers = update_ad_set_status_with_http_info(ad_set_id, update_ad_campaign_status_request, opts)
+      data
+    end
+
+    # Pause or resume a single ad set
+    # Ad-set-scoped pause/resume (doesn&#39;t touch sibling ad sets). Thin wrapper over PUT /v1/ads/ad-sets/{adSetId} for callers that only want the status toggle and prefer a symmetric URL to /v1/ads/campaigns/{campaignId}/status. 
+    # @param ad_set_id [String] Platform ad set ID
+    # @param update_ad_campaign_status_request [UpdateAdCampaignStatusRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAdSetStatus200Response, Integer, Hash)>] UpdateAdSetStatus200Response data, response status code and response headers
+    def update_ad_set_status_with_http_info(ad_set_id, update_ad_campaign_status_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_ad_set_status ...'
+      end
+      # verify the required parameter 'ad_set_id' is set
+      if @api_client.config.client_side_validation && ad_set_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_set_id' when calling AdCampaignsApi.update_ad_set_status"
+      end
+      # verify the required parameter 'update_ad_campaign_status_request' is set
+      if @api_client.config.client_side_validation && update_ad_campaign_status_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_campaign_status_request' when calling AdCampaignsApi.update_ad_set_status"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ad-sets/{adSetId}/status'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_campaign_status_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAdSetStatus200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.update_ad_set_status",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#update_ad_set_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
