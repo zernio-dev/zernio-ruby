@@ -34,6 +34,15 @@ module Late
 
     attr_accessor :engagement
 
+    # Count of conversion events matching the campaign's promoted_object.custom_event_type (PURCHASE, LEAD, etc.) over the requested date range. 0 for non-conversion campaigns or when no events have fired. Meta-only at time of writing; other platforms return 0.
+    attr_accessor :conversions
+
+    # Derived spend / conversions in the same currency as spend. 0 when conversions is 0.
+    attr_accessor :cost_per_conversion
+
+    # Raw per-action-type counts from Meta's Insights actions[] array, summed over the date range. Keys are Meta action_type strings (e.g. link_click, offsite_conversion.fb_pixel_purchase, onsite_conversion.lead_grouped). Use this to extract any conversion event (purchases, leads, add_to_cart, etc.) without relying on the derived conversions field. Empty object when no actions are reported.
+    attr_accessor :actions
+
     # Present on individual ads only, not on campaign aggregations
     attr_accessor :last_synced_at
 
@@ -48,6 +57,9 @@ module Late
         :'cpc' => :'cpc',
         :'cpm' => :'cpm',
         :'engagement' => :'engagement',
+        :'conversions' => :'conversions',
+        :'cost_per_conversion' => :'costPerConversion',
+        :'actions' => :'actions',
         :'last_synced_at' => :'lastSyncedAt'
       }
     end
@@ -73,6 +85,9 @@ module Late
         :'cpc' => :'Float',
         :'cpm' => :'Float',
         :'engagement' => :'Integer',
+        :'conversions' => :'Integer',
+        :'cost_per_conversion' => :'Float',
+        :'actions' => :'Hash<String, Integer>',
         :'last_synced_at' => :'Time'
       }
     end
@@ -131,6 +146,20 @@ module Late
         self.engagement = attributes[:'engagement']
       end
 
+      if attributes.key?(:'conversions')
+        self.conversions = attributes[:'conversions']
+      end
+
+      if attributes.key?(:'cost_per_conversion')
+        self.cost_per_conversion = attributes[:'cost_per_conversion']
+      end
+
+      if attributes.key?(:'actions')
+        if (value = attributes[:'actions']).is_a?(Hash)
+          self.actions = value
+        end
+      end
+
       if attributes.key?(:'last_synced_at')
         self.last_synced_at = attributes[:'last_synced_at']
       end
@@ -164,6 +193,9 @@ module Late
           cpc == o.cpc &&
           cpm == o.cpm &&
           engagement == o.engagement &&
+          conversions == o.conversions &&
+          cost_per_conversion == o.cost_per_conversion &&
+          actions == o.actions &&
           last_synced_at == o.last_synced_at
     end
 
@@ -176,7 +208,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, last_synced_at].hash
+      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, last_synced_at].hash
     end
 
     # Builds the object from hash
