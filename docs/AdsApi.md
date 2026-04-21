@@ -462,7 +462,7 @@ api_instance = Late::AdsApi.new
 opts = {
   page: 56, # Integer | Page number (1-based)
   limit: 56, # Integer | 
-  source: 'zernio', # String | zernio = Zernio-created only, all = include external ads
+  source: 'zernio', # String | all (default) = Zernio-created + platform-discovered ads. zernio = restrict to Zernio-created only.
   status: Late::AdStatus::ACTIVE, # AdStatus | 
   platform: 'facebook', # String | 
   account_id: 'account_id_example', # String | Social account ID
@@ -506,7 +506,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **page** | **Integer** | Page number (1-based) | [optional][default to 1] |
 | **limit** | **Integer** |  | [optional][default to 50] |
-| **source** | **String** | zernio &#x3D; Zernio-created only, all &#x3D; include external ads | [optional][default to &#39;zernio&#39;] |
+| **source** | **String** | all (default) &#x3D; Zernio-created + platform-discovered ads. zernio &#x3D; restrict to Zernio-created only. | [optional][default to &#39;all&#39;] |
 | **status** | [**AdStatus**](.md) |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **account_id** | **String** | Social account ID | [optional] |

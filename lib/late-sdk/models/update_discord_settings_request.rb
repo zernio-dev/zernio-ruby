@@ -15,9 +15,6 @@ require 'time'
 
 module Late
   class UpdateDiscordSettingsRequest < ApiModelBase
-    # Discord account ID
-    attr_accessor :account_id
-
     # Custom display name for the webhook (1-80 chars). Empty string resets to default (\"Zernio\"). Cannot contain \"clyde\" or \"discord\".
     attr_accessor :webhook_username
 
@@ -30,7 +27,6 @@ module Late
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
         :'webhook_username' => :'webhookUsername',
         :'webhook_avatar_url' => :'webhookAvatarUrl',
         :'channel_id' => :'channelId'
@@ -50,7 +46,6 @@ module Late
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
         :'webhook_username' => :'String',
         :'webhook_avatar_url' => :'String',
         :'channel_id' => :'String'
@@ -79,12 +74,6 @@ module Late
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      else
-        self.account_id = nil
-      end
-
       if attributes.key?(:'webhook_username')
         self.webhook_username = attributes[:'webhook_username']
       end
@@ -103,10 +92,6 @@ module Late
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -114,18 +99,7 @@ module Late
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
-      end
-
-      @account_id = account_id
     end
 
     # Checks equality by comparing each attribute.
@@ -133,7 +107,6 @@ module Late
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
           webhook_username == o.webhook_username &&
           webhook_avatar_url == o.webhook_avatar_url &&
           channel_id == o.channel_id
@@ -148,7 +121,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, webhook_username, webhook_avatar_url, channel_id].hash
+      [webhook_username, webhook_avatar_url, channel_id].hash
     end
 
     # Builds the object from hash

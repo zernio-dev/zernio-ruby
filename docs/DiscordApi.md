@@ -168,7 +168,7 @@ end
 
 api_instance = Late::DiscordApi.new
 account_id = 'account_id_example' # String | 
-update_discord_settings_request = Late::UpdateDiscordSettingsRequest.new({account_id: 'account_id_example'}) # UpdateDiscordSettingsRequest | 
+update_discord_settings_request = Late::UpdateDiscordSettingsRequest.new # UpdateDiscordSettingsRequest | 
 
 begin
   # Update Discord settings

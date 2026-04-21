@@ -76,7 +76,7 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit Campaigns per page
-  # @option opts [String] :source &#x60;zernio&#x60; (default) returns only ads created via Zernio (isExternal&#x3D;false). &#x60;all&#x60; additionally returns ads discovered from the platform&#39;s ad manager (isExternal&#x3D;true). Status is NOT filtered by default — use the &#x60;status&#x60; param for that.
+  # @option opts [String] :source &#x60;all&#x60; (default) returns both Zernio-created ads and those discovered from the platform&#39;s ad manager — matches the web UI&#39;s default view. Pass &#x60;zernio&#x60; to restrict to isExternal&#x3D;false only. Status is NOT filtered by default — use the &#x60;status&#x60; param for that.
   # @option opts [String] :platform 
   # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
   # @option opts [String] :ad_account_id Platform ad account ID
@@ -97,7 +97,7 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit 
-  # @option opts [String] :source &#x60;zernio&#x60; (default) returns only ads created via Zernio (isExternal&#x3D;false). &#x60;all&#x60; additionally returns ads discovered from the platform&#39;s ad manager (isExternal&#x3D;true). Status is NOT filtered by default — use the &#x60;status&#x60; param for that.
+  # @option opts [String] :source &#x60;all&#x60; (default) returns both Zernio-created ads and those discovered from the platform&#39;s ad manager — matches the web UI&#39;s default view. Pass &#x60;zernio&#x60; to restrict to isExternal&#x3D;false only. Status is NOT filtered by default — use the &#x60;status&#x60; param for that.
   # @option opts [String] :platform 
   # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
   # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)

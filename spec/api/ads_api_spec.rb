@@ -113,7 +113,7 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit 
-  # @option opts [String] :source zernio &#x3D; Zernio-created only, all &#x3D; include external ads
+  # @option opts [String] :source all (default) &#x3D; Zernio-created + platform-discovered ads. zernio &#x3D; restrict to Zernio-created only.
   # @option opts [AdStatus] :status 
   # @option opts [String] :platform 
   # @option opts [String] :account_id Social account ID

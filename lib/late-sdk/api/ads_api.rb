@@ -422,7 +422,7 @@ module Late
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 50)
-    # @option opts [String] :source zernio &#x3D; Zernio-created only, all &#x3D; include external ads (default to 'zernio')
+    # @option opts [String] :source all (default) &#x3D; Zernio-created + platform-discovered ads. zernio &#x3D; restrict to Zernio-created only. (default to 'all')
     # @option opts [AdStatus] :status 
     # @option opts [String] :platform 
     # @option opts [String] :account_id Social account ID
@@ -442,7 +442,7 @@ module Late
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit  (default to 50)
-    # @option opts [String] :source zernio &#x3D; Zernio-created only, all &#x3D; include external ads (default to 'zernio')
+    # @option opts [String] :source all (default) &#x3D; Zernio-created + platform-discovered ads. zernio &#x3D; restrict to Zernio-created only. (default to 'all')
     # @option opts [AdStatus] :status 
     # @option opts [String] :platform 
     # @option opts [String] :account_id Social account ID
