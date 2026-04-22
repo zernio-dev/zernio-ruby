@@ -42,8 +42,13 @@ jobs:
 
       - name: Clean generated files
         run: |
-          rm -rf lib/late-sdk/models lib/late-sdk/api docs spec
-          rm -rf lib/late lib/late.rb lib/late-sdk.rb late.gemspec
+          # Remove both the Zernio tree (for re-gen) and the legacy Late tree
+          # (carried over from before the rebrand) so the next generation
+          # produces a clean lib/zernio-sdk/ tree.
+          rm -rf lib/zernio-sdk lib/zernio-sdk.rb zernio-sdk.gemspec
+          rm -rf lib/late-sdk lib/late-sdk.rb late-sdk.gemspec late.gemspec
+          rm -rf lib/late lib/late.rb
+          rm -rf docs spec
 
       - name: Generate SDK
         run: |
@@ -52,30 +57,24 @@ jobs:
             -g ruby \
             -o . \
             --skip-validate-spec \
-            --additional-properties=gemName=late-sdk,moduleName=Late,gemVersion=0.1.0 \
+            --additional-properties=gemName=zernio-sdk,moduleName=Zernio,gemVersion=0.1.0 \
             --inline-schema-name-mappings "getGoogleBusinessLocationDetails_200_response_specialHours_specialHourPeriods_inner_startDate=GbpSpecialHourPeriodStartDate,getGoogleBusinessLocationDetails_200_response_specialHours_specialHourPeriods_inner=GbpSpecialHourPeriod,getGoogleBusinessLocationDetails_200_response_serviceItems_inner_freeFormServiceItem_label=GbpFreeFormServiceItemLabel,updateGoogleBusinessLocationDetails_request_serviceItems_inner_freeFormServiceItem_label=GbpUpdateFreeFormServiceItemLabel" \
             --git-user-id=zernio-dev \
             --git-repo-id=zernio-ruby
 
-      - name: Rebrand gemspec name to zernio-sdk
+      - name: Add Late alias to zernio-sdk.rb
         run: |
-          # The generator creates s.name = "late-sdk", change it to "zernio-sdk"
-          # so the primary gem is published as zernio-sdk
-          sed -i 's/s.name        = "late-sdk"/s.name        = "zernio-sdk"/' late-sdk.gemspec
-
-      - name: Restore zernio-sdk.rb entry point
-        run: |
-          # The generator cleans files, so recreate the zernio-sdk.rb alias
-          printf '%s\n' "# Zernio SDK - forwards to late-sdk for backwards compatibility" "require 'late-sdk'" "" "# Alias the module so both Late and Zernio work" "Zernio = Late unless defined?(Zernio)" > lib/zernio-sdk.rb
-
-      - name: Add Zernio alias to late-sdk.rb
-        run: |
-          # Ensure the Zernio alias is present at the end of lib/late-sdk.rb
-          if ! grep -q 'Zernio = Late' lib/late-sdk.rb; then
-            echo '' >> lib/late-sdk.rb
-            echo '# Zernio alias for backwards compatibility during rebrand' >> lib/late-sdk.rb
-            echo 'Zernio = Late unless defined?(Zernio)' >> lib/late-sdk.rb
+          # Keep existing Late::... callers working by aliasing to Zernio.
+          if ! grep -q 'Late = Zernio' lib/zernio-sdk.rb; then
+            echo '' >> lib/zernio-sdk.rb
+            echo '# Late alias for backwards compatibility with the pre-rebrand gem' >> lib/zernio-sdk.rb
+            echo 'Late = Zernio unless defined?(Late)' >> lib/zernio-sdk.rb
           fi
+
+      - name: Create late-sdk.rb legacy entry point
+        run: |
+          # Users who `require "late-sdk"` still get the full SDK via the alias.
+          printf '%s\n' "# Legacy entry point - forwards to zernio-sdk" "require 'zernio-sdk'" "" "# Alias the module so existing Late::... code keeps working" "Late = Zernio unless defined?(Late)" > lib/late-sdk.rb
 
       - name: Patch README install instructions
         run: |
@@ -88,14 +87,16 @@ jobs:
           Install via RubyGems:
 
           \`\`\`bash
-          gem install late-sdk
+          gem install zernio-sdk
           \`\`\`
 
           Or add it to your Gemfile:
 
           \`\`\`ruby
-          gem \"late-sdk\"
-          \`\`\`''')
+          gem \"zernio-sdk\"
+          \`\`\`
+
+          The legacy \`late-sdk\` gem is still published for backwards compatibility and exposes the same API (\`Late = Zernio\`).''')
           content = re.sub(r'## Installation.*?(?=\n## )', install_section + '\n\n', content, flags=re.DOTALL)
           with open('README.md', 'w') as f:
               f.write(content)
@@ -130,7 +131,7 @@ jobs:
       - name: Update gem version
         if: steps.changes.outputs.has_changes == 'true'
         run: |
-          sed -i "s/VERSION = '.*'/VERSION = '${{ steps.version.outputs.gem_version }}'/" lib/late-sdk/version.rb
+          sed -i "s/VERSION = '.*'/VERSION = '${{ steps.version.outputs.gem_version }}'/" lib/zernio-sdk/version.rb
 
       - name: Commit and push
         if: steps.changes.outputs.has_changes == 'true'
@@ -154,21 +155,20 @@ jobs:
       - name: Build and publish zernio-sdk (primary)
         if: steps.changes.outputs.has_changes == 'true'
         run: |
-          # late-sdk.gemspec has s.name = "zernio-sdk" (set in rebrand step)
-          # so gem build produces zernio-sdk-VERSION.gem
-          gem build late-sdk.gemspec
+          gem build zernio-sdk.gemspec
           gem push zernio-sdk-${{ steps.version.outputs.gem_version }}.gem
         continue-on-error: true
 
       - name: Build and publish late-sdk (legacy alias)
         if: steps.changes.outputs.has_changes == 'true'
         run: |
-          # Create a copy with s.name swapped back to "late-sdk" for the legacy gem
-          cp late-sdk.gemspec late-sdk-legacy.gemspec
-          sed -i 's/s.name        = "zernio-sdk"/s.name        = "late-sdk"/' late-sdk-legacy.gemspec
-          gem build late-sdk-legacy.gemspec
+          # Copy the gemspec with s.name swapped to "late-sdk" so the legacy gem
+          # keeps being published at the same version.
+          cp zernio-sdk.gemspec late-sdk.gemspec
+          sed -i 's/s.name        = "zernio-sdk"/s.name        = "late-sdk"/' late-sdk.gemspec
+          gem build late-sdk.gemspec
           gem push late-sdk-${{ steps.version.outputs.gem_version }}.gem
-          rm -f late-sdk-legacy.gemspec
+          rm -f late-sdk.gemspec
         continue-on-error: true
 
       - name: Create GitHub Release
@@ -182,9 +182,9 @@ jobs:
             ## Auto-generated SDK Update
 
             ```bash
-            gem install late-sdk
-            # or
             gem install zernio-sdk
+            # or, for backwards compatibility with the pre-rebrand gem
+            gem install late-sdk
             ```
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
