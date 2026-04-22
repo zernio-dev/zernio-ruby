@@ -1,4 +1,4 @@
-# Late::ListAccountGroups200Response
+# Zernio::ListAccountGroups200Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListAccountGroups200Response.new(
+instance = Zernio::ListAccountGroups200Response.new(
   groups: null
 )
 ```

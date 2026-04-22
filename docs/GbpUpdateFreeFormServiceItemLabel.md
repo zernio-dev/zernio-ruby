@@ -1,4 +1,4 @@
-# Late::GbpUpdateFreeFormServiceItemLabel
+# Zernio::GbpUpdateFreeFormServiceItemLabel
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GbpUpdateFreeFormServiceItemLabel.new(
+instance = Zernio::GbpUpdateFreeFormServiceItemLabel.new(
   display_name: null,
   language_code: null
 )

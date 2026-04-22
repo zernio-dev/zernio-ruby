@@ -1,4 +1,4 @@
-# Late::TwitterPlatformData
+# Zernio::TwitterPlatformData
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::TwitterPlatformData.new(
+instance = Zernio::TwitterPlatformData.new(
   reply_to_tweet_id: null,
   reply_settings: null,
   thread_items: null,

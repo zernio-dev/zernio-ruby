@@ -1,4 +1,4 @@
-# Late::BoostPostRequestTargeting
+# Zernio::BoostPostRequestTargeting
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BoostPostRequestTargeting.new(
+instance = Zernio::BoostPostRequestTargeting.new(
   age_min: null,
   age_max: null,
   countries: null,

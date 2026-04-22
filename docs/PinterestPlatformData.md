@@ -1,4 +1,4 @@
-# Late::PinterestPlatformData
+# Zernio::PinterestPlatformData
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::PinterestPlatformData.new(
+instance = Zernio::PinterestPlatformData.new(
   title: null,
   board_id: null,
   link: null,

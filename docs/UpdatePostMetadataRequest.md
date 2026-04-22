@@ -1,4 +1,4 @@
-# Late::UpdatePostMetadataRequest
+# Zernio::UpdatePostMetadataRequest
 
 ## Properties
 
@@ -20,9 +20,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdatePostMetadataRequest.new(
+instance = Zernio::UpdatePostMetadataRequest.new(
   platform: null,
   video_id: null,
   account_id: null,

@@ -1,4 +1,4 @@
-# Late::GetGmbLocations200Response
+# Zernio::GetGmbLocations200Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGmbLocations200Response.new(
+instance = Zernio::GetGmbLocations200Response.new(
   locations: null,
   selected_location_id: null,
   cached: null

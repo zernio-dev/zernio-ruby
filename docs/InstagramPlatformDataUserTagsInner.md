@@ -1,4 +1,4 @@
-# Late::InstagramPlatformDataUserTagsInner
+# Zernio::InstagramPlatformDataUserTagsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InstagramPlatformDataUserTagsInner.new(
+instance = Zernio::InstagramPlatformDataUserTagsInner.new(
   username: friend_username,
   x: 0.5,
   y: 0.5,

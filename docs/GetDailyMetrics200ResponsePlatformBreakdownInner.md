@@ -1,4 +1,4 @@
-# Late::GetDailyMetrics200ResponsePlatformBreakdownInner
+# Zernio::GetDailyMetrics200ResponsePlatformBreakdownInner
 
 ## Properties
 
@@ -18,9 +18,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetDailyMetrics200ResponsePlatformBreakdownInner.new(
+instance = Zernio::GetDailyMetrics200ResponsePlatformBreakdownInner.new(
   platform: instagram,
   post_count: 142,
   impressions: null,

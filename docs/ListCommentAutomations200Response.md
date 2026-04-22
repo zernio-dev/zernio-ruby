@@ -1,4 +1,4 @@
-# Late::ListCommentAutomations200Response
+# Zernio::ListCommentAutomations200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListCommentAutomations200Response.new(
+instance = Zernio::ListCommentAutomations200Response.new(
   success: null,
   automations: null
 )

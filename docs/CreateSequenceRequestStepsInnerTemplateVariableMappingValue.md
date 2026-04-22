@@ -1,4 +1,4 @@
-# Late::CreateSequenceRequestStepsInnerTemplateVariableMappingValue
+# Zernio::CreateSequenceRequestStepsInnerTemplateVariableMappingValue
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateSequenceRequestStepsInnerTemplateVariableMappingValue.new(
+instance = Zernio::CreateSequenceRequestStepsInnerTemplateVariableMappingValue.new(
   field: null,
   custom_value: null
 )

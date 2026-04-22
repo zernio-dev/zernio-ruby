@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessAttributes200ResponseAttributesInnerRepeatedEnumValue
+# Zernio::GetGoogleBusinessAttributes200ResponseAttributesInnerRepeatedEnumValue
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessAttributes200ResponseAttributesInnerRepeatedEnumValue.new(
+instance = Zernio::GetGoogleBusinessAttributes200ResponseAttributesInnerRepeatedEnumValue.new(
   set_values: null,
   unset_values: null
 )

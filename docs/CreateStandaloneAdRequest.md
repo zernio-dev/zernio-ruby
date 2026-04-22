@@ -1,4 +1,4 @@
-# Late::CreateStandaloneAdRequest
+# Zernio::CreateStandaloneAdRequest
 
 ## Properties
 
@@ -36,9 +36,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateStandaloneAdRequest.new(
+instance = Zernio::CreateStandaloneAdRequest.new(
   account_id: null,
   ad_account_id: null,
   name: null,

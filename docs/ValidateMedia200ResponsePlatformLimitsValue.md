@@ -1,4 +1,4 @@
-# Late::ValidateMedia200ResponsePlatformLimitsValue
+# Zernio::ValidateMedia200ResponsePlatformLimitsValue
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidateMedia200ResponsePlatformLimitsValue.new(
+instance = Zernio::ValidateMedia200ResponsePlatformLimitsValue.new(
   limit: null,
   limit_formatted: null,
   within_limit: null

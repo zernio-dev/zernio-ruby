@@ -1,4 +1,4 @@
-# Late::GetSequence200ResponseSequenceStepsInnerTemplate
+# Zernio::GetSequence200ResponseSequenceStepsInnerTemplate
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetSequence200ResponseSequenceStepsInnerTemplate.new(
+instance = Zernio::GetSequence200ResponseSequenceStepsInnerTemplate.new(
   name: null,
   language: null,
   variable_mapping: null

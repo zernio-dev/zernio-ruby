@@ -1,4 +1,4 @@
-# Late::WhatsAppTemplateComponent
+# Zernio::WhatsAppTemplateComponent
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::WhatsAppTemplateComponent.openapi_one_of
+Zernio::WhatsAppTemplateComponent.openapi_one_of
 # =>
 # [
 #   :'WhatsAppBodyComponent',
@@ -28,9 +28,9 @@ Returns the discriminator's property name.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::WhatsAppTemplateComponent.openapi_discriminator_name
+Zernio::WhatsAppTemplateComponent.openapi_discriminator_name
 # => :'type'
 ```
 
@@ -41,9 +41,9 @@ Returns the discriminator's mapping.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::WhatsAppTemplateComponent.openapi_discriminator_mapping
+Zernio::WhatsAppTemplateComponent.openapi_discriminator_mapping
 # =>
 # {
 #   :'body' => :'WhatsAppBodyComponent',
@@ -60,12 +60,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::WhatsAppTemplateComponent.build(data)
+Zernio::WhatsAppTemplateComponent.build(data)
 # => #<WhatsAppBodyComponent:0x00007fdd4aab02a0>
 
-Late::WhatsAppTemplateComponent.build(data_that_doesnt_match)
+Zernio::WhatsAppTemplateComponent.build(data_that_doesnt_match)
 # => nil
 ```
 

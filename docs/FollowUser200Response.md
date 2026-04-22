@@ -1,4 +1,4 @@
-# Late::FollowUser200Response
+# Zernio::FollowUser200Response
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::FollowUser200Response.new(
+instance = Zernio::FollowUser200Response.new(
   status: success,
   target_user_id: null,
   following: null,

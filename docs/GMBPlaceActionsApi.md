@@ -1,4 +1,4 @@
-# Late::GMBPlaceActionsApi
+# Zernio::GMBPlaceActionsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -22,16 +22,16 @@ Creates a place action link for a location.  Available action types: APPOINTMENT
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBPlaceActionsApi.new
+api_instance = Zernio::GMBPlaceActionsApi.new
 account_id = 'account_id_example' # String | 
-create_google_business_place_action_request = Late::CreateGoogleBusinessPlaceActionRequest.new({uri: 'uri_example', place_action_type: 'APPOINTMENT'}) # CreateGoogleBusinessPlaceActionRequest | 
+create_google_business_place_action_request = Zernio::CreateGoogleBusinessPlaceActionRequest.new({uri: 'uri_example', place_action_type: 'APPOINTMENT'}) # CreateGoogleBusinessPlaceActionRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
 }
@@ -40,7 +40,7 @@ begin
   # Create action link
   result = api_instance.create_google_business_place_action(account_id, create_google_business_place_action_request, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->create_google_business_place_action: #{e}"
 end
 ```
@@ -58,7 +58,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateGoogleBusinessPlaceAction200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->create_google_business_place_action_with_http_info: #{e}"
 end
 ```
@@ -97,14 +97,14 @@ Deletes a place action link (e.g. booking or ordering URL) from a GBP location.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBPlaceActionsApi.new
+api_instance = Zernio::GMBPlaceActionsApi.new
 account_id = 'account_id_example' # String | 
 name = 'name_example' # String | The resource name of the place action link (e.g. locations/123/placeActionLinks/456)
 opts = {
@@ -115,7 +115,7 @@ begin
   # Delete action link
   result = api_instance.delete_google_business_place_action(account_id, name, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->delete_google_business_place_action: #{e}"
 end
 ```
@@ -133,7 +133,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteGoogleBusinessPlaceAction200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->delete_google_business_place_action_with_http_info: #{e}"
 end
 ```
@@ -172,14 +172,14 @@ Lists place action links for a Google Business Profile location.  Place actions 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBPlaceActionsApi.new
+api_instance = Zernio::GMBPlaceActionsApi.new
 account_id = 'account_id_example' # String | 
 opts = {
   location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
@@ -191,7 +191,7 @@ begin
   # List action links
   result = api_instance.list_google_business_place_actions(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->list_google_business_place_actions: #{e}"
 end
 ```
@@ -209,7 +209,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListGoogleBusinessPlaceActions200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->list_google_business_place_actions_with_http_info: #{e}"
 end
 ```
@@ -249,16 +249,16 @@ Updates a place action link (change URL or action type). Only the fields include
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBPlaceActionsApi.new
+api_instance = Zernio::GMBPlaceActionsApi.new
 account_id = 'account_id_example' # String | 
-update_google_business_place_action_request = Late::UpdateGoogleBusinessPlaceActionRequest.new({name: 'name_example'}) # UpdateGoogleBusinessPlaceActionRequest | 
+update_google_business_place_action_request = Zernio::UpdateGoogleBusinessPlaceActionRequest.new({name: 'name_example'}) # UpdateGoogleBusinessPlaceActionRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location.
 }
@@ -267,7 +267,7 @@ begin
   # Update action link
   result = api_instance.update_google_business_place_action(account_id, update_google_business_place_action_request, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->update_google_business_place_action: #{e}"
 end
 ```
@@ -285,7 +285,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateGoogleBusinessPlaceAction200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBPlaceActionsApi->update_google_business_place_action_with_http_info: #{e}"
 end
 ```

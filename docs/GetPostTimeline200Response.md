@@ -1,4 +1,4 @@
-# Late::GetPostTimeline200Response
+# Zernio::GetPostTimeline200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPostTimeline200Response.new(
+instance = Zernio::GetPostTimeline200Response.new(
   post_id: null,
   timeline: null
 )

@@ -1,4 +1,4 @@
-# Late::DeleteAdCampaignRequest
+# Zernio::DeleteAdCampaignRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DeleteAdCampaignRequest.new(
+instance = Zernio::DeleteAdCampaignRequest.new(
   platform: null
 )
 ```

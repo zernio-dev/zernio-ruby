@@ -1,4 +1,4 @@
-# Late::GetAnalytics400Response
+# Zernio::GetAnalytics400Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetAnalytics400Response.new(
+instance = Zernio::GetAnalytics400Response.new(
   error: Invalid query parameters,
   details: null
 )

@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessAttributes200ResponseAttributesInner
+# Zernio::GetGoogleBusinessAttributes200ResponseAttributesInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessAttributes200ResponseAttributesInner.new(
+instance = Zernio::GetGoogleBusinessAttributes200ResponseAttributesInner.new(
   name: null,
   value_type: null,
   values: null,

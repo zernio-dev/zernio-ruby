@@ -1,4 +1,4 @@
-# Late::UpdateAdRequestTargeting
+# Zernio::UpdateAdRequestTargeting
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateAdRequestTargeting.new(
+instance = Zernio::UpdateAdRequestTargeting.new(
   age_min: null,
   age_max: null,
   countries: null,

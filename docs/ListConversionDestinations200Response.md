@@ -1,4 +1,4 @@
-# Late::ListConversionDestinations200Response
+# Zernio::ListConversionDestinations200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListConversionDestinations200Response.new(
+instance = Zernio::ListConversionDestinations200Response.new(
   platform: null,
   destinations: null
 )

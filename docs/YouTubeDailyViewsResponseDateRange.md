@@ -1,4 +1,4 @@
-# Late::YouTubeDailyViewsResponseDateRange
+# Zernio::YouTubeDailyViewsResponseDateRange
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::YouTubeDailyViewsResponseDateRange.new(
+instance = Zernio::YouTubeDailyViewsResponseDateRange.new(
   start_date: null,
   end_date: null
 )

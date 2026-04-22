@@ -1,4 +1,4 @@
-# Late::ValidateSubreddit200Response
+# Zernio::ValidateSubreddit200Response
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::ValidateSubreddit200Response.openapi_one_of
+Zernio::ValidateSubreddit200Response.openapi_one_of
 # =>
 # [
 #   :'ValidateSubreddit200ResponseOneOf',
@@ -26,12 +26,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::ValidateSubreddit200Response.build(data)
+Zernio::ValidateSubreddit200Response.build(data)
 # => #<ValidateSubreddit200ResponseOneOf:0x00007fdd4aab02a0>
 
-Late::ValidateSubreddit200Response.build(data_that_doesnt_match)
+Zernio::ValidateSubreddit200Response.build(data_that_doesnt_match)
 # => nil
 ```
 

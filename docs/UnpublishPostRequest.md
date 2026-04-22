@@ -1,4 +1,4 @@
-# Late::UnpublishPostRequest
+# Zernio::UnpublishPostRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UnpublishPostRequest.new(
+instance = Zernio::UnpublishPostRequest.new(
   platform: null
 )
 ```

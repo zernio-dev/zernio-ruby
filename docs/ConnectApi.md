@@ -1,4 +1,4 @@
-# Late::ConnectApi
+# Zernio::ConnectApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -50,21 +50,21 @@ Poll this endpoint to check if a Telegram access code has been used to connect a
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 code = 'ZRN-ABC123' # String | The access code to check status for
 
 begin
   # Check Telegram status
   result = api_instance.complete_telegram_connect(code)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->complete_telegram_connect: #{e}"
 end
 ```
@@ -82,7 +82,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CompleteTelegramConnect200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->complete_telegram_connect_with_http_info: #{e}"
 end
 ```
@@ -119,14 +119,14 @@ Unified ads connection endpoint. Creates a dedicated ads SocialAccount for the s
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 platform = 'facebook' # String | Platform to connect ads for. Only platforms with ads support are accepted.
 profile_id = 'profile_id_example' # String | Your Zernio profile ID
 opts = {
@@ -139,7 +139,7 @@ begin
   # Connect ads for a platform
   result = api_instance.connect_ads(platform, profile_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->connect_ads: #{e}"
 end
 ```
@@ -157,7 +157,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ConnectAds200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->connect_ads_with_http_info: #{e}"
 end
 ```
@@ -198,21 +198,21 @@ Connect a Bluesky account using identifier (handle or email) and an app password
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
-connect_bluesky_credentials_request = Late::ConnectBlueskyCredentialsRequest.new({identifier: 'identifier_example', app_password: 'app_password_example', state: '6507a1b2c3d4e5f6a7b8c9d0-6507a1b2c3d4e5f6a7b8c9d1'}) # ConnectBlueskyCredentialsRequest | 
+api_instance = Zernio::ConnectApi.new
+connect_bluesky_credentials_request = Zernio::ConnectBlueskyCredentialsRequest.new({identifier: 'identifier_example', app_password: 'app_password_example', state: '6507a1b2c3d4e5f6a7b8c9d0-6507a1b2c3d4e5f6a7b8c9d1'}) # ConnectBlueskyCredentialsRequest | 
 
 begin
   # Connect Bluesky account
   result = api_instance.connect_bluesky_credentials(connect_bluesky_credentials_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->connect_bluesky_credentials: #{e}"
 end
 ```
@@ -230,7 +230,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ConnectBlueskyCredentials200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->connect_bluesky_credentials_with_http_info: #{e}"
 end
 ```
@@ -267,21 +267,21 @@ Connect a WhatsApp Business Account by providing Meta credentials directly. This
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
-connect_whats_app_credentials_request = Late::ConnectWhatsAppCredentialsRequest.new({profile_id: 'profile_id_example', access_token: 'access_token_example', waba_id: 'waba_id_example', phone_number_id: 'phone_number_id_example'}) # ConnectWhatsAppCredentialsRequest | 
+api_instance = Zernio::ConnectApi.new
+connect_whats_app_credentials_request = Zernio::ConnectWhatsAppCredentialsRequest.new({profile_id: 'profile_id_example', access_token: 'access_token_example', waba_id: 'waba_id_example', phone_number_id: 'phone_number_id_example'}) # ConnectWhatsAppCredentialsRequest | 
 
 begin
   # Connect WhatsApp via credentials
   result = api_instance.connect_whats_app_credentials(connect_whats_app_credentials_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->connect_whats_app_credentials: #{e}"
 end
 ```
@@ -299,7 +299,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ConnectWhatsAppCredentials200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->connect_whats_app_credentials_with_http_info: #{e}"
 end
 ```
@@ -336,14 +336,14 @@ Initiate an OAuth connection flow. Returns an authUrl to redirect the user to. S
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 platform = 'facebook' # String | Social media platform to connect
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles)
 opts = {
@@ -355,7 +355,7 @@ begin
   # Get OAuth connect URL
   result = api_instance.get_connect_url(platform, profile_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_connect_url: #{e}"
 end
 ```
@@ -373,7 +373,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetConnectUrl200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_connect_url_with_http_info: #{e}"
 end
 ```
@@ -413,21 +413,21 @@ Returns all Facebook pages the connected account has access to, including the cu
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # List Facebook pages
   result = api_instance.get_facebook_pages(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_facebook_pages: #{e}"
 end
 ```
@@ -445,7 +445,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetFacebookPages200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_facebook_pages_with_http_info: #{e}"
 end
 ```
@@ -482,21 +482,21 @@ Returns all Google Business Profile locations the connected account has access t
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # List GBP locations
   result = api_instance.get_gmb_locations(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_gmb_locations: #{e}"
 end
 ```
@@ -514,7 +514,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGmbLocations200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_gmb_locations_with_http_info: #{e}"
 end
 ```
@@ -551,21 +551,21 @@ Returns LinkedIn organizations (company pages) the connected account has admin a
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # List LinkedIn orgs
   result = api_instance.get_linked_in_organizations(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_linked_in_organizations: #{e}"
 end
 ```
@@ -583,7 +583,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetLinkedInOrganizations200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_linked_in_organizations_with_http_info: #{e}"
 end
 ```
@@ -620,21 +620,21 @@ Fetch pending OAuth data for headless mode using the pendingDataToken from the r
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 token = 'token_example' # String | The pending data token from the OAuth redirect URL (pendingDataToken parameter)
 
 begin
   # Get pending OAuth data
   result = api_instance.get_pending_o_auth_data(token)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_pending_o_auth_data: #{e}"
 end
 ```
@@ -652,7 +652,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetPendingOAuthData200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_pending_o_auth_data_with_http_info: #{e}"
 end
 ```
@@ -689,21 +689,21 @@ Returns the boards available for a connected Pinterest account. Use this to get 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # List Pinterest boards
   result = api_instance.get_pinterest_boards(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_pinterest_boards: #{e}"
 end
 ```
@@ -721,7 +721,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetPinterestBoards200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_pinterest_boards_with_http_info: #{e}"
 end
 ```
@@ -758,14 +758,14 @@ Returns available post flairs for a subreddit. Some subreddits require a flair w
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 subreddit = 'subreddit_example' # String | Subreddit name (without \"r/\" prefix) to fetch flairs for
 
@@ -773,7 +773,7 @@ begin
   # List subreddit flairs
   result = api_instance.get_reddit_flairs(account_id, subreddit)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_reddit_flairs: #{e}"
 end
 ```
@@ -791,7 +791,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetRedditFlairs200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_reddit_flairs_with_http_info: #{e}"
 end
 ```
@@ -829,21 +829,21 @@ Returns the subreddits the connected Reddit account can post to. Use this to get
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # List Reddit subreddits
   result = api_instance.get_reddit_subreddits(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_reddit_subreddits: #{e}"
 end
 ```
@@ -861,7 +861,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetRedditSubreddits200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_reddit_subreddits_with_http_info: #{e}"
 end
 ```
@@ -898,21 +898,21 @@ Generate an access code (valid 15 minutes) for connecting a Telegram channel or 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | The profile ID to connect the Telegram account to
 
 begin
   # Generate Telegram code
   result = api_instance.get_telegram_connect_status(profile_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_telegram_connect_status: #{e}"
 end
 ```
@@ -930,7 +930,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetTelegramConnectStatus200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_telegram_connect_status_with_http_info: #{e}"
 end
 ```
@@ -967,21 +967,21 @@ Returns the playlists available for a connected YouTube account. Use this to get
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # List YouTube playlists
   result = api_instance.get_youtube_playlists(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_youtube_playlists: #{e}"
 end
 ```
@@ -999,7 +999,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetYoutubePlaylists200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_youtube_playlists_with_http_info: #{e}"
 end
 ```
@@ -1036,21 +1036,21 @@ Exchange the OAuth authorization code for tokens and connect the account to the 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 platform = 'platform_example' # String | 
-handle_o_auth_callback_request = Late::HandleOAuthCallbackRequest.new({code: 'code_example', state: 'state_example', profile_id: 'profile_id_example'}) # HandleOAuthCallbackRequest | 
+handle_o_auth_callback_request = Zernio::HandleOAuthCallbackRequest.new({code: 'code_example', state: 'state_example', profile_id: 'profile_id_example'}) # HandleOAuthCallbackRequest | 
 
 begin
   # Complete OAuth callback
   api_instance.handle_o_auth_callback(platform, handle_o_auth_callback_request)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->handle_o_auth_callback: #{e}"
 end
 ```
@@ -1068,7 +1068,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->handle_o_auth_callback_with_http_info: #{e}"
 end
 ```
@@ -1106,21 +1106,21 @@ Connect a Telegram channel/group directly using the chat ID. Alternative to the 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
-initiate_telegram_connect_request = Late::InitiateTelegramConnectRequest.new({chat_id: 'chat_id_example', profile_id: 'profile_id_example'}) # InitiateTelegramConnectRequest | 
+api_instance = Zernio::ConnectApi.new
+initiate_telegram_connect_request = Zernio::InitiateTelegramConnectRequest.new({chat_id: 'chat_id_example', profile_id: 'profile_id_example'}) # InitiateTelegramConnectRequest | 
 
 begin
   # Connect Telegram directly
   result = api_instance.initiate_telegram_connect(initiate_telegram_connect_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->initiate_telegram_connect: #{e}"
 end
 ```
@@ -1138,7 +1138,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <InitiateTelegramConnect200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->initiate_telegram_connect_with_http_info: #{e}"
 end
 ```
@@ -1175,9 +1175,9 @@ Returns the list of Facebook Pages the user can manage after OAuth. Extract temp
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure API key authorization: connectToken
   config.api_key['X-Connect-Token'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1187,7 +1187,7 @@ Late.configure do |config|
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 profile_id = 'profile_id_example' # String | Profile ID from your connection flow
 temp_token = 'temp_token_example' # String | Temporary Facebook access token from the OAuth callback redirect
 
@@ -1195,7 +1195,7 @@ begin
   # List Facebook pages
   result = api_instance.list_facebook_pages(profile_id, temp_token)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_facebook_pages: #{e}"
 end
 ```
@@ -1213,7 +1213,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListFacebookPages200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_facebook_pages_with_http_info: #{e}"
 end
 ```
@@ -1251,9 +1251,9 @@ For headless flows. Returns the list of GBP locations the user can manage. Use p
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure API key authorization: connectToken
   config.api_key['X-Connect-Token'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1263,7 +1263,7 @@ Late.configure do |config|
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Profile ID from your connection flow. Required for auth validation when provided.
   pending_data_token: 'pending_data_token_example', # String | Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required.
@@ -1274,7 +1274,7 @@ begin
   # List GBP locations
   result = api_instance.list_google_business_locations(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_google_business_locations: #{e}"
 end
 ```
@@ -1292,7 +1292,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListGoogleBusinessLocations200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_google_business_locations_with_http_info: #{e}"
 end
 ```
@@ -1331,14 +1331,14 @@ Fetch full LinkedIn organization details (logos, vanity names, websites) for cus
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 temp_token = 'temp_token_example' # String | The temporary LinkedIn access token from the OAuth redirect
 org_ids = '12345678,87654321,11111111' # String | Comma-separated list of organization IDs to fetch details for (max 100)
 
@@ -1346,7 +1346,7 @@ begin
   # List LinkedIn orgs
   result = api_instance.list_linked_in_organizations(temp_token, org_ids)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_linked_in_organizations: #{e}"
 end
 ```
@@ -1364,7 +1364,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListLinkedInOrganizations200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_linked_in_organizations_with_http_info: #{e}"
 end
 ```
@@ -1402,14 +1402,14 @@ For headless flows. Returns Pinterest boards the user can post to. Use X-Connect
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 x_connect_token = 'x_connect_token_example' # String | Short-lived connect token from the OAuth redirect
 profile_id = 'profile_id_example' # String | Your Zernio profile ID
 temp_token = 'temp_token_example' # String | Temporary Pinterest access token from the OAuth callback redirect
@@ -1418,7 +1418,7 @@ begin
   # List Pinterest boards
   result = api_instance.list_pinterest_boards_for_selection(x_connect_token, profile_id, temp_token)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_pinterest_boards_for_selection: #{e}"
 end
 ```
@@ -1436,7 +1436,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListPinterestBoardsForSelection200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_pinterest_boards_for_selection_with_http_info: #{e}"
 end
 ```
@@ -1475,14 +1475,14 @@ For headless flows. Returns Snapchat Public Profiles the user can post to. Use X
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 x_connect_token = 'x_connect_token_example' # String | Short-lived connect token from the OAuth redirect
 profile_id = 'profile_id_example' # String | Your Zernio profile ID
 temp_token = 'temp_token_example' # String | Temporary Snapchat access token from the OAuth callback redirect
@@ -1491,7 +1491,7 @@ begin
   # List Snapchat profiles
   result = api_instance.list_snapchat_profiles(x_connect_token, profile_id, temp_token)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_snapchat_profiles: #{e}"
 end
 ```
@@ -1509,7 +1509,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListSnapchatProfiles200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->list_snapchat_profiles_with_http_info: #{e}"
 end
 ```
@@ -1548,9 +1548,9 @@ Complete the headless flow by saving the user's selected Facebook page. Pass the
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure API key authorization: connectToken
   config.api_key['X-Connect-Token'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1560,14 +1560,14 @@ Late.configure do |config|
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
-select_facebook_page_request = Late::SelectFacebookPageRequest.new({profile_id: 'profile_id_example', page_id: 'page_id_example', temp_token: 'temp_token_example', user_profile: Late::SelectFacebookPageRequestUserProfile.new}) # SelectFacebookPageRequest | 
+api_instance = Zernio::ConnectApi.new
+select_facebook_page_request = Zernio::SelectFacebookPageRequest.new({profile_id: 'profile_id_example', page_id: 'page_id_example', temp_token: 'temp_token_example', user_profile: Zernio::SelectFacebookPageRequestUserProfile.new}) # SelectFacebookPageRequest | 
 
 begin
   # Select Facebook page
   result = api_instance.select_facebook_page(select_facebook_page_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_facebook_page: #{e}"
 end
 ```
@@ -1585,7 +1585,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SelectFacebookPage200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_facebook_page_with_http_info: #{e}"
 end
 ```
@@ -1622,9 +1622,9 @@ Complete the headless GBP flow by saving the user's selected location. The pendi
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure API key authorization: connectToken
   config.api_key['X-Connect-Token'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1634,14 +1634,14 @@ Late.configure do |config|
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
-select_google_business_location_request = Late::SelectGoogleBusinessLocationRequest.new({profile_id: 'profile_id_example', location_id: 'location_id_example', pending_data_token: 'pending_data_token_example'}) # SelectGoogleBusinessLocationRequest | 
+api_instance = Zernio::ConnectApi.new
+select_google_business_location_request = Zernio::SelectGoogleBusinessLocationRequest.new({profile_id: 'profile_id_example', location_id: 'location_id_example', pending_data_token: 'pending_data_token_example'}) # SelectGoogleBusinessLocationRequest | 
 
 begin
   # Select GBP location
   result = api_instance.select_google_business_location(select_google_business_location_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_google_business_location: #{e}"
 end
 ```
@@ -1659,7 +1659,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SelectGoogleBusinessLocation200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_google_business_location_with_http_info: #{e}"
 end
 ```
@@ -1696,21 +1696,21 @@ Complete the LinkedIn connection flow. Set accountType to \"personal\" or \"orga
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
-select_linked_in_organization_request = Late::SelectLinkedInOrganizationRequest.new({profile_id: 'profile_id_example', temp_token: 'temp_token_example', user_profile: 3.56, account_type: 'personal'}) # SelectLinkedInOrganizationRequest | 
+api_instance = Zernio::ConnectApi.new
+select_linked_in_organization_request = Zernio::SelectLinkedInOrganizationRequest.new({profile_id: 'profile_id_example', temp_token: 'temp_token_example', user_profile: 3.56, account_type: 'personal'}) # SelectLinkedInOrganizationRequest | 
 
 begin
   # Select LinkedIn org
   result = api_instance.select_linked_in_organization(select_linked_in_organization_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_linked_in_organization: #{e}"
 end
 ```
@@ -1728,7 +1728,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SelectLinkedInOrganization200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_linked_in_organization_with_http_info: #{e}"
 end
 ```
@@ -1765,21 +1765,21 @@ Complete the Pinterest connection flow. After OAuth, use this endpoint to save t
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
-select_pinterest_board_request = Late::SelectPinterestBoardRequest.new({profile_id: 'profile_id_example', board_id: 'board_id_example', temp_token: 'temp_token_example'}) # SelectPinterestBoardRequest | 
+api_instance = Zernio::ConnectApi.new
+select_pinterest_board_request = Zernio::SelectPinterestBoardRequest.new({profile_id: 'profile_id_example', board_id: 'board_id_example', temp_token: 'temp_token_example'}) # SelectPinterestBoardRequest | 
 
 begin
   # Select Pinterest board
   result = api_instance.select_pinterest_board(select_pinterest_board_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_pinterest_board: #{e}"
 end
 ```
@@ -1797,7 +1797,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SelectPinterestBoard200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_pinterest_board_with_http_info: #{e}"
 end
 ```
@@ -1834,15 +1834,15 @@ Complete the Snapchat connection flow by saving the selected Public Profile. Sna
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
-select_snapchat_profile_request = Late::SelectSnapchatProfileRequest.new({profile_id: 'profile_id_example', selected_public_profile: Late::SelectSnapchatProfileRequestSelectedPublicProfile.new({id: 'id_example', display_name: 'display_name_example'}), temp_token: 'temp_token_example', user_profile: 3.56}) # SelectSnapchatProfileRequest | 
+api_instance = Zernio::ConnectApi.new
+select_snapchat_profile_request = Zernio::SelectSnapchatProfileRequest.new({profile_id: 'profile_id_example', selected_public_profile: Zernio::SelectSnapchatProfileRequestSelectedPublicProfile.new({id: 'id_example', display_name: 'display_name_example'}), temp_token: 'temp_token_example', user_profile: 3.56}) # SelectSnapchatProfileRequest | 
 opts = {
   x_connect_token: 'x_connect_token_example' # String | Short-lived connect token from the OAuth redirect (for API users)
 }
@@ -1851,7 +1851,7 @@ begin
   # Select Snapchat profile
   result = api_instance.select_snapchat_profile(select_snapchat_profile_request, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_snapchat_profile: #{e}"
 end
 ```
@@ -1869,7 +1869,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SelectSnapchatProfile200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->select_snapchat_profile_with_http_info: #{e}"
 end
 ```
@@ -1907,22 +1907,22 @@ Switch which Facebook Page is active for a connected account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
-update_facebook_page_request = Late::UpdateFacebookPageRequest.new({selected_page_id: 'selected_page_id_example'}) # UpdateFacebookPageRequest | 
+update_facebook_page_request = Zernio::UpdateFacebookPageRequest.new({selected_page_id: 'selected_page_id_example'}) # UpdateFacebookPageRequest | 
 
 begin
   # Update Facebook page
   result = api_instance.update_facebook_page(account_id, update_facebook_page_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_facebook_page: #{e}"
 end
 ```
@@ -1940,7 +1940,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateFacebookPage200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_facebook_page_with_http_info: #{e}"
 end
 ```
@@ -1978,22 +1978,22 @@ Switch which GBP location is active for a connected account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
-update_gmb_location_request = Late::UpdateGmbLocationRequest.new({selected_location_id: 'selected_location_id_example'}) # UpdateGmbLocationRequest | 
+update_gmb_location_request = Zernio::UpdateGmbLocationRequest.new({selected_location_id: 'selected_location_id_example'}) # UpdateGmbLocationRequest | 
 
 begin
   # Update GBP location
   result = api_instance.update_gmb_location(account_id, update_gmb_location_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_gmb_location: #{e}"
 end
 ```
@@ -2011,7 +2011,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateGmbLocation200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_gmb_location_with_http_info: #{e}"
 end
 ```
@@ -2049,22 +2049,22 @@ Switch a LinkedIn account between personal profile and organization (company pag
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
-update_linked_in_organization_request = Late::UpdateLinkedInOrganizationRequest.new({account_type: 'personal'}) # UpdateLinkedInOrganizationRequest | 
+update_linked_in_organization_request = Zernio::UpdateLinkedInOrganizationRequest.new({account_type: 'personal'}) # UpdateLinkedInOrganizationRequest | 
 
 begin
   # Switch LinkedIn account type
   result = api_instance.update_linked_in_organization(account_id, update_linked_in_organization_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_linked_in_organization: #{e}"
 end
 ```
@@ -2082,7 +2082,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ConnectBlueskyCredentials200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_linked_in_organization_with_http_info: #{e}"
 end
 ```
@@ -2120,22 +2120,22 @@ Sets the default board used when publishing pins for this account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
-update_pinterest_boards_request = Late::UpdatePinterestBoardsRequest.new({default_board_id: 'default_board_id_example'}) # UpdatePinterestBoardsRequest | 
+update_pinterest_boards_request = Zernio::UpdatePinterestBoardsRequest.new({default_board_id: 'default_board_id_example'}) # UpdatePinterestBoardsRequest | 
 
 begin
   # Set default Pinterest board
   result = api_instance.update_pinterest_boards(account_id, update_pinterest_boards_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_pinterest_boards: #{e}"
 end
 ```
@@ -2153,7 +2153,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ConnectBlueskyCredentials200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_pinterest_boards_with_http_info: #{e}"
 end
 ```
@@ -2191,22 +2191,22 @@ Sets the default subreddit used when publishing posts for this Reddit account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
-update_reddit_subreddits_request = Late::UpdateRedditSubredditsRequest.new({default_subreddit: 'default_subreddit_example'}) # UpdateRedditSubredditsRequest | 
+update_reddit_subreddits_request = Zernio::UpdateRedditSubredditsRequest.new({default_subreddit: 'default_subreddit_example'}) # UpdateRedditSubredditsRequest | 
 
 begin
   # Set default subreddit
   result = api_instance.update_reddit_subreddits(account_id, update_reddit_subreddits_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_reddit_subreddits: #{e}"
 end
 ```
@@ -2224,7 +2224,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_reddit_subreddits_with_http_info: #{e}"
 end
 ```
@@ -2262,22 +2262,22 @@ Sets the default playlist used when publishing videos for this account. When a p
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ConnectApi.new
+api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
-update_youtube_default_playlist_request = Late::UpdateYoutubeDefaultPlaylistRequest.new({default_playlist_id: 'default_playlist_id_example'}) # UpdateYoutubeDefaultPlaylistRequest | 
+update_youtube_default_playlist_request = Zernio::UpdateYoutubeDefaultPlaylistRequest.new({default_playlist_id: 'default_playlist_id_example'}) # UpdateYoutubeDefaultPlaylistRequest | 
 
 begin
   # Set default YouTube playlist
   result = api_instance.update_youtube_default_playlist(account_id, update_youtube_default_playlist_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_youtube_default_playlist: #{e}"
 end
 ```
@@ -2295,7 +2295,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_youtube_default_playlist_with_http_info: #{e}"
 end
 ```

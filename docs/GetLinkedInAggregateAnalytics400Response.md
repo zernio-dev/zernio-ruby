@@ -1,4 +1,4 @@
-# Late::GetLinkedInAggregateAnalytics400Response
+# Zernio::GetLinkedInAggregateAnalytics400Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetLinkedInAggregateAnalytics400Response.new(
+instance = Zernio::GetLinkedInAggregateAnalytics400Response.new(
   error: null,
   code: null,
   valid_options: null

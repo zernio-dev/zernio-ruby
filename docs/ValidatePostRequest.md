@@ -1,4 +1,4 @@
-# Late::ValidatePostRequest
+# Zernio::ValidatePostRequest
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidatePostRequest.new(
+instance = Zernio::ValidatePostRequest.new(
   content: Check out this video!,
   platforms: [{&quot;platform&quot;:&quot;youtube&quot;},{&quot;platform&quot;:&quot;twitter&quot;}],
   media_items: null

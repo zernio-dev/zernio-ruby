@@ -1,4 +1,4 @@
-# Late::WebhookPayloadPostPostPlatformsInner
+# Zernio::WebhookPayloadPostPostPlatformsInner
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::WebhookPayloadPostPostPlatformsInner.new(
+instance = Zernio::WebhookPayloadPostPostPlatformsInner.new(
   platform: null,
   status: null,
   platform_post_id: null,

@@ -1,4 +1,4 @@
-# Late::UpdateGoogleBusinessLocationDetailsRequestProfile
+# Zernio::UpdateGoogleBusinessLocationDetailsRequestProfile
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateGoogleBusinessLocationDetailsRequestProfile.new(
+instance = Zernio::UpdateGoogleBusinessLocationDetailsRequestProfile.new(
   description: null
 )
 ```

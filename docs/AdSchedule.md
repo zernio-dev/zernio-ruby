@@ -1,4 +1,4 @@
-# Late::AdSchedule
+# Zernio::AdSchedule
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AdSchedule.new(
+instance = Zernio::AdSchedule.new(
   start_date: null,
   end_date: null
 )

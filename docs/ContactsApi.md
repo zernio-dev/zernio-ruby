@@ -1,4 +1,4 @@
-# Late::ContactsApi
+# Zernio::ContactsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -25,21 +25,21 @@ Import up to 1000 contacts at a time. Skips duplicates.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ContactsApi.new
-bulk_create_contacts_request = Late::BulkCreateContactsRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform: 'platform_example', contacts: [Late::BulkCreateContactsRequestContactsInner.new({name: 'name_example', platform_identifier: 'platform_identifier_example'})]}) # BulkCreateContactsRequest | 
+api_instance = Zernio::ContactsApi.new
+bulk_create_contacts_request = Zernio::BulkCreateContactsRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform: 'platform_example', contacts: [Zernio::BulkCreateContactsRequestContactsInner.new({name: 'name_example', platform_identifier: 'platform_identifier_example'})]}) # BulkCreateContactsRequest | 
 
 begin
   # Bulk create contacts
   result = api_instance.bulk_create_contacts(bulk_create_contacts_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->bulk_create_contacts: #{e}"
 end
 ```
@@ -57,7 +57,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BulkCreateContacts200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->bulk_create_contacts_with_http_info: #{e}"
 end
 ```
@@ -94,21 +94,21 @@ Create a new contact. Optionally create a platform channel in the same request b
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ContactsApi.new
-create_contact_request = Late::CreateContactRequest.new({profile_id: 'profile_id_example', name: 'name_example'}) # CreateContactRequest | 
+api_instance = Zernio::ContactsApi.new
+create_contact_request = Zernio::CreateContactRequest.new({profile_id: 'profile_id_example', name: 'name_example'}) # CreateContactRequest | 
 
 begin
   # Create contact
   result = api_instance.create_contact(create_contact_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->create_contact: #{e}"
 end
 ```
@@ -126,7 +126,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateContact200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->create_contact_with_http_info: #{e}"
 end
 ```
@@ -163,20 +163,20 @@ Permanently deletes a contact and all associated channels.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ContactsApi.new
+api_instance = Zernio::ContactsApi.new
 contact_id = 'contact_id_example' # String | 
 
 begin
   # Delete contact
   api_instance.delete_contact(contact_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->delete_contact: #{e}"
 end
 ```
@@ -194,7 +194,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->delete_contact_with_http_info: #{e}"
 end
 ```
@@ -231,21 +231,21 @@ Returns a contact with all associated messaging channels.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ContactsApi.new
+api_instance = Zernio::ContactsApi.new
 contact_id = 'contact_id_example' # String | 
 
 begin
   # Get contact
   result = api_instance.get_contact(contact_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->get_contact: #{e}"
 end
 ```
@@ -263,7 +263,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetContact200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->get_contact_with_http_info: #{e}"
 end
 ```
@@ -300,21 +300,21 @@ Returns all messaging channels linked to a contact (e.g. Instagram DM, Telegram,
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ContactsApi.new
+api_instance = Zernio::ContactsApi.new
 contact_id = 'contact_id_example' # String | 
 
 begin
   # List channels for a contact
   result = api_instance.get_contact_channels(contact_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->get_contact_channels: #{e}"
 end
 ```
@@ -332,7 +332,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetContactChannels200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->get_contact_channels_with_http_info: #{e}"
 end
 ```
@@ -369,14 +369,14 @@ List and search contacts for a profile. Supports filtering by tags, platform, su
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ContactsApi.new
+api_instance = Zernio::ContactsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter by profile. Omit to list across all profiles
   search: 'search_example', # String | 
@@ -391,7 +391,7 @@ begin
   # List contacts
   result = api_instance.list_contacts(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->list_contacts: #{e}"
 end
 ```
@@ -409,7 +409,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListContacts200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->list_contacts_with_http_info: #{e}"
 end
 ```
@@ -452,24 +452,24 @@ Update one or more fields on a contact. Only provided fields are changed.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ContactsApi.new
+api_instance = Zernio::ContactsApi.new
 contact_id = 'contact_id_example' # String | 
 opts = {
-  update_contact_request: Late::UpdateContactRequest.new # UpdateContactRequest | 
+  update_contact_request: Zernio::UpdateContactRequest.new # UpdateContactRequest | 
 }
 
 begin
   # Update contact
   result = api_instance.update_contact(contact_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->update_contact: #{e}"
 end
 ```
@@ -487,7 +487,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateContact200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ContactsApi->update_contact_with_http_info: #{e}"
 end
 ```

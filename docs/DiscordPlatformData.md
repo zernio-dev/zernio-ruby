@@ -1,4 +1,4 @@
-# Late::DiscordPlatformData
+# Zernio::DiscordPlatformData
 
 ## Properties
 
@@ -18,9 +18,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DiscordPlatformData.new(
+instance = Zernio::DiscordPlatformData.new(
   channel_id: 1234567890123456789,
   embeds: null,
   poll: null,

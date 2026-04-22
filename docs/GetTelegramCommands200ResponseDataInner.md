@@ -1,4 +1,4 @@
-# Late::GetTelegramCommands200ResponseDataInner
+# Zernio::GetTelegramCommands200ResponseDataInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetTelegramCommands200ResponseDataInner.new(
+instance = Zernio::GetTelegramCommands200ResponseDataInner.new(
   command: null,
   description: null
 )

@@ -1,4 +1,4 @@
-# Late::GoogleBusinessPlatformData
+# Zernio::GoogleBusinessPlatformData
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GoogleBusinessPlatformData.new(
+instance = Zernio::GoogleBusinessPlatformData.new(
   location_id: null,
   language_code: de,
   topic_type: null,

@@ -1,4 +1,4 @@
-# Late::CommentsApi
+# Zernio::CommentsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -27,14 +27,14 @@ Delete a comment on a post. Supported by Facebook, Instagram, Bluesky, Reddit, Y
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
 account_id = 'account_id_example' # String | 
 comment_id = 'comment_id_example' # String | 
@@ -43,7 +43,7 @@ begin
   # Delete comment
   result = api_instance.delete_inbox_comment(post_id, account_id, comment_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->delete_inbox_comment: #{e}"
 end
 ```
@@ -61,7 +61,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteInboxComment200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->delete_inbox_comment_with_http_info: #{e}"
 end
 ```
@@ -100,14 +100,14 @@ Fetch comments for a specific post. Requires accountId query parameter.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID.
 account_id = 'account_id_example' # String | 
 opts = {
@@ -121,7 +121,7 @@ begin
   # Get post comments
   result = api_instance.get_inbox_post_comments(post_id, account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->get_inbox_post_comments: #{e}"
 end
 ```
@@ -139,7 +139,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetInboxPostComments200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->get_inbox_post_comments_with_http_info: #{e}"
 end
 ```
@@ -181,23 +181,23 @@ Hide a comment on a post. Supported by Facebook, Instagram, Threads, and X/Twitt
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | 
 comment_id = 'comment_id_example' # String | 
-hide_inbox_comment_request = Late::HideInboxCommentRequest.new({account_id: 'account_id_example'}) # HideInboxCommentRequest | 
+hide_inbox_comment_request = Zernio::HideInboxCommentRequest.new({account_id: 'account_id_example'}) # HideInboxCommentRequest | 
 
 begin
   # Hide comment
   result = api_instance.hide_inbox_comment(post_id, comment_id, hide_inbox_comment_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->hide_inbox_comment: #{e}"
 end
 ```
@@ -215,7 +215,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <HideInboxComment200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->hide_inbox_comment_with_http_info: #{e}"
 end
 ```
@@ -254,23 +254,23 @@ Like or upvote a comment on a post. Supported platforms: Facebook, Twitter/X, Bl
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | 
 comment_id = 'comment_id_example' # String | 
-like_inbox_comment_request = Late::LikeInboxCommentRequest.new({account_id: 'account_id_example'}) # LikeInboxCommentRequest | 
+like_inbox_comment_request = Zernio::LikeInboxCommentRequest.new({account_id: 'account_id_example'}) # LikeInboxCommentRequest | 
 
 begin
   # Like comment
   result = api_instance.like_inbox_comment(post_id, comment_id, like_inbox_comment_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->like_inbox_comment: #{e}"
 end
 ```
@@ -288,7 +288,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <LikeInboxComment200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->like_inbox_comment_with_http_info: #{e}"
 end
 ```
@@ -327,14 +327,14 @@ Returns posts with comment counts from all connected accounts. Aggregates data a
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter by profile ID
   platform: 'facebook', # String | Filter by platform
@@ -351,7 +351,7 @@ begin
   # List commented posts
   result = api_instance.list_inbox_comments(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->list_inbox_comments: #{e}"
 end
 ```
@@ -369,7 +369,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListInboxComments200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->list_inbox_comments_with_http_info: #{e}"
 end
 ```
@@ -414,22 +414,22 @@ Post a reply to a post or specific comment. Requires accountId in request body.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
-reply_to_inbox_post_request = Late::ReplyToInboxPostRequest.new({account_id: 'account_id_example', message: 'message_example'}) # ReplyToInboxPostRequest | 
+reply_to_inbox_post_request = Zernio::ReplyToInboxPostRequest.new({account_id: 'account_id_example', message: 'message_example'}) # ReplyToInboxPostRequest | 
 
 begin
   # Reply to comment
   result = api_instance.reply_to_inbox_post(post_id, reply_to_inbox_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->reply_to_inbox_post: #{e}"
 end
 ```
@@ -447,7 +447,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReplyToInboxPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->reply_to_inbox_post_with_http_info: #{e}"
 end
 ```
@@ -485,23 +485,23 @@ Send a private message to the author of a comment. Supported on Instagram and Fa
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | The media/post ID (Instagram media ID or Facebook post ID)
 comment_id = 'comment_id_example' # String | The comment ID to send a private reply to
-send_private_reply_to_comment_request = Late::SendPrivateReplyToCommentRequest.new({account_id: 'account_id_example', message: 'message_example'}) # SendPrivateReplyToCommentRequest | 
+send_private_reply_to_comment_request = Zernio::SendPrivateReplyToCommentRequest.new({account_id: 'account_id_example', message: 'message_example'}) # SendPrivateReplyToCommentRequest | 
 
 begin
   # Send private reply
   result = api_instance.send_private_reply_to_comment(post_id, comment_id, send_private_reply_to_comment_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->send_private_reply_to_comment: #{e}"
 end
 ```
@@ -519,7 +519,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SendPrivateReplyToComment200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->send_private_reply_to_comment_with_http_info: #{e}"
 end
 ```
@@ -558,14 +558,14 @@ Unhide a previously hidden comment. Supported by Facebook, Instagram, Threads, a
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | 
 comment_id = 'comment_id_example' # String | 
 account_id = 'account_id_example' # String | 
@@ -574,7 +574,7 @@ begin
   # Unhide comment
   result = api_instance.unhide_inbox_comment(post_id, comment_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->unhide_inbox_comment: #{e}"
 end
 ```
@@ -592,7 +592,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <HideInboxComment200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->unhide_inbox_comment_with_http_info: #{e}"
 end
 ```
@@ -631,14 +631,14 @@ Remove a like from a comment. Supported platforms: Facebook, Twitter/X, Bluesky,
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentsApi.new
+api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | 
 comment_id = 'comment_id_example' # String | 
 account_id = 'account_id_example' # String | 
@@ -650,7 +650,7 @@ begin
   # Unlike comment
   result = api_instance.unlike_inbox_comment(post_id, comment_id, account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->unlike_inbox_comment: #{e}"
 end
 ```
@@ -668,7 +668,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnlikeInboxComment200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentsApi->unlike_inbox_comment_with_http_info: #{e}"
 end
 ```

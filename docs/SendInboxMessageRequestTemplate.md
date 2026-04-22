@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequestTemplate
+# Zernio::SendInboxMessageRequestTemplate
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequestTemplate.new(
+instance = Zernio::SendInboxMessageRequestTemplate.new(
   type: null,
   elements: null
 )

@@ -1,4 +1,4 @@
-# Late::ValidateMedia200Response
+# Zernio::ValidateMedia200Response
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidateMedia200Response.new(
+instance = Zernio::ValidateMedia200Response.new(
   valid: null,
   url: null,
   error: null,

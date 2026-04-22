@@ -1,4 +1,4 @@
-# Late::ValidatePost200ResponseOneOfWarningsInner
+# Zernio::ValidatePost200ResponseOneOfWarningsInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidatePost200ResponseOneOfWarningsInner.new(
+instance = Zernio::ValidatePost200ResponseOneOfWarningsInner.new(
   platform: null,
   warning: null
 )

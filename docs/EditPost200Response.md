@@ -1,4 +1,4 @@
-# Late::EditPost200Response
+# Zernio::EditPost200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::EditPost200Response.new(
+instance = Zernio::EditPost200Response.new(
   success: null,
   id: null,
   url: null,

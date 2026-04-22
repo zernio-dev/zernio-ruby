@@ -1,4 +1,4 @@
-# Late::GetPostingFrequency200Response
+# Zernio::GetPostingFrequency200Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPostingFrequency200Response.new(
+instance = Zernio::GetPostingFrequency200Response.new(
   frequency: null
 )
 ```

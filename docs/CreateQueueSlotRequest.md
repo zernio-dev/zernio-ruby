@@ -1,4 +1,4 @@
-# Late::CreateQueueSlotRequest
+# Zernio::CreateQueueSlotRequest
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateQueueSlotRequest.new(
+instance = Zernio::CreateQueueSlotRequest.new(
   profile_id: null,
   name: null,
   timezone: null,

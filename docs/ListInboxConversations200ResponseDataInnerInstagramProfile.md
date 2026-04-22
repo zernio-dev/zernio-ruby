@@ -1,4 +1,4 @@
-# Late::ListInboxConversations200ResponseDataInnerInstagramProfile
+# Zernio::ListInboxConversations200ResponseDataInnerInstagramProfile
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListInboxConversations200ResponseDataInnerInstagramProfile.new(
+instance = Zernio::ListInboxConversations200ResponseDataInnerInstagramProfile.new(
   is_follower: null,
   is_following: null,
   follower_count: null,

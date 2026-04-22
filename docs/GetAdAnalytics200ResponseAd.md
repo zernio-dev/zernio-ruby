@@ -1,4 +1,4 @@
-# Late::GetAdAnalytics200ResponseAd
+# Zernio::GetAdAnalytics200ResponseAd
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetAdAnalytics200ResponseAd.new(
+instance = Zernio::GetAdAnalytics200ResponseAd.new(
   id: null,
   name: null,
   platform: null,

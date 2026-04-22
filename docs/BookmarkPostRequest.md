@@ -1,4 +1,4 @@
-# Late::BookmarkPostRequest
+# Zernio::BookmarkPostRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BookmarkPostRequest.new(
+instance = Zernio::BookmarkPostRequest.new(
   account_id: null,
   tweet_id: null
 )

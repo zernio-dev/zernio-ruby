@@ -1,4 +1,4 @@
-# Late::GetRedditFlairs200ResponseFlairsInner
+# Zernio::GetRedditFlairs200ResponseFlairsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetRedditFlairs200ResponseFlairsInner.new(
+instance = Zernio::GetRedditFlairs200ResponseFlairsInner.new(
   id: null,
   text: null,
   text_color: null,

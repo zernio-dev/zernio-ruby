@@ -1,4 +1,4 @@
-# Late::SocialAccountProfileId
+# Zernio::SocialAccountProfileId
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::SocialAccountProfileId.openapi_one_of
+Zernio::SocialAccountProfileId.openapi_one_of
 # =>
 # [
 #   :'Profile',
@@ -26,12 +26,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::SocialAccountProfileId.build(data)
+Zernio::SocialAccountProfileId.build(data)
 # => #<Profile:0x00007fdd4aab02a0>
 
-Late::SocialAccountProfileId.build(data_that_doesnt_match)
+Zernio::SocialAccountProfileId.build(data_that_doesnt_match)
 # => nil
 ```
 

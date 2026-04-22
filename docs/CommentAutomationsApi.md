@@ -1,4 +1,4 @@
-# Late::CommentAutomationsApi
+# Zernio::CommentAutomationsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -24,21 +24,21 @@ Create a keyword-triggered DM automation on an Instagram or Facebook post. When 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentAutomationsApi.new
-create_comment_automation_request = Late::CreateCommentAutomationRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform_post_id: 'platform_post_id_example', name: 'name_example', dm_message: 'dm_message_example'}) # CreateCommentAutomationRequest | 
+api_instance = Zernio::CommentAutomationsApi.new
+create_comment_automation_request = Zernio::CreateCommentAutomationRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform_post_id: 'platform_post_id_example', name: 'name_example', dm_message: 'dm_message_example'}) # CreateCommentAutomationRequest | 
 
 begin
   # Create comment-to-DM automation
   result = api_instance.create_comment_automation(create_comment_automation_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->create_comment_automation: #{e}"
 end
 ```
@@ -56,7 +56,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateCommentAutomation200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->create_comment_automation_with_http_info: #{e}"
 end
 ```
@@ -93,20 +93,20 @@ Permanently delete an automation and all its trigger logs.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentAutomationsApi.new
+api_instance = Zernio::CommentAutomationsApi.new
 automation_id = 'automation_id_example' # String | 
 
 begin
   # Delete automation
   api_instance.delete_comment_automation(automation_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->delete_comment_automation: #{e}"
 end
 ```
@@ -124,7 +124,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->delete_comment_automation_with_http_info: #{e}"
 end
 ```
@@ -161,21 +161,21 @@ Returns an automation with its configuration, stats, and recent trigger logs.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentAutomationsApi.new
+api_instance = Zernio::CommentAutomationsApi.new
 automation_id = 'automation_id_example' # String | 
 
 begin
   # Get automation details
   result = api_instance.get_comment_automation(automation_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->get_comment_automation: #{e}"
 end
 ```
@@ -193,7 +193,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetCommentAutomation200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->get_comment_automation_with_http_info: #{e}"
 end
 ```
@@ -230,14 +230,14 @@ Paginated list of every comment that triggered this automation, with send status
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentAutomationsApi.new
+api_instance = Zernio::CommentAutomationsApi.new
 automation_id = 'automation_id_example' # String | 
 opts = {
   status: 'sent', # String | Filter by result status
@@ -249,7 +249,7 @@ begin
   # List automation logs
   result = api_instance.list_comment_automation_logs(automation_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->list_comment_automation_logs: #{e}"
 end
 ```
@@ -267,7 +267,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListCommentAutomationLogs200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->list_comment_automation_logs_with_http_info: #{e}"
 end
 ```
@@ -307,14 +307,14 @@ List all comment-to-DM automations for a profile. Returns automations with their
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentAutomationsApi.new
+api_instance = Zernio::CommentAutomationsApi.new
 opts = {
   profile_id: 'profile_id_example' # String | Filter by profile. Omit to list across all profiles
 }
@@ -323,7 +323,7 @@ begin
   # List comment-to-DM automations
   result = api_instance.list_comment_automations(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->list_comment_automations: #{e}"
 end
 ```
@@ -341,7 +341,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListCommentAutomations200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->list_comment_automations_with_http_info: #{e}"
 end
 ```
@@ -378,24 +378,24 @@ Update an automation's keywords, DM message, comment reply, or active status.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CommentAutomationsApi.new
+api_instance = Zernio::CommentAutomationsApi.new
 automation_id = 'automation_id_example' # String | 
 opts = {
-  update_comment_automation_request: Late::UpdateCommentAutomationRequest.new # UpdateCommentAutomationRequest | 
+  update_comment_automation_request: Zernio::UpdateCommentAutomationRequest.new # UpdateCommentAutomationRequest | 
 }
 
 begin
   # Update automation settings
   result = api_instance.update_comment_automation(automation_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->update_comment_automation: #{e}"
 end
 ```
@@ -413,7 +413,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateCommentAutomation200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CommentAutomationsApi->update_comment_automation_with_http_info: #{e}"
 end
 ```

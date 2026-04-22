@@ -1,4 +1,4 @@
-# Late::SendPrivateReplyToCommentRequest
+# Zernio::SendPrivateReplyToCommentRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendPrivateReplyToCommentRequest.new(
+instance = Zernio::SendPrivateReplyToCommentRequest.new(
   account_id: null,
   message: null
 )

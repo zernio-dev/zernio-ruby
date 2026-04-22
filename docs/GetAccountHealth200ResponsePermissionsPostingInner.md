@@ -1,4 +1,4 @@
-# Late::GetAccountHealth200ResponsePermissionsPostingInner
+# Zernio::GetAccountHealth200ResponsePermissionsPostingInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetAccountHealth200ResponsePermissionsPostingInner.new(
+instance = Zernio::GetAccountHealth200ResponsePermissionsPostingInner.new(
   scope: null,
   granted: null,
   required: null

@@ -1,4 +1,4 @@
-# Late::CompleteTelegramConnect200Response
+# Zernio::CompleteTelegramConnect200Response
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::CompleteTelegramConnect200Response.openapi_one_of
+Zernio::CompleteTelegramConnect200Response.openapi_one_of
 # =>
 # [
 #   :'Connected',
@@ -27,12 +27,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::CompleteTelegramConnect200Response.build(data)
+Zernio::CompleteTelegramConnect200Response.build(data)
 # => #<Connected:0x00007fdd4aab02a0>
 
-Late::CompleteTelegramConnect200Response.build(data_that_doesnt_match)
+Zernio::CompleteTelegramConnect200Response.build(data_that_doesnt_match)
 # => nil
 ```
 

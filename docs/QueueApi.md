@@ -1,4 +1,4 @@
-# Late::QueueApi
+# Zernio::QueueApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -24,21 +24,21 @@ Create an additional queue for a profile. The first queue created becomes the de
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::QueueApi.new
-create_queue_slot_request = Late::CreateQueueSlotRequest.new({profile_id: 'profile_id_example', name: 'name_example', timezone: 'timezone_example', slots: [Late::QueueSlot.new]}) # CreateQueueSlotRequest | 
+api_instance = Zernio::QueueApi.new
+create_queue_slot_request = Zernio::CreateQueueSlotRequest.new({profile_id: 'profile_id_example', name: 'name_example', timezone: 'timezone_example', slots: [Zernio::QueueSlot.new]}) # CreateQueueSlotRequest | 
 
 begin
   # Create schedule
   result = api_instance.create_queue_slot(create_queue_slot_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->create_queue_slot: #{e}"
 end
 ```
@@ -56,7 +56,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateQueueSlot201Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->create_queue_slot_with_http_info: #{e}"
 end
 ```
@@ -93,14 +93,14 @@ Delete a queue from a profile. Requires queueId to specify which queue to delete
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::QueueApi.new
+api_instance = Zernio::QueueApi.new
 profile_id = 'profile_id_example' # String | 
 queue_id = 'queue_id_example' # String | Queue ID to delete
 
@@ -108,7 +108,7 @@ begin
   # Delete schedule
   result = api_instance.delete_queue_slot(profile_id, queue_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->delete_queue_slot: #{e}"
 end
 ```
@@ -126,7 +126,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteQueueSlot200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->delete_queue_slot_with_http_info: #{e}"
 end
 ```
@@ -164,14 +164,14 @@ Returns the next available queue slot for preview purposes. To create a queue po
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::QueueApi.new
+api_instance = Zernio::QueueApi.new
 profile_id = 'profile_id_example' # String | 
 opts = {
   queue_id: 'queue_id_example' # String | Specific queue ID (optional, defaults to profile's default queue)
@@ -181,7 +181,7 @@ begin
   # Get next available slot
   result = api_instance.get_next_queue_slot(profile_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->get_next_queue_slot: #{e}"
 end
 ```
@@ -199,7 +199,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetNextQueueSlot200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->get_next_queue_slot_with_http_info: #{e}"
 end
 ```
@@ -237,14 +237,14 @@ Returns queue schedules for a profile. Use all=true for all queues, or queueId f
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::QueueApi.new
+api_instance = Zernio::QueueApi.new
 profile_id = 'profile_id_example' # String | Profile ID to get queues for
 opts = {
   queue_id: 'queue_id_example', # String | Specific queue ID to retrieve (optional)
@@ -255,7 +255,7 @@ begin
   # List schedules
   result = api_instance.list_queue_slots(profile_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->list_queue_slots: #{e}"
 end
 ```
@@ -273,7 +273,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListQueueSlots200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->list_queue_slots_with_http_info: #{e}"
 end
 ```
@@ -312,14 +312,14 @@ Returns the next N upcoming queue slot times for a profile as ISO datetime strin
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::QueueApi.new
+api_instance = Zernio::QueueApi.new
 profile_id = 'profile_id_example' # String | 
 opts = {
   queue_id: 'queue_id_example', # String | Filter by specific queue ID. Omit to use the default queue.
@@ -330,7 +330,7 @@ begin
   # Preview upcoming slots
   result = api_instance.preview_queue(profile_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->preview_queue: #{e}"
 end
 ```
@@ -348,7 +348,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PreviewQueue200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->preview_queue_with_http_info: #{e}"
 end
 ```
@@ -387,21 +387,21 @@ Create a new queue or update an existing one. Without queueId, creates/updates t
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::QueueApi.new
-update_queue_slot_request = Late::UpdateQueueSlotRequest.new({profile_id: 'profile_id_example', timezone: 'timezone_example', slots: [Late::QueueSlot.new]}) # UpdateQueueSlotRequest | 
+api_instance = Zernio::QueueApi.new
+update_queue_slot_request = Zernio::UpdateQueueSlotRequest.new({profile_id: 'profile_id_example', timezone: 'timezone_example', slots: [Zernio::QueueSlot.new]}) # UpdateQueueSlotRequest | 
 
 begin
   # Update schedule
   result = api_instance.update_queue_slot(update_queue_slot_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->update_queue_slot: #{e}"
 end
 ```
@@ -419,7 +419,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateQueueSlot200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->update_queue_slot_with_http_info: #{e}"
 end
 ```

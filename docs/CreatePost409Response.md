@@ -1,4 +1,4 @@
-# Late::CreatePost409Response
+# Zernio::CreatePost409Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreatePost409Response.new(
+instance = Zernio::CreatePost409Response.new(
   error: This exact content was already posted to this account within the last 24 hours.,
   details: null
 )

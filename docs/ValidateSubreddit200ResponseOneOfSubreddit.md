@@ -1,4 +1,4 @@
-# Late::ValidateSubreddit200ResponseOneOfSubreddit
+# Zernio::ValidateSubreddit200ResponseOneOfSubreddit
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidateSubreddit200ResponseOneOfSubreddit.new(
+instance = Zernio::ValidateSubreddit200ResponseOneOfSubreddit.new(
   name: programming,
   title: programming,
   description: Computer Programming,

@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessSearchKeywords200ResponseMonthRange
+# Zernio::GetGoogleBusinessSearchKeywords200ResponseMonthRange
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessSearchKeywords200ResponseMonthRange.new(
+instance = Zernio::GetGoogleBusinessSearchKeywords200ResponseMonthRange.new(
   start_month: 2026-01,
   end_month: 2026-03
 )

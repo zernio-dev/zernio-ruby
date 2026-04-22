@@ -1,4 +1,4 @@
-# Late::UpdateWhatsAppBusinessProfileRequest
+# Zernio::UpdateWhatsAppBusinessProfileRequest
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateWhatsAppBusinessProfileRequest.new(
+instance = Zernio::UpdateWhatsAppBusinessProfileRequest.new(
   account_id: null,
   about: null,
   address: null,

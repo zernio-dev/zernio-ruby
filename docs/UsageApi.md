@@ -1,4 +1,4 @@
-# Late::UsageApi
+# Zernio::UsageApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -19,20 +19,20 @@ Returns the current plan name, billing period, plan limits, and usage counts.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::UsageApi.new
+api_instance = Zernio::UsageApi.new
 
 begin
   # Get plan and usage stats
   result = api_instance.get_usage_stats
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling UsageApi->get_usage_stats: #{e}"
 end
 ```
@@ -50,7 +50,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UsageStats>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling UsageApi->get_usage_stats_with_http_info: #{e}"
 end
 ```

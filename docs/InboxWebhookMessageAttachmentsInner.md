@@ -1,4 +1,4 @@
-# Late::InboxWebhookMessageAttachmentsInner
+# Zernio::InboxWebhookMessageAttachmentsInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InboxWebhookMessageAttachmentsInner.new(
+instance = Zernio::InboxWebhookMessageAttachmentsInner.new(
   type: null,
   url: null,
   payload: null

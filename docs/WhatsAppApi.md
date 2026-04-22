@@ -1,4 +1,4 @@
-# Late::WhatsAppApi
+# Zernio::WhatsAppApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -39,23 +39,23 @@ Add participants to a WhatsApp group. Maximum 8 participants per request.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
-add_whats_app_group_participants_request = Late::AddWhatsAppGroupParticipantsRequest.new({phone_numbers: ['phone_numbers_example']}) # AddWhatsAppGroupParticipantsRequest | 
+add_whats_app_group_participants_request = Zernio::AddWhatsAppGroupParticipantsRequest.new({phone_numbers: ['phone_numbers_example']}) # AddWhatsAppGroupParticipantsRequest | 
 
 begin
   # Add participants
   result = api_instance.add_whats_app_group_participants(group_id, account_id, add_whats_app_group_participants_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->add_whats_app_group_participants: #{e}"
 end
 ```
@@ -73,7 +73,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->add_whats_app_group_participants_with_http_info: #{e}"
 end
 ```
@@ -112,23 +112,23 @@ Approve pending join requests for a WhatsApp group.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
-approve_whats_app_group_join_requests_request = Late::ApproveWhatsAppGroupJoinRequestsRequest.new({phone_numbers: ['phone_numbers_example']}) # ApproveWhatsAppGroupJoinRequestsRequest | 
+approve_whats_app_group_join_requests_request = Zernio::ApproveWhatsAppGroupJoinRequestsRequest.new({phone_numbers: ['phone_numbers_example']}) # ApproveWhatsAppGroupJoinRequestsRequest | 
 
 begin
   # Approve join requests
   result = api_instance.approve_whats_app_group_join_requests(group_id, account_id, approve_whats_app_group_join_requests_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->approve_whats_app_group_join_requests: #{e}"
 end
 ```
@@ -146,7 +146,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->approve_whats_app_group_join_requests_with_http_info: #{e}"
 end
 ```
@@ -185,21 +185,21 @@ Create a new WhatsApp group chat. Returns the group ID and optionally an invite 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
-create_whats_app_group_chat_request = Late::CreateWhatsAppGroupChatRequest.new({account_id: 'account_id_example', subject: 'subject_example'}) # CreateWhatsAppGroupChatRequest | 
+api_instance = Zernio::WhatsAppApi.new
+create_whats_app_group_chat_request = Zernio::CreateWhatsAppGroupChatRequest.new({account_id: 'account_id_example', subject: 'subject_example'}) # CreateWhatsAppGroupChatRequest | 
 
 begin
   # Create group
   result = api_instance.create_whats_app_group_chat(create_whats_app_group_chat_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->create_whats_app_group_chat: #{e}"
 end
 ```
@@ -217,7 +217,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateWhatsAppGroupChat201Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->create_whats_app_group_chat_with_http_info: #{e}"
 end
 ```
@@ -254,14 +254,14 @@ Create a new invite link for a WhatsApp group. The previous link is revoked.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
@@ -269,7 +269,7 @@ begin
   # Create invite link
   result = api_instance.create_whats_app_group_invite_link(group_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->create_whats_app_group_invite_link: #{e}"
 end
 ```
@@ -287,7 +287,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateWhatsAppGroupInviteLink200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->create_whats_app_group_invite_link_with_http_info: #{e}"
 end
 ```
@@ -325,21 +325,21 @@ Create a new message template. Supports two modes:  Custom template: Provide com
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
-create_whats_app_template_request = Late::CreateWhatsAppTemplateRequest.new({account_id: 'account_id_example', name: 'name_example', category: 'AUTHENTICATION', language: 'language_example'}) # CreateWhatsAppTemplateRequest | 
+api_instance = Zernio::WhatsAppApi.new
+create_whats_app_template_request = Zernio::CreateWhatsAppTemplateRequest.new({account_id: 'account_id_example', name: 'name_example', category: 'AUTHENTICATION', language: 'language_example'}) # CreateWhatsAppTemplateRequest | 
 
 begin
   # Create template
   result = api_instance.create_whats_app_template(create_whats_app_template_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->create_whats_app_template: #{e}"
 end
 ```
@@ -357,7 +357,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateWhatsAppTemplate200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->create_whats_app_template_with_http_info: #{e}"
 end
 ```
@@ -394,14 +394,14 @@ Delete a WhatsApp group and remove all participants.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
@@ -409,7 +409,7 @@ begin
   # Delete group
   result = api_instance.delete_whats_app_group_chat(group_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->delete_whats_app_group_chat: #{e}"
 end
 ```
@@ -427,7 +427,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->delete_whats_app_group_chat_with_http_info: #{e}"
 end
 ```
@@ -465,14 +465,14 @@ Permanently delete a message template by name.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 template_name = 'template_name_example' # String | Template name
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
@@ -480,7 +480,7 @@ begin
   # Delete template
   result = api_instance.delete_whats_app_template(template_name, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->delete_whats_app_template: #{e}"
 end
 ```
@@ -498,7 +498,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->delete_whats_app_template_with_http_info: #{e}"
 end
 ```
@@ -536,21 +536,21 @@ Retrieve the WhatsApp Business profile for the account (about, address, descript
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
 begin
   # Get business profile
   result = api_instance.get_whats_app_business_profile(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_business_profile: #{e}"
 end
 ```
@@ -568,7 +568,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppBusinessProfile200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_business_profile_with_http_info: #{e}"
 end
 ```
@@ -605,21 +605,21 @@ Fetch the current display name and its Meta review status for a WhatsApp Busines
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
 begin
   # Get display name status
   result = api_instance.get_whats_app_display_name(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_display_name: #{e}"
 end
 ```
@@ -637,7 +637,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppDisplayName200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_display_name_with_http_info: #{e}"
 end
 ```
@@ -674,14 +674,14 @@ Retrieve metadata about a WhatsApp group including subject, description, partici
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
@@ -689,7 +689,7 @@ begin
   # Get group info
   result = api_instance.get_whats_app_group_chat(group_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_group_chat: #{e}"
 end
 ```
@@ -707,7 +707,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppGroupChat200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_group_chat_with_http_info: #{e}"
 end
 ```
@@ -745,14 +745,14 @@ Retrieve a single message template by name.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 template_name = 'template_name_example' # String | Template name
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
@@ -760,7 +760,7 @@ begin
   # Get template
   result = api_instance.get_whats_app_template(template_name, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_template: #{e}"
 end
 ```
@@ -778,7 +778,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppTemplate200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_template_with_http_info: #{e}"
 end
 ```
@@ -816,21 +816,21 @@ List all message templates for the WhatsApp Business Account (WABA) associated w
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
 begin
   # List templates
   result = api_instance.get_whats_app_templates(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_templates: #{e}"
 end
 ```
@@ -848,7 +848,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppTemplates200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_templates_with_http_info: #{e}"
 end
 ```
@@ -885,14 +885,14 @@ List active WhatsApp group chats for a business phone number. These are actual W
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 account_id = 'account_id_example' # String | WhatsApp social account ID
 opts = {
   limit: 56, # Integer | Max groups to return
@@ -903,7 +903,7 @@ begin
   # List active groups
   result = api_instance.list_whats_app_group_chats(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->list_whats_app_group_chats: #{e}"
 end
 ```
@@ -921,7 +921,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListWhatsAppGroupChats200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->list_whats_app_group_chats_with_http_info: #{e}"
 end
 ```
@@ -960,14 +960,14 @@ List pending join requests for a WhatsApp group (only for groups with approval_r
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
@@ -975,7 +975,7 @@ begin
   # List join requests
   result = api_instance.list_whats_app_group_join_requests(group_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->list_whats_app_group_join_requests: #{e}"
 end
 ```
@@ -993,7 +993,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListWhatsAppGroupJoinRequests200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->list_whats_app_group_join_requests_with_http_info: #{e}"
 end
 ```
@@ -1031,23 +1031,23 @@ Reject pending join requests for a WhatsApp group.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
-reject_whats_app_group_join_requests_request = Late::RejectWhatsAppGroupJoinRequestsRequest.new({phone_numbers: ['phone_numbers_example']}) # RejectWhatsAppGroupJoinRequestsRequest | 
+reject_whats_app_group_join_requests_request = Zernio::RejectWhatsAppGroupJoinRequestsRequest.new({phone_numbers: ['phone_numbers_example']}) # RejectWhatsAppGroupJoinRequestsRequest | 
 
 begin
   # Reject join requests
   result = api_instance.reject_whats_app_group_join_requests(group_id, account_id, reject_whats_app_group_join_requests_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->reject_whats_app_group_join_requests: #{e}"
 end
 ```
@@ -1065,7 +1065,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->reject_whats_app_group_join_requests_with_http_info: #{e}"
 end
 ```
@@ -1104,23 +1104,23 @@ Remove participants from a WhatsApp group.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
-remove_whats_app_group_participants_request = Late::RemoveWhatsAppGroupParticipantsRequest.new({phone_numbers: ['phone_numbers_example']}) # RemoveWhatsAppGroupParticipantsRequest | 
+remove_whats_app_group_participants_request = Zernio::RemoveWhatsAppGroupParticipantsRequest.new({phone_numbers: ['phone_numbers_example']}) # RemoveWhatsAppGroupParticipantsRequest | 
 
 begin
   # Remove participants
   result = api_instance.remove_whats_app_group_participants(group_id, account_id, remove_whats_app_group_participants_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->remove_whats_app_group_participants: #{e}"
 end
 ```
@@ -1138,7 +1138,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->remove_whats_app_group_participants_with_http_info: #{e}"
 end
 ```
@@ -1177,21 +1177,21 @@ Update the WhatsApp Business profile. All fields are optional; only provided fie
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
-update_whats_app_business_profile_request = Late::UpdateWhatsAppBusinessProfileRequest.new({account_id: 'account_id_example'}) # UpdateWhatsAppBusinessProfileRequest | 
+api_instance = Zernio::WhatsAppApi.new
+update_whats_app_business_profile_request = Zernio::UpdateWhatsAppBusinessProfileRequest.new({account_id: 'account_id_example'}) # UpdateWhatsAppBusinessProfileRequest | 
 
 begin
   # Update business profile
   result = api_instance.update_whats_app_business_profile(update_whats_app_business_profile_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->update_whats_app_business_profile: #{e}"
 end
 ```
@@ -1209,7 +1209,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->update_whats_app_business_profile_with_http_info: #{e}"
 end
 ```
@@ -1246,21 +1246,21 @@ Submit a display name change request for the WhatsApp Business account. The new 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
-update_whats_app_display_name_request = Late::UpdateWhatsAppDisplayNameRequest.new({account_id: 'account_id_example', display_name: 'display_name_example'}) # UpdateWhatsAppDisplayNameRequest | 
+api_instance = Zernio::WhatsAppApi.new
+update_whats_app_display_name_request = Zernio::UpdateWhatsAppDisplayNameRequest.new({account_id: 'account_id_example', display_name: 'display_name_example'}) # UpdateWhatsAppDisplayNameRequest | 
 
 begin
   # Request display name change
   result = api_instance.update_whats_app_display_name(update_whats_app_display_name_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->update_whats_app_display_name: #{e}"
 end
 ```
@@ -1278,7 +1278,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateWhatsAppDisplayName200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->update_whats_app_display_name_with_http_info: #{e}"
 end
 ```
@@ -1315,23 +1315,23 @@ Update the subject, description, or join approval mode of a WhatsApp group.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
-update_whats_app_group_chat_request = Late::UpdateWhatsAppGroupChatRequest.new # UpdateWhatsAppGroupChatRequest | 
+update_whats_app_group_chat_request = Zernio::UpdateWhatsAppGroupChatRequest.new # UpdateWhatsAppGroupChatRequest | 
 
 begin
   # Update group settings
   result = api_instance.update_whats_app_group_chat(group_id, account_id, update_whats_app_group_chat_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->update_whats_app_group_chat: #{e}"
 end
 ```
@@ -1349,7 +1349,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->update_whats_app_group_chat_with_http_info: #{e}"
 end
 ```
@@ -1388,22 +1388,22 @@ Update a message template's components. Only certain fields can be updated depen
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 template_name = 'template_name_example' # String | Template name
-update_whats_app_template_request = Late::UpdateWhatsAppTemplateRequest.new({account_id: 'account_id_example', components: [Late::WhatsAppBodyComponent.new({type: 'body', text: 'text_example'})]}) # UpdateWhatsAppTemplateRequest | 
+update_whats_app_template_request = Zernio::UpdateWhatsAppTemplateRequest.new({account_id: 'account_id_example', components: [Zernio::WhatsAppBodyComponent.new({type: 'body', text: 'text_example'})]}) # UpdateWhatsAppTemplateRequest | 
 
 begin
   # Update template
   result = api_instance.update_whats_app_template(template_name, update_whats_app_template_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->update_whats_app_template: #{e}"
 end
 ```
@@ -1421,7 +1421,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateWhatsAppTemplate200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->update_whats_app_template_with_http_info: #{e}"
 end
 ```
@@ -1459,14 +1459,14 @@ Upload a new profile picture for the WhatsApp Business Profile. Uses Meta's resu
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppApi.new
+api_instance = Zernio::WhatsAppApi.new
 account_id = 'account_id_example' # String | WhatsApp social account ID
 file = File.new('/path/to/some/file') # File | Image file (JPEG or PNG, max 5MB, recommended 640x640)
 
@@ -1474,7 +1474,7 @@ begin
   # Upload profile picture
   result = api_instance.upload_whats_app_profile_photo(account_id, file)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->upload_whats_app_profile_photo: #{e}"
 end
 ```
@@ -1492,7 +1492,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->upload_whats_app_profile_photo_with_http_info: #{e}"
 end
 ```

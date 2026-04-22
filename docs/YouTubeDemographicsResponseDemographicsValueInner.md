@@ -1,4 +1,4 @@
-# Late::YouTubeDemographicsResponseDemographicsValueInner
+# Zernio::YouTubeDemographicsResponseDemographicsValueInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::YouTubeDemographicsResponseDemographicsValueInner.new(
+instance = Zernio::YouTubeDemographicsResponseDemographicsValueInner.new(
   dimension: null,
   value: null
 )

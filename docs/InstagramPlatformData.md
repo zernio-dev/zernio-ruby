@@ -1,4 +1,4 @@
-# Late::InstagramPlatformData
+# Zernio::InstagramPlatformData
 
 ## Properties
 
@@ -18,9 +18,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InstagramPlatformData.new(
+instance = Zernio::InstagramPlatformData.new(
   content_type: null,
   share_to_feed: null,
   collaborators: null,

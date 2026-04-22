@@ -1,4 +1,4 @@
-# Late::AdPromotedObject
+# Zernio::AdPromotedObject
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AdPromotedObject.new(
+instance = Zernio::AdPromotedObject.new(
   custom_event_type: PURCHASE,
   pixel_id: null,
   page_id: null,

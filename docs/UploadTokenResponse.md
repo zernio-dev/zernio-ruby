@@ -1,4 +1,4 @@
-# Late::UploadTokenResponse
+# Zernio::UploadTokenResponse
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UploadTokenResponse.new(
+instance = Zernio::UploadTokenResponse.new(
   token: null,
   upload_url: null,
   expires_at: null,

@@ -1,4 +1,4 @@
-# Late::ListGoogleBusinessPlaceActions200Response
+# Zernio::ListGoogleBusinessPlaceActions200Response
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListGoogleBusinessPlaceActions200Response.new(
+instance = Zernio::ListGoogleBusinessPlaceActions200Response.new(
   success: null,
   account_id: null,
   location_id: null,

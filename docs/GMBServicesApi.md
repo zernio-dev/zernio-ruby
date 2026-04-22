@@ -1,4 +1,4 @@
-# Late::GMBServicesApi
+# Zernio::GMBServicesApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -20,14 +20,14 @@ Gets the services offered by a Google Business Profile location. Returns an arra
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBServicesApi.new
+api_instance = Zernio::GMBServicesApi.new
 account_id = 'account_id_example' # String | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to query. If omitted, uses the account's selected location.
@@ -37,7 +37,7 @@ begin
   # Get services
   result = api_instance.get_google_business_services(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBServicesApi->get_google_business_services: #{e}"
 end
 ```
@@ -55,7 +55,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGoogleBusinessServices200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBServicesApi->get_google_business_services_with_http_info: #{e}"
 end
 ```
@@ -93,16 +93,16 @@ Replaces the entire service list for a location. Google's API requires full repl
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBServicesApi.new
+api_instance = Zernio::GMBServicesApi.new
 account_id = 'account_id_example' # String | 
-update_google_business_services_request = Late::UpdateGoogleBusinessServicesRequest.new({service_items: [Late::UpdateGoogleBusinessServicesRequestServiceItemsInner.new]}) # UpdateGoogleBusinessServicesRequest | 
+update_google_business_services_request = Zernio::UpdateGoogleBusinessServicesRequest.new({service_items: [Zernio::UpdateGoogleBusinessServicesRequestServiceItemsInner.new]}) # UpdateGoogleBusinessServicesRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location.
 }
@@ -111,7 +111,7 @@ begin
   # Replace services
   result = api_instance.update_google_business_services(account_id, update_google_business_services_request, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBServicesApi->update_google_business_services: #{e}"
 end
 ```
@@ -129,7 +129,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateGoogleBusinessServices200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBServicesApi->update_google_business_services_with_http_info: #{e}"
 end
 ```

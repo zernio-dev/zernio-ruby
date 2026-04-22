@@ -1,4 +1,4 @@
-# Late::CreateCustomField200Response
+# Zernio::CreateCustomField200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateCustomField200Response.new(
+instance = Zernio::CreateCustomField200Response.new(
   success: null,
   field: null
 )

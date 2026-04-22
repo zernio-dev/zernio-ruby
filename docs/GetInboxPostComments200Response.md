@@ -1,4 +1,4 @@
-# Late::GetInboxPostComments200Response
+# Zernio::GetInboxPostComments200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetInboxPostComments200Response.new(
+instance = Zernio::GetInboxPostComments200Response.new(
   status: null,
   comments: null,
   pagination: null,

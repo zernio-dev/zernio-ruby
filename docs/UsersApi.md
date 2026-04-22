@@ -1,4 +1,4 @@
-# Late::UsersApi
+# Zernio::UsersApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -20,21 +20,21 @@ Returns a single user's details by ID, including name, email, and role.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::UsersApi.new
+api_instance = Zernio::UsersApi.new
 user_id = 'user_id_example' # String | 
 
 begin
   # Get user
   result = api_instance.get_user(user_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling UsersApi->get_user: #{e}"
 end
 ```
@@ -52,7 +52,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetUser200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling UsersApi->get_user_with_http_info: #{e}"
 end
 ```
@@ -89,20 +89,20 @@ Returns all users in the workspace including roles and profile access. Also retu
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::UsersApi.new
+api_instance = Zernio::UsersApi.new
 
 begin
   # List users
   result = api_instance.list_users
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling UsersApi->list_users: #{e}"
 end
 ```
@@ -120,7 +120,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListUsers200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling UsersApi->list_users_with_http_info: #{e}"
 end
 ```

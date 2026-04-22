@@ -1,4 +1,4 @@
-# Late::LinkedInAggregateAnalyticsTotalResponseAnalytics
+# Zernio::LinkedInAggregateAnalyticsTotalResponseAnalytics
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::LinkedInAggregateAnalyticsTotalResponseAnalytics.new(
+instance = Zernio::LinkedInAggregateAnalyticsTotalResponseAnalytics.new(
   impressions: null,
   reach: null,
   reactions: null,

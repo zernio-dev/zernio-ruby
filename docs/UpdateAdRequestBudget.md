@@ -1,4 +1,4 @@
-# Late::UpdateAdRequestBudget
+# Zernio::UpdateAdRequestBudget
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateAdRequestBudget.new(
+instance = Zernio::UpdateAdRequestBudget.new(
   amount: null,
   type: null
 )

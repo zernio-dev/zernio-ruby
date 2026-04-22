@@ -1,4 +1,4 @@
-# Late::SelectSnapchatProfileRequestSelectedPublicProfile
+# Zernio::SelectSnapchatProfileRequestSelectedPublicProfile
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SelectSnapchatProfileRequestSelectedPublicProfile.new(
+instance = Zernio::SelectSnapchatProfileRequestSelectedPublicProfile.new(
   id: null,
   display_name: null,
   username: null,

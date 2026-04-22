@@ -1,4 +1,4 @@
-# Late::AnalyticsOverview
+# Zernio::AnalyticsOverview
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AnalyticsOverview.new(
+instance = Zernio::AnalyticsOverview.new(
   total_posts: null,
   published_posts: null,
   scheduled_posts: null,

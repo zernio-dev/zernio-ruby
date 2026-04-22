@@ -1,4 +1,4 @@
-# Late::TwitterPlatformDataPoll
+# Zernio::TwitterPlatformDataPoll
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::TwitterPlatformDataPoll.new(
+instance = Zernio::TwitterPlatformDataPoll.new(
   options: null,
   duration_minutes: null
 )

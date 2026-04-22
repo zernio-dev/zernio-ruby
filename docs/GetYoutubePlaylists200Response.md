@@ -1,4 +1,4 @@
-# Late::GetYoutubePlaylists200Response
+# Zernio::GetYoutubePlaylists200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetYoutubePlaylists200Response.new(
+instance = Zernio::GetYoutubePlaylists200Response.new(
   playlists: null,
   default_playlist_id: null
 )

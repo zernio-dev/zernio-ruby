@@ -1,4 +1,4 @@
-# Late::ListLinkedInOrganizations200ResponseOrganizationsInner
+# Zernio::ListLinkedInOrganizations200ResponseOrganizationsInner
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListLinkedInOrganizations200ResponseOrganizationsInner.new(
+instance = Zernio::ListLinkedInOrganizations200ResponseOrganizationsInner.new(
   id: null,
   logo_url: null,
   vanity_name: null,

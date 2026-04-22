@@ -1,4 +1,4 @@
-# Late::UpdateGoogleBusinessLocationDetailsRequestCategoriesPrimaryCategory
+# Zernio::UpdateGoogleBusinessLocationDetailsRequestCategoriesPrimaryCategory
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateGoogleBusinessLocationDetailsRequestCategoriesPrimaryCategory.new(
+instance = Zernio::UpdateGoogleBusinessLocationDetailsRequestCategoriesPrimaryCategory.new(
   name: null
 )
 ```

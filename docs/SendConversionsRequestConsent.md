@@ -1,4 +1,4 @@
-# Late::SendConversionsRequestConsent
+# Zernio::SendConversionsRequestConsent
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendConversionsRequestConsent.new(
+instance = Zernio::SendConversionsRequestConsent.new(
   ad_user_data: null,
   ad_personalization: null
 )

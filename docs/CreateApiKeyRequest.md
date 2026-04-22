@@ -1,4 +1,4 @@
-# Late::CreateApiKeyRequest
+# Zernio::CreateApiKeyRequest
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateApiKeyRequest.new(
+instance = Zernio::CreateApiKeyRequest.new(
   name: null,
   expires_in: null,
   scope: null,

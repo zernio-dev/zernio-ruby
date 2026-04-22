@@ -1,4 +1,4 @@
-# Late::GetContactChannels200Response
+# Zernio::GetContactChannels200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetContactChannels200Response.new(
+instance = Zernio::GetContactChannels200Response.new(
   success: null,
   channels: null
 )

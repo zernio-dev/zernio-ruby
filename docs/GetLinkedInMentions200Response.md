@@ -1,4 +1,4 @@
-# Late::GetLinkedInMentions200Response
+# Zernio::GetLinkedInMentions200Response
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetLinkedInMentions200Response.new(
+instance = Zernio::GetLinkedInMentions200Response.new(
   urn: urn:li:person:4qj5ox-agD,
   type: person,
   display_name: Miquel Palet,

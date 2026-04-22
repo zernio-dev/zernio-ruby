@@ -1,4 +1,4 @@
-# Late::BulkUpdateAdCampaignStatus200ResponseTotals
+# Zernio::BulkUpdateAdCampaignStatus200ResponseTotals
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BulkUpdateAdCampaignStatus200ResponseTotals.new(
+instance = Zernio::BulkUpdateAdCampaignStatus200ResponseTotals.new(
   updated: null,
   skipped: null,
   failed: null

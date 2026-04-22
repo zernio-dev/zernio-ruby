@@ -1,4 +1,4 @@
-# Late::QueuePreviewResponse
+# Zernio::QueuePreviewResponse
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::QueuePreviewResponse.new(
+instance = Zernio::QueuePreviewResponse.new(
   profile_id: null,
   count: null,
   slots: null

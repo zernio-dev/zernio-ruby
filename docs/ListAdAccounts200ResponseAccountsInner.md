@@ -1,4 +1,4 @@
-# Late::ListAdAccounts200ResponseAccountsInner
+# Zernio::ListAdAccounts200ResponseAccountsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListAdAccounts200ResponseAccountsInner.new(
+instance = Zernio::ListAdAccounts200ResponseAccountsInner.new(
   id: null,
   name: null,
   currency: null,

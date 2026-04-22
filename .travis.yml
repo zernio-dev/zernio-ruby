@@ -7,5 +7,5 @@ rvm:
 script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
-  - gem build late-sdk.gemspec
-  - gem install ./late-sdk-0.1.0.gem
+  - gem build zernio-sdk.gemspec
+  - gem install ./zernio-sdk-0.1.0.gem

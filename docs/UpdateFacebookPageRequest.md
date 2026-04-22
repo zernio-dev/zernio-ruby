@@ -1,4 +1,4 @@
-# Late::UpdateFacebookPageRequest
+# Zernio::UpdateFacebookPageRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateFacebookPageRequest.new(
+instance = Zernio::UpdateFacebookPageRequest.new(
   selected_page_id: null
 )
 ```

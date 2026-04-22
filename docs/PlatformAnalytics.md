@@ -1,4 +1,4 @@
-# Late::PlatformAnalytics
+# Zernio::PlatformAnalytics
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::PlatformAnalytics.new(
+instance = Zernio::PlatformAnalytics.new(
   platform: null,
   status: null,
   platform_post_id: null,

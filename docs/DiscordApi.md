@@ -1,4 +1,4 @@
-# Late::DiscordApi
+# Zernio::DiscordApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -21,21 +21,21 @@ Returns the text, announcement, and forum channels in the connected Discord guil
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::DiscordApi.new
+api_instance = Zernio::DiscordApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # List Discord guild channels
   result = api_instance.get_discord_channels(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling DiscordApi->get_discord_channels: #{e}"
 end
 ```
@@ -53,7 +53,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetDiscordChannels200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling DiscordApi->get_discord_channels_with_http_info: #{e}"
 end
 ```
@@ -90,21 +90,21 @@ Returns the current Discord account settings including webhook identity (display
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::DiscordApi.new
+api_instance = Zernio::DiscordApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # Get Discord account settings
   result = api_instance.get_discord_settings(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling DiscordApi->get_discord_settings: #{e}"
 end
 ```
@@ -122,7 +122,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetDiscordSettings200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling DiscordApi->get_discord_settings_with_http_info: #{e}"
 end
 ```
@@ -159,22 +159,22 @@ Update Discord account settings. Supports two operations (can be combined):  1. 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::DiscordApi.new
+api_instance = Zernio::DiscordApi.new
 account_id = 'account_id_example' # String | 
-update_discord_settings_request = Late::UpdateDiscordSettingsRequest.new # UpdateDiscordSettingsRequest | 
+update_discord_settings_request = Zernio::UpdateDiscordSettingsRequest.new # UpdateDiscordSettingsRequest | 
 
 begin
   # Update Discord settings
   result = api_instance.update_discord_settings(account_id, update_discord_settings_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling DiscordApi->update_discord_settings: #{e}"
 end
 ```
@@ -192,7 +192,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateDiscordSettings200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling DiscordApi->update_discord_settings_with_http_info: #{e}"
 end
 ```

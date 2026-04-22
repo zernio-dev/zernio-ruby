@@ -1,4 +1,4 @@
-# Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerStructuredServiceItem
+# Zernio::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerStructuredServiceItem
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerStructuredServiceItem.new(
+instance = Zernio::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerStructuredServiceItem.new(
   service_type_id: null,
   description: null
 )

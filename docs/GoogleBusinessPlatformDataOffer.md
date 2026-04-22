@@ -1,4 +1,4 @@
-# Late::GoogleBusinessPlatformDataOffer
+# Zernio::GoogleBusinessPlatformDataOffer
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GoogleBusinessPlatformDataOffer.new(
+instance = Zernio::GoogleBusinessPlatformDataOffer.new(
   offer_type: null,
   redeem_online_url: null,
   terms_conditions: null,

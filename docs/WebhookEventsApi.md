@@ -1,4 +1,4 @@
-# Late::WebhookEventsApi
+# Zernio::WebhookEventsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -35,20 +35,20 @@ Fired when a social account is successfully connected.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_account_connected =  # WebhookPayloadAccountConnected | 
 
 begin
   # Account connected event
   api_instance.on_account_connected(webhook_payload_account_connected)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_account_connected: #{e}"
 end
 ```
@@ -66,7 +66,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_account_connected_with_http_info: #{e}"
 end
 ```
@@ -103,20 +103,20 @@ Fired when a connected social account becomes disconnected.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_account_disconnected =  # WebhookPayloadAccountDisconnected | 
 
 begin
   # Account disconnected event
   api_instance.on_account_disconnected(webhook_payload_account_disconnected)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_account_disconnected: #{e}"
 end
 ```
@@ -134,7 +134,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_account_disconnected_with_http_info: #{e}"
 end
 ```
@@ -171,20 +171,20 @@ Fired when a new comment is received on a tracked post.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_comment =  # WebhookPayloadComment | 
 
 begin
   # Comment received event
   api_instance.on_comment_received(webhook_payload_comment)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_comment_received: #{e}"
 end
 ```
@@ -202,7 +202,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_comment_received_with_http_info: #{e}"
 end
 ```
@@ -239,20 +239,20 @@ Fired when a sender deletes (unsends) a message. Supported on Instagram (incomin
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_message_deleted =  # WebhookPayloadMessageDeleted | 
 
 begin
   # Message deleted event
   api_instance.on_message_deleted(webhook_payload_message_deleted)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_deleted: #{e}"
 end
 ```
@@ -270,7 +270,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_deleted_with_http_info: #{e}"
 end
 ```
@@ -307,20 +307,20 @@ Fired when an outgoing message is delivered to the recipient. Supported on Whats
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_message_delivery_status =  # WebhookPayloadMessageDeliveryStatus | 
 
 begin
   # Message delivered event
   api_instance.on_message_delivered(webhook_payload_message_delivery_status)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_delivered: #{e}"
 end
 ```
@@ -338,7 +338,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_delivered_with_http_info: #{e}"
 end
 ```
@@ -375,20 +375,20 @@ Fired when a sender edits a previously-sent message. Supported on Instagram, Fac
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_message_edited =  # WebhookPayloadMessageEdited | 
 
 begin
   # Message edited event
   api_instance.on_message_edited(webhook_payload_message_edited)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_edited: #{e}"
 end
 ```
@@ -406,7 +406,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_edited_with_http_info: #{e}"
 end
 ```
@@ -443,20 +443,20 @@ Fired when an outgoing message fails to deliver. Currently only emitted for What
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_message_delivery_status =  # WebhookPayloadMessageDeliveryStatus | 
 
 begin
   # Message delivery failed event
   api_instance.on_message_failed(webhook_payload_message_delivery_status)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_failed: #{e}"
 end
 ```
@@ -474,7 +474,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_failed_with_http_info: #{e}"
 end
 ```
@@ -511,20 +511,20 @@ Fired when an outgoing message is read by the recipient. Supported on WhatsApp, 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_message_delivery_status =  # WebhookPayloadMessageDeliveryStatus | 
 
 begin
   # Message read event
   api_instance.on_message_read(webhook_payload_message_delivery_status)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_read: #{e}"
 end
 ```
@@ -542,7 +542,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_read_with_http_info: #{e}"
 end
 ```
@@ -579,20 +579,20 @@ Fired when a new inbox message is received.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_message =  # WebhookPayloadMessage | 
 
 begin
   # Message received event
   api_instance.on_message_received(webhook_payload_message)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_received: #{e}"
 end
 ```
@@ -610,7 +610,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_received_with_http_info: #{e}"
 end
 ```
@@ -647,20 +647,20 @@ Fired when a message is sent via the API.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_message_sent =  # WebhookPayloadMessageSent | 
 
 begin
   # Message sent event
   api_instance.on_message_sent(webhook_payload_message_sent)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_sent: #{e}"
 end
 ```
@@ -678,7 +678,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_message_sent_with_http_info: #{e}"
 end
 ```
@@ -715,20 +715,20 @@ Fired when a post publishing job is cancelled.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_post =  # WebhookPayloadPost | 
 
 begin
   # Post cancelled event
   api_instance.on_post_cancelled(webhook_payload_post)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_cancelled: #{e}"
 end
 ```
@@ -746,7 +746,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_cancelled_with_http_info: #{e}"
 end
 ```
@@ -783,20 +783,20 @@ Fired when a post fails to publish on all target platforms.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_post =  # WebhookPayloadPost | 
 
 begin
   # Post failed event
   api_instance.on_post_failed(webhook_payload_post)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_failed: #{e}"
 end
 ```
@@ -814,7 +814,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_failed_with_http_info: #{e}"
 end
 ```
@@ -851,20 +851,20 @@ Fired when a post publishes on some platforms and fails on others.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_post =  # WebhookPayloadPost | 
 
 begin
   # Post partial event
   api_instance.on_post_partial(webhook_payload_post)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_partial: #{e}"
 end
 ```
@@ -882,7 +882,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_partial_with_http_info: #{e}"
 end
 ```
@@ -919,20 +919,20 @@ Fired when a post is successfully published.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_post =  # WebhookPayloadPost | 
 
 begin
   # Post published event
   api_instance.on_post_published(webhook_payload_post)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_published: #{e}"
 end
 ```
@@ -950,7 +950,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_published_with_http_info: #{e}"
 end
 ```
@@ -987,20 +987,20 @@ Fired when a post is recycled (cloned and re-scheduled for publishing).
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_post =  # WebhookPayloadPost | 
 
 begin
   # Post recycled event
   api_instance.on_post_recycled(webhook_payload_post)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_recycled: #{e}"
 end
 ```
@@ -1018,7 +1018,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_recycled_with_http_info: #{e}"
 end
 ```
@@ -1055,20 +1055,20 @@ Fired when a post is created and scheduled for publishing.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_post =  # WebhookPayloadPost | 
 
 begin
   # Post scheduled event
   api_instance.on_post_scheduled(webhook_payload_post)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_scheduled: #{e}"
 end
 ```
@@ -1086,7 +1086,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_post_scheduled_with_http_info: #{e}"
 end
 ```
@@ -1123,20 +1123,20 @@ Fired when sending a test webhook to verify the endpoint configuration.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhookEventsApi.new
+api_instance = Zernio::WebhookEventsApi.new
 webhook_payload_test =  # WebhookPayloadTest | 
 
 begin
   # Webhook test event
   api_instance.on_webhook_test(webhook_payload_test)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_webhook_test: #{e}"
 end
 ```
@@ -1154,7 +1154,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhookEventsApi->on_webhook_test_with_http_info: #{e}"
 end
 ```

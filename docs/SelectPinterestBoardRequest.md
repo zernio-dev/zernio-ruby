@@ -1,4 +1,4 @@
-# Late::SelectPinterestBoardRequest
+# Zernio::SelectPinterestBoardRequest
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SelectPinterestBoardRequest.new(
+instance = Zernio::SelectPinterestBoardRequest.new(
   profile_id: null,
   board_id: null,
   board_name: null,

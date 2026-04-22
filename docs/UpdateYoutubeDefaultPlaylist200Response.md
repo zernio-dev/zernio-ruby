@@ -1,4 +1,4 @@
-# Late::UpdateYoutubeDefaultPlaylist200Response
+# Zernio::UpdateYoutubeDefaultPlaylist200Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateYoutubeDefaultPlaylist200Response.new(
+instance = Zernio::UpdateYoutubeDefaultPlaylist200Response.new(
   success: null
 )
 ```

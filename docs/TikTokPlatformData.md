@@ -1,4 +1,4 @@
-# Late::TikTokPlatformData
+# Zernio::TikTokPlatformData
 
 ## Properties
 
@@ -25,9 +25,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::TikTokPlatformData.new(
+instance = Zernio::TikTokPlatformData.new(
   draft: null,
   privacy_level: null,
   allow_comment: null,

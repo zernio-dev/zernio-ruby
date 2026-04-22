@@ -1,4 +1,4 @@
-# Late::ProfileCreateResponse
+# Zernio::ProfileCreateResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ProfileCreateResponse.new(
+instance = Zernio::ProfileCreateResponse.new(
   message: null,
   profile: null
 )

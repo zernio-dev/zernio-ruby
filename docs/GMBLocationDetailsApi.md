@@ -1,4 +1,4 @@
-# Late::GMBLocationDetailsApi
+# Zernio::GMBLocationDetailsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -20,14 +20,14 @@ Returns detailed GBP location info (hours, description, phone, website, categori
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBLocationDetailsApi.new
+api_instance = Zernio::GMBLocationDetailsApi.new
 account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
 opts = {
   location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
@@ -38,7 +38,7 @@ begin
   # Get location details
   result = api_instance.get_google_business_location_details(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBLocationDetailsApi->get_google_business_location_details: #{e}"
 end
 ```
@@ -56,7 +56,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGoogleBusinessLocationDetails200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBLocationDetailsApi->get_google_business_location_details_with_http_info: #{e}"
 end
 ```
@@ -95,16 +95,16 @@ Updates GBP location details. The updateMask field is required and specifies whi
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBLocationDetailsApi.new
+api_instance = Zernio::GMBLocationDetailsApi.new
 account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
-update_google_business_location_details_request = Late::UpdateGoogleBusinessLocationDetailsRequest.new({update_mask: 'update_mask_example'}) # UpdateGoogleBusinessLocationDetailsRequest | 
+update_google_business_location_details_request = Zernio::UpdateGoogleBusinessLocationDetailsRequest.new({update_mask: 'update_mask_example'}) # UpdateGoogleBusinessLocationDetailsRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
 }
@@ -113,7 +113,7 @@ begin
   # Update location details
   result = api_instance.update_google_business_location_details(account_id, update_google_business_location_details_request, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBLocationDetailsApi->update_google_business_location_details: #{e}"
 end
 ```
@@ -131,7 +131,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateGoogleBusinessLocationDetails200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBLocationDetailsApi->update_google_business_location_details_with_http_info: #{e}"
 end
 ```

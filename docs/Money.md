@@ -1,4 +1,4 @@
-# Late::Money
+# Zernio::Money
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::Money.new(
+instance = Zernio::Money.new(
   currency_code: null,
   units: null,
   nanos: null

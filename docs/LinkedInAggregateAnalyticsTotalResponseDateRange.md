@@ -1,4 +1,4 @@
-# Late::LinkedInAggregateAnalyticsTotalResponseDateRange
+# Zernio::LinkedInAggregateAnalyticsTotalResponseDateRange
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::LinkedInAggregateAnalyticsTotalResponseDateRange.new(
+instance = Zernio::LinkedInAggregateAnalyticsTotalResponseDateRange.new(
   start_date: null,
   end_date: null
 )

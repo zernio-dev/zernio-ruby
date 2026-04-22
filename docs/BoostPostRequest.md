@@ -1,4 +1,4 @@
-# Late::BoostPostRequest
+# Zernio::BoostPostRequest
 
 ## Properties
 
@@ -21,9 +21,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BoostPostRequest.new(
+instance = Zernio::BoostPostRequest.new(
   post_id: null,
   platform_post_id: null,
   account_id: null,

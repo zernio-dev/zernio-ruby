@@ -1,4 +1,4 @@
-# Late::ListLogs200Response
+# Zernio::ListLogs200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListLogs200Response.new(
+instance = Zernio::ListLogs200Response.new(
   logs: null,
   pagination: null
 )

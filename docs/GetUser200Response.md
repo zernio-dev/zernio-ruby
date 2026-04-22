@@ -1,4 +1,4 @@
-# Late::GetUser200Response
+# Zernio::GetUser200Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetUser200Response.new(
+instance = Zernio::GetUser200Response.new(
   user: null
 )
 ```

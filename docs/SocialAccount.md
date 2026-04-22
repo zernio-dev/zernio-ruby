@@ -1,4 +1,4 @@
-# Late::SocialAccount
+# Zernio::SocialAccount
 
 ## Properties
 
@@ -21,9 +21,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SocialAccount.new(
+instance = Zernio::SocialAccount.new(
   _id: null,
   platform: null,
   profile_id: null,

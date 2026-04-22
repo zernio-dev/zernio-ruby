@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequestInteractiveFooter
+# Zernio::SendInboxMessageRequestInteractiveFooter
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequestInteractiveFooter.new(
+instance = Zernio::SendInboxMessageRequestInteractiveFooter.new(
   text: null
 )
 ```

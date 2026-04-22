@@ -1,4 +1,4 @@
-# Late::QueueSchedule
+# Zernio::QueueSchedule
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::QueueSchedule.new(
+instance = Zernio::QueueSchedule.new(
   _id: null,
   profile_id: null,
   name: null,

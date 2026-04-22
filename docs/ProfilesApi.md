@@ -1,4 +1,4 @@
-# Late::ProfilesApi
+# Zernio::ProfilesApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -23,21 +23,21 @@ Creates a new profile with a name, optional description, and color.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ProfilesApi.new
-create_profile_request = Late::CreateProfileRequest.new({name: 'name_example'}) # CreateProfileRequest | 
+api_instance = Zernio::ProfilesApi.new
+create_profile_request = Zernio::CreateProfileRequest.new({name: 'name_example'}) # CreateProfileRequest | 
 
 begin
   # Create profile
   result = api_instance.create_profile(create_profile_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->create_profile: #{e}"
 end
 ```
@@ -55,7 +55,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ProfileCreateResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->create_profile_with_http_info: #{e}"
 end
 ```
@@ -92,21 +92,21 @@ Permanently deletes a profile by ID.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ProfilesApi.new
+api_instance = Zernio::ProfilesApi.new
 profile_id = 'profile_id_example' # String | 
 
 begin
   # Delete profile
   result = api_instance.delete_profile(profile_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->delete_profile: #{e}"
 end
 ```
@@ -124,7 +124,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAccountGroup200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->delete_profile_with_http_info: #{e}"
 end
 ```
@@ -161,21 +161,21 @@ Returns a single profile by ID, including its name, color, and default status.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ProfilesApi.new
+api_instance = Zernio::ProfilesApi.new
 profile_id = 'profile_id_example' # String | 
 
 begin
   # Get profile
   result = api_instance.get_profile(profile_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->get_profile: #{e}"
 end
 ```
@@ -193,7 +193,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetProfile200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->get_profile_with_http_info: #{e}"
 end
 ```
@@ -230,14 +230,14 @@ Returns profiles sorted by creation date. Use includeOverLimit=true to include p
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ProfilesApi.new
+api_instance = Zernio::ProfilesApi.new
 opts = {
   include_over_limit: true # Boolean | When true, includes over-limit profiles (marked with isOverLimit: true).
 }
@@ -246,7 +246,7 @@ begin
   # List profiles
   result = api_instance.list_profiles(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->list_profiles: #{e}"
 end
 ```
@@ -264,7 +264,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ProfilesListResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->list_profiles_with_http_info: #{e}"
 end
 ```
@@ -301,22 +301,22 @@ Updates a profile's name, description, color, or default status.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ProfilesApi.new
+api_instance = Zernio::ProfilesApi.new
 profile_id = 'profile_id_example' # String | 
-update_profile_request = Late::UpdateProfileRequest.new # UpdateProfileRequest | 
+update_profile_request = Zernio::UpdateProfileRequest.new # UpdateProfileRequest | 
 
 begin
   # Update profile
   result = api_instance.update_profile(profile_id, update_profile_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->update_profile: #{e}"
 end
 ```
@@ -334,7 +334,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateProfile200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->update_profile_with_http_info: #{e}"
 end
 ```

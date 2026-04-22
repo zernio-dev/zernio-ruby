@@ -1,4 +1,4 @@
-# Late::UsageStatsLimits
+# Zernio::UsageStatsLimits
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UsageStatsLimits.new(
+instance = Zernio::UsageStatsLimits.new(
   uploads: null,
   profiles: null
 )

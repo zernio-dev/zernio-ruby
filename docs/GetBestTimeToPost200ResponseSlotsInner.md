@@ -1,4 +1,4 @@
-# Late::GetBestTimeToPost200ResponseSlotsInner
+# Zernio::GetBestTimeToPost200ResponseSlotsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetBestTimeToPost200ResponseSlotsInner.new(
+instance = Zernio::GetBestTimeToPost200ResponseSlotsInner.new(
   day_of_week: null,
   hour: null,
   avg_engagement: null,

@@ -1,4 +1,4 @@
-# Late::GetPinterestBoards200ResponseBoardsInner
+# Zernio::GetPinterestBoards200ResponseBoardsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPinterestBoards200ResponseBoardsInner.new(
+instance = Zernio::GetPinterestBoards200ResponseBoardsInner.new(
   id: null,
   name: null,
   description: null,

@@ -1,4 +1,4 @@
-# Late::ConversionEventUser
+# Zernio::ConversionEventUser
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ConversionEventUser.new(
+instance = Zernio::ConversionEventUser.new(
   email: null,
   phone: null,
   first_name: null,

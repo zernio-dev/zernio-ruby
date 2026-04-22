@@ -1,4 +1,4 @@
-# Late::UpdateWhatsAppTemplateRequest
+# Zernio::UpdateWhatsAppTemplateRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateWhatsAppTemplateRequest.new(
+instance = Zernio::UpdateWhatsAppTemplateRequest.new(
   account_id: null,
   components: null
 )

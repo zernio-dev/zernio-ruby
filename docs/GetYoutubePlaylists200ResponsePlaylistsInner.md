@@ -1,4 +1,4 @@
-# Late::GetYoutubePlaylists200ResponsePlaylistsInner
+# Zernio::GetYoutubePlaylists200ResponsePlaylistsInner
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetYoutubePlaylists200ResponsePlaylistsInner.new(
+instance = Zernio::GetYoutubePlaylists200ResponsePlaylistsInner.new(
   id: null,
   title: null,
   description: null,

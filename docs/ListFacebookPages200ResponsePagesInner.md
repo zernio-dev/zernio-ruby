@@ -1,4 +1,4 @@
-# Late::ListFacebookPages200ResponsePagesInner
+# Zernio::ListFacebookPages200ResponsePagesInner
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListFacebookPages200ResponsePagesInner.new(
+instance = Zernio::ListFacebookPages200ResponsePagesInner.new(
   id: null,
   name: null,
   username: null,

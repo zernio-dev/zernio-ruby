@@ -1,4 +1,4 @@
-# Late::PostDeleteResponse
+# Zernio::PostDeleteResponse
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::PostDeleteResponse.new(
+instance = Zernio::PostDeleteResponse.new(
   message: null
 )
 ```

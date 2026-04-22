@@ -1,4 +1,4 @@
-# Late::GetInboxConversationMessages200ResponseMessagesInnerDeliveryError
+# Zernio::GetInboxConversationMessages200ResponseMessagesInnerDeliveryError
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetInboxConversationMessages200ResponseMessagesInnerDeliveryError.new(
+instance = Zernio::GetInboxConversationMessages200ResponseMessagesInnerDeliveryError.new(
   code: null,
   title: null,
   message: null

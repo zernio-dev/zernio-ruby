@@ -1,4 +1,4 @@
-# Late::SendWhatsAppFlowMessageRequestHeader
+# Zernio::SendWhatsAppFlowMessageRequestHeader
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendWhatsAppFlowMessageRequestHeader.new(
+instance = Zernio::SendWhatsAppFlowMessageRequestHeader.new(
   type: null,
   text: null
 )

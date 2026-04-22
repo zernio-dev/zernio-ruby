@@ -1,4 +1,4 @@
-# Late::MessagesApi
+# Zernio::MessagesApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -30,23 +30,23 @@ Add an emoji reaction to a message. Platform support: - Telegram: Supports a sub
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID
 message_id = 'message_id_example' # String | The platform message ID to react to
-add_message_reaction_request = Late::AddMessageReactionRequest.new({account_id: 'account_id_example', emoji: '👍'}) # AddMessageReactionRequest | 
+add_message_reaction_request = Zernio::AddMessageReactionRequest.new({account_id: 'account_id_example', emoji: '👍'}) # AddMessageReactionRequest | 
 
 begin
   # Add reaction
   result = api_instance.add_message_reaction(conversation_id, message_id, add_message_reaction_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->add_message_reaction: #{e}"
 end
 ```
@@ -64,7 +64,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->add_message_reaction_with_http_info: #{e}"
 end
 ```
@@ -103,21 +103,21 @@ Initiate a new direct message conversation with a specified user. If a conversat
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
-create_inbox_conversation_request = Late::CreateInboxConversationRequest.new({account_id: 'account_id_example'}) # CreateInboxConversationRequest | 
+api_instance = Zernio::MessagesApi.new
+create_inbox_conversation_request = Zernio::CreateInboxConversationRequest.new({account_id: 'account_id_example'}) # CreateInboxConversationRequest | 
 
 begin
   # Create conversation
   result = api_instance.create_inbox_conversation(create_inbox_conversation_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->create_inbox_conversation: #{e}"
 end
 ```
@@ -135,7 +135,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateInboxConversation201Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->create_inbox_conversation_with_http_info: #{e}"
 end
 ```
@@ -172,14 +172,14 @@ Delete a message from a conversation. Platform support varies: - Telegram: Full 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID
 message_id = 'message_id_example' # String | The platform message ID to delete
 account_id = 'account_id_example' # String | Social account ID
@@ -188,7 +188,7 @@ begin
   # Delete message
   result = api_instance.delete_inbox_message(conversation_id, message_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->delete_inbox_message: #{e}"
 end
 ```
@@ -206,7 +206,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->delete_inbox_message_with_http_info: #{e}"
 end
 ```
@@ -245,23 +245,23 @@ Edit the text and/or reply markup of a previously sent Telegram message. Only su
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID
 message_id = 'message_id_example' # String | The Telegram message ID to edit
-edit_inbox_message_request = Late::EditInboxMessageRequest.new({account_id: 'account_id_example'}) # EditInboxMessageRequest | 
+edit_inbox_message_request = Zernio::EditInboxMessageRequest.new({account_id: 'account_id_example'}) # EditInboxMessageRequest | 
 
 begin
   # Edit message
   result = api_instance.edit_inbox_message(conversation_id, message_id, edit_inbox_message_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->edit_inbox_message: #{e}"
 end
 ```
@@ -279,7 +279,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <EditInboxMessage200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->edit_inbox_message_with_http_info: #{e}"
 end
 ```
@@ -318,14 +318,14 @@ Retrieve details and metadata for a specific conversation. Requires accountId qu
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
 account_id = 'account_id_example' # String | The social account ID
 
@@ -333,7 +333,7 @@ begin
   # Get conversation
   result = api_instance.get_inbox_conversation(conversation_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->get_inbox_conversation: #{e}"
 end
 ```
@@ -351,7 +351,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetInboxConversation200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->get_inbox_conversation_with_http_info: #{e}"
 end
 ```
@@ -389,14 +389,14 @@ Fetch messages for a specific conversation. Requires accountId query parameter. 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
 account_id = 'account_id_example' # String | Social account ID
 
@@ -404,7 +404,7 @@ begin
   # List messages
   result = api_instance.get_inbox_conversation_messages(conversation_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->get_inbox_conversation_messages: #{e}"
 end
 ```
@@ -422,7 +422,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetInboxConversationMessages200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->get_inbox_conversation_messages_with_http_info: #{e}"
 end
 ```
@@ -460,14 +460,14 @@ Fetch conversations (DMs) from all connected messaging accounts in a single API 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter by profile ID
   platform: 'facebook', # String | Filter by platform
@@ -482,7 +482,7 @@ begin
   # List conversations
   result = api_instance.list_inbox_conversations(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->list_inbox_conversations: #{e}"
 end
 ```
@@ -500,7 +500,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListInboxConversations200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->list_inbox_conversations_with_http_info: #{e}"
 end
 ```
@@ -543,14 +543,14 @@ Remove a reaction from a message. Platform support: - Telegram: Send empty react
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID
 message_id = 'message_id_example' # String | The platform message ID
 account_id = 'account_id_example' # String | Social account ID
@@ -559,7 +559,7 @@ begin
   # Remove reaction
   result = api_instance.remove_message_reaction(conversation_id, message_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->remove_message_reaction: #{e}"
 end
 ```
@@ -577,7 +577,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->remove_message_reaction_with_http_info: #{e}"
 end
 ```
@@ -616,22 +616,22 @@ Send a message in a conversation. Supports text, attachments, quick replies, but
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
-send_inbox_message_request = Late::SendInboxMessageRequest.new({account_id: 'account_id_example'}) # SendInboxMessageRequest | 
+send_inbox_message_request = Zernio::SendInboxMessageRequest.new({account_id: 'account_id_example'}) # SendInboxMessageRequest | 
 
 begin
   # Send message
   result = api_instance.send_inbox_message(conversation_id, send_inbox_message_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->send_inbox_message: #{e}"
 end
 ```
@@ -649,7 +649,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SendInboxMessage200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->send_inbox_message_with_http_info: #{e}"
 end
 ```
@@ -687,22 +687,22 @@ Show a typing indicator in a conversation. Platform support: - Facebook Messenge
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID
-send_typing_indicator_request = Late::SendTypingIndicatorRequest.new({account_id: 'account_id_example'}) # SendTypingIndicatorRequest | 
+send_typing_indicator_request = Zernio::SendTypingIndicatorRequest.new({account_id: 'account_id_example'}) # SendTypingIndicatorRequest | 
 
 begin
   # Send typing indicator
   result = api_instance.send_typing_indicator(conversation_id, send_typing_indicator_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->send_typing_indicator: #{e}"
 end
 ```
@@ -720,7 +720,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->send_typing_indicator_with_http_info: #{e}"
 end
 ```
@@ -758,22 +758,22 @@ Archive or activate a conversation. Requires accountId in request body.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
-update_inbox_conversation_request = Late::UpdateInboxConversationRequest.new({account_id: 'account_id_example', status: 'active'}) # UpdateInboxConversationRequest | 
+update_inbox_conversation_request = Zernio::UpdateInboxConversationRequest.new({account_id: 'account_id_example', status: 'active'}) # UpdateInboxConversationRequest | 
 
 begin
   # Update conversation status
   result = api_instance.update_inbox_conversation(conversation_id, update_inbox_conversation_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->update_inbox_conversation: #{e}"
 end
 ```
@@ -791,7 +791,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateInboxConversation200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->update_inbox_conversation_with_http_info: #{e}"
 end
 ```
@@ -829,14 +829,14 @@ Upload a media file using API key authentication and get back a publicly accessi
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MessagesApi.new
+api_instance = Zernio::MessagesApi.new
 file = File.new('/path/to/some/file') # File | The file to upload (max 25MB)
 opts = {
   content_type: 'content_type_example' # String | Override MIME type (e.g. \\\"image/jpeg\\\"). Auto-detected from file if not provided.
@@ -846,7 +846,7 @@ begin
   # Upload media file
   result = api_instance.upload_media_direct(file, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->upload_media_direct: #{e}"
 end
 ```
@@ -864,7 +864,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UploadMediaDirect200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->upload_media_direct_with_http_info: #{e}"
 end
 ```

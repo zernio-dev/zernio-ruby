@@ -1,4 +1,4 @@
-# Late::BatchGetGoogleBusinessReviews200Response
+# Zernio::BatchGetGoogleBusinessReviews200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BatchGetGoogleBusinessReviews200Response.new(
+instance = Zernio::BatchGetGoogleBusinessReviews200Response.new(
   success: null,
   account_id: null,
   location_reviews: null,

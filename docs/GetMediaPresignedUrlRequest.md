@@ -1,4 +1,4 @@
-# Late::GetMediaPresignedUrlRequest
+# Zernio::GetMediaPresignedUrlRequest
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetMediaPresignedUrlRequest.new(
+instance = Zernio::GetMediaPresignedUrlRequest.new(
   filename: my-video.mp4,
   content_type: video/mp4,
   size: 15234567

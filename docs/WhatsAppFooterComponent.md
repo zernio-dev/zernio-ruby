@@ -1,4 +1,4 @@
-# Late::WhatsAppFooterComponent
+# Zernio::WhatsAppFooterComponent
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::WhatsAppFooterComponent.new(
+instance = Zernio::WhatsAppFooterComponent.new(
   type: null,
   text: null,
   code_expiration_minutes: null

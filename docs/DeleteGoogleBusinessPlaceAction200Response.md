@@ -1,4 +1,4 @@
-# Late::DeleteGoogleBusinessPlaceAction200Response
+# Zernio::DeleteGoogleBusinessPlaceAction200Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DeleteGoogleBusinessPlaceAction200Response.new(
+instance = Zernio::DeleteGoogleBusinessPlaceAction200Response.new(
   success: null,
   deleted: null,
   name: null

@@ -1,4 +1,4 @@
-# Late::YouTubeDemographicsResponse
+# Zernio::YouTubeDemographicsResponse
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::YouTubeDemographicsResponse.new(
+instance = Zernio::YouTubeDemographicsResponse.new(
   success: true,
   account_id: null,
   platform: youtube,

@@ -1,4 +1,4 @@
-# Late::ApiKeyProfileIdsInner
+# Zernio::ApiKeyProfileIdsInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ApiKeyProfileIdsInner.new(
+instance = Zernio::ApiKeyProfileIdsInner.new(
   _id: null,
   name: null,
   color: null

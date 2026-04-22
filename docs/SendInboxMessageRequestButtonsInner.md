@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequestButtonsInner
+# Zernio::SendInboxMessageRequestButtonsInner
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequestButtonsInner.new(
+instance = Zernio::SendInboxMessageRequestButtonsInner.new(
   type: null,
   title: null,
   url: null,

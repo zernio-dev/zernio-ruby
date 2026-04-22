@@ -1,4 +1,4 @@
-# Late::CreateGoogleBusinessMedia200Response
+# Zernio::CreateGoogleBusinessMedia200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateGoogleBusinessMedia200Response.new(
+instance = Zernio::CreateGoogleBusinessMedia200Response.new(
   success: null,
   name: null,
   media_format: null,

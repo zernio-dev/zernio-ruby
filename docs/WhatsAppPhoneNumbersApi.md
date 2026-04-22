@@ -1,4 +1,4 @@
-# Late::WhatsAppPhoneNumbersApi
+# Zernio::WhatsAppPhoneNumbersApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -22,21 +22,21 @@ Retrieve the current status of a purchased phone number. Used to poll for Meta p
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppPhoneNumbersApi.new
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 phone_number_id = 'phone_number_id_example' # String | Phone number record ID
 
 begin
   # Get phone number
   result = api_instance.get_whats_app_phone_number(phone_number_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_phone_number: #{e}"
 end
 ```
@@ -54,7 +54,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppPhoneNumber200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_phone_number_with_http_info: #{e}"
 end
 ```
@@ -91,14 +91,14 @@ List all WhatsApp phone numbers purchased by the authenticated user. By default,
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppPhoneNumbersApi.new
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 opts = {
   status: 'provisioning', # String | Filter by status (by default excludes released numbers)
   profile_id: 'profile_id_example' # String | Filter by profile
@@ -108,7 +108,7 @@ begin
   # List phone numbers
   result = api_instance.get_whats_app_phone_numbers(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_phone_numbers: #{e}"
 end
 ```
@@ -126,7 +126,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppPhoneNumbers200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_phone_numbers_with_http_info: #{e}"
 end
 ```
@@ -164,21 +164,21 @@ Initiate purchasing a WhatsApp phone number. Payment-first flow: the user does n
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppPhoneNumbersApi.new
-purchase_whats_app_phone_number_request = Late::PurchaseWhatsAppPhoneNumberRequest.new({profile_id: 'profile_id_example'}) # PurchaseWhatsAppPhoneNumberRequest | 
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+purchase_whats_app_phone_number_request = Zernio::PurchaseWhatsAppPhoneNumberRequest.new({profile_id: 'profile_id_example'}) # PurchaseWhatsAppPhoneNumberRequest | 
 
 begin
   # Purchase phone number
   result = api_instance.purchase_whats_app_phone_number(purchase_whats_app_phone_number_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->purchase_whats_app_phone_number: #{e}"
 end
 ```
@@ -196,7 +196,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PurchaseWhatsAppPhoneNumber200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->purchase_whats_app_phone_number_with_http_info: #{e}"
 end
 ```
@@ -233,21 +233,21 @@ Release a purchased phone number. This will: 1. Disconnect any linked WhatsApp s
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppPhoneNumbersApi.new
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 phone_number_id = 'phone_number_id_example' # String | Phone number record ID
 
 begin
   # Release phone number
   result = api_instance.release_whats_app_phone_number(phone_number_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->release_whats_app_phone_number: #{e}"
 end
 ```
@@ -265,7 +265,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReleaseWhatsAppPhoneNumber200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->release_whats_app_phone_number_with_http_info: #{e}"
 end
 ```

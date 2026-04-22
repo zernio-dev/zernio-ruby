@@ -1,4 +1,4 @@
-# Late::ListAdCampaigns200Response
+# Zernio::ListAdCampaigns200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListAdCampaigns200Response.new(
+instance = Zernio::ListAdCampaigns200Response.new(
   campaigns: null,
   pagination: null
 )

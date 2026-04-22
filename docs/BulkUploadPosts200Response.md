@@ -1,4 +1,4 @@
-# Late::BulkUploadPosts200Response
+# Zernio::BulkUploadPosts200Response
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BulkUploadPosts200Response.new(
+instance = Zernio::BulkUploadPosts200Response.new(
   success: null,
   total_rows: null,
   created: null,

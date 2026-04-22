@@ -1,4 +1,4 @@
-# Late::GetAllAccountsHealth200ResponseSummary
+# Zernio::GetAllAccountsHealth200ResponseSummary
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetAllAccountsHealth200ResponseSummary.new(
+instance = Zernio::GetAllAccountsHealth200ResponseSummary.new(
   total: null,
   healthy: null,
   warning: null,

@@ -1,4 +1,4 @@
-# Late::DiscordPlatformDataEmbedsInnerFooter
+# Zernio::DiscordPlatformDataEmbedsInnerFooter
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DiscordPlatformDataEmbedsInnerFooter.new(
+instance = Zernio::DiscordPlatformDataEmbedsInnerFooter.new(
   text: null,
   icon_url: null
 )

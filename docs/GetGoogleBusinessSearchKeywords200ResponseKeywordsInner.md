@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessSearchKeywords200ResponseKeywordsInner
+# Zernio::GetGoogleBusinessSearchKeywords200ResponseKeywordsInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.new(
+instance = Zernio::GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.new(
   keyword: restaurant near me,
   impressions: 245
 )

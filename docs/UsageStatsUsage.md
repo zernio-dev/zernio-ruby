@@ -1,4 +1,4 @@
-# Late::UsageStatsUsage
+# Zernio::UsageStatsUsage
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UsageStatsUsage.new(
+instance = Zernio::UsageStatsUsage.new(
   uploads: null,
   profiles: null,
   last_reset: null

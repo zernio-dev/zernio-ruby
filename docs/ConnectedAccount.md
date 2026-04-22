@@ -1,4 +1,4 @@
-# Late::ConnectedAccount
+# Zernio::ConnectedAccount
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ConnectedAccount.new(
+instance = Zernio::ConnectedAccount.new(
   _id: null,
   platform: null,
   username: null,

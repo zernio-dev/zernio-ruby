@@ -1,4 +1,4 @@
-# Late::YouTubeDailyViewsResponseScopeStatus
+# Zernio::YouTubeDailyViewsResponseScopeStatus
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::YouTubeDailyViewsResponseScopeStatus.new(
+instance = Zernio::YouTubeDailyViewsResponseScopeStatus.new(
   has_analytics_scope: null
 )
 ```

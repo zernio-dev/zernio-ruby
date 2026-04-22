@@ -1,4 +1,4 @@
-# Late::GetTikTokCreatorInfo200ResponseCommercialContentTypesInner
+# Zernio::GetTikTokCreatorInfo200ResponseCommercialContentTypesInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetTikTokCreatorInfo200ResponseCommercialContentTypesInner.new(
+instance = Zernio::GetTikTokCreatorInfo200ResponseCommercialContentTypesInner.new(
   value: null,
   label: null,
   requires: null

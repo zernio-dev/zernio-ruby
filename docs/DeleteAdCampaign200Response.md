@@ -1,4 +1,4 @@
-# Late::DeleteAdCampaign200Response
+# Zernio::DeleteAdCampaign200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DeleteAdCampaign200Response.new(
+instance = Zernio::DeleteAdCampaign200Response.new(
   deleted: null,
   ad_count: null
 )

@@ -1,4 +1,4 @@
-# Late::ThreadsPlatformData
+# Zernio::ThreadsPlatformData
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ThreadsPlatformData.new(
+instance = Zernio::ThreadsPlatformData.new(
   topic_tag: null,
   thread_items: null
 )

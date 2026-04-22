@@ -1,4 +1,4 @@
-# Late::SnapchatPlatformData
+# Zernio::SnapchatPlatformData
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SnapchatPlatformData.new(
+instance = Zernio::SnapchatPlatformData.new(
   content_type: null
 )
 ```

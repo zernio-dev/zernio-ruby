@@ -1,4 +1,4 @@
-# Late::LikeInboxCommentRequest
+# Zernio::LikeInboxCommentRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::LikeInboxCommentRequest.new(
+instance = Zernio::LikeInboxCommentRequest.new(
   account_id: null,
   cid: null
 )

@@ -1,4 +1,4 @@
-# Late::UpdateGoogleBusinessFoodMenusRequest
+# Zernio::UpdateGoogleBusinessFoodMenusRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateGoogleBusinessFoodMenusRequest.new(
+instance = Zernio::UpdateGoogleBusinessFoodMenusRequest.new(
   menus: null,
   update_mask: null
 )

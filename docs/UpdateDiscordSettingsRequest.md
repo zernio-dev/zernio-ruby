@@ -1,4 +1,4 @@
-# Late::UpdateDiscordSettingsRequest
+# Zernio::UpdateDiscordSettingsRequest
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateDiscordSettingsRequest.new(
+instance = Zernio::UpdateDiscordSettingsRequest.new(
   webhook_username: null,
   webhook_avatar_url: null,
   channel_id: null

@@ -1,4 +1,4 @@
-# Late::PostCreateResponse
+# Zernio::PostCreateResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::PostCreateResponse.new(
+instance = Zernio::PostCreateResponse.new(
   message: null,
   post: null
 )

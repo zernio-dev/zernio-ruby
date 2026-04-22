@@ -1,4 +1,4 @@
-# Late::DeleteGoogleBusinessMedia200Response
+# Zernio::DeleteGoogleBusinessMedia200Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DeleteGoogleBusinessMedia200Response.new(
+instance = Zernio::DeleteGoogleBusinessMedia200Response.new(
   success: null,
   deleted: null,
   media_id: null

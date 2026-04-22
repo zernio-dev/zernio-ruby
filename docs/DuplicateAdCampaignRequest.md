@@ -1,4 +1,4 @@
-# Late::DuplicateAdCampaignRequest
+# Zernio::DuplicateAdCampaignRequest
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DuplicateAdCampaignRequest.new(
+instance = Zernio::DuplicateAdCampaignRequest.new(
   platform: null,
   deep_copy: null,
   status_option: null,

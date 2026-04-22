@@ -1,4 +1,4 @@
-# Late::GMBMediaApi
+# Zernio::GMBMediaApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -21,16 +21,16 @@ Creates a media item (photo) for a location from a publicly accessible URL.  Cat
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBMediaApi.new
+api_instance = Zernio::GMBMediaApi.new
 account_id = 'account_id_example' # String | 
-create_google_business_media_request = Late::CreateGoogleBusinessMediaRequest.new({source_url: 'source_url_example'}) # CreateGoogleBusinessMediaRequest | 
+create_google_business_media_request = Zernio::CreateGoogleBusinessMediaRequest.new({source_url: 'source_url_example'}) # CreateGoogleBusinessMediaRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
 }
@@ -39,7 +39,7 @@ begin
   # Upload photo
   result = api_instance.create_google_business_media(account_id, create_google_business_media_request, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBMediaApi->create_google_business_media: #{e}"
 end
 ```
@@ -57,7 +57,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateGoogleBusinessMedia200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBMediaApi->create_google_business_media_with_http_info: #{e}"
 end
 ```
@@ -96,14 +96,14 @@ Deletes a photo or media item from a GBP location.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBMediaApi.new
+api_instance = Zernio::GMBMediaApi.new
 account_id = 'account_id_example' # String | 
 media_id = 'media_id_example' # String | The media item ID to delete
 opts = {
@@ -114,7 +114,7 @@ begin
   # Delete photo
   result = api_instance.delete_google_business_media(account_id, media_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBMediaApi->delete_google_business_media: #{e}"
 end
 ```
@@ -132,7 +132,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteGoogleBusinessMedia200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBMediaApi->delete_google_business_media_with_http_info: #{e}"
 end
 ```
@@ -171,14 +171,14 @@ Lists media items (photos) for a Google Business Profile location. Returns photo
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBMediaApi.new
+api_instance = Zernio::GMBMediaApi.new
 account_id = 'account_id_example' # String | 
 opts = {
   location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
@@ -190,7 +190,7 @@ begin
   # List media
   result = api_instance.list_google_business_media(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBMediaApi->list_google_business_media: #{e}"
 end
 ```
@@ -208,7 +208,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListGoogleBusinessMedia200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBMediaApi->list_google_business_media_with_http_info: #{e}"
 end
 ```

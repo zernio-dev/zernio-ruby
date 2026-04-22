@@ -1,4 +1,4 @@
-# Late::ValidatePostLength200ResponsePlatformsValue
+# Zernio::ValidatePostLength200ResponsePlatformsValue
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidatePostLength200ResponsePlatformsValue.new(
+instance = Zernio::ValidatePostLength200ResponsePlatformsValue.new(
   count: null,
   limit: null,
   valid: null

@@ -1,4 +1,4 @@
-# Late::Pagination
+# Zernio::Pagination
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::Pagination.new(
+instance = Zernio::Pagination.new(
   page: null,
   limit: null,
   total: null,

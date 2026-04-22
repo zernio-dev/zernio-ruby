@@ -1,4 +1,4 @@
-# Late::GetLinkedInPostAnalytics403Response
+# Zernio::GetLinkedInPostAnalytics403Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetLinkedInPostAnalytics403Response.new(
+instance = Zernio::GetLinkedInPostAnalytics403Response.new(
   error: null,
   code: missing_scope,
   required_scope: null,

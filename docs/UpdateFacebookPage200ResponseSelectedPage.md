@@ -1,4 +1,4 @@
-# Late::UpdateFacebookPage200ResponseSelectedPage
+# Zernio::UpdateFacebookPage200ResponseSelectedPage
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateFacebookPage200ResponseSelectedPage.new(
+instance = Zernio::UpdateFacebookPage200ResponseSelectedPage.new(
   id: null,
   name: null
 )

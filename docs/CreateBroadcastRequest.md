@@ -1,4 +1,4 @@
-# Late::CreateBroadcastRequest
+# Zernio::CreateBroadcastRequest
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateBroadcastRequest.new(
+instance = Zernio::CreateBroadcastRequest.new(
   profile_id: null,
   account_id: null,
   platform: null,

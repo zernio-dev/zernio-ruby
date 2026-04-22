@@ -1,4 +1,4 @@
-# Late::CreateSequenceRequestStepsInner
+# Zernio::CreateSequenceRequestStepsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateSequenceRequestStepsInner.new(
+instance = Zernio::CreateSequenceRequestStepsInner.new(
   order: null,
   delay_minutes: null,
   message: null,

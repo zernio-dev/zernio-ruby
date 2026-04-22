@@ -1,4 +1,4 @@
-# Late::GetMessengerMenu200Response
+# Zernio::GetMessengerMenu200Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetMessengerMenu200Response.new(
+instance = Zernio::GetMessengerMenu200Response.new(
   data: null
 )
 ```

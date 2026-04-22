@@ -1,4 +1,4 @@
-# Late::CreateInviteToken201Response
+# Zernio::CreateInviteToken201Response
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateInviteToken201Response.new(
+instance = Zernio::CreateInviteToken201Response.new(
   token: null,
   scope: null,
   invited_profile_ids: null,

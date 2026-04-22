@@ -1,4 +1,4 @@
-# Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerPrice
+# Zernio::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerPrice
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerPrice.new(
+instance = Zernio::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerPrice.new(
   currency_code: null,
   units: null,
   nanos: null

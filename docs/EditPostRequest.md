@@ -1,4 +1,4 @@
-# Late::EditPostRequest
+# Zernio::EditPostRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::EditPostRequest.new(
+instance = Zernio::EditPostRequest.new(
   platform: null,
   content: null
 )

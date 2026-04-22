@@ -1,4 +1,4 @@
-# Late::GMBReviewsApi
+# Zernio::GMBReviewsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -20,22 +20,22 @@ Fetches reviews across multiple locations in a single request. More efficient th
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBReviewsApi.new
+api_instance = Zernio::GMBReviewsApi.new
 account_id = 'account_id_example' # String | 
-batch_get_google_business_reviews_request = Late::BatchGetGoogleBusinessReviewsRequest.new({location_names: ['location_names_example']}) # BatchGetGoogleBusinessReviewsRequest | 
+batch_get_google_business_reviews_request = Zernio::BatchGetGoogleBusinessReviewsRequest.new({location_names: ['location_names_example']}) # BatchGetGoogleBusinessReviewsRequest | 
 
 begin
   # Batch get reviews
   result = api_instance.batch_get_google_business_reviews(account_id, batch_get_google_business_reviews_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBReviewsApi->batch_get_google_business_reviews: #{e}"
 end
 ```
@@ -53,7 +53,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BatchGetGoogleBusinessReviews200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBReviewsApi->batch_get_google_business_reviews_with_http_info: #{e}"
 end
 ```
@@ -91,14 +91,14 @@ Returns reviews for a GBP account including ratings, comments, and owner replies
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBReviewsApi.new
+api_instance = Zernio::GMBReviewsApi.new
 account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
 opts = {
   location_id: 'location_id_example', # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
@@ -110,7 +110,7 @@ begin
   # Get reviews
   result = api_instance.get_google_business_reviews(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBReviewsApi->get_google_business_reviews: #{e}"
 end
 ```
@@ -128,7 +128,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGoogleBusinessReviews200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBReviewsApi->get_google_business_reviews_with_http_info: #{e}"
 end
 ```

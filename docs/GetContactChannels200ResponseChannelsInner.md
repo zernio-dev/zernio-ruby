@@ -1,4 +1,4 @@
-# Late::GetContactChannels200ResponseChannelsInner
+# Zernio::GetContactChannels200ResponseChannelsInner
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetContactChannels200ResponseChannelsInner.new(
+instance = Zernio::GetContactChannels200ResponseChannelsInner.new(
   id: null,
   account_id: null,
   platform: null,

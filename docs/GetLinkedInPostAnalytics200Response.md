@@ -1,4 +1,4 @@
-# Late::GetLinkedInPostAnalytics200Response
+# Zernio::GetLinkedInPostAnalytics200Response
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetLinkedInPostAnalytics200Response.new(
+instance = Zernio::GetLinkedInPostAnalytics200Response.new(
   account_id: null,
   platform: linkedin,
   account_type: null,

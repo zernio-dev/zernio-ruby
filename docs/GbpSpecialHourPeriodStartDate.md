@@ -1,4 +1,4 @@
-# Late::GbpSpecialHourPeriodStartDate
+# Zernio::GbpSpecialHourPeriodStartDate
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GbpSpecialHourPeriodStartDate.new(
+instance = Zernio::GbpSpecialHourPeriodStartDate.new(
   year: null,
   month: null,
   day: null

@@ -1,4 +1,4 @@
-# Late::ConnectBlueskyCredentialsRequest
+# Zernio::ConnectBlueskyCredentialsRequest
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ConnectBlueskyCredentialsRequest.new(
+instance = Zernio::ConnectBlueskyCredentialsRequest.new(
   identifier: null,
   app_password: null,
   state: 6507a1b2c3d4e5f6a7b8c9d0-6507a1b2c3d4e5f6a7b8c9d1,

@@ -1,4 +1,4 @@
-# Late::WhatsAppBodyComponentExample
+# Zernio::WhatsAppBodyComponentExample
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::WhatsAppBodyComponentExample.new(
+instance = Zernio::WhatsAppBodyComponentExample.new(
   body_text: null
 )
 ```

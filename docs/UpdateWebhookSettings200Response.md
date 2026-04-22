@@ -1,4 +1,4 @@
-# Late::UpdateWebhookSettings200Response
+# Zernio::UpdateWebhookSettings200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateWebhookSettings200Response.new(
+instance = Zernio::UpdateWebhookSettings200Response.new(
   success: null,
   webhook: null
 )

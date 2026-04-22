@@ -1,4 +1,4 @@
-# Late::APIKeysApi
+# Zernio::APIKeysApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -21,21 +21,21 @@ Creates a new API key with an optional expiry. The full key value is only return
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::APIKeysApi.new
-create_api_key_request = Late::CreateApiKeyRequest.new({name: 'name_example'}) # CreateApiKeyRequest | 
+api_instance = Zernio::APIKeysApi.new
+create_api_key_request = Zernio::CreateApiKeyRequest.new({name: 'name_example'}) # CreateApiKeyRequest | 
 
 begin
   # Create key
   result = api_instance.create_api_key(create_api_key_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling APIKeysApi->create_api_key: #{e}"
 end
 ```
@@ -53,7 +53,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateApiKey201Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling APIKeysApi->create_api_key_with_http_info: #{e}"
 end
 ```
@@ -90,21 +90,21 @@ Permanently revokes and deletes an API key.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::APIKeysApi.new
+api_instance = Zernio::APIKeysApi.new
 key_id = 'key_id_example' # String | 
 
 begin
   # Delete key
   result = api_instance.delete_api_key(key_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling APIKeysApi->delete_api_key: #{e}"
 end
 ```
@@ -122,7 +122,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAccountGroup200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling APIKeysApi->delete_api_key_with_http_info: #{e}"
 end
 ```
@@ -159,20 +159,20 @@ Returns all API keys for the authenticated user. Keys are returned with a previe
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::APIKeysApi.new
+api_instance = Zernio::APIKeysApi.new
 
 begin
   # List keys
   result = api_instance.list_api_keys
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling APIKeysApi->list_api_keys: #{e}"
 end
 ```
@@ -190,7 +190,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListApiKeys200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling APIKeysApi->list_api_keys_with_http_info: #{e}"
 end
 ```

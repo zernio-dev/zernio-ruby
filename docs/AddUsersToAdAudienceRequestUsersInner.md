@@ -1,4 +1,4 @@
-# Late::AddUsersToAdAudienceRequestUsersInner
+# Zernio::AddUsersToAdAudienceRequestUsersInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AddUsersToAdAudienceRequestUsersInner.new(
+instance = Zernio::AddUsersToAdAudienceRequestUsersInner.new(
   email: null,
   phone: null
 )

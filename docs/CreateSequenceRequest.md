@@ -1,4 +1,4 @@
-# Late::CreateSequenceRequest
+# Zernio::CreateSequenceRequest
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateSequenceRequest.new(
+instance = Zernio::CreateSequenceRequest.new(
   profile_id: null,
   account_id: null,
   platform: null,

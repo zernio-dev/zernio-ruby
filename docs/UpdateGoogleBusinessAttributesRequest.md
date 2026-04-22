@@ -1,4 +1,4 @@
-# Late::UpdateGoogleBusinessAttributesRequest
+# Zernio::UpdateGoogleBusinessAttributesRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateGoogleBusinessAttributesRequest.new(
+instance = Zernio::UpdateGoogleBusinessAttributesRequest.new(
   attributes: null,
   attribute_mask: null
 )

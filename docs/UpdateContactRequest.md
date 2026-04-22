@@ -1,4 +1,4 @@
-# Late::UpdateContactRequest
+# Zernio::UpdateContactRequest
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateContactRequest.new(
+instance = Zernio::UpdateContactRequest.new(
   name: null,
   email: null,
   company: null,

@@ -1,4 +1,4 @@
-# Late::MediaUploadResponse
+# Zernio::MediaUploadResponse
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::MediaUploadResponse.new(
+instance = Zernio::MediaUploadResponse.new(
   files: null
 )
 ```

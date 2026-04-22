@@ -1,4 +1,4 @@
-# Late::TwitterEngagementApi
+# Zernio::TwitterEngagementApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -24,21 +24,21 @@ Bookmark a tweet by ID. Requires the bookmark.write OAuth scope. Rate limit: 50 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::TwitterEngagementApi.new
-bookmark_post_request = Late::BookmarkPostRequest.new({account_id: 'account_id_example', tweet_id: 'tweet_id_example'}) # BookmarkPostRequest | 
+api_instance = Zernio::TwitterEngagementApi.new
+bookmark_post_request = Zernio::BookmarkPostRequest.new({account_id: 'account_id_example', tweet_id: 'tweet_id_example'}) # BookmarkPostRequest | 
 
 begin
   # Bookmark a tweet
   result = api_instance.bookmark_post(bookmark_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->bookmark_post: #{e}"
 end
 ```
@@ -56,7 +56,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BookmarkPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->bookmark_post_with_http_info: #{e}"
 end
 ```
@@ -93,21 +93,21 @@ Follow a user on X/Twitter. Requires the follows.write OAuth scope. For protecte
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::TwitterEngagementApi.new
-follow_user_request = Late::FollowUserRequest.new({account_id: 'account_id_example', target_user_id: 'target_user_id_example'}) # FollowUserRequest | 
+api_instance = Zernio::TwitterEngagementApi.new
+follow_user_request = Zernio::FollowUserRequest.new({account_id: 'account_id_example', target_user_id: 'target_user_id_example'}) # FollowUserRequest | 
 
 begin
   # Follow a user
   result = api_instance.follow_user(follow_user_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->follow_user: #{e}"
 end
 ```
@@ -125,7 +125,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FollowUser200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->follow_user_with_http_info: #{e}"
 end
 ```
@@ -162,14 +162,14 @@ Remove a bookmark from a tweet.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::TwitterEngagementApi.new
+api_instance = Zernio::TwitterEngagementApi.new
 account_id = 'account_id_example' # String | 
 tweet_id = 'tweet_id_example' # String | The ID of the tweet to unbookmark
 
@@ -177,7 +177,7 @@ begin
   # Remove bookmark
   result = api_instance.remove_bookmark(account_id, tweet_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->remove_bookmark: #{e}"
 end
 ```
@@ -195,7 +195,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveBookmark200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->remove_bookmark_with_http_info: #{e}"
 end
 ```
@@ -233,21 +233,21 @@ Retweet (repost) a tweet by ID. Rate limit: 50 requests per 15-min window. Share
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::TwitterEngagementApi.new
-retweet_post_request = Late::RetweetPostRequest.new({account_id: 'account_id_example', tweet_id: 'tweet_id_example'}) # RetweetPostRequest | 
+api_instance = Zernio::TwitterEngagementApi.new
+retweet_post_request = Zernio::RetweetPostRequest.new({account_id: 'account_id_example', tweet_id: 'tweet_id_example'}) # RetweetPostRequest | 
 
 begin
   # Retweet a post
   result = api_instance.retweet_post(retweet_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->retweet_post: #{e}"
 end
 ```
@@ -265,7 +265,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RetweetPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->retweet_post_with_http_info: #{e}"
 end
 ```
@@ -302,14 +302,14 @@ Undo a retweet (un-repost a tweet).
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::TwitterEngagementApi.new
+api_instance = Zernio::TwitterEngagementApi.new
 account_id = 'account_id_example' # String | 
 tweet_id = 'tweet_id_example' # String | The ID of the original tweet to un-retweet
 
@@ -317,7 +317,7 @@ begin
   # Undo retweet
   result = api_instance.undo_retweet(account_id, tweet_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->undo_retweet: #{e}"
 end
 ```
@@ -335,7 +335,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UndoRetweet200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->undo_retweet_with_http_info: #{e}"
 end
 ```
@@ -373,14 +373,14 @@ Unfollow a user on X/Twitter.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::TwitterEngagementApi.new
+api_instance = Zernio::TwitterEngagementApi.new
 account_id = 'account_id_example' # String | 
 target_user_id = 'target_user_id_example' # String | The Twitter ID of the user to unfollow
 
@@ -388,7 +388,7 @@ begin
   # Unfollow a user
   result = api_instance.unfollow_user(account_id, target_user_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->unfollow_user: #{e}"
 end
 ```
@@ -406,7 +406,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnfollowUser200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling TwitterEngagementApi->unfollow_user_with_http_info: #{e}"
 end
 ```

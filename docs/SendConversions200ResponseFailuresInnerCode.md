@@ -1,4 +1,4 @@
-# Late::SendConversions200ResponseFailuresInnerCode
+# Zernio::SendConversions200ResponseFailuresInnerCode
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::SendConversions200ResponseFailuresInnerCode.openapi_one_of
+Zernio::SendConversions200ResponseFailuresInnerCode.openapi_one_of
 # =>
 # [
 #   :'Integer',
@@ -26,12 +26,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::SendConversions200ResponseFailuresInnerCode.build(data)
+Zernio::SendConversions200ResponseFailuresInnerCode.build(data)
 # => #<Integer:0x00007fdd4aab02a0>
 
-Late::SendConversions200ResponseFailuresInnerCode.build(data_that_doesnt_match)
+Zernio::SendConversions200ResponseFailuresInnerCode.build(data_that_doesnt_match)
 # => nil
 ```
 

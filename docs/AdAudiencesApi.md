@@ -1,4 +1,4 @@
-# Late::AdAudiencesApi
+# Zernio::AdAudiencesApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -23,22 +23,22 @@ Upload user data (emails and/or phone numbers) to a customer_list audience. Data
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdAudiencesApi.new
+api_instance = Zernio::AdAudiencesApi.new
 audience_id = 'audience_id_example' # String | 
-add_users_to_ad_audience_request = Late::AddUsersToAdAudienceRequest.new({users: [Late::AddUsersToAdAudienceRequestUsersInner.new]}) # AddUsersToAdAudienceRequest | 
+add_users_to_ad_audience_request = Zernio::AddUsersToAdAudienceRequest.new({users: [Zernio::AddUsersToAdAudienceRequestUsersInner.new]}) # AddUsersToAdAudienceRequest | 
 
 begin
   # Add users to audience
   result = api_instance.add_users_to_ad_audience(audience_id, add_users_to_ad_audience_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->add_users_to_ad_audience: #{e}"
 end
 ```
@@ -56,7 +56,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AddUsersToAdAudience200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->add_users_to_ad_audience_with_http_info: #{e}"
 end
 ```
@@ -94,21 +94,21 @@ Create a customer list, website retargeting, or lookalike audience on Meta (Face
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdAudiencesApi.new
-create_ad_audience_request = Late::CreateAdAudienceRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', type: 'customer_list'}) # CreateAdAudienceRequest | 
+api_instance = Zernio::AdAudiencesApi.new
+create_ad_audience_request = Zernio::CreateAdAudienceRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', type: 'customer_list'}) # CreateAdAudienceRequest | 
 
 begin
   # Create custom audience
   result = api_instance.create_ad_audience(create_ad_audience_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->create_ad_audience: #{e}"
 end
 ```
@@ -126,7 +126,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateAdAudience201Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->create_ad_audience_with_http_info: #{e}"
 end
 ```
@@ -163,21 +163,21 @@ Deletes the audience from both Meta and the local database.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdAudiencesApi.new
+api_instance = Zernio::AdAudiencesApi.new
 audience_id = 'audience_id_example' # String | 
 
 begin
   # Delete custom audience
   result = api_instance.delete_ad_audience(audience_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->delete_ad_audience: #{e}"
 end
 ```
@@ -195,7 +195,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAccountGroup200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->delete_ad_audience_with_http_info: #{e}"
 end
 ```
@@ -232,21 +232,21 @@ Returns the local audience record and fresh data from Meta (if available).
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdAudiencesApi.new
+api_instance = Zernio::AdAudiencesApi.new
 audience_id = 'audience_id_example' # String | 
 
 begin
   # Get audience details
   result = api_instance.get_ad_audience(audience_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->get_ad_audience: #{e}"
 end
 ```
@@ -264,7 +264,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetAdAudience200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->get_ad_audience_with_http_info: #{e}"
 end
 ```
@@ -301,14 +301,14 @@ Returns custom audiences for the given ad account. Supports Meta, Google, TikTok
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdAudiencesApi.new
+api_instance = Zernio::AdAudiencesApi.new
 account_id = 'account_id_example' # String | Social account ID
 ad_account_id = 'ad_account_id_example' # String | Platform ad account ID
 opts = {
@@ -319,7 +319,7 @@ begin
   # List custom audiences
   result = api_instance.list_ad_audiences(account_id, ad_account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->list_ad_audiences: #{e}"
 end
 ```
@@ -337,7 +337,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListAdAudiences200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdAudiencesApi->list_ad_audiences_with_http_info: #{e}"
 end
 ```

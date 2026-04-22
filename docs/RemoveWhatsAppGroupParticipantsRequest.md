@@ -1,4 +1,4 @@
-# Late::RemoveWhatsAppGroupParticipantsRequest
+# Zernio::RemoveWhatsAppGroupParticipantsRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::RemoveWhatsAppGroupParticipantsRequest.new(
+instance = Zernio::RemoveWhatsAppGroupParticipantsRequest.new(
   phone_numbers: null
 )
 ```

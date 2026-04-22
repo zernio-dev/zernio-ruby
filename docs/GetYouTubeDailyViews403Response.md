@@ -1,4 +1,4 @@
-# Late::GetYouTubeDailyViews403Response
+# Zernio::GetYouTubeDailyViews403Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetYouTubeDailyViews403Response.new(
+instance = Zernio::GetYouTubeDailyViews403Response.new(
   error: Access denied to this account
 )
 ```

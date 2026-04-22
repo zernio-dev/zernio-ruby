@@ -1,4 +1,4 @@
-# Late::SelectPinterestBoard200ResponseAccount
+# Zernio::SelectPinterestBoard200ResponseAccount
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SelectPinterestBoard200ResponseAccount.new(
+instance = Zernio::SelectPinterestBoard200ResponseAccount.new(
   account_id: null,
   platform: null,
   username: null,

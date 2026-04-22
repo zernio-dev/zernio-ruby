@@ -1,4 +1,4 @@
-# Late::PlatformTarget
+# Zernio::PlatformTarget
 
 ## Properties
 
@@ -21,9 +21,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::PlatformTarget.new(
+instance = Zernio::PlatformTarget.new(
   platform: twitter,
   account_id: null,
   custom_content: null,

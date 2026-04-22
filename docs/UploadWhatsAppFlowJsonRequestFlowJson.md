@@ -1,4 +1,4 @@
-# Late::UploadWhatsAppFlowJsonRequestFlowJson
+# Zernio::UploadWhatsAppFlowJsonRequestFlowJson
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::UploadWhatsAppFlowJsonRequestFlowJson.openapi_one_of
+Zernio::UploadWhatsAppFlowJsonRequestFlowJson.openapi_one_of
 # =>
 # [
 #   :'Object',
@@ -26,12 +26,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::UploadWhatsAppFlowJsonRequestFlowJson.build(data)
+Zernio::UploadWhatsAppFlowJsonRequestFlowJson.build(data)
 # => #<Object:0x00007fdd4aab02a0>
 
-Late::UploadWhatsAppFlowJsonRequestFlowJson.build(data_that_doesnt_match)
+Zernio::UploadWhatsAppFlowJsonRequestFlowJson.build(data_that_doesnt_match)
 # => nil
 ```
 

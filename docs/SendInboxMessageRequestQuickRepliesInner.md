@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequestQuickRepliesInner
+# Zernio::SendInboxMessageRequestQuickRepliesInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequestQuickRepliesInner.new(
+instance = Zernio::SendInboxMessageRequestQuickRepliesInner.new(
   title: null,
   payload: null,
   image_url: null

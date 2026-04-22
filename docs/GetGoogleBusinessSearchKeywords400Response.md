@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessSearchKeywords400Response
+# Zernio::GetGoogleBusinessSearchKeywords400Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessSearchKeywords400Response.new(
+instance = Zernio::GetGoogleBusinessSearchKeywords400Response.new(
   error: Invalid startMonth format. Use YYYY-MM.
 )
 ```

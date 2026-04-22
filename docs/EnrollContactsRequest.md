@@ -1,4 +1,4 @@
-# Late::EnrollContactsRequest
+# Zernio::EnrollContactsRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::EnrollContactsRequest.new(
+instance = Zernio::EnrollContactsRequest.new(
   contact_ids: null,
   channel_ids: null
 )

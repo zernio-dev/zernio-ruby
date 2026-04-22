@@ -1,4 +1,4 @@
-# Late::ScheduleBroadcastRequest
+# Zernio::ScheduleBroadcastRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ScheduleBroadcastRequest.new(
+instance = Zernio::ScheduleBroadcastRequest.new(
   scheduled_at: null
 )
 ```

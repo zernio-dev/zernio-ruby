@@ -1,4 +1,4 @@
-# Late::ReplyToInboxReview200Response
+# Zernio::ReplyToInboxReview200Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ReplyToInboxReview200Response.new(
+instance = Zernio::ReplyToInboxReview200Response.new(
   status: null,
   reply: null,
   platform: null

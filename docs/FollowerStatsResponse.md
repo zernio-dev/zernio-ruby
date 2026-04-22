@@ -1,4 +1,4 @@
-# Late::FollowerStatsResponse
+# Zernio::FollowerStatsResponse
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::FollowerStatsResponse.new(
+instance = Zernio::FollowerStatsResponse.new(
   accounts: null,
   date_range: null,
   aggregation: null

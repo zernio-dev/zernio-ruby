@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequestReplyMarkupKeyboardInnerInner
+# Zernio::SendInboxMessageRequestReplyMarkupKeyboardInnerInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequestReplyMarkupKeyboardInnerInner.new(
+instance = Zernio::SendInboxMessageRequestReplyMarkupKeyboardInnerInner.new(
   text: null,
   callback_data: null,
   url: null

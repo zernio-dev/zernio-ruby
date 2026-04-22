@@ -1,4 +1,4 @@
-# Late::UpdatePostRequest
+# Zernio::UpdatePostRequest
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdatePostRequest.new(
+instance = Zernio::UpdatePostRequest.new(
   content: null,
   scheduled_for: null,
   tiktok_settings: null,

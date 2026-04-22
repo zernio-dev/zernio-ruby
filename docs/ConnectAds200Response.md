@@ -1,4 +1,4 @@
-# Late::ConnectAds200Response
+# Zernio::ConnectAds200Response
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::ConnectAds200Response.openapi_one_of
+Zernio::ConnectAds200Response.openapi_one_of
 # =>
 # [
 #   :'ConnectAds200ResponseOneOf',
@@ -26,12 +26,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::ConnectAds200Response.build(data)
+Zernio::ConnectAds200Response.build(data)
 # => #<ConnectAds200ResponseOneOf:0x00007fdd4aab02a0>
 
-Late::ConnectAds200Response.build(data_that_doesnt_match)
+Zernio::ConnectAds200Response.build(data_that_doesnt_match)
 # => nil
 ```
 

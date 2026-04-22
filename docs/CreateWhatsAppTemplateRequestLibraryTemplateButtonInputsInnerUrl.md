@@ -1,4 +1,4 @@
-# Late::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl
+# Zernio::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.new(
+instance = Zernio::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.new(
   base_url: null
 )
 ```

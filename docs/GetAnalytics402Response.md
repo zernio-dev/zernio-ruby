@@ -1,4 +1,4 @@
-# Late::GetAnalytics402Response
+# Zernio::GetAnalytics402Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetAnalytics402Response.new(
+instance = Zernio::GetAnalytics402Response.new(
   error: Analytics add-on required,
   code: analytics_addon_required
 )

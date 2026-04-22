@@ -1,4 +1,4 @@
-# Late::GetContentDecay200ResponseBucketsInner
+# Zernio::GetContentDecay200ResponseBucketsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetContentDecay200ResponseBucketsInner.new(
+instance = Zernio::GetContentDecay200ResponseBucketsInner.new(
   bucket_order: null,
   bucket_label: null,
   avg_pct_of_final: null,

@@ -1,4 +1,4 @@
-# Late::RetweetPostRequest
+# Zernio::RetweetPostRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::RetweetPostRequest.new(
+instance = Zernio::RetweetPostRequest.new(
   account_id: null,
   tweet_id: null
 )

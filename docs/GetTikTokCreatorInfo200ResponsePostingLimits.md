@@ -1,4 +1,4 @@
-# Late::GetTikTokCreatorInfo200ResponsePostingLimits
+# Zernio::GetTikTokCreatorInfo200ResponsePostingLimits
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetTikTokCreatorInfo200ResponsePostingLimits.new(
+instance = Zernio::GetTikTokCreatorInfo200ResponsePostingLimits.new(
   max_video_duration_sec: null,
   interaction_settings: null
 )

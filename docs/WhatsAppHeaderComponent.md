@@ -1,4 +1,4 @@
-# Late::WhatsAppHeaderComponent
+# Zernio::WhatsAppHeaderComponent
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::WhatsAppHeaderComponent.new(
+instance = Zernio::WhatsAppHeaderComponent.new(
   type: null,
   format: null,
   text: null,

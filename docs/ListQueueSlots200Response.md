@@ -1,4 +1,4 @@
-# Late::ListQueueSlots200Response
+# Zernio::ListQueueSlots200Response
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::ListQueueSlots200Response.openapi_one_of
+Zernio::ListQueueSlots200Response.openapi_one_of
 # =>
 # [
 #   :'ListQueueSlots200ResponseOneOf',
@@ -26,12 +26,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::ListQueueSlots200Response.build(data)
+Zernio::ListQueueSlots200Response.build(data)
 # => #<ListQueueSlots200ResponseOneOf:0x00007fdd4aab02a0>
 
-Late::ListQueueSlots200Response.build(data_that_doesnt_match)
+Zernio::ListQueueSlots200Response.build(data_that_doesnt_match)
 # => nil
 ```
 

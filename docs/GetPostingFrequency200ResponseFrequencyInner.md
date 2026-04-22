@@ -1,4 +1,4 @@
-# Late::GetPostingFrequency200ResponseFrequencyInner
+# Zernio::GetPostingFrequency200ResponseFrequencyInner
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPostingFrequency200ResponseFrequencyInner.new(
+instance = Zernio::GetPostingFrequency200ResponseFrequencyInner.new(
   platform: instagram,
   posts_per_week: null,
   avg_engagement_rate: null,

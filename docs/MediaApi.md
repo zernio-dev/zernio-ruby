@@ -1,4 +1,4 @@
-# Late::MediaApi
+# Zernio::MediaApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -19,21 +19,21 @@ Get a presigned URL to upload files directly to cloud storage (up to 5GB). Retur
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::MediaApi.new
-get_media_presigned_url_request = Late::GetMediaPresignedUrlRequest.new({filename: 'my-video.mp4', content_type: 'image/jpeg'}) # GetMediaPresignedUrlRequest | 
+api_instance = Zernio::MediaApi.new
+get_media_presigned_url_request = Zernio::GetMediaPresignedUrlRequest.new({filename: 'my-video.mp4', content_type: 'image/jpeg'}) # GetMediaPresignedUrlRequest | 
 
 begin
   # Get upload URL
   result = api_instance.get_media_presigned_url(get_media_presigned_url_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MediaApi->get_media_presigned_url: #{e}"
 end
 ```
@@ -51,7 +51,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetMediaPresignedUrl200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling MediaApi->get_media_presigned_url_with_http_info: #{e}"
 end
 ```

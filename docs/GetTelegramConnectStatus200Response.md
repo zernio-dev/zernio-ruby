@@ -1,4 +1,4 @@
-# Late::GetTelegramConnectStatus200Response
+# Zernio::GetTelegramConnectStatus200Response
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetTelegramConnectStatus200Response.new(
+instance = Zernio::GetTelegramConnectStatus200Response.new(
   code: ZRN-ABC123,
   expires_at: null,
   expires_in: 900,

@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequestInteractiveActionOneOf2Parameters
+# Zernio::SendInboxMessageRequestInteractiveActionOneOf2Parameters
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequestInteractiveActionOneOf2Parameters.new(
+instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf2Parameters.new(
   flow_message_version: null,
   flow_token: null,
   flow_id: null,

@@ -1,4 +1,4 @@
-# Late::RedditSearchApi
+# Zernio::RedditSearchApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -20,14 +20,14 @@ Fetch posts from a subreddit feed. Supports sorting, time filtering, and cursor-
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::RedditSearchApi.new
+api_instance = Zernio::RedditSearchApi.new
 account_id = 'account_id_example' # String | 
 opts = {
   subreddit: 'subreddit_example', # String | 
@@ -41,7 +41,7 @@ begin
   # Get subreddit feed
   result = api_instance.get_reddit_feed(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling RedditSearchApi->get_reddit_feed: #{e}"
 end
 ```
@@ -59,7 +59,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchReddit200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling RedditSearchApi->get_reddit_feed_with_http_info: #{e}"
 end
 ```
@@ -101,14 +101,14 @@ Search Reddit posts using a connected account. Optionally scope to a specific su
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::RedditSearchApi.new
+api_instance = Zernio::RedditSearchApi.new
 account_id = 'account_id_example' # String | 
 q = 'q_example' # String | 
 opts = {
@@ -123,7 +123,7 @@ begin
   # Search posts
   result = api_instance.search_reddit(account_id, q, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling RedditSearchApi->search_reddit: #{e}"
 end
 ```
@@ -141,7 +141,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchReddit200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling RedditSearchApi->search_reddit_with_http_info: #{e}"
 end
 ```

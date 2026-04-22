@@ -1,4 +1,4 @@
-# Late::AdMetrics
+# Zernio::AdMetrics
 
 ## Properties
 
@@ -23,9 +23,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AdMetrics.new(
+instance = Zernio::AdMetrics.new(
   spend: null,
   impressions: null,
   reach: null,

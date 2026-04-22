@@ -1,4 +1,4 @@
-# Late::InstagramDemographicsResponseDemographicsValueInner
+# Zernio::InstagramDemographicsResponseDemographicsValueInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InstagramDemographicsResponseDemographicsValueInner.new(
+instance = Zernio::InstagramDemographicsResponseDemographicsValueInner.new(
   dimension: null,
   value: null
 )

@@ -1,4 +1,4 @@
-# Late::GetInstagramAccountInsights404Response
+# Zernio::GetInstagramAccountInsights404Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetInstagramAccountInsights404Response.new(
+instance = Zernio::GetInstagramAccountInsights404Response.new(
   error: Account not found
 )
 ```

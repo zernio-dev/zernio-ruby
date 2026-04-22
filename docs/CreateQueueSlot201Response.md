@@ -1,4 +1,4 @@
-# Late::CreateQueueSlot201Response
+# Zernio::CreateQueueSlot201Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateQueueSlot201Response.new(
+instance = Zernio::CreateQueueSlot201Response.new(
   success: null,
   schedule: null,
   next_slots: null

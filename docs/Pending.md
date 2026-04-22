@@ -1,4 +1,4 @@
-# Late::Pending
+# Zernio::Pending
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::Pending.new(
+instance = Zernio::Pending.new(
   status: null,
   expires_at: null,
   expires_in: null

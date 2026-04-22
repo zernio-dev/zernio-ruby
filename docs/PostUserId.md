@@ -1,4 +1,4 @@
-# Late::PostUserId
+# Zernio::PostUserId
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::PostUserId.openapi_one_of
+Zernio::PostUserId.openapi_one_of
 # =>
 # [
 #   :'String',
@@ -26,12 +26,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::PostUserId.build(data)
+Zernio::PostUserId.build(data)
 # => #<String:0x00007fdd4aab02a0>
 
-Late::PostUserId.build(data_that_doesnt_match)
+Zernio::PostUserId.build(data_that_doesnt_match)
 # => nil
 ```
 

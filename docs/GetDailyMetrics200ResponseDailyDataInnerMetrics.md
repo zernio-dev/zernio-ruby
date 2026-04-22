@@ -1,4 +1,4 @@
-# Late::GetDailyMetrics200ResponseDailyDataInnerMetrics
+# Zernio::GetDailyMetrics200ResponseDailyDataInnerMetrics
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetDailyMetrics200ResponseDailyDataInnerMetrics.new(
+instance = Zernio::GetDailyMetrics200ResponseDailyDataInnerMetrics.new(
   impressions: null,
   reach: null,
   likes: null,

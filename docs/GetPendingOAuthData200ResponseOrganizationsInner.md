@@ -1,4 +1,4 @@
-# Late::GetPendingOAuthData200ResponseOrganizationsInner
+# Zernio::GetPendingOAuthData200ResponseOrganizationsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPendingOAuthData200ResponseOrganizationsInner.new(
+instance = Zernio::GetPendingOAuthData200ResponseOrganizationsInner.new(
   id: null,
   urn: null,
   name: null,

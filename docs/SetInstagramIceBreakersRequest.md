@@ -1,4 +1,4 @@
-# Late::SetInstagramIceBreakersRequest
+# Zernio::SetInstagramIceBreakersRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SetInstagramIceBreakersRequest.new(
+instance = Zernio::SetInstagramIceBreakersRequest.new(
   ice_breakers: null
 )
 ```

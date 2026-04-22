@@ -1,4 +1,4 @@
-# Late::TwitterPlatformDataThreadItemsInner
+# Zernio::TwitterPlatformDataThreadItemsInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::TwitterPlatformDataThreadItemsInner.new(
+instance = Zernio::TwitterPlatformDataThreadItemsInner.new(
   content: null,
   media_items: null
 )

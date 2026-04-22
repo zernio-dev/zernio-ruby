@@ -1,4 +1,4 @@
-# Late::ListSequenceEnrollments200ResponseEnrollmentsInner
+# Zernio::ListSequenceEnrollments200ResponseEnrollmentsInner
 
 ## Properties
 
@@ -20,9 +20,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListSequenceEnrollments200ResponseEnrollmentsInner.new(
+instance = Zernio::ListSequenceEnrollments200ResponseEnrollmentsInner.new(
   id: null,
   contact_id: null,
   channel_id: null,

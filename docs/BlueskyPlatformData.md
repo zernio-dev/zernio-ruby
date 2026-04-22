@@ -1,4 +1,4 @@
-# Late::BlueskyPlatformData
+# Zernio::BlueskyPlatformData
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BlueskyPlatformData.new(
+instance = Zernio::BlueskyPlatformData.new(
   thread_items: null
 )
 ```

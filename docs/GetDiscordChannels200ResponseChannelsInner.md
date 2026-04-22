@@ -1,4 +1,4 @@
-# Late::GetDiscordChannels200ResponseChannelsInner
+# Zernio::GetDiscordChannels200ResponseChannelsInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetDiscordChannels200ResponseChannelsInner.new(
+instance = Zernio::GetDiscordChannels200ResponseChannelsInner.new(
   id: null,
   name: null,
   type: null

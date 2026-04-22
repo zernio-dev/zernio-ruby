@@ -1,4 +1,4 @@
-# Late::ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation
+# Zernio::ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation.new(
+instance = Zernio::ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation.new(
   category: null
 )
 ```

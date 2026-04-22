@@ -1,4 +1,4 @@
-# Late::LinkedInPlatformData
+# Zernio::LinkedInPlatformData
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::LinkedInPlatformData.new(
+instance = Zernio::LinkedInPlatformData.new(
   document_title: null,
   organization_urn: null,
   first_comment: null,

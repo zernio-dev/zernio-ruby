@@ -1,4 +1,4 @@
-# Late::LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner
+# Zernio::LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner.new(
+instance = Zernio::LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner.new(
   date: null,
   count: null
 )

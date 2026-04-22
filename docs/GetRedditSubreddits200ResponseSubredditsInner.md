@@ -1,4 +1,4 @@
-# Late::GetRedditSubreddits200ResponseSubredditsInner
+# Zernio::GetRedditSubreddits200ResponseSubredditsInner
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetRedditSubreddits200ResponseSubredditsInner.new(
+instance = Zernio::GetRedditSubreddits200ResponseSubredditsInner.new(
   id: null,
   name: null,
   title: null,

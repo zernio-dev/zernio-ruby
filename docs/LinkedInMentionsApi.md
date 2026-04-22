@@ -1,4 +1,4 @@
-# Late::LinkedInMentionsApi
+# Zernio::LinkedInMentionsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -19,14 +19,14 @@ Converts a LinkedIn profile or company URL to a URN for @mentions in posts.  How
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::LinkedInMentionsApi.new
+api_instance = Zernio::LinkedInMentionsApi.new
 account_id = 'account_id_example' # String | The LinkedIn account ID
 url = 'miquelpalet' # String | LinkedIn profile URL, company URL, or vanity name.
 opts = {
@@ -37,7 +37,7 @@ begin
   # Resolve LinkedIn mention
   result = api_instance.get_linked_in_mentions(account_id, url, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling LinkedInMentionsApi->get_linked_in_mentions: #{e}"
 end
 ```
@@ -55,7 +55,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetLinkedInMentions200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling LinkedInMentionsApi->get_linked_in_mentions_with_http_info: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# Late::CreateWhatsAppGroupChat201Response
+# Zernio::CreateWhatsAppGroupChat201Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateWhatsAppGroupChat201Response.new(
+instance = Zernio::CreateWhatsAppGroupChat201Response.new(
   success: null,
   group: null
 )

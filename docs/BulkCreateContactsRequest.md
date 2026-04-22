@@ -1,4 +1,4 @@
-# Late::BulkCreateContactsRequest
+# Zernio::BulkCreateContactsRequest
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BulkCreateContactsRequest.new(
+instance = Zernio::BulkCreateContactsRequest.new(
   profile_id: null,
   account_id: null,
   platform: null,

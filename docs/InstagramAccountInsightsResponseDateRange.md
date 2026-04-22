@@ -1,4 +1,4 @@
-# Late::InstagramAccountInsightsResponseDateRange
+# Zernio::InstagramAccountInsightsResponseDateRange
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InstagramAccountInsightsResponseDateRange.new(
+instance = Zernio::InstagramAccountInsightsResponseDateRange.new(
   since: null,
   _until: null
 )

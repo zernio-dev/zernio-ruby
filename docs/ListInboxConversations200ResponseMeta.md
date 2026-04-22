@@ -1,4 +1,4 @@
-# Late::ListInboxConversations200ResponseMeta
+# Zernio::ListInboxConversations200ResponseMeta
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListInboxConversations200ResponseMeta.new(
+instance = Zernio::ListInboxConversations200ResponseMeta.new(
   accounts_queried: null,
   accounts_failed: null,
   failed_accounts: null,

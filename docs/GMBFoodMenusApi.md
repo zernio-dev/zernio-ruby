@@ -1,4 +1,4 @@
-# Late::GMBFoodMenusApi
+# Zernio::GMBFoodMenusApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -20,14 +20,14 @@ Returns food menus for a GBP location including sections, items, pricing, and di
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBFoodMenusApi.new
+api_instance = Zernio::GMBFoodMenusApi.new
 account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
 opts = {
   location_id: 'location_id_example' # String | Override which location to query. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
@@ -37,7 +37,7 @@ begin
   # Get food menus
   result = api_instance.get_google_business_food_menus(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBFoodMenusApi->get_google_business_food_menus: #{e}"
 end
 ```
@@ -55,7 +55,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGoogleBusinessFoodMenus200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBFoodMenusApi->get_google_business_food_menus_with_http_info: #{e}"
 end
 ```
@@ -93,16 +93,16 @@ Updates food menus for a GBP location. Send the full menus array. Use updateMask
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::GMBFoodMenusApi.new
+api_instance = Zernio::GMBFoodMenusApi.new
 account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
-update_google_business_food_menus_request = Late::UpdateGoogleBusinessFoodMenusRequest.new({menus: [Late::FoodMenu.new({labels: [Late::FoodMenuLabel.new({display_name: 'display_name_example'})]})]}) # UpdateGoogleBusinessFoodMenusRequest | 
+update_google_business_food_menus_request = Zernio::UpdateGoogleBusinessFoodMenusRequest.new({menus: [Zernio::FoodMenu.new({labels: [Zernio::FoodMenuLabel.new({display_name: 'display_name_example'})]})]}) # UpdateGoogleBusinessFoodMenusRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
 }
@@ -111,7 +111,7 @@ begin
   # Update food menus
   result = api_instance.update_google_business_food_menus(account_id, update_google_business_food_menus_request, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBFoodMenusApi->update_google_business_food_menus: #{e}"
 end
 ```
@@ -129,7 +129,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateGoogleBusinessFoodMenus200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling GMBFoodMenusApi->update_google_business_food_menus_with_http_info: #{e}"
 end
 ```

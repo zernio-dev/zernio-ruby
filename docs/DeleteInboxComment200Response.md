@@ -1,4 +1,4 @@
-# Late::DeleteInboxComment200Response
+# Zernio::DeleteInboxComment200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DeleteInboxComment200Response.new(
+instance = Zernio::DeleteInboxComment200Response.new(
   success: null,
   data: null
 )

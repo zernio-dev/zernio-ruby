@@ -1,4 +1,4 @@
-# Late::CreateGoogleBusinessMediaRequest
+# Zernio::CreateGoogleBusinessMediaRequest
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateGoogleBusinessMediaRequest.new(
+instance = Zernio::CreateGoogleBusinessMediaRequest.new(
   source_url: null,
   media_format: null,
   description: null,

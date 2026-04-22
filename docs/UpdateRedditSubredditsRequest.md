@@ -1,4 +1,4 @@
-# Late::UpdateRedditSubredditsRequest
+# Zernio::UpdateRedditSubredditsRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateRedditSubredditsRequest.new(
+instance = Zernio::UpdateRedditSubredditsRequest.new(
   default_subreddit: null
 )
 ```

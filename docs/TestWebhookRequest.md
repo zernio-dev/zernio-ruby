@@ -1,4 +1,4 @@
-# Late::TestWebhookRequest
+# Zernio::TestWebhookRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::TestWebhookRequest.new(
+instance = Zernio::TestWebhookRequest.new(
   webhook_id: null
 )
 ```

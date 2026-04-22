@@ -1,4 +1,4 @@
-# Late::SetContactFieldValueRequest
+# Zernio::SetContactFieldValueRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SetContactFieldValueRequest.new(
+instance = Zernio::SetContactFieldValueRequest.new(
   value: null
 )
 ```

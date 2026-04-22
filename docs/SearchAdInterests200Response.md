@@ -1,4 +1,4 @@
-# Late::SearchAdInterests200Response
+# Zernio::SearchAdInterests200Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SearchAdInterests200Response.new(
+instance = Zernio::SearchAdInterests200Response.new(
   interests: null
 )
 ```

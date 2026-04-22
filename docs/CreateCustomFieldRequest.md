@@ -1,4 +1,4 @@
-# Late::CreateCustomFieldRequest
+# Zernio::CreateCustomFieldRequest
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateCustomFieldRequest.new(
+instance = Zernio::CreateCustomFieldRequest.new(
   profile_id: null,
   name: null,
   slug: null,

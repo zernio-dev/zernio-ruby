@@ -1,4 +1,4 @@
-# Late::ValidatePostRequestPlatformsInner
+# Zernio::ValidatePostRequestPlatformsInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidatePostRequestPlatformsInner.new(
+instance = Zernio::ValidatePostRequestPlatformsInner.new(
   platform: null,
   custom_content: null,
   platform_specific_data: null,

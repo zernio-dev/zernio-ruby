@@ -1,4 +1,4 @@
-# Late::ListAdAudiences200ResponseAudiencesInner
+# Zernio::ListAdAudiences200ResponseAudiencesInner
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListAdAudiences200ResponseAudiencesInner.new(
+instance = Zernio::ListAdAudiences200ResponseAudiencesInner.new(
   id: null,
   platform_audience_id: null,
   name: null,

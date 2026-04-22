@@ -1,4 +1,4 @@
-# Late::GetWhatsAppBusinessProfile200ResponseBusinessProfile
+# Zernio::GetWhatsAppBusinessProfile200ResponseBusinessProfile
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetWhatsAppBusinessProfile200ResponseBusinessProfile.new(
+instance = Zernio::GetWhatsAppBusinessProfile200ResponseBusinessProfile.new(
   about: null,
   address: null,
   description: null,

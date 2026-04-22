@@ -1,4 +1,4 @@
-# Late::ListInboxConversations200ResponseMetaFailedAccountsInner
+# Zernio::ListInboxConversations200ResponseMetaFailedAccountsInner
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListInboxConversations200ResponseMetaFailedAccountsInner.new(
+instance = Zernio::ListInboxConversations200ResponseMetaFailedAccountsInner.new(
   account_id: null,
   account_username: null,
   platform: null,

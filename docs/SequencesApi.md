@@ -1,4 +1,4 @@
-# Late::SequencesApi
+# Zernio::SequencesApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -28,21 +28,21 @@ Start a draft or paused sequence. The sequence must have at least one step.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
   # Activate sequence
   result = api_instance.activate_sequence(sequence_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->activate_sequence: #{e}"
 end
 ```
@@ -60,7 +60,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ActivateSequence200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->activate_sequence_with_http_info: #{e}"
 end
 ```
@@ -97,21 +97,21 @@ Create a multi-step messaging sequence. Each step has a delay and a message or W
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
-create_sequence_request = Late::CreateSequenceRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform: 'instagram', name: 'name_example'}) # CreateSequenceRequest | 
+api_instance = Zernio::SequencesApi.new
+create_sequence_request = Zernio::CreateSequenceRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform: 'instagram', name: 'name_example'}) # CreateSequenceRequest | 
 
 begin
   # Create sequence
   result = api_instance.create_sequence(create_sequence_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->create_sequence: #{e}"
 end
 ```
@@ -129,7 +129,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateSequence200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->create_sequence_with_http_info: #{e}"
 end
 ```
@@ -166,20 +166,20 @@ Permanently delete a sequence. Active enrollments are stopped.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
   # Delete sequence
   api_instance.delete_sequence(sequence_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->delete_sequence: #{e}"
 end
 ```
@@ -197,7 +197,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->delete_sequence_with_http_info: #{e}"
 end
 ```
@@ -234,22 +234,22 @@ Enroll one or more contacts into a sequence. Contacts already enrolled are skipp
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
-enroll_contacts_request = Late::EnrollContactsRequest.new({contact_ids: ['contact_ids_example']}) # EnrollContactsRequest | 
+enroll_contacts_request = Zernio::EnrollContactsRequest.new({contact_ids: ['contact_ids_example']}) # EnrollContactsRequest | 
 
 begin
   # Enroll contacts in a sequence
   result = api_instance.enroll_contacts(sequence_id, enroll_contacts_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->enroll_contacts: #{e}"
 end
 ```
@@ -267,7 +267,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <EnrollContacts200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->enroll_contacts_with_http_info: #{e}"
 end
 ```
@@ -305,21 +305,21 @@ Returns a sequence with all its steps and enrollment stats.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
   # Get sequence with steps
   result = api_instance.get_sequence(sequence_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->get_sequence: #{e}"
 end
 ```
@@ -337,7 +337,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetSequence200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->get_sequence_with_http_info: #{e}"
 end
 ```
@@ -374,14 +374,14 @@ Returns enrolled contacts with their progress, status, and next scheduled step.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 opts = {
   status: 'active', # String | 
@@ -393,7 +393,7 @@ begin
   # List enrollments for a sequence
   result = api_instance.list_sequence_enrollments(sequence_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->list_sequence_enrollments: #{e}"
 end
 ```
@@ -411,7 +411,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListSequenceEnrollments200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->list_sequence_enrollments_with_http_info: #{e}"
 end
 ```
@@ -451,14 +451,14 @@ Returns sequences with enrollment stats. Filter by status, platform, or profile.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter by profile. Omit to list across all profiles
   status: 'draft', # String | 
@@ -470,7 +470,7 @@ begin
   # List sequences
   result = api_instance.list_sequences(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->list_sequences: #{e}"
 end
 ```
@@ -488,7 +488,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListSequences200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->list_sequences_with_http_info: #{e}"
 end
 ```
@@ -528,21 +528,21 @@ Pause an active sequence. Enrolled contacts stop receiving messages until the se
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
   # Pause sequence
   result = api_instance.pause_sequence(sequence_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->pause_sequence: #{e}"
 end
 ```
@@ -560,7 +560,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ActivateSequence200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->pause_sequence_with_http_info: #{e}"
 end
 ```
@@ -597,21 +597,21 @@ Remove a contact from a sequence. No further messages will be sent to this conta
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 contact_id = 'contact_id_example' # String | 
 
 begin
   # Unenroll contact
   api_instance.unenroll_contact(sequence_id, contact_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->unenroll_contact: #{e}"
 end
 ```
@@ -629,7 +629,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->unenroll_contact_with_http_info: #{e}"
 end
 ```
@@ -667,21 +667,21 @@ Update a sequence's name, steps, or exit conditions. Active sequences can be upd
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::SequencesApi.new
+api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
 
 begin
   # Update sequence
   result = api_instance.update_sequence(sequence_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->update_sequence: #{e}"
 end
 ```
@@ -699,7 +699,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateSequence200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->update_sequence_with_http_info: #{e}"
 end
 ```

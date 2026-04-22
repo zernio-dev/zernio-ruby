@@ -1,4 +1,4 @@
-# Late::AnalyticsOverviewDataStaleness
+# Zernio::AnalyticsOverviewDataStaleness
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AnalyticsOverviewDataStaleness.new(
+instance = Zernio::AnalyticsOverviewDataStaleness.new(
   stale_account_count: null,
   sync_triggered: null
 )

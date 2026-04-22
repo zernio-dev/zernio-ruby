@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequest
+# Zernio::SendInboxMessageRequest
 
 ## Properties
 
@@ -20,9 +20,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequest.new(
+instance = Zernio::SendInboxMessageRequest.new(
   account_id: null,
   message: null,
   attachment_url: null,

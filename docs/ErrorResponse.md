@@ -1,4 +1,4 @@
-# Late::ErrorResponse
+# Zernio::ErrorResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ErrorResponse.new(
+instance = Zernio::ErrorResponse.new(
   error: null,
   details: null
 )

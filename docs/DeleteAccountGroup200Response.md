@@ -1,4 +1,4 @@
-# Late::DeleteAccountGroup200Response
+# Zernio::DeleteAccountGroup200Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DeleteAccountGroup200Response.new(
+instance = Zernio::DeleteAccountGroup200Response.new(
   message: null
 )
 ```

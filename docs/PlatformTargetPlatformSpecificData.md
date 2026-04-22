@@ -1,4 +1,4 @@
-# Late::PlatformTargetPlatformSpecificData
+# Zernio::PlatformTargetPlatformSpecificData
 
 ## Class instance methods
 
@@ -9,9 +9,9 @@ Returns the list of classes defined in oneOf.
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::PlatformTargetPlatformSpecificData.openapi_one_of
+Zernio::PlatformTargetPlatformSpecificData.openapi_one_of
 # =>
 # [
 #   :'BlueskyPlatformData',
@@ -38,12 +38,12 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 #### Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-Late::PlatformTargetPlatformSpecificData.build(data)
+Zernio::PlatformTargetPlatformSpecificData.build(data)
 # => #<BlueskyPlatformData:0x00007fdd4aab02a0>
 
-Late::PlatformTargetPlatformSpecificData.build(data_that_doesnt_match)
+Zernio::PlatformTargetPlatformSpecificData.build(data_that_doesnt_match)
 # => nil
 ```
 

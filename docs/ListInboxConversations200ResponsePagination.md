@@ -1,4 +1,4 @@
-# Late::ListInboxConversations200ResponsePagination
+# Zernio::ListInboxConversations200ResponsePagination
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListInboxConversations200ResponsePagination.new(
+instance = Zernio::ListInboxConversations200ResponsePagination.new(
   has_more: null,
   next_cursor: null
 )

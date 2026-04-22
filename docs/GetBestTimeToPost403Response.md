@@ -1,4 +1,4 @@
-# Late::GetBestTimeToPost403Response
+# Zernio::GetBestTimeToPost403Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetBestTimeToPost403Response.new(
+instance = Zernio::GetBestTimeToPost403Response.new(
   error: Analytics add-on required,
   requires_addon: true
 )

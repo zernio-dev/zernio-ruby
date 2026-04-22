@@ -1,4 +1,4 @@
-# Late::BroadcastsApi
+# Zernio::BroadcastsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -28,22 +28,22 @@ Add recipients by contact IDs, raw phone numbers, or from the broadcast's segmen
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
-add_broadcast_recipients_request = Late::AddBroadcastRecipientsRequest.new # AddBroadcastRecipientsRequest | 
+add_broadcast_recipients_request = Zernio::AddBroadcastRecipientsRequest.new # AddBroadcastRecipientsRequest | 
 
 begin
   # Add recipients to a broadcast
   result = api_instance.add_broadcast_recipients(broadcast_id, add_broadcast_recipients_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->add_broadcast_recipients: #{e}"
 end
 ```
@@ -61,7 +61,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AddBroadcastRecipients200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->add_broadcast_recipients_with_http_info: #{e}"
 end
 ```
@@ -99,21 +99,21 @@ Cancel a scheduled or in-progress broadcast. Already-sent messages are not affec
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
   # Cancel broadcast
   result = api_instance.cancel_broadcast(broadcast_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->cancel_broadcast: #{e}"
 end
 ```
@@ -131,7 +131,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CancelBroadcast200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->cancel_broadcast_with_http_info: #{e}"
 end
 ```
@@ -168,21 +168,21 @@ Create a broadcast in draft status. Add recipients and then send or schedule it.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
-create_broadcast_request = Late::CreateBroadcastRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform: 'instagram', name: 'name_example'}) # CreateBroadcastRequest | 
+api_instance = Zernio::BroadcastsApi.new
+create_broadcast_request = Zernio::CreateBroadcastRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform: 'instagram', name: 'name_example'}) # CreateBroadcastRequest | 
 
 begin
   # Create broadcast draft
   result = api_instance.create_broadcast(create_broadcast_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->create_broadcast: #{e}"
 end
 ```
@@ -200,7 +200,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateBroadcast200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->create_broadcast_with_http_info: #{e}"
 end
 ```
@@ -237,20 +237,20 @@ Permanently delete a broadcast. Only drafts can be deleted.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
   # Delete broadcast
   api_instance.delete_broadcast(broadcast_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->delete_broadcast: #{e}"
 end
 ```
@@ -268,7 +268,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->delete_broadcast_with_http_info: #{e}"
 end
 ```
@@ -305,21 +305,21 @@ Returns a broadcast with its full configuration and delivery stats.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
   # Get broadcast details
   result = api_instance.get_broadcast(broadcast_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->get_broadcast: #{e}"
 end
 ```
@@ -337,7 +337,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetBroadcast200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->get_broadcast_with_http_info: #{e}"
 end
 ```
@@ -374,14 +374,14 @@ Returns recipients for a broadcast with individual delivery status. Filter by st
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 opts = {
   status: 'pending', # String | 
@@ -393,7 +393,7 @@ begin
   # List broadcast recipients
   result = api_instance.list_broadcast_recipients(broadcast_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->list_broadcast_recipients: #{e}"
 end
 ```
@@ -411,7 +411,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListBroadcastRecipients200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->list_broadcast_recipients_with_http_info: #{e}"
 end
 ```
@@ -451,14 +451,14 @@ Returns broadcasts with delivery stats. Filter by status, platform, or profile.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter by profile. Omit to list across all profiles
   status: 'draft', # String | 
@@ -471,7 +471,7 @@ begin
   # List broadcasts
   result = api_instance.list_broadcasts(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->list_broadcasts: #{e}"
 end
 ```
@@ -489,7 +489,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListBroadcasts200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->list_broadcasts_with_http_info: #{e}"
 end
 ```
@@ -530,22 +530,22 @@ Schedule a draft broadcast to be sent at a future date and time.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
-schedule_broadcast_request = Late::ScheduleBroadcastRequest.new({scheduled_at: Time.now}) # ScheduleBroadcastRequest | 
+schedule_broadcast_request = Zernio::ScheduleBroadcastRequest.new({scheduled_at: Time.now}) # ScheduleBroadcastRequest | 
 
 begin
   # Schedule broadcast for later
   result = api_instance.schedule_broadcast(broadcast_id, schedule_broadcast_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->schedule_broadcast: #{e}"
 end
 ```
@@ -563,7 +563,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ScheduleBroadcast200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->schedule_broadcast_with_http_info: #{e}"
 end
 ```
@@ -601,21 +601,21 @@ Immediately start sending a draft broadcast to its recipients.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
   # Send broadcast now
   result = api_instance.send_broadcast(broadcast_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->send_broadcast: #{e}"
 end
 ```
@@ -633,7 +633,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SendBroadcast200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->send_broadcast_with_http_info: #{e}"
 end
 ```
@@ -670,21 +670,21 @@ Update a broadcast's name, message, template, or segment filters. Only draft bro
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::BroadcastsApi.new
+api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
 
 begin
   # Update broadcast
   result = api_instance.update_broadcast(broadcast_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->update_broadcast: #{e}"
 end
 ```
@@ -702,7 +702,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateBroadcast200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->update_broadcast_with_http_info: #{e}"
 end
 ```

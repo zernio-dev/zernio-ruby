@@ -1,4 +1,4 @@
-# Late::GoogleBusinessPlatformDataEventSchedule
+# Zernio::GoogleBusinessPlatformDataEventSchedule
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GoogleBusinessPlatformDataEventSchedule.new(
+instance = Zernio::GoogleBusinessPlatformDataEventSchedule.new(
   start_date: null,
   start_time: null,
   end_date: null,

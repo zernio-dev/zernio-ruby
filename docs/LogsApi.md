@@ -1,4 +1,4 @@
-# Late::LogsApi
+# Zernio::LogsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -19,14 +19,14 @@ Unified logs endpoint. Returns logs for publishing, connections, webhooks, and m
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::LogsApi.new
+api_instance = Zernio::LogsApi.new
 opts = {
   type: 'publishing', # String | Log category to query
   status: 'success', # String | Filter by status
@@ -42,7 +42,7 @@ begin
   # List activity logs
   result = api_instance.list_logs(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling LogsApi->list_logs: #{e}"
 end
 ```
@@ -60,7 +60,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListLogs200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling LogsApi->list_logs_with_http_info: #{e}"
 end
 ```

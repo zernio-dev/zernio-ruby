@@ -1,4 +1,4 @@
-# Late::UpdateAd200Response
+# Zernio::UpdateAd200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateAd200Response.new(
+instance = Zernio::UpdateAd200Response.new(
   ad: null,
   message: null
 )

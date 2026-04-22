@@ -1,4 +1,4 @@
-# Late::InlineObject
+# Zernio::InlineObject
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InlineObject.new(
+instance = Zernio::InlineObject.new(
   error: Unauthorized
 )
 ```

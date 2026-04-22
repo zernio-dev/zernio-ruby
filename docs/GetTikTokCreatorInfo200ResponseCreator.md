@@ -1,4 +1,4 @@
-# Late::GetTikTokCreatorInfo200ResponseCreator
+# Zernio::GetTikTokCreatorInfo200ResponseCreator
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetTikTokCreatorInfo200ResponseCreator.new(
+instance = Zernio::GetTikTokCreatorInfo200ResponseCreator.new(
   nickname: null,
   avatar_url: null,
   is_verified: null,

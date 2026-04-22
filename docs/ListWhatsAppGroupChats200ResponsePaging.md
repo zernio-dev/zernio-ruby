@@ -1,4 +1,4 @@
-# Late::ListWhatsAppGroupChats200ResponsePaging
+# Zernio::ListWhatsAppGroupChats200ResponsePaging
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListWhatsAppGroupChats200ResponsePaging.new(
+instance = Zernio::ListWhatsAppGroupChats200ResponsePaging.new(
   cursors: null
 )
 ```

@@ -1,4 +1,4 @@
-# Late::CreateContact200ResponseChannel
+# Zernio::CreateContact200ResponseChannel
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateContact200ResponseChannel.new(
+instance = Zernio::CreateContact200ResponseChannel.new(
   id: null,
   platform: null,
   platform_identifier: null,

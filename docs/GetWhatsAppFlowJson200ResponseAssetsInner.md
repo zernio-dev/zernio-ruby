@@ -1,4 +1,4 @@
-# Late::GetWhatsAppFlowJson200ResponseAssetsInner
+# Zernio::GetWhatsAppFlowJson200ResponseAssetsInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetWhatsAppFlowJson200ResponseAssetsInner.new(
+instance = Zernio::GetWhatsAppFlowJson200ResponseAssetsInner.new(
   name: flow.json,
   asset_type: FLOW_JSON,
   download_url: null

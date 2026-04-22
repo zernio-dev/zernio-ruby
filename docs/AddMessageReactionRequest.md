@@ -1,4 +1,4 @@
-# Late::AddMessageReactionRequest
+# Zernio::AddMessageReactionRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AddMessageReactionRequest.new(
+instance = Zernio::AddMessageReactionRequest.new(
   account_id: null,
   emoji: 👍
 )

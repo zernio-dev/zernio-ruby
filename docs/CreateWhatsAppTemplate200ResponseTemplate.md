@@ -1,4 +1,4 @@
-# Late::CreateWhatsAppTemplate200ResponseTemplate
+# Zernio::CreateWhatsAppTemplate200ResponseTemplate
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateWhatsAppTemplate200ResponseTemplate.new(
+instance = Zernio::CreateWhatsAppTemplate200ResponseTemplate.new(
   id: null,
   name: null,
   status: null,

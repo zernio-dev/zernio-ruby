@@ -1,4 +1,4 @@
-# Late::EditInboxMessageRequestReplyMarkup
+# Zernio::EditInboxMessageRequestReplyMarkup
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::EditInboxMessageRequestReplyMarkup.new(
+instance = Zernio::EditInboxMessageRequestReplyMarkup.new(
   type: null,
   keyboard: null
 )

@@ -1,4 +1,4 @@
-# Late::SendConversions200ResponseFailuresInner
+# Zernio::SendConversions200ResponseFailuresInner
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendConversions200ResponseFailuresInner.new(
+instance = Zernio::SendConversions200ResponseFailuresInner.new(
   event_index: null,
   event_id: null,
   message: null,

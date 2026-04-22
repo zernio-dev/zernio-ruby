@@ -1,4 +1,4 @@
-# Late::AdTreeAdSet
+# Zernio::AdTreeAdSet
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AdTreeAdSet.new(
+instance = Zernio::AdTreeAdSet.new(
   platform_ad_set_id: null,
   ad_set_name: null,
   status: null,

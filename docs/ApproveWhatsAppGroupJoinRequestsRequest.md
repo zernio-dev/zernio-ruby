@@ -1,4 +1,4 @@
-# Late::ApproveWhatsAppGroupJoinRequestsRequest
+# Zernio::ApproveWhatsAppGroupJoinRequestsRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ApproveWhatsAppGroupJoinRequestsRequest.new(
+instance = Zernio::ApproveWhatsAppGroupJoinRequestsRequest.new(
   phone_numbers: null
 )
 ```

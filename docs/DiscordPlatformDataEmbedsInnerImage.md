@@ -1,4 +1,4 @@
-# Late::DiscordPlatformDataEmbedsInnerImage
+# Zernio::DiscordPlatformDataEmbedsInnerImage
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DiscordPlatformDataEmbedsInnerImage.new(
+instance = Zernio::DiscordPlatformDataEmbedsInnerImage.new(
   url: null
 )
 ```

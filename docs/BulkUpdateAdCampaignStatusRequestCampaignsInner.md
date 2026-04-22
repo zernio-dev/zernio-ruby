@@ -1,4 +1,4 @@
-# Late::BulkUpdateAdCampaignStatusRequestCampaignsInner
+# Zernio::BulkUpdateAdCampaignStatusRequestCampaignsInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BulkUpdateAdCampaignStatusRequestCampaignsInner.new(
+instance = Zernio::BulkUpdateAdCampaignStatusRequestCampaignsInner.new(
   platform_campaign_id: null,
   platform: null
 )

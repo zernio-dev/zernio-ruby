@@ -1,4 +1,4 @@
-# Late::QueueUpdateResponse
+# Zernio::QueueUpdateResponse
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::QueueUpdateResponse.new(
+instance = Zernio::QueueUpdateResponse.new(
   success: null,
   schedule: null,
   next_slots: null,

@@ -1,4 +1,4 @@
-# Late::CustomFieldsApi
+# Zernio::CustomFieldsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -24,21 +24,21 @@ Remove a custom field value from a contact. The field definition is not affected
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CustomFieldsApi.new
+api_instance = Zernio::CustomFieldsApi.new
 contact_id = 'contact_id_example' # String | 
 slug = 'slug_example' # String | 
 
 begin
   # Clear custom field value
   api_instance.clear_contact_field_value(contact_id, slug)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->clear_contact_field_value: #{e}"
 end
 ```
@@ -56,7 +56,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->clear_contact_field_value_with_http_info: #{e}"
 end
 ```
@@ -94,21 +94,21 @@ Create a new custom field definition. Supported types are text, number, date, bo
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CustomFieldsApi.new
-create_custom_field_request = Late::CreateCustomFieldRequest.new({profile_id: 'profile_id_example', name: 'name_example', type: 'text'}) # CreateCustomFieldRequest | 
+api_instance = Zernio::CustomFieldsApi.new
+create_custom_field_request = Zernio::CreateCustomFieldRequest.new({profile_id: 'profile_id_example', name: 'name_example', type: 'text'}) # CreateCustomFieldRequest | 
 
 begin
   # Create custom field
   result = api_instance.create_custom_field(create_custom_field_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->create_custom_field: #{e}"
 end
 ```
@@ -126,7 +126,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateCustomField200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->create_custom_field_with_http_info: #{e}"
 end
 ```
@@ -163,20 +163,20 @@ Delete a custom field definition and remove its values from all contacts.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CustomFieldsApi.new
+api_instance = Zernio::CustomFieldsApi.new
 field_id = 'field_id_example' # String | 
 
 begin
   # Delete custom field
   api_instance.delete_custom_field(field_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->delete_custom_field: #{e}"
 end
 ```
@@ -194,7 +194,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->delete_custom_field_with_http_info: #{e}"
 end
 ```
@@ -231,14 +231,14 @@ Returns all custom field definitions. Optionally filter by profile.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CustomFieldsApi.new
+api_instance = Zernio::CustomFieldsApi.new
 opts = {
   profile_id: 'profile_id_example' # String | Filter by profile. Omit to list across all profiles
 }
@@ -247,7 +247,7 @@ begin
   # List custom field definitions
   result = api_instance.list_custom_fields(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->list_custom_fields: #{e}"
 end
 ```
@@ -265,7 +265,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListCustomFields200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->list_custom_fields_with_http_info: #{e}"
 end
 ```
@@ -302,22 +302,22 @@ Set or overwrite a custom field value on a contact. The value type must match th
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CustomFieldsApi.new
+api_instance = Zernio::CustomFieldsApi.new
 contact_id = 'contact_id_example' # String | 
 slug = 'slug_example' # String | 
-set_contact_field_value_request = Late::SetContactFieldValueRequest.new({value: 3.56}) # SetContactFieldValueRequest | 
+set_contact_field_value_request = Zernio::SetContactFieldValueRequest.new({value: 3.56}) # SetContactFieldValueRequest | 
 
 begin
   # Set custom field value
   api_instance.set_contact_field_value(contact_id, slug, set_contact_field_value_request)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->set_contact_field_value: #{e}"
 end
 ```
@@ -335,7 +335,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->set_contact_field_value_with_http_info: #{e}"
 end
 ```
@@ -374,24 +374,24 @@ Update a custom field definition. The field type cannot be changed after creatio
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::CustomFieldsApi.new
+api_instance = Zernio::CustomFieldsApi.new
 field_id = 'field_id_example' # String | 
 opts = {
-  update_custom_field_request: Late::UpdateCustomFieldRequest.new # UpdateCustomFieldRequest | 
+  update_custom_field_request: Zernio::UpdateCustomFieldRequest.new # UpdateCustomFieldRequest | 
 }
 
 begin
   # Update custom field
   result = api_instance.update_custom_field(field_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->update_custom_field: #{e}"
 end
 ```
@@ -409,7 +409,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateCustomField200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->update_custom_field_with_http_info: #{e}"
 end
 ```

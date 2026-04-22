@@ -1,4 +1,4 @@
-# Late::Expired
+# Zernio::Expired
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::Expired.new(
+instance = Zernio::Expired.new(
   status: null,
   message: null
 )

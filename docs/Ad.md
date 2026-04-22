@@ -1,4 +1,4 @@
-# Late::Ad
+# Zernio::Ad
 
 ## Properties
 
@@ -33,9 +33,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::Ad.new(
+instance = Zernio::Ad.new(
   _id: null,
   name: null,
   platform: null,

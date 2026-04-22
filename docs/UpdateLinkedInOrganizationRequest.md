@@ -1,4 +1,4 @@
-# Late::UpdateLinkedInOrganizationRequest
+# Zernio::UpdateLinkedInOrganizationRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateLinkedInOrganizationRequest.new(
+instance = Zernio::UpdateLinkedInOrganizationRequest.new(
   account_type: null,
   selected_organization: null
 )

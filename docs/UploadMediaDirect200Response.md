@@ -1,4 +1,4 @@
-# Late::UploadMediaDirect200Response
+# Zernio::UploadMediaDirect200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UploadMediaDirect200Response.new(
+instance = Zernio::UploadMediaDirect200Response.new(
   url: null,
   filename: null,
   content_type: null,

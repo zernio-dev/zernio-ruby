@@ -1,4 +1,4 @@
-# Late::CreateStandaloneAdRequestCreativesInner
+# Zernio::CreateStandaloneAdRequestCreativesInner
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateStandaloneAdRequestCreativesInner.new(
+instance = Zernio::CreateStandaloneAdRequestCreativesInner.new(
   headline: null,
   body: null,
   image_url: null,

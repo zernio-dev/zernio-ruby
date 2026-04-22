@@ -1,4 +1,4 @@
-# Late::ListSnapchatProfiles200Response
+# Zernio::ListSnapchatProfiles200Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListSnapchatProfiles200Response.new(
+instance = Zernio::ListSnapchatProfiles200Response.new(
   public_profiles: null
 )
 ```

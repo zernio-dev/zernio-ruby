@@ -1,4 +1,4 @@
-# Late::WebhookPayloadMessageMessageSenderInstagramProfile
+# Zernio::WebhookPayloadMessageMessageSenderInstagramProfile
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::WebhookPayloadMessageMessageSenderInstagramProfile.new(
+instance = Zernio::WebhookPayloadMessageMessageSenderInstagramProfile.new(
   is_follower: null,
   is_following: null,
   follower_count: null,

@@ -1,4 +1,4 @@
-# Late::FollowUserRequest
+# Zernio::FollowUserRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::FollowUserRequest.new(
+instance = Zernio::FollowUserRequest.new(
   account_id: null,
   target_user_id: null
 )

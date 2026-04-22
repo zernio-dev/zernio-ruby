@@ -1,4 +1,4 @@
-# Late::RetweetPost200Response
+# Zernio::RetweetPost200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::RetweetPost200Response.new(
+instance = Zernio::RetweetPost200Response.new(
   status: success,
   tweet_id: null,
   retweeted: null,

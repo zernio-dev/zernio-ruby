@@ -1,4 +1,4 @@
-# Late::GetConnectUrl200Response
+# Zernio::GetConnectUrl200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetConnectUrl200Response.new(
+instance = Zernio::GetConnectUrl200Response.new(
   auth_url: null,
   state: null
 )

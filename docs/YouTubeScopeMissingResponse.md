@@ -1,4 +1,4 @@
-# Late::YouTubeScopeMissingResponse
+# Zernio::YouTubeScopeMissingResponse
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::YouTubeScopeMissingResponse.new(
+instance = Zernio::YouTubeScopeMissingResponse.new(
   success: false,
   error: To access daily video analytics, please reconnect your YouTube account to grant the required permissions.,
   code: youtube_analytics_scope_missing,

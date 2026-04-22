@@ -1,4 +1,4 @@
-# Late::GeoRestriction
+# Zernio::GeoRestriction
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GeoRestriction.new(
+instance = Zernio::GeoRestriction.new(
   countries: [US, CA, GB]
 )
 ```

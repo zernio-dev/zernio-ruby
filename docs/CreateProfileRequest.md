@@ -1,4 +1,4 @@
-# Late::CreateProfileRequest
+# Zernio::CreateProfileRequest
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateProfileRequest.new(
+instance = Zernio::CreateProfileRequest.new(
   name: null,
   description: null,
   color: #ffeda0

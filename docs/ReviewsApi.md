@@ -1,4 +1,4 @@
-# Late::ReviewsApi
+# Zernio::ReviewsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -21,22 +21,22 @@ Delete a reply to a review (Google Business only). Requires accountId in request
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ReviewsApi.new
+api_instance = Zernio::ReviewsApi.new
 review_id = 'review_id_example' # String | 
-delete_inbox_review_reply_request = Late::DeleteInboxReviewReplyRequest.new({account_id: 'account_id_example'}) # DeleteInboxReviewReplyRequest | 
+delete_inbox_review_reply_request = Zernio::DeleteInboxReviewReplyRequest.new({account_id: 'account_id_example'}) # DeleteInboxReviewReplyRequest | 
 
 begin
   # Delete review reply
   result = api_instance.delete_inbox_review_reply(review_id, delete_inbox_review_reply_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ReviewsApi->delete_inbox_review_reply: #{e}"
 end
 ```
@@ -54,7 +54,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteInboxReviewReply200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ReviewsApi->delete_inbox_review_reply_with_http_info: #{e}"
 end
 ```
@@ -92,14 +92,14 @@ Fetch reviews from all connected Facebook Pages and Google Business accounts. Ag
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ReviewsApi.new
+api_instance = Zernio::ReviewsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | 
   platform: 'facebook', # String | 
@@ -117,7 +117,7 @@ begin
   # List reviews
   result = api_instance.list_inbox_reviews(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ReviewsApi->list_inbox_reviews: #{e}"
 end
 ```
@@ -135,7 +135,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListInboxReviews200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ReviewsApi->list_inbox_reviews_with_http_info: #{e}"
 end
 ```
@@ -181,22 +181,22 @@ Post a reply to a review. Requires accountId in request body.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ReviewsApi.new
+api_instance = Zernio::ReviewsApi.new
 review_id = 'review_id_example' # String | Review ID (URL-encoded for Google Business)
-reply_to_inbox_review_request = Late::ReplyToInboxReviewRequest.new({account_id: 'account_id_example', message: 'message_example'}) # ReplyToInboxReviewRequest | 
+reply_to_inbox_review_request = Zernio::ReplyToInboxReviewRequest.new({account_id: 'account_id_example', message: 'message_example'}) # ReplyToInboxReviewRequest | 
 
 begin
   # Reply to review
   result = api_instance.reply_to_inbox_review(review_id, reply_to_inbox_review_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ReviewsApi->reply_to_inbox_review: #{e}"
 end
 ```
@@ -214,7 +214,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ReplyToInboxReview200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ReviewsApi->reply_to_inbox_review_with_http_info: #{e}"
 end
 ```

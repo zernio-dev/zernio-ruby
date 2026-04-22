@@ -1,4 +1,4 @@
-# Late::SelectFacebookPageRequestUserProfile
+# Zernio::SelectFacebookPageRequestUserProfile
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SelectFacebookPageRequestUserProfile.new(
+instance = Zernio::SelectFacebookPageRequestUserProfile.new(
   id: null,
   name: null,
   profile_picture: null

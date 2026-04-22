@@ -1,4 +1,4 @@
-# Late::YouTubePlatformData
+# Zernio::YouTubePlatformData
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::YouTubePlatformData.new(
+instance = Zernio::YouTubePlatformData.new(
   title: null,
   visibility: null,
   made_for_kids: null,

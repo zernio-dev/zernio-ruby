@@ -1,4 +1,4 @@
-# Late::GetWhatsAppPhoneNumber200ResponsePhoneNumber
+# Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber
 
 ## Properties
 
@@ -15,9 +15,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetWhatsAppPhoneNumber200ResponsePhoneNumber.new(
+instance = Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber.new(
   id: null,
   phone_number: null,
   status: null,

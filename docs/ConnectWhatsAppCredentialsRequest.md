@@ -1,4 +1,4 @@
-# Late::ConnectWhatsAppCredentialsRequest
+# Zernio::ConnectWhatsAppCredentialsRequest
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ConnectWhatsAppCredentialsRequest.new(
+instance = Zernio::ConnectWhatsAppCredentialsRequest.new(
   profile_id: null,
   access_token: null,
   waba_id: null,

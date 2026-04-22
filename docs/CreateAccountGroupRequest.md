@@ -1,4 +1,4 @@
-# Late::CreateAccountGroupRequest
+# Zernio::CreateAccountGroupRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateAccountGroupRequest.new(
+instance = Zernio::CreateAccountGroupRequest.new(
   name: null,
   account_ids: null
 )

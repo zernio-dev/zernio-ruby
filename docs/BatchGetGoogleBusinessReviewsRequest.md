@@ -1,4 +1,4 @@
-# Late::BatchGetGoogleBusinessReviewsRequest
+# Zernio::BatchGetGoogleBusinessReviewsRequest
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BatchGetGoogleBusinessReviewsRequest.new(
+instance = Zernio::BatchGetGoogleBusinessReviewsRequest.new(
   location_names: null,
   page_size: null,
   page_token: null

@@ -1,4 +1,4 @@
-# Late::UpdateWhatsAppDisplayName200ResponseDisplayName
+# Zernio::UpdateWhatsAppDisplayName200ResponseDisplayName
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateWhatsAppDisplayName200ResponseDisplayName.new(
+instance = Zernio::UpdateWhatsAppDisplayName200ResponseDisplayName.new(
   name: null,
   status: null
 )

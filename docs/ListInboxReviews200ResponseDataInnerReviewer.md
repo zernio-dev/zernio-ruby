@@ -1,4 +1,4 @@
-# Late::ListInboxReviews200ResponseDataInnerReviewer
+# Zernio::ListInboxReviews200ResponseDataInnerReviewer
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListInboxReviews200ResponseDataInnerReviewer.new(
+instance = Zernio::ListInboxReviews200ResponseDataInnerReviewer.new(
   id: null,
   name: null,
   profile_image: null

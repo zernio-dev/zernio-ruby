@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner
+# Zernio::GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner.new(
+instance = Zernio::GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner.new(
   date: null,
   value: null
 )

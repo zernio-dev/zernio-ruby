@@ -1,4 +1,4 @@
-# Late::WhatsAppFlowsApi
+# Zernio::WhatsAppFlowsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -28,21 +28,21 @@ Create a new WhatsApp Flow in DRAFT status. Optionally clone an existing flow. A
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
-create_whats_app_flow_request = Late::CreateWhatsAppFlowRequest.new({account_id: 'account_id_example', name: 'name_example', categories: ['SIGN_UP']}) # CreateWhatsAppFlowRequest | 
+api_instance = Zernio::WhatsAppFlowsApi.new
+create_whats_app_flow_request = Zernio::CreateWhatsAppFlowRequest.new({account_id: 'account_id_example', name: 'name_example', categories: ['SIGN_UP']}) # CreateWhatsAppFlowRequest | 
 
 begin
   # Create flow
   result = api_instance.create_whats_app_flow(create_whats_app_flow_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->create_whats_app_flow: #{e}"
 end
 ```
@@ -60,7 +60,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateWhatsAppFlow200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->create_whats_app_flow_with_http_info: #{e}"
 end
 ```
@@ -97,14 +97,14 @@ Delete a DRAFT flow. This is irreversible. Only flows in DRAFT status can be del
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
+api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
@@ -112,7 +112,7 @@ begin
   # Delete flow
   result = api_instance.delete_whats_app_flow(flow_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->delete_whats_app_flow: #{e}"
 end
 ```
@@ -130,7 +130,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->delete_whats_app_flow_with_http_info: #{e}"
 end
 ```
@@ -168,22 +168,22 @@ Deprecate a PUBLISHED flow. This is irreversible. Deprecated flows cannot be sen
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
+api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-publish_whats_app_flow_request = Late::PublishWhatsAppFlowRequest.new({account_id: 'account_id_example'}) # PublishWhatsAppFlowRequest | 
+publish_whats_app_flow_request = Zernio::PublishWhatsAppFlowRequest.new({account_id: 'account_id_example'}) # PublishWhatsAppFlowRequest | 
 
 begin
   # Deprecate flow
   result = api_instance.deprecate_whats_app_flow(flow_id, publish_whats_app_flow_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->deprecate_whats_app_flow: #{e}"
 end
 ```
@@ -201,7 +201,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->deprecate_whats_app_flow_with_http_info: #{e}"
 end
 ```
@@ -239,14 +239,14 @@ Get details for a specific flow, including status, categories, validation errors
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
+api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
 opts = {
@@ -257,7 +257,7 @@ begin
   # Get flow
   result = api_instance.get_whats_app_flow(flow_id, account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->get_whats_app_flow: #{e}"
 end
 ```
@@ -275,7 +275,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppFlow200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->get_whats_app_flow_with_http_info: #{e}"
 end
 ```
@@ -314,14 +314,14 @@ Get the flow JSON asset metadata, including a temporary download URL for the Flo
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
+api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
@@ -329,7 +329,7 @@ begin
   # Get flow JSON asset
   result = api_instance.get_whats_app_flow_json(flow_id, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->get_whats_app_flow_json: #{e}"
 end
 ```
@@ -347,7 +347,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppFlowJson200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->get_whats_app_flow_json_with_http_info: #{e}"
 end
 ```
@@ -385,21 +385,21 @@ List all WhatsApp Flows for the Business Account (WABA) associated with the give
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
+api_instance = Zernio::WhatsAppFlowsApi.new
 account_id = 'account_id_example' # String | WhatsApp social account ID
 
 begin
   # List flows
   result = api_instance.list_whats_app_flows(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->list_whats_app_flows: #{e}"
 end
 ```
@@ -417,7 +417,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListWhatsAppFlows200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->list_whats_app_flows_with_http_info: #{e}"
 end
 ```
@@ -454,22 +454,22 @@ Publish a DRAFT flow. This is irreversible. Once published, the flow and its JSO
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
+api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-publish_whats_app_flow_request = Late::PublishWhatsAppFlowRequest.new({account_id: 'account_id_example'}) # PublishWhatsAppFlowRequest | 
+publish_whats_app_flow_request = Zernio::PublishWhatsAppFlowRequest.new({account_id: 'account_id_example'}) # PublishWhatsAppFlowRequest | 
 
 begin
   # Publish flow
   result = api_instance.publish_whats_app_flow(flow_id, publish_whats_app_flow_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->publish_whats_app_flow: #{e}"
 end
 ```
@@ -487,7 +487,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->publish_whats_app_flow_with_http_info: #{e}"
 end
 ```
@@ -525,21 +525,21 @@ Send a published flow as an interactive message with a CTA button. When the reci
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
-send_whats_app_flow_message_request = Late::SendWhatsAppFlowMessageRequest.new({account_id: 'account_id_example', to: 'to_example', flow_id: 'flow_id_example', flow_cta: 'flow_cta_example', body: 'body_example'}) # SendWhatsAppFlowMessageRequest | 
+api_instance = Zernio::WhatsAppFlowsApi.new
+send_whats_app_flow_message_request = Zernio::SendWhatsAppFlowMessageRequest.new({account_id: 'account_id_example', to: 'to_example', flow_id: 'flow_id_example', flow_cta: 'flow_cta_example', body: 'body_example'}) # SendWhatsAppFlowMessageRequest | 
 
 begin
   # Send flow message
   result = api_instance.send_whats_app_flow_message(send_whats_app_flow_message_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->send_whats_app_flow_message: #{e}"
 end
 ```
@@ -557,7 +557,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SendWhatsAppFlowMessage200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->send_whats_app_flow_message_with_http_info: #{e}"
 end
 ```
@@ -594,22 +594,22 @@ Update metadata (name, categories) of a DRAFT flow. Published flows are immutabl
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
+api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-update_whats_app_flow_request = Late::UpdateWhatsAppFlowRequest.new({account_id: 'account_id_example'}) # UpdateWhatsAppFlowRequest | 
+update_whats_app_flow_request = Zernio::UpdateWhatsAppFlowRequest.new({account_id: 'account_id_example'}) # UpdateWhatsAppFlowRequest | 
 
 begin
   # Update flow
   result = api_instance.update_whats_app_flow(flow_id, update_whats_app_flow_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->update_whats_app_flow: #{e}"
 end
 ```
@@ -627,7 +627,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->update_whats_app_flow_with_http_info: #{e}"
 end
 ```
@@ -665,22 +665,22 @@ Upload or update the Flow JSON for a DRAFT flow. The Flow JSON defines all scree
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WhatsAppFlowsApi.new
+api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-upload_whats_app_flow_json_request = Late::UploadWhatsAppFlowJsonRequest.new({account_id: 'account_id_example', flow_json: nil}) # UploadWhatsAppFlowJsonRequest | 
+upload_whats_app_flow_json_request = Zernio::UploadWhatsAppFlowJsonRequest.new({account_id: 'account_id_example', flow_json: nil}) # UploadWhatsAppFlowJsonRequest | 
 
 begin
   # Upload flow JSON
   result = api_instance.upload_whats_app_flow_json(flow_id, upload_whats_app_flow_json_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->upload_whats_app_flow_json: #{e}"
 end
 ```
@@ -698,7 +698,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UploadWhatsAppFlowJson200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->upload_whats_app_flow_json_with_http_info: #{e}"
 end
 ```

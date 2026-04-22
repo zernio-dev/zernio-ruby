@@ -1,4 +1,4 @@
-# Late::ListContacts200ResponsePagination
+# Zernio::ListContacts200ResponsePagination
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListContacts200ResponsePagination.new(
+instance = Zernio::ListContacts200ResponsePagination.new(
   total: null,
   limit: null,
   skip: null,

@@ -1,4 +1,4 @@
-# Late::AnalyticsApi
+# Zernio::AnalyticsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -34,14 +34,14 @@ Returns analytics for posts. With postId, returns a single post. Without it, ret
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 opts = {
   post_id: 'post_id_example', # String | Returns analytics for a single post. Accepts both Zernio Post IDs and External Post IDs. Zernio IDs are auto-resolved to External Post analytics.
   platform: 'platform_example', # String | Filter by platform (default \"all\")
@@ -60,7 +60,7 @@ begin
   # Get post analytics
   result = api_instance.get_analytics(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_analytics: #{e}"
 end
 ```
@@ -78,7 +78,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetAnalytics200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_analytics_with_http_info: #{e}"
 end
 ```
@@ -125,14 +125,14 @@ Returns the best times to post based on historical engagement data. Groups all p
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 opts = {
   platform: 'platform_example', # String | Filter by platform (e.g. \"instagram\", \"tiktok\"). Omit for all platforms.
   profile_id: 'profile_id_example', # String | Filter by profile ID. Omit for all profiles.
@@ -143,7 +143,7 @@ begin
   # Get best times to post
   result = api_instance.get_best_time_to_post(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_best_time_to_post: #{e}"
 end
 ```
@@ -161,7 +161,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetBestTimeToPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_best_time_to_post_with_http_info: #{e}"
 end
 ```
@@ -200,14 +200,14 @@ Returns how engagement accumulates over time after a post is published. Each buc
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 opts = {
   platform: 'platform_example', # String | Filter by platform (e.g. \"instagram\", \"tiktok\"). Omit for all platforms.
   profile_id: 'profile_id_example', # String | Filter by profile ID. Omit for all profiles.
@@ -218,7 +218,7 @@ begin
   # Get content performance decay
   result = api_instance.get_content_decay(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_content_decay: #{e}"
 end
 ```
@@ -236,7 +236,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetContentDecay200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_content_decay_with_http_info: #{e}"
 end
 ```
@@ -275,14 +275,14 @@ Returns daily aggregated analytics metrics and a per-platform breakdown. Each da
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 opts = {
   platform: 'platform_example', # String | Filter by platform (e.g. \"instagram\", \"tiktok\"). Omit for all platforms.
   profile_id: 'profile_id_example', # String | Filter by profile ID. Omit for all profiles.
@@ -296,7 +296,7 @@ begin
   # Get daily aggregated metrics
   result = api_instance.get_daily_metrics(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_daily_metrics: #{e}"
 end
 ```
@@ -314,7 +314,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetDailyMetrics200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_daily_metrics_with_http_info: #{e}"
 end
 ```
@@ -356,14 +356,14 @@ Returns follower count history and growth metrics for connected social accounts.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 opts = {
   account_ids: 'account_ids_example', # String | Comma-separated list of account IDs (optional, defaults to all user's accounts)
   profile_id: 'profile_id_example', # String | Filter by profile ID
@@ -376,7 +376,7 @@ begin
   # Get follower stats
   result = api_instance.get_follower_stats(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_follower_stats: #{e}"
 end
 ```
@@ -394,7 +394,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetFollowerStats200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_follower_stats_with_http_info: #{e}"
 end
 ```
@@ -435,14 +435,14 @@ Returns daily performance metrics for a Google Business Profile location. Metric
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Google Business Profile account.
 opts = {
   metrics: 'metrics_example', # String | Comma-separated metric names. Defaults to all available metrics. Valid values: BUSINESS_IMPRESSIONS_DESKTOP_MAPS, BUSINESS_IMPRESSIONS_DESKTOP_SEARCH, BUSINESS_IMPRESSIONS_MOBILE_MAPS, BUSINESS_IMPRESSIONS_MOBILE_SEARCH, BUSINESS_CONVERSATIONS, BUSINESS_DIRECTION_REQUESTS, CALL_CLICKS, WEBSITE_CLICKS, BUSINESS_BOOKINGS, BUSINESS_FOOD_ORDERS, BUSINESS_FOOD_MENU_CLICKS 
@@ -454,7 +454,7 @@ begin
   # Get GBP performance metrics
   result = api_instance.get_google_business_performance(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_google_business_performance: #{e}"
 end
 ```
@@ -472,7 +472,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGoogleBusinessPerformance200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_google_business_performance_with_http_info: #{e}"
 end
 ```
@@ -512,14 +512,14 @@ Returns search keywords that triggered impressions for a Google Business Profile
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Google Business Profile account.
 opts = {
   start_month: 'start_month_example', # String | Start month (YYYY-MM). Defaults to 3 months ago.
@@ -530,7 +530,7 @@ begin
   # Get GBP search keywords
   result = api_instance.get_google_business_search_keywords(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_google_business_search_keywords: #{e}"
 end
 ```
@@ -548,7 +548,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGoogleBusinessSearchKeywords200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_google_business_search_keywords_with_http_info: #{e}"
 end
 ```
@@ -587,14 +587,14 @@ Returns account-level Instagram insights such as reach, views, accounts engaged,
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Instagram account
 opts = {
   metrics: 'metrics_example', # String | Comma-separated list of metrics. Defaults to \"reach,views,accounts_engaged,total_interactions\". Valid metrics: reach, views, accounts_engaged, total_interactions, comments, likes, saves, shares, replies, reposts, follows_and_unfollows, profile_links_taps. Note: only \"reach\" supports metricType=time_series. All other metrics are total_value only. 
@@ -608,7 +608,7 @@ begin
   # Get Instagram insights
   result = api_instance.get_instagram_account_insights(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_instagram_account_insights: #{e}"
 end
 ```
@@ -626,7 +626,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <InstagramAccountInsightsResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_instagram_account_insights_with_http_info: #{e}"
 end
 ```
@@ -668,14 +668,14 @@ Returns audience demographic insights for an Instagram account, broken down by a
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the Instagram account
 opts = {
   metric: 'follower_demographics', # String | \"follower_demographics\" for follower audience data, or \"engaged_audience_demographics\" for engaged viewers. 
@@ -687,7 +687,7 @@ begin
   # Get Instagram demographics
   result = api_instance.get_instagram_demographics(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_instagram_demographics: #{e}"
 end
 ```
@@ -705,7 +705,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <InstagramDemographicsResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_instagram_demographics_with_http_info: #{e}"
 end
 ```
@@ -745,14 +745,14 @@ Returns aggregate analytics across all posts for a LinkedIn personal account. On
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The ID of the LinkedIn personal account
 opts = {
   aggregation: 'TOTAL', # String | TOTAL (default, lifetime totals) or DAILY (time series). MEMBERS_REACHED not available with DAILY.
@@ -765,7 +765,7 @@ begin
   # Get LinkedIn aggregate stats
   result = api_instance.get_linked_in_aggregate_analytics(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_linked_in_aggregate_analytics: #{e}"
 end
 ```
@@ -783,7 +783,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetLinkedInAggregateAnalytics200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_linked_in_aggregate_analytics_with_http_info: #{e}"
 end
 ```
@@ -824,14 +824,14 @@ Returns analytics for a specific LinkedIn post by URN. Works for both personal a
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The ID of the LinkedIn account
 urn = 'urn:li:share:7123456789012345678' # String | The LinkedIn post URN
 
@@ -839,7 +839,7 @@ begin
   # Get LinkedIn post stats
   result = api_instance.get_linked_in_post_analytics(account_id, urn)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_linked_in_post_analytics: #{e}"
 end
 ```
@@ -857,7 +857,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetLinkedInPostAnalytics200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_linked_in_post_analytics_with_http_info: #{e}"
 end
 ```
@@ -895,14 +895,14 @@ Returns individual reactions for a specific LinkedIn post, including reactor pro
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The ID of the LinkedIn organization account
 urn = 'urn:li:share:7123456789012345678' # String | The LinkedIn post URN
 opts = {
@@ -914,7 +914,7 @@ begin
   # Get LinkedIn post reactions
   result = api_instance.get_linked_in_post_reactions(account_id, urn, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_linked_in_post_reactions: #{e}"
 end
 ```
@@ -932,7 +932,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetLinkedInPostReactions200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_linked_in_post_reactions_with_http_info: #{e}"
 end
 ```
@@ -972,14 +972,14 @@ Returns a daily timeline of analytics metrics for a specific post, showing how i
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 post_id = 'post_id_example' # String | The post to fetch timeline for. Accepts an ExternalPost ID, a platformPostId, or a Zernio Post ID. 
 opts = {
   from_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Start of date range (ISO 8601). Defaults to 90 days ago.
@@ -990,7 +990,7 @@ begin
   # Get post analytics timeline
   result = api_instance.get_post_timeline(post_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_post_timeline: #{e}"
 end
 ```
@@ -1008,7 +1008,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetPostTimeline200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_post_timeline_with_http_info: #{e}"
 end
 ```
@@ -1047,14 +1047,14 @@ Returns the correlation between posting frequency (posts per week) and engagemen
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 opts = {
   platform: 'platform_example', # String | Filter by platform (e.g. \"instagram\", \"tiktok\"). Omit for all platforms.
   profile_id: 'profile_id_example', # String | Filter by profile ID. Omit for all profiles.
@@ -1065,7 +1065,7 @@ begin
   # Get frequency vs engagement
   result = api_instance.get_posting_frequency(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_posting_frequency: #{e}"
 end
 ```
@@ -1083,7 +1083,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetPostingFrequency200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_posting_frequency_with_http_info: #{e}"
 end
 ```
@@ -1122,14 +1122,14 @@ Returns daily view counts for a YouTube video including views, watch time, and s
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 video_id = 'video_id_example' # String | The YouTube video ID (e.g., \"dQw4w9WgXcQ\")
 account_id = 'account_id_example' # String | The Zernio account ID for the YouTube account
 opts = {
@@ -1141,7 +1141,7 @@ begin
   # Get YouTube daily views
   result = api_instance.get_you_tube_daily_views(video_id, account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_you_tube_daily_views: #{e}"
 end
 ```
@@ -1159,7 +1159,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <YouTubeDailyViewsResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_you_tube_daily_views_with_http_info: #{e}"
 end
 ```
@@ -1199,14 +1199,14 @@ Returns audience demographic insights for a YouTube channel, broken down by age,
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AnalyticsApi.new
+api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the YouTube account
 opts = {
   breakdown: 'breakdown_example', # String | Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
@@ -1218,7 +1218,7 @@ begin
   # Get YouTube demographics
   result = api_instance.get_you_tube_demographics(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_you_tube_demographics: #{e}"
 end
 ```
@@ -1236,7 +1236,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <YouTubeDemographicsResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AnalyticsApi->get_you_tube_demographics_with_http_info: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# Late::SendConversionsRequest
+# Zernio::SendConversionsRequest
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendConversionsRequest.new(
+instance = Zernio::SendConversionsRequest.new(
   account_id: null,
   destination_id: null,
   events: null,

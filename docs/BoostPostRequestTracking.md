@@ -1,4 +1,4 @@
-# Late::BoostPostRequestTracking
+# Zernio::BoostPostRequestTracking
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BoostPostRequestTracking.new(
+instance = Zernio::BoostPostRequestTracking.new(
   pixel_id: null,
   url_tags: null
 )

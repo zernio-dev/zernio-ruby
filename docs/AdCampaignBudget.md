@@ -1,4 +1,4 @@
-# Late::AdCampaignBudget
+# Zernio::AdCampaignBudget
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AdCampaignBudget.new(
+instance = Zernio::AdCampaignBudget.new(
   amount: null,
   type: null
 )

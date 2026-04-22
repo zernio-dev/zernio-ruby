@@ -1,4 +1,4 @@
-# Late::GetMediaPresignedUrl200Response
+# Zernio::GetMediaPresignedUrl200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetMediaPresignedUrl200Response.new(
+instance = Zernio::GetMediaPresignedUrl200Response.new(
   upload_url: null,
   public_url: null,
   key: null,

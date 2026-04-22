@@ -1,4 +1,4 @@
-# Late::ListBroadcastRecipients200Response
+# Zernio::ListBroadcastRecipients200Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListBroadcastRecipients200Response.new(
+instance = Zernio::ListBroadcastRecipients200Response.new(
   success: null,
   recipients: null,
   pagination: null

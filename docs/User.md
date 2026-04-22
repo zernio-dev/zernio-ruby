@@ -1,4 +1,4 @@
-# Late::User
+# Zernio::User
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::User.new(
+instance = Zernio::User.new(
   _id: null,
   email: null,
   name: null,

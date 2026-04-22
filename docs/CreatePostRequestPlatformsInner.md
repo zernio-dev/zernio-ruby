@@ -1,4 +1,4 @@
-# Late::CreatePostRequestPlatformsInner
+# Zernio::CreatePostRequestPlatformsInner
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreatePostRequestPlatformsInner.new(
+instance = Zernio::CreatePostRequestPlatformsInner.new(
   platform: twitter,
   account_id: null,
   custom_content: null,

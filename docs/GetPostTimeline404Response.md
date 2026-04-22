@@ -1,4 +1,4 @@
-# Late::GetPostTimeline404Response
+# Zernio::GetPostTimeline404Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPostTimeline404Response.new(
+instance = Zernio::GetPostTimeline404Response.new(
   error: Post not found
 )
 ```

@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequestInteractiveHeader
+# Zernio::SendInboxMessageRequestInteractiveHeader
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequestInteractiveHeader.new(
+instance = Zernio::SendInboxMessageRequestInteractiveHeader.new(
   type: null,
   text: null,
   image: null,

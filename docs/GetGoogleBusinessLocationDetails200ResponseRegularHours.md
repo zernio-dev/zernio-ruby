@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessLocationDetails200ResponseRegularHours
+# Zernio::GetGoogleBusinessLocationDetails200ResponseRegularHours
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessLocationDetails200ResponseRegularHours.new(
+instance = Zernio::GetGoogleBusinessLocationDetails200ResponseRegularHours.new(
   periods: null
 )
 ```

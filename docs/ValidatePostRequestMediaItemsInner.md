@@ -1,4 +1,4 @@
-# Late::ValidatePostRequestMediaItemsInner
+# Zernio::ValidatePostRequestMediaItemsInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidatePostRequestMediaItemsInner.new(
+instance = Zernio::ValidatePostRequestMediaItemsInner.new(
   url: null,
   type: null
 )

@@ -1,4 +1,4 @@
-# Late::CreateCommentAutomationRequest
+# Zernio::CreateCommentAutomationRequest
 
 ## Properties
 
@@ -18,9 +18,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateCommentAutomationRequest.new(
+instance = Zernio::CreateCommentAutomationRequest.new(
   profile_id: null,
   account_id: null,
   platform_post_id: null,

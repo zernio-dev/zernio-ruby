@@ -1,4 +1,4 @@
-# Late::GetFollowerStats403Response
+# Zernio::GetFollowerStats403Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetFollowerStats403Response.new(
+instance = Zernio::GetFollowerStats403Response.new(
   error: Analytics add-on required,
   message: Follower stats tracking requires the Analytics add-on. Please upgrade to access this feature.,
   requires_addon: true

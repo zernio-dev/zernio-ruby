@@ -1,4 +1,4 @@
-# Late::SearchReddit200Response
+# Zernio::SearchReddit200Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SearchReddit200Response.new(
+instance = Zernio::SearchReddit200Response.new(
   items: null,
   after: null,
   before: null

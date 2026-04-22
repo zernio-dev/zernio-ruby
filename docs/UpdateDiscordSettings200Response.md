@@ -1,4 +1,4 @@
-# Late::UpdateDiscordSettings200Response
+# Zernio::UpdateDiscordSettings200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateDiscordSettings200Response.new(
+instance = Zernio::UpdateDiscordSettings200Response.new(
   message: Discord settings updated,
   account: null
 )

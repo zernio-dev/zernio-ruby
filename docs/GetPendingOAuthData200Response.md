@@ -1,4 +1,4 @@
-# Late::GetPendingOAuthData200Response
+# Zernio::GetPendingOAuthData200Response
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPendingOAuthData200Response.new(
+instance = Zernio::GetPendingOAuthData200Response.new(
   platform: null,
   profile_id: null,
   temp_token: null,

@@ -1,4 +1,4 @@
-# Late::DiscordPlatformDataEmbedsInnerAuthor
+# Zernio::DiscordPlatformDataEmbedsInnerAuthor
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DiscordPlatformDataEmbedsInnerAuthor.new(
+instance = Zernio::DiscordPlatformDataEmbedsInnerAuthor.new(
   name: null,
   url: null,
   icon_url: null

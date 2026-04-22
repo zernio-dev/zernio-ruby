@@ -1,4 +1,4 @@
-# Late::WebhookPayloadMessageDeliveryStatus
+# Zernio::WebhookPayloadMessageDeliveryStatus
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::WebhookPayloadMessageDeliveryStatus.new(
+instance = Zernio::WebhookPayloadMessageDeliveryStatus.new(
   id: null,
   event: null,
   message: null,

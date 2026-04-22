@@ -1,4 +1,4 @@
-# Late::CancelBroadcast200Response
+# Zernio::CancelBroadcast200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CancelBroadcast200Response.new(
+instance = Zernio::CancelBroadcast200Response.new(
   success: null,
   broadcast: null
 )

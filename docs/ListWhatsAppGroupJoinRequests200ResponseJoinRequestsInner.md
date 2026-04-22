@@ -1,4 +1,4 @@
-# Late::ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner
+# Zernio::ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.new(
+instance = Zernio::ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.new(
   user: null,
   timestamp: null
 )

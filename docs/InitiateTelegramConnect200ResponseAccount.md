@@ -1,4 +1,4 @@
-# Late::InitiateTelegramConnect200ResponseAccount
+# Zernio::InitiateTelegramConnect200ResponseAccount
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InitiateTelegramConnect200ResponseAccount.new(
+instance = Zernio::InitiateTelegramConnect200ResponseAccount.new(
   _id: null,
   platform: null,
   username: null,

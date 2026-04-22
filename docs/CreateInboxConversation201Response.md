@@ -1,4 +1,4 @@
-# Late::CreateInboxConversation201Response
+# Zernio::CreateInboxConversation201Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateInboxConversation201Response.new(
+instance = Zernio::CreateInboxConversation201Response.new(
   success: true,
   data: null
 )

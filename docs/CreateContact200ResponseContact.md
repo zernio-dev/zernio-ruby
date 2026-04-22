@@ -1,4 +1,4 @@
-# Late::CreateContact200ResponseContact
+# Zernio::CreateContact200ResponseContact
 
 ## Properties
 
@@ -18,9 +18,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateContact200ResponseContact.new(
+instance = Zernio::CreateContact200ResponseContact.new(
   id: null,
   name: null,
   email: null,

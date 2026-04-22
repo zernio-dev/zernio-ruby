@@ -1,4 +1,4 @@
-# Late::SelectFacebookPage200Response
+# Zernio::SelectFacebookPage200Response
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SelectFacebookPage200Response.new(
+instance = Zernio::SelectFacebookPage200Response.new(
   message: null,
   redirect_url: null,
   account: null

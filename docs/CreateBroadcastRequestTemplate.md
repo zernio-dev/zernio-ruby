@@ -1,4 +1,4 @@
-# Late::CreateBroadcastRequestTemplate
+# Zernio::CreateBroadcastRequestTemplate
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateBroadcastRequestTemplate.new(
+instance = Zernio::CreateBroadcastRequestTemplate.new(
   name: null,
   language: null,
   components: null

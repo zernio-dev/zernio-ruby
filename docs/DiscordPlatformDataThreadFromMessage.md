@@ -1,4 +1,4 @@
-# Late::DiscordPlatformDataThreadFromMessage
+# Zernio::DiscordPlatformDataThreadFromMessage
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DiscordPlatformDataThreadFromMessage.new(
+instance = Zernio::DiscordPlatformDataThreadFromMessage.new(
   name: null,
   auto_archive_duration: null,
   rate_limit_per_user: null

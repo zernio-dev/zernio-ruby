@@ -1,4 +1,4 @@
-# Late::CreateWhatsAppGroupChatRequest
+# Zernio::CreateWhatsAppGroupChatRequest
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateWhatsAppGroupChatRequest.new(
+instance = Zernio::CreateWhatsAppGroupChatRequest.new(
   account_id: null,
   subject: null,
   description: null,

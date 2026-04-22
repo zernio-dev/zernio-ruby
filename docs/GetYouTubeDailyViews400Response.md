@@ -1,4 +1,4 @@
-# Late::GetYouTubeDailyViews400Response
+# Zernio::GetYouTubeDailyViews400Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetYouTubeDailyViews400Response.new(
+instance = Zernio::GetYouTubeDailyViews400Response.new(
   error: null
 )
 ```

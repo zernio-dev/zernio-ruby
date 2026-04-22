@@ -1,4 +1,4 @@
-# Late::TelegramPlatformData
+# Zernio::TelegramPlatformData
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::TelegramPlatformData.new(
+instance = Zernio::TelegramPlatformData.new(
   parse_mode: null,
   disable_web_page_preview: null,
   disable_notification: null,

@@ -1,4 +1,4 @@
-# Late::SendTypingIndicatorRequest
+# Zernio::SendTypingIndicatorRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendTypingIndicatorRequest.new(
+instance = Zernio::SendTypingIndicatorRequest.new(
   account_id: null
 )
 ```

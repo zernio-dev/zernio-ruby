@@ -1,4 +1,4 @@
-# Late::GetLinkedInAggregateAnalytics403Response
+# Zernio::GetLinkedInAggregateAnalytics403Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetLinkedInAggregateAnalytics403Response.new(
+instance = Zernio::GetLinkedInAggregateAnalytics403Response.new(
   error: null,
   code: missing_scope,
   required_scope: r_member_postAnalytics,

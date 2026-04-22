@@ -1,4 +1,4 @@
-# Late::GetYouTubeDemographics412ResponseScopeStatus
+# Zernio::GetYouTubeDemographics412ResponseScopeStatus
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetYouTubeDemographics412ResponseScopeStatus.new(
+instance = Zernio::GetYouTubeDemographics412ResponseScopeStatus.new(
   has_analytics_scope: false,
   requires_reauthorization: true,
   reauthorize_url: null

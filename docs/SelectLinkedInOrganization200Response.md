@@ -1,4 +1,4 @@
-# Late::SelectLinkedInOrganization200Response
+# Zernio::SelectLinkedInOrganization200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SelectLinkedInOrganization200Response.new(
+instance = Zernio::SelectLinkedInOrganization200Response.new(
   message: null,
   redirect_url: null,
   account: null,

@@ -1,4 +1,4 @@
-# Late::GetPostTimeline403Response
+# Zernio::GetPostTimeline403Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPostTimeline403Response.new(
+instance = Zernio::GetPostTimeline403Response.new(
   error: Forbidden
 )
 ```

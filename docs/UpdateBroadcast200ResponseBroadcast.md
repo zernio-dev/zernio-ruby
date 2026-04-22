@@ -1,4 +1,4 @@
-# Late::UpdateBroadcast200ResponseBroadcast
+# Zernio::UpdateBroadcast200ResponseBroadcast
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateBroadcast200ResponseBroadcast.new(
+instance = Zernio::UpdateBroadcast200ResponseBroadcast.new(
   id: null,
   name: null,
   description: null,

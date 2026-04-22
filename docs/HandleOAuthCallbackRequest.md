@@ -1,4 +1,4 @@
-# Late::HandleOAuthCallbackRequest
+# Zernio::HandleOAuthCallbackRequest
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::HandleOAuthCallbackRequest.new(
+instance = Zernio::HandleOAuthCallbackRequest.new(
   code: null,
   state: null,
   profile_id: null

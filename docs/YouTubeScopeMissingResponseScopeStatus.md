@@ -1,4 +1,4 @@
-# Late::YouTubeScopeMissingResponseScopeStatus
+# Zernio::YouTubeScopeMissingResponseScopeStatus
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::YouTubeScopeMissingResponseScopeStatus.new(
+instance = Zernio::YouTubeScopeMissingResponseScopeStatus.new(
   has_analytics_scope: false,
   requires_reauthorization: true,
   reauthorize_url: null

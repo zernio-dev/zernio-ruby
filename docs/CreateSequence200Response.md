@@ -1,4 +1,4 @@
-# Late::CreateSequence200Response
+# Zernio::CreateSequence200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateSequence200Response.new(
+instance = Zernio::CreateSequence200Response.new(
   success: null,
   sequence: null
 )

@@ -1,4 +1,4 @@
-# Late::ConversionEventItemsInner
+# Zernio::ConversionEventItemsInner
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ConversionEventItemsInner.new(
+instance = Zernio::ConversionEventItemsInner.new(
   id: null,
   name: null,
   price: null,

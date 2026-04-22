@@ -1,4 +1,4 @@
-# Late::AnalyticsSinglePostResponseMediaItemsInner
+# Zernio::AnalyticsSinglePostResponseMediaItemsInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AnalyticsSinglePostResponseMediaItemsInner.new(
+instance = Zernio::AnalyticsSinglePostResponseMediaItemsInner.new(
   type: null,
   url: null,
   thumbnail: null

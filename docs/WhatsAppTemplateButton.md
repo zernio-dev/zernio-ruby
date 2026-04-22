@@ -1,4 +1,4 @@
-# Late::WhatsAppTemplateButton
+# Zernio::WhatsAppTemplateButton
 
 ## Properties
 
@@ -22,9 +22,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::WhatsAppTemplateButton.new(
+instance = Zernio::WhatsAppTemplateButton.new(
   type: null,
   text: null,
   url: null,

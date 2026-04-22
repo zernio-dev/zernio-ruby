@@ -1,4 +1,4 @@
-# Late::InboxWebhookMessageSender
+# Zernio::InboxWebhookMessageSender
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InboxWebhookMessageSender.new(
+instance = Zernio::InboxWebhookMessageSender.new(
   id: null,
   name: null,
   username: null,

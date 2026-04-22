@@ -1,4 +1,4 @@
-# Late::AdCreative
+# Zernio::AdCreative
 
 ## Properties
 
@@ -21,9 +21,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AdCreative.new(
+instance = Zernio::AdCreative.new(
   thumbnail_url: null,
   image_url: null,
   video_id: null,

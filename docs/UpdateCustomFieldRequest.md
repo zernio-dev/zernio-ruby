@@ -1,4 +1,4 @@
-# Late::UpdateCustomFieldRequest
+# Zernio::UpdateCustomFieldRequest
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateCustomFieldRequest.new(
+instance = Zernio::UpdateCustomFieldRequest.new(
   name: null,
   options: null
 )

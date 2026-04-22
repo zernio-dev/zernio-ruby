@@ -1,4 +1,4 @@
-# Late::PostsListResponse
+# Zernio::PostsListResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::PostsListResponse.new(
+instance = Zernio::PostsListResponse.new(
   posts: null,
   pagination: null
 )

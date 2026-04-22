@@ -1,4 +1,4 @@
-# Late::SetMessengerMenuRequest
+# Zernio::SetMessengerMenuRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SetMessengerMenuRequest.new(
+instance = Zernio::SetMessengerMenuRequest.new(
   persistent_menu: null
 )
 ```

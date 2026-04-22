@@ -1,4 +1,4 @@
-# Late::GetBroadcast200ResponseBroadcastTemplate
+# Zernio::GetBroadcast200ResponseBroadcastTemplate
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetBroadcast200ResponseBroadcastTemplate.new(
+instance = Zernio::GetBroadcast200ResponseBroadcastTemplate.new(
   name: null,
   language: null
 )

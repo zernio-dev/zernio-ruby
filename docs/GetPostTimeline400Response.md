@@ -1,4 +1,4 @@
-# Late::GetPostTimeline400Response
+# Zernio::GetPostTimeline400Response
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetPostTimeline400Response.new(
+instance = Zernio::GetPostTimeline400Response.new(
   error: Missing required parameter: postId
 )
 ```

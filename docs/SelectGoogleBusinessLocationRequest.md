@@ -1,4 +1,4 @@
-# Late::SelectGoogleBusinessLocationRequest
+# Zernio::SelectGoogleBusinessLocationRequest
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SelectGoogleBusinessLocationRequest.new(
+instance = Zernio::SelectGoogleBusinessLocationRequest.new(
   profile_id: null,
   location_id: null,
   pending_data_token: null,

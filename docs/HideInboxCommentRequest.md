@@ -1,4 +1,4 @@
-# Late::HideInboxCommentRequest
+# Zernio::HideInboxCommentRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::HideInboxCommentRequest.new(
+instance = Zernio::HideInboxCommentRequest.new(
   account_id: null
 )
 ```

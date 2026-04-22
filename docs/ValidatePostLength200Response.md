@@ -1,4 +1,4 @@
-# Late::ValidatePostLength200Response
+# Zernio::ValidatePostLength200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidatePostLength200Response.new(
+instance = Zernio::ValidatePostLength200Response.new(
   text: null,
   platforms: {&quot;twitter&quot;:{&quot;count&quot;:51,&quot;limit&quot;:280,&quot;valid&quot;:true},&quot;twitterPremium&quot;:{&quot;count&quot;:51,&quot;limit&quot;:25000,&quot;valid&quot;:true},&quot;instagram&quot;:{&quot;count&quot;:51,&quot;limit&quot;:2200,&quot;valid&quot;:true},&quot;bluesky&quot;:{&quot;count&quot;:51,&quot;limit&quot;:300,&quot;valid&quot;:true},&quot;snapchat&quot;:{&quot;count&quot;:51,&quot;limit&quot;:160,&quot;valid&quot;:true}}
 )

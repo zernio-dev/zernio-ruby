@@ -1,4 +1,4 @@
-# Late::ListContacts200Response
+# Zernio::ListContacts200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListContacts200Response.new(
+instance = Zernio::ListContacts200Response.new(
   success: null,
   contacts: null,
   filters: null,

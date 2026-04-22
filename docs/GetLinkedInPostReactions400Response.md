@@ -1,4 +1,4 @@
-# Late::GetLinkedInPostReactions400Response
+# Zernio::GetLinkedInPostReactions400Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetLinkedInPostReactions400Response.new(
+instance = Zernio::GetLinkedInPostReactions400Response.new(
   error: null,
   code: null
 )

@@ -1,4 +1,4 @@
-# Late::GetAdAnalytics200ResponseAnalyticsDailyInner
+# Zernio::GetAdAnalytics200ResponseAnalyticsDailyInner
 
 ## Properties
 
@@ -24,9 +24,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetAdAnalytics200ResponseAnalyticsDailyInner.new(
+instance = Zernio::GetAdAnalytics200ResponseAnalyticsDailyInner.new(
   spend: null,
   impressions: null,
   reach: null,

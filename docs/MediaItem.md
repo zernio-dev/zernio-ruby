@@ -1,4 +1,4 @@
-# Late::MediaItem
+# Zernio::MediaItem
 
 ## Properties
 
@@ -17,9 +17,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::MediaItem.new(
+instance = Zernio::MediaItem.new(
   type: null,
   url: null,
   title: null,

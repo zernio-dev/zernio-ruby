@@ -1,4 +1,4 @@
-# Late::DiscordPlatformDataPollQuestion
+# Zernio::DiscordPlatformDataPollQuestion
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::DiscordPlatformDataPollQuestion.new(
+instance = Zernio::DiscordPlatformDataPollQuestion.new(
   text: null
 )
 ```

@@ -1,4 +1,4 @@
-# Late::CreateBroadcastRequestSegmentFilters
+# Zernio::CreateBroadcastRequestSegmentFilters
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateBroadcastRequestSegmentFilters.new(
+instance = Zernio::CreateBroadcastRequestSegmentFilters.new(
   tags: null,
   is_subscribed: null
 )

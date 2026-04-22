@@ -1,4 +1,4 @@
-# Late::AdCampaignsApi
+# Zernio::AdCampaignsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -27,21 +27,21 @@ Process up to 50 campaigns in one call. Each campaign is updated concurrently an
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
-bulk_update_ad_campaign_status_request = Late::BulkUpdateAdCampaignStatusRequest.new({status: 'active', campaigns: [Late::BulkUpdateAdCampaignStatusRequestCampaignsInner.new({platform_campaign_id: 'platform_campaign_id_example', platform: 'facebook'})]}) # BulkUpdateAdCampaignStatusRequest | 
+api_instance = Zernio::AdCampaignsApi.new
+bulk_update_ad_campaign_status_request = Zernio::BulkUpdateAdCampaignStatusRequest.new({status: 'active', campaigns: [Zernio::BulkUpdateAdCampaignStatusRequestCampaignsInner.new({platform_campaign_id: 'platform_campaign_id_example', platform: 'facebook'})]}) # BulkUpdateAdCampaignStatusRequest | 
 
 begin
   # Pause or resume many campaigns
   result = api_instance.bulk_update_ad_campaign_status(bulk_update_ad_campaign_status_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->bulk_update_ad_campaign_status: #{e}"
 end
 ```
@@ -59,7 +59,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BulkUpdateAdCampaignStatus200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->bulk_update_ad_campaign_status_with_http_info: #{e}"
 end
 ```
@@ -96,22 +96,22 @@ Deletes the whole campaign on the platform, cascading to its ad sets and ads. Lo
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
+api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Platform campaign ID
-delete_ad_campaign_request = Late::DeleteAdCampaignRequest.new({platform: 'facebook'}) # DeleteAdCampaignRequest | 
+delete_ad_campaign_request = Zernio::DeleteAdCampaignRequest.new({platform: 'facebook'}) # DeleteAdCampaignRequest | 
 
 begin
   # Delete a campaign
   result = api_instance.delete_ad_campaign(campaign_id, delete_ad_campaign_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->delete_ad_campaign: #{e}"
 end
 ```
@@ -129,7 +129,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAdCampaign200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->delete_ad_campaign_with_http_info: #{e}"
 end
 ```
@@ -167,22 +167,22 @@ Duplicates a campaign, including its ad sets, ads, creatives, and targeting by d
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
+api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Source platform campaign ID
-duplicate_ad_campaign_request = Late::DuplicateAdCampaignRequest.new({platform: 'facebook'}) # DuplicateAdCampaignRequest | 
+duplicate_ad_campaign_request = Zernio::DuplicateAdCampaignRequest.new({platform: 'facebook'}) # DuplicateAdCampaignRequest | 
 
 begin
   # Duplicate a campaign
   result = api_instance.duplicate_ad_campaign(campaign_id, duplicate_ad_campaign_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->duplicate_ad_campaign: #{e}"
 end
 ```
@@ -200,7 +200,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DuplicateAdCampaign200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->duplicate_ad_campaign_with_http_info: #{e}"
 end
 ```
@@ -238,20 +238,20 @@ Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
+api_instance = Zernio::AdCampaignsApi.new
 opts = {
   page: 56, # Integer | Page number (1-based)
   limit: 56, # Integer | Campaigns per page
   source: 'zernio', # String | `all` (default) returns both Zernio-created ads and those discovered from the platform's ad manager — matches the web UI's default view. Pass `zernio` to restrict to isExternal=false only. Status is NOT filtered by default — use the `status` param for that.
   platform: 'facebook', # String | 
-  status: Late::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
+  status: Zernio::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID
   account_id: 'account_id_example', # String | Social account ID
   profile_id: 'profile_id_example', # String | Profile ID
@@ -263,7 +263,7 @@ begin
   # Get campaign tree
   result = api_instance.get_ad_tree(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->get_ad_tree: #{e}"
 end
 ```
@@ -281,7 +281,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetAdTree200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->get_ad_tree_with_http_info: #{e}"
 end
 ```
@@ -327,20 +327,20 @@ Returns campaigns as virtual aggregations over ad documents grouped by platform 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
+api_instance = Zernio::AdCampaignsApi.new
 opts = {
   page: 56, # Integer | Page number (1-based)
   limit: 56, # Integer | 
   source: 'zernio', # String | `all` (default) returns both Zernio-created ads and those discovered from the platform's ad manager — matches the web UI's default view. Pass `zernio` to restrict to isExternal=false only. Status is NOT filtered by default — use the `status` param for that.
   platform: 'facebook', # String | 
-  status: Late::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
+  status: Zernio::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (e.g. act_123 for Meta)
   account_id: 'account_id_example', # String | Social account ID
   profile_id: 'profile_id_example' # String | Profile ID
@@ -350,7 +350,7 @@ begin
   # List campaigns
   result = api_instance.list_ad_campaigns(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->list_ad_campaigns: #{e}"
 end
 ```
@@ -368,7 +368,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListAdCampaigns200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->list_ad_campaigns_with_http_info: #{e}"
 end
 ```
@@ -412,22 +412,22 @@ Campaign-level edits. Currently supports updating the CBO (Campaign Budget Optim
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
+api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Platform campaign ID
-update_ad_campaign_request = Late::UpdateAdCampaignRequest.new({platform: 'facebook', budget: Late::UpdateAdCampaignRequestBudget.new({amount: 3.56, type: 'daily'})}) # UpdateAdCampaignRequest | 
+update_ad_campaign_request = Zernio::UpdateAdCampaignRequest.new({platform: 'facebook', budget: Zernio::UpdateAdCampaignRequestBudget.new({amount: 3.56, type: 'daily'})}) # UpdateAdCampaignRequest | 
 
 begin
   # Update a campaign (budget)
   result = api_instance.update_ad_campaign(campaign_id, update_ad_campaign_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_campaign: #{e}"
 end
 ```
@@ -445,7 +445,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdCampaign200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_campaign_with_http_info: #{e}"
 end
 ```
@@ -483,22 +483,22 @@ Updates the status of all ads in a campaign. Makes one platform API call (not pe
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
+api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Platform campaign ID
-update_ad_campaign_status_request = Late::UpdateAdCampaignStatusRequest.new({status: 'active', platform: 'facebook'}) # UpdateAdCampaignStatusRequest | 
+update_ad_campaign_status_request = Zernio::UpdateAdCampaignStatusRequest.new({status: 'active', platform: 'facebook'}) # UpdateAdCampaignStatusRequest | 
 
 begin
   # Pause or resume a campaign
   result = api_instance.update_ad_campaign_status(campaign_id, update_ad_campaign_status_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_campaign_status: #{e}"
 end
 ```
@@ -516,7 +516,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdCampaignStatus200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_campaign_status_with_http_info: #{e}"
 end
 ```
@@ -554,22 +554,22 @@ Ad-set-level writes. Use this for ABO budget updates and ad-set-scoped pause/res
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
+api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Platform ad set ID
-update_ad_set_request = Late::UpdateAdSetRequest.new({platform: 'facebook'}) # UpdateAdSetRequest | 
+update_ad_set_request = Zernio::UpdateAdSetRequest.new({platform: 'facebook'}) # UpdateAdSetRequest | 
 
 begin
   # Update an ad set (budget and/or status)
   result = api_instance.update_ad_set(ad_set_id, update_ad_set_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_set: #{e}"
 end
 ```
@@ -587,7 +587,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdSet200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_set_with_http_info: #{e}"
 end
 ```
@@ -625,22 +625,22 @@ Ad-set-scoped pause/resume (doesn't touch sibling ad sets). Thin wrapper over PU
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdCampaignsApi.new
+api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Platform ad set ID
-update_ad_campaign_status_request = Late::UpdateAdCampaignStatusRequest.new({status: 'active', platform: 'facebook'}) # UpdateAdCampaignStatusRequest | 
+update_ad_campaign_status_request = Zernio::UpdateAdCampaignStatusRequest.new({status: 'active', platform: 'facebook'}) # UpdateAdCampaignStatusRequest | 
 
 begin
   # Pause or resume a single ad set
   result = api_instance.update_ad_set_status(ad_set_id, update_ad_campaign_status_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_set_status: #{e}"
 end
 ```
@@ -658,7 +658,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdSetStatus200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_set_status_with_http_info: #{e}"
 end
 ```

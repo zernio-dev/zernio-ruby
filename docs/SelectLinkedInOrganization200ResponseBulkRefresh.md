@@ -1,4 +1,4 @@
-# Late::SelectLinkedInOrganization200ResponseBulkRefresh
+# Zernio::SelectLinkedInOrganization200ResponseBulkRefresh
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SelectLinkedInOrganization200ResponseBulkRefresh.new(
+instance = Zernio::SelectLinkedInOrganization200ResponseBulkRefresh.new(
   updated_count: null,
   errors: null
 )

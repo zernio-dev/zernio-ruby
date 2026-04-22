@@ -1,4 +1,4 @@
-# Late::InvitesApi
+# Zernio::InvitesApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -19,21 +19,21 @@ Generate a secure invite link to grant team members access to your profiles. Inv
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::InvitesApi.new
-create_invite_token_request = Late::CreateInviteTokenRequest.new({scope: 'all'}) # CreateInviteTokenRequest | 
+api_instance = Zernio::InvitesApi.new
+create_invite_token_request = Zernio::CreateInviteTokenRequest.new({scope: 'all'}) # CreateInviteTokenRequest | 
 
 begin
   # Create invite token
   result = api_instance.create_invite_token(create_invite_token_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling InvitesApi->create_invite_token: #{e}"
 end
 ```
@@ -51,7 +51,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateInviteToken201Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling InvitesApi->create_invite_token_with_http_info: #{e}"
 end
 ```

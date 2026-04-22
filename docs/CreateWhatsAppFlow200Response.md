@@ -1,4 +1,4 @@
-# Late::CreateWhatsAppFlow200Response
+# Zernio::CreateWhatsAppFlow200Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateWhatsAppFlow200Response.new(
+instance = Zernio::CreateWhatsAppFlow200Response.new(
   success: null,
   flow: null
 )

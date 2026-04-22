@@ -1,4 +1,4 @@
-# Late::ProfileDeleteResponse
+# Zernio::ProfileDeleteResponse
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ProfileDeleteResponse.new(
+instance = Zernio::ProfileDeleteResponse.new(
   message: null
 )
 ```

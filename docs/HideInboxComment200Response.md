@@ -1,4 +1,4 @@
-# Late::HideInboxComment200Response
+# Zernio::HideInboxComment200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::HideInboxComment200Response.new(
+instance = Zernio::HideInboxComment200Response.new(
   status: null,
   comment_id: null,
   hidden: null,

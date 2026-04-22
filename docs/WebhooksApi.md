@@ -1,4 +1,4 @@
-# Late::WebhooksApi
+# Zernio::WebhooksApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -23,21 +23,21 @@ Create a new webhook configuration. Maximum 10 webhooks per user.  `name`, `url`
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhooksApi.new
-create_webhook_settings_request = Late::CreateWebhookSettingsRequest.new({name: 'name_example', url: 'url_example', events: ['post.scheduled']}) # CreateWebhookSettingsRequest | 
+api_instance = Zernio::WebhooksApi.new
+create_webhook_settings_request = Zernio::CreateWebhookSettingsRequest.new({name: 'name_example', url: 'url_example', events: ['post.scheduled']}) # CreateWebhookSettingsRequest | 
 
 begin
   # Create webhook
   result = api_instance.create_webhook_settings(create_webhook_settings_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->create_webhook_settings: #{e}"
 end
 ```
@@ -55,7 +55,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateWebhookSettings200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->create_webhook_settings_with_http_info: #{e}"
 end
 ```
@@ -92,21 +92,21 @@ Permanently delete a webhook configuration.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhooksApi.new
+api_instance = Zernio::WebhooksApi.new
 id = 'id_example' # String | Webhook ID to delete
 
 begin
   # Delete webhook
   result = api_instance.delete_webhook_settings(id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->delete_webhook_settings: #{e}"
 end
 ```
@@ -124,7 +124,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->delete_webhook_settings_with_http_info: #{e}"
 end
 ```
@@ -161,20 +161,20 @@ Retrieve all configured webhooks for the authenticated user. Supports up to 10 w
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhooksApi.new
+api_instance = Zernio::WebhooksApi.new
 
 begin
   # List webhooks
   result = api_instance.get_webhook_settings
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->get_webhook_settings: #{e}"
 end
 ```
@@ -192,7 +192,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWebhookSettings200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->get_webhook_settings_with_http_info: #{e}"
 end
 ```
@@ -227,21 +227,21 @@ Send a test webhook to verify your endpoint is configured correctly. The test pa
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhooksApi.new
-test_webhook_request = Late::TestWebhookRequest.new({webhook_id: 'webhook_id_example'}) # TestWebhookRequest | 
+api_instance = Zernio::WebhooksApi.new
+test_webhook_request = Zernio::TestWebhookRequest.new({webhook_id: 'webhook_id_example'}) # TestWebhookRequest | 
 
 begin
   # Send test webhook
   result = api_instance.test_webhook(test_webhook_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->test_webhook: #{e}"
 end
 ```
@@ -259,7 +259,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->test_webhook_with_http_info: #{e}"
 end
 ```
@@ -296,21 +296,21 @@ Update an existing webhook configuration. All fields except `_id` are optional; 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::WebhooksApi.new
-update_webhook_settings_request = Late::UpdateWebhookSettingsRequest.new({_id: '_id_example'}) # UpdateWebhookSettingsRequest | 
+api_instance = Zernio::WebhooksApi.new
+update_webhook_settings_request = Zernio::UpdateWebhookSettingsRequest.new({_id: '_id_example'}) # UpdateWebhookSettingsRequest | 
 
 begin
   # Update webhook
   result = api_instance.update_webhook_settings(update_webhook_settings_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->update_webhook_settings: #{e}"
 end
 ```
@@ -328,7 +328,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateWebhookSettings200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling WebhooksApi->update_webhook_settings_with_http_info: #{e}"
 end
 ```

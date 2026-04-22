@@ -1,4 +1,4 @@
-# Late::UploadedFile
+# Zernio::UploadedFile
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UploadedFile.new(
+instance = Zernio::UploadedFile.new(
   type: null,
   url: null,
   filename: null,

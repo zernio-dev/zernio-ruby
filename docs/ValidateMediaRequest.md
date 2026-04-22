@@ -1,4 +1,4 @@
-# Late::ValidateMediaRequest
+# Zernio::ValidateMediaRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidateMediaRequest.new(
+instance = Zernio::ValidateMediaRequest.new(
   url: https://example.com/image.jpg
 )
 ```

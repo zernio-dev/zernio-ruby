@@ -1,4 +1,4 @@
-# Late::AccountGroupsApi
+# Zernio::AccountGroupsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -22,21 +22,21 @@ Creates a new account group with a name and a list of social account IDs.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountGroupsApi.new
-create_account_group_request = Late::CreateAccountGroupRequest.new({name: 'name_example', account_ids: ['account_ids_example']}) # CreateAccountGroupRequest | 
+api_instance = Zernio::AccountGroupsApi.new
+create_account_group_request = Zernio::CreateAccountGroupRequest.new({name: 'name_example', account_ids: ['account_ids_example']}) # CreateAccountGroupRequest | 
 
 begin
   # Create group
   result = api_instance.create_account_group(create_account_group_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountGroupsApi->create_account_group: #{e}"
 end
 ```
@@ -54,7 +54,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateAccountGroup201Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountGroupsApi->create_account_group_with_http_info: #{e}"
 end
 ```
@@ -91,21 +91,21 @@ Permanently deletes an account group. The accounts themselves are not affected.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountGroupsApi.new
+api_instance = Zernio::AccountGroupsApi.new
 group_id = 'group_id_example' # String | 
 
 begin
   # Delete group
   result = api_instance.delete_account_group(group_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountGroupsApi->delete_account_group: #{e}"
 end
 ```
@@ -123,7 +123,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAccountGroup200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountGroupsApi->delete_account_group_with_http_info: #{e}"
 end
 ```
@@ -160,20 +160,20 @@ Returns all account groups for the authenticated user, including group names and
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountGroupsApi.new
+api_instance = Zernio::AccountGroupsApi.new
 
 begin
   # List groups
   result = api_instance.list_account_groups
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountGroupsApi->list_account_groups: #{e}"
 end
 ```
@@ -191,7 +191,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListAccountGroups200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountGroupsApi->list_account_groups_with_http_info: #{e}"
 end
 ```
@@ -226,22 +226,22 @@ Updates the name or account list of an existing group. You can rename the group,
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountGroupsApi.new
+api_instance = Zernio::AccountGroupsApi.new
 group_id = 'group_id_example' # String | 
-update_account_group_request = Late::UpdateAccountGroupRequest.new # UpdateAccountGroupRequest | 
+update_account_group_request = Zernio::UpdateAccountGroupRequest.new # UpdateAccountGroupRequest | 
 
 begin
   # Update group
   result = api_instance.update_account_group(group_id, update_account_group_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountGroupsApi->update_account_group: #{e}"
 end
 ```
@@ -259,7 +259,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAccountGroup200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountGroupsApi->update_account_group_with_http_info: #{e}"
 end
 ```

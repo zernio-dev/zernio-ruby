@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer
+# Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer.new(
+instance = Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer.new(
   display_name: null,
   profile_photo_url: null,
   is_anonymous: null

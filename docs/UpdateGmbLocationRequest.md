@@ -1,4 +1,4 @@
-# Late::UpdateGmbLocationRequest
+# Zernio::UpdateGmbLocationRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateGmbLocationRequest.new(
+instance = Zernio::UpdateGmbLocationRequest.new(
   selected_location_id: null
 )
 ```

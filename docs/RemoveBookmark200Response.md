@@ -1,4 +1,4 @@
-# Late::RemoveBookmark200Response
+# Zernio::RemoveBookmark200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::RemoveBookmark200Response.new(
+instance = Zernio::RemoveBookmark200Response.new(
   status: success,
   tweet_id: null,
   bookmarked: false,

@@ -1,4 +1,4 @@
-# Late::ListCustomFields200ResponseFieldsInner
+# Zernio::ListCustomFields200ResponseFieldsInner
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListCustomFields200ResponseFieldsInner.new(
+instance = Zernio::ListCustomFields200ResponseFieldsInner.new(
   id: null,
   name: null,
   slug: null,

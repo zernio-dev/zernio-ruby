@@ -1,4 +1,4 @@
-# Late::RedditPlatformData
+# Zernio::RedditPlatformData
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::RedditPlatformData.new(
+instance = Zernio::RedditPlatformData.new(
   subreddit: socialmedia,
   title: null,
   url: null,

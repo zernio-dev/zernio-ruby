@@ -1,4 +1,4 @@
-# Late::FoodMenuItem
+# Zernio::FoodMenuItem
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::FoodMenuItem.new(
+instance = Zernio::FoodMenuItem.new(
   labels: null,
   attributes: null,
   options: null

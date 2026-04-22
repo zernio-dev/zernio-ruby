@@ -1,4 +1,4 @@
-# Late::CreatePostRequest
+# Zernio::CreatePostRequest
 
 ## Properties
 
@@ -26,9 +26,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreatePostRequest.new(
+instance = Zernio::CreatePostRequest.new(
   title: null,
   content: null,
   media_items: null,

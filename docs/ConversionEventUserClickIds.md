@@ -1,4 +1,4 @@
-# Late::ConversionEventUserClickIds
+# Zernio::ConversionEventUserClickIds
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ConversionEventUserClickIds.new(
+instance = Zernio::ConversionEventUserClickIds.new(
   fbc: null,
   fbp: null,
   gclid: null,

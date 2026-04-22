@@ -1,4 +1,4 @@
-# Late::InstagramAccountInsightsResponseMetricsValue
+# Zernio::InstagramAccountInsightsResponseMetricsValue
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InstagramAccountInsightsResponseMetricsValue.new(
+instance = Zernio::InstagramAccountInsightsResponseMetricsValue.new(
   total: null,
   values: null,
   breakdowns: null

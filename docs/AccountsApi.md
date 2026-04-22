@@ -1,4 +1,4 @@
-# Late::AccountsApi
+# Zernio::AccountsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -25,21 +25,21 @@ Disconnects and removes a connected social account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountsApi.new
+api_instance = Zernio::AccountsApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # Disconnect account
   result = api_instance.delete_account(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->delete_account: #{e}"
 end
 ```
@@ -57,7 +57,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAccountGroup200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->delete_account_with_http_info: #{e}"
 end
 ```
@@ -94,21 +94,21 @@ Returns detailed health info for a specific account including token status, perm
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountsApi.new
+api_instance = Zernio::AccountsApi.new
 account_id = 'account_id_example' # String | The account ID to check
 
 begin
   # Check account health
   result = api_instance.get_account_health(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_account_health: #{e}"
 end
 ```
@@ -126,7 +126,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetAccountHealth200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_account_health_with_http_info: #{e}"
 end
 ```
@@ -163,14 +163,14 @@ Returns health status of all connected accounts including token validity, permis
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountsApi.new
+api_instance = Zernio::AccountsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter by profile ID
   platform: 'facebook', # String | Filter by platform
@@ -181,7 +181,7 @@ begin
   # Check accounts health
   result = api_instance.get_all_accounts_health(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_all_accounts_health: #{e}"
 end
 ```
@@ -199,7 +199,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetAllAccountsHealth200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_all_accounts_health_with_http_info: #{e}"
 end
 ```
@@ -238,14 +238,14 @@ Returns follower count history and growth metrics for connected social accounts.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountsApi.new
+api_instance = Zernio::AccountsApi.new
 opts = {
   account_ids: 'account_ids_example', # String | Comma-separated list of account IDs (optional, defaults to all user's accounts)
   profile_id: 'profile_id_example', # String | Filter by profile ID
@@ -258,7 +258,7 @@ begin
   # Get follower stats
   result = api_instance.get_follower_stats(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_follower_stats: #{e}"
 end
 ```
@@ -276,7 +276,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetFollowerStats200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_follower_stats_with_http_info: #{e}"
 end
 ```
@@ -317,14 +317,14 @@ Returns TikTok creator details, available privacy levels, posting limits, and co
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountsApi.new
+api_instance = Zernio::AccountsApi.new
 account_id = 'account_id_example' # String | The TikTok account ID
 opts = {
   media_type: 'video' # String | The media type to get creator info for (affects available interaction settings)
@@ -334,7 +334,7 @@ begin
   # Get TikTok creator info
   result = api_instance.get_tik_tok_creator_info(account_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_tik_tok_creator_info: #{e}"
 end
 ```
@@ -352,7 +352,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetTikTokCreatorInfo200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_tik_tok_creator_info_with_http_info: #{e}"
 end
 ```
@@ -390,14 +390,14 @@ Returns connected social accounts. Only includes accounts within the plan limit 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountsApi.new
+api_instance = Zernio::AccountsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter accounts by profile ID
   platform: 'platform_example', # String | Filter accounts by platform (e.g. \"instagram\", \"twitter\").
@@ -410,7 +410,7 @@ begin
   # List accounts
   result = api_instance.list_accounts(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->list_accounts: #{e}"
 end
 ```
@@ -428,7 +428,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListAccounts200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->list_accounts_with_http_info: #{e}"
 end
 ```
@@ -469,22 +469,22 @@ Updates a connected social account's display name or username override.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountsApi.new
+api_instance = Zernio::AccountsApi.new
 account_id = 'account_id_example' # String | 
-update_account_request = Late::UpdateAccountRequest.new # UpdateAccountRequest | 
+update_account_request = Zernio::UpdateAccountRequest.new # UpdateAccountRequest | 
 
 begin
   # Update account
   result = api_instance.update_account(account_id, update_account_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->update_account: #{e}"
 end
 ```
@@ -502,7 +502,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAccount200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->update_account_with_http_info: #{e}"
 end
 ```

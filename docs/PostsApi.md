@@ -1,4 +1,4 @@
-# Late::PostsApi
+# Zernio::PostsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -28,14 +28,14 @@ Create multiple posts by uploading a CSV file. Use dryRun=true to validate witho
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 opts = {
   dry_run: true, # Boolean | 
   file: File.new('/path/to/some/file') # File | 
@@ -45,7 +45,7 @@ begin
   # Bulk upload from CSV
   result = api_instance.bulk_upload_posts(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->bulk_upload_posts: #{e}"
 end
 ```
@@ -63,7 +63,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BulkUploadPosts200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->bulk_upload_posts_with_http_info: #{e}"
 end
 ```
@@ -101,21 +101,21 @@ Create and optionally publish a post. Immediate posts (publishNow: true) include
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
-create_post_request = Late::CreatePostRequest.new # CreatePostRequest | 
+api_instance = Zernio::PostsApi.new
+create_post_request = Zernio::CreatePostRequest.new # CreatePostRequest | 
 
 begin
   # Create post
   result = api_instance.create_post(create_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->create_post: #{e}"
 end
 ```
@@ -133,7 +133,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PostCreateResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->create_post_with_http_info: #{e}"
 end
 ```
@@ -170,21 +170,21 @@ Delete a draft or scheduled post from Zernio. Published posts cannot be deleted;
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 post_id = 'post_id_example' # String | 
 
 begin
   # Delete post
   result = api_instance.delete_post(post_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->delete_post: #{e}"
 end
 ```
@@ -202,7 +202,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PostDeleteResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->delete_post_with_http_info: #{e}"
 end
 ```
@@ -239,22 +239,22 @@ Edit a published post on a social media platform. Currently only supported for X
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 post_id = 'post_id_example' # String | 
-edit_post_request = Late::EditPostRequest.new({platform: 'twitter', content: 'content_example'}) # EditPostRequest | 
+edit_post_request = Zernio::EditPostRequest.new({platform: 'twitter', content: 'content_example'}) # EditPostRequest | 
 
 begin
   # Edit published post
   result = api_instance.edit_post(post_id, edit_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->edit_post: #{e}"
 end
 ```
@@ -272,7 +272,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <EditPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->edit_post_with_http_info: #{e}"
 end
 ```
@@ -310,21 +310,21 @@ Fetch a single post by ID. For published posts, this returns platformPostUrl for
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 post_id = 'post_id_example' # String | 
 
 begin
   # Get post
   result = api_instance.get_post(post_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->get_post: #{e}"
 end
 ```
@@ -342,7 +342,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PostGetResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->get_post_with_http_info: #{e}"
 end
 ```
@@ -379,14 +379,14 @@ Returns a paginated list of posts. Published posts include platformPostUrl with 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 opts = {
   page: 56, # Integer | Page number (1-based)
   limit: 56, # Integer | Page size
@@ -405,7 +405,7 @@ begin
   # List posts
   result = api_instance.list_posts(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->list_posts: #{e}"
 end
 ```
@@ -423,7 +423,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PostsListResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->list_posts_with_http_info: #{e}"
 end
 ```
@@ -470,21 +470,21 @@ Immediately retries publishing a failed post. Returns the updated post with its 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 post_id = 'post_id_example' # String | 
 
 begin
   # Retry failed post
   result = api_instance.retry_post(post_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->retry_post: #{e}"
 end
 ```
@@ -502,7 +502,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PostRetryResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->retry_post_with_http_info: #{e}"
 end
 ```
@@ -539,22 +539,22 @@ Deletes a published post from the specified platform. The post record in Zernio 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 post_id = 'post_id_example' # String | 
-unpublish_post_request = Late::UnpublishPostRequest.new({platform: 'threads'}) # UnpublishPostRequest | 
+unpublish_post_request = Zernio::UnpublishPostRequest.new({platform: 'threads'}) # UnpublishPostRequest | 
 
 begin
   # Unpublish post
   result = api_instance.unpublish_post(post_id, unpublish_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->unpublish_post: #{e}"
 end
 ```
@@ -572,7 +572,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UnpublishPost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->unpublish_post_with_http_info: #{e}"
 end
 ```
@@ -610,22 +610,22 @@ Update an existing post. Only draft, scheduled, failed, and partial posts can be
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 post_id = 'post_id_example' # String | 
-update_post_request = Late::UpdatePostRequest.new # UpdatePostRequest | 
+update_post_request = Zernio::UpdatePostRequest.new # UpdatePostRequest | 
 
 begin
   # Update post
   result = api_instance.update_post(post_id, update_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->update_post: #{e}"
 end
 ```
@@ -643,7 +643,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PostUpdateResponse>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->update_post_with_http_info: #{e}"
 end
 ```
@@ -681,22 +681,22 @@ Updates metadata of a published video on the specified platform without re-uploa
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::PostsApi.new
+api_instance = Zernio::PostsApi.new
 post_id = 'post_id_example' # String | Zernio post ID, or \"_\" when using direct video ID mode
-update_post_metadata_request = Late::UpdatePostMetadataRequest.new({platform: 'youtube'}) # UpdatePostMetadataRequest | 
+update_post_metadata_request = Zernio::UpdatePostMetadataRequest.new({platform: 'youtube'}) # UpdatePostMetadataRequest | 
 
 begin
   # Update post metadata
   result = api_instance.update_post_metadata(post_id, update_post_metadata_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->update_post_metadata: #{e}"
 end
 ```
@@ -714,7 +714,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdatePostMetadata200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->update_post_metadata_with_http_info: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# Late::FacebookPlatformData
+# Zernio::FacebookPlatformData
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::FacebookPlatformData.new(
+instance = Zernio::FacebookPlatformData.new(
   draft: null,
   content_type: null,
   title: null,

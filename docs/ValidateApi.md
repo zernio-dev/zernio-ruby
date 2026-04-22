@@ -1,4 +1,4 @@
-# Late::ValidateApi
+# Zernio::ValidateApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -22,21 +22,21 @@ Check if a media URL is accessible and return metadata (content type, file size)
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ValidateApi.new
-validate_media_request = Late::ValidateMediaRequest.new({url: 'https://example.com/image.jpg'}) # ValidateMediaRequest | 
+api_instance = Zernio::ValidateApi.new
+validate_media_request = Zernio::ValidateMediaRequest.new({url: 'https://example.com/image.jpg'}) # ValidateMediaRequest | 
 
 begin
   # Validate media URL
   result = api_instance.validate_media(validate_media_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ValidateApi->validate_media: #{e}"
 end
 ```
@@ -54,7 +54,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ValidateMedia200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ValidateApi->validate_media_with_http_info: #{e}"
 end
 ```
@@ -91,21 +91,21 @@ Dry-run the full post validation pipeline without publishing. Catches issues lik
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ValidateApi.new
-validate_post_request = Late::ValidatePostRequest.new({platforms: [{"platform": "youtube"}, {"platform": "twitter"}]}) # ValidatePostRequest | 
+api_instance = Zernio::ValidateApi.new
+validate_post_request = Zernio::ValidatePostRequest.new({platforms: [{"platform": "youtube"}, {"platform": "twitter"}]}) # ValidatePostRequest | 
 
 begin
   # Validate post content
   result = api_instance.validate_post(validate_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ValidateApi->validate_post: #{e}"
 end
 ```
@@ -123,7 +123,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ValidatePost200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ValidateApi->validate_post_with_http_info: #{e}"
 end
 ```
@@ -160,21 +160,21 @@ Check weighted character count per platform and whether the text is within each 
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ValidateApi.new
-validate_post_length_request = Late::ValidatePostLengthRequest.new({text: 'Check out https://zernio.com for scheduling posts!'}) # ValidatePostLengthRequest | 
+api_instance = Zernio::ValidateApi.new
+validate_post_length_request = Zernio::ValidatePostLengthRequest.new({text: 'Check out https://zernio.com for scheduling posts!'}) # ValidatePostLengthRequest | 
 
 begin
   # Validate character count
   result = api_instance.validate_post_length(validate_post_length_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ValidateApi->validate_post_length: #{e}"
 end
 ```
@@ -192,7 +192,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ValidatePostLength200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ValidateApi->validate_post_length_with_http_info: #{e}"
 end
 ```
@@ -229,14 +229,14 @@ Check if a subreddit exists and return basic info (title, subscriber count, NSFW
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::ValidateApi.new
+api_instance = Zernio::ValidateApi.new
 name = 'programming' # String | Subreddit name (with or without \"r/\" prefix)
 opts = {
   account_id: 'account_id_example' # String | Reddit social account ID for authenticated lookup (recommended for reliable results)
@@ -246,7 +246,7 @@ begin
   # Check subreddit existence
   result = api_instance.validate_subreddit(name, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ValidateApi->validate_subreddit: #{e}"
 end
 ```
@@ -264,7 +264,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ValidateSubreddit200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling ValidateApi->validate_subreddit_with_http_info: #{e}"
 end
 ```

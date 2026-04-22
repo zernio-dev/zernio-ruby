@@ -1,4 +1,4 @@
-# Late::AnalyticsListResponsePostsInner
+# Zernio::AnalyticsListResponsePostsInner
 
 ## Properties
 
@@ -23,9 +23,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AnalyticsListResponsePostsInner.new(
+instance = Zernio::AnalyticsListResponsePostsInner.new(
   _id: null,
   late_post_id: null,
   content: null,

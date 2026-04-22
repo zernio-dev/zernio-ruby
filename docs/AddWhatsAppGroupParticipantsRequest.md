@@ -1,4 +1,4 @@
-# Late::AddWhatsAppGroupParticipantsRequest
+# Zernio::AddWhatsAppGroupParticipantsRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AddWhatsAppGroupParticipantsRequest.new(
+instance = Zernio::AddWhatsAppGroupParticipantsRequest.new(
   phone_numbers: null
 )
 ```

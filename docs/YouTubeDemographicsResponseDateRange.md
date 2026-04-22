@@ -1,4 +1,4 @@
-# Late::YouTubeDemographicsResponseDateRange
+# Zernio::YouTubeDemographicsResponseDateRange
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::YouTubeDemographicsResponseDateRange.new(
+instance = Zernio::YouTubeDemographicsResponseDateRange.new(
   start_date: 2026-01-01,
   end_date: 2026-03-31
 )

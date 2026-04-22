@@ -1,4 +1,4 @@
-# Late::QueueDeleteResponse
+# Zernio::QueueDeleteResponse
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::QueueDeleteResponse.new(
+instance = Zernio::QueueDeleteResponse.new(
   success: null,
   deleted: null
 )

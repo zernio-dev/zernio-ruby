@@ -1,4 +1,4 @@
-# Late::ConnectAds200ResponseOneOf1
+# Zernio::ConnectAds200ResponseOneOf1
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ConnectAds200ResponseOneOf1.new(
+instance = Zernio::ConnectAds200ResponseOneOf1.new(
   auth_url: null,
   state: null
 )

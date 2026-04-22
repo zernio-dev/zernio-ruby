@@ -1,4 +1,4 @@
-# Late::QueueSlot
+# Zernio::QueueSlot
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::QueueSlot.new(
+instance = Zernio::QueueSlot.new(
   day_of_week: null,
   time: null
 )

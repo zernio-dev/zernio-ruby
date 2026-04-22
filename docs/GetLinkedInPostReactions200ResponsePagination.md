@@ -1,4 +1,4 @@
-# Late::GetLinkedInPostReactions200ResponsePagination
+# Zernio::GetLinkedInPostReactions200ResponsePagination
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetLinkedInPostReactions200ResponsePagination.new(
+instance = Zernio::GetLinkedInPostReactions200ResponsePagination.new(
   has_more: null,
   cursor: null,
   total: null

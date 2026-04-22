@@ -1,4 +1,4 @@
-# Late::PostAnalytics
+# Zernio::PostAnalytics
 
 ## Properties
 
@@ -18,9 +18,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::PostAnalytics.new(
+instance = Zernio::PostAnalytics.new(
   impressions: 0,
   reach: 0,
   likes: 0,

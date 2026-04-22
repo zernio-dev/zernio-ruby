@@ -1,4 +1,4 @@
-# Late::EditInboxMessageRequest
+# Zernio::EditInboxMessageRequest
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::EditInboxMessageRequest.new(
+instance = Zernio::EditInboxMessageRequest.new(
   account_id: null,
   text: null,
   reply_markup: null

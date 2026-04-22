@@ -1,4 +1,4 @@
-# Late::AccountSettingsApi
+# Zernio::AccountSettingsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -27,20 +27,20 @@ Removes the ice breaker questions from an Instagram account's Messenger experien
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # Delete IG ice breakers
   api_instance.delete_instagram_ice_breakers(account_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->delete_instagram_ice_breakers: #{e}"
 end
 ```
@@ -58,7 +58,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->delete_instagram_ice_breakers_with_http_info: #{e}"
 end
 ```
@@ -95,20 +95,20 @@ Removes the persistent menu from Facebook Messenger conversations for this accou
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # Delete FB persistent menu
   api_instance.delete_messenger_menu(account_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->delete_messenger_menu: #{e}"
 end
 ```
@@ -126,7 +126,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->delete_messenger_menu_with_http_info: #{e}"
 end
 ```
@@ -163,20 +163,20 @@ Clears all bot commands configured for a Telegram bot account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # Delete TG bot commands
   api_instance.delete_telegram_commands(account_id)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->delete_telegram_commands: #{e}"
 end
 ```
@@ -194,7 +194,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->delete_telegram_commands_with_http_info: #{e}"
 end
 ```
@@ -231,21 +231,21 @@ Get the ice breaker configuration for an Instagram account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # Get IG ice breakers
   result = api_instance.get_instagram_ice_breakers(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->get_instagram_ice_breakers: #{e}"
 end
 ```
@@ -263,7 +263,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetMessengerMenu200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->get_instagram_ice_breakers_with_http_info: #{e}"
 end
 ```
@@ -300,21 +300,21 @@ Get the persistent menu configuration for a Facebook Messenger account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # Get FB persistent menu
   result = api_instance.get_messenger_menu(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->get_messenger_menu: #{e}"
 end
 ```
@@ -332,7 +332,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetMessengerMenu200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->get_messenger_menu_with_http_info: #{e}"
 end
 ```
@@ -369,21 +369,21 @@ Get the bot commands configuration for a Telegram account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
 
 begin
   # Get TG bot commands
   result = api_instance.get_telegram_commands(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->get_telegram_commands: #{e}"
 end
 ```
@@ -401,7 +401,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetTelegramCommands200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->get_telegram_commands_with_http_info: #{e}"
 end
 ```
@@ -438,21 +438,21 @@ Set ice breakers for an Instagram account. Max 4 ice breakers, question max 80 c
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
-set_instagram_ice_breakers_request = Late::SetInstagramIceBreakersRequest.new({ice_breakers: [Late::SetInstagramIceBreakersRequestIceBreakersInner.new({question: 'question_example', payload: 'payload_example'})]}) # SetInstagramIceBreakersRequest | 
+set_instagram_ice_breakers_request = Zernio::SetInstagramIceBreakersRequest.new({ice_breakers: [Zernio::SetInstagramIceBreakersRequestIceBreakersInner.new({question: 'question_example', payload: 'payload_example'})]}) # SetInstagramIceBreakersRequest | 
 
 begin
   # Set IG ice breakers
   api_instance.set_instagram_ice_breakers(account_id, set_instagram_ice_breakers_request)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->set_instagram_ice_breakers: #{e}"
 end
 ```
@@ -470,7 +470,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->set_instagram_ice_breakers_with_http_info: #{e}"
 end
 ```
@@ -508,21 +508,21 @@ Set the persistent menu for a Facebook Messenger account. Max 3 top-level items,
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
-set_messenger_menu_request = Late::SetMessengerMenuRequest.new({persistent_menu: [3.56]}) # SetMessengerMenuRequest | 
+set_messenger_menu_request = Zernio::SetMessengerMenuRequest.new({persistent_menu: [3.56]}) # SetMessengerMenuRequest | 
 
 begin
   # Set FB persistent menu
   api_instance.set_messenger_menu(account_id, set_messenger_menu_request)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->set_messenger_menu: #{e}"
 end
 ```
@@ -540,7 +540,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->set_messenger_menu_with_http_info: #{e}"
 end
 ```
@@ -578,21 +578,21 @@ Set bot commands for a Telegram account.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AccountSettingsApi.new
+api_instance = Zernio::AccountSettingsApi.new
 account_id = 'account_id_example' # String | 
-set_telegram_commands_request = Late::SetTelegramCommandsRequest.new({commands: [Late::SetTelegramCommandsRequestCommandsInner.new({command: 'command_example', description: 'description_example'})]}) # SetTelegramCommandsRequest | 
+set_telegram_commands_request = Zernio::SetTelegramCommandsRequest.new({commands: [Zernio::SetTelegramCommandsRequestCommandsInner.new({command: 'command_example', description: 'description_example'})]}) # SetTelegramCommandsRequest | 
 
 begin
   # Set TG bot commands
   api_instance.set_telegram_commands(account_id, set_telegram_commands_request)
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->set_telegram_commands: #{e}"
 end
 ```
@@ -610,7 +610,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AccountSettingsApi->set_telegram_commands_with_http_info: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# Late::ValidateSubreddit200ResponseOneOf1
+# Zernio::ValidateSubreddit200ResponseOneOf1
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidateSubreddit200ResponseOneOf1.new(
+instance = Zernio::ValidateSubreddit200ResponseOneOf1.new(
   exists: null,
   error: null
 )

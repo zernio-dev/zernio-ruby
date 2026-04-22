@@ -1,4 +1,4 @@
-# Late::BoostPostRequestBudget
+# Zernio::BoostPostRequestBudget
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::BoostPostRequestBudget.new(
+instance = Zernio::BoostPostRequestBudget.new(
   amount: null,
   type: null
 )

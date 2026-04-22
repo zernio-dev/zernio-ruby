@@ -1,4 +1,4 @@
-# Late::SendInboxMessageRequestInteractiveActionOneOfSectionsInnerRowsInner
+# Zernio::SendInboxMessageRequestInteractiveActionOneOfSectionsInnerRowsInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::SendInboxMessageRequestInteractiveActionOneOfSectionsInnerRowsInner.new(
+instance = Zernio::SendInboxMessageRequestInteractiveActionOneOfSectionsInnerRowsInner.new(
   id: null,
   title: null,
   description: null

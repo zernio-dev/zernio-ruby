@@ -1,4 +1,4 @@
-# Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerFreeFormServiceItem
+# Zernio::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerFreeFormServiceItem
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerFreeFormServiceItem.new(
+instance = Zernio::UpdateGoogleBusinessLocationDetailsRequestServiceItemsInnerFreeFormServiceItem.new(
   category: null,
   label: null
 )

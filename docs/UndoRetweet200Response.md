@@ -1,4 +1,4 @@
-# Late::UndoRetweet200Response
+# Zernio::UndoRetweet200Response
 
 ## Properties
 
@@ -12,9 +12,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::UndoRetweet200Response.new(
+instance = Zernio::UndoRetweet200Response.new(
   status: success,
   tweet_id: null,
   retweeted: false,

@@ -1,4 +1,4 @@
-# Late::AccountWithFollowerStatsAllOfAccountStats
+# Zernio::AccountWithFollowerStatsAllOfAccountStats
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AccountWithFollowerStatsAllOfAccountStats.new(
+instance = Zernio::AccountWithFollowerStatsAllOfAccountStats.new(
   following_count: null,
   media_count: null,
   video_count: null,

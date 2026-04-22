@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessPerformance200ResponseDateRange
+# Zernio::GetGoogleBusinessPerformance200ResponseDateRange
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessPerformance200ResponseDateRange.new(
+instance = Zernio::GetGoogleBusinessPerformance200ResponseDateRange.new(
   start_date: 2026-03-01,
   end_date: 2026-03-31
 )

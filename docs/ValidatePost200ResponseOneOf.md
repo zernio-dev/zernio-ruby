@@ -1,4 +1,4 @@
-# Late::ValidatePost200ResponseOneOf
+# Zernio::ValidatePost200ResponseOneOf
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidatePost200ResponseOneOf.new(
+instance = Zernio::ValidatePost200ResponseOneOf.new(
   valid: null,
   message: No validation issues found.,
   warnings: null

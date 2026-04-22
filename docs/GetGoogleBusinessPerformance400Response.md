@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessPerformance400Response
+# Zernio::GetGoogleBusinessPerformance400Response
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessPerformance400Response.new(
+instance = Zernio::GetGoogleBusinessPerformance400Response.new(
   error: Invalid metrics: INVALID_METRIC,
   valid_metrics: null
 )

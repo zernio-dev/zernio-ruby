@@ -1,4 +1,4 @@
-# Late::CreateBroadcastRequestMessageAttachmentsInner
+# Zernio::CreateBroadcastRequestMessageAttachmentsInner
 
 ## Properties
 
@@ -11,9 +11,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateBroadcastRequestMessageAttachmentsInner.new(
+instance = Zernio::CreateBroadcastRequestMessageAttachmentsInner.new(
   type: null,
   url: null,
   filename: null

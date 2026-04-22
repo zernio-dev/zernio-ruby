@@ -1,4 +1,4 @@
-# Late::GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem
+# Zernio::GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem.new(
+instance = Zernio::GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem.new(
   category: null,
   label: null
 )

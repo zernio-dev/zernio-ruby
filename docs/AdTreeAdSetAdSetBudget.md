@@ -1,4 +1,4 @@
-# Late::AdTreeAdSetAdSetBudget
+# Zernio::AdTreeAdSetAdSetBudget
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::AdTreeAdSetAdSetBudget.new(
+instance = Zernio::AdTreeAdSetAdSetBudget.new(
   amount: null,
   type: null
 )

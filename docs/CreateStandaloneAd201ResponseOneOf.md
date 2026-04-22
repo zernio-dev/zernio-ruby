@@ -1,4 +1,4 @@
-# Late::CreateStandaloneAd201ResponseOneOf
+# Zernio::CreateStandaloneAd201ResponseOneOf
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::CreateStandaloneAd201ResponseOneOf.new(
+instance = Zernio::CreateStandaloneAd201ResponseOneOf.new(
   ad: null,
   message: null
 )

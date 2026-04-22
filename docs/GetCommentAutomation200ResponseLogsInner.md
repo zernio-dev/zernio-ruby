@@ -1,4 +1,4 @@
-# Late::GetCommentAutomation200ResponseLogsInner
+# Zernio::GetCommentAutomation200ResponseLogsInner
 
 ## Properties
 
@@ -16,9 +16,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetCommentAutomation200ResponseLogsInner.new(
+instance = Zernio::GetCommentAutomation200ResponseLogsInner.new(
   id: null,
   comment_id: null,
   commenter_id: null,

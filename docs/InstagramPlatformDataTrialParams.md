@@ -1,4 +1,4 @@
-# Late::InstagramPlatformDataTrialParams
+# Zernio::InstagramPlatformDataTrialParams
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::InstagramPlatformDataTrialParams.new(
+instance = Zernio::InstagramPlatformDataTrialParams.new(
   graduation_strategy: null
 )
 ```

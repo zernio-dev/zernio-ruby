@@ -1,4 +1,4 @@
-# Late::RecyclingState
+# Zernio::RecyclingState
 
 ## Properties
 
@@ -19,9 +19,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::RecyclingState.new(
+instance = Zernio::RecyclingState.new(
   enabled: null,
   gap: null,
   gap_freq: null,

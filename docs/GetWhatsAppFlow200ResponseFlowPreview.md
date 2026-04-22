@@ -1,4 +1,4 @@
-# Late::GetWhatsAppFlow200ResponseFlowPreview
+# Zernio::GetWhatsAppFlow200ResponseFlowPreview
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::GetWhatsAppFlow200ResponseFlowPreview.new(
+instance = Zernio::GetWhatsAppFlow200ResponseFlowPreview.new(
   preview_url: null,
   expires_at: null
 )

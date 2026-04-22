@@ -1,4 +1,4 @@
-# Late::AdsApi
+# Zernio::AdsApi
 
 All URIs are relative to *https://zernio.com/api*
 
@@ -29,21 +29,21 @@ Creates a paid ad campaign from an existing published post. Creates the full pla
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
-boost_post_request = Late::BoostPostRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement', budget: Late::BoostPostRequestBudget.new({amount: 3.56, type: 'daily'})}) # BoostPostRequest | 
+api_instance = Zernio::AdsApi.new
+boost_post_request = Zernio::BoostPostRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement', budget: Zernio::BoostPostRequestBudget.new({amount: 3.56, type: 'daily'})}) # BoostPostRequest | 
 
 begin
   # Boost post as ad
   result = api_instance.boost_post(boost_post_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->boost_post: #{e}"
 end
 ```
@@ -61,7 +61,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAd200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->boost_post_with_http_info: #{e}"
 end
 ```
@@ -98,21 +98,21 @@ Creates a paid ad with custom creative. The request body supports three mutually
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
-create_standalone_ad_request = Late::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CreateStandaloneAdRequest | 
+api_instance = Zernio::AdsApi.new
+create_standalone_ad_request = Zernio::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CreateStandaloneAdRequest | 
 
 begin
   # Create standalone ad
   result = api_instance.create_standalone_ad(create_standalone_ad_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->create_standalone_ad: #{e}"
 end
 ```
@@ -130,7 +130,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateStandaloneAd201Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->create_standalone_ad_with_http_info: #{e}"
 end
 ```
@@ -167,21 +167,21 @@ Cancels the ad on the platform and marks it as cancelled in the database. The ad
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
+api_instance = Zernio::AdsApi.new
 ad_id = 'ad_id_example' # String | 
 
 begin
   # Cancel an ad
   result = api_instance.delete_ad(ad_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->delete_ad: #{e}"
 end
 ```
@@ -199,7 +199,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DeleteAccountGroup200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->delete_ad_with_http_info: #{e}"
 end
 ```
@@ -236,21 +236,21 @@ Returns an ad with its creative, targeting, status, and performance metrics.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
+api_instance = Zernio::AdsApi.new
 ad_id = 'ad_id_example' # String | 
 
 begin
   # Get ad details
   result = api_instance.get_ad(ad_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->get_ad: #{e}"
 end
 ```
@@ -268,7 +268,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetAd200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->get_ad_with_http_info: #{e}"
 end
 ```
@@ -305,14 +305,14 @@ Returns detailed performance analytics for an ad. Includes summary metrics, a da
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
+api_instance = Zernio::AdsApi.new
 ad_id = 'ad_id_example' # String | 
 opts = {
   from_date: Date.parse('2013-10-20'), # Date | Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
@@ -324,7 +324,7 @@ begin
   # Get ad analytics
   result = api_instance.get_ad_analytics(ad_id, opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->get_ad_analytics: #{e}"
 end
 ```
@@ -342,7 +342,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetAdAnalytics200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->get_ad_analytics_with_http_info: #{e}"
 end
 ```
@@ -382,21 +382,21 @@ Returns the platform ad accounts available for the given social account (e.g. Me
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
+api_instance = Zernio::AdsApi.new
 account_id = 'account_id_example' # String | Social account ID
 
 begin
   # List ad accounts
   result = api_instance.list_ad_accounts(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->list_ad_accounts: #{e}"
 end
 ```
@@ -414,7 +414,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListAdAccounts200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->list_ad_accounts_with_http_info: #{e}"
 end
 ```
@@ -451,19 +451,19 @@ Returns a paginated list of ads with metrics computed over an optional date rang
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
+api_instance = Zernio::AdsApi.new
 opts = {
   page: 56, # Integer | Page number (1-based)
   limit: 56, # Integer | 
   source: 'zernio', # String | all (default) = Zernio-created + platform-discovered ads. zernio = restrict to Zernio-created only.
-  status: Late::AdStatus::ACTIVE, # AdStatus | 
+  status: Zernio::AdStatus::ACTIVE, # AdStatus | 
   platform: 'facebook', # String | 
   account_id: 'account_id_example', # String | Social account ID
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
@@ -477,7 +477,7 @@ begin
   # List ads
   result = api_instance.list_ads(opts)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->list_ads: #{e}"
 end
 ```
@@ -495,7 +495,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListAds200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->list_ads_with_http_info: #{e}"
 end
 ```
@@ -542,21 +542,21 @@ Returns the list of pixels (Meta) or conversion actions (Google) accessible to t
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
+api_instance = Zernio::AdsApi.new
 account_id = 'account_id_example' # String | SocialAccount ID (metaads or googleads).
 
 begin
   # List destinations for the Conversions API
   result = api_instance.list_conversion_destinations(account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->list_conversion_destinations: #{e}"
 end
 ```
@@ -574,7 +574,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListConversionDestinations200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->list_conversion_destinations_with_http_info: #{e}"
 end
 ```
@@ -611,14 +611,14 @@ Search for interest-based targeting options available on the platform.
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
+api_instance = Zernio::AdsApi.new
 q = 'q_example' # String | Search query
 account_id = 'account_id_example' # String | Social account ID
 
@@ -626,7 +626,7 @@ begin
   # Search targeting interests
   result = api_instance.search_ad_interests(q, account_id)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->search_ad_interests: #{e}"
 end
 ```
@@ -644,7 +644,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SearchAdInterests200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->search_ad_interests_with_http_info: #{e}"
 end
 ```
@@ -682,21 +682,21 @@ Relay one or more conversion events to the target ad platform's native Conversio
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
-send_conversions_request = Late::SendConversionsRequest.new({account_id: 'account_id_example', destination_id: 'destination_id_example', events: [Late::ConversionEvent.new({event_name: 'Purchase', event_time: 1744732800, event_id: 'order_abc_123', user: Late::ConversionEventUser.new})]}) # SendConversionsRequest | 
+api_instance = Zernio::AdsApi.new
+send_conversions_request = Zernio::SendConversionsRequest.new({account_id: 'account_id_example', destination_id: 'destination_id_example', events: [Zernio::ConversionEvent.new({event_name: 'Purchase', event_time: 1744732800, event_id: 'order_abc_123', user: Zernio::ConversionEventUser.new})]}) # SendConversionsRequest | 
 
 begin
   # Send conversion events to an ad platform
   result = api_instance.send_conversions(send_conversions_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->send_conversions: #{e}"
 end
 ```
@@ -714,7 +714,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <SendConversions200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->send_conversions_with_http_info: #{e}"
 end
 ```
@@ -751,22 +751,22 @@ Update one or more fields on an ad. Status changes and budget updates are propag
 
 ```ruby
 require 'time'
-require 'late-sdk'
+require 'zernio-sdk'
 # setup authorization
-Late.configure do |config|
+Zernio.configure do |config|
   # Configure Bearer authorization (JWT): bearerAuth
   config.access_token = 'YOUR_BEARER_TOKEN'
 end
 
-api_instance = Late::AdsApi.new
+api_instance = Zernio::AdsApi.new
 ad_id = 'ad_id_example' # String | 
-update_ad_request = Late::UpdateAdRequest.new # UpdateAdRequest | 
+update_ad_request = Zernio::UpdateAdRequest.new # UpdateAdRequest | 
 
 begin
   # Update ad
   result = api_instance.update_ad(ad_id, update_ad_request)
   p result
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->update_ad: #{e}"
 end
 ```
@@ -784,7 +784,7 @@ begin
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAd200Response>
-rescue Late::ApiError => e
+rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->update_ad_with_http_info: #{e}"
 end
 ```

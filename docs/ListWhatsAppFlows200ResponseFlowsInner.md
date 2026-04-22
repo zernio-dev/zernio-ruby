@@ -1,4 +1,4 @@
-# Late::ListWhatsAppFlows200ResponseFlowsInner
+# Zernio::ListWhatsAppFlows200ResponseFlowsInner
 
 ## Properties
 
@@ -13,9 +13,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListWhatsAppFlows200ResponseFlowsInner.new(
+instance = Zernio::ListWhatsAppFlows200ResponseFlowsInner.new(
   id: null,
   name: null,
   status: null,

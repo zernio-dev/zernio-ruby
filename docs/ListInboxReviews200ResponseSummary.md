@@ -1,4 +1,4 @@
-# Late::ListInboxReviews200ResponseSummary
+# Zernio::ListInboxReviews200ResponseSummary
 
 ## Properties
 
@@ -10,9 +10,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ListInboxReviews200ResponseSummary.new(
+instance = Zernio::ListInboxReviews200ResponseSummary.new(
   total_reviews: null,
   average_rating: null
 )

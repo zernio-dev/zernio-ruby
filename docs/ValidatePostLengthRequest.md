@@ -1,4 +1,4 @@
-# Late::ValidatePostLengthRequest
+# Zernio::ValidatePostLengthRequest
 
 ## Properties
 
@@ -9,9 +9,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ValidatePostLengthRequest.new(
+instance = Zernio::ValidatePostLengthRequest.new(
   text: Check out https://zernio.com for scheduling posts!
 )
 ```

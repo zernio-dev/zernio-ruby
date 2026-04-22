@@ -1,4 +1,4 @@
-# Late::ReplyToInboxPostRequest
+# Zernio::ReplyToInboxPostRequest
 
 ## Properties
 
@@ -14,9 +14,9 @@
 ## Example
 
 ```ruby
-require 'late-sdk'
+require 'zernio-sdk'
 
-instance = Late::ReplyToInboxPostRequest.new(
+instance = Zernio::ReplyToInboxPostRequest.new(
   account_id: null,
   message: null,
   comment_id: null,
