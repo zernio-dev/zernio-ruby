@@ -43,6 +43,15 @@ module Late
     # Raw per-action-type counts from Meta's Insights actions[] array, summed over the date range. Keys are Meta action_type strings (e.g. link_click, offsite_conversion.fb_pixel_purchase, onsite_conversion.lead_grouped). Use this to extract any conversion event (purchases, leads, add_to_cart, etc.) without relying on the derived conversions field. Empty object when no actions are reported.
     attr_accessor :actions
 
+    # Monetary mirror of `actions`, from Meta's Insights `action_values[]` array. Same keying — values are the revenue attributed to each action_type, in ad-account native currency (same unit as `spend`; see the campaign node's `currency` field). Use this to compute revenue-per-event (e.g. avg purchase value). Meta-only; other platforms return {}.
+    attr_accessor :action_values
+
+    # Convenience sum of purchase-type action values — picked from `actionValues` via the same priority list as `conversions` so both fields describe the same events. In ad-account native currency. 0 when the campaign has no purchase event configured. Meta-only.
+    attr_accessor :purchase_value
+
+    # Return on ad spend — derived as `purchaseValue / spend`. 0 when `spend` is 0. Equivalent to Meta's `purchase_roas` under default attribution. At ad-set and campaign levels this is recomputed from summed purchaseValue + spend (NOT averaged across children) so it's mathematically correct at every rollup level.
+    attr_accessor :roas
+
     # Present on individual ads only, not on campaign aggregations
     attr_accessor :last_synced_at
 
@@ -62,6 +71,9 @@ module Late
         :'conversions' => :'conversions',
         :'cost_per_conversion' => :'costPerConversion',
         :'actions' => :'actions',
+        :'action_values' => :'actionValues',
+        :'purchase_value' => :'purchaseValue',
+        :'roas' => :'roas',
         :'last_synced_at' => :'lastSyncedAt',
         :'date' => :'date'
       }
@@ -91,6 +103,9 @@ module Late
         :'conversions' => :'Integer',
         :'cost_per_conversion' => :'Float',
         :'actions' => :'Hash<String, Integer>',
+        :'action_values' => :'Hash<String, Float>',
+        :'purchase_value' => :'Float',
+        :'roas' => :'Float',
         :'last_synced_at' => :'Time',
         :'date' => :'Date'
       }
@@ -171,6 +186,20 @@ module Late
         end
       end
 
+      if attributes.key?(:'action_values')
+        if (value = attributes[:'action_values']).is_a?(Hash)
+          self.action_values = value
+        end
+      end
+
+      if attributes.key?(:'purchase_value')
+        self.purchase_value = attributes[:'purchase_value']
+      end
+
+      if attributes.key?(:'roas')
+        self.roas = attributes[:'roas']
+      end
+
       if attributes.key?(:'last_synced_at')
         self.last_synced_at = attributes[:'last_synced_at']
       end
@@ -211,6 +240,9 @@ module Late
           conversions == o.conversions &&
           cost_per_conversion == o.cost_per_conversion &&
           actions == o.actions &&
+          action_values == o.action_values &&
+          purchase_value == o.purchase_value &&
+          roas == o.roas &&
           last_synced_at == o.last_synced_at &&
           date == o.date
     end
@@ -224,7 +256,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, last_synced_at, date].hash
+      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, action_values, purchase_value, roas, last_synced_at, date].hash
     end
 
     # Builds the object from hash
