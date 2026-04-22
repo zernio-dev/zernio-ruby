@@ -88,20 +88,20 @@ module Late
     end
 
     # Create standalone ad
-    # Creates a paid ad with custom creative (headline, body, image/video, link). Creates the full platform campaign hierarchy.
+    # Creates a paid ad with custom creative. The request body supports three mutually-exclusive shapes:  1. **Legacy single-creative** (all platforms). Top-level `headline` + `body` + `imageUrl` + `linkUrl` + `callToAction` create 1 campaign + 1 ad set + 1 ad. 2. **Multi-creative** (Meta only — use `creatives[]` array). Creates 1 campaign + 1 ad set + N ads sharing the same budget / targeting / schedule. This is the standard performance-marketing creative-testing flow — Meta's delivery algorithm A/B tests the creatives inside a single ad set so budget isn't fragmented across N parallel campaigns. 3. **Attach to existing ad set** (Meta only — pass `adSetId` + a single creative). Adds one new ad to an existing ad set without creating a new campaign. Budget, targeting, goal are inherited from the ad set on Meta.  `creatives[]` and `adSetId` are mutually exclusive; specifying both returns 400. 
     # @param create_standalone_ad_request [CreateStandaloneAdRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [UpdateAd200Response]
+    # @return [CreateStandaloneAd201Response]
     def create_standalone_ad(create_standalone_ad_request, opts = {})
       data, _status_code, _headers = create_standalone_ad_with_http_info(create_standalone_ad_request, opts)
       data
     end
 
     # Create standalone ad
-    # Creates a paid ad with custom creative (headline, body, image/video, link). Creates the full platform campaign hierarchy.
+    # Creates a paid ad with custom creative. The request body supports three mutually-exclusive shapes:  1. **Legacy single-creative** (all platforms). Top-level &#x60;headline&#x60; + &#x60;body&#x60; + &#x60;imageUrl&#x60; + &#x60;linkUrl&#x60; + &#x60;callToAction&#x60; create 1 campaign + 1 ad set + 1 ad. 2. **Multi-creative** (Meta only — use &#x60;creatives[]&#x60; array). Creates 1 campaign + 1 ad set + N ads sharing the same budget / targeting / schedule. This is the standard performance-marketing creative-testing flow — Meta&#39;s delivery algorithm A/B tests the creatives inside a single ad set so budget isn&#39;t fragmented across N parallel campaigns. 3. **Attach to existing ad set** (Meta only — pass &#x60;adSetId&#x60; + a single creative). Adds one new ad to an existing ad set without creating a new campaign. Budget, targeting, goal are inherited from the ad set on Meta.  &#x60;creatives[]&#x60; and &#x60;adSetId&#x60; are mutually exclusive; specifying both returns 400. 
     # @param create_standalone_ad_request [CreateStandaloneAdRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateAd200Response, Integer, Hash)>] UpdateAd200Response data, response status code and response headers
+    # @return [Array<(CreateStandaloneAd201Response, Integer, Hash)>] CreateStandaloneAd201Response data, response status code and response headers
     def create_standalone_ad_with_http_info(create_standalone_ad_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdsApi.create_standalone_ad ...'
@@ -133,7 +133,7 @@ module Late
       post_body = opts[:debug_body] || @api_client.object_to_http_body(create_standalone_ad_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateAd200Response'
+      return_type = opts[:debug_return_type] || 'CreateStandaloneAd201Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

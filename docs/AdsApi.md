@@ -88,11 +88,11 @@ end
 
 ## create_standalone_ad
 
-> <UpdateAd200Response> create_standalone_ad(create_standalone_ad_request)
+> <CreateStandaloneAd201Response> create_standalone_ad(create_standalone_ad_request)
 
 Create standalone ad
 
-Creates a paid ad with custom creative (headline, body, image/video, link). Creates the full platform campaign hierarchy.
+Creates a paid ad with custom creative. The request body supports three mutually-exclusive shapes:  1. **Legacy single-creative** (all platforms). Top-level `headline` + `body` + `imageUrl` + `linkUrl` + `callToAction` create 1 campaign + 1 ad set + 1 ad. 2. **Multi-creative** (Meta only — use `creatives[]` array). Creates 1 campaign + 1 ad set + N ads sharing the same budget / targeting / schedule. This is the standard performance-marketing creative-testing flow — Meta's delivery algorithm A/B tests the creatives inside a single ad set so budget isn't fragmented across N parallel campaigns. 3. **Attach to existing ad set** (Meta only — pass `adSetId` + a single creative). Adds one new ad to an existing ad set without creating a new campaign. Budget, targeting, goal are inherited from the ad set on Meta.  `creatives[]` and `adSetId` are mutually exclusive; specifying both returns 400. 
 
 ### Examples
 
@@ -106,7 +106,7 @@ Late.configure do |config|
 end
 
 api_instance = Late::AdsApi.new
-create_standalone_ad_request = Late::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement', budget_amount: 3.56, budget_type: 'daily', body: 'body_example'}) # CreateStandaloneAdRequest | 
+create_standalone_ad_request = Late::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CreateStandaloneAdRequest | 
 
 begin
   # Create standalone ad
@@ -121,7 +121,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAd200Response>, Integer, Hash)> create_standalone_ad_with_http_info(create_standalone_ad_request)
+> <Array(<CreateStandaloneAd201Response>, Integer, Hash)> create_standalone_ad_with_http_info(create_standalone_ad_request)
 
 ```ruby
 begin
@@ -129,7 +129,7 @@ begin
   data, status_code, headers = api_instance.create_standalone_ad_with_http_info(create_standalone_ad_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateAd200Response>
+  p data # => <CreateStandaloneAd201Response>
 rescue Late::ApiError => e
   puts "Error when calling AdsApi->create_standalone_ad_with_http_info: #{e}"
 end
@@ -143,7 +143,7 @@ end
 
 ### Return type
 
-[**UpdateAd200Response**](UpdateAd200Response.md)
+[**CreateStandaloneAd201Response**](CreateStandaloneAd201Response.md)
 
 ### Authorization
 

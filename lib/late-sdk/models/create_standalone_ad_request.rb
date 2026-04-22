@@ -21,31 +21,40 @@ module Late
 
     attr_accessor :name
 
-    # Available goals vary by platform. Meta (Facebook/Instagram) and TikTok support all 7. LinkedIn supports all except app_promotion. Twitter/X supports engagement, traffic, awareness, video_views, app_promotion. Pinterest and Google Ads support only engagement, traffic, awareness, video_views.
+    # Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform.
     attr_accessor :goal
 
+    # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_amount
 
+    # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_type
 
     attr_accessor :currency
 
-    # Required for most platforms. Max: Meta=255, Google=30, Pinterest=100
+    # Required on legacy + attach shapes (skip for multi-creative — use `creatives[].headline`). Max: Meta=255, Google=30, Pinterest=100
     attr_accessor :headline
 
     # Google Display only
     attr_accessor :long_headline
 
-    # Max: Google=90, Pinterest=500
+    # Required on legacy + attach shapes. Max: Google=90, Pinterest=500
     attr_accessor :body
 
-    # Meta only
+    # Required on legacy + attach shapes. Meta only.
     attr_accessor :call_to_action
 
+    # Required on legacy + attach shapes. Skip for multi-creative.
     attr_accessor :link_url
 
-    # Image URL (or video URL for TikTok). Not required for Google Search campaigns.
+    # Required on legacy + attach shapes. Not required for Google Search campaigns.
     attr_accessor :image_url
+
+    # Meta-only. When present, switches to the multi-creative shape: creates 1 campaign + 1 ad set + N ads (one per entry here). Top-level `headline` / `body` / `imageUrl` / `linkUrl` / `callToAction` are ignored in this mode. Mutually exclusive with `adSetId`. 
+    attr_accessor :creatives
+
+    # Meta-only. When present, switches to the attach shape: adds one new ad to this existing ad set without creating a new campaign. Budget, targeting, goal, and schedule are inherited from the ad set on Meta. Mutually exclusive with `creatives[]`. 
+    attr_accessor :ad_set_id
 
     # Google Display only
     attr_accessor :business_name
@@ -121,6 +130,8 @@ module Late
         :'call_to_action' => :'callToAction',
         :'link_url' => :'linkUrl',
         :'image_url' => :'imageUrl',
+        :'creatives' => :'creatives',
+        :'ad_set_id' => :'adSetId',
         :'business_name' => :'businessName',
         :'board_id' => :'boardId',
         :'countries' => :'countries',
@@ -163,6 +174,8 @@ module Late
         :'call_to_action' => :'String',
         :'link_url' => :'String',
         :'image_url' => :'String',
+        :'creatives' => :'Array<CreateStandaloneAdRequestCreativesInner>',
+        :'ad_set_id' => :'String',
         :'business_name' => :'String',
         :'board_id' => :'String',
         :'countries' => :'Array<String>',
@@ -221,20 +234,14 @@ module Late
 
       if attributes.key?(:'goal')
         self.goal = attributes[:'goal']
-      else
-        self.goal = nil
       end
 
       if attributes.key?(:'budget_amount')
         self.budget_amount = attributes[:'budget_amount']
-      else
-        self.budget_amount = nil
       end
 
       if attributes.key?(:'budget_type')
         self.budget_type = attributes[:'budget_type']
-      else
-        self.budget_type = nil
       end
 
       if attributes.key?(:'currency')
@@ -251,8 +258,6 @@ module Late
 
       if attributes.key?(:'body')
         self.body = attributes[:'body']
-      else
-        self.body = nil
       end
 
       if attributes.key?(:'call_to_action')
@@ -265,6 +270,16 @@ module Late
 
       if attributes.key?(:'image_url')
         self.image_url = attributes[:'image_url']
+      end
+
+      if attributes.key?(:'creatives')
+        if (value = attributes[:'creatives']).is_a?(Array)
+          self.creatives = value
+        end
+      end
+
+      if attributes.key?(:'ad_set_id')
+        self.ad_set_id = attributes[:'ad_set_id']
       end
 
       if attributes.key?(:'business_name')
@@ -353,24 +368,12 @@ module Late
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
       end
 
-      if @goal.nil?
-        invalid_properties.push('invalid value for "goal", goal cannot be nil.')
-      end
-
-      if @budget_amount.nil?
-        invalid_properties.push('invalid value for "budget_amount", budget_amount cannot be nil.')
-      end
-
-      if @budget_type.nil?
-        invalid_properties.push('invalid value for "budget_type", budget_type cannot be nil.')
-      end
-
       if !@long_headline.nil? && @long_headline.to_s.length > 90
         invalid_properties.push('invalid value for "long_headline", the character length must be smaller than or equal to 90.')
       end
 
-      if @body.nil?
-        invalid_properties.push('invalid value for "body", body cannot be nil.')
+      if !@creatives.nil? && @creatives.length < 1
+        invalid_properties.push('invalid value for "creatives", number of items must be greater than or equal to 1.')
       end
 
       if !@business_name.nil? && @business_name.to_s.length > 25
@@ -404,17 +407,14 @@ module Late
       return false if @ad_account_id.nil?
       return false if @name.nil?
       return false if @name.to_s.length > 255
-      return false if @goal.nil?
       goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "conversions", "app_promotion"])
       return false unless goal_validator.valid?(@goal)
-      return false if @budget_amount.nil?
-      return false if @budget_type.nil?
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
       return false if !@long_headline.nil? && @long_headline.to_s.length > 90
-      return false if @body.nil?
       call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
       return false unless call_to_action_validator.valid?(@call_to_action)
+      return false if !@creatives.nil? && @creatives.length < 1
       return false if !@business_name.nil? && @business_name.to_s.length > 25
       return false if !@age_min.nil? && @age_min > 65
       return false if !@age_min.nil? && @age_min < 13
@@ -471,16 +471,6 @@ module Late
       @goal = goal
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] budget_amount Value to be assigned
-    def budget_amount=(budget_amount)
-      if budget_amount.nil?
-        fail ArgumentError, 'budget_amount cannot be nil'
-      end
-
-      @budget_amount = budget_amount
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] budget_type Object to be assigned
     def budget_type=(budget_type)
@@ -505,16 +495,6 @@ module Late
       @long_headline = long_headline
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] body Value to be assigned
-    def body=(body)
-      if body.nil?
-        fail ArgumentError, 'body cannot be nil'
-      end
-
-      @body = body
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] call_to_action Object to be assigned
     def call_to_action=(call_to_action)
@@ -523,6 +503,20 @@ module Late
         fail ArgumentError, "invalid value for \"call_to_action\", must be one of #{validator.allowable_values}."
       end
       @call_to_action = call_to_action
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] creatives Value to be assigned
+    def creatives=(creatives)
+      if creatives.nil?
+        fail ArgumentError, 'creatives cannot be nil'
+      end
+
+      if creatives.length < 1
+        fail ArgumentError, 'invalid value for "creatives", number of items must be greater than or equal to 1.'
+      end
+
+      @creatives = creatives
     end
 
     # Custom attribute writer method with validation
@@ -613,6 +607,8 @@ module Late
           call_to_action == o.call_to_action &&
           link_url == o.link_url &&
           image_url == o.image_url &&
+          creatives == o.creatives &&
+          ad_set_id == o.ad_set_id &&
           business_name == o.business_name &&
           board_id == o.board_id &&
           countries == o.countries &&
@@ -637,7 +633,7 @@ module Late
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience].hash
     end
 
     # Builds the object from hash
