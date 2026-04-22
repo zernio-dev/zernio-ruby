@@ -34,7 +34,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for add_whats_app_group_participants
   # Add participants
-  # Add participants to a WhatsApp group. Maximum 8 participants per request. 
+  # Add participants to a WhatsApp group. Maximum 8 participants per request.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param add_whats_app_group_participants_request 
@@ -48,7 +48,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for approve_whats_app_group_join_requests
   # Approve join requests
-  # Approve pending join requests for a WhatsApp group. 
+  # Approve pending join requests for a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param approve_whats_app_group_join_requests_request 
@@ -62,7 +62,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for create_whats_app_group_chat
   # Create group
-  # Create a new WhatsApp group chat. Returns the group ID and optionally an invite link. 
+  # Create a new WhatsApp group chat. Returns the group ID and optionally an invite link.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param create_whats_app_group_chat_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateWhatsAppGroupChat201Response]
@@ -74,7 +74,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for create_whats_app_group_invite_link
   # Create invite link
-  # Create a new invite link for a WhatsApp group. The previous link is revoked. 
+  # Create a new invite link for a WhatsApp group. The previous link is revoked.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
@@ -99,7 +99,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for delete_whats_app_group_chat
   # Delete group
-  # Delete a WhatsApp group and remove all participants. 
+  # Delete a WhatsApp group and remove all participants.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
@@ -149,7 +149,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for get_whats_app_group_chat
   # Get group info
-  # Retrieve metadata about a WhatsApp group including subject, description, participants, and settings. 
+  # Retrieve metadata about a WhatsApp group including subject, description, participants, and settings.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
@@ -187,7 +187,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for list_whats_app_group_chats
   # List active groups
-  # List active WhatsApp group chats for a business phone number. These are actual WhatsApp group conversations on the platform. 
+  # List active WhatsApp group chats for a business phone number. These are actual WhatsApp group conversations on the platform.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit Max groups to return
@@ -201,7 +201,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for list_whats_app_group_join_requests
   # List join requests
-  # List pending join requests for a WhatsApp group (only for groups with approval_required mode). 
+  # List pending join requests for a WhatsApp group (only for groups with approval_required mode).  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
@@ -214,7 +214,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for reject_whats_app_group_join_requests
   # Reject join requests
-  # Reject pending join requests for a WhatsApp group. 
+  # Reject pending join requests for a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param reject_whats_app_group_join_requests_request 
@@ -228,7 +228,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for remove_whats_app_group_participants
   # Remove participants
-  # Remove participants from a WhatsApp group. 
+  # Remove participants from a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param remove_whats_app_group_participants_request 
@@ -266,7 +266,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for update_whats_app_group_chat
   # Update group settings
-  # Update the subject, description, or join approval mode of a WhatsApp group. 
+  # Update the subject, description, or join approval mode of a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
   # @param group_id Group ID
   # @param account_id WhatsApp social account ID
   # @param update_whats_app_group_chat_request 
