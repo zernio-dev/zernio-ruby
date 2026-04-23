@@ -47,8 +47,10 @@ module Zernio
     # Required on legacy + attach shapes. Skip for multi-creative.
     attr_accessor :link_url
 
-    # Image creative for Meta/Google/Pinterest on legacy + attach shapes (mutually exclusive with `video`). Not required for Google Search campaigns. For TikTok, this field carries the VIDEO URL (the TikTok ads endpoint is video-only; the field retains the `imageUrl` name for cross-platform consistency). Ignored for X/Twitter.
+    # Image creative for Meta/Google/Pinterest on legacy + attach shapes (mutually exclusive with `video`). Not required for Google Search campaigns. For TikTok, this field carries the VIDEO URL (the TikTok ads endpoint is video-only; the field retains the `imageUrl` name for cross-platform consistency). Ignored for X/Twitter. For Google Display, treated as the landscape image (alias of `images.landscape`); supply `images.square` alongside or the request is rejected.
     attr_accessor :image_url
+
+    attr_accessor :images
 
     attr_accessor :video
 
@@ -132,6 +134,7 @@ module Zernio
         :'call_to_action' => :'callToAction',
         :'link_url' => :'linkUrl',
         :'image_url' => :'imageUrl',
+        :'images' => :'images',
         :'video' => :'video',
         :'creatives' => :'creatives',
         :'ad_set_id' => :'adSetId',
@@ -177,6 +180,7 @@ module Zernio
         :'call_to_action' => :'String',
         :'link_url' => :'String',
         :'image_url' => :'String',
+        :'images' => :'CreateStandaloneAdRequestImages',
         :'video' => :'CreateStandaloneAdRequestVideo',
         :'creatives' => :'Array<CreateStandaloneAdRequestCreativesInner>',
         :'ad_set_id' => :'String',
@@ -274,6 +278,10 @@ module Zernio
 
       if attributes.key?(:'image_url')
         self.image_url = attributes[:'image_url']
+      end
+
+      if attributes.key?(:'images')
+        self.images = attributes[:'images']
       end
 
       if attributes.key?(:'video')
@@ -615,6 +623,7 @@ module Zernio
           call_to_action == o.call_to_action &&
           link_url == o.link_url &&
           image_url == o.image_url &&
+          images == o.images &&
           video == o.video &&
           creatives == o.creatives &&
           ad_set_id == o.ad_set_id &&
@@ -642,7 +651,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience].hash
     end
 
     # Builds the object from hash
