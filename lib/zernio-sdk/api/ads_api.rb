@@ -353,6 +353,83 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List comments on an ad
+    # Returns comments on an ad's underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular `/v1/inbox/comments/{postId}` endpoint cannot serve because dark posts aren't in Zernio's post database.  Resolves the ad's creative `effective_object_story_id` (Facebook) or `effective_instagram_media_id` (Instagram) via the Marketing API on each call (cached in-process by the platform client), then fetches comments from the Graph API.  **Meta-only**: other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) do not expose a public per-ad comments API and return `feature_not_available`.  Requires the Ads add-on. Response shape matches `/v1/inbox/comments/{postId}`. 
+    # @param ad_id [String] Internal Zernio ad ID (ObjectId).
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [String] :cursor Pagination cursor from a previous response.
+    # @return [GetAdComments200Response]
+    def get_ad_comments(ad_id, opts = {})
+      data, _status_code, _headers = get_ad_comments_with_http_info(ad_id, opts)
+      data
+    end
+
+    # List comments on an ad
+    # Returns comments on an ad&#39;s underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular &#x60;/v1/inbox/comments/{postId}&#x60; endpoint cannot serve because dark posts aren&#39;t in Zernio&#39;s post database.  Resolves the ad&#39;s creative &#x60;effective_object_story_id&#x60; (Facebook) or &#x60;effective_instagram_media_id&#x60; (Instagram) via the Marketing API on each call (cached in-process by the platform client), then fetches comments from the Graph API.  **Meta-only**: other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) do not expose a public per-ad comments API and return &#x60;feature_not_available&#x60;.  Requires the Ads add-on. Response shape matches &#x60;/v1/inbox/comments/{postId}&#x60;. 
+    # @param ad_id [String] Internal Zernio ad ID (ObjectId).
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [String] :cursor Pagination cursor from a previous response.
+    # @return [Array<(GetAdComments200Response, Integer, Hash)>] GetAdComments200Response data, response status code and response headers
+    def get_ad_comments_with_http_info(ad_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_ad_comments ...'
+      end
+      # verify the required parameter 'ad_id' is set
+      if @api_client.config.client_side_validation && ad_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdsApi.get_ad_comments"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.get_ad_comments, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.get_ad_comments, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/{adId}/comments'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdComments200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_ad_comments",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_ad_comments\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List ad accounts
     # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).
     # @param account_id [String] Social account ID

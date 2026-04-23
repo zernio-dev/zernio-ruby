@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad**](AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**get_ad**](AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
 | [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
+| [**get_ad_comments**](AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**list_conversion_destinations**](AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API |
@@ -359,6 +360,81 @@ end
 ### Return type
 
 [**GetAdAnalytics200Response**](GetAdAnalytics200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_comments
+
+> <GetAdComments200Response> get_ad_comments(ad_id, opts)
+
+List comments on an ad
+
+Returns comments on an ad's underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular `/v1/inbox/comments/{postId}` endpoint cannot serve because dark posts aren't in Zernio's post database.  Resolves the ad's creative `effective_object_story_id` (Facebook) or `effective_instagram_media_id` (Instagram) via the Marketing API on each call (cached in-process by the platform client), then fetches comments from the Graph API.  **Meta-only**: other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) do not expose a public per-ad comments API and return `feature_not_available`.  Requires the Ads add-on. Response shape matches `/v1/inbox/comments/{postId}`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+ad_id = 'ad_id_example' # String | Internal Zernio ad ID (ObjectId).
+opts = {
+  limit: 56, # Integer | 
+  cursor: 'cursor_example' # String | Pagination cursor from a previous response.
+}
+
+begin
+  # List comments on an ad
+  result = api_instance.get_ad_comments(ad_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_comments: #{e}"
+end
+```
+
+#### Using the get_ad_comments_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdComments200Response>, Integer, Hash)> get_ad_comments_with_http_info(ad_id, opts)
+
+```ruby
+begin
+  # List comments on an ad
+  data, status_code, headers = api_instance.get_ad_comments_with_http_info(ad_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdComments200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_comments_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Internal Zernio ad ID (ObjectId). |  |
+| **limit** | **Integer** |  | [optional][default to 25] |
+| **cursor** | **String** | Pagination cursor from a previous response. | [optional] |
+
+### Return type
+
+[**GetAdComments200Response**](GetAdComments200Response.md)
 
 ### Authorization
 

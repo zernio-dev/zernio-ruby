@@ -108,6 +108,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
+*Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API
@@ -536,6 +537,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdAnalytics200ResponseAnalytics](docs/GetAdAnalytics200ResponseAnalytics.md)
  - [Zernio::GetAdAnalytics200ResponseAnalyticsDailyInner](docs/GetAdAnalytics200ResponseAnalyticsDailyInner.md)
  - [Zernio::GetAdAudience200Response](docs/GetAdAudience200Response.md)
+ - [Zernio::GetAdComments200Response](docs/GetAdComments200Response.md)
+ - [Zernio::GetAdComments200ResponseMeta](docs/GetAdComments200ResponseMeta.md)
+ - [Zernio::GetAdComments200ResponsePagination](docs/GetAdComments200ResponsePagination.md)
  - [Zernio::GetAdTree200Response](docs/GetAdTree200Response.md)
  - [Zernio::GetAllAccountsHealth200Response](docs/GetAllAccountsHealth200Response.md)
  - [Zernio::GetAllAccountsHealth200ResponseAccountsInner](docs/GetAllAccountsHealth200ResponseAccountsInner.md)

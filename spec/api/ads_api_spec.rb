@@ -95,6 +95,20 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for get_ad_comments
+  # List comments on an ad
+  # Returns comments on an ad&#39;s underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular &#x60;/v1/inbox/comments/{postId}&#x60; endpoint cannot serve because dark posts aren&#39;t in Zernio&#39;s post database.  Resolves the ad&#39;s creative &#x60;effective_object_story_id&#x60; (Facebook) or &#x60;effective_instagram_media_id&#x60; (Instagram) via the Marketing API on each call (cached in-process by the platform client), then fetches comments from the Graph API.  **Meta-only**: other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) do not expose a public per-ad comments API and return &#x60;feature_not_available&#x60;.  Requires the Ads add-on. Response shape matches &#x60;/v1/inbox/comments/{postId}&#x60;. 
+  # @param ad_id Internal Zernio ad ID (ObjectId).
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit 
+  # @option opts [String] :cursor Pagination cursor from a previous response.
+  # @return [GetAdComments200Response]
+  describe 'get_ad_comments test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_accounts
   # List ad accounts
   # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).
