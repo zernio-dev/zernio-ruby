@@ -32,13 +32,13 @@ module Zernio
 
     attr_accessor :currency
 
-    # Required on legacy + attach shapes (skip for multi-creative — use `creatives[].headline`). Max: Meta=255, Google=30, Pinterest=100
+    # Required for Meta, Google, and Pinterest on legacy + attach shapes (skip for multi-creative — use `creatives[].headline`). Ignored for TikTok and X/Twitter. Max: Meta=255, Google=30, Pinterest=100.
     attr_accessor :headline
 
-    # Google Display only
+    # Google Display only. Defaults to `headline` if omitted.
     attr_accessor :long_headline
 
-    # Required on legacy + attach shapes. Max: Google=90, Pinterest=500
+    # Required on legacy + attach shapes. For X/Twitter this is the tweet text (max 280 chars including a ~24-char URL when `linkUrl` is set). Max: Google=90, Pinterest=500.
     attr_accessor :body
 
     # Required on legacy + attach shapes. Meta only.
@@ -47,8 +47,10 @@ module Zernio
     # Required on legacy + attach shapes. Skip for multi-creative.
     attr_accessor :link_url
 
-    # Required on legacy + attach shapes. Not required for Google Search campaigns.
+    # Image creative for Meta/Google/Pinterest on legacy + attach shapes (mutually exclusive with `video`). Not required for Google Search campaigns. For TikTok, this field carries the VIDEO URL (the TikTok ads endpoint is video-only; the field retains the `imageUrl` name for cross-platform consistency). Ignored for X/Twitter.
     attr_accessor :image_url
+
+    attr_accessor :video
 
     # Meta-only. When present, switches to the multi-creative shape: creates 1 campaign + 1 ad set + N ads (one per entry here). Top-level `headline` / `body` / `imageUrl` / `linkUrl` / `callToAction` are ignored in this mode. Mutually exclusive with `adSetId`. 
     attr_accessor :creatives
@@ -130,6 +132,7 @@ module Zernio
         :'call_to_action' => :'callToAction',
         :'link_url' => :'linkUrl',
         :'image_url' => :'imageUrl',
+        :'video' => :'video',
         :'creatives' => :'creatives',
         :'ad_set_id' => :'adSetId',
         :'business_name' => :'businessName',
@@ -174,6 +177,7 @@ module Zernio
         :'call_to_action' => :'String',
         :'link_url' => :'String',
         :'image_url' => :'String',
+        :'video' => :'CreateStandaloneAdRequestVideo',
         :'creatives' => :'Array<CreateStandaloneAdRequestCreativesInner>',
         :'ad_set_id' => :'String',
         :'business_name' => :'String',
@@ -270,6 +274,10 @@ module Zernio
 
       if attributes.key?(:'image_url')
         self.image_url = attributes[:'image_url']
+      end
+
+      if attributes.key?(:'video')
+        self.video = attributes[:'video']
       end
 
       if attributes.key?(:'creatives')
@@ -607,6 +615,7 @@ module Zernio
           call_to_action == o.call_to_action &&
           link_url == o.link_url &&
           image_url == o.image_url &&
+          video == o.video &&
           creatives == o.creatives &&
           ad_set_id == o.ad_set_id &&
           business_name == o.business_name &&
@@ -633,7 +642,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience].hash
     end
 
     # Builds the object from hash

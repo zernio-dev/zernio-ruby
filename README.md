@@ -462,6 +462,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAd201ResponseOneOf1](docs/CreateStandaloneAd201ResponseOneOf1.md)
  - [Zernio::CreateStandaloneAdRequest](docs/CreateStandaloneAdRequest.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInner](docs/CreateStandaloneAdRequestCreativesInner.md)
+ - [Zernio::CreateStandaloneAdRequestCreativesInnerVideo](docs/CreateStandaloneAdRequestCreativesInnerVideo.md)
+ - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
  - [Zernio::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
  - [Zernio::CreateWhatsAppFlow200Response](docs/CreateWhatsAppFlow200Response.md)
  - [Zernio::CreateWhatsAppFlow200ResponseFlow](docs/CreateWhatsAppFlow200ResponseFlow.md)

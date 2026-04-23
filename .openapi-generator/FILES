@@ -152,6 +152,8 @@ docs/CreateStandaloneAd201ResponseOneOf.md
 docs/CreateStandaloneAd201ResponseOneOf1.md
 docs/CreateStandaloneAdRequest.md
 docs/CreateStandaloneAdRequestCreativesInner.md
+docs/CreateStandaloneAdRequestCreativesInnerVideo.md
+docs/CreateStandaloneAdRequestVideo.md
 docs/CreateWebhookSettingsRequest.md
 docs/CreateWhatsAppFlow200Response.md
 docs/CreateWhatsAppFlow200ResponseFlow.md
@@ -1023,6 +1025,8 @@ lib/zernio-sdk/models/create_standalone_ad201_response_one_of.rb
 lib/zernio-sdk/models/create_standalone_ad201_response_one_of1.rb
 lib/zernio-sdk/models/create_standalone_ad_request.rb
 lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner.rb
+lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner_video.rb
+lib/zernio-sdk/models/create_standalone_ad_request_video.rb
 lib/zernio-sdk/models/create_webhook_settings_request.rb
 lib/zernio-sdk/models/create_whats_app_flow200_response.rb
 lib/zernio-sdk/models/create_whats_app_flow200_response_flow.rb
@@ -1858,7 +1862,9 @@ spec/models/create_standalone_ad201_response_one_of1_spec.rb
 spec/models/create_standalone_ad201_response_one_of_spec.rb
 spec/models/create_standalone_ad201_response_spec.rb
 spec/models/create_standalone_ad_request_creatives_inner_spec.rb
+spec/models/create_standalone_ad_request_creatives_inner_video_spec.rb
 spec/models/create_standalone_ad_request_spec.rb
+spec/models/create_standalone_ad_request_video_spec.rb
 spec/models/create_webhook_settings_request_spec.rb
 spec/models/create_whats_app_flow200_response_flow_spec.rb
 spec/models/create_whats_app_flow200_response_spec.rb

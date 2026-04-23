@@ -14,12 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Each creative must supply EXACTLY ONE of `imageUrl` (image creative) or `video` (video creative).
   class CreateStandaloneAdRequestCreativesInner < ApiModelBase
     attr_accessor :headline
 
     attr_accessor :body
 
+    # Image creative. Mutually exclusive with `video`.
     attr_accessor :image_url
+
+    attr_accessor :video
 
     attr_accessor :link_url
 
@@ -53,6 +57,7 @@ module Zernio
         :'headline' => :'headline',
         :'body' => :'body',
         :'image_url' => :'imageUrl',
+        :'video' => :'video',
         :'link_url' => :'linkUrl',
         :'call_to_action' => :'callToAction'
       }
@@ -74,6 +79,7 @@ module Zernio
         :'headline' => :'String',
         :'body' => :'String',
         :'image_url' => :'String',
+        :'video' => :'CreateStandaloneAdRequestCreativesInnerVideo',
         :'link_url' => :'String',
         :'call_to_action' => :'String'
       }
@@ -115,8 +121,10 @@ module Zernio
 
       if attributes.key?(:'image_url')
         self.image_url = attributes[:'image_url']
-      else
-        self.image_url = nil
+      end
+
+      if attributes.key?(:'video')
+        self.video = attributes[:'video']
       end
 
       if attributes.key?(:'link_url')
@@ -149,10 +157,6 @@ module Zernio
         invalid_properties.push('invalid value for "body", body cannot be nil.')
       end
 
-      if @image_url.nil?
-        invalid_properties.push('invalid value for "image_url", image_url cannot be nil.')
-      end
-
       if @link_url.nil?
         invalid_properties.push('invalid value for "link_url", link_url cannot be nil.')
       end
@@ -171,7 +175,6 @@ module Zernio
       return false if @headline.nil?
       return false if @headline.to_s.length > 255
       return false if @body.nil?
-      return false if @image_url.nil?
       return false if @link_url.nil?
       return false if @call_to_action.nil?
       call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
@@ -204,16 +207,6 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] image_url Value to be assigned
-    def image_url=(image_url)
-      if image_url.nil?
-        fail ArgumentError, 'image_url cannot be nil'
-      end
-
-      @image_url = image_url
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] link_url Value to be assigned
     def link_url=(link_url)
       if link_url.nil?
@@ -241,6 +234,7 @@ module Zernio
           headline == o.headline &&
           body == o.body &&
           image_url == o.image_url &&
+          video == o.video &&
           link_url == o.link_url &&
           call_to_action == o.call_to_action
     end
@@ -254,7 +248,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headline, body, image_url, link_url, call_to_action].hash
+      [headline, body, image_url, video, link_url, call_to_action].hash
     end
 
     # Builds the object from hash
