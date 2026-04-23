@@ -20,6 +20,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_post_published**](WebhookEventsApi.md#on_post_published) | **POST** /post.published | Post published event |
 | [**on_post_recycled**](WebhookEventsApi.md#on_post_recycled) | **POST** /post.recycled | Post recycled event |
 | [**on_post_scheduled**](WebhookEventsApi.md#on_post_scheduled) | **POST** /post.scheduled | Post scheduled event |
+| [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
+| [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
 
 
@@ -1096,6 +1098,142 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_post** | [**WebhookPayloadPost**](WebhookPayloadPost.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_review_new
+
+> on_review_new(webhook_payload_review_new)
+
+Review new event
+
+Fired when a new review is posted on a connected account. Currently supported for Google Business Profile (real-time via Pub/Sub). Requires the Inbox add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_review_new =  # WebhookPayloadReviewNew | 
+
+begin
+  # Review new event
+  api_instance.on_review_new(webhook_payload_review_new)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_review_new: #{e}"
+end
+```
+
+#### Using the on_review_new_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_review_new_with_http_info(webhook_payload_review_new)
+
+```ruby
+begin
+  # Review new event
+  data, status_code, headers = api_instance.on_review_new_with_http_info(webhook_payload_review_new)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_review_new_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_review_new** | [**WebhookPayloadReviewNew**](WebhookPayloadReviewNew.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_review_updated
+
+> on_review_updated(webhook_payload_review_updated)
+
+Review updated event
+
+Fired when a review changes: the reviewer edits their text or rating, or a reply is added (via the API or directly through the Google Business dashboard). Payload shape matches `review.new`. Requires the Inbox add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_review_updated =  # WebhookPayloadReviewUpdated | 
+
+begin
+  # Review updated event
+  api_instance.on_review_updated(webhook_payload_review_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_review_updated: #{e}"
+end
+```
+
+#### Using the on_review_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_review_updated_with_http_info(webhook_payload_review_updated)
+
+```ruby
+begin
+  # Review updated event
+  data, status_code, headers = api_instance.on_review_updated_with_http_info(webhook_payload_review_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_review_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_review_updated** | [**WebhookPayloadReviewUpdated**](WebhookPayloadReviewUpdated.md) |  |  |
 
 ### Return type
 

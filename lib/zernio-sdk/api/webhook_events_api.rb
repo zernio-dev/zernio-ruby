@@ -1075,6 +1075,138 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Review new event
+    # Fired when a new review is posted on a connected account. Currently supported for Google Business Profile (real-time via Pub/Sub). Requires the Inbox add-on. 
+    # @param webhook_payload_review_new [WebhookPayloadReviewNew] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_review_new(webhook_payload_review_new, opts = {})
+      on_review_new_with_http_info(webhook_payload_review_new, opts)
+      nil
+    end
+
+    # Review new event
+    # Fired when a new review is posted on a connected account. Currently supported for Google Business Profile (real-time via Pub/Sub). Requires the Inbox add-on. 
+    # @param webhook_payload_review_new [WebhookPayloadReviewNew] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_review_new_with_http_info(webhook_payload_review_new, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_review_new ...'
+      end
+      # verify the required parameter 'webhook_payload_review_new' is set
+      if @api_client.config.client_side_validation && webhook_payload_review_new.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_review_new' when calling WebhookEventsApi.on_review_new"
+      end
+      # resource path
+      local_var_path = '/review.new'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_review_new)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_review_new",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_review_new\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Review updated event
+    # Fired when a review changes: the reviewer edits their text or rating, or a reply is added (via the API or directly through the Google Business dashboard). Payload shape matches `review.new`. Requires the Inbox add-on. 
+    # @param webhook_payload_review_updated [WebhookPayloadReviewUpdated] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_review_updated(webhook_payload_review_updated, opts = {})
+      on_review_updated_with_http_info(webhook_payload_review_updated, opts)
+      nil
+    end
+
+    # Review updated event
+    # Fired when a review changes: the reviewer edits their text or rating, or a reply is added (via the API or directly through the Google Business dashboard). Payload shape matches &#x60;review.new&#x60;. Requires the Inbox add-on. 
+    # @param webhook_payload_review_updated [WebhookPayloadReviewUpdated] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_review_updated_with_http_info(webhook_payload_review_updated, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_review_updated ...'
+      end
+      # verify the required parameter 'webhook_payload_review_updated' is set
+      if @api_client.config.client_side_validation && webhook_payload_review_updated.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_review_updated' when calling WebhookEventsApi.on_review_updated"
+      end
+      # resource path
+      local_var_path = '/review.updated'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_review_updated)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_review_updated",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_review_updated\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Webhook test event
     # Fired when sending a test webhook to verify the endpoint configuration.
     # @param webhook_payload_test [WebhookPayloadTest] 
