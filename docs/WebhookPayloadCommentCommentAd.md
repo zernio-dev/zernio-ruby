@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Meta ad ID (Instagram only). | [optional] |
 | **title** | **String** | Ad creative title (Instagram only). | [optional] |
-| **promotion_status** | **String** | Facebook promotion status returned by Graph API. Common values: \&quot;active\&quot; (organic post currently boosted), \&quot;ineligible\&quot; (dark post / ad creative — not promotable because it already is an ad).  | [optional] |
+| **promotion_status** | **String** | Facebook promotion status returned by Graph API. Common values: \&quot;active\&quot; (organic post currently boosted), \&quot;ineligible\&quot; (dark post or ad creative, not promotable because it already is an ad).  | [optional] |
 
 ## Example
 

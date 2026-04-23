@@ -23,7 +23,7 @@ module Zernio
     # Meta ad ID.
     attr_accessor :platform_ad_id
 
-    # Underlying post ID the comments belong to (effective_object_story_id for FB, effective_instagram_media_id for IG).
+    # Underlying post ID the comments belong to. effective_object_story_id for Facebook, effective_instagram_media_id for Instagram.
     attr_accessor :effective_story_id
 
     # Social account ID (ads SocialAccount).

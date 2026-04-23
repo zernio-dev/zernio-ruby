@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Webhook payload for the `review.new` event (new review posted on a connected account).
+  # Webhook payload for the review.new event (new review posted on a connected account).
   class WebhookPayloadReviewNew < ApiModelBase
     # Stable webhook event ID
     attr_accessor :id

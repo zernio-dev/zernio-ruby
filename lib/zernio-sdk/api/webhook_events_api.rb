@@ -1142,7 +1142,7 @@ module Zernio
     end
 
     # Review updated event
-    # Fired when a review changes: the reviewer edits their text or rating, or a reply is added (via the API or directly through the Google Business dashboard). Payload shape matches `review.new`. Requires the Inbox add-on. 
+    # Fired when a review changes: the reviewer edits their text or rating, or a reply is added (via the API or directly through the Google Business dashboard). Payload shape matches review.new. Requires the Inbox add-on. 
     # @param webhook_payload_review_updated [WebhookPayloadReviewUpdated] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -1152,7 +1152,7 @@ module Zernio
     end
 
     # Review updated event
-    # Fired when a review changes: the reviewer edits their text or rating, or a reply is added (via the API or directly through the Google Business dashboard). Payload shape matches &#x60;review.new&#x60;. Requires the Inbox add-on. 
+    # Fired when a review changes: the reviewer edits their text or rating, or a reply is added (via the API or directly through the Google Business dashboard). Payload shape matches review.new. Requires the Inbox add-on. 
     # @param webhook_payload_review_updated [WebhookPayloadReviewUpdated] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

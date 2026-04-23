@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Present when `hasReply` is true.
+  # Present when hasReply is true.
   class ReviewWebhookReviewReply < ApiModelBase
     attr_accessor :text
 
