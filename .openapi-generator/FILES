@@ -802,6 +802,7 @@ docs/WebhookPayloadAccountDisconnectedAccount.md
 docs/WebhookPayloadComment.md
 docs/WebhookPayloadCommentAccount.md
 docs/WebhookPayloadCommentComment.md
+docs/WebhookPayloadCommentCommentAd.md
 docs/WebhookPayloadCommentCommentAuthor.md
 docs/WebhookPayloadCommentPost.md
 docs/WebhookPayloadMessage.md
@@ -1651,6 +1652,7 @@ lib/zernio-sdk/models/webhook_payload_account_disconnected_account.rb
 lib/zernio-sdk/models/webhook_payload_comment.rb
 lib/zernio-sdk/models/webhook_payload_comment_account.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment.rb
+lib/zernio-sdk/models/webhook_payload_comment_comment_ad.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_author.rb
 lib/zernio-sdk/models/webhook_payload_comment_post.rb
 lib/zernio-sdk/models/webhook_payload_message.rb
@@ -2487,6 +2489,7 @@ spec/models/webhook_payload_account_connected_spec.rb
 spec/models/webhook_payload_account_disconnected_account_spec.rb
 spec/models/webhook_payload_account_disconnected_spec.rb
 spec/models/webhook_payload_comment_account_spec.rb
+spec/models/webhook_payload_comment_comment_ad_spec.rb
 spec/models/webhook_payload_comment_comment_author_spec.rb
 spec/models/webhook_payload_comment_comment_spec.rb
 spec/models/webhook_payload_comment_post_spec.rb

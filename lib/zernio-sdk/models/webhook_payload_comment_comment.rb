@@ -39,6 +39,8 @@ module Zernio
     # Parent comment ID if this is a reply
     attr_accessor :parent_comment_id
 
+    attr_accessor :ad
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -72,7 +74,8 @@ module Zernio
         :'author' => :'author',
         :'created_at' => :'createdAt',
         :'is_reply' => :'isReply',
-        :'parent_comment_id' => :'parentCommentId'
+        :'parent_comment_id' => :'parentCommentId',
+        :'ad' => :'ad'
       }
     end
 
@@ -97,7 +100,8 @@ module Zernio
         :'author' => :'WebhookPayloadCommentCommentAuthor',
         :'created_at' => :'Time',
         :'is_reply' => :'Boolean',
-        :'parent_comment_id' => :'String'
+        :'parent_comment_id' => :'String',
+        :'ad' => :'WebhookPayloadCommentCommentAd'
       }
     end
 
@@ -175,6 +179,10 @@ module Zernio
         self.parent_comment_id = attributes[:'parent_comment_id']
       else
         self.parent_comment_id = nil
+      end
+
+      if attributes.key?(:'ad')
+        self.ad = attributes[:'ad']
       end
     end
 
@@ -343,7 +351,8 @@ module Zernio
           author == o.author &&
           created_at == o.created_at &&
           is_reply == o.is_reply &&
-          parent_comment_id == o.parent_comment_id
+          parent_comment_id == o.parent_comment_id &&
+          ad == o.ad
     end
 
     # @see the `==` method
@@ -355,7 +364,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, post_id, platform_post_id, platform, text, author, created_at, is_reply, parent_comment_id].hash
+      [id, post_id, platform_post_id, platform, text, author, created_at, is_reply, parent_comment_id, ad].hash
     end
 
     # Builds the object from hash
