@@ -30,6 +30,12 @@ module Zernio
     # Total reshares across all posts
     attr_accessor :shares
 
+    # Total times posts were saved (personal accounts only)
+    attr_accessor :saves
+
+    # Total times posts were sent via LinkedIn messaging (personal accounts only)
+    attr_accessor :sends
+
     # Overall engagement rate as percentage
     attr_accessor :engagement_rate
 
@@ -41,6 +47,8 @@ module Zernio
         :'reactions' => :'reactions',
         :'comments' => :'comments',
         :'shares' => :'shares',
+        :'saves' => :'saves',
+        :'sends' => :'sends',
         :'engagement_rate' => :'engagementRate'
       }
     end
@@ -63,6 +71,8 @@ module Zernio
         :'reactions' => :'Integer',
         :'comments' => :'Integer',
         :'shares' => :'Integer',
+        :'saves' => :'Integer',
+        :'sends' => :'Integer',
         :'engagement_rate' => :'Float'
       }
     end
@@ -109,6 +119,14 @@ module Zernio
         self.shares = attributes[:'shares']
       end
 
+      if attributes.key?(:'saves')
+        self.saves = attributes[:'saves']
+      end
+
+      if attributes.key?(:'sends')
+        self.sends = attributes[:'sends']
+      end
+
       if attributes.key?(:'engagement_rate')
         self.engagement_rate = attributes[:'engagement_rate']
       end
@@ -139,6 +157,8 @@ module Zernio
           reactions == o.reactions &&
           comments == o.comments &&
           shares == o.shares &&
+          saves == o.saves &&
+          sends == o.sends &&
           engagement_rate == o.engagement_rate
     end
 
@@ -151,7 +171,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [impressions, reach, reactions, comments, shares, engagement_rate].hash
+      [impressions, reach, reactions, comments, shares, saves, sends, engagement_rate].hash
     end
 
     # Builds the object from hash

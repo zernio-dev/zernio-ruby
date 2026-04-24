@@ -352,6 +352,86 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get Facebook Page insights
+    # Returns page-level Facebook insights (media views, views, post engagements, video metrics, follower counts). Response shape matches /v1/analytics/instagram/account-insights so the same client handling works across platforms.  Metric names track the current (post-November 2025) Meta Graph API. The legacy page_impressions / page_fans / page_fan_adds / page_fan_removes metrics were deprecated by Meta on November 15, 2025 and are NOT accepted by this endpoint. Use the replacements below. Because Meta did not provide direct adds/removes replacements, Zernio synthesizes followers_gained / followers_lost from the daily follower snapshotter.  Max 89 days, defaults to last 30 days. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the connected Facebook Page.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
+    # @option opts [String] :metric_type \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array.  (default to 'total_value')
+    # @return [InstagramAccountInsightsResponse]
+    def get_facebook_page_insights(account_id, opts = {})
+      data, _status_code, _headers = get_facebook_page_insights_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get Facebook Page insights
+    # Returns page-level Facebook insights (media views, views, post engagements, video metrics, follower counts). Response shape matches /v1/analytics/instagram/account-insights so the same client handling works across platforms.  Metric names track the current (post-November 2025) Meta Graph API. The legacy page_impressions / page_fans / page_fan_adds / page_fan_removes metrics were deprecated by Meta on November 15, 2025 and are NOT accepted by this endpoint. Use the replacements below. Because Meta did not provide direct adds/removes replacements, Zernio synthesizes followers_gained / followers_lost from the daily follower snapshotter.  Max 89 days, defaults to last 30 days. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the connected Facebook Page.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
+    # @option opts [String] :metric_type \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array.  (default to 'total_value')
+    # @return [Array<(InstagramAccountInsightsResponse, Integer, Hash)>] InstagramAccountInsightsResponse data, response status code and response headers
+    def get_facebook_page_insights_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_facebook_page_insights ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_facebook_page_insights"
+      end
+      allowable_values = ["time_series", "total_value"]
+      if @api_client.config.client_side_validation && opts[:'metric_type'] && !allowable_values.include?(opts[:'metric_type'])
+        fail ArgumentError, "invalid value for \"metric_type\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/analytics/facebook/page-insights'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'metrics'] = opts[:'metrics'] if !opts[:'metrics'].nil?
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+      query_params[:'metricType'] = opts[:'metric_type'] if !opts[:'metric_type'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'InstagramAccountInsightsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_facebook_page_insights",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_facebook_page_insights\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get follower stats
     # Returns follower count history and growth metrics for connected social accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
     # @param [Hash] opts the optional parameters
@@ -585,7 +665,7 @@ module Zernio
     # Returns account-level Instagram insights such as reach, views, accounts engaged, and total interactions. These metrics reflect the entire account's performance across all content surfaces (feed, stories, explore, profile), and are fundamentally different from post-level metrics. Data may be delayed up to 48 hours. Max 90 days, defaults to last 30 days. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Instagram account
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :metrics Comma-separated list of metrics. Defaults to \&quot;reach,views,accounts_engaged,total_interactions\&quot;. Valid metrics: reach, views, accounts_engaged, total_interactions, comments, likes, saves, shares, replies, reposts, follows_and_unfollows, profile_links_taps. Note: only \&quot;reach\&quot; supports metricType&#x3D;time_series. All other metrics are total_value only. 
+    # @option opts [String] :metrics Comma-separated list of metrics. Defaults to \&quot;reach,views,accounts_engaged,total_interactions\&quot;. Valid metrics: reach, views, accounts_engaged, total_interactions, comments, likes, saves, shares, replies, reposts, follows_and_unfollows, profile_links_taps. Note: only \&quot;reach\&quot; supports metricType&#x3D;time_series. All other metrics (including follows_and_unfollows) are total_value only. This is an Instagram Graph API limitation, not a Zernio limitation - the IG API does not return time-series data for these metrics. For a daily running follower count, use /v1/analytics/instagram/follower-history instead. 
     # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
     # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
     # @option opts [String] :metric_type \&quot;total_value\&quot; (default) returns aggregated totals and supports breakdowns. \&quot;time_series\&quot; returns daily values but only works with the \&quot;reach\&quot; metric.  (default to 'total_value')
@@ -600,7 +680,7 @@ module Zernio
     # Returns account-level Instagram insights such as reach, views, accounts engaged, and total interactions. These metrics reflect the entire account&#39;s performance across all content surfaces (feed, stories, explore, profile), and are fundamentally different from post-level metrics. Data may be delayed up to 48 hours. Max 90 days, defaults to last 30 days. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the Instagram account
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :metrics Comma-separated list of metrics. Defaults to \&quot;reach,views,accounts_engaged,total_interactions\&quot;. Valid metrics: reach, views, accounts_engaged, total_interactions, comments, likes, saves, shares, replies, reposts, follows_and_unfollows, profile_links_taps. Note: only \&quot;reach\&quot; supports metricType&#x3D;time_series. All other metrics are total_value only. 
+    # @option opts [String] :metrics Comma-separated list of metrics. Defaults to \&quot;reach,views,accounts_engaged,total_interactions\&quot;. Valid metrics: reach, views, accounts_engaged, total_interactions, comments, likes, saves, shares, replies, reposts, follows_and_unfollows, profile_links_taps. Note: only \&quot;reach\&quot; supports metricType&#x3D;time_series. All other metrics (including follows_and_unfollows) are total_value only. This is an Instagram Graph API limitation, not a Zernio limitation - the IG API does not return time-series data for these metrics. For a daily running follower count, use /v1/analytics/instagram/follower-history instead. 
     # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
     # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
     # @option opts [String] :metric_type \&quot;total_value\&quot; (default) returns aggregated totals and supports breakdowns. \&quot;time_series\&quot; returns daily values but only works with the \&quot;reach\&quot; metric.  (default to 'total_value')
@@ -745,14 +825,94 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get Instagram follower history
+    # Returns a daily running Instagram follower count time series, served from Zernio's cross-platform daily snapshotter. Exists because Meta removed follower_count from the /insights endpoint in Graph API v22+ and never exposed a historical daily series via any public API.  Response envelope matches /v1/analytics/instagram/account-insights so the same client handling works. Max 89 days, defaults to last 30 days. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the Instagram account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list. Defaults to \&quot;follower_count,followers_gained,followers_lost\&quot;.   - follower_count   : per-day raw follower count   - followers_gained : sum of positive daily deltas   - followers_lost   : sum of absolute negative daily deltas 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
+    # @option opts [String] :metric_type \&quot;total_value\&quot; returns aggregated totals (latest for follower_count, sum for gained/lost). \&quot;time_series\&quot; returns per-day values in the \&quot;values\&quot; array.  (default to 'total_value')
+    # @return [InstagramAccountInsightsResponse]
+    def get_instagram_follower_history(account_id, opts = {})
+      data, _status_code, _headers = get_instagram_follower_history_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get Instagram follower history
+    # Returns a daily running Instagram follower count time series, served from Zernio&#39;s cross-platform daily snapshotter. Exists because Meta removed follower_count from the /insights endpoint in Graph API v22+ and never exposed a historical daily series via any public API.  Response envelope matches /v1/analytics/instagram/account-insights so the same client handling works. Max 89 days, defaults to last 30 days. Requires the Analytics add-on. 
+    # @param account_id [String] The Zernio SocialAccount ID for the Instagram account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list. Defaults to \&quot;follower_count,followers_gained,followers_lost\&quot;.   - follower_count   : per-day raw follower count   - followers_gained : sum of positive daily deltas   - followers_lost   : sum of absolute negative daily deltas 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
+    # @option opts [String] :metric_type \&quot;total_value\&quot; returns aggregated totals (latest for follower_count, sum for gained/lost). \&quot;time_series\&quot; returns per-day values in the \&quot;values\&quot; array.  (default to 'total_value')
+    # @return [Array<(InstagramAccountInsightsResponse, Integer, Hash)>] InstagramAccountInsightsResponse data, response status code and response headers
+    def get_instagram_follower_history_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_instagram_follower_history ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_instagram_follower_history"
+      end
+      allowable_values = ["time_series", "total_value"]
+      if @api_client.config.client_side_validation && opts[:'metric_type'] && !allowable_values.include?(opts[:'metric_type'])
+        fail ArgumentError, "invalid value for \"metric_type\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/analytics/instagram/follower-history'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'metrics'] = opts[:'metrics'] if !opts[:'metrics'].nil?
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+      query_params[:'metricType'] = opts[:'metric_type'] if !opts[:'metric_type'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'InstagramAccountInsightsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_instagram_follower_history",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_instagram_follower_history\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get LinkedIn aggregate stats
-    # Returns aggregate analytics across all posts for a LinkedIn personal account. Only includes posts published through Zernio (LinkedIn API limitation). Org accounts should use /v1/analytics instead. Requires r_member_postAnalytics scope.
+    # Returns aggregate analytics across all posts for a LinkedIn personal account. Only includes posts published through Zernio (LinkedIn API limitation). Org accounts should use /v1/analytics instead. Requires r_member_postAnalytics scope. Saves (POST_SAVE) and sends (POST_SEND) are available for personal accounts; organization pages always return 0 for these two metrics because LinkedIn does not expose them on the organization analytics endpoint.
     # @param account_id [String] The ID of the LinkedIn personal account
     # @param [Hash] opts the optional parameters
     # @option opts [String] :aggregation TOTAL (default, lifetime totals) or DAILY (time series). MEMBERS_REACHED not available with DAILY. (default to 'TOTAL')
     # @option opts [Date] :start_date Start date (YYYY-MM-DD). If omitted, returns lifetime analytics.
     # @option opts [Date] :end_date End date (YYYY-MM-DD, exclusive). Defaults to today if omitted.
-    # @option opts [String] :metrics Comma-separated metrics: IMPRESSION, MEMBERS_REACHED, REACTION, COMMENT, RESHARE. Omit for all.
+    # @option opts [String] :metrics Comma-separated metrics: IMPRESSION, MEMBERS_REACHED, REACTION, COMMENT, RESHARE, POST_SAVE, POST_SEND. Omit for all.
     # @return [GetLinkedInAggregateAnalytics200Response]
     def get_linked_in_aggregate_analytics(account_id, opts = {})
       data, _status_code, _headers = get_linked_in_aggregate_analytics_with_http_info(account_id, opts)
@@ -760,13 +920,13 @@ module Zernio
     end
 
     # Get LinkedIn aggregate stats
-    # Returns aggregate analytics across all posts for a LinkedIn personal account. Only includes posts published through Zernio (LinkedIn API limitation). Org accounts should use /v1/analytics instead. Requires r_member_postAnalytics scope.
+    # Returns aggregate analytics across all posts for a LinkedIn personal account. Only includes posts published through Zernio (LinkedIn API limitation). Org accounts should use /v1/analytics instead. Requires r_member_postAnalytics scope. Saves (POST_SAVE) and sends (POST_SEND) are available for personal accounts; organization pages always return 0 for these two metrics because LinkedIn does not expose them on the organization analytics endpoint.
     # @param account_id [String] The ID of the LinkedIn personal account
     # @param [Hash] opts the optional parameters
     # @option opts [String] :aggregation TOTAL (default, lifetime totals) or DAILY (time series). MEMBERS_REACHED not available with DAILY. (default to 'TOTAL')
     # @option opts [Date] :start_date Start date (YYYY-MM-DD). If omitted, returns lifetime analytics.
     # @option opts [Date] :end_date End date (YYYY-MM-DD, exclusive). Defaults to today if omitted.
-    # @option opts [String] :metrics Comma-separated metrics: IMPRESSION, MEMBERS_REACHED, REACTION, COMMENT, RESHARE. Omit for all.
+    # @option opts [String] :metrics Comma-separated metrics: IMPRESSION, MEMBERS_REACHED, REACTION, COMMENT, RESHARE, POST_SAVE, POST_SEND. Omit for all.
     # @return [Array<(GetLinkedInAggregateAnalytics200Response, Integer, Hash)>] GetLinkedInAggregateAnalytics200Response data, response status code and response headers
     def get_linked_in_aggregate_analytics_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -824,8 +984,88 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get LinkedIn organization page aggregate analytics
+    # Returns aggregate analytics for a LinkedIn organization page. Parallel to /v1/accounts/{id}/linkedin-aggregate-analytics (which handles personal accounts only). Backed by LinkedIn's organizationalEntityShareStatistics, organizationalEntityFollowerStatistics, and organizationPageStatistics endpoints.  Response shape matches /v1/analytics/instagram/account-insights. Max 89 days, defaults to last 30 days. Requires the Analytics add-on.  Scope requirements: r_organization_social, r_organization_followers, and r_organization_admin must all be present on the account. Accounts connected before these scopes were included in the OAuth flow will return 412 with a reauth hint.  Enforced by this endpoint:   - Page-view metrics accept only metricType=total_value (LinkedIn omits per-day     segmentation even when the API is called with DAY granularity, so a time-series     response would be meaningless).   - Date range capped at 89 days.  LinkedIn-side platform limits (not re-enforced here, but worth knowing for larger ranges in a future release):   - Follower stats: rolling 12-month window, end must be no later than 2 days ago.   - Share stats: rolling 12-month window. 
+    # @param account_id [String] The Zernio SocialAccount ID for the LinkedIn organization account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list. Defaults to \&quot;impressions,clicks,engagement_rate,organic_followers_gained,followers_gained,followers_lost\&quot;.  Share statistics (support both total_value and time_series):   - impressions   - unique_impressions   - clicks   - likes   - comments   - shares   - engagement_rate       (0..1, LinkedIn-computed)  Follower-gain statistics (support total_value and time_series):   - organic_followers_gained   (per-day organic gains for time_series; sum of organic gains over the range for total_value)   - paid_followers_gained      (per-day paid gains for time_series; sum of paid gains over the range for total_value)  Page-view statistics (total_value ONLY - LinkedIn platform limit):   - page_views_total   - page_views_overview   - page_views_careers   - page_views_jobs   - page_views_life  Zernio-synthesized from daily follower snapshots:   - followers_gained   - followers_lost 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
+    # @option opts [String] :metric_type  (default to 'total_value')
+    # @return [InstagramAccountInsightsResponse]
+    def get_linked_in_org_aggregate_analytics(account_id, opts = {})
+      data, _status_code, _headers = get_linked_in_org_aggregate_analytics_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get LinkedIn organization page aggregate analytics
+    # Returns aggregate analytics for a LinkedIn organization page. Parallel to /v1/accounts/{id}/linkedin-aggregate-analytics (which handles personal accounts only). Backed by LinkedIn&#39;s organizationalEntityShareStatistics, organizationalEntityFollowerStatistics, and organizationPageStatistics endpoints.  Response shape matches /v1/analytics/instagram/account-insights. Max 89 days, defaults to last 30 days. Requires the Analytics add-on.  Scope requirements: r_organization_social, r_organization_followers, and r_organization_admin must all be present on the account. Accounts connected before these scopes were included in the OAuth flow will return 412 with a reauth hint.  Enforced by this endpoint:   - Page-view metrics accept only metricType&#x3D;total_value (LinkedIn omits per-day     segmentation even when the API is called with DAY granularity, so a time-series     response would be meaningless).   - Date range capped at 89 days.  LinkedIn-side platform limits (not re-enforced here, but worth knowing for larger ranges in a future release):   - Follower stats: rolling 12-month window, end must be no later than 2 days ago.   - Share stats: rolling 12-month window. 
+    # @param account_id [String] The Zernio SocialAccount ID for the LinkedIn organization account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list. Defaults to \&quot;impressions,clicks,engagement_rate,organic_followers_gained,followers_gained,followers_lost\&quot;.  Share statistics (support both total_value and time_series):   - impressions   - unique_impressions   - clicks   - likes   - comments   - shares   - engagement_rate       (0..1, LinkedIn-computed)  Follower-gain statistics (support total_value and time_series):   - organic_followers_gained   (per-day organic gains for time_series; sum of organic gains over the range for total_value)   - paid_followers_gained      (per-day paid gains for time_series; sum of paid gains over the range for total_value)  Page-view statistics (total_value ONLY - LinkedIn platform limit):   - page_views_total   - page_views_overview   - page_views_careers   - page_views_jobs   - page_views_life  Zernio-synthesized from daily follower snapshots:   - followers_gained   - followers_lost 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
+    # @option opts [String] :metric_type  (default to 'total_value')
+    # @return [Array<(InstagramAccountInsightsResponse, Integer, Hash)>] InstagramAccountInsightsResponse data, response status code and response headers
+    def get_linked_in_org_aggregate_analytics_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_linked_in_org_aggregate_analytics ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_linked_in_org_aggregate_analytics"
+      end
+      allowable_values = ["time_series", "total_value"]
+      if @api_client.config.client_side_validation && opts[:'metric_type'] && !allowable_values.include?(opts[:'metric_type'])
+        fail ArgumentError, "invalid value for \"metric_type\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/analytics/linkedin/org-aggregate-analytics'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'metrics'] = opts[:'metrics'] if !opts[:'metrics'].nil?
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+      query_params[:'metricType'] = opts[:'metric_type'] if !opts[:'metric_type'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'InstagramAccountInsightsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_linked_in_org_aggregate_analytics",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_linked_in_org_aggregate_analytics\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get LinkedIn post stats
-    # Returns analytics for a specific LinkedIn post by URN. Works for both personal and organization accounts.
+    # Returns analytics for a specific LinkedIn post by URN. Works for both personal and organization accounts. Saves and sends are only populated for personal accounts (LinkedIn does not expose these metrics on the organization analytics endpoint).
     # @param account_id [String] The ID of the LinkedIn account
     # @param urn [String] The LinkedIn post URN
     # @param [Hash] opts the optional parameters
@@ -836,7 +1076,7 @@ module Zernio
     end
 
     # Get LinkedIn post stats
-    # Returns analytics for a specific LinkedIn post by URN. Works for both personal and organization accounts.
+    # Returns analytics for a specific LinkedIn post by URN. Works for both personal and organization accounts. Saves and sends are only populated for personal accounts (LinkedIn does not expose these metrics on the organization analytics endpoint).
     # @param account_id [String] The ID of the LinkedIn account
     # @param urn [String] The LinkedIn post URN
     # @param [Hash] opts the optional parameters
@@ -1114,6 +1354,166 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AnalyticsApi#get_posting_frequency\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get TikTok account-level insights
+    # Returns account-level TikTok insights from /v2/user/info/ (live) plus historical time series joined from Zernio's daily snapshotter (AccountStats).  Response shape matches /v1/analytics/instagram/account-insights. Max 89 days, defaults to last 30 days. Requires the Analytics add-on and the user.info.stats scope on the account (412 if missing).  Scope intentionally narrow. TikTok's public API exposes only the four counter metrics below. The deep metrics that live in TikTok Studio are NOT available on any public TikTok API, even for Business accounts:   - profile_views   - account-level impressions / reach   - follower inflow / outflow breakdown   - video watch time, average watch time, full-watched rate   - impression_sources (FYP / Following / Hashtag / Search / Personal profile)  TikTok's Research API doesn't expose those fields either, and is restricted to non-commercial academic use per TikTok's eligibility policy. There is no public API workaround. Post-level metrics (views, likes, comments, shares per video) are available via /v1/analytics?postId=... from TikTok's /v2/video/query/. 
+    # @param account_id [String] The Zernio SocialAccount ID for the TikTok account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list. Defaults to \&quot;follower_count,likes_count,video_count,followers_gained,followers_lost\&quot;.  Live from /v2/user/info/ (requires user.info.stats scope):   - follower_count  (cumulative; time series joined from AccountStats)   - following_count (cumulative; time series joined from AccountStats.metadata)   - likes_count     (cumulative; time series joined from AccountStats.metadata)   - video_count     (cumulative; time series joined from AccountStats.metadata)  Zernio-synthesized:   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas) 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
+    # @option opts [String] :metric_type \&quot;total_value\&quot; returns the latest cumulative counter value. \&quot;time_series\&quot; returns daily values joined from AccountStats snapshots.  (default to 'total_value')
+    # @return [InstagramAccountInsightsResponse]
+    def get_tik_tok_account_insights(account_id, opts = {})
+      data, _status_code, _headers = get_tik_tok_account_insights_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get TikTok account-level insights
+    # Returns account-level TikTok insights from /v2/user/info/ (live) plus historical time series joined from Zernio&#39;s daily snapshotter (AccountStats).  Response shape matches /v1/analytics/instagram/account-insights. Max 89 days, defaults to last 30 days. Requires the Analytics add-on and the user.info.stats scope on the account (412 if missing).  Scope intentionally narrow. TikTok&#39;s public API exposes only the four counter metrics below. The deep metrics that live in TikTok Studio are NOT available on any public TikTok API, even for Business accounts:   - profile_views   - account-level impressions / reach   - follower inflow / outflow breakdown   - video watch time, average watch time, full-watched rate   - impression_sources (FYP / Following / Hashtag / Search / Personal profile)  TikTok&#39;s Research API doesn&#39;t expose those fields either, and is restricted to non-commercial academic use per TikTok&#39;s eligibility policy. There is no public API workaround. Post-level metrics (views, likes, comments, shares per video) are available via /v1/analytics?postId&#x3D;... from TikTok&#39;s /v2/video/query/. 
+    # @param account_id [String] The Zernio SocialAccount ID for the TikTok account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list. Defaults to \&quot;follower_count,likes_count,video_count,followers_gained,followers_lost\&quot;.  Live from /v2/user/info/ (requires user.info.stats scope):   - follower_count  (cumulative; time series joined from AccountStats)   - following_count (cumulative; time series joined from AccountStats.metadata)   - likes_count     (cumulative; time series joined from AccountStats.metadata)   - video_count     (cumulative; time series joined from AccountStats.metadata)  Zernio-synthesized:   - followers_gained  (sum of positive daily follower deltas)   - followers_lost    (sum of absolute negative daily deltas) 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today.
+    # @option opts [String] :metric_type \&quot;total_value\&quot; returns the latest cumulative counter value. \&quot;time_series\&quot; returns daily values joined from AccountStats snapshots.  (default to 'total_value')
+    # @return [Array<(InstagramAccountInsightsResponse, Integer, Hash)>] InstagramAccountInsightsResponse data, response status code and response headers
+    def get_tik_tok_account_insights_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_tik_tok_account_insights ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_tik_tok_account_insights"
+      end
+      allowable_values = ["time_series", "total_value"]
+      if @api_client.config.client_side_validation && opts[:'metric_type'] && !allowable_values.include?(opts[:'metric_type'])
+        fail ArgumentError, "invalid value for \"metric_type\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/analytics/tiktok/account-insights'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'metrics'] = opts[:'metrics'] if !opts[:'metrics'].nil?
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+      query_params[:'metricType'] = opts[:'metric_type'] if !opts[:'metric_type'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'InstagramAccountInsightsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_tik_tok_account_insights",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_tik_tok_account_insights\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get YouTube channel-level insights
+    # Returns channel-scoped aggregate metrics from YouTube Analytics API v2. Saves you from looping /v1/analytics/youtube/daily-views over every video when you only need channel totals.  Response shape matches /v1/analytics/instagram/account-insights so the same client handling works. Requires yt-analytics.readonly scope (412 with reauthorizeUrl if missing). Data has a 2-3 day delay (endDate is clamped accordingly). Max 89 days, defaults to last 30 days. Requires the Analytics add-on.  NOT exposed: impressions (Studio thumbnail impressions) and impressionsClickThroughRate. YouTube Analytics API v2 does not expose these for any principal type, not channel owners, not Partner Program channels, not content owners with CMS access. The only way to get them is Studio CSV export. This is a Google-side limitation. 
+    # @param account_id [String] The Zernio SocialAccount ID for the YouTube account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list. Defaults to \&quot;views,estimatedMinutesWatched,subscribersGained,subscribersLost\&quot;.  Live YouTube Analytics v2 metrics:   - views   - estimatedMinutesWatched   - averageViewDuration          (ratio - weighted mean computed across days)   - subscribersGained   - subscribersLost  Zernio-synthesized from daily follower snapshots (cross-platform parity):   - followers_gained   - followers_lost 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today. YouTube Analytics has a 2-3 day delay, so the fetch is internally clamped to 3 days ago; any requested range extending beyond that returns zero values for the tail days. The response&#39;s dateRange.until field reflects your requested value. 
+    # @option opts [String] :metric_type \&quot;total_value\&quot; (default) returns aggregated totals. \&quot;time_series\&quot; returns per-day values in the \&quot;values\&quot; array.  (default to 'total_value')
+    # @return [InstagramAccountInsightsResponse]
+    def get_you_tube_channel_insights(account_id, opts = {})
+      data, _status_code, _headers = get_you_tube_channel_insights_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get YouTube channel-level insights
+    # Returns channel-scoped aggregate metrics from YouTube Analytics API v2. Saves you from looping /v1/analytics/youtube/daily-views over every video when you only need channel totals.  Response shape matches /v1/analytics/instagram/account-insights so the same client handling works. Requires yt-analytics.readonly scope (412 with reauthorizeUrl if missing). Data has a 2-3 day delay (endDate is clamped accordingly). Max 89 days, defaults to last 30 days. Requires the Analytics add-on.  NOT exposed: impressions (Studio thumbnail impressions) and impressionsClickThroughRate. YouTube Analytics API v2 does not expose these for any principal type, not channel owners, not Partner Program channels, not content owners with CMS access. The only way to get them is Studio CSV export. This is a Google-side limitation. 
+    # @param account_id [String] The Zernio SocialAccount ID for the YouTube account.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :metrics Comma-separated list. Defaults to \&quot;views,estimatedMinutesWatched,subscribersGained,subscribersLost\&quot;.  Live YouTube Analytics v2 metrics:   - views   - estimatedMinutesWatched   - averageViewDuration          (ratio - weighted mean computed across days)   - subscribersGained   - subscribersLost  Zernio-synthesized from daily follower snapshots (cross-platform parity):   - followers_gained   - followers_lost 
+    # @option opts [Date] :since Start date (YYYY-MM-DD). Defaults to 30 days ago.
+    # @option opts [Date] :_until End date (YYYY-MM-DD). Defaults to today. YouTube Analytics has a 2-3 day delay, so the fetch is internally clamped to 3 days ago; any requested range extending beyond that returns zero values for the tail days. The response&#39;s dateRange.until field reflects your requested value. 
+    # @option opts [String] :metric_type \&quot;total_value\&quot; (default) returns aggregated totals. \&quot;time_series\&quot; returns per-day values in the \&quot;values\&quot; array.  (default to 'total_value')
+    # @return [Array<(InstagramAccountInsightsResponse, Integer, Hash)>] InstagramAccountInsightsResponse data, response status code and response headers
+    def get_you_tube_channel_insights_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_you_tube_channel_insights ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_you_tube_channel_insights"
+      end
+      allowable_values = ["time_series", "total_value"]
+      if @api_client.config.client_side_validation && opts[:'metric_type'] && !allowable_values.include?(opts[:'metric_type'])
+        fail ArgumentError, "invalid value for \"metric_type\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/analytics/youtube/channel-insights'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'metrics'] = opts[:'metrics'] if !opts[:'metrics'].nil?
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+      query_params[:'metricType'] = opts[:'metric_type'] if !opts[:'metric_type'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'InstagramAccountInsightsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_you_tube_channel_insights",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_you_tube_channel_insights\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -24,13 +24,21 @@ module Zernio
 
     attr_accessor :shares
 
+    # Daily saves (personal accounts only)
+    attr_accessor :saves
+
+    # Daily sends via LinkedIn messaging (personal accounts only)
+    attr_accessor :sends
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'impressions' => :'impressions',
         :'reactions' => :'reactions',
         :'comments' => :'comments',
-        :'shares' => :'shares'
+        :'shares' => :'shares',
+        :'saves' => :'saves',
+        :'sends' => :'sends'
       }
     end
 
@@ -50,7 +58,9 @@ module Zernio
         :'impressions' => :'Array<LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner>',
         :'reactions' => :'Array<LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner>',
         :'comments' => :'Array<LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner>',
-        :'shares' => :'Array<LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner>'
+        :'shares' => :'Array<LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner>',
+        :'saves' => :'Array<LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner>',
+        :'sends' => :'Array<LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner>'
       }
     end
 
@@ -99,6 +109,18 @@ module Zernio
           self.shares = value
         end
       end
+
+      if attributes.key?(:'saves')
+        if (value = attributes[:'saves']).is_a?(Array)
+          self.saves = value
+        end
+      end
+
+      if attributes.key?(:'sends')
+        if (value = attributes[:'sends']).is_a?(Array)
+          self.sends = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -124,7 +146,9 @@ module Zernio
           impressions == o.impressions &&
           reactions == o.reactions &&
           comments == o.comments &&
-          shares == o.shares
+          shares == o.shares &&
+          saves == o.saves &&
+          sends == o.sends
     end
 
     # @see the `==` method
@@ -136,7 +160,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [impressions, reactions, comments, shares].hash
+      [impressions, reactions, comments, shares, saves, sends].hash
     end
 
     # Builds the object from hash

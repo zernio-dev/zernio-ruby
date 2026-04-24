@@ -30,6 +30,12 @@ module Zernio
     # Reshares of the post
     attr_accessor :shares
 
+    # Times the post was saved (personal accounts only; 0 for organization accounts)
+    attr_accessor :saves
+
+    # Times the post was sent via LinkedIn messaging (personal accounts only; 0 for organization accounts)
+    attr_accessor :sends
+
     # Clicks on the post (organization accounts only)
     attr_accessor :clicks
 
@@ -47,6 +53,8 @@ module Zernio
         :'likes' => :'likes',
         :'comments' => :'comments',
         :'shares' => :'shares',
+        :'saves' => :'saves',
+        :'sends' => :'sends',
         :'clicks' => :'clicks',
         :'views' => :'views',
         :'engagement_rate' => :'engagementRate'
@@ -71,6 +79,8 @@ module Zernio
         :'likes' => :'Integer',
         :'comments' => :'Integer',
         :'shares' => :'Integer',
+        :'saves' => :'Integer',
+        :'sends' => :'Integer',
         :'clicks' => :'Integer',
         :'views' => :'Integer',
         :'engagement_rate' => :'Float'
@@ -119,6 +129,14 @@ module Zernio
         self.shares = attributes[:'shares']
       end
 
+      if attributes.key?(:'saves')
+        self.saves = attributes[:'saves']
+      end
+
+      if attributes.key?(:'sends')
+        self.sends = attributes[:'sends']
+      end
+
       if attributes.key?(:'clicks')
         self.clicks = attributes[:'clicks']
       end
@@ -157,6 +175,8 @@ module Zernio
           likes == o.likes &&
           comments == o.comments &&
           shares == o.shares &&
+          saves == o.saves &&
+          sends == o.sends &&
           clicks == o.clicks &&
           views == o.views &&
           engagement_rate == o.engagement_rate
@@ -171,7 +191,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [impressions, reach, likes, comments, shares, clicks, views, engagement_rate].hash
+      [impressions, reach, likes, comments, shares, saves, sends, clicks, views, engagement_rate].hash
     end
 
     # Builds the object from hash

@@ -14,12 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Shared account-insights response envelope used by every platform-level analytics endpoint (/v1/analytics/{facebook|instagram|youtube|linkedin|tiktok}/*). The name is historical - the shape was first shipped for Instagram and every new platform endpoint reuses it for response-shape consistency. The platform field echoes back which platform served the response. 
   class InstagramAccountInsightsResponse < ApiModelBase
     attr_accessor :success
 
     # The Zernio SocialAccount ID
     attr_accessor :account_id
 
+    # Platform that served this response.
     attr_accessor :platform
 
     attr_accessor :date_range
@@ -163,9 +165,21 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "youtube", "linkedin", "tiktok"])
+      return false unless platform_validator.valid?(@platform)
       metric_type_validator = EnumAttributeValidator.new('String', ["time_series", "total_value"])
       return false unless metric_type_validator.valid?(@metric_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] platform Object to be assigned
+    def platform=(platform)
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "youtube", "linkedin", "tiktok"])
+      unless validator.valid?(platform)
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
+      end
+      @platform = platform
     end
 
     # Custom attribute writer method checking allowed values (enum).

@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
 | **account_id** | **String** | The Zernio SocialAccount ID | [optional] |
-| **platform** | **String** |  | [optional] |
+| **platform** | **String** | Platform that served this response. | [optional] |
 | **date_range** | [**InstagramAccountInsightsResponseDateRange**](InstagramAccountInsightsResponseDateRange.md) |  | [optional] |
 | **metric_type** | **String** |  | [optional] |
 | **breakdown** | **String** | Breakdown dimension used (only present when breakdown was requested) | [optional] |
@@ -21,7 +21,7 @@ require 'zernio-sdk'
 instance = Zernio::InstagramAccountInsightsResponse.new(
   success: true,
   account_id: null,
-  platform: instagram,
+  platform: null,
   date_range: null,
   metric_type: null,
   breakdown: null,
