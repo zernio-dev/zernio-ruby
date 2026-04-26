@@ -25,9 +25,17 @@ module Zernio
 
     attr_accessor :comment_text
 
+    # DM outcome
     attr_accessor :status
 
+    # DM error message if status is failed
     attr_accessor :error
+
+    # Outcome of the optional public reply on the triggering comment. 'skipped' if no commentReply was configured or if the DM failed (the public reply is not attempted in that case).
+    attr_accessor :comment_reply_status
+
+    # Public-reply error message if commentReplyStatus is failed
+    attr_accessor :comment_reply_error
 
     attr_accessor :created_at
 
@@ -63,6 +71,8 @@ module Zernio
         :'comment_text' => :'commentText',
         :'status' => :'status',
         :'error' => :'error',
+        :'comment_reply_status' => :'commentReplyStatus',
+        :'comment_reply_error' => :'commentReplyError',
         :'created_at' => :'createdAt'
       }
     end
@@ -87,6 +97,8 @@ module Zernio
         :'comment_text' => :'String',
         :'status' => :'String',
         :'error' => :'String',
+        :'comment_reply_status' => :'String',
+        :'comment_reply_error' => :'String',
         :'created_at' => :'Time'
       }
     end
@@ -141,6 +153,14 @@ module Zernio
         self.error = attributes[:'error']
       end
 
+      if attributes.key?(:'comment_reply_status')
+        self.comment_reply_status = attributes[:'comment_reply_status']
+      end
+
+      if attributes.key?(:'comment_reply_error')
+        self.comment_reply_error = attributes[:'comment_reply_error']
+      end
+
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
       end
@@ -160,6 +180,8 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       status_validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped"])
       return false unless status_validator.valid?(@status)
+      comment_reply_status_validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped"])
+      return false unless comment_reply_status_validator.valid?(@comment_reply_status)
       true
     end
 
@@ -171,6 +193,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
       @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] comment_reply_status Object to be assigned
+    def comment_reply_status=(comment_reply_status)
+      validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped"])
+      unless validator.valid?(comment_reply_status)
+        fail ArgumentError, "invalid value for \"comment_reply_status\", must be one of #{validator.allowable_values}."
+      end
+      @comment_reply_status = comment_reply_status
     end
 
     # Checks equality by comparing each attribute.
@@ -185,6 +217,8 @@ module Zernio
           comment_text == o.comment_text &&
           status == o.status &&
           error == o.error &&
+          comment_reply_status == o.comment_reply_status &&
+          comment_reply_error == o.comment_reply_error &&
           created_at == o.created_at
     end
 
@@ -197,7 +231,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, comment_id, commenter_id, commenter_name, comment_text, status, error, created_at].hash
+      [id, comment_id, commenter_id, commenter_name, comment_text, status, error, comment_reply_status, comment_reply_error, created_at].hash
     end
 
     # Builds the object from hash
