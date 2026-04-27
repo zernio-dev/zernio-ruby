@@ -96,6 +96,9 @@ module Zernio
     # Meta only. Controls the Advantage audience feature (targeting_automation). 0 = disabled (default), 1 = enabled. Meta Marketing API requires this field on all ad set creation requests.
     attr_accessor :advantage_audience
 
+    # Meta only. Restrict the audience by gender. 'male' targets men only, 'female' targets women only, 'all' (default) targets everyone. Ignored by non-Meta platforms.
+    attr_accessor :gender
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -150,7 +153,8 @@ module Zernio
         :'keywords' => :'keywords',
         :'additional_headlines' => :'additionalHeadlines',
         :'additional_descriptions' => :'additionalDescriptions',
-        :'advantage_audience' => :'advantageAudience'
+        :'advantage_audience' => :'advantageAudience',
+        :'gender' => :'gender'
       }
     end
 
@@ -196,7 +200,8 @@ module Zernio
         :'keywords' => :'Array<String>',
         :'additional_headlines' => :'Array<String>',
         :'additional_descriptions' => :'Array<String>',
-        :'advantage_audience' => :'Integer'
+        :'advantage_audience' => :'Integer',
+        :'gender' => :'String'
       }
     end
 
@@ -361,6 +366,12 @@ module Zernio
       if attributes.key?(:'advantage_audience')
         self.advantage_audience = attributes[:'advantage_audience']
       end
+
+      if attributes.key?(:'gender')
+        self.gender = attributes[:'gender']
+      else
+        self.gender = 'all'
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -440,6 +451,8 @@ module Zernio
       return false unless campaign_type_validator.valid?(@campaign_type)
       advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
       return false unless advantage_audience_validator.valid?(@advantage_audience)
+      gender_validator = EnumAttributeValidator.new('String', ["all", "male", "female"])
+      return false unless gender_validator.valid?(@gender)
       true
     end
 
@@ -605,6 +618,16 @@ module Zernio
       @advantage_audience = advantage_audience
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] gender Object to be assigned
+    def gender=(gender)
+      validator = EnumAttributeValidator.new('String', ["all", "male", "female"])
+      unless validator.valid?(gender)
+        fail ArgumentError, "invalid value for \"gender\", must be one of #{validator.allowable_values}."
+      end
+      @gender = gender
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -639,7 +662,8 @@ module Zernio
           keywords == o.keywords &&
           additional_headlines == o.additional_headlines &&
           additional_descriptions == o.additional_descriptions &&
-          advantage_audience == o.advantage_audience
+          advantage_audience == o.advantage_audience &&
+          gender == o.gender
     end
 
     # @see the `==` method
@@ -651,7 +675,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender].hash
     end
 
     # Builds the object from hash
