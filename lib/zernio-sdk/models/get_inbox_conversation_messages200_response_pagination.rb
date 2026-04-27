@@ -14,48 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetInboxConversationMessages200Response < ApiModelBase
-    attr_accessor :status
+  class GetInboxConversationMessages200ResponsePagination < ApiModelBase
+    # Whether more messages are available beyond this page.
+    attr_accessor :has_more
 
-    attr_accessor :pagination
-
-    # Sort order actually applied to the returned page. May differ from the requested `sortOrder` for Twitter, Facebook and Bluesky (always `desc` regardless of request). 
-    attr_accessor :sort_order_applied
-
-    attr_accessor :messages
-
-    attr_accessor :last_updated
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Opaque cursor to fetch the next page. `null` on the last page.
+    attr_accessor :next_cursor
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'pagination' => :'pagination',
-        :'sort_order_applied' => :'sortOrderApplied',
-        :'messages' => :'messages',
-        :'last_updated' => :'lastUpdated'
+        :'has_more' => :'hasMore',
+        :'next_cursor' => :'nextCursor'
       }
     end
 
@@ -72,11 +42,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'pagination' => :'GetInboxConversationMessages200ResponsePagination',
-        :'sort_order_applied' => :'String',
-        :'messages' => :'Array<GetInboxConversationMessages200ResponseMessagesInner>',
-        :'last_updated' => :'Time'
+        :'has_more' => :'Boolean',
+        :'next_cursor' => :'String'
       }
     end
 
@@ -90,38 +57,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetInboxConversationMessages200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetInboxConversationMessages200ResponsePagination` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetInboxConversationMessages200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetInboxConversationMessages200ResponsePagination`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
-      end
-
-      if attributes.key?(:'sort_order_applied')
-        self.sort_order_applied = attributes[:'sort_order_applied']
-      end
-
-      if attributes.key?(:'messages')
-        if (value = attributes[:'messages']).is_a?(Array)
-          self.messages = value
-        end
-      end
-
-      if attributes.key?(:'last_updated')
-        self.last_updated = attributes[:'last_updated']
+      if attributes.key?(:'next_cursor')
+        self.next_cursor = attributes[:'next_cursor']
       end
     end
 
@@ -137,19 +90,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      sort_order_applied_validator = EnumAttributeValidator.new('String', ["asc", "desc"])
-      return false unless sort_order_applied_validator.valid?(@sort_order_applied)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] sort_order_applied Object to be assigned
-    def sort_order_applied=(sort_order_applied)
-      validator = EnumAttributeValidator.new('String', ["asc", "desc"])
-      unless validator.valid?(sort_order_applied)
-        fail ArgumentError, "invalid value for \"sort_order_applied\", must be one of #{validator.allowable_values}."
-      end
-      @sort_order_applied = sort_order_applied
     end
 
     # Checks equality by comparing each attribute.
@@ -157,11 +98,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          pagination == o.pagination &&
-          sort_order_applied == o.sort_order_applied &&
-          messages == o.messages &&
-          last_updated == o.last_updated
+          has_more == o.has_more &&
+          next_cursor == o.next_cursor
     end
 
     # @see the `==` method
@@ -173,7 +111,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, pagination, sort_order_applied, messages, last_updated].hash
+      [has_more, next_cursor].hash
     end
 
     # Builds the object from hash

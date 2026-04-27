@@ -33,6 +33,22 @@ describe Zernio::GetInboxConversationMessages200Response do
     end
   end
 
+  describe 'test attribute "pagination"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "sort_order_applied"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["asc", "desc"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.sort_order_applied = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "messages"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

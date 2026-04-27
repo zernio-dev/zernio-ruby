@@ -394,10 +394,13 @@ module Zernio
     end
 
     # List messages
-    # Fetch messages for a specific conversation. Requires accountId query parameter.  Twitter/X limitation: X's encrypted \"X Chat\" messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details. 
+    # Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass `pagination.nextCursor` from a prior response back as the `cursor` query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to `asc` (oldest first, chat style). For the \"show me the latest messages\" pattern, pass `?sortOrder=desc&limit=N`. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field `sortOrderApplied` tells you what was actually applied.  Reddit threads are paginated client-side because Reddit's API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit's inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X's encrypted \"X Chat\" messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details. 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Number of messages to return per page. Default 100, max 100. (default to 100)
+    # @option opts [String] :cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response.
+    # @option opts [String] :sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). For Twitter, Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response.  (default to 'asc')
     # @return [GetInboxConversationMessages200Response]
     def get_inbox_conversation_messages(conversation_id, account_id, opts = {})
       data, _status_code, _headers = get_inbox_conversation_messages_with_http_info(conversation_id, account_id, opts)
@@ -405,10 +408,13 @@ module Zernio
     end
 
     # List messages
-    # Fetch messages for a specific conversation. Requires accountId query parameter.  Twitter/X limitation: X&#39;s encrypted \&quot;X Chat\&quot; messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details. 
+    # Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass &#x60;pagination.nextCursor&#x60; from a prior response back as the &#x60;cursor&#x60; query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to &#x60;asc&#x60; (oldest first, chat style). For the \&quot;show me the latest messages\&quot; pattern, pass &#x60;?sortOrder&#x3D;desc&amp;limit&#x3D;N&#x60;. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field &#x60;sortOrderApplied&#x60; tells you what was actually applied.  Reddit threads are paginated client-side because Reddit&#39;s API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit&#39;s inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X&#39;s encrypted \&quot;X Chat\&quot; messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details. 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Number of messages to return per page. Default 100, max 100. (default to 100)
+    # @option opts [String] :cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response.
+    # @option opts [String] :sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). For Twitter, Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response.  (default to 'asc')
     # @return [Array<(GetInboxConversationMessages200Response, Integer, Hash)>] GetInboxConversationMessages200Response data, response status code and response headers
     def get_inbox_conversation_messages_with_http_info(conversation_id, account_id, opts = {})
       if @api_client.config.debugging
@@ -422,12 +428,27 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling MessagesApi.get_inbox_conversation_messages"
       end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling MessagesApi.get_inbox_conversation_messages, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling MessagesApi.get_inbox_conversation_messages, must be greater than or equal to 1.'
+      end
+
+      allowable_values = ["asc", "desc"]
+      if @api_client.config.client_side_validation && opts[:'sort_order'] && !allowable_values.include?(opts[:'sort_order'])
+        fail ArgumentError, "invalid value for \"sort_order\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/inbox/conversations/{conversationId}/messages'.sub('{' + 'conversationId' + '}', CGI.escape(conversation_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+      query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

@@ -43,6 +43,8 @@ module Zernio
     # WhatsApp only. Parsed Flow response JSON. Populated when `flowResponseJson` is valid JSON; otherwise omitted. Keys and value types depend on the specific Flow that was submitted. 
     attr_accessor :flow_response_data
 
+    attr_accessor :referral
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -76,7 +78,8 @@ module Zernio
         :'interactive_id' => :'interactiveId',
         :'button_payload' => :'buttonPayload',
         :'flow_response_json' => :'flowResponseJson',
-        :'flow_response_data' => :'flowResponseData'
+        :'flow_response_data' => :'flowResponseData',
+        :'referral' => :'referral'
       }
     end
 
@@ -101,7 +104,8 @@ module Zernio
         :'interactive_id' => :'String',
         :'button_payload' => :'String',
         :'flow_response_json' => :'String',
-        :'flow_response_data' => :'Hash<String, Object>'
+        :'flow_response_data' => :'Hash<String, Object>',
+        :'referral' => :'WebhookPayloadMessageMetadataReferral'
       }
     end
 
@@ -164,6 +168,10 @@ module Zernio
           self.flow_response_data = value
         end
       end
+
+      if attributes.key?(:'referral')
+        self.referral = attributes[:'referral']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -206,7 +214,8 @@ module Zernio
           interactive_id == o.interactive_id &&
           button_payload == o.button_payload &&
           flow_response_json == o.flow_response_json &&
-          flow_response_data == o.flow_response_data
+          flow_response_data == o.flow_response_data &&
+          referral == o.referral
     end
 
     # @see the `==` method
@@ -218,7 +227,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data].hash
+      [quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, referral].hash
     end
 
     # Builds the object from hash

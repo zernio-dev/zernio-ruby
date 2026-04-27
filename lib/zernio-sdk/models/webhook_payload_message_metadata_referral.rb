@@ -14,48 +14,42 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetInboxConversationMessages200Response < ApiModelBase
-    attr_accessor :status
+  # WhatsApp only. Click-to-WhatsApp (CTWA) ad attribution. Present only on the FIRST inbound message after a user reaches the business via a CTWA ad. Forwarded verbatim from Meta's referral envelope so it can be replayed to the Conversions API for Business Messaging. Attribution window is 7 days from click. 
+  class WebhookPayloadMessageMetadataReferral < ApiModelBase
+    # Meta's GCLID-equivalent click identifier.
+    attr_accessor :ctwa_clid
 
-    attr_accessor :pagination
+    attr_accessor :source_id
 
-    # Sort order actually applied to the returned page. May differ from the requested `sortOrder` for Twitter, Facebook and Bluesky (always `desc` regardless of request). 
-    attr_accessor :sort_order_applied
+    attr_accessor :source_type
 
-    attr_accessor :messages
+    attr_accessor :source_url
 
-    attr_accessor :last_updated
+    attr_accessor :headline
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :body
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
+    attr_accessor :media_type
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :image_url
+
+    attr_accessor :video_url
+
+    attr_accessor :thumbnail_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'pagination' => :'pagination',
-        :'sort_order_applied' => :'sortOrderApplied',
-        :'messages' => :'messages',
-        :'last_updated' => :'lastUpdated'
+        :'ctwa_clid' => :'ctwa_clid',
+        :'source_id' => :'source_id',
+        :'source_type' => :'source_type',
+        :'source_url' => :'source_url',
+        :'headline' => :'headline',
+        :'body' => :'body',
+        :'media_type' => :'media_type',
+        :'image_url' => :'image_url',
+        :'video_url' => :'video_url',
+        :'thumbnail_url' => :'thumbnail_url'
       }
     end
 
@@ -72,11 +66,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'pagination' => :'GetInboxConversationMessages200ResponsePagination',
-        :'sort_order_applied' => :'String',
-        :'messages' => :'Array<GetInboxConversationMessages200ResponseMessagesInner>',
-        :'last_updated' => :'Time'
+        :'ctwa_clid' => :'String',
+        :'source_id' => :'String',
+        :'source_type' => :'String',
+        :'source_url' => :'String',
+        :'headline' => :'String',
+        :'body' => :'String',
+        :'media_type' => :'String',
+        :'image_url' => :'String',
+        :'video_url' => :'String',
+        :'thumbnail_url' => :'String'
       }
     end
 
@@ -90,38 +89,56 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetInboxConversationMessages200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessageMetadataReferral` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetInboxConversationMessages200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessageMetadataReferral`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'ctwa_clid')
+        self.ctwa_clid = attributes[:'ctwa_clid']
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'source_id')
+        self.source_id = attributes[:'source_id']
       end
 
-      if attributes.key?(:'sort_order_applied')
-        self.sort_order_applied = attributes[:'sort_order_applied']
+      if attributes.key?(:'source_type')
+        self.source_type = attributes[:'source_type']
       end
 
-      if attributes.key?(:'messages')
-        if (value = attributes[:'messages']).is_a?(Array)
-          self.messages = value
-        end
+      if attributes.key?(:'source_url')
+        self.source_url = attributes[:'source_url']
       end
 
-      if attributes.key?(:'last_updated')
-        self.last_updated = attributes[:'last_updated']
+      if attributes.key?(:'headline')
+        self.headline = attributes[:'headline']
+      end
+
+      if attributes.key?(:'body')
+        self.body = attributes[:'body']
+      end
+
+      if attributes.key?(:'media_type')
+        self.media_type = attributes[:'media_type']
+      end
+
+      if attributes.key?(:'image_url')
+        self.image_url = attributes[:'image_url']
+      end
+
+      if attributes.key?(:'video_url')
+        self.video_url = attributes[:'video_url']
+      end
+
+      if attributes.key?(:'thumbnail_url')
+        self.thumbnail_url = attributes[:'thumbnail_url']
       end
     end
 
@@ -137,19 +154,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      sort_order_applied_validator = EnumAttributeValidator.new('String', ["asc", "desc"])
-      return false unless sort_order_applied_validator.valid?(@sort_order_applied)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] sort_order_applied Object to be assigned
-    def sort_order_applied=(sort_order_applied)
-      validator = EnumAttributeValidator.new('String', ["asc", "desc"])
-      unless validator.valid?(sort_order_applied)
-        fail ArgumentError, "invalid value for \"sort_order_applied\", must be one of #{validator.allowable_values}."
-      end
-      @sort_order_applied = sort_order_applied
     end
 
     # Checks equality by comparing each attribute.
@@ -157,11 +162,16 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          pagination == o.pagination &&
-          sort_order_applied == o.sort_order_applied &&
-          messages == o.messages &&
-          last_updated == o.last_updated
+          ctwa_clid == o.ctwa_clid &&
+          source_id == o.source_id &&
+          source_type == o.source_type &&
+          source_url == o.source_url &&
+          headline == o.headline &&
+          body == o.body &&
+          media_type == o.media_type &&
+          image_url == o.image_url &&
+          video_url == o.video_url &&
+          thumbnail_url == o.thumbnail_url
     end
 
     # @see the `==` method
@@ -173,7 +183,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, pagination, sort_order_applied, messages, last_updated].hash
+      [ctwa_clid, source_id, source_type, source_url, headline, body, media_type, image_url, video_url, thumbnail_url].hash
     end
 
     # Builds the object from hash
