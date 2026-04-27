@@ -20,7 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_whats_app_group_join_requests**](WhatsAppApi.md#list_whats_app_group_join_requests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests |
 | [**reject_whats_app_group_join_requests**](WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests |
 | [**remove_whats_app_group_participants**](WhatsAppApi.md#remove_whats_app_group_participants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants |
-| [**send_whats_app_conversion**](WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send a WhatsApp conversation event to Meta CAPI for Business Messaging |
+| [**send_whats_app_conversion**](WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**update_whats_app_business_profile**](WhatsAppApi.md#update_whats_app_business_profile) | **POST** /v1/whatsapp/business-profile | Update business profile |
 | [**update_whats_app_display_name**](WhatsAppApi.md#update_whats_app_display_name) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change |
 | [**update_whats_app_group_chat**](WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings |
@@ -1170,9 +1170,9 @@ end
 
 > <SendWhatsAppConversion200Response> send_whats_app_conversion(send_whats_app_conversion_request)
 
-Send a WhatsApp conversation event to Meta CAPI for Business Messaging
+Send WhatsApp conversion event
 
-Forward a WhatsApp Business Messaging conversion event (`LeadSubmitted`, `Purchase`, `AddToCart`, `InitiateCheckout`, `ViewContent`) to Meta's Conversions API with `action_source = business_messaging` and `messaging_channel = whatsapp`. The endpoint looks up the originating CTWA click ID (`ctwa_clid`) captured on the first inbound message of the conversation and replays it on every event so Meta can attribute the conversion back to the Click-to-WhatsApp ad that drove the chat.  Configuration prerequisites on the WhatsApp account metadata:   - `metaCapiDatasetId`: the Meta Pixel/Dataset ID linked to the WABA.   - `connectedFacebookPageId`: the Facebook Page paired with the     WhatsApp Business number.  Identify the conversation by either `conversationId` (preferred) or `phoneE164` (digits only, no '+') — at least one is required. If the conversation has no captured `ctwa_clid`, the request returns 422 — there's nothing to attribute.  Token + dataset coupling: the WhatsApp account's accessToken must have access to the configured `metaCapiDatasetId`. By default a WABA's system-user token is scoped to the WABA's own Business Manager and cannot post to a pixel owned by a different Business — Meta returns code 100 in that case. Either share the dataset with the WhatsApp app's Business in BM, or use a dataset already in the same Business as the WABA. 
+Forward a WhatsApp Business Messaging conversion event (`LeadSubmitted`, `Purchase`, `AddToCart`, `InitiateCheckout`, `ViewContent`) to Meta's Conversions API with `action_source = business_messaging` and `messaging_channel = whatsapp`. The endpoint looks up the originating CTWA click ID (`ctwa_clid`) captured on the first inbound message of the conversation and replays it on every event so Meta can attribute the conversion back to the Click-to-WhatsApp ad that drove the chat.  Configuration prerequisites on the WhatsApp account metadata:   - `metaCapiDatasetId`: the Meta Pixel/Dataset ID linked to the WABA.   - `connectedFacebookPageId`: the Facebook Page paired with the     WhatsApp Business number.  Identify the conversation by either `conversationId` (preferred) or `phoneE164` (digits only, no `+`). At least one is required. If the conversation has no captured `ctwa_clid`, the request returns 422 because there is nothing to attribute.  Token and dataset coupling: the WhatsApp account's accessToken must have access to the configured `metaCapiDatasetId`. By default a WABA's system-user token is scoped to the WABA's own Business Manager and cannot post to a pixel owned by a different Business; Meta returns code 100 in that case. Either share the dataset with the WhatsApp app's Business in BM, or use a dataset already in the same Business as the WABA. 
 
 ### Examples
 
@@ -1189,7 +1189,7 @@ api_instance = Zernio::WhatsAppApi.new
 send_whats_app_conversion_request = Zernio::SendWhatsAppConversionRequest.new({account_id: 'account_id_example', event_name: 'LeadSubmitted', event_id: 'event_id_example'}) # SendWhatsAppConversionRequest | 
 
 begin
-  # Send a WhatsApp conversation event to Meta CAPI for Business Messaging
+  # Send WhatsApp conversion event
   result = api_instance.send_whats_app_conversion(send_whats_app_conversion_request)
   p result
 rescue Zernio::ApiError => e
@@ -1205,7 +1205,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Send a WhatsApp conversation event to Meta CAPI for Business Messaging
+  # Send WhatsApp conversion event
   data, status_code, headers = api_instance.send_whats_app_conversion_with_http_info(send_whats_app_conversion_request)
   p status_code # => 2xx
   p headers # => { ... }

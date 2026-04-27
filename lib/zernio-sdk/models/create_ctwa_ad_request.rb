@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # In addition to the `required` list, **exactly one of `imageUrl` or `video` must be supplied** (mutually exclusive). The route enforces this at the Zod boundary; OpenAPI's `required` cannot express OR-required cleanly. 
+  # In addition to the `required` list, exactly one of `imageUrl` or `video` must be supplied (they are mutually exclusive). The route enforces this at the Zod boundary; OpenAPI's `required` cannot express OR-required cleanly. 
   class CreateCtwaAdRequest < ApiModelBase
     # Facebook or Instagram SocialAccount ID.
     attr_accessor :account_id
@@ -40,7 +40,7 @@ module Zernio
 
     attr_accessor :budget_type
 
-    # ISO 4217 currency code matching the ad account's currency (e.g. `USD`). Optional — Meta infers from the ad account when omitted. 
+    # ISO 4217 currency code matching the ad account's currency (e.g. `USD`). Optional; Meta infers from the ad account when omitted. 
     attr_accessor :currency
 
     # ISO 8601 datetime. Required when `budgetType` is `lifetime`. 

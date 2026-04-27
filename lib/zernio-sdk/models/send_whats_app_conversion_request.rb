@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # In addition to the `required` list, **at least one of `conversationId` or `phoneE164` must be supplied** (used to resolve the originating CTWA conversation). The route enforces this at the Zod boundary; OpenAPI's `required` cannot express OR-required cleanly. 
+  # In addition to the `required` list, at least one of `conversationId` or `phoneE164` must be supplied (used to resolve the originating CTWA conversation). The route enforces this at the Zod boundary; OpenAPI's `required` cannot express OR-required cleanly. 
   class SendWhatsAppConversionRequest < ApiModelBase
     # WhatsApp SocialAccount ID.
     attr_accessor :account_id
