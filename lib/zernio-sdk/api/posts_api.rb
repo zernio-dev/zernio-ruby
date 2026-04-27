@@ -369,6 +369,7 @@ module Zernio
     # @option opts [Boolean] :include_hidden  (default to false)
     # @option opts [String] :search Search posts by text content.
     # @option opts [String] :sort_by Sort order for results. (default to 'scheduled-desc')
+    # @option opts [String] :account_id Filter posts to those published via a specific social account (24-char hex ObjectId).
     # @return [PostsListResponse]
     def list_posts(opts = {})
       data, _status_code, _headers = list_posts_with_http_info(opts)
@@ -389,6 +390,7 @@ module Zernio
     # @option opts [Boolean] :include_hidden  (default to false)
     # @option opts [String] :search Search posts by text content.
     # @option opts [String] :sort_by Sort order for results. (default to 'scheduled-desc')
+    # @option opts [String] :account_id Filter posts to those published via a specific social account (24-char hex ObjectId).
     # @return [Array<(PostsListResponse, Integer, Hash)>] PostsListResponse data, response status code and response headers
     def list_posts_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -430,6 +432,7 @@ module Zernio
       query_params[:'includeHidden'] = opts[:'include_hidden'] if !opts[:'include_hidden'].nil?
       query_params[:'search'] = opts[:'search'] if !opts[:'search'].nil?
       query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

@@ -398,7 +398,8 @@ opts = {
   date_to: Date.parse('2013-10-20'), # Date | 
   include_hidden: true, # Boolean | 
   search: 'search_example', # String | Search posts by text content.
-  sort_by: 'scheduled-desc' # String | Sort order for results.
+  sort_by: 'scheduled-desc', # String | Sort order for results.
+  account_id: 'account_id_example' # String | Filter posts to those published via a specific social account (24-char hex ObjectId).
 }
 
 begin
@@ -443,6 +444,7 @@ end
 | **include_hidden** | **Boolean** |  | [optional][default to false] |
 | **search** | **String** | Search posts by text content. | [optional] |
 | **sort_by** | **String** | Sort order for results. | [optional][default to &#39;scheduled-desc&#39;] |
+| **account_id** | **String** | Filter posts to those published via a specific social account (24-char hex ObjectId). | [optional] |
 
 ### Return type
 

@@ -109,6 +109,7 @@ describe 'PostsApi' do
   # @option opts [Boolean] :include_hidden 
   # @option opts [String] :search Search posts by text content.
   # @option opts [String] :sort_by Sort order for results.
+  # @option opts [String] :account_id Filter posts to those published via a specific social account (24-char hex ObjectId).
   # @return [PostsListResponse]
   describe 'list_posts test' do
     it 'should work' do
