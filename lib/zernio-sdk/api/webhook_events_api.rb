@@ -19,6 +19,72 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Ads initial sync completed event
+    # Fired once per ads-enabled account when the initial sync (ad-account discovery + 90-day historical ad backfill) completes. The `sync` block reports whether the backfill succeeded and how many ads were synced. 
+    # @param webhook_payload_account_ads_initial_sync_completed [WebhookPayloadAccountAdsInitialSyncCompleted] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_account_ads_initial_sync_completed(webhook_payload_account_ads_initial_sync_completed, opts = {})
+      on_account_ads_initial_sync_completed_with_http_info(webhook_payload_account_ads_initial_sync_completed, opts)
+      nil
+    end
+
+    # Ads initial sync completed event
+    # Fired once per ads-enabled account when the initial sync (ad-account discovery + 90-day historical ad backfill) completes. The &#x60;sync&#x60; block reports whether the backfill succeeded and how many ads were synced. 
+    # @param webhook_payload_account_ads_initial_sync_completed [WebhookPayloadAccountAdsInitialSyncCompleted] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_account_ads_initial_sync_completed_with_http_info(webhook_payload_account_ads_initial_sync_completed, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_account_ads_initial_sync_completed ...'
+      end
+      # verify the required parameter 'webhook_payload_account_ads_initial_sync_completed' is set
+      if @api_client.config.client_side_validation && webhook_payload_account_ads_initial_sync_completed.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_account_ads_initial_sync_completed' when calling WebhookEventsApi.on_account_ads_initial_sync_completed"
+      end
+      # resource path
+      local_var_path = '/account.ads.initial_sync_completed'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_account_ads_initial_sync_completed)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_account_ads_initial_sync_completed",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_account_ads_initial_sync_completed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Account connected event
     # Fired when a social account is successfully connected.
     # @param webhook_payload_account_connected [WebhookPayloadAccountConnected] 

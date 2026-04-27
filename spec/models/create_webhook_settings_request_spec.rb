@@ -48,7 +48,7 @@ describe Zernio::CreateWebhookSettingsRequest do
   describe 'test attribute "events"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["post.scheduled", "post.published", "post.failed", "post.partial", "post.cancelled", "post.recycled", "account.connected", "account.disconnected", "message.received", "comment.received", "review.new", "review.updated"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["post.scheduled", "post.published", "post.failed", "post.partial", "post.cancelled", "post.recycled", "account.connected", "account.disconnected", "account.ads.initial_sync_completed", "message.received", "comment.received", "review.new", "review.updated"])
       # validator.allowable_values.each do |value|
       #   expect { instance.events = value }.not_to raise_error
       # end
