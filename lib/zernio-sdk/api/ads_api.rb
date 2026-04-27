@@ -87,6 +87,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a Click-to-WhatsApp (CTWA) ad
+    # Create a CTWA ad on Meta — when tapped, the ad opens a WhatsApp conversation with the business attached to the supplied Facebook Page. The full hierarchy (campaign → ad set → creative → ad) is created and activated in one call.  The CTA is locked to `WHATSAPP_MESSAGE` and the destination is hard-coded to `https://api.whatsapp.com/send` — Meta resolves the actual WhatsApp number from the Page-to-WA pairing the user configured in Page settings or Business Manager.  Prerequisites enforced by Meta (failure surfaces as a `platform_error`):   - The Facebook Page must already be paired with a verified WhatsApp     Business number.   - The WhatsApp Business Account must be business-verified.   - The Meta access token must carry `ads_management`. 
+    # @param create_ctwa_ad_request [CreateCtwaAdRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateCtwaAd201Response]
+    def create_ctwa_ad(create_ctwa_ad_request, opts = {})
+      data, _status_code, _headers = create_ctwa_ad_with_http_info(create_ctwa_ad_request, opts)
+      data
+    end
+
+    # Create a Click-to-WhatsApp (CTWA) ad
+    # Create a CTWA ad on Meta — when tapped, the ad opens a WhatsApp conversation with the business attached to the supplied Facebook Page. The full hierarchy (campaign → ad set → creative → ad) is created and activated in one call.  The CTA is locked to &#x60;WHATSAPP_MESSAGE&#x60; and the destination is hard-coded to &#x60;https://api.whatsapp.com/send&#x60; — Meta resolves the actual WhatsApp number from the Page-to-WA pairing the user configured in Page settings or Business Manager.  Prerequisites enforced by Meta (failure surfaces as a &#x60;platform_error&#x60;):   - The Facebook Page must already be paired with a verified WhatsApp     Business number.   - The WhatsApp Business Account must be business-verified.   - The Meta access token must carry &#x60;ads_management&#x60;. 
+    # @param create_ctwa_ad_request [CreateCtwaAdRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateCtwaAd201Response, Integer, Hash)>] CreateCtwaAd201Response data, response status code and response headers
+    def create_ctwa_ad_with_http_info(create_ctwa_ad_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.create_ctwa_ad ...'
+      end
+      # verify the required parameter 'create_ctwa_ad_request' is set
+      if @api_client.config.client_side_validation && create_ctwa_ad_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_ctwa_ad_request' when calling AdsApi.create_ctwa_ad"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ctwa'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_ctwa_ad_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateCtwaAd201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.create_ctwa_ad",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#create_ctwa_ad\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create standalone ad
     # Creates a paid ad with custom creative. The request body supports three mutually-exclusive shapes:  1. **Legacy single-creative** (all platforms). Top-level `headline` + `body` + `imageUrl` + `linkUrl` + `callToAction` create 1 campaign + 1 ad set + 1 ad. 2. **Multi-creative** (Meta only — use `creatives[]` array). Creates 1 campaign + 1 ad set + N ads sharing the same budget / targeting / schedule. This is the standard performance-marketing creative-testing flow — Meta's delivery algorithm A/B tests the creatives inside a single ad set so budget isn't fragmented across N parallel campaigns. 3. **Attach to existing ad set** (Meta only — pass `adSetId` + a single creative). Adds one new ad to an existing ad set without creating a new campaign. Budget, targeting, goal are inherited from the ad set on Meta.  `creatives[]` and `adSetId` are mutually exclusive; specifying both returns 400.  **Per-platform required fields** (the platform is inferred from `accountId`): - **Meta (facebook, instagram)**: `accountId`, `adAccountId`, `name`, `goal`, `budgetAmount`, `budgetType`, `headline`, `body`, `imageUrl`, `linkUrl`, `callToAction`. - **Google Ads (Display)**: `accountId`, `adAccountId`, `name`, `goal`, `budgetAmount`, `budgetType`, `headline`, `body`, `linkUrl`, `images.landscape` (1.91:1) + `images.square` (1:1), `businessName`. Google's Responsive Display Ads require BOTH a landscape and a square marketing image; supplying only one is rejected by Google as \"Too few.\". The legacy top-level `imageUrl` is accepted as an alias for `images.landscape` for back-compat. `longHeadline` defaults to `headline` if omitted (max 90 chars). - **Google Ads (Search)**: `accountId`, `adAccountId`, `name`, `goal`, `budgetAmount`, `budgetType`, `headline`, `body`, `linkUrl`, `businessName`. `imageUrl` is NOT required for Search. Set `campaignType: \"search\"`. - **TikTok**: `accountId`, `adAccountId`, `name`, `goal`, `budgetAmount`, `budgetType`, `body`, `linkUrl`, `imageUrl` (this field **carries the VIDEO URL** for TikTok; the TikTok ads endpoint is video-only and the field is named `imageUrl` for cross-platform consistency). - **Pinterest**: `accountId`, `adAccountId`, `name`, `goal`, `budgetAmount`, `budgetType`, `headline`, `body`, `imageUrl`, `linkUrl`. Optional `boardId` (auto-creates \"Zernio Ads\" board if omitted). - **X / Twitter**: `accountId` (the posting account, internally resolved to the linked X Ads credential), `adAccountId`, `name`, `goal`, `budgetAmount`, `budgetType`, `body` (the tweet text, max 280 chars with `linkUrl` adding ~24). `headline`, `imageUrl`, `callToAction`, and targeting fields are ignored. Requires a connected X Ads account (`/v1/connect/twitter/ads`); otherwise 422.  **Budget minimums** are enforced per platform in USD: TikTok=$20, Pinterest=$5, all others=$1. If you pass `currency` other than USD, this minimum is currently still evaluated as USD. Pass the ad account's native currency on every request so Meta-side amount conversion is correct.  **Video ads (Meta only).** Meta (facebook, instagram) supports video creatives on all three shapes (legacy, multi-creative via `creatives[].video`, attach). Set `video: { url, thumbnailUrl }` at the request root (for legacy/attach) or per-entry inside `creatives[]` (for multi-creative). `video` and `imageUrl` are mutually exclusive per creative; supply exactly one. `video.thumbnailUrl` is required because Meta requires a thumbnail on every video creative. The video is uploaded to Meta via chunked transfer and the request blocks on Meta's transcoding (`status.video_status === 'ready'`). This path can take several minutes for longer videos; this endpoint is configured with `maxDuration = 800` on Vercel (13 min) to cover it, but your HTTP client should allow for the same. If transcoding hasn't finished within 10 minutes, the request fails with a `platform_error`. Video on non-Meta platforms is NOT supported here: TikTok uses its own flow (pass the video URL via `imageUrl`); other platforms are image-only. 
     # @param create_standalone_ad_request [CreateStandaloneAdRequest] 
@@ -802,6 +870,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#send_conversions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Send a WhatsApp conversation event to Meta CAPI for Business Messaging
+    # Forward a WhatsApp Business Messaging conversion event (`LeadSubmitted`, `Purchase`, `AddToCart`, `InitiateCheckout`, `ViewContent`) to Meta's Conversions API with `action_source = business_messaging` and `messaging_channel = whatsapp`. The endpoint looks up the originating CTWA click ID (`ctwa_clid`) captured on the first inbound message of the conversation and replays it on every event so Meta can attribute the conversion back to the Click-to-WhatsApp ad that drove the chat.  Configuration prerequisites on the WhatsApp account metadata:   - `metaCapiDatasetId`: the Meta Pixel/Dataset ID linked to the WABA.   - `connectedFacebookPageId`: the Facebook Page paired with the     WhatsApp Business number.  Identify the conversation by either `conversationId` (preferred) or `phoneE164` (digits only, no '+') — at least one is required. If the conversation has no captured `ctwa_clid`, the request returns 422 — there's nothing to attribute.  Token + dataset coupling: the WhatsApp account's accessToken must have access to the configured `metaCapiDatasetId`. By default a WABA's system-user token is scoped to the WABA's own Business Manager and cannot post to a pixel owned by a different Business — Meta returns code 100 in that case. Either share the dataset with the WhatsApp app's Business in BM, or use a dataset already in the same Business as the WABA. 
+    # @param send_whats_app_conversion_request [SendWhatsAppConversionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [SendWhatsAppConversion200Response]
+    def send_whats_app_conversion(send_whats_app_conversion_request, opts = {})
+      data, _status_code, _headers = send_whats_app_conversion_with_http_info(send_whats_app_conversion_request, opts)
+      data
+    end
+
+    # Send a WhatsApp conversation event to Meta CAPI for Business Messaging
+    # Forward a WhatsApp Business Messaging conversion event (&#x60;LeadSubmitted&#x60;, &#x60;Purchase&#x60;, &#x60;AddToCart&#x60;, &#x60;InitiateCheckout&#x60;, &#x60;ViewContent&#x60;) to Meta&#39;s Conversions API with &#x60;action_source &#x3D; business_messaging&#x60; and &#x60;messaging_channel &#x3D; whatsapp&#x60;. The endpoint looks up the originating CTWA click ID (&#x60;ctwa_clid&#x60;) captured on the first inbound message of the conversation and replays it on every event so Meta can attribute the conversion back to the Click-to-WhatsApp ad that drove the chat.  Configuration prerequisites on the WhatsApp account metadata:   - &#x60;metaCapiDatasetId&#x60;: the Meta Pixel/Dataset ID linked to the WABA.   - &#x60;connectedFacebookPageId&#x60;: the Facebook Page paired with the     WhatsApp Business number.  Identify the conversation by either &#x60;conversationId&#x60; (preferred) or &#x60;phoneE164&#x60; (digits only, no &#39;+&#39;) — at least one is required. If the conversation has no captured &#x60;ctwa_clid&#x60;, the request returns 422 — there&#39;s nothing to attribute.  Token + dataset coupling: the WhatsApp account&#39;s accessToken must have access to the configured &#x60;metaCapiDatasetId&#x60;. By default a WABA&#39;s system-user token is scoped to the WABA&#39;s own Business Manager and cannot post to a pixel owned by a different Business — Meta returns code 100 in that case. Either share the dataset with the WhatsApp app&#39;s Business in BM, or use a dataset already in the same Business as the WABA. 
+    # @param send_whats_app_conversion_request [SendWhatsAppConversionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SendWhatsAppConversion200Response, Integer, Hash)>] SendWhatsAppConversion200Response data, response status code and response headers
+    def send_whats_app_conversion_with_http_info(send_whats_app_conversion_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.send_whats_app_conversion ...'
+      end
+      # verify the required parameter 'send_whats_app_conversion_request' is set
+      if @api_client.config.client_side_validation && send_whats_app_conversion_request.nil?
+        fail ArgumentError, "Missing the required parameter 'send_whats_app_conversion_request' when calling AdsApi.send_whats_app_conversion"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/conversions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(send_whats_app_conversion_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SendWhatsAppConversion200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.send_whats_app_conversion",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#send_whats_app_conversion\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

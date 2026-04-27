@@ -118,6 +118,10 @@ docs/CreateContact200Response.md
 docs/CreateContact200ResponseChannel.md
 docs/CreateContact200ResponseContact.md
 docs/CreateContactRequest.md
+docs/CreateCtwaAd201Response.md
+docs/CreateCtwaAdRequest.md
+docs/CreateCtwaAdRequestInterestsInner.md
+docs/CreateCtwaAdRequestVideo.md
 docs/CreateCustomField200Response.md
 docs/CreateCustomFieldRequest.md
 docs/CreateGoogleBusinessMedia200Response.md
@@ -649,6 +653,8 @@ docs/SendInboxMessageRequestTemplateElementsInnerButtonsInner.md
 docs/SendPrivateReplyToComment200Response.md
 docs/SendPrivateReplyToCommentRequest.md
 docs/SendTypingIndicatorRequest.md
+docs/SendWhatsAppConversion200Response.md
+docs/SendWhatsAppConversionRequest.md
 docs/SendWhatsAppFlowMessage200Response.md
 docs/SendWhatsAppFlowMessageRequest.md
 docs/SendWhatsAppFlowMessageRequestFlowActionPayload.md
@@ -1005,6 +1011,10 @@ lib/zernio-sdk/models/create_contact200_response.rb
 lib/zernio-sdk/models/create_contact200_response_channel.rb
 lib/zernio-sdk/models/create_contact200_response_contact.rb
 lib/zernio-sdk/models/create_contact_request.rb
+lib/zernio-sdk/models/create_ctwa_ad201_response.rb
+lib/zernio-sdk/models/create_ctwa_ad_request.rb
+lib/zernio-sdk/models/create_ctwa_ad_request_interests_inner.rb
+lib/zernio-sdk/models/create_ctwa_ad_request_video.rb
 lib/zernio-sdk/models/create_custom_field200_response.rb
 lib/zernio-sdk/models/create_custom_field_request.rb
 lib/zernio-sdk/models/create_google_business_media200_response.rb
@@ -1517,6 +1527,8 @@ lib/zernio-sdk/models/send_inbox_message_request_template_elements_inner_buttons
 lib/zernio-sdk/models/send_private_reply_to_comment200_response.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request.rb
 lib/zernio-sdk/models/send_typing_indicator_request.rb
+lib/zernio-sdk/models/send_whats_app_conversion200_response.rb
+lib/zernio-sdk/models/send_whats_app_conversion_request.rb
 lib/zernio-sdk/models/send_whats_app_flow_message200_response.rb
 lib/zernio-sdk/models/send_whats_app_flow_message_request.rb
 lib/zernio-sdk/models/send_whats_app_flow_message_request_flow_action_payload.rb
@@ -1857,6 +1869,10 @@ spec/models/create_contact200_response_channel_spec.rb
 spec/models/create_contact200_response_contact_spec.rb
 spec/models/create_contact200_response_spec.rb
 spec/models/create_contact_request_spec.rb
+spec/models/create_ctwa_ad201_response_spec.rb
+spec/models/create_ctwa_ad_request_interests_inner_spec.rb
+spec/models/create_ctwa_ad_request_spec.rb
+spec/models/create_ctwa_ad_request_video_spec.rb
 spec/models/create_custom_field200_response_spec.rb
 spec/models/create_custom_field_request_spec.rb
 spec/models/create_google_business_media200_response_spec.rb
@@ -2369,6 +2385,8 @@ spec/models/send_inbox_message_request_template_spec.rb
 spec/models/send_private_reply_to_comment200_response_spec.rb
 spec/models/send_private_reply_to_comment_request_spec.rb
 spec/models/send_typing_indicator_request_spec.rb
+spec/models/send_whats_app_conversion200_response_spec.rb
+spec/models/send_whats_app_conversion_request_spec.rb
 spec/models/send_whats_app_flow_message200_response_spec.rb
 spec/models/send_whats_app_flow_message_request_flow_action_payload_spec.rb
 spec/models/send_whats_app_flow_message_request_header_spec.rb
