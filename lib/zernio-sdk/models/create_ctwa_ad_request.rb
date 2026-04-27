@@ -35,7 +35,7 @@ module Zernio
 
     attr_accessor :video
 
-    # Budget amount in the ad account's currency major units (e.g. dollars for USD, not cents). Must be positive. 
+    # Budget amount in the ad account's currency major units (e.g. dollars for USD, not cents). Must be > 0. 
     attr_accessor :budget_amount
 
     attr_accessor :budget_type
@@ -310,6 +310,10 @@ module Zernio
         invalid_properties.push('invalid value for "budget_amount", budget_amount cannot be nil.')
       end
 
+      if @budget_amount < 0
+        invalid_properties.push('invalid value for "budget_amount", must be greater than or equal to 0.')
+      end
+
       if @budget_type.nil?
         invalid_properties.push('invalid value for "budget_type", budget_type cannot be nil.')
       end
@@ -357,6 +361,7 @@ module Zernio
       return false if @body.nil?
       return false if @body.to_s.length < 1
       return false if @budget_amount.nil?
+      return false if @budget_amount < 0
       return false if @budget_type.nil?
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
@@ -452,6 +457,10 @@ module Zernio
     def budget_amount=(budget_amount)
       if budget_amount.nil?
         fail ArgumentError, 'budget_amount cannot be nil'
+      end
+
+      if budget_amount < 0
+        fail ArgumentError, 'invalid value for "budget_amount", must be greater than or equal to 0.'
       end
 
       @budget_amount = budget_amount
