@@ -24,13 +24,21 @@ module Zernio
 
     attr_accessor :status
 
+    # IANA timezone of the ad account (Meta only). Drives daily-budget reset and Insights day boundaries.
+    attr_accessor :timezone_name
+
+    # Signed UTC offset in hours, reflecting current DST (Meta only).
+    attr_accessor :timezone_offset_hours_utc
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'name' => :'name',
         :'currency' => :'currency',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'timezone_name' => :'timezoneName',
+        :'timezone_offset_hours_utc' => :'timezoneOffsetHoursUtc'
       }
     end
 
@@ -50,7 +58,9 @@ module Zernio
         :'id' => :'String',
         :'name' => :'String',
         :'currency' => :'String',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'timezone_name' => :'String',
+        :'timezone_offset_hours_utc' => :'Float'
       }
     end
 
@@ -91,6 +101,14 @@ module Zernio
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
+
+      if attributes.key?(:'timezone_name')
+        self.timezone_name = attributes[:'timezone_name']
+      end
+
+      if attributes.key?(:'timezone_offset_hours_utc')
+        self.timezone_offset_hours_utc = attributes[:'timezone_offset_hours_utc']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,7 +134,9 @@ module Zernio
           id == o.id &&
           name == o.name &&
           currency == o.currency &&
-          status == o.status
+          status == o.status &&
+          timezone_name == o.timezone_name &&
+          timezone_offset_hours_utc == o.timezone_offset_hours_utc
     end
 
     # @see the `==` method
@@ -128,7 +148,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, currency, status].hash
+      [id, name, currency, status, timezone_name, timezone_offset_hours_utc].hash
     end
 
     # Builds the object from hash
