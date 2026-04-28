@@ -22,6 +22,8 @@
 | **audience_id** | **String** | Custom audience ID to target. | [optional] |
 | **advantage_audience** | **Integer** | Meta&#39;s Advantage+ audience expansion. &#x60;0&#x60; (default) keeps targeting strict; &#x60;1&#x60; lets Meta expand beyond the supplied targeting when its delivery system finds better matches. Always sent on CREATE (Meta requires it).  | [optional] |
 | **objective** | **String** | Defaults to &#x60;OUTCOME_ENGAGEMENT&#x60; (the broadly-supported CTWA objective). &#x60;OUTCOME_SALES&#x60; and &#x60;OUTCOME_LEADS&#x60; require additional account configuration (Dataset linked to the WABA for sales) and may be rejected by Meta if missing.  | [optional] |
+| **dsa_beneficiary** | **String** | Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states.  | [optional] |
+| **dsa_payor** | **String** | Name of the legal entity paying for the ad. Required by Meta when targeting EU users (DSA Article 26). Note Meta API spelling: dsa_payor (not dsa_payer).  | [optional] |
 
 ## Example
 
@@ -46,7 +48,9 @@ instance = Zernio::CreateCtwaAdRequest.new(
   interests: null,
   audience_id: null,
   advantage_audience: null,
-  objective: null
+  objective: null,
+  dsa_beneficiary: null,
+  dsa_payor: null
 )
 ```
 

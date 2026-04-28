@@ -99,6 +99,12 @@ module Zernio
     # Meta only. Restrict the audience by gender. 'male' targets men only, 'female' targets women only, 'all' (default) targets everyone. Ignored by non-Meta platforms.
     attr_accessor :gender
 
+    # Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states. 
+    attr_accessor :dsa_beneficiary
+
+    # Name of the legal entity paying for the ad. Required by Meta when targeting EU users (DSA Article 26). Note Meta API spelling: dsa_payor (not dsa_payer). 
+    attr_accessor :dsa_payor
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -154,7 +160,9 @@ module Zernio
         :'additional_headlines' => :'additionalHeadlines',
         :'additional_descriptions' => :'additionalDescriptions',
         :'advantage_audience' => :'advantageAudience',
-        :'gender' => :'gender'
+        :'gender' => :'gender',
+        :'dsa_beneficiary' => :'dsaBeneficiary',
+        :'dsa_payor' => :'dsaPayor'
       }
     end
 
@@ -201,7 +209,9 @@ module Zernio
         :'additional_headlines' => :'Array<String>',
         :'additional_descriptions' => :'Array<String>',
         :'advantage_audience' => :'Integer',
-        :'gender' => :'String'
+        :'gender' => :'String',
+        :'dsa_beneficiary' => :'String',
+        :'dsa_payor' => :'String'
       }
     end
 
@@ -372,6 +382,14 @@ module Zernio
       else
         self.gender = 'all'
       end
+
+      if attributes.key?(:'dsa_beneficiary')
+        self.dsa_beneficiary = attributes[:'dsa_beneficiary']
+      end
+
+      if attributes.key?(:'dsa_payor')
+        self.dsa_payor = attributes[:'dsa_payor']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -423,6 +441,14 @@ module Zernio
         invalid_properties.push('invalid value for "age_max", must be greater than or equal to 13.')
       end
 
+      if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
+        invalid_properties.push('invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
+        invalid_properties.push('invalid value for "dsa_payor", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -453,6 +479,8 @@ module Zernio
       return false unless advantage_audience_validator.valid?(@advantage_audience)
       gender_validator = EnumAttributeValidator.new('String', ["all", "male", "female"])
       return false unless gender_validator.valid?(@gender)
+      return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
+      return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       true
     end
 
@@ -628,6 +656,34 @@ module Zernio
       @gender = gender
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] dsa_beneficiary Value to be assigned
+    def dsa_beneficiary=(dsa_beneficiary)
+      if dsa_beneficiary.nil?
+        fail ArgumentError, 'dsa_beneficiary cannot be nil'
+      end
+
+      if dsa_beneficiary.to_s.length > 100
+        fail ArgumentError, 'invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.'
+      end
+
+      @dsa_beneficiary = dsa_beneficiary
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] dsa_payor Value to be assigned
+    def dsa_payor=(dsa_payor)
+      if dsa_payor.nil?
+        fail ArgumentError, 'dsa_payor cannot be nil'
+      end
+
+      if dsa_payor.to_s.length > 100
+        fail ArgumentError, 'invalid value for "dsa_payor", the character length must be smaller than or equal to 100.'
+      end
+
+      @dsa_payor = dsa_payor
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -663,7 +719,9 @@ module Zernio
           additional_headlines == o.additional_headlines &&
           additional_descriptions == o.additional_descriptions &&
           advantage_audience == o.advantage_audience &&
-          gender == o.gender
+          gender == o.gender &&
+          dsa_beneficiary == o.dsa_beneficiary &&
+          dsa_payor == o.dsa_payor
     end
 
     # @see the `==` method
@@ -675,7 +733,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

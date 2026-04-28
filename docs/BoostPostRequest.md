@@ -17,6 +17,8 @@
 | **bid_amount** | **Float** | Max bid cap (Meta only) | [optional] |
 | **tracking** | [**BoostPostRequestTracking**](BoostPostRequestTracking.md) |  | [optional] |
 | **special_ad_categories** | **Array&lt;String&gt;** | Meta only. Required for housing, employment, credit, or political ads. | [optional] |
+| **dsa_beneficiary** | **String** | Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states.  | [optional] |
+| **dsa_payor** | **String** | Name of the legal entity paying for the ad. Required by Meta when targeting EU users (DSA Article 26). Note Meta API spelling: dsa_payor (not dsa_payer).  | [optional] |
 
 ## Example
 
@@ -36,7 +38,9 @@ instance = Zernio::BoostPostRequest.new(
   targeting: null,
   bid_amount: null,
   tracking: null,
-  special_ad_categories: null
+  special_ad_categories: null,
+  dsa_beneficiary: null,
+  dsa_payor: null
 )
 ```
 

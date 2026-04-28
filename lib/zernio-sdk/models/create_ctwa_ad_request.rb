@@ -64,6 +64,12 @@ module Zernio
     # Defaults to `OUTCOME_ENGAGEMENT` (the broadly-supported CTWA objective). `OUTCOME_SALES` and `OUTCOME_LEADS` require additional account configuration (Dataset linked to the WABA for sales) and may be rejected by Meta if missing. 
     attr_accessor :objective
 
+    # Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states. 
+    attr_accessor :dsa_beneficiary
+
+    # Name of the legal entity paying for the ad. Required by Meta when targeting EU users (DSA Article 26). Note Meta API spelling: dsa_payor (not dsa_payer). 
+    attr_accessor :dsa_payor
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -106,7 +112,9 @@ module Zernio
         :'interests' => :'interests',
         :'audience_id' => :'audienceId',
         :'advantage_audience' => :'advantageAudience',
-        :'objective' => :'objective'
+        :'objective' => :'objective',
+        :'dsa_beneficiary' => :'dsaBeneficiary',
+        :'dsa_payor' => :'dsaPayor'
       }
     end
 
@@ -140,7 +148,9 @@ module Zernio
         :'interests' => :'Array<CreateCtwaAdRequestInterestsInner>',
         :'audience_id' => :'String',
         :'advantage_audience' => :'Integer',
-        :'objective' => :'String'
+        :'objective' => :'String',
+        :'dsa_beneficiary' => :'String',
+        :'dsa_payor' => :'String'
       }
     end
 
@@ -255,6 +265,14 @@ module Zernio
       if attributes.key?(:'objective')
         self.objective = attributes[:'objective']
       end
+
+      if attributes.key?(:'dsa_beneficiary')
+        self.dsa_beneficiary = attributes[:'dsa_beneficiary']
+      end
+
+      if attributes.key?(:'dsa_payor')
+        self.dsa_payor = attributes[:'dsa_payor']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -342,6 +360,14 @@ module Zernio
         invalid_properties.push('invalid value for "age_max", must be greater than or equal to 13.')
       end
 
+      if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
+        invalid_properties.push('invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.')
+      end
+
+      if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
+        invalid_properties.push('invalid value for "dsa_payor", the character length must be smaller than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -375,6 +401,8 @@ module Zernio
       return false unless advantage_audience_validator.valid?(@advantage_audience)
       objective_validator = EnumAttributeValidator.new('String', ["OUTCOME_ENGAGEMENT", "OUTCOME_SALES", "OUTCOME_LEADS"])
       return false unless objective_validator.valid?(@objective)
+      return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
+      return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       true
     end
 
@@ -550,6 +578,34 @@ module Zernio
       @objective = objective
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] dsa_beneficiary Value to be assigned
+    def dsa_beneficiary=(dsa_beneficiary)
+      if dsa_beneficiary.nil?
+        fail ArgumentError, 'dsa_beneficiary cannot be nil'
+      end
+
+      if dsa_beneficiary.to_s.length > 100
+        fail ArgumentError, 'invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.'
+      end
+
+      @dsa_beneficiary = dsa_beneficiary
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] dsa_payor Value to be assigned
+    def dsa_payor=(dsa_payor)
+      if dsa_payor.nil?
+        fail ArgumentError, 'dsa_payor cannot be nil'
+      end
+
+      if dsa_payor.to_s.length > 100
+        fail ArgumentError, 'invalid value for "dsa_payor", the character length must be smaller than or equal to 100.'
+      end
+
+      @dsa_payor = dsa_payor
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -572,7 +628,9 @@ module Zernio
           interests == o.interests &&
           audience_id == o.audience_id &&
           advantage_audience == o.advantage_audience &&
-          objective == o.objective
+          objective == o.objective &&
+          dsa_beneficiary == o.dsa_beneficiary &&
+          dsa_payor == o.dsa_payor
     end
 
     # @see the `==` method
@@ -584,7 +642,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, budget_amount, budget_type, currency, end_date, countries, age_min, age_max, interests, audience_id, advantage_audience, objective].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, budget_amount, budget_type, currency, end_date, countries, age_min, age_max, interests, audience_id, advantage_audience, objective, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash
