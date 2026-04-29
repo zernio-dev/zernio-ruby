@@ -21,6 +21,8 @@ module Zernio
 
     attr_accessor :budget_level
 
+    attr_accessor :bid_strategy
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -48,7 +50,8 @@ module Zernio
       {
         :'updated' => :'updated',
         :'budget' => :'budget',
-        :'budget_level' => :'budgetLevel'
+        :'budget_level' => :'budgetLevel',
+        :'bid_strategy' => :'bidStrategy'
       }
     end
 
@@ -67,7 +70,8 @@ module Zernio
       {
         :'updated' => :'Integer',
         :'budget' => :'AdBudget',
-        :'budget_level' => :'String'
+        :'budget_level' => :'String',
+        :'bid_strategy' => :'BidStrategy'
       }
     end
 
@@ -103,6 +107,10 @@ module Zernio
 
       if attributes.key?(:'budget_level')
         self.budget_level = attributes[:'budget_level']
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
       end
     end
 
@@ -140,7 +148,8 @@ module Zernio
       self.class == o.class &&
           updated == o.updated &&
           budget == o.budget &&
-          budget_level == o.budget_level
+          budget_level == o.budget_level &&
+          bid_strategy == o.bid_strategy
     end
 
     # @see the `==` method
@@ -152,7 +161,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, budget, budget_level].hash
+      [updated, budget, budget_level, bid_strategy].hash
     end
 
     # Builds the object from hash

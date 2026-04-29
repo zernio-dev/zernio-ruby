@@ -25,6 +25,12 @@ module Zernio
 
     attr_accessor :status_skipped
 
+    attr_accessor :bid_strategy
+
+    attr_accessor :bid_amount
+
+    attr_accessor :roas_average_floor
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -54,7 +60,10 @@ module Zernio
         :'budget_level' => :'budgetLevel',
         :'status' => :'status',
         :'status_updated' => :'statusUpdated',
-        :'status_skipped' => :'statusSkipped'
+        :'status_skipped' => :'statusSkipped',
+        :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor'
       }
     end
 
@@ -75,7 +84,10 @@ module Zernio
         :'budget_level' => :'String',
         :'status' => :'String',
         :'status_updated' => :'Integer',
-        :'status_skipped' => :'Integer'
+        :'status_skipped' => :'Integer',
+        :'bid_strategy' => :'BidStrategy',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float'
       }
     end
 
@@ -119,6 +131,18 @@ module Zernio
 
       if attributes.key?(:'status_skipped')
         self.status_skipped = attributes[:'status_skipped']
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
       end
     end
 
@@ -170,7 +194,10 @@ module Zernio
           budget_level == o.budget_level &&
           status == o.status &&
           status_updated == o.status_updated &&
-          status_skipped == o.status_skipped
+          status_skipped == o.status_skipped &&
+          bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor
     end
 
     # @see the `==` method
@@ -182,7 +209,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [budget, budget_level, status, status_updated, status_skipped].hash
+      [budget, budget_level, status, status_updated, status_skipped, bid_strategy, bid_amount, roas_average_floor].hash
     end
 
     # Builds the object from hash

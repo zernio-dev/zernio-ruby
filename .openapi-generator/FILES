@@ -56,6 +56,7 @@ docs/ApproveWhatsAppGroupJoinRequestsRequest.md
 docs/BatchGetGoogleBusinessReviews200Response.md
 docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md
 docs/BatchGetGoogleBusinessReviewsRequest.md
+docs/BidStrategy.md
 docs/BlueskyPlatformData.md
 docs/BookmarkPost200Response.md
 docs/BookmarkPostRequest.md
@@ -957,6 +958,7 @@ lib/zernio-sdk/models/approve_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response_location_reviews_inner.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews_request.rb
+lib/zernio-sdk/models/bid_strategy.rb
 lib/zernio-sdk/models/bluesky_platform_data.rb
 lib/zernio-sdk/models/bookmark_post200_response.rb
 lib/zernio-sdk/models/bookmark_post_request.rb
@@ -1818,6 +1820,7 @@ spec/models/approve_whats_app_group_join_requests_request_spec.rb
 spec/models/batch_get_google_business_reviews200_response_location_reviews_inner_spec.rb
 spec/models/batch_get_google_business_reviews200_response_spec.rb
 spec/models/batch_get_google_business_reviews_request_spec.rb
+spec/models/bid_strategy_spec.rb
 spec/models/bluesky_platform_data_spec.rb
 spec/models/bookmark_post200_response_spec.rb
 spec/models/bookmark_post_request_spec.rb

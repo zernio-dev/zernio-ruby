@@ -53,8 +53,14 @@ module Zernio
     # Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION, LINK_CLICKS). Only present for Meta ads.
     attr_accessor :optimization_goal
 
-    # Bid strategy (e.g. LOWEST_COST_WITHOUT_CAP, COST_CAP, LOWEST_COST_WITH_MIN_ROAS). Ad set level overrides campaign level. Only present for Meta ads.
+    # Ad-set bid strategy (overrides campaign level on Meta). Populated for Meta and TikTok. TikTok's native `bid_type` is normalized to the cross-platform Meta enum: `BID_TYPE_NO_BID` -> `LOWEST_COST_WITHOUT_CAP`, `BID_TYPE_CUSTOM` -> `LOWEST_COST_WITH_BID_CAP`, deep_bid_type=MIN_ROAS or roas_bid>0 -> `LOWEST_COST_WITH_MIN_ROAS`, `BID_TYPE_MAX_CONVERSION` -> `LOWEST_COST_WITHOUT_CAP`. 
     attr_accessor :bid_strategy
+
+    # Bid cap in WHOLE currency units of the ad account (USD: 5 = $5.00; JPY: 100 = ¥100). Populated when bidStrategy is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. `null` for auto-bid (`LOWEST_COST_WITHOUT_CAP`).  - Meta source: `bid_amount` on the ad set (smallest-denomination int, decoded here). - TikTok source: priority order `bid_price` -> `conversion_bid_price` -> `deep_cpa_bid`   (whichever is set on the ad group). TikTok stores all three in whole currency units.  Source: facebook-business-sdk-codegen api_specs/specs/AdSet.json (`bid_amount`). 
+    attr_accessor :bid_amount
+
+    # Minimum ROAS as a decimal multiplier (2.0 = 2.0x ROAS). Populated when bidStrategy is `LOWEST_COST_WITH_MIN_ROAS`.  - Meta source: decoded from `bid_constraints.roas_average_floor` (Meta stores as   fixed-point int × 10000; we return the decimal). - TikTok source: `roas_bid` on the ad group (already a decimal).  Source: facebook-business-sdk-codegen api_specs/specs/AdCampaignBidConstraint.json. 
+    attr_accessor :roas_average_floor
 
     attr_accessor :promoted_object
 
@@ -113,6 +119,8 @@ module Zernio
         :'platform_objective' => :'platformObjective',
         :'optimization_goal' => :'optimizationGoal',
         :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor',
         :'promoted_object' => :'promotedObject',
         :'creative' => :'creative',
         :'targeting' => :'targeting',
@@ -153,7 +161,9 @@ module Zernio
         :'ad_set_name' => :'String',
         :'platform_objective' => :'String',
         :'optimization_goal' => :'String',
-        :'bid_strategy' => :'String',
+        :'bid_strategy' => :'BidStrategy',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float',
         :'promoted_object' => :'AdPromotedObject',
         :'creative' => :'AdCreative',
         :'targeting' => :'Object',
@@ -256,6 +266,14 @@ module Zernio
 
       if attributes.key?(:'bid_strategy')
         self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
       if attributes.key?(:'promoted_object')
@@ -361,6 +379,8 @@ module Zernio
           platform_objective == o.platform_objective &&
           optimization_goal == o.optimization_goal &&
           bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor &&
           promoted_object == o.promoted_object &&
           creative == o.creative &&
           targeting == o.targeting &&
@@ -379,7 +399,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, platform, status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, bid_strategy, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
+      [_id, name, platform, status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
     end
 
     # Builds the object from hash

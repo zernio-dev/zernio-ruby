@@ -62,8 +62,14 @@ module Zernio
     # Meta optimization goal shared across ad sets, or comma-separated values when ad sets differ (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
     attr_accessor :optimization_goal
 
-    # Campaign-level bid strategy (e.g. LOWEST_COST_WITHOUT_CAP, COST_CAP, LOWEST_COST_WITH_MIN_ROAS)
+    # Campaign-level bid strategy. Ad sets inherit this unless they override.
     attr_accessor :bid_strategy
+
+    # Representative bid cap from the top-spending ad set (whole currency units). Populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP.
+    attr_accessor :bid_amount
+
+    # Representative ROAS floor from the top-spending ad set. Decimal multiplier (2.0 = 2.0x).
+    attr_accessor :roas_average_floor
 
     attr_accessor :promoted_object
 
@@ -116,6 +122,8 @@ module Zernio
         :'platform_objective' => :'platformObjective',
         :'optimization_goal' => :'optimizationGoal',
         :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor',
         :'promoted_object' => :'promotedObject',
         :'earliest_ad' => :'earliestAd',
         :'latest_ad' => :'latestAd'
@@ -154,7 +162,9 @@ module Zernio
         :'profile_id' => :'String',
         :'platform_objective' => :'String',
         :'optimization_goal' => :'String',
-        :'bid_strategy' => :'String',
+        :'bid_strategy' => :'BidStrategy',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float',
         :'promoted_object' => :'AdTreeCampaignPromotedObject',
         :'earliest_ad' => :'Time',
         :'latest_ad' => :'Time'
@@ -267,6 +277,14 @@ module Zernio
         self.bid_strategy = attributes[:'bid_strategy']
       end
 
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
+      end
+
       if attributes.key?(:'promoted_object')
         self.promoted_object = attributes[:'promoted_object']
       end
@@ -356,6 +374,8 @@ module Zernio
           platform_objective == o.platform_objective &&
           optimization_goal == o.optimization_goal &&
           bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor &&
           promoted_object == o.promoted_object &&
           earliest_ad == o.earliest_ad &&
           latest_ad == o.latest_ad
@@ -370,7 +390,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, promoted_object, earliest_ad, latest_ad].hash
+      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, earliest_ad, latest_ad].hash
     end
 
     # Builds the object from hash

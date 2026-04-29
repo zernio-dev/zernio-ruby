@@ -57,7 +57,7 @@ module Zernio
     # Meta-only. When present, switches to the multi-creative shape: creates 1 campaign + 1 ad set + N ads (one per entry here). Top-level `headline` / `body` / `imageUrl` / `linkUrl` / `callToAction` are ignored in this mode. Mutually exclusive with `adSetId`. 
     attr_accessor :creatives
 
-    # Meta-only. When present, switches to the attach shape: adds one new ad to this existing ad set without creating a new campaign. Budget, targeting, goal, and schedule are inherited from the ad set on Meta. Mutually exclusive with `creatives[]`. 
+    # Meta-only. When present, switches to the attach shape: adds one new ad to this existing ad set without creating a new campaign. Budget, targeting, goal, schedule, AND bid strategy are inherited from the ad set on Meta — passing `bidStrategy` in attach mode returns 400. To change an existing ad set's bid, use `PUT /v1/ads/ad-sets/{adSetId}`. Mutually exclusive with `creatives[]`. 
     attr_accessor :ad_set_id
 
     # Google Display only
@@ -98,6 +98,15 @@ module Zernio
 
     # Meta only. Restrict the audience by gender. 'male' targets men only, 'female' targets women only, 'all' (default) targets everyone. Ignored by non-Meta platforms.
     attr_accessor :gender
+
+    # Meta bid strategy applied to the ad set.
+    attr_accessor :bid_strategy
+
+    # Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when `bidStrategy` is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. 
+    attr_accessor :bid_amount
+
+    # Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sent to Meta as `bid_constraints.roas_average_floor` × 10000. 
+    attr_accessor :roas_average_floor
 
     # Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states. 
     attr_accessor :dsa_beneficiary
@@ -161,6 +170,9 @@ module Zernio
         :'additional_descriptions' => :'additionalDescriptions',
         :'advantage_audience' => :'advantageAudience',
         :'gender' => :'gender',
+        :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor'
       }
@@ -210,6 +222,9 @@ module Zernio
         :'additional_descriptions' => :'Array<String>',
         :'advantage_audience' => :'Integer',
         :'gender' => :'String',
+        :'bid_strategy' => :'BidStrategy',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String'
       }
@@ -381,6 +396,18 @@ module Zernio
         self.gender = attributes[:'gender']
       else
         self.gender = 'all'
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
       if attributes.key?(:'dsa_beneficiary')
@@ -720,6 +747,9 @@ module Zernio
           additional_descriptions == o.additional_descriptions &&
           advantage_audience == o.advantage_audience &&
           gender == o.gender &&
+          bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor
     end
@@ -733,7 +763,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, dsa_beneficiary, dsa_payor].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

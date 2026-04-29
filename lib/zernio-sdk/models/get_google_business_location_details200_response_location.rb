@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Compact public-facing summary derived from `metadata`. Useful for surfacing the \"leave a review\" URL (e.g. behind a QR code) without parsing Google's raw `metadata` block. Populated when the readMask includes `metadata` (the default). For unverified or new locations, Google omits placeId/reviewUrl/mapsUri, so those return as null. 
+  # Compact public-facing summary derived from Google's `metadata`. Useful for surfacing the \"leave a review\" URL (e.g. behind a QR code) without parsing the raw block. Always populated regardless of readMask. For unverified or new locations Google omits placeId/reviewUrl/mapsUri, so those return as null and `isVerified` is false. 
   class GetGoogleBusinessLocationDetails200ResponseLocation < ApiModelBase
     # Business name as set in GBP
     attr_accessor :name

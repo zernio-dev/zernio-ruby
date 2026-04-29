@@ -40,13 +40,25 @@ module Zernio
 
     attr_accessor :targeting
 
-    # Max bid cap (Meta only)
+    # Meta bid strategy applied to the ad set. On TikTok, mapped to `bid_type` / `bid_price` / `deep_bid_type` automatically. 
+    attr_accessor :bid_strategy
+
+    # Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when `bidStrategy` is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. Backward-compat: providing `bidAmount` without `bidStrategy` is treated as `LOWEST_COST_WITH_BID_CAP`. 
     attr_accessor :bid_amount
+
+    # Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sent to Meta as `bid_constraints.roas_average_floor` × 10000 (Meta uses fixed-point integers). 
+    attr_accessor :roas_average_floor
 
     attr_accessor :tracking
 
     # Meta only. Required for housing, employment, credit, or political ads.
     attr_accessor :special_ad_categories
+
+    # TikTok-only. Custom destination URL for the Spark Ad. Without this, TikTok Spark Ads have no clickable destination — required for traffic / conversion objectives. Maps to `landing_page_url` on the creative entry of /v2/ad/create/ (TikTok SDK `AdcreateCreatives.landing_page_url`). Ignored on Meta / LinkedIn / Pinterest / X / Google (those infer the destination from the boosted post). 
+    attr_accessor :link_url
+
+    # TikTok-only. Call-to-action button label on the Spark Ad creative (e.g. `LEARN_MORE`, `SHOP_NOW`, `DOWNLOAD_NOW`, `SIGN_UP`, `WATCH_NOW`). Maps to `call_to_action` on the creative entry of /v2/ad/create/. Pass-through — the platform validates the value. See TikTok's \"Enumeration - Call-to-Action\" reference for the full list. 
+    attr_accessor :call_to_action
 
     # Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states. 
     attr_accessor :dsa_beneficiary
@@ -89,9 +101,13 @@ module Zernio
         :'currency' => :'currency',
         :'schedule' => :'schedule',
         :'targeting' => :'targeting',
+        :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor',
         :'tracking' => :'tracking',
         :'special_ad_categories' => :'specialAdCategories',
+        :'link_url' => :'linkUrl',
+        :'call_to_action' => :'callToAction',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor'
       }
@@ -120,9 +136,13 @@ module Zernio
         :'currency' => :'String',
         :'schedule' => :'BoostPostRequestSchedule',
         :'targeting' => :'BoostPostRequestTargeting',
+        :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float',
         :'tracking' => :'BoostPostRequestTracking',
         :'special_ad_categories' => :'Array<String>',
+        :'link_url' => :'String',
+        :'call_to_action' => :'String',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String'
       }
@@ -200,8 +220,16 @@ module Zernio
         self.targeting = attributes[:'targeting']
       end
 
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
       if attributes.key?(:'bid_amount')
         self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
       if attributes.key?(:'tracking')
@@ -212,6 +240,14 @@ module Zernio
         if (value = attributes[:'special_ad_categories']).is_a?(Array)
           self.special_ad_categories = value
         end
+      end
+
+      if attributes.key?(:'link_url')
+        self.link_url = attributes[:'link_url']
+      end
+
+      if attributes.key?(:'call_to_action')
+        self.call_to_action = attributes[:'call_to_action']
       end
 
       if attributes.key?(:'dsa_beneficiary')
@@ -377,9 +413,13 @@ module Zernio
           currency == o.currency &&
           schedule == o.schedule &&
           targeting == o.targeting &&
+          bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor &&
           tracking == o.tracking &&
           special_ad_categories == o.special_ad_categories &&
+          link_url == o.link_url &&
+          call_to_action == o.call_to_action &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor
     end
@@ -393,7 +433,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, bid_amount, tracking, special_ad_categories, dsa_beneficiary, dsa_payor].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, bid_strategy, bid_amount, roas_average_floor, tracking, special_ad_categories, link_url, call_to_action, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

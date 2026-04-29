@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Omit if only toggling status
+  # Omit if not updating budget
   class UpdateAdSetRequestBudget < ApiModelBase
     attr_accessor :amount
 

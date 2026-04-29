@@ -7,6 +7,7 @@
 | **updated** | **Integer** |  | [optional] |
 | **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
 | **budget_level** | **String** |  | [optional] |
+| **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
 
 ## Example
 
@@ -16,7 +17,8 @@ require 'zernio-sdk'
 instance = Zernio::UpdateAdCampaign200Response.new(
   updated: null,
   budget: null,
-  budget_level: null
+  budget_level: null,
+  bid_strategy: null
 )
 ```
 

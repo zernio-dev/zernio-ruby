@@ -19,8 +19,17 @@ module Zernio
 
     attr_accessor :budget
 
-    # Omit if only updating budget
+    # Omit if not toggling delivery state
     attr_accessor :status
+
+    # Ad-set-level bid strategy. Overrides the campaign-level default. Supported on Meta (facebook, instagram) and TikTok. On TikTok the Meta-style enum is mapped to bid_type / bid_price / deep_bid_type automatically. Other platforms (linkedin, pinterest, google, twitter) return 501 Not Implemented when bidStrategy is set. 
+    attr_accessor :bid_strategy
+
+    # Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. Internally converted to Meta's smallest-denomination integer. 
+    attr_accessor :bid_amount
+
+    # Minimum ROAS as a decimal multiplier (2.0 = 2.0x). Required when bidStrategy is LOWEST_COST_WITH_MIN_ROAS. Sent to Meta as `bid_constraints.roas_average_floor` × 10000. 
+    attr_accessor :roas_average_floor
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -49,7 +58,10 @@ module Zernio
       {
         :'platform' => :'platform',
         :'budget' => :'budget',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor'
       }
     end
 
@@ -68,7 +80,10 @@ module Zernio
       {
         :'platform' => :'String',
         :'budget' => :'UpdateAdSetRequestBudget',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'bid_strategy' => :'BidStrategy',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float'
       }
     end
 
@@ -106,6 +121,18 @@ module Zernio
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
       end
     end
 
@@ -160,7 +187,10 @@ module Zernio
       self.class == o.class &&
           platform == o.platform &&
           budget == o.budget &&
-          status == o.status
+          status == o.status &&
+          bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor
     end
 
     # @see the `==` method
@@ -172,7 +202,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, budget, status].hash
+      [platform, budget, status, bid_strategy, bid_amount, roas_average_floor].hash
     end
 
     # Builds the object from hash

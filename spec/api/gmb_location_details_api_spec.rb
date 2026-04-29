@@ -38,7 +38,7 @@ describe 'GMBLocationDetailsApi' do
   # @param account_id The Zernio account ID (from /v1/accounts)
   # @param [Hash] opts the optional parameters
   # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
-  # @option opts [String] :read_mask Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, serviceItems, profile, openInfo, metadata, moreHours.
+  # @option opts [String] :read_mask Comma-separated fields to return. Available: name, title, phoneNumbers, categories, storefrontAddress, websiteUri, regularHours, specialHours, serviceArea, serviceItems, profile, openInfo, metadata, moreHours. &#x60;title&#x60; and &#x60;metadata&#x60; are always included in the response so the &#x60;location&#x60; summary block can be populated, even if you omit them here. Note: &#x60;location&#x60; is a derived response field, not a Google readMask value, passing it returns 400. 
   # @return [GetGoogleBusinessLocationDetails200Response]
   describe 'get_google_business_location_details test' do
     it 'should work' do

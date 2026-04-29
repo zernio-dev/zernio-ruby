@@ -91,7 +91,19 @@ describe Zernio::BoostPostRequest do
     end
   end
 
+  describe 'test attribute "bid_strategy"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "bid_amount"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "roas_average_floor"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -110,6 +122,18 @@ describe Zernio::BoostPostRequest do
       # validator.allowable_values.each do |value|
       #   expect { instance.special_ad_categories = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "link_url"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "call_to_action"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 

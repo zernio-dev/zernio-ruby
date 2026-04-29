@@ -19,6 +19,9 @@ module Zernio
 
     attr_accessor :budget
 
+    # Campaign-level default. Ad sets inherit this unless they override.
+    attr_accessor :bid_strategy
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -45,7 +48,8 @@ module Zernio
     def self.attribute_map
       {
         :'platform' => :'platform',
-        :'budget' => :'budget'
+        :'budget' => :'budget',
+        :'bid_strategy' => :'bidStrategy'
       }
     end
 
@@ -63,7 +67,8 @@ module Zernio
     def self.openapi_types
       {
         :'platform' => :'String',
-        :'budget' => :'UpdateAdCampaignRequestBudget'
+        :'budget' => :'UpdateAdCampaignRequestBudget',
+        :'bid_strategy' => :'BidStrategy'
       }
     end
 
@@ -97,8 +102,10 @@ module Zernio
 
       if attributes.key?(:'budget')
         self.budget = attributes[:'budget']
-      else
-        self.budget = nil
+      end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
       end
     end
 
@@ -111,10 +118,6 @@ module Zernio
         invalid_properties.push('invalid value for "platform", platform cannot be nil.')
       end
 
-      if @budget.nil?
-        invalid_properties.push('invalid value for "budget", budget cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -125,7 +128,6 @@ module Zernio
       return false if @platform.nil?
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
       return false unless platform_validator.valid?(@platform)
-      return false if @budget.nil?
       true
     end
 
@@ -139,23 +141,14 @@ module Zernio
       @platform = platform
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] budget Value to be assigned
-    def budget=(budget)
-      if budget.nil?
-        fail ArgumentError, 'budget cannot be nil'
-      end
-
-      @budget = budget
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           platform == o.platform &&
-          budget == o.budget
+          budget == o.budget &&
+          bid_strategy == o.bid_strategy
     end
 
     # @see the `==` method
@@ -167,7 +160,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, budget].hash
+      [platform, budget, bid_strategy].hash
     end
 
     # Builds the object from hash
