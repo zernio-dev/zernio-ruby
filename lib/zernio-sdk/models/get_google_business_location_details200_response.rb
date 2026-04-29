@@ -21,6 +21,8 @@ module Zernio
 
     attr_accessor :location_id
 
+    attr_accessor :location
+
     # Business name
     attr_accessor :title
 
@@ -45,6 +47,7 @@ module Zernio
         :'success' => :'success',
         :'account_id' => :'accountId',
         :'location_id' => :'locationId',
+        :'location' => :'location',
         :'title' => :'title',
         :'regular_hours' => :'regularHours',
         :'special_hours' => :'specialHours',
@@ -72,6 +75,7 @@ module Zernio
         :'success' => :'Boolean',
         :'account_id' => :'String',
         :'location_id' => :'String',
+        :'location' => :'GetGoogleBusinessLocationDetails200ResponseLocation',
         :'title' => :'String',
         :'regular_hours' => :'GetGoogleBusinessLocationDetails200ResponseRegularHours',
         :'special_hours' => :'GetGoogleBusinessLocationDetails200ResponseSpecialHours',
@@ -115,6 +119,10 @@ module Zernio
 
       if attributes.key?(:'location_id')
         self.location_id = attributes[:'location_id']
+      end
+
+      if attributes.key?(:'location')
+        self.location = attributes[:'location']
       end
 
       if attributes.key?(:'title')
@@ -175,6 +183,7 @@ module Zernio
           success == o.success &&
           account_id == o.account_id &&
           location_id == o.location_id &&
+          location == o.location &&
           title == o.title &&
           regular_hours == o.regular_hours &&
           special_hours == o.special_hours &&
@@ -194,7 +203,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, account_id, location_id, title, regular_hours, special_hours, profile, website_uri, phone_numbers, categories, service_items].hash
+      [success, account_id, location_id, location, title, regular_hours, special_hours, profile, website_uri, phone_numbers, categories, service_items].hash
     end
 
     # Builds the object from hash

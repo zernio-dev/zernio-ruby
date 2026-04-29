@@ -601,6 +601,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetGoogleBusinessLocationDetails200ResponseCategories](docs/GetGoogleBusinessLocationDetails200ResponseCategories.md)
  - [Zernio::GetGoogleBusinessLocationDetails200ResponseCategoriesAdditionalCategoriesInner](docs/GetGoogleBusinessLocationDetails200ResponseCategoriesAdditionalCategoriesInner.md)
  - [Zernio::GetGoogleBusinessLocationDetails200ResponseCategoriesPrimaryCategory](docs/GetGoogleBusinessLocationDetails200ResponseCategoriesPrimaryCategory.md)
+ - [Zernio::GetGoogleBusinessLocationDetails200ResponseLocation](docs/GetGoogleBusinessLocationDetails200ResponseLocation.md)
  - [Zernio::GetGoogleBusinessLocationDetails200ResponsePhoneNumbers](docs/GetGoogleBusinessLocationDetails200ResponsePhoneNumbers.md)
  - [Zernio::GetGoogleBusinessLocationDetails200ResponseProfile](docs/GetGoogleBusinessLocationDetails200ResponseProfile.md)
  - [Zernio::GetGoogleBusinessLocationDetails200ResponseRegularHours](docs/GetGoogleBusinessLocationDetails200ResponseRegularHours.md)

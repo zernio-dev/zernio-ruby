@@ -7,6 +7,7 @@
 | **success** | **Boolean** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **location_id** | **String** |  | [optional] |
+| **location** | [**GetGoogleBusinessLocationDetails200ResponseLocation**](GetGoogleBusinessLocationDetails200ResponseLocation.md) |  | [optional] |
 | **title** | **String** | Business name | [optional] |
 | **regular_hours** | [**GetGoogleBusinessLocationDetails200ResponseRegularHours**](GetGoogleBusinessLocationDetails200ResponseRegularHours.md) |  | [optional] |
 | **special_hours** | [**GetGoogleBusinessLocationDetails200ResponseSpecialHours**](GetGoogleBusinessLocationDetails200ResponseSpecialHours.md) |  | [optional] |
@@ -25,6 +26,7 @@ instance = Zernio::GetGoogleBusinessLocationDetails200Response.new(
   success: null,
   account_id: null,
   location_id: null,
+  location: null,
   title: null,
   regular_hours: null,
   special_hours: null,
