@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta-only. Targeting updates for other platforms are not supported after creation.
+  # Meta + TikTok only. Pinterest / X / LinkedIn / Google return 501. 
   class UpdateAdRequestTargeting < ApiModelBase
     attr_accessor :age_min
 

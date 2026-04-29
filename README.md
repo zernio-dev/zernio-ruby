@@ -112,10 +112,12 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
+*Zernio::AdsApi* | [**list_ads_business_centers**](docs/AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
 *Zernio::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API
 *Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
+*Zernio::AdsApi* | [**trigger_ads_initial_sync**](docs/AdsApi.md#trigger_ads_initial_sync) | **POST** /v1/ads/sync/initial | Re-sync an ads account
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Zernio::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
@@ -400,6 +402,7 @@ Class | Method | HTTP request | Description
  - [Zernio::BulkUploadPosts200Response](docs/BulkUploadPosts200Response.md)
  - [Zernio::BulkUploadPosts200ResponseErrorsInner](docs/BulkUploadPosts200ResponseErrorsInner.md)
  - [Zernio::BulkUploadPosts429Response](docs/BulkUploadPosts429Response.md)
+ - [Zernio::BusinessCenter](docs/BusinessCenter.md)
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
  - [Zernio::CancelBroadcast200ResponseBroadcast](docs/CancelBroadcast200ResponseBroadcast.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
@@ -774,6 +777,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdAudiences200ResponseAudiencesInner](docs/ListAdAudiences200ResponseAudiencesInner.md)
  - [Zernio::ListAdCampaigns200Response](docs/ListAdCampaigns200Response.md)
  - [Zernio::ListAds200Response](docs/ListAds200Response.md)
+ - [Zernio::ListAdsBusinessCenters200Response](docs/ListAdsBusinessCenters200Response.md)
  - [Zernio::ListApiKeys200Response](docs/ListApiKeys200Response.md)
  - [Zernio::ListBroadcastRecipients200Response](docs/ListBroadcastRecipients200Response.md)
  - [Zernio::ListBroadcastRecipients200ResponseRecipientsInner](docs/ListBroadcastRecipients200ResponseRecipientsInner.md)
@@ -975,6 +979,8 @@ Class | Method | HTTP request | Description
  - [Zernio::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Zernio::ThreadsPlatformData](docs/ThreadsPlatformData.md)
  - [Zernio::TikTokPlatformData](docs/TikTokPlatformData.md)
+ - [Zernio::TriggerAdsInitialSync202Response](docs/TriggerAdsInitialSync202Response.md)
+ - [Zernio::TriggerAdsInitialSyncRequest](docs/TriggerAdsInitialSyncRequest.md)
  - [Zernio::TwitterPlatformData](docs/TwitterPlatformData.md)
  - [Zernio::TwitterPlatformDataPoll](docs/TwitterPlatformDataPoll.md)
  - [Zernio::TwitterPlatformDataThreadItemsInner](docs/TwitterPlatformDataThreadItemsInner.md)
@@ -995,6 +1001,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdCampaignStatusRequest](docs/UpdateAdCampaignStatusRequest.md)
  - [Zernio::UpdateAdRequest](docs/UpdateAdRequest.md)
  - [Zernio::UpdateAdRequestBudget](docs/UpdateAdRequestBudget.md)
+ - [Zernio::UpdateAdRequestCreative](docs/UpdateAdRequestCreative.md)
  - [Zernio::UpdateAdRequestTargeting](docs/UpdateAdRequestTargeting.md)
  - [Zernio::UpdateAdRequestTargetingInterestsInner](docs/UpdateAdRequestTargetingInterestsInner.md)
  - [Zernio::UpdateAdSet200Response](docs/UpdateAdSet200Response.md)

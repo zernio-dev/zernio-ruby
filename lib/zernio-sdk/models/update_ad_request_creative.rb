@@ -14,47 +14,30 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdRequest < ApiModelBase
-    attr_accessor :status
+  # Replace the ad's creative. Meta + TikTok only.  - **Meta**: requires `headline`, `body`, `callToAction`, `linkUrl`, `imageUrl`. The   ad's existing creative is replaced via a new `/act_X/adcreatives` upload + ad   update. The old creative is retained on the ad account for historical reporting. - **TikTok**: patch-style. Pass any subset; `headline` is ignored (TikTok creatives   have no headline slot). `body` becomes the in-feed `ad_text`; `linkUrl` becomes   `landing_page_url`; `videoUrl` triggers a fresh upload. 
+  class UpdateAdRequestCreative < ApiModelBase
+    # Meta only
+    attr_accessor :headline
 
-    attr_accessor :budget
+    attr_accessor :body
 
-    attr_accessor :targeting
+    attr_accessor :call_to_action
 
-    attr_accessor :creative
+    attr_accessor :link_url
 
-    attr_accessor :name
+    attr_accessor :image_url
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :video_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'budget' => :'budget',
-        :'targeting' => :'targeting',
-        :'creative' => :'creative',
-        :'name' => :'name'
+        :'headline' => :'headline',
+        :'body' => :'body',
+        :'call_to_action' => :'callToAction',
+        :'link_url' => :'linkUrl',
+        :'image_url' => :'imageUrl',
+        :'video_url' => :'videoUrl'
       }
     end
 
@@ -71,11 +54,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'budget' => :'UpdateAdRequestBudget',
-        :'targeting' => :'UpdateAdRequestTargeting',
-        :'creative' => :'UpdateAdRequestCreative',
-        :'name' => :'String'
+        :'headline' => :'String',
+        :'body' => :'String',
+        :'call_to_action' => :'String',
+        :'link_url' => :'String',
+        :'image_url' => :'String',
+        :'video_url' => :'String'
       }
     end
 
@@ -89,36 +73,40 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdRequestCreative` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdRequestCreative`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'headline')
+        self.headline = attributes[:'headline']
       end
 
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
+      if attributes.key?(:'body')
+        self.body = attributes[:'body']
       end
 
-      if attributes.key?(:'targeting')
-        self.targeting = attributes[:'targeting']
+      if attributes.key?(:'call_to_action')
+        self.call_to_action = attributes[:'call_to_action']
       end
 
-      if attributes.key?(:'creative')
-        self.creative = attributes[:'creative']
+      if attributes.key?(:'link_url')
+        self.link_url = attributes[:'link_url']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'image_url')
+        self.image_url = attributes[:'image_url']
+      end
+
+      if attributes.key?(:'video_url')
+        self.video_url = attributes[:'video_url']
       end
     end
 
@@ -134,19 +122,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["active", "paused"])
-      return false unless status_validator.valid?(@status)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "paused"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -154,11 +130,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          budget == o.budget &&
-          targeting == o.targeting &&
-          creative == o.creative &&
-          name == o.name
+          headline == o.headline &&
+          body == o.body &&
+          call_to_action == o.call_to_action &&
+          link_url == o.link_url &&
+          image_url == o.image_url &&
+          video_url == o.video_url
     end
 
     # @see the `==` method
@@ -170,7 +147,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, budget, targeting, creative, name].hash
+      [headline, body, call_to_action, link_url, image_url, video_url].hash
     end
 
     # Builds the object from hash

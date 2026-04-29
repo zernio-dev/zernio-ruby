@@ -53,6 +53,12 @@ module Zernio
     # Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION, LINK_CLICKS). Only present for Meta ads.
     attr_accessor :optimization_goal
 
+    # Human-readable advertiser/account name (Meta `AdAccount.name`, TikTok `advertiser_name`, LinkedIn / X / Pinterest equivalents). Refreshed every sync so platform-side renames propagate within one cycle. `null` when the platform doesn't return a name or the sync hasn't run yet. 
+    attr_accessor :platform_ad_account_name
+
+    # Platform-reported creation timestamp (Meta `created_time`, TikTok `create_time`). Distinct from `createdAt` which reflects when Zernio first synced the doc — for sort/filter by \"when the ad was actually created on the platform\", read this field. `null` for legacy ads synced before this field was added; aggregations fall back to `createdAt` in that case. 
+    attr_accessor :platform_created_at
+
     # Ad-set bid strategy (overrides campaign level on Meta). Populated for Meta and TikTok. TikTok's native `bid_type` is normalized to the cross-platform Meta enum: `BID_TYPE_NO_BID` -> `LOWEST_COST_WITHOUT_CAP`, `BID_TYPE_CUSTOM` -> `LOWEST_COST_WITH_BID_CAP`, deep_bid_type=MIN_ROAS or roas_bid>0 -> `LOWEST_COST_WITH_MIN_ROAS`, `BID_TYPE_MAX_CONVERSION` -> `LOWEST_COST_WITHOUT_CAP`. 
     attr_accessor :bid_strategy
 
@@ -118,6 +124,8 @@ module Zernio
         :'ad_set_name' => :'adSetName',
         :'platform_objective' => :'platformObjective',
         :'optimization_goal' => :'optimizationGoal',
+        :'platform_ad_account_name' => :'platformAdAccountName',
+        :'platform_created_at' => :'platformCreatedAt',
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
@@ -161,6 +169,8 @@ module Zernio
         :'ad_set_name' => :'String',
         :'platform_objective' => :'String',
         :'optimization_goal' => :'String',
+        :'platform_ad_account_name' => :'String',
+        :'platform_created_at' => :'Time',
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
@@ -262,6 +272,14 @@ module Zernio
 
       if attributes.key?(:'optimization_goal')
         self.optimization_goal = attributes[:'optimization_goal']
+      end
+
+      if attributes.key?(:'platform_ad_account_name')
+        self.platform_ad_account_name = attributes[:'platform_ad_account_name']
+      end
+
+      if attributes.key?(:'platform_created_at')
+        self.platform_created_at = attributes[:'platform_created_at']
       end
 
       if attributes.key?(:'bid_strategy')
@@ -378,6 +396,8 @@ module Zernio
           ad_set_name == o.ad_set_name &&
           platform_objective == o.platform_objective &&
           optimization_goal == o.optimization_goal &&
+          platform_ad_account_name == o.platform_ad_account_name &&
+          platform_created_at == o.platform_created_at &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
@@ -399,7 +419,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, platform, status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
+      [_id, name, platform, status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, platform_ad_account_name, platform_created_at, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
     end
 
     # Builds the object from hash

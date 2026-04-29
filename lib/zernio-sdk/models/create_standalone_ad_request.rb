@@ -57,7 +57,7 @@ module Zernio
     # Meta-only. When present, switches to the multi-creative shape: creates 1 campaign + 1 ad set + N ads (one per entry here). Top-level `headline` / `body` / `imageUrl` / `linkUrl` / `callToAction` are ignored in this mode. Mutually exclusive with `adSetId`. 
     attr_accessor :creatives
 
-    # Meta-only. When present, switches to the attach shape: adds one new ad to this existing ad set without creating a new campaign. Budget, targeting, goal, schedule, AND bid strategy are inherited from the ad set on Meta — passing `bidStrategy` in attach mode returns 400. To change an existing ad set's bid, use `PUT /v1/ads/ad-sets/{adSetId}`. Mutually exclusive with `creatives[]`. 
+    # Meta-only. When present, switches to the attach shape: adds one new ad to this existing ad set without creating a new campaign. Budget, targeting, goal, schedule, AND bid strategy are inherited from the ad set on Meta — passing `bidStrategy` in attach mode returns 400. To change an existing ad set's bid, use `PUT /v1/ads/ad-sets/{adSetId}`. Mutually exclusive with `creatives[]`.  Supported on Meta (facebook, instagram) and TikTok. On TikTok the `adSetId` is the ad group ID; the new ad inherits the ad group's bid + budget + targeting. 
     attr_accessor :ad_set_id
 
     # Google Display only

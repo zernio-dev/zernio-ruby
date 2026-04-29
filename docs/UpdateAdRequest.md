@@ -7,6 +7,7 @@
 | **status** | **String** |  | [optional] |
 | **budget** | [**UpdateAdRequestBudget**](UpdateAdRequestBudget.md) |  | [optional] |
 | **targeting** | [**UpdateAdRequestTargeting**](UpdateAdRequestTargeting.md) |  | [optional] |
+| **creative** | [**UpdateAdRequestCreative**](UpdateAdRequestCreative.md) |  | [optional] |
 | **name** | **String** |  | [optional] |
 
 ## Example
@@ -18,6 +19,7 @@ instance = Zernio::UpdateAdRequest.new(
   status: null,
   budget: null,
   targeting: null,
+  creative: null,
   name: null
 )
 ```

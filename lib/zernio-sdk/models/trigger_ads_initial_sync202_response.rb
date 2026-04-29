@@ -14,16 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdRequest < ApiModelBase
+  class TriggerAdsInitialSync202Response < ApiModelBase
     attr_accessor :status
 
-    attr_accessor :budget
+    # Trace ID for the enqueued job. Reused on `already_queued`.
+    attr_accessor :trace_id
 
-    attr_accessor :targeting
-
-    attr_accessor :creative
-
-    attr_accessor :name
+    attr_accessor :message
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -51,10 +48,8 @@ module Zernio
     def self.attribute_map
       {
         :'status' => :'status',
-        :'budget' => :'budget',
-        :'targeting' => :'targeting',
-        :'creative' => :'creative',
-        :'name' => :'name'
+        :'trace_id' => :'traceId',
+        :'message' => :'message'
       }
     end
 
@@ -72,10 +67,8 @@ module Zernio
     def self.openapi_types
       {
         :'status' => :'String',
-        :'budget' => :'UpdateAdRequestBudget',
-        :'targeting' => :'UpdateAdRequestTargeting',
-        :'creative' => :'UpdateAdRequestCreative',
-        :'name' => :'String'
+        :'trace_id' => :'String',
+        :'message' => :'String'
       }
     end
 
@@ -89,14 +82,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::TriggerAdsInitialSync202Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::TriggerAdsInitialSync202Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -105,20 +98,12 @@ module Zernio
         self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
+      if attributes.key?(:'trace_id')
+        self.trace_id = attributes[:'trace_id']
       end
 
-      if attributes.key?(:'targeting')
-        self.targeting = attributes[:'targeting']
-      end
-
-      if attributes.key?(:'creative')
-        self.creative = attributes[:'creative']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'message')
+        self.message = attributes[:'message']
       end
     end
 
@@ -134,7 +119,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["active", "paused"])
+      status_validator = EnumAttributeValidator.new('String', ["queued", "already_queued"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -142,7 +127,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "paused"])
+      validator = EnumAttributeValidator.new('String', ["queued", "already_queued"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
@@ -155,10 +140,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           status == o.status &&
-          budget == o.budget &&
-          targeting == o.targeting &&
-          creative == o.creative &&
-          name == o.name
+          trace_id == o.trace_id &&
+          message == o.message
     end
 
     # @see the `==` method
@@ -170,7 +153,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, budget, targeting, creative, name].hash
+      [status, trace_id, message].hash
     end
 
     # Builds the object from hash

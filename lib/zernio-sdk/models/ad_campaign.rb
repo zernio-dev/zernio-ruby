@@ -52,6 +52,9 @@ module Zernio
 
     attr_accessor :platform_ad_account_id
 
+    # Human-readable advertiser/account name from the platform. Refreshed on every sync.
+    attr_accessor :platform_ad_account_name
+
     attr_accessor :account_id
 
     attr_accessor :profile_id
@@ -117,6 +120,7 @@ module Zernio
         :'currency' => :'currency',
         :'metrics' => :'metrics',
         :'platform_ad_account_id' => :'platformAdAccountId',
+        :'platform_ad_account_name' => :'platformAdAccountName',
         :'account_id' => :'accountId',
         :'profile_id' => :'profileId',
         :'platform_objective' => :'platformObjective',
@@ -158,6 +162,7 @@ module Zernio
         :'currency' => :'String',
         :'metrics' => :'AdMetrics',
         :'platform_ad_account_id' => :'String',
+        :'platform_ad_account_name' => :'String',
         :'account_id' => :'String',
         :'profile_id' => :'String',
         :'platform_objective' => :'String',
@@ -255,6 +260,10 @@ module Zernio
 
       if attributes.key?(:'platform_ad_account_id')
         self.platform_ad_account_id = attributes[:'platform_ad_account_id']
+      end
+
+      if attributes.key?(:'platform_ad_account_name')
+        self.platform_ad_account_name = attributes[:'platform_ad_account_name']
       end
 
       if attributes.key?(:'account_id')
@@ -369,6 +378,7 @@ module Zernio
           currency == o.currency &&
           metrics == o.metrics &&
           platform_ad_account_id == o.platform_ad_account_id &&
+          platform_ad_account_name == o.platform_ad_account_name &&
           account_id == o.account_id &&
           profile_id == o.profile_id &&
           platform_objective == o.platform_objective &&
@@ -390,7 +400,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, earliest_ad, latest_ad].hash
+      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, platform_ad_account_name, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, earliest_ad, latest_ad].hash
     end
 
     # Builds the object from hash

@@ -13,10 +13,12 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad_comments**](AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
+| [**list_ads_business_centers**](AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
 | [**list_conversion_destinations**](AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API |
 | [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests |
 | [**send_conversions**](AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform |
 | [**send_whats_app_conversion**](AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
+| [**trigger_ads_initial_sync**](AdsApi.md#trigger_ads_initial_sync) | **POST** /v1/ads/sync/initial | Re-sync an ads account |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 
 
@@ -519,7 +521,7 @@ end
 
 ## list_ad_accounts
 
-> <ListAdAccounts200Response> list_ad_accounts(account_id)
+> <ListAdAccounts200Response> list_ad_accounts(account_id, opts)
 
 List ad accounts
 
@@ -538,10 +540,14 @@ end
 
 api_instance = Zernio::AdsApi.new
 account_id = 'account_id_example' # String | Social account ID
+opts = {
+  ad_account_id: 'ad_account_id_example', # String | Filter response to a single platform ad account ID (e.g. `act_123` for Meta, advertiser_id for TikTok). Returns at most one item.
+  limit: 56 # Integer | Clamp the returned `accounts[]` length. Useful for typeahead pickers on agency tokens with hundreds of advertisers.
+}
 
 begin
   # List ad accounts
-  result = api_instance.list_ad_accounts(account_id)
+  result = api_instance.list_ad_accounts(account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->list_ad_accounts: #{e}"
@@ -552,12 +558,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListAdAccounts200Response>, Integer, Hash)> list_ad_accounts_with_http_info(account_id)
+> <Array(<ListAdAccounts200Response>, Integer, Hash)> list_ad_accounts_with_http_info(account_id, opts)
 
 ```ruby
 begin
   # List ad accounts
-  data, status_code, headers = api_instance.list_ad_accounts_with_http_info(account_id)
+  data, status_code, headers = api_instance.list_ad_accounts_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListAdAccounts200Response>
@@ -571,6 +577,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Social account ID |  |
+| **ad_account_id** | **String** | Filter response to a single platform ad account ID (e.g. &#x60;act_123&#x60; for Meta, advertiser_id for TikTok). Returns at most one item. | [optional] |
+| **limit** | **Integer** | Clamp the returned &#x60;accounts[]&#x60; length. Useful for typeahead pickers on agency tokens with hundreds of advertisers. | [optional] |
 
 ### Return type
 
@@ -666,6 +674,75 @@ end
 ### Return type
 
 [**ListAds200Response**](ListAds200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ads_business_centers
+
+> <ListAdsBusinessCenters200Response> list_ads_business_centers(account_id)
+
+List TikTok Business Centers
+
+Returns the TikTok Business Centers (BCs) the connected `tiktokads` account can read. Each BC reports its advertiser count so callers can build agency-style pickers without re-walking `/v1/ads/accounts` per BC.  TikTok-only. Solo advertisers (non-agency tokens) return an empty array. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | ID of the `tiktokads` (or parent `tiktok` posting) SocialAccount
+
+begin
+  # List TikTok Business Centers
+  result = api_instance.list_ads_business_centers(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ads_business_centers: #{e}"
+end
+```
+
+#### Using the list_ads_business_centers_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdsBusinessCenters200Response>, Integer, Hash)> list_ads_business_centers_with_http_info(account_id)
+
+```ruby
+begin
+  # List TikTok Business Centers
+  data, status_code, headers = api_instance.list_ads_business_centers_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdsBusinessCenters200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ads_business_centers_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | ID of the &#x60;tiktokads&#x60; (or parent &#x60;tiktok&#x60; posting) SocialAccount |  |
+
+### Return type
+
+[**ListAdsBusinessCenters200Response**](ListAdsBusinessCenters200Response.md)
 
 ### Authorization
 
@@ -955,13 +1032,82 @@ end
 - **Accept**: application/json
 
 
+## trigger_ads_initial_sync
+
+> <TriggerAdsInitialSync202Response> trigger_ads_initial_sync(trigger_ads_initial_sync_request)
+
+Re-sync an ads account
+
+Enqueue a full re-sync (discovery + 90-day metrics backfill) for one ads SocialAccount. Returns immediately with a trace ID; subscribe to the `account.ads.initial_sync_completed` webhook for completion.  Use this when: - the customer changed which TikTok Business Center / Meta ad account a   token can reach and wants Zernio to discover the new ads, - a previous sync errored out and the customer wants a clean retry, - the customer rotated permissions on the platform side.  Per-account 1h debounce: subsequent calls within an hour return `202` with `status: \"already_queued\"` and the prior trace ID. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+trigger_ads_initial_sync_request = Zernio::TriggerAdsInitialSyncRequest.new({account_id: 'account_id_example'}) # TriggerAdsInitialSyncRequest | 
+
+begin
+  # Re-sync an ads account
+  result = api_instance.trigger_ads_initial_sync(trigger_ads_initial_sync_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->trigger_ads_initial_sync: #{e}"
+end
+```
+
+#### Using the trigger_ads_initial_sync_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<TriggerAdsInitialSync202Response>, Integer, Hash)> trigger_ads_initial_sync_with_http_info(trigger_ads_initial_sync_request)
+
+```ruby
+begin
+  # Re-sync an ads account
+  data, status_code, headers = api_instance.trigger_ads_initial_sync_with_http_info(trigger_ads_initial_sync_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <TriggerAdsInitialSync202Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->trigger_ads_initial_sync_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **trigger_ads_initial_sync_request** | [**TriggerAdsInitialSyncRequest**](TriggerAdsInitialSyncRequest.md) |  |  |
+
+### Return type
+
+[**TriggerAdsInitialSync202Response**](TriggerAdsInitialSync202Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_ad
 
 > <UpdateAd200Response> update_ad(ad_id, update_ad_request)
 
 Update ad
 
-Update one or more fields on an ad. Status changes and budget updates are propagated to the platform. Targeting updates are Meta-only.
+Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via `/v2/adgroup/update/`), and creative   (via `/v2/ad/update/` patch-style — `headline` is ignored, `body` becomes `ad_text`). - **Pinterest / X / LinkedIn / Google**: status + budget only. Sending `targeting`   or `creative` returns 501 with code `unsupported_platform_operation`. 
 
 ### Examples
 

@@ -60,6 +60,9 @@ module Zernio
     # TikTok-only. Call-to-action button label on the Spark Ad creative (e.g. `LEARN_MORE`, `SHOP_NOW`, `DOWNLOAD_NOW`, `SIGN_UP`, `WATCH_NOW`). Maps to `call_to_action` on the creative entry of /v2/ad/create/. Pass-through — the platform validates the value. See TikTok's \"Enumeration - Call-to-Action\" reference for the full list. 
     attr_accessor :call_to_action
 
+    # TikTok-only. Spark Code (creator's `auth_code`) authorizing cross-creator Spark Ads — the advertiser can boost a video owned by a DIFFERENT TikTok account. Without this, boosts are limited to videos owned by the same account running the ads (same-BC creators only). The creator generates the code in their TikTok app's Promote settings and shares it with the advertiser. Maps to `auth_code` on the creative entry of /v2/ad/create/. 
+    attr_accessor :spark_auth_code
+
     # Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states. 
     attr_accessor :dsa_beneficiary
 
@@ -108,6 +111,7 @@ module Zernio
         :'special_ad_categories' => :'specialAdCategories',
         :'link_url' => :'linkUrl',
         :'call_to_action' => :'callToAction',
+        :'spark_auth_code' => :'sparkAuthCode',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor'
       }
@@ -143,6 +147,7 @@ module Zernio
         :'special_ad_categories' => :'Array<String>',
         :'link_url' => :'String',
         :'call_to_action' => :'String',
+        :'spark_auth_code' => :'String',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String'
       }
@@ -248,6 +253,10 @@ module Zernio
 
       if attributes.key?(:'call_to_action')
         self.call_to_action = attributes[:'call_to_action']
+      end
+
+      if attributes.key?(:'spark_auth_code')
+        self.spark_auth_code = attributes[:'spark_auth_code']
       end
 
       if attributes.key?(:'dsa_beneficiary')
@@ -420,6 +429,7 @@ module Zernio
           special_ad_categories == o.special_ad_categories &&
           link_url == o.link_url &&
           call_to_action == o.call_to_action &&
+          spark_auth_code == o.spark_auth_code &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor
     end
@@ -433,7 +443,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, bid_strategy, bid_amount, roas_average_floor, tracking, special_ad_categories, link_url, call_to_action, dsa_beneficiary, dsa_payor].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, bid_strategy, bid_amount, roas_average_floor, tracking, special_ad_categories, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

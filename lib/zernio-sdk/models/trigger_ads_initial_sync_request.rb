@@ -14,47 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdRequest < ApiModelBase
-    attr_accessor :status
-
-    attr_accessor :budget
-
-    attr_accessor :targeting
-
-    attr_accessor :creative
-
-    attr_accessor :name
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  class TriggerAdsInitialSyncRequest < ApiModelBase
+    # ID of the ads SocialAccount to re-sync (e.g. `metaads` / `tiktokads` doc). Posting accounts (`facebook` / `tiktok`) are rejected — pass the ads-side account ID that owns the platform tokens. 
+    attr_accessor :account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'budget' => :'budget',
-        :'targeting' => :'targeting',
-        :'creative' => :'creative',
-        :'name' => :'name'
+        :'account_id' => :'accountId'
       }
     end
 
@@ -71,11 +38,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'budget' => :'UpdateAdRequestBudget',
-        :'targeting' => :'UpdateAdRequestTargeting',
-        :'creative' => :'UpdateAdRequestCreative',
-        :'name' => :'String'
+        :'account_id' => :'String'
       }
     end
 
@@ -89,36 +52,22 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::TriggerAdsInitialSyncRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::TriggerAdsInitialSyncRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
-      end
-
-      if attributes.key?(:'targeting')
-        self.targeting = attributes[:'targeting']
-      end
-
-      if attributes.key?(:'creative')
-        self.creative = attributes[:'creative']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      else
+        self.account_id = nil
       end
     end
 
@@ -127,6 +76,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -134,19 +87,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["active", "paused"])
-      return false unless status_validator.valid?(@status)
+      return false if @account_id.nil?
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "paused"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] account_id Value to be assigned
+    def account_id=(account_id)
+      if account_id.nil?
+        fail ArgumentError, 'account_id cannot be nil'
       end
-      @status = status
+
+      @account_id = account_id
     end
 
     # Checks equality by comparing each attribute.
@@ -154,11 +106,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          budget == o.budget &&
-          targeting == o.targeting &&
-          creative == o.creative &&
-          name == o.name
+          account_id == o.account_id
     end
 
     # @see the `==` method
@@ -170,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, budget, targeting, creative, name].hash
+      [account_id].hash
     end
 
     # Builds the object from hash

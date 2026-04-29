@@ -14,47 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdRequest < ApiModelBase
-    attr_accessor :status
+  # TikTok Business Center entity. Returned by `GET /v1/ads/business-centers`. BCs are TikTok's agency container — one BC owns N advertisers (ad accounts). Most solo advertisers don't have one; the agency token uses BCs to roll up multi-client access. 
+  class BusinessCenter < ApiModelBase
+    # Business Center ID
+    attr_accessor :bc_id
 
-    attr_accessor :budget
-
-    attr_accessor :targeting
-
-    attr_accessor :creative
-
+    # Display name set by the BC owner
     attr_accessor :name
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Number of advertisers (ad accounts) reachable under this BC for the calling token
+    attr_accessor :advertiser_count
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'budget' => :'budget',
-        :'targeting' => :'targeting',
-        :'creative' => :'creative',
-        :'name' => :'name'
+        :'bc_id' => :'bcId',
+        :'name' => :'name',
+        :'advertiser_count' => :'advertiserCount'
       }
     end
 
@@ -71,11 +47,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'budget' => :'UpdateAdRequestBudget',
-        :'targeting' => :'UpdateAdRequestTargeting',
-        :'creative' => :'UpdateAdRequestCreative',
-        :'name' => :'String'
+        :'bc_id' => :'String',
+        :'name' => :'String',
+        :'advertiser_count' => :'Integer'
       }
     end
 
@@ -89,36 +63,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::BusinessCenter` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::BusinessCenter`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
-      end
-
-      if attributes.key?(:'targeting')
-        self.targeting = attributes[:'targeting']
-      end
-
-      if attributes.key?(:'creative')
-        self.creative = attributes[:'creative']
+      if attributes.key?(:'bc_id')
+        self.bc_id = attributes[:'bc_id']
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'advertiser_count')
+        self.advertiser_count = attributes[:'advertiser_count']
       end
     end
 
@@ -134,19 +100,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["active", "paused"])
-      return false unless status_validator.valid?(@status)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "paused"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -154,11 +108,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          budget == o.budget &&
-          targeting == o.targeting &&
-          creative == o.creative &&
-          name == o.name
+          bc_id == o.bc_id &&
+          name == o.name &&
+          advertiser_count == o.advertiser_count
     end
 
     # @see the `==` method
@@ -170,7 +122,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, budget, targeting, creative, name].hash
+      [bc_id, name, advertiser_count].hash
     end
 
     # Builds the object from hash

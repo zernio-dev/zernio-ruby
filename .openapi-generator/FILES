@@ -77,6 +77,7 @@ docs/BulkUpdateAdCampaignStatusRequestCampaignsInner.md
 docs/BulkUploadPosts200Response.md
 docs/BulkUploadPosts200ResponseErrorsInner.md
 docs/BulkUploadPosts429Response.md
+docs/BusinessCenter.md
 docs/CancelBroadcast200Response.md
 docs/CancelBroadcast200ResponseBroadcast.md
 docs/CommentAutomationsApi.md
@@ -466,6 +467,7 @@ docs/ListAdAudiences200Response.md
 docs/ListAdAudiences200ResponseAudiencesInner.md
 docs/ListAdCampaigns200Response.md
 docs/ListAds200Response.md
+docs/ListAdsBusinessCenters200Response.md
 docs/ListApiKeys200Response.md
 docs/ListBroadcastRecipients200Response.md
 docs/ListBroadcastRecipients200ResponseRecipientsInner.md
@@ -676,6 +678,8 @@ docs/TelegramPlatformData.md
 docs/TestWebhookRequest.md
 docs/ThreadsPlatformData.md
 docs/TikTokPlatformData.md
+docs/TriggerAdsInitialSync202Response.md
+docs/TriggerAdsInitialSyncRequest.md
 docs/TwitterEngagementApi.md
 docs/TwitterPlatformData.md
 docs/TwitterPlatformDataPoll.md
@@ -697,6 +701,7 @@ docs/UpdateAdCampaignStatus200Response.md
 docs/UpdateAdCampaignStatusRequest.md
 docs/UpdateAdRequest.md
 docs/UpdateAdRequestBudget.md
+docs/UpdateAdRequestCreative.md
 docs/UpdateAdRequestTargeting.md
 docs/UpdateAdRequestTargetingInterestsInner.md
 docs/UpdateAdSet200Response.md
@@ -978,6 +983,7 @@ lib/zernio-sdk/models/bulk_update_ad_campaign_status_request_campaigns_inner.rb
 lib/zernio-sdk/models/bulk_upload_posts200_response.rb
 lib/zernio-sdk/models/bulk_upload_posts200_response_errors_inner.rb
 lib/zernio-sdk/models/bulk_upload_posts429_response.rb
+lib/zernio-sdk/models/business_center.rb
 lib/zernio-sdk/models/cancel_broadcast200_response.rb
 lib/zernio-sdk/models/cancel_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/complete_telegram_connect200_response.rb
@@ -1352,6 +1358,7 @@ lib/zernio-sdk/models/list_ad_audiences200_response.rb
 lib/zernio-sdk/models/list_ad_audiences200_response_audiences_inner.rb
 lib/zernio-sdk/models/list_ad_campaigns200_response.rb
 lib/zernio-sdk/models/list_ads200_response.rb
+lib/zernio-sdk/models/list_ads_business_centers200_response.rb
 lib/zernio-sdk/models/list_api_keys200_response.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response_recipients_inner.rb
@@ -1553,6 +1560,8 @@ lib/zernio-sdk/models/telegram_platform_data.rb
 lib/zernio-sdk/models/test_webhook_request.rb
 lib/zernio-sdk/models/threads_platform_data.rb
 lib/zernio-sdk/models/tik_tok_platform_data.rb
+lib/zernio-sdk/models/trigger_ads_initial_sync202_response.rb
+lib/zernio-sdk/models/trigger_ads_initial_sync_request.rb
 lib/zernio-sdk/models/twitter_platform_data.rb
 lib/zernio-sdk/models/twitter_platform_data_poll.rb
 lib/zernio-sdk/models/twitter_platform_data_thread_items_inner.rb
@@ -1573,6 +1582,7 @@ lib/zernio-sdk/models/update_ad_campaign_status200_response.rb
 lib/zernio-sdk/models/update_ad_campaign_status_request.rb
 lib/zernio-sdk/models/update_ad_request.rb
 lib/zernio-sdk/models/update_ad_request_budget.rb
+lib/zernio-sdk/models/update_ad_request_creative.rb
 lib/zernio-sdk/models/update_ad_request_targeting.rb
 lib/zernio-sdk/models/update_ad_request_targeting_interests_inner.rb
 lib/zernio-sdk/models/update_ad_set200_response.rb
@@ -1840,6 +1850,7 @@ spec/models/bulk_update_ad_campaign_status_request_spec.rb
 spec/models/bulk_upload_posts200_response_errors_inner_spec.rb
 spec/models/bulk_upload_posts200_response_spec.rb
 spec/models/bulk_upload_posts429_response_spec.rb
+spec/models/business_center_spec.rb
 spec/models/cancel_broadcast200_response_broadcast_spec.rb
 spec/models/cancel_broadcast200_response_spec.rb
 spec/models/complete_telegram_connect200_response_spec.rb
@@ -2214,6 +2225,7 @@ spec/models/list_ad_audiences200_response_audiences_inner_spec.rb
 spec/models/list_ad_audiences200_response_spec.rb
 spec/models/list_ad_campaigns200_response_spec.rb
 spec/models/list_ads200_response_spec.rb
+spec/models/list_ads_business_centers200_response_spec.rb
 spec/models/list_api_keys200_response_spec.rb
 spec/models/list_broadcast_recipients200_response_recipients_inner_spec.rb
 spec/models/list_broadcast_recipients200_response_spec.rb
@@ -2415,6 +2427,8 @@ spec/models/telegram_platform_data_spec.rb
 spec/models/test_webhook_request_spec.rb
 spec/models/threads_platform_data_spec.rb
 spec/models/tik_tok_platform_data_spec.rb
+spec/models/trigger_ads_initial_sync202_response_spec.rb
+spec/models/trigger_ads_initial_sync_request_spec.rb
 spec/models/twitter_platform_data_poll_spec.rb
 spec/models/twitter_platform_data_spec.rb
 spec/models/twitter_platform_data_thread_items_inner_spec.rb
@@ -2434,6 +2448,7 @@ spec/models/update_ad_campaign_request_spec.rb
 spec/models/update_ad_campaign_status200_response_spec.rb
 spec/models/update_ad_campaign_status_request_spec.rb
 spec/models/update_ad_request_budget_spec.rb
+spec/models/update_ad_request_creative_spec.rb
 spec/models/update_ad_request_spec.rb
 spec/models/update_ad_request_targeting_interests_inner_spec.rb
 spec/models/update_ad_request_targeting_spec.rb

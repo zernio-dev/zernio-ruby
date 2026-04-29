@@ -20,6 +20,7 @@
 | **currency** | **String** | ISO 4217 currency code (e.g. USD, EUR, CLP, JPY) for all budget amounts in this campaign node. Budgets are NOT normalized to USD. | [optional] |
 | **metrics** | [**AdMetrics**](AdMetrics.md) |  | [optional] |
 | **platform_ad_account_id** | **String** |  | [optional] |
+| **platform_ad_account_name** | **String** | Human-readable advertiser/account name from the platform. Refreshed on every sync. | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **profile_id** | **String** |  | [optional] |
 | **platform_objective** | **String** | Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC) | [optional] |
@@ -52,6 +53,7 @@ instance = Zernio::AdTreeCampaign.new(
   currency: null,
   metrics: null,
   platform_ad_account_id: null,
+  platform_ad_account_name: null,
   account_id: null,
   profile_id: null,
   platform_objective: null,

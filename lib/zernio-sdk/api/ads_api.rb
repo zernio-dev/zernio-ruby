@@ -502,6 +502,8 @@ module Zernio
     # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok's `/advertiser/info/` endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time `advertiser_ids` list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id Filter response to a single platform ad account ID (e.g. &#x60;act_123&#x60; for Meta, advertiser_id for TikTok). Returns at most one item.
+    # @option opts [Integer] :limit Clamp the returned &#x60;accounts[]&#x60; length. Useful for typeahead pickers on agency tokens with hundreds of advertisers.
     # @return [ListAdAccounts200Response]
     def list_ad_accounts(account_id, opts = {})
       data, _status_code, _headers = list_ad_accounts_with_http_info(account_id, opts)
@@ -512,6 +514,8 @@ module Zernio
     # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok&#39;s &#x60;/advertiser/info/&#x60; endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time &#x60;advertiser_ids&#x60; list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id Filter response to a single platform ad account ID (e.g. &#x60;act_123&#x60; for Meta, advertiser_id for TikTok). Returns at most one item.
+    # @option opts [Integer] :limit Clamp the returned &#x60;accounts[]&#x60; length. Useful for typeahead pickers on agency tokens with hundreds of advertisers.
     # @return [Array<(ListAdAccounts200Response, Integer, Hash)>] ListAdAccounts200Response data, response status code and response headers
     def list_ad_accounts_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -521,12 +525,22 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_ad_accounts"
       end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_ad_accounts, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_ad_accounts, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/ads/accounts'
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -668,6 +682,70 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#list_ads\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List TikTok Business Centers
+    # Returns the TikTok Business Centers (BCs) the connected `tiktokads` account can read. Each BC reports its advertiser count so callers can build agency-style pickers without re-walking `/v1/ads/accounts` per BC.  TikTok-only. Solo advertisers (non-agency tokens) return an empty array. 
+    # @param account_id [String] ID of the &#x60;tiktokads&#x60; (or parent &#x60;tiktok&#x60; posting) SocialAccount
+    # @param [Hash] opts the optional parameters
+    # @return [ListAdsBusinessCenters200Response]
+    def list_ads_business_centers(account_id, opts = {})
+      data, _status_code, _headers = list_ads_business_centers_with_http_info(account_id, opts)
+      data
+    end
+
+    # List TikTok Business Centers
+    # Returns the TikTok Business Centers (BCs) the connected &#x60;tiktokads&#x60; account can read. Each BC reports its advertiser count so callers can build agency-style pickers without re-walking &#x60;/v1/ads/accounts&#x60; per BC.  TikTok-only. Solo advertisers (non-agency tokens) return an empty array. 
+    # @param account_id [String] ID of the &#x60;tiktokads&#x60; (or parent &#x60;tiktok&#x60; posting) SocialAccount
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListAdsBusinessCenters200Response, Integer, Hash)>] ListAdsBusinessCenters200Response data, response status code and response headers
+    def list_ads_business_centers_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_ads_business_centers ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_ads_business_centers"
+      end
+      # resource path
+      local_var_path = '/v1/ads/business-centers'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdsBusinessCenters200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_ads_business_centers",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_ads_business_centers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -942,8 +1020,76 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Re-sync an ads account
+    # Enqueue a full re-sync (discovery + 90-day metrics backfill) for one ads SocialAccount. Returns immediately with a trace ID; subscribe to the `account.ads.initial_sync_completed` webhook for completion.  Use this when: - the customer changed which TikTok Business Center / Meta ad account a   token can reach and wants Zernio to discover the new ads, - a previous sync errored out and the customer wants a clean retry, - the customer rotated permissions on the platform side.  Per-account 1h debounce: subsequent calls within an hour return `202` with `status: \"already_queued\"` and the prior trace ID. 
+    # @param trigger_ads_initial_sync_request [TriggerAdsInitialSyncRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [TriggerAdsInitialSync202Response]
+    def trigger_ads_initial_sync(trigger_ads_initial_sync_request, opts = {})
+      data, _status_code, _headers = trigger_ads_initial_sync_with_http_info(trigger_ads_initial_sync_request, opts)
+      data
+    end
+
+    # Re-sync an ads account
+    # Enqueue a full re-sync (discovery + 90-day metrics backfill) for one ads SocialAccount. Returns immediately with a trace ID; subscribe to the &#x60;account.ads.initial_sync_completed&#x60; webhook for completion.  Use this when: - the customer changed which TikTok Business Center / Meta ad account a   token can reach and wants Zernio to discover the new ads, - a previous sync errored out and the customer wants a clean retry, - the customer rotated permissions on the platform side.  Per-account 1h debounce: subsequent calls within an hour return &#x60;202&#x60; with &#x60;status: \&quot;already_queued\&quot;&#x60; and the prior trace ID. 
+    # @param trigger_ads_initial_sync_request [TriggerAdsInitialSyncRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(TriggerAdsInitialSync202Response, Integer, Hash)>] TriggerAdsInitialSync202Response data, response status code and response headers
+    def trigger_ads_initial_sync_with_http_info(trigger_ads_initial_sync_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.trigger_ads_initial_sync ...'
+      end
+      # verify the required parameter 'trigger_ads_initial_sync_request' is set
+      if @api_client.config.client_side_validation && trigger_ads_initial_sync_request.nil?
+        fail ArgumentError, "Missing the required parameter 'trigger_ads_initial_sync_request' when calling AdsApi.trigger_ads_initial_sync"
+      end
+      # resource path
+      local_var_path = '/v1/ads/sync/initial'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(trigger_ads_initial_sync_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'TriggerAdsInitialSync202Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.trigger_ads_initial_sync",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#trigger_ads_initial_sync\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update ad
-    # Update one or more fields on an ad. Status changes and budget updates are propagated to the platform. Targeting updates are Meta-only.
+    # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via `/v2/adgroup/update/`), and creative   (via `/v2/ad/update/` patch-style — `headline` is ignored, `body` becomes `ad_text`). - **Pinterest / X / LinkedIn / Google**: status + budget only. Sending `targeting`   or `creative` returns 501 with code `unsupported_platform_operation`. 
     # @param ad_id [String] 
     # @param update_ad_request [UpdateAdRequest] 
     # @param [Hash] opts the optional parameters
@@ -954,7 +1100,7 @@ module Zernio
     end
 
     # Update ad
-    # Update one or more fields on an ad. Status changes and budget updates are propagated to the platform. Targeting updates are Meta-only.
+    # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via &#x60;/v2/adgroup/update/&#x60;), and creative   (via &#x60;/v2/ad/update/&#x60; patch-style — &#x60;headline&#x60; is ignored, &#x60;body&#x60; becomes &#x60;ad_text&#x60;). - **Pinterest / X / LinkedIn / Google**: status + budget only. Sending &#x60;targeting&#x60;   or &#x60;creative&#x60; returns 501 with code &#x60;unsupported_platform_operation&#x60;. 
     # @param ad_id [String] 
     # @param update_ad_request [UpdateAdRequest] 
     # @param [Hash] opts the optional parameters
