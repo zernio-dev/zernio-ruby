@@ -678,8 +678,6 @@ docs/TelegramPlatformData.md
 docs/TestWebhookRequest.md
 docs/ThreadsPlatformData.md
 docs/TikTokPlatformData.md
-docs/TriggerAdsInitialSync202Response.md
-docs/TriggerAdsInitialSyncRequest.md
 docs/TwitterEngagementApi.md
 docs/TwitterPlatformData.md
 docs/TwitterPlatformDataPoll.md
@@ -1560,8 +1558,6 @@ lib/zernio-sdk/models/telegram_platform_data.rb
 lib/zernio-sdk/models/test_webhook_request.rb
 lib/zernio-sdk/models/threads_platform_data.rb
 lib/zernio-sdk/models/tik_tok_platform_data.rb
-lib/zernio-sdk/models/trigger_ads_initial_sync202_response.rb
-lib/zernio-sdk/models/trigger_ads_initial_sync_request.rb
 lib/zernio-sdk/models/twitter_platform_data.rb
 lib/zernio-sdk/models/twitter_platform_data_poll.rb
 lib/zernio-sdk/models/twitter_platform_data_thread_items_inner.rb
@@ -2427,8 +2423,6 @@ spec/models/telegram_platform_data_spec.rb
 spec/models/test_webhook_request_spec.rb
 spec/models/threads_platform_data_spec.rb
 spec/models/tik_tok_platform_data_spec.rb
-spec/models/trigger_ads_initial_sync202_response_spec.rb
-spec/models/trigger_ads_initial_sync_request_spec.rb
 spec/models/twitter_platform_data_poll_spec.rb
 spec/models/twitter_platform_data_spec.rb
 spec/models/twitter_platform_data_thread_items_inner_spec.rb

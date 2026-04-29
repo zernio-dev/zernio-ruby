@@ -18,7 +18,6 @@ All URIs are relative to *https://zernio.com/api*
 | [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests |
 | [**send_conversions**](AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform |
 | [**send_whats_app_conversion**](AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
-| [**trigger_ads_initial_sync**](AdsApi.md#trigger_ads_initial_sync) | **POST** /v1/ads/sync/initial | Re-sync an ads account |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 
 
@@ -1021,75 +1020,6 @@ end
 ### Return type
 
 [**SendWhatsAppConversion200Response**](SendWhatsAppConversion200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## trigger_ads_initial_sync
-
-> <TriggerAdsInitialSync202Response> trigger_ads_initial_sync(trigger_ads_initial_sync_request)
-
-Re-sync an ads account
-
-Enqueue a full re-sync (discovery + 90-day metrics backfill) for one ads SocialAccount. Returns immediately with a trace ID; subscribe to the `account.ads.initial_sync_completed` webhook for completion.  Use this when: - the customer changed which TikTok Business Center / Meta ad account a   token can reach and wants Zernio to discover the new ads, - a previous sync errored out and the customer wants a clean retry, - the customer rotated permissions on the platform side.  Per-account 1h debounce: subsequent calls within an hour return `202` with `status: \"already_queued\"` and the prior trace ID. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::AdsApi.new
-trigger_ads_initial_sync_request = Zernio::TriggerAdsInitialSyncRequest.new({account_id: 'account_id_example'}) # TriggerAdsInitialSyncRequest | 
-
-begin
-  # Re-sync an ads account
-  result = api_instance.trigger_ads_initial_sync(trigger_ads_initial_sync_request)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling AdsApi->trigger_ads_initial_sync: #{e}"
-end
-```
-
-#### Using the trigger_ads_initial_sync_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<TriggerAdsInitialSync202Response>, Integer, Hash)> trigger_ads_initial_sync_with_http_info(trigger_ads_initial_sync_request)
-
-```ruby
-begin
-  # Re-sync an ads account
-  data, status_code, headers = api_instance.trigger_ads_initial_sync_with_http_info(trigger_ads_initial_sync_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <TriggerAdsInitialSync202Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling AdsApi->trigger_ads_initial_sync_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **trigger_ads_initial_sync_request** | [**TriggerAdsInitialSyncRequest**](TriggerAdsInitialSyncRequest.md) |  |  |
-
-### Return type
-
-[**TriggerAdsInitialSync202Response**](TriggerAdsInitialSync202Response.md)
 
 ### Authorization
 

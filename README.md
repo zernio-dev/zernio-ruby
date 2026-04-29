@@ -117,7 +117,6 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
-*Zernio::AdsApi* | [**trigger_ads_initial_sync**](docs/AdsApi.md#trigger_ads_initial_sync) | **POST** /v1/ads/sync/initial | Re-sync an ads account
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Zernio::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
@@ -979,8 +978,6 @@ Class | Method | HTTP request | Description
  - [Zernio::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Zernio::ThreadsPlatformData](docs/ThreadsPlatformData.md)
  - [Zernio::TikTokPlatformData](docs/TikTokPlatformData.md)
- - [Zernio::TriggerAdsInitialSync202Response](docs/TriggerAdsInitialSync202Response.md)
- - [Zernio::TriggerAdsInitialSyncRequest](docs/TriggerAdsInitialSyncRequest.md)
  - [Zernio::TwitterPlatformData](docs/TwitterPlatformData.md)
  - [Zernio::TwitterPlatformDataPoll](docs/TwitterPlatformDataPoll.md)
  - [Zernio::TwitterPlatformDataThreadItemsInner](docs/TwitterPlatformDataThreadItemsInner.md)
