@@ -884,6 +884,106 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Search geo targeting locations (Meta)
+    # Resolve a human-readable location name into Meta's opaque `key` used in `targeting.cities[]` / `targeting.regions[]` on `POST /v1/ads/create` (and the same fields under `targeting.geo_locations` on `POST /v1/ads/boost`). Wraps Meta's `/search?type=adgeolocation` endpoint.  Meta-only for now. Other platforms have their own location id systems and are not exposed here.  Per Meta's docs, `q` must contain only the locality name (e.g. `\"Amsterdam\"`, not `\"Amsterdam, NL\"`). Use `countryCode` to disambiguate when the same name exists in multiple countries. 
+    # @param account_id [String] Social account ID (must be a connected Facebook or Instagram account).
+    # @param q [String] Location name. Locality only — no region/country suffix.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :type Type of location to search. Defaults to city. (default to 'city')
+    # @option opts [String] :country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope the search.
+    # @option opts [Integer] :limit Maximum results to return. (default to 25)
+    # @return [SearchAdTargetingLocations200Response]
+    def search_ad_targeting_locations(account_id, q, opts = {})
+      data, _status_code, _headers = search_ad_targeting_locations_with_http_info(account_id, q, opts)
+      data
+    end
+
+    # Search geo targeting locations (Meta)
+    # Resolve a human-readable location name into Meta&#39;s opaque &#x60;key&#x60; used in &#x60;targeting.cities[]&#x60; / &#x60;targeting.regions[]&#x60; on &#x60;POST /v1/ads/create&#x60; (and the same fields under &#x60;targeting.geo_locations&#x60; on &#x60;POST /v1/ads/boost&#x60;). Wraps Meta&#39;s &#x60;/search?type&#x3D;adgeolocation&#x60; endpoint.  Meta-only for now. Other platforms have their own location id systems and are not exposed here.  Per Meta&#39;s docs, &#x60;q&#x60; must contain only the locality name (e.g. &#x60;\&quot;Amsterdam\&quot;&#x60;, not &#x60;\&quot;Amsterdam, NL\&quot;&#x60;). Use &#x60;countryCode&#x60; to disambiguate when the same name exists in multiple countries. 
+    # @param account_id [String] Social account ID (must be a connected Facebook or Instagram account).
+    # @param q [String] Location name. Locality only — no region/country suffix.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :type Type of location to search. Defaults to city. (default to 'city')
+    # @option opts [String] :country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope the search.
+    # @option opts [Integer] :limit Maximum results to return. (default to 25)
+    # @return [Array<(SearchAdTargetingLocations200Response, Integer, Hash)>] SearchAdTargetingLocations200Response data, response status code and response headers
+    def search_ad_targeting_locations_with_http_info(account_id, q, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.search_ad_targeting_locations ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.search_ad_targeting_locations"
+      end
+      # verify the required parameter 'q' is set
+      if @api_client.config.client_side_validation && q.nil?
+        fail ArgumentError, "Missing the required parameter 'q' when calling AdsApi.search_ad_targeting_locations"
+      end
+      allowable_values = ["country", "region", "city", "subcity", "neighborhood", "zip", "metro_area", "geo_market"]
+      if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
+        fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'country_code'].nil? && opts[:'country_code'].to_s.length > 2
+        fail ArgumentError, 'invalid value for "opts[:"country_code"]" when calling AdsApi.search_ad_targeting_locations, the character length must be smaller than or equal to 2.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'country_code'].nil? && opts[:'country_code'].to_s.length < 2
+        fail ArgumentError, 'invalid value for "opts[:"country_code"]" when calling AdsApi.search_ad_targeting_locations, the character length must be greater than or equal to 2.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.search_ad_targeting_locations, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.search_ad_targeting_locations, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/targeting/search'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'q'] = q
+      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
+      query_params[:'countryCode'] = opts[:'country_code'] if !opts[:'country_code'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SearchAdTargetingLocations200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.search_ad_targeting_locations",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#search_ad_targeting_locations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Send conversion events to an ad platform
     # Relay one or more conversion events to the target ad platform's native Conversions API. Supported platforms: Meta (metaads) via Graph API, Google Ads (googleads) via Data Manager API `ingestEvents`.  Platform is inferred from the provided `accountId`. `destinationId` semantics differ per platform: - Meta: pixel (dataset) ID, e.g. \"123456789012345\" - Google: conversion action resource name, e.g.   \"customers/1234567890/conversionActions/987654321\"  Callers can list valid destinations via `GET /v1/accounts/{accountId}/conversion-destinations`.  All PII (email, phone, names, external IDs) is hashed with SHA-256 server-side per each platform's normalization spec (including Google's Gmail-specific dot/plus-suffix stripping). Send plaintext.  Requires the Ads add-on.  Batching: Meta caps at 1000 events per request and rejects the entire batch if any event is malformed. Google caps at 2000. Both are handled automatically by chunking.  Dedup: pass a stable `eventId` on every event. Meta uses it to dedupe against pixel events; Google maps it to transactionId. 
     # @param send_conversions_request [SendConversionsRequest] 

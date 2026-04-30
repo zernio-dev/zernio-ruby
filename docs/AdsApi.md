@@ -16,6 +16,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ads_business_centers**](AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
 | [**list_conversion_destinations**](AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API |
 | [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests |
+| [**search_ad_targeting_locations**](AdsApi.md#search_ad_targeting_locations) | **GET** /v1/ads/targeting/search | Search geo targeting locations (Meta) |
 | [**send_conversions**](AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform |
 | [**send_whats_app_conversion**](AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
@@ -882,6 +883,85 @@ end
 ### Return type
 
 [**SearchAdInterests200Response**](SearchAdInterests200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## search_ad_targeting_locations
+
+> <SearchAdTargetingLocations200Response> search_ad_targeting_locations(account_id, q, opts)
+
+Search geo targeting locations (Meta)
+
+Resolve a human-readable location name into Meta's opaque `key` used in `targeting.cities[]` / `targeting.regions[]` on `POST /v1/ads/create` (and the same fields under `targeting.geo_locations` on `POST /v1/ads/boost`). Wraps Meta's `/search?type=adgeolocation` endpoint.  Meta-only for now. Other platforms have their own location id systems and are not exposed here.  Per Meta's docs, `q` must contain only the locality name (e.g. `\"Amsterdam\"`, not `\"Amsterdam, NL\"`). Use `countryCode` to disambiguate when the same name exists in multiple countries. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Social account ID (must be a connected Facebook or Instagram account).
+q = 'q_example' # String | Location name. Locality only — no region/country suffix.
+opts = {
+  type: 'country', # String | Type of location to search. Defaults to city.
+  country_code: 'country_code_example', # String | ISO 3166-1 alpha-2 country code (e.g. NL) to scope the search.
+  limit: 56 # Integer | Maximum results to return.
+}
+
+begin
+  # Search geo targeting locations (Meta)
+  result = api_instance.search_ad_targeting_locations(account_id, q, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->search_ad_targeting_locations: #{e}"
+end
+```
+
+#### Using the search_ad_targeting_locations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchAdTargetingLocations200Response>, Integer, Hash)> search_ad_targeting_locations_with_http_info(account_id, q, opts)
+
+```ruby
+begin
+  # Search geo targeting locations (Meta)
+  data, status_code, headers = api_instance.search_ad_targeting_locations_with_http_info(account_id, q, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchAdTargetingLocations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->search_ad_targeting_locations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Social account ID (must be a connected Facebook or Instagram account). |  |
+| **q** | **String** | Location name. Locality only — no region/country suffix. |  |
+| **type** | **String** | Type of location to search. Defaults to city. | [optional][default to &#39;city&#39;] |
+| **country_code** | **String** | ISO 3166-1 alpha-2 country code (e.g. NL) to scope the search. | [optional] |
+| **limit** | **Integer** | Maximum results to return. | [optional][default to 25] |
+
+### Return type
+
+[**SearchAdTargetingLocations200Response**](SearchAdTargetingLocations200Response.md)
 
 ### Authorization
 

@@ -66,7 +66,14 @@ module Zernio
     # Pinterest only. Board ID (auto-creates if not provided).
     attr_accessor :board_id
 
+    # ISO 3166-1 alpha-2 country codes (e.g. ['NL']). Defaults to ['US'] when no `cities` or `regions` are provided.
     attr_accessor :countries
+
+    # Meta-only. City-level geo targeting. Each city is targeted by Meta's opaque `key` (the city ID) which can be looked up via `GET /v1/ads/targeting/search?type=city&q=<name>&country_code=<ISO>`. Optional `radius` + `distance_unit` extend the targeting beyond the city limits (e.g. radius 25 km around the city center). Both must be set together, or both omitted (Meta defaults to ~16 km when omitted).  Cannot overlap with the same country in `countries` (Meta returns a \"locations overlap\" error). Either drop the country or scope it to a different country. 
+    attr_accessor :cities
+
+    # Meta-only. Region-level (state/province) geo targeting. Each region is targeted by Meta's opaque `key` (the region ID) which can be looked up via `GET /v1/ads/targeting/search?type=region&q=<name>&country_code=<ISO>`. 
+    attr_accessor :regions
 
     attr_accessor :age_min
 
@@ -161,6 +168,8 @@ module Zernio
         :'business_name' => :'businessName',
         :'board_id' => :'boardId',
         :'countries' => :'countries',
+        :'cities' => :'cities',
+        :'regions' => :'regions',
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
         :'interests' => :'interests',
@@ -214,6 +223,8 @@ module Zernio
         :'business_name' => :'String',
         :'board_id' => :'String',
         :'countries' => :'Array<String>',
+        :'cities' => :'Array<CreateStandaloneAdRequestCitiesInner>',
+        :'regions' => :'Array<CreateStandaloneAdRequestRegionsInner>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>',
@@ -343,6 +354,18 @@ module Zernio
       if attributes.key?(:'countries')
         if (value = attributes[:'countries']).is_a?(Array)
           self.countries = value
+        end
+      end
+
+      if attributes.key?(:'cities')
+        if (value = attributes[:'cities']).is_a?(Array)
+          self.cities = value
+        end
+      end
+
+      if attributes.key?(:'regions')
+        if (value = attributes[:'regions']).is_a?(Array)
+          self.regions = value
         end
       end
 
@@ -744,6 +767,8 @@ module Zernio
           business_name == o.business_name &&
           board_id == o.board_id &&
           countries == o.countries &&
+          cities == o.cities &&
+          regions == o.regions &&
           age_min == o.age_min &&
           age_max == o.age_max &&
           interests == o.interests &&
@@ -772,7 +797,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, cities, regions, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, promoted_object].hash
     end
 
     # Builds the object from hash
