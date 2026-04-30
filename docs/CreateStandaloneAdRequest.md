@@ -7,7 +7,7 @@
 | **account_id** | **String** |  |  |
 | **ad_account_id** | **String** |  |  |
 | **name** | **String** |  |  |
-| **goal** | **String** | Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform. | [optional] |
+| **goal** | **String** | Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform. Meta-specific: &#x60;conversions&#x60; requires &#x60;promotedObject.pixelId&#x60; + &#x60;promotedObject.customEventType&#x60;; &#x60;app_promotion&#x60; requires &#x60;promotedObject.applicationId&#x60; + &#x60;promotedObject.objectStoreUrl&#x60;; &#x60;lead_generation&#x60; accepts an optional &#x60;promotedObject.pageId&#x60; (auto-filled from the connected Page when omitted). | [optional] |
 | **budget_amount** | **Float** | Required on legacy + multi-creative shapes. Inherited on attach. | [optional] |
 | **budget_type** | **String** | Required on legacy + multi-creative shapes. Inherited on attach. | [optional] |
 | **currency** | **String** |  | [optional] |
@@ -40,6 +40,7 @@
 | **roas_average_floor** | **Float** | Minimum ROAS as a decimal multiplier (e.g. 2.0 &#x3D; 2.0x ROAS). Required when &#x60;bidStrategy&#x60; is &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60;. Sent to Meta as &#x60;bid_constraints.roas_average_floor&#x60; × 10000.  | [optional] |
 | **dsa_beneficiary** | **String** | Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states.  | [optional] |
 | **dsa_payor** | **String** | Name of the legal entity paying for the ad. Required by Meta when targeting EU users (DSA Article 26). Note Meta API spelling: dsa_payor (not dsa_payer).  | [optional] |
+| **promoted_object** | [**CreateStandaloneAdRequestPromotedObject**](CreateStandaloneAdRequestPromotedObject.md) |  | [optional] |
 
 ## Example
 
@@ -82,7 +83,8 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   bid_amount: null,
   roas_average_floor: null,
   dsa_beneficiary: null,
-  dsa_payor: null
+  dsa_payor: null,
+  promoted_object: null
 )
 ```
 

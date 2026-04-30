@@ -21,7 +21,7 @@ module Zernio
 
     attr_accessor :name
 
-    # Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform.
+    # Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform. Meta-specific: `conversions` requires `promotedObject.pixelId` + `promotedObject.customEventType`; `app_promotion` requires `promotedObject.applicationId` + `promotedObject.objectStoreUrl`; `lead_generation` accepts an optional `promotedObject.pageId` (auto-filled from the connected Page when omitted).
     attr_accessor :goal
 
     # Required on legacy + multi-creative shapes. Inherited on attach.
@@ -114,6 +114,8 @@ module Zernio
     # Name of the legal entity paying for the ad. Required by Meta when targeting EU users (DSA Article 26). Note Meta API spelling: dsa_payor (not dsa_payer). 
     attr_accessor :dsa_payor
 
+    attr_accessor :promoted_object
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -174,7 +176,8 @@ module Zernio
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
         :'dsa_beneficiary' => :'dsaBeneficiary',
-        :'dsa_payor' => :'dsaPayor'
+        :'dsa_payor' => :'dsaPayor',
+        :'promoted_object' => :'promotedObject'
       }
     end
 
@@ -226,7 +229,8 @@ module Zernio
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
         :'dsa_beneficiary' => :'String',
-        :'dsa_payor' => :'String'
+        :'dsa_payor' => :'String',
+        :'promoted_object' => :'CreateStandaloneAdRequestPromotedObject'
       }
     end
 
@@ -416,6 +420,10 @@ module Zernio
 
       if attributes.key?(:'dsa_payor')
         self.dsa_payor = attributes[:'dsa_payor']
+      end
+
+      if attributes.key?(:'promoted_object')
+        self.promoted_object = attributes[:'promoted_object']
       end
     end
 
@@ -751,7 +759,8 @@ module Zernio
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
           dsa_beneficiary == o.dsa_beneficiary &&
-          dsa_payor == o.dsa_payor
+          dsa_payor == o.dsa_payor &&
+          promoted_object == o.promoted_object
     end
 
     # @see the `==` method
@@ -763,7 +772,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, promoted_object].hash
     end
 
     # Builds the object from hash

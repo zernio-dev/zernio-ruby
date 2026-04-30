@@ -480,6 +480,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestCreativesInner](docs/CreateStandaloneAdRequestCreativesInner.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInnerVideo](docs/CreateStandaloneAdRequestCreativesInnerVideo.md)
  - [Zernio::CreateStandaloneAdRequestImages](docs/CreateStandaloneAdRequestImages.md)
+ - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
  - [Zernio::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
  - [Zernio::CreateWhatsAppFlow200Response](docs/CreateWhatsAppFlow200Response.md)
