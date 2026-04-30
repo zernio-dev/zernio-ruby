@@ -141,6 +141,7 @@ api_instance = Zernio::AnalyticsApi.new
 opts = {
   platform: 'platform_example', # String | Filter by platform (e.g. \"instagram\", \"tiktok\"). Omit for all platforms.
   profile_id: 'profile_id_example', # String | Filter by profile ID. Omit for all profiles.
+  account_id: 'account_id_example', # String | Filter by social account ID. Omit for all accounts.
   source: 'all' # String | Filter by post origin. \"late\" for posts published via Zernio, \"external\" for posts imported from platforms.
 }
 
@@ -177,6 +178,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** | Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms. | [optional] |
 | **profile_id** | **String** | Filter by profile ID. Omit for all profiles. | [optional] |
+| **account_id** | **String** | Filter by social account ID. Omit for all accounts. | [optional] |
 | **source** | **String** | Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. | [optional][default to &#39;all&#39;] |
 
 ### Return type
@@ -216,6 +218,7 @@ api_instance = Zernio::AnalyticsApi.new
 opts = {
   platform: 'platform_example', # String | Filter by platform (e.g. \"instagram\", \"tiktok\"). Omit for all platforms.
   profile_id: 'profile_id_example', # String | Filter by profile ID. Omit for all profiles.
+  account_id: 'account_id_example', # String | Filter by social account ID. Omit for all accounts.
   source: 'all' # String | Filter by post origin. \"late\" for posts published via Zernio, \"external\" for posts imported from platforms.
 }
 
@@ -252,6 +255,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** | Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms. | [optional] |
 | **profile_id** | **String** | Filter by profile ID. Omit for all profiles. | [optional] |
+| **account_id** | **String** | Filter by social account ID. Omit for all accounts. | [optional] |
 | **source** | **String** | Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. | [optional][default to &#39;all&#39;] |
 
 ### Return type
@@ -1300,6 +1304,7 @@ api_instance = Zernio::AnalyticsApi.new
 opts = {
   platform: 'platform_example', # String | Filter by platform (e.g. \"instagram\", \"tiktok\"). Omit for all platforms.
   profile_id: 'profile_id_example', # String | Filter by profile ID. Omit for all profiles.
+  account_id: 'account_id_example', # String | Filter by social account ID. Omit for all accounts.
   source: 'all' # String | Filter by post origin. \"late\" for posts published via Zernio, \"external\" for posts imported from platforms.
 }
 
@@ -1336,6 +1341,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** | Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms. | [optional] |
 | **profile_id** | **String** | Filter by profile ID. Omit for all profiles. | [optional] |
+| **account_id** | **String** | Filter by social account ID. Omit for all accounts. | [optional] |
 | **source** | **String** | Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. | [optional][default to &#39;all&#39;] |
 
 ### Return type

@@ -138,6 +138,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
     # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+    # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
     # @return [GetBestTimeToPost200Response]
     def get_best_time_to_post(opts = {})
@@ -150,6 +151,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
     # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+    # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
     # @return [Array<(GetBestTimeToPost200Response, Integer, Hash)>] GetBestTimeToPost200Response data, response status code and response headers
     def get_best_time_to_post_with_http_info(opts = {})
@@ -167,6 +169,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'source'] = opts[:'source'] if !opts[:'source'].nil?
 
       # header parameters
@@ -208,6 +211,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
     # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+    # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
     # @return [GetContentDecay200Response]
     def get_content_decay(opts = {})
@@ -220,6 +224,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
     # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+    # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
     # @return [Array<(GetContentDecay200Response, Integer, Hash)>] GetContentDecay200Response data, response status code and response headers
     def get_content_decay_with_http_info(opts = {})
@@ -237,6 +242,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'source'] = opts[:'source'] if !opts[:'source'].nil?
 
       # header parameters
@@ -1293,6 +1299,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
     # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+    # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
     # @return [GetPostingFrequency200Response]
     def get_posting_frequency(opts = {})
@@ -1305,6 +1312,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
     # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+    # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
     # @return [Array<(GetPostingFrequency200Response, Integer, Hash)>] GetPostingFrequency200Response data, response status code and response headers
     def get_posting_frequency_with_http_info(opts = {})
@@ -1322,6 +1330,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'source'] = opts[:'source'] if !opts[:'source'].nil?
 
       # header parameters

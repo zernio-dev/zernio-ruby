@@ -60,6 +60,7 @@ describe 'AnalyticsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
   # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+  # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
   # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms.
   # @return [GetBestTimeToPost200Response]
   describe 'get_best_time_to_post test' do
@@ -74,6 +75,7 @@ describe 'AnalyticsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
   # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+  # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
   # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms.
   # @return [GetContentDecay200Response]
   describe 'get_content_decay test' do
@@ -288,6 +290,7 @@ describe 'AnalyticsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :platform Filter by platform (e.g. \&quot;instagram\&quot;, \&quot;tiktok\&quot;). Omit for all platforms.
   # @option opts [String] :profile_id Filter by profile ID. Omit for all profiles.
+  # @option opts [String] :account_id Filter by social account ID. Omit for all accounts.
   # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms.
   # @return [GetPostingFrequency200Response]
   describe 'get_posting_frequency test' do
