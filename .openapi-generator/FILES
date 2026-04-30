@@ -83,6 +83,8 @@ docs/CancelBroadcast200ResponseBroadcast.md
 docs/CommentAutomationsApi.md
 docs/CommentsApi.md
 docs/CompleteTelegramConnect200Response.md
+docs/ConfigureTikTokAdsBrandIdentity200Response.md
+docs/ConfigureTikTokAdsBrandIdentityRequest.md
 docs/ConnectAds200Response.md
 docs/ConnectAds200ResponseOneOf.md
 docs/ConnectAds200ResponseOneOf1.md
@@ -157,6 +159,7 @@ docs/CreateStandaloneAd201Response.md
 docs/CreateStandaloneAd201ResponseOneOf.md
 docs/CreateStandaloneAd201ResponseOneOf1.md
 docs/CreateStandaloneAdRequest.md
+docs/CreateStandaloneAdRequestBrandIdentity.md
 docs/CreateStandaloneAdRequestCitiesInner.md
 docs/CreateStandaloneAdRequestCreativesInner.md
 docs/CreateStandaloneAdRequestCreativesInnerVideo.md
@@ -991,6 +994,8 @@ lib/zernio-sdk/models/business_center.rb
 lib/zernio-sdk/models/cancel_broadcast200_response.rb
 lib/zernio-sdk/models/cancel_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/complete_telegram_connect200_response.rb
+lib/zernio-sdk/models/configure_tik_tok_ads_brand_identity200_response.rb
+lib/zernio-sdk/models/configure_tik_tok_ads_brand_identity_request.rb
 lib/zernio-sdk/models/connect_ads200_response.rb
 lib/zernio-sdk/models/connect_ads200_response_one_of.rb
 lib/zernio-sdk/models/connect_ads200_response_one_of1.rb
@@ -1063,6 +1068,7 @@ lib/zernio-sdk/models/create_standalone_ad201_response.rb
 lib/zernio-sdk/models/create_standalone_ad201_response_one_of.rb
 lib/zernio-sdk/models/create_standalone_ad201_response_one_of1.rb
 lib/zernio-sdk/models/create_standalone_ad_request.rb
+lib/zernio-sdk/models/create_standalone_ad_request_brand_identity.rb
 lib/zernio-sdk/models/create_standalone_ad_request_cities_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner_video.rb
@@ -1862,6 +1868,8 @@ spec/models/business_center_spec.rb
 spec/models/cancel_broadcast200_response_broadcast_spec.rb
 spec/models/cancel_broadcast200_response_spec.rb
 spec/models/complete_telegram_connect200_response_spec.rb
+spec/models/configure_tik_tok_ads_brand_identity200_response_spec.rb
+spec/models/configure_tik_tok_ads_brand_identity_request_spec.rb
 spec/models/connect_ads200_response_one_of1_spec.rb
 spec/models/connect_ads200_response_one_of_spec.rb
 spec/models/connect_ads200_response_spec.rb
@@ -1933,6 +1941,7 @@ spec/models/create_sequence_request_steps_inner_template_variable_mapping_value_
 spec/models/create_standalone_ad201_response_one_of1_spec.rb
 spec/models/create_standalone_ad201_response_one_of_spec.rb
 spec/models/create_standalone_ad201_response_spec.rb
+spec/models/create_standalone_ad_request_brand_identity_spec.rb
 spec/models/create_standalone_ad_request_cities_inner_spec.rb
 spec/models/create_standalone_ad_request_creatives_inner_spec.rb
 spec/models/create_standalone_ad_request_creatives_inner_video_spec.rb

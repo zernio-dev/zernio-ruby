@@ -121,6 +121,11 @@ module Zernio
     # Name of the legal entity paying for the ad. Required by Meta when targeting EU users (DSA Article 26). Note Meta API spelling: dsa_payor (not dsa_payer). 
     attr_accessor :dsa_payor
 
+    attr_accessor :brand_identity
+
+    # TikTok only. Forces the identity attribution on the ad:    - `TT_USER`: the posting account's open_id (real @username     branding). Requires a connected TikTok posting account     on the same profile.   - `CUSTOMIZED_USER`: synthetic Brand Identity (display     name + avatar). Requires a configured Brand Identity     (cached on the `tiktokads` SocialAccount via     `PATCH /v1/connect/tiktok-ads`) or an inline     `brandIdentity` to create one on the fly.  When omitted, defaults to `TT_USER` if a posting account is connected on this profile, else `CUSTOMIZED_USER`. Spark Ads (`POST /v1/ads/boost`) always use `TT_USER` regardless of this field — TikTok requires the original organic post's author identity for Spark. 
+    attr_accessor :identity_type
+
     attr_accessor :promoted_object
 
     class EnumAttributeValidator
@@ -186,6 +191,8 @@ module Zernio
         :'roas_average_floor' => :'roasAverageFloor',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor',
+        :'brand_identity' => :'brandIdentity',
+        :'identity_type' => :'identityType',
         :'promoted_object' => :'promotedObject'
       }
     end
@@ -241,6 +248,8 @@ module Zernio
         :'roas_average_floor' => :'Float',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String',
+        :'brand_identity' => :'CreateStandaloneAdRequestBrandIdentity',
+        :'identity_type' => :'String',
         :'promoted_object' => :'CreateStandaloneAdRequestPromotedObject'
       }
     end
@@ -445,6 +454,14 @@ module Zernio
         self.dsa_payor = attributes[:'dsa_payor']
       end
 
+      if attributes.key?(:'brand_identity')
+        self.brand_identity = attributes[:'brand_identity']
+      end
+
+      if attributes.key?(:'identity_type')
+        self.identity_type = attributes[:'identity_type']
+      end
+
       if attributes.key?(:'promoted_object')
         self.promoted_object = attributes[:'promoted_object']
       end
@@ -539,6 +556,8 @@ module Zernio
       return false unless gender_validator.valid?(@gender)
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
+      identity_type_validator = EnumAttributeValidator.new('String', ["TT_USER", "CUSTOMIZED_USER"])
+      return false unless identity_type_validator.valid?(@identity_type)
       true
     end
 
@@ -742,6 +761,16 @@ module Zernio
       @dsa_payor = dsa_payor
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] identity_type Object to be assigned
+    def identity_type=(identity_type)
+      validator = EnumAttributeValidator.new('String', ["TT_USER", "CUSTOMIZED_USER"])
+      unless validator.valid?(identity_type)
+        fail ArgumentError, "invalid value for \"identity_type\", must be one of #{validator.allowable_values}."
+      end
+      @identity_type = identity_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -785,6 +814,8 @@ module Zernio
           roas_average_floor == o.roas_average_floor &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor &&
+          brand_identity == o.brand_identity &&
+          identity_type == o.identity_type &&
           promoted_object == o.promoted_object
     end
 
@@ -797,7 +828,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, cities, regions, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, cities, regions, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

@@ -166,6 +166,7 @@ Class | Method | HTTP request | Description
 *Zernio::CommentsApi* | [**unhide_inbox_comment**](docs/CommentsApi.md#unhide_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment
 *Zernio::CommentsApi* | [**unlike_inbox_comment**](docs/CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
 *Zernio::ConnectApi* | [**complete_telegram_connect**](docs/ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status
+*Zernio::ConnectApi* | [**configure_tik_tok_ads_brand_identity**](docs/ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Configure TikTok Ads Brand Identity
 *Zernio::ConnectApi* | [**connect_ads**](docs/ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform
 *Zernio::ConnectApi* | [**connect_bluesky_credentials**](docs/ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account
 *Zernio::ConnectApi* | [**connect_whats_app_credentials**](docs/ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials
@@ -406,6 +407,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
  - [Zernio::CancelBroadcast200ResponseBroadcast](docs/CancelBroadcast200ResponseBroadcast.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
+ - [Zernio::ConfigureTikTokAdsBrandIdentity200Response](docs/ConfigureTikTokAdsBrandIdentity200Response.md)
+ - [Zernio::ConfigureTikTokAdsBrandIdentityRequest](docs/ConfigureTikTokAdsBrandIdentityRequest.md)
  - [Zernio::ConnectAds200Response](docs/ConnectAds200Response.md)
  - [Zernio::ConnectAds200ResponseOneOf](docs/ConnectAds200ResponseOneOf.md)
  - [Zernio::ConnectAds200ResponseOneOf1](docs/ConnectAds200ResponseOneOf1.md)
@@ -478,6 +481,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAd201ResponseOneOf](docs/CreateStandaloneAd201ResponseOneOf.md)
  - [Zernio::CreateStandaloneAd201ResponseOneOf1](docs/CreateStandaloneAd201ResponseOneOf1.md)
  - [Zernio::CreateStandaloneAdRequest](docs/CreateStandaloneAdRequest.md)
+ - [Zernio::CreateStandaloneAdRequestBrandIdentity](docs/CreateStandaloneAdRequestBrandIdentity.md)
  - [Zernio::CreateStandaloneAdRequestCitiesInner](docs/CreateStandaloneAdRequestCitiesInner.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInner](docs/CreateStandaloneAdRequestCreativesInner.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInnerVideo](docs/CreateStandaloneAdRequestCreativesInnerVideo.md)
