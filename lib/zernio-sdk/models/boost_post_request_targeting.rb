@@ -19,6 +19,7 @@ module Zernio
 
     attr_accessor :age_max
 
+    # ISO country codes. Required for TikTok boosts (TikTok's ad group requires location_ids); optional on other platforms.
     attr_accessor :countries
 
     # Interest objects from /v1/ads/interests. Each must include id and name.

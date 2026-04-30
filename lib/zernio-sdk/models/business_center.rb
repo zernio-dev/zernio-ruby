@@ -22,7 +22,7 @@ module Zernio
     # Display name set by the BC owner
     attr_accessor :name
 
-    # Number of advertisers (ad accounts) reachable under this BC for the calling token
+    # Number of advertisers reachable under this BC for the calling token. `null` when the BC asset walk returned empty or failed (typical for agency apps without full BC asset read scope) — distinct from `0`, which would imply the BC genuinely has no advertisers. 
     attr_accessor :advertiser_count
 
     # Attribute mapping from ruby-style variable name to JSON key.
