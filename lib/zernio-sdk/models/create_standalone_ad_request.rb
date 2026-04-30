@@ -41,7 +41,7 @@ module Zernio
     # Required on legacy + attach shapes. For X/Twitter this is the tweet text (max 280 chars including a ~24-char URL when `linkUrl` is set). Max: Google=90, Pinterest=500.
     attr_accessor :body
 
-    # Required on legacy + attach shapes. Meta only.
+    # Required on legacy + attach shapes for Meta. Honoured on TikTok too — passes through to the Spark Ad creative's `call_to_action`. Ignored by other platforms.
     attr_accessor :call_to_action
 
     # Required on legacy + attach shapes. Skip for multi-creative.
