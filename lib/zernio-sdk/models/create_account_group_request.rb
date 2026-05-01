@@ -17,12 +17,16 @@ module Zernio
   class CreateAccountGroupRequest < ApiModelBase
     attr_accessor :name
 
+    # ID of the profile this group belongs to. All accountIds must belong to this profile.
+    attr_accessor :profile_id
+
     attr_accessor :account_ids
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
+        :'profile_id' => :'profileId',
         :'account_ids' => :'accountIds'
       }
     end
@@ -41,6 +45,7 @@ module Zernio
     def self.openapi_types
       {
         :'name' => :'String',
+        :'profile_id' => :'String',
         :'account_ids' => :'Array<String>'
       }
     end
@@ -73,6 +78,12 @@ module Zernio
         self.name = nil
       end
 
+      if attributes.key?(:'profile_id')
+        self.profile_id = attributes[:'profile_id']
+      else
+        self.profile_id = nil
+      end
+
       if attributes.key?(:'account_ids')
         if (value = attributes[:'account_ids']).is_a?(Array)
           self.account_ids = value
@@ -91,6 +102,10 @@ module Zernio
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
+      if @profile_id.nil?
+        invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
+      end
+
       if @account_ids.nil?
         invalid_properties.push('invalid value for "account_ids", account_ids cannot be nil.')
       end
@@ -103,6 +118,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @name.nil?
+      return false if @profile_id.nil?
       return false if @account_ids.nil?
       true
     end
@@ -115,6 +131,16 @@ module Zernio
       end
 
       @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] profile_id Value to be assigned
+    def profile_id=(profile_id)
+      if profile_id.nil?
+        fail ArgumentError, 'profile_id cannot be nil'
+      end
+
+      @profile_id = profile_id
     end
 
     # Custom attribute writer method with validation
@@ -133,6 +159,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
+          profile_id == o.profile_id &&
           account_ids == o.account_ids
     end
 
@@ -145,7 +172,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, account_ids].hash
+      [name, profile_id, account_ids].hash
     end
 
     # Builds the object from hash

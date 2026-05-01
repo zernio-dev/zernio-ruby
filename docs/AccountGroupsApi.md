@@ -30,7 +30,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AccountGroupsApi.new
-create_account_group_request = Zernio::CreateAccountGroupRequest.new({name: 'name_example', account_ids: ['account_ids_example']}) # CreateAccountGroupRequest | 
+create_account_group_request = Zernio::CreateAccountGroupRequest.new({name: 'name_example', profile_id: 'profile_id_example', account_ids: ['account_ids_example']}) # CreateAccountGroupRequest | 
 
 begin
   # Create group
