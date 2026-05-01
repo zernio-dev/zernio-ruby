@@ -20,10 +20,10 @@ module Zernio
     # Instagram or Facebook account ID
     attr_accessor :account_id
 
-    # Platform media/post ID
+    # Platform media/post ID. Omit for an account-wide (any-post) automation.
     attr_accessor :platform_post_id
 
-    # Zernio post ID (optional)
+    # Zernio post ID. Required only when also targeting a specific post via platformPostId.
     attr_accessor :post_id
 
     # Post content snippet for display
@@ -143,8 +143,6 @@ module Zernio
 
       if attributes.key?(:'platform_post_id')
         self.platform_post_id = attributes[:'platform_post_id']
-      else
-        self.platform_post_id = nil
       end
 
       if attributes.key?(:'post_id')
@@ -197,10 +195,6 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
-      if @platform_post_id.nil?
-        invalid_properties.push('invalid value for "platform_post_id", platform_post_id cannot be nil.')
-      end
-
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
@@ -218,7 +212,6 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @profile_id.nil?
       return false if @account_id.nil?
-      return false if @platform_post_id.nil?
       return false if @name.nil?
       match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains"])
       return false unless match_mode_validator.valid?(@match_mode)
@@ -244,16 +237,6 @@ module Zernio
       end
 
       @account_id = account_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] platform_post_id Value to be assigned
-    def platform_post_id=(platform_post_id)
-      if platform_post_id.nil?
-        fail ArgumentError, 'platform_post_id cannot be nil'
-      end
-
-      @platform_post_id = platform_post_id
     end
 
     # Custom attribute writer method with validation

@@ -34,7 +34,7 @@ describe 'CommentAutomationsApi' do
 
   # unit tests for create_comment_automation
   # Create comment-to-DM automation
-  # Create a keyword-triggered DM automation on an Instagram or Facebook post. When someone comments a matching keyword, they automatically receive a DM. Only one active automation per post is allowed. 
+  # Create a keyword-triggered DM automation on an Instagram or Facebook account. When someone comments a matching keyword, they automatically receive a DM.  Two modes:   * **Per-post** — set &#x60;platformPostId&#x60; to scope the automation to one specific post.     Only one active per-post automation is allowed per post.   * **Account-wide (\&quot;any post\&quot;)** — omit &#x60;platformPostId&#x60; (and &#x60;postId&#x60;). The automation     evaluates every comment on every post on the account. You can stack unlimited     account-wide automations, each with its own keyword set, and they all run     independently. Per-post automations take priority on their post. 
   # @param create_comment_automation_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateCommentAutomation200Response]

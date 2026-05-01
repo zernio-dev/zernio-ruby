@@ -18,7 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Create comment-to-DM automation
 
-Create a keyword-triggered DM automation on an Instagram or Facebook post. When someone comments a matching keyword, they automatically receive a DM. Only one active automation per post is allowed. 
+Create a keyword-triggered DM automation on an Instagram or Facebook account. When someone comments a matching keyword, they automatically receive a DM.  Two modes:   * **Per-post** — set `platformPostId` to scope the automation to one specific post.     Only one active per-post automation is allowed per post.   * **Account-wide (\"any post\")** — omit `platformPostId` (and `postId`). The automation     evaluates every comment on every post on the account. You can stack unlimited     account-wide automations, each with its own keyword set, and they all run     independently. Per-post automations take priority on their post. 
 
 ### Examples
 
@@ -32,7 +32,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::CommentAutomationsApi.new
-create_comment_automation_request = Zernio::CreateCommentAutomationRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', platform_post_id: 'platform_post_id_example', name: 'name_example', dm_message: 'dm_message_example'}) # CreateCommentAutomationRequest | 
+create_comment_automation_request = Zernio::CreateCommentAutomationRequest.new({profile_id: 'profile_id_example', account_id: 'account_id_example', name: 'name_example', dm_message: 'dm_message_example'}) # CreateCommentAutomationRequest | 
 
 begin
   # Create comment-to-DM automation
