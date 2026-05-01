@@ -55,4 +55,32 @@ describe Zernio::WebhookPayloadAccountAdsInitialSyncCompletedSync do
     end
   end
 
+  describe 'test attribute "error"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "error_code"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "error_subcode"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "error_category"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["token_invalid", "permission_denied", "no_ad_accounts", "rate_limited", "discovery_failed", "unknown"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.error_category = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

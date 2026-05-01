@@ -9,6 +9,7 @@
 | **platform** | **String** |  | [optional] |
 | **username** | **String** |  | [optional] |
 | **display_name** | **String** |  | [optional] |
+| **scoped_ad_account_ids** | **Array&lt;String&gt;** | Echo of the persisted ad-account scope when the caller passed &#x60;adAccountId&#x60; / &#x60;adAccountIds&#x60;. Omitted when no scope is set.  | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Zernio::ConnectAds200ResponseOneOf.new(
   account_id: null,
   platform: null,
   username: null,
-  display_name: null
+  display_name: null,
+  scoped_ad_account_ids: [&quot;act_1330190928038136&quot;]
 )
 ```
 

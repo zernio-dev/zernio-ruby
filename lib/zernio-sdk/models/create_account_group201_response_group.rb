@@ -14,20 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateAccountGroupRequest < ApiModelBase
+  class CreateAccountGroup201ResponseGroup < ApiModelBase
+    attr_accessor :_id
+
     attr_accessor :name
 
     attr_accessor :account_ids
 
-    # Deprecated. Accepted for backward compatibility but ignored. Groups are no longer scoped to a single profile. 
-    attr_accessor :profile_id
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'_id' => :'_id',
         :'name' => :'name',
-        :'account_ids' => :'accountIds',
-        :'profile_id' => :'profileId'
+        :'account_ids' => :'accountIds'
       }
     end
 
@@ -44,9 +43,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'_id' => :'String',
         :'name' => :'String',
-        :'account_ids' => :'Array<String>',
-        :'profile_id' => :'String'
+        :'account_ids' => :'Array<String>'
       }
     end
 
@@ -60,34 +59,30 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateAccountGroupRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateAccountGroup201ResponseGroup` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateAccountGroupRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateAccountGroup201ResponseGroup`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'_id')
+        self._id = attributes[:'_id']
+      end
+
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'account_ids')
         if (value = attributes[:'account_ids']).is_a?(Array)
           self.account_ids = value
         end
-      else
-        self.account_ids = nil
-      end
-
-      if attributes.key?(:'profile_id')
-        self.profile_id = attributes[:'profile_id']
       end
     end
 
@@ -96,14 +91,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @account_ids.nil?
-        invalid_properties.push('invalid value for "account_ids", account_ids cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -111,29 +98,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @name.nil?
-      return false if @account_ids.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_ids Value to be assigned
-    def account_ids=(account_ids)
-      if account_ids.nil?
-        fail ArgumentError, 'account_ids cannot be nil'
-      end
-
-      @account_ids = account_ids
     end
 
     # Checks equality by comparing each attribute.
@@ -141,9 +106,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          _id == o._id &&
           name == o.name &&
-          account_ids == o.account_ids &&
-          profile_id == o.profile_id
+          account_ids == o.account_ids
     end
 
     # @see the `==` method
@@ -155,7 +120,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, account_ids, profile_id].hash
+      [_id, name, account_ids].hash
     end
 
     # Builds the object from hash

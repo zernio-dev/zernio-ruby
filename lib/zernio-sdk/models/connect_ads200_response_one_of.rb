@@ -26,6 +26,9 @@ module Zernio
 
     attr_accessor :display_name
 
+    # Echo of the persisted ad-account scope when the caller passed `adAccountId` / `adAccountIds`. Omitted when no scope is set. 
+    attr_accessor :scoped_ad_account_ids
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -33,7 +36,8 @@ module Zernio
         :'account_id' => :'accountId',
         :'platform' => :'platform',
         :'username' => :'username',
-        :'display_name' => :'displayName'
+        :'display_name' => :'displayName',
+        :'scoped_ad_account_ids' => :'scopedAdAccountIds'
       }
     end
 
@@ -54,7 +58,8 @@ module Zernio
         :'account_id' => :'String',
         :'platform' => :'String',
         :'username' => :'String',
-        :'display_name' => :'String'
+        :'display_name' => :'String',
+        :'scoped_ad_account_ids' => :'Array<String>'
       }
     end
 
@@ -99,6 +104,12 @@ module Zernio
       if attributes.key?(:'display_name')
         self.display_name = attributes[:'display_name']
       end
+
+      if attributes.key?(:'scoped_ad_account_ids')
+        if (value = attributes[:'scoped_ad_account_ids']).is_a?(Array)
+          self.scoped_ad_account_ids = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -125,7 +136,8 @@ module Zernio
           account_id == o.account_id &&
           platform == o.platform &&
           username == o.username &&
-          display_name == o.display_name
+          display_name == o.display_name &&
+          scoped_ad_account_ids == o.scoped_ad_account_ids
     end
 
     # @see the `==` method
@@ -137,7 +149,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [already_connected, account_id, platform, username, display_name].hash
+      [already_connected, account_id, platform, username, display_name, scoped_ad_account_ids].hash
     end
 
     # Builds the object from hash

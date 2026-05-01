@@ -21,12 +21,19 @@ module Zernio
 
     attr_accessor :account_ids
 
+    attr_accessor :created_by
+
+    # Legacy field. Present only on groups created before cross-profile groups were supported. New groups omit it. 
+    attr_accessor :profile_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'_id' => :'_id',
         :'name' => :'name',
-        :'account_ids' => :'accountIds'
+        :'account_ids' => :'accountIds',
+        :'created_by' => :'createdBy',
+        :'profile_id' => :'profileId'
       }
     end
 
@@ -45,7 +52,9 @@ module Zernio
       {
         :'_id' => :'String',
         :'name' => :'String',
-        :'account_ids' => :'Array<String>'
+        :'account_ids' => :'Array<String>',
+        :'created_by' => :'String',
+        :'profile_id' => :'String'
       }
     end
 
@@ -84,6 +93,14 @@ module Zernio
           self.account_ids = value
         end
       end
+
+      if attributes.key?(:'created_by')
+        self.created_by = attributes[:'created_by']
+      end
+
+      if attributes.key?(:'profile_id')
+        self.profile_id = attributes[:'profile_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -108,7 +125,9 @@ module Zernio
       self.class == o.class &&
           _id == o._id &&
           name == o.name &&
-          account_ids == o.account_ids
+          account_ids == o.account_ids &&
+          created_by == o.created_by &&
+          profile_id == o.profile_id
     end
 
     # @see the `==` method
@@ -120,7 +139,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, account_ids].hash
+      [_id, name, account_ids, created_by, profile_id].hash
     end
 
     # Builds the object from hash

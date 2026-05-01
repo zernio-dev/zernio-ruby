@@ -28,6 +28,18 @@ module Zernio
     # Number of ads that failed to sync.
     attr_accessor :failed
 
+    # Free-form error message from the platform (typically Meta's Marketing API). Truncated to ~2KB. Present when `status` is `failure` (and sometimes on `success` when discovery saw zero ad accounts). For UX branching prefer `errorCategory`; this field is for human display and debugging. 
+    attr_accessor :error
+
+    # Platform-native error code if parsed (e.g. Meta `190`, `10`, `200`).
+    attr_accessor :error_code
+
+    # Platform-native error subcode if parsed.
+    attr_accessor :error_subcode
+
+    # Stable category for UX branching. New values may be added; existing ones are stable. Mapping:   - `token_invalid`: access token is expired or revoked. Reconnect.   - `permission_denied`: token lacks required scope, or the user has no role     on the Business Manager that owns the ad account. Reconnect with full     permissions, or have an admin grant access.   - `no_ad_accounts`: token is valid but sees zero ad accounts. The user     needs to connect a Business Manager that owns ad accounts.   - `rate_limited`: platform throttled us. Sync will retry automatically.   - `discovery_failed`: any other platform-side failure. Inspect `error`.   - `unknown`: classifier could not categorize the failure. 
+    attr_accessor :error_category
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -56,7 +68,11 @@ module Zernio
         :'status' => :'status',
         :'total_ads' => :'totalAds',
         :'synced' => :'synced',
-        :'failed' => :'failed'
+        :'failed' => :'failed',
+        :'error' => :'error',
+        :'error_code' => :'errorCode',
+        :'error_subcode' => :'errorSubcode',
+        :'error_category' => :'errorCategory'
       }
     end
 
@@ -76,7 +92,11 @@ module Zernio
         :'status' => :'String',
         :'total_ads' => :'Integer',
         :'synced' => :'Integer',
-        :'failed' => :'Integer'
+        :'failed' => :'Integer',
+        :'error' => :'String',
+        :'error_code' => :'String',
+        :'error_subcode' => :'String',
+        :'error_category' => :'String'
       }
     end
 
@@ -125,6 +145,22 @@ module Zernio
       else
         self.failed = nil
       end
+
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
+      end
+
+      if attributes.key?(:'error_code')
+        self.error_code = attributes[:'error_code']
+      end
+
+      if attributes.key?(:'error_subcode')
+        self.error_subcode = attributes[:'error_subcode']
+      end
+
+      if attributes.key?(:'error_category')
+        self.error_category = attributes[:'error_category']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -161,6 +197,8 @@ module Zernio
       return false if @total_ads.nil?
       return false if @synced.nil?
       return false if @failed.nil?
+      error_category_validator = EnumAttributeValidator.new('String', ["token_invalid", "permission_denied", "no_ad_accounts", "rate_limited", "discovery_failed", "unknown"])
+      return false unless error_category_validator.valid?(@error_category)
       true
     end
 
@@ -204,6 +242,16 @@ module Zernio
       @failed = failed
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] error_category Object to be assigned
+    def error_category=(error_category)
+      validator = EnumAttributeValidator.new('String', ["token_invalid", "permission_denied", "no_ad_accounts", "rate_limited", "discovery_failed", "unknown"])
+      unless validator.valid?(error_category)
+        fail ArgumentError, "invalid value for \"error_category\", must be one of #{validator.allowable_values}."
+      end
+      @error_category = error_category
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -212,7 +260,11 @@ module Zernio
           status == o.status &&
           total_ads == o.total_ads &&
           synced == o.synced &&
-          failed == o.failed
+          failed == o.failed &&
+          error == o.error &&
+          error_code == o.error_code &&
+          error_subcode == o.error_subcode &&
+          error_category == o.error_category
     end
 
     # @see the `==` method
@@ -224,7 +276,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, total_ads, synced, failed].hash
+      [status, total_ads, synced, failed, error, error_code, error_subcode, error_category].hash
     end
 
     # Builds the object from hash

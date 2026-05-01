@@ -33,6 +33,12 @@ module Zernio
     # URL of the account's profile picture, when available.
     attr_accessor :profile_picture
 
+    # When the consumer scoped the connect call to a single ad account, this echoes that ID back so the webhook can be correlated to the originating connect request without consulting the consumer's DB. Meta uses the `act_*` shape. 
+    attr_accessor :platform_ad_account_id
+
+    # Every ad-account ID that the connected token could see at discovery time. Useful for \"we synced ads from these accounts\" UX without a follow-up API call. Empty array when the token had no ad-account visibility. 
+    attr_accessor :platform_ad_account_ids
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -42,7 +48,9 @@ module Zernio
         :'username' => :'username',
         :'display_name' => :'displayName',
         :'platform_user_id' => :'platformUserId',
-        :'profile_picture' => :'profilePicture'
+        :'profile_picture' => :'profilePicture',
+        :'platform_ad_account_id' => :'platformAdAccountId',
+        :'platform_ad_account_ids' => :'platformAdAccountIds'
       }
     end
 
@@ -65,7 +73,9 @@ module Zernio
         :'username' => :'String',
         :'display_name' => :'String',
         :'platform_user_id' => :'String',
-        :'profile_picture' => :'String'
+        :'profile_picture' => :'String',
+        :'platform_ad_account_id' => :'String',
+        :'platform_ad_account_ids' => :'Array<String>'
       }
     end
 
@@ -125,6 +135,16 @@ module Zernio
 
       if attributes.key?(:'profile_picture')
         self.profile_picture = attributes[:'profile_picture']
+      end
+
+      if attributes.key?(:'platform_ad_account_id')
+        self.platform_ad_account_id = attributes[:'platform_ad_account_id']
+      end
+
+      if attributes.key?(:'platform_ad_account_ids')
+        if (value = attributes[:'platform_ad_account_ids']).is_a?(Array)
+          self.platform_ad_account_ids = value
+        end
       end
     end
 
@@ -214,7 +234,9 @@ module Zernio
           username == o.username &&
           display_name == o.display_name &&
           platform_user_id == o.platform_user_id &&
-          profile_picture == o.profile_picture
+          profile_picture == o.profile_picture &&
+          platform_ad_account_id == o.platform_ad_account_id &&
+          platform_ad_account_ids == o.platform_ad_account_ids
     end
 
     # @see the `==` method
@@ -226,7 +248,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, profile_id, platform, username, display_name, platform_user_id, profile_picture].hash
+      [account_id, profile_id, platform, username, display_name, platform_user_id, profile_picture, platform_ad_account_id, platform_ad_account_ids].hash
     end
 
     # Builds the object from hash

@@ -65,6 +65,8 @@ describe 'ConnectApi' do
   # @option opts [String] :account_id Existing SocialAccount ID. Required for &#x60;twitter&#x60; (X Ads). Optional for &#x60;tiktok&#x60; — omit to enter ads-only mode (no TikTok posting account linked; ad creation uses a Brand Identity instead of a TT_USER). Ignored for same-token (&#x60;facebook&#x60;, &#x60;instagram&#x60;, &#x60;linkedin&#x60;, &#x60;pinterest&#x60;) and standalone (&#x60;googleads&#x60;) platforms. 
   # @option opts [String] :redirect_url Custom redirect URL after OAuth completes (same-token platforms only)
   # @option opts [Boolean] :headless Enable headless mode (same-token platforms only)
+  # @option opts [String] :ad_account_id (metaads only) Scope ad sync to a single Meta ad account. Without this param, sync covers every &#x60;act_*&#x60; the connected token can see. Pass this to limit &#x60;sync.totalAds&#x60; / &#x60;synced&#x60; and the resulting ads to one ad account. Format: &#x60;act_&lt;digits&gt;&#x60; (matches what &#x60;/me/adaccounts&#x60; returns). Validated against the connected token; unreachable IDs return 400. For multiple accounts use &#x60;adAccountIds&#x60; instead. 
+  # @option opts [Array<String>] :ad_account_ids (metaads only) Scope ad sync to multiple Meta ad accounts. Repeat the param (&#x60;?adAccountIds&#x3D;act_1&amp;adAccountIds&#x3D;act_2&#x60;) or comma-separate (&#x60;?adAccountIds&#x3D;act_1,act_2&#x60;). Validated against the connected token. Persisted server-side; latest call wins. Omitting both &#x60;adAccountId&#x60; and &#x60;adAccountIds&#x60; keeps any previously persisted scope unchanged. 
   # @return [ConnectAds200Response]
   describe 'connect_ads test' do
     it 'should work' do

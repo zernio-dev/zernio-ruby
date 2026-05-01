@@ -159,6 +159,8 @@ module Zernio
     # @option opts [String] :account_id Existing SocialAccount ID. Required for &#x60;twitter&#x60; (X Ads). Optional for &#x60;tiktok&#x60; — omit to enter ads-only mode (no TikTok posting account linked; ad creation uses a Brand Identity instead of a TT_USER). Ignored for same-token (&#x60;facebook&#x60;, &#x60;instagram&#x60;, &#x60;linkedin&#x60;, &#x60;pinterest&#x60;) and standalone (&#x60;googleads&#x60;) platforms. 
     # @option opts [String] :redirect_url Custom redirect URL after OAuth completes (same-token platforms only)
     # @option opts [Boolean] :headless Enable headless mode (same-token platforms only) (default to false)
+    # @option opts [String] :ad_account_id (metaads only) Scope ad sync to a single Meta ad account. Without this param, sync covers every &#x60;act_*&#x60; the connected token can see. Pass this to limit &#x60;sync.totalAds&#x60; / &#x60;synced&#x60; and the resulting ads to one ad account. Format: &#x60;act_&lt;digits&gt;&#x60; (matches what &#x60;/me/adaccounts&#x60; returns). Validated against the connected token; unreachable IDs return 400. For multiple accounts use &#x60;adAccountIds&#x60; instead. 
+    # @option opts [Array<String>] :ad_account_ids (metaads only) Scope ad sync to multiple Meta ad accounts. Repeat the param (&#x60;?adAccountIds&#x3D;act_1&amp;adAccountIds&#x3D;act_2&#x60;) or comma-separate (&#x60;?adAccountIds&#x3D;act_1,act_2&#x60;). Validated against the connected token. Persisted server-side; latest call wins. Omitting both &#x60;adAccountId&#x60; and &#x60;adAccountIds&#x60; keeps any previously persisted scope unchanged. 
     # @return [ConnectAds200Response]
     def connect_ads(platform, profile_id, opts = {})
       data, _status_code, _headers = connect_ads_with_http_info(platform, profile_id, opts)
@@ -173,6 +175,8 @@ module Zernio
     # @option opts [String] :account_id Existing SocialAccount ID. Required for &#x60;twitter&#x60; (X Ads). Optional for &#x60;tiktok&#x60; — omit to enter ads-only mode (no TikTok posting account linked; ad creation uses a Brand Identity instead of a TT_USER). Ignored for same-token (&#x60;facebook&#x60;, &#x60;instagram&#x60;, &#x60;linkedin&#x60;, &#x60;pinterest&#x60;) and standalone (&#x60;googleads&#x60;) platforms. 
     # @option opts [String] :redirect_url Custom redirect URL after OAuth completes (same-token platforms only)
     # @option opts [Boolean] :headless Enable headless mode (same-token platforms only) (default to false)
+    # @option opts [String] :ad_account_id (metaads only) Scope ad sync to a single Meta ad account. Without this param, sync covers every &#x60;act_*&#x60; the connected token can see. Pass this to limit &#x60;sync.totalAds&#x60; / &#x60;synced&#x60; and the resulting ads to one ad account. Format: &#x60;act_&lt;digits&gt;&#x60; (matches what &#x60;/me/adaccounts&#x60; returns). Validated against the connected token; unreachable IDs return 400. For multiple accounts use &#x60;adAccountIds&#x60; instead. 
+    # @option opts [Array<String>] :ad_account_ids (metaads only) Scope ad sync to multiple Meta ad accounts. Repeat the param (&#x60;?adAccountIds&#x3D;act_1&amp;adAccountIds&#x3D;act_2&#x60;) or comma-separate (&#x60;?adAccountIds&#x3D;act_1,act_2&#x60;). Validated against the connected token. Persisted server-side; latest call wins. Omitting both &#x60;adAccountId&#x60; and &#x60;adAccountIds&#x60; keeps any previously persisted scope unchanged. 
     # @return [Array<(ConnectAds200Response, Integer, Hash)>] ConnectAds200Response data, response status code and response headers
     def connect_ads_with_http_info(platform, profile_id, opts = {})
       if @api_client.config.debugging
@@ -191,6 +195,11 @@ module Zernio
       if @api_client.config.client_side_validation && profile_id.nil?
         fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConnectApi.connect_ads"
       end
+      pattern = Regexp.new(/^act_\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'ad_account_id'].nil? && opts[:'ad_account_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"ad_account_id\"]' when calling ConnectApi.connect_ads, must conform to the pattern #{pattern}."
+      end
+
       # resource path
       local_var_path = '/v1/connect/{platform}/ads'.sub('{' + 'platform' + '}', CGI.escape(platform.to_s))
 
@@ -200,6 +209,8 @@ module Zernio
       query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'redirect_url'] = opts[:'redirect_url'] if !opts[:'redirect_url'].nil?
       query_params[:'headless'] = opts[:'headless'] if !opts[:'headless'].nil?
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
+      query_params[:'adAccountIds'] = @api_client.build_collection_param(opts[:'ad_account_ids'], :multi) if !opts[:'ad_account_ids'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

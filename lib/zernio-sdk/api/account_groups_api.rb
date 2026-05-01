@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Create group
-    # Creates a new account group with a name and a list of social account IDs.
+    # Creates a new account group with a name and a list of social account IDs. Accounts can belong to different profiles; the caller must have access to every account's profile. Group names must be unique per user. 
     # @param create_account_group_request [CreateAccountGroupRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateAccountGroup201Response]
@@ -30,7 +30,7 @@ module Zernio
     end
 
     # Create group
-    # Creates a new account group with a name and a list of social account IDs.
+    # Creates a new account group with a name and a list of social account IDs. Accounts can belong to different profiles; the caller must have access to every account&#39;s profile. Group names must be unique per user. 
     # @param create_account_group_request [CreateAccountGroupRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateAccountGroup201Response, Integer, Hash)>] CreateAccountGroup201Response data, response status code and response headers
@@ -151,7 +151,7 @@ module Zernio
     end
 
     # List groups
-    # Returns all account groups for the authenticated user, including group names and associated account IDs.
+    # Returns all account groups visible to the authenticated user. Groups can contain accounts from multiple profiles. For API keys scoped to specific profiles, only groups whose accounts all live in allowed profiles are returned. 
     # @param [Hash] opts the optional parameters
     # @return [ListAccountGroups200Response]
     def list_account_groups(opts = {})
@@ -160,7 +160,7 @@ module Zernio
     end
 
     # List groups
-    # Returns all account groups for the authenticated user, including group names and associated account IDs.
+    # Returns all account groups visible to the authenticated user. Groups can contain accounts from multiple profiles. For API keys scoped to specific profiles, only groups whose accounts all live in allowed profiles are returned. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListAccountGroups200Response, Integer, Hash)>] ListAccountGroups200Response data, response status code and response headers
     def list_account_groups_with_http_info(opts = {})

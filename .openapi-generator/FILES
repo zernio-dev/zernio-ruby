@@ -102,6 +102,7 @@ docs/ConversionEventItemsInner.md
 docs/ConversionEventUser.md
 docs/ConversionEventUserClickIds.md
 docs/CreateAccountGroup201Response.md
+docs/CreateAccountGroup201ResponseGroup.md
 docs/CreateAccountGroupRequest.md
 docs/CreateAdAudience201Response.md
 docs/CreateAdAudienceRequest.md
@@ -1011,6 +1012,7 @@ lib/zernio-sdk/models/conversion_event_items_inner.rb
 lib/zernio-sdk/models/conversion_event_user.rb
 lib/zernio-sdk/models/conversion_event_user_click_ids.rb
 lib/zernio-sdk/models/create_account_group201_response.rb
+lib/zernio-sdk/models/create_account_group201_response_group.rb
 lib/zernio-sdk/models/create_account_group_request.rb
 lib/zernio-sdk/models/create_ad_audience201_response.rb
 lib/zernio-sdk/models/create_ad_audience_request.rb
@@ -1884,6 +1886,7 @@ spec/models/conversion_event_items_inner_spec.rb
 spec/models/conversion_event_spec.rb
 spec/models/conversion_event_user_click_ids_spec.rb
 spec/models/conversion_event_user_spec.rb
+spec/models/create_account_group201_response_group_spec.rb
 spec/models/create_account_group201_response_spec.rb
 spec/models/create_account_group_request_spec.rb
 spec/models/create_ad_audience201_response_spec.rb

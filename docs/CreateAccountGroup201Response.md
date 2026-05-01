@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **message** | **String** |  | [optional] |
-| **group** | [**ListAccountGroups200ResponseGroupsInner**](ListAccountGroups200ResponseGroupsInner.md) |  | [optional] |
+| **group** | [**CreateAccountGroup201ResponseGroup**](CreateAccountGroup201ResponseGroup.md) |  | [optional] |
 
 ## Example
 

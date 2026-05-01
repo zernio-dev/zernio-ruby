@@ -41,7 +41,7 @@ module Zernio
     def self.openapi_types
       {
         :'message' => :'String',
-        :'group' => :'ListAccountGroups200ResponseGroupsInner'
+        :'group' => :'CreateAccountGroup201ResponseGroup'
       }
     end
 

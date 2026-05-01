@@ -424,6 +424,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ConversionEventUser](docs/ConversionEventUser.md)
  - [Zernio::ConversionEventUserClickIds](docs/ConversionEventUserClickIds.md)
  - [Zernio::CreateAccountGroup201Response](docs/CreateAccountGroup201Response.md)
+ - [Zernio::CreateAccountGroup201ResponseGroup](docs/CreateAccountGroup201ResponseGroup.md)
  - [Zernio::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
  - [Zernio::CreateAdAudience201Response](docs/CreateAdAudience201Response.md)
  - [Zernio::CreateAdAudienceRequest](docs/CreateAdAudienceRequest.md)
