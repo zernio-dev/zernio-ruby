@@ -29,9 +29,6 @@ module Zernio
 
     attr_accessor :call_to_action
 
-    # Per-creative Lead Gen Form ID. Wins over the top-level `leadGenFormId` so each ad in a campaign can A/B a different form. Forces CTA to SIGN_UP.
-    attr_accessor :lead_gen_form_id
-
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -62,8 +59,7 @@ module Zernio
         :'image_url' => :'imageUrl',
         :'video' => :'video',
         :'link_url' => :'linkUrl',
-        :'call_to_action' => :'callToAction',
-        :'lead_gen_form_id' => :'leadGenFormId'
+        :'call_to_action' => :'callToAction'
       }
     end
 
@@ -85,8 +81,7 @@ module Zernio
         :'image_url' => :'String',
         :'video' => :'CreateStandaloneAdRequestCreativesInnerVideo',
         :'link_url' => :'String',
-        :'call_to_action' => :'String',
-        :'lead_gen_form_id' => :'String'
+        :'call_to_action' => :'String'
       }
     end
 
@@ -142,10 +137,6 @@ module Zernio
         self.call_to_action = attributes[:'call_to_action']
       else
         self.call_to_action = nil
-      end
-
-      if attributes.key?(:'lead_gen_form_id')
-        self.lead_gen_form_id = attributes[:'lead_gen_form_id']
       end
     end
 
@@ -245,8 +236,7 @@ module Zernio
           image_url == o.image_url &&
           video == o.video &&
           link_url == o.link_url &&
-          call_to_action == o.call_to_action &&
-          lead_gen_form_id == o.lead_gen_form_id
+          call_to_action == o.call_to_action
     end
 
     # @see the `==` method
@@ -258,7 +248,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headline, body, image_url, video, link_url, call_to_action, lead_gen_form_id].hash
+      [headline, body, image_url, video, link_url, call_to_action].hash
     end
 
     # Builds the object from hash

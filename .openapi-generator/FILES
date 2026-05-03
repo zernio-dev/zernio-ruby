@@ -140,15 +140,6 @@ docs/CreateInboxConversation422Response.md
 docs/CreateInboxConversationRequest.md
 docs/CreateInviteToken201Response.md
 docs/CreateInviteTokenRequest.md
-docs/CreateLeadForm201Response.md
-docs/CreateLeadFormBody.md
-docs/CreateLeadFormBodyContextCard.md
-docs/CreateLeadFormBodyLegalContent.md
-docs/CreateLeadFormBodyLegalContentCustomDisclaimer.md
-docs/CreateLeadFormTestLead200Response.md
-docs/CreateLeadFormTestLead200ResponseTestLead.md
-docs/CreateLeadFormTestLeadRequest.md
-docs/CreateLeadFormTestLeadRequestFieldDataInner.md
 docs/CreatePost409Response.md
 docs/CreatePost409ResponseDetails.md
 docs/CreatePost429Response.md
@@ -199,7 +190,6 @@ docs/DeleteGoogleBusinessPlaceAction200Response.md
 docs/DeleteInboxComment200Response.md
 docs/DeleteInboxReviewReply200Response.md
 docs/DeleteInboxReviewReplyRequest.md
-docs/DeleteLeadForm200Response.md
 docs/DeleteQueueSlot200Response.md
 docs/DiscordApi.md
 docs/DiscordPlatformData.md
@@ -353,7 +343,6 @@ docs/GetInboxPostComments200ResponseCommentsInnerFrom.md
 docs/GetInboxPostComments200ResponseMeta.md
 docs/GetInboxPostComments200ResponsePagination.md
 docs/GetInstagramAccountInsights404Response.md
-docs/GetLeadForm200Response.md
 docs/GetLinkedInAggregateAnalytics200Response.md
 docs/GetLinkedInAggregateAnalytics400Response.md
 docs/GetLinkedInAggregateAnalytics402Response.md
@@ -466,13 +455,6 @@ docs/InstagramPlatformData.md
 docs/InstagramPlatformDataTrialParams.md
 docs/InstagramPlatformDataUserTagsInner.md
 docs/InvitesApi.md
-docs/Lead.md
-docs/LeadFieldDataInner.md
-docs/LeadFormResponseMeta.md
-docs/LeadFormsApi.md
-docs/LeadGenForm.md
-docs/LeadGenFormQuestion.md
-docs/LeadGenFormQuestionOptionsInner.md
 docs/LikeInboxComment200Response.md
 docs/LikeInboxCommentRequest.md
 docs/LinkedInAggregateAnalyticsDailyResponse.md
@@ -532,8 +514,6 @@ docs/ListInboxReviews200ResponseDataInner.md
 docs/ListInboxReviews200ResponseDataInnerReply.md
 docs/ListInboxReviews200ResponseDataInnerReviewer.md
 docs/ListInboxReviews200ResponseSummary.md
-docs/ListLeadFormLeads200Response.md
-docs/ListLeadForms200Response.md
 docs/ListLinkedInOrganizations200Response.md
 docs/ListLinkedInOrganizations200ResponseOrganizationsInner.md
 docs/ListLogs200Response.md
@@ -780,7 +760,6 @@ docs/UpdateGoogleBusinessServicesRequestServiceItemsInner.md
 docs/UpdateInboxConversation200Response.md
 docs/UpdateInboxConversation200ResponseData.md
 docs/UpdateInboxConversationRequest.md
-docs/UpdateLeadFormRequest.md
 docs/UpdateLinkedInOrganizationRequest.md
 docs/UpdatePinterestBoardsRequest.md
 docs/UpdatePostMetadata200Response.md
@@ -857,8 +836,6 @@ docs/WebhookPayloadCommentComment.md
 docs/WebhookPayloadCommentCommentAd.md
 docs/WebhookPayloadCommentCommentAuthor.md
 docs/WebhookPayloadCommentPost.md
-docs/WebhookPayloadLeadReceived.md
-docs/WebhookPayloadLeadReceivedAccount.md
 docs/WebhookPayloadMessage.md
 docs/WebhookPayloadMessageAccount.md
 docs/WebhookPayloadMessageConversation.md
@@ -929,7 +906,6 @@ lib/zernio-sdk/api/gmb_place_actions_api.rb
 lib/zernio-sdk/api/gmb_reviews_api.rb
 lib/zernio-sdk/api/gmb_services_api.rb
 lib/zernio-sdk/api/invites_api.rb
-lib/zernio-sdk/api/lead_forms_api.rb
 lib/zernio-sdk/api/linked_in_mentions_api.rb
 lib/zernio-sdk/api/logs_api.rb
 lib/zernio-sdk/api/media_api.rb
@@ -1074,15 +1050,6 @@ lib/zernio-sdk/models/create_inbox_conversation422_response.rb
 lib/zernio-sdk/models/create_inbox_conversation_request.rb
 lib/zernio-sdk/models/create_invite_token201_response.rb
 lib/zernio-sdk/models/create_invite_token_request.rb
-lib/zernio-sdk/models/create_lead_form201_response.rb
-lib/zernio-sdk/models/create_lead_form_body.rb
-lib/zernio-sdk/models/create_lead_form_body_context_card.rb
-lib/zernio-sdk/models/create_lead_form_body_legal_content.rb
-lib/zernio-sdk/models/create_lead_form_body_legal_content_custom_disclaimer.rb
-lib/zernio-sdk/models/create_lead_form_test_lead200_response.rb
-lib/zernio-sdk/models/create_lead_form_test_lead200_response_test_lead.rb
-lib/zernio-sdk/models/create_lead_form_test_lead_request.rb
-lib/zernio-sdk/models/create_lead_form_test_lead_request_field_data_inner.rb
 lib/zernio-sdk/models/create_post409_response.rb
 lib/zernio-sdk/models/create_post409_response_details.rb
 lib/zernio-sdk/models/create_post429_response.rb
@@ -1132,7 +1099,6 @@ lib/zernio-sdk/models/delete_google_business_place_action200_response.rb
 lib/zernio-sdk/models/delete_inbox_comment200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
-lib/zernio-sdk/models/delete_lead_form200_response.rb
 lib/zernio-sdk/models/delete_queue_slot200_response.rb
 lib/zernio-sdk/models/discord_platform_data.rb
 lib/zernio-sdk/models/discord_platform_data_embeds_inner.rb
@@ -1278,7 +1244,6 @@ lib/zernio-sdk/models/get_inbox_post_comments200_response_comments_inner_from.rb
 lib/zernio-sdk/models/get_inbox_post_comments200_response_meta.rb
 lib/zernio-sdk/models/get_inbox_post_comments200_response_pagination.rb
 lib/zernio-sdk/models/get_instagram_account_insights404_response.rb
-lib/zernio-sdk/models/get_lead_form200_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics200_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics400_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics402_response.rb
@@ -1390,12 +1355,6 @@ lib/zernio-sdk/models/instagram_demographics_response_demographics_value_inner.r
 lib/zernio-sdk/models/instagram_platform_data.rb
 lib/zernio-sdk/models/instagram_platform_data_trial_params.rb
 lib/zernio-sdk/models/instagram_platform_data_user_tags_inner.rb
-lib/zernio-sdk/models/lead.rb
-lib/zernio-sdk/models/lead_field_data_inner.rb
-lib/zernio-sdk/models/lead_form_response_meta.rb
-lib/zernio-sdk/models/lead_gen_form.rb
-lib/zernio-sdk/models/lead_gen_form_question.rb
-lib/zernio-sdk/models/lead_gen_form_question_options_inner.rb
 lib/zernio-sdk/models/like_inbox_comment200_response.rb
 lib/zernio-sdk/models/like_inbox_comment_request.rb
 lib/zernio-sdk/models/linked_in_aggregate_analytics_daily_response.rb
@@ -1454,8 +1413,6 @@ lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner_reply.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner_reviewer.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_summary.rb
-lib/zernio-sdk/models/list_lead_form_leads200_response.rb
-lib/zernio-sdk/models/list_lead_forms200_response.rb
 lib/zernio-sdk/models/list_linked_in_organizations200_response.rb
 lib/zernio-sdk/models/list_linked_in_organizations200_response_organizations_inner.rb
 lib/zernio-sdk/models/list_logs200_response.rb
@@ -1692,7 +1649,6 @@ lib/zernio-sdk/models/update_google_business_services_request_service_items_inne
 lib/zernio-sdk/models/update_inbox_conversation200_response.rb
 lib/zernio-sdk/models/update_inbox_conversation200_response_data.rb
 lib/zernio-sdk/models/update_inbox_conversation_request.rb
-lib/zernio-sdk/models/update_lead_form_request.rb
 lib/zernio-sdk/models/update_linked_in_organization_request.rb
 lib/zernio-sdk/models/update_pinterest_boards_request.rb
 lib/zernio-sdk/models/update_post_metadata200_response.rb
@@ -1765,8 +1721,6 @@ lib/zernio-sdk/models/webhook_payload_comment_comment.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_ad.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_author.rb
 lib/zernio-sdk/models/webhook_payload_comment_post.rb
-lib/zernio-sdk/models/webhook_payload_lead_received.rb
-lib/zernio-sdk/models/webhook_payload_lead_received_account.rb
 lib/zernio-sdk/models/webhook_payload_message.rb
 lib/zernio-sdk/models/webhook_payload_message_account.rb
 lib/zernio-sdk/models/webhook_payload_message_conversation.rb
@@ -1832,7 +1786,6 @@ spec/api/gmb_place_actions_api_spec.rb
 spec/api/gmb_reviews_api_spec.rb
 spec/api/gmb_services_api_spec.rb
 spec/api/invites_api_spec.rb
-spec/api/lead_forms_api_spec.rb
 spec/api/linked_in_mentions_api_spec.rb
 spec/api/logs_api_spec.rb
 spec/api/media_api_spec.rb
@@ -1972,15 +1925,6 @@ spec/models/create_inbox_conversation422_response_spec.rb
 spec/models/create_inbox_conversation_request_spec.rb
 spec/models/create_invite_token201_response_spec.rb
 spec/models/create_invite_token_request_spec.rb
-spec/models/create_lead_form201_response_spec.rb
-spec/models/create_lead_form_body_context_card_spec.rb
-spec/models/create_lead_form_body_legal_content_custom_disclaimer_spec.rb
-spec/models/create_lead_form_body_legal_content_spec.rb
-spec/models/create_lead_form_body_spec.rb
-spec/models/create_lead_form_test_lead200_response_spec.rb
-spec/models/create_lead_form_test_lead200_response_test_lead_spec.rb
-spec/models/create_lead_form_test_lead_request_field_data_inner_spec.rb
-spec/models/create_lead_form_test_lead_request_spec.rb
 spec/models/create_post409_response_details_spec.rb
 spec/models/create_post409_response_spec.rb
 spec/models/create_post429_response_spec.rb
@@ -2030,7 +1974,6 @@ spec/models/delete_google_business_place_action200_response_spec.rb
 spec/models/delete_inbox_comment200_response_spec.rb
 spec/models/delete_inbox_review_reply200_response_spec.rb
 spec/models/delete_inbox_review_reply_request_spec.rb
-spec/models/delete_lead_form200_response_spec.rb
 spec/models/delete_queue_slot200_response_spec.rb
 spec/models/discord_platform_data_embeds_inner_author_spec.rb
 spec/models/discord_platform_data_embeds_inner_fields_inner_spec.rb
@@ -2176,7 +2119,6 @@ spec/models/get_inbox_post_comments200_response_meta_spec.rb
 spec/models/get_inbox_post_comments200_response_pagination_spec.rb
 spec/models/get_inbox_post_comments200_response_spec.rb
 spec/models/get_instagram_account_insights404_response_spec.rb
-spec/models/get_lead_form200_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics200_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics400_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics402_response_spec.rb
@@ -2288,12 +2230,6 @@ spec/models/instagram_demographics_response_spec.rb
 spec/models/instagram_platform_data_spec.rb
 spec/models/instagram_platform_data_trial_params_spec.rb
 spec/models/instagram_platform_data_user_tags_inner_spec.rb
-spec/models/lead_field_data_inner_spec.rb
-spec/models/lead_form_response_meta_spec.rb
-spec/models/lead_gen_form_question_options_inner_spec.rb
-spec/models/lead_gen_form_question_spec.rb
-spec/models/lead_gen_form_spec.rb
-spec/models/lead_spec.rb
 spec/models/like_inbox_comment200_response_spec.rb
 spec/models/like_inbox_comment_request_spec.rb
 spec/models/linked_in_aggregate_analytics_daily_response_analytics_impressions_inner_spec.rb
@@ -2352,8 +2288,6 @@ spec/models/list_inbox_reviews200_response_data_inner_reviewer_spec.rb
 spec/models/list_inbox_reviews200_response_data_inner_spec.rb
 spec/models/list_inbox_reviews200_response_spec.rb
 spec/models/list_inbox_reviews200_response_summary_spec.rb
-spec/models/list_lead_form_leads200_response_spec.rb
-spec/models/list_lead_forms200_response_spec.rb
 spec/models/list_linked_in_organizations200_response_organizations_inner_spec.rb
 spec/models/list_linked_in_organizations200_response_spec.rb
 spec/models/list_logs200_response_logs_inner_spec.rb
@@ -2590,7 +2524,6 @@ spec/models/update_google_business_services_request_spec.rb
 spec/models/update_inbox_conversation200_response_data_spec.rb
 spec/models/update_inbox_conversation200_response_spec.rb
 spec/models/update_inbox_conversation_request_spec.rb
-spec/models/update_lead_form_request_spec.rb
 spec/models/update_linked_in_organization_request_spec.rb
 spec/models/update_pinterest_boards_request_spec.rb
 spec/models/update_post_metadata200_response_spec.rb
@@ -2662,8 +2595,6 @@ spec/models/webhook_payload_comment_comment_author_spec.rb
 spec/models/webhook_payload_comment_comment_spec.rb
 spec/models/webhook_payload_comment_post_spec.rb
 spec/models/webhook_payload_comment_spec.rb
-spec/models/webhook_payload_lead_received_account_spec.rb
-spec/models/webhook_payload_lead_received_spec.rb
 spec/models/webhook_payload_message_account_spec.rb
 spec/models/webhook_payload_message_conversation_spec.rb
 spec/models/webhook_payload_message_deleted_spec.rb

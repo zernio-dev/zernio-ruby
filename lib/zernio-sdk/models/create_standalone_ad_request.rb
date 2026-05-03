@@ -41,11 +41,8 @@ module Zernio
     # Required on legacy + attach shapes. For X/Twitter this is the tweet text (max 280 chars including a ~24-char URL when `linkUrl` is set). Max: Google=90, Pinterest=500.
     attr_accessor :body
 
-    # Required on legacy + attach shapes for Meta. Honoured on TikTok too — passes through to the Spark Ad creative's `call_to_action`. Ignored by other platforms. Ignored on Meta when `leadGenFormId` is set — lead ads force CTA type to SIGN_UP.
+    # Required on legacy + attach shapes for Meta. Honoured on TikTok too — passes through to the Spark Ad creative's `call_to_action`. Ignored by other platforms.
     attr_accessor :call_to_action
-
-    # Meta-only. Attaches a Lead Gen (Instant) Form to the creative. Required when `goal=\"lead_generation\"`. Force-overrides the CTA to SIGN_UP. Create a form first via POST /v1/ads/lead-forms. On the multi-creative shape this can also be set per `creatives[i]` to A/B different forms inside one ad set.
-    attr_accessor :lead_gen_form_id
 
     # Required on legacy + attach shapes. Skip for multi-creative.
     attr_accessor :link_url
@@ -167,7 +164,6 @@ module Zernio
         :'long_headline' => :'longHeadline',
         :'body' => :'body',
         :'call_to_action' => :'callToAction',
-        :'lead_gen_form_id' => :'leadGenFormId',
         :'link_url' => :'linkUrl',
         :'image_url' => :'imageUrl',
         :'images' => :'images',
@@ -225,7 +221,6 @@ module Zernio
         :'long_headline' => :'String',
         :'body' => :'String',
         :'call_to_action' => :'String',
-        :'lead_gen_form_id' => :'String',
         :'link_url' => :'String',
         :'image_url' => :'String',
         :'images' => :'CreateStandaloneAdRequestImages',
@@ -329,10 +324,6 @@ module Zernio
 
       if attributes.key?(:'call_to_action')
         self.call_to_action = attributes[:'call_to_action']
-      end
-
-      if attributes.key?(:'lead_gen_form_id')
-        self.lead_gen_form_id = attributes[:'lead_gen_form_id']
       end
 
       if attributes.key?(:'link_url')
@@ -796,7 +787,6 @@ module Zernio
           long_headline == o.long_headline &&
           body == o.body &&
           call_to_action == o.call_to_action &&
-          lead_gen_form_id == o.lead_gen_form_id &&
           link_url == o.link_url &&
           image_url == o.image_url &&
           images == o.images &&
@@ -838,7 +828,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, lead_gen_form_id, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, cities, regions, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, cities, regions, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash
