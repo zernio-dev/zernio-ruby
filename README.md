@@ -232,6 +232,14 @@ Class | Method | HTTP request | Description
 *Zernio::GMBServicesApi* | [**get_google_business_services**](docs/GMBServicesApi.md#get_google_business_services) | **GET** /v1/accounts/{accountId}/gmb-services | Get services
 *Zernio::GMBServicesApi* | [**update_google_business_services**](docs/GMBServicesApi.md#update_google_business_services) | **PUT** /v1/accounts/{accountId}/gmb-services | Replace services
 *Zernio::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
+*Zernio::LeadFormsApi* | [**create_lead_form**](docs/LeadFormsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a Meta Lead Gen Form
+*Zernio::LeadFormsApi* | [**create_lead_form_test_lead**](docs/LeadFormsApi.md#create_lead_form_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a synthetic test lead
+*Zernio::LeadFormsApi* | [**delete_lead_form**](docs/LeadFormsApi.md#delete_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Delete a Lead Gen Form
+*Zernio::LeadFormsApi* | [**delete_lead_form_test_lead**](docs/LeadFormsApi.md#delete_lead_form_test_lead) | **DELETE** /v1/ads/lead-forms/{formId}/test-leads/{leadId} | Delete a (test) lead
+*Zernio::LeadFormsApi* | [**get_lead_form**](docs/LeadFormsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a Lead Gen Form
+*Zernio::LeadFormsApi* | [**list_lead_form_leads**](docs/LeadFormsApi.md#list_lead_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List submitted leads for a form
+*Zernio::LeadFormsApi* | [**list_lead_forms**](docs/LeadFormsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List Meta Lead Gen Forms
+*Zernio::LeadFormsApi* | [**update_lead_form**](docs/LeadFormsApi.md#update_lead_form) | **PATCH** /v1/ads/lead-forms/{formId} | Update a Lead Gen Form (status only)
 *Zernio::LinkedInMentionsApi* | [**get_linked_in_mentions**](docs/LinkedInMentionsApi.md#get_linked_in_mentions) | **GET** /v1/accounts/{accountId}/linkedin-mentions | Resolve LinkedIn mention
 *Zernio::LogsApi* | [**list_logs**](docs/LogsApi.md#list_logs) | **GET** /v1/logs | List activity logs
 *Zernio::MediaApi* | [**get_media_presigned_url**](docs/MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get upload URL
@@ -462,6 +470,15 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateInboxConversationRequest](docs/CreateInboxConversationRequest.md)
  - [Zernio::CreateInviteToken201Response](docs/CreateInviteToken201Response.md)
  - [Zernio::CreateInviteTokenRequest](docs/CreateInviteTokenRequest.md)
+ - [Zernio::CreateLeadForm201Response](docs/CreateLeadForm201Response.md)
+ - [Zernio::CreateLeadFormBody](docs/CreateLeadFormBody.md)
+ - [Zernio::CreateLeadFormBodyContextCard](docs/CreateLeadFormBodyContextCard.md)
+ - [Zernio::CreateLeadFormBodyLegalContent](docs/CreateLeadFormBodyLegalContent.md)
+ - [Zernio::CreateLeadFormBodyLegalContentCustomDisclaimer](docs/CreateLeadFormBodyLegalContentCustomDisclaimer.md)
+ - [Zernio::CreateLeadFormTestLead200Response](docs/CreateLeadFormTestLead200Response.md)
+ - [Zernio::CreateLeadFormTestLead200ResponseTestLead](docs/CreateLeadFormTestLead200ResponseTestLead.md)
+ - [Zernio::CreateLeadFormTestLeadRequest](docs/CreateLeadFormTestLeadRequest.md)
+ - [Zernio::CreateLeadFormTestLeadRequestFieldDataInner](docs/CreateLeadFormTestLeadRequestFieldDataInner.md)
  - [Zernio::CreatePost409Response](docs/CreatePost409Response.md)
  - [Zernio::CreatePost409ResponseDetails](docs/CreatePost409ResponseDetails.md)
  - [Zernio::CreatePost429Response](docs/CreatePost429Response.md)
@@ -511,6 +528,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxComment200Response](docs/DeleteInboxComment200Response.md)
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
+ - [Zernio::DeleteLeadForm200Response](docs/DeleteLeadForm200Response.md)
  - [Zernio::DeleteQueueSlot200Response](docs/DeleteQueueSlot200Response.md)
  - [Zernio::DiscordPlatformData](docs/DiscordPlatformData.md)
  - [Zernio::DiscordPlatformDataEmbedsInner](docs/DiscordPlatformDataEmbedsInner.md)
@@ -656,6 +674,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInboxPostComments200ResponseMeta](docs/GetInboxPostComments200ResponseMeta.md)
  - [Zernio::GetInboxPostComments200ResponsePagination](docs/GetInboxPostComments200ResponsePagination.md)
  - [Zernio::GetInstagramAccountInsights404Response](docs/GetInstagramAccountInsights404Response.md)
+ - [Zernio::GetLeadForm200Response](docs/GetLeadForm200Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics200Response](docs/GetLinkedInAggregateAnalytics200Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics400Response](docs/GetLinkedInAggregateAnalytics400Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics402Response](docs/GetLinkedInAggregateAnalytics402Response.md)
@@ -767,6 +786,12 @@ Class | Method | HTTP request | Description
  - [Zernio::InstagramPlatformData](docs/InstagramPlatformData.md)
  - [Zernio::InstagramPlatformDataTrialParams](docs/InstagramPlatformDataTrialParams.md)
  - [Zernio::InstagramPlatformDataUserTagsInner](docs/InstagramPlatformDataUserTagsInner.md)
+ - [Zernio::Lead](docs/Lead.md)
+ - [Zernio::LeadFieldDataInner](docs/LeadFieldDataInner.md)
+ - [Zernio::LeadFormResponseMeta](docs/LeadFormResponseMeta.md)
+ - [Zernio::LeadGenForm](docs/LeadGenForm.md)
+ - [Zernio::LeadGenFormQuestion](docs/LeadGenFormQuestion.md)
+ - [Zernio::LeadGenFormQuestionOptionsInner](docs/LeadGenFormQuestionOptionsInner.md)
  - [Zernio::LikeInboxComment200Response](docs/LikeInboxComment200Response.md)
  - [Zernio::LikeInboxCommentRequest](docs/LikeInboxCommentRequest.md)
  - [Zernio::LinkedInAggregateAnalyticsDailyResponse](docs/LinkedInAggregateAnalyticsDailyResponse.md)
@@ -825,6 +850,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListInboxReviews200ResponseDataInnerReply](docs/ListInboxReviews200ResponseDataInnerReply.md)
  - [Zernio::ListInboxReviews200ResponseDataInnerReviewer](docs/ListInboxReviews200ResponseDataInnerReviewer.md)
  - [Zernio::ListInboxReviews200ResponseSummary](docs/ListInboxReviews200ResponseSummary.md)
+ - [Zernio::ListLeadFormLeads200Response](docs/ListLeadFormLeads200Response.md)
+ - [Zernio::ListLeadForms200Response](docs/ListLeadForms200Response.md)
  - [Zernio::ListLinkedInOrganizations200Response](docs/ListLinkedInOrganizations200Response.md)
  - [Zernio::ListLinkedInOrganizations200ResponseOrganizationsInner](docs/ListLinkedInOrganizations200ResponseOrganizationsInner.md)
  - [Zernio::ListLogs200Response](docs/ListLogs200Response.md)
@@ -1061,6 +1088,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateInboxConversation200Response](docs/UpdateInboxConversation200Response.md)
  - [Zernio::UpdateInboxConversation200ResponseData](docs/UpdateInboxConversation200ResponseData.md)
  - [Zernio::UpdateInboxConversationRequest](docs/UpdateInboxConversationRequest.md)
+ - [Zernio::UpdateLeadFormRequest](docs/UpdateLeadFormRequest.md)
  - [Zernio::UpdateLinkedInOrganizationRequest](docs/UpdateLinkedInOrganizationRequest.md)
  - [Zernio::UpdatePinterestBoardsRequest](docs/UpdatePinterestBoardsRequest.md)
  - [Zernio::UpdatePostMetadata200Response](docs/UpdatePostMetadata200Response.md)
@@ -1133,6 +1161,8 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadCommentCommentAd](docs/WebhookPayloadCommentCommentAd.md)
  - [Zernio::WebhookPayloadCommentCommentAuthor](docs/WebhookPayloadCommentCommentAuthor.md)
  - [Zernio::WebhookPayloadCommentPost](docs/WebhookPayloadCommentPost.md)
+ - [Zernio::WebhookPayloadLeadReceived](docs/WebhookPayloadLeadReceived.md)
+ - [Zernio::WebhookPayloadLeadReceivedAccount](docs/WebhookPayloadLeadReceivedAccount.md)
  - [Zernio::WebhookPayloadMessage](docs/WebhookPayloadMessage.md)
  - [Zernio::WebhookPayloadMessageAccount](docs/WebhookPayloadMessageAccount.md)
  - [Zernio::WebhookPayloadMessageConversation](docs/WebhookPayloadMessageConversation.md)
