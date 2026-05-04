@@ -970,6 +970,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SendInboxMessageRequestTemplateElementsInnerButtonsInner](docs/SendInboxMessageRequestTemplateElementsInnerButtonsInner.md)
  - [Zernio::SendPrivateReplyToComment200Response](docs/SendPrivateReplyToComment200Response.md)
  - [Zernio::SendPrivateReplyToCommentRequest](docs/SendPrivateReplyToCommentRequest.md)
+ - [Zernio::SendPrivateReplyToCommentRequestQuickRepliesInner](docs/SendPrivateReplyToCommentRequestQuickRepliesInner.md)
  - [Zernio::SendTypingIndicatorRequest](docs/SendTypingIndicatorRequest.md)
  - [Zernio::SendWhatsAppConversion200Response](docs/SendWhatsAppConversion200Response.md)
  - [Zernio::SendWhatsAppConversionRequest](docs/SendWhatsAppConversionRequest.md)

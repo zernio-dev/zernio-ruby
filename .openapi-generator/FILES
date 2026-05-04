@@ -667,6 +667,7 @@ docs/SendInboxMessageRequestTemplateElementsInner.md
 docs/SendInboxMessageRequestTemplateElementsInnerButtonsInner.md
 docs/SendPrivateReplyToComment200Response.md
 docs/SendPrivateReplyToCommentRequest.md
+docs/SendPrivateReplyToCommentRequestQuickRepliesInner.md
 docs/SendTypingIndicatorRequest.md
 docs/SendWhatsAppConversion200Response.md
 docs/SendWhatsAppConversionRequest.md
@@ -1558,6 +1559,7 @@ lib/zernio-sdk/models/send_inbox_message_request_template_elements_inner.rb
 lib/zernio-sdk/models/send_inbox_message_request_template_elements_inner_buttons_inner.rb
 lib/zernio-sdk/models/send_private_reply_to_comment200_response.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request.rb
+lib/zernio-sdk/models/send_private_reply_to_comment_request_quick_replies_inner.rb
 lib/zernio-sdk/models/send_typing_indicator_request.rb
 lib/zernio-sdk/models/send_whats_app_conversion200_response.rb
 lib/zernio-sdk/models/send_whats_app_conversion_request.rb
@@ -2432,6 +2434,7 @@ spec/models/send_inbox_message_request_template_elements_inner_buttons_inner_spe
 spec/models/send_inbox_message_request_template_elements_inner_spec.rb
 spec/models/send_inbox_message_request_template_spec.rb
 spec/models/send_private_reply_to_comment200_response_spec.rb
+spec/models/send_private_reply_to_comment_request_quick_replies_inner_spec.rb
 spec/models/send_private_reply_to_comment_request_spec.rb
 spec/models/send_typing_indicator_request_spec.rb
 spec/models/send_whats_app_conversion200_response_spec.rb

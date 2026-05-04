@@ -14,22 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SendPrivateReplyToCommentRequest < ApiModelBase
-    # The social account ID (Instagram or Facebook)
-    attr_accessor :account_id
+  class SendPrivateReplyToCommentRequestQuickRepliesInner < ApiModelBase
+    # Label shown on the chip. Truncated by Meta beyond 20 characters.
+    attr_accessor :title
 
-    # The message text to send as a private DM
-    attr_accessor :message
+    # Opaque value returned in the inbound webhook when the user taps the chip.
+    attr_accessor :payload
 
-    # Optional quick-reply chips appended to the message. Visible only in the Instagram and Messenger apps (not on web). Maximum 13 entries. 
-    attr_accessor :quick_replies
+    # Optional thumbnail shown next to the chip title.
+    attr_accessor :image_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
-        :'message' => :'message',
-        :'quick_replies' => :'quickReplies'
+        :'title' => :'title',
+        :'payload' => :'payload',
+        :'image_url' => :'imageUrl'
       }
     end
 
@@ -46,9 +46,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
-        :'message' => :'String',
-        :'quick_replies' => :'Array<SendPrivateReplyToCommentRequestQuickRepliesInner>'
+        :'title' => :'String',
+        :'payload' => :'String',
+        :'image_url' => :'String'
       }
     end
 
@@ -62,34 +62,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendPrivateReplyToCommentRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendPrivateReplyToCommentRequestQuickRepliesInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendPrivateReplyToCommentRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendPrivateReplyToCommentRequestQuickRepliesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       else
-        self.account_id = nil
+        self.title = nil
       end
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.key?(:'payload')
+        self.payload = attributes[:'payload']
       else
-        self.message = nil
+        self.payload = nil
       end
 
-      if attributes.key?(:'quick_replies')
-        if (value = attributes[:'quick_replies']).is_a?(Array)
-          self.quick_replies = value
-        end
+      if attributes.key?(:'image_url')
+        self.image_url = attributes[:'image_url']
       end
     end
 
@@ -98,16 +96,16 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      if @title.nil?
+        invalid_properties.push('invalid value for "title", title cannot be nil.')
       end
 
-      if @message.nil?
-        invalid_properties.push('invalid value for "message", message cannot be nil.')
+      if @title.to_s.length > 20
+        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 20.')
       end
 
-      if !@quick_replies.nil? && @quick_replies.length > 13
-        invalid_properties.push('invalid value for "quick_replies", number of items must be less than or equal to 13.')
+      if @payload.nil?
+        invalid_properties.push('invalid value for "payload", payload cannot be nil.')
       end
 
       invalid_properties
@@ -117,44 +115,34 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
-      return false if @message.nil?
-      return false if !@quick_replies.nil? && @quick_replies.length > 13
+      return false if @title.nil?
+      return false if @title.to_s.length > 20
+      return false if @payload.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
       end
 
-      @account_id = account_id
+      if title.to_s.length > 20
+        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 20.'
+      end
+
+      @title = title
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] message Value to be assigned
-    def message=(message)
-      if message.nil?
-        fail ArgumentError, 'message cannot be nil'
+    # @param [Object] payload Value to be assigned
+    def payload=(payload)
+      if payload.nil?
+        fail ArgumentError, 'payload cannot be nil'
       end
 
-      @message = message
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] quick_replies Value to be assigned
-    def quick_replies=(quick_replies)
-      if quick_replies.nil?
-        fail ArgumentError, 'quick_replies cannot be nil'
-      end
-
-      if quick_replies.length > 13
-        fail ArgumentError, 'invalid value for "quick_replies", number of items must be less than or equal to 13.'
-      end
-
-      @quick_replies = quick_replies
+      @payload = payload
     end
 
     # Checks equality by comparing each attribute.
@@ -162,9 +150,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          message == o.message &&
-          quick_replies == o.quick_replies
+          title == o.title &&
+          payload == o.payload &&
+          image_url == o.image_url
     end
 
     # @see the `==` method
@@ -176,7 +164,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, quick_replies].hash
+      [title, payload, image_url].hash
     end
 
     # Builds the object from hash
