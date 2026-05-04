@@ -83,6 +83,77 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Complete WhatsApp phone number selection
+    # Bind a specific WhatsApp phone number to the Zernio profile after the user picks one from `listWhatsAppPhoneNumbers`. Exchanges the short-lived OAuth token for a long-lived token, subscribes the WABA to webhooks, and creates the SocialAccount. 
+    # @param complete_whats_app_phone_selection_request [CompleteWhatsAppPhoneSelectionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :x_connect_token Alternative auth for API users&#39; end customers
+    # @return [CompleteWhatsAppPhoneSelection200Response]
+    def complete_whats_app_phone_selection(complete_whats_app_phone_selection_request, opts = {})
+      data, _status_code, _headers = complete_whats_app_phone_selection_with_http_info(complete_whats_app_phone_selection_request, opts)
+      data
+    end
+
+    # Complete WhatsApp phone number selection
+    # Bind a specific WhatsApp phone number to the Zernio profile after the user picks one from &#x60;listWhatsAppPhoneNumbers&#x60;. Exchanges the short-lived OAuth token for a long-lived token, subscribes the WABA to webhooks, and creates the SocialAccount. 
+    # @param complete_whats_app_phone_selection_request [CompleteWhatsAppPhoneSelectionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :x_connect_token Alternative auth for API users&#39; end customers
+    # @return [Array<(CompleteWhatsAppPhoneSelection200Response, Integer, Hash)>] CompleteWhatsAppPhoneSelection200Response data, response status code and response headers
+    def complete_whats_app_phone_selection_with_http_info(complete_whats_app_phone_selection_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.complete_whats_app_phone_selection ...'
+      end
+      # verify the required parameter 'complete_whats_app_phone_selection_request' is set
+      if @api_client.config.client_side_validation && complete_whats_app_phone_selection_request.nil?
+        fail ArgumentError, "Missing the required parameter 'complete_whats_app_phone_selection_request' when calling ConnectApi.complete_whats_app_phone_selection"
+      end
+      # resource path
+      local_var_path = '/v1/connect/whatsapp/select-phone-number'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+      header_params[:'X-Connect-Token'] = opts[:'x_connect_token'] if !opts[:'x_connect_token'].nil?
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(complete_whats_app_phone_selection_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CompleteWhatsAppPhoneSelection200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.complete_whats_app_phone_selection",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#complete_whats_app_phone_selection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Configure TikTok Ads Brand Identity
     # Set or update the Brand Identity (display name + avatar) for a `tiktokads` SocialAccount. TikTok requires every ad to carry an `identity_id + identity_type` pair. The Brand Identity is the CUSTOMIZED_USER alternative to attributing ads to a real @username (TT_USER). This route uploads the supplied image to TikTok, creates the identity via `/v2/identity/create/`, and caches the resulting `identity_id` on the account so subsequent `POST /v1/ads/create` calls can opt into it via `identityType: 'CUSTOMIZED_USER'`.  Configurable on every `tiktokads` account, including linked-mode ones (those with a posting account on the same profile). Configuration is idempotent and harmless when posting is also connected: the default ad-create path still prefers TT_USER, and CUSTOMIZED_USER is only used per-ad when the caller explicitly opts in.  TikTok identities are immutable post-creation. Re-saving creates a new identity on TikTok and swaps the cached id; the old identity stays orphaned on TikTok's side (harmless, no billing impact).  Alternative: pass `brandIdentity` directly on `POST /v1/ads/create` to configure on first ad creation in a single round-trip. 
     # @param configure_tik_tok_ads_brand_identity_request [ConfigureTikTokAdsBrandIdentityRequest] 
@@ -653,7 +724,7 @@ module Zernio
     end
 
     # Get pending OAuth data
-    # Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL. One-time use, expires after 10 minutes. No authentication required.
+    # Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL.  **Scope**: This endpoint is used only for LinkedIn organizations and Snapchat profiles, where the selection list is too large to fit in URL params. WhatsApp, Facebook, Pinterest, Google Business and other platforms pass selection state directly via URL query params on the redirect (`profileId`, `tempToken`, `step`), no pending record is created, so this endpoint will return 404 for those flows. Use the platform-specific selection endpoint instead (e.g. `/v1/connect/whatsapp/select-phone-number`).  Token is one-time use and expires after 10 minutes. No authentication required. 
     # @param token [String] The pending data token from the OAuth redirect URL (pendingDataToken parameter)
     # @param [Hash] opts the optional parameters
     # @return [GetPendingOAuthData200Response]
@@ -663,7 +734,7 @@ module Zernio
     end
 
     # Get pending OAuth data
-    # Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL. One-time use, expires after 10 minutes. No authentication required.
+    # Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL.  **Scope**: This endpoint is used only for LinkedIn organizations and Snapchat profiles, where the selection list is too large to fit in URL params. WhatsApp, Facebook, Pinterest, Google Business and other platforms pass selection state directly via URL query params on the redirect (&#x60;profileId&#x60;, &#x60;tempToken&#x60;, &#x60;step&#x60;), no pending record is created, so this endpoint will return 404 for those flows. Use the platform-specific selection endpoint instead (e.g. &#x60;/v1/connect/whatsapp/select-phone-number&#x60;).  Token is one-time use and expires after 10 minutes. No authentication required. 
     # @param token [String] The pending data token from the OAuth redirect URL (pendingDataToken parameter)
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetPendingOAuthData200Response, Integer, Hash)>] GetPendingOAuthData200Response data, response status code and response headers
@@ -1541,6 +1612,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#list_snapchat_profiles\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List WhatsApp phone numbers for selection
+    # Fetch the WhatsApp phone numbers available across the user's WhatsApp Business Accounts (WABAs) after a headless OAuth flow.  WhatsApp OAuth grants access at the WABA level. When a connected WABA has 2 or more phone numbers, you must call this endpoint to list them and then `POST /v1/connect/whatsapp/select-phone-number` to bind one to the Zernio profile. Single-phone WABAs auto-complete during the OAuth callback and never reach this endpoint.  Use the `profileId` and `tempToken` returned in the headless redirect (`step=select_phone_number`).  Alternative: if you already know `wabaId` and `phoneNumberId` (e.g. from Meta Business Suite), use `connectWhatsAppCredentials` instead, which skips this two-step flow. 
+    # @param profile_id [String] The Zernio profile ID from the headless redirect
+    # @param temp_token [String] The temporary access token from the headless redirect
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :x_connect_token Alternative auth for API users&#39; end customers (used when the bearer token is scoped to a different user)
+    # @return [ListWhatsAppPhoneNumbers200Response]
+    def list_whats_app_phone_numbers(profile_id, temp_token, opts = {})
+      data, _status_code, _headers = list_whats_app_phone_numbers_with_http_info(profile_id, temp_token, opts)
+      data
+    end
+
+    # List WhatsApp phone numbers for selection
+    # Fetch the WhatsApp phone numbers available across the user&#39;s WhatsApp Business Accounts (WABAs) after a headless OAuth flow.  WhatsApp OAuth grants access at the WABA level. When a connected WABA has 2 or more phone numbers, you must call this endpoint to list them and then &#x60;POST /v1/connect/whatsapp/select-phone-number&#x60; to bind one to the Zernio profile. Single-phone WABAs auto-complete during the OAuth callback and never reach this endpoint.  Use the &#x60;profileId&#x60; and &#x60;tempToken&#x60; returned in the headless redirect (&#x60;step&#x3D;select_phone_number&#x60;).  Alternative: if you already know &#x60;wabaId&#x60; and &#x60;phoneNumberId&#x60; (e.g. from Meta Business Suite), use &#x60;connectWhatsAppCredentials&#x60; instead, which skips this two-step flow. 
+    # @param profile_id [String] The Zernio profile ID from the headless redirect
+    # @param temp_token [String] The temporary access token from the headless redirect
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :x_connect_token Alternative auth for API users&#39; end customers (used when the bearer token is scoped to a different user)
+    # @return [Array<(ListWhatsAppPhoneNumbers200Response, Integer, Hash)>] ListWhatsAppPhoneNumbers200Response data, response status code and response headers
+    def list_whats_app_phone_numbers_with_http_info(profile_id, temp_token, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.list_whats_app_phone_numbers ...'
+      end
+      # verify the required parameter 'profile_id' is set
+      if @api_client.config.client_side_validation && profile_id.nil?
+        fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConnectApi.list_whats_app_phone_numbers"
+      end
+      # verify the required parameter 'temp_token' is set
+      if @api_client.config.client_side_validation && temp_token.nil?
+        fail ArgumentError, "Missing the required parameter 'temp_token' when calling ConnectApi.list_whats_app_phone_numbers"
+      end
+      # resource path
+      local_var_path = '/v1/connect/whatsapp/select-phone-number'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'profileId'] = profile_id
+      query_params[:'tempToken'] = temp_token
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'X-Connect-Token'] = opts[:'x_connect_token'] if !opts[:'x_connect_token'].nil?
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListWhatsAppPhoneNumbers200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.list_whats_app_phone_numbers",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#list_whats_app_phone_numbers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

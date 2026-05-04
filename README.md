@@ -166,6 +166,7 @@ Class | Method | HTTP request | Description
 *Zernio::CommentsApi* | [**unhide_inbox_comment**](docs/CommentsApi.md#unhide_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment
 *Zernio::CommentsApi* | [**unlike_inbox_comment**](docs/CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
 *Zernio::ConnectApi* | [**complete_telegram_connect**](docs/ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status
+*Zernio::ConnectApi* | [**complete_whats_app_phone_selection**](docs/ConnectApi.md#complete_whats_app_phone_selection) | **POST** /v1/connect/whatsapp/select-phone-number | Complete WhatsApp phone number selection
 *Zernio::ConnectApi* | [**configure_tik_tok_ads_brand_identity**](docs/ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Configure TikTok Ads Brand Identity
 *Zernio::ConnectApi* | [**connect_ads**](docs/ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform
 *Zernio::ConnectApi* | [**connect_bluesky_credentials**](docs/ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account
@@ -187,6 +188,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**list_linked_in_organizations**](docs/ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs
 *Zernio::ConnectApi* | [**list_pinterest_boards_for_selection**](docs/ConnectApi.md#list_pinterest_boards_for_selection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards
 *Zernio::ConnectApi* | [**list_snapchat_profiles**](docs/ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles
+*Zernio::ConnectApi* | [**list_whats_app_phone_numbers**](docs/ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List WhatsApp phone numbers for selection
 *Zernio::ConnectApi* | [**select_facebook_page**](docs/ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page
 *Zernio::ConnectApi* | [**select_google_business_location**](docs/ConnectApi.md#select_google_business_location) | **POST** /v1/connect/googlebusiness/select-location | Select GBP location
 *Zernio::ConnectApi* | [**select_linked_in_organization**](docs/ConnectApi.md#select_linked_in_organization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org
@@ -408,6 +410,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
  - [Zernio::CancelBroadcast200ResponseBroadcast](docs/CancelBroadcast200ResponseBroadcast.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
+ - [Zernio::CompleteWhatsAppPhoneSelection200Response](docs/CompleteWhatsAppPhoneSelection200Response.md)
+ - [Zernio::CompleteWhatsAppPhoneSelection200ResponseAccount](docs/CompleteWhatsAppPhoneSelection200ResponseAccount.md)
+ - [Zernio::CompleteWhatsAppPhoneSelectionRequest](docs/CompleteWhatsAppPhoneSelectionRequest.md)
  - [Zernio::ConfigureTikTokAdsBrandIdentity200Response](docs/ConfigureTikTokAdsBrandIdentity200Response.md)
  - [Zernio::ConfigureTikTokAdsBrandIdentityRequest](docs/ConfigureTikTokAdsBrandIdentityRequest.md)
  - [Zernio::ConnectAds200Response](docs/ConnectAds200Response.md)
@@ -854,6 +859,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListWhatsAppGroupChats200ResponsePagingCursors](docs/ListWhatsAppGroupChats200ResponsePagingCursors.md)
  - [Zernio::ListWhatsAppGroupJoinRequests200Response](docs/ListWhatsAppGroupJoinRequests200Response.md)
  - [Zernio::ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner](docs/ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.md)
+ - [Zernio::ListWhatsAppPhoneNumbers200Response](docs/ListWhatsAppPhoneNumbers200Response.md)
+ - [Zernio::ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner](docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md)
  - [Zernio::MediaItem](docs/MediaItem.md)
  - [Zernio::MediaUploadResponse](docs/MediaUploadResponse.md)
  - [Zernio::Money](docs/Money.md)

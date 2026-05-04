@@ -44,6 +44,19 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for complete_whats_app_phone_selection
+  # Complete WhatsApp phone number selection
+  # Bind a specific WhatsApp phone number to the Zernio profile after the user picks one from &#x60;listWhatsAppPhoneNumbers&#x60;. Exchanges the short-lived OAuth token for a long-lived token, subscribes the WABA to webhooks, and creates the SocialAccount. 
+  # @param complete_whats_app_phone_selection_request 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :x_connect_token Alternative auth for API users&#39; end customers
+  # @return [CompleteWhatsAppPhoneSelection200Response]
+  describe 'complete_whats_app_phone_selection test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for configure_tik_tok_ads_brand_identity
   # Configure TikTok Ads Brand Identity
   # Set or update the Brand Identity (display name + avatar) for a &#x60;tiktokads&#x60; SocialAccount. TikTok requires every ad to carry an &#x60;identity_id + identity_type&#x60; pair. The Brand Identity is the CUSTOMIZED_USER alternative to attributing ads to a real @username (TT_USER). This route uploads the supplied image to TikTok, creates the identity via &#x60;/v2/identity/create/&#x60;, and caches the resulting &#x60;identity_id&#x60; on the account so subsequent &#x60;POST /v1/ads/create&#x60; calls can opt into it via &#x60;identityType: &#39;CUSTOMIZED_USER&#39;&#x60;.  Configurable on every &#x60;tiktokads&#x60; account, including linked-mode ones (those with a posting account on the same profile). Configuration is idempotent and harmless when posting is also connected: the default ad-create path still prefers TT_USER, and CUSTOMIZED_USER is only used per-ad when the caller explicitly opts in.  TikTok identities are immutable post-creation. Re-saving creates a new identity on TikTok and swaps the cached id; the old identity stays orphaned on TikTok&#39;s side (harmless, no billing impact).  Alternative: pass &#x60;brandIdentity&#x60; directly on &#x60;POST /v1/ads/create&#x60; to configure on first ad creation in a single round-trip. 
@@ -151,7 +164,7 @@ describe 'ConnectApi' do
 
   # unit tests for get_pending_o_auth_data
   # Get pending OAuth data
-  # Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL. One-time use, expires after 10 minutes. No authentication required.
+  # Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL.  **Scope**: This endpoint is used only for LinkedIn organizations and Snapchat profiles, where the selection list is too large to fit in URL params. WhatsApp, Facebook, Pinterest, Google Business and other platforms pass selection state directly via URL query params on the redirect (&#x60;profileId&#x60;, &#x60;tempToken&#x60;, &#x60;step&#x60;), no pending record is created, so this endpoint will return 404 for those flows. Use the platform-specific selection endpoint instead (e.g. &#x60;/v1/connect/whatsapp/select-phone-number&#x60;).  Token is one-time use and expires after 10 minutes. No authentication required. 
   # @param token The pending data token from the OAuth redirect URL (pendingDataToken parameter)
   # @param [Hash] opts the optional parameters
   # @return [GetPendingOAuthData200Response]
@@ -310,6 +323,20 @@ describe 'ConnectApi' do
   # @param [Hash] opts the optional parameters
   # @return [ListSnapchatProfiles200Response]
   describe 'list_snapchat_profiles test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_whats_app_phone_numbers
+  # List WhatsApp phone numbers for selection
+  # Fetch the WhatsApp phone numbers available across the user&#39;s WhatsApp Business Accounts (WABAs) after a headless OAuth flow.  WhatsApp OAuth grants access at the WABA level. When a connected WABA has 2 or more phone numbers, you must call this endpoint to list them and then &#x60;POST /v1/connect/whatsapp/select-phone-number&#x60; to bind one to the Zernio profile. Single-phone WABAs auto-complete during the OAuth callback and never reach this endpoint.  Use the &#x60;profileId&#x60; and &#x60;tempToken&#x60; returned in the headless redirect (&#x60;step&#x3D;select_phone_number&#x60;).  Alternative: if you already know &#x60;wabaId&#x60; and &#x60;phoneNumberId&#x60; (e.g. from Meta Business Suite), use &#x60;connectWhatsAppCredentials&#x60; instead, which skips this two-step flow. 
+  # @param profile_id The Zernio profile ID from the headless redirect
+  # @param temp_token The temporary access token from the headless redirect
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :x_connect_token Alternative auth for API users&#39; end customers (used when the bearer token is scoped to a different user)
+  # @return [ListWhatsAppPhoneNumbers200Response]
+  describe 'list_whats_app_phone_numbers test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

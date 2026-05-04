@@ -83,6 +83,9 @@ docs/CancelBroadcast200ResponseBroadcast.md
 docs/CommentAutomationsApi.md
 docs/CommentsApi.md
 docs/CompleteTelegramConnect200Response.md
+docs/CompleteWhatsAppPhoneSelection200Response.md
+docs/CompleteWhatsAppPhoneSelection200ResponseAccount.md
+docs/CompleteWhatsAppPhoneSelectionRequest.md
 docs/ConfigureTikTokAdsBrandIdentity200Response.md
 docs/ConfigureTikTokAdsBrandIdentityRequest.md
 docs/ConnectAds200Response.md
@@ -542,6 +545,8 @@ docs/ListWhatsAppGroupChats200ResponsePaging.md
 docs/ListWhatsAppGroupChats200ResponsePagingCursors.md
 docs/ListWhatsAppGroupJoinRequests200Response.md
 docs/ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.md
+docs/ListWhatsAppPhoneNumbers200Response.md
+docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md
 docs/LogsApi.md
 docs/MediaApi.md
 docs/MediaItem.md
@@ -1006,6 +1011,9 @@ lib/zernio-sdk/models/business_center.rb
 lib/zernio-sdk/models/cancel_broadcast200_response.rb
 lib/zernio-sdk/models/cancel_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/complete_telegram_connect200_response.rb
+lib/zernio-sdk/models/complete_whats_app_phone_selection200_response.rb
+lib/zernio-sdk/models/complete_whats_app_phone_selection200_response_account.rb
+lib/zernio-sdk/models/complete_whats_app_phone_selection_request.rb
 lib/zernio-sdk/models/configure_tik_tok_ads_brand_identity200_response.rb
 lib/zernio-sdk/models/configure_tik_tok_ads_brand_identity_request.rb
 lib/zernio-sdk/models/connect_ads200_response.rb
@@ -1452,6 +1460,8 @@ lib/zernio-sdk/models/list_whats_app_group_chats200_response_paging.rb
 lib/zernio-sdk/models/list_whats_app_group_chats200_response_paging_cursors.rb
 lib/zernio-sdk/models/list_whats_app_group_join_requests200_response.rb
 lib/zernio-sdk/models/list_whats_app_group_join_requests200_response_join_requests_inner.rb
+lib/zernio-sdk/models/list_whats_app_phone_numbers200_response.rb
+lib/zernio-sdk/models/list_whats_app_phone_numbers200_response_phone_numbers_inner.rb
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/money.rb
@@ -1892,6 +1902,9 @@ spec/models/business_center_spec.rb
 spec/models/cancel_broadcast200_response_broadcast_spec.rb
 spec/models/cancel_broadcast200_response_spec.rb
 spec/models/complete_telegram_connect200_response_spec.rb
+spec/models/complete_whats_app_phone_selection200_response_account_spec.rb
+spec/models/complete_whats_app_phone_selection200_response_spec.rb
+spec/models/complete_whats_app_phone_selection_request_spec.rb
 spec/models/configure_tik_tok_ads_brand_identity200_response_spec.rb
 spec/models/configure_tik_tok_ads_brand_identity_request_spec.rb
 spec/models/connect_ads200_response_one_of1_spec.rb
@@ -2338,6 +2351,8 @@ spec/models/list_whats_app_group_chats200_response_paging_spec.rb
 spec/models/list_whats_app_group_chats200_response_spec.rb
 spec/models/list_whats_app_group_join_requests200_response_join_requests_inner_spec.rb
 spec/models/list_whats_app_group_join_requests200_response_spec.rb
+spec/models/list_whats_app_phone_numbers200_response_phone_numbers_inner_spec.rb
+spec/models/list_whats_app_phone_numbers200_response_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
 spec/models/money_spec.rb

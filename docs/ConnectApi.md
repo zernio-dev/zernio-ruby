@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**complete_telegram_connect**](ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status |
+| [**complete_whats_app_phone_selection**](ConnectApi.md#complete_whats_app_phone_selection) | **POST** /v1/connect/whatsapp/select-phone-number | Complete WhatsApp phone number selection |
 | [**configure_tik_tok_ads_brand_identity**](ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Configure TikTok Ads Brand Identity |
 | [**connect_ads**](ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform |
 | [**connect_bluesky_credentials**](ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account |
@@ -26,6 +27,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_linked_in_organizations**](ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs |
 | [**list_pinterest_boards_for_selection**](ConnectApi.md#list_pinterest_boards_for_selection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards |
 | [**list_snapchat_profiles**](ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles |
+| [**list_whats_app_phone_numbers**](ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List WhatsApp phone numbers for selection |
 | [**select_facebook_page**](ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page |
 | [**select_google_business_location**](ConnectApi.md#select_google_business_location) | **POST** /v1/connect/googlebusiness/select-location | Select GBP location |
 | [**select_linked_in_organization**](ConnectApi.md#select_linked_in_organization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org |
@@ -105,6 +107,79 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## complete_whats_app_phone_selection
+
+> <CompleteWhatsAppPhoneSelection200Response> complete_whats_app_phone_selection(complete_whats_app_phone_selection_request, opts)
+
+Complete WhatsApp phone number selection
+
+Bind a specific WhatsApp phone number to the Zernio profile after the user picks one from `listWhatsAppPhoneNumbers`. Exchanges the short-lived OAuth token for a long-lived token, subscribes the WABA to webhooks, and creates the SocialAccount. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+complete_whats_app_phone_selection_request = Zernio::CompleteWhatsAppPhoneSelectionRequest.new({profile_id: 'profile_id_example', phone_number_id: 'phone_number_id_example', waba_id: 'waba_id_example', temp_token: 'temp_token_example'}) # CompleteWhatsAppPhoneSelectionRequest | 
+opts = {
+  x_connect_token: 'x_connect_token_example' # String | Alternative auth for API users' end customers
+}
+
+begin
+  # Complete WhatsApp phone number selection
+  result = api_instance.complete_whats_app_phone_selection(complete_whats_app_phone_selection_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->complete_whats_app_phone_selection: #{e}"
+end
+```
+
+#### Using the complete_whats_app_phone_selection_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CompleteWhatsAppPhoneSelection200Response>, Integer, Hash)> complete_whats_app_phone_selection_with_http_info(complete_whats_app_phone_selection_request, opts)
+
+```ruby
+begin
+  # Complete WhatsApp phone number selection
+  data, status_code, headers = api_instance.complete_whats_app_phone_selection_with_http_info(complete_whats_app_phone_selection_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CompleteWhatsAppPhoneSelection200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->complete_whats_app_phone_selection_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **complete_whats_app_phone_selection_request** | [**CompleteWhatsAppPhoneSelectionRequest**](CompleteWhatsAppPhoneSelectionRequest.md) |  |  |
+| **x_connect_token** | **String** | Alternative auth for API users&#39; end customers | [optional] |
+
+### Return type
+
+[**CompleteWhatsAppPhoneSelection200Response**](CompleteWhatsAppPhoneSelection200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -688,7 +763,7 @@ end
 
 Get pending OAuth data
 
-Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL. One-time use, expires after 10 minutes. No authentication required.
+Fetch pending OAuth data for headless mode using the pendingDataToken from the redirect URL.  **Scope**: This endpoint is used only for LinkedIn organizations and Snapchat profiles, where the selection list is too large to fit in URL params. WhatsApp, Facebook, Pinterest, Google Business and other platforms pass selection state directly via URL query params on the redirect (`profileId`, `tempToken`, `step`), no pending record is created, so this endpoint will return 404 for those flows. Use the platform-specific selection endpoint instead (e.g. `/v1/connect/whatsapp/select-phone-number`).  Token is one-time use and expires after 10 minutes. No authentication required. 
 
 ### Examples
 
@@ -1599,6 +1674,81 @@ end
 ### Return type
 
 [**ListSnapchatProfiles200Response**](ListSnapchatProfiles200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_whats_app_phone_numbers
+
+> <ListWhatsAppPhoneNumbers200Response> list_whats_app_phone_numbers(profile_id, temp_token, opts)
+
+List WhatsApp phone numbers for selection
+
+Fetch the WhatsApp phone numbers available across the user's WhatsApp Business Accounts (WABAs) after a headless OAuth flow.  WhatsApp OAuth grants access at the WABA level. When a connected WABA has 2 or more phone numbers, you must call this endpoint to list them and then `POST /v1/connect/whatsapp/select-phone-number` to bind one to the Zernio profile. Single-phone WABAs auto-complete during the OAuth callback and never reach this endpoint.  Use the `profileId` and `tempToken` returned in the headless redirect (`step=select_phone_number`).  Alternative: if you already know `wabaId` and `phoneNumberId` (e.g. from Meta Business Suite), use `connectWhatsAppCredentials` instead, which skips this two-step flow. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | The Zernio profile ID from the headless redirect
+temp_token = 'temp_token_example' # String | The temporary access token from the headless redirect
+opts = {
+  x_connect_token: 'x_connect_token_example' # String | Alternative auth for API users' end customers (used when the bearer token is scoped to a different user)
+}
+
+begin
+  # List WhatsApp phone numbers for selection
+  result = api_instance.list_whats_app_phone_numbers(profile_id, temp_token, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_whats_app_phone_numbers: #{e}"
+end
+```
+
+#### Using the list_whats_app_phone_numbers_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWhatsAppPhoneNumbers200Response>, Integer, Hash)> list_whats_app_phone_numbers_with_http_info(profile_id, temp_token, opts)
+
+```ruby
+begin
+  # List WhatsApp phone numbers for selection
+  data, status_code, headers = api_instance.list_whats_app_phone_numbers_with_http_info(profile_id, temp_token, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWhatsAppPhoneNumbers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_whats_app_phone_numbers_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | The Zernio profile ID from the headless redirect |  |
+| **temp_token** | **String** | The temporary access token from the headless redirect |  |
+| **x_connect_token** | **String** | Alternative auth for API users&#39; end customers (used when the bearer token is scoped to a different user) | [optional] |
+
+### Return type
+
+[**ListWhatsAppPhoneNumbers200Response**](ListWhatsAppPhoneNumbers200Response.md)
 
 ### Authorization
 
