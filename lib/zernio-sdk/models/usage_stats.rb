@@ -14,7 +14,11 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Plan and usage stats. The response shape depends on `billingSystem`:   * Stripe users (default): per-period counters like `usage.uploads` and     `usage.profiles` are returned, scoped by the plan's `limits`.   * Metronome users (usage-based): `limits` are unlimited (-1). The     `usage` block carries connected-account and per-X-operation counts,     and the `spend` block carries current-period costs plus the X cap. 
   class UsageStats < ApiModelBase
+    # Which billing system the account is on. Shape of `usage`/`spend` differs.
+    attr_accessor :billing_system
+
     attr_accessor :plan_name
 
     attr_accessor :billing_period
@@ -24,9 +28,23 @@ module Zernio
     # Day of month (1-31) when the billing cycle resets
     attr_accessor :billing_anchor_day
 
+    # True if the account is in good standing. False for past-due/unpaid/paused subscriptions.
+    attr_accessor :has_access
+
+    # Stripe customer ID, when present.
+    attr_accessor :customer_id
+
+    # True if this is a team member; limits/usage reflect the account owner.
+    attr_accessor :is_invited_user
+
+    # Stripe-only. Always false for Metronome users.
+    attr_accessor :auto_upgrade_enabled
+
     attr_accessor :limits
 
     attr_accessor :usage
+
+    attr_accessor :spend
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -53,12 +71,18 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'billing_system' => :'billingSystem',
         :'plan_name' => :'planName',
         :'billing_period' => :'billingPeriod',
         :'signup_date' => :'signupDate',
         :'billing_anchor_day' => :'billingAnchorDay',
+        :'has_access' => :'hasAccess',
+        :'customer_id' => :'customerId',
+        :'is_invited_user' => :'isInvitedUser',
+        :'auto_upgrade_enabled' => :'autoUpgradeEnabled',
         :'limits' => :'limits',
-        :'usage' => :'usage'
+        :'usage' => :'usage',
+        :'spend' => :'spend'
       }
     end
 
@@ -75,12 +99,18 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'billing_system' => :'String',
         :'plan_name' => :'String',
         :'billing_period' => :'String',
         :'signup_date' => :'Time',
         :'billing_anchor_day' => :'Integer',
+        :'has_access' => :'Boolean',
+        :'customer_id' => :'String',
+        :'is_invited_user' => :'Boolean',
+        :'auto_upgrade_enabled' => :'Boolean',
         :'limits' => :'UsageStatsLimits',
-        :'usage' => :'UsageStatsUsage'
+        :'usage' => :'UsageStatsUsage',
+        :'spend' => :'UsageStatsSpend'
       }
     end
 
@@ -106,6 +136,10 @@ module Zernio
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'billing_system')
+        self.billing_system = attributes[:'billing_system']
+      end
+
       if attributes.key?(:'plan_name')
         self.plan_name = attributes[:'plan_name']
       end
@@ -122,12 +156,32 @@ module Zernio
         self.billing_anchor_day = attributes[:'billing_anchor_day']
       end
 
+      if attributes.key?(:'has_access')
+        self.has_access = attributes[:'has_access']
+      end
+
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
+      end
+
+      if attributes.key?(:'is_invited_user')
+        self.is_invited_user = attributes[:'is_invited_user']
+      end
+
+      if attributes.key?(:'auto_upgrade_enabled')
+        self.auto_upgrade_enabled = attributes[:'auto_upgrade_enabled']
+      end
+
       if attributes.key?(:'limits')
         self.limits = attributes[:'limits']
       end
 
       if attributes.key?(:'usage')
         self.usage = attributes[:'usage']
+      end
+
+      if attributes.key?(:'spend')
+        self.spend = attributes[:'spend']
       end
     end
 
@@ -143,9 +197,21 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      billing_system_validator = EnumAttributeValidator.new('String', ["stripe", "metronome"])
+      return false unless billing_system_validator.valid?(@billing_system)
       billing_period_validator = EnumAttributeValidator.new('String', ["monthly", "yearly"])
       return false unless billing_period_validator.valid?(@billing_period)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] billing_system Object to be assigned
+    def billing_system=(billing_system)
+      validator = EnumAttributeValidator.new('String', ["stripe", "metronome"])
+      unless validator.valid?(billing_system)
+        fail ArgumentError, "invalid value for \"billing_system\", must be one of #{validator.allowable_values}."
+      end
+      @billing_system = billing_system
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -163,12 +229,18 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          billing_system == o.billing_system &&
           plan_name == o.plan_name &&
           billing_period == o.billing_period &&
           signup_date == o.signup_date &&
           billing_anchor_day == o.billing_anchor_day &&
+          has_access == o.has_access &&
+          customer_id == o.customer_id &&
+          is_invited_user == o.is_invited_user &&
+          auto_upgrade_enabled == o.auto_upgrade_enabled &&
           limits == o.limits &&
-          usage == o.usage
+          usage == o.usage &&
+          spend == o.spend
     end
 
     # @see the `==` method
@@ -180,7 +252,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [plan_name, billing_period, signup_date, billing_anchor_day, limits, usage].hash
+      [billing_system, plan_name, billing_period, signup_date, billing_anchor_day, has_access, customer_id, is_invited_user, auto_upgrade_enabled, limits, usage, spend].hash
     end
 
     # Builds the object from hash

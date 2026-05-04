@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **username** | **String** |  | [optional] |
 | **display_name** | **String** |  | [optional] |
+| **x_capabilities** | [**UpdateAccountRequestXCapabilities**](UpdateAccountRequestXCapabilities.md) |  | [optional] |
 
 ## Example
 
@@ -14,7 +15,8 @@ require 'zernio-sdk'
 
 instance = Zernio::UpdateAccountRequest.new(
   username: null,
-  display_name: null
+  display_name: null,
+  x_capabilities: null
 )
 ```
 

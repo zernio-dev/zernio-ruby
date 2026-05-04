@@ -34,10 +34,21 @@ describe 'UsageApi' do
 
   # unit tests for get_usage_stats
   # Get plan and usage stats
-  # Returns the current plan name, billing period, plan limits, and usage counts.
+  # Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCalls&#x60; (aggregated by tier), &#x60;usage.xApiCallsByOperation&#x60;     (per-operation map — resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;),     plus a &#x60;spend&#x60; block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. 
   # @param [Hash] opts the optional parameters
   # @return [UsageStats]
   describe 'get_usage_stats test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_x_api_pricing
+  # Get X/Twitter API pricing table
+  # Returns Zernio&#39;s canonical X/Twitter API pricing table. Each X action has its own Metronome product and its own rate, and Zernio passes X API costs through at exact rates with zero markup.  The response is identical for every authenticated user (pricing is universal), so it is safe to cache on the client for the duration of a billing period.  To compute your own per-operation spend, pair this endpoint with &#x60;GET /v1/usage-stats&#x60; — that endpoint returns &#x60;usage.xApiCallsByOperation&#x60; keyed by the same &#x60;operation&#x60; field you get here. 
+  # @param [Hash] opts the optional parameters
+  # @return [XApiPricing]
+  describe 'get_x_api_pricing test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -14,19 +14,42 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAccountRequest < ApiModelBase
-    attr_accessor :username
+  class XApiPricingTiersInner < ApiModelBase
+    # Historical bucket key used in `xApiCalls` aggregation.
+    attr_accessor :tier
 
-    attr_accessor :display_name
+    attr_accessor :price_per_call_usd
 
-    attr_accessor :x_capabilities
+    attr_accessor :operation_count
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'username' => :'username',
-        :'display_name' => :'displayName',
-        :'x_capabilities' => :'xCapabilities'
+        :'tier' => :'tier',
+        :'price_per_call_usd' => :'pricePerCallUsd',
+        :'operation_count' => :'operationCount'
       }
     end
 
@@ -43,9 +66,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'username' => :'String',
-        :'display_name' => :'String',
-        :'x_capabilities' => :'UpdateAccountRequestXCapabilities'
+        :'tier' => :'String',
+        :'price_per_call_usd' => :'Float',
+        :'operation_count' => :'Integer'
       }
     end
 
@@ -59,28 +82,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::XApiPricingTiersInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::XApiPricingTiersInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'tier')
+        self.tier = attributes[:'tier']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'price_per_call_usd')
+        self.price_per_call_usd = attributes[:'price_per_call_usd']
       end
 
-      if attributes.key?(:'x_capabilities')
-        self.x_capabilities = attributes[:'x_capabilities']
+      if attributes.key?(:'operation_count')
+        self.operation_count = attributes[:'operation_count']
       end
     end
 
@@ -96,7 +119,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      tier_validator = EnumAttributeValidator.new('String', ["x_api_005", "x_api_010", "x_api_015"])
+      return false unless tier_validator.valid?(@tier)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tier Object to be assigned
+    def tier=(tier)
+      validator = EnumAttributeValidator.new('String', ["x_api_005", "x_api_010", "x_api_015"])
+      unless validator.valid?(tier)
+        fail ArgumentError, "invalid value for \"tier\", must be one of #{validator.allowable_values}."
+      end
+      @tier = tier
     end
 
     # Checks equality by comparing each attribute.
@@ -104,9 +139,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          username == o.username &&
-          display_name == o.display_name &&
-          x_capabilities == o.x_capabilities
+          tier == o.tier &&
+          price_per_call_usd == o.price_per_call_usd &&
+          operation_count == o.operation_count
     end
 
     # @see the `==` method
@@ -118,7 +153,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, display_name, x_capabilities].hash
+      [tier, price_per_call_usd, operation_count].hash
     end
 
     # Builds the object from hash

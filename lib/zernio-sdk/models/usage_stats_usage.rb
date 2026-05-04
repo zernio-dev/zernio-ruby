@@ -14,19 +14,34 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Per-period usage counts. Fields present depend on `billingSystem`: Stripe returns `uploads` / `profiles` / `lastReset`; Metronome returns `connectedAccounts` / `xApiCalls` / `xApiCallsByOperation`. 
   class UsageStatsUsage < ApiModelBase
+    # Stripe users only. Uploads consumed in the current period.
     attr_accessor :uploads
 
+    # Stripe users only. Profiles currently owned.
     attr_accessor :profiles
 
+    # Stripe users only.
     attr_accessor :last_reset
+
+    # Metronome users only. Accounts currently connected across the team.
+    attr_accessor :connected_accounts
+
+    attr_accessor :x_api_calls
+
+    # Metronome users only. Per-operation X API call counts keyed by operation (e.g. `posts_read`, `content_create`). Resolve each key to price and metadata via `GET /v1/billing/x-pricing`. 
+    attr_accessor :x_api_calls_by_operation
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'uploads' => :'uploads',
         :'profiles' => :'profiles',
-        :'last_reset' => :'lastReset'
+        :'last_reset' => :'lastReset',
+        :'connected_accounts' => :'connectedAccounts',
+        :'x_api_calls' => :'xApiCalls',
+        :'x_api_calls_by_operation' => :'xApiCallsByOperation'
       }
     end
 
@@ -45,7 +60,10 @@ module Zernio
       {
         :'uploads' => :'Integer',
         :'profiles' => :'Integer',
-        :'last_reset' => :'Time'
+        :'last_reset' => :'Time',
+        :'connected_accounts' => :'Integer',
+        :'x_api_calls' => :'UsageStatsUsageXApiCalls',
+        :'x_api_calls_by_operation' => :'Hash<String, Integer>'
       }
     end
 
@@ -82,6 +100,20 @@ module Zernio
       if attributes.key?(:'last_reset')
         self.last_reset = attributes[:'last_reset']
       end
+
+      if attributes.key?(:'connected_accounts')
+        self.connected_accounts = attributes[:'connected_accounts']
+      end
+
+      if attributes.key?(:'x_api_calls')
+        self.x_api_calls = attributes[:'x_api_calls']
+      end
+
+      if attributes.key?(:'x_api_calls_by_operation')
+        if (value = attributes[:'x_api_calls_by_operation']).is_a?(Hash)
+          self.x_api_calls_by_operation = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -106,7 +138,10 @@ module Zernio
       self.class == o.class &&
           uploads == o.uploads &&
           profiles == o.profiles &&
-          last_reset == o.last_reset
+          last_reset == o.last_reset &&
+          connected_accounts == o.connected_accounts &&
+          x_api_calls == o.x_api_calls &&
+          x_api_calls_by_operation == o.x_api_calls_by_operation
     end
 
     # @see the `==` method
@@ -118,7 +153,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [uploads, profiles, last_reset].hash
+      [uploads, profiles, last_reset, connected_accounts, x_api_calls, x_api_calls_by_operation].hash
     end
 
     # Builds the object from hash

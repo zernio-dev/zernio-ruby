@@ -117,7 +117,7 @@ describe 'AccountsApi' do
 
   # unit tests for update_account
   # Update account
-  # Updates a connected social account&#39;s display name or username override.
+  # Updates a connected social account&#39;s display name or username override.  For X/Twitter accounts on usage-based billing, also accepts an &#x60;xCapabilities&#x60; object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default &#x60;false&#x60;) — when off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting &#x60;xCapabilities&#x60; on a non-X account returns 400. 
   # @param account_id 
   # @param update_account_request 
   # @param [Hash] opts the optional parameters

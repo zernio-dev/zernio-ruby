@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Plan limits. For Metronome users both fields are `-1` (unlimited).
   class UsageStatsLimits < ApiModelBase
     attr_accessor :uploads
 

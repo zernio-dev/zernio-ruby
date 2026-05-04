@@ -14,19 +14,27 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAccountRequest < ApiModelBase
-    attr_accessor :username
+  # Metronome users only. Current-period spend summary.
+  class UsageStatsSpend < ApiModelBase
+    # Total current-period spend in cents (all products combined).
+    attr_accessor :current_period_cents
 
-    attr_accessor :display_name
+    # Free-tier credit remaining in cents. Applied before any charge.
+    attr_accessor :credits_remaining_cents
 
-    attr_accessor :x_capabilities
+    # Current-period X/Twitter API spend in cents, derived from the per-tier call counts. Rounded up for conservative enforcement against `xSpendLimitCents`. 
+    attr_accessor :x_spend_cents
+
+    # Monthly X spend cap set by the account owner, or null if no cap. When current X spend hits this cap, analytics and inbox sync are auto-paused for X accounts. Publishing is never blocked by this cap. 
+    attr_accessor :x_spend_limit_cents
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'username' => :'username',
-        :'display_name' => :'displayName',
-        :'x_capabilities' => :'xCapabilities'
+        :'current_period_cents' => :'currentPeriodCents',
+        :'credits_remaining_cents' => :'creditsRemainingCents',
+        :'x_spend_cents' => :'xSpendCents',
+        :'x_spend_limit_cents' => :'xSpendLimitCents'
       }
     end
 
@@ -43,9 +51,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'username' => :'String',
-        :'display_name' => :'String',
-        :'x_capabilities' => :'UpdateAccountRequestXCapabilities'
+        :'current_period_cents' => :'Integer',
+        :'credits_remaining_cents' => :'Integer',
+        :'x_spend_cents' => :'Integer',
+        :'x_spend_limit_cents' => :'Integer'
       }
     end
 
@@ -59,28 +68,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UsageStatsSpend` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UsageStatsSpend`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'current_period_cents')
+        self.current_period_cents = attributes[:'current_period_cents']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'credits_remaining_cents')
+        self.credits_remaining_cents = attributes[:'credits_remaining_cents']
       end
 
-      if attributes.key?(:'x_capabilities')
-        self.x_capabilities = attributes[:'x_capabilities']
+      if attributes.key?(:'x_spend_cents')
+        self.x_spend_cents = attributes[:'x_spend_cents']
+      end
+
+      if attributes.key?(:'x_spend_limit_cents')
+        self.x_spend_limit_cents = attributes[:'x_spend_limit_cents']
       end
     end
 
@@ -104,9 +117,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          username == o.username &&
-          display_name == o.display_name &&
-          x_capabilities == o.x_capabilities
+          current_period_cents == o.current_period_cents &&
+          credits_remaining_cents == o.credits_remaining_cents &&
+          x_spend_cents == o.x_spend_cents &&
+          x_spend_limit_cents == o.x_spend_limit_cents
     end
 
     # @see the `==` method
@@ -118,7 +132,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, display_name, x_capabilities].hash
+      [current_period_cents, credits_remaining_cents, x_spend_cents, x_spend_limit_cents].hash
     end
 
     # Builds the object from hash

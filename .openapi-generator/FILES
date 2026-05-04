@@ -444,6 +444,8 @@ docs/InitiateTelegramConnect200ResponseAccount.md
 docs/InitiateTelegramConnectRequest.md
 docs/InlineObject.md
 docs/InlineObject1.md
+docs/InlineObject2.md
+docs/InlineObject2Details.md
 docs/InstagramAccountInsightsResponse.md
 docs/InstagramAccountInsightsResponseDateRange.md
 docs/InstagramAccountInsightsResponseMetricsValue.md
@@ -699,9 +701,11 @@ docs/UnlikeInboxComment200Response.md
 docs/UnpublishPost200Response.md
 docs/UnpublishPostRequest.md
 docs/UpdateAccount200Response.md
+docs/UpdateAccount200ResponseXCapabilities.md
 docs/UpdateAccountGroup200Response.md
 docs/UpdateAccountGroupRequest.md
 docs/UpdateAccountRequest.md
+docs/UpdateAccountRequestXCapabilities.md
 docs/UpdateAd200Response.md
 docs/UpdateAdCampaign200Response.md
 docs/UpdateAdCampaignRequest.md
@@ -797,7 +801,9 @@ docs/UploadedFile.md
 docs/UsageApi.md
 docs/UsageStats.md
 docs/UsageStatsLimits.md
+docs/UsageStatsSpend.md
 docs/UsageStatsUsage.md
+docs/UsageStatsUsageXApiCalls.md
 docs/User.md
 docs/UserGetResponse.md
 docs/UsersApi.md
@@ -872,6 +878,10 @@ docs/WhatsAppHeaderComponentExample.md
 docs/WhatsAppPhoneNumbersApi.md
 docs/WhatsAppTemplateButton.md
 docs/WhatsAppTemplateComponent.md
+docs/XApiOperation.md
+docs/XApiOperationTriggeredByInner.md
+docs/XApiPricing.md
+docs/XApiPricingTiersInner.md
 docs/YouTubeDailyViewsResponse.md
 docs/YouTubeDailyViewsResponseDailyViewsInner.md
 docs/YouTubeDailyViewsResponseDateRange.md
@@ -1346,6 +1356,8 @@ lib/zernio-sdk/models/initiate_telegram_connect200_response_account.rb
 lib/zernio-sdk/models/initiate_telegram_connect_request.rb
 lib/zernio-sdk/models/inline_object.rb
 lib/zernio-sdk/models/inline_object1.rb
+lib/zernio-sdk/models/inline_object2.rb
+lib/zernio-sdk/models/inline_object2_details.rb
 lib/zernio-sdk/models/instagram_account_insights_response.rb
 lib/zernio-sdk/models/instagram_account_insights_response_date_range.rb
 lib/zernio-sdk/models/instagram_account_insights_response_metrics_value.rb
@@ -1589,9 +1601,11 @@ lib/zernio-sdk/models/unlike_inbox_comment200_response.rb
 lib/zernio-sdk/models/unpublish_post200_response.rb
 lib/zernio-sdk/models/unpublish_post_request.rb
 lib/zernio-sdk/models/update_account200_response.rb
+lib/zernio-sdk/models/update_account200_response_x_capabilities.rb
 lib/zernio-sdk/models/update_account_group200_response.rb
 lib/zernio-sdk/models/update_account_group_request.rb
 lib/zernio-sdk/models/update_account_request.rb
+lib/zernio-sdk/models/update_account_request_x_capabilities.rb
 lib/zernio-sdk/models/update_ad200_response.rb
 lib/zernio-sdk/models/update_ad_campaign200_response.rb
 lib/zernio-sdk/models/update_ad_campaign_request.rb
@@ -1686,7 +1700,9 @@ lib/zernio-sdk/models/upload_whats_app_flow_json_request_flow_json.rb
 lib/zernio-sdk/models/uploaded_file.rb
 lib/zernio-sdk/models/usage_stats.rb
 lib/zernio-sdk/models/usage_stats_limits.rb
+lib/zernio-sdk/models/usage_stats_spend.rb
 lib/zernio-sdk/models/usage_stats_usage.rb
+lib/zernio-sdk/models/usage_stats_usage_x_api_calls.rb
 lib/zernio-sdk/models/user.rb
 lib/zernio-sdk/models/user_get_response.rb
 lib/zernio-sdk/models/users_list_response.rb
@@ -1754,6 +1770,10 @@ lib/zernio-sdk/models/whats_app_header_component.rb
 lib/zernio-sdk/models/whats_app_header_component_example.rb
 lib/zernio-sdk/models/whats_app_template_button.rb
 lib/zernio-sdk/models/whats_app_template_component.rb
+lib/zernio-sdk/models/x_api_operation.rb
+lib/zernio-sdk/models/x_api_operation_triggered_by_inner.rb
+lib/zernio-sdk/models/x_api_pricing.rb
+lib/zernio-sdk/models/x_api_pricing_tiers_inner.rb
 lib/zernio-sdk/models/you_tube_daily_views_response.rb
 lib/zernio-sdk/models/you_tube_daily_views_response_daily_views_inner.rb
 lib/zernio-sdk/models/you_tube_daily_views_response_date_range.rb
@@ -2221,6 +2241,8 @@ spec/models/initiate_telegram_connect200_response_account_spec.rb
 spec/models/initiate_telegram_connect200_response_spec.rb
 spec/models/initiate_telegram_connect_request_spec.rb
 spec/models/inline_object1_spec.rb
+spec/models/inline_object2_details_spec.rb
+spec/models/inline_object2_spec.rb
 spec/models/inline_object_spec.rb
 spec/models/instagram_account_insights_response_date_range_spec.rb
 spec/models/instagram_account_insights_response_metrics_value_breakdowns_inner_spec.rb
@@ -2465,9 +2487,11 @@ spec/models/unlike_inbox_comment200_response_spec.rb
 spec/models/unpublish_post200_response_spec.rb
 spec/models/unpublish_post_request_spec.rb
 spec/models/update_account200_response_spec.rb
+spec/models/update_account200_response_x_capabilities_spec.rb
 spec/models/update_account_group200_response_spec.rb
 spec/models/update_account_group_request_spec.rb
 spec/models/update_account_request_spec.rb
+spec/models/update_account_request_x_capabilities_spec.rb
 spec/models/update_ad200_response_spec.rb
 spec/models/update_ad_campaign200_response_spec.rb
 spec/models/update_ad_campaign_request_budget_spec.rb
@@ -2562,7 +2586,9 @@ spec/models/upload_whats_app_flow_json_request_spec.rb
 spec/models/uploaded_file_spec.rb
 spec/models/usage_stats_limits_spec.rb
 spec/models/usage_stats_spec.rb
+spec/models/usage_stats_spend_spec.rb
 spec/models/usage_stats_usage_spec.rb
+spec/models/usage_stats_usage_x_api_calls_spec.rb
 spec/models/user_get_response_spec.rb
 spec/models/user_spec.rb
 spec/models/users_list_response_spec.rb
@@ -2630,6 +2656,10 @@ spec/models/whats_app_header_component_example_spec.rb
 spec/models/whats_app_header_component_spec.rb
 spec/models/whats_app_template_button_spec.rb
 spec/models/whats_app_template_component_spec.rb
+spec/models/x_api_operation_spec.rb
+spec/models/x_api_operation_triggered_by_inner_spec.rb
+spec/models/x_api_pricing_spec.rb
+spec/models/x_api_pricing_tiers_inner_spec.rb
 spec/models/you_tube_daily_views_response_daily_views_inner_spec.rb
 spec/models/you_tube_daily_views_response_date_range_spec.rb
 spec/models/you_tube_daily_views_response_scope_status_spec.rb

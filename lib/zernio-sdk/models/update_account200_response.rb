@@ -21,12 +21,15 @@ module Zernio
 
     attr_accessor :display_name
 
+    attr_accessor :x_capabilities
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'message' => :'message',
         :'username' => :'username',
-        :'display_name' => :'displayName'
+        :'display_name' => :'displayName',
+        :'x_capabilities' => :'xCapabilities'
       }
     end
 
@@ -45,7 +48,8 @@ module Zernio
       {
         :'message' => :'String',
         :'username' => :'String',
-        :'display_name' => :'String'
+        :'display_name' => :'String',
+        :'x_capabilities' => :'UpdateAccount200ResponseXCapabilities'
       }
     end
 
@@ -82,6 +86,10 @@ module Zernio
       if attributes.key?(:'display_name')
         self.display_name = attributes[:'display_name']
       end
+
+      if attributes.key?(:'x_capabilities')
+        self.x_capabilities = attributes[:'x_capabilities']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -106,7 +114,8 @@ module Zernio
       self.class == o.class &&
           message == o.message &&
           username == o.username &&
-          display_name == o.display_name
+          display_name == o.display_name &&
+          x_capabilities == o.x_capabilities
     end
 
     # @see the `==` method
@@ -118,7 +127,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message, username, display_name].hash
+      [message, username, display_name, x_capabilities].hash
     end
 
     # Builds the object from hash

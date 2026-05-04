@@ -14,19 +14,60 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAccountRequest < ApiModelBase
-    attr_accessor :username
+  # A single X API operation with its per-call price and the Zernio platform methods that trigger it.
+  class XApiOperation < ApiModelBase
+    # Internal operation key. Matches keys in `xApiCallsByOperation`.
+    attr_accessor :operation
 
+    # Metronome `event_type` emitted when this operation runs.
+    attr_accessor :event_type
+
+    # Human-readable label shown on Metronome invoices.
     attr_accessor :display_name
 
-    attr_accessor :x_capabilities
+    attr_accessor :price_per_call_usd
+
+    # Per-call price in cents. Fractional values are intentional.
+    attr_accessor :price_per_call_cents
+
+    # Which aggregate price tier this operation falls into.
+    attr_accessor :tier
+
+    # Zernio platform methods that emit this operation, with their metering rule.
+    attr_accessor :triggered_by
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'username' => :'username',
+        :'operation' => :'operation',
+        :'event_type' => :'eventType',
         :'display_name' => :'displayName',
-        :'x_capabilities' => :'xCapabilities'
+        :'price_per_call_usd' => :'pricePerCallUsd',
+        :'price_per_call_cents' => :'pricePerCallCents',
+        :'tier' => :'tier',
+        :'triggered_by' => :'triggeredBy'
       }
     end
 
@@ -43,9 +84,13 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'username' => :'String',
+        :'operation' => :'String',
+        :'event_type' => :'String',
         :'display_name' => :'String',
-        :'x_capabilities' => :'UpdateAccountRequestXCapabilities'
+        :'price_per_call_usd' => :'Float',
+        :'price_per_call_cents' => :'Float',
+        :'tier' => :'String',
+        :'triggered_by' => :'Array<XApiOperationTriggeredByInner>'
       }
     end
 
@@ -59,28 +104,46 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::XApiOperation` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::XApiOperation`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'operation')
+        self.operation = attributes[:'operation']
+      end
+
+      if attributes.key?(:'event_type')
+        self.event_type = attributes[:'event_type']
       end
 
       if attributes.key?(:'display_name')
         self.display_name = attributes[:'display_name']
       end
 
-      if attributes.key?(:'x_capabilities')
-        self.x_capabilities = attributes[:'x_capabilities']
+      if attributes.key?(:'price_per_call_usd')
+        self.price_per_call_usd = attributes[:'price_per_call_usd']
+      end
+
+      if attributes.key?(:'price_per_call_cents')
+        self.price_per_call_cents = attributes[:'price_per_call_cents']
+      end
+
+      if attributes.key?(:'tier')
+        self.tier = attributes[:'tier']
+      end
+
+      if attributes.key?(:'triggered_by')
+        if (value = attributes[:'triggered_by']).is_a?(Array)
+          self.triggered_by = value
+        end
       end
     end
 
@@ -96,7 +159,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      tier_validator = EnumAttributeValidator.new('String', ["x_api_005", "x_api_010", "x_api_015"])
+      return false unless tier_validator.valid?(@tier)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tier Object to be assigned
+    def tier=(tier)
+      validator = EnumAttributeValidator.new('String', ["x_api_005", "x_api_010", "x_api_015"])
+      unless validator.valid?(tier)
+        fail ArgumentError, "invalid value for \"tier\", must be one of #{validator.allowable_values}."
+      end
+      @tier = tier
     end
 
     # Checks equality by comparing each attribute.
@@ -104,9 +179,13 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          username == o.username &&
+          operation == o.operation &&
+          event_type == o.event_type &&
           display_name == o.display_name &&
-          x_capabilities == o.x_capabilities
+          price_per_call_usd == o.price_per_call_usd &&
+          price_per_call_cents == o.price_per_call_cents &&
+          tier == o.tier &&
+          triggered_by == o.triggered_by
     end
 
     # @see the `==` method
@@ -118,7 +197,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, display_name, x_capabilities].hash
+      [operation, event_type, display_name, price_per_call_usd, price_per_call_cents, tier, triggered_by].hash
     end
 
     # Builds the object from hash

@@ -290,6 +290,7 @@ Class | Method | HTTP request | Description
 *Zernio::TwitterEngagementApi* | [**undo_retweet**](docs/TwitterEngagementApi.md#undo_retweet) | **DELETE** /v1/twitter/retweet | Undo retweet
 *Zernio::TwitterEngagementApi* | [**unfollow_user**](docs/TwitterEngagementApi.md#unfollow_user) | **DELETE** /v1/twitter/follow | Unfollow a user
 *Zernio::UsageApi* | [**get_usage_stats**](docs/UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage stats
+*Zernio::UsageApi* | [**get_x_api_pricing**](docs/UsageApi.md#get_x_api_pricing) | **GET** /v1/billing/x-pricing | Get X/Twitter API pricing table
 *Zernio::UsersApi* | [**get_user**](docs/UsersApi.md#get_user) | **GET** /v1/users/{userId} | Get user
 *Zernio::UsersApi* | [**list_users**](docs/UsersApi.md#list_users) | **GET** /v1/users | List users
 *Zernio::ValidateApi* | [**validate_media**](docs/ValidateApi.md#validate_media) | **POST** /v1/tools/validate/media | Validate media URL
@@ -757,6 +758,8 @@ Class | Method | HTTP request | Description
  - [Zernio::InitiateTelegramConnectRequest](docs/InitiateTelegramConnectRequest.md)
  - [Zernio::InlineObject](docs/InlineObject.md)
  - [Zernio::InlineObject1](docs/InlineObject1.md)
+ - [Zernio::InlineObject2](docs/InlineObject2.md)
+ - [Zernio::InlineObject2Details](docs/InlineObject2Details.md)
  - [Zernio::InstagramAccountInsightsResponse](docs/InstagramAccountInsightsResponse.md)
  - [Zernio::InstagramAccountInsightsResponseDateRange](docs/InstagramAccountInsightsResponseDateRange.md)
  - [Zernio::InstagramAccountInsightsResponseMetricsValue](docs/InstagramAccountInsightsResponseMetricsValue.md)
@@ -1000,9 +1003,11 @@ Class | Method | HTTP request | Description
  - [Zernio::UnpublishPost200Response](docs/UnpublishPost200Response.md)
  - [Zernio::UnpublishPostRequest](docs/UnpublishPostRequest.md)
  - [Zernio::UpdateAccount200Response](docs/UpdateAccount200Response.md)
+ - [Zernio::UpdateAccount200ResponseXCapabilities](docs/UpdateAccount200ResponseXCapabilities.md)
  - [Zernio::UpdateAccountGroup200Response](docs/UpdateAccountGroup200Response.md)
  - [Zernio::UpdateAccountGroupRequest](docs/UpdateAccountGroupRequest.md)
  - [Zernio::UpdateAccountRequest](docs/UpdateAccountRequest.md)
+ - [Zernio::UpdateAccountRequestXCapabilities](docs/UpdateAccountRequestXCapabilities.md)
  - [Zernio::UpdateAd200Response](docs/UpdateAd200Response.md)
  - [Zernio::UpdateAdCampaign200Response](docs/UpdateAdCampaign200Response.md)
  - [Zernio::UpdateAdCampaignRequest](docs/UpdateAdCampaignRequest.md)
@@ -1097,7 +1102,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadedFile](docs/UploadedFile.md)
  - [Zernio::UsageStats](docs/UsageStats.md)
  - [Zernio::UsageStatsLimits](docs/UsageStatsLimits.md)
+ - [Zernio::UsageStatsSpend](docs/UsageStatsSpend.md)
  - [Zernio::UsageStatsUsage](docs/UsageStatsUsage.md)
+ - [Zernio::UsageStatsUsageXApiCalls](docs/UsageStatsUsageXApiCalls.md)
  - [Zernio::User](docs/User.md)
  - [Zernio::UserGetResponse](docs/UserGetResponse.md)
  - [Zernio::UsersListResponse](docs/UsersListResponse.md)
@@ -1165,6 +1172,10 @@ Class | Method | HTTP request | Description
  - [Zernio::WhatsAppHeaderComponentExample](docs/WhatsAppHeaderComponentExample.md)
  - [Zernio::WhatsAppTemplateButton](docs/WhatsAppTemplateButton.md)
  - [Zernio::WhatsAppTemplateComponent](docs/WhatsAppTemplateComponent.md)
+ - [Zernio::XApiOperation](docs/XApiOperation.md)
+ - [Zernio::XApiOperationTriggeredByInner](docs/XApiOperationTriggeredByInner.md)
+ - [Zernio::XApiPricing](docs/XApiPricing.md)
+ - [Zernio::XApiPricingTiersInner](docs/XApiPricingTiersInner.md)
  - [Zernio::YouTubeDailyViewsResponse](docs/YouTubeDailyViewsResponse.md)
  - [Zernio::YouTubeDailyViewsResponseDailyViewsInner](docs/YouTubeDailyViewsResponseDailyViewsInner.md)
  - [Zernio::YouTubeDailyViewsResponseDateRange](docs/YouTubeDailyViewsResponseDateRange.md)

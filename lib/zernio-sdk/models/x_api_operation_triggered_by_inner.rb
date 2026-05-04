@@ -14,19 +14,40 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAccountRequest < ApiModelBase
-    attr_accessor :username
+  class XApiOperationTriggeredByInner < ApiModelBase
+    # Zernio platform method name.
+    attr_accessor :method
 
-    attr_accessor :display_name
+    # When the method actually bills the user:   * `always` — every call is metered   * `analytics_optin` — only when the X account has analytics enabled   * `inbox_optin` — only when the X account has inbox sync enabled   * `absorbed` — Zernio eats the cost, never billed 
+    attr_accessor :metering
 
-    attr_accessor :x_capabilities
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'username' => :'username',
-        :'display_name' => :'displayName',
-        :'x_capabilities' => :'xCapabilities'
+        :'method' => :'method',
+        :'metering' => :'metering'
       }
     end
 
@@ -43,9 +64,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'username' => :'String',
-        :'display_name' => :'String',
-        :'x_capabilities' => :'UpdateAccountRequestXCapabilities'
+        :'method' => :'String',
+        :'metering' => :'String'
       }
     end
 
@@ -59,28 +79,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::XApiOperationTriggeredByInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::XApiOperationTriggeredByInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'method')
+        self.method = attributes[:'method']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
-      end
-
-      if attributes.key?(:'x_capabilities')
-        self.x_capabilities = attributes[:'x_capabilities']
+      if attributes.key?(:'metering')
+        self.metering = attributes[:'metering']
       end
     end
 
@@ -96,7 +112,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      metering_validator = EnumAttributeValidator.new('String', ["always", "analytics_optin", "inbox_optin", "absorbed"])
+      return false unless metering_validator.valid?(@metering)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] metering Object to be assigned
+    def metering=(metering)
+      validator = EnumAttributeValidator.new('String', ["always", "analytics_optin", "inbox_optin", "absorbed"])
+      unless validator.valid?(metering)
+        fail ArgumentError, "invalid value for \"metering\", must be one of #{validator.allowable_values}."
+      end
+      @metering = metering
     end
 
     # Checks equality by comparing each attribute.
@@ -104,9 +132,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          username == o.username &&
-          display_name == o.display_name &&
-          x_capabilities == o.x_capabilities
+          method == o.method &&
+          metering == o.metering
     end
 
     # @see the `==` method
@@ -118,7 +145,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, display_name, x_capabilities].hash
+      [method, metering].hash
     end
 
     # Builds the object from hash

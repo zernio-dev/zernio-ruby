@@ -14,19 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAccountRequest < ApiModelBase
-    attr_accessor :username
+  # X/Twitter only. Per-account opt-in toggles for background API operations that incur X API pass-through costs. Each call is billed via Metronome at the X tier rate. Either field can be sent independently; omitted fields are unchanged. 
+  class UpdateAccountRequestXCapabilities < ApiModelBase
+    # Enable periodic analytics reads (impressions, likes, etc.) for this X account. Each X API call is metered as `posts_read` and billed pass-through (~$0.005/call at the time of writing — actual rate depends on X's pricing tier). 
+    attr_accessor :analytics
 
-    attr_accessor :display_name
-
-    attr_accessor :x_capabilities
+    # Enable DM polling and inbox sync for this X account. DM reads are metered as `dm_event_read` (~$0.010/call) and DM sends as `dm_interaction_create` (~$0.015/call), both billed pass-through. DM sends fire only on user-initiated actions; reads/polling fire only when this flag is true. 
+    attr_accessor :inbox
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'username' => :'username',
-        :'display_name' => :'displayName',
-        :'x_capabilities' => :'xCapabilities'
+        :'analytics' => :'analytics',
+        :'inbox' => :'inbox'
       }
     end
 
@@ -43,9 +43,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'username' => :'String',
-        :'display_name' => :'String',
-        :'x_capabilities' => :'UpdateAccountRequestXCapabilities'
+        :'analytics' => :'Boolean',
+        :'inbox' => :'Boolean'
       }
     end
 
@@ -59,28 +58,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequestXCapabilities` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequestXCapabilities`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'analytics')
+        self.analytics = attributes[:'analytics']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
-      end
-
-      if attributes.key?(:'x_capabilities')
-        self.x_capabilities = attributes[:'x_capabilities']
+      if attributes.key?(:'inbox')
+        self.inbox = attributes[:'inbox']
       end
     end
 
@@ -104,9 +99,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          username == o.username &&
-          display_name == o.display_name &&
-          x_capabilities == o.x_capabilities
+          analytics == o.analytics &&
+          inbox == o.inbox
     end
 
     # @see the `==` method
@@ -118,7 +112,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, display_name, x_capabilities].hash
+      [analytics, inbox].hash
     end
 
     # Builds the object from hash

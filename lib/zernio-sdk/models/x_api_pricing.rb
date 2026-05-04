@@ -14,19 +14,33 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAccountRequest < ApiModelBase
-    attr_accessor :username
+  # Canonical X/Twitter API pricing table. Zernio passes X API costs through at exact rates with zero markup, so every call you make has a known per-unit price. Use this payload alongside `/v1/usage-stats` (which returns per-operation call counts via `xApiCallsByOperation`) to compute exact cost attribution by X action. 
+  class XApiPricing < ApiModelBase
+    attr_accessor :currency
 
-    attr_accessor :display_name
+    # Always 0% — Zernio does not mark up X API rates.
+    attr_accessor :markup
 
-    attr_accessor :x_capabilities
+    attr_accessor :source
+
+    # Date the prices were last verified against X's published rates.
+    attr_accessor :last_verified
+
+    # Rollup of operations grouped by their per-call price.
+    attr_accessor :tiers
+
+    # Flat list of every X operation Zernio can perform, with its rate.
+    attr_accessor :operations
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'username' => :'username',
-        :'display_name' => :'displayName',
-        :'x_capabilities' => :'xCapabilities'
+        :'currency' => :'currency',
+        :'markup' => :'markup',
+        :'source' => :'source',
+        :'last_verified' => :'lastVerified',
+        :'tiers' => :'tiers',
+        :'operations' => :'operations'
       }
     end
 
@@ -43,9 +57,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'username' => :'String',
-        :'display_name' => :'String',
-        :'x_capabilities' => :'UpdateAccountRequestXCapabilities'
+        :'currency' => :'String',
+        :'markup' => :'String',
+        :'source' => :'String',
+        :'last_verified' => :'Date',
+        :'tiers' => :'Array<XApiPricingTiersInner>',
+        :'operations' => :'Array<XApiOperation>'
       }
     end
 
@@ -59,28 +76,44 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::XApiPricing` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::XApiPricing`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'markup')
+        self.markup = attributes[:'markup']
       end
 
-      if attributes.key?(:'x_capabilities')
-        self.x_capabilities = attributes[:'x_capabilities']
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
+      end
+
+      if attributes.key?(:'last_verified')
+        self.last_verified = attributes[:'last_verified']
+      end
+
+      if attributes.key?(:'tiers')
+        if (value = attributes[:'tiers']).is_a?(Array)
+          self.tiers = value
+        end
+      end
+
+      if attributes.key?(:'operations')
+        if (value = attributes[:'operations']).is_a?(Array)
+          self.operations = value
+        end
       end
     end
 
@@ -104,9 +137,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          username == o.username &&
-          display_name == o.display_name &&
-          x_capabilities == o.x_capabilities
+          currency == o.currency &&
+          markup == o.markup &&
+          source == o.source &&
+          last_verified == o.last_verified &&
+          tiers == o.tiers &&
+          operations == o.operations
     end
 
     # @see the `==` method
@@ -118,7 +154,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, display_name, x_capabilities].hash
+      [currency, markup, source, last_verified, tiers, operations].hash
     end
 
     # Builds the object from hash

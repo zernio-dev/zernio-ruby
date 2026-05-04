@@ -14,19 +14,31 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAccountRequest < ApiModelBase
-    attr_accessor :username
+  # Structured context for SDK clients that want to render their own UX. Keys vary by `reason`.
+  class InlineObject2Details < ApiModelBase
+    # How many accounts the free tier allows. Only set when reason=free_tier_exceeded.
+    attr_accessor :free_tier_account_limit
 
-    attr_accessor :display_name
+    # How many accounts the team currently has connected. Set when reason=free_tier_exceeded or reason=enterprise_required.
+    attr_accessor :current_account_count
 
-    attr_accessor :x_capabilities
+    # Whether the team currently has a card on file in Stripe. Set when reason=free_tier_exceeded or reason=twitter_passthrough.
+    attr_accessor :has_payment_method
+
+    # Public pricing ceiling (the published cap beyond which an enterprise contract is required). Only set when reason=enterprise_required.
+    attr_accessor :public_account_limit
+
+    # The cap actually applied to this team. Equals `public_account_limit` for organic teams; for teams with a per-customer override (grandfathered legacy customers, signed enterprise contracts) this can be higher. Only set when reason=enterprise_required. 
+    attr_accessor :effective_account_limit
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'username' => :'username',
-        :'display_name' => :'displayName',
-        :'x_capabilities' => :'xCapabilities'
+        :'free_tier_account_limit' => :'free_tier_account_limit',
+        :'current_account_count' => :'current_account_count',
+        :'has_payment_method' => :'has_payment_method',
+        :'public_account_limit' => :'public_account_limit',
+        :'effective_account_limit' => :'effective_account_limit'
       }
     end
 
@@ -43,9 +55,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'username' => :'String',
-        :'display_name' => :'String',
-        :'x_capabilities' => :'UpdateAccountRequestXCapabilities'
+        :'free_tier_account_limit' => :'Integer',
+        :'current_account_count' => :'Integer',
+        :'has_payment_method' => :'Boolean',
+        :'public_account_limit' => :'Integer',
+        :'effective_account_limit' => :'Integer'
       }
     end
 
@@ -59,28 +73,36 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InlineObject2Details` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InlineObject2Details`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'free_tier_account_limit')
+        self.free_tier_account_limit = attributes[:'free_tier_account_limit']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'current_account_count')
+        self.current_account_count = attributes[:'current_account_count']
       end
 
-      if attributes.key?(:'x_capabilities')
-        self.x_capabilities = attributes[:'x_capabilities']
+      if attributes.key?(:'has_payment_method')
+        self.has_payment_method = attributes[:'has_payment_method']
+      end
+
+      if attributes.key?(:'public_account_limit')
+        self.public_account_limit = attributes[:'public_account_limit']
+      end
+
+      if attributes.key?(:'effective_account_limit')
+        self.effective_account_limit = attributes[:'effective_account_limit']
       end
     end
 
@@ -104,9 +126,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          username == o.username &&
-          display_name == o.display_name &&
-          x_capabilities == o.x_capabilities
+          free_tier_account_limit == o.free_tier_account_limit &&
+          current_account_count == o.current_account_count &&
+          has_payment_method == o.has_payment_method &&
+          public_account_limit == o.public_account_limit &&
+          effective_account_limit == o.effective_account_limit
     end
 
     # @see the `==` method
@@ -118,7 +142,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, display_name, x_capabilities].hash
+      [free_tier_account_limit, current_account_count, has_payment_method, public_account_limit, effective_account_limit].hash
     end
 
     # Builds the object from hash

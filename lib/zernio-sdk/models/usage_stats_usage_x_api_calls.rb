@@ -14,19 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAccountRequest < ApiModelBase
-    attr_accessor :username
+  # Metronome users only. Aggregated X API call counts bucketed by price tier (backward-compat). For per-operation breakdown use `xApiCallsByOperation`. 
+  class UsageStatsUsageXApiCalls < ApiModelBase
+    # Calls at $0.005 per call (reads, list mgmt, bookmarks, etc.)
+    attr_accessor :x_api_005
 
-    attr_accessor :display_name
+    # Calls at $0.010 per call (publish/delete, DM reads, follows)
+    attr_accessor :x_api_010
 
-    attr_accessor :x_capabilities
+    # Calls at $0.015 per call (sending DMs, follow actions)
+    attr_accessor :x_api_015
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'username' => :'username',
-        :'display_name' => :'displayName',
-        :'x_capabilities' => :'xCapabilities'
+        :'x_api_005' => :'x_api_005',
+        :'x_api_010' => :'x_api_010',
+        :'x_api_015' => :'x_api_015'
       }
     end
 
@@ -43,9 +47,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'username' => :'String',
-        :'display_name' => :'String',
-        :'x_capabilities' => :'UpdateAccountRequestXCapabilities'
+        :'x_api_005' => :'Integer',
+        :'x_api_010' => :'Integer',
+        :'x_api_015' => :'Integer'
       }
     end
 
@@ -59,28 +63,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAccountRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UsageStatsUsageXApiCalls` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAccountRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UsageStatsUsageXApiCalls`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'x_api_005')
+        self.x_api_005 = attributes[:'x_api_005']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'x_api_010')
+        self.x_api_010 = attributes[:'x_api_010']
       end
 
-      if attributes.key?(:'x_capabilities')
-        self.x_capabilities = attributes[:'x_capabilities']
+      if attributes.key?(:'x_api_015')
+        self.x_api_015 = attributes[:'x_api_015']
       end
     end
 
@@ -104,9 +108,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          username == o.username &&
-          display_name == o.display_name &&
-          x_capabilities == o.x_capabilities
+          x_api_005 == o.x_api_005 &&
+          x_api_010 == o.x_api_010 &&
+          x_api_015 == o.x_api_015
     end
 
     # @see the `==` method
@@ -118,7 +122,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [username, display_name, x_capabilities].hash
+      [x_api_005, x_api_010, x_api_015].hash
     end
 
     # Builds the object from hash

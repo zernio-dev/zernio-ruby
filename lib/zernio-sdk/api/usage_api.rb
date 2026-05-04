@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Get plan and usage stats
-    # Returns the current plan name, billing period, plan limits, and usage counts.
+    # Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCalls` (aggregated by tier), `usage.xApiCallsByOperation`     (per-operation map — resolve keys via `GET /v1/billing/x-pricing`),     plus a `spend` block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. 
     # @param [Hash] opts the optional parameters
     # @return [UsageStats]
     def get_usage_stats(opts = {})
@@ -29,7 +29,7 @@ module Zernio
     end
 
     # Get plan and usage stats
-    # Returns the current plan name, billing period, plan limits, and usage counts.
+    # Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCalls&#x60; (aggregated by tier), &#x60;usage.xApiCallsByOperation&#x60;     (per-operation map — resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;),     plus a &#x60;spend&#x60; block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UsageStats, Integer, Hash)>] UsageStats data, response status code and response headers
     def get_usage_stats_with_http_info(opts = {})
@@ -72,6 +72,63 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: UsageApi#get_usage_stats\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get X/Twitter API pricing table
+    # Returns Zernio's canonical X/Twitter API pricing table. Each X action has its own Metronome product and its own rate, and Zernio passes X API costs through at exact rates with zero markup.  The response is identical for every authenticated user (pricing is universal), so it is safe to cache on the client for the duration of a billing period.  To compute your own per-operation spend, pair this endpoint with `GET /v1/usage-stats` — that endpoint returns `usage.xApiCallsByOperation` keyed by the same `operation` field you get here. 
+    # @param [Hash] opts the optional parameters
+    # @return [XApiPricing]
+    def get_x_api_pricing(opts = {})
+      data, _status_code, _headers = get_x_api_pricing_with_http_info(opts)
+      data
+    end
+
+    # Get X/Twitter API pricing table
+    # Returns Zernio&#39;s canonical X/Twitter API pricing table. Each X action has its own Metronome product and its own rate, and Zernio passes X API costs through at exact rates with zero markup.  The response is identical for every authenticated user (pricing is universal), so it is safe to cache on the client for the duration of a billing period.  To compute your own per-operation spend, pair this endpoint with &#x60;GET /v1/usage-stats&#x60; — that endpoint returns &#x60;usage.xApiCallsByOperation&#x60; keyed by the same &#x60;operation&#x60; field you get here. 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(XApiPricing, Integer, Hash)>] XApiPricing data, response status code and response headers
+    def get_x_api_pricing_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: UsageApi.get_x_api_pricing ...'
+      end
+      # resource path
+      local_var_path = '/v1/billing/x-pricing'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'XApiPricing'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"UsageApi.get_x_api_pricing",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsageApi#get_x_api_pricing\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
