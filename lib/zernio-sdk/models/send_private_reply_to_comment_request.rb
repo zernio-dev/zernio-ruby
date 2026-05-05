@@ -21,15 +21,19 @@ module Zernio
     # The message text to send as a private DM
     attr_accessor :message
 
-    # Optional quick-reply chips appended to the message. Visible only in the Instagram and Messenger apps (not on web). Maximum 13 entries. 
+    # Optional quick-reply chips appended to the message. Visible only in the Instagram and Messenger apps (not on web). Maximum 13 entries. Mutually exclusive with `buttons`. Note: chips do NOT render in the Instagram Message Requests folder where DMs from non-followers land — use `buttons` instead for cold reach. 
     attr_accessor :quick_replies
+
+    # Optional 1-3 inline buttons rendered as part of the same message bubble via Meta's button_template. Visible in the Instagram Message Requests folder (unlike quick replies). Mutually exclusive with `quickReplies`. 
+    attr_accessor :buttons
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'account_id' => :'accountId',
         :'message' => :'message',
-        :'quick_replies' => :'quickReplies'
+        :'quick_replies' => :'quickReplies',
+        :'buttons' => :'buttons'
       }
     end
 
@@ -48,7 +52,8 @@ module Zernio
       {
         :'account_id' => :'String',
         :'message' => :'String',
-        :'quick_replies' => :'Array<SendPrivateReplyToCommentRequestQuickRepliesInner>'
+        :'quick_replies' => :'Array<SendPrivateReplyToCommentRequestQuickRepliesInner>',
+        :'buttons' => :'Array<SendPrivateReplyToCommentRequestButtonsInner>'
       }
     end
 
@@ -91,6 +96,12 @@ module Zernio
           self.quick_replies = value
         end
       end
+
+      if attributes.key?(:'buttons')
+        if (value = attributes[:'buttons']).is_a?(Array)
+          self.buttons = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,6 +121,14 @@ module Zernio
         invalid_properties.push('invalid value for "quick_replies", number of items must be less than or equal to 13.')
       end
 
+      if !@buttons.nil? && @buttons.length > 3
+        invalid_properties.push('invalid value for "buttons", number of items must be less than or equal to 3.')
+      end
+
+      if !@buttons.nil? && @buttons.length < 1
+        invalid_properties.push('invalid value for "buttons", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -120,6 +139,8 @@ module Zernio
       return false if @account_id.nil?
       return false if @message.nil?
       return false if !@quick_replies.nil? && @quick_replies.length > 13
+      return false if !@buttons.nil? && @buttons.length > 3
+      return false if !@buttons.nil? && @buttons.length < 1
       true
     end
 
@@ -157,6 +178,24 @@ module Zernio
       @quick_replies = quick_replies
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] buttons Value to be assigned
+    def buttons=(buttons)
+      if buttons.nil?
+        fail ArgumentError, 'buttons cannot be nil'
+      end
+
+      if buttons.length > 3
+        fail ArgumentError, 'invalid value for "buttons", number of items must be less than or equal to 3.'
+      end
+
+      if buttons.length < 1
+        fail ArgumentError, 'invalid value for "buttons", number of items must be greater than or equal to 1.'
+      end
+
+      @buttons = buttons
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -164,7 +203,8 @@ module Zernio
       self.class == o.class &&
           account_id == o.account_id &&
           message == o.message &&
-          quick_replies == o.quick_replies
+          quick_replies == o.quick_replies &&
+          buttons == o.buttons
     end
 
     # @see the `==` method
@@ -176,7 +216,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, quick_replies].hash
+      [account_id, message, quick_replies, buttons].hash
     end
 
     # Builds the object from hash

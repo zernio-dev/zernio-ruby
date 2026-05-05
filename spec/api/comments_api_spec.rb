@@ -126,7 +126,7 @@ describe 'CommentsApi' do
 
   # unit tests for send_private_reply_to_comment
   # Send private reply
-  # Send a private message to the author of a comment. Supported on Instagram and Facebook only. One reply per comment, must be sent within 7 days. Optionally include up to 13 quick-reply chips (&#x60;quickReplies&#x60;) on the same first message — useful for comment-to-DM automations that want to capture intent in a single round-trip. 
+  # Send a private message to the author of a comment. Supported on Instagram and Facebook only. One reply per comment, must be sent within 7 days. Optionally attach interactive elements: &#x60;quickReplies&#x60; (chips above the keyboard, max 13) or &#x60;buttons&#x60; (1-3 inline postback/url buttons rendered in the same bubble via Meta&#39;s button_template). Buttons are recommended for cold reach since chips do not render in the Instagram Message Requests folder. &#x60;quickReplies&#x60; and &#x60;buttons&#x60; are mutually exclusive. 
   # @param post_id The media/post ID (Instagram media ID or Facebook post ID)
   # @param comment_id The comment ID to send a private reply to
   # @param send_private_reply_to_comment_request 
