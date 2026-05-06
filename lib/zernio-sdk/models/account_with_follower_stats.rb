@@ -177,14 +177,20 @@ module Zernio
 
       if attributes.key?(:'_id')
         self._id = attributes[:'_id']
+      else
+        self._id = nil
       end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
+      else
+        self.platform = nil
       end
 
       if attributes.key?(:'profile_id')
         self.profile_id = attributes[:'profile_id']
+      else
+        self.profile_id = nil
       end
 
       if attributes.key?(:'username')
@@ -205,6 +211,8 @@ module Zernio
 
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
+      else
+        self.is_active = nil
       end
 
       if attributes.key?(:'followers_count')
@@ -257,6 +265,22 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @_id.nil?
+        invalid_properties.push('invalid value for "_id", _id cannot be nil.')
+      end
+
+      if @platform.nil?
+        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
+      end
+
+      if @profile_id.nil?
+        invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
+      end
+
+      if @is_active.nil?
+        invalid_properties.push('invalid value for "is_active", is_active cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -264,9 +288,23 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @_id.nil?
+      return false if @platform.nil?
       platform_validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads"])
       return false unless platform_validator.valid?(@platform)
+      return false if @profile_id.nil?
+      return false if @is_active.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] _id Value to be assigned
+    def _id=(_id)
+      if _id.nil?
+        fail ArgumentError, '_id cannot be nil'
+      end
+
+      @_id = _id
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -277,6 +315,26 @@ module Zernio
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] profile_id Value to be assigned
+    def profile_id=(profile_id)
+      if profile_id.nil?
+        fail ArgumentError, 'profile_id cannot be nil'
+      end
+
+      @profile_id = profile_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] is_active Value to be assigned
+    def is_active=(is_active)
+      if is_active.nil?
+        fail ArgumentError, 'is_active cannot be nil'
+      end
+
+      @is_active = is_active
     end
 
     # Checks equality by comparing each attribute.

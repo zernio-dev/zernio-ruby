@@ -77,10 +77,14 @@ module Zernio
         if (value = attributes[:'accounts']).is_a?(Array)
           self.accounts = value
         end
+      else
+        self.accounts = nil
       end
 
       if attributes.key?(:'has_analytics_access')
         self.has_analytics_access = attributes[:'has_analytics_access']
+      else
+        self.has_analytics_access = nil
       end
 
       if attributes.key?(:'pagination')
@@ -93,6 +97,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @accounts.nil?
+        invalid_properties.push('invalid value for "accounts", accounts cannot be nil.')
+      end
+
+      if @has_analytics_access.nil?
+        invalid_properties.push('invalid value for "has_analytics_access", has_analytics_access cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -100,7 +112,29 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @accounts.nil?
+      return false if @has_analytics_access.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] accounts Value to be assigned
+    def accounts=(accounts)
+      if accounts.nil?
+        fail ArgumentError, 'accounts cannot be nil'
+      end
+
+      @accounts = accounts
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] has_analytics_access Value to be assigned
+    def has_analytics_access=(has_analytics_access)
+      if has_analytics_access.nil?
+        fail ArgumentError, 'has_analytics_access cannot be nil'
+      end
+
+      @has_analytics_access = has_analytics_access
     end
 
     # Checks equality by comparing each attribute.
