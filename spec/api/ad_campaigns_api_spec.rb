@@ -72,7 +72,7 @@ describe 'AdCampaignsApi' do
 
   # unit tests for get_ad_tree
   # Get campaign tree
-  # Returns a nested Campaign &gt; Ad Set &gt; Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \&quot;Ungrouped\&quot; buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. Ranges older than 90 days trigger a one-time on-demand fetch from the platform when scoped to a specific accountId, then serve from cache on subsequent requests. 
+  # Returns a nested Campaign &gt; Ad Set &gt; Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \&quot;Ungrouped\&quot; buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit Campaigns per page
@@ -82,7 +82,7 @@ describe 'AdCampaignsApi' do
   # @option opts [String] :ad_account_id Platform ad account ID
   # @option opts [String] :account_id Social account ID
   # @option opts [String] :profile_id Profile ID
-  # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago. Ranges older than 90 days trigger an on-demand platform fetch when scoped to a specific accountId.
+  # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
   # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   # @return [GetAdTree200Response]
   describe 'get_ad_tree test' do
