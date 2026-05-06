@@ -94,11 +94,11 @@ describe 'AdsApi' do
 
   # unit tests for get_ad_analytics
   # Get ad analytics
-  # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
+  # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. Ranges older than 90 days trigger a one-time on-demand fetch from the platform, then serve from cache on subsequent requests. 
   # @param ad_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
-  # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
+  # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago. Ranges older than 90 days trigger an on-demand platform fetch.
+  # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   # @option opts [String] :breakdowns Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region. TikTok: gender, age, country_code, platform, ac, language.
   # @return [GetAdAnalytics200Response]
   describe 'get_ad_analytics test' do
@@ -137,7 +137,7 @@ describe 'AdsApi' do
 
   # unit tests for list_ads
   # List ads
-  # Returns a paginated list of ads with metrics computed over an optional date range. Use source&#x3D;all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 90 days max. 
+  # Returns a paginated list of ads with metrics computed over an optional date range. Use source&#x3D;all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. Ranges older than 90 days trigger a one-time on-demand fetch from the platform when scoped to a specific accountId, then serve from cache on subsequent requests. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Page number (1-based)
   # @option opts [Integer] :limit 
@@ -148,8 +148,8 @@ describe 'AdsApi' do
   # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
   # @option opts [String] :profile_id Profile ID
   # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
-  # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
-  # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 90-day range.
+  # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago. Ranges older than 90 days trigger an on-demand platform fetch when scoped to a specific accountId.
+  # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   # @return [ListAds200Response]
   describe 'list_ads test' do
     it 'should work' do
