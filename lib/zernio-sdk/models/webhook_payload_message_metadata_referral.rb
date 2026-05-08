@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # WhatsApp only. Click-to-WhatsApp (CTWA) ad attribution. Present only on the FIRST inbound message after a user reaches the business via a CTWA ad. Forwarded verbatim from Meta's referral envelope so it can be replayed to the Conversions API for Business Messaging. Attribution window is 7 days from click. 
+  # Ad-click attribution forwarded verbatim from Meta. Populated only on the FIRST inbound message after the click; absent on subsequent messages of the same conversation.  The populated subset identifies the source platform:   - `ctwa_clid` and `source_*` fields: WhatsApp CTWA     (Click-to-WhatsApp). Attribution window is 7 days from click.     Forward to Meta Conversions API for Business Messaging replay.   - `ad_id` and `ads_context_data`: Facebook Messenger CTM     (Click-to-Message) or Instagram CTD (Click-to-Direct). Use     `ad_id` to attribute the conversation to a specific ad. 
   class WebhookPayloadMessageMetadataReferral < ApiModelBase
     # Meta's GCLID-equivalent click identifier.
     attr_accessor :ctwa_clid
@@ -37,6 +37,20 @@ module Zernio
 
     attr_accessor :thumbnail_url
 
+    # Facebook Messenger CTM / Instagram CTD only. The Meta ad ID the user clicked to start the conversation. 
+    attr_accessor :ad_id
+
+    # Optional `ref` parameter passed through from the Meta ad creative. Facebook Messenger CTM / Instagram CTD only. 
+    attr_accessor :ref
+
+    # Meta-supplied source identifier (e.g. `ADS`). Facebook Messenger CTM / Instagram CTD only. 
+    attr_accessor :source
+
+    # Meta-supplied referral type (e.g. `OPEN_THREAD`). Facebook Messenger CTM / Instagram CTD only. 
+    attr_accessor :type
+
+    attr_accessor :ads_context_data
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -49,7 +63,12 @@ module Zernio
         :'media_type' => :'media_type',
         :'image_url' => :'image_url',
         :'video_url' => :'video_url',
-        :'thumbnail_url' => :'thumbnail_url'
+        :'thumbnail_url' => :'thumbnail_url',
+        :'ad_id' => :'ad_id',
+        :'ref' => :'ref',
+        :'source' => :'source',
+        :'type' => :'type',
+        :'ads_context_data' => :'ads_context_data'
       }
     end
 
@@ -75,7 +94,12 @@ module Zernio
         :'media_type' => :'String',
         :'image_url' => :'String',
         :'video_url' => :'String',
-        :'thumbnail_url' => :'String'
+        :'thumbnail_url' => :'String',
+        :'ad_id' => :'String',
+        :'ref' => :'String',
+        :'source' => :'String',
+        :'type' => :'String',
+        :'ads_context_data' => :'WebhookPayloadMessageMetadataReferralAdsContextData'
       }
     end
 
@@ -140,6 +164,26 @@ module Zernio
       if attributes.key?(:'thumbnail_url')
         self.thumbnail_url = attributes[:'thumbnail_url']
       end
+
+      if attributes.key?(:'ad_id')
+        self.ad_id = attributes[:'ad_id']
+      end
+
+      if attributes.key?(:'ref')
+        self.ref = attributes[:'ref']
+      end
+
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'ads_context_data')
+        self.ads_context_data = attributes[:'ads_context_data']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -171,7 +215,12 @@ module Zernio
           media_type == o.media_type &&
           image_url == o.image_url &&
           video_url == o.video_url &&
-          thumbnail_url == o.thumbnail_url
+          thumbnail_url == o.thumbnail_url &&
+          ad_id == o.ad_id &&
+          ref == o.ref &&
+          source == o.source &&
+          type == o.type &&
+          ads_context_data == o.ads_context_data
     end
 
     # @see the `==` method
@@ -183,7 +232,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ctwa_clid, source_id, source_type, source_url, headline, body, media_type, image_url, video_url, thumbnail_url].hash
+      [ctwa_clid, source_id, source_type, source_url, headline, body, media_type, image_url, video_url, thumbnail_url, ad_id, ref, source, type, ads_context_data].hash
     end
 
     # Builds the object from hash

@@ -1188,6 +1188,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadMessageMessageSenderInstagramProfile](docs/WebhookPayloadMessageMessageSenderInstagramProfile.md)
  - [Zernio::WebhookPayloadMessageMetadata](docs/WebhookPayloadMessageMetadata.md)
  - [Zernio::WebhookPayloadMessageMetadataReferral](docs/WebhookPayloadMessageMetadataReferral.md)
+ - [Zernio::WebhookPayloadMessageMetadataReferralAdsContextData](docs/WebhookPayloadMessageMetadataReferralAdsContextData.md)
  - [Zernio::WebhookPayloadMessageMetadataStoryReply](docs/WebhookPayloadMessageMetadataStoryReply.md)
  - [Zernio::WebhookPayloadMessageSent](docs/WebhookPayloadMessageSent.md)
  - [Zernio::WebhookPayloadMessageSentMessage](docs/WebhookPayloadMessageSentMessage.md)
