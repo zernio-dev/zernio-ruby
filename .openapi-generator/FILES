@@ -37,6 +37,9 @@ docs/AdTreeCampaignCampaignBudget.md
 docs/AdTreeCampaignPromotedObject.md
 docs/AddBroadcastRecipients200Response.md
 docs/AddBroadcastRecipientsRequest.md
+docs/AddConversionAssociations200Response.md
+docs/AddConversionAssociations200ResponseFailedInner.md
+docs/AddConversionAssociationsRequest.md
 docs/AddMessageReactionRequest.md
 docs/AddUsersToAdAudience200Response.md
 docs/AddUsersToAdAudienceRequest.md
@@ -100,6 +103,7 @@ docs/ConnectWhatsAppCredentialsRequest.md
 docs/Connected.md
 docs/ConnectedAccount.md
 docs/ContactsApi.md
+docs/ConversionDestination.md
 docs/ConversionEvent.md
 docs/ConversionEventItemsInner.md
 docs/ConversionEventUser.md
@@ -126,6 +130,9 @@ docs/CreateContact200Response.md
 docs/CreateContact200ResponseChannel.md
 docs/CreateContact200ResponseContact.md
 docs/CreateContactRequest.md
+docs/CreateConversionDestination201Response.md
+docs/CreateConversionDestinationRequest.md
+docs/CreateConversionDestinationRequestValue.md
 docs/CreateCtwaAd201Response.md
 docs/CreateCtwaAdRequest.md
 docs/CreateCtwaAdRequestInterestsInner.md
@@ -279,6 +286,9 @@ docs/GetContactChannels200Response.md
 docs/GetContactChannels200ResponseChannelsInner.md
 docs/GetContentDecay200Response.md
 docs/GetContentDecay200ResponseBucketsInner.md
+docs/GetConversionMetrics200Response.md
+docs/GetConversionMetrics200ResponseRowsInner.md
+docs/GetConversionMetrics200ResponseRowsInnerMetricsValue.md
 docs/GetDailyMetrics200Response.md
 docs/GetDailyMetrics200ResponseDailyDataInner.md
 docs/GetDailyMetrics200ResponseDailyDataInnerMetrics.md
@@ -493,6 +503,8 @@ docs/ListContacts200Response.md
 docs/ListContacts200ResponseContactsInner.md
 docs/ListContacts200ResponseFilters.md
 docs/ListContacts200ResponsePagination.md
+docs/ListConversionAssociations200Response.md
+docs/ListConversionAssociations200ResponseAssociationsInner.md
 docs/ListConversionDestinations200Response.md
 docs/ListConversionDestinations200ResponseDestinationsInner.md
 docs/ListCustomFields200Response.md
@@ -601,6 +613,7 @@ docs/RejectWhatsAppGroupJoinRequestsRequest.md
 docs/ReleaseWhatsAppPhoneNumber200Response.md
 docs/ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber.md
 docs/RemoveBookmark200Response.md
+docs/RemoveConversionAssociations200Response.md
 docs/RemoveWhatsAppGroupParticipantsRequest.md
 docs/ReplyToInboxPost200Response.md
 docs/ReplyToInboxPost200ResponseData.md
@@ -738,6 +751,8 @@ docs/UpdateCommentAutomationRequest.md
 docs/UpdateContact200Response.md
 docs/UpdateContact200ResponseContact.md
 docs/UpdateContactRequest.md
+docs/UpdateConversionDestinationRequest.md
+docs/UpdateConversionDestinationRequestValue.md
 docs/UpdateCustomField200Response.md
 docs/UpdateCustomField200ResponseField.md
 docs/UpdateCustomFieldRequest.md
@@ -975,6 +990,9 @@ lib/zernio-sdk/models/ad_tree_campaign_campaign_budget.rb
 lib/zernio-sdk/models/ad_tree_campaign_promoted_object.rb
 lib/zernio-sdk/models/add_broadcast_recipients200_response.rb
 lib/zernio-sdk/models/add_broadcast_recipients_request.rb
+lib/zernio-sdk/models/add_conversion_associations200_response.rb
+lib/zernio-sdk/models/add_conversion_associations200_response_failed_inner.rb
+lib/zernio-sdk/models/add_conversion_associations_request.rb
 lib/zernio-sdk/models/add_message_reaction_request.rb
 lib/zernio-sdk/models/add_users_to_ad_audience200_response.rb
 lib/zernio-sdk/models/add_users_to_ad_audience_request.rb
@@ -1031,6 +1049,7 @@ lib/zernio-sdk/models/connect_whats_app_credentials200_response_account.rb
 lib/zernio-sdk/models/connect_whats_app_credentials_request.rb
 lib/zernio-sdk/models/connected.rb
 lib/zernio-sdk/models/connected_account.rb
+lib/zernio-sdk/models/conversion_destination.rb
 lib/zernio-sdk/models/conversion_event.rb
 lib/zernio-sdk/models/conversion_event_items_inner.rb
 lib/zernio-sdk/models/conversion_event_user.rb
@@ -1057,6 +1076,9 @@ lib/zernio-sdk/models/create_contact200_response.rb
 lib/zernio-sdk/models/create_contact200_response_channel.rb
 lib/zernio-sdk/models/create_contact200_response_contact.rb
 lib/zernio-sdk/models/create_contact_request.rb
+lib/zernio-sdk/models/create_conversion_destination201_response.rb
+lib/zernio-sdk/models/create_conversion_destination_request.rb
+lib/zernio-sdk/models/create_conversion_destination_request_value.rb
 lib/zernio-sdk/models/create_ctwa_ad201_response.rb
 lib/zernio-sdk/models/create_ctwa_ad_request.rb
 lib/zernio-sdk/models/create_ctwa_ad_request_interests_inner.rb
@@ -1201,6 +1223,9 @@ lib/zernio-sdk/models/get_contact_channels200_response.rb
 lib/zernio-sdk/models/get_contact_channels200_response_channels_inner.rb
 lib/zernio-sdk/models/get_content_decay200_response.rb
 lib/zernio-sdk/models/get_content_decay200_response_buckets_inner.rb
+lib/zernio-sdk/models/get_conversion_metrics200_response.rb
+lib/zernio-sdk/models/get_conversion_metrics200_response_rows_inner.rb
+lib/zernio-sdk/models/get_conversion_metrics200_response_rows_inner_metrics_value.rb
 lib/zernio-sdk/models/get_daily_metrics200_response.rb
 lib/zernio-sdk/models/get_daily_metrics200_response_daily_data_inner.rb
 lib/zernio-sdk/models/get_daily_metrics200_response_daily_data_inner_metrics.rb
@@ -1413,6 +1438,8 @@ lib/zernio-sdk/models/list_contacts200_response.rb
 lib/zernio-sdk/models/list_contacts200_response_contacts_inner.rb
 lib/zernio-sdk/models/list_contacts200_response_filters.rb
 lib/zernio-sdk/models/list_contacts200_response_pagination.rb
+lib/zernio-sdk/models/list_conversion_associations200_response.rb
+lib/zernio-sdk/models/list_conversion_associations200_response_associations_inner.rb
 lib/zernio-sdk/models/list_conversion_destinations200_response.rb
 lib/zernio-sdk/models/list_conversion_destinations200_response_destinations_inner.rb
 lib/zernio-sdk/models/list_custom_fields200_response.rb
@@ -1514,6 +1541,7 @@ lib/zernio-sdk/models/reject_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/release_whats_app_phone_number200_response.rb
 lib/zernio-sdk/models/release_whats_app_phone_number200_response_phone_number.rb
 lib/zernio-sdk/models/remove_bookmark200_response.rb
+lib/zernio-sdk/models/remove_conversion_associations200_response.rb
 lib/zernio-sdk/models/remove_whats_app_group_participants_request.rb
 lib/zernio-sdk/models/reply_to_inbox_post200_response.rb
 lib/zernio-sdk/models/reply_to_inbox_post200_response_data.rb
@@ -1648,6 +1676,8 @@ lib/zernio-sdk/models/update_comment_automation_request.rb
 lib/zernio-sdk/models/update_contact200_response.rb
 lib/zernio-sdk/models/update_contact200_response_contact.rb
 lib/zernio-sdk/models/update_contact_request.rb
+lib/zernio-sdk/models/update_conversion_destination_request.rb
+lib/zernio-sdk/models/update_conversion_destination_request_value.rb
 lib/zernio-sdk/models/update_custom_field200_response.rb
 lib/zernio-sdk/models/update_custom_field200_response_field.rb
 lib/zernio-sdk/models/update_custom_field_request.rb
@@ -1871,6 +1901,9 @@ spec/models/ad_tree_campaign_promoted_object_spec.rb
 spec/models/ad_tree_campaign_spec.rb
 spec/models/add_broadcast_recipients200_response_spec.rb
 spec/models/add_broadcast_recipients_request_spec.rb
+spec/models/add_conversion_associations200_response_failed_inner_spec.rb
+spec/models/add_conversion_associations200_response_spec.rb
+spec/models/add_conversion_associations_request_spec.rb
 spec/models/add_message_reaction_request_spec.rb
 spec/models/add_users_to_ad_audience200_response_spec.rb
 spec/models/add_users_to_ad_audience_request_spec.rb
@@ -1927,6 +1960,7 @@ spec/models/connect_whats_app_credentials200_response_spec.rb
 spec/models/connect_whats_app_credentials_request_spec.rb
 spec/models/connected_account_spec.rb
 spec/models/connected_spec.rb
+spec/models/conversion_destination_spec.rb
 spec/models/conversion_event_items_inner_spec.rb
 spec/models/conversion_event_spec.rb
 spec/models/conversion_event_user_click_ids_spec.rb
@@ -1953,6 +1987,9 @@ spec/models/create_contact200_response_channel_spec.rb
 spec/models/create_contact200_response_contact_spec.rb
 spec/models/create_contact200_response_spec.rb
 spec/models/create_contact_request_spec.rb
+spec/models/create_conversion_destination201_response_spec.rb
+spec/models/create_conversion_destination_request_spec.rb
+spec/models/create_conversion_destination_request_value_spec.rb
 spec/models/create_ctwa_ad201_response_spec.rb
 spec/models/create_ctwa_ad_request_interests_inner_spec.rb
 spec/models/create_ctwa_ad_request_spec.rb
@@ -2097,6 +2134,9 @@ spec/models/get_contact_channels200_response_channels_inner_spec.rb
 spec/models/get_contact_channels200_response_spec.rb
 spec/models/get_content_decay200_response_buckets_inner_spec.rb
 spec/models/get_content_decay200_response_spec.rb
+spec/models/get_conversion_metrics200_response_rows_inner_metrics_value_spec.rb
+spec/models/get_conversion_metrics200_response_rows_inner_spec.rb
+spec/models/get_conversion_metrics200_response_spec.rb
 spec/models/get_daily_metrics200_response_daily_data_inner_metrics_spec.rb
 spec/models/get_daily_metrics200_response_daily_data_inner_spec.rb
 spec/models/get_daily_metrics200_response_platform_breakdown_inner_spec.rb
@@ -2309,6 +2349,8 @@ spec/models/list_contacts200_response_contacts_inner_spec.rb
 spec/models/list_contacts200_response_filters_spec.rb
 spec/models/list_contacts200_response_pagination_spec.rb
 spec/models/list_contacts200_response_spec.rb
+spec/models/list_conversion_associations200_response_associations_inner_spec.rb
+spec/models/list_conversion_associations200_response_spec.rb
 spec/models/list_conversion_destinations200_response_destinations_inner_spec.rb
 spec/models/list_conversion_destinations200_response_spec.rb
 spec/models/list_custom_fields200_response_fields_inner_spec.rb
@@ -2410,6 +2452,7 @@ spec/models/reject_whats_app_group_join_requests_request_spec.rb
 spec/models/release_whats_app_phone_number200_response_phone_number_spec.rb
 spec/models/release_whats_app_phone_number200_response_spec.rb
 spec/models/remove_bookmark200_response_spec.rb
+spec/models/remove_conversion_associations200_response_spec.rb
 spec/models/remove_whats_app_group_participants_request_spec.rb
 spec/models/reply_to_inbox_post200_response_data_spec.rb
 spec/models/reply_to_inbox_post200_response_spec.rb
@@ -2544,6 +2587,8 @@ spec/models/update_comment_automation_request_spec.rb
 spec/models/update_contact200_response_contact_spec.rb
 spec/models/update_contact200_response_spec.rb
 spec/models/update_contact_request_spec.rb
+spec/models/update_conversion_destination_request_spec.rb
+spec/models/update_conversion_destination_request_value_spec.rb
 spec/models/update_custom_field200_response_field_spec.rb
 spec/models/update_custom_field200_response_spec.rb
 spec/models/update_custom_field_request_spec.rb

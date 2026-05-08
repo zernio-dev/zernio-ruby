@@ -103,22 +103,30 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_ad_campaign_status**](docs/AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign
 *Zernio::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set (budget, status, and/or bid strategy)
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
+*Zernio::AdsApi* | [**add_conversion_associations**](docs/AdsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns with a conversion destination
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
+*Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn)
 *Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
+*Zernio::AdsApi* | [**delete_conversion_destination**](docs/AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Soft-delete a conversion destination
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
+*Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Fetch a single conversion destination
+*Zernio::AdsApi* | [**get_conversion_metrics**](docs/AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Fetch attribution metrics for a conversion destination
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdsApi* | [**list_ads_business_centers**](docs/AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
+*Zernio::AdsApi* | [**list_conversion_associations**](docs/AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List campaigns associated with a conversion destination
 *Zernio::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API
+*Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove campaign↔conversion associations
 *Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
 *Zernio::AdsApi* | [**search_ad_targeting_locations**](docs/AdsApi.md#search_ad_targeting_locations) | **GET** /v1/ads/targeting/search | Search geo targeting locations (Meta)
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
+*Zernio::AdsApi* | [**update_conversion_destination**](docs/AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Zernio::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
 *Zernio::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
@@ -369,6 +377,9 @@ Class | Method | HTTP request | Description
  - [Zernio::AdTreeCampaignPromotedObject](docs/AdTreeCampaignPromotedObject.md)
  - [Zernio::AddBroadcastRecipients200Response](docs/AddBroadcastRecipients200Response.md)
  - [Zernio::AddBroadcastRecipientsRequest](docs/AddBroadcastRecipientsRequest.md)
+ - [Zernio::AddConversionAssociations200Response](docs/AddConversionAssociations200Response.md)
+ - [Zernio::AddConversionAssociations200ResponseFailedInner](docs/AddConversionAssociations200ResponseFailedInner.md)
+ - [Zernio::AddConversionAssociationsRequest](docs/AddConversionAssociationsRequest.md)
  - [Zernio::AddMessageReactionRequest](docs/AddMessageReactionRequest.md)
  - [Zernio::AddUsersToAdAudience200Response](docs/AddUsersToAdAudience200Response.md)
  - [Zernio::AddUsersToAdAudienceRequest](docs/AddUsersToAdAudienceRequest.md)
@@ -425,6 +436,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ConnectWhatsAppCredentialsRequest](docs/ConnectWhatsAppCredentialsRequest.md)
  - [Zernio::Connected](docs/Connected.md)
  - [Zernio::ConnectedAccount](docs/ConnectedAccount.md)
+ - [Zernio::ConversionDestination](docs/ConversionDestination.md)
  - [Zernio::ConversionEvent](docs/ConversionEvent.md)
  - [Zernio::ConversionEventItemsInner](docs/ConversionEventItemsInner.md)
  - [Zernio::ConversionEventUser](docs/ConversionEventUser.md)
@@ -451,6 +463,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateContact200ResponseChannel](docs/CreateContact200ResponseChannel.md)
  - [Zernio::CreateContact200ResponseContact](docs/CreateContact200ResponseContact.md)
  - [Zernio::CreateContactRequest](docs/CreateContactRequest.md)
+ - [Zernio::CreateConversionDestination201Response](docs/CreateConversionDestination201Response.md)
+ - [Zernio::CreateConversionDestinationRequest](docs/CreateConversionDestinationRequest.md)
+ - [Zernio::CreateConversionDestinationRequestValue](docs/CreateConversionDestinationRequestValue.md)
  - [Zernio::CreateCtwaAd201Response](docs/CreateCtwaAd201Response.md)
  - [Zernio::CreateCtwaAdRequest](docs/CreateCtwaAdRequest.md)
  - [Zernio::CreateCtwaAdRequestInterestsInner](docs/CreateCtwaAdRequestInterestsInner.md)
@@ -595,6 +610,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetContactChannels200ResponseChannelsInner](docs/GetContactChannels200ResponseChannelsInner.md)
  - [Zernio::GetContentDecay200Response](docs/GetContentDecay200Response.md)
  - [Zernio::GetContentDecay200ResponseBucketsInner](docs/GetContentDecay200ResponseBucketsInner.md)
+ - [Zernio::GetConversionMetrics200Response](docs/GetConversionMetrics200Response.md)
+ - [Zernio::GetConversionMetrics200ResponseRowsInner](docs/GetConversionMetrics200ResponseRowsInner.md)
+ - [Zernio::GetConversionMetrics200ResponseRowsInnerMetricsValue](docs/GetConversionMetrics200ResponseRowsInnerMetricsValue.md)
  - [Zernio::GetDailyMetrics200Response](docs/GetDailyMetrics200Response.md)
  - [Zernio::GetDailyMetrics200ResponseDailyDataInner](docs/GetDailyMetrics200ResponseDailyDataInner.md)
  - [Zernio::GetDailyMetrics200ResponseDailyDataInnerMetrics](docs/GetDailyMetrics200ResponseDailyDataInnerMetrics.md)
@@ -807,6 +825,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListContacts200ResponseContactsInner](docs/ListContacts200ResponseContactsInner.md)
  - [Zernio::ListContacts200ResponseFilters](docs/ListContacts200ResponseFilters.md)
  - [Zernio::ListContacts200ResponsePagination](docs/ListContacts200ResponsePagination.md)
+ - [Zernio::ListConversionAssociations200Response](docs/ListConversionAssociations200Response.md)
+ - [Zernio::ListConversionAssociations200ResponseAssociationsInner](docs/ListConversionAssociations200ResponseAssociationsInner.md)
  - [Zernio::ListConversionDestinations200Response](docs/ListConversionDestinations200Response.md)
  - [Zernio::ListConversionDestinations200ResponseDestinationsInner](docs/ListConversionDestinations200ResponseDestinationsInner.md)
  - [Zernio::ListCustomFields200Response](docs/ListCustomFields200Response.md)
@@ -908,6 +928,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ReleaseWhatsAppPhoneNumber200Response](docs/ReleaseWhatsAppPhoneNumber200Response.md)
  - [Zernio::ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber](docs/ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber.md)
  - [Zernio::RemoveBookmark200Response](docs/RemoveBookmark200Response.md)
+ - [Zernio::RemoveConversionAssociations200Response](docs/RemoveConversionAssociations200Response.md)
  - [Zernio::RemoveWhatsAppGroupParticipantsRequest](docs/RemoveWhatsAppGroupParticipantsRequest.md)
  - [Zernio::ReplyToInboxPost200Response](docs/ReplyToInboxPost200Response.md)
  - [Zernio::ReplyToInboxPost200ResponseData](docs/ReplyToInboxPost200ResponseData.md)
@@ -1042,6 +1063,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateContact200Response](docs/UpdateContact200Response.md)
  - [Zernio::UpdateContact200ResponseContact](docs/UpdateContact200ResponseContact.md)
  - [Zernio::UpdateContactRequest](docs/UpdateContactRequest.md)
+ - [Zernio::UpdateConversionDestinationRequest](docs/UpdateConversionDestinationRequest.md)
+ - [Zernio::UpdateConversionDestinationRequestValue](docs/UpdateConversionDestinationRequestValue.md)
  - [Zernio::UpdateCustomField200Response](docs/UpdateCustomField200Response.md)
  - [Zernio::UpdateCustomField200ResponseField](docs/UpdateCustomField200ResponseField.md)
  - [Zernio::UpdateCustomFieldRequest](docs/UpdateCustomFieldRequest.md)

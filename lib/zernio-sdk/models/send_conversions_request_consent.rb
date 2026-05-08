@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Batch-level user consent. Required by Google for EEA/UK events under the Feb 2026 restrictions. Ignored by Meta. 
+  # Batch-level user consent. Required by Google for EEA/UK events under the Feb 2026 restrictions. Ignored by Meta and LinkedIn. 
   class SendConversionsRequestConsent < ApiModelBase
     attr_accessor :ad_user_data
 

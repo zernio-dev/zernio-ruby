@@ -15,15 +15,18 @@ require 'time'
 
 module Zernio
   class ListConversionDestinations200ResponseDestinationsInner < ApiModelBase
-    # Destination identifier. Meta: pixel ID. Google: conversion action resource name. 
+    # Destination identifier. Meta: pixel ID. Google: conversion action resource name. LinkedIn: numeric conversion rule ID. 
     attr_accessor :id
 
     attr_accessor :name
 
-    # Present when the platform locks event type to the destination (Google conversion actions). 
+    # Present when the platform locks event type to the destination (Google conversion actions, LinkedIn conversion rules). 
     attr_accessor :type
 
     attr_accessor :status
+
+    # Set by adapters whose destinations are scoped to a specific ad account (LinkedIn). Pass back on subsequent CRUD calls. 
+    attr_accessor :ad_account_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -53,7 +56,8 @@ module Zernio
         :'id' => :'id',
         :'name' => :'name',
         :'type' => :'type',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'ad_account_id' => :'adAccountId'
       }
     end
 
@@ -73,7 +77,8 @@ module Zernio
         :'id' => :'String',
         :'name' => :'String',
         :'type' => :'String',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'ad_account_id' => :'String'
       }
     end
 
@@ -114,6 +119,10 @@ module Zernio
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
+
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -151,7 +160,8 @@ module Zernio
           id == o.id &&
           name == o.name &&
           type == o.type &&
-          status == o.status
+          status == o.status &&
+          ad_account_id == o.ad_account_id
     end
 
     # @see the `==` method
@@ -163,7 +173,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, type, status].hash
+      [id, name, type, status, ad_account_id].hash
     end
 
     # Builds the object from hash

@@ -31,6 +31,9 @@ module Zernio
     # Google iOS 14.5+ web-to-app attribution ID.
     attr_accessor :wbraid
 
+    # LinkedIn first-party ad tracking click ID. Captured by parsing `li_fat_id` from landing-page URLs after the advertiser enables enhanced conversion tracking on the LinkedIn Insight Tag. Sent to LinkedIn as the LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID userId. Opaque token, not hashed. 
+    attr_accessor :li_fat_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +41,8 @@ module Zernio
         :'fbp' => :'fbp',
         :'gclid' => :'gclid',
         :'gbraid' => :'gbraid',
-        :'wbraid' => :'wbraid'
+        :'wbraid' => :'wbraid',
+        :'li_fat_id' => :'li_fat_id'
       }
     end
 
@@ -59,7 +63,8 @@ module Zernio
         :'fbp' => :'String',
         :'gclid' => :'String',
         :'gbraid' => :'String',
-        :'wbraid' => :'String'
+        :'wbraid' => :'String',
+        :'li_fat_id' => :'String'
       }
     end
 
@@ -104,6 +109,10 @@ module Zernio
       if attributes.key?(:'wbraid')
         self.wbraid = attributes[:'wbraid']
       end
+
+      if attributes.key?(:'li_fat_id')
+        self.li_fat_id = attributes[:'li_fat_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -130,7 +139,8 @@ module Zernio
           fbp == o.fbp &&
           gclid == o.gclid &&
           gbraid == o.gbraid &&
-          wbraid == o.wbraid
+          wbraid == o.wbraid &&
+          li_fat_id == o.li_fat_id
     end
 
     # @see the `==` method
@@ -142,7 +152,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [fbc, fbp, gclid, gbraid, wbraid].hash
+      [fbc, fbp, gclid, gbraid, wbraid, li_fat_id].hash
     end
 
     # Builds the object from hash

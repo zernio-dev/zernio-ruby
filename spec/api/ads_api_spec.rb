@@ -32,6 +32,20 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for add_conversion_associations
+  # Associate campaigns with a conversion destination
+  # Associate one or more campaigns with this conversion rule. Returns a per-campaign success/failure result so callers can retry only the rows that failed (e.g. wrong campaign type for the rule&#39;s objective). 
+  # @param account_id 
+  # @param destination_id 
+  # @param add_conversion_associations_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AddConversionAssociations200Response]
+  describe 'add_conversion_associations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for boost_post
   # Boost post as ad
   # Creates a paid ad campaign from an existing published post. Creates the full platform campaign hierarchy (campaign, ad set, ad).
@@ -39,6 +53,19 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAd200Response]
   describe 'boost_post test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_conversion_destination
+  # Create a conversion destination (LinkedIn)
+  # Create a new conversion rule on the platform. LinkedIn-only today; other platforms manage destinations in their own UIs and return 405.  For LinkedIn, the rule is created with &#x60;conversionMethod&#x3D;CONVERSIONS_API&#x60; and (by default) auto-associated with all of the ad account&#39;s campaigns via &#x60;autoAssociationType&#x3D;ALL_CAMPAIGNS&#x60;. Pass &#x60;autoAssociationType: NONE&#x60; to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for &#x60;SUBMIT_APPLICATION&#x60;, &#x60;PURCHASE&#x60;, &#x60;ADD_TO_CART&#x60;, &#x60;QUALIFIED_LEAD&#x60;, and &#x60;LEAD&#x60; rule types; the API rejects other combinations locally. 
+  # @param account_id SocialAccount ID (linkedinads).
+  # @param create_conversion_destination_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateConversionDestination201Response]
+  describe 'create_conversion_destination test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -80,6 +107,20 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for delete_conversion_destination
+  # Soft-delete a conversion destination
+  # LinkedIn-only today. LinkedIn does not expose hard-delete on conversion rules — what their UI calls \&quot;delete\&quot; is the same &#x60;enabled: false&#x60; flip we apply here. The rule remains fetchable via GET with &#x60;status: &#39;inactive&#39;&#x60;; the unified discovery endpoint hides it by default.  &#x60;adAccountId&#x60; may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. 
+  # @param account_id 
+  # @param destination_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id Required as query OR in JSON body.
+  # @return [nil]
+  describe 'delete_conversion_destination test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_ad
   # Get ad details
   # Returns an ad with its creative, targeting, status, and performance metrics.
@@ -116,6 +157,37 @@ describe 'AdsApi' do
   # @option opts [String] :cursor Pagination cursor from a previous response.
   # @return [GetAdComments200Response]
   describe 'get_ad_comments test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_conversion_destination
+  # Fetch a single conversion destination
+  # LinkedIn-only today. Returns the full destination record for one conversion rule. The &#x60;adAccountId&#x60; query parameter is required because LinkedIn rules are scoped to a sponsored ad account. 
+  # @param account_id 
+  # @param destination_id 
+  # @param ad_account_id Numeric ID or full &#x60;urn:li:sponsoredAccount:{id}&#x60; URN.
+  # @param [Hash] opts the optional parameters
+  # @return [CreateConversionDestination201Response]
+  describe 'get_conversion_destination test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_conversion_metrics
+  # Fetch attribution metrics for a conversion destination
+  # LinkedIn-only today. Returns conversion-attribution metrics (&#x60;externalWebsiteConversions&#x60;, &#x60;externalWebsitePostClickConversions&#x60;, &#x60;externalWebsitePostViewConversions&#x60;, &#x60;conversionValueInLocalCurrency&#x60;, &#x60;qualifiedLeads&#x60;, &#x60;costInLocalCurrency&#x60;) bucketed by date.  Date-range constraints (passed through from LinkedIn): - &#x60;granularity&#x3D;DAILY&#x60; is retained for ~6 months only - &#x60;granularity&#x3D;ALL&#x60; with a range &gt; 6 months auto-rounds to month boundaries - &#x60;granularity&#x3D;MONTHLY&#x60;/&#x60;YEARLY&#x60; retains 24 months  Throttle: LinkedIn caps adAnalytics at 45M metric values per 5-minute window across the calling token. Single-rule queries are well within that limit; surfaces as 429 if hit. 
+  # @param account_id 
+  # @param destination_id 
+  # @param ad_account_id 
+  # @param start_date 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :end_date 
+  # @option opts [String] :granularity 
+  # @return [GetConversionMetrics200Response]
+  describe 'get_conversion_metrics test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -169,13 +241,42 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for list_conversion_associations
+  # List campaigns associated with a conversion destination
+  # LinkedIn-only today. Returns the campaigns currently associated with this conversion rule. Note that auto-association on rule creation runs once at create time; campaigns created after the rule still need explicit association. 
+  # @param account_id 
+  # @param destination_id 
+  # @param ad_account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [ListConversionAssociations200Response]
+  describe 'list_conversion_associations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_conversion_destinations
   # List destinations for the Conversions API
-  # Returns the list of pixels (Meta) or conversion actions (Google) accessible to the connected ads account. Use the returned &#x60;id&#x60; as &#x60;destinationId&#x60; when posting to &#x60;POST /v1/ads/conversions&#x60;.  For Google, each destination&#39;s &#x60;type&#x60; reflects the conversion action&#39;s category (PURCHASE, LEAD, SIGN_UP, etc.) — the event type is locked to the destination. For Meta, &#x60;type&#x60; is absent: pixels accept any event name per request. 
-  # @param account_id SocialAccount ID (metaads or googleads).
+  # Returns the list of pixels (Meta), conversion actions (Google), or conversion rules (LinkedIn) accessible to the connected ads account. Use the returned &#x60;id&#x60; as &#x60;destinationId&#x60; when posting to &#x60;POST /v1/ads/conversions&#x60;.  For Google and LinkedIn, each destination&#39;s &#x60;type&#x60; reflects the conversion type (PURCHASE, LEAD, SIGN_UP, etc.) — the event type is locked to the destination. For Meta, &#x60;type&#x60; is absent: pixels accept any event name per request.  For LinkedIn, destinations are returned across every sponsored ad account the connected token can access; the &#x60;adAccountId&#x60; field on each destination identifies the parent ad account and is required for subsequent CRUD calls (update, delete, associations, metrics). 
+  # @param account_id SocialAccount ID (metaads, googleads, or linkedinads).
   # @param [Hash] opts the optional parameters
   # @return [ListConversionDestinations200Response]
   describe 'list_conversion_destinations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for remove_conversion_associations
+  # Remove campaign↔conversion associations
+  # Remove one or more campaign associations from this conversion rule. Pass &#x60;adAccountId&#x60; and &#x60;campaignIds&#x60; as query parameters (&#x60;campaignIds&#x60; is comma-separated). The route also accepts a JSON body with the same fields for clients that prefer DELETE-with-body, but the documented surface is query-only because some SDK code generators (e.g. Python) collapse query + body parameters with the same name into a single kwarg. 
+  # @param account_id 
+  # @param destination_id 
+  # @param ad_account_id 
+  # @param campaign_ids Comma-separated list of campaign IDs.
+  # @param [Hash] opts the optional parameters
+  # @return [RemoveConversionAssociations200Response]
+  describe 'remove_conversion_associations test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -212,7 +313,7 @@ describe 'AdsApi' do
 
   # unit tests for send_conversions
   # Send conversion events to an ad platform
-  # Relay one or more conversion events to the target ad platform&#39;s native Conversions API. Supported platforms: Meta (metaads) via Graph API, Google Ads (googleads) via Data Manager API &#x60;ingestEvents&#x60;.  Platform is inferred from the provided &#x60;accountId&#x60;. &#x60;destinationId&#x60; semantics differ per platform: - Meta: pixel (dataset) ID, e.g. \&quot;123456789012345\&quot; - Google: conversion action resource name, e.g.   \&quot;customers/1234567890/conversionActions/987654321\&quot;  Callers can list valid destinations via &#x60;GET /v1/accounts/{accountId}/conversion-destinations&#x60;.  All PII (email, phone, names, external IDs) is hashed with SHA-256 server-side per each platform&#39;s normalization spec (including Google&#39;s Gmail-specific dot/plus-suffix stripping). Send plaintext.  Requires the Ads add-on.  Batching: Meta caps at 1000 events per request and rejects the entire batch if any event is malformed. Google caps at 2000. Both are handled automatically by chunking.  Dedup: pass a stable &#x60;eventId&#x60; on every event. Meta uses it to dedupe against pixel events; Google maps it to transactionId. 
+  # Relay one or more conversion events to the target ad platform&#39;s native Conversions API. Supported platforms: Meta (metaads) via Graph API, Google Ads (googleads) via Data Manager API &#x60;ingestEvents&#x60;, LinkedIn (linkedinads) via &#x60;/rest/conversionEvents&#x60;.  Platform is inferred from the provided &#x60;accountId&#x60;. &#x60;destinationId&#x60; semantics differ per platform: - Meta: pixel (dataset) ID, e.g. \&quot;123456789012345\&quot; - Google: conversion action resource name, e.g.   \&quot;customers/1234567890/conversionActions/987654321\&quot; - LinkedIn: conversion rule ID or URN, e.g. \&quot;104012\&quot; or   \&quot;urn:lla:llaPartnerConversion:104012\&quot;  Callers can list valid destinations via &#x60;GET /v1/accounts/{accountId}/conversion-destinations&#x60;.  All PII (email, phone, names, external IDs) is hashed with SHA-256 server-side per each platform&#39;s normalization spec (including Google&#39;s Gmail-specific dot/plus-suffix stripping). Send plaintext. Note: LinkedIn &#x60;externalIds&#x60; are passed through as plaintext per LinkedIn&#39;s spec — only emails and phones are hashed.  Requires the Ads add-on. For LinkedIn, the connected account must have been authorized after the Conversions API rollout (i.e. the OAuth grant must include &#x60;rw_conversions&#x60;); older accounts must reconnect.  Batching: Meta caps at 1000 events per request and rejects the entire batch if any event is malformed. Google caps at 2000. LinkedIn caps at 5000 and is also all-or-nothing per chunk. All three are handled automatically.  Dedup: pass a stable &#x60;eventId&#x60; on every event. Meta and LinkedIn use it to dedupe against browser-side pixel/Insight Tag events; Google maps it to transactionId.  Per-platform &#x60;eventName&#x60; semantics: - Meta: free-form. Standard names (Purchase, Lead, ...) match Meta&#39;s   built-in events; custom strings are accepted. - Google: ignored — the conversion action&#39;s category determines the   event type. Send the standard name closest to your action for   documentation, but the platform will not branch on it. - LinkedIn: ignored — the conversion rule&#39;s &#x60;type&#x60; (LEAD, PURCHASE,   etc.) is locked to the destination at rule-creation time. Send the   standard name for documentation; LinkedIn does not branch on it. 
   # @param send_conversions_request 
   # @param [Hash] opts the optional parameters
   # @return [SendConversions200Response]
@@ -242,6 +343,20 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAd200Response]
   describe 'update_ad test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_conversion_destination
+  # Update a conversion destination
+  # Partial-update a conversion rule. LinkedIn-only today. Whitelisted fields: &#x60;name&#x60;, &#x60;enabled&#x60;, attribution windows, &#x60;valueType&#x60;, &#x60;value&#x60;, &#x60;attributionType&#x60;. The rule&#39;s &#x60;type&#x60; and parent ad account are intentionally not exposed for update — recreate the rule if those need to change. 
+  # @param account_id 
+  # @param destination_id 
+  # @param update_conversion_destination_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateConversionDestination201Response]
+  describe 'update_conversion_destination test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

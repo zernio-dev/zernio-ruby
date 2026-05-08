@@ -19,6 +19,86 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Associate campaigns with a conversion destination
+    # Associate one or more campaigns with this conversion rule. Returns a per-campaign success/failure result so callers can retry only the rows that failed (e.g. wrong campaign type for the rule's objective). 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param add_conversion_associations_request [AddConversionAssociationsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AddConversionAssociations200Response]
+    def add_conversion_associations(account_id, destination_id, add_conversion_associations_request, opts = {})
+      data, _status_code, _headers = add_conversion_associations_with_http_info(account_id, destination_id, add_conversion_associations_request, opts)
+      data
+    end
+
+    # Associate campaigns with a conversion destination
+    # Associate one or more campaigns with this conversion rule. Returns a per-campaign success/failure result so callers can retry only the rows that failed (e.g. wrong campaign type for the rule&#39;s objective). 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param add_conversion_associations_request [AddConversionAssociationsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AddConversionAssociations200Response, Integer, Hash)>] AddConversionAssociations200Response data, response status code and response headers
+    def add_conversion_associations_with_http_info(account_id, destination_id, add_conversion_associations_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.add_conversion_associations ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.add_conversion_associations"
+      end
+      # verify the required parameter 'destination_id' is set
+      if @api_client.config.client_side_validation && destination_id.nil?
+        fail ArgumentError, "Missing the required parameter 'destination_id' when calling AdsApi.add_conversion_associations"
+      end
+      # verify the required parameter 'add_conversion_associations_request' is set
+      if @api_client.config.client_side_validation && add_conversion_associations_request.nil?
+        fail ArgumentError, "Missing the required parameter 'add_conversion_associations_request' when calling AdsApi.add_conversion_associations"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'destinationId' + '}', CGI.escape(destination_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(add_conversion_associations_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AddConversionAssociations200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.add_conversion_associations",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#add_conversion_associations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Boost post as ad
     # Creates a paid ad campaign from an existing published post. Creates the full platform campaign hierarchy (campaign, ad set, ad).
     # @param boost_post_request [BoostPostRequest] 
@@ -83,6 +163,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#boost_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create a conversion destination (LinkedIn)
+    # Create a new conversion rule on the platform. LinkedIn-only today; other platforms manage destinations in their own UIs and return 405.  For LinkedIn, the rule is created with `conversionMethod=CONVERSIONS_API` and (by default) auto-associated with all of the ad account's campaigns via `autoAssociationType=ALL_CAMPAIGNS`. Pass `autoAssociationType: NONE` to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for `SUBMIT_APPLICATION`, `PURCHASE`, `ADD_TO_CART`, `QUALIFIED_LEAD`, and `LEAD` rule types; the API rejects other combinations locally. 
+    # @param account_id [String] SocialAccount ID (linkedinads).
+    # @param create_conversion_destination_request [CreateConversionDestinationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateConversionDestination201Response]
+    def create_conversion_destination(account_id, create_conversion_destination_request, opts = {})
+      data, _status_code, _headers = create_conversion_destination_with_http_info(account_id, create_conversion_destination_request, opts)
+      data
+    end
+
+    # Create a conversion destination (LinkedIn)
+    # Create a new conversion rule on the platform. LinkedIn-only today; other platforms manage destinations in their own UIs and return 405.  For LinkedIn, the rule is created with &#x60;conversionMethod&#x3D;CONVERSIONS_API&#x60; and (by default) auto-associated with all of the ad account&#39;s campaigns via &#x60;autoAssociationType&#x3D;ALL_CAMPAIGNS&#x60;. Pass &#x60;autoAssociationType: NONE&#x60; to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for &#x60;SUBMIT_APPLICATION&#x60;, &#x60;PURCHASE&#x60;, &#x60;ADD_TO_CART&#x60;, &#x60;QUALIFIED_LEAD&#x60;, and &#x60;LEAD&#x60; rule types; the API rejects other combinations locally. 
+    # @param account_id [String] SocialAccount ID (linkedinads).
+    # @param create_conversion_destination_request [CreateConversionDestinationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateConversionDestination201Response, Integer, Hash)>] CreateConversionDestination201Response data, response status code and response headers
+    def create_conversion_destination_with_http_info(account_id, create_conversion_destination_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.create_conversion_destination ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.create_conversion_destination"
+      end
+      # verify the required parameter 'create_conversion_destination_request' is set
+      if @api_client.config.client_side_validation && create_conversion_destination_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_conversion_destination_request' when calling AdsApi.create_conversion_destination"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/conversion-destinations'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_conversion_destination_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateConversionDestination201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.create_conversion_destination",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#create_conversion_destination\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -282,6 +436,78 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#delete_ad\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Soft-delete a conversion destination
+    # LinkedIn-only today. LinkedIn does not expose hard-delete on conversion rules — what their UI calls \"delete\" is the same `enabled: false` flip we apply here. The rule remains fetchable via GET with `status: 'inactive'`; the unified discovery endpoint hides it by default.  `adAccountId` may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id Required as query OR in JSON body.
+    # @return [nil]
+    def delete_conversion_destination(account_id, destination_id, opts = {})
+      delete_conversion_destination_with_http_info(account_id, destination_id, opts)
+      nil
+    end
+
+    # Soft-delete a conversion destination
+    # LinkedIn-only today. LinkedIn does not expose hard-delete on conversion rules — what their UI calls \&quot;delete\&quot; is the same &#x60;enabled: false&#x60; flip we apply here. The rule remains fetchable via GET with &#x60;status: &#39;inactive&#39;&#x60;; the unified discovery endpoint hides it by default.  &#x60;adAccountId&#x60; may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id Required as query OR in JSON body.
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def delete_conversion_destination_with_http_info(account_id, destination_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.delete_conversion_destination ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.delete_conversion_destination"
+      end
+      # verify the required parameter 'destination_id' is set
+      if @api_client.config.client_side_validation && destination_id.nil?
+        fail ArgumentError, "Missing the required parameter 'destination_id' when calling AdsApi.delete_conversion_destination"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/conversion-destinations/{destinationId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'destinationId' + '}', CGI.escape(destination_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.delete_conversion_destination",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#delete_conversion_destination\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -494,6 +720,185 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#get_ad_comments\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Fetch a single conversion destination
+    # LinkedIn-only today. Returns the full destination record for one conversion rule. The `adAccountId` query parameter is required because LinkedIn rules are scoped to a sponsored ad account. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param ad_account_id [String] Numeric ID or full &#x60;urn:li:sponsoredAccount:{id}&#x60; URN.
+    # @param [Hash] opts the optional parameters
+    # @return [CreateConversionDestination201Response]
+    def get_conversion_destination(account_id, destination_id, ad_account_id, opts = {})
+      data, _status_code, _headers = get_conversion_destination_with_http_info(account_id, destination_id, ad_account_id, opts)
+      data
+    end
+
+    # Fetch a single conversion destination
+    # LinkedIn-only today. Returns the full destination record for one conversion rule. The &#x60;adAccountId&#x60; query parameter is required because LinkedIn rules are scoped to a sponsored ad account. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param ad_account_id [String] Numeric ID or full &#x60;urn:li:sponsoredAccount:{id}&#x60; URN.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateConversionDestination201Response, Integer, Hash)>] CreateConversionDestination201Response data, response status code and response headers
+    def get_conversion_destination_with_http_info(account_id, destination_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_conversion_destination ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.get_conversion_destination"
+      end
+      # verify the required parameter 'destination_id' is set
+      if @api_client.config.client_side_validation && destination_id.nil?
+        fail ArgumentError, "Missing the required parameter 'destination_id' when calling AdsApi.get_conversion_destination"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.get_conversion_destination"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/conversion-destinations/{destinationId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'destinationId' + '}', CGI.escape(destination_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'adAccountId'] = ad_account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateConversionDestination201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_conversion_destination",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_conversion_destination\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Fetch attribution metrics for a conversion destination
+    # LinkedIn-only today. Returns conversion-attribution metrics (`externalWebsiteConversions`, `externalWebsitePostClickConversions`, `externalWebsitePostViewConversions`, `conversionValueInLocalCurrency`, `qualifiedLeads`, `costInLocalCurrency`) bucketed by date.  Date-range constraints (passed through from LinkedIn): - `granularity=DAILY` is retained for ~6 months only - `granularity=ALL` with a range > 6 months auto-rounds to month boundaries - `granularity=MONTHLY`/`YEARLY` retains 24 months  Throttle: LinkedIn caps adAnalytics at 45M metric values per 5-minute window across the calling token. Single-rule queries are well within that limit; surfaces as 429 if hit. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param ad_account_id [String] 
+    # @param start_date [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :end_date 
+    # @option opts [String] :granularity  (default to 'DAILY')
+    # @return [GetConversionMetrics200Response]
+    def get_conversion_metrics(account_id, destination_id, ad_account_id, start_date, opts = {})
+      data, _status_code, _headers = get_conversion_metrics_with_http_info(account_id, destination_id, ad_account_id, start_date, opts)
+      data
+    end
+
+    # Fetch attribution metrics for a conversion destination
+    # LinkedIn-only today. Returns conversion-attribution metrics (&#x60;externalWebsiteConversions&#x60;, &#x60;externalWebsitePostClickConversions&#x60;, &#x60;externalWebsitePostViewConversions&#x60;, &#x60;conversionValueInLocalCurrency&#x60;, &#x60;qualifiedLeads&#x60;, &#x60;costInLocalCurrency&#x60;) bucketed by date.  Date-range constraints (passed through from LinkedIn): - &#x60;granularity&#x3D;DAILY&#x60; is retained for ~6 months only - &#x60;granularity&#x3D;ALL&#x60; with a range &gt; 6 months auto-rounds to month boundaries - &#x60;granularity&#x3D;MONTHLY&#x60;/&#x60;YEARLY&#x60; retains 24 months  Throttle: LinkedIn caps adAnalytics at 45M metric values per 5-minute window across the calling token. Single-rule queries are well within that limit; surfaces as 429 if hit. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param ad_account_id [String] 
+    # @param start_date [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :end_date 
+    # @option opts [String] :granularity  (default to 'DAILY')
+    # @return [Array<(GetConversionMetrics200Response, Integer, Hash)>] GetConversionMetrics200Response data, response status code and response headers
+    def get_conversion_metrics_with_http_info(account_id, destination_id, ad_account_id, start_date, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_conversion_metrics ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.get_conversion_metrics"
+      end
+      # verify the required parameter 'destination_id' is set
+      if @api_client.config.client_side_validation && destination_id.nil?
+        fail ArgumentError, "Missing the required parameter 'destination_id' when calling AdsApi.get_conversion_metrics"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.get_conversion_metrics"
+      end
+      # verify the required parameter 'start_date' is set
+      if @api_client.config.client_side_validation && start_date.nil?
+        fail ArgumentError, "Missing the required parameter 'start_date' when calling AdsApi.get_conversion_metrics"
+      end
+      pattern = Regexp.new(/^\\d{4}-\\d{2}-\\d{2}$/)
+      if @api_client.config.client_side_validation && start_date !~ pattern
+        fail ArgumentError, "invalid value for 'start_date' when calling AdsApi.get_conversion_metrics, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\\d{4}-\\d{2}-\\d{2}$/)
+      if @api_client.config.client_side_validation && !opts[:'end_date'].nil? && opts[:'end_date'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"end_date\"]' when calling AdsApi.get_conversion_metrics, must conform to the pattern #{pattern}."
+      end
+
+      allowable_values = ["ALL", "DAILY", "MONTHLY", "YEARLY"]
+      if @api_client.config.client_side_validation && opts[:'granularity'] && !allowable_values.include?(opts[:'granularity'])
+        fail ArgumentError, "invalid value for \"granularity\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'destinationId' + '}', CGI.escape(destination_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'adAccountId'] = ad_account_id
+      query_params[:'startDate'] = start_date
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+      query_params[:'granularity'] = opts[:'granularity'] if !opts[:'granularity'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetConversionMetrics200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_conversion_metrics",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_conversion_metrics\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -750,9 +1155,85 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List campaigns associated with a conversion destination
+    # LinkedIn-only today. Returns the campaigns currently associated with this conversion rule. Note that auto-association on rule creation runs once at create time; campaigns created after the rule still need explicit association. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param ad_account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [ListConversionAssociations200Response]
+    def list_conversion_associations(account_id, destination_id, ad_account_id, opts = {})
+      data, _status_code, _headers = list_conversion_associations_with_http_info(account_id, destination_id, ad_account_id, opts)
+      data
+    end
+
+    # List campaigns associated with a conversion destination
+    # LinkedIn-only today. Returns the campaigns currently associated with this conversion rule. Note that auto-association on rule creation runs once at create time; campaigns created after the rule still need explicit association. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param ad_account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListConversionAssociations200Response, Integer, Hash)>] ListConversionAssociations200Response data, response status code and response headers
+    def list_conversion_associations_with_http_info(account_id, destination_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_conversion_associations ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_conversion_associations"
+      end
+      # verify the required parameter 'destination_id' is set
+      if @api_client.config.client_side_validation && destination_id.nil?
+        fail ArgumentError, "Missing the required parameter 'destination_id' when calling AdsApi.list_conversion_associations"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.list_conversion_associations"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'destinationId' + '}', CGI.escape(destination_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'adAccountId'] = ad_account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListConversionAssociations200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_conversion_associations",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_conversion_associations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List destinations for the Conversions API
-    # Returns the list of pixels (Meta) or conversion actions (Google) accessible to the connected ads account. Use the returned `id` as `destinationId` when posting to `POST /v1/ads/conversions`.  For Google, each destination's `type` reflects the conversion action's category (PURCHASE, LEAD, SIGN_UP, etc.) — the event type is locked to the destination. For Meta, `type` is absent: pixels accept any event name per request. 
-    # @param account_id [String] SocialAccount ID (metaads or googleads).
+    # Returns the list of pixels (Meta), conversion actions (Google), or conversion rules (LinkedIn) accessible to the connected ads account. Use the returned `id` as `destinationId` when posting to `POST /v1/ads/conversions`.  For Google and LinkedIn, each destination's `type` reflects the conversion type (PURCHASE, LEAD, SIGN_UP, etc.) — the event type is locked to the destination. For Meta, `type` is absent: pixels accept any event name per request.  For LinkedIn, destinations are returned across every sponsored ad account the connected token can access; the `adAccountId` field on each destination identifies the parent ad account and is required for subsequent CRUD calls (update, delete, associations, metrics). 
+    # @param account_id [String] SocialAccount ID (metaads, googleads, or linkedinads).
     # @param [Hash] opts the optional parameters
     # @return [ListConversionDestinations200Response]
     def list_conversion_destinations(account_id, opts = {})
@@ -761,8 +1242,8 @@ module Zernio
     end
 
     # List destinations for the Conversions API
-    # Returns the list of pixels (Meta) or conversion actions (Google) accessible to the connected ads account. Use the returned &#x60;id&#x60; as &#x60;destinationId&#x60; when posting to &#x60;POST /v1/ads/conversions&#x60;.  For Google, each destination&#39;s &#x60;type&#x60; reflects the conversion action&#39;s category (PURCHASE, LEAD, SIGN_UP, etc.) — the event type is locked to the destination. For Meta, &#x60;type&#x60; is absent: pixels accept any event name per request. 
-    # @param account_id [String] SocialAccount ID (metaads or googleads).
+    # Returns the list of pixels (Meta), conversion actions (Google), or conversion rules (LinkedIn) accessible to the connected ads account. Use the returned &#x60;id&#x60; as &#x60;destinationId&#x60; when posting to &#x60;POST /v1/ads/conversions&#x60;.  For Google and LinkedIn, each destination&#39;s &#x60;type&#x60; reflects the conversion type (PURCHASE, LEAD, SIGN_UP, etc.) — the event type is locked to the destination. For Meta, &#x60;type&#x60; is absent: pixels accept any event name per request.  For LinkedIn, destinations are returned across every sponsored ad account the connected token can access; the &#x60;adAccountId&#x60; field on each destination identifies the parent ad account and is required for subsequent CRUD calls (update, delete, associations, metrics). 
+    # @param account_id [String] SocialAccount ID (metaads, googleads, or linkedinads).
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListConversionDestinations200Response, Integer, Hash)>] ListConversionDestinations200Response data, response status code and response headers
     def list_conversion_destinations_with_http_info(account_id, opts = {})
@@ -809,6 +1290,89 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#list_conversion_destinations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Remove campaign↔conversion associations
+    # Remove one or more campaign associations from this conversion rule. Pass `adAccountId` and `campaignIds` as query parameters (`campaignIds` is comma-separated). The route also accepts a JSON body with the same fields for clients that prefer DELETE-with-body, but the documented surface is query-only because some SDK code generators (e.g. Python) collapse query + body parameters with the same name into a single kwarg. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param ad_account_id [String] 
+    # @param campaign_ids [String] Comma-separated list of campaign IDs.
+    # @param [Hash] opts the optional parameters
+    # @return [RemoveConversionAssociations200Response]
+    def remove_conversion_associations(account_id, destination_id, ad_account_id, campaign_ids, opts = {})
+      data, _status_code, _headers = remove_conversion_associations_with_http_info(account_id, destination_id, ad_account_id, campaign_ids, opts)
+      data
+    end
+
+    # Remove campaign↔conversion associations
+    # Remove one or more campaign associations from this conversion rule. Pass &#x60;adAccountId&#x60; and &#x60;campaignIds&#x60; as query parameters (&#x60;campaignIds&#x60; is comma-separated). The route also accepts a JSON body with the same fields for clients that prefer DELETE-with-body, but the documented surface is query-only because some SDK code generators (e.g. Python) collapse query + body parameters with the same name into a single kwarg. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param ad_account_id [String] 
+    # @param campaign_ids [String] Comma-separated list of campaign IDs.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RemoveConversionAssociations200Response, Integer, Hash)>] RemoveConversionAssociations200Response data, response status code and response headers
+    def remove_conversion_associations_with_http_info(account_id, destination_id, ad_account_id, campaign_ids, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.remove_conversion_associations ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.remove_conversion_associations"
+      end
+      # verify the required parameter 'destination_id' is set
+      if @api_client.config.client_side_validation && destination_id.nil?
+        fail ArgumentError, "Missing the required parameter 'destination_id' when calling AdsApi.remove_conversion_associations"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.remove_conversion_associations"
+      end
+      # verify the required parameter 'campaign_ids' is set
+      if @api_client.config.client_side_validation && campaign_ids.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_ids' when calling AdsApi.remove_conversion_associations"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'destinationId' + '}', CGI.escape(destination_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'adAccountId'] = ad_account_id
+      query_params[:'campaignIds'] = campaign_ids
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveConversionAssociations200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.remove_conversion_associations",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#remove_conversion_associations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -985,7 +1549,7 @@ module Zernio
     end
 
     # Send conversion events to an ad platform
-    # Relay one or more conversion events to the target ad platform's native Conversions API. Supported platforms: Meta (metaads) via Graph API, Google Ads (googleads) via Data Manager API `ingestEvents`.  Platform is inferred from the provided `accountId`. `destinationId` semantics differ per platform: - Meta: pixel (dataset) ID, e.g. \"123456789012345\" - Google: conversion action resource name, e.g.   \"customers/1234567890/conversionActions/987654321\"  Callers can list valid destinations via `GET /v1/accounts/{accountId}/conversion-destinations`.  All PII (email, phone, names, external IDs) is hashed with SHA-256 server-side per each platform's normalization spec (including Google's Gmail-specific dot/plus-suffix stripping). Send plaintext.  Requires the Ads add-on.  Batching: Meta caps at 1000 events per request and rejects the entire batch if any event is malformed. Google caps at 2000. Both are handled automatically by chunking.  Dedup: pass a stable `eventId` on every event. Meta uses it to dedupe against pixel events; Google maps it to transactionId. 
+    # Relay one or more conversion events to the target ad platform's native Conversions API. Supported platforms: Meta (metaads) via Graph API, Google Ads (googleads) via Data Manager API `ingestEvents`, LinkedIn (linkedinads) via `/rest/conversionEvents`.  Platform is inferred from the provided `accountId`. `destinationId` semantics differ per platform: - Meta: pixel (dataset) ID, e.g. \"123456789012345\" - Google: conversion action resource name, e.g.   \"customers/1234567890/conversionActions/987654321\" - LinkedIn: conversion rule ID or URN, e.g. \"104012\" or   \"urn:lla:llaPartnerConversion:104012\"  Callers can list valid destinations via `GET /v1/accounts/{accountId}/conversion-destinations`.  All PII (email, phone, names, external IDs) is hashed with SHA-256 server-side per each platform's normalization spec (including Google's Gmail-specific dot/plus-suffix stripping). Send plaintext. Note: LinkedIn `externalIds` are passed through as plaintext per LinkedIn's spec — only emails and phones are hashed.  Requires the Ads add-on. For LinkedIn, the connected account must have been authorized after the Conversions API rollout (i.e. the OAuth grant must include `rw_conversions`); older accounts must reconnect.  Batching: Meta caps at 1000 events per request and rejects the entire batch if any event is malformed. Google caps at 2000. LinkedIn caps at 5000 and is also all-or-nothing per chunk. All three are handled automatically.  Dedup: pass a stable `eventId` on every event. Meta and LinkedIn use it to dedupe against browser-side pixel/Insight Tag events; Google maps it to transactionId.  Per-platform `eventName` semantics: - Meta: free-form. Standard names (Purchase, Lead, ...) match Meta's   built-in events; custom strings are accepted. - Google: ignored — the conversion action's category determines the   event type. Send the standard name closest to your action for   documentation, but the platform will not branch on it. - LinkedIn: ignored — the conversion rule's `type` (LEAD, PURCHASE,   etc.) is locked to the destination at rule-creation time. Send the   standard name for documentation; LinkedIn does not branch on it. 
     # @param send_conversions_request [SendConversionsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [SendConversions200Response]
@@ -995,7 +1559,7 @@ module Zernio
     end
 
     # Send conversion events to an ad platform
-    # Relay one or more conversion events to the target ad platform&#39;s native Conversions API. Supported platforms: Meta (metaads) via Graph API, Google Ads (googleads) via Data Manager API &#x60;ingestEvents&#x60;.  Platform is inferred from the provided &#x60;accountId&#x60;. &#x60;destinationId&#x60; semantics differ per platform: - Meta: pixel (dataset) ID, e.g. \&quot;123456789012345\&quot; - Google: conversion action resource name, e.g.   \&quot;customers/1234567890/conversionActions/987654321\&quot;  Callers can list valid destinations via &#x60;GET /v1/accounts/{accountId}/conversion-destinations&#x60;.  All PII (email, phone, names, external IDs) is hashed with SHA-256 server-side per each platform&#39;s normalization spec (including Google&#39;s Gmail-specific dot/plus-suffix stripping). Send plaintext.  Requires the Ads add-on.  Batching: Meta caps at 1000 events per request and rejects the entire batch if any event is malformed. Google caps at 2000. Both are handled automatically by chunking.  Dedup: pass a stable &#x60;eventId&#x60; on every event. Meta uses it to dedupe against pixel events; Google maps it to transactionId. 
+    # Relay one or more conversion events to the target ad platform&#39;s native Conversions API. Supported platforms: Meta (metaads) via Graph API, Google Ads (googleads) via Data Manager API &#x60;ingestEvents&#x60;, LinkedIn (linkedinads) via &#x60;/rest/conversionEvents&#x60;.  Platform is inferred from the provided &#x60;accountId&#x60;. &#x60;destinationId&#x60; semantics differ per platform: - Meta: pixel (dataset) ID, e.g. \&quot;123456789012345\&quot; - Google: conversion action resource name, e.g.   \&quot;customers/1234567890/conversionActions/987654321\&quot; - LinkedIn: conversion rule ID or URN, e.g. \&quot;104012\&quot; or   \&quot;urn:lla:llaPartnerConversion:104012\&quot;  Callers can list valid destinations via &#x60;GET /v1/accounts/{accountId}/conversion-destinations&#x60;.  All PII (email, phone, names, external IDs) is hashed with SHA-256 server-side per each platform&#39;s normalization spec (including Google&#39;s Gmail-specific dot/plus-suffix stripping). Send plaintext. Note: LinkedIn &#x60;externalIds&#x60; are passed through as plaintext per LinkedIn&#39;s spec — only emails and phones are hashed.  Requires the Ads add-on. For LinkedIn, the connected account must have been authorized after the Conversions API rollout (i.e. the OAuth grant must include &#x60;rw_conversions&#x60;); older accounts must reconnect.  Batching: Meta caps at 1000 events per request and rejects the entire batch if any event is malformed. Google caps at 2000. LinkedIn caps at 5000 and is also all-or-nothing per chunk. All three are handled automatically.  Dedup: pass a stable &#x60;eventId&#x60; on every event. Meta and LinkedIn use it to dedupe against browser-side pixel/Insight Tag events; Google maps it to transactionId.  Per-platform &#x60;eventName&#x60; semantics: - Meta: free-form. Standard names (Purchase, Lead, ...) match Meta&#39;s   built-in events; custom strings are accepted. - Google: ignored — the conversion action&#39;s category determines the   event type. Send the standard name closest to your action for   documentation, but the platform will not branch on it. - LinkedIn: ignored — the conversion rule&#39;s &#x60;type&#x60; (LEAD, PURCHASE,   etc.) is locked to the destination at rule-creation time. Send the   standard name for documentation; LinkedIn does not branch on it. 
     # @param send_conversions_request [SendConversionsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SendConversions200Response, Integer, Hash)>] SendConversions200Response data, response status code and response headers
@@ -1190,6 +1754,86 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#update_ad\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update a conversion destination
+    # Partial-update a conversion rule. LinkedIn-only today. Whitelisted fields: `name`, `enabled`, attribution windows, `valueType`, `value`, `attributionType`. The rule's `type` and parent ad account are intentionally not exposed for update — recreate the rule if those need to change. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param update_conversion_destination_request [UpdateConversionDestinationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateConversionDestination201Response]
+    def update_conversion_destination(account_id, destination_id, update_conversion_destination_request, opts = {})
+      data, _status_code, _headers = update_conversion_destination_with_http_info(account_id, destination_id, update_conversion_destination_request, opts)
+      data
+    end
+
+    # Update a conversion destination
+    # Partial-update a conversion rule. LinkedIn-only today. Whitelisted fields: &#x60;name&#x60;, &#x60;enabled&#x60;, attribution windows, &#x60;valueType&#x60;, &#x60;value&#x60;, &#x60;attributionType&#x60;. The rule&#39;s &#x60;type&#x60; and parent ad account are intentionally not exposed for update — recreate the rule if those need to change. 
+    # @param account_id [String] 
+    # @param destination_id [String] 
+    # @param update_conversion_destination_request [UpdateConversionDestinationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateConversionDestination201Response, Integer, Hash)>] CreateConversionDestination201Response data, response status code and response headers
+    def update_conversion_destination_with_http_info(account_id, destination_id, update_conversion_destination_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.update_conversion_destination ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.update_conversion_destination"
+      end
+      # verify the required parameter 'destination_id' is set
+      if @api_client.config.client_side_validation && destination_id.nil?
+        fail ArgumentError, "Missing the required parameter 'destination_id' when calling AdsApi.update_conversion_destination"
+      end
+      # verify the required parameter 'update_conversion_destination_request' is set
+      if @api_client.config.client_side_validation && update_conversion_destination_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_conversion_destination_request' when calling AdsApi.update_conversion_destination"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/conversion-destinations/{destinationId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'destinationId' + '}', CGI.escape(destination_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_conversion_destination_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateConversionDestination201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.update_conversion_destination",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#update_conversion_destination\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -15,15 +15,15 @@ require 'time'
 
 module Zernio
   class SendConversionsRequest < ApiModelBase
-    # SocialAccount ID (metaads or googleads).
+    # SocialAccount ID (metaads, googleads, or linkedinads).
     attr_accessor :account_id
 
-    # Platform destination identifier. For Meta, the pixel/dataset ID. For Google, the conversion action resource name. 
+    # Platform destination identifier. For Meta, the pixel/dataset ID. For Google, the conversion action resource name. For LinkedIn, the conversion rule ID or full `urn:lla:llaPartnerConversion:{id}` URN. 
     attr_accessor :destination_id
 
     attr_accessor :events
 
-    # Meta `test_event_code` passthrough. Ignored by Google.
+    # Meta `test_event_code` passthrough. Ignored by Google and LinkedIn.
     attr_accessor :test_code
 
     attr_accessor :consent
