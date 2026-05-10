@@ -9,7 +9,7 @@
 | **display_name** | **String** | Human-readable label shown on Metronome invoices. | [optional] |
 | **price_per_call_usd** | **Float** |  | [optional] |
 | **price_per_call_cents** | **Float** | Per-call price in cents. Fractional values are intentional. | [optional] |
-| **tier** | **String** | Which aggregate price tier this operation falls into. | [optional] |
+| **tier** | **String** | Tier key derived from &#x60;pricePerCallUsd&#x60; (e.g. &#x60;x_api_005&#x60; for $0.005, &#x60;x_api_200&#x60; for $0.200). Useful for grouping operations by price in dashboards.  | [optional] |
 | **triggered_by** | [**Array&lt;XApiOperationTriggeredByInner&gt;**](XApiOperationTriggeredByInner.md) | Zernio platform methods that emit this operation, with their metering rule. | [optional] |
 
 ## Example
@@ -23,7 +23,7 @@ instance = Zernio::XApiOperation.new(
   display_name: X API: Posts Read,
   price_per_call_usd: 0.005,
   price_per_call_cents: 0.5,
-  tier: null,
+  tier: x_api_005,
   triggered_by: null
 )
 ```

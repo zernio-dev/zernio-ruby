@@ -30,7 +30,7 @@ module Zernio
 
     attr_accessor :x_api_calls
 
-    # Metronome users only. Per-operation X API call counts keyed by operation (e.g. `posts_read`, `content_create`). Resolve each key to price and metadata via `GET /v1/billing/x-pricing`. 
+    # Metronome users only. Per-operation X API call counts keyed by operation (e.g. `posts_read`, `content_create`, `content_create_with_url`). Resolve each key to price and metadata via `GET /v1/billing/x-pricing`. This is the canonical source — covers every price tier including the $0.200 URL tier that `xApiCalls` excludes. 
     attr_accessor :x_api_calls_by_operation
 
     # Attribute mapping from ruby-style variable name to JSON key.

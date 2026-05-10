@@ -60,10 +60,6 @@ describe Zernio::XApiOperation do
   describe 'test attribute "tier"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["x_api_005", "x_api_010", "x_api_015"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.tier = value }.not_to raise_error
-      # end
     end
   end
 

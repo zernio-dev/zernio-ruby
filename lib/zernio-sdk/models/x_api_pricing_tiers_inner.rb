@@ -15,34 +15,12 @@ require 'time'
 
 module Zernio
   class XApiPricingTiersInner < ApiModelBase
-    # Historical bucket key used in `xApiCalls` aggregation.
+    # Tier key derived from price (e.g. `x_api_005` for $0.005, `x_api_200` for $0.200). The first three keys map to the legacy `xApiCalls` aggregate; new tiers (e.g. `x_api_200` for the URL tier added April 2026) are surfaced here but not in the legacy shape. 
     attr_accessor :tier
 
     attr_accessor :price_per_call_usd
 
     attr_accessor :operation_count
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -119,19 +97,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      tier_validator = EnumAttributeValidator.new('String', ["x_api_005", "x_api_010", "x_api_015"])
-      return false unless tier_validator.valid?(@tier)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] tier Object to be assigned
-    def tier=(tier)
-      validator = EnumAttributeValidator.new('String', ["x_api_005", "x_api_010", "x_api_015"])
-      unless validator.valid?(tier)
-        fail ArgumentError, "invalid value for \"tier\", must be one of #{validator.allowable_values}."
-      end
-      @tier = tier
     end
 
     # Checks equality by comparing each attribute.
