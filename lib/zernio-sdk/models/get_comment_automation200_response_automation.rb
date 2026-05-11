@@ -35,6 +35,9 @@ module Zernio
 
     attr_accessor :dm_message
 
+    # Inline DM buttons (up to 3). Omitted when none are set.
+    attr_accessor :buttons
+
     attr_accessor :comment_reply
 
     attr_accessor :is_active
@@ -80,6 +83,7 @@ module Zernio
         :'keywords' => :'keywords',
         :'match_mode' => :'matchMode',
         :'dm_message' => :'dmMessage',
+        :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
         :'is_active' => :'isActive',
         :'stats' => :'stats',
@@ -111,6 +115,7 @@ module Zernio
         :'keywords' => :'Array<String>',
         :'match_mode' => :'String',
         :'dm_message' => :'String',
+        :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
         :'is_active' => :'Boolean',
         :'stats' => :'CreateCommentAutomation200ResponseAutomationStats',
@@ -183,6 +188,12 @@ module Zernio
         self.dm_message = attributes[:'dm_message']
       end
 
+      if attributes.key?(:'buttons')
+        if (value = attributes[:'buttons']).is_a?(Array)
+          self.buttons = value
+        end
+      end
+
       if attributes.key?(:'comment_reply')
         self.comment_reply = attributes[:'comment_reply']
       end
@@ -246,6 +257,7 @@ module Zernio
           keywords == o.keywords &&
           match_mode == o.match_mode &&
           dm_message == o.dm_message &&
+          buttons == o.buttons &&
           comment_reply == o.comment_reply &&
           is_active == o.is_active &&
           stats == o.stats &&
@@ -262,7 +274,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, account_id, platform_post_id, post_id, post_title, keywords, match_mode, dm_message, comment_reply, is_active, stats, created_at, updated_at].hash
+      [id, name, platform, account_id, platform_post_id, post_id, post_title, keywords, match_mode, dm_message, buttons, comment_reply, is_active, stats, created_at, updated_at].hash
     end
 
     # Builds the object from hash

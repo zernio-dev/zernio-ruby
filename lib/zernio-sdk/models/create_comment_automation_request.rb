@@ -37,8 +37,11 @@ module Zernio
 
     attr_accessor :match_mode
 
-    # DM text to send to commenter
+    # DM text to send to commenter. Max 640 chars when buttons are set, otherwise ~1000.
     attr_accessor :dm_message
+
+    # Optional inline DM buttons (1-3). Phone buttons are Facebook-only. Omit or pass [] for a plain-text DM.
+    attr_accessor :buttons
 
     # Optional public reply to the comment
     attr_accessor :comment_reply
@@ -77,6 +80,7 @@ module Zernio
         :'keywords' => :'keywords',
         :'match_mode' => :'matchMode',
         :'dm_message' => :'dmMessage',
+        :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply'
       }
     end
@@ -103,6 +107,7 @@ module Zernio
         :'keywords' => :'Array<String>',
         :'match_mode' => :'String',
         :'dm_message' => :'String',
+        :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String'
       }
     end
@@ -177,6 +182,12 @@ module Zernio
         self.dm_message = nil
       end
 
+      if attributes.key?(:'buttons')
+        if (value = attributes[:'buttons']).is_a?(Array)
+          self.buttons = value
+        end
+      end
+
       if attributes.key?(:'comment_reply')
         self.comment_reply = attributes[:'comment_reply']
       end
@@ -203,6 +214,10 @@ module Zernio
         invalid_properties.push('invalid value for "dm_message", dm_message cannot be nil.')
       end
 
+      if !@buttons.nil? && @buttons.length > 3
+        invalid_properties.push('invalid value for "buttons", number of items must be less than or equal to 3.')
+      end
+
       invalid_properties
     end
 
@@ -216,6 +231,7 @@ module Zernio
       match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains"])
       return false unless match_mode_validator.valid?(@match_mode)
       return false if @dm_message.nil?
+      return false if !@buttons.nil? && @buttons.length > 3
       true
     end
 
@@ -269,6 +285,20 @@ module Zernio
       @dm_message = dm_message
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] buttons Value to be assigned
+    def buttons=(buttons)
+      if buttons.nil?
+        fail ArgumentError, 'buttons cannot be nil'
+      end
+
+      if buttons.length > 3
+        fail ArgumentError, 'invalid value for "buttons", number of items must be less than or equal to 3.'
+      end
+
+      @buttons = buttons
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -283,6 +313,7 @@ module Zernio
           keywords == o.keywords &&
           match_mode == o.match_mode &&
           dm_message == o.dm_message &&
+          buttons == o.buttons &&
           comment_reply == o.comment_reply
     end
 
@@ -295,7 +326,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, comment_reply].hash
+      [profile_id, account_id, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply].hash
     end
 
     # Builds the object from hash

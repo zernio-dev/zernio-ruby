@@ -372,7 +372,7 @@ end
 
 Update automation settings
 
-Update an automation's keywords, DM message, comment reply, or active status.
+Update an automation's keywords, DM message, inline buttons, comment reply, or active status. Pass `buttons: []` to clear all buttons. When `buttons` is non-empty, `dmMessage` (the new one if you're changing it, otherwise the stored one) must be 640 characters or less. 
 
 ### Examples
 

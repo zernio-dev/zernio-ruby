@@ -12,7 +12,8 @@
 | **name** | **String** | Automation label |  |
 | **keywords** | **Array&lt;String&gt;** | Trigger keywords (empty &#x3D; any comment triggers) | [optional] |
 | **match_mode** | **String** |  | [optional][default to &#39;contains&#39;] |
-| **dm_message** | **String** | DM text to send to commenter |  |
+| **dm_message** | **String** | DM text to send to commenter. Max 640 chars when buttons are set, otherwise ~1000. |  |
+| **buttons** | [**Array&lt;DmButton&gt;**](DmButton.md) | Optional inline DM buttons (1-3). Phone buttons are Facebook-only. Omit or pass [] for a plain-text DM. | [optional] |
 | **comment_reply** | **String** | Optional public reply to the comment | [optional] |
 
 ## Example
@@ -30,6 +31,7 @@ instance = Zernio::CreateCommentAutomationRequest.new(
   keywords: null,
   match_mode: null,
   dm_message: null,
+  buttons: null,
   comment_reply: null
 )
 ```

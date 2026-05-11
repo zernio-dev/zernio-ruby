@@ -23,6 +23,9 @@ module Zernio
 
     attr_accessor :dm_message
 
+    # Inline DM buttons (1-3). Pass [] to clear all buttons.
+    attr_accessor :buttons
+
     attr_accessor :comment_reply
 
     attr_accessor :is_active
@@ -56,6 +59,7 @@ module Zernio
         :'keywords' => :'keywords',
         :'match_mode' => :'matchMode',
         :'dm_message' => :'dmMessage',
+        :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
         :'is_active' => :'isActive'
       }
@@ -78,6 +82,7 @@ module Zernio
         :'keywords' => :'Array<String>',
         :'match_mode' => :'String',
         :'dm_message' => :'String',
+        :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
         :'is_active' => :'Boolean'
       }
@@ -123,6 +128,12 @@ module Zernio
         self.dm_message = attributes[:'dm_message']
       end
 
+      if attributes.key?(:'buttons')
+        if (value = attributes[:'buttons']).is_a?(Array)
+          self.buttons = value
+        end
+      end
+
       if attributes.key?(:'comment_reply')
         self.comment_reply = attributes[:'comment_reply']
       end
@@ -137,6 +148,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@buttons.nil? && @buttons.length > 3
+        invalid_properties.push('invalid value for "buttons", number of items must be less than or equal to 3.')
+      end
+
       invalid_properties
     end
 
@@ -146,6 +161,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains"])
       return false unless match_mode_validator.valid?(@match_mode)
+      return false if !@buttons.nil? && @buttons.length > 3
       true
     end
 
@@ -159,6 +175,20 @@ module Zernio
       @match_mode = match_mode
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] buttons Value to be assigned
+    def buttons=(buttons)
+      if buttons.nil?
+        fail ArgumentError, 'buttons cannot be nil'
+      end
+
+      if buttons.length > 3
+        fail ArgumentError, 'invalid value for "buttons", number of items must be less than or equal to 3.'
+      end
+
+      @buttons = buttons
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -168,6 +198,7 @@ module Zernio
           keywords == o.keywords &&
           match_mode == o.match_mode &&
           dm_message == o.dm_message &&
+          buttons == o.buttons &&
           comment_reply == o.comment_reply &&
           is_active == o.is_active
     end
@@ -181,7 +212,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, keywords, match_mode, dm_message, comment_reply, is_active].hash
+      [name, keywords, match_mode, dm_message, buttons, comment_reply, is_active].hash
     end
 
     # Builds the object from hash

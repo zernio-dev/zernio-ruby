@@ -544,6 +544,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DiscordPlatformDataPollAnswersInnerPollMedia](docs/DiscordPlatformDataPollAnswersInnerPollMedia.md)
  - [Zernio::DiscordPlatformDataPollQuestion](docs/DiscordPlatformDataPollQuestion.md)
  - [Zernio::DiscordPlatformDataThreadFromMessage](docs/DiscordPlatformDataThreadFromMessage.md)
+ - [Zernio::DmButton](docs/DmButton.md)
  - [Zernio::DuplicateAdCampaign200Response](docs/DuplicateAdCampaign200Response.md)
  - [Zernio::DuplicateAdCampaignRequest](docs/DuplicateAdCampaignRequest.md)
  - [Zernio::EditInboxMessage200Response](docs/EditInboxMessage200Response.md)
