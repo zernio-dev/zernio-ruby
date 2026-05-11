@@ -41,6 +41,8 @@ docs/AddConversionAssociations200Response.md
 docs/AddConversionAssociations200ResponseFailedInner.md
 docs/AddConversionAssociationsRequest.md
 docs/AddMessageReactionRequest.md
+docs/AddTrackingTagSharedAccount201Response.md
+docs/AddTrackingTagSharedAccountRequest.md
 docs/AddUsersToAdAudience200Response.md
 docs/AddUsersToAdAudienceRequest.md
 docs/AddUsersToAdAudienceRequestUsersInner.md
@@ -178,6 +180,8 @@ docs/CreateStandaloneAdRequestImages.md
 docs/CreateStandaloneAdRequestPromotedObject.md
 docs/CreateStandaloneAdRequestRegionsInner.md
 docs/CreateStandaloneAdRequestVideo.md
+docs/CreateTrackingTag201Response.md
+docs/CreateTrackingTagRequest.md
 docs/CreateWebhookSettingsRequest.md
 docs/CreateWhatsAppFlow200Response.md
 docs/CreateWhatsAppFlow200ResponseFlow.md
@@ -405,6 +409,8 @@ docs/GetTikTokCreatorInfo200ResponseCommercialContentTypesInner.md
 docs/GetTikTokCreatorInfo200ResponseCreator.md
 docs/GetTikTokCreatorInfo200ResponsePostingLimits.md
 docs/GetTikTokCreatorInfo200ResponsePrivacyLevelsInner.md
+docs/GetTrackingTagStats200Response.md
+docs/GetTrackingTagStats200ResponseStats.md
 docs/GetUser200Response.md
 docs/GetUser200ResponseUser.md
 docs/GetWebhookSettings200Response.md
@@ -548,6 +554,8 @@ docs/ListSequences200Response.md
 docs/ListSequences200ResponseSequencesInner.md
 docs/ListSnapchatProfiles200Response.md
 docs/ListSnapchatProfiles200ResponsePublicProfilesInner.md
+docs/ListTrackingTagSharedAccounts200Response.md
+docs/ListTrackingTags200Response.md
 docs/ListUsers200Response.md
 docs/ListUsers200ResponseUsersInner.md
 docs/ListWhatsAppFlows200Response.md
@@ -707,6 +715,7 @@ docs/SetInstagramIceBreakersRequestIceBreakersInner.md
 docs/SetMessengerMenuRequest.md
 docs/SetTelegramCommandsRequest.md
 docs/SetTelegramCommandsRequestCommandsInner.md
+docs/SharedAdAccount.md
 docs/SnapchatPlatformData.md
 docs/SocialAccount.md
 docs/SocialAccountProfileId.md
@@ -714,6 +723,7 @@ docs/TelegramPlatformData.md
 docs/TestWebhookRequest.md
 docs/ThreadsPlatformData.md
 docs/TikTokPlatformData.md
+docs/TrackingTag.md
 docs/TwitterEngagementApi.md
 docs/TwitterPlatformData.md
 docs/TwitterPlatformDataPoll.md
@@ -802,6 +812,7 @@ docs/UpdateQueueSlotRequest.md
 docs/UpdateRedditSubredditsRequest.md
 docs/UpdateSequence200Response.md
 docs/UpdateSequence200ResponseSequence.md
+docs/UpdateTrackingTagRequest.md
 docs/UpdateWebhookSettings200Response.md
 docs/UpdateWebhookSettingsRequest.md
 docs/UpdateWhatsAppBusinessProfileRequest.md
@@ -996,6 +1007,8 @@ lib/zernio-sdk/models/add_conversion_associations200_response.rb
 lib/zernio-sdk/models/add_conversion_associations200_response_failed_inner.rb
 lib/zernio-sdk/models/add_conversion_associations_request.rb
 lib/zernio-sdk/models/add_message_reaction_request.rb
+lib/zernio-sdk/models/add_tracking_tag_shared_account201_response.rb
+lib/zernio-sdk/models/add_tracking_tag_shared_account_request.rb
 lib/zernio-sdk/models/add_users_to_ad_audience200_response.rb
 lib/zernio-sdk/models/add_users_to_ad_audience_request.rb
 lib/zernio-sdk/models/add_users_to_ad_audience_request_users_inner.rb
@@ -1126,6 +1139,8 @@ lib/zernio-sdk/models/create_standalone_ad_request_images.rb
 lib/zernio-sdk/models/create_standalone_ad_request_promoted_object.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
+lib/zernio-sdk/models/create_tracking_tag201_response.rb
+lib/zernio-sdk/models/create_tracking_tag_request.rb
 lib/zernio-sdk/models/create_webhook_settings_request.rb
 lib/zernio-sdk/models/create_whats_app_flow200_response.rb
 lib/zernio-sdk/models/create_whats_app_flow200_response_flow.rb
@@ -1344,6 +1359,8 @@ lib/zernio-sdk/models/get_tik_tok_creator_info200_response_commercial_content_ty
 lib/zernio-sdk/models/get_tik_tok_creator_info200_response_creator.rb
 lib/zernio-sdk/models/get_tik_tok_creator_info200_response_posting_limits.rb
 lib/zernio-sdk/models/get_tik_tok_creator_info200_response_privacy_levels_inner.rb
+lib/zernio-sdk/models/get_tracking_tag_stats200_response.rb
+lib/zernio-sdk/models/get_tracking_tag_stats200_response_stats.rb
 lib/zernio-sdk/models/get_user200_response.rb
 lib/zernio-sdk/models/get_user200_response_user.rb
 lib/zernio-sdk/models/get_webhook_settings200_response.rb
@@ -1485,6 +1502,8 @@ lib/zernio-sdk/models/list_sequences200_response.rb
 lib/zernio-sdk/models/list_sequences200_response_sequences_inner.rb
 lib/zernio-sdk/models/list_snapchat_profiles200_response.rb
 lib/zernio-sdk/models/list_snapchat_profiles200_response_public_profiles_inner.rb
+lib/zernio-sdk/models/list_tracking_tag_shared_accounts200_response.rb
+lib/zernio-sdk/models/list_tracking_tags200_response.rb
 lib/zernio-sdk/models/list_users200_response.rb
 lib/zernio-sdk/models/list_users200_response_users_inner.rb
 lib/zernio-sdk/models/list_whats_app_flows200_response.rb
@@ -1635,6 +1654,7 @@ lib/zernio-sdk/models/set_instagram_ice_breakers_request_ice_breakers_inner.rb
 lib/zernio-sdk/models/set_messenger_menu_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request_commands_inner.rb
+lib/zernio-sdk/models/shared_ad_account.rb
 lib/zernio-sdk/models/snapchat_platform_data.rb
 lib/zernio-sdk/models/social_account.rb
 lib/zernio-sdk/models/social_account_profile_id.rb
@@ -1642,6 +1662,7 @@ lib/zernio-sdk/models/telegram_platform_data.rb
 lib/zernio-sdk/models/test_webhook_request.rb
 lib/zernio-sdk/models/threads_platform_data.rb
 lib/zernio-sdk/models/tik_tok_platform_data.rb
+lib/zernio-sdk/models/tracking_tag.rb
 lib/zernio-sdk/models/twitter_platform_data.rb
 lib/zernio-sdk/models/twitter_platform_data_poll.rb
 lib/zernio-sdk/models/twitter_platform_data_thread_items_inner.rb
@@ -1729,6 +1750,7 @@ lib/zernio-sdk/models/update_queue_slot_request.rb
 lib/zernio-sdk/models/update_reddit_subreddits_request.rb
 lib/zernio-sdk/models/update_sequence200_response.rb
 lib/zernio-sdk/models/update_sequence200_response_sequence.rb
+lib/zernio-sdk/models/update_tracking_tag_request.rb
 lib/zernio-sdk/models/update_webhook_settings200_response.rb
 lib/zernio-sdk/models/update_webhook_settings_request.rb
 lib/zernio-sdk/models/update_whats_app_business_profile_request.rb
@@ -1909,6 +1931,8 @@ spec/models/add_conversion_associations200_response_failed_inner_spec.rb
 spec/models/add_conversion_associations200_response_spec.rb
 spec/models/add_conversion_associations_request_spec.rb
 spec/models/add_message_reaction_request_spec.rb
+spec/models/add_tracking_tag_shared_account201_response_spec.rb
+spec/models/add_tracking_tag_shared_account_request_spec.rb
 spec/models/add_users_to_ad_audience200_response_spec.rb
 spec/models/add_users_to_ad_audience_request_spec.rb
 spec/models/add_users_to_ad_audience_request_users_inner_spec.rb
@@ -2039,6 +2063,8 @@ spec/models/create_standalone_ad_request_promoted_object_spec.rb
 spec/models/create_standalone_ad_request_regions_inner_spec.rb
 spec/models/create_standalone_ad_request_spec.rb
 spec/models/create_standalone_ad_request_video_spec.rb
+spec/models/create_tracking_tag201_response_spec.rb
+spec/models/create_tracking_tag_request_spec.rb
 spec/models/create_webhook_settings_request_spec.rb
 spec/models/create_whats_app_flow200_response_flow_spec.rb
 spec/models/create_whats_app_flow200_response_spec.rb
@@ -2257,6 +2283,8 @@ spec/models/get_tik_tok_creator_info200_response_creator_spec.rb
 spec/models/get_tik_tok_creator_info200_response_posting_limits_spec.rb
 spec/models/get_tik_tok_creator_info200_response_privacy_levels_inner_spec.rb
 spec/models/get_tik_tok_creator_info200_response_spec.rb
+spec/models/get_tracking_tag_stats200_response_spec.rb
+spec/models/get_tracking_tag_stats200_response_stats_spec.rb
 spec/models/get_user200_response_spec.rb
 spec/models/get_user200_response_user_spec.rb
 spec/models/get_webhook_settings200_response_spec.rb
@@ -2398,6 +2426,8 @@ spec/models/list_sequences200_response_sequences_inner_spec.rb
 spec/models/list_sequences200_response_spec.rb
 spec/models/list_snapchat_profiles200_response_public_profiles_inner_spec.rb
 spec/models/list_snapchat_profiles200_response_spec.rb
+spec/models/list_tracking_tag_shared_accounts200_response_spec.rb
+spec/models/list_tracking_tags200_response_spec.rb
 spec/models/list_users200_response_spec.rb
 spec/models/list_users200_response_users_inner_spec.rb
 spec/models/list_whats_app_flows200_response_flows_inner_spec.rb
@@ -2548,6 +2578,7 @@ spec/models/set_instagram_ice_breakers_request_spec.rb
 spec/models/set_messenger_menu_request_spec.rb
 spec/models/set_telegram_commands_request_commands_inner_spec.rb
 spec/models/set_telegram_commands_request_spec.rb
+spec/models/shared_ad_account_spec.rb
 spec/models/snapchat_platform_data_spec.rb
 spec/models/social_account_profile_id_spec.rb
 spec/models/social_account_spec.rb
@@ -2555,6 +2586,7 @@ spec/models/telegram_platform_data_spec.rb
 spec/models/test_webhook_request_spec.rb
 spec/models/threads_platform_data_spec.rb
 spec/models/tik_tok_platform_data_spec.rb
+spec/models/tracking_tag_spec.rb
 spec/models/twitter_platform_data_poll_spec.rb
 spec/models/twitter_platform_data_spec.rb
 spec/models/twitter_platform_data_thread_items_inner_spec.rb
@@ -2642,6 +2674,7 @@ spec/models/update_queue_slot_request_spec.rb
 spec/models/update_reddit_subreddits_request_spec.rb
 spec/models/update_sequence200_response_sequence_spec.rb
 spec/models/update_sequence200_response_spec.rb
+spec/models/update_tracking_tag_request_spec.rb
 spec/models/update_webhook_settings200_response_spec.rb
 spec/models/update_webhook_settings_request_spec.rb
 spec/models/update_whats_app_business_profile_request_spec.rb

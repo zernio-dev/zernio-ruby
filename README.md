@@ -104,10 +104,12 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set (budget, status, and/or bid strategy)
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
 *Zernio::AdsApi* | [**add_conversion_associations**](docs/AdsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns with a conversion destination
+*Zernio::AdsApi* | [**add_tracking_tag_shared_account**](docs/AdsApi.md#add_tracking_tag_shared_account) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Share a tracking tag with an ad account
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn)
 *Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
+*Zernio::AdsApi* | [**create_tracking_tag**](docs/AdsApi.md#create_tracking_tag) | **POST** /v1/accounts/{accountId}/tracking-tags | Create a tracking tag (Meta Pixel)
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdsApi* | [**delete_conversion_destination**](docs/AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Soft-delete a conversion destination
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
@@ -115,18 +117,24 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Fetch a single conversion destination
 *Zernio::AdsApi* | [**get_conversion_metrics**](docs/AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Fetch attribution metrics for a conversion destination
+*Zernio::AdsApi* | [**get_tracking_tag**](docs/AdsApi.md#get_tracking_tag) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId} | Fetch a single tracking tag (Meta Pixel)
+*Zernio::AdsApi* | [**get_tracking_tag_stats**](docs/AdsApi.md#get_tracking_tag_stats) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/stats | Aggregated event stats for a tracking tag (Meta Pixel)
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdsApi* | [**list_ads_business_centers**](docs/AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
 *Zernio::AdsApi* | [**list_conversion_associations**](docs/AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List campaigns associated with a conversion destination
 *Zernio::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API
+*Zernio::AdsApi* | [**list_tracking_tag_shared_accounts**](docs/AdsApi.md#list_tracking_tag_shared_accounts) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | List ad accounts a tracking tag is shared with
+*Zernio::AdsApi* | [**list_tracking_tags**](docs/AdsApi.md#list_tracking_tags) | **GET** /v1/accounts/{accountId}/tracking-tags | List tracking tags (Meta Pixels)
 *Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove campaign↔conversion associations
+*Zernio::AdsApi* | [**remove_tracking_tag_shared_account**](docs/AdsApi.md#remove_tracking_tag_shared_account) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Stop sharing a tracking tag with an ad account
 *Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
 *Zernio::AdsApi* | [**search_ad_targeting_locations**](docs/AdsApi.md#search_ad_targeting_locations) | **GET** /v1/ads/targeting/search | Search geo targeting locations (Meta)
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Zernio::AdsApi* | [**update_conversion_destination**](docs/AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
+*Zernio::AdsApi* | [**update_tracking_tag**](docs/AdsApi.md#update_tracking_tag) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId} | Update a tracking tag (Meta Pixel)
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Zernio::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
 *Zernio::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
@@ -381,6 +389,8 @@ Class | Method | HTTP request | Description
  - [Zernio::AddConversionAssociations200ResponseFailedInner](docs/AddConversionAssociations200ResponseFailedInner.md)
  - [Zernio::AddConversionAssociationsRequest](docs/AddConversionAssociationsRequest.md)
  - [Zernio::AddMessageReactionRequest](docs/AddMessageReactionRequest.md)
+ - [Zernio::AddTrackingTagSharedAccount201Response](docs/AddTrackingTagSharedAccount201Response.md)
+ - [Zernio::AddTrackingTagSharedAccountRequest](docs/AddTrackingTagSharedAccountRequest.md)
  - [Zernio::AddUsersToAdAudience200Response](docs/AddUsersToAdAudience200Response.md)
  - [Zernio::AddUsersToAdAudienceRequest](docs/AddUsersToAdAudienceRequest.md)
  - [Zernio::AddUsersToAdAudienceRequestUsersInner](docs/AddUsersToAdAudienceRequestUsersInner.md)
@@ -511,6 +521,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
+ - [Zernio::CreateTrackingTag201Response](docs/CreateTrackingTag201Response.md)
+ - [Zernio::CreateTrackingTagRequest](docs/CreateTrackingTagRequest.md)
  - [Zernio::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
  - [Zernio::CreateWhatsAppFlow200Response](docs/CreateWhatsAppFlow200Response.md)
  - [Zernio::CreateWhatsAppFlow200ResponseFlow](docs/CreateWhatsAppFlow200ResponseFlow.md)
@@ -729,6 +741,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetTikTokCreatorInfo200ResponseCreator](docs/GetTikTokCreatorInfo200ResponseCreator.md)
  - [Zernio::GetTikTokCreatorInfo200ResponsePostingLimits](docs/GetTikTokCreatorInfo200ResponsePostingLimits.md)
  - [Zernio::GetTikTokCreatorInfo200ResponsePrivacyLevelsInner](docs/GetTikTokCreatorInfo200ResponsePrivacyLevelsInner.md)
+ - [Zernio::GetTrackingTagStats200Response](docs/GetTrackingTagStats200Response.md)
+ - [Zernio::GetTrackingTagStats200ResponseStats](docs/GetTrackingTagStats200ResponseStats.md)
  - [Zernio::GetUser200Response](docs/GetUser200Response.md)
  - [Zernio::GetUser200ResponseUser](docs/GetUser200ResponseUser.md)
  - [Zernio::GetWebhookSettings200Response](docs/GetWebhookSettings200Response.md)
@@ -870,6 +884,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListSequences200ResponseSequencesInner](docs/ListSequences200ResponseSequencesInner.md)
  - [Zernio::ListSnapchatProfiles200Response](docs/ListSnapchatProfiles200Response.md)
  - [Zernio::ListSnapchatProfiles200ResponsePublicProfilesInner](docs/ListSnapchatProfiles200ResponsePublicProfilesInner.md)
+ - [Zernio::ListTrackingTagSharedAccounts200Response](docs/ListTrackingTagSharedAccounts200Response.md)
+ - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
  - [Zernio::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
  - [Zernio::ListWhatsAppFlows200Response](docs/ListWhatsAppFlows200Response.md)
@@ -1020,6 +1036,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SetMessengerMenuRequest](docs/SetMessengerMenuRequest.md)
  - [Zernio::SetTelegramCommandsRequest](docs/SetTelegramCommandsRequest.md)
  - [Zernio::SetTelegramCommandsRequestCommandsInner](docs/SetTelegramCommandsRequestCommandsInner.md)
+ - [Zernio::SharedAdAccount](docs/SharedAdAccount.md)
  - [Zernio::SnapchatPlatformData](docs/SnapchatPlatformData.md)
  - [Zernio::SocialAccount](docs/SocialAccount.md)
  - [Zernio::SocialAccountProfileId](docs/SocialAccountProfileId.md)
@@ -1027,6 +1044,7 @@ Class | Method | HTTP request | Description
  - [Zernio::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Zernio::ThreadsPlatformData](docs/ThreadsPlatformData.md)
  - [Zernio::TikTokPlatformData](docs/TikTokPlatformData.md)
+ - [Zernio::TrackingTag](docs/TrackingTag.md)
  - [Zernio::TwitterPlatformData](docs/TwitterPlatformData.md)
  - [Zernio::TwitterPlatformDataPoll](docs/TwitterPlatformDataPoll.md)
  - [Zernio::TwitterPlatformDataThreadItemsInner](docs/TwitterPlatformDataThreadItemsInner.md)
@@ -1114,6 +1132,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateRedditSubredditsRequest](docs/UpdateRedditSubredditsRequest.md)
  - [Zernio::UpdateSequence200Response](docs/UpdateSequence200Response.md)
  - [Zernio::UpdateSequence200ResponseSequence](docs/UpdateSequence200ResponseSequence.md)
+ - [Zernio::UpdateTrackingTagRequest](docs/UpdateTrackingTagRequest.md)
  - [Zernio::UpdateWebhookSettings200Response](docs/UpdateWebhookSettings200Response.md)
  - [Zernio::UpdateWebhookSettingsRequest](docs/UpdateWebhookSettingsRequest.md)
  - [Zernio::UpdateWhatsAppBusinessProfileRequest](docs/UpdateWhatsAppBusinessProfileRequest.md)
