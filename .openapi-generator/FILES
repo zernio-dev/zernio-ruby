@@ -724,6 +724,7 @@ docs/TestWebhookRequest.md
 docs/ThreadsPlatformData.md
 docs/TikTokPlatformData.md
 docs/TrackingTag.md
+docs/TrackingTagsApi.md
 docs/TwitterEngagementApi.md
 docs/TwitterPlatformData.md
 docs/TwitterPlatformDataPoll.md
@@ -965,6 +966,7 @@ lib/zernio-sdk/api/queue_api.rb
 lib/zernio-sdk/api/reddit_search_api.rb
 lib/zernio-sdk/api/reviews_api.rb
 lib/zernio-sdk/api/sequences_api.rb
+lib/zernio-sdk/api/tracking_tags_api.rb
 lib/zernio-sdk/api/twitter_engagement_api.rb
 lib/zernio-sdk/api/usage_api.rb
 lib/zernio-sdk/api/users_api.rb
@@ -1894,6 +1896,7 @@ spec/api/queue_api_spec.rb
 spec/api/reddit_search_api_spec.rb
 spec/api/reviews_api_spec.rb
 spec/api/sequences_api_spec.rb
+spec/api/tracking_tags_api_spec.rb
 spec/api/twitter_engagement_api_spec.rb
 spec/api/usage_api_spec.rb
 spec/api/users_api_spec.rb

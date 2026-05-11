@@ -46,20 +46,6 @@ describe 'AdsApi' do
     end
   end
 
-  # unit tests for add_tracking_tag_shared_account
-  # Share a tracking tag with an ad account
-  # Shares the pixel with another ad account so campaigns/audiences in that account can use it. Requires that you administer both the pixel&#39;s owning Business Manager and the target ad account; a pixel on a personal (non-BM) ad account can&#39;t be shared (Meta will reject the call). Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
-  # @param account_id 
-  # @param tag_id Pixel id.
-  # @param add_tracking_tag_shared_account_request 
-  # @param [Hash] opts the optional parameters
-  # @return [AddTrackingTagSharedAccount201Response]
-  describe 'add_tracking_tag_shared_account test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for boost_post
   # Boost post as ad
   # Creates a paid ad campaign from an existing published post. Creates the full platform campaign hierarchy (campaign, ad set, ad).
@@ -104,19 +90,6 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [CreateStandaloneAd201Response]
   describe 'create_standalone_ad test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for create_tracking_tag
-  # Create a tracking tag (Meta Pixel)
-  # Creates a Meta Pixel on the given ad account (&#x60;POST /act_{id}/adspixels&#x60; — &#x60;name&#x60; is the only input). Returns the created tag including its install &#x60;code&#x60;. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with &#x60;ownerBusinessId: null&#x60; and can&#39;t be shared with other ad accounts.  Creating a pixel does NOT install it — install the returned &#x60;code&#x60; snippet on the site, or send events server-side via &#x60;POST /v1/ads/conversions&#x60;. The check &#x60;installed&#x60; is derived from &#x60;lastFiredTime&#x60;.  NOT idempotent: each call creates a new pixel. Do not retry blindly on timeout. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
-  # @param account_id Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
-  # @param create_tracking_tag_request 
-  # @param [Hash] opts the optional parameters
-  # @return [CreateTrackingTag201Response]
-  describe 'create_tracking_tag test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -220,35 +193,6 @@ describe 'AdsApi' do
     end
   end
 
-  # unit tests for get_tracking_tag
-  # Fetch a single tracking tag (Meta Pixel)
-  # Returns the full tag record including the base-code &#x60;code&#x60; snippet, &#x60;lastFiredTime&#x60;, &#x60;ownerBusinessId&#x60;, &#x60;isUnavailable&#x60;, etc. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
-  # @param account_id 
-  # @param tag_id Pixel id.
-  # @param [Hash] opts the optional parameters
-  # @return [CreateTrackingTag201Response]
-  describe 'get_tracking_tag test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for get_tracking_tag_stats
-  # Aggregated event stats for a tracking tag (Meta Pixel)
-  # Returns aggregated event counts for the pixel (&#x60;GET /{pixel_id}/stats&#x60;). Rows are passed through from Meta as-is — their shape depends on the &#x60;aggregation&#x60; requested. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
-  # @param account_id 
-  # @param tag_id Pixel id.
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :aggregation Aggregation dimension. Defaults to &#x60;event&#x60;.
-  # @option opts [Integer] :start_time Unix seconds lower bound.
-  # @option opts [Integer] :end_time Unix seconds upper bound.
-  # @return [GetTrackingTagStats200Response]
-  describe 'get_tracking_tag_stats test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for list_ad_accounts
   # List ad accounts
   # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok&#39;s &#x60;/advertiser/info/&#x60; endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time &#x60;advertiser_ids&#x60; list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 
@@ -323,32 +267,6 @@ describe 'AdsApi' do
     end
   end
 
-  # unit tests for list_tracking_tag_shared_accounts
-  # List ad accounts a tracking tag is shared with
-  # Meta only (platform &#x60;metaads&#x60;); other platforms return 405.
-  # @param account_id 
-  # @param tag_id Pixel id.
-  # @param [Hash] opts the optional parameters
-  # @return [ListTrackingTagSharedAccounts200Response]
-  describe 'list_tracking_tag_shared_accounts test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for list_tracking_tags
-  # List tracking tags (Meta Pixels)
-  # Returns the tracking tags (Meta Pixels) the connected ads account can see. Pass &#x60;?adAccountId&#x3D;act_...&#x60; to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits &#x60;code&#x60; — call &#x60;getTrackingTag&#x60; for the install snippet and full detail.  Meta only today (platform &#x60;metaads&#x60;); other platforms return 405. The &#x60;accountId&#x60; must be the Meta *ads* SocialAccount created by the Ads add-on connect flow, not a Facebook/Instagram posting account. Get your &#x60;act_...&#x60; ids from &#x60;GET /v1/ads/accounts&#x60;. 
-  # @param account_id Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :ad_account_id Optional. Scope to one ad account, e.g. &#x60;act_123456789&#x60;.
-  # @return [ListTrackingTags200Response]
-  describe 'list_tracking_tags test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for remove_conversion_associations
   # Remove campaign↔conversion associations
   # Remove one or more campaign associations from this conversion rule. Pass &#x60;adAccountId&#x60; and &#x60;campaignIds&#x60; as query parameters (&#x60;campaignIds&#x60; is comma-separated). The route also accepts a JSON body with the same fields for clients that prefer DELETE-with-body, but the documented surface is query-only because some SDK code generators (e.g. Python) collapse query + body parameters with the same name into a single kwarg. 
@@ -359,20 +277,6 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [RemoveConversionAssociations200Response]
   describe 'remove_conversion_associations test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for remove_tracking_tag_shared_account
-  # Stop sharing a tracking tag with an ad account
-  # &#x60;adAccountId&#x60; may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
-  # @param account_id 
-  # @param tag_id Pixel id.
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :ad_account_id Ad account to unshare, e.g. &#x60;act_123456789&#x60;. May also be sent in the JSON body.
-  # @return [nil]
-  describe 'remove_tracking_tag_shared_account test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -453,20 +357,6 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [CreateConversionDestination201Response]
   describe 'update_conversion_destination test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for update_tracking_tag
-  # Update a tracking tag (Meta Pixel)
-  # Partial-update a pixel. Whitelisted fields: &#x60;name&#x60; (rename), &#x60;enableAutomaticMatching&#x60;, &#x60;automaticMatchingFields&#x60;, &#x60;firstPartyCookieStatus&#x60;, &#x60;dataUseSetting&#x60;. At least one is required. Returns the re-fetched canonical tag. Meta only (platform &#x60;metaads&#x60;); other platforms return 405.  There is no DELETE — Meta has no API to delete a pixel. To stop using one, unshare it from your ad accounts (&#x60;DELETE .../tracking-tags/{tagId}/shared-accounts&#x60;) or disable it in Events Manager. 
-  # @param account_id 
-  # @param tag_id Pixel id.
-  # @param update_tracking_tag_request 
-  # @param [Hash] opts the optional parameters
-  # @return [CreateTrackingTag201Response]
-  describe 'update_tracking_tag test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

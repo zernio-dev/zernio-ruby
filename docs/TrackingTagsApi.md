@@ -1,0 +1,600 @@
+# Zernio::TrackingTagsApi
+
+All URIs are relative to *https://zernio.com/api*
+
+| Method | HTTP request | Description |
+| ------ | ------------ | ----------- |
+| [**add_tracking_tag_shared_account**](TrackingTagsApi.md#add_tracking_tag_shared_account) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Share a tracking tag with an ad account |
+| [**create_tracking_tag**](TrackingTagsApi.md#create_tracking_tag) | **POST** /v1/accounts/{accountId}/tracking-tags | Create a tracking tag (Meta Pixel) |
+| [**get_tracking_tag**](TrackingTagsApi.md#get_tracking_tag) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId} | Fetch a single tracking tag (Meta Pixel) |
+| [**get_tracking_tag_stats**](TrackingTagsApi.md#get_tracking_tag_stats) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/stats | Aggregated event stats for a tracking tag (Meta Pixel) |
+| [**list_tracking_tag_shared_accounts**](TrackingTagsApi.md#list_tracking_tag_shared_accounts) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | List ad accounts a tracking tag is shared with |
+| [**list_tracking_tags**](TrackingTagsApi.md#list_tracking_tags) | **GET** /v1/accounts/{accountId}/tracking-tags | List tracking tags (Meta Pixels) |
+| [**remove_tracking_tag_shared_account**](TrackingTagsApi.md#remove_tracking_tag_shared_account) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Stop sharing a tracking tag with an ad account |
+| [**update_tracking_tag**](TrackingTagsApi.md#update_tracking_tag) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId} | Update a tracking tag (Meta Pixel) |
+
+
+## add_tracking_tag_shared_account
+
+> <AddTrackingTagSharedAccount201Response> add_tracking_tag_shared_account(account_id, tag_id, add_tracking_tag_shared_account_request)
+
+Share a tracking tag with an ad account
+
+Shares the pixel with another ad account so campaigns/audiences in that account can use it. Requires that you administer both the pixel's owning Business Manager and the target ad account; a pixel on a personal (non-BM) ad account can't be shared (Meta will reject the call). Meta only (platform `metaads`); other platforms return 405. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Pixel id.
+add_tracking_tag_shared_account_request = Zernio::AddTrackingTagSharedAccountRequest.new({ad_account_id: 'ad_account_id_example'}) # AddTrackingTagSharedAccountRequest | 
+
+begin
+  # Share a tracking tag with an ad account
+  result = api_instance.add_tracking_tag_shared_account(account_id, tag_id, add_tracking_tag_shared_account_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->add_tracking_tag_shared_account: #{e}"
+end
+```
+
+#### Using the add_tracking_tag_shared_account_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AddTrackingTagSharedAccount201Response>, Integer, Hash)> add_tracking_tag_shared_account_with_http_info(account_id, tag_id, add_tracking_tag_shared_account_request)
+
+```ruby
+begin
+  # Share a tracking tag with an ad account
+  data, status_code, headers = api_instance.add_tracking_tag_shared_account_with_http_info(account_id, tag_id, add_tracking_tag_shared_account_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AddTrackingTagSharedAccount201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->add_tracking_tag_shared_account_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Pixel id. |  |
+| **add_tracking_tag_shared_account_request** | [**AddTrackingTagSharedAccountRequest**](AddTrackingTagSharedAccountRequest.md) |  |  |
+
+### Return type
+
+[**AddTrackingTagSharedAccount201Response**](AddTrackingTagSharedAccount201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_tracking_tag
+
+> <CreateTrackingTag201Response> create_tracking_tag(account_id, create_tracking_tag_request)
+
+Create a tracking tag (Meta Pixel)
+
+Creates a Meta Pixel on the given ad account (`POST /act_{id}/adspixels` — `name` is the only input). Returns the created tag including its install `code`. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with `ownerBusinessId: null` and can't be shared with other ad accounts.  Creating a pixel does NOT install it — install the returned `code` snippet on the site, or send events server-side via `POST /v1/ads/conversions`. The check `installed` is derived from `lastFiredTime`.  NOT idempotent: each call creates a new pixel. Do not retry blindly on timeout. Meta only (platform `metaads`); other platforms return 405. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | Meta ads SocialAccount id (platform `metaads`).
+create_tracking_tag_request = Zernio::CreateTrackingTagRequest.new({ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CreateTrackingTagRequest | 
+
+begin
+  # Create a tracking tag (Meta Pixel)
+  result = api_instance.create_tracking_tag(account_id, create_tracking_tag_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->create_tracking_tag: #{e}"
+end
+```
+
+#### Using the create_tracking_tag_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateTrackingTag201Response>, Integer, Hash)> create_tracking_tag_with_http_info(account_id, create_tracking_tag_request)
+
+```ruby
+begin
+  # Create a tracking tag (Meta Pixel)
+  data, status_code, headers = api_instance.create_tracking_tag_with_http_info(account_id, create_tracking_tag_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateTrackingTag201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->create_tracking_tag_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Meta ads SocialAccount id (platform &#x60;metaads&#x60;). |  |
+| **create_tracking_tag_request** | [**CreateTrackingTagRequest**](CreateTrackingTagRequest.md) |  |  |
+
+### Return type
+
+[**CreateTrackingTag201Response**](CreateTrackingTag201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_tracking_tag
+
+> <CreateTrackingTag201Response> get_tracking_tag(account_id, tag_id)
+
+Fetch a single tracking tag (Meta Pixel)
+
+Returns the full tag record including the base-code `code` snippet, `lastFiredTime`, `ownerBusinessId`, `isUnavailable`, etc. Meta only (platform `metaads`); other platforms return 405. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Pixel id.
+
+begin
+  # Fetch a single tracking tag (Meta Pixel)
+  result = api_instance.get_tracking_tag(account_id, tag_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->get_tracking_tag: #{e}"
+end
+```
+
+#### Using the get_tracking_tag_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateTrackingTag201Response>, Integer, Hash)> get_tracking_tag_with_http_info(account_id, tag_id)
+
+```ruby
+begin
+  # Fetch a single tracking tag (Meta Pixel)
+  data, status_code, headers = api_instance.get_tracking_tag_with_http_info(account_id, tag_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateTrackingTag201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->get_tracking_tag_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Pixel id. |  |
+
+### Return type
+
+[**CreateTrackingTag201Response**](CreateTrackingTag201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_tracking_tag_stats
+
+> <GetTrackingTagStats200Response> get_tracking_tag_stats(account_id, tag_id, opts)
+
+Aggregated event stats for a tracking tag (Meta Pixel)
+
+Returns aggregated event counts for the pixel (`GET /{pixel_id}/stats`). Rows are passed through from Meta as-is — their shape depends on the `aggregation` requested. Meta only (platform `metaads`); other platforms return 405. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Pixel id.
+opts = {
+  aggregation: 'event', # String | Aggregation dimension. Defaults to `event`.
+  start_time: 56, # Integer | Unix seconds lower bound.
+  end_time: 56 # Integer | Unix seconds upper bound.
+}
+
+begin
+  # Aggregated event stats for a tracking tag (Meta Pixel)
+  result = api_instance.get_tracking_tag_stats(account_id, tag_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->get_tracking_tag_stats: #{e}"
+end
+```
+
+#### Using the get_tracking_tag_stats_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetTrackingTagStats200Response>, Integer, Hash)> get_tracking_tag_stats_with_http_info(account_id, tag_id, opts)
+
+```ruby
+begin
+  # Aggregated event stats for a tracking tag (Meta Pixel)
+  data, status_code, headers = api_instance.get_tracking_tag_stats_with_http_info(account_id, tag_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetTrackingTagStats200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->get_tracking_tag_stats_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Pixel id. |  |
+| **aggregation** | **String** | Aggregation dimension. Defaults to &#x60;event&#x60;. | [optional][default to &#39;event&#39;] |
+| **start_time** | **Integer** | Unix seconds lower bound. | [optional] |
+| **end_time** | **Integer** | Unix seconds upper bound. | [optional] |
+
+### Return type
+
+[**GetTrackingTagStats200Response**](GetTrackingTagStats200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_tracking_tag_shared_accounts
+
+> <ListTrackingTagSharedAccounts200Response> list_tracking_tag_shared_accounts(account_id, tag_id)
+
+List ad accounts a tracking tag is shared with
+
+Meta only (platform `metaads`); other platforms return 405.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Pixel id.
+
+begin
+  # List ad accounts a tracking tag is shared with
+  result = api_instance.list_tracking_tag_shared_accounts(account_id, tag_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tag_shared_accounts: #{e}"
+end
+```
+
+#### Using the list_tracking_tag_shared_accounts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListTrackingTagSharedAccounts200Response>, Integer, Hash)> list_tracking_tag_shared_accounts_with_http_info(account_id, tag_id)
+
+```ruby
+begin
+  # List ad accounts a tracking tag is shared with
+  data, status_code, headers = api_instance.list_tracking_tag_shared_accounts_with_http_info(account_id, tag_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListTrackingTagSharedAccounts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tag_shared_accounts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Pixel id. |  |
+
+### Return type
+
+[**ListTrackingTagSharedAccounts200Response**](ListTrackingTagSharedAccounts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_tracking_tags
+
+> <ListTrackingTags200Response> list_tracking_tags(account_id, opts)
+
+List tracking tags (Meta Pixels)
+
+Returns the tracking tags (Meta Pixels) the connected ads account can see. Pass `?adAccountId=act_...` to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits `code` — call `getTrackingTag` for the install snippet and full detail.  Meta only today (platform `metaads`); other platforms return 405. The `accountId` must be the Meta *ads* SocialAccount created by the Ads add-on connect flow, not a Facebook/Instagram posting account. Get your `act_...` ids from `GET /v1/ads/accounts`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | Meta ads SocialAccount id (platform `metaads`).
+opts = {
+  ad_account_id: 'ad_account_id_example' # String | Optional. Scope to one ad account, e.g. `act_123456789`.
+}
+
+begin
+  # List tracking tags (Meta Pixels)
+  result = api_instance.list_tracking_tags(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tags: #{e}"
+end
+```
+
+#### Using the list_tracking_tags_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListTrackingTags200Response>, Integer, Hash)> list_tracking_tags_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List tracking tags (Meta Pixels)
+  data, status_code, headers = api_instance.list_tracking_tags_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListTrackingTags200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->list_tracking_tags_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Meta ads SocialAccount id (platform &#x60;metaads&#x60;). |  |
+| **ad_account_id** | **String** | Optional. Scope to one ad account, e.g. &#x60;act_123456789&#x60;. | [optional] |
+
+### Return type
+
+[**ListTrackingTags200Response**](ListTrackingTags200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_tracking_tag_shared_account
+
+> remove_tracking_tag_shared_account(account_id, tag_id, opts)
+
+Stop sharing a tracking tag with an ad account
+
+`adAccountId` may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. Meta only (platform `metaads`); other platforms return 405. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Pixel id.
+opts = {
+  ad_account_id: 'ad_account_id_example' # String | Ad account to unshare, e.g. `act_123456789`. May also be sent in the JSON body.
+}
+
+begin
+  # Stop sharing a tracking tag with an ad account
+  api_instance.remove_tracking_tag_shared_account(account_id, tag_id, opts)
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->remove_tracking_tag_shared_account: #{e}"
+end
+```
+
+#### Using the remove_tracking_tag_shared_account_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> remove_tracking_tag_shared_account_with_http_info(account_id, tag_id, opts)
+
+```ruby
+begin
+  # Stop sharing a tracking tag with an ad account
+  data, status_code, headers = api_instance.remove_tracking_tag_shared_account_with_http_info(account_id, tag_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->remove_tracking_tag_shared_account_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Pixel id. |  |
+| **ad_account_id** | **String** | Ad account to unshare, e.g. &#x60;act_123456789&#x60;. May also be sent in the JSON body. | [optional] |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## update_tracking_tag
+
+> <CreateTrackingTag201Response> update_tracking_tag(account_id, tag_id, update_tracking_tag_request)
+
+Update a tracking tag (Meta Pixel)
+
+Partial-update a pixel. Whitelisted fields: `name` (rename), `enableAutomaticMatching`, `automaticMatchingFields`, `firstPartyCookieStatus`, `dataUseSetting`. At least one is required. Returns the re-fetched canonical tag. Meta only (platform `metaads`); other platforms return 405.  There is no DELETE — Meta has no API to delete a pixel. To stop using one, unshare it from your ad accounts (`DELETE .../tracking-tags/{tagId}/shared-accounts`) or disable it in Events Manager. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TrackingTagsApi.new
+account_id = 'account_id_example' # String | 
+tag_id = 'tag_id_example' # String | Pixel id.
+update_tracking_tag_request = Zernio::UpdateTrackingTagRequest.new # UpdateTrackingTagRequest | 
+
+begin
+  # Update a tracking tag (Meta Pixel)
+  result = api_instance.update_tracking_tag(account_id, tag_id, update_tracking_tag_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->update_tracking_tag: #{e}"
+end
+```
+
+#### Using the update_tracking_tag_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateTrackingTag201Response>, Integer, Hash)> update_tracking_tag_with_http_info(account_id, tag_id, update_tracking_tag_request)
+
+```ruby
+begin
+  # Update a tracking tag (Meta Pixel)
+  data, status_code, headers = api_instance.update_tracking_tag_with_http_info(account_id, tag_id, update_tracking_tag_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateTrackingTag201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TrackingTagsApi->update_tracking_tag_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **tag_id** | **String** | Pixel id. |  |
+| **update_tracking_tag_request** | [**UpdateTrackingTagRequest**](UpdateTrackingTagRequest.md) |  |  |
+
+### Return type
+
+[**CreateTrackingTag201Response**](CreateTrackingTag201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
