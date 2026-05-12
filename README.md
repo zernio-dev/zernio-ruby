@@ -513,6 +513,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAd201ResponseOneOf](docs/CreateStandaloneAd201ResponseOneOf.md)
  - [Zernio::CreateStandaloneAd201ResponseOneOf1](docs/CreateStandaloneAd201ResponseOneOf1.md)
  - [Zernio::CreateStandaloneAdRequest](docs/CreateStandaloneAdRequest.md)
+ - [Zernio::CreateStandaloneAdRequestAttributionSpecInner](docs/CreateStandaloneAdRequestAttributionSpecInner.md)
  - [Zernio::CreateStandaloneAdRequestBrandIdentity](docs/CreateStandaloneAdRequestBrandIdentity.md)
  - [Zernio::CreateStandaloneAdRequestCitiesInner](docs/CreateStandaloneAdRequestCitiesInner.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInner](docs/CreateStandaloneAdRequestCreativesInner.md)

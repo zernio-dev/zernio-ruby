@@ -21,7 +21,7 @@ module Zernio
 
     attr_accessor :name
 
-    # Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform. Meta-specific: `conversions` requires `promotedObject.pixelId` + `promotedObject.customEventType`; `app_promotion` requires `promotedObject.applicationId` + `promotedObject.objectStoreUrl`; `lead_generation` accepts an optional `promotedObject.pageId` (auto-filled from the connected Page when omitted).
+    # Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform. Meta-specific: `conversions` requires `promotedObject.pixelId` + `promotedObject.customEventType`; `app_promotion` requires `promotedObject.applicationId` + `promotedObject.objectStoreUrl`; `lead_generation` accepts an optional `promotedObject.pageId` (auto-filled from the connected Page when omitted). LinkedIn-specific: only `engagement`, `traffic`, and `awareness` are supported for standalone ads (creates a Direct Sponsored Content single image ad); `traffic` requires `linkUrl`. For `video_views` / `lead_generation` / `conversions` on LinkedIn — or to promote an existing post — use `POST /v1/ads/boost`.
     attr_accessor :goal
 
     # Required on legacy + multi-creative shapes. Inherited on attach.
@@ -32,22 +32,22 @@ module Zernio
 
     attr_accessor :currency
 
-    # Required for Meta, Google, and Pinterest on legacy + attach shapes (skip for multi-creative — use `creatives[].headline`). Ignored for TikTok and X/Twitter. Max: Meta=255, Google=30, Pinterest=100.
+    # Required for Meta, Google, Pinterest, and LinkedIn on legacy + attach shapes (skip for multi-creative — use `creatives[].headline`). Ignored for TikTok and X/Twitter. Max: Meta=255, Google=30, Pinterest=100, LinkedIn=400. On LinkedIn this is the ad's headline (the bold text on the creative); for traffic ads it's the link card title.
     attr_accessor :headline
 
-    # Google Display only. Defaults to `headline` if omitted.
+    # Google Display only — defaults to `headline` if omitted. On LinkedIn, reused as the optional secondary description text on traffic (link) ads; omitted if not provided.
     attr_accessor :long_headline
 
-    # Required on legacy + attach shapes. For X/Twitter this is the tweet text (max 280 chars including a ~24-char URL when `linkUrl` is set). Max: Google=90, Pinterest=500.
+    # Required on legacy + attach shapes. For X/Twitter this is the tweet text (max 280 chars including a ~24-char URL when `linkUrl` is set). On LinkedIn this is the post commentary (the intro text shown above the ad). Max: Google=90, Pinterest=500.
     attr_accessor :body
 
-    # Required on legacy + attach shapes for Meta. Honoured on TikTok too — passes through to the Spark Ad creative's `call_to_action`. Ignored by other platforms.
+    # Required on legacy + attach shapes for Meta. Honoured on TikTok (passes through to the Spark Ad creative's `call_to_action`) and on LinkedIn (the CTA button on the ad; defaults to LEARN_MORE when `linkUrl` is set). LinkedIn accepts: LEARN_MORE, SIGN_UP, DOWNLOAD, SUBSCRIBE, REGISTER, JOIN, ATTEND, REQUEST_DEMO, VIEW_QUOTE, APPLY, SEE_MORE, SHOP_NOW, BUY_NOW. Ignored by Google, Pinterest, and X/Twitter.
     attr_accessor :call_to_action
 
-    # Required on legacy + attach shapes. Skip for multi-creative.
+    # Required on legacy + attach shapes (skip for multi-creative). On LinkedIn it's the ad's destination URL; required for `traffic` ads, optional for `engagement` / `awareness`.
     attr_accessor :link_url
 
-    # Image creative for Meta/Google/Pinterest on legacy + attach shapes (mutually exclusive with `video`). Not required for Google Search campaigns. For TikTok, this field carries the VIDEO URL (the TikTok ads endpoint is video-only; the field retains the `imageUrl` name for cross-platform consistency). Ignored for X/Twitter. For Google Display, treated as the landscape image (alias of `images.landscape`); supply `images.square` alongside or the request is rejected.
+    # Image creative for Meta/Google/Pinterest/LinkedIn on legacy + attach shapes (mutually exclusive with `video`). Required for LinkedIn ads. Not required for Google Search campaigns. For TikTok, this field carries the VIDEO URL (the TikTok ads endpoint is video-only; the field retains the `imageUrl` name for cross-platform consistency). Ignored for X/Twitter. For Google Display, treated as the landscape image (alias of `images.landscape`); supply `images.square` alongside or the request is rejected. For LinkedIn the image is uploaded to LinkedIn under the authoring Company Page (see `organizationId`); recommended ratio 1.91:1 (e.g. 1200×627).
     attr_accessor :image_url
 
     attr_accessor :images
@@ -66,7 +66,10 @@ module Zernio
     # Pinterest only. Board ID (auto-creates if not provided).
     attr_accessor :board_id
 
-    # ISO 3166-1 alpha-2 country codes (e.g. ['NL']). Defaults to ['US'] when no `cities` or `regions` are provided.
+    # LinkedIn only. The Company Page that authors the Direct Sponsored Content (\"dark\") post backing the ad — accepts a numeric organization ID or a full `urn:li:organization:N` URN. Required unless the resolved `accountId` is a connected LinkedIn Company-Page account (defaults to that page) or the LinkedIn ad account is org-owned (defaults to the account's owning organization). The authenticated member must be an ADMINISTRATOR or DIRECT_SPONSORED_CONTENT_POSTER of this page (and the page must be associated with the ad account), or LinkedIn returns 403. Ignored by every other platform.
+    attr_accessor :organization_id
+
+    # ISO 3166-1 alpha-2 country codes (e.g. ['NL']). Defaults to ['US'] when no `cities` or `regions` are provided. (LinkedIn currently honours country-level targeting only.)
     attr_accessor :countries
 
     # Meta-only. City-level geo targeting. Each city is targeted by Meta's opaque `key` (the city ID) which can be looked up via `GET /v1/ads/targeting/search?type=city&q=<name>&country_code=<ISO>`. Optional `radius` + `distance_unit` extend the targeting beyond the city limits (e.g. radius 25 km around the city center). Both must be set together, or both omitted (Meta defaults to ~16 km when omitted).  Cannot overlap with the same country in `countries` (Meta returns a \"locations overlap\" error). Either drop the country or scope it to a different country. 
@@ -102,6 +105,9 @@ module Zernio
 
     # Meta only. Controls the Advantage audience feature (targeting_automation). 0 = disabled (default), 1 = enabled. Meta Marketing API requires this field on all ad set creation requests.
     attr_accessor :advantage_audience
+
+    # Meta only. Conversion attribution window for the ad set — maps 1:1 to Meta's ad-set `attribution_spec`. Only honored for conversion goals (`conversions`, `lead_generation`, `app_promotion`); ignored for awareness/traffic/engagement. Omit to use Meta's default (`7-day click` + `1-day view`). Meta enforces the valid combinations: `VIEW_THROUGH` only allows `windowDays: 1` (7d/28d view windows were removed Jan 2026); `ENGAGED_VIDEO_VIEW` only `1` and only alongside `VIEW_THROUGH: 1`; `CLICK_THROUGH: 28` only on certain objectives. Invalid combos surface as a Meta 400. Example: `[{ \"eventType\": \"CLICK_THROUGH\", \"windowDays\": 7 }, { \"eventType\": \"VIEW_THROUGH\", \"windowDays\": 1 }]` 
+    attr_accessor :attribution_spec
 
     # Meta only. Restrict the audience by gender. 'male' targets men only, 'female' targets women only, 'all' (default) targets everyone. Ignored by non-Meta platforms.
     attr_accessor :gender
@@ -172,6 +178,7 @@ module Zernio
         :'ad_set_id' => :'adSetId',
         :'business_name' => :'businessName',
         :'board_id' => :'boardId',
+        :'organization_id' => :'organizationId',
         :'countries' => :'countries',
         :'cities' => :'cities',
         :'regions' => :'regions',
@@ -185,6 +192,7 @@ module Zernio
         :'additional_headlines' => :'additionalHeadlines',
         :'additional_descriptions' => :'additionalDescriptions',
         :'advantage_audience' => :'advantageAudience',
+        :'attribution_spec' => :'attributionSpec',
         :'gender' => :'gender',
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
@@ -229,6 +237,7 @@ module Zernio
         :'ad_set_id' => :'String',
         :'business_name' => :'String',
         :'board_id' => :'String',
+        :'organization_id' => :'String',
         :'countries' => :'Array<String>',
         :'cities' => :'Array<CreateStandaloneAdRequestCitiesInner>',
         :'regions' => :'Array<CreateStandaloneAdRequestRegionsInner>',
@@ -242,6 +251,7 @@ module Zernio
         :'additional_headlines' => :'Array<String>',
         :'additional_descriptions' => :'Array<String>',
         :'advantage_audience' => :'Integer',
+        :'attribution_spec' => :'Array<CreateStandaloneAdRequestAttributionSpecInner>',
         :'gender' => :'String',
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
@@ -360,6 +370,10 @@ module Zernio
         self.board_id = attributes[:'board_id']
       end
 
+      if attributes.key?(:'organization_id')
+        self.organization_id = attributes[:'organization_id']
+      end
+
       if attributes.key?(:'countries')
         if (value = attributes[:'countries']).is_a?(Array)
           self.countries = value
@@ -426,6 +440,12 @@ module Zernio
 
       if attributes.key?(:'advantage_audience')
         self.advantage_audience = attributes[:'advantage_audience']
+      end
+
+      if attributes.key?(:'attribution_spec')
+        if (value = attributes[:'attribution_spec']).is_a?(Array)
+          self.attribution_spec = value
+        end
       end
 
       if attributes.key?(:'gender')
@@ -516,6 +536,14 @@ module Zernio
         invalid_properties.push('invalid value for "age_max", must be greater than or equal to 13.')
       end
 
+      if !@attribution_spec.nil? && @attribution_spec.length > 3
+        invalid_properties.push('invalid value for "attribution_spec", number of items must be less than or equal to 3.')
+      end
+
+      if !@attribution_spec.nil? && @attribution_spec.length < 1
+        invalid_properties.push('invalid value for "attribution_spec", number of items must be greater than or equal to 1.')
+      end
+
       if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
         invalid_properties.push('invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.')
       end
@@ -540,7 +568,7 @@ module Zernio
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
       return false if !@long_headline.nil? && @long_headline.to_s.length > 90
-      call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
+      call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
       return false unless call_to_action_validator.valid?(@call_to_action)
       return false if !@creatives.nil? && @creatives.length < 1
       return false if !@business_name.nil? && @business_name.to_s.length > 25
@@ -552,6 +580,8 @@ module Zernio
       return false unless campaign_type_validator.valid?(@campaign_type)
       advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
       return false unless advantage_audience_validator.valid?(@advantage_audience)
+      return false if !@attribution_spec.nil? && @attribution_spec.length > 3
+      return false if !@attribution_spec.nil? && @attribution_spec.length < 1
       gender_validator = EnumAttributeValidator.new('String', ["all", "male", "female"])
       return false unless gender_validator.valid?(@gender)
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
@@ -632,7 +662,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] call_to_action Object to be assigned
     def call_to_action=(call_to_action)
-      validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
+      validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
       unless validator.valid?(call_to_action)
         fail ArgumentError, "invalid value for \"call_to_action\", must be one of #{validator.allowable_values}."
       end
@@ -723,6 +753,24 @@ module Zernio
       @advantage_audience = advantage_audience
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] attribution_spec Value to be assigned
+    def attribution_spec=(attribution_spec)
+      if attribution_spec.nil?
+        fail ArgumentError, 'attribution_spec cannot be nil'
+      end
+
+      if attribution_spec.length > 3
+        fail ArgumentError, 'invalid value for "attribution_spec", number of items must be less than or equal to 3.'
+      end
+
+      if attribution_spec.length < 1
+        fail ArgumentError, 'invalid value for "attribution_spec", number of items must be greater than or equal to 1.'
+      end
+
+      @attribution_spec = attribution_spec
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] gender Object to be assigned
     def gender=(gender)
@@ -795,6 +843,7 @@ module Zernio
           ad_set_id == o.ad_set_id &&
           business_name == o.business_name &&
           board_id == o.board_id &&
+          organization_id == o.organization_id &&
           countries == o.countries &&
           cities == o.cities &&
           regions == o.regions &&
@@ -808,6 +857,7 @@ module Zernio
           additional_headlines == o.additional_headlines &&
           additional_descriptions == o.additional_descriptions &&
           advantage_audience == o.advantage_audience &&
+          attribution_spec == o.attribution_spec &&
           gender == o.gender &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
@@ -828,7 +878,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, countries, cities, regions, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

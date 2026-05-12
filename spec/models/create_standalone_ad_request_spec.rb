@@ -98,7 +98,7 @@ describe Zernio::CreateStandaloneAdRequest do
   describe 'test attribute "call_to_action"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
       # validator.allowable_values.each do |value|
       #   expect { instance.call_to_action = value }.not_to raise_error
       # end
@@ -148,6 +148,12 @@ describe Zernio::CreateStandaloneAdRequest do
   end
 
   describe 'test attribute "board_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "organization_id"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -236,6 +242,12 @@ describe Zernio::CreateStandaloneAdRequest do
       # validator.allowable_values.each do |value|
       #   expect { instance.advantage_audience = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "attribution_spec"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 
