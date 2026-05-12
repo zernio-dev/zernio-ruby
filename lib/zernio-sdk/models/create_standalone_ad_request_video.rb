@@ -14,12 +14,12 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta only (facebook, instagram). When set, creates a VIDEO ad on the legacy or attach shape. Mutually exclusive with `imageUrl`. For multi-creative, set `video` per entry inside `creatives[]` instead.
+  # Meta (facebook, instagram) and LinkedIn. When set, creates a VIDEO ad on the legacy (or, for Meta, attach) shape. Mutually exclusive with `imageUrl`. For Meta multi-creative, set `video` per entry inside `creatives[]` instead. For LinkedIn the video is uploaded to LinkedIn under the authoring Company Page (see `organizationId`) and the campaign format is set to SINGLE_VIDEO; LinkedIn ignores `thumbnailUrl` (it auto-generates the poster frame) — supply MP4 H.264/AAC, 3s-30min, 75KB-500MB.
   class CreateStandaloneAdRequestVideo < ApiModelBase
-    # Public URL of the video. Uploaded to Meta via chunked transfer on /act_X/advideos; then the request blocks on Meta's transcoding until status.video_status === 'ready'.
+    # Public URL of the video. Meta: uploaded via chunked transfer on /act_X/advideos, then the request blocks on Meta's transcoding until status.video_status === 'ready'. LinkedIn: uploaded via the Videos API (multipart), then the request blocks until LinkedIn finishes transcoding (status AVAILABLE) — short clips take ~10-30s.
     attr_accessor :url
 
-    # Public URL of a still-image thumbnail for the video. Required by Meta on every video creative. Uploaded to Meta as an ad image and referenced as the thumbnail in object_story_spec.video_data.
+    # Public URL of a still-image thumbnail for the video. Required by Meta on every video creative (uploaded as an ad image and referenced in object_story_spec.video_data). Ignored by LinkedIn (auto-generated poster frame).
     attr_accessor :thumbnail_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -78,8 +78,6 @@ module Zernio
 
       if attributes.key?(:'thumbnail_url')
         self.thumbnail_url = attributes[:'thumbnail_url']
-      else
-        self.thumbnail_url = nil
       end
     end
 
@@ -92,10 +90,6 @@ module Zernio
         invalid_properties.push('invalid value for "url", url cannot be nil.')
       end
 
-      if @thumbnail_url.nil?
-        invalid_properties.push('invalid value for "thumbnail_url", thumbnail_url cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -104,7 +98,6 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @url.nil?
-      return false if @thumbnail_url.nil?
       true
     end
 
@@ -116,16 +109,6 @@ module Zernio
       end
 
       @url = url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] thumbnail_url Value to be assigned
-    def thumbnail_url=(thumbnail_url)
-      if thumbnail_url.nil?
-        fail ArgumentError, 'thumbnail_url cannot be nil'
-      end
-
-      @thumbnail_url = thumbnail_url
     end
 
     # Checks equality by comparing each attribute.
