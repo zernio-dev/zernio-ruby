@@ -26,6 +26,15 @@ module Zernio
     # Underlying post ID the comments belong to. effective_object_story_id for Facebook, effective_instagram_media_id for Instagram.
     attr_accessor :effective_story_id
 
+    # Instagram-only. The Instagram-scoped business ID that owns the boosted media (creative.instagram_user_id).
+    attr_accessor :instagram_user_id
+
+    # Instagram-only. Public permalink of the boosted IG post (creative.instagram_permalink_url).
+    attr_accessor :instagram_permalink
+
+    # Instagram-only. The connected Instagram SocialAccount these comments were read through — use it for reply/hide actions via /v1/inbox/comments.
+    attr_accessor :instagram_account_id
+
     # Social account ID (ads SocialAccount).
     attr_accessor :account_id
 
@@ -60,6 +69,9 @@ module Zernio
         :'ad_id' => :'adId',
         :'platform_ad_id' => :'platformAdId',
         :'effective_story_id' => :'effectiveStoryId',
+        :'instagram_user_id' => :'instagramUserId',
+        :'instagram_permalink' => :'instagramPermalink',
+        :'instagram_account_id' => :'instagramAccountId',
         :'account_id' => :'accountId',
         :'last_updated' => :'lastUpdated'
       }
@@ -82,6 +94,9 @@ module Zernio
         :'ad_id' => :'String',
         :'platform_ad_id' => :'String',
         :'effective_story_id' => :'String',
+        :'instagram_user_id' => :'String',
+        :'instagram_permalink' => :'String',
+        :'instagram_account_id' => :'String',
         :'account_id' => :'String',
         :'last_updated' => :'Time'
       }
@@ -131,6 +146,18 @@ module Zernio
         self.effective_story_id = attributes[:'effective_story_id']
       else
         self.effective_story_id = nil
+      end
+
+      if attributes.key?(:'instagram_user_id')
+        self.instagram_user_id = attributes[:'instagram_user_id']
+      end
+
+      if attributes.key?(:'instagram_permalink')
+        self.instagram_permalink = attributes[:'instagram_permalink']
+      end
+
+      if attributes.key?(:'instagram_account_id')
+        self.instagram_account_id = attributes[:'instagram_account_id']
       end
 
       if attributes.key?(:'account_id')
@@ -262,6 +289,9 @@ module Zernio
           ad_id == o.ad_id &&
           platform_ad_id == o.platform_ad_id &&
           effective_story_id == o.effective_story_id &&
+          instagram_user_id == o.instagram_user_id &&
+          instagram_permalink == o.instagram_permalink &&
+          instagram_account_id == o.instagram_account_id &&
           account_id == o.account_id &&
           last_updated == o.last_updated
     end
@@ -275,7 +305,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, ad_id, platform_ad_id, effective_story_id, account_id, last_updated].hash
+      [platform, ad_id, platform_ad_id, effective_story_id, instagram_user_id, instagram_permalink, instagram_account_id, account_id, last_updated].hash
     end
 
     # Builds the object from hash
