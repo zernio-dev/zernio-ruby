@@ -14,29 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetInboxPostComments200ResponseMeta < ApiModelBase
-    attr_accessor :platform
+  # (Facebook/Instagram only) Present when this post has no organic comments but is a boosted post — the engagement lives on the ad. Use the ad-comments endpoint instead.
+  class GetInboxPostComments200ResponseMetaAdComments < ApiModelBase
+    # Internal Zernio ad ID
+    attr_accessor :ad_id
 
-    attr_accessor :post_id
-
-    attr_accessor :account_id
-
-    # (Reddit only) Subreddit name
-    attr_accessor :subreddit
-
-    attr_accessor :last_updated
-
-    attr_accessor :ad_comments
+    # Path to fetch the ad's comments (GET /v1/ads/{adId}/comments)
+    attr_accessor :ad_comments_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'platform' => :'platform',
-        :'post_id' => :'postId',
-        :'account_id' => :'accountId',
-        :'subreddit' => :'subreddit',
-        :'last_updated' => :'lastUpdated',
-        :'ad_comments' => :'adComments'
+        :'ad_id' => :'adId',
+        :'ad_comments_url' => :'adCommentsUrl'
       }
     end
 
@@ -53,12 +43,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'platform' => :'String',
-        :'post_id' => :'String',
-        :'account_id' => :'String',
-        :'subreddit' => :'String',
-        :'last_updated' => :'Time',
-        :'ad_comments' => :'GetInboxPostComments200ResponseMetaAdComments'
+        :'ad_id' => :'String',
+        :'ad_comments_url' => :'String'
       }
     end
 
@@ -72,40 +58,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetInboxPostComments200ResponseMeta` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetInboxPostComments200ResponseMetaAdComments` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetInboxPostComments200ResponseMeta`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetInboxPostComments200ResponseMetaAdComments`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'platform')
-        self.platform = attributes[:'platform']
+      if attributes.key?(:'ad_id')
+        self.ad_id = attributes[:'ad_id']
       end
 
-      if attributes.key?(:'post_id')
-        self.post_id = attributes[:'post_id']
-      end
-
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
-
-      if attributes.key?(:'subreddit')
-        self.subreddit = attributes[:'subreddit']
-      end
-
-      if attributes.key?(:'last_updated')
-        self.last_updated = attributes[:'last_updated']
-      end
-
-      if attributes.key?(:'ad_comments')
-        self.ad_comments = attributes[:'ad_comments']
+      if attributes.key?(:'ad_comments_url')
+        self.ad_comments_url = attributes[:'ad_comments_url']
       end
     end
 
@@ -129,12 +99,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          platform == o.platform &&
-          post_id == o.post_id &&
-          account_id == o.account_id &&
-          subreddit == o.subreddit &&
-          last_updated == o.last_updated &&
-          ad_comments == o.ad_comments
+          ad_id == o.ad_id &&
+          ad_comments_url == o.ad_comments_url
     end
 
     # @see the `==` method
@@ -146,7 +112,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, post_id, account_id, subreddit, last_updated, ad_comments].hash
+      [ad_id, ad_comments_url].hash
     end
 
     # Builds the object from hash

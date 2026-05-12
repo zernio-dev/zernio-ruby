@@ -347,10 +347,10 @@ module Zernio
     end
 
     # List commented posts
-    # Returns posts with comment counts from all connected accounts. Aggregates data across multiple accounts.
+    # Returns posts with comment counts from all connected accounts. Aggregates data across multiple accounts.  For users with the Ads add-on (Metronome plans always qualify), the user's Meta ads (boosted/dark posts) are included too, flagged with `isAd: true` and an `adId`. Use `?platform=metaads` to return *only* ad rows; passing `facebook`/`instagram` returns *organic* posts only (no ads); omitting `platform` returns both. Fetch an ad row's thread from GET /v1/ads/{adId}/comments. Ad comment counts are read with the Marketing API token (Facebook) or the connected Instagram account's token (Instagram); an ad whose count can't be read is omitted. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter by profile ID
-    # @option opts [String] :platform Filter by platform
+    # @option opts [String] :platform Filter by platform. &#x60;metaads&#x60; is a synthetic value meaning the user&#39;s ads (boosted/dark posts) only; &#x60;facebook&#x60;/&#x60;instagram&#x60; return organic posts only.
     # @option opts [Integer] :min_comments Minimum comment count
     # @option opts [Time] :since Posts created after this date
     # @option opts [String] :sort_by Sort field (default to 'date')
@@ -365,10 +365,10 @@ module Zernio
     end
 
     # List commented posts
-    # Returns posts with comment counts from all connected accounts. Aggregates data across multiple accounts.
+    # Returns posts with comment counts from all connected accounts. Aggregates data across multiple accounts.  For users with the Ads add-on (Metronome plans always qualify), the user&#39;s Meta ads (boosted/dark posts) are included too, flagged with &#x60;isAd: true&#x60; and an &#x60;adId&#x60;. Use &#x60;?platform&#x3D;metaads&#x60; to return *only* ad rows; passing &#x60;facebook&#x60;/&#x60;instagram&#x60; returns *organic* posts only (no ads); omitting &#x60;platform&#x60; returns both. Fetch an ad row&#39;s thread from GET /v1/ads/{adId}/comments. Ad comment counts are read with the Marketing API token (Facebook) or the connected Instagram account&#39;s token (Instagram); an ad whose count can&#39;t be read is omitted. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter by profile ID
-    # @option opts [String] :platform Filter by platform
+    # @option opts [String] :platform Filter by platform. &#x60;metaads&#x60; is a synthetic value meaning the user&#39;s ads (boosted/dark posts) only; &#x60;facebook&#x60;/&#x60;instagram&#x60; return organic posts only.
     # @option opts [Integer] :min_comments Minimum comment count
     # @option opts [Time] :since Posts created after this date
     # @option opts [String] :sort_by Sort field (default to 'date')
@@ -381,7 +381,7 @@ module Zernio
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CommentsApi.list_inbox_comments ...'
       end
-      allowable_values = ["facebook", "instagram", "twitter", "bluesky", "threads", "youtube", "linkedin", "reddit"]
+      allowable_values = ["facebook", "instagram", "twitter", "bluesky", "threads", "youtube", "linkedin", "reddit", "metaads"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end

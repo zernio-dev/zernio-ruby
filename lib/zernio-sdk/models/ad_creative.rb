@@ -31,6 +31,21 @@ module Zernio
     # Meta creative object_type (e.g. SHARE, VIDEO, PRIVACY_CHECK_FAIL, POST_DELETED). Use this to render state-aware previews — when Meta moderation strips image/video fields, only thumbnailUrl at 64x64 is available.
     attr_accessor :object_type
 
+    # Meta creative `object_story_id` (the SHARE reference). Frequently absent — Meta omits it for SHARE creatives. Use effectiveObjectStoryId instead.
+    attr_accessor :object_story_id
+
+    # Meta `effective_object_story_id` — `{pageId}_{postId}` of the Facebook post the ad's engagement (comments) lives on. Pass to GET /v1/ads?effectiveObjectStoryId= to map a Business-Manager-visible post back to this ad; GET /v1/ads/{adId}/comments resolves comments against it.
+    attr_accessor :effective_object_story_id
+
+    # Meta `effective_instagram_media_id` — the Instagram media ID of the boosted post the ad's engagement lives on. Pass to GET /v1/ads?effectiveInstagramMediaId= to map a Business-Manager-visible IG post back to this ad.
+    attr_accessor :effective_instagram_media_id
+
+    # Meta `instagram_user_id` — the Instagram-scoped business ID that owns the boosted media.
+    attr_accessor :instagram_user_id
+
+    # Meta `instagram_permalink_url` — public Instagram post URL of the boosted media.
+    attr_accessor :instagram_permalink_url
+
     # All media URLs for this ad (carousel images, multiple assets). Populated for Meta (carousel child_attachments), Google Ads (responsive display marketing_images), and LinkedIn (multi-image posts).
     attr_accessor :media_urls
 
@@ -60,6 +75,11 @@ module Zernio
         :'video_id' => :'videoId',
         :'video_url' => :'videoUrl',
         :'object_type' => :'objectType',
+        :'object_story_id' => :'objectStoryId',
+        :'effective_object_story_id' => :'effectiveObjectStoryId',
+        :'effective_instagram_media_id' => :'effectiveInstagramMediaId',
+        :'instagram_user_id' => :'instagramUserId',
+        :'instagram_permalink_url' => :'instagramPermalinkUrl',
         :'media_urls' => :'mediaUrls',
         :'body' => :'body',
         :'google_headline' => :'googleHeadline',
@@ -89,6 +109,11 @@ module Zernio
         :'video_id' => :'String',
         :'video_url' => :'String',
         :'object_type' => :'String',
+        :'object_story_id' => :'String',
+        :'effective_object_story_id' => :'String',
+        :'effective_instagram_media_id' => :'String',
+        :'instagram_user_id' => :'String',
+        :'instagram_permalink_url' => :'String',
         :'media_urls' => :'Array<String>',
         :'body' => :'String',
         :'google_headline' => :'String',
@@ -140,6 +165,26 @@ module Zernio
 
       if attributes.key?(:'object_type')
         self.object_type = attributes[:'object_type']
+      end
+
+      if attributes.key?(:'object_story_id')
+        self.object_story_id = attributes[:'object_story_id']
+      end
+
+      if attributes.key?(:'effective_object_story_id')
+        self.effective_object_story_id = attributes[:'effective_object_story_id']
+      end
+
+      if attributes.key?(:'effective_instagram_media_id')
+        self.effective_instagram_media_id = attributes[:'effective_instagram_media_id']
+      end
+
+      if attributes.key?(:'instagram_user_id')
+        self.instagram_user_id = attributes[:'instagram_user_id']
+      end
+
+      if attributes.key?(:'instagram_permalink_url')
+        self.instagram_permalink_url = attributes[:'instagram_permalink_url']
       end
 
       if attributes.key?(:'media_urls')
@@ -202,6 +247,11 @@ module Zernio
           video_id == o.video_id &&
           video_url == o.video_url &&
           object_type == o.object_type &&
+          object_story_id == o.object_story_id &&
+          effective_object_story_id == o.effective_object_story_id &&
+          effective_instagram_media_id == o.effective_instagram_media_id &&
+          instagram_user_id == o.instagram_user_id &&
+          instagram_permalink_url == o.instagram_permalink_url &&
           media_urls == o.media_urls &&
           body == o.body &&
           google_headline == o.google_headline &&
@@ -221,7 +271,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thumbnail_url, image_url, video_id, video_url, object_type, media_urls, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
+      [thumbnail_url, image_url, video_id, video_url, object_type, object_story_id, effective_object_story_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
     end
 
     # Builds the object from hash

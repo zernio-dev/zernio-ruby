@@ -9,6 +9,7 @@
 | **account_id** | **String** |  | [optional] |
 | **subreddit** | **String** | (Reddit only) Subreddit name | [optional] |
 | **last_updated** | **Time** |  | [optional] |
+| **ad_comments** | [**GetInboxPostComments200ResponseMetaAdComments**](GetInboxPostComments200ResponseMetaAdComments.md) |  | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Zernio::GetInboxPostComments200ResponseMeta.new(
   post_id: null,
   account_id: null,
   subreddit: null,
-  last_updated: null
+  last_updated: null,
+  ad_comments: null
 )
 ```
 

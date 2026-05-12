@@ -359,6 +359,7 @@ docs/GetInboxPostComments200Response.md
 docs/GetInboxPostComments200ResponseCommentsInner.md
 docs/GetInboxPostComments200ResponseCommentsInnerFrom.md
 docs/GetInboxPostComments200ResponseMeta.md
+docs/GetInboxPostComments200ResponseMetaAdComments.md
 docs/GetInboxPostComments200ResponsePagination.md
 docs/GetInstagramAccountInsights404Response.md
 docs/GetLinkedInAggregateAnalytics200Response.md
@@ -1311,6 +1312,7 @@ lib/zernio-sdk/models/get_inbox_post_comments200_response.rb
 lib/zernio-sdk/models/get_inbox_post_comments200_response_comments_inner.rb
 lib/zernio-sdk/models/get_inbox_post_comments200_response_comments_inner_from.rb
 lib/zernio-sdk/models/get_inbox_post_comments200_response_meta.rb
+lib/zernio-sdk/models/get_inbox_post_comments200_response_meta_ad_comments.rb
 lib/zernio-sdk/models/get_inbox_post_comments200_response_pagination.rb
 lib/zernio-sdk/models/get_instagram_account_insights404_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics200_response.rb
@@ -2234,6 +2236,7 @@ spec/models/get_inbox_conversation_messages200_response_pagination_spec.rb
 spec/models/get_inbox_conversation_messages200_response_spec.rb
 spec/models/get_inbox_post_comments200_response_comments_inner_from_spec.rb
 spec/models/get_inbox_post_comments200_response_comments_inner_spec.rb
+spec/models/get_inbox_post_comments200_response_meta_ad_comments_spec.rb
 spec/models/get_inbox_post_comments200_response_meta_spec.rb
 spec/models/get_inbox_post_comments200_response_pagination_spec.rb
 spec/models/get_inbox_post_comments200_response_spec.rb

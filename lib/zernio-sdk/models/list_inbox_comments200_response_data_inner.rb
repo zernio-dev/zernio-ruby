@@ -41,6 +41,12 @@ module Zernio
     # Reddit subreddit name
     attr_accessor :subreddit
 
+    # True when this row is an ad (boosted/dark post). `platform` is then the comment platform (facebook or instagram), `id` equals `adId`, and the thread is at GET /v1/ads/{adId}/comments.
+    attr_accessor :is_ad
+
+    # Internal Zernio ad id — only on ad rows (same value as `id`).
+    attr_accessor :ad_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -55,7 +61,9 @@ module Zernio
         :'comment_count' => :'commentCount',
         :'like_count' => :'likeCount',
         :'cid' => :'cid',
-        :'subreddit' => :'subreddit'
+        :'subreddit' => :'subreddit',
+        :'is_ad' => :'isAd',
+        :'ad_id' => :'adId'
       }
     end
 
@@ -83,7 +91,9 @@ module Zernio
         :'comment_count' => :'Integer',
         :'like_count' => :'Integer',
         :'cid' => :'String',
-        :'subreddit' => :'String'
+        :'subreddit' => :'String',
+        :'is_ad' => :'Boolean',
+        :'ad_id' => :'String'
       }
     end
 
@@ -156,6 +166,14 @@ module Zernio
       if attributes.key?(:'subreddit')
         self.subreddit = attributes[:'subreddit']
       end
+
+      if attributes.key?(:'is_ad')
+        self.is_ad = attributes[:'is_ad']
+      end
+
+      if attributes.key?(:'ad_id')
+        self.ad_id = attributes[:'ad_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -189,7 +207,9 @@ module Zernio
           comment_count == o.comment_count &&
           like_count == o.like_count &&
           cid == o.cid &&
-          subreddit == o.subreddit
+          subreddit == o.subreddit &&
+          is_ad == o.is_ad &&
+          ad_id == o.ad_id
     end
 
     # @see the `==` method
@@ -201,7 +221,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, content, picture, permalink, created_time, comment_count, like_count, cid, subreddit].hash
+      [id, platform, account_id, account_username, content, picture, permalink, created_time, comment_count, like_count, cid, subreddit, is_ad, ad_id].hash
     end
 
     # Builds the object from hash
