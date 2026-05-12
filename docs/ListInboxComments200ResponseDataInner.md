@@ -16,8 +16,9 @@
 | **like_count** | **Integer** |  | [optional] |
 | **cid** | **String** | Bluesky content identifier | [optional] |
 | **subreddit** | **String** | Reddit subreddit name | [optional] |
-| **is_ad** | **Boolean** | True when this row is an ad (boosted/dark post). &#x60;platform&#x60; is then the comment platform (facebook or instagram), &#x60;id&#x60; equals &#x60;adId&#x60;, and the thread is at GET /v1/ads/{adId}/comments. | [optional] |
-| **ad_id** | **String** | Internal Zernio ad id — only on ad rows (same value as &#x60;id&#x60;). | [optional] |
+| **is_ad** | **Boolean** | True when this row is an ad (boosted/dark post). &#x60;platform&#x60; is then the placement (facebook &#x3D; the Page dark post / instagram &#x3D; the IG media), &#x60;id&#x60; is &#x60;{adId}:{placement}&#x60;, and the thread is at GET /v1/ads/{adId}/comments?placement&#x3D;{placement}. | [optional] |
+| **ad_id** | **String** | Internal Zernio ad id — only on ad rows. | [optional] |
+| **placement** | **String** | Which side of the ad this row&#39;s comments are on — only on ad rows. | [optional] |
 
 ## Example
 
@@ -38,7 +39,8 @@ instance = Zernio::ListInboxComments200ResponseDataInner.new(
   cid: null,
   subreddit: null,
   is_ad: null,
-  ad_id: null
+  ad_id: null,
+  placement: null
 )
 ```
 

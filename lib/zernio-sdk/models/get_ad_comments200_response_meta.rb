@@ -15,7 +15,11 @@ require 'time'
 
 module Zernio
   class GetAdComments200ResponseMeta < ApiModelBase
+    # Which side these comments are on (same as `placement`).
     attr_accessor :platform
+
+    # The placement these comments are for — useful when you didn't pass ?placement= and want to know which one you got.
+    attr_accessor :placement
 
     # Internal Zernio ad ID.
     attr_accessor :ad_id
@@ -23,7 +27,7 @@ module Zernio
     # Meta ad ID.
     attr_accessor :platform_ad_id
 
-    # Underlying post ID the comments belong to. effective_object_story_id for Facebook, effective_instagram_media_id for Instagram.
+    # Underlying post ID the comments belong to. effective_object_story_id for the Facebook side, effective_instagram_media_id for the Instagram side.
     attr_accessor :effective_story_id
 
     # Instagram-only. The Instagram-scoped business ID that owns the boosted media (creative.instagram_user_id).
@@ -66,6 +70,7 @@ module Zernio
     def self.attribute_map
       {
         :'platform' => :'platform',
+        :'placement' => :'placement',
         :'ad_id' => :'adId',
         :'platform_ad_id' => :'platformAdId',
         :'effective_story_id' => :'effectiveStoryId',
@@ -91,6 +96,7 @@ module Zernio
     def self.openapi_types
       {
         :'platform' => :'String',
+        :'placement' => :'String',
         :'ad_id' => :'String',
         :'platform_ad_id' => :'String',
         :'effective_story_id' => :'String',
@@ -128,6 +134,12 @@ module Zernio
         self.platform = attributes[:'platform']
       else
         self.platform = nil
+      end
+
+      if attributes.key?(:'placement')
+        self.placement = attributes[:'placement']
+      else
+        self.placement = nil
       end
 
       if attributes.key?(:'ad_id')
@@ -182,6 +194,10 @@ module Zernio
         invalid_properties.push('invalid value for "platform", platform cannot be nil.')
       end
 
+      if @placement.nil?
+        invalid_properties.push('invalid value for "placement", placement cannot be nil.')
+      end
+
       if @ad_id.nil?
         invalid_properties.push('invalid value for "ad_id", ad_id cannot be nil.')
       end
@@ -212,6 +228,9 @@ module Zernio
       return false if @platform.nil?
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
       return false unless platform_validator.valid?(@platform)
+      return false if @placement.nil?
+      placement_validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      return false unless placement_validator.valid?(@placement)
       return false if @ad_id.nil?
       return false if @platform_ad_id.nil?
       return false if @effective_story_id.nil?
@@ -228,6 +247,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] placement Object to be assigned
+    def placement=(placement)
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      unless validator.valid?(placement)
+        fail ArgumentError, "invalid value for \"placement\", must be one of #{validator.allowable_values}."
+      end
+      @placement = placement
     end
 
     # Custom attribute writer method with validation
@@ -286,6 +315,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           platform == o.platform &&
+          placement == o.placement &&
           ad_id == o.ad_id &&
           platform_ad_id == o.platform_ad_id &&
           effective_story_id == o.effective_story_id &&
@@ -305,7 +335,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, ad_id, platform_ad_id, effective_story_id, instagram_user_id, instagram_permalink, instagram_account_id, account_id, last_updated].hash
+      [platform, placement, ad_id, platform_ad_id, effective_story_id, instagram_user_id, instagram_permalink, instagram_account_id, account_id, last_updated].hash
     end
 
     # Builds the object from hash

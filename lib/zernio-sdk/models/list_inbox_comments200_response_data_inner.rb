@@ -41,11 +41,36 @@ module Zernio
     # Reddit subreddit name
     attr_accessor :subreddit
 
-    # True when this row is an ad (boosted/dark post). `platform` is then the comment platform (facebook or instagram), `id` equals `adId`, and the thread is at GET /v1/ads/{adId}/comments.
+    # True when this row is an ad (boosted/dark post). `platform` is then the placement (facebook = the Page dark post / instagram = the IG media), `id` is `{adId}:{placement}`, and the thread is at GET /v1/ads/{adId}/comments?placement={placement}.
     attr_accessor :is_ad
 
-    # Internal Zernio ad id — only on ad rows (same value as `id`).
+    # Internal Zernio ad id — only on ad rows.
     attr_accessor :ad_id
+
+    # Which side of the ad this row's comments are on — only on ad rows.
+    attr_accessor :placement
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -63,7 +88,8 @@ module Zernio
         :'cid' => :'cid',
         :'subreddit' => :'subreddit',
         :'is_ad' => :'isAd',
-        :'ad_id' => :'adId'
+        :'ad_id' => :'adId',
+        :'placement' => :'placement'
       }
     end
 
@@ -93,7 +119,8 @@ module Zernio
         :'cid' => :'String',
         :'subreddit' => :'String',
         :'is_ad' => :'Boolean',
-        :'ad_id' => :'String'
+        :'ad_id' => :'String',
+        :'placement' => :'String'
       }
     end
 
@@ -174,6 +201,10 @@ module Zernio
       if attributes.key?(:'ad_id')
         self.ad_id = attributes[:'ad_id']
       end
+
+      if attributes.key?(:'placement')
+        self.placement = attributes[:'placement']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -188,7 +219,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      placement_validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      return false unless placement_validator.valid?(@placement)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] placement Object to be assigned
+    def placement=(placement)
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      unless validator.valid?(placement)
+        fail ArgumentError, "invalid value for \"placement\", must be one of #{validator.allowable_values}."
+      end
+      @placement = placement
     end
 
     # Checks equality by comparing each attribute.
@@ -209,7 +252,8 @@ module Zernio
           cid == o.cid &&
           subreddit == o.subreddit &&
           is_ad == o.is_ad &&
-          ad_id == o.ad_id
+          ad_id == o.ad_id &&
+          placement == o.placement
     end
 
     # @see the `==` method
@@ -221,7 +265,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, content, picture, permalink, created_time, comment_count, like_count, cid, subreddit, is_ad, ad_id].hash
+      [id, platform, account_id, account_username, content, picture, permalink, created_time, comment_count, like_count, cid, subreddit, is_ad, ad_id, placement].hash
     end
 
     # Builds the object from hash
