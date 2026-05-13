@@ -96,6 +96,7 @@ describe 'AdCampaignsApi' do
   # Returns daily aggregate metrics across all ads in a SocialAccount as a single time series — one row per calendar day in the requested range. Use this for dashboards that draw a daily-spend or daily-conversions chart, instead of calling &#x60;/v1/ads/tree&#x60; once per day.  &#x60;accountId&#x60; is required. The lookup is sibling-expanded so passing the &#x60;metaads&#x60; ID also includes ads under the linked &#x60;facebook&#x60; / &#x60;instagram&#x60; posting account (and vice-versa) — same convention as &#x60;/v1/ads/tree&#x60; and &#x60;/v1/ads&#x60;.  Date range defaults to the last 90 days. Capped at 730 days. Ranges older than the 90-day cache window trigger an on-demand backfill from the platform before returning. 
   # @param account_id Social account ID. Sibling-expanded to its linked posting↔ads pair.
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id Optional platform-native ad account ID (e.g. Meta &#x60;act_…&#x60;, TikTok advertiser ID). Use when the connection wraps multiple platform ad accounts and the chart should show one only. Note: rows ingested before 2026-05-13 don&#39;t carry this column; the recurring 7-day re-sync repopulates them naturally.
   # @option opts [Date] :from_date Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago.
   # @option opts [Date] :to_date Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   # @option opts [String] :platform Restrict to one platform.
