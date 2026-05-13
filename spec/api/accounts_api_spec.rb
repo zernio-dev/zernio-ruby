@@ -115,6 +115,19 @@ describe 'AccountsApi' do
     end
   end
 
+  # unit tests for move_account_to_profile
+  # Move account to a different profile
+  # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 
+  # @param account_id 
+  # @param move_account_to_profile_request 
+  # @param [Hash] opts the optional parameters
+  # @return [MoveAccountToProfile200Response]
+  describe 'move_account_to_profile test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_account
   # Update account
   # Updates a connected social account&#39;s display name or username override.  For X/Twitter accounts on usage-based billing, also accepts an &#x60;xCapabilities&#x60; object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default &#x60;false&#x60;) — when off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting &#x60;xCapabilities&#x60; on a non-X account returns 400. 

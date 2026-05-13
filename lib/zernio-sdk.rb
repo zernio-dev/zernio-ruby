@@ -561,6 +561,8 @@ require 'zernio-sdk/models/list_whats_app_phone_numbers200_response_phone_number
 require 'zernio-sdk/models/media_item'
 require 'zernio-sdk/models/media_upload_response'
 require 'zernio-sdk/models/money'
+require 'zernio-sdk/models/move_account_to_profile200_response'
+require 'zernio-sdk/models/move_account_to_profile_request'
 require 'zernio-sdk/models/pagination'
 require 'zernio-sdk/models/pending'
 require 'zernio-sdk/models/pinterest_platform_data'

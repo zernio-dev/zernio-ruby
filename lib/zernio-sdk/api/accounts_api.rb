@@ -449,6 +449,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Move account to a different profile
+    # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
+    # @param account_id [String] 
+    # @param move_account_to_profile_request [MoveAccountToProfileRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [MoveAccountToProfile200Response]
+    def move_account_to_profile(account_id, move_account_to_profile_request, opts = {})
+      data, _status_code, _headers = move_account_to_profile_with_http_info(account_id, move_account_to_profile_request, opts)
+      data
+    end
+
+    # Move account to a different profile
+    # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 
+    # @param account_id [String] 
+    # @param move_account_to_profile_request [MoveAccountToProfileRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(MoveAccountToProfile200Response, Integer, Hash)>] MoveAccountToProfile200Response data, response status code and response headers
+    def move_account_to_profile_with_http_info(account_id, move_account_to_profile_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountsApi.move_account_to_profile ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.move_account_to_profile"
+      end
+      # verify the required parameter 'move_account_to_profile_request' is set
+      if @api_client.config.client_side_validation && move_account_to_profile_request.nil?
+        fail ArgumentError, "Missing the required parameter 'move_account_to_profile_request' when calling AccountsApi.move_account_to_profile"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(move_account_to_profile_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'MoveAccountToProfile200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountsApi.move_account_to_profile",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#move_account_to_profile\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update account
     # Updates a connected social account's display name or username override.  For X/Twitter accounts on usage-based billing, also accepts an `xCapabilities` object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default `false`) — when off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting `xCapabilities` on a non-X account returns 400. 
     # @param account_id [String] 

@@ -10,6 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**get_tik_tok_creator_info**](AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info |
 | [**list_accounts**](AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts |
+| [**move_account_to_profile**](AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to a different profile |
 | [**update_account**](AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account |
 
 
@@ -454,6 +455,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## move_account_to_profile
+
+> <MoveAccountToProfile200Response> move_account_to_profile(account_id, move_account_to_profile_request)
+
+Move account to a different profile
+
+Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | 
+move_account_to_profile_request = Zernio::MoveAccountToProfileRequest.new({profile_id: 'profile_id_example'}) # MoveAccountToProfileRequest | 
+
+begin
+  # Move account to a different profile
+  result = api_instance.move_account_to_profile(account_id, move_account_to_profile_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->move_account_to_profile: #{e}"
+end
+```
+
+#### Using the move_account_to_profile_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<MoveAccountToProfile200Response>, Integer, Hash)> move_account_to_profile_with_http_info(account_id, move_account_to_profile_request)
+
+```ruby
+begin
+  # Move account to a different profile
+  data, status_code, headers = api_instance.move_account_to_profile_with_http_info(account_id, move_account_to_profile_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <MoveAccountToProfile200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->move_account_to_profile_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **move_account_to_profile_request** | [**MoveAccountToProfileRequest**](MoveAccountToProfileRequest.md) |  |  |
+
+### Return type
+
+[**MoveAccountToProfile200Response**](MoveAccountToProfile200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

@@ -576,6 +576,8 @@ docs/MediaItem.md
 docs/MediaUploadResponse.md
 docs/MessagesApi.md
 docs/Money.md
+docs/MoveAccountToProfile200Response.md
+docs/MoveAccountToProfileRequest.md
 docs/Pagination.md
 docs/Pending.md
 docs/PinterestPlatformData.md
@@ -1525,6 +1527,8 @@ lib/zernio-sdk/models/list_whats_app_phone_numbers200_response_phone_numbers_inn
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/money.rb
+lib/zernio-sdk/models/move_account_to_profile200_response.rb
+lib/zernio-sdk/models/move_account_to_profile_request.rb
 lib/zernio-sdk/models/pagination.rb
 lib/zernio-sdk/models/pending.rb
 lib/zernio-sdk/models/pinterest_platform_data.rb
@@ -2452,6 +2456,8 @@ spec/models/list_whats_app_phone_numbers200_response_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
 spec/models/money_spec.rb
+spec/models/move_account_to_profile200_response_spec.rb
+spec/models/move_account_to_profile_request_spec.rb
 spec/models/pagination_spec.rb
 spec/models/pending_spec.rb
 spec/models/pinterest_platform_data_spec.rb
