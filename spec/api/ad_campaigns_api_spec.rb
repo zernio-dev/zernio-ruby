@@ -91,6 +91,21 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for get_ads_timeline
+  # Get daily aggregate ad metrics for an account
+  # Returns daily aggregate metrics across all ads in a SocialAccount as a single time series — one row per calendar day in the requested range. Use this for dashboards that draw a daily-spend or daily-conversions chart, instead of calling &#x60;/v1/ads/tree&#x60; once per day.  &#x60;accountId&#x60; is required. The lookup is sibling-expanded so passing the &#x60;metaads&#x60; ID also includes ads under the linked &#x60;facebook&#x60; / &#x60;instagram&#x60; posting account (and vice-versa) — same convention as &#x60;/v1/ads/tree&#x60; and &#x60;/v1/ads&#x60;.  Date range defaults to the last 90 days. Capped at 730 days. Ranges older than the 90-day cache window trigger an on-demand backfill from the platform before returning. 
+  # @param account_id Social account ID. Sibling-expanded to its linked posting↔ads pair.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Date] :from_date Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago.
+  # @option opts [Date] :to_date Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+  # @option opts [String] :platform Restrict to one platform.
+  # @return [GetAdsTimeline200Response]
+  describe 'get_ads_timeline test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_campaigns
   # List campaigns
   # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active &gt; pending_review &gt; paused &gt; error &gt; completed &gt; cancelled &gt; rejected). 
