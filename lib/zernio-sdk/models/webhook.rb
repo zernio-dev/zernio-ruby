@@ -25,7 +25,7 @@ module Zernio
     # Webhook endpoint URL
     attr_accessor :url
 
-    # Secret key for HMAC-SHA256 signature (not returned in responses for security)
+    # Secret key for HMAC-SHA256 signature verification.
     attr_accessor :secret
 
     # Events subscribed to

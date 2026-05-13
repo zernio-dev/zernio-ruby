@@ -7,7 +7,7 @@
 | **_id** | **String** | Unique webhook identifier | [optional] |
 | **name** | **String** | Webhook name (for identification) | [optional] |
 | **url** | **String** | Webhook endpoint URL | [optional] |
-| **secret** | **String** | Secret key for HMAC-SHA256 signature (not returned in responses for security) | [optional] |
+| **secret** | **String** | Secret key for HMAC-SHA256 signature verification. | [optional] |
 | **events** | **Array&lt;String&gt;** | Events subscribed to | [optional] |
 | **is_active** | **Boolean** | Whether webhook delivery is enabled | [optional] |
 | **last_fired_at** | **Time** | Timestamp of last successful webhook delivery | [optional] |
