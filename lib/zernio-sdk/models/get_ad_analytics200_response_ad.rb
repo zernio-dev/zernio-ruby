@@ -23,13 +23,17 @@ module Zernio
 
     attr_accessor :status
 
+    # ISO 4217 code of the ad account that owns this ad (e.g. USD, THB, INR). All money values in `summary` and `daily` are in this currency. Null only on legacy ads synced before currency was persisted.
+    attr_accessor :currency
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'name' => :'name',
         :'platform' => :'platform',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'currency' => :'currency'
       }
     end
 
@@ -49,7 +53,8 @@ module Zernio
         :'id' => :'String',
         :'name' => :'String',
         :'platform' => :'String',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'currency' => :'String'
       }
     end
 
@@ -90,6 +95,10 @@ module Zernio
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -115,7 +124,8 @@ module Zernio
           id == o.id &&
           name == o.name &&
           platform == o.platform &&
-          status == o.status
+          status == o.status &&
+          currency == o.currency
     end
 
     # @see the `==` method
@@ -127,7 +137,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, status].hash
+      [id, name, platform, status, currency].hash
     end
 
     # Builds the object from hash
