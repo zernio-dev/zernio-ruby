@@ -923,6 +923,9 @@ docs/WebhookPayloadReviewNew.md
 docs/WebhookPayloadReviewNewAccount.md
 docs/WebhookPayloadReviewUpdated.md
 docs/WebhookPayloadTest.md
+docs/WebhookPayloadWhatsAppTemplateStatusUpdated.md
+docs/WebhookPayloadWhatsAppTemplateStatusUpdatedAccount.md
+docs/WebhookPayloadWhatsAppTemplateStatusUpdatedTemplate.md
 docs/WebhooksApi.md
 docs/WhatsAppApi.md
 docs/WhatsAppBodyComponent.md
@@ -1876,6 +1879,9 @@ lib/zernio-sdk/models/webhook_payload_review_new.rb
 lib/zernio-sdk/models/webhook_payload_review_new_account.rb
 lib/zernio-sdk/models/webhook_payload_review_updated.rb
 lib/zernio-sdk/models/webhook_payload_test.rb
+lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated.rb
+lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated_account.rb
+lib/zernio-sdk/models/webhook_payload_whats_app_template_status_updated_template.rb
 lib/zernio-sdk/models/whats_app_body_component.rb
 lib/zernio-sdk/models/whats_app_body_component_example.rb
 lib/zernio-sdk/models/whats_app_buttons_component.rb
@@ -2818,6 +2824,9 @@ spec/models/webhook_payload_review_new_account_spec.rb
 spec/models/webhook_payload_review_new_spec.rb
 spec/models/webhook_payload_review_updated_spec.rb
 spec/models/webhook_payload_test_spec.rb
+spec/models/webhook_payload_whats_app_template_status_updated_account_spec.rb
+spec/models/webhook_payload_whats_app_template_status_updated_spec.rb
+spec/models/webhook_payload_whats_app_template_status_updated_template_spec.rb
 spec/models/webhook_spec.rb
 spec/models/whats_app_body_component_example_spec.rb
 spec/models/whats_app_body_component_spec.rb

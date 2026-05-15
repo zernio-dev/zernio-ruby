@@ -25,6 +25,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
+| [**on_whats_app_template_status_updated**](WebhookEventsApi.md#on_whats_app_template_status_updated) | **POST** /whatsapp.template.status_updated | WhatsApp template status updated event |
 
 
 ## on_account_ads_initial_sync_completed
@@ -1440,6 +1441,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_test** | [**WebhookPayloadTest**](WebhookPayloadTest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_whats_app_template_status_updated
+
+> on_whats_app_template_status_updated(webhook_payload_whats_app_template_status_updated)
+
+WhatsApp template status updated event
+
+Fired when Meta finishes (re)reviewing a WhatsApp Business template attached to a connected WABA. Forwarded from Meta's `message_template_status_update` webhook field on the WhatsApp Business Account. Consumers branch on `template.status` (APPROVED, REJECTED, PENDING, PAUSED, DISABLED, IN_APPEAL, PENDING_DELETION). Meta does not include the previous status or the template's category in this event. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_whats_app_template_status_updated =  # WebhookPayloadWhatsAppTemplateStatusUpdated | 
+
+begin
+  # WhatsApp template status updated event
+  api_instance.on_whats_app_template_status_updated(webhook_payload_whats_app_template_status_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_template_status_updated: #{e}"
+end
+```
+
+#### Using the on_whats_app_template_status_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_template_status_updated_with_http_info(webhook_payload_whats_app_template_status_updated)
+
+```ruby
+begin
+  # WhatsApp template status updated event
+  data, status_code, headers = api_instance.on_whats_app_template_status_updated_with_http_info(webhook_payload_whats_app_template_status_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_template_status_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_whats_app_template_status_updated** | [**WebhookPayloadWhatsAppTemplateStatusUpdated**](WebhookPayloadWhatsAppTemplateStatusUpdated.md) |  |  |
 
 ### Return type
 
