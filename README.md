@@ -581,6 +581,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ErrorResponse](docs/ErrorResponse.md)
  - [Zernio::Expired](docs/Expired.md)
  - [Zernio::FacebookPlatformData](docs/FacebookPlatformData.md)
+ - [Zernio::FacebookPlatformDataCarouselCardsInner](docs/FacebookPlatformDataCarouselCardsInner.md)
  - [Zernio::FollowUser200Response](docs/FollowUser200Response.md)
  - [Zernio::FollowUserRequest](docs/FollowUserRequest.md)
  - [Zernio::FollowerStatsResponse](docs/FollowerStatsResponse.md)

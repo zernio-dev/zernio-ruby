@@ -67,4 +67,16 @@ describe Zernio::FacebookPlatformData do
     end
   end
 
+  describe 'test attribute "carousel_cards"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "carousel_link"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

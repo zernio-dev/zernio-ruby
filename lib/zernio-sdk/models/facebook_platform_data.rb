@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Feed posts support up to 10 images (no mixed video+image). Stories require single media (24h, no captions). Reels require single vertical video (9:16, 3-60s). Geo-restriction is a hard visibility restriction: users outside the specified countries cannot see the post. Not supported for stories. 
+  # Feed posts support up to 10 images (no mixed video+image). Stories require single media (24h, no captions). Reels require single vertical video (9:16, 3-60s). Carousel posts (carouselCards) render a 2-5 card multi-link post, images only, mutually exclusive with story/reel. Geo-restriction is a hard visibility restriction: users outside the specified countries cannot see the post. Not supported for stories. 
   class FacebookPlatformData < ApiModelBase
     # When true, creates the post as an unpublished draft visible in Facebook Publishing Tools instead of publishing immediately. Supported for feed posts (text, link, image, video) and reels. Not supported for stories. Drafts expire after ~30 days.
     attr_accessor :draft
@@ -32,6 +32,12 @@ module Zernio
     attr_accessor :page_id
 
     attr_accessor :geo_restriction
+
+    # Renders the post as a multi-link carousel (organic Page post). When set, mediaItems must be provided with the same length and all items must be images (no videos). Each cards[i] adds the click-through link and headline for the image at mediaItems[i]. Mutually exclusive with contentType=story|reel. Facebook display truncates name at ~35 chars and description at ~30 chars; longer strings are accepted but get truncated on render. 
+    attr_accessor :carousel_cards
+
+    # Optional top-level \"See more\" destination shown on the carousel end card. Defaults to the first card's link when omitted. Only used together with carouselCards. 
+    attr_accessor :carousel_link
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -63,7 +69,9 @@ module Zernio
         :'title' => :'title',
         :'first_comment' => :'firstComment',
         :'page_id' => :'pageId',
-        :'geo_restriction' => :'geoRestriction'
+        :'geo_restriction' => :'geoRestriction',
+        :'carousel_cards' => :'carouselCards',
+        :'carousel_link' => :'carouselLink'
       }
     end
 
@@ -85,7 +93,9 @@ module Zernio
         :'title' => :'String',
         :'first_comment' => :'String',
         :'page_id' => :'String',
-        :'geo_restriction' => :'GeoRestriction'
+        :'geo_restriction' => :'GeoRestriction',
+        :'carousel_cards' => :'Array<FacebookPlatformDataCarouselCardsInner>',
+        :'carousel_link' => :'String'
       }
     end
 
@@ -136,6 +146,16 @@ module Zernio
       if attributes.key?(:'geo_restriction')
         self.geo_restriction = attributes[:'geo_restriction']
       end
+
+      if attributes.key?(:'carousel_cards')
+        if (value = attributes[:'carousel_cards']).is_a?(Array)
+          self.carousel_cards = value
+        end
+      end
+
+      if attributes.key?(:'carousel_link')
+        self.carousel_link = attributes[:'carousel_link']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -143,6 +163,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@carousel_cards.nil? && @carousel_cards.length > 5
+        invalid_properties.push('invalid value for "carousel_cards", number of items must be less than or equal to 5.')
+      end
+
+      if !@carousel_cards.nil? && @carousel_cards.length < 2
+        invalid_properties.push('invalid value for "carousel_cards", number of items must be greater than or equal to 2.')
+      end
+
       invalid_properties
     end
 
@@ -152,6 +180,8 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       content_type_validator = EnumAttributeValidator.new('String', ["story", "reel"])
       return false unless content_type_validator.valid?(@content_type)
+      return false if !@carousel_cards.nil? && @carousel_cards.length > 5
+      return false if !@carousel_cards.nil? && @carousel_cards.length < 2
       true
     end
 
@@ -165,6 +195,24 @@ module Zernio
       @content_type = content_type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] carousel_cards Value to be assigned
+    def carousel_cards=(carousel_cards)
+      if carousel_cards.nil?
+        fail ArgumentError, 'carousel_cards cannot be nil'
+      end
+
+      if carousel_cards.length > 5
+        fail ArgumentError, 'invalid value for "carousel_cards", number of items must be less than or equal to 5.'
+      end
+
+      if carousel_cards.length < 2
+        fail ArgumentError, 'invalid value for "carousel_cards", number of items must be greater than or equal to 2.'
+      end
+
+      @carousel_cards = carousel_cards
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -175,7 +223,9 @@ module Zernio
           title == o.title &&
           first_comment == o.first_comment &&
           page_id == o.page_id &&
-          geo_restriction == o.geo_restriction
+          geo_restriction == o.geo_restriction &&
+          carousel_cards == o.carousel_cards &&
+          carousel_link == o.carousel_link
     end
 
     # @see the `==` method
@@ -187,7 +237,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [draft, content_type, title, first_comment, page_id, geo_restriction].hash
+      [draft, content_type, title, first_comment, page_id, geo_restriction, carousel_cards, carousel_link].hash
     end
 
     # Builds the object from hash
