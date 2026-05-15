@@ -69,6 +69,12 @@ describe Zernio::CreateCtwaAdRequest do
     end
   end
 
+  describe 'test attribute "creatives"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "budget_amount"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -144,6 +150,28 @@ describe Zernio::CreateCtwaAdRequest do
       # validator.allowable_values.each do |value|
       #   expect { instance.objective = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "bid_strategy"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.bid_strategy = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "bid_amount"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "roas_average_floor"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 

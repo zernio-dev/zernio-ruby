@@ -93,6 +93,75 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Delete a review reply
+    # Removes the business owner reply from a Google Business review. The review itself remains.
+    # @param account_id [String] The Zernio account ID (from /v1/accounts)
+    # @param review_id [String] The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+    # @param [Hash] opts the optional parameters
+    # @return [DeleteGoogleBusinessReviewReply200Response]
+    def delete_google_business_review_reply(account_id, review_id, opts = {})
+      data, _status_code, _headers = delete_google_business_review_reply_with_http_info(account_id, review_id, opts)
+      data
+    end
+
+    # Delete a review reply
+    # Removes the business owner reply from a Google Business review. The review itself remains.
+    # @param account_id [String] The Zernio account ID (from /v1/accounts)
+    # @param review_id [String] The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeleteGoogleBusinessReviewReply200Response, Integer, Hash)>] DeleteGoogleBusinessReviewReply200Response data, response status code and response headers
+    def delete_google_business_review_reply_with_http_info(account_id, review_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: GMBReviewsApi.delete_google_business_review_reply ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling GMBReviewsApi.delete_google_business_review_reply"
+      end
+      # verify the required parameter 'review_id' is set
+      if @api_client.config.client_side_validation && review_id.nil?
+        fail ArgumentError, "Missing the required parameter 'review_id' when calling GMBReviewsApi.delete_google_business_review_reply"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'reviewId' + '}', CGI.escape(review_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteGoogleBusinessReviewReply200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"GMBReviewsApi.delete_google_business_review_reply",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: GMBReviewsApi#delete_google_business_review_reply\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get reviews
     # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
@@ -169,6 +238,86 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: GMBReviewsApi#get_google_business_reviews\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Reply to a review
+    # Posts (or updates) the business owner reply to a Google Business review. The reply is associated with the account's currently selected location (set via /v1/accounts/{accountId}/gmb-locations). Calling this endpoint a second time on the same review overwrites the previous reply (PUT semantics on Google's side). 
+    # @param account_id [String] The Zernio account ID (from /v1/accounts)
+    # @param review_id [String] The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+    # @param reply_to_google_business_review_request [ReplyToGoogleBusinessReviewRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ReplyToGoogleBusinessReview200Response]
+    def reply_to_google_business_review(account_id, review_id, reply_to_google_business_review_request, opts = {})
+      data, _status_code, _headers = reply_to_google_business_review_with_http_info(account_id, review_id, reply_to_google_business_review_request, opts)
+      data
+    end
+
+    # Reply to a review
+    # Posts (or updates) the business owner reply to a Google Business review. The reply is associated with the account&#39;s currently selected location (set via /v1/accounts/{accountId}/gmb-locations). Calling this endpoint a second time on the same review overwrites the previous reply (PUT semantics on Google&#39;s side). 
+    # @param account_id [String] The Zernio account ID (from /v1/accounts)
+    # @param review_id [String] The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+    # @param reply_to_google_business_review_request [ReplyToGoogleBusinessReviewRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ReplyToGoogleBusinessReview200Response, Integer, Hash)>] ReplyToGoogleBusinessReview200Response data, response status code and response headers
+    def reply_to_google_business_review_with_http_info(account_id, review_id, reply_to_google_business_review_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: GMBReviewsApi.reply_to_google_business_review ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling GMBReviewsApi.reply_to_google_business_review"
+      end
+      # verify the required parameter 'review_id' is set
+      if @api_client.config.client_side_validation && review_id.nil?
+        fail ArgumentError, "Missing the required parameter 'review_id' when calling GMBReviewsApi.reply_to_google_business_review"
+      end
+      # verify the required parameter 'reply_to_google_business_review_request' is set
+      if @api_client.config.client_side_validation && reply_to_google_business_review_request.nil?
+        fail ArgumentError, "Missing the required parameter 'reply_to_google_business_review_request' when calling GMBReviewsApi.reply_to_google_business_review"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'reviewId' + '}', CGI.escape(review_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(reply_to_google_business_review_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplyToGoogleBusinessReview200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"GMBReviewsApi.reply_to_google_business_review",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: GMBReviewsApi#reply_to_google_business_review\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

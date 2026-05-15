@@ -1,20 +1,79 @@
 # Zernio::CreateCtwaAd201Response
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **ad** | **Object** | The persisted Ad document. | [optional] |
-| **message** | **String** |  | [optional] |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateCtwaAd201Response.new(
-  ad: null,
-  message: null
-)
+Zernio::CreateCtwaAd201Response.openapi_one_of
+# =>
+# [
+#   :'CtwaMultiResponse',
+#   :'CtwaSingleResponse'
+# ]
 ```
+
+### `openapi_discriminator_name`
+
+Returns the discriminator's property name.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::CreateCtwaAd201Response.openapi_discriminator_name
+# => :'ad_type'
+```
+
+### `openapi_discriminator_name`
+
+Returns the discriminator's mapping.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::CreateCtwaAd201Response.openapi_discriminator_mapping
+# =>
+# {
+#   :'multi' => :'CtwaMultiResponse',
+#   :'single' => :'CtwaSingleResponse'
+# }
+```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::CreateCtwaAd201Response.build(data)
+# => #<CtwaMultiResponse:0x00007fdd4aab02a0>
+
+Zernio::CreateCtwaAd201Response.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `CtwaMultiResponse`
+- `CtwaSingleResponse`
+- `nil` (if no type matches)
 

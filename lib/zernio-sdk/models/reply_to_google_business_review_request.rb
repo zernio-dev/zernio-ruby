@@ -14,18 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Video creative for single-creative shape. Mutually exclusive with `imageUrl` and with `creatives[]`. Required on the single-creative shape if `imageUrl` is not supplied. 
-  class CreateCtwaAdRequestVideo < ApiModelBase
-    attr_accessor :url
-
-    # Required by Meta for every video creative. Used as the ad thumbnail. 
-    attr_accessor :thumbnail_url
+  class ReplyToGoogleBusinessReviewRequest < ApiModelBase
+    # The reply text to post on the review. Must be non-empty.
+    attr_accessor :comment
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'url' => :'url',
-        :'thumbnail_url' => :'thumbnailUrl'
+        :'comment' => :'comment'
       }
     end
 
@@ -42,8 +38,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'url' => :'String',
-        :'thumbnail_url' => :'String'
+        :'comment' => :'String'
       }
     end
 
@@ -57,28 +52,22 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateCtwaAdRequestVideo` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ReplyToGoogleBusinessReviewRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateCtwaAdRequestVideo`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ReplyToGoogleBusinessReviewRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'comment')
+        self.comment = attributes[:'comment']
       else
-        self.url = nil
-      end
-
-      if attributes.key?(:'thumbnail_url')
-        self.thumbnail_url = attributes[:'thumbnail_url']
-      else
-        self.thumbnail_url = nil
+        self.comment = nil
       end
     end
 
@@ -87,12 +76,8 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
-      end
-
-      if @thumbnail_url.nil?
-        invalid_properties.push('invalid value for "thumbnail_url", thumbnail_url cannot be nil.')
+      if @comment.nil?
+        invalid_properties.push('invalid value for "comment", comment cannot be nil.')
       end
 
       invalid_properties
@@ -102,29 +87,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @url.nil?
-      return false if @thumbnail_url.nil?
+      return false if @comment.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] url Value to be assigned
-    def url=(url)
-      if url.nil?
-        fail ArgumentError, 'url cannot be nil'
+    # @param [Object] comment Value to be assigned
+    def comment=(comment)
+      if comment.nil?
+        fail ArgumentError, 'comment cannot be nil'
       end
 
-      @url = url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] thumbnail_url Value to be assigned
-    def thumbnail_url=(thumbnail_url)
-      if thumbnail_url.nil?
-        fail ArgumentError, 'thumbnail_url cannot be nil'
-      end
-
-      @thumbnail_url = thumbnail_url
+      @comment = comment
     end
 
     # Checks equality by comparing each attribute.
@@ -132,8 +106,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          url == o.url &&
-          thumbnail_url == o.thumbnail_url
+          comment == o.comment
     end
 
     # @see the `==` method
@@ -145,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [url, thumbnail_url].hash
+      [comment].hash
     end
 
     # Builds the object from hash

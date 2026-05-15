@@ -108,7 +108,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**add_conversion_associations**](docs/AdsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns with a conversion destination
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn)
-*Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad
+*Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad(s)
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdsApi* | [**delete_conversion_destination**](docs/AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Soft-delete a conversion destination
@@ -240,7 +240,9 @@ Class | Method | HTTP request | Description
 *Zernio::GMBPlaceActionsApi* | [**list_google_business_place_actions**](docs/GMBPlaceActionsApi.md#list_google_business_place_actions) | **GET** /v1/accounts/{accountId}/gmb-place-actions | List action links
 *Zernio::GMBPlaceActionsApi* | [**update_google_business_place_action**](docs/GMBPlaceActionsApi.md#update_google_business_place_action) | **PATCH** /v1/accounts/{accountId}/gmb-place-actions | Update action link
 *Zernio::GMBReviewsApi* | [**batch_get_google_business_reviews**](docs/GMBReviewsApi.md#batch_get_google_business_reviews) | **POST** /v1/accounts/{accountId}/gmb-reviews/batch | Batch get reviews
+*Zernio::GMBReviewsApi* | [**delete_google_business_review_reply**](docs/GMBReviewsApi.md#delete_google_business_review_reply) | **DELETE** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Delete a review reply
 *Zernio::GMBReviewsApi* | [**get_google_business_reviews**](docs/GMBReviewsApi.md#get_google_business_reviews) | **GET** /v1/accounts/{accountId}/gmb-reviews | Get reviews
+*Zernio::GMBReviewsApi* | [**reply_to_google_business_review**](docs/GMBReviewsApi.md#reply_to_google_business_review) | **POST** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Reply to a review
 *Zernio::GMBServicesApi* | [**get_google_business_services**](docs/GMBServicesApi.md#get_google_business_services) | **GET** /v1/accounts/{accountId}/gmb-services | Get services
 *Zernio::GMBServicesApi* | [**update_google_business_services**](docs/GMBServicesApi.md#update_google_business_services) | **PUT** /v1/accounts/{accountId}/gmb-services | Replace services
 *Zernio::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
@@ -480,6 +482,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateConversionDestinationRequestValue](docs/CreateConversionDestinationRequestValue.md)
  - [Zernio::CreateCtwaAd201Response](docs/CreateCtwaAd201Response.md)
  - [Zernio::CreateCtwaAdRequest](docs/CreateCtwaAdRequest.md)
+ - [Zernio::CreateCtwaAdRequestCreativesInner](docs/CreateCtwaAdRequestCreativesInner.md)
+ - [Zernio::CreateCtwaAdRequestCreativesInnerVideo](docs/CreateCtwaAdRequestCreativesInnerVideo.md)
  - [Zernio::CreateCtwaAdRequestInterestsInner](docs/CreateCtwaAdRequestInterestsInner.md)
  - [Zernio::CreateCtwaAdRequestVideo](docs/CreateCtwaAdRequestVideo.md)
  - [Zernio::CreateCustomField200Response](docs/CreateCustomField200Response.md)
@@ -539,11 +543,14 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateWhatsAppTemplateRequest](docs/CreateWhatsAppTemplateRequest.md)
  - [Zernio::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner](docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner.md)
  - [Zernio::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl](docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.md)
+ - [Zernio::CtwaMultiResponse](docs/CtwaMultiResponse.md)
+ - [Zernio::CtwaSingleResponse](docs/CtwaSingleResponse.md)
  - [Zernio::DeleteAccountGroup200Response](docs/DeleteAccountGroup200Response.md)
  - [Zernio::DeleteAdCampaign200Response](docs/DeleteAdCampaign200Response.md)
  - [Zernio::DeleteAdCampaignRequest](docs/DeleteAdCampaignRequest.md)
  - [Zernio::DeleteGoogleBusinessMedia200Response](docs/DeleteGoogleBusinessMedia200Response.md)
  - [Zernio::DeleteGoogleBusinessPlaceAction200Response](docs/DeleteGoogleBusinessPlaceAction200Response.md)
+ - [Zernio::DeleteGoogleBusinessReviewReply200Response](docs/DeleteGoogleBusinessReviewReply200Response.md)
  - [Zernio::DeleteInboxComment200Response](docs/DeleteInboxComment200Response.md)
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
@@ -955,6 +962,8 @@ Class | Method | HTTP request | Description
  - [Zernio::RemoveBookmark200Response](docs/RemoveBookmark200Response.md)
  - [Zernio::RemoveConversionAssociations200Response](docs/RemoveConversionAssociations200Response.md)
  - [Zernio::RemoveWhatsAppGroupParticipantsRequest](docs/RemoveWhatsAppGroupParticipantsRequest.md)
+ - [Zernio::ReplyToGoogleBusinessReview200Response](docs/ReplyToGoogleBusinessReview200Response.md)
+ - [Zernio::ReplyToGoogleBusinessReviewRequest](docs/ReplyToGoogleBusinessReviewRequest.md)
  - [Zernio::ReplyToInboxPost200Response](docs/ReplyToInboxPost200Response.md)
  - [Zernio::ReplyToInboxPost200ResponseData](docs/ReplyToInboxPost200ResponseData.md)
  - [Zernio::ReplyToInboxPostRequest](docs/ReplyToInboxPostRequest.md)

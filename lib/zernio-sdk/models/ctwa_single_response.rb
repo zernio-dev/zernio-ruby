@@ -14,18 +14,43 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Video creative for single-creative shape. Mutually exclusive with `imageUrl` and with `creatives[]`. Required on the single-creative shape if `imageUrl` is not supplied. 
-  class CreateCtwaAdRequestVideo < ApiModelBase
-    attr_accessor :url
+  # Response returned by `POST /v1/ads/ctwa` when the request used the single-creative shape (top-level headline / body / imageUrl|video). `adType` is the union discriminator. 
+  class CtwaSingleResponse < ApiModelBase
+    attr_accessor :ad_type
 
-    # Required by Meta for every video creative. Used as the ad thumbnail. 
-    attr_accessor :thumbnail_url
+    # The persisted Ad document.
+    attr_accessor :ad
+
+    attr_accessor :message
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'url' => :'url',
-        :'thumbnail_url' => :'thumbnailUrl'
+        :'ad_type' => :'adType',
+        :'ad' => :'ad',
+        :'message' => :'message'
       }
     end
 
@@ -42,8 +67,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'url' => :'String',
-        :'thumbnail_url' => :'String'
+        :'ad_type' => :'String',
+        :'ad' => :'Object',
+        :'message' => :'String'
       }
     end
 
@@ -57,28 +83,34 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateCtwaAdRequestVideo` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CtwaSingleResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateCtwaAdRequestVideo`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CtwaSingleResponse`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'ad_type')
+        self.ad_type = attributes[:'ad_type']
       else
-        self.url = nil
+        self.ad_type = nil
       end
 
-      if attributes.key?(:'thumbnail_url')
-        self.thumbnail_url = attributes[:'thumbnail_url']
+      if attributes.key?(:'ad')
+        self.ad = attributes[:'ad']
       else
-        self.thumbnail_url = nil
+        self.ad = nil
+      end
+
+      if attributes.key?(:'message')
+        self.message = attributes[:'message']
+      else
+        self.message = nil
       end
     end
 
@@ -87,12 +119,16 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
+      if @ad_type.nil?
+        invalid_properties.push('invalid value for "ad_type", ad_type cannot be nil.')
       end
 
-      if @thumbnail_url.nil?
-        invalid_properties.push('invalid value for "thumbnail_url", thumbnail_url cannot be nil.')
+      if @ad.nil?
+        invalid_properties.push('invalid value for "ad", ad cannot be nil.')
+      end
+
+      if @message.nil?
+        invalid_properties.push('invalid value for "message", message cannot be nil.')
       end
 
       invalid_properties
@@ -102,29 +138,42 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @url.nil?
-      return false if @thumbnail_url.nil?
+      return false if @ad_type.nil?
+      ad_type_validator = EnumAttributeValidator.new('String', ["single"])
+      return false unless ad_type_validator.valid?(@ad_type)
+      return false if @ad.nil?
+      return false if @message.nil?
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] url Value to be assigned
-    def url=(url)
-      if url.nil?
-        fail ArgumentError, 'url cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] ad_type Object to be assigned
+    def ad_type=(ad_type)
+      validator = EnumAttributeValidator.new('String', ["single"])
+      unless validator.valid?(ad_type)
+        fail ArgumentError, "invalid value for \"ad_type\", must be one of #{validator.allowable_values}."
       end
-
-      @url = url
+      @ad_type = ad_type
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] thumbnail_url Value to be assigned
-    def thumbnail_url=(thumbnail_url)
-      if thumbnail_url.nil?
-        fail ArgumentError, 'thumbnail_url cannot be nil'
+    # @param [Object] ad Value to be assigned
+    def ad=(ad)
+      if ad.nil?
+        fail ArgumentError, 'ad cannot be nil'
       end
 
-      @thumbnail_url = thumbnail_url
+      @ad = ad
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] message Value to be assigned
+    def message=(message)
+      if message.nil?
+        fail ArgumentError, 'message cannot be nil'
+      end
+
+      @message = message
     end
 
     # Checks equality by comparing each attribute.
@@ -132,8 +181,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          url == o.url &&
-          thumbnail_url == o.thumbnail_url
+          ad_type == o.ad_type &&
+          ad == o.ad &&
+          message == o.message
     end
 
     # @see the `==` method
@@ -145,7 +195,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [url, thumbnail_url].hash
+      [ad_type, ad, message].hash
     end
 
     # Builds the object from hash

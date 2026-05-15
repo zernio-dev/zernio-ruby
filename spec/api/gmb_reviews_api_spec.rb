@@ -45,6 +45,19 @@ describe 'GMBReviewsApi' do
     end
   end
 
+  # unit tests for delete_google_business_review_reply
+  # Delete a review reply
+  # Removes the business owner reply from a Google Business review. The review itself remains.
+  # @param account_id The Zernio account ID (from /v1/accounts)
+  # @param review_id The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteGoogleBusinessReviewReply200Response]
+  describe 'delete_google_business_review_reply test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_google_business_reviews
   # Get reviews
   # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.
@@ -55,6 +68,20 @@ describe 'GMBReviewsApi' do
   # @option opts [String] :page_token Pagination token from previous response
   # @return [GetGoogleBusinessReviews200Response]
   describe 'get_google_business_reviews test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for reply_to_google_business_review
+  # Reply to a review
+  # Posts (or updates) the business owner reply to a Google Business review. The reply is associated with the account&#39;s currently selected location (set via /v1/accounts/{accountId}/gmb-locations). Calling this endpoint a second time on the same review overwrites the previous reply (PUT semantics on Google&#39;s side). 
+  # @param account_id The Zernio account ID (from /v1/accounts)
+  # @param review_id The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+  # @param reply_to_google_business_review_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ReplyToGoogleBusinessReview200Response]
+  describe 'reply_to_google_business_review test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

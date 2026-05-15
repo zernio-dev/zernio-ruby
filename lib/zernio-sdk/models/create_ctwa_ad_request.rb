@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # In addition to the `required` list, exactly one of `imageUrl` or `video` must be supplied (they are mutually exclusive). The route enforces this at the Zod boundary; OpenAPI's `required` cannot express OR-required cleanly. 
+  # In addition to the `required` list, the request must use EXACTLY ONE of the two shapes:  - Single-creative: `headline`, `body`, and one of   `imageUrl` / `video` (mutually exclusive). - Multi-creative: a non-empty `creatives[]` array. Top-level   `headline` / `body` / `imageUrl` / `video` must NOT be set   on this shape.  The route enforces this at the Zod boundary; OpenAPI's `required` cannot express the OR cleanly. 
   class CreateCtwaAdRequest < ApiModelBase
     # Facebook or Instagram SocialAccount ID.
     attr_accessor :account_id
@@ -22,18 +22,22 @@ module Zernio
     # Meta ad account ID, e.g. `act_123456789`.
     attr_accessor :ad_account_id
 
-    # Ad display name. Used to derive campaign / ad set names.
+    # Ad display name. Used to derive campaign / ad set names. On the multi-creative shape, each ad's Meta name gets a \" #N\" suffix (1-indexed) so Ads Manager shows them as a numbered batch. 
     attr_accessor :name
 
+    # Single-creative shape only. Mutually exclusive with `creatives[]`. 
     attr_accessor :headline
 
-    # Primary text shown above the image / video.
+    # Primary text shown above the image / video. Single-creative shape only. Mutually exclusive with `creatives[]`. 
     attr_accessor :body
 
-    # Image asset for image creatives. Mutually exclusive with `video`. Required if `video` is not supplied. 
+    # Image asset for single-creative shape. Mutually exclusive with `video` and with `creatives[]`. Required on the single-creative shape if `video` is not supplied. 
     attr_accessor :image_url
 
     attr_accessor :video
+
+    # Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (`headline` / `body` / `imageUrl` / `video`). Each entry must supply its own headline, body, and exactly one of `imageUrl` / `video`. 
+    attr_accessor :creatives
 
     # Budget amount in the ad account's currency major units (e.g. dollars for USD, not cents). Must be > 0. 
     attr_accessor :budget_amount
@@ -63,6 +67,15 @@ module Zernio
 
     # Defaults to `OUTCOME_ENGAGEMENT` (the broadly-supported CTWA objective). `OUTCOME_SALES` and `OUTCOME_LEADS` require additional account configuration (Dataset linked to the WABA for sales) and may be rejected by Meta if missing. 
     attr_accessor :objective
+
+    # Meta bid strategy applied to the shared ad set. Defaults to `LOWEST_COST_WITHOUT_CAP` (auto-bid) when omitted. `LOWEST_COST_WITH_BID_CAP` and `COST_CAP` require `bidAmount`. `LOWEST_COST_WITH_MIN_ROAS` requires `roasAverageFloor`. CTWA's `optimization_goal` is fixed to `CONVERSATIONS`, but the bid strategy is independent. 
+    attr_accessor :bid_strategy
+
+    # Whole currency units (e.g. `5` = $5.00 on a USD account). Required when `bidStrategy` is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`; rejected otherwise. 
+    attr_accessor :bid_amount
+
+    # Decimal ROAS multiplier (e.g. `2.0` = 2.0× ROAS floor). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`; rejected otherwise. Meta enforces its own upper bound server-side. 
+    attr_accessor :roas_average_floor
 
     # Name of the legal entity benefiting from the ad. Required by Meta when targeting EU users (DSA Article 26). Not enforced at schema level; enforced server-side when targeting intersects EU member states. 
     attr_accessor :dsa_beneficiary
@@ -102,6 +115,7 @@ module Zernio
         :'body' => :'body',
         :'image_url' => :'imageUrl',
         :'video' => :'video',
+        :'creatives' => :'creatives',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
         :'currency' => :'currency',
@@ -113,6 +127,9 @@ module Zernio
         :'audience_id' => :'audienceId',
         :'advantage_audience' => :'advantageAudience',
         :'objective' => :'objective',
+        :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor'
       }
@@ -138,6 +155,7 @@ module Zernio
         :'body' => :'String',
         :'image_url' => :'String',
         :'video' => :'CreateCtwaAdRequestVideo',
+        :'creatives' => :'Array<CreateCtwaAdRequestCreativesInner>',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
         :'currency' => :'String',
@@ -149,6 +167,9 @@ module Zernio
         :'audience_id' => :'String',
         :'advantage_audience' => :'Integer',
         :'objective' => :'String',
+        :'bid_strategy' => :'String',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String'
       }
@@ -196,14 +217,10 @@ module Zernio
 
       if attributes.key?(:'headline')
         self.headline = attributes[:'headline']
-      else
-        self.headline = nil
       end
 
       if attributes.key?(:'body')
         self.body = attributes[:'body']
-      else
-        self.body = nil
       end
 
       if attributes.key?(:'image_url')
@@ -212,6 +229,12 @@ module Zernio
 
       if attributes.key?(:'video')
         self.video = attributes[:'video']
+      end
+
+      if attributes.key?(:'creatives')
+        if (value = attributes[:'creatives']).is_a?(Array)
+          self.creatives = value
+        end
       end
 
       if attributes.key?(:'budget_amount')
@@ -266,6 +289,18 @@ module Zernio
         self.objective = attributes[:'objective']
       end
 
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
+      end
+
       if attributes.key?(:'dsa_beneficiary')
         self.dsa_beneficiary = attributes[:'dsa_beneficiary']
       end
@@ -304,24 +339,20 @@ module Zernio
         invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
       end
 
-      if @headline.nil?
-        invalid_properties.push('invalid value for "headline", headline cannot be nil.')
-      end
-
-      if @headline.to_s.length > 255
+      if !@headline.nil? && @headline.to_s.length > 255
         invalid_properties.push('invalid value for "headline", the character length must be smaller than or equal to 255.')
       end
 
-      if @headline.to_s.length < 1
+      if !@headline.nil? && @headline.to_s.length < 1
         invalid_properties.push('invalid value for "headline", the character length must be greater than or equal to 1.')
       end
 
-      if @body.nil?
-        invalid_properties.push('invalid value for "body", body cannot be nil.')
+      if !@body.nil? && @body.to_s.length < 1
+        invalid_properties.push('invalid value for "body", the character length must be greater than or equal to 1.')
       end
 
-      if @body.to_s.length < 1
-        invalid_properties.push('invalid value for "body", the character length must be greater than or equal to 1.')
+      if !@creatives.nil? && @creatives.length < 1
+        invalid_properties.push('invalid value for "creatives", number of items must be greater than or equal to 1.')
       end
 
       if @budget_amount.nil?
@@ -360,6 +391,14 @@ module Zernio
         invalid_properties.push('invalid value for "age_max", must be greater than or equal to 13.')
       end
 
+      if !@bid_amount.nil? && @bid_amount < 0
+        invalid_properties.push('invalid value for "bid_amount", must be greater than or equal to 0.')
+      end
+
+      if !@roas_average_floor.nil? && @roas_average_floor < 0
+        invalid_properties.push('invalid value for "roas_average_floor", must be greater than or equal to 0.')
+      end
+
       if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
         invalid_properties.push('invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.')
       end
@@ -381,11 +420,10 @@ module Zernio
       return false if @ad_account_id.to_s.length < 1
       return false if @name.nil?
       return false if @name.to_s.length < 1
-      return false if @headline.nil?
-      return false if @headline.to_s.length > 255
-      return false if @headline.to_s.length < 1
-      return false if @body.nil?
-      return false if @body.to_s.length < 1
+      return false if !@headline.nil? && @headline.to_s.length > 255
+      return false if !@headline.nil? && @headline.to_s.length < 1
+      return false if !@body.nil? && @body.to_s.length < 1
+      return false if !@creatives.nil? && @creatives.length < 1
       return false if @budget_amount.nil?
       return false if @budget_amount < 0
       return false if @budget_type.nil?
@@ -401,6 +439,10 @@ module Zernio
       return false unless advantage_audience_validator.valid?(@advantage_audience)
       objective_validator = EnumAttributeValidator.new('String', ["OUTCOME_ENGAGEMENT", "OUTCOME_SALES", "OUTCOME_LEADS"])
       return false unless objective_validator.valid?(@objective)
+      bid_strategy_validator = EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
+      return false unless bid_strategy_validator.valid?(@bid_strategy)
+      return false if !@bid_amount.nil? && @bid_amount < 0
+      return false if !@roas_average_floor.nil? && @roas_average_floor < 0
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       true
@@ -478,6 +520,20 @@ module Zernio
       end
 
       @body = body
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] creatives Value to be assigned
+    def creatives=(creatives)
+      if creatives.nil?
+        fail ArgumentError, 'creatives cannot be nil'
+      end
+
+      if creatives.length < 1
+        fail ArgumentError, 'invalid value for "creatives", number of items must be greater than or equal to 1.'
+      end
+
+      @creatives = creatives
     end
 
     # Custom attribute writer method with validation
@@ -578,6 +634,44 @@ module Zernio
       @objective = objective
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] bid_strategy Object to be assigned
+    def bid_strategy=(bid_strategy)
+      validator = EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
+      unless validator.valid?(bid_strategy)
+        fail ArgumentError, "invalid value for \"bid_strategy\", must be one of #{validator.allowable_values}."
+      end
+      @bid_strategy = bid_strategy
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] bid_amount Value to be assigned
+    def bid_amount=(bid_amount)
+      if bid_amount.nil?
+        fail ArgumentError, 'bid_amount cannot be nil'
+      end
+
+      if bid_amount < 0
+        fail ArgumentError, 'invalid value for "bid_amount", must be greater than or equal to 0.'
+      end
+
+      @bid_amount = bid_amount
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] roas_average_floor Value to be assigned
+    def roas_average_floor=(roas_average_floor)
+      if roas_average_floor.nil?
+        fail ArgumentError, 'roas_average_floor cannot be nil'
+      end
+
+      if roas_average_floor < 0
+        fail ArgumentError, 'invalid value for "roas_average_floor", must be greater than or equal to 0.'
+      end
+
+      @roas_average_floor = roas_average_floor
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] dsa_beneficiary Value to be assigned
     def dsa_beneficiary=(dsa_beneficiary)
@@ -618,6 +712,7 @@ module Zernio
           body == o.body &&
           image_url == o.image_url &&
           video == o.video &&
+          creatives == o.creatives &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
           currency == o.currency &&
@@ -629,6 +724,9 @@ module Zernio
           audience_id == o.audience_id &&
           advantage_audience == o.advantage_audience &&
           objective == o.objective &&
+          bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor
     end
@@ -642,7 +740,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, budget_amount, budget_type, currency, end_date, countries, age_min, age_max, interests, audience_id, advantage_audience, objective, dsa_beneficiary, dsa_payor].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, budget_amount, budget_type, currency, end_date, countries, age_min, age_max, interests, audience_id, advantage_audience, objective, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

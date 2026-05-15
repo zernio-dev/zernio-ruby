@@ -5,7 +5,9 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**batch_get_google_business_reviews**](GMBReviewsApi.md#batch_get_google_business_reviews) | **POST** /v1/accounts/{accountId}/gmb-reviews/batch | Batch get reviews |
+| [**delete_google_business_review_reply**](GMBReviewsApi.md#delete_google_business_review_reply) | **DELETE** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Delete a review reply |
 | [**get_google_business_reviews**](GMBReviewsApi.md#get_google_business_reviews) | **GET** /v1/accounts/{accountId}/gmb-reviews | Get reviews |
+| [**reply_to_google_business_review**](GMBReviewsApi.md#reply_to_google_business_review) | **POST** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Reply to a review |
 
 
 ## batch_get_google_business_reviews
@@ -76,6 +78,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## delete_google_business_review_reply
+
+> <DeleteGoogleBusinessReviewReply200Response> delete_google_business_review_reply(account_id, review_id)
+
+Delete a review reply
+
+Removes the business owner reply from a Google Business review. The review itself remains.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::GMBReviewsApi.new
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
+review_id = 'review_id_example' # String | The review ID portion (e.g. \"AIe9_BGx1234567890\"), not the full resource name
+
+begin
+  # Delete a review reply
+  result = api_instance.delete_google_business_review_reply(account_id, review_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling GMBReviewsApi->delete_google_business_review_reply: #{e}"
+end
+```
+
+#### Using the delete_google_business_review_reply_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteGoogleBusinessReviewReply200Response>, Integer, Hash)> delete_google_business_review_reply_with_http_info(account_id, review_id)
+
+```ruby
+begin
+  # Delete a review reply
+  data, status_code, headers = api_instance.delete_google_business_review_reply_with_http_info(account_id, review_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteGoogleBusinessReviewReply200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling GMBReviewsApi->delete_google_business_review_reply_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
+| **review_id** | **String** | The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name |  |
+
+### Return type
+
+[**DeleteGoogleBusinessReviewReply200Response**](DeleteGoogleBusinessReviewReply200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -153,5 +226,78 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## reply_to_google_business_review
+
+> <ReplyToGoogleBusinessReview200Response> reply_to_google_business_review(account_id, review_id, reply_to_google_business_review_request)
+
+Reply to a review
+
+Posts (or updates) the business owner reply to a Google Business review. The reply is associated with the account's currently selected location (set via /v1/accounts/{accountId}/gmb-locations). Calling this endpoint a second time on the same review overwrites the previous reply (PUT semantics on Google's side). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::GMBReviewsApi.new
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
+review_id = 'review_id_example' # String | The review ID portion (e.g. \"AIe9_BGx1234567890\"), not the full resource name
+reply_to_google_business_review_request = Zernio::ReplyToGoogleBusinessReviewRequest.new({comment: 'comment_example'}) # ReplyToGoogleBusinessReviewRequest | 
+
+begin
+  # Reply to a review
+  result = api_instance.reply_to_google_business_review(account_id, review_id, reply_to_google_business_review_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling GMBReviewsApi->reply_to_google_business_review: #{e}"
+end
+```
+
+#### Using the reply_to_google_business_review_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ReplyToGoogleBusinessReview200Response>, Integer, Hash)> reply_to_google_business_review_with_http_info(account_id, review_id, reply_to_google_business_review_request)
+
+```ruby
+begin
+  # Reply to a review
+  data, status_code, headers = api_instance.reply_to_google_business_review_with_http_info(account_id, review_id, reply_to_google_business_review_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ReplyToGoogleBusinessReview200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling GMBReviewsApi->reply_to_google_business_review_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
+| **review_id** | **String** | The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name |  |
+| **reply_to_google_business_review_request** | [**ReplyToGoogleBusinessReviewRequest**](ReplyToGoogleBusinessReviewRequest.md) |  |  |
+
+### Return type
+
+[**ReplyToGoogleBusinessReview200Response**](ReplyToGoogleBusinessReview200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
