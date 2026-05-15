@@ -1009,6 +1009,138 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Post platform failed event
+    # Fired once per platform target inside a post as that platform fails permanently. Temporary/retryable failures do NOT fire this event — only permanent ones, so retry loops stay quiet. The envelope event (`post.failed` / `post.partial`) fires separately AFTER all platforms have terminated. 
+    # @param webhook_payload_post_platform [WebhookPayloadPostPlatform] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_post_platform_failed(webhook_payload_post_platform, opts = {})
+      on_post_platform_failed_with_http_info(webhook_payload_post_platform, opts)
+      nil
+    end
+
+    # Post platform failed event
+    # Fired once per platform target inside a post as that platform fails permanently. Temporary/retryable failures do NOT fire this event — only permanent ones, so retry loops stay quiet. The envelope event (&#x60;post.failed&#x60; / &#x60;post.partial&#x60;) fires separately AFTER all platforms have terminated. 
+    # @param webhook_payload_post_platform [WebhookPayloadPostPlatform] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_post_platform_failed_with_http_info(webhook_payload_post_platform, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_post_platform_failed ...'
+      end
+      # verify the required parameter 'webhook_payload_post_platform' is set
+      if @api_client.config.client_side_validation && webhook_payload_post_platform.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_post_platform' when calling WebhookEventsApi.on_post_platform_failed"
+      end
+      # resource path
+      local_var_path = '/post.platform.failed'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_post_platform)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_post_platform_failed",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_post_platform_failed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Post platform published event
+    # Fired once per platform target inside a post as that platform finishes publishing successfully. Does NOT wait for the post-level rollup — consumers building incremental UIs get notified immediately, even when other platforms on the same post are still processing. The envelope event (`post.published` / `post.partial`) fires separately AFTER all platforms have terminated. 
+    # @param webhook_payload_post_platform [WebhookPayloadPostPlatform] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_post_platform_published(webhook_payload_post_platform, opts = {})
+      on_post_platform_published_with_http_info(webhook_payload_post_platform, opts)
+      nil
+    end
+
+    # Post platform published event
+    # Fired once per platform target inside a post as that platform finishes publishing successfully. Does NOT wait for the post-level rollup — consumers building incremental UIs get notified immediately, even when other platforms on the same post are still processing. The envelope event (&#x60;post.published&#x60; / &#x60;post.partial&#x60;) fires separately AFTER all platforms have terminated. 
+    # @param webhook_payload_post_platform [WebhookPayloadPostPlatform] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_post_platform_published_with_http_info(webhook_payload_post_platform, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_post_platform_published ...'
+      end
+      # verify the required parameter 'webhook_payload_post_platform' is set
+      if @api_client.config.client_side_validation && webhook_payload_post_platform.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_post_platform' when calling WebhookEventsApi.on_post_platform_published"
+      end
+      # resource path
+      local_var_path = '/post.platform.published'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_post_platform)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_post_platform_published",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_post_platform_published\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Post published event
     # Fired when a post is successfully published.
     # @param webhook_payload_post [WebhookPayloadPost] 

@@ -19,6 +19,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_post_cancelled**](WebhookEventsApi.md#on_post_cancelled) | **POST** /post.cancelled | Post cancelled event |
 | [**on_post_failed**](WebhookEventsApi.md#on_post_failed) | **POST** /post.failed | Post failed event |
 | [**on_post_partial**](WebhookEventsApi.md#on_post_partial) | **POST** /post.partial | Post partial event |
+| [**on_post_platform_failed**](WebhookEventsApi.md#on_post_platform_failed) | **POST** /post.platform.failed | Post platform failed event |
+| [**on_post_platform_published**](WebhookEventsApi.md#on_post_platform_published) | **POST** /post.platform.published | Post platform published event |
 | [**on_post_published**](WebhookEventsApi.md#on_post_published) | **POST** /post.published | Post published event |
 | [**on_post_recycled**](WebhookEventsApi.md#on_post_recycled) | **POST** /post.recycled | Post recycled event |
 | [**on_post_scheduled**](WebhookEventsApi.md#on_post_scheduled) | **POST** /post.scheduled | Post scheduled event |
@@ -1033,6 +1035,142 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_post** | [**WebhookPayloadPost**](WebhookPayloadPost.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_post_platform_failed
+
+> on_post_platform_failed(webhook_payload_post_platform)
+
+Post platform failed event
+
+Fired once per platform target inside a post as that platform fails permanently. Temporary/retryable failures do NOT fire this event — only permanent ones, so retry loops stay quiet. The envelope event (`post.failed` / `post.partial`) fires separately AFTER all platforms have terminated. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_post_platform =  # WebhookPayloadPostPlatform | 
+
+begin
+  # Post platform failed event
+  api_instance.on_post_platform_failed(webhook_payload_post_platform)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_platform_failed: #{e}"
+end
+```
+
+#### Using the on_post_platform_failed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_post_platform_failed_with_http_info(webhook_payload_post_platform)
+
+```ruby
+begin
+  # Post platform failed event
+  data, status_code, headers = api_instance.on_post_platform_failed_with_http_info(webhook_payload_post_platform)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_platform_failed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_post_platform** | [**WebhookPayloadPostPlatform**](WebhookPayloadPostPlatform.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_post_platform_published
+
+> on_post_platform_published(webhook_payload_post_platform)
+
+Post platform published event
+
+Fired once per platform target inside a post as that platform finishes publishing successfully. Does NOT wait for the post-level rollup — consumers building incremental UIs get notified immediately, even when other platforms on the same post are still processing. The envelope event (`post.published` / `post.partial`) fires separately AFTER all platforms have terminated. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_post_platform =  # WebhookPayloadPostPlatform | 
+
+begin
+  # Post platform published event
+  api_instance.on_post_platform_published(webhook_payload_post_platform)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_platform_published: #{e}"
+end
+```
+
+#### Using the on_post_platform_published_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_post_platform_published_with_http_info(webhook_payload_post_platform)
+
+```ruby
+begin
+  # Post platform published event
+  data, status_code, headers = api_instance.on_post_platform_published_with_http_info(webhook_payload_post_platform)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_platform_published_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_post_platform** | [**WebhookPayloadPostPlatform**](WebhookPayloadPostPlatform.md) |  |  |
 
 ### Return type
 
