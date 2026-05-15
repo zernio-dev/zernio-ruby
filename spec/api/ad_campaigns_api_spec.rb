@@ -119,6 +119,8 @@ describe 'AdCampaignsApi' do
   # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
   # @option opts [String] :account_id Social account ID
   # @option opts [String] :profile_id Profile ID
+  # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted.
+  # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range.
   # @return [ListAdCampaigns200Response]
   describe 'list_ad_campaigns test' do
     it 'should work' do

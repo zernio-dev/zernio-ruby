@@ -433,6 +433,8 @@ module Zernio
     # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
+    # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted.
+    # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range.
     # @return [ListAdCampaigns200Response]
     def list_ad_campaigns(opts = {})
       data, _status_code, _headers = list_ad_campaigns_with_http_info(opts)
@@ -450,6 +452,8 @@ module Zernio
     # @option opts [String] :ad_account_id Platform ad account ID (e.g. act_123 for Meta)
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
+    # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted.
+    # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range.
     # @return [Array<(ListAdCampaigns200Response, Integer, Hash)>] ListAdCampaigns200Response data, response status code and response headers
     def list_ad_campaigns_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -488,6 +492,8 @@ module Zernio
       query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

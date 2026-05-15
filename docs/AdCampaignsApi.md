@@ -423,7 +423,9 @@ opts = {
   status: Zernio::AdStatus::ACTIVE, # AdStatus | Filter by derived campaign status (post-aggregation)
   ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (e.g. act_123 for Meta)
   account_id: 'account_id_example', # String | Social account ID
-  profile_id: 'profile_id_example' # String | Profile ID
+  profile_id: 'profile_id_example', # String | Profile ID
+  from_date: Date.parse('2013-10-20'), # Date | Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted.
+  to_date: Date.parse('2013-10-20') # Date | End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range.
 }
 
 begin
@@ -465,6 +467,8 @@ end
 | **ad_account_id** | **String** | Platform ad account ID (e.g. act_123 for Meta) | [optional] |
 | **account_id** | **String** | Social account ID | [optional] |
 | **profile_id** | **String** | Profile ID | [optional] |
+| **from_date** | **Date** | Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted. | [optional] |
+| **to_date** | **Date** | End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range. | [optional] |
 
 ### Return type
 
