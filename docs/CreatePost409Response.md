@@ -13,7 +13,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::CreatePost409Response.new(
-  error: This exact content was already posted to this account within the last 24 hours.,
+  error: This exact content is already scheduled, publishing, or was posted to this account within the last 24 hours.,
   details: null
 )
 ```

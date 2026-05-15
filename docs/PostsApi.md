@@ -91,11 +91,11 @@ end
 
 ## create_post
 
-> <PostCreateResponse> create_post(create_post_request)
+> <PostCreateResponse> create_post(create_post_request, opts)
 
 Create post
 
-Create and optionally publish a post. Immediate posts (publishNow: true) include platformPostUrl in the response. Content is optional when media is attached or all platforms have customContent. See each platform's schema for media constraints. 
+Create and optionally publish a post. Immediate posts (`publishNow: true`) include `platformPostUrl` in the response. Content is optional when media is attached or all platforms have `customContent`. See each platform's schema for media constraints.  ## Idempotency  Two layers of duplicate-protection apply, so safe-to-retry callers (network blips, n8n / Zapier retries, etc.) don't accidentally double-post.  **1. Same-request idempotency (5-minute window).** Pass an `x-request-id` header to mark a logical request. If a second request arrives with the same `x-request-id` while the first is in-flight (or within ~5 minutes of completion), we return **HTTP 200** with the original post in the `existingPost` field — no new post is created. The official Zernio SDKs auto-generate a unique `x-request-id` per call. If you're using a generic HTTP client (curl, n8n's HTTP node, Zapier, custom code), either: - Set a unique `x-request-id` per logical call (recommended — UUIDv4 is fine) - Or simply omit the header — we'll treat each request as new  **Common pitfall**: if your workflow tool uses a single execution-level request ID and reuses it across multiple HTTP nodes (e.g. one ID for the whole run, shared across 6 different platform calls), every call after the first will look like a retry of the first and return its post. Generate a fresh ID per node.  **2. Content-hash dedup (24-hour window).** Independently, we hash `(platform, accountId, content + media URLs)` and reject duplicates within 24 hours with **HTTP 409**. This catches genuine \"same content posted twice to the same account\" cases regardless of `x-request-id`. Returns `error`, `accountId`, `platform`, and `existingPostId` so you can find the original. To intentionally re-post identical content within 24h, change something (the caption, the media, the account) — the dedup is keyed on the full content fingerprint.  Order: same-`x-request-id` retries (200) are checked first; if no idempotency match, the content-hash dedup (409) runs. 
 
 ### Examples
 
@@ -110,10 +110,13 @@ end
 
 api_instance = Zernio::PostsApi.new
 create_post_request = Zernio::CreatePostRequest.new # CreatePostRequest | 
+opts = {
+  x_request_id: '38400000-8cf0-11bd-b23e-10b96e4ef00d' # String | Optional client-generated request identifier for safe retry (idempotency). When two requests carry the same value, the second is treated as a retry of the first and returns the original post (HTTP 200) instead of creating a duplicate. Window is ~5 minutes from the first request. Generate a UUID per logical call. SDKs do this automatically; HTTP clients should set it themselves or omit it. See the operation description for the full idempotency contract. 
+}
 
 begin
   # Create post
-  result = api_instance.create_post(create_post_request)
+  result = api_instance.create_post(create_post_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->create_post: #{e}"
@@ -124,12 +127,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PostCreateResponse>, Integer, Hash)> create_post_with_http_info(create_post_request)
+> <Array(<PostCreateResponse>, Integer, Hash)> create_post_with_http_info(create_post_request, opts)
 
 ```ruby
 begin
   # Create post
-  data, status_code, headers = api_instance.create_post_with_http_info(create_post_request)
+  data, status_code, headers = api_instance.create_post_with_http_info(create_post_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PostCreateResponse>
@@ -143,6 +146,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_post_request** | [**CreatePostRequest**](CreatePostRequest.md) |  |  |
+| **x_request_id** | **String** | Optional client-generated request identifier for safe retry (idempotency). When two requests carry the same value, the second is treated as a retry of the first and returns the original post (HTTP 200) instead of creating a duplicate. Window is ~5 minutes from the first request. Generate a UUID per logical call. SDKs do this automatically; HTTP clients should set it themselves or omit it. See the operation description for the full idempotency contract.  | [optional] |
 
 ### Return type
 
