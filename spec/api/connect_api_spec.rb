@@ -131,6 +131,7 @@ describe 'ConnectApi' do
   # Returns all Facebook pages the connected account has access to, including the currently selected page.
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :refresh When true, bypasses the page cache and fetches fresh pages from Meta. Rate-limited server-side to 1 refresh per 60s. Pages no longer accessible to the connected account will be removed from the list on refresh. 
   # @return [GetFacebookPages200Response]
   describe 'get_facebook_pages test' do
     it 'should work' do

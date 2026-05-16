@@ -552,7 +552,7 @@ end
 
 ## get_facebook_pages
 
-> <GetFacebookPages200Response> get_facebook_pages(account_id)
+> <GetFacebookPages200Response> get_facebook_pages(account_id, opts)
 
 List Facebook pages
 
@@ -571,10 +571,13 @@ end
 
 api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
+opts = {
+  refresh: true # Boolean | When true, bypasses the page cache and fetches fresh pages from Meta. Rate-limited server-side to 1 refresh per 60s. Pages no longer accessible to the connected account will be removed from the list on refresh. 
+}
 
 begin
   # List Facebook pages
-  result = api_instance.get_facebook_pages(account_id)
+  result = api_instance.get_facebook_pages(account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_facebook_pages: #{e}"
@@ -585,12 +588,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetFacebookPages200Response>, Integer, Hash)> get_facebook_pages_with_http_info(account_id)
+> <Array(<GetFacebookPages200Response>, Integer, Hash)> get_facebook_pages_with_http_info(account_id, opts)
 
 ```ruby
 begin
   # List Facebook pages
-  data, status_code, headers = api_instance.get_facebook_pages_with_http_info(account_id)
+  data, status_code, headers = api_instance.get_facebook_pages_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetFacebookPages200Response>
@@ -604,6 +607,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **refresh** | **Boolean** | When true, bypasses the page cache and fetches fresh pages from Meta. Rate-limited server-side to 1 refresh per 60s. Pages no longer accessible to the connected account will be removed from the list on refresh.  | [optional] |
 
 ### Return type
 

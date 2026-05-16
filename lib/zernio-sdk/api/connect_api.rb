@@ -538,6 +538,7 @@ module Zernio
     # Returns all Facebook pages the connected account has access to, including the currently selected page.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :refresh When true, bypasses the page cache and fetches fresh pages from Meta. Rate-limited server-side to 1 refresh per 60s. Pages no longer accessible to the connected account will be removed from the list on refresh. 
     # @return [GetFacebookPages200Response]
     def get_facebook_pages(account_id, opts = {})
       data, _status_code, _headers = get_facebook_pages_with_http_info(account_id, opts)
@@ -548,6 +549,7 @@ module Zernio
     # Returns all Facebook pages the connected account has access to, including the currently selected page.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :refresh When true, bypasses the page cache and fetches fresh pages from Meta. Rate-limited server-side to 1 refresh per 60s. Pages no longer accessible to the connected account will be removed from the list on refresh. 
     # @return [Array<(GetFacebookPages200Response, Integer, Hash)>] GetFacebookPages200Response data, response status code and response headers
     def get_facebook_pages_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -562,6 +564,7 @@ module Zernio
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'refresh'] = opts[:'refresh'] if !opts[:'refresh'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
