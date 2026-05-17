@@ -257,7 +257,8 @@ opts = {
   account_id: 'account_id_example', # String | Social account ID
   profile_id: 'profile_id_example', # String | Profile ID
   from_date: Date.parse('2013-10-20'), # Date | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
-  to_date: Date.parse('2013-10-20') # Date | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+  to_date: Date.parse('2013-10-20'), # Date | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+  sort: 'newest' # String | Campaign-level sort order. `newest` (default) / `oldest` order by the campaign's newest-ad createdAt. `spend_desc` / `spend_asc` order by aggregated spend in the requested date range; campaigns with no spend land at the end.
 }
 
 begin
@@ -301,6 +302,7 @@ end
 | **profile_id** | **String** | Profile ID | [optional] |
 | **from_date** | **Date** | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
 | **to_date** | **Date** | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range. | [optional] |
+| **sort** | **String** | Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. | [optional][default to &#39;newest&#39;] |
 
 ### Return type
 

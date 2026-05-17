@@ -248,6 +248,7 @@ module Zernio
     # @option opts [String] :profile_id Profile ID
     # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+    # @option opts [String] :sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (default to 'newest')
     # @return [GetAdTree200Response]
     def get_ad_tree(opts = {})
       data, _status_code, _headers = get_ad_tree_with_http_info(opts)
@@ -267,6 +268,7 @@ module Zernio
     # @option opts [String] :profile_id Profile ID
     # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+    # @option opts [String] :sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (default to 'newest')
     # @return [Array<(GetAdTree200Response, Integer, Hash)>] GetAdTree200Response data, response status code and response headers
     def get_ad_tree_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -292,6 +294,10 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
+      allowable_values = ["newest", "oldest", "spend_desc", "spend_asc"]
+      if @api_client.config.client_side_validation && opts[:'sort'] && !allowable_values.include?(opts[:'sort'])
+        fail ArgumentError, "invalid value for \"sort\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/ads/tree'
 
@@ -307,6 +313,7 @@ module Zernio
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
