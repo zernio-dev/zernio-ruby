@@ -483,7 +483,7 @@ module Zernio
         fail ArgumentError, "Missing the required parameter 'platform' when calling ConnectApi.get_connect_url"
       end
       # verify enum value
-      allowable_values = ["facebook", "instagram", "linkedin", "twitter", "tiktok", "youtube", "threads", "reddit", "pinterest", "bluesky", "googlebusiness", "telegram", "snapchat", "discord"]
+      allowable_values = ["facebook", "instagram", "linkedin", "twitter", "tiktok", "youtube", "threads", "reddit", "pinterest", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp"]
       if @api_client.config.client_side_validation && !allowable_values.include?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
