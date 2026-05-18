@@ -371,6 +371,9 @@ docs/GetInboxPostComments200ResponseMeta.md
 docs/GetInboxPostComments200ResponseMetaAdComments.md
 docs/GetInboxPostComments200ResponsePagination.md
 docs/GetInstagramAccountInsights404Response.md
+docs/GetInstagramStoryInsights200Response.md
+docs/GetInstagramStoryInsights200ResponseData.md
+docs/GetInstagramStoryInsights200ResponseDataMetrics.md
 docs/GetLinkedInAggregateAnalytics200Response.md
 docs/GetLinkedInAggregateAnalytics400Response.md
 docs/GetLinkedInAggregateAnalytics402Response.md
@@ -481,6 +484,7 @@ docs/InstagramAccountInsightsResponseDateRange.md
 docs/InstagramAccountInsightsResponseMetricsValue.md
 docs/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.md
 docs/InstagramAccountInsightsResponseMetricsValueValuesInner.md
+docs/InstagramApi.md
 docs/InstagramDemographicsResponse.md
 docs/InstagramDemographicsResponseDemographicsValueInner.md
 docs/InstagramPlatformData.md
@@ -548,6 +552,8 @@ docs/ListInboxReviews200ResponseDataInner.md
 docs/ListInboxReviews200ResponseDataInnerReply.md
 docs/ListInboxReviews200ResponseDataInnerReviewer.md
 docs/ListInboxReviews200ResponseSummary.md
+docs/ListInstagramStories200Response.md
+docs/ListInstagramStories200ResponseDataInner.md
 docs/ListLinkedInOrganizations200Response.md
 docs/ListLinkedInOrganizations200ResponseOrganizationsInner.md
 docs/ListLogs200Response.md
@@ -981,6 +987,7 @@ lib/zernio-sdk/api/gmb_media_api.rb
 lib/zernio-sdk/api/gmb_place_actions_api.rb
 lib/zernio-sdk/api/gmb_reviews_api.rb
 lib/zernio-sdk/api/gmb_services_api.rb
+lib/zernio-sdk/api/instagram_api.rb
 lib/zernio-sdk/api/invites_api.rb
 lib/zernio-sdk/api/linked_in_mentions_api.rb
 lib/zernio-sdk/api/logs_api.rb
@@ -1349,6 +1356,9 @@ lib/zernio-sdk/models/get_inbox_post_comments200_response_meta.rb
 lib/zernio-sdk/models/get_inbox_post_comments200_response_meta_ad_comments.rb
 lib/zernio-sdk/models/get_inbox_post_comments200_response_pagination.rb
 lib/zernio-sdk/models/get_instagram_account_insights404_response.rb
+lib/zernio-sdk/models/get_instagram_story_insights200_response.rb
+lib/zernio-sdk/models/get_instagram_story_insights200_response_data.rb
+lib/zernio-sdk/models/get_instagram_story_insights200_response_data_metrics.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics200_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics400_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics402_response.rb
@@ -1524,6 +1534,8 @@ lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner_reply.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner_reviewer.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_summary.rb
+lib/zernio-sdk/models/list_instagram_stories200_response.rb
+lib/zernio-sdk/models/list_instagram_stories200_response_data_inner.rb
 lib/zernio-sdk/models/list_linked_in_organizations200_response.rb
 lib/zernio-sdk/models/list_linked_in_organizations200_response_organizations_inner.rb
 lib/zernio-sdk/models/list_logs200_response.rb
@@ -1937,6 +1949,7 @@ spec/api/gmb_media_api_spec.rb
 spec/api/gmb_place_actions_api_spec.rb
 spec/api/gmb_reviews_api_spec.rb
 spec/api/gmb_services_api_spec.rb
+spec/api/instagram_api_spec.rb
 spec/api/invites_api_spec.rb
 spec/api/linked_in_mentions_api_spec.rb
 spec/api/logs_api_spec.rb
@@ -2300,6 +2313,9 @@ spec/models/get_inbox_post_comments200_response_meta_spec.rb
 spec/models/get_inbox_post_comments200_response_pagination_spec.rb
 spec/models/get_inbox_post_comments200_response_spec.rb
 spec/models/get_instagram_account_insights404_response_spec.rb
+spec/models/get_instagram_story_insights200_response_data_metrics_spec.rb
+spec/models/get_instagram_story_insights200_response_data_spec.rb
+spec/models/get_instagram_story_insights200_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics200_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics400_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics402_response_spec.rb
@@ -2475,6 +2491,8 @@ spec/models/list_inbox_reviews200_response_data_inner_reviewer_spec.rb
 spec/models/list_inbox_reviews200_response_data_inner_spec.rb
 spec/models/list_inbox_reviews200_response_spec.rb
 spec/models/list_inbox_reviews200_response_summary_spec.rb
+spec/models/list_instagram_stories200_response_data_inner_spec.rb
+spec/models/list_instagram_stories200_response_spec.rb
 spec/models/list_linked_in_organizations200_response_organizations_inner_spec.rb
 spec/models/list_linked_in_organizations200_response_spec.rb
 spec/models/list_logs200_response_logs_inner_spec.rb
