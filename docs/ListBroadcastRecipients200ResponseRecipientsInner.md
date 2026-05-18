@@ -12,6 +12,7 @@
 | **status** | **String** |  | [optional] |
 | **message_id** | **String** |  | [optional] |
 | **error** | **String** |  | [optional] |
+| **error_code** | **Integer** | Meta WhatsApp error code (e.g. 131049 for antispam, 131021 for invalid phone, 131026 for re-engagement required). Only populated for status&#x3D;failed. | [optional] |
 | **sent_at** | **Time** |  | [optional] |
 | **delivered_at** | **Time** |  | [optional] |
 | **read_at** | **Time** |  | [optional] |
@@ -30,6 +31,7 @@ instance = Zernio::ListBroadcastRecipients200ResponseRecipientsInner.new(
   status: null,
   message_id: null,
   error: null,
+  error_code: null,
   sent_at: null,
   delivered_at: null,
   read_at: null
