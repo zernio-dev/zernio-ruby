@@ -10,7 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## get_usage_stats
 
-> <UsageStats> get_usage_stats
+> <UsageStats> get_usage_stats(opts)
 
 Get plan and usage stats
 
@@ -28,10 +28,13 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::UsageApi.new
+opts = {
+  reconcile: true # Boolean | For Stripe subscription users, `true` forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass `false`, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
+}
 
 begin
   # Get plan and usage stats
-  result = api_instance.get_usage_stats
+  result = api_instance.get_usage_stats(opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling UsageApi->get_usage_stats: #{e}"
@@ -42,12 +45,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UsageStats>, Integer, Hash)> get_usage_stats_with_http_info
+> <Array(<UsageStats>, Integer, Hash)> get_usage_stats_with_http_info(opts)
 
 ```ruby
 begin
   # Get plan and usage stats
-  data, status_code, headers = api_instance.get_usage_stats_with_http_info
+  data, status_code, headers = api_instance.get_usage_stats_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UsageStats>
@@ -58,7 +61,9 @@ end
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **reconcile** | **Boolean** | For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected.  | [optional] |
 
 ### Return type
 

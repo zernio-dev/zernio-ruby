@@ -22,6 +22,7 @@ module Zernio
     # Get plan and usage stats
     # Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
     # @return [UsageStats]
     def get_usage_stats(opts = {})
       data, _status_code, _headers = get_usage_stats_with_http_info(opts)
@@ -31,6 +32,7 @@ module Zernio
     # Get plan and usage stats
     # Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
     # @return [Array<(UsageStats, Integer, Hash)>] UsageStats data, response status code and response headers
     def get_usage_stats_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -41,6 +43,7 @@ module Zernio
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'reconcile'] = opts[:'reconcile'] if !opts[:'reconcile'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
