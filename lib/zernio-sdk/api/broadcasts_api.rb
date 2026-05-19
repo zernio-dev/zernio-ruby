@@ -643,6 +643,7 @@ module Zernio
     # Update a broadcast's name, message, template, or segment filters. Only draft broadcasts can be updated.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [UpdateBroadcastRequest] :update_broadcast_request 
     # @return [UpdateBroadcast200Response]
     def update_broadcast(broadcast_id, opts = {})
       data, _status_code, _headers = update_broadcast_with_http_info(broadcast_id, opts)
@@ -653,6 +654,7 @@ module Zernio
     # Update a broadcast&#39;s name, message, template, or segment filters. Only draft broadcasts can be updated.
     # @param broadcast_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [UpdateBroadcastRequest] :update_broadcast_request 
     # @return [Array<(UpdateBroadcast200Response, Integer, Hash)>] UpdateBroadcast200Response data, response status code and response headers
     def update_broadcast_with_http_info(broadcast_id, opts = {})
       if @api_client.config.debugging
@@ -672,12 +674,17 @@ module Zernio
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
 
       # form parameters
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body]
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_broadcast_request'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'UpdateBroadcast200Response'

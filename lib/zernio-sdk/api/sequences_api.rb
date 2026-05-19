@@ -632,9 +632,10 @@ module Zernio
     end
 
     # Update sequence
-    # Update a sequence's name, steps, or exit conditions. Active sequences can be updated without pausing.
+    # Update a sequence's name, steps, or exit conditions. Steps can only be modified while the sequence is draft or paused.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [UpdateSequenceRequest] :update_sequence_request 
     # @return [UpdateSequence200Response]
     def update_sequence(sequence_id, opts = {})
       data, _status_code, _headers = update_sequence_with_http_info(sequence_id, opts)
@@ -642,9 +643,10 @@ module Zernio
     end
 
     # Update sequence
-    # Update a sequence&#39;s name, steps, or exit conditions. Active sequences can be updated without pausing.
+    # Update a sequence&#39;s name, steps, or exit conditions. Steps can only be modified while the sequence is draft or paused.
     # @param sequence_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [UpdateSequenceRequest] :update_sequence_request 
     # @return [Array<(UpdateSequence200Response, Integer, Hash)>] UpdateSequence200Response data, response status code and response headers
     def update_sequence_with_http_info(sequence_id, opts = {})
       if @api_client.config.debugging
@@ -664,12 +666,17 @@ module Zernio
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
 
       # form parameters
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body]
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_sequence_request'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'UpdateSequence200Response'

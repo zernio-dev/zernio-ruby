@@ -150,9 +150,10 @@ describe 'SequencesApi' do
 
   # unit tests for update_sequence
   # Update sequence
-  # Update a sequence&#39;s name, steps, or exit conditions. Active sequences can be updated without pausing.
+  # Update a sequence&#39;s name, steps, or exit conditions. Steps can only be modified while the sequence is draft or paused.
   # @param sequence_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [UpdateSequenceRequest] :update_sequence_request 
   # @return [UpdateSequence200Response]
   describe 'update_sequence test' do
     it 'should work' do

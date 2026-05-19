@@ -660,7 +660,7 @@ end
 
 ## update_broadcast
 
-> <UpdateBroadcast200Response> update_broadcast(broadcast_id)
+> <UpdateBroadcast200Response> update_broadcast(broadcast_id, opts)
 
 Update broadcast
 
@@ -679,10 +679,13 @@ end
 
 api_instance = Zernio::BroadcastsApi.new
 broadcast_id = 'broadcast_id_example' # String | 
+opts = {
+  update_broadcast_request: Zernio::UpdateBroadcastRequest.new # UpdateBroadcastRequest | 
+}
 
 begin
   # Update broadcast
-  result = api_instance.update_broadcast(broadcast_id)
+  result = api_instance.update_broadcast(broadcast_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling BroadcastsApi->update_broadcast: #{e}"
@@ -693,12 +696,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateBroadcast200Response>, Integer, Hash)> update_broadcast_with_http_info(broadcast_id)
+> <Array(<UpdateBroadcast200Response>, Integer, Hash)> update_broadcast_with_http_info(broadcast_id, opts)
 
 ```ruby
 begin
   # Update broadcast
-  data, status_code, headers = api_instance.update_broadcast_with_http_info(broadcast_id)
+  data, status_code, headers = api_instance.update_broadcast_with_http_info(broadcast_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateBroadcast200Response>
@@ -712,6 +715,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **broadcast_id** | **String** |  |  |
+| **update_broadcast_request** | [**UpdateBroadcastRequest**](UpdateBroadcastRequest.md) |  | [optional] |
 
 ### Return type
 
@@ -723,6 +727,6 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 

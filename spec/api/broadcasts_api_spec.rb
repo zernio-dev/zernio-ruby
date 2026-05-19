@@ -154,6 +154,7 @@ describe 'BroadcastsApi' do
   # Update a broadcast&#39;s name, message, template, or segment filters. Only draft broadcasts can be updated.
   # @param broadcast_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [UpdateBroadcastRequest] :update_broadcast_request 
   # @return [UpdateBroadcast200Response]
   describe 'update_broadcast test' do
     it 'should work' do

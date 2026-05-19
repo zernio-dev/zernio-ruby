@@ -657,11 +657,11 @@ nil (empty response body)
 
 ## update_sequence
 
-> <UpdateSequence200Response> update_sequence(sequence_id)
+> <UpdateSequence200Response> update_sequence(sequence_id, opts)
 
 Update sequence
 
-Update a sequence's name, steps, or exit conditions. Active sequences can be updated without pausing.
+Update a sequence's name, steps, or exit conditions. Steps can only be modified while the sequence is draft or paused.
 
 ### Examples
 
@@ -676,10 +676,13 @@ end
 
 api_instance = Zernio::SequencesApi.new
 sequence_id = 'sequence_id_example' # String | 
+opts = {
+  update_sequence_request: Zernio::UpdateSequenceRequest.new # UpdateSequenceRequest | 
+}
 
 begin
   # Update sequence
-  result = api_instance.update_sequence(sequence_id)
+  result = api_instance.update_sequence(sequence_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling SequencesApi->update_sequence: #{e}"
@@ -690,12 +693,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateSequence200Response>, Integer, Hash)> update_sequence_with_http_info(sequence_id)
+> <Array(<UpdateSequence200Response>, Integer, Hash)> update_sequence_with_http_info(sequence_id, opts)
 
 ```ruby
 begin
   # Update sequence
-  data, status_code, headers = api_instance.update_sequence_with_http_info(sequence_id)
+  data, status_code, headers = api_instance.update_sequence_with_http_info(sequence_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateSequence200Response>
@@ -709,6 +712,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **sequence_id** | **String** |  |  |
+| **update_sequence_request** | [**UpdateSequenceRequest**](UpdateSequenceRequest.md) |  | [optional] |
 
 ### Return type
 
@@ -720,6 +724,6 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
