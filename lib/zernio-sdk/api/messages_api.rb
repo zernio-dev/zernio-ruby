@@ -394,7 +394,7 @@ module Zernio
     end
 
     # List messages
-    # Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass `pagination.nextCursor` from a prior response back as the `cursor` query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to `asc` (oldest first, chat style). For the \"show me the latest messages\" pattern, pass `?sortOrder=desc&limit=N`. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field `sortOrderApplied` tells you what was actually applied.  Reddit threads are paginated client-side because Reddit's API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit's inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X's encrypted \"X Chat\" messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details. 
+    # Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass `pagination.nextCursor` from a prior response back as the `cursor` query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to `asc` (oldest first, chat style). For the \"show me the latest messages\" pattern, pass `?sortOrder=desc&limit=N`. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field `sortOrderApplied` tells you what was actually applied.  Reddit threads are paginated client-side because Reddit's API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit's inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X's encrypted \"X Chat\" messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details.  This endpoint is read-only and does NOT mark messages as read or send read receipts. To mark a conversation read (and send WhatsApp blue ticks on eligible accounts), call `POST /v1/inbox/conversations/{conversationId}/read`. 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
@@ -408,7 +408,7 @@ module Zernio
     end
 
     # List messages
-    # Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass &#x60;pagination.nextCursor&#x60; from a prior response back as the &#x60;cursor&#x60; query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to &#x60;asc&#x60; (oldest first, chat style). For the \&quot;show me the latest messages\&quot; pattern, pass &#x60;?sortOrder&#x3D;desc&amp;limit&#x3D;N&#x60;. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field &#x60;sortOrderApplied&#x60; tells you what was actually applied.  Reddit threads are paginated client-side because Reddit&#39;s API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit&#39;s inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X&#39;s encrypted \&quot;X Chat\&quot; messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details. 
+    # Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass &#x60;pagination.nextCursor&#x60; from a prior response back as the &#x60;cursor&#x60; query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to &#x60;asc&#x60; (oldest first, chat style). For the \&quot;show me the latest messages\&quot; pattern, pass &#x60;?sortOrder&#x3D;desc&amp;limit&#x3D;N&#x60;. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field &#x60;sortOrderApplied&#x60; tells you what was actually applied.  Reddit threads are paginated client-side because Reddit&#39;s API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit&#39;s inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X&#39;s encrypted \&quot;X Chat\&quot; messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details.  This endpoint is read-only and does NOT mark messages as read or send read receipts. To mark a conversation read (and send WhatsApp blue ticks on eligible accounts), call &#x60;POST /v1/inbox/conversations/{conversationId}/read&#x60;. 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
@@ -578,6 +578,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: MessagesApi#list_inbox_conversations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Mark a conversation as read
+    # Marks all unread incoming messages in the conversation as read.  For WhatsApp, this also sends read receipts (blue ticks) to the contact, EXCEPT on coexistence accounts (where the WhatsApp Business app on the customer's phone owns read state and we never override it).  This is the explicit, human-driven counterpart to `GET .../messages`, which is side-effect-free and does NOT mark anything read. Call this when a user actually views the conversation. 
+    # @param conversation_id [String] The conversation ID
+    # @param send_typing_indicator_request [SendTypingIndicatorRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [MarkConversationRead200Response]
+    def mark_conversation_read(conversation_id, send_typing_indicator_request, opts = {})
+      data, _status_code, _headers = mark_conversation_read_with_http_info(conversation_id, send_typing_indicator_request, opts)
+      data
+    end
+
+    # Mark a conversation as read
+    # Marks all unread incoming messages in the conversation as read.  For WhatsApp, this also sends read receipts (blue ticks) to the contact, EXCEPT on coexistence accounts (where the WhatsApp Business app on the customer&#39;s phone owns read state and we never override it).  This is the explicit, human-driven counterpart to &#x60;GET .../messages&#x60;, which is side-effect-free and does NOT mark anything read. Call this when a user actually views the conversation. 
+    # @param conversation_id [String] The conversation ID
+    # @param send_typing_indicator_request [SendTypingIndicatorRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(MarkConversationRead200Response, Integer, Hash)>] MarkConversationRead200Response data, response status code and response headers
+    def mark_conversation_read_with_http_info(conversation_id, send_typing_indicator_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.mark_conversation_read ...'
+      end
+      # verify the required parameter 'conversation_id' is set
+      if @api_client.config.client_side_validation && conversation_id.nil?
+        fail ArgumentError, "Missing the required parameter 'conversation_id' when calling MessagesApi.mark_conversation_read"
+      end
+      # verify the required parameter 'send_typing_indicator_request' is set
+      if @api_client.config.client_side_validation && send_typing_indicator_request.nil?
+        fail ArgumentError, "Missing the required parameter 'send_typing_indicator_request' when calling MessagesApi.mark_conversation_read"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/conversations/{conversationId}/read'.sub('{' + 'conversationId' + '}', CGI.escape(conversation_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(send_typing_indicator_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'MarkConversationRead200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.mark_conversation_read",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#mark_conversation_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -101,7 +101,7 @@ describe 'MessagesApi' do
 
   # unit tests for get_inbox_conversation_messages
   # List messages
-  # Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass &#x60;pagination.nextCursor&#x60; from a prior response back as the &#x60;cursor&#x60; query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to &#x60;asc&#x60; (oldest first, chat style). For the \&quot;show me the latest messages\&quot; pattern, pass &#x60;?sortOrder&#x3D;desc&amp;limit&#x3D;N&#x60;. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field &#x60;sortOrderApplied&#x60; tells you what was actually applied.  Reddit threads are paginated client-side because Reddit&#39;s API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit&#39;s inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X&#39;s encrypted \&quot;X Chat\&quot; messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details. 
+  # Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass &#x60;pagination.nextCursor&#x60; from a prior response back as the &#x60;cursor&#x60; query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to &#x60;asc&#x60; (oldest first, chat style). For the \&quot;show me the latest messages\&quot; pattern, pass &#x60;?sortOrder&#x3D;desc&amp;limit&#x3D;N&#x60;. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field &#x60;sortOrderApplied&#x60; tells you what was actually applied.  Reddit threads are paginated client-side because Reddit&#39;s API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit&#39;s inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X&#39;s encrypted \&quot;X Chat\&quot; messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details.  This endpoint is read-only and does NOT mark messages as read or send read receipts. To mark a conversation read (and send WhatsApp blue ticks on eligible accounts), call &#x60;POST /v1/inbox/conversations/{conversationId}/read&#x60;. 
   # @param conversation_id The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
   # @param account_id Social account ID
   # @param [Hash] opts the optional parameters
@@ -128,6 +128,19 @@ describe 'MessagesApi' do
   # @option opts [String] :account_id Filter by specific social account ID
   # @return [ListInboxConversations200Response]
   describe 'list_inbox_conversations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for mark_conversation_read
+  # Mark a conversation as read
+  # Marks all unread incoming messages in the conversation as read.  For WhatsApp, this also sends read receipts (blue ticks) to the contact, EXCEPT on coexistence accounts (where the WhatsApp Business app on the customer&#39;s phone owns read state and we never override it).  This is the explicit, human-driven counterpart to &#x60;GET .../messages&#x60;, which is side-effect-free and does NOT mark anything read. Call this when a user actually views the conversation. 
+  # @param conversation_id The conversation ID
+  # @param send_typing_indicator_request 
+  # @param [Hash] opts the optional parameters
+  # @return [MarkConversationRead200Response]
+  describe 'mark_conversation_read test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

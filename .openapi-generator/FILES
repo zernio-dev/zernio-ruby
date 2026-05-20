@@ -586,6 +586,7 @@ docs/ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.md
 docs/ListWhatsAppPhoneNumbers200Response.md
 docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md
 docs/LogsApi.md
+docs/MarkConversationRead200Response.md
 docs/MediaApi.md
 docs/MediaItem.md
 docs/MediaUploadResponse.md
@@ -1575,6 +1576,7 @@ lib/zernio-sdk/models/list_whats_app_group_join_requests200_response.rb
 lib/zernio-sdk/models/list_whats_app_group_join_requests200_response_join_requests_inner.rb
 lib/zernio-sdk/models/list_whats_app_phone_numbers200_response.rb
 lib/zernio-sdk/models/list_whats_app_phone_numbers200_response_phone_numbers_inner.rb
+lib/zernio-sdk/models/mark_conversation_read200_response.rb
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/money.rb
@@ -2540,6 +2542,7 @@ spec/models/list_whats_app_group_join_requests200_response_join_requests_inner_s
 spec/models/list_whats_app_group_join_requests200_response_spec.rb
 spec/models/list_whats_app_phone_numbers200_response_phone_numbers_inner_spec.rb
 spec/models/list_whats_app_phone_numbers200_response_spec.rb
+spec/models/mark_conversation_read200_response_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
 spec/models/money_spec.rb

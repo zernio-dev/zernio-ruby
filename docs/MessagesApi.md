@@ -11,6 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_inbox_conversation**](MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation |
 | [**get_inbox_conversation_messages**](MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages |
 | [**list_inbox_conversations**](MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations |
+| [**mark_conversation_read**](MessagesApi.md#mark_conversation_read) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read |
 | [**remove_message_reaction**](MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction |
 | [**send_inbox_message**](MessagesApi.md#send_inbox_message) | **POST** /v1/inbox/conversations/{conversationId}/messages | Send message |
 | [**send_typing_indicator**](MessagesApi.md#send_typing_indicator) | **POST** /v1/inbox/conversations/{conversationId}/typing | Send typing indicator |
@@ -383,7 +384,7 @@ end
 
 List messages
 
-Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass `pagination.nextCursor` from a prior response back as the `cursor` query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to `asc` (oldest first, chat style). For the \"show me the latest messages\" pattern, pass `?sortOrder=desc&limit=N`. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field `sortOrderApplied` tells you what was actually applied.  Reddit threads are paginated client-side because Reddit's API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit's inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X's encrypted \"X Chat\" messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details. 
+Fetch messages for a specific conversation, with cursor-based pagination and ordering control.  Pagination: pass `pagination.nextCursor` from a prior response back as the `cursor` query param to fetch the next page. The cursor is opaque; do not parse or construct it client-side.  Sort order: defaults to `asc` (oldest first, chat style). For the \"show me the latest messages\" pattern, pass `?sortOrder=desc&limit=N`. For Twitter, Facebook and Bluesky, the upstream APIs only return newest-first and have no order parameter — sort order is best-effort and only reverses items within a single page (pages still walk newest→oldest). The response field `sortOrderApplied` tells you what was actually applied.  Reddit threads are paginated client-side because Reddit's API has no per-thread cursor. Very long threads may be upstream-truncated by Reddit's inbox/sent windows (~100 most-recent items each); this is a Reddit platform limitation.  Twitter/X limitation: X's encrypted \"X Chat\" messages are not accessible via the API. Conversations where the other participant uses encrypted X Chat may only show your outgoing messages. See the list conversations endpoint for more details.  This endpoint is read-only and does NOT mark messages as read or send read receipts. To mark a conversation read (and send WhatsApp blue ticks on eligible accounts), call `POST /v1/inbox/conversations/{conversationId}/read`. 
 
 ### Examples
 
@@ -536,6 +537,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## mark_conversation_read
+
+> <MarkConversationRead200Response> mark_conversation_read(conversation_id, send_typing_indicator_request)
+
+Mark a conversation as read
+
+Marks all unread incoming messages in the conversation as read.  For WhatsApp, this also sends read receipts (blue ticks) to the contact, EXCEPT on coexistence accounts (where the WhatsApp Business app on the customer's phone owns read state and we never override it).  This is the explicit, human-driven counterpart to `GET .../messages`, which is side-effect-free and does NOT mark anything read. Call this when a user actually views the conversation. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | The conversation ID
+send_typing_indicator_request = Zernio::SendTypingIndicatorRequest.new({account_id: 'account_id_example'}) # SendTypingIndicatorRequest | 
+
+begin
+  # Mark a conversation as read
+  result = api_instance.mark_conversation_read(conversation_id, send_typing_indicator_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->mark_conversation_read: #{e}"
+end
+```
+
+#### Using the mark_conversation_read_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<MarkConversationRead200Response>, Integer, Hash)> mark_conversation_read_with_http_info(conversation_id, send_typing_indicator_request)
+
+```ruby
+begin
+  # Mark a conversation as read
+  data, status_code, headers = api_instance.mark_conversation_read_with_http_info(conversation_id, send_typing_indicator_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <MarkConversationRead200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->mark_conversation_read_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | The conversation ID |  |
+| **send_typing_indicator_request** | [**SendTypingIndicatorRequest**](SendTypingIndicatorRequest.md) |  |  |
+
+### Return type
+
+[**MarkConversationRead200Response**](MarkConversationRead200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

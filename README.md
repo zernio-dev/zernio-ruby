@@ -258,6 +258,7 @@ Class | Method | HTTP request | Description
 *Zernio::MessagesApi* | [**get_inbox_conversation**](docs/MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation
 *Zernio::MessagesApi* | [**get_inbox_conversation_messages**](docs/MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages
 *Zernio::MessagesApi* | [**list_inbox_conversations**](docs/MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations
+*Zernio::MessagesApi* | [**mark_conversation_read**](docs/MessagesApi.md#mark_conversation_read) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read
 *Zernio::MessagesApi* | [**remove_message_reaction**](docs/MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction
 *Zernio::MessagesApi* | [**send_inbox_message**](docs/MessagesApi.md#send_inbox_message) | **POST** /v1/inbox/conversations/{conversationId}/messages | Send message
 *Zernio::MessagesApi* | [**send_typing_indicator**](docs/MessagesApi.md#send_typing_indicator) | **POST** /v1/inbox/conversations/{conversationId}/typing | Send typing indicator
@@ -920,6 +921,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner](docs/ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.md)
  - [Zernio::ListWhatsAppPhoneNumbers200Response](docs/ListWhatsAppPhoneNumbers200Response.md)
  - [Zernio::ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner](docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md)
+ - [Zernio::MarkConversationRead200Response](docs/MarkConversationRead200Response.md)
  - [Zernio::MediaItem](docs/MediaItem.md)
  - [Zernio::MediaUploadResponse](docs/MediaUploadResponse.md)
  - [Zernio::Money](docs/Money.md)
