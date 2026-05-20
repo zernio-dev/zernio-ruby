@@ -18,7 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## bulk_upload_posts
 
-> <BulkUploadPosts200Response> bulk_upload_posts(opts)
+> <BulkUploadResult> bulk_upload_posts(opts)
 
 Bulk upload from CSV
 
@@ -54,7 +54,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BulkUploadPosts200Response>, Integer, Hash)> bulk_upload_posts_with_http_info(opts)
+> <Array(<BulkUploadResult>, Integer, Hash)> bulk_upload_posts_with_http_info(opts)
 
 ```ruby
 begin
@@ -62,7 +62,7 @@ begin
   data, status_code, headers = api_instance.bulk_upload_posts_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <BulkUploadPosts200Response>
+  p data # => <BulkUploadResult>
 rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->bulk_upload_posts_with_http_info: #{e}"
 end
@@ -77,7 +77,7 @@ end
 
 ### Return type
 
-[**BulkUploadPosts200Response**](BulkUploadPosts200Response.md)
+[**BulkUploadResult**](BulkUploadResult.md)
 
 ### Authorization
 

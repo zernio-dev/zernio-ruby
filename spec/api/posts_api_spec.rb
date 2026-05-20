@@ -38,7 +38,7 @@ describe 'PostsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :dry_run 
   # @option opts [File] :file 
-  # @return [BulkUploadPosts200Response]
+  # @return [BulkUploadResult]
   describe 'bulk_upload_posts test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

@@ -24,7 +24,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry_run  (default to false)
     # @option opts [File] :file 
-    # @return [BulkUploadPosts200Response]
+    # @return [BulkUploadResult]
     def bulk_upload_posts(opts = {})
       data, _status_code, _headers = bulk_upload_posts_with_http_info(opts)
       data
@@ -35,7 +35,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :dry_run  (default to false)
     # @option opts [File] :file 
-    # @return [Array<(BulkUploadPosts200Response, Integer, Hash)>] BulkUploadPosts200Response data, response status code and response headers
+    # @return [Array<(BulkUploadResult, Integer, Hash)>] BulkUploadResult data, response status code and response headers
     def bulk_upload_posts_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PostsApi.bulk_upload_posts ...'
@@ -65,7 +65,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'BulkUploadPosts200Response'
+      return_type = opts[:debug_return_type] || 'BulkUploadResult'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

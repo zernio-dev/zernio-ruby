@@ -14,28 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class BulkUploadPosts200Response < ApiModelBase
-    attr_accessor :success
+  class BulkUploadResultRateLimitedAccountsInner < ApiModelBase
+    attr_accessor :account_id
 
-    attr_accessor :total_rows
+    attr_accessor :platform
 
-    attr_accessor :created
+    attr_accessor :username
 
-    attr_accessor :failed
-
-    attr_accessor :errors
-
-    attr_accessor :posts
+    attr_accessor :rate_limited_until
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'total_rows' => :'totalRows',
-        :'created' => :'created',
-        :'failed' => :'failed',
-        :'errors' => :'errors',
-        :'posts' => :'posts'
+        :'account_id' => :'accountId',
+        :'platform' => :'platform',
+        :'username' => :'username',
+        :'rate_limited_until' => :'rateLimitedUntil'
       }
     end
 
@@ -52,12 +46,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'total_rows' => :'Integer',
-        :'created' => :'Integer',
-        :'failed' => :'Integer',
-        :'errors' => :'Array<BulkUploadPosts200ResponseErrorsInner>',
-        :'posts' => :'Array<Post>'
+        :'account_id' => :'String',
+        :'platform' => :'String',
+        :'username' => :'String',
+        :'rate_limited_until' => :'Time'
       }
     end
 
@@ -71,44 +63,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::BulkUploadPosts200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::BulkUploadResultRateLimitedAccountsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::BulkUploadPosts200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::BulkUploadResultRateLimitedAccountsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'total_rows')
-        self.total_rows = attributes[:'total_rows']
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
       end
 
-      if attributes.key?(:'created')
-        self.created = attributes[:'created']
+      if attributes.key?(:'username')
+        self.username = attributes[:'username']
       end
 
-      if attributes.key?(:'failed')
-        self.failed = attributes[:'failed']
-      end
-
-      if attributes.key?(:'errors')
-        if (value = attributes[:'errors']).is_a?(Array)
-          self.errors = value
-        end
-      end
-
-      if attributes.key?(:'posts')
-        if (value = attributes[:'posts']).is_a?(Array)
-          self.posts = value
-        end
+      if attributes.key?(:'rate_limited_until')
+        self.rate_limited_until = attributes[:'rate_limited_until']
       end
     end
 
@@ -132,12 +112,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          total_rows == o.total_rows &&
-          created == o.created &&
-          failed == o.failed &&
-          errors == o.errors &&
-          posts == o.posts
+          account_id == o.account_id &&
+          platform == o.platform &&
+          username == o.username &&
+          rate_limited_until == o.rate_limited_until
     end
 
     # @see the `==` method
@@ -149,7 +127,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, total_rows, created, failed, errors, posts].hash
+      [account_id, platform, username, rate_limited_until].hash
     end
 
     # Builds the object from hash
