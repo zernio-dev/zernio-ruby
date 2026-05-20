@@ -83,7 +83,7 @@ describe 'AdAudiencesApi' do
 
   # unit tests for list_ad_audiences
   # List custom audiences
-  # Returns custom audiences for the given ad account. Supports Meta, Google, TikTok, and Pinterest.
+  # Returns custom audiences for the given ad account. Supports Meta, Google, TikTok, Pinterest, LinkedIn, and X (Twitter).
   # @param account_id Social account ID
   # @param ad_account_id Platform ad account ID
   # @param [Hash] opts the optional parameters

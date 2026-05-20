@@ -288,7 +288,7 @@ module Zernio
     end
 
     # List custom audiences
-    # Returns custom audiences for the given ad account. Supports Meta, Google, TikTok, and Pinterest.
+    # Returns custom audiences for the given ad account. Supports Meta, Google, TikTok, Pinterest, LinkedIn, and X (Twitter).
     # @param account_id [String] Social account ID
     # @param ad_account_id [String] Platform ad account ID
     # @param [Hash] opts the optional parameters
@@ -300,7 +300,7 @@ module Zernio
     end
 
     # List custom audiences
-    # Returns custom audiences for the given ad account. Supports Meta, Google, TikTok, and Pinterest.
+    # Returns custom audiences for the given ad account. Supports Meta, Google, TikTok, Pinterest, LinkedIn, and X (Twitter).
     # @param account_id [String] Social account ID
     # @param ad_account_id [String] Platform ad account ID
     # @param [Hash] opts the optional parameters
@@ -318,7 +318,7 @@ module Zernio
       if @api_client.config.client_side_validation && ad_account_id.nil?
         fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdAudiencesApi.list_ad_audiences"
       end
-      allowable_values = ["facebook", "instagram", "googleads", "tiktok", "pinterest"]
+      allowable_values = ["facebook", "instagram", "googleads", "tiktok", "tiktokads", "pinterest", "linkedin", "linkedinads", "twitter", "xads"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
