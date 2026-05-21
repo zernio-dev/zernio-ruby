@@ -14,24 +14,39 @@ require 'date'
 require 'time'
 
 module Zernio
-  # WhatsApp template (required when platform is whatsapp)
-  class CreateBroadcastRequestTemplate < ApiModelBase
-    attr_accessor :name
+  class CreateBroadcastRequestTemplateVariableMappingValue < ApiModelBase
+    attr_accessor :field
 
-    attr_accessor :language
+    # Static value used when field is \"custom\"
+    attr_accessor :custom_value
 
-    attr_accessor :components
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # Maps template variable positions (\"1\", \"2\") to contact fields or static values. Resolved per recipient at send time.
-    attr_accessor :variable_mapping
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'language' => :'language',
-        :'components' => :'components',
-        :'variable_mapping' => :'variableMapping'
+        :'field' => :'field',
+        :'custom_value' => :'customValue'
       }
     end
 
@@ -48,10 +63,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'language' => :'String',
-        :'components' => :'Array<Object>',
-        :'variable_mapping' => :'Hash<String, CreateBroadcastRequestTemplateVariableMappingValue>'
+        :'field' => :'String',
+        :'custom_value' => :'String'
       }
     end
 
@@ -65,36 +78,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateBroadcastRequestTemplate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateBroadcastRequestTemplateVariableMappingValue` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateBroadcastRequestTemplate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateBroadcastRequestTemplateVariableMappingValue`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'field')
+        self.field = attributes[:'field']
       end
 
-      if attributes.key?(:'language')
-        self.language = attributes[:'language']
-      end
-
-      if attributes.key?(:'components')
-        if (value = attributes[:'components']).is_a?(Array)
-          self.components = value
-        end
-      end
-
-      if attributes.key?(:'variable_mapping')
-        if (value = attributes[:'variable_mapping']).is_a?(Hash)
-          self.variable_mapping = value
-        end
+      if attributes.key?(:'custom_value')
+        self.custom_value = attributes[:'custom_value']
       end
     end
 
@@ -110,7 +111,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      field_validator = EnumAttributeValidator.new('String', ["name", "phone", "email", "company", "custom"])
+      return false unless field_validator.valid?(@field)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] field Object to be assigned
+    def field=(field)
+      validator = EnumAttributeValidator.new('String', ["name", "phone", "email", "company", "custom"])
+      unless validator.valid?(field)
+        fail ArgumentError, "invalid value for \"field\", must be one of #{validator.allowable_values}."
+      end
+      @field = field
     end
 
     # Checks equality by comparing each attribute.
@@ -118,10 +131,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          language == o.language &&
-          components == o.components &&
-          variable_mapping == o.variable_mapping
+          field == o.field &&
+          custom_value == o.custom_value
     end
 
     # @see the `==` method
@@ -133,7 +144,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, language, components, variable_mapping].hash
+      [field, custom_value].hash
     end
 
     # Builds the object from hash

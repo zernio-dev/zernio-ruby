@@ -478,6 +478,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateBroadcastRequestMessageAttachmentsInner](docs/CreateBroadcastRequestMessageAttachmentsInner.md)
  - [Zernio::CreateBroadcastRequestSegmentFilters](docs/CreateBroadcastRequestSegmentFilters.md)
  - [Zernio::CreateBroadcastRequestTemplate](docs/CreateBroadcastRequestTemplate.md)
+ - [Zernio::CreateBroadcastRequestTemplateVariableMappingValue](docs/CreateBroadcastRequestTemplateVariableMappingValue.md)
  - [Zernio::CreateCommentAutomation200Response](docs/CreateCommentAutomation200Response.md)
  - [Zernio::CreateCommentAutomation200ResponseAutomation](docs/CreateCommentAutomation200ResponseAutomation.md)
  - [Zernio::CreateCommentAutomation200ResponseAutomationStats](docs/CreateCommentAutomation200ResponseAutomationStats.md)
