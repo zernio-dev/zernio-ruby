@@ -14,23 +14,27 @@ require 'date'
 require 'time'
 
 module Zernio
-  class WebhookPayloadMessageAccount < ApiModelBase
-    # Social account ID
+  # The participant who added or removed the reaction.
+  class WebhookPayloadReactionReactionSender < ApiModelBase
     attr_accessor :id
 
-    attr_accessor :platform
+    attr_accessor :name
 
     attr_accessor :username
 
-    attr_accessor :display_name
+    attr_accessor :picture
+
+    # WhatsApp only. Sender's phone number in E.164 format (with leading `+`), when available.
+    attr_accessor :phone_number
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'platform' => :'platform',
+        :'name' => :'name',
         :'username' => :'username',
-        :'display_name' => :'displayName'
+        :'picture' => :'picture',
+        :'phone_number' => :'phoneNumber'
       }
     end
 
@@ -48,9 +52,10 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
-        :'platform' => :'String',
+        :'name' => :'String',
         :'username' => :'String',
-        :'display_name' => :'String'
+        :'picture' => :'String',
+        :'phone_number' => :'String'
       }
     end
 
@@ -64,14 +69,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessageAccount` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadReactionReactionSender` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessageAccount`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadReactionReactionSender`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -82,20 +87,20 @@ module Zernio
         self.id = nil
       end
 
-      if attributes.key?(:'platform')
-        self.platform = attributes[:'platform']
-      else
-        self.platform = nil
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.key?(:'username')
         self.username = attributes[:'username']
-      else
-        self.username = nil
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'picture')
+        self.picture = attributes[:'picture']
+      end
+
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
       end
     end
 
@@ -108,14 +113,6 @@ module Zernio
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @platform.nil?
-        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
-      end
-
-      if @username.nil?
-        invalid_properties.push('invalid value for "username", username cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -124,8 +121,6 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @id.nil?
-      return false if @platform.nil?
-      return false if @username.nil?
       true
     end
 
@@ -139,35 +134,16 @@ module Zernio
       @id = id
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] platform Value to be assigned
-    def platform=(platform)
-      if platform.nil?
-        fail ArgumentError, 'platform cannot be nil'
-      end
-
-      @platform = platform
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] username Value to be assigned
-    def username=(username)
-      if username.nil?
-        fail ArgumentError, 'username cannot be nil'
-      end
-
-      @username = username
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          platform == o.platform &&
+          name == o.name &&
           username == o.username &&
-          display_name == o.display_name
+          picture == o.picture &&
+          phone_number == o.phone_number
     end
 
     # @see the `==` method
@@ -179,7 +155,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, username, display_name].hash
+      [id, name, username, picture, phone_number].hash
     end
 
     # Builds the object from hash

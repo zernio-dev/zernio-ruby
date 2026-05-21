@@ -14,20 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Webhook payload for message received events
-  class WebhookPayloadMessage < ApiModelBase
+  # Webhook payload for reaction received events (WhatsApp, Telegram)
+  class WebhookPayloadReaction < ApiModelBase
     # Stable webhook event ID
     attr_accessor :id
 
     attr_accessor :event
 
-    attr_accessor :message
+    attr_accessor :reaction
 
     attr_accessor :conversation
 
     attr_accessor :account
-
-    attr_accessor :metadata
 
     attr_accessor :timestamp
 
@@ -58,10 +56,9 @@ module Zernio
       {
         :'id' => :'id',
         :'event' => :'event',
-        :'message' => :'message',
+        :'reaction' => :'reaction',
         :'conversation' => :'conversation',
         :'account' => :'account',
-        :'metadata' => :'metadata',
         :'timestamp' => :'timestamp'
       }
     end
@@ -81,10 +78,9 @@ module Zernio
       {
         :'id' => :'String',
         :'event' => :'String',
-        :'message' => :'WebhookPayloadMessageMessage',
+        :'reaction' => :'WebhookPayloadReactionReaction',
         :'conversation' => :'WebhookPayloadReactionConversation',
         :'account' => :'WebhookPayloadReactionAccount',
-        :'metadata' => :'WebhookPayloadMessageMetadata',
         :'timestamp' => :'Time'
       }
     end
@@ -99,14 +95,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessage` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadReaction` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessage`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadReaction`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -123,10 +119,10 @@ module Zernio
         self.event = nil
       end
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.key?(:'reaction')
+        self.reaction = attributes[:'reaction']
       else
-        self.message = nil
+        self.reaction = nil
       end
 
       if attributes.key?(:'conversation')
@@ -139,10 +135,6 @@ module Zernio
         self.account = attributes[:'account']
       else
         self.account = nil
-      end
-
-      if attributes.key?(:'metadata')
-        self.metadata = attributes[:'metadata']
       end
 
       if attributes.key?(:'timestamp')
@@ -165,8 +157,8 @@ module Zernio
         invalid_properties.push('invalid value for "event", event cannot be nil.')
       end
 
-      if @message.nil?
-        invalid_properties.push('invalid value for "message", message cannot be nil.')
+      if @reaction.nil?
+        invalid_properties.push('invalid value for "reaction", reaction cannot be nil.')
       end
 
       if @conversation.nil?
@@ -190,9 +182,9 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @id.nil?
       return false if @event.nil?
-      event_validator = EnumAttributeValidator.new('String', ["message.received"])
+      event_validator = EnumAttributeValidator.new('String', ["reaction.received"])
       return false unless event_validator.valid?(@event)
-      return false if @message.nil?
+      return false if @reaction.nil?
       return false if @conversation.nil?
       return false if @account.nil?
       return false if @timestamp.nil?
@@ -212,7 +204,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] event Object to be assigned
     def event=(event)
-      validator = EnumAttributeValidator.new('String', ["message.received"])
+      validator = EnumAttributeValidator.new('String', ["reaction.received"])
       unless validator.valid?(event)
         fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
       end
@@ -220,13 +212,13 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] message Value to be assigned
-    def message=(message)
-      if message.nil?
-        fail ArgumentError, 'message cannot be nil'
+    # @param [Object] reaction Value to be assigned
+    def reaction=(reaction)
+      if reaction.nil?
+        fail ArgumentError, 'reaction cannot be nil'
       end
 
-      @message = message
+      @reaction = reaction
     end
 
     # Custom attribute writer method with validation
@@ -266,10 +258,9 @@ module Zernio
       self.class == o.class &&
           id == o.id &&
           event == o.event &&
-          message == o.message &&
+          reaction == o.reaction &&
           conversation == o.conversation &&
           account == o.account &&
-          metadata == o.metadata &&
           timestamp == o.timestamp
     end
 
@@ -282,7 +273,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event, message, conversation, account, metadata, timestamp].hash
+      [id, event, reaction, conversation, account, timestamp].hash
     end
 
     # Builds the object from hash

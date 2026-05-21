@@ -1,4 +1,4 @@
-# Zernio::WebhookPayloadMessageSent
+# Zernio::WebhookPayloadReaction
 
 ## Properties
 
@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Stable webhook event ID |  |
 | **event** | **String** |  |  |
-| **message** | [**WebhookPayloadMessageSentMessage**](WebhookPayloadMessageSentMessage.md) |  |  |
+| **reaction** | [**WebhookPayloadReactionReaction**](WebhookPayloadReactionReaction.md) |  |  |
 | **conversation** | [**WebhookPayloadReactionConversation**](WebhookPayloadReactionConversation.md) |  |  |
 | **account** | [**WebhookPayloadReactionAccount**](WebhookPayloadReactionAccount.md) |  |  |
 | **timestamp** | **Time** |  |  |
@@ -16,10 +16,10 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::WebhookPayloadMessageSent.new(
+instance = Zernio::WebhookPayloadReaction.new(
   id: null,
   event: null,
-  message: null,
+  reaction: null,
   conversation: null,
   account: null,
   timestamp: null

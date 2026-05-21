@@ -1,4 +1,4 @@
-# Zernio::WebhookPayloadMessageAccount
+# Zernio::WebhookPayloadReactionAccount
 
 ## Properties
 
@@ -14,7 +14,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::WebhookPayloadMessageAccount.new(
+instance = Zernio::WebhookPayloadReactionAccount.new(
   id: null,
   platform: null,
   username: null,

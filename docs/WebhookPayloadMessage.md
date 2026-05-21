@@ -7,8 +7,8 @@
 | **id** | **String** | Stable webhook event ID |  |
 | **event** | **String** |  |  |
 | **message** | [**WebhookPayloadMessageMessage**](WebhookPayloadMessageMessage.md) |  |  |
-| **conversation** | [**WebhookPayloadMessageConversation**](WebhookPayloadMessageConversation.md) |  |  |
-| **account** | [**WebhookPayloadMessageAccount**](WebhookPayloadMessageAccount.md) |  |  |
+| **conversation** | [**WebhookPayloadReactionConversation**](WebhookPayloadReactionConversation.md) |  |  |
+| **account** | [**WebhookPayloadReactionAccount**](WebhookPayloadReactionAccount.md) |  |  |
 | **metadata** | [**WebhookPayloadMessageMetadata**](WebhookPayloadMessageMetadata.md) |  | [optional] |
 | **timestamp** | **Time** |  |  |
 

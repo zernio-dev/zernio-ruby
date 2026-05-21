@@ -14,20 +14,21 @@ require 'date'
 require 'time'
 
 module Zernio
-  class WebhookPayloadMessageConversation < ApiModelBase
-    attr_accessor :id
+  class WebhookPayloadReactionReaction < ApiModelBase
+    # The emoji reacted with. May be an empty string when `action` is `removed` on WhatsApp (Meta does not report which emoji was removed). 
+    attr_accessor :emoji
 
-    attr_accessor :platform_conversation_id
+    attr_accessor :action
 
-    attr_accessor :participant_id
+    # Internal Zernio message ID of the reacted-to message, when resolvable from the platform ID.
+    attr_accessor :message_id
 
-    attr_accessor :participant_name
+    # Platform-native ID of the reacted-to message (e.g. WhatsApp wamid).
+    attr_accessor :platform_message_id
 
-    attr_accessor :participant_username
+    attr_accessor :sender
 
-    attr_accessor :participant_picture
-
-    attr_accessor :status
+    attr_accessor :reacted_at
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -54,13 +55,12 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'platform_conversation_id' => :'platformConversationId',
-        :'participant_id' => :'participantId',
-        :'participant_name' => :'participantName',
-        :'participant_username' => :'participantUsername',
-        :'participant_picture' => :'participantPicture',
-        :'status' => :'status'
+        :'emoji' => :'emoji',
+        :'action' => :'action',
+        :'message_id' => :'messageId',
+        :'platform_message_id' => :'platformMessageId',
+        :'sender' => :'sender',
+        :'reacted_at' => :'reactedAt'
       }
     end
 
@@ -77,13 +77,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'platform_conversation_id' => :'String',
-        :'participant_id' => :'String',
-        :'participant_name' => :'String',
-        :'participant_username' => :'String',
-        :'participant_picture' => :'String',
-        :'status' => :'String'
+        :'emoji' => :'String',
+        :'action' => :'String',
+        :'message_id' => :'String',
+        :'platform_message_id' => :'String',
+        :'sender' => :'WebhookPayloadReactionReactionSender',
+        :'reacted_at' => :'Time'
       }
     end
 
@@ -97,50 +96,50 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessageConversation` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadReactionReaction` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessageConversation`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadReactionReaction`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'emoji')
+        self.emoji = attributes[:'emoji']
       else
-        self.id = nil
+        self.emoji = nil
       end
 
-      if attributes.key?(:'platform_conversation_id')
-        self.platform_conversation_id = attributes[:'platform_conversation_id']
+      if attributes.key?(:'action')
+        self.action = attributes[:'action']
       else
-        self.platform_conversation_id = nil
+        self.action = nil
       end
 
-      if attributes.key?(:'participant_id')
-        self.participant_id = attributes[:'participant_id']
+      if attributes.key?(:'message_id')
+        self.message_id = attributes[:'message_id']
       end
 
-      if attributes.key?(:'participant_name')
-        self.participant_name = attributes[:'participant_name']
-      end
-
-      if attributes.key?(:'participant_username')
-        self.participant_username = attributes[:'participant_username']
-      end
-
-      if attributes.key?(:'participant_picture')
-        self.participant_picture = attributes[:'participant_picture']
-      end
-
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'platform_message_id')
+        self.platform_message_id = attributes[:'platform_message_id']
       else
-        self.status = nil
+        self.platform_message_id = nil
+      end
+
+      if attributes.key?(:'sender')
+        self.sender = attributes[:'sender']
+      else
+        self.sender = nil
+      end
+
+      if attributes.key?(:'reacted_at')
+        self.reacted_at = attributes[:'reacted_at']
+      else
+        self.reacted_at = nil
       end
     end
 
@@ -149,16 +148,24 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      if @emoji.nil?
+        invalid_properties.push('invalid value for "emoji", emoji cannot be nil.')
       end
 
-      if @platform_conversation_id.nil?
-        invalid_properties.push('invalid value for "platform_conversation_id", platform_conversation_id cannot be nil.')
+      if @action.nil?
+        invalid_properties.push('invalid value for "action", action cannot be nil.')
       end
 
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      if @platform_message_id.nil?
+        invalid_properties.push('invalid value for "platform_message_id", platform_message_id cannot be nil.')
+      end
+
+      if @sender.nil?
+        invalid_properties.push('invalid value for "sender", sender cannot be nil.')
+      end
+
+      if @reacted_at.nil?
+        invalid_properties.push('invalid value for "reacted_at", reacted_at cannot be nil.')
       end
 
       invalid_properties
@@ -168,42 +175,64 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @platform_conversation_id.nil?
-      return false if @status.nil?
-      status_validator = EnumAttributeValidator.new('String', ["active", "archived"])
-      return false unless status_validator.valid?(@status)
+      return false if @emoji.nil?
+      return false if @action.nil?
+      action_validator = EnumAttributeValidator.new('String', ["added", "removed"])
+      return false unless action_validator.valid?(@action)
+      return false if @platform_message_id.nil?
+      return false if @sender.nil?
+      return false if @reacted_at.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.nil?
-        fail ArgumentError, 'id cannot be nil'
+    # @param [Object] emoji Value to be assigned
+    def emoji=(emoji)
+      if emoji.nil?
+        fail ArgumentError, 'emoji cannot be nil'
       end
 
-      @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] platform_conversation_id Value to be assigned
-    def platform_conversation_id=(platform_conversation_id)
-      if platform_conversation_id.nil?
-        fail ArgumentError, 'platform_conversation_id cannot be nil'
-      end
-
-      @platform_conversation_id = platform_conversation_id
+      @emoji = emoji
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "archived"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+    # @param [Object] action Object to be assigned
+    def action=(action)
+      validator = EnumAttributeValidator.new('String', ["added", "removed"])
+      unless validator.valid?(action)
+        fail ArgumentError, "invalid value for \"action\", must be one of #{validator.allowable_values}."
       end
-      @status = status
+      @action = action
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] platform_message_id Value to be assigned
+    def platform_message_id=(platform_message_id)
+      if platform_message_id.nil?
+        fail ArgumentError, 'platform_message_id cannot be nil'
+      end
+
+      @platform_message_id = platform_message_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sender Value to be assigned
+    def sender=(sender)
+      if sender.nil?
+        fail ArgumentError, 'sender cannot be nil'
+      end
+
+      @sender = sender
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] reacted_at Value to be assigned
+    def reacted_at=(reacted_at)
+      if reacted_at.nil?
+        fail ArgumentError, 'reacted_at cannot be nil'
+      end
+
+      @reacted_at = reacted_at
     end
 
     # Checks equality by comparing each attribute.
@@ -211,13 +240,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          platform_conversation_id == o.platform_conversation_id &&
-          participant_id == o.participant_id &&
-          participant_name == o.participant_name &&
-          participant_username == o.participant_username &&
-          participant_picture == o.participant_picture &&
-          status == o.status
+          emoji == o.emoji &&
+          action == o.action &&
+          message_id == o.message_id &&
+          platform_message_id == o.platform_message_id &&
+          sender == o.sender &&
+          reacted_at == o.reacted_at
     end
 
     # @see the `==` method
@@ -229,7 +257,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform_conversation_id, participant_id, participant_name, participant_username, participant_picture, status].hash
+      [emoji, action, message_id, platform_message_id, sender, reacted_at].hash
     end
 
     # Builds the object from hash

@@ -1,4 +1,4 @@
-# Zernio::WebhookPayloadMessageConversation
+# Zernio::WebhookPayloadReactionConversation
 
 ## Properties
 
@@ -17,7 +17,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::WebhookPayloadMessageConversation.new(
+instance = Zernio::WebhookPayloadReactionConversation.new(
   id: null,
   platform_conversation_id: null,
   participant_id: null,

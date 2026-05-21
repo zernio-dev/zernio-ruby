@@ -24,6 +24,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_post_published**](WebhookEventsApi.md#on_post_published) | **POST** /post.published | Post published event |
 | [**on_post_recycled**](WebhookEventsApi.md#on_post_recycled) | **POST** /post.recycled | Post recycled event |
 | [**on_post_scheduled**](WebhookEventsApi.md#on_post_scheduled) | **POST** /post.scheduled | Post scheduled event |
+| [**on_reaction_received**](WebhookEventsApi.md#on_reaction_received) | **POST** /reaction.received | Reaction received event |
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
@@ -1375,6 +1376,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_post** | [**WebhookPayloadPost**](WebhookPayloadPost.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_reaction_received
+
+> on_reaction_received(webhook_payload_reaction)
+
+Reaction received event
+
+Fired when a participant adds or removes an emoji reaction on a message. Supported on WhatsApp and Telegram. Distinct from message.received so a reaction (e.g. a thumbs-up) is not mistaken for an inbound message. The `reaction.action` field is `added` or `removed`. On WhatsApp removals the platform does not report which emoji was removed, so `reaction.emoji` may be an empty string. Requires the Inbox add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_reaction =  # WebhookPayloadReaction | 
+
+begin
+  # Reaction received event
+  api_instance.on_reaction_received(webhook_payload_reaction)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_reaction_received: #{e}"
+end
+```
+
+#### Using the on_reaction_received_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_reaction_received_with_http_info(webhook_payload_reaction)
+
+```ruby
+begin
+  # Reaction received event
+  data, status_code, headers = api_instance.on_reaction_received_with_http_info(webhook_payload_reaction)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_reaction_received_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_reaction** | [**WebhookPayloadReaction**](WebhookPayloadReaction.md) |  |  |
 
 ### Return type
 

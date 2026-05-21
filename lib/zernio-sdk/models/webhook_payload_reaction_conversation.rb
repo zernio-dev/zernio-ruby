@@ -14,22 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Webhook payload for message received events
-  class WebhookPayloadMessage < ApiModelBase
-    # Stable webhook event ID
+  class WebhookPayloadReactionConversation < ApiModelBase
     attr_accessor :id
 
-    attr_accessor :event
+    attr_accessor :platform_conversation_id
 
-    attr_accessor :message
+    attr_accessor :participant_id
 
-    attr_accessor :conversation
+    attr_accessor :participant_name
 
-    attr_accessor :account
+    attr_accessor :participant_username
 
-    attr_accessor :metadata
+    attr_accessor :participant_picture
 
-    attr_accessor :timestamp
+    attr_accessor :status
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -57,12 +55,12 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
-        :'event' => :'event',
-        :'message' => :'message',
-        :'conversation' => :'conversation',
-        :'account' => :'account',
-        :'metadata' => :'metadata',
-        :'timestamp' => :'timestamp'
+        :'platform_conversation_id' => :'platformConversationId',
+        :'participant_id' => :'participantId',
+        :'participant_name' => :'participantName',
+        :'participant_username' => :'participantUsername',
+        :'participant_picture' => :'participantPicture',
+        :'status' => :'status'
       }
     end
 
@@ -80,12 +78,12 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
-        :'event' => :'String',
-        :'message' => :'WebhookPayloadMessageMessage',
-        :'conversation' => :'WebhookPayloadReactionConversation',
-        :'account' => :'WebhookPayloadReactionAccount',
-        :'metadata' => :'WebhookPayloadMessageMetadata',
-        :'timestamp' => :'Time'
+        :'platform_conversation_id' => :'String',
+        :'participant_id' => :'String',
+        :'participant_name' => :'String',
+        :'participant_username' => :'String',
+        :'participant_picture' => :'String',
+        :'status' => :'String'
       }
     end
 
@@ -99,14 +97,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessage` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadReactionConversation` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessage`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadReactionConversation`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -117,38 +115,32 @@ module Zernio
         self.id = nil
       end
 
-      if attributes.key?(:'event')
-        self.event = attributes[:'event']
+      if attributes.key?(:'platform_conversation_id')
+        self.platform_conversation_id = attributes[:'platform_conversation_id']
       else
-        self.event = nil
+        self.platform_conversation_id = nil
       end
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
-      else
-        self.message = nil
+      if attributes.key?(:'participant_id')
+        self.participant_id = attributes[:'participant_id']
       end
 
-      if attributes.key?(:'conversation')
-        self.conversation = attributes[:'conversation']
-      else
-        self.conversation = nil
+      if attributes.key?(:'participant_name')
+        self.participant_name = attributes[:'participant_name']
       end
 
-      if attributes.key?(:'account')
-        self.account = attributes[:'account']
-      else
-        self.account = nil
+      if attributes.key?(:'participant_username')
+        self.participant_username = attributes[:'participant_username']
       end
 
-      if attributes.key?(:'metadata')
-        self.metadata = attributes[:'metadata']
+      if attributes.key?(:'participant_picture')
+        self.participant_picture = attributes[:'participant_picture']
       end
 
-      if attributes.key?(:'timestamp')
-        self.timestamp = attributes[:'timestamp']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       else
-        self.timestamp = nil
+        self.status = nil
       end
     end
 
@@ -161,24 +153,12 @@ module Zernio
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @event.nil?
-        invalid_properties.push('invalid value for "event", event cannot be nil.')
+      if @platform_conversation_id.nil?
+        invalid_properties.push('invalid value for "platform_conversation_id", platform_conversation_id cannot be nil.')
       end
 
-      if @message.nil?
-        invalid_properties.push('invalid value for "message", message cannot be nil.')
-      end
-
-      if @conversation.nil?
-        invalid_properties.push('invalid value for "conversation", conversation cannot be nil.')
-      end
-
-      if @account.nil?
-        invalid_properties.push('invalid value for "account", account cannot be nil.')
-      end
-
-      if @timestamp.nil?
-        invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
       end
 
       invalid_properties
@@ -189,13 +169,10 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @id.nil?
-      return false if @event.nil?
-      event_validator = EnumAttributeValidator.new('String', ["message.received"])
-      return false unless event_validator.valid?(@event)
-      return false if @message.nil?
-      return false if @conversation.nil?
-      return false if @account.nil?
-      return false if @timestamp.nil?
+      return false if @platform_conversation_id.nil?
+      return false if @status.nil?
+      status_validator = EnumAttributeValidator.new('String', ["active", "archived"])
+      return false unless status_validator.valid?(@status)
       true
     end
 
@@ -209,54 +186,24 @@ module Zernio
       @id = id
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] platform_conversation_id Value to be assigned
+    def platform_conversation_id=(platform_conversation_id)
+      if platform_conversation_id.nil?
+        fail ArgumentError, 'platform_conversation_id cannot be nil'
+      end
+
+      @platform_conversation_id = platform_conversation_id
+    end
+
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] event Object to be assigned
-    def event=(event)
-      validator = EnumAttributeValidator.new('String', ["message.received"])
-      unless validator.valid?(event)
-        fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["active", "archived"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
-      @event = event
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] message Value to be assigned
-    def message=(message)
-      if message.nil?
-        fail ArgumentError, 'message cannot be nil'
-      end
-
-      @message = message
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] conversation Value to be assigned
-    def conversation=(conversation)
-      if conversation.nil?
-        fail ArgumentError, 'conversation cannot be nil'
-      end
-
-      @conversation = conversation
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account Value to be assigned
-    def account=(account)
-      if account.nil?
-        fail ArgumentError, 'account cannot be nil'
-      end
-
-      @account = account
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] timestamp Value to be assigned
-    def timestamp=(timestamp)
-      if timestamp.nil?
-        fail ArgumentError, 'timestamp cannot be nil'
-      end
-
-      @timestamp = timestamp
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -265,12 +212,12 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          event == o.event &&
-          message == o.message &&
-          conversation == o.conversation &&
-          account == o.account &&
-          metadata == o.metadata &&
-          timestamp == o.timestamp
+          platform_conversation_id == o.platform_conversation_id &&
+          participant_id == o.participant_id &&
+          participant_name == o.participant_name &&
+          participant_username == o.participant_username &&
+          participant_picture == o.participant_picture &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -282,7 +229,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event, message, conversation, account, metadata, timestamp].hash
+      [id, platform_conversation_id, participant_id, participant_name, participant_username, participant_picture, status].hash
     end
 
     # Builds the object from hash
