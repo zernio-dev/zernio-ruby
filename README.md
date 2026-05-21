@@ -245,6 +245,10 @@ Class | Method | HTTP request | Description
 *Zernio::GMBReviewsApi* | [**reply_to_google_business_review**](docs/GMBReviewsApi.md#reply_to_google_business_review) | **POST** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Reply to a review
 *Zernio::GMBServicesApi* | [**get_google_business_services**](docs/GMBServicesApi.md#get_google_business_services) | **GET** /v1/accounts/{accountId}/gmb-services | Get services
 *Zernio::GMBServicesApi* | [**update_google_business_services**](docs/GMBServicesApi.md#update_google_business_services) | **PUT** /v1/accounts/{accountId}/gmb-services | Replace services
+*Zernio::GMBVerificationsApi* | [**complete_google_business_verification**](docs/GMBVerificationsApi.md#complete_google_business_verification) | **POST** /v1/accounts/{accountId}/gmb-verifications/{verificationId}/complete | Complete a verification
+*Zernio::GMBVerificationsApi* | [**fetch_google_business_verification_options**](docs/GMBVerificationsApi.md#fetch_google_business_verification_options) | **POST** /v1/accounts/{accountId}/gmb-verifications/options | Fetch verification options
+*Zernio::GMBVerificationsApi* | [**get_google_business_verifications**](docs/GMBVerificationsApi.md#get_google_business_verifications) | **GET** /v1/accounts/{accountId}/gmb-verifications | Get verification state
+*Zernio::GMBVerificationsApi* | [**start_google_business_verification**](docs/GMBVerificationsApi.md#start_google_business_verification) | **POST** /v1/accounts/{accountId}/gmb-verifications | Start a verification
 *Zernio::InstagramApi* | [**get_instagram_story_insights**](docs/InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights
 *Zernio::InstagramApi* | [**list_instagram_stories**](docs/InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories
 *Zernio::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
@@ -438,6 +442,7 @@ Class | Method | HTTP request | Description
  - [Zernio::BusinessCenter](docs/BusinessCenter.md)
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
  - [Zernio::CancelBroadcast200ResponseBroadcast](docs/CancelBroadcast200ResponseBroadcast.md)
+ - [Zernio::CompleteGoogleBusinessVerificationRequest](docs/CompleteGoogleBusinessVerificationRequest.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
  - [Zernio::CompleteWhatsAppPhoneSelection200Response](docs/CompleteWhatsAppPhoneSelection200Response.md)
  - [Zernio::CompleteWhatsAppPhoneSelection200ResponseAccount](docs/CompleteWhatsAppPhoneSelection200ResponseAccount.md)
@@ -586,6 +591,9 @@ Class | Method | HTTP request | Description
  - [Zernio::Expired](docs/Expired.md)
  - [Zernio::FacebookPlatformData](docs/FacebookPlatformData.md)
  - [Zernio::FacebookPlatformDataCarouselCardsInner](docs/FacebookPlatformDataCarouselCardsInner.md)
+ - [Zernio::FetchGoogleBusinessVerificationOptions200Response](docs/FetchGoogleBusinessVerificationOptions200Response.md)
+ - [Zernio::FetchGoogleBusinessVerificationOptions200ResponseOptionsInner](docs/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.md)
+ - [Zernio::FetchGoogleBusinessVerificationOptionsRequest](docs/FetchGoogleBusinessVerificationOptionsRequest.md)
  - [Zernio::FollowUser200Response](docs/FollowUser200Response.md)
  - [Zernio::FollowUserRequest](docs/FollowUserRequest.md)
  - [Zernio::FollowerStatsResponse](docs/FollowerStatsResponse.md)
@@ -695,6 +703,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem](docs/GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem.md)
  - [Zernio::GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItemLabel](docs/GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItemLabel.md)
  - [Zernio::GetGoogleBusinessServices200ResponseServicesInnerPrice](docs/GetGoogleBusinessServices200ResponseServicesInnerPrice.md)
+ - [Zernio::GetGoogleBusinessVerifications200Response](docs/GetGoogleBusinessVerifications200Response.md)
+ - [Zernio::GetGoogleBusinessVerifications200ResponseVerificationsInner](docs/GetGoogleBusinessVerifications200ResponseVerificationsInner.md)
+ - [Zernio::GetGoogleBusinessVerifications200ResponseVoiceOfMerchantState](docs/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantState.md)
+ - [Zernio::GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify](docs/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify.md)
  - [Zernio::GetInboxConversation200Response](docs/GetInboxConversation200Response.md)
  - [Zernio::GetInboxConversation200ResponseData](docs/GetInboxConversation200ResponseData.md)
  - [Zernio::GetInboxConversationMessages200Response](docs/GetInboxConversationMessages200Response.md)
@@ -1068,6 +1080,9 @@ Class | Method | HTTP request | Description
  - [Zernio::SnapchatPlatformData](docs/SnapchatPlatformData.md)
  - [Zernio::SocialAccount](docs/SocialAccount.md)
  - [Zernio::SocialAccountProfileId](docs/SocialAccountProfileId.md)
+ - [Zernio::StartGoogleBusinessVerification200Response](docs/StartGoogleBusinessVerification200Response.md)
+ - [Zernio::StartGoogleBusinessVerification200ResponseVerification](docs/StartGoogleBusinessVerification200ResponseVerification.md)
+ - [Zernio::StartGoogleBusinessVerificationRequest](docs/StartGoogleBusinessVerificationRequest.md)
  - [Zernio::TelegramPlatformData](docs/TelegramPlatformData.md)
  - [Zernio::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Zernio::ThreadsPlatformData](docs/ThreadsPlatformData.md)

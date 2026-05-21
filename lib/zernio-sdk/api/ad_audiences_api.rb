@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Add users to audience
-    # Upload user data (emails and/or phone numbers) to a customer_list audience. Data is SHA256-hashed server-side before sending to Meta. Max 10,000 users per request.
+    # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request. 
     # @param audience_id [String] 
     # @param add_users_to_ad_audience_request [AddUsersToAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
@@ -31,7 +31,7 @@ module Zernio
     end
 
     # Add users to audience
-    # Upload user data (emails and/or phone numbers) to a customer_list audience. Data is SHA256-hashed server-side before sending to Meta. Max 10,000 users per request.
+    # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request. 
     # @param audience_id [String] 
     # @param add_users_to_ad_audience_request [AddUsersToAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
@@ -94,7 +94,7 @@ module Zernio
     end
 
     # Create custom audience
-    # Create a customer list, website retargeting, or lookalike audience on Meta (Facebook/Instagram).
+    # Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only. The audience is created empty — add members via `POST /v1/ads/audiences/{audienceId}/users`. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is `pending`). Create is not idempotent — never auto-retry. 
     # @param create_ad_audience_request [CreateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateAdAudience201Response]
@@ -104,7 +104,7 @@ module Zernio
     end
 
     # Create custom audience
-    # Create a customer list, website retargeting, or lookalike audience on Meta (Facebook/Instagram).
+    # Create a custom audience. &#x60;customer_list&#x60; is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; &#x60;website&#x60; and &#x60;lookalike&#x60; are Meta-only. The audience is created empty — add members via &#x60;POST /v1/ads/audiences/{audienceId}/users&#x60;. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is &#x60;pending&#x60;). Create is not idempotent — never auto-retry. 
     # @param create_ad_audience_request [CreateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateAdAudience201Response, Integer, Hash)>] CreateAdAudience201Response data, response status code and response headers

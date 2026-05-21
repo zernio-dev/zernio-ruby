@@ -88,6 +88,7 @@ docs/CancelBroadcast200Response.md
 docs/CancelBroadcast200ResponseBroadcast.md
 docs/CommentAutomationsApi.md
 docs/CommentsApi.md
+docs/CompleteGoogleBusinessVerificationRequest.md
 docs/CompleteTelegramConnect200Response.md
 docs/CompleteWhatsAppPhoneSelection200Response.md
 docs/CompleteWhatsAppPhoneSelection200ResponseAccount.md
@@ -240,6 +241,9 @@ docs/ErrorResponse.md
 docs/Expired.md
 docs/FacebookPlatformData.md
 docs/FacebookPlatformDataCarouselCardsInner.md
+docs/FetchGoogleBusinessVerificationOptions200Response.md
+docs/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.md
+docs/FetchGoogleBusinessVerificationOptionsRequest.md
 docs/FollowUser200Response.md
 docs/FollowUserRequest.md
 docs/FollowerStatsResponse.md
@@ -256,6 +260,7 @@ docs/GMBMediaApi.md
 docs/GMBPlaceActionsApi.md
 docs/GMBReviewsApi.md
 docs/GMBServicesApi.md
+docs/GMBVerificationsApi.md
 docs/GbpFreeFormServiceItemLabel.md
 docs/GbpSpecialHourPeriod.md
 docs/GbpSpecialHourPeriodStartDate.md
@@ -356,6 +361,10 @@ docs/GetGoogleBusinessServices200ResponseServicesInner.md
 docs/GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem.md
 docs/GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItemLabel.md
 docs/GetGoogleBusinessServices200ResponseServicesInnerPrice.md
+docs/GetGoogleBusinessVerifications200Response.md
+docs/GetGoogleBusinessVerifications200ResponseVerificationsInner.md
+docs/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantState.md
+docs/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify.md
 docs/GetInboxConversation200Response.md
 docs/GetInboxConversation200ResponseData.md
 docs/GetInboxConversationMessages200Response.md
@@ -741,6 +750,9 @@ docs/SharedAdAccount.md
 docs/SnapchatPlatformData.md
 docs/SocialAccount.md
 docs/SocialAccountProfileId.md
+docs/StartGoogleBusinessVerification200Response.md
+docs/StartGoogleBusinessVerification200ResponseVerification.md
+docs/StartGoogleBusinessVerificationRequest.md
 docs/TelegramPlatformData.md
 docs/TestWebhookRequest.md
 docs/ThreadsPlatformData.md
@@ -999,6 +1011,7 @@ lib/zernio-sdk/api/gmb_media_api.rb
 lib/zernio-sdk/api/gmb_place_actions_api.rb
 lib/zernio-sdk/api/gmb_reviews_api.rb
 lib/zernio-sdk/api/gmb_services_api.rb
+lib/zernio-sdk/api/gmb_verifications_api.rb
 lib/zernio-sdk/api/instagram_api.rb
 lib/zernio-sdk/api/invites_api.rb
 lib/zernio-sdk/api/linked_in_mentions_api.rb
@@ -1096,6 +1109,7 @@ lib/zernio-sdk/models/bulk_upload_result_results_inner.rb
 lib/zernio-sdk/models/business_center.rb
 lib/zernio-sdk/models/cancel_broadcast200_response.rb
 lib/zernio-sdk/models/cancel_broadcast200_response_broadcast.rb
+lib/zernio-sdk/models/complete_google_business_verification_request.rb
 lib/zernio-sdk/models/complete_telegram_connect200_response.rb
 lib/zernio-sdk/models/complete_whats_app_phone_selection200_response.rb
 lib/zernio-sdk/models/complete_whats_app_phone_selection200_response_account.rb
@@ -1244,6 +1258,9 @@ lib/zernio-sdk/models/error_response.rb
 lib/zernio-sdk/models/expired.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
 lib/zernio-sdk/models/facebook_platform_data_carousel_cards_inner.rb
+lib/zernio-sdk/models/fetch_google_business_verification_options200_response.rb
+lib/zernio-sdk/models/fetch_google_business_verification_options200_response_options_inner.rb
+lib/zernio-sdk/models/fetch_google_business_verification_options_request.rb
 lib/zernio-sdk/models/follow_user200_response.rb
 lib/zernio-sdk/models/follow_user_request.rb
 lib/zernio-sdk/models/follower_stats_response.rb
@@ -1353,6 +1370,10 @@ lib/zernio-sdk/models/get_google_business_services200_response_services_inner.rb
 lib/zernio-sdk/models/get_google_business_services200_response_services_inner_free_form_service_item.rb
 lib/zernio-sdk/models/get_google_business_services200_response_services_inner_free_form_service_item_label.rb
 lib/zernio-sdk/models/get_google_business_services200_response_services_inner_price.rb
+lib/zernio-sdk/models/get_google_business_verifications200_response.rb
+lib/zernio-sdk/models/get_google_business_verifications200_response_verifications_inner.rb
+lib/zernio-sdk/models/get_google_business_verifications200_response_voice_of_merchant_state.rb
+lib/zernio-sdk/models/get_google_business_verifications200_response_voice_of_merchant_state_verify.rb
 lib/zernio-sdk/models/get_inbox_conversation200_response.rb
 lib/zernio-sdk/models/get_inbox_conversation200_response_data.rb
 lib/zernio-sdk/models/get_inbox_conversation_messages200_response.rb
@@ -1726,6 +1747,9 @@ lib/zernio-sdk/models/shared_ad_account.rb
 lib/zernio-sdk/models/snapchat_platform_data.rb
 lib/zernio-sdk/models/social_account.rb
 lib/zernio-sdk/models/social_account_profile_id.rb
+lib/zernio-sdk/models/start_google_business_verification200_response.rb
+lib/zernio-sdk/models/start_google_business_verification200_response_verification.rb
+lib/zernio-sdk/models/start_google_business_verification_request.rb
 lib/zernio-sdk/models/telegram_platform_data.rb
 lib/zernio-sdk/models/test_webhook_request.rb
 lib/zernio-sdk/models/threads_platform_data.rb
@@ -1973,6 +1997,7 @@ spec/api/gmb_media_api_spec.rb
 spec/api/gmb_place_actions_api_spec.rb
 spec/api/gmb_reviews_api_spec.rb
 spec/api/gmb_services_api_spec.rb
+spec/api/gmb_verifications_api_spec.rb
 spec/api/instagram_api_spec.rb
 spec/api/invites_api_spec.rb
 spec/api/linked_in_mentions_api_spec.rb
@@ -2065,6 +2090,7 @@ spec/models/bulk_upload_result_spec.rb
 spec/models/business_center_spec.rb
 spec/models/cancel_broadcast200_response_broadcast_spec.rb
 spec/models/cancel_broadcast200_response_spec.rb
+spec/models/complete_google_business_verification_request_spec.rb
 spec/models/complete_telegram_connect200_response_spec.rb
 spec/models/complete_whats_app_phone_selection200_response_account_spec.rb
 spec/models/complete_whats_app_phone_selection200_response_spec.rb
@@ -2213,6 +2239,9 @@ spec/models/error_response_spec.rb
 spec/models/expired_spec.rb
 spec/models/facebook_platform_data_carousel_cards_inner_spec.rb
 spec/models/facebook_platform_data_spec.rb
+spec/models/fetch_google_business_verification_options200_response_options_inner_spec.rb
+spec/models/fetch_google_business_verification_options200_response_spec.rb
+spec/models/fetch_google_business_verification_options_request_spec.rb
 spec/models/follow_user200_response_spec.rb
 spec/models/follow_user_request_spec.rb
 spec/models/follower_stats_response_spec.rb
@@ -2322,6 +2351,10 @@ spec/models/get_google_business_services200_response_services_inner_free_form_se
 spec/models/get_google_business_services200_response_services_inner_price_spec.rb
 spec/models/get_google_business_services200_response_services_inner_spec.rb
 spec/models/get_google_business_services200_response_spec.rb
+spec/models/get_google_business_verifications200_response_spec.rb
+spec/models/get_google_business_verifications200_response_verifications_inner_spec.rb
+spec/models/get_google_business_verifications200_response_voice_of_merchant_state_spec.rb
+spec/models/get_google_business_verifications200_response_voice_of_merchant_state_verify_spec.rb
 spec/models/get_inbox_conversation200_response_data_spec.rb
 spec/models/get_inbox_conversation200_response_spec.rb
 spec/models/get_inbox_conversation_messages200_response_messages_inner_attachments_inner_spec.rb
@@ -2695,6 +2728,9 @@ spec/models/shared_ad_account_spec.rb
 spec/models/snapchat_platform_data_spec.rb
 spec/models/social_account_profile_id_spec.rb
 spec/models/social_account_spec.rb
+spec/models/start_google_business_verification200_response_spec.rb
+spec/models/start_google_business_verification200_response_verification_spec.rb
+spec/models/start_google_business_verification_request_spec.rb
 spec/models/telegram_platform_data_spec.rb
 spec/models/test_webhook_request_spec.rb
 spec/models/threads_platform_data_spec.rb

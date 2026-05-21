@@ -17,7 +17,7 @@ module Zernio
   class CreateAdAudienceRequest < ApiModelBase
     attr_accessor :account_id
 
-    # Must start with act_
+    # Platform ad account ID. Must start with act_ for Meta; bare platform id for others (Google customer id, X/TikTok/LinkedIn/Pinterest account id).
     attr_accessor :ad_account_id
 
     attr_accessor :name
