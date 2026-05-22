@@ -94,7 +94,7 @@ module Zernio
     end
 
     # Create custom audience
-    # Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only. The audience is created empty — add members via `POST /v1/ads/audiences/{audienceId}/users`. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is `pending`). Create is not idempotent — never auto-retry. 
+    # Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only. `saved_targeting` stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via `savedTargetingId` on `POST /v1/ads/create`. Upload-backed audiences are created empty, add members via `POST /v1/ads/audiences/{audienceId}/users`. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is `pending`). Create is not idempotent, never auto-retry. 
     # @param create_ad_audience_request [CreateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateAdAudience201Response]
@@ -104,7 +104,7 @@ module Zernio
     end
 
     # Create custom audience
-    # Create a custom audience. &#x60;customer_list&#x60; is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; &#x60;website&#x60; and &#x60;lookalike&#x60; are Meta-only. The audience is created empty — add members via &#x60;POST /v1/ads/audiences/{audienceId}/users&#x60;. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is &#x60;pending&#x60;). Create is not idempotent — never auto-retry. 
+    # Create a custom audience. &#x60;customer_list&#x60; is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; &#x60;website&#x60; and &#x60;lookalike&#x60; are Meta-only. &#x60;saved_targeting&#x60; stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via &#x60;savedTargetingId&#x60; on &#x60;POST /v1/ads/create&#x60;. Upload-backed audiences are created empty, add members via &#x60;POST /v1/ads/audiences/{audienceId}/users&#x60;. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is &#x60;pending&#x60;). Create is not idempotent, never auto-retry. 
     # @param create_ad_audience_request [CreateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateAdAudience201Response, Integer, Hash)>] CreateAdAudience201Response data, response status code and response headers
@@ -293,6 +293,7 @@ module Zernio
     # @param ad_account_id [String] Platform ad account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform 
+    # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences.
     # @return [ListAdAudiences200Response]
     def list_ad_audiences(account_id, ad_account_id, opts = {})
       data, _status_code, _headers = list_ad_audiences_with_http_info(account_id, ad_account_id, opts)
@@ -305,6 +306,7 @@ module Zernio
     # @param ad_account_id [String] Platform ad account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform 
+    # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences.
     # @return [Array<(ListAdAudiences200Response, Integer, Hash)>] ListAdAudiences200Response data, response status code and response headers
     def list_ad_audiences_with_http_info(account_id, ad_account_id, opts = {})
       if @api_client.config.debugging
@@ -322,6 +324,10 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
+      allowable_values = ["customer_list", "website", "lookalike", "saved_targeting"]
+      if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
+        fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/ads/audiences'
 
@@ -330,6 +336,7 @@ module Zernio
       query_params[:'accountId'] = account_id
       query_params[:'adAccountId'] = ad_account_id
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

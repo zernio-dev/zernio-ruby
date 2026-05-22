@@ -512,6 +512,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Estimate audience reach
+    # Returns a normalized pre-flight audience-size estimate for a targeting spec, before any campaign is created. Backed by each platform's native reach API (Meta `delivery_estimate`, LinkedIn `audienceCounts`, X `audience_summary`, Pinterest `audience_sizing`).  Platforms without a usable pre-flight reach API (Google Search/Display, TikTok) return `available: false` with no bounds, so clients can hide or grey out the estimate rather than treat the absence as an error. 
+    # @param estimate_ad_reach_request [EstimateAdReachRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [EstimateAdReach200Response]
+    def estimate_ad_reach(estimate_ad_reach_request, opts = {})
+      data, _status_code, _headers = estimate_ad_reach_with_http_info(estimate_ad_reach_request, opts)
+      data
+    end
+
+    # Estimate audience reach
+    # Returns a normalized pre-flight audience-size estimate for a targeting spec, before any campaign is created. Backed by each platform&#39;s native reach API (Meta &#x60;delivery_estimate&#x60;, LinkedIn &#x60;audienceCounts&#x60;, X &#x60;audience_summary&#x60;, Pinterest &#x60;audience_sizing&#x60;).  Platforms without a usable pre-flight reach API (Google Search/Display, TikTok) return &#x60;available: false&#x60; with no bounds, so clients can hide or grey out the estimate rather than treat the absence as an error. 
+    # @param estimate_ad_reach_request [EstimateAdReachRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(EstimateAdReach200Response, Integer, Hash)>] EstimateAdReach200Response data, response status code and response headers
+    def estimate_ad_reach_with_http_info(estimate_ad_reach_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.estimate_ad_reach ...'
+      end
+      # verify the required parameter 'estimate_ad_reach_request' is set
+      if @api_client.config.client_side_validation && estimate_ad_reach_request.nil?
+        fail ArgumentError, "Missing the required parameter 'estimate_ad_reach_request' when calling AdsApi.estimate_ad_reach"
+      end
+      # resource path
+      local_var_path = '/v1/ads/targeting/reach-estimate'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(estimate_ad_reach_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'EstimateAdReach200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.estimate_ad_reach",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#estimate_ad_reach\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get ad details
     # Returns an ad with its creative, targeting, status, and performance metrics.  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal `_id` (24-char hex) - Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`) - the creative's `effective_object_story_id` (`{pageId}_{postId}` shape, Facebook side) - the creative's `effective_instagram_media_id` (Instagram side)  Any of the four resolve to the same ad. Caller doesn't need a translation step. 
     # @param ad_id [String] Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. See description for details. 
@@ -1393,8 +1461,8 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Search targeting interests
-    # Search for interest-based targeting options available on the platform.
+    # Search targeting interests (deprecated)
+    # Deprecated alias for `GET /v1/ads/targeting/search?dimension=interest`. Kept for backward compatibility, it returns the legacy `{ interests: [...] }` shape rather than the normalized `{ results: [...] }`. New integrations should use `GET /v1/ads/targeting/search` with `dimension=interest`. 
     # @param q [String] Search query
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
@@ -1404,8 +1472,8 @@ module Zernio
       data
     end
 
-    # Search targeting interests
-    # Search for interest-based targeting options available on the platform.
+    # Search targeting interests (deprecated)
+    # Deprecated alias for &#x60;GET /v1/ads/targeting/search?dimension&#x3D;interest&#x60;. Kept for backward compatibility, it returns the legacy &#x60;{ interests: [...] }&#x60; shape rather than the normalized &#x60;{ results: [...] }&#x60;. New integrations should use &#x60;GET /v1/ads/targeting/search&#x60; with &#x60;dimension&#x3D;interest&#x60;. 
     # @param q [String] Search query
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
@@ -1464,59 +1532,65 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Search geo targeting locations (Meta)
-    # Resolve a human-readable location name into Meta's opaque `key` used in `targeting.cities[]` / `targeting.regions[]` on `POST /v1/ads/create` (and the same fields under `targeting.geo_locations` on `POST /v1/ads/boost`). Wraps Meta's `/search?type=adgeolocation` endpoint.  Meta-only for now. Other platforms have their own location id systems and are not exposed here.  Per Meta's docs, `q` must contain only the locality name (e.g. `\"Amsterdam\"`, not `\"Amsterdam, NL\"`). Use `countryCode` to disambiguate when the same name exists in multiple countries. 
-    # @param account_id [String] Social account ID (must be a connected Facebook or Instagram account).
-    # @param q [String] Location name. Locality only — no region/country suffix.
+    # Search targeting options
+    # Resolve a human-readable query into the platform's opaque targeting ids used in the `TargetingSpec` (`countries`/`regions`/`cities`/`zips`/`metros` geo keys, and `interests`/`behaviors` entity ids) on `POST /v1/ads/create`, `POST /v1/ads/targeting/reach-estimate`, and `saved_targeting` audiences.  The `dimension` param selects what is searched, `geo` (locations, further scoped by `geoType`), `interest`, `behavior`, or `income`. Availability of each dimension varies by platform (e.g. behaviours are Meta/TikTok only). Results are normalized across platforms into a single shape, so the same client code consumes Meta, TikTok, LinkedIn, X, Pinterest, and Google results.  For geo queries, `q` should contain only the locality name (e.g. `\"Amsterdam\"`, not `\"Amsterdam, NL\"`). Use `countryCode` to disambiguate. 
+    # @param account_id [String] Social account ID (a connected account on the target ad platform).
+    # @param q [String] Search query. For geo, the locality name only (no region/country suffix).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Type of location to search. Defaults to city. (default to 'city')
-    # @option opts [String] :country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope the search.
+    # @option opts [String] :dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (default to 'interest')
+    # @option opts [String] :geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. Defaults to &#x60;city&#x60;. (default to 'city')
+    # @option opts [String] :country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search.
     # @option opts [Integer] :limit Maximum results to return. (default to 25)
-    # @return [SearchAdTargetingLocations200Response]
-    def search_ad_targeting_locations(account_id, q, opts = {})
-      data, _status_code, _headers = search_ad_targeting_locations_with_http_info(account_id, q, opts)
+    # @return [SearchAdTargeting200Response]
+    def search_ad_targeting(account_id, q, opts = {})
+      data, _status_code, _headers = search_ad_targeting_with_http_info(account_id, q, opts)
       data
     end
 
-    # Search geo targeting locations (Meta)
-    # Resolve a human-readable location name into Meta&#39;s opaque &#x60;key&#x60; used in &#x60;targeting.cities[]&#x60; / &#x60;targeting.regions[]&#x60; on &#x60;POST /v1/ads/create&#x60; (and the same fields under &#x60;targeting.geo_locations&#x60; on &#x60;POST /v1/ads/boost&#x60;). Wraps Meta&#39;s &#x60;/search?type&#x3D;adgeolocation&#x60; endpoint.  Meta-only for now. Other platforms have their own location id systems and are not exposed here.  Per Meta&#39;s docs, &#x60;q&#x60; must contain only the locality name (e.g. &#x60;\&quot;Amsterdam\&quot;&#x60;, not &#x60;\&quot;Amsterdam, NL\&quot;&#x60;). Use &#x60;countryCode&#x60; to disambiguate when the same name exists in multiple countries. 
-    # @param account_id [String] Social account ID (must be a connected Facebook or Instagram account).
-    # @param q [String] Location name. Locality only — no region/country suffix.
+    # Search targeting options
+    # Resolve a human-readable query into the platform&#39;s opaque targeting ids used in the &#x60;TargetingSpec&#x60; (&#x60;countries&#x60;/&#x60;regions&#x60;/&#x60;cities&#x60;/&#x60;zips&#x60;/&#x60;metros&#x60; geo keys, and &#x60;interests&#x60;/&#x60;behaviors&#x60; entity ids) on &#x60;POST /v1/ads/create&#x60;, &#x60;POST /v1/ads/targeting/reach-estimate&#x60;, and &#x60;saved_targeting&#x60; audiences.  The &#x60;dimension&#x60; param selects what is searched, &#x60;geo&#x60; (locations, further scoped by &#x60;geoType&#x60;), &#x60;interest&#x60;, &#x60;behavior&#x60;, or &#x60;income&#x60;. Availability of each dimension varies by platform (e.g. behaviours are Meta/TikTok only). Results are normalized across platforms into a single shape, so the same client code consumes Meta, TikTok, LinkedIn, X, Pinterest, and Google results.  For geo queries, &#x60;q&#x60; should contain only the locality name (e.g. &#x60;\&quot;Amsterdam\&quot;&#x60;, not &#x60;\&quot;Amsterdam, NL\&quot;&#x60;). Use &#x60;countryCode&#x60; to disambiguate. 
+    # @param account_id [String] Social account ID (a connected account on the target ad platform).
+    # @param q [String] Search query. For geo, the locality name only (no region/country suffix).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Type of location to search. Defaults to city. (default to 'city')
-    # @option opts [String] :country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope the search.
+    # @option opts [String] :dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (default to 'interest')
+    # @option opts [String] :geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. Defaults to &#x60;city&#x60;. (default to 'city')
+    # @option opts [String] :country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search.
     # @option opts [Integer] :limit Maximum results to return. (default to 25)
-    # @return [Array<(SearchAdTargetingLocations200Response, Integer, Hash)>] SearchAdTargetingLocations200Response data, response status code and response headers
-    def search_ad_targeting_locations_with_http_info(account_id, q, opts = {})
+    # @return [Array<(SearchAdTargeting200Response, Integer, Hash)>] SearchAdTargeting200Response data, response status code and response headers
+    def search_ad_targeting_with_http_info(account_id, q, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: AdsApi.search_ad_targeting_locations ...'
+        @api_client.config.logger.debug 'Calling API: AdsApi.search_ad_targeting ...'
       end
       # verify the required parameter 'account_id' is set
       if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.search_ad_targeting_locations"
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.search_ad_targeting"
       end
       # verify the required parameter 'q' is set
       if @api_client.config.client_side_validation && q.nil?
-        fail ArgumentError, "Missing the required parameter 'q' when calling AdsApi.search_ad_targeting_locations"
+        fail ArgumentError, "Missing the required parameter 'q' when calling AdsApi.search_ad_targeting"
       end
-      allowable_values = ["country", "region", "city", "subcity", "neighborhood", "zip", "metro_area", "geo_market"]
-      if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
-        fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
+      allowable_values = ["geo", "interest", "behavior", "income"]
+      if @api_client.config.client_side_validation && opts[:'dimension'] && !allowable_values.include?(opts[:'dimension'])
+        fail ArgumentError, "invalid value for \"dimension\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["country", "region", "city", "zip", "metro"]
+      if @api_client.config.client_side_validation && opts[:'geo_type'] && !allowable_values.include?(opts[:'geo_type'])
+        fail ArgumentError, "invalid value for \"geo_type\", must be one of #{allowable_values}"
       end
       if @api_client.config.client_side_validation && !opts[:'country_code'].nil? && opts[:'country_code'].to_s.length > 2
-        fail ArgumentError, 'invalid value for "opts[:"country_code"]" when calling AdsApi.search_ad_targeting_locations, the character length must be smaller than or equal to 2.'
+        fail ArgumentError, 'invalid value for "opts[:"country_code"]" when calling AdsApi.search_ad_targeting, the character length must be smaller than or equal to 2.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'country_code'].nil? && opts[:'country_code'].to_s.length < 2
-        fail ArgumentError, 'invalid value for "opts[:"country_code"]" when calling AdsApi.search_ad_targeting_locations, the character length must be greater than or equal to 2.'
+        fail ArgumentError, 'invalid value for "opts[:"country_code"]" when calling AdsApi.search_ad_targeting, the character length must be greater than or equal to 2.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.search_ad_targeting_locations, must be smaller than or equal to 100.'
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.search_ad_targeting, must be smaller than or equal to 100.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.search_ad_targeting_locations, must be greater than or equal to 1.'
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.search_ad_targeting, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -1526,7 +1600,8 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
       query_params[:'q'] = q
-      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
+      query_params[:'dimension'] = opts[:'dimension'] if !opts[:'dimension'].nil?
+      query_params[:'geoType'] = opts[:'geo_type'] if !opts[:'geo_type'].nil?
       query_params[:'countryCode'] = opts[:'country_code'] if !opts[:'country_code'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
 
@@ -1542,13 +1617,13 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'SearchAdTargetingLocations200Response'
+      return_type = opts[:debug_return_type] || 'SearchAdTargeting200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
 
       new_options = opts.merge(
-        :operation => :"AdsApi.search_ad_targeting_locations",
+        :operation => :"AdsApi.search_ad_targeting",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -1559,7 +1634,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: AdsApi#search_ad_targeting_locations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: AdsApi#search_ad_targeting\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

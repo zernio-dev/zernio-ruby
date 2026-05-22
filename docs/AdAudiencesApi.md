@@ -88,7 +88,7 @@ end
 
 Create custom audience
 
-Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only. The audience is created empty — add members via `POST /v1/ads/audiences/{audienceId}/users`. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is `pending`). Create is not idempotent — never auto-retry. 
+Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only. `saved_targeting` stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via `savedTargetingId` on `POST /v1/ads/create`. Upload-backed audiences are created empty, add members via `POST /v1/ads/audiences/{audienceId}/users`. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is `pending`). Create is not idempotent, never auto-retry. 
 
 ### Examples
 
@@ -102,7 +102,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAudiencesApi.new
-create_ad_audience_request = Zernio::CreateAdAudienceRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', type: 'customer_list'}) # CreateAdAudienceRequest | 
+create_ad_audience_request = Zernio::SavedTargetingAudience.new({type: 'saved_targeting', account_id: 'account_id_example', name: 'name_example', spec: Zernio::TargetingSpec.new}) # CreateAdAudienceRequest | 
 
 begin
   # Create custom audience
@@ -312,7 +312,8 @@ api_instance = Zernio::AdAudiencesApi.new
 account_id = 'account_id_example' # String | Social account ID
 ad_account_id = 'ad_account_id_example' # String | Platform ad account ID
 opts = {
-  platform: 'facebook' # String | 
+  platform: 'facebook', # String | 
+  type: 'customer_list' # String | Filter to one audience type. `saved_targeting` returns stored TargetingSpec audiences (each item carries a `spec`); the other types return uploaded/derived audiences.
 }
 
 begin
@@ -349,6 +350,7 @@ end
 | **account_id** | **String** | Social account ID |  |
 | **ad_account_id** | **String** | Platform ad account ID |  |
 | **platform** | **String** |  | [optional] |
+| **type** | **String** | Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences. | [optional] |
 
 ### Return type
 

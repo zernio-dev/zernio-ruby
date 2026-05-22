@@ -112,6 +112,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdsApi* | [**delete_conversion_destination**](docs/AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Soft-delete a conversion destination
+*Zernio::AdsApi* | [**estimate_ad_reach**](docs/AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
@@ -123,8 +124,8 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**list_conversion_associations**](docs/AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List campaigns associated with a conversion destination
 *Zernio::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API
 *Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove campaign↔conversion associations
-*Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
-*Zernio::AdsApi* | [**search_ad_targeting_locations**](docs/AdsApi.md#search_ad_targeting_locations) | **GET** /v1/ads/targeting/search | Search geo targeting locations (Meta)
+*Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests (deprecated)
+*Zernio::AdsApi* | [**search_ad_targeting**](docs/AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
@@ -494,7 +495,6 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateCtwaAdRequest](docs/CreateCtwaAdRequest.md)
  - [Zernio::CreateCtwaAdRequestCreativesInner](docs/CreateCtwaAdRequestCreativesInner.md)
  - [Zernio::CreateCtwaAdRequestCreativesInnerVideo](docs/CreateCtwaAdRequestCreativesInnerVideo.md)
- - [Zernio::CreateCtwaAdRequestInterestsInner](docs/CreateCtwaAdRequestInterestsInner.md)
  - [Zernio::CreateCtwaAdRequestVideo](docs/CreateCtwaAdRequestVideo.md)
  - [Zernio::CreateCustomField200Response](docs/CreateCustomField200Response.md)
  - [Zernio::CreateCustomFieldRequest](docs/CreateCustomFieldRequest.md)
@@ -529,14 +529,17 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAd201ResponseOneOf1](docs/CreateStandaloneAd201ResponseOneOf1.md)
  - [Zernio::CreateStandaloneAdRequest](docs/CreateStandaloneAdRequest.md)
  - [Zernio::CreateStandaloneAdRequestAttributionSpecInner](docs/CreateStandaloneAdRequestAttributionSpecInner.md)
+ - [Zernio::CreateStandaloneAdRequestBehaviorsInner](docs/CreateStandaloneAdRequestBehaviorsInner.md)
  - [Zernio::CreateStandaloneAdRequestBrandIdentity](docs/CreateStandaloneAdRequestBrandIdentity.md)
  - [Zernio::CreateStandaloneAdRequestCitiesInner](docs/CreateStandaloneAdRequestCitiesInner.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInner](docs/CreateStandaloneAdRequestCreativesInner.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInnerVideo](docs/CreateStandaloneAdRequestCreativesInnerVideo.md)
+ - [Zernio::CreateStandaloneAdRequestCustomLocationsInner](docs/CreateStandaloneAdRequestCustomLocationsInner.md)
  - [Zernio::CreateStandaloneAdRequestImages](docs/CreateStandaloneAdRequestImages.md)
  - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
+ - [Zernio::CreateStandaloneAdRequestZipsInner](docs/CreateStandaloneAdRequestZipsInner.md)
  - [Zernio::CreateTrackingTag201Response](docs/CreateTrackingTag201Response.md)
  - [Zernio::CreateTrackingTagRequest](docs/CreateTrackingTagRequest.md)
  - [Zernio::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
@@ -588,6 +591,8 @@ Class | Method | HTTP request | Description
  - [Zernio::EnrollContacts200Response](docs/EnrollContacts200Response.md)
  - [Zernio::EnrollContactsRequest](docs/EnrollContactsRequest.md)
  - [Zernio::ErrorResponse](docs/ErrorResponse.md)
+ - [Zernio::EstimateAdReach200Response](docs/EstimateAdReach200Response.md)
+ - [Zernio::EstimateAdReachRequest](docs/EstimateAdReachRequest.md)
  - [Zernio::Expired](docs/Expired.md)
  - [Zernio::FacebookPlatformData](docs/FacebookPlatformData.md)
  - [Zernio::FacebookPlatformDataCarouselCardsInner](docs/FacebookPlatformDataCarouselCardsInner.md)
@@ -999,14 +1004,14 @@ Class | Method | HTTP request | Description
  - [Zernio::ReviewWebhookReview](docs/ReviewWebhookReview.md)
  - [Zernio::ReviewWebhookReviewReply](docs/ReviewWebhookReviewReply.md)
  - [Zernio::ReviewWebhookReviewReviewer](docs/ReviewWebhookReviewReviewer.md)
+ - [Zernio::SavedTargetingAudience](docs/SavedTargetingAudience.md)
  - [Zernio::ScheduleBroadcast200Response](docs/ScheduleBroadcast200Response.md)
  - [Zernio::ScheduleBroadcast200ResponseBroadcast](docs/ScheduleBroadcast200ResponseBroadcast.md)
  - [Zernio::ScheduleBroadcastRequest](docs/ScheduleBroadcastRequest.md)
  - [Zernio::SearchAdInterests200Response](docs/SearchAdInterests200Response.md)
  - [Zernio::SearchAdInterests200ResponseInterestsInner](docs/SearchAdInterests200ResponseInterestsInner.md)
- - [Zernio::SearchAdTargetingLocations200Response](docs/SearchAdTargetingLocations200Response.md)
- - [Zernio::SearchAdTargetingLocations200ResponseResultsInner](docs/SearchAdTargetingLocations200ResponseResultsInner.md)
- - [Zernio::SearchAdTargetingLocations200ResponseResultsInnerRegionId](docs/SearchAdTargetingLocations200ResponseResultsInnerRegionId.md)
+ - [Zernio::SearchAdTargeting200Response](docs/SearchAdTargeting200Response.md)
+ - [Zernio::SearchAdTargeting200ResponseResultsInner](docs/SearchAdTargeting200ResponseResultsInner.md)
  - [Zernio::SearchReddit200Response](docs/SearchReddit200Response.md)
  - [Zernio::SelectFacebookPage200Response](docs/SelectFacebookPage200Response.md)
  - [Zernio::SelectFacebookPage200ResponseAccount](docs/SelectFacebookPage200ResponseAccount.md)
@@ -1084,6 +1089,10 @@ Class | Method | HTTP request | Description
  - [Zernio::StartGoogleBusinessVerification200Response](docs/StartGoogleBusinessVerification200Response.md)
  - [Zernio::StartGoogleBusinessVerification200ResponseVerification](docs/StartGoogleBusinessVerification200ResponseVerification.md)
  - [Zernio::StartGoogleBusinessVerificationRequest](docs/StartGoogleBusinessVerificationRequest.md)
+ - [Zernio::TargetingSpec](docs/TargetingSpec.md)
+ - [Zernio::TargetingSpecCitiesInner](docs/TargetingSpecCitiesInner.md)
+ - [Zernio::TargetingSpecCustomLocationsInner](docs/TargetingSpecCustomLocationsInner.md)
+ - [Zernio::TargetingSpecExcludedLocations](docs/TargetingSpecExcludedLocations.md)
  - [Zernio::TelegramPlatformData](docs/TelegramPlatformData.md)
  - [Zernio::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Zernio::ThreadsPlatformData](docs/ThreadsPlatformData.md)
@@ -1205,6 +1214,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadWhatsAppFlowJsonRequest](docs/UploadWhatsAppFlowJsonRequest.md)
  - [Zernio::UploadWhatsAppFlowJsonRequestFlowJson](docs/UploadWhatsAppFlowJsonRequestFlowJson.md)
  - [Zernio::UploadedFile](docs/UploadedFile.md)
+ - [Zernio::UploadedOrDerivedAudience](docs/UploadedOrDerivedAudience.md)
  - [Zernio::UsageStats](docs/UsageStats.md)
  - [Zernio::UsageStatsLimits](docs/UsageStatsLimits.md)
  - [Zernio::UsageStatsSpend](docs/UsageStatsSpend.md)

@@ -11,6 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_standalone_ad**](AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad |
 | [**delete_ad**](AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**delete_conversion_destination**](AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Soft-delete a conversion destination |
+| [**estimate_ad_reach**](AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach |
 | [**get_ad**](AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
 | [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**get_ad_comments**](AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
@@ -22,8 +23,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_conversion_associations**](AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List campaigns associated with a conversion destination |
 | [**list_conversion_destinations**](AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API |
 | [**remove_conversion_associations**](AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove campaign↔conversion associations |
-| [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests |
-| [**search_ad_targeting_locations**](AdsApi.md#search_ad_targeting_locations) | **GET** /v1/ads/targeting/search | Search geo targeting locations (Meta) |
+| [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests (deprecated) |
+| [**search_ad_targeting**](AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options |
 | [**send_conversions**](AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform |
 | [**send_whats_app_conversion**](AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
@@ -521,6 +522,75 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## estimate_ad_reach
+
+> <EstimateAdReach200Response> estimate_ad_reach(estimate_ad_reach_request)
+
+Estimate audience reach
+
+Returns a normalized pre-flight audience-size estimate for a targeting spec, before any campaign is created. Backed by each platform's native reach API (Meta `delivery_estimate`, LinkedIn `audienceCounts`, X `audience_summary`, Pinterest `audience_sizing`).  Platforms without a usable pre-flight reach API (Google Search/Display, TikTok) return `available: false` with no bounds, so clients can hide or grey out the estimate rather than treat the absence as an error. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+estimate_ad_reach_request = Zernio::EstimateAdReachRequest.new({account_id: 'account_id_example', spec: Zernio::TargetingSpec.new}) # EstimateAdReachRequest | 
+
+begin
+  # Estimate audience reach
+  result = api_instance.estimate_ad_reach(estimate_ad_reach_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->estimate_ad_reach: #{e}"
+end
+```
+
+#### Using the estimate_ad_reach_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<EstimateAdReach200Response>, Integer, Hash)> estimate_ad_reach_with_http_info(estimate_ad_reach_request)
+
+```ruby
+begin
+  # Estimate audience reach
+  data, status_code, headers = api_instance.estimate_ad_reach_with_http_info(estimate_ad_reach_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <EstimateAdReach200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->estimate_ad_reach_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **estimate_ad_reach_request** | [**EstimateAdReachRequest**](EstimateAdReachRequest.md) |  |  |
+
+### Return type
+
+[**EstimateAdReach200Response**](EstimateAdReach200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -1363,9 +1433,9 @@ end
 
 > <SearchAdInterests200Response> search_ad_interests(q, account_id)
 
-Search targeting interests
+Search targeting interests (deprecated)
 
-Search for interest-based targeting options available on the platform.
+Deprecated alias for `GET /v1/ads/targeting/search?dimension=interest`. Kept for backward compatibility, it returns the legacy `{ interests: [...] }` shape rather than the normalized `{ results: [...] }`. New integrations should use `GET /v1/ads/targeting/search` with `dimension=interest`. 
 
 ### Examples
 
@@ -1383,7 +1453,7 @@ q = 'q_example' # String | Search query
 account_id = 'account_id_example' # String | Social account ID
 
 begin
-  # Search targeting interests
+  # Search targeting interests (deprecated)
   result = api_instance.search_ad_interests(q, account_id)
   p result
 rescue Zernio::ApiError => e
@@ -1399,7 +1469,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Search targeting interests
+  # Search targeting interests (deprecated)
   data, status_code, headers = api_instance.search_ad_interests_with_http_info(q, account_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -1430,13 +1500,13 @@ end
 - **Accept**: application/json
 
 
-## search_ad_targeting_locations
+## search_ad_targeting
 
-> <SearchAdTargetingLocations200Response> search_ad_targeting_locations(account_id, q, opts)
+> <SearchAdTargeting200Response> search_ad_targeting(account_id, q, opts)
 
-Search geo targeting locations (Meta)
+Search targeting options
 
-Resolve a human-readable location name into Meta's opaque `key` used in `targeting.cities[]` / `targeting.regions[]` on `POST /v1/ads/create` (and the same fields under `targeting.geo_locations` on `POST /v1/ads/boost`). Wraps Meta's `/search?type=adgeolocation` endpoint.  Meta-only for now. Other platforms have their own location id systems and are not exposed here.  Per Meta's docs, `q` must contain only the locality name (e.g. `\"Amsterdam\"`, not `\"Amsterdam, NL\"`). Use `countryCode` to disambiguate when the same name exists in multiple countries. 
+Resolve a human-readable query into the platform's opaque targeting ids used in the `TargetingSpec` (`countries`/`regions`/`cities`/`zips`/`metros` geo keys, and `interests`/`behaviors` entity ids) on `POST /v1/ads/create`, `POST /v1/ads/targeting/reach-estimate`, and `saved_targeting` audiences.  The `dimension` param selects what is searched, `geo` (locations, further scoped by `geoType`), `interest`, `behavior`, or `income`. Availability of each dimension varies by platform (e.g. behaviours are Meta/TikTok only). Results are normalized across platforms into a single shape, so the same client code consumes Meta, TikTok, LinkedIn, X, Pinterest, and Google results.  For geo queries, `q` should contain only the locality name (e.g. `\"Amsterdam\"`, not `\"Amsterdam, NL\"`). Use `countryCode` to disambiguate. 
 
 ### Examples
 
@@ -1450,38 +1520,39 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdsApi.new
-account_id = 'account_id_example' # String | Social account ID (must be a connected Facebook or Instagram account).
-q = 'q_example' # String | Location name. Locality only — no region/country suffix.
+account_id = 'account_id_example' # String | Social account ID (a connected account on the target ad platform).
+q = 'q_example' # String | Search query. For geo, the locality name only (no region/country suffix).
 opts = {
-  type: 'country', # String | Type of location to search. Defaults to city.
-  country_code: 'country_code_example', # String | ISO 3166-1 alpha-2 country code (e.g. NL) to scope the search.
+  dimension: 'geo', # String | What to search. `geo` resolves locations (scope further with `geoType`), `interest`/`behavior` resolve audience entities, `income` resolves income-tier options. Defaults to `interest` for backward compatibility with the deprecated /v1/ads/interests alias.
+  geo_type: 'country', # String | Only used when `dimension=geo`. The kind of location to resolve. Defaults to `city`.
+  country_code: 'country_code_example', # String | ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search.
   limit: 56 # Integer | Maximum results to return.
 }
 
 begin
-  # Search geo targeting locations (Meta)
-  result = api_instance.search_ad_targeting_locations(account_id, q, opts)
+  # Search targeting options
+  result = api_instance.search_ad_targeting(account_id, q, opts)
   p result
 rescue Zernio::ApiError => e
-  puts "Error when calling AdsApi->search_ad_targeting_locations: #{e}"
+  puts "Error when calling AdsApi->search_ad_targeting: #{e}"
 end
 ```
 
-#### Using the search_ad_targeting_locations_with_http_info variant
+#### Using the search_ad_targeting_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SearchAdTargetingLocations200Response>, Integer, Hash)> search_ad_targeting_locations_with_http_info(account_id, q, opts)
+> <Array(<SearchAdTargeting200Response>, Integer, Hash)> search_ad_targeting_with_http_info(account_id, q, opts)
 
 ```ruby
 begin
-  # Search geo targeting locations (Meta)
-  data, status_code, headers = api_instance.search_ad_targeting_locations_with_http_info(account_id, q, opts)
+  # Search targeting options
+  data, status_code, headers = api_instance.search_ad_targeting_with_http_info(account_id, q, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SearchAdTargetingLocations200Response>
+  p data # => <SearchAdTargeting200Response>
 rescue Zernio::ApiError => e
-  puts "Error when calling AdsApi->search_ad_targeting_locations_with_http_info: #{e}"
+  puts "Error when calling AdsApi->search_ad_targeting_with_http_info: #{e}"
 end
 ```
 
@@ -1489,15 +1560,16 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Social account ID (must be a connected Facebook or Instagram account). |  |
-| **q** | **String** | Location name. Locality only — no region/country suffix. |  |
-| **type** | **String** | Type of location to search. Defaults to city. | [optional][default to &#39;city&#39;] |
-| **country_code** | **String** | ISO 3166-1 alpha-2 country code (e.g. NL) to scope the search. | [optional] |
+| **account_id** | **String** | Social account ID (a connected account on the target ad platform). |  |
+| **q** | **String** | Search query. For geo, the locality name only (no region/country suffix). |  |
+| **dimension** | **String** | What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. | [optional][default to &#39;interest&#39;] |
+| **geo_type** | **String** | Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. Defaults to &#x60;city&#x60;. | [optional][default to &#39;city&#39;] |
+| **country_code** | **String** | ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search. | [optional] |
 | **limit** | **Integer** | Maximum results to return. | [optional][default to 25] |
 
 ### Return type
 
-[**SearchAdTargetingLocations200Response**](SearchAdTargetingLocations200Response.md)
+[**SearchAdTargeting200Response**](SearchAdTargeting200Response.md)
 
 ### Authorization
 

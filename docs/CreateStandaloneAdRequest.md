@@ -30,6 +30,14 @@
 | **age_min** | **Integer** |  | [optional] |
 | **age_max** | **Integer** |  | [optional] |
 | **interests** | [**Array&lt;UpdateAdRequestTargetingInterestsInner&gt;**](UpdateAdRequestTargetingInterestsInner.md) | Interest objects from /v1/ads/interests. Each must include id and name. | [optional] |
+| **zips** | [**Array&lt;CreateStandaloneAdRequestZipsInner&gt;**](CreateStandaloneAdRequestZipsInner.md) | Postal/ZIP geo targeting. &#x60;key&#x60; is the platform&#39;s postal location ID from /v1/ads/targeting/search?dimension&#x3D;geo&amp;geoType&#x3D;zip. Supported on Meta, Google, TikTok, Pinterest, X. | [optional] |
+| **metros** | [**Array&lt;CreateStandaloneAdRequestZipsInner&gt;**](CreateStandaloneAdRequestZipsInner.md) | DMA / metro-area geo targeting. &#x60;key&#x60; is the platform&#39;s metro ID from /v1/ads/targeting/search?dimension&#x3D;geo&amp;geoType&#x3D;metro. | [optional] |
+| **custom_locations** | [**Array&lt;CreateStandaloneAdRequestCustomLocationsInner&gt;**](CreateStandaloneAdRequestCustomLocationsInner.md) | Point-radius (lat/lng) geo targeting. Meta only (custom_locations). Rejected on platforms without radius support. | [optional] |
+| **behaviors** | [**Array&lt;CreateStandaloneAdRequestBehaviorsInner&gt;**](CreateStandaloneAdRequestBehaviorsInner.md) | Behaviour entities from /v1/ads/targeting/search?dimension&#x3D;behavior. Supported on Meta and TikTok. Each must include id. | [optional] |
+| **income_tier** | **String** | Normalized household-income tier. Meta and TikTok express all four; Google maps only &#x60;top_10&#x60;; rejected on LinkedIn, X, and Pinterest. On Meta, income targeting is incompatible with housing/employment/credit &#x60;specialAdCategories&#x60;.  | [optional] |
+| **languages** | **Array&lt;String&gt;** | Language codes (e.g. [&#39;en&#39;]). Restricts the audience by language. | [optional] |
+| **saved_targeting_id** | **String** | ID of a &#x60;saved_targeting&#x60; audience (created via POST /v1/ads/audiences). When set, its stored TargetingSpec is expanded as the base targeting; inline fields on this body merge on top. Lets you reuse a named targeting preset without re-sending every field.  | [optional] |
+| **special_ad_categories** | **Array&lt;String&gt;** | Meta only. Declares the ad&#39;s special category, required for housing, employment, credit, or political/social-issue ads (Meta enforces restricted targeting for these). Note: setting a special category disables income/zip targeting on Meta.  | [optional] |
 | **end_date** | **Time** | Required for lifetime budgets | [optional] |
 | **audience_id** | **String** | Custom audience ID for targeting | [optional] |
 | **campaign_type** | **String** | Google only | [optional][default to &#39;display&#39;] |
@@ -80,6 +88,14 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   age_min: null,
   age_max: null,
   interests: null,
+  zips: null,
+  metros: null,
+  custom_locations: null,
+  behaviors: null,
+  income_tier: null,
+  languages: null,
+  saved_targeting_id: null,
+  special_ad_categories: null,
   end_date: null,
   audience_id: null,
   campaign_type: null,

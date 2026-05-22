@@ -14,398 +14,91 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateAdAudienceRequest < ApiModelBase
-    attr_accessor :account_id
+  module CreateAdAudienceRequest
+    class << self
+      # List of class defined in oneOf (OpenAPI v3)
+      def openapi_one_of
+        [
+          :'SavedTargetingAudience',
+          :'UploadedOrDerivedAudience'
+        ]
+      end
 
-    # Platform ad account ID. Must start with act_ for Meta; bare platform id for others (Google customer id, X/TikTok/LinkedIn/Pinterest account id).
-    attr_accessor :ad_account_id
-
-    attr_accessor :name
-
-    attr_accessor :description
-
-    attr_accessor :type
-
-    # Required for website audiences
-    attr_accessor :pixel_id
-
-    # Required for website audiences
-    attr_accessor :retention_days
-
-    # Required for lookalike audiences
-    attr_accessor :source_audience_id
-
-    # 2-letter code, required for lookalike audiences
-    attr_accessor :country
-
-    # Required for lookalike audiences
-    attr_accessor :ratio
-
-    # Pixel event rule for website audiences (optional)
-    attr_accessor :rule
-
-    # Data source declaration for GDPR compliance (customer_list only)
-    attr_accessor :customer_file_source
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
+      # Builds the object
+      # @param [Mixed] Data to be matched against the list of oneOf items
+      # @return [Object] Returns the model or the data itself
+      def build(data)
+        # Go through the list of oneOf items and attempt to identify the appropriate one.
+        # Note:
+        # - We do not attempt to check whether exactly one item matches.
+        # - No advanced validation of types in some cases (e.g. "x: { type: string }" will happily match { x: 123 })
+        #   due to the way the deserialization is made in the base_object template (it just casts without verifying).
+        # - TODO: scalar values are de facto behaving as if they were nullable.
+        # - TODO: logging when debugging is set.
+        openapi_one_of.each do |klass|
+          begin
+            next if klass == :AnyType # "nullable: true"
+            return find_and_cast_into_type(klass, data)
+          rescue # rescue all errors so we keep iterating even if the current item lookup raises
           end
         end
+
+        openapi_one_of.include?(:AnyType) ? data : nil
       end
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+      private
 
-    # Attribute mapping from ruby-style variable name to JSON key.
-    def self.attribute_map
-      {
-        :'account_id' => :'accountId',
-        :'ad_account_id' => :'adAccountId',
-        :'name' => :'name',
-        :'description' => :'description',
-        :'type' => :'type',
-        :'pixel_id' => :'pixelId',
-        :'retention_days' => :'retentionDays',
-        :'source_audience_id' => :'sourceAudienceId',
-        :'country' => :'country',
-        :'ratio' => :'ratio',
-        :'rule' => :'rule',
-        :'customer_file_source' => :'customerFileSource'
-      }
-    end
+      SchemaMismatchError = Class.new(StandardError)
 
-    # Returns attribute mapping this model knows about
-    def self.acceptable_attribute_map
-      attribute_map
-    end
+      # Note: 'File' is missing here because in the regular case we get the data _after_ a call to JSON.parse.
+      def find_and_cast_into_type(klass, data)
+        return if data.nil?
 
-    # Returns all the JSON keys this model knows about
-    def self.acceptable_attributes
-      acceptable_attribute_map.values
-    end
-
-    # Attribute type mapping.
-    def self.openapi_types
-      {
-        :'account_id' => :'String',
-        :'ad_account_id' => :'String',
-        :'name' => :'String',
-        :'description' => :'String',
-        :'type' => :'String',
-        :'pixel_id' => :'String',
-        :'retention_days' => :'Integer',
-        :'source_audience_id' => :'String',
-        :'country' => :'String',
-        :'ratio' => :'Float',
-        :'rule' => :'Object',
-        :'customer_file_source' => :'String'
-      }
-    end
-
-    # List of attributes with nullable: true
-    def self.openapi_nullable
-      Set.new([
-      ])
-    end
-
-    # Initializes the object
-    # @param [Hash] attributes Model attributes in the form of hash
-    def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateAdAudienceRequest` initialize method"
-      end
-
-      # check to see if the attribute exists and convert string to symbol for hash key
-      acceptable_attribute_map = self.class.acceptable_attribute_map
-      attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateAdAudienceRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
-        end
-        h[k.to_sym] = v
-      }
-
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      else
-        self.account_id = nil
-      end
-
-      if attributes.key?(:'ad_account_id')
-        self.ad_account_id = attributes[:'ad_account_id']
-      else
-        self.ad_account_id = nil
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      else
-        self.name = nil
-      end
-
-      if attributes.key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      else
-        self.type = nil
-      end
-
-      if attributes.key?(:'pixel_id')
-        self.pixel_id = attributes[:'pixel_id']
-      end
-
-      if attributes.key?(:'retention_days')
-        self.retention_days = attributes[:'retention_days']
-      end
-
-      if attributes.key?(:'source_audience_id')
-        self.source_audience_id = attributes[:'source_audience_id']
-      end
-
-      if attributes.key?(:'country')
-        self.country = attributes[:'country']
-      end
-
-      if attributes.key?(:'ratio')
-        self.ratio = attributes[:'ratio']
-      end
-
-      if attributes.key?(:'rule')
-        self.rule = attributes[:'rule']
-      end
-
-      if attributes.key?(:'customer_file_source')
-        self.customer_file_source = attributes[:'customer_file_source']
-      end
-    end
-
-    # Show invalid properties with the reasons. Usually used together with valid?
-    # @return Array for valid properties with the reasons
-    def list_invalid_properties
-      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
-      invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
-      if @ad_account_id.nil?
-        invalid_properties.push('invalid value for "ad_account_id", ad_account_id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @name.to_s.length > 255
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if !@retention_days.nil? && @retention_days > 180
-        invalid_properties.push('invalid value for "retention_days", must be smaller than or equal to 180.')
-      end
-
-      if !@retention_days.nil? && @retention_days < 1
-        invalid_properties.push('invalid value for "retention_days", must be greater than or equal to 1.')
-      end
-
-      if !@ratio.nil? && @ratio > 0.2
-        invalid_properties.push('invalid value for "ratio", must be smaller than or equal to 0.2.')
-      end
-
-      if !@ratio.nil? && @ratio < 0.01
-        invalid_properties.push('invalid value for "ratio", must be greater than or equal to 0.01.')
-      end
-
-      invalid_properties
-    end
-
-    # Check to see if the all the properties in the model are valid
-    # @return true if the model is valid
-    def valid?
-      warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
-      return false if @ad_account_id.nil?
-      return false if @name.nil?
-      return false if @name.to_s.length > 255
-      return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["customer_list", "website", "lookalike"])
-      return false unless type_validator.valid?(@type)
-      return false if !@retention_days.nil? && @retention_days > 180
-      return false if !@retention_days.nil? && @retention_days < 1
-      return false if !@ratio.nil? && @ratio > 0.2
-      return false if !@ratio.nil? && @ratio < 0.01
-      true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
-      end
-
-      @account_id = account_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ad_account_id Value to be assigned
-    def ad_account_id=(ad_account_id)
-      if ad_account_id.nil?
-        fail ArgumentError, 'ad_account_id cannot be nil'
-      end
-
-      @ad_account_id = ad_account_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      if name.to_s.length > 255
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 255.'
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["customer_list", "website", "lookalike"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] retention_days Value to be assigned
-    def retention_days=(retention_days)
-      if retention_days.nil?
-        fail ArgumentError, 'retention_days cannot be nil'
-      end
-
-      if retention_days > 180
-        fail ArgumentError, 'invalid value for "retention_days", must be smaller than or equal to 180.'
-      end
-
-      if retention_days < 1
-        fail ArgumentError, 'invalid value for "retention_days", must be greater than or equal to 1.'
-      end
-
-      @retention_days = retention_days
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ratio Value to be assigned
-    def ratio=(ratio)
-      if ratio.nil?
-        fail ArgumentError, 'ratio cannot be nil'
-      end
-
-      if ratio > 0.2
-        fail ArgumentError, 'invalid value for "ratio", must be smaller than or equal to 0.2.'
-      end
-
-      if ratio < 0.01
-        fail ArgumentError, 'invalid value for "ratio", must be greater than or equal to 0.01.'
-      end
-
-      @ratio = ratio
-    end
-
-    # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared
-    def ==(o)
-      return true if self.equal?(o)
-      self.class == o.class &&
-          account_id == o.account_id &&
-          ad_account_id == o.ad_account_id &&
-          name == o.name &&
-          description == o.description &&
-          type == o.type &&
-          pixel_id == o.pixel_id &&
-          retention_days == o.retention_days &&
-          source_audience_id == o.source_audience_id &&
-          country == o.country &&
-          ratio == o.ratio &&
-          rule == o.rule &&
-          customer_file_source == o.customer_file_source
-    end
-
-    # @see the `==` method
-    # @param [Object] Object to be compared
-    def eql?(o)
-      self == o
-    end
-
-    # Calculates hash code according to all attributes.
-    # @return [Integer] Hash code
-    def hash
-      [account_id, ad_account_id, name, description, type, pixel_id, retention_days, source_audience_id, country, ratio, rule, customer_file_source].hash
-    end
-
-    # Builds the object from hash
-    # @param [Hash] attributes Model attributes in the form of hash
-    # @return [Object] Returns the model itself
-    def self.build_from_hash(attributes)
-      return nil unless attributes.is_a?(Hash)
-      attributes = attributes.transform_keys(&:to_sym)
-      transformed_hash = {}
-      openapi_types.each_pair do |key, type|
-        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
-          transformed_hash["#{key}"] = nil
-        elsif type =~ /\AArray<(.*)>/i
-          # check to ensure the input is an array given that the attribute
-          # is documented as an array but the input is not
-          if attributes[attribute_map[key]].is_a?(Array)
-            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
+        case klass.to_s
+        when 'Boolean'
+          return data if data.instance_of?(TrueClass) || data.instance_of?(FalseClass)
+        when 'Float'
+          return data if data.instance_of?(Float)
+        when 'Integer'
+          return data if data.instance_of?(Integer)
+        when 'Time'
+          return Time.parse(data)
+        when 'Date'
+          return Date.iso8601(data)
+        when 'String'
+          return data if data.instance_of?(String)
+        when 'Object' # "type: object"
+          return data if data.instance_of?(Hash)
+        when /\AArray<(?<sub_type>.+)>\z/ # "type: array"
+          if data.instance_of?(Array)
+            sub_type = Regexp.last_match[:sub_type]
+            return data.map { |item| find_and_cast_into_type(sub_type, item) }
           end
-        elsif !attributes[attribute_map[key]].nil?
-          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        when /\AHash<String, (?<sub_type>.+)>\z/ # "type: object" with "additionalProperties: { ... }"
+          if data.instance_of?(Hash) && data.keys.all? { |k| k.instance_of?(Symbol) || k.instance_of?(String) }
+            sub_type = Regexp.last_match[:sub_type]
+            return data.each_with_object({}) { |(k, v), hsh| hsh[k] = find_and_cast_into_type(sub_type, v) }
+          end
+        else # model
+          const = Zernio.const_get(klass)
+          if const
+            if const.respond_to?(:openapi_one_of) # nested oneOf model
+              model = const.build(data)
+              return model if model
+            else
+              # raise if data contains keys that are not known to the model
+              raise if const.respond_to?(:acceptable_attributes) && !(data.keys - const.acceptable_attributes).empty?
+              model = const.build_from_hash(data)
+              return model if model
+            end
+          end
         end
+
+        raise # if no match by now, raise
+      rescue
+        raise SchemaMismatchError, "#{data} doesn't match the #{klass} type"
       end
-      new(transformed_hash)
     end
-
-    # Returns the object in the form of hash
-    # @return [Hash] Returns the object in the form of hash
-    def to_hash
-      hash = {}
-      self.class.attribute_map.each_pair do |attr, param|
-        value = self.send(attr)
-        if value.nil?
-          is_nullable = self.class.openapi_nullable.include?(attr)
-          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
-        end
-
-        hash[param] = _to_hash(value)
-      end
-      hash
-    end
-
   end
 
 end

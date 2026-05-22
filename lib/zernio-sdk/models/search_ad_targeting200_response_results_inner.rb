@@ -14,16 +14,30 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateCtwaAdRequestInterestsInner < ApiModelBase
+  class SearchAdTargeting200ResponseResultsInner < ApiModelBase
+    # The platform's opaque id. Use as a geo `key` (regions/cities/zips/metros) or an entity `id` (interests/behaviors) in TargetingSpec.
     attr_accessor :id
 
+    # Human-readable label.
     attr_accessor :name
+
+    # What the result is (e.g. city, region, country, zip, metro, interest, behavior, income).
+    attr_accessor :type
+
+    # Optional breadcrumb of parent labels (e.g. ['United States', 'California', 'Los Angeles']). Disambiguates same-named results.
+    attr_accessor :path
+
+    # Optional estimated reachable users for this option, when the platform returns it.
+    attr_accessor :audience_size
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'name' => :'name'
+        :'name' => :'name',
+        :'type' => :'type',
+        :'path' => :'path',
+        :'audience_size' => :'audienceSize'
       }
     end
 
@@ -41,7 +55,10 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
-        :'name' => :'String'
+        :'name' => :'String',
+        :'type' => :'String',
+        :'path' => :'Array<String>',
+        :'audience_size' => :'Integer'
       }
     end
 
@@ -55,14 +72,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateCtwaAdRequestInterestsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SearchAdTargeting200ResponseResultsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateCtwaAdRequestInterestsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SearchAdTargeting200ResponseResultsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -75,6 +92,24 @@ module Zernio
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      else
+        self.type = nil
+      end
+
+      if attributes.key?(:'path')
+        if (value = attributes[:'path']).is_a?(Array)
+          self.path = value
+        end
+      end
+
+      if attributes.key?(:'audience_size')
+        self.audience_size = attributes[:'audience_size']
       end
     end
 
@@ -87,6 +122,14 @@ module Zernio
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -95,6 +138,8 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @id.nil?
+      return false if @name.nil?
+      return false if @type.nil?
       true
     end
 
@@ -108,13 +153,36 @@ module Zernio
       @id = id
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] type Value to be assigned
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'type cannot be nil'
+      end
+
+      @type = type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          name == o.name
+          name == o.name &&
+          type == o.type &&
+          path == o.path &&
+          audience_size == o.audience_size
     end
 
     # @see the `==` method
@@ -126,7 +194,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name].hash
+      [id, name, type, path, audience_size].hash
     end
 
     # Builds the object from hash

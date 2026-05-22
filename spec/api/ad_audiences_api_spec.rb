@@ -47,7 +47,7 @@ describe 'AdAudiencesApi' do
 
   # unit tests for create_ad_audience
   # Create custom audience
-  # Create a custom audience. &#x60;customer_list&#x60; is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; &#x60;website&#x60; and &#x60;lookalike&#x60; are Meta-only. The audience is created empty — add members via &#x60;POST /v1/ads/audiences/{audienceId}/users&#x60;. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is &#x60;pending&#x60;). Create is not idempotent — never auto-retry. 
+  # Create a custom audience. &#x60;customer_list&#x60; is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; &#x60;website&#x60; and &#x60;lookalike&#x60; are Meta-only. &#x60;saved_targeting&#x60; stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via &#x60;savedTargetingId&#x60; on &#x60;POST /v1/ads/create&#x60;. Upload-backed audiences are created empty, add members via &#x60;POST /v1/ads/audiences/{audienceId}/users&#x60;. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is &#x60;pending&#x60;). Create is not idempotent, never auto-retry. 
   # @param create_ad_audience_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateAdAudience201Response]
@@ -88,6 +88,7 @@ describe 'AdAudiencesApi' do
   # @param ad_account_id Platform ad account ID
   # @param [Hash] opts the optional parameters
   # @option opts [String] :platform 
+  # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences.
   # @return [ListAdAudiences200Response]
   describe 'list_ad_audiences test' do
     it 'should work' do

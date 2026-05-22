@@ -14,40 +14,34 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SearchAdTargetingLocations200ResponseResultsInner < ApiModelBase
-    # Meta's opaque location ID. Use this in targeting.cities[].key / regions[].key.
-    attr_accessor :key
+  class EstimateAdReach200Response < ApiModelBase
+    # Whether a pre-flight estimate is available on this platform. False for Google and TikTok.
+    attr_accessor :available
 
-    attr_accessor :name
+    # Lower bound of the estimated reachable audience. Present only when available.
+    attr_accessor :lower
 
-    # Location type as returned by Meta (city, region, country, etc.).
-    attr_accessor :type
+    # Upper bound of the estimated reachable audience. Present only when available.
+    attr_accessor :upper
 
-    attr_accessor :country_code
+    # Optional estimated daily reach/results at the given budget, when the platform returns it.
+    attr_accessor :daily
 
-    attr_accessor :country_name
+    # Currency of any monetary fields in the estimate, when applicable.
+    attr_accessor :currency
 
-    # Parent region/state name (cities only).
-    attr_accessor :region
-
-    attr_accessor :region_id
-
-    attr_accessor :supports_region
-
-    attr_accessor :supports_city
+    # Meta only. False when Meta is still computing the estimate (the audience is too new); retry shortly.
+    attr_accessor :estimate_ready
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'key' => :'key',
-        :'name' => :'name',
-        :'type' => :'type',
-        :'country_code' => :'countryCode',
-        :'country_name' => :'countryName',
-        :'region' => :'region',
-        :'region_id' => :'regionId',
-        :'supports_region' => :'supportsRegion',
-        :'supports_city' => :'supportsCity'
+        :'available' => :'available',
+        :'lower' => :'lower',
+        :'upper' => :'upper',
+        :'daily' => :'daily',
+        :'currency' => :'currency',
+        :'estimate_ready' => :'estimateReady'
       }
     end
 
@@ -64,15 +58,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'key' => :'String',
-        :'name' => :'String',
-        :'type' => :'String',
-        :'country_code' => :'String',
-        :'country_name' => :'String',
-        :'region' => :'String',
-        :'region_id' => :'SearchAdTargetingLocations200ResponseResultsInnerRegionId',
-        :'supports_region' => :'Boolean',
-        :'supports_city' => :'Boolean'
+        :'available' => :'Boolean',
+        :'lower' => :'Integer',
+        :'upper' => :'Integer',
+        :'daily' => :'Integer',
+        :'currency' => :'String',
+        :'estimate_ready' => :'Boolean'
       }
     end
 
@@ -86,58 +77,42 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SearchAdTargetingLocations200ResponseResultsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::EstimateAdReach200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SearchAdTargetingLocations200ResponseResultsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::EstimateAdReach200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'key')
-        self.key = attributes[:'key']
+      if attributes.key?(:'available')
+        self.available = attributes[:'available']
       else
-        self.key = nil
+        self.available = nil
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      else
-        self.name = nil
+      if attributes.key?(:'lower')
+        self.lower = attributes[:'lower']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      else
-        self.type = nil
+      if attributes.key?(:'upper')
+        self.upper = attributes[:'upper']
       end
 
-      if attributes.key?(:'country_code')
-        self.country_code = attributes[:'country_code']
+      if attributes.key?(:'daily')
+        self.daily = attributes[:'daily']
       end
 
-      if attributes.key?(:'country_name')
-        self.country_name = attributes[:'country_name']
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
 
-      if attributes.key?(:'region')
-        self.region = attributes[:'region']
-      end
-
-      if attributes.key?(:'region_id')
-        self.region_id = attributes[:'region_id']
-      end
-
-      if attributes.key?(:'supports_region')
-        self.supports_region = attributes[:'supports_region']
-      end
-
-      if attributes.key?(:'supports_city')
-        self.supports_city = attributes[:'supports_city']
+      if attributes.key?(:'estimate_ready')
+        self.estimate_ready = attributes[:'estimate_ready']
       end
     end
 
@@ -146,16 +121,8 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @key.nil?
-        invalid_properties.push('invalid value for "key", key cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      if @available.nil?
+        invalid_properties.push('invalid value for "available", available cannot be nil.')
       end
 
       invalid_properties
@@ -165,40 +132,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @key.nil?
-      return false if @name.nil?
-      return false if @type.nil?
+      return false if @available.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] key Value to be assigned
-    def key=(key)
-      if key.nil?
-        fail ArgumentError, 'key cannot be nil'
+    # @param [Object] available Value to be assigned
+    def available=(available)
+      if available.nil?
+        fail ArgumentError, 'available cannot be nil'
       end
 
-      @key = key
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] type Value to be assigned
-    def type=(type)
-      if type.nil?
-        fail ArgumentError, 'type cannot be nil'
-      end
-
-      @type = type
+      @available = available
     end
 
     # Checks equality by comparing each attribute.
@@ -206,15 +151,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          key == o.key &&
-          name == o.name &&
-          type == o.type &&
-          country_code == o.country_code &&
-          country_name == o.country_name &&
-          region == o.region &&
-          region_id == o.region_id &&
-          supports_region == o.supports_region &&
-          supports_city == o.supports_city
+          available == o.available &&
+          lower == o.lower &&
+          upper == o.upper &&
+          daily == o.daily &&
+          currency == o.currency &&
+          estimate_ready == o.estimate_ready
     end
 
     # @see the `==` method
@@ -226,7 +168,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [key, name, type, country_code, country_name, region, region_id, supports_region, supports_city].hash
+      [available, lower, upper, daily, currency, estimate_ready].hash
     end
 
     # Builds the object from hash

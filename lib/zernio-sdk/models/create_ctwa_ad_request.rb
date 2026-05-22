@@ -163,7 +163,7 @@ module Zernio
         :'countries' => :'Array<String>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
-        :'interests' => :'Array<CreateCtwaAdRequestInterestsInner>',
+        :'interests' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
         :'audience_id' => :'String',
         :'advantage_audience' => :'Integer',
         :'objective' => :'String',

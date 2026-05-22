@@ -1,40 +1,49 @@
 # Zernio::CreateAdAudienceRequest
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **account_id** | **String** |  |  |
-| **ad_account_id** | **String** | Platform ad account ID. Must start with act_ for Meta; bare platform id for others (Google customer id, X/TikTok/LinkedIn/Pinterest account id). |  |
-| **name** | **String** |  |  |
-| **description** | **String** |  | [optional] |
-| **type** | **String** |  |  |
-| **pixel_id** | **String** | Required for website audiences | [optional] |
-| **retention_days** | **Integer** | Required for website audiences | [optional] |
-| **source_audience_id** | **String** | Required for lookalike audiences | [optional] |
-| **country** | **String** | 2-letter code, required for lookalike audiences | [optional] |
-| **ratio** | **Float** | Required for lookalike audiences | [optional] |
-| **rule** | **Object** | Pixel event rule for website audiences (optional) | [optional] |
-| **customer_file_source** | **String** | Data source declaration for GDPR compliance (customer_list only) | [optional] |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateAdAudienceRequest.new(
-  account_id: null,
-  ad_account_id: null,
-  name: null,
-  description: null,
-  type: null,
-  pixel_id: null,
-  retention_days: null,
-  source_audience_id: null,
-  country: null,
-  ratio: null,
-  rule: null,
-  customer_file_source: null
-)
+Zernio::CreateAdAudienceRequest.openapi_one_of
+# =>
+# [
+#   :'SavedTargetingAudience',
+#   :'UploadedOrDerivedAudience'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::CreateAdAudienceRequest.build(data)
+# => #<SavedTargetingAudience:0x00007fdd4aab02a0>
+
+Zernio::CreateAdAudienceRequest.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `SavedTargetingAudience`
+- `UploadedOrDerivedAudience`
+- `nil` (if no type matches)
 

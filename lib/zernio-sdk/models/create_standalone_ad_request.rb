@@ -85,6 +85,30 @@ module Zernio
     # Interest objects from /v1/ads/interests. Each must include id and name.
     attr_accessor :interests
 
+    # Postal/ZIP geo targeting. `key` is the platform's postal location ID from /v1/ads/targeting/search?dimension=geo&geoType=zip. Supported on Meta, Google, TikTok, Pinterest, X.
+    attr_accessor :zips
+
+    # DMA / metro-area geo targeting. `key` is the platform's metro ID from /v1/ads/targeting/search?dimension=geo&geoType=metro.
+    attr_accessor :metros
+
+    # Point-radius (lat/lng) geo targeting. Meta only (custom_locations). Rejected on platforms without radius support.
+    attr_accessor :custom_locations
+
+    # Behaviour entities from /v1/ads/targeting/search?dimension=behavior. Supported on Meta and TikTok. Each must include id.
+    attr_accessor :behaviors
+
+    # Normalized household-income tier. Meta and TikTok express all four; Google maps only `top_10`; rejected on LinkedIn, X, and Pinterest. On Meta, income targeting is incompatible with housing/employment/credit `specialAdCategories`. 
+    attr_accessor :income_tier
+
+    # Language codes (e.g. ['en']). Restricts the audience by language.
+    attr_accessor :languages
+
+    # ID of a `saved_targeting` audience (created via POST /v1/ads/audiences). When set, its stored TargetingSpec is expanded as the base targeting; inline fields on this body merge on top. Lets you reuse a named targeting preset without re-sending every field. 
+    attr_accessor :saved_targeting_id
+
+    # Meta only. Declares the ad's special category, required for housing, employment, credit, or political/social-issue ads (Meta enforces restricted targeting for these). Note: setting a special category disables income/zip targeting on Meta. 
+    attr_accessor :special_ad_categories
+
     # Required for lifetime budgets
     attr_accessor :end_date
 
@@ -185,6 +209,14 @@ module Zernio
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
         :'interests' => :'interests',
+        :'zips' => :'zips',
+        :'metros' => :'metros',
+        :'custom_locations' => :'customLocations',
+        :'behaviors' => :'behaviors',
+        :'income_tier' => :'incomeTier',
+        :'languages' => :'languages',
+        :'saved_targeting_id' => :'savedTargetingId',
+        :'special_ad_categories' => :'specialAdCategories',
         :'end_date' => :'endDate',
         :'audience_id' => :'audienceId',
         :'campaign_type' => :'campaignType',
@@ -244,6 +276,14 @@ module Zernio
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>',
+        :'zips' => :'Array<CreateStandaloneAdRequestZipsInner>',
+        :'metros' => :'Array<CreateStandaloneAdRequestZipsInner>',
+        :'custom_locations' => :'Array<CreateStandaloneAdRequestCustomLocationsInner>',
+        :'behaviors' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
+        :'income_tier' => :'String',
+        :'languages' => :'Array<String>',
+        :'saved_targeting_id' => :'String',
+        :'special_ad_categories' => :'Array<String>',
         :'end_date' => :'Time',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
@@ -403,6 +443,50 @@ module Zernio
       if attributes.key?(:'interests')
         if (value = attributes[:'interests']).is_a?(Array)
           self.interests = value
+        end
+      end
+
+      if attributes.key?(:'zips')
+        if (value = attributes[:'zips']).is_a?(Array)
+          self.zips = value
+        end
+      end
+
+      if attributes.key?(:'metros')
+        if (value = attributes[:'metros']).is_a?(Array)
+          self.metros = value
+        end
+      end
+
+      if attributes.key?(:'custom_locations')
+        if (value = attributes[:'custom_locations']).is_a?(Array)
+          self.custom_locations = value
+        end
+      end
+
+      if attributes.key?(:'behaviors')
+        if (value = attributes[:'behaviors']).is_a?(Array)
+          self.behaviors = value
+        end
+      end
+
+      if attributes.key?(:'income_tier')
+        self.income_tier = attributes[:'income_tier']
+      end
+
+      if attributes.key?(:'languages')
+        if (value = attributes[:'languages']).is_a?(Array)
+          self.languages = value
+        end
+      end
+
+      if attributes.key?(:'saved_targeting_id')
+        self.saved_targeting_id = attributes[:'saved_targeting_id']
+      end
+
+      if attributes.key?(:'special_ad_categories')
+        if (value = attributes[:'special_ad_categories']).is_a?(Array)
+          self.special_ad_categories = value
         end
       end
 
@@ -576,6 +660,8 @@ module Zernio
       return false if !@age_min.nil? && @age_min < 13
       return false if !@age_max.nil? && @age_max > 65
       return false if !@age_max.nil? && @age_max < 13
+      income_tier_validator = EnumAttributeValidator.new('String', ["top_5", "top_10", "top_10_25", "top_25_50"])
+      return false unless income_tier_validator.valid?(@income_tier)
       campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search"])
       return false unless campaign_type_validator.valid?(@campaign_type)
       advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
@@ -734,6 +820,16 @@ module Zernio
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] income_tier Object to be assigned
+    def income_tier=(income_tier)
+      validator = EnumAttributeValidator.new('String', ["top_5", "top_10", "top_10_25", "top_25_50"])
+      unless validator.valid?(income_tier)
+        fail ArgumentError, "invalid value for \"income_tier\", must be one of #{validator.allowable_values}."
+      end
+      @income_tier = income_tier
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] campaign_type Object to be assigned
     def campaign_type=(campaign_type)
       validator = EnumAttributeValidator.new('String', ["display", "search"])
@@ -850,6 +946,14 @@ module Zernio
           age_min == o.age_min &&
           age_max == o.age_max &&
           interests == o.interests &&
+          zips == o.zips &&
+          metros == o.metros &&
+          custom_locations == o.custom_locations &&
+          behaviors == o.behaviors &&
+          income_tier == o.income_tier &&
+          languages == o.languages &&
+          saved_targeting_id == o.saved_targeting_id &&
+          special_ad_categories == o.special_ad_categories &&
           end_date == o.end_date &&
           audience_id == o.audience_id &&
           campaign_type == o.campaign_type &&
@@ -878,7 +982,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, saved_targeting_id, special_ad_categories, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash
