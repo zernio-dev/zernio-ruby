@@ -7,7 +7,7 @@
 | **platform** | **String** |  |  |
 | **custom_content** | **String** |  | [optional] |
 | **platform_specific_data** | **Object** |  | [optional] |
-| **custom_media** | [**Array&lt;ValidatePostRequestPlatformsInnerCustomMediaInner&gt;**](ValidatePostRequestPlatformsInnerCustomMediaInner.md) |  | [optional] |
+| **custom_media** | [**Array&lt;MediaItem&gt;**](MediaItem.md) |  | [optional] |
 
 ## Example
 

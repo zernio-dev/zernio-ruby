@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **content** | **String** | Post text content | [optional] |
 | **platforms** | [**Array&lt;ValidatePostRequestPlatformsInner&gt;**](ValidatePostRequestPlatformsInner.md) | Target platforms (same format as POST /v1/posts) |  |
-| **media_items** | [**Array&lt;ValidatePostRequestMediaItemsInner&gt;**](ValidatePostRequestMediaItemsInner.md) | Root media items shared across platforms | [optional] |
+| **media_items** | [**Array&lt;MediaItem&gt;**](MediaItem.md) | Root media items shared across platforms | [optional] |
 
 ## Example
 

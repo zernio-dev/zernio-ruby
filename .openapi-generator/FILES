@@ -899,9 +899,7 @@ docs/ValidatePostLength200Response.md
 docs/ValidatePostLength200ResponsePlatformsValue.md
 docs/ValidatePostLengthRequest.md
 docs/ValidatePostRequest.md
-docs/ValidatePostRequestMediaItemsInner.md
 docs/ValidatePostRequestPlatformsInner.md
-docs/ValidatePostRequestPlatformsInnerCustomMediaInner.md
 docs/ValidateSubreddit200Response.md
 docs/ValidateSubreddit200ResponseOneOf.md
 docs/ValidateSubreddit200ResponseOneOf1.md
@@ -1891,9 +1889,7 @@ lib/zernio-sdk/models/validate_post_length200_response.rb
 lib/zernio-sdk/models/validate_post_length200_response_platforms_value.rb
 lib/zernio-sdk/models/validate_post_length_request.rb
 lib/zernio-sdk/models/validate_post_request.rb
-lib/zernio-sdk/models/validate_post_request_media_items_inner.rb
 lib/zernio-sdk/models/validate_post_request_platforms_inner.rb
-lib/zernio-sdk/models/validate_post_request_platforms_inner_custom_media_inner.rb
 lib/zernio-sdk/models/validate_subreddit200_response.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of1.rb
@@ -2871,8 +2867,6 @@ spec/models/validate_post200_response_spec.rb
 spec/models/validate_post_length200_response_platforms_value_spec.rb
 spec/models/validate_post_length200_response_spec.rb
 spec/models/validate_post_length_request_spec.rb
-spec/models/validate_post_request_media_items_inner_spec.rb
-spec/models/validate_post_request_platforms_inner_custom_media_inner_spec.rb
 spec/models/validate_post_request_platforms_inner_spec.rb
 spec/models/validate_post_request_spec.rb
 spec/models/validate_subreddit200_response_one_of1_spec.rb
