@@ -19,6 +19,8 @@ module Zernio
 
     attr_accessor :comments
 
+    attr_accessor :post
+
     attr_accessor :pagination
 
     attr_accessor :meta
@@ -28,6 +30,7 @@ module Zernio
       {
         :'status' => :'status',
         :'comments' => :'comments',
+        :'post' => :'post',
         :'pagination' => :'pagination',
         :'meta' => :'meta'
       }
@@ -48,6 +51,7 @@ module Zernio
       {
         :'status' => :'String',
         :'comments' => :'Array<GetInboxPostComments200ResponseCommentsInner>',
+        :'post' => :'GetInboxPostComments200ResponsePost',
         :'pagination' => :'GetInboxPostComments200ResponsePagination',
         :'meta' => :'GetInboxPostComments200ResponseMeta'
       }
@@ -85,6 +89,10 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'post')
+        self.post = attributes[:'post']
+      end
+
       if attributes.key?(:'pagination')
         self.pagination = attributes[:'pagination']
       end
@@ -116,6 +124,7 @@ module Zernio
       self.class == o.class &&
           status == o.status &&
           comments == o.comments &&
+          post == o.post &&
           pagination == o.pagination &&
           meta == o.meta
     end
@@ -129,7 +138,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, comments, pagination, meta].hash
+      [status, comments, post, pagination, meta].hash
     end
 
     # Builds the object from hash

@@ -369,6 +369,7 @@ require 'zernio-sdk/models/get_inbox_post_comments200_response_comments_inner_fr
 require 'zernio-sdk/models/get_inbox_post_comments200_response_meta'
 require 'zernio-sdk/models/get_inbox_post_comments200_response_meta_ad_comments'
 require 'zernio-sdk/models/get_inbox_post_comments200_response_pagination'
+require 'zernio-sdk/models/get_inbox_post_comments200_response_post'
 require 'zernio-sdk/models/get_instagram_account_insights404_response'
 require 'zernio-sdk/models/get_instagram_story_insights200_response'
 require 'zernio-sdk/models/get_instagram_story_insights200_response_data'

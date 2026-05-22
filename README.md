@@ -722,6 +722,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInboxPostComments200ResponseMeta](docs/GetInboxPostComments200ResponseMeta.md)
  - [Zernio::GetInboxPostComments200ResponseMetaAdComments](docs/GetInboxPostComments200ResponseMetaAdComments.md)
  - [Zernio::GetInboxPostComments200ResponsePagination](docs/GetInboxPostComments200ResponsePagination.md)
+ - [Zernio::GetInboxPostComments200ResponsePost](docs/GetInboxPostComments200ResponsePost.md)
  - [Zernio::GetInstagramAccountInsights404Response](docs/GetInstagramAccountInsights404Response.md)
  - [Zernio::GetInstagramStoryInsights200Response](docs/GetInstagramStoryInsights200Response.md)
  - [Zernio::GetInstagramStoryInsights200ResponseData](docs/GetInstagramStoryInsights200ResponseData.md)
