@@ -44,8 +44,11 @@ module Zernio
     # Required on legacy + attach shapes for Meta. Honoured on TikTok (passes through to the Spark Ad creative's `call_to_action`) and on LinkedIn (the CTA button on the ad; defaults to LEARN_MORE when `linkUrl` is set). LinkedIn accepts: LEARN_MORE, SIGN_UP, DOWNLOAD, SUBSCRIBE, REGISTER, JOIN, ATTEND, REQUEST_DEMO, VIEW_QUOTE, APPLY, SEE_MORE, SHOP_NOW, BUY_NOW. Ignored by Google, Pinterest, and X/Twitter.
     attr_accessor :call_to_action
 
-    # Required on legacy + attach shapes (skip for multi-creative). On LinkedIn it's the ad's destination URL; required for `traffic` ads, optional for `engagement` / `awareness`.
+    # Required on legacy + attach shapes (skip for multi-creative). On LinkedIn it's the ad's destination URL; required for `traffic` ads, optional for `engagement` / `awareness`. NOT required when `goal` is `lead_generation` (the ad opens a Lead Gen form instead of a destination).
     attr_accessor :link_url
+
+    # Meta Lead Gen forms only (facebook/instagram). The leadgen_forms ID to attach to the ad's creative — create one via POST /v1/ads/lead-forms. REQUIRED when `goal` is `lead_generation`; ignored otherwise. The ad set's promoted_object.page_id + LEAD_GENERATION optimization are derived automatically from the goal.
+    attr_accessor :lead_gen_form_id
 
     # Image creative for Meta/Google/Pinterest/LinkedIn on legacy + attach shapes (mutually exclusive with `video`). Required for LinkedIn ads unless `video` is set. Not required for Google Search campaigns. For TikTok, this field carries the VIDEO URL (the TikTok ads endpoint is video-only; the field retains the `imageUrl` name for cross-platform consistency). Ignored for X/Twitter. For Google Display, treated as the landscape image (alias of `images.landscape`); supply `images.square` alongside or the request is rejected. For LinkedIn the image is uploaded to LinkedIn under the authoring Company Page (see `organizationId`); recommended ratio 1.91:1 (e.g. 1200×627).
     attr_accessor :image_url
@@ -195,6 +198,7 @@ module Zernio
         :'body' => :'body',
         :'call_to_action' => :'callToAction',
         :'link_url' => :'linkUrl',
+        :'lead_gen_form_id' => :'leadGenFormId',
         :'image_url' => :'imageUrl',
         :'images' => :'images',
         :'video' => :'video',
@@ -262,6 +266,7 @@ module Zernio
         :'body' => :'String',
         :'call_to_action' => :'String',
         :'link_url' => :'String',
+        :'lead_gen_form_id' => :'String',
         :'image_url' => :'String',
         :'images' => :'CreateStandaloneAdRequestImages',
         :'video' => :'CreateStandaloneAdRequestVideo',
@@ -378,6 +383,10 @@ module Zernio
 
       if attributes.key?(:'link_url')
         self.link_url = attributes[:'link_url']
+      end
+
+      if attributes.key?(:'lead_gen_form_id')
+        self.lead_gen_form_id = attributes[:'lead_gen_form_id']
       end
 
       if attributes.key?(:'image_url')
@@ -932,6 +941,7 @@ module Zernio
           body == o.body &&
           call_to_action == o.call_to_action &&
           link_url == o.link_url &&
+          lead_gen_form_id == o.lead_gen_form_id &&
           image_url == o.image_url &&
           images == o.images &&
           video == o.video &&
@@ -982,7 +992,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, saved_targeting_id, special_ad_categories, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, saved_targeting_id, special_ad_categories, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

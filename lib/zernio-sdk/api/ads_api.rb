@@ -99,6 +99,76 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Archive a Lead Gen form
+    # Meta has no hard delete for forms; this archives the form (status=ARCHIVED).
+    # @param form_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [ArchiveLeadForm200Response]
+    def archive_lead_form(form_id, account_id, opts = {})
+      data, _status_code, _headers = archive_lead_form_with_http_info(form_id, account_id, opts)
+      data
+    end
+
+    # Archive a Lead Gen form
+    # Meta has no hard delete for forms; this archives the form (status&#x3D;ARCHIVED).
+    # @param form_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ArchiveLeadForm200Response, Integer, Hash)>] ArchiveLeadForm200Response data, response status code and response headers
+    def archive_lead_form_with_http_info(form_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.archive_lead_form ...'
+      end
+      # verify the required parameter 'form_id' is set
+      if @api_client.config.client_side_validation && form_id.nil?
+        fail ArgumentError, "Missing the required parameter 'form_id' when calling AdsApi.archive_lead_form"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.archive_lead_form"
+      end
+      # resource path
+      local_var_path = '/v1/ads/lead-forms/{formId}'.sub('{' + 'formId' + '}', CGI.escape(form_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ArchiveLeadForm200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.archive_lead_form",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#archive_lead_form\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Boost post as ad
     # Creates a paid ad campaign from an existing published post. Creates the full platform campaign hierarchy (campaign, ad set, ad).
     # @param boost_post_request [BoostPostRequest] 
@@ -309,6 +379,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a Lead Gen (Instant) form
+    # Creates a Lead Gen form on the connected Facebook Page (POST /{page-id}/leadgen_forms). NOT idempotent — a retry creates a second form. Prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. Requires the Ads add-on. 
+    # @param create_lead_form_request [CreateLeadFormRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateLeadForm200Response]
+    def create_lead_form(create_lead_form_request, opts = {})
+      data, _status_code, _headers = create_lead_form_with_http_info(create_lead_form_request, opts)
+      data
+    end
+
+    # Create a Lead Gen (Instant) form
+    # Creates a Lead Gen form on the connected Facebook Page (POST /{page-id}/leadgen_forms). NOT idempotent — a retry creates a second form. Prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. Requires the Ads add-on. 
+    # @param create_lead_form_request [CreateLeadFormRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateLeadForm200Response, Integer, Hash)>] CreateLeadForm200Response data, response status code and response headers
+    def create_lead_form_with_http_info(create_lead_form_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.create_lead_form ...'
+      end
+      # verify the required parameter 'create_lead_form_request' is set
+      if @api_client.config.client_side_validation && create_lead_form_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_lead_form_request' when calling AdsApi.create_lead_form"
+      end
+      # resource path
+      local_var_path = '/v1/ads/lead-forms'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_lead_form_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateLeadForm200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.create_lead_form",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#create_lead_form\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create standalone ad
     # Creates a paid ad with custom creative across Meta, Google Ads, Pinterest, TikTok, X/Twitter, and LinkedIn. Supports three mutually-exclusive request shapes selected by the body, a legacy single-creative shape (all platforms, default), a Meta-only multi-creative shape via the creatives array (one ad set with N ads sharing budget and targeting), and a Meta-only attach shape via adSetId (adds one new ad to an existing ad set). Per-platform required fields, budget minimums, and video-ad rules are documented on each property below. LinkedIn creates a Single Image or Single Video Ad backed by a Direct Sponsored Content \"dark post\" authored by a Company Page (see `organizationId`); supported goals are engagement, traffic, awareness, and video_views (video ads use the `video` field; video_views requires a video), and traffic ads require `linkUrl`.
     # @param create_standalone_ad_request [CreateStandaloneAdRequest] 
@@ -373,6 +511,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#create_standalone_ad\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create a synthetic test lead
+    # Submits a test lead against the form (POST /{form-id}/test_leads) to exercise retrieval without waiting for real ad impressions. Meta allows one test lead per form at a time. 
+    # @param form_id [String] 
+    # @param create_test_lead_request [CreateTestLeadRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateTestLead200Response]
+    def create_test_lead(form_id, create_test_lead_request, opts = {})
+      data, _status_code, _headers = create_test_lead_with_http_info(form_id, create_test_lead_request, opts)
+      data
+    end
+
+    # Create a synthetic test lead
+    # Submits a test lead against the form (POST /{form-id}/test_leads) to exercise retrieval without waiting for real ad impressions. Meta allows one test lead per form at a time. 
+    # @param form_id [String] 
+    # @param create_test_lead_request [CreateTestLeadRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateTestLead200Response, Integer, Hash)>] CreateTestLead200Response data, response status code and response headers
+    def create_test_lead_with_http_info(form_id, create_test_lead_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.create_test_lead ...'
+      end
+      # verify the required parameter 'form_id' is set
+      if @api_client.config.client_side_validation && form_id.nil?
+        fail ArgumentError, "Missing the required parameter 'form_id' when calling AdsApi.create_test_lead"
+      end
+      # verify the required parameter 'create_test_lead_request' is set
+      if @api_client.config.client_side_validation && create_test_lead_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_test_lead_request' when calling AdsApi.create_test_lead"
+      end
+      # resource path
+      local_var_path = '/v1/ads/lead-forms/{formId}/test-leads'.sub('{' + 'formId' + '}', CGI.escape(form_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_test_lead_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateTestLead200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.create_test_lead",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#create_test_lead\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -978,6 +1190,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get a single Lead Gen form
+    # @param form_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetLeadForm200Response]
+    def get_lead_form(form_id, account_id, opts = {})
+      data, _status_code, _headers = get_lead_form_with_http_info(form_id, account_id, opts)
+      data
+    end
+
+    # Get a single Lead Gen form
+    # @param form_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetLeadForm200Response, Integer, Hash)>] GetLeadForm200Response data, response status code and response headers
+    def get_lead_form_with_http_info(form_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_lead_form ...'
+      end
+      # verify the required parameter 'form_id' is set
+      if @api_client.config.client_side_validation && form_id.nil?
+        fail ArgumentError, "Missing the required parameter 'form_id' when calling AdsApi.get_lead_form"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.get_lead_form"
+      end
+      # resource path
+      local_var_path = '/v1/ads/lead-forms/{formId}'.sub('{' + 'formId' + '}', CGI.escape(form_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetLeadForm200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_lead_form",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_lead_form\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List ad accounts
     # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok's `/advertiser/info/` endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time `advertiser_ids` list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 
     # @param account_id [String] Social account ID
@@ -1374,6 +1654,251 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#list_conversion_destinations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List leads for a single form
+    # Returns leads for one form. Serves persisted leads (ingested via the leadgen webhook) when available, falling back to a live Graph read. 
+    # @param form_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [String] :cursor 
+    # @option opts [Integer] :since Unix seconds.
+    # @return [ListFormLeads200Response]
+    def list_form_leads(form_id, account_id, opts = {})
+      data, _status_code, _headers = list_form_leads_with_http_info(form_id, account_id, opts)
+      data
+    end
+
+    # List leads for a single form
+    # Returns leads for one form. Serves persisted leads (ingested via the leadgen webhook) when available, falling back to a live Graph read. 
+    # @param form_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [String] :cursor 
+    # @option opts [Integer] :since Unix seconds.
+    # @return [Array<(ListFormLeads200Response, Integer, Hash)>] ListFormLeads200Response data, response status code and response headers
+    def list_form_leads_with_http_info(form_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_form_leads ...'
+      end
+      # verify the required parameter 'form_id' is set
+      if @api_client.config.client_side_validation && form_id.nil?
+        fail ArgumentError, "Missing the required parameter 'form_id' when calling AdsApi.list_form_leads"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_form_leads"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_form_leads, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_form_leads, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/lead-forms/{formId}/leads'.sub('{' + 'formId' + '}', CGI.escape(form_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListFormLeads200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_form_leads",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_form_leads\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List Lead Gen (Instant) forms
+    # Lists the Lead Gen forms owned by the connected Facebook Page. Requires the Ads add-on.
+    # @param account_id [String] Connected facebook account id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [String] :cursor 
+    # @return [ListLeadForms200Response]
+    def list_lead_forms(account_id, opts = {})
+      data, _status_code, _headers = list_lead_forms_with_http_info(account_id, opts)
+      data
+    end
+
+    # List Lead Gen (Instant) forms
+    # Lists the Lead Gen forms owned by the connected Facebook Page. Requires the Ads add-on.
+    # @param account_id [String] Connected facebook account id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [String] :cursor 
+    # @return [Array<(ListLeadForms200Response, Integer, Hash)>] ListLeadForms200Response data, response status code and response headers
+    def list_lead_forms_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_lead_forms ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_lead_forms"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_lead_forms, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_lead_forms, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/lead-forms'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListLeadForms200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_lead_forms",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_lead_forms\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List submitted leads (cross-form CRM view)
+    # Returns persisted Meta Lead Gen leads for your team, newest-first, with keyset pagination on `cursor`. Leads are ingested in real time from the `leadgen` webhook. Requires the Ads add-on. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :form_id Filter to a single lead form.
+    # @option opts [String] :account_id Filter to a single connected account.
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [Integer] :since Unix seconds; only leads created at/after this Meta timestamp.
+    # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor.
+    # @return [ListLeads200Response]
+    def list_leads(opts = {})
+      data, _status_code, _headers = list_leads_with_http_info(opts)
+      data
+    end
+
+    # List submitted leads (cross-form CRM view)
+    # Returns persisted Meta Lead Gen leads for your team, newest-first, with keyset pagination on &#x60;cursor&#x60;. Leads are ingested in real time from the &#x60;leadgen&#x60; webhook. Requires the Ads add-on. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :form_id Filter to a single lead form.
+    # @option opts [String] :account_id Filter to a single connected account.
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [Integer] :since Unix seconds; only leads created at/after this Meta timestamp.
+    # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor.
+    # @return [Array<(ListLeads200Response, Integer, Hash)>] ListLeads200Response data, response status code and response headers
+    def list_leads_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_leads ...'
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_leads, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_leads, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/leads'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'formId'] = opts[:'form_id'] if !opts[:'form_id'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListLeads200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_leads",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_leads\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

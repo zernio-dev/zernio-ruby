@@ -46,6 +46,19 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for archive_lead_form
+  # Archive a Lead Gen form
+  # Meta has no hard delete for forms; this archives the form (status&#x3D;ARCHIVED).
+  # @param form_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [ArchiveLeadForm200Response]
+  describe 'archive_lead_form test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for boost_post
   # Boost post as ad
   # Creates a paid ad campaign from an existing published post. Creates the full platform campaign hierarchy (campaign, ad set, ad).
@@ -83,6 +96,18 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for create_lead_form
+  # Create a Lead Gen (Instant) form
+  # Creates a Lead Gen form on the connected Facebook Page (POST /{page-id}/leadgen_forms). NOT idempotent — a retry creates a second form. Prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. Requires the Ads add-on. 
+  # @param create_lead_form_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateLeadForm200Response]
+  describe 'create_lead_form test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_standalone_ad
   # Create standalone ad
   # Creates a paid ad with custom creative across Meta, Google Ads, Pinterest, TikTok, X/Twitter, and LinkedIn. Supports three mutually-exclusive request shapes selected by the body, a legacy single-creative shape (all platforms, default), a Meta-only multi-creative shape via the creatives array (one ad set with N ads sharing budget and targeting), and a Meta-only attach shape via adSetId (adds one new ad to an existing ad set). Per-platform required fields, budget minimums, and video-ad rules are documented on each property below. LinkedIn creates a Single Image or Single Video Ad backed by a Direct Sponsored Content \&quot;dark post\&quot; authored by a Company Page (see &#x60;organizationId&#x60;); supported goals are engagement, traffic, awareness, and video_views (video ads use the &#x60;video&#x60; field; video_views requires a video), and traffic ads require &#x60;linkUrl&#x60;.
@@ -90,6 +115,19 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [CreateStandaloneAd201Response]
   describe 'create_standalone_ad test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_test_lead
+  # Create a synthetic test lead
+  # Submits a test lead against the form (POST /{form-id}/test_leads) to exercise retrieval without waiting for real ad impressions. Meta allows one test lead per form at a time. 
+  # @param form_id 
+  # @param create_test_lead_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateTestLead200Response]
+  describe 'create_test_lead test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -206,6 +244,18 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for get_lead_form
+  # Get a single Lead Gen form
+  # @param form_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetLeadForm200Response]
+  describe 'get_lead_form test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_accounts
   # List ad accounts
   # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok&#39;s &#x60;/advertiser/info/&#x60; endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time &#x60;advertiser_ids&#x60; list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 
@@ -278,6 +328,52 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [ListConversionDestinations200Response]
   describe 'list_conversion_destinations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_form_leads
+  # List leads for a single form
+  # Returns leads for one form. Serves persisted leads (ingested via the leadgen webhook) when available, falling back to a live Graph read. 
+  # @param form_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit 
+  # @option opts [String] :cursor 
+  # @option opts [Integer] :since Unix seconds.
+  # @return [ListFormLeads200Response]
+  describe 'list_form_leads test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_lead_forms
+  # List Lead Gen (Instant) forms
+  # Lists the Lead Gen forms owned by the connected Facebook Page. Requires the Ads add-on.
+  # @param account_id Connected facebook account id.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit 
+  # @option opts [String] :cursor 
+  # @return [ListLeadForms200Response]
+  describe 'list_lead_forms test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_leads
+  # List submitted leads (cross-form CRM view)
+  # Returns persisted Meta Lead Gen leads for your team, newest-first, with keyset pagination on &#x60;cursor&#x60;. Leads are ingested in real time from the &#x60;leadgen&#x60; webhook. Requires the Ads add-on. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :form_id Filter to a single lead form.
+  # @option opts [String] :account_id Filter to a single connected account.
+  # @option opts [Integer] :limit 
+  # @option opts [Integer] :since Unix seconds; only leads created at/after this Meta timestamp.
+  # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor.
+  # @return [ListLeads200Response]
+  describe 'list_leads test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

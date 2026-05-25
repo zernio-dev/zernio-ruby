@@ -106,10 +106,13 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set (budget, status, and/or bid strategy)
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
 *Zernio::AdsApi* | [**add_conversion_associations**](docs/AdsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns with a conversion destination
+*Zernio::AdsApi* | [**archive_lead_form**](docs/AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a Lead Gen form
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn)
 *Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad(s)
+*Zernio::AdsApi* | [**create_lead_form**](docs/AdsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a Lead Gen (Instant) form
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
+*Zernio::AdsApi* | [**create_test_lead**](docs/AdsApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a synthetic test lead
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdsApi* | [**delete_conversion_destination**](docs/AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Soft-delete a conversion destination
 *Zernio::AdsApi* | [**estimate_ad_reach**](docs/AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
@@ -118,11 +121,15 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Fetch a single conversion destination
 *Zernio::AdsApi* | [**get_conversion_metrics**](docs/AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Fetch attribution metrics for a conversion destination
+*Zernio::AdsApi* | [**get_lead_form**](docs/AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a single Lead Gen form
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdsApi* | [**list_ads_business_centers**](docs/AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
 *Zernio::AdsApi* | [**list_conversion_associations**](docs/AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List campaigns associated with a conversion destination
 *Zernio::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List destinations for the Conversions API
+*Zernio::AdsApi* | [**list_form_leads**](docs/AdsApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form
+*Zernio::AdsApi* | [**list_lead_forms**](docs/AdsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List Lead Gen (Instant) forms
+*Zernio::AdsApi* | [**list_leads**](docs/AdsApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads (cross-form CRM view)
 *Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove campaign↔conversion associations
 *Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests (deprecated)
 *Zernio::AdsApi* | [**search_ad_targeting**](docs/AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options
@@ -416,6 +423,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ApiKey](docs/ApiKey.md)
  - [Zernio::ApiKeyProfileIdsInner](docs/ApiKeyProfileIdsInner.md)
  - [Zernio::ApproveWhatsAppGroupJoinRequestsRequest](docs/ApproveWhatsAppGroupJoinRequestsRequest.md)
+ - [Zernio::ArchiveLeadForm200Response](docs/ArchiveLeadForm200Response.md)
  - [Zernio::BatchGetGoogleBusinessReviews200Response](docs/BatchGetGoogleBusinessReviews200Response.md)
  - [Zernio::BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner](docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md)
  - [Zernio::BatchGetGoogleBusinessReviewsRequest](docs/BatchGetGoogleBusinessReviewsRequest.md)
@@ -509,6 +517,10 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateInboxConversationRequest](docs/CreateInboxConversationRequest.md)
  - [Zernio::CreateInviteToken201Response](docs/CreateInviteToken201Response.md)
  - [Zernio::CreateInviteTokenRequest](docs/CreateInviteTokenRequest.md)
+ - [Zernio::CreateLeadForm200Response](docs/CreateLeadForm200Response.md)
+ - [Zernio::CreateLeadFormRequest](docs/CreateLeadFormRequest.md)
+ - [Zernio::CreateLeadFormRequestQuestionsInner](docs/CreateLeadFormRequestQuestionsInner.md)
+ - [Zernio::CreateLeadFormRequestQuestionsInnerOptionsInner](docs/CreateLeadFormRequestQuestionsInnerOptionsInner.md)
  - [Zernio::CreatePost409Response](docs/CreatePost409Response.md)
  - [Zernio::CreatePost409ResponseDetails](docs/CreatePost409ResponseDetails.md)
  - [Zernio::CreatePost429Response](docs/CreatePost429Response.md)
@@ -540,6 +552,10 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
  - [Zernio::CreateStandaloneAdRequestZipsInner](docs/CreateStandaloneAdRequestZipsInner.md)
+ - [Zernio::CreateTestLead200Response](docs/CreateTestLead200Response.md)
+ - [Zernio::CreateTestLead200ResponseTestLead](docs/CreateTestLead200ResponseTestLead.md)
+ - [Zernio::CreateTestLeadRequest](docs/CreateTestLeadRequest.md)
+ - [Zernio::CreateTestLeadRequestFieldDataInner](docs/CreateTestLeadRequestFieldDataInner.md)
  - [Zernio::CreateTrackingTag201Response](docs/CreateTrackingTag201Response.md)
  - [Zernio::CreateTrackingTagRequest](docs/CreateTrackingTagRequest.md)
  - [Zernio::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
@@ -732,6 +748,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInstagramStoryInsights200Response](docs/GetInstagramStoryInsights200Response.md)
  - [Zernio::GetInstagramStoryInsights200ResponseData](docs/GetInstagramStoryInsights200ResponseData.md)
  - [Zernio::GetInstagramStoryInsights200ResponseDataMetrics](docs/GetInstagramStoryInsights200ResponseDataMetrics.md)
+ - [Zernio::GetLeadForm200Response](docs/GetLeadForm200Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics200Response](docs/GetLinkedInAggregateAnalytics200Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics400Response](docs/GetLinkedInAggregateAnalytics400Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics402Response](docs/GetLinkedInAggregateAnalytics402Response.md)
@@ -887,6 +904,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListCustomFields200ResponseFieldsInner](docs/ListCustomFields200ResponseFieldsInner.md)
  - [Zernio::ListFacebookPages200Response](docs/ListFacebookPages200Response.md)
  - [Zernio::ListFacebookPages200ResponsePagesInner](docs/ListFacebookPages200ResponsePagesInner.md)
+ - [Zernio::ListFormLeads200Response](docs/ListFormLeads200Response.md)
+ - [Zernio::ListFormLeads200ResponseLeadsInner](docs/ListFormLeads200ResponseLeadsInner.md)
  - [Zernio::ListGoogleBusinessLocations200Response](docs/ListGoogleBusinessLocations200Response.md)
  - [Zernio::ListGoogleBusinessLocations200ResponseLocationsInner](docs/ListGoogleBusinessLocations200ResponseLocationsInner.md)
  - [Zernio::ListGoogleBusinessMedia200Response](docs/ListGoogleBusinessMedia200Response.md)
@@ -909,6 +928,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ListInboxReviews200ResponseSummary](docs/ListInboxReviews200ResponseSummary.md)
  - [Zernio::ListInstagramStories200Response](docs/ListInstagramStories200Response.md)
  - [Zernio::ListInstagramStories200ResponseDataInner](docs/ListInstagramStories200ResponseDataInner.md)
+ - [Zernio::ListLeadForms200Response](docs/ListLeadForms200Response.md)
+ - [Zernio::ListLeads200Response](docs/ListLeads200Response.md)
+ - [Zernio::ListLeads200ResponseLeadsInner](docs/ListLeads200ResponseLeadsInner.md)
  - [Zernio::ListLinkedInOrganizations200Response](docs/ListLinkedInOrganizations200Response.md)
  - [Zernio::ListLinkedInOrganizations200ResponseOrganizationsInner](docs/ListLinkedInOrganizations200ResponseOrganizationsInner.md)
  - [Zernio::ListLogs200Response](docs/ListLogs200Response.md)
