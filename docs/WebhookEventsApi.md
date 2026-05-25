@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
 | [**on_ad_status_changed**](WebhookEventsApi.md#on_ad_status_changed) | **POST** /ad.status_changed | Ad status changed event |
 | [**on_comment_received**](WebhookEventsApi.md#on_comment_received) | **POST** /comment.received | Comment received event |
+| [**on_lead_received**](WebhookEventsApi.md#on_lead_received) | **POST** /lead.received | Lead received event |
 | [**on_message_deleted**](WebhookEventsApi.md#on_message_deleted) | **POST** /message.deleted | Message deleted event |
 | [**on_message_delivered**](WebhookEventsApi.md#on_message_delivered) | **POST** /message.delivered | Message delivered event |
 | [**on_message_edited**](WebhookEventsApi.md#on_message_edited) | **POST** /message.edited | Message edited event |
@@ -356,6 +357,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_comment** | [**WebhookPayloadComment**](WebhookPayloadComment.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_lead_received
+
+> on_lead_received(webhook_payload_lead)
+
+Lead received event
+
+Fired when a new lead is submitted against a Meta Lead Gen (Instant) Form and ingested via the Page `leadgen` webhook. `lead.fields` is the question-key to answer map; `lead.formId` / `lead.adId` give provenance. Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_lead =  # WebhookPayloadLead | 
+
+begin
+  # Lead received event
+  api_instance.on_lead_received(webhook_payload_lead)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_lead_received: #{e}"
+end
+```
+
+#### Using the on_lead_received_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_lead_received_with_http_info(webhook_payload_lead)
+
+```ruby
+begin
+  # Lead received event
+  data, status_code, headers = api_instance.on_lead_received_with_http_info(webhook_payload_lead)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_lead_received_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_lead** | [**WebhookPayloadLead**](WebhookPayloadLead.md) |  |  |
 
 ### Return type
 

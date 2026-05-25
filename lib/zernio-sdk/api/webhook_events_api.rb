@@ -349,6 +349,72 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Lead received event
+    # Fired when a new lead is submitted against a Meta Lead Gen (Instant) Form and ingested via the Page `leadgen` webhook. `lead.fields` is the question-key to answer map; `lead.formId` / `lead.adId` give provenance. Requires the Ads add-on. 
+    # @param webhook_payload_lead [WebhookPayloadLead] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_lead_received(webhook_payload_lead, opts = {})
+      on_lead_received_with_http_info(webhook_payload_lead, opts)
+      nil
+    end
+
+    # Lead received event
+    # Fired when a new lead is submitted against a Meta Lead Gen (Instant) Form and ingested via the Page &#x60;leadgen&#x60; webhook. &#x60;lead.fields&#x60; is the question-key to answer map; &#x60;lead.formId&#x60; / &#x60;lead.adId&#x60; give provenance. Requires the Ads add-on. 
+    # @param webhook_payload_lead [WebhookPayloadLead] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_lead_received_with_http_info(webhook_payload_lead, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_lead_received ...'
+      end
+      # verify the required parameter 'webhook_payload_lead' is set
+      if @api_client.config.client_side_validation && webhook_payload_lead.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_lead' when calling WebhookEventsApi.on_lead_received"
+      end
+      # resource path
+      local_var_path = '/lead.received'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_lead)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_lead_received",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_lead_received\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Message deleted event
     # Fired when a sender deletes (unsends) a message. Supported on Instagram (incoming unsend) and WhatsApp (when the business deletes an outgoing message via the Cloud API). The payload retains the pre-delete text and attachments so API consumers can access the original content for moderation or compliance — the Zernio dashboard UI hides it. 
     # @param webhook_payload_message_deleted [WebhookPayloadMessageDeleted] 
