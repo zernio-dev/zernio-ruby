@@ -18,17 +18,26 @@ module Zernio
     # The social account ID to send from
     attr_accessor :account_id
 
-    # Twitter numeric user ID of the recipient. Provide either this or participantUsername.
+    # Recipient identifier. For X this is the numeric user ID; for WhatsApp, the recipient phone number in international format (digits, country code included). Provide either this or participantUsername.
     attr_accessor :participant_id
 
-    # Twitter username (with or without @) of the recipient. Resolved to a user ID via lookup. Provide either this or participantId.
+    # Recipient handle/username — an X or Bluesky handle (with or without @) or a Reddit username (with or without u/). Resolved via lookup. Provide either this or participantId.
     attr_accessor :participant_username
 
-    # Text content of the message. At least one of message or attachment is required.
+    # Text content of the message. At least one of message, attachment, or (for WhatsApp) templateName is required.
     attr_accessor :message
 
-    # Skip the receives_your_dm eligibility check before sending. Use if you have already verified the recipient accepts DMs.
+    # X/Twitter only. Skip the receives_your_dm eligibility check before sending. Use if you have already verified the recipient accepts DMs.
     attr_accessor :skip_dm_check
+
+    # WhatsApp only. Name of the approved template to start the conversation with (required for WhatsApp).
+    attr_accessor :template_name
+
+    # WhatsApp only. Template language code (e.g. en_US).
+    attr_accessor :template_language
+
+    # WhatsApp only. Body variable values, in order, substituted into the template body ({{1}}, {{2}}, ...).
+    attr_accessor :template_params
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -37,7 +46,10 @@ module Zernio
         :'participant_id' => :'participantId',
         :'participant_username' => :'participantUsername',
         :'message' => :'message',
-        :'skip_dm_check' => :'skipDmCheck'
+        :'skip_dm_check' => :'skipDmCheck',
+        :'template_name' => :'templateName',
+        :'template_language' => :'templateLanguage',
+        :'template_params' => :'templateParams'
       }
     end
 
@@ -58,7 +70,10 @@ module Zernio
         :'participant_id' => :'String',
         :'participant_username' => :'String',
         :'message' => :'String',
-        :'skip_dm_check' => :'Boolean'
+        :'skip_dm_check' => :'Boolean',
+        :'template_name' => :'String',
+        :'template_language' => :'String',
+        :'template_params' => :'Array<String>'
       }
     end
 
@@ -107,6 +122,20 @@ module Zernio
       else
         self.skip_dm_check = false
       end
+
+      if attributes.key?(:'template_name')
+        self.template_name = attributes[:'template_name']
+      end
+
+      if attributes.key?(:'template_language')
+        self.template_language = attributes[:'template_language']
+      end
+
+      if attributes.key?(:'template_params')
+        if (value = attributes[:'template_params']).is_a?(Array)
+          self.template_params = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -148,7 +177,10 @@ module Zernio
           participant_id == o.participant_id &&
           participant_username == o.participant_username &&
           message == o.message &&
-          skip_dm_check == o.skip_dm_check
+          skip_dm_check == o.skip_dm_check &&
+          template_name == o.template_name &&
+          template_language == o.template_language &&
+          template_params == o.template_params
     end
 
     # @see the `==` method
@@ -160,7 +192,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, participant_id, participant_username, message, skip_dm_check].hash
+      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, template_language, template_params].hash
     end
 
     # Builds the object from hash
