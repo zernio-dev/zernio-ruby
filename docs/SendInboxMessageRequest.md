@@ -16,6 +16,8 @@
 | **messaging_type** | **String** | Facebook messaging type. Required when using messageTag. | [optional] |
 | **message_tag** | **String** | Facebook message tag for messaging outside 24h window. Requires messagingType MESSAGE_TAG. Instagram only supports HUMAN_AGENT. | [optional] |
 | **reply_to** | **String** | Platform message ID to quote-reply to. For WhatsApp, pass the wamid (available in message.platformMessageId from webhooks). For Telegram, pass the Telegram message ID. | [optional] |
+| **location** | [**SendInboxMessageRequestLocation**](SendInboxMessageRequestLocation.md) |  | [optional] |
+| **contacts** | [**Array&lt;SendInboxMessageRequestContactsInner&gt;**](SendInboxMessageRequestContactsInner.md) | WhatsApp-only. Send one or more contact cards. | [optional] |
 
 ## Example
 
@@ -34,7 +36,9 @@ instance = Zernio::SendInboxMessageRequest.new(
   reply_markup: null,
   messaging_type: null,
   message_tag: null,
-  reply_to: null
+  reply_to: null,
+  location: null,
+  contacts: null
 )
 ```
 

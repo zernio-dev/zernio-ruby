@@ -48,6 +48,11 @@ module Zernio
     # Platform message ID to quote-reply to. For WhatsApp, pass the wamid (available in message.platformMessageId from webhooks). For Telegram, pass the Telegram message ID.
     attr_accessor :reply_to
 
+    attr_accessor :location
+
+    # WhatsApp-only. Send one or more contact cards.
+    attr_accessor :contacts
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -84,7 +89,9 @@ module Zernio
         :'reply_markup' => :'replyMarkup',
         :'messaging_type' => :'messagingType',
         :'message_tag' => :'messageTag',
-        :'reply_to' => :'replyTo'
+        :'reply_to' => :'replyTo',
+        :'location' => :'location',
+        :'contacts' => :'contacts'
       }
     end
 
@@ -112,7 +119,9 @@ module Zernio
         :'reply_markup' => :'SendInboxMessageRequestReplyMarkup',
         :'messaging_type' => :'String',
         :'message_tag' => :'String',
-        :'reply_to' => :'String'
+        :'reply_to' => :'String',
+        :'location' => :'SendInboxMessageRequestLocation',
+        :'contacts' => :'Array<SendInboxMessageRequestContactsInner>'
       }
     end
 
@@ -190,6 +199,16 @@ module Zernio
 
       if attributes.key?(:'reply_to')
         self.reply_to = attributes[:'reply_to']
+      end
+
+      if attributes.key?(:'location')
+        self.location = attributes[:'location']
+      end
+
+      if attributes.key?(:'contacts')
+        if (value = attributes[:'contacts']).is_a?(Array)
+          self.contacts = value
+        end
       end
     end
 
@@ -313,7 +332,9 @@ module Zernio
           reply_markup == o.reply_markup &&
           messaging_type == o.messaging_type &&
           message_tag == o.message_tag &&
-          reply_to == o.reply_to
+          reply_to == o.reply_to &&
+          location == o.location &&
+          contacts == o.contacts
     end
 
     # @see the `==` method
@@ -325,7 +346,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, attachment_url, attachment_type, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to].hash
+      [account_id, message, attachment_url, attachment_type, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to, location, contacts].hash
     end
 
     # Builds the object from hash

@@ -29,6 +29,7 @@
 | **read_at** | **Time** |  | [optional] |
 | **sent_at** | **Time** | Original send time for outgoing messages (used for Messenger watermark queries). | [optional] |
 | **delivery_error** | [**GetInboxConversationMessages200ResponseMessagesInnerDeliveryError**](GetInboxConversationMessages200ResponseMessagesInnerDeliveryError.md) |  | [optional] |
+| **reactions** | [**Array&lt;GetInboxConversationMessages200ResponseMessagesInnerReactionsInner&gt;**](GetInboxConversationMessages200ResponseMessagesInnerReactionsInner.md) | Emoji reactions on this message (WhatsApp / Telegram). At most one per party in a 1:1 thread. | [optional] |
 
 ## Example
 
@@ -60,7 +61,8 @@ instance = Zernio::GetInboxConversationMessages200ResponseMessagesInner.new(
   delivered_at: null,
   read_at: null,
   sent_at: null,
-  delivery_error: null
+  delivery_error: null,
+  reactions: null
 )
 ```
 

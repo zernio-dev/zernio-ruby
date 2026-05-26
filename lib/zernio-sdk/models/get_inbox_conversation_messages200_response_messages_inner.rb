@@ -76,6 +76,9 @@ module Zernio
 
     attr_accessor :delivery_error
 
+    # Emoji reactions on this message (WhatsApp / Telegram). At most one per party in a 1:1 thread.
+    attr_accessor :reactions
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -125,7 +128,8 @@ module Zernio
         :'delivered_at' => :'deliveredAt',
         :'read_at' => :'readAt',
         :'sent_at' => :'sentAt',
-        :'delivery_error' => :'deliveryError'
+        :'delivery_error' => :'deliveryError',
+        :'reactions' => :'reactions'
       }
     end
 
@@ -166,7 +170,8 @@ module Zernio
         :'delivered_at' => :'Time',
         :'read_at' => :'Time',
         :'sent_at' => :'Time',
-        :'delivery_error' => :'GetInboxConversationMessages200ResponseMessagesInnerDeliveryError'
+        :'delivery_error' => :'GetInboxConversationMessages200ResponseMessagesInnerDeliveryError',
+        :'reactions' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerReactionsInner>'
       }
     end
 
@@ -295,6 +300,12 @@ module Zernio
       if attributes.key?(:'delivery_error')
         self.delivery_error = attributes[:'delivery_error']
       end
+
+      if attributes.key?(:'reactions')
+        if (value = attributes[:'reactions']).is_a?(Array)
+          self.reactions = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -377,7 +388,8 @@ module Zernio
           delivered_at == o.delivered_at &&
           read_at == o.read_at &&
           sent_at == o.sent_at &&
-          delivery_error == o.delivery_error
+          delivery_error == o.delivery_error &&
+          reactions == o.reactions
     end
 
     # @see the `==` method
@@ -389,7 +401,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention, is_edited, edited_at, edit_count, edit_history, is_deleted, deleted_at, delivery_status, delivered_at, read_at, sent_at, delivery_error].hash
+      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention, is_edited, edited_at, edit_count, edit_history, is_deleted, deleted_at, delivery_status, delivered_at, read_at, sent_at, delivery_error, reactions].hash
     end
 
     # Builds the object from hash
