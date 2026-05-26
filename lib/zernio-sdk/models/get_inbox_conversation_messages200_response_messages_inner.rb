@@ -79,6 +79,9 @@ module Zernio
     # Emoji reactions on this message (WhatsApp / Telegram). At most one per party in a 1:1 thread.
     attr_accessor :reactions
 
+    # Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (platformMessageId this message replies to), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow), and for inbound interactive taps `interactiveType` / `interactiveId`. 
+    attr_accessor :metadata
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -129,7 +132,8 @@ module Zernio
         :'read_at' => :'readAt',
         :'sent_at' => :'sentAt',
         :'delivery_error' => :'deliveryError',
-        :'reactions' => :'reactions'
+        :'reactions' => :'reactions',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -171,7 +175,8 @@ module Zernio
         :'read_at' => :'Time',
         :'sent_at' => :'Time',
         :'delivery_error' => :'GetInboxConversationMessages200ResponseMessagesInnerDeliveryError',
-        :'reactions' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerReactionsInner>'
+        :'reactions' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerReactionsInner>',
+        :'metadata' => :'Hash<String, Object>'
       }
     end
 
@@ -306,6 +311,12 @@ module Zernio
           self.reactions = value
         end
       end
+
+      if attributes.key?(:'metadata')
+        if (value = attributes[:'metadata']).is_a?(Hash)
+          self.metadata = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -389,7 +400,8 @@ module Zernio
           read_at == o.read_at &&
           sent_at == o.sent_at &&
           delivery_error == o.delivery_error &&
-          reactions == o.reactions
+          reactions == o.reactions &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -401,7 +413,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention, is_edited, edited_at, edit_count, edit_history, is_deleted, deleted_at, delivery_status, delivered_at, read_at, sent_at, delivery_error, reactions].hash
+      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention, is_edited, edited_at, edit_count, edit_history, is_deleted, deleted_at, delivery_status, delivered_at, read_at, sent_at, delivery_error, reactions, metadata].hash
     end
 
     # Builds the object from hash

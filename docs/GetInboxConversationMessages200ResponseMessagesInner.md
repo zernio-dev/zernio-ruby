@@ -30,6 +30,7 @@
 | **sent_at** | **Time** | Original send time for outgoing messages (used for Messenger watermark queries). | [optional] |
 | **delivery_error** | [**GetInboxConversationMessages200ResponseMessagesInnerDeliveryError**](GetInboxConversationMessages200ResponseMessagesInnerDeliveryError.md) |  | [optional] |
 | **reactions** | [**Array&lt;GetInboxConversationMessages200ResponseMessagesInnerReactionsInner&gt;**](GetInboxConversationMessages200ResponseMessagesInnerReactionsInner.md) | Emoji reactions on this message (WhatsApp / Telegram). At most one per party in a 1:1 thread. | [optional] |
+| **metadata** | **Hash&lt;String, Object&gt;** | Platform-specific extras. Free-form, but commonly includes: &#x60;quotedMessageId&#x60; (platformMessageId this message replies to), &#x60;waInteractive&#x60; (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow), and for inbound interactive taps &#x60;interactiveType&#x60; / &#x60;interactiveId&#x60;.  | [optional] |
 
 ## Example
 
@@ -62,7 +63,8 @@ instance = Zernio::GetInboxConversationMessages200ResponseMessagesInner.new(
   read_at: null,
   sent_at: null,
   delivery_error: null,
-  reactions: null
+  reactions: null,
+  metadata: null
 )
 ```
 
