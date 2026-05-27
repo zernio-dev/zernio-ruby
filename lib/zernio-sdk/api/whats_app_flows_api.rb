@@ -374,6 +374,149 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get flow preview URL
+    # Get Meta's public web-preview URL for a flow (drafts included), embeddable as an interactive iframe. The link is reused across calls (valid ~30 days); pass invalidate=true to mint a fresh one (the previous link stops working). 
+    # @param flow_id [String] Flow ID
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :invalidate Mint a fresh preview link (default false)
+    # @return [GetWhatsAppFlowPreview200Response]
+    def get_whats_app_flow_preview(flow_id, account_id, opts = {})
+      data, _status_code, _headers = get_whats_app_flow_preview_with_http_info(flow_id, account_id, opts)
+      data
+    end
+
+    # Get flow preview URL
+    # Get Meta&#39;s public web-preview URL for a flow (drafts included), embeddable as an interactive iframe. The link is reused across calls (valid ~30 days); pass invalidate&#x3D;true to mint a fresh one (the previous link stops working). 
+    # @param flow_id [String] Flow ID
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :invalidate Mint a fresh preview link (default false)
+    # @return [Array<(GetWhatsAppFlowPreview200Response, Integer, Hash)>] GetWhatsAppFlowPreview200Response data, response status code and response headers
+    def get_whats_app_flow_preview_with_http_info(flow_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppFlowsApi.get_whats_app_flow_preview ...'
+      end
+      # verify the required parameter 'flow_id' is set
+      if @api_client.config.client_side_validation && flow_id.nil?
+        fail ArgumentError, "Missing the required parameter 'flow_id' when calling WhatsAppFlowsApi.get_whats_app_flow_preview"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppFlowsApi.get_whats_app_flow_preview"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/flows/{flowId}/preview'.sub('{' + 'flowId' + '}', CGI.escape(flow_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'invalidate'] = opts[:'invalidate'] if !opts[:'invalidate'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppFlowPreview200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppFlowsApi.get_whats_app_flow_preview",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppFlowsApi#get_whats_app_flow_preview\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List flow versions
+    # List the flow's version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version's live name and status from Meta. A flow with no lineage returns just itself as version 1. 
+    # @param flow_id [String] Flow ID
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [ListWhatsAppFlowVersions200Response]
+    def list_whats_app_flow_versions(flow_id, account_id, opts = {})
+      data, _status_code, _headers = list_whats_app_flow_versions_with_http_info(flow_id, account_id, opts)
+      data
+    end
+
+    # List flow versions
+    # List the flow&#39;s version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version&#39;s live name and status from Meta. A flow with no lineage returns just itself as version 1. 
+    # @param flow_id [String] Flow ID
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListWhatsAppFlowVersions200Response, Integer, Hash)>] ListWhatsAppFlowVersions200Response data, response status code and response headers
+    def list_whats_app_flow_versions_with_http_info(flow_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppFlowsApi.list_whats_app_flow_versions ...'
+      end
+      # verify the required parameter 'flow_id' is set
+      if @api_client.config.client_side_validation && flow_id.nil?
+        fail ArgumentError, "Missing the required parameter 'flow_id' when calling WhatsAppFlowsApi.list_whats_app_flow_versions"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppFlowsApi.list_whats_app_flow_versions"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/flows/{flowId}/versions'.sub('{' + 'flowId' + '}', CGI.escape(flow_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListWhatsAppFlowVersions200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppFlowsApi.list_whats_app_flow_versions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppFlowsApi#list_whats_app_flow_versions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List flows
     # List all WhatsApp Flows for the Business Account (WABA) associated with the given account. 
     # @param account_id [String] WhatsApp social account ID

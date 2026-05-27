@@ -366,6 +366,8 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppFlowsApi* | [**deprecate_whats_app_flow**](docs/WhatsAppFlowsApi.md#deprecate_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/deprecate | Deprecate flow
 *Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow**](docs/WhatsAppFlowsApi.md#get_whats_app_flow) | **GET** /v1/whatsapp/flows/{flowId} | Get flow
 *Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow_json**](docs/WhatsAppFlowsApi.md#get_whats_app_flow_json) | **GET** /v1/whatsapp/flows/{flowId}/json | Get flow JSON asset
+*Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow_preview**](docs/WhatsAppFlowsApi.md#get_whats_app_flow_preview) | **GET** /v1/whatsapp/flows/{flowId}/preview | Get flow preview URL
+*Zernio::WhatsAppFlowsApi* | [**list_whats_app_flow_versions**](docs/WhatsAppFlowsApi.md#list_whats_app_flow_versions) | **GET** /v1/whatsapp/flows/{flowId}/versions | List flow versions
 *Zernio::WhatsAppFlowsApi* | [**list_whats_app_flows**](docs/WhatsAppFlowsApi.md#list_whats_app_flows) | **GET** /v1/whatsapp/flows | List flows
 *Zernio::WhatsAppFlowsApi* | [**publish_whats_app_flow**](docs/WhatsAppFlowsApi.md#publish_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/publish | Publish flow
 *Zernio::WhatsAppFlowsApi* | [**send_whats_app_flow_message**](docs/WhatsAppFlowsApi.md#send_whats_app_flow_message) | **POST** /v1/whatsapp/flows/send | Send flow message
@@ -812,6 +814,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppFlow200ResponseFlowPreview](docs/GetWhatsAppFlow200ResponseFlowPreview.md)
  - [Zernio::GetWhatsAppFlowJson200Response](docs/GetWhatsAppFlowJson200Response.md)
  - [Zernio::GetWhatsAppFlowJson200ResponseAssetsInner](docs/GetWhatsAppFlowJson200ResponseAssetsInner.md)
+ - [Zernio::GetWhatsAppFlowPreview200Response](docs/GetWhatsAppFlowPreview200Response.md)
  - [Zernio::GetWhatsAppGroupChat200Response](docs/GetWhatsAppGroupChat200Response.md)
  - [Zernio::GetWhatsAppGroupChat200ResponseGroup](docs/GetWhatsAppGroupChat200ResponseGroup.md)
  - [Zernio::GetWhatsAppGroupChat200ResponseGroupParticipantsInner](docs/GetWhatsAppGroupChat200ResponseGroupParticipantsInner.md)
@@ -952,6 +955,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
  - [Zernio::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
+ - [Zernio::ListWhatsAppFlowVersions200Response](docs/ListWhatsAppFlowVersions200Response.md)
+ - [Zernio::ListWhatsAppFlowVersions200ResponseVersionsInner](docs/ListWhatsAppFlowVersions200ResponseVersionsInner.md)
  - [Zernio::ListWhatsAppFlows200Response](docs/ListWhatsAppFlows200Response.md)
  - [Zernio::ListWhatsAppFlows200ResponseFlowsInner](docs/ListWhatsAppFlows200ResponseFlowsInner.md)
  - [Zernio::ListWhatsAppGroupChats200Response](docs/ListWhatsAppGroupChats200Response.md)

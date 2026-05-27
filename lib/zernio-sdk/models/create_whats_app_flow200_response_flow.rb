@@ -23,13 +23,21 @@ module Zernio
 
     attr_accessor :categories
 
+    # Version within the clone lineage
+    attr_accessor :version
+
+    # Version-lineage group key
+    attr_accessor :lineage_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'name' => :'name',
         :'status' => :'status',
-        :'categories' => :'categories'
+        :'categories' => :'categories',
+        :'version' => :'version',
+        :'lineage_id' => :'lineageId'
       }
     end
 
@@ -49,7 +57,9 @@ module Zernio
         :'id' => :'String',
         :'name' => :'String',
         :'status' => :'String',
-        :'categories' => :'Array<String>'
+        :'categories' => :'Array<String>',
+        :'version' => :'Integer',
+        :'lineage_id' => :'String'
       }
     end
 
@@ -92,6 +102,14 @@ module Zernio
           self.categories = value
         end
       end
+
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.key?(:'lineage_id')
+        self.lineage_id = attributes[:'lineage_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,7 +135,9 @@ module Zernio
           id == o.id &&
           name == o.name &&
           status == o.status &&
-          categories == o.categories
+          categories == o.categories &&
+          version == o.version &&
+          lineage_id == o.lineage_id
     end
 
     # @see the `==` method
@@ -129,7 +149,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, status, categories].hash
+      [id, name, status, categories, version, lineage_id].hash
     end
 
     # Builds the object from hash

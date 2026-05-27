@@ -9,6 +9,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**deprecate_whats_app_flow**](WhatsAppFlowsApi.md#deprecate_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/deprecate | Deprecate flow |
 | [**get_whats_app_flow**](WhatsAppFlowsApi.md#get_whats_app_flow) | **GET** /v1/whatsapp/flows/{flowId} | Get flow |
 | [**get_whats_app_flow_json**](WhatsAppFlowsApi.md#get_whats_app_flow_json) | **GET** /v1/whatsapp/flows/{flowId}/json | Get flow JSON asset |
+| [**get_whats_app_flow_preview**](WhatsAppFlowsApi.md#get_whats_app_flow_preview) | **GET** /v1/whatsapp/flows/{flowId}/preview | Get flow preview URL |
+| [**list_whats_app_flow_versions**](WhatsAppFlowsApi.md#list_whats_app_flow_versions) | **GET** /v1/whatsapp/flows/{flowId}/versions | List flow versions |
 | [**list_whats_app_flows**](WhatsAppFlowsApi.md#list_whats_app_flows) | **GET** /v1/whatsapp/flows | List flows |
 | [**publish_whats_app_flow**](WhatsAppFlowsApi.md#publish_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/publish | Publish flow |
 | [**send_whats_app_flow_message**](WhatsAppFlowsApi.md#send_whats_app_flow_message) | **POST** /v1/whatsapp/flows/send | Send flow message |
@@ -362,6 +364,152 @@ end
 ### Return type
 
 [**GetWhatsAppFlowJson200Response**](GetWhatsAppFlowJson200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_whats_app_flow_preview
+
+> <GetWhatsAppFlowPreview200Response> get_whats_app_flow_preview(flow_id, account_id, opts)
+
+Get flow preview URL
+
+Get Meta's public web-preview URL for a flow (drafts included), embeddable as an interactive iframe. The link is reused across calls (valid ~30 days); pass invalidate=true to mint a fresh one (the previous link stops working). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppFlowsApi.new
+flow_id = 'flow_id_example' # String | Flow ID
+account_id = 'account_id_example' # String | WhatsApp social account ID
+opts = {
+  invalidate: true # Boolean | Mint a fresh preview link (default false)
+}
+
+begin
+  # Get flow preview URL
+  result = api_instance.get_whats_app_flow_preview(flow_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->get_whats_app_flow_preview: #{e}"
+end
+```
+
+#### Using the get_whats_app_flow_preview_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppFlowPreview200Response>, Integer, Hash)> get_whats_app_flow_preview_with_http_info(flow_id, account_id, opts)
+
+```ruby
+begin
+  # Get flow preview URL
+  data, status_code, headers = api_instance.get_whats_app_flow_preview_with_http_info(flow_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppFlowPreview200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->get_whats_app_flow_preview_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **flow_id** | **String** | Flow ID |  |
+| **account_id** | **String** | WhatsApp social account ID |  |
+| **invalidate** | **Boolean** | Mint a fresh preview link (default false) | [optional] |
+
+### Return type
+
+[**GetWhatsAppFlowPreview200Response**](GetWhatsAppFlowPreview200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_whats_app_flow_versions
+
+> <ListWhatsAppFlowVersions200Response> list_whats_app_flow_versions(flow_id, account_id)
+
+List flow versions
+
+List the flow's version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version's live name and status from Meta. A flow with no lineage returns just itself as version 1. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppFlowsApi.new
+flow_id = 'flow_id_example' # String | Flow ID
+account_id = 'account_id_example' # String | WhatsApp social account ID
+
+begin
+  # List flow versions
+  result = api_instance.list_whats_app_flow_versions(flow_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->list_whats_app_flow_versions: #{e}"
+end
+```
+
+#### Using the list_whats_app_flow_versions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWhatsAppFlowVersions200Response>, Integer, Hash)> list_whats_app_flow_versions_with_http_info(flow_id, account_id)
+
+```ruby
+begin
+  # List flow versions
+  data, status_code, headers = api_instance.list_whats_app_flow_versions_with_http_info(flow_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWhatsAppFlowVersions200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->list_whats_app_flow_versions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **flow_id** | **String** | Flow ID |  |
+| **account_id** | **String** | WhatsApp social account ID |  |
+
+### Return type
+
+[**ListWhatsAppFlowVersions200Response**](ListWhatsAppFlowVersions200Response.md)
 
 ### Authorization
 

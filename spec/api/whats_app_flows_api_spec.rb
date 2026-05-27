@@ -97,6 +97,33 @@ describe 'WhatsAppFlowsApi' do
     end
   end
 
+  # unit tests for get_whats_app_flow_preview
+  # Get flow preview URL
+  # Get Meta&#39;s public web-preview URL for a flow (drafts included), embeddable as an interactive iframe. The link is reused across calls (valid ~30 days); pass invalidate&#x3D;true to mint a fresh one (the previous link stops working). 
+  # @param flow_id Flow ID
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :invalidate Mint a fresh preview link (default false)
+  # @return [GetWhatsAppFlowPreview200Response]
+  describe 'get_whats_app_flow_preview test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_whats_app_flow_versions
+  # List flow versions
+  # List the flow&#39;s version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version&#39;s live name and status from Meta. A flow with no lineage returns just itself as version 1. 
+  # @param flow_id Flow ID
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [ListWhatsAppFlowVersions200Response]
+  describe 'list_whats_app_flow_versions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_whats_app_flows
   # List flows
   # List all WhatsApp Flows for the Business Account (WABA) associated with the given account. 

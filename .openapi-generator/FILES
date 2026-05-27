@@ -462,6 +462,7 @@ docs/GetWhatsAppFlow200ResponseFlow.md
 docs/GetWhatsAppFlow200ResponseFlowPreview.md
 docs/GetWhatsAppFlowJson200Response.md
 docs/GetWhatsAppFlowJson200ResponseAssetsInner.md
+docs/GetWhatsAppFlowPreview200Response.md
 docs/GetWhatsAppGroupChat200Response.md
 docs/GetWhatsAppGroupChat200ResponseGroup.md
 docs/GetWhatsAppGroupChat200ResponseGroupParticipantsInner.md
@@ -605,6 +606,8 @@ docs/ListTrackingTagSharedAccounts200Response.md
 docs/ListTrackingTags200Response.md
 docs/ListUsers200Response.md
 docs/ListUsers200ResponseUsersInner.md
+docs/ListWhatsAppFlowVersions200Response.md
+docs/ListWhatsAppFlowVersions200ResponseVersionsInner.md
 docs/ListWhatsAppFlows200Response.md
 docs/ListWhatsAppFlows200ResponseFlowsInner.md
 docs/ListWhatsAppGroupChats200Response.md
@@ -1503,6 +1506,7 @@ lib/zernio-sdk/models/get_whats_app_flow200_response_flow.rb
 lib/zernio-sdk/models/get_whats_app_flow200_response_flow_preview.rb
 lib/zernio-sdk/models/get_whats_app_flow_json200_response.rb
 lib/zernio-sdk/models/get_whats_app_flow_json200_response_assets_inner.rb
+lib/zernio-sdk/models/get_whats_app_flow_preview200_response.rb
 lib/zernio-sdk/models/get_whats_app_group_chat200_response.rb
 lib/zernio-sdk/models/get_whats_app_group_chat200_response_group.rb
 lib/zernio-sdk/models/get_whats_app_group_chat200_response_group_participants_inner.rb
@@ -1643,6 +1647,8 @@ lib/zernio-sdk/models/list_tracking_tag_shared_accounts200_response.rb
 lib/zernio-sdk/models/list_tracking_tags200_response.rb
 lib/zernio-sdk/models/list_users200_response.rb
 lib/zernio-sdk/models/list_users200_response_users_inner.rb
+lib/zernio-sdk/models/list_whats_app_flow_versions200_response.rb
+lib/zernio-sdk/models/list_whats_app_flow_versions200_response_versions_inner.rb
 lib/zernio-sdk/models/list_whats_app_flows200_response.rb
 lib/zernio-sdk/models/list_whats_app_flows200_response_flows_inner.rb
 lib/zernio-sdk/models/list_whats_app_group_chats200_response.rb
@@ -2516,6 +2522,7 @@ spec/models/get_whats_app_flow200_response_flow_spec.rb
 spec/models/get_whats_app_flow200_response_spec.rb
 spec/models/get_whats_app_flow_json200_response_assets_inner_spec.rb
 spec/models/get_whats_app_flow_json200_response_spec.rb
+spec/models/get_whats_app_flow_preview200_response_spec.rb
 spec/models/get_whats_app_group_chat200_response_group_participants_inner_spec.rb
 spec/models/get_whats_app_group_chat200_response_group_spec.rb
 spec/models/get_whats_app_group_chat200_response_spec.rb
@@ -2656,6 +2663,8 @@ spec/models/list_tracking_tag_shared_accounts200_response_spec.rb
 spec/models/list_tracking_tags200_response_spec.rb
 spec/models/list_users200_response_spec.rb
 spec/models/list_users200_response_users_inner_spec.rb
+spec/models/list_whats_app_flow_versions200_response_spec.rb
+spec/models/list_whats_app_flow_versions200_response_versions_inner_spec.rb
 spec/models/list_whats_app_flows200_response_flows_inner_spec.rb
 spec/models/list_whats_app_flows200_response_spec.rb
 spec/models/list_whats_app_group_chats200_response_groups_inner_spec.rb

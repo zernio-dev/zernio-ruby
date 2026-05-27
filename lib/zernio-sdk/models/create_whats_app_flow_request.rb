@@ -24,8 +24,11 @@ module Zernio
     # Flow categories
     attr_accessor :categories
 
-    # Optional: ID of an existing flow to clone
+    # Optional: ID of an existing flow to clone the Flow JSON from
     attr_accessor :clone_flow_id
+
+    # When cloning, true keeps the clone in cloneFlowId's version lineage (auto-numbered next version); false/absent creates an independent flow. Ignored without cloneFlowId.
+    attr_accessor :as_version
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -55,7 +58,8 @@ module Zernio
         :'account_id' => :'accountId',
         :'name' => :'name',
         :'categories' => :'categories',
-        :'clone_flow_id' => :'cloneFlowId'
+        :'clone_flow_id' => :'cloneFlowId',
+        :'as_version' => :'asVersion'
       }
     end
 
@@ -75,7 +79,8 @@ module Zernio
         :'account_id' => :'String',
         :'name' => :'String',
         :'categories' => :'Array<String>',
-        :'clone_flow_id' => :'String'
+        :'clone_flow_id' => :'String',
+        :'as_version' => :'Boolean'
       }
     end
 
@@ -123,6 +128,10 @@ module Zernio
 
       if attributes.key?(:'clone_flow_id')
         self.clone_flow_id = attributes[:'clone_flow_id']
+      end
+
+      if attributes.key?(:'as_version')
+        self.as_version = attributes[:'as_version']
       end
     end
 
@@ -198,7 +207,8 @@ module Zernio
           account_id == o.account_id &&
           name == o.name &&
           categories == o.categories &&
-          clone_flow_id == o.clone_flow_id
+          clone_flow_id == o.clone_flow_id &&
+          as_version == o.as_version
     end
 
     # @see the `==` method
@@ -210,7 +220,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, name, categories, clone_flow_id].hash
+      [account_id, name, categories, clone_flow_id, as_version].hash
     end
 
     # Builds the object from hash
