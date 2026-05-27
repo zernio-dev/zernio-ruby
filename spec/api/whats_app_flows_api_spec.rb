@@ -111,6 +111,20 @@ describe 'WhatsAppFlowsApi' do
     end
   end
 
+  # unit tests for list_whats_app_flow_responses
+  # List flow responses
+  # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with &#x60;flowId&#x60; — this matches responses whose flow_token carries the &#x60;&lt;flowId&gt;:&#x60; prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :flow_id Scope to responses for this flow
+  # @option opts [Integer] :limit Max responses to return
+  # @return [ListWhatsAppFlowResponses200Response]
+  describe 'list_whats_app_flow_responses test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_whats_app_flow_versions
   # List flow versions
   # List the flow&#39;s version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version&#39;s live name and status from Meta. A flow with no lineage returns just itself as version 1. 

@@ -447,6 +447,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List flow responses
+    # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with `flowId` — this matches responses whose flow_token carries the `<flowId>:` prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :flow_id Scope to responses for this flow
+    # @option opts [Integer] :limit Max responses to return (default to 50)
+    # @return [ListWhatsAppFlowResponses200Response]
+    def list_whats_app_flow_responses(account_id, opts = {})
+      data, _status_code, _headers = list_whats_app_flow_responses_with_http_info(account_id, opts)
+      data
+    end
+
+    # List flow responses
+    # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with &#x60;flowId&#x60; — this matches responses whose flow_token carries the &#x60;&lt;flowId&gt;:&#x60; prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :flow_id Scope to responses for this flow
+    # @option opts [Integer] :limit Max responses to return (default to 50)
+    # @return [Array<(ListWhatsAppFlowResponses200Response, Integer, Hash)>] ListWhatsAppFlowResponses200Response data, response status code and response headers
+    def list_whats_app_flow_responses_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppFlowsApi.list_whats_app_flow_responses ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppFlowsApi.list_whats_app_flow_responses"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 200
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WhatsAppFlowsApi.list_whats_app_flow_responses, must be smaller than or equal to 200.'
+      end
+
+      # resource path
+      local_var_path = '/v1/whatsapp/flow-responses'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'flowId'] = opts[:'flow_id'] if !opts[:'flow_id'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListWhatsAppFlowResponses200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppFlowsApi.list_whats_app_flow_responses",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppFlowsApi#list_whats_app_flow_responses\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List flow versions
     # List the flow's version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version's live name and status from Meta. A flow with no lineage returns just itself as version 1. 
     # @param flow_id [String] Flow ID

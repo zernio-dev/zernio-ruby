@@ -367,6 +367,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow**](docs/WhatsAppFlowsApi.md#get_whats_app_flow) | **GET** /v1/whatsapp/flows/{flowId} | Get flow
 *Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow_json**](docs/WhatsAppFlowsApi.md#get_whats_app_flow_json) | **GET** /v1/whatsapp/flows/{flowId}/json | Get flow JSON asset
 *Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow_preview**](docs/WhatsAppFlowsApi.md#get_whats_app_flow_preview) | **GET** /v1/whatsapp/flows/{flowId}/preview | Get flow preview URL
+*Zernio::WhatsAppFlowsApi* | [**list_whats_app_flow_responses**](docs/WhatsAppFlowsApi.md#list_whats_app_flow_responses) | **GET** /v1/whatsapp/flow-responses | List flow responses
 *Zernio::WhatsAppFlowsApi* | [**list_whats_app_flow_versions**](docs/WhatsAppFlowsApi.md#list_whats_app_flow_versions) | **GET** /v1/whatsapp/flows/{flowId}/versions | List flow versions
 *Zernio::WhatsAppFlowsApi* | [**list_whats_app_flows**](docs/WhatsAppFlowsApi.md#list_whats_app_flows) | **GET** /v1/whatsapp/flows | List flows
 *Zernio::WhatsAppFlowsApi* | [**publish_whats_app_flow**](docs/WhatsAppFlowsApi.md#publish_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/publish | Publish flow
@@ -955,6 +956,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
  - [Zernio::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
+ - [Zernio::ListWhatsAppFlowResponses200Response](docs/ListWhatsAppFlowResponses200Response.md)
+ - [Zernio::ListWhatsAppFlowResponses200ResponseResponsesInner](docs/ListWhatsAppFlowResponses200ResponseResponsesInner.md)
  - [Zernio::ListWhatsAppFlowVersions200Response](docs/ListWhatsAppFlowVersions200Response.md)
  - [Zernio::ListWhatsAppFlowVersions200ResponseVersionsInner](docs/ListWhatsAppFlowVersions200ResponseVersionsInner.md)
  - [Zernio::ListWhatsAppFlows200Response](docs/ListWhatsAppFlows200Response.md)

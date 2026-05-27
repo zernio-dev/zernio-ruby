@@ -10,6 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_flow**](WhatsAppFlowsApi.md#get_whats_app_flow) | **GET** /v1/whatsapp/flows/{flowId} | Get flow |
 | [**get_whats_app_flow_json**](WhatsAppFlowsApi.md#get_whats_app_flow_json) | **GET** /v1/whatsapp/flows/{flowId}/json | Get flow JSON asset |
 | [**get_whats_app_flow_preview**](WhatsAppFlowsApi.md#get_whats_app_flow_preview) | **GET** /v1/whatsapp/flows/{flowId}/preview | Get flow preview URL |
+| [**list_whats_app_flow_responses**](WhatsAppFlowsApi.md#list_whats_app_flow_responses) | **GET** /v1/whatsapp/flow-responses | List flow responses |
 | [**list_whats_app_flow_versions**](WhatsAppFlowsApi.md#list_whats_app_flow_versions) | **GET** /v1/whatsapp/flows/{flowId}/versions | List flow versions |
 | [**list_whats_app_flows**](WhatsAppFlowsApi.md#list_whats_app_flows) | **GET** /v1/whatsapp/flows | List flows |
 | [**publish_whats_app_flow**](WhatsAppFlowsApi.md#publish_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/publish | Publish flow |
@@ -439,6 +440,81 @@ end
 ### Return type
 
 [**GetWhatsAppFlowPreview200Response**](GetWhatsAppFlowPreview200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_whats_app_flow_responses
+
+> <ListWhatsAppFlowResponses200Response> list_whats_app_flow_responses(account_id, opts)
+
+List flow responses
+
+List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with `flowId` — this matches responses whose flow_token carries the `<flowId>:` prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppFlowsApi.new
+account_id = 'account_id_example' # String | WhatsApp social account ID
+opts = {
+  flow_id: 'flow_id_example', # String | Scope to responses for this flow
+  limit: 56 # Integer | Max responses to return
+}
+
+begin
+  # List flow responses
+  result = api_instance.list_whats_app_flow_responses(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->list_whats_app_flow_responses: #{e}"
+end
+```
+
+#### Using the list_whats_app_flow_responses_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWhatsAppFlowResponses200Response>, Integer, Hash)> list_whats_app_flow_responses_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List flow responses
+  data, status_code, headers = api_instance.list_whats_app_flow_responses_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWhatsAppFlowResponses200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->list_whats_app_flow_responses_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp social account ID |  |
+| **flow_id** | **String** | Scope to responses for this flow | [optional] |
+| **limit** | **Integer** | Max responses to return | [optional][default to 50] |
+
+### Return type
+
+[**ListWhatsAppFlowResponses200Response**](ListWhatsAppFlowResponses200Response.md)
 
 ### Authorization
 

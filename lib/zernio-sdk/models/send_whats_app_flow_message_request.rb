@@ -30,7 +30,7 @@ module Zernio
     # Action type: navigate opens a screen directly, data_exchange hits your endpoint first
     attr_accessor :flow_action
 
-    # Unique token to correlate responses. Auto-generated UUID if omitted.
+    # Unique token to correlate responses. If omitted, auto-generated as '<flowId>:<uuid>' so the response can be attributed to this flow in the Flow Responses view.
     attr_accessor :flow_token
 
     attr_accessor :flow_action_payload
