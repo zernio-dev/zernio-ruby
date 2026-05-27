@@ -466,6 +466,9 @@ docs/GetWhatsAppFlowPreview200Response.md
 docs/GetWhatsAppGroupChat200Response.md
 docs/GetWhatsAppGroupChat200ResponseGroup.md
 docs/GetWhatsAppGroupChat200ResponseGroupParticipantsInner.md
+docs/GetWhatsAppLibraryTemplate200Response.md
+docs/GetWhatsAppLibraryTemplate200ResponseTemplate.md
+docs/GetWhatsAppLibraryTemplate200ResponseTemplateButtonsInner.md
 docs/GetWhatsAppPhoneNumber200Response.md
 docs/GetWhatsAppPhoneNumber200ResponsePhoneNumber.md
 docs/GetWhatsAppPhoneNumbers200Response.md
@@ -1010,6 +1013,7 @@ docs/WhatsAppHeaderComponentExample.md
 docs/WhatsAppPhoneNumbersApi.md
 docs/WhatsAppTemplateButton.md
 docs/WhatsAppTemplateComponent.md
+docs/WhatsAppTemplatesApi.md
 docs/XApiOperation.md
 docs/XApiOperationTriggeredByInner.md
 docs/XApiPricing.md
@@ -1071,6 +1075,7 @@ lib/zernio-sdk/api/webhooks_api.rb
 lib/zernio-sdk/api/whats_app_api.rb
 lib/zernio-sdk/api/whats_app_flows_api.rb
 lib/zernio-sdk/api/whats_app_phone_numbers_api.rb
+lib/zernio-sdk/api/whats_app_templates_api.rb
 lib/zernio-sdk/api_client.rb
 lib/zernio-sdk/api_error.rb
 lib/zernio-sdk/api_model_base.rb
@@ -1512,6 +1517,9 @@ lib/zernio-sdk/models/get_whats_app_flow_preview200_response.rb
 lib/zernio-sdk/models/get_whats_app_group_chat200_response.rb
 lib/zernio-sdk/models/get_whats_app_group_chat200_response_group.rb
 lib/zernio-sdk/models/get_whats_app_group_chat200_response_group_participants_inner.rb
+lib/zernio-sdk/models/get_whats_app_library_template200_response.rb
+lib/zernio-sdk/models/get_whats_app_library_template200_response_template.rb
+lib/zernio-sdk/models/get_whats_app_library_template200_response_template_buttons_inner.rb
 lib/zernio-sdk/models/get_whats_app_phone_number200_response.rb
 lib/zernio-sdk/models/get_whats_app_phone_number200_response_phone_number.rb
 lib/zernio-sdk/models/get_whats_app_phone_numbers200_response.rb
@@ -2093,6 +2101,7 @@ spec/api/webhooks_api_spec.rb
 spec/api/whats_app_api_spec.rb
 spec/api/whats_app_flows_api_spec.rb
 spec/api/whats_app_phone_numbers_api_spec.rb
+spec/api/whats_app_templates_api_spec.rb
 spec/models/account_get_response_spec.rb
 spec/models/account_with_follower_stats_all_of_account_stats_spec.rb
 spec/models/account_with_follower_stats_spec.rb
@@ -2530,6 +2539,9 @@ spec/models/get_whats_app_flow_preview200_response_spec.rb
 spec/models/get_whats_app_group_chat200_response_group_participants_inner_spec.rb
 spec/models/get_whats_app_group_chat200_response_group_spec.rb
 spec/models/get_whats_app_group_chat200_response_spec.rb
+spec/models/get_whats_app_library_template200_response_spec.rb
+spec/models/get_whats_app_library_template200_response_template_buttons_inner_spec.rb
+spec/models/get_whats_app_library_template200_response_template_spec.rb
 spec/models/get_whats_app_phone_number200_response_phone_number_spec.rb
 spec/models/get_whats_app_phone_number200_response_spec.rb
 spec/models/get_whats_app_phone_numbers200_response_numbers_inner_spec.rb

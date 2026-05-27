@@ -378,6 +378,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_numbers**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers
 *Zernio::WhatsAppPhoneNumbersApi* | [**purchase_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number
 *Zernio::WhatsAppPhoneNumbersApi* | [**release_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number
+*Zernio::WhatsAppTemplatesApi* | [**get_whats_app_library_template**](docs/WhatsAppTemplatesApi.md#get_whats_app_library_template) | **GET** /v1/whatsapp/template-library | Look up a library template
 
 
 ## Documentation for Models
@@ -819,6 +820,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppGroupChat200Response](docs/GetWhatsAppGroupChat200Response.md)
  - [Zernio::GetWhatsAppGroupChat200ResponseGroup](docs/GetWhatsAppGroupChat200ResponseGroup.md)
  - [Zernio::GetWhatsAppGroupChat200ResponseGroupParticipantsInner](docs/GetWhatsAppGroupChat200ResponseGroupParticipantsInner.md)
+ - [Zernio::GetWhatsAppLibraryTemplate200Response](docs/GetWhatsAppLibraryTemplate200Response.md)
+ - [Zernio::GetWhatsAppLibraryTemplate200ResponseTemplate](docs/GetWhatsAppLibraryTemplate200ResponseTemplate.md)
+ - [Zernio::GetWhatsAppLibraryTemplate200ResponseTemplateButtonsInner](docs/GetWhatsAppLibraryTemplate200ResponseTemplateButtonsInner.md)
  - [Zernio::GetWhatsAppPhoneNumber200Response](docs/GetWhatsAppPhoneNumber200Response.md)
  - [Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber](docs/GetWhatsAppPhoneNumber200ResponsePhoneNumber.md)
  - [Zernio::GetWhatsAppPhoneNumbers200Response](docs/GetWhatsAppPhoneNumbers200Response.md)

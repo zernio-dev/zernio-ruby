@@ -455,6 +455,9 @@ require 'zernio-sdk/models/get_whats_app_flow_preview200_response'
 require 'zernio-sdk/models/get_whats_app_group_chat200_response'
 require 'zernio-sdk/models/get_whats_app_group_chat200_response_group'
 require 'zernio-sdk/models/get_whats_app_group_chat200_response_group_participants_inner'
+require 'zernio-sdk/models/get_whats_app_library_template200_response'
+require 'zernio-sdk/models/get_whats_app_library_template200_response_template'
+require 'zernio-sdk/models/get_whats_app_library_template200_response_template_buttons_inner'
 require 'zernio-sdk/models/get_whats_app_phone_number200_response'
 require 'zernio-sdk/models/get_whats_app_phone_number200_response_phone_number'
 require 'zernio-sdk/models/get_whats_app_phone_numbers200_response'
@@ -1037,6 +1040,7 @@ require 'zernio-sdk/api/webhooks_api'
 require 'zernio-sdk/api/whats_app_api'
 require 'zernio-sdk/api/whats_app_flows_api'
 require 'zernio-sdk/api/whats_app_phone_numbers_api'
+require 'zernio-sdk/api/whats_app_templates_api'
 
 module Zernio
   class << self
