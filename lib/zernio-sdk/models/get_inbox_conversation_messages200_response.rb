@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :pagination
 
-    # Sort order actually applied to the returned page. May differ from the requested `sortOrder` for Twitter, Facebook and Bluesky (always `desc` regardless of request). 
+    # Sort order actually applied to the returned page. May differ from the requested `sortOrder` for Facebook and Bluesky (always `desc` regardless of request). 
     attr_accessor :sort_order_applied
 
     attr_accessor :messages
