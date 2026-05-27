@@ -32,6 +32,18 @@ describe 'WhatsAppPhoneNumbersApi' do
     end
   end
 
+  # unit tests for get_whats_app_number_info
+  # Get number status
+  # Live snapshot of a connected number straight from Meta: the phone-number node (display number, display name + approval, quality rating, messaging-limit tier, throughput, official-business badge, connection status, health_status) and its owning WhatsApp Business Account (name, business verification, timezone, health_status). Fetched live because Meta updates quality/tier/name/health over time; the call also refreshes the cached values shown on the connection card. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppNumberInfo200Response]
+  describe 'get_whats_app_number_info test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_whats_app_phone_number
   # Get phone number
   # Retrieve the current status of a purchased phone number. Used to poll for Meta pre-verification completion after purchase. 

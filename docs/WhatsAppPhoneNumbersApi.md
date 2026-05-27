@@ -4,10 +4,80 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**get_whats_app_number_info**](WhatsAppPhoneNumbersApi.md#get_whats_app_number_info) | **GET** /v1/whatsapp/number-info | Get number status |
 | [**get_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#get_whats_app_phone_number) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number |
 | [**get_whats_app_phone_numbers**](WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers |
 | [**purchase_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number |
 | [**release_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number |
+
+
+## get_whats_app_number_info
+
+> <GetWhatsAppNumberInfo200Response> get_whats_app_number_info(account_id)
+
+Get number status
+
+Live snapshot of a connected number straight from Meta: the phone-number node (display number, display name + approval, quality rating, messaging-limit tier, throughput, official-business badge, connection status, health_status) and its owning WhatsApp Business Account (name, business verification, timezone, health_status). Fetched live because Meta updates quality/tier/name/health over time; the call also refreshes the cached values shown on the connection card. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+account_id = 'account_id_example' # String | WhatsApp social account ID
+
+begin
+  # Get number status
+  result = api_instance.get_whats_app_number_info(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_number_info: #{e}"
+end
+```
+
+#### Using the get_whats_app_number_info_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppNumberInfo200Response>, Integer, Hash)> get_whats_app_number_info_with_http_info(account_id)
+
+```ruby
+begin
+  # Get number status
+  data, status_code, headers = api_instance.get_whats_app_number_info_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppNumberInfo200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_number_info_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp social account ID |  |
+
+### Return type
+
+[**GetWhatsAppNumberInfo200Response**](GetWhatsAppNumberInfo200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## get_whats_app_phone_number
