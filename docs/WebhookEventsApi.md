@@ -8,6 +8,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_account_connected**](WebhookEventsApi.md#on_account_connected) | **POST** /account.connected | Account connected event |
 | [**on_account_disconnected**](WebhookEventsApi.md#on_account_disconnected) | **POST** /account.disconnected | Account disconnected event |
 | [**on_ad_status_changed**](WebhookEventsApi.md#on_ad_status_changed) | **POST** /ad.status_changed | Ad status changed event |
+| [**on_call_ended**](WebhookEventsApi.md#on_call_ended) | **POST** /call.ended | Call ended event |
+| [**on_call_failed**](WebhookEventsApi.md#on_call_failed) | **POST** /call.failed | Call failed event |
+| [**on_call_permission_request**](WebhookEventsApi.md#on_call_permission_request) | **POST** /call.permission_request | Call permission request reply event |
+| [**on_call_received**](WebhookEventsApi.md#on_call_received) | **POST** /call.received | Call received event |
 | [**on_comment_received**](WebhookEventsApi.md#on_comment_received) | **POST** /comment.received | Comment received event |
 | [**on_conversation_started**](WebhookEventsApi.md#on_conversation_started) | **POST** /conversation.started | Conversation started event |
 | [**on_lead_received**](WebhookEventsApi.md#on_lead_received) | **POST** /lead.received | Lead received event |
@@ -290,6 +294,278 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_ad_status_changed** | [**WebhookPayloadAdStatusChanged**](WebhookPayloadAdStatusChanged.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_call_ended
+
+> on_call_ended(webhook_payload_call_ended)
+
+Call ended event
+
+Fired on call hangup with the duration and a zero-markup billing breakdown (Meta cost, Telnyx cost, recording surcharge, total). Costs are pass-through; no margin is applied. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_call_ended =  # WebhookPayloadCallEnded | 
+
+begin
+  # Call ended event
+  api_instance.on_call_ended(webhook_payload_call_ended)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_ended: #{e}"
+end
+```
+
+#### Using the on_call_ended_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_call_ended_with_http_info(webhook_payload_call_ended)
+
+```ruby
+begin
+  # Call ended event
+  data, status_code, headers = api_instance.on_call_ended_with_http_info(webhook_payload_call_ended)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_ended_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_call_ended** | [**WebhookPayloadCallEnded**](WebhookPayloadCallEnded.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_call_failed
+
+> on_call_failed(webhook_payload_call_failed)
+
+Call failed event
+
+Fired when a call setup or in-progress call fails (Meta rejected the connect, Telnyx returned an error, etc.). Payload carries the upstream error code and message. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_call_failed =  # WebhookPayloadCallFailed | 
+
+begin
+  # Call failed event
+  api_instance.on_call_failed(webhook_payload_call_failed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_failed: #{e}"
+end
+```
+
+#### Using the on_call_failed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_call_failed_with_http_info(webhook_payload_call_failed)
+
+```ruby
+begin
+  # Call failed event
+  data, status_code, headers = api_instance.on_call_failed_with_http_info(webhook_payload_call_failed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_failed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_call_failed** | [**WebhookPayloadCallFailed**](WebhookPayloadCallFailed.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_call_permission_request
+
+> on_call_permission_request(webhook_payload_call_permission_request)
+
+Call permission request reply event
+
+Fired when a consumer replies to a `call_permission_request` interactive message (or its marketing-template variant). Carries the response (`accept` / `reject`), whether the grant is permanent, and the expiration timestamp when it is temporary. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_call_permission_request =  # WebhookPayloadCallPermissionRequest | 
+
+begin
+  # Call permission request reply event
+  api_instance.on_call_permission_request(webhook_payload_call_permission_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_permission_request: #{e}"
+end
+```
+
+#### Using the on_call_permission_request_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_call_permission_request_with_http_info(webhook_payload_call_permission_request)
+
+```ruby
+begin
+  # Call permission request reply event
+  data, status_code, headers = api_instance.on_call_permission_request_with_http_info(webhook_payload_call_permission_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_permission_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_call_permission_request** | [**WebhookPayloadCallPermissionRequest**](WebhookPayloadCallPermissionRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_call_received
+
+> on_call_received(webhook_payload_call_received)
+
+Call received event
+
+Fired when a WhatsApp Business Call connects. For inbound (UIC) calls the event fires at the moment our Telnyx trunk bridges the consumer leg to the customer&apos;s forward-to destination; for outbound (BIC) calls it fires immediately after Meta accepts the connect. Branch on `call.direction` to distinguish. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_call_received =  # WebhookPayloadCallReceived | 
+
+begin
+  # Call received event
+  api_instance.on_call_received(webhook_payload_call_received)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_received: #{e}"
+end
+```
+
+#### Using the on_call_received_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_call_received_with_http_info(webhook_payload_call_received)
+
+```ruby
+begin
+  # Call received event
+  data, status_code, headers = api_instance.on_call_received_with_http_info(webhook_payload_call_received)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_call_received_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_call_received** | [**WebhookPayloadCallReceived**](WebhookPayloadCallReceived.md) |  |  |
 
 ### Return type
 

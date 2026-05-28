@@ -283,6 +283,270 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Call ended event
+    # Fired on call hangup with the duration and a zero-markup billing breakdown (Meta cost, Telnyx cost, recording surcharge, total). Costs are pass-through; no margin is applied. 
+    # @param webhook_payload_call_ended [WebhookPayloadCallEnded] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_call_ended(webhook_payload_call_ended, opts = {})
+      on_call_ended_with_http_info(webhook_payload_call_ended, opts)
+      nil
+    end
+
+    # Call ended event
+    # Fired on call hangup with the duration and a zero-markup billing breakdown (Meta cost, Telnyx cost, recording surcharge, total). Costs are pass-through; no margin is applied. 
+    # @param webhook_payload_call_ended [WebhookPayloadCallEnded] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_call_ended_with_http_info(webhook_payload_call_ended, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_call_ended ...'
+      end
+      # verify the required parameter 'webhook_payload_call_ended' is set
+      if @api_client.config.client_side_validation && webhook_payload_call_ended.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_call_ended' when calling WebhookEventsApi.on_call_ended"
+      end
+      # resource path
+      local_var_path = '/call.ended'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_call_ended)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_call_ended",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_call_ended\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Call failed event
+    # Fired when a call setup or in-progress call fails (Meta rejected the connect, Telnyx returned an error, etc.). Payload carries the upstream error code and message. 
+    # @param webhook_payload_call_failed [WebhookPayloadCallFailed] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_call_failed(webhook_payload_call_failed, opts = {})
+      on_call_failed_with_http_info(webhook_payload_call_failed, opts)
+      nil
+    end
+
+    # Call failed event
+    # Fired when a call setup or in-progress call fails (Meta rejected the connect, Telnyx returned an error, etc.). Payload carries the upstream error code and message. 
+    # @param webhook_payload_call_failed [WebhookPayloadCallFailed] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_call_failed_with_http_info(webhook_payload_call_failed, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_call_failed ...'
+      end
+      # verify the required parameter 'webhook_payload_call_failed' is set
+      if @api_client.config.client_side_validation && webhook_payload_call_failed.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_call_failed' when calling WebhookEventsApi.on_call_failed"
+      end
+      # resource path
+      local_var_path = '/call.failed'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_call_failed)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_call_failed",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_call_failed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Call permission request reply event
+    # Fired when a consumer replies to a `call_permission_request` interactive message (or its marketing-template variant). Carries the response (`accept` / `reject`), whether the grant is permanent, and the expiration timestamp when it is temporary. 
+    # @param webhook_payload_call_permission_request [WebhookPayloadCallPermissionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_call_permission_request(webhook_payload_call_permission_request, opts = {})
+      on_call_permission_request_with_http_info(webhook_payload_call_permission_request, opts)
+      nil
+    end
+
+    # Call permission request reply event
+    # Fired when a consumer replies to a &#x60;call_permission_request&#x60; interactive message (or its marketing-template variant). Carries the response (&#x60;accept&#x60; / &#x60;reject&#x60;), whether the grant is permanent, and the expiration timestamp when it is temporary. 
+    # @param webhook_payload_call_permission_request [WebhookPayloadCallPermissionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_call_permission_request_with_http_info(webhook_payload_call_permission_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_call_permission_request ...'
+      end
+      # verify the required parameter 'webhook_payload_call_permission_request' is set
+      if @api_client.config.client_side_validation && webhook_payload_call_permission_request.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_call_permission_request' when calling WebhookEventsApi.on_call_permission_request"
+      end
+      # resource path
+      local_var_path = '/call.permission_request'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_call_permission_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_call_permission_request",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_call_permission_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Call received event
+    # Fired when a WhatsApp Business Call connects. For inbound (UIC) calls the event fires at the moment our Telnyx trunk bridges the consumer leg to the customer&apos;s forward-to destination; for outbound (BIC) calls it fires immediately after Meta accepts the connect. Branch on `call.direction` to distinguish. 
+    # @param webhook_payload_call_received [WebhookPayloadCallReceived] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_call_received(webhook_payload_call_received, opts = {})
+      on_call_received_with_http_info(webhook_payload_call_received, opts)
+      nil
+    end
+
+    # Call received event
+    # Fired when a WhatsApp Business Call connects. For inbound (UIC) calls the event fires at the moment our Telnyx trunk bridges the consumer leg to the customer&amp;apos;s forward-to destination; for outbound (BIC) calls it fires immediately after Meta accepts the connect. Branch on &#x60;call.direction&#x60; to distinguish. 
+    # @param webhook_payload_call_received [WebhookPayloadCallReceived] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_call_received_with_http_info(webhook_payload_call_received, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_call_received ...'
+      end
+      # verify the required parameter 'webhook_payload_call_received' is set
+      if @api_client.config.client_side_validation && webhook_payload_call_received.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_call_received' when calling WebhookEventsApi.on_call_received"
+      end
+      # resource path
+      local_var_path = '/call.received'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_call_received)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_call_received",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_call_received\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Comment received event
     # Fired when a new comment is received on a tracked post.
     # @param webhook_payload_comment [WebhookPayloadComment] 

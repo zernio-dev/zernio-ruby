@@ -365,6 +365,15 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**update_whats_app_group_chat**](docs/WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings
 *Zernio::WhatsAppApi* | [**update_whats_app_template**](docs/WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template
 *Zernio::WhatsAppApi* | [**upload_whats_app_profile_photo**](docs/WhatsAppApi.md#upload_whats_app_profile_photo) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture
+*Zernio::WhatsAppCallingApi* | [**disable_whats_app_calling**](docs/WhatsAppCallingApi.md#disable_whats_app_calling) | **DELETE** /v1/whatsapp/phone-numbers/{id}/calling | Disable calling on a number
+*Zernio::WhatsAppCallingApi* | [**enable_whats_app_calling**](docs/WhatsAppCallingApi.md#enable_whats_app_calling) | **POST** /v1/whatsapp/phone-numbers/{id}/calling | Enable calling on a number
+*Zernio::WhatsAppCallingApi* | [**get_whats_app_call**](docs/WhatsAppCallingApi.md#get_whats_app_call) | **GET** /v1/whatsapp/calls/{callId} | Get a single call
+*Zernio::WhatsAppCallingApi* | [**get_whats_app_call_estimate**](docs/WhatsAppCallingApi.md#get_whats_app_call_estimate) | **GET** /v1/whatsapp/calls/estimate | Estimate per-minute cost for a destination
+*Zernio::WhatsAppCallingApi* | [**get_whats_app_call_permissions**](docs/WhatsAppCallingApi.md#get_whats_app_call_permissions) | **GET** /v1/whatsapp/call-permissions | Check call permission for a consumer
+*Zernio::WhatsAppCallingApi* | [**get_whats_app_calling_config**](docs/WhatsAppCallingApi.md#get_whats_app_calling_config) | **GET** /v1/whatsapp/calling | Get calling config for an account
+*Zernio::WhatsAppCallingApi* | [**initiate_whats_app_call**](docs/WhatsAppCallingApi.md#initiate_whats_app_call) | **POST** /v1/whatsapp/calls | Initiate outbound call
+*Zernio::WhatsAppCallingApi* | [**list_whats_app_calls**](docs/WhatsAppCallingApi.md#list_whats_app_calls) | **GET** /v1/whatsapp/calls | List call history for an account
+*Zernio::WhatsAppCallingApi* | [**update_whats_app_calling**](docs/WhatsAppCallingApi.md#update_whats_app_calling) | **PATCH** /v1/whatsapp/phone-numbers/{id}/calling | Update calling config
 *Zernio::WhatsAppFlowsApi* | [**create_whats_app_flow**](docs/WhatsAppFlowsApi.md#create_whats_app_flow) | **POST** /v1/whatsapp/flows | Create flow
 *Zernio::WhatsAppFlowsApi* | [**delete_whats_app_flow**](docs/WhatsAppFlowsApi.md#delete_whats_app_flow) | **DELETE** /v1/whatsapp/flows/{flowId} | Delete flow
 *Zernio::WhatsAppFlowsApi* | [**deprecate_whats_app_flow**](docs/WhatsAppFlowsApi.md#deprecate_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/deprecate | Deprecate flow
@@ -618,6 +627,8 @@ Class | Method | HTTP request | Description
  - [Zernio::EditInboxMessageRequestReplyMarkupKeyboardInnerInner](docs/EditInboxMessageRequestReplyMarkupKeyboardInnerInner.md)
  - [Zernio::EditPost200Response](docs/EditPost200Response.md)
  - [Zernio::EditPostRequest](docs/EditPostRequest.md)
+ - [Zernio::EnableWhatsAppCalling200Response](docs/EnableWhatsAppCalling200Response.md)
+ - [Zernio::EnableWhatsAppCallingRequest](docs/EnableWhatsAppCallingRequest.md)
  - [Zernio::EnrollContacts200Response](docs/EnrollContacts200Response.md)
  - [Zernio::EnrollContactsRequest](docs/EnrollContactsRequest.md)
  - [Zernio::ErrorResponse](docs/ErrorResponse.md)
@@ -819,6 +830,13 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWebhookSettings200Response](docs/GetWebhookSettings200Response.md)
  - [Zernio::GetWhatsAppBusinessProfile200Response](docs/GetWhatsAppBusinessProfile200Response.md)
  - [Zernio::GetWhatsAppBusinessProfile200ResponseBusinessProfile](docs/GetWhatsAppBusinessProfile200ResponseBusinessProfile.md)
+ - [Zernio::GetWhatsAppCall200Response](docs/GetWhatsAppCall200Response.md)
+ - [Zernio::GetWhatsAppCallEstimate200Response](docs/GetWhatsAppCallEstimate200Response.md)
+ - [Zernio::GetWhatsAppCallEstimate200ResponseBreakdown](docs/GetWhatsAppCallEstimate200ResponseBreakdown.md)
+ - [Zernio::GetWhatsAppCallPermissions200Response](docs/GetWhatsAppCallPermissions200Response.md)
+ - [Zernio::GetWhatsAppCallPermissions200ResponseActionsInner](docs/GetWhatsAppCallPermissions200ResponseActionsInner.md)
+ - [Zernio::GetWhatsAppCallPermissions200ResponsePermission](docs/GetWhatsAppCallPermissions200ResponsePermission.md)
+ - [Zernio::GetWhatsAppCallingConfig200Response](docs/GetWhatsAppCallingConfig200Response.md)
  - [Zernio::GetWhatsAppDataset200Response](docs/GetWhatsAppDataset200Response.md)
  - [Zernio::GetWhatsAppDisplayName200Response](docs/GetWhatsAppDisplayName200Response.md)
  - [Zernio::GetWhatsAppDisplayName200ResponseDisplayName](docs/GetWhatsAppDisplayName200ResponseDisplayName.md)
@@ -874,6 +892,8 @@ Class | Method | HTTP request | Description
  - [Zernio::InitiateTelegramConnect200Response](docs/InitiateTelegramConnect200Response.md)
  - [Zernio::InitiateTelegramConnect200ResponseAccount](docs/InitiateTelegramConnect200ResponseAccount.md)
  - [Zernio::InitiateTelegramConnectRequest](docs/InitiateTelegramConnectRequest.md)
+ - [Zernio::InitiateWhatsAppCall200Response](docs/InitiateWhatsAppCall200Response.md)
+ - [Zernio::InitiateWhatsAppCallRequest](docs/InitiateWhatsAppCallRequest.md)
  - [Zernio::InlineObject](docs/InlineObject.md)
  - [Zernio::InlineObject1](docs/InlineObject1.md)
  - [Zernio::InlineObject2](docs/InlineObject2.md)
@@ -975,6 +995,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
  - [Zernio::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
+ - [Zernio::ListWhatsAppCalls200Response](docs/ListWhatsAppCalls200Response.md)
+ - [Zernio::ListWhatsAppCalls200ResponseCallsInner](docs/ListWhatsAppCalls200ResponseCallsInner.md)
+ - [Zernio::ListWhatsAppCalls200ResponseCallsInnerBilling](docs/ListWhatsAppCalls200ResponseCallsInnerBilling.md)
  - [Zernio::ListWhatsAppConversions200Response](docs/ListWhatsAppConversions200Response.md)
  - [Zernio::ListWhatsAppConversions200ResponseEventsInner](docs/ListWhatsAppConversions200ResponseEventsInner.md)
  - [Zernio::ListWhatsAppFlowResponses200Response](docs/ListWhatsAppFlowResponses200Response.md)
@@ -1252,6 +1275,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateWebhookSettings200Response](docs/UpdateWebhookSettings200Response.md)
  - [Zernio::UpdateWebhookSettingsRequest](docs/UpdateWebhookSettingsRequest.md)
  - [Zernio::UpdateWhatsAppBusinessProfileRequest](docs/UpdateWhatsAppBusinessProfileRequest.md)
+ - [Zernio::UpdateWhatsAppCallingRequest](docs/UpdateWhatsAppCallingRequest.md)
  - [Zernio::UpdateWhatsAppDisplayName200Response](docs/UpdateWhatsAppDisplayName200Response.md)
  - [Zernio::UpdateWhatsAppDisplayName200ResponseDisplayName](docs/UpdateWhatsAppDisplayName200ResponseDisplayName.md)
  - [Zernio::UpdateWhatsAppDisplayNameRequest](docs/UpdateWhatsAppDisplayNameRequest.md)
@@ -1309,6 +1333,16 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadAdStatusChangedAdObject](docs/WebhookPayloadAdStatusChangedAdObject.md)
  - [Zernio::WebhookPayloadAdStatusChangedError](docs/WebhookPayloadAdStatusChangedError.md)
  - [Zernio::WebhookPayloadAdStatusChangedStatus](docs/WebhookPayloadAdStatusChangedStatus.md)
+ - [Zernio::WebhookPayloadCallEnded](docs/WebhookPayloadCallEnded.md)
+ - [Zernio::WebhookPayloadCallEndedCall](docs/WebhookPayloadCallEndedCall.md)
+ - [Zernio::WebhookPayloadCallEndedCallBilling](docs/WebhookPayloadCallEndedCallBilling.md)
+ - [Zernio::WebhookPayloadCallFailed](docs/WebhookPayloadCallFailed.md)
+ - [Zernio::WebhookPayloadCallFailedCall](docs/WebhookPayloadCallFailedCall.md)
+ - [Zernio::WebhookPayloadCallFailedCallError](docs/WebhookPayloadCallFailedCallError.md)
+ - [Zernio::WebhookPayloadCallPermissionRequest](docs/WebhookPayloadCallPermissionRequest.md)
+ - [Zernio::WebhookPayloadCallPermissionRequestPermission](docs/WebhookPayloadCallPermissionRequestPermission.md)
+ - [Zernio::WebhookPayloadCallReceived](docs/WebhookPayloadCallReceived.md)
+ - [Zernio::WebhookPayloadCallReceivedCall](docs/WebhookPayloadCallReceivedCall.md)
  - [Zernio::WebhookPayloadComment](docs/WebhookPayloadComment.md)
  - [Zernio::WebhookPayloadCommentAccount](docs/WebhookPayloadCommentAccount.md)
  - [Zernio::WebhookPayloadCommentComment](docs/WebhookPayloadCommentComment.md)
