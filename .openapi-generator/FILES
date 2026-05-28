@@ -1003,8 +1003,6 @@ docs/WebhookPayloadPostPlatformPost.md
 docs/WebhookPayloadPostPost.md
 docs/WebhookPayloadPostPostPlatformsInner.md
 docs/WebhookPayloadReaction.md
-docs/WebhookPayloadReactionAccount.md
-docs/WebhookPayloadReactionConversation.md
 docs/WebhookPayloadReactionReaction.md
 docs/WebhookPayloadReactionReactionSender.md
 docs/WebhookPayloadReviewNew.md
@@ -2049,8 +2047,6 @@ lib/zernio-sdk/models/webhook_payload_post_platform_post.rb
 lib/zernio-sdk/models/webhook_payload_post_post.rb
 lib/zernio-sdk/models/webhook_payload_post_post_platforms_inner.rb
 lib/zernio-sdk/models/webhook_payload_reaction.rb
-lib/zernio-sdk/models/webhook_payload_reaction_account.rb
-lib/zernio-sdk/models/webhook_payload_reaction_conversation.rb
 lib/zernio-sdk/models/webhook_payload_reaction_reaction.rb
 lib/zernio-sdk/models/webhook_payload_reaction_reaction_sender.rb
 lib/zernio-sdk/models/webhook_payload_review_new.rb
@@ -3082,8 +3078,6 @@ spec/models/webhook_payload_post_platform_spec.rb
 spec/models/webhook_payload_post_post_platforms_inner_spec.rb
 spec/models/webhook_payload_post_post_spec.rb
 spec/models/webhook_payload_post_spec.rb
-spec/models/webhook_payload_reaction_account_spec.rb
-spec/models/webhook_payload_reaction_conversation_spec.rb
 spec/models/webhook_payload_reaction_reaction_sender_spec.rb
 spec/models/webhook_payload_reaction_reaction_spec.rb
 spec/models/webhook_payload_reaction_spec.rb

@@ -79,8 +79,8 @@ module Zernio
         :'id' => :'String',
         :'event' => :'String',
         :'reaction' => :'WebhookPayloadReactionReaction',
-        :'conversation' => :'WebhookPayloadReactionConversation',
-        :'account' => :'WebhookPayloadReactionAccount',
+        :'conversation' => :'InboxWebhookConversation',
+        :'account' => :'InboxWebhookAccount',
         :'timestamp' => :'Time'
       }
     end

@@ -1344,8 +1344,6 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadPostPost](docs/WebhookPayloadPostPost.md)
  - [Zernio::WebhookPayloadPostPostPlatformsInner](docs/WebhookPayloadPostPostPlatformsInner.md)
  - [Zernio::WebhookPayloadReaction](docs/WebhookPayloadReaction.md)
- - [Zernio::WebhookPayloadReactionAccount](docs/WebhookPayloadReactionAccount.md)
- - [Zernio::WebhookPayloadReactionConversation](docs/WebhookPayloadReactionConversation.md)
  - [Zernio::WebhookPayloadReactionReaction](docs/WebhookPayloadReactionReaction.md)
  - [Zernio::WebhookPayloadReactionReactionSender](docs/WebhookPayloadReactionReactionSender.md)
  - [Zernio::WebhookPayloadReviewNew](docs/WebhookPayloadReviewNew.md)

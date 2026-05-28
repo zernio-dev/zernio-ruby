@@ -30,6 +30,9 @@ module Zernio
 
     attr_accessor :status
 
+    # Zernio CRM Contact ID for the participant, when one exists. Resolved by joining `participantId` to the ContactChannel collection. Best-effort: omitted when no channel matches or `participantId` is absent. Lets integrators join any inbox webhook back to the CRM Contact without needing to look at the sender — which matters for outgoing and delivery-status events whose sender is the business. 
+    attr_accessor :contact_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -61,7 +64,8 @@ module Zernio
         :'participant_name' => :'participantName',
         :'participant_username' => :'participantUsername',
         :'participant_picture' => :'participantPicture',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'contact_id' => :'contactId'
       }
     end
 
@@ -84,7 +88,8 @@ module Zernio
         :'participant_name' => :'String',
         :'participant_username' => :'String',
         :'participant_picture' => :'String',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'contact_id' => :'String'
       }
     end
 
@@ -142,6 +147,10 @@ module Zernio
         self.status = attributes[:'status']
       else
         self.status = nil
+      end
+
+      if attributes.key?(:'contact_id')
+        self.contact_id = attributes[:'contact_id']
       end
     end
 
@@ -218,7 +227,8 @@ module Zernio
           participant_name == o.participant_name &&
           participant_username == o.participant_username &&
           participant_picture == o.participant_picture &&
-          status == o.status
+          status == o.status &&
+          contact_id == o.contact_id
     end
 
     # @see the `==` method
@@ -230,7 +240,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform_conversation_id, participant_id, participant_name, participant_username, participant_picture, status].hash
+      [id, platform_conversation_id, participant_id, participant_name, participant_username, participant_picture, status, contact_id].hash
     end
 
     # Builds the object from hash
