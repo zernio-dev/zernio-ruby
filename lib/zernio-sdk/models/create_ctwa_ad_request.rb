@@ -50,8 +50,23 @@ module Zernio
     # ISO 8601 datetime. Required when `budgetType` is `lifetime`. 
     attr_accessor :end_date
 
-    # ISO 3166-1 alpha-2 country codes. Defaults to `[\"US\"]`.
+    # ISO 3166-1 alpha-2 country codes. Defaults to `[\"US\"]` only when no other geo (`cities`, `regions`, `zips`, `metros`, `customLocations`) is supplied. 
     attr_accessor :countries
+
+    # City-level geo targeting for local CTWA campaigns (e.g. 25km radius around Milan). Each entry maps to Meta's TargetingGeoLocationCity. `key` is Meta's city ID (lookupable via GET /v1/ads/targeting/search). `radius` and `distance_unit` are coupled: set both or neither. 
+    attr_accessor :cities
+
+    # Region / state-level geo targeting. `key` is Meta's region ID (lookupable via GET /v1/ads/targeting/search?type=region). 
+    attr_accessor :regions
+
+    # ZIP / postal-code geo targeting. `key` is the platform's postal id resolved via /v1/ads/targeting/search. 
+    attr_accessor :zips
+
+    # DMA / metro-area geo targeting. `key` is Meta's metro id (e.g. `DMA:807`). 
+    attr_accessor :metros
+
+    # Point-radius geo (Meta `geo_locations.custom_locations`). Use for targeting a radius around a specific lat/long when no Meta city/region key fits. `distanceUnit` is required. 
+    attr_accessor :custom_locations
 
     attr_accessor :age_min
 
@@ -121,6 +136,11 @@ module Zernio
         :'currency' => :'currency',
         :'end_date' => :'endDate',
         :'countries' => :'countries',
+        :'cities' => :'cities',
+        :'regions' => :'regions',
+        :'zips' => :'zips',
+        :'metros' => :'metros',
+        :'custom_locations' => :'customLocations',
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
         :'interests' => :'interests',
@@ -161,6 +181,11 @@ module Zernio
         :'currency' => :'String',
         :'end_date' => :'Time',
         :'countries' => :'Array<String>',
+        :'cities' => :'Array<CreateCtwaAdRequestCitiesInner>',
+        :'regions' => :'Array<CreateCtwaAdRequestRegionsInner>',
+        :'zips' => :'Array<CreateCtwaAdRequestZipsInner>',
+        :'metros' => :'Array<CreateCtwaAdRequestZipsInner>',
+        :'custom_locations' => :'Array<CreateStandaloneAdRequestCustomLocationsInner>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'interests' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
@@ -260,6 +285,36 @@ module Zernio
       if attributes.key?(:'countries')
         if (value = attributes[:'countries']).is_a?(Array)
           self.countries = value
+        end
+      end
+
+      if attributes.key?(:'cities')
+        if (value = attributes[:'cities']).is_a?(Array)
+          self.cities = value
+        end
+      end
+
+      if attributes.key?(:'regions')
+        if (value = attributes[:'regions']).is_a?(Array)
+          self.regions = value
+        end
+      end
+
+      if attributes.key?(:'zips')
+        if (value = attributes[:'zips']).is_a?(Array)
+          self.zips = value
+        end
+      end
+
+      if attributes.key?(:'metros')
+        if (value = attributes[:'metros']).is_a?(Array)
+          self.metros = value
+        end
+      end
+
+      if attributes.key?(:'custom_locations')
+        if (value = attributes[:'custom_locations']).is_a?(Array)
+          self.custom_locations = value
         end
       end
 
@@ -718,6 +773,11 @@ module Zernio
           currency == o.currency &&
           end_date == o.end_date &&
           countries == o.countries &&
+          cities == o.cities &&
+          regions == o.regions &&
+          zips == o.zips &&
+          metros == o.metros &&
+          custom_locations == o.custom_locations &&
           age_min == o.age_min &&
           age_max == o.age_max &&
           interests == o.interests &&
@@ -740,7 +800,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, budget_amount, budget_type, currency, end_date, countries, age_min, age_max, interests, audience_id, advantage_audience, objective, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, advantage_audience, objective, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash
