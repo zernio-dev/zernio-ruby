@@ -17,6 +17,9 @@ module Zernio
   class WebhookPayloadMessageSentMessageSender < ApiModelBase
     attr_accessor :id
 
+    # Zernio CRM Contact id for this sender, when one exists.
+    attr_accessor :contact_id
+
     attr_accessor :name
 
     attr_accessor :username
@@ -27,6 +30,7 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
+        :'contact_id' => :'contactId',
         :'name' => :'name',
         :'username' => :'username',
         :'picture' => :'picture'
@@ -47,6 +51,7 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
+        :'contact_id' => :'String',
         :'name' => :'String',
         :'username' => :'String',
         :'picture' => :'String'
@@ -79,6 +84,10 @@ module Zernio
         self.id = attributes[:'id']
       else
         self.id = nil
+      end
+
+      if attributes.key?(:'contact_id')
+        self.contact_id = attributes[:'contact_id']
       end
 
       if attributes.key?(:'name')
@@ -130,6 +139,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          contact_id == o.contact_id &&
           name == o.name &&
           username == o.username &&
           picture == o.picture
@@ -144,7 +154,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, username, picture].hash
+      [id, contact_id, name, username, picture].hash
     end
 
     # Builds the object from hash

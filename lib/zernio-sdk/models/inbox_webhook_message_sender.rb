@@ -18,6 +18,9 @@ module Zernio
     # Sender's platform identifier. For WhatsApp this is the phone number (without leading `+`) when available, otherwise the `businessScopedUserId`. For other platforms, the platform's own user ID. 
     attr_accessor :id
 
+    # Zernio CRM Contact id for this sender, when one exists (joined via the ContactChannel mapping). Lets integrators link a message straight to a Contact without a follow-up Contacts API call. Omitted when the sender isn't a tracked contact (e.g. outgoing messages where the sender is the business, or first-touch messages before the contact is created). 
+    attr_accessor :contact_id
+
     attr_accessor :name
 
     attr_accessor :username
@@ -42,6 +45,7 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
+        :'contact_id' => :'contactId',
         :'name' => :'name',
         :'username' => :'username',
         :'picture' => :'picture',
@@ -67,6 +71,7 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
+        :'contact_id' => :'String',
         :'name' => :'String',
         :'username' => :'String',
         :'picture' => :'String',
@@ -104,6 +109,10 @@ module Zernio
         self.id = attributes[:'id']
       else
         self.id = nil
+      end
+
+      if attributes.key?(:'contact_id')
+        self.contact_id = attributes[:'contact_id']
       end
 
       if attributes.key?(:'name')
@@ -175,6 +184,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          contact_id == o.contact_id &&
           name == o.name &&
           username == o.username &&
           picture == o.picture &&
@@ -194,7 +204,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, username, picture, phone_number, business_scoped_user_id, parent_business_scoped_user_id, whatsapp_username, instagram_profile].hash
+      [id, contact_id, name, username, picture, phone_number, business_scoped_user_id, parent_business_scoped_user_id, whatsapp_username, instagram_profile].hash
     end
 
     # Builds the object from hash
