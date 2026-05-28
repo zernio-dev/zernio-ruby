@@ -8,6 +8,7 @@
 | **message** | **String** | Message text | [optional] |
 | **attachment_url** | **String** | URL of the attachment to send (image, video, audio, or file). The URL must be publicly accessible. For binary file uploads, use multipart/form-data instead. | [optional] |
 | **attachment_type** | **String** | Type of attachment. Defaults to file if not specified. | [optional] |
+| **voice_note** | **Boolean** | WhatsApp only. When &#x60;true&#x60; on an audio attachment, the message is sent as a voice message (PTT) — the recipient sees the waveform + voice-note UI instead of a basic audio attachment. The audio file MUST be &#x60;.ogg&#x60; encoded with the OPUS codec (mono) per Meta&#39;s voice-message contract; other formats are rejected by WhatsApp. Ignored for non-audio attachments.  | [optional] |
 | **quick_replies** | [**Array&lt;SendInboxMessageRequestQuickRepliesInner&gt;**](SendInboxMessageRequestQuickRepliesInner.md) | Quick reply buttons. Mutually exclusive with buttons. Max 13 items. | [optional] |
 | **buttons** | [**Array&lt;SendInboxMessageRequestButtonsInner&gt;**](SendInboxMessageRequestButtonsInner.md) | Action buttons. Mutually exclusive with quickReplies. Max 3 items. | [optional] |
 | **template** | [**SendInboxMessageRequestTemplate**](SendInboxMessageRequestTemplate.md) |  | [optional] |
@@ -29,6 +30,7 @@ instance = Zernio::SendInboxMessageRequest.new(
   message: null,
   attachment_url: null,
   attachment_type: null,
+  voice_note: null,
   quick_replies: null,
   buttons: null,
   template: null,

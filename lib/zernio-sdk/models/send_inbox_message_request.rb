@@ -27,6 +27,9 @@ module Zernio
     # Type of attachment. Defaults to file if not specified.
     attr_accessor :attachment_type
 
+    # WhatsApp only. When `true` on an audio attachment, the message is sent as a voice message (PTT) — the recipient sees the waveform + voice-note UI instead of a basic audio attachment. The audio file MUST be `.ogg` encoded with the OPUS codec (mono) per Meta's voice-message contract; other formats are rejected by WhatsApp. Ignored for non-audio attachments. 
+    attr_accessor :voice_note
+
     # Quick reply buttons. Mutually exclusive with buttons. Max 13 items.
     attr_accessor :quick_replies
 
@@ -82,6 +85,7 @@ module Zernio
         :'message' => :'message',
         :'attachment_url' => :'attachmentUrl',
         :'attachment_type' => :'attachmentType',
+        :'voice_note' => :'voiceNote',
         :'quick_replies' => :'quickReplies',
         :'buttons' => :'buttons',
         :'template' => :'template',
@@ -112,6 +116,7 @@ module Zernio
         :'message' => :'String',
         :'attachment_url' => :'String',
         :'attachment_type' => :'String',
+        :'voice_note' => :'Boolean',
         :'quick_replies' => :'Array<SendInboxMessageRequestQuickRepliesInner>',
         :'buttons' => :'Array<SendInboxMessageRequestButtonsInner>',
         :'template' => :'SendInboxMessageRequestTemplate',
@@ -163,6 +168,10 @@ module Zernio
 
       if attributes.key?(:'attachment_type')
         self.attachment_type = attributes[:'attachment_type']
+      end
+
+      if attributes.key?(:'voice_note')
+        self.voice_note = attributes[:'voice_note']
       end
 
       if attributes.key?(:'quick_replies')
@@ -325,6 +334,7 @@ module Zernio
           message == o.message &&
           attachment_url == o.attachment_url &&
           attachment_type == o.attachment_type &&
+          voice_note == o.voice_note &&
           quick_replies == o.quick_replies &&
           buttons == o.buttons &&
           template == o.template &&
@@ -346,7 +356,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, attachment_url, attachment_type, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to, location, contacts].hash
+      [account_id, message, attachment_url, attachment_type, voice_note, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to, location, contacts].hash
     end
 
     # Builds the object from hash
