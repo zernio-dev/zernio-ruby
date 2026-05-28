@@ -181,6 +181,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Provision CTWA conversions dataset
+    # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as `metadata.metaCapiDatasetId`.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with `created: false`.  Requires the connected WhatsApp account's token to carry the `whatsapp_business_manage_events` permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
+    # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateWhatsAppDataset200Response]
+    def create_whats_app_dataset(create_whats_app_dataset_request, opts = {})
+      data, _status_code, _headers = create_whats_app_dataset_with_http_info(create_whats_app_dataset_request, opts)
+      data
+    end
+
+    # Provision CTWA conversions dataset
+    # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as &#x60;metadata.metaCapiDatasetId&#x60;.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with &#x60;created: false&#x60;.  Requires the connected WhatsApp account&#39;s token to carry the &#x60;whatsapp_business_manage_events&#x60; permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
+    # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateWhatsAppDataset200Response, Integer, Hash)>] CreateWhatsAppDataset200Response data, response status code and response headers
+    def create_whats_app_dataset_with_http_info(create_whats_app_dataset_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.create_whats_app_dataset ...'
+      end
+      # verify the required parameter 'create_whats_app_dataset_request' is set
+      if @api_client.config.client_side_validation && create_whats_app_dataset_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_whats_app_dataset_request' when calling WhatsAppApi.create_whats_app_dataset"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/dataset'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_whats_app_dataset_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateWhatsAppDataset200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.create_whats_app_dataset",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#create_whats_app_dataset\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create group
     # Create a new WhatsApp group chat. Returns the group ID and optionally an invite link.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param create_whats_app_group_chat_request [CreateWhatsAppGroupChatRequest] 
@@ -587,6 +655,70 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppApi#get_whats_app_business_profile\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get CTWA conversions dataset
+    # Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored `metadata.metaCapiDatasetId` — never hits Meta, never creates a dataset. Use this to detect whether `POST /v1/whatsapp/conversions` is configured for an account. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [GetWhatsAppDataset200Response]
+    def get_whats_app_dataset(account_id, opts = {})
+      data, _status_code, _headers = get_whats_app_dataset_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get CTWA conversions dataset
+    # Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored &#x60;metadata.metaCapiDatasetId&#x60; — never hits Meta, never creates a dataset. Use this to detect whether &#x60;POST /v1/whatsapp/conversions&#x60; is configured for an account. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsAppDataset200Response, Integer, Hash)>] GetWhatsAppDataset200Response data, response status code and response headers
+    def get_whats_app_dataset_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.get_whats_app_dataset ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.get_whats_app_dataset"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/dataset'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppDataset200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.get_whats_app_dataset",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#get_whats_app_dataset\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

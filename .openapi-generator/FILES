@@ -199,6 +199,8 @@ docs/CreateTestLeadRequestFieldDataInner.md
 docs/CreateTrackingTag201Response.md
 docs/CreateTrackingTagRequest.md
 docs/CreateWebhookSettingsRequest.md
+docs/CreateWhatsAppDataset200Response.md
+docs/CreateWhatsAppDatasetRequest.md
 docs/CreateWhatsAppFlow200Response.md
 docs/CreateWhatsAppFlow200ResponseFlow.md
 docs/CreateWhatsAppFlowRequest.md
@@ -455,6 +457,7 @@ docs/GetUser200ResponseUser.md
 docs/GetWebhookSettings200Response.md
 docs/GetWhatsAppBusinessProfile200Response.md
 docs/GetWhatsAppBusinessProfile200ResponseBusinessProfile.md
+docs/GetWhatsAppDataset200Response.md
 docs/GetWhatsAppDisplayName200Response.md
 docs/GetWhatsAppDisplayName200ResponseDisplayName.md
 docs/GetWhatsAppFlow200Response.md
@@ -661,7 +664,6 @@ docs/ProfileGetResponse.md
 docs/ProfileUpdateResponse.md
 docs/ProfilesApi.md
 docs/ProfilesListResponse.md
-docs/PublishWhatsAppFlowRequest.md
 docs/PurchaseWhatsAppPhoneNumber200Response.md
 docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf.md
 docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf1.md
@@ -1264,6 +1266,8 @@ lib/zernio-sdk/models/create_test_lead_request_field_data_inner.rb
 lib/zernio-sdk/models/create_tracking_tag201_response.rb
 lib/zernio-sdk/models/create_tracking_tag_request.rb
 lib/zernio-sdk/models/create_webhook_settings_request.rb
+lib/zernio-sdk/models/create_whats_app_dataset200_response.rb
+lib/zernio-sdk/models/create_whats_app_dataset_request.rb
 lib/zernio-sdk/models/create_whats_app_flow200_response.rb
 lib/zernio-sdk/models/create_whats_app_flow200_response_flow.rb
 lib/zernio-sdk/models/create_whats_app_flow_request.rb
@@ -1510,6 +1514,7 @@ lib/zernio-sdk/models/get_user200_response_user.rb
 lib/zernio-sdk/models/get_webhook_settings200_response.rb
 lib/zernio-sdk/models/get_whats_app_business_profile200_response.rb
 lib/zernio-sdk/models/get_whats_app_business_profile200_response_business_profile.rb
+lib/zernio-sdk/models/get_whats_app_dataset200_response.rb
 lib/zernio-sdk/models/get_whats_app_display_name200_response.rb
 lib/zernio-sdk/models/get_whats_app_display_name200_response_display_name.rb
 lib/zernio-sdk/models/get_whats_app_flow200_response.rb
@@ -1708,7 +1713,6 @@ lib/zernio-sdk/models/profile_delete_response.rb
 lib/zernio-sdk/models/profile_get_response.rb
 lib/zernio-sdk/models/profile_update_response.rb
 lib/zernio-sdk/models/profiles_list_response.rb
-lib/zernio-sdk/models/publish_whats_app_flow_request.rb
 lib/zernio-sdk/models/purchase_whats_app_phone_number200_response.rb
 lib/zernio-sdk/models/purchase_whats_app_phone_number200_response_one_of.rb
 lib/zernio-sdk/models/purchase_whats_app_phone_number200_response_one_of1.rb
@@ -2290,6 +2294,8 @@ spec/models/create_test_lead_request_spec.rb
 spec/models/create_tracking_tag201_response_spec.rb
 spec/models/create_tracking_tag_request_spec.rb
 spec/models/create_webhook_settings_request_spec.rb
+spec/models/create_whats_app_dataset200_response_spec.rb
+spec/models/create_whats_app_dataset_request_spec.rb
 spec/models/create_whats_app_flow200_response_flow_spec.rb
 spec/models/create_whats_app_flow200_response_spec.rb
 spec/models/create_whats_app_flow_request_spec.rb
@@ -2536,6 +2542,7 @@ spec/models/get_user200_response_user_spec.rb
 spec/models/get_webhook_settings200_response_spec.rb
 spec/models/get_whats_app_business_profile200_response_business_profile_spec.rb
 spec/models/get_whats_app_business_profile200_response_spec.rb
+spec/models/get_whats_app_dataset200_response_spec.rb
 spec/models/get_whats_app_display_name200_response_display_name_spec.rb
 spec/models/get_whats_app_display_name200_response_spec.rb
 spec/models/get_whats_app_flow200_response_flow_preview_spec.rb
@@ -2734,7 +2741,6 @@ spec/models/profile_get_response_spec.rb
 spec/models/profile_spec.rb
 spec/models/profile_update_response_spec.rb
 spec/models/profiles_list_response_spec.rb
-spec/models/publish_whats_app_flow_request_spec.rb
 spec/models/purchase_whats_app_phone_number200_response_one_of1_phone_number_spec.rb
 spec/models/purchase_whats_app_phone_number200_response_one_of1_spec.rb
 spec/models/purchase_whats_app_phone_number200_response_one_of_spec.rb

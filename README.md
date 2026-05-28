@@ -341,12 +341,14 @@ Class | Method | HTTP request | Description
 *Zernio::WebhooksApi* | [**update_webhook_settings**](docs/WebhooksApi.md#update_webhook_settings) | **PUT** /v1/webhooks/settings | Update webhook
 *Zernio::WhatsAppApi* | [**add_whats_app_group_participants**](docs/WhatsAppApi.md#add_whats_app_group_participants) | **POST** /v1/whatsapp/wa-groups/{groupId}/participants | Add participants
 *Zernio::WhatsAppApi* | [**approve_whats_app_group_join_requests**](docs/WhatsAppApi.md#approve_whats_app_group_join_requests) | **POST** /v1/whatsapp/wa-groups/{groupId}/join-requests | Approve join requests
+*Zernio::WhatsAppApi* | [**create_whats_app_dataset**](docs/WhatsAppApi.md#create_whats_app_dataset) | **POST** /v1/whatsapp/dataset | Provision CTWA conversions dataset
 *Zernio::WhatsAppApi* | [**create_whats_app_group_chat**](docs/WhatsAppApi.md#create_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups | Create group
 *Zernio::WhatsAppApi* | [**create_whats_app_group_invite_link**](docs/WhatsAppApi.md#create_whats_app_group_invite_link) | **POST** /v1/whatsapp/wa-groups/{groupId}/invite-link | Create invite link
 *Zernio::WhatsAppApi* | [**create_whats_app_template**](docs/WhatsAppApi.md#create_whats_app_template) | **POST** /v1/whatsapp/templates | Create template
 *Zernio::WhatsAppApi* | [**delete_whats_app_group_chat**](docs/WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group
 *Zernio::WhatsAppApi* | [**delete_whats_app_template**](docs/WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template
 *Zernio::WhatsAppApi* | [**get_whats_app_business_profile**](docs/WhatsAppApi.md#get_whats_app_business_profile) | **GET** /v1/whatsapp/business-profile | Get business profile
+*Zernio::WhatsAppApi* | [**get_whats_app_dataset**](docs/WhatsAppApi.md#get_whats_app_dataset) | **GET** /v1/whatsapp/dataset | Get CTWA conversions dataset
 *Zernio::WhatsAppApi* | [**get_whats_app_display_name**](docs/WhatsAppApi.md#get_whats_app_display_name) | **GET** /v1/whatsapp/business-profile/display-name | Get display name status
 *Zernio::WhatsAppApi* | [**get_whats_app_group_chat**](docs/WhatsAppApi.md#get_whats_app_group_chat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info
 *Zernio::WhatsAppApi* | [**get_whats_app_template**](docs/WhatsAppApi.md#get_whats_app_template) | **GET** /v1/whatsapp/templates/{templateName} | Get template
@@ -564,6 +566,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateTrackingTag201Response](docs/CreateTrackingTag201Response.md)
  - [Zernio::CreateTrackingTagRequest](docs/CreateTrackingTagRequest.md)
  - [Zernio::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
+ - [Zernio::CreateWhatsAppDataset200Response](docs/CreateWhatsAppDataset200Response.md)
+ - [Zernio::CreateWhatsAppDatasetRequest](docs/CreateWhatsAppDatasetRequest.md)
  - [Zernio::CreateWhatsAppFlow200Response](docs/CreateWhatsAppFlow200Response.md)
  - [Zernio::CreateWhatsAppFlow200ResponseFlow](docs/CreateWhatsAppFlow200ResponseFlow.md)
  - [Zernio::CreateWhatsAppFlowRequest](docs/CreateWhatsAppFlowRequest.md)
@@ -810,6 +814,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWebhookSettings200Response](docs/GetWebhookSettings200Response.md)
  - [Zernio::GetWhatsAppBusinessProfile200Response](docs/GetWhatsAppBusinessProfile200Response.md)
  - [Zernio::GetWhatsAppBusinessProfile200ResponseBusinessProfile](docs/GetWhatsAppBusinessProfile200ResponseBusinessProfile.md)
+ - [Zernio::GetWhatsAppDataset200Response](docs/GetWhatsAppDataset200Response.md)
  - [Zernio::GetWhatsAppDisplayName200Response](docs/GetWhatsAppDisplayName200Response.md)
  - [Zernio::GetWhatsAppDisplayName200ResponseDisplayName](docs/GetWhatsAppDisplayName200ResponseDisplayName.md)
  - [Zernio::GetWhatsAppFlow200Response](docs/GetWhatsAppFlow200Response.md)
@@ -1008,7 +1013,6 @@ Class | Method | HTTP request | Description
  - [Zernio::ProfileGetResponse](docs/ProfileGetResponse.md)
  - [Zernio::ProfileUpdateResponse](docs/ProfileUpdateResponse.md)
  - [Zernio::ProfilesListResponse](docs/ProfilesListResponse.md)
- - [Zernio::PublishWhatsAppFlowRequest](docs/PublishWhatsAppFlowRequest.md)
  - [Zernio::PurchaseWhatsAppPhoneNumber200Response](docs/PurchaseWhatsAppPhoneNumber200Response.md)
  - [Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf.md)
  - [Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf1](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf1.md)

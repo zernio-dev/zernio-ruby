@@ -1,4 +1,4 @@
-# Zernio::PublishWhatsAppFlowRequest
+# Zernio::CreateWhatsAppDatasetRequest
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::PublishWhatsAppFlowRequest.new(
+instance = Zernio::CreateWhatsAppDatasetRequest.new(
   account_id: null
 )
 ```

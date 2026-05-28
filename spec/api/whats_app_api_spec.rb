@@ -60,6 +60,18 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for create_whats_app_dataset
+  # Provision CTWA conversions dataset
+  # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as &#x60;metadata.metaCapiDatasetId&#x60;.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with &#x60;created: false&#x60;.  Requires the connected WhatsApp account&#39;s token to carry the &#x60;whatsapp_business_manage_events&#x60; permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
+  # @param create_whats_app_dataset_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateWhatsAppDataset200Response]
+  describe 'create_whats_app_dataset test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_whats_app_group_chat
   # Create group
   # Create a new WhatsApp group chat. Returns the group ID and optionally an invite link.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
@@ -130,6 +142,18 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppBusinessProfile200Response]
   describe 'get_whats_app_business_profile test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_whats_app_dataset
+  # Get CTWA conversions dataset
+  # Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored &#x60;metadata.metaCapiDatasetId&#x60; — never hits Meta, never creates a dataset. Use this to detect whether &#x60;POST /v1/whatsapp/conversions&#x60; is configured for an account. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppDataset200Response]
+  describe 'get_whats_app_dataset test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -160,21 +160,21 @@ module Zernio
     # Deprecate flow
     # Deprecate a PUBLISHED flow. This is irreversible. Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
     # @param flow_id [String] Flow ID
-    # @param publish_whats_app_flow_request [PublishWhatsAppFlowRequest] 
+    # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateYoutubeDefaultPlaylist200Response]
-    def deprecate_whats_app_flow(flow_id, publish_whats_app_flow_request, opts = {})
-      data, _status_code, _headers = deprecate_whats_app_flow_with_http_info(flow_id, publish_whats_app_flow_request, opts)
+    def deprecate_whats_app_flow(flow_id, create_whats_app_dataset_request, opts = {})
+      data, _status_code, _headers = deprecate_whats_app_flow_with_http_info(flow_id, create_whats_app_dataset_request, opts)
       data
     end
 
     # Deprecate flow
     # Deprecate a PUBLISHED flow. This is irreversible. Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
     # @param flow_id [String] Flow ID
-    # @param publish_whats_app_flow_request [PublishWhatsAppFlowRequest] 
+    # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
-    def deprecate_whats_app_flow_with_http_info(flow_id, publish_whats_app_flow_request, opts = {})
+    def deprecate_whats_app_flow_with_http_info(flow_id, create_whats_app_dataset_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppFlowsApi.deprecate_whats_app_flow ...'
       end
@@ -182,9 +182,9 @@ module Zernio
       if @api_client.config.client_side_validation && flow_id.nil?
         fail ArgumentError, "Missing the required parameter 'flow_id' when calling WhatsAppFlowsApi.deprecate_whats_app_flow"
       end
-      # verify the required parameter 'publish_whats_app_flow_request' is set
-      if @api_client.config.client_side_validation && publish_whats_app_flow_request.nil?
-        fail ArgumentError, "Missing the required parameter 'publish_whats_app_flow_request' when calling WhatsAppFlowsApi.deprecate_whats_app_flow"
+      # verify the required parameter 'create_whats_app_dataset_request' is set
+      if @api_client.config.client_side_validation && create_whats_app_dataset_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_whats_app_dataset_request' when calling WhatsAppFlowsApi.deprecate_whats_app_flow"
       end
       # resource path
       local_var_path = '/v1/whatsapp/flows/{flowId}/deprecate'.sub('{' + 'flowId' + '}', CGI.escape(flow_id.to_s))
@@ -206,7 +206,7 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(publish_whats_app_flow_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_whats_app_dataset_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
@@ -658,21 +658,21 @@ module Zernio
     # Publish flow
     # Publish a DRAFT flow. This is irreversible. Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via cloneFlowId). 
     # @param flow_id [String] Flow ID
-    # @param publish_whats_app_flow_request [PublishWhatsAppFlowRequest] 
+    # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateYoutubeDefaultPlaylist200Response]
-    def publish_whats_app_flow(flow_id, publish_whats_app_flow_request, opts = {})
-      data, _status_code, _headers = publish_whats_app_flow_with_http_info(flow_id, publish_whats_app_flow_request, opts)
+    def publish_whats_app_flow(flow_id, create_whats_app_dataset_request, opts = {})
+      data, _status_code, _headers = publish_whats_app_flow_with_http_info(flow_id, create_whats_app_dataset_request, opts)
       data
     end
 
     # Publish flow
     # Publish a DRAFT flow. This is irreversible. Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via cloneFlowId). 
     # @param flow_id [String] Flow ID
-    # @param publish_whats_app_flow_request [PublishWhatsAppFlowRequest] 
+    # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
-    def publish_whats_app_flow_with_http_info(flow_id, publish_whats_app_flow_request, opts = {})
+    def publish_whats_app_flow_with_http_info(flow_id, create_whats_app_dataset_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppFlowsApi.publish_whats_app_flow ...'
       end
@@ -680,9 +680,9 @@ module Zernio
       if @api_client.config.client_side_validation && flow_id.nil?
         fail ArgumentError, "Missing the required parameter 'flow_id' when calling WhatsAppFlowsApi.publish_whats_app_flow"
       end
-      # verify the required parameter 'publish_whats_app_flow_request' is set
-      if @api_client.config.client_side_validation && publish_whats_app_flow_request.nil?
-        fail ArgumentError, "Missing the required parameter 'publish_whats_app_flow_request' when calling WhatsAppFlowsApi.publish_whats_app_flow"
+      # verify the required parameter 'create_whats_app_dataset_request' is set
+      if @api_client.config.client_side_validation && create_whats_app_dataset_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_whats_app_dataset_request' when calling WhatsAppFlowsApi.publish_whats_app_flow"
       end
       # resource path
       local_var_path = '/v1/whatsapp/flows/{flowId}/publish'.sub('{' + 'flowId' + '}', CGI.escape(flow_id.to_s))
@@ -704,7 +704,7 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(publish_whats_app_flow_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_whats_app_dataset_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
