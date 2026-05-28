@@ -971,6 +971,8 @@ docs/WebhookPayloadCommentComment.md
 docs/WebhookPayloadCommentCommentAd.md
 docs/WebhookPayloadCommentCommentAuthor.md
 docs/WebhookPayloadCommentPost.md
+docs/WebhookPayloadConversationStarted.md
+docs/WebhookPayloadConversationStartedConversation.md
 docs/WebhookPayloadLead.md
 docs/WebhookPayloadLeadAccount.md
 docs/WebhookPayloadLeadLead.md
@@ -2012,6 +2014,8 @@ lib/zernio-sdk/models/webhook_payload_comment_comment.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_ad.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_author.rb
 lib/zernio-sdk/models/webhook_payload_comment_post.rb
+lib/zernio-sdk/models/webhook_payload_conversation_started.rb
+lib/zernio-sdk/models/webhook_payload_conversation_started_conversation.rb
 lib/zernio-sdk/models/webhook_payload_lead.rb
 lib/zernio-sdk/models/webhook_payload_lead_account.rb
 lib/zernio-sdk/models/webhook_payload_lead_lead.rb
@@ -3041,6 +3045,8 @@ spec/models/webhook_payload_comment_comment_author_spec.rb
 spec/models/webhook_payload_comment_comment_spec.rb
 spec/models/webhook_payload_comment_post_spec.rb
 spec/models/webhook_payload_comment_spec.rb
+spec/models/webhook_payload_conversation_started_conversation_spec.rb
+spec/models/webhook_payload_conversation_started_spec.rb
 spec/models/webhook_payload_lead_account_spec.rb
 spec/models/webhook_payload_lead_lead_spec.rb
 spec/models/webhook_payload_lead_spec.rb
