@@ -130,6 +130,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**list_form_leads**](docs/AdsApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form
 *Zernio::AdsApi* | [**list_lead_forms**](docs/AdsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List Lead Gen (Instant) forms
 *Zernio::AdsApi* | [**list_leads**](docs/AdsApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads (cross-form CRM view)
+*Zernio::AdsApi* | [**list_whats_app_conversions**](docs/AdsApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List recent WhatsApp conversion events
 *Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove campaign↔conversion associations
 *Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests (deprecated)
 *Zernio::AdsApi* | [**search_ad_targeting**](docs/AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options
@@ -353,6 +354,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**get_whats_app_group_chat**](docs/WhatsAppApi.md#get_whats_app_group_chat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info
 *Zernio::WhatsAppApi* | [**get_whats_app_template**](docs/WhatsAppApi.md#get_whats_app_template) | **GET** /v1/whatsapp/templates/{templateName} | Get template
 *Zernio::WhatsAppApi* | [**get_whats_app_templates**](docs/WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates
+*Zernio::WhatsAppApi* | [**list_whats_app_conversions**](docs/WhatsAppApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List recent WhatsApp conversion events
 *Zernio::WhatsAppApi* | [**list_whats_app_group_chats**](docs/WhatsAppApi.md#list_whats_app_group_chats) | **GET** /v1/whatsapp/wa-groups | List active groups
 *Zernio::WhatsAppApi* | [**list_whats_app_group_join_requests**](docs/WhatsAppApi.md#list_whats_app_group_join_requests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests
 *Zernio::WhatsAppApi* | [**reject_whats_app_group_join_requests**](docs/WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests
@@ -970,6 +972,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
  - [Zernio::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
+ - [Zernio::ListWhatsAppConversions200Response](docs/ListWhatsAppConversions200Response.md)
+ - [Zernio::ListWhatsAppConversions200ResponseEventsInner](docs/ListWhatsAppConversions200ResponseEventsInner.md)
  - [Zernio::ListWhatsAppFlowResponses200Response](docs/ListWhatsAppFlowResponses200Response.md)
  - [Zernio::ListWhatsAppFlowResponses200ResponseResponsesInner](docs/ListWhatsAppFlowResponses200ResponseResponsesInner.md)
  - [Zernio::ListWhatsAppFlowVersions200Response](docs/ListWhatsAppFlowVersions200Response.md)

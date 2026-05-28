@@ -209,6 +209,19 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for list_whats_app_conversions
+  # List recent WhatsApp conversion events
+  # Returns the most recent conversion events sent through &#x60;POST /v1/whatsapp/conversions&#x60; for the given WhatsApp account. Sourced from delivery logs (Axiom &#x60;late&#x60; dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \&quot;recent activity\&quot; panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: &#x60;eventName&#x60;, &#x60;conversationId&#x60;, &#x60;eventsReceived&#x60;, &#x60;eventsFailed&#x60;, &#x60;traceId&#x60;, &#x60;durationMs&#x60;, and the wall-clock &#x60;timestamp&#x60;. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Max events to return (1-200, default 50).
+  # @return [ListWhatsAppConversions200Response]
+  describe 'list_whats_app_conversions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_whats_app_group_chats
   # List active groups
   # List active WhatsApp group chats for a business phone number. These are actual WhatsApp group conversations on the platform.  Not available on [Coexistence](/platforms/whatsapp#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 

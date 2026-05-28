@@ -29,6 +29,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_form_leads**](AdsApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form |
 | [**list_lead_forms**](AdsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List Lead Gen (Instant) forms |
 | [**list_leads**](AdsApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads (cross-form CRM view) |
+| [**list_whats_app_conversions**](AdsApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List recent WhatsApp conversion events |
 | [**remove_conversion_associations**](AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove campaign↔conversion associations |
 | [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests (deprecated) |
 | [**search_ad_targeting**](AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options |
@@ -1863,6 +1864,79 @@ end
 ### Return type
 
 [**ListLeads200Response**](ListLeads200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_whats_app_conversions
+
+> <ListWhatsAppConversions200Response> list_whats_app_conversions(account_id, opts)
+
+List recent WhatsApp conversion events
+
+Returns the most recent conversion events sent through `POST /v1/whatsapp/conversions` for the given WhatsApp account. Sourced from delivery logs (Axiom `late` dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \"recent activity\" panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: `eventName`, `conversationId`, `eventsReceived`, `eventsFailed`, `traceId`, `durationMs`, and the wall-clock `timestamp`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | WhatsApp social account ID
+opts = {
+  limit: 56 # Integer | Max events to return (1-200, default 50).
+}
+
+begin
+  # List recent WhatsApp conversion events
+  result = api_instance.list_whats_app_conversions(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_whats_app_conversions: #{e}"
+end
+```
+
+#### Using the list_whats_app_conversions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWhatsAppConversions200Response>, Integer, Hash)> list_whats_app_conversions_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List recent WhatsApp conversion events
+  data, status_code, headers = api_instance.list_whats_app_conversions_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWhatsAppConversions200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_whats_app_conversions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp social account ID |  |
+| **limit** | **Integer** | Max events to return (1-200, default 50). | [optional][default to 50] |
+
+### Return type
+
+[**ListWhatsAppConversions200Response**](ListWhatsAppConversions200Response.md)
 
 ### Authorization
 
