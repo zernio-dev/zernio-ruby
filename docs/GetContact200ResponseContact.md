@@ -12,6 +12,10 @@
 | **tags** | **Array&lt;String&gt;** |  | [optional] |
 | **is_subscribed** | **Boolean** |  | [optional] |
 | **is_blocked** | **Boolean** |  | [optional] |
+| **messages_sent_count** | **Integer** | Messages sent to the contact, derived live from message history across all linked conversations. | [optional] |
+| **messages_received_count** | **Integer** | Messages received from the contact, derived live from message history across all linked conversations. | [optional] |
+| **last_message_sent_at** | **Time** | Timestamp of the most recent outgoing message, or null if none. | [optional] |
+| **last_message_received_at** | **Time** | Timestamp of the most recent incoming message, or null if none. | [optional] |
 | **custom_fields** | **Object** |  | [optional] |
 | **notes** | **String** |  | [optional] |
 | **conversation_ids** | **Array&lt;String&gt;** |  | [optional] |
@@ -32,6 +36,10 @@ instance = Zernio::GetContact200ResponseContact.new(
   tags: null,
   is_subscribed: null,
   is_blocked: null,
+  messages_sent_count: null,
+  messages_received_count: null,
+  last_message_sent_at: null,
+  last_message_received_at: null,
   custom_fields: null,
   notes: null,
   conversation_ids: null,

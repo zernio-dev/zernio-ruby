@@ -11,6 +11,7 @@
 | **display_identifier** | **String** |  | [optional] |
 | **is_subscribed** | **Boolean** |  | [optional] |
 | **conversation_id** | **String** |  | [optional] |
+| **last_active_at** | **Time** | Most recent message (either direction) in this channel&#39;s conversation, or null if none. | [optional] |
 | **created_at** | **Time** |  | [optional] |
 
 ## Example
@@ -26,6 +27,7 @@ instance = Zernio::GetContact200ResponseChannelsInner.new(
   display_identifier: null,
   is_subscribed: null,
   conversation_id: null,
+  last_active_at: null,
   created_at: null
 )
 ```

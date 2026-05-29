@@ -31,6 +31,18 @@ module Zernio
 
     attr_accessor :is_blocked
 
+    # Messages sent to the contact, derived live from message history across all linked conversations.
+    attr_accessor :messages_sent_count
+
+    # Messages received from the contact, derived live from message history across all linked conversations.
+    attr_accessor :messages_received_count
+
+    # Timestamp of the most recent outgoing message, or null if none.
+    attr_accessor :last_message_sent_at
+
+    # Timestamp of the most recent incoming message, or null if none.
+    attr_accessor :last_message_received_at
+
     attr_accessor :custom_fields
 
     attr_accessor :notes
@@ -52,6 +64,10 @@ module Zernio
         :'tags' => :'tags',
         :'is_subscribed' => :'isSubscribed',
         :'is_blocked' => :'isBlocked',
+        :'messages_sent_count' => :'messagesSentCount',
+        :'messages_received_count' => :'messagesReceivedCount',
+        :'last_message_sent_at' => :'lastMessageSentAt',
+        :'last_message_received_at' => :'lastMessageReceivedAt',
         :'custom_fields' => :'customFields',
         :'notes' => :'notes',
         :'conversation_ids' => :'conversationIds',
@@ -81,6 +97,10 @@ module Zernio
         :'tags' => :'Array<String>',
         :'is_subscribed' => :'Boolean',
         :'is_blocked' => :'Boolean',
+        :'messages_sent_count' => :'Integer',
+        :'messages_received_count' => :'Integer',
+        :'last_message_sent_at' => :'Time',
+        :'last_message_received_at' => :'Time',
         :'custom_fields' => :'Object',
         :'notes' => :'String',
         :'conversation_ids' => :'Array<String>',
@@ -145,6 +165,22 @@ module Zernio
         self.is_blocked = attributes[:'is_blocked']
       end
 
+      if attributes.key?(:'messages_sent_count')
+        self.messages_sent_count = attributes[:'messages_sent_count']
+      end
+
+      if attributes.key?(:'messages_received_count')
+        self.messages_received_count = attributes[:'messages_received_count']
+      end
+
+      if attributes.key?(:'last_message_sent_at')
+        self.last_message_sent_at = attributes[:'last_message_sent_at']
+      end
+
+      if attributes.key?(:'last_message_received_at')
+        self.last_message_received_at = attributes[:'last_message_received_at']
+      end
+
       if attributes.key?(:'custom_fields')
         self.custom_fields = attributes[:'custom_fields']
       end
@@ -196,6 +232,10 @@ module Zernio
           tags == o.tags &&
           is_subscribed == o.is_subscribed &&
           is_blocked == o.is_blocked &&
+          messages_sent_count == o.messages_sent_count &&
+          messages_received_count == o.messages_received_count &&
+          last_message_sent_at == o.last_message_sent_at &&
+          last_message_received_at == o.last_message_received_at &&
           custom_fields == o.custom_fields &&
           notes == o.notes &&
           conversation_ids == o.conversation_ids &&
@@ -212,7 +252,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, email, company, avatar_url, tags, is_subscribed, is_blocked, custom_fields, notes, conversation_ids, created_at, updated_at].hash
+      [id, name, email, company, avatar_url, tags, is_subscribed, is_blocked, messages_sent_count, messages_received_count, last_message_sent_at, last_message_received_at, custom_fields, notes, conversation_ids, created_at, updated_at].hash
     end
 
     # Builds the object from hash

@@ -29,6 +29,9 @@ module Zernio
 
     attr_accessor :conversation_id
 
+    # Most recent message (either direction) in this channel's conversation, or null if none.
+    attr_accessor :last_active_at
+
     attr_accessor :created_at
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -41,6 +44,7 @@ module Zernio
         :'display_identifier' => :'displayIdentifier',
         :'is_subscribed' => :'isSubscribed',
         :'conversation_id' => :'conversationId',
+        :'last_active_at' => :'lastActiveAt',
         :'created_at' => :'createdAt'
       }
     end
@@ -65,6 +69,7 @@ module Zernio
         :'display_identifier' => :'String',
         :'is_subscribed' => :'Boolean',
         :'conversation_id' => :'String',
+        :'last_active_at' => :'Time',
         :'created_at' => :'Time'
       }
     end
@@ -119,6 +124,10 @@ module Zernio
         self.conversation_id = attributes[:'conversation_id']
       end
 
+      if attributes.key?(:'last_active_at')
+        self.last_active_at = attributes[:'last_active_at']
+      end
+
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
       end
@@ -151,6 +160,7 @@ module Zernio
           display_identifier == o.display_identifier &&
           is_subscribed == o.is_subscribed &&
           conversation_id == o.conversation_id &&
+          last_active_at == o.last_active_at &&
           created_at == o.created_at
     end
 
@@ -163,7 +173,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, platform, platform_identifier, display_identifier, is_subscribed, conversation_id, created_at].hash
+      [id, account_id, platform, platform_identifier, display_identifier, is_subscribed, conversation_id, last_active_at, created_at].hash
     end
 
     # Builds the object from hash
