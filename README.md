@@ -392,6 +392,9 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_numbers**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers
 *Zernio::WhatsAppPhoneNumbersApi* | [**purchase_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number
 *Zernio::WhatsAppPhoneNumbersApi* | [**release_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number
+*Zernio::WhatsAppSandboxApi* | [**create_whats_app_sandbox_session**](docs/WhatsAppSandboxApi.md#create_whats_app_sandbox_session) | **POST** /v1/whatsapp/sandbox/sessions | Start a sandbox activation for a phone
+*Zernio::WhatsAppSandboxApi* | [**delete_whats_app_sandbox_session**](docs/WhatsAppSandboxApi.md#delete_whats_app_sandbox_session) | **DELETE** /v1/whatsapp/sandbox/sessions/{sessionId} | Revoke a sandbox session
+*Zernio::WhatsAppSandboxApi* | [**list_whats_app_sandbox_sessions**](docs/WhatsAppSandboxApi.md#list_whats_app_sandbox_sessions) | **GET** /v1/whatsapp/sandbox/sessions | List your sandbox sessions
 *Zernio::WhatsAppTemplatesApi* | [**get_whats_app_library_template**](docs/WhatsAppTemplatesApi.md#get_whats_app_library_template) | **GET** /v1/whatsapp/template-library | Look up a library template
 
 
@@ -589,6 +592,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateWhatsAppGroupChat201ResponseGroup](docs/CreateWhatsAppGroupChat201ResponseGroup.md)
  - [Zernio::CreateWhatsAppGroupChatRequest](docs/CreateWhatsAppGroupChatRequest.md)
  - [Zernio::CreateWhatsAppGroupInviteLink200Response](docs/CreateWhatsAppGroupInviteLink200Response.md)
+ - [Zernio::CreateWhatsAppSandboxSession200Response](docs/CreateWhatsAppSandboxSession200Response.md)
+ - [Zernio::CreateWhatsAppSandboxSessionRequest](docs/CreateWhatsAppSandboxSessionRequest.md)
  - [Zernio::CreateWhatsAppTemplate200Response](docs/CreateWhatsAppTemplate200Response.md)
  - [Zernio::CreateWhatsAppTemplate200ResponseTemplate](docs/CreateWhatsAppTemplate200ResponseTemplate.md)
  - [Zernio::CreateWhatsAppTemplateRequest](docs/CreateWhatsAppTemplateRequest.md)
@@ -606,6 +611,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
  - [Zernio::DeleteQueueSlot200Response](docs/DeleteQueueSlot200Response.md)
+ - [Zernio::DeleteWhatsAppSandboxSession200Response](docs/DeleteWhatsAppSandboxSession200Response.md)
  - [Zernio::DiscordPlatformData](docs/DiscordPlatformData.md)
  - [Zernio::DiscordPlatformDataEmbedsInner](docs/DiscordPlatformDataEmbedsInner.md)
  - [Zernio::DiscordPlatformDataEmbedsInnerAuthor](docs/DiscordPlatformDataEmbedsInnerAuthor.md)
@@ -860,6 +866,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber](docs/GetWhatsAppPhoneNumber200ResponsePhoneNumber.md)
  - [Zernio::GetWhatsAppPhoneNumbers200Response](docs/GetWhatsAppPhoneNumbers200Response.md)
  - [Zernio::GetWhatsAppPhoneNumbers200ResponseNumbersInner](docs/GetWhatsAppPhoneNumbers200ResponseNumbersInner.md)
+ - [Zernio::GetWhatsAppPhoneNumbers200ResponseSandbox](docs/GetWhatsAppPhoneNumbers200ResponseSandbox.md)
+ - [Zernio::GetWhatsAppPhoneNumbers200ResponseSandboxTemplate](docs/GetWhatsAppPhoneNumbers200ResponseSandboxTemplate.md)
  - [Zernio::GetWhatsAppTemplate200Response](docs/GetWhatsAppTemplate200Response.md)
  - [Zernio::GetWhatsAppTemplate200ResponseTemplate](docs/GetWhatsAppTemplate200ResponseTemplate.md)
  - [Zernio::GetWhatsAppTemplates200Response](docs/GetWhatsAppTemplates200Response.md)
@@ -1014,6 +1022,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner](docs/ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.md)
  - [Zernio::ListWhatsAppPhoneNumbers200Response](docs/ListWhatsAppPhoneNumbers200Response.md)
  - [Zernio::ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner](docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md)
+ - [Zernio::ListWhatsAppSandboxSessions200Response](docs/ListWhatsAppSandboxSessions200Response.md)
  - [Zernio::MarkConversationRead200Response](docs/MarkConversationRead200Response.md)
  - [Zernio::MediaItem](docs/MediaItem.md)
  - [Zernio::MediaUploadResponse](docs/MediaUploadResponse.md)
@@ -1393,6 +1402,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WhatsAppFooterComponent](docs/WhatsAppFooterComponent.md)
  - [Zernio::WhatsAppHeaderComponent](docs/WhatsAppHeaderComponent.md)
  - [Zernio::WhatsAppHeaderComponentExample](docs/WhatsAppHeaderComponentExample.md)
+ - [Zernio::WhatsAppSandboxSession](docs/WhatsAppSandboxSession.md)
  - [Zernio::WhatsAppTemplateButton](docs/WhatsAppTemplateButton.md)
  - [Zernio::WhatsAppTemplateComponent](docs/WhatsAppTemplateComponent.md)
  - [Zernio::XApiOperation](docs/XApiOperation.md)

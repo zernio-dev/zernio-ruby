@@ -14,16 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetWhatsAppPhoneNumbers200Response < ApiModelBase
-    attr_accessor :numbers
-
-    attr_accessor :sandbox
+  class CreateWhatsAppSandboxSessionRequest < ApiModelBase
+    # Recipient phone in international format. Digits, spaces, dashes and a leading `+` are all accepted; the server normalizes to E.164 digits-only.
+    attr_accessor :phone
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'numbers' => :'numbers',
-        :'sandbox' => :'sandbox'
+        :'phone' => :'phone'
       }
     end
 
@@ -40,8 +38,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'numbers' => :'Array<GetWhatsAppPhoneNumbers200ResponseNumbersInner>',
-        :'sandbox' => :'GetWhatsAppPhoneNumbers200ResponseSandbox'
+        :'phone' => :'String'
       }
     end
 
@@ -55,26 +52,22 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetWhatsAppPhoneNumbers200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateWhatsAppSandboxSessionRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetWhatsAppPhoneNumbers200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateWhatsAppSandboxSessionRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'numbers')
-        if (value = attributes[:'numbers']).is_a?(Array)
-          self.numbers = value
-        end
-      end
-
-      if attributes.key?(:'sandbox')
-        self.sandbox = attributes[:'sandbox']
+      if attributes.key?(:'phone')
+        self.phone = attributes[:'phone']
+      else
+        self.phone = nil
       end
     end
 
@@ -83,6 +76,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @phone.nil?
+        invalid_properties.push('invalid value for "phone", phone cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -90,7 +87,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @phone.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] phone Value to be assigned
+    def phone=(phone)
+      if phone.nil?
+        fail ArgumentError, 'phone cannot be nil'
+      end
+
+      @phone = phone
     end
 
     # Checks equality by comparing each attribute.
@@ -98,8 +106,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          numbers == o.numbers &&
-          sandbox == o.sandbox
+          phone == o.phone
     end
 
     # @see the `==` method
@@ -111,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [numbers, sandbox].hash
+      [phone].hash
     end
 
     # Builds the object from hash

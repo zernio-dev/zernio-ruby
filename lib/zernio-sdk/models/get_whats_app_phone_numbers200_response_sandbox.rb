@@ -14,16 +14,45 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetWhatsAppPhoneNumbers200Response < ApiModelBase
-    attr_accessor :numbers
+  # The shared WhatsApp sandbox (one Zernio-owned number, all users test against it). Present when the sandbox is configured; null otherwise. The `accountId` lets you address the sandbox in compose endpoints. `template` is the only template a sandbox send is allowed to use. 
+  class GetWhatsAppPhoneNumbers200ResponseSandbox < ApiModelBase
+    attr_accessor :phone_number
 
-    attr_accessor :sandbox
+    attr_accessor :account_id
+
+    attr_accessor :template
+
+    attr_accessor :is_sandbox
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'numbers' => :'numbers',
-        :'sandbox' => :'sandbox'
+        :'phone_number' => :'phoneNumber',
+        :'account_id' => :'accountId',
+        :'template' => :'template',
+        :'is_sandbox' => :'isSandbox'
       }
     end
 
@@ -40,8 +69,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'numbers' => :'Array<GetWhatsAppPhoneNumbers200ResponseNumbersInner>',
-        :'sandbox' => :'GetWhatsAppPhoneNumbers200ResponseSandbox'
+        :'phone_number' => :'String',
+        :'account_id' => :'String',
+        :'template' => :'GetWhatsAppPhoneNumbers200ResponseSandboxTemplate',
+        :'is_sandbox' => :'Boolean'
       }
     end
 
@@ -55,26 +86,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetWhatsAppPhoneNumbers200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetWhatsAppPhoneNumbers200ResponseSandbox` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetWhatsAppPhoneNumbers200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetWhatsAppPhoneNumbers200ResponseSandbox`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'numbers')
-        if (value = attributes[:'numbers']).is_a?(Array)
-          self.numbers = value
-        end
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
       end
 
-      if attributes.key?(:'sandbox')
-        self.sandbox = attributes[:'sandbox']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
+
+      if attributes.key?(:'template')
+        self.template = attributes[:'template']
+      end
+
+      if attributes.key?(:'is_sandbox')
+        self.is_sandbox = attributes[:'is_sandbox']
       end
     end
 
@@ -90,7 +127,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      is_sandbox_validator = EnumAttributeValidator.new('Boolean', ["true"])
+      return false unless is_sandbox_validator.valid?(@is_sandbox)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] is_sandbox Object to be assigned
+    def is_sandbox=(is_sandbox)
+      validator = EnumAttributeValidator.new('Boolean', ["true"])
+      unless validator.valid?(is_sandbox)
+        fail ArgumentError, "invalid value for \"is_sandbox\", must be one of #{validator.allowable_values}."
+      end
+      @is_sandbox = is_sandbox
     end
 
     # Checks equality by comparing each attribute.
@@ -98,8 +147,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          numbers == o.numbers &&
-          sandbox == o.sandbox
+          phone_number == o.phone_number &&
+          account_id == o.account_id &&
+          template == o.template &&
+          is_sandbox == o.is_sandbox
     end
 
     # @see the `==` method
@@ -111,7 +162,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [numbers, sandbox].hash
+      [phone_number, account_id, template, is_sandbox].hash
     end
 
     # Builds the object from hash
