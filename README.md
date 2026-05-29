@@ -396,6 +396,15 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppSandboxApi* | [**delete_whats_app_sandbox_session**](docs/WhatsAppSandboxApi.md#delete_whats_app_sandbox_session) | **DELETE** /v1/whatsapp/sandbox/sessions/{sessionId} | Revoke a sandbox session
 *Zernio::WhatsAppSandboxApi* | [**list_whats_app_sandbox_sessions**](docs/WhatsAppSandboxApi.md#list_whats_app_sandbox_sessions) | **GET** /v1/whatsapp/sandbox/sessions | List your sandbox sessions
 *Zernio::WhatsAppTemplatesApi* | [**get_whats_app_library_template**](docs/WhatsAppTemplatesApi.md#get_whats_app_library_template) | **GET** /v1/whatsapp/template-library | Look up a library template
+*Zernio::WorkflowsApi* | [**activate_workflow**](docs/WorkflowsApi.md#activate_workflow) | **POST** /v1/workflows/{workflowId}/activate | Activate workflow
+*Zernio::WorkflowsApi* | [**create_workflow**](docs/WorkflowsApi.md#create_workflow) | **POST** /v1/workflows | Create workflow
+*Zernio::WorkflowsApi* | [**delete_workflow**](docs/WorkflowsApi.md#delete_workflow) | **DELETE** /v1/workflows/{workflowId} | Delete workflow
+*Zernio::WorkflowsApi* | [**get_workflow**](docs/WorkflowsApi.md#get_workflow) | **GET** /v1/workflows/{workflowId} | Get workflow with graph
+*Zernio::WorkflowsApi* | [**list_workflow_executions**](docs/WorkflowsApi.md#list_workflow_executions) | **GET** /v1/workflows/{workflowId}/executions | List workflow runs
+*Zernio::WorkflowsApi* | [**list_workflows**](docs/WorkflowsApi.md#list_workflows) | **GET** /v1/workflows | List workflows
+*Zernio::WorkflowsApi* | [**pause_workflow**](docs/WorkflowsApi.md#pause_workflow) | **POST** /v1/workflows/{workflowId}/pause | Pause workflow
+*Zernio::WorkflowsApi* | [**trigger_workflow**](docs/WorkflowsApi.md#trigger_workflow) | **POST** /v1/workflows/{workflowId}/executions | Manually start a workflow run
+*Zernio::WorkflowsApi* | [**update_workflow**](docs/WorkflowsApi.md#update_workflow) | **PATCH** /v1/workflows/{workflowId} | Update workflow
 
 
 ## Documentation for Models
@@ -405,6 +414,8 @@ Class | Method | HTTP request | Description
  - [Zernio::AccountWithFollowerStatsAllOfAccountStats](docs/AccountWithFollowerStatsAllOfAccountStats.md)
  - [Zernio::AccountsListResponse](docs/AccountsListResponse.md)
  - [Zernio::ActivateSequence200Response](docs/ActivateSequence200Response.md)
+ - [Zernio::ActivateWorkflow200Response](docs/ActivateWorkflow200Response.md)
+ - [Zernio::ActivateWorkflow200ResponseWorkflow](docs/ActivateWorkflow200ResponseWorkflow.md)
  - [Zernio::Ad](docs/Ad.md)
  - [Zernio::AdBudget](docs/AdBudget.md)
  - [Zernio::AdCampaign](docs/AdCampaign.md)
@@ -599,6 +610,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateWhatsAppTemplateRequest](docs/CreateWhatsAppTemplateRequest.md)
  - [Zernio::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner](docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner.md)
  - [Zernio::CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl](docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.md)
+ - [Zernio::CreateWorkflow200Response](docs/CreateWorkflow200Response.md)
+ - [Zernio::CreateWorkflow200ResponseWorkflow](docs/CreateWorkflow200ResponseWorkflow.md)
+ - [Zernio::CreateWorkflowRequest](docs/CreateWorkflowRequest.md)
  - [Zernio::CtwaMultiResponse](docs/CtwaMultiResponse.md)
  - [Zernio::CtwaSingleResponse](docs/CtwaSingleResponse.md)
  - [Zernio::DeleteAccountGroup200Response](docs/DeleteAccountGroup200Response.md)
@@ -872,6 +886,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppTemplate200ResponseTemplate](docs/GetWhatsAppTemplate200ResponseTemplate.md)
  - [Zernio::GetWhatsAppTemplates200Response](docs/GetWhatsAppTemplates200Response.md)
  - [Zernio::GetWhatsAppTemplates200ResponseTemplatesInner](docs/GetWhatsAppTemplates200ResponseTemplatesInner.md)
+ - [Zernio::GetWorkflow200Response](docs/GetWorkflow200Response.md)
+ - [Zernio::GetWorkflow200ResponseWorkflow](docs/GetWorkflow200ResponseWorkflow.md)
  - [Zernio::GetYouTubeDailyViews400Response](docs/GetYouTubeDailyViews400Response.md)
  - [Zernio::GetYouTubeDailyViews403Response](docs/GetYouTubeDailyViews403Response.md)
  - [Zernio::GetYouTubeDailyViews500Response](docs/GetYouTubeDailyViews500Response.md)
@@ -1023,6 +1039,11 @@ Class | Method | HTTP request | Description
  - [Zernio::ListWhatsAppPhoneNumbers200Response](docs/ListWhatsAppPhoneNumbers200Response.md)
  - [Zernio::ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner](docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md)
  - [Zernio::ListWhatsAppSandboxSessions200Response](docs/ListWhatsAppSandboxSessions200Response.md)
+ - [Zernio::ListWorkflowExecutions200Response](docs/ListWorkflowExecutions200Response.md)
+ - [Zernio::ListWorkflowExecutions200ResponseExecutionsInner](docs/ListWorkflowExecutions200ResponseExecutionsInner.md)
+ - [Zernio::ListWorkflowExecutions200ResponseExecutionsInnerWaitingFor](docs/ListWorkflowExecutions200ResponseExecutionsInnerWaitingFor.md)
+ - [Zernio::ListWorkflows200Response](docs/ListWorkflows200Response.md)
+ - [Zernio::ListWorkflows200ResponseWorkflowsInner](docs/ListWorkflows200ResponseWorkflowsInner.md)
  - [Zernio::MarkConversationRead200Response](docs/MarkConversationRead200Response.md)
  - [Zernio::MediaItem](docs/MediaItem.md)
  - [Zernio::MediaUploadResponse](docs/MediaUploadResponse.md)
@@ -1030,6 +1051,7 @@ Class | Method | HTTP request | Description
  - [Zernio::MoveAccountToProfile200Response](docs/MoveAccountToProfile200Response.md)
  - [Zernio::MoveAccountToProfileRequest](docs/MoveAccountToProfileRequest.md)
  - [Zernio::Pagination](docs/Pagination.md)
+ - [Zernio::PauseWorkflow200Response](docs/PauseWorkflow200Response.md)
  - [Zernio::Pending](docs/Pending.md)
  - [Zernio::PinterestPlatformData](docs/PinterestPlatformData.md)
  - [Zernio::PlatformAnalytics](docs/PlatformAnalytics.md)
@@ -1186,6 +1208,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ThreadsPlatformData](docs/ThreadsPlatformData.md)
  - [Zernio::TikTokPlatformData](docs/TikTokPlatformData.md)
  - [Zernio::TrackingTag](docs/TrackingTag.md)
+ - [Zernio::TriggerWorkflow200Response](docs/TriggerWorkflow200Response.md)
+ - [Zernio::TriggerWorkflow200ResponseExecution](docs/TriggerWorkflow200ResponseExecution.md)
+ - [Zernio::TriggerWorkflowRequest](docs/TriggerWorkflowRequest.md)
  - [Zernio::TwitterPlatformData](docs/TwitterPlatformData.md)
  - [Zernio::TwitterPlatformDataPoll](docs/TwitterPlatformDataPoll.md)
  - [Zernio::TwitterPlatformDataThreadItemsInner](docs/TwitterPlatformDataThreadItemsInner.md)
@@ -1293,6 +1318,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateWhatsAppTemplate200Response](docs/UpdateWhatsAppTemplate200Response.md)
  - [Zernio::UpdateWhatsAppTemplate200ResponseTemplate](docs/UpdateWhatsAppTemplate200ResponseTemplate.md)
  - [Zernio::UpdateWhatsAppTemplateRequest](docs/UpdateWhatsAppTemplateRequest.md)
+ - [Zernio::UpdateWorkflow200Response](docs/UpdateWorkflow200Response.md)
+ - [Zernio::UpdateWorkflow200ResponseWorkflow](docs/UpdateWorkflow200ResponseWorkflow.md)
+ - [Zernio::UpdateWorkflowRequest](docs/UpdateWorkflowRequest.md)
  - [Zernio::UpdateYoutubeDefaultPlaylist200Response](docs/UpdateYoutubeDefaultPlaylist200Response.md)
  - [Zernio::UpdateYoutubeDefaultPlaylistRequest](docs/UpdateYoutubeDefaultPlaylistRequest.md)
  - [Zernio::UploadMediaDirect200Response](docs/UploadMediaDirect200Response.md)
@@ -1405,6 +1433,9 @@ Class | Method | HTTP request | Description
  - [Zernio::WhatsAppSandboxSession](docs/WhatsAppSandboxSession.md)
  - [Zernio::WhatsAppTemplateButton](docs/WhatsAppTemplateButton.md)
  - [Zernio::WhatsAppTemplateComponent](docs/WhatsAppTemplateComponent.md)
+ - [Zernio::WorkflowEdge](docs/WorkflowEdge.md)
+ - [Zernio::WorkflowNode](docs/WorkflowNode.md)
+ - [Zernio::WorkflowNodePosition](docs/WorkflowNodePosition.md)
  - [Zernio::XApiOperation](docs/XApiOperation.md)
  - [Zernio::XApiOperationTriggeredByInner](docs/XApiOperationTriggeredByInner.md)
  - [Zernio::XApiPricing](docs/XApiPricing.md)

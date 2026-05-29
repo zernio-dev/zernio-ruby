@@ -15,6 +15,8 @@ docs/AccountWithFollowerStatsAllOfAccountStats.md
 docs/AccountsApi.md
 docs/AccountsListResponse.md
 docs/ActivateSequence200Response.md
+docs/ActivateWorkflow200Response.md
+docs/ActivateWorkflow200ResponseWorkflow.md
 docs/Ad.md
 docs/AdAudiencesApi.md
 docs/AdBudget.md
@@ -218,6 +220,9 @@ docs/CreateWhatsAppTemplate200ResponseTemplate.md
 docs/CreateWhatsAppTemplateRequest.md
 docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInner.md
 docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.md
+docs/CreateWorkflow200Response.md
+docs/CreateWorkflow200ResponseWorkflow.md
+docs/CreateWorkflowRequest.md
 docs/CtwaMultiResponse.md
 docs/CtwaSingleResponse.md
 docs/CustomFieldsApi.md
@@ -501,6 +506,8 @@ docs/GetWhatsAppTemplate200Response.md
 docs/GetWhatsAppTemplate200ResponseTemplate.md
 docs/GetWhatsAppTemplates200Response.md
 docs/GetWhatsAppTemplates200ResponseTemplatesInner.md
+docs/GetWorkflow200Response.md
+docs/GetWorkflow200ResponseWorkflow.md
 docs/GetYouTubeDailyViews400Response.md
 docs/GetYouTubeDailyViews403Response.md
 docs/GetYouTubeDailyViews500Response.md
@@ -655,6 +662,11 @@ docs/ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.md
 docs/ListWhatsAppPhoneNumbers200Response.md
 docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md
 docs/ListWhatsAppSandboxSessions200Response.md
+docs/ListWorkflowExecutions200Response.md
+docs/ListWorkflowExecutions200ResponseExecutionsInner.md
+docs/ListWorkflowExecutions200ResponseExecutionsInnerWaitingFor.md
+docs/ListWorkflows200Response.md
+docs/ListWorkflows200ResponseWorkflowsInner.md
 docs/LogsApi.md
 docs/MarkConversationRead200Response.md
 docs/MediaApi.md
@@ -665,6 +677,7 @@ docs/Money.md
 docs/MoveAccountToProfile200Response.md
 docs/MoveAccountToProfileRequest.md
 docs/Pagination.md
+docs/PauseWorkflow200Response.md
 docs/Pending.md
 docs/PinterestPlatformData.md
 docs/PlatformAnalytics.md
@@ -828,6 +841,9 @@ docs/ThreadsPlatformData.md
 docs/TikTokPlatformData.md
 docs/TrackingTag.md
 docs/TrackingTagsApi.md
+docs/TriggerWorkflow200Response.md
+docs/TriggerWorkflow200ResponseExecution.md
+docs/TriggerWorkflowRequest.md
 docs/TwitterEngagementApi.md
 docs/TwitterPlatformData.md
 docs/TwitterPlatformDataPoll.md
@@ -936,6 +952,9 @@ docs/UpdateWhatsAppGroupChatRequest.md
 docs/UpdateWhatsAppTemplate200Response.md
 docs/UpdateWhatsAppTemplate200ResponseTemplate.md
 docs/UpdateWhatsAppTemplateRequest.md
+docs/UpdateWorkflow200Response.md
+docs/UpdateWorkflow200ResponseWorkflow.md
+docs/UpdateWorkflowRequest.md
 docs/UpdateYoutubeDefaultPlaylist200Response.md
 docs/UpdateYoutubeDefaultPlaylistRequest.md
 docs/UploadMediaDirect200Response.md
@@ -1059,6 +1078,10 @@ docs/WhatsAppSandboxSession.md
 docs/WhatsAppTemplateButton.md
 docs/WhatsAppTemplateComponent.md
 docs/WhatsAppTemplatesApi.md
+docs/WorkflowEdge.md
+docs/WorkflowNode.md
+docs/WorkflowNodePosition.md
+docs/WorkflowsApi.md
 docs/XApiOperation.md
 docs/XApiOperationTriggeredByInner.md
 docs/XApiPricing.md
@@ -1123,6 +1146,7 @@ lib/zernio-sdk/api/whats_app_flows_api.rb
 lib/zernio-sdk/api/whats_app_phone_numbers_api.rb
 lib/zernio-sdk/api/whats_app_sandbox_api.rb
 lib/zernio-sdk/api/whats_app_templates_api.rb
+lib/zernio-sdk/api/workflows_api.rb
 lib/zernio-sdk/api_client.rb
 lib/zernio-sdk/api_error.rb
 lib/zernio-sdk/api_model_base.rb
@@ -1132,6 +1156,8 @@ lib/zernio-sdk/models/account_with_follower_stats.rb
 lib/zernio-sdk/models/account_with_follower_stats_all_of_account_stats.rb
 lib/zernio-sdk/models/accounts_list_response.rb
 lib/zernio-sdk/models/activate_sequence200_response.rb
+lib/zernio-sdk/models/activate_workflow200_response.rb
+lib/zernio-sdk/models/activate_workflow200_response_workflow.rb
 lib/zernio-sdk/models/ad.rb
 lib/zernio-sdk/models/ad_budget.rb
 lib/zernio-sdk/models/ad_campaign.rb
@@ -1326,6 +1352,9 @@ lib/zernio-sdk/models/create_whats_app_template200_response_template.rb
 lib/zernio-sdk/models/create_whats_app_template_request.rb
 lib/zernio-sdk/models/create_whats_app_template_request_library_template_button_inputs_inner.rb
 lib/zernio-sdk/models/create_whats_app_template_request_library_template_button_inputs_inner_url.rb
+lib/zernio-sdk/models/create_workflow200_response.rb
+lib/zernio-sdk/models/create_workflow200_response_workflow.rb
+lib/zernio-sdk/models/create_workflow_request.rb
 lib/zernio-sdk/models/ctwa_multi_response.rb
 lib/zernio-sdk/models/ctwa_single_response.rb
 lib/zernio-sdk/models/delete_account_group200_response.rb
@@ -1599,6 +1628,8 @@ lib/zernio-sdk/models/get_whats_app_template200_response.rb
 lib/zernio-sdk/models/get_whats_app_template200_response_template.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response_templates_inner.rb
+lib/zernio-sdk/models/get_workflow200_response.rb
+lib/zernio-sdk/models/get_workflow200_response_workflow.rb
 lib/zernio-sdk/models/get_you_tube_daily_views400_response.rb
 lib/zernio-sdk/models/get_you_tube_daily_views403_response.rb
 lib/zernio-sdk/models/get_you_tube_daily_views500_response.rb
@@ -1750,6 +1781,11 @@ lib/zernio-sdk/models/list_whats_app_group_join_requests200_response_join_reques
 lib/zernio-sdk/models/list_whats_app_phone_numbers200_response.rb
 lib/zernio-sdk/models/list_whats_app_phone_numbers200_response_phone_numbers_inner.rb
 lib/zernio-sdk/models/list_whats_app_sandbox_sessions200_response.rb
+lib/zernio-sdk/models/list_workflow_executions200_response.rb
+lib/zernio-sdk/models/list_workflow_executions200_response_executions_inner.rb
+lib/zernio-sdk/models/list_workflow_executions200_response_executions_inner_waiting_for.rb
+lib/zernio-sdk/models/list_workflows200_response.rb
+lib/zernio-sdk/models/list_workflows200_response_workflows_inner.rb
 lib/zernio-sdk/models/mark_conversation_read200_response.rb
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
@@ -1757,6 +1793,7 @@ lib/zernio-sdk/models/money.rb
 lib/zernio-sdk/models/move_account_to_profile200_response.rb
 lib/zernio-sdk/models/move_account_to_profile_request.rb
 lib/zernio-sdk/models/pagination.rb
+lib/zernio-sdk/models/pause_workflow200_response.rb
 lib/zernio-sdk/models/pending.rb
 lib/zernio-sdk/models/pinterest_platform_data.rb
 lib/zernio-sdk/models/platform_analytics.rb
@@ -1913,6 +1950,9 @@ lib/zernio-sdk/models/test_webhook_request.rb
 lib/zernio-sdk/models/threads_platform_data.rb
 lib/zernio-sdk/models/tik_tok_platform_data.rb
 lib/zernio-sdk/models/tracking_tag.rb
+lib/zernio-sdk/models/trigger_workflow200_response.rb
+lib/zernio-sdk/models/trigger_workflow200_response_execution.rb
+lib/zernio-sdk/models/trigger_workflow_request.rb
 lib/zernio-sdk/models/twitter_platform_data.rb
 lib/zernio-sdk/models/twitter_platform_data_poll.rb
 lib/zernio-sdk/models/twitter_platform_data_thread_items_inner.rb
@@ -2020,6 +2060,9 @@ lib/zernio-sdk/models/update_whats_app_group_chat_request.rb
 lib/zernio-sdk/models/update_whats_app_template200_response.rb
 lib/zernio-sdk/models/update_whats_app_template200_response_template.rb
 lib/zernio-sdk/models/update_whats_app_template_request.rb
+lib/zernio-sdk/models/update_workflow200_response.rb
+lib/zernio-sdk/models/update_workflow200_response_workflow.rb
+lib/zernio-sdk/models/update_workflow_request.rb
 lib/zernio-sdk/models/update_youtube_default_playlist200_response.rb
 lib/zernio-sdk/models/update_youtube_default_playlist_request.rb
 lib/zernio-sdk/models/upload_media_direct200_response.rb
@@ -2132,6 +2175,9 @@ lib/zernio-sdk/models/whats_app_header_component_example.rb
 lib/zernio-sdk/models/whats_app_sandbox_session.rb
 lib/zernio-sdk/models/whats_app_template_button.rb
 lib/zernio-sdk/models/whats_app_template_component.rb
+lib/zernio-sdk/models/workflow_edge.rb
+lib/zernio-sdk/models/workflow_node.rb
+lib/zernio-sdk/models/workflow_node_position.rb
 lib/zernio-sdk/models/x_api_operation.rb
 lib/zernio-sdk/models/x_api_operation_triggered_by_inner.rb
 lib/zernio-sdk/models/x_api_pricing.rb
@@ -2194,11 +2240,14 @@ spec/api/whats_app_flows_api_spec.rb
 spec/api/whats_app_phone_numbers_api_spec.rb
 spec/api/whats_app_sandbox_api_spec.rb
 spec/api/whats_app_templates_api_spec.rb
+spec/api/workflows_api_spec.rb
 spec/models/account_get_response_spec.rb
 spec/models/account_with_follower_stats_all_of_account_stats_spec.rb
 spec/models/account_with_follower_stats_spec.rb
 spec/models/accounts_list_response_spec.rb
 spec/models/activate_sequence200_response_spec.rb
+spec/models/activate_workflow200_response_spec.rb
+spec/models/activate_workflow200_response_workflow_spec.rb
 spec/models/ad_budget_spec.rb
 spec/models/ad_campaign_budget_spec.rb
 spec/models/ad_campaign_campaign_budget_spec.rb
@@ -2393,6 +2442,9 @@ spec/models/create_whats_app_template200_response_template_spec.rb
 spec/models/create_whats_app_template_request_library_template_button_inputs_inner_spec.rb
 spec/models/create_whats_app_template_request_library_template_button_inputs_inner_url_spec.rb
 spec/models/create_whats_app_template_request_spec.rb
+spec/models/create_workflow200_response_spec.rb
+spec/models/create_workflow200_response_workflow_spec.rb
+spec/models/create_workflow_request_spec.rb
 spec/models/ctwa_multi_response_spec.rb
 spec/models/ctwa_single_response_spec.rb
 spec/models/delete_account_group200_response_spec.rb
@@ -2666,6 +2718,8 @@ spec/models/get_whats_app_template200_response_spec.rb
 spec/models/get_whats_app_template200_response_template_spec.rb
 spec/models/get_whats_app_templates200_response_spec.rb
 spec/models/get_whats_app_templates200_response_templates_inner_spec.rb
+spec/models/get_workflow200_response_spec.rb
+spec/models/get_workflow200_response_workflow_spec.rb
 spec/models/get_you_tube_daily_views400_response_spec.rb
 spec/models/get_you_tube_daily_views403_response_spec.rb
 spec/models/get_you_tube_daily_views500_response_spec.rb
@@ -2817,6 +2871,11 @@ spec/models/list_whats_app_group_join_requests200_response_spec.rb
 spec/models/list_whats_app_phone_numbers200_response_phone_numbers_inner_spec.rb
 spec/models/list_whats_app_phone_numbers200_response_spec.rb
 spec/models/list_whats_app_sandbox_sessions200_response_spec.rb
+spec/models/list_workflow_executions200_response_executions_inner_spec.rb
+spec/models/list_workflow_executions200_response_executions_inner_waiting_for_spec.rb
+spec/models/list_workflow_executions200_response_spec.rb
+spec/models/list_workflows200_response_spec.rb
+spec/models/list_workflows200_response_workflows_inner_spec.rb
 spec/models/mark_conversation_read200_response_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
@@ -2824,6 +2883,7 @@ spec/models/money_spec.rb
 spec/models/move_account_to_profile200_response_spec.rb
 spec/models/move_account_to_profile_request_spec.rb
 spec/models/pagination_spec.rb
+spec/models/pause_workflow200_response_spec.rb
 spec/models/pending_spec.rb
 spec/models/pinterest_platform_data_spec.rb
 spec/models/platform_analytics_spec.rb
@@ -2980,6 +3040,9 @@ spec/models/test_webhook_request_spec.rb
 spec/models/threads_platform_data_spec.rb
 spec/models/tik_tok_platform_data_spec.rb
 spec/models/tracking_tag_spec.rb
+spec/models/trigger_workflow200_response_execution_spec.rb
+spec/models/trigger_workflow200_response_spec.rb
+spec/models/trigger_workflow_request_spec.rb
 spec/models/twitter_platform_data_poll_spec.rb
 spec/models/twitter_platform_data_spec.rb
 spec/models/twitter_platform_data_thread_items_inner_spec.rb
@@ -3087,6 +3150,9 @@ spec/models/update_whats_app_group_chat_request_spec.rb
 spec/models/update_whats_app_template200_response_spec.rb
 spec/models/update_whats_app_template200_response_template_spec.rb
 spec/models/update_whats_app_template_request_spec.rb
+spec/models/update_workflow200_response_spec.rb
+spec/models/update_workflow200_response_workflow_spec.rb
+spec/models/update_workflow_request_spec.rb
 spec/models/update_youtube_default_playlist200_response_spec.rb
 spec/models/update_youtube_default_playlist_request_spec.rb
 spec/models/upload_media_direct200_response_spec.rb
@@ -3199,6 +3265,9 @@ spec/models/whats_app_header_component_spec.rb
 spec/models/whats_app_sandbox_session_spec.rb
 spec/models/whats_app_template_button_spec.rb
 spec/models/whats_app_template_component_spec.rb
+spec/models/workflow_edge_spec.rb
+spec/models/workflow_node_position_spec.rb
+spec/models/workflow_node_spec.rb
 spec/models/x_api_operation_spec.rb
 spec/models/x_api_operation_triggered_by_inner_spec.rb
 spec/models/x_api_pricing_spec.rb
