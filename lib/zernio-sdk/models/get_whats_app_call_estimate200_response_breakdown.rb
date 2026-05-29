@@ -17,12 +17,17 @@ module Zernio
   class GetWhatsAppCallEstimate200ResponseBreakdown < ApiModelBase
     attr_accessor :meta_minutes
 
+    # Estimated Meta per-minute charge, billed by Meta directly to your WABA. Display only; not billed by Zernio.
     attr_accessor :meta_cost_usd
 
     attr_accessor :telnyx_cost_usd
 
     attr_accessor :recording_cost_usd
 
+    # Estimated amount Zernio bills you = Telnyx leg + recording (excludes Meta).
+    attr_accessor :billable_cost_usd
+
+    # Estimated full cost incl. the Meta portion you pay directly. Display only.
     attr_accessor :total_cost_usd
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -32,6 +37,7 @@ module Zernio
         :'meta_cost_usd' => :'metaCostUSD',
         :'telnyx_cost_usd' => :'telnyxCostUSD',
         :'recording_cost_usd' => :'recordingCostUSD',
+        :'billable_cost_usd' => :'billableCostUSD',
         :'total_cost_usd' => :'totalCostUSD'
       }
     end
@@ -53,6 +59,7 @@ module Zernio
         :'meta_cost_usd' => :'Float',
         :'telnyx_cost_usd' => :'Float',
         :'recording_cost_usd' => :'Float',
+        :'billable_cost_usd' => :'Float',
         :'total_cost_usd' => :'Float'
       }
     end
@@ -95,6 +102,10 @@ module Zernio
         self.recording_cost_usd = attributes[:'recording_cost_usd']
       end
 
+      if attributes.key?(:'billable_cost_usd')
+        self.billable_cost_usd = attributes[:'billable_cost_usd']
+      end
+
       if attributes.key?(:'total_cost_usd')
         self.total_cost_usd = attributes[:'total_cost_usd']
       end
@@ -124,6 +135,7 @@ module Zernio
           meta_cost_usd == o.meta_cost_usd &&
           telnyx_cost_usd == o.telnyx_cost_usd &&
           recording_cost_usd == o.recording_cost_usd &&
+          billable_cost_usd == o.billable_cost_usd &&
           total_cost_usd == o.total_cost_usd
     end
 
@@ -136,7 +148,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [meta_minutes, meta_cost_usd, telnyx_cost_usd, recording_cost_usd, total_cost_usd].hash
+      [meta_minutes, meta_cost_usd, telnyx_cost_usd, recording_cost_usd, billable_cost_usd, total_cost_usd].hash
     end
 
     # Builds the object from hash

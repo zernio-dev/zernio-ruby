@@ -45,6 +45,12 @@ describe Zernio::ListWhatsAppCalls200ResponseCallsInnerBilling do
     end
   end
 
+  describe 'test attribute "billable_cost_usd"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "total_cost_usd"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
