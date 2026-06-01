@@ -19,6 +19,9 @@ module Zernio
     # ID of an existing tweet to reply to. The published tweet will appear as a reply in that tweet's thread. For threads, only the first tweet replies to the target; subsequent tweets chain normally.
     attr_accessor :reply_to_tweet_id
 
+    # ID (or full status URL) of an existing tweet to quote-repost. The published tweet becomes a quote tweet of the target. Mutually exclusive with media and poll. X only permits quoting your own posts or posts you are mentioned in / part of the conversation thread of; quoting an arbitrary other account's post is rejected by X. Billed at the standard create rate ($0.015), unlike pasting a tweet URL into the text which is billed at the URL rate ($0.20). For threads, applies to the first tweet only.
+    attr_accessor :quote_tweet_id
+
     # Controls who can reply to the tweet. \"following\" allows only people you follow, \"mentionedUsers\" allows only mentioned users, \"subscribers\" allows only subscribers, \"verified\" allows only verified users. Omit for default (everyone can reply). For threads, applies to the first tweet only. Cannot be combined with replyToTweetId.
     attr_accessor :reply_settings
 
@@ -58,6 +61,7 @@ module Zernio
     def self.attribute_map
       {
         :'reply_to_tweet_id' => :'replyToTweetId',
+        :'quote_tweet_id' => :'quoteTweetId',
         :'reply_settings' => :'replySettings',
         :'thread_items' => :'threadItems',
         :'poll' => :'poll',
@@ -80,6 +84,7 @@ module Zernio
     def self.openapi_types
       {
         :'reply_to_tweet_id' => :'String',
+        :'quote_tweet_id' => :'String',
         :'reply_settings' => :'String',
         :'thread_items' => :'Array<TwitterPlatformDataThreadItemsInner>',
         :'poll' => :'TwitterPlatformDataPoll',
@@ -112,6 +117,10 @@ module Zernio
 
       if attributes.key?(:'reply_to_tweet_id')
         self.reply_to_tweet_id = attributes[:'reply_to_tweet_id']
+      end
+
+      if attributes.key?(:'quote_tweet_id')
+        self.quote_tweet_id = attributes[:'quote_tweet_id']
       end
 
       if attributes.key?(:'reply_settings')
@@ -172,6 +181,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           reply_to_tweet_id == o.reply_to_tweet_id &&
+          quote_tweet_id == o.quote_tweet_id &&
           reply_settings == o.reply_settings &&
           thread_items == o.thread_items &&
           poll == o.poll &&
@@ -188,7 +198,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [reply_to_tweet_id, reply_settings, thread_items, poll, long_video, geo_restriction].hash
+      [reply_to_tweet_id, quote_tweet_id, reply_settings, thread_items, poll, long_video, geo_restriction].hash
     end
 
     # Builds the object from hash
