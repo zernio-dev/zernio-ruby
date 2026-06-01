@@ -18,10 +18,14 @@ module Zernio
     # Profile to associate the number with
     attr_accessor :profile_id
 
+    # ISO 3166-1 alpha-2 country for the number (default US). International numbers require usage-based billing. Tier 3/4 countries return 202 { status: \"kyc_required\", kycUrl } — the customer must complete KYC at that URL before the number is ordered. See GET /v1/whatsapp/phone-numbers/countries. 
+    attr_accessor :country
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'profile_id' => :'profileId'
+        :'profile_id' => :'profileId',
+        :'country' => :'country'
       }
     end
 
@@ -38,7 +42,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'profile_id' => :'String'
+        :'profile_id' => :'String',
+        :'country' => :'String'
       }
     end
 
@@ -68,6 +73,12 @@ module Zernio
         self.profile_id = attributes[:'profile_id']
       else
         self.profile_id = nil
+      end
+
+      if attributes.key?(:'country')
+        self.country = attributes[:'country']
+      else
+        self.country = 'US'
       end
     end
 
@@ -106,7 +117,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          profile_id == o.profile_id
+          profile_id == o.profile_id &&
+          country == o.country
     end
 
     # @see the `==` method
@@ -118,7 +130,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id].hash
+      [profile_id, country].hash
     end
 
     # Builds the object from hash

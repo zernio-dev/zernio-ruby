@@ -23,6 +23,9 @@ module Zernio
 
     attr_accessor :status
 
+    # Per-country monthly price in cents ($2..$25).
+    attr_accessor :monthly_cents
+
     attr_accessor :profile_id
 
     attr_accessor :provisioned_at
@@ -30,6 +33,16 @@ module Zernio
     attr_accessor :meta_preverified_id
 
     attr_accessor :meta_verification_status
+
+    # For regulated (Tier 3/4) numbers with an Onfido ID-verification step — the link to forward to the end user. Set once the order is placed; null otherwise. Poll this field after submitting KYC.
+    attr_accessor :onfido_verification_url
+
+    attr_accessor :end_user_first_name
+
+    attr_accessor :end_user_last_name
+
+    # Reviewer rejection reason when status is regulatory_declined.
+    attr_accessor :regulatory_decline_reason
 
     attr_accessor :created_at
 
@@ -62,10 +75,15 @@ module Zernio
         :'phone_number' => :'phoneNumber',
         :'country' => :'country',
         :'status' => :'status',
+        :'monthly_cents' => :'monthlyCents',
         :'profile_id' => :'profileId',
         :'provisioned_at' => :'provisionedAt',
         :'meta_preverified_id' => :'metaPreverifiedId',
         :'meta_verification_status' => :'metaVerificationStatus',
+        :'onfido_verification_url' => :'onfidoVerificationUrl',
+        :'end_user_first_name' => :'endUserFirstName',
+        :'end_user_last_name' => :'endUserLastName',
+        :'regulatory_decline_reason' => :'regulatoryDeclineReason',
         :'created_at' => :'createdAt'
       }
     end
@@ -87,10 +105,15 @@ module Zernio
         :'phone_number' => :'String',
         :'country' => :'String',
         :'status' => :'String',
+        :'monthly_cents' => :'Integer',
         :'profile_id' => :'Object',
         :'provisioned_at' => :'Time',
         :'meta_preverified_id' => :'String',
         :'meta_verification_status' => :'String',
+        :'onfido_verification_url' => :'String',
+        :'end_user_first_name' => :'String',
+        :'end_user_last_name' => :'String',
+        :'regulatory_decline_reason' => :'String',
         :'created_at' => :'Time'
       }
     end
@@ -133,6 +156,10 @@ module Zernio
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'monthly_cents')
+        self.monthly_cents = attributes[:'monthly_cents']
+      end
+
       if attributes.key?(:'profile_id')
         self.profile_id = attributes[:'profile_id']
       end
@@ -147,6 +174,22 @@ module Zernio
 
       if attributes.key?(:'meta_verification_status')
         self.meta_verification_status = attributes[:'meta_verification_status']
+      end
+
+      if attributes.key?(:'onfido_verification_url')
+        self.onfido_verification_url = attributes[:'onfido_verification_url']
+      end
+
+      if attributes.key?(:'end_user_first_name')
+        self.end_user_first_name = attributes[:'end_user_first_name']
+      end
+
+      if attributes.key?(:'end_user_last_name')
+        self.end_user_last_name = attributes[:'end_user_last_name']
+      end
+
+      if attributes.key?(:'regulatory_decline_reason')
+        self.regulatory_decline_reason = attributes[:'regulatory_decline_reason']
       end
 
       if attributes.key?(:'created_at')
@@ -166,7 +209,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["pending_payment", "provisioning", "active", "suspended", "releasing", "released"])
+      status_validator = EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "active", "suspended", "releasing", "released"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -174,7 +217,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["pending_payment", "provisioning", "active", "suspended", "releasing", "released"])
+      validator = EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "active", "suspended", "releasing", "released"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
@@ -190,10 +233,15 @@ module Zernio
           phone_number == o.phone_number &&
           country == o.country &&
           status == o.status &&
+          monthly_cents == o.monthly_cents &&
           profile_id == o.profile_id &&
           provisioned_at == o.provisioned_at &&
           meta_preverified_id == o.meta_preverified_id &&
           meta_verification_status == o.meta_verification_status &&
+          onfido_verification_url == o.onfido_verification_url &&
+          end_user_first_name == o.end_user_first_name &&
+          end_user_last_name == o.end_user_last_name &&
+          regulatory_decline_reason == o.regulatory_decline_reason &&
           created_at == o.created_at
     end
 
@@ -206,7 +254,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, phone_number, country, status, profile_id, provisioned_at, meta_preverified_id, meta_verification_status, created_at].hash
+      [_id, phone_number, country, status, monthly_cents, profile_id, provisioned_at, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, created_at].hash
     end
 
     # Builds the object from hash

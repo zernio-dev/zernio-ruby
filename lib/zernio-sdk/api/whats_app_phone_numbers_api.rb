@@ -83,8 +83,79 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get regulated-number KYC form spec
+    # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
+    # @param country [String] 
+    # @param profile_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetWhatsAppNumberKycForm200Response]
+    def get_whats_app_number_kyc_form(country, profile_id, opts = {})
+      data, _status_code, _headers = get_whats_app_number_kyc_form_with_http_info(country, profile_id, opts)
+      data
+    end
+
+    # Get regulated-number KYC form spec
+    # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
+    # @param country [String] 
+    # @param profile_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsAppNumberKycForm200Response, Integer, Hash)>] GetWhatsAppNumberKycForm200Response data, response status code and response headers
+    def get_whats_app_number_kyc_form_with_http_info(country, profile_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.get_whats_app_number_kyc_form ...'
+      end
+      # verify the required parameter 'country' is set
+      if @api_client.config.client_side_validation && country.nil?
+        fail ArgumentError, "Missing the required parameter 'country' when calling WhatsAppPhoneNumbersApi.get_whats_app_number_kyc_form"
+      end
+      # verify the required parameter 'profile_id' is set
+      if @api_client.config.client_side_validation && profile_id.nil?
+        fail ArgumentError, "Missing the required parameter 'profile_id' when calling WhatsAppPhoneNumbersApi.get_whats_app_number_kyc_form"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/kyc'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'country'] = country
+      query_params[:'profileId'] = profile_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppNumberKycForm200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppPhoneNumbersApi.get_whats_app_number_kyc_form",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#get_whats_app_number_kyc_form\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get phone number
-    # Retrieve the current status of a purchased phone number. Used to poll for Meta pre-verification completion after purchase. 
+    # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, `onfidoVerificationUrl` appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
     # @param phone_number_id [String] Phone number record ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppPhoneNumber200Response]
@@ -94,7 +165,7 @@ module Zernio
     end
 
     # Get phone number
-    # Retrieve the current status of a purchased phone number. Used to poll for Meta pre-verification completion after purchase. 
+    # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, &#x60;onfidoVerificationUrl&#x60; appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
     # @param phone_number_id [String] Phone number record ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppPhoneNumber200Response, Integer, Hash)>] GetWhatsAppPhoneNumber200Response data, response status code and response headers
@@ -167,7 +238,7 @@ module Zernio
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.get_whats_app_phone_numbers ...'
       end
-      allowable_values = ["provisioning", "active", "suspended", "releasing", "released"]
+      allowable_values = ["provisioning", "pending_payment", "pending_regulatory", "regulatory_declined", "active", "suspended", "releasing", "released"]
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
@@ -209,6 +280,63 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#get_whats_app_phone_numbers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List offerable number countries
+    # The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
+    # @param [Hash] opts the optional parameters
+    # @return [ListWhatsAppNumberCountries200Response]
+    def list_whats_app_number_countries(opts = {})
+      data, _status_code, _headers = list_whats_app_number_countries_with_http_info(opts)
+      data
+    end
+
+    # List offerable number countries
+    # The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListWhatsAppNumberCountries200Response, Integer, Hash)>] ListWhatsAppNumberCountries200Response data, response status code and response headers
+    def list_whats_app_number_countries_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.list_whats_app_number_countries ...'
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/countries'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListWhatsAppNumberCountries200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppPhoneNumbersApi.list_whats_app_number_countries",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#list_whats_app_number_countries\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -340,6 +468,153 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#release_whats_app_phone_number\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Search available numbers to purchase
+    # Search the provider's inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :country  (default to 'US')
+    # @option opts [String] :type Number type; defaults to the country&#39;s WhatsApp-safe type
+    # @option opts [String] :prefix Area code
+    # @option opts [String] :locality City
+    # @option opts [String] :contains Pattern to match within the number
+    # @option opts [Integer] :limit  (default to 20)
+    # @return [SearchAvailableWhatsAppNumbers200Response]
+    def search_available_whats_app_numbers(opts = {})
+      data, _status_code, _headers = search_available_whats_app_numbers_with_http_info(opts)
+      data
+    end
+
+    # Search available numbers to purchase
+    # Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :country  (default to 'US')
+    # @option opts [String] :type Number type; defaults to the country&#39;s WhatsApp-safe type
+    # @option opts [String] :prefix Area code
+    # @option opts [String] :locality City
+    # @option opts [String] :contains Pattern to match within the number
+    # @option opts [Integer] :limit  (default to 20)
+    # @return [Array<(SearchAvailableWhatsAppNumbers200Response, Integer, Hash)>] SearchAvailableWhatsAppNumbers200Response data, response status code and response headers
+    def search_available_whats_app_numbers_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.search_available_whats_app_numbers ...'
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WhatsAppPhoneNumbersApi.search_available_whats_app_numbers, must be smaller than or equal to 100.'
+      end
+
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/available'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'country'] = opts[:'country'] if !opts[:'country'].nil?
+      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
+      query_params[:'prefix'] = opts[:'prefix'] if !opts[:'prefix'].nil?
+      query_params[:'locality'] = opts[:'locality'] if !opts[:'locality'].nil?
+      query_params[:'contains'] = opts[:'contains'] if !opts[:'contains'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SearchAvailableWhatsAppNumbers200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppPhoneNumbersApi.search_available_whats_app_numbers",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#search_available_whats_app_numbers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Submit regulated-number KYC
+    # Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). Idempotent per (owner, country). 
+    # @param submit_whats_app_number_kyc_request [SubmitWhatsAppNumberKycRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [SubmitWhatsAppNumberKyc200Response]
+    def submit_whats_app_number_kyc(submit_whats_app_number_kyc_request, opts = {})
+      data, _status_code, _headers = submit_whats_app_number_kyc_with_http_info(submit_whats_app_number_kyc_request, opts)
+      data
+    end
+
+    # Submit regulated-number KYC
+    # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). Idempotent per (owner, country). 
+    # @param submit_whats_app_number_kyc_request [SubmitWhatsAppNumberKycRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SubmitWhatsAppNumberKyc200Response, Integer, Hash)>] SubmitWhatsAppNumberKyc200Response data, response status code and response headers
+    def submit_whats_app_number_kyc_with_http_info(submit_whats_app_number_kyc_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.submit_whats_app_number_kyc ...'
+      end
+      # verify the required parameter 'submit_whats_app_number_kyc_request' is set
+      if @api_client.config.client_side_validation && submit_whats_app_number_kyc_request.nil?
+        fail ArgumentError, "Missing the required parameter 'submit_whats_app_number_kyc_request' when calling WhatsAppPhoneNumbersApi.submit_whats_app_number_kyc"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/kyc'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(submit_whats_app_number_kyc_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SubmitWhatsAppNumberKyc200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppPhoneNumbersApi.submit_whats_app_number_kyc",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#submit_whats_app_number_kyc\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

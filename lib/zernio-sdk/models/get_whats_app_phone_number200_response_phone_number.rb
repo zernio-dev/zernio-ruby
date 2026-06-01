@@ -27,6 +27,16 @@ module Zernio
 
     attr_accessor :meta_verification_status
 
+    # For a regulated number with an Onfido ID step — the link to forward to the end user. Appears once the order is placed; null otherwise.
+    attr_accessor :onfido_verification_url
+
+    attr_accessor :end_user_first_name
+
+    attr_accessor :end_user_last_name
+
+    # Reviewer rejection reason when status is regulatory_declined.
+    attr_accessor :regulatory_decline_reason
+
     attr_accessor :provisioned_at
 
     class EnumAttributeValidator
@@ -60,6 +70,10 @@ module Zernio
         :'country' => :'country',
         :'meta_preverified_id' => :'metaPreverifiedId',
         :'meta_verification_status' => :'metaVerificationStatus',
+        :'onfido_verification_url' => :'onfidoVerificationUrl',
+        :'end_user_first_name' => :'endUserFirstName',
+        :'end_user_last_name' => :'endUserLastName',
+        :'regulatory_decline_reason' => :'regulatoryDeclineReason',
         :'provisioned_at' => :'provisionedAt'
       }
     end
@@ -83,6 +97,10 @@ module Zernio
         :'country' => :'String',
         :'meta_preverified_id' => :'String',
         :'meta_verification_status' => :'String',
+        :'onfido_verification_url' => :'String',
+        :'end_user_first_name' => :'String',
+        :'end_user_last_name' => :'String',
+        :'regulatory_decline_reason' => :'String',
         :'provisioned_at' => :'Time'
       }
     end
@@ -133,6 +151,22 @@ module Zernio
         self.meta_verification_status = attributes[:'meta_verification_status']
       end
 
+      if attributes.key?(:'onfido_verification_url')
+        self.onfido_verification_url = attributes[:'onfido_verification_url']
+      end
+
+      if attributes.key?(:'end_user_first_name')
+        self.end_user_first_name = attributes[:'end_user_first_name']
+      end
+
+      if attributes.key?(:'end_user_last_name')
+        self.end_user_last_name = attributes[:'end_user_last_name']
+      end
+
+      if attributes.key?(:'regulatory_decline_reason')
+        self.regulatory_decline_reason = attributes[:'regulatory_decline_reason']
+      end
+
       if attributes.key?(:'provisioned_at')
         self.provisioned_at = attributes[:'provisioned_at']
       end
@@ -150,7 +184,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["pending_payment", "provisioning", "active", "suspended", "releasing", "released"])
+      status_validator = EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "active", "suspended", "releasing", "released"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -158,7 +192,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["pending_payment", "provisioning", "active", "suspended", "releasing", "released"])
+      validator = EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "active", "suspended", "releasing", "released"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
@@ -176,6 +210,10 @@ module Zernio
           country == o.country &&
           meta_preverified_id == o.meta_preverified_id &&
           meta_verification_status == o.meta_verification_status &&
+          onfido_verification_url == o.onfido_verification_url &&
+          end_user_first_name == o.end_user_first_name &&
+          end_user_last_name == o.end_user_last_name &&
+          regulatory_decline_reason == o.regulatory_decline_reason &&
           provisioned_at == o.provisioned_at
     end
 
@@ -188,7 +226,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, phone_number, status, country, meta_preverified_id, meta_verification_status, provisioned_at].hash
+      [id, phone_number, status, country, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, provisioned_at].hash
     end
 
     # Builds the object from hash

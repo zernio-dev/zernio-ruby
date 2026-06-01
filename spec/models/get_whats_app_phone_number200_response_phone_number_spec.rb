@@ -42,7 +42,7 @@ describe Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["pending_payment", "provisioning", "active", "suspended", "releasing", "released"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "active", "suspended", "releasing", "released"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -62,6 +62,30 @@ describe Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber do
   end
 
   describe 'test attribute "meta_verification_status"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "onfido_verification_url"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "end_user_first_name"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "end_user_last_name"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "regulatory_decline_reason"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

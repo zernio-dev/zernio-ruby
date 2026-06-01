@@ -44,9 +44,22 @@ describe 'WhatsAppPhoneNumbersApi' do
     end
   end
 
+  # unit tests for get_whats_app_number_kyc_form
+  # Get regulated-number KYC form spec
+  # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
+  # @param country 
+  # @param profile_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppNumberKycForm200Response]
+  describe 'get_whats_app_number_kyc_form test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_whats_app_phone_number
   # Get phone number
-  # Retrieve the current status of a purchased phone number. Used to poll for Meta pre-verification completion after purchase. 
+  # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, &#x60;onfidoVerificationUrl&#x60; appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
   # @param phone_number_id Phone number record ID
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppPhoneNumber200Response]
@@ -64,6 +77,17 @@ describe 'WhatsAppPhoneNumbersApi' do
   # @option opts [String] :profile_id Filter by profile
   # @return [GetWhatsAppPhoneNumbers200Response]
   describe 'get_whats_app_phone_numbers test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_whats_app_number_countries
+  # List offerable number countries
+  # The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
+  # @param [Hash] opts the optional parameters
+  # @return [ListWhatsAppNumberCountries200Response]
+  describe 'list_whats_app_number_countries test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -88,6 +112,35 @@ describe 'WhatsAppPhoneNumbersApi' do
   # @param [Hash] opts the optional parameters
   # @return [ReleaseWhatsAppPhoneNumber200Response]
   describe 'release_whats_app_phone_number test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for search_available_whats_app_numbers
+  # Search available numbers to purchase
+  # Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :country 
+  # @option opts [String] :type Number type; defaults to the country&#39;s WhatsApp-safe type
+  # @option opts [String] :prefix Area code
+  # @option opts [String] :locality City
+  # @option opts [String] :contains Pattern to match within the number
+  # @option opts [Integer] :limit 
+  # @return [SearchAvailableWhatsAppNumbers200Response]
+  describe 'search_available_whats_app_numbers test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for submit_whats_app_number_kyc
+  # Submit regulated-number KYC
+  # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). Idempotent per (owner, country). 
+  # @param submit_whats_app_number_kyc_request 
+  # @param [Hash] opts the optional parameters
+  # @return [SubmitWhatsAppNumberKyc200Response]
+  describe 'submit_whats_app_number_kyc test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

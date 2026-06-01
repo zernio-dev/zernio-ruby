@@ -496,6 +496,9 @@ docs/GetWhatsAppNumberInfo200Response.md
 docs/GetWhatsAppNumberInfo200ResponsePhone.md
 docs/GetWhatsAppNumberInfo200ResponsePhoneThroughput.md
 docs/GetWhatsAppNumberInfo200ResponseWaba.md
+docs/GetWhatsAppNumberKycForm200Response.md
+docs/GetWhatsAppNumberKycForm200ResponseFieldsInner.md
+docs/GetWhatsAppNumberKycForm200ResponseReusable.md
 docs/GetWhatsAppPhoneNumber200Response.md
 docs/GetWhatsAppPhoneNumber200ResponsePhoneNumber.md
 docs/GetWhatsAppPhoneNumbers200Response.md
@@ -659,6 +662,8 @@ docs/ListWhatsAppGroupChats200ResponsePaging.md
 docs/ListWhatsAppGroupChats200ResponsePagingCursors.md
 docs/ListWhatsAppGroupJoinRequests200Response.md
 docs/ListWhatsAppGroupJoinRequests200ResponseJoinRequestsInner.md
+docs/ListWhatsAppNumberCountries200Response.md
+docs/ListWhatsAppNumberCountries200ResponseCountriesInner.md
 docs/ListWhatsAppPhoneNumbers200Response.md
 docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md
 docs/ListWhatsAppSandboxSessions200Response.md
@@ -676,6 +681,11 @@ docs/MessagesApi.md
 docs/Money.md
 docs/MoveAccountToProfile200Response.md
 docs/MoveAccountToProfileRequest.md
+docs/OnWhatsAppNumberActivatedRequest.md
+docs/OnWhatsAppNumberActivatedRequestNumber.md
+docs/OnWhatsAppNumberDeclinedRequest.md
+docs/OnWhatsAppNumberDeclinedRequestNumber.md
+docs/OnWhatsAppNumberVerificationRequiredRequest.md
 docs/Pagination.md
 docs/PauseWorkflow200Response.md
 docs/Pending.md
@@ -706,6 +716,7 @@ docs/PurchaseWhatsAppPhoneNumber200Response.md
 docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf.md
 docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf1.md
 docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf1PhoneNumber.md
+docs/PurchaseWhatsAppPhoneNumber202Response.md
 docs/PurchaseWhatsAppPhoneNumberRequest.md
 docs/QueueApi.md
 docs/QueueDeleteResponse.md
@@ -748,6 +759,8 @@ docs/SearchAdInterests200Response.md
 docs/SearchAdInterests200ResponseInterestsInner.md
 docs/SearchAdTargeting200Response.md
 docs/SearchAdTargeting200ResponseResultsInner.md
+docs/SearchAvailableWhatsAppNumbers200Response.md
+docs/SearchAvailableWhatsAppNumbers200ResponseNumbersInner.md
 docs/SearchReddit200Response.md
 docs/SelectFacebookPage200Response.md
 docs/SelectFacebookPage200ResponseAccount.md
@@ -831,6 +844,11 @@ docs/SocialAccountProfileId.md
 docs/StartGoogleBusinessVerification200Response.md
 docs/StartGoogleBusinessVerification200ResponseVerification.md
 docs/StartGoogleBusinessVerificationRequest.md
+docs/SubmitWhatsAppNumberKyc200Response.md
+docs/SubmitWhatsAppNumberKyc200ResponsePhoneNumber.md
+docs/SubmitWhatsAppNumberKycRequest.md
+docs/SubmitWhatsAppNumberKycRequestAddress.md
+docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md
 docs/TargetingSpec.md
 docs/TargetingSpecCitiesInner.md
 docs/TargetingSpecCustomLocationsInner.md
@@ -1618,6 +1636,9 @@ lib/zernio-sdk/models/get_whats_app_number_info200_response.rb
 lib/zernio-sdk/models/get_whats_app_number_info200_response_phone.rb
 lib/zernio-sdk/models/get_whats_app_number_info200_response_phone_throughput.rb
 lib/zernio-sdk/models/get_whats_app_number_info200_response_waba.rb
+lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response.rb
+lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response_fields_inner.rb
+lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response_reusable.rb
 lib/zernio-sdk/models/get_whats_app_phone_number200_response.rb
 lib/zernio-sdk/models/get_whats_app_phone_number200_response_phone_number.rb
 lib/zernio-sdk/models/get_whats_app_phone_numbers200_response.rb
@@ -1778,6 +1799,8 @@ lib/zernio-sdk/models/list_whats_app_group_chats200_response_paging.rb
 lib/zernio-sdk/models/list_whats_app_group_chats200_response_paging_cursors.rb
 lib/zernio-sdk/models/list_whats_app_group_join_requests200_response.rb
 lib/zernio-sdk/models/list_whats_app_group_join_requests200_response_join_requests_inner.rb
+lib/zernio-sdk/models/list_whats_app_number_countries200_response.rb
+lib/zernio-sdk/models/list_whats_app_number_countries200_response_countries_inner.rb
 lib/zernio-sdk/models/list_whats_app_phone_numbers200_response.rb
 lib/zernio-sdk/models/list_whats_app_phone_numbers200_response_phone_numbers_inner.rb
 lib/zernio-sdk/models/list_whats_app_sandbox_sessions200_response.rb
@@ -1792,6 +1815,11 @@ lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/money.rb
 lib/zernio-sdk/models/move_account_to_profile200_response.rb
 lib/zernio-sdk/models/move_account_to_profile_request.rb
+lib/zernio-sdk/models/on_whats_app_number_activated_request.rb
+lib/zernio-sdk/models/on_whats_app_number_activated_request_number.rb
+lib/zernio-sdk/models/on_whats_app_number_declined_request.rb
+lib/zernio-sdk/models/on_whats_app_number_declined_request_number.rb
+lib/zernio-sdk/models/on_whats_app_number_verification_required_request.rb
 lib/zernio-sdk/models/pagination.rb
 lib/zernio-sdk/models/pause_workflow200_response.rb
 lib/zernio-sdk/models/pending.rb
@@ -1820,6 +1848,7 @@ lib/zernio-sdk/models/purchase_whats_app_phone_number200_response.rb
 lib/zernio-sdk/models/purchase_whats_app_phone_number200_response_one_of.rb
 lib/zernio-sdk/models/purchase_whats_app_phone_number200_response_one_of1.rb
 lib/zernio-sdk/models/purchase_whats_app_phone_number200_response_one_of1_phone_number.rb
+lib/zernio-sdk/models/purchase_whats_app_phone_number202_response.rb
 lib/zernio-sdk/models/purchase_whats_app_phone_number_request.rb
 lib/zernio-sdk/models/queue_delete_response.rb
 lib/zernio-sdk/models/queue_next_slot_response.rb
@@ -1859,6 +1888,8 @@ lib/zernio-sdk/models/search_ad_interests200_response.rb
 lib/zernio-sdk/models/search_ad_interests200_response_interests_inner.rb
 lib/zernio-sdk/models/search_ad_targeting200_response.rb
 lib/zernio-sdk/models/search_ad_targeting200_response_results_inner.rb
+lib/zernio-sdk/models/search_available_whats_app_numbers200_response.rb
+lib/zernio-sdk/models/search_available_whats_app_numbers200_response_numbers_inner.rb
 lib/zernio-sdk/models/search_reddit200_response.rb
 lib/zernio-sdk/models/select_facebook_page200_response.rb
 lib/zernio-sdk/models/select_facebook_page200_response_account.rb
@@ -1941,6 +1972,11 @@ lib/zernio-sdk/models/social_account_profile_id.rb
 lib/zernio-sdk/models/start_google_business_verification200_response.rb
 lib/zernio-sdk/models/start_google_business_verification200_response_verification.rb
 lib/zernio-sdk/models/start_google_business_verification_request.rb
+lib/zernio-sdk/models/submit_whats_app_number_kyc200_response.rb
+lib/zernio-sdk/models/submit_whats_app_number_kyc200_response_phone_number.rb
+lib/zernio-sdk/models/submit_whats_app_number_kyc_request.rb
+lib/zernio-sdk/models/submit_whats_app_number_kyc_request_address.rb
+lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner.rb
 lib/zernio-sdk/models/targeting_spec.rb
 lib/zernio-sdk/models/targeting_spec_cities_inner.rb
 lib/zernio-sdk/models/targeting_spec_custom_locations_inner.rb
@@ -2708,6 +2744,9 @@ spec/models/get_whats_app_number_info200_response_phone_spec.rb
 spec/models/get_whats_app_number_info200_response_phone_throughput_spec.rb
 spec/models/get_whats_app_number_info200_response_spec.rb
 spec/models/get_whats_app_number_info200_response_waba_spec.rb
+spec/models/get_whats_app_number_kyc_form200_response_fields_inner_spec.rb
+spec/models/get_whats_app_number_kyc_form200_response_reusable_spec.rb
+spec/models/get_whats_app_number_kyc_form200_response_spec.rb
 spec/models/get_whats_app_phone_number200_response_phone_number_spec.rb
 spec/models/get_whats_app_phone_number200_response_spec.rb
 spec/models/get_whats_app_phone_numbers200_response_numbers_inner_spec.rb
@@ -2868,6 +2907,8 @@ spec/models/list_whats_app_group_chats200_response_paging_spec.rb
 spec/models/list_whats_app_group_chats200_response_spec.rb
 spec/models/list_whats_app_group_join_requests200_response_join_requests_inner_spec.rb
 spec/models/list_whats_app_group_join_requests200_response_spec.rb
+spec/models/list_whats_app_number_countries200_response_countries_inner_spec.rb
+spec/models/list_whats_app_number_countries200_response_spec.rb
 spec/models/list_whats_app_phone_numbers200_response_phone_numbers_inner_spec.rb
 spec/models/list_whats_app_phone_numbers200_response_spec.rb
 spec/models/list_whats_app_sandbox_sessions200_response_spec.rb
@@ -2882,6 +2923,11 @@ spec/models/media_upload_response_spec.rb
 spec/models/money_spec.rb
 spec/models/move_account_to_profile200_response_spec.rb
 spec/models/move_account_to_profile_request_spec.rb
+spec/models/on_whats_app_number_activated_request_number_spec.rb
+spec/models/on_whats_app_number_activated_request_spec.rb
+spec/models/on_whats_app_number_declined_request_number_spec.rb
+spec/models/on_whats_app_number_declined_request_spec.rb
+spec/models/on_whats_app_number_verification_required_request_spec.rb
 spec/models/pagination_spec.rb
 spec/models/pause_workflow200_response_spec.rb
 spec/models/pending_spec.rb
@@ -2910,6 +2956,7 @@ spec/models/purchase_whats_app_phone_number200_response_one_of1_phone_number_spe
 spec/models/purchase_whats_app_phone_number200_response_one_of1_spec.rb
 spec/models/purchase_whats_app_phone_number200_response_one_of_spec.rb
 spec/models/purchase_whats_app_phone_number200_response_spec.rb
+spec/models/purchase_whats_app_phone_number202_response_spec.rb
 spec/models/purchase_whats_app_phone_number_request_spec.rb
 spec/models/queue_delete_response_spec.rb
 spec/models/queue_next_slot_response_spec.rb
@@ -2949,6 +2996,8 @@ spec/models/search_ad_interests200_response_interests_inner_spec.rb
 spec/models/search_ad_interests200_response_spec.rb
 spec/models/search_ad_targeting200_response_results_inner_spec.rb
 spec/models/search_ad_targeting200_response_spec.rb
+spec/models/search_available_whats_app_numbers200_response_numbers_inner_spec.rb
+spec/models/search_available_whats_app_numbers200_response_spec.rb
 spec/models/search_reddit200_response_spec.rb
 spec/models/select_facebook_page200_response_account_spec.rb
 spec/models/select_facebook_page200_response_spec.rb
@@ -3031,6 +3080,11 @@ spec/models/social_account_spec.rb
 spec/models/start_google_business_verification200_response_spec.rb
 spec/models/start_google_business_verification200_response_verification_spec.rb
 spec/models/start_google_business_verification_request_spec.rb
+spec/models/submit_whats_app_number_kyc200_response_phone_number_spec.rb
+spec/models/submit_whats_app_number_kyc200_response_spec.rb
+spec/models/submit_whats_app_number_kyc_request_address_spec.rb
+spec/models/submit_whats_app_number_kyc_request_documents_inner_spec.rb
+spec/models/submit_whats_app_number_kyc_request_spec.rb
 spec/models/targeting_spec_cities_inner_spec.rb
 spec/models/targeting_spec_custom_locations_inner_spec.rb
 spec/models/targeting_spec_excluded_locations_spec.rb
