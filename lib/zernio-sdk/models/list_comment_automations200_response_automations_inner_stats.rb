@@ -29,6 +29,12 @@ module Zernio
     # Distinct people who clicked a tracked link.
     attr_accessor :unique_clicks
 
+    # DMs confirmed delivered (Messenger; IG emits no delivery receipt).
+    attr_accessor :delivered
+
+    # DMs confirmed read (IG messaging_seen / Messenger message_reads).
+    attr_accessor :read
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -37,7 +43,9 @@ module Zernio
         :'dms_failed' => :'dmsFailed',
         :'unique_contacts' => :'uniqueContacts',
         :'link_clicks' => :'linkClicks',
-        :'unique_clicks' => :'uniqueClicks'
+        :'unique_clicks' => :'uniqueClicks',
+        :'delivered' => :'delivered',
+        :'read' => :'read'
       }
     end
 
@@ -59,7 +67,9 @@ module Zernio
         :'dms_failed' => :'Integer',
         :'unique_contacts' => :'Integer',
         :'link_clicks' => :'Integer',
-        :'unique_clicks' => :'Integer'
+        :'unique_clicks' => :'Integer',
+        :'delivered' => :'Integer',
+        :'read' => :'Integer'
       }
     end
 
@@ -108,6 +118,14 @@ module Zernio
       if attributes.key?(:'unique_clicks')
         self.unique_clicks = attributes[:'unique_clicks']
       end
+
+      if attributes.key?(:'delivered')
+        self.delivered = attributes[:'delivered']
+      end
+
+      if attributes.key?(:'read')
+        self.read = attributes[:'read']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -135,7 +153,9 @@ module Zernio
           dms_failed == o.dms_failed &&
           unique_contacts == o.unique_contacts &&
           link_clicks == o.link_clicks &&
-          unique_clicks == o.unique_clicks
+          unique_clicks == o.unique_clicks &&
+          delivered == o.delivered &&
+          read == o.read
     end
 
     # @see the `==` method
@@ -147,7 +167,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [triggered, dms_sent, dms_failed, unique_contacts, link_clicks, unique_clicks].hash
+      [triggered, dms_sent, dms_failed, unique_contacts, link_clicks, unique_clicks, delivered, read].hash
     end
 
     # Builds the object from hash
