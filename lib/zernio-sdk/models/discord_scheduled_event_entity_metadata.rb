@@ -14,35 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  class DeleteWhatsAppSandboxSession200Response < ApiModelBase
-    attr_accessor :success
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  class DiscordScheduledEventEntityMetadata < ApiModelBase
+    # External event location string.
+    attr_accessor :location
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success'
+        :'location' => :'location'
       }
     end
 
@@ -59,7 +38,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean'
+        :'location' => :'String'
       }
     end
 
@@ -73,20 +52,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::DeleteWhatsAppSandboxSession200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::DiscordScheduledEventEntityMetadata` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::DeleteWhatsAppSandboxSession200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::DiscordScheduledEventEntityMetadata`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'location')
+        self.location = attributes[:'location']
       end
     end
 
@@ -102,19 +81,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      success_validator = EnumAttributeValidator.new('Boolean', ["true"])
-      return false unless success_validator.valid?(@success)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] success Object to be assigned
-    def success=(success)
-      validator = EnumAttributeValidator.new('Boolean', ["true"])
-      unless validator.valid?(success)
-        fail ArgumentError, "invalid value for \"success\", must be one of #{validator.allowable_values}."
-      end
-      @success = success
     end
 
     # Checks equality by comparing each attribute.
@@ -122,7 +89,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success
+          location == o.location
     end
 
     # @see the `==` method
@@ -134,7 +101,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success].hash
+      [location].hash
     end
 
     # Builds the object from hash

@@ -232,8 +232,21 @@ Class | Method | HTTP request | Description
 *Zernio::CustomFieldsApi* | [**list_custom_fields**](docs/CustomFieldsApi.md#list_custom_fields) | **GET** /v1/custom-fields | List custom field definitions
 *Zernio::CustomFieldsApi* | [**set_contact_field_value**](docs/CustomFieldsApi.md#set_contact_field_value) | **PUT** /v1/contacts/{contactId}/fields/{slug} | Set custom field value
 *Zernio::CustomFieldsApi* | [**update_custom_field**](docs/CustomFieldsApi.md#update_custom_field) | **PATCH** /v1/custom-fields/{fieldId} | Update custom field
+*Zernio::DiscordApi* | [**add_discord_member_role**](docs/DiscordApi.md#add_discord_member_role) | **PUT** /v1/discord/guilds/{guildId}/members/{userId}/roles/{roleId} | Assign a role to a guild member
+*Zernio::DiscordApi* | [**create_discord_scheduled_event**](docs/DiscordApi.md#create_discord_scheduled_event) | **POST** /v1/discord/guilds/{guildId}/events | Create a Discord scheduled event
+*Zernio::DiscordApi* | [**delete_discord_scheduled_event**](docs/DiscordApi.md#delete_discord_scheduled_event) | **DELETE** /v1/discord/guilds/{guildId}/events/{eventId} | Delete a Discord scheduled event
 *Zernio::DiscordApi* | [**get_discord_channels**](docs/DiscordApi.md#get_discord_channels) | **GET** /v1/accounts/{accountId}/discord-channels | List Discord guild channels
+*Zernio::DiscordApi* | [**get_discord_scheduled_event**](docs/DiscordApi.md#get_discord_scheduled_event) | **GET** /v1/discord/guilds/{guildId}/events/{eventId} | Get a Discord scheduled event
 *Zernio::DiscordApi* | [**get_discord_settings**](docs/DiscordApi.md#get_discord_settings) | **GET** /v1/accounts/{accountId}/discord-settings | Get Discord account settings
+*Zernio::DiscordApi* | [**list_discord_guild_members**](docs/DiscordApi.md#list_discord_guild_members) | **GET** /v1/discord/guilds/{guildId}/members | List Discord guild members
+*Zernio::DiscordApi* | [**list_discord_guild_roles**](docs/DiscordApi.md#list_discord_guild_roles) | **GET** /v1/discord/guilds/{guildId}/roles | List Discord guild roles
+*Zernio::DiscordApi* | [**list_discord_pinned_messages**](docs/DiscordApi.md#list_discord_pinned_messages) | **GET** /v1/discord/channels/{channelId}/pins | List pinned messages in a Discord channel
+*Zernio::DiscordApi* | [**list_discord_scheduled_events**](docs/DiscordApi.md#list_discord_scheduled_events) | **GET** /v1/discord/guilds/{guildId}/events | List Discord scheduled events
+*Zernio::DiscordApi* | [**pin_discord_message**](docs/DiscordApi.md#pin_discord_message) | **PUT** /v1/discord/channels/{channelId}/pins/{messageId} | Pin a Discord message
+*Zernio::DiscordApi* | [**remove_discord_member_role**](docs/DiscordApi.md#remove_discord_member_role) | **DELETE** /v1/discord/guilds/{guildId}/members/{userId}/roles/{roleId} | Remove a role from a guild member
+*Zernio::DiscordApi* | [**send_discord_direct_message**](docs/DiscordApi.md#send_discord_direct_message) | **POST** /v1/discord/dms | Send a Discord Direct Message
+*Zernio::DiscordApi* | [**unpin_discord_message**](docs/DiscordApi.md#unpin_discord_message) | **DELETE** /v1/discord/channels/{channelId}/pins/{messageId} | Unpin a Discord message
+*Zernio::DiscordApi* | [**update_discord_scheduled_event**](docs/DiscordApi.md#update_discord_scheduled_event) | **PATCH** /v1/discord/guilds/{guildId}/events/{eventId} | Update a Discord scheduled event
 *Zernio::DiscordApi* | [**update_discord_settings**](docs/DiscordApi.md#update_discord_settings) | **PATCH** /v1/accounts/{accountId}/discord-settings | Update Discord settings
 *Zernio::GMBAttributesApi* | [**get_google_business_attributes**](docs/GMBAttributesApi.md#get_google_business_attributes) | **GET** /v1/accounts/{accountId}/gmb-attributes | Get attributes
 *Zernio::GMBAttributesApi* | [**update_google_business_attributes**](docs/GMBAttributesApi.md#update_google_business_attributes) | **PUT** /v1/accounts/{accountId}/gmb-attributes | Update attributes
@@ -448,6 +461,7 @@ Class | Method | HTTP request | Description
  - [Zernio::AddConversionAssociations200Response](docs/AddConversionAssociations200Response.md)
  - [Zernio::AddConversionAssociations200ResponseFailedInner](docs/AddConversionAssociations200ResponseFailedInner.md)
  - [Zernio::AddConversionAssociationsRequest](docs/AddConversionAssociationsRequest.md)
+ - [Zernio::AddDiscordMemberRole200Response](docs/AddDiscordMemberRole200Response.md)
  - [Zernio::AddMessageReactionRequest](docs/AddMessageReactionRequest.md)
  - [Zernio::AddTrackingTagSharedAccount201Response](docs/AddTrackingTagSharedAccount201Response.md)
  - [Zernio::AddTrackingTagSharedAccountRequest](docs/AddTrackingTagSharedAccountRequest.md)
@@ -545,11 +559,18 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateCtwaAdRequestCitiesInner](docs/CreateCtwaAdRequestCitiesInner.md)
  - [Zernio::CreateCtwaAdRequestCreativesInner](docs/CreateCtwaAdRequestCreativesInner.md)
  - [Zernio::CreateCtwaAdRequestCreativesInnerVideo](docs/CreateCtwaAdRequestCreativesInnerVideo.md)
+ - [Zernio::CreateCtwaAdRequestCustomLocationsInner](docs/CreateCtwaAdRequestCustomLocationsInner.md)
  - [Zernio::CreateCtwaAdRequestRegionsInner](docs/CreateCtwaAdRequestRegionsInner.md)
  - [Zernio::CreateCtwaAdRequestVideo](docs/CreateCtwaAdRequestVideo.md)
  - [Zernio::CreateCtwaAdRequestZipsInner](docs/CreateCtwaAdRequestZipsInner.md)
  - [Zernio::CreateCustomField200Response](docs/CreateCustomField200Response.md)
  - [Zernio::CreateCustomFieldRequest](docs/CreateCustomFieldRequest.md)
+ - [Zernio::CreateDiscordScheduledEvent200Response](docs/CreateDiscordScheduledEvent200Response.md)
+ - [Zernio::CreateDiscordScheduledEventRequest](docs/CreateDiscordScheduledEventRequest.md)
+ - [Zernio::CreateDiscordScheduledEventRequestEntity](docs/CreateDiscordScheduledEventRequestEntity.md)
+ - [Zernio::CreateDiscordScheduledEventRequestEntityOneOf](docs/CreateDiscordScheduledEventRequestEntityOneOf.md)
+ - [Zernio::CreateDiscordScheduledEventRequestEntityOneOf1](docs/CreateDiscordScheduledEventRequestEntityOneOf1.md)
+ - [Zernio::CreateDiscordScheduledEventRequestEntityOneOf2](docs/CreateDiscordScheduledEventRequestEntityOneOf2.md)
  - [Zernio::CreateGoogleBusinessMedia200Response](docs/CreateGoogleBusinessMedia200Response.md)
  - [Zernio::CreateGoogleBusinessMediaRequest](docs/CreateGoogleBusinessMediaRequest.md)
  - [Zernio::CreateGoogleBusinessPlaceAction200Response](docs/CreateGoogleBusinessPlaceAction200Response.md)
@@ -627,6 +648,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteAccountGroup200Response](docs/DeleteAccountGroup200Response.md)
  - [Zernio::DeleteAdCampaign200Response](docs/DeleteAdCampaign200Response.md)
  - [Zernio::DeleteAdCampaignRequest](docs/DeleteAdCampaignRequest.md)
+ - [Zernio::DeleteDiscordScheduledEvent200Response](docs/DeleteDiscordScheduledEvent200Response.md)
  - [Zernio::DeleteGoogleBusinessMedia200Response](docs/DeleteGoogleBusinessMedia200Response.md)
  - [Zernio::DeleteGoogleBusinessPlaceAction200Response](docs/DeleteGoogleBusinessPlaceAction200Response.md)
  - [Zernio::DeleteGoogleBusinessReviewReply200Response](docs/DeleteGoogleBusinessReviewReply200Response.md)
@@ -634,7 +656,6 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
  - [Zernio::DeleteQueueSlot200Response](docs/DeleteQueueSlot200Response.md)
- - [Zernio::DeleteWhatsAppSandboxSession200Response](docs/DeleteWhatsAppSandboxSession200Response.md)
  - [Zernio::DiscordPlatformData](docs/DiscordPlatformData.md)
  - [Zernio::DiscordPlatformDataEmbedsInner](docs/DiscordPlatformDataEmbedsInner.md)
  - [Zernio::DiscordPlatformDataEmbedsInnerAuthor](docs/DiscordPlatformDataEmbedsInnerAuthor.md)
@@ -646,6 +667,8 @@ Class | Method | HTTP request | Description
  - [Zernio::DiscordPlatformDataPollAnswersInnerPollMedia](docs/DiscordPlatformDataPollAnswersInnerPollMedia.md)
  - [Zernio::DiscordPlatformDataPollQuestion](docs/DiscordPlatformDataPollQuestion.md)
  - [Zernio::DiscordPlatformDataThreadFromMessage](docs/DiscordPlatformDataThreadFromMessage.md)
+ - [Zernio::DiscordScheduledEvent](docs/DiscordScheduledEvent.md)
+ - [Zernio::DiscordScheduledEventEntityMetadata](docs/DiscordScheduledEventEntityMetadata.md)
  - [Zernio::DmButton](docs/DmButton.md)
  - [Zernio::DuplicateAdCampaign200Response](docs/DuplicateAdCampaign200Response.md)
  - [Zernio::DuplicateAdCampaignRequest](docs/DuplicateAdCampaignRequest.md)
@@ -986,6 +1009,15 @@ Class | Method | HTTP request | Description
  - [Zernio::ListConversionDestinations200ResponseDestinationsInner](docs/ListConversionDestinations200ResponseDestinationsInner.md)
  - [Zernio::ListCustomFields200Response](docs/ListCustomFields200Response.md)
  - [Zernio::ListCustomFields200ResponseFieldsInner](docs/ListCustomFields200ResponseFieldsInner.md)
+ - [Zernio::ListDiscordGuildMembers200Response](docs/ListDiscordGuildMembers200Response.md)
+ - [Zernio::ListDiscordGuildMembers200ResponseDataInner](docs/ListDiscordGuildMembers200ResponseDataInner.md)
+ - [Zernio::ListDiscordGuildMembers200ResponseDataInnerUser](docs/ListDiscordGuildMembers200ResponseDataInnerUser.md)
+ - [Zernio::ListDiscordGuildMembers200ResponsePagination](docs/ListDiscordGuildMembers200ResponsePagination.md)
+ - [Zernio::ListDiscordGuildRoles200Response](docs/ListDiscordGuildRoles200Response.md)
+ - [Zernio::ListDiscordGuildRoles200ResponseDataInner](docs/ListDiscordGuildRoles200ResponseDataInner.md)
+ - [Zernio::ListDiscordPinnedMessages200Response](docs/ListDiscordPinnedMessages200Response.md)
+ - [Zernio::ListDiscordPinnedMessages200ResponseDataInner](docs/ListDiscordPinnedMessages200ResponseDataInner.md)
+ - [Zernio::ListDiscordScheduledEvents200Response](docs/ListDiscordScheduledEvents200Response.md)
  - [Zernio::ListFacebookPages200Response](docs/ListFacebookPages200Response.md)
  - [Zernio::ListFacebookPages200ResponsePagesInner](docs/ListFacebookPages200ResponsePagesInner.md)
  - [Zernio::ListFormLeads200Response](docs/ListFormLeads200Response.md)
@@ -1080,6 +1112,7 @@ Class | Method | HTTP request | Description
  - [Zernio::Pagination](docs/Pagination.md)
  - [Zernio::PauseWorkflow200Response](docs/PauseWorkflow200Response.md)
  - [Zernio::Pending](docs/Pending.md)
+ - [Zernio::PinDiscordMessage200Response](docs/PinDiscordMessage200Response.md)
  - [Zernio::PinterestPlatformData](docs/PinterestPlatformData.md)
  - [Zernio::PlatformAnalytics](docs/PlatformAnalytics.md)
  - [Zernio::PlatformTarget](docs/PlatformTarget.md)
@@ -1123,6 +1156,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber](docs/ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber.md)
  - [Zernio::RemoveBookmark200Response](docs/RemoveBookmark200Response.md)
  - [Zernio::RemoveConversionAssociations200Response](docs/RemoveConversionAssociations200Response.md)
+ - [Zernio::RemoveDiscordMemberRole200Response](docs/RemoveDiscordMemberRole200Response.md)
  - [Zernio::RemoveWhatsAppGroupParticipantsRequest](docs/RemoveWhatsAppGroupParticipantsRequest.md)
  - [Zernio::ReplyToGoogleBusinessReview200Response](docs/ReplyToGoogleBusinessReview200Response.md)
  - [Zernio::ReplyToGoogleBusinessReviewRequest](docs/ReplyToGoogleBusinessReviewRequest.md)
@@ -1174,6 +1208,11 @@ Class | Method | HTTP request | Description
  - [Zernio::SendConversions200ResponseFailuresInnerCode](docs/SendConversions200ResponseFailuresInnerCode.md)
  - [Zernio::SendConversionsRequest](docs/SendConversionsRequest.md)
  - [Zernio::SendConversionsRequestConsent](docs/SendConversionsRequestConsent.md)
+ - [Zernio::SendDiscordDirectMessage200Response](docs/SendDiscordDirectMessage200Response.md)
+ - [Zernio::SendDiscordDirectMessage200ResponseAccount](docs/SendDiscordDirectMessage200ResponseAccount.md)
+ - [Zernio::SendDiscordDirectMessage200ResponseRecipient](docs/SendDiscordDirectMessage200ResponseRecipient.md)
+ - [Zernio::SendDiscordDirectMessageRequest](docs/SendDiscordDirectMessageRequest.md)
+ - [Zernio::SendDiscordDirectMessageRequestAttachmentsInner](docs/SendDiscordDirectMessageRequestAttachmentsInner.md)
  - [Zernio::SendInboxMessage200Response](docs/SendInboxMessage200Response.md)
  - [Zernio::SendInboxMessage200ResponseData](docs/SendInboxMessage200ResponseData.md)
  - [Zernio::SendInboxMessage400Response](docs/SendInboxMessage400Response.md)
@@ -1254,6 +1293,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UndoRetweet200Response](docs/UndoRetweet200Response.md)
  - [Zernio::UnfollowUser200Response](docs/UnfollowUser200Response.md)
  - [Zernio::UnlikeInboxComment200Response](docs/UnlikeInboxComment200Response.md)
+ - [Zernio::UnpinDiscordMessage200Response](docs/UnpinDiscordMessage200Response.md)
  - [Zernio::UnpublishPost200Response](docs/UnpublishPost200Response.md)
  - [Zernio::UnpublishPostRequest](docs/UnpublishPostRequest.md)
  - [Zernio::UpdateAccount200Response](docs/UpdateAccount200Response.md)
@@ -1294,6 +1334,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateCustomField200Response](docs/UpdateCustomField200Response.md)
  - [Zernio::UpdateCustomField200ResponseField](docs/UpdateCustomField200ResponseField.md)
  - [Zernio::UpdateCustomFieldRequest](docs/UpdateCustomFieldRequest.md)
+ - [Zernio::UpdateDiscordScheduledEventRequest](docs/UpdateDiscordScheduledEventRequest.md)
  - [Zernio::UpdateDiscordSettings200Response](docs/UpdateDiscordSettings200Response.md)
  - [Zernio::UpdateDiscordSettings200ResponseAccount](docs/UpdateDiscordSettings200ResponseAccount.md)
  - [Zernio::UpdateDiscordSettingsRequest](docs/UpdateDiscordSettingsRequest.md)

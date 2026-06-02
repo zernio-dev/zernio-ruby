@@ -185,7 +185,7 @@ module Zernio
         :'regions' => :'Array<CreateCtwaAdRequestRegionsInner>',
         :'zips' => :'Array<CreateCtwaAdRequestZipsInner>',
         :'metros' => :'Array<CreateCtwaAdRequestZipsInner>',
-        :'custom_locations' => :'Array<CreateStandaloneAdRequestCustomLocationsInner>',
+        :'custom_locations' => :'Array<CreateCtwaAdRequestCustomLocationsInner>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'interests' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',

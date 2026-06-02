@@ -42,6 +42,7 @@ docs/AddBroadcastRecipientsRequest.md
 docs/AddConversionAssociations200Response.md
 docs/AddConversionAssociations200ResponseFailedInner.md
 docs/AddConversionAssociationsRequest.md
+docs/AddDiscordMemberRole200Response.md
 docs/AddMessageReactionRequest.md
 docs/AddTrackingTagSharedAccount201Response.md
 docs/AddTrackingTagSharedAccountRequest.md
@@ -146,11 +147,18 @@ docs/CreateCtwaAdRequest.md
 docs/CreateCtwaAdRequestCitiesInner.md
 docs/CreateCtwaAdRequestCreativesInner.md
 docs/CreateCtwaAdRequestCreativesInnerVideo.md
+docs/CreateCtwaAdRequestCustomLocationsInner.md
 docs/CreateCtwaAdRequestRegionsInner.md
 docs/CreateCtwaAdRequestVideo.md
 docs/CreateCtwaAdRequestZipsInner.md
 docs/CreateCustomField200Response.md
 docs/CreateCustomFieldRequest.md
+docs/CreateDiscordScheduledEvent200Response.md
+docs/CreateDiscordScheduledEventRequest.md
+docs/CreateDiscordScheduledEventRequestEntity.md
+docs/CreateDiscordScheduledEventRequestEntityOneOf.md
+docs/CreateDiscordScheduledEventRequestEntityOneOf1.md
+docs/CreateDiscordScheduledEventRequestEntityOneOf2.md
 docs/CreateGoogleBusinessMedia200Response.md
 docs/CreateGoogleBusinessMediaRequest.md
 docs/CreateGoogleBusinessPlaceAction200Response.md
@@ -229,6 +237,7 @@ docs/CustomFieldsApi.md
 docs/DeleteAccountGroup200Response.md
 docs/DeleteAdCampaign200Response.md
 docs/DeleteAdCampaignRequest.md
+docs/DeleteDiscordScheduledEvent200Response.md
 docs/DeleteGoogleBusinessMedia200Response.md
 docs/DeleteGoogleBusinessPlaceAction200Response.md
 docs/DeleteGoogleBusinessReviewReply200Response.md
@@ -236,7 +245,6 @@ docs/DeleteInboxComment200Response.md
 docs/DeleteInboxReviewReply200Response.md
 docs/DeleteInboxReviewReplyRequest.md
 docs/DeleteQueueSlot200Response.md
-docs/DeleteWhatsAppSandboxSession200Response.md
 docs/DiscordApi.md
 docs/DiscordPlatformData.md
 docs/DiscordPlatformDataEmbedsInner.md
@@ -249,6 +257,8 @@ docs/DiscordPlatformDataPollAnswersInner.md
 docs/DiscordPlatformDataPollAnswersInnerPollMedia.md
 docs/DiscordPlatformDataPollQuestion.md
 docs/DiscordPlatformDataThreadFromMessage.md
+docs/DiscordScheduledEvent.md
+docs/DiscordScheduledEventEntityMetadata.md
 docs/DmButton.md
 docs/DuplicateAdCampaign200Response.md
 docs/DuplicateAdCampaignRequest.md
@@ -600,6 +610,15 @@ docs/ListConversionDestinations200Response.md
 docs/ListConversionDestinations200ResponseDestinationsInner.md
 docs/ListCustomFields200Response.md
 docs/ListCustomFields200ResponseFieldsInner.md
+docs/ListDiscordGuildMembers200Response.md
+docs/ListDiscordGuildMembers200ResponseDataInner.md
+docs/ListDiscordGuildMembers200ResponseDataInnerUser.md
+docs/ListDiscordGuildMembers200ResponsePagination.md
+docs/ListDiscordGuildRoles200Response.md
+docs/ListDiscordGuildRoles200ResponseDataInner.md
+docs/ListDiscordPinnedMessages200Response.md
+docs/ListDiscordPinnedMessages200ResponseDataInner.md
+docs/ListDiscordScheduledEvents200Response.md
 docs/ListFacebookPages200Response.md
 docs/ListFacebookPages200ResponsePagesInner.md
 docs/ListFormLeads200Response.md
@@ -697,6 +716,7 @@ docs/OnWhatsAppNumberVerificationRequiredRequest.md
 docs/Pagination.md
 docs/PauseWorkflow200Response.md
 docs/Pending.md
+docs/PinDiscordMessage200Response.md
 docs/PinterestPlatformData.md
 docs/PlatformAnalytics.md
 docs/PlatformTarget.md
@@ -744,6 +764,7 @@ docs/ReleaseWhatsAppPhoneNumber200Response.md
 docs/ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber.md
 docs/RemoveBookmark200Response.md
 docs/RemoveConversionAssociations200Response.md
+docs/RemoveDiscordMemberRole200Response.md
 docs/RemoveWhatsAppGroupParticipantsRequest.md
 docs/ReplyToGoogleBusinessReview200Response.md
 docs/ReplyToGoogleBusinessReviewRequest.md
@@ -796,6 +817,11 @@ docs/SendConversions200ResponseFailuresInner.md
 docs/SendConversions200ResponseFailuresInnerCode.md
 docs/SendConversionsRequest.md
 docs/SendConversionsRequestConsent.md
+docs/SendDiscordDirectMessage200Response.md
+docs/SendDiscordDirectMessage200ResponseAccount.md
+docs/SendDiscordDirectMessage200ResponseRecipient.md
+docs/SendDiscordDirectMessageRequest.md
+docs/SendDiscordDirectMessageRequestAttachmentsInner.md
 docs/SendInboxMessage200Response.md
 docs/SendInboxMessage200ResponseData.md
 docs/SendInboxMessage400Response.md
@@ -879,6 +905,7 @@ docs/TwitterPlatformDataThreadItemsInner.md
 docs/UndoRetweet200Response.md
 docs/UnfollowUser200Response.md
 docs/UnlikeInboxComment200Response.md
+docs/UnpinDiscordMessage200Response.md
 docs/UnpublishPost200Response.md
 docs/UnpublishPostRequest.md
 docs/UpdateAccount200Response.md
@@ -919,6 +946,7 @@ docs/UpdateConversionDestinationRequestValue.md
 docs/UpdateCustomField200Response.md
 docs/UpdateCustomField200ResponseField.md
 docs/UpdateCustomFieldRequest.md
+docs/UpdateDiscordScheduledEventRequest.md
 docs/UpdateDiscordSettings200Response.md
 docs/UpdateDiscordSettings200ResponseAccount.md
 docs/UpdateDiscordSettingsRequest.md
@@ -1210,6 +1238,7 @@ lib/zernio-sdk/models/add_broadcast_recipients_request.rb
 lib/zernio-sdk/models/add_conversion_associations200_response.rb
 lib/zernio-sdk/models/add_conversion_associations200_response_failed_inner.rb
 lib/zernio-sdk/models/add_conversion_associations_request.rb
+lib/zernio-sdk/models/add_discord_member_role200_response.rb
 lib/zernio-sdk/models/add_message_reaction_request.rb
 lib/zernio-sdk/models/add_tracking_tag_shared_account201_response.rb
 lib/zernio-sdk/models/add_tracking_tag_shared_account_request.rb
@@ -1307,11 +1336,18 @@ lib/zernio-sdk/models/create_ctwa_ad_request.rb
 lib/zernio-sdk/models/create_ctwa_ad_request_cities_inner.rb
 lib/zernio-sdk/models/create_ctwa_ad_request_creatives_inner.rb
 lib/zernio-sdk/models/create_ctwa_ad_request_creatives_inner_video.rb
+lib/zernio-sdk/models/create_ctwa_ad_request_custom_locations_inner.rb
 lib/zernio-sdk/models/create_ctwa_ad_request_regions_inner.rb
 lib/zernio-sdk/models/create_ctwa_ad_request_video.rb
 lib/zernio-sdk/models/create_ctwa_ad_request_zips_inner.rb
 lib/zernio-sdk/models/create_custom_field200_response.rb
 lib/zernio-sdk/models/create_custom_field_request.rb
+lib/zernio-sdk/models/create_discord_scheduled_event200_response.rb
+lib/zernio-sdk/models/create_discord_scheduled_event_request.rb
+lib/zernio-sdk/models/create_discord_scheduled_event_request_entity.rb
+lib/zernio-sdk/models/create_discord_scheduled_event_request_entity_one_of.rb
+lib/zernio-sdk/models/create_discord_scheduled_event_request_entity_one_of1.rb
+lib/zernio-sdk/models/create_discord_scheduled_event_request_entity_one_of2.rb
 lib/zernio-sdk/models/create_google_business_media200_response.rb
 lib/zernio-sdk/models/create_google_business_media_request.rb
 lib/zernio-sdk/models/create_google_business_place_action200_response.rb
@@ -1389,6 +1425,7 @@ lib/zernio-sdk/models/ctwa_single_response.rb
 lib/zernio-sdk/models/delete_account_group200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign_request.rb
+lib/zernio-sdk/models/delete_discord_scheduled_event200_response.rb
 lib/zernio-sdk/models/delete_google_business_media200_response.rb
 lib/zernio-sdk/models/delete_google_business_place_action200_response.rb
 lib/zernio-sdk/models/delete_google_business_review_reply200_response.rb
@@ -1396,7 +1433,6 @@ lib/zernio-sdk/models/delete_inbox_comment200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
 lib/zernio-sdk/models/delete_queue_slot200_response.rb
-lib/zernio-sdk/models/delete_whats_app_sandbox_session200_response.rb
 lib/zernio-sdk/models/discord_platform_data.rb
 lib/zernio-sdk/models/discord_platform_data_embeds_inner.rb
 lib/zernio-sdk/models/discord_platform_data_embeds_inner_author.rb
@@ -1408,6 +1444,8 @@ lib/zernio-sdk/models/discord_platform_data_poll_answers_inner.rb
 lib/zernio-sdk/models/discord_platform_data_poll_answers_inner_poll_media.rb
 lib/zernio-sdk/models/discord_platform_data_poll_question.rb
 lib/zernio-sdk/models/discord_platform_data_thread_from_message.rb
+lib/zernio-sdk/models/discord_scheduled_event.rb
+lib/zernio-sdk/models/discord_scheduled_event_entity_metadata.rb
 lib/zernio-sdk/models/dm_button.rb
 lib/zernio-sdk/models/duplicate_ad_campaign200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign_request.rb
@@ -1748,6 +1786,15 @@ lib/zernio-sdk/models/list_conversion_destinations200_response.rb
 lib/zernio-sdk/models/list_conversion_destinations200_response_destinations_inner.rb
 lib/zernio-sdk/models/list_custom_fields200_response.rb
 lib/zernio-sdk/models/list_custom_fields200_response_fields_inner.rb
+lib/zernio-sdk/models/list_discord_guild_members200_response.rb
+lib/zernio-sdk/models/list_discord_guild_members200_response_data_inner.rb
+lib/zernio-sdk/models/list_discord_guild_members200_response_data_inner_user.rb
+lib/zernio-sdk/models/list_discord_guild_members200_response_pagination.rb
+lib/zernio-sdk/models/list_discord_guild_roles200_response.rb
+lib/zernio-sdk/models/list_discord_guild_roles200_response_data_inner.rb
+lib/zernio-sdk/models/list_discord_pinned_messages200_response.rb
+lib/zernio-sdk/models/list_discord_pinned_messages200_response_data_inner.rb
+lib/zernio-sdk/models/list_discord_scheduled_events200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response.rb
 lib/zernio-sdk/models/list_facebook_pages200_response_pages_inner.rb
 lib/zernio-sdk/models/list_form_leads200_response.rb
@@ -1842,6 +1889,7 @@ lib/zernio-sdk/models/on_whats_app_number_verification_required_request.rb
 lib/zernio-sdk/models/pagination.rb
 lib/zernio-sdk/models/pause_workflow200_response.rb
 lib/zernio-sdk/models/pending.rb
+lib/zernio-sdk/models/pin_discord_message200_response.rb
 lib/zernio-sdk/models/pinterest_platform_data.rb
 lib/zernio-sdk/models/platform_analytics.rb
 lib/zernio-sdk/models/platform_target.rb
@@ -1885,6 +1933,7 @@ lib/zernio-sdk/models/release_whats_app_phone_number200_response.rb
 lib/zernio-sdk/models/release_whats_app_phone_number200_response_phone_number.rb
 lib/zernio-sdk/models/remove_bookmark200_response.rb
 lib/zernio-sdk/models/remove_conversion_associations200_response.rb
+lib/zernio-sdk/models/remove_discord_member_role200_response.rb
 lib/zernio-sdk/models/remove_whats_app_group_participants_request.rb
 lib/zernio-sdk/models/reply_to_google_business_review200_response.rb
 lib/zernio-sdk/models/reply_to_google_business_review_request.rb
@@ -1936,6 +1985,11 @@ lib/zernio-sdk/models/send_conversions200_response_failures_inner.rb
 lib/zernio-sdk/models/send_conversions200_response_failures_inner_code.rb
 lib/zernio-sdk/models/send_conversions_request.rb
 lib/zernio-sdk/models/send_conversions_request_consent.rb
+lib/zernio-sdk/models/send_discord_direct_message200_response.rb
+lib/zernio-sdk/models/send_discord_direct_message200_response_account.rb
+lib/zernio-sdk/models/send_discord_direct_message200_response_recipient.rb
+lib/zernio-sdk/models/send_discord_direct_message_request.rb
+lib/zernio-sdk/models/send_discord_direct_message_request_attachments_inner.rb
 lib/zernio-sdk/models/send_inbox_message200_response.rb
 lib/zernio-sdk/models/send_inbox_message200_response_data.rb
 lib/zernio-sdk/models/send_inbox_message400_response.rb
@@ -2016,6 +2070,7 @@ lib/zernio-sdk/models/twitter_platform_data_thread_items_inner.rb
 lib/zernio-sdk/models/undo_retweet200_response.rb
 lib/zernio-sdk/models/unfollow_user200_response.rb
 lib/zernio-sdk/models/unlike_inbox_comment200_response.rb
+lib/zernio-sdk/models/unpin_discord_message200_response.rb
 lib/zernio-sdk/models/unpublish_post200_response.rb
 lib/zernio-sdk/models/unpublish_post_request.rb
 lib/zernio-sdk/models/update_account200_response.rb
@@ -2056,6 +2111,7 @@ lib/zernio-sdk/models/update_conversion_destination_request_value.rb
 lib/zernio-sdk/models/update_custom_field200_response.rb
 lib/zernio-sdk/models/update_custom_field200_response_field.rb
 lib/zernio-sdk/models/update_custom_field_request.rb
+lib/zernio-sdk/models/update_discord_scheduled_event_request.rb
 lib/zernio-sdk/models/update_discord_settings200_response.rb
 lib/zernio-sdk/models/update_discord_settings200_response_account.rb
 lib/zernio-sdk/models/update_discord_settings_request.rb
@@ -2329,6 +2385,7 @@ spec/models/add_broadcast_recipients_request_spec.rb
 spec/models/add_conversion_associations200_response_failed_inner_spec.rb
 spec/models/add_conversion_associations200_response_spec.rb
 spec/models/add_conversion_associations_request_spec.rb
+spec/models/add_discord_member_role200_response_spec.rb
 spec/models/add_message_reaction_request_spec.rb
 spec/models/add_tracking_tag_shared_account201_response_spec.rb
 spec/models/add_tracking_tag_shared_account_request_spec.rb
@@ -2425,12 +2482,19 @@ spec/models/create_ctwa_ad201_response_spec.rb
 spec/models/create_ctwa_ad_request_cities_inner_spec.rb
 spec/models/create_ctwa_ad_request_creatives_inner_spec.rb
 spec/models/create_ctwa_ad_request_creatives_inner_video_spec.rb
+spec/models/create_ctwa_ad_request_custom_locations_inner_spec.rb
 spec/models/create_ctwa_ad_request_regions_inner_spec.rb
 spec/models/create_ctwa_ad_request_spec.rb
 spec/models/create_ctwa_ad_request_video_spec.rb
 spec/models/create_ctwa_ad_request_zips_inner_spec.rb
 spec/models/create_custom_field200_response_spec.rb
 spec/models/create_custom_field_request_spec.rb
+spec/models/create_discord_scheduled_event200_response_spec.rb
+spec/models/create_discord_scheduled_event_request_entity_one_of1_spec.rb
+spec/models/create_discord_scheduled_event_request_entity_one_of2_spec.rb
+spec/models/create_discord_scheduled_event_request_entity_one_of_spec.rb
+spec/models/create_discord_scheduled_event_request_entity_spec.rb
+spec/models/create_discord_scheduled_event_request_spec.rb
 spec/models/create_google_business_media200_response_spec.rb
 spec/models/create_google_business_media_request_spec.rb
 spec/models/create_google_business_place_action200_response_spec.rb
@@ -2508,6 +2572,7 @@ spec/models/ctwa_single_response_spec.rb
 spec/models/delete_account_group200_response_spec.rb
 spec/models/delete_ad_campaign200_response_spec.rb
 spec/models/delete_ad_campaign_request_spec.rb
+spec/models/delete_discord_scheduled_event200_response_spec.rb
 spec/models/delete_google_business_media200_response_spec.rb
 spec/models/delete_google_business_place_action200_response_spec.rb
 spec/models/delete_google_business_review_reply200_response_spec.rb
@@ -2515,7 +2580,6 @@ spec/models/delete_inbox_comment200_response_spec.rb
 spec/models/delete_inbox_review_reply200_response_spec.rb
 spec/models/delete_inbox_review_reply_request_spec.rb
 spec/models/delete_queue_slot200_response_spec.rb
-spec/models/delete_whats_app_sandbox_session200_response_spec.rb
 spec/models/discord_platform_data_embeds_inner_author_spec.rb
 spec/models/discord_platform_data_embeds_inner_fields_inner_spec.rb
 spec/models/discord_platform_data_embeds_inner_footer_spec.rb
@@ -2527,6 +2591,8 @@ spec/models/discord_platform_data_poll_question_spec.rb
 spec/models/discord_platform_data_poll_spec.rb
 spec/models/discord_platform_data_spec.rb
 spec/models/discord_platform_data_thread_from_message_spec.rb
+spec/models/discord_scheduled_event_entity_metadata_spec.rb
+spec/models/discord_scheduled_event_spec.rb
 spec/models/dm_button_spec.rb
 spec/models/duplicate_ad_campaign200_response_spec.rb
 spec/models/duplicate_ad_campaign_request_spec.rb
@@ -2867,6 +2933,15 @@ spec/models/list_conversion_destinations200_response_destinations_inner_spec.rb
 spec/models/list_conversion_destinations200_response_spec.rb
 spec/models/list_custom_fields200_response_fields_inner_spec.rb
 spec/models/list_custom_fields200_response_spec.rb
+spec/models/list_discord_guild_members200_response_data_inner_spec.rb
+spec/models/list_discord_guild_members200_response_data_inner_user_spec.rb
+spec/models/list_discord_guild_members200_response_pagination_spec.rb
+spec/models/list_discord_guild_members200_response_spec.rb
+spec/models/list_discord_guild_roles200_response_data_inner_spec.rb
+spec/models/list_discord_guild_roles200_response_spec.rb
+spec/models/list_discord_pinned_messages200_response_data_inner_spec.rb
+spec/models/list_discord_pinned_messages200_response_spec.rb
+spec/models/list_discord_scheduled_events200_response_spec.rb
 spec/models/list_facebook_pages200_response_pages_inner_spec.rb
 spec/models/list_facebook_pages200_response_spec.rb
 spec/models/list_form_leads200_response_leads_inner_spec.rb
@@ -2961,6 +3036,7 @@ spec/models/on_whats_app_number_verification_required_request_spec.rb
 spec/models/pagination_spec.rb
 spec/models/pause_workflow200_response_spec.rb
 spec/models/pending_spec.rb
+spec/models/pin_discord_message200_response_spec.rb
 spec/models/pinterest_platform_data_spec.rb
 spec/models/platform_analytics_spec.rb
 spec/models/platform_target_account_id_spec.rb
@@ -3004,6 +3080,7 @@ spec/models/release_whats_app_phone_number200_response_phone_number_spec.rb
 spec/models/release_whats_app_phone_number200_response_spec.rb
 spec/models/remove_bookmark200_response_spec.rb
 spec/models/remove_conversion_associations200_response_spec.rb
+spec/models/remove_discord_member_role200_response_spec.rb
 spec/models/remove_whats_app_group_participants_request_spec.rb
 spec/models/reply_to_google_business_review200_response_spec.rb
 spec/models/reply_to_google_business_review_request_spec.rb
@@ -3055,6 +3132,11 @@ spec/models/send_conversions200_response_failures_inner_spec.rb
 spec/models/send_conversions200_response_spec.rb
 spec/models/send_conversions_request_consent_spec.rb
 spec/models/send_conversions_request_spec.rb
+spec/models/send_discord_direct_message200_response_account_spec.rb
+spec/models/send_discord_direct_message200_response_recipient_spec.rb
+spec/models/send_discord_direct_message200_response_spec.rb
+spec/models/send_discord_direct_message_request_attachments_inner_spec.rb
+spec/models/send_discord_direct_message_request_spec.rb
 spec/models/send_inbox_message200_response_data_spec.rb
 spec/models/send_inbox_message200_response_spec.rb
 spec/models/send_inbox_message400_response_spec.rb
@@ -3135,6 +3217,7 @@ spec/models/twitter_platform_data_thread_items_inner_spec.rb
 spec/models/undo_retweet200_response_spec.rb
 spec/models/unfollow_user200_response_spec.rb
 spec/models/unlike_inbox_comment200_response_spec.rb
+spec/models/unpin_discord_message200_response_spec.rb
 spec/models/unpublish_post200_response_spec.rb
 spec/models/unpublish_post_request_spec.rb
 spec/models/update_account200_response_spec.rb
@@ -3175,6 +3258,7 @@ spec/models/update_conversion_destination_request_value_spec.rb
 spec/models/update_custom_field200_response_field_spec.rb
 spec/models/update_custom_field200_response_spec.rb
 spec/models/update_custom_field_request_spec.rb
+spec/models/update_discord_scheduled_event_request_spec.rb
 spec/models/update_discord_settings200_response_account_spec.rb
 spec/models/update_discord_settings200_response_spec.rb
 spec/models/update_discord_settings_request_spec.rb

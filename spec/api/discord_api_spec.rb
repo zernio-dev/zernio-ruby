@@ -32,6 +32,48 @@ describe 'DiscordApi' do
     end
   end
 
+  # unit tests for add_discord_member_role
+  # Assign a role to a guild member
+  # Assign one role to one member. Idempotent on Discord&#39;s side — re-running on a member who already has the role is a 204 no-op.  Path shape mirrors Discord&#39;s own API (&#x60;PUT /guilds/{guild}/members/{user}/roles/{role}&#x60;) for zero-translation mental mapping.  Bot needs MANAGE_ROLES permission in the guild AND its highest role must be above the target role (Discord hierarchy rule). The &#x60;@everyone&#x60; role (where roleId &#x3D;&#x3D; guildId) cannot be assigned. 
+  # @param guild_id 
+  # @param user_id Discord user snowflake to assign the role to.
+  # @param role_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [AddDiscordMemberRole200Response]
+  describe 'add_discord_member_role test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_discord_scheduled_event
+  # Create a Discord scheduled event
+  # Create a guild scheduled event. Three event types, selected via the discriminator on &#x60;entity.type&#x60;:    - &#x60;external&#x60; — off-platform (Zoom, in-person, livestream). Requires     both &#x60;location&#x60; and &#x60;endsAt&#x60;. Most common type for scheduler     integrations.   - &#x60;voice&#x60; — hosted in a Discord voice channel. Requires &#x60;channelId&#x60;.   - &#x60;stage&#x60; — hosted in a Discord stage channel. Requires &#x60;channelId&#x60;.  Bot needs MANAGE_EVENTS in the guild. Existing installs (pre-events PR) need a re-invite OR a server admin manually granting the permission — see route header for details. 
+  # @param guild_id 
+  # @param create_discord_scheduled_event_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateDiscordScheduledEvent200Response]
+  describe 'create_discord_scheduled_event test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_discord_scheduled_event
+  # Delete a Discord scheduled event
+  # Hard-delete an event. Use PATCH with &#x60;status: &#39;cancelled&#39;&#x60; instead if you want the event preserved in the guild&#39;s history. 
+  # @param guild_id 
+  # @param event_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteDiscordScheduledEvent200Response]
+  describe 'delete_discord_scheduled_event test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_discord_channels
   # List Discord guild channels
   # Returns the text, announcement, and forum channels in the connected Discord guild. Use this to discover available channels when switching the connected channel via PATCH /v1/accounts/{accountId}/discord-settings.
@@ -44,6 +86,19 @@ describe 'DiscordApi' do
     end
   end
 
+  # unit tests for get_discord_scheduled_event
+  # Get a Discord scheduled event
+  # @param guild_id 
+  # @param event_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateDiscordScheduledEvent200Response]
+  describe 'get_discord_scheduled_event test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_discord_settings
   # Get Discord account settings
   # Returns the current Discord account settings including webhook identity (display name and avatar), connected channel, and guild information.
@@ -51,6 +106,130 @@ describe 'DiscordApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetDiscordSettings200Response]
   describe 'get_discord_settings test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_discord_guild_members
+  # List Discord guild members
+  # Cursor-paginated list of guild members. Returns Discord&#39;s raw member objects so callers can build community-ops automation (e.g. \&quot;add role to all members joined in the last 7 days\&quot;) on the actual platform shape.  **Important:** this endpoint requires the privileged \&quot;Server Members Intent\&quot; enabled on the Discord app (Developer Portal → Bot tab → toggle \&quot;Server Members Intent\&quot; ON, then Save). Without it, Discord returns an empty array with no error. Verify the intent is enabled before relying on this endpoint.  Pagination: pass &#x60;after&#x60; &#x3D; the last &#x60;user.id&#x60; from the previous page. Omit on the first call. Response includes a &#x60;nextCursor&#x60; and &#x60;hasMore&#x60; flag so callers don&#39;t need to know Discord&#39;s pagination shape. 
+  # @param guild_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Page size (1-1000).
+  # @option opts [String] :after Snowflake of the last member from the previous page.
+  # @return [ListDiscordGuildMembers200Response]
+  describe 'list_discord_guild_members test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_discord_guild_roles
+  # List Discord guild roles
+  # Returns all roles in a Discord guild. Useful for building role-mention pickers, role-permission UIs, or finding the role ID before calling the role-assign endpoint.  Roles are returned unordered — sort client-side by &#x60;position&#x60; if you need Discord&#39;s UI ordering.  Caller must pass &#x60;accountId&#x60; of a Discord SocialAccount bound to this guild (route verifies team access + guild match). 
+  # @param guild_id Discord guild snowflake ID
+  # @param account_id SocialAccount _id of the Discord account bound to this guild
+  # @param [Hash] opts the optional parameters
+  # @return [ListDiscordGuildRoles200Response]
+  describe 'list_discord_guild_roles test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_discord_pinned_messages
+  # List pinned messages in a Discord channel
+  # Returns the channel&#39;s pinned messages, sorted most-recently-pinned first. Discord caps a channel at 50 pinned messages and returns the full list unpaginated.  Bot needs READ_MESSAGE_HISTORY in the channel (granted by default BOT_PERMISSIONS). 
+  # @param channel_id Discord channel snowflake.
+  # @param account_id SocialAccount _id of any Discord account in the same guild.
+  # @param [Hash] opts the optional parameters
+  # @return [ListDiscordPinnedMessages200Response]
+  describe 'list_discord_pinned_messages test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_discord_scheduled_events
+  # List Discord scheduled events
+  # Return all scheduled events in the guild. Events are distinct from messages — they appear in the server&#39;s Events panel and Discord auto-notifies interested members ahead of start time.  Pass &#x60;withUserCount&#x3D;true&#x60; to include &#x60;user_count&#x60; (number of members who RSVP&#39;d) on each event. Useful for surfacing engagement. 
+  # @param guild_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :with_user_count Include user_count on each event.
+  # @return [ListDiscordScheduledEvents200Response]
+  describe 'list_discord_scheduled_events test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for pin_discord_message
+  # Pin a Discord message
+  # Pin a specific message in a channel. Path shape mirrors Discord&#39;s own API (&#x60;PUT /channels/{cid}/pins/{mid}&#x60;).  Idempotent — re-pinning an already-pinned message is a 204 no-op.  Constraints:   - Bot needs MANAGE_MESSAGES in the channel.   - 50-pin cap per channel — hitting it returns 400 (Discord-side).     Caller should unpin one first. 
+  # @param channel_id 
+  # @param message_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [PinDiscordMessage200Response]
+  describe 'pin_discord_message test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for remove_discord_member_role
+  # Remove a role from a guild member
+  # Remove one role from one member. Idempotent — removing a role the member doesn&#39;t have returns 204 no-op.  Same permission + hierarchy constraints as the PUT counterpart. 
+  # @param guild_id 
+  # @param user_id 
+  # @param role_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [RemoveDiscordMemberRole200Response]
+  describe 'remove_discord_member_role test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for send_discord_direct_message
+  # Send a Discord Direct Message
+  # Send a 1:1 Direct Message from the bot to a Discord user (by snowflake ID). Supports the same payload shape as channel posts — content, embeds, media attachments, and TTS.  Constraints (Discord platform limits):   - The bot can only DM users it shares at least one guild with.   - If the recipient has DMs disabled for non-friends, Discord returns 403     (surfaces as a 502 platform error).   - &#x60;content&#x60; capped at 2,000 chars.   - At least one of &#x60;content&#x60;, &#x60;embeds&#x60;, or &#x60;attachments&#x60; is required.   - The recipient must be identified by Discord snowflake ID (not username).  This is a dedicated endpoint rather than a &#x60;POST /v1/posts&#x60; variant because DMs are 1:1 operational messages (onboarding, billing reminders, support pings) with a different lifecycle than scheduled channel posts. DMs are not persisted to &#x60;Post&#x60; / &#x60;ExternalPost&#x60; and are always sent immediately. 
+  # @param send_discord_direct_message_request 
+  # @param [Hash] opts the optional parameters
+  # @return [SendDiscordDirectMessage200Response]
+  describe 'send_discord_direct_message test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for unpin_discord_message
+  # Unpin a Discord message
+  # Unpin a message. Same MANAGE_MESSAGES permission requirement as pin. Idempotent — unpinning a non-pinned message is a 204 no-op. 
+  # @param channel_id 
+  # @param message_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [UnpinDiscordMessage200Response]
+  describe 'unpin_discord_message test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_discord_scheduled_event
+  # Update a Discord scheduled event
+  # Patch any subset of fields. Passing &#x60;status: &#39;cancelled&#39;&#x60; is how you cancel an event — Discord doesn&#39;t have a dedicated cancel endpoint, it&#39;s a status transition.  Most status transitions Discord enforces (you can&#39;t go SCHEDULED → COMPLETED directly). The common consumer case is SCHEDULED → CANCELED. 
+  # @param guild_id 
+  # @param event_id 
+  # @param update_discord_scheduled_event_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateDiscordScheduledEvent200Response]
+  describe 'update_discord_scheduled_event test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -49,7 +49,7 @@ describe 'WhatsAppSandboxApi' do
   # Hard-deletes the session. The user loses the ability to send to that phone via the sandbox until they re-activate it. Existing conversations and messages already exchanged with that phone are untouched — revocation only blocks FUTURE sends.  Sessions belonging to other users cannot be revoked; the response is the same 400 as \&quot;session not found\&quot; so existence isn&#39;t leaked. 
   # @param session_id The session id returned by POST /v1/whatsapp/sandbox/sessions.
   # @param [Hash] opts the optional parameters
-  # @return [DeleteWhatsAppSandboxSession200Response]
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'delete_whats_app_sandbox_session test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

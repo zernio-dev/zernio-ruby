@@ -91,7 +91,7 @@ module Zernio
     # Hard-deletes the session. The user loses the ability to send to that phone via the sandbox until they re-activate it. Existing conversations and messages already exchanged with that phone are untouched — revocation only blocks FUTURE sends.  Sessions belonging to other users cannot be revoked; the response is the same 400 as \"session not found\" so existence isn't leaked. 
     # @param session_id [String] The session id returned by POST /v1/whatsapp/sandbox/sessions.
     # @param [Hash] opts the optional parameters
-    # @return [DeleteWhatsAppSandboxSession200Response]
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
     def delete_whats_app_sandbox_session(session_id, opts = {})
       data, _status_code, _headers = delete_whats_app_sandbox_session_with_http_info(session_id, opts)
       data
@@ -101,7 +101,7 @@ module Zernio
     # Hard-deletes the session. The user loses the ability to send to that phone via the sandbox until they re-activate it. Existing conversations and messages already exchanged with that phone are untouched — revocation only blocks FUTURE sends.  Sessions belonging to other users cannot be revoked; the response is the same 400 as \&quot;session not found\&quot; so existence isn&#39;t leaked. 
     # @param session_id [String] The session id returned by POST /v1/whatsapp/sandbox/sessions.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(DeleteWhatsAppSandboxSession200Response, Integer, Hash)>] DeleteWhatsAppSandboxSession200Response data, response status code and response headers
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
     def delete_whats_app_sandbox_session_with_http_info(session_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppSandboxApi.delete_whats_app_sandbox_session ...'
@@ -128,7 +128,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'DeleteWhatsAppSandboxSession200Response'
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
