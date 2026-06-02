@@ -39,6 +39,16 @@ describe Zernio::CreateCommentAutomationRequest do
     end
   end
 
+  describe 'test attribute "trigger"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.trigger = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "platform_post_id"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

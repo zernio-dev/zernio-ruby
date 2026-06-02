@@ -7,6 +7,7 @@
 | **id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
+| **trigger** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **platform_post_id** | **String** |  | [optional] |
 | **post_title** | **String** |  | [optional] |
@@ -30,6 +31,7 @@ instance = Zernio::ListCommentAutomations200ResponseAutomationsInner.new(
   id: null,
   name: null,
   platform: null,
+  trigger: null,
   account_id: null,
   platform_post_id: null,
   post_title: null,

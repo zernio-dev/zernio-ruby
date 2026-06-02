@@ -21,6 +21,8 @@ module Zernio
 
     attr_accessor :platform
 
+    attr_accessor :trigger
+
     attr_accessor :platform_post_id
 
     attr_accessor :keywords
@@ -72,6 +74,7 @@ module Zernio
         :'id' => :'id',
         :'name' => :'name',
         :'platform' => :'platform',
+        :'trigger' => :'trigger',
         :'platform_post_id' => :'platformPostId',
         :'keywords' => :'keywords',
         :'match_mode' => :'matchMode',
@@ -102,6 +105,7 @@ module Zernio
         :'id' => :'String',
         :'name' => :'String',
         :'platform' => :'String',
+        :'trigger' => :'String',
         :'platform_post_id' => :'String',
         :'keywords' => :'Array<String>',
         :'match_mode' => :'String',
@@ -148,6 +152,10 @@ module Zernio
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
+      end
+
+      if attributes.key?(:'trigger')
+        self.trigger = attributes[:'trigger']
       end
 
       if attributes.key?(:'platform_post_id')
@@ -211,9 +219,21 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      trigger_validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      return false unless trigger_validator.valid?(@trigger)
       match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains"])
       return false unless match_mode_validator.valid?(@match_mode)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] trigger Object to be assigned
+    def trigger=(trigger)
+      validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      unless validator.valid?(trigger)
+        fail ArgumentError, "invalid value for \"trigger\", must be one of #{validator.allowable_values}."
+      end
+      @trigger = trigger
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -234,6 +254,7 @@ module Zernio
           id == o.id &&
           name == o.name &&
           platform == o.platform &&
+          trigger == o.trigger &&
           platform_post_id == o.platform_post_id &&
           keywords == o.keywords &&
           match_mode == o.match_mode &&
@@ -256,7 +277,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, platform_post_id, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, click_tag, is_active, stats, created_at].hash
+      [id, name, platform, trigger, platform_post_id, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, click_tag, is_active, stats, created_at].hash
     end
 
     # Builds the object from hash

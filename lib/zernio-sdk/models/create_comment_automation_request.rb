@@ -20,7 +20,10 @@ module Zernio
     # Instagram or Facebook account ID
     attr_accessor :account_id
 
-    # Platform media/post ID. Omit for an account-wide (any-post) automation.
+    # What fires the automation. 'comment' (keyword comment on a post) or 'story_reply' (keyword reply to an Instagram story). For 'story_reply', platformPostId is the story media id (omit for any story).
+    attr_accessor :trigger
+
+    # Platform media/post ID (or story media id when trigger=story_reply). Omit for an account-wide (any-post / any-story) automation.
     attr_accessor :platform_post_id
 
     # Zernio post ID. Required only when also targeting a specific post via platformPostId.
@@ -79,6 +82,7 @@ module Zernio
       {
         :'profile_id' => :'profileId',
         :'account_id' => :'accountId',
+        :'trigger' => :'trigger',
         :'platform_post_id' => :'platformPostId',
         :'post_id' => :'postId',
         :'post_title' => :'postTitle',
@@ -108,6 +112,7 @@ module Zernio
       {
         :'profile_id' => :'String',
         :'account_id' => :'String',
+        :'trigger' => :'String',
         :'platform_post_id' => :'String',
         :'post_id' => :'String',
         :'post_title' => :'String',
@@ -154,6 +159,12 @@ module Zernio
         self.account_id = attributes[:'account_id']
       else
         self.account_id = nil
+      end
+
+      if attributes.key?(:'trigger')
+        self.trigger = attributes[:'trigger']
+      else
+        self.trigger = 'comment'
       end
 
       if attributes.key?(:'platform_post_id')
@@ -247,6 +258,8 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @profile_id.nil?
       return false if @account_id.nil?
+      trigger_validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      return false unless trigger_validator.valid?(@trigger)
       return false if @name.nil?
       match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains"])
       return false unless match_mode_validator.valid?(@match_mode)
@@ -273,6 +286,16 @@ module Zernio
       end
 
       @account_id = account_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] trigger Object to be assigned
+    def trigger=(trigger)
+      validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      unless validator.valid?(trigger)
+        fail ArgumentError, "invalid value for \"trigger\", must be one of #{validator.allowable_values}."
+      end
+      @trigger = trigger
     end
 
     # Custom attribute writer method with validation
@@ -326,6 +349,7 @@ module Zernio
       self.class == o.class &&
           profile_id == o.profile_id &&
           account_id == o.account_id &&
+          trigger == o.trigger &&
           platform_post_id == o.platform_post_id &&
           post_id == o.post_id &&
           post_title == o.post_title &&
@@ -348,7 +372,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, click_tag].hash
+      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, click_tag].hash
     end
 
     # Builds the object from hash

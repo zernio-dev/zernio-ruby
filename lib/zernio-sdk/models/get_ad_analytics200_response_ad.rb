@@ -21,10 +21,34 @@ module Zernio
 
     attr_accessor :platform
 
+    attr_accessor :trigger
+
     attr_accessor :status
 
     # ISO 4217 code of the ad account that owns this ad (e.g. USD, THB, INR). All money values in `summary` and `daily` are in this currency. Null only on legacy ads synced before currency was persisted.
     attr_accessor :currency
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -32,6 +56,7 @@ module Zernio
         :'id' => :'id',
         :'name' => :'name',
         :'platform' => :'platform',
+        :'trigger' => :'trigger',
         :'status' => :'status',
         :'currency' => :'currency'
       }
@@ -53,6 +78,7 @@ module Zernio
         :'id' => :'String',
         :'name' => :'String',
         :'platform' => :'String',
+        :'trigger' => :'String',
         :'status' => :'String',
         :'currency' => :'String'
       }
@@ -92,6 +118,10 @@ module Zernio
         self.platform = attributes[:'platform']
       end
 
+      if attributes.key?(:'trigger')
+        self.trigger = attributes[:'trigger']
+      end
+
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
@@ -113,7 +143,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      trigger_validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      return false unless trigger_validator.valid?(@trigger)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] trigger Object to be assigned
+    def trigger=(trigger)
+      validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      unless validator.valid?(trigger)
+        fail ArgumentError, "invalid value for \"trigger\", must be one of #{validator.allowable_values}."
+      end
+      @trigger = trigger
     end
 
     # Checks equality by comparing each attribute.
@@ -124,6 +166,7 @@ module Zernio
           id == o.id &&
           name == o.name &&
           platform == o.platform &&
+          trigger == o.trigger &&
           status == o.status &&
           currency == o.currency
     end
@@ -137,7 +180,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, status, currency].hash
+      [id, name, platform, trigger, status, currency].hash
     end
 
     # Builds the object from hash

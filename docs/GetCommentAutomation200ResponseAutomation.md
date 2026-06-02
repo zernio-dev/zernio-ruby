@@ -7,6 +7,7 @@
 | **id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
+| **trigger** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **platform_post_id** | **String** |  | [optional] |
 | **post_id** | **String** |  | [optional] |
@@ -32,6 +33,7 @@ instance = Zernio::GetCommentAutomation200ResponseAutomation.new(
   id: null,
   name: null,
   platform: null,
+  trigger: null,
   account_id: null,
   platform_post_id: null,
   post_id: null,
