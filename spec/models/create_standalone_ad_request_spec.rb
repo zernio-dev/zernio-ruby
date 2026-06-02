@@ -71,6 +71,16 @@ describe Zernio::CreateStandaloneAdRequest do
     end
   end
 
+  describe 'test attribute "budget_level"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["adset", "campaign"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.budget_level = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "currency"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -241,6 +251,12 @@ describe Zernio::CreateStandaloneAdRequest do
     end
   end
 
+  describe 'test attribute "placements"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "saved_targeting_id"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -258,6 +274,24 @@ describe Zernio::CreateStandaloneAdRequest do
   end
 
   describe 'test attribute "end_date"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "start_date"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "instagram_account_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "dynamic_creative"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

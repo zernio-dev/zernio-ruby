@@ -30,6 +30,9 @@ module Zernio
     # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_type
 
+    # Meta only. Where the budget lives, which selects the Meta budget model:   - `adset` (default): ABO (Ad-set Budget Optimization). The budget is set on the     ad set. This is the back-compatible behaviour — omit this field to keep it.   - `campaign`: CBO (Campaign Budget Optimization / Advantage Campaign Budget). The     budget AND `bidStrategy` are set on the CAMPAIGN, and Meta distributes spend     across ad sets automatically. Meta requires the budget at exactly one level, never both. Non-Meta platforms ignore this field. Ignored on the attach shape (`adSetId`), which inherits the existing budget. 
+    attr_accessor :budget_level
+
     attr_accessor :currency
 
     # Required for Meta, Google, Pinterest, and LinkedIn on legacy + attach shapes (skip for multi-creative — use `creatives[].headline`). Ignored for TikTok and X/Twitter. Max: Meta=255, Google=30, Pinterest=100, LinkedIn=400. On LinkedIn this is the ad's headline (the bold text on the creative); for traffic ads it's the link card title.
@@ -106,6 +109,8 @@ module Zernio
     # Language codes (e.g. ['en']). Restricts the audience by language.
     attr_accessor :languages
 
+    attr_accessor :placements
+
     # ID of a `saved_targeting` audience (created via POST /v1/ads/audiences). When set, its stored TargetingSpec is expanded as the base targeting; inline fields on this body merge on top. Lets you reuse a named targeting preset without re-sending every field. 
     attr_accessor :saved_targeting_id
 
@@ -114,6 +119,14 @@ module Zernio
 
     # Required for lifetime budgets
     attr_accessor :end_date
+
+    # Meta only. Ad-set start time (ISO 8601, e.g. \"2026-06-10T09:00:00Z\"), mapped to the ad set's `start_time`. When omitted the ad starts delivering immediately. For lifetime budgets Meta also requires `endDate`. (Same `schedule.startDate` semantics already available on `POST /v1/ads/boost`.) 
+    attr_accessor :start_date
+
+    # Meta only. Override the Instagram account the ad is delivered as — pass an Instagram Business Account ID (e.g. 17841...), mapped to the creative's `instagram_user_id`. When omitted we auto-resolve the IG account linked to the connected Facebook Page (the existing default). Useful when a Page has more than one eligible IG account. 
+    attr_accessor :instagram_account_id
+
+    attr_accessor :dynamic_creative
 
     # Custom audience ID for targeting
     attr_accessor :audience_id
@@ -192,6 +205,7 @@ module Zernio
         :'goal' => :'goal',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
+        :'budget_level' => :'budgetLevel',
         :'currency' => :'currency',
         :'headline' => :'headline',
         :'long_headline' => :'longHeadline',
@@ -219,9 +233,13 @@ module Zernio
         :'behaviors' => :'behaviors',
         :'income_tier' => :'incomeTier',
         :'languages' => :'languages',
+        :'placements' => :'placements',
         :'saved_targeting_id' => :'savedTargetingId',
         :'special_ad_categories' => :'specialAdCategories',
         :'end_date' => :'endDate',
+        :'start_date' => :'startDate',
+        :'instagram_account_id' => :'instagramAccountId',
+        :'dynamic_creative' => :'dynamicCreative',
         :'audience_id' => :'audienceId',
         :'campaign_type' => :'campaignType',
         :'keywords' => :'keywords',
@@ -260,6 +278,7 @@ module Zernio
         :'goal' => :'String',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
+        :'budget_level' => :'String',
         :'currency' => :'String',
         :'headline' => :'String',
         :'long_headline' => :'String',
@@ -287,9 +306,13 @@ module Zernio
         :'behaviors' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
         :'income_tier' => :'String',
         :'languages' => :'Array<String>',
+        :'placements' => :'CreateStandaloneAdRequestPlacements',
         :'saved_targeting_id' => :'String',
         :'special_ad_categories' => :'Array<String>',
         :'end_date' => :'Time',
+        :'start_date' => :'Time',
+        :'instagram_account_id' => :'String',
+        :'dynamic_creative' => :'CreateStandaloneAdRequestDynamicCreative',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
         :'keywords' => :'Array<String>',
@@ -359,6 +382,12 @@ module Zernio
 
       if attributes.key?(:'budget_type')
         self.budget_type = attributes[:'budget_type']
+      end
+
+      if attributes.key?(:'budget_level')
+        self.budget_level = attributes[:'budget_level']
+      else
+        self.budget_level = 'adset'
       end
 
       if attributes.key?(:'currency')
@@ -489,6 +518,10 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'placements')
+        self.placements = attributes[:'placements']
+      end
+
       if attributes.key?(:'saved_targeting_id')
         self.saved_targeting_id = attributes[:'saved_targeting_id']
       end
@@ -501,6 +534,18 @@ module Zernio
 
       if attributes.key?(:'end_date')
         self.end_date = attributes[:'end_date']
+      end
+
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
+      end
+
+      if attributes.key?(:'instagram_account_id')
+        self.instagram_account_id = attributes[:'instagram_account_id']
+      end
+
+      if attributes.key?(:'dynamic_creative')
+        self.dynamic_creative = attributes[:'dynamic_creative']
       end
 
       if attributes.key?(:'audience_id')
@@ -660,6 +705,8 @@ module Zernio
       return false unless goal_validator.valid?(@goal)
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
+      budget_level_validator = EnumAttributeValidator.new('String', ["adset", "campaign"])
+      return false unless budget_level_validator.valid?(@budget_level)
       return false if !@long_headline.nil? && @long_headline.to_s.length > 90
       call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
       return false unless call_to_action_validator.valid?(@call_to_action)
@@ -738,6 +785,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"budget_type\", must be one of #{validator.allowable_values}."
       end
       @budget_type = budget_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] budget_level Object to be assigned
+    def budget_level=(budget_level)
+      validator = EnumAttributeValidator.new('String', ["adset", "campaign"])
+      unless validator.valid?(budget_level)
+        fail ArgumentError, "invalid value for \"budget_level\", must be one of #{validator.allowable_values}."
+      end
+      @budget_level = budget_level
     end
 
     # Custom attribute writer method with validation
@@ -935,6 +992,7 @@ module Zernio
           goal == o.goal &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
+          budget_level == o.budget_level &&
           currency == o.currency &&
           headline == o.headline &&
           long_headline == o.long_headline &&
@@ -962,9 +1020,13 @@ module Zernio
           behaviors == o.behaviors &&
           income_tier == o.income_tier &&
           languages == o.languages &&
+          placements == o.placements &&
           saved_targeting_id == o.saved_targeting_id &&
           special_ad_categories == o.special_ad_categories &&
           end_date == o.end_date &&
+          start_date == o.start_date &&
+          instagram_account_id == o.instagram_account_id &&
+          dynamic_creative == o.dynamic_creative &&
           audience_id == o.audience_id &&
           campaign_type == o.campaign_type &&
           keywords == o.keywords &&
@@ -992,7 +1054,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, saved_targeting_id, special_ad_categories, end_date, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, budget_level, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash
