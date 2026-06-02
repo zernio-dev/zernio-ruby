@@ -128,6 +128,8 @@ module Zernio
 
     attr_accessor :dynamic_creative
 
+    attr_accessor :placement_assets
+
     # Custom audience ID for targeting
     attr_accessor :audience_id
 
@@ -240,6 +242,7 @@ module Zernio
         :'start_date' => :'startDate',
         :'instagram_account_id' => :'instagramAccountId',
         :'dynamic_creative' => :'dynamicCreative',
+        :'placement_assets' => :'placementAssets',
         :'audience_id' => :'audienceId',
         :'campaign_type' => :'campaignType',
         :'keywords' => :'keywords',
@@ -313,6 +316,7 @@ module Zernio
         :'start_date' => :'Time',
         :'instagram_account_id' => :'String',
         :'dynamic_creative' => :'CreateStandaloneAdRequestDynamicCreative',
+        :'placement_assets' => :'CreateStandaloneAdRequestPlacementAssets',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
         :'keywords' => :'Array<String>',
@@ -546,6 +550,10 @@ module Zernio
 
       if attributes.key?(:'dynamic_creative')
         self.dynamic_creative = attributes[:'dynamic_creative']
+      end
+
+      if attributes.key?(:'placement_assets')
+        self.placement_assets = attributes[:'placement_assets']
       end
 
       if attributes.key?(:'audience_id')
@@ -1027,6 +1035,7 @@ module Zernio
           start_date == o.start_date &&
           instagram_account_id == o.instagram_account_id &&
           dynamic_creative == o.dynamic_creative &&
+          placement_assets == o.placement_assets &&
           audience_id == o.audience_id &&
           campaign_type == o.campaign_type &&
           keywords == o.keywords &&
@@ -1054,7 +1063,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, budget_level, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, budget_level, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

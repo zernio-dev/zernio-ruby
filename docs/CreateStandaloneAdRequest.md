@@ -45,6 +45,7 @@
 | **start_date** | **Time** | Meta only. Ad-set start time (ISO 8601, e.g. \&quot;2026-06-10T09:00:00Z\&quot;), mapped to the ad set&#39;s &#x60;start_time&#x60;. When omitted the ad starts delivering immediately. For lifetime budgets Meta also requires &#x60;endDate&#x60;. (Same &#x60;schedule.startDate&#x60; semantics already available on &#x60;POST /v1/ads/boost&#x60;.)  | [optional] |
 | **instagram_account_id** | **String** | Meta only. Override the Instagram account the ad is delivered as — pass an Instagram Business Account ID (e.g. 17841...), mapped to the creative&#39;s &#x60;instagram_user_id&#x60;. When omitted we auto-resolve the IG account linked to the connected Facebook Page (the existing default). Useful when a Page has more than one eligible IG account.  | [optional] |
 | **dynamic_creative** | [**CreateStandaloneAdRequestDynamicCreative**](CreateStandaloneAdRequestDynamicCreative.md) |  | [optional] |
+| **placement_assets** | [**CreateStandaloneAdRequestPlacementAssets**](CreateStandaloneAdRequestPlacementAssets.md) |  | [optional] |
 | **audience_id** | **String** | Custom audience ID for targeting | [optional] |
 | **campaign_type** | **String** | Google only | [optional][default to &#39;display&#39;] |
 | **keywords** | **Array&lt;String&gt;** | Google Search only | [optional] |
@@ -109,6 +110,7 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   start_date: null,
   instagram_account_id: null,
   dynamic_creative: null,
+  placement_assets: null,
   audience_id: null,
   campaign_type: null,
   keywords: null,
