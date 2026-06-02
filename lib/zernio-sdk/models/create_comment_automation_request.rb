@@ -46,6 +46,9 @@ module Zernio
     # Optional public reply to the comment
     attr_accessor :comment_reply
 
+    # Wrap link buttons in the DM in a tracked redirect so clicks are counted (Link Clicks / CTR). Pass false to send links exactly as written. Defaults to on.
+    attr_accessor :link_tracking
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -81,7 +84,8 @@ module Zernio
         :'match_mode' => :'matchMode',
         :'dm_message' => :'dmMessage',
         :'buttons' => :'buttons',
-        :'comment_reply' => :'commentReply'
+        :'comment_reply' => :'commentReply',
+        :'link_tracking' => :'linkTracking'
       }
     end
 
@@ -108,7 +112,8 @@ module Zernio
         :'match_mode' => :'String',
         :'dm_message' => :'String',
         :'buttons' => :'Array<DmButton>',
-        :'comment_reply' => :'String'
+        :'comment_reply' => :'String',
+        :'link_tracking' => :'Boolean'
       }
     end
 
@@ -190,6 +195,12 @@ module Zernio
 
       if attributes.key?(:'comment_reply')
         self.comment_reply = attributes[:'comment_reply']
+      end
+
+      if attributes.key?(:'link_tracking')
+        self.link_tracking = attributes[:'link_tracking']
+      else
+        self.link_tracking = true
       end
     end
 
@@ -314,7 +325,8 @@ module Zernio
           match_mode == o.match_mode &&
           dm_message == o.dm_message &&
           buttons == o.buttons &&
-          comment_reply == o.comment_reply
+          comment_reply == o.comment_reply &&
+          link_tracking == o.link_tracking
     end
 
     # @see the `==` method
@@ -326,7 +338,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply].hash
+      [profile_id, account_id, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking].hash
     end
 
     # Builds the object from hash

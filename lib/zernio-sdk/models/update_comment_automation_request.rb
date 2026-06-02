@@ -28,6 +28,9 @@ module Zernio
 
     attr_accessor :comment_reply
 
+    # Wrap link buttons in a tracked redirect to count clicks. Pass false to send links untouched.
+    attr_accessor :link_tracking
+
     attr_accessor :is_active
 
     class EnumAttributeValidator
@@ -61,6 +64,7 @@ module Zernio
         :'dm_message' => :'dmMessage',
         :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
+        :'link_tracking' => :'linkTracking',
         :'is_active' => :'isActive'
       }
     end
@@ -84,6 +88,7 @@ module Zernio
         :'dm_message' => :'String',
         :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
+        :'link_tracking' => :'Boolean',
         :'is_active' => :'Boolean'
       }
     end
@@ -136,6 +141,10 @@ module Zernio
 
       if attributes.key?(:'comment_reply')
         self.comment_reply = attributes[:'comment_reply']
+      end
+
+      if attributes.key?(:'link_tracking')
+        self.link_tracking = attributes[:'link_tracking']
       end
 
       if attributes.key?(:'is_active')
@@ -200,6 +209,7 @@ module Zernio
           dm_message == o.dm_message &&
           buttons == o.buttons &&
           comment_reply == o.comment_reply &&
+          link_tracking == o.link_tracking &&
           is_active == o.is_active
     end
 
@@ -212,7 +222,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, keywords, match_mode, dm_message, buttons, comment_reply, is_active].hash
+      [name, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, is_active].hash
     end
 
     # Builds the object from hash

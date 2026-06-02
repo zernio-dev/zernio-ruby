@@ -8,6 +8,8 @@
 | **dms_sent** | **Integer** |  | [optional] |
 | **dms_failed** | **Integer** |  | [optional] |
 | **unique_contacts** | **Integer** |  | [optional] |
+| **link_clicks** | **Integer** | Total clicks on tracked links (bots/prefetch excluded). | [optional] |
+| **unique_clicks** | **Integer** | Distinct people who clicked a tracked link. | [optional] |
 
 ## Example
 
@@ -18,7 +20,9 @@ instance = Zernio::ListCommentAutomations200ResponseAutomationsInnerStats.new(
   triggered: null,
   dms_sent: null,
   dms_failed: null,
-  unique_contacts: null
+  unique_contacts: null,
+  link_clicks: null,
+  unique_clicks: null
 )
 ```
 

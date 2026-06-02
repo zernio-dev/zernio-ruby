@@ -15,6 +15,7 @@
 | **dm_message** | **String** |  | [optional] |
 | **buttons** | [**Array&lt;DmButton&gt;**](DmButton.md) | Inline DM buttons (up to 3). Omitted when none are set. | [optional] |
 | **comment_reply** | **String** |  | [optional] |
+| **link_tracking** | **Boolean** | Whether link buttons in the DM are wrapped in a tracked redirect to count clicks. | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **stats** | [**ListCommentAutomations200ResponseAutomationsInnerStats**](ListCommentAutomations200ResponseAutomationsInnerStats.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
@@ -36,6 +37,7 @@ instance = Zernio::ListCommentAutomations200ResponseAutomationsInner.new(
   dm_message: null,
   buttons: null,
   comment_reply: null,
+  link_tracking: null,
   is_active: null,
   stats: null,
   created_at: null

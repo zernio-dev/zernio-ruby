@@ -10,6 +10,7 @@
 | **dm_message** | **String** |  | [optional] |
 | **buttons** | [**Array&lt;DmButton&gt;**](DmButton.md) | Inline DM buttons (1-3). Pass [] to clear all buttons. | [optional] |
 | **comment_reply** | **String** |  | [optional] |
+| **link_tracking** | **Boolean** | Wrap link buttons in a tracked redirect to count clicks. Pass false to send links untouched. | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 
 ## Example
@@ -24,6 +25,7 @@ instance = Zernio::UpdateCommentAutomationRequest.new(
   dm_message: null,
   buttons: null,
   comment_reply: null,
+  link_tracking: null,
   is_active: null
 )
 ```
