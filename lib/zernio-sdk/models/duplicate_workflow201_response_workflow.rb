@@ -14,29 +14,62 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateWorkflowRequest < ApiModelBase
+  class DuplicateWorkflow201ResponseWorkflow < ApiModelBase
+    attr_accessor :id
+
     attr_accessor :name
 
     attr_accessor :description
 
-    attr_accessor :nodes
+    attr_accessor :status
 
-    attr_accessor :edges
+    attr_accessor :platform
+
+    attr_accessor :account_id
+
+    attr_accessor :profile_id
 
     attr_accessor :entry_node_id
 
-    # Reassign the workflow to a different `SocialAccount`. `platform` and `profileId` are derived server-side from the new account (the client never sends them directly). The account must belong to the caller's workspace and be on a workflow-supported platform (whatsapp, instagram, facebook, telegram, twitter, bluesky, reddit). Changing this triggers a graph revalidation against the new platform. 
-    attr_accessor :account_id
+    attr_accessor :node_count
+
+    attr_accessor :created_at
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'name' => :'name',
         :'description' => :'description',
-        :'nodes' => :'nodes',
-        :'edges' => :'edges',
+        :'status' => :'status',
+        :'platform' => :'platform',
+        :'account_id' => :'accountId',
+        :'profile_id' => :'profileId',
         :'entry_node_id' => :'entryNodeId',
-        :'account_id' => :'accountId'
+        :'node_count' => :'nodeCount',
+        :'created_at' => :'createdAt'
       }
     end
 
@@ -53,12 +86,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
         :'name' => :'String',
         :'description' => :'String',
-        :'nodes' => :'Array<WorkflowNode>',
-        :'edges' => :'Array<WorkflowEdge>',
+        :'status' => :'String',
+        :'platform' => :'String',
+        :'account_id' => :'String',
+        :'profile_id' => :'String',
         :'entry_node_id' => :'String',
-        :'account_id' => :'String'
+        :'node_count' => :'Integer',
+        :'created_at' => :'Time'
       }
     end
 
@@ -72,17 +109,21 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateWorkflowRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::DuplicateWorkflow201ResponseWorkflow` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateWorkflowRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::DuplicateWorkflow201ResponseWorkflow`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
@@ -92,24 +133,32 @@ module Zernio
         self.description = attributes[:'description']
       end
 
-      if attributes.key?(:'nodes')
-        if (value = attributes[:'nodes']).is_a?(Array)
-          self.nodes = value
-        end
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'edges')
-        if (value = attributes[:'edges']).is_a?(Array)
-          self.edges = value
-        end
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
+      end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
+
+      if attributes.key?(:'profile_id')
+        self.profile_id = attributes[:'profile_id']
       end
 
       if attributes.key?(:'entry_node_id')
         self.entry_node_id = attributes[:'entry_node_id']
       end
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
+      if attributes.key?(:'node_count')
+        self.node_count = attributes[:'node_count']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
     end
 
@@ -125,7 +174,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      status_validator = EnumAttributeValidator.new('String', ["draft"])
+      return false unless status_validator.valid?(@status)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["draft"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -133,12 +194,16 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           name == o.name &&
           description == o.description &&
-          nodes == o.nodes &&
-          edges == o.edges &&
+          status == o.status &&
+          platform == o.platform &&
+          account_id == o.account_id &&
+          profile_id == o.profile_id &&
           entry_node_id == o.entry_node_id &&
-          account_id == o.account_id
+          node_count == o.node_count &&
+          created_at == o.created_at
     end
 
     # @see the `==` method
@@ -150,7 +215,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, nodes, edges, entry_node_id, account_id].hash
+      [id, name, description, status, platform, account_id, profile_id, entry_node_id, node_count, created_at].hash
     end
 
     # Builds the object from hash

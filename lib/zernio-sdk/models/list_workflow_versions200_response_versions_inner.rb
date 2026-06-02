@@ -14,17 +14,35 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Canvas coordinates (ignored by the executor; used by the visual builder).
-  class WorkflowNodePosition < ApiModelBase
-    attr_accessor :x
+  class ListWorkflowVersions200ResponseVersionsInner < ApiModelBase
+    # Monotonically increasing version number
+    attr_accessor :version
 
-    attr_accessor :y
+    attr_accessor :name
+
+    attr_accessor :description
+
+    # User id that authored this version
+    attr_accessor :created_by
+
+    # Denormalized email so the history UI can render without a join
+    attr_accessor :created_by_email
+
+    # When non-null
+    attr_accessor :restored_from_version
+
+    attr_accessor :created_at
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'x' => :'x',
-        :'y' => :'y'
+        :'version' => :'version',
+        :'name' => :'name',
+        :'description' => :'description',
+        :'created_by' => :'createdBy',
+        :'created_by_email' => :'createdByEmail',
+        :'restored_from_version' => :'restoredFromVersion',
+        :'created_at' => :'createdAt'
       }
     end
 
@@ -41,8 +59,13 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'x' => :'Float',
-        :'y' => :'Float'
+        :'version' => :'Integer',
+        :'name' => :'String',
+        :'description' => :'String',
+        :'created_by' => :'String',
+        :'created_by_email' => :'String',
+        :'restored_from_version' => :'Integer',
+        :'created_at' => :'Time'
       }
     end
 
@@ -56,24 +79,44 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WorkflowNodePosition` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListWorkflowVersions200ResponseVersionsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WorkflowNodePosition`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListWorkflowVersions200ResponseVersionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'x')
-        self.x = attributes[:'x']
+      if attributes.key?(:'version')
+        self.version = attributes[:'version']
       end
 
-      if attributes.key?(:'y')
-        self.y = attributes[:'y']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'created_by')
+        self.created_by = attributes[:'created_by']
+      end
+
+      if attributes.key?(:'created_by_email')
+        self.created_by_email = attributes[:'created_by_email']
+      end
+
+      if attributes.key?(:'restored_from_version')
+        self.restored_from_version = attributes[:'restored_from_version']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
     end
 
@@ -97,8 +140,13 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          x == o.x &&
-          y == o.y
+          version == o.version &&
+          name == o.name &&
+          description == o.description &&
+          created_by == o.created_by &&
+          created_by_email == o.created_by_email &&
+          restored_from_version == o.restored_from_version &&
+          created_at == o.created_at
     end
 
     # @see the `==` method
@@ -110,7 +158,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [x, y].hash
+      [version, name, description, created_by, created_by_email, restored_from_version, created_at].hash
     end
 
     # Builds the object from hash

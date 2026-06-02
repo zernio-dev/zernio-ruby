@@ -14,17 +14,31 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Canvas coordinates (ignored by the executor; used by the visual builder).
-  class WorkflowNodePosition < ApiModelBase
-    attr_accessor :x
+  class RestoreWorkflowVersion200ResponseWorkflow < ApiModelBase
+    attr_accessor :id
 
-    attr_accessor :y
+    attr_accessor :name
+
+    attr_accessor :description
+
+    attr_accessor :status
+
+    attr_accessor :entry_node_id
+
+    attr_accessor :node_count
+
+    attr_accessor :updated_at
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'x' => :'x',
-        :'y' => :'y'
+        :'id' => :'id',
+        :'name' => :'name',
+        :'description' => :'description',
+        :'status' => :'status',
+        :'entry_node_id' => :'entryNodeId',
+        :'node_count' => :'nodeCount',
+        :'updated_at' => :'updatedAt'
       }
     end
 
@@ -41,8 +55,13 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'x' => :'Float',
-        :'y' => :'Float'
+        :'id' => :'String',
+        :'name' => :'String',
+        :'description' => :'String',
+        :'status' => :'String',
+        :'entry_node_id' => :'String',
+        :'node_count' => :'Integer',
+        :'updated_at' => :'Time'
       }
     end
 
@@ -56,24 +75,44 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WorkflowNodePosition` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::RestoreWorkflowVersion200ResponseWorkflow` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WorkflowNodePosition`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::RestoreWorkflowVersion200ResponseWorkflow`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'x')
-        self.x = attributes[:'x']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'y')
-        self.y = attributes[:'y']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'entry_node_id')
+        self.entry_node_id = attributes[:'entry_node_id']
+      end
+
+      if attributes.key?(:'node_count')
+        self.node_count = attributes[:'node_count']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
       end
     end
 
@@ -97,8 +136,13 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          x == o.x &&
-          y == o.y
+          id == o.id &&
+          name == o.name &&
+          description == o.description &&
+          status == o.status &&
+          entry_node_id == o.entry_node_id &&
+          node_count == o.node_count &&
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -110,7 +154,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [x, y].hash
+      [id, name, description, status, entry_node_id, node_count, updated_at].hash
     end
 
     # Builds the object from hash

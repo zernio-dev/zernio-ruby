@@ -68,6 +68,18 @@ describe 'WorkflowsApi' do
     end
   end
 
+  # unit tests for duplicate_workflow
+  # Duplicate a workflow
+  # Create an independent copy of a workflow&#39;s graph, name, description, and account binding. The copy is created in &#x60;draft&#x60; status with fresh execution counters and a new id — execution history is NOT copied. Useful for branching off a known-good workflow before making experimental edits. 
+  # @param workflow_id 
+  # @param [Hash] opts the optional parameters
+  # @return [DuplicateWorkflow201Response]
+  describe 'duplicate_workflow test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_workflow
   # Get workflow with graph
   # Returns a workflow including its full node/edge graph and run stats.
@@ -75,6 +87,32 @@ describe 'WorkflowsApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetWorkflow200Response]
   describe 'get_workflow test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_workflow_version
+  # Get a specific workflow version
+  # Returns the full snapshot for a single historical version, including the graph.
+  # @param workflow_id 
+  # @param version 
+  # @param [Hash] opts the optional parameters
+  # @return [GetWorkflowVersion200Response]
+  describe 'get_workflow_version test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_workflow_execution_events
+  # Get an execution&#39;s timeline
+  # Returns the per-step run-log for a single workflow execution: trigger fired, each node visited, edge handles taken, errors, and durations. Backed by Tinybird (90-day retention). Used by the Runs UI drawer to render the timeline. 
+  # @param workflow_id 
+  # @param execution_id 
+  # @param [Hash] opts the optional parameters
+  # @return [ListWorkflowExecutionEvents200Response]
+  describe 'list_workflow_execution_events test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -90,6 +128,18 @@ describe 'WorkflowsApi' do
   # @option opts [Integer] :skip 
   # @return [ListWorkflowExecutions200Response]
   describe 'list_workflow_executions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_workflow_versions
+  # List a workflow&#39;s version history
+  # Returns the snapshot history. A new version is recorded automatically before every PATCH to &#x60;nodes&#x60; / &#x60;edges&#x60; / &#x60;entryNodeId&#x60;, and explicitly when a previous version is restored. Lightweight list — call &#x60;getWorkflowVersion&#x60; for the full snapshot graph. 
+  # @param workflow_id 
+  # @param [Hash] opts the optional parameters
+  # @return [ListWorkflowVersions200Response]
+  describe 'list_workflow_versions test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -122,6 +172,19 @@ describe 'WorkflowsApi' do
     end
   end
 
+  # unit tests for restore_workflow_version
+  # Restore a previous workflow version
+  # Replace the current graph with the named version&#39;s snapshot. Before the swap, the current graph is itself snapshotted as a new version, so a restore is reversible. The workflow must be in &#x60;draft&#x60; or &#x60;paused&#x60; status (same gate as a normal graph edit). The returned workflow carries &#x60;restoredFromVersion&#x60; so the UI can surface which version was rolled back to. 
+  # @param workflow_id 
+  # @param version 
+  # @param [Hash] opts the optional parameters
+  # @return [RestoreWorkflowVersion200Response]
+  describe 'restore_workflow_version test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for trigger_workflow
   # Manually start a workflow run
   # Kick off a run without waiting for an inbound message (useful for testing). Target an existing conversation by &#x60;conversationId&#x60;, or — WhatsApp only — a phone number via &#x60;to&#x60; (a conversation is found or created). &#x60;text&#x60; seeds the run&#39;s &#x60;lastMessage&#x60; variable. The graph must be runnable. 
@@ -137,7 +200,7 @@ describe 'WorkflowsApi' do
 
   # unit tests for update_workflow
   # Update workflow
-  # Update name, description, or the graph. The graph can only be modified while the workflow is draft or paused.
+  # Update name, description, the graph, or reassign to a different account. The graph can only be modified while the workflow is draft or paused. Account swaps re-validate the graph against the new platform (so e.g. moving from WhatsApp to Facebook surfaces a &#x60;start_call&#x60; node as an error instead of silently saving an unrunnable graph). 
   # @param workflow_id 
   # @param [Hash] opts the optional parameters
   # @option opts [UpdateWorkflowRequest] :update_workflow_request 

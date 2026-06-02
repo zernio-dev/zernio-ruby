@@ -36,7 +36,7 @@ describe Zernio::WorkflowNode do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["trigger", "send_message", "wait_for_reply", "condition", "set_variable", "delay", "webhook", "handoff", "end"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["trigger", "send_message", "wait_for_reply", "condition", "set_variable", "delay", "webhook", "ai", "handoff", "start_call", "a_b_split", "set_field", "enroll_sequence", "add_tag", "remove_tag", "end"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end

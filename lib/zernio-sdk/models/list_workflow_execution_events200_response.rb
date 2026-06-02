@@ -14,17 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Canvas coordinates (ignored by the executor; used by the visual builder).
-  class WorkflowNodePosition < ApiModelBase
-    attr_accessor :x
+  class ListWorkflowExecutionEvents200Response < ApiModelBase
+    attr_accessor :success
 
-    attr_accessor :y
+    attr_accessor :execution
+
+    # Events in chronological order (oldest first).
+    attr_accessor :events
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'x' => :'x',
-        :'y' => :'y'
+        :'success' => :'success',
+        :'execution' => :'execution',
+        :'events' => :'events'
       }
     end
 
@@ -41,8 +44,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'x' => :'Float',
-        :'y' => :'Float'
+        :'success' => :'Boolean',
+        :'execution' => :'ListWorkflowExecutionEvents200ResponseExecution',
+        :'events' => :'Array<WorkflowExecutionEvent>'
       }
     end
 
@@ -56,24 +60,30 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WorkflowNodePosition` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListWorkflowExecutionEvents200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WorkflowNodePosition`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListWorkflowExecutionEvents200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'x')
-        self.x = attributes[:'x']
+      if attributes.key?(:'success')
+        self.success = attributes[:'success']
       end
 
-      if attributes.key?(:'y')
-        self.y = attributes[:'y']
+      if attributes.key?(:'execution')
+        self.execution = attributes[:'execution']
+      end
+
+      if attributes.key?(:'events')
+        if (value = attributes[:'events']).is_a?(Array)
+          self.events = value
+        end
       end
     end
 
@@ -97,8 +107,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          x == o.x &&
-          y == o.y
+          success == o.success &&
+          execution == o.execution &&
+          events == o.events
     end
 
     # @see the `==` method
@@ -110,7 +121,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [x, y].hash
+      [success, execution, events].hash
     end
 
     # Builds the object from hash

@@ -213,6 +213,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Duplicate a workflow
+    # Create an independent copy of a workflow's graph, name, description, and account binding. The copy is created in `draft` status with fresh execution counters and a new id — execution history is NOT copied. Useful for branching off a known-good workflow before making experimental edits. 
+    # @param workflow_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [DuplicateWorkflow201Response]
+    def duplicate_workflow(workflow_id, opts = {})
+      data, _status_code, _headers = duplicate_workflow_with_http_info(workflow_id, opts)
+      data
+    end
+
+    # Duplicate a workflow
+    # Create an independent copy of a workflow&#39;s graph, name, description, and account binding. The copy is created in &#x60;draft&#x60; status with fresh execution counters and a new id — execution history is NOT copied. Useful for branching off a known-good workflow before making experimental edits. 
+    # @param workflow_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DuplicateWorkflow201Response, Integer, Hash)>] DuplicateWorkflow201Response data, response status code and response headers
+    def duplicate_workflow_with_http_info(workflow_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WorkflowsApi.duplicate_workflow ...'
+      end
+      # verify the required parameter 'workflow_id' is set
+      if @api_client.config.client_side_validation && workflow_id.nil?
+        fail ArgumentError, "Missing the required parameter 'workflow_id' when calling WorkflowsApi.duplicate_workflow"
+      end
+      # resource path
+      local_var_path = '/v1/workflows/{workflowId}/duplicate'.sub('{' + 'workflowId' + '}', CGI.escape(workflow_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DuplicateWorkflow201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WorkflowsApi.duplicate_workflow",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WorkflowsApi#duplicate_workflow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get workflow with graph
     # Returns a workflow including its full node/edge graph and run stats.
     # @param workflow_id [String] 
@@ -272,6 +335,144 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WorkflowsApi#get_workflow\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get a specific workflow version
+    # Returns the full snapshot for a single historical version, including the graph.
+    # @param workflow_id [String] 
+    # @param version [Integer] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetWorkflowVersion200Response]
+    def get_workflow_version(workflow_id, version, opts = {})
+      data, _status_code, _headers = get_workflow_version_with_http_info(workflow_id, version, opts)
+      data
+    end
+
+    # Get a specific workflow version
+    # Returns the full snapshot for a single historical version, including the graph.
+    # @param workflow_id [String] 
+    # @param version [Integer] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWorkflowVersion200Response, Integer, Hash)>] GetWorkflowVersion200Response data, response status code and response headers
+    def get_workflow_version_with_http_info(workflow_id, version, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WorkflowsApi.get_workflow_version ...'
+      end
+      # verify the required parameter 'workflow_id' is set
+      if @api_client.config.client_side_validation && workflow_id.nil?
+        fail ArgumentError, "Missing the required parameter 'workflow_id' when calling WorkflowsApi.get_workflow_version"
+      end
+      # verify the required parameter 'version' is set
+      if @api_client.config.client_side_validation && version.nil?
+        fail ArgumentError, "Missing the required parameter 'version' when calling WorkflowsApi.get_workflow_version"
+      end
+      # resource path
+      local_var_path = '/v1/workflows/{workflowId}/versions/{version}'.sub('{' + 'workflowId' + '}', CGI.escape(workflow_id.to_s)).sub('{' + 'version' + '}', CGI.escape(version.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWorkflowVersion200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WorkflowsApi.get_workflow_version",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WorkflowsApi#get_workflow_version\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get an execution's timeline
+    # Returns the per-step run-log for a single workflow execution: trigger fired, each node visited, edge handles taken, errors, and durations. Backed by Tinybird (90-day retention). Used by the Runs UI drawer to render the timeline. 
+    # @param workflow_id [String] 
+    # @param execution_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [ListWorkflowExecutionEvents200Response]
+    def list_workflow_execution_events(workflow_id, execution_id, opts = {})
+      data, _status_code, _headers = list_workflow_execution_events_with_http_info(workflow_id, execution_id, opts)
+      data
+    end
+
+    # Get an execution&#39;s timeline
+    # Returns the per-step run-log for a single workflow execution: trigger fired, each node visited, edge handles taken, errors, and durations. Backed by Tinybird (90-day retention). Used by the Runs UI drawer to render the timeline. 
+    # @param workflow_id [String] 
+    # @param execution_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListWorkflowExecutionEvents200Response, Integer, Hash)>] ListWorkflowExecutionEvents200Response data, response status code and response headers
+    def list_workflow_execution_events_with_http_info(workflow_id, execution_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WorkflowsApi.list_workflow_execution_events ...'
+      end
+      # verify the required parameter 'workflow_id' is set
+      if @api_client.config.client_side_validation && workflow_id.nil?
+        fail ArgumentError, "Missing the required parameter 'workflow_id' when calling WorkflowsApi.list_workflow_execution_events"
+      end
+      # verify the required parameter 'execution_id' is set
+      if @api_client.config.client_side_validation && execution_id.nil?
+        fail ArgumentError, "Missing the required parameter 'execution_id' when calling WorkflowsApi.list_workflow_execution_events"
+      end
+      # resource path
+      local_var_path = '/v1/workflows/{workflowId}/executions/{executionId}/events'.sub('{' + 'workflowId' + '}', CGI.escape(workflow_id.to_s)).sub('{' + 'executionId' + '}', CGI.escape(execution_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListWorkflowExecutionEvents200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WorkflowsApi.list_workflow_execution_events",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WorkflowsApi#list_workflow_execution_events\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -348,6 +549,69 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WorkflowsApi#list_workflow_executions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List a workflow's version history
+    # Returns the snapshot history. A new version is recorded automatically before every PATCH to `nodes` / `edges` / `entryNodeId`, and explicitly when a previous version is restored. Lightweight list — call `getWorkflowVersion` for the full snapshot graph. 
+    # @param workflow_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [ListWorkflowVersions200Response]
+    def list_workflow_versions(workflow_id, opts = {})
+      data, _status_code, _headers = list_workflow_versions_with_http_info(workflow_id, opts)
+      data
+    end
+
+    # List a workflow&#39;s version history
+    # Returns the snapshot history. A new version is recorded automatically before every PATCH to &#x60;nodes&#x60; / &#x60;edges&#x60; / &#x60;entryNodeId&#x60;, and explicitly when a previous version is restored. Lightweight list — call &#x60;getWorkflowVersion&#x60; for the full snapshot graph. 
+    # @param workflow_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListWorkflowVersions200Response, Integer, Hash)>] ListWorkflowVersions200Response data, response status code and response headers
+    def list_workflow_versions_with_http_info(workflow_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WorkflowsApi.list_workflow_versions ...'
+      end
+      # verify the required parameter 'workflow_id' is set
+      if @api_client.config.client_side_validation && workflow_id.nil?
+        fail ArgumentError, "Missing the required parameter 'workflow_id' when calling WorkflowsApi.list_workflow_versions"
+      end
+      # resource path
+      local_var_path = '/v1/workflows/{workflowId}/versions'.sub('{' + 'workflowId' + '}', CGI.escape(workflow_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListWorkflowVersions200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WorkflowsApi.list_workflow_versions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WorkflowsApi#list_workflow_versions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -488,6 +752,75 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Restore a previous workflow version
+    # Replace the current graph with the named version's snapshot. Before the swap, the current graph is itself snapshotted as a new version, so a restore is reversible. The workflow must be in `draft` or `paused` status (same gate as a normal graph edit). The returned workflow carries `restoredFromVersion` so the UI can surface which version was rolled back to. 
+    # @param workflow_id [String] 
+    # @param version [Integer] 
+    # @param [Hash] opts the optional parameters
+    # @return [RestoreWorkflowVersion200Response]
+    def restore_workflow_version(workflow_id, version, opts = {})
+      data, _status_code, _headers = restore_workflow_version_with_http_info(workflow_id, version, opts)
+      data
+    end
+
+    # Restore a previous workflow version
+    # Replace the current graph with the named version&#39;s snapshot. Before the swap, the current graph is itself snapshotted as a new version, so a restore is reversible. The workflow must be in &#x60;draft&#x60; or &#x60;paused&#x60; status (same gate as a normal graph edit). The returned workflow carries &#x60;restoredFromVersion&#x60; so the UI can surface which version was rolled back to. 
+    # @param workflow_id [String] 
+    # @param version [Integer] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RestoreWorkflowVersion200Response, Integer, Hash)>] RestoreWorkflowVersion200Response data, response status code and response headers
+    def restore_workflow_version_with_http_info(workflow_id, version, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WorkflowsApi.restore_workflow_version ...'
+      end
+      # verify the required parameter 'workflow_id' is set
+      if @api_client.config.client_side_validation && workflow_id.nil?
+        fail ArgumentError, "Missing the required parameter 'workflow_id' when calling WorkflowsApi.restore_workflow_version"
+      end
+      # verify the required parameter 'version' is set
+      if @api_client.config.client_side_validation && version.nil?
+        fail ArgumentError, "Missing the required parameter 'version' when calling WorkflowsApi.restore_workflow_version"
+      end
+      # resource path
+      local_var_path = '/v1/workflows/{workflowId}/versions/{version}/restore'.sub('{' + 'workflowId' + '}', CGI.escape(workflow_id.to_s)).sub('{' + 'version' + '}', CGI.escape(version.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RestoreWorkflowVersion200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WorkflowsApi.restore_workflow_version",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WorkflowsApi#restore_workflow_version\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Manually start a workflow run
     # Kick off a run without waiting for an inbound message (useful for testing). Target an existing conversation by `conversationId`, or — WhatsApp only — a phone number via `to` (a conversation is found or created). `text` seeds the run's `lastMessage` variable. The graph must be runnable. 
     # @param workflow_id [String] 
@@ -563,7 +896,7 @@ module Zernio
     end
 
     # Update workflow
-    # Update name, description, or the graph. The graph can only be modified while the workflow is draft or paused.
+    # Update name, description, the graph, or reassign to a different account. The graph can only be modified while the workflow is draft or paused. Account swaps re-validate the graph against the new platform (so e.g. moving from WhatsApp to Facebook surfaces a `start_call` node as an error instead of silently saving an unrunnable graph). 
     # @param workflow_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateWorkflowRequest] :update_workflow_request 
@@ -574,7 +907,7 @@ module Zernio
     end
 
     # Update workflow
-    # Update name, description, or the graph. The graph can only be modified while the workflow is draft or paused.
+    # Update name, description, the graph, or reassign to a different account. The graph can only be modified while the workflow is draft or paused. Account swaps re-validate the graph against the new platform (so e.g. moving from WhatsApp to Facebook surfaces a &#x60;start_call&#x60; node as an error instead of silently saving an unrunnable graph). 
     # @param workflow_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateWorkflowRequest] :update_workflow_request 

@@ -252,6 +252,8 @@ docs/DiscordPlatformDataThreadFromMessage.md
 docs/DmButton.md
 docs/DuplicateAdCampaign200Response.md
 docs/DuplicateAdCampaignRequest.md
+docs/DuplicateWorkflow201Response.md
+docs/DuplicateWorkflow201ResponseWorkflow.md
 docs/EditInboxMessage200Response.md
 docs/EditInboxMessage200ResponseData.md
 docs/EditInboxMessageRequest.md
@@ -511,6 +513,8 @@ docs/GetWhatsAppTemplates200Response.md
 docs/GetWhatsAppTemplates200ResponseTemplatesInner.md
 docs/GetWorkflow200Response.md
 docs/GetWorkflow200ResponseWorkflow.md
+docs/GetWorkflowVersion200Response.md
+docs/GetWorkflowVersion200ResponseVersion.md
 docs/GetYouTubeDailyViews400Response.md
 docs/GetYouTubeDailyViews403Response.md
 docs/GetYouTubeDailyViews500Response.md
@@ -667,9 +671,13 @@ docs/ListWhatsAppNumberCountries200ResponseCountriesInner.md
 docs/ListWhatsAppPhoneNumbers200Response.md
 docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md
 docs/ListWhatsAppSandboxSessions200Response.md
+docs/ListWorkflowExecutionEvents200Response.md
+docs/ListWorkflowExecutionEvents200ResponseExecution.md
 docs/ListWorkflowExecutions200Response.md
 docs/ListWorkflowExecutions200ResponseExecutionsInner.md
 docs/ListWorkflowExecutions200ResponseExecutionsInnerWaitingFor.md
+docs/ListWorkflowVersions200Response.md
+docs/ListWorkflowVersions200ResponseVersionsInner.md
 docs/ListWorkflows200Response.md
 docs/ListWorkflows200ResponseWorkflowsInner.md
 docs/LogsApi.md
@@ -745,6 +753,8 @@ docs/ReplyToInboxPostRequest.md
 docs/ReplyToInboxReview200Response.md
 docs/ReplyToInboxReview200ResponseReply.md
 docs/ReplyToInboxReviewRequest.md
+docs/RestoreWorkflowVersion200Response.md
+docs/RestoreWorkflowVersion200ResponseWorkflow.md
 docs/RetweetPost200Response.md
 docs/RetweetPostRequest.md
 docs/ReviewWebhookReview.md
@@ -1097,6 +1107,7 @@ docs/WhatsAppTemplateButton.md
 docs/WhatsAppTemplateComponent.md
 docs/WhatsAppTemplatesApi.md
 docs/WorkflowEdge.md
+docs/WorkflowExecutionEvent.md
 docs/WorkflowNode.md
 docs/WorkflowNodePosition.md
 docs/WorkflowsApi.md
@@ -1400,6 +1411,8 @@ lib/zernio-sdk/models/discord_platform_data_thread_from_message.rb
 lib/zernio-sdk/models/dm_button.rb
 lib/zernio-sdk/models/duplicate_ad_campaign200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign_request.rb
+lib/zernio-sdk/models/duplicate_workflow201_response.rb
+lib/zernio-sdk/models/duplicate_workflow201_response_workflow.rb
 lib/zernio-sdk/models/edit_inbox_message200_response.rb
 lib/zernio-sdk/models/edit_inbox_message200_response_data.rb
 lib/zernio-sdk/models/edit_inbox_message_request.rb
@@ -1651,6 +1664,8 @@ lib/zernio-sdk/models/get_whats_app_templates200_response.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response_templates_inner.rb
 lib/zernio-sdk/models/get_workflow200_response.rb
 lib/zernio-sdk/models/get_workflow200_response_workflow.rb
+lib/zernio-sdk/models/get_workflow_version200_response.rb
+lib/zernio-sdk/models/get_workflow_version200_response_version.rb
 lib/zernio-sdk/models/get_you_tube_daily_views400_response.rb
 lib/zernio-sdk/models/get_you_tube_daily_views403_response.rb
 lib/zernio-sdk/models/get_you_tube_daily_views500_response.rb
@@ -1804,9 +1819,13 @@ lib/zernio-sdk/models/list_whats_app_number_countries200_response_countries_inne
 lib/zernio-sdk/models/list_whats_app_phone_numbers200_response.rb
 lib/zernio-sdk/models/list_whats_app_phone_numbers200_response_phone_numbers_inner.rb
 lib/zernio-sdk/models/list_whats_app_sandbox_sessions200_response.rb
+lib/zernio-sdk/models/list_workflow_execution_events200_response.rb
+lib/zernio-sdk/models/list_workflow_execution_events200_response_execution.rb
 lib/zernio-sdk/models/list_workflow_executions200_response.rb
 lib/zernio-sdk/models/list_workflow_executions200_response_executions_inner.rb
 lib/zernio-sdk/models/list_workflow_executions200_response_executions_inner_waiting_for.rb
+lib/zernio-sdk/models/list_workflow_versions200_response.rb
+lib/zernio-sdk/models/list_workflow_versions200_response_versions_inner.rb
 lib/zernio-sdk/models/list_workflows200_response.rb
 lib/zernio-sdk/models/list_workflows200_response_workflows_inner.rb
 lib/zernio-sdk/models/mark_conversation_read200_response.rb
@@ -1875,6 +1894,8 @@ lib/zernio-sdk/models/reply_to_inbox_post_request.rb
 lib/zernio-sdk/models/reply_to_inbox_review200_response.rb
 lib/zernio-sdk/models/reply_to_inbox_review200_response_reply.rb
 lib/zernio-sdk/models/reply_to_inbox_review_request.rb
+lib/zernio-sdk/models/restore_workflow_version200_response.rb
+lib/zernio-sdk/models/restore_workflow_version200_response_workflow.rb
 lib/zernio-sdk/models/retweet_post200_response.rb
 lib/zernio-sdk/models/retweet_post_request.rb
 lib/zernio-sdk/models/review_webhook_review.rb
@@ -2212,6 +2233,7 @@ lib/zernio-sdk/models/whats_app_sandbox_session.rb
 lib/zernio-sdk/models/whats_app_template_button.rb
 lib/zernio-sdk/models/whats_app_template_component.rb
 lib/zernio-sdk/models/workflow_edge.rb
+lib/zernio-sdk/models/workflow_execution_event.rb
 lib/zernio-sdk/models/workflow_node.rb
 lib/zernio-sdk/models/workflow_node_position.rb
 lib/zernio-sdk/models/x_api_operation.rb
@@ -2508,6 +2530,8 @@ spec/models/discord_platform_data_thread_from_message_spec.rb
 spec/models/dm_button_spec.rb
 spec/models/duplicate_ad_campaign200_response_spec.rb
 spec/models/duplicate_ad_campaign_request_spec.rb
+spec/models/duplicate_workflow201_response_spec.rb
+spec/models/duplicate_workflow201_response_workflow_spec.rb
 spec/models/edit_inbox_message200_response_data_spec.rb
 spec/models/edit_inbox_message200_response_spec.rb
 spec/models/edit_inbox_message_request_reply_markup_keyboard_inner_inner_spec.rb
@@ -2759,6 +2783,8 @@ spec/models/get_whats_app_templates200_response_spec.rb
 spec/models/get_whats_app_templates200_response_templates_inner_spec.rb
 spec/models/get_workflow200_response_spec.rb
 spec/models/get_workflow200_response_workflow_spec.rb
+spec/models/get_workflow_version200_response_spec.rb
+spec/models/get_workflow_version200_response_version_spec.rb
 spec/models/get_you_tube_daily_views400_response_spec.rb
 spec/models/get_you_tube_daily_views403_response_spec.rb
 spec/models/get_you_tube_daily_views500_response_spec.rb
@@ -2912,9 +2938,13 @@ spec/models/list_whats_app_number_countries200_response_spec.rb
 spec/models/list_whats_app_phone_numbers200_response_phone_numbers_inner_spec.rb
 spec/models/list_whats_app_phone_numbers200_response_spec.rb
 spec/models/list_whats_app_sandbox_sessions200_response_spec.rb
+spec/models/list_workflow_execution_events200_response_execution_spec.rb
+spec/models/list_workflow_execution_events200_response_spec.rb
 spec/models/list_workflow_executions200_response_executions_inner_spec.rb
 spec/models/list_workflow_executions200_response_executions_inner_waiting_for_spec.rb
 spec/models/list_workflow_executions200_response_spec.rb
+spec/models/list_workflow_versions200_response_spec.rb
+spec/models/list_workflow_versions200_response_versions_inner_spec.rb
 spec/models/list_workflows200_response_spec.rb
 spec/models/list_workflows200_response_workflows_inner_spec.rb
 spec/models/mark_conversation_read200_response_spec.rb
@@ -2983,6 +3013,8 @@ spec/models/reply_to_inbox_post_request_spec.rb
 spec/models/reply_to_inbox_review200_response_reply_spec.rb
 spec/models/reply_to_inbox_review200_response_spec.rb
 spec/models/reply_to_inbox_review_request_spec.rb
+spec/models/restore_workflow_version200_response_spec.rb
+spec/models/restore_workflow_version200_response_workflow_spec.rb
 spec/models/retweet_post200_response_spec.rb
 spec/models/retweet_post_request_spec.rb
 spec/models/review_webhook_review_reply_spec.rb
@@ -3320,6 +3352,7 @@ spec/models/whats_app_sandbox_session_spec.rb
 spec/models/whats_app_template_button_spec.rb
 spec/models/whats_app_template_component_spec.rb
 spec/models/workflow_edge_spec.rb
+spec/models/workflow_execution_event_spec.rb
 spec/models/workflow_node_position_spec.rb
 spec/models/workflow_node_spec.rb
 spec/models/x_api_operation_spec.rb

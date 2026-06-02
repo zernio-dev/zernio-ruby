@@ -14,17 +14,17 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Canvas coordinates (ignored by the executor; used by the visual builder).
-  class WorkflowNodePosition < ApiModelBase
-    attr_accessor :x
+  class ListWorkflowVersions200Response < ApiModelBase
+    attr_accessor :success
 
-    attr_accessor :y
+    # Versions in reverse chronological order (newest first).
+    attr_accessor :versions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'x' => :'x',
-        :'y' => :'y'
+        :'success' => :'success',
+        :'versions' => :'versions'
       }
     end
 
@@ -41,8 +41,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'x' => :'Float',
-        :'y' => :'Float'
+        :'success' => :'Boolean',
+        :'versions' => :'Array<ListWorkflowVersions200ResponseVersionsInner>'
       }
     end
 
@@ -56,24 +56,26 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WorkflowNodePosition` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListWorkflowVersions200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WorkflowNodePosition`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListWorkflowVersions200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'x')
-        self.x = attributes[:'x']
+      if attributes.key?(:'success')
+        self.success = attributes[:'success']
       end
 
-      if attributes.key?(:'y')
-        self.y = attributes[:'y']
+      if attributes.key?(:'versions')
+        if (value = attributes[:'versions']).is_a?(Array)
+          self.versions = value
+        end
       end
     end
 
@@ -97,8 +99,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          x == o.x &&
-          y == o.y
+          success == o.success &&
+          versions == o.versions
     end
 
     # @see the `==` method
@@ -110,7 +112,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [x, y].hash
+      [success, versions].hash
     end
 
     # Builds the object from hash

@@ -403,10 +403,15 @@ Class | Method | HTTP request | Description
 *Zernio::WorkflowsApi* | [**activate_workflow**](docs/WorkflowsApi.md#activate_workflow) | **POST** /v1/workflows/{workflowId}/activate | Activate workflow
 *Zernio::WorkflowsApi* | [**create_workflow**](docs/WorkflowsApi.md#create_workflow) | **POST** /v1/workflows | Create workflow
 *Zernio::WorkflowsApi* | [**delete_workflow**](docs/WorkflowsApi.md#delete_workflow) | **DELETE** /v1/workflows/{workflowId} | Delete workflow
+*Zernio::WorkflowsApi* | [**duplicate_workflow**](docs/WorkflowsApi.md#duplicate_workflow) | **POST** /v1/workflows/{workflowId}/duplicate | Duplicate a workflow
 *Zernio::WorkflowsApi* | [**get_workflow**](docs/WorkflowsApi.md#get_workflow) | **GET** /v1/workflows/{workflowId} | Get workflow with graph
+*Zernio::WorkflowsApi* | [**get_workflow_version**](docs/WorkflowsApi.md#get_workflow_version) | **GET** /v1/workflows/{workflowId}/versions/{version} | Get a specific workflow version
+*Zernio::WorkflowsApi* | [**list_workflow_execution_events**](docs/WorkflowsApi.md#list_workflow_execution_events) | **GET** /v1/workflows/{workflowId}/executions/{executionId}/events | Get an execution's timeline
 *Zernio::WorkflowsApi* | [**list_workflow_executions**](docs/WorkflowsApi.md#list_workflow_executions) | **GET** /v1/workflows/{workflowId}/executions | List workflow runs
+*Zernio::WorkflowsApi* | [**list_workflow_versions**](docs/WorkflowsApi.md#list_workflow_versions) | **GET** /v1/workflows/{workflowId}/versions | List a workflow's version history
 *Zernio::WorkflowsApi* | [**list_workflows**](docs/WorkflowsApi.md#list_workflows) | **GET** /v1/workflows | List workflows
 *Zernio::WorkflowsApi* | [**pause_workflow**](docs/WorkflowsApi.md#pause_workflow) | **POST** /v1/workflows/{workflowId}/pause | Pause workflow
+*Zernio::WorkflowsApi* | [**restore_workflow_version**](docs/WorkflowsApi.md#restore_workflow_version) | **POST** /v1/workflows/{workflowId}/versions/{version}/restore | Restore a previous workflow version
 *Zernio::WorkflowsApi* | [**trigger_workflow**](docs/WorkflowsApi.md#trigger_workflow) | **POST** /v1/workflows/{workflowId}/executions | Manually start a workflow run
 *Zernio::WorkflowsApi* | [**update_workflow**](docs/WorkflowsApi.md#update_workflow) | **PATCH** /v1/workflows/{workflowId} | Update workflow
 
@@ -644,6 +649,8 @@ Class | Method | HTTP request | Description
  - [Zernio::DmButton](docs/DmButton.md)
  - [Zernio::DuplicateAdCampaign200Response](docs/DuplicateAdCampaign200Response.md)
  - [Zernio::DuplicateAdCampaignRequest](docs/DuplicateAdCampaignRequest.md)
+ - [Zernio::DuplicateWorkflow201Response](docs/DuplicateWorkflow201Response.md)
+ - [Zernio::DuplicateWorkflow201ResponseWorkflow](docs/DuplicateWorkflow201ResponseWorkflow.md)
  - [Zernio::EditInboxMessage200Response](docs/EditInboxMessage200Response.md)
  - [Zernio::EditInboxMessage200ResponseData](docs/EditInboxMessage200ResponseData.md)
  - [Zernio::EditInboxMessageRequest](docs/EditInboxMessageRequest.md)
@@ -895,6 +902,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppTemplates200ResponseTemplatesInner](docs/GetWhatsAppTemplates200ResponseTemplatesInner.md)
  - [Zernio::GetWorkflow200Response](docs/GetWorkflow200Response.md)
  - [Zernio::GetWorkflow200ResponseWorkflow](docs/GetWorkflow200ResponseWorkflow.md)
+ - [Zernio::GetWorkflowVersion200Response](docs/GetWorkflowVersion200Response.md)
+ - [Zernio::GetWorkflowVersion200ResponseVersion](docs/GetWorkflowVersion200ResponseVersion.md)
  - [Zernio::GetYouTubeDailyViews400Response](docs/GetYouTubeDailyViews400Response.md)
  - [Zernio::GetYouTubeDailyViews403Response](docs/GetYouTubeDailyViews403Response.md)
  - [Zernio::GetYouTubeDailyViews500Response](docs/GetYouTubeDailyViews500Response.md)
@@ -1048,9 +1057,13 @@ Class | Method | HTTP request | Description
  - [Zernio::ListWhatsAppPhoneNumbers200Response](docs/ListWhatsAppPhoneNumbers200Response.md)
  - [Zernio::ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner](docs/ListWhatsAppPhoneNumbers200ResponsePhoneNumbersInner.md)
  - [Zernio::ListWhatsAppSandboxSessions200Response](docs/ListWhatsAppSandboxSessions200Response.md)
+ - [Zernio::ListWorkflowExecutionEvents200Response](docs/ListWorkflowExecutionEvents200Response.md)
+ - [Zernio::ListWorkflowExecutionEvents200ResponseExecution](docs/ListWorkflowExecutionEvents200ResponseExecution.md)
  - [Zernio::ListWorkflowExecutions200Response](docs/ListWorkflowExecutions200Response.md)
  - [Zernio::ListWorkflowExecutions200ResponseExecutionsInner](docs/ListWorkflowExecutions200ResponseExecutionsInner.md)
  - [Zernio::ListWorkflowExecutions200ResponseExecutionsInnerWaitingFor](docs/ListWorkflowExecutions200ResponseExecutionsInnerWaitingFor.md)
+ - [Zernio::ListWorkflowVersions200Response](docs/ListWorkflowVersions200Response.md)
+ - [Zernio::ListWorkflowVersions200ResponseVersionsInner](docs/ListWorkflowVersions200ResponseVersionsInner.md)
  - [Zernio::ListWorkflows200Response](docs/ListWorkflows200Response.md)
  - [Zernio::ListWorkflows200ResponseWorkflowsInner](docs/ListWorkflows200ResponseWorkflowsInner.md)
  - [Zernio::MarkConversationRead200Response](docs/MarkConversationRead200Response.md)
@@ -1119,6 +1132,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplyToInboxReview200Response](docs/ReplyToInboxReview200Response.md)
  - [Zernio::ReplyToInboxReview200ResponseReply](docs/ReplyToInboxReview200ResponseReply.md)
  - [Zernio::ReplyToInboxReviewRequest](docs/ReplyToInboxReviewRequest.md)
+ - [Zernio::RestoreWorkflowVersion200Response](docs/RestoreWorkflowVersion200Response.md)
+ - [Zernio::RestoreWorkflowVersion200ResponseWorkflow](docs/RestoreWorkflowVersion200ResponseWorkflow.md)
  - [Zernio::RetweetPost200Response](docs/RetweetPost200Response.md)
  - [Zernio::RetweetPostRequest](docs/RetweetPostRequest.md)
  - [Zernio::ReviewWebhookReview](docs/ReviewWebhookReview.md)
@@ -1456,6 +1471,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WhatsAppTemplateButton](docs/WhatsAppTemplateButton.md)
  - [Zernio::WhatsAppTemplateComponent](docs/WhatsAppTemplateComponent.md)
  - [Zernio::WorkflowEdge](docs/WorkflowEdge.md)
+ - [Zernio::WorkflowExecutionEvent](docs/WorkflowExecutionEvent.md)
  - [Zernio::WorkflowNode](docs/WorkflowNode.md)
  - [Zernio::WorkflowNodePosition](docs/WorkflowNodePosition.md)
  - [Zernio::XApiOperation](docs/XApiOperation.md)

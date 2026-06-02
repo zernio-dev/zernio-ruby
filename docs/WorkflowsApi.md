@@ -7,10 +7,15 @@ All URIs are relative to *https://zernio.com/api*
 | [**activate_workflow**](WorkflowsApi.md#activate_workflow) | **POST** /v1/workflows/{workflowId}/activate | Activate workflow |
 | [**create_workflow**](WorkflowsApi.md#create_workflow) | **POST** /v1/workflows | Create workflow |
 | [**delete_workflow**](WorkflowsApi.md#delete_workflow) | **DELETE** /v1/workflows/{workflowId} | Delete workflow |
+| [**duplicate_workflow**](WorkflowsApi.md#duplicate_workflow) | **POST** /v1/workflows/{workflowId}/duplicate | Duplicate a workflow |
 | [**get_workflow**](WorkflowsApi.md#get_workflow) | **GET** /v1/workflows/{workflowId} | Get workflow with graph |
+| [**get_workflow_version**](WorkflowsApi.md#get_workflow_version) | **GET** /v1/workflows/{workflowId}/versions/{version} | Get a specific workflow version |
+| [**list_workflow_execution_events**](WorkflowsApi.md#list_workflow_execution_events) | **GET** /v1/workflows/{workflowId}/executions/{executionId}/events | Get an execution&#39;s timeline |
 | [**list_workflow_executions**](WorkflowsApi.md#list_workflow_executions) | **GET** /v1/workflows/{workflowId}/executions | List workflow runs |
+| [**list_workflow_versions**](WorkflowsApi.md#list_workflow_versions) | **GET** /v1/workflows/{workflowId}/versions | List a workflow&#39;s version history |
 | [**list_workflows**](WorkflowsApi.md#list_workflows) | **GET** /v1/workflows | List workflows |
 | [**pause_workflow**](WorkflowsApi.md#pause_workflow) | **POST** /v1/workflows/{workflowId}/pause | Pause workflow |
+| [**restore_workflow_version**](WorkflowsApi.md#restore_workflow_version) | **POST** /v1/workflows/{workflowId}/versions/{version}/restore | Restore a previous workflow version |
 | [**trigger_workflow**](WorkflowsApi.md#trigger_workflow) | **POST** /v1/workflows/{workflowId}/executions | Manually start a workflow run |
 | [**update_workflow**](WorkflowsApi.md#update_workflow) | **PATCH** /v1/workflows/{workflowId} | Update workflow |
 
@@ -221,6 +226,75 @@ nil (empty response body)
 - **Accept**: application/json
 
 
+## duplicate_workflow
+
+> <DuplicateWorkflow201Response> duplicate_workflow(workflow_id)
+
+Duplicate a workflow
+
+Create an independent copy of a workflow's graph, name, description, and account binding. The copy is created in `draft` status with fresh execution counters and a new id — execution history is NOT copied. Useful for branching off a known-good workflow before making experimental edits. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WorkflowsApi.new
+workflow_id = 'workflow_id_example' # String | 
+
+begin
+  # Duplicate a workflow
+  result = api_instance.duplicate_workflow(workflow_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->duplicate_workflow: #{e}"
+end
+```
+
+#### Using the duplicate_workflow_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DuplicateWorkflow201Response>, Integer, Hash)> duplicate_workflow_with_http_info(workflow_id)
+
+```ruby
+begin
+  # Duplicate a workflow
+  data, status_code, headers = api_instance.duplicate_workflow_with_http_info(workflow_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DuplicateWorkflow201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->duplicate_workflow_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **workflow_id** | **String** |  |  |
+
+### Return type
+
+[**DuplicateWorkflow201Response**](DuplicateWorkflow201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_workflow
 
 > <GetWorkflow200Response> get_workflow(workflow_id)
@@ -279,6 +353,148 @@ end
 ### Return type
 
 [**GetWorkflow200Response**](GetWorkflow200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_workflow_version
+
+> <GetWorkflowVersion200Response> get_workflow_version(workflow_id, version)
+
+Get a specific workflow version
+
+Returns the full snapshot for a single historical version, including the graph.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WorkflowsApi.new
+workflow_id = 'workflow_id_example' # String | 
+version = 56 # Integer | 
+
+begin
+  # Get a specific workflow version
+  result = api_instance.get_workflow_version(workflow_id, version)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->get_workflow_version: #{e}"
+end
+```
+
+#### Using the get_workflow_version_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWorkflowVersion200Response>, Integer, Hash)> get_workflow_version_with_http_info(workflow_id, version)
+
+```ruby
+begin
+  # Get a specific workflow version
+  data, status_code, headers = api_instance.get_workflow_version_with_http_info(workflow_id, version)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWorkflowVersion200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->get_workflow_version_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **workflow_id** | **String** |  |  |
+| **version** | **Integer** |  |  |
+
+### Return type
+
+[**GetWorkflowVersion200Response**](GetWorkflowVersion200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_workflow_execution_events
+
+> <ListWorkflowExecutionEvents200Response> list_workflow_execution_events(workflow_id, execution_id)
+
+Get an execution's timeline
+
+Returns the per-step run-log for a single workflow execution: trigger fired, each node visited, edge handles taken, errors, and durations. Backed by Tinybird (90-day retention). Used by the Runs UI drawer to render the timeline. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WorkflowsApi.new
+workflow_id = 'workflow_id_example' # String | 
+execution_id = 'execution_id_example' # String | 
+
+begin
+  # Get an execution's timeline
+  result = api_instance.list_workflow_execution_events(workflow_id, execution_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->list_workflow_execution_events: #{e}"
+end
+```
+
+#### Using the list_workflow_execution_events_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWorkflowExecutionEvents200Response>, Integer, Hash)> list_workflow_execution_events_with_http_info(workflow_id, execution_id)
+
+```ruby
+begin
+  # Get an execution's timeline
+  data, status_code, headers = api_instance.list_workflow_execution_events_with_http_info(workflow_id, execution_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWorkflowExecutionEvents200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->list_workflow_execution_events_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **workflow_id** | **String** |  |  |
+| **execution_id** | **String** |  |  |
+
+### Return type
+
+[**ListWorkflowExecutionEvents200Response**](ListWorkflowExecutionEvents200Response.md)
 
 ### Authorization
 
@@ -356,6 +572,75 @@ end
 ### Return type
 
 [**ListWorkflowExecutions200Response**](ListWorkflowExecutions200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_workflow_versions
+
+> <ListWorkflowVersions200Response> list_workflow_versions(workflow_id)
+
+List a workflow's version history
+
+Returns the snapshot history. A new version is recorded automatically before every PATCH to `nodes` / `edges` / `entryNodeId`, and explicitly when a previous version is restored. Lightweight list — call `getWorkflowVersion` for the full snapshot graph. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WorkflowsApi.new
+workflow_id = 'workflow_id_example' # String | 
+
+begin
+  # List a workflow's version history
+  result = api_instance.list_workflow_versions(workflow_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->list_workflow_versions: #{e}"
+end
+```
+
+#### Using the list_workflow_versions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWorkflowVersions200Response>, Integer, Hash)> list_workflow_versions_with_http_info(workflow_id)
+
+```ruby
+begin
+  # List a workflow's version history
+  data, status_code, headers = api_instance.list_workflow_versions_with_http_info(workflow_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWorkflowVersions200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->list_workflow_versions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **workflow_id** | **String** |  |  |
+
+### Return type
+
+[**ListWorkflowVersions200Response**](ListWorkflowVersions200Response.md)
 
 ### Authorization
 
@@ -513,6 +798,77 @@ end
 - **Accept**: application/json
 
 
+## restore_workflow_version
+
+> <RestoreWorkflowVersion200Response> restore_workflow_version(workflow_id, version)
+
+Restore a previous workflow version
+
+Replace the current graph with the named version's snapshot. Before the swap, the current graph is itself snapshotted as a new version, so a restore is reversible. The workflow must be in `draft` or `paused` status (same gate as a normal graph edit). The returned workflow carries `restoredFromVersion` so the UI can surface which version was rolled back to. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WorkflowsApi.new
+workflow_id = 'workflow_id_example' # String | 
+version = 56 # Integer | 
+
+begin
+  # Restore a previous workflow version
+  result = api_instance.restore_workflow_version(workflow_id, version)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->restore_workflow_version: #{e}"
+end
+```
+
+#### Using the restore_workflow_version_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RestoreWorkflowVersion200Response>, Integer, Hash)> restore_workflow_version_with_http_info(workflow_id, version)
+
+```ruby
+begin
+  # Restore a previous workflow version
+  data, status_code, headers = api_instance.restore_workflow_version_with_http_info(workflow_id, version)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RestoreWorkflowVersion200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WorkflowsApi->restore_workflow_version_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **workflow_id** | **String** |  |  |
+| **version** | **Integer** |  |  |
+
+### Return type
+
+[**RestoreWorkflowVersion200Response**](RestoreWorkflowVersion200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## trigger_workflow
 
 > <TriggerWorkflow200Response> trigger_workflow(workflow_id, trigger_workflow_request)
@@ -590,7 +946,7 @@ end
 
 Update workflow
 
-Update name, description, or the graph. The graph can only be modified while the workflow is draft or paused.
+Update name, description, the graph, or reassign to a different account. The graph can only be modified while the workflow is draft or paused. Account swaps re-validate the graph against the new platform (so e.g. moving from WhatsApp to Facebook surfaces a `start_call` node as an error instead of silently saving an unrunnable graph). 
 
 ### Examples
 
