@@ -36,6 +36,8 @@ module Zernio
 
     attr_accessor :link_tracking
 
+    attr_accessor :click_tag
+
     attr_accessor :is_active
 
     attr_accessor :stats
@@ -77,6 +79,7 @@ module Zernio
         :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
         :'link_tracking' => :'linkTracking',
+        :'click_tag' => :'clickTag',
         :'is_active' => :'isActive',
         :'stats' => :'stats',
         :'created_at' => :'createdAt'
@@ -106,6 +109,7 @@ module Zernio
         :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
         :'link_tracking' => :'Boolean',
+        :'click_tag' => :'String',
         :'is_active' => :'Boolean',
         :'stats' => :'CreateCommentAutomation200ResponseAutomationStats',
         :'created_at' => :'Time'
@@ -178,6 +182,10 @@ module Zernio
         self.link_tracking = attributes[:'link_tracking']
       end
 
+      if attributes.key?(:'click_tag')
+        self.click_tag = attributes[:'click_tag']
+      end
+
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
       end
@@ -233,6 +241,7 @@ module Zernio
           buttons == o.buttons &&
           comment_reply == o.comment_reply &&
           link_tracking == o.link_tracking &&
+          click_tag == o.click_tag &&
           is_active == o.is_active &&
           stats == o.stats &&
           created_at == o.created_at
@@ -247,7 +256,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, platform_post_id, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, is_active, stats, created_at].hash
+      [id, name, platform, platform_post_id, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, click_tag, is_active, stats, created_at].hash
     end
 
     # Builds the object from hash

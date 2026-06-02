@@ -17,6 +17,7 @@
 | **buttons** | [**Array&lt;DmButton&gt;**](DmButton.md) | Inline DM buttons (up to 3). Omitted when none are set. | [optional] |
 | **comment_reply** | **String** |  | [optional] |
 | **link_tracking** | **Boolean** |  | [optional] |
+| **click_tag** | **String** |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **stats** | [**CreateCommentAutomation200ResponseAutomationStats**](CreateCommentAutomation200ResponseAutomationStats.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
@@ -41,6 +42,7 @@ instance = Zernio::GetCommentAutomation200ResponseAutomation.new(
   buttons: null,
   comment_reply: null,
   link_tracking: null,
+  click_tag: null,
   is_active: null,
   stats: null,
   created_at: null,

@@ -49,6 +49,9 @@ module Zernio
     # Wrap link buttons in the DM in a tracked redirect so clicks are counted (Link Clicks / CTR). Pass false to send links exactly as written. Defaults to on.
     attr_accessor :link_tracking
 
+    # Optional tag applied to a contact when they click a tracked link (requires linkTracking). Lets you segment clickers for broadcasts/sequences.
+    attr_accessor :click_tag
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -85,7 +88,8 @@ module Zernio
         :'dm_message' => :'dmMessage',
         :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
-        :'link_tracking' => :'linkTracking'
+        :'link_tracking' => :'linkTracking',
+        :'click_tag' => :'clickTag'
       }
     end
 
@@ -113,7 +117,8 @@ module Zernio
         :'dm_message' => :'String',
         :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
-        :'link_tracking' => :'Boolean'
+        :'link_tracking' => :'Boolean',
+        :'click_tag' => :'String'
       }
     end
 
@@ -201,6 +206,10 @@ module Zernio
         self.link_tracking = attributes[:'link_tracking']
       else
         self.link_tracking = true
+      end
+
+      if attributes.key?(:'click_tag')
+        self.click_tag = attributes[:'click_tag']
       end
     end
 
@@ -326,7 +335,8 @@ module Zernio
           dm_message == o.dm_message &&
           buttons == o.buttons &&
           comment_reply == o.comment_reply &&
-          link_tracking == o.link_tracking
+          link_tracking == o.link_tracking &&
+          click_tag == o.click_tag
     end
 
     # @see the `==` method
@@ -338,7 +348,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking].hash
+      [profile_id, account_id, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, click_tag].hash
     end
 
     # Builds the object from hash
