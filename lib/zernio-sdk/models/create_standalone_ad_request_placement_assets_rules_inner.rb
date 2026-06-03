@@ -15,8 +15,14 @@ require 'time'
 
 module Zernio
   class CreateStandaloneAdRequestPlacementAssetsRulesInner < ApiModelBase
-    # The image to deliver for this rule's placements.
+    # Image mode. The image to deliver for this rule's placements.
     attr_accessor :image_url
+
+    # Video mode. The video to deliver for this rule's placements.
+    attr_accessor :video_url
+
+    # Video mode (optional). Poster image for this rule's video; auto-generated when omitted.
+    attr_accessor :thumbnail_url
 
     attr_accessor :placements
 
@@ -24,6 +30,8 @@ module Zernio
     def self.attribute_map
       {
         :'image_url' => :'imageUrl',
+        :'video_url' => :'videoUrl',
+        :'thumbnail_url' => :'thumbnailUrl',
         :'placements' => :'placements'
       }
     end
@@ -42,6 +50,8 @@ module Zernio
     def self.openapi_types
       {
         :'image_url' => :'String',
+        :'video_url' => :'String',
+        :'thumbnail_url' => :'String',
         :'placements' => :'CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements'
       }
     end
@@ -70,8 +80,14 @@ module Zernio
 
       if attributes.key?(:'image_url')
         self.image_url = attributes[:'image_url']
-      else
-        self.image_url = nil
+      end
+
+      if attributes.key?(:'video_url')
+        self.video_url = attributes[:'video_url']
+      end
+
+      if attributes.key?(:'thumbnail_url')
+        self.thumbnail_url = attributes[:'thumbnail_url']
       end
 
       if attributes.key?(:'placements')
@@ -86,10 +102,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @image_url.nil?
-        invalid_properties.push('invalid value for "image_url", image_url cannot be nil.')
-      end
-
       if @placements.nil?
         invalid_properties.push('invalid value for "placements", placements cannot be nil.')
       end
@@ -101,19 +113,8 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @image_url.nil?
       return false if @placements.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] image_url Value to be assigned
-    def image_url=(image_url)
-      if image_url.nil?
-        fail ArgumentError, 'image_url cannot be nil'
-      end
-
-      @image_url = image_url
     end
 
     # Custom attribute writer method with validation
@@ -132,6 +133,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           image_url == o.image_url &&
+          video_url == o.video_url &&
+          thumbnail_url == o.thumbnail_url &&
           placements == o.placements
     end
 
@@ -144,7 +147,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [image_url, placements].hash
+      [image_url, video_url, thumbnail_url, placements].hash
     end
 
     # Builds the object from hash

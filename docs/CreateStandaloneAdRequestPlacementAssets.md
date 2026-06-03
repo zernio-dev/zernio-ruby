@@ -4,8 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **default_image_url** | **String** | Catch-all image for any placement not matched by a rule. REQUIRED — Meta mandates a default asset customization rule (empty placement spec, lowest priority) on every placement-customized creative.  |  |
-| **rules** | [**Array&lt;CreateStandaloneAdRequestPlacementAssetsRulesInner&gt;**](CreateStandaloneAdRequestPlacementAssetsRulesInner.md) | One entry per placement group you want to pin a specific image to. |  |
+| **default_image_url** | **String** | Image mode. Catch-all image for any placement no rule matches. Required in image mode (Meta mandates a default rule). | [optional] |
+| **default_video_url** | **String** | Video mode. Catch-all video for any placement no rule matches. Required in video mode. | [optional] |
+| **default_thumbnail_url** | **String** | Video mode (optional). Poster image for the default video; Meta auto-generates one when omitted. | [optional] |
+| **rules** | [**Array&lt;CreateStandaloneAdRequestPlacementAssetsRulesInner&gt;**](CreateStandaloneAdRequestPlacementAssetsRulesInner.md) | One entry per placement group you want to pin a specific asset to. |  |
 
 ## Example
 
@@ -14,6 +16,8 @@ require 'zernio-sdk'
 
 instance = Zernio::CreateStandaloneAdRequestPlacementAssets.new(
   default_image_url: null,
+  default_video_url: null,
+  default_thumbnail_url: null,
   rules: null
 )
 ```

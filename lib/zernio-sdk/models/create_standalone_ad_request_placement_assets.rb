@@ -14,18 +14,26 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta only. Placement asset customization: pin a SPECIFIC image to each placement group on a SINGLE ad (e.g. a 9:16 image on Stories/Reels and a 4:5 on Feed). This is the same thing Meta Ads Manager produces with \"different creative per placement\", mapped to the creative's `asset_feed_spec` + `asset_customization_rules`. It is deterministic pinning, NOT the auto-optimizing pool of `dynamicCreative` (the two are mutually exclusive, and it cannot be combined with `creatives[]` or `adSetId`). The shared copy (headline, body, link, CTA) comes from the top-level single-creative fields (`headline`, `body`, `linkUrl`, `callToAction`) since only the image varies by placement. Each rule's `placements` accepts the same fields as the top-level `placements` object; Meta enforces co-selection rules and returns an actionable error. 
+  # Meta only. Placement asset customization: pin a SPECIFIC asset (image OR video) to each placement group on a SINGLE ad (e.g. a 9:16 on Stories/Reels and a 4:5 on Feed). The same thing Meta Ads Manager produces with \"different creative per placement\", mapped to the creative's `asset_feed_spec` + `asset_customization_rules`. Deterministic pinning, NOT the auto-optimizing pool of `dynamicCreative` (mutually exclusive, and it cannot be combined with `creatives[]` or `adSetId`). Shared copy (headline, body, link, CTA) comes from the top-level single-creative fields since only the asset varies by placement. Each rule's `placements` accepts the same fields as the top-level `placements` object; Meta enforces co-selection rules and returns an actionable error.  A block is all-image OR all-video, never mixed (Meta's asset_feed_spec carries one ad format). Image mode: `defaultImageUrl` + `rules[].imageUrl`. Video mode: `defaultVideoUrl` + `rules[].videoUrl` (optional `thumbnailUrl`/`defaultThumbnailUrl` posters; Meta auto-generates when omitted). Exactly one catch-all default is required. 
   class CreateStandaloneAdRequestPlacementAssets < ApiModelBase
-    # Catch-all image for any placement not matched by a rule. REQUIRED — Meta mandates a default asset customization rule (empty placement spec, lowest priority) on every placement-customized creative. 
+    # Image mode. Catch-all image for any placement no rule matches. Required in image mode (Meta mandates a default rule).
     attr_accessor :default_image_url
 
-    # One entry per placement group you want to pin a specific image to.
+    # Video mode. Catch-all video for any placement no rule matches. Required in video mode.
+    attr_accessor :default_video_url
+
+    # Video mode (optional). Poster image for the default video; Meta auto-generates one when omitted.
+    attr_accessor :default_thumbnail_url
+
+    # One entry per placement group you want to pin a specific asset to.
     attr_accessor :rules
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'default_image_url' => :'defaultImageUrl',
+        :'default_video_url' => :'defaultVideoUrl',
+        :'default_thumbnail_url' => :'defaultThumbnailUrl',
         :'rules' => :'rules'
       }
     end
@@ -44,6 +52,8 @@ module Zernio
     def self.openapi_types
       {
         :'default_image_url' => :'String',
+        :'default_video_url' => :'String',
+        :'default_thumbnail_url' => :'String',
         :'rules' => :'Array<CreateStandaloneAdRequestPlacementAssetsRulesInner>'
       }
     end
@@ -72,8 +82,14 @@ module Zernio
 
       if attributes.key?(:'default_image_url')
         self.default_image_url = attributes[:'default_image_url']
-      else
-        self.default_image_url = nil
+      end
+
+      if attributes.key?(:'default_video_url')
+        self.default_video_url = attributes[:'default_video_url']
+      end
+
+      if attributes.key?(:'default_thumbnail_url')
+        self.default_thumbnail_url = attributes[:'default_thumbnail_url']
       end
 
       if attributes.key?(:'rules')
@@ -90,10 +106,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @default_image_url.nil?
-        invalid_properties.push('invalid value for "default_image_url", default_image_url cannot be nil.')
-      end
-
       if @rules.nil?
         invalid_properties.push('invalid value for "rules", rules cannot be nil.')
       end
@@ -113,21 +125,10 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @default_image_url.nil?
       return false if @rules.nil?
       return false if @rules.length > 10
       return false if @rules.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] default_image_url Value to be assigned
-    def default_image_url=(default_image_url)
-      if default_image_url.nil?
-        fail ArgumentError, 'default_image_url cannot be nil'
-      end
-
-      @default_image_url = default_image_url
     end
 
     # Custom attribute writer method with validation
@@ -154,6 +155,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           default_image_url == o.default_image_url &&
+          default_video_url == o.default_video_url &&
+          default_thumbnail_url == o.default_thumbnail_url &&
           rules == o.rules
     end
 
@@ -166,7 +169,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [default_image_url, rules].hash
+      [default_image_url, default_video_url, default_thumbnail_url, rules].hash
     end
 
     # Builds the object from hash
