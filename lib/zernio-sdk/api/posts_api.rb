@@ -609,7 +609,7 @@ module Zernio
     end
 
     # Update post
-    # Update an existing post. Only draft, scheduled, failed, and partial posts can be edited. Published, publishing, and cancelled posts cannot be modified. 
+    # Update an existing post. Draft, scheduled, failed, partial, and cancelled posts can be edited. Published posts can only have their recycling config updated. 
     # @param post_id [String] 
     # @param update_post_request [UpdatePostRequest] 
     # @param [Hash] opts the optional parameters
@@ -620,7 +620,7 @@ module Zernio
     end
 
     # Update post
-    # Update an existing post. Only draft, scheduled, failed, and partial posts can be edited. Published, publishing, and cancelled posts cannot be modified. 
+    # Update an existing post. Draft, scheduled, failed, partial, and cancelled posts can be edited. Published posts can only have their recycling config updated. 
     # @param post_id [String] 
     # @param update_post_request [UpdatePostRequest] 
     # @param [Hash] opts the optional parameters

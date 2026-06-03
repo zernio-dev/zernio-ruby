@@ -1378,6 +1378,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdatePostMetadata200Response](docs/UpdatePostMetadata200Response.md)
  - [Zernio::UpdatePostMetadataRequest](docs/UpdatePostMetadataRequest.md)
  - [Zernio::UpdatePostRequest](docs/UpdatePostRequest.md)
+ - [Zernio::UpdatePostRequestPlatformsInner](docs/UpdatePostRequestPlatformsInner.md)
  - [Zernio::UpdateProfile200Response](docs/UpdateProfile200Response.md)
  - [Zernio::UpdateProfileRequest](docs/UpdateProfileRequest.md)
  - [Zernio::UpdateQueueSlot200Response](docs/UpdateQueueSlot200Response.md)

@@ -990,6 +990,7 @@ docs/UpdatePinterestBoardsRequest.md
 docs/UpdatePostMetadata200Response.md
 docs/UpdatePostMetadataRequest.md
 docs/UpdatePostRequest.md
+docs/UpdatePostRequestPlatformsInner.md
 docs/UpdateProfile200Response.md
 docs/UpdateProfileRequest.md
 docs/UpdateQueueSlot200Response.md
@@ -2160,6 +2161,7 @@ lib/zernio-sdk/models/update_pinterest_boards_request.rb
 lib/zernio-sdk/models/update_post_metadata200_response.rb
 lib/zernio-sdk/models/update_post_metadata_request.rb
 lib/zernio-sdk/models/update_post_request.rb
+lib/zernio-sdk/models/update_post_request_platforms_inner.rb
 lib/zernio-sdk/models/update_profile200_response.rb
 lib/zernio-sdk/models/update_profile_request.rb
 lib/zernio-sdk/models/update_queue_slot200_response.rb
@@ -3311,6 +3313,7 @@ spec/models/update_linked_in_organization_request_spec.rb
 spec/models/update_pinterest_boards_request_spec.rb
 spec/models/update_post_metadata200_response_spec.rb
 spec/models/update_post_metadata_request_spec.rb
+spec/models/update_post_request_platforms_inner_spec.rb
 spec/models/update_post_request_spec.rb
 spec/models/update_profile200_response_spec.rb
 spec/models/update_profile_request_spec.rb

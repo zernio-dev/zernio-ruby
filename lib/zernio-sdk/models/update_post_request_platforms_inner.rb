@@ -14,17 +14,17 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreatePostRequestPlatformsInner < ApiModelBase
+  class UpdatePostRequestPlatformsInner < ApiModelBase
     attr_accessor :platform
 
     attr_accessor :account_id
 
-    # Platform-specific text override. When set, this content is used instead of the top-level post content for this platform. Useful for tailoring captions per platform (e.g. keeping tweets under 280 characters).
+    # Platform-specific text override.
     attr_accessor :custom_content
 
     attr_accessor :custom_media
 
-    # Optional per-platform scheduled time override. When omitted, the top-level scheduledFor is used.
+    # Optional per-platform scheduled time override.
     attr_accessor :scheduled_for
 
     attr_accessor :platform_specific_data
@@ -59,7 +59,7 @@ module Zernio
         :'custom_content' => :'String',
         :'custom_media' => :'Array<MediaItem>',
         :'scheduled_for' => :'Time',
-        :'platform_specific_data' => :'CreatePostRequestPlatformsInnerPlatformSpecificData'
+        :'platform_specific_data' => :'Hash<String, Object>'
       }
     end
 
@@ -73,14 +73,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreatePostRequestPlatformsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdatePostRequestPlatformsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreatePostRequestPlatformsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdatePostRequestPlatformsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -112,7 +112,9 @@ module Zernio
       end
 
       if attributes.key?(:'platform_specific_data')
-        self.platform_specific_data = attributes[:'platform_specific_data']
+        if (value = attributes[:'platform_specific_data']).is_a?(Hash)
+          self.platform_specific_data = value
+        end
       end
     end
 

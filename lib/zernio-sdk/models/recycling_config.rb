@@ -28,10 +28,10 @@ module Zernio
     # When to start the recycling cycle. Defaults to the post's scheduledFor date.
     attr_accessor :start_date
 
-    # Stop recycling after this many copies have been created
+    # Stop recycling after this many copies have been created. Send null on update to clear this limit.
     attr_accessor :expire_count
 
-    # Stop recycling after this date, regardless of count
+    # Stop recycling after this date, regardless of count. Send null on update to clear this limit.
     attr_accessor :expire_date
 
     # Array of content variations for recycled copies. On each recycle, the next variation is used in round-robin order. Recommended for Twitter and Pinterest to avoid duplicate content flags. If omitted, the original post content is used for all recycled copies. Send an empty array [] to clear existing variations. Must have 2+ entries when setting variations. Platform-level customContent still overrides the base content per platform. 

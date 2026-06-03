@@ -15,9 +15,40 @@ require 'time'
 
 module Zernio
   class UpdatePostRequest < ApiModelBase
+    attr_accessor :title
+
     attr_accessor :content
 
+    attr_accessor :media_items
+
+    # Target platforms and accounts for this post. Each item must include platform and accountId.
+    attr_accessor :platforms
+
     attr_accessor :scheduled_for
+
+    attr_accessor :publish_now
+
+    attr_accessor :is_draft
+
+    attr_accessor :timezone
+
+    attr_accessor :visibility
+
+    attr_accessor :tags
+
+    attr_accessor :hashtags
+
+    attr_accessor :mentions
+
+    attr_accessor :crossposting_enabled
+
+    attr_accessor :metadata
+
+    # Profile ID to schedule via queue.
+    attr_accessor :queued_from_profile
+
+    # Specific queue ID to use when scheduling via queue.
+    attr_accessor :queue_id
 
     # Root-level TikTok settings applied to all TikTok platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
     attr_accessor :tiktok_settings
@@ -27,11 +58,47 @@ module Zernio
 
     attr_accessor :recycling
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'title' => :'title',
         :'content' => :'content',
+        :'media_items' => :'mediaItems',
+        :'platforms' => :'platforms',
         :'scheduled_for' => :'scheduledFor',
+        :'publish_now' => :'publishNow',
+        :'is_draft' => :'isDraft',
+        :'timezone' => :'timezone',
+        :'visibility' => :'visibility',
+        :'tags' => :'tags',
+        :'hashtags' => :'hashtags',
+        :'mentions' => :'mentions',
+        :'crossposting_enabled' => :'crosspostingEnabled',
+        :'metadata' => :'metadata',
+        :'queued_from_profile' => :'queuedFromProfile',
+        :'queue_id' => :'queueId',
         :'tiktok_settings' => :'tiktokSettings',
         :'facebook_settings' => :'facebookSettings',
         :'recycling' => :'recycling'
@@ -51,8 +118,22 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'title' => :'String',
         :'content' => :'String',
+        :'media_items' => :'Array<MediaItem>',
+        :'platforms' => :'Array<UpdatePostRequestPlatformsInner>',
         :'scheduled_for' => :'Time',
+        :'publish_now' => :'Boolean',
+        :'is_draft' => :'Boolean',
+        :'timezone' => :'String',
+        :'visibility' => :'String',
+        :'tags' => :'Array<String>',
+        :'hashtags' => :'Array<String>',
+        :'mentions' => :'Array<String>',
+        :'crossposting_enabled' => :'Boolean',
+        :'metadata' => :'Hash<String, Object>',
+        :'queued_from_profile' => :'String',
+        :'queue_id' => :'String',
         :'tiktok_settings' => :'TikTokPlatformData',
         :'facebook_settings' => :'FacebookPlatformData',
         :'recycling' => :'RecyclingConfig'
@@ -81,12 +162,82 @@ module Zernio
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
       if attributes.key?(:'content')
         self.content = attributes[:'content']
       end
 
+      if attributes.key?(:'media_items')
+        if (value = attributes[:'media_items']).is_a?(Array)
+          self.media_items = value
+        end
+      end
+
+      if attributes.key?(:'platforms')
+        if (value = attributes[:'platforms']).is_a?(Array)
+          self.platforms = value
+        end
+      end
+
       if attributes.key?(:'scheduled_for')
         self.scheduled_for = attributes[:'scheduled_for']
+      end
+
+      if attributes.key?(:'publish_now')
+        self.publish_now = attributes[:'publish_now']
+      else
+        self.publish_now = false
+      end
+
+      if attributes.key?(:'is_draft')
+        self.is_draft = attributes[:'is_draft']
+      end
+
+      if attributes.key?(:'timezone')
+        self.timezone = attributes[:'timezone']
+      end
+
+      if attributes.key?(:'visibility')
+        self.visibility = attributes[:'visibility']
+      end
+
+      if attributes.key?(:'tags')
+        if (value = attributes[:'tags']).is_a?(Array)
+          self.tags = value
+        end
+      end
+
+      if attributes.key?(:'hashtags')
+        if (value = attributes[:'hashtags']).is_a?(Array)
+          self.hashtags = value
+        end
+      end
+
+      if attributes.key?(:'mentions')
+        if (value = attributes[:'mentions']).is_a?(Array)
+          self.mentions = value
+        end
+      end
+
+      if attributes.key?(:'crossposting_enabled')
+        self.crossposting_enabled = attributes[:'crossposting_enabled']
+      end
+
+      if attributes.key?(:'metadata')
+        if (value = attributes[:'metadata']).is_a?(Hash)
+          self.metadata = value
+        end
+      end
+
+      if attributes.key?(:'queued_from_profile')
+        self.queued_from_profile = attributes[:'queued_from_profile']
+      end
+
+      if attributes.key?(:'queue_id')
+        self.queue_id = attributes[:'queue_id']
       end
 
       if attributes.key?(:'tiktok_settings')
@@ -114,7 +265,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      visibility_validator = EnumAttributeValidator.new('String', ["public", "private", "unlisted"])
+      return false unless visibility_validator.valid?(@visibility)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] visibility Object to be assigned
+    def visibility=(visibility)
+      validator = EnumAttributeValidator.new('String', ["public", "private", "unlisted"])
+      unless validator.valid?(visibility)
+        fail ArgumentError, "invalid value for \"visibility\", must be one of #{validator.allowable_values}."
+      end
+      @visibility = visibility
     end
 
     # Checks equality by comparing each attribute.
@@ -122,8 +285,22 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          title == o.title &&
           content == o.content &&
+          media_items == o.media_items &&
+          platforms == o.platforms &&
           scheduled_for == o.scheduled_for &&
+          publish_now == o.publish_now &&
+          is_draft == o.is_draft &&
+          timezone == o.timezone &&
+          visibility == o.visibility &&
+          tags == o.tags &&
+          hashtags == o.hashtags &&
+          mentions == o.mentions &&
+          crossposting_enabled == o.crossposting_enabled &&
+          metadata == o.metadata &&
+          queued_from_profile == o.queued_from_profile &&
+          queue_id == o.queue_id &&
           tiktok_settings == o.tiktok_settings &&
           facebook_settings == o.facebook_settings &&
           recycling == o.recycling
@@ -138,7 +315,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content, scheduled_for, tiktok_settings, facebook_settings, recycling].hash
+      [title, content, media_items, platforms, scheduled_for, publish_now, is_draft, timezone, visibility, tags, hashtags, mentions, crossposting_enabled, metadata, queued_from_profile, queue_id, tiktok_settings, facebook_settings, recycling].hash
     end
 
     # Builds the object from hash
