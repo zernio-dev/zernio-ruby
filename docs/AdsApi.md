@@ -18,8 +18,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad**](AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
 | [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**get_ad_comments**](AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
+| [**get_ad_tracking_tags**](AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Read an ad&#39;s click-URL tracking tags |
 | [**get_conversion_destination**](AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Fetch a single conversion destination |
 | [**get_conversion_metrics**](AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Fetch attribution metrics for a conversion destination |
+| [**get_conversions_quality**](AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Read Event Match Quality + coverage for a Meta pixel |
 | [**get_lead_form**](AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a single Lead Gen form |
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
@@ -36,6 +38,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**send_conversions**](AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform |
 | [**send_whats_app_conversion**](AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
+| [**update_ad_tracking_tags**](AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set/update an ad&#39;s click-URL tracking tags |
 | [**update_conversion_destination**](AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination |
 
 
@@ -1036,6 +1039,75 @@ end
 - **Accept**: application/json
 
 
+## get_ad_tracking_tags
+
+> <GetAdTrackingTags200Response> get_ad_tracking_tags(ad_id)
+
+Read an ad's click-URL tracking tags
+
+Unified read of the platform's native click-URL tracking params. - Meta (facebook/instagram): the creative's `url_tags` (and template_url_spec). - Google (googleads): the campaign's `trackingUrlTemplate` + `finalUrlSuffix`.   Subject to the Google Ads API access-tier daily quota; bulk audits need Standard access. - LinkedIn (linkedinads): the campaign's Dynamic UTM `dynamicValueParameters` + `customValueParameters`. Returns 405 for platforms without a click-URL tracking surface (TikTok, X, Pinterest). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+ad_id = 'ad_id_example' # String | Ad id (hex _id, platformAdId, or effective story/media id).
+
+begin
+  # Read an ad's click-URL tracking tags
+  result = api_instance.get_ad_tracking_tags(ad_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_tracking_tags: #{e}"
+end
+```
+
+#### Using the get_ad_tracking_tags_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdTrackingTags200Response>, Integer, Hash)> get_ad_tracking_tags_with_http_info(ad_id)
+
+```ruby
+begin
+  # Read an ad's click-URL tracking tags
+  data, status_code, headers = api_instance.get_ad_tracking_tags_with_http_info(ad_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdTrackingTags200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_tracking_tags_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Ad id (hex _id, platformAdId, or effective story/media id). |  |
+
+### Return type
+
+[**GetAdTrackingTags200Response**](GetAdTrackingTags200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_conversion_destination
 
 > <CreateConversionDestination201Response> get_conversion_destination(account_id, destination_id, ad_account_id)
@@ -1179,6 +1251,77 @@ end
 ### Return type
 
 [**GetConversionMetrics200Response**](GetConversionMetrics200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_conversions_quality
+
+> <GetConversionsQuality200Response> get_conversions_quality(account_id, destination_id)
+
+Read Event Match Quality + coverage for a Meta pixel
+
+Reads Meta Event Match Quality (EMQ) and pixel↔CAPI event coverage for a pixel/dataset, live from Meta's Dataset Quality API. Web events only (a Meta limitation). Meta-only; other platforms return 405. Requires the Ads add-on. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | SocialAccount _id (must be a metaads account).
+destination_id = 'destination_id_example' # String | Meta pixel/dataset ID.
+
+begin
+  # Read Event Match Quality + coverage for a Meta pixel
+  result = api_instance.get_conversions_quality(account_id, destination_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_conversions_quality: #{e}"
+end
+```
+
+#### Using the get_conversions_quality_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetConversionsQuality200Response>, Integer, Hash)> get_conversions_quality_with_http_info(account_id, destination_id)
+
+```ruby
+begin
+  # Read Event Match Quality + coverage for a Meta pixel
+  data, status_code, headers = api_instance.get_conversions_quality_with_http_info(account_id, destination_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetConversionsQuality200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_conversions_quality_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | SocialAccount _id (must be a metaads account). |  |
+| **destination_id** | **String** | Meta pixel/dataset ID. |  |
+
+### Return type
+
+[**GetConversionsQuality200Response**](GetConversionsQuality200Response.md)
 
 ### Authorization
 
@@ -2373,6 +2516,76 @@ end
 ### Return type
 
 [**UpdateAd200Response**](UpdateAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ad_tracking_tags
+
+> update_ad_tracking_tags(ad_id, update_ad_tracking_tags_request)
+
+Set/update an ad's click-URL tracking tags
+
+Unified update. Send only the fields for the ad's platform: - Meta: `urlTags` (array of {key,value}) + `creative` (headline, body, callToAction, linkUrl, imageUrl).   Meta creatives are immutable, so this REBUILDS the creative and repoints the ad — the full   creative is required. Placement-customized / asset-feed / dark creatives may not be   rebuildable this way and return 422. - Google: `trackingUrlTemplate` and/or `finalUrlSuffix` (full template strings; account quota applies). - LinkedIn: `dynamicValueParameters` and/or `customValueParameters` (campaign-level Dynamic UTM). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+ad_id = 'ad_id_example' # String | 
+update_ad_tracking_tags_request = Zernio::UpdateAdTrackingTagsRequest.new # UpdateAdTrackingTagsRequest | 
+
+begin
+  # Set/update an ad's click-URL tracking tags
+  api_instance.update_ad_tracking_tags(ad_id, update_ad_tracking_tags_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->update_ad_tracking_tags: #{e}"
+end
+```
+
+#### Using the update_ad_tracking_tags_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request)
+
+```ruby
+begin
+  # Set/update an ad's click-URL tracking tags
+  data, status_code, headers = api_instance.update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->update_ad_tracking_tags_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** |  |  |
+| **update_ad_tracking_tags_request** | [**UpdateAdTrackingTagsRequest**](UpdateAdTrackingTagsRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
 
 ### Authorization
 

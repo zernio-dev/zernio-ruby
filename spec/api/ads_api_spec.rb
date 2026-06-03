@@ -213,6 +213,18 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for get_ad_tracking_tags
+  # Read an ad&#39;s click-URL tracking tags
+  # Unified read of the platform&#39;s native click-URL tracking params. - Meta (facebook/instagram): the creative&#39;s &#x60;url_tags&#x60; (and template_url_spec). - Google (googleads): the campaign&#39;s &#x60;trackingUrlTemplate&#x60; + &#x60;finalUrlSuffix&#x60;.   Subject to the Google Ads API access-tier daily quota; bulk audits need Standard access. - LinkedIn (linkedinads): the campaign&#39;s Dynamic UTM &#x60;dynamicValueParameters&#x60; + &#x60;customValueParameters&#x60;. Returns 405 for platforms without a click-URL tracking surface (TikTok, X, Pinterest). 
+  # @param ad_id Ad id (hex _id, platformAdId, or effective story/media id).
+  # @param [Hash] opts the optional parameters
+  # @return [GetAdTrackingTags200Response]
+  describe 'get_ad_tracking_tags test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_conversion_destination
   # Fetch a single conversion destination
   # LinkedIn-only today. Returns the full destination record for one conversion rule. The &#x60;adAccountId&#x60; query parameter is required because LinkedIn rules are scoped to a sponsored ad account. 
@@ -239,6 +251,19 @@ describe 'AdsApi' do
   # @option opts [String] :granularity 
   # @return [GetConversionMetrics200Response]
   describe 'get_conversion_metrics test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_conversions_quality
+  # Read Event Match Quality + coverage for a Meta pixel
+  # Reads Meta Event Match Quality (EMQ) and pixel↔CAPI event coverage for a pixel/dataset, live from Meta&#39;s Dataset Quality API. Web events only (a Meta limitation). Meta-only; other platforms return 405. Requires the Ads add-on. 
+  # @param account_id SocialAccount _id (must be a metaads account).
+  # @param destination_id Meta pixel/dataset ID.
+  # @param [Hash] opts the optional parameters
+  # @return [GetConversionsQuality200Response]
+  describe 'get_conversions_quality test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -469,6 +494,19 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAd200Response]
   describe 'update_ad test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_tracking_tags
+  # Set/update an ad&#39;s click-URL tracking tags
+  # Unified update. Send only the fields for the ad&#39;s platform: - Meta: &#x60;urlTags&#x60; (array of {key,value}) + &#x60;creative&#x60; (headline, body, callToAction, linkUrl, imageUrl).   Meta creatives are immutable, so this REBUILDS the creative and repoints the ad — the full   creative is required. Placement-customized / asset-feed / dark creatives may not be   rebuildable this way and return 422. - Google: &#x60;trackingUrlTemplate&#x60; and/or &#x60;finalUrlSuffix&#x60; (full template strings; account quota applies). - LinkedIn: &#x60;dynamicValueParameters&#x60; and/or &#x60;customValueParameters&#x60; (campaign-level Dynamic UTM). 
+  # @param ad_id 
+  # @param update_ad_tracking_tags_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'update_ad_tracking_tags test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

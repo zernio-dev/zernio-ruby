@@ -119,8 +119,10 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
+*Zernio::AdsApi* | [**get_ad_tracking_tags**](docs/AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Read an ad's click-URL tracking tags
 *Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Fetch a single conversion destination
 *Zernio::AdsApi* | [**get_conversion_metrics**](docs/AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Fetch attribution metrics for a conversion destination
+*Zernio::AdsApi* | [**get_conversions_quality**](docs/AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Read Event Match Quality + coverage for a Meta pixel
 *Zernio::AdsApi* | [**get_lead_form**](docs/AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a single Lead Gen form
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
@@ -137,6 +139,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events to an ad platform
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
+*Zernio::AdsApi* | [**update_ad_tracking_tags**](docs/AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set/update an ad's click-URL tracking tags
 *Zernio::AdsApi* | [**update_conversion_destination**](docs/AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Zernio::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
@@ -726,6 +729,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdComments200Response](docs/GetAdComments200Response.md)
  - [Zernio::GetAdComments200ResponseMeta](docs/GetAdComments200ResponseMeta.md)
  - [Zernio::GetAdComments200ResponsePagination](docs/GetAdComments200ResponsePagination.md)
+ - [Zernio::GetAdTrackingTags200Response](docs/GetAdTrackingTags200Response.md)
  - [Zernio::GetAdTree200Response](docs/GetAdTree200Response.md)
  - [Zernio::GetAdsTimeline200Response](docs/GetAdsTimeline200Response.md)
  - [Zernio::GetAdsTimeline200ResponseRowsInner](docs/GetAdsTimeline200ResponseRowsInner.md)
@@ -756,6 +760,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetConversionMetrics200Response](docs/GetConversionMetrics200Response.md)
  - [Zernio::GetConversionMetrics200ResponseRowsInner](docs/GetConversionMetrics200ResponseRowsInner.md)
  - [Zernio::GetConversionMetrics200ResponseRowsInnerMetricsValue](docs/GetConversionMetrics200ResponseRowsInnerMetricsValue.md)
+ - [Zernio::GetConversionsQuality200Response](docs/GetConversionsQuality200Response.md)
+ - [Zernio::GetConversionsQuality200ResponseRowsInner](docs/GetConversionsQuality200ResponseRowsInner.md)
+ - [Zernio::GetConversionsQuality200ResponseRowsInnerMatchKeysInner](docs/GetConversionsQuality200ResponseRowsInnerMatchKeysInner.md)
  - [Zernio::GetDailyMetrics200Response](docs/GetDailyMetrics200Response.md)
  - [Zernio::GetDailyMetrics200ResponseDailyDataInner](docs/GetDailyMetrics200ResponseDailyDataInner.md)
  - [Zernio::GetDailyMetrics200ResponseDailyDataInnerMetrics](docs/GetDailyMetrics200ResponseDailyDataInnerMetrics.md)
@@ -1322,6 +1329,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdSetRequest](docs/UpdateAdSetRequest.md)
  - [Zernio::UpdateAdSetRequestBudget](docs/UpdateAdSetRequestBudget.md)
  - [Zernio::UpdateAdSetStatus200Response](docs/UpdateAdSetStatus200Response.md)
+ - [Zernio::UpdateAdTrackingTagsRequest](docs/UpdateAdTrackingTagsRequest.md)
+ - [Zernio::UpdateAdTrackingTagsRequestCreative](docs/UpdateAdTrackingTagsRequestCreative.md)
+ - [Zernio::UpdateAdTrackingTagsRequestUrlTagsInner](docs/UpdateAdTrackingTagsRequestUrlTagsInner.md)
  - [Zernio::UpdateBroadcast200Response](docs/UpdateBroadcast200Response.md)
  - [Zernio::UpdateBroadcast200ResponseBroadcast](docs/UpdateBroadcast200ResponseBroadcast.md)
  - [Zernio::UpdateBroadcastRequest](docs/UpdateBroadcastRequest.md)

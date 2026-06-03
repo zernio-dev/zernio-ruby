@@ -12,6 +12,11 @@
 | **ip_address** | **String** | Client IP address. Sent plaintext. | [optional] |
 | **user_agent** | **String** | Client user-agent string. Sent plaintext. | [optional] |
 | **country** | **String** | ISO 3166-1 alpha-2 country code, e.g. &#39;us&#39;. | [optional] |
+| **city** | **String** | Meta advanced matching (ct). Plaintext city; normalized + SHA-256 hashed server-side. Meta only. | [optional] |
+| **state** | **String** | Meta advanced matching (st). 2-letter ANSI for US; hashed server-side. Meta only. | [optional] |
+| **zip** | **String** | Meta advanced matching (zp). US uses first 5 digits; hashed server-side. Meta only. | [optional] |
+| **dob** | **String** | Meta advanced matching (db). YYYYMMDD; hashed server-side. Meta only. | [optional] |
+| **gender** | **String** | Meta advanced matching (ge). &#39;f&#39; or &#39;m&#39;; hashed server-side. Meta only. | [optional] |
 | **click_ids** | [**ConversionEventUserClickIds**](ConversionEventUserClickIds.md) |  | [optional] |
 
 ## Example
@@ -28,6 +33,11 @@ instance = Zernio::ConversionEventUser.new(
   ip_address: null,
   user_agent: null,
   country: null,
+  city: null,
+  state: null,
+  zip: null,
+  dob: null,
+  gender: null,
   click_ids: null
 )
 ```

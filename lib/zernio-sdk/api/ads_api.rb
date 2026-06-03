@@ -1011,6 +1011,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Read an ad's click-URL tracking tags
+    # Unified read of the platform's native click-URL tracking params. - Meta (facebook/instagram): the creative's `url_tags` (and template_url_spec). - Google (googleads): the campaign's `trackingUrlTemplate` + `finalUrlSuffix`.   Subject to the Google Ads API access-tier daily quota; bulk audits need Standard access. - LinkedIn (linkedinads): the campaign's Dynamic UTM `dynamicValueParameters` + `customValueParameters`. Returns 405 for platforms without a click-URL tracking surface (TikTok, X, Pinterest). 
+    # @param ad_id [String] Ad id (hex _id, platformAdId, or effective story/media id).
+    # @param [Hash] opts the optional parameters
+    # @return [GetAdTrackingTags200Response]
+    def get_ad_tracking_tags(ad_id, opts = {})
+      data, _status_code, _headers = get_ad_tracking_tags_with_http_info(ad_id, opts)
+      data
+    end
+
+    # Read an ad&#39;s click-URL tracking tags
+    # Unified read of the platform&#39;s native click-URL tracking params. - Meta (facebook/instagram): the creative&#39;s &#x60;url_tags&#x60; (and template_url_spec). - Google (googleads): the campaign&#39;s &#x60;trackingUrlTemplate&#x60; + &#x60;finalUrlSuffix&#x60;.   Subject to the Google Ads API access-tier daily quota; bulk audits need Standard access. - LinkedIn (linkedinads): the campaign&#39;s Dynamic UTM &#x60;dynamicValueParameters&#x60; + &#x60;customValueParameters&#x60;. Returns 405 for platforms without a click-URL tracking surface (TikTok, X, Pinterest). 
+    # @param ad_id [String] Ad id (hex _id, platformAdId, or effective story/media id).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetAdTrackingTags200Response, Integer, Hash)>] GetAdTrackingTags200Response data, response status code and response headers
+    def get_ad_tracking_tags_with_http_info(ad_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_ad_tracking_tags ...'
+      end
+      # verify the required parameter 'ad_id' is set
+      if @api_client.config.client_side_validation && ad_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdsApi.get_ad_tracking_tags"
+      end
+      # resource path
+      local_var_path = '/v1/ads/{adId}/tracking-tags'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdTrackingTags200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_ad_tracking_tags",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_ad_tracking_tags\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Fetch a single conversion destination
     # LinkedIn-only today. Returns the full destination record for one conversion rule. The `adAccountId` query parameter is required because LinkedIn rules are scoped to a sponsored ad account. 
     # @param account_id [String] 
@@ -1186,6 +1249,77 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#get_conversion_metrics\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Read Event Match Quality + coverage for a Meta pixel
+    # Reads Meta Event Match Quality (EMQ) and pixel↔CAPI event coverage for a pixel/dataset, live from Meta's Dataset Quality API. Web events only (a Meta limitation). Meta-only; other platforms return 405. Requires the Ads add-on. 
+    # @param account_id [String] SocialAccount _id (must be a metaads account).
+    # @param destination_id [String] Meta pixel/dataset ID.
+    # @param [Hash] opts the optional parameters
+    # @return [GetConversionsQuality200Response]
+    def get_conversions_quality(account_id, destination_id, opts = {})
+      data, _status_code, _headers = get_conversions_quality_with_http_info(account_id, destination_id, opts)
+      data
+    end
+
+    # Read Event Match Quality + coverage for a Meta pixel
+    # Reads Meta Event Match Quality (EMQ) and pixel↔CAPI event coverage for a pixel/dataset, live from Meta&#39;s Dataset Quality API. Web events only (a Meta limitation). Meta-only; other platforms return 405. Requires the Ads add-on. 
+    # @param account_id [String] SocialAccount _id (must be a metaads account).
+    # @param destination_id [String] Meta pixel/dataset ID.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetConversionsQuality200Response, Integer, Hash)>] GetConversionsQuality200Response data, response status code and response headers
+    def get_conversions_quality_with_http_info(account_id, destination_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_conversions_quality ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.get_conversions_quality"
+      end
+      # verify the required parameter 'destination_id' is set
+      if @api_client.config.client_side_validation && destination_id.nil?
+        fail ArgumentError, "Missing the required parameter 'destination_id' when calling AdsApi.get_conversions_quality"
+      end
+      # resource path
+      local_var_path = '/v1/ads/conversions/quality'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'destinationId'] = destination_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetConversionsQuality200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_conversions_quality",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_conversions_quality\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2445,6 +2579,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#update_ad\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Set/update an ad's click-URL tracking tags
+    # Unified update. Send only the fields for the ad's platform: - Meta: `urlTags` (array of {key,value}) + `creative` (headline, body, callToAction, linkUrl, imageUrl).   Meta creatives are immutable, so this REBUILDS the creative and repoints the ad — the full   creative is required. Placement-customized / asset-feed / dark creatives may not be   rebuildable this way and return 422. - Google: `trackingUrlTemplate` and/or `finalUrlSuffix` (full template strings; account quota applies). - LinkedIn: `dynamicValueParameters` and/or `customValueParameters` (campaign-level Dynamic UTM). 
+    # @param ad_id [String] 
+    # @param update_ad_tracking_tags_request [UpdateAdTrackingTagsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def update_ad_tracking_tags(ad_id, update_ad_tracking_tags_request, opts = {})
+      update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request, opts)
+      nil
+    end
+
+    # Set/update an ad&#39;s click-URL tracking tags
+    # Unified update. Send only the fields for the ad&#39;s platform: - Meta: &#x60;urlTags&#x60; (array of {key,value}) + &#x60;creative&#x60; (headline, body, callToAction, linkUrl, imageUrl).   Meta creatives are immutable, so this REBUILDS the creative and repoints the ad — the full   creative is required. Placement-customized / asset-feed / dark creatives may not be   rebuildable this way and return 422. - Google: &#x60;trackingUrlTemplate&#x60; and/or &#x60;finalUrlSuffix&#x60; (full template strings; account quota applies). - LinkedIn: &#x60;dynamicValueParameters&#x60; and/or &#x60;customValueParameters&#x60; (campaign-level Dynamic UTM). 
+    # @param ad_id [String] 
+    # @param update_ad_tracking_tags_request [UpdateAdTrackingTagsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.update_ad_tracking_tags ...'
+      end
+      # verify the required parameter 'ad_id' is set
+      if @api_client.config.client_side_validation && ad_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdsApi.update_ad_tracking_tags"
+      end
+      # verify the required parameter 'update_ad_tracking_tags_request' is set
+      if @api_client.config.client_side_validation && update_ad_tracking_tags_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_tracking_tags_request' when calling AdsApi.update_ad_tracking_tags"
+      end
+      # resource path
+      local_var_path = '/v1/ads/{adId}/tracking-tags'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_tracking_tags_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.update_ad_tracking_tags",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#update_ad_tracking_tags\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

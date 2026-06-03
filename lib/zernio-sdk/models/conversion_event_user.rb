@@ -40,6 +40,21 @@ module Zernio
     # ISO 3166-1 alpha-2 country code, e.g. 'us'.
     attr_accessor :country
 
+    # Meta advanced matching (ct). Plaintext city; normalized + SHA-256 hashed server-side. Meta only.
+    attr_accessor :city
+
+    # Meta advanced matching (st). 2-letter ANSI for US; hashed server-side. Meta only.
+    attr_accessor :state
+
+    # Meta advanced matching (zp). US uses first 5 digits; hashed server-side. Meta only.
+    attr_accessor :zip
+
+    # Meta advanced matching (db). YYYYMMDD; hashed server-side. Meta only.
+    attr_accessor :dob
+
+    # Meta advanced matching (ge). 'f' or 'm'; hashed server-side. Meta only.
+    attr_accessor :gender
+
     attr_accessor :click_ids
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -53,6 +68,11 @@ module Zernio
         :'ip_address' => :'ipAddress',
         :'user_agent' => :'userAgent',
         :'country' => :'country',
+        :'city' => :'city',
+        :'state' => :'state',
+        :'zip' => :'zip',
+        :'dob' => :'dob',
+        :'gender' => :'gender',
         :'click_ids' => :'clickIds'
       }
     end
@@ -78,6 +98,11 @@ module Zernio
         :'ip_address' => :'String',
         :'user_agent' => :'String',
         :'country' => :'String',
+        :'city' => :'String',
+        :'state' => :'String',
+        :'zip' => :'String',
+        :'dob' => :'String',
+        :'gender' => :'String',
         :'click_ids' => :'ConversionEventUserClickIds'
       }
     end
@@ -136,6 +161,26 @@ module Zernio
         self.country = attributes[:'country']
       end
 
+      if attributes.key?(:'city')
+        self.city = attributes[:'city']
+      end
+
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.key?(:'zip')
+        self.zip = attributes[:'zip']
+      end
+
+      if attributes.key?(:'dob')
+        self.dob = attributes[:'dob']
+      end
+
+      if attributes.key?(:'gender')
+        self.gender = attributes[:'gender']
+      end
+
       if attributes.key?(:'click_ids')
         self.click_ids = attributes[:'click_ids']
       end
@@ -169,6 +214,11 @@ module Zernio
           ip_address == o.ip_address &&
           user_agent == o.user_agent &&
           country == o.country &&
+          city == o.city &&
+          state == o.state &&
+          zip == o.zip &&
+          dob == o.dob &&
+          gender == o.gender &&
           click_ids == o.click_ids
     end
 
@@ -181,7 +231,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [email, phone, first_name, last_name, external_id, ip_address, user_agent, country, click_ids].hash
+      [email, phone, first_name, last_name, external_id, ip_address, user_agent, country, city, state, zip, dob, gender, click_ids].hash
     end
 
     # Builds the object from hash
