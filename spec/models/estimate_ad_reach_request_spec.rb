@@ -33,6 +33,12 @@ describe Zernio::EstimateAdReachRequest do
     end
   end
 
+  describe 'test attribute "ad_account_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "spec"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

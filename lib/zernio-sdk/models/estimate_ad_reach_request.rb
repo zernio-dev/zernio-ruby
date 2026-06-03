@@ -15,8 +15,11 @@ require 'time'
 
 module Zernio
   class EstimateAdReachRequest < ApiModelBase
-    # Social account ID on the target ad platform.
+    # Zernio social account ID on the target ad platform (the estimate runs against its platform).
     attr_accessor :account_id
+
+    # Required. The platform ad-account ID the reach call runs against (Meta act_..., LinkedIn numeric sponsoredAccount ID, Pinterest ad-account ID, X account ID) - every backing reach API is scoped to one ad account. Get it from GET /v1/ads/accounts.
+    attr_accessor :ad_account_id
 
     # The targeting spec to estimate. Same shape used by POST /v1/ads/create.
     attr_accessor :spec
@@ -28,6 +31,7 @@ module Zernio
     def self.attribute_map
       {
         :'account_id' => :'accountId',
+        :'ad_account_id' => :'adAccountId',
         :'spec' => :'spec',
         :'optimization_goal' => :'optimizationGoal'
       }
@@ -47,6 +51,7 @@ module Zernio
     def self.openapi_types
       {
         :'account_id' => :'String',
+        :'ad_account_id' => :'String',
         :'spec' => :'TargetingSpec',
         :'optimization_goal' => :'String'
       }
@@ -80,6 +85,12 @@ module Zernio
         self.account_id = nil
       end
 
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
+      else
+        self.ad_account_id = nil
+      end
+
       if attributes.key?(:'spec')
         self.spec = attributes[:'spec']
       else
@@ -100,6 +111,10 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
+      if @ad_account_id.nil?
+        invalid_properties.push('invalid value for "ad_account_id", ad_account_id cannot be nil.')
+      end
+
       if @spec.nil?
         invalid_properties.push('invalid value for "spec", spec cannot be nil.')
       end
@@ -112,6 +127,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
+      return false if @ad_account_id.nil?
       return false if @spec.nil?
       true
     end
@@ -124,6 +140,16 @@ module Zernio
       end
 
       @account_id = account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] ad_account_id Value to be assigned
+    def ad_account_id=(ad_account_id)
+      if ad_account_id.nil?
+        fail ArgumentError, 'ad_account_id cannot be nil'
+      end
+
+      @ad_account_id = ad_account_id
     end
 
     # Custom attribute writer method with validation
@@ -142,6 +168,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           account_id == o.account_id &&
+          ad_account_id == o.ad_account_id &&
           spec == o.spec &&
           optimization_goal == o.optimization_goal
     end
@@ -155,7 +182,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, spec, optimization_goal].hash
+      [account_id, ad_account_id, spec, optimization_goal].hash
     end
 
     # Builds the object from hash

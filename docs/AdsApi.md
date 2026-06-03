@@ -767,7 +767,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdsApi.new
-estimate_ad_reach_request = Zernio::EstimateAdReachRequest.new({account_id: 'account_id_example', spec: Zernio::TargetingSpec.new}) # EstimateAdReachRequest | 
+estimate_ad_reach_request = Zernio::EstimateAdReachRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', spec: Zernio::TargetingSpec.new}) # EstimateAdReachRequest | 
 
 begin
   # Estimate audience reach
