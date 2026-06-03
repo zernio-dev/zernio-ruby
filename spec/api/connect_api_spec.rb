@@ -141,9 +141,11 @@ describe 'ConnectApi' do
 
   # unit tests for get_gmb_locations
   # List GBP locations
-  # Returns all Google Business Profile locations the connected account has access to, including the currently selected location.
+  # Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all. 
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :search Free-text search on the business name, applied server-side by Google. Use for accounts with many locations.
+  # @option opts [String] :filter Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode&#x3D;\&quot;LH279411\&quot;.
   # @return [GetGmbLocations200Response]
   describe 'get_gmb_locations test' do
     it 'should work' do
@@ -281,6 +283,8 @@ describe 'ConnectApi' do
   # @option opts [String] :profile_id Profile ID from your connection flow. Required for auth validation when provided.
   # @option opts [String] :pending_data_token Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required.
   # @option opts [String] :temp_token Legacy. Direct Google access token. Use pendingDataToken instead when available.
+  # @option opts [String] :search Free-text search on the business name, applied server-side by Google. Use this for accounts that own many locations (the response is bounded, see hasMore) so the user can find a specific location without loading the full list. 
+  # @option opts [String] :filter Raw Google Business Information API filter expression (advanced; takes precedence over search). Supports fields such as title, storeCode, storefront_address.postal_code, labels and categories, e.g. storeCode&#x3D;\&quot;LH279411\&quot;. See Google&#39;s \&quot;Work with location data\&quot; guide. 
   # @return [ListGoogleBusinessLocations200Response]
   describe 'list_google_business_locations test' do
     it 'should work' do

@@ -11,6 +11,7 @@
 | **address** | **String** |  | [optional] |
 | **category** | **String** |  | [optional] |
 | **website_url** | **String** |  | [optional] |
+| **store_code** | **String** |  | [optional] |
 
 ## Example
 
@@ -24,7 +25,8 @@ instance = Zernio::GetGmbLocations200ResponseLocationsInner.new(
   account_name: null,
   address: null,
   category: null,
-  website_url: null
+  website_url: null,
+  store_code: null
 )
 ```
 

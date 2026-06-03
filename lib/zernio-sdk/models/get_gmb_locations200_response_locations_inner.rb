@@ -29,6 +29,8 @@ module Zernio
 
     attr_accessor :website_url
 
+    attr_accessor :store_code
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +40,8 @@ module Zernio
         :'account_name' => :'accountName',
         :'address' => :'address',
         :'category' => :'category',
-        :'website_url' => :'websiteUrl'
+        :'website_url' => :'websiteUrl',
+        :'store_code' => :'storeCode'
       }
     end
 
@@ -61,7 +64,8 @@ module Zernio
         :'account_name' => :'String',
         :'address' => :'String',
         :'category' => :'String',
-        :'website_url' => :'String'
+        :'website_url' => :'String',
+        :'store_code' => :'String'
       }
     end
 
@@ -114,6 +118,10 @@ module Zernio
       if attributes.key?(:'website_url')
         self.website_url = attributes[:'website_url']
       end
+
+      if attributes.key?(:'store_code')
+        self.store_code = attributes[:'store_code']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -142,7 +150,8 @@ module Zernio
           account_name == o.account_name &&
           address == o.address &&
           category == o.category &&
-          website_url == o.website_url
+          website_url == o.website_url &&
+          store_code == o.store_code
     end
 
     # @see the `==` method
@@ -154,7 +163,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, account_id, account_name, address, category, website_url].hash
+      [id, name, account_id, account_name, address, category, website_url, store_code].hash
     end
 
     # Builds the object from hash

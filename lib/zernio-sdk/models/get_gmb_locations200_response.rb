@@ -17,6 +17,9 @@ module Zernio
   class GetGmbLocations200Response < ApiModelBase
     attr_accessor :locations
 
+    # True when more locations exist than were returned (use search to narrow down).
+    attr_accessor :has_more
+
     attr_accessor :selected_location_id
 
     attr_accessor :cached
@@ -25,6 +28,7 @@ module Zernio
     def self.attribute_map
       {
         :'locations' => :'locations',
+        :'has_more' => :'hasMore',
         :'selected_location_id' => :'selectedLocationId',
         :'cached' => :'cached'
       }
@@ -44,6 +48,7 @@ module Zernio
     def self.openapi_types
       {
         :'locations' => :'Array<GetGmbLocations200ResponseLocationsInner>',
+        :'has_more' => :'Boolean',
         :'selected_location_id' => :'String',
         :'cached' => :'Boolean'
       }
@@ -77,6 +82,10 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
+      end
+
       if attributes.key?(:'selected_location_id')
         self.selected_location_id = attributes[:'selected_location_id']
       end
@@ -107,6 +116,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           locations == o.locations &&
+          has_more == o.has_more &&
           selected_location_id == o.selected_location_id &&
           cached == o.cached
     end
@@ -120,7 +130,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [locations, selected_location_id, cached].hash
+      [locations, has_more, selected_location_id, cached].hash
     end
 
     # Builds the object from hash

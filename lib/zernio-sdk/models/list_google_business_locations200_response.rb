@@ -17,10 +17,14 @@ module Zernio
   class ListGoogleBusinessLocations200Response < ApiModelBase
     attr_accessor :locations
 
+    # True when more locations exist than were returned (the list is bounded). Prompt the user to narrow the result set with search. 
+    attr_accessor :has_more
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'locations' => :'locations'
+        :'locations' => :'locations',
+        :'has_more' => :'hasMore'
       }
     end
 
@@ -37,7 +41,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'locations' => :'Array<ListGoogleBusinessLocations200ResponseLocationsInner>'
+        :'locations' => :'Array<ListGoogleBusinessLocations200ResponseLocationsInner>',
+        :'has_more' => :'Boolean'
       }
     end
 
@@ -68,6 +73,10 @@ module Zernio
           self.locations = value
         end
       end
+
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -90,7 +99,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          locations == o.locations
+          locations == o.locations &&
+          has_more == o.has_more
     end
 
     # @see the `==` method
@@ -102,7 +112,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [locations].hash
+      [locations, has_more].hash
     end
 
     # Builds the object from hash

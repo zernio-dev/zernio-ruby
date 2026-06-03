@@ -601,9 +601,11 @@ module Zernio
     end
 
     # List GBP locations
-    # Returns all Google Business Profile locations the connected account has access to, including the currently selected location.
+    # Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :search Free-text search on the business name, applied server-side by Google. Use for accounts with many locations.
+    # @option opts [String] :filter Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode&#x3D;\&quot;LH279411\&quot;.
     # @return [GetGmbLocations200Response]
     def get_gmb_locations(account_id, opts = {})
       data, _status_code, _headers = get_gmb_locations_with_http_info(account_id, opts)
@@ -611,9 +613,11 @@ module Zernio
     end
 
     # List GBP locations
-    # Returns all Google Business Profile locations the connected account has access to, including the currently selected location.
+    # Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :search Free-text search on the business name, applied server-side by Google. Use for accounts with many locations.
+    # @option opts [String] :filter Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode&#x3D;\&quot;LH279411\&quot;.
     # @return [Array<(GetGmbLocations200Response, Integer, Hash)>] GetGmbLocations200Response data, response status code and response headers
     def get_gmb_locations_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -628,6 +632,8 @@ module Zernio
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'search'] = opts[:'search'] if !opts[:'search'].nil?
+      query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1332,6 +1338,8 @@ module Zernio
     # @option opts [String] :profile_id Profile ID from your connection flow. Required for auth validation when provided.
     # @option opts [String] :pending_data_token Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required.
     # @option opts [String] :temp_token Legacy. Direct Google access token. Use pendingDataToken instead when available.
+    # @option opts [String] :search Free-text search on the business name, applied server-side by Google. Use this for accounts that own many locations (the response is bounded, see hasMore) so the user can find a specific location without loading the full list. 
+    # @option opts [String] :filter Raw Google Business Information API filter expression (advanced; takes precedence over search). Supports fields such as title, storeCode, storefront_address.postal_code, labels and categories, e.g. storeCode&#x3D;\&quot;LH279411\&quot;. See Google&#39;s \&quot;Work with location data\&quot; guide. 
     # @return [ListGoogleBusinessLocations200Response]
     def list_google_business_locations(opts = {})
       data, _status_code, _headers = list_google_business_locations_with_http_info(opts)
@@ -1344,6 +1352,8 @@ module Zernio
     # @option opts [String] :profile_id Profile ID from your connection flow. Required for auth validation when provided.
     # @option opts [String] :pending_data_token Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required.
     # @option opts [String] :temp_token Legacy. Direct Google access token. Use pendingDataToken instead when available.
+    # @option opts [String] :search Free-text search on the business name, applied server-side by Google. Use this for accounts that own many locations (the response is bounded, see hasMore) so the user can find a specific location without loading the full list. 
+    # @option opts [String] :filter Raw Google Business Information API filter expression (advanced; takes precedence over search). Supports fields such as title, storeCode, storefront_address.postal_code, labels and categories, e.g. storeCode&#x3D;\&quot;LH279411\&quot;. See Google&#39;s \&quot;Work with location data\&quot; guide. 
     # @return [Array<(ListGoogleBusinessLocations200Response, Integer, Hash)>] ListGoogleBusinessLocations200Response data, response status code and response headers
     def list_google_business_locations_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1357,6 +1367,8 @@ module Zernio
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'pendingDataToken'] = opts[:'pending_data_token'] if !opts[:'pending_data_token'].nil?
       query_params[:'tempToken'] = opts[:'temp_token'] if !opts[:'temp_token'].nil?
+      query_params[:'search'] = opts[:'search'] if !opts[:'search'].nil?
+      query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

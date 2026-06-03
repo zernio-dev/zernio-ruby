@@ -625,11 +625,11 @@ end
 
 ## get_gmb_locations
 
-> <GetGmbLocations200Response> get_gmb_locations(account_id)
+> <GetGmbLocations200Response> get_gmb_locations(account_id, opts)
 
 List GBP locations
 
-Returns all Google Business Profile locations the connected account has access to, including the currently selected location.
+Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all. 
 
 ### Examples
 
@@ -644,10 +644,14 @@ end
 
 api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
+opts = {
+  search: 'search_example', # String | Free-text search on the business name, applied server-side by Google. Use for accounts with many locations.
+  filter: 'filter_example' # String | Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode=\"LH279411\".
+}
 
 begin
   # List GBP locations
-  result = api_instance.get_gmb_locations(account_id)
+  result = api_instance.get_gmb_locations(account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->get_gmb_locations: #{e}"
@@ -658,12 +662,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetGmbLocations200Response>, Integer, Hash)> get_gmb_locations_with_http_info(account_id)
+> <Array(<GetGmbLocations200Response>, Integer, Hash)> get_gmb_locations_with_http_info(account_id, opts)
 
 ```ruby
 begin
   # List GBP locations
-  data, status_code, headers = api_instance.get_gmb_locations_with_http_info(account_id)
+  data, status_code, headers = api_instance.get_gmb_locations_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetGmbLocations200Response>
@@ -677,6 +681,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
+| **search** | **String** | Free-text search on the business name, applied server-side by Google. Use for accounts with many locations. | [optional] |
+| **filter** | **String** | Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode&#x3D;\&quot;LH279411\&quot;. | [optional] |
 
 ### Return type
 
@@ -1420,7 +1426,9 @@ api_instance = Zernio::ConnectApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Profile ID from your connection flow. Required for auth validation when provided.
   pending_data_token: 'pending_data_token_example', # String | Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required.
-  temp_token: 'temp_token_example' # String | Legacy. Direct Google access token. Use pendingDataToken instead when available.
+  temp_token: 'temp_token_example', # String | Legacy. Direct Google access token. Use pendingDataToken instead when available.
+  search: 'search_example', # String | Free-text search on the business name, applied server-side by Google. Use this for accounts that own many locations (the response is bounded, see hasMore) so the user can find a specific location without loading the full list. 
+  filter: 'filter_example' # String | Raw Google Business Information API filter expression (advanced; takes precedence over search). Supports fields such as title, storeCode, storefront_address.postal_code, labels and categories, e.g. storeCode=\"LH279411\". See Google's \"Work with location data\" guide. 
 }
 
 begin
@@ -1457,6 +1465,8 @@ end
 | **profile_id** | **String** | Profile ID from your connection flow. Required for auth validation when provided. | [optional] |
 | **pending_data_token** | **String** | Token from the OAuth callback redirect. Preferred over tempToken because it preserves server-side token storage. One of pendingDataToken or tempToken is required. | [optional] |
 | **temp_token** | **String** | Legacy. Direct Google access token. Use pendingDataToken instead when available. | [optional] |
+| **search** | **String** | Free-text search on the business name, applied server-side by Google. Use this for accounts that own many locations (the response is bounded, see hasMore) so the user can find a specific location without loading the full list.  | [optional] |
+| **filter** | **String** | Raw Google Business Information API filter expression (advanced; takes precedence over search). Supports fields such as title, storeCode, storefront_address.postal_code, labels and categories, e.g. storeCode&#x3D;\&quot;LH279411\&quot;. See Google&#39;s \&quot;Work with location data\&quot; guide.  | [optional] |
 
 ### Return type
 

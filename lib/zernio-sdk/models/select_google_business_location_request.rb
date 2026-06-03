@@ -21,6 +21,9 @@ module Zernio
     # The Google Business location ID selected by the user
     attr_accessor :location_id
 
+    # Optional but recommended. The Google Business Account resource name (\"accounts/123\") that owns the selected location (returned per-location by GET /v1/connect/googlebusiness/locations). When provided, the location is resolved directly instead of by enumerating the account, which is required for accounts that own many locations. Omit only for small accounts. 
+    attr_accessor :account_id
+
     # Token from the OAuth callback redirect (pendingDataToken query param). Tokens and profile data are retrieved server-side from this token.
     attr_accessor :pending_data_token
 
@@ -32,6 +35,7 @@ module Zernio
       {
         :'profile_id' => :'profileId',
         :'location_id' => :'locationId',
+        :'account_id' => :'accountId',
         :'pending_data_token' => :'pendingDataToken',
         :'redirect_url' => :'redirect_url'
       }
@@ -52,6 +56,7 @@ module Zernio
       {
         :'profile_id' => :'String',
         :'location_id' => :'String',
+        :'account_id' => :'String',
         :'pending_data_token' => :'String',
         :'redirect_url' => :'String'
       }
@@ -89,6 +94,10 @@ module Zernio
         self.location_id = attributes[:'location_id']
       else
         self.location_id = nil
+      end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
       if attributes.key?(:'pending_data_token')
@@ -169,6 +178,7 @@ module Zernio
       self.class == o.class &&
           profile_id == o.profile_id &&
           location_id == o.location_id &&
+          account_id == o.account_id &&
           pending_data_token == o.pending_data_token &&
           redirect_url == o.redirect_url
     end
@@ -182,7 +192,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, location_id, pending_data_token, redirect_url].hash
+      [profile_id, location_id, account_id, pending_data_token, redirect_url].hash
     end
 
     # Builds the object from hash

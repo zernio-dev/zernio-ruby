@@ -10,6 +10,7 @@
 | **account_name** | **String** | Account name | [optional] |
 | **address** | **String** | Business address | [optional] |
 | **category** | **String** | Business category | [optional] |
+| **store_code** | **String** | Store code set on the location in Google Business Profile (if any) | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::ListGoogleBusinessLocations200ResponseLocationsInner.new(
   account_id: null,
   account_name: null,
   address: null,
-  category: null
+  category: null,
+  store_code: null
 )
 ```
 
