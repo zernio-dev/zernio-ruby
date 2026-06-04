@@ -7,6 +7,7 @@
 | **platform** | **String** |  |  |
 | **budget** | [**UpdateAdCampaignRequestBudget**](UpdateAdCampaignRequestBudget.md) |  | [optional] |
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) | Campaign-level default. Ad sets inherit this unless they override. | [optional] |
+| **name** | **String** | Rename the campaign (Meta only; other platforms return 501). At least one of budget/bidStrategy/name is required. | [optional] |
 
 ## Example
 
@@ -16,7 +17,8 @@ require 'zernio-sdk'
 instance = Zernio::UpdateAdCampaignRequest.new(
   platform: null,
   budget: null,
-  bid_strategy: null
+  bid_strategy: null,
+  name: null
 )
 ```
 

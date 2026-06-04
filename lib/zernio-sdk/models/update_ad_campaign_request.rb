@@ -22,6 +22,9 @@ module Zernio
     # Campaign-level default. Ad sets inherit this unless they override.
     attr_accessor :bid_strategy
 
+    # Rename the campaign (Meta only; other platforms return 501). At least one of budget/bidStrategy/name is required.
+    attr_accessor :name
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -49,7 +52,8 @@ module Zernio
       {
         :'platform' => :'platform',
         :'budget' => :'budget',
-        :'bid_strategy' => :'bidStrategy'
+        :'bid_strategy' => :'bidStrategy',
+        :'name' => :'name'
       }
     end
 
@@ -68,7 +72,8 @@ module Zernio
       {
         :'platform' => :'String',
         :'budget' => :'UpdateAdCampaignRequestBudget',
-        :'bid_strategy' => :'BidStrategy'
+        :'bid_strategy' => :'BidStrategy',
+        :'name' => :'String'
       }
     end
 
@@ -107,6 +112,10 @@ module Zernio
       if attributes.key?(:'bid_strategy')
         self.bid_strategy = attributes[:'bid_strategy']
       end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,6 +125,10 @@ module Zernio
       invalid_properties = Array.new
       if @platform.nil?
         invalid_properties.push('invalid value for "platform", platform cannot be nil.')
+      end
+
+      if !@name.nil? && @name.to_s.length > 255
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
       end
 
       invalid_properties
@@ -128,6 +141,7 @@ module Zernio
       return false if @platform.nil?
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
       return false unless platform_validator.valid?(@platform)
+      return false if !@name.nil? && @name.to_s.length > 255
       true
     end
 
@@ -141,6 +155,20 @@ module Zernio
       @platform = platform
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      if name.to_s.length > 255
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 255.'
+      end
+
+      @name = name
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -148,7 +176,8 @@ module Zernio
       self.class == o.class &&
           platform == o.platform &&
           budget == o.budget &&
-          bid_strategy == o.bid_strategy
+          bid_strategy == o.bid_strategy &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -160,7 +189,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, budget, bid_strategy].hash
+      [platform, budget, bid_strategy, name].hash
     end
 
     # Builds the object from hash

@@ -22,6 +22,9 @@ module Zernio
     # Omit if not toggling delivery state
     attr_accessor :status
 
+    # Rename the ad set (Meta only; other platforms return 501). At least one of budget/status/bidStrategy/name is required.
+    attr_accessor :name
+
     # Ad-set-level bid strategy. Overrides the campaign-level default. Supported on Meta (facebook, instagram) and TikTok. On TikTok the Meta-style enum is mapped to bid_type / bid_price / deep_bid_type automatically. Other platforms (linkedin, pinterest, google, twitter) return 501 Not Implemented when bidStrategy is set. 
     attr_accessor :bid_strategy
 
@@ -59,6 +62,7 @@ module Zernio
         :'platform' => :'platform',
         :'budget' => :'budget',
         :'status' => :'status',
+        :'name' => :'name',
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor'
@@ -81,6 +85,7 @@ module Zernio
         :'platform' => :'String',
         :'budget' => :'UpdateAdSetRequestBudget',
         :'status' => :'String',
+        :'name' => :'String',
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float'
@@ -123,6 +128,10 @@ module Zernio
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
       if attributes.key?(:'bid_strategy')
         self.bid_strategy = attributes[:'bid_strategy']
       end
@@ -145,6 +154,10 @@ module Zernio
         invalid_properties.push('invalid value for "platform", platform cannot be nil.')
       end
 
+      if !@name.nil? && @name.to_s.length > 255
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
+      end
+
       invalid_properties
     end
 
@@ -157,6 +170,7 @@ module Zernio
       return false unless platform_validator.valid?(@platform)
       status_validator = EnumAttributeValidator.new('String', ["active", "paused"])
       return false unless status_validator.valid?(@status)
+      return false if !@name.nil? && @name.to_s.length > 255
       true
     end
 
@@ -180,6 +194,20 @@ module Zernio
       @status = status
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      if name.to_s.length > 255
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 255.'
+      end
+
+      @name = name
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -188,6 +216,7 @@ module Zernio
           platform == o.platform &&
           budget == o.budget &&
           status == o.status &&
+          name == o.name &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor
@@ -202,7 +231,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, budget, status, bid_strategy, bid_amount, roas_average_floor].hash
+      [platform, budget, status, name, bid_strategy, bid_amount, roas_average_floor].hash
     end
 
     # Builds the object from hash

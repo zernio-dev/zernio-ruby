@@ -16,6 +16,9 @@ require 'time'
 module Zernio
   # Each creative must supply EXACTLY ONE of `imageUrl` (image creative) or `video` (video creative).
   class CreateStandaloneAdRequestCreativesInner < ApiModelBase
+    # Exact name for this ad. Falls back to `<name> #N` (N = 1-based position).
+    attr_accessor :name
+
     attr_accessor :headline
 
     attr_accessor :body
@@ -54,6 +57,7 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'name' => :'name',
         :'headline' => :'headline',
         :'body' => :'body',
         :'image_url' => :'imageUrl',
@@ -76,6 +80,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'name' => :'String',
         :'headline' => :'String',
         :'body' => :'String',
         :'image_url' => :'String',
@@ -106,6 +111,10 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
 
       if attributes.key?(:'headline')
         self.headline = attributes[:'headline']
@@ -145,6 +154,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@name.nil? && @name.to_s.length > 255
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
+      end
+
       if @headline.nil?
         invalid_properties.push('invalid value for "headline", headline cannot be nil.')
       end
@@ -172,6 +185,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@name.nil? && @name.to_s.length > 255
       return false if @headline.nil?
       return false if @headline.to_s.length > 255
       return false if @body.nil?
@@ -180,6 +194,20 @@ module Zernio
       call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
       return false unless call_to_action_validator.valid?(@call_to_action)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      if name.to_s.length > 255
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 255.'
+      end
+
+      @name = name
     end
 
     # Custom attribute writer method with validation
@@ -231,6 +259,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          name == o.name &&
           headline == o.headline &&
           body == o.body &&
           image_url == o.image_url &&
@@ -248,7 +277,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headline, body, image_url, video, link_url, call_to_action].hash
+      [name, headline, body, image_url, video, link_url, call_to_action].hash
     end
 
     # Builds the object from hash
