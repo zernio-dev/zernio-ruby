@@ -114,6 +114,9 @@ module Zernio
     # ID of a `saved_targeting` audience (created via POST /v1/ads/audiences). When set, its stored TargetingSpec is expanded as the base targeting; inline fields on this body merge on top. Lets you reuse a named targeting preset without re-sending every field. 
     attr_accessor :saved_targeting_id
 
+    # Meta only. A raw Meta-native targeting spec passed to the ad set VERBATIM (snake_case: `geo_locations`, `age_min`, `excluded_custom_audiences`, `flexible_spec`, `targeting_automation`, business places, etc.) — exactly the shape `GET /v1/ads/{adId}` returns for external ads. Use it to clone a campaign's targeting EXACTLY, preserving advanced fields the camelCase targeting fields can't model. Mutually exclusive with the camelCase targeting fields (countries/regions/cities/interests/ ageMin/...), `audienceId`, and `savedTargetingId` (sending both → 422). Sent as-is; Meta validates and surfaces any errors. If cloning an EU campaign, also pass `dsaBeneficiary` / `dsaPayor` (those are separate fields, not part of targeting). 
+    attr_accessor :raw_targeting
+
     # Meta only. Declares the ad's special category, required for housing, employment, credit, or political/social-issue ads (Meta enforces restricted targeting for these). Note: setting a special category disables income/zip targeting on Meta. 
     attr_accessor :special_ad_categories
 
@@ -237,6 +240,7 @@ module Zernio
         :'languages' => :'languages',
         :'placements' => :'placements',
         :'saved_targeting_id' => :'savedTargetingId',
+        :'raw_targeting' => :'rawTargeting',
         :'special_ad_categories' => :'specialAdCategories',
         :'end_date' => :'endDate',
         :'start_date' => :'startDate',
@@ -311,6 +315,7 @@ module Zernio
         :'languages' => :'Array<String>',
         :'placements' => :'CreateStandaloneAdRequestPlacements',
         :'saved_targeting_id' => :'String',
+        :'raw_targeting' => :'Hash<String, Object>',
         :'special_ad_categories' => :'Array<String>',
         :'end_date' => :'Time',
         :'start_date' => :'Time',
@@ -528,6 +533,12 @@ module Zernio
 
       if attributes.key?(:'saved_targeting_id')
         self.saved_targeting_id = attributes[:'saved_targeting_id']
+      end
+
+      if attributes.key?(:'raw_targeting')
+        if (value = attributes[:'raw_targeting']).is_a?(Hash)
+          self.raw_targeting = value
+        end
       end
 
       if attributes.key?(:'special_ad_categories')
@@ -1030,6 +1041,7 @@ module Zernio
           languages == o.languages &&
           placements == o.placements &&
           saved_targeting_id == o.saved_targeting_id &&
+          raw_targeting == o.raw_targeting &&
           special_ad_categories == o.special_ad_categories &&
           end_date == o.end_date &&
           start_date == o.start_date &&
@@ -1063,7 +1075,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, budget_amount, budget_type, budget_level, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, goal, budget_amount, budget_type, budget_level, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash
