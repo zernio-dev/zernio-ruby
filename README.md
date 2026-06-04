@@ -412,6 +412,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppPhoneNumbersApi* | [**release_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number
 *Zernio::WhatsAppPhoneNumbersApi* | [**search_available_whats_app_numbers**](docs/WhatsAppPhoneNumbersApi.md#search_available_whats_app_numbers) | **GET** /v1/whatsapp/phone-numbers/available | Search available numbers to purchase
 *Zernio::WhatsAppPhoneNumbersApi* | [**submit_whats_app_number_kyc**](docs/WhatsAppPhoneNumbersApi.md#submit_whats_app_number_kyc) | **POST** /v1/whatsapp/phone-numbers/kyc | Submit regulated-number KYC
+*Zernio::WhatsAppPhoneNumbersApi* | [**upload_whats_app_number_kyc_document**](docs/WhatsAppPhoneNumbersApi.md#upload_whats_app_number_kyc_document) | **POST** /v1/whatsapp/phone-numbers/kyc/upload-document | Upload a single regulated-number KYC document
 *Zernio::WhatsAppSandboxApi* | [**create_whats_app_sandbox_session**](docs/WhatsAppSandboxApi.md#create_whats_app_sandbox_session) | **POST** /v1/whatsapp/sandbox/sessions | Start a sandbox activation for a phone
 *Zernio::WhatsAppSandboxApi* | [**delete_whats_app_sandbox_session**](docs/WhatsAppSandboxApi.md#delete_whats_app_sandbox_session) | **DELETE** /v1/whatsapp/sandbox/sessions/{sessionId} | Revoke a sandbox session
 *Zernio::WhatsAppSandboxApi* | [**list_whats_app_sandbox_sessions**](docs/WhatsAppSandboxApi.md#list_whats_app_sandbox_sessions) | **GET** /v1/whatsapp/sandbox/sessions | List your sandbox sessions
@@ -1287,6 +1288,8 @@ Class | Method | HTTP request | Description
  - [Zernio::SubmitWhatsAppNumberKycRequest](docs/SubmitWhatsAppNumberKycRequest.md)
  - [Zernio::SubmitWhatsAppNumberKycRequestAddress](docs/SubmitWhatsAppNumberKycRequestAddress.md)
  - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInner](docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md)
+ - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf](docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md)
+ - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1](docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1.md)
  - [Zernio::TargetingSpec](docs/TargetingSpec.md)
  - [Zernio::TargetingSpecCitiesInner](docs/TargetingSpecCitiesInner.md)
  - [Zernio::TargetingSpecCustomLocationsInner](docs/TargetingSpecCustomLocationsInner.md)
@@ -1424,6 +1427,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadWhatsAppFlowJson200ResponseValidationErrorsInner](docs/UploadWhatsAppFlowJson200ResponseValidationErrorsInner.md)
  - [Zernio::UploadWhatsAppFlowJsonRequest](docs/UploadWhatsAppFlowJsonRequest.md)
  - [Zernio::UploadWhatsAppFlowJsonRequestFlowJson](docs/UploadWhatsAppFlowJsonRequestFlowJson.md)
+ - [Zernio::UploadWhatsAppNumberKycDocument200Response](docs/UploadWhatsAppNumberKycDocument200Response.md)
  - [Zernio::UploadedFile](docs/UploadedFile.md)
  - [Zernio::UploadedOrDerivedAudience](docs/UploadedOrDerivedAudience.md)
  - [Zernio::UsageStats](docs/UsageStats.md)

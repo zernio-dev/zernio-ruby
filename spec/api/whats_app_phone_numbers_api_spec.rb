@@ -136,11 +136,24 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for submit_whats_app_number_kyc
   # Submit regulated-number KYC
-  # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). Idempotent per (owner, country). 
+  # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;. 
   # @param submit_whats_app_number_kyc_request 
   # @param [Hash] opts the optional parameters
   # @return [SubmitWhatsAppNumberKyc200Response]
   describe 'submit_whats_app_number_kyc test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for upload_whats_app_number_kyc_document
+  # Upload a single regulated-number KYC document
+  # Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via &#x60;documents[].documentId&#x60;. Send the RAW file bytes as the request body (not base64); put the filename in the &#x60;X-Filename&#x60; header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
+  # @param x_filename URL-encoded original filename.
+  # @param body 
+  # @param [Hash] opts the optional parameters
+  # @return [UploadWhatsAppNumberKycDocument200Response]
+  describe 'upload_whats_app_number_kyc_document test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -552,7 +552,7 @@ module Zernio
     end
 
     # Submit regulated-number KYC
-    # Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). Idempotent per (owner, country). 
+    # Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via `submissionId`. 
     # @param submit_whats_app_number_kyc_request [SubmitWhatsAppNumberKycRequest] 
     # @param [Hash] opts the optional parameters
     # @return [SubmitWhatsAppNumberKyc200Response]
@@ -562,7 +562,7 @@ module Zernio
     end
 
     # Submit regulated-number KYC
-    # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). Idempotent per (owner, country). 
+    # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;. 
     # @param submit_whats_app_number_kyc_request [SubmitWhatsAppNumberKycRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SubmitWhatsAppNumberKyc200Response, Integer, Hash)>] SubmitWhatsAppNumberKyc200Response data, response status code and response headers
@@ -615,6 +615,81 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#submit_whats_app_number_kyc\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Upload a single regulated-number KYC document
+    # Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via `documents[].documentId`. Send the RAW file bytes as the request body (not base64); put the filename in the `X-Filename` header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
+    # @param x_filename [String] URL-encoded original filename.
+    # @param body [File] 
+    # @param [Hash] opts the optional parameters
+    # @return [UploadWhatsAppNumberKycDocument200Response]
+    def upload_whats_app_number_kyc_document(x_filename, body, opts = {})
+      data, _status_code, _headers = upload_whats_app_number_kyc_document_with_http_info(x_filename, body, opts)
+      data
+    end
+
+    # Upload a single regulated-number KYC document
+    # Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via &#x60;documents[].documentId&#x60;. Send the RAW file bytes as the request body (not base64); put the filename in the &#x60;X-Filename&#x60; header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
+    # @param x_filename [String] URL-encoded original filename.
+    # @param body [File] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UploadWhatsAppNumberKycDocument200Response, Integer, Hash)>] UploadWhatsAppNumberKycDocument200Response data, response status code and response headers
+    def upload_whats_app_number_kyc_document_with_http_info(x_filename, body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.upload_whats_app_number_kyc_document ...'
+      end
+      # verify the required parameter 'x_filename' is set
+      if @api_client.config.client_side_validation && x_filename.nil?
+        fail ArgumentError, "Missing the required parameter 'x_filename' when calling WhatsAppPhoneNumbersApi.upload_whats_app_number_kyc_document"
+      end
+      # verify the required parameter 'body' is set
+      if @api_client.config.client_side_validation && body.nil?
+        fail ArgumentError, "Missing the required parameter 'body' when calling WhatsAppPhoneNumbersApi.upload_whats_app_number_kyc_document"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/kyc/upload-document'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/octet-stream'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+      header_params[:'X-Filename'] = x_filename
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UploadWhatsAppNumberKycDocument200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppPhoneNumbersApi.upload_whats_app_number_kyc_document",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#upload_whats_app_number_kyc_document\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

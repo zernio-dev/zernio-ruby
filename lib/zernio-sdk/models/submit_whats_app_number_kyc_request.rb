@@ -19,6 +19,9 @@ module Zernio
 
     attr_accessor :country
 
+    # Idempotency token for this submission attempt. A retry/double-submit with the same token returns the same number; omit and each call creates a new number.
+    attr_accessor :submission_id
+
     # Reuse a prior approved verification for this country (skips document/field collection; places the order immediately).
     attr_accessor :reuse
 
@@ -31,6 +34,7 @@ module Zernio
     # requirementId → textual value
     attr_accessor :values
 
+    # One per document requirement. Each is EITHER inline base64 OR a `documentId` returned by POST /v1/whatsapp/phone-numbers/kyc/upload-document (use the upload endpoint for large files to stay under the request-size limit).
     attr_accessor :documents
 
     attr_accessor :address
@@ -40,6 +44,7 @@ module Zernio
       {
         :'profile_id' => :'profileId',
         :'country' => :'country',
+        :'submission_id' => :'submissionId',
         :'reuse' => :'reuse',
         :'end_user_first_name' => :'endUserFirstName',
         :'end_user_last_name' => :'endUserLastName',
@@ -64,6 +69,7 @@ module Zernio
       {
         :'profile_id' => :'String',
         :'country' => :'String',
+        :'submission_id' => :'String',
         :'reuse' => :'Boolean',
         :'end_user_first_name' => :'String',
         :'end_user_last_name' => :'String',
@@ -105,6 +111,10 @@ module Zernio
         self.country = attributes[:'country']
       else
         self.country = nil
+      end
+
+      if attributes.key?(:'submission_id')
+        self.submission_id = attributes[:'submission_id']
       end
 
       if attributes.key?(:'reuse')
@@ -188,6 +198,7 @@ module Zernio
       self.class == o.class &&
           profile_id == o.profile_id &&
           country == o.country &&
+          submission_id == o.submission_id &&
           reuse == o.reuse &&
           end_user_first_name == o.end_user_first_name &&
           end_user_last_name == o.end_user_last_name &&
@@ -205,7 +216,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, reuse, end_user_first_name, end_user_last_name, values, documents, address].hash
+      [profile_id, country, submission_id, reuse, end_user_first_name, end_user_last_name, values, documents, address].hash
     end
 
     # Builds the object from hash

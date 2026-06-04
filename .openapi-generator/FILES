@@ -894,6 +894,8 @@ docs/SubmitWhatsAppNumberKyc200ResponsePhoneNumber.md
 docs/SubmitWhatsAppNumberKycRequest.md
 docs/SubmitWhatsAppNumberKycRequestAddress.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md
+docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md
+docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1.md
 docs/TargetingSpec.md
 docs/TargetingSpecCitiesInner.md
 docs/TargetingSpecCustomLocationsInner.md
@@ -1033,6 +1035,7 @@ docs/UploadWhatsAppFlowJson200Response.md
 docs/UploadWhatsAppFlowJson200ResponseValidationErrorsInner.md
 docs/UploadWhatsAppFlowJsonRequest.md
 docs/UploadWhatsAppFlowJsonRequestFlowJson.md
+docs/UploadWhatsAppNumberKycDocument200Response.md
 docs/UploadedFile.md
 docs/UploadedOrDerivedAudience.md
 docs/UsageApi.md
@@ -2074,6 +2077,8 @@ lib/zernio-sdk/models/submit_whats_app_number_kyc200_response_phone_number.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_address.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner.rb
+lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner_one_of.rb
+lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner_one_of1.rb
 lib/zernio-sdk/models/targeting_spec.rb
 lib/zernio-sdk/models/targeting_spec_cities_inner.rb
 lib/zernio-sdk/models/targeting_spec_custom_locations_inner.rb
@@ -2211,6 +2216,7 @@ lib/zernio-sdk/models/upload_whats_app_flow_json200_response.rb
 lib/zernio-sdk/models/upload_whats_app_flow_json200_response_validation_errors_inner.rb
 lib/zernio-sdk/models/upload_whats_app_flow_json_request.rb
 lib/zernio-sdk/models/upload_whats_app_flow_json_request_flow_json.rb
+lib/zernio-sdk/models/upload_whats_app_number_kyc_document200_response.rb
 lib/zernio-sdk/models/uploaded_file.rb
 lib/zernio-sdk/models/uploaded_or_derived_audience.rb
 lib/zernio-sdk/models/usage_stats.rb
@@ -3232,6 +3238,8 @@ spec/models/start_google_business_verification_request_spec.rb
 spec/models/submit_whats_app_number_kyc200_response_phone_number_spec.rb
 spec/models/submit_whats_app_number_kyc200_response_spec.rb
 spec/models/submit_whats_app_number_kyc_request_address_spec.rb
+spec/models/submit_whats_app_number_kyc_request_documents_inner_one_of1_spec.rb
+spec/models/submit_whats_app_number_kyc_request_documents_inner_one_of_spec.rb
 spec/models/submit_whats_app_number_kyc_request_documents_inner_spec.rb
 spec/models/submit_whats_app_number_kyc_request_spec.rb
 spec/models/targeting_spec_cities_inner_spec.rb
@@ -3371,6 +3379,7 @@ spec/models/upload_whats_app_flow_json200_response_spec.rb
 spec/models/upload_whats_app_flow_json200_response_validation_errors_inner_spec.rb
 spec/models/upload_whats_app_flow_json_request_flow_json_spec.rb
 spec/models/upload_whats_app_flow_json_request_spec.rb
+spec/models/upload_whats_app_number_kyc_document200_response_spec.rb
 spec/models/uploaded_file_spec.rb
 spec/models/uploaded_or_derived_audience_spec.rb
 spec/models/usage_stats_limits_spec.rb

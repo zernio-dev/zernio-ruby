@@ -13,6 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**release_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number |
 | [**search_available_whats_app_numbers**](WhatsAppPhoneNumbersApi.md#search_available_whats_app_numbers) | **GET** /v1/whatsapp/phone-numbers/available | Search available numbers to purchase |
 | [**submit_whats_app_number_kyc**](WhatsAppPhoneNumbersApi.md#submit_whats_app_number_kyc) | **POST** /v1/whatsapp/phone-numbers/kyc | Submit regulated-number KYC |
+| [**upload_whats_app_number_kyc_document**](WhatsAppPhoneNumbersApi.md#upload_whats_app_number_kyc_document) | **POST** /v1/whatsapp/phone-numbers/kyc/upload-document | Upload a single regulated-number KYC document |
 
 
 ## get_whats_app_number_info
@@ -588,7 +589,7 @@ end
 
 Submit regulated-number KYC
 
-Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). Idempotent per (owner, country). 
+Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via `submissionId`. 
 
 ### Examples
 
@@ -648,5 +649,76 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## upload_whats_app_number_kyc_document
+
+> <UploadWhatsAppNumberKycDocument200Response> upload_whats_app_number_kyc_document(x_filename, body)
+
+Upload a single regulated-number KYC document
+
+Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via `documents[].documentId`. Send the RAW file bytes as the request body (not base64); put the filename in the `X-Filename` header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+x_filename = 'x_filename_example' # String | URL-encoded original filename.
+body = File.new('/path/to/some/file') # File | 
+
+begin
+  # Upload a single regulated-number KYC document
+  result = api_instance.upload_whats_app_number_kyc_document(x_filename, body)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->upload_whats_app_number_kyc_document: #{e}"
+end
+```
+
+#### Using the upload_whats_app_number_kyc_document_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UploadWhatsAppNumberKycDocument200Response>, Integer, Hash)> upload_whats_app_number_kyc_document_with_http_info(x_filename, body)
+
+```ruby
+begin
+  # Upload a single regulated-number KYC document
+  data, status_code, headers = api_instance.upload_whats_app_number_kyc_document_with_http_info(x_filename, body)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UploadWhatsAppNumberKycDocument200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->upload_whats_app_number_kyc_document_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **x_filename** | **String** | URL-encoded original filename. |  |
+| **body** | **File** |  |  |
+
+### Return type
+
+[**UploadWhatsAppNumberKycDocument200Response**](UploadWhatsAppNumberKycDocument200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/octet-stream
 - **Accept**: application/json
 
