@@ -403,13 +403,16 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppFlowsApi* | [**send_whats_app_flow_message**](docs/WhatsAppFlowsApi.md#send_whats_app_flow_message) | **POST** /v1/whatsapp/flows/send | Send flow message
 *Zernio::WhatsAppFlowsApi* | [**update_whats_app_flow**](docs/WhatsAppFlowsApi.md#update_whats_app_flow) | **PATCH** /v1/whatsapp/flows/{flowId} | Update flow
 *Zernio::WhatsAppFlowsApi* | [**upload_whats_app_flow_json**](docs/WhatsAppFlowsApi.md#upload_whats_app_flow_json) | **PUT** /v1/whatsapp/flows/{flowId}/json | Upload flow JSON
+*Zernio::WhatsAppPhoneNumbersApi* | [**check_whats_app_number_availability**](docs/WhatsAppPhoneNumbersApi.md#check_whats_app_number_availability) | **GET** /v1/whatsapp/phone-numbers/availability | Check a country's availability + address constraint
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_number_info**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_number_info) | **GET** /v1/whatsapp/number-info | Get number status
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_number_kyc_form**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_number_kyc_form) | **GET** /v1/whatsapp/phone-numbers/kyc | Get regulated-number KYC form spec
+*Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_number_remediation**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_number_remediation) | **GET** /v1/whatsapp/phone-numbers/{id}/remediate | Get the declined requirements to fix
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_number) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_numbers**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers
 *Zernio::WhatsAppPhoneNumbersApi* | [**list_whats_app_number_countries**](docs/WhatsAppPhoneNumbersApi.md#list_whats_app_number_countries) | **GET** /v1/whatsapp/phone-numbers/countries | List offerable number countries
 *Zernio::WhatsAppPhoneNumbersApi* | [**purchase_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number
 *Zernio::WhatsAppPhoneNumbersApi* | [**release_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number
+*Zernio::WhatsAppPhoneNumbersApi* | [**remediate_whats_app_number**](docs/WhatsAppPhoneNumbersApi.md#remediate_whats_app_number) | **POST** /v1/whatsapp/phone-numbers/{id}/remediate | Fix a declined number and re-submit
 *Zernio::WhatsAppPhoneNumbersApi* | [**search_available_whats_app_numbers**](docs/WhatsAppPhoneNumbersApi.md#search_available_whats_app_numbers) | **GET** /v1/whatsapp/phone-numbers/available | Search available numbers to purchase
 *Zernio::WhatsAppPhoneNumbersApi* | [**submit_whats_app_number_kyc**](docs/WhatsAppPhoneNumbersApi.md#submit_whats_app_number_kyc) | **POST** /v1/whatsapp/phone-numbers/kyc | Submit regulated-number KYC
 *Zernio::WhatsAppPhoneNumbersApi* | [**upload_whats_app_number_kyc_document**](docs/WhatsAppPhoneNumbersApi.md#upload_whats_app_number_kyc_document) | **POST** /v1/whatsapp/phone-numbers/kyc/upload-document | Upload a single regulated-number KYC document
@@ -509,7 +512,7 @@ Class | Method | HTTP request | Description
  - [Zernio::BulkUploadResultResultsInner](docs/BulkUploadResultResultsInner.md)
  - [Zernio::BusinessCenter](docs/BusinessCenter.md)
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
- - [Zernio::CancelBroadcast200ResponseBroadcast](docs/CancelBroadcast200ResponseBroadcast.md)
+ - [Zernio::CheckWhatsAppNumberAvailability200Response](docs/CheckWhatsAppNumberAvailability200Response.md)
  - [Zernio::CompleteGoogleBusinessVerificationRequest](docs/CompleteGoogleBusinessVerificationRequest.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
  - [Zernio::CompleteWhatsAppPhoneSelection200Response](docs/CompleteWhatsAppPhoneSelection200Response.md)
@@ -926,6 +929,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppNumberKycForm200Response](docs/GetWhatsAppNumberKycForm200Response.md)
  - [Zernio::GetWhatsAppNumberKycForm200ResponseFieldsInner](docs/GetWhatsAppNumberKycForm200ResponseFieldsInner.md)
  - [Zernio::GetWhatsAppNumberKycForm200ResponseReusable](docs/GetWhatsAppNumberKycForm200ResponseReusable.md)
+ - [Zernio::GetWhatsAppNumberRemediation200Response](docs/GetWhatsAppNumberRemediation200Response.md)
  - [Zernio::GetWhatsAppPhoneNumber200Response](docs/GetWhatsAppPhoneNumber200Response.md)
  - [Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber](docs/GetWhatsAppPhoneNumber200ResponsePhoneNumber.md)
  - [Zernio::GetWhatsAppPhoneNumbers200Response](docs/GetWhatsAppPhoneNumbers200Response.md)
@@ -1167,6 +1171,11 @@ Class | Method | HTTP request | Description
  - [Zernio::RejectWhatsAppGroupJoinRequestsRequest](docs/RejectWhatsAppGroupJoinRequestsRequest.md)
  - [Zernio::ReleaseWhatsAppPhoneNumber200Response](docs/ReleaseWhatsAppPhoneNumber200Response.md)
  - [Zernio::ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber](docs/ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber.md)
+ - [Zernio::RemediateWhatsAppNumber200Response](docs/RemediateWhatsAppNumber200Response.md)
+ - [Zernio::RemediateWhatsAppNumber200ResponsePhoneNumber](docs/RemediateWhatsAppNumber200ResponsePhoneNumber.md)
+ - [Zernio::RemediateWhatsAppNumberRequest](docs/RemediateWhatsAppNumberRequest.md)
+ - [Zernio::RemediateWhatsAppNumberRequestDocumentsInner](docs/RemediateWhatsAppNumberRequestDocumentsInner.md)
+ - [Zernio::RemediateWhatsAppNumberRequestDocumentsInnerOneOf](docs/RemediateWhatsAppNumberRequestDocumentsInnerOneOf.md)
  - [Zernio::RemoveBookmark200Response](docs/RemoveBookmark200Response.md)
  - [Zernio::RemoveConversionAssociations200Response](docs/RemoveConversionAssociations200Response.md)
  - [Zernio::RemoveDiscordMemberRole200Response](docs/RemoveDiscordMemberRole200Response.md)

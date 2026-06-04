@@ -14,16 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CancelBroadcast200Response < ApiModelBase
-    attr_accessor :success
+  class RemediateWhatsAppNumberRequest < ApiModelBase
+    attr_accessor :values
 
-    attr_accessor :broadcast
+    attr_accessor :documents
+
+    # Same shape as the KYC submit address.
+    attr_accessor :address
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'broadcast' => :'broadcast'
+        :'values' => :'values',
+        :'documents' => :'documents',
+        :'address' => :'address'
       }
     end
 
@@ -40,8 +44,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'broadcast' => :'RemediateWhatsAppNumber200ResponsePhoneNumber'
+        :'values' => :'Hash<String, String>',
+        :'documents' => :'Array<RemediateWhatsAppNumberRequestDocumentsInner>',
+        :'address' => :'Object'
       }
     end
 
@@ -55,24 +60,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CancelBroadcast200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::RemediateWhatsAppNumberRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CancelBroadcast200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::RemediateWhatsAppNumberRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'values')
+        if (value = attributes[:'values']).is_a?(Hash)
+          self.values = value
+        end
       end
 
-      if attributes.key?(:'broadcast')
-        self.broadcast = attributes[:'broadcast']
+      if attributes.key?(:'documents')
+        if (value = attributes[:'documents']).is_a?(Array)
+          self.documents = value
+        end
+      end
+
+      if attributes.key?(:'address')
+        self.address = attributes[:'address']
       end
     end
 
@@ -96,8 +109,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          broadcast == o.broadcast
+          values == o.values &&
+          documents == o.documents &&
+          address == o.address
     end
 
     # @see the `==` method
@@ -109,7 +123,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, broadcast].hash
+      [values, documents, address].hash
     end
 
     # Builds the object from hash

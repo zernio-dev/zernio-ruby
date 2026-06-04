@@ -8,6 +8,8 @@
 | **phone_number** | **String** |  | [optional] |
 | **country** | **String** |  | [optional] |
 | **status** | **String** |  | [optional] |
+| **registrant_name** | **String** | For regulated numbers | [optional] |
+| **telnyx_order_id** | **String** | Present once the number order has been placed (i.e. the requirement group was approved). Absent while still in identity review. | [optional] |
 | **monthly_cents** | **Integer** | Per-country monthly price in cents ($2..$25). | [optional] |
 | **profile_id** | **Object** |  | [optional] |
 | **provisioned_at** | **Time** |  | [optional] |
@@ -29,6 +31,8 @@ instance = Zernio::GetWhatsAppPhoneNumbers200ResponseNumbersInner.new(
   phone_number: null,
   country: null,
   status: null,
+  registrant_name: null,
+  telnyx_order_id: null,
   monthly_cents: null,
   profile_id: null,
   provisioned_at: null,

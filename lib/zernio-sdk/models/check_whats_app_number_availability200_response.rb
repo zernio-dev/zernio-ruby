@@ -14,16 +14,49 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CancelBroadcast200Response < ApiModelBase
-    attr_accessor :success
+  class CheckWhatsAppNumberAvailability200Response < ApiModelBase
+    attr_accessor :country
 
-    attr_accessor :broadcast
+    attr_accessor :number_type
+
+    # Whether deliverable voice inventory exists right now.
+    attr_accessor :available
+
+    attr_accessor :address_constraint
+
+    # For `geo` only — the area(s) the registered address must be in.
+    attr_accessor :areas
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'broadcast' => :'broadcast'
+        :'country' => :'country',
+        :'number_type' => :'numberType',
+        :'available' => :'available',
+        :'address_constraint' => :'addressConstraint',
+        :'areas' => :'areas'
       }
     end
 
@@ -40,8 +73,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'broadcast' => :'RemediateWhatsAppNumber200ResponsePhoneNumber'
+        :'country' => :'String',
+        :'number_type' => :'String',
+        :'available' => :'Boolean',
+        :'address_constraint' => :'String',
+        :'areas' => :'Array<String>'
       }
     end
 
@@ -55,24 +91,38 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CancelBroadcast200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CheckWhatsAppNumberAvailability200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CancelBroadcast200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CheckWhatsAppNumberAvailability200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'country')
+        self.country = attributes[:'country']
       end
 
-      if attributes.key?(:'broadcast')
-        self.broadcast = attributes[:'broadcast']
+      if attributes.key?(:'number_type')
+        self.number_type = attributes[:'number_type']
+      end
+
+      if attributes.key?(:'available')
+        self.available = attributes[:'available']
+      end
+
+      if attributes.key?(:'address_constraint')
+        self.address_constraint = attributes[:'address_constraint']
+      end
+
+      if attributes.key?(:'areas')
+        if (value = attributes[:'areas']).is_a?(Array)
+          self.areas = value
+        end
       end
     end
 
@@ -88,7 +138,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      address_constraint_validator = EnumAttributeValidator.new('String', ["geo", "country", "none"])
+      return false unless address_constraint_validator.valid?(@address_constraint)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] address_constraint Object to be assigned
+    def address_constraint=(address_constraint)
+      validator = EnumAttributeValidator.new('String', ["geo", "country", "none"])
+      unless validator.valid?(address_constraint)
+        fail ArgumentError, "invalid value for \"address_constraint\", must be one of #{validator.allowable_values}."
+      end
+      @address_constraint = address_constraint
     end
 
     # Checks equality by comparing each attribute.
@@ -96,8 +158,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          broadcast == o.broadcast
+          country == o.country &&
+          number_type == o.number_type &&
+          available == o.available &&
+          address_constraint == o.address_constraint &&
+          areas == o.areas
     end
 
     # @see the `==` method
@@ -109,7 +174,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, broadcast].hash
+      [country, number_type, available, address_constraint, areas].hash
     end
 
     # Builds the object from hash

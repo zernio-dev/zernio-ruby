@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CancelBroadcast200ResponseBroadcast < ApiModelBase
+  class RemediateWhatsAppNumber200ResponsePhoneNumber < ApiModelBase
     attr_accessor :id
 
     attr_accessor :status
@@ -55,14 +55,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CancelBroadcast200ResponseBroadcast` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::RemediateWhatsAppNumber200ResponsePhoneNumber` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CancelBroadcast200ResponseBroadcast`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::RemediateWhatsAppNumber200ResponsePhoneNumber`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }

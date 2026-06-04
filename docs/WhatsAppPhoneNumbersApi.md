@@ -4,16 +4,88 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**check_whats_app_number_availability**](WhatsAppPhoneNumbersApi.md#check_whats_app_number_availability) | **GET** /v1/whatsapp/phone-numbers/availability | Check a country&#39;s availability + address constraint |
 | [**get_whats_app_number_info**](WhatsAppPhoneNumbersApi.md#get_whats_app_number_info) | **GET** /v1/whatsapp/number-info | Get number status |
 | [**get_whats_app_number_kyc_form**](WhatsAppPhoneNumbersApi.md#get_whats_app_number_kyc_form) | **GET** /v1/whatsapp/phone-numbers/kyc | Get regulated-number KYC form spec |
+| [**get_whats_app_number_remediation**](WhatsAppPhoneNumbersApi.md#get_whats_app_number_remediation) | **GET** /v1/whatsapp/phone-numbers/{id}/remediate | Get the declined requirements to fix |
 | [**get_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#get_whats_app_phone_number) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number |
 | [**get_whats_app_phone_numbers**](WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers |
 | [**list_whats_app_number_countries**](WhatsAppPhoneNumbersApi.md#list_whats_app_number_countries) | **GET** /v1/whatsapp/phone-numbers/countries | List offerable number countries |
 | [**purchase_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number |
 | [**release_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number |
+| [**remediate_whats_app_number**](WhatsAppPhoneNumbersApi.md#remediate_whats_app_number) | **POST** /v1/whatsapp/phone-numbers/{id}/remediate | Fix a declined number and re-submit |
 | [**search_available_whats_app_numbers**](WhatsAppPhoneNumbersApi.md#search_available_whats_app_numbers) | **GET** /v1/whatsapp/phone-numbers/available | Search available numbers to purchase |
 | [**submit_whats_app_number_kyc**](WhatsAppPhoneNumbersApi.md#submit_whats_app_number_kyc) | **POST** /v1/whatsapp/phone-numbers/kyc | Submit regulated-number KYC |
 | [**upload_whats_app_number_kyc_document**](WhatsAppPhoneNumbersApi.md#upload_whats_app_number_kyc_document) | **POST** /v1/whatsapp/phone-numbers/kyc/upload-document | Upload a single regulated-number KYC document |
+
+
+## check_whats_app_number_availability
+
+> <CheckWhatsAppNumberAvailability200Response> check_whats_app_number_availability(country)
+
+Check a country's availability + address constraint
+
+Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+country = 'country_example' # String | ISO-2 country code.
+
+begin
+  # Check a country's availability + address constraint
+  result = api_instance.check_whats_app_number_availability(country)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->check_whats_app_number_availability: #{e}"
+end
+```
+
+#### Using the check_whats_app_number_availability_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CheckWhatsAppNumberAvailability200Response>, Integer, Hash)> check_whats_app_number_availability_with_http_info(country)
+
+```ruby
+begin
+  # Check a country's availability + address constraint
+  data, status_code, headers = api_instance.check_whats_app_number_availability_with_http_info(country)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CheckWhatsAppNumberAvailability200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->check_whats_app_number_availability_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **country** | **String** | ISO-2 country code. |  |
+
+### Return type
+
+[**CheckWhatsAppNumberAvailability200Response**](CheckWhatsAppNumberAvailability200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## get_whats_app_number_info
@@ -156,6 +228,75 @@ end
 - **Accept**: application/json
 
 
+## get_whats_app_number_remediation
+
+> <GetWhatsAppNumberRemediation200Response> get_whats_app_number_remediation(id)
+
+Get the declined requirements to fix
+
+For a number in `regulatory_declined`, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+id = 'id_example' # String | WhatsAppPhoneNumber id.
+
+begin
+  # Get the declined requirements to fix
+  result = api_instance.get_whats_app_number_remediation(id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_number_remediation: #{e}"
+end
+```
+
+#### Using the get_whats_app_number_remediation_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppNumberRemediation200Response>, Integer, Hash)> get_whats_app_number_remediation_with_http_info(id)
+
+```ruby
+begin
+  # Get the declined requirements to fix
+  data, status_code, headers = api_instance.get_whats_app_number_remediation_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppNumberRemediation200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->get_whats_app_number_remediation_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | WhatsAppPhoneNumber id. |  |
+
+### Return type
+
+[**GetWhatsAppNumberRemediation200Response**](GetWhatsAppNumberRemediation200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_whats_app_phone_number
 
 > <GetWhatsAppPhoneNumber200Response> get_whats_app_phone_number(phone_number_id)
@@ -246,7 +387,7 @@ end
 
 api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 opts = {
-  status: 'provisioning', # String | Filter by status (by default excludes released numbers)
+  status: 'provisioning', # String | Filter by status (by default excludes released numbers). NOTE: `status=pending_regulatory` returns the \"provisioning\" view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with `regulatoryDeclineReason`) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. 
   profile_id: 'profile_id_example' # String | Filter by profile
 }
 
@@ -281,7 +422,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **status** | **String** | Filter by status (by default excludes released numbers) | [optional] |
+| **status** | **String** | Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate.  | [optional] |
 | **profile_id** | **String** | Filter by profile | [optional] |
 
 ### Return type
@@ -502,6 +643,77 @@ end
 - **Accept**: application/json
 
 
+## remediate_whats_app_number
+
+> <RemediateWhatsAppNumber200Response> remediate_whats_app_number(id, remediate_whats_app_number_request)
+
+Fix a declined number and re-submit
+
+Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes `regulatory_declined` → `pending_regulatory`. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+id = 'id_example' # String | 
+remediate_whats_app_number_request = Zernio::RemediateWhatsAppNumberRequest.new # RemediateWhatsAppNumberRequest | 
+
+begin
+  # Fix a declined number and re-submit
+  result = api_instance.remediate_whats_app_number(id, remediate_whats_app_number_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->remediate_whats_app_number: #{e}"
+end
+```
+
+#### Using the remediate_whats_app_number_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemediateWhatsAppNumber200Response>, Integer, Hash)> remediate_whats_app_number_with_http_info(id, remediate_whats_app_number_request)
+
+```ruby
+begin
+  # Fix a declined number and re-submit
+  data, status_code, headers = api_instance.remediate_whats_app_number_with_http_info(id, remediate_whats_app_number_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemediateWhatsAppNumber200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->remediate_whats_app_number_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+| **remediate_whats_app_number_request** | [**RemediateWhatsAppNumberRequest**](RemediateWhatsAppNumberRequest.md) |  |  |
+
+### Return type
+
+[**RemediateWhatsAppNumber200Response**](RemediateWhatsAppNumber200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## search_available_whats_app_numbers
 
 > <SearchAvailableWhatsAppNumbers200Response> search_available_whats_app_numbers(opts)
@@ -589,7 +801,7 @@ end
 
 Submit regulated-number KYC
 
-Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via `submissionId`. 
+Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via `submissionId`.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
 
 ### Examples
 

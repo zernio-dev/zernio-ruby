@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
-| **sequence** | [**CancelBroadcast200ResponseBroadcast**](CancelBroadcast200ResponseBroadcast.md) |  | [optional] |
+| **sequence** | [**RemediateWhatsAppNumber200ResponsePhoneNumber**](RemediateWhatsAppNumber200ResponsePhoneNumber.md) |  | [optional] |
 
 ## Example
 

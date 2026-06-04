@@ -23,6 +23,12 @@ module Zernio
 
     attr_accessor :status
 
+    # For regulated numbers
+    attr_accessor :registrant_name
+
+    # Present once the number order has been placed (i.e. the requirement group was approved). Absent while still in identity review.
+    attr_accessor :telnyx_order_id
+
     # Per-country monthly price in cents ($2..$25).
     attr_accessor :monthly_cents
 
@@ -75,6 +81,8 @@ module Zernio
         :'phone_number' => :'phoneNumber',
         :'country' => :'country',
         :'status' => :'status',
+        :'registrant_name' => :'registrantName',
+        :'telnyx_order_id' => :'telnyxOrderId',
         :'monthly_cents' => :'monthlyCents',
         :'profile_id' => :'profileId',
         :'provisioned_at' => :'provisionedAt',
@@ -105,6 +113,8 @@ module Zernio
         :'phone_number' => :'String',
         :'country' => :'String',
         :'status' => :'String',
+        :'registrant_name' => :'String',
+        :'telnyx_order_id' => :'String',
         :'monthly_cents' => :'Integer',
         :'profile_id' => :'Object',
         :'provisioned_at' => :'Time',
@@ -154,6 +164,14 @@ module Zernio
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'registrant_name')
+        self.registrant_name = attributes[:'registrant_name']
+      end
+
+      if attributes.key?(:'telnyx_order_id')
+        self.telnyx_order_id = attributes[:'telnyx_order_id']
       end
 
       if attributes.key?(:'monthly_cents')
@@ -233,6 +251,8 @@ module Zernio
           phone_number == o.phone_number &&
           country == o.country &&
           status == o.status &&
+          registrant_name == o.registrant_name &&
+          telnyx_order_id == o.telnyx_order_id &&
           monthly_cents == o.monthly_cents &&
           profile_id == o.profile_id &&
           provisioned_at == o.provisioned_at &&
@@ -254,7 +274,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, phone_number, country, status, monthly_cents, profile_id, provisioned_at, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, created_at].hash
+      [_id, phone_number, country, status, registrant_name, telnyx_order_id, monthly_cents, profile_id, provisioned_at, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, created_at].hash
     end
 
     # Builds the object from hash

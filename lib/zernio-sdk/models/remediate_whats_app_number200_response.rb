@@ -14,16 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CancelBroadcast200Response < ApiModelBase
-    attr_accessor :success
+  class RemediateWhatsAppNumber200Response < ApiModelBase
+    attr_accessor :status
 
-    attr_accessor :broadcast
+    attr_accessor :phone_number
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'broadcast' => :'broadcast'
+        :'status' => :'status',
+        :'phone_number' => :'phoneNumber'
       }
     end
 
@@ -40,8 +40,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'broadcast' => :'RemediateWhatsAppNumber200ResponsePhoneNumber'
+        :'status' => :'String',
+        :'phone_number' => :'RemediateWhatsAppNumber200ResponsePhoneNumber'
       }
     end
 
@@ -55,24 +55,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CancelBroadcast200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::RemediateWhatsAppNumber200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CancelBroadcast200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::RemediateWhatsAppNumber200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'broadcast')
-        self.broadcast = attributes[:'broadcast']
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
       end
     end
 
@@ -96,8 +96,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          broadcast == o.broadcast
+          status == o.status &&
+          phone_number == o.phone_number
     end
 
     # @see the `==` method
@@ -109,7 +109,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, broadcast].hash
+      [status, phone_number].hash
     end
 
     # Builds the object from hash

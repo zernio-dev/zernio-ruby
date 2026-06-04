@@ -1,4 +1,4 @@
-# Zernio::CancelBroadcast200ResponseBroadcast
+# Zernio::RemediateWhatsAppNumber200ResponsePhoneNumber
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CancelBroadcast200ResponseBroadcast.new(
+instance = Zernio::RemediateWhatsAppNumber200ResponsePhoneNumber.new(
   id: null,
   status: null
 )

@@ -89,7 +89,7 @@ docs/BulkUploadResultRateLimitedAccountsInner.md
 docs/BulkUploadResultResultsInner.md
 docs/BusinessCenter.md
 docs/CancelBroadcast200Response.md
-docs/CancelBroadcast200ResponseBroadcast.md
+docs/CheckWhatsAppNumberAvailability200Response.md
 docs/CommentAutomationsApi.md
 docs/CommentsApi.md
 docs/CompleteGoogleBusinessVerificationRequest.md
@@ -520,6 +520,7 @@ docs/GetWhatsAppNumberInfo200ResponseWaba.md
 docs/GetWhatsAppNumberKycForm200Response.md
 docs/GetWhatsAppNumberKycForm200ResponseFieldsInner.md
 docs/GetWhatsAppNumberKycForm200ResponseReusable.md
+docs/GetWhatsAppNumberRemediation200Response.md
 docs/GetWhatsAppPhoneNumber200Response.md
 docs/GetWhatsAppPhoneNumber200ResponsePhoneNumber.md
 docs/GetWhatsAppPhoneNumbers200Response.md
@@ -771,6 +772,11 @@ docs/RedditSearchApi.md
 docs/RejectWhatsAppGroupJoinRequestsRequest.md
 docs/ReleaseWhatsAppPhoneNumber200Response.md
 docs/ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber.md
+docs/RemediateWhatsAppNumber200Response.md
+docs/RemediateWhatsAppNumber200ResponsePhoneNumber.md
+docs/RemediateWhatsAppNumberRequest.md
+docs/RemediateWhatsAppNumberRequestDocumentsInner.md
+docs/RemediateWhatsAppNumberRequestDocumentsInnerOneOf.md
 docs/RemoveBookmark200Response.md
 docs/RemoveConversionAssociations200Response.md
 docs/RemoveDiscordMemberRole200Response.md
@@ -1298,7 +1304,7 @@ lib/zernio-sdk/models/bulk_upload_result_rate_limited_accounts_inner.rb
 lib/zernio-sdk/models/bulk_upload_result_results_inner.rb
 lib/zernio-sdk/models/business_center.rb
 lib/zernio-sdk/models/cancel_broadcast200_response.rb
-lib/zernio-sdk/models/cancel_broadcast200_response_broadcast.rb
+lib/zernio-sdk/models/check_whats_app_number_availability200_response.rb
 lib/zernio-sdk/models/complete_google_business_verification_request.rb
 lib/zernio-sdk/models/complete_telegram_connect200_response.rb
 lib/zernio-sdk/models/complete_whats_app_phone_selection200_response.rb
@@ -1715,6 +1721,7 @@ lib/zernio-sdk/models/get_whats_app_number_info200_response_waba.rb
 lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response.rb
 lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response_fields_inner.rb
 lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response_reusable.rb
+lib/zernio-sdk/models/get_whats_app_number_remediation200_response.rb
 lib/zernio-sdk/models/get_whats_app_phone_number200_response.rb
 lib/zernio-sdk/models/get_whats_app_phone_number200_response_phone_number.rb
 lib/zernio-sdk/models/get_whats_app_phone_numbers200_response.rb
@@ -1956,6 +1963,11 @@ lib/zernio-sdk/models/reddit_post.rb
 lib/zernio-sdk/models/reject_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/release_whats_app_phone_number200_response.rb
 lib/zernio-sdk/models/release_whats_app_phone_number200_response_phone_number.rb
+lib/zernio-sdk/models/remediate_whats_app_number200_response.rb
+lib/zernio-sdk/models/remediate_whats_app_number200_response_phone_number.rb
+lib/zernio-sdk/models/remediate_whats_app_number_request.rb
+lib/zernio-sdk/models/remediate_whats_app_number_request_documents_inner.rb
+lib/zernio-sdk/models/remediate_whats_app_number_request_documents_inner_one_of.rb
 lib/zernio-sdk/models/remove_bookmark200_response.rb
 lib/zernio-sdk/models/remove_conversion_associations200_response.rb
 lib/zernio-sdk/models/remove_discord_member_role200_response.rb
@@ -2460,8 +2472,8 @@ spec/models/bulk_upload_result_rate_limited_accounts_inner_spec.rb
 spec/models/bulk_upload_result_results_inner_spec.rb
 spec/models/bulk_upload_result_spec.rb
 spec/models/business_center_spec.rb
-spec/models/cancel_broadcast200_response_broadcast_spec.rb
 spec/models/cancel_broadcast200_response_spec.rb
+spec/models/check_whats_app_number_availability200_response_spec.rb
 spec/models/complete_google_business_verification_request_spec.rb
 spec/models/complete_telegram_connect200_response_spec.rb
 spec/models/complete_whats_app_phone_selection200_response_account_spec.rb
@@ -2878,6 +2890,7 @@ spec/models/get_whats_app_number_info200_response_waba_spec.rb
 spec/models/get_whats_app_number_kyc_form200_response_fields_inner_spec.rb
 spec/models/get_whats_app_number_kyc_form200_response_reusable_spec.rb
 spec/models/get_whats_app_number_kyc_form200_response_spec.rb
+spec/models/get_whats_app_number_remediation200_response_spec.rb
 spec/models/get_whats_app_phone_number200_response_phone_number_spec.rb
 spec/models/get_whats_app_phone_number200_response_spec.rb
 spec/models/get_whats_app_phone_numbers200_response_numbers_inner_spec.rb
@@ -3119,6 +3132,11 @@ spec/models/reddit_post_spec.rb
 spec/models/reject_whats_app_group_join_requests_request_spec.rb
 spec/models/release_whats_app_phone_number200_response_phone_number_spec.rb
 spec/models/release_whats_app_phone_number200_response_spec.rb
+spec/models/remediate_whats_app_number200_response_phone_number_spec.rb
+spec/models/remediate_whats_app_number200_response_spec.rb
+spec/models/remediate_whats_app_number_request_documents_inner_one_of_spec.rb
+spec/models/remediate_whats_app_number_request_documents_inner_spec.rb
+spec/models/remediate_whats_app_number_request_spec.rb
 spec/models/remove_bookmark200_response_spec.rb
 spec/models/remove_conversion_associations200_response_spec.rb
 spec/models/remove_discord_member_role200_response_spec.rb

@@ -32,6 +32,18 @@ describe 'WhatsAppPhoneNumbersApi' do
     end
   end
 
+  # unit tests for check_whats_app_number_availability
+  # Check a country&#39;s availability + address constraint
+  # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
+  # @param country ISO-2 country code.
+  # @param [Hash] opts the optional parameters
+  # @return [CheckWhatsAppNumberAvailability200Response]
+  describe 'check_whats_app_number_availability test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_whats_app_number_info
   # Get number status
   # Live snapshot of a connected number straight from Meta: the phone-number node (display number, display name + approval, quality rating, messaging-limit tier, throughput, official-business badge, connection status, health_status) and its owning WhatsApp Business Account (name, business verification, timezone, health_status). Fetched live because Meta updates quality/tier/name/health over time; the call also refreshes the cached values shown on the connection card. 
@@ -57,6 +69,18 @@ describe 'WhatsAppPhoneNumbersApi' do
     end
   end
 
+  # unit tests for get_whats_app_number_remediation
+  # Get the declined requirements to fix
+  # For a number in &#x60;regulatory_declined&#x60;, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
+  # @param id WhatsAppPhoneNumber id.
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppNumberRemediation200Response]
+  describe 'get_whats_app_number_remediation test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_whats_app_phone_number
   # Get phone number
   # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, &#x60;onfidoVerificationUrl&#x60; appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
@@ -73,7 +97,7 @@ describe 'WhatsAppPhoneNumbersApi' do
   # List phone numbers
   # List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :status Filter by status (by default excludes released numbers)
+  # @option opts [String] :status Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. 
   # @option opts [String] :profile_id Filter by profile
   # @return [GetWhatsAppPhoneNumbers200Response]
   describe 'get_whats_app_phone_numbers test' do
@@ -117,6 +141,19 @@ describe 'WhatsAppPhoneNumbersApi' do
     end
   end
 
+  # unit tests for remediate_whats_app_number
+  # Fix a declined number and re-submit
+  # Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes &#x60;regulatory_declined&#x60; → &#x60;pending_regulatory&#x60;. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
+  # @param id 
+  # @param remediate_whats_app_number_request 
+  # @param [Hash] opts the optional parameters
+  # @return [RemediateWhatsAppNumber200Response]
+  describe 'remediate_whats_app_number test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for search_available_whats_app_numbers
   # Search available numbers to purchase
   # Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
@@ -136,7 +173,7 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for submit_whats_app_number_kyc
   # Submit regulated-number KYC
-  # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;. 
+  # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
   # @param submit_whats_app_number_kyc_request 
   # @param [Hash] opts the optional parameters
   # @return [SubmitWhatsAppNumberKyc200Response]
