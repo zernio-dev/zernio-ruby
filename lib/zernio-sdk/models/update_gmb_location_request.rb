@@ -17,14 +17,14 @@ module Zernio
   class UpdateGmbLocationRequest < ApiModelBase
     attr_accessor :selected_location_id
 
-    # Optional but recommended. The Google Business Account resource name (\"accounts/123\") that owns the new location (from GET gmb-locations). When provided, the location is resolved directly instead of by enumerating the account, which is required for accounts with many locations. 
-    attr_accessor :account_id
+    # Optional but recommended. The Google Business Account resource name (\"accounts/123\") that owns the new location (from GET gmb-locations). When provided, the location is resolved directly instead of by enumerating the account, which is required for accounts with many locations. Named `googleAccountId` to disambiguate from the path `accountId` (the Zernio account). The legacy field name `accountId` is still accepted for backwards compatibility. 
+    attr_accessor :google_account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'selected_location_id' => :'selectedLocationId',
-        :'account_id' => :'accountId'
+        :'google_account_id' => :'googleAccountId'
       }
     end
 
@@ -42,7 +42,7 @@ module Zernio
     def self.openapi_types
       {
         :'selected_location_id' => :'String',
-        :'account_id' => :'String'
+        :'google_account_id' => :'String'
       }
     end
 
@@ -74,8 +74,8 @@ module Zernio
         self.selected_location_id = nil
       end
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
+      if attributes.key?(:'google_account_id')
+        self.google_account_id = attributes[:'google_account_id']
       end
     end
 
@@ -115,7 +115,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           selected_location_id == o.selected_location_id &&
-          account_id == o.account_id
+          google_account_id == o.google_account_id
     end
 
     # @see the `==` method
@@ -127,7 +127,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [selected_location_id, account_id].hash
+      [selected_location_id, google_account_id].hash
     end
 
     # Builds the object from hash
