@@ -1,4 +1,4 @@
-# Zernio::BulkUploadPosts429Response
+# Zernio::GetInboxVolume400Response
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::BulkUploadPosts429Response.new(
+instance = Zernio::GetInboxVolume400Response.new(
   error: null,
   details: null
 )

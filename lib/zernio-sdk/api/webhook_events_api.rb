@@ -2131,6 +2131,204 @@ module Zernio
       return data, status_code, headers
     end
 
+    # WhatsApp number reactivated event
+    # Fired when a suspended number is reactivated (e.g. the payment recovered) and is usable again. 
+    # @param on_whats_app_number_reactivated_request [OnWhatsAppNumberReactivatedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_whats_app_number_reactivated(on_whats_app_number_reactivated_request, opts = {})
+      on_whats_app_number_reactivated_with_http_info(on_whats_app_number_reactivated_request, opts)
+      nil
+    end
+
+    # WhatsApp number reactivated event
+    # Fired when a suspended number is reactivated (e.g. the payment recovered) and is usable again. 
+    # @param on_whats_app_number_reactivated_request [OnWhatsAppNumberReactivatedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_whats_app_number_reactivated_with_http_info(on_whats_app_number_reactivated_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_whats_app_number_reactivated ...'
+      end
+      # verify the required parameter 'on_whats_app_number_reactivated_request' is set
+      if @api_client.config.client_side_validation && on_whats_app_number_reactivated_request.nil?
+        fail ArgumentError, "Missing the required parameter 'on_whats_app_number_reactivated_request' when calling WebhookEventsApi.on_whats_app_number_reactivated"
+      end
+      # resource path
+      local_var_path = '/whatsapp.number.reactivated'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(on_whats_app_number_reactivated_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_whats_app_number_reactivated",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_whats_app_number_reactivated\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # WhatsApp number released event
+    # Fired when a number is released and is no longer usable (by the user, a billing cleanup, or an admin). Terminal. `reason` carries the cause (e.g. `user_requested`, `cleanup_suspended`). 
+    # @param on_whats_app_number_released_request [OnWhatsAppNumberReleasedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_whats_app_number_released(on_whats_app_number_released_request, opts = {})
+      on_whats_app_number_released_with_http_info(on_whats_app_number_released_request, opts)
+      nil
+    end
+
+    # WhatsApp number released event
+    # Fired when a number is released and is no longer usable (by the user, a billing cleanup, or an admin). Terminal. &#x60;reason&#x60; carries the cause (e.g. &#x60;user_requested&#x60;, &#x60;cleanup_suspended&#x60;). 
+    # @param on_whats_app_number_released_request [OnWhatsAppNumberReleasedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_whats_app_number_released_with_http_info(on_whats_app_number_released_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_whats_app_number_released ...'
+      end
+      # verify the required parameter 'on_whats_app_number_released_request' is set
+      if @api_client.config.client_side_validation && on_whats_app_number_released_request.nil?
+        fail ArgumentError, "Missing the required parameter 'on_whats_app_number_released_request' when calling WebhookEventsApi.on_whats_app_number_released"
+      end
+      # resource path
+      local_var_path = '/whatsapp.number.released'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(on_whats_app_number_released_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_whats_app_number_released",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_whats_app_number_released\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # WhatsApp number suspended event
+    # Fired when an active number is suspended (e.g. a failed payment). The number stops working until the issue is resolved, after which a `whatsapp.number.reactivated` event is sent. `reason` carries the cause (e.g. `payment_failed`, `subscription_ended`). 
+    # @param on_whats_app_number_suspended_request [OnWhatsAppNumberSuspendedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_whats_app_number_suspended(on_whats_app_number_suspended_request, opts = {})
+      on_whats_app_number_suspended_with_http_info(on_whats_app_number_suspended_request, opts)
+      nil
+    end
+
+    # WhatsApp number suspended event
+    # Fired when an active number is suspended (e.g. a failed payment). The number stops working until the issue is resolved, after which a &#x60;whatsapp.number.reactivated&#x60; event is sent. &#x60;reason&#x60; carries the cause (e.g. &#x60;payment_failed&#x60;, &#x60;subscription_ended&#x60;). 
+    # @param on_whats_app_number_suspended_request [OnWhatsAppNumberSuspendedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_whats_app_number_suspended_with_http_info(on_whats_app_number_suspended_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_whats_app_number_suspended ...'
+      end
+      # verify the required parameter 'on_whats_app_number_suspended_request' is set
+      if @api_client.config.client_side_validation && on_whats_app_number_suspended_request.nil?
+        fail ArgumentError, "Missing the required parameter 'on_whats_app_number_suspended_request' when calling WebhookEventsApi.on_whats_app_number_suspended"
+      end
+      # resource path
+      local_var_path = '/whatsapp.number.suspended'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(on_whats_app_number_suspended_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_whats_app_number_suspended",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_whats_app_number_suspended\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # WhatsApp number verification-required event
     # Fired when a regulated number has an out-of-band identity-verification step (e.g. Onfido). `verificationUrl` is the link to forward to the number's end user; the order completes once they pass. 
     # @param on_whats_app_number_verification_required_request [OnWhatsAppNumberVerificationRequiredRequest] 

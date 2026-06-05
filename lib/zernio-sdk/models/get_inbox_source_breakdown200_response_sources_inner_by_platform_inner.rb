@@ -14,16 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class BulkUploadPosts429Response < ApiModelBase
-    attr_accessor :error
+  class GetInboxSourceBreakdown200ResponseSourcesInnerByPlatformInner < ApiModelBase
+    attr_accessor :platform
 
-    attr_accessor :details
+    attr_accessor :received
+
+    attr_accessor :sent
+
+    attr_accessor :read
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error',
-        :'details' => :'details'
+        :'platform' => :'platform',
+        :'received' => :'received',
+        :'sent' => :'sent',
+        :'read' => :'read'
       }
     end
 
@@ -40,8 +46,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'String',
-        :'details' => :'Object'
+        :'platform' => :'String',
+        :'received' => :'Integer',
+        :'sent' => :'Integer',
+        :'read' => :'Integer'
       }
     end
 
@@ -55,24 +63,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::BulkUploadPosts429Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetInboxSourceBreakdown200ResponseSourcesInnerByPlatformInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::BulkUploadPosts429Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetInboxSourceBreakdown200ResponseSourcesInnerByPlatformInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
       end
 
-      if attributes.key?(:'details')
-        self.details = attributes[:'details']
+      if attributes.key?(:'received')
+        self.received = attributes[:'received']
+      end
+
+      if attributes.key?(:'sent')
+        self.sent = attributes[:'sent']
+      end
+
+      if attributes.key?(:'read')
+        self.read = attributes[:'read']
       end
     end
 
@@ -96,8 +112,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error &&
-          details == o.details
+          platform == o.platform &&
+          received == o.received &&
+          sent == o.sent &&
+          read == o.read
     end
 
     # @see the `==` method
@@ -109,7 +127,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, details].hash
+      [platform, received, sent, read].hash
     end
 
     # Builds the object from hash

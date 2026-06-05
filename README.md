@@ -274,6 +274,13 @@ Class | Method | HTTP request | Description
 *Zernio::GMBVerificationsApi* | [**fetch_google_business_verification_options**](docs/GMBVerificationsApi.md#fetch_google_business_verification_options) | **POST** /v1/accounts/{accountId}/gmb-verifications/options | Fetch verification options
 *Zernio::GMBVerificationsApi* | [**get_google_business_verifications**](docs/GMBVerificationsApi.md#get_google_business_verifications) | **GET** /v1/accounts/{accountId}/gmb-verifications | Get verification state
 *Zernio::GMBVerificationsApi* | [**start_google_business_verification**](docs/GMBVerificationsApi.md#start_google_business_verification) | **POST** /v1/accounts/{accountId}/gmb-verifications | Start a verification
+*Zernio::InboxAnalyticsApi* | [**get_inbox_conversation_analytics**](docs/InboxAnalyticsApi.md#get_inbox_conversation_analytics) | **GET** /v1/analytics/inbox/conversations/{conversationId} | Get analytics for a single conversation
+*Zernio::InboxAnalyticsApi* | [**get_inbox_heatmap**](docs/InboxAnalyticsApi.md#get_inbox_heatmap) | **GET** /v1/analytics/inbox/heatmap | Get inbox day-of-week × hour-of-day heatmap
+*Zernio::InboxAnalyticsApi* | [**get_inbox_response_time**](docs/InboxAnalyticsApi.md#get_inbox_response_time) | **GET** /v1/analytics/inbox/response-time | Get inbox response-time stats
+*Zernio::InboxAnalyticsApi* | [**get_inbox_source_breakdown**](docs/InboxAnalyticsApi.md#get_inbox_source_breakdown) | **GET** /v1/analytics/inbox/source-breakdown | Get inbox source breakdown
+*Zernio::InboxAnalyticsApi* | [**get_inbox_top_accounts**](docs/InboxAnalyticsApi.md#get_inbox_top_accounts) | **GET** /v1/analytics/inbox/top-accounts | Get top accounts by inbox volume
+*Zernio::InboxAnalyticsApi* | [**get_inbox_volume**](docs/InboxAnalyticsApi.md#get_inbox_volume) | **GET** /v1/analytics/inbox/volume | Get inbox messaging volume
+*Zernio::InboxAnalyticsApi* | [**list_inbox_conversation_analytics**](docs/InboxAnalyticsApi.md#list_inbox_conversation_analytics) | **GET** /v1/analytics/inbox/conversations | List conversations with inbox analytics
 *Zernio::InstagramApi* | [**get_instagram_story_insights**](docs/InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights
 *Zernio::InstagramApi* | [**list_instagram_stories**](docs/InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories
 *Zernio::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
@@ -506,7 +513,6 @@ Class | Method | HTTP request | Description
  - [Zernio::BulkUpdateAdCampaignStatus200ResponseTotals](docs/BulkUpdateAdCampaignStatus200ResponseTotals.md)
  - [Zernio::BulkUpdateAdCampaignStatusRequest](docs/BulkUpdateAdCampaignStatusRequest.md)
  - [Zernio::BulkUpdateAdCampaignStatusRequestCampaignsInner](docs/BulkUpdateAdCampaignStatusRequestCampaignsInner.md)
- - [Zernio::BulkUploadPosts429Response](docs/BulkUploadPosts429Response.md)
  - [Zernio::BulkUploadResult](docs/BulkUploadResult.md)
  - [Zernio::BulkUploadResultRateLimitedAccountsInner](docs/BulkUploadResultRateLimitedAccountsInner.md)
  - [Zernio::BulkUploadResultResultsInner](docs/BulkUploadResultResultsInner.md)
@@ -825,6 +831,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify](docs/GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify.md)
  - [Zernio::GetInboxConversation200Response](docs/GetInboxConversation200Response.md)
  - [Zernio::GetInboxConversation200ResponseData](docs/GetInboxConversation200ResponseData.md)
+ - [Zernio::GetInboxConversationAnalytics200Response](docs/GetInboxConversationAnalytics200Response.md)
+ - [Zernio::GetInboxConversationAnalytics200ResponseBySourceInner](docs/GetInboxConversationAnalytics200ResponseBySourceInner.md)
+ - [Zernio::GetInboxConversationAnalytics200ResponseSummary](docs/GetInboxConversationAnalytics200ResponseSummary.md)
+ - [Zernio::GetInboxConversationAnalytics404Response](docs/GetInboxConversationAnalytics404Response.md)
  - [Zernio::GetInboxConversationMessages200Response](docs/GetInboxConversationMessages200Response.md)
  - [Zernio::GetInboxConversationMessages200ResponseMessagesInner](docs/GetInboxConversationMessages200ResponseMessagesInner.md)
  - [Zernio::GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner](docs/GetInboxConversationMessages200ResponseMessagesInnerAttachmentsInner.md)
@@ -833,6 +843,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner](docs/GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner.md)
  - [Zernio::GetInboxConversationMessages200ResponseMessagesInnerReactionsInner](docs/GetInboxConversationMessages200ResponseMessagesInnerReactionsInner.md)
  - [Zernio::GetInboxConversationMessages200ResponsePagination](docs/GetInboxConversationMessages200ResponsePagination.md)
+ - [Zernio::GetInboxHeatmap200Response](docs/GetInboxHeatmap200Response.md)
+ - [Zernio::GetInboxHeatmap200ResponseBucketsInner](docs/GetInboxHeatmap200ResponseBucketsInner.md)
  - [Zernio::GetInboxPostComments200Response](docs/GetInboxPostComments200Response.md)
  - [Zernio::GetInboxPostComments200ResponseCommentsInner](docs/GetInboxPostComments200ResponseCommentsInner.md)
  - [Zernio::GetInboxPostComments200ResponseCommentsInnerFrom](docs/GetInboxPostComments200ResponseCommentsInnerFrom.md)
@@ -840,6 +852,19 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInboxPostComments200ResponseMetaAdComments](docs/GetInboxPostComments200ResponseMetaAdComments.md)
  - [Zernio::GetInboxPostComments200ResponsePagination](docs/GetInboxPostComments200ResponsePagination.md)
  - [Zernio::GetInboxPostComments200ResponsePost](docs/GetInboxPostComments200ResponsePost.md)
+ - [Zernio::GetInboxResponseTime200Response](docs/GetInboxResponseTime200Response.md)
+ - [Zernio::GetInboxResponseTime200ResponseHistogramInner](docs/GetInboxResponseTime200ResponseHistogramInner.md)
+ - [Zernio::GetInboxResponseTime200ResponseSummary](docs/GetInboxResponseTime200ResponseSummary.md)
+ - [Zernio::GetInboxSourceBreakdown200Response](docs/GetInboxSourceBreakdown200Response.md)
+ - [Zernio::GetInboxSourceBreakdown200ResponseSourcesInner](docs/GetInboxSourceBreakdown200ResponseSourcesInner.md)
+ - [Zernio::GetInboxSourceBreakdown200ResponseSourcesInnerByPlatformInner](docs/GetInboxSourceBreakdown200ResponseSourcesInnerByPlatformInner.md)
+ - [Zernio::GetInboxTopAccounts200Response](docs/GetInboxTopAccounts200Response.md)
+ - [Zernio::GetInboxTopAccounts200ResponseAccountsInner](docs/GetInboxTopAccounts200ResponseAccountsInner.md)
+ - [Zernio::GetInboxVolume200Response](docs/GetInboxVolume200Response.md)
+ - [Zernio::GetInboxVolume200ResponseByPlatformInner](docs/GetInboxVolume200ResponseByPlatformInner.md)
+ - [Zernio::GetInboxVolume200ResponseSummary](docs/GetInboxVolume200ResponseSummary.md)
+ - [Zernio::GetInboxVolume200ResponseTimeseriesInner](docs/GetInboxVolume200ResponseTimeseriesInner.md)
+ - [Zernio::GetInboxVolume400Response](docs/GetInboxVolume400Response.md)
  - [Zernio::GetInstagramAccountInsights404Response](docs/GetInstagramAccountInsights404Response.md)
  - [Zernio::GetInstagramStoryInsights200Response](docs/GetInstagramStoryInsights200Response.md)
  - [Zernio::GetInstagramStoryInsights200ResponseData](docs/GetInstagramStoryInsights200ResponseData.md)
@@ -1048,6 +1073,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner](docs/ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner.md)
  - [Zernio::ListInboxComments200Response](docs/ListInboxComments200Response.md)
  - [Zernio::ListInboxComments200ResponseDataInner](docs/ListInboxComments200ResponseDataInner.md)
+ - [Zernio::ListInboxConversationAnalytics200Response](docs/ListInboxConversationAnalytics200Response.md)
+ - [Zernio::ListInboxConversationAnalytics200ResponseItemsInner](docs/ListInboxConversationAnalytics200ResponseItemsInner.md)
+ - [Zernio::ListInboxConversationAnalytics200ResponsePagination](docs/ListInboxConversationAnalytics200ResponsePagination.md)
  - [Zernio::ListInboxConversations200Response](docs/ListInboxConversations200Response.md)
  - [Zernio::ListInboxConversations200ResponseDataInner](docs/ListInboxConversations200ResponseDataInner.md)
  - [Zernio::ListInboxConversations200ResponseDataInnerInstagramProfile](docs/ListInboxConversations200ResponseDataInnerInstagramProfile.md)
@@ -1125,6 +1153,9 @@ Class | Method | HTTP request | Description
  - [Zernio::OnWhatsAppNumberActivatedRequestNumber](docs/OnWhatsAppNumberActivatedRequestNumber.md)
  - [Zernio::OnWhatsAppNumberDeclinedRequest](docs/OnWhatsAppNumberDeclinedRequest.md)
  - [Zernio::OnWhatsAppNumberDeclinedRequestNumber](docs/OnWhatsAppNumberDeclinedRequestNumber.md)
+ - [Zernio::OnWhatsAppNumberReactivatedRequest](docs/OnWhatsAppNumberReactivatedRequest.md)
+ - [Zernio::OnWhatsAppNumberReleasedRequest](docs/OnWhatsAppNumberReleasedRequest.md)
+ - [Zernio::OnWhatsAppNumberSuspendedRequest](docs/OnWhatsAppNumberSuspendedRequest.md)
  - [Zernio::OnWhatsAppNumberVerificationRequiredRequest](docs/OnWhatsAppNumberVerificationRequiredRequest.md)
  - [Zernio::Pagination](docs/Pagination.md)
  - [Zernio::PauseWorkflow200Response](docs/PauseWorkflow200Response.md)
