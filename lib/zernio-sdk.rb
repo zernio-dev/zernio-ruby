@@ -206,6 +206,7 @@ require 'zernio-sdk/models/create_standalone_ad_request_placement_assets_rules_i
 require 'zernio-sdk/models/create_standalone_ad_request_placements'
 require 'zernio-sdk/models/create_standalone_ad_request_promoted_object'
 require 'zernio-sdk/models/create_standalone_ad_request_regions_inner'
+require 'zernio-sdk/models/create_standalone_ad_request_tracking'
 require 'zernio-sdk/models/create_standalone_ad_request_video'
 require 'zernio-sdk/models/create_standalone_ad_request_zips_inner'
 require 'zernio-sdk/models/create_test_lead200_response'

@@ -207,6 +207,7 @@ docs/CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.md
 docs/CreateStandaloneAdRequestPlacements.md
 docs/CreateStandaloneAdRequestPromotedObject.md
 docs/CreateStandaloneAdRequestRegionsInner.md
+docs/CreateStandaloneAdRequestTracking.md
 docs/CreateStandaloneAdRequestVideo.md
 docs/CreateStandaloneAdRequestZipsInner.md
 docs/CreateTestLead200Response.md
@@ -1444,6 +1445,7 @@ lib/zernio-sdk/models/create_standalone_ad_request_placement_assets_rules_inner_
 lib/zernio-sdk/models/create_standalone_ad_request_placements.rb
 lib/zernio-sdk/models/create_standalone_ad_request_promoted_object.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner.rb
+lib/zernio-sdk/models/create_standalone_ad_request_tracking.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
 lib/zernio-sdk/models/create_standalone_ad_request_zips_inner.rb
 lib/zernio-sdk/models/create_test_lead200_response.rb
@@ -2638,6 +2640,7 @@ spec/models/create_standalone_ad_request_placements_spec.rb
 spec/models/create_standalone_ad_request_promoted_object_spec.rb
 spec/models/create_standalone_ad_request_regions_inner_spec.rb
 spec/models/create_standalone_ad_request_spec.rb
+spec/models/create_standalone_ad_request_tracking_spec.rb
 spec/models/create_standalone_ad_request_video_spec.rb
 spec/models/create_standalone_ad_request_zips_inner_spec.rb
 spec/models/create_test_lead200_response_spec.rb

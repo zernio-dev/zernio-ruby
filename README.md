@@ -633,6 +633,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestPlacements](docs/CreateStandaloneAdRequestPlacements.md)
  - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
+ - [Zernio::CreateStandaloneAdRequestTracking](docs/CreateStandaloneAdRequestTracking.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
  - [Zernio::CreateStandaloneAdRequestZipsInner](docs/CreateStandaloneAdRequestZipsInner.md)
  - [Zernio::CreateTestLead200Response](docs/CreateTestLead200Response.md)
