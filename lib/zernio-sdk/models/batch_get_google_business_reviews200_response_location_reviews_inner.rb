@@ -15,21 +15,17 @@ require 'time'
 
 module Zernio
   class BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner < ApiModelBase
-    attr_accessor :location_name
+    # Full review resource name (accounts/*/locations/*/reviews/*)
+    attr_accessor :name
 
-    attr_accessor :reviews
-
-    attr_accessor :average_rating
-
-    attr_accessor :total_review_count
+    # The review object (reviewId
+    attr_accessor :review
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'location_name' => :'locationName',
-        :'reviews' => :'reviews',
-        :'average_rating' => :'averageRating',
-        :'total_review_count' => :'totalReviewCount'
+        :'name' => :'name',
+        :'review' => :'review'
       }
     end
 
@@ -46,10 +42,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'location_name' => :'String',
-        :'reviews' => :'Array<Object>',
-        :'average_rating' => :'Float',
-        :'total_review_count' => :'Integer'
+        :'name' => :'String',
+        :'review' => :'Object'
       }
     end
 
@@ -75,22 +69,12 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'location_name')
-        self.location_name = attributes[:'location_name']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'reviews')
-        if (value = attributes[:'reviews']).is_a?(Array)
-          self.reviews = value
-        end
-      end
-
-      if attributes.key?(:'average_rating')
-        self.average_rating = attributes[:'average_rating']
-      end
-
-      if attributes.key?(:'total_review_count')
-        self.total_review_count = attributes[:'total_review_count']
+      if attributes.key?(:'review')
+        self.review = attributes[:'review']
       end
     end
 
@@ -114,10 +98,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          location_name == o.location_name &&
-          reviews == o.reviews &&
-          average_rating == o.average_rating &&
-          total_review_count == o.total_review_count
+          name == o.name &&
+          review == o.review
     end
 
     # @see the `==` method
@@ -129,7 +111,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [location_name, reviews, average_rating, total_review_count].hash
+      [name, review].hash
     end
 
     # Builds the object from hash
