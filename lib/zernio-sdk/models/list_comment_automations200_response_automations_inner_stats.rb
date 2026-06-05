@@ -23,6 +23,9 @@ module Zernio
 
     attr_accessor :unique_contacts
 
+    # DMs sent with a trackable (wrapped) link. CTR denominator: divide clicks by this, not dmsSent. Lags dmsSent for campaigns that predate click tracking.
+    attr_accessor :tracked_sends
+
     # Total clicks on tracked links (bots/prefetch excluded).
     attr_accessor :link_clicks
 
@@ -42,6 +45,7 @@ module Zernio
         :'dms_sent' => :'dmsSent',
         :'dms_failed' => :'dmsFailed',
         :'unique_contacts' => :'uniqueContacts',
+        :'tracked_sends' => :'trackedSends',
         :'link_clicks' => :'linkClicks',
         :'unique_clicks' => :'uniqueClicks',
         :'delivered' => :'delivered',
@@ -66,6 +70,7 @@ module Zernio
         :'dms_sent' => :'Integer',
         :'dms_failed' => :'Integer',
         :'unique_contacts' => :'Integer',
+        :'tracked_sends' => :'Integer',
         :'link_clicks' => :'Integer',
         :'unique_clicks' => :'Integer',
         :'delivered' => :'Integer',
@@ -111,6 +116,10 @@ module Zernio
         self.unique_contacts = attributes[:'unique_contacts']
       end
 
+      if attributes.key?(:'tracked_sends')
+        self.tracked_sends = attributes[:'tracked_sends']
+      end
+
       if attributes.key?(:'link_clicks')
         self.link_clicks = attributes[:'link_clicks']
       end
@@ -152,6 +161,7 @@ module Zernio
           dms_sent == o.dms_sent &&
           dms_failed == o.dms_failed &&
           unique_contacts == o.unique_contacts &&
+          tracked_sends == o.tracked_sends &&
           link_clicks == o.link_clicks &&
           unique_clicks == o.unique_clicks &&
           delivered == o.delivered &&
@@ -167,7 +177,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [triggered, dms_sent, dms_failed, unique_contacts, link_clicks, unique_clicks, delivered, read].hash
+      [triggered, dms_sent, dms_failed, unique_contacts, tracked_sends, link_clicks, unique_clicks, delivered, read].hash
     end
 
     # Builds the object from hash

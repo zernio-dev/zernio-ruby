@@ -8,6 +8,7 @@
 | **dms_sent** | **Integer** |  | [optional] |
 | **dms_failed** | **Integer** |  | [optional] |
 | **unique_contacts** | **Integer** |  | [optional] |
+| **tracked_sends** | **Integer** | DMs sent with a trackable (wrapped) link. CTR denominator: divide clicks by this, not dmsSent. Lags dmsSent for campaigns that predate click tracking. | [optional] |
 | **link_clicks** | **Integer** | Total clicks on tracked links (bots/prefetch excluded). | [optional] |
 | **unique_clicks** | **Integer** | Distinct people who clicked a tracked link. | [optional] |
 | **delivered** | **Integer** | DMs confirmed delivered (Messenger; IG emits no delivery receipt). | [optional] |
@@ -23,6 +24,7 @@ instance = Zernio::ListCommentAutomations200ResponseAutomationsInnerStats.new(
   dms_sent: null,
   dms_failed: null,
   unique_contacts: null,
+  tracked_sends: null,
   link_clicks: null,
   unique_clicks: null,
   delivered: null,
