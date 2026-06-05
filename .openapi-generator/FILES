@@ -284,8 +284,8 @@ docs/ErrorResponse.md
 docs/EstimateAdReach200Response.md
 docs/EstimateAdReachRequest.md
 docs/Expired.md
+docs/ExternalPostMediaItem.md
 docs/ExternalPostWebhookPost.md
-docs/ExternalPostWebhookPostMediaItemsInner.md
 docs/FacebookPlatformData.md
 docs/FacebookPlatformDataCarouselCardsInner.md
 docs/FetchGoogleBusinessVerificationOptions200Response.md
@@ -1523,8 +1523,8 @@ lib/zernio-sdk/models/error_response.rb
 lib/zernio-sdk/models/estimate_ad_reach200_response.rb
 lib/zernio-sdk/models/estimate_ad_reach_request.rb
 lib/zernio-sdk/models/expired.rb
+lib/zernio-sdk/models/external_post_media_item.rb
 lib/zernio-sdk/models/external_post_webhook_post.rb
-lib/zernio-sdk/models/external_post_webhook_post_media_items_inner.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
 lib/zernio-sdk/models/facebook_platform_data_carousel_cards_inner.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options200_response.rb
@@ -2721,7 +2721,7 @@ spec/models/error_response_spec.rb
 spec/models/estimate_ad_reach200_response_spec.rb
 spec/models/estimate_ad_reach_request_spec.rb
 spec/models/expired_spec.rb
-spec/models/external_post_webhook_post_media_items_inner_spec.rb
+spec/models/external_post_media_item_spec.rb
 spec/models/external_post_webhook_post_spec.rb
 spec/models/facebook_platform_data_carousel_cards_inner_spec.rb
 spec/models/facebook_platform_data_spec.rb

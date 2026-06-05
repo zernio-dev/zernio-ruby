@@ -1,4 +1,4 @@
-# Zernio::ExternalPostWebhookPostMediaItemsInner
+# Zernio::ExternalPostMediaItem
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ExternalPostWebhookPostMediaItemsInner.new(
+instance = Zernio::ExternalPostMediaItem.new(
   type: null,
   url: null,
   thumbnail: null

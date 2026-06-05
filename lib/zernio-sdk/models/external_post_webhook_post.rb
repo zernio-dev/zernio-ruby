@@ -104,7 +104,7 @@ module Zernio
         :'url' => :'String',
         :'content' => :'String',
         :'media_type' => :'String',
-        :'media_items' => :'Array<ExternalPostWebhookPostMediaItemsInner>',
+        :'media_items' => :'Array<ExternalPostMediaItem>',
         :'thumbnail_url' => :'String',
         :'published_at' => :'Time',
         :'source' => :'String',
