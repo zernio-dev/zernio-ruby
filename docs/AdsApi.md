@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**add_conversion_associations**](AdsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns with a conversion destination |
+| [**adjust_conversions**](AdsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust already-uploaded conversions (Google only) |
 | [**archive_lead_form**](AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a Lead Gen form |
 | [**boost_post**](AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
 | [**create_conversion_destination**](AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn) |
@@ -104,6 +105,75 @@ end
 ### Return type
 
 [**AddConversionAssociations200Response**](AddConversionAssociations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## adjust_conversions
+
+> <AdjustConversions200Response> adjust_conversions(adjust_conversions_request)
+
+Adjust already-uploaded conversions (Google only)
+
+Adjust conversions that were previously uploaded via `POST /v1/ads/conversions` — retract them, restate their value, or enhance them with first-party data. Requires the Ads add-on.  **Google Ads only.** Google handles adjustments through the classic Google Ads API (`ConversionAdjustmentUploadService`); the Data Manager `ingestEvents` path used for sending conversions is ingest-only. Meta and LinkedIn have no equivalent, so this endpoint returns `405` for those platforms.  Adjustment types:  - `RETRACTION` — remove the conversion entirely (refund, chargeback, cancelled order, churn). - `RESTATEMENT` — change the conversion's value (upgrade / downgrade / partial refund). Send the corrected **total** value in `restatementValue` (not a delta). - `ENHANCEMENT` — attach first-party identifiers (hashed email / phone) to an existing conversion (enhanced conversions applied after the fact).  Identifying the original conversion (per adjustment):  - `orderId` — the transaction ID you sent as `eventId` on the original conversion. Recommended, and **required** for `ENHANCEMENT`. - or `gclid` + `conversionTime` — the click ID and the original conversion's time (unix seconds). Not available for `ENHANCEMENT`.  `destinationId` is the conversion action resource name, e.g. `customers/1234567890/conversionActions/987654321` (same value you send to `POST /v1/ads/conversions`). PII in `user` is hashed with SHA-256 server-side (Gmail-specific normalization included). Send plaintext.  Times are unix seconds; we convert to Google's required `yyyy-MM-dd HH:mm:ss+00:00` format. Up to 2000 adjustments per request; partial failure is supported (inspect `adjustmentsFailed` / `failures[]`). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+adjust_conversions_request = Zernio::AdjustConversionsRequest.new({account_id: 'account_id_example', destination_id: 'destination_id_example', adjustments: [Zernio::AdjustConversionsRequestAdjustmentsInner.new({adjustment_type: 'RETRACTION', adjustment_time: 3.56})]}) # AdjustConversionsRequest | 
+
+begin
+  # Adjust already-uploaded conversions (Google only)
+  result = api_instance.adjust_conversions(adjust_conversions_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->adjust_conversions: #{e}"
+end
+```
+
+#### Using the adjust_conversions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AdjustConversions200Response>, Integer, Hash)> adjust_conversions_with_http_info(adjust_conversions_request)
+
+```ruby
+begin
+  # Adjust already-uploaded conversions (Google only)
+  data, status_code, headers = api_instance.adjust_conversions_with_http_info(adjust_conversions_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AdjustConversions200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->adjust_conversions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **adjust_conversions_request** | [**AdjustConversionsRequest**](AdjustConversionsRequest.md) |  |  |
+
+### Return type
+
+[**AdjustConversions200Response**](AdjustConversions200Response.md)
 
 ### Authorization
 

@@ -32,7 +32,7 @@ module Zernio
 
     attr_accessor :tracking
 
-    # Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform. Meta-specific: `conversions` requires `promotedObject.pixelId` + `promotedObject.customEventType`; `app_promotion` requires `promotedObject.applicationId` + `promotedObject.objectStoreUrl`; `lead_generation` accepts an optional `promotedObject.pageId` (auto-filled from the connected Page when omitted). TikTok-specific: `conversions` (website-conversion ad group) requires `promotedObject.pixelId` (your TikTok Pixel ID) and accepts an optional `promotedObject.customEventType` (a TikTok `optimization_event` code like `ON_WEB_ORDER`, `INITIATE_ORDER`, `ON_WEB_REGISTER`, `FORM`); to inherit a pixel + event from an existing ad group, pass `adSetId` instead. LinkedIn-specific: `engagement`, `traffic`, `awareness`, and `video_views` are supported for standalone ads (creates a Direct Sponsored Content single image or single video ad). `traffic` requires `linkUrl`; `video_views` requires the `video` field. For `lead_generation` / `conversions` on LinkedIn — or to promote an existing post — use `POST /v1/ads/boost`.
+    # Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform. Meta-specific: `conversions` (OUTCOME_SALES) requires `promotedObject.pixelId` + `promotedObject.customEventType` (use a commerce event, e.g. PURCHASE, START_TRIAL); `lead_conversion` (OUTCOME_LEADS, website pixel leads) requires the same pixel + event but with a leads-class event (e.g. LEAD, SUBMIT_APPLICATION, SCHEDULE, CONTACT) — these are rejected under `conversions` because Meta gates conversion events by objective; `lead_generation` is OUTCOME_LEADS with instant forms (`leadGenFormId`), distinct from `lead_conversion`'s website pixel optimization; `app_promotion` requires `promotedObject.applicationId` + `promotedObject.objectStoreUrl`; `lead_generation` accepts an optional `promotedObject.pageId` (auto-filled from the connected Page when omitted). TikTok-specific: `conversions` (website-conversion ad group) requires `promotedObject.pixelId` (your TikTok Pixel ID) and accepts an optional `promotedObject.customEventType` (a TikTok `optimization_event` code like `ON_WEB_ORDER`, `INITIATE_ORDER`, `ON_WEB_REGISTER`, `FORM`); to inherit a pixel + event from an existing ad group, pass `adSetId` instead. LinkedIn-specific: `engagement`, `traffic`, `awareness`, and `video_views` are supported for standalone ads (creates a Direct Sponsored Content single image or single video ad). `traffic` requires `linkUrl`; `video_views` requires the `video` field. For `lead_generation` / `conversions` on LinkedIn — or to promote an existing post — use `POST /v1/ads/boost`.
     attr_accessor :goal
 
     # Required on legacy + multi-creative shapes. Inherited on attach.
@@ -770,7 +770,7 @@ module Zernio
       return false if !@campaign_name.nil? && @campaign_name.to_s.length > 255
       return false if !@ad_set_name.nil? && @ad_set_name.to_s.length > 255
       return false if !@ad_name.nil? && @ad_name.to_s.length > 255
-      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "conversions", "app_promotion"])
+      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion"])
       return false unless goal_validator.valid?(@goal)
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
@@ -881,7 +881,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] goal Object to be assigned
     def goal=(goal)
-      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "conversions", "app_promotion"])
+      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion"])
       unless validator.valid?(goal)
         fail ArgumentError, "invalid value for \"goal\", must be one of #{validator.allowable_values}."
       end

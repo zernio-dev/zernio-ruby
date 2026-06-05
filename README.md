@@ -106,6 +106,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set (budget, status, and/or bid strategy)
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
 *Zernio::AdsApi* | [**add_conversion_associations**](docs/AdsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns with a conversion destination
+*Zernio::AdsApi* | [**adjust_conversions**](docs/AdsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust already-uploaded conversions (Google only)
 *Zernio::AdsApi* | [**archive_lead_form**](docs/AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a Lead Gen form
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn)
@@ -483,6 +484,11 @@ Class | Method | HTTP request | Description
  - [Zernio::AddUsersToAdAudienceRequest](docs/AddUsersToAdAudienceRequest.md)
  - [Zernio::AddUsersToAdAudienceRequestUsersInner](docs/AddUsersToAdAudienceRequestUsersInner.md)
  - [Zernio::AddWhatsAppGroupParticipantsRequest](docs/AddWhatsAppGroupParticipantsRequest.md)
+ - [Zernio::AdjustConversions200Response](docs/AdjustConversions200Response.md)
+ - [Zernio::AdjustConversions200ResponseFailuresInner](docs/AdjustConversions200ResponseFailuresInner.md)
+ - [Zernio::AdjustConversionsRequest](docs/AdjustConversionsRequest.md)
+ - [Zernio::AdjustConversionsRequestAdjustmentsInner](docs/AdjustConversionsRequestAdjustmentsInner.md)
+ - [Zernio::AdjustConversionsRequestAdjustmentsInnerUser](docs/AdjustConversionsRequestAdjustmentsInnerUser.md)
  - [Zernio::AnalyticsListResponse](docs/AnalyticsListResponse.md)
  - [Zernio::AnalyticsListResponsePostsInner](docs/AnalyticsListResponsePostsInner.md)
  - [Zernio::AnalyticsOverview](docs/AnalyticsOverview.md)
