@@ -284,6 +284,8 @@ docs/ErrorResponse.md
 docs/EstimateAdReach200Response.md
 docs/EstimateAdReachRequest.md
 docs/Expired.md
+docs/ExternalPostWebhookPost.md
+docs/ExternalPostWebhookPostMediaItemsInner.md
 docs/FacebookPlatformData.md
 docs/FacebookPlatformDataCarouselCardsInner.md
 docs/FetchGoogleBusinessVerificationOptions200Response.md
@@ -1130,6 +1132,7 @@ docs/WebhookPayloadCommentCommentAuthor.md
 docs/WebhookPayloadCommentPost.md
 docs/WebhookPayloadConversationStarted.md
 docs/WebhookPayloadConversationStartedConversation.md
+docs/WebhookPayloadExternalPost.md
 docs/WebhookPayloadLead.md
 docs/WebhookPayloadLeadAccount.md
 docs/WebhookPayloadLeadLead.md
@@ -1520,6 +1523,8 @@ lib/zernio-sdk/models/error_response.rb
 lib/zernio-sdk/models/estimate_ad_reach200_response.rb
 lib/zernio-sdk/models/estimate_ad_reach_request.rb
 lib/zernio-sdk/models/expired.rb
+lib/zernio-sdk/models/external_post_webhook_post.rb
+lib/zernio-sdk/models/external_post_webhook_post_media_items_inner.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
 lib/zernio-sdk/models/facebook_platform_data_carousel_cards_inner.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options200_response.rb
@@ -2339,6 +2344,7 @@ lib/zernio-sdk/models/webhook_payload_comment_comment_author.rb
 lib/zernio-sdk/models/webhook_payload_comment_post.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started_conversation.rb
+lib/zernio-sdk/models/webhook_payload_external_post.rb
 lib/zernio-sdk/models/webhook_payload_lead.rb
 lib/zernio-sdk/models/webhook_payload_lead_account.rb
 lib/zernio-sdk/models/webhook_payload_lead_lead.rb
@@ -2715,6 +2721,8 @@ spec/models/error_response_spec.rb
 spec/models/estimate_ad_reach200_response_spec.rb
 spec/models/estimate_ad_reach_request_spec.rb
 spec/models/expired_spec.rb
+spec/models/external_post_webhook_post_media_items_inner_spec.rb
+spec/models/external_post_webhook_post_spec.rb
 spec/models/facebook_platform_data_carousel_cards_inner_spec.rb
 spec/models/facebook_platform_data_spec.rb
 spec/models/fetch_google_business_verification_options200_response_options_inner_spec.rb
@@ -3533,6 +3541,7 @@ spec/models/webhook_payload_comment_post_spec.rb
 spec/models/webhook_payload_comment_spec.rb
 spec/models/webhook_payload_conversation_started_conversation_spec.rb
 spec/models/webhook_payload_conversation_started_spec.rb
+spec/models/webhook_payload_external_post_spec.rb
 spec/models/webhook_payload_lead_account_spec.rb
 spec/models/webhook_payload_lead_lead_spec.rb
 spec/models/webhook_payload_lead_spec.rb

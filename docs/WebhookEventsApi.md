@@ -23,6 +23,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_message_received**](WebhookEventsApi.md#on_message_received) | **POST** /message.received | Message received event |
 | [**on_message_sent**](WebhookEventsApi.md#on_message_sent) | **POST** /message.sent | Message sent event |
 | [**on_post_cancelled**](WebhookEventsApi.md#on_post_cancelled) | **POST** /post.cancelled | Post cancelled event |
+| [**on_post_external_created**](WebhookEventsApi.md#on_post_external_created) | **POST** /post.external.created | External post created event |
+| [**on_post_external_deleted**](WebhookEventsApi.md#on_post_external_deleted) | **POST** /post.external.deleted | External post deleted event |
+| [**on_post_external_updated**](WebhookEventsApi.md#on_post_external_updated) | **POST** /post.external.updated | External post updated event |
 | [**on_post_failed**](WebhookEventsApi.md#on_post_failed) | **POST** /post.failed | Post failed event |
 | [**on_post_partial**](WebhookEventsApi.md#on_post_partial) | **POST** /post.partial | Post partial event |
 | [**on_post_platform_failed**](WebhookEventsApi.md#on_post_platform_failed) | **POST** /post.platform.failed | Post platform failed event |
@@ -1320,6 +1323,210 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_post** | [**WebhookPayloadPost**](WebhookPayloadPost.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_post_external_created
+
+> on_post_external_created(webhook_payload_external_post)
+
+External post created event
+
+Fired when Zernio's background sync detects a natively-authored post (created outside Zernio, e.g. a Google Business Profile localPost made in the Google UI) for the first time. Poll-driven (~hourly), not real-time. `post.source` is always \"external\". 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_external_post =  # WebhookPayloadExternalPost | 
+
+begin
+  # External post created event
+  api_instance.on_post_external_created(webhook_payload_external_post)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_external_created: #{e}"
+end
+```
+
+#### Using the on_post_external_created_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_post_external_created_with_http_info(webhook_payload_external_post)
+
+```ruby
+begin
+  # External post created event
+  data, status_code, headers = api_instance.on_post_external_created_with_http_info(webhook_payload_external_post)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_external_created_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_external_post** | [**WebhookPayloadExternalPost**](WebhookPayloadExternalPost.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_post_external_deleted
+
+> on_post_external_deleted(webhook_payload_external_post)
+
+External post deleted event
+
+Fired when a tracked native post is detected as removed from the platform. `post.deletedAt` carries the detection time. Coverage is bounded to the most recent posts the platform listing returns. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_external_post =  # WebhookPayloadExternalPost | 
+
+begin
+  # External post deleted event
+  api_instance.on_post_external_deleted(webhook_payload_external_post)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_external_deleted: #{e}"
+end
+```
+
+#### Using the on_post_external_deleted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_post_external_deleted_with_http_info(webhook_payload_external_post)
+
+```ruby
+begin
+  # External post deleted event
+  data, status_code, headers = api_instance.on_post_external_deleted_with_http_info(webhook_payload_external_post)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_external_deleted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_external_post** | [**WebhookPayloadExternalPost**](WebhookPayloadExternalPost.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_post_external_updated
+
+> on_post_external_updated(webhook_payload_external_post)
+
+External post updated event
+
+Fired when a tracked native post's text or media changed on the platform. Detected by comparing text/media structure and, where available, the platform's own edit timestamp; a media-URL-only refresh does not fire this. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_external_post =  # WebhookPayloadExternalPost | 
+
+begin
+  # External post updated event
+  api_instance.on_post_external_updated(webhook_payload_external_post)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_external_updated: #{e}"
+end
+```
+
+#### Using the on_post_external_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_post_external_updated_with_http_info(webhook_payload_external_post)
+
+```ruby
+begin
+  # External post updated event
+  data, status_code, headers = api_instance.on_post_external_updated_with_http_info(webhook_payload_external_post)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_external_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_external_post** | [**WebhookPayloadExternalPost**](WebhookPayloadExternalPost.md) |  |  |
 
 ### Return type
 

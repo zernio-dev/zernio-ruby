@@ -1273,6 +1273,204 @@ module Zernio
       return data, status_code, headers
     end
 
+    # External post created event
+    # Fired when Zernio's background sync detects a natively-authored post (created outside Zernio, e.g. a Google Business Profile localPost made in the Google UI) for the first time. Poll-driven (~hourly), not real-time. `post.source` is always \"external\". 
+    # @param webhook_payload_external_post [WebhookPayloadExternalPost] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_post_external_created(webhook_payload_external_post, opts = {})
+      on_post_external_created_with_http_info(webhook_payload_external_post, opts)
+      nil
+    end
+
+    # External post created event
+    # Fired when Zernio&#39;s background sync detects a natively-authored post (created outside Zernio, e.g. a Google Business Profile localPost made in the Google UI) for the first time. Poll-driven (~hourly), not real-time. &#x60;post.source&#x60; is always \&quot;external\&quot;. 
+    # @param webhook_payload_external_post [WebhookPayloadExternalPost] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_post_external_created_with_http_info(webhook_payload_external_post, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_post_external_created ...'
+      end
+      # verify the required parameter 'webhook_payload_external_post' is set
+      if @api_client.config.client_side_validation && webhook_payload_external_post.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_external_post' when calling WebhookEventsApi.on_post_external_created"
+      end
+      # resource path
+      local_var_path = '/post.external.created'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_external_post)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_post_external_created",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_post_external_created\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # External post deleted event
+    # Fired when a tracked native post is detected as removed from the platform. `post.deletedAt` carries the detection time. Coverage is bounded to the most recent posts the platform listing returns. 
+    # @param webhook_payload_external_post [WebhookPayloadExternalPost] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_post_external_deleted(webhook_payload_external_post, opts = {})
+      on_post_external_deleted_with_http_info(webhook_payload_external_post, opts)
+      nil
+    end
+
+    # External post deleted event
+    # Fired when a tracked native post is detected as removed from the platform. &#x60;post.deletedAt&#x60; carries the detection time. Coverage is bounded to the most recent posts the platform listing returns. 
+    # @param webhook_payload_external_post [WebhookPayloadExternalPost] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_post_external_deleted_with_http_info(webhook_payload_external_post, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_post_external_deleted ...'
+      end
+      # verify the required parameter 'webhook_payload_external_post' is set
+      if @api_client.config.client_side_validation && webhook_payload_external_post.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_external_post' when calling WebhookEventsApi.on_post_external_deleted"
+      end
+      # resource path
+      local_var_path = '/post.external.deleted'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_external_post)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_post_external_deleted",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_post_external_deleted\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # External post updated event
+    # Fired when a tracked native post's text or media changed on the platform. Detected by comparing text/media structure and, where available, the platform's own edit timestamp; a media-URL-only refresh does not fire this. 
+    # @param webhook_payload_external_post [WebhookPayloadExternalPost] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_post_external_updated(webhook_payload_external_post, opts = {})
+      on_post_external_updated_with_http_info(webhook_payload_external_post, opts)
+      nil
+    end
+
+    # External post updated event
+    # Fired when a tracked native post&#39;s text or media changed on the platform. Detected by comparing text/media structure and, where available, the platform&#39;s own edit timestamp; a media-URL-only refresh does not fire this. 
+    # @param webhook_payload_external_post [WebhookPayloadExternalPost] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_post_external_updated_with_http_info(webhook_payload_external_post, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_post_external_updated ...'
+      end
+      # verify the required parameter 'webhook_payload_external_post' is set
+      if @api_client.config.client_side_validation && webhook_payload_external_post.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_external_post' when calling WebhookEventsApi.on_post_external_updated"
+      end
+      # resource path
+      local_var_path = '/post.external.updated'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_external_post)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_post_external_updated",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_post_external_updated\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Post failed event
     # Fired when a post fails to publish on all target platforms.
     # @param webhook_payload_post [WebhookPayloadPost] 
