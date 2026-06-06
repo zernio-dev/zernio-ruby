@@ -184,7 +184,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "active", "suspended", "releasing", "released"])
+      status_validator = EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "verifying", "active", "suspended", "releasing", "released"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -192,7 +192,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "active", "suspended", "releasing", "released"])
+      validator = EnumAttributeValidator.new('String', ["pending_payment", "pending_regulatory", "regulatory_declined", "provisioning", "verifying", "active", "suspended", "releasing", "released"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end

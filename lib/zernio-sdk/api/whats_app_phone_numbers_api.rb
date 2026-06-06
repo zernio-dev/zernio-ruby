@@ -347,7 +347,7 @@ module Zernio
     # List phone numbers
     # List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :status Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. 
+    # @option opts [String] :status Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. &#x60;verifying&#x60; is the short-lived state after the number is provisioned on our side while WhatsApp confirms the activation code; the number is not billed until it reaches &#x60;active&#x60;. 
     # @option opts [String] :profile_id Filter by profile
     # @return [GetWhatsAppPhoneNumbers200Response]
     def get_whats_app_phone_numbers(opts = {})
@@ -358,14 +358,14 @@ module Zernio
     # List phone numbers
     # List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :status Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. 
+    # @option opts [String] :status Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. &#x60;verifying&#x60; is the short-lived state after the number is provisioned on our side while WhatsApp confirms the activation code; the number is not billed until it reaches &#x60;active&#x60;. 
     # @option opts [String] :profile_id Filter by profile
     # @return [Array<(GetWhatsAppPhoneNumbers200Response, Integer, Hash)>] GetWhatsAppPhoneNumbers200Response data, response status code and response headers
     def get_whats_app_phone_numbers_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.get_whats_app_phone_numbers ...'
       end
-      allowable_values = ["provisioning", "pending_payment", "pending_regulatory", "regulatory_declined", "active", "suspended", "releasing", "released"]
+      allowable_values = ["provisioning", "verifying", "pending_payment", "pending_regulatory", "regulatory_declined", "active", "suspended", "releasing", "released"]
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
