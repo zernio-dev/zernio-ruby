@@ -17,6 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**search_available_whats_app_numbers**](WhatsAppPhoneNumbersApi.md#search_available_whats_app_numbers) | **GET** /v1/whatsapp/phone-numbers/available | Search available numbers to purchase |
 | [**submit_whats_app_number_kyc**](WhatsAppPhoneNumbersApi.md#submit_whats_app_number_kyc) | **POST** /v1/whatsapp/phone-numbers/kyc | Submit regulated-number KYC |
 | [**upload_whats_app_number_kyc_document**](WhatsAppPhoneNumbersApi.md#upload_whats_app_number_kyc_document) | **POST** /v1/whatsapp/phone-numbers/kyc/upload-document | Upload a single regulated-number KYC document |
+| [**validate_whats_app_number_kyc_address**](WhatsAppPhoneNumbersApi.md#validate_whats_app_number_kyc_address) | **POST** /v1/whatsapp/phone-numbers/kyc/validate-address | Pre-validate a regulated-number KYC address (Tier 4) |
 
 
 ## check_whats_app_number_availability
@@ -932,5 +933,74 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/octet-stream
+- **Accept**: application/json
+
+
+## validate_whats_app_number_kyc_address
+
+> <ValidateWhatsAppNumberKycAddress200Response> validate_whats_app_number_kyc_address(validate_whats_app_number_kyc_address_request)
+
+Pre-validate a regulated-number KYC address (Tier 4)
+
+Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (`administrative_area`) is required by the validator; when it is omitted the pre-check is skipped and `{ ok: true, skipped: true }` is returned (the final submit still validates). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+validate_whats_app_number_kyc_address_request = Zernio::ValidateWhatsAppNumberKycAddressRequest.new({country: 'country_example', street_address: 'street_address_example', locality: 'locality_example', postal_code: 'postal_code_example'}) # ValidateWhatsAppNumberKycAddressRequest | 
+
+begin
+  # Pre-validate a regulated-number KYC address (Tier 4)
+  result = api_instance.validate_whats_app_number_kyc_address(validate_whats_app_number_kyc_address_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->validate_whats_app_number_kyc_address: #{e}"
+end
+```
+
+#### Using the validate_whats_app_number_kyc_address_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ValidateWhatsAppNumberKycAddress200Response>, Integer, Hash)> validate_whats_app_number_kyc_address_with_http_info(validate_whats_app_number_kyc_address_request)
+
+```ruby
+begin
+  # Pre-validate a regulated-number KYC address (Tier 4)
+  data, status_code, headers = api_instance.validate_whats_app_number_kyc_address_with_http_info(validate_whats_app_number_kyc_address_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ValidateWhatsAppNumberKycAddress200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->validate_whats_app_number_kyc_address_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **validate_whats_app_number_kyc_address_request** | [**ValidateWhatsAppNumberKycAddressRequest**](ValidateWhatsAppNumberKycAddressRequest.md) |  |  |
+
+### Return type
+
+[**ValidateWhatsAppNumberKycAddress200Response**](ValidateWhatsAppNumberKycAddress200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

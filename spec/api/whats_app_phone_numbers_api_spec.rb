@@ -196,4 +196,16 @@ describe 'WhatsAppPhoneNumbersApi' do
     end
   end
 
+  # unit tests for validate_whats_app_number_kyc_address
+  # Pre-validate a regulated-number KYC address (Tier 4)
+  # Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (&#x60;administrative_area&#x60;) is required by the validator; when it is omitted the pre-check is skipped and &#x60;{ ok: true, skipped: true }&#x60; is returned (the final submit still validates). 
+  # @param validate_whats_app_number_kyc_address_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ValidateWhatsAppNumberKycAddress200Response]
+  describe 'validate_whats_app_number_kyc_address test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

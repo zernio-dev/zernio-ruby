@@ -894,5 +894,73 @@ module Zernio
       end
       return data, status_code, headers
     end
+
+    # Pre-validate a regulated-number KYC address (Tier 4)
+    # Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (`administrative_area`) is required by the validator; when it is omitted the pre-check is skipped and `{ ok: true, skipped: true }` is returned (the final submit still validates). 
+    # @param validate_whats_app_number_kyc_address_request [ValidateWhatsAppNumberKycAddressRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ValidateWhatsAppNumberKycAddress200Response]
+    def validate_whats_app_number_kyc_address(validate_whats_app_number_kyc_address_request, opts = {})
+      data, _status_code, _headers = validate_whats_app_number_kyc_address_with_http_info(validate_whats_app_number_kyc_address_request, opts)
+      data
+    end
+
+    # Pre-validate a regulated-number KYC address (Tier 4)
+    # Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (&#x60;administrative_area&#x60;) is required by the validator; when it is omitted the pre-check is skipped and &#x60;{ ok: true, skipped: true }&#x60; is returned (the final submit still validates). 
+    # @param validate_whats_app_number_kyc_address_request [ValidateWhatsAppNumberKycAddressRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ValidateWhatsAppNumberKycAddress200Response, Integer, Hash)>] ValidateWhatsAppNumberKycAddress200Response data, response status code and response headers
+    def validate_whats_app_number_kyc_address_with_http_info(validate_whats_app_number_kyc_address_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.validate_whats_app_number_kyc_address ...'
+      end
+      # verify the required parameter 'validate_whats_app_number_kyc_address_request' is set
+      if @api_client.config.client_side_validation && validate_whats_app_number_kyc_address_request.nil?
+        fail ArgumentError, "Missing the required parameter 'validate_whats_app_number_kyc_address_request' when calling WhatsAppPhoneNumbersApi.validate_whats_app_number_kyc_address"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/kyc/validate-address'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(validate_whats_app_number_kyc_address_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ValidateWhatsAppNumberKycAddress200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppPhoneNumbersApi.validate_whats_app_number_kyc_address",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#validate_whats_app_number_kyc_address\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end
