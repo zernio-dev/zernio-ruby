@@ -35,6 +35,9 @@ module Zernio
     # Required on legacy + multi-creative shapes. Inherited from the ad set on the attach shape. Available goals vary by platform. Meta-specific: `conversions` (OUTCOME_SALES) requires `promotedObject.pixelId` + `promotedObject.customEventType` (use a commerce event, e.g. PURCHASE, START_TRIAL); `lead_conversion` (OUTCOME_LEADS, website pixel leads) requires the same pixel + event but with a leads-class event (e.g. LEAD, SUBMIT_APPLICATION, SCHEDULE, CONTACT) — these are rejected under `conversions` because Meta gates conversion events by objective; `lead_generation` is OUTCOME_LEADS with instant forms (`leadGenFormId`), distinct from `lead_conversion`'s website pixel optimization; `app_promotion` requires `promotedObject.applicationId` + `promotedObject.objectStoreUrl`; `lead_generation` accepts an optional `promotedObject.pageId` (auto-filled from the connected Page when omitted). TikTok-specific: `conversions` (website-conversion ad group) requires `promotedObject.pixelId` (your TikTok Pixel ID) and accepts an optional `promotedObject.customEventType` (a TikTok `optimization_event` code like `ON_WEB_ORDER`, `INITIATE_ORDER`, `ON_WEB_REGISTER`, `FORM`); to inherit a pixel + event from an existing ad group, pass `adSetId` instead. LinkedIn-specific: `engagement`, `traffic`, `awareness`, and `video_views` are supported for standalone ads (creates a Direct Sponsored Content single image or single video ad). `traffic` requires `linkUrl`; `video_views` requires the `video` field. For `lead_generation` / `conversions` on LinkedIn — or to promote an existing post — use `POST /v1/ads/boost`.
     attr_accessor :goal
 
+    # Meta only. Explicit ad-set `optimization_goal` (e.g. `LANDING_PAGE_VIEWS`, `LINK_CLICKS`, `REACH`, `IMPRESSIONS`, `OFFSITE_CONVERSIONS`, `THRUPLAY`, `LEAD_GENERATION`). Overrides the default derived from `goal` (e.g. `traffic` defaults to `LINK_CLICKS`). Forwarded verbatim to Meta, which validates compatibility with the campaign objective and rejects incompatible combinations.
+    attr_accessor :optimization_goal
+
     # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_amount
 
@@ -223,6 +226,7 @@ module Zernio
         :'ad_name' => :'adName',
         :'tracking' => :'tracking',
         :'goal' => :'goal',
+        :'optimization_goal' => :'optimizationGoal',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
         :'budget_level' => :'budgetLevel',
@@ -302,6 +306,7 @@ module Zernio
         :'ad_name' => :'String',
         :'tracking' => :'CreateStandaloneAdRequestTracking',
         :'goal' => :'String',
+        :'optimization_goal' => :'String',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
         :'budget_level' => :'String',
@@ -418,6 +423,10 @@ module Zernio
 
       if attributes.key?(:'goal')
         self.goal = attributes[:'goal']
+      end
+
+      if attributes.key?(:'optimization_goal')
+        self.optimization_goal = attributes[:'optimization_goal']
       end
 
       if attributes.key?(:'budget_amount')
@@ -1105,6 +1114,7 @@ module Zernio
           ad_name == o.ad_name &&
           tracking == o.tracking &&
           goal == o.goal &&
+          optimization_goal == o.optimization_goal &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
           budget_level == o.budget_level &&
@@ -1171,7 +1181,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, budget_amount, budget_type, budget_level, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, budget_amount, budget_type, budget_level, currency, headline, long_headline, body, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash
