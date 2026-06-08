@@ -370,6 +370,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter accounts by profile ID
     # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
+    # @option opts [String] :status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. 
     # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles. (default to false)
     # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
     # @option opts [Integer] :limit Page size. Required alongside page for pagination.
@@ -384,6 +385,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter accounts by profile ID
     # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
+    # @option opts [String] :status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. 
     # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles. (default to false)
     # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
     # @option opts [Integer] :limit Page size. Required alongside page for pagination.
@@ -391,6 +393,10 @@ module Zernio
     def list_accounts_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsApi.list_accounts ...'
+      end
+      allowable_values = ["connected", "disconnected"]
+      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
+        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling AccountsApi.list_accounts, must be greater than or equal to 1.'
@@ -411,6 +417,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
       query_params[:'includeOverLimit'] = opts[:'include_over_limit'] if !opts[:'include_over_limit'].nil?
       query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?

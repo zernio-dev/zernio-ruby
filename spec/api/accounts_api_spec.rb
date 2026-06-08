@@ -105,6 +105,7 @@ describe 'AccountsApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :profile_id Filter accounts by profile ID
   # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
+  # @option opts [String] :status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. 
   # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles.
   # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
   # @option opts [Integer] :limit Page size. Required alongside page for pagination.
