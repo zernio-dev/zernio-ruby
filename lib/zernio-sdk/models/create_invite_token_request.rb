@@ -21,6 +21,12 @@ module Zernio
     # Required if scope is 'profiles'. Array of profile IDs to grant access to.
     attr_accessor :profile_ids
 
+    # Org role granted to the invitee. Defaults to 'member'.
+    attr_accessor :role
+
+    # When true, the invitee can view everything in their profile scope but cannot perform any content mutation (publish, edit, delete, connect accounts).
+    attr_accessor :read_only
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -47,7 +53,9 @@ module Zernio
     def self.attribute_map
       {
         :'scope' => :'scope',
-        :'profile_ids' => :'profileIds'
+        :'profile_ids' => :'profileIds',
+        :'role' => :'role',
+        :'read_only' => :'readOnly'
       }
     end
 
@@ -65,7 +73,9 @@ module Zernio
     def self.openapi_types
       {
         :'scope' => :'String',
-        :'profile_ids' => :'Array<String>'
+        :'profile_ids' => :'Array<String>',
+        :'role' => :'String',
+        :'read_only' => :'Boolean'
       }
     end
 
@@ -102,6 +112,18 @@ module Zernio
           self.profile_ids = value
         end
       end
+
+      if attributes.key?(:'role')
+        self.role = attributes[:'role']
+      else
+        self.role = 'member'
+      end
+
+      if attributes.key?(:'read_only')
+        self.read_only = attributes[:'read_only']
+      else
+        self.read_only = false
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -123,6 +145,8 @@ module Zernio
       return false if @scope.nil?
       scope_validator = EnumAttributeValidator.new('String', ["all", "profiles"])
       return false unless scope_validator.valid?(@scope)
+      role_validator = EnumAttributeValidator.new('String', ["member", "billing_admin"])
+      return false unless role_validator.valid?(@role)
       true
     end
 
@@ -136,13 +160,25 @@ module Zernio
       @scope = scope
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] role Object to be assigned
+    def role=(role)
+      validator = EnumAttributeValidator.new('String', ["member", "billing_admin"])
+      unless validator.valid?(role)
+        fail ArgumentError, "invalid value for \"role\", must be one of #{validator.allowable_values}."
+      end
+      @role = role
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           scope == o.scope &&
-          profile_ids == o.profile_ids
+          profile_ids == o.profile_ids &&
+          role == o.role &&
+          read_only == o.read_only
     end
 
     # @see the `==` method
@@ -154,7 +190,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [scope, profile_ids].hash
+      [scope, profile_ids, role, read_only].hash
     end
 
     # Builds the object from hash
