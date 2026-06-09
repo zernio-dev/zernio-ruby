@@ -6,6 +6,7 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**create_webhook_settings**](WebhooksApi.md#create_webhook_settings) | **POST** /v1/webhooks/settings | Create webhook |
 | [**delete_webhook_settings**](WebhooksApi.md#delete_webhook_settings) | **DELETE** /v1/webhooks/settings | Delete webhook |
+| [**get_webhook_logs**](WebhooksApi.md#get_webhook_logs) | **GET** /v1/webhooks/logs | List webhook delivery logs |
 | [**get_webhook_settings**](WebhooksApi.md#get_webhook_settings) | **GET** /v1/webhooks/settings | List webhooks |
 | [**test_webhook**](WebhooksApi.md#test_webhook) | **POST** /v1/webhooks/test | Send test webhook |
 | [**update_webhook_settings**](WebhooksApi.md#update_webhook_settings) | **PUT** /v1/webhooks/settings | Update webhook |
@@ -138,6 +139,87 @@ end
 ### Return type
 
 [**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_webhook_logs
+
+> <GetWebhookLogs200Response> get_webhook_logs(opts)
+
+List webhook delivery logs
+
+Retrieve recorded webhook delivery attempts for the authenticated user, most recent first. Logs are retained for 30 days. Supports filtering by status, event type, webhook ID, and event ID, plus offset-based pagination. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhooksApi.new
+opts = {
+  limit: 56, # Integer | Maximum number of logs to return
+  skip: 56, # Integer | Number of logs to skip (offset-based pagination)
+  status: 'success', # String | Filter by delivery outcome
+  event: 'event_example', # String | Filter by event type (e.g. post.published)
+  webhook_id: 'webhook_id_example', # String | Filter by webhook configuration ID
+  event_id: 'event_id_example' # String | Filter by stable webhook event ID
+}
+
+begin
+  # List webhook delivery logs
+  result = api_instance.get_webhook_logs(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhooksApi->get_webhook_logs: #{e}"
+end
+```
+
+#### Using the get_webhook_logs_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWebhookLogs200Response>, Integer, Hash)> get_webhook_logs_with_http_info(opts)
+
+```ruby
+begin
+  # List webhook delivery logs
+  data, status_code, headers = api_instance.get_webhook_logs_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWebhookLogs200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhooksApi->get_webhook_logs_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **limit** | **Integer** | Maximum number of logs to return | [optional][default to 50] |
+| **skip** | **Integer** | Number of logs to skip (offset-based pagination) | [optional][default to 0] |
+| **status** | **String** | Filter by delivery outcome | [optional] |
+| **event** | **String** | Filter by event type (e.g. post.published) | [optional] |
+| **webhook_id** | **String** | Filter by webhook configuration ID | [optional] |
+| **event_id** | **String** | Filter by stable webhook event ID | [optional] |
+
+### Return type
+
+[**GetWebhookLogs200Response**](GetWebhookLogs200Response.md)
 
 ### Authorization
 

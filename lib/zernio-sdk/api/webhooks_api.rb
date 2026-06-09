@@ -151,6 +151,125 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List webhook delivery logs
+    # Retrieve recorded webhook delivery attempts for the authenticated user, most recent first. Logs are retained for 30 days. Supports filtering by status, event type, webhook ID, and event ID, plus offset-based pagination. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Maximum number of logs to return (default to 50)
+    # @option opts [Integer] :skip Number of logs to skip (offset-based pagination) (default to 0)
+    # @option opts [String] :status Filter by delivery outcome
+    # @option opts [String] :event Filter by event type (e.g. post.published)
+    # @option opts [String] :webhook_id Filter by webhook configuration ID
+    # @option opts [String] :event_id Filter by stable webhook event ID
+    # @return [GetWebhookLogs200Response]
+    def get_webhook_logs(opts = {})
+      data, _status_code, _headers = get_webhook_logs_with_http_info(opts)
+      data
+    end
+
+    # List webhook delivery logs
+    # Retrieve recorded webhook delivery attempts for the authenticated user, most recent first. Logs are retained for 30 days. Supports filtering by status, event type, webhook ID, and event ID, plus offset-based pagination. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Maximum number of logs to return (default to 50)
+    # @option opts [Integer] :skip Number of logs to skip (offset-based pagination) (default to 0)
+    # @option opts [String] :status Filter by delivery outcome
+    # @option opts [String] :event Filter by event type (e.g. post.published)
+    # @option opts [String] :webhook_id Filter by webhook configuration ID
+    # @option opts [String] :event_id Filter by stable webhook event ID
+    # @return [Array<(GetWebhookLogs200Response, Integer, Hash)>] GetWebhookLogs200Response data, response status code and response headers
+    def get_webhook_logs_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhooksApi.get_webhook_logs ...'
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WebhooksApi.get_webhook_logs, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WebhooksApi.get_webhook_logs, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'skip'].nil? && opts[:'skip'] > 10000
+        fail ArgumentError, 'invalid value for "opts[:"skip"]" when calling WebhooksApi.get_webhook_logs, must be smaller than or equal to 10000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'skip'].nil? && opts[:'skip'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"skip"]" when calling WebhooksApi.get_webhook_logs, must be greater than or equal to 0.'
+      end
+
+      allowable_values = ["success", "failed"]
+      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
+        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'event'].nil? && opts[:'event'].to_s.length > 100
+        fail ArgumentError, 'invalid value for "opts[:"event"]" when calling WebhooksApi.get_webhook_logs, the character length must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'event'].nil? && opts[:'event'].to_s.length < 1
+        fail ArgumentError, 'invalid value for "opts[:"event"]" when calling WebhooksApi.get_webhook_logs, the character length must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'webhook_id'].nil? && opts[:'webhook_id'].to_s.length > 100
+        fail ArgumentError, 'invalid value for "opts[:"webhook_id"]" when calling WebhooksApi.get_webhook_logs, the character length must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'webhook_id'].nil? && opts[:'webhook_id'].to_s.length < 1
+        fail ArgumentError, 'invalid value for "opts[:"webhook_id"]" when calling WebhooksApi.get_webhook_logs, the character length must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'event_id'].nil? && opts[:'event_id'].to_s.length > 200
+        fail ArgumentError, 'invalid value for "opts[:"event_id"]" when calling WebhooksApi.get_webhook_logs, the character length must be smaller than or equal to 200.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'event_id'].nil? && opts[:'event_id'].to_s.length < 1
+        fail ArgumentError, 'invalid value for "opts[:"event_id"]" when calling WebhooksApi.get_webhook_logs, the character length must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/webhooks/logs'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
+      query_params[:'event'] = opts[:'event'] if !opts[:'event'].nil?
+      query_params[:'webhookId'] = opts[:'webhook_id'] if !opts[:'webhook_id'].nil?
+      query_params[:'eventId'] = opts[:'event_id'] if !opts[:'event_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWebhookLogs200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhooksApi.get_webhook_logs",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhooksApi#get_webhook_logs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List webhooks
     # Retrieve all configured webhooks for the authenticated user. Supports up to 10 webhooks per user.
     # @param [Hash] opts the optional parameters

@@ -56,6 +56,23 @@ describe 'WebhooksApi' do
     end
   end
 
+  # unit tests for get_webhook_logs
+  # List webhook delivery logs
+  # Retrieve recorded webhook delivery attempts for the authenticated user, most recent first. Logs are retained for 30 days. Supports filtering by status, event type, webhook ID, and event ID, plus offset-based pagination. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Maximum number of logs to return
+  # @option opts [Integer] :skip Number of logs to skip (offset-based pagination)
+  # @option opts [String] :status Filter by delivery outcome
+  # @option opts [String] :event Filter by event type (e.g. post.published)
+  # @option opts [String] :webhook_id Filter by webhook configuration ID
+  # @option opts [String] :event_id Filter by stable webhook event ID
+  # @return [GetWebhookLogs200Response]
+  describe 'get_webhook_logs test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_webhook_settings
   # List webhooks
   # Retrieve all configured webhooks for the authenticated user. Supports up to 10 webhooks per user.
