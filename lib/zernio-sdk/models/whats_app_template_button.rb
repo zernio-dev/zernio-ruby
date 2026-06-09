@@ -17,12 +17,12 @@ module Zernio
   class WhatsAppTemplateButton < ApiModelBase
     attr_accessor :type
 
+    # Visible button label. Required for all types except copy_code (whose label is fixed by WhatsApp).
     attr_accessor :text
 
     # Required when type is URL
     attr_accessor :url
 
-    # Example values for URL suffix variables
     attr_accessor :example
 
     # Required when type is phone_number
@@ -105,7 +105,7 @@ module Zernio
         :'type' => :'String',
         :'text' => :'String',
         :'url' => :'String',
-        :'example' => :'Array<String>',
+        :'example' => :'WhatsAppTemplateButtonExample',
         :'phone_number' => :'String',
         :'otp_type' => :'String',
         :'autofill_text' => :'String',
@@ -149,8 +149,6 @@ module Zernio
 
       if attributes.key?(:'text')
         self.text = attributes[:'text']
-      else
-        self.text = nil
       end
 
       if attributes.key?(:'url')
@@ -158,9 +156,7 @@ module Zernio
       end
 
       if attributes.key?(:'example')
-        if (value = attributes[:'example']).is_a?(Array)
-          self.example = value
-        end
+        self.example = attributes[:'example']
       end
 
       if attributes.key?(:'phone_number')
@@ -213,10 +209,6 @@ module Zernio
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
-      if @text.nil?
-        invalid_properties.push('invalid value for "text", text cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -225,9 +217,8 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "flow", "mpm", "catalog"])
+      type_validator = EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "copy_code", "flow", "mpm", "catalog"])
       return false unless type_validator.valid?(@type)
-      return false if @text.nil?
       otp_type_validator = EnumAttributeValidator.new('String', ["copy_code", "one_tap", "zero_tap"])
       return false unless otp_type_validator.valid?(@otp_type)
       true
@@ -236,21 +227,11 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "flow", "mpm", "catalog"])
+      validator = EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "copy_code", "flow", "mpm", "catalog"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] text Value to be assigned
-    def text=(text)
-      if text.nil?
-        fail ArgumentError, 'text cannot be nil'
-      end
-
-      @text = text
     end
 
     # Custom attribute writer method checking allowed values (enum).

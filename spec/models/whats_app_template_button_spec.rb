@@ -30,7 +30,7 @@ describe Zernio::WhatsAppTemplateButton do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "flow", "mpm", "catalog"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["quick_reply", "url", "phone_number", "otp", "copy_code", "flow", "mpm", "catalog"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end

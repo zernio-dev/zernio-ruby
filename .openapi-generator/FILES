@@ -1197,6 +1197,7 @@ docs/WhatsAppPhoneNumbersApi.md
 docs/WhatsAppSandboxApi.md
 docs/WhatsAppSandboxSession.md
 docs/WhatsAppTemplateButton.md
+docs/WhatsAppTemplateButtonExample.md
 docs/WhatsAppTemplateComponent.md
 docs/WhatsAppTemplatesApi.md
 docs/WorkflowEdge.md
@@ -2417,6 +2418,7 @@ lib/zernio-sdk/models/whats_app_header_component.rb
 lib/zernio-sdk/models/whats_app_header_component_example.rb
 lib/zernio-sdk/models/whats_app_sandbox_session.rb
 lib/zernio-sdk/models/whats_app_template_button.rb
+lib/zernio-sdk/models/whats_app_template_button_example.rb
 lib/zernio-sdk/models/whats_app_template_component.rb
 lib/zernio-sdk/models/workflow_edge.rb
 lib/zernio-sdk/models/workflow_execution_event.rb
@@ -3628,6 +3630,7 @@ spec/models/whats_app_footer_component_spec.rb
 spec/models/whats_app_header_component_example_spec.rb
 spec/models/whats_app_header_component_spec.rb
 spec/models/whats_app_sandbox_session_spec.rb
+spec/models/whats_app_template_button_example_spec.rb
 spec/models/whats_app_template_button_spec.rb
 spec/models/whats_app_template_component_spec.rb
 spec/models/workflow_edge_spec.rb
