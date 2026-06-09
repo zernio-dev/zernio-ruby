@@ -31,6 +31,18 @@ module Zernio
     # Flair ID for the post. Required by some subreddits. Use GET /v1/accounts/{id}/reddit-flairs?subreddit=name to list flairs.
     attr_accessor :flair_id
 
+    # Custom flair text, for subreddits that allow free-text flair. Ignored when flairId is provided (flairId wins).
+    attr_accessor :flair_text
+
+    # Mark the post as NSFW (Not Safe For Work / over 18).
+    attr_accessor :nsfw
+
+    # Mark the post as a spoiler. The subreddit must have spoiler tagging enabled for this to take effect.
+    attr_accessor :spoiler
+
+    # Whether to receive inbox replies for comments on this post. Set to false to opt out.
+    attr_accessor :sendreplies
+
     # Controls Reddit's native video upload flow. When true (default for video mediaItems), the video is uploaded to Reddit's CDN and submitted with kind=video so it renders as an embedded Reddit video player. Reddit transcodes server-side (1080p/30fps cap). Set to false to fall back to a legacy link post. If the subreddit blocks video posts, the upload falls back to a link post automatically. 
     attr_accessor :native_video
 
@@ -48,6 +60,10 @@ module Zernio
         :'url' => :'url',
         :'force_self' => :'forceSelf',
         :'flair_id' => :'flairId',
+        :'flair_text' => :'flairText',
+        :'nsfw' => :'nsfw',
+        :'spoiler' => :'spoiler',
+        :'sendreplies' => :'sendreplies',
         :'native_video' => :'nativeVideo',
         :'videogif' => :'videogif',
         :'video_poster_url' => :'videoPosterUrl'
@@ -72,6 +88,10 @@ module Zernio
         :'url' => :'String',
         :'force_self' => :'Boolean',
         :'flair_id' => :'String',
+        :'flair_text' => :'String',
+        :'nsfw' => :'Boolean',
+        :'spoiler' => :'Boolean',
+        :'sendreplies' => :'Boolean',
         :'native_video' => :'Boolean',
         :'videogif' => :'Boolean',
         :'video_poster_url' => :'String'
@@ -118,6 +138,28 @@ module Zernio
 
       if attributes.key?(:'flair_id')
         self.flair_id = attributes[:'flair_id']
+      end
+
+      if attributes.key?(:'flair_text')
+        self.flair_text = attributes[:'flair_text']
+      end
+
+      if attributes.key?(:'nsfw')
+        self.nsfw = attributes[:'nsfw']
+      else
+        self.nsfw = false
+      end
+
+      if attributes.key?(:'spoiler')
+        self.spoiler = attributes[:'spoiler']
+      else
+        self.spoiler = false
+      end
+
+      if attributes.key?(:'sendreplies')
+        self.sendreplies = attributes[:'sendreplies']
+      else
+        self.sendreplies = true
       end
 
       if attributes.key?(:'native_video')
@@ -179,6 +221,10 @@ module Zernio
           url == o.url &&
           force_self == o.force_self &&
           flair_id == o.flair_id &&
+          flair_text == o.flair_text &&
+          nsfw == o.nsfw &&
+          spoiler == o.spoiler &&
+          sendreplies == o.sendreplies &&
           native_video == o.native_video &&
           videogif == o.videogif &&
           video_poster_url == o.video_poster_url
@@ -193,7 +239,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [subreddit, title, url, force_self, flair_id, native_video, videogif, video_poster_url].hash
+      [subreddit, title, url, force_self, flair_id, flair_text, nsfw, spoiler, sendreplies, native_video, videogif, video_poster_url].hash
     end
 
     # Builds the object from hash

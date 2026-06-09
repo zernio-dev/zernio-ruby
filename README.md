@@ -1354,6 +1354,7 @@ Class | Method | HTTP request | Description
  - [Zernio::TriggerWorkflowRequest](docs/TriggerWorkflowRequest.md)
  - [Zernio::TwitterPlatformData](docs/TwitterPlatformData.md)
  - [Zernio::TwitterPlatformDataPoll](docs/TwitterPlatformDataPoll.md)
+ - [Zernio::TwitterPlatformDataSensitiveMedia](docs/TwitterPlatformDataSensitiveMedia.md)
  - [Zernio::TwitterPlatformDataThreadItemsInner](docs/TwitterPlatformDataThreadItemsInner.md)
  - [Zernio::UndoRetweet200Response](docs/UndoRetweet200Response.md)
  - [Zernio::UnfollowUser200Response](docs/UnfollowUser200Response.md)

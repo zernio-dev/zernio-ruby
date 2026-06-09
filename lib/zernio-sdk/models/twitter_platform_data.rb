@@ -35,6 +35,14 @@ module Zernio
 
     attr_accessor :geo_restriction
 
+    # When true, the post is labeled by X as a paid partnership / paid promotion. For threads, applies to the root tweet only. Field availability may depend on your X API access tier.
+    attr_accessor :paid_partnership
+
+    # When true, the post is labeled by X as containing AI-generated media. Per X, this label is for AI-generated media, not AI-written text. For threads, applies to the root tweet only.
+    attr_accessor :made_with_ai
+
+    attr_accessor :sensitive_media
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -66,7 +74,10 @@ module Zernio
         :'thread_items' => :'threadItems',
         :'poll' => :'poll',
         :'long_video' => :'longVideo',
-        :'geo_restriction' => :'geoRestriction'
+        :'geo_restriction' => :'geoRestriction',
+        :'paid_partnership' => :'paidPartnership',
+        :'made_with_ai' => :'madeWithAi',
+        :'sensitive_media' => :'sensitiveMedia'
       }
     end
 
@@ -89,7 +100,10 @@ module Zernio
         :'thread_items' => :'Array<TwitterPlatformDataThreadItemsInner>',
         :'poll' => :'TwitterPlatformDataPoll',
         :'long_video' => :'Boolean',
-        :'geo_restriction' => :'GeoRestriction'
+        :'geo_restriction' => :'GeoRestriction',
+        :'paid_partnership' => :'Boolean',
+        :'made_with_ai' => :'Boolean',
+        :'sensitive_media' => :'TwitterPlatformDataSensitiveMedia'
       }
     end
 
@@ -146,6 +160,22 @@ module Zernio
       if attributes.key?(:'geo_restriction')
         self.geo_restriction = attributes[:'geo_restriction']
       end
+
+      if attributes.key?(:'paid_partnership')
+        self.paid_partnership = attributes[:'paid_partnership']
+      else
+        self.paid_partnership = false
+      end
+
+      if attributes.key?(:'made_with_ai')
+        self.made_with_ai = attributes[:'made_with_ai']
+      else
+        self.made_with_ai = false
+      end
+
+      if attributes.key?(:'sensitive_media')
+        self.sensitive_media = attributes[:'sensitive_media']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -186,7 +216,10 @@ module Zernio
           thread_items == o.thread_items &&
           poll == o.poll &&
           long_video == o.long_video &&
-          geo_restriction == o.geo_restriction
+          geo_restriction == o.geo_restriction &&
+          paid_partnership == o.paid_partnership &&
+          made_with_ai == o.made_with_ai &&
+          sensitive_media == o.sensitive_media
     end
 
     # @see the `==` method
@@ -198,7 +231,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [reply_to_tweet_id, quote_tweet_id, reply_settings, thread_items, poll, long_video, geo_restriction].hash
+      [reply_to_tweet_id, quote_tweet_id, reply_settings, thread_items, poll, long_video, geo_restriction, paid_partnership, made_with_ai, sensitive_media].hash
     end
 
     # Builds the object from hash

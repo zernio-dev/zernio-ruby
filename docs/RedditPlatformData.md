@@ -9,6 +9,10 @@
 | **url** | **String** | URL for link posts. If provided (and forceSelf is not true), creates a link post instead of a text post. | [optional] |
 | **force_self** | **Boolean** | When true, creates a text/self post even when a URL or media is provided. | [optional] |
 | **flair_id** | **String** | Flair ID for the post. Required by some subreddits. Use GET /v1/accounts/{id}/reddit-flairs?subreddit&#x3D;name to list flairs. | [optional] |
+| **flair_text** | **String** | Custom flair text, for subreddits that allow free-text flair. Ignored when flairId is provided (flairId wins). | [optional] |
+| **nsfw** | **Boolean** | Mark the post as NSFW (Not Safe For Work / over 18). | [optional][default to false] |
+| **spoiler** | **Boolean** | Mark the post as a spoiler. The subreddit must have spoiler tagging enabled for this to take effect. | [optional][default to false] |
+| **sendreplies** | **Boolean** | Whether to receive inbox replies for comments on this post. Set to false to opt out. | [optional][default to true] |
 | **native_video** | **Boolean** | Controls Reddit&#39;s native video upload flow. When true (default for video mediaItems), the video is uploaded to Reddit&#39;s CDN and submitted with kind&#x3D;video so it renders as an embedded Reddit video player. Reddit transcodes server-side (1080p/30fps cap). Set to false to fall back to a legacy link post. If the subreddit blocks video posts, the upload falls back to a link post automatically.  | [optional][default to true] |
 | **videogif** | **Boolean** | When true (and nativeVideo is active), submits the video as a silent videogif (kind&#x3D;videogif). Use for short looping clips without audio. | [optional] |
 | **video_poster_url** | **String** | Optional poster/thumbnail image URL for native video posts. If omitted, the first frame of the video is extracted and used automatically. | [optional] |
@@ -24,6 +28,10 @@ instance = Zernio::RedditPlatformData.new(
   url: null,
   force_self: null,
   flair_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890,
+  flair_text: null,
+  nsfw: null,
+  spoiler: null,
+  sendreplies: null,
   native_video: null,
   videogif: null,
   video_poster_url: null

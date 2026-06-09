@@ -11,6 +11,9 @@
 | **poll** | [**TwitterPlatformDataPoll**](TwitterPlatformDataPoll.md) |  | [optional] |
 | **long_video** | **Boolean** | Enable long video uploads (over 140 seconds) using amplify_video media category. Requires the connected X account to have an active X Premium subscription. When true, videos are uploaded with the amplify_video category which supports longer durations (up to 10 minutes via API). When false or omitted, the standard tweet_video category is used (140 second limit). Note that not all Premium accounts have API long-video access, as X may require separate allowlisting. | [optional][default to false] |
 | **geo_restriction** | [**GeoRestriction**](GeoRestriction.md) |  | [optional] |
+| **paid_partnership** | **Boolean** | When true, the post is labeled by X as a paid partnership / paid promotion. For threads, applies to the root tweet only. Field availability may depend on your X API access tier. | [optional][default to false] |
+| **made_with_ai** | **Boolean** | When true, the post is labeled by X as containing AI-generated media. Per X, this label is for AI-generated media, not AI-written text. For threads, applies to the root tweet only. | [optional][default to false] |
+| **sensitive_media** | [**TwitterPlatformDataSensitiveMedia**](TwitterPlatformDataSensitiveMedia.md) |  | [optional] |
 
 ## Example
 
@@ -24,7 +27,10 @@ instance = Zernio::TwitterPlatformData.new(
   thread_items: null,
   poll: null,
   long_video: null,
-  geo_restriction: null
+  geo_restriction: null,
+  paid_partnership: null,
+  made_with_ai: null,
+  sensitive_media: null
 )
 ```
 
