@@ -1162,6 +1162,7 @@ Class | Method | HTTP request | Description
  - [Zernio::Money](docs/Money.md)
  - [Zernio::MoveAccountToProfile200Response](docs/MoveAccountToProfile200Response.md)
  - [Zernio::MoveAccountToProfileRequest](docs/MoveAccountToProfileRequest.md)
+ - [Zernio::OnWhatsAppNumberActionRequiredRequest](docs/OnWhatsAppNumberActionRequiredRequest.md)
  - [Zernio::OnWhatsAppNumberActivatedRequest](docs/OnWhatsAppNumberActivatedRequest.md)
  - [Zernio::OnWhatsAppNumberActivatedRequestNumber](docs/OnWhatsAppNumberActivatedRequestNumber.md)
  - [Zernio::OnWhatsAppNumberDeclinedRequest](docs/OnWhatsAppNumberDeclinedRequest.md)

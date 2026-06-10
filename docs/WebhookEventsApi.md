@@ -37,6 +37,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
+| [**on_whats_app_number_action_required**](WebhookEventsApi.md#on_whats_app_number_action_required) | **POST** /whatsapp.number.action_required | WhatsApp number action required event |
 | [**on_whats_app_number_activated**](WebhookEventsApi.md#on_whats_app_number_activated) | **POST** /whatsapp.number.activated | WhatsApp number activated event |
 | [**on_whats_app_number_declined**](WebhookEventsApi.md#on_whats_app_number_declined) | **POST** /whatsapp.number.declined | WhatsApp number declined event |
 | [**on_whats_app_number_reactivated**](WebhookEventsApi.md#on_whats_app_number_reactivated) | **POST** /whatsapp.number.reactivated | WhatsApp number reactivated event |
@@ -2275,6 +2276,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_test** | [**WebhookPayloadTest**](WebhookPayloadTest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_whats_app_number_action_required
+
+> on_whats_app_number_action_required(on_whats_app_number_action_required_request)
+
+WhatsApp number action required event
+
+Fired when the regulator asks for more information on an already-placed regulated number order. The number stays pending (nothing was rejected); the customer can provide the missing information from the dashboard, or via the remediation endpoint. `reason` carries the regulator's request verbatim when available. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_whats_app_number_action_required_request =  # OnWhatsAppNumberActionRequiredRequest | 
+
+begin
+  # WhatsApp number action required event
+  api_instance.on_whats_app_number_action_required(on_whats_app_number_action_required_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_number_action_required: #{e}"
+end
+```
+
+#### Using the on_whats_app_number_action_required_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_number_action_required_with_http_info(on_whats_app_number_action_required_request)
+
+```ruby
+begin
+  # WhatsApp number action required event
+  data, status_code, headers = api_instance.on_whats_app_number_action_required_with_http_info(on_whats_app_number_action_required_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_number_action_required_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_whats_app_number_action_required_request** | [**OnWhatsAppNumberActionRequiredRequest**](OnWhatsAppNumberActionRequiredRequest.md) |  |  |
 
 ### Return type
 
