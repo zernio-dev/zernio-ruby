@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Video creative for this entry. Mutually exclusive with `imageUrl`.
+  # Video creative for this entry. Mutually exclusive with `imageUrl`. thumbnailUrl is optional — when omitted, the poster is auto-generated from Meta's preferred video thumbnail.
   class CreateStandaloneAdRequestCreativesInnerVideo < ApiModelBase
     attr_accessor :url
 
@@ -76,8 +76,6 @@ module Zernio
 
       if attributes.key?(:'thumbnail_url')
         self.thumbnail_url = attributes[:'thumbnail_url']
-      else
-        self.thumbnail_url = nil
       end
     end
 
@@ -90,10 +88,6 @@ module Zernio
         invalid_properties.push('invalid value for "url", url cannot be nil.')
       end
 
-      if @thumbnail_url.nil?
-        invalid_properties.push('invalid value for "thumbnail_url", thumbnail_url cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -102,7 +96,6 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @url.nil?
-      return false if @thumbnail_url.nil?
       true
     end
 
@@ -114,16 +107,6 @@ module Zernio
       end
 
       @url = url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] thumbnail_url Value to be assigned
-    def thumbnail_url=(thumbnail_url)
-      if thumbnail_url.nil?
-        fail ArgumentError, 'thumbnail_url cannot be nil'
-      end
-
-      @thumbnail_url = thumbnail_url
     end
 
     # Checks equality by comparing each attribute.

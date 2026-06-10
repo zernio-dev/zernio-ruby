@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **url** | **String** |  |  |
-| **thumbnail_url** | **String** |  |  |
+| **thumbnail_url** | **String** |  | [optional] |
 
 ## Example
 
