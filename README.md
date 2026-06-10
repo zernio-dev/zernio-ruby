@@ -252,6 +252,7 @@ Class | Method | HTTP request | Description
 *Zernio::DiscordApi* | [**unpin_discord_message**](docs/DiscordApi.md#unpin_discord_message) | **DELETE** /v1/discord/channels/{channelId}/pins/{messageId} | Unpin a Discord message
 *Zernio::DiscordApi* | [**update_discord_scheduled_event**](docs/DiscordApi.md#update_discord_scheduled_event) | **PATCH** /v1/discord/guilds/{guildId}/events/{eventId} | Update a Discord scheduled event
 *Zernio::DiscordApi* | [**update_discord_settings**](docs/DiscordApi.md#update_discord_settings) | **PATCH** /v1/accounts/{accountId}/discord-settings | Update Discord settings
+*Zernio::GMBAttributesApi* | [**get_gmb_attribute_metadata**](docs/GMBAttributesApi.md#get_gmb_attribute_metadata) | **GET** /v1/accounts/{accountId}/gmb-attribute-metadata | Get attribute metadata
 *Zernio::GMBAttributesApi* | [**get_google_business_attributes**](docs/GMBAttributesApi.md#get_google_business_attributes) | **GET** /v1/accounts/{accountId}/gmb-attributes | Get attributes
 *Zernio::GMBAttributesApi* | [**update_google_business_attributes**](docs/GMBAttributesApi.md#update_google_business_attributes) | **PUT** /v1/accounts/{accountId}/gmb-attributes | Update attributes
 *Zernio::GMBFoodMenusApi* | [**get_google_business_food_menus**](docs/GMBFoodMenusApi.md#get_google_business_food_menus) | **GET** /v1/accounts/{accountId}/gmb-food-menus | Get food menus
@@ -798,6 +799,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetFollowerStats200ResponseDateRange](docs/GetFollowerStats200ResponseDateRange.md)
  - [Zernio::GetFollowerStats200ResponseStatsValueInner](docs/GetFollowerStats200ResponseStatsValueInner.md)
  - [Zernio::GetFollowerStats403Response](docs/GetFollowerStats403Response.md)
+ - [Zernio::GetGmbAttributeMetadata200Response](docs/GetGmbAttributeMetadata200Response.md)
+ - [Zernio::GetGmbAttributeMetadata200ResponseAttributeMetadataInner](docs/GetGmbAttributeMetadata200ResponseAttributeMetadataInner.md)
+ - [Zernio::GetGmbAttributeMetadata200ResponseAttributeMetadataInnerValueMetadataInner](docs/GetGmbAttributeMetadata200ResponseAttributeMetadataInnerValueMetadataInner.md)
  - [Zernio::GetGmbLocations200Response](docs/GetGmbLocations200Response.md)
  - [Zernio::GetGmbLocations200ResponseLocationsInner](docs/GetGmbLocations200ResponseLocationsInner.md)
  - [Zernio::GetGoogleBusinessAttributes200Response](docs/GetGoogleBusinessAttributes200Response.md)

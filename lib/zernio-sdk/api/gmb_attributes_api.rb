@@ -19,6 +19,95 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Get attribute metadata
+    # Returns metadata about which Google Business Profile attributes are available for a location or business category. Use this endpoint to discover valid attribute names, value types, and allowed enum values before reading or writing via gmb-attributes.  Two mutually exclusive query modes:  **Location mode**: pass `locationId` (or rely on the account's stored `selectedLocationId`). Google returns attributes valid for that specific location.  **Category mode**: pass `categoryName` (must start with `categories/`) and `regionCode`. Google returns attributes valid for that category across the given region. `languageCode` is optional in category mode.  Both modes support `pageSize` and `pageToken` for pagination. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id GBP location ID (e.g. \&quot;6257659026299438786\&quot;). If omitted, uses the account&#39;s stored selectedLocationId. Mutually exclusive with categoryName. 
+    # @option opts [String] :category_name Category resource name, must start with \&quot;categories/\&quot; (e.g. \&quot;categories/gcid:plumber\&quot;). Required together with regionCode. Mutually exclusive with locationId. 
+    # @option opts [String] :region_code BCP-47 region code (e.g. \&quot;US\&quot;, \&quot;ES\&quot;). Required when categoryName is provided. 
+    # @option opts [String] :language_code BCP-47 language code for display names (e.g. \&quot;en\&quot;, \&quot;es\&quot;). Optional when categoryName is provided. Omitted from the Google call when not supplied. 
+    # @option opts [Integer] :page_size Maximum number of attribute metadata items to return. Google defaults to 200.
+    # @option opts [String] :page_token Pagination token from a previous response&#39;s nextPageToken field.
+    # @return [GetGmbAttributeMetadata200Response]
+    def get_gmb_attribute_metadata(account_id, opts = {})
+      data, _status_code, _headers = get_gmb_attribute_metadata_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get attribute metadata
+    # Returns metadata about which Google Business Profile attributes are available for a location or business category. Use this endpoint to discover valid attribute names, value types, and allowed enum values before reading or writing via gmb-attributes.  Two mutually exclusive query modes:  **Location mode**: pass &#x60;locationId&#x60; (or rely on the account&#39;s stored &#x60;selectedLocationId&#x60;). Google returns attributes valid for that specific location.  **Category mode**: pass &#x60;categoryName&#x60; (must start with &#x60;categories/&#x60;) and &#x60;regionCode&#x60;. Google returns attributes valid for that category across the given region. &#x60;languageCode&#x60; is optional in category mode.  Both modes support &#x60;pageSize&#x60; and &#x60;pageToken&#x60; for pagination. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id GBP location ID (e.g. \&quot;6257659026299438786\&quot;). If omitted, uses the account&#39;s stored selectedLocationId. Mutually exclusive with categoryName. 
+    # @option opts [String] :category_name Category resource name, must start with \&quot;categories/\&quot; (e.g. \&quot;categories/gcid:plumber\&quot;). Required together with regionCode. Mutually exclusive with locationId. 
+    # @option opts [String] :region_code BCP-47 region code (e.g. \&quot;US\&quot;, \&quot;ES\&quot;). Required when categoryName is provided. 
+    # @option opts [String] :language_code BCP-47 language code for display names (e.g. \&quot;en\&quot;, \&quot;es\&quot;). Optional when categoryName is provided. Omitted from the Google call when not supplied. 
+    # @option opts [Integer] :page_size Maximum number of attribute metadata items to return. Google defaults to 200.
+    # @option opts [String] :page_token Pagination token from a previous response&#39;s nextPageToken field.
+    # @return [Array<(GetGmbAttributeMetadata200Response, Integer, Hash)>] GetGmbAttributeMetadata200Response data, response status code and response headers
+    def get_gmb_attribute_metadata_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: GMBAttributesApi.get_gmb_attribute_metadata ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling GMBAttributesApi.get_gmb_attribute_metadata"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 200
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling GMBAttributesApi.get_gmb_attribute_metadata, must be smaller than or equal to 200.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling GMBAttributesApi.get_gmb_attribute_metadata, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/gmb-attribute-metadata'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
+      query_params[:'categoryName'] = opts[:'category_name'] if !opts[:'category_name'].nil?
+      query_params[:'regionCode'] = opts[:'region_code'] if !opts[:'region_code'].nil?
+      query_params[:'languageCode'] = opts[:'language_code'] if !opts[:'language_code'].nil?
+      query_params[:'pageSize'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+      query_params[:'pageToken'] = opts[:'page_token'] if !opts[:'page_token'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetGmbAttributeMetadata200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"GMBAttributesApi.get_gmb_attribute_metadata",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: GMBAttributesApi#get_gmb_attribute_metadata\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get attributes
     # Returns GBP location attributes (amenities, services, accessibility, payment types). Available attributes vary by business category.
     # @param account_id [String] 

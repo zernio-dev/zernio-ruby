@@ -32,6 +32,24 @@ describe 'GMBAttributesApi' do
     end
   end
 
+  # unit tests for get_gmb_attribute_metadata
+  # Get attribute metadata
+  # Returns metadata about which Google Business Profile attributes are available for a location or business category. Use this endpoint to discover valid attribute names, value types, and allowed enum values before reading or writing via gmb-attributes.  Two mutually exclusive query modes:  **Location mode**: pass &#x60;locationId&#x60; (or rely on the account&#39;s stored &#x60;selectedLocationId&#x60;). Google returns attributes valid for that specific location.  **Category mode**: pass &#x60;categoryName&#x60; (must start with &#x60;categories/&#x60;) and &#x60;regionCode&#x60;. Google returns attributes valid for that category across the given region. &#x60;languageCode&#x60; is optional in category mode.  Both modes support &#x60;pageSize&#x60; and &#x60;pageToken&#x60; for pagination. 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id GBP location ID (e.g. \&quot;6257659026299438786\&quot;). If omitted, uses the account&#39;s stored selectedLocationId. Mutually exclusive with categoryName. 
+  # @option opts [String] :category_name Category resource name, must start with \&quot;categories/\&quot; (e.g. \&quot;categories/gcid:plumber\&quot;). Required together with regionCode. Mutually exclusive with locationId. 
+  # @option opts [String] :region_code BCP-47 region code (e.g. \&quot;US\&quot;, \&quot;ES\&quot;). Required when categoryName is provided. 
+  # @option opts [String] :language_code BCP-47 language code for display names (e.g. \&quot;en\&quot;, \&quot;es\&quot;). Optional when categoryName is provided. Omitted from the Google call when not supplied. 
+  # @option opts [Integer] :page_size Maximum number of attribute metadata items to return. Google defaults to 200.
+  # @option opts [String] :page_token Pagination token from a previous response&#39;s nextPageToken field.
+  # @return [GetGmbAttributeMetadata200Response]
+  describe 'get_gmb_attribute_metadata test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_google_business_attributes
   # Get attributes
   # Returns GBP location attributes (amenities, services, accessibility, payment types). Available attributes vary by business category.
