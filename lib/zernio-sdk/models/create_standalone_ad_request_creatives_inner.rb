@@ -23,6 +23,9 @@ module Zernio
 
     attr_accessor :body
 
+    # Link description for this ad (link_data.description; video creatives: video_data.link_description). Falls back to the top-level `description`; when both are omitted Meta scrapes the destination URL's OG description.
+    attr_accessor :description
+
     # Image creative. Mutually exclusive with `video`.
     attr_accessor :image_url
 
@@ -60,6 +63,7 @@ module Zernio
         :'name' => :'name',
         :'headline' => :'headline',
         :'body' => :'body',
+        :'description' => :'description',
         :'image_url' => :'imageUrl',
         :'video' => :'video',
         :'link_url' => :'linkUrl',
@@ -83,6 +87,7 @@ module Zernio
         :'name' => :'String',
         :'headline' => :'String',
         :'body' => :'String',
+        :'description' => :'String',
         :'image_url' => :'String',
         :'video' => :'CreateStandaloneAdRequestCreativesInnerVideo',
         :'link_url' => :'String',
@@ -128,6 +133,10 @@ module Zernio
         self.body = nil
       end
 
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
       if attributes.key?(:'image_url')
         self.image_url = attributes[:'image_url']
       end
@@ -170,6 +179,10 @@ module Zernio
         invalid_properties.push('invalid value for "body", body cannot be nil.')
       end
 
+      if !@description.nil? && @description.to_s.length > 255
+        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 255.')
+      end
+
       if @link_url.nil?
         invalid_properties.push('invalid value for "link_url", link_url cannot be nil.')
       end
@@ -189,6 +202,7 @@ module Zernio
       return false if @headline.nil?
       return false if @headline.to_s.length > 255
       return false if @body.nil?
+      return false if !@description.nil? && @description.to_s.length > 255
       return false if @link_url.nil?
       return false if @call_to_action.nil?
       call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
@@ -235,6 +249,20 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if description.nil?
+        fail ArgumentError, 'description cannot be nil'
+      end
+
+      if description.to_s.length > 255
+        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 255.'
+      end
+
+      @description = description
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] link_url Value to be assigned
     def link_url=(link_url)
       if link_url.nil?
@@ -262,6 +290,7 @@ module Zernio
           name == o.name &&
           headline == o.headline &&
           body == o.body &&
+          description == o.description &&
           image_url == o.image_url &&
           video == o.video &&
           link_url == o.link_url &&
@@ -277,7 +306,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, headline, body, image_url, video, link_url, call_to_action].hash
+      [name, headline, body, description, image_url, video, link_url, call_to_action].hash
     end
 
     # Builds the object from hash
