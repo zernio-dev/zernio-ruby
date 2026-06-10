@@ -105,7 +105,7 @@ module Zernio
         :'type' => :'String',
         :'text' => :'String',
         :'url' => :'String',
-        :'example' => :'WhatsAppTemplateButtonExample',
+        :'example' => :'Object',
         :'phone_number' => :'String',
         :'otp_type' => :'String',
         :'autofill_text' => :'String',
@@ -122,6 +122,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'example',
       ])
     end
 

@@ -1592,7 +1592,6 @@ Class | Method | HTTP request | Description
  - [Zernio::WhatsAppHeaderComponentExample](docs/WhatsAppHeaderComponentExample.md)
  - [Zernio::WhatsAppSandboxSession](docs/WhatsAppSandboxSession.md)
  - [Zernio::WhatsAppTemplateButton](docs/WhatsAppTemplateButton.md)
- - [Zernio::WhatsAppTemplateButtonExample](docs/WhatsAppTemplateButtonExample.md)
  - [Zernio::WhatsAppTemplateComponent](docs/WhatsAppTemplateComponent.md)
  - [Zernio::WorkflowEdge](docs/WorkflowEdge.md)
  - [Zernio::WorkflowExecutionEvent](docs/WorkflowExecutionEvent.md)

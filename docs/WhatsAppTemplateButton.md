@@ -7,7 +7,7 @@
 | **type** | **String** |  |  |
 | **text** | **String** | Visible button label. Required for all types except copy_code (whose label is fixed by WhatsApp). | [optional] |
 | **url** | **String** | Required when type is URL | [optional] |
-| **example** | [**WhatsAppTemplateButtonExample**](WhatsAppTemplateButtonExample.md) |  | [optional] |
+| **example** | **Object** |  | [optional] |
 | **phone_number** | **String** | Required when type is phone_number | [optional] |
 | **otp_type** | **String** | Required when type is otp | [optional] |
 | **autofill_text** | **String** |  | [optional] |
