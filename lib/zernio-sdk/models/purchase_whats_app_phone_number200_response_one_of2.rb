@@ -14,26 +14,42 @@ require 'date'
 require 'time'
 
 module Zernio
-  class PurchaseWhatsAppPhoneNumberRequest < ApiModelBase
-    # Profile to associate the number with
-    attr_accessor :profile_id
+  # A number was already purchased under the supplied purchaseIntentId; no new number was provisioned. 
+  class PurchaseWhatsAppPhoneNumber200ResponseOneOf2 < ApiModelBase
+    attr_accessor :status
 
-    # ISO 3166-1 alpha-2 country for the number (default US). International numbers require usage-based billing. Tier 3/4 countries return 202 { status: \"kyc_required\", kycUrl } — the customer must complete KYC at that URL before the number is ordered. See GET /v1/whatsapp/phone-numbers/countries. 
-    attr_accessor :country
+    attr_accessor :number_id
 
-    # Optional idempotency key. Send the same value when retrying a purchase: if a number was already bought under this key, the API returns { status: \"already_purchased\", numberId, phoneNumber } instead of provisioning a second number. Generate a fresh key for each genuinely new purchase. 
-    attr_accessor :purchase_intent_id
+    attr_accessor :phone_number
 
-    # Any second purchase within 10 minutes of a previous one is rejected with 409 code PURCHASE_VELOCITY as duplicate protection. Pass true to confirm the additional purchase is intentional (e.g. bulk provisioning). 
-    attr_accessor :allow_multiple
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'profile_id' => :'profileId',
-        :'country' => :'country',
-        :'purchase_intent_id' => :'purchaseIntentId',
-        :'allow_multiple' => :'allowMultiple'
+        :'status' => :'status',
+        :'number_id' => :'numberId',
+        :'phone_number' => :'phoneNumber'
       }
     end
 
@@ -50,10 +66,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'profile_id' => :'String',
-        :'country' => :'String',
-        :'purchase_intent_id' => :'String',
-        :'allow_multiple' => :'Boolean'
+        :'status' => :'String',
+        :'number_id' => :'String',
+        :'phone_number' => :'String'
       }
     end
 
@@ -67,38 +82,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchaseWhatsAppPhoneNumberRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf2` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchaseWhatsAppPhoneNumberRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf2`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'profile_id')
-        self.profile_id = attributes[:'profile_id']
-      else
-        self.profile_id = nil
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'country')
-        self.country = attributes[:'country']
-      else
-        self.country = 'US'
+      if attributes.key?(:'number_id')
+        self.number_id = attributes[:'number_id']
       end
 
-      if attributes.key?(:'purchase_intent_id')
-        self.purchase_intent_id = attributes[:'purchase_intent_id']
-      end
-
-      if attributes.key?(:'allow_multiple')
-        self.allow_multiple = attributes[:'allow_multiple']
-      else
-        self.allow_multiple = false
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
       end
     end
 
@@ -107,14 +112,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @profile_id.nil?
-        invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
-      end
-
-      if !@purchase_intent_id.nil? && @purchase_intent_id.to_s.length > 100
-        invalid_properties.push('invalid value for "purchase_intent_id", the character length must be smaller than or equal to 100.')
-      end
-
       invalid_properties
     end
 
@@ -122,33 +119,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @profile_id.nil?
-      return false if !@purchase_intent_id.nil? && @purchase_intent_id.to_s.length > 100
+      status_validator = EnumAttributeValidator.new('String', ["already_purchased"])
+      return false unless status_validator.valid?(@status)
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] profile_id Value to be assigned
-    def profile_id=(profile_id)
-      if profile_id.nil?
-        fail ArgumentError, 'profile_id cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["already_purchased"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
-
-      @profile_id = profile_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] purchase_intent_id Value to be assigned
-    def purchase_intent_id=(purchase_intent_id)
-      if purchase_intent_id.nil?
-        fail ArgumentError, 'purchase_intent_id cannot be nil'
-      end
-
-      if purchase_intent_id.to_s.length > 100
-        fail ArgumentError, 'invalid value for "purchase_intent_id", the character length must be smaller than or equal to 100.'
-      end
-
-      @purchase_intent_id = purchase_intent_id
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -156,10 +139,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          profile_id == o.profile_id &&
-          country == o.country &&
-          purchase_intent_id == o.purchase_intent_id &&
-          allow_multiple == o.allow_multiple
+          status == o.status &&
+          number_id == o.number_id &&
+          phone_number == o.phone_number
     end
 
     # @see the `==` method
@@ -171,7 +153,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, purchase_intent_id, allow_multiple].hash
+      [status, number_id, phone_number].hash
     end
 
     # Builds the object from hash

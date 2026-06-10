@@ -15,7 +15,8 @@ Zernio::PurchaseWhatsAppPhoneNumber200Response.openapi_one_of
 # =>
 # [
 #   :'PurchaseWhatsAppPhoneNumber200ResponseOneOf',
-#   :'PurchaseWhatsAppPhoneNumber200ResponseOneOf1'
+#   :'PurchaseWhatsAppPhoneNumber200ResponseOneOf1',
+#   :'PurchaseWhatsAppPhoneNumber200ResponseOneOf2'
 # ]
 ```
 
@@ -45,5 +46,6 @@ Zernio::PurchaseWhatsAppPhoneNumber200Response.build(data_that_doesnt_match)
 
 - `PurchaseWhatsAppPhoneNumber200ResponseOneOf`
 - `PurchaseWhatsAppPhoneNumber200ResponseOneOf1`
+- `PurchaseWhatsAppPhoneNumber200ResponseOneOf2`
 - `nil` (if no type matches)
 

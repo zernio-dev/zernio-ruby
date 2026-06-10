@@ -20,7 +20,8 @@ module Zernio
       def openapi_one_of
         [
           :'PurchaseWhatsAppPhoneNumber200ResponseOneOf',
-          :'PurchaseWhatsAppPhoneNumber200ResponseOneOf1'
+          :'PurchaseWhatsAppPhoneNumber200ResponseOneOf1',
+          :'PurchaseWhatsAppPhoneNumber200ResponseOneOf2'
         ]
       end
 
