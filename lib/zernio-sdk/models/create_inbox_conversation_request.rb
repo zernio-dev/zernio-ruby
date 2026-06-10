@@ -36,7 +36,7 @@ module Zernio
     # WhatsApp only. Template language code (e.g. en_US).
     attr_accessor :template_language
 
-    # WhatsApp only. Body variable values, in order, substituted into the template body ({{1}}, {{2}}, ...).
+    # WhatsApp only. Body variable values, in order. Works with positional placeholders ({{1}}, {{2}}, ...) and with named placeholders ({{name}}, {{company}} - how Meta Business Manager creates templates), where values fill the named slots in order of appearance.
     attr_accessor :template_params
 
     # Attribute mapping from ruby-style variable name to JSON key.
