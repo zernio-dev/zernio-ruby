@@ -46,7 +46,7 @@ describe Zernio::CreateInviteTokenRequest do
   describe 'test attribute "role"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["member", "billing_admin"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["member", "billing_admin", "viewer"])
       # validator.allowable_values.each do |value|
       #   expect { instance.role = value }.not_to raise_error
       # end
