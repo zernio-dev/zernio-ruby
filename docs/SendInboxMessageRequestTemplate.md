@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | **String** | Template type | [optional] |
+| **type** | **String** | Template type. Required for Instagram/Facebook generic templates; ignored on WhatsApp. | [optional] |
 | **elements** | [**Array&lt;SendInboxMessageRequestTemplateElementsInner&gt;**](SendInboxMessageRequestTemplateElementsInner.md) |  | [optional] |
 
 ## Example

@@ -15,16 +15,26 @@ require 'time'
 
 module Zernio
   class SendInboxMessageRequestTemplateElementsInner < ApiModelBase
-    # Element title (max 80 chars)
+    # Element title (max 80 chars). Required for Instagram/Facebook generic templates.
     attr_accessor :title
 
-    # Element subtitle
+    # Element subtitle (Instagram/Facebook only)
     attr_accessor :subtitle
 
-    # Element image URL
+    # Element image URL (Instagram/Facebook only)
     attr_accessor :image_url
 
+    # Element buttons (Instagram/Facebook only)
     attr_accessor :buttons
+
+    # WhatsApp only. Name of the approved template to send.
+    attr_accessor :name
+
+    # WhatsApp only. Template language code (e.g. en_US).
+    attr_accessor :language
+
+    # WhatsApp only. Meta Cloud API send-shape components array, forwarded to Meta verbatim.
+    attr_accessor :components
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -32,7 +42,10 @@ module Zernio
         :'title' => :'title',
         :'subtitle' => :'subtitle',
         :'image_url' => :'imageUrl',
-        :'buttons' => :'buttons'
+        :'buttons' => :'buttons',
+        :'name' => :'name',
+        :'language' => :'language',
+        :'components' => :'components'
       }
     end
 
@@ -52,7 +65,10 @@ module Zernio
         :'title' => :'String',
         :'subtitle' => :'String',
         :'image_url' => :'String',
-        :'buttons' => :'Array<SendInboxMessageRequestTemplateElementsInnerButtonsInner>'
+        :'buttons' => :'Array<SendInboxMessageRequestTemplateElementsInnerButtonsInner>',
+        :'name' => :'String',
+        :'language' => :'String',
+        :'components' => :'Array<Hash<String, Object>>'
       }
     end
 
@@ -80,8 +96,6 @@ module Zernio
 
       if attributes.key?(:'title')
         self.title = attributes[:'title']
-      else
-        self.title = nil
       end
 
       if attributes.key?(:'subtitle')
@@ -97,6 +111,20 @@ module Zernio
           self.buttons = value
         end
       end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
+      end
+
+      if attributes.key?(:'components')
+        if (value = attributes[:'components']).is_a?(Array)
+          self.components = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -104,11 +132,7 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @title.nil?
-        invalid_properties.push('invalid value for "title", title cannot be nil.')
-      end
-
-      if @title.to_s.length > 80
+      if !@title.nil? && @title.to_s.length > 80
         invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 80.')
       end
 
@@ -123,8 +147,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @title.nil?
-      return false if @title.to_s.length > 80
+      return false if !@title.nil? && @title.to_s.length > 80
       return false if !@buttons.nil? && @buttons.length > 3
       true
     end
@@ -165,7 +188,10 @@ module Zernio
           title == o.title &&
           subtitle == o.subtitle &&
           image_url == o.image_url &&
-          buttons == o.buttons
+          buttons == o.buttons &&
+          name == o.name &&
+          language == o.language &&
+          components == o.components
     end
 
     # @see the `==` method
@@ -177,7 +203,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, subtitle, image_url, buttons].hash
+      [title, subtitle, image_url, buttons, name, language, components].hash
     end
 
     # Builds the object from hash
