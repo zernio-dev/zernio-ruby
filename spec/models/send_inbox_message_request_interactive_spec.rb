@@ -30,7 +30,7 @@ describe Zernio::SendInboxMessageRequestInteractive do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["list", "cta_url", "flow"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["list", "cta_url", "flow", "location_request_message"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end

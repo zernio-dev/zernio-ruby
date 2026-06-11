@@ -71,6 +71,10 @@ docs/BatchGetGoogleBusinessReviews200Response.md
 docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md
 docs/BatchGetGoogleBusinessReviewsRequest.md
 docs/BidStrategy.md
+docs/BlockWhatsAppUsers200Response.md
+docs/BlockWhatsAppUsers200ResponseBlockedInner.md
+docs/BlockWhatsAppUsers200ResponseFailedInner.md
+docs/BlockWhatsAppUsersRequest.md
 docs/BlueskyPlatformData.md
 docs/BookmarkPost200Response.md
 docs/BookmarkPostRequest.md
@@ -520,6 +524,8 @@ docs/GetUser200ResponseUser.md
 docs/GetWebhookLogs200Response.md
 docs/GetWebhookLogs200ResponsePagination.md
 docs/GetWebhookSettings200Response.md
+docs/GetWhatsAppBlockedUsers200Response.md
+docs/GetWhatsAppBlockedUsers200ResponseBlockedUsersInner.md
 docs/GetWhatsAppBusinessProfile200Response.md
 docs/GetWhatsAppBusinessProfile200ResponseBusinessProfile.md
 docs/GetWhatsAppCall200Response.md
@@ -900,6 +906,7 @@ docs/SendInboxMessageRequestInteractiveActionOneOf1Parameters.md
 docs/SendInboxMessageRequestInteractiveActionOneOf2.md
 docs/SendInboxMessageRequestInteractiveActionOneOf2Parameters.md
 docs/SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload.md
+docs/SendInboxMessageRequestInteractiveActionOneOf3.md
 docs/SendInboxMessageRequestInteractiveActionOneOfSectionsInner.md
 docs/SendInboxMessageRequestInteractiveActionOneOfSectionsInnerRowsInner.md
 docs/SendInboxMessageRequestInteractiveBody.md
@@ -966,6 +973,8 @@ docs/TwitterPlatformData.md
 docs/TwitterPlatformDataPoll.md
 docs/TwitterPlatformDataSensitiveMedia.md
 docs/TwitterPlatformDataThreadItemsInner.md
+docs/UnblockWhatsAppUsers200Response.md
+docs/UnblockWhatsAppUsersRequest.md
 docs/UndoRetweet200Response.md
 docs/UnfollowUser200Response.md
 docs/UnlikeInboxComment200Response.md
@@ -1342,6 +1351,10 @@ lib/zernio-sdk/models/batch_get_google_business_reviews200_response.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response_location_reviews_inner.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews_request.rb
 lib/zernio-sdk/models/bid_strategy.rb
+lib/zernio-sdk/models/block_whats_app_users200_response.rb
+lib/zernio-sdk/models/block_whats_app_users200_response_blocked_inner.rb
+lib/zernio-sdk/models/block_whats_app_users200_response_failed_inner.rb
+lib/zernio-sdk/models/block_whats_app_users_request.rb
 lib/zernio-sdk/models/bluesky_platform_data.rb
 lib/zernio-sdk/models/bookmark_post200_response.rb
 lib/zernio-sdk/models/bookmark_post_request.rb
@@ -1776,6 +1789,8 @@ lib/zernio-sdk/models/get_user200_response_user.rb
 lib/zernio-sdk/models/get_webhook_logs200_response.rb
 lib/zernio-sdk/models/get_webhook_logs200_response_pagination.rb
 lib/zernio-sdk/models/get_webhook_settings200_response.rb
+lib/zernio-sdk/models/get_whats_app_blocked_users200_response.rb
+lib/zernio-sdk/models/get_whats_app_blocked_users200_response_blocked_users_inner.rb
 lib/zernio-sdk/models/get_whats_app_business_profile200_response.rb
 lib/zernio-sdk/models/get_whats_app_business_profile200_response_business_profile.rb
 lib/zernio-sdk/models/get_whats_app_call200_response.rb
@@ -2144,6 +2159,7 @@ lib/zernio-sdk/models/send_inbox_message_request_interactive_action_one_of1_para
 lib/zernio-sdk/models/send_inbox_message_request_interactive_action_one_of2.rb
 lib/zernio-sdk/models/send_inbox_message_request_interactive_action_one_of2_parameters.rb
 lib/zernio-sdk/models/send_inbox_message_request_interactive_action_one_of2_parameters_flow_action_payload.rb
+lib/zernio-sdk/models/send_inbox_message_request_interactive_action_one_of3.rb
 lib/zernio-sdk/models/send_inbox_message_request_interactive_action_one_of_sections_inner.rb
 lib/zernio-sdk/models/send_inbox_message_request_interactive_action_one_of_sections_inner_rows_inner.rb
 lib/zernio-sdk/models/send_inbox_message_request_interactive_body.rb
@@ -2207,6 +2223,8 @@ lib/zernio-sdk/models/twitter_platform_data.rb
 lib/zernio-sdk/models/twitter_platform_data_poll.rb
 lib/zernio-sdk/models/twitter_platform_data_sensitive_media.rb
 lib/zernio-sdk/models/twitter_platform_data_thread_items_inner.rb
+lib/zernio-sdk/models/unblock_whats_app_users200_response.rb
+lib/zernio-sdk/models/unblock_whats_app_users_request.rb
 lib/zernio-sdk/models/undo_retweet200_response.rb
 lib/zernio-sdk/models/unfollow_user200_response.rb
 lib/zernio-sdk/models/unlike_inbox_comment200_response.rb
@@ -2565,6 +2583,10 @@ spec/models/batch_get_google_business_reviews200_response_location_reviews_inner
 spec/models/batch_get_google_business_reviews200_response_spec.rb
 spec/models/batch_get_google_business_reviews_request_spec.rb
 spec/models/bid_strategy_spec.rb
+spec/models/block_whats_app_users200_response_blocked_inner_spec.rb
+spec/models/block_whats_app_users200_response_failed_inner_spec.rb
+spec/models/block_whats_app_users200_response_spec.rb
+spec/models/block_whats_app_users_request_spec.rb
 spec/models/bluesky_platform_data_spec.rb
 spec/models/bookmark_post200_response_spec.rb
 spec/models/bookmark_post_request_spec.rb
@@ -2999,6 +3021,8 @@ spec/models/get_user200_response_user_spec.rb
 spec/models/get_webhook_logs200_response_pagination_spec.rb
 spec/models/get_webhook_logs200_response_spec.rb
 spec/models/get_webhook_settings200_response_spec.rb
+spec/models/get_whats_app_blocked_users200_response_blocked_users_inner_spec.rb
+spec/models/get_whats_app_blocked_users200_response_spec.rb
 spec/models/get_whats_app_business_profile200_response_business_profile_spec.rb
 spec/models/get_whats_app_business_profile200_response_spec.rb
 spec/models/get_whats_app_call200_response_spec.rb
@@ -3363,6 +3387,7 @@ spec/models/send_inbox_message_request_interactive_action_one_of1_spec.rb
 spec/models/send_inbox_message_request_interactive_action_one_of2_parameters_flow_action_payload_spec.rb
 spec/models/send_inbox_message_request_interactive_action_one_of2_parameters_spec.rb
 spec/models/send_inbox_message_request_interactive_action_one_of2_spec.rb
+spec/models/send_inbox_message_request_interactive_action_one_of3_spec.rb
 spec/models/send_inbox_message_request_interactive_action_one_of_sections_inner_rows_inner_spec.rb
 spec/models/send_inbox_message_request_interactive_action_one_of_sections_inner_spec.rb
 spec/models/send_inbox_message_request_interactive_action_one_of_spec.rb
@@ -3430,6 +3455,8 @@ spec/models/twitter_platform_data_poll_spec.rb
 spec/models/twitter_platform_data_sensitive_media_spec.rb
 spec/models/twitter_platform_data_spec.rb
 spec/models/twitter_platform_data_thread_items_inner_spec.rb
+spec/models/unblock_whats_app_users200_response_spec.rb
+spec/models/unblock_whats_app_users_request_spec.rb
 spec/models/undo_retweet200_response_spec.rb
 spec/models/unfollow_user200_response_spec.rb
 spec/models/unlike_inbox_comment200_response_spec.rb

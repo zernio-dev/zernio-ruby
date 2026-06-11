@@ -79,7 +79,7 @@ module Zernio
     # Emoji reactions on this message (WhatsApp / Telegram). At most one per party in a 1:1 thread.
     attr_accessor :reactions
 
-    # Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (platformMessageId this message replies to), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow), and for inbound interactive taps `interactiveType` / `interactiveId`. 
+    # Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (platformMessageId this message replies to), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps `interactiveType` / `interactiveId`. 
     attr_accessor :metadata
 
     class EnumAttributeValidator

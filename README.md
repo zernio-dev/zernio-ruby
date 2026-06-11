@@ -370,12 +370,14 @@ Class | Method | HTTP request | Description
 *Zernio::WebhooksApi* | [**update_webhook_settings**](docs/WebhooksApi.md#update_webhook_settings) | **PUT** /v1/webhooks/settings | Update webhook
 *Zernio::WhatsAppApi* | [**add_whats_app_group_participants**](docs/WhatsAppApi.md#add_whats_app_group_participants) | **POST** /v1/whatsapp/wa-groups/{groupId}/participants | Add participants
 *Zernio::WhatsAppApi* | [**approve_whats_app_group_join_requests**](docs/WhatsAppApi.md#approve_whats_app_group_join_requests) | **POST** /v1/whatsapp/wa-groups/{groupId}/join-requests | Approve join requests
+*Zernio::WhatsAppApi* | [**block_whats_app_users**](docs/WhatsAppApi.md#block_whats_app_users) | **POST** /v1/whatsapp/block-users | Block users
 *Zernio::WhatsAppApi* | [**create_whats_app_dataset**](docs/WhatsAppApi.md#create_whats_app_dataset) | **POST** /v1/whatsapp/dataset | Provision CTWA conversions dataset
 *Zernio::WhatsAppApi* | [**create_whats_app_group_chat**](docs/WhatsAppApi.md#create_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups | Create group
 *Zernio::WhatsAppApi* | [**create_whats_app_group_invite_link**](docs/WhatsAppApi.md#create_whats_app_group_invite_link) | **POST** /v1/whatsapp/wa-groups/{groupId}/invite-link | Create invite link
 *Zernio::WhatsAppApi* | [**create_whats_app_template**](docs/WhatsAppApi.md#create_whats_app_template) | **POST** /v1/whatsapp/templates | Create template
 *Zernio::WhatsAppApi* | [**delete_whats_app_group_chat**](docs/WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group
 *Zernio::WhatsAppApi* | [**delete_whats_app_template**](docs/WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template
+*Zernio::WhatsAppApi* | [**get_whats_app_blocked_users**](docs/WhatsAppApi.md#get_whats_app_blocked_users) | **GET** /v1/whatsapp/block-users | List blocked users
 *Zernio::WhatsAppApi* | [**get_whats_app_business_profile**](docs/WhatsAppApi.md#get_whats_app_business_profile) | **GET** /v1/whatsapp/business-profile | Get business profile
 *Zernio::WhatsAppApi* | [**get_whats_app_dataset**](docs/WhatsAppApi.md#get_whats_app_dataset) | **GET** /v1/whatsapp/dataset | Get CTWA conversions dataset
 *Zernio::WhatsAppApi* | [**get_whats_app_display_name**](docs/WhatsAppApi.md#get_whats_app_display_name) | **GET** /v1/whatsapp/business-profile/display-name | Get display name status
@@ -388,6 +390,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**reject_whats_app_group_join_requests**](docs/WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests
 *Zernio::WhatsAppApi* | [**remove_whats_app_group_participants**](docs/WhatsAppApi.md#remove_whats_app_group_participants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants
 *Zernio::WhatsAppApi* | [**send_whats_app_conversion**](docs/WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
+*Zernio::WhatsAppApi* | [**unblock_whats_app_users**](docs/WhatsAppApi.md#unblock_whats_app_users) | **DELETE** /v1/whatsapp/block-users | Unblock users
 *Zernio::WhatsAppApi* | [**update_whats_app_business_profile**](docs/WhatsAppApi.md#update_whats_app_business_profile) | **POST** /v1/whatsapp/business-profile | Update business profile
 *Zernio::WhatsAppApi* | [**update_whats_app_display_name**](docs/WhatsAppApi.md#update_whats_app_display_name) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change
 *Zernio::WhatsAppApi* | [**update_whats_app_group_chat**](docs/WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings
@@ -508,6 +511,10 @@ Class | Method | HTTP request | Description
  - [Zernio::BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner](docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md)
  - [Zernio::BatchGetGoogleBusinessReviewsRequest](docs/BatchGetGoogleBusinessReviewsRequest.md)
  - [Zernio::BidStrategy](docs/BidStrategy.md)
+ - [Zernio::BlockWhatsAppUsers200Response](docs/BlockWhatsAppUsers200Response.md)
+ - [Zernio::BlockWhatsAppUsers200ResponseBlockedInner](docs/BlockWhatsAppUsers200ResponseBlockedInner.md)
+ - [Zernio::BlockWhatsAppUsers200ResponseFailedInner](docs/BlockWhatsAppUsers200ResponseFailedInner.md)
+ - [Zernio::BlockWhatsAppUsersRequest](docs/BlockWhatsAppUsersRequest.md)
  - [Zernio::BlueskyPlatformData](docs/BlueskyPlatformData.md)
  - [Zernio::BookmarkPost200Response](docs/BookmarkPost200Response.md)
  - [Zernio::BookmarkPostRequest](docs/BookmarkPostRequest.md)
@@ -942,6 +949,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWebhookLogs200Response](docs/GetWebhookLogs200Response.md)
  - [Zernio::GetWebhookLogs200ResponsePagination](docs/GetWebhookLogs200ResponsePagination.md)
  - [Zernio::GetWebhookSettings200Response](docs/GetWebhookSettings200Response.md)
+ - [Zernio::GetWhatsAppBlockedUsers200Response](docs/GetWhatsAppBlockedUsers200Response.md)
+ - [Zernio::GetWhatsAppBlockedUsers200ResponseBlockedUsersInner](docs/GetWhatsAppBlockedUsers200ResponseBlockedUsersInner.md)
  - [Zernio::GetWhatsAppBusinessProfile200Response](docs/GetWhatsAppBusinessProfile200Response.md)
  - [Zernio::GetWhatsAppBusinessProfile200ResponseBusinessProfile](docs/GetWhatsAppBusinessProfile200ResponseBusinessProfile.md)
  - [Zernio::GetWhatsAppCall200Response](docs/GetWhatsAppCall200Response.md)
@@ -1310,6 +1319,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOf2](docs/SendInboxMessageRequestInteractiveActionOneOf2.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOf2Parameters](docs/SendInboxMessageRequestInteractiveActionOneOf2Parameters.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload](docs/SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload.md)
+ - [Zernio::SendInboxMessageRequestInteractiveActionOneOf3](docs/SendInboxMessageRequestInteractiveActionOneOf3.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOfSectionsInner](docs/SendInboxMessageRequestInteractiveActionOneOfSectionsInner.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOfSectionsInnerRowsInner](docs/SendInboxMessageRequestInteractiveActionOneOfSectionsInnerRowsInner.md)
  - [Zernio::SendInboxMessageRequestInteractiveBody](docs/SendInboxMessageRequestInteractiveBody.md)
@@ -1373,6 +1383,8 @@ Class | Method | HTTP request | Description
  - [Zernio::TwitterPlatformDataPoll](docs/TwitterPlatformDataPoll.md)
  - [Zernio::TwitterPlatformDataSensitiveMedia](docs/TwitterPlatformDataSensitiveMedia.md)
  - [Zernio::TwitterPlatformDataThreadItemsInner](docs/TwitterPlatformDataThreadItemsInner.md)
+ - [Zernio::UnblockWhatsAppUsers200Response](docs/UnblockWhatsAppUsers200Response.md)
+ - [Zernio::UnblockWhatsAppUsersRequest](docs/UnblockWhatsAppUsersRequest.md)
  - [Zernio::UndoRetweet200Response](docs/UndoRetweet200Response.md)
  - [Zernio::UnfollowUser200Response](docs/UnfollowUser200Response.md)
  - [Zernio::UnlikeInboxComment200Response](docs/UnlikeInboxComment200Response.md)

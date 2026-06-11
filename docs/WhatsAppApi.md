@@ -6,12 +6,14 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**add_whats_app_group_participants**](WhatsAppApi.md#add_whats_app_group_participants) | **POST** /v1/whatsapp/wa-groups/{groupId}/participants | Add participants |
 | [**approve_whats_app_group_join_requests**](WhatsAppApi.md#approve_whats_app_group_join_requests) | **POST** /v1/whatsapp/wa-groups/{groupId}/join-requests | Approve join requests |
+| [**block_whats_app_users**](WhatsAppApi.md#block_whats_app_users) | **POST** /v1/whatsapp/block-users | Block users |
 | [**create_whats_app_dataset**](WhatsAppApi.md#create_whats_app_dataset) | **POST** /v1/whatsapp/dataset | Provision CTWA conversions dataset |
 | [**create_whats_app_group_chat**](WhatsAppApi.md#create_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups | Create group |
 | [**create_whats_app_group_invite_link**](WhatsAppApi.md#create_whats_app_group_invite_link) | **POST** /v1/whatsapp/wa-groups/{groupId}/invite-link | Create invite link |
 | [**create_whats_app_template**](WhatsAppApi.md#create_whats_app_template) | **POST** /v1/whatsapp/templates | Create template |
 | [**delete_whats_app_group_chat**](WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group |
 | [**delete_whats_app_template**](WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template |
+| [**get_whats_app_blocked_users**](WhatsAppApi.md#get_whats_app_blocked_users) | **GET** /v1/whatsapp/block-users | List blocked users |
 | [**get_whats_app_business_profile**](WhatsAppApi.md#get_whats_app_business_profile) | **GET** /v1/whatsapp/business-profile | Get business profile |
 | [**get_whats_app_dataset**](WhatsAppApi.md#get_whats_app_dataset) | **GET** /v1/whatsapp/dataset | Get CTWA conversions dataset |
 | [**get_whats_app_display_name**](WhatsAppApi.md#get_whats_app_display_name) | **GET** /v1/whatsapp/business-profile/display-name | Get display name status |
@@ -24,6 +26,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**reject_whats_app_group_join_requests**](WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests |
 | [**remove_whats_app_group_participants**](WhatsAppApi.md#remove_whats_app_group_participants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants |
 | [**send_whats_app_conversion**](WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
+| [**unblock_whats_app_users**](WhatsAppApi.md#unblock_whats_app_users) | **DELETE** /v1/whatsapp/block-users | Unblock users |
 | [**update_whats_app_business_profile**](WhatsAppApi.md#update_whats_app_business_profile) | **POST** /v1/whatsapp/business-profile | Update business profile |
 | [**update_whats_app_display_name**](WhatsAppApi.md#update_whats_app_display_name) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change |
 | [**update_whats_app_group_chat**](WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings |
@@ -166,6 +169,75 @@ end
 ### Return type
 
 [**UnpublishPost200Response**](UnpublishPost200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## block_whats_app_users
+
+> <BlockWhatsAppUsers200Response> block_whats_app_users(block_whats_app_users_request)
+
+Block users
+
+Block one or more WhatsApp users on this number. Blocked users cannot message your number or see that you are online, and your sends to them return an error.  Meta constraints, surfaced per-user in `failed` (the request itself still succeeds for the rest of the batch): - Only users who messaged your business within the last 24 hours can be   blocked (failures outside the window report \"Re-engagement required\"). - Up to 1,000 users per request; the blocklist caps at 64,000. - Other WhatsApp Business accounts cannot be blocked. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+block_whats_app_users_request = Zernio::BlockWhatsAppUsersRequest.new({account_id: 'account_id_example', users: ['users_example']}) # BlockWhatsAppUsersRequest | 
+
+begin
+  # Block users
+  result = api_instance.block_whats_app_users(block_whats_app_users_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->block_whats_app_users: #{e}"
+end
+```
+
+#### Using the block_whats_app_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<BlockWhatsAppUsers200Response>, Integer, Hash)> block_whats_app_users_with_http_info(block_whats_app_users_request)
+
+```ruby
+begin
+  # Block users
+  data, status_code, headers = api_instance.block_whats_app_users_with_http_info(block_whats_app_users_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <BlockWhatsAppUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->block_whats_app_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **block_whats_app_users_request** | [**BlockWhatsAppUsersRequest**](BlockWhatsAppUsersRequest.md) |  |  |
+
+### Return type
+
+[**BlockWhatsAppUsers200Response**](BlockWhatsAppUsers200Response.md)
 
 ### Authorization
 
@@ -586,6 +658,81 @@ end
 ### Return type
 
 [**UnpublishPost200Response**](UnpublishPost200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_whats_app_blocked_users
+
+> <GetWhatsAppBlockedUsers200Response> get_whats_app_blocked_users(account_id, opts)
+
+List blocked users
+
+List the WhatsApp users blocked on this number. Cursor-paginated; pass `nextCursor` back as `after` to fetch the next page. The blocklist holds up to 64,000 users. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | WhatsApp social account ID
+opts = {
+  limit: 56, # Integer | Page size.
+  after: 'after_example' # String | Cursor from a previous response's `nextCursor`.
+}
+
+begin
+  # List blocked users
+  result = api_instance.get_whats_app_blocked_users(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whats_app_blocked_users: #{e}"
+end
+```
+
+#### Using the get_whats_app_blocked_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppBlockedUsers200Response>, Integer, Hash)> get_whats_app_blocked_users_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List blocked users
+  data, status_code, headers = api_instance.get_whats_app_blocked_users_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppBlockedUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whats_app_blocked_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp social account ID |  |
+| **limit** | **Integer** | Page size. | [optional] |
+| **after** | **String** | Cursor from a previous response&#39;s &#x60;nextCursor&#x60;. | [optional] |
+
+### Return type
+
+[**GetWhatsAppBlockedUsers200Response**](GetWhatsAppBlockedUsers200Response.md)
 
 ### Authorization
 
@@ -1438,6 +1585,75 @@ end
 ### Return type
 
 [**SendWhatsAppConversion200Response**](SendWhatsAppConversion200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## unblock_whats_app_users
+
+> <UnblockWhatsAppUsers200Response> unblock_whats_app_users(unblock_whats_app_users_request)
+
+Unblock users
+
+Unblock one or more previously blocked WhatsApp users on this number. Up to 1,000 users per request; per-user failures are reported in `failed` without failing the rest of the batch. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+unblock_whats_app_users_request = Zernio::UnblockWhatsAppUsersRequest.new({account_id: 'account_id_example', users: ['users_example']}) # UnblockWhatsAppUsersRequest | 
+
+begin
+  # Unblock users
+  result = api_instance.unblock_whats_app_users(unblock_whats_app_users_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->unblock_whats_app_users: #{e}"
+end
+```
+
+#### Using the unblock_whats_app_users_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UnblockWhatsAppUsers200Response>, Integer, Hash)> unblock_whats_app_users_with_http_info(unblock_whats_app_users_request)
+
+```ruby
+begin
+  # Unblock users
+  data, status_code, headers = api_instance.unblock_whats_app_users_with_http_info(unblock_whats_app_users_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UnblockWhatsAppUsers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->unblock_whats_app_users_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **unblock_whats_app_users_request** | [**UnblockWhatsAppUsersRequest**](UnblockWhatsAppUsersRequest.md) |  |  |
+
+### Return type
+
+[**UnblockWhatsAppUsers200Response**](UnblockWhatsAppUsers200Response.md)
 
 ### Authorization
 

@@ -60,6 +60,18 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for block_whats_app_users
+  # Block users
+  # Block one or more WhatsApp users on this number. Blocked users cannot message your number or see that you are online, and your sends to them return an error.  Meta constraints, surfaced per-user in &#x60;failed&#x60; (the request itself still succeeds for the rest of the batch): - Only users who messaged your business within the last 24 hours can be   blocked (failures outside the window report \&quot;Re-engagement required\&quot;). - Up to 1,000 users per request; the blocklist caps at 64,000. - Other WhatsApp Business accounts cannot be blocked. 
+  # @param block_whats_app_users_request 
+  # @param [Hash] opts the optional parameters
+  # @return [BlockWhatsAppUsers200Response]
+  describe 'block_whats_app_users test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_whats_app_dataset
   # Provision CTWA conversions dataset
   # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as &#x60;metadata.metaCapiDatasetId&#x60;.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with &#x60;created: false&#x60;.  Requires the connected WhatsApp account&#39;s token to carry the &#x60;whatsapp_business_manage_events&#x60; permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
@@ -130,6 +142,20 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [UnpublishPost200Response]
   describe 'delete_whats_app_template test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_whats_app_blocked_users
+  # List blocked users
+  # List the WhatsApp users blocked on this number. Cursor-paginated; pass &#x60;nextCursor&#x60; back as &#x60;after&#x60; to fetch the next page. The blocklist holds up to 64,000 users. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Page size.
+  # @option opts [String] :after Cursor from a previous response&#39;s &#x60;nextCursor&#x60;.
+  # @return [GetWhatsAppBlockedUsers200Response]
+  describe 'get_whats_app_blocked_users test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -284,6 +310,18 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [SendWhatsAppConversion200Response]
   describe 'send_whats_app_conversion test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for unblock_whats_app_users
+  # Unblock users
+  # Unblock one or more previously blocked WhatsApp users on this number. Up to 1,000 users per request; per-user failures are reported in &#x60;failed&#x60; without failing the rest of the batch. 
+  # @param unblock_whats_app_users_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UnblockWhatsAppUsers200Response]
+  describe 'unblock_whats_app_users test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
