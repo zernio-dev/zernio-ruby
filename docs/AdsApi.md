@@ -25,6 +25,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_conversions_quality**](AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Read Event Match Quality + coverage for a Meta pixel |
 | [**get_lead_form**](AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a single Lead Gen form |
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
+| [**list_ad_catalog_product_sets**](AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog&#39;s product sets |
+| [**list_ad_catalogs**](AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**list_ads_business_centers**](AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
 | [**list_conversion_associations**](AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List campaigns associated with a conversion destination |
@@ -1540,6 +1542,148 @@ end
 ### Return type
 
 [**ListAdAccounts200Response**](ListAdAccounts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_catalog_product_sets
+
+> <ListAdCatalogProductSets200Response> list_ad_catalog_product_sets(catalog_id, account_id)
+
+List a catalog's product sets
+
+Lists a Meta product catalog's product sets — the unit a catalog ad promotes. Pass the chosen set as `promotedObject.productSetId` on POST /v1/ads/create with `goal: catalog_sales`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+catalog_id = 'catalog_id_example' # String | Meta product catalog ID (from GET /v1/ads/catalogs)
+account_id = 'account_id_example' # String | A facebook, instagram, or metaads social account ID
+
+begin
+  # List a catalog's product sets
+  result = api_instance.list_ad_catalog_product_sets(catalog_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_catalog_product_sets: #{e}"
+end
+```
+
+#### Using the list_ad_catalog_product_sets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdCatalogProductSets200Response>, Integer, Hash)> list_ad_catalog_product_sets_with_http_info(catalog_id, account_id)
+
+```ruby
+begin
+  # List a catalog's product sets
+  data, status_code, headers = api_instance.list_ad_catalog_product_sets_with_http_info(catalog_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdCatalogProductSets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_catalog_product_sets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **catalog_id** | **String** | Meta product catalog ID (from GET /v1/ads/catalogs) |  |
+| **account_id** | **String** | A facebook, instagram, or metaads social account ID |  |
+
+### Return type
+
+[**ListAdCatalogProductSets200Response**](ListAdCatalogProductSets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_catalogs
+
+> <ListAdCatalogs200Response> list_ad_catalogs(account_id, ad_account_id)
+
+List Meta product catalogs
+
+Lists the Meta product catalogs reachable from an ad account (owned + agency-shared catalogs of the ad account's business), for Advantage+ catalog ads (`goal: catalog_sales` on POST /v1/ads/create — e.g. vehicle inventory catalogs). Read-only; uses scopes customers already granted (no reconnect needed). Catalog contents (items, feeds) are managed in Meta Commerce Manager, not through this API.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | A facebook, instagram, or metaads social account ID
+ad_account_id = 'ad_account_id_example' # String | Meta ad account ID (act_...)
+
+begin
+  # List Meta product catalogs
+  result = api_instance.list_ad_catalogs(account_id, ad_account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_catalogs: #{e}"
+end
+```
+
+#### Using the list_ad_catalogs_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdCatalogs200Response>, Integer, Hash)> list_ad_catalogs_with_http_info(account_id, ad_account_id)
+
+```ruby
+begin
+  # List Meta product catalogs
+  data, status_code, headers = api_instance.list_ad_catalogs_with_http_info(account_id, ad_account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdCatalogs200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_catalogs_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | A facebook, instagram, or metaads social account ID |  |
+| **ad_account_id** | **String** | Meta ad account ID (act_...) |  |
+
+### Return type
+
+[**ListAdCatalogs200Response**](ListAdCatalogs200Response.md)
 
 ### Authorization
 

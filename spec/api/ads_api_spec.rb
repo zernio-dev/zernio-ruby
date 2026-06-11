@@ -308,6 +308,32 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for list_ad_catalog_product_sets
+  # List a catalog&#39;s product sets
+  # Lists a Meta product catalog&#39;s product sets — the unit a catalog ad promotes. Pass the chosen set as &#x60;promotedObject.productSetId&#x60; on POST /v1/ads/create with &#x60;goal: catalog_sales&#x60;.
+  # @param catalog_id Meta product catalog ID (from GET /v1/ads/catalogs)
+  # @param account_id A facebook, instagram, or metaads social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [ListAdCatalogProductSets200Response]
+  describe 'list_ad_catalog_product_sets test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_ad_catalogs
+  # List Meta product catalogs
+  # Lists the Meta product catalogs reachable from an ad account (owned + agency-shared catalogs of the ad account&#39;s business), for Advantage+ catalog ads (&#x60;goal: catalog_sales&#x60; on POST /v1/ads/create — e.g. vehicle inventory catalogs). Read-only; uses scopes customers already granted (no reconnect needed). Catalog contents (items, feeds) are managed in Meta Commerce Manager, not through this API.
+  # @param account_id A facebook, instagram, or metaads social account ID
+  # @param ad_account_id Meta ad account ID (act_...)
+  # @param [Hash] opts the optional parameters
+  # @return [ListAdCatalogs200Response]
+  describe 'list_ad_catalogs test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ads
   # List ads
   # Returns a paginated list of ads with metrics computed over an optional date range. Use source&#x3D;all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max.  To find the Zernio ad behind a comment you see in Meta Business Manager, filter by platformAdId (the Meta ad ID), effectiveObjectStoryId (Facebook), or effectiveInstagramMediaId (Instagram) — those are the post/media the ad&#39;s engagement lives on, and are also returned on each ad&#39;s &#x60;creative&#x60; object. Then call GET /v1/ads/{adId}/comments with the returned ad id. 

@@ -126,6 +126,8 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_conversions_quality**](docs/AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Read Event Match Quality + coverage for a Meta pixel
 *Zernio::AdsApi* | [**get_lead_form**](docs/AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a single Lead Gen form
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
+*Zernio::AdsApi* | [**list_ad_catalog_product_sets**](docs/AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog's product sets
+*Zernio::AdsApi* | [**list_ad_catalogs**](docs/AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdsApi* | [**list_ads_business_centers**](docs/AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
 *Zernio::AdsApi* | [**list_conversion_associations**](docs/AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List campaigns associated with a conversion destination
@@ -1048,6 +1050,10 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdAudiences200Response](docs/ListAdAudiences200Response.md)
  - [Zernio::ListAdAudiences200ResponseAudiencesInner](docs/ListAdAudiences200ResponseAudiencesInner.md)
  - [Zernio::ListAdCampaigns200Response](docs/ListAdCampaigns200Response.md)
+ - [Zernio::ListAdCatalogProductSets200Response](docs/ListAdCatalogProductSets200Response.md)
+ - [Zernio::ListAdCatalogProductSets200ResponseProductSetsInner](docs/ListAdCatalogProductSets200ResponseProductSetsInner.md)
+ - [Zernio::ListAdCatalogs200Response](docs/ListAdCatalogs200Response.md)
+ - [Zernio::ListAdCatalogs200ResponseCatalogsInner](docs/ListAdCatalogs200ResponseCatalogsInner.md)
  - [Zernio::ListAds200Response](docs/ListAds200Response.md)
  - [Zernio::ListAdsBusinessCenters200Response](docs/ListAdsBusinessCenters200Response.md)
  - [Zernio::ListApiKeys200Response](docs/ListApiKeys200Response.md)

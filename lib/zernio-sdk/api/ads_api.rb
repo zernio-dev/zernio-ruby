@@ -1545,6 +1545,147 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List a catalog's product sets
+    # Lists a Meta product catalog's product sets — the unit a catalog ad promotes. Pass the chosen set as `promotedObject.productSetId` on POST /v1/ads/create with `goal: catalog_sales`.
+    # @param catalog_id [String] Meta product catalog ID (from GET /v1/ads/catalogs)
+    # @param account_id [String] A facebook, instagram, or metaads social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [ListAdCatalogProductSets200Response]
+    def list_ad_catalog_product_sets(catalog_id, account_id, opts = {})
+      data, _status_code, _headers = list_ad_catalog_product_sets_with_http_info(catalog_id, account_id, opts)
+      data
+    end
+
+    # List a catalog&#39;s product sets
+    # Lists a Meta product catalog&#39;s product sets — the unit a catalog ad promotes. Pass the chosen set as &#x60;promotedObject.productSetId&#x60; on POST /v1/ads/create with &#x60;goal: catalog_sales&#x60;.
+    # @param catalog_id [String] Meta product catalog ID (from GET /v1/ads/catalogs)
+    # @param account_id [String] A facebook, instagram, or metaads social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListAdCatalogProductSets200Response, Integer, Hash)>] ListAdCatalogProductSets200Response data, response status code and response headers
+    def list_ad_catalog_product_sets_with_http_info(catalog_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_ad_catalog_product_sets ...'
+      end
+      # verify the required parameter 'catalog_id' is set
+      if @api_client.config.client_side_validation && catalog_id.nil?
+        fail ArgumentError, "Missing the required parameter 'catalog_id' when calling AdsApi.list_ad_catalog_product_sets"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_ad_catalog_product_sets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/catalogs/{catalogId}/product-sets'.sub('{' + 'catalogId' + '}', CGI.escape(catalog_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdCatalogProductSets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_ad_catalog_product_sets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_ad_catalog_product_sets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List Meta product catalogs
+    # Lists the Meta product catalogs reachable from an ad account (owned + agency-shared catalogs of the ad account's business), for Advantage+ catalog ads (`goal: catalog_sales` on POST /v1/ads/create — e.g. vehicle inventory catalogs). Read-only; uses scopes customers already granted (no reconnect needed). Catalog contents (items, feeds) are managed in Meta Commerce Manager, not through this API.
+    # @param account_id [String] A facebook, instagram, or metaads social account ID
+    # @param ad_account_id [String] Meta ad account ID (act_...)
+    # @param [Hash] opts the optional parameters
+    # @return [ListAdCatalogs200Response]
+    def list_ad_catalogs(account_id, ad_account_id, opts = {})
+      data, _status_code, _headers = list_ad_catalogs_with_http_info(account_id, ad_account_id, opts)
+      data
+    end
+
+    # List Meta product catalogs
+    # Lists the Meta product catalogs reachable from an ad account (owned + agency-shared catalogs of the ad account&#39;s business), for Advantage+ catalog ads (&#x60;goal: catalog_sales&#x60; on POST /v1/ads/create — e.g. vehicle inventory catalogs). Read-only; uses scopes customers already granted (no reconnect needed). Catalog contents (items, feeds) are managed in Meta Commerce Manager, not through this API.
+    # @param account_id [String] A facebook, instagram, or metaads social account ID
+    # @param ad_account_id [String] Meta ad account ID (act_...)
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListAdCatalogs200Response, Integer, Hash)>] ListAdCatalogs200Response data, response status code and response headers
+    def list_ad_catalogs_with_http_info(account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_ad_catalogs ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_ad_catalogs"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.list_ad_catalogs"
+      end
+      # resource path
+      local_var_path = '/v1/ads/catalogs'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdCatalogs200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_ad_catalogs",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_ad_catalogs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List ads
     # Returns a paginated list of ads with metrics computed over an optional date range. Use source=all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max.  To find the Zernio ad behind a comment you see in Meta Business Manager, filter by platformAdId (the Meta ad ID), effectiveObjectStoryId (Facebook), or effectiveInstagramMediaId (Instagram) — those are the post/media the ad's engagement lives on, and are also returned on each ad's `creative` object. Then call GET /v1/ads/{adId}/comments with the returned ad id. 
     # @param [Hash] opts the optional parameters

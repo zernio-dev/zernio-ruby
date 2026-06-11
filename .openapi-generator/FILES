@@ -632,6 +632,10 @@ docs/ListAdAccounts200ResponseAccountsInner.md
 docs/ListAdAudiences200Response.md
 docs/ListAdAudiences200ResponseAudiencesInner.md
 docs/ListAdCampaigns200Response.md
+docs/ListAdCatalogProductSets200Response.md
+docs/ListAdCatalogProductSets200ResponseProductSetsInner.md
+docs/ListAdCatalogs200Response.md
+docs/ListAdCatalogs200ResponseCatalogsInner.md
 docs/ListAds200Response.md
 docs/ListAdsBusinessCenters200Response.md
 docs/ListApiKeys200Response.md
@@ -1880,6 +1884,10 @@ lib/zernio-sdk/models/list_ad_accounts200_response_accounts_inner.rb
 lib/zernio-sdk/models/list_ad_audiences200_response.rb
 lib/zernio-sdk/models/list_ad_audiences200_response_audiences_inner.rb
 lib/zernio-sdk/models/list_ad_campaigns200_response.rb
+lib/zernio-sdk/models/list_ad_catalog_product_sets200_response.rb
+lib/zernio-sdk/models/list_ad_catalog_product_sets200_response_product_sets_inner.rb
+lib/zernio-sdk/models/list_ad_catalogs200_response.rb
+lib/zernio-sdk/models/list_ad_catalogs200_response_catalogs_inner.rb
 lib/zernio-sdk/models/list_ads200_response.rb
 lib/zernio-sdk/models/list_ads_business_centers200_response.rb
 lib/zernio-sdk/models/list_api_keys200_response.rb
@@ -3099,6 +3107,10 @@ spec/models/list_ad_accounts200_response_spec.rb
 spec/models/list_ad_audiences200_response_audiences_inner_spec.rb
 spec/models/list_ad_audiences200_response_spec.rb
 spec/models/list_ad_campaigns200_response_spec.rb
+spec/models/list_ad_catalog_product_sets200_response_product_sets_inner_spec.rb
+spec/models/list_ad_catalog_product_sets200_response_spec.rb
+spec/models/list_ad_catalogs200_response_catalogs_inner_spec.rb
+spec/models/list_ad_catalogs200_response_spec.rb
 spec/models/list_ads200_response_spec.rb
 spec/models/list_ads_business_centers200_response_spec.rb
 spec/models/list_api_keys200_response_spec.rb
