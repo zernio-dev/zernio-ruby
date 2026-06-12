@@ -4,13 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **flow_message_version** | **String** | Defaults to \&quot;3\&quot; when omitted. | [optional] |
-| **flow_token** | **String** | Opaque token you choose to correlate Flow responses with your own state (max 200 chars). |  |
-| **flow_id** | **String** | Published Flow ID from Meta Business Manager. |  |
-| **flow_cta** | **String** | Button label that opens the Flow (max 20 chars). |  |
-| **flow_action** | **String** | &#x60;navigate&#x60; sends the user to &#x60;flow_action_payload.screen&#x60;; &#x60;data_exchange&#x60; posts data to your Flow endpoint. |  |
-| **flow_action_payload** | [**SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload**](SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload.md) |  | [optional] |
-| **mode** | **String** | Set to &#x60;draft&#x60; to test an unpublished Flow. | [optional] |
+| **display_text** | **String** | Button label. Defaults to \&quot;Call Now\&quot;. | [optional] |
+| **ttl_minutes** | **Integer** | How long the button stays tappable. Defaults to 10080 (7 days). | [optional] |
+| **payload** | **String** | Arbitrary string echoed back as &#x60;cta_payload&#x60; on the &#x60;calls&#x60; webhook (connect/terminate) for attribution. | [optional] |
 
 ## Example
 
@@ -18,13 +14,9 @@
 require 'zernio-sdk'
 
 instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf2Parameters.new(
-  flow_message_version: null,
-  flow_token: null,
-  flow_id: null,
-  flow_cta: null,
-  flow_action: null,
-  flow_action_payload: null,
-  mode: null
+  display_text: null,
+  ttl_minutes: null,
+  payload: null
 )
 ```
 

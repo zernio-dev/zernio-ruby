@@ -14,59 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
+  # All optional.
   class SendInboxMessageRequestInteractiveActionOneOf2Parameters < ApiModelBase
-    # Defaults to \"3\" when omitted.
-    attr_accessor :flow_message_version
+    # Button label. Defaults to \"Call Now\".
+    attr_accessor :display_text
 
-    # Opaque token you choose to correlate Flow responses with your own state (max 200 chars).
-    attr_accessor :flow_token
+    # How long the button stays tappable. Defaults to 10080 (7 days).
+    attr_accessor :ttl_minutes
 
-    # Published Flow ID from Meta Business Manager.
-    attr_accessor :flow_id
-
-    # Button label that opens the Flow (max 20 chars).
-    attr_accessor :flow_cta
-
-    # `navigate` sends the user to `flow_action_payload.screen`; `data_exchange` posts data to your Flow endpoint.
-    attr_accessor :flow_action
-
-    attr_accessor :flow_action_payload
-
-    # Set to `draft` to test an unpublished Flow.
-    attr_accessor :mode
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Arbitrary string echoed back as `cta_payload` on the `calls` webhook (connect/terminate) for attribution.
+    attr_accessor :payload
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'flow_message_version' => :'flow_message_version',
-        :'flow_token' => :'flow_token',
-        :'flow_id' => :'flow_id',
-        :'flow_cta' => :'flow_cta',
-        :'flow_action' => :'flow_action',
-        :'flow_action_payload' => :'flow_action_payload',
-        :'mode' => :'mode'
+        :'display_text' => :'display_text',
+        :'ttl_minutes' => :'ttl_minutes',
+        :'payload' => :'payload'
       }
     end
 
@@ -83,13 +47,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'flow_message_version' => :'String',
-        :'flow_token' => :'String',
-        :'flow_id' => :'String',
-        :'flow_cta' => :'String',
-        :'flow_action' => :'String',
-        :'flow_action_payload' => :'SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload',
-        :'mode' => :'String'
+        :'display_text' => :'String',
+        :'ttl_minutes' => :'Integer',
+        :'payload' => :'String'
       }
     end
 
@@ -115,40 +75,16 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'flow_message_version')
-        self.flow_message_version = attributes[:'flow_message_version']
+      if attributes.key?(:'display_text')
+        self.display_text = attributes[:'display_text']
       end
 
-      if attributes.key?(:'flow_token')
-        self.flow_token = attributes[:'flow_token']
-      else
-        self.flow_token = nil
+      if attributes.key?(:'ttl_minutes')
+        self.ttl_minutes = attributes[:'ttl_minutes']
       end
 
-      if attributes.key?(:'flow_id')
-        self.flow_id = attributes[:'flow_id']
-      else
-        self.flow_id = nil
-      end
-
-      if attributes.key?(:'flow_cta')
-        self.flow_cta = attributes[:'flow_cta']
-      else
-        self.flow_cta = nil
-      end
-
-      if attributes.key?(:'flow_action')
-        self.flow_action = attributes[:'flow_action']
-      else
-        self.flow_action = nil
-      end
-
-      if attributes.key?(:'flow_action_payload')
-        self.flow_action_payload = attributes[:'flow_action_payload']
-      end
-
-      if attributes.key?(:'mode')
-        self.mode = attributes[:'mode']
+      if attributes.key?(:'payload')
+        self.payload = attributes[:'payload']
       end
     end
 
@@ -157,20 +93,20 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @flow_token.nil?
-        invalid_properties.push('invalid value for "flow_token", flow_token cannot be nil.')
+      if !@display_text.nil? && @display_text.to_s.length > 20
+        invalid_properties.push('invalid value for "display_text", the character length must be smaller than or equal to 20.')
       end
 
-      if @flow_id.nil?
-        invalid_properties.push('invalid value for "flow_id", flow_id cannot be nil.')
+      if !@ttl_minutes.nil? && @ttl_minutes > 43200
+        invalid_properties.push('invalid value for "ttl_minutes", must be smaller than or equal to 43200.')
       end
 
-      if @flow_cta.nil?
-        invalid_properties.push('invalid value for "flow_cta", flow_cta cannot be nil.')
+      if !@ttl_minutes.nil? && @ttl_minutes < 1
+        invalid_properties.push('invalid value for "ttl_minutes", must be greater than or equal to 1.')
       end
 
-      if @flow_action.nil?
-        invalid_properties.push('invalid value for "flow_action", flow_action cannot be nil.')
+      if !@payload.nil? && @payload.to_s.length > 512
+        invalid_properties.push('invalid value for "payload", the character length must be smaller than or equal to 512.')
       end
 
       invalid_properties
@@ -180,77 +116,57 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      flow_message_version_validator = EnumAttributeValidator.new('String', ["3"])
-      return false unless flow_message_version_validator.valid?(@flow_message_version)
-      return false if @flow_token.nil?
-      return false if @flow_id.nil?
-      return false if @flow_cta.nil?
-      return false if @flow_action.nil?
-      flow_action_validator = EnumAttributeValidator.new('String', ["navigate", "data_exchange"])
-      return false unless flow_action_validator.valid?(@flow_action)
-      mode_validator = EnumAttributeValidator.new('String', ["draft"])
-      return false unless mode_validator.valid?(@mode)
+      return false if !@display_text.nil? && @display_text.to_s.length > 20
+      return false if !@ttl_minutes.nil? && @ttl_minutes > 43200
+      return false if !@ttl_minutes.nil? && @ttl_minutes < 1
+      return false if !@payload.nil? && @payload.to_s.length > 512
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] flow_message_version Object to be assigned
-    def flow_message_version=(flow_message_version)
-      validator = EnumAttributeValidator.new('String', ["3"])
-      unless validator.valid?(flow_message_version)
-        fail ArgumentError, "invalid value for \"flow_message_version\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] display_text Value to be assigned
+    def display_text=(display_text)
+      if display_text.nil?
+        fail ArgumentError, 'display_text cannot be nil'
       end
-      @flow_message_version = flow_message_version
+
+      if display_text.to_s.length > 20
+        fail ArgumentError, 'invalid value for "display_text", the character length must be smaller than or equal to 20.'
+      end
+
+      @display_text = display_text
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] flow_token Value to be assigned
-    def flow_token=(flow_token)
-      if flow_token.nil?
-        fail ArgumentError, 'flow_token cannot be nil'
+    # @param [Object] ttl_minutes Value to be assigned
+    def ttl_minutes=(ttl_minutes)
+      if ttl_minutes.nil?
+        fail ArgumentError, 'ttl_minutes cannot be nil'
       end
 
-      @flow_token = flow_token
+      if ttl_minutes > 43200
+        fail ArgumentError, 'invalid value for "ttl_minutes", must be smaller than or equal to 43200.'
+      end
+
+      if ttl_minutes < 1
+        fail ArgumentError, 'invalid value for "ttl_minutes", must be greater than or equal to 1.'
+      end
+
+      @ttl_minutes = ttl_minutes
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] flow_id Value to be assigned
-    def flow_id=(flow_id)
-      if flow_id.nil?
-        fail ArgumentError, 'flow_id cannot be nil'
+    # @param [Object] payload Value to be assigned
+    def payload=(payload)
+      if payload.nil?
+        fail ArgumentError, 'payload cannot be nil'
       end
 
-      @flow_id = flow_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] flow_cta Value to be assigned
-    def flow_cta=(flow_cta)
-      if flow_cta.nil?
-        fail ArgumentError, 'flow_cta cannot be nil'
+      if payload.to_s.length > 512
+        fail ArgumentError, 'invalid value for "payload", the character length must be smaller than or equal to 512.'
       end
 
-      @flow_cta = flow_cta
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] flow_action Object to be assigned
-    def flow_action=(flow_action)
-      validator = EnumAttributeValidator.new('String', ["navigate", "data_exchange"])
-      unless validator.valid?(flow_action)
-        fail ArgumentError, "invalid value for \"flow_action\", must be one of #{validator.allowable_values}."
-      end
-      @flow_action = flow_action
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mode Object to be assigned
-    def mode=(mode)
-      validator = EnumAttributeValidator.new('String', ["draft"])
-      unless validator.valid?(mode)
-        fail ArgumentError, "invalid value for \"mode\", must be one of #{validator.allowable_values}."
-      end
-      @mode = mode
+      @payload = payload
     end
 
     # Checks equality by comparing each attribute.
@@ -258,13 +174,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          flow_message_version == o.flow_message_version &&
-          flow_token == o.flow_token &&
-          flow_id == o.flow_id &&
-          flow_cta == o.flow_cta &&
-          flow_action == o.flow_action &&
-          flow_action_payload == o.flow_action_payload &&
-          mode == o.mode
+          display_text == o.display_text &&
+          ttl_minutes == o.ttl_minutes &&
+          payload == o.payload
     end
 
     # @see the `==` method
@@ -276,7 +188,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [flow_message_version, flow_token, flow_id, flow_cta, flow_action, flow_action_payload, mode].hash
+      [display_text, ttl_minutes, payload].hash
     end
 
     # Builds the object from hash

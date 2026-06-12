@@ -14,19 +14,36 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Required when flow_action is `navigate`.
-  class SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload < ApiModelBase
-    # First screen to show.
-    attr_accessor :screen
+  # Location request action. `type` on the parent must be `location_request_message`. May be omitted entirely; it is defaulted.
+  class SendInboxMessageRequestInteractiveActionOneOf4 < ApiModelBase
+    attr_accessor :name
 
-    # Optional pre-filled data passed to the screen.
-    attr_accessor :data
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'screen' => :'screen',
-        :'data' => :'data'
+        :'name' => :'name'
       }
     end
 
@@ -43,8 +60,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'screen' => :'String',
-        :'data' => :'Hash<String, Object>'
+        :'name' => :'String'
       }
     end
 
@@ -58,26 +74,22 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestInteractiveActionOneOf4` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestInteractiveActionOneOf4`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'screen')
-        self.screen = attributes[:'screen']
-      end
-
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Hash)
-          self.data = value
-        end
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
       end
     end
 
@@ -86,6 +98,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -93,7 +109,20 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @name.nil?
+      name_validator = EnumAttributeValidator.new('String', ["send_location"])
+      return false unless name_validator.valid?(@name)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name)
+      validator = EnumAttributeValidator.new('String', ["send_location"])
+      unless validator.valid?(name)
+        fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
+      end
+      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -101,8 +130,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          screen == o.screen &&
-          data == o.data
+          name == o.name
     end
 
     # @see the `==` method
@@ -114,7 +142,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [screen, data].hash
+      [name].hash
     end
 
     # Builds the object from hash

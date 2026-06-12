@@ -1,4 +1,4 @@
-# Zernio::SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload
+# Zernio::SendInboxMessageRequestInteractiveActionOneOf3ParametersFlowActionPayload
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf2ParametersFlowActionPayload.new(
+instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf3ParametersFlowActionPayload.new(
   screen: null,
   data: null
 )

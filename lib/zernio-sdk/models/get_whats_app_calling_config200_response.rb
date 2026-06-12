@@ -22,6 +22,9 @@ module Zernio
 
     attr_accessor :calling_enabled
 
+    # Public calling deep link (https://wa.me/call/<number>). Tapping it on a phone starts a WhatsApp voice call to this number. Embed it on websites, emails, or QR codes. Null while calling is disabled; not supported by WhatsApp desktop clients.
+    attr_accessor :call_deep_link
+
     # tel:+E164 / sip:... / wss://... destination
     attr_accessor :forward_to
 
@@ -40,6 +43,7 @@ module Zernio
         :'phone_number_doc_id' => :'phoneNumberDocId',
         :'phone_number' => :'phoneNumber',
         :'calling_enabled' => :'callingEnabled',
+        :'call_deep_link' => :'callDeepLink',
         :'forward_to' => :'forwardTo',
         :'recording_enabled' => :'recordingEnabled',
         :'sip_auth_username' => :'sipAuthUsername',
@@ -64,6 +68,7 @@ module Zernio
         :'phone_number_doc_id' => :'String',
         :'phone_number' => :'String',
         :'calling_enabled' => :'Boolean',
+        :'call_deep_link' => :'String',
         :'forward_to' => :'String',
         :'recording_enabled' => :'Boolean',
         :'sip_auth_username' => :'String',
@@ -104,6 +109,10 @@ module Zernio
 
       if attributes.key?(:'calling_enabled')
         self.calling_enabled = attributes[:'calling_enabled']
+      end
+
+      if attributes.key?(:'call_deep_link')
+        self.call_deep_link = attributes[:'call_deep_link']
       end
 
       if attributes.key?(:'forward_to')
@@ -152,6 +161,7 @@ module Zernio
           phone_number_doc_id == o.phone_number_doc_id &&
           phone_number == o.phone_number &&
           calling_enabled == o.calling_enabled &&
+          call_deep_link == o.call_deep_link &&
           forward_to == o.forward_to &&
           recording_enabled == o.recording_enabled &&
           sip_auth_username == o.sip_auth_username &&
@@ -168,7 +178,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_number_doc_id, phone_number, calling_enabled, forward_to, recording_enabled, sip_auth_username, sip_auth_password_configured, call_icon_countries].hash
+      [phone_number_doc_id, phone_number, calling_enabled, call_deep_link, forward_to, recording_enabled, sip_auth_username, sip_auth_password_configured, call_icon_countries].hash
     end
 
     # Builds the object from hash

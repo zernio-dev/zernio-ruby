@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **name** | **String** |  |  |
-| **parameters** | [**SendInboxMessageRequestInteractiveActionOneOf2Parameters**](SendInboxMessageRequestInteractiveActionOneOf2Parameters.md) |  |  |
+| **parameters** | [**SendInboxMessageRequestInteractiveActionOneOf2Parameters**](SendInboxMessageRequestInteractiveActionOneOf2Parameters.md) |  | [optional] |
 
 ## Example
 

@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Flow action. `type` on the parent must be `flow`.
+  # Voice-call action. `type` on the parent must be `voice_call`. Renders WhatsApp's native call button (requires Calling enabled on the sending number).
   class SendInboxMessageRequestInteractiveActionOneOf2 < ApiModelBase
     attr_accessor :name
 
@@ -98,8 +98,6 @@ module Zernio
 
       if attributes.key?(:'parameters')
         self.parameters = attributes[:'parameters']
-      else
-        self.parameters = nil
       end
     end
 
@@ -112,10 +110,6 @@ module Zernio
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @parameters.nil?
-        invalid_properties.push('invalid value for "parameters", parameters cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -124,30 +118,19 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @name.nil?
-      name_validator = EnumAttributeValidator.new('String', ["flow"])
+      name_validator = EnumAttributeValidator.new('String', ["voice_call"])
       return false unless name_validator.valid?(@name)
-      return false if @parameters.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
     def name=(name)
-      validator = EnumAttributeValidator.new('String', ["flow"])
+      validator = EnumAttributeValidator.new('String', ["voice_call"])
       unless validator.valid?(name)
         fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
       end
       @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] parameters Value to be assigned
-    def parameters=(parameters)
-      if parameters.nil?
-        fail ArgumentError, 'parameters cannot be nil'
-      end
-
-      @parameters = parameters
     end
 
     # Checks equality by comparing each attribute.

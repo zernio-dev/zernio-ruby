@@ -27,57 +27,21 @@ describe Zernio::SendInboxMessageRequestInteractiveActionOneOf2Parameters do
     end
   end
 
-  describe 'test attribute "flow_message_version"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["3"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.flow_message_version = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe 'test attribute "flow_token"' do
+  describe 'test attribute "display_text"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 
-  describe 'test attribute "flow_id"' do
+  describe 'test attribute "ttl_minutes"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 
-  describe 'test attribute "flow_cta"' do
+  describe 'test attribute "payload"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "flow_action"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["navigate", "data_exchange"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.flow_action = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe 'test attribute "flow_action_payload"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "mode"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["draft"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.mode = value }.not_to raise_error
-      # end
     end
   end
 

@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **name** | **String** |  |  |
+| **parameters** | [**SendInboxMessageRequestInteractiveActionOneOf3Parameters**](SendInboxMessageRequestInteractiveActionOneOf3Parameters.md) |  |  |
 
 ## Example
 
@@ -12,7 +13,8 @@
 require 'zernio-sdk'
 
 instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf3.new(
-  name: null
+  name: null,
+  parameters: null
 )
 ```
 

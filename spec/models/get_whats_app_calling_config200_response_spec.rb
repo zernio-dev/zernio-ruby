@@ -45,6 +45,12 @@ describe Zernio::GetWhatsAppCallingConfig200Response do
     end
   end
 
+  describe 'test attribute "call_deep_link"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "forward_to"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
