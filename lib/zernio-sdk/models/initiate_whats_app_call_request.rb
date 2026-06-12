@@ -20,6 +20,12 @@ module Zernio
     # Consumer wa_id (E.164
     attr_accessor :to
 
+    # Omit to place a call. Set to send the consent prompt instead.
+    attr_accessor :action
+
+    # Body text shown with the consent prompt (send_call_permission_request only).
+    attr_accessor :body_text
+
     # Per-call destination override. Same accepted shape as the number's stored forwardTo (tel:+E164, sip:..., wss://...). 
     attr_accessor :forward_to
 
@@ -28,11 +34,35 @@ module Zernio
     # Accepted for forward compatibility. Not currently echoed back in webhook payloads (SIP-first flow does not pass through Meta's Graph API where Meta would echo this). 
     attr_accessor :biz_opaque_callback_data
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'account_id' => :'accountId',
         :'to' => :'to',
+        :'action' => :'action',
+        :'body_text' => :'bodyText',
         :'forward_to' => :'forwardTo',
         :'record_override' => :'recordOverride',
         :'biz_opaque_callback_data' => :'biz_opaque_callback_data'
@@ -54,6 +84,8 @@ module Zernio
       {
         :'account_id' => :'String',
         :'to' => :'String',
+        :'action' => :'String',
+        :'body_text' => :'String',
         :'forward_to' => :'String',
         :'record_override' => :'Boolean',
         :'biz_opaque_callback_data' => :'String'
@@ -94,6 +126,14 @@ module Zernio
         self.to = nil
       end
 
+      if attributes.key?(:'action')
+        self.action = attributes[:'action']
+      end
+
+      if attributes.key?(:'body_text')
+        self.body_text = attributes[:'body_text']
+      end
+
       if attributes.key?(:'forward_to')
         self.forward_to = attributes[:'forward_to']
       end
@@ -120,6 +160,10 @@ module Zernio
         invalid_properties.push('invalid value for "to", to cannot be nil.')
       end
 
+      if !@body_text.nil? && @body_text.to_s.length > 1024
+        invalid_properties.push('invalid value for "body_text", the character length must be smaller than or equal to 1024.')
+      end
+
       if !@biz_opaque_callback_data.nil? && @biz_opaque_callback_data.to_s.length > 512
         invalid_properties.push('invalid value for "biz_opaque_callback_data", the character length must be smaller than or equal to 512.')
       end
@@ -133,6 +177,9 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
       return false if @to.nil?
+      action_validator = EnumAttributeValidator.new('String', ["send_call_permission_request"])
+      return false unless action_validator.valid?(@action)
+      return false if !@body_text.nil? && @body_text.to_s.length > 1024
       return false if !@biz_opaque_callback_data.nil? && @biz_opaque_callback_data.to_s.length > 512
       true
     end
@@ -157,6 +204,30 @@ module Zernio
       @to = to
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] action Object to be assigned
+    def action=(action)
+      validator = EnumAttributeValidator.new('String', ["send_call_permission_request"])
+      unless validator.valid?(action)
+        fail ArgumentError, "invalid value for \"action\", must be one of #{validator.allowable_values}."
+      end
+      @action = action
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] body_text Value to be assigned
+    def body_text=(body_text)
+      if body_text.nil?
+        fail ArgumentError, 'body_text cannot be nil'
+      end
+
+      if body_text.to_s.length > 1024
+        fail ArgumentError, 'invalid value for "body_text", the character length must be smaller than or equal to 1024.'
+      end
+
+      @body_text = body_text
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] biz_opaque_callback_data Value to be assigned
     def biz_opaque_callback_data=(biz_opaque_callback_data)
@@ -178,6 +249,8 @@ module Zernio
       self.class == o.class &&
           account_id == o.account_id &&
           to == o.to &&
+          action == o.action &&
+          body_text == o.body_text &&
           forward_to == o.forward_to &&
           record_override == o.record_override &&
           biz_opaque_callback_data == o.biz_opaque_callback_data
@@ -192,7 +265,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, to, forward_to, record_override, biz_opaque_callback_data].hash
+      [account_id, to, action, body_text, forward_to, record_override, biz_opaque_callback_data].hash
     end
 
     # Builds the object from hash
