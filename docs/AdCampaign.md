@@ -22,6 +22,7 @@
 | **platform_ad_account_name** | **String** | Human-readable advertiser/account name from the platform. Refreshed on every sync. | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **profile_id** | **String** |  | [optional] |
+| **advertising_channel_type** | **String** | Google-only. Raw campaign.advertising_channel_type. See AdTreeCampaign.advertisingChannelType. | [optional] |
 | **platform_objective** | **String** | Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC) | [optional] |
 | **optimization_goal** | **String** | Meta optimization goal shared across ad sets, or comma-separated values when ad sets differ (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION) | [optional] |
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) | Campaign-level bid strategy. Ad sets inherit this unless they override. | [optional] |
@@ -55,6 +56,7 @@ instance = Zernio::AdCampaign.new(
   platform_ad_account_name: null,
   account_id: null,
   profile_id: null,
+  advertising_channel_type: null,
   platform_objective: null,
   optimization_goal: null,
   bid_strategy: null,

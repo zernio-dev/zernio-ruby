@@ -63,6 +63,9 @@ module Zernio
 
     attr_accessor :profile_id
 
+    # Google-only. Raw campaign.advertising_channel_type (SEARCH, PERFORMANCE_MAX, VIDEO, DEMAND_GEN, DISPLAY, SHOPPING, ...). Serving surface, distinct from platformObjective (advertiser intent). Null/absent for non-Google platforms.
+    attr_accessor :advertising_channel_type
+
     # Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC)
     attr_accessor :platform_objective
 
@@ -126,6 +129,7 @@ module Zernio
         :'platform_ad_account_name' => :'platformAdAccountName',
         :'account_id' => :'accountId',
         :'profile_id' => :'profileId',
+        :'advertising_channel_type' => :'advertisingChannelType',
         :'platform_objective' => :'platformObjective',
         :'optimization_goal' => :'optimizationGoal',
         :'bid_strategy' => :'bidStrategy',
@@ -168,6 +172,7 @@ module Zernio
         :'platform_ad_account_name' => :'String',
         :'account_id' => :'String',
         :'profile_id' => :'String',
+        :'advertising_channel_type' => :'String',
         :'platform_objective' => :'String',
         :'optimization_goal' => :'String',
         :'bid_strategy' => :'BidStrategy',
@@ -280,6 +285,10 @@ module Zernio
         self.profile_id = attributes[:'profile_id']
       end
 
+      if attributes.key?(:'advertising_channel_type')
+        self.advertising_channel_type = attributes[:'advertising_channel_type']
+      end
+
       if attributes.key?(:'platform_objective')
         self.platform_objective = attributes[:'platform_objective']
       end
@@ -386,6 +395,7 @@ module Zernio
           platform_ad_account_name == o.platform_ad_account_name &&
           account_id == o.account_id &&
           profile_id == o.profile_id &&
+          advertising_channel_type == o.advertising_channel_type &&
           platform_objective == o.platform_objective &&
           optimization_goal == o.optimization_goal &&
           bid_strategy == o.bid_strategy &&
@@ -404,7 +414,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, ad_set_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, platform_ad_account_name, account_id, profile_id, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ad_sets].hash
+      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, ad_set_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, platform_ad_account_name, account_id, profile_id, advertising_channel_type, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ad_sets].hash
     end
 
     # Builds the object from hash
