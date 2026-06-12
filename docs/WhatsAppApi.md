@@ -13,6 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_whats_app_template**](WhatsAppApi.md#create_whats_app_template) | **POST** /v1/whatsapp/templates | Create template |
 | [**delete_whats_app_group_chat**](WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group |
 | [**delete_whats_app_template**](WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template |
+| [**get_whats_app_block_status**](WhatsAppApi.md#get_whats_app_block_status) | **GET** /v1/whatsapp/block-users/status | Check if a user is blocked |
 | [**get_whats_app_blocked_users**](WhatsAppApi.md#get_whats_app_blocked_users) | **GET** /v1/whatsapp/block-users | List blocked users |
 | [**get_whats_app_business_profile**](WhatsAppApi.md#get_whats_app_business_profile) | **GET** /v1/whatsapp/business-profile | Get business profile |
 | [**get_whats_app_dataset**](WhatsAppApi.md#get_whats_app_dataset) | **GET** /v1/whatsapp/dataset | Get CTWA conversions dataset |
@@ -658,6 +659,77 @@ end
 ### Return type
 
 [**UnpublishPost200Response**](UnpublishPost200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_whats_app_block_status
+
+> <GetWhatsAppBlockStatus200Response> get_whats_app_block_status(account_id, user)
+
+Check if a user is blocked
+
+Definitive blocked-state lookup for a single contact. Meta exposes no membership endpoint, so this reads Zernio's blocklist mirror (kept in sync by the block/unblock endpoints; the first call per account backfills the mirror from Meta's full list). Constant-time regardless of blocklist size. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | 
+user = 'user_example' # String | Consumer wa_id or E.164 phone (leading + optional)
+
+begin
+  # Check if a user is blocked
+  result = api_instance.get_whats_app_block_status(account_id, user)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whats_app_block_status: #{e}"
+end
+```
+
+#### Using the get_whats_app_block_status_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppBlockStatus200Response>, Integer, Hash)> get_whats_app_block_status_with_http_info(account_id, user)
+
+```ruby
+begin
+  # Check if a user is blocked
+  data, status_code, headers = api_instance.get_whats_app_block_status_with_http_info(account_id, user)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppBlockStatus200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whats_app_block_status_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **user** | **String** | Consumer wa_id or E.164 phone (leading + optional) |  |
+
+### Return type
+
+[**GetWhatsAppBlockStatus200Response**](GetWhatsAppBlockStatus200Response.md)
 
 ### Authorization
 

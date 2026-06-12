@@ -147,6 +147,19 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for get_whats_app_block_status
+  # Check if a user is blocked
+  # Definitive blocked-state lookup for a single contact. Meta exposes no membership endpoint, so this reads Zernio&#39;s blocklist mirror (kept in sync by the block/unblock endpoints; the first call per account backfills the mirror from Meta&#39;s full list). Constant-time regardless of blocklist size. 
+  # @param account_id 
+  # @param user Consumer wa_id or E.164 phone (leading + optional)
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppBlockStatus200Response]
+  describe 'get_whats_app_block_status test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_whats_app_blocked_users
   # List blocked users
   # List the WhatsApp users blocked on this number. Cursor-paginated; pass &#x60;nextCursor&#x60; back as &#x60;after&#x60; to fetch the next page. The blocklist holds up to 64,000 users. 

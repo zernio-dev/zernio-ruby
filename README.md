@@ -377,6 +377,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**create_whats_app_template**](docs/WhatsAppApi.md#create_whats_app_template) | **POST** /v1/whatsapp/templates | Create template
 *Zernio::WhatsAppApi* | [**delete_whats_app_group_chat**](docs/WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group
 *Zernio::WhatsAppApi* | [**delete_whats_app_template**](docs/WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template
+*Zernio::WhatsAppApi* | [**get_whats_app_block_status**](docs/WhatsAppApi.md#get_whats_app_block_status) | **GET** /v1/whatsapp/block-users/status | Check if a user is blocked
 *Zernio::WhatsAppApi* | [**get_whats_app_blocked_users**](docs/WhatsAppApi.md#get_whats_app_blocked_users) | **GET** /v1/whatsapp/block-users | List blocked users
 *Zernio::WhatsAppApi* | [**get_whats_app_business_profile**](docs/WhatsAppApi.md#get_whats_app_business_profile) | **GET** /v1/whatsapp/business-profile | Get business profile
 *Zernio::WhatsAppApi* | [**get_whats_app_dataset**](docs/WhatsAppApi.md#get_whats_app_dataset) | **GET** /v1/whatsapp/dataset | Get CTWA conversions dataset
@@ -949,6 +950,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWebhookLogs200Response](docs/GetWebhookLogs200Response.md)
  - [Zernio::GetWebhookLogs200ResponsePagination](docs/GetWebhookLogs200ResponsePagination.md)
  - [Zernio::GetWebhookSettings200Response](docs/GetWebhookSettings200Response.md)
+ - [Zernio::GetWhatsAppBlockStatus200Response](docs/GetWhatsAppBlockStatus200Response.md)
  - [Zernio::GetWhatsAppBlockedUsers200Response](docs/GetWhatsAppBlockedUsers200Response.md)
  - [Zernio::GetWhatsAppBlockedUsers200ResponseBlockedUsersInner](docs/GetWhatsAppBlockedUsers200ResponseBlockedUsersInner.md)
  - [Zernio::GetWhatsAppBusinessProfile200Response](docs/GetWhatsAppBusinessProfile200Response.md)

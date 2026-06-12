@@ -663,6 +663,77 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Check if a user is blocked
+    # Definitive blocked-state lookup for a single contact. Meta exposes no membership endpoint, so this reads Zernio's blocklist mirror (kept in sync by the block/unblock endpoints; the first call per account backfills the mirror from Meta's full list). Constant-time regardless of blocklist size. 
+    # @param account_id [String] 
+    # @param user [String] Consumer wa_id or E.164 phone (leading + optional)
+    # @param [Hash] opts the optional parameters
+    # @return [GetWhatsAppBlockStatus200Response]
+    def get_whats_app_block_status(account_id, user, opts = {})
+      data, _status_code, _headers = get_whats_app_block_status_with_http_info(account_id, user, opts)
+      data
+    end
+
+    # Check if a user is blocked
+    # Definitive blocked-state lookup for a single contact. Meta exposes no membership endpoint, so this reads Zernio&#39;s blocklist mirror (kept in sync by the block/unblock endpoints; the first call per account backfills the mirror from Meta&#39;s full list). Constant-time regardless of blocklist size. 
+    # @param account_id [String] 
+    # @param user [String] Consumer wa_id or E.164 phone (leading + optional)
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsAppBlockStatus200Response, Integer, Hash)>] GetWhatsAppBlockStatus200Response data, response status code and response headers
+    def get_whats_app_block_status_with_http_info(account_id, user, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.get_whats_app_block_status ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.get_whats_app_block_status"
+      end
+      # verify the required parameter 'user' is set
+      if @api_client.config.client_side_validation && user.nil?
+        fail ArgumentError, "Missing the required parameter 'user' when calling WhatsAppApi.get_whats_app_block_status"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/block-users/status'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'user'] = user
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppBlockStatus200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.get_whats_app_block_status",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#get_whats_app_block_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List blocked users
     # List the WhatsApp users blocked on this number. Cursor-paginated; pass `nextCursor` back as `after` to fetch the next page. The blocklist holds up to 64,000 users. 
     # @param account_id [String] WhatsApp social account ID

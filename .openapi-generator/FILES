@@ -524,6 +524,7 @@ docs/GetUser200ResponseUser.md
 docs/GetWebhookLogs200Response.md
 docs/GetWebhookLogs200ResponsePagination.md
 docs/GetWebhookSettings200Response.md
+docs/GetWhatsAppBlockStatus200Response.md
 docs/GetWhatsAppBlockedUsers200Response.md
 docs/GetWhatsAppBlockedUsers200ResponseBlockedUsersInner.md
 docs/GetWhatsAppBusinessProfile200Response.md
@@ -1789,6 +1790,7 @@ lib/zernio-sdk/models/get_user200_response_user.rb
 lib/zernio-sdk/models/get_webhook_logs200_response.rb
 lib/zernio-sdk/models/get_webhook_logs200_response_pagination.rb
 lib/zernio-sdk/models/get_webhook_settings200_response.rb
+lib/zernio-sdk/models/get_whats_app_block_status200_response.rb
 lib/zernio-sdk/models/get_whats_app_blocked_users200_response.rb
 lib/zernio-sdk/models/get_whats_app_blocked_users200_response_blocked_users_inner.rb
 lib/zernio-sdk/models/get_whats_app_business_profile200_response.rb
@@ -3021,6 +3023,7 @@ spec/models/get_user200_response_user_spec.rb
 spec/models/get_webhook_logs200_response_pagination_spec.rb
 spec/models/get_webhook_logs200_response_spec.rb
 spec/models/get_webhook_settings200_response_spec.rb
+spec/models/get_whats_app_block_status200_response_spec.rb
 spec/models/get_whats_app_blocked_users200_response_blocked_users_inner_spec.rb
 spec/models/get_whats_app_blocked_users200_response_spec.rb
 spec/models/get_whats_app_business_profile200_response_business_profile_spec.rb
