@@ -579,6 +579,7 @@ docs/GetYouTubeDailyViews403Response.md
 docs/GetYouTubeDailyViews500Response.md
 docs/GetYouTubeDemographics412Response.md
 docs/GetYouTubeDemographics412ResponseScopeStatus.md
+docs/GetYouTubeVideoRetention404Response.md
 docs/GetYoutubePlaylists200Response.md
 docs/GetYoutubePlaylists200ResponsePlaylistsInner.md
 docs/GoogleBusinessPlatformData.md
@@ -1239,6 +1240,8 @@ docs/YouTubeDemographicsResponseDemographicsValueInner.md
 docs/YouTubePlatformData.md
 docs/YouTubeScopeMissingResponse.md
 docs/YouTubeScopeMissingResponseScopeStatus.md
+docs/YouTubeVideoRetentionResponse.md
+docs/YouTubeVideoRetentionResponseRetentionCurveInner.md
 git_push.sh
 lib/zernio-sdk.rb
 lib/zernio-sdk/api/account_groups_api.rb
@@ -1845,6 +1848,7 @@ lib/zernio-sdk/models/get_you_tube_daily_views403_response.rb
 lib/zernio-sdk/models/get_you_tube_daily_views500_response.rb
 lib/zernio-sdk/models/get_you_tube_demographics412_response.rb
 lib/zernio-sdk/models/get_you_tube_demographics412_response_scope_status.rb
+lib/zernio-sdk/models/get_you_tube_video_retention404_response.rb
 lib/zernio-sdk/models/get_youtube_playlists200_response.rb
 lib/zernio-sdk/models/get_youtube_playlists200_response_playlists_inner.rb
 lib/zernio-sdk/models/google_business_platform_data.rb
@@ -2478,6 +2482,8 @@ lib/zernio-sdk/models/you_tube_demographics_response_demographics_value_inner.rb
 lib/zernio-sdk/models/you_tube_platform_data.rb
 lib/zernio-sdk/models/you_tube_scope_missing_response.rb
 lib/zernio-sdk/models/you_tube_scope_missing_response_scope_status.rb
+lib/zernio-sdk/models/you_tube_video_retention_response.rb
+lib/zernio-sdk/models/you_tube_video_retention_response_retention_curve_inner.rb
 lib/zernio-sdk/version.rb
 spec/api/account_groups_api_spec.rb
 spec/api/account_settings_api_spec.rb
@@ -3078,6 +3084,7 @@ spec/models/get_you_tube_daily_views403_response_spec.rb
 spec/models/get_you_tube_daily_views500_response_spec.rb
 spec/models/get_you_tube_demographics412_response_scope_status_spec.rb
 spec/models/get_you_tube_demographics412_response_spec.rb
+spec/models/get_you_tube_video_retention404_response_spec.rb
 spec/models/get_youtube_playlists200_response_playlists_inner_spec.rb
 spec/models/get_youtube_playlists200_response_spec.rb
 spec/models/google_business_platform_data_call_to_action_spec.rb
@@ -3711,5 +3718,7 @@ spec/models/you_tube_demographics_response_spec.rb
 spec/models/you_tube_platform_data_spec.rb
 spec/models/you_tube_scope_missing_response_scope_status_spec.rb
 spec/models/you_tube_scope_missing_response_spec.rb
+spec/models/you_tube_video_retention_response_retention_curve_inner_spec.rb
+spec/models/you_tube_video_retention_response_spec.rb
 spec/spec_helper.rb
 zernio-sdk.gemspec

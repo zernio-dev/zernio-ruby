@@ -14,24 +14,31 @@ require 'date'
 require 'time'
 
 module Zernio
-  class YouTubeDailyViewsResponse < ApiModelBase
+  class YouTubeVideoRetentionResponse < ApiModelBase
     attr_accessor :success
+
+    # The Zernio account ID for the YouTube account
+    attr_accessor :account_id
 
     # The YouTube video ID
     attr_accessor :video_id
+
+    # Video title
+    attr_accessor :title
+
+    # When the video was published on YouTube
+    attr_accessor :published_at
 
     # Video length in seconds (from YouTube contentDetails.duration)
     attr_accessor :duration_seconds
 
     attr_accessor :date_range
 
-    # Sum of views across all days in the range
-    attr_accessor :total_views
+    # Up to 100 points covering the video timeline, aggregated over the date range. Empty for videos with very few views.
+    attr_accessor :retention_curve
 
-    attr_accessor :daily_views
-
-    # When the data was last synced from YouTube
-    attr_accessor :last_synced_at
+    # Present only when the curve is empty, explaining why
+    attr_accessor :note
 
     attr_accessor :scope_status
 
@@ -39,12 +46,14 @@ module Zernio
     def self.attribute_map
       {
         :'success' => :'success',
+        :'account_id' => :'accountId',
         :'video_id' => :'videoId',
+        :'title' => :'title',
+        :'published_at' => :'publishedAt',
         :'duration_seconds' => :'durationSeconds',
         :'date_range' => :'dateRange',
-        :'total_views' => :'totalViews',
-        :'daily_views' => :'dailyViews',
-        :'last_synced_at' => :'lastSyncedAt',
+        :'retention_curve' => :'retentionCurve',
+        :'note' => :'note',
         :'scope_status' => :'scopeStatus'
       }
     end
@@ -63,12 +72,14 @@ module Zernio
     def self.openapi_types
       {
         :'success' => :'Boolean',
+        :'account_id' => :'String',
         :'video_id' => :'String',
+        :'title' => :'String',
+        :'published_at' => :'Time',
         :'duration_seconds' => :'Integer',
         :'date_range' => :'YouTubeDailyViewsResponseDateRange',
-        :'total_views' => :'Integer',
-        :'daily_views' => :'Array<YouTubeDailyViewsResponseDailyViewsInner>',
-        :'last_synced_at' => :'Time',
+        :'retention_curve' => :'Array<YouTubeVideoRetentionResponseRetentionCurveInner>',
+        :'note' => :'String',
         :'scope_status' => :'YouTubeDailyViewsResponseScopeStatus'
       }
     end
@@ -83,14 +94,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::YouTubeDailyViewsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::YouTubeVideoRetentionResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::YouTubeDailyViewsResponse`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::YouTubeVideoRetentionResponse`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -99,8 +110,20 @@ module Zernio
         self.success = attributes[:'success']
       end
 
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
+
       if attributes.key?(:'video_id')
         self.video_id = attributes[:'video_id']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'published_at')
+        self.published_at = attributes[:'published_at']
       end
 
       if attributes.key?(:'duration_seconds')
@@ -111,18 +134,14 @@ module Zernio
         self.date_range = attributes[:'date_range']
       end
 
-      if attributes.key?(:'total_views')
-        self.total_views = attributes[:'total_views']
-      end
-
-      if attributes.key?(:'daily_views')
-        if (value = attributes[:'daily_views']).is_a?(Array)
-          self.daily_views = value
+      if attributes.key?(:'retention_curve')
+        if (value = attributes[:'retention_curve']).is_a?(Array)
+          self.retention_curve = value
         end
       end
 
-      if attributes.key?(:'last_synced_at')
-        self.last_synced_at = attributes[:'last_synced_at']
+      if attributes.key?(:'note')
+        self.note = attributes[:'note']
       end
 
       if attributes.key?(:'scope_status')
@@ -151,12 +170,14 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           success == o.success &&
+          account_id == o.account_id &&
           video_id == o.video_id &&
+          title == o.title &&
+          published_at == o.published_at &&
           duration_seconds == o.duration_seconds &&
           date_range == o.date_range &&
-          total_views == o.total_views &&
-          daily_views == o.daily_views &&
-          last_synced_at == o.last_synced_at &&
+          retention_curve == o.retention_curve &&
+          note == o.note &&
           scope_status == o.scope_status
     end
 
@@ -169,7 +190,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, video_id, duration_seconds, date_range, total_views, daily_views, last_synced_at, scope_status].hash
+      [success, account_id, video_id, title, published_at, duration_seconds, date_range, retention_curve, note, scope_status].hash
     end
 
     # Builds the object from hash

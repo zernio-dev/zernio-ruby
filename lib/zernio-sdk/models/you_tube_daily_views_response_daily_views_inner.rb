@@ -24,6 +24,9 @@ module Zernio
     # Average view duration in seconds
     attr_accessor :average_view_duration
 
+    # Average percentage of the video watched per view. Can exceed 100 on Shorts (looping rewatches), so do not clamp it client-side.
+    attr_accessor :average_view_percentage
+
     attr_accessor :subscribers_gained
 
     attr_accessor :subscribers_lost
@@ -41,6 +44,7 @@ module Zernio
         :'views' => :'views',
         :'estimated_minutes_watched' => :'estimatedMinutesWatched',
         :'average_view_duration' => :'averageViewDuration',
+        :'average_view_percentage' => :'averageViewPercentage',
         :'subscribers_gained' => :'subscribersGained',
         :'subscribers_lost' => :'subscribersLost',
         :'likes' => :'likes',
@@ -66,6 +70,7 @@ module Zernio
         :'views' => :'Integer',
         :'estimated_minutes_watched' => :'Float',
         :'average_view_duration' => :'Float',
+        :'average_view_percentage' => :'Float',
         :'subscribers_gained' => :'Integer',
         :'subscribers_lost' => :'Integer',
         :'likes' => :'Integer',
@@ -110,6 +115,10 @@ module Zernio
 
       if attributes.key?(:'average_view_duration')
         self.average_view_duration = attributes[:'average_view_duration']
+      end
+
+      if attributes.key?(:'average_view_percentage')
+        self.average_view_percentage = attributes[:'average_view_percentage']
       end
 
       if attributes.key?(:'subscribers_gained')
@@ -157,6 +166,7 @@ module Zernio
           views == o.views &&
           estimated_minutes_watched == o.estimated_minutes_watched &&
           average_view_duration == o.average_view_duration &&
+          average_view_percentage == o.average_view_percentage &&
           subscribers_gained == o.subscribers_gained &&
           subscribers_lost == o.subscribers_lost &&
           likes == o.likes &&
@@ -173,7 +183,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, views, estimated_minutes_watched, average_view_duration, subscribers_gained, subscribers_lost, likes, comments, shares].hash
+      [date, views, estimated_minutes_watched, average_view_duration, average_view_percentage, subscribers_gained, subscribers_lost, likes, comments, shares].hash
     end
 
     # Builds the object from hash

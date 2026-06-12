@@ -14,38 +14,34 @@ require 'date'
 require 'time'
 
 module Zernio
-  class YouTubeDailyViewsResponse < ApiModelBase
-    attr_accessor :success
+  class YouTubeVideoRetentionResponseRetentionCurveInner < ApiModelBase
+    # Position in the video as a ratio (0.01-1.0, exclusive end of each interval)
+    attr_accessor :elapsed_video_time_ratio
 
-    # The YouTube video ID
-    attr_accessor :video_id
+    # Absolute share of viewers watching at this point. Can exceed 1 (rewinds/looping, common on Shorts).
+    attr_accessor :audience_watch_ratio
 
-    # Video length in seconds (from YouTube contentDetails.duration)
-    attr_accessor :duration_seconds
+    # Retention vs videos of similar length (0 = worst, 0.5 = median, 1 = best)
+    attr_accessor :relative_retention_performance
 
-    attr_accessor :date_range
+    # Viewers who started watching in this segment
+    attr_accessor :started_watching
 
-    # Sum of views across all days in the range
-    attr_accessor :total_views
+    # Viewers who stopped watching in this segment
+    attr_accessor :stopped_watching
 
-    attr_accessor :daily_views
-
-    # When the data was last synced from YouTube
-    attr_accessor :last_synced_at
-
-    attr_accessor :scope_status
+    # Total views of this segment, including rewatches
+    attr_accessor :total_segment_impressions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'video_id' => :'videoId',
-        :'duration_seconds' => :'durationSeconds',
-        :'date_range' => :'dateRange',
-        :'total_views' => :'totalViews',
-        :'daily_views' => :'dailyViews',
-        :'last_synced_at' => :'lastSyncedAt',
-        :'scope_status' => :'scopeStatus'
+        :'elapsed_video_time_ratio' => :'elapsedVideoTimeRatio',
+        :'audience_watch_ratio' => :'audienceWatchRatio',
+        :'relative_retention_performance' => :'relativeRetentionPerformance',
+        :'started_watching' => :'startedWatching',
+        :'stopped_watching' => :'stoppedWatching',
+        :'total_segment_impressions' => :'totalSegmentImpressions'
       }
     end
 
@@ -62,14 +58,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'video_id' => :'String',
-        :'duration_seconds' => :'Integer',
-        :'date_range' => :'YouTubeDailyViewsResponseDateRange',
-        :'total_views' => :'Integer',
-        :'daily_views' => :'Array<YouTubeDailyViewsResponseDailyViewsInner>',
-        :'last_synced_at' => :'Time',
-        :'scope_status' => :'YouTubeDailyViewsResponseScopeStatus'
+        :'elapsed_video_time_ratio' => :'Float',
+        :'audience_watch_ratio' => :'Float',
+        :'relative_retention_performance' => :'Float',
+        :'started_watching' => :'Integer',
+        :'stopped_watching' => :'Integer',
+        :'total_segment_impressions' => :'Integer'
       }
     end
 
@@ -83,50 +77,40 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::YouTubeDailyViewsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::YouTubeVideoRetentionResponseRetentionCurveInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::YouTubeDailyViewsResponse`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::YouTubeVideoRetentionResponseRetentionCurveInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'elapsed_video_time_ratio')
+        self.elapsed_video_time_ratio = attributes[:'elapsed_video_time_ratio']
       end
 
-      if attributes.key?(:'video_id')
-        self.video_id = attributes[:'video_id']
+      if attributes.key?(:'audience_watch_ratio')
+        self.audience_watch_ratio = attributes[:'audience_watch_ratio']
       end
 
-      if attributes.key?(:'duration_seconds')
-        self.duration_seconds = attributes[:'duration_seconds']
+      if attributes.key?(:'relative_retention_performance')
+        self.relative_retention_performance = attributes[:'relative_retention_performance']
       end
 
-      if attributes.key?(:'date_range')
-        self.date_range = attributes[:'date_range']
+      if attributes.key?(:'started_watching')
+        self.started_watching = attributes[:'started_watching']
       end
 
-      if attributes.key?(:'total_views')
-        self.total_views = attributes[:'total_views']
+      if attributes.key?(:'stopped_watching')
+        self.stopped_watching = attributes[:'stopped_watching']
       end
 
-      if attributes.key?(:'daily_views')
-        if (value = attributes[:'daily_views']).is_a?(Array)
-          self.daily_views = value
-        end
-      end
-
-      if attributes.key?(:'last_synced_at')
-        self.last_synced_at = attributes[:'last_synced_at']
-      end
-
-      if attributes.key?(:'scope_status')
-        self.scope_status = attributes[:'scope_status']
+      if attributes.key?(:'total_segment_impressions')
+        self.total_segment_impressions = attributes[:'total_segment_impressions']
       end
     end
 
@@ -150,14 +134,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          video_id == o.video_id &&
-          duration_seconds == o.duration_seconds &&
-          date_range == o.date_range &&
-          total_views == o.total_views &&
-          daily_views == o.daily_views &&
-          last_synced_at == o.last_synced_at &&
-          scope_status == o.scope_status
+          elapsed_video_time_ratio == o.elapsed_video_time_ratio &&
+          audience_watch_ratio == o.audience_watch_ratio &&
+          relative_retention_performance == o.relative_retention_performance &&
+          started_watching == o.started_watching &&
+          stopped_watching == o.stopped_watching &&
+          total_segment_impressions == o.total_segment_impressions
     end
 
     # @see the `==` method
@@ -169,7 +151,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, video_id, duration_seconds, date_range, total_views, daily_views, last_synced_at, scope_status].hash
+      [elapsed_video_time_ratio, audience_watch_ratio, relative_retention_performance, started_watching, stopped_watching, total_segment_impressions].hash
     end
 
     # Builds the object from hash

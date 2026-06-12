@@ -25,6 +25,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_you_tube_channel_insights**](AnalyticsApi.md#get_you_tube_channel_insights) | **GET** /v1/analytics/youtube/channel-insights | Get YouTube channel-level insights |
 | [**get_you_tube_daily_views**](AnalyticsApi.md#get_you_tube_daily_views) | **GET** /v1/analytics/youtube/daily-views | Get YouTube daily views |
 | [**get_you_tube_demographics**](AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube demographics |
+| [**get_you_tube_video_retention**](AnalyticsApi.md#get_you_tube_video_retention) | **GET** /v1/analytics/youtube/video-retention | Get YouTube video retention curve |
 
 
 ## get_analytics
@@ -1661,6 +1662,83 @@ end
 ### Return type
 
 [**YouTubeDemographicsResponse**](YouTubeDemographicsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_you_tube_video_retention
+
+> <YouTubeVideoRetentionResponse> get_you_tube_video_retention(video_id, account_id, opts)
+
+Get YouTube video retention curve
+
+Returns the audience retention curve for a single YouTube video, plus the video's duration for rendering the curve on a time axis. The curve has up to 100 points (elapsedVideoTimeRatio 0.01-1.0) aggregated over the whole date range; YouTube does not support per-day retention breakdowns.  audienceWatchRatio is the absolute share of viewers watching at that point in the video and can exceed 1 (rewinds and looping, common on Shorts). relativeRetentionPerformance compares against videos of similar length (0 = worst, 0.5 = median, 1 = best). YouTube returns an empty curve for videos with very few views or before analytics processing completes (2-3 day delay).  Requires yt-analytics.readonly scope (re-authorization may be needed). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+video_id = 'video_id_example' # String | The YouTube video ID (e.g., \"dQw4w9WgXcQ\")
+account_id = 'account_id_example' # String | The Zernio account ID for the YouTube account
+opts = {
+  start_date: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to the video's publish date (lifetime curve).
+  end_date: Date.parse('2013-10-20') # Date | End date (YYYY-MM-DD). Defaults to 3 days ago (YouTube data latency).
+}
+
+begin
+  # Get YouTube video retention curve
+  result = api_instance.get_you_tube_video_retention(video_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_you_tube_video_retention: #{e}"
+end
+```
+
+#### Using the get_you_tube_video_retention_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<YouTubeVideoRetentionResponse>, Integer, Hash)> get_you_tube_video_retention_with_http_info(video_id, account_id, opts)
+
+```ruby
+begin
+  # Get YouTube video retention curve
+  data, status_code, headers = api_instance.get_you_tube_video_retention_with_http_info(video_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <YouTubeVideoRetentionResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_you_tube_video_retention_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **video_id** | **String** | The YouTube video ID (e.g., \&quot;dQw4w9WgXcQ\&quot;) |  |
+| **account_id** | **String** | The Zernio account ID for the YouTube account |  |
+| **start_date** | **Date** | Start date (YYYY-MM-DD). Defaults to the video&#39;s publish date (lifetime curve). | [optional] |
+| **end_date** | **Date** | End date (YYYY-MM-DD). Defaults to 3 days ago (YouTube data latency). | [optional] |
+
+### Return type
+
+[**YouTubeVideoRetentionResponse**](YouTubeVideoRetentionResponse.md)
 
 ### Authorization
 

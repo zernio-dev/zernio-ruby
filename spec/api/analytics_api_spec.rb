@@ -362,4 +362,19 @@ describe 'AnalyticsApi' do
     end
   end
 
+  # unit tests for get_you_tube_video_retention
+  # Get YouTube video retention curve
+  # Returns the audience retention curve for a single YouTube video, plus the video&#39;s duration for rendering the curve on a time axis. The curve has up to 100 points (elapsedVideoTimeRatio 0.01-1.0) aggregated over the whole date range; YouTube does not support per-day retention breakdowns.  audienceWatchRatio is the absolute share of viewers watching at that point in the video and can exceed 1 (rewinds and looping, common on Shorts). relativeRetentionPerformance compares against videos of similar length (0 &#x3D; worst, 0.5 &#x3D; median, 1 &#x3D; best). YouTube returns an empty curve for videos with very few views or before analytics processing completes (2-3 day delay).  Requires yt-analytics.readonly scope (re-authorization may be needed). 
+  # @param video_id The YouTube video ID (e.g., \&quot;dQw4w9WgXcQ\&quot;)
+  # @param account_id The Zernio account ID for the YouTube account
+  # @param [Hash] opts the optional parameters
+  # @option opts [Date] :start_date Start date (YYYY-MM-DD). Defaults to the video&#39;s publish date (lifetime curve).
+  # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to 3 days ago (YouTube data latency).
+  # @return [YouTubeVideoRetentionResponse]
+  describe 'get_you_tube_video_retention test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

@@ -14,38 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class YouTubeDailyViewsResponse < ApiModelBase
-    attr_accessor :success
+  class GetYouTubeVideoRetention404Response < ApiModelBase
+    attr_accessor :error
 
-    # The YouTube video ID
-    attr_accessor :video_id
+    attr_accessor :type
 
-    # Video length in seconds (from YouTube contentDetails.duration)
-    attr_accessor :duration_seconds
+    attr_accessor :code
 
-    attr_accessor :date_range
-
-    # Sum of views across all days in the range
-    attr_accessor :total_views
-
-    attr_accessor :daily_views
-
-    # When the data was last synced from YouTube
-    attr_accessor :last_synced_at
-
-    attr_accessor :scope_status
+    attr_accessor :param
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'video_id' => :'videoId',
-        :'duration_seconds' => :'durationSeconds',
-        :'date_range' => :'dateRange',
-        :'total_views' => :'totalViews',
-        :'daily_views' => :'dailyViews',
-        :'last_synced_at' => :'lastSyncedAt',
-        :'scope_status' => :'scopeStatus'
+        :'error' => :'error',
+        :'type' => :'type',
+        :'code' => :'code',
+        :'param' => :'param'
       }
     end
 
@@ -62,14 +46,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'video_id' => :'String',
-        :'duration_seconds' => :'Integer',
-        :'date_range' => :'YouTubeDailyViewsResponseDateRange',
-        :'total_views' => :'Integer',
-        :'daily_views' => :'Array<YouTubeDailyViewsResponseDailyViewsInner>',
-        :'last_synced_at' => :'Time',
-        :'scope_status' => :'YouTubeDailyViewsResponseScopeStatus'
+        :'error' => :'String',
+        :'type' => :'String',
+        :'code' => :'String',
+        :'param' => :'String'
       }
     end
 
@@ -83,50 +63,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::YouTubeDailyViewsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetYouTubeVideoRetention404Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::YouTubeDailyViewsResponse`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetYouTubeVideoRetention404Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
       end
 
-      if attributes.key?(:'video_id')
-        self.video_id = attributes[:'video_id']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'duration_seconds')
-        self.duration_seconds = attributes[:'duration_seconds']
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
 
-      if attributes.key?(:'date_range')
-        self.date_range = attributes[:'date_range']
-      end
-
-      if attributes.key?(:'total_views')
-        self.total_views = attributes[:'total_views']
-      end
-
-      if attributes.key?(:'daily_views')
-        if (value = attributes[:'daily_views']).is_a?(Array)
-          self.daily_views = value
-        end
-      end
-
-      if attributes.key?(:'last_synced_at')
-        self.last_synced_at = attributes[:'last_synced_at']
-      end
-
-      if attributes.key?(:'scope_status')
-        self.scope_status = attributes[:'scope_status']
+      if attributes.key?(:'param')
+        self.param = attributes[:'param']
       end
     end
 
@@ -150,14 +112,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          video_id == o.video_id &&
-          duration_seconds == o.duration_seconds &&
-          date_range == o.date_range &&
-          total_views == o.total_views &&
-          daily_views == o.daily_views &&
-          last_synced_at == o.last_synced_at &&
-          scope_status == o.scope_status
+          error == o.error &&
+          type == o.type &&
+          code == o.code &&
+          param == o.param
     end
 
     # @see the `==` method
@@ -169,7 +127,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, video_id, duration_seconds, date_range, total_views, daily_views, last_synced_at, scope_status].hash
+      [error, type, code, param].hash
     end
 
     # Builds the object from hash

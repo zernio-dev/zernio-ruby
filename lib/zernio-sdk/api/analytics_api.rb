@@ -1683,5 +1683,82 @@ module Zernio
       end
       return data, status_code, headers
     end
+
+    # Get YouTube video retention curve
+    # Returns the audience retention curve for a single YouTube video, plus the video's duration for rendering the curve on a time axis. The curve has up to 100 points (elapsedVideoTimeRatio 0.01-1.0) aggregated over the whole date range; YouTube does not support per-day retention breakdowns.  audienceWatchRatio is the absolute share of viewers watching at that point in the video and can exceed 1 (rewinds and looping, common on Shorts). relativeRetentionPerformance compares against videos of similar length (0 = worst, 0.5 = median, 1 = best). YouTube returns an empty curve for videos with very few views or before analytics processing completes (2-3 day delay).  Requires yt-analytics.readonly scope (re-authorization may be needed). 
+    # @param video_id [String] The YouTube video ID (e.g., \&quot;dQw4w9WgXcQ\&quot;)
+    # @param account_id [String] The Zernio account ID for the YouTube account
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :start_date Start date (YYYY-MM-DD). Defaults to the video&#39;s publish date (lifetime curve).
+    # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to 3 days ago (YouTube data latency).
+    # @return [YouTubeVideoRetentionResponse]
+    def get_you_tube_video_retention(video_id, account_id, opts = {})
+      data, _status_code, _headers = get_you_tube_video_retention_with_http_info(video_id, account_id, opts)
+      data
+    end
+
+    # Get YouTube video retention curve
+    # Returns the audience retention curve for a single YouTube video, plus the video&#39;s duration for rendering the curve on a time axis. The curve has up to 100 points (elapsedVideoTimeRatio 0.01-1.0) aggregated over the whole date range; YouTube does not support per-day retention breakdowns.  audienceWatchRatio is the absolute share of viewers watching at that point in the video and can exceed 1 (rewinds and looping, common on Shorts). relativeRetentionPerformance compares against videos of similar length (0 &#x3D; worst, 0.5 &#x3D; median, 1 &#x3D; best). YouTube returns an empty curve for videos with very few views or before analytics processing completes (2-3 day delay).  Requires yt-analytics.readonly scope (re-authorization may be needed). 
+    # @param video_id [String] The YouTube video ID (e.g., \&quot;dQw4w9WgXcQ\&quot;)
+    # @param account_id [String] The Zernio account ID for the YouTube account
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :start_date Start date (YYYY-MM-DD). Defaults to the video&#39;s publish date (lifetime curve).
+    # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to 3 days ago (YouTube data latency).
+    # @return [Array<(YouTubeVideoRetentionResponse, Integer, Hash)>] YouTubeVideoRetentionResponse data, response status code and response headers
+    def get_you_tube_video_retention_with_http_info(video_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_you_tube_video_retention ...'
+      end
+      # verify the required parameter 'video_id' is set
+      if @api_client.config.client_side_validation && video_id.nil?
+        fail ArgumentError, "Missing the required parameter 'video_id' when calling AnalyticsApi.get_you_tube_video_retention"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_you_tube_video_retention"
+      end
+      # resource path
+      local_var_path = '/v1/analytics/youtube/video-retention'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'videoId'] = video_id
+      query_params[:'accountId'] = account_id
+      query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'YouTubeVideoRetentionResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_you_tube_video_retention",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_you_tube_video_retention\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end

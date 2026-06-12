@@ -568,6 +568,7 @@ require 'zernio-sdk/models/get_you_tube_daily_views403_response'
 require 'zernio-sdk/models/get_you_tube_daily_views500_response'
 require 'zernio-sdk/models/get_you_tube_demographics412_response'
 require 'zernio-sdk/models/get_you_tube_demographics412_response_scope_status'
+require 'zernio-sdk/models/get_you_tube_video_retention404_response'
 require 'zernio-sdk/models/get_youtube_playlists200_response'
 require 'zernio-sdk/models/get_youtube_playlists200_response_playlists_inner'
 require 'zernio-sdk/models/google_business_platform_data'
@@ -1201,6 +1202,8 @@ require 'zernio-sdk/models/you_tube_demographics_response_demographics_value_inn
 require 'zernio-sdk/models/you_tube_platform_data'
 require 'zernio-sdk/models/you_tube_scope_missing_response'
 require 'zernio-sdk/models/you_tube_scope_missing_response_scope_status'
+require 'zernio-sdk/models/you_tube_video_retention_response'
+require 'zernio-sdk/models/you_tube_video_retention_response_retention_curve_inner'
 
 # APIs
 require 'zernio-sdk/api/api_keys_api'
