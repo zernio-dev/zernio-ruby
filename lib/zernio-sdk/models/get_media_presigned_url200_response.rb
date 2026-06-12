@@ -24,30 +24,8 @@ module Zernio
     # Storage key/path of the file
     attr_accessor :key
 
-    # Detected file type based on content type
-    attr_accessor :type
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Seconds until the presigned uploadUrl expires (always 3600)
+    attr_accessor :expires_in
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -55,7 +33,7 @@ module Zernio
         :'upload_url' => :'uploadUrl',
         :'public_url' => :'publicUrl',
         :'key' => :'key',
-        :'type' => :'type'
+        :'expires_in' => :'expiresIn'
       }
     end
 
@@ -75,7 +53,7 @@ module Zernio
         :'upload_url' => :'String',
         :'public_url' => :'String',
         :'key' => :'String',
-        :'type' => :'String'
+        :'expires_in' => :'Integer'
       }
     end
 
@@ -113,8 +91,8 @@ module Zernio
         self.key = attributes[:'key']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'expires_in')
+        self.expires_in = attributes[:'expires_in']
       end
     end
 
@@ -130,19 +108,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["image", "video", "document"])
-      return false unless type_validator.valid?(@type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["image", "video", "document"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -153,7 +119,7 @@ module Zernio
           upload_url == o.upload_url &&
           public_url == o.public_url &&
           key == o.key &&
-          type == o.type
+          expires_in == o.expires_in
     end
 
     # @see the `==` method
@@ -165,7 +131,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [upload_url, public_url, key, type].hash
+      [upload_url, public_url, key, expires_in].hash
     end
 
     # Builds the object from hash
