@@ -298,7 +298,8 @@ opts = {
   account_id: 'account_id_example', # String | Filter by social account ID
   from_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Inclusive start date (ISO 8601). Defaults to 180 days ago.
   to_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Inclusive end date (ISO 8601). Defaults to now.
-  source: 'all' # String | Filter by post origin. \"late\" for posts published via Zernio, \"external\" for posts imported from platforms.
+  source: 'all', # String | Filter by post origin. \"late\" for posts published via Zernio, \"external\" for posts imported from platforms.
+  attribution: 'publish' # String | How each post's engagement is attributed to a day. \"publish\" (default) sums each post's lifetime total on its publish date. \"received\" buckets the per-day increase in engagement by the day it actually arrived (engagement-over-time), so engagement on older posts appears on the day it was gained rather than the post's publish date. 
 }
 
 begin
@@ -338,6 +339,7 @@ end
 | **from_date** | **Time** | Inclusive start date (ISO 8601). Defaults to 180 days ago. | [optional] |
 | **to_date** | **Time** | Inclusive end date (ISO 8601). Defaults to now. | [optional] |
 | **source** | **String** | Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. | [optional][default to &#39;all&#39;] |
+| **attribution** | **String** | How each post&#39;s engagement is attributed to a day. \&quot;publish\&quot; (default) sums each post&#39;s lifetime total on its publish date. \&quot;received\&quot; buckets the per-day increase in engagement by the day it actually arrived (engagement-over-time), so engagement on older posts appears on the day it was gained rather than the post&#39;s publish date.  | [optional][default to &#39;publish&#39;] |
 
 ### Return type
 

@@ -94,6 +94,7 @@ describe 'AnalyticsApi' do
   # @option opts [Time] :from_date Inclusive start date (ISO 8601). Defaults to 180 days ago.
   # @option opts [Time] :to_date Inclusive end date (ISO 8601). Defaults to now.
   # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms.
+  # @option opts [String] :attribution How each post&#39;s engagement is attributed to a day. \&quot;publish\&quot; (default) sums each post&#39;s lifetime total on its publish date. \&quot;received\&quot; buckets the per-day increase in engagement by the day it actually arrived (engagement-over-time), so engagement on older posts appears on the day it was gained rather than the post&#39;s publish date. 
   # @return [GetDailyMetrics200Response]
   describe 'get_daily_metrics test' do
     it 'should work' do

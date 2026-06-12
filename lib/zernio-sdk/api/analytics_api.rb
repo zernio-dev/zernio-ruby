@@ -288,6 +288,7 @@ module Zernio
     # @option opts [Time] :from_date Inclusive start date (ISO 8601). Defaults to 180 days ago.
     # @option opts [Time] :to_date Inclusive end date (ISO 8601). Defaults to now.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
+    # @option opts [String] :attribution How each post&#39;s engagement is attributed to a day. \&quot;publish\&quot; (default) sums each post&#39;s lifetime total on its publish date. \&quot;received\&quot; buckets the per-day increase in engagement by the day it actually arrived (engagement-over-time), so engagement on older posts appears on the day it was gained rather than the post&#39;s publish date.  (default to 'publish')
     # @return [GetDailyMetrics200Response]
     def get_daily_metrics(opts = {})
       data, _status_code, _headers = get_daily_metrics_with_http_info(opts)
@@ -303,6 +304,7 @@ module Zernio
     # @option opts [Time] :from_date Inclusive start date (ISO 8601). Defaults to 180 days ago.
     # @option opts [Time] :to_date Inclusive end date (ISO 8601). Defaults to now.
     # @option opts [String] :source Filter by post origin. \&quot;late\&quot; for posts published via Zernio, \&quot;external\&quot; for posts imported from platforms. (default to 'all')
+    # @option opts [String] :attribution How each post&#39;s engagement is attributed to a day. \&quot;publish\&quot; (default) sums each post&#39;s lifetime total on its publish date. \&quot;received\&quot; buckets the per-day increase in engagement by the day it actually arrived (engagement-over-time), so engagement on older posts appears on the day it was gained rather than the post&#39;s publish date.  (default to 'publish')
     # @return [Array<(GetDailyMetrics200Response, Integer, Hash)>] GetDailyMetrics200Response data, response status code and response headers
     def get_daily_metrics_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -311,6 +313,10 @@ module Zernio
       allowable_values = ["all", "late", "external"]
       if @api_client.config.client_side_validation && opts[:'source'] && !allowable_values.include?(opts[:'source'])
         fail ArgumentError, "invalid value for \"source\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["publish", "received"]
+      if @api_client.config.client_side_validation && opts[:'attribution'] && !allowable_values.include?(opts[:'attribution'])
+        fail ArgumentError, "invalid value for \"attribution\", must be one of #{allowable_values}"
       end
       # resource path
       local_var_path = '/v1/analytics/daily-metrics'
@@ -323,6 +329,7 @@ module Zernio
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
       query_params[:'source'] = opts[:'source'] if !opts[:'source'].nil?
+      query_params[:'attribution'] = opts[:'attribution'] if !opts[:'attribution'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
