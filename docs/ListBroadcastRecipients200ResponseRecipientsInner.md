@@ -13,6 +13,7 @@
 | **message_id** | **String** |  | [optional] |
 | **error** | **String** |  | [optional] |
 | **error_code** | **Integer** | Meta WhatsApp error code (e.g. 131049 for antispam, 131021 for invalid phone, 131026 for re-engagement required). Only populated for status&#x3D;failed. | [optional] |
+| **error_explanation** | **String** | Plain-language translation of errorCode (e.g. for 131026, that the recipient has likely opted out of marketing messages). Null for unmapped codes; fall back to error. | [optional] |
 | **sent_at** | **Time** |  | [optional] |
 | **delivered_at** | **Time** |  | [optional] |
 | **read_at** | **Time** |  | [optional] |
@@ -32,6 +33,7 @@ instance = Zernio::ListBroadcastRecipients200ResponseRecipientsInner.new(
   message_id: null,
   error: null,
   error_code: null,
+  error_explanation: null,
   sent_at: null,
   delivered_at: null,
   read_at: null

@@ -34,6 +34,9 @@ module Zernio
     # Meta WhatsApp error code (e.g. 131049 for antispam, 131021 for invalid phone, 131026 for re-engagement required). Only populated for status=failed.
     attr_accessor :error_code
 
+    # Plain-language translation of errorCode (e.g. for 131026, that the recipient has likely opted out of marketing messages). Null for unmapped codes; fall back to error.
+    attr_accessor :error_explanation
+
     attr_accessor :sent_at
 
     attr_accessor :delivered_at
@@ -74,6 +77,7 @@ module Zernio
         :'message_id' => :'messageId',
         :'error' => :'error',
         :'error_code' => :'errorCode',
+        :'error_explanation' => :'errorExplanation',
         :'sent_at' => :'sentAt',
         :'delivered_at' => :'deliveredAt',
         :'read_at' => :'readAt'
@@ -102,6 +106,7 @@ module Zernio
         :'message_id' => :'String',
         :'error' => :'String',
         :'error_code' => :'Integer',
+        :'error_explanation' => :'String',
         :'sent_at' => :'Time',
         :'delivered_at' => :'Time',
         :'read_at' => :'Time'
@@ -166,6 +171,10 @@ module Zernio
         self.error_code = attributes[:'error_code']
       end
 
+      if attributes.key?(:'error_explanation')
+        self.error_explanation = attributes[:'error_explanation']
+      end
+
       if attributes.key?(:'sent_at')
         self.sent_at = attributes[:'sent_at']
       end
@@ -220,6 +229,7 @@ module Zernio
           message_id == o.message_id &&
           error == o.error &&
           error_code == o.error_code &&
+          error_explanation == o.error_explanation &&
           sent_at == o.sent_at &&
           delivered_at == o.delivered_at &&
           read_at == o.read_at
@@ -234,7 +244,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, contact_id, channel_id, platform_identifier, contact_name, status, message_id, error, error_code, sent_at, delivered_at, read_at].hash
+      [id, contact_id, channel_id, platform_identifier, contact_name, status, message_id, error, error_code, error_explanation, sent_at, delivered_at, read_at].hash
     end
 
     # Builds the object from hash

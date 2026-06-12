@@ -22,12 +22,16 @@ module Zernio
 
     attr_accessor :message
 
+    # Plain-language translation of `code` (e.g. for 131026, that the recipient has likely opted out of marketing messages while utility templates are unaffected). Null for unmapped codes; fall back to title/message. 
+    attr_accessor :explanation
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'code' => :'code',
         :'title' => :'title',
-        :'message' => :'message'
+        :'message' => :'message',
+        :'explanation' => :'explanation'
       }
     end
 
@@ -46,7 +50,8 @@ module Zernio
       {
         :'code' => :'Integer',
         :'title' => :'String',
-        :'message' => :'String'
+        :'message' => :'String',
+        :'explanation' => :'String'
       }
     end
 
@@ -83,6 +88,10 @@ module Zernio
       if attributes.key?(:'message')
         self.message = attributes[:'message']
       end
+
+      if attributes.key?(:'explanation')
+        self.explanation = attributes[:'explanation']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -107,7 +116,8 @@ module Zernio
       self.class == o.class &&
           code == o.code &&
           title == o.title &&
-          message == o.message
+          message == o.message &&
+          explanation == o.explanation
     end
 
     # @see the `==` method
@@ -119,7 +129,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, title, message].hash
+      [code, title, message, explanation].hash
     end
 
     # Builds the object from hash
