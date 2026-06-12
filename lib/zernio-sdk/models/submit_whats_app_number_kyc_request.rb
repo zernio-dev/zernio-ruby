@@ -25,6 +25,9 @@ module Zernio
     # Reuse a prior approved verification for this country (skips document/field collection; places the order immediately).
     attr_accessor :reuse
 
+    # Which approved verification to reuse when several exist: the phone number it was originally approved for (GET reusable.options[].fromPhoneNumber). Omitted = newest. No match = 409.
+    attr_accessor :reuse_from
+
     # End user's legal first name. Required when the country has an action/ID-verification (Onfido) requirement.
     attr_accessor :end_user_first_name
 
@@ -46,6 +49,7 @@ module Zernio
         :'country' => :'country',
         :'submission_id' => :'submissionId',
         :'reuse' => :'reuse',
+        :'reuse_from' => :'reuseFrom',
         :'end_user_first_name' => :'endUserFirstName',
         :'end_user_last_name' => :'endUserLastName',
         :'values' => :'values',
@@ -71,6 +75,7 @@ module Zernio
         :'country' => :'String',
         :'submission_id' => :'String',
         :'reuse' => :'Boolean',
+        :'reuse_from' => :'String',
         :'end_user_first_name' => :'String',
         :'end_user_last_name' => :'String',
         :'values' => :'Hash<String, String>',
@@ -119,6 +124,10 @@ module Zernio
 
       if attributes.key?(:'reuse')
         self.reuse = attributes[:'reuse']
+      end
+
+      if attributes.key?(:'reuse_from')
+        self.reuse_from = attributes[:'reuse_from']
       end
 
       if attributes.key?(:'end_user_first_name')
@@ -200,6 +209,7 @@ module Zernio
           country == o.country &&
           submission_id == o.submission_id &&
           reuse == o.reuse &&
+          reuse_from == o.reuse_from &&
           end_user_first_name == o.end_user_first_name &&
           end_user_last_name == o.end_user_last_name &&
           values == o.values &&
@@ -216,7 +226,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, submission_id, reuse, end_user_first_name, end_user_last_name, values, documents, address].hash
+      [profile_id, country, submission_id, reuse, reuse_from, end_user_first_name, end_user_last_name, values, documents, address].hash
     end
 
     # Builds the object from hash

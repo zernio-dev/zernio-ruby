@@ -14,25 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Present when this account already has an approved verification for the country that can be reused (skip the form). `fromPhoneNumber`/`details` mirror the newest option; `options` lists ALL approved verifications (agencies hold one per end client) — pass the chosen option's `fromPhoneNumber` as `reuseFrom` on POST.
-  class GetWhatsAppNumberKycForm200ResponseReusable < ApiModelBase
-    attr_accessor :available
-
+  class GetWhatsAppNumberKycForm200ResponseReusableOptionsInner < ApiModelBase
     attr_accessor :from_phone_number
 
-    # Human-readable summary of the verification on file (field labels + values, plus the address as one line). Best-effort — may be empty if the provider lookup fails.
     attr_accessor :details
-
-    # One entry per distinct approved verification, newest first.
-    attr_accessor :options
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'available' => :'available',
         :'from_phone_number' => :'fromPhoneNumber',
-        :'details' => :'details',
-        :'options' => :'options'
+        :'details' => :'details'
       }
     end
 
@@ -49,10 +40,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'available' => :'Boolean',
         :'from_phone_number' => :'String',
-        :'details' => :'Array<GetWhatsAppNumberKycForm200ResponseReusableDetailsInner>',
-        :'options' => :'Array<GetWhatsAppNumberKycForm200ResponseReusableOptionsInner>'
+        :'details' => :'Array<GetWhatsAppNumberKycForm200ResponseReusableDetailsInner>'
       }
     end
 
@@ -66,21 +55,17 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetWhatsAppNumberKycForm200ResponseReusable` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetWhatsAppNumberKycForm200ResponseReusableOptionsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetWhatsAppNumberKycForm200ResponseReusable`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetWhatsAppNumberKycForm200ResponseReusableOptionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'available')
-        self.available = attributes[:'available']
-      end
 
       if attributes.key?(:'from_phone_number')
         self.from_phone_number = attributes[:'from_phone_number']
@@ -89,12 +74,6 @@ module Zernio
       if attributes.key?(:'details')
         if (value = attributes[:'details']).is_a?(Array)
           self.details = value
-        end
-      end
-
-      if attributes.key?(:'options')
-        if (value = attributes[:'options']).is_a?(Array)
-          self.options = value
         end
       end
     end
@@ -119,10 +98,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          available == o.available &&
           from_phone_number == o.from_phone_number &&
-          details == o.details &&
-          options == o.options
+          details == o.details
     end
 
     # @see the `==` method
@@ -134,7 +111,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [available, from_phone_number, details, options].hash
+      [from_phone_number, details].hash
     end
 
     # Builds the object from hash

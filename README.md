@@ -986,6 +986,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppNumberKycForm200ResponseFieldsInner](docs/GetWhatsAppNumberKycForm200ResponseFieldsInner.md)
  - [Zernio::GetWhatsAppNumberKycForm200ResponseReusable](docs/GetWhatsAppNumberKycForm200ResponseReusable.md)
  - [Zernio::GetWhatsAppNumberKycForm200ResponseReusableDetailsInner](docs/GetWhatsAppNumberKycForm200ResponseReusableDetailsInner.md)
+ - [Zernio::GetWhatsAppNumberKycForm200ResponseReusableOptionsInner](docs/GetWhatsAppNumberKycForm200ResponseReusableOptionsInner.md)
  - [Zernio::GetWhatsAppNumberRemediation200Response](docs/GetWhatsAppNumberRemediation200Response.md)
  - [Zernio::GetWhatsAppPhoneNumber200Response](docs/GetWhatsAppPhoneNumber200Response.md)
  - [Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber](docs/GetWhatsAppPhoneNumber200ResponsePhoneNumber.md)
