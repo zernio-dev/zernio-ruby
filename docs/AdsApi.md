@@ -8,7 +8,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**adjust_conversions**](AdsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust already-uploaded conversions (Google only) |
 | [**archive_lead_form**](AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a Lead Gen form |
 | [**boost_post**](AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
-| [**create_conversion_destination**](AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn) |
+| [**create_conversion_destination**](AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn, Google Ads) |
 | [**create_ctwa_ad**](AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad(s) |
 | [**create_lead_form**](AdsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a Lead Gen (Instant) form |
 | [**create_standalone_ad**](AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad |
@@ -331,9 +331,9 @@ end
 
 > <CreateConversionDestination201Response> create_conversion_destination(account_id, create_conversion_destination_request)
 
-Create a conversion destination (LinkedIn)
+Create a conversion destination (LinkedIn, Google Ads)
 
-Create a new conversion rule on the platform. LinkedIn-only today; other platforms manage destinations in their own UIs and return 405.  For LinkedIn, the rule is created with `conversionMethod=CONVERSIONS_API` and (by default) auto-associated with all of the ad account's campaigns via `autoAssociationType=ALL_CAMPAIGNS`. Pass `autoAssociationType: NONE` to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for `SUBMIT_APPLICATION`, `PURCHASE`, `ADD_TO_CART`, `QUALIFIED_LEAD`, and `LEAD` rule types; the API rejects other combinations locally. 
+Create a new conversion destination on the platform. Supported for LinkedIn (conversion rule) and Google Ads (conversion action). Meta manages destinations in its own UI and returns 405.  **WARNING: creation is NOT idempotent.** A retry creates a second destination. Deduplicate before retrying.  **LinkedIn:** the rule is created with `conversionMethod=CONVERSIONS_API` and (by default) auto-associated with all of the ad account's campaigns via `autoAssociationType=ALL_CAMPAIGNS`. Pass `autoAssociationType: NONE` to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for `SUBMIT_APPLICATION`, `PURCHASE`, `ADD_TO_CART`, `QUALIFIED_LEAD`, and `LEAD` rule types; the API rejects other combinations locally.  **Google Ads:** the conversion action is created with `type=UPLOAD_CLICKS` (required for API-uploaded offline conversions, immutable after creation). The `type` field carries the Google `ConversionActionCategory` enum value, e.g. `PURCHASE`, `SUBSCRIBE_PAID`, `SIGNUP`, `IMPORTED_LEAD`, `BOOK_APPOINTMENT`. Unified standard event names (e.g. `Purchase`, `Subscribe`, `CompleteRegistration`, `Lead`, `Schedule`) are resolved to their Google category equivalents automatically. The action defaults to secondary (non-primary) to avoid immediately steering Smart Bidding; pass `primaryForGoal: true` to opt in. 
 
 ### Examples
 
@@ -347,11 +347,11 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdsApi.new
-account_id = 'account_id_example' # String | SocialAccount ID (linkedinads).
+account_id = 'account_id_example' # String | SocialAccount ID (linkedinads or googleads).
 create_conversion_destination_request = Zernio::CreateConversionDestinationRequest.new({ad_account_id: 'ad_account_id_example', name: 'name_example', type: 'type_example'}) # CreateConversionDestinationRequest | 
 
 begin
-  # Create a conversion destination (LinkedIn)
+  # Create a conversion destination (LinkedIn, Google Ads)
   result = api_instance.create_conversion_destination(account_id, create_conversion_destination_request)
   p result
 rescue Zernio::ApiError => e
@@ -367,7 +367,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create a conversion destination (LinkedIn)
+  # Create a conversion destination (LinkedIn, Google Ads)
   data, status_code, headers = api_instance.create_conversion_destination_with_http_info(account_id, create_conversion_destination_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -381,7 +381,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | SocialAccount ID (linkedinads). |  |
+| **account_id** | **String** | SocialAccount ID (linkedinads or googleads). |  |
 | **create_conversion_destination_request** | [**CreateConversionDestinationRequest**](CreateConversionDestinationRequest.md) |  |  |
 
 ### Return type
@@ -1186,7 +1186,7 @@ end
 
 ## get_conversion_destination
 
-> <CreateConversionDestination201Response> get_conversion_destination(account_id, destination_id, ad_account_id)
+> <GetConversionDestination200Response> get_conversion_destination(account_id, destination_id, ad_account_id)
 
 Fetch a single conversion destination
 
@@ -1221,7 +1221,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateConversionDestination201Response>, Integer, Hash)> get_conversion_destination_with_http_info(account_id, destination_id, ad_account_id)
+> <Array(<GetConversionDestination200Response>, Integer, Hash)> get_conversion_destination_with_http_info(account_id, destination_id, ad_account_id)
 
 ```ruby
 begin
@@ -1229,7 +1229,7 @@ begin
   data, status_code, headers = api_instance.get_conversion_destination_with_http_info(account_id, destination_id, ad_account_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateConversionDestination201Response>
+  p data # => <GetConversionDestination200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->get_conversion_destination_with_http_info: #{e}"
 end
@@ -1245,7 +1245,7 @@ end
 
 ### Return type
 
-[**CreateConversionDestination201Response**](CreateConversionDestination201Response.md)
+[**GetConversionDestination200Response**](GetConversionDestination200Response.md)
 
 ### Authorization
 
@@ -2817,7 +2817,7 @@ nil (empty response body)
 
 ## update_conversion_destination
 
-> <CreateConversionDestination201Response> update_conversion_destination(account_id, destination_id, update_conversion_destination_request)
+> <GetConversionDestination200Response> update_conversion_destination(account_id, destination_id, update_conversion_destination_request)
 
 Update a conversion destination
 
@@ -2852,7 +2852,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateConversionDestination201Response>, Integer, Hash)> update_conversion_destination_with_http_info(account_id, destination_id, update_conversion_destination_request)
+> <Array(<GetConversionDestination200Response>, Integer, Hash)> update_conversion_destination_with_http_info(account_id, destination_id, update_conversion_destination_request)
 
 ```ruby
 begin
@@ -2860,7 +2860,7 @@ begin
   data, status_code, headers = api_instance.update_conversion_destination_with_http_info(account_id, destination_id, update_conversion_destination_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateConversionDestination201Response>
+  p data # => <GetConversionDestination200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->update_conversion_destination_with_http_info: #{e}"
 end
@@ -2876,7 +2876,7 @@ end
 
 ### Return type
 
-[**CreateConversionDestination201Response**](CreateConversionDestination201Response.md)
+[**GetConversionDestination200Response**](GetConversionDestination200Response.md)
 
 ### Authorization
 

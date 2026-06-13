@@ -109,7 +109,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**adjust_conversions**](docs/AdsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust already-uploaded conversions (Google only)
 *Zernio::AdsApi* | [**archive_lead_form**](docs/AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a Lead Gen form
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
-*Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn)
+*Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination (LinkedIn, Google Ads)
 *Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad(s)
 *Zernio::AdsApi* | [**create_lead_form**](docs/AdsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a Lead Gen (Instant) form
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
@@ -790,6 +790,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetContactChannels200ResponseChannelsInner](docs/GetContactChannels200ResponseChannelsInner.md)
  - [Zernio::GetContentDecay200Response](docs/GetContentDecay200Response.md)
  - [Zernio::GetContentDecay200ResponseBucketsInner](docs/GetContentDecay200ResponseBucketsInner.md)
+ - [Zernio::GetConversionDestination200Response](docs/GetConversionDestination200Response.md)
  - [Zernio::GetConversionMetrics200Response](docs/GetConversionMetrics200Response.md)
  - [Zernio::GetConversionMetrics200ResponseRowsInner](docs/GetConversionMetrics200ResponseRowsInner.md)
  - [Zernio::GetConversionMetrics200ResponseRowsInnerMetricsValue](docs/GetConversionMetrics200ResponseRowsInnerMetricsValue.md)

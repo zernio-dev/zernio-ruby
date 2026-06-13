@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Static conversion value. Used when `valueType=FIXED`. The currency should match the ad account's currency. 
+  # LinkedIn only. Static conversion value. Used when `valueType=FIXED`. The currency should match the ad account's currency. 
   class CreateConversionDestinationRequestValue < ApiModelBase
     # ISO 4217 (e.g. \"USD\").
     attr_accessor :currency_code

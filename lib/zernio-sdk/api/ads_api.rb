@@ -305,9 +305,9 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Create a conversion destination (LinkedIn)
-    # Create a new conversion rule on the platform. LinkedIn-only today; other platforms manage destinations in their own UIs and return 405.  For LinkedIn, the rule is created with `conversionMethod=CONVERSIONS_API` and (by default) auto-associated with all of the ad account's campaigns via `autoAssociationType=ALL_CAMPAIGNS`. Pass `autoAssociationType: NONE` to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for `SUBMIT_APPLICATION`, `PURCHASE`, `ADD_TO_CART`, `QUALIFIED_LEAD`, and `LEAD` rule types; the API rejects other combinations locally. 
-    # @param account_id [String] SocialAccount ID (linkedinads).
+    # Create a conversion destination (LinkedIn, Google Ads)
+    # Create a new conversion destination on the platform. Supported for LinkedIn (conversion rule) and Google Ads (conversion action). Meta manages destinations in its own UI and returns 405.  **WARNING: creation is NOT idempotent.** A retry creates a second destination. Deduplicate before retrying.  **LinkedIn:** the rule is created with `conversionMethod=CONVERSIONS_API` and (by default) auto-associated with all of the ad account's campaigns via `autoAssociationType=ALL_CAMPAIGNS`. Pass `autoAssociationType: NONE` to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for `SUBMIT_APPLICATION`, `PURCHASE`, `ADD_TO_CART`, `QUALIFIED_LEAD`, and `LEAD` rule types; the API rejects other combinations locally.  **Google Ads:** the conversion action is created with `type=UPLOAD_CLICKS` (required for API-uploaded offline conversions, immutable after creation). The `type` field carries the Google `ConversionActionCategory` enum value, e.g. `PURCHASE`, `SUBSCRIBE_PAID`, `SIGNUP`, `IMPORTED_LEAD`, `BOOK_APPOINTMENT`. Unified standard event names (e.g. `Purchase`, `Subscribe`, `CompleteRegistration`, `Lead`, `Schedule`) are resolved to their Google category equivalents automatically. The action defaults to secondary (non-primary) to avoid immediately steering Smart Bidding; pass `primaryForGoal: true` to opt in. 
+    # @param account_id [String] SocialAccount ID (linkedinads or googleads).
     # @param create_conversion_destination_request [CreateConversionDestinationRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateConversionDestination201Response]
@@ -316,9 +316,9 @@ module Zernio
       data
     end
 
-    # Create a conversion destination (LinkedIn)
-    # Create a new conversion rule on the platform. LinkedIn-only today; other platforms manage destinations in their own UIs and return 405.  For LinkedIn, the rule is created with &#x60;conversionMethod&#x3D;CONVERSIONS_API&#x60; and (by default) auto-associated with all of the ad account&#39;s campaigns via &#x60;autoAssociationType&#x3D;ALL_CAMPAIGNS&#x60;. Pass &#x60;autoAssociationType: NONE&#x60; to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for &#x60;SUBMIT_APPLICATION&#x60;, &#x60;PURCHASE&#x60;, &#x60;ADD_TO_CART&#x60;, &#x60;QUALIFIED_LEAD&#x60;, and &#x60;LEAD&#x60; rule types; the API rejects other combinations locally. 
-    # @param account_id [String] SocialAccount ID (linkedinads).
+    # Create a conversion destination (LinkedIn, Google Ads)
+    # Create a new conversion destination on the platform. Supported for LinkedIn (conversion rule) and Google Ads (conversion action). Meta manages destinations in its own UI and returns 405.  **WARNING: creation is NOT idempotent.** A retry creates a second destination. Deduplicate before retrying.  **LinkedIn:** the rule is created with &#x60;conversionMethod&#x3D;CONVERSIONS_API&#x60; and (by default) auto-associated with all of the ad account&#39;s campaigns via &#x60;autoAssociationType&#x3D;ALL_CAMPAIGNS&#x60;. Pass &#x60;autoAssociationType: NONE&#x60; to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for &#x60;SUBMIT_APPLICATION&#x60;, &#x60;PURCHASE&#x60;, &#x60;ADD_TO_CART&#x60;, &#x60;QUALIFIED_LEAD&#x60;, and &#x60;LEAD&#x60; rule types; the API rejects other combinations locally.  **Google Ads:** the conversion action is created with &#x60;type&#x3D;UPLOAD_CLICKS&#x60; (required for API-uploaded offline conversions, immutable after creation). The &#x60;type&#x60; field carries the Google &#x60;ConversionActionCategory&#x60; enum value, e.g. &#x60;PURCHASE&#x60;, &#x60;SUBSCRIBE_PAID&#x60;, &#x60;SIGNUP&#x60;, &#x60;IMPORTED_LEAD&#x60;, &#x60;BOOK_APPOINTMENT&#x60;. Unified standard event names (e.g. &#x60;Purchase&#x60;, &#x60;Subscribe&#x60;, &#x60;CompleteRegistration&#x60;, &#x60;Lead&#x60;, &#x60;Schedule&#x60;) are resolved to their Google category equivalents automatically. The action defaults to secondary (non-primary) to avoid immediately steering Smart Bidding; pass &#x60;primaryForGoal: true&#x60; to opt in. 
+    # @param account_id [String] SocialAccount ID (linkedinads or googleads).
     # @param create_conversion_destination_request [CreateConversionDestinationRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateConversionDestination201Response, Integer, Hash)>] CreateConversionDestination201Response data, response status code and response headers
@@ -1155,7 +1155,7 @@ module Zernio
     # @param destination_id [String] 
     # @param ad_account_id [String] Numeric ID or full &#x60;urn:li:sponsoredAccount:{id}&#x60; URN.
     # @param [Hash] opts the optional parameters
-    # @return [CreateConversionDestination201Response]
+    # @return [GetConversionDestination200Response]
     def get_conversion_destination(account_id, destination_id, ad_account_id, opts = {})
       data, _status_code, _headers = get_conversion_destination_with_http_info(account_id, destination_id, ad_account_id, opts)
       data
@@ -1167,7 +1167,7 @@ module Zernio
     # @param destination_id [String] 
     # @param ad_account_id [String] Numeric ID or full &#x60;urn:li:sponsoredAccount:{id}&#x60; URN.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateConversionDestination201Response, Integer, Hash)>] CreateConversionDestination201Response data, response status code and response headers
+    # @return [Array<(GetConversionDestination200Response, Integer, Hash)>] GetConversionDestination200Response data, response status code and response headers
     def get_conversion_destination_with_http_info(account_id, destination_id, ad_account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdsApi.get_conversion_destination ...'
@@ -1203,7 +1203,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CreateConversionDestination201Response'
+      return_type = opts[:debug_return_type] || 'GetConversionDestination200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -2879,7 +2879,7 @@ module Zernio
     # @param destination_id [String] 
     # @param update_conversion_destination_request [UpdateConversionDestinationRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [CreateConversionDestination201Response]
+    # @return [GetConversionDestination200Response]
     def update_conversion_destination(account_id, destination_id, update_conversion_destination_request, opts = {})
       data, _status_code, _headers = update_conversion_destination_with_http_info(account_id, destination_id, update_conversion_destination_request, opts)
       data
@@ -2891,7 +2891,7 @@ module Zernio
     # @param destination_id [String] 
     # @param update_conversion_destination_request [UpdateConversionDestinationRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateConversionDestination201Response, Integer, Hash)>] CreateConversionDestination201Response data, response status code and response headers
+    # @return [Array<(GetConversionDestination200Response, Integer, Hash)>] GetConversionDestination200Response data, response status code and response headers
     def update_conversion_destination_with_http_info(account_id, destination_id, update_conversion_destination_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdsApi.update_conversion_destination ...'
@@ -2931,7 +2931,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_conversion_destination_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CreateConversionDestination201Response'
+      return_type = opts[:debug_return_type] || 'GetConversionDestination200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

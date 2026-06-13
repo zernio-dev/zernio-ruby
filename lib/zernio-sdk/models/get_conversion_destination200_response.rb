@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateConversionDestination201Response < ApiModelBase
+  class GetConversionDestination200Response < ApiModelBase
     attr_accessor :platform
 
     attr_accessor :destination
@@ -77,14 +77,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateConversionDestination201Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetConversionDestination200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateConversionDestination201Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetConversionDestination200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -110,7 +110,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      platform_validator = EnumAttributeValidator.new('String', ["linkedinads", "googleads"])
+      platform_validator = EnumAttributeValidator.new('String', ["linkedinads"])
       return false unless platform_validator.valid?(@platform)
       true
     end
@@ -118,7 +118,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["linkedinads", "googleads"])
+      validator = EnumAttributeValidator.new('String', ["linkedinads"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end

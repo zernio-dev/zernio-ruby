@@ -15,29 +15,36 @@ require 'time'
 
 module Zernio
   class CreateConversionDestinationRequest < ApiModelBase
-    # Sponsored ad account ID. Numeric (e.g. \"5123456\") or full `urn:li:sponsoredAccount:{id}` URN. 
+    # Ad account ID. For LinkedIn: numeric (e.g. \"5123456\") or full `urn:li:sponsoredAccount:{id}` URN. For Google: numeric customer ID (e.g. \"1234567890\") or `customers/{id}` form. 
     attr_accessor :ad_account_id
 
     attr_accessor :name
 
-    # Either a unified standard event name (e.g. \"Purchase\", \"Lead\", \"AddToCart\") or a LinkedIn rule type enum value (e.g. \"PURCHASE\", \"QUALIFIED_LEAD\"). The API maps standard names to LinkedIn enum values automatically. 
+    # Conversion type. For LinkedIn: a unified standard event name (e.g. \"Purchase\", \"Lead\", \"AddToCart\") or a LinkedIn rule type enum (e.g. \"PURCHASE\", \"QUALIFIED_LEAD\"). For Google: a unified standard event name (Purchase, Subscribe, CompleteRegistration, Lead, Schedule) or a Google ConversionActionCategory enum value directly (e.g. \"PURCHASE\", \"SUBSCRIBE_PAID\", \"SIGNUP\", \"IMPORTED_LEAD\", \"BOOK_APPOINTMENT\"). Unknown values pass through to the platform. 
     attr_accessor :type
 
+    # LinkedIn only.
     attr_accessor :attribution_type
 
-    # Default 30. 365 only allowed for LEAD, PURCHASE, ADD_TO_CART, QUALIFIED_LEAD, SUBMIT_APPLICATION rule types — the API rejects other combinations locally. 
+    # LinkedIn only. Default 30. 365 only allowed for LEAD, PURCHASE, ADD_TO_CART, QUALIFIED_LEAD, SUBMIT_APPLICATION rule types; the API rejects other combinations locally. 
     attr_accessor :post_click_attribution_window_size
 
-    # Default 7. Same 365-day-window type restriction applies as `postClickAttributionWindowSize`. 
+    # LinkedIn only. Default 7. Same 365-day-window type restriction applies as `postClickAttributionWindowSize`. 
     attr_accessor :view_through_attribution_window_size
 
-    # DYNAMIC (default) uses the per-event `value` from `sendConversions`. FIXED uses the rule's `value` field. NO_VALUE drops monetary value entirely. 
+    # LinkedIn only. DYNAMIC (default) uses the per-event `value` from `sendConversions`. FIXED uses the rule's `value` field. NO_VALUE drops monetary value entirely. 
     attr_accessor :value_type
 
     attr_accessor :value
 
-    # Controls campaign association at rule-creation time: - ALL_CAMPAIGNS: associate the rule with every active,   paused, and draft campaign in the ad account - OBJECTIVE_BASED: associate only campaigns whose   objective matches the rule's type - NONE: don't auto-associate. Manage associations via   the `/associations` endpoints below. Note: auto-association runs once at create time; new campaigns added after the rule still need explicit association. 
+    # LinkedIn only. Controls campaign association at rule-creation time: - ALL_CAMPAIGNS: associate the rule with every active,   paused, and draft campaign in the ad account - OBJECTIVE_BASED: associate only campaigns whose   objective matches the rule's type - NONE: don't auto-associate. Manage associations via   the `/associations` endpoints below. Note: auto-association runs once at create time; new campaigns added after the rule still need explicit association. 
     attr_accessor :auto_association_type
+
+    # Google Ads only. Whether to count multiple conversions from the same click (MANY_PER_CLICK) or at most one (ONE_PER_CLICK). Defaults to MANY_PER_CLICK if omitted. 
+    attr_accessor :counting_type
+
+    # Google Ads only. When true, the conversion action is marked as primary and immediately influences Smart Bidding. Defaults to false (secondary, record-only) to avoid unintentionally steering the customer's campaigns on creation. 
+    attr_accessor :primary_for_goal
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -72,7 +79,9 @@ module Zernio
         :'view_through_attribution_window_size' => :'viewThroughAttributionWindowSize',
         :'value_type' => :'valueType',
         :'value' => :'value',
-        :'auto_association_type' => :'autoAssociationType'
+        :'auto_association_type' => :'autoAssociationType',
+        :'counting_type' => :'countingType',
+        :'primary_for_goal' => :'primaryForGoal'
       }
     end
 
@@ -97,7 +106,9 @@ module Zernio
         :'view_through_attribution_window_size' => :'Integer',
         :'value_type' => :'String',
         :'value' => :'CreateConversionDestinationRequestValue',
-        :'auto_association_type' => :'String'
+        :'auto_association_type' => :'String',
+        :'counting_type' => :'String',
+        :'primary_for_goal' => :'Boolean'
       }
     end
 
@@ -166,6 +177,14 @@ module Zernio
       else
         self.auto_association_type = 'ALL_CAMPAIGNS'
       end
+
+      if attributes.key?(:'counting_type')
+        self.counting_type = attributes[:'counting_type']
+      end
+
+      if attributes.key?(:'primary_for_goal')
+        self.primary_for_goal = attributes[:'primary_for_goal']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -210,6 +229,8 @@ module Zernio
       return false unless value_type_validator.valid?(@value_type)
       auto_association_type_validator = EnumAttributeValidator.new('String', ["ALL_CAMPAIGNS", "OBJECTIVE_BASED", "NONE"])
       return false unless auto_association_type_validator.valid?(@auto_association_type)
+      counting_type_validator = EnumAttributeValidator.new('String', ["MANY_PER_CLICK", "ONE_PER_CLICK"])
+      return false unless counting_type_validator.valid?(@counting_type)
       true
     end
 
@@ -297,6 +318,16 @@ module Zernio
       @auto_association_type = auto_association_type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] counting_type Object to be assigned
+    def counting_type=(counting_type)
+      validator = EnumAttributeValidator.new('String', ["MANY_PER_CLICK", "ONE_PER_CLICK"])
+      unless validator.valid?(counting_type)
+        fail ArgumentError, "invalid value for \"counting_type\", must be one of #{validator.allowable_values}."
+      end
+      @counting_type = counting_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -310,7 +341,9 @@ module Zernio
           view_through_attribution_window_size == o.view_through_attribution_window_size &&
           value_type == o.value_type &&
           value == o.value &&
-          auto_association_type == o.auto_association_type
+          auto_association_type == o.auto_association_type &&
+          counting_type == o.counting_type &&
+          primary_for_goal == o.primary_for_goal
     end
 
     # @see the `==` method
@@ -322,7 +355,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad_account_id, name, type, attribution_type, post_click_attribution_window_size, view_through_attribution_window_size, value_type, value, auto_association_type].hash
+      [ad_account_id, name, type, attribution_type, post_click_attribution_window_size, view_through_attribution_window_size, value_type, value, auto_association_type, counting_type, primary_for_goal].hash
     end
 
     # Builds the object from hash
