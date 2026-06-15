@@ -82,7 +82,8 @@ describe 'AdCampaignsApi' do
   # @option opts [String] :ad_account_id Platform ad account ID
   # @option opts [String] :account_id Social account ID
   # @option opts [String] :profile_id Profile ID
-  # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+  # @option opts [String] :campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads.
+  # @option opts [Date] :from_date Start of the METRICS date range (YYYY-MM-DD). Affects only the spend/impression numbers overlaid on each node, NOT which campaigns are returned. Defaults to 90 days ago.
   # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   # @option opts [String] :sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end.
   # @return [GetAdTree200Response]
