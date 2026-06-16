@@ -28,6 +28,9 @@ module Zernio
     # Set to true to disable automatic link previews for URLs in the post content (default is false)
     attr_accessor :disable_link_preview
 
+    # LinkedIn post link to repost (use the post's \"Copy link to post\" action), or a urn:li:share / urn:li:ugcPost / urn:li:groupPost URN. The published post becomes a quote-reshare: your content is shown as the commentary and the original post is embedded underneath (LinkedIn's \"repost with your thoughts\"). Mutually exclusive with media. Works on personal profiles and organization pages.
+    attr_accessor :reshare_url
+
     attr_accessor :geo_restriction
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -37,6 +40,7 @@ module Zernio
         :'organization_urn' => :'organizationUrn',
         :'first_comment' => :'firstComment',
         :'disable_link_preview' => :'disableLinkPreview',
+        :'reshare_url' => :'reshareUrl',
         :'geo_restriction' => :'geoRestriction'
       }
     end
@@ -58,6 +62,7 @@ module Zernio
         :'organization_urn' => :'String',
         :'first_comment' => :'String',
         :'disable_link_preview' => :'Boolean',
+        :'reshare_url' => :'String',
         :'geo_restriction' => :'GeoRestriction'
       }
     end
@@ -100,6 +105,10 @@ module Zernio
         self.disable_link_preview = attributes[:'disable_link_preview']
       end
 
+      if attributes.key?(:'reshare_url')
+        self.reshare_url = attributes[:'reshare_url']
+      end
+
       if attributes.key?(:'geo_restriction')
         self.geo_restriction = attributes[:'geo_restriction']
       end
@@ -129,6 +138,7 @@ module Zernio
           organization_urn == o.organization_urn &&
           first_comment == o.first_comment &&
           disable_link_preview == o.disable_link_preview &&
+          reshare_url == o.reshare_url &&
           geo_restriction == o.geo_restriction
     end
 
@@ -141,7 +151,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [document_title, organization_urn, first_comment, disable_link_preview, geo_restriction].hash
+      [document_title, organization_urn, first_comment, disable_link_preview, reshare_url, geo_restriction].hash
     end
 
     # Builds the object from hash
