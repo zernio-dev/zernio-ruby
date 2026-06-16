@@ -22,7 +22,7 @@ module Zernio
     # An existing conversation to run in (required for non-WhatsApp workflows)
     attr_accessor :conversation_id
 
-    # Simulated inbound text
+    # Simulated inbound text, seeded as the run's lastMessage variable
     attr_accessor :text
 
     # Attribute mapping from ruby-style variable name to JSON key.

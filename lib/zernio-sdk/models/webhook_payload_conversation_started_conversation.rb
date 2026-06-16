@@ -22,7 +22,7 @@ module Zernio
 
     attr_accessor :platform_conversation_id
 
-    # Contact's platform identifier (IGSID
+    # Contact's platform identifier (IGSID, PSID, wa_id, etc.)
     attr_accessor :participant_id
 
     attr_accessor :participant_name

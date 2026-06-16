@@ -23,7 +23,7 @@ module Zernio
 
     attr_accessor :status
 
-    # For regulated numbers
+    # For regulated numbers, who it's registered for (company or person) — set from the submitted KYC.
     attr_accessor :registrant_name
 
     # Present once the number order has been placed (i.e. the requirement group was approved). Absent while still in identity review.

@@ -89,7 +89,7 @@ describe 'WhatsAppCallingApi' do
   # Check call permission for a consumer
   # Returns the permission state and the list of available actions for a given consumer wa_id (e.g. &#x60;start_call&#x60;, &#x60;send_call_permission_request&#x60;). Use this before placing a call to decide whether to prompt for consent first. 
   # @param account_id 
-  # @param to Consumer wa_id (E.164
+  # @param to Consumer wa_id (E.164, leading + optional)
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppCallPermissions200Response]
   describe 'get_whats_app_call_permissions test' do

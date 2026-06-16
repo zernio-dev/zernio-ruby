@@ -39,10 +39,10 @@ module Zernio
 
     attr_accessor :can_delete
 
-    # Whether this comment can be hidden (Facebook
+    # Whether this comment can be hidden (Facebook, Instagram, Threads)
     attr_accessor :can_hide
 
-    # Whether this comment can be liked (Facebook
+    # Whether this comment can be liked (Facebook, Twitter/X, Bluesky, Reddit)
     attr_accessor :can_like
 
     # Whether the comment is currently hidden

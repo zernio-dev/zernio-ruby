@@ -28,7 +28,7 @@ module Zernio
     # Denormalized email so the history UI can render without a join
     attr_accessor :created_by_email
 
-    # When non-null
+    # When non-null, this snapshot was created by restoring that version
     attr_accessor :restored_from_version
 
     attr_accessor :created_at

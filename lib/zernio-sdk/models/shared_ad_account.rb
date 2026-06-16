@@ -21,7 +21,7 @@ module Zernio
 
     attr_accessor :name
 
-    # Business Manager id that owns the ad account
+    # Business Manager id that owns the ad account, when reported.
     attr_accessor :business_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

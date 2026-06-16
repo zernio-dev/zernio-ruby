@@ -22,7 +22,7 @@ module Zernio
 
     attr_accessor :sip_auth_username
 
-    # Stored encrypted
+    # Stored encrypted, never returned by any endpoint.
     attr_accessor :sip_auth_password
 
     attr_accessor :recording_enabled

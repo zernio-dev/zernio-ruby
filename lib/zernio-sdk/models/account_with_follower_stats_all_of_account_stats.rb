@@ -22,7 +22,7 @@ module Zernio
     # Total media posts (Instagram)
     attr_accessor :media_count
 
-    # Total videos (YouTube
+    # Total videos (YouTube, TikTok)
     attr_accessor :video_count
 
     # Total tweets (X/Twitter)

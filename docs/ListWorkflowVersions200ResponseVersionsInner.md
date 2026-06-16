@@ -9,7 +9,7 @@
 | **description** | **String** |  | [optional] |
 | **created_by** | **String** | User id that authored this version | [optional] |
 | **created_by_email** | **String** | Denormalized email so the history UI can render without a join | [optional] |
-| **restored_from_version** | **Integer** | When non-null | [optional] |
+| **restored_from_version** | **Integer** | When non-null, this snapshot was created by restoring that version | [optional] |
 | **created_at** | **Time** |  | [optional] |
 
 ## Example

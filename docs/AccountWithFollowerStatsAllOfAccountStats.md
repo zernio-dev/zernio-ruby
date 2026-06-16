@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **following_count** | **Float** | Number of accounts being followed | [optional] |
 | **media_count** | **Float** | Total media posts (Instagram) | [optional] |
-| **video_count** | **Float** | Total videos (YouTube | [optional] |
+| **video_count** | **Float** | Total videos (YouTube, TikTok) | [optional] |
 | **tweet_count** | **Float** | Total tweets (X/Twitter) | [optional] |
 | **posts_count** | **Float** | Total posts (Bluesky) | [optional] |
 | **pin_count** | **Float** | Total pins (Pinterest) | [optional] |

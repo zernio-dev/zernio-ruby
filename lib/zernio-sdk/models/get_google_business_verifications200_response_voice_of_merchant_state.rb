@@ -16,7 +16,7 @@ require 'time'
 module Zernio
   # Raw Voice of Merchant state from Google.
   class GetGoogleBusinessVerifications200ResponseVoiceOfMerchantState < ApiModelBase
-    # True when the listing is verified and published (eligible to surface reviews
+    # True when the listing is verified and published (eligible to surface reviews, edits, etc.).
     attr_accessor :has_voice_of_merchant
 
     # True when the authenticated user has owner/manager authority over the listing.

@@ -17,7 +17,7 @@ module Zernio
   class ConfigureTikTokAdsBrandIdentity200Response < ApiModelBase
     attr_accessor :success
 
-    # The TikTok-assigned identity_id
+    # The TikTok-assigned identity_id, cached on the account.
     attr_accessor :identity_id
 
     attr_accessor :display_name

@@ -27,16 +27,16 @@ module Zernio
     # Body text for self-posts (empty for link posts)
     attr_accessor :selftext
 
-    # Reddit username
+    # Reddit username, without the u/ prefix
     attr_accessor :author
 
-    # Subreddit name
+    # Subreddit name, without the r/ prefix
     attr_accessor :subreddit
 
     # Absolute URL to the post on reddit.com
     attr_accessor :permalink
 
-    # For link posts
+    # For link posts, the external URL; for self-posts, the Reddit permalink
     attr_accessor :url
 
     # Net upvotes (upvotes minus downvotes)

@@ -7,7 +7,7 @@
 | **account_id** | **String** |  |  |
 | **forward_to** | **String** | tel:+E164 / sip:... / wss://... destination |  |
 | **sip_auth_username** | **String** |  | [optional] |
-| **sip_auth_password** | **String** | Stored encrypted | [optional] |
+| **sip_auth_password** | **String** | Stored encrypted, never returned by any endpoint. | [optional] |
 | **recording_enabled** | **Boolean** |  | [optional][default to false] |
 | **call_icon_countries** | **Array&lt;String&gt;** |  | [optional] |
 

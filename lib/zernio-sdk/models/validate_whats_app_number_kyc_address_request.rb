@@ -23,7 +23,7 @@ module Zernio
     # City / town.
     attr_accessor :locality
 
-    # State / province / region. When omitted
+    # State / province / region. When omitted, the pre-check is skipped (the final submit still validates).
     attr_accessor :administrative_area
 
     attr_accessor :postal_code

@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **to** | **String** | Recipient phone (WhatsApp only) | [optional] |
 | **conversation_id** | **String** | An existing conversation to run in (required for non-WhatsApp workflows) | [optional] |
-| **text** | **String** | Simulated inbound text | [optional] |
+| **text** | **String** | Simulated inbound text, seeded as the run&#39;s lastMessage variable | [optional] |
 
 ## Example
 

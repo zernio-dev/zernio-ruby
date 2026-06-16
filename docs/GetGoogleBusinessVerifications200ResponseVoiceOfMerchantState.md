@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **has_voice_of_merchant** | **Boolean** | True when the listing is verified and published (eligible to surface reviews | [optional] |
+| **has_voice_of_merchant** | **Boolean** | True when the listing is verified and published (eligible to surface reviews, edits, etc.). | [optional] |
 | **has_business_authority** | **Boolean** | True when the authenticated user has owner/manager authority over the listing. | [optional] |
 | **verify** | [**GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify**](GetGoogleBusinessVerifications200ResponseVoiceOfMerchantStateVerify.md) |  | [optional] |
 

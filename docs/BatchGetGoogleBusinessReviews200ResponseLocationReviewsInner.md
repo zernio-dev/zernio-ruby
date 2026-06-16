@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **name** | **String** | Full review resource name (accounts/*/locations/*/reviews/*) | [optional] |
-| **review** | **Object** | The review object (reviewId | [optional] |
+| **review** | **Object** | The review object (reviewId, starRating, comment, reviewer, createTime, updateTime, reviewReply) | [optional] |
 
 ## Example
 

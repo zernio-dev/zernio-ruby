@@ -18,7 +18,7 @@ module Zernio
     # Field name (max 256 chars)
     attr_accessor :name
 
-    # Field value (max 1
+    # Field value (max 1,024 chars)
     attr_accessor :value
 
     # Display fields side-by-side

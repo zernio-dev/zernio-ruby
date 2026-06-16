@@ -28,7 +28,7 @@ module Zernio
 
     attr_accessor :subreddit
 
-    # Post URL (may be a gallery URL
+    # Post URL (may be a gallery URL, external link, or self-post URL)
     attr_accessor :url
 
     # Full permalink to the Reddit post

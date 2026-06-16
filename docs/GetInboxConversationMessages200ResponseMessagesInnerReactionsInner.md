@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **emoji** | **String** |  | [optional] |
-| **from_me** | **Boolean** | true if the connected account reacted | [optional] |
+| **from_me** | **Boolean** | true if the connected account reacted, false if the contact did. | [optional] |
 | **reacted_at** | **Time** |  | [optional] |
 
 ## Example

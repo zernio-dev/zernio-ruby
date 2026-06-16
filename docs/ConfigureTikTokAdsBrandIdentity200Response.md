@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
-| **identity_id** | **String** | The TikTok-assigned identity_id | [optional] |
+| **identity_id** | **String** | The TikTok-assigned identity_id, cached on the account. | [optional] |
 | **display_name** | **String** |  | [optional] |
 
 ## Example

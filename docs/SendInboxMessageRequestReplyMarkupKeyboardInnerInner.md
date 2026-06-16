@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **text** | **String** | Button text | [optional] |
-| **callback_data** | **String** | Callback data (inline_keyboard only | [optional] |
+| **callback_data** | **String** | Callback data (inline_keyboard only, max 64 bytes) | [optional] |
 | **url** | **String** | URL to open (inline_keyboard only) | [optional] |
 
 ## Example

@@ -18,7 +18,7 @@ module Zernio
     # Full review resource name (accounts/*/locations/*/reviews/*)
     attr_accessor :name
 
-    # The review object (reviewId
+    # The review object (reviewId, starRating, comment, reviewer, createTime, updateTime, reviewReply)
     attr_accessor :review
 
     # Attribute mapping from ruby-style variable name to JSON key.

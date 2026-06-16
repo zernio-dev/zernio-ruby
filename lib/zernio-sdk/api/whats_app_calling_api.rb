@@ -319,7 +319,7 @@ module Zernio
     # Check call permission for a consumer
     # Returns the permission state and the list of available actions for a given consumer wa_id (e.g. `start_call`, `send_call_permission_request`). Use this before placing a call to decide whether to prompt for consent first. 
     # @param account_id [String] 
-    # @param to [String] Consumer wa_id (E.164
+    # @param to [String] Consumer wa_id (E.164, leading + optional)
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppCallPermissions200Response]
     def get_whats_app_call_permissions(account_id, to, opts = {})
@@ -330,7 +330,7 @@ module Zernio
     # Check call permission for a consumer
     # Returns the permission state and the list of available actions for a given consumer wa_id (e.g. &#x60;start_call&#x60;, &#x60;send_call_permission_request&#x60;). Use this before placing a call to decide whether to prompt for consent first. 
     # @param account_id [String] 
-    # @param to [String] Consumer wa_id (E.164
+    # @param to [String] Consumer wa_id (E.164, leading + optional)
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppCallPermissions200Response, Integer, Hash)>] GetWhatsAppCallPermissions200Response data, response status code and response headers
     def get_whats_app_call_permissions_with_http_info(account_id, to, opts = {})

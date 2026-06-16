@@ -17,7 +17,7 @@ module Zernio
   class GetInboxConversationMessages200ResponseMessagesInnerReactionsInner < ApiModelBase
     attr_accessor :emoji
 
-    # true if the connected account reacted
+    # true if the connected account reacted, false if the contact did.
     attr_accessor :from_me
 
     attr_accessor :reacted_at

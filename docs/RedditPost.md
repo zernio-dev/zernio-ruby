@@ -9,7 +9,7 @@
 | **title** | **String** |  | [optional] |
 | **author** | **String** |  | [optional] |
 | **subreddit** | **String** |  | [optional] |
-| **url** | **String** | Post URL (may be a gallery URL | [optional] |
+| **url** | **String** | Post URL (may be a gallery URL, external link, or self-post URL) | [optional] |
 | **permalink** | **String** | Full permalink to the Reddit post | [optional] |
 | **selftext** | **String** | Self-post body text (empty string for link posts) | [optional] |
 | **created_utc** | **Float** | Unix timestamp of post creation | [optional] |

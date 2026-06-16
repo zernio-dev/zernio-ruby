@@ -17,7 +17,7 @@ module Zernio
   class InitiateWhatsAppCallRequest < ApiModelBase
     attr_accessor :account_id
 
-    # Consumer wa_id (E.164
+    # Consumer wa_id (E.164, leading + optional)
     attr_accessor :to
 
     # Omit to place a call. Set to send the consent prompt instead.

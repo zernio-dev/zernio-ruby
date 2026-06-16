@@ -18,7 +18,7 @@ module Zernio
     # Button text
     attr_accessor :text
 
-    # Callback data (inline_keyboard only
+    # Callback data (inline_keyboard only, max 64 bytes)
     attr_accessor :callback_data
 
     # URL to open (inline_keyboard only)

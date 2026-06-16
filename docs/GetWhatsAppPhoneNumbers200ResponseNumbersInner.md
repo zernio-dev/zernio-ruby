@@ -8,7 +8,7 @@
 | **phone_number** | **String** |  | [optional] |
 | **country** | **String** |  | [optional] |
 | **status** | **String** |  | [optional] |
-| **registrant_name** | **String** | For regulated numbers | [optional] |
+| **registrant_name** | **String** | For regulated numbers, who it&#39;s registered for (company or person) — set from the submitted KYC. | [optional] |
 | **telnyx_order_id** | **String** | Present once the number order has been placed (i.e. the requirement group was approved). Absent while still in identity review. | [optional] |
 | **monthly_cents** | **Integer** | Per-country monthly price in cents ($2..$25). | [optional] |
 | **profile_id** | **Object** |  | [optional] |

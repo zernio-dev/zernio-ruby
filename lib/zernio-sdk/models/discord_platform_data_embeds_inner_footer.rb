@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class DiscordPlatformDataEmbedsInnerFooter < ApiModelBase
-    # Footer text (max 2
+    # Footer text (max 2,048 chars)
     attr_accessor :text
 
     attr_accessor :icon_url

@@ -323,7 +323,7 @@ end
 
 api_instance = Zernio::WhatsAppCallingApi.new
 account_id = 'account_id_example' # String | 
-to = 'to_example' # String | Consumer wa_id (E.164
+to = 'to_example' # String | Consumer wa_id (E.164, leading + optional)
 
 begin
   # Check call permission for a consumer
@@ -357,7 +357,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
-| **to** | **String** | Consumer wa_id (E.164 |  |
+| **to** | **String** | Consumer wa_id (E.164, leading + optional) |  |
 
 ### Return type
 

@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Ad account id, in &#x60;act_&lt;digits&gt;&#x60; form. |  |
 | **name** | **String** |  | [optional] |
-| **business_id** | **String** | Business Manager id that owns the ad account | [optional] |
+| **business_id** | **String** | Business Manager id that owns the ad account, when reported. | [optional] |
 
 ## Example
 
