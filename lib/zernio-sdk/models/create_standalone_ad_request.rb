@@ -44,6 +44,9 @@ module Zernio
     # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_type
 
+    # Meta only. Publish state of the created ad set + ad. Omitted or ACTIVE publishes live (default, back-compat); PAUSED creates them paused and skips activation, so you can review before they spend.
+    attr_accessor :status
+
     # Meta only. Where the budget lives, which selects the Meta budget model:   - `adset` (default): ABO (Ad-set Budget Optimization). The budget is set on the     ad set. This is the back-compatible behaviour — omit this field to keep it.   - `campaign`: CBO (Campaign Budget Optimization / Advantage Campaign Budget). The     budget AND `bidStrategy` are set on the CAMPAIGN, and Meta distributes spend     across ad sets automatically. Meta requires the budget at exactly one level, never both. Non-Meta platforms ignore this field. Ignored on the attach shape (`adSetId`), which inherits the existing budget. 
     attr_accessor :budget_level
 
@@ -82,6 +85,12 @@ module Zernio
 
     # Meta-only. When present, switches to the attach shape: adds one new ad to this existing ad set without creating a new campaign. Budget, targeting, goal, schedule, AND bid strategy are inherited from the ad set on Meta — passing `bidStrategy` in attach mode returns 400. To change an existing ad set's bid, use `PUT /v1/ads/ad-sets/{adSetId}`. Mutually exclusive with `creatives[]`.  The attached ad takes the full single-creative surface: `headline`/`body`/`description`/`callToAction` plus either `imageUrl`/`video` OR `placementAssets` (its own per-placement Feed/Story assets), and `leadGenFormId` when the target is a lead ad set (the parent must be ON_AD — true for ad sets created via goal `lead_generation`; Meta rejects a formless ad there, so pass the form on EVERY attached ad). This is the way to build N full ads sharing one ad set: create the first ad via the normal shape, then attach the rest one call each.  Supported on Meta (facebook, instagram) and TikTok. On TikTok the `adSetId` is the ad group ID; the new ad inherits the ad group's bid + budget + targeting. 
     attr_accessor :ad_set_id
+
+    # Meta only. Add the new ad set under this EXISTING campaign instead of creating a new one (multi-ad-set audience testing). The new ad set's budget is matched to the campaign's mode automatically: for a CBO campaign (campaign-level budget) omit `budgetAmount`/`budgetType` — the campaign owns the budget; for an ABO campaign pass them (they go on the new ad set). On failure only the new ad set is cleaned up; the existing campaign is left untouched and is never (re)activated. Mutually exclusive with `adSetId` and `creatives[]`. 
+    attr_accessor :existing_campaign_id
+
+    # Meta only. Reuse an EXISTING ad creative by id instead of building a new one from the copy/media fields (which are then ignored). Combine with `existingCampaignId` to build a multi-ad-set campaign that shares one creative. Mutually exclusive with `creatives[]`, `dynamicCreative`, and `placementAssets`. The creative id used is returned as `creativeId` on the create response. 
+    attr_accessor :existing_creative_id
 
     # Google Display only
     attr_accessor :business_name
@@ -232,6 +241,7 @@ module Zernio
         :'optimization_goal' => :'optimizationGoal',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
+        :'status' => :'status',
         :'budget_level' => :'budgetLevel',
         :'currency' => :'currency',
         :'headline' => :'headline',
@@ -246,6 +256,8 @@ module Zernio
         :'video' => :'video',
         :'creatives' => :'creatives',
         :'ad_set_id' => :'adSetId',
+        :'existing_campaign_id' => :'existingCampaignId',
+        :'existing_creative_id' => :'existingCreativeId',
         :'business_name' => :'businessName',
         :'board_id' => :'boardId',
         :'organization_id' => :'organizationId',
@@ -313,6 +325,7 @@ module Zernio
         :'optimization_goal' => :'String',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
+        :'status' => :'String',
         :'budget_level' => :'String',
         :'currency' => :'String',
         :'headline' => :'String',
@@ -327,6 +340,8 @@ module Zernio
         :'video' => :'CreateStandaloneAdRequestVideo',
         :'creatives' => :'Array<CreateStandaloneAdRequestCreativesInner>',
         :'ad_set_id' => :'String',
+        :'existing_campaign_id' => :'String',
+        :'existing_creative_id' => :'String',
         :'business_name' => :'String',
         :'board_id' => :'String',
         :'organization_id' => :'String',
@@ -442,6 +457,10 @@ module Zernio
         self.budget_type = attributes[:'budget_type']
       end
 
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
       if attributes.key?(:'budget_level')
         self.budget_level = attributes[:'budget_level']
       else
@@ -500,6 +519,14 @@ module Zernio
 
       if attributes.key?(:'ad_set_id')
         self.ad_set_id = attributes[:'ad_set_id']
+      end
+
+      if attributes.key?(:'existing_campaign_id')
+        self.existing_campaign_id = attributes[:'existing_campaign_id']
+      end
+
+      if attributes.key?(:'existing_creative_id')
+        self.existing_creative_id = attributes[:'existing_creative_id']
       end
 
       if attributes.key?(:'business_name')
@@ -796,6 +823,8 @@ module Zernio
       return false unless goal_validator.valid?(@goal)
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
+      status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      return false unless status_validator.valid?(@status)
       budget_level_validator = EnumAttributeValidator.new('String', ["adset", "campaign"])
       return false unless budget_level_validator.valid?(@budget_level)
       return false if !@long_headline.nil? && @long_headline.to_s.length > 90
@@ -919,6 +948,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"budget_type\", must be one of #{validator.allowable_values}."
       end
       @budget_type = budget_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -1145,6 +1184,7 @@ module Zernio
           optimization_goal == o.optimization_goal &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
+          status == o.status &&
           budget_level == o.budget_level &&
           currency == o.currency &&
           headline == o.headline &&
@@ -1159,6 +1199,8 @@ module Zernio
           video == o.video &&
           creatives == o.creatives &&
           ad_set_id == o.ad_set_id &&
+          existing_campaign_id == o.existing_campaign_id &&
+          existing_creative_id == o.existing_creative_id &&
           business_name == o.business_name &&
           board_id == o.board_id &&
           organization_id == o.organization_id &&
@@ -1210,7 +1252,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, budget_amount, budget_type, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash
