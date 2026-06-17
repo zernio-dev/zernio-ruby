@@ -14,15 +14,60 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Canonical error envelope. `error` is the human-readable message; `type`, `code`, `param`, `platform`, and `platformError` are top-level siblings for programmatic handling. For upstream platform failures (`type: platform_error`), `platformError` carries the provider's raw payload verbatim (for Meta: `error_subcode`, `error_user_title`, `error_user_msg`). 
   class ErrorResponse < ApiModelBase
+    # Human-readable error message.
     attr_accessor :error
 
+    # Error class for programmatic handling.
+    attr_accessor :type
+
+    # Stable machine-readable error code.
+    attr_accessor :code
+
+    # The request field that caused the error, when applicable.
+    attr_accessor :param
+
+    # Upstream platform (e.g. meta, google, tiktok) — present when type is platform_error.
+    attr_accessor :platform
+
+    # Raw error payload from the upstream platform, passed through verbatim so integrators can read provider-specific codes. For Meta this includes error_subcode, error_user_title, and error_user_msg. 
+    attr_accessor :platform_error
+
+    # Additional structured context (e.g. field-level validation errors).
     attr_accessor :details
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'error' => :'error',
+        :'type' => :'type',
+        :'code' => :'code',
+        :'param' => :'param',
+        :'platform' => :'platform',
+        :'platform_error' => :'platformError',
         :'details' => :'details'
       }
     end
@@ -41,6 +86,11 @@ module Zernio
     def self.openapi_types
       {
         :'error' => :'String',
+        :'type' => :'String',
+        :'code' => :'String',
+        :'param' => :'String',
+        :'platform' => :'String',
+        :'platform_error' => :'Hash<String, Object>',
         :'details' => :'Hash<String, Object>'
       }
     end
@@ -71,6 +121,28 @@ module Zernio
         self.error = attributes[:'error']
       end
 
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
+      end
+
+      if attributes.key?(:'param')
+        self.param = attributes[:'param']
+      end
+
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
+      end
+
+      if attributes.key?(:'platform_error')
+        if (value = attributes[:'platform_error']).is_a?(Hash)
+          self.platform_error = value
+        end
+      end
+
       if attributes.key?(:'details')
         if (value = attributes[:'details']).is_a?(Hash)
           self.details = value
@@ -90,7 +162,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      type_validator = EnumAttributeValidator.new('String', ["invalid_request_error", "authentication_error", "permission_error", "not_found", "rate_limit_error", "platform_error", "api_error"])
+      return false unless type_validator.valid?(@type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["invalid_request_error", "authentication_error", "permission_error", "not_found", "rate_limit_error", "platform_error", "api_error"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -99,6 +183,11 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           error == o.error &&
+          type == o.type &&
+          code == o.code &&
+          param == o.param &&
+          platform == o.platform &&
+          platform_error == o.platform_error &&
           details == o.details
     end
 
@@ -111,7 +200,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, details].hash
+      [error, type, code, param, platform, platform_error, details].hash
     end
 
     # Builds the object from hash
