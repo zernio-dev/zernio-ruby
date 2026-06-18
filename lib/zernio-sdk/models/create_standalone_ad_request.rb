@@ -44,8 +44,11 @@ module Zernio
     # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_type
 
-    # Meta only. Publish state of the created ad set + ad. Omitted or ACTIVE publishes live (default, back-compat); PAUSED creates them paused and skips activation, so you can review before they spend.
+    # Meta only. Desired publish state of the ad (and, on the legacy/multi-ad-set shapes, the ad set too). Omitted or `ACTIVE` publishes live immediately (default). `PAUSED` creates the objects paused and skips activation — useful to stage ads before they spend. On the attach shape (`adSetId`), only the new ad is affected; the existing ad set and campaign are already live and are not touched. 
     attr_accessor :status
+
+    # Meta only. Independent publish state for the CAMPAIGN when the create makes both a new campaign and a new ad set (legacy shape). When omitted, the campaign follows `status`. Use this to stage a paused campaign with an active ad set (`status: ACTIVE, campaignStatus: PAUSED`) — the ad set will start delivering as soon as the campaign is activated later. Ignored when `existingCampaignId` is set (the campaign is already live and its status is not changed). 
+    attr_accessor :campaign_status
 
     # Meta only. Where the budget lives, which selects the Meta budget model:   - `adset` (default): ABO (Ad-set Budget Optimization). The budget is set on the     ad set. This is the back-compatible behaviour — omit this field to keep it.   - `campaign`: CBO (Campaign Budget Optimization / Advantage Campaign Budget). The     budget AND `bidStrategy` are set on the CAMPAIGN, and Meta distributes spend     across ad sets automatically. Meta requires the budget at exactly one level, never both. Non-Meta platforms ignore this field. Ignored on the attach shape (`adSetId`), which inherits the existing budget. 
     attr_accessor :budget_level
@@ -89,7 +92,7 @@ module Zernio
     # Meta only. Add the new ad set under this EXISTING campaign instead of creating a new one (multi-ad-set audience testing). The new ad set's budget is matched to the campaign's mode automatically: for a CBO campaign (campaign-level budget) omit `budgetAmount`/`budgetType` — the campaign owns the budget; for an ABO campaign pass them (they go on the new ad set). On failure only the new ad set is cleaned up; the existing campaign is left untouched and is never (re)activated. Mutually exclusive with `adSetId` and `creatives[]`. 
     attr_accessor :existing_campaign_id
 
-    # Meta only. Reuse an EXISTING ad creative by id instead of building a new one from the copy/media fields (which are then ignored). Combine with `existingCampaignId` to build a multi-ad-set campaign that shares one creative. Mutually exclusive with `creatives[]`, `dynamicCreative`, and `placementAssets`. The creative id used is returned as `creativeId` on the create response. 
+    # Meta only. Reuse an EXISTING ad creative by id instead of building a new one from the copy/media fields (which are then ignored). Works on both shapes: - Legacy/multi-ad-set (`existingCampaignId`): combine with   `existingCampaignId` to build a multi-ad-set campaign that   shares one creative across audiences. - Attach (`adSetId`): combine with `adSetId` to add a second   (or Nth) ad to an existing ad set reusing the same creative —   no `headline`/`body`/`imageUrl` required on the body. Mutually exclusive with `creatives[]`, `dynamicCreative`, and `placementAssets`. The creative id is returned as `creativeId` on the create response. 
     attr_accessor :existing_creative_id
 
     # Google Display only
@@ -242,6 +245,7 @@ module Zernio
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
         :'status' => :'status',
+        :'campaign_status' => :'campaignStatus',
         :'budget_level' => :'budgetLevel',
         :'currency' => :'currency',
         :'headline' => :'headline',
@@ -326,6 +330,7 @@ module Zernio
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
         :'status' => :'String',
+        :'campaign_status' => :'String',
         :'budget_level' => :'String',
         :'currency' => :'String',
         :'headline' => :'String',
@@ -459,6 +464,10 @@ module Zernio
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'campaign_status')
+        self.campaign_status = attributes[:'campaign_status']
       end
 
       if attributes.key?(:'budget_level')
@@ -825,6 +834,8 @@ module Zernio
       return false unless budget_type_validator.valid?(@budget_type)
       status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
       return false unless status_validator.valid?(@status)
+      campaign_status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      return false unless campaign_status_validator.valid?(@campaign_status)
       budget_level_validator = EnumAttributeValidator.new('String', ["adset", "campaign"])
       return false unless budget_level_validator.valid?(@budget_level)
       return false if !@long_headline.nil? && @long_headline.to_s.length > 90
@@ -958,6 +969,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
       @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] campaign_status Object to be assigned
+    def campaign_status=(campaign_status)
+      validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      unless validator.valid?(campaign_status)
+        fail ArgumentError, "invalid value for \"campaign_status\", must be one of #{validator.allowable_values}."
+      end
+      @campaign_status = campaign_status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -1185,6 +1206,7 @@ module Zernio
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
           status == o.status &&
+          campaign_status == o.campaign_status &&
           budget_level == o.budget_level &&
           currency == o.currency &&
           headline == o.headline &&
@@ -1252,7 +1274,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash
