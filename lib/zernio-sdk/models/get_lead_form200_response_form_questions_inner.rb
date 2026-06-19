@@ -14,16 +14,26 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetLeadForm200Response < ApiModelBase
-    attr_accessor :status
+  class GetLeadForm200ResponseFormQuestionsInner < ApiModelBase
+    attr_accessor :key
 
-    attr_accessor :form
+    attr_accessor :label
+
+    # EMAIL, PHONE, FULL_NAME, FIRST_NAME, LAST_NAME, CUSTOM, …
+    attr_accessor :type
+
+    attr_accessor :options
+
+    attr_accessor :inline_context
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'form' => :'form'
+        :'key' => :'key',
+        :'label' => :'label',
+        :'type' => :'type',
+        :'options' => :'options',
+        :'inline_context' => :'inline_context'
       }
     end
 
@@ -40,8 +50,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'form' => :'GetLeadForm200ResponseForm'
+        :'key' => :'String',
+        :'label' => :'String',
+        :'type' => :'String',
+        :'options' => :'Array<CreateLeadFormRequestQuestionsInnerOptionsInner>',
+        :'inline_context' => :'String'
       }
     end
 
@@ -55,24 +68,38 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetLeadForm200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetLeadForm200ResponseFormQuestionsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetLeadForm200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetLeadForm200ResponseFormQuestionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'key')
+        self.key = attributes[:'key']
       end
 
-      if attributes.key?(:'form')
-        self.form = attributes[:'form']
+      if attributes.key?(:'label')
+        self.label = attributes[:'label']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'options')
+        if (value = attributes[:'options']).is_a?(Array)
+          self.options = value
+        end
+      end
+
+      if attributes.key?(:'inline_context')
+        self.inline_context = attributes[:'inline_context']
       end
     end
 
@@ -96,8 +123,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          form == o.form
+          key == o.key &&
+          label == o.label &&
+          type == o.type &&
+          options == o.options &&
+          inline_context == o.inline_context
     end
 
     # @see the `==` method
@@ -109,7 +139,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, form].hash
+      [key, label, type, options, inline_context].hash
     end
 
     # Builds the object from hash

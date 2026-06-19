@@ -470,6 +470,9 @@ docs/GetInstagramStoryInsights200Response.md
 docs/GetInstagramStoryInsights200ResponseData.md
 docs/GetInstagramStoryInsights200ResponseDataMetrics.md
 docs/GetLeadForm200Response.md
+docs/GetLeadForm200ResponseForm.md
+docs/GetLeadForm200ResponseFormQuestionsInner.md
+docs/GetLeadForm200ResponseFormThankYouPage.md
 docs/GetLinkedInAggregateAnalytics200Response.md
 docs/GetLinkedInAggregateAnalytics400Response.md
 docs/GetLinkedInAggregateAnalytics402Response.md
@@ -1748,6 +1751,9 @@ lib/zernio-sdk/models/get_instagram_story_insights200_response.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response_data.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response_data_metrics.rb
 lib/zernio-sdk/models/get_lead_form200_response.rb
+lib/zernio-sdk/models/get_lead_form200_response_form.rb
+lib/zernio-sdk/models/get_lead_form200_response_form_questions_inner.rb
+lib/zernio-sdk/models/get_lead_form200_response_form_thank_you_page.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics200_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics400_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics402_response.rb
@@ -2991,6 +2997,9 @@ spec/models/get_instagram_account_insights404_response_spec.rb
 spec/models/get_instagram_story_insights200_response_data_metrics_spec.rb
 spec/models/get_instagram_story_insights200_response_data_spec.rb
 spec/models/get_instagram_story_insights200_response_spec.rb
+spec/models/get_lead_form200_response_form_questions_inner_spec.rb
+spec/models/get_lead_form200_response_form_spec.rb
+spec/models/get_lead_form200_response_form_thank_you_page_spec.rb
 spec/models/get_lead_form200_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics200_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics400_response_spec.rb

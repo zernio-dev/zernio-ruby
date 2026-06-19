@@ -14,16 +14,25 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetLeadForm200Response < ApiModelBase
-    attr_accessor :status
+  class GetLeadForm200ResponseFormThankYouPage < ApiModelBase
+    attr_accessor :title
 
-    attr_accessor :form
+    attr_accessor :body
+
+    attr_accessor :button_text
+
+    attr_accessor :button_type
+
+    attr_accessor :website_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'form' => :'form'
+        :'title' => :'title',
+        :'body' => :'body',
+        :'button_text' => :'button_text',
+        :'button_type' => :'button_type',
+        :'website_url' => :'website_url'
       }
     end
 
@@ -40,8 +49,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'form' => :'GetLeadForm200ResponseForm'
+        :'title' => :'String',
+        :'body' => :'String',
+        :'button_text' => :'String',
+        :'button_type' => :'String',
+        :'website_url' => :'String'
       }
     end
 
@@ -55,24 +67,36 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetLeadForm200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetLeadForm200ResponseFormThankYouPage` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetLeadForm200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetLeadForm200ResponseFormThankYouPage`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       end
 
-      if attributes.key?(:'form')
-        self.form = attributes[:'form']
+      if attributes.key?(:'body')
+        self.body = attributes[:'body']
+      end
+
+      if attributes.key?(:'button_text')
+        self.button_text = attributes[:'button_text']
+      end
+
+      if attributes.key?(:'button_type')
+        self.button_type = attributes[:'button_type']
+      end
+
+      if attributes.key?(:'website_url')
+        self.website_url = attributes[:'website_url']
       end
     end
 
@@ -96,8 +120,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          form == o.form
+          title == o.title &&
+          body == o.body &&
+          button_text == o.button_text &&
+          button_type == o.button_type &&
+          website_url == o.website_url
     end
 
     # @see the `==` method
@@ -109,7 +136,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, form].hash
+      [title, body, button_text, button_type, website_url].hash
     end
 
     # Builds the object from hash
