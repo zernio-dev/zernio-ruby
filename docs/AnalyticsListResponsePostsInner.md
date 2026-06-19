@@ -15,6 +15,7 @@
 | **platform** | **String** |  | [optional] |
 | **platform_post_url** | **String** |  | [optional] |
 | **is_external** | **Boolean** |  | [optional] |
+| **is_ad** | **Boolean** | True when the post is an ad creative. False for organic posts or platforms where the signal is unavailable. For now is only available for LinkedIn posts. | [optional] |
 | **profile_id** | **String** |  | [optional] |
 | **thumbnail_url** | **String** |  | [optional] |
 | **media_type** | **String** |  | [optional] |
@@ -37,6 +38,7 @@ instance = Zernio::AnalyticsListResponsePostsInner.new(
   platform: null,
   platform_post_url: null,
   is_external: null,
+  is_ad: null,
   profile_id: null,
   thumbnail_url: null,
   media_type: null,
