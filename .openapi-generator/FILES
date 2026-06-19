@@ -854,6 +854,7 @@ docs/ReviewWebhookReview.md
 docs/ReviewWebhookReviewReply.md
 docs/ReviewWebhookReviewReviewer.md
 docs/ReviewsApi.md
+docs/SMSApi.md
 docs/SavedTargetingAudience.md
 docs/ScheduleBroadcast200Response.md
 docs/ScheduleBroadcast200ResponseBroadcast.md
@@ -934,6 +935,8 @@ docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf.md
 docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf1.md
 docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf2.md
 docs/SendPrivateReplyToCommentRequestQuickRepliesInner.md
+docs/SendSms200Response.md
+docs/SendSmsRequest.md
 docs/SendTypingIndicatorRequest.md
 docs/SendWhatsAppConversion200Response.md
 docs/SendWhatsAppConversionRequest.md
@@ -1285,6 +1288,7 @@ lib/zernio-sdk/api/queue_api.rb
 lib/zernio-sdk/api/reddit_search_api.rb
 lib/zernio-sdk/api/reviews_api.rb
 lib/zernio-sdk/api/sequences_api.rb
+lib/zernio-sdk/api/sms_api.rb
 lib/zernio-sdk/api/tracking_tags_api.rb
 lib/zernio-sdk/api/twitter_engagement_api.rb
 lib/zernio-sdk/api/usage_api.rb
@@ -2196,6 +2200,8 @@ lib/zernio-sdk/models/send_private_reply_to_comment_request_buttons_inner_one_of
 lib/zernio-sdk/models/send_private_reply_to_comment_request_buttons_inner_one_of1.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request_buttons_inner_one_of2.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request_quick_replies_inner.rb
+lib/zernio-sdk/models/send_sms200_response.rb
+lib/zernio-sdk/models/send_sms_request.rb
 lib/zernio-sdk/models/send_typing_indicator_request.rb
 lib/zernio-sdk/models/send_whats_app_conversion200_response.rb
 lib/zernio-sdk/models/send_whats_app_conversion_request.rb
@@ -2531,6 +2537,7 @@ spec/api/queue_api_spec.rb
 spec/api/reddit_search_api_spec.rb
 spec/api/reviews_api_spec.rb
 spec/api/sequences_api_spec.rb
+spec/api/sms_api_spec.rb
 spec/api/tracking_tags_api_spec.rb
 spec/api/twitter_engagement_api_spec.rb
 spec/api/usage_api_spec.rb
@@ -3437,6 +3444,8 @@ spec/models/send_private_reply_to_comment_request_buttons_inner_one_of_spec.rb
 spec/models/send_private_reply_to_comment_request_buttons_inner_spec.rb
 spec/models/send_private_reply_to_comment_request_quick_replies_inner_spec.rb
 spec/models/send_private_reply_to_comment_request_spec.rb
+spec/models/send_sms200_response_spec.rb
+spec/models/send_sms_request_spec.rb
 spec/models/send_typing_indicator_request_spec.rb
 spec/models/send_whats_app_conversion200_response_spec.rb
 spec/models/send_whats_app_conversion_request_spec.rb

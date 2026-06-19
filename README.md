@@ -331,6 +331,7 @@ Class | Method | HTTP request | Description
 *Zernio::ReviewsApi* | [**delete_inbox_review_reply**](docs/ReviewsApi.md#delete_inbox_review_reply) | **DELETE** /v1/inbox/reviews/{reviewId}/reply | Delete review reply
 *Zernio::ReviewsApi* | [**list_inbox_reviews**](docs/ReviewsApi.md#list_inbox_reviews) | **GET** /v1/inbox/reviews | List reviews
 *Zernio::ReviewsApi* | [**reply_to_inbox_review**](docs/ReviewsApi.md#reply_to_inbox_review) | **POST** /v1/inbox/reviews/{reviewId}/reply | Reply to review
+*Zernio::SMSApi* | [**send_sms**](docs/SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS or MMS
 *Zernio::SequencesApi* | [**activate_sequence**](docs/SequencesApi.md#activate_sequence) | **POST** /v1/sequences/{sequenceId}/activate | Activate sequence
 *Zernio::SequencesApi* | [**create_sequence**](docs/SequencesApi.md#create_sequence) | **POST** /v1/sequences | Create sequence
 *Zernio::SequencesApi* | [**delete_sequence**](docs/SequencesApi.md#delete_sequence) | **DELETE** /v1/sequences/{sequenceId} | Delete sequence
@@ -1349,6 +1350,8 @@ Class | Method | HTTP request | Description
  - [Zernio::SendPrivateReplyToCommentRequestButtonsInnerOneOf1](docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf1.md)
  - [Zernio::SendPrivateReplyToCommentRequestButtonsInnerOneOf2](docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf2.md)
  - [Zernio::SendPrivateReplyToCommentRequestQuickRepliesInner](docs/SendPrivateReplyToCommentRequestQuickRepliesInner.md)
+ - [Zernio::SendSms200Response](docs/SendSms200Response.md)
+ - [Zernio::SendSmsRequest](docs/SendSmsRequest.md)
  - [Zernio::SendTypingIndicatorRequest](docs/SendTypingIndicatorRequest.md)
  - [Zernio::SendWhatsAppConversion200Response](docs/SendWhatsAppConversion200Response.md)
  - [Zernio::SendWhatsAppConversionRequest](docs/SendWhatsAppConversionRequest.md)
