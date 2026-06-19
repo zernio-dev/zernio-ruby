@@ -42,6 +42,9 @@ module Zernio
 
     attr_accessor :instagram_profile
 
+    # Ad-click attribution captured on the first inbound message of the conversation. Only present when the conversation originated from a click-to-message ad. Absent on organic conversations.  Two sources populate this field:   - WhatsApp CTWA (Click-to-WhatsApp): `ctwa_clid`, `ctwa_source_id`,     `ctwa_source_url`, `ctwa_headline`, `ctwa_source_type`, `ctwa_captured_at`.   - Facebook Messenger CTM / Instagram CTD: `meta_ad_id`, `meta_ad_title`,     `meta_ad_source`, `meta_ad_type`, `meta_ad_ref`, `meta_ad_captured_at`,     `meta_ad_photo_url`, `meta_ad_video_url`, `meta_ad_post_id`,     `meta_ad_product_id`, `meta_ad_flow_id`.  Note: `meta_ad_photo_url` and `meta_ad_video_url` are Facebook CDN URLs that may expire. Use `meta_ad_id` for a permanent reference to the ad (e.g. to link to Meta Ads Manager). 
+    attr_accessor :metadata
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -79,7 +82,8 @@ module Zernio
         :'last_message_at' => :'lastMessageAt',
         :'updated_time' => :'updatedTime',
         :'participants' => :'participants',
-        :'instagram_profile' => :'instagramProfile'
+        :'instagram_profile' => :'instagramProfile',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -108,7 +112,8 @@ module Zernio
         :'last_message_at' => :'Time',
         :'updated_time' => :'Time',
         :'participants' => :'Array<UpdateFacebookPage200ResponseSelectedPage>',
-        :'instagram_profile' => :'ListInboxConversations200ResponseDataInnerInstagramProfile'
+        :'instagram_profile' => :'ListInboxConversations200ResponseDataInnerInstagramProfile',
+        :'metadata' => :'Hash<String, String>'
       }
     end
 
@@ -187,6 +192,12 @@ module Zernio
       if attributes.key?(:'instagram_profile')
         self.instagram_profile = attributes[:'instagram_profile']
       end
+
+      if attributes.key?(:'metadata')
+        if (value = attributes[:'metadata']).is_a?(Hash)
+          self.metadata = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -245,7 +256,8 @@ module Zernio
           last_message_at == o.last_message_at &&
           updated_time == o.updated_time &&
           participants == o.participants &&
-          instagram_profile == o.instagram_profile
+          instagram_profile == o.instagram_profile &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -257,7 +269,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, account_username, platform, status, participant_name, participant_id, participant_verified_type, last_message, last_message_at, updated_time, participants, instagram_profile].hash
+      [id, account_id, account_username, platform, status, participant_name, participant_id, participant_verified_type, last_message, last_message_at, updated_time, participants, instagram_profile, metadata].hash
     end
 
     # Builds the object from hash
