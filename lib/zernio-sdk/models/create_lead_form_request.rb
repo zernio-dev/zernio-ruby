@@ -39,7 +39,44 @@ module Zernio
 
     attr_accessor :thank_you_website_url
 
+    # Legacy form type toggle. Prefer formType instead. false = More Volume, true = Higher Intent.
     attr_accessor :is_optimized_for_quality
+
+    # Form type. MORE_VOLUME = optimized for lead quantity (default). HIGHER_INTENT = adds a review/confirmation step before submit. RICH_CREATIVE = includes context card and custom headline to educate users before they submit. Supersedes isOptimizedForQuality.
+    attr_accessor :form_type
+
+    # Sharing setting. true = Restricted (only people targeted by the ad can open the form link). false = Open (shareable link, default).
+    attr_accessor :block_display_for_non_targeted_viewer
+
+    # Flexible form delivery. true = the form can surface organically on the Page (not just as a paid ad). Defaults to false.
+    attr_accessor :allow_organic_lead_gen
+
+    # Custom subheadline shown above the form fields on the questions page (the contact-information section description). Defaults to Meta's generic copy when omitted.
+    attr_accessor :question_page_custom_headline
+
+    attr_accessor :context_card
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -56,7 +93,12 @@ module Zernio
         :'thank_you_button_text' => :'thankYouButtonText',
         :'thank_you_button_type' => :'thankYouButtonType',
         :'thank_you_website_url' => :'thankYouWebsiteUrl',
-        :'is_optimized_for_quality' => :'isOptimizedForQuality'
+        :'is_optimized_for_quality' => :'isOptimizedForQuality',
+        :'form_type' => :'formType',
+        :'block_display_for_non_targeted_viewer' => :'blockDisplayForNonTargetedViewer',
+        :'allow_organic_lead_gen' => :'allowOrganicLeadGen',
+        :'question_page_custom_headline' => :'questionPageCustomHeadline',
+        :'context_card' => :'contextCard'
       }
     end
 
@@ -85,7 +127,12 @@ module Zernio
         :'thank_you_button_text' => :'String',
         :'thank_you_button_type' => :'String',
         :'thank_you_website_url' => :'String',
-        :'is_optimized_for_quality' => :'Boolean'
+        :'is_optimized_for_quality' => :'Boolean',
+        :'form_type' => :'String',
+        :'block_display_for_non_targeted_viewer' => :'Boolean',
+        :'allow_organic_lead_gen' => :'Boolean',
+        :'question_page_custom_headline' => :'String',
+        :'context_card' => :'CreateLeadFormRequestContextCard'
       }
     end
 
@@ -172,6 +219,26 @@ module Zernio
       if attributes.key?(:'is_optimized_for_quality')
         self.is_optimized_for_quality = attributes[:'is_optimized_for_quality']
       end
+
+      if attributes.key?(:'form_type')
+        self.form_type = attributes[:'form_type']
+      end
+
+      if attributes.key?(:'block_display_for_non_targeted_viewer')
+        self.block_display_for_non_targeted_viewer = attributes[:'block_display_for_non_targeted_viewer']
+      end
+
+      if attributes.key?(:'allow_organic_lead_gen')
+        self.allow_organic_lead_gen = attributes[:'allow_organic_lead_gen']
+      end
+
+      if attributes.key?(:'question_page_custom_headline')
+        self.question_page_custom_headline = attributes[:'question_page_custom_headline']
+      end
+
+      if attributes.key?(:'context_card')
+        self.context_card = attributes[:'context_card']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -221,6 +288,8 @@ module Zernio
       return false if @questions.length < 1
       return false if @privacy_policy_url.nil?
       return false if !@privacy_policy_link_text.nil? && @privacy_policy_link_text.to_s.length > 70
+      form_type_validator = EnumAttributeValidator.new('String', ["MORE_VOLUME", "HIGHER_INTENT", "RICH_CREATIVE"])
+      return false unless form_type_validator.valid?(@form_type)
       true
     end
 
@@ -286,6 +355,16 @@ module Zernio
       @privacy_policy_link_text = privacy_policy_link_text
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] form_type Object to be assigned
+    def form_type=(form_type)
+      validator = EnumAttributeValidator.new('String', ["MORE_VOLUME", "HIGHER_INTENT", "RICH_CREATIVE"])
+      unless validator.valid?(form_type)
+        fail ArgumentError, "invalid value for \"form_type\", must be one of #{validator.allowable_values}."
+      end
+      @form_type = form_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -303,7 +382,12 @@ module Zernio
           thank_you_button_text == o.thank_you_button_text &&
           thank_you_button_type == o.thank_you_button_type &&
           thank_you_website_url == o.thank_you_website_url &&
-          is_optimized_for_quality == o.is_optimized_for_quality
+          is_optimized_for_quality == o.is_optimized_for_quality &&
+          form_type == o.form_type &&
+          block_display_for_non_targeted_viewer == o.block_display_for_non_targeted_viewer &&
+          allow_organic_lead_gen == o.allow_organic_lead_gen &&
+          question_page_custom_headline == o.question_page_custom_headline &&
+          context_card == o.context_card
     end
 
     # @see the `==` method
@@ -315,7 +399,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, name, questions, privacy_policy_url, privacy_policy_link_text, follow_up_action_url, locale, thank_you_title, thank_you_body, thank_you_button_text, thank_you_button_type, thank_you_website_url, is_optimized_for_quality].hash
+      [account_id, name, questions, privacy_policy_url, privacy_policy_link_text, follow_up_action_url, locale, thank_you_title, thank_you_body, thank_you_button_text, thank_you_button_type, thank_you_website_url, is_optimized_for_quality, form_type, block_display_for_non_targeted_viewer, allow_organic_lead_gen, question_page_custom_headline, context_card].hash
     end
 
     # Builds the object from hash

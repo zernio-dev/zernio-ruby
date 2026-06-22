@@ -14,38 +14,24 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SearchAdTargeting200ResponseResultsInner < ApiModelBase
-    # The platform's opaque id. Use as a geo `key` (regions/cities/zips/metros) or an entity `id` (interests/behaviors) in TargetingSpec.
-    attr_accessor :id
+  # Geo exclusions. Meta only. Maps to excluded_geo_locations. Supports countries, regions, cities, and zips.
+  class CreateStandaloneAdRequestExcludedLocations < ApiModelBase
+    # ISO-3166 alpha-2 country codes to exclude.
+    attr_accessor :countries
 
-    # Human-readable label.
-    attr_accessor :name
+    attr_accessor :regions
 
-    # What the result is (e.g. city, region, country, zip, metro, interest, behavior, income).
-    attr_accessor :type
+    attr_accessor :cities
 
-    # Optional breadcrumb of parent labels (e.g. ['United States', 'California', 'Los Angeles']). Disambiguates same-named results.
-    attr_accessor :path
-
-    # Optional estimated reachable users for this option, when the platform returns it.
-    attr_accessor :audience_size
-
-    # Centre latitude of the location. Populated on Meta geo results (city, neighborhood, place, etc.). Useful for map views.
-    attr_accessor :latitude
-
-    # Centre longitude of the location.
-    attr_accessor :longitude
+    attr_accessor :zips
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'name' => :'name',
-        :'type' => :'type',
-        :'path' => :'path',
-        :'audience_size' => :'audienceSize',
-        :'latitude' => :'latitude',
-        :'longitude' => :'longitude'
+        :'countries' => :'countries',
+        :'regions' => :'regions',
+        :'cities' => :'cities',
+        :'zips' => :'zips'
       }
     end
 
@@ -62,13 +48,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'name' => :'String',
-        :'type' => :'String',
-        :'path' => :'Array<String>',
-        :'audience_size' => :'Integer',
-        :'latitude' => :'Float',
-        :'longitude' => :'Float'
+        :'countries' => :'Array<String>',
+        :'regions' => :'Array<CreateStandaloneAdRequestPlacesInner>',
+        :'cities' => :'Array<CreateStandaloneAdRequestPlacesInner>',
+        :'zips' => :'Array<CreateStandaloneAdRequestPlacesInner>'
       }
     end
 
@@ -82,52 +65,40 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SearchAdTargeting200ResponseResultsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateStandaloneAdRequestExcludedLocations` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SearchAdTargeting200ResponseResultsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateStandaloneAdRequestExcludedLocations`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      else
-        self.id = nil
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      else
-        self.name = nil
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      else
-        self.type = nil
-      end
-
-      if attributes.key?(:'path')
-        if (value = attributes[:'path']).is_a?(Array)
-          self.path = value
+      if attributes.key?(:'countries')
+        if (value = attributes[:'countries']).is_a?(Array)
+          self.countries = value
         end
       end
 
-      if attributes.key?(:'audience_size')
-        self.audience_size = attributes[:'audience_size']
+      if attributes.key?(:'regions')
+        if (value = attributes[:'regions']).is_a?(Array)
+          self.regions = value
+        end
       end
 
-      if attributes.key?(:'latitude')
-        self.latitude = attributes[:'latitude']
+      if attributes.key?(:'cities')
+        if (value = attributes[:'cities']).is_a?(Array)
+          self.cities = value
+        end
       end
 
-      if attributes.key?(:'longitude')
-        self.longitude = attributes[:'longitude']
+      if attributes.key?(:'zips')
+        if (value = attributes[:'zips']).is_a?(Array)
+          self.zips = value
+        end
       end
     end
 
@@ -136,18 +107,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -155,40 +114,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @type.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.nil?
-        fail ArgumentError, 'id cannot be nil'
-      end
-
-      @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] type Value to be assigned
-    def type=(type)
-      if type.nil?
-        fail ArgumentError, 'type cannot be nil'
-      end
-
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -196,13 +122,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          name == o.name &&
-          type == o.type &&
-          path == o.path &&
-          audience_size == o.audience_size &&
-          latitude == o.latitude &&
-          longitude == o.longitude
+          countries == o.countries &&
+          regions == o.regions &&
+          cities == o.cities &&
+          zips == o.zips
     end
 
     # @see the `==` method
@@ -214,7 +137,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, type, path, audience_size, latitude, longitude].hash
+      [countries, regions, cities, zips].hash
     end
 
     # Builds the object from hash

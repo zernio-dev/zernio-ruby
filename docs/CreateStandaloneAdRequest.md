@@ -45,6 +45,9 @@
 | **zips** | [**Array&lt;CreateStandaloneAdRequestZipsInner&gt;**](CreateStandaloneAdRequestZipsInner.md) | Postal/ZIP geo targeting. &#x60;key&#x60; is the platform&#39;s postal location ID from /v1/ads/targeting/search?dimension&#x3D;geo&amp;geoType&#x3D;zip. Supported on Meta, Google, TikTok, Pinterest, X. | [optional] |
 | **metros** | [**Array&lt;CreateStandaloneAdRequestZipsInner&gt;**](CreateStandaloneAdRequestZipsInner.md) | DMA / metro-area geo targeting. &#x60;key&#x60; is the platform&#39;s metro ID from /v1/ads/targeting/search?dimension&#x3D;geo&amp;geoType&#x3D;metro. | [optional] |
 | **custom_locations** | [**Array&lt;CreateStandaloneAdRequestCustomLocationsInner&gt;**](CreateStandaloneAdRequestCustomLocationsInner.md) | Point-radius (lat/lng) geo targeting. Meta only (custom_locations). Rejected on platforms without radius support. | [optional] |
+| **places** | [**Array&lt;CreateStandaloneAdRequestPlacesInner&gt;**](CreateStandaloneAdRequestPlacesInner.md) | Named points of interest (businesses, landmarks). Meta only. &#x60;key&#x60; from /v1/ads/targeting/search?dimension&#x3D;geo&amp;geoType&#x3D;place. Maps to geo_locations.places. | [optional] |
+| **neighborhoods** | [**Array&lt;CreateStandaloneAdRequestPlacesInner&gt;**](CreateStandaloneAdRequestPlacesInner.md) | Named neighbourhood areas. Meta only. &#x60;key&#x60; from /v1/ads/targeting/search?dimension&#x3D;geo&amp;geoType&#x3D;neighborhood. Maps to geo_locations.neighborhoods. | [optional] |
+| **excluded_locations** | [**CreateStandaloneAdRequestExcludedLocations**](CreateStandaloneAdRequestExcludedLocations.md) |  | [optional] |
 | **behaviors** | [**Array&lt;CreateStandaloneAdRequestBehaviorsInner&gt;**](CreateStandaloneAdRequestBehaviorsInner.md) | Behaviour entities from /v1/ads/targeting/search?dimension&#x3D;behavior. Supported on Meta and TikTok. Each must include id. | [optional] |
 | **income_tier** | **String** | Normalized household-income tier. Meta and TikTok express all four; Google maps only &#x60;top_10&#x60;; rejected on LinkedIn, X, and Pinterest. On Meta, income targeting is incompatible with housing/employment/credit &#x60;specialAdCategories&#x60;.  | [optional] |
 | **languages** | **Array&lt;String&gt;** | Language codes (e.g. [&#39;en&#39;]). Restricts the audience by language. | [optional] |
@@ -121,6 +124,9 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   zips: null,
   metros: null,
   custom_locations: null,
+  places: null,
+  neighborhoods: null,
+  excluded_locations: null,
   behaviors: null,
   income_tier: null,
   languages: null,

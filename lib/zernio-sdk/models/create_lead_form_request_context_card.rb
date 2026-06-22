@@ -14,38 +14,53 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SearchAdTargeting200ResponseResultsInner < ApiModelBase
-    # The platform's opaque id. Use as a geo `key` (regions/cities/zips/metros) or an entity `id` (interests/behaviors) in TargetingSpec.
-    attr_accessor :id
+  # Intro card shown before the questions page. Omit to skip the intro screen.
+  class CreateLeadFormRequestContextCard < ApiModelBase
+    # Headline / title of the intro card.
+    attr_accessor :title
 
-    # Human-readable label.
-    attr_accessor :name
+    # Body text lines shown on the intro card.
+    attr_accessor :content
 
-    # What the result is (e.g. city, region, country, zip, metro, interest, behavior, income).
-    attr_accessor :type
+    # Visual layout of the intro card.
+    attr_accessor :style
 
-    # Optional breadcrumb of parent labels (e.g. ['United States', 'California', 'Los Angeles']). Disambiguates same-named results.
-    attr_accessor :path
+    # CTA button label on the intro card.
+    attr_accessor :button_text
 
-    # Optional estimated reachable users for this option, when the platform returns it.
-    attr_accessor :audience_size
+    # Image hash of the cover photo (obtain from the Meta Ad Images API). Omit to show no image.
+    attr_accessor :cover_photo
 
-    # Centre latitude of the location. Populated on Meta geo results (city, neighborhood, place, etc.). Useful for map views.
-    attr_accessor :latitude
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # Centre longitude of the location.
-    attr_accessor :longitude
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'name' => :'name',
-        :'type' => :'type',
-        :'path' => :'path',
-        :'audience_size' => :'audienceSize',
-        :'latitude' => :'latitude',
-        :'longitude' => :'longitude'
+        :'title' => :'title',
+        :'content' => :'content',
+        :'style' => :'style',
+        :'button_text' => :'buttonText',
+        :'cover_photo' => :'coverPhoto'
       }
     end
 
@@ -62,13 +77,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'name' => :'String',
-        :'type' => :'String',
-        :'path' => :'Array<String>',
-        :'audience_size' => :'Integer',
-        :'latitude' => :'Float',
-        :'longitude' => :'Float'
+        :'title' => :'String',
+        :'content' => :'Array<String>',
+        :'style' => :'String',
+        :'button_text' => :'String',
+        :'cover_photo' => :'String'
       }
     end
 
@@ -82,52 +95,38 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SearchAdTargeting200ResponseResultsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateLeadFormRequestContextCard` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SearchAdTargeting200ResponseResultsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateLeadFormRequestContextCard`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      else
-        self.id = nil
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      else
-        self.name = nil
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      else
-        self.type = nil
-      end
-
-      if attributes.key?(:'path')
-        if (value = attributes[:'path']).is_a?(Array)
-          self.path = value
+      if attributes.key?(:'content')
+        if (value = attributes[:'content']).is_a?(Array)
+          self.content = value
         end
       end
 
-      if attributes.key?(:'audience_size')
-        self.audience_size = attributes[:'audience_size']
+      if attributes.key?(:'style')
+        self.style = attributes[:'style']
       end
 
-      if attributes.key?(:'latitude')
-        self.latitude = attributes[:'latitude']
+      if attributes.key?(:'button_text')
+        self.button_text = attributes[:'button_text']
       end
 
-      if attributes.key?(:'longitude')
-        self.longitude = attributes[:'longitude']
+      if attributes.key?(:'cover_photo')
+        self.cover_photo = attributes[:'cover_photo']
       end
     end
 
@@ -136,18 +135,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -155,40 +142,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @type.nil?
+      style_validator = EnumAttributeValidator.new('String', ["LIST_STYLE", "PARAGRAPH_STYLE"])
+      return false unless style_validator.valid?(@style)
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.nil?
-        fail ArgumentError, 'id cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] style Object to be assigned
+    def style=(style)
+      validator = EnumAttributeValidator.new('String', ["LIST_STYLE", "PARAGRAPH_STYLE"])
+      unless validator.valid?(style)
+        fail ArgumentError, "invalid value for \"style\", must be one of #{validator.allowable_values}."
       end
-
-      @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] type Value to be assigned
-    def type=(type)
-      if type.nil?
-        fail ArgumentError, 'type cannot be nil'
-      end
-
-      @type = type
+      @style = style
     end
 
     # Checks equality by comparing each attribute.
@@ -196,13 +162,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          name == o.name &&
-          type == o.type &&
-          path == o.path &&
-          audience_size == o.audience_size &&
-          latitude == o.latitude &&
-          longitude == o.longitude
+          title == o.title &&
+          content == o.content &&
+          style == o.style &&
+          button_text == o.button_text &&
+          cover_photo == o.cover_photo
     end
 
     # @see the `==` method
@@ -214,7 +178,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, type, path, audience_size, latitude, longitude].hash
+      [title, content, style, button_text, cover_photo].hash
     end
 
     # Builds the object from hash

@@ -129,6 +129,14 @@ module Zernio
     # Point-radius (lat/lng) geo targeting. Meta only (custom_locations). Rejected on platforms without radius support.
     attr_accessor :custom_locations
 
+    # Named points of interest (businesses, landmarks). Meta only. `key` from /v1/ads/targeting/search?dimension=geo&geoType=place. Maps to geo_locations.places.
+    attr_accessor :places
+
+    # Named neighbourhood areas. Meta only. `key` from /v1/ads/targeting/search?dimension=geo&geoType=neighborhood. Maps to geo_locations.neighborhoods.
+    attr_accessor :neighborhoods
+
+    attr_accessor :excluded_locations
+
     # Behaviour entities from /v1/ads/targeting/search?dimension=behavior. Supported on Meta and TikTok. Each must include id.
     attr_accessor :behaviors
 
@@ -274,6 +282,9 @@ module Zernio
         :'zips' => :'zips',
         :'metros' => :'metros',
         :'custom_locations' => :'customLocations',
+        :'places' => :'places',
+        :'neighborhoods' => :'neighborhoods',
+        :'excluded_locations' => :'excludedLocations',
         :'behaviors' => :'behaviors',
         :'income_tier' => :'incomeTier',
         :'languages' => :'languages',
@@ -359,6 +370,9 @@ module Zernio
         :'zips' => :'Array<CreateStandaloneAdRequestZipsInner>',
         :'metros' => :'Array<CreateStandaloneAdRequestZipsInner>',
         :'custom_locations' => :'Array<CreateStandaloneAdRequestCustomLocationsInner>',
+        :'places' => :'Array<CreateStandaloneAdRequestPlacesInner>',
+        :'neighborhoods' => :'Array<CreateStandaloneAdRequestPlacesInner>',
+        :'excluded_locations' => :'CreateStandaloneAdRequestExcludedLocations',
         :'behaviors' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
         :'income_tier' => :'String',
         :'languages' => :'Array<String>',
@@ -598,6 +612,22 @@ module Zernio
         if (value = attributes[:'custom_locations']).is_a?(Array)
           self.custom_locations = value
         end
+      end
+
+      if attributes.key?(:'places')
+        if (value = attributes[:'places']).is_a?(Array)
+          self.places = value
+        end
+      end
+
+      if attributes.key?(:'neighborhoods')
+        if (value = attributes[:'neighborhoods']).is_a?(Array)
+          self.neighborhoods = value
+        end
+      end
+
+      if attributes.key?(:'excluded_locations')
+        self.excluded_locations = attributes[:'excluded_locations']
       end
 
       if attributes.key?(:'behaviors')
@@ -1235,6 +1265,9 @@ module Zernio
           zips == o.zips &&
           metros == o.metros &&
           custom_locations == o.custom_locations &&
+          places == o.places &&
+          neighborhoods == o.neighborhoods &&
+          excluded_locations == o.excluded_locations &&
           behaviors == o.behaviors &&
           income_tier == o.income_tier &&
           languages == o.languages &&
@@ -1274,7 +1307,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, places, neighborhoods, excluded_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

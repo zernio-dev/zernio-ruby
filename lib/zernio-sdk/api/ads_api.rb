@@ -2488,7 +2488,7 @@ module Zernio
     # @param q [String] Search query. For geo, the locality name only (no region/country suffix).
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (default to 'interest')
-    # @option opts [String] :geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;place&#x60; resolves named points of interest (businesses, landmarks) by proximity. &#x60;neighborhood&#x60; resolves named neighbourhood areas. Defaults to &#x60;city&#x60;. (default to 'city')
+    # @option opts [String] :geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;place&#x60; resolves named points of interest (businesses, landmarks). &#x60;neighborhood&#x60; resolves named neighbourhood areas. Use &#x60;all&#x60; to search every geo type in a single relevance-ranked call — mirrors Meta&#39;s own unified search box. Defaults to &#x60;city&#x60;. (default to 'city')
     # @option opts [String] :country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search.
     # @option opts [Integer] :limit Maximum results to return. (default to 25)
     # @return [SearchAdTargeting200Response]
@@ -2503,7 +2503,7 @@ module Zernio
     # @param q [String] Search query. For geo, the locality name only (no region/country suffix).
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension What to search. &#x60;geo&#x60; resolves locations (scope further with &#x60;geoType&#x60;), &#x60;interest&#x60;/&#x60;behavior&#x60; resolve audience entities, &#x60;income&#x60; resolves income-tier options. Defaults to &#x60;interest&#x60; for backward compatibility with the deprecated /v1/ads/interests alias. (default to 'interest')
-    # @option opts [String] :geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;place&#x60; resolves named points of interest (businesses, landmarks) by proximity. &#x60;neighborhood&#x60; resolves named neighbourhood areas. Defaults to &#x60;city&#x60;. (default to 'city')
+    # @option opts [String] :geo_type Only used when &#x60;dimension&#x3D;geo&#x60;. The kind of location to resolve. &#x60;place&#x60; resolves named points of interest (businesses, landmarks). &#x60;neighborhood&#x60; resolves named neighbourhood areas. Use &#x60;all&#x60; to search every geo type in a single relevance-ranked call — mirrors Meta&#39;s own unified search box. Defaults to &#x60;city&#x60;. (default to 'city')
     # @option opts [String] :country_code ISO 3166-1 alpha-2 country code (e.g. NL) to scope a geo search.
     # @option opts [Integer] :limit Maximum results to return. (default to 25)
     # @return [Array<(SearchAdTargeting200Response, Integer, Hash)>] SearchAdTargeting200Response data, response status code and response headers
@@ -2523,7 +2523,7 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'dimension'] && !allowable_values.include?(opts[:'dimension'])
         fail ArgumentError, "invalid value for \"dimension\", must be one of #{allowable_values}"
       end
-      allowable_values = ["country", "region", "city", "subcity", "neighborhood", "place", "zip", "metro_area", "geo_market"]
+      allowable_values = ["all", "country", "region", "city", "subcity", "neighborhood", "place", "zip", "metro_area", "geo_market"]
       if @api_client.config.client_side_validation && opts[:'geo_type'] && !allowable_values.include?(opts[:'geo_type'])
         fail ArgumentError, "invalid value for \"geo_type\", must be one of #{allowable_values}"
       end
