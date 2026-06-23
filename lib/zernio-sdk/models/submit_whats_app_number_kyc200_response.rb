@@ -19,6 +19,9 @@ module Zernio
 
     attr_accessor :phone_number
 
+    # Every number provisioned from this submission. Length equals the requested `quantity` on full success (fewer if some orders failed; best-effort). The first element mirrors `phoneNumber`.
+    attr_accessor :numbers
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -45,7 +48,8 @@ module Zernio
     def self.attribute_map
       {
         :'status' => :'status',
-        :'phone_number' => :'phoneNumber'
+        :'phone_number' => :'phoneNumber',
+        :'numbers' => :'numbers'
       }
     end
 
@@ -63,7 +67,8 @@ module Zernio
     def self.openapi_types
       {
         :'status' => :'String',
-        :'phone_number' => :'SubmitWhatsAppNumberKyc200ResponsePhoneNumber'
+        :'phone_number' => :'SubmitWhatsAppNumberKyc200ResponsePhoneNumber',
+        :'numbers' => :'Array<SubmitWhatsAppNumberKyc200ResponseNumbersInner>'
       }
     end
 
@@ -95,6 +100,12 @@ module Zernio
 
       if attributes.key?(:'phone_number')
         self.phone_number = attributes[:'phone_number']
+      end
+
+      if attributes.key?(:'numbers')
+        if (value = attributes[:'numbers']).is_a?(Array)
+          self.numbers = value
+        end
       end
     end
 
@@ -131,7 +142,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           status == o.status &&
-          phone_number == o.phone_number
+          phone_number == o.phone_number &&
+          numbers == o.numbers
     end
 
     # @see the `==` method
@@ -143,7 +155,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, phone_number].hash
+      [status, phone_number, numbers].hash
     end
 
     # Builds the object from hash

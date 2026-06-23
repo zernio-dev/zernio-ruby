@@ -22,6 +22,9 @@ module Zernio
     # Idempotency token for this submission attempt. A retry/double-submit with the same token returns the same number; omit and each call creates a new number.
     attr_accessor :submission_id
 
+    # Provision several same-country numbers from one submission (1-5). The single verification covers all of them; each number is billed only when it activates. Numbers that fail to order are skipped (best-effort).
+    attr_accessor :quantity
+
     # Reuse a prior approved verification for this country (skips document/field collection; places the order immediately).
     attr_accessor :reuse
 
@@ -48,6 +51,7 @@ module Zernio
         :'profile_id' => :'profileId',
         :'country' => :'country',
         :'submission_id' => :'submissionId',
+        :'quantity' => :'quantity',
         :'reuse' => :'reuse',
         :'reuse_from' => :'reuseFrom',
         :'end_user_first_name' => :'endUserFirstName',
@@ -74,6 +78,7 @@ module Zernio
         :'profile_id' => :'String',
         :'country' => :'String',
         :'submission_id' => :'String',
+        :'quantity' => :'Integer',
         :'reuse' => :'Boolean',
         :'reuse_from' => :'String',
         :'end_user_first_name' => :'String',
@@ -122,6 +127,12 @@ module Zernio
         self.submission_id = attributes[:'submission_id']
       end
 
+      if attributes.key?(:'quantity')
+        self.quantity = attributes[:'quantity']
+      else
+        self.quantity = 1
+      end
+
       if attributes.key?(:'reuse')
         self.reuse = attributes[:'reuse']
       end
@@ -168,6 +179,14 @@ module Zernio
         invalid_properties.push('invalid value for "country", country cannot be nil.')
       end
 
+      if !@quantity.nil? && @quantity > 5
+        invalid_properties.push('invalid value for "quantity", must be smaller than or equal to 5.')
+      end
+
+      if !@quantity.nil? && @quantity < 1
+        invalid_properties.push('invalid value for "quantity", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -177,6 +196,8 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @profile_id.nil?
       return false if @country.nil?
+      return false if !@quantity.nil? && @quantity > 5
+      return false if !@quantity.nil? && @quantity < 1
       true
     end
 
@@ -200,6 +221,24 @@ module Zernio
       @country = country
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] quantity Value to be assigned
+    def quantity=(quantity)
+      if quantity.nil?
+        fail ArgumentError, 'quantity cannot be nil'
+      end
+
+      if quantity > 5
+        fail ArgumentError, 'invalid value for "quantity", must be smaller than or equal to 5.'
+      end
+
+      if quantity < 1
+        fail ArgumentError, 'invalid value for "quantity", must be greater than or equal to 1.'
+      end
+
+      @quantity = quantity
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -208,6 +247,7 @@ module Zernio
           profile_id == o.profile_id &&
           country == o.country &&
           submission_id == o.submission_id &&
+          quantity == o.quantity &&
           reuse == o.reuse &&
           reuse_from == o.reuse_from &&
           end_user_first_name == o.end_user_first_name &&
@@ -226,7 +266,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, submission_id, reuse, reuse_from, end_user_first_name, end_user_last_name, values, documents, address].hash
+      [profile_id, country, submission_id, quantity, reuse, reuse_from, end_user_first_name, end_user_last_name, values, documents, address].hash
     end
 
     # Builds the object from hash
