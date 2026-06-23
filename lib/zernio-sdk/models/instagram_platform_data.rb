@@ -45,6 +45,9 @@ module Zernio
     # Alias for instagramThumbnail. If both are provided, instagramThumbnail takes priority.
     attr_accessor :reel_cover
 
+    # When true, the post is labeled by Instagram as containing AI-generated media. Per Meta, this self-disclosure label is for AI-generated media, not AI-written captions. Applies to feed posts, Reels, Stories, and carousels.
+    attr_accessor :is_ai_generated
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -79,7 +82,8 @@ module Zernio
         :'audio_name' => :'audioName',
         :'thumb_offset' => :'thumbOffset',
         :'instagram_thumbnail' => :'instagramThumbnail',
-        :'reel_cover' => :'reelCover'
+        :'reel_cover' => :'reelCover',
+        :'is_ai_generated' => :'isAiGenerated'
       }
     end
 
@@ -105,7 +109,8 @@ module Zernio
         :'audio_name' => :'String',
         :'thumb_offset' => :'Integer',
         :'instagram_thumbnail' => :'String',
-        :'reel_cover' => :'String'
+        :'reel_cover' => :'String',
+        :'is_ai_generated' => :'Boolean'
       }
     end
 
@@ -176,6 +181,12 @@ module Zernio
       if attributes.key?(:'reel_cover')
         self.reel_cover = attributes[:'reel_cover']
       end
+
+      if attributes.key?(:'is_ai_generated')
+        self.is_ai_generated = attributes[:'is_ai_generated']
+      else
+        self.is_ai_generated = false
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -238,7 +249,8 @@ module Zernio
           audio_name == o.audio_name &&
           thumb_offset == o.thumb_offset &&
           instagram_thumbnail == o.instagram_thumbnail &&
-          reel_cover == o.reel_cover
+          reel_cover == o.reel_cover &&
+          is_ai_generated == o.is_ai_generated
     end
 
     # @see the `==` method
@@ -250,7 +262,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, thumb_offset, instagram_thumbnail, reel_cover].hash
+      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, thumb_offset, instagram_thumbnail, reel_cover, is_ai_generated].hash
     end
 
     # Builds the object from hash
