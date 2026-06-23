@@ -421,6 +421,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppFlowsApi* | [**update_whats_app_flow**](docs/WhatsAppFlowsApi.md#update_whats_app_flow) | **PATCH** /v1/whatsapp/flows/{flowId} | Update flow
 *Zernio::WhatsAppFlowsApi* | [**upload_whats_app_flow_json**](docs/WhatsAppFlowsApi.md#upload_whats_app_flow_json) | **PUT** /v1/whatsapp/flows/{flowId}/json | Upload flow JSON
 *Zernio::WhatsAppPhoneNumbersApi* | [**check_whats_app_number_availability**](docs/WhatsAppPhoneNumbersApi.md#check_whats_app_number_availability) | **GET** /v1/whatsapp/phone-numbers/availability | Check a country's availability + address constraint
+*Zernio::WhatsAppPhoneNumbersApi* | [**create_whats_app_number_kyc_link**](docs/WhatsAppPhoneNumbersApi.md#create_whats_app_number_kyc_link) | **POST** /v1/whatsapp/phone-numbers/kyc/share | Create a hosted KYC link
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_number_info**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_number_info) | **GET** /v1/whatsapp/number-info | Get number status
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_number_kyc_form**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_number_kyc_form) | **GET** /v1/whatsapp/phone-numbers/kyc | Get regulated-number KYC form spec
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_number_remediation**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_number_remediation) | **GET** /v1/whatsapp/phone-numbers/{id}/remediate | Get the declined requirements to fix
@@ -669,6 +670,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateWhatsAppGroupChat201ResponseGroup](docs/CreateWhatsAppGroupChat201ResponseGroup.md)
  - [Zernio::CreateWhatsAppGroupChatRequest](docs/CreateWhatsAppGroupChatRequest.md)
  - [Zernio::CreateWhatsAppGroupInviteLink200Response](docs/CreateWhatsAppGroupInviteLink200Response.md)
+ - [Zernio::CreateWhatsAppNumberKycLink200Response](docs/CreateWhatsAppNumberKycLink200Response.md)
+ - [Zernio::CreateWhatsAppNumberKycLinkRequest](docs/CreateWhatsAppNumberKycLinkRequest.md)
+ - [Zernio::CreateWhatsAppNumberKycLinkRequestBranding](docs/CreateWhatsAppNumberKycLinkRequestBranding.md)
  - [Zernio::CreateWhatsAppSandboxSession200Response](docs/CreateWhatsAppSandboxSession200Response.md)
  - [Zernio::CreateWhatsAppSandboxSessionRequest](docs/CreateWhatsAppSandboxSessionRequest.md)
  - [Zernio::CreateWhatsAppTemplate200Response](docs/CreateWhatsAppTemplate200Response.md)
@@ -1188,6 +1192,7 @@ Class | Method | HTTP request | Description
  - [Zernio::OnWhatsAppNumberActivatedRequestNumber](docs/OnWhatsAppNumberActivatedRequestNumber.md)
  - [Zernio::OnWhatsAppNumberDeclinedRequest](docs/OnWhatsAppNumberDeclinedRequest.md)
  - [Zernio::OnWhatsAppNumberDeclinedRequestNumber](docs/OnWhatsAppNumberDeclinedRequestNumber.md)
+ - [Zernio::OnWhatsAppNumberKycSubmittedRequest](docs/OnWhatsAppNumberKycSubmittedRequest.md)
  - [Zernio::OnWhatsAppNumberReactivatedRequest](docs/OnWhatsAppNumberReactivatedRequest.md)
  - [Zernio::OnWhatsAppNumberReleasedRequest](docs/OnWhatsAppNumberReleasedRequest.md)
  - [Zernio::OnWhatsAppNumberSuspendedRequest](docs/OnWhatsAppNumberSuspendedRequest.md)

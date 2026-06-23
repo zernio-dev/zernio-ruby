@@ -40,6 +40,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_whats_app_number_action_required**](WebhookEventsApi.md#on_whats_app_number_action_required) | **POST** /whatsapp.number.action_required | WhatsApp number action required event |
 | [**on_whats_app_number_activated**](WebhookEventsApi.md#on_whats_app_number_activated) | **POST** /whatsapp.number.activated | WhatsApp number activated event |
 | [**on_whats_app_number_declined**](WebhookEventsApi.md#on_whats_app_number_declined) | **POST** /whatsapp.number.declined | WhatsApp number declined event |
+| [**on_whats_app_number_kyc_submitted**](WebhookEventsApi.md#on_whats_app_number_kyc_submitted) | **POST** /whatsapp.number.kyc_submitted | WhatsApp number KYC submitted event |
 | [**on_whats_app_number_reactivated**](WebhookEventsApi.md#on_whats_app_number_reactivated) | **POST** /whatsapp.number.reactivated | WhatsApp number reactivated event |
 | [**on_whats_app_number_released**](WebhookEventsApi.md#on_whats_app_number_released) | **POST** /whatsapp.number.released | WhatsApp number released event |
 | [**on_whats_app_number_suspended**](WebhookEventsApi.md#on_whats_app_number_suspended) | **POST** /whatsapp.number.suspended | WhatsApp number suspended event |
@@ -2480,6 +2481,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **on_whats_app_number_declined_request** | [**OnWhatsAppNumberDeclinedRequest**](OnWhatsAppNumberDeclinedRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_whats_app_number_kyc_submitted
+
+> on_whats_app_number_kyc_submitted(on_whats_app_number_kyc_submitted_request)
+
+WhatsApp number KYC submitted event
+
+Fired when an end customer completes a hosted KYC share link (POST /v1/whatsapp/phone-numbers/kyc/share). The number enters review (pending_regulatory) under your account; `whatsapp.number.activated` or `whatsapp.number.declined` follows once the provider rules on it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_whats_app_number_kyc_submitted_request =  # OnWhatsAppNumberKycSubmittedRequest | 
+
+begin
+  # WhatsApp number KYC submitted event
+  api_instance.on_whats_app_number_kyc_submitted(on_whats_app_number_kyc_submitted_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_number_kyc_submitted: #{e}"
+end
+```
+
+#### Using the on_whats_app_number_kyc_submitted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_number_kyc_submitted_with_http_info(on_whats_app_number_kyc_submitted_request)
+
+```ruby
+begin
+  # WhatsApp number KYC submitted event
+  data, status_code, headers = api_instance.on_whats_app_number_kyc_submitted_with_http_info(on_whats_app_number_kyc_submitted_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_number_kyc_submitted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_whats_app_number_kyc_submitted_request** | [**OnWhatsAppNumberKycSubmittedRequest**](OnWhatsAppNumberKycSubmittedRequest.md) |  |  |
 
 ### Return type
 

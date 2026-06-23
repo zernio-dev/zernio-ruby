@@ -232,6 +232,9 @@ docs/CreateWhatsAppGroupChat201Response.md
 docs/CreateWhatsAppGroupChat201ResponseGroup.md
 docs/CreateWhatsAppGroupChatRequest.md
 docs/CreateWhatsAppGroupInviteLink200Response.md
+docs/CreateWhatsAppNumberKycLink200Response.md
+docs/CreateWhatsAppNumberKycLinkRequest.md
+docs/CreateWhatsAppNumberKycLinkRequestBranding.md
 docs/CreateWhatsAppSandboxSession200Response.md
 docs/CreateWhatsAppSandboxSessionRequest.md
 docs/CreateWhatsAppTemplate200Response.md
@@ -768,6 +771,7 @@ docs/OnWhatsAppNumberActivatedRequest.md
 docs/OnWhatsAppNumberActivatedRequestNumber.md
 docs/OnWhatsAppNumberDeclinedRequest.md
 docs/OnWhatsAppNumberDeclinedRequestNumber.md
+docs/OnWhatsAppNumberKycSubmittedRequest.md
 docs/OnWhatsAppNumberReactivatedRequest.md
 docs/OnWhatsAppNumberReleasedRequest.md
 docs/OnWhatsAppNumberSuspendedRequest.md
@@ -1497,6 +1501,9 @@ lib/zernio-sdk/models/create_whats_app_group_chat201_response.rb
 lib/zernio-sdk/models/create_whats_app_group_chat201_response_group.rb
 lib/zernio-sdk/models/create_whats_app_group_chat_request.rb
 lib/zernio-sdk/models/create_whats_app_group_invite_link200_response.rb
+lib/zernio-sdk/models/create_whats_app_number_kyc_link200_response.rb
+lib/zernio-sdk/models/create_whats_app_number_kyc_link_request.rb
+lib/zernio-sdk/models/create_whats_app_number_kyc_link_request_branding.rb
 lib/zernio-sdk/models/create_whats_app_sandbox_session200_response.rb
 lib/zernio-sdk/models/create_whats_app_sandbox_session_request.rb
 lib/zernio-sdk/models/create_whats_app_template200_response.rb
@@ -2016,6 +2023,7 @@ lib/zernio-sdk/models/on_whats_app_number_activated_request.rb
 lib/zernio-sdk/models/on_whats_app_number_activated_request_number.rb
 lib/zernio-sdk/models/on_whats_app_number_declined_request.rb
 lib/zernio-sdk/models/on_whats_app_number_declined_request_number.rb
+lib/zernio-sdk/models/on_whats_app_number_kyc_submitted_request.rb
 lib/zernio-sdk/models/on_whats_app_number_reactivated_request.rb
 lib/zernio-sdk/models/on_whats_app_number_released_request.rb
 lib/zernio-sdk/models/on_whats_app_number_suspended_request.rb
@@ -2719,6 +2727,9 @@ spec/models/create_whats_app_group_chat201_response_group_spec.rb
 spec/models/create_whats_app_group_chat201_response_spec.rb
 spec/models/create_whats_app_group_chat_request_spec.rb
 spec/models/create_whats_app_group_invite_link200_response_spec.rb
+spec/models/create_whats_app_number_kyc_link200_response_spec.rb
+spec/models/create_whats_app_number_kyc_link_request_branding_spec.rb
+spec/models/create_whats_app_number_kyc_link_request_spec.rb
 spec/models/create_whats_app_sandbox_session200_response_spec.rb
 spec/models/create_whats_app_sandbox_session_request_spec.rb
 spec/models/create_whats_app_template200_response_spec.rb
@@ -3238,6 +3249,7 @@ spec/models/on_whats_app_number_activated_request_number_spec.rb
 spec/models/on_whats_app_number_activated_request_spec.rb
 spec/models/on_whats_app_number_declined_request_number_spec.rb
 spec/models/on_whats_app_number_declined_request_spec.rb
+spec/models/on_whats_app_number_kyc_submitted_request_spec.rb
 spec/models/on_whats_app_number_reactivated_request_spec.rb
 spec/models/on_whats_app_number_released_request_spec.rb
 spec/models/on_whats_app_number_suspended_request_spec.rb

@@ -83,6 +83,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a hosted KYC link
+    # Create a single-use, 7-day hosted KYC link that your end customer completes WITHOUT a Zernio login — useful when the person who holds the ID and address is not your team. They fill the regulated verification on a Zernio-hosted page; the number provisions under YOUR account once they submit. Only regulated (KYC) countries are valid: a country that does not require KYC returns 400.  White-label the page with `branding` (your company name, logo, brand color). Supply `redirect_url` to send the end customer back to your own site after a successful submit (completion params are appended — see below). Listen for the `whatsapp.number.kyc_submitted` webhook to react when the form is completed. 
+    # @param create_whats_app_number_kyc_link_request [CreateWhatsAppNumberKycLinkRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateWhatsAppNumberKycLink200Response]
+    def create_whats_app_number_kyc_link(create_whats_app_number_kyc_link_request, opts = {})
+      data, _status_code, _headers = create_whats_app_number_kyc_link_with_http_info(create_whats_app_number_kyc_link_request, opts)
+      data
+    end
+
+    # Create a hosted KYC link
+    # Create a single-use, 7-day hosted KYC link that your end customer completes WITHOUT a Zernio login — useful when the person who holds the ID and address is not your team. They fill the regulated verification on a Zernio-hosted page; the number provisions under YOUR account once they submit. Only regulated (KYC) countries are valid: a country that does not require KYC returns 400.  White-label the page with &#x60;branding&#x60; (your company name, logo, brand color). Supply &#x60;redirect_url&#x60; to send the end customer back to your own site after a successful submit (completion params are appended — see below). Listen for the &#x60;whatsapp.number.kyc_submitted&#x60; webhook to react when the form is completed. 
+    # @param create_whats_app_number_kyc_link_request [CreateWhatsAppNumberKycLinkRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateWhatsAppNumberKycLink200Response, Integer, Hash)>] CreateWhatsAppNumberKycLink200Response data, response status code and response headers
+    def create_whats_app_number_kyc_link_with_http_info(create_whats_app_number_kyc_link_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.create_whats_app_number_kyc_link ...'
+      end
+      # verify the required parameter 'create_whats_app_number_kyc_link_request' is set
+      if @api_client.config.client_side_validation && create_whats_app_number_kyc_link_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_whats_app_number_kyc_link_request' when calling WhatsAppPhoneNumbersApi.create_whats_app_number_kyc_link"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/kyc/share'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_whats_app_number_kyc_link_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateWhatsAppNumberKycLink200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppPhoneNumbersApi.create_whats_app_number_kyc_link",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#create_whats_app_number_kyc_link\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get number status
     # Live snapshot of a connected number straight from Meta: the phone-number node (display number, display name + approval, quality rating, messaging-limit tier, throughput, official-business badge, connection status, health_status) and its owning WhatsApp Business Account (name, business verification, timezone, health_status). Fetched live because Meta updates quality/tier/name/health over time; the call also refreshes the cached values shown on the connection card. 
     # @param account_id [String] WhatsApp social account ID
