@@ -50,7 +50,7 @@ module Zernio
       {
         :'name' => :'String',
         :'language' => :'String',
-        :'components' => :'Array<Object>',
+        :'components' => :'Array<Hash<String, Object>>',
         :'variable_mapping' => :'Hash<String, CreateBroadcastRequestTemplateVariableMappingValue>'
       }
     end
