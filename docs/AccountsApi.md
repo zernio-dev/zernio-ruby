@@ -229,7 +229,7 @@ end
 
 ## get_follower_stats
 
-> <GetFollowerStats200Response> get_follower_stats(opts)
+> <FollowerStatsResponse> get_follower_stats(opts)
 
 Get follower stats
 
@@ -268,7 +268,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetFollowerStats200Response>, Integer, Hash)> get_follower_stats_with_http_info(opts)
+> <Array(<FollowerStatsResponse>, Integer, Hash)> get_follower_stats_with_http_info(opts)
 
 ```ruby
 begin
@@ -276,7 +276,7 @@ begin
   data, status_code, headers = api_instance.get_follower_stats_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetFollowerStats200Response>
+  p data # => <FollowerStatsResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->get_follower_stats_with_http_info: #{e}"
 end
@@ -294,7 +294,7 @@ end
 
 ### Return type
 
-[**GetFollowerStats200Response**](GetFollowerStats200Response.md)
+[**FollowerStatsResponse**](FollowerStatsResponse.md)
 
 ### Authorization
 
@@ -381,7 +381,7 @@ end
 
 ## list_accounts
 
-> <ListAccounts200Response> list_accounts(opts)
+> <AccountsListResponse> list_accounts(opts)
 
 List accounts
 
@@ -421,7 +421,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListAccounts200Response>, Integer, Hash)> list_accounts_with_http_info(opts)
+> <Array(<AccountsListResponse>, Integer, Hash)> list_accounts_with_http_info(opts)
 
 ```ruby
 begin
@@ -429,7 +429,7 @@ begin
   data, status_code, headers = api_instance.list_accounts_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ListAccounts200Response>
+  p data # => <AccountsListResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling AccountsApi->list_accounts_with_http_info: #{e}"
 end
@@ -448,7 +448,7 @@ end
 
 ### Return type
 
-[**ListAccounts200Response**](ListAccounts200Response.md)
+[**AccountsListResponse**](AccountsListResponse.md)
 
 ### Authorization
 

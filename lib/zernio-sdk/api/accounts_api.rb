@@ -227,7 +227,7 @@ module Zernio
     # @option opts [Date] :from_date Start date in YYYY-MM-DD format (defaults to 30 days ago)
     # @option opts [Date] :to_date End date in YYYY-MM-DD format (defaults to today)
     # @option opts [String] :granularity Data aggregation level (default to 'daily')
-    # @return [GetFollowerStats200Response]
+    # @return [FollowerStatsResponse]
     def get_follower_stats(opts = {})
       data, _status_code, _headers = get_follower_stats_with_http_info(opts)
       data
@@ -241,7 +241,7 @@ module Zernio
     # @option opts [Date] :from_date Start date in YYYY-MM-DD format (defaults to 30 days ago)
     # @option opts [Date] :to_date End date in YYYY-MM-DD format (defaults to today)
     # @option opts [String] :granularity Data aggregation level (default to 'daily')
-    # @return [Array<(GetFollowerStats200Response, Integer, Hash)>] GetFollowerStats200Response data, response status code and response headers
+    # @return [Array<(FollowerStatsResponse, Integer, Hash)>] FollowerStatsResponse data, response status code and response headers
     def get_follower_stats_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsApi.get_follower_stats ...'
@@ -273,7 +273,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetFollowerStats200Response'
+      return_type = opts[:debug_return_type] || 'FollowerStatsResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -374,7 +374,7 @@ module Zernio
     # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles. (default to false)
     # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
     # @option opts [Integer] :limit Page size. Required alongside page for pagination.
-    # @return [ListAccounts200Response]
+    # @return [AccountsListResponse]
     def list_accounts(opts = {})
       data, _status_code, _headers = list_accounts_with_http_info(opts)
       data
@@ -389,7 +389,7 @@ module Zernio
     # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles. (default to false)
     # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
     # @option opts [Integer] :limit Page size. Required alongside page for pagination.
-    # @return [Array<(ListAccounts200Response, Integer, Hash)>] ListAccounts200Response data, response status code and response headers
+    # @return [Array<(AccountsListResponse, Integer, Hash)>] AccountsListResponse data, response status code and response headers
     def list_accounts_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountsApi.list_accounts ...'
@@ -434,7 +434,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ListAccounts200Response'
+      return_type = opts[:debug_return_type] || 'AccountsListResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

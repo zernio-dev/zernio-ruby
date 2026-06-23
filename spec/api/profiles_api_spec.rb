@@ -49,7 +49,7 @@ describe 'ProfilesApi' do
   # Permanently deletes a profile by ID.
   # @param profile_id 
   # @param [Hash] opts the optional parameters
-  # @return [DeleteAccountGroup200Response]
+  # @return [ProfileDeleteResponse]
   describe 'delete_profile test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -61,7 +61,7 @@ describe 'ProfilesApi' do
   # Returns a single profile by ID, including its name, color, and default status.
   # @param profile_id 
   # @param [Hash] opts the optional parameters
-  # @return [GetProfile200Response]
+  # @return [ProfileGetResponse]
   describe 'get_profile test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -86,7 +86,7 @@ describe 'ProfilesApi' do
   # @param profile_id 
   # @param update_profile_request 
   # @param [Hash] opts the optional parameters
-  # @return [UpdateProfile200Response]
+  # @return [ProfileUpdateResponse]
   describe 'update_profile test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

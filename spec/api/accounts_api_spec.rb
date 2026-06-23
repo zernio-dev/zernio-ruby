@@ -79,7 +79,7 @@ describe 'AccountsApi' do
   # @option opts [Date] :from_date Start date in YYYY-MM-DD format (defaults to 30 days ago)
   # @option opts [Date] :to_date End date in YYYY-MM-DD format (defaults to today)
   # @option opts [String] :granularity Data aggregation level
-  # @return [GetFollowerStats200Response]
+  # @return [FollowerStatsResponse]
   describe 'get_follower_stats test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -109,7 +109,7 @@ describe 'AccountsApi' do
   # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles.
   # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
   # @option opts [Integer] :limit Page size. Required alongside page for pagination.
-  # @return [ListAccounts200Response]
+  # @return [AccountsListResponse]
   describe 'list_accounts test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

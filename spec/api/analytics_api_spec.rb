@@ -127,7 +127,7 @@ describe 'AnalyticsApi' do
   # @option opts [Date] :from_date Start date in YYYY-MM-DD format (defaults to 30 days ago)
   # @option opts [Date] :to_date End date in YYYY-MM-DD format (defaults to today)
   # @option opts [String] :granularity Data aggregation level
-  # @return [GetFollowerStats200Response]
+  # @return [FollowerStatsResponse]
   describe 'get_follower_stats test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

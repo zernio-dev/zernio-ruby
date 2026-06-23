@@ -20,7 +20,7 @@ module Zernio
       def openapi_one_of
         [
           :'ListQueueSlots200ResponseOneOf',
-          :'ListQueueSlots200ResponseOneOf1'
+          :'QueueSlotsResponse'
         ]
       end
 

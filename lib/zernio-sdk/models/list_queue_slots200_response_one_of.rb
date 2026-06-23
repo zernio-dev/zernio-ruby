@@ -14,20 +14,17 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Single queue response (default behavior)
+  # All queues response (when all=true)
   class ListQueueSlots200ResponseOneOf < ApiModelBase
-    attr_accessor :exists
+    attr_accessor :queues
 
-    attr_accessor :schedule
-
-    attr_accessor :next_slots
+    attr_accessor :count
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'exists' => :'exists',
-        :'schedule' => :'schedule',
-        :'next_slots' => :'nextSlots'
+        :'queues' => :'queues',
+        :'count' => :'count'
       }
     end
 
@@ -44,9 +41,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'exists' => :'Boolean',
-        :'schedule' => :'QueueSchedule',
-        :'next_slots' => :'Array<Time>'
+        :'queues' => :'Array<QueueSchedule>',
+        :'count' => :'Integer'
       }
     end
 
@@ -72,18 +68,14 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'exists')
-        self.exists = attributes[:'exists']
-      end
-
-      if attributes.key?(:'schedule')
-        self.schedule = attributes[:'schedule']
-      end
-
-      if attributes.key?(:'next_slots')
-        if (value = attributes[:'next_slots']).is_a?(Array)
-          self.next_slots = value
+      if attributes.key?(:'queues')
+        if (value = attributes[:'queues']).is_a?(Array)
+          self.queues = value
         end
+      end
+
+      if attributes.key?(:'count')
+        self.count = attributes[:'count']
       end
     end
 
@@ -107,9 +99,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          exists == o.exists &&
-          schedule == o.schedule &&
-          next_slots == o.next_slots
+          queues == o.queues &&
+          count == o.count
     end
 
     # @see the `==` method
@@ -121,7 +112,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [exists, schedule, next_slots].hash
+      [queues, count].hash
     end
 
     # Builds the object from hash

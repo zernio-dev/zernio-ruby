@@ -50,7 +50,7 @@ describe 'QueueApi' do
   # @param profile_id 
   # @param queue_id Queue ID to delete
   # @param [Hash] opts the optional parameters
-  # @return [DeleteQueueSlot200Response]
+  # @return [QueueDeleteResponse]
   describe 'delete_queue_slot test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -63,7 +63,7 @@ describe 'QueueApi' do
   # @param profile_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :queue_id Specific queue ID (optional, defaults to profile&#39;s default queue)
-  # @return [GetNextQueueSlot200Response]
+  # @return [QueueNextSlotResponse]
   describe 'get_next_queue_slot test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -91,7 +91,7 @@ describe 'QueueApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :queue_id Filter by specific queue ID. Omit to use the default queue.
   # @option opts [Integer] :count 
-  # @return [PreviewQueue200Response]
+  # @return [QueuePreviewResponse]
   describe 'preview_queue test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -103,7 +103,7 @@ describe 'QueueApi' do
   # Create a new queue or update an existing one. Without queueId, creates/updates the default queue. With queueId, updates a specific queue. With setAsDefault&#x3D;true, makes this queue the default for the profile. 
   # @param update_queue_slot_request 
   # @param [Hash] opts the optional parameters
-  # @return [UpdateQueueSlot200Response]
+  # @return [QueueUpdateResponse]
   describe 'update_queue_slot test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

@@ -91,7 +91,7 @@ module Zernio
     # Permanently deletes a profile by ID.
     # @param profile_id [String] 
     # @param [Hash] opts the optional parameters
-    # @return [DeleteAccountGroup200Response]
+    # @return [ProfileDeleteResponse]
     def delete_profile(profile_id, opts = {})
       data, _status_code, _headers = delete_profile_with_http_info(profile_id, opts)
       data
@@ -101,7 +101,7 @@ module Zernio
     # Permanently deletes a profile by ID.
     # @param profile_id [String] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(DeleteAccountGroup200Response, Integer, Hash)>] DeleteAccountGroup200Response data, response status code and response headers
+    # @return [Array<(ProfileDeleteResponse, Integer, Hash)>] ProfileDeleteResponse data, response status code and response headers
     def delete_profile_with_http_info(profile_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProfilesApi.delete_profile ...'
@@ -128,7 +128,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'DeleteAccountGroup200Response'
+      return_type = opts[:debug_return_type] || 'ProfileDeleteResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -154,7 +154,7 @@ module Zernio
     # Returns a single profile by ID, including its name, color, and default status.
     # @param profile_id [String] 
     # @param [Hash] opts the optional parameters
-    # @return [GetProfile200Response]
+    # @return [ProfileGetResponse]
     def get_profile(profile_id, opts = {})
       data, _status_code, _headers = get_profile_with_http_info(profile_id, opts)
       data
@@ -164,7 +164,7 @@ module Zernio
     # Returns a single profile by ID, including its name, color, and default status.
     # @param profile_id [String] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(GetProfile200Response, Integer, Hash)>] GetProfile200Response data, response status code and response headers
+    # @return [Array<(ProfileGetResponse, Integer, Hash)>] ProfileGetResponse data, response status code and response headers
     def get_profile_with_http_info(profile_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProfilesApi.get_profile ...'
@@ -191,7 +191,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetProfile200Response'
+      return_type = opts[:debug_return_type] || 'ProfileGetResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -278,7 +278,7 @@ module Zernio
     # @param profile_id [String] 
     # @param update_profile_request [UpdateProfileRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [UpdateProfile200Response]
+    # @return [ProfileUpdateResponse]
     def update_profile(profile_id, update_profile_request, opts = {})
       data, _status_code, _headers = update_profile_with_http_info(profile_id, update_profile_request, opts)
       data
@@ -289,7 +289,7 @@ module Zernio
     # @param profile_id [String] 
     # @param update_profile_request [UpdateProfileRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateProfile200Response, Integer, Hash)>] UpdateProfile200Response data, response status code and response headers
+    # @return [Array<(ProfileUpdateResponse, Integer, Hash)>] ProfileUpdateResponse data, response status code and response headers
     def update_profile_with_http_info(profile_id, update_profile_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProfilesApi.update_profile ...'
@@ -325,7 +325,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_profile_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateProfile200Response'
+      return_type = opts[:debug_return_type] || 'ProfileUpdateResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

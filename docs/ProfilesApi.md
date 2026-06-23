@@ -82,7 +82,7 @@ end
 
 ## delete_profile
 
-> <DeleteAccountGroup200Response> delete_profile(profile_id)
+> <ProfileDeleteResponse> delete_profile(profile_id)
 
 Delete profile
 
@@ -115,7 +115,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteAccountGroup200Response>, Integer, Hash)> delete_profile_with_http_info(profile_id)
+> <Array(<ProfileDeleteResponse>, Integer, Hash)> delete_profile_with_http_info(profile_id)
 
 ```ruby
 begin
@@ -123,7 +123,7 @@ begin
   data, status_code, headers = api_instance.delete_profile_with_http_info(profile_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <DeleteAccountGroup200Response>
+  p data # => <ProfileDeleteResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->delete_profile_with_http_info: #{e}"
 end
@@ -137,7 +137,7 @@ end
 
 ### Return type
 
-[**DeleteAccountGroup200Response**](DeleteAccountGroup200Response.md)
+[**ProfileDeleteResponse**](ProfileDeleteResponse.md)
 
 ### Authorization
 
@@ -151,7 +151,7 @@ end
 
 ## get_profile
 
-> <GetProfile200Response> get_profile(profile_id)
+> <ProfileGetResponse> get_profile(profile_id)
 
 Get profile
 
@@ -184,7 +184,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetProfile200Response>, Integer, Hash)> get_profile_with_http_info(profile_id)
+> <Array(<ProfileGetResponse>, Integer, Hash)> get_profile_with_http_info(profile_id)
 
 ```ruby
 begin
@@ -192,7 +192,7 @@ begin
   data, status_code, headers = api_instance.get_profile_with_http_info(profile_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetProfile200Response>
+  p data # => <ProfileGetResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->get_profile_with_http_info: #{e}"
 end
@@ -206,7 +206,7 @@ end
 
 ### Return type
 
-[**GetProfile200Response**](GetProfile200Response.md)
+[**ProfileGetResponse**](ProfileGetResponse.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ end
 
 ## update_profile
 
-> <UpdateProfile200Response> update_profile(profile_id, update_profile_request)
+> <ProfileUpdateResponse> update_profile(profile_id, update_profile_request)
 
 Update profile
 
@@ -325,7 +325,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateProfile200Response>, Integer, Hash)> update_profile_with_http_info(profile_id, update_profile_request)
+> <Array(<ProfileUpdateResponse>, Integer, Hash)> update_profile_with_http_info(profile_id, update_profile_request)
 
 ```ruby
 begin
@@ -333,7 +333,7 @@ begin
   data, status_code, headers = api_instance.update_profile_with_http_info(profile_id, update_profile_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateProfile200Response>
+  p data # => <ProfileUpdateResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->update_profile_with_http_info: #{e}"
 end
@@ -348,7 +348,7 @@ end
 
 ### Return type
 
-[**UpdateProfile200Response**](UpdateProfile200Response.md)
+[**ProfileUpdateResponse**](ProfileUpdateResponse.md)
 
 ### Authorization
 

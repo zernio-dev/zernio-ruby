@@ -27,19 +27,13 @@ describe Zernio::ListQueueSlots200ResponseOneOf do
     end
   end
 
-  describe 'test attribute "exists"' do
+  describe 'test attribute "queues"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 
-  describe 'test attribute "schedule"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "next_slots"' do
+  describe 'test attribute "count"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -92,7 +92,7 @@ module Zernio
     # @param profile_id [String] 
     # @param queue_id [String] Queue ID to delete
     # @param [Hash] opts the optional parameters
-    # @return [DeleteQueueSlot200Response]
+    # @return [QueueDeleteResponse]
     def delete_queue_slot(profile_id, queue_id, opts = {})
       data, _status_code, _headers = delete_queue_slot_with_http_info(profile_id, queue_id, opts)
       data
@@ -103,7 +103,7 @@ module Zernio
     # @param profile_id [String] 
     # @param queue_id [String] Queue ID to delete
     # @param [Hash] opts the optional parameters
-    # @return [Array<(DeleteQueueSlot200Response, Integer, Hash)>] DeleteQueueSlot200Response data, response status code and response headers
+    # @return [Array<(QueueDeleteResponse, Integer, Hash)>] QueueDeleteResponse data, response status code and response headers
     def delete_queue_slot_with_http_info(profile_id, queue_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: QueueApi.delete_queue_slot ...'
@@ -136,7 +136,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'DeleteQueueSlot200Response'
+      return_type = opts[:debug_return_type] || 'QueueDeleteResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -163,7 +163,7 @@ module Zernio
     # @param profile_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :queue_id Specific queue ID (optional, defaults to profile&#39;s default queue)
-    # @return [GetNextQueueSlot200Response]
+    # @return [QueueNextSlotResponse]
     def get_next_queue_slot(profile_id, opts = {})
       data, _status_code, _headers = get_next_queue_slot_with_http_info(profile_id, opts)
       data
@@ -174,7 +174,7 @@ module Zernio
     # @param profile_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :queue_id Specific queue ID (optional, defaults to profile&#39;s default queue)
-    # @return [Array<(GetNextQueueSlot200Response, Integer, Hash)>] GetNextQueueSlot200Response data, response status code and response headers
+    # @return [Array<(QueueNextSlotResponse, Integer, Hash)>] QueueNextSlotResponse data, response status code and response headers
     def get_next_queue_slot_with_http_info(profile_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: QueueApi.get_next_queue_slot ...'
@@ -203,7 +203,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetNextQueueSlot200Response'
+      return_type = opts[:debug_return_type] || 'QueueNextSlotResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -305,7 +305,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :queue_id Filter by specific queue ID. Omit to use the default queue.
     # @option opts [Integer] :count  (default to 20)
-    # @return [PreviewQueue200Response]
+    # @return [QueuePreviewResponse]
     def preview_queue(profile_id, opts = {})
       data, _status_code, _headers = preview_queue_with_http_info(profile_id, opts)
       data
@@ -317,7 +317,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :queue_id Filter by specific queue ID. Omit to use the default queue.
     # @option opts [Integer] :count  (default to 20)
-    # @return [Array<(PreviewQueue200Response, Integer, Hash)>] PreviewQueue200Response data, response status code and response headers
+    # @return [Array<(QueuePreviewResponse, Integer, Hash)>] QueuePreviewResponse data, response status code and response headers
     def preview_queue_with_http_info(profile_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: QueueApi.preview_queue ...'
@@ -355,7 +355,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PreviewQueue200Response'
+      return_type = opts[:debug_return_type] || 'QueuePreviewResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -381,7 +381,7 @@ module Zernio
     # Create a new queue or update an existing one. Without queueId, creates/updates the default queue. With queueId, updates a specific queue. With setAsDefault=true, makes this queue the default for the profile. 
     # @param update_queue_slot_request [UpdateQueueSlotRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [UpdateQueueSlot200Response]
+    # @return [QueueUpdateResponse]
     def update_queue_slot(update_queue_slot_request, opts = {})
       data, _status_code, _headers = update_queue_slot_with_http_info(update_queue_slot_request, opts)
       data
@@ -391,7 +391,7 @@ module Zernio
     # Create a new queue or update an existing one. Without queueId, creates/updates the default queue. With queueId, updates a specific queue. With setAsDefault&#x3D;true, makes this queue the default for the profile. 
     # @param update_queue_slot_request [UpdateQueueSlotRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UpdateQueueSlot200Response, Integer, Hash)>] UpdateQueueSlot200Response data, response status code and response headers
+    # @return [Array<(QueueUpdateResponse, Integer, Hash)>] QueueUpdateResponse data, response status code and response headers
     def update_queue_slot_with_http_info(update_queue_slot_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: QueueApi.update_queue_slot ...'
@@ -423,7 +423,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_queue_slot_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UpdateQueueSlot200Response'
+      return_type = opts[:debug_return_type] || 'QueueUpdateResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

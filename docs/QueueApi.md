@@ -83,7 +83,7 @@ end
 
 ## delete_queue_slot
 
-> <DeleteQueueSlot200Response> delete_queue_slot(profile_id, queue_id)
+> <QueueDeleteResponse> delete_queue_slot(profile_id, queue_id)
 
 Delete schedule
 
@@ -117,7 +117,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DeleteQueueSlot200Response>, Integer, Hash)> delete_queue_slot_with_http_info(profile_id, queue_id)
+> <Array(<QueueDeleteResponse>, Integer, Hash)> delete_queue_slot_with_http_info(profile_id, queue_id)
 
 ```ruby
 begin
@@ -125,7 +125,7 @@ begin
   data, status_code, headers = api_instance.delete_queue_slot_with_http_info(profile_id, queue_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <DeleteQueueSlot200Response>
+  p data # => <QueueDeleteResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->delete_queue_slot_with_http_info: #{e}"
 end
@@ -140,7 +140,7 @@ end
 
 ### Return type
 
-[**DeleteQueueSlot200Response**](DeleteQueueSlot200Response.md)
+[**QueueDeleteResponse**](QueueDeleteResponse.md)
 
 ### Authorization
 
@@ -154,7 +154,7 @@ end
 
 ## get_next_queue_slot
 
-> <GetNextQueueSlot200Response> get_next_queue_slot(profile_id, opts)
+> <QueueNextSlotResponse> get_next_queue_slot(profile_id, opts)
 
 Get next available slot
 
@@ -190,7 +190,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetNextQueueSlot200Response>, Integer, Hash)> get_next_queue_slot_with_http_info(profile_id, opts)
+> <Array(<QueueNextSlotResponse>, Integer, Hash)> get_next_queue_slot_with_http_info(profile_id, opts)
 
 ```ruby
 begin
@@ -198,7 +198,7 @@ begin
   data, status_code, headers = api_instance.get_next_queue_slot_with_http_info(profile_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetNextQueueSlot200Response>
+  p data # => <QueueNextSlotResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->get_next_queue_slot_with_http_info: #{e}"
 end
@@ -213,7 +213,7 @@ end
 
 ### Return type
 
-[**GetNextQueueSlot200Response**](GetNextQueueSlot200Response.md)
+[**QueueNextSlotResponse**](QueueNextSlotResponse.md)
 
 ### Authorization
 
@@ -302,7 +302,7 @@ end
 
 ## preview_queue
 
-> <PreviewQueue200Response> preview_queue(profile_id, opts)
+> <QueuePreviewResponse> preview_queue(profile_id, opts)
 
 Preview upcoming slots
 
@@ -339,7 +339,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PreviewQueue200Response>, Integer, Hash)> preview_queue_with_http_info(profile_id, opts)
+> <Array(<QueuePreviewResponse>, Integer, Hash)> preview_queue_with_http_info(profile_id, opts)
 
 ```ruby
 begin
@@ -347,7 +347,7 @@ begin
   data, status_code, headers = api_instance.preview_queue_with_http_info(profile_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PreviewQueue200Response>
+  p data # => <QueuePreviewResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->preview_queue_with_http_info: #{e}"
 end
@@ -363,7 +363,7 @@ end
 
 ### Return type
 
-[**PreviewQueue200Response**](PreviewQueue200Response.md)
+[**QueuePreviewResponse**](QueuePreviewResponse.md)
 
 ### Authorization
 
@@ -377,7 +377,7 @@ end
 
 ## update_queue_slot
 
-> <UpdateQueueSlot200Response> update_queue_slot(update_queue_slot_request)
+> <QueueUpdateResponse> update_queue_slot(update_queue_slot_request)
 
 Update schedule
 
@@ -410,7 +410,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateQueueSlot200Response>, Integer, Hash)> update_queue_slot_with_http_info(update_queue_slot_request)
+> <Array(<QueueUpdateResponse>, Integer, Hash)> update_queue_slot_with_http_info(update_queue_slot_request)
 
 ```ruby
 begin
@@ -418,7 +418,7 @@ begin
   data, status_code, headers = api_instance.update_queue_slot_with_http_info(update_queue_slot_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateQueueSlot200Response>
+  p data # => <QueueUpdateResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->update_queue_slot_with_http_info: #{e}"
 end
@@ -432,7 +432,7 @@ end
 
 ### Return type
 
-[**UpdateQueueSlot200Response**](UpdateQueueSlot200Response.md)
+[**QueueUpdateResponse**](QueueUpdateResponse.md)
 
 ### Authorization
 

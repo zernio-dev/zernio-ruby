@@ -15,7 +15,7 @@ Zernio::ListQueueSlots200Response.openapi_one_of
 # =>
 # [
 #   :'ListQueueSlots200ResponseOneOf',
-#   :'ListQueueSlots200ResponseOneOf1'
+#   :'QueueSlotsResponse'
 # ]
 ```
 
@@ -44,6 +44,6 @@ Zernio::ListQueueSlots200Response.build(data_that_doesnt_match)
 #### Return type
 
 - `ListQueueSlots200ResponseOneOf`
-- `ListQueueSlots200ResponseOneOf1`
+- `QueueSlotsResponse`
 - `nil` (if no type matches)
 
