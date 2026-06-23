@@ -41,6 +41,8 @@ module Zernio
 
     attr_accessor :ad
 
+    attr_accessor :attachment
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -75,7 +77,8 @@ module Zernio
         :'created_at' => :'createdAt',
         :'is_reply' => :'isReply',
         :'parent_comment_id' => :'parentCommentId',
-        :'ad' => :'ad'
+        :'ad' => :'ad',
+        :'attachment' => :'attachment'
       }
     end
 
@@ -101,7 +104,8 @@ module Zernio
         :'created_at' => :'Time',
         :'is_reply' => :'Boolean',
         :'parent_comment_id' => :'String',
-        :'ad' => :'WebhookPayloadCommentCommentAd'
+        :'ad' => :'WebhookPayloadCommentCommentAd',
+        :'attachment' => :'WebhookPayloadCommentCommentAttachment'
       }
     end
 
@@ -185,6 +189,10 @@ module Zernio
 
       if attributes.key?(:'ad')
         self.ad = attributes[:'ad']
+      end
+
+      if attributes.key?(:'attachment')
+        self.attachment = attributes[:'attachment']
       end
     end
 
@@ -324,7 +332,8 @@ module Zernio
           created_at == o.created_at &&
           is_reply == o.is_reply &&
           parent_comment_id == o.parent_comment_id &&
-          ad == o.ad
+          ad == o.ad &&
+          attachment == o.attachment
     end
 
     # @see the `==` method
@@ -336,7 +345,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, post_id, platform_post_id, platform, text, author, created_at, is_reply, parent_comment_id, ad].hash
+      [id, post_id, platform_post_id, platform, text, author, created_at, is_reply, parent_comment_id, ad, attachment].hash
     end
 
     # Builds the object from hash

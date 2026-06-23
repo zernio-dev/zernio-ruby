@@ -1557,6 +1557,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadCommentAccount](docs/WebhookPayloadCommentAccount.md)
  - [Zernio::WebhookPayloadCommentComment](docs/WebhookPayloadCommentComment.md)
  - [Zernio::WebhookPayloadCommentCommentAd](docs/WebhookPayloadCommentCommentAd.md)
+ - [Zernio::WebhookPayloadCommentCommentAttachment](docs/WebhookPayloadCommentCommentAttachment.md)
  - [Zernio::WebhookPayloadCommentCommentAuthor](docs/WebhookPayloadCommentCommentAuthor.md)
  - [Zernio::WebhookPayloadCommentPost](docs/WebhookPayloadCommentPost.md)
  - [Zernio::WebhookPayloadConversationStarted](docs/WebhookPayloadConversationStarted.md)

@@ -14,6 +14,7 @@
 | **is_reply** | **Boolean** | Whether this is a reply to another comment |  |
 | **parent_comment_id** | **String** | Parent comment ID if this is a reply |  |
 | **ad** | [**WebhookPayloadCommentCommentAd**](WebhookPayloadCommentCommentAd.md) |  | [optional] |
+| **attachment** | [**WebhookPayloadCommentCommentAttachment**](WebhookPayloadCommentCommentAttachment.md) |  | [optional] |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = Zernio::WebhookPayloadCommentComment.new(
   created_at: null,
   is_reply: null,
   parent_comment_id: null,
-  ad: null
+  ad: null,
+  attachment: null
 )
 ```
 

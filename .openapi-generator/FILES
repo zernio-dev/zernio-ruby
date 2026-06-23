@@ -1149,6 +1149,7 @@ docs/WebhookPayloadComment.md
 docs/WebhookPayloadCommentAccount.md
 docs/WebhookPayloadCommentComment.md
 docs/WebhookPayloadCommentCommentAd.md
+docs/WebhookPayloadCommentCommentAttachment.md
 docs/WebhookPayloadCommentCommentAuthor.md
 docs/WebhookPayloadCommentPost.md
 docs/WebhookPayloadConversationStarted.md
@@ -2384,6 +2385,7 @@ lib/zernio-sdk/models/webhook_payload_comment.rb
 lib/zernio-sdk/models/webhook_payload_comment_account.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_ad.rb
+lib/zernio-sdk/models/webhook_payload_comment_comment_attachment.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_author.rb
 lib/zernio-sdk/models/webhook_payload_comment_post.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started.rb
@@ -3602,6 +3604,7 @@ spec/models/webhook_payload_call_received_call_spec.rb
 spec/models/webhook_payload_call_received_spec.rb
 spec/models/webhook_payload_comment_account_spec.rb
 spec/models/webhook_payload_comment_comment_ad_spec.rb
+spec/models/webhook_payload_comment_comment_attachment_spec.rb
 spec/models/webhook_payload_comment_comment_author_spec.rb
 spec/models/webhook_payload_comment_comment_spec.rb
 spec/models/webhook_payload_comment_post_spec.rb
