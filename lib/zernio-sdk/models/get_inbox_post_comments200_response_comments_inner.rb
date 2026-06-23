@@ -131,6 +131,12 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'url',
+        :'like_uri',
+        :'cid',
+        :'parent_id',
+        :'root_uri',
+        :'root_cid'
       ])
     end
 

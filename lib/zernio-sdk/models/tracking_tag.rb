@@ -121,6 +121,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'last_fired_time',
+        :'owner_business_id',
       ])
     end
 

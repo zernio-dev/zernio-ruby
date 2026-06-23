@@ -92,6 +92,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'activated_at',
+        :'created_at'
       ])
     end
 

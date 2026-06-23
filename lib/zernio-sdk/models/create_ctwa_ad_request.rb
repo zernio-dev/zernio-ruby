@@ -185,7 +185,7 @@ module Zernio
         :'regions' => :'Array<CreateCtwaAdRequestRegionsInner>',
         :'zips' => :'Array<CreateCtwaAdRequestZipsInner>',
         :'metros' => :'Array<CreateCtwaAdRequestZipsInner>',
-        :'custom_locations' => :'Array<CreateCtwaAdRequestCustomLocationsInner>',
+        :'custom_locations' => :'Array<CreateStandaloneAdRequestCustomLocationsInner>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'interests' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
@@ -414,10 +414,6 @@ module Zernio
         invalid_properties.push('invalid value for "budget_amount", budget_amount cannot be nil.')
       end
 
-      if @budget_amount < 0
-        invalid_properties.push('invalid value for "budget_amount", must be greater than or equal to 0.')
-      end
-
       if @budget_type.nil?
         invalid_properties.push('invalid value for "budget_type", budget_type cannot be nil.')
       end
@@ -446,14 +442,6 @@ module Zernio
         invalid_properties.push('invalid value for "age_max", must be greater than or equal to 13.')
       end
 
-      if !@bid_amount.nil? && @bid_amount < 0
-        invalid_properties.push('invalid value for "bid_amount", must be greater than or equal to 0.')
-      end
-
-      if !@roas_average_floor.nil? && @roas_average_floor < 0
-        invalid_properties.push('invalid value for "roas_average_floor", must be greater than or equal to 0.')
-      end
-
       if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
         invalid_properties.push('invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.')
       end
@@ -480,7 +468,6 @@ module Zernio
       return false if !@body.nil? && @body.to_s.length < 1
       return false if !@creatives.nil? && @creatives.length < 1
       return false if @budget_amount.nil?
-      return false if @budget_amount < 0
       return false if @budget_type.nil?
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
@@ -496,8 +483,6 @@ module Zernio
       return false unless objective_validator.valid?(@objective)
       bid_strategy_validator = EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
       return false unless bid_strategy_validator.valid?(@bid_strategy)
-      return false if !@bid_amount.nil? && @bid_amount < 0
-      return false if !@roas_average_floor.nil? && @roas_average_floor < 0
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       true
@@ -598,10 +583,6 @@ module Zernio
         fail ArgumentError, 'budget_amount cannot be nil'
       end
 
-      if budget_amount < 0
-        fail ArgumentError, 'invalid value for "budget_amount", must be greater than or equal to 0.'
-      end
-
       @budget_amount = budget_amount
     end
 
@@ -697,34 +678,6 @@ module Zernio
         fail ArgumentError, "invalid value for \"bid_strategy\", must be one of #{validator.allowable_values}."
       end
       @bid_strategy = bid_strategy
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] bid_amount Value to be assigned
-    def bid_amount=(bid_amount)
-      if bid_amount.nil?
-        fail ArgumentError, 'bid_amount cannot be nil'
-      end
-
-      if bid_amount < 0
-        fail ArgumentError, 'invalid value for "bid_amount", must be greater than or equal to 0.'
-      end
-
-      @bid_amount = bid_amount
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] roas_average_floor Value to be assigned
-    def roas_average_floor=(roas_average_floor)
-      if roas_average_floor.nil?
-        fail ArgumentError, 'roas_average_floor cannot be nil'
-      end
-
-      if roas_average_floor < 0
-        fail ArgumentError, 'invalid value for "roas_average_floor", must be greater than or equal to 0.'
-      end
-
-      @roas_average_floor = roas_average_floor
     end
 
     # Custom attribute writer method with validation

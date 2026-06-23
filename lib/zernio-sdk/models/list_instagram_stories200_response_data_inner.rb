@@ -75,6 +75,12 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'media_type',
+        :'media_product_type',
+        :'media_url',
+        :'permalink',
+        :'thumbnail_url',
+        :'timestamp'
       ])
     end
 

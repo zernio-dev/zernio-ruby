@@ -9,7 +9,7 @@
 | **account_type** | **String** |  | [optional] |
 | **username** | **String** |  | [optional] |
 | **aggregation** | **String** |  | [optional] |
-| **date_range** | [**LinkedInAggregateAnalyticsTotalResponseDateRange**](LinkedInAggregateAnalyticsTotalResponseDateRange.md) |  | [optional] |
+| **date_range** | [**YouTubeDailyViewsResponseDateRange**](YouTubeDailyViewsResponseDateRange.md) |  | [optional] |
 | **analytics** | [**LinkedInAggregateAnalyticsDailyResponseAnalytics**](LinkedInAggregateAnalyticsDailyResponseAnalytics.md) |  | [optional] |
 | **skipped_metrics** | **Array&lt;String&gt;** | Metrics that were skipped due to API limitations | [optional] |
 | **note** | **String** |  | [optional] |

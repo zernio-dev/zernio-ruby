@@ -107,6 +107,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'text',
       ])
     end
 
@@ -214,10 +215,6 @@ module Zernio
         invalid_properties.push('invalid value for "direction", direction cannot be nil.')
       end
 
-      if @text.nil?
-        invalid_properties.push('invalid value for "text", text cannot be nil.')
-      end
-
       if @attachments.nil?
         invalid_properties.push('invalid value for "attachments", attachments cannot be nil.')
       end
@@ -250,7 +247,6 @@ module Zernio
       return false if @direction.nil?
       direction_validator = EnumAttributeValidator.new('String', ["incoming", "outgoing"])
       return false unless direction_validator.valid?(@direction)
-      return false if @text.nil?
       return false if @attachments.nil?
       return false if @sender.nil?
       return false if @sent_at.nil?
@@ -306,16 +302,6 @@ module Zernio
         fail ArgumentError, "invalid value for \"direction\", must be one of #{validator.allowable_values}."
       end
       @direction = direction
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] text Value to be assigned
-    def text=(text)
-      if text.nil?
-        fail ArgumentError, 'text cannot be nil'
-      end
-
-      @text = text
     end
 
     # Custom attribute writer method with validation

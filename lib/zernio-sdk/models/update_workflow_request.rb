@@ -65,6 +65,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'entry_node_id',
       ])
     end
 

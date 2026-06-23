@@ -60,6 +60,9 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'conversation_id',
+        :'sent_at',
+        :'message'
       ])
     end
 

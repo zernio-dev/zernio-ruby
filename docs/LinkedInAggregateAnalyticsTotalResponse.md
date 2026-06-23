@@ -9,7 +9,7 @@
 | **account_type** | **String** |  | [optional] |
 | **username** | **String** |  | [optional] |
 | **aggregation** | **String** |  | [optional] |
-| **date_range** | [**LinkedInAggregateAnalyticsTotalResponseDateRange**](LinkedInAggregateAnalyticsTotalResponseDateRange.md) |  | [optional] |
+| **date_range** | [**YouTubeDailyViewsResponseDateRange**](YouTubeDailyViewsResponseDateRange.md) |  | [optional] |
 | **analytics** | [**LinkedInAggregateAnalyticsTotalResponseAnalytics**](LinkedInAggregateAnalyticsTotalResponseAnalytics.md) |  | [optional] |
 | **note** | **String** |  | [optional] |
 | **last_updated** | **Time** |  | [optional] |

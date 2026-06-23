@@ -121,10 +121,6 @@ module Zernio
         invalid_properties.push('invalid value for "key", the character length must be greater than or equal to 1.')
       end
 
-      if !@radius.nil? && @radius < 0
-        invalid_properties.push('invalid value for "radius", must be greater than or equal to 0.')
-      end
-
       invalid_properties
     end
 
@@ -134,7 +130,6 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @key.nil?
       return false if @key.to_s.length < 1
-      return false if !@radius.nil? && @radius < 0
       distance_unit_validator = EnumAttributeValidator.new('String', ["mile", "kilometer"])
       return false unless distance_unit_validator.valid?(@distance_unit)
       true
@@ -152,20 +147,6 @@ module Zernio
       end
 
       @key = key
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] radius Value to be assigned
-    def radius=(radius)
-      if radius.nil?
-        fail ArgumentError, 'radius cannot be nil'
-      end
-
-      if radius < 0
-        fail ArgumentError, 'invalid value for "radius", must be greater than or equal to 0.'
-      end
-
-      @radius = radius
     end
 
     # Custom attribute writer method checking allowed values (enum).

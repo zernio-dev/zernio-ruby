@@ -98,6 +98,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'expire_count',
+        :'expire_date',
       ])
     end
 
@@ -211,11 +213,7 @@ module Zernio
     # Custom attribute writer method with validation
     # @param [Object] expire_count Value to be assigned
     def expire_count=(expire_count)
-      if expire_count.nil?
-        fail ArgumentError, 'expire_count cannot be nil'
-      end
-
-      if expire_count < 1
+      if !expire_count.nil? && expire_count < 1
         fail ArgumentError, 'invalid value for "expire_count", must be greater than or equal to 1.'
       end
 

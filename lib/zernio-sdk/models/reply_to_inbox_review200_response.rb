@@ -44,7 +44,7 @@ module Zernio
     def self.openapi_types
       {
         :'status' => :'String',
-        :'reply' => :'ReplyToInboxReview200ResponseReply',
+        :'reply' => :'ListInboxReviews200ResponseDataInnerReply',
         :'platform' => :'String'
       }
     end

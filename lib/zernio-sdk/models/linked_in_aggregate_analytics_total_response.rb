@@ -89,7 +89,7 @@ module Zernio
         :'account_type' => :'String',
         :'username' => :'String',
         :'aggregation' => :'String',
-        :'date_range' => :'LinkedInAggregateAnalyticsTotalResponseDateRange',
+        :'date_range' => :'YouTubeDailyViewsResponseDateRange',
         :'analytics' => :'LinkedInAggregateAnalyticsTotalResponseAnalytics',
         :'note' => :'String',
         :'last_updated' => :'Time'

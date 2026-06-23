@@ -30,12 +30,6 @@ module Zernio
     # Optional estimated reachable users for this option, when the platform returns it.
     attr_accessor :audience_size
 
-    # Centre latitude of the location. Populated on Meta geo results (city, neighborhood, place, etc.). Useful for map views.
-    attr_accessor :latitude
-
-    # Centre longitude of the location.
-    attr_accessor :longitude
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -43,9 +37,7 @@ module Zernio
         :'name' => :'name',
         :'type' => :'type',
         :'path' => :'path',
-        :'audience_size' => :'audienceSize',
-        :'latitude' => :'latitude',
-        :'longitude' => :'longitude'
+        :'audience_size' => :'audienceSize'
       }
     end
 
@@ -66,15 +58,14 @@ module Zernio
         :'name' => :'String',
         :'type' => :'String',
         :'path' => :'Array<String>',
-        :'audience_size' => :'Integer',
-        :'latitude' => :'Float',
-        :'longitude' => :'Float'
+        :'audience_size' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'audience_size'
       ])
     end
 
@@ -120,14 +111,6 @@ module Zernio
 
       if attributes.key?(:'audience_size')
         self.audience_size = attributes[:'audience_size']
-      end
-
-      if attributes.key?(:'latitude')
-        self.latitude = attributes[:'latitude']
-      end
-
-      if attributes.key?(:'longitude')
-        self.longitude = attributes[:'longitude']
       end
     end
 
@@ -200,9 +183,7 @@ module Zernio
           name == o.name &&
           type == o.type &&
           path == o.path &&
-          audience_size == o.audience_size &&
-          latitude == o.latitude &&
-          longitude == o.longitude
+          audience_size == o.audience_size
     end
 
     # @see the `==` method
@@ -214,7 +195,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, type, path, audience_size, latitude, longitude].hash
+      [id, name, type, path, audience_size].hash
     end
 
     # Builds the object from hash

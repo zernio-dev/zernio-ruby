@@ -457,7 +457,7 @@ module Zernio
     end
 
     # Move account to a different profile
-    # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  A profile can hold only one account per platform. Moving an account into a profile that already has an account of the same platform returns 409 (`profile_platform_conflict`).  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
+    # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
     # @param account_id [String] 
     # @param move_account_to_profile_request [MoveAccountToProfileRequest] 
     # @param [Hash] opts the optional parameters
@@ -468,7 +468,7 @@ module Zernio
     end
 
     # Move account to a different profile
-    # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  A profile can hold only one account per platform. Moving an account into a profile that already has an account of the same platform returns 409 (&#x60;profile_platform_conflict&#x60;).  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 
+    # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 
     # @param account_id [String] 
     # @param move_account_to_profile_request [MoveAccountToProfileRequest] 
     # @param [Hash] opts the optional parameters

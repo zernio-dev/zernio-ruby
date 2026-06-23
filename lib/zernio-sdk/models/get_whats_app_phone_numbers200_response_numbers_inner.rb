@@ -131,6 +131,12 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'registrant_name',
+        :'telnyx_order_id',
+        :'onfido_verification_url',
+        :'end_user_first_name',
+        :'end_user_last_name',
+        :'regulatory_decline_reason',
       ])
     end
 

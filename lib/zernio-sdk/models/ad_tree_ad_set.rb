@@ -34,7 +34,6 @@ module Zernio
     # Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
     attr_accessor :optimization_goal
 
-    # Bid strategy for this ad set (overrides campaign level when set)
     attr_accessor :bid_strategy
 
     # Bid cap in whole currency units. Populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP.
@@ -121,6 +120,10 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'optimization_goal',
+        :'bid_strategy',
+        :'bid_amount',
+        :'roas_average_floor',
       ])
     end
 

@@ -41,7 +41,7 @@ module Zernio
     def self.openapi_types
       {
         :'status' => :'String',
-        :'form' => :'GetLeadForm200ResponseForm'
+        :'form' => :'Object'
       }
     end
 

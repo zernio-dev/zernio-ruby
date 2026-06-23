@@ -131,6 +131,12 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'late_post_id',
+        :'published_at',
+        :'platform_post_url',
+        :'message',
+        :'thumbnail_url',
+        :'media_type',
       ])
     end
 

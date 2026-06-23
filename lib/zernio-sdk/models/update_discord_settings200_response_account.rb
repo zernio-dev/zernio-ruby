@@ -84,6 +84,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'webhook_username',
+        :'webhook_avatar_url'
       ])
     end
 

@@ -88,6 +88,10 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'form_name',
+        :'ad_id',
+        :'adset_id',
+        :'campaign_id',
       ])
     end
 

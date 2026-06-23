@@ -103,6 +103,11 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'mongo_id',
+        :'participant_name',
+        :'participant_username',
+        :'participant_picture',
+        :'last_message',
       ])
     end
 

@@ -12,7 +12,7 @@
 | **ad_set_budget** | [**AdTreeAdSetAdSetBudget**](AdTreeAdSetAdSetBudget.md) |  | [optional] |
 | **metrics** | [**AdMetrics**](AdMetrics.md) |  | [optional] |
 | **optimization_goal** | **String** | Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION) | [optional] |
-| **bid_strategy** | [**BidStrategy**](BidStrategy.md) | Bid strategy for this ad set (overrides campaign level when set) | [optional] |
+| **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
 | **bid_amount** | **Float** | Bid cap in whole currency units. Populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. | [optional] |
 | **roas_average_floor** | **Float** | Minimum ROAS as a decimal multiplier (2.0 &#x3D; 2.0x). Populated when bidStrategy is LOWEST_COST_WITH_MIN_ROAS. | [optional] |
 | **promoted_object** | [**AdTreeAdSetPromotedObject**](AdTreeAdSetPromotedObject.md) |  | [optional] |

@@ -121,6 +121,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'profile_picture',
+        :'parent_account_id',
       ])
     end
 

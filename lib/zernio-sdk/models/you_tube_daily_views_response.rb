@@ -76,6 +76,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'duration_seconds',
+        :'last_synced_at',
       ])
     end
 

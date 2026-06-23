@@ -131,6 +131,12 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'channel_id',
+        :'creator_id',
+        :'description',
+        :'scheduled_end_time',
+        :'entity_id',
+        :'image'
       ])
     end
 

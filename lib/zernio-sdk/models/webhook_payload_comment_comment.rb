@@ -108,6 +108,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'post_id',
+        :'parent_comment_id',
       ])
     end
 
@@ -195,10 +197,6 @@ module Zernio
         invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @post_id.nil?
-        invalid_properties.push('invalid value for "post_id", post_id cannot be nil.')
-      end
-
       if @platform_post_id.nil?
         invalid_properties.push('invalid value for "platform_post_id", platform_post_id cannot be nil.')
       end
@@ -223,10 +221,6 @@ module Zernio
         invalid_properties.push('invalid value for "is_reply", is_reply cannot be nil.')
       end
 
-      if @parent_comment_id.nil?
-        invalid_properties.push('invalid value for "parent_comment_id", parent_comment_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -235,7 +229,6 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @id.nil?
-      return false if @post_id.nil?
       return false if @platform_post_id.nil?
       return false if @platform.nil?
       platform_validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "twitter", "youtube", "linkedin", "bluesky", "reddit"])
@@ -244,7 +237,6 @@ module Zernio
       return false if @author.nil?
       return false if @created_at.nil?
       return false if @is_reply.nil?
-      return false if @parent_comment_id.nil?
       true
     end
 
@@ -256,16 +248,6 @@ module Zernio
       end
 
       @id = id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] post_id Value to be assigned
-    def post_id=(post_id)
-      if post_id.nil?
-        fail ArgumentError, 'post_id cannot be nil'
-      end
-
-      @post_id = post_id
     end
 
     # Custom attribute writer method with validation
@@ -326,16 +308,6 @@ module Zernio
       end
 
       @is_reply = is_reply
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] parent_comment_id Value to be assigned
-    def parent_comment_id=(parent_comment_id)
-      if parent_comment_id.nil?
-        fail ArgumentError, 'parent_comment_id cannot be nil'
-      end
-
-      @parent_comment_id = parent_comment_id
     end
 
     # Checks equality by comparing each attribute.

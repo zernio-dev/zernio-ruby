@@ -66,6 +66,9 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'account_username',
+        :'code',
+        :'retry_after'
       ])
     end
 

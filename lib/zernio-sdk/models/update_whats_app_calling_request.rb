@@ -64,6 +64,9 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'sip_auth_username',
+        :'sip_auth_password',
+        :'call_icon_countries'
       ])
     end
 

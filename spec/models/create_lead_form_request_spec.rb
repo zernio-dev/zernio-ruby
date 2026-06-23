@@ -105,38 +105,4 @@ describe Zernio::CreateLeadFormRequest do
     end
   end
 
-  describe 'test attribute "form_type"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["MORE_VOLUME", "HIGHER_INTENT", "RICH_CREATIVE"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.form_type = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe 'test attribute "block_display_for_non_targeted_viewer"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "allow_organic_lead_gen"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "question_page_custom_headline"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "context_card"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
 end

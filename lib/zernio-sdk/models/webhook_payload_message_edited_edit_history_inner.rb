@@ -52,6 +52,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'text',
       ])
     end
 
@@ -97,10 +98,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @text.nil?
-        invalid_properties.push('invalid value for "text", text cannot be nil.')
-      end
-
       if @attachments.nil?
         invalid_properties.push('invalid value for "attachments", attachments cannot be nil.')
       end
@@ -116,20 +113,9 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @text.nil?
       return false if @attachments.nil?
       return false if @edited_at.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] text Value to be assigned
-    def text=(text)
-      if text.nil?
-        fail ArgumentError, 'text cannot be nil'
-      end
-
-      @text = text
     end
 
     # Custom attribute writer method with validation

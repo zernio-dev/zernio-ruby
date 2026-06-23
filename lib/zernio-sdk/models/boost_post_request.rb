@@ -49,9 +49,6 @@ module Zernio
     # Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sent to Meta as `bid_constraints.roas_average_floor` × 10000 (Meta uses fixed-point integers). 
     attr_accessor :roas_average_floor
 
-    # Meta only. A raw Meta-native targeting spec passed to the ad set VERBATIM (snake_case: `geo_locations`, `custom_audiences`, `excluded_custom_audiences`, `flexible_spec`, `targeting_automation`, etc.). Use it to target specific custom or lookalike audiences, or to clone a campaign's targeting exactly. Mutually exclusive with `targeting` (sending both → 422). Sent as-is; Meta validates and surfaces any errors. 
-    attr_accessor :raw_targeting
-
     attr_accessor :tracking
 
     # Meta only. Required for housing, employment, credit, or political ads.
@@ -110,7 +107,6 @@ module Zernio
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
-        :'raw_targeting' => :'rawTargeting',
         :'tracking' => :'tracking',
         :'special_ad_categories' => :'specialAdCategories',
         :'link_url' => :'linkUrl',
@@ -147,7 +143,6 @@ module Zernio
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
-        :'raw_targeting' => :'Hash<String, Object>',
         :'tracking' => :'BoostPostRequestTracking',
         :'special_ad_categories' => :'Array<String>',
         :'link_url' => :'String',
@@ -240,12 +235,6 @@ module Zernio
 
       if attributes.key?(:'roas_average_floor')
         self.roas_average_floor = attributes[:'roas_average_floor']
-      end
-
-      if attributes.key?(:'raw_targeting')
-        if (value = attributes[:'raw_targeting']).is_a?(Hash)
-          self.raw_targeting = value
-        end
       end
 
       if attributes.key?(:'tracking')
@@ -436,7 +425,6 @@ module Zernio
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
-          raw_targeting == o.raw_targeting &&
           tracking == o.tracking &&
           special_ad_categories == o.special_ad_categories &&
           link_url == o.link_url &&
@@ -455,7 +443,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, bid_strategy, bid_amount, roas_average_floor, raw_targeting, tracking, special_ad_categories, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, bid_strategy, bid_amount, roas_average_floor, tracking, special_ad_categories, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

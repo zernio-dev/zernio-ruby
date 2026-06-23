@@ -59,7 +59,6 @@ module Zernio
     # Platform-reported creation timestamp (Meta `created_time`, TikTok `create_time`). Distinct from `createdAt` which reflects when Zernio first synced the doc — for sort/filter by \"when the ad was actually created on the platform\", read this field. `null` for legacy ads synced before this field was added; aggregations fall back to `createdAt` in that case. 
     attr_accessor :platform_created_at
 
-    # Ad-set bid strategy (overrides campaign level on Meta). Populated for Meta and TikTok. TikTok's native `bid_type` is normalized to the cross-platform Meta enum: `BID_TYPE_NO_BID` -> `LOWEST_COST_WITHOUT_CAP`, `BID_TYPE_CUSTOM` -> `LOWEST_COST_WITH_BID_CAP`, deep_bid_type=MIN_ROAS or roas_bid>0 -> `LOWEST_COST_WITH_MIN_ROAS`, `BID_TYPE_MAX_CONVERSION` -> `LOWEST_COST_WITHOUT_CAP`. 
     attr_accessor :bid_strategy
 
     # Bid cap in WHOLE currency units of the ad account (USD: 5 = $5.00; JPY: 100 = ¥100). Populated when bidStrategy is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. `null` for auto-bid (`LOWEST_COST_WITHOUT_CAP`).  - Meta source: `bid_amount` on the ad set (smallest-denomination int, decoded here). - TikTok source: priority order `bid_price` -> `conversion_bid_price` -> `deep_cpa_bid`   (whichever is set on the ad group). TikTok stores all three in whole currency units.  Source: facebook-business-sdk-codegen api_specs/specs/AdSet.json (`bid_amount`). 
@@ -188,6 +187,14 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'metrics',
+        :'platform_objective',
+        :'optimization_goal',
+        :'platform_ad_account_name',
+        :'platform_created_at',
+        :'bid_strategy',
+        :'bid_amount',
+        :'roas_average_floor',
       ])
     end
 

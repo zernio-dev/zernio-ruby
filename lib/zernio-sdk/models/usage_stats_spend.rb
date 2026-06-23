@@ -61,6 +61,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'x_spend_limit_cents'
       ])
     end
 

@@ -100,6 +100,12 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'url_tags',
+        :'template_url_spec',
+        :'tracking_url_template',
+        :'final_url_suffix',
+        :'dynamic_value_parameters',
+        :'custom_value_parameters'
       ])
     end
 

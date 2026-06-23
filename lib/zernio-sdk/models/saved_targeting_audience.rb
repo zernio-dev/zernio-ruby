@@ -85,6 +85,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'spec'
       ])
     end
 
@@ -154,10 +155,6 @@ module Zernio
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
       end
 
-      if @spec.nil?
-        invalid_properties.push('invalid value for "spec", spec cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -171,7 +168,6 @@ module Zernio
       return false if @account_id.nil?
       return false if @name.nil?
       return false if @name.to_s.length > 255
-      return false if @spec.nil?
       true
     end
 
@@ -207,16 +203,6 @@ module Zernio
       end
 
       @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] spec Value to be assigned
-    def spec=(spec)
-      if spec.nil?
-        fail ArgumentError, 'spec cannot be nil'
-      end
-
-      @spec = spec
     end
 
     # Checks equality by comparing each attribute.

@@ -46,9 +46,6 @@ module Zernio
 
     attr_accessor :instagram_profile
 
-    # Ad-click attribution captured on the first inbound message of the conversation. Only present when the conversation originated from a click-to-message ad. Absent on organic conversations.  Two sources populate this field:   - WhatsApp CTWA (Click-to-WhatsApp): `ctwa_clid`, `ctwa_source_id`,     `ctwa_source_url`, `ctwa_headline`, `ctwa_source_type`, `ctwa_captured_at`.   - Facebook Messenger CTM / Instagram CTD: `meta_ad_id`, `meta_ad_title`,     `meta_ad_source`, `meta_ad_type`, `meta_ad_ref`, `meta_ad_captured_at`,     `meta_ad_photo_url`, `meta_ad_video_url`, `meta_ad_post_id`,     `meta_ad_product_id`, `meta_ad_flow_id`.  Note: `meta_ad_photo_url` and `meta_ad_video_url` are Facebook CDN URLs that may expire. Use `meta_ad_id` for a permanent reference to the ad. 
-    attr_accessor :metadata
-
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -87,8 +84,7 @@ module Zernio
         :'status' => :'status',
         :'unread_count' => :'unreadCount',
         :'url' => :'url',
-        :'instagram_profile' => :'instagramProfile',
-        :'metadata' => :'metadata'
+        :'instagram_profile' => :'instagramProfile'
       }
     end
 
@@ -118,14 +114,17 @@ module Zernio
         :'status' => :'String',
         :'unread_count' => :'Integer',
         :'url' => :'String',
-        :'instagram_profile' => :'ListInboxConversations200ResponseDataInnerInstagramProfile',
-        :'metadata' => :'Hash<String, String>'
+        :'instagram_profile' => :'ListInboxConversations200ResponseDataInnerInstagramProfile'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'participant_picture',
+        :'participant_verified_type',
+        :'unread_count',
+        :'url',
       ])
     end
 
@@ -200,12 +199,6 @@ module Zernio
       if attributes.key?(:'instagram_profile')
         self.instagram_profile = attributes[:'instagram_profile']
       end
-
-      if attributes.key?(:'metadata')
-        if (value = attributes[:'metadata']).is_a?(Hash)
-          self.metadata = value
-        end
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -265,8 +258,7 @@ module Zernio
           status == o.status &&
           unread_count == o.unread_count &&
           url == o.url &&
-          instagram_profile == o.instagram_profile &&
-          metadata == o.metadata
+          instagram_profile == o.instagram_profile
     end
 
     # @see the `==` method
@@ -278,7 +270,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, participant_id, participant_name, participant_picture, participant_verified_type, last_message, updated_time, status, unread_count, url, instagram_profile, metadata].hash
+      [id, platform, account_id, account_username, participant_id, participant_name, participant_picture, participant_verified_type, last_message, updated_time, status, unread_count, url, instagram_profile].hash
     end
 
     # Builds the object from hash

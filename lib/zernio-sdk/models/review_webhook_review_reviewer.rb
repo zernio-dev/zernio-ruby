@@ -53,6 +53,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'profile_image'
       ])
     end
 
@@ -96,16 +98,8 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
       if @name.nil?
         invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @profile_image.nil?
-        invalid_properties.push('invalid value for "profile_image", profile_image cannot be nil.')
       end
 
       invalid_properties
@@ -115,20 +109,8 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
       return false if @name.nil?
-      return false if @profile_image.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.nil?
-        fail ArgumentError, 'id cannot be nil'
-      end
-
-      @id = id
     end
 
     # Custom attribute writer method with validation
@@ -139,16 +121,6 @@ module Zernio
       end
 
       @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] profile_image Value to be assigned
-    def profile_image=(profile_image)
-      if profile_image.nil?
-        fail ArgumentError, 'profile_image cannot be nil'
-      end
-
-      @profile_image = profile_image
     end
 
     # Checks equality by comparing each attribute.

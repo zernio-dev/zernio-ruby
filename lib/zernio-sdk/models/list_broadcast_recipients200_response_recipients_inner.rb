@@ -116,6 +116,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'error_code',
+        :'error_explanation',
       ])
     end
 

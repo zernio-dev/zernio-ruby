@@ -101,6 +101,11 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'platform_post_id',
+        :'account_username',
+        :'analytics',
+        :'platform_post_url',
+        :'error_message'
       ])
     end
 

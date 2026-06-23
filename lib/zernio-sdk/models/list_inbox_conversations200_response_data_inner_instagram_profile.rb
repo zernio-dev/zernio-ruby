@@ -66,6 +66,11 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'is_follower',
+        :'is_following',
+        :'follower_count',
+        :'is_verified',
+        :'fetched_at'
       ])
     end
 

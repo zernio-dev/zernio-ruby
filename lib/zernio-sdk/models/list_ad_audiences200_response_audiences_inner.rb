@@ -25,7 +25,6 @@ module Zernio
 
     attr_accessor :type
 
-    # Present (and the only meaningful payload) when `type` is `saved_targeting`. Null for uploaded/derived audience types.
     attr_accessor :spec
 
     attr_accessor :platform
@@ -99,6 +98,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'spec',
       ])
     end
 

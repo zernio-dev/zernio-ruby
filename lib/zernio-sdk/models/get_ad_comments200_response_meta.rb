@@ -116,6 +116,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'facebook_account_id',
       ])
     end
 

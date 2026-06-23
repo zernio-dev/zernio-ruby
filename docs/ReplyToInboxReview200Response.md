@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **status** | **String** |  | [optional] |
-| **reply** | [**ReplyToInboxReview200ResponseReply**](ReplyToInboxReview200ResponseReply.md) |  | [optional] |
+| **reply** | [**ListInboxReviews200ResponseDataInnerReply**](ListInboxReviews200ResponseDataInnerReply.md) |  | [optional] |
 | **platform** | **String** |  | [optional] |
 
 ## Example

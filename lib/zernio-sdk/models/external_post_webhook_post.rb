@@ -115,6 +115,9 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'url',
+        :'thumbnail_url',
+        :'deleted_at'
       ])
     end
 
@@ -218,10 +221,6 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
-      end
-
       if @content.nil?
         invalid_properties.push('invalid value for "content", content cannot be nil.')
       end
@@ -232,10 +231,6 @@ module Zernio
 
       if @media_items.nil?
         invalid_properties.push('invalid value for "media_items", media_items cannot be nil.')
-      end
-
-      if @thumbnail_url.nil?
-        invalid_properties.push('invalid value for "thumbnail_url", thumbnail_url cannot be nil.')
       end
 
       if @published_at.nil?
@@ -256,11 +251,9 @@ module Zernio
       return false if @id.nil?
       return false if @platform.nil?
       return false if @account_id.nil?
-      return false if @url.nil?
       return false if @content.nil?
       return false if @media_type.nil?
       return false if @media_items.nil?
-      return false if @thumbnail_url.nil?
       return false if @published_at.nil?
       return false if @source.nil?
       source_validator = EnumAttributeValidator.new('String', ["external"])
@@ -299,16 +292,6 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] url Value to be assigned
-    def url=(url)
-      if url.nil?
-        fail ArgumentError, 'url cannot be nil'
-      end
-
-      @url = url
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] content Value to be assigned
     def content=(content)
       if content.nil?
@@ -336,16 +319,6 @@ module Zernio
       end
 
       @media_items = media_items
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] thumbnail_url Value to be assigned
-    def thumbnail_url=(thumbnail_url)
-      if thumbnail_url.nil?
-        fail ArgumentError, 'thumbnail_url cannot be nil'
-      end
-
-      @thumbnail_url = thumbnail_url
     end
 
     # Custom attribute writer method with validation

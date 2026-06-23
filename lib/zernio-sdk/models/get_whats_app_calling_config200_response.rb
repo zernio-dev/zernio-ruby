@@ -80,6 +80,10 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'call_deep_link',
+        :'forward_to',
+        :'sip_auth_username',
+        :'call_icon_countries'
       ])
     end
 
