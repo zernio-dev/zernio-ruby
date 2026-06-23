@@ -16,13 +16,13 @@ require 'time'
 module Zernio
   # Optional white-label of the hosted page the end customer sees.
   class CreateWhatsAppNumberKycLinkRequestBranding < ApiModelBase
-    # Your company name
+    # Your company name, shown on the hosted page.
     attr_accessor :company_name
 
     # Logo shown above the form.
     attr_accessor :logo_url
 
-    # Hex color (e.g. \"#1a73e8\") applied to the primary action.
+    # Hex color (e.g. #1a73e8) used as a brand accent on the page.
     attr_accessor :brand_color
 
     # Attribute mapping from ruby-style variable name to JSON key.

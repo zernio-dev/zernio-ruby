@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **company_name** | **String** | Your company name | [optional] |
+| **company_name** | **String** | Your company name, shown on the hosted page. | [optional] |
 | **logo_url** | **String** | Logo shown above the form. | [optional] |
-| **brand_color** | **String** | Hex color (e.g. \&quot;#1a73e8\&quot;) applied to the primary action. | [optional] |
+| **brand_color** | **String** | Hex color (e.g. #1a73e8) used as a brand accent on the page. | [optional] |
 
 ## Example
 
