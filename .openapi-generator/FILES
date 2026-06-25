@@ -960,6 +960,8 @@ docs/TargetingSpec.md
 docs/TargetingSpecCitiesInner.md
 docs/TargetingSpecCustomLocationsInner.md
 docs/TargetingSpecExcludedLocations.md
+docs/TargetingSpecExcludedLocationsCitiesInner.md
+docs/TargetingSpecExcludedLocationsPlacesInner.md
 docs/TelegramPlatformData.md
 docs/TestWebhookRequest.md
 docs/ThreadsPlatformData.md
@@ -2214,6 +2216,8 @@ lib/zernio-sdk/models/targeting_spec.rb
 lib/zernio-sdk/models/targeting_spec_cities_inner.rb
 lib/zernio-sdk/models/targeting_spec_custom_locations_inner.rb
 lib/zernio-sdk/models/targeting_spec_excluded_locations.rb
+lib/zernio-sdk/models/targeting_spec_excluded_locations_cities_inner.rb
+lib/zernio-sdk/models/targeting_spec_excluded_locations_places_inner.rb
 lib/zernio-sdk/models/telegram_platform_data.rb
 lib/zernio-sdk/models/test_webhook_request.rb
 lib/zernio-sdk/models/threads_platform_data.rb
@@ -3446,6 +3450,8 @@ spec/models/submit_whats_app_number_kyc_request_documents_inner_spec.rb
 spec/models/submit_whats_app_number_kyc_request_spec.rb
 spec/models/targeting_spec_cities_inner_spec.rb
 spec/models/targeting_spec_custom_locations_inner_spec.rb
+spec/models/targeting_spec_excluded_locations_cities_inner_spec.rb
+spec/models/targeting_spec_excluded_locations_places_inner_spec.rb
 spec/models/targeting_spec_excluded_locations_spec.rb
 spec/models/targeting_spec_spec.rb
 spec/models/telegram_platform_data_spec.rb

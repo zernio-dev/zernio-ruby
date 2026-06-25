@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :name
 
-    # Radius around the city. Requires distanceUnit.
+    # Radius around the city. Requires distance_unit.
     attr_accessor :radius
 
     # Required if radius is set.
@@ -53,7 +53,7 @@ module Zernio
         :'key' => :'key',
         :'name' => :'name',
         :'radius' => :'radius',
-        :'distance_unit' => :'distanceUnit'
+        :'distance_unit' => :'distance_unit'
       }
     end
 

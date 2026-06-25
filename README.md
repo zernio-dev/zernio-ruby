@@ -1375,6 +1375,8 @@ Class | Method | HTTP request | Description
  - [Zernio::TargetingSpecCitiesInner](docs/TargetingSpecCitiesInner.md)
  - [Zernio::TargetingSpecCustomLocationsInner](docs/TargetingSpecCustomLocationsInner.md)
  - [Zernio::TargetingSpecExcludedLocations](docs/TargetingSpecExcludedLocations.md)
+ - [Zernio::TargetingSpecExcludedLocationsCitiesInner](docs/TargetingSpecExcludedLocationsCitiesInner.md)
+ - [Zernio::TargetingSpecExcludedLocationsPlacesInner](docs/TargetingSpecExcludedLocationsPlacesInner.md)
  - [Zernio::TelegramPlatformData](docs/TelegramPlatformData.md)
  - [Zernio::TestWebhookRequest](docs/TestWebhookRequest.md)
  - [Zernio::ThreadsPlatformData](docs/ThreadsPlatformData.md)

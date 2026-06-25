@@ -14,36 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Geo to exclude from the audience. Mirrors the inclusion geo shape: excluded cities can carry a radius catchment and excluded custom (lat/lng) pins are supported, both on Meta (excluded_geo_locations).
-  class TargetingSpecExcludedLocations < ApiModelBase
-    attr_accessor :countries
-
-    attr_accessor :regions
-
-    # Cities to exclude. Optional `radius` + `distance_unit` exclude a catchment around the city (both must be set together or both omitted); Meta honours the radius on excluded cities.
-    attr_accessor :cities
-
-    attr_accessor :zips
-
-    # Named points of interest to exclude. `key` from /v1/ads/targeting/search.
-    attr_accessor :places
-
-    # Named neighbourhood areas to exclude. `key` from /v1/ads/targeting/search.
-    attr_accessor :neighborhoods
-
-    # Point-radius (lat/lng) pins to exclude (Meta excluded_geo_locations.custom_locations). Mirrors the inclusion customLocations shape.
-    attr_accessor :custom_locations
+  class TargetingSpecExcludedLocationsPlacesInner < ApiModelBase
+    attr_accessor :key
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'countries' => :'countries',
-        :'regions' => :'regions',
-        :'cities' => :'cities',
-        :'zips' => :'zips',
-        :'places' => :'places',
-        :'neighborhoods' => :'neighborhoods',
-        :'custom_locations' => :'customLocations'
+        :'key' => :'key'
       }
     end
 
@@ -60,13 +37,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'countries' => :'Array<String>',
-        :'regions' => :'Array<CreateStandaloneAdRequestZipsInner>',
-        :'cities' => :'Array<TargetingSpecExcludedLocationsCitiesInner>',
-        :'zips' => :'Array<CreateStandaloneAdRequestZipsInner>',
-        :'places' => :'Array<TargetingSpecExcludedLocationsPlacesInner>',
-        :'neighborhoods' => :'Array<TargetingSpecExcludedLocationsPlacesInner>',
-        :'custom_locations' => :'Array<TargetingSpecCustomLocationsInner>'
+        :'key' => :'String'
       }
     end
 
@@ -80,58 +51,22 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::TargetingSpecExcludedLocations` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::TargetingSpecExcludedLocationsPlacesInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::TargetingSpecExcludedLocations`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::TargetingSpecExcludedLocationsPlacesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'countries')
-        if (value = attributes[:'countries']).is_a?(Array)
-          self.countries = value
-        end
-      end
-
-      if attributes.key?(:'regions')
-        if (value = attributes[:'regions']).is_a?(Array)
-          self.regions = value
-        end
-      end
-
-      if attributes.key?(:'cities')
-        if (value = attributes[:'cities']).is_a?(Array)
-          self.cities = value
-        end
-      end
-
-      if attributes.key?(:'zips')
-        if (value = attributes[:'zips']).is_a?(Array)
-          self.zips = value
-        end
-      end
-
-      if attributes.key?(:'places')
-        if (value = attributes[:'places']).is_a?(Array)
-          self.places = value
-        end
-      end
-
-      if attributes.key?(:'neighborhoods')
-        if (value = attributes[:'neighborhoods']).is_a?(Array)
-          self.neighborhoods = value
-        end
-      end
-
-      if attributes.key?(:'custom_locations')
-        if (value = attributes[:'custom_locations']).is_a?(Array)
-          self.custom_locations = value
-        end
+      if attributes.key?(:'key')
+        self.key = attributes[:'key']
+      else
+        self.key = nil
       end
     end
 
@@ -140,6 +75,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @key.nil?
+        invalid_properties.push('invalid value for "key", key cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -147,7 +86,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @key.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] key Value to be assigned
+    def key=(key)
+      if key.nil?
+        fail ArgumentError, 'key cannot be nil'
+      end
+
+      @key = key
     end
 
     # Checks equality by comparing each attribute.
@@ -155,13 +105,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          countries == o.countries &&
-          regions == o.regions &&
-          cities == o.cities &&
-          zips == o.zips &&
-          places == o.places &&
-          neighborhoods == o.neighborhoods &&
-          custom_locations == o.custom_locations
+          key == o.key
     end
 
     # @see the `==` method
@@ -173,7 +117,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [countries, regions, cities, zips, places, neighborhoods, custom_locations].hash
+      [key].hash
     end
 
     # Builds the object from hash

@@ -1,12 +1,11 @@
-# Zernio::TargetingSpecCitiesInner
+# Zernio::TargetingSpecExcludedLocationsCitiesInner
 
 ## Properties
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **key** | **String** |  |  |
-| **name** | **String** |  | [optional] |
-| **radius** | **Float** | Radius around the city. Requires distance_unit. | [optional] |
+| **radius** | **Float** | Radius around the excluded city. Requires distance_unit. | [optional] |
 | **distance_unit** | **String** | Required if radius is set. | [optional] |
 
 ## Example
@@ -14,9 +13,8 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::TargetingSpecCitiesInner.new(
+instance = Zernio::TargetingSpecExcludedLocationsCitiesInner.new(
   key: null,
-  name: null,
   radius: null,
   distance_unit: null
 )

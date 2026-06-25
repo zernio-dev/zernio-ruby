@@ -26,6 +26,7 @@ module Zernio
 
     attr_accessor :name
 
+    # Optional label, sent to Meta as `address_string`. latitude/longitude take precedence for the pin location.
     attr_accessor :address
 
     class EnumAttributeValidator
