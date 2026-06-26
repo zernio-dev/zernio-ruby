@@ -84,6 +84,7 @@ Class | Method | HTTP request | Description
 *Zernio::AccountSettingsApi* | [**set_telegram_commands**](docs/AccountSettingsApi.md#set_telegram_commands) | **PUT** /v1/accounts/{accountId}/telegram-commands | Set TG bot commands
 *Zernio::AccountsApi* | [**delete_account**](docs/AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account
 *Zernio::AccountsApi* | [**get_account_health**](docs/AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health
+*Zernio::AccountsApi* | [**get_account_posts**](docs/AccountsApi.md#get_account_posts) | **GET** /v1/accounts/{accountId}/posts | List posts for an account
 *Zernio::AccountsApi* | [**get_all_accounts_health**](docs/AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health
 *Zernio::AccountsApi* | [**get_follower_stats**](docs/AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
 *Zernio::AccountsApi* | [**get_tik_tok_creator_info**](docs/AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info
@@ -756,6 +757,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAccountHealth200ResponsePermissions](docs/GetAccountHealth200ResponsePermissions.md)
  - [Zernio::GetAccountHealth200ResponsePermissionsPostingInner](docs/GetAccountHealth200ResponsePermissionsPostingInner.md)
  - [Zernio::GetAccountHealth200ResponseTokenStatus](docs/GetAccountHealth200ResponseTokenStatus.md)
+ - [Zernio::GetAccountPosts200Response](docs/GetAccountPosts200Response.md)
+ - [Zernio::GetAccountPosts200ResponsePostsInner](docs/GetAccountPosts200ResponsePostsInner.md)
+ - [Zernio::GetAccountPosts401Response](docs/GetAccountPosts401Response.md)
  - [Zernio::GetAd200Response](docs/GetAd200Response.md)
  - [Zernio::GetAdAnalytics200Response](docs/GetAdAnalytics200Response.md)
  - [Zernio::GetAdAnalytics200ResponseAd](docs/GetAdAnalytics200ResponseAd.md)

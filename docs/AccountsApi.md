@@ -6,6 +6,7 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**delete_account**](AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account |
 | [**get_account_health**](AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health |
+| [**get_account_posts**](AccountsApi.md#get_account_posts) | **GET** /v1/accounts/{accountId}/posts | List posts for an account |
 | [**get_all_accounts_health**](AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health |
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**get_tik_tok_creator_info**](AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info |
@@ -141,6 +142,79 @@ end
 ### Return type
 
 [**GetAccountHealth200Response**](GetAccountHealth200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_account_posts
+
+> <GetAccountPosts200Response> get_account_posts(account_id, opts)
+
+List posts for an account
+
+Returns recent posts from a connected social account by calling the platform API directly. Supports Facebook, Instagram, X/Twitter, Bluesky, Threads, YouTube, LinkedIn, Reddit, TikTok, and Pinterest.  For YouTube accounts, the `excludeUnlisted` parameter can be used to filter out unlisted and private videos, which is useful when the account contains internal content not meant for social monitoring. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | 
+opts = {
+  exclude_unlisted: true # Boolean | YouTube only. When `true`, excludes unlisted and private videos from the response. Has no effect on other platforms.
+}
+
+begin
+  # List posts for an account
+  result = api_instance.get_account_posts(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_account_posts: #{e}"
+end
+```
+
+#### Using the get_account_posts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAccountPosts200Response>, Integer, Hash)> get_account_posts_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List posts for an account
+  data, status_code, headers = api_instance.get_account_posts_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAccountPosts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_account_posts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **exclude_unlisted** | **Boolean** | YouTube only. When &#x60;true&#x60;, excludes unlisted and private videos from the response. Has no effect on other platforms. | [optional] |
+
+### Return type
+
+[**GetAccountPosts200Response**](GetAccountPosts200Response.md)
 
 ### Authorization
 

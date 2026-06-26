@@ -145,6 +145,72 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List posts for an account
+    # Returns recent posts from a connected social account by calling the platform API directly. Supports Facebook, Instagram, X/Twitter, Bluesky, Threads, YouTube, LinkedIn, Reddit, TikTok, and Pinterest.  For YouTube accounts, the `excludeUnlisted` parameter can be used to filter out unlisted and private videos, which is useful when the account contains internal content not meant for social monitoring. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :exclude_unlisted YouTube only. When &#x60;true&#x60;, excludes unlisted and private videos from the response. Has no effect on other platforms.
+    # @return [GetAccountPosts200Response]
+    def get_account_posts(account_id, opts = {})
+      data, _status_code, _headers = get_account_posts_with_http_info(account_id, opts)
+      data
+    end
+
+    # List posts for an account
+    # Returns recent posts from a connected social account by calling the platform API directly. Supports Facebook, Instagram, X/Twitter, Bluesky, Threads, YouTube, LinkedIn, Reddit, TikTok, and Pinterest.  For YouTube accounts, the &#x60;excludeUnlisted&#x60; parameter can be used to filter out unlisted and private videos, which is useful when the account contains internal content not meant for social monitoring. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :exclude_unlisted YouTube only. When &#x60;true&#x60;, excludes unlisted and private videos from the response. Has no effect on other platforms.
+    # @return [Array<(GetAccountPosts200Response, Integer, Hash)>] GetAccountPosts200Response data, response status code and response headers
+    def get_account_posts_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountsApi.get_account_posts ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.get_account_posts"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/posts'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'excludeUnlisted'] = opts[:'exclude_unlisted'] if !opts[:'exclude_unlisted'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAccountPosts200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountsApi.get_account_posts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#get_account_posts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Check accounts health
     # Returns health status of all connected accounts including token validity, permissions, and issues needing attention.
     # @param [Hash] opts the optional parameters
