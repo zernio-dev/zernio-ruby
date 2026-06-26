@@ -56,19 +56,6 @@ describe 'AccountsApi' do
     end
   end
 
-  # unit tests for get_account_posts
-  # List posts for an account
-  # Returns recent posts from a connected social account by calling the platform API directly. Supports Facebook, Instagram, X/Twitter, Bluesky, Threads, YouTube, LinkedIn, Reddit, TikTok, and Pinterest.  For YouTube accounts, the &#x60;excludeUnlisted&#x60; parameter can be used to filter out unlisted and private videos, which is useful when the account contains internal content not meant for social monitoring. 
-  # @param account_id 
-  # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :exclude_unlisted YouTube only. When &#x60;true&#x60;, excludes unlisted and private videos from the response. Has no effect on other platforms.
-  # @return [GetAccountPosts200Response]
-  describe 'get_account_posts test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for get_all_accounts_health
   # Check accounts health
   # Returns health status of all connected accounts including token validity, permissions, and issues needing attention.
