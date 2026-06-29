@@ -140,7 +140,7 @@ describe 'DiscordApi' do
   end
 
   # unit tests for list_discord_pinned_messages
-  # List pinned messages in a Discord channel
+  # List pinned messages
   # Returns the channel&#39;s pinned messages, sorted most-recently-pinned first. Discord caps a channel at 50 pinned messages and returns the full list unpaginated.  Bot needs READ_MESSAGE_HISTORY in the channel (granted by default BOT_PERMISSIONS). 
   # @param channel_id Discord channel snowflake.
   # @param account_id SocialAccount _id of any Discord account in the same guild.

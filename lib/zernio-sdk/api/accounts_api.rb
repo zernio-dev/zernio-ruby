@@ -456,7 +456,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Move account to a different profile
+    # Move account to another profile
     # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
     # @param account_id [String] 
     # @param move_account_to_profile_request [MoveAccountToProfileRequest] 
@@ -467,7 +467,7 @@ module Zernio
       data
     end
 
-    # Move account to a different profile
+    # Move account to another profile
     # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 
     # @param account_id [String] 
     # @param move_account_to_profile_request [MoveAccountToProfileRequest] 

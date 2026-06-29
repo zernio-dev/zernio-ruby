@@ -117,7 +117,7 @@ describe 'AccountsApi' do
   end
 
   # unit tests for move_account_to_profile
-  # Move account to a different profile
+  # Move account to another profile
   # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 
   # @param account_id 
   # @param move_account_to_profile_request 

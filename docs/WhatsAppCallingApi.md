@@ -7,8 +7,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**disable_whats_app_calling**](WhatsAppCallingApi.md#disable_whats_app_calling) | **DELETE** /v1/whatsapp/phone-numbers/{id}/calling | Disable calling on a number |
 | [**enable_whats_app_calling**](WhatsAppCallingApi.md#enable_whats_app_calling) | **POST** /v1/whatsapp/phone-numbers/{id}/calling | Enable calling on a number |
 | [**get_whats_app_call**](WhatsAppCallingApi.md#get_whats_app_call) | **GET** /v1/whatsapp/calls/{callId} | Get a single call |
-| [**get_whats_app_call_estimate**](WhatsAppCallingApi.md#get_whats_app_call_estimate) | **GET** /v1/whatsapp/calls/estimate | Estimate per-minute cost for a destination |
-| [**get_whats_app_call_permissions**](WhatsAppCallingApi.md#get_whats_app_call_permissions) | **GET** /v1/whatsapp/call-permissions | Check call permission for a consumer |
+| [**get_whats_app_call_estimate**](WhatsAppCallingApi.md#get_whats_app_call_estimate) | **GET** /v1/whatsapp/calls/estimate | Estimate per-minute cost |
+| [**get_whats_app_call_permissions**](WhatsAppCallingApi.md#get_whats_app_call_permissions) | **GET** /v1/whatsapp/call-permissions | Check call permission |
 | [**get_whats_app_calling_config**](WhatsAppCallingApi.md#get_whats_app_calling_config) | **GET** /v1/whatsapp/calling | Get calling config for an account |
 | [**initiate_whats_app_call**](WhatsAppCallingApi.md#initiate_whats_app_call) | **POST** /v1/whatsapp/calls | Initiate outbound call |
 | [**list_whats_app_calls**](WhatsAppCallingApi.md#list_whats_app_calls) | **GET** /v1/whatsapp/calls | List call history for an account |
@@ -229,7 +229,7 @@ end
 
 > <GetWhatsAppCallEstimate200Response> get_whats_app_call_estimate(account_id, to, opts)
 
-Estimate per-minute cost for a destination
+Estimate per-minute cost
 
 Returns a zero-markup estimated cost for an outbound call to the given destination, broken down by Meta + Telnyx + recording line items. Costs are pass-through, no margin applied. 
 
@@ -253,7 +253,7 @@ opts = {
 }
 
 begin
-  # Estimate per-minute cost for a destination
+  # Estimate per-minute cost
   result = api_instance.get_whats_app_call_estimate(account_id, to, opts)
   p result
 rescue Zernio::ApiError => e
@@ -269,7 +269,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Estimate per-minute cost for a destination
+  # Estimate per-minute cost
   data, status_code, headers = api_instance.get_whats_app_call_estimate_with_http_info(account_id, to, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -306,7 +306,7 @@ end
 
 > <GetWhatsAppCallPermissions200Response> get_whats_app_call_permissions(account_id, to)
 
-Check call permission for a consumer
+Check call permission
 
 Returns the permission state and the list of available actions for a given consumer wa_id (e.g. `start_call`, `send_call_permission_request`). Use this before placing a call to decide whether to prompt for consent first. 
 
@@ -326,7 +326,7 @@ account_id = 'account_id_example' # String |
 to = 'to_example' # String | Consumer wa_id (E.164, leading + optional)
 
 begin
-  # Check call permission for a consumer
+  # Check call permission
   result = api_instance.get_whats_app_call_permissions(account_id, to)
   p result
 rescue Zernio::ApiError => e
@@ -342,7 +342,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Check call permission for a consumer
+  # Check call permission
   data, status_code, headers = api_instance.get_whats_app_call_permissions_with_http_info(account_id, to)
   p status_code # => 2xx
   p headers # => { ... }

@@ -249,7 +249,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Provision CTWA conversions dataset
+    # Provision CTWA dataset
     # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as `metadata.metaCapiDatasetId`.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with `created: false`.  Requires the connected WhatsApp account's token to carry the `whatsapp_business_manage_events` permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
     # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
     # @param [Hash] opts the optional parameters
@@ -259,7 +259,7 @@ module Zernio
       data
     end
 
-    # Provision CTWA conversions dataset
+    # Provision CTWA dataset
     # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as &#x60;metadata.metaCapiDatasetId&#x60;.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with &#x60;created: false&#x60;.  Requires the connected WhatsApp account&#39;s token to carry the &#x60;whatsapp_business_manage_events&#x60; permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
     # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
     # @param [Hash] opts the optional parameters
@@ -1208,7 +1208,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # List recent WhatsApp conversion events
+    # List conversion events
     # Returns the most recent conversion events sent through `POST /v1/whatsapp/conversions` for the given WhatsApp account. Sourced from delivery logs (Axiom `late` dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \"recent activity\" panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: `eventName`, `conversationId`, `eventsReceived`, `eventsFailed`, `traceId`, `durationMs`, and the wall-clock `timestamp`. 
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
@@ -1219,7 +1219,7 @@ module Zernio
       data
     end
 
-    # List recent WhatsApp conversion events
+    # List conversion events
     # Returns the most recent conversion events sent through &#x60;POST /v1/whatsapp/conversions&#x60; for the given WhatsApp account. Sourced from delivery logs (Axiom &#x60;late&#x60; dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \&quot;recent activity\&quot; panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: &#x60;eventName&#x60;, &#x60;conversationId&#x60;, &#x60;eventsReceived&#x60;, &#x60;eventsFailed&#x60;, &#x60;traceId&#x60;, &#x60;durationMs&#x60;, and the wall-clock &#x60;timestamp&#x60;. 
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters

@@ -173,7 +173,7 @@ describe 'WorkflowsApi' do
   end
 
   # unit tests for restore_workflow_version
-  # Restore a previous workflow version
+  # Restore a workflow version
   # Replace the current graph with the named version&#39;s snapshot. Before the swap, the current graph is itself snapshotted as a new version, so a restore is reversible. The workflow must be in &#x60;draft&#x60; or &#x60;paused&#x60; status (same gate as a normal graph edit). The returned workflow carries &#x60;restoredFromVersion&#x60; so the UI can surface which version was rolled back to. 
   # @param workflow_id 
   # @param version 

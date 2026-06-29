@@ -19,7 +19,7 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Share a tracking tag with an ad account
+    # Share with an ad account
     # Shares the pixel with another ad account so campaigns/audiences in that account can use it. Requires that you administer both the pixel's owning Business Manager and the target ad account; a pixel on a personal (non-BM) ad account can't be shared (Meta will reject the call). Meta only (platform `metaads`); other platforms return 405. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -31,7 +31,7 @@ module Zernio
       data
     end
 
-    # Share a tracking tag with an ad account
+    # Share with an ad account
     # Shares the pixel with another ad account so campaigns/audiences in that account can use it. Requires that you administer both the pixel&#39;s owning Business Manager and the target ad account; a pixel on a personal (non-BM) ad account can&#39;t be shared (Meta will reject the call). Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -99,7 +99,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Create a tracking tag (Meta Pixel)
+    # Create a tracking tag
     # Creates a Meta Pixel on the given ad account (`POST /act_{id}/adspixels` — `name` is the only input). Returns the created tag including its install `code`. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with `ownerBusinessId: null` and can't be shared with other ad accounts.  Creating a pixel does NOT install it — install the returned `code` snippet on the site, or send events server-side via `POST /v1/ads/conversions`. The check `installed` is derived from `lastFiredTime`.  NOT idempotent: each call creates a new pixel. Do not retry blindly on timeout. Meta only (platform `metaads`); other platforms return 405. 
     # @param account_id [String] Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
     # @param create_tracking_tag_request [CreateTrackingTagRequest] 
@@ -110,7 +110,7 @@ module Zernio
       data
     end
 
-    # Create a tracking tag (Meta Pixel)
+    # Create a tracking tag
     # Creates a Meta Pixel on the given ad account (&#x60;POST /act_{id}/adspixels&#x60; — &#x60;name&#x60; is the only input). Returns the created tag including its install &#x60;code&#x60;. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with &#x60;ownerBusinessId: null&#x60; and can&#39;t be shared with other ad accounts.  Creating a pixel does NOT install it — install the returned &#x60;code&#x60; snippet on the site, or send events server-side via &#x60;POST /v1/ads/conversions&#x60;. The check &#x60;installed&#x60; is derived from &#x60;lastFiredTime&#x60;.  NOT idempotent: each call creates a new pixel. Do not retry blindly on timeout. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
     # @param account_id [String] Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
     # @param create_tracking_tag_request [CreateTrackingTagRequest] 
@@ -173,7 +173,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Fetch a single tracking tag (Meta Pixel)
+    # Get a tracking tag
     # Returns the full tag record including the base-code `code` snippet, `lastFiredTime`, `ownerBusinessId`, `isUnavailable`, etc. Meta only (platform `metaads`); other platforms return 405. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -184,7 +184,7 @@ module Zernio
       data
     end
 
-    # Fetch a single tracking tag (Meta Pixel)
+    # Get a tracking tag
     # Returns the full tag record including the base-code &#x60;code&#x60; snippet, &#x60;lastFiredTime&#x60;, &#x60;ownerBusinessId&#x60;, &#x60;isUnavailable&#x60;, etc. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -242,7 +242,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Aggregated event stats for a tracking tag (Meta Pixel)
+    # Get aggregated event stats
     # Returns aggregated event counts for the pixel (`GET /{pixel_id}/stats`). Rows are passed through from Meta as-is — their shape depends on the `aggregation` requested. Meta only (platform `metaads`); other platforms return 405. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -256,7 +256,7 @@ module Zernio
       data
     end
 
-    # Aggregated event stats for a tracking tag (Meta Pixel)
+    # Get aggregated event stats
     # Returns aggregated event counts for the pixel (&#x60;GET /{pixel_id}/stats&#x60;). Rows are passed through from Meta as-is — their shape depends on the &#x60;aggregation&#x60; requested. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -324,7 +324,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # List ad accounts a tracking tag is shared with
+    # List accounts it is shared with
     # Meta only (platform `metaads`); other platforms return 405.
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -335,7 +335,7 @@ module Zernio
       data
     end
 
-    # List ad accounts a tracking tag is shared with
+    # List accounts it is shared with
     # Meta only (platform &#x60;metaads&#x60;); other platforms return 405.
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -393,7 +393,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # List tracking tags (Meta Pixels)
+    # List tracking tags
     # Returns the tracking tags (Meta Pixels) the connected ads account can see. Pass `?adAccountId=act_...` to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits `code` — call `getTrackingTag` for the install snippet and full detail.  Meta only today (platform `metaads`); other platforms return 405. The `accountId` must be the Meta *ads* SocialAccount created by the Ads add-on connect flow, not a Facebook/Instagram posting account. Get your `act_...` ids from `GET /v1/ads/accounts`. 
     # @param account_id [String] Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
     # @param [Hash] opts the optional parameters
@@ -404,7 +404,7 @@ module Zernio
       data
     end
 
-    # List tracking tags (Meta Pixels)
+    # List tracking tags
     # Returns the tracking tags (Meta Pixels) the connected ads account can see. Pass &#x60;?adAccountId&#x3D;act_...&#x60; to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits &#x60;code&#x60; — call &#x60;getTrackingTag&#x60; for the install snippet and full detail.  Meta only today (platform &#x60;metaads&#x60;); other platforms return 405. The &#x60;accountId&#x60; must be the Meta *ads* SocialAccount created by the Ads add-on connect flow, not a Facebook/Instagram posting account. Get your &#x60;act_...&#x60; ids from &#x60;GET /v1/ads/accounts&#x60;. 
     # @param account_id [String] Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
     # @param [Hash] opts the optional parameters
@@ -459,7 +459,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Stop sharing a tracking tag with an ad account
+    # Stop sharing with an account
     # `adAccountId` may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. Meta only (platform `metaads`); other platforms return 405. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -471,7 +471,7 @@ module Zernio
       nil
     end
 
-    # Stop sharing a tracking tag with an ad account
+    # Stop sharing with an account
     # &#x60;adAccountId&#x60; may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -531,7 +531,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Update a tracking tag (Meta Pixel)
+    # Update a tracking tag
     # Partial-update a pixel. Whitelisted fields: `name` (rename), `enableAutomaticMatching`, `automaticMatchingFields`, `firstPartyCookieStatus`, `dataUseSetting`. At least one is required. Returns the re-fetched canonical tag. Meta only (platform `metaads`); other platforms return 405.  There is no DELETE — Meta has no API to delete a pixel. To stop using one, unshare it from your ad accounts (`DELETE .../tracking-tags/{tagId}/shared-accounts`) or disable it in Events Manager. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
@@ -543,7 +543,7 @@ module Zernio
       data
     end
 
-    # Update a tracking tag (Meta Pixel)
+    # Update a tracking tag
     # Partial-update a pixel. Whitelisted fields: &#x60;name&#x60; (rename), &#x60;enableAutomaticMatching&#x60;, &#x60;automaticMatchingFields&#x60;, &#x60;firstPartyCookieStatus&#x60;, &#x60;dataUseSetting&#x60;. At least one is required. Returns the re-fetched canonical tag. Meta only (platform &#x60;metaads&#x60;); other platforms return 405.  There is no DELETE — Meta has no API to delete a pixel. To stop using one, unshare it from your ad accounts (&#x60;DELETE .../tracking-tags/{tagId}/shared-accounts&#x60;) or disable it in Events Manager. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.

@@ -19,7 +19,7 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Check a country's availability + address constraint
+    # Check country availability
     # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
@@ -29,7 +29,7 @@ module Zernio
       data
     end
 
-    # Check a country&#39;s availability + address constraint
+    # Check country availability
     # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
@@ -215,7 +215,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Get regulated-number KYC form spec
+    # Get KYC form spec
     # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
     # @param country [String] 
     # @param profile_id [String] 
@@ -226,7 +226,7 @@ module Zernio
       data
     end
 
-    # Get regulated-number KYC form spec
+    # Get KYC form spec
     # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
     # @param country [String] 
     # @param profile_id [String] 
@@ -286,7 +286,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Get the declined requirements to fix
+    # Get declined requirements
     # For a number in `regulatory_declined`, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
     # @param id [String] WhatsAppPhoneNumber id.
     # @param [Hash] opts the optional parameters
@@ -296,7 +296,7 @@ module Zernio
       data
     end
 
-    # Get the declined requirements to fix
+    # Get declined requirements
     # For a number in &#x60;regulatory_declined&#x60;, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
     # @param id [String] WhatsAppPhoneNumber id.
     # @param [Hash] opts the optional parameters
@@ -667,7 +667,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Fix a declined number and re-submit
+    # Resubmit a declined number
     # Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes `regulatory_declined` → `pending_regulatory`. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
     # @param id [String] 
     # @param remediate_whats_app_number_request [RemediateWhatsAppNumberRequest] 
@@ -678,7 +678,7 @@ module Zernio
       data
     end
 
-    # Fix a declined number and re-submit
+    # Resubmit a declined number
     # Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes &#x60;regulatory_declined&#x60; → &#x60;pending_regulatory&#x60;. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
     # @param id [String] 
     # @param remediate_whats_app_number_request [RemediateWhatsAppNumberRequest] 
@@ -741,7 +741,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Search available numbers to purchase
+    # Search available numbers
     # Search the provider's inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :country  (default to 'US')
@@ -756,7 +756,7 @@ module Zernio
       data
     end
 
-    # Search available numbers to purchase
+    # Search available numbers
     # Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :country  (default to 'US')
@@ -820,7 +820,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Submit regulated-number KYC
+    # Submit KYC
     # Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via `submissionId`.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
     # @param submit_whats_app_number_kyc_request [SubmitWhatsAppNumberKycRequest] 
     # @param [Hash] opts the optional parameters
@@ -830,7 +830,7 @@ module Zernio
       data
     end
 
-    # Submit regulated-number KYC
+    # Submit KYC
     # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
     # @param submit_whats_app_number_kyc_request [SubmitWhatsAppNumberKycRequest] 
     # @param [Hash] opts the optional parameters
@@ -888,7 +888,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Upload a single regulated-number KYC document
+    # Upload a KYC document
     # Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via `documents[].documentId`. Send the RAW file bytes as the request body (not base64); put the filename in the `X-Filename` header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
     # @param x_filename [String] URL-encoded original filename.
     # @param body [File] 
@@ -899,7 +899,7 @@ module Zernio
       data
     end
 
-    # Upload a single regulated-number KYC document
+    # Upload a KYC document
     # Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via &#x60;documents[].documentId&#x60;. Send the RAW file bytes as the request body (not base64); put the filename in the &#x60;X-Filename&#x60; header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
     # @param x_filename [String] URL-encoded original filename.
     # @param body [File] 
@@ -963,7 +963,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Pre-validate a regulated-number KYC address (Tier 4)
+    # Pre-validate KYC address
     # Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (`administrative_area`) is required by the validator; when it is omitted the pre-check is skipped and `{ ok: true, skipped: true }` is returned (the final submit still validates). 
     # @param validate_whats_app_number_kyc_address_request [ValidateWhatsAppNumberKycAddressRequest] 
     # @param [Hash] opts the optional parameters
@@ -973,7 +973,7 @@ module Zernio
       data
     end
 
-    # Pre-validate a regulated-number KYC address (Tier 4)
+    # Pre-validate KYC address
     # Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (&#x60;administrative_area&#x60;) is required by the validator; when it is omitted the pre-check is skipped and &#x60;{ ok: true, skipped: true }&#x60; is returned (the final submit still validates). 
     # @param validate_whats_app_number_kyc_address_request [ValidateWhatsAppNumberKycAddressRequest] 
     # @param [Hash] opts the optional parameters

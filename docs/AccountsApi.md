@@ -10,7 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**get_tik_tok_creator_info**](AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info |
 | [**list_accounts**](AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts |
-| [**move_account_to_profile**](AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to a different profile |
+| [**move_account_to_profile**](AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile |
 | [**update_account**](AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account |
 
 
@@ -464,7 +464,7 @@ end
 
 > <MoveAccountToProfile200Response> move_account_to_profile(account_id, move_account_to_profile_request)
 
-Move account to a different profile
+Move account to another profile
 
 Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
 
@@ -484,7 +484,7 @@ account_id = 'account_id_example' # String |
 move_account_to_profile_request = Zernio::MoveAccountToProfileRequest.new({profile_id: 'profile_id_example'}) # MoveAccountToProfileRequest | 
 
 begin
-  # Move account to a different profile
+  # Move account to another profile
   result = api_instance.move_account_to_profile(account_id, move_account_to_profile_request)
   p result
 rescue Zernio::ApiError => e
@@ -500,7 +500,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Move account to a different profile
+  # Move account to another profile
   data, status_code, headers = api_instance.move_account_to_profile_with_http_info(account_id, move_account_to_profile_request)
   p status_code # => 2xx
   p headers # => { ... }

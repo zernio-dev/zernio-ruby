@@ -94,7 +94,7 @@ describe 'AdCampaignsApi' do
   end
 
   # unit tests for get_ads_timeline
-  # Get daily aggregate ad metrics for an account
+  # Get daily account metrics
   # Returns daily aggregate metrics across all ads in a SocialAccount as a single time series — one row per calendar day in the requested range. Use this for dashboards that draw a daily-spend or daily-conversions chart, instead of calling &#x60;/v1/ads/tree&#x60; once per day.  &#x60;accountId&#x60; is required. The lookup is sibling-expanded so passing the &#x60;metaads&#x60; ID also includes ads under the linked &#x60;facebook&#x60; / &#x60;instagram&#x60; posting account (and vice-versa) — same convention as &#x60;/v1/ads/tree&#x60; and &#x60;/v1/ads&#x60;.  Date range defaults to the last 90 days. Capped at 730 days. Ranges older than the 90-day cache window trigger an on-demand backfill from the platform before returning. 
   # @param account_id Social account ID. Sibling-expanded to its linked posting↔ads pair.
   # @param [Hash] opts the optional parameters
@@ -131,7 +131,7 @@ describe 'AdCampaignsApi' do
   end
 
   # unit tests for update_ad_campaign
-  # Update a campaign (budget and/or bid strategy)
+  # Update a campaign
   # Campaign-level edits. At least one of &#x60;budget&#x60; or &#x60;bidStrategy&#x60; is required.  - &#x60;budget&#x60; updates the CBO (Campaign Budget Optimization) budget. For ABO campaigns   (where the budget lives on the ad set), use PUT /v1/ads/ad-sets/{adSetId} instead — this endpoint   will return 409 with code BUDGET_LEVEL_MISMATCH. - &#x60;bidStrategy&#x60; sets the campaign-level default bid strategy. Per Meta&#39;s spec, &#x60;bid_amount&#x60; and   &#x60;bid_constraints&#x60; do NOT exist at the campaign level — pass them via PUT /v1/ads/ad-sets/{adSetId}.  Meta-only for now. Other platforms return 501 Not Implemented. 
   # @param campaign_id Platform campaign ID
   # @param update_ad_campaign_request 
@@ -157,7 +157,7 @@ describe 'AdCampaignsApi' do
   end
 
   # unit tests for update_ad_set
-  # Update an ad set (budget, status, and/or bid strategy)
+  # Update an ad set
   # Ad-set-level writes. Use this for ABO budget updates, ad-set-scoped pause/resume, and bid-strategy edits. At least one of &#x60;budget&#x60;, &#x60;status&#x60;, or &#x60;bidStrategy&#x60; is required.  Bid strategy compatibility (per Meta&#39;s spec): - &#x60;LOWEST_COST_WITHOUT_CAP&#x60;: no &#x60;bidAmount&#x60;, no &#x60;roasAverageFloor&#x60;. - &#x60;LOWEST_COST_WITH_BID_CAP&#x60; / &#x60;COST_CAP&#x60;: &#x60;bidAmount&#x60; REQUIRED (whole currency units). - &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60;: &#x60;roasAverageFloor&#x60; REQUIRED (decimal multiplier, e.g. 2.0 &#x3D; 2.0x ROAS).  When updating &#x60;budget&#x60; on an ABO campaign: if the parent campaign is CBO, the response is 409 with code BUDGET_LEVEL_MISMATCH — route to PUT /v1/ads/campaigns/{campaignId} instead. 
   # @param ad_set_id Platform ad set ID
   # @param update_ad_set_request 

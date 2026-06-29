@@ -8,11 +8,11 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
-| [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily aggregate ad metrics for an account |
+| [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
-| [**update_ad_campaign**](AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign (budget and/or bid strategy) |
+| [**update_ad_campaign**](AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign |
 | [**update_ad_campaign_status**](AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign |
-| [**update_ad_set**](AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set (budget, status, and/or bid strategy) |
+| [**update_ad_set**](AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set |
 | [**update_ad_set_status**](AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set |
 
 
@@ -324,7 +324,7 @@ end
 
 > <GetAdsTimeline200Response> get_ads_timeline(account_id, opts)
 
-Get daily aggregate ad metrics for an account
+Get daily account metrics
 
 Returns daily aggregate metrics across all ads in a SocialAccount as a single time series — one row per calendar day in the requested range. Use this for dashboards that draw a daily-spend or daily-conversions chart, instead of calling `/v1/ads/tree` once per day.  `accountId` is required. The lookup is sibling-expanded so passing the `metaads` ID also includes ads under the linked `facebook` / `instagram` posting account (and vice-versa) — same convention as `/v1/ads/tree` and `/v1/ads`.  Date range defaults to the last 90 days. Capped at 730 days. Ranges older than the 90-day cache window trigger an on-demand backfill from the platform before returning. 
 
@@ -349,7 +349,7 @@ opts = {
 }
 
 begin
-  # Get daily aggregate ad metrics for an account
+  # Get daily account metrics
   result = api_instance.get_ads_timeline(account_id, opts)
   p result
 rescue Zernio::ApiError => e
@@ -365,7 +365,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get daily aggregate ad metrics for an account
+  # Get daily account metrics
   data, status_code, headers = api_instance.get_ads_timeline_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -492,7 +492,7 @@ end
 
 > <UpdateAdCampaign200Response> update_ad_campaign(campaign_id, update_ad_campaign_request)
 
-Update a campaign (budget and/or bid strategy)
+Update a campaign
 
 Campaign-level edits. At least one of `budget` or `bidStrategy` is required.  - `budget` updates the CBO (Campaign Budget Optimization) budget. For ABO campaigns   (where the budget lives on the ad set), use PUT /v1/ads/ad-sets/{adSetId} instead — this endpoint   will return 409 with code BUDGET_LEVEL_MISMATCH. - `bidStrategy` sets the campaign-level default bid strategy. Per Meta's spec, `bid_amount` and   `bid_constraints` do NOT exist at the campaign level — pass them via PUT /v1/ads/ad-sets/{adSetId}.  Meta-only for now. Other platforms return 501 Not Implemented. 
 
@@ -512,7 +512,7 @@ campaign_id = 'campaign_id_example' # String | Platform campaign ID
 update_ad_campaign_request = Zernio::UpdateAdCampaignRequest.new({platform: 'facebook'}) # UpdateAdCampaignRequest | 
 
 begin
-  # Update a campaign (budget and/or bid strategy)
+  # Update a campaign
   result = api_instance.update_ad_campaign(campaign_id, update_ad_campaign_request)
   p result
 rescue Zernio::ApiError => e
@@ -528,7 +528,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Update a campaign (budget and/or bid strategy)
+  # Update a campaign
   data, status_code, headers = api_instance.update_ad_campaign_with_http_info(campaign_id, update_ad_campaign_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -634,7 +634,7 @@ end
 
 > <UpdateAdSet200Response> update_ad_set(ad_set_id, update_ad_set_request)
 
-Update an ad set (budget, status, and/or bid strategy)
+Update an ad set
 
 Ad-set-level writes. Use this for ABO budget updates, ad-set-scoped pause/resume, and bid-strategy edits. At least one of `budget`, `status`, or `bidStrategy` is required.  Bid strategy compatibility (per Meta's spec): - `LOWEST_COST_WITHOUT_CAP`: no `bidAmount`, no `roasAverageFloor`. - `LOWEST_COST_WITH_BID_CAP` / `COST_CAP`: `bidAmount` REQUIRED (whole currency units). - `LOWEST_COST_WITH_MIN_ROAS`: `roasAverageFloor` REQUIRED (decimal multiplier, e.g. 2.0 = 2.0x ROAS).  When updating `budget` on an ABO campaign: if the parent campaign is CBO, the response is 409 with code BUDGET_LEVEL_MISMATCH — route to PUT /v1/ads/campaigns/{campaignId} instead. 
 
@@ -654,7 +654,7 @@ ad_set_id = 'ad_set_id_example' # String | Platform ad set ID
 update_ad_set_request = Zernio::UpdateAdSetRequest.new({platform: 'facebook'}) # UpdateAdSetRequest | 
 
 begin
-  # Update an ad set (budget, status, and/or bid strategy)
+  # Update an ad set
   result = api_instance.update_ad_set(ad_set_id, update_ad_set_request)
   p result
 rescue Zernio::ApiError => e
@@ -670,7 +670,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Update an ad set (budget, status, and/or bid strategy)
+  # Update an ad set
   data, status_code, headers = api_instance.update_ad_set_with_http_info(ad_set_id, update_ad_set_request)
   p status_code # => 2xx
   p headers # => { ... }
