@@ -14,6 +14,8 @@
 | **platform_post_id** | **String** | The native post ID on the platform (populated after successful publish) | [optional] |
 | **platform_post_url** | **String** | Public URL of the published post. Included in the response for immediate posts; for scheduled posts, fetch via GET /v1/posts/{postId} after publish time. | [optional] |
 | **published_at** | **Time** | Timestamp when the post was published to this platform | [optional] |
+| **is_trial_reel** | **Boolean** | Present and true only when this Instagram reel was launched as a Trial through Zernio (created with platformSpecificData.trialParams). Use it to segment trial reels in analytics. Note: Instagram&#39;s Graph API exposes no readable trial field, so this reflects creation-time intent only. It indicates the reel STARTED as a trial, not whether or when it graduated. | [optional] |
+| **trial_graduation_strategy** | **String** | Graduation strategy the trial reel was launched with. Present only when isTrialReel is true. | [optional] |
 | **error_message** | **String** | Human-readable error message when status is failed. Contains platform-specific error details explaining why the publish failed. | [optional] |
 | **error_category** | **String** | Error category for programmatic handling: auth_expired (token expired/revoked), user_content (wrong format/too long), user_abuse (rate limits/spam), account_issue (config problems), platform_rejected (policy violation), platform_error (5xx/maintenance), system_error (Zernio infra), unknown | [optional] |
 | **error_source** | **String** | Who caused the error: user (fix content/reconnect), platform (outage/API change), system (Zernio issue, rare) | [optional] |
@@ -34,6 +36,8 @@ instance = Zernio::PlatformTarget.new(
   platform_post_id: 1234567890123456789,
   platform_post_url: https://twitter.com/acmecorp/status/1234567890123456789,
   published_at: null,
+  is_trial_reel: null,
+  trial_graduation_strategy: null,
   error_message: null,
   error_category: null,
   error_source: null

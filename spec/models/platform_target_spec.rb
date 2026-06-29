@@ -87,6 +87,22 @@ describe Zernio::PlatformTarget do
     end
   end
 
+  describe 'test attribute "is_trial_reel"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "trial_graduation_strategy"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["MANUAL", "SS_PERFORMANCE"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.trial_graduation_strategy = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "error_message"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

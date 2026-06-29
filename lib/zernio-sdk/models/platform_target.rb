@@ -42,6 +42,12 @@ module Zernio
     # Timestamp when the post was published to this platform
     attr_accessor :published_at
 
+    # Present and true only when this Instagram reel was launched as a Trial through Zernio (created with platformSpecificData.trialParams). Use it to segment trial reels in analytics. Note: Instagram's Graph API exposes no readable trial field, so this reflects creation-time intent only. It indicates the reel STARTED as a trial, not whether or when it graduated.
+    attr_accessor :is_trial_reel
+
+    # Graduation strategy the trial reel was launched with. Present only when isTrialReel is true.
+    attr_accessor :trial_graduation_strategy
+
     # Human-readable error message when status is failed. Contains platform-specific error details explaining why the publish failed.
     attr_accessor :error_message
 
@@ -86,6 +92,8 @@ module Zernio
         :'platform_post_id' => :'platformPostId',
         :'platform_post_url' => :'platformPostUrl',
         :'published_at' => :'publishedAt',
+        :'is_trial_reel' => :'isTrialReel',
+        :'trial_graduation_strategy' => :'trialGraduationStrategy',
         :'error_message' => :'errorMessage',
         :'error_category' => :'errorCategory',
         :'error_source' => :'errorSource'
@@ -115,6 +123,8 @@ module Zernio
         :'platform_post_id' => :'String',
         :'platform_post_url' => :'String',
         :'published_at' => :'Time',
+        :'is_trial_reel' => :'Boolean',
+        :'trial_graduation_strategy' => :'String',
         :'error_message' => :'String',
         :'error_category' => :'String',
         :'error_source' => :'String'
@@ -185,6 +195,14 @@ module Zernio
         self.published_at = attributes[:'published_at']
       end
 
+      if attributes.key?(:'is_trial_reel')
+        self.is_trial_reel = attributes[:'is_trial_reel']
+      end
+
+      if attributes.key?(:'trial_graduation_strategy')
+        self.trial_graduation_strategy = attributes[:'trial_graduation_strategy']
+      end
+
       if attributes.key?(:'error_message')
         self.error_message = attributes[:'error_message']
       end
@@ -210,11 +228,23 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      trial_graduation_strategy_validator = EnumAttributeValidator.new('String', ["MANUAL", "SS_PERFORMANCE"])
+      return false unless trial_graduation_strategy_validator.valid?(@trial_graduation_strategy)
       error_category_validator = EnumAttributeValidator.new('String', ["auth_expired", "user_content", "user_abuse", "account_issue", "platform_rejected", "platform_error", "system_error", "unknown"])
       return false unless error_category_validator.valid?(@error_category)
       error_source_validator = EnumAttributeValidator.new('String', ["user", "platform", "system"])
       return false unless error_source_validator.valid?(@error_source)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] trial_graduation_strategy Object to be assigned
+    def trial_graduation_strategy=(trial_graduation_strategy)
+      validator = EnumAttributeValidator.new('String', ["MANUAL", "SS_PERFORMANCE"])
+      unless validator.valid?(trial_graduation_strategy)
+        fail ArgumentError, "invalid value for \"trial_graduation_strategy\", must be one of #{validator.allowable_values}."
+      end
+      @trial_graduation_strategy = trial_graduation_strategy
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -252,6 +282,8 @@ module Zernio
           platform_post_id == o.platform_post_id &&
           platform_post_url == o.platform_post_url &&
           published_at == o.published_at &&
+          is_trial_reel == o.is_trial_reel &&
+          trial_graduation_strategy == o.trial_graduation_strategy &&
           error_message == o.error_message &&
           error_category == o.error_category &&
           error_source == o.error_source
@@ -266,7 +298,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, account_id, custom_content, custom_media, scheduled_for, platform_specific_data, status, platform_post_id, platform_post_url, published_at, error_message, error_category, error_source].hash
+      [platform, account_id, custom_content, custom_media, scheduled_for, platform_specific_data, status, platform_post_id, platform_post_url, published_at, is_trial_reel, trial_graduation_strategy, error_message, error_category, error_source].hash
     end
 
     # Builds the object from hash
