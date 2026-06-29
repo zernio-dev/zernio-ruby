@@ -394,6 +394,7 @@ api_instance = Zernio::PostsApi.new
 opts = {
   page: 56, # Integer | Page number (1-based)
   limit: 56, # Integer | Page size
+  source: 'zernio', # String | Which collection to read. `zernio` (default) returns posts authored through Zernio. `external` returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with `accountId` and paginate via `page`/`limit` to walk the full synced history (we keep up to the last ~12 months per account).
   status: 'draft', # String | 
   platform: 'twitter', # String | 
   profile_id: 'profile_id_example', # String | 
@@ -439,6 +440,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **page** | **Integer** | Page number (1-based) | [optional][default to 1] |
 | **limit** | **Integer** | Page size | [optional][default to 10] |
+| **source** | **String** | Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). | [optional][default to &#39;zernio&#39;] |
 | **status** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **profile_id** | **String** |  | [optional] |

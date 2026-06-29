@@ -363,6 +363,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit Page size (default to 10)
+    # @option opts [String] :source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (default to 'zernio')
     # @option opts [String] :status 
     # @option opts [String] :platform 
     # @option opts [String] :profile_id 
@@ -384,6 +385,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
     # @option opts [Integer] :limit Page size (default to 10)
+    # @option opts [String] :source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (default to 'zernio')
     # @option opts [String] :status 
     # @option opts [String] :platform 
     # @option opts [String] :profile_id 
@@ -411,6 +413,10 @@ module Zernio
         fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PostsApi.list_posts, must be greater than or equal to 1.'
       end
 
+      allowable_values = ["zernio", "external"]
+      if @api_client.config.client_side_validation && opts[:'source'] && !allowable_values.include?(opts[:'source'])
+        fail ArgumentError, "invalid value for \"source\", must be one of #{allowable_values}"
+      end
       allowable_values = ["draft", "scheduled", "published", "failed"]
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
@@ -426,6 +432,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'source'] = opts[:'source'] if !opts[:'source'].nil?
       query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
