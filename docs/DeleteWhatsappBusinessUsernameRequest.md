@@ -1,4 +1,4 @@
-# Zernio::CreateWhatsAppDatasetRequest
+# Zernio::DeleteWhatsappBusinessUsernameRequest
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateWhatsAppDatasetRequest.new(
+instance = Zernio::DeleteWhatsappBusinessUsernameRequest.new(
   account_id: null
 )
 ```

@@ -226,7 +226,6 @@ docs/CreateTrackingTag201Response.md
 docs/CreateTrackingTagRequest.md
 docs/CreateWebhookSettingsRequest.md
 docs/CreateWhatsAppDataset200Response.md
-docs/CreateWhatsAppDatasetRequest.md
 docs/CreateWhatsAppFlow200Response.md
 docs/CreateWhatsAppFlow200ResponseFlow.md
 docs/CreateWhatsAppFlowRequest.md
@@ -260,6 +259,7 @@ docs/DeleteGoogleBusinessReviewReply200Response.md
 docs/DeleteInboxComment200Response.md
 docs/DeleteInboxReviewReply200Response.md
 docs/DeleteInboxReviewReplyRequest.md
+docs/DeleteWhatsappBusinessUsernameRequest.md
 docs/DiscordApi.md
 docs/DiscordPlatformData.md
 docs/DiscordPlatformDataEmbedsInner.md
@@ -573,6 +573,8 @@ docs/GetWhatsAppTemplate200Response.md
 docs/GetWhatsAppTemplate200ResponseTemplate.md
 docs/GetWhatsAppTemplates200Response.md
 docs/GetWhatsAppTemplates200ResponseTemplatesInner.md
+docs/GetWhatsappBusinessUsername200Response.md
+docs/GetWhatsappBusinessUsernameSuggestions200Response.md
 docs/GetWorkflow200Response.md
 docs/GetWorkflow200ResponseWorkflow.md
 docs/GetWorkflowVersion200Response.md
@@ -949,6 +951,8 @@ docs/SetInstagramIceBreakersRequestIceBreakersInner.md
 docs/SetMessengerMenuRequest.md
 docs/SetTelegramCommandsRequest.md
 docs/SetTelegramCommandsRequestCommandsInner.md
+docs/SetWhatsappBusinessUsername200Response.md
+docs/SetWhatsappBusinessUsernameRequest.md
 docs/SharedAdAccount.md
 docs/SnapchatPlatformData.md
 docs/SocialAccount.md
@@ -1514,7 +1518,6 @@ lib/zernio-sdk/models/create_tracking_tag201_response.rb
 lib/zernio-sdk/models/create_tracking_tag_request.rb
 lib/zernio-sdk/models/create_webhook_settings_request.rb
 lib/zernio-sdk/models/create_whats_app_dataset200_response.rb
-lib/zernio-sdk/models/create_whats_app_dataset_request.rb
 lib/zernio-sdk/models/create_whats_app_flow200_response.rb
 lib/zernio-sdk/models/create_whats_app_flow200_response_flow.rb
 lib/zernio-sdk/models/create_whats_app_flow_request.rb
@@ -1547,6 +1550,7 @@ lib/zernio-sdk/models/delete_google_business_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_comment200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
+lib/zernio-sdk/models/delete_whatsapp_business_username_request.rb
 lib/zernio-sdk/models/discord_platform_data.rb
 lib/zernio-sdk/models/discord_platform_data_embeds_inner.rb
 lib/zernio-sdk/models/discord_platform_data_embeds_inner_author.rb
@@ -1851,6 +1855,8 @@ lib/zernio-sdk/models/get_whats_app_template200_response.rb
 lib/zernio-sdk/models/get_whats_app_template200_response_template.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response_templates_inner.rb
+lib/zernio-sdk/models/get_whatsapp_business_username200_response.rb
+lib/zernio-sdk/models/get_whatsapp_business_username_suggestions200_response.rb
 lib/zernio-sdk/models/get_workflow200_response.rb
 lib/zernio-sdk/models/get_workflow200_response_workflow.rb
 lib/zernio-sdk/models/get_workflow_version200_response.rb
@@ -2213,6 +2219,8 @@ lib/zernio-sdk/models/set_instagram_ice_breakers_request_ice_breakers_inner.rb
 lib/zernio-sdk/models/set_messenger_menu_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request_commands_inner.rb
+lib/zernio-sdk/models/set_whatsapp_business_username200_response.rb
+lib/zernio-sdk/models/set_whatsapp_business_username_request.rb
 lib/zernio-sdk/models/shared_ad_account.rb
 lib/zernio-sdk/models/snapchat_platform_data.rb
 lib/zernio-sdk/models/social_account.rb
@@ -2758,7 +2766,6 @@ spec/models/create_tracking_tag201_response_spec.rb
 spec/models/create_tracking_tag_request_spec.rb
 spec/models/create_webhook_settings_request_spec.rb
 spec/models/create_whats_app_dataset200_response_spec.rb
-spec/models/create_whats_app_dataset_request_spec.rb
 spec/models/create_whats_app_flow200_response_flow_spec.rb
 spec/models/create_whats_app_flow200_response_spec.rb
 spec/models/create_whats_app_flow_request_spec.rb
@@ -2791,6 +2798,7 @@ spec/models/delete_google_business_review_reply200_response_spec.rb
 spec/models/delete_inbox_comment200_response_spec.rb
 spec/models/delete_inbox_review_reply200_response_spec.rb
 spec/models/delete_inbox_review_reply_request_spec.rb
+spec/models/delete_whatsapp_business_username_request_spec.rb
 spec/models/discord_platform_data_embeds_inner_author_spec.rb
 spec/models/discord_platform_data_embeds_inner_fields_inner_spec.rb
 spec/models/discord_platform_data_embeds_inner_footer_spec.rb
@@ -3095,6 +3103,8 @@ spec/models/get_whats_app_template200_response_spec.rb
 spec/models/get_whats_app_template200_response_template_spec.rb
 spec/models/get_whats_app_templates200_response_spec.rb
 spec/models/get_whats_app_templates200_response_templates_inner_spec.rb
+spec/models/get_whatsapp_business_username200_response_spec.rb
+spec/models/get_whatsapp_business_username_suggestions200_response_spec.rb
 spec/models/get_workflow200_response_spec.rb
 spec/models/get_workflow200_response_workflow_spec.rb
 spec/models/get_workflow_version200_response_spec.rb
@@ -3457,6 +3467,8 @@ spec/models/set_instagram_ice_breakers_request_spec.rb
 spec/models/set_messenger_menu_request_spec.rb
 spec/models/set_telegram_commands_request_commands_inner_spec.rb
 spec/models/set_telegram_commands_request_spec.rb
+spec/models/set_whatsapp_business_username200_response_spec.rb
+spec/models/set_whatsapp_business_username_request_spec.rb
 spec/models/shared_ad_account_spec.rb
 spec/models/snapchat_platform_data_spec.rb
 spec/models/social_account_profile_id_spec.rb

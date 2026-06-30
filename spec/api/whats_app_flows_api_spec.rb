@@ -61,7 +61,7 @@ describe 'WhatsAppFlowsApi' do
   # Deprecate flow
   # Deprecate a PUBLISHED flow. This is irreversible. Deprecated flows cannot be sent or opened, but existing active sessions may continue until they complete. 
   # @param flow_id Flow ID
-  # @param create_whats_app_dataset_request 
+  # @param delete_whatsapp_business_username_request 
   # @param [Hash] opts the optional parameters
   # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'deprecate_whats_app_flow test' do
@@ -154,7 +154,7 @@ describe 'WhatsAppFlowsApi' do
   # Publish flow
   # Publish a DRAFT flow. This is irreversible. Once published, the flow and its JSON become immutable and the flow can be sent to users. To update a published flow, create a new flow (optionally cloning this one via cloneFlowId). 
   # @param flow_id Flow ID
-  # @param create_whats_app_dataset_request 
+  # @param delete_whatsapp_business_username_request 
   # @param [Hash] opts the optional parameters
   # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'publish_whats_app_flow test' do

@@ -161,7 +161,7 @@ end
 
 ## deprecate_whats_app_flow
 
-> <UpdateYoutubeDefaultPlaylist200Response> deprecate_whats_app_flow(flow_id, create_whats_app_dataset_request)
+> <UpdateYoutubeDefaultPlaylist200Response> deprecate_whats_app_flow(flow_id, delete_whatsapp_business_username_request)
 
 Deprecate flow
 
@@ -180,11 +180,11 @@ end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-create_whats_app_dataset_request = Zernio::CreateWhatsAppDatasetRequest.new({account_id: 'account_id_example'}) # CreateWhatsAppDatasetRequest | 
+delete_whatsapp_business_username_request = Zernio::DeleteWhatsappBusinessUsernameRequest.new({account_id: 'account_id_example'}) # DeleteWhatsappBusinessUsernameRequest | 
 
 begin
   # Deprecate flow
-  result = api_instance.deprecate_whats_app_flow(flow_id, create_whats_app_dataset_request)
+  result = api_instance.deprecate_whats_app_flow(flow_id, delete_whatsapp_business_username_request)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->deprecate_whats_app_flow: #{e}"
@@ -195,12 +195,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> deprecate_whats_app_flow_with_http_info(flow_id, create_whats_app_dataset_request)
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> deprecate_whats_app_flow_with_http_info(flow_id, delete_whatsapp_business_username_request)
 
 ```ruby
 begin
   # Deprecate flow
-  data, status_code, headers = api_instance.deprecate_whats_app_flow_with_http_info(flow_id, create_whats_app_dataset_request)
+  data, status_code, headers = api_instance.deprecate_whats_app_flow_with_http_info(flow_id, delete_whatsapp_business_username_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
@@ -214,7 +214,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **flow_id** | **String** | Flow ID |  |
-| **create_whats_app_dataset_request** | [**CreateWhatsAppDatasetRequest**](CreateWhatsAppDatasetRequest.md) |  |  |
+| **delete_whatsapp_business_username_request** | [**DeleteWhatsappBusinessUsernameRequest**](DeleteWhatsappBusinessUsernameRequest.md) |  |  |
 
 ### Return type
 
@@ -668,7 +668,7 @@ end
 
 ## publish_whats_app_flow
 
-> <UpdateYoutubeDefaultPlaylist200Response> publish_whats_app_flow(flow_id, create_whats_app_dataset_request)
+> <UpdateYoutubeDefaultPlaylist200Response> publish_whats_app_flow(flow_id, delete_whatsapp_business_username_request)
 
 Publish flow
 
@@ -687,11 +687,11 @@ end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-create_whats_app_dataset_request = Zernio::CreateWhatsAppDatasetRequest.new({account_id: 'account_id_example'}) # CreateWhatsAppDatasetRequest | 
+delete_whatsapp_business_username_request = Zernio::DeleteWhatsappBusinessUsernameRequest.new({account_id: 'account_id_example'}) # DeleteWhatsappBusinessUsernameRequest | 
 
 begin
   # Publish flow
-  result = api_instance.publish_whats_app_flow(flow_id, create_whats_app_dataset_request)
+  result = api_instance.publish_whats_app_flow(flow_id, delete_whatsapp_business_username_request)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppFlowsApi->publish_whats_app_flow: #{e}"
@@ -702,12 +702,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> publish_whats_app_flow_with_http_info(flow_id, create_whats_app_dataset_request)
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> publish_whats_app_flow_with_http_info(flow_id, delete_whatsapp_business_username_request)
 
 ```ruby
 begin
   # Publish flow
-  data, status_code, headers = api_instance.publish_whats_app_flow_with_http_info(flow_id, create_whats_app_dataset_request)
+  data, status_code, headers = api_instance.publish_whats_app_flow_with_http_info(flow_id, delete_whatsapp_business_username_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateYoutubeDefaultPlaylist200Response>
@@ -721,7 +721,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **flow_id** | **String** | Flow ID |  |
-| **create_whats_app_dataset_request** | [**CreateWhatsAppDatasetRequest**](CreateWhatsAppDatasetRequest.md) |  |  |
+| **delete_whatsapp_business_username_request** | [**DeleteWhatsappBusinessUsernameRequest**](DeleteWhatsappBusinessUsernameRequest.md) |  |  |
 
 ### Return type
 

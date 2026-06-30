@@ -251,26 +251,26 @@ module Zernio
 
     # Provision CTWA dataset
     # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as `metadata.metaCapiDatasetId`.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with `created: false`.  Requires the connected WhatsApp account's token to carry the `whatsapp_business_manage_events` permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
-    # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
+    # @param delete_whatsapp_business_username_request [DeleteWhatsappBusinessUsernameRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateWhatsAppDataset200Response]
-    def create_whats_app_dataset(create_whats_app_dataset_request, opts = {})
-      data, _status_code, _headers = create_whats_app_dataset_with_http_info(create_whats_app_dataset_request, opts)
+    def create_whats_app_dataset(delete_whatsapp_business_username_request, opts = {})
+      data, _status_code, _headers = create_whats_app_dataset_with_http_info(delete_whatsapp_business_username_request, opts)
       data
     end
 
     # Provision CTWA dataset
     # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as &#x60;metadata.metaCapiDatasetId&#x60;.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with &#x60;created: false&#x60;.  Requires the connected WhatsApp account&#39;s token to carry the &#x60;whatsapp_business_manage_events&#x60; permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
-    # @param create_whats_app_dataset_request [CreateWhatsAppDatasetRequest] 
+    # @param delete_whatsapp_business_username_request [DeleteWhatsappBusinessUsernameRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateWhatsAppDataset200Response, Integer, Hash)>] CreateWhatsAppDataset200Response data, response status code and response headers
-    def create_whats_app_dataset_with_http_info(create_whats_app_dataset_request, opts = {})
+    def create_whats_app_dataset_with_http_info(delete_whatsapp_business_username_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppApi.create_whats_app_dataset ...'
       end
-      # verify the required parameter 'create_whats_app_dataset_request' is set
-      if @api_client.config.client_side_validation && create_whats_app_dataset_request.nil?
-        fail ArgumentError, "Missing the required parameter 'create_whats_app_dataset_request' when calling WhatsAppApi.create_whats_app_dataset"
+      # verify the required parameter 'delete_whatsapp_business_username_request' is set
+      if @api_client.config.client_side_validation && delete_whatsapp_business_username_request.nil?
+        fail ArgumentError, "Missing the required parameter 'delete_whatsapp_business_username_request' when calling WhatsAppApi.create_whats_app_dataset"
       end
       # resource path
       local_var_path = '/v1/whatsapp/dataset'
@@ -292,7 +292,7 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_whats_app_dataset_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(delete_whatsapp_business_username_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'CreateWhatsAppDataset200Response'
@@ -659,6 +659,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppApi#delete_whats_app_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete business username
+    # Release the currently claimed WhatsApp Business username from the account. After deletion the username becomes available for other accounts to claim. 
+    # @param delete_whatsapp_business_username_request [DeleteWhatsappBusinessUsernameRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def delete_whatsapp_business_username(delete_whatsapp_business_username_request, opts = {})
+      data, _status_code, _headers = delete_whatsapp_business_username_with_http_info(delete_whatsapp_business_username_request, opts)
+      data
+    end
+
+    # Delete business username
+    # Release the currently claimed WhatsApp Business username from the account. After deletion the username becomes available for other accounts to claim. 
+    # @param delete_whatsapp_business_username_request [DeleteWhatsappBusinessUsernameRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def delete_whatsapp_business_username_with_http_info(delete_whatsapp_business_username_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.delete_whatsapp_business_username ...'
+      end
+      # verify the required parameter 'delete_whatsapp_business_username_request' is set
+      if @api_client.config.client_side_validation && delete_whatsapp_business_username_request.nil?
+        fail ArgumentError, "Missing the required parameter 'delete_whatsapp_business_username_request' when calling WhatsAppApi.delete_whatsapp_business_username"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/business-profile/username'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(delete_whatsapp_business_username_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.delete_whatsapp_business_username",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#delete_whatsapp_business_username\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1208,6 +1276,134 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get business username
+    # Fetch the current WhatsApp Business username and its approval status. Username status can be `approved` (active), `reserved` (pending activation), or `none` (no username set). 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [GetWhatsappBusinessUsername200Response]
+    def get_whatsapp_business_username(account_id, opts = {})
+      data, _status_code, _headers = get_whatsapp_business_username_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get business username
+    # Fetch the current WhatsApp Business username and its approval status. Username status can be &#x60;approved&#x60; (active), &#x60;reserved&#x60; (pending activation), or &#x60;none&#x60; (no username set). 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsappBusinessUsername200Response, Integer, Hash)>] GetWhatsappBusinessUsername200Response data, response status code and response headers
+    def get_whatsapp_business_username_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.get_whatsapp_business_username ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.get_whatsapp_business_username"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/business-profile/username'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsappBusinessUsername200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.get_whatsapp_business_username",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#get_whatsapp_business_username\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get username suggestions
+    # Retrieve a list of available WhatsApp Business username suggestions based on the account's business profile name. Use these to help users discover valid, unclaimed usernames. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [GetWhatsappBusinessUsernameSuggestions200Response]
+    def get_whatsapp_business_username_suggestions(account_id, opts = {})
+      data, _status_code, _headers = get_whatsapp_business_username_suggestions_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get username suggestions
+    # Retrieve a list of available WhatsApp Business username suggestions based on the account&#39;s business profile name. Use these to help users discover valid, unclaimed usernames. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsappBusinessUsernameSuggestions200Response, Integer, Hash)>] GetWhatsappBusinessUsernameSuggestions200Response data, response status code and response headers
+    def get_whatsapp_business_username_suggestions_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.get_whatsapp_business_username_suggestions ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.get_whatsapp_business_username_suggestions"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/business-profile/username/suggestions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsappBusinessUsernameSuggestions200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.get_whatsapp_business_username_suggestions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#get_whatsapp_business_username_suggestions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List conversion events
     # Returns the most recent conversion events sent through `POST /v1/whatsapp/conversions` for the given WhatsApp account. Sourced from delivery logs (Axiom `late` dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \"recent activity\" panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: `eventName`, `conversationId`, `eventsReceived`, `eventsFailed`, `traceId`, `durationMs`, and the wall-clock `timestamp`. 
     # @param account_id [String] WhatsApp social account ID
@@ -1653,6 +1849,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppApi#send_whats_app_conversion\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Set business username
+    # Claim or transfer a WhatsApp Business username for the account.  Username rules: 3-35 characters, letters/digits/period/underscore only, must contain at least one letter, no leading or trailing periods, no consecutive periods, no `www` prefix, no domain TLD suffix (e.g. `.com`).  If the desired username is currently held by another account, pass `transferAction: \"force_transfer\"` to request a transfer. On failure the API returns a standard error envelope with one of these codes: `whatsapp_username_unavailable` (already taken and transfer not requested), `whatsapp_username_ineligible` (account not eligible to claim a username), or `whatsapp_username_transfer_required` (username is held elsewhere; retry with `force_transfer`). 
+    # @param set_whatsapp_business_username_request [SetWhatsappBusinessUsernameRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [SetWhatsappBusinessUsername200Response]
+    def set_whatsapp_business_username(set_whatsapp_business_username_request, opts = {})
+      data, _status_code, _headers = set_whatsapp_business_username_with_http_info(set_whatsapp_business_username_request, opts)
+      data
+    end
+
+    # Set business username
+    # Claim or transfer a WhatsApp Business username for the account.  Username rules: 3-35 characters, letters/digits/period/underscore only, must contain at least one letter, no leading or trailing periods, no consecutive periods, no &#x60;www&#x60; prefix, no domain TLD suffix (e.g. &#x60;.com&#x60;).  If the desired username is currently held by another account, pass &#x60;transferAction: \&quot;force_transfer\&quot;&#x60; to request a transfer. On failure the API returns a standard error envelope with one of these codes: &#x60;whatsapp_username_unavailable&#x60; (already taken and transfer not requested), &#x60;whatsapp_username_ineligible&#x60; (account not eligible to claim a username), or &#x60;whatsapp_username_transfer_required&#x60; (username is held elsewhere; retry with &#x60;force_transfer&#x60;). 
+    # @param set_whatsapp_business_username_request [SetWhatsappBusinessUsernameRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SetWhatsappBusinessUsername200Response, Integer, Hash)>] SetWhatsappBusinessUsername200Response data, response status code and response headers
+    def set_whatsapp_business_username_with_http_info(set_whatsapp_business_username_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.set_whatsapp_business_username ...'
+      end
+      # verify the required parameter 'set_whatsapp_business_username_request' is set
+      if @api_client.config.client_side_validation && set_whatsapp_business_username_request.nil?
+        fail ArgumentError, "Missing the required parameter 'set_whatsapp_business_username_request' when calling WhatsAppApi.set_whatsapp_business_username"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/business-profile/username'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_whatsapp_business_username_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SetWhatsappBusinessUsername200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.set_whatsapp_business_username",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#set_whatsapp_business_username\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

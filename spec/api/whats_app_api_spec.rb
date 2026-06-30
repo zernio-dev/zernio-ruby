@@ -75,7 +75,7 @@ describe 'WhatsAppApi' do
   # unit tests for create_whats_app_dataset
   # Provision CTWA dataset
   # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as &#x60;metadata.metaCapiDatasetId&#x60;.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with &#x60;created: false&#x60;.  Requires the connected WhatsApp account&#39;s token to carry the &#x60;whatsapp_business_manage_events&#x60; permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
-  # @param create_whats_app_dataset_request 
+  # @param delete_whatsapp_business_username_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateWhatsAppDataset200Response]
   describe 'create_whats_app_dataset test' do
@@ -142,6 +142,18 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [UnpublishPost200Response]
   describe 'delete_whats_app_template test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_whatsapp_business_username
+  # Delete business username
+  # Release the currently claimed WhatsApp Business username from the account. After deletion the username becomes available for other accounts to claim. 
+  # @param delete_whatsapp_business_username_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'delete_whatsapp_business_username test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -248,6 +260,30 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for get_whatsapp_business_username
+  # Get business username
+  # Fetch the current WhatsApp Business username and its approval status. Username status can be &#x60;approved&#x60; (active), &#x60;reserved&#x60; (pending activation), or &#x60;none&#x60; (no username set). 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsappBusinessUsername200Response]
+  describe 'get_whatsapp_business_username test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_whatsapp_business_username_suggestions
+  # Get username suggestions
+  # Retrieve a list of available WhatsApp Business username suggestions based on the account&#39;s business profile name. Use these to help users discover valid, unclaimed usernames. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsappBusinessUsernameSuggestions200Response]
+  describe 'get_whatsapp_business_username_suggestions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_whats_app_conversions
   # List conversion events
   # Returns the most recent conversion events sent through &#x60;POST /v1/whatsapp/conversions&#x60; for the given WhatsApp account. Sourced from delivery logs (Axiom &#x60;late&#x60; dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \&quot;recent activity\&quot; panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: &#x60;eventName&#x60;, &#x60;conversationId&#x60;, &#x60;eventsReceived&#x60;, &#x60;eventsFailed&#x60;, &#x60;traceId&#x60;, &#x60;durationMs&#x60;, and the wall-clock &#x60;timestamp&#x60;. 
@@ -323,6 +359,18 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [SendWhatsAppConversion200Response]
   describe 'send_whats_app_conversion test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for set_whatsapp_business_username
+  # Set business username
+  # Claim or transfer a WhatsApp Business username for the account.  Username rules: 3-35 characters, letters/digits/period/underscore only, must contain at least one letter, no leading or trailing periods, no consecutive periods, no &#x60;www&#x60; prefix, no domain TLD suffix (e.g. &#x60;.com&#x60;).  If the desired username is currently held by another account, pass &#x60;transferAction: \&quot;force_transfer\&quot;&#x60; to request a transfer. On failure the API returns a standard error envelope with one of these codes: &#x60;whatsapp_username_unavailable&#x60; (already taken and transfer not requested), &#x60;whatsapp_username_ineligible&#x60; (account not eligible to claim a username), or &#x60;whatsapp_username_transfer_required&#x60; (username is held elsewhere; retry with &#x60;force_transfer&#x60;). 
+  # @param set_whatsapp_business_username_request 
+  # @param [Hash] opts the optional parameters
+  # @return [SetWhatsappBusinessUsername200Response]
+  describe 'set_whatsapp_business_username test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

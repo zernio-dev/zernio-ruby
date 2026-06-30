@@ -13,6 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_whats_app_template**](WhatsAppApi.md#create_whats_app_template) | **POST** /v1/whatsapp/templates | Create template |
 | [**delete_whats_app_group_chat**](WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group |
 | [**delete_whats_app_template**](WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template |
+| [**delete_whatsapp_business_username**](WhatsAppApi.md#delete_whatsapp_business_username) | **DELETE** /v1/whatsapp/business-profile/username | Delete business username |
 | [**get_whats_app_block_status**](WhatsAppApi.md#get_whats_app_block_status) | **GET** /v1/whatsapp/block-users/status | Check if a user is blocked |
 | [**get_whats_app_blocked_users**](WhatsAppApi.md#get_whats_app_blocked_users) | **GET** /v1/whatsapp/block-users | List blocked users |
 | [**get_whats_app_business_profile**](WhatsAppApi.md#get_whats_app_business_profile) | **GET** /v1/whatsapp/business-profile | Get business profile |
@@ -21,12 +22,15 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_group_chat**](WhatsAppApi.md#get_whats_app_group_chat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info |
 | [**get_whats_app_template**](WhatsAppApi.md#get_whats_app_template) | **GET** /v1/whatsapp/templates/{templateName} | Get template |
 | [**get_whats_app_templates**](WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates |
+| [**get_whatsapp_business_username**](WhatsAppApi.md#get_whatsapp_business_username) | **GET** /v1/whatsapp/business-profile/username | Get business username |
+| [**get_whatsapp_business_username_suggestions**](WhatsAppApi.md#get_whatsapp_business_username_suggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions |
 | [**list_whats_app_conversions**](WhatsAppApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events |
 | [**list_whats_app_group_chats**](WhatsAppApi.md#list_whats_app_group_chats) | **GET** /v1/whatsapp/wa-groups | List active groups |
 | [**list_whats_app_group_join_requests**](WhatsAppApi.md#list_whats_app_group_join_requests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests |
 | [**reject_whats_app_group_join_requests**](WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests |
 | [**remove_whats_app_group_participants**](WhatsAppApi.md#remove_whats_app_group_participants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants |
 | [**send_whats_app_conversion**](WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
+| [**set_whatsapp_business_username**](WhatsAppApi.md#set_whatsapp_business_username) | **POST** /v1/whatsapp/business-profile/username | Set business username |
 | [**unblock_whats_app_users**](WhatsAppApi.md#unblock_whats_app_users) | **DELETE** /v1/whatsapp/block-users | Unblock users |
 | [**update_whats_app_business_profile**](WhatsAppApi.md#update_whats_app_business_profile) | **POST** /v1/whatsapp/business-profile | Update business profile |
 | [**update_whats_app_display_name**](WhatsAppApi.md#update_whats_app_display_name) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change |
@@ -252,7 +256,7 @@ end
 
 ## create_whats_app_dataset
 
-> <CreateWhatsAppDataset200Response> create_whats_app_dataset(create_whats_app_dataset_request)
+> <CreateWhatsAppDataset200Response> create_whats_app_dataset(delete_whatsapp_business_username_request)
 
 Provision CTWA dataset
 
@@ -270,11 +274,11 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-create_whats_app_dataset_request = Zernio::CreateWhatsAppDatasetRequest.new({account_id: 'account_id_example'}) # CreateWhatsAppDatasetRequest | 
+delete_whatsapp_business_username_request = Zernio::DeleteWhatsappBusinessUsernameRequest.new({account_id: 'account_id_example'}) # DeleteWhatsappBusinessUsernameRequest | 
 
 begin
   # Provision CTWA dataset
-  result = api_instance.create_whats_app_dataset(create_whats_app_dataset_request)
+  result = api_instance.create_whats_app_dataset(delete_whatsapp_business_username_request)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->create_whats_app_dataset: #{e}"
@@ -285,12 +289,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateWhatsAppDataset200Response>, Integer, Hash)> create_whats_app_dataset_with_http_info(create_whats_app_dataset_request)
+> <Array(<CreateWhatsAppDataset200Response>, Integer, Hash)> create_whats_app_dataset_with_http_info(delete_whatsapp_business_username_request)
 
 ```ruby
 begin
   # Provision CTWA dataset
-  data, status_code, headers = api_instance.create_whats_app_dataset_with_http_info(create_whats_app_dataset_request)
+  data, status_code, headers = api_instance.create_whats_app_dataset_with_http_info(delete_whatsapp_business_username_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateWhatsAppDataset200Response>
@@ -303,7 +307,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **create_whats_app_dataset_request** | [**CreateWhatsAppDatasetRequest**](CreateWhatsAppDatasetRequest.md) |  |  |
+| **delete_whatsapp_business_username_request** | [**DeleteWhatsappBusinessUsernameRequest**](DeleteWhatsappBusinessUsernameRequest.md) |  |  |
 
 ### Return type
 
@@ -667,6 +671,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## delete_whatsapp_business_username
+
+> <UpdateYoutubeDefaultPlaylist200Response> delete_whatsapp_business_username(delete_whatsapp_business_username_request)
+
+Delete business username
+
+Release the currently claimed WhatsApp Business username from the account. After deletion the username becomes available for other accounts to claim. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+delete_whatsapp_business_username_request = Zernio::DeleteWhatsappBusinessUsernameRequest.new({account_id: 'account_id_example'}) # DeleteWhatsappBusinessUsernameRequest | 
+
+begin
+  # Delete business username
+  result = api_instance.delete_whatsapp_business_username(delete_whatsapp_business_username_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->delete_whatsapp_business_username: #{e}"
+end
+```
+
+#### Using the delete_whatsapp_business_username_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> delete_whatsapp_business_username_with_http_info(delete_whatsapp_business_username_request)
+
+```ruby
+begin
+  # Delete business username
+  data, status_code, headers = api_instance.delete_whatsapp_business_username_with_http_info(delete_whatsapp_business_username_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->delete_whatsapp_business_username_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **delete_whatsapp_business_username_request** | [**DeleteWhatsappBusinessUsernameRequest**](DeleteWhatsappBusinessUsernameRequest.md) |  |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -1234,6 +1307,144 @@ end
 - **Accept**: application/json
 
 
+## get_whatsapp_business_username
+
+> <GetWhatsappBusinessUsername200Response> get_whatsapp_business_username(account_id)
+
+Get business username
+
+Fetch the current WhatsApp Business username and its approval status. Username status can be `approved` (active), `reserved` (pending activation), or `none` (no username set). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | WhatsApp social account ID
+
+begin
+  # Get business username
+  result = api_instance.get_whatsapp_business_username(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whatsapp_business_username: #{e}"
+end
+```
+
+#### Using the get_whatsapp_business_username_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsappBusinessUsername200Response>, Integer, Hash)> get_whatsapp_business_username_with_http_info(account_id)
+
+```ruby
+begin
+  # Get business username
+  data, status_code, headers = api_instance.get_whatsapp_business_username_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsappBusinessUsername200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whatsapp_business_username_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp social account ID |  |
+
+### Return type
+
+[**GetWhatsappBusinessUsername200Response**](GetWhatsappBusinessUsername200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_whatsapp_business_username_suggestions
+
+> <GetWhatsappBusinessUsernameSuggestions200Response> get_whatsapp_business_username_suggestions(account_id)
+
+Get username suggestions
+
+Retrieve a list of available WhatsApp Business username suggestions based on the account's business profile name. Use these to help users discover valid, unclaimed usernames. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | WhatsApp social account ID
+
+begin
+  # Get username suggestions
+  result = api_instance.get_whatsapp_business_username_suggestions(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whatsapp_business_username_suggestions: #{e}"
+end
+```
+
+#### Using the get_whatsapp_business_username_suggestions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsappBusinessUsernameSuggestions200Response>, Integer, Hash)> get_whatsapp_business_username_suggestions_with_http_info(account_id)
+
+```ruby
+begin
+  # Get username suggestions
+  data, status_code, headers = api_instance.get_whatsapp_business_username_suggestions_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsappBusinessUsernameSuggestions200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whatsapp_business_username_suggestions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp social account ID |  |
+
+### Return type
+
+[**GetWhatsappBusinessUsernameSuggestions200Response**](GetWhatsappBusinessUsernameSuggestions200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_whats_app_conversions
 
 > <ListWhatsAppConversions200Response> list_whats_app_conversions(account_id, opts)
@@ -1657,6 +1868,75 @@ end
 ### Return type
 
 [**SendWhatsAppConversion200Response**](SendWhatsAppConversion200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## set_whatsapp_business_username
+
+> <SetWhatsappBusinessUsername200Response> set_whatsapp_business_username(set_whatsapp_business_username_request)
+
+Set business username
+
+Claim or transfer a WhatsApp Business username for the account.  Username rules: 3-35 characters, letters/digits/period/underscore only, must contain at least one letter, no leading or trailing periods, no consecutive periods, no `www` prefix, no domain TLD suffix (e.g. `.com`).  If the desired username is currently held by another account, pass `transferAction: \"force_transfer\"` to request a transfer. On failure the API returns a standard error envelope with one of these codes: `whatsapp_username_unavailable` (already taken and transfer not requested), `whatsapp_username_ineligible` (account not eligible to claim a username), or `whatsapp_username_transfer_required` (username is held elsewhere; retry with `force_transfer`). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+set_whatsapp_business_username_request = Zernio::SetWhatsappBusinessUsernameRequest.new({account_id: 'account_id_example', username: 'username_example'}) # SetWhatsappBusinessUsernameRequest | 
+
+begin
+  # Set business username
+  result = api_instance.set_whatsapp_business_username(set_whatsapp_business_username_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->set_whatsapp_business_username: #{e}"
+end
+```
+
+#### Using the set_whatsapp_business_username_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SetWhatsappBusinessUsername200Response>, Integer, Hash)> set_whatsapp_business_username_with_http_info(set_whatsapp_business_username_request)
+
+```ruby
+begin
+  # Set business username
+  data, status_code, headers = api_instance.set_whatsapp_business_username_with_http_info(set_whatsapp_business_username_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SetWhatsappBusinessUsername200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->set_whatsapp_business_username_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **set_whatsapp_business_username_request** | [**SetWhatsappBusinessUsernameRequest**](SetWhatsappBusinessUsernameRequest.md) |  |  |
+
+### Return type
+
+[**SetWhatsappBusinessUsername200Response**](SetWhatsappBusinessUsername200Response.md)
 
 ### Authorization
 
