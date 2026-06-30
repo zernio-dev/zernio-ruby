@@ -121,6 +121,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdsApi* | [**get_ad_tracking_tags**](docs/AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
+*Zernio::AdsApi* | [**get_campaign_analytics**](docs/AdsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
 *Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination
 *Zernio::AdsApi* | [**get_conversion_metrics**](docs/AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics
 *Zernio::AdsApi* | [**get_conversions_quality**](docs/AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Get Event Match Quality
@@ -469,6 +470,7 @@ Class | Method | HTTP request | Description
  - [Zernio::AdCampaignBudget](docs/AdCampaignBudget.md)
  - [Zernio::AdCampaignCampaignBudget](docs/AdCampaignCampaignBudget.md)
  - [Zernio::AdCreative](docs/AdCreative.md)
+ - [Zernio::AdDailyMetrics](docs/AdDailyMetrics.md)
  - [Zernio::AdMetrics](docs/AdMetrics.md)
  - [Zernio::AdPromotedObject](docs/AdPromotedObject.md)
  - [Zernio::AdSchedule](docs/AdSchedule.md)
@@ -759,8 +761,6 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAd200Response](docs/GetAd200Response.md)
  - [Zernio::GetAdAnalytics200Response](docs/GetAdAnalytics200Response.md)
  - [Zernio::GetAdAnalytics200ResponseAd](docs/GetAdAnalytics200ResponseAd.md)
- - [Zernio::GetAdAnalytics200ResponseAnalytics](docs/GetAdAnalytics200ResponseAnalytics.md)
- - [Zernio::GetAdAnalytics200ResponseAnalyticsDailyInner](docs/GetAdAnalytics200ResponseAnalyticsDailyInner.md)
  - [Zernio::GetAdAudience200Response](docs/GetAdAudience200Response.md)
  - [Zernio::GetAdComments200Response](docs/GetAdComments200Response.md)
  - [Zernio::GetAdComments200ResponseMeta](docs/GetAdComments200ResponseMeta.md)
@@ -782,6 +782,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetBroadcast200ResponseBroadcast](docs/GetBroadcast200ResponseBroadcast.md)
  - [Zernio::GetBroadcast200ResponseBroadcastMessage](docs/GetBroadcast200ResponseBroadcastMessage.md)
  - [Zernio::GetBroadcast200ResponseBroadcastTemplate](docs/GetBroadcast200ResponseBroadcastTemplate.md)
+ - [Zernio::GetCampaignAnalytics200Response](docs/GetCampaignAnalytics200Response.md)
+ - [Zernio::GetCampaignAnalytics200ResponseAnalytics](docs/GetCampaignAnalytics200ResponseAnalytics.md)
+ - [Zernio::GetCampaignAnalytics200ResponseAnalyticsDailyInner](docs/GetCampaignAnalytics200ResponseAnalyticsDailyInner.md)
+ - [Zernio::GetCampaignAnalytics200ResponseCampaign](docs/GetCampaignAnalytics200ResponseCampaign.md)
  - [Zernio::GetCommentAutomation200Response](docs/GetCommentAutomation200Response.md)
  - [Zernio::GetCommentAutomation200ResponseAutomation](docs/GetCommentAutomation200ResponseAutomation.md)
  - [Zernio::GetCommentAutomation200ResponseLogsInner](docs/GetCommentAutomation200ResponseLogsInner.md)

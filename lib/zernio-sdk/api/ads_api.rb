@@ -1149,6 +1149,81 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get campaign analytics
+    # Returns performance analytics for a whole campaign in one call: summary metrics, a daily timeline over the requested date range (summed across the campaign's ads), and optional demographic breakdowns. Breakdowns are fetched live from Meta at the campaign level (one call per dimension, no per-ad fan-out), so an agency dashboard gets campaign-level age/gender/etc. without summing thousands of per-ad reads. `campaignId` is the platform campaign id; pass `platform` when a campaign id could be ambiguous across platforms. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
+    # @param campaign_id [String] Platform campaign id (platformCampaignId).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Disambiguate when the campaign id exists across platforms (e.g. facebook, instagram).
+    # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
+    # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+    # @option opts [String] :breakdowns Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.
+    # @return [GetCampaignAnalytics200Response]
+    def get_campaign_analytics(campaign_id, opts = {})
+      data, _status_code, _headers = get_campaign_analytics_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Get campaign analytics
+    # Returns performance analytics for a whole campaign in one call: summary metrics, a daily timeline over the requested date range (summed across the campaign&#39;s ads), and optional demographic breakdowns. Breakdowns are fetched live from Meta at the campaign level (one call per dimension, no per-ad fan-out), so an agency dashboard gets campaign-level age/gender/etc. without summing thousands of per-ad reads. &#x60;campaignId&#x60; is the platform campaign id; pass &#x60;platform&#x60; when a campaign id could be ambiguous across platforms. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
+    # @param campaign_id [String] Platform campaign id (platformCampaignId).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Disambiguate when the campaign id exists across platforms (e.g. facebook, instagram).
+    # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
+    # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+    # @option opts [String] :breakdowns Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.
+    # @return [Array<(GetCampaignAnalytics200Response, Integer, Hash)>] GetCampaignAnalytics200Response data, response status code and response headers
+    def get_campaign_analytics_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_campaign_analytics ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdsApi.get_campaign_analytics"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/analytics'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'breakdowns'] = opts[:'breakdowns'] if !opts[:'breakdowns'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetCampaignAnalytics200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_campaign_analytics",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_campaign_analytics\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get a conversion destination
     # LinkedIn-only today. Returns the full destination record for one conversion rule. The `adAccountId` query parameter is required because LinkedIn rules are scoped to a sponsored ad account. 
     # @param account_id [String] 

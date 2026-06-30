@@ -1,4 +1,4 @@
-# Zernio::GetAdAnalytics200ResponseAnalyticsDailyInner
+# Zernio::GetCampaignAnalytics200ResponseAnalyticsDailyInner
 
 ## Properties
 
@@ -26,7 +26,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GetAdAnalytics200ResponseAnalyticsDailyInner.new(
+instance = Zernio::GetCampaignAnalytics200ResponseAnalyticsDailyInner.new(
   spend: null,
   impressions: null,
   reach: null,

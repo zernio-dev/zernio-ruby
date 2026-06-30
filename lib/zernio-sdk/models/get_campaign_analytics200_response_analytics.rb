@@ -14,16 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetAdAnalytics200Response < ApiModelBase
-    attr_accessor :ad
+  class GetCampaignAnalytics200ResponseAnalytics < ApiModelBase
+    attr_accessor :summary
 
-    attr_accessor :analytics
+    attr_accessor :daily
+
+    attr_accessor :breakdowns
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'ad' => :'ad',
-        :'analytics' => :'analytics'
+        :'summary' => :'summary',
+        :'daily' => :'daily',
+        :'breakdowns' => :'breakdowns'
       }
     end
 
@@ -40,8 +43,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ad' => :'GetAdAnalytics200ResponseAd',
-        :'analytics' => :'GetCampaignAnalytics200ResponseAnalytics'
+        :'summary' => :'AdMetrics',
+        :'daily' => :'Array<GetCampaignAnalytics200ResponseAnalyticsDailyInner>',
+        :'breakdowns' => :'Hash<String, Array<Object>>'
       }
     end
 
@@ -55,24 +59,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetAdAnalytics200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetCampaignAnalytics200ResponseAnalytics` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetAdAnalytics200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetCampaignAnalytics200ResponseAnalytics`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'ad')
-        self.ad = attributes[:'ad']
+      if attributes.key?(:'summary')
+        self.summary = attributes[:'summary']
       end
 
-      if attributes.key?(:'analytics')
-        self.analytics = attributes[:'analytics']
+      if attributes.key?(:'daily')
+        if (value = attributes[:'daily']).is_a?(Array)
+          self.daily = value
+        end
+      end
+
+      if attributes.key?(:'breakdowns')
+        if (value = attributes[:'breakdowns']).is_a?(Hash)
+          self.breakdowns = value
+        end
       end
     end
 
@@ -96,8 +108,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          ad == o.ad &&
-          analytics == o.analytics
+          summary == o.summary &&
+          daily == o.daily &&
+          breakdowns == o.breakdowns
     end
 
     # @see the `==` method
@@ -109,7 +122,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad, analytics].hash
+      [summary, daily, breakdowns].hash
     end
 
     # Builds the object from hash

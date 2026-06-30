@@ -14,15 +14,15 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetAdAnalytics200Response < ApiModelBase
-    attr_accessor :ad
+  class GetCampaignAnalytics200Response < ApiModelBase
+    attr_accessor :campaign
 
     attr_accessor :analytics
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'ad' => :'ad',
+        :'campaign' => :'campaign',
         :'analytics' => :'analytics'
       }
     end
@@ -40,7 +40,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ad' => :'GetAdAnalytics200ResponseAd',
+        :'campaign' => :'GetCampaignAnalytics200ResponseCampaign',
         :'analytics' => :'GetCampaignAnalytics200ResponseAnalytics'
       }
     end
@@ -55,20 +55,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetAdAnalytics200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetCampaignAnalytics200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetAdAnalytics200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetCampaignAnalytics200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'ad')
-        self.ad = attributes[:'ad']
+      if attributes.key?(:'campaign')
+        self.campaign = attributes[:'campaign']
       end
 
       if attributes.key?(:'analytics')
@@ -96,7 +96,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          ad == o.ad &&
+          campaign == o.campaign &&
           analytics == o.analytics
     end
 
@@ -109,7 +109,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad, analytics].hash
+      [campaign, analytics].hash
     end
 
     # Builds the object from hash

@@ -84,6 +84,9 @@ module Zernio
 
     attr_accessor :ad_sets
 
+    # Per-day metric series for this campaign. Present only when `GET /v1/ads/tree` is called with `timeIncrement=1` (any `dailyLevel`). This is the per-campaign daily trend — summing its additive fields reproduces the campaign `metrics` total.
+    attr_accessor :daily
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -135,7 +138,8 @@ module Zernio
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
         :'promoted_object' => :'promotedObject',
-        :'ad_sets' => :'adSets'
+        :'ad_sets' => :'adSets',
+        :'daily' => :'daily'
       }
     end
 
@@ -178,7 +182,8 @@ module Zernio
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
         :'promoted_object' => :'AdTreeCampaignPromotedObject',
-        :'ad_sets' => :'Array<AdTreeAdSet>'
+        :'ad_sets' => :'Array<AdTreeAdSet>',
+        :'daily' => :'Array<AdDailyMetrics>'
       }
     end
 
@@ -329,6 +334,12 @@ module Zernio
           self.ad_sets = value
         end
       end
+
+      if attributes.key?(:'daily')
+        if (value = attributes[:'daily']).is_a?(Array)
+          self.daily = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -413,7 +424,8 @@ module Zernio
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
           promoted_object == o.promoted_object &&
-          ad_sets == o.ad_sets
+          ad_sets == o.ad_sets &&
+          daily == o.daily
     end
 
     # @see the `==` method
@@ -425,7 +437,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, ad_set_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, platform_ad_account_name, account_id, profile_id, advertising_channel_type, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ad_sets].hash
+      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, ad_set_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, platform_ad_account_name, account_id, profile_id, advertising_channel_type, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ad_sets, daily].hash
     end
 
     # Builds the object from hash

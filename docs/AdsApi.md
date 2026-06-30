@@ -20,6 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**get_ad_comments**](AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
 | [**get_ad_tracking_tags**](AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags |
+| [**get_campaign_analytics**](AdsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics |
 | [**get_conversion_destination**](AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination |
 | [**get_conversion_metrics**](AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics |
 | [**get_conversions_quality**](AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Get Event Match Quality |
@@ -1173,6 +1174,85 @@ end
 ### Return type
 
 [**GetAdTrackingTags200Response**](GetAdTrackingTags200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_campaign_analytics
+
+> <GetCampaignAnalytics200Response> get_campaign_analytics(campaign_id, opts)
+
+Get campaign analytics
+
+Returns performance analytics for a whole campaign in one call: summary metrics, a daily timeline over the requested date range (summed across the campaign's ads), and optional demographic breakdowns. Breakdowns are fetched live from Meta at the campaign level (one call per dimension, no per-ad fan-out), so an agency dashboard gets campaign-level age/gender/etc. without summing thousands of per-ad reads. `campaignId` is the platform campaign id; pass `platform` when a campaign id could be ambiguous across platforms. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+campaign_id = 'campaign_id_example' # String | Platform campaign id (platformCampaignId).
+opts = {
+  platform: 'platform_example', # String | Disambiguate when the campaign id exists across platforms (e.g. facebook, instagram).
+  from_date: Date.parse('2013-10-20'), # Date | Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+  breakdowns: 'breakdowns_example' # String | Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.
+}
+
+begin
+  # Get campaign analytics
+  result = api_instance.get_campaign_analytics(campaign_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_campaign_analytics: #{e}"
+end
+```
+
+#### Using the get_campaign_analytics_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCampaignAnalytics200Response>, Integer, Hash)> get_campaign_analytics_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # Get campaign analytics
+  data, status_code, headers = api_instance.get_campaign_analytics_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCampaignAnalytics200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_campaign_analytics_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Platform campaign id (platformCampaignId). |  |
+| **platform** | **String** | Disambiguate when the campaign id exists across platforms (e.g. facebook, instagram). | [optional] |
+| **from_date** | **Date** | Start of date range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
+| **to_date** | **Date** | End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range. | [optional] |
+| **breakdowns** | **String** | Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset. | [optional] |
+
+### Return type
+
+[**GetCampaignAnalytics200Response**](GetCampaignAnalytics200Response.md)
 
 ### Authorization
 

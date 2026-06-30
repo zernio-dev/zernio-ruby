@@ -44,8 +44,11 @@ module Zernio
 
     attr_accessor :promoted_object
 
-    # Individual ads within this ad set (capped at 100). Returns a subset of Ad fields from the aggregation (core fields like _id, name, platform, status, budget, metrics, creative, goal are included; targeting and schedule may be absent).
+    # Individual ads within this ad set (capped at 100). Returns a subset of Ad fields from the aggregation (core fields like _id, name, platform, status, budget, metrics, creative, goal are included; targeting and schedule may be absent). When `timeIncrement=1&dailyLevel=ad`, each entry also carries a `daily[]` array of `AdDailyMetrics`.
     attr_accessor :ads
+
+    # Per-day metric series for this ad set. Present only when `GET /v1/ads/tree` is called with `timeIncrement=1` and `dailyLevel` is `adset` or `ad`.
+    attr_accessor :daily
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -84,7 +87,8 @@ module Zernio
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
         :'promoted_object' => :'promotedObject',
-        :'ads' => :'ads'
+        :'ads' => :'ads',
+        :'daily' => :'daily'
       }
     end
 
@@ -113,7 +117,8 @@ module Zernio
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
         :'promoted_object' => :'AdTreeAdSetPromotedObject',
-        :'ads' => :'Array<Ad>'
+        :'ads' => :'Array<Ad>',
+        :'daily' => :'Array<AdDailyMetrics>'
       }
     end
 
@@ -196,6 +201,12 @@ module Zernio
           self.ads = value
         end
       end
+
+      if attributes.key?(:'daily')
+        if (value = attributes[:'daily']).is_a?(Array)
+          self.daily = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -230,7 +241,8 @@ module Zernio
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
           promoted_object == o.promoted_object &&
-          ads == o.ads
+          ads == o.ads &&
+          daily == o.daily
     end
 
     # @see the `==` method
@@ -242,7 +254,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_ad_set_id, ad_set_name, status, ad_count, budget, ad_set_budget, metrics, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ads].hash
+      [platform_ad_set_id, ad_set_name, status, ad_count, budget, ad_set_budget, metrics, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ads, daily].hash
     end
 
     # Builds the object from hash

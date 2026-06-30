@@ -238,6 +238,22 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for get_campaign_analytics
+  # Get campaign analytics
+  # Returns performance analytics for a whole campaign in one call: summary metrics, a daily timeline over the requested date range (summed across the campaign&#39;s ads), and optional demographic breakdowns. Breakdowns are fetched live from Meta at the campaign level (one call per dimension, no per-ad fan-out), so an agency dashboard gets campaign-level age/gender/etc. without summing thousands of per-ad reads. &#x60;campaignId&#x60; is the platform campaign id; pass &#x60;platform&#x60; when a campaign id could be ambiguous across platforms. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
+  # @param campaign_id Platform campaign id (platformCampaignId).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :platform Disambiguate when the campaign id exists across platforms (e.g. facebook, instagram).
+  # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
+  # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+  # @option opts [String] :breakdowns Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.
+  # @return [GetCampaignAnalytics200Response]
+  describe 'get_campaign_analytics test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_conversion_destination
   # Get a conversion destination
   # LinkedIn-only today. Returns the full destination record for one conversion rule. The &#x60;adAccountId&#x60; query parameter is required because LinkedIn rules are scoped to a sponsored ad account. 

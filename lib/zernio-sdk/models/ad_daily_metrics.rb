@@ -14,7 +14,8 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetAdAnalytics200ResponseAnalyticsDailyInner < ApiModelBase
+  # One day of metrics. Same fields as `AdMetrics` plus the `date` they apply to. Returned inside a node's `daily[]` when `GET /v1/ads/tree` is called with `timeIncrement=1`. Rate metrics (ctr/cpc/cpm/costPerConversion/ roas) are recomputed per day from that day's sums, so summing the additive fields across a node's `daily[]` reproduces its aggregated `metrics` total. 
+  class AdDailyMetrics < ApiModelBase
     attr_accessor :spend
 
     attr_accessor :impressions
@@ -55,6 +56,7 @@ module Zernio
     # Present on individual ads only, not on campaign aggregations
     attr_accessor :last_synced_at
 
+    # Calendar day (YYYY-MM-DD) these metrics apply to.
     attr_accessor :date
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -128,14 +130,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetAdAnalytics200ResponseAnalyticsDailyInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::AdDailyMetrics` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetAdAnalytics200ResponseAnalyticsDailyInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::AdDailyMetrics`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
