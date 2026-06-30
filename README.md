@@ -293,6 +293,7 @@ Class | Method | HTTP request | Description
 *Zernio::LinkedInMentionsApi* | [**get_linked_in_mentions**](docs/LinkedInMentionsApi.md#get_linked_in_mentions) | **GET** /v1/accounts/{accountId}/linkedin-mentions | Resolve LinkedIn mention
 *Zernio::LogsApi* | [**list_logs**](docs/LogsApi.md#list_logs) | **GET** /v1/logs | List activity logs
 *Zernio::MediaApi* | [**get_media_presigned_url**](docs/MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get upload URL
+*Zernio::MentionsApi* | [**list_inbox_mentions**](docs/MentionsApi.md#list_inbox_mentions) | **GET** /v1/inbox/mentions | List mentions
 *Zernio::MessagesApi* | [**add_message_reaction**](docs/MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction
 *Zernio::MessagesApi* | [**create_inbox_conversation**](docs/MessagesApi.md#create_inbox_conversation) | **POST** /v1/inbox/conversations | Create conversation
 *Zernio::MessagesApi* | [**delete_inbox_message**](docs/MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message
@@ -1122,6 +1123,10 @@ Class | Method | HTTP request | Description
  - [Zernio::ListInboxConversations200ResponseMeta](docs/ListInboxConversations200ResponseMeta.md)
  - [Zernio::ListInboxConversations200ResponseMetaFailedAccountsInner](docs/ListInboxConversations200ResponseMetaFailedAccountsInner.md)
  - [Zernio::ListInboxConversations200ResponsePagination](docs/ListInboxConversations200ResponsePagination.md)
+ - [Zernio::ListInboxMentions200Response](docs/ListInboxMentions200Response.md)
+ - [Zernio::ListInboxMentions200ResponseDataInner](docs/ListInboxMentions200ResponseDataInner.md)
+ - [Zernio::ListInboxMentions200ResponseMeta](docs/ListInboxMentions200ResponseMeta.md)
+ - [Zernio::ListInboxMentions200ResponsePagination](docs/ListInboxMentions200ResponsePagination.md)
  - [Zernio::ListInboxReviews200Response](docs/ListInboxReviews200Response.md)
  - [Zernio::ListInboxReviews200ResponseDataInner](docs/ListInboxReviews200ResponseDataInner.md)
  - [Zernio::ListInboxReviews200ResponseDataInnerReply](docs/ListInboxReviews200ResponseDataInnerReply.md)
