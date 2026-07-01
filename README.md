@@ -314,7 +314,7 @@ Class | Method | HTTP request | Description
 *Zernio::PostsApi* | [**get_post**](docs/PostsApi.md#get_post) | **GET** /v1/posts/{postId} | Get post
 *Zernio::PostsApi* | [**list_posts**](docs/PostsApi.md#list_posts) | **GET** /v1/posts | List posts
 *Zernio::PostsApi* | [**retry_post**](docs/PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post
-*Zernio::PostsApi* | [**sync_external_posts**](docs/PostsApi.md#sync_external_posts) | **POST** /v1/posts/sync-external | Sync or verify an external post on demand
+*Zernio::PostsApi* | [**sync_external_posts**](docs/PostsApi.md#sync_external_posts) | **POST** /v1/posts/sync-external | Sync an external post
 *Zernio::PostsApi* | [**unpublish_post**](docs/PostsApi.md#unpublish_post) | **POST** /v1/posts/{postId}/unpublish | Unpublish post
 *Zernio::PostsApi* | [**update_post**](docs/PostsApi.md#update_post) | **PUT** /v1/posts/{postId} | Update post
 *Zernio::PostsApi* | [**update_post_metadata**](docs/PostsApi.md#update_post_metadata) | **POST** /v1/posts/{postId}/update-metadata | Update post metadata
