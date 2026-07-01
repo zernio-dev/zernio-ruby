@@ -22,7 +22,7 @@ module Zernio
     # List activity logs
     # Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Log category to query (default to 'publishing')
+    # @option opts [String] :type Log category to query. Use &#x60;all&#x60; for the unified view across every category, or &#x60;api_request&#x60; for your API request logs (method, path, status, latency).  (default to 'publishing')
     # @option opts [String] :status Filter by status
     # @option opts [String] :platform Filter by platform
     # @option opts [String] :action Filter by action (e.g., post.published, message.sent, account.connected, webhook.delivered)
@@ -30,6 +30,14 @@ module Zernio
     # @option opts [Integer] :days Number of days to look back (max 90) (default to 90)
     # @option opts [Integer] :limit Maximum number of logs to return (max 100) (default to 50)
     # @option opts [Integer] :skip Number of logs to skip (for pagination) (default to 0)
+    # @option opts [String] :account_id Filter by connected account ID
+    # @option opts [String] :event Filter webhook logs by event (e.g. post.published, message.received)
+    # @option opts [String] :request_id Correlation ID — returns every log spawned by a single API request
+    # @option opts [Time] :from Precise start instant (ISO 8601); narrows within the day range
+    # @option opts [Time] :to Precise end instant (ISO 8601)
+    # @option opts [Integer] :status_code Filter by exact HTTP status code (api_request logs)
+    # @option opts [String] :api_key_id Filter by the API key that made the request (api_request logs)
+    # @option opts [Boolean] :include_read_receipts Include message.read / message.delivered events (hidden by default for messaging logs) (default to false)
     # @return [ListLogs200Response]
     def list_logs(opts = {})
       data, _status_code, _headers = list_logs_with_http_info(opts)
@@ -39,7 +47,7 @@ module Zernio
     # List activity logs
     # Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Log category to query (default to 'publishing')
+    # @option opts [String] :type Log category to query. Use &#x60;all&#x60; for the unified view across every category, or &#x60;api_request&#x60; for your API request logs (method, path, status, latency).  (default to 'publishing')
     # @option opts [String] :status Filter by status
     # @option opts [String] :platform Filter by platform
     # @option opts [String] :action Filter by action (e.g., post.published, message.sent, account.connected, webhook.delivered)
@@ -47,12 +55,20 @@ module Zernio
     # @option opts [Integer] :days Number of days to look back (max 90) (default to 90)
     # @option opts [Integer] :limit Maximum number of logs to return (max 100) (default to 50)
     # @option opts [Integer] :skip Number of logs to skip (for pagination) (default to 0)
+    # @option opts [String] :account_id Filter by connected account ID
+    # @option opts [String] :event Filter webhook logs by event (e.g. post.published, message.received)
+    # @option opts [String] :request_id Correlation ID — returns every log spawned by a single API request
+    # @option opts [Time] :from Precise start instant (ISO 8601); narrows within the day range
+    # @option opts [Time] :to Precise end instant (ISO 8601)
+    # @option opts [Integer] :status_code Filter by exact HTTP status code (api_request logs)
+    # @option opts [String] :api_key_id Filter by the API key that made the request (api_request logs)
+    # @option opts [Boolean] :include_read_receipts Include message.read / message.delivered events (hidden by default for messaging logs) (default to false)
     # @return [Array<(ListLogs200Response, Integer, Hash)>] ListLogs200Response data, response status code and response headers
     def list_logs_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LogsApi.list_logs ...'
       end
-      allowable_values = ["publishing", "connections", "webhooks", "messaging"]
+      allowable_values = ["all", "publishing", "connections", "webhooks", "messaging", "workflow_event", "api_request"]
       if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
         fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
       end
@@ -97,6 +113,14 @@ module Zernio
       query_params[:'days'] = opts[:'days'] if !opts[:'days'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
+      query_params[:'account_id'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'event'] = opts[:'event'] if !opts[:'event'].nil?
+      query_params[:'request_id'] = opts[:'request_id'] if !opts[:'request_id'].nil?
+      query_params[:'from'] = opts[:'from'] if !opts[:'from'].nil?
+      query_params[:'to'] = opts[:'to'] if !opts[:'to'].nil?
+      query_params[:'status_code'] = opts[:'status_code'] if !opts[:'status_code'].nil?
+      query_params[:'api_key_id'] = opts[:'api_key_id'] if !opts[:'api_key_id'].nil?
+      query_params[:'include_read_receipts'] = opts[:'include_read_receipts'] if !opts[:'include_read_receipts'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

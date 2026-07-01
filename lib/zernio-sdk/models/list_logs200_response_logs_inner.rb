@@ -51,6 +51,24 @@ module Zernio
     # Additional context as JSON string
     attr_accessor :metadata
 
+    # Correlation ID linking every log from one API request (api_request logs)
+    attr_accessor :request_id
+
+    # The API key that made the request (api_request logs)
+    attr_accessor :api_key_id
+
+    # HTTP method (api_request logs)
+    attr_accessor :method
+
+    # Request path (api_request logs)
+    attr_accessor :path
+
+    # Client IP address (api_request logs)
+    attr_accessor :ip_address
+
+    # Client user-agent (api_request logs)
+    attr_accessor :user_agent
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -90,7 +108,13 @@ module Zernio
         :'request_body' => :'request_body',
         :'response_body' => :'response_body',
         :'created_at' => :'created_at',
-        :'metadata' => :'metadata'
+        :'metadata' => :'metadata',
+        :'request_id' => :'request_id',
+        :'api_key_id' => :'api_key_id',
+        :'method' => :'method',
+        :'path' => :'path',
+        :'ip_address' => :'ip_address',
+        :'user_agent' => :'user_agent'
       }
     end
 
@@ -121,7 +145,13 @@ module Zernio
         :'request_body' => :'String',
         :'response_body' => :'String',
         :'created_at' => :'Time',
-        :'metadata' => :'String'
+        :'metadata' => :'String',
+        :'request_id' => :'String',
+        :'api_key_id' => :'String',
+        :'method' => :'String',
+        :'path' => :'String',
+        :'ip_address' => :'String',
+        :'user_agent' => :'String'
       }
     end
 
@@ -206,6 +236,30 @@ module Zernio
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
+
+      if attributes.key?(:'request_id')
+        self.request_id = attributes[:'request_id']
+      end
+
+      if attributes.key?(:'api_key_id')
+        self.api_key_id = attributes[:'api_key_id']
+      end
+
+      if attributes.key?(:'method')
+        self.method = attributes[:'method']
+      end
+
+      if attributes.key?(:'path')
+        self.path = attributes[:'path']
+      end
+
+      if attributes.key?(:'ip_address')
+        self.ip_address = attributes[:'ip_address']
+      end
+
+      if attributes.key?(:'user_agent')
+        self.user_agent = attributes[:'user_agent']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -254,7 +308,13 @@ module Zernio
           request_body == o.request_body &&
           response_body == o.response_body &&
           created_at == o.created_at &&
-          metadata == o.metadata
+          metadata == o.metadata &&
+          request_id == o.request_id &&
+          api_key_id == o.api_key_id &&
+          method == o.method &&
+          path == o.path &&
+          ip_address == o.ip_address &&
+          user_agent == o.user_agent
     end
 
     # @see the `==` method
@@ -266,7 +326,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, action, user_id, platform, account_id, status, status_code, error_message, error_code, duration_ms, endpoint, request_body, response_body, created_at, metadata].hash
+      [type, action, user_id, platform, account_id, status, status_code, error_message, error_code, duration_ms, endpoint, request_body, response_body, created_at, metadata, request_id, api_key_id, method, path, ip_address, user_agent].hash
     end
 
     # Builds the object from hash

@@ -36,7 +36,7 @@ describe 'LogsApi' do
   # List activity logs
   # Unified logs endpoint. Returns logs for publishing, connections, webhooks, and messaging. Filter by type, platform, status, and time range. Logs are retained for 90 days. 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :type Log category to query
+  # @option opts [String] :type Log category to query. Use &#x60;all&#x60; for the unified view across every category, or &#x60;api_request&#x60; for your API request logs (method, path, status, latency). 
   # @option opts [String] :status Filter by status
   # @option opts [String] :platform Filter by platform
   # @option opts [String] :action Filter by action (e.g., post.published, message.sent, account.connected, webhook.delivered)
@@ -44,6 +44,14 @@ describe 'LogsApi' do
   # @option opts [Integer] :days Number of days to look back (max 90)
   # @option opts [Integer] :limit Maximum number of logs to return (max 100)
   # @option opts [Integer] :skip Number of logs to skip (for pagination)
+  # @option opts [String] :account_id Filter by connected account ID
+  # @option opts [String] :event Filter webhook logs by event (e.g. post.published, message.received)
+  # @option opts [String] :request_id Correlation ID — returns every log spawned by a single API request
+  # @option opts [Time] :from Precise start instant (ISO 8601); narrows within the day range
+  # @option opts [Time] :to Precise end instant (ISO 8601)
+  # @option opts [Integer] :status_code Filter by exact HTTP status code (api_request logs)
+  # @option opts [String] :api_key_id Filter by the API key that made the request (api_request logs)
+  # @option opts [Boolean] :include_read_receipts Include message.read / message.delivered events (hidden by default for messaging logs)
   # @return [ListLogs200Response]
   describe 'list_logs test' do
     it 'should work' do
