@@ -314,6 +314,7 @@ Class | Method | HTTP request | Description
 *Zernio::PostsApi* | [**get_post**](docs/PostsApi.md#get_post) | **GET** /v1/posts/{postId} | Get post
 *Zernio::PostsApi* | [**list_posts**](docs/PostsApi.md#list_posts) | **GET** /v1/posts | List posts
 *Zernio::PostsApi* | [**retry_post**](docs/PostsApi.md#retry_post) | **POST** /v1/posts/{postId}/retry | Retry failed post
+*Zernio::PostsApi* | [**sync_external_posts**](docs/PostsApi.md#sync_external_posts) | **POST** /v1/posts/sync-external | Sync or verify an external post on demand
 *Zernio::PostsApi* | [**unpublish_post**](docs/PostsApi.md#unpublish_post) | **POST** /v1/posts/{postId}/unpublish | Unpublish post
 *Zernio::PostsApi* | [**update_post**](docs/PostsApi.md#update_post) | **PUT** /v1/posts/{postId} | Update post
 *Zernio::PostsApi* | [**update_post_metadata**](docs/PostsApi.md#update_post_metadata) | **POST** /v1/posts/{postId}/update-metadata | Update post metadata
@@ -737,6 +738,8 @@ Class | Method | HTTP request | Description
  - [Zernio::EstimateAdReachRequest](docs/EstimateAdReachRequest.md)
  - [Zernio::Expired](docs/Expired.md)
  - [Zernio::ExternalPostMediaItem](docs/ExternalPostMediaItem.md)
+ - [Zernio::ExternalPostSummary](docs/ExternalPostSummary.md)
+ - [Zernio::ExternalPostSummaryAnalytics](docs/ExternalPostSummaryAnalytics.md)
  - [Zernio::ExternalPostWebhookPost](docs/ExternalPostWebhookPost.md)
  - [Zernio::FacebookPlatformData](docs/FacebookPlatformData.md)
  - [Zernio::FacebookPlatformDataCarouselCardsInner](docs/FacebookPlatformDataCarouselCardsInner.md)
@@ -1388,6 +1391,9 @@ Class | Method | HTTP request | Description
  - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInner](docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md)
  - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf](docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md)
  - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1](docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1.md)
+ - [Zernio::SyncExternalPosts200Response](docs/SyncExternalPosts200Response.md)
+ - [Zernio::SyncExternalPosts200ResponseSynced](docs/SyncExternalPosts200ResponseSynced.md)
+ - [Zernio::SyncExternalPostsRequest](docs/SyncExternalPostsRequest.md)
  - [Zernio::TargetingSpec](docs/TargetingSpec.md)
  - [Zernio::TargetingSpecCitiesInner](docs/TargetingSpecCitiesInner.md)
  - [Zernio::TargetingSpecCustomLocationsInner](docs/TargetingSpecCustomLocationsInner.md)

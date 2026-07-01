@@ -295,6 +295,8 @@ docs/EstimateAdReach200Response.md
 docs/EstimateAdReachRequest.md
 docs/Expired.md
 docs/ExternalPostMediaItem.md
+docs/ExternalPostSummary.md
+docs/ExternalPostSummaryAnalytics.md
 docs/ExternalPostWebhookPost.md
 docs/FacebookPlatformData.md
 docs/FacebookPlatformDataCarouselCardsInner.md
@@ -968,6 +970,9 @@ docs/SubmitWhatsAppNumberKycRequestAddress.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md
 docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1.md
+docs/SyncExternalPosts200Response.md
+docs/SyncExternalPosts200ResponseSynced.md
+docs/SyncExternalPostsRequest.md
 docs/TargetingSpec.md
 docs/TargetingSpecCitiesInner.md
 docs/TargetingSpecCustomLocationsInner.md
@@ -1585,6 +1590,8 @@ lib/zernio-sdk/models/estimate_ad_reach200_response.rb
 lib/zernio-sdk/models/estimate_ad_reach_request.rb
 lib/zernio-sdk/models/expired.rb
 lib/zernio-sdk/models/external_post_media_item.rb
+lib/zernio-sdk/models/external_post_summary.rb
+lib/zernio-sdk/models/external_post_summary_analytics.rb
 lib/zernio-sdk/models/external_post_webhook_post.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
 lib/zernio-sdk/models/facebook_platform_data_carousel_cards_inner.rb
@@ -2236,6 +2243,9 @@ lib/zernio-sdk/models/submit_whats_app_number_kyc_request_address.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner_one_of.rb
 lib/zernio-sdk/models/submit_whats_app_number_kyc_request_documents_inner_one_of1.rb
+lib/zernio-sdk/models/sync_external_posts200_response.rb
+lib/zernio-sdk/models/sync_external_posts200_response_synced.rb
+lib/zernio-sdk/models/sync_external_posts_request.rb
 lib/zernio-sdk/models/targeting_spec.rb
 lib/zernio-sdk/models/targeting_spec_cities_inner.rb
 lib/zernio-sdk/models/targeting_spec_custom_locations_inner.rb
@@ -2833,6 +2843,8 @@ spec/models/estimate_ad_reach200_response_spec.rb
 spec/models/estimate_ad_reach_request_spec.rb
 spec/models/expired_spec.rb
 spec/models/external_post_media_item_spec.rb
+spec/models/external_post_summary_analytics_spec.rb
+spec/models/external_post_summary_spec.rb
 spec/models/external_post_webhook_post_spec.rb
 spec/models/facebook_platform_data_carousel_cards_inner_spec.rb
 spec/models/facebook_platform_data_spec.rb
@@ -3484,6 +3496,9 @@ spec/models/submit_whats_app_number_kyc_request_documents_inner_one_of1_spec.rb
 spec/models/submit_whats_app_number_kyc_request_documents_inner_one_of_spec.rb
 spec/models/submit_whats_app_number_kyc_request_documents_inner_spec.rb
 spec/models/submit_whats_app_number_kyc_request_spec.rb
+spec/models/sync_external_posts200_response_spec.rb
+spec/models/sync_external_posts200_response_synced_spec.rb
+spec/models/sync_external_posts_request_spec.rb
 spec/models/targeting_spec_cities_inner_spec.rb
 spec/models/targeting_spec_custom_locations_inner_spec.rb
 spec/models/targeting_spec_excluded_locations_cities_inner_spec.rb

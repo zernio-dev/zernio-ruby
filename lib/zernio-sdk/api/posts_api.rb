@@ -541,6 +541,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Sync or verify an external post on demand
+    # Fetch an account's latest external posts (published directly on the platform, not through Zernio) on demand, so a just-published post is retrievable within seconds instead of waiting for the background sync (which refreshes each account at most every ~90 minutes).  Primary use case: verifying a submitted post. When a user publishes on the platform and immediately pastes the post URL into your app, call this with `accountId` plus `url` (or `postId`) to confirm the post exists and return its metadata.  Behavior: - We check our stored copy first and return immediately if the post is already known (no platform call). - Otherwise we fetch the account's latest posts live from the platform, then match and return the submitted post. - Requests are debounced per account (~15s): if the account was just synced, the live fetch is skipped.  `accountId` is required — a post URL or id alone cannot be resolved to an account, and the account must be connected to Zernio (we use its token to read the platform). Supported for every platform with a listing API (Instagram, Facebook, TikTok, YouTube, X, Threads, Pinterest, Reddit, Bluesky, Google Business, and LinkedIn organization accounts; LinkedIn personal accounts are not supported).  `url` accepts any format the platform uses (e.g. `instagram.com/p/…`, `instagram.com/reel/…`, `youtu.be/…`, `youtube.com/shorts/…`, `tiktok.com/@user/video/…`, and `vm.tiktok.com` short links). Pass `postId` (the platform media/video id) as an alternative locator.  Note: post-level analytics (reach, impressions) still carry the platform's own delay (e.g. ~24h on Instagram). This endpoint confirms the post exists and returns its metadata plus basic engagement (likes, comments), not delayed insights. 
+    # @param sync_external_posts_request [SyncExternalPostsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [SyncExternalPosts200Response]
+    def sync_external_posts(sync_external_posts_request, opts = {})
+      data, _status_code, _headers = sync_external_posts_with_http_info(sync_external_posts_request, opts)
+      data
+    end
+
+    # Sync or verify an external post on demand
+    # Fetch an account&#39;s latest external posts (published directly on the platform, not through Zernio) on demand, so a just-published post is retrievable within seconds instead of waiting for the background sync (which refreshes each account at most every ~90 minutes).  Primary use case: verifying a submitted post. When a user publishes on the platform and immediately pastes the post URL into your app, call this with &#x60;accountId&#x60; plus &#x60;url&#x60; (or &#x60;postId&#x60;) to confirm the post exists and return its metadata.  Behavior: - We check our stored copy first and return immediately if the post is already known (no platform call). - Otherwise we fetch the account&#39;s latest posts live from the platform, then match and return the submitted post. - Requests are debounced per account (~15s): if the account was just synced, the live fetch is skipped.  &#x60;accountId&#x60; is required — a post URL or id alone cannot be resolved to an account, and the account must be connected to Zernio (we use its token to read the platform). Supported for every platform with a listing API (Instagram, Facebook, TikTok, YouTube, X, Threads, Pinterest, Reddit, Bluesky, Google Business, and LinkedIn organization accounts; LinkedIn personal accounts are not supported).  &#x60;url&#x60; accepts any format the platform uses (e.g. &#x60;instagram.com/p/…&#x60;, &#x60;instagram.com/reel/…&#x60;, &#x60;youtu.be/…&#x60;, &#x60;youtube.com/shorts/…&#x60;, &#x60;tiktok.com/@user/video/…&#x60;, and &#x60;vm.tiktok.com&#x60; short links). Pass &#x60;postId&#x60; (the platform media/video id) as an alternative locator.  Note: post-level analytics (reach, impressions) still carry the platform&#39;s own delay (e.g. ~24h on Instagram). This endpoint confirms the post exists and returns its metadata plus basic engagement (likes, comments), not delayed insights. 
+    # @param sync_external_posts_request [SyncExternalPostsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SyncExternalPosts200Response, Integer, Hash)>] SyncExternalPosts200Response data, response status code and response headers
+    def sync_external_posts_with_http_info(sync_external_posts_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PostsApi.sync_external_posts ...'
+      end
+      # verify the required parameter 'sync_external_posts_request' is set
+      if @api_client.config.client_side_validation && sync_external_posts_request.nil?
+        fail ArgumentError, "Missing the required parameter 'sync_external_posts_request' when calling PostsApi.sync_external_posts"
+      end
+      # resource path
+      local_var_path = '/v1/posts/sync-external'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(sync_external_posts_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SyncExternalPosts200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PostsApi.sync_external_posts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PostsApi#sync_external_posts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Unpublish post
     # Deletes a published post from the specified platform. The post record in Zernio is kept but its status is updated to cancelled. Not supported on Instagram, TikTok, or Snapchat. Threaded posts delete all items. YouTube deletion is permanent. 
     # @param post_id [String] 
