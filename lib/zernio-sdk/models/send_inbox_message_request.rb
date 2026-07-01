@@ -27,6 +27,9 @@ module Zernio
     # Type of attachment. Defaults to file if not specified.
     attr_accessor :attachment_type
 
+    # WhatsApp only. Display name for a document sent via attachmentUrl with attachmentType: file (e.g. \"Report.pdf\"). Maps to the recipient's file name; without it WhatsApp derives the name from the URL and shows \"Untitled\". Ignored for image/video/audio and for binary uploads (which use the uploaded file's name).
+    attr_accessor :attachment_name
+
     # WhatsApp only. When `true` on an audio attachment, the message is sent as a voice message (PTT) — the recipient sees the waveform + voice-note UI instead of a basic audio attachment. The audio file MUST be `.ogg` encoded with the OPUS codec (mono) per Meta's voice-message contract; other formats are rejected by WhatsApp. Ignored for non-audio attachments. 
     attr_accessor :voice_note
 
@@ -85,6 +88,7 @@ module Zernio
         :'message' => :'message',
         :'attachment_url' => :'attachmentUrl',
         :'attachment_type' => :'attachmentType',
+        :'attachment_name' => :'attachmentName',
         :'voice_note' => :'voiceNote',
         :'quick_replies' => :'quickReplies',
         :'buttons' => :'buttons',
@@ -116,6 +120,7 @@ module Zernio
         :'message' => :'String',
         :'attachment_url' => :'String',
         :'attachment_type' => :'String',
+        :'attachment_name' => :'String',
         :'voice_note' => :'Boolean',
         :'quick_replies' => :'Array<SendInboxMessageRequestQuickRepliesInner>',
         :'buttons' => :'Array<SendInboxMessageRequestButtonsInner>',
@@ -168,6 +173,10 @@ module Zernio
 
       if attributes.key?(:'attachment_type')
         self.attachment_type = attributes[:'attachment_type']
+      end
+
+      if attributes.key?(:'attachment_name')
+        self.attachment_name = attributes[:'attachment_name']
       end
 
       if attributes.key?(:'voice_note')
@@ -334,6 +343,7 @@ module Zernio
           message == o.message &&
           attachment_url == o.attachment_url &&
           attachment_type == o.attachment_type &&
+          attachment_name == o.attachment_name &&
           voice_note == o.voice_note &&
           quick_replies == o.quick_replies &&
           buttons == o.buttons &&
@@ -356,7 +366,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, attachment_url, attachment_type, voice_note, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to, location, contacts].hash
+      [account_id, message, attachment_url, attachment_type, attachment_name, voice_note, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to, location, contacts].hash
     end
 
     # Builds the object from hash
