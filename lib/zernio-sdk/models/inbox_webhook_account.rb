@@ -19,6 +19,9 @@ module Zernio
     # Social account ID
     attr_accessor :id
 
+    # Social account ID (same value as id). Canonical field so consumers can filter every webhook event on one field (e.g. route staging vs production by account). id is kept for backward compatibility.
+    attr_accessor :account_id
+
     attr_accessor :platform
 
     attr_accessor :username
@@ -29,6 +32,7 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
+        :'account_id' => :'accountId',
         :'platform' => :'platform',
         :'username' => :'username',
         :'display_name' => :'displayName'
@@ -49,6 +53,7 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
+        :'account_id' => :'String',
         :'platform' => :'String',
         :'username' => :'String',
         :'display_name' => :'String'
@@ -81,6 +86,10 @@ module Zernio
         self.id = attributes[:'id']
       else
         self.id = nil
+      end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
       if attributes.key?(:'platform')
@@ -166,6 +175,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          account_id == o.account_id &&
           platform == o.platform &&
           username == o.username &&
           display_name == o.display_name
@@ -180,7 +190,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, username, display_name].hash
+      [id, account_id, platform, username, display_name].hash
     end
 
     # Builds the object from hash

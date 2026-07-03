@@ -18,6 +18,9 @@ module Zernio
     # Social account ID
     attr_accessor :id
 
+    # Social account ID (same as id); canonical field for account filtering.
+    attr_accessor :account_id
+
     attr_accessor :platform
 
     attr_accessor :username
@@ -26,6 +29,7 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
+        :'account_id' => :'accountId',
         :'platform' => :'platform',
         :'username' => :'username'
       }
@@ -45,6 +49,7 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
+        :'account_id' => :'String',
         :'platform' => :'String',
         :'username' => :'String'
       }
@@ -76,6 +81,10 @@ module Zernio
         self.id = attributes[:'id']
       else
         self.id = nil
+      end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
       if attributes.key?(:'platform')
@@ -157,6 +166,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          account_id == o.account_id &&
           platform == o.platform &&
           username == o.username
     end
@@ -170,7 +180,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, username].hash
+      [id, account_id, platform, username].hash
     end
 
     # Builds the object from hash
