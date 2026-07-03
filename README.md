@@ -1625,6 +1625,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadPostPlatformAccount](docs/WebhookPayloadPostPlatformAccount.md)
  - [Zernio::WebhookPayloadPostPlatformPlatform](docs/WebhookPayloadPostPlatformPlatform.md)
  - [Zernio::WebhookPayloadPostPlatformPost](docs/WebhookPayloadPostPlatformPost.md)
+ - [Zernio::WebhookPayloadPostPlatformPostPlatformsInner](docs/WebhookPayloadPostPlatformPostPlatformsInner.md)
  - [Zernio::WebhookPayloadPostPost](docs/WebhookPayloadPostPost.md)
  - [Zernio::WebhookPayloadPostPostPlatformsInner](docs/WebhookPayloadPostPostPlatformsInner.md)
  - [Zernio::WebhookPayloadReaction](docs/WebhookPayloadReaction.md)

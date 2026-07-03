@@ -9,7 +9,7 @@
 | **status** | **String** | Post-level status AT FIRE TIME. May still be &#x60;publishing&#x60; if other platforms haven&#39;t terminated; check this field rather than assuming.  |  |
 | **scheduled_for** | **Time** |  |  |
 | **published_at** | **Time** |  | [optional] |
-| **platforms** | [**Array&lt;WebhookPayloadPostPostPlatformsInner&gt;**](WebhookPayloadPostPostPlatformsInner.md) |  |  |
+| **platforms** | [**Array&lt;WebhookPayloadPostPlatformPostPlatformsInner&gt;**](WebhookPayloadPostPlatformPostPlatformsInner.md) |  |  |
 
 ## Example
 

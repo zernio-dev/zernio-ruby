@@ -58,7 +58,7 @@ module Zernio
         :'status' => :'String',
         :'scheduled_for' => :'Time',
         :'published_at' => :'Time',
-        :'platforms' => :'Array<WebhookPayloadPostPostPlatformsInner>'
+        :'platforms' => :'Array<WebhookPayloadPostPlatformPostPlatformsInner>'
       }
     end
 

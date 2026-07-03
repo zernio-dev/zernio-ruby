@@ -1,4 +1,4 @@
-# Zernio::WebhookPayloadPostPostPlatformsInner
+# Zernio::WebhookPayloadPostPlatformPostPlatformsInner
 
 ## Properties
 
@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** |  |  |
 | **status** | **String** |  |  |
-| **account_id** | **String** | SocialAccount id this platform target published through. Use it to route events by connected account (e.g. separate staging vs production endpoints). A post can span multiple accounts. | [optional] |
+| **account_id** | **String** | SocialAccount id this platform target published through. On post.platform.* events see also the top-level &#x60;account&#x60; block. | [optional] |
 | **platform_post_id** | **String** |  | [optional] |
 | **published_url** | **String** |  | [optional] |
 | **error** | **String** |  | [optional] |
@@ -16,7 +16,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::WebhookPayloadPostPostPlatformsInner.new(
+instance = Zernio::WebhookPayloadPostPlatformPostPlatformsInner.new(
   platform: null,
   status: null,
   account_id: null,
