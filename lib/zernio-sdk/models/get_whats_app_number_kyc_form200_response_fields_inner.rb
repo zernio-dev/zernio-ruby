@@ -31,6 +31,9 @@ module Zernio
     # ISO country the value must be local to
     attr_accessor :local_to
 
+    # When set, the requirement applies ONLY to this end-user type — provide it for that type and OMIT it for the other (e.g. Brazil: \"Cartão CNPJ\" is business-only, \"CPF\" and \"ID/Passport Copy\" are personal-only). Submitting both sets makes the regulator ask whether the number is for personal or business use and stalls the review. Pass `entityType` on POST so the server drops the inapplicable set.
+    attr_accessor :audience
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -61,7 +64,8 @@ module Zernio
         :'kind' => :'kind',
         :'description' => :'description',
         :'example' => :'example',
-        :'local_to' => :'localTo'
+        :'local_to' => :'localTo',
+        :'audience' => :'audience'
       }
     end
 
@@ -83,7 +87,8 @@ module Zernio
         :'kind' => :'String',
         :'description' => :'String',
         :'example' => :'String',
-        :'local_to' => :'String'
+        :'local_to' => :'String',
+        :'audience' => :'String'
       }
     end
 
@@ -92,7 +97,8 @@ module Zernio
       Set.new([
         :'description',
         :'example',
-        :'local_to'
+        :'local_to',
+        :'audience'
       ])
     end
 
@@ -135,6 +141,10 @@ module Zernio
       if attributes.key?(:'local_to')
         self.local_to = attributes[:'local_to']
       end
+
+      if attributes.key?(:'audience')
+        self.audience = attributes[:'audience']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -151,6 +161,8 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       kind_validator = EnumAttributeValidator.new('String', ["text", "date", "address", "file", "action"])
       return false unless kind_validator.valid?(@kind)
+      audience_validator = EnumAttributeValidator.new('String', ["business", "individual"])
+      return false unless audience_validator.valid?(@audience)
       true
     end
 
@@ -164,6 +176,16 @@ module Zernio
       @kind = kind
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] audience Object to be assigned
+    def audience=(audience)
+      validator = EnumAttributeValidator.new('String', ["business", "individual"])
+      unless validator.valid?(audience)
+        fail ArgumentError, "invalid value for \"audience\", must be one of #{validator.allowable_values}."
+      end
+      @audience = audience
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -174,7 +196,8 @@ module Zernio
           kind == o.kind &&
           description == o.description &&
           example == o.example &&
-          local_to == o.local_to
+          local_to == o.local_to &&
+          audience == o.audience
     end
 
     # @see the `==` method
@@ -186,7 +209,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [requirement_id, label, kind, description, example, local_to].hash
+      [requirement_id, label, kind, description, example, local_to, audience].hash
     end
 
     # Builds the object from hash
