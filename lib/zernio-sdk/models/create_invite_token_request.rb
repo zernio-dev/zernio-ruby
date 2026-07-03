@@ -21,10 +21,10 @@ module Zernio
     # Required if scope is 'profiles'. Array of profile IDs to grant access to.
     attr_accessor :profile_ids
 
-    # Org role granted to the invitee. Defaults to 'member'. 'viewer' creates a read-only member who can view everything in their profile scope but cannot perform any content mutation (publish, edit, delete, connect accounts).
+    # Org role granted to the invitee. Defaults to 'member'. 'admin' can manage the team (invite/remove members, change roles and access) but not billing, ownership transfer or account deletion. 'viewer' creates a read-only member who can view everything in their profile scope but cannot perform any content mutation (publish, edit, delete, connect accounts).
     attr_accessor :role
 
-    # Deprecated. Use role 'viewer' instead. When true, the invite is created with role 'viewer'. Cannot be combined with role 'billing_admin'.
+    # Deprecated. Use role 'viewer' instead. When true, the invite is created with role 'viewer'. Cannot be combined with role 'billing_admin' or 'admin'.
     attr_accessor :read_only
 
     class EnumAttributeValidator
@@ -143,7 +143,7 @@ module Zernio
       return false if @scope.nil?
       scope_validator = EnumAttributeValidator.new('String', ["all", "profiles"])
       return false unless scope_validator.valid?(@scope)
-      role_validator = EnumAttributeValidator.new('String', ["member", "billing_admin", "viewer"])
+      role_validator = EnumAttributeValidator.new('String', ["admin", "member", "billing_admin", "viewer"])
       return false unless role_validator.valid?(@role)
       true
     end
@@ -161,7 +161,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] role Object to be assigned
     def role=(role)
-      validator = EnumAttributeValidator.new('String', ["member", "billing_admin", "viewer"])
+      validator = EnumAttributeValidator.new('String', ["admin", "member", "billing_admin", "viewer"])
       unless validator.valid?(role)
         fail ArgumentError, "invalid value for \"role\", must be one of #{validator.allowable_values}."
       end
