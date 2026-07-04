@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Webhook payload for the per-platform terminal events `post.platform.published` and `post.platform.failed`. Fires once per platform target inside a post as that platform reaches a terminal state (published or permanent failure). The `post` envelope mirrors the shape of `WebhookPayloadPost` so consumers can reuse rendering logic; the `platform` block identifies which specific platform transitioned; the `account` block identifies the connected social account behind that platform-write. 
+  # Webhook payload for the per-platform terminal events `post.platform.published` and `post.platform.failed`, and for `post.tiktok.url_resolved` (same shape, fired when a published TikTok post's public URL is backfilled). Terminal events fire once per platform target inside a post as that platform reaches a terminal state (published or permanent failure). The `post` envelope mirrors the shape of `WebhookPayloadPost` so consumers can reuse rendering logic; the `platform` block identifies which specific platform transitioned; the `account` block identifies the connected social account behind that platform-write. 
   class WebhookPayloadPostPlatform < ApiModelBase
     # Stable webhook event ID.
     attr_accessor :id
@@ -182,7 +182,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @id.nil?
       return false if @event.nil?
-      event_validator = EnumAttributeValidator.new('String', ["post.platform.published", "post.platform.failed"])
+      event_validator = EnumAttributeValidator.new('String', ["post.platform.published", "post.platform.failed", "post.tiktok.url_resolved"])
       return false unless event_validator.valid?(@event)
       return false if @post.nil?
       return false if @platform.nil?
@@ -204,7 +204,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] event Object to be assigned
     def event=(event)
-      validator = EnumAttributeValidator.new('String', ["post.platform.published", "post.platform.failed"])
+      validator = EnumAttributeValidator.new('String', ["post.platform.published", "post.platform.failed", "post.tiktok.url_resolved"])
       unless validator.valid?(event)
         fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
       end

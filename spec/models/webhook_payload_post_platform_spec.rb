@@ -36,7 +36,7 @@ describe Zernio::WebhookPayloadPostPlatform do
   describe 'test attribute "event"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["post.platform.published", "post.platform.failed"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["post.platform.published", "post.platform.failed", "post.tiktok.url_resolved"])
       # validator.allowable_values.each do |value|
       #   expect { instance.event = value }.not_to raise_error
       # end

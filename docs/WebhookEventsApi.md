@@ -33,6 +33,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_post_published**](WebhookEventsApi.md#on_post_published) | **POST** /post.published | Post published event |
 | [**on_post_recycled**](WebhookEventsApi.md#on_post_recycled) | **POST** /post.recycled | Post recycled event |
 | [**on_post_scheduled**](WebhookEventsApi.md#on_post_scheduled) | **POST** /post.scheduled | Post scheduled event |
+| [**on_post_tik_tok_url_resolved**](WebhookEventsApi.md#on_post_tik_tok_url_resolved) | **POST** /post.tiktok.url_resolved | TikTok post URL resolved event |
 | [**on_reaction_received**](WebhookEventsApi.md#on_reaction_received) | **POST** /reaction.received | Reaction received event |
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
@@ -2005,6 +2006,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_post** | [**WebhookPayloadPost**](WebhookPayloadPost.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_post_tik_tok_url_resolved
+
+> on_post_tik_tok_url_resolved(webhook_payload_post_platform)
+
+TikTok post URL resolved event
+
+Fired when an already-published TikTok platform entry gets its public URL backfilled. TikTok exposes the numeric video id asynchronously (often minutes after PUBLISH_COMPLETE), so the terminal events can carry an empty `publishedUrl` for TikTok. This event delivers `platform.publishedUrl` and the resolved `platform.platformPostId` once available. At most once per platform target; never fires for drafts or private posts (no public URL exists). Payload shape is identical to `post.platform.published`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_post_platform =  # WebhookPayloadPostPlatform | 
+
+begin
+  # TikTok post URL resolved event
+  api_instance.on_post_tik_tok_url_resolved(webhook_payload_post_platform)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_tik_tok_url_resolved: #{e}"
+end
+```
+
+#### Using the on_post_tik_tok_url_resolved_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_post_tik_tok_url_resolved_with_http_info(webhook_payload_post_platform)
+
+```ruby
+begin
+  # TikTok post URL resolved event
+  data, status_code, headers = api_instance.on_post_tik_tok_url_resolved_with_http_info(webhook_payload_post_platform)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_tik_tok_url_resolved_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_post_platform** | [**WebhookPayloadPostPlatform**](WebhookPayloadPostPlatform.md) |  |  |
 
 ### Return type
 

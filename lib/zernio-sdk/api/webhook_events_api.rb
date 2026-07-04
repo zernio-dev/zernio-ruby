@@ -1933,6 +1933,72 @@ module Zernio
       return data, status_code, headers
     end
 
+    # TikTok post URL resolved event
+    # Fired when an already-published TikTok platform entry gets its public URL backfilled. TikTok exposes the numeric video id asynchronously (often minutes after PUBLISH_COMPLETE), so the terminal events can carry an empty `publishedUrl` for TikTok. This event delivers `platform.publishedUrl` and the resolved `platform.platformPostId` once available. At most once per platform target; never fires for drafts or private posts (no public URL exists). Payload shape is identical to `post.platform.published`. 
+    # @param webhook_payload_post_platform [WebhookPayloadPostPlatform] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_post_tik_tok_url_resolved(webhook_payload_post_platform, opts = {})
+      on_post_tik_tok_url_resolved_with_http_info(webhook_payload_post_platform, opts)
+      nil
+    end
+
+    # TikTok post URL resolved event
+    # Fired when an already-published TikTok platform entry gets its public URL backfilled. TikTok exposes the numeric video id asynchronously (often minutes after PUBLISH_COMPLETE), so the terminal events can carry an empty &#x60;publishedUrl&#x60; for TikTok. This event delivers &#x60;platform.publishedUrl&#x60; and the resolved &#x60;platform.platformPostId&#x60; once available. At most once per platform target; never fires for drafts or private posts (no public URL exists). Payload shape is identical to &#x60;post.platform.published&#x60;. 
+    # @param webhook_payload_post_platform [WebhookPayloadPostPlatform] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_post_tik_tok_url_resolved_with_http_info(webhook_payload_post_platform, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_post_tik_tok_url_resolved ...'
+      end
+      # verify the required parameter 'webhook_payload_post_platform' is set
+      if @api_client.config.client_side_validation && webhook_payload_post_platform.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_post_platform' when calling WebhookEventsApi.on_post_tik_tok_url_resolved"
+      end
+      # resource path
+      local_var_path = '/post.tiktok.url_resolved'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_post_platform)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_post_tik_tok_url_resolved",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_post_tik_tok_url_resolved\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Reaction received event
     # Fired when a participant adds or removes an emoji reaction on a message. Supported on WhatsApp and Telegram. Distinct from message.received so a reaction (e.g. a thumbs-up) is not mistaken for an inbound message. The `reaction.action` field is `added` or `removed`. On WhatsApp removals the platform does not report which emoji was removed, so `reaction.emoji` may be an empty string. Requires the Inbox add-on. 
     # @param webhook_payload_reaction [WebhookPayloadReaction] 

@@ -28,6 +28,7 @@ module Zernio
 
     attr_accessor :publish_now
 
+    # When omitted, the post keeps its current draft status. Send `false` to promote a draft to scheduled (combined with `scheduledFor`, `publishNow`, or a queue).
     attr_accessor :is_draft
 
     attr_accessor :timezone
