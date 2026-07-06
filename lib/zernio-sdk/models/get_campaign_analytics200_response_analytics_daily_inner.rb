@@ -52,6 +52,33 @@ module Zernio
     # Return on ad spend — derived as `purchaseValue / spend`. 0 when `spend` is 0. Equivalent to Meta's `purchase_roas` under default attribution. At ad-set and campaign levels this is recomputed from summed purchaseValue + spend (NOT averaged across children) so it's mathematically correct at every rollup level.
     attr_accessor :roas
 
+    # Meta video ads only (0 for non-video ads and other platforms), like all video* fields below. Number of times the video started playing (Meta `video_play_actions`), summed over the date range and across children at ad-set/campaign level.
+    attr_accessor :video_play_actions
+
+    # Views of at least 30 seconds (or to the end, for shorter videos). Meta `video_30_sec_watched_actions`.
+    attr_accessor :video30_sec_watched_actions
+
+    # ThruPlays (watched to completion, or at least 15 seconds). Meta `video_thruplay_watched_actions`.
+    attr_accessor :video_thruplay_watched_actions
+
+    # Views reaching 25% of the video's length. With the other percentile fields, powers hook/hold/drop-off analysis (e.g. hook rate = videoP25WatchedActions / videoPlayActions). Meta `video_p25_watched_actions`.
+    attr_accessor :video_p25_watched_actions
+
+    # Views reaching 50% of the video's length. Meta `video_p50_watched_actions`.
+    attr_accessor :video_p50_watched_actions
+
+    # Views reaching 75% of the video's length. Meta `video_p75_watched_actions`.
+    attr_accessor :video_p75_watched_actions
+
+    # Views reaching 95% of the video's length. Meta `video_p95_watched_actions`.
+    attr_accessor :video_p95_watched_actions
+
+    # Views reaching 100% of the video's length. Meta `video_p100_watched_actions`.
+    attr_accessor :video_p100_watched_actions
+
+    # Average seconds watched per play (Meta `video_avg_time_watched_actions`). Aggregated over date ranges and across children as a play-weighted average (total watch time / total plays), never a plain average of averages.
+    attr_accessor :video_avg_time_watched_actions
+
     # Present on individual ads only, not on campaign aggregations
     attr_accessor :last_synced_at
 
@@ -74,6 +101,15 @@ module Zernio
         :'action_values' => :'actionValues',
         :'purchase_value' => :'purchaseValue',
         :'roas' => :'roas',
+        :'video_play_actions' => :'videoPlayActions',
+        :'video30_sec_watched_actions' => :'video30SecWatchedActions',
+        :'video_thruplay_watched_actions' => :'videoThruplayWatchedActions',
+        :'video_p25_watched_actions' => :'videoP25WatchedActions',
+        :'video_p50_watched_actions' => :'videoP50WatchedActions',
+        :'video_p75_watched_actions' => :'videoP75WatchedActions',
+        :'video_p95_watched_actions' => :'videoP95WatchedActions',
+        :'video_p100_watched_actions' => :'videoP100WatchedActions',
+        :'video_avg_time_watched_actions' => :'videoAvgTimeWatchedActions',
         :'last_synced_at' => :'lastSyncedAt',
         :'date' => :'date'
       }
@@ -106,6 +142,15 @@ module Zernio
         :'action_values' => :'Hash<String, Float>',
         :'purchase_value' => :'Float',
         :'roas' => :'Float',
+        :'video_play_actions' => :'Integer',
+        :'video30_sec_watched_actions' => :'Integer',
+        :'video_thruplay_watched_actions' => :'Integer',
+        :'video_p25_watched_actions' => :'Integer',
+        :'video_p50_watched_actions' => :'Integer',
+        :'video_p75_watched_actions' => :'Integer',
+        :'video_p95_watched_actions' => :'Integer',
+        :'video_p100_watched_actions' => :'Integer',
+        :'video_avg_time_watched_actions' => :'Float',
         :'last_synced_at' => :'Time',
         :'date' => :'Date'
       }
@@ -200,6 +245,42 @@ module Zernio
         self.roas = attributes[:'roas']
       end
 
+      if attributes.key?(:'video_play_actions')
+        self.video_play_actions = attributes[:'video_play_actions']
+      end
+
+      if attributes.key?(:'video30_sec_watched_actions')
+        self.video30_sec_watched_actions = attributes[:'video30_sec_watched_actions']
+      end
+
+      if attributes.key?(:'video_thruplay_watched_actions')
+        self.video_thruplay_watched_actions = attributes[:'video_thruplay_watched_actions']
+      end
+
+      if attributes.key?(:'video_p25_watched_actions')
+        self.video_p25_watched_actions = attributes[:'video_p25_watched_actions']
+      end
+
+      if attributes.key?(:'video_p50_watched_actions')
+        self.video_p50_watched_actions = attributes[:'video_p50_watched_actions']
+      end
+
+      if attributes.key?(:'video_p75_watched_actions')
+        self.video_p75_watched_actions = attributes[:'video_p75_watched_actions']
+      end
+
+      if attributes.key?(:'video_p95_watched_actions')
+        self.video_p95_watched_actions = attributes[:'video_p95_watched_actions']
+      end
+
+      if attributes.key?(:'video_p100_watched_actions')
+        self.video_p100_watched_actions = attributes[:'video_p100_watched_actions']
+      end
+
+      if attributes.key?(:'video_avg_time_watched_actions')
+        self.video_avg_time_watched_actions = attributes[:'video_avg_time_watched_actions']
+      end
+
       if attributes.key?(:'last_synced_at')
         self.last_synced_at = attributes[:'last_synced_at']
       end
@@ -243,6 +324,15 @@ module Zernio
           action_values == o.action_values &&
           purchase_value == o.purchase_value &&
           roas == o.roas &&
+          video_play_actions == o.video_play_actions &&
+          video30_sec_watched_actions == o.video30_sec_watched_actions &&
+          video_thruplay_watched_actions == o.video_thruplay_watched_actions &&
+          video_p25_watched_actions == o.video_p25_watched_actions &&
+          video_p50_watched_actions == o.video_p50_watched_actions &&
+          video_p75_watched_actions == o.video_p75_watched_actions &&
+          video_p95_watched_actions == o.video_p95_watched_actions &&
+          video_p100_watched_actions == o.video_p100_watched_actions &&
+          video_avg_time_watched_actions == o.video_avg_time_watched_actions &&
           last_synced_at == o.last_synced_at &&
           date == o.date
     end
@@ -256,7 +346,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, action_values, purchase_value, roas, last_synced_at, date].hash
+      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, action_values, purchase_value, roas, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video_avg_time_watched_actions, last_synced_at, date].hash
     end
 
     # Builds the object from hash
