@@ -178,6 +178,9 @@ Class | Method | HTTP request | Description
 *Zernio::BroadcastsApi* | [**schedule_broadcast**](docs/BroadcastsApi.md#schedule_broadcast) | **POST** /v1/broadcasts/{broadcastId}/schedule | Schedule broadcast for later
 *Zernio::BroadcastsApi* | [**send_broadcast**](docs/BroadcastsApi.md#send_broadcast) | **POST** /v1/broadcasts/{broadcastId}/send | Send broadcast now
 *Zernio::BroadcastsApi* | [**update_broadcast**](docs/BroadcastsApi.md#update_broadcast) | **PATCH** /v1/broadcasts/{broadcastId} | Update broadcast
+*Zernio::CallsApi* | [**get_call**](docs/CallsApi.md#get_call) | **GET** /v1/calls/{id} | Get a call (any channel)
+*Zernio::CallsApi* | [**get_call_recording**](docs/CallsApi.md#get_call_recording) | **GET** /v1/calls/{id}/recording | Get a call recording (any channel)
+*Zernio::CallsApi* | [**list_calls**](docs/CallsApi.md#list_calls) | **GET** /v1/calls | List all calls (unified history)
 *Zernio::CommentAutomationsApi* | [**create_comment_automation**](docs/CommentAutomationsApi.md#create_comment_automation) | **POST** /v1/comment-automations | Create comment-to-DM automation
 *Zernio::CommentAutomationsApi* | [**delete_comment_automation**](docs/CommentAutomationsApi.md#delete_comment_automation) | **DELETE** /v1/comment-automations/{automationId} | Delete automation
 *Zernio::CommentAutomationsApi* | [**get_comment_automation**](docs/CommentAutomationsApi.md#get_comment_automation) | **GET** /v1/comment-automations/{automationId} | Get automation details
@@ -308,6 +311,26 @@ Class | Method | HTTP request | Description
 *Zernio::MessagesApi* | [**send_typing_indicator**](docs/MessagesApi.md#send_typing_indicator) | **POST** /v1/inbox/conversations/{conversationId}/typing | Send typing indicator
 *Zernio::MessagesApi* | [**update_inbox_conversation**](docs/MessagesApi.md#update_inbox_conversation) | **PUT** /v1/inbox/conversations/{conversationId} | Update conversation status
 *Zernio::MessagesApi* | [**upload_media_direct**](docs/MessagesApi.md#upload_media_direct) | **POST** /v1/media/upload-direct | Upload media file
+*Zernio::PhoneNumbersApi* | [**cancel_phone_number_port_in**](docs/PhoneNumbersApi.md#cancel_phone_number_port_in) | **DELETE** /v1/phone-numbers/port-in/{id} | Cancel a port-in
+*Zernio::PhoneNumbersApi* | [**check_phone_number_availability**](docs/PhoneNumbersApi.md#check_phone_number_availability) | **GET** /v1/phone-numbers/availability | Check country availability
+*Zernio::PhoneNumbersApi* | [**check_phone_number_portability**](docs/PhoneNumbersApi.md#check_phone_number_portability) | **POST** /v1/phone-numbers/port-in/check | Check portability
+*Zernio::PhoneNumbersApi* | [**create_phone_number_kyc_link**](docs/PhoneNumbersApi.md#create_phone_number_kyc_link) | **POST** /v1/phone-numbers/kyc/share | Create a hosted KYC link
+*Zernio::PhoneNumbersApi* | [**create_phone_number_port_in**](docs/PhoneNumbersApi.md#create_phone_number_port_in) | **POST** /v1/phone-numbers/port-in | Port numbers in
+*Zernio::PhoneNumbersApi* | [**get_phone_number**](docs/PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number
+*Zernio::PhoneNumbersApi* | [**get_phone_number_kyc_form**](docs/PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec
+*Zernio::PhoneNumbersApi* | [**get_phone_number_remediation**](docs/PhoneNumbersApi.md#get_phone_number_remediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements
+*Zernio::PhoneNumbersApi* | [**list_phone_number_countries**](docs/PhoneNumbersApi.md#list_phone_number_countries) | **GET** /v1/phone-numbers/countries | List offerable number countries
+*Zernio::PhoneNumbersApi* | [**list_phone_number_port_ins**](docs/PhoneNumbersApi.md#list_phone_number_port_ins) | **GET** /v1/phone-numbers/port-in | List port-in orders
+*Zernio::PhoneNumbersApi* | [**list_phone_numbers**](docs/PhoneNumbersApi.md#list_phone_numbers) | **GET** /v1/phone-numbers | List phone numbers
+*Zernio::PhoneNumbersApi* | [**purchase_phone_number**](docs/PhoneNumbersApi.md#purchase_phone_number) | **POST** /v1/phone-numbers/purchase | Purchase phone number
+*Zernio::PhoneNumbersApi* | [**release_phone_number**](docs/PhoneNumbersApi.md#release_phone_number) | **DELETE** /v1/phone-numbers/{id} | Release phone number
+*Zernio::PhoneNumbersApi* | [**remediate_phone_number**](docs/PhoneNumbersApi.md#remediate_phone_number) | **POST** /v1/phone-numbers/{id}/remediate | Resubmit a declined number
+*Zernio::PhoneNumbersApi* | [**review_phone_number_kyc_packet**](docs/PhoneNumbersApi.md#review_phone_number_kyc_packet) | **POST** /v1/phone-numbers/kyc/review-packet | Pre-review a KYC packet
+*Zernio::PhoneNumbersApi* | [**search_available_phone_numbers**](docs/PhoneNumbersApi.md#search_available_phone_numbers) | **GET** /v1/phone-numbers/available | Search available numbers
+*Zernio::PhoneNumbersApi* | [**submit_phone_number_kyc**](docs/PhoneNumbersApi.md#submit_phone_number_kyc) | **POST** /v1/phone-numbers/kyc | Submit KYC
+*Zernio::PhoneNumbersApi* | [**upload_phone_number_kyc_document**](docs/PhoneNumbersApi.md#upload_phone_number_kyc_document) | **POST** /v1/phone-numbers/kyc/upload-document | Upload a KYC document
+*Zernio::PhoneNumbersApi* | [**upload_phone_number_port_in_document**](docs/PhoneNumbersApi.md#upload_phone_number_port_in_document) | **POST** /v1/phone-numbers/port-in/documents | Upload a porting document
+*Zernio::PhoneNumbersApi* | [**validate_phone_number_kyc_address**](docs/PhoneNumbersApi.md#validate_phone_number_kyc_address) | **POST** /v1/phone-numbers/kyc/validate-address | Pre-validate KYC address
 *Zernio::PostsApi* | [**bulk_upload_posts**](docs/PostsApi.md#bulk_upload_posts) | **POST** /v1/posts/bulk-upload | Bulk upload from CSV
 *Zernio::PostsApi* | [**create_post**](docs/PostsApi.md#create_post) | **POST** /v1/posts | Create post
 *Zernio::PostsApi* | [**delete_post**](docs/PostsApi.md#delete_post) | **DELETE** /v1/posts/{postId} | Delete post
@@ -334,6 +357,18 @@ Class | Method | HTTP request | Description
 *Zernio::ReviewsApi* | [**delete_inbox_review_reply**](docs/ReviewsApi.md#delete_inbox_review_reply) | **DELETE** /v1/inbox/reviews/{reviewId}/reply | Delete review reply
 *Zernio::ReviewsApi* | [**list_inbox_reviews**](docs/ReviewsApi.md#list_inbox_reviews) | **GET** /v1/inbox/reviews | List reviews
 *Zernio::ReviewsApi* | [**reply_to_inbox_review**](docs/ReviewsApi.md#reply_to_inbox_review) | **POST** /v1/inbox/reviews/{reviewId}/reply | Reply to review
+*Zernio::SMSApi* | [**appeal_sms_registration**](docs/SMSApi.md#appeal_sms_registration) | **POST** /v1/sms/registrations/{id}/appeal | Appeal a rejected campaign
+*Zernio::SMSApi* | [**disable_sms_on_number**](docs/SMSApi.md#disable_sms_on_number) | **DELETE** /v1/phone-numbers/{id}/sms | Disable SMS on a number
+*Zernio::SMSApi* | [**enable_sms_on_number**](docs/SMSApi.md#enable_sms_on_number) | **POST** /v1/phone-numbers/{id}/sms | Enable SMS on a number
+*Zernio::SMSApi* | [**get_sms_registration**](docs/SMSApi.md#get_sms_registration) | **GET** /v1/sms/registrations/{id} | Get a carrier registration
+*Zernio::SMSApi* | [**list_sms_opt_outs**](docs/SMSApi.md#list_sms_opt_outs) | **GET** /v1/sms/opt-outs | List SMS opt-outs
+*Zernio::SMSApi* | [**list_sms_registrations**](docs/SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations
+*Zernio::SMSApi* | [**lookup_sms_number**](docs/SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type
+*Zernio::SMSApi* | [**reuse_sms_registration_for_number**](docs/SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add a number to an existing registration
+*Zernio::SMSApi* | [**send_sms**](docs/SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS
+*Zernio::SMSApi* | [**share_sms_registration**](docs/SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link
+*Zernio::SMSApi* | [**start_sms_registration**](docs/SMSApi.md#start_sms_registration) | **POST** /v1/sms/registrations | Start a carrier registration
+*Zernio::SMSApi* | [**verify_sms_registration_otp**](docs/SMSApi.md#verify_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/verify-otp | Submit the sole-prop OTP
 *Zernio::SequencesApi* | [**activate_sequence**](docs/SequencesApi.md#activate_sequence) | **POST** /v1/sequences/{sequenceId}/activate | Activate sequence
 *Zernio::SequencesApi* | [**create_sequence**](docs/SequencesApi.md#create_sequence) | **POST** /v1/sequences | Create sequence
 *Zernio::SequencesApi* | [**delete_sequence**](docs/SequencesApi.md#delete_sequence) | **DELETE** /v1/sequences/{sequenceId} | Delete sequence
@@ -358,6 +393,9 @@ Class | Method | HTTP request | Description
 *Zernio::TwitterEngagementApi* | [**retweet_post**](docs/TwitterEngagementApi.md#retweet_post) | **POST** /v1/twitter/retweet | Retweet a post
 *Zernio::TwitterEngagementApi* | [**undo_retweet**](docs/TwitterEngagementApi.md#undo_retweet) | **DELETE** /v1/twitter/retweet | Undo retweet
 *Zernio::TwitterEngagementApi* | [**unfollow_user**](docs/TwitterEngagementApi.md#unfollow_user) | **DELETE** /v1/twitter/follow | Unfollow a user
+*Zernio::UsageApi* | [**get_calls_usage**](docs/UsageApi.md#get_calls_usage) | **GET** /v1/usage/calls | Calling usage (volumes + billable cost)
+*Zernio::UsageApi* | [**get_sms_usage**](docs/UsageApi.md#get_sms_usage) | **GET** /v1/usage/sms | SMS usage (volumes)
+*Zernio::UsageApi* | [**get_usage**](docs/UsageApi.md#get_usage) | **GET** /v1/usage | Get plan and usage snapshot
 *Zernio::UsageApi* | [**get_usage_stats**](docs/UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage stats
 *Zernio::UsageApi* | [**get_x_api_pricing**](docs/UsageApi.md#get_x_api_pricing) | **GET** /v1/billing/x-pricing | Get X/Twitter API pricing table
 *Zernio::UsersApi* | [**get_user**](docs/UsersApi.md#get_user) | **GET** /v1/users/{userId} | Get user
@@ -366,6 +404,17 @@ Class | Method | HTTP request | Description
 *Zernio::ValidateApi* | [**validate_post**](docs/ValidateApi.md#validate_post) | **POST** /v1/tools/validate/post | Validate post content
 *Zernio::ValidateApi* | [**validate_post_length**](docs/ValidateApi.md#validate_post_length) | **POST** /v1/tools/validate/post-length | Validate character count
 *Zernio::ValidateApi* | [**validate_subreddit**](docs/ValidateApi.md#validate_subreddit) | **GET** /v1/tools/validate/subreddit | Check subreddit existence
+*Zernio::VoiceApi* | [**create_voice_call**](docs/VoiceApi.md#create_voice_call) | **POST** /v1/voice/calls | Place an outbound phone call
+*Zernio::VoiceApi* | [**create_voice_web_session**](docs/VoiceApi.md#create_voice_web_session) | **POST** /v1/voice/calls/web | Mint a browser softphone session
+*Zernio::VoiceApi* | [**dial_voice_web_call**](docs/VoiceApi.md#dial_voice_web_call) | **POST** /v1/voice/calls/web/dial | Dial from the browser softphone
+*Zernio::VoiceApi* | [**disable_voice_on_number**](docs/VoiceApi.md#disable_voice_on_number) | **DELETE** /v1/phone-numbers/{id}/voice | Disable phone calling on a number
+*Zernio::VoiceApi* | [**enable_voice_on_number**](docs/VoiceApi.md#enable_voice_on_number) | **POST** /v1/phone-numbers/{id}/voice | Enable phone calling on a number
+*Zernio::VoiceApi* | [**end_voice_call**](docs/VoiceApi.md#end_voice_call) | **POST** /v1/voice/calls/{id}/end | Hang up a live call
+*Zernio::VoiceApi* | [**get_voice_call**](docs/VoiceApi.md#get_voice_call) | **GET** /v1/voice/calls/{id} | Get a phone call
+*Zernio::VoiceApi* | [**get_voice_call_estimate**](docs/VoiceApi.md#get_voice_call_estimate) | **GET** /v1/voice/calls/estimate | Estimate call cost
+*Zernio::VoiceApi* | [**get_voice_call_recording**](docs/VoiceApi.md#get_voice_call_recording) | **GET** /v1/voice/calls/{id}/recording | Get a call recording
+*Zernio::VoiceApi* | [**list_voice_calls**](docs/VoiceApi.md#list_voice_calls) | **GET** /v1/voice/calls | List phone calls
+*Zernio::VoiceApi* | [**transfer_voice_call**](docs/VoiceApi.md#transfer_voice_call) | **POST** /v1/voice/calls/{id}/transfer | Blind-transfer a live call
 *Zernio::WebhooksApi* | [**create_webhook_settings**](docs/WebhooksApi.md#create_webhook_settings) | **POST** /v1/webhooks/settings | Create webhook
 *Zernio::WebhooksApi* | [**delete_webhook_settings**](docs/WebhooksApi.md#delete_webhook_settings) | **DELETE** /v1/webhooks/settings | Delete webhook
 *Zernio::WebhooksApi* | [**get_webhook_logs**](docs/WebhooksApi.md#get_webhook_logs) | **GET** /v1/webhooks/logs | List webhook delivery logs
@@ -405,15 +454,20 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**update_whats_app_group_chat**](docs/WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings
 *Zernio::WhatsAppApi* | [**update_whats_app_template**](docs/WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template
 *Zernio::WhatsAppApi* | [**upload_whats_app_profile_photo**](docs/WhatsAppApi.md#upload_whats_app_profile_photo) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture
-*Zernio::WhatsAppCallingApi* | [**disable_whats_app_calling**](docs/WhatsAppCallingApi.md#disable_whats_app_calling) | **DELETE** /v1/whatsapp/phone-numbers/{id}/calling | Disable calling on a number
-*Zernio::WhatsAppCallingApi* | [**enable_whats_app_calling**](docs/WhatsAppCallingApi.md#enable_whats_app_calling) | **POST** /v1/whatsapp/phone-numbers/{id}/calling | Enable calling on a number
+*Zernio::WhatsAppCallingApi* | [**disable_whats_app_calling**](docs/WhatsAppCallingApi.md#disable_whats_app_calling) | **DELETE** /v1/phone-numbers/{id}/whatsapp/calling | Disable calling on a number
+*Zernio::WhatsAppCallingApi* | [**disable_whats_app_calling_legacy**](docs/WhatsAppCallingApi.md#disable_whats_app_calling_legacy) | **DELETE** /v1/whatsapp/phone-numbers/{id}/calling | Disable calling on a number
+*Zernio::WhatsAppCallingApi* | [**enable_whats_app_calling**](docs/WhatsAppCallingApi.md#enable_whats_app_calling) | **POST** /v1/phone-numbers/{id}/whatsapp/calling | Enable calling on a number
+*Zernio::WhatsAppCallingApi* | [**enable_whats_app_calling_legacy**](docs/WhatsAppCallingApi.md#enable_whats_app_calling_legacy) | **POST** /v1/whatsapp/phone-numbers/{id}/calling | Enable calling on a number
 *Zernio::WhatsAppCallingApi* | [**get_whats_app_call**](docs/WhatsAppCallingApi.md#get_whats_app_call) | **GET** /v1/whatsapp/calls/{callId} | Get a single call
 *Zernio::WhatsAppCallingApi* | [**get_whats_app_call_estimate**](docs/WhatsAppCallingApi.md#get_whats_app_call_estimate) | **GET** /v1/whatsapp/calls/estimate | Estimate per-minute cost
 *Zernio::WhatsAppCallingApi* | [**get_whats_app_call_permissions**](docs/WhatsAppCallingApi.md#get_whats_app_call_permissions) | **GET** /v1/whatsapp/call-permissions | Check call permission
+*Zernio::WhatsAppCallingApi* | [**get_whats_app_call_recording**](docs/WhatsAppCallingApi.md#get_whats_app_call_recording) | **GET** /v1/whatsapp/calls/{callId}/recording | Get a call recording
+*Zernio::WhatsAppCallingApi* | [**get_whats_app_calling**](docs/WhatsAppCallingApi.md#get_whats_app_calling) | **GET** /v1/phone-numbers/{id}/whatsapp/calling | Get calling config for a number
 *Zernio::WhatsAppCallingApi* | [**get_whats_app_calling_config**](docs/WhatsAppCallingApi.md#get_whats_app_calling_config) | **GET** /v1/whatsapp/calling | Get calling config for an account
 *Zernio::WhatsAppCallingApi* | [**initiate_whats_app_call**](docs/WhatsAppCallingApi.md#initiate_whats_app_call) | **POST** /v1/whatsapp/calls | Initiate outbound call
 *Zernio::WhatsAppCallingApi* | [**list_whats_app_calls**](docs/WhatsAppCallingApi.md#list_whats_app_calls) | **GET** /v1/whatsapp/calls | List call history for an account
-*Zernio::WhatsAppCallingApi* | [**update_whats_app_calling**](docs/WhatsAppCallingApi.md#update_whats_app_calling) | **PATCH** /v1/whatsapp/phone-numbers/{id}/calling | Update calling config
+*Zernio::WhatsAppCallingApi* | [**update_whats_app_calling**](docs/WhatsAppCallingApi.md#update_whats_app_calling) | **PATCH** /v1/phone-numbers/{id}/whatsapp/calling | Update calling config
+*Zernio::WhatsAppCallingApi* | [**update_whats_app_calling_legacy**](docs/WhatsAppCallingApi.md#update_whats_app_calling_legacy) | **PATCH** /v1/whatsapp/phone-numbers/{id}/calling | Update calling config
 *Zernio::WhatsAppFlowsApi* | [**create_whats_app_flow**](docs/WhatsAppFlowsApi.md#create_whats_app_flow) | **POST** /v1/whatsapp/flows | Create flow
 *Zernio::WhatsAppFlowsApi* | [**delete_whats_app_flow**](docs/WhatsAppFlowsApi.md#delete_whats_app_flow) | **DELETE** /v1/whatsapp/flows/{flowId} | Delete flow
 *Zernio::WhatsAppFlowsApi* | [**deprecate_whats_app_flow**](docs/WhatsAppFlowsApi.md#deprecate_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/deprecate | Deprecate flow
@@ -515,6 +569,8 @@ Class | Method | HTTP request | Description
  - [Zernio::AnalyticsSinglePostResponseMediaItemsInner](docs/AnalyticsSinglePostResponseMediaItemsInner.md)
  - [Zernio::ApiKey](docs/ApiKey.md)
  - [Zernio::ApiKeyProfileIdsInner](docs/ApiKeyProfileIdsInner.md)
+ - [Zernio::AppealSmsRegistration200Response](docs/AppealSmsRegistration200Response.md)
+ - [Zernio::AppealSmsRegistrationRequest](docs/AppealSmsRegistrationRequest.md)
  - [Zernio::ApproveWhatsAppGroupJoinRequestsRequest](docs/ApproveWhatsAppGroupJoinRequestsRequest.md)
  - [Zernio::ArchiveLeadForm200Response](docs/ArchiveLeadForm200Response.md)
  - [Zernio::BatchGetGoogleBusinessReviews200Response](docs/BatchGetGoogleBusinessReviews200Response.md)
@@ -545,8 +601,16 @@ Class | Method | HTTP request | Description
  - [Zernio::BulkUploadResultRateLimitedAccountsInner](docs/BulkUploadResultRateLimitedAccountsInner.md)
  - [Zernio::BulkUploadResultResultsInner](docs/BulkUploadResultResultsInner.md)
  - [Zernio::BusinessCenter](docs/BusinessCenter.md)
+ - [Zernio::CallRecord](docs/CallRecord.md)
+ - [Zernio::CallRecordBilling](docs/CallRecordBilling.md)
+ - [Zernio::CallRecordCallErrorsInner](docs/CallRecordCallErrorsInner.md)
+ - [Zernio::CallRecordTranscriptInner](docs/CallRecordTranscriptInner.md)
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
- - [Zernio::CheckWhatsAppNumberAvailability200Response](docs/CheckWhatsAppNumberAvailability200Response.md)
+ - [Zernio::CancelPhoneNumberPortIn200Response](docs/CancelPhoneNumberPortIn200Response.md)
+ - [Zernio::CheckPhoneNumberAvailability200Response](docs/CheckPhoneNumberAvailability200Response.md)
+ - [Zernio::CheckPhoneNumberPortability200Response](docs/CheckPhoneNumberPortability200Response.md)
+ - [Zernio::CheckPhoneNumberPortability200ResponseResultsInner](docs/CheckPhoneNumberPortability200ResponseResultsInner.md)
+ - [Zernio::CheckPhoneNumberPortabilityRequest](docs/CheckPhoneNumberPortabilityRequest.md)
  - [Zernio::CompleteGoogleBusinessVerificationRequest](docs/CompleteGoogleBusinessVerificationRequest.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
  - [Zernio::CompleteWhatsAppPhoneSelection200Response](docs/CompleteWhatsAppPhoneSelection200Response.md)
@@ -626,6 +690,13 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateLeadFormRequest](docs/CreateLeadFormRequest.md)
  - [Zernio::CreateLeadFormRequestQuestionsInner](docs/CreateLeadFormRequestQuestionsInner.md)
  - [Zernio::CreateLeadFormRequestQuestionsInnerOptionsInner](docs/CreateLeadFormRequestQuestionsInnerOptionsInner.md)
+ - [Zernio::CreatePhoneNumberKycLink200Response](docs/CreatePhoneNumberKycLink200Response.md)
+ - [Zernio::CreatePhoneNumberKycLinkRequest](docs/CreatePhoneNumberKycLinkRequest.md)
+ - [Zernio::CreatePhoneNumberKycLinkRequestBranding](docs/CreatePhoneNumberKycLinkRequestBranding.md)
+ - [Zernio::CreatePhoneNumberPortIn201Response](docs/CreatePhoneNumberPortIn201Response.md)
+ - [Zernio::CreatePhoneNumberPortIn201ResponseOrdersInner](docs/CreatePhoneNumberPortIn201ResponseOrdersInner.md)
+ - [Zernio::CreatePhoneNumberPortInRequest](docs/CreatePhoneNumberPortInRequest.md)
+ - [Zernio::CreatePhoneNumberPortInRequestEndUser](docs/CreatePhoneNumberPortInRequestEndUser.md)
  - [Zernio::CreatePost409Response](docs/CreatePost409Response.md)
  - [Zernio::CreatePost409ResponseDetails](docs/CreatePost409ResponseDetails.md)
  - [Zernio::CreatePost429Response](docs/CreatePost429Response.md)
@@ -669,6 +740,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateTestLeadRequestFieldDataInner](docs/CreateTestLeadRequestFieldDataInner.md)
  - [Zernio::CreateTrackingTag201Response](docs/CreateTrackingTag201Response.md)
  - [Zernio::CreateTrackingTagRequest](docs/CreateTrackingTagRequest.md)
+ - [Zernio::CreateVoiceCall200Response](docs/CreateVoiceCall200Response.md)
+ - [Zernio::CreateVoiceCallRequest](docs/CreateVoiceCallRequest.md)
+ - [Zernio::CreateVoiceWebSession200Response](docs/CreateVoiceWebSession200Response.md)
  - [Zernio::CreateWebhookSettingsRequest](docs/CreateWebhookSettingsRequest.md)
  - [Zernio::CreateWhatsAppDataset200Response](docs/CreateWhatsAppDataset200Response.md)
  - [Zernio::CreateWhatsAppFlow200Response](docs/CreateWhatsAppFlow200Response.md)
@@ -678,9 +752,6 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateWhatsAppGroupChat201ResponseGroup](docs/CreateWhatsAppGroupChat201ResponseGroup.md)
  - [Zernio::CreateWhatsAppGroupChatRequest](docs/CreateWhatsAppGroupChatRequest.md)
  - [Zernio::CreateWhatsAppGroupInviteLink200Response](docs/CreateWhatsAppGroupInviteLink200Response.md)
- - [Zernio::CreateWhatsAppNumberKycLink200Response](docs/CreateWhatsAppNumberKycLink200Response.md)
- - [Zernio::CreateWhatsAppNumberKycLinkRequest](docs/CreateWhatsAppNumberKycLinkRequest.md)
- - [Zernio::CreateWhatsAppNumberKycLinkRequestBranding](docs/CreateWhatsAppNumberKycLinkRequestBranding.md)
  - [Zernio::CreateWhatsAppSandboxSession200Response](docs/CreateWhatsAppSandboxSession200Response.md)
  - [Zernio::CreateWhatsAppSandboxSessionRequest](docs/CreateWhatsAppSandboxSessionRequest.md)
  - [Zernio::CreateWhatsAppTemplate200Response](docs/CreateWhatsAppTemplate200Response.md)
@@ -704,12 +775,15 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
  - [Zernio::DeleteWhatsappBusinessUsernameRequest](docs/DeleteWhatsappBusinessUsernameRequest.md)
+ - [Zernio::DialVoiceWebCall200Response](docs/DialVoiceWebCall200Response.md)
+ - [Zernio::DialVoiceWebCallRequest](docs/DialVoiceWebCallRequest.md)
+ - [Zernio::DisableSmsOnNumber200Response](docs/DisableSmsOnNumber200Response.md)
+ - [Zernio::DisableVoiceOnNumber200Response](docs/DisableVoiceOnNumber200Response.md)
  - [Zernio::DiscordPlatformData](docs/DiscordPlatformData.md)
  - [Zernio::DiscordPlatformDataEmbedsInner](docs/DiscordPlatformDataEmbedsInner.md)
  - [Zernio::DiscordPlatformDataEmbedsInnerAuthor](docs/DiscordPlatformDataEmbedsInnerAuthor.md)
  - [Zernio::DiscordPlatformDataEmbedsInnerFieldsInner](docs/DiscordPlatformDataEmbedsInnerFieldsInner.md)
  - [Zernio::DiscordPlatformDataEmbedsInnerFooter](docs/DiscordPlatformDataEmbedsInnerFooter.md)
- - [Zernio::DiscordPlatformDataEmbedsInnerImage](docs/DiscordPlatformDataEmbedsInnerImage.md)
  - [Zernio::DiscordPlatformDataPoll](docs/DiscordPlatformDataPoll.md)
  - [Zernio::DiscordPlatformDataPollAnswersInner](docs/DiscordPlatformDataPollAnswersInner.md)
  - [Zernio::DiscordPlatformDataPollAnswersInnerPollMedia](docs/DiscordPlatformDataPollAnswersInnerPollMedia.md)
@@ -729,8 +803,17 @@ Class | Method | HTTP request | Description
  - [Zernio::EditInboxMessageRequestReplyMarkupKeyboardInnerInner](docs/EditInboxMessageRequestReplyMarkupKeyboardInnerInner.md)
  - [Zernio::EditPost200Response](docs/EditPost200Response.md)
  - [Zernio::EditPostRequest](docs/EditPostRequest.md)
- - [Zernio::EnableWhatsAppCalling200Response](docs/EnableWhatsAppCalling200Response.md)
- - [Zernio::EnableWhatsAppCallingRequest](docs/EnableWhatsAppCallingRequest.md)
+ - [Zernio::EnableSmsOnNumber200Response](docs/EnableSmsOnNumber200Response.md)
+ - [Zernio::EnableSmsOnNumber200ResponseReusable](docs/EnableSmsOnNumber200ResponseReusable.md)
+ - [Zernio::EnableVoiceOnNumber200Response](docs/EnableVoiceOnNumber200Response.md)
+ - [Zernio::EnableVoiceOnNumber200ResponseBusinessHoursInner](docs/EnableVoiceOnNumber200ResponseBusinessHoursInner.md)
+ - [Zernio::EnableVoiceOnNumber200ResponseIvrOptionsInner](docs/EnableVoiceOnNumber200ResponseIvrOptionsInner.md)
+ - [Zernio::EnableVoiceOnNumberRequest](docs/EnableVoiceOnNumberRequest.md)
+ - [Zernio::EnableVoiceOnNumberRequestBusinessHoursInner](docs/EnableVoiceOnNumberRequestBusinessHoursInner.md)
+ - [Zernio::EnableVoiceOnNumberRequestIvrOptionsInner](docs/EnableVoiceOnNumberRequestIvrOptionsInner.md)
+ - [Zernio::EnableWhatsAppCallingLegacy200Response](docs/EnableWhatsAppCallingLegacy200Response.md)
+ - [Zernio::EnableWhatsAppCallingLegacyRequest](docs/EnableWhatsAppCallingLegacyRequest.md)
+ - [Zernio::EndVoiceCall200Response](docs/EndVoiceCall200Response.md)
  - [Zernio::EnrollContacts200Response](docs/EnrollContacts200Response.md)
  - [Zernio::EnrollContactsRequest](docs/EnrollContactsRequest.md)
  - [Zernio::ErrorResponse](docs/ErrorResponse.md)
@@ -790,6 +873,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetBroadcast200ResponseBroadcast](docs/GetBroadcast200ResponseBroadcast.md)
  - [Zernio::GetBroadcast200ResponseBroadcastMessage](docs/GetBroadcast200ResponseBroadcastMessage.md)
  - [Zernio::GetBroadcast200ResponseBroadcastTemplate](docs/GetBroadcast200ResponseBroadcastTemplate.md)
+ - [Zernio::GetCall200Response](docs/GetCall200Response.md)
+ - [Zernio::GetCallsUsage200Response](docs/GetCallsUsage200Response.md)
+ - [Zernio::GetCallsUsage200ResponseGroupsInner](docs/GetCallsUsage200ResponseGroupsInner.md)
+ - [Zernio::GetCallsUsage200ResponseTotals](docs/GetCallsUsage200ResponseTotals.md)
  - [Zernio::GetCampaignAnalytics200Response](docs/GetCampaignAnalytics200Response.md)
  - [Zernio::GetCampaignAnalytics200ResponseAnalytics](docs/GetCampaignAnalytics200ResponseAnalytics.md)
  - [Zernio::GetCampaignAnalytics200ResponseAnalyticsDailyInner](docs/GetCampaignAnalytics200ResponseAnalyticsDailyInner.md)
@@ -930,6 +1017,14 @@ Class | Method | HTTP request | Description
  - [Zernio::GetMessengerMenu200Response](docs/GetMessengerMenu200Response.md)
  - [Zernio::GetPendingOAuthData200Response](docs/GetPendingOAuthData200Response.md)
  - [Zernio::GetPendingOAuthData200ResponseOrganizationsInner](docs/GetPendingOAuthData200ResponseOrganizationsInner.md)
+ - [Zernio::GetPhoneNumber200Response](docs/GetPhoneNumber200Response.md)
+ - [Zernio::GetPhoneNumber200ResponsePhoneNumber](docs/GetPhoneNumber200ResponsePhoneNumber.md)
+ - [Zernio::GetPhoneNumberKycForm200Response](docs/GetPhoneNumberKycForm200Response.md)
+ - [Zernio::GetPhoneNumberKycForm200ResponseFieldsInner](docs/GetPhoneNumberKycForm200ResponseFieldsInner.md)
+ - [Zernio::GetPhoneNumberKycForm200ResponseReusable](docs/GetPhoneNumberKycForm200ResponseReusable.md)
+ - [Zernio::GetPhoneNumberKycForm200ResponseReusableDetailsInner](docs/GetPhoneNumberKycForm200ResponseReusableDetailsInner.md)
+ - [Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInner](docs/GetPhoneNumberKycForm200ResponseReusableOptionsInner.md)
+ - [Zernio::GetPhoneNumberRemediation200Response](docs/GetPhoneNumberRemediation200Response.md)
  - [Zernio::GetPinterestBoards200Response](docs/GetPinterestBoards200Response.md)
  - [Zernio::GetPinterestBoards200ResponseBoardsInner](docs/GetPinterestBoards200ResponseBoardsInner.md)
  - [Zernio::GetPostTimeline200Response](docs/GetPostTimeline200Response.md)
@@ -947,6 +1042,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetSequence200ResponseSequence](docs/GetSequence200ResponseSequence.md)
  - [Zernio::GetSequence200ResponseSequenceStepsInner](docs/GetSequence200ResponseSequenceStepsInner.md)
  - [Zernio::GetSequence200ResponseSequenceStepsInnerTemplate](docs/GetSequence200ResponseSequenceStepsInnerTemplate.md)
+ - [Zernio::GetSmsRegistration200Response](docs/GetSmsRegistration200Response.md)
+ - [Zernio::GetSmsUsage200Response](docs/GetSmsUsage200Response.md)
+ - [Zernio::GetSmsUsage200ResponseGroupsInner](docs/GetSmsUsage200ResponseGroupsInner.md)
+ - [Zernio::GetSmsUsage200ResponseTotals](docs/GetSmsUsage200ResponseTotals.md)
  - [Zernio::GetTelegramCommands200Response](docs/GetTelegramCommands200Response.md)
  - [Zernio::GetTelegramCommands200ResponseDataInner](docs/GetTelegramCommands200ResponseDataInner.md)
  - [Zernio::GetTelegramConnectStatus200Response](docs/GetTelegramConnectStatus200Response.md)
@@ -959,6 +1058,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetTrackingTagStats200ResponseStats](docs/GetTrackingTagStats200ResponseStats.md)
  - [Zernio::GetUser200Response](docs/GetUser200Response.md)
  - [Zernio::GetUser200ResponseUser](docs/GetUser200ResponseUser.md)
+ - [Zernio::GetVoiceCall200Response](docs/GetVoiceCall200Response.md)
+ - [Zernio::GetVoiceCallEstimate200Response](docs/GetVoiceCallEstimate200Response.md)
+ - [Zernio::GetVoiceCallEstimate200ResponseBreakdown](docs/GetVoiceCallEstimate200ResponseBreakdown.md)
  - [Zernio::GetWebhookLogs200Response](docs/GetWebhookLogs200Response.md)
  - [Zernio::GetWebhookLogs200ResponsePagination](docs/GetWebhookLogs200ResponsePagination.md)
  - [Zernio::GetWebhookSettings200Response](docs/GetWebhookSettings200Response.md)
@@ -973,6 +1075,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppCallPermissions200Response](docs/GetWhatsAppCallPermissions200Response.md)
  - [Zernio::GetWhatsAppCallPermissions200ResponseActionsInner](docs/GetWhatsAppCallPermissions200ResponseActionsInner.md)
  - [Zernio::GetWhatsAppCallPermissions200ResponsePermission](docs/GetWhatsAppCallPermissions200ResponsePermission.md)
+ - [Zernio::GetWhatsAppCallRecording200Response](docs/GetWhatsAppCallRecording200Response.md)
+ - [Zernio::GetWhatsAppCalling200Response](docs/GetWhatsAppCalling200Response.md)
  - [Zernio::GetWhatsAppCallingConfig200Response](docs/GetWhatsAppCallingConfig200Response.md)
  - [Zernio::GetWhatsAppDataset200Response](docs/GetWhatsAppDataset200Response.md)
  - [Zernio::GetWhatsAppDisplayName200Response](docs/GetWhatsAppDisplayName200Response.md)
@@ -995,17 +1099,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppNumberInfo200ResponseWaba](docs/GetWhatsAppNumberInfo200ResponseWaba.md)
  - [Zernio::GetWhatsAppNumberKycForm200Response](docs/GetWhatsAppNumberKycForm200Response.md)
  - [Zernio::GetWhatsAppNumberKycForm200ResponseFieldsInner](docs/GetWhatsAppNumberKycForm200ResponseFieldsInner.md)
- - [Zernio::GetWhatsAppNumberKycForm200ResponseReusable](docs/GetWhatsAppNumberKycForm200ResponseReusable.md)
- - [Zernio::GetWhatsAppNumberKycForm200ResponseReusableDetailsInner](docs/GetWhatsAppNumberKycForm200ResponseReusableDetailsInner.md)
- - [Zernio::GetWhatsAppNumberKycForm200ResponseReusableOptionsInner](docs/GetWhatsAppNumberKycForm200ResponseReusableOptionsInner.md)
  - [Zernio::GetWhatsAppNumberRemediation200Response](docs/GetWhatsAppNumberRemediation200Response.md)
- - [Zernio::GetWhatsAppPhoneNumber200Response](docs/GetWhatsAppPhoneNumber200Response.md)
- - [Zernio::GetWhatsAppPhoneNumber200ResponsePhoneNumber](docs/GetWhatsAppPhoneNumber200ResponsePhoneNumber.md)
- - [Zernio::GetWhatsAppPhoneNumbers200Response](docs/GetWhatsAppPhoneNumbers200Response.md)
- - [Zernio::GetWhatsAppPhoneNumbers200ResponseConnectedInner](docs/GetWhatsAppPhoneNumbers200ResponseConnectedInner.md)
- - [Zernio::GetWhatsAppPhoneNumbers200ResponseNumbersInner](docs/GetWhatsAppPhoneNumbers200ResponseNumbersInner.md)
- - [Zernio::GetWhatsAppPhoneNumbers200ResponseSandbox](docs/GetWhatsAppPhoneNumbers200ResponseSandbox.md)
- - [Zernio::GetWhatsAppPhoneNumbers200ResponseSandboxTemplate](docs/GetWhatsAppPhoneNumbers200ResponseSandboxTemplate.md)
  - [Zernio::GetWhatsAppTemplate200Response](docs/GetWhatsAppTemplate200Response.md)
  - [Zernio::GetWhatsAppTemplate200ResponseTemplate](docs/GetWhatsAppTemplate200ResponseTemplate.md)
  - [Zernio::GetWhatsAppTemplates200Response](docs/GetWhatsAppTemplates200Response.md)
@@ -1087,6 +1181,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListBroadcastRecipients200ResponseRecipientsInner](docs/ListBroadcastRecipients200ResponseRecipientsInner.md)
  - [Zernio::ListBroadcasts200Response](docs/ListBroadcasts200Response.md)
  - [Zernio::ListBroadcasts200ResponseBroadcastsInner](docs/ListBroadcasts200ResponseBroadcastsInner.md)
+ - [Zernio::ListCalls200Response](docs/ListCalls200Response.md)
+ - [Zernio::ListCalls200ResponseCallsInner](docs/ListCalls200ResponseCallsInner.md)
  - [Zernio::ListCommentAutomationLogs200Response](docs/ListCommentAutomationLogs200Response.md)
  - [Zernio::ListCommentAutomations200Response](docs/ListCommentAutomations200Response.md)
  - [Zernio::ListCommentAutomations200ResponseAutomationsInner](docs/ListCommentAutomations200ResponseAutomationsInner.md)
@@ -1151,6 +1247,15 @@ Class | Method | HTTP request | Description
  - [Zernio::ListLogs200Response](docs/ListLogs200Response.md)
  - [Zernio::ListLogs200ResponseLogsInner](docs/ListLogs200ResponseLogsInner.md)
  - [Zernio::ListLogs200ResponsePagination](docs/ListLogs200ResponsePagination.md)
+ - [Zernio::ListPhoneNumberCountries200Response](docs/ListPhoneNumberCountries200Response.md)
+ - [Zernio::ListPhoneNumberCountries200ResponseCountriesInner](docs/ListPhoneNumberCountries200ResponseCountriesInner.md)
+ - [Zernio::ListPhoneNumberPortIns200Response](docs/ListPhoneNumberPortIns200Response.md)
+ - [Zernio::ListPhoneNumberPortIns200ResponseOrdersInner](docs/ListPhoneNumberPortIns200ResponseOrdersInner.md)
+ - [Zernio::ListPhoneNumbers200Response](docs/ListPhoneNumbers200Response.md)
+ - [Zernio::ListPhoneNumbers200ResponseConnectedInner](docs/ListPhoneNumbers200ResponseConnectedInner.md)
+ - [Zernio::ListPhoneNumbers200ResponseNumbersInner](docs/ListPhoneNumbers200ResponseNumbersInner.md)
+ - [Zernio::ListPhoneNumbers200ResponseSandbox](docs/ListPhoneNumbers200ResponseSandbox.md)
+ - [Zernio::ListPhoneNumbers200ResponseSandboxTemplate](docs/ListPhoneNumbers200ResponseSandboxTemplate.md)
  - [Zernio::ListPinterestBoardsForSelection200Response](docs/ListPinterestBoardsForSelection200Response.md)
  - [Zernio::ListPinterestBoardsForSelection200ResponseBoardsInner](docs/ListPinterestBoardsForSelection200ResponseBoardsInner.md)
  - [Zernio::ListQueueSlots200Response](docs/ListQueueSlots200Response.md)
@@ -1159,12 +1264,18 @@ Class | Method | HTTP request | Description
  - [Zernio::ListSequenceEnrollments200ResponseEnrollmentsInner](docs/ListSequenceEnrollments200ResponseEnrollmentsInner.md)
  - [Zernio::ListSequences200Response](docs/ListSequences200Response.md)
  - [Zernio::ListSequences200ResponseSequencesInner](docs/ListSequences200ResponseSequencesInner.md)
+ - [Zernio::ListSmsOptOuts200Response](docs/ListSmsOptOuts200Response.md)
+ - [Zernio::ListSmsOptOuts200ResponseOptOutsInner](docs/ListSmsOptOuts200ResponseOptOutsInner.md)
+ - [Zernio::ListSmsRegistrations200Response](docs/ListSmsRegistrations200Response.md)
+ - [Zernio::ListSmsRegistrations200ResponseRegistrationsInner](docs/ListSmsRegistrations200ResponseRegistrationsInner.md)
+ - [Zernio::ListSmsRegistrations200ResponseRegistrationsInnerThroughput](docs/ListSmsRegistrations200ResponseRegistrationsInnerThroughput.md)
  - [Zernio::ListSnapchatProfiles200Response](docs/ListSnapchatProfiles200Response.md)
  - [Zernio::ListSnapchatProfiles200ResponsePublicProfilesInner](docs/ListSnapchatProfiles200ResponsePublicProfilesInner.md)
  - [Zernio::ListTrackingTagSharedAccounts200Response](docs/ListTrackingTagSharedAccounts200Response.md)
  - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
  - [Zernio::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
+ - [Zernio::ListVoiceCalls200Response](docs/ListVoiceCalls200Response.md)
  - [Zernio::ListWhatsAppCalls200Response](docs/ListWhatsAppCalls200Response.md)
  - [Zernio::ListWhatsAppCalls200ResponseCallsInner](docs/ListWhatsAppCalls200ResponseCallsInner.md)
  - [Zernio::ListWhatsAppCalls200ResponseCallsInnerBilling](docs/ListWhatsAppCalls200ResponseCallsInnerBilling.md)
@@ -1196,6 +1307,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListWorkflowVersions200ResponseVersionsInner](docs/ListWorkflowVersions200ResponseVersionsInner.md)
  - [Zernio::ListWorkflows200Response](docs/ListWorkflows200Response.md)
  - [Zernio::ListWorkflows200ResponseWorkflowsInner](docs/ListWorkflows200ResponseWorkflowsInner.md)
+ - [Zernio::LookupSmsNumber200Response](docs/LookupSmsNumber200Response.md)
  - [Zernio::MarkConversationRead200Response](docs/MarkConversationRead200Response.md)
  - [Zernio::MediaItem](docs/MediaItem.md)
  - [Zernio::MediaUploadResponse](docs/MediaUploadResponse.md)
@@ -1236,13 +1348,14 @@ Class | Method | HTTP request | Description
  - [Zernio::ProfileGetResponse](docs/ProfileGetResponse.md)
  - [Zernio::ProfileUpdateResponse](docs/ProfileUpdateResponse.md)
  - [Zernio::ProfilesListResponse](docs/ProfilesListResponse.md)
- - [Zernio::PurchaseWhatsAppPhoneNumber200Response](docs/PurchaseWhatsAppPhoneNumber200Response.md)
- - [Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf.md)
- - [Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf1](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf1.md)
- - [Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf1PhoneNumber](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf1PhoneNumber.md)
- - [Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf2](docs/PurchaseWhatsAppPhoneNumber200ResponseOneOf2.md)
- - [Zernio::PurchaseWhatsAppPhoneNumber202Response](docs/PurchaseWhatsAppPhoneNumber202Response.md)
- - [Zernio::PurchaseWhatsAppPhoneNumber409Response](docs/PurchaseWhatsAppPhoneNumber409Response.md)
+ - [Zernio::PurchasePhoneNumber200Response](docs/PurchasePhoneNumber200Response.md)
+ - [Zernio::PurchasePhoneNumber200ResponseOneOf](docs/PurchasePhoneNumber200ResponseOneOf.md)
+ - [Zernio::PurchasePhoneNumber200ResponseOneOf1](docs/PurchasePhoneNumber200ResponseOneOf1.md)
+ - [Zernio::PurchasePhoneNumber200ResponseOneOf1PhoneNumber](docs/PurchasePhoneNumber200ResponseOneOf1PhoneNumber.md)
+ - [Zernio::PurchasePhoneNumber200ResponseOneOf2](docs/PurchasePhoneNumber200ResponseOneOf2.md)
+ - [Zernio::PurchasePhoneNumber202Response](docs/PurchasePhoneNumber202Response.md)
+ - [Zernio::PurchasePhoneNumber409Response](docs/PurchasePhoneNumber409Response.md)
+ - [Zernio::PurchasePhoneNumberRequest](docs/PurchasePhoneNumberRequest.md)
  - [Zernio::PurchaseWhatsAppPhoneNumberRequest](docs/PurchaseWhatsAppPhoneNumberRequest.md)
  - [Zernio::QueueDeleteResponse](docs/QueueDeleteResponse.md)
  - [Zernio::QueueNextSlotResponse](docs/QueueNextSlotResponse.md)
@@ -1256,13 +1369,13 @@ Class | Method | HTTP request | Description
  - [Zernio::RedditPlatformData](docs/RedditPlatformData.md)
  - [Zernio::RedditPost](docs/RedditPost.md)
  - [Zernio::RejectWhatsAppGroupJoinRequestsRequest](docs/RejectWhatsAppGroupJoinRequestsRequest.md)
- - [Zernio::ReleaseWhatsAppPhoneNumber200Response](docs/ReleaseWhatsAppPhoneNumber200Response.md)
- - [Zernio::ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber](docs/ReleaseWhatsAppPhoneNumber200ResponsePhoneNumber.md)
- - [Zernio::RemediateWhatsAppNumber200Response](docs/RemediateWhatsAppNumber200Response.md)
- - [Zernio::RemediateWhatsAppNumber200ResponsePhoneNumber](docs/RemediateWhatsAppNumber200ResponsePhoneNumber.md)
- - [Zernio::RemediateWhatsAppNumberRequest](docs/RemediateWhatsAppNumberRequest.md)
- - [Zernio::RemediateWhatsAppNumberRequestDocumentsInner](docs/RemediateWhatsAppNumberRequestDocumentsInner.md)
- - [Zernio::RemediateWhatsAppNumberRequestDocumentsInnerOneOf](docs/RemediateWhatsAppNumberRequestDocumentsInnerOneOf.md)
+ - [Zernio::ReleasePhoneNumber200Response](docs/ReleasePhoneNumber200Response.md)
+ - [Zernio::ReleasePhoneNumber200ResponsePhoneNumber](docs/ReleasePhoneNumber200ResponsePhoneNumber.md)
+ - [Zernio::RemediatePhoneNumber200Response](docs/RemediatePhoneNumber200Response.md)
+ - [Zernio::RemediatePhoneNumber200ResponsePhoneNumber](docs/RemediatePhoneNumber200ResponsePhoneNumber.md)
+ - [Zernio::RemediatePhoneNumberRequest](docs/RemediatePhoneNumberRequest.md)
+ - [Zernio::RemediatePhoneNumberRequestDocumentsInner](docs/RemediatePhoneNumberRequestDocumentsInner.md)
+ - [Zernio::RemediatePhoneNumberRequestDocumentsInnerOneOf](docs/RemediatePhoneNumberRequestDocumentsInnerOneOf.md)
  - [Zernio::RemoveBookmark200Response](docs/RemoveBookmark200Response.md)
  - [Zernio::RemoveConversionAssociations200Response](docs/RemoveConversionAssociations200Response.md)
  - [Zernio::RemoveDiscordMemberRole200Response](docs/RemoveDiscordMemberRole200Response.md)
@@ -1278,6 +1391,10 @@ Class | Method | HTTP request | Description
  - [Zernio::RestoreWorkflowVersion200ResponseWorkflow](docs/RestoreWorkflowVersion200ResponseWorkflow.md)
  - [Zernio::RetweetPost200Response](docs/RetweetPost200Response.md)
  - [Zernio::RetweetPostRequest](docs/RetweetPostRequest.md)
+ - [Zernio::ReuseSmsRegistrationForNumber200Response](docs/ReuseSmsRegistrationForNumber200Response.md)
+ - [Zernio::ReviewPhoneNumberKycPacket200Response](docs/ReviewPhoneNumberKycPacket200Response.md)
+ - [Zernio::ReviewPhoneNumberKycPacket200ResponseAdvisoriesInner](docs/ReviewPhoneNumberKycPacket200ResponseAdvisoriesInner.md)
+ - [Zernio::ReviewPhoneNumberKycPacketRequest](docs/ReviewPhoneNumberKycPacketRequest.md)
  - [Zernio::ReviewWebhookReview](docs/ReviewWebhookReview.md)
  - [Zernio::ReviewWebhookReviewReply](docs/ReviewWebhookReviewReply.md)
  - [Zernio::ReviewWebhookReviewReviewer](docs/ReviewWebhookReviewReviewer.md)
@@ -1289,6 +1406,8 @@ Class | Method | HTTP request | Description
  - [Zernio::SearchAdInterests200ResponseInterestsInner](docs/SearchAdInterests200ResponseInterestsInner.md)
  - [Zernio::SearchAdTargeting200Response](docs/SearchAdTargeting200Response.md)
  - [Zernio::SearchAdTargeting200ResponseResultsInner](docs/SearchAdTargeting200ResponseResultsInner.md)
+ - [Zernio::SearchAvailablePhoneNumbers200Response](docs/SearchAvailablePhoneNumbers200Response.md)
+ - [Zernio::SearchAvailablePhoneNumbers200ResponseNumbersInner](docs/SearchAvailablePhoneNumbers200ResponseNumbersInner.md)
  - [Zernio::SearchAvailableWhatsAppNumbers200Response](docs/SearchAvailableWhatsAppNumbers200Response.md)
  - [Zernio::SearchAvailableWhatsAppNumbers200ResponseNumbersInner](docs/SearchAvailableWhatsAppNumbers200ResponseNumbersInner.md)
  - [Zernio::SearchReddit200Response](docs/SearchReddit200Response.md)
@@ -1361,6 +1480,8 @@ Class | Method | HTTP request | Description
  - [Zernio::SendPrivateReplyToCommentRequestButtonsInnerOneOf1](docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf1.md)
  - [Zernio::SendPrivateReplyToCommentRequestButtonsInnerOneOf2](docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf2.md)
  - [Zernio::SendPrivateReplyToCommentRequestQuickRepliesInner](docs/SendPrivateReplyToCommentRequestQuickRepliesInner.md)
+ - [Zernio::SendSms200Response](docs/SendSms200Response.md)
+ - [Zernio::SendSmsRequest](docs/SendSmsRequest.md)
  - [Zernio::SendTypingIndicatorRequest](docs/SendTypingIndicatorRequest.md)
  - [Zernio::SendWhatsAppConversion200Response](docs/SendWhatsAppConversion200Response.md)
  - [Zernio::SendWhatsAppConversionRequest](docs/SendWhatsAppConversionRequest.md)
@@ -1376,6 +1497,8 @@ Class | Method | HTTP request | Description
  - [Zernio::SetTelegramCommandsRequestCommandsInner](docs/SetTelegramCommandsRequestCommandsInner.md)
  - [Zernio::SetWhatsappBusinessUsername200Response](docs/SetWhatsappBusinessUsername200Response.md)
  - [Zernio::SetWhatsappBusinessUsernameRequest](docs/SetWhatsappBusinessUsernameRequest.md)
+ - [Zernio::ShareSmsRegistration200Response](docs/ShareSmsRegistration200Response.md)
+ - [Zernio::ShareSmsRegistrationRequest](docs/ShareSmsRegistrationRequest.md)
  - [Zernio::SharedAdAccount](docs/SharedAdAccount.md)
  - [Zernio::SnapchatPlatformData](docs/SnapchatPlatformData.md)
  - [Zernio::SocialAccount](docs/SocialAccount.md)
@@ -1383,14 +1506,22 @@ Class | Method | HTTP request | Description
  - [Zernio::StartGoogleBusinessVerification200Response](docs/StartGoogleBusinessVerification200Response.md)
  - [Zernio::StartGoogleBusinessVerification200ResponseVerification](docs/StartGoogleBusinessVerification200ResponseVerification.md)
  - [Zernio::StartGoogleBusinessVerificationRequest](docs/StartGoogleBusinessVerificationRequest.md)
- - [Zernio::SubmitWhatsAppNumberKyc200Response](docs/SubmitWhatsAppNumberKyc200Response.md)
- - [Zernio::SubmitWhatsAppNumberKyc200ResponseNumbersInner](docs/SubmitWhatsAppNumberKyc200ResponseNumbersInner.md)
- - [Zernio::SubmitWhatsAppNumberKyc200ResponsePhoneNumber](docs/SubmitWhatsAppNumberKyc200ResponsePhoneNumber.md)
+ - [Zernio::StartSmsRegistration200Response](docs/StartSmsRegistration200Response.md)
+ - [Zernio::StartSmsRegistrationRequest](docs/StartSmsRegistrationRequest.md)
+ - [Zernio::StartSmsRegistrationRequestBrand](docs/StartSmsRegistrationRequestBrand.md)
+ - [Zernio::StartSmsRegistrationRequestCampaign](docs/StartSmsRegistrationRequestCampaign.md)
+ - [Zernio::StartSmsRegistrationRequestTollFree](docs/StartSmsRegistrationRequestTollFree.md)
+ - [Zernio::SubmitPhoneNumberKyc200Response](docs/SubmitPhoneNumberKyc200Response.md)
+ - [Zernio::SubmitPhoneNumberKyc200ResponseNumbersInner](docs/SubmitPhoneNumberKyc200ResponseNumbersInner.md)
+ - [Zernio::SubmitPhoneNumberKyc200ResponsePhoneNumber](docs/SubmitPhoneNumberKyc200ResponsePhoneNumber.md)
+ - [Zernio::SubmitPhoneNumberKycRequest](docs/SubmitPhoneNumberKycRequest.md)
+ - [Zernio::SubmitPhoneNumberKycRequestAddress](docs/SubmitPhoneNumberKycRequestAddress.md)
+ - [Zernio::SubmitPhoneNumberKycRequestDocumentsInner](docs/SubmitPhoneNumberKycRequestDocumentsInner.md)
+ - [Zernio::SubmitPhoneNumberKycRequestDocumentsInnerOneOf](docs/SubmitPhoneNumberKycRequestDocumentsInnerOneOf.md)
+ - [Zernio::SubmitPhoneNumberKycRequestDocumentsInnerOneOf1](docs/SubmitPhoneNumberKycRequestDocumentsInnerOneOf1.md)
  - [Zernio::SubmitWhatsAppNumberKycRequest](docs/SubmitWhatsAppNumberKycRequest.md)
- - [Zernio::SubmitWhatsAppNumberKycRequestAddress](docs/SubmitWhatsAppNumberKycRequestAddress.md)
  - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInner](docs/SubmitWhatsAppNumberKycRequestDocumentsInner.md)
  - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf](docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf.md)
- - [Zernio::SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1](docs/SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1.md)
  - [Zernio::SyncExternalPosts200Response](docs/SyncExternalPosts200Response.md)
  - [Zernio::SyncExternalPosts200ResponseSynced](docs/SyncExternalPosts200ResponseSynced.md)
  - [Zernio::SyncExternalPostsRequest](docs/SyncExternalPostsRequest.md)
@@ -1405,6 +1536,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ThreadsPlatformData](docs/ThreadsPlatformData.md)
  - [Zernio::TikTokPlatformData](docs/TikTokPlatformData.md)
  - [Zernio::TrackingTag](docs/TrackingTag.md)
+ - [Zernio::TransferVoiceCall200Response](docs/TransferVoiceCall200Response.md)
+ - [Zernio::TransferVoiceCallRequest](docs/TransferVoiceCallRequest.md)
  - [Zernio::TriggerWorkflow200Response](docs/TriggerWorkflow200Response.md)
  - [Zernio::TriggerWorkflow200ResponseExecution](docs/TriggerWorkflow200ResponseExecution.md)
  - [Zernio::TriggerWorkflowRequest](docs/TriggerWorkflowRequest.md)
@@ -1513,7 +1646,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateWebhookSettings200Response](docs/UpdateWebhookSettings200Response.md)
  - [Zernio::UpdateWebhookSettingsRequest](docs/UpdateWebhookSettingsRequest.md)
  - [Zernio::UpdateWhatsAppBusinessProfileRequest](docs/UpdateWhatsAppBusinessProfileRequest.md)
- - [Zernio::UpdateWhatsAppCallingRequest](docs/UpdateWhatsAppCallingRequest.md)
+ - [Zernio::UpdateWhatsAppCallingLegacyRequest](docs/UpdateWhatsAppCallingLegacyRequest.md)
  - [Zernio::UpdateWhatsAppDisplayName200Response](docs/UpdateWhatsAppDisplayName200Response.md)
  - [Zernio::UpdateWhatsAppDisplayName200ResponseDisplayName](docs/UpdateWhatsAppDisplayName200ResponseDisplayName.md)
  - [Zernio::UpdateWhatsAppDisplayNameRequest](docs/UpdateWhatsAppDisplayNameRequest.md)
@@ -1528,13 +1661,14 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateYoutubeDefaultPlaylist200Response](docs/UpdateYoutubeDefaultPlaylist200Response.md)
  - [Zernio::UpdateYoutubeDefaultPlaylistRequest](docs/UpdateYoutubeDefaultPlaylistRequest.md)
  - [Zernio::UploadMediaDirect200Response](docs/UploadMediaDirect200Response.md)
+ - [Zernio::UploadPhoneNumberKycDocument200Response](docs/UploadPhoneNumberKycDocument200Response.md)
+ - [Zernio::UploadPhoneNumberPortInDocument200Response](docs/UploadPhoneNumberPortInDocument200Response.md)
  - [Zernio::UploadTokenResponse](docs/UploadTokenResponse.md)
  - [Zernio::UploadTokenStatusResponse](docs/UploadTokenStatusResponse.md)
  - [Zernio::UploadWhatsAppFlowJson200Response](docs/UploadWhatsAppFlowJson200Response.md)
  - [Zernio::UploadWhatsAppFlowJson200ResponseValidationErrorsInner](docs/UploadWhatsAppFlowJson200ResponseValidationErrorsInner.md)
  - [Zernio::UploadWhatsAppFlowJsonRequest](docs/UploadWhatsAppFlowJsonRequest.md)
  - [Zernio::UploadWhatsAppFlowJsonRequestFlowJson](docs/UploadWhatsAppFlowJsonRequestFlowJson.md)
- - [Zernio::UploadWhatsAppNumberKycDocument200Response](docs/UploadWhatsAppNumberKycDocument200Response.md)
  - [Zernio::UploadedFile](docs/UploadedFile.md)
  - [Zernio::UploadedOrDerivedAudience](docs/UploadedOrDerivedAudience.md)
  - [Zernio::UsageStats](docs/UsageStats.md)
@@ -1548,6 +1682,11 @@ Class | Method | HTTP request | Description
  - [Zernio::ValidateMedia200Response](docs/ValidateMedia200Response.md)
  - [Zernio::ValidateMedia200ResponsePlatformLimitsValue](docs/ValidateMedia200ResponsePlatformLimitsValue.md)
  - [Zernio::ValidateMediaRequest](docs/ValidateMediaRequest.md)
+ - [Zernio::ValidatePhoneNumberKycAddress200Response](docs/ValidatePhoneNumberKycAddress200Response.md)
+ - [Zernio::ValidatePhoneNumberKycAddress400Response](docs/ValidatePhoneNumberKycAddress400Response.md)
+ - [Zernio::ValidatePhoneNumberKycAddress400ResponseDetails](docs/ValidatePhoneNumberKycAddress400ResponseDetails.md)
+ - [Zernio::ValidatePhoneNumberKycAddress400ResponseDetailsAddressSuggestionsInner](docs/ValidatePhoneNumberKycAddress400ResponseDetailsAddressSuggestionsInner.md)
+ - [Zernio::ValidatePhoneNumberKycAddressRequest](docs/ValidatePhoneNumberKycAddressRequest.md)
  - [Zernio::ValidatePost200Response](docs/ValidatePost200Response.md)
  - [Zernio::ValidatePost200ResponseOneOf](docs/ValidatePost200ResponseOneOf.md)
  - [Zernio::ValidatePost200ResponseOneOf1](docs/ValidatePost200ResponseOneOf1.md)
@@ -1562,11 +1701,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ValidateSubreddit200ResponseOneOf](docs/ValidateSubreddit200ResponseOneOf.md)
  - [Zernio::ValidateSubreddit200ResponseOneOf1](docs/ValidateSubreddit200ResponseOneOf1.md)
  - [Zernio::ValidateSubreddit200ResponseOneOfSubreddit](docs/ValidateSubreddit200ResponseOneOfSubreddit.md)
- - [Zernio::ValidateWhatsAppNumberKycAddress200Response](docs/ValidateWhatsAppNumberKycAddress200Response.md)
- - [Zernio::ValidateWhatsAppNumberKycAddress400Response](docs/ValidateWhatsAppNumberKycAddress400Response.md)
- - [Zernio::ValidateWhatsAppNumberKycAddress400ResponseDetails](docs/ValidateWhatsAppNumberKycAddress400ResponseDetails.md)
- - [Zernio::ValidateWhatsAppNumberKycAddress400ResponseDetailsAddressSuggestionsInner](docs/ValidateWhatsAppNumberKycAddress400ResponseDetailsAddressSuggestionsInner.md)
- - [Zernio::ValidateWhatsAppNumberKycAddressRequest](docs/ValidateWhatsAppNumberKycAddressRequest.md)
+ - [Zernio::VerifySmsRegistrationOtp200Response](docs/VerifySmsRegistrationOtp200Response.md)
+ - [Zernio::VerifySmsRegistrationOtpRequest](docs/VerifySmsRegistrationOtpRequest.md)
  - [Zernio::Webhook](docs/Webhook.md)
  - [Zernio::WebhookLog](docs/WebhookLog.md)
  - [Zernio::WebhookPayloadAccountAdsInitialSyncCompleted](docs/WebhookPayloadAccountAdsInitialSyncCompleted.md)
@@ -1586,7 +1722,6 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadCallEndedCallBilling](docs/WebhookPayloadCallEndedCallBilling.md)
  - [Zernio::WebhookPayloadCallFailed](docs/WebhookPayloadCallFailed.md)
  - [Zernio::WebhookPayloadCallFailedCall](docs/WebhookPayloadCallFailedCall.md)
- - [Zernio::WebhookPayloadCallFailedCallError](docs/WebhookPayloadCallFailedCallError.md)
  - [Zernio::WebhookPayloadCallPermissionRequest](docs/WebhookPayloadCallPermissionRequest.md)
  - [Zernio::WebhookPayloadCallPermissionRequestPermission](docs/WebhookPayloadCallPermissionRequestPermission.md)
  - [Zernio::WebhookPayloadCallReceived](docs/WebhookPayloadCallReceived.md)

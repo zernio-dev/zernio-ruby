@@ -45,14 +45,40 @@ describe 'WhatsAppCallingApi' do
     end
   end
 
+  # unit tests for disable_whats_app_calling_legacy
+  # Disable calling on a number
+  # Deprecated alias of &#x60;/v1/phone-numbers/{id}/whatsapp/calling&#x60;; same contract. New integrations should use that path.  Disable calling. Sends calling.status&#x3D;DISABLED to Meta (best-effort) and flips the local &#x60;callingEnabled&#x60; flag off. forwardTo and SIP creds are preserved so a re-enable does not lose the destination. 
+  # @param id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'disable_whats_app_calling_legacy test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for enable_whats_app_calling
   # Enable calling on a number
   # Enable WhatsApp Business Calling on a connected number. Configures Meta calling.status&#x3D;ENABLED with our Telnyx SIP endpoint, fetches and stores the Meta-issued SIP password (encrypted), and snapshots the customer&#39;s forward-to destination. 
-  # @param id WhatsAppPhoneNumber Mongo ID
-  # @param enable_whats_app_calling_request 
+  # @param id Phone number record ID (from GET /v1/phone-numbers).
+  # @param enable_whats_app_calling_legacy_request 
   # @param [Hash] opts the optional parameters
-  # @return [EnableWhatsAppCalling200Response]
+  # @return [EnableWhatsAppCallingLegacy200Response]
   describe 'enable_whats_app_calling test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for enable_whats_app_calling_legacy
+  # Enable calling on a number
+  # Deprecated alias of &#x60;/v1/phone-numbers/{id}/whatsapp/calling&#x60;; same contract. New integrations should use that path.  Enable WhatsApp Business Calling on a connected number. Configures Meta calling.status&#x3D;ENABLED with our Telnyx SIP endpoint, fetches and stores the Meta-issued SIP password (encrypted), and snapshots the customer&#39;s forward-to destination. 
+  # @param id WhatsAppPhoneNumber Mongo ID
+  # @param enable_whats_app_calling_legacy_request 
+  # @param [Hash] opts the optional parameters
+  # @return [EnableWhatsAppCallingLegacy200Response]
+  describe 'enable_whats_app_calling_legacy test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -98,9 +124,35 @@ describe 'WhatsAppCallingApi' do
     end
   end
 
+  # unit tests for get_whats_app_call_recording
+  # Get a call recording
+  # Resolves a fresh, playable MP3 URL for the call&#39;s recording. Provider-signed recording URLs expire ~10 minutes after signing, so the &#x60;recordingUrl&#x60; stored on the call is usually stale by the time it is played; this endpoint re-signs on demand. Default responds &#x60;302 Found&#x60; redirecting to the fresh URL (point an &#x60;&lt;audio&gt;&#x60; element or a link straight at this endpoint); pass &#x60;as&#x3D;json&#x60; to receive &#x60;{ url }&#x60; instead. 
+  # @param call_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :as &#x60;json&#x60; returns &#x60;{ url }&#x60; instead of a 302 redirect.
+  # @return [GetWhatsAppCallRecording200Response]
+  describe 'get_whats_app_call_recording test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_whats_app_calling
+  # Get calling config for a number
+  # The WhatsApp Business Calling configuration of this number, keyed the same way as the POST/PATCH/DELETE below (full read-write on one sub-resource). Encrypted secrets are never returned; only a boolean saying whether a SIP password is stored. The account-scoped read (&#x60;GET /v1/whatsapp/calling?accountId&#x3D;&#x60;) remains for callers that only know the social account id, and additionally carries account-level extras (billing eligibility, current-period spend). 
+  # @param id Phone number record ID (from GET /v1/phone-numbers).
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppCalling200Response]
+  describe 'get_whats_app_calling test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_whats_app_calling_config
   # Get calling config for an account
-  # Returns the local calling configuration snapshot for the connected WhatsApp account: whether calling is enabled, the forward-to destination URI, recording opt-in state, the WhatsAppPhoneNumber doc id (use as &#x60;{id}&#x60; on the calling-config write endpoints) and whether SIP digest credentials are stored (the encrypted password itself is never returned). 
+  # Returns the local calling configuration snapshot for the connected WhatsApp account: whether calling is enabled, the forward-to destination URI, recording opt-in state, the phone number record id (use as &#x60;{id}&#x60; on the read-write calling sub-resource at /v1/phone-numbers/{id}/whatsapp/calling) and whether SIP digest credentials are stored (the encrypted password itself is never returned). Also carries account-level extras (billing eligibility, current-period spend) that the number-keyed GET does not. 
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppCallingConfig200Response]
@@ -112,9 +164,10 @@ describe 'WhatsAppCallingApi' do
 
   # unit tests for initiate_whats_app_call
   # Initiate outbound call
-  # Initiates an outbound Business-Initiated Call. The Telnyx-side SIP leg is originated server-side (Option B: SIP-first). Telnyx INVITEs Meta directly over TLS:5061 with the SIP digest credentials we captured at calling-enablement time). No client-side SDP is required; pass only &#x60;accountId&#x60; and &#x60;to&#x60;.  To send the consumer the call-consent prompt instead of placing a call, pass &#x60;action: \&quot;send_call_permission_request\&quot;&#x60; (+ optional &#x60;bodyText&#x60;). The consumer must tap Allow in WhatsApp before &#x60;start_call&#x60; is permitted; Meta limits the prompt to 1 per consumer per 24h (2 per 7 days) and requires an open 24h service window. 
+  # Initiates an outbound Business-Initiated Call. The Telnyx-side SIP leg is originated server-side (Option B: SIP-first). Telnyx INVITEs Meta directly over TLS:5061 with the SIP digest credentials we captured at calling-enablement time). No client-side SDP is required; pass only &#x60;accountId&#x60; and &#x60;to&#x60;.  To send the consumer the call-consent prompt instead of placing a call, pass &#x60;action: \&quot;send_call_permission_request\&quot;&#x60; (+ optional &#x60;bodyText&#x60;). The consumer must tap Allow in WhatsApp before &#x60;start_call&#x60; is permitted; Meta limits the prompt to 1 per consumer per 24h (2 per 7 days) and requires an open 24h service window.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
   # @param initiate_whats_app_call_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
   # @return [InitiateWhatsAppCall200Response]
   describe 'initiate_whats_app_call test' do
     it 'should work' do
@@ -124,13 +177,14 @@ describe 'WhatsAppCallingApi' do
 
   # unit tests for list_whats_app_calls
   # List call history for an account
-  # Compact history listing for a single connected account. Results are scoped to the resolved SocialAccount; profile-scoped team members cannot read calls on sibling accounts. 
+  # Compact history listing for a single connected account. Results are scoped to the resolved SocialAccount; profile-scoped team members cannot read calls on sibling accounts.  Cursor pagination: pass the returned &#x60;nextCursor&#x60; as &#x60;before&#x60; to fetch the next page (same scheme as &#x60;GET /v1/calls&#x60;). &#x60;since&#x60;/&#x60;until&#x60; remain as absolute range filters and combine with the cursor. 
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :status 
   # @option opts [String] :direction 
   # @option opts [Time] :since 
   # @option opts [Time] :_until 
+  # @option opts [Time] :before Return calls with startedAt strictly before this instant (use the previous page&#39;s nextCursor).
   # @option opts [Integer] :limit 
   # @return [ListWhatsAppCalls200Response]
   describe 'list_whats_app_calls test' do
@@ -143,10 +197,23 @@ describe 'WhatsAppCallingApi' do
   # Update calling config
   # Update fields on an already-enabled number. Only fields present in the body are written; &#x60;undefined&#x60; leaves the stored value alone, explicit &#x60;null&#x60; clears a nullable field. No Meta side effect, this only changes local routing state consumed by the Telnyx webhook handler. 
   # @param id 
-  # @param update_whats_app_calling_request 
+  # @param update_whats_app_calling_legacy_request 
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'update_whats_app_calling test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_whats_app_calling_legacy
+  # Update calling config
+  # Deprecated alias of &#x60;/v1/phone-numbers/{id}/whatsapp/calling&#x60;; same contract. New integrations should use that path.  Update fields on an already-enabled number. Only fields present in the body are written; &#x60;undefined&#x60; leaves the stored value alone, explicit &#x60;null&#x60; clears a nullable field. No Meta side effect, this only changes local routing state consumed by the Telnyx webhook handler. 
+  # @param id 
+  # @param update_whats_app_calling_legacy_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'update_whats_app_calling_legacy test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

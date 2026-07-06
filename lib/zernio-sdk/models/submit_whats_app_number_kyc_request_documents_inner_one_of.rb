@@ -17,16 +17,14 @@ module Zernio
   class SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf < ApiModelBase
     attr_accessor :requirement_id
 
-    attr_accessor :filename
-
-    attr_accessor :base64
+    # Id from POST /v1/whatsapp/phone-numbers/kyc/upload-document.
+    attr_accessor :document_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'requirement_id' => :'requirementId',
-        :'filename' => :'filename',
-        :'base64' => :'base64'
+        :'document_id' => :'documentId'
       }
     end
 
@@ -44,8 +42,7 @@ module Zernio
     def self.openapi_types
       {
         :'requirement_id' => :'String',
-        :'filename' => :'String',
-        :'base64' => :'String'
+        :'document_id' => :'String'
       }
     end
 
@@ -77,16 +74,10 @@ module Zernio
         self.requirement_id = nil
       end
 
-      if attributes.key?(:'filename')
-        self.filename = attributes[:'filename']
+      if attributes.key?(:'document_id')
+        self.document_id = attributes[:'document_id']
       else
-        self.filename = nil
-      end
-
-      if attributes.key?(:'base64')
-        self.base64 = attributes[:'base64']
-      else
-        self.base64 = nil
+        self.document_id = nil
       end
     end
 
@@ -99,12 +90,8 @@ module Zernio
         invalid_properties.push('invalid value for "requirement_id", requirement_id cannot be nil.')
       end
 
-      if @filename.nil?
-        invalid_properties.push('invalid value for "filename", filename cannot be nil.')
-      end
-
-      if @base64.nil?
-        invalid_properties.push('invalid value for "base64", base64 cannot be nil.')
+      if @document_id.nil?
+        invalid_properties.push('invalid value for "document_id", document_id cannot be nil.')
       end
 
       invalid_properties
@@ -115,8 +102,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @requirement_id.nil?
-      return false if @filename.nil?
-      return false if @base64.nil?
+      return false if @document_id.nil?
       true
     end
 
@@ -131,23 +117,13 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] filename Value to be assigned
-    def filename=(filename)
-      if filename.nil?
-        fail ArgumentError, 'filename cannot be nil'
+    # @param [Object] document_id Value to be assigned
+    def document_id=(document_id)
+      if document_id.nil?
+        fail ArgumentError, 'document_id cannot be nil'
       end
 
-      @filename = filename
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] base64 Value to be assigned
-    def base64=(base64)
-      if base64.nil?
-        fail ArgumentError, 'base64 cannot be nil'
-      end
-
-      @base64 = base64
+      @document_id = document_id
     end
 
     # Checks equality by comparing each attribute.
@@ -156,8 +132,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           requirement_id == o.requirement_id &&
-          filename == o.filename &&
-          base64 == o.base64
+          document_id == o.document_id
     end
 
     # @see the `==` method
@@ -169,7 +144,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [requirement_id, filename, base64].hash
+      [requirement_id, document_id].hash
     end
 
     # Builds the object from hash

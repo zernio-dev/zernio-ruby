@@ -14,7 +14,7 @@
 | **end_user_last_name** | **String** | End user&#39;s legal last name. Same condition as endUserFirstName. | [optional] |
 | **values** | **Hash&lt;String, String&gt;** | requirementId → textual value | [optional] |
 | **documents** | [**Array&lt;SubmitWhatsAppNumberKycRequestDocumentsInner&gt;**](SubmitWhatsAppNumberKycRequestDocumentsInner.md) | One per document requirement. Each is EITHER inline base64 OR a &#x60;documentId&#x60; returned by POST /v1/whatsapp/phone-numbers/kyc/upload-document (use the upload endpoint for large files to stay under the request-size limit). | [optional] |
-| **address** | [**SubmitWhatsAppNumberKycRequestAddress**](SubmitWhatsAppNumberKycRequestAddress.md) |  | [optional] |
+| **address** | [**SubmitPhoneNumberKycRequestAddress**](SubmitPhoneNumberKycRequestAddress.md) |  | [optional] |
 
 ## Example
 

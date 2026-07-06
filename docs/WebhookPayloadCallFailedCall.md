@@ -12,7 +12,7 @@
 | **from** | **String** |  | [optional] |
 | **to** | **String** |  | [optional] |
 | **failed_at** | **Time** |  | [optional] |
-| **error** | [**WebhookPayloadCallFailedCallError**](WebhookPayloadCallFailedCallError.md) |  | [optional] |
+| **error** | [**CallRecordCallErrorsInner**](CallRecordCallErrorsInner.md) |  | [optional] |
 
 ## Example
 

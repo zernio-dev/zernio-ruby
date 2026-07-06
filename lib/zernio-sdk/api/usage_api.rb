@@ -19,8 +19,221 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Calling usage (volumes + billable cost)
+    # Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call's billing snapshot, so this endpoint always agrees with the invoice: `billableUSD` is what Zernio bills; `metaUSD` is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional `groupBy` returns a breakdown by UTC day, by your number, or by channel. Defaults to the last 30 days. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Time] :since Start of the window (inclusive). Default 30 days before &#x60;until&#x60;.
+    # @option opts [Time] :_until End of the window (exclusive). Default now.
+    # @option opts [String] :channel 
+    # @option opts [String] :number Scope to calls involving this number (typically one of YOUR numbers). E.164, leading + optional.
+    # @option opts [String] :group_by 
+    # @return [GetCallsUsage200Response]
+    def get_calls_usage(opts = {})
+      data, _status_code, _headers = get_calls_usage_with_http_info(opts)
+      data
+    end
+
+    # Calling usage (volumes + billable cost)
+    # Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call&#39;s billing snapshot, so this endpoint always agrees with the invoice: &#x60;billableUSD&#x60; is what Zernio bills; &#x60;metaUSD&#x60; is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional &#x60;groupBy&#x60; returns a breakdown by UTC day, by your number, or by channel. Defaults to the last 30 days. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Time] :since Start of the window (inclusive). Default 30 days before &#x60;until&#x60;.
+    # @option opts [Time] :_until End of the window (exclusive). Default now.
+    # @option opts [String] :channel 
+    # @option opts [String] :number Scope to calls involving this number (typically one of YOUR numbers). E.164, leading + optional.
+    # @option opts [String] :group_by 
+    # @return [Array<(GetCallsUsage200Response, Integer, Hash)>] GetCallsUsage200Response data, response status code and response headers
+    def get_calls_usage_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: UsageApi.get_calls_usage ...'
+      end
+      allowable_values = ["whatsapp", "pstn"]
+      if @api_client.config.client_side_validation && opts[:'channel'] && !allowable_values.include?(opts[:'channel'])
+        fail ArgumentError, "invalid value for \"channel\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["day", "number", "channel"]
+      if @api_client.config.client_side_validation && opts[:'group_by'] && !allowable_values.include?(opts[:'group_by'])
+        fail ArgumentError, "invalid value for \"group_by\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/usage/calls'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+      query_params[:'channel'] = opts[:'channel'] if !opts[:'channel'].nil?
+      query_params[:'number'] = opts[:'number'] if !opts[:'number'].nil?
+      query_params[:'groupBy'] = opts[:'group_by'] if !opts[:'group_by'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetCallsUsage200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"UsageApi.get_calls_usage",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsageApi#get_calls_usage\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # SMS usage (volumes)
+    # Aggregated SMS/MMS volumes across your numbers: sent, received, and total message counts, with an optional breakdown by UTC day or by number. Defaults to the last 30 days.  Volumes only, deliberately: SMS cost is carrier-rated asynchronously and billed to your invoice, so per-message cost is not available here. Calling usage (GET /v1/usage/calls) does include billable cost. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Time] :since Start of the window (inclusive). Default 30 days before &#x60;until&#x60;.
+    # @option opts [Time] :_until End of the window (exclusive). Default now.
+    # @option opts [String] :number Scope to one of YOUR SMS-enabled numbers (E.164, leading + optional).
+    # @option opts [String] :group_by 
+    # @return [GetSmsUsage200Response]
+    def get_sms_usage(opts = {})
+      data, _status_code, _headers = get_sms_usage_with_http_info(opts)
+      data
+    end
+
+    # SMS usage (volumes)
+    # Aggregated SMS/MMS volumes across your numbers: sent, received, and total message counts, with an optional breakdown by UTC day or by number. Defaults to the last 30 days.  Volumes only, deliberately: SMS cost is carrier-rated asynchronously and billed to your invoice, so per-message cost is not available here. Calling usage (GET /v1/usage/calls) does include billable cost. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Time] :since Start of the window (inclusive). Default 30 days before &#x60;until&#x60;.
+    # @option opts [Time] :_until End of the window (exclusive). Default now.
+    # @option opts [String] :number Scope to one of YOUR SMS-enabled numbers (E.164, leading + optional).
+    # @option opts [String] :group_by 
+    # @return [Array<(GetSmsUsage200Response, Integer, Hash)>] GetSmsUsage200Response data, response status code and response headers
+    def get_sms_usage_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: UsageApi.get_sms_usage ...'
+      end
+      allowable_values = ["day", "number"]
+      if @api_client.config.client_side_validation && opts[:'group_by'] && !allowable_values.include?(opts[:'group_by'])
+        fail ArgumentError, "invalid value for \"group_by\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/usage/sms'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+      query_params[:'number'] = opts[:'number'] if !opts[:'number'].nil?
+      query_params[:'groupBy'] = opts[:'group_by'] if !opts[:'group_by'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetSmsUsage200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"UsageApi.get_sms_usage",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsageApi#get_sms_usage\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get plan and usage snapshot
+    # The usage hub: current plan name, billing period, plan limits, and usage counts, in one snapshot. For metered consumption over an arbitrary window with breakdowns (by day, by number), use the domain spokes: `GET /v1/usage/calls` and `GET /v1/usage/sms`.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
+    # @return [UsageStats]
+    def get_usage(opts = {})
+      data, _status_code, _headers = get_usage_with_http_info(opts)
+      data
+    end
+
+    # Get plan and usage snapshot
+    # The usage hub: current plan name, billing period, plan limits, and usage counts, in one snapshot. For metered consumption over an arbitrary window with breakdowns (by day, by number), use the domain spokes: &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60;.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
+    # @return [Array<(UsageStats, Integer, Hash)>] UsageStats data, response status code and response headers
+    def get_usage_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: UsageApi.get_usage ...'
+      end
+      # resource path
+      local_var_path = '/v1/usage'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'reconcile'] = opts[:'reconcile'] if !opts[:'reconcile'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UsageStats'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"UsageApi.get_usage",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsageApi#get_usage\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get plan and usage stats
-    # Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
+    # Deprecated alias of `GET /v1/usage`; same contract. New integrations should use that path (the usage hub), with `GET /v1/usage/calls` and `GET /v1/usage/sms` for metered breakdowns.  Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
     # @return [UsageStats]
@@ -30,7 +243,7 @@ module Zernio
     end
 
     # Get plan and usage stats
-    # Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
+    # Deprecated alias of &#x60;GET /v1/usage&#x60;; same contract. New integrations should use that path (the usage hub), with &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60; for metered breakdowns.  Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
     # @return [Array<(UsageStats, Integer, Hash)>] UsageStats data, response status code and response headers

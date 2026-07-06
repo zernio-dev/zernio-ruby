@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class GetWhatsAppCallingConfig200Response < ApiModelBase
-    # WhatsAppPhoneNumber Mongo ID (use on /v1/whatsapp/phone-numbers/{id}/calling)
+    # Phone number record ID (use on /v1/phone-numbers/{id}/whatsapp/calling)
     attr_accessor :phone_number_doc_id
 
     attr_accessor :phone_number

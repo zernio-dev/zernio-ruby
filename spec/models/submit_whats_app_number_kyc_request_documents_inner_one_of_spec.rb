@@ -33,13 +33,7 @@ describe Zernio::SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf do
     end
   end
 
-  describe 'test attribute "filename"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "base64"' do
+  describe 'test attribute "document_id"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

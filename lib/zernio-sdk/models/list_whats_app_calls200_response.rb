@@ -17,10 +17,14 @@ module Zernio
   class ListWhatsAppCalls200Response < ApiModelBase
     attr_accessor :calls
 
+    # Pass as `before` for the next page; null on the last page.
+    attr_accessor :next_cursor
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'calls' => :'calls'
+        :'calls' => :'calls',
+        :'next_cursor' => :'nextCursor'
       }
     end
 
@@ -37,13 +41,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'calls' => :'Array<ListWhatsAppCalls200ResponseCallsInner>'
+        :'calls' => :'Array<ListWhatsAppCalls200ResponseCallsInner>',
+        :'next_cursor' => :'Time'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'next_cursor'
       ])
     end
 
@@ -68,6 +74,10 @@ module Zernio
           self.calls = value
         end
       end
+
+      if attributes.key?(:'next_cursor')
+        self.next_cursor = attributes[:'next_cursor']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -90,7 +100,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          calls == o.calls
+          calls == o.calls &&
+          next_cursor == o.next_cursor
     end
 
     # @see the `==` method
@@ -102,7 +113,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [calls].hash
+      [calls, next_cursor].hash
     end
 
     # Builds the object from hash

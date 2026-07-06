@@ -70,8 +70,8 @@ module Zernio
         :'description' => :'String',
         :'url' => :'String',
         :'color' => :'Integer',
-        :'image' => :'DiscordPlatformDataEmbedsInnerImage',
-        :'thumbnail' => :'DiscordPlatformDataEmbedsInnerImage',
+        :'image' => :'GetWhatsAppCallRecording200Response',
+        :'thumbnail' => :'GetWhatsAppCallRecording200Response',
         :'footer' => :'DiscordPlatformDataEmbedsInnerFooter',
         :'author' => :'DiscordPlatformDataEmbedsInnerAuthor',
         :'fields' => :'Array<DiscordPlatformDataEmbedsInnerFieldsInner>'

@@ -7,7 +7,7 @@
 | **country** | **String** |  | [optional] |
 | **number_type** | **String** |  | [optional] |
 | **fields** | [**Array&lt;GetWhatsAppNumberKycForm200ResponseFieldsInner&gt;**](GetWhatsAppNumberKycForm200ResponseFieldsInner.md) |  | [optional] |
-| **reusable** | [**GetWhatsAppNumberKycForm200ResponseReusable**](GetWhatsAppNumberKycForm200ResponseReusable.md) |  | [optional] |
+| **reusable** | [**GetPhoneNumberKycForm200ResponseReusable**](GetPhoneNumberKycForm200ResponseReusable.md) |  | [optional] |
 
 ## Example
 

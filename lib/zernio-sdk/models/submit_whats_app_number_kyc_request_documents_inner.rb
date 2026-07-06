@@ -19,8 +19,8 @@ module Zernio
       # List of class defined in oneOf (OpenAPI v3)
       def openapi_one_of
         [
-          :'SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf',
-          :'SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf1'
+          :'SubmitPhoneNumberKycRequestDocumentsInnerOneOf',
+          :'SubmitWhatsAppNumberKycRequestDocumentsInnerOneOf'
         ]
       end
 

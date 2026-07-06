@@ -20,20 +20,20 @@ module Zernio
       @api_client = api_client
     end
     # Check country availability
-    # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
+    # Deprecated alias of `/v1/phone-numbers/availability`; same contract. New integrations should use that path.  Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
-    # @return [CheckWhatsAppNumberAvailability200Response]
+    # @return [CheckPhoneNumberAvailability200Response]
     def check_whats_app_number_availability(country, opts = {})
       data, _status_code, _headers = check_whats_app_number_availability_with_http_info(country, opts)
       data
     end
 
     # Check country availability
-    # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
+    # Deprecated alias of &#x60;/v1/phone-numbers/availability&#x60;; same contract. New integrations should use that path.  Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CheckWhatsAppNumberAvailability200Response, Integer, Hash)>] CheckWhatsAppNumberAvailability200Response data, response status code and response headers
+    # @return [Array<(CheckPhoneNumberAvailability200Response, Integer, Hash)>] CheckPhoneNumberAvailability200Response data, response status code and response headers
     def check_whats_app_number_availability_with_http_info(country, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.check_whats_app_number_availability ...'
@@ -61,7 +61,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CheckWhatsAppNumberAvailability200Response'
+      return_type = opts[:debug_return_type] || 'CheckPhoneNumberAvailability200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -84,27 +84,27 @@ module Zernio
     end
 
     # Create a hosted KYC link
-    # Create a single-use, 7-day hosted KYC link that your end customer completes WITHOUT a Zernio login — useful when the person who holds the ID and address is not your team. They fill the regulated verification on a Zernio-hosted page; the number provisions under YOUR account once they submit. Only regulated (KYC) countries are valid: a country that does not require KYC returns 400.  White-label the page with `branding` (your company name, logo, brand color). Supply `redirect_url` to send the end customer back to your own site after a successful submit (completion params are appended — see below). Listen for the `whatsapp.number.kyc_submitted` webhook to react when the form is completed. 
-    # @param create_whats_app_number_kyc_link_request [CreateWhatsAppNumberKycLinkRequest] 
+    # Deprecated alias of `/v1/phone-numbers/kyc/share`; same contract. New integrations should use that path.  Create a single-use, 7-day hosted KYC link that your end customer completes WITHOUT a Zernio login — useful when the person who holds the ID and address is not your team. They fill the regulated verification on a Zernio-hosted page; the number provisions under YOUR account once they submit. Only regulated (KYC) countries are valid: a country that does not require KYC returns 400.  White-label the page with `branding` (your company name, logo, brand color). Supply `redirect_url` to send the end customer back to your own site after a successful submit (completion params are appended — see below). Listen for the `whatsapp.number.kyc_submitted` webhook to react when the form is completed. 
+    # @param create_phone_number_kyc_link_request [CreatePhoneNumberKycLinkRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [CreateWhatsAppNumberKycLink200Response]
-    def create_whats_app_number_kyc_link(create_whats_app_number_kyc_link_request, opts = {})
-      data, _status_code, _headers = create_whats_app_number_kyc_link_with_http_info(create_whats_app_number_kyc_link_request, opts)
+    # @return [CreatePhoneNumberKycLink200Response]
+    def create_whats_app_number_kyc_link(create_phone_number_kyc_link_request, opts = {})
+      data, _status_code, _headers = create_whats_app_number_kyc_link_with_http_info(create_phone_number_kyc_link_request, opts)
       data
     end
 
     # Create a hosted KYC link
-    # Create a single-use, 7-day hosted KYC link that your end customer completes WITHOUT a Zernio login — useful when the person who holds the ID and address is not your team. They fill the regulated verification on a Zernio-hosted page; the number provisions under YOUR account once they submit. Only regulated (KYC) countries are valid: a country that does not require KYC returns 400.  White-label the page with &#x60;branding&#x60; (your company name, logo, brand color). Supply &#x60;redirect_url&#x60; to send the end customer back to your own site after a successful submit (completion params are appended — see below). Listen for the &#x60;whatsapp.number.kyc_submitted&#x60; webhook to react when the form is completed. 
-    # @param create_whats_app_number_kyc_link_request [CreateWhatsAppNumberKycLinkRequest] 
+    # Deprecated alias of &#x60;/v1/phone-numbers/kyc/share&#x60;; same contract. New integrations should use that path.  Create a single-use, 7-day hosted KYC link that your end customer completes WITHOUT a Zernio login — useful when the person who holds the ID and address is not your team. They fill the regulated verification on a Zernio-hosted page; the number provisions under YOUR account once they submit. Only regulated (KYC) countries are valid: a country that does not require KYC returns 400.  White-label the page with &#x60;branding&#x60; (your company name, logo, brand color). Supply &#x60;redirect_url&#x60; to send the end customer back to your own site after a successful submit (completion params are appended — see below). Listen for the &#x60;whatsapp.number.kyc_submitted&#x60; webhook to react when the form is completed. 
+    # @param create_phone_number_kyc_link_request [CreatePhoneNumberKycLinkRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateWhatsAppNumberKycLink200Response, Integer, Hash)>] CreateWhatsAppNumberKycLink200Response data, response status code and response headers
-    def create_whats_app_number_kyc_link_with_http_info(create_whats_app_number_kyc_link_request, opts = {})
+    # @return [Array<(CreatePhoneNumberKycLink200Response, Integer, Hash)>] CreatePhoneNumberKycLink200Response data, response status code and response headers
+    def create_whats_app_number_kyc_link_with_http_info(create_phone_number_kyc_link_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.create_whats_app_number_kyc_link ...'
       end
-      # verify the required parameter 'create_whats_app_number_kyc_link_request' is set
-      if @api_client.config.client_side_validation && create_whats_app_number_kyc_link_request.nil?
-        fail ArgumentError, "Missing the required parameter 'create_whats_app_number_kyc_link_request' when calling WhatsAppPhoneNumbersApi.create_whats_app_number_kyc_link"
+      # verify the required parameter 'create_phone_number_kyc_link_request' is set
+      if @api_client.config.client_side_validation && create_phone_number_kyc_link_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_phone_number_kyc_link_request' when calling WhatsAppPhoneNumbersApi.create_whats_app_number_kyc_link"
       end
       # resource path
       local_var_path = '/v1/whatsapp/phone-numbers/kyc/share'
@@ -126,10 +126,10 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_whats_app_number_kyc_link_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_phone_number_kyc_link_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CreateWhatsAppNumberKycLink200Response'
+      return_type = opts[:debug_return_type] || 'CreatePhoneNumberKycLink200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -216,7 +216,7 @@ module Zernio
     end
 
     # Get KYC form spec
-    # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
+    # Deprecated alias of `/v1/phone-numbers/kyc`; same contract. New integrations should use that path.  For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
     # @param country [String] 
     # @param profile_id [String] 
     # @param [Hash] opts the optional parameters
@@ -227,7 +227,7 @@ module Zernio
     end
 
     # Get KYC form spec
-    # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
+    # Deprecated alias of &#x60;/v1/phone-numbers/kyc&#x60;; same contract. New integrations should use that path.  For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
     # @param country [String] 
     # @param profile_id [String] 
     # @param [Hash] opts the optional parameters
@@ -287,7 +287,7 @@ module Zernio
     end
 
     # Get declined requirements
-    # For a number in `regulatory_declined`, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
+    # Deprecated alias of `/v1/phone-numbers/{id}/remediate`; same contract. New integrations should use that path.  For a number in `regulatory_declined`, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
     # @param id [String] WhatsAppPhoneNumber id.
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppNumberRemediation200Response]
@@ -297,7 +297,7 @@ module Zernio
     end
 
     # Get declined requirements
-    # For a number in &#x60;regulatory_declined&#x60;, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
+    # Deprecated alias of &#x60;/v1/phone-numbers/{id}/remediate&#x60;; same contract. New integrations should use that path.  For a number in &#x60;regulatory_declined&#x60;, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
     # @param id [String] WhatsAppPhoneNumber id.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppNumberRemediation200Response, Integer, Hash)>] GetWhatsAppNumberRemediation200Response data, response status code and response headers
@@ -350,20 +350,20 @@ module Zernio
     end
 
     # Get phone number
-    # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, `onfidoVerificationUrl` appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
+    # Deprecated alias of `/v1/phone-numbers/{id}`; same contract. New integrations should use that path.  Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, `onfidoVerificationUrl` appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
     # @param phone_number_id [String] Phone number record ID
     # @param [Hash] opts the optional parameters
-    # @return [GetWhatsAppPhoneNumber200Response]
+    # @return [GetPhoneNumber200Response]
     def get_whats_app_phone_number(phone_number_id, opts = {})
       data, _status_code, _headers = get_whats_app_phone_number_with_http_info(phone_number_id, opts)
       data
     end
 
     # Get phone number
-    # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, &#x60;onfidoVerificationUrl&#x60; appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
+    # Deprecated alias of &#x60;/v1/phone-numbers/{id}&#x60;; same contract. New integrations should use that path.  Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, &#x60;onfidoVerificationUrl&#x60; appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
     # @param phone_number_id [String] Phone number record ID
     # @param [Hash] opts the optional parameters
-    # @return [Array<(GetWhatsAppPhoneNumber200Response, Integer, Hash)>] GetWhatsAppPhoneNumber200Response data, response status code and response headers
+    # @return [Array<(GetPhoneNumber200Response, Integer, Hash)>] GetPhoneNumber200Response data, response status code and response headers
     def get_whats_app_phone_number_with_http_info(phone_number_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.get_whats_app_phone_number ...'
@@ -390,7 +390,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetWhatsAppPhoneNumber200Response'
+      return_type = opts[:debug_return_type] || 'GetPhoneNumber200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -413,22 +413,22 @@ module Zernio
     end
 
     # List phone numbers
-    # List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. Connected (bring-your-own) numbers are returned in the separate `connected` array — they are not billed and have no provisioning lifecycle. 
+    # Deprecated alias of `/v1/phone-numbers`; same contract. New integrations should use that path.  List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. Connected (bring-your-own) numbers are returned in the separate `connected` array — they are not billed and have no provisioning lifecycle. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. &#x60;verifying&#x60; is the short-lived state after the number is provisioned on our side while WhatsApp confirms the activation code; the number is not billed until it reaches &#x60;active&#x60;. 
     # @option opts [String] :profile_id Filter by profile
-    # @return [GetWhatsAppPhoneNumbers200Response]
+    # @return [ListPhoneNumbers200Response]
     def get_whats_app_phone_numbers(opts = {})
       data, _status_code, _headers = get_whats_app_phone_numbers_with_http_info(opts)
       data
     end
 
     # List phone numbers
-    # List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. Connected (bring-your-own) numbers are returned in the separate &#x60;connected&#x60; array — they are not billed and have no provisioning lifecycle. 
+    # Deprecated alias of &#x60;/v1/phone-numbers&#x60;; same contract. New integrations should use that path.  List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. Connected (bring-your-own) numbers are returned in the separate &#x60;connected&#x60; array — they are not billed and have no provisioning lifecycle. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. &#x60;verifying&#x60; is the short-lived state after the number is provisioned on our side while WhatsApp confirms the activation code; the number is not billed until it reaches &#x60;active&#x60;. 
     # @option opts [String] :profile_id Filter by profile
-    # @return [Array<(GetWhatsAppPhoneNumbers200Response, Integer, Hash)>] GetWhatsAppPhoneNumbers200Response data, response status code and response headers
+    # @return [Array<(ListPhoneNumbers200Response, Integer, Hash)>] ListPhoneNumbers200Response data, response status code and response headers
     def get_whats_app_phone_numbers_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.get_whats_app_phone_numbers ...'
@@ -457,7 +457,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetWhatsAppPhoneNumbers200Response'
+      return_type = opts[:debug_return_type] || 'ListPhoneNumbers200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -480,7 +480,7 @@ module Zernio
     end
 
     # List offerable number countries
-    # The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
+    # Deprecated alias of `/v1/phone-numbers/countries`; same contract. New integrations should use that path.  The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
     # @param [Hash] opts the optional parameters
     # @return [ListWhatsAppNumberCountries200Response]
     def list_whats_app_number_countries(opts = {})
@@ -489,7 +489,7 @@ module Zernio
     end
 
     # List offerable number countries
-    # The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
+    # Deprecated alias of &#x60;/v1/phone-numbers/countries&#x60;; same contract. New integrations should use that path.  The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListWhatsAppNumberCountries200Response, Integer, Hash)>] ListWhatsAppNumberCountries200Response data, response status code and response headers
     def list_whats_app_number_countries_with_http_info(opts = {})
@@ -537,20 +537,20 @@ module Zernio
     end
 
     # Purchase phone number
-    # Initiate purchasing a WhatsApp phone number. Payment-first flow: the user does not pick a specific number. The system either creates a Stripe Checkout Session (first number) or increments the existing subscription quantity and provisions inline (subsequent numbers).  Requires a paid plan. The maximum number of phone numbers is determined by the user's plan. 
+    # Deprecated alias of `/v1/phone-numbers/purchase`; same contract. New integrations should use that path.  Initiate purchasing a WhatsApp phone number. Payment-first flow: the user does not pick a specific number. The system either creates a Stripe Checkout Session (first number) or increments the existing subscription quantity and provisions inline (subsequent numbers).  Requires a paid plan. The maximum number of phone numbers is determined by the user's plan. 
     # @param purchase_whats_app_phone_number_request [PurchaseWhatsAppPhoneNumberRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [PurchaseWhatsAppPhoneNumber200Response]
+    # @return [PurchasePhoneNumber200Response]
     def purchase_whats_app_phone_number(purchase_whats_app_phone_number_request, opts = {})
       data, _status_code, _headers = purchase_whats_app_phone_number_with_http_info(purchase_whats_app_phone_number_request, opts)
       data
     end
 
     # Purchase phone number
-    # Initiate purchasing a WhatsApp phone number. Payment-first flow: the user does not pick a specific number. The system either creates a Stripe Checkout Session (first number) or increments the existing subscription quantity and provisions inline (subsequent numbers).  Requires a paid plan. The maximum number of phone numbers is determined by the user&#39;s plan. 
+    # Deprecated alias of &#x60;/v1/phone-numbers/purchase&#x60;; same contract. New integrations should use that path.  Initiate purchasing a WhatsApp phone number. Payment-first flow: the user does not pick a specific number. The system either creates a Stripe Checkout Session (first number) or increments the existing subscription quantity and provisions inline (subsequent numbers).  Requires a paid plan. The maximum number of phone numbers is determined by the user&#39;s plan. 
     # @param purchase_whats_app_phone_number_request [PurchaseWhatsAppPhoneNumberRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(PurchaseWhatsAppPhoneNumber200Response, Integer, Hash)>] PurchaseWhatsAppPhoneNumber200Response data, response status code and response headers
+    # @return [Array<(PurchasePhoneNumber200Response, Integer, Hash)>] PurchasePhoneNumber200Response data, response status code and response headers
     def purchase_whats_app_phone_number_with_http_info(purchase_whats_app_phone_number_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.purchase_whats_app_phone_number ...'
@@ -582,7 +582,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(purchase_whats_app_phone_number_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PurchaseWhatsAppPhoneNumber200Response'
+      return_type = opts[:debug_return_type] || 'PurchasePhoneNumber200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -605,20 +605,20 @@ module Zernio
     end
 
     # Release phone number
-    # Release a purchased phone number. This will: 1. Disconnect any linked WhatsApp social account 2. Decrement the Stripe subscription quantity (or cancel if last number) 3. Release the number from Telnyx 4. Mark the number as released 
+    # Deprecated alias of `/v1/phone-numbers/{id}`; same contract. New integrations should use that path.  Release a purchased phone number. This will: 1. Disconnect any linked WhatsApp social account 2. Decrement the Stripe subscription quantity (or cancel if last number) 3. Release the number from Telnyx 4. Mark the number as released 
     # @param phone_number_id [String] Phone number record ID
     # @param [Hash] opts the optional parameters
-    # @return [ReleaseWhatsAppPhoneNumber200Response]
+    # @return [ReleasePhoneNumber200Response]
     def release_whats_app_phone_number(phone_number_id, opts = {})
       data, _status_code, _headers = release_whats_app_phone_number_with_http_info(phone_number_id, opts)
       data
     end
 
     # Release phone number
-    # Release a purchased phone number. This will: 1. Disconnect any linked WhatsApp social account 2. Decrement the Stripe subscription quantity (or cancel if last number) 3. Release the number from Telnyx 4. Mark the number as released 
+    # Deprecated alias of &#x60;/v1/phone-numbers/{id}&#x60;; same contract. New integrations should use that path.  Release a purchased phone number. This will: 1. Disconnect any linked WhatsApp social account 2. Decrement the Stripe subscription quantity (or cancel if last number) 3. Release the number from Telnyx 4. Mark the number as released 
     # @param phone_number_id [String] Phone number record ID
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ReleaseWhatsAppPhoneNumber200Response, Integer, Hash)>] ReleaseWhatsAppPhoneNumber200Response data, response status code and response headers
+    # @return [Array<(ReleasePhoneNumber200Response, Integer, Hash)>] ReleasePhoneNumber200Response data, response status code and response headers
     def release_whats_app_phone_number_with_http_info(phone_number_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.release_whats_app_phone_number ...'
@@ -645,7 +645,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ReleaseWhatsAppPhoneNumber200Response'
+      return_type = opts[:debug_return_type] || 'ReleasePhoneNumber200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -668,23 +668,23 @@ module Zernio
     end
 
     # Resubmit a declined number
-    # Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes `regulatory_declined` → `pending_regulatory`. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
+    # Deprecated alias of `/v1/phone-numbers/{id}/remediate`; same contract. New integrations should use that path.  Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes `regulatory_declined` → `pending_regulatory`. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
     # @param id [String] 
-    # @param remediate_whats_app_number_request [RemediateWhatsAppNumberRequest] 
+    # @param remediate_phone_number_request [RemediatePhoneNumberRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [RemediateWhatsAppNumber200Response]
-    def remediate_whats_app_number(id, remediate_whats_app_number_request, opts = {})
-      data, _status_code, _headers = remediate_whats_app_number_with_http_info(id, remediate_whats_app_number_request, opts)
+    # @return [RemediatePhoneNumber200Response]
+    def remediate_whats_app_number(id, remediate_phone_number_request, opts = {})
+      data, _status_code, _headers = remediate_whats_app_number_with_http_info(id, remediate_phone_number_request, opts)
       data
     end
 
     # Resubmit a declined number
-    # Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes &#x60;regulatory_declined&#x60; → &#x60;pending_regulatory&#x60;. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
+    # Deprecated alias of &#x60;/v1/phone-numbers/{id}/remediate&#x60;; same contract. New integrations should use that path.  Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes &#x60;regulatory_declined&#x60; → &#x60;pending_regulatory&#x60;. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
     # @param id [String] 
-    # @param remediate_whats_app_number_request [RemediateWhatsAppNumberRequest] 
+    # @param remediate_phone_number_request [RemediatePhoneNumberRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(RemediateWhatsAppNumber200Response, Integer, Hash)>] RemediateWhatsAppNumber200Response data, response status code and response headers
-    def remediate_whats_app_number_with_http_info(id, remediate_whats_app_number_request, opts = {})
+    # @return [Array<(RemediatePhoneNumber200Response, Integer, Hash)>] RemediatePhoneNumber200Response data, response status code and response headers
+    def remediate_whats_app_number_with_http_info(id, remediate_phone_number_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.remediate_whats_app_number ...'
       end
@@ -692,9 +692,9 @@ module Zernio
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppPhoneNumbersApi.remediate_whats_app_number"
       end
-      # verify the required parameter 'remediate_whats_app_number_request' is set
-      if @api_client.config.client_side_validation && remediate_whats_app_number_request.nil?
-        fail ArgumentError, "Missing the required parameter 'remediate_whats_app_number_request' when calling WhatsAppPhoneNumbersApi.remediate_whats_app_number"
+      # verify the required parameter 'remediate_phone_number_request' is set
+      if @api_client.config.client_side_validation && remediate_phone_number_request.nil?
+        fail ArgumentError, "Missing the required parameter 'remediate_phone_number_request' when calling WhatsAppPhoneNumbersApi.remediate_whats_app_number"
       end
       # resource path
       local_var_path = '/v1/whatsapp/phone-numbers/{id}/remediate'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -716,10 +716,10 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(remediate_whats_app_number_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(remediate_phone_number_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'RemediateWhatsAppNumber200Response'
+      return_type = opts[:debug_return_type] || 'RemediatePhoneNumber200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -742,7 +742,7 @@ module Zernio
     end
 
     # Search available numbers
-    # Search the provider's inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
+    # Deprecated alias of `/v1/phone-numbers/available`; same contract. New integrations should use that path.  Search the provider's inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :country  (default to 'US')
     # @option opts [String] :type Number type; defaults to the country&#39;s WhatsApp-safe type
@@ -757,7 +757,7 @@ module Zernio
     end
 
     # Search available numbers
-    # Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
+    # Deprecated alias of &#x60;/v1/phone-numbers/available&#x60;; same contract. New integrations should use that path.  Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :country  (default to 'US')
     # @option opts [String] :type Number type; defaults to the country&#39;s WhatsApp-safe type
@@ -821,20 +821,20 @@ module Zernio
     end
 
     # Submit KYC
-    # Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via `submissionId`.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
+    # Deprecated alias of `/v1/phone-numbers/kyc`; same contract. New integrations should use that path.  Submit the end customer's KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via `submissionId`.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
     # @param submit_whats_app_number_kyc_request [SubmitWhatsAppNumberKycRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [SubmitWhatsAppNumberKyc200Response]
+    # @return [SubmitPhoneNumberKyc200Response]
     def submit_whats_app_number_kyc(submit_whats_app_number_kyc_request, opts = {})
       data, _status_code, _headers = submit_whats_app_number_kyc_with_http_info(submit_whats_app_number_kyc_request, opts)
       data
     end
 
     # Submit KYC
-    # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
+    # Deprecated alias of &#x60;/v1/phone-numbers/kyc&#x60;; same contract. New integrations should use that path.  Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
     # @param submit_whats_app_number_kyc_request [SubmitWhatsAppNumberKycRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(SubmitWhatsAppNumberKyc200Response, Integer, Hash)>] SubmitWhatsAppNumberKyc200Response data, response status code and response headers
+    # @return [Array<(SubmitPhoneNumberKyc200Response, Integer, Hash)>] SubmitPhoneNumberKyc200Response data, response status code and response headers
     def submit_whats_app_number_kyc_with_http_info(submit_whats_app_number_kyc_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.submit_whats_app_number_kyc ...'
@@ -866,7 +866,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(submit_whats_app_number_kyc_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'SubmitWhatsAppNumberKyc200Response'
+      return_type = opts[:debug_return_type] || 'SubmitPhoneNumberKyc200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -889,22 +889,22 @@ module Zernio
     end
 
     # Upload a KYC document
-    # Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via `documents[].documentId`. Send the RAW file bytes as the request body (not base64); put the filename in the `X-Filename` header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
+    # Deprecated alias of `/v1/phone-numbers/kyc/upload-document`; same contract. New integrations should use that path.  Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via `documents[].documentId`. Send the RAW file bytes as the request body (not base64); put the filename in the `X-Filename` header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
     # @param x_filename [String] URL-encoded original filename.
     # @param body [File] 
     # @param [Hash] opts the optional parameters
-    # @return [UploadWhatsAppNumberKycDocument200Response]
+    # @return [UploadPhoneNumberKycDocument200Response]
     def upload_whats_app_number_kyc_document(x_filename, body, opts = {})
       data, _status_code, _headers = upload_whats_app_number_kyc_document_with_http_info(x_filename, body, opts)
       data
     end
 
     # Upload a KYC document
-    # Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via &#x60;documents[].documentId&#x60;. Send the RAW file bytes as the request body (not base64); put the filename in the &#x60;X-Filename&#x60; header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
+    # Deprecated alias of &#x60;/v1/phone-numbers/kyc/upload-document&#x60;; same contract. New integrations should use that path.  Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via &#x60;documents[].documentId&#x60;. Send the RAW file bytes as the request body (not base64); put the filename in the &#x60;X-Filename&#x60; header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
     # @param x_filename [String] URL-encoded original filename.
     # @param body [File] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UploadWhatsAppNumberKycDocument200Response, Integer, Hash)>] UploadWhatsAppNumberKycDocument200Response data, response status code and response headers
+    # @return [Array<(UploadPhoneNumberKycDocument200Response, Integer, Hash)>] UploadPhoneNumberKycDocument200Response data, response status code and response headers
     def upload_whats_app_number_kyc_document_with_http_info(x_filename, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.upload_whats_app_number_kyc_document ...'
@@ -941,7 +941,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UploadWhatsAppNumberKycDocument200Response'
+      return_type = opts[:debug_return_type] || 'UploadPhoneNumberKycDocument200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -964,27 +964,27 @@ module Zernio
     end
 
     # Pre-validate KYC address
-    # Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (`administrative_area`) is required by the validator; when it is omitted the pre-check is skipped and `{ ok: true, skipped: true }` is returned (the final submit still validates). 
-    # @param validate_whats_app_number_kyc_address_request [ValidateWhatsAppNumberKycAddressRequest] 
+    # Deprecated alias of `/v1/phone-numbers/kyc/validate-address`; same contract. New integrations should use that path.  Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (`administrative_area`) is required by the validator; when it is omitted the pre-check is skipped and `{ ok: true, skipped: true }` is returned (the final submit still validates). 
+    # @param validate_phone_number_kyc_address_request [ValidatePhoneNumberKycAddressRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [ValidateWhatsAppNumberKycAddress200Response]
-    def validate_whats_app_number_kyc_address(validate_whats_app_number_kyc_address_request, opts = {})
-      data, _status_code, _headers = validate_whats_app_number_kyc_address_with_http_info(validate_whats_app_number_kyc_address_request, opts)
+    # @return [ValidatePhoneNumberKycAddress200Response]
+    def validate_whats_app_number_kyc_address(validate_phone_number_kyc_address_request, opts = {})
+      data, _status_code, _headers = validate_whats_app_number_kyc_address_with_http_info(validate_phone_number_kyc_address_request, opts)
       data
     end
 
     # Pre-validate KYC address
-    # Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (&#x60;administrative_area&#x60;) is required by the validator; when it is omitted the pre-check is skipped and &#x60;{ ok: true, skipped: true }&#x60; is returned (the final submit still validates). 
-    # @param validate_whats_app_number_kyc_address_request [ValidateWhatsAppNumberKycAddressRequest] 
+    # Deprecated alias of &#x60;/v1/phone-numbers/kyc/validate-address&#x60;; same contract. New integrations should use that path.  Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (&#x60;administrative_area&#x60;) is required by the validator; when it is omitted the pre-check is skipped and &#x60;{ ok: true, skipped: true }&#x60; is returned (the final submit still validates). 
+    # @param validate_phone_number_kyc_address_request [ValidatePhoneNumberKycAddressRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ValidateWhatsAppNumberKycAddress200Response, Integer, Hash)>] ValidateWhatsAppNumberKycAddress200Response data, response status code and response headers
-    def validate_whats_app_number_kyc_address_with_http_info(validate_whats_app_number_kyc_address_request, opts = {})
+    # @return [Array<(ValidatePhoneNumberKycAddress200Response, Integer, Hash)>] ValidatePhoneNumberKycAddress200Response data, response status code and response headers
+    def validate_whats_app_number_kyc_address_with_http_info(validate_phone_number_kyc_address_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.validate_whats_app_number_kyc_address ...'
       end
-      # verify the required parameter 'validate_whats_app_number_kyc_address_request' is set
-      if @api_client.config.client_side_validation && validate_whats_app_number_kyc_address_request.nil?
-        fail ArgumentError, "Missing the required parameter 'validate_whats_app_number_kyc_address_request' when calling WhatsAppPhoneNumbersApi.validate_whats_app_number_kyc_address"
+      # verify the required parameter 'validate_phone_number_kyc_address_request' is set
+      if @api_client.config.client_side_validation && validate_phone_number_kyc_address_request.nil?
+        fail ArgumentError, "Missing the required parameter 'validate_phone_number_kyc_address_request' when calling WhatsAppPhoneNumbersApi.validate_whats_app_number_kyc_address"
       end
       # resource path
       local_var_path = '/v1/whatsapp/phone-numbers/kyc/validate-address'
@@ -1006,10 +1006,10 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(validate_whats_app_number_kyc_address_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(validate_phone_number_kyc_address_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ValidateWhatsAppNumberKycAddress200Response'
+      return_type = opts[:debug_return_type] || 'ValidatePhoneNumberKycAddress200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

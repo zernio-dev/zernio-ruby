@@ -2435,7 +2435,7 @@ nil (empty response body)
 
 WhatsApp number activated event
 
-Fired when a purchased WhatsApp number becomes active and usable — both the synchronous (Tier 1/2) path and the asynchronous regulated (Tier 3/4) path land here. Lets integrators react without polling GET /v1/whatsapp/phone-numbers. 
+Fired when a purchased WhatsApp number becomes active and usable — both the synchronous (Tier 1/2) path and the asynchronous regulated (Tier 3/4) path land here. Lets integrators react without polling GET /v1/phone-numbers. 
 
 ### Examples
 
@@ -2571,7 +2571,7 @@ nil (empty response body)
 
 WhatsApp number KYC submitted event
 
-Fired when an end customer completes a hosted KYC share link (POST /v1/whatsapp/phone-numbers/kyc/share). The number enters review (pending_regulatory) under your account; `whatsapp.number.activated` or `whatsapp.number.declined` follows once the provider rules on it. 
+Fired when an end customer completes a hosted KYC share link (POST /v1/phone-numbers/kyc/share). The number enters review (pending_regulatory) under your account; `whatsapp.number.activated` or `whatsapp.number.declined` follows once the provider rules on it. 
 
 ### Examples
 

@@ -49,7 +49,7 @@ module Zernio
         :'country' => :'String',
         :'number_type' => :'String',
         :'fields' => :'Array<GetWhatsAppNumberKycForm200ResponseFieldsInner>',
-        :'reusable' => :'GetWhatsAppNumberKycForm200ResponseReusable'
+        :'reusable' => :'GetPhoneNumberKycForm200ResponseReusable'
       }
     end
 

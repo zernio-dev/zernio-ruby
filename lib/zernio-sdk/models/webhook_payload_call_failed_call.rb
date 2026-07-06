@@ -91,7 +91,7 @@ module Zernio
         :'from' => :'String',
         :'to' => :'String',
         :'failed_at' => :'Time',
-        :'error' => :'WebhookPayloadCallFailedCallError'
+        :'error' => :'CallRecordCallErrorsInner'
       }
     end
 

@@ -34,10 +34,10 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for check_whats_app_number_availability
   # Check country availability
-  # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
+  # Deprecated alias of &#x60;/v1/phone-numbers/availability&#x60;; same contract. New integrations should use that path.  Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
   # @param country ISO-2 country code.
   # @param [Hash] opts the optional parameters
-  # @return [CheckWhatsAppNumberAvailability200Response]
+  # @return [CheckPhoneNumberAvailability200Response]
   describe 'check_whats_app_number_availability test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -46,10 +46,10 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for create_whats_app_number_kyc_link
   # Create a hosted KYC link
-  # Create a single-use, 7-day hosted KYC link that your end customer completes WITHOUT a Zernio login — useful when the person who holds the ID and address is not your team. They fill the regulated verification on a Zernio-hosted page; the number provisions under YOUR account once they submit. Only regulated (KYC) countries are valid: a country that does not require KYC returns 400.  White-label the page with &#x60;branding&#x60; (your company name, logo, brand color). Supply &#x60;redirect_url&#x60; to send the end customer back to your own site after a successful submit (completion params are appended — see below). Listen for the &#x60;whatsapp.number.kyc_submitted&#x60; webhook to react when the form is completed. 
-  # @param create_whats_app_number_kyc_link_request 
+  # Deprecated alias of &#x60;/v1/phone-numbers/kyc/share&#x60;; same contract. New integrations should use that path.  Create a single-use, 7-day hosted KYC link that your end customer completes WITHOUT a Zernio login — useful when the person who holds the ID and address is not your team. They fill the regulated verification on a Zernio-hosted page; the number provisions under YOUR account once they submit. Only regulated (KYC) countries are valid: a country that does not require KYC returns 400.  White-label the page with &#x60;branding&#x60; (your company name, logo, brand color). Supply &#x60;redirect_url&#x60; to send the end customer back to your own site after a successful submit (completion params are appended — see below). Listen for the &#x60;whatsapp.number.kyc_submitted&#x60; webhook to react when the form is completed. 
+  # @param create_phone_number_kyc_link_request 
   # @param [Hash] opts the optional parameters
-  # @return [CreateWhatsAppNumberKycLink200Response]
+  # @return [CreatePhoneNumberKycLink200Response]
   describe 'create_whats_app_number_kyc_link test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -70,7 +70,7 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for get_whats_app_number_kyc_form
   # Get KYC form spec
-  # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
+  # Deprecated alias of &#x60;/v1/phone-numbers/kyc&#x60;; same contract. New integrations should use that path.  For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
   # @param country 
   # @param profile_id 
   # @param [Hash] opts the optional parameters
@@ -83,7 +83,7 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for get_whats_app_number_remediation
   # Get declined requirements
-  # For a number in &#x60;regulatory_declined&#x60;, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
+  # Deprecated alias of &#x60;/v1/phone-numbers/{id}/remediate&#x60;; same contract. New integrations should use that path.  For a number in &#x60;regulatory_declined&#x60;, returns ONLY the requirements the reviewer flagged declined, as a form spec (same shape as the KYC form GET). The customer fixes just those — Telnyx supports correcting a declined requirement group and re-submitting it (no new number/group). Falls back to the full spec if the provider exposes no per-requirement flags. 
   # @param id WhatsAppPhoneNumber id.
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppNumberRemediation200Response]
@@ -95,10 +95,10 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for get_whats_app_phone_number
   # Get phone number
-  # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, &#x60;onfidoVerificationUrl&#x60; appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
+  # Deprecated alias of &#x60;/v1/phone-numbers/{id}&#x60;; same contract. New integrations should use that path.  Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, &#x60;onfidoVerificationUrl&#x60; appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
   # @param phone_number_id Phone number record ID
   # @param [Hash] opts the optional parameters
-  # @return [GetWhatsAppPhoneNumber200Response]
+  # @return [GetPhoneNumber200Response]
   describe 'get_whats_app_phone_number test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -107,11 +107,11 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for get_whats_app_phone_numbers
   # List phone numbers
-  # List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. Connected (bring-your-own) numbers are returned in the separate &#x60;connected&#x60; array — they are not billed and have no provisioning lifecycle. 
+  # Deprecated alias of &#x60;/v1/phone-numbers&#x60;; same contract. New integrations should use that path.  List all WhatsApp phone numbers purchased by the authenticated user. By default, released numbers are excluded. Connected (bring-your-own) numbers are returned in the separate &#x60;connected&#x60; array — they are not billed and have no provisioning lifecycle. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :status Filter by status (by default excludes released numbers). NOTE: &#x60;status&#x3D;pending_regulatory&#x60; returns the \&quot;provisioning\&quot; view — numbers still in review PLUS recently-declined (last 30 days) ones, so a failed registration surfaces (with &#x60;regulatoryDeclineReason&#x60;) instead of silently disappearing. Declined numbers can be re-submitted via POST /v1/whatsapp/phone-numbers/{id}/remediate. &#x60;verifying&#x60; is the short-lived state after the number is provisioned on our side while WhatsApp confirms the activation code; the number is not billed until it reaches &#x60;active&#x60;. 
   # @option opts [String] :profile_id Filter by profile
-  # @return [GetWhatsAppPhoneNumbers200Response]
+  # @return [ListPhoneNumbers200Response]
   describe 'get_whats_app_phone_numbers test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -120,7 +120,7 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for list_whats_app_number_countries
   # List offerable number countries
-  # The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
+  # Deprecated alias of &#x60;/v1/phone-numbers/countries&#x60;; same contract. New integrations should use that path.  The WhatsApp number countries available to purchase, each with its flat monthly price (cents), regulatory tier, whether it needs end-user KYC (Tier 3/4), and whether outbound calling is available (not BIC-blocked). Drives the country picker. Tier-4 countries appear only when enabled. 
   # @param [Hash] opts the optional parameters
   # @return [ListWhatsAppNumberCountries200Response]
   describe 'list_whats_app_number_countries test' do
@@ -131,10 +131,10 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for purchase_whats_app_phone_number
   # Purchase phone number
-  # Initiate purchasing a WhatsApp phone number. Payment-first flow: the user does not pick a specific number. The system either creates a Stripe Checkout Session (first number) or increments the existing subscription quantity and provisions inline (subsequent numbers).  Requires a paid plan. The maximum number of phone numbers is determined by the user&#39;s plan. 
+  # Deprecated alias of &#x60;/v1/phone-numbers/purchase&#x60;; same contract. New integrations should use that path.  Initiate purchasing a WhatsApp phone number. Payment-first flow: the user does not pick a specific number. The system either creates a Stripe Checkout Session (first number) or increments the existing subscription quantity and provisions inline (subsequent numbers).  Requires a paid plan. The maximum number of phone numbers is determined by the user&#39;s plan. 
   # @param purchase_whats_app_phone_number_request 
   # @param [Hash] opts the optional parameters
-  # @return [PurchaseWhatsAppPhoneNumber200Response]
+  # @return [PurchasePhoneNumber200Response]
   describe 'purchase_whats_app_phone_number test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -143,10 +143,10 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for release_whats_app_phone_number
   # Release phone number
-  # Release a purchased phone number. This will: 1. Disconnect any linked WhatsApp social account 2. Decrement the Stripe subscription quantity (or cancel if last number) 3. Release the number from Telnyx 4. Mark the number as released 
+  # Deprecated alias of &#x60;/v1/phone-numbers/{id}&#x60;; same contract. New integrations should use that path.  Release a purchased phone number. This will: 1. Disconnect any linked WhatsApp social account 2. Decrement the Stripe subscription quantity (or cancel if last number) 3. Release the number from Telnyx 4. Mark the number as released 
   # @param phone_number_id Phone number record ID
   # @param [Hash] opts the optional parameters
-  # @return [ReleaseWhatsAppPhoneNumber200Response]
+  # @return [ReleasePhoneNumber200Response]
   describe 'release_whats_app_phone_number test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -155,11 +155,11 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for remediate_whats_app_number
   # Resubmit a declined number
-  # Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes &#x60;regulatory_declined&#x60; → &#x60;pending_regulatory&#x60;. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
+  # Deprecated alias of &#x60;/v1/phone-numbers/{id}/remediate&#x60;; same contract. New integrations should use that path.  Submit corrected values/documents for the declined requirement(s). We PATCH them onto the SAME requirement group and re-submit it for approval; the number goes &#x60;regulatory_declined&#x60; → &#x60;pending_regulatory&#x60;. No new number and no new billing. Body shape matches the KYC submit (values / documents / address) — send only the corrected fields. 
   # @param id 
-  # @param remediate_whats_app_number_request 
+  # @param remediate_phone_number_request 
   # @param [Hash] opts the optional parameters
-  # @return [RemediateWhatsAppNumber200Response]
+  # @return [RemediatePhoneNumber200Response]
   describe 'remediate_whats_app_number test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -168,7 +168,7 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for search_available_whats_app_numbers
   # Search available numbers
-  # Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
+  # Deprecated alias of &#x60;/v1/phone-numbers/available&#x60;; same contract. New integrations should use that path.  Search the provider&#39;s inventory for numbers available to purchase in a country (default US). Optional filters narrow the results. The country must be offerable (see GET /v1/whatsapp/phone-numbers/countries). 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :country 
   # @option opts [String] :type Number type; defaults to the country&#39;s WhatsApp-safe type
@@ -185,10 +185,10 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for submit_whats_app_number_kyc
   # Submit KYC
-  # Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
+  # Deprecated alias of &#x60;/v1/phone-numbers/kyc&#x60;; same contract. New integrations should use that path.  Submit the end customer&#39;s KYC (textual values, uploaded documents, address) for a Tier 3/4 country. Documents are streamed straight to the number provider and are not stored by Zernio. Builds + submits a regulatory requirement group and claims a pending_regulatory slot; the number is ordered + activated once the provider approves (asynchronous). A customer may hold several same-country numbers in review at once; a double-submit of the SAME attempt is deduped via &#x60;submissionId&#x60;.  For an ID-card document requirement, carriers commonly require BOTH sides: combine the front and back into a single file before uploading (the dashboard does this automatically). A one-sided ID is a common decline reason; fix it via POST /v1/whatsapp/phone-numbers/{id}/remediate.  Before submitting, call GET /v1/whatsapp/phone-numbers/availability to check the country has deliverable inventory and, for geographic-match countries, which area the address must be in — otherwise the submission can pass review yet never be assignable a number. 
   # @param submit_whats_app_number_kyc_request 
   # @param [Hash] opts the optional parameters
-  # @return [SubmitWhatsAppNumberKyc200Response]
+  # @return [SubmitPhoneNumberKyc200Response]
   describe 'submit_whats_app_number_kyc test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -197,11 +197,11 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for upload_whats_app_number_kyc_document
   # Upload a KYC document
-  # Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via &#x60;documents[].documentId&#x60;. Send the RAW file bytes as the request body (not base64); put the filename in the &#x60;X-Filename&#x60; header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
+  # Deprecated alias of &#x60;/v1/phone-numbers/kyc/upload-document&#x60;; same contract. New integrations should use that path.  Upload ONE document and get back its provider document id, to reference from POST /v1/whatsapp/phone-numbers/kyc via &#x60;documents[].documentId&#x60;. Send the RAW file bytes as the request body (not base64); put the filename in the &#x60;X-Filename&#x60; header. Uploading documents one-per-request keeps each request under the ~4.5MB body limit. The document streams straight to the number provider and is not stored by Zernio. 
   # @param x_filename URL-encoded original filename.
   # @param body 
   # @param [Hash] opts the optional parameters
-  # @return [UploadWhatsAppNumberKycDocument200Response]
+  # @return [UploadPhoneNumberKycDocument200Response]
   describe 'upload_whats_app_number_kyc_document test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -210,10 +210,10 @@ describe 'WhatsAppPhoneNumbersApi' do
 
   # unit tests for validate_whats_app_number_kyc_address
   # Pre-validate KYC address
-  # Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (&#x60;administrative_area&#x60;) is required by the validator; when it is omitted the pre-check is skipped and &#x60;{ ok: true, skipped: true }&#x60; is returned (the final submit still validates). 
-  # @param validate_whats_app_number_kyc_address_request 
+  # Deprecated alias of &#x60;/v1/phone-numbers/kyc/validate-address&#x60;; same contract. New integrations should use that path.  Optional early check for the address step of a Tier 4 (end-user identity) registration: validates a postal address for deliverability BEFORE the full KYC submit, so it can be corrected before any documents are uploaded. The full submit (POST /v1/whatsapp/phone-numbers/kyc) re-validates the address, so this call is purely a fast feedback path and skipping it is safe. Only the postal address is sent (no documents, no gov-ID fields). A region (&#x60;administrative_area&#x60;) is required by the validator; when it is omitted the pre-check is skipped and &#x60;{ ok: true, skipped: true }&#x60; is returned (the final submit still validates). 
+  # @param validate_phone_number_kyc_address_request 
   # @param [Hash] opts the optional parameters
-  # @return [ValidateWhatsAppNumberKycAddress200Response]
+  # @return [ValidatePhoneNumberKycAddress200Response]
   describe 'validate_whats_app_number_kyc_address test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

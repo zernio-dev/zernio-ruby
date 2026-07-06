@@ -49,7 +49,7 @@ module Zernio
         fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppCallingApi.disable_whats_app_calling"
       end
       # resource path
-      local_var_path = '/v1/whatsapp/phone-numbers/{id}/calling'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+      local_var_path = '/v1/phone-numbers/{id}/whatsapp/calling'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -89,24 +89,94 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Disable calling on a number
+    # Deprecated alias of `/v1/phone-numbers/{id}/whatsapp/calling`; same contract. New integrations should use that path.  Disable calling. Sends calling.status=DISABLED to Meta (best-effort) and flips the local `callingEnabled` flag off. forwardTo and SIP creds are preserved so a re-enable does not lose the destination. 
+    # @param id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def disable_whats_app_calling_legacy(id, account_id, opts = {})
+      disable_whats_app_calling_legacy_with_http_info(id, account_id, opts)
+      nil
+    end
+
+    # Disable calling on a number
+    # Deprecated alias of &#x60;/v1/phone-numbers/{id}/whatsapp/calling&#x60;; same contract. New integrations should use that path.  Disable calling. Sends calling.status&#x3D;DISABLED to Meta (best-effort) and flips the local &#x60;callingEnabled&#x60; flag off. forwardTo and SIP creds are preserved so a re-enable does not lose the destination. 
+    # @param id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def disable_whats_app_calling_legacy_with_http_info(id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.disable_whats_app_calling_legacy ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.disable_whats_app_calling_legacy"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppCallingApi.disable_whats_app_calling_legacy"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/{id}/calling'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppCallingApi.disable_whats_app_calling_legacy",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#disable_whats_app_calling_legacy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Enable calling on a number
     # Enable WhatsApp Business Calling on a connected number. Configures Meta calling.status=ENABLED with our Telnyx SIP endpoint, fetches and stores the Meta-issued SIP password (encrypted), and snapshots the customer's forward-to destination. 
-    # @param id [String] WhatsAppPhoneNumber Mongo ID
-    # @param enable_whats_app_calling_request [EnableWhatsAppCallingRequest] 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param enable_whats_app_calling_legacy_request [EnableWhatsAppCallingLegacyRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [EnableWhatsAppCalling200Response]
-    def enable_whats_app_calling(id, enable_whats_app_calling_request, opts = {})
-      data, _status_code, _headers = enable_whats_app_calling_with_http_info(id, enable_whats_app_calling_request, opts)
+    # @return [EnableWhatsAppCallingLegacy200Response]
+    def enable_whats_app_calling(id, enable_whats_app_calling_legacy_request, opts = {})
+      data, _status_code, _headers = enable_whats_app_calling_with_http_info(id, enable_whats_app_calling_legacy_request, opts)
       data
     end
 
     # Enable calling on a number
     # Enable WhatsApp Business Calling on a connected number. Configures Meta calling.status&#x3D;ENABLED with our Telnyx SIP endpoint, fetches and stores the Meta-issued SIP password (encrypted), and snapshots the customer&#39;s forward-to destination. 
-    # @param id [String] WhatsAppPhoneNumber Mongo ID
-    # @param enable_whats_app_calling_request [EnableWhatsAppCallingRequest] 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param enable_whats_app_calling_legacy_request [EnableWhatsAppCallingLegacyRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(EnableWhatsAppCalling200Response, Integer, Hash)>] EnableWhatsAppCalling200Response data, response status code and response headers
-    def enable_whats_app_calling_with_http_info(id, enable_whats_app_calling_request, opts = {})
+    # @return [Array<(EnableWhatsAppCallingLegacy200Response, Integer, Hash)>] EnableWhatsAppCallingLegacy200Response data, response status code and response headers
+    def enable_whats_app_calling_with_http_info(id, enable_whats_app_calling_legacy_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.enable_whats_app_calling ...'
       end
@@ -114,9 +184,83 @@ module Zernio
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.enable_whats_app_calling"
       end
-      # verify the required parameter 'enable_whats_app_calling_request' is set
-      if @api_client.config.client_side_validation && enable_whats_app_calling_request.nil?
-        fail ArgumentError, "Missing the required parameter 'enable_whats_app_calling_request' when calling WhatsAppCallingApi.enable_whats_app_calling"
+      # verify the required parameter 'enable_whats_app_calling_legacy_request' is set
+      if @api_client.config.client_side_validation && enable_whats_app_calling_legacy_request.nil?
+        fail ArgumentError, "Missing the required parameter 'enable_whats_app_calling_legacy_request' when calling WhatsAppCallingApi.enable_whats_app_calling"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/{id}/whatsapp/calling'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(enable_whats_app_calling_legacy_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'EnableWhatsAppCallingLegacy200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppCallingApi.enable_whats_app_calling",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#enable_whats_app_calling\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Enable calling on a number
+    # Deprecated alias of `/v1/phone-numbers/{id}/whatsapp/calling`; same contract. New integrations should use that path.  Enable WhatsApp Business Calling on a connected number. Configures Meta calling.status=ENABLED with our Telnyx SIP endpoint, fetches and stores the Meta-issued SIP password (encrypted), and snapshots the customer's forward-to destination. 
+    # @param id [String] WhatsAppPhoneNumber Mongo ID
+    # @param enable_whats_app_calling_legacy_request [EnableWhatsAppCallingLegacyRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [EnableWhatsAppCallingLegacy200Response]
+    def enable_whats_app_calling_legacy(id, enable_whats_app_calling_legacy_request, opts = {})
+      data, _status_code, _headers = enable_whats_app_calling_legacy_with_http_info(id, enable_whats_app_calling_legacy_request, opts)
+      data
+    end
+
+    # Enable calling on a number
+    # Deprecated alias of &#x60;/v1/phone-numbers/{id}/whatsapp/calling&#x60;; same contract. New integrations should use that path.  Enable WhatsApp Business Calling on a connected number. Configures Meta calling.status&#x3D;ENABLED with our Telnyx SIP endpoint, fetches and stores the Meta-issued SIP password (encrypted), and snapshots the customer&#39;s forward-to destination. 
+    # @param id [String] WhatsAppPhoneNumber Mongo ID
+    # @param enable_whats_app_calling_legacy_request [EnableWhatsAppCallingLegacyRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(EnableWhatsAppCallingLegacy200Response, Integer, Hash)>] EnableWhatsAppCallingLegacy200Response data, response status code and response headers
+    def enable_whats_app_calling_legacy_with_http_info(id, enable_whats_app_calling_legacy_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.enable_whats_app_calling_legacy ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.enable_whats_app_calling_legacy"
+      end
+      # verify the required parameter 'enable_whats_app_calling_legacy_request' is set
+      if @api_client.config.client_side_validation && enable_whats_app_calling_legacy_request.nil?
+        fail ArgumentError, "Missing the required parameter 'enable_whats_app_calling_legacy_request' when calling WhatsAppCallingApi.enable_whats_app_calling_legacy"
       end
       # resource path
       local_var_path = '/v1/whatsapp/phone-numbers/{id}/calling'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -138,16 +282,16 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(enable_whats_app_calling_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(enable_whats_app_calling_legacy_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'EnableWhatsAppCalling200Response'
+      return_type = opts[:debug_return_type] || 'EnableWhatsAppCallingLegacy200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
 
       new_options = opts.merge(
-        :operation => :"WhatsAppCallingApi.enable_whats_app_calling",
+        :operation => :"WhatsAppCallingApi.enable_whats_app_calling_legacy",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -158,7 +302,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: WhatsAppCallingApi#enable_whats_app_calling\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#enable_whats_app_calling_legacy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -387,8 +531,148 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get a call recording
+    # Resolves a fresh, playable MP3 URL for the call's recording. Provider-signed recording URLs expire ~10 minutes after signing, so the `recordingUrl` stored on the call is usually stale by the time it is played; this endpoint re-signs on demand. Default responds `302 Found` redirecting to the fresh URL (point an `<audio>` element or a link straight at this endpoint); pass `as=json` to receive `{ url }` instead. 
+    # @param call_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :as &#x60;json&#x60; returns &#x60;{ url }&#x60; instead of a 302 redirect.
+    # @return [GetWhatsAppCallRecording200Response]
+    def get_whats_app_call_recording(call_id, account_id, opts = {})
+      data, _status_code, _headers = get_whats_app_call_recording_with_http_info(call_id, account_id, opts)
+      data
+    end
+
+    # Get a call recording
+    # Resolves a fresh, playable MP3 URL for the call&#39;s recording. Provider-signed recording URLs expire ~10 minutes after signing, so the &#x60;recordingUrl&#x60; stored on the call is usually stale by the time it is played; this endpoint re-signs on demand. Default responds &#x60;302 Found&#x60; redirecting to the fresh URL (point an &#x60;&lt;audio&gt;&#x60; element or a link straight at this endpoint); pass &#x60;as&#x3D;json&#x60; to receive &#x60;{ url }&#x60; instead. 
+    # @param call_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :as &#x60;json&#x60; returns &#x60;{ url }&#x60; instead of a 302 redirect.
+    # @return [Array<(GetWhatsAppCallRecording200Response, Integer, Hash)>] GetWhatsAppCallRecording200Response data, response status code and response headers
+    def get_whats_app_call_recording_with_http_info(call_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.get_whats_app_call_recording ...'
+      end
+      # verify the required parameter 'call_id' is set
+      if @api_client.config.client_side_validation && call_id.nil?
+        fail ArgumentError, "Missing the required parameter 'call_id' when calling WhatsAppCallingApi.get_whats_app_call_recording"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppCallingApi.get_whats_app_call_recording"
+      end
+      allowable_values = ["json"]
+      if @api_client.config.client_side_validation && opts[:'as'] && !allowable_values.include?(opts[:'as'])
+        fail ArgumentError, "invalid value for \"as\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/calls/{callId}/recording'.sub('{' + 'callId' + '}', CGI.escape(call_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'as'] = opts[:'as'] if !opts[:'as'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppCallRecording200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppCallingApi.get_whats_app_call_recording",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#get_whats_app_call_recording\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get calling config for a number
+    # The WhatsApp Business Calling configuration of this number, keyed the same way as the POST/PATCH/DELETE below (full read-write on one sub-resource). Encrypted secrets are never returned; only a boolean saying whether a SIP password is stored. The account-scoped read (`GET /v1/whatsapp/calling?accountId=`) remains for callers that only know the social account id, and additionally carries account-level extras (billing eligibility, current-period spend). 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param [Hash] opts the optional parameters
+    # @return [GetWhatsAppCalling200Response]
+    def get_whats_app_calling(id, opts = {})
+      data, _status_code, _headers = get_whats_app_calling_with_http_info(id, opts)
+      data
+    end
+
+    # Get calling config for a number
+    # The WhatsApp Business Calling configuration of this number, keyed the same way as the POST/PATCH/DELETE below (full read-write on one sub-resource). Encrypted secrets are never returned; only a boolean saying whether a SIP password is stored. The account-scoped read (&#x60;GET /v1/whatsapp/calling?accountId&#x3D;&#x60;) remains for callers that only know the social account id, and additionally carries account-level extras (billing eligibility, current-period spend). 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsAppCalling200Response, Integer, Hash)>] GetWhatsAppCalling200Response data, response status code and response headers
+    def get_whats_app_calling_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.get_whats_app_calling ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.get_whats_app_calling"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/{id}/whatsapp/calling'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppCalling200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppCallingApi.get_whats_app_calling",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#get_whats_app_calling\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get calling config for an account
-    # Returns the local calling configuration snapshot for the connected WhatsApp account: whether calling is enabled, the forward-to destination URI, recording opt-in state, the WhatsAppPhoneNumber doc id (use as `{id}` on the calling-config write endpoints) and whether SIP digest credentials are stored (the encrypted password itself is never returned). 
+    # Returns the local calling configuration snapshot for the connected WhatsApp account: whether calling is enabled, the forward-to destination URI, recording opt-in state, the phone number record id (use as `{id}` on the read-write calling sub-resource at /v1/phone-numbers/{id}/whatsapp/calling) and whether SIP digest credentials are stored (the encrypted password itself is never returned). Also carries account-level extras (billing eligibility, current-period spend) that the number-keyed GET does not. 
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppCallingConfig200Response]
@@ -398,7 +682,7 @@ module Zernio
     end
 
     # Get calling config for an account
-    # Returns the local calling configuration snapshot for the connected WhatsApp account: whether calling is enabled, the forward-to destination URI, recording opt-in state, the WhatsAppPhoneNumber doc id (use as &#x60;{id}&#x60; on the calling-config write endpoints) and whether SIP digest credentials are stored (the encrypted password itself is never returned). 
+    # Returns the local calling configuration snapshot for the connected WhatsApp account: whether calling is enabled, the forward-to destination URI, recording opt-in state, the phone number record id (use as &#x60;{id}&#x60; on the read-write calling sub-resource at /v1/phone-numbers/{id}/whatsapp/calling) and whether SIP digest credentials are stored (the encrypted password itself is never returned). Also carries account-level extras (billing eligibility, current-period spend) that the number-keyed GET does not. 
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppCallingConfig200Response, Integer, Hash)>] GetWhatsAppCallingConfig200Response data, response status code and response headers
@@ -452,9 +736,10 @@ module Zernio
     end
 
     # Initiate outbound call
-    # Initiates an outbound Business-Initiated Call. The Telnyx-side SIP leg is originated server-side (Option B: SIP-first). Telnyx INVITEs Meta directly over TLS:5061 with the SIP digest credentials we captured at calling-enablement time). No client-side SDP is required; pass only `accountId` and `to`.  To send the consumer the call-consent prompt instead of placing a call, pass `action: \"send_call_permission_request\"` (+ optional `bodyText`). The consumer must tap Allow in WhatsApp before `start_call` is permitted; Meta limits the prompt to 1 per consumer per 24h (2 per 7 days) and requires an open 24h service window. 
+    # Initiates an outbound Business-Initiated Call. The Telnyx-side SIP leg is originated server-side (Option B: SIP-first). Telnyx INVITEs Meta directly over TLS:5061 with the SIP digest credentials we captured at calling-enablement time). No client-side SDP is required; pass only `accountId` and `to`.  To send the consumer the call-consent prompt instead of placing a call, pass `action: \"send_call_permission_request\"` (+ optional `bodyText`). The consumer must tap Allow in WhatsApp before `start_call` is permitted; Meta limits the prompt to 1 per consumer per 24h (2 per 7 days) and requires an open 24h service window.  **Idempotency:** send an `Idempotency-Key` header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
     # @param initiate_whats_app_call_request [InitiateWhatsAppCallRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [InitiateWhatsAppCall200Response]
     def initiate_whats_app_call(initiate_whats_app_call_request, opts = {})
       data, _status_code, _headers = initiate_whats_app_call_with_http_info(initiate_whats_app_call_request, opts)
@@ -462,9 +747,10 @@ module Zernio
     end
 
     # Initiate outbound call
-    # Initiates an outbound Business-Initiated Call. The Telnyx-side SIP leg is originated server-side (Option B: SIP-first). Telnyx INVITEs Meta directly over TLS:5061 with the SIP digest credentials we captured at calling-enablement time). No client-side SDP is required; pass only &#x60;accountId&#x60; and &#x60;to&#x60;.  To send the consumer the call-consent prompt instead of placing a call, pass &#x60;action: \&quot;send_call_permission_request\&quot;&#x60; (+ optional &#x60;bodyText&#x60;). The consumer must tap Allow in WhatsApp before &#x60;start_call&#x60; is permitted; Meta limits the prompt to 1 per consumer per 24h (2 per 7 days) and requires an open 24h service window. 
+    # Initiates an outbound Business-Initiated Call. The Telnyx-side SIP leg is originated server-side (Option B: SIP-first). Telnyx INVITEs Meta directly over TLS:5061 with the SIP digest credentials we captured at calling-enablement time). No client-side SDP is required; pass only &#x60;accountId&#x60; and &#x60;to&#x60;.  To send the consumer the call-consent prompt instead of placing a call, pass &#x60;action: \&quot;send_call_permission_request\&quot;&#x60; (+ optional &#x60;bodyText&#x60;). The consumer must tap Allow in WhatsApp before &#x60;start_call&#x60; is permitted; Meta limits the prompt to 1 per consumer per 24h (2 per 7 days) and requires an open 24h service window.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
     # @param initiate_whats_app_call_request [InitiateWhatsAppCallRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [Array<(InitiateWhatsAppCall200Response, Integer, Hash)>] InitiateWhatsAppCall200Response data, response status code and response headers
     def initiate_whats_app_call_with_http_info(initiate_whats_app_call_request, opts = {})
       if @api_client.config.debugging
@@ -474,6 +760,10 @@ module Zernio
       if @api_client.config.client_side_validation && initiate_whats_app_call_request.nil?
         fail ArgumentError, "Missing the required parameter 'initiate_whats_app_call_request' when calling WhatsAppCallingApi.initiate_whats_app_call"
       end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling WhatsAppCallingApi.initiate_whats_app_call, the character length must be smaller than or equal to 255.'
+      end
+
       # resource path
       local_var_path = '/v1/whatsapp/calls'
 
@@ -489,6 +779,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -520,13 +811,14 @@ module Zernio
     end
 
     # List call history for an account
-    # Compact history listing for a single connected account. Results are scoped to the resolved SocialAccount; profile-scoped team members cannot read calls on sibling accounts. 
+    # Compact history listing for a single connected account. Results are scoped to the resolved SocialAccount; profile-scoped team members cannot read calls on sibling accounts.  Cursor pagination: pass the returned `nextCursor` as `before` to fetch the next page (same scheme as `GET /v1/calls`). `since`/`until` remain as absolute range filters and combine with the cursor. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status 
     # @option opts [String] :direction 
     # @option opts [Time] :since 
     # @option opts [Time] :_until 
+    # @option opts [Time] :before Return calls with startedAt strictly before this instant (use the previous page&#39;s nextCursor).
     # @option opts [Integer] :limit 
     # @return [ListWhatsAppCalls200Response]
     def list_whats_app_calls(account_id, opts = {})
@@ -535,13 +827,14 @@ module Zernio
     end
 
     # List call history for an account
-    # Compact history listing for a single connected account. Results are scoped to the resolved SocialAccount; profile-scoped team members cannot read calls on sibling accounts. 
+    # Compact history listing for a single connected account. Results are scoped to the resolved SocialAccount; profile-scoped team members cannot read calls on sibling accounts.  Cursor pagination: pass the returned &#x60;nextCursor&#x60; as &#x60;before&#x60; to fetch the next page (same scheme as &#x60;GET /v1/calls&#x60;). &#x60;since&#x60;/&#x60;until&#x60; remain as absolute range filters and combine with the cursor. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :status 
     # @option opts [String] :direction 
     # @option opts [Time] :since 
     # @option opts [Time] :_until 
+    # @option opts [Time] :before Return calls with startedAt strictly before this instant (use the previous page&#39;s nextCursor).
     # @option opts [Integer] :limit 
     # @return [Array<(ListWhatsAppCalls200Response, Integer, Hash)>] ListWhatsAppCalls200Response data, response status code and response headers
     def list_whats_app_calls_with_http_info(account_id, opts = {})
@@ -578,6 +871,7 @@ module Zernio
       query_params[:'direction'] = opts[:'direction'] if !opts[:'direction'].nil?
       query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
       query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+      query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
 
       # header parameters
@@ -617,21 +911,21 @@ module Zernio
     # Update calling config
     # Update fields on an already-enabled number. Only fields present in the body are written; `undefined` leaves the stored value alone, explicit `null` clears a nullable field. No Meta side effect, this only changes local routing state consumed by the Telnyx webhook handler. 
     # @param id [String] 
-    # @param update_whats_app_calling_request [UpdateWhatsAppCallingRequest] 
+    # @param update_whats_app_calling_legacy_request [UpdateWhatsAppCallingLegacyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def update_whats_app_calling(id, update_whats_app_calling_request, opts = {})
-      update_whats_app_calling_with_http_info(id, update_whats_app_calling_request, opts)
+    def update_whats_app_calling(id, update_whats_app_calling_legacy_request, opts = {})
+      update_whats_app_calling_with_http_info(id, update_whats_app_calling_legacy_request, opts)
       nil
     end
 
     # Update calling config
     # Update fields on an already-enabled number. Only fields present in the body are written; &#x60;undefined&#x60; leaves the stored value alone, explicit &#x60;null&#x60; clears a nullable field. No Meta side effect, this only changes local routing state consumed by the Telnyx webhook handler. 
     # @param id [String] 
-    # @param update_whats_app_calling_request [UpdateWhatsAppCallingRequest] 
+    # @param update_whats_app_calling_legacy_request [UpdateWhatsAppCallingLegacyRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def update_whats_app_calling_with_http_info(id, update_whats_app_calling_request, opts = {})
+    def update_whats_app_calling_with_http_info(id, update_whats_app_calling_legacy_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.update_whats_app_calling ...'
       end
@@ -639,9 +933,83 @@ module Zernio
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.update_whats_app_calling"
       end
-      # verify the required parameter 'update_whats_app_calling_request' is set
-      if @api_client.config.client_side_validation && update_whats_app_calling_request.nil?
-        fail ArgumentError, "Missing the required parameter 'update_whats_app_calling_request' when calling WhatsAppCallingApi.update_whats_app_calling"
+      # verify the required parameter 'update_whats_app_calling_legacy_request' is set
+      if @api_client.config.client_side_validation && update_whats_app_calling_legacy_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_whats_app_calling_legacy_request' when calling WhatsAppCallingApi.update_whats_app_calling"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/{id}/whatsapp/calling'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_whats_app_calling_legacy_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppCallingApi.update_whats_app_calling",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#update_whats_app_calling\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update calling config
+    # Deprecated alias of `/v1/phone-numbers/{id}/whatsapp/calling`; same contract. New integrations should use that path.  Update fields on an already-enabled number. Only fields present in the body are written; `undefined` leaves the stored value alone, explicit `null` clears a nullable field. No Meta side effect, this only changes local routing state consumed by the Telnyx webhook handler. 
+    # @param id [String] 
+    # @param update_whats_app_calling_legacy_request [UpdateWhatsAppCallingLegacyRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def update_whats_app_calling_legacy(id, update_whats_app_calling_legacy_request, opts = {})
+      update_whats_app_calling_legacy_with_http_info(id, update_whats_app_calling_legacy_request, opts)
+      nil
+    end
+
+    # Update calling config
+    # Deprecated alias of &#x60;/v1/phone-numbers/{id}/whatsapp/calling&#x60;; same contract. New integrations should use that path.  Update fields on an already-enabled number. Only fields present in the body are written; &#x60;undefined&#x60; leaves the stored value alone, explicit &#x60;null&#x60; clears a nullable field. No Meta side effect, this only changes local routing state consumed by the Telnyx webhook handler. 
+    # @param id [String] 
+    # @param update_whats_app_calling_legacy_request [UpdateWhatsAppCallingLegacyRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def update_whats_app_calling_legacy_with_http_info(id, update_whats_app_calling_legacy_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.update_whats_app_calling_legacy ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.update_whats_app_calling_legacy"
+      end
+      # verify the required parameter 'update_whats_app_calling_legacy_request' is set
+      if @api_client.config.client_side_validation && update_whats_app_calling_legacy_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_whats_app_calling_legacy_request' when calling WhatsAppCallingApi.update_whats_app_calling_legacy"
       end
       # resource path
       local_var_path = '/v1/whatsapp/phone-numbers/{id}/calling'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -663,7 +1031,7 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_whats_app_calling_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_whats_app_calling_legacy_request)
 
       # return_type
       return_type = opts[:debug_return_type]
@@ -672,7 +1040,7 @@ module Zernio
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
 
       new_options = opts.merge(
-        :operation => :"WhatsAppCallingApi.update_whats_app_calling",
+        :operation => :"WhatsAppCallingApi.update_whats_app_calling_legacy",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -683,7 +1051,7 @@ module Zernio
 
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: WhatsAppCallingApi#update_whats_app_calling\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#update_whats_app_calling_legacy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

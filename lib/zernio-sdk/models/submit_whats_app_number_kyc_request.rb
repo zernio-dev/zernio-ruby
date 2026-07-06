@@ -85,7 +85,7 @@ module Zernio
         :'end_user_last_name' => :'String',
         :'values' => :'Hash<String, String>',
         :'documents' => :'Array<SubmitWhatsAppNumberKycRequestDocumentsInner>',
-        :'address' => :'SubmitWhatsAppNumberKycRequestAddress'
+        :'address' => :'SubmitPhoneNumberKycRequestAddress'
       }
     end
 

@@ -41,7 +41,7 @@ module Zernio
     def self.openapi_types
       {
         :'success' => :'Boolean',
-        :'broadcast' => :'RemediateWhatsAppNumber200ResponsePhoneNumber'
+        :'broadcast' => :'RemediatePhoneNumber200ResponsePhoneNumber'
       }
     end
 

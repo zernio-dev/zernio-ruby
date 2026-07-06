@@ -32,9 +32,52 @@ describe 'UsageApi' do
     end
   end
 
+  # unit tests for get_calls_usage
+  # Calling usage (volumes + billable cost)
+  # Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call&#39;s billing snapshot, so this endpoint always agrees with the invoice: &#x60;billableUSD&#x60; is what Zernio bills; &#x60;metaUSD&#x60; is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional &#x60;groupBy&#x60; returns a breakdown by UTC day, by your number, or by channel. Defaults to the last 30 days. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Time] :since Start of the window (inclusive). Default 30 days before &#x60;until&#x60;.
+  # @option opts [Time] :_until End of the window (exclusive). Default now.
+  # @option opts [String] :channel 
+  # @option opts [String] :number Scope to calls involving this number (typically one of YOUR numbers). E.164, leading + optional.
+  # @option opts [String] :group_by 
+  # @return [GetCallsUsage200Response]
+  describe 'get_calls_usage test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_sms_usage
+  # SMS usage (volumes)
+  # Aggregated SMS/MMS volumes across your numbers: sent, received, and total message counts, with an optional breakdown by UTC day or by number. Defaults to the last 30 days.  Volumes only, deliberately: SMS cost is carrier-rated asynchronously and billed to your invoice, so per-message cost is not available here. Calling usage (GET /v1/usage/calls) does include billable cost. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Time] :since Start of the window (inclusive). Default 30 days before &#x60;until&#x60;.
+  # @option opts [Time] :_until End of the window (exclusive). Default now.
+  # @option opts [String] :number Scope to one of YOUR SMS-enabled numbers (E.164, leading + optional).
+  # @option opts [String] :group_by 
+  # @return [GetSmsUsage200Response]
+  describe 'get_sms_usage test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_usage
+  # Get plan and usage snapshot
+  # The usage hub: current plan name, billing period, plan limits, and usage counts, in one snapshot. For metered consumption over an arbitrary window with breakdowns (by day, by number), use the domain spokes: &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60;.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
+  # @return [UsageStats]
+  describe 'get_usage test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_usage_stats
   # Get plan and usage stats
-  # Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
+  # Deprecated alias of &#x60;GET /v1/usage&#x60;; same contract. New integrations should use that path (the usage hub), with &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60; for metered breakdowns.  Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
   # @return [UsageStats]
