@@ -36,9 +36,6 @@ module Zernio
     # 'auto' derives from the callee's country; 'en'/'es' force it.
     attr_accessor :transcription_language
 
-    # A retry with the same key returns the original call instead of dialing again.
-    attr_accessor :idempotency_key
-
     # Answering-machine detection; defers the bridge until human vs machine is known.
     attr_accessor :amd
 
@@ -77,7 +74,6 @@ module Zernio
         :'record_override' => :'recordOverride',
         :'transcribe_override' => :'transcribeOverride',
         :'transcription_language' => :'transcriptionLanguage',
-        :'idempotency_key' => :'idempotencyKey',
         :'amd' => :'amd',
         :'voicemail_drop_message' => :'voicemailDropMessage'
       }
@@ -103,7 +99,6 @@ module Zernio
         :'record_override' => :'Boolean',
         :'transcribe_override' => :'Boolean',
         :'transcription_language' => :'String',
-        :'idempotency_key' => :'String',
         :'amd' => :'Boolean',
         :'voicemail_drop_message' => :'String'
       }
@@ -161,10 +156,6 @@ module Zernio
         self.transcription_language = attributes[:'transcription_language']
       end
 
-      if attributes.key?(:'idempotency_key')
-        self.idempotency_key = attributes[:'idempotency_key']
-      end
-
       if attributes.key?(:'amd')
         self.amd = attributes[:'amd']
       end
@@ -197,14 +188,6 @@ module Zernio
         invalid_properties.push('invalid value for "greeting", the character length must be smaller than or equal to 1000.')
       end
 
-      if !@idempotency_key.nil? && @idempotency_key.to_s.length > 255
-        invalid_properties.push('invalid value for "idempotency_key", the character length must be smaller than or equal to 255.')
-      end
-
-      if !@idempotency_key.nil? && @idempotency_key.to_s.length < 1
-        invalid_properties.push('invalid value for "idempotency_key", the character length must be greater than or equal to 1.')
-      end
-
       if !@voicemail_drop_message.nil? && @voicemail_drop_message.to_s.length > 1000
         invalid_properties.push('invalid value for "voicemail_drop_message", the character length must be smaller than or equal to 1000.')
       end
@@ -222,8 +205,6 @@ module Zernio
       return false if !@greeting.nil? && @greeting.to_s.length > 1000
       transcription_language_validator = EnumAttributeValidator.new('String', ["auto", "en", "es"])
       return false unless transcription_language_validator.valid?(@transcription_language)
-      return false if !@idempotency_key.nil? && @idempotency_key.to_s.length > 255
-      return false if !@idempotency_key.nil? && @idempotency_key.to_s.length < 1
       return false if !@voicemail_drop_message.nil? && @voicemail_drop_message.to_s.length > 1000
       true
     end
@@ -283,24 +264,6 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] idempotency_key Value to be assigned
-    def idempotency_key=(idempotency_key)
-      if idempotency_key.nil?
-        fail ArgumentError, 'idempotency_key cannot be nil'
-      end
-
-      if idempotency_key.to_s.length > 255
-        fail ArgumentError, 'invalid value for "idempotency_key", the character length must be smaller than or equal to 255.'
-      end
-
-      if idempotency_key.to_s.length < 1
-        fail ArgumentError, 'invalid value for "idempotency_key", the character length must be greater than or equal to 1.'
-      end
-
-      @idempotency_key = idempotency_key
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] voicemail_drop_message Value to be assigned
     def voicemail_drop_message=(voicemail_drop_message)
       if voicemail_drop_message.nil?
@@ -326,7 +289,6 @@ module Zernio
           record_override == o.record_override &&
           transcribe_override == o.transcribe_override &&
           transcription_language == o.transcription_language &&
-          idempotency_key == o.idempotency_key &&
           amd == o.amd &&
           voicemail_drop_message == o.voicemail_drop_message
     end
@@ -340,7 +302,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [to, from_number, forward_to, greeting, record_override, transcribe_override, transcription_language, idempotency_key, amd, voicemail_drop_message].hash
+      [to, from_number, forward_to, greeting, record_override, transcribe_override, transcription_language, amd, voicemail_drop_message].hash
     end
 
     # Builds the object from hash

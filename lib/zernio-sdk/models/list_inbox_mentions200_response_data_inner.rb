@@ -107,6 +107,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'permalink',
+        :'author_urn',
       ])
     end
 

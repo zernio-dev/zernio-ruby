@@ -15,31 +15,10 @@ require 'time'
 
 module Zernio
   class DisableVoiceOnNumber200Response < ApiModelBase
+    # Always false after a successful disable.
     attr_accessor :enabled
 
     attr_accessor :phone_number
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -110,19 +89,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      enabled_validator = EnumAttributeValidator.new('Boolean', ["false"])
-      return false unless enabled_validator.valid?(@enabled)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] enabled Object to be assigned
-    def enabled=(enabled)
-      validator = EnumAttributeValidator.new('Boolean', ["false"])
-      unless validator.valid?(enabled)
-        fail ArgumentError, "invalid value for \"enabled\", must be one of #{validator.allowable_values}."
-      end
-      @enabled = enabled
     end
 
     # Checks equality by comparing each attribute.

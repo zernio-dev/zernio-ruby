@@ -1231,7 +1231,6 @@ Class | Method | HTTP request | Description
  - [Zernio::ListInboxMentions200Response](docs/ListInboxMentions200Response.md)
  - [Zernio::ListInboxMentions200ResponseDataInner](docs/ListInboxMentions200ResponseDataInner.md)
  - [Zernio::ListInboxMentions200ResponseMeta](docs/ListInboxMentions200ResponseMeta.md)
- - [Zernio::ListInboxMentions200ResponsePagination](docs/ListInboxMentions200ResponsePagination.md)
  - [Zernio::ListInboxReviews200Response](docs/ListInboxReviews200Response.md)
  - [Zernio::ListInboxReviews200ResponseDataInner](docs/ListInboxReviews200ResponseDataInner.md)
  - [Zernio::ListInboxReviews200ResponseDataInnerReply](docs/ListInboxReviews200ResponseDataInnerReply.md)
