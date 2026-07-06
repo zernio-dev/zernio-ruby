@@ -732,6 +732,112 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Search conversations
+    # Search message text across your conversations and get back the conversations that contain the query, each with up to 3 most-recent matching messages. Useful for finding threads about a topic, or (with direction=outgoing) collecting examples of how you write to customers, for example to teach an AI agent your tone of voice.  Only platforms whose messages are stored by Zernio are searchable: WhatsApp, SMS, Telegram, Facebook and Instagram. Twitter/X, Bluesky and Reddit conversations are fetched live from the platforms and cannot be searched; those accounts are listed in meta.accountsSkipped.  Matching is word-based: case-insensitive and accent-insensitive, exact tokens only (no substrings, no stemming). Quote a phrase to match it exactly. 
+    # @param query [String] Text to search for in message content
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :direction Only match messages sent to you (incoming) or by you (outgoing)
+    # @option opts [String] :profile_id Filter by profile ID
+    # @option opts [String] :platform Filter by platform (searchable platforms only)
+    # @option opts [String] :account_id Filter by specific social account ID
+    # @option opts [Integer] :limit Maximum number of conversations to return (default to 20)
+    # @option opts [String] :cursor Pagination cursor for next page
+    # @return [SearchInboxConversations200Response]
+    def search_inbox_conversations(query, opts = {})
+      data, _status_code, _headers = search_inbox_conversations_with_http_info(query, opts)
+      data
+    end
+
+    # Search conversations
+    # Search message text across your conversations and get back the conversations that contain the query, each with up to 3 most-recent matching messages. Useful for finding threads about a topic, or (with direction&#x3D;outgoing) collecting examples of how you write to customers, for example to teach an AI agent your tone of voice.  Only platforms whose messages are stored by Zernio are searchable: WhatsApp, SMS, Telegram, Facebook and Instagram. Twitter/X, Bluesky and Reddit conversations are fetched live from the platforms and cannot be searched; those accounts are listed in meta.accountsSkipped.  Matching is word-based: case-insensitive and accent-insensitive, exact tokens only (no substrings, no stemming). Quote a phrase to match it exactly. 
+    # @param query [String] Text to search for in message content
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :direction Only match messages sent to you (incoming) or by you (outgoing)
+    # @option opts [String] :profile_id Filter by profile ID
+    # @option opts [String] :platform Filter by platform (searchable platforms only)
+    # @option opts [String] :account_id Filter by specific social account ID
+    # @option opts [Integer] :limit Maximum number of conversations to return (default to 20)
+    # @option opts [String] :cursor Pagination cursor for next page
+    # @return [Array<(SearchInboxConversations200Response, Integer, Hash)>] SearchInboxConversations200Response data, response status code and response headers
+    def search_inbox_conversations_with_http_info(query, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.search_inbox_conversations ...'
+      end
+      # verify the required parameter 'query' is set
+      if @api_client.config.client_side_validation && query.nil?
+        fail ArgumentError, "Missing the required parameter 'query' when calling MessagesApi.search_inbox_conversations"
+      end
+      if @api_client.config.client_side_validation && query.to_s.length > 200
+        fail ArgumentError, 'invalid value for "query" when calling MessagesApi.search_inbox_conversations, the character length must be smaller than or equal to 200.'
+      end
+
+      if @api_client.config.client_side_validation && query.to_s.length < 2
+        fail ArgumentError, 'invalid value for "query" when calling MessagesApi.search_inbox_conversations, the character length must be greater than or equal to 2.'
+      end
+
+      allowable_values = ["incoming", "outgoing"]
+      if @api_client.config.client_side_validation && opts[:'direction'] && !allowable_values.include?(opts[:'direction'])
+        fail ArgumentError, "invalid value for \"direction\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["facebook", "instagram", "telegram", "whatsapp", "sms"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 50
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling MessagesApi.search_inbox_conversations, must be smaller than or equal to 50.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling MessagesApi.search_inbox_conversations, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/inbox/conversations/search'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'query'] = query
+      query_params[:'direction'] = opts[:'direction'] if !opts[:'direction'].nil?
+      query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SearchInboxConversations200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.search_inbox_conversations",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#search_inbox_conversations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Send message
     # Send a message in a conversation. Supports text, attachments, quick replies, buttons, templates, and message tags. Attachment and interactive message support varies by platform.  WhatsApp template messages: to send an approved template into this conversation (required when the 24-hour customer-service window is closed), use the `template` field with a single element carrying the template reference: `{ \"elements\": [{ \"name\": ..., \"language\": ..., \"components\": [...] }] }`. See the `template` field below for the exact shape. To send a template to a phone number you have no conversation with yet, use the create-conversation endpoint (POST /v1/inbox/conversations) instead.  WhatsApp rich interactive messages (list, CTA URL, Flow, location request) are available via the `interactive` field. Tap events are delivered through the `message.received` webhook with WhatsApp-specific `metadata` fields (`interactiveType`, `interactiveId`, `flowResponseJson`, `flowResponseData`). 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.

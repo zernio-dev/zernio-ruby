@@ -160,6 +160,24 @@ describe 'MessagesApi' do
     end
   end
 
+  # unit tests for search_inbox_conversations
+  # Search conversations
+  # Search message text across your conversations and get back the conversations that contain the query, each with up to 3 most-recent matching messages. Useful for finding threads about a topic, or (with direction&#x3D;outgoing) collecting examples of how you write to customers, for example to teach an AI agent your tone of voice.  Only platforms whose messages are stored by Zernio are searchable: WhatsApp, SMS, Telegram, Facebook and Instagram. Twitter/X, Bluesky and Reddit conversations are fetched live from the platforms and cannot be searched; those accounts are listed in meta.accountsSkipped.  Matching is word-based: case-insensitive and accent-insensitive, exact tokens only (no substrings, no stemming). Quote a phrase to match it exactly. 
+  # @param query Text to search for in message content
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :direction Only match messages sent to you (incoming) or by you (outgoing)
+  # @option opts [String] :profile_id Filter by profile ID
+  # @option opts [String] :platform Filter by platform (searchable platforms only)
+  # @option opts [String] :account_id Filter by specific social account ID
+  # @option opts [Integer] :limit Maximum number of conversations to return
+  # @option opts [String] :cursor Pagination cursor for next page
+  # @return [SearchInboxConversations200Response]
+  describe 'search_inbox_conversations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for send_inbox_message
   # Send message
   # Send a message in a conversation. Supports text, attachments, quick replies, buttons, templates, and message tags. Attachment and interactive message support varies by platform.  WhatsApp template messages: to send an approved template into this conversation (required when the 24-hour customer-service window is closed), use the &#x60;template&#x60; field with a single element carrying the template reference: &#x60;{ \&quot;elements\&quot;: [{ \&quot;name\&quot;: ..., \&quot;language\&quot;: ..., \&quot;components\&quot;: [...] }] }&#x60;. See the &#x60;template&#x60; field below for the exact shape. To send a template to a phone number you have no conversation with yet, use the create-conversation endpoint (POST /v1/inbox/conversations) instead.  WhatsApp rich interactive messages (list, CTA URL, Flow, location request) are available via the &#x60;interactive&#x60; field. Tap events are delivered through the &#x60;message.received&#x60; webhook with WhatsApp-specific &#x60;metadata&#x60; fields (&#x60;interactiveType&#x60;, &#x60;interactiveId&#x60;, &#x60;flowResponseJson&#x60;, &#x60;flowResponseData&#x60;). 

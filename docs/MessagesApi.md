@@ -13,6 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_inbox_conversations**](MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations |
 | [**mark_conversation_read**](MessagesApi.md#mark_conversation_read) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read |
 | [**remove_message_reaction**](MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction |
+| [**search_inbox_conversations**](MessagesApi.md#search_inbox_conversations) | **GET** /v1/inbox/conversations/search | Search conversations |
 | [**send_inbox_message**](MessagesApi.md#send_inbox_message) | **POST** /v1/inbox/conversations/{conversationId}/messages | Send message |
 | [**send_typing_indicator**](MessagesApi.md#send_typing_indicator) | **POST** /v1/inbox/conversations/{conversationId}/typing | Send typing indicator |
 | [**update_inbox_conversation**](MessagesApi.md#update_inbox_conversation) | **PUT** /v1/inbox/conversations/{conversationId} | Update conversation status |
@@ -673,6 +674,89 @@ end
 ### Return type
 
 [**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## search_inbox_conversations
+
+> <SearchInboxConversations200Response> search_inbox_conversations(query, opts)
+
+Search conversations
+
+Search message text across your conversations and get back the conversations that contain the query, each with up to 3 most-recent matching messages. Useful for finding threads about a topic, or (with direction=outgoing) collecting examples of how you write to customers, for example to teach an AI agent your tone of voice.  Only platforms whose messages are stored by Zernio are searchable: WhatsApp, SMS, Telegram, Facebook and Instagram. Twitter/X, Bluesky and Reddit conversations are fetched live from the platforms and cannot be searched; those accounts are listed in meta.accountsSkipped.  Matching is word-based: case-insensitive and accent-insensitive, exact tokens only (no substrings, no stemming). Quote a phrase to match it exactly. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+query = 'query_example' # String | Text to search for in message content
+opts = {
+  direction: 'incoming', # String | Only match messages sent to you (incoming) or by you (outgoing)
+  profile_id: 'profile_id_example', # String | Filter by profile ID
+  platform: 'facebook', # String | Filter by platform (searchable platforms only)
+  account_id: 'account_id_example', # String | Filter by specific social account ID
+  limit: 56, # Integer | Maximum number of conversations to return
+  cursor: 'cursor_example' # String | Pagination cursor for next page
+}
+
+begin
+  # Search conversations
+  result = api_instance.search_inbox_conversations(query, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->search_inbox_conversations: #{e}"
+end
+```
+
+#### Using the search_inbox_conversations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchInboxConversations200Response>, Integer, Hash)> search_inbox_conversations_with_http_info(query, opts)
+
+```ruby
+begin
+  # Search conversations
+  data, status_code, headers = api_instance.search_inbox_conversations_with_http_info(query, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchInboxConversations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->search_inbox_conversations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **query** | **String** | Text to search for in message content |  |
+| **direction** | **String** | Only match messages sent to you (incoming) or by you (outgoing) | [optional] |
+| **profile_id** | **String** | Filter by profile ID | [optional] |
+| **platform** | **String** | Filter by platform (searchable platforms only) | [optional] |
+| **account_id** | **String** | Filter by specific social account ID | [optional] |
+| **limit** | **Integer** | Maximum number of conversations to return | [optional][default to 20] |
+| **cursor** | **String** | Pagination cursor for next page | [optional] |
+
+### Return type
+
+[**SearchInboxConversations200Response**](SearchInboxConversations200Response.md)
 
 ### Authorization
 
