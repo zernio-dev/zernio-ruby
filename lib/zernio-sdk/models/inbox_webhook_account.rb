@@ -22,6 +22,9 @@ module Zernio
     # Social account ID (same value as id). Canonical field so consumers can filter every webhook event on one field (e.g. route staging vs production by account). id is kept for backward compatibility.
     attr_accessor :account_id
 
+    # Zernio profile (workspace) ID this account belongs to. Use it to route or filter inbox webhooks by workspace. This is the profile ID only, not its name (resolve the name via the API with this ID). Optional; omitted on the shared WhatsApp sandbox account and when the account has no resolvable profile.
+    attr_accessor :profile_id
+
     attr_accessor :platform
 
     attr_accessor :username
@@ -33,6 +36,7 @@ module Zernio
       {
         :'id' => :'id',
         :'account_id' => :'accountId',
+        :'profile_id' => :'profileId',
         :'platform' => :'platform',
         :'username' => :'username',
         :'display_name' => :'displayName'
@@ -54,6 +58,7 @@ module Zernio
       {
         :'id' => :'String',
         :'account_id' => :'String',
+        :'profile_id' => :'String',
         :'platform' => :'String',
         :'username' => :'String',
         :'display_name' => :'String'
@@ -90,6 +95,10 @@ module Zernio
 
       if attributes.key?(:'account_id')
         self.account_id = attributes[:'account_id']
+      end
+
+      if attributes.key?(:'profile_id')
+        self.profile_id = attributes[:'profile_id']
       end
 
       if attributes.key?(:'platform')
@@ -176,6 +185,7 @@ module Zernio
       self.class == o.class &&
           id == o.id &&
           account_id == o.account_id &&
+          profile_id == o.profile_id &&
           platform == o.platform &&
           username == o.username &&
           display_name == o.display_name
@@ -190,7 +200,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, platform, username, display_name].hash
+      [id, account_id, profile_id, platform, username, display_name].hash
     end
 
     # Builds the object from hash
