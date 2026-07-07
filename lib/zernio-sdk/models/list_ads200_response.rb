@@ -17,12 +17,16 @@ module Zernio
   class ListAds200Response < ApiModelBase
     attr_accessor :ads
 
+    # Present and true only on `202` responses: part of the requested date range is still being backfilled from the platform in the background. Retry the same request shortly; it returns 200 once the range is fully ingested.
+    attr_accessor :backfill_pending
+
     attr_accessor :pagination
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'ads' => :'ads',
+        :'backfill_pending' => :'backfillPending',
         :'pagination' => :'pagination'
       }
     end
@@ -41,6 +45,7 @@ module Zernio
     def self.openapi_types
       {
         :'ads' => :'Array<Ad>',
+        :'backfill_pending' => :'Boolean',
         :'pagination' => :'Pagination'
       }
     end
@@ -73,6 +78,10 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'backfill_pending')
+        self.backfill_pending = attributes[:'backfill_pending']
+      end
+
       if attributes.key?(:'pagination')
         self.pagination = attributes[:'pagination']
       end
@@ -99,6 +108,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           ads == o.ads &&
+          backfill_pending == o.backfill_pending &&
           pagination == o.pagination
     end
 
@@ -111,7 +121,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ads, pagination].hash
+      [ads, backfill_pending, pagination].hash
     end
 
     # Builds the object from hash

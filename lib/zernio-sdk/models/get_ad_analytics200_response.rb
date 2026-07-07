@@ -17,12 +17,16 @@ module Zernio
   class GetAdAnalytics200Response < ApiModelBase
     attr_accessor :ad
 
+    # Present and true only on `202` responses: part of the requested date range is still being backfilled from the platform in the background. Retry the same request shortly; it returns 200 once the range is fully ingested.
+    attr_accessor :backfill_pending
+
     attr_accessor :analytics
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'ad' => :'ad',
+        :'backfill_pending' => :'backfillPending',
         :'analytics' => :'analytics'
       }
     end
@@ -41,6 +45,7 @@ module Zernio
     def self.openapi_types
       {
         :'ad' => :'GetAdAnalytics200ResponseAd',
+        :'backfill_pending' => :'Boolean',
         :'analytics' => :'GetCampaignAnalytics200ResponseAnalytics'
       }
     end
@@ -71,6 +76,10 @@ module Zernio
         self.ad = attributes[:'ad']
       end
 
+      if attributes.key?(:'backfill_pending')
+        self.backfill_pending = attributes[:'backfill_pending']
+      end
+
       if attributes.key?(:'analytics')
         self.analytics = attributes[:'analytics']
       end
@@ -97,6 +106,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           ad == o.ad &&
+          backfill_pending == o.backfill_pending &&
           analytics == o.analytics
     end
 
@@ -109,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad, analytics].hash
+      [ad, backfill_pending, analytics].hash
     end
 
     # Builds the object from hash

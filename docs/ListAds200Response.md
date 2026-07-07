@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ads** | [**Array&lt;Ad&gt;**](Ad.md) |  | [optional] |
+| **backfill_pending** | **Boolean** | Present and true only on &#x60;202&#x60; responses: part of the requested date range is still being backfilled from the platform in the background. Retry the same request shortly; it returns 200 once the range is fully ingested. | [optional] |
 | **pagination** | [**Pagination**](Pagination.md) |  | [optional] |
 
 ## Example
@@ -14,6 +15,7 @@ require 'zernio-sdk'
 
 instance = Zernio::ListAds200Response.new(
   ads: null,
+  backfill_pending: null,
   pagination: null
 )
 ```
