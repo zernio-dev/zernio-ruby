@@ -33,6 +33,15 @@ module Zernio
     # LinkedIn URN of the person who mentioned you
     attr_accessor :author_urn
 
+    # Display name of the author, resolved from authorUrn. Null when LinkedIn does not allow resolving the profile.
+    attr_accessor :author_name
+
+    # LinkedIn vanity name of the author (the slug in their profile URL)
+    attr_accessor :author_username
+
+    # Profile picture URL of the author. LinkedIn CDN URLs expire after some time, so fetch promptly rather than storing long-term.
+    attr_accessor :author_picture
+
     # URN of the organization that was mentioned
     attr_accessor :organizational_entity
 
@@ -72,6 +81,9 @@ module Zernio
         :'content' => :'content',
         :'permalink' => :'permalink',
         :'author_urn' => :'authorUrn',
+        :'author_name' => :'authorName',
+        :'author_username' => :'authorUsername',
+        :'author_picture' => :'authorPicture',
         :'organizational_entity' => :'organizationalEntity',
         :'published_at' => :'publishedAt',
         :'created_at' => :'createdAt'
@@ -98,6 +110,9 @@ module Zernio
         :'content' => :'String',
         :'permalink' => :'String',
         :'author_urn' => :'String',
+        :'author_name' => :'String',
+        :'author_username' => :'String',
+        :'author_picture' => :'String',
         :'organizational_entity' => :'String',
         :'published_at' => :'Time',
         :'created_at' => :'Time'
@@ -109,6 +124,9 @@ module Zernio
       Set.new([
         :'permalink',
         :'author_urn',
+        :'author_name',
+        :'author_username',
+        :'author_picture',
       ])
     end
 
@@ -154,6 +172,18 @@ module Zernio
 
       if attributes.key?(:'author_urn')
         self.author_urn = attributes[:'author_urn']
+      end
+
+      if attributes.key?(:'author_name')
+        self.author_name = attributes[:'author_name']
+      end
+
+      if attributes.key?(:'author_username')
+        self.author_username = attributes[:'author_username']
+      end
+
+      if attributes.key?(:'author_picture')
+        self.author_picture = attributes[:'author_picture']
       end
 
       if attributes.key?(:'organizational_entity')
@@ -208,6 +238,9 @@ module Zernio
           content == o.content &&
           permalink == o.permalink &&
           author_urn == o.author_urn &&
+          author_name == o.author_name &&
+          author_username == o.author_username &&
+          author_picture == o.author_picture &&
           organizational_entity == o.organizational_entity &&
           published_at == o.published_at &&
           created_at == o.created_at
@@ -222,7 +255,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, content, permalink, author_urn, organizational_entity, published_at, created_at].hash
+      [id, platform, account_id, account_username, content, permalink, author_urn, author_name, author_username, author_picture, organizational_entity, published_at, created_at].hash
     end
 
     # Builds the object from hash
