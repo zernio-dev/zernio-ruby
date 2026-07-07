@@ -14,15 +14,17 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Required for every type except `product`, where it is optional.
-  class SendInboxMessageRequestInteractiveBody < ApiModelBase
-    # Main body text.
-    attr_accessor :text
+  class SendInboxMessageRequestInteractiveActionOneOf6SectionsInner < ApiModelBase
+    # Optional section header.
+    attr_accessor :title
+
+    attr_accessor :product_items
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'text' => :'text'
+        :'title' => :'title',
+        :'product_items' => :'product_items'
       }
     end
 
@@ -39,7 +41,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'text' => :'String'
+        :'title' => :'String',
+        :'product_items' => :'Array<SendInboxMessageRequestInteractiveActionOneOf6SectionsInnerProductItemsInner>'
       }
     end
 
@@ -53,22 +56,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestInteractiveBody` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestInteractiveActionOneOf6SectionsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestInteractiveBody`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestInteractiveActionOneOf6SectionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'text')
-        self.text = attributes[:'text']
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'product_items')
+        if (value = attributes[:'product_items']).is_a?(Array)
+          self.product_items = value
+        end
       else
-        self.text = nil
+        self.product_items = nil
       end
     end
 
@@ -77,8 +86,12 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @text.nil?
-        invalid_properties.push('invalid value for "text", text cannot be nil.')
+      if @product_items.nil?
+        invalid_properties.push('invalid value for "product_items", product_items cannot be nil.')
+      end
+
+      if @product_items.length < 1
+        invalid_properties.push('invalid value for "product_items", number of items must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -88,18 +101,23 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @text.nil?
+      return false if @product_items.nil?
+      return false if @product_items.length < 1
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] text Value to be assigned
-    def text=(text)
-      if text.nil?
-        fail ArgumentError, 'text cannot be nil'
+    # @param [Object] product_items Value to be assigned
+    def product_items=(product_items)
+      if product_items.nil?
+        fail ArgumentError, 'product_items cannot be nil'
       end
 
-      @text = text
+      if product_items.length < 1
+        fail ArgumentError, 'invalid value for "product_items", number of items must be greater than or equal to 1.'
+      end
+
+      @product_items = product_items
     end
 
     # Checks equality by comparing each attribute.
@@ -107,7 +125,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          text == o.text
+          title == o.title &&
+          product_items == o.product_items
     end
 
     # @see the `==` method
@@ -119,7 +138,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [text].hash
+      [title, product_items].hash
     end
 
     # Builds the object from hash

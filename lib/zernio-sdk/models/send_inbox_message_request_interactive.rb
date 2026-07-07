@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # WhatsApp-only. Rich interactive payload for list messages, CTA URL buttons, Flow prompts, and location requests. When set, takes priority over `buttons` and `quickReplies`. The shape mirrors Meta's Cloud API `interactive` object verbatim, so any payload that works against Meta directly will also work here.  Use `buttons` / `quickReplies` for simple button replies (WhatsApp's `interactive.type: \"button\"`) — the abstraction caps at 3 buttons and handles the auto-conversion for you. Use this field only for `list`, `cta_url`, `flow`, `location_request_message`, or `voice_call` messages.  For `voice_call`, the message renders WhatsApp's native call button; tapping it starts a voice call to your business number. Requires WhatsApp Business Calling to be enabled on the sending number. The optional `parameters.payload` string is echoed back on the `calls` webhook (as `cta_payload`) for attribution.  For `location_request_message`, `action` may be omitted (we default it to `{ \"name\": \"send_location\" }`). WhatsApp renders a localized \"Send location\" button; the user's reply arrives as a regular location message in the conversation.  Tap events come back via the `message.received` webhook with `metadata.interactiveType` set to `list_reply` or `nfm_reply`. 
+  # WhatsApp-only. Rich interactive payload for list messages, CTA URL buttons, Flow prompts, location requests, voice-call buttons, and commerce messages (single product, product list, catalog, and carousel). When set, takes priority over `buttons` and `quickReplies`. The shape mirrors Meta's Cloud API `interactive` object verbatim, so any payload that works against Meta directly will also work here.  Use `buttons` / `quickReplies` for simple button replies (WhatsApp's `interactive.type: \"button\"`): the abstraction caps at 3 buttons and handles the auto-conversion for you. Use this field only for the types listed in the enum below.  All interactive messages are session messages: they can only be sent inside the 24-hour customer service window opened by the user's last inbound message.  Commerce types (`product`, `product_list`, `catalog_message`, and product carousels) require a Meta catalog connected to the WhatsApp Business Account in Commerce Manager. Media carousels (image/video cards) do not need a catalog.  For `product`, `body` is optional (WhatsApp renders the product card itself) and `header` is not allowed (the product image is the header). For `product_list`, a `header` with `type: \"text\"` is required. For `carousel`, top-level `header`/`footer` are not supported; media goes on each card instead.  For `voice_call`, the message renders WhatsApp's native call button; tapping it starts a voice call to your business number. Requires WhatsApp Business Calling to be enabled on the sending number. The optional `parameters.payload` string is echoed back on the `calls` webhook (as `cta_payload`) for attribution.  For `location_request_message`, `action` may be omitted (we default it to `{ \"name\": \"send_location\" }`). WhatsApp renders a localized \"Send location\" button; the user's reply arrives as a regular location message in the conversation.  For `catalog_message`, `action` may also be omitted (we default it to `{ \"name\": \"catalog_message\" }`).  Tap events come back via the `message.received` webhook with `metadata.interactiveType` set to `list_reply` or `nfm_reply`. Carts submitted from commerce messages arrive as `metadata.order`; product inquiries arrive as `metadata.referredProduct`. 
   class SendInboxMessageRequestInteractive < ApiModelBase
     # Which interactive layout to render.
     attr_accessor :type
@@ -115,8 +115,6 @@ module Zernio
 
       if attributes.key?(:'body')
         self.body = attributes[:'body']
-      else
-        self.body = nil
       end
 
       if attributes.key?(:'footer')
@@ -137,10 +135,6 @@ module Zernio
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
-      if @body.nil?
-        invalid_properties.push('invalid value for "body", body cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -149,30 +143,19 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["list", "cta_url", "flow", "location_request_message", "voice_call"])
+      type_validator = EnumAttributeValidator.new('String', ["list", "cta_url", "flow", "location_request_message", "voice_call", "product", "product_list", "catalog_message", "carousel"])
       return false unless type_validator.valid?(@type)
-      return false if @body.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["list", "cta_url", "flow", "location_request_message", "voice_call"])
+      validator = EnumAttributeValidator.new('String', ["list", "cta_url", "flow", "location_request_message", "voice_call", "product", "product_list", "catalog_message", "carousel"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] body Value to be assigned
-    def body=(body)
-      if body.nil?
-        fail ArgumentError, 'body cannot be nil'
-      end
-
-      @body = body
     end
 
     # Checks equality by comparing each attribute.

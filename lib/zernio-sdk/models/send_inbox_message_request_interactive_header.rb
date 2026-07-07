@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Optional header shown above the body.
+  # Optional header shown above the body. Required with `type: \"text\"` for `product_list`; not allowed for `product` or `carousel`. 
   class SendInboxMessageRequestInteractiveHeader < ApiModelBase
     attr_accessor :type
 
