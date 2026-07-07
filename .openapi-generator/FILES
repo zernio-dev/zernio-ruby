@@ -199,6 +199,7 @@ docs/CreatePhoneNumberPortIn201Response.md
 docs/CreatePhoneNumberPortIn201ResponseOrdersInner.md
 docs/CreatePhoneNumberPortInRequest.md
 docs/CreatePhoneNumberPortInRequestEndUser.md
+docs/CreatePost403Response.md
 docs/CreatePost409Response.md
 docs/CreatePost409ResponseDetails.md
 docs/CreatePost429Response.md
@@ -1602,6 +1603,7 @@ lib/zernio-sdk/models/create_phone_number_port_in201_response.rb
 lib/zernio-sdk/models/create_phone_number_port_in201_response_orders_inner.rb
 lib/zernio-sdk/models/create_phone_number_port_in_request.rb
 lib/zernio-sdk/models/create_phone_number_port_in_request_end_user.rb
+lib/zernio-sdk/models/create_post403_response.rb
 lib/zernio-sdk/models/create_post409_response.rb
 lib/zernio-sdk/models/create_post409_response_details.rb
 lib/zernio-sdk/models/create_post429_response.rb
@@ -2958,6 +2960,7 @@ spec/models/create_phone_number_port_in201_response_orders_inner_spec.rb
 spec/models/create_phone_number_port_in201_response_spec.rb
 spec/models/create_phone_number_port_in_request_end_user_spec.rb
 spec/models/create_phone_number_port_in_request_spec.rb
+spec/models/create_post403_response_spec.rb
 spec/models/create_post409_response_details_spec.rb
 spec/models/create_post409_response_spec.rb
 spec/models/create_post429_response_spec.rb

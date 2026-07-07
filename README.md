@@ -698,6 +698,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreatePhoneNumberPortIn201ResponseOrdersInner](docs/CreatePhoneNumberPortIn201ResponseOrdersInner.md)
  - [Zernio::CreatePhoneNumberPortInRequest](docs/CreatePhoneNumberPortInRequest.md)
  - [Zernio::CreatePhoneNumberPortInRequestEndUser](docs/CreatePhoneNumberPortInRequestEndUser.md)
+ - [Zernio::CreatePost403Response](docs/CreatePost403Response.md)
  - [Zernio::CreatePost409Response](docs/CreatePost409Response.md)
  - [Zernio::CreatePost409ResponseDetails](docs/CreatePost409ResponseDetails.md)
  - [Zernio::CreatePost429Response](docs/CreatePost429Response.md)
