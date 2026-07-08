@@ -936,7 +936,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
-    # @option opts [String] :breakdowns Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset. TikTok: gender, age, country_code, platform, ac, language. &#x60;placement&#x60; is accepted as an alias for &#x60;publisher_platform&#x60; (Facebook vs Instagram vs Audience Network). The singular &#x60;breakdown&#x60; is accepted too. Unknown values return 400 with the supported list rather than being ignored.
+    # @option opts [String] :breakdowns Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region. TikTok: gender, age, country_code, platform, ac, language.
     # @return [GetAdAnalytics200Response]
     def get_ad_analytics(ad_id, opts = {})
       data, _status_code, _headers = get_ad_analytics_with_http_info(ad_id, opts)
@@ -949,7 +949,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
-    # @option opts [String] :breakdowns Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset. TikTok: gender, age, country_code, platform, ac, language. &#x60;placement&#x60; is accepted as an alias for &#x60;publisher_platform&#x60; (Facebook vs Instagram vs Audience Network). The singular &#x60;breakdown&#x60; is accepted too. Unknown values return 400 with the supported list rather than being ignored.
+    # @option opts [String] :breakdowns Comma-separated breakdown dimensions. Meta: age, gender, country, publisher_platform, device_platform, region. TikTok: gender, age, country_code, platform, ac, language.
     # @return [Array<(GetAdAnalytics200Response, Integer, Hash)>] GetAdAnalytics200Response data, response status code and response headers
     def get_ad_analytics_with_http_info(ad_id, opts = {})
       if @api_client.config.debugging
@@ -1156,7 +1156,7 @@ module Zernio
     # @option opts [String] :platform Disambiguate when the campaign id exists across platforms (e.g. facebook, instagram).
     # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
-    # @option opts [String] :breakdowns Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset. &#x60;placement&#x60; is accepted as an alias for &#x60;publisher_platform&#x60; (Facebook vs Instagram vs Audience Network). The singular &#x60;breakdown&#x60; is accepted too. Unknown values return 400 with the supported list rather than being ignored.
+    # @option opts [String] :breakdowns Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.
     # @return [GetCampaignAnalytics200Response]
     def get_campaign_analytics(campaign_id, opts = {})
       data, _status_code, _headers = get_campaign_analytics_with_http_info(campaign_id, opts)
@@ -1170,7 +1170,7 @@ module Zernio
     # @option opts [String] :platform Disambiguate when the campaign id exists across platforms (e.g. facebook, instagram).
     # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
-    # @option opts [String] :breakdowns Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset. &#x60;placement&#x60; is accepted as an alias for &#x60;publisher_platform&#x60; (Facebook vs Instagram vs Audience Network). The singular &#x60;breakdown&#x60; is accepted too. Unknown values return 400 with the supported list rather than being ignored.
+    # @option opts [String] :breakdowns Comma-separated breakdown dimensions (Meta only): age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.
     # @return [Array<(GetCampaignAnalytics200Response, Integer, Hash)>] GetCampaignAnalytics200Response data, response status code and response headers
     def get_campaign_analytics_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
