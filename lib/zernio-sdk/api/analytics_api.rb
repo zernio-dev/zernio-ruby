@@ -74,7 +74,7 @@ module Zernio
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling AnalyticsApi.get_analytics, must be greater than or equal to 1.'
       end
 
-      allowable_values = ["date", "engagement", "impressions", "reach", "likes", "comments", "shares", "saves", "clicks", "views"]
+      allowable_values = ["date", "engagement", "impressions", "reach", "likes", "comments", "shares", "saves", "clicks", "views", "follows"]
       if @api_client.config.client_side_validation && opts[:'sort_by'] && !allowable_values.include?(opts[:'sort_by'])
         fail ArgumentError, "invalid value for \"sort_by\", must be one of #{allowable_values}"
       end

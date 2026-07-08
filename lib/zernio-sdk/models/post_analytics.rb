@@ -32,6 +32,9 @@ module Zernio
 
     attr_accessor :views
 
+    # Instagram feed posts and stories only: organic accounts that started following from this post. 0 for reels and other platforms.
+    attr_accessor :follows
+
     # Instagram Reels only: average watch time per play, in milliseconds. 0 for non-Reels media and other platforms.
     attr_accessor :ig_reels_avg_watch_time
 
@@ -53,6 +56,7 @@ module Zernio
         :'saves' => :'saves',
         :'clicks' => :'clicks',
         :'views' => :'views',
+        :'follows' => :'follows',
         :'ig_reels_avg_watch_time' => :'igReelsAvgWatchTime',
         :'ig_reels_video_view_total_time' => :'igReelsVideoViewTotalTime',
         :'engagement_rate' => :'engagementRate',
@@ -81,6 +85,7 @@ module Zernio
         :'saves' => :'Integer',
         :'clicks' => :'Integer',
         :'views' => :'Integer',
+        :'follows' => :'Integer',
         :'ig_reels_avg_watch_time' => :'Integer',
         :'ig_reels_video_view_total_time' => :'Integer',
         :'engagement_rate' => :'Float',
@@ -142,6 +147,10 @@ module Zernio
         self.views = attributes[:'views']
       end
 
+      if attributes.key?(:'follows')
+        self.follows = attributes[:'follows']
+      end
+
       if attributes.key?(:'ig_reels_avg_watch_time')
         self.ig_reels_avg_watch_time = attributes[:'ig_reels_avg_watch_time']
       end
@@ -187,6 +196,7 @@ module Zernio
           saves == o.saves &&
           clicks == o.clicks &&
           views == o.views &&
+          follows == o.follows &&
           ig_reels_avg_watch_time == o.ig_reels_avg_watch_time &&
           ig_reels_video_view_total_time == o.ig_reels_video_view_total_time &&
           engagement_rate == o.engagement_rate &&
@@ -202,7 +212,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [impressions, reach, likes, comments, shares, saves, clicks, views, ig_reels_avg_watch_time, ig_reels_video_view_total_time, engagement_rate, last_updated].hash
+      [impressions, reach, likes, comments, shares, saves, clicks, views, follows, ig_reels_avg_watch_time, ig_reels_video_view_total_time, engagement_rate, last_updated].hash
     end
 
     # Builds the object from hash
