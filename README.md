@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAudiencesApi* | [**delete_ad_audience**](docs/AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience
 *Zernio::AdAudiencesApi* | [**get_ad_audience**](docs/AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details
 *Zernio::AdAudiencesApi* | [**list_ad_audiences**](docs/AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences
+*Zernio::AdAudiencesApi* | [**update_ad_audience**](docs/AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update saved targeting audience
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
 *Zernio::AdCampaignsApi* | [**delete_ad_campaign**](docs/AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign
 *Zernio::AdCampaignsApi* | [**duplicate_ad_campaign**](docs/AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign
@@ -1576,6 +1577,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAccountRequest](docs/UpdateAccountRequest.md)
  - [Zernio::UpdateAccountRequestXCapabilities](docs/UpdateAccountRequestXCapabilities.md)
  - [Zernio::UpdateAd200Response](docs/UpdateAd200Response.md)
+ - [Zernio::UpdateAdAudienceRequest](docs/UpdateAdAudienceRequest.md)
  - [Zernio::UpdateAdCampaign200Response](docs/UpdateAdCampaign200Response.md)
  - [Zernio::UpdateAdCampaignRequest](docs/UpdateAdCampaignRequest.md)
  - [Zernio::UpdateAdCampaignRequestBudget](docs/UpdateAdCampaignRequestBudget.md)

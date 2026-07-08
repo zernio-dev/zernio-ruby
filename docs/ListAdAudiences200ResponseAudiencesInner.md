@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
+| **account_id** | **String** | Social account the audience was created against. Returned for saved_targeting items. | [optional] |
 | **platform_audience_id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
 | **description** | **String** |  | [optional] |
@@ -21,6 +22,7 @@ require 'zernio-sdk'
 
 instance = Zernio::ListAdAudiences200ResponseAudiencesInner.new(
   id: null,
+  account_id: null,
   platform_audience_id: null,
   name: null,
   description: null,

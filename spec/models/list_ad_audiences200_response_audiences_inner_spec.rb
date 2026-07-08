@@ -33,6 +33,12 @@ describe Zernio::ListAdAudiences200ResponseAudiencesInner do
     end
   end
 
+  describe 'test attribute "account_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "platform_audience_id"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

@@ -59,7 +59,7 @@ describe 'AdAudiencesApi' do
 
   # unit tests for delete_ad_audience
   # Delete custom audience
-  # Deletes the audience from both Meta and the local database.
+  # Deletes the audience from both the platform and the local database. &#x60;saved_targeting&#x60; audiences exist only on Zernio, so only the local record is removed.
   # @param audience_id 
   # @param [Hash] opts the optional parameters
   # @return [DeleteAccountGroup200Response]
@@ -91,6 +91,19 @@ describe 'AdAudiencesApi' do
   # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences.
   # @return [ListAdAudiences200Response]
   describe 'list_ad_audiences test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_audience
+  # Update saved targeting audience
+  # Update a &#x60;saved_targeting&#x60; audience&#39;s name, description, or spec. Only &#x60;saved_targeting&#x60; audiences are updatable (they exist only on Zernio); uploaded/derived audiences return 422, delete and recreate those instead. &#x60;spec&#x60; replaces the stored spec wholesale (no merge). Ads already created from this audience are unaffected, they snapshot the targeting at creation. 
+  # @param audience_id 
+  # @param update_ad_audience_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateAdAudience201Response]
+  describe 'update_ad_audience test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

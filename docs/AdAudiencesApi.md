@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad_audience**](AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience |
 | [**get_ad_audience**](AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details |
 | [**list_ad_audiences**](AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences |
+| [**update_ad_audience**](AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update saved targeting audience |
 
 
 ## add_users_to_ad_audience
@@ -157,7 +158,7 @@ end
 
 Delete custom audience
 
-Deletes the audience from both Meta and the local database.
+Deletes the audience from both the platform and the local database. `saved_targeting` audiences exist only on Zernio, so only the local record is removed.
 
 ### Examples
 
@@ -363,5 +364,76 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## update_ad_audience
+
+> <CreateAdAudience201Response> update_ad_audience(audience_id, update_ad_audience_request)
+
+Update saved targeting audience
+
+Update a `saved_targeting` audience's name, description, or spec. Only `saved_targeting` audiences are updatable (they exist only on Zernio); uploaded/derived audiences return 422, delete and recreate those instead. `spec` replaces the stored spec wholesale (no merge). Ads already created from this audience are unaffected, they snapshot the targeting at creation. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAudiencesApi.new
+audience_id = 'audience_id_example' # String | 
+update_ad_audience_request = Zernio::UpdateAdAudienceRequest.new # UpdateAdAudienceRequest | 
+
+begin
+  # Update saved targeting audience
+  result = api_instance.update_ad_audience(audience_id, update_ad_audience_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->update_ad_audience: #{e}"
+end
+```
+
+#### Using the update_ad_audience_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateAdAudience201Response>, Integer, Hash)> update_ad_audience_with_http_info(audience_id, update_ad_audience_request)
+
+```ruby
+begin
+  # Update saved targeting audience
+  data, status_code, headers = api_instance.update_ad_audience_with_http_info(audience_id, update_ad_audience_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateAdAudience201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->update_ad_audience_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **audience_id** | **String** |  |  |
+| **update_ad_audience_request** | [**UpdateAdAudienceRequest**](UpdateAdAudienceRequest.md) |  |  |
+
+### Return type
+
+[**CreateAdAudience201Response**](CreateAdAudience201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
