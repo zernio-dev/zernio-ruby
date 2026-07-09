@@ -441,7 +441,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for upload_whats_app_profile_photo
   # Upload profile picture
-  # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta&#39;s resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle. 
+  # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta&#39;s resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle.  Provide the image either as a binary upload (&#x60;multipart/form-data&#x60; with &#x60;file&#x60;) or as a download URL (&#x60;application/json&#x60; with &#x60;url&#x60;) — with a URL we fetch the image server-side and upload the bytes for you. Meta&#39;s profile-photo API is bytes-only, so there is no direct URL passthrough. JPEG/PNG, max 5MB either way. 
   # @param account_id WhatsApp social account ID
   # @param file Image file (JPEG or PNG, max 5MB, recommended 640x640)
   # @param [Hash] opts the optional parameters
