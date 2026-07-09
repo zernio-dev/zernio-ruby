@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Required for 10DLC. What you'll send and how recipients opt in/out.
+  # Required for 10DLC. What you'll send and how recipients opt in/out. Opt-in/opt-out/help auto-responses must name the registered brand and carry the carrier-required disclosures; submissions that don't (or that are blank) are automatically rewritten to a compliant, brand-named template before the campaign is filed. 
   class StartSmsRegistrationRequestCampaign < ApiModelBase
     attr_accessor :usecase
 
@@ -25,6 +25,7 @@ module Zernio
 
     attr_accessor :sample1
 
+    # Second example message; carriers require two distinct samples
     attr_accessor :sample2
 
     attr_accessor :help_message
@@ -151,6 +152,8 @@ module Zernio
 
       if attributes.key?(:'sample2')
         self.sample2 = attributes[:'sample2']
+      else
+        self.sample2 = nil
       end
 
       if attributes.key?(:'help_message')
@@ -251,6 +254,14 @@ module Zernio
         invalid_properties.push('invalid value for "sample1", the character length must be greater than or equal to 20.')
       end
 
+      if @sample2.nil?
+        invalid_properties.push('invalid value for "sample2", sample2 cannot be nil.')
+      end
+
+      if @sample2.to_s.length < 20
+        invalid_properties.push('invalid value for "sample2", the character length must be greater than or equal to 20.')
+      end
+
       if @help_message.nil?
         invalid_properties.push('invalid value for "help_message", help_message cannot be nil.')
       end
@@ -315,6 +326,8 @@ module Zernio
       return false if @message_flow.to_s.length < 40
       return false if @sample1.nil?
       return false if @sample1.to_s.length < 20
+      return false if @sample2.nil?
+      return false if @sample2.to_s.length < 20
       return false if @help_message.nil?
       return false if @help_message.to_s.length > 320
       return false if @help_message.to_s.length < 20
@@ -388,6 +401,20 @@ module Zernio
       end
 
       @sample1 = sample1
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sample2 Value to be assigned
+    def sample2=(sample2)
+      if sample2.nil?
+        fail ArgumentError, 'sample2 cannot be nil'
+      end
+
+      if sample2.to_s.length < 20
+        fail ArgumentError, 'invalid value for "sample2", the character length must be greater than or equal to 20.'
+      end
+
+      @sample2 = sample2
     end
 
     # Custom attribute writer method with validation

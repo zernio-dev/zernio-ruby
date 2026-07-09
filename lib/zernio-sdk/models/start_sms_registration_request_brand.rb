@@ -26,6 +26,7 @@ module Zernio
     # Required for every entityType except SOLE_PROPRIETOR.
     attr_accessor :ein
 
+    # Business contact phone. Required for every entityType except SOLE_PROPRIETOR.
     attr_accessor :phone
 
     # Required for SOLE_PROPRIETOR; the verification OTP is texted there (US/CA mobile).
@@ -44,6 +45,7 @@ module Zernio
     # Brand contact email; defaults to your account email when omitted.
     attr_accessor :email
 
+    # The brand's website (sole proprietors may use a social profile such as LinkedIn or a business Facebook page). Carriers verify the brand against it; a bare domain is normalized to https://.
     attr_accessor :website
 
     attr_accessor :vertical
@@ -176,18 +178,26 @@ module Zernio
 
       if attributes.key?(:'street')
         self.street = attributes[:'street']
+      else
+        self.street = nil
       end
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
+      else
+        self.city = nil
       end
 
       if attributes.key?(:'state')
         self.state = attributes[:'state']
+      else
+        self.state = nil
       end
 
       if attributes.key?(:'postal_code')
         self.postal_code = attributes[:'postal_code']
+      else
+        self.postal_code = nil
       end
 
       if attributes.key?(:'country')
@@ -202,6 +212,8 @@ module Zernio
 
       if attributes.key?(:'website')
         self.website = attributes[:'website']
+      else
+        self.website = nil
       end
 
       if attributes.key?(:'vertical')
@@ -228,8 +240,28 @@ module Zernio
         invalid_properties.push('invalid value for "display_name", display_name cannot be nil.')
       end
 
+      if @street.nil?
+        invalid_properties.push('invalid value for "street", street cannot be nil.')
+      end
+
+      if @city.nil?
+        invalid_properties.push('invalid value for "city", city cannot be nil.')
+      end
+
+      if @state.nil?
+        invalid_properties.push('invalid value for "state", state cannot be nil.')
+      end
+
+      if @postal_code.nil?
+        invalid_properties.push('invalid value for "postal_code", postal_code cannot be nil.')
+      end
+
       if @country.nil?
         invalid_properties.push('invalid value for "country", country cannot be nil.')
+      end
+
+      if @website.nil?
+        invalid_properties.push('invalid value for "website", website cannot be nil.')
       end
 
       if @vertical.nil?
@@ -247,9 +279,14 @@ module Zernio
       entity_type_validator = EnumAttributeValidator.new('String', ["PRIVATE_PROFIT", "PUBLIC_PROFIT", "NON_PROFIT", "GOVERNMENT", "SOLE_PROPRIETOR"])
       return false unless entity_type_validator.valid?(@entity_type)
       return false if @display_name.nil?
+      return false if @street.nil?
+      return false if @city.nil?
+      return false if @state.nil?
+      return false if @postal_code.nil?
       return false if @country.nil?
       country_validator = EnumAttributeValidator.new('String', ["US", "CA"])
       return false unless country_validator.valid?(@country)
+      return false if @website.nil?
       return false if @vertical.nil?
       vertical_validator = EnumAttributeValidator.new('String', ["AGRICULTURE", "COMMUNICATION", "CONSTRUCTION", "EDUCATION", "ENERGY", "ENTERTAINMENT", "FINANCIAL", "GAMBLING", "GOVERNMENT", "HEALTHCARE", "HOSPITALITY", "HUMAN_RESOURCES", "INSURANCE", "LEGAL", "MANUFACTURING", "NGO", "POLITICAL", "POSTAL", "PROFESSIONAL", "REAL_ESTATE", "RETAIL", "TECHNOLOGY", "TRANSPORTATION"])
       return false unless vertical_validator.valid?(@vertical)
@@ -276,6 +313,46 @@ module Zernio
       @display_name = display_name
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] street Value to be assigned
+    def street=(street)
+      if street.nil?
+        fail ArgumentError, 'street cannot be nil'
+      end
+
+      @street = street
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] city Value to be assigned
+    def city=(city)
+      if city.nil?
+        fail ArgumentError, 'city cannot be nil'
+      end
+
+      @city = city
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] state Value to be assigned
+    def state=(state)
+      if state.nil?
+        fail ArgumentError, 'state cannot be nil'
+      end
+
+      @state = state
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] postal_code Value to be assigned
+    def postal_code=(postal_code)
+      if postal_code.nil?
+        fail ArgumentError, 'postal_code cannot be nil'
+      end
+
+      @postal_code = postal_code
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country Object to be assigned
     def country=(country)
@@ -284,6 +361,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"country\", must be one of #{validator.allowable_values}."
       end
       @country = country
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] website Value to be assigned
+    def website=(website)
+      if website.nil?
+        fail ArgumentError, 'website cannot be nil'
+      end
+
+      @website = website
     end
 
     # Custom attribute writer method checking allowed values (enum).

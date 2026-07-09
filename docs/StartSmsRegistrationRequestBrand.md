@@ -8,15 +8,15 @@
 | **display_name** | **String** |  |  |
 | **company_name** | **String** | Legal company name. Required for every entityType except SOLE_PROPRIETOR. | [optional] |
 | **ein** | **String** | Required for every entityType except SOLE_PROPRIETOR. | [optional] |
-| **phone** | **String** |  | [optional] |
+| **phone** | **String** | Business contact phone. Required for every entityType except SOLE_PROPRIETOR. | [optional] |
 | **mobile_phone** | **String** | Required for SOLE_PROPRIETOR; the verification OTP is texted there (US/CA mobile). | [optional] |
-| **street** | **String** |  | [optional] |
-| **city** | **String** |  | [optional] |
-| **state** | **String** |  | [optional] |
-| **postal_code** | **String** |  | [optional] |
+| **street** | **String** |  |  |
+| **city** | **String** |  |  |
+| **state** | **String** |  |  |
+| **postal_code** | **String** |  |  |
 | **country** | **String** |  |  |
 | **email** | **String** | Brand contact email; defaults to your account email when omitted. | [optional] |
-| **website** | **String** |  | [optional] |
+| **website** | **String** | The brand&#39;s website (sole proprietors may use a social profile such as LinkedIn or a business Facebook page). Carriers verify the brand against it; a bare domain is normalized to https://. |  |
 | **vertical** | **String** |  |  |
 | **stock_symbol** | **String** |  | [optional] |
 
