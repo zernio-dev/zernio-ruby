@@ -4,11 +4,78 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**get_billing**](UsageApi.md#get_billing) | **GET** /v1/billing | Account billing snapshot (plan, cycle, balance, caps, status) |
 | [**get_calls_usage**](UsageApi.md#get_calls_usage) | **GET** /v1/usage/calls | Calling usage and cost |
 | [**get_sms_usage**](UsageApi.md#get_sms_usage) | **GET** /v1/usage/sms | SMS usage (volumes) |
-| [**get_usage**](UsageApi.md#get_usage) | **GET** /v1/usage | Get plan and usage snapshot |
-| [**get_usage_stats**](UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage stats |
+| [**get_usage**](UsageApi.md#get_usage) | **GET** /v1/usage | Usage snapshot (default) or billed-spend metering (with params) |
+| [**get_usage_stats**](UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage snapshot (plan, limits, payment status) |
 | [**get_x_api_pricing**](UsageApi.md#get_x_api_pricing) | **GET** /v1/billing/x-pricing | Get X/Twitter API pricing table |
+
+
+## get_billing
+
+> <BillingSnapshot> get_billing
+
+Account billing snapshot (plan, cycle, balance, caps, status)
+
+The billing \"wallet/statement\" view: current plan, billing cycle, accrued balance + remaining credits this period, spend caps, and payment / access status. This is the billing half of the legacy `/v1/usage-stats` snapshot — the per-product consumption half is metering and lives on `GET /v1/usage`.  Usage-based (Metronome) accounts get a populated `balance`; legacy Stripe accounts get `balance: null` plus a deprecated `legacy.limits` block and, when payment-blocked, `status.openInvoiceUrl` / `status.declineReason`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::UsageApi.new
+
+begin
+  # Account billing snapshot (plan, cycle, balance, caps, status)
+  result = api_instance.get_billing
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling UsageApi->get_billing: #{e}"
+end
+```
+
+#### Using the get_billing_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<BillingSnapshot>, Integer, Hash)> get_billing_with_http_info
+
+```ruby
+begin
+  # Account billing snapshot (plan, cycle, balance, caps, status)
+  data, status_code, headers = api_instance.get_billing_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <BillingSnapshot>
+rescue Zernio::ApiError => e
+  puts "Error when calling UsageApi->get_billing_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**BillingSnapshot**](BillingSnapshot.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## get_calls_usage
@@ -169,11 +236,11 @@ end
 
 ## get_usage
 
-> <UsageStats> get_usage(opts)
+> <GetUsage200Response> get_usage(opts)
 
-Get plan and usage snapshot
+Usage snapshot (default) or billed-spend metering (with params)
 
-The usage hub: current plan name, billing period, plan limits, and usage counts, in one snapshot. For metered consumption over an arbitrary window with breakdowns (by day, by number), use the domain spokes: `GET /v1/usage/calls` and `GET /v1/usage/sms`.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
+Dual-mode endpoint, selected by query params — fully backward compatible:  **Without metering params (the default):** the plan / quota / usage snapshot — plan name, billing period, limits, usage counts, access state. Identical to `GET /v1/usage-stats`. Existing integrations keep working unchanged.  **With `range`, `granularity`, `from`, or `to`:** usage METERING — billed spend (USD) by product family (`accounts`, `numbers`, `calls`, `sms`, `dlc`, `xApi`, `credits`, `other`) over the window, at `day` / `month` / `total` granularity, from Metronome's invoice breakdown (the CHARGE view — always reconciles with what gets billed). Also served at `GET /v1/usage/daily`. Usage-based accounts only — legacy Stripe accounts get `{ \"supported\": false, \"days\": [] }`.  For per-domain consumption *volumes* use `GET /v1/usage/calls` and `GET /v1/usage/sms`. For the billing statement (balance, credits, caps, payment status) use `GET /v1/billing`. 
 
 ### Examples
 
@@ -188,11 +255,15 @@ end
 
 api_instance = Zernio::UsageApi.new
 opts = {
-  reconcile: true # Boolean | For Stripe subscription users, `true` forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass `false`, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
+  reconcile: true, # Boolean | Snapshot mode only. For Stripe subscription users, `true` forces a subscription reconciliation pass even when cached plan data looks complete. 
+  range: 'cycle', # String | Window to report. `cycle` / `prev-cycle` resolve to the customer's real billing-period bounds (falling back to a trailing 30 days when no invoice exists yet); `7d`…`12mo` are trailing windows; `custom` uses `from` / `to`. 
+  from: Date.parse('2013-10-20'), # Date | Inclusive start (UTC date). Required when `range=custom`.
+  to: Date.parse('2013-10-20'), # Date | Inclusive end (UTC date). Required when `range=custom`. Max span 366 days.
+  granularity: 'day' # String | Bucketing of the `days` series: `day` (one row per UTC day), `month` (one row per calendar month, dated to the 1st), or `total` (no series — read `totals`). Does not affect `totals`. 
 }
 
 begin
-  # Get plan and usage snapshot
+  # Usage snapshot (default) or billed-spend metering (with params)
   result = api_instance.get_usage(opts)
   p result
 rescue Zernio::ApiError => e
@@ -204,15 +275,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UsageStats>, Integer, Hash)> get_usage_with_http_info(opts)
+> <Array(<GetUsage200Response>, Integer, Hash)> get_usage_with_http_info(opts)
 
 ```ruby
 begin
-  # Get plan and usage snapshot
+  # Usage snapshot (default) or billed-spend metering (with params)
   data, status_code, headers = api_instance.get_usage_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UsageStats>
+  p data # => <GetUsage200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling UsageApi->get_usage_with_http_info: #{e}"
 end
@@ -222,11 +293,15 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **reconcile** | **Boolean** | For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected.  | [optional] |
+| **reconcile** | **Boolean** | Snapshot mode only. For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete.  | [optional] |
+| **range** | **String** | Window to report. &#x60;cycle&#x60; / &#x60;prev-cycle&#x60; resolve to the customer&#39;s real billing-period bounds (falling back to a trailing 30 days when no invoice exists yet); &#x60;7d&#x60;…&#x60;12mo&#x60; are trailing windows; &#x60;custom&#x60; uses &#x60;from&#x60; / &#x60;to&#x60;.  | [optional][default to &#39;cycle&#39;] |
+| **from** | **Date** | Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;. | [optional] |
+| **to** | **Date** | Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. | [optional] |
+| **granularity** | **String** | Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;.  | [optional][default to &#39;day&#39;] |
 
 ### Return type
 
-[**UsageStats**](UsageStats.md)
+[**GetUsage200Response**](GetUsage200Response.md)
 
 ### Authorization
 
@@ -242,9 +317,9 @@ end
 
 > <UsageStats> get_usage_stats(opts)
 
-Get plan and usage stats
+Get plan and usage snapshot (plan, limits, payment status)
 
-Deprecated alias of `GET /v1/usage`; same contract. New integrations should use that path (the usage hub), with `GET /v1/usage/calls` and `GET /v1/usage/sms` for metered breakdowns.  Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
+The plan / quota / payment-status snapshot: current plan name, billing period, plan limits, usage counts, and access state. Identical to a bare `GET /v1/usage` call (this path is its deprecated alias). For billed spend by product, call `GET /v1/usage` with `range` / `granularity` params. The statement view (balance, credits, caps, payment status) lives at `GET /v1/billing`.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
 
 ### Examples
 
@@ -263,7 +338,7 @@ opts = {
 }
 
 begin
-  # Get plan and usage stats
+  # Get plan and usage snapshot (plan, limits, payment status)
   result = api_instance.get_usage_stats(opts)
   p result
 rescue Zernio::ApiError => e
@@ -279,7 +354,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get plan and usage stats
+  # Get plan and usage snapshot (plan, limits, payment status)
   data, status_code, headers = api_instance.get_usage_stats_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }

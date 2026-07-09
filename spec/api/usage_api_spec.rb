@@ -32,6 +32,17 @@ describe 'UsageApi' do
     end
   end
 
+  # unit tests for get_billing
+  # Account billing snapshot (plan, cycle, balance, caps, status)
+  # The billing \&quot;wallet/statement\&quot; view: current plan, billing cycle, accrued balance + remaining credits this period, spend caps, and payment / access status. This is the billing half of the legacy &#x60;/v1/usage-stats&#x60; snapshot — the per-product consumption half is metering and lives on &#x60;GET /v1/usage&#x60;.  Usage-based (Metronome) accounts get a populated &#x60;balance&#x60;; legacy Stripe accounts get &#x60;balance: null&#x60; plus a deprecated &#x60;legacy.limits&#x60; block and, when payment-blocked, &#x60;status.openInvoiceUrl&#x60; / &#x60;status.declineReason&#x60;. 
+  # @param [Hash] opts the optional parameters
+  # @return [BillingSnapshot]
+  describe 'get_billing test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_calls_usage
   # Calling usage and cost
   # Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call&#39;s billing snapshot, so this endpoint always agrees with the invoice: &#x60;billableUSD&#x60; is what Zernio bills; &#x60;metaUSD&#x60; is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional &#x60;groupBy&#x60; returns a breakdown by UTC day, by your number, or by channel. Defaults to the last 30 days. 
@@ -64,11 +75,15 @@ describe 'UsageApi' do
   end
 
   # unit tests for get_usage
-  # Get plan and usage snapshot
-  # The usage hub: current plan name, billing period, plan limits, and usage counts, in one snapshot. For metered consumption over an arbitrary window with breakdowns (by day, by number), use the domain spokes: &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60;.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
+  # Usage snapshot (default) or billed-spend metering (with params)
+  # Dual-mode endpoint, selected by query params — fully backward compatible:  **Without metering params (the default):** the plan / quota / usage snapshot — plan name, billing period, limits, usage counts, access state. Identical to &#x60;GET /v1/usage-stats&#x60;. Existing integrations keep working unchanged.  **With &#x60;range&#x60;, &#x60;granularity&#x60;, &#x60;from&#x60;, or &#x60;to&#x60;:** usage METERING — billed spend (USD) by product family (&#x60;accounts&#x60;, &#x60;numbers&#x60;, &#x60;calls&#x60;, &#x60;sms&#x60;, &#x60;dlc&#x60;, &#x60;xApi&#x60;, &#x60;credits&#x60;, &#x60;other&#x60;) over the window, at &#x60;day&#x60; / &#x60;month&#x60; / &#x60;total&#x60; granularity, from Metronome&#39;s invoice breakdown (the CHARGE view — always reconciles with what gets billed). Also served at &#x60;GET /v1/usage/daily&#x60;. Usage-based accounts only — legacy Stripe accounts get &#x60;{ \&quot;supported\&quot;: false, \&quot;days\&quot;: [] }&#x60;.  For per-domain consumption *volumes* use &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60;. For the billing statement (balance, credits, caps, payment status) use &#x60;GET /v1/billing&#x60;. 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
-  # @return [UsageStats]
+  # @option opts [Boolean] :reconcile Snapshot mode only. For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. 
+  # @option opts [String] :range Window to report. &#x60;cycle&#x60; / &#x60;prev-cycle&#x60; resolve to the customer&#39;s real billing-period bounds (falling back to a trailing 30 days when no invoice exists yet); &#x60;7d&#x60;…&#x60;12mo&#x60; are trailing windows; &#x60;custom&#x60; uses &#x60;from&#x60; / &#x60;to&#x60;. 
+  # @option opts [Date] :from Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;.
+  # @option opts [Date] :to Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days.
+  # @option opts [String] :granularity Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;. 
+  # @return [GetUsage200Response]
   describe 'get_usage test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -76,8 +91,8 @@ describe 'UsageApi' do
   end
 
   # unit tests for get_usage_stats
-  # Get plan and usage stats
-  # Deprecated alias of &#x60;GET /v1/usage&#x60;; same contract. New integrations should use that path (the usage hub), with &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60; for metered breakdowns.  Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
+  # Get plan and usage snapshot (plan, limits, payment status)
+  # The plan / quota / payment-status snapshot: current plan name, billing period, plan limits, usage counts, and access state. Identical to a bare &#x60;GET /v1/usage&#x60; call (this path is its deprecated alias). For billed spend by product, call &#x60;GET /v1/usage&#x60; with &#x60;range&#x60; / &#x60;granularity&#x60; params. The statement view (balance, credits, caps, payment status) lives at &#x60;GET /v1/billing&#x60;.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
   # @return [UsageStats]

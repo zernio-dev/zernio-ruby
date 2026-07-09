@@ -409,10 +409,11 @@ Class | Method | HTTP request | Description
 *Zernio::TwitterEngagementApi* | [**retweet_post**](docs/TwitterEngagementApi.md#retweet_post) | **POST** /v1/twitter/retweet | Retweet a post
 *Zernio::TwitterEngagementApi* | [**undo_retweet**](docs/TwitterEngagementApi.md#undo_retweet) | **DELETE** /v1/twitter/retweet | Undo retweet
 *Zernio::TwitterEngagementApi* | [**unfollow_user**](docs/TwitterEngagementApi.md#unfollow_user) | **DELETE** /v1/twitter/follow | Unfollow a user
+*Zernio::UsageApi* | [**get_billing**](docs/UsageApi.md#get_billing) | **GET** /v1/billing | Account billing snapshot (plan, cycle, balance, caps, status)
 *Zernio::UsageApi* | [**get_calls_usage**](docs/UsageApi.md#get_calls_usage) | **GET** /v1/usage/calls | Calling usage and cost
 *Zernio::UsageApi* | [**get_sms_usage**](docs/UsageApi.md#get_sms_usage) | **GET** /v1/usage/sms | SMS usage (volumes)
-*Zernio::UsageApi* | [**get_usage**](docs/UsageApi.md#get_usage) | **GET** /v1/usage | Get plan and usage snapshot
-*Zernio::UsageApi* | [**get_usage_stats**](docs/UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage stats
+*Zernio::UsageApi* | [**get_usage**](docs/UsageApi.md#get_usage) | **GET** /v1/usage | Usage snapshot (default) or billed-spend metering (with params)
+*Zernio::UsageApi* | [**get_usage_stats**](docs/UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage snapshot (plan, limits, payment status)
 *Zernio::UsageApi* | [**get_x_api_pricing**](docs/UsageApi.md#get_x_api_pricing) | **GET** /v1/billing/x-pricing | Get X/Twitter API pricing table
 *Zernio::UsersApi* | [**get_user**](docs/UsersApi.md#get_user) | **GET** /v1/users/{userId} | Get user
 *Zernio::UsersApi* | [**list_users**](docs/UsersApi.md#list_users) | **GET** /v1/users | List users
@@ -593,6 +594,14 @@ Class | Method | HTTP request | Description
  - [Zernio::BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner](docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md)
  - [Zernio::BatchGetGoogleBusinessReviewsRequest](docs/BatchGetGoogleBusinessReviewsRequest.md)
  - [Zernio::BidStrategy](docs/BidStrategy.md)
+ - [Zernio::BillingSnapshot](docs/BillingSnapshot.md)
+ - [Zernio::BillingSnapshotBalance](docs/BillingSnapshotBalance.md)
+ - [Zernio::BillingSnapshotCaps](docs/BillingSnapshotCaps.md)
+ - [Zernio::BillingSnapshotLegacy](docs/BillingSnapshotLegacy.md)
+ - [Zernio::BillingSnapshotLegacyLimits](docs/BillingSnapshotLegacyLimits.md)
+ - [Zernio::BillingSnapshotPeriod](docs/BillingSnapshotPeriod.md)
+ - [Zernio::BillingSnapshotPlan](docs/BillingSnapshotPlan.md)
+ - [Zernio::BillingSnapshotStatus](docs/BillingSnapshotStatus.md)
  - [Zernio::BlockWhatsAppUsers200Response](docs/BlockWhatsAppUsers200Response.md)
  - [Zernio::BlockWhatsAppUsers200ResponseBlockedInner](docs/BlockWhatsAppUsers200ResponseBlockedInner.md)
  - [Zernio::BlockWhatsAppUsers200ResponseFailedInner](docs/BlockWhatsAppUsers200ResponseFailedInner.md)
@@ -1088,6 +1097,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetTikTokCreatorInfo200ResponsePrivacyLevelsInner](docs/GetTikTokCreatorInfo200ResponsePrivacyLevelsInner.md)
  - [Zernio::GetTrackingTagStats200Response](docs/GetTrackingTagStats200Response.md)
  - [Zernio::GetTrackingTagStats200ResponseStats](docs/GetTrackingTagStats200ResponseStats.md)
+ - [Zernio::GetUsage200Response](docs/GetUsage200Response.md)
  - [Zernio::GetUser200Response](docs/GetUser200Response.md)
  - [Zernio::GetUser200ResponseUser](docs/GetUser200ResponseUser.md)
  - [Zernio::GetVoiceCall200Response](docs/GetVoiceCall200Response.md)
@@ -1723,6 +1733,14 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadWhatsAppProfilePhotoRequest1](docs/UploadWhatsAppProfilePhotoRequest1.md)
  - [Zernio::UploadedFile](docs/UploadedFile.md)
  - [Zernio::UploadedOrDerivedAudience](docs/UploadedOrDerivedAudience.md)
+ - [Zernio::UsageMetering](docs/UsageMetering.md)
+ - [Zernio::UsageMeteringCallUsage](docs/UsageMeteringCallUsage.md)
+ - [Zernio::UsageMeteringCallUsageWhatsapp](docs/UsageMeteringCallUsageWhatsapp.md)
+ - [Zernio::UsageMeteringDaysInner](docs/UsageMeteringDaysInner.md)
+ - [Zernio::UsageMeteringLineItemsInner](docs/UsageMeteringLineItemsInner.md)
+ - [Zernio::UsageMeteringPeaks](docs/UsageMeteringPeaks.md)
+ - [Zernio::UsageMeteringPeriod](docs/UsageMeteringPeriod.md)
+ - [Zernio::UsageMeteringTotals](docs/UsageMeteringTotals.md)
  - [Zernio::UsageStats](docs/UsageStats.md)
  - [Zernio::UsageStatsLimits](docs/UsageStatsLimits.md)
  - [Zernio::UsageStatsSpend](docs/UsageStatsSpend.md)

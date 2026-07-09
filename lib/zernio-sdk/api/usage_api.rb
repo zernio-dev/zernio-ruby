@@ -19,6 +19,63 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Account billing snapshot (plan, cycle, balance, caps, status)
+    # The billing \"wallet/statement\" view: current plan, billing cycle, accrued balance + remaining credits this period, spend caps, and payment / access status. This is the billing half of the legacy `/v1/usage-stats` snapshot — the per-product consumption half is metering and lives on `GET /v1/usage`.  Usage-based (Metronome) accounts get a populated `balance`; legacy Stripe accounts get `balance: null` plus a deprecated `legacy.limits` block and, when payment-blocked, `status.openInvoiceUrl` / `status.declineReason`. 
+    # @param [Hash] opts the optional parameters
+    # @return [BillingSnapshot]
+    def get_billing(opts = {})
+      data, _status_code, _headers = get_billing_with_http_info(opts)
+      data
+    end
+
+    # Account billing snapshot (plan, cycle, balance, caps, status)
+    # The billing \&quot;wallet/statement\&quot; view: current plan, billing cycle, accrued balance + remaining credits this period, spend caps, and payment / access status. This is the billing half of the legacy &#x60;/v1/usage-stats&#x60; snapshot — the per-product consumption half is metering and lives on &#x60;GET /v1/usage&#x60;.  Usage-based (Metronome) accounts get a populated &#x60;balance&#x60;; legacy Stripe accounts get &#x60;balance: null&#x60; plus a deprecated &#x60;legacy.limits&#x60; block and, when payment-blocked, &#x60;status.openInvoiceUrl&#x60; / &#x60;status.declineReason&#x60;. 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BillingSnapshot, Integer, Hash)>] BillingSnapshot data, response status code and response headers
+    def get_billing_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: UsageApi.get_billing ...'
+      end
+      # resource path
+      local_var_path = '/v1/billing'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'BillingSnapshot'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"UsageApi.get_billing",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: UsageApi#get_billing\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Calling usage and cost
     # Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call's billing snapshot, so this endpoint always agrees with the invoice: `billableUSD` is what Zernio bills; `metaUSD` is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional `groupBy` returns a breakdown by UTC day, by your number, or by channel. Defaults to the last 30 days. 
     # @param [Hash] opts the optional parameters
@@ -172,24 +229,40 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Get plan and usage snapshot
-    # The usage hub: current plan name, billing period, plan limits, and usage counts, in one snapshot. For metered consumption over an arbitrary window with breakdowns (by day, by number), use the domain spokes: `GET /v1/usage/calls` and `GET /v1/usage/sms`.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
+    # Usage snapshot (default) or billed-spend metering (with params)
+    # Dual-mode endpoint, selected by query params — fully backward compatible:  **Without metering params (the default):** the plan / quota / usage snapshot — plan name, billing period, limits, usage counts, access state. Identical to `GET /v1/usage-stats`. Existing integrations keep working unchanged.  **With `range`, `granularity`, `from`, or `to`:** usage METERING — billed spend (USD) by product family (`accounts`, `numbers`, `calls`, `sms`, `dlc`, `xApi`, `credits`, `other`) over the window, at `day` / `month` / `total` granularity, from Metronome's invoice breakdown (the CHARGE view — always reconciles with what gets billed). Also served at `GET /v1/usage/daily`. Usage-based accounts only — legacy Stripe accounts get `{ \"supported\": false, \"days\": [] }`.  For per-domain consumption *volumes* use `GET /v1/usage/calls` and `GET /v1/usage/sms`. For the billing statement (balance, credits, caps, payment status) use `GET /v1/billing`. 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
-    # @return [UsageStats]
+    # @option opts [Boolean] :reconcile Snapshot mode only. For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. 
+    # @option opts [String] :range Window to report. &#x60;cycle&#x60; / &#x60;prev-cycle&#x60; resolve to the customer&#39;s real billing-period bounds (falling back to a trailing 30 days when no invoice exists yet); &#x60;7d&#x60;…&#x60;12mo&#x60; are trailing windows; &#x60;custom&#x60; uses &#x60;from&#x60; / &#x60;to&#x60;.  (default to 'cycle')
+    # @option opts [Date] :from Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;.
+    # @option opts [Date] :to Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days.
+    # @option opts [String] :granularity Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;.  (default to 'day')
+    # @return [GetUsage200Response]
     def get_usage(opts = {})
       data, _status_code, _headers = get_usage_with_http_info(opts)
       data
     end
 
-    # Get plan and usage snapshot
-    # The usage hub: current plan name, billing period, plan limits, and usage counts, in one snapshot. For metered consumption over an arbitrary window with breakdowns (by day, by number), use the domain spokes: &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60;.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
+    # Usage snapshot (default) or billed-spend metering (with params)
+    # Dual-mode endpoint, selected by query params — fully backward compatible:  **Without metering params (the default):** the plan / quota / usage snapshot — plan name, billing period, limits, usage counts, access state. Identical to &#x60;GET /v1/usage-stats&#x60;. Existing integrations keep working unchanged.  **With &#x60;range&#x60;, &#x60;granularity&#x60;, &#x60;from&#x60;, or &#x60;to&#x60;:** usage METERING — billed spend (USD) by product family (&#x60;accounts&#x60;, &#x60;numbers&#x60;, &#x60;calls&#x60;, &#x60;sms&#x60;, &#x60;dlc&#x60;, &#x60;xApi&#x60;, &#x60;credits&#x60;, &#x60;other&#x60;) over the window, at &#x60;day&#x60; / &#x60;month&#x60; / &#x60;total&#x60; granularity, from Metronome&#39;s invoice breakdown (the CHARGE view — always reconciles with what gets billed). Also served at &#x60;GET /v1/usage/daily&#x60;. Usage-based accounts only — legacy Stripe accounts get &#x60;{ \&quot;supported\&quot;: false, \&quot;days\&quot;: [] }&#x60;.  For per-domain consumption *volumes* use &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60;. For the billing statement (balance, credits, caps, payment status) use &#x60;GET /v1/billing&#x60;. 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
-    # @return [Array<(UsageStats, Integer, Hash)>] UsageStats data, response status code and response headers
+    # @option opts [Boolean] :reconcile Snapshot mode only. For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. 
+    # @option opts [String] :range Window to report. &#x60;cycle&#x60; / &#x60;prev-cycle&#x60; resolve to the customer&#39;s real billing-period bounds (falling back to a trailing 30 days when no invoice exists yet); &#x60;7d&#x60;…&#x60;12mo&#x60; are trailing windows; &#x60;custom&#x60; uses &#x60;from&#x60; / &#x60;to&#x60;.  (default to 'cycle')
+    # @option opts [Date] :from Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;.
+    # @option opts [Date] :to Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days.
+    # @option opts [String] :granularity Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;.  (default to 'day')
+    # @return [Array<(GetUsage200Response, Integer, Hash)>] GetUsage200Response data, response status code and response headers
     def get_usage_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsageApi.get_usage ...'
+      end
+      allowable_values = ["cycle", "prev-cycle", "7d", "14d", "30d", "3mo", "12mo", "custom"]
+      if @api_client.config.client_side_validation && opts[:'range'] && !allowable_values.include?(opts[:'range'])
+        fail ArgumentError, "invalid value for \"range\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["day", "month", "total"]
+      if @api_client.config.client_side_validation && opts[:'granularity'] && !allowable_values.include?(opts[:'granularity'])
+        fail ArgumentError, "invalid value for \"granularity\", must be one of #{allowable_values}"
       end
       # resource path
       local_var_path = '/v1/usage'
@@ -197,6 +270,10 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'reconcile'] = opts[:'reconcile'] if !opts[:'reconcile'].nil?
+      query_params[:'range'] = opts[:'range'] if !opts[:'range'].nil?
+      query_params[:'from'] = opts[:'from'] if !opts[:'from'].nil?
+      query_params[:'to'] = opts[:'to'] if !opts[:'to'].nil?
+      query_params[:'granularity'] = opts[:'granularity'] if !opts[:'granularity'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -210,7 +287,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UsageStats'
+      return_type = opts[:debug_return_type] || 'GetUsage200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -232,8 +309,8 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Get plan and usage stats
-    # Deprecated alias of `GET /v1/usage`; same contract. New integrations should use that path (the usage hub), with `GET /v1/usage/calls` and `GET /v1/usage/sms` for metered breakdowns.  Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
+    # Get plan and usage snapshot (plan, limits, payment status)
+    # The plan / quota / payment-status snapshot: current plan name, billing period, plan limits, usage counts, and access state. Identical to a bare `GET /v1/usage` call (this path is its deprecated alias). For billed spend by product, call `GET /v1/usage` with `range` / `granularity` params. The statement view (balance, credits, caps, payment status) lives at `GET /v1/billing`.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
     # @return [UsageStats]
@@ -242,8 +319,8 @@ module Zernio
       data
     end
 
-    # Get plan and usage stats
-    # Deprecated alias of &#x60;GET /v1/usage&#x60;; same contract. New integrations should use that path (the usage hub), with &#x60;GET /v1/usage/calls&#x60; and &#x60;GET /v1/usage/sms&#x60; for metered breakdowns.  Returns the current plan name, billing period, plan limits, and usage counts.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
+    # Get plan and usage snapshot (plan, limits, payment status)
+    # The plan / quota / payment-status snapshot: current plan name, billing period, plan limits, usage counts, and access state. Identical to a bare &#x60;GET /v1/usage&#x60; call (this path is its deprecated alias). For billed spend by product, call &#x60;GET /v1/usage&#x60; with &#x60;range&#x60; / &#x60;granularity&#x60; params. The statement view (balance, credits, caps, payment status) lives at &#x60;GET /v1/billing&#x60;.  The response shape depends on the account&#39;s &#x60;billingSystem&#x60;:   * Stripe users: per-period &#x60;usage.uploads&#x60; / &#x60;usage.profiles&#x60; counters.   * Metronome (usage-based) users: &#x60;usage.connectedAccounts&#x60;,     &#x60;usage.xApiCallsByOperation&#x60; (per-operation X API call counts —     resolve keys via &#x60;GET /v1/billing/x-pricing&#x60;), plus a &#x60;spend&#x60;     block with &#x60;currentPeriodCents&#x60;, &#x60;xSpendCents&#x60;, and     &#x60;xSpendLimitCents&#x60;. The legacy &#x60;usage.xApiCalls&#x60; 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume &#x60;xApiCallsByOperation&#x60; only. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :reconcile For Stripe subscription users, &#x60;true&#x60; forces a subscription reconciliation pass even when cached plan data looks complete. Omit the parameter, or pass &#x60;false&#x60;, to use the default first-time-only reconciliation behavior. Invalid boolean values are rejected. 
     # @return [Array<(UsageStats, Integer, Hash)>] UsageStats data, response status code and response headers
