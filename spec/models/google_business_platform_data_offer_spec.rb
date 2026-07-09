@@ -27,16 +27,6 @@ describe Zernio::GoogleBusinessPlatformDataOffer do
     end
   end
 
-  describe 'test attribute "offer_type"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["OFFER", "BUY_ONE_GET_ONE"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.offer_type = value }.not_to raise_error
-      # end
-    end
-  end
-
   describe 'test attribute "redeem_online_url"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

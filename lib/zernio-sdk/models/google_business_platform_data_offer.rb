@@ -16,9 +16,6 @@ require 'time'
 module Zernio
   # Offer details. Required when topicType is OFFER. All fields are optional per Google's API, but at least one is recommended.
   class GoogleBusinessPlatformDataOffer < ApiModelBase
-    # Type of offer
-    attr_accessor :offer_type
-
     # URL where the offer can be redeemed online
     attr_accessor :redeem_online_url
 
@@ -28,32 +25,9 @@ module Zernio
     # Coupon code for the offer
     attr_accessor :coupon_code
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'offer_type' => :'offerType',
         :'redeem_online_url' => :'redeemOnlineUrl',
         :'terms_conditions' => :'termsConditions',
         :'coupon_code' => :'couponCode'
@@ -73,7 +47,6 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'offer_type' => :'String',
         :'redeem_online_url' => :'String',
         :'terms_conditions' => :'String',
         :'coupon_code' => :'String'
@@ -102,10 +75,6 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'offer_type')
-        self.offer_type = attributes[:'offer_type']
-      end
-
       if attributes.key?(:'redeem_online_url')
         self.redeem_online_url = attributes[:'redeem_online_url']
       end
@@ -131,19 +100,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      offer_type_validator = EnumAttributeValidator.new('String', ["OFFER", "BUY_ONE_GET_ONE"])
-      return false unless offer_type_validator.valid?(@offer_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] offer_type Object to be assigned
-    def offer_type=(offer_type)
-      validator = EnumAttributeValidator.new('String', ["OFFER", "BUY_ONE_GET_ONE"])
-      unless validator.valid?(offer_type)
-        fail ArgumentError, "invalid value for \"offer_type\", must be one of #{validator.allowable_values}."
-      end
-      @offer_type = offer_type
     end
 
     # Checks equality by comparing each attribute.
@@ -151,7 +108,6 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          offer_type == o.offer_type &&
           redeem_online_url == o.redeem_online_url &&
           terms_conditions == o.terms_conditions &&
           coupon_code == o.coupon_code
@@ -166,7 +122,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [offer_type, redeem_online_url, terms_conditions, coupon_code].hash
+      [redeem_online_url, terms_conditions, coupon_code].hash
     end
 
     # Builds the object from hash
