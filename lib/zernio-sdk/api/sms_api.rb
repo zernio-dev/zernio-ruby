@@ -480,7 +480,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Add a number to an existing registration
+    # Add number to SMS registration
     # Attaches this number to your existing approved 10DLC campaign instead of running a fresh registration: the number inherits the campaign's approval (no new brand or campaign, no extra carrier fee). Enable SMS on the number first (`POST /v1/phone-numbers/{id}/sms`; its response tells you whether a reusable registration exists). 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
@@ -490,7 +490,7 @@ module Zernio
       data
     end
 
-    # Add a number to an existing registration
+    # Add number to SMS registration
     # Attaches this number to your existing approved 10DLC campaign instead of running a fresh registration: the number inherits the campaign&#39;s approval (no new brand or campaign, no extra carrier fee). Enable SMS on the number first (&#x60;POST /v1/phone-numbers/{id}/sms&#x60;; its response tells you whether a reusable registration exists). 
     # @param id [String] 
     # @param [Hash] opts the optional parameters

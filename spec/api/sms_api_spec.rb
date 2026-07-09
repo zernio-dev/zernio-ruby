@@ -117,7 +117,7 @@ describe 'SMSApi' do
   end
 
   # unit tests for reuse_sms_registration_for_number
-  # Add a number to an existing registration
+  # Add number to SMS registration
   # Attaches this number to your existing approved 10DLC campaign instead of running a fresh registration: the number inherits the campaign&#39;s approval (no new brand or campaign, no extra carrier fee). Enable SMS on the number first (&#x60;POST /v1/phone-numbers/{id}/sms&#x60;; its response tells you whether a reusable registration exists). 
   # @param id 
   # @param [Hash] opts the optional parameters

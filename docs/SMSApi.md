@@ -11,7 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_sms_opt_outs**](SMSApi.md#list_sms_opt_outs) | **GET** /v1/sms/opt-outs | List SMS opt-outs |
 | [**list_sms_registrations**](SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations |
 | [**lookup_sms_number**](SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type |
-| [**reuse_sms_registration_for_number**](SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add a number to an existing registration |
+| [**reuse_sms_registration_for_number**](SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration |
 | [**send_sms**](SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS |
 | [**share_sms_registration**](SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link |
 | [**start_sms_registration**](SMSApi.md#start_sms_registration) | **POST** /v1/sms/registrations | Start a carrier registration |
@@ -506,7 +506,7 @@ end
 
 > <ReuseSmsRegistrationForNumber200Response> reuse_sms_registration_for_number(id)
 
-Add a number to an existing registration
+Add number to SMS registration
 
 Attaches this number to your existing approved 10DLC campaign instead of running a fresh registration: the number inherits the campaign's approval (no new brand or campaign, no extra carrier fee). Enable SMS on the number first (`POST /v1/phone-numbers/{id}/sms`; its response tells you whether a reusable registration exists). 
 
@@ -525,7 +525,7 @@ api_instance = Zernio::SMSApi.new
 id = 'id_example' # String | 
 
 begin
-  # Add a number to an existing registration
+  # Add number to SMS registration
   result = api_instance.reuse_sms_registration_for_number(id)
   p result
 rescue Zernio::ApiError => e
@@ -541,7 +541,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Add a number to an existing registration
+  # Add number to SMS registration
   data, status_code, headers = api_instance.reuse_sms_registration_for_number_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }

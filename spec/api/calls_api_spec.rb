@@ -45,7 +45,7 @@ describe 'CallsApi' do
   end
 
   # unit tests for get_call_recording
-  # Get a call recording (any channel)
+  # Get a call recording
   # Channel-agnostic recording fetch: resolves a fresh, playable MP3 URL for any call regardless of channel (provider-signed URLs expire ~10 minutes after signing, so this re-signs on demand). Default responds &#x60;302 Found&#x60; redirecting to the fresh URL; pass &#x60;as&#x3D;json&#x60; to receive &#x60;{ url }&#x60; instead. 
   # @param id 
   # @param [Hash] opts the optional parameters

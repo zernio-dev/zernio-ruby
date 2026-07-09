@@ -181,7 +181,7 @@ Class | Method | HTTP request | Description
 *Zernio::BroadcastsApi* | [**send_broadcast**](docs/BroadcastsApi.md#send_broadcast) | **POST** /v1/broadcasts/{broadcastId}/send | Send broadcast now
 *Zernio::BroadcastsApi* | [**update_broadcast**](docs/BroadcastsApi.md#update_broadcast) | **PATCH** /v1/broadcasts/{broadcastId} | Update broadcast
 *Zernio::CallsApi* | [**get_call**](docs/CallsApi.md#get_call) | **GET** /v1/calls/{id} | Get a call (any channel)
-*Zernio::CallsApi* | [**get_call_recording**](docs/CallsApi.md#get_call_recording) | **GET** /v1/calls/{id}/recording | Get a call recording (any channel)
+*Zernio::CallsApi* | [**get_call_recording**](docs/CallsApi.md#get_call_recording) | **GET** /v1/calls/{id}/recording | Get a call recording
 *Zernio::CallsApi* | [**list_calls**](docs/CallsApi.md#list_calls) | **GET** /v1/calls | List all calls (unified history)
 *Zernio::CommentAutomationsApi* | [**create_comment_automation**](docs/CommentAutomationsApi.md#create_comment_automation) | **POST** /v1/comment-automations | Create comment-to-DM automation
 *Zernio::CommentAutomationsApi* | [**delete_comment_automation**](docs/CommentAutomationsApi.md#delete_comment_automation) | **DELETE** /v1/comment-automations/{automationId} | Delete automation
@@ -380,7 +380,7 @@ Class | Method | HTTP request | Description
 *Zernio::SMSApi* | [**list_sms_opt_outs**](docs/SMSApi.md#list_sms_opt_outs) | **GET** /v1/sms/opt-outs | List SMS opt-outs
 *Zernio::SMSApi* | [**list_sms_registrations**](docs/SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations
 *Zernio::SMSApi* | [**lookup_sms_number**](docs/SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type
-*Zernio::SMSApi* | [**reuse_sms_registration_for_number**](docs/SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add a number to an existing registration
+*Zernio::SMSApi* | [**reuse_sms_registration_for_number**](docs/SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration
 *Zernio::SMSApi* | [**send_sms**](docs/SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS
 *Zernio::SMSApi* | [**share_sms_registration**](docs/SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link
 *Zernio::SMSApi* | [**start_sms_registration**](docs/SMSApi.md#start_sms_registration) | **POST** /v1/sms/registrations | Start a carrier registration
@@ -409,7 +409,7 @@ Class | Method | HTTP request | Description
 *Zernio::TwitterEngagementApi* | [**retweet_post**](docs/TwitterEngagementApi.md#retweet_post) | **POST** /v1/twitter/retweet | Retweet a post
 *Zernio::TwitterEngagementApi* | [**undo_retweet**](docs/TwitterEngagementApi.md#undo_retweet) | **DELETE** /v1/twitter/retweet | Undo retweet
 *Zernio::TwitterEngagementApi* | [**unfollow_user**](docs/TwitterEngagementApi.md#unfollow_user) | **DELETE** /v1/twitter/follow | Unfollow a user
-*Zernio::UsageApi* | [**get_calls_usage**](docs/UsageApi.md#get_calls_usage) | **GET** /v1/usage/calls | Calling usage (volumes + billable cost)
+*Zernio::UsageApi* | [**get_calls_usage**](docs/UsageApi.md#get_calls_usage) | **GET** /v1/usage/calls | Calling usage and cost
 *Zernio::UsageApi* | [**get_sms_usage**](docs/UsageApi.md#get_sms_usage) | **GET** /v1/usage/sms | SMS usage (volumes)
 *Zernio::UsageApi* | [**get_usage**](docs/UsageApi.md#get_usage) | **GET** /v1/usage | Get plan and usage snapshot
 *Zernio::UsageApi* | [**get_usage_stats**](docs/UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage stats

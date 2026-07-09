@@ -4,7 +4,7 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_calls_usage**](UsageApi.md#get_calls_usage) | **GET** /v1/usage/calls | Calling usage (volumes + billable cost) |
+| [**get_calls_usage**](UsageApi.md#get_calls_usage) | **GET** /v1/usage/calls | Calling usage and cost |
 | [**get_sms_usage**](UsageApi.md#get_sms_usage) | **GET** /v1/usage/sms | SMS usage (volumes) |
 | [**get_usage**](UsageApi.md#get_usage) | **GET** /v1/usage | Get plan and usage snapshot |
 | [**get_usage_stats**](UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage stats |
@@ -15,7 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 
 > <GetCallsUsage200Response> get_calls_usage(opts)
 
-Calling usage (volumes + billable cost)
+Calling usage and cost
 
 Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call's billing snapshot, so this endpoint always agrees with the invoice: `billableUSD` is what Zernio bills; `metaUSD` is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional `groupBy` returns a breakdown by UTC day, by your number, or by channel. Defaults to the last 30 days. 
 
@@ -40,7 +40,7 @@ opts = {
 }
 
 begin
-  # Calling usage (volumes + billable cost)
+  # Calling usage and cost
   result = api_instance.get_calls_usage(opts)
   p result
 rescue Zernio::ApiError => e
@@ -56,7 +56,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Calling usage (volumes + billable cost)
+  # Calling usage and cost
   data, status_code, headers = api_instance.get_calls_usage_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }

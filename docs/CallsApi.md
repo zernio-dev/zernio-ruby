@@ -5,7 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**get_call**](CallsApi.md#get_call) | **GET** /v1/calls/{id} | Get a call (any channel) |
-| [**get_call_recording**](CallsApi.md#get_call_recording) | **GET** /v1/calls/{id}/recording | Get a call recording (any channel) |
+| [**get_call_recording**](CallsApi.md#get_call_recording) | **GET** /v1/calls/{id}/recording | Get a call recording |
 | [**list_calls**](CallsApi.md#list_calls) | **GET** /v1/calls | List all calls (unified history) |
 
 
@@ -82,7 +82,7 @@ end
 
 > <GetWhatsAppCallRecording200Response> get_call_recording(id, opts)
 
-Get a call recording (any channel)
+Get a call recording
 
 Channel-agnostic recording fetch: resolves a fresh, playable MP3 URL for any call regardless of channel (provider-signed URLs expire ~10 minutes after signing, so this re-signs on demand). Default responds `302 Found` redirecting to the fresh URL; pass `as=json` to receive `{ url }` instead. 
 
@@ -104,7 +104,7 @@ opts = {
 }
 
 begin
-  # Get a call recording (any channel)
+  # Get a call recording
   result = api_instance.get_call_recording(id, opts)
   p result
 rescue Zernio::ApiError => e
@@ -120,7 +120,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get a call recording (any channel)
+  # Get a call recording
   data, status_code, headers = api_instance.get_call_recording_with_http_info(id, opts)
   p status_code # => 2xx
   p headers # => { ... }

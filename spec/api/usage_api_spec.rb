@@ -33,7 +33,7 @@ describe 'UsageApi' do
   end
 
   # unit tests for get_calls_usage
-  # Calling usage (volumes + billable cost)
+  # Calling usage and cost
   # Aggregated calling usage across your numbers, both channels (WhatsApp Business Calling + regular phone/PSTN): call counts, answered counts, minutes, and cost. Use it for cost visibility or to rebill your own customers per number.  Costs come from each call&#39;s billing snapshot, so this endpoint always agrees with the invoice: &#x60;billableUSD&#x60; is what Zernio bills; &#x60;metaUSD&#x60; is the WhatsApp per-minute charge Meta bills directly to your WABA (display only, never billed by Zernio).  Optional &#x60;groupBy&#x60; returns a breakdown by UTC day, by your number, or by channel. Defaults to the last 30 days. 
   # @param [Hash] opts the optional parameters
   # @option opts [Time] :since Start of the window (inclusive). Default 30 days before &#x60;until&#x60;.
