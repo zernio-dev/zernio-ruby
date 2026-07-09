@@ -151,6 +151,7 @@ Class | Method | HTTP request | Description
 *Zernio::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
 *Zernio::AnalyticsApi* | [**get_daily_metrics**](docs/AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics
 *Zernio::AnalyticsApi* | [**get_facebook_page_insights**](docs/AnalyticsApi.md#get_facebook_page_insights) | **GET** /v1/analytics/facebook/page-insights | Get Facebook Page insights
+*Zernio::AnalyticsApi* | [**get_facebook_post_reactions**](docs/AnalyticsApi.md#get_facebook_post_reactions) | **GET** /v1/accounts/{accountId}/facebook-post-reactions | Get Facebook post reactions
 *Zernio::AnalyticsApi* | [**get_follower_stats**](docs/AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
 *Zernio::AnalyticsApi* | [**get_google_business_performance**](docs/AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get GBP performance metrics
 *Zernio::AnalyticsApi* | [**get_google_business_search_keywords**](docs/AnalyticsApi.md#get_google_business_search_keywords) | **GET** /v1/analytics/googlebusiness/search-keywords | Get GBP search keywords
@@ -189,12 +190,14 @@ Class | Method | HTTP request | Description
 *Zernio::CommentAutomationsApi* | [**list_comment_automations**](docs/CommentAutomationsApi.md#list_comment_automations) | **GET** /v1/comment-automations | List comment-to-DM automations
 *Zernio::CommentAutomationsApi* | [**update_comment_automation**](docs/CommentAutomationsApi.md#update_comment_automation) | **PATCH** /v1/comment-automations/{automationId} | Update automation settings
 *Zernio::CommentsApi* | [**delete_inbox_comment**](docs/CommentsApi.md#delete_inbox_comment) | **DELETE** /v1/inbox/comments/{postId} | Delete comment
+*Zernio::CommentsApi* | [**edit_inbox_comment**](docs/CommentsApi.md#edit_inbox_comment) | **PATCH** /v1/inbox/comments/{postId}/{commentId} | Edit comment
 *Zernio::CommentsApi* | [**get_inbox_post_comments**](docs/CommentsApi.md#get_inbox_post_comments) | **GET** /v1/inbox/comments/{postId} | Get post comments
 *Zernio::CommentsApi* | [**hide_inbox_comment**](docs/CommentsApi.md#hide_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/hide | Hide comment
 *Zernio::CommentsApi* | [**like_inbox_comment**](docs/CommentsApi.md#like_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/like | Like comment
 *Zernio::CommentsApi* | [**list_inbox_comments**](docs/CommentsApi.md#list_inbox_comments) | **GET** /v1/inbox/comments | List commented posts
 *Zernio::CommentsApi* | [**reply_to_inbox_post**](docs/CommentsApi.md#reply_to_inbox_post) | **POST** /v1/inbox/comments/{postId} | Reply to comment
 *Zernio::CommentsApi* | [**send_private_reply_to_comment**](docs/CommentsApi.md#send_private_reply_to_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/private-reply | Send private reply
+*Zernio::CommentsApi* | [**set_comment_moderation**](docs/CommentsApi.md#set_comment_moderation) | **POST** /v1/inbox/comments/{postId}/{commentId}/moderation | Set comment moderation status
 *Zernio::CommentsApi* | [**unhide_inbox_comment**](docs/CommentsApi.md#unhide_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment
 *Zernio::CommentsApi* | [**unlike_inbox_comment**](docs/CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
 *Zernio::ConnectApi* | [**complete_telegram_connect**](docs/ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status
@@ -211,6 +214,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**get_pinterest_boards**](docs/ConnectApi.md#get_pinterest_boards) | **GET** /v1/accounts/{accountId}/pinterest-boards | List Pinterest boards
 *Zernio::ConnectApi* | [**get_reddit_flairs**](docs/ConnectApi.md#get_reddit_flairs) | **GET** /v1/accounts/{accountId}/reddit-flairs | List subreddit flairs
 *Zernio::ConnectApi* | [**get_reddit_subreddits**](docs/ConnectApi.md#get_reddit_subreddits) | **GET** /v1/accounts/{accountId}/reddit-subreddits | List Reddit subreddits
+*Zernio::ConnectApi* | [**get_subreddit_rules**](docs/ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules
 *Zernio::ConnectApi* | [**get_telegram_connect_status**](docs/ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code
 *Zernio::ConnectApi* | [**get_youtube_playlists**](docs/ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists
 *Zernio::ConnectApi* | [**handle_o_auth_callback**](docs/ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback
@@ -226,12 +230,14 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**select_linked_in_organization**](docs/ConnectApi.md#select_linked_in_organization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org
 *Zernio::ConnectApi* | [**select_pinterest_board**](docs/ConnectApi.md#select_pinterest_board) | **POST** /v1/connect/pinterest/select-board | Select Pinterest board
 *Zernio::ConnectApi* | [**select_snapchat_profile**](docs/ConnectApi.md#select_snapchat_profile) | **POST** /v1/connect/snapchat/select-profile | Select Snapchat profile
+*Zernio::ConnectApi* | [**set_reddit_post_flair**](docs/ConnectApi.md#set_reddit_post_flair) | **POST** /v1/accounts/{accountId}/reddit-flairs | Set flair on a published Reddit post
 *Zernio::ConnectApi* | [**update_facebook_page**](docs/ConnectApi.md#update_facebook_page) | **PUT** /v1/accounts/{accountId}/facebook-page | Update Facebook page
 *Zernio::ConnectApi* | [**update_gmb_location**](docs/ConnectApi.md#update_gmb_location) | **PUT** /v1/accounts/{accountId}/gmb-locations | Update GBP location
 *Zernio::ConnectApi* | [**update_linked_in_organization**](docs/ConnectApi.md#update_linked_in_organization) | **PUT** /v1/accounts/{accountId}/linkedin-organization | Switch LinkedIn account type
 *Zernio::ConnectApi* | [**update_pinterest_boards**](docs/ConnectApi.md#update_pinterest_boards) | **PUT** /v1/accounts/{accountId}/pinterest-boards | Set default Pinterest board
 *Zernio::ConnectApi* | [**update_reddit_subreddits**](docs/ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit
 *Zernio::ConnectApi* | [**update_youtube_default_playlist**](docs/ConnectApi.md#update_youtube_default_playlist) | **PUT** /v1/accounts/{accountId}/youtube-playlists | Set default YouTube playlist
+*Zernio::ConnectApi* | [**vote_reddit_thing**](docs/ConnectApi.md#vote_reddit_thing) | **POST** /v1/accounts/{accountId}/reddit-vote | Vote on a Reddit post or comment
 *Zernio::ContactsApi* | [**bulk_create_contacts**](docs/ContactsApi.md#bulk_create_contacts) | **POST** /v1/contacts/bulk | Bulk create contacts
 *Zernio::ContactsApi* | [**create_contact**](docs/ContactsApi.md#create_contact) | **POST** /v1/contacts | Create contact
 *Zernio::ContactsApi* | [**delete_contact**](docs/ContactsApi.md#delete_contact) | **DELETE** /v1/contacts/{contactId} | Delete contact
@@ -246,8 +252,14 @@ Class | Method | HTTP request | Description
 *Zernio::CustomFieldsApi* | [**set_contact_field_value**](docs/CustomFieldsApi.md#set_contact_field_value) | **PUT** /v1/contacts/{contactId}/fields/{slug} | Set custom field value
 *Zernio::CustomFieldsApi* | [**update_custom_field**](docs/CustomFieldsApi.md#update_custom_field) | **PATCH** /v1/custom-fields/{fieldId} | Update custom field
 *Zernio::DiscordApi* | [**add_discord_member_role**](docs/DiscordApi.md#add_discord_member_role) | **PUT** /v1/discord/guilds/{guildId}/members/{userId}/roles/{roleId} | Assign a role to a guild member
+*Zernio::DiscordApi* | [**create_discord_guild_role**](docs/DiscordApi.md#create_discord_guild_role) | **POST** /v1/discord/guilds/{guildId}/roles | Create a Discord guild role
 *Zernio::DiscordApi* | [**create_discord_scheduled_event**](docs/DiscordApi.md#create_discord_scheduled_event) | **POST** /v1/discord/guilds/{guildId}/events | Create a Discord scheduled event
+*Zernio::DiscordApi* | [**create_discord_thread**](docs/DiscordApi.md#create_discord_thread) | **POST** /v1/discord/channels/{channelId}/threads | Create a Discord public thread
+*Zernio::DiscordApi* | [**crosspost_discord_message**](docs/DiscordApi.md#crosspost_discord_message) | **POST** /v1/discord/channels/{channelId}/messages/{messageId}/crosspost | Crosspost a Discord announcement message
+*Zernio::DiscordApi* | [**delete_discord_guild_role**](docs/DiscordApi.md#delete_discord_guild_role) | **DELETE** /v1/discord/guilds/{guildId}/roles/{roleId} | Delete a Discord guild role
+*Zernio::DiscordApi* | [**delete_discord_message**](docs/DiscordApi.md#delete_discord_message) | **DELETE** /v1/discord/channels/{channelId}/messages/{messageId} | Delete a Discord channel message
 *Zernio::DiscordApi* | [**delete_discord_scheduled_event**](docs/DiscordApi.md#delete_discord_scheduled_event) | **DELETE** /v1/discord/guilds/{guildId}/events/{eventId} | Delete a Discord scheduled event
+*Zernio::DiscordApi* | [**edit_discord_guild_role**](docs/DiscordApi.md#edit_discord_guild_role) | **PATCH** /v1/discord/guilds/{guildId}/roles/{roleId} | Edit a Discord guild role
 *Zernio::DiscordApi* | [**get_discord_channels**](docs/DiscordApi.md#get_discord_channels) | **GET** /v1/accounts/{accountId}/discord-channels | List Discord guild channels
 *Zernio::DiscordApi* | [**get_discord_scheduled_event**](docs/DiscordApi.md#get_discord_scheduled_event) | **GET** /v1/discord/guilds/{guildId}/events/{eventId} | Get a Discord scheduled event
 *Zernio::DiscordApi* | [**get_discord_settings**](docs/DiscordApi.md#get_discord_settings) | **GET** /v1/accounts/{accountId}/discord-settings | Get Discord account settings
@@ -292,6 +304,7 @@ Class | Method | HTTP request | Description
 *Zernio::InboxAnalyticsApi* | [**get_inbox_top_accounts**](docs/InboxAnalyticsApi.md#get_inbox_top_accounts) | **GET** /v1/analytics/inbox/top-accounts | Get top accounts by inbox volume
 *Zernio::InboxAnalyticsApi* | [**get_inbox_volume**](docs/InboxAnalyticsApi.md#get_inbox_volume) | **GET** /v1/analytics/inbox/volume | Get inbox messaging volume
 *Zernio::InboxAnalyticsApi* | [**list_inbox_conversation_analytics**](docs/InboxAnalyticsApi.md#list_inbox_conversation_analytics) | **GET** /v1/analytics/inbox/conversations | List conversation analytics
+*Zernio::InstagramApi* | [**get_instagram_publishing_limit**](docs/InstagramApi.md#get_instagram_publishing_limit) | **GET** /v1/accounts/{accountId}/instagram/publishing-limit | Get Instagram publishing limit
 *Zernio::InstagramApi* | [**get_instagram_story_insights**](docs/InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights
 *Zernio::InstagramApi* | [**list_instagram_stories**](docs/InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories
 *Zernio::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
@@ -299,6 +312,7 @@ Class | Method | HTTP request | Description
 *Zernio::LogsApi* | [**list_logs**](docs/LogsApi.md#list_logs) | **GET** /v1/logs | List activity logs
 *Zernio::MediaApi* | [**get_media_presigned_url**](docs/MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get upload URL
 *Zernio::MentionsApi* | [**list_inbox_mentions**](docs/MentionsApi.md#list_inbox_mentions) | **GET** /v1/inbox/mentions | List mentions
+*Zernio::MentionsApi* | [**reply_to_mention**](docs/MentionsApi.md#reply_to_mention) | **POST** /v1/inbox/mentions/reply | Reply to a mention
 *Zernio::MessagesApi* | [**add_message_reaction**](docs/MessagesApi.md#add_message_reaction) | **POST** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Add reaction
 *Zernio::MessagesApi* | [**create_inbox_conversation**](docs/MessagesApi.md#create_inbox_conversation) | **POST** /v1/inbox/conversations | Create conversation
 *Zernio::MessagesApi* | [**delete_inbox_message**](docs/MessagesApi.md#delete_inbox_message) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Delete message
@@ -671,12 +685,17 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateCtwaAdRequestZipsInner](docs/CreateCtwaAdRequestZipsInner.md)
  - [Zernio::CreateCustomField200Response](docs/CreateCustomField200Response.md)
  - [Zernio::CreateCustomFieldRequest](docs/CreateCustomFieldRequest.md)
+ - [Zernio::CreateDiscordGuildRole201Response](docs/CreateDiscordGuildRole201Response.md)
+ - [Zernio::CreateDiscordGuildRoleRequest](docs/CreateDiscordGuildRoleRequest.md)
  - [Zernio::CreateDiscordScheduledEvent200Response](docs/CreateDiscordScheduledEvent200Response.md)
  - [Zernio::CreateDiscordScheduledEventRequest](docs/CreateDiscordScheduledEventRequest.md)
  - [Zernio::CreateDiscordScheduledEventRequestEntity](docs/CreateDiscordScheduledEventRequestEntity.md)
  - [Zernio::CreateDiscordScheduledEventRequestEntityOneOf](docs/CreateDiscordScheduledEventRequestEntityOneOf.md)
  - [Zernio::CreateDiscordScheduledEventRequestEntityOneOf1](docs/CreateDiscordScheduledEventRequestEntityOneOf1.md)
  - [Zernio::CreateDiscordScheduledEventRequestEntityOneOf2](docs/CreateDiscordScheduledEventRequestEntityOneOf2.md)
+ - [Zernio::CreateDiscordThread200Response](docs/CreateDiscordThread200Response.md)
+ - [Zernio::CreateDiscordThread200ResponseData](docs/CreateDiscordThread200ResponseData.md)
+ - [Zernio::CreateDiscordThreadRequest](docs/CreateDiscordThreadRequest.md)
  - [Zernio::CreateGoogleBusinessMedia200Response](docs/CreateGoogleBusinessMedia200Response.md)
  - [Zernio::CreateGoogleBusinessMediaRequest](docs/CreateGoogleBusinessMediaRequest.md)
  - [Zernio::CreateGoogleBusinessPlaceAction200Response](docs/CreateGoogleBusinessPlaceAction200Response.md)
@@ -765,6 +784,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateWorkflow200Response](docs/CreateWorkflow200Response.md)
  - [Zernio::CreateWorkflow200ResponseWorkflow](docs/CreateWorkflow200ResponseWorkflow.md)
  - [Zernio::CreateWorkflowRequest](docs/CreateWorkflowRequest.md)
+ - [Zernio::CrosspostDiscordMessage200Response](docs/CrosspostDiscordMessage200Response.md)
  - [Zernio::CtwaMultiResponse](docs/CtwaMultiResponse.md)
  - [Zernio::CtwaSingleResponse](docs/CtwaSingleResponse.md)
  - [Zernio::DeleteAccountGroup200Response](docs/DeleteAccountGroup200Response.md)
@@ -792,6 +812,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DiscordPlatformDataPollAnswersInnerPollMedia](docs/DiscordPlatformDataPollAnswersInnerPollMedia.md)
  - [Zernio::DiscordPlatformDataPollQuestion](docs/DiscordPlatformDataPollQuestion.md)
  - [Zernio::DiscordPlatformDataThreadFromMessage](docs/DiscordPlatformDataThreadFromMessage.md)
+ - [Zernio::DiscordRole](docs/DiscordRole.md)
  - [Zernio::DiscordScheduledEvent](docs/DiscordScheduledEvent.md)
  - [Zernio::DiscordScheduledEventEntityMetadata](docs/DiscordScheduledEventEntityMetadata.md)
  - [Zernio::DmButton](docs/DmButton.md)
@@ -799,6 +820,9 @@ Class | Method | HTTP request | Description
  - [Zernio::DuplicateAdCampaignRequest](docs/DuplicateAdCampaignRequest.md)
  - [Zernio::DuplicateWorkflow201Response](docs/DuplicateWorkflow201Response.md)
  - [Zernio::DuplicateWorkflow201ResponseWorkflow](docs/DuplicateWorkflow201ResponseWorkflow.md)
+ - [Zernio::EditDiscordGuildRoleRequest](docs/EditDiscordGuildRoleRequest.md)
+ - [Zernio::EditInboxComment200Response](docs/EditInboxComment200Response.md)
+ - [Zernio::EditInboxCommentRequest](docs/EditInboxCommentRequest.md)
  - [Zernio::EditInboxMessage200Response](docs/EditInboxMessage200Response.md)
  - [Zernio::EditInboxMessage200ResponseData](docs/EditInboxMessage200ResponseData.md)
  - [Zernio::EditInboxMessageRequest](docs/EditInboxMessageRequest.md)
@@ -912,6 +936,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetDiscordSettings200ResponseAccount](docs/GetDiscordSettings200ResponseAccount.md)
  - [Zernio::GetFacebookPages200Response](docs/GetFacebookPages200Response.md)
  - [Zernio::GetFacebookPages200ResponsePagesInner](docs/GetFacebookPages200ResponsePagesInner.md)
+ - [Zernio::GetFacebookPostReactions200Response](docs/GetFacebookPostReactions200Response.md)
+ - [Zernio::GetFacebookPostReactions200ResponseBreakdown](docs/GetFacebookPostReactions200ResponseBreakdown.md)
  - [Zernio::GetFollowerStats403Response](docs/GetFollowerStats403Response.md)
  - [Zernio::GetGmbAttributeMetadata200Response](docs/GetGmbAttributeMetadata200Response.md)
  - [Zernio::GetGmbAttributeMetadata200ResponseAttributeMetadataInner](docs/GetGmbAttributeMetadata200ResponseAttributeMetadataInner.md)
@@ -995,6 +1021,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInboxVolume200ResponseTimeseriesInner](docs/GetInboxVolume200ResponseTimeseriesInner.md)
  - [Zernio::GetInboxVolume400Response](docs/GetInboxVolume400Response.md)
  - [Zernio::GetInstagramAccountInsights404Response](docs/GetInstagramAccountInsights404Response.md)
+ - [Zernio::GetInstagramPublishingLimit200Response](docs/GetInstagramPublishingLimit200Response.md)
  - [Zernio::GetInstagramStoryInsights200Response](docs/GetInstagramStoryInsights200Response.md)
  - [Zernio::GetInstagramStoryInsights200ResponseData](docs/GetInstagramStoryInsights200ResponseData.md)
  - [Zernio::GetInstagramStoryInsights200ResponseDataMetrics](docs/GetInstagramStoryInsights200ResponseDataMetrics.md)
@@ -1049,6 +1076,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetSmsUsage200Response](docs/GetSmsUsage200Response.md)
  - [Zernio::GetSmsUsage200ResponseGroupsInner](docs/GetSmsUsage200ResponseGroupsInner.md)
  - [Zernio::GetSmsUsage200ResponseTotals](docs/GetSmsUsage200ResponseTotals.md)
+ - [Zernio::GetSubredditRules200Response](docs/GetSubredditRules200Response.md)
+ - [Zernio::GetSubredditRules200ResponseRulesInner](docs/GetSubredditRules200ResponseRulesInner.md)
  - [Zernio::GetTelegramCommands200Response](docs/GetTelegramCommands200Response.md)
  - [Zernio::GetTelegramCommands200ResponseDataInner](docs/GetTelegramCommands200ResponseDataInner.md)
  - [Zernio::GetTelegramConnectStatus200Response](docs/GetTelegramConnectStatus200Response.md)
@@ -1389,6 +1418,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplyToInboxPostRequest](docs/ReplyToInboxPostRequest.md)
  - [Zernio::ReplyToInboxReview200Response](docs/ReplyToInboxReview200Response.md)
  - [Zernio::ReplyToInboxReviewRequest](docs/ReplyToInboxReviewRequest.md)
+ - [Zernio::ReplyToMention200Response](docs/ReplyToMention200Response.md)
+ - [Zernio::ReplyToMentionRequest](docs/ReplyToMentionRequest.md)
  - [Zernio::RestoreWorkflowVersion200Response](docs/RestoreWorkflowVersion200Response.md)
  - [Zernio::RestoreWorkflowVersion200ResponseWorkflow](docs/RestoreWorkflowVersion200ResponseWorkflow.md)
  - [Zernio::RetweetPost200Response](docs/RetweetPost200Response.md)
@@ -1506,10 +1537,12 @@ Class | Method | HTTP request | Description
  - [Zernio::SendWhatsAppFlowMessageRequest](docs/SendWhatsAppFlowMessageRequest.md)
  - [Zernio::SendWhatsAppFlowMessageRequestFlowActionPayload](docs/SendWhatsAppFlowMessageRequestFlowActionPayload.md)
  - [Zernio::SendWhatsAppFlowMessageRequestHeader](docs/SendWhatsAppFlowMessageRequestHeader.md)
+ - [Zernio::SetCommentModerationRequest](docs/SetCommentModerationRequest.md)
  - [Zernio::SetContactFieldValueRequest](docs/SetContactFieldValueRequest.md)
  - [Zernio::SetInstagramIceBreakersRequest](docs/SetInstagramIceBreakersRequest.md)
  - [Zernio::SetInstagramIceBreakersRequestIceBreakersInner](docs/SetInstagramIceBreakersRequestIceBreakersInner.md)
  - [Zernio::SetMessengerMenuRequest](docs/SetMessengerMenuRequest.md)
+ - [Zernio::SetRedditPostFlairRequest](docs/SetRedditPostFlairRequest.md)
  - [Zernio::SetTelegramCommandsRequest](docs/SetTelegramCommandsRequest.md)
  - [Zernio::SetTelegramCommandsRequestCommandsInner](docs/SetTelegramCommandsRequestCommandsInner.md)
  - [Zernio::SetWhatsappBusinessUsername200Response](docs/SetWhatsappBusinessUsername200Response.md)
@@ -1721,6 +1754,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ValidateSubreddit200ResponseOneOfSubreddit](docs/ValidateSubreddit200ResponseOneOfSubreddit.md)
  - [Zernio::VerifySmsRegistrationOtp200Response](docs/VerifySmsRegistrationOtp200Response.md)
  - [Zernio::VerifySmsRegistrationOtpRequest](docs/VerifySmsRegistrationOtpRequest.md)
+ - [Zernio::VoteRedditThingRequest](docs/VoteRedditThingRequest.md)
  - [Zernio::Webhook](docs/Webhook.md)
  - [Zernio::WebhookLog](docs/WebhookLog.md)
  - [Zernio::WebhookPayloadAccountAdsInitialSyncCompleted](docs/WebhookPayloadAccountAdsInitialSyncCompleted.md)

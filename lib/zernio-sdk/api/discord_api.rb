@@ -101,6 +101,87 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a Discord guild role
+    # Creates a new role in the guild.  Requires the bot to hold the Manage Roles permission. Guilds that added the Zernio bot before role management shipped must re-invite it, because Discord applies the permission set at invite time.  Discord's role hierarchy applies: the bot cannot create a role positioned at or above its own highest role, and cannot grant permissions it does not itself hold. Either attempt returns a 403 carrying Discord's own error. 
+    # @param guild_id [String] Discord guild snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this guild
+    # @param create_discord_guild_role_request [CreateDiscordGuildRoleRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateDiscordGuildRole201Response]
+    def create_discord_guild_role(guild_id, account_id, create_discord_guild_role_request, opts = {})
+      data, _status_code, _headers = create_discord_guild_role_with_http_info(guild_id, account_id, create_discord_guild_role_request, opts)
+      data
+    end
+
+    # Create a Discord guild role
+    # Creates a new role in the guild.  Requires the bot to hold the Manage Roles permission. Guilds that added the Zernio bot before role management shipped must re-invite it, because Discord applies the permission set at invite time.  Discord&#39;s role hierarchy applies: the bot cannot create a role positioned at or above its own highest role, and cannot grant permissions it does not itself hold. Either attempt returns a 403 carrying Discord&#39;s own error. 
+    # @param guild_id [String] Discord guild snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this guild
+    # @param create_discord_guild_role_request [CreateDiscordGuildRoleRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateDiscordGuildRole201Response, Integer, Hash)>] CreateDiscordGuildRole201Response data, response status code and response headers
+    def create_discord_guild_role_with_http_info(guild_id, account_id, create_discord_guild_role_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DiscordApi.create_discord_guild_role ...'
+      end
+      # verify the required parameter 'guild_id' is set
+      if @api_client.config.client_side_validation && guild_id.nil?
+        fail ArgumentError, "Missing the required parameter 'guild_id' when calling DiscordApi.create_discord_guild_role"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DiscordApi.create_discord_guild_role"
+      end
+      # verify the required parameter 'create_discord_guild_role_request' is set
+      if @api_client.config.client_side_validation && create_discord_guild_role_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_discord_guild_role_request' when calling DiscordApi.create_discord_guild_role"
+      end
+      # resource path
+      local_var_path = '/v1/discord/guilds/{guildId}/roles'.sub('{' + 'guildId' + '}', CGI.escape(guild_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_discord_guild_role_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateDiscordGuildRole201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"DiscordApi.create_discord_guild_role",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DiscordApi#create_discord_guild_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create a Discord scheduled event
     # Create a guild scheduled event. Three event types, selected via the discriminator on `entity.type`:    - `external` — off-platform (Zoom, in-person, livestream). Requires     both `location` and `endsAt`. Most common type for scheduler     integrations.   - `voice` — hosted in a Discord voice channel. Requires `channelId`.   - `stage` — hosted in a Discord stage channel. Requires `channelId`.  Bot needs MANAGE_EVENTS in the guild. Existing installs (pre-events PR) need a re-invite OR a server admin manually granting the permission — see route header for details. 
     # @param guild_id [String] 
@@ -171,6 +252,315 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DiscordApi#create_discord_scheduled_event\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create a Discord public thread
+    # Creates a public thread in a channel. Pass `messageId` to start the thread from an existing message, or omit it to create a standalone thread.  Threads created here are always public. Requires the bot to hold Create Public Threads, which the Zernio bot requests at install time. 
+    # @param channel_id [String] Discord channel snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this channel&#39;s guild
+    # @param create_discord_thread_request [CreateDiscordThreadRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateDiscordThread200Response]
+    def create_discord_thread(channel_id, account_id, create_discord_thread_request, opts = {})
+      data, _status_code, _headers = create_discord_thread_with_http_info(channel_id, account_id, create_discord_thread_request, opts)
+      data
+    end
+
+    # Create a Discord public thread
+    # Creates a public thread in a channel. Pass &#x60;messageId&#x60; to start the thread from an existing message, or omit it to create a standalone thread.  Threads created here are always public. Requires the bot to hold Create Public Threads, which the Zernio bot requests at install time. 
+    # @param channel_id [String] Discord channel snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this channel&#39;s guild
+    # @param create_discord_thread_request [CreateDiscordThreadRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateDiscordThread200Response, Integer, Hash)>] CreateDiscordThread200Response data, response status code and response headers
+    def create_discord_thread_with_http_info(channel_id, account_id, create_discord_thread_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DiscordApi.create_discord_thread ...'
+      end
+      # verify the required parameter 'channel_id' is set
+      if @api_client.config.client_side_validation && channel_id.nil?
+        fail ArgumentError, "Missing the required parameter 'channel_id' when calling DiscordApi.create_discord_thread"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DiscordApi.create_discord_thread"
+      end
+      # verify the required parameter 'create_discord_thread_request' is set
+      if @api_client.config.client_side_validation && create_discord_thread_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_discord_thread_request' when calling DiscordApi.create_discord_thread"
+      end
+      # resource path
+      local_var_path = '/v1/discord/channels/{channelId}/threads'.sub('{' + 'channelId' + '}', CGI.escape(channel_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_discord_thread_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateDiscordThread200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"DiscordApi.create_discord_thread",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DiscordApi#create_discord_thread\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Crosspost a Discord announcement message
+    # Publishes a message from an announcement channel so it propagates to every server following that channel.  The source channel must be an announcement channel. Calling this on a regular text channel returns a 400 before Discord is contacted, because Discord's own error for this case is opaque. 
+    # @param channel_id [String] Discord announcement channel snowflake ID
+    # @param message_id [String] Discord message snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this channel&#39;s guild
+    # @param [Hash] opts the optional parameters
+    # @return [CrosspostDiscordMessage200Response]
+    def crosspost_discord_message(channel_id, message_id, account_id, opts = {})
+      data, _status_code, _headers = crosspost_discord_message_with_http_info(channel_id, message_id, account_id, opts)
+      data
+    end
+
+    # Crosspost a Discord announcement message
+    # Publishes a message from an announcement channel so it propagates to every server following that channel.  The source channel must be an announcement channel. Calling this on a regular text channel returns a 400 before Discord is contacted, because Discord&#39;s own error for this case is opaque. 
+    # @param channel_id [String] Discord announcement channel snowflake ID
+    # @param message_id [String] Discord message snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this channel&#39;s guild
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CrosspostDiscordMessage200Response, Integer, Hash)>] CrosspostDiscordMessage200Response data, response status code and response headers
+    def crosspost_discord_message_with_http_info(channel_id, message_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DiscordApi.crosspost_discord_message ...'
+      end
+      # verify the required parameter 'channel_id' is set
+      if @api_client.config.client_side_validation && channel_id.nil?
+        fail ArgumentError, "Missing the required parameter 'channel_id' when calling DiscordApi.crosspost_discord_message"
+      end
+      # verify the required parameter 'message_id' is set
+      if @api_client.config.client_side_validation && message_id.nil?
+        fail ArgumentError, "Missing the required parameter 'message_id' when calling DiscordApi.crosspost_discord_message"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DiscordApi.crosspost_discord_message"
+      end
+      # resource path
+      local_var_path = '/v1/discord/channels/{channelId}/messages/{messageId}/crosspost'.sub('{' + 'channelId' + '}', CGI.escape(channel_id.to_s)).sub('{' + 'messageId' + '}', CGI.escape(message_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CrosspostDiscordMessage200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"DiscordApi.crosspost_discord_message",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DiscordApi#crosspost_discord_message\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete a Discord guild role
+    # Permanently deletes a role from the guild and removes it from every member. This cannot be undone.  Requires the bot to hold Manage Roles, and the target role must sit below the bot's highest role. 
+    # @param guild_id [String] Discord guild snowflake ID
+    # @param role_id [String] Discord role snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this guild
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def delete_discord_guild_role(guild_id, role_id, account_id, opts = {})
+      data, _status_code, _headers = delete_discord_guild_role_with_http_info(guild_id, role_id, account_id, opts)
+      data
+    end
+
+    # Delete a Discord guild role
+    # Permanently deletes a role from the guild and removes it from every member. This cannot be undone.  Requires the bot to hold Manage Roles, and the target role must sit below the bot&#39;s highest role. 
+    # @param guild_id [String] Discord guild snowflake ID
+    # @param role_id [String] Discord role snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this guild
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def delete_discord_guild_role_with_http_info(guild_id, role_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DiscordApi.delete_discord_guild_role ...'
+      end
+      # verify the required parameter 'guild_id' is set
+      if @api_client.config.client_side_validation && guild_id.nil?
+        fail ArgumentError, "Missing the required parameter 'guild_id' when calling DiscordApi.delete_discord_guild_role"
+      end
+      # verify the required parameter 'role_id' is set
+      if @api_client.config.client_side_validation && role_id.nil?
+        fail ArgumentError, "Missing the required parameter 'role_id' when calling DiscordApi.delete_discord_guild_role"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DiscordApi.delete_discord_guild_role"
+      end
+      # resource path
+      local_var_path = '/v1/discord/guilds/{guildId}/roles/{roleId}'.sub('{' + 'guildId' + '}', CGI.escape(guild_id.to_s)).sub('{' + 'roleId' + '}', CGI.escape(role_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"DiscordApi.delete_discord_guild_role",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DiscordApi#delete_discord_guild_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete a Discord channel message
+    # Deletes a message from a channel, for moderation and cleanup. This cannot be undone.  Deleting a message the bot did not send requires the bot to hold the Manage Messages permission, which the Zernio bot requests at install time. Deleting the bot's own message needs no extra permission.  Ownership is verified by resolving the channel's guild and confirming the caller owns a Discord account bound to it. 
+    # @param channel_id [String] Discord channel snowflake ID
+    # @param message_id [String] Discord message snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this channel&#39;s guild
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def delete_discord_message(channel_id, message_id, account_id, opts = {})
+      data, _status_code, _headers = delete_discord_message_with_http_info(channel_id, message_id, account_id, opts)
+      data
+    end
+
+    # Delete a Discord channel message
+    # Deletes a message from a channel, for moderation and cleanup. This cannot be undone.  Deleting a message the bot did not send requires the bot to hold the Manage Messages permission, which the Zernio bot requests at install time. Deleting the bot&#39;s own message needs no extra permission.  Ownership is verified by resolving the channel&#39;s guild and confirming the caller owns a Discord account bound to it. 
+    # @param channel_id [String] Discord channel snowflake ID
+    # @param message_id [String] Discord message snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this channel&#39;s guild
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def delete_discord_message_with_http_info(channel_id, message_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DiscordApi.delete_discord_message ...'
+      end
+      # verify the required parameter 'channel_id' is set
+      if @api_client.config.client_side_validation && channel_id.nil?
+        fail ArgumentError, "Missing the required parameter 'channel_id' when calling DiscordApi.delete_discord_message"
+      end
+      # verify the required parameter 'message_id' is set
+      if @api_client.config.client_side_validation && message_id.nil?
+        fail ArgumentError, "Missing the required parameter 'message_id' when calling DiscordApi.delete_discord_message"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DiscordApi.delete_discord_message"
+      end
+      # resource path
+      local_var_path = '/v1/discord/channels/{channelId}/messages/{messageId}'.sub('{' + 'channelId' + '}', CGI.escape(channel_id.to_s)).sub('{' + 'messageId' + '}', CGI.escape(message_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"DiscordApi.delete_discord_message",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DiscordApi#delete_discord_message\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -247,6 +637,93 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DiscordApi#delete_discord_scheduled_event\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Edit a Discord guild role
+    # Updates a role's name, color, hoist, mentionable flag, or permission bitfield. At least one field must be supplied. Omitted fields are left unchanged.  Requires the bot to hold Manage Roles, and the target role must sit below the bot's highest role. See the create-role operation for the re-invite requirement. 
+    # @param guild_id [String] Discord guild snowflake ID
+    # @param role_id [String] Discord role snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this guild
+    # @param edit_discord_guild_role_request [EditDiscordGuildRoleRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateDiscordGuildRole201Response]
+    def edit_discord_guild_role(guild_id, role_id, account_id, edit_discord_guild_role_request, opts = {})
+      data, _status_code, _headers = edit_discord_guild_role_with_http_info(guild_id, role_id, account_id, edit_discord_guild_role_request, opts)
+      data
+    end
+
+    # Edit a Discord guild role
+    # Updates a role&#39;s name, color, hoist, mentionable flag, or permission bitfield. At least one field must be supplied. Omitted fields are left unchanged.  Requires the bot to hold Manage Roles, and the target role must sit below the bot&#39;s highest role. See the create-role operation for the re-invite requirement. 
+    # @param guild_id [String] Discord guild snowflake ID
+    # @param role_id [String] Discord role snowflake ID
+    # @param account_id [String] SocialAccount _id of the Discord account bound to this guild
+    # @param edit_discord_guild_role_request [EditDiscordGuildRoleRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateDiscordGuildRole201Response, Integer, Hash)>] CreateDiscordGuildRole201Response data, response status code and response headers
+    def edit_discord_guild_role_with_http_info(guild_id, role_id, account_id, edit_discord_guild_role_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DiscordApi.edit_discord_guild_role ...'
+      end
+      # verify the required parameter 'guild_id' is set
+      if @api_client.config.client_side_validation && guild_id.nil?
+        fail ArgumentError, "Missing the required parameter 'guild_id' when calling DiscordApi.edit_discord_guild_role"
+      end
+      # verify the required parameter 'role_id' is set
+      if @api_client.config.client_side_validation && role_id.nil?
+        fail ArgumentError, "Missing the required parameter 'role_id' when calling DiscordApi.edit_discord_guild_role"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DiscordApi.edit_discord_guild_role"
+      end
+      # verify the required parameter 'edit_discord_guild_role_request' is set
+      if @api_client.config.client_side_validation && edit_discord_guild_role_request.nil?
+        fail ArgumentError, "Missing the required parameter 'edit_discord_guild_role_request' when calling DiscordApi.edit_discord_guild_role"
+      end
+      # resource path
+      local_var_path = '/v1/discord/guilds/{guildId}/roles/{roleId}'.sub('{' + 'guildId' + '}', CGI.escape(guild_id.to_s)).sub('{' + 'roleId' + '}', CGI.escape(role_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(edit_discord_guild_role_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateDiscordGuildRole201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"DiscordApi.edit_discord_guild_role",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DiscordApi#edit_discord_guild_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

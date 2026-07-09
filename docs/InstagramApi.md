@@ -4,8 +4,78 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**get_instagram_publishing_limit**](InstagramApi.md#get_instagram_publishing_limit) | **GET** /v1/accounts/{accountId}/instagram/publishing-limit | Get Instagram publishing limit |
 | [**get_instagram_story_insights**](InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights |
 | [**list_instagram_stories**](InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories |
+
+
+## get_instagram_publishing_limit
+
+> <GetInstagramPublishingLimit200Response> get_instagram_publishing_limit(account_id)
+
+Get Instagram publishing limit
+
+Returns the account's remaining content-publishing quota for Instagram's rolling 24-hour window, so you can pace publishing and warn before the cap is reached.  `quotaUsage` counts containers published since the start of the window. Always compare against the returned `quotaTotal` rather than hardcoding a number: Meta's prose documentation and the live API disagree on the value, and the live value is authoritative. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of the Instagram account
+
+begin
+  # Get Instagram publishing limit
+  result = api_instance.get_instagram_publishing_limit(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_publishing_limit: #{e}"
+end
+```
+
+#### Using the get_instagram_publishing_limit_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetInstagramPublishingLimit200Response>, Integer, Hash)> get_instagram_publishing_limit_with_http_info(account_id)
+
+```ruby
+begin
+  # Get Instagram publishing limit
+  data, status_code, headers = api_instance.get_instagram_publishing_limit_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetInstagramPublishingLimit200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_publishing_limit_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of the Instagram account |  |
+
+### Return type
+
+[**GetInstagramPublishingLimit200Response**](GetInstagramPublishingLimit200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## get_instagram_story_insights

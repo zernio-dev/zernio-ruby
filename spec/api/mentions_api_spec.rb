@@ -48,4 +48,16 @@ describe 'MentionsApi' do
     end
   end
 
+  # unit tests for reply_to_mention
+  # Reply to a mention
+  # Reply to a mention of the connected account. Supported on Instagram only.  Two shapes, selected by whether &#x60;commentId&#x60; is present:  - **Comment mention** (someone @mentioned the account inside a comment): pass both   &#x60;mediaId&#x60; and &#x60;commentId&#x60;. Instagram posts a reply under that comment. - **Caption mention** (someone @mentioned the account in their media caption, so no   comment exists): pass &#x60;mediaId&#x60; only. Instagram posts a comment on their media.  Story mentions are not supported by Instagram&#39;s API.  Note that &#x60;GET /v1/inbox/mentions&#x60; currently returns LinkedIn mentions only and does not surface Instagram mentions. Source &#x60;mediaId&#x60; and &#x60;commentId&#x60; from Instagram&#39;s &#x60;comments&#x60; webhook, which is where mention notifications are delivered for accounts connected through Instagram Login. 
+  # @param reply_to_mention_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ReplyToMention200Response]
+  describe 'reply_to_mention test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

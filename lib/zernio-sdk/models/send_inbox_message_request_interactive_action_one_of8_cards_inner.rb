@@ -21,7 +21,7 @@ module Zernio
     # `product` for a product card; media cards use `cta_url` or a quick-reply type.
     attr_accessor :type
 
-    # Media cards only
+    # Media cards only, required. Carries the card's image or video.
     attr_accessor :header
 
     # Optional card body text.

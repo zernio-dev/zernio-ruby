@@ -445,6 +445,76 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get Facebook post reactions
+    # Returns the reaction breakdown for a Facebook Page post: a count per reaction type plus the overall total.  The whole breakdown is fetched in a single Graph call. Note that the post analytics endpoint reports only an aggregate reaction count (surfaced there as `likes`), so use this endpoint when you need per-type counts. 
+    # @param account_id [String] The ID of the Facebook Page account
+    # @param post_id [String] The Facebook post ID
+    # @param [Hash] opts the optional parameters
+    # @return [GetFacebookPostReactions200Response]
+    def get_facebook_post_reactions(account_id, post_id, opts = {})
+      data, _status_code, _headers = get_facebook_post_reactions_with_http_info(account_id, post_id, opts)
+      data
+    end
+
+    # Get Facebook post reactions
+    # Returns the reaction breakdown for a Facebook Page post: a count per reaction type plus the overall total.  The whole breakdown is fetched in a single Graph call. Note that the post analytics endpoint reports only an aggregate reaction count (surfaced there as &#x60;likes&#x60;), so use this endpoint when you need per-type counts. 
+    # @param account_id [String] The ID of the Facebook Page account
+    # @param post_id [String] The Facebook post ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetFacebookPostReactions200Response, Integer, Hash)>] GetFacebookPostReactions200Response data, response status code and response headers
+    def get_facebook_post_reactions_with_http_info(account_id, post_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_facebook_post_reactions ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AnalyticsApi.get_facebook_post_reactions"
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling AnalyticsApi.get_facebook_post_reactions"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/facebook-post-reactions'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'postId'] = post_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetFacebookPostReactions200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_facebook_post_reactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_facebook_post_reactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get follower stats
     # Returns follower count history and growth metrics for connected social accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
     # @param [Hash] opts the optional parameters

@@ -214,6 +214,19 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for get_subreddit_rules
+  # Get subreddit rules
+  # Returns a subreddit&#39;s posting rules plus Reddit&#39;s site-wide rules, so you can check them before submitting and avoid a removal.  Use this alongside &#x60;POST /v1/tools/validate/subreddit&#x60;, which only confirms that a subreddit exists and reports its basic posting settings. 
+  # @param account_id The ID of the Reddit account
+  # @param subreddit Subreddit name (without the \&quot;r/\&quot; prefix)
+  # @param [Hash] opts the optional parameters
+  # @return [GetSubredditRules200Response]
+  describe 'get_subreddit_rules test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_telegram_connect_status
   # Generate Telegram code
   # Generate an access code (valid 15 minutes) for connecting a Telegram channel or group. Add the bot as admin, then send the code + @yourchannel to the bot. Poll PATCH /v1/connect/telegram to check status.
@@ -408,6 +421,19 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for set_reddit_post_flair
+  # Set flair on a published Reddit post
+  # Applies a flair to a post the connected account already published. Use the GET on this path to list the available &#x60;flairTemplateId&#x60; values for the subreddit.  Flair can also be set at submit time by passing &#x60;flairId&#x60; in &#x60;platformSpecificData&#x60; when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user&#39;s post requires moderator permissions, which Zernio does not request. 
+  # @param account_id The ID of the Reddit account that owns the post
+  # @param set_reddit_post_flair_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'set_reddit_post_flair test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_facebook_page
   # Update Facebook page
   # Switch which Facebook Page is active for a connected account.
@@ -481,6 +507,19 @@ describe 'ConnectApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'update_youtube_default_playlist test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for vote_reddit_thing
+  # Vote on a Reddit post or comment
+  # Cast, change, or clear the connected account&#39;s vote on a Reddit post or comment.  **Reddit requires that votes be cast by humans.** Reddit&#39;s API terms permit a client to proxy a human&#39;s action one-for-one, and prohibit a bot from deciding how to vote or from amplifying a human&#39;s vote. Call this endpoint only in direct response to an explicit action by the account owner. Automated or agent-decided voting is vote manipulation and puts API access at risk. 
+  # @param account_id The ID of the Reddit account casting the vote
+  # @param vote_reddit_thing_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'vote_reddit_thing test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -47,6 +47,20 @@ describe 'DiscordApi' do
     end
   end
 
+  # unit tests for create_discord_guild_role
+  # Create a Discord guild role
+  # Creates a new role in the guild.  Requires the bot to hold the Manage Roles permission. Guilds that added the Zernio bot before role management shipped must re-invite it, because Discord applies the permission set at invite time.  Discord&#39;s role hierarchy applies: the bot cannot create a role positioned at or above its own highest role, and cannot grant permissions it does not itself hold. Either attempt returns a 403 carrying Discord&#39;s own error. 
+  # @param guild_id Discord guild snowflake ID
+  # @param account_id SocialAccount _id of the Discord account bound to this guild
+  # @param create_discord_guild_role_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateDiscordGuildRole201Response]
+  describe 'create_discord_guild_role test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_discord_scheduled_event
   # Create a Discord scheduled event
   # Create a guild scheduled event. Three event types, selected via the discriminator on &#x60;entity.type&#x60;:    - &#x60;external&#x60; — off-platform (Zoom, in-person, livestream). Requires     both &#x60;location&#x60; and &#x60;endsAt&#x60;. Most common type for scheduler     integrations.   - &#x60;voice&#x60; — hosted in a Discord voice channel. Requires &#x60;channelId&#x60;.   - &#x60;stage&#x60; — hosted in a Discord stage channel. Requires &#x60;channelId&#x60;.  Bot needs MANAGE_EVENTS in the guild. Existing installs (pre-events PR) need a re-invite OR a server admin manually granting the permission — see route header for details. 
@@ -55,6 +69,62 @@ describe 'DiscordApi' do
   # @param [Hash] opts the optional parameters
   # @return [CreateDiscordScheduledEvent200Response]
   describe 'create_discord_scheduled_event test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_discord_thread
+  # Create a Discord public thread
+  # Creates a public thread in a channel. Pass &#x60;messageId&#x60; to start the thread from an existing message, or omit it to create a standalone thread.  Threads created here are always public. Requires the bot to hold Create Public Threads, which the Zernio bot requests at install time. 
+  # @param channel_id Discord channel snowflake ID
+  # @param account_id SocialAccount _id of the Discord account bound to this channel&#39;s guild
+  # @param create_discord_thread_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateDiscordThread200Response]
+  describe 'create_discord_thread test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for crosspost_discord_message
+  # Crosspost a Discord announcement message
+  # Publishes a message from an announcement channel so it propagates to every server following that channel.  The source channel must be an announcement channel. Calling this on a regular text channel returns a 400 before Discord is contacted, because Discord&#39;s own error for this case is opaque. 
+  # @param channel_id Discord announcement channel snowflake ID
+  # @param message_id Discord message snowflake ID
+  # @param account_id SocialAccount _id of the Discord account bound to this channel&#39;s guild
+  # @param [Hash] opts the optional parameters
+  # @return [CrosspostDiscordMessage200Response]
+  describe 'crosspost_discord_message test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_discord_guild_role
+  # Delete a Discord guild role
+  # Permanently deletes a role from the guild and removes it from every member. This cannot be undone.  Requires the bot to hold Manage Roles, and the target role must sit below the bot&#39;s highest role. 
+  # @param guild_id Discord guild snowflake ID
+  # @param role_id Discord role snowflake ID
+  # @param account_id SocialAccount _id of the Discord account bound to this guild
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'delete_discord_guild_role test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_discord_message
+  # Delete a Discord channel message
+  # Deletes a message from a channel, for moderation and cleanup. This cannot be undone.  Deleting a message the bot did not send requires the bot to hold the Manage Messages permission, which the Zernio bot requests at install time. Deleting the bot&#39;s own message needs no extra permission.  Ownership is verified by resolving the channel&#39;s guild and confirming the caller owns a Discord account bound to it. 
+  # @param channel_id Discord channel snowflake ID
+  # @param message_id Discord message snowflake ID
+  # @param account_id SocialAccount _id of the Discord account bound to this channel&#39;s guild
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'delete_discord_message test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -69,6 +139,21 @@ describe 'DiscordApi' do
   # @param [Hash] opts the optional parameters
   # @return [DeleteDiscordScheduledEvent200Response]
   describe 'delete_discord_scheduled_event test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for edit_discord_guild_role
+  # Edit a Discord guild role
+  # Updates a role&#39;s name, color, hoist, mentionable flag, or permission bitfield. At least one field must be supplied. Omitted fields are left unchanged.  Requires the bot to hold Manage Roles, and the target role must sit below the bot&#39;s highest role. See the create-role operation for the re-invite requirement. 
+  # @param guild_id Discord guild snowflake ID
+  # @param role_id Discord role snowflake ID
+  # @param account_id SocialAccount _id of the Discord account bound to this guild
+  # @param edit_discord_guild_role_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateDiscordGuildRole201Response]
+  describe 'edit_discord_guild_role test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

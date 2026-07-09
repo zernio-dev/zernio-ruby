@@ -5,12 +5,14 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**delete_inbox_comment**](CommentsApi.md#delete_inbox_comment) | **DELETE** /v1/inbox/comments/{postId} | Delete comment |
+| [**edit_inbox_comment**](CommentsApi.md#edit_inbox_comment) | **PATCH** /v1/inbox/comments/{postId}/{commentId} | Edit comment |
 | [**get_inbox_post_comments**](CommentsApi.md#get_inbox_post_comments) | **GET** /v1/inbox/comments/{postId} | Get post comments |
 | [**hide_inbox_comment**](CommentsApi.md#hide_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/hide | Hide comment |
 | [**like_inbox_comment**](CommentsApi.md#like_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/like | Like comment |
 | [**list_inbox_comments**](CommentsApi.md#list_inbox_comments) | **GET** /v1/inbox/comments | List commented posts |
 | [**reply_to_inbox_post**](CommentsApi.md#reply_to_inbox_post) | **POST** /v1/inbox/comments/{postId} | Reply to comment |
 | [**send_private_reply_to_comment**](CommentsApi.md#send_private_reply_to_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/private-reply | Send private reply |
+| [**set_comment_moderation**](CommentsApi.md#set_comment_moderation) | **POST** /v1/inbox/comments/{postId}/{commentId}/moderation | Set comment moderation status |
 | [**unhide_inbox_comment**](CommentsApi.md#unhide_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment |
 | [**unlike_inbox_comment**](CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment |
 
@@ -85,6 +87,79 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## edit_inbox_comment
+
+> <EditInboxComment200Response> edit_inbox_comment(post_id, comment_id, edit_inbox_comment_request)
+
+Edit comment
+
+Edit the body of a comment the connected account posted. Supported on Reddit only.  Reddit keeps the same comment id after an edit. Reddit exposes no API to edit a post title, and a link post has no editable body. To edit a published post's body, use `POST /v1/posts/{postId}/edit`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommentsApi.new
+post_id = 'post_id_example' # String | 
+comment_id = 'comment_id_example' # String | 
+edit_inbox_comment_request = Zernio::EditInboxCommentRequest.new({account_id: 'account_id_example', platform: 'reddit', content: 'content_example'}) # EditInboxCommentRequest | 
+
+begin
+  # Edit comment
+  result = api_instance.edit_inbox_comment(post_id, comment_id, edit_inbox_comment_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommentsApi->edit_inbox_comment: #{e}"
+end
+```
+
+#### Using the edit_inbox_comment_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<EditInboxComment200Response>, Integer, Hash)> edit_inbox_comment_with_http_info(post_id, comment_id, edit_inbox_comment_request)
+
+```ruby
+begin
+  # Edit comment
+  data, status_code, headers = api_instance.edit_inbox_comment_with_http_info(post_id, comment_id, edit_inbox_comment_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <EditInboxComment200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommentsApi->edit_inbox_comment_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **comment_id** | **String** |  |  |
+| **edit_inbox_comment_request** | [**EditInboxCommentRequest**](EditInboxCommentRequest.md) |  |  |
+
+### Return type
+
+[**EditInboxComment200Response**](EditInboxComment200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -535,6 +610,79 @@ end
 ### Return type
 
 [**SendPrivateReplyToComment200Response**](SendPrivateReplyToComment200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## set_comment_moderation
+
+> <UpdateYoutubeDefaultPlaylist200Response> set_comment_moderation(post_id, comment_id, set_comment_moderation_request)
+
+Set comment moderation status
+
+Set a comment's moderation status. Supported on YouTube only.  Use this to work a moderation queue: approve a held comment (`published`), reject it (`rejected`), or send it back for review (`heldForReview`).  The request must be authorized by the owner of the channel or video the comment belongs to. You cannot moderate comments on videos you do not own.  This is distinct from `POST /v1/inbox/comments/{postId}/{commentId}/hide`, which covers Facebook, Instagram, Threads, and X/Twitter and does not apply to YouTube. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::CommentsApi.new
+post_id = 'post_id_example' # String | 
+comment_id = 'comment_id_example' # String | 
+set_comment_moderation_request = Zernio::SetCommentModerationRequest.new({account_id: 'account_id_example', platform: 'youtube', moderation_status: 'published'}) # SetCommentModerationRequest | 
+
+begin
+  # Set comment moderation status
+  result = api_instance.set_comment_moderation(post_id, comment_id, set_comment_moderation_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling CommentsApi->set_comment_moderation: #{e}"
+end
+```
+
+#### Using the set_comment_moderation_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> set_comment_moderation_with_http_info(post_id, comment_id, set_comment_moderation_request)
+
+```ruby
+begin
+  # Set comment moderation status
+  data, status_code, headers = api_instance.set_comment_moderation_with_http_info(post_id, comment_id, set_comment_moderation_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling CommentsApi->set_comment_moderation_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **post_id** | **String** |  |  |
+| **comment_id** | **String** |  |  |
+| **set_comment_moderation_request** | [**SetCommentModerationRequest**](SetCommentModerationRequest.md) |  |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 

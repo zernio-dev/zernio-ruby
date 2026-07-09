@@ -18,6 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_pinterest_boards**](ConnectApi.md#get_pinterest_boards) | **GET** /v1/accounts/{accountId}/pinterest-boards | List Pinterest boards |
 | [**get_reddit_flairs**](ConnectApi.md#get_reddit_flairs) | **GET** /v1/accounts/{accountId}/reddit-flairs | List subreddit flairs |
 | [**get_reddit_subreddits**](ConnectApi.md#get_reddit_subreddits) | **GET** /v1/accounts/{accountId}/reddit-subreddits | List Reddit subreddits |
+| [**get_subreddit_rules**](ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules |
 | [**get_telegram_connect_status**](ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code |
 | [**get_youtube_playlists**](ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists |
 | [**handle_o_auth_callback**](ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback |
@@ -33,12 +34,14 @@ All URIs are relative to *https://zernio.com/api*
 | [**select_linked_in_organization**](ConnectApi.md#select_linked_in_organization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org |
 | [**select_pinterest_board**](ConnectApi.md#select_pinterest_board) | **POST** /v1/connect/pinterest/select-board | Select Pinterest board |
 | [**select_snapchat_profile**](ConnectApi.md#select_snapchat_profile) | **POST** /v1/connect/snapchat/select-profile | Select Snapchat profile |
+| [**set_reddit_post_flair**](ConnectApi.md#set_reddit_post_flair) | **POST** /v1/accounts/{accountId}/reddit-flairs | Set flair on a published Reddit post |
 | [**update_facebook_page**](ConnectApi.md#update_facebook_page) | **PUT** /v1/accounts/{accountId}/facebook-page | Update Facebook page |
 | [**update_gmb_location**](ConnectApi.md#update_gmb_location) | **PUT** /v1/accounts/{accountId}/gmb-locations | Update GBP location |
 | [**update_linked_in_organization**](ConnectApi.md#update_linked_in_organization) | **PUT** /v1/accounts/{accountId}/linkedin-organization | Switch LinkedIn account type |
 | [**update_pinterest_boards**](ConnectApi.md#update_pinterest_boards) | **PUT** /v1/accounts/{accountId}/pinterest-boards | Set default Pinterest board |
 | [**update_reddit_subreddits**](ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit |
 | [**update_youtube_default_playlist**](ConnectApi.md#update_youtube_default_playlist) | **PUT** /v1/accounts/{accountId}/youtube-playlists | Set default YouTube playlist |
+| [**vote_reddit_thing**](ConnectApi.md#vote_reddit_thing) | **POST** /v1/accounts/{accountId}/reddit-vote | Vote on a Reddit post or comment |
 
 
 ## complete_telegram_connect
@@ -1034,6 +1037,77 @@ end
 ### Return type
 
 [**GetRedditSubreddits200Response**](GetRedditSubreddits200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_subreddit_rules
+
+> <GetSubredditRules200Response> get_subreddit_rules(account_id, subreddit)
+
+Get subreddit rules
+
+Returns a subreddit's posting rules plus Reddit's site-wide rules, so you can check them before submitting and avoid a removal.  Use this alongside `POST /v1/tools/validate/subreddit`, which only confirms that a subreddit exists and reports its basic posting settings. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | The ID of the Reddit account
+subreddit = 'webdev' # String | Subreddit name (without the \"r/\" prefix)
+
+begin
+  # Get subreddit rules
+  result = api_instance.get_subreddit_rules(account_id, subreddit)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_subreddit_rules: #{e}"
+end
+```
+
+#### Using the get_subreddit_rules_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetSubredditRules200Response>, Integer, Hash)> get_subreddit_rules_with_http_info(account_id, subreddit)
+
+```ruby
+begin
+  # Get subreddit rules
+  data, status_code, headers = api_instance.get_subreddit_rules_with_http_info(account_id, subreddit)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetSubredditRules200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_subreddit_rules_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of the Reddit account |  |
+| **subreddit** | **String** | Subreddit name (without the \&quot;r/\&quot; prefix) |  |
+
+### Return type
+
+[**GetSubredditRules200Response**](GetSubredditRules200Response.md)
 
 ### Authorization
 
@@ -2133,6 +2207,77 @@ end
 - **Accept**: application/json
 
 
+## set_reddit_post_flair
+
+> <UpdateYoutubeDefaultPlaylist200Response> set_reddit_post_flair(account_id, set_reddit_post_flair_request)
+
+Set flair on a published Reddit post
+
+Applies a flair to a post the connected account already published. Use the GET on this path to list the available `flairTemplateId` values for the subreddit.  Flair can also be set at submit time by passing `flairId` in `platformSpecificData` when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user's post requires moderator permissions, which Zernio does not request. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | The ID of the Reddit account that owns the post
+set_reddit_post_flair_request = Zernio::SetRedditPostFlairRequest.new({subreddit: 'subreddit_example', post_id: 'post_id_example', flair_template_id: 'flair_template_id_example'}) # SetRedditPostFlairRequest | 
+
+begin
+  # Set flair on a published Reddit post
+  result = api_instance.set_reddit_post_flair(account_id, set_reddit_post_flair_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->set_reddit_post_flair: #{e}"
+end
+```
+
+#### Using the set_reddit_post_flair_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> set_reddit_post_flair_with_http_info(account_id, set_reddit_post_flair_request)
+
+```ruby
+begin
+  # Set flair on a published Reddit post
+  data, status_code, headers = api_instance.set_reddit_post_flair_with_http_info(account_id, set_reddit_post_flair_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->set_reddit_post_flair_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of the Reddit account that owns the post |  |
+| **set_reddit_post_flair_request** | [**SetRedditPostFlairRequest**](SetRedditPostFlairRequest.md) |  |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_facebook_page
 
 > <UpdateFacebookPage200Response> update_facebook_page(account_id, update_facebook_page_request)
@@ -2544,6 +2689,77 @@ end
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
 | **update_youtube_default_playlist_request** | [**UpdateYoutubeDefaultPlaylistRequest**](UpdateYoutubeDefaultPlaylistRequest.md) |  |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## vote_reddit_thing
+
+> <UpdateYoutubeDefaultPlaylist200Response> vote_reddit_thing(account_id, vote_reddit_thing_request)
+
+Vote on a Reddit post or comment
+
+Cast, change, or clear the connected account's vote on a Reddit post or comment.  **Reddit requires that votes be cast by humans.** Reddit's API terms permit a client to proxy a human's action one-for-one, and prohibit a bot from deciding how to vote or from amplifying a human's vote. Call this endpoint only in direct response to an explicit action by the account owner. Automated or agent-decided voting is vote manipulation and puts API access at risk. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | The ID of the Reddit account casting the vote
+vote_reddit_thing_request = Zernio::VoteRedditThingRequest.new({thing_id: 't3_abc123', direction: 1}) # VoteRedditThingRequest | 
+
+begin
+  # Vote on a Reddit post or comment
+  result = api_instance.vote_reddit_thing(account_id, vote_reddit_thing_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->vote_reddit_thing: #{e}"
+end
+```
+
+#### Using the vote_reddit_thing_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> vote_reddit_thing_with_http_info(account_id, vote_reddit_thing_request)
+
+```ruby
+begin
+  # Vote on a Reddit post or comment
+  data, status_code, headers = api_instance.vote_reddit_thing_with_http_info(account_id, vote_reddit_thing_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->vote_reddit_thing_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of the Reddit account casting the vote |  |
+| **vote_reddit_thing_request** | [**VoteRedditThingRequest**](VoteRedditThingRequest.md) |  |  |
 
 ### Return type
 

@@ -96,6 +96,86 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Edit comment
+    # Edit the body of a comment the connected account posted. Supported on Reddit only.  Reddit keeps the same comment id after an edit. Reddit exposes no API to edit a post title, and a link post has no editable body. To edit a published post's body, use `POST /v1/posts/{postId}/edit`. 
+    # @param post_id [String] 
+    # @param comment_id [String] 
+    # @param edit_inbox_comment_request [EditInboxCommentRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [EditInboxComment200Response]
+    def edit_inbox_comment(post_id, comment_id, edit_inbox_comment_request, opts = {})
+      data, _status_code, _headers = edit_inbox_comment_with_http_info(post_id, comment_id, edit_inbox_comment_request, opts)
+      data
+    end
+
+    # Edit comment
+    # Edit the body of a comment the connected account posted. Supported on Reddit only.  Reddit keeps the same comment id after an edit. Reddit exposes no API to edit a post title, and a link post has no editable body. To edit a published post&#39;s body, use &#x60;POST /v1/posts/{postId}/edit&#x60;. 
+    # @param post_id [String] 
+    # @param comment_id [String] 
+    # @param edit_inbox_comment_request [EditInboxCommentRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(EditInboxComment200Response, Integer, Hash)>] EditInboxComment200Response data, response status code and response headers
+    def edit_inbox_comment_with_http_info(post_id, comment_id, edit_inbox_comment_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CommentsApi.edit_inbox_comment ...'
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling CommentsApi.edit_inbox_comment"
+      end
+      # verify the required parameter 'comment_id' is set
+      if @api_client.config.client_side_validation && comment_id.nil?
+        fail ArgumentError, "Missing the required parameter 'comment_id' when calling CommentsApi.edit_inbox_comment"
+      end
+      # verify the required parameter 'edit_inbox_comment_request' is set
+      if @api_client.config.client_side_validation && edit_inbox_comment_request.nil?
+        fail ArgumentError, "Missing the required parameter 'edit_inbox_comment_request' when calling CommentsApi.edit_inbox_comment"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/comments/{postId}/{commentId}'.sub('{' + 'postId' + '}', CGI.escape(post_id.to_s)).sub('{' + 'commentId' + '}', CGI.escape(comment_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(edit_inbox_comment_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'EditInboxComment200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"CommentsApi.edit_inbox_comment",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CommentsApi#edit_inbox_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get post comments
     # Fetch comments for a specific post. Requires accountId query parameter.
     # @param post_id [String] Zernio post ID or platform-specific post ID. Zernio IDs are auto-resolved. LinkedIn third-party posts accept full activity URN or numeric ID.
@@ -604,6 +684,86 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CommentsApi#send_private_reply_to_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Set comment moderation status
+    # Set a comment's moderation status. Supported on YouTube only.  Use this to work a moderation queue: approve a held comment (`published`), reject it (`rejected`), or send it back for review (`heldForReview`).  The request must be authorized by the owner of the channel or video the comment belongs to. You cannot moderate comments on videos you do not own.  This is distinct from `POST /v1/inbox/comments/{postId}/{commentId}/hide`, which covers Facebook, Instagram, Threads, and X/Twitter and does not apply to YouTube. 
+    # @param post_id [String] 
+    # @param comment_id [String] 
+    # @param set_comment_moderation_request [SetCommentModerationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def set_comment_moderation(post_id, comment_id, set_comment_moderation_request, opts = {})
+      data, _status_code, _headers = set_comment_moderation_with_http_info(post_id, comment_id, set_comment_moderation_request, opts)
+      data
+    end
+
+    # Set comment moderation status
+    # Set a comment&#39;s moderation status. Supported on YouTube only.  Use this to work a moderation queue: approve a held comment (&#x60;published&#x60;), reject it (&#x60;rejected&#x60;), or send it back for review (&#x60;heldForReview&#x60;).  The request must be authorized by the owner of the channel or video the comment belongs to. You cannot moderate comments on videos you do not own.  This is distinct from &#x60;POST /v1/inbox/comments/{postId}/{commentId}/hide&#x60;, which covers Facebook, Instagram, Threads, and X/Twitter and does not apply to YouTube. 
+    # @param post_id [String] 
+    # @param comment_id [String] 
+    # @param set_comment_moderation_request [SetCommentModerationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def set_comment_moderation_with_http_info(post_id, comment_id, set_comment_moderation_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CommentsApi.set_comment_moderation ...'
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling CommentsApi.set_comment_moderation"
+      end
+      # verify the required parameter 'comment_id' is set
+      if @api_client.config.client_side_validation && comment_id.nil?
+        fail ArgumentError, "Missing the required parameter 'comment_id' when calling CommentsApi.set_comment_moderation"
+      end
+      # verify the required parameter 'set_comment_moderation_request' is set
+      if @api_client.config.client_side_validation && set_comment_moderation_request.nil?
+        fail ArgumentError, "Missing the required parameter 'set_comment_moderation_request' when calling CommentsApi.set_comment_moderation"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/comments/{postId}/{commentId}/moderation'.sub('{' + 'postId' + '}', CGI.escape(post_id.to_s)).sub('{' + 'commentId' + '}', CGI.escape(comment_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_comment_moderation_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"CommentsApi.set_comment_moderation",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CommentsApi#set_comment_moderation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

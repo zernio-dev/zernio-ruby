@@ -46,6 +46,20 @@ describe 'CommentsApi' do
     end
   end
 
+  # unit tests for edit_inbox_comment
+  # Edit comment
+  # Edit the body of a comment the connected account posted. Supported on Reddit only.  Reddit keeps the same comment id after an edit. Reddit exposes no API to edit a post title, and a link post has no editable body. To edit a published post&#39;s body, use &#x60;POST /v1/posts/{postId}/edit&#x60;. 
+  # @param post_id 
+  # @param comment_id 
+  # @param edit_inbox_comment_request 
+  # @param [Hash] opts the optional parameters
+  # @return [EditInboxComment200Response]
+  describe 'edit_inbox_comment test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_inbox_post_comments
   # Get post comments
   # Fetch comments for a specific post. Requires accountId query parameter.
@@ -133,6 +147,20 @@ describe 'CommentsApi' do
   # @param [Hash] opts the optional parameters
   # @return [SendPrivateReplyToComment200Response]
   describe 'send_private_reply_to_comment test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for set_comment_moderation
+  # Set comment moderation status
+  # Set a comment&#39;s moderation status. Supported on YouTube only.  Use this to work a moderation queue: approve a held comment (&#x60;published&#x60;), reject it (&#x60;rejected&#x60;), or send it back for review (&#x60;heldForReview&#x60;).  The request must be authorized by the owner of the channel or video the comment belongs to. You cannot moderate comments on videos you do not own.  This is distinct from &#x60;POST /v1/inbox/comments/{postId}/{commentId}/hide&#x60;, which covers Facebook, Instagram, Threads, and X/Twitter and does not apply to YouTube. 
+  # @param post_id 
+  # @param comment_id 
+  # @param set_comment_moderation_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'set_comment_moderation test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

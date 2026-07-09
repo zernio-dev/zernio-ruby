@@ -19,6 +19,69 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Get Instagram publishing limit
+    # Returns the account's remaining content-publishing quota for Instagram's rolling 24-hour window, so you can pace publishing and warn before the cap is reached.  `quotaUsage` counts containers published since the start of the window. Always compare against the returned `quotaTotal` rather than hardcoding a number: Meta's prose documentation and the live API disagree on the value, and the live value is authoritative. 
+    # @param account_id [String] The ID of the Instagram account
+    # @param [Hash] opts the optional parameters
+    # @return [GetInstagramPublishingLimit200Response]
+    def get_instagram_publishing_limit(account_id, opts = {})
+      data, _status_code, _headers = get_instagram_publishing_limit_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get Instagram publishing limit
+    # Returns the account&#39;s remaining content-publishing quota for Instagram&#39;s rolling 24-hour window, so you can pace publishing and warn before the cap is reached.  &#x60;quotaUsage&#x60; counts containers published since the start of the window. Always compare against the returned &#x60;quotaTotal&#x60; rather than hardcoding a number: Meta&#39;s prose documentation and the live API disagree on the value, and the live value is authoritative. 
+    # @param account_id [String] The ID of the Instagram account
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetInstagramPublishingLimit200Response, Integer, Hash)>] GetInstagramPublishingLimit200Response data, response status code and response headers
+    def get_instagram_publishing_limit_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: InstagramApi.get_instagram_publishing_limit ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling InstagramApi.get_instagram_publishing_limit"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/instagram/publishing-limit'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetInstagramPublishingLimit200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"InstagramApi.get_instagram_publishing_limit",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: InstagramApi#get_instagram_publishing_limit\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Instagram story insights
     # Returns metrics for a single story. The `source` field discriminates between three states:  - `live` — fetched from Meta in real time (story is still active) - `cached` — fetched from a persisted `story_insights` webhook payload   (story has expired but we received its final-state metrics from Meta) - `unavailable` — story has expired and we never received its webhook   payload (for example, the account connected after the story expired)  Field semantics follow Meta's API. Counts below 5 may be returned as 0 due to Meta's privacy floor on small audiences. The `navigation` field is the sum of `tapsForward + tapsBack + exits + swipesForward`. 
     # @param account_id [String] The Instagram account ID

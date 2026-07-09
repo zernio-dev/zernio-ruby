@@ -102,5 +102,73 @@ module Zernio
       end
       return data, status_code, headers
     end
+
+    # Reply to a mention
+    # Reply to a mention of the connected account. Supported on Instagram only.  Two shapes, selected by whether `commentId` is present:  - **Comment mention** (someone @mentioned the account inside a comment): pass both   `mediaId` and `commentId`. Instagram posts a reply under that comment. - **Caption mention** (someone @mentioned the account in their media caption, so no   comment exists): pass `mediaId` only. Instagram posts a comment on their media.  Story mentions are not supported by Instagram's API.  Note that `GET /v1/inbox/mentions` currently returns LinkedIn mentions only and does not surface Instagram mentions. Source `mediaId` and `commentId` from Instagram's `comments` webhook, which is where mention notifications are delivered for accounts connected through Instagram Login. 
+    # @param reply_to_mention_request [ReplyToMentionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ReplyToMention200Response]
+    def reply_to_mention(reply_to_mention_request, opts = {})
+      data, _status_code, _headers = reply_to_mention_with_http_info(reply_to_mention_request, opts)
+      data
+    end
+
+    # Reply to a mention
+    # Reply to a mention of the connected account. Supported on Instagram only.  Two shapes, selected by whether &#x60;commentId&#x60; is present:  - **Comment mention** (someone @mentioned the account inside a comment): pass both   &#x60;mediaId&#x60; and &#x60;commentId&#x60;. Instagram posts a reply under that comment. - **Caption mention** (someone @mentioned the account in their media caption, so no   comment exists): pass &#x60;mediaId&#x60; only. Instagram posts a comment on their media.  Story mentions are not supported by Instagram&#39;s API.  Note that &#x60;GET /v1/inbox/mentions&#x60; currently returns LinkedIn mentions only and does not surface Instagram mentions. Source &#x60;mediaId&#x60; and &#x60;commentId&#x60; from Instagram&#39;s &#x60;comments&#x60; webhook, which is where mention notifications are delivered for accounts connected through Instagram Login. 
+    # @param reply_to_mention_request [ReplyToMentionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ReplyToMention200Response, Integer, Hash)>] ReplyToMention200Response data, response status code and response headers
+    def reply_to_mention_with_http_info(reply_to_mention_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MentionsApi.reply_to_mention ...'
+      end
+      # verify the required parameter 'reply_to_mention_request' is set
+      if @api_client.config.client_side_validation && reply_to_mention_request.nil?
+        fail ArgumentError, "Missing the required parameter 'reply_to_mention_request' when calling MentionsApi.reply_to_mention"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/mentions/reply'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(reply_to_mention_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplyToMention200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MentionsApi.reply_to_mention",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MentionsApi#reply_to_mention\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end

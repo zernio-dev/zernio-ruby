@@ -17,10 +17,10 @@ module Zernio
   class EditPost200Response < ApiModelBase
     attr_accessor :success
 
-    # New tweet ID assigned by X after edit
+    # The platform post ID after the edit. X assigns a new ID; Discord, Facebook, and Reddit return the original ID unchanged. 
     attr_accessor :id
 
-    # URL of the edited tweet
+    # URL of the edited post
     attr_accessor :url
 
     attr_accessor :message

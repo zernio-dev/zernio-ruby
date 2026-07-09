@@ -5,8 +5,14 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**add_discord_member_role**](DiscordApi.md#add_discord_member_role) | **PUT** /v1/discord/guilds/{guildId}/members/{userId}/roles/{roleId} | Assign a role to a guild member |
+| [**create_discord_guild_role**](DiscordApi.md#create_discord_guild_role) | **POST** /v1/discord/guilds/{guildId}/roles | Create a Discord guild role |
 | [**create_discord_scheduled_event**](DiscordApi.md#create_discord_scheduled_event) | **POST** /v1/discord/guilds/{guildId}/events | Create a Discord scheduled event |
+| [**create_discord_thread**](DiscordApi.md#create_discord_thread) | **POST** /v1/discord/channels/{channelId}/threads | Create a Discord public thread |
+| [**crosspost_discord_message**](DiscordApi.md#crosspost_discord_message) | **POST** /v1/discord/channels/{channelId}/messages/{messageId}/crosspost | Crosspost a Discord announcement message |
+| [**delete_discord_guild_role**](DiscordApi.md#delete_discord_guild_role) | **DELETE** /v1/discord/guilds/{guildId}/roles/{roleId} | Delete a Discord guild role |
+| [**delete_discord_message**](DiscordApi.md#delete_discord_message) | **DELETE** /v1/discord/channels/{channelId}/messages/{messageId} | Delete a Discord channel message |
 | [**delete_discord_scheduled_event**](DiscordApi.md#delete_discord_scheduled_event) | **DELETE** /v1/discord/guilds/{guildId}/events/{eventId} | Delete a Discord scheduled event |
+| [**edit_discord_guild_role**](DiscordApi.md#edit_discord_guild_role) | **PATCH** /v1/discord/guilds/{guildId}/roles/{roleId} | Edit a Discord guild role |
 | [**get_discord_channels**](DiscordApi.md#get_discord_channels) | **GET** /v1/accounts/{accountId}/discord-channels | List Discord guild channels |
 | [**get_discord_scheduled_event**](DiscordApi.md#get_discord_scheduled_event) | **GET** /v1/discord/guilds/{guildId}/events/{eventId} | Get a Discord scheduled event |
 | [**get_discord_settings**](DiscordApi.md#get_discord_settings) | **GET** /v1/accounts/{accountId}/discord-settings | Get Discord account settings |
@@ -97,6 +103,79 @@ end
 - **Accept**: application/json
 
 
+## create_discord_guild_role
+
+> <CreateDiscordGuildRole201Response> create_discord_guild_role(guild_id, account_id, create_discord_guild_role_request)
+
+Create a Discord guild role
+
+Creates a new role in the guild.  Requires the bot to hold the Manage Roles permission. Guilds that added the Zernio bot before role management shipped must re-invite it, because Discord applies the permission set at invite time.  Discord's role hierarchy applies: the bot cannot create a role positioned at or above its own highest role, and cannot grant permissions it does not itself hold. Either attempt returns a 403 carrying Discord's own error. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::DiscordApi.new
+guild_id = 'guild_id_example' # String | Discord guild snowflake ID
+account_id = 'account_id_example' # String | SocialAccount _id of the Discord account bound to this guild
+create_discord_guild_role_request = Zernio::CreateDiscordGuildRoleRequest.new({name: 'name_example'}) # CreateDiscordGuildRoleRequest | 
+
+begin
+  # Create a Discord guild role
+  result = api_instance.create_discord_guild_role(guild_id, account_id, create_discord_guild_role_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->create_discord_guild_role: #{e}"
+end
+```
+
+#### Using the create_discord_guild_role_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateDiscordGuildRole201Response>, Integer, Hash)> create_discord_guild_role_with_http_info(guild_id, account_id, create_discord_guild_role_request)
+
+```ruby
+begin
+  # Create a Discord guild role
+  data, status_code, headers = api_instance.create_discord_guild_role_with_http_info(guild_id, account_id, create_discord_guild_role_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateDiscordGuildRole201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->create_discord_guild_role_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **guild_id** | **String** | Discord guild snowflake ID |  |
+| **account_id** | **String** | SocialAccount _id of the Discord account bound to this guild |  |
+| **create_discord_guild_role_request** | [**CreateDiscordGuildRoleRequest**](CreateDiscordGuildRoleRequest.md) |  |  |
+
+### Return type
+
+[**CreateDiscordGuildRole201Response**](CreateDiscordGuildRole201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## create_discord_scheduled_event
 
 > <CreateDiscordScheduledEvent200Response> create_discord_scheduled_event(guild_id, create_discord_scheduled_event_request)
@@ -165,6 +244,298 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_discord_thread
+
+> <CreateDiscordThread200Response> create_discord_thread(channel_id, account_id, create_discord_thread_request)
+
+Create a Discord public thread
+
+Creates a public thread in a channel. Pass `messageId` to start the thread from an existing message, or omit it to create a standalone thread.  Threads created here are always public. Requires the bot to hold Create Public Threads, which the Zernio bot requests at install time. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::DiscordApi.new
+channel_id = 'channel_id_example' # String | Discord channel snowflake ID
+account_id = 'account_id_example' # String | SocialAccount _id of the Discord account bound to this channel's guild
+create_discord_thread_request = Zernio::CreateDiscordThreadRequest.new({name: 'name_example'}) # CreateDiscordThreadRequest | 
+
+begin
+  # Create a Discord public thread
+  result = api_instance.create_discord_thread(channel_id, account_id, create_discord_thread_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->create_discord_thread: #{e}"
+end
+```
+
+#### Using the create_discord_thread_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateDiscordThread200Response>, Integer, Hash)> create_discord_thread_with_http_info(channel_id, account_id, create_discord_thread_request)
+
+```ruby
+begin
+  # Create a Discord public thread
+  data, status_code, headers = api_instance.create_discord_thread_with_http_info(channel_id, account_id, create_discord_thread_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateDiscordThread200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->create_discord_thread_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **channel_id** | **String** | Discord channel snowflake ID |  |
+| **account_id** | **String** | SocialAccount _id of the Discord account bound to this channel&#39;s guild |  |
+| **create_discord_thread_request** | [**CreateDiscordThreadRequest**](CreateDiscordThreadRequest.md) |  |  |
+
+### Return type
+
+[**CreateDiscordThread200Response**](CreateDiscordThread200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## crosspost_discord_message
+
+> <CrosspostDiscordMessage200Response> crosspost_discord_message(channel_id, message_id, account_id)
+
+Crosspost a Discord announcement message
+
+Publishes a message from an announcement channel so it propagates to every server following that channel.  The source channel must be an announcement channel. Calling this on a regular text channel returns a 400 before Discord is contacted, because Discord's own error for this case is opaque. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::DiscordApi.new
+channel_id = 'channel_id_example' # String | Discord announcement channel snowflake ID
+message_id = 'message_id_example' # String | Discord message snowflake ID
+account_id = 'account_id_example' # String | SocialAccount _id of the Discord account bound to this channel's guild
+
+begin
+  # Crosspost a Discord announcement message
+  result = api_instance.crosspost_discord_message(channel_id, message_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->crosspost_discord_message: #{e}"
+end
+```
+
+#### Using the crosspost_discord_message_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CrosspostDiscordMessage200Response>, Integer, Hash)> crosspost_discord_message_with_http_info(channel_id, message_id, account_id)
+
+```ruby
+begin
+  # Crosspost a Discord announcement message
+  data, status_code, headers = api_instance.crosspost_discord_message_with_http_info(channel_id, message_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CrosspostDiscordMessage200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->crosspost_discord_message_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **channel_id** | **String** | Discord announcement channel snowflake ID |  |
+| **message_id** | **String** | Discord message snowflake ID |  |
+| **account_id** | **String** | SocialAccount _id of the Discord account bound to this channel&#39;s guild |  |
+
+### Return type
+
+[**CrosspostDiscordMessage200Response**](CrosspostDiscordMessage200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## delete_discord_guild_role
+
+> <UpdateYoutubeDefaultPlaylist200Response> delete_discord_guild_role(guild_id, role_id, account_id)
+
+Delete a Discord guild role
+
+Permanently deletes a role from the guild and removes it from every member. This cannot be undone.  Requires the bot to hold Manage Roles, and the target role must sit below the bot's highest role. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::DiscordApi.new
+guild_id = 'guild_id_example' # String | Discord guild snowflake ID
+role_id = 'role_id_example' # String | Discord role snowflake ID
+account_id = 'account_id_example' # String | SocialAccount _id of the Discord account bound to this guild
+
+begin
+  # Delete a Discord guild role
+  result = api_instance.delete_discord_guild_role(guild_id, role_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->delete_discord_guild_role: #{e}"
+end
+```
+
+#### Using the delete_discord_guild_role_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> delete_discord_guild_role_with_http_info(guild_id, role_id, account_id)
+
+```ruby
+begin
+  # Delete a Discord guild role
+  data, status_code, headers = api_instance.delete_discord_guild_role_with_http_info(guild_id, role_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->delete_discord_guild_role_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **guild_id** | **String** | Discord guild snowflake ID |  |
+| **role_id** | **String** | Discord role snowflake ID |  |
+| **account_id** | **String** | SocialAccount _id of the Discord account bound to this guild |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## delete_discord_message
+
+> <UpdateYoutubeDefaultPlaylist200Response> delete_discord_message(channel_id, message_id, account_id)
+
+Delete a Discord channel message
+
+Deletes a message from a channel, for moderation and cleanup. This cannot be undone.  Deleting a message the bot did not send requires the bot to hold the Manage Messages permission, which the Zernio bot requests at install time. Deleting the bot's own message needs no extra permission.  Ownership is verified by resolving the channel's guild and confirming the caller owns a Discord account bound to it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::DiscordApi.new
+channel_id = 'channel_id_example' # String | Discord channel snowflake ID
+message_id = 'message_id_example' # String | Discord message snowflake ID
+account_id = 'account_id_example' # String | SocialAccount _id of the Discord account bound to this channel's guild
+
+begin
+  # Delete a Discord channel message
+  result = api_instance.delete_discord_message(channel_id, message_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->delete_discord_message: #{e}"
+end
+```
+
+#### Using the delete_discord_message_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> delete_discord_message_with_http_info(channel_id, message_id, account_id)
+
+```ruby
+begin
+  # Delete a Discord channel message
+  data, status_code, headers = api_instance.delete_discord_message_with_http_info(channel_id, message_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->delete_discord_message_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **channel_id** | **String** | Discord channel snowflake ID |  |
+| **message_id** | **String** | Discord message snowflake ID |  |
+| **account_id** | **String** | SocialAccount _id of the Discord account bound to this channel&#39;s guild |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -238,6 +609,81 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## edit_discord_guild_role
+
+> <CreateDiscordGuildRole201Response> edit_discord_guild_role(guild_id, role_id, account_id, edit_discord_guild_role_request)
+
+Edit a Discord guild role
+
+Updates a role's name, color, hoist, mentionable flag, or permission bitfield. At least one field must be supplied. Omitted fields are left unchanged.  Requires the bot to hold Manage Roles, and the target role must sit below the bot's highest role. See the create-role operation for the re-invite requirement. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::DiscordApi.new
+guild_id = 'guild_id_example' # String | Discord guild snowflake ID
+role_id = 'role_id_example' # String | Discord role snowflake ID
+account_id = 'account_id_example' # String | SocialAccount _id of the Discord account bound to this guild
+edit_discord_guild_role_request = Zernio::EditDiscordGuildRoleRequest.new # EditDiscordGuildRoleRequest | 
+
+begin
+  # Edit a Discord guild role
+  result = api_instance.edit_discord_guild_role(guild_id, role_id, account_id, edit_discord_guild_role_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->edit_discord_guild_role: #{e}"
+end
+```
+
+#### Using the edit_discord_guild_role_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateDiscordGuildRole201Response>, Integer, Hash)> edit_discord_guild_role_with_http_info(guild_id, role_id, account_id, edit_discord_guild_role_request)
+
+```ruby
+begin
+  # Edit a Discord guild role
+  data, status_code, headers = api_instance.edit_discord_guild_role_with_http_info(guild_id, role_id, account_id, edit_discord_guild_role_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateDiscordGuildRole201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->edit_discord_guild_role_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **guild_id** | **String** | Discord guild snowflake ID |  |
+| **role_id** | **String** | Discord role snowflake ID |  |
+| **account_id** | **String** | SocialAccount _id of the Discord account bound to this guild |  |
+| **edit_discord_guild_role_request** | [**EditDiscordGuildRoleRequest**](EditDiscordGuildRoleRequest.md) |  |  |
+
+### Return type
+
+[**CreateDiscordGuildRole201Response**](CreateDiscordGuildRole201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

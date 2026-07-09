@@ -171,12 +171,17 @@ docs/CreateCtwaAdRequestVideo.md
 docs/CreateCtwaAdRequestZipsInner.md
 docs/CreateCustomField200Response.md
 docs/CreateCustomFieldRequest.md
+docs/CreateDiscordGuildRole201Response.md
+docs/CreateDiscordGuildRoleRequest.md
 docs/CreateDiscordScheduledEvent200Response.md
 docs/CreateDiscordScheduledEventRequest.md
 docs/CreateDiscordScheduledEventRequestEntity.md
 docs/CreateDiscordScheduledEventRequestEntityOneOf.md
 docs/CreateDiscordScheduledEventRequestEntityOneOf1.md
 docs/CreateDiscordScheduledEventRequestEntityOneOf2.md
+docs/CreateDiscordThread200Response.md
+docs/CreateDiscordThread200ResponseData.md
+docs/CreateDiscordThreadRequest.md
 docs/CreateGoogleBusinessMedia200Response.md
 docs/CreateGoogleBusinessMediaRequest.md
 docs/CreateGoogleBusinessPlaceAction200Response.md
@@ -265,6 +270,7 @@ docs/CreateWhatsAppTemplateRequestLibraryTemplateButtonInputsInnerUrl.md
 docs/CreateWorkflow200Response.md
 docs/CreateWorkflow200ResponseWorkflow.md
 docs/CreateWorkflowRequest.md
+docs/CrosspostDiscordMessage200Response.md
 docs/CtwaMultiResponse.md
 docs/CtwaSingleResponse.md
 docs/CustomFieldsApi.md
@@ -294,6 +300,7 @@ docs/DiscordPlatformDataPollAnswersInner.md
 docs/DiscordPlatformDataPollAnswersInnerPollMedia.md
 docs/DiscordPlatformDataPollQuestion.md
 docs/DiscordPlatformDataThreadFromMessage.md
+docs/DiscordRole.md
 docs/DiscordScheduledEvent.md
 docs/DiscordScheduledEventEntityMetadata.md
 docs/DmButton.md
@@ -301,6 +308,9 @@ docs/DuplicateAdCampaign200Response.md
 docs/DuplicateAdCampaignRequest.md
 docs/DuplicateWorkflow201Response.md
 docs/DuplicateWorkflow201ResponseWorkflow.md
+docs/EditDiscordGuildRoleRequest.md
+docs/EditInboxComment200Response.md
+docs/EditInboxCommentRequest.md
 docs/EditInboxMessage200Response.md
 docs/EditInboxMessage200ResponseData.md
 docs/EditInboxMessageRequest.md
@@ -422,6 +432,8 @@ docs/GetDiscordSettings200Response.md
 docs/GetDiscordSettings200ResponseAccount.md
 docs/GetFacebookPages200Response.md
 docs/GetFacebookPages200ResponsePagesInner.md
+docs/GetFacebookPostReactions200Response.md
+docs/GetFacebookPostReactions200ResponseBreakdown.md
 docs/GetFollowerStats403Response.md
 docs/GetGmbAttributeMetadata200Response.md
 docs/GetGmbAttributeMetadata200ResponseAttributeMetadataInner.md
@@ -505,6 +517,7 @@ docs/GetInboxVolume200ResponseSummary.md
 docs/GetInboxVolume200ResponseTimeseriesInner.md
 docs/GetInboxVolume400Response.md
 docs/GetInstagramAccountInsights404Response.md
+docs/GetInstagramPublishingLimit200Response.md
 docs/GetInstagramStoryInsights200Response.md
 docs/GetInstagramStoryInsights200ResponseData.md
 docs/GetInstagramStoryInsights200ResponseDataMetrics.md
@@ -559,6 +572,8 @@ docs/GetSmsRegistration200Response.md
 docs/GetSmsUsage200Response.md
 docs/GetSmsUsage200ResponseGroupsInner.md
 docs/GetSmsUsage200ResponseTotals.md
+docs/GetSubredditRules200Response.md
+docs/GetSubredditRules200ResponseRulesInner.md
 docs/GetTelegramCommands200Response.md
 docs/GetTelegramCommands200ResponseDataInner.md
 docs/GetTelegramConnectStatus200Response.md
@@ -912,6 +927,8 @@ docs/ReplyToInboxPost200ResponseData.md
 docs/ReplyToInboxPostRequest.md
 docs/ReplyToInboxReview200Response.md
 docs/ReplyToInboxReviewRequest.md
+docs/ReplyToMention200Response.md
+docs/ReplyToMentionRequest.md
 docs/RestoreWorkflowVersion200Response.md
 docs/RestoreWorkflowVersion200ResponseWorkflow.md
 docs/RetweetPost200Response.md
@@ -1032,10 +1049,12 @@ docs/SendWhatsAppFlowMessageRequest.md
 docs/SendWhatsAppFlowMessageRequestFlowActionPayload.md
 docs/SendWhatsAppFlowMessageRequestHeader.md
 docs/SequencesApi.md
+docs/SetCommentModerationRequest.md
 docs/SetContactFieldValueRequest.md
 docs/SetInstagramIceBreakersRequest.md
 docs/SetInstagramIceBreakersRequestIceBreakersInner.md
 docs/SetMessengerMenuRequest.md
+docs/SetRedditPostFlairRequest.md
 docs/SetTelegramCommandsRequest.md
 docs/SetTelegramCommandsRequestCommandsInner.md
 docs/SetWhatsappBusinessUsername200Response.md
@@ -1253,6 +1272,7 @@ docs/ValidateSubreddit200ResponseOneOfSubreddit.md
 docs/VerifySmsRegistrationOtp200Response.md
 docs/VerifySmsRegistrationOtpRequest.md
 docs/VoiceApi.md
+docs/VoteRedditThingRequest.md
 docs/Webhook.md
 docs/WebhookEventsApi.md
 docs/WebhookLog.md
@@ -1576,12 +1596,17 @@ lib/zernio-sdk/models/create_ctwa_ad_request_video.rb
 lib/zernio-sdk/models/create_ctwa_ad_request_zips_inner.rb
 lib/zernio-sdk/models/create_custom_field200_response.rb
 lib/zernio-sdk/models/create_custom_field_request.rb
+lib/zernio-sdk/models/create_discord_guild_role201_response.rb
+lib/zernio-sdk/models/create_discord_guild_role_request.rb
 lib/zernio-sdk/models/create_discord_scheduled_event200_response.rb
 lib/zernio-sdk/models/create_discord_scheduled_event_request.rb
 lib/zernio-sdk/models/create_discord_scheduled_event_request_entity.rb
 lib/zernio-sdk/models/create_discord_scheduled_event_request_entity_one_of.rb
 lib/zernio-sdk/models/create_discord_scheduled_event_request_entity_one_of1.rb
 lib/zernio-sdk/models/create_discord_scheduled_event_request_entity_one_of2.rb
+lib/zernio-sdk/models/create_discord_thread200_response.rb
+lib/zernio-sdk/models/create_discord_thread200_response_data.rb
+lib/zernio-sdk/models/create_discord_thread_request.rb
 lib/zernio-sdk/models/create_google_business_media200_response.rb
 lib/zernio-sdk/models/create_google_business_media_request.rb
 lib/zernio-sdk/models/create_google_business_place_action200_response.rb
@@ -1670,6 +1695,7 @@ lib/zernio-sdk/models/create_whats_app_template_request_library_template_button_
 lib/zernio-sdk/models/create_workflow200_response.rb
 lib/zernio-sdk/models/create_workflow200_response_workflow.rb
 lib/zernio-sdk/models/create_workflow_request.rb
+lib/zernio-sdk/models/crosspost_discord_message200_response.rb
 lib/zernio-sdk/models/ctwa_multi_response.rb
 lib/zernio-sdk/models/ctwa_single_response.rb
 lib/zernio-sdk/models/delete_account_group200_response.rb
@@ -1697,6 +1723,7 @@ lib/zernio-sdk/models/discord_platform_data_poll_answers_inner.rb
 lib/zernio-sdk/models/discord_platform_data_poll_answers_inner_poll_media.rb
 lib/zernio-sdk/models/discord_platform_data_poll_question.rb
 lib/zernio-sdk/models/discord_platform_data_thread_from_message.rb
+lib/zernio-sdk/models/discord_role.rb
 lib/zernio-sdk/models/discord_scheduled_event.rb
 lib/zernio-sdk/models/discord_scheduled_event_entity_metadata.rb
 lib/zernio-sdk/models/dm_button.rb
@@ -1704,6 +1731,9 @@ lib/zernio-sdk/models/duplicate_ad_campaign200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign_request.rb
 lib/zernio-sdk/models/duplicate_workflow201_response.rb
 lib/zernio-sdk/models/duplicate_workflow201_response_workflow.rb
+lib/zernio-sdk/models/edit_discord_guild_role_request.rb
+lib/zernio-sdk/models/edit_inbox_comment200_response.rb
+lib/zernio-sdk/models/edit_inbox_comment_request.rb
 lib/zernio-sdk/models/edit_inbox_message200_response.rb
 lib/zernio-sdk/models/edit_inbox_message200_response_data.rb
 lib/zernio-sdk/models/edit_inbox_message_request.rb
@@ -1817,6 +1847,8 @@ lib/zernio-sdk/models/get_discord_settings200_response.rb
 lib/zernio-sdk/models/get_discord_settings200_response_account.rb
 lib/zernio-sdk/models/get_facebook_pages200_response.rb
 lib/zernio-sdk/models/get_facebook_pages200_response_pages_inner.rb
+lib/zernio-sdk/models/get_facebook_post_reactions200_response.rb
+lib/zernio-sdk/models/get_facebook_post_reactions200_response_breakdown.rb
 lib/zernio-sdk/models/get_follower_stats403_response.rb
 lib/zernio-sdk/models/get_gmb_attribute_metadata200_response.rb
 lib/zernio-sdk/models/get_gmb_attribute_metadata200_response_attribute_metadata_inner.rb
@@ -1900,6 +1932,7 @@ lib/zernio-sdk/models/get_inbox_volume200_response_summary.rb
 lib/zernio-sdk/models/get_inbox_volume200_response_timeseries_inner.rb
 lib/zernio-sdk/models/get_inbox_volume400_response.rb
 lib/zernio-sdk/models/get_instagram_account_insights404_response.rb
+lib/zernio-sdk/models/get_instagram_publishing_limit200_response.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response_data.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response_data_metrics.rb
@@ -1954,6 +1987,8 @@ lib/zernio-sdk/models/get_sms_registration200_response.rb
 lib/zernio-sdk/models/get_sms_usage200_response.rb
 lib/zernio-sdk/models/get_sms_usage200_response_groups_inner.rb
 lib/zernio-sdk/models/get_sms_usage200_response_totals.rb
+lib/zernio-sdk/models/get_subreddit_rules200_response.rb
+lib/zernio-sdk/models/get_subreddit_rules200_response_rules_inner.rb
 lib/zernio-sdk/models/get_telegram_commands200_response.rb
 lib/zernio-sdk/models/get_telegram_commands200_response_data_inner.rb
 lib/zernio-sdk/models/get_telegram_connect_status200_response.rb
@@ -2294,6 +2329,8 @@ lib/zernio-sdk/models/reply_to_inbox_post200_response_data.rb
 lib/zernio-sdk/models/reply_to_inbox_post_request.rb
 lib/zernio-sdk/models/reply_to_inbox_review200_response.rb
 lib/zernio-sdk/models/reply_to_inbox_review_request.rb
+lib/zernio-sdk/models/reply_to_mention200_response.rb
+lib/zernio-sdk/models/reply_to_mention_request.rb
 lib/zernio-sdk/models/restore_workflow_version200_response.rb
 lib/zernio-sdk/models/restore_workflow_version200_response_workflow.rb
 lib/zernio-sdk/models/retweet_post200_response.rb
@@ -2411,10 +2448,12 @@ lib/zernio-sdk/models/send_whats_app_flow_message200_response.rb
 lib/zernio-sdk/models/send_whats_app_flow_message_request.rb
 lib/zernio-sdk/models/send_whats_app_flow_message_request_flow_action_payload.rb
 lib/zernio-sdk/models/send_whats_app_flow_message_request_header.rb
+lib/zernio-sdk/models/set_comment_moderation_request.rb
 lib/zernio-sdk/models/set_contact_field_value_request.rb
 lib/zernio-sdk/models/set_instagram_ice_breakers_request.rb
 lib/zernio-sdk/models/set_instagram_ice_breakers_request_ice_breakers_inner.rb
 lib/zernio-sdk/models/set_messenger_menu_request.rb
+lib/zernio-sdk/models/set_reddit_post_flair_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request.rb
 lib/zernio-sdk/models/set_telegram_commands_request_commands_inner.rb
 lib/zernio-sdk/models/set_whatsapp_business_username200_response.rb
@@ -2626,6 +2665,7 @@ lib/zernio-sdk/models/validate_subreddit200_response_one_of1.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of_subreddit.rb
 lib/zernio-sdk/models/verify_sms_registration_otp200_response.rb
 lib/zernio-sdk/models/verify_sms_registration_otp_request.rb
+lib/zernio-sdk/models/vote_reddit_thing_request.rb
 lib/zernio-sdk/models/webhook.rb
 lib/zernio-sdk/models/webhook_log.rb
 lib/zernio-sdk/models/webhook_payload_account_ads_initial_sync_completed.rb
@@ -2934,12 +2974,17 @@ spec/models/create_ctwa_ad_request_video_spec.rb
 spec/models/create_ctwa_ad_request_zips_inner_spec.rb
 spec/models/create_custom_field200_response_spec.rb
 spec/models/create_custom_field_request_spec.rb
+spec/models/create_discord_guild_role201_response_spec.rb
+spec/models/create_discord_guild_role_request_spec.rb
 spec/models/create_discord_scheduled_event200_response_spec.rb
 spec/models/create_discord_scheduled_event_request_entity_one_of1_spec.rb
 spec/models/create_discord_scheduled_event_request_entity_one_of2_spec.rb
 spec/models/create_discord_scheduled_event_request_entity_one_of_spec.rb
 spec/models/create_discord_scheduled_event_request_entity_spec.rb
 spec/models/create_discord_scheduled_event_request_spec.rb
+spec/models/create_discord_thread200_response_data_spec.rb
+spec/models/create_discord_thread200_response_spec.rb
+spec/models/create_discord_thread_request_spec.rb
 spec/models/create_google_business_media200_response_spec.rb
 spec/models/create_google_business_media_request_spec.rb
 spec/models/create_google_business_place_action200_response_spec.rb
@@ -3028,6 +3073,7 @@ spec/models/create_whats_app_template_request_spec.rb
 spec/models/create_workflow200_response_spec.rb
 spec/models/create_workflow200_response_workflow_spec.rb
 spec/models/create_workflow_request_spec.rb
+spec/models/crosspost_discord_message200_response_spec.rb
 spec/models/ctwa_multi_response_spec.rb
 spec/models/ctwa_single_response_spec.rb
 spec/models/delete_account_group200_response_spec.rb
@@ -3055,6 +3101,7 @@ spec/models/discord_platform_data_poll_question_spec.rb
 spec/models/discord_platform_data_poll_spec.rb
 spec/models/discord_platform_data_spec.rb
 spec/models/discord_platform_data_thread_from_message_spec.rb
+spec/models/discord_role_spec.rb
 spec/models/discord_scheduled_event_entity_metadata_spec.rb
 spec/models/discord_scheduled_event_spec.rb
 spec/models/dm_button_spec.rb
@@ -3062,6 +3109,9 @@ spec/models/duplicate_ad_campaign200_response_spec.rb
 spec/models/duplicate_ad_campaign_request_spec.rb
 spec/models/duplicate_workflow201_response_spec.rb
 spec/models/duplicate_workflow201_response_workflow_spec.rb
+spec/models/edit_discord_guild_role_request_spec.rb
+spec/models/edit_inbox_comment200_response_spec.rb
+spec/models/edit_inbox_comment_request_spec.rb
 spec/models/edit_inbox_message200_response_data_spec.rb
 spec/models/edit_inbox_message200_response_spec.rb
 spec/models/edit_inbox_message_request_reply_markup_keyboard_inner_inner_spec.rb
@@ -3175,6 +3225,8 @@ spec/models/get_discord_settings200_response_account_spec.rb
 spec/models/get_discord_settings200_response_spec.rb
 spec/models/get_facebook_pages200_response_pages_inner_spec.rb
 spec/models/get_facebook_pages200_response_spec.rb
+spec/models/get_facebook_post_reactions200_response_breakdown_spec.rb
+spec/models/get_facebook_post_reactions200_response_spec.rb
 spec/models/get_follower_stats403_response_spec.rb
 spec/models/get_gmb_attribute_metadata200_response_attribute_metadata_inner_spec.rb
 spec/models/get_gmb_attribute_metadata200_response_attribute_metadata_inner_value_metadata_inner_spec.rb
@@ -3258,6 +3310,7 @@ spec/models/get_inbox_volume200_response_summary_spec.rb
 spec/models/get_inbox_volume200_response_timeseries_inner_spec.rb
 spec/models/get_inbox_volume400_response_spec.rb
 spec/models/get_instagram_account_insights404_response_spec.rb
+spec/models/get_instagram_publishing_limit200_response_spec.rb
 spec/models/get_instagram_story_insights200_response_data_metrics_spec.rb
 spec/models/get_instagram_story_insights200_response_data_spec.rb
 spec/models/get_instagram_story_insights200_response_spec.rb
@@ -3312,6 +3365,8 @@ spec/models/get_sms_registration200_response_spec.rb
 spec/models/get_sms_usage200_response_groups_inner_spec.rb
 spec/models/get_sms_usage200_response_spec.rb
 spec/models/get_sms_usage200_response_totals_spec.rb
+spec/models/get_subreddit_rules200_response_rules_inner_spec.rb
+spec/models/get_subreddit_rules200_response_spec.rb
 spec/models/get_telegram_commands200_response_data_inner_spec.rb
 spec/models/get_telegram_commands200_response_spec.rb
 spec/models/get_telegram_connect_status200_response_spec.rb
@@ -3652,6 +3707,8 @@ spec/models/reply_to_inbox_post200_response_spec.rb
 spec/models/reply_to_inbox_post_request_spec.rb
 spec/models/reply_to_inbox_review200_response_spec.rb
 spec/models/reply_to_inbox_review_request_spec.rb
+spec/models/reply_to_mention200_response_spec.rb
+spec/models/reply_to_mention_request_spec.rb
 spec/models/restore_workflow_version200_response_spec.rb
 spec/models/restore_workflow_version200_response_workflow_spec.rb
 spec/models/retweet_post200_response_spec.rb
@@ -3769,10 +3826,12 @@ spec/models/send_whats_app_flow_message200_response_spec.rb
 spec/models/send_whats_app_flow_message_request_flow_action_payload_spec.rb
 spec/models/send_whats_app_flow_message_request_header_spec.rb
 spec/models/send_whats_app_flow_message_request_spec.rb
+spec/models/set_comment_moderation_request_spec.rb
 spec/models/set_contact_field_value_request_spec.rb
 spec/models/set_instagram_ice_breakers_request_ice_breakers_inner_spec.rb
 spec/models/set_instagram_ice_breakers_request_spec.rb
 spec/models/set_messenger_menu_request_spec.rb
+spec/models/set_reddit_post_flair_request_spec.rb
 spec/models/set_telegram_commands_request_commands_inner_spec.rb
 spec/models/set_telegram_commands_request_spec.rb
 spec/models/set_whatsapp_business_username200_response_spec.rb
@@ -3984,6 +4043,7 @@ spec/models/validate_subreddit200_response_one_of_subreddit_spec.rb
 spec/models/validate_subreddit200_response_spec.rb
 spec/models/verify_sms_registration_otp200_response_spec.rb
 spec/models/verify_sms_registration_otp_request_spec.rb
+spec/models/vote_reddit_thing_request_spec.rb
 spec/models/webhook_log_spec.rb
 spec/models/webhook_payload_account_ads_initial_sync_completed_account_spec.rb
 spec/models/webhook_payload_account_ads_initial_sync_completed_spec.rb

@@ -32,6 +32,18 @@ describe 'InstagramApi' do
     end
   end
 
+  # unit tests for get_instagram_publishing_limit
+  # Get Instagram publishing limit
+  # Returns the account&#39;s remaining content-publishing quota for Instagram&#39;s rolling 24-hour window, so you can pace publishing and warn before the cap is reached.  &#x60;quotaUsage&#x60; counts containers published since the start of the window. Always compare against the returned &#x60;quotaTotal&#x60; rather than hardcoding a number: Meta&#39;s prose documentation and the live API disagree on the value, and the live value is authoritative. 
+  # @param account_id The ID of the Instagram account
+  # @param [Hash] opts the optional parameters
+  # @return [GetInstagramPublishingLimit200Response]
+  describe 'get_instagram_publishing_limit test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_instagram_story_insights
   # Get Instagram story insights
   # Returns metrics for a single story. The &#x60;source&#x60; field discriminates between three states:  - &#x60;live&#x60; — fetched from Meta in real time (story is still active) - &#x60;cached&#x60; — fetched from a persisted &#x60;story_insights&#x60; webhook payload   (story has expired but we received its final-state metrics from Meta) - &#x60;unavailable&#x60; — story has expired and we never received its webhook   payload (for example, the account connected after the story expired)  Field semantics follow Meta&#39;s API. Counts below 5 may be returned as 0 due to Meta&#39;s privacy floor on small audiences. The &#x60;navigation&#x60; field is the sum of &#x60;tapsForward + tapsBack + exits + swipesForward&#x60;. 

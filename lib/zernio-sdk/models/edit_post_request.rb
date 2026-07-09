@@ -15,10 +15,10 @@ require 'time'
 
 module Zernio
   class EditPostRequest < ApiModelBase
-    # The platform to edit the post on. Currently only twitter is supported.
+    # The platform to edit the post on.
     attr_accessor :platform
 
-    # The new tweet text content
+    # The new post text content
     attr_accessor :content
 
     class EnumAttributeValidator
@@ -125,7 +125,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["twitter"])
+      platform_validator = EnumAttributeValidator.new('String', ["twitter", "discord", "facebook", "reddit"])
       return false unless platform_validator.valid?(@platform)
       return false if @content.nil?
       true
@@ -134,7 +134,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["twitter"])
+      validator = EnumAttributeValidator.new('String', ["twitter", "discord", "facebook", "reddit"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end

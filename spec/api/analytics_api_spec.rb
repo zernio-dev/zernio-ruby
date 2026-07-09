@@ -118,6 +118,19 @@ describe 'AnalyticsApi' do
     end
   end
 
+  # unit tests for get_facebook_post_reactions
+  # Get Facebook post reactions
+  # Returns the reaction breakdown for a Facebook Page post: a count per reaction type plus the overall total.  The whole breakdown is fetched in a single Graph call. Note that the post analytics endpoint reports only an aggregate reaction count (surfaced there as &#x60;likes&#x60;), so use this endpoint when you need per-type counts. 
+  # @param account_id The ID of the Facebook Page account
+  # @param post_id The Facebook post ID
+  # @param [Hash] opts the optional parameters
+  # @return [GetFacebookPostReactions200Response]
+  describe 'get_facebook_post_reactions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_follower_stats
   # Get follower stats
   # Returns follower count history and growth metrics for connected social accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 

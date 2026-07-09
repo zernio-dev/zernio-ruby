@@ -987,6 +987,75 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get subreddit rules
+    # Returns a subreddit's posting rules plus Reddit's site-wide rules, so you can check them before submitting and avoid a removal.  Use this alongside `POST /v1/tools/validate/subreddit`, which only confirms that a subreddit exists and reports its basic posting settings. 
+    # @param account_id [String] The ID of the Reddit account
+    # @param subreddit [String] Subreddit name (without the \&quot;r/\&quot; prefix)
+    # @param [Hash] opts the optional parameters
+    # @return [GetSubredditRules200Response]
+    def get_subreddit_rules(account_id, subreddit, opts = {})
+      data, _status_code, _headers = get_subreddit_rules_with_http_info(account_id, subreddit, opts)
+      data
+    end
+
+    # Get subreddit rules
+    # Returns a subreddit&#39;s posting rules plus Reddit&#39;s site-wide rules, so you can check them before submitting and avoid a removal.  Use this alongside &#x60;POST /v1/tools/validate/subreddit&#x60;, which only confirms that a subreddit exists and reports its basic posting settings. 
+    # @param account_id [String] The ID of the Reddit account
+    # @param subreddit [String] Subreddit name (without the \&quot;r/\&quot; prefix)
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetSubredditRules200Response, Integer, Hash)>] GetSubredditRules200Response data, response status code and response headers
+    def get_subreddit_rules_with_http_info(account_id, subreddit, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.get_subreddit_rules ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.get_subreddit_rules"
+      end
+      # verify the required parameter 'subreddit' is set
+      if @api_client.config.client_side_validation && subreddit.nil?
+        fail ArgumentError, "Missing the required parameter 'subreddit' when calling ConnectApi.get_subreddit_rules"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'subreddit' + '}', CGI.escape(subreddit.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetSubredditRules200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.get_subreddit_rules",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#get_subreddit_rules\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Generate Telegram code
     # Generate an access code (valid 15 minutes) for connecting a Telegram channel or group. Add the bot as admin, then send the code + @yourchannel to the bot. Poll PATCH /v1/connect/telegram to check status.
     # @param profile_id [String] The profile ID to connect the Telegram account to
@@ -2043,6 +2112,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Set flair on a published Reddit post
+    # Applies a flair to a post the connected account already published. Use the GET on this path to list the available `flairTemplateId` values for the subreddit.  Flair can also be set at submit time by passing `flairId` in `platformSpecificData` when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user's post requires moderator permissions, which Zernio does not request. 
+    # @param account_id [String] The ID of the Reddit account that owns the post
+    # @param set_reddit_post_flair_request [SetRedditPostFlairRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def set_reddit_post_flair(account_id, set_reddit_post_flair_request, opts = {})
+      data, _status_code, _headers = set_reddit_post_flair_with_http_info(account_id, set_reddit_post_flair_request, opts)
+      data
+    end
+
+    # Set flair on a published Reddit post
+    # Applies a flair to a post the connected account already published. Use the GET on this path to list the available &#x60;flairTemplateId&#x60; values for the subreddit.  Flair can also be set at submit time by passing &#x60;flairId&#x60; in &#x60;platformSpecificData&#x60; when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user&#39;s post requires moderator permissions, which Zernio does not request. 
+    # @param account_id [String] The ID of the Reddit account that owns the post
+    # @param set_reddit_post_flair_request [SetRedditPostFlairRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def set_reddit_post_flair_with_http_info(account_id, set_reddit_post_flair_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.set_reddit_post_flair ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.set_reddit_post_flair"
+      end
+      # verify the required parameter 'set_reddit_post_flair_request' is set
+      if @api_client.config.client_side_validation && set_reddit_post_flair_request.nil?
+        fail ArgumentError, "Missing the required parameter 'set_reddit_post_flair_request' when calling ConnectApi.set_reddit_post_flair"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/reddit-flairs'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_reddit_post_flair_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.set_reddit_post_flair",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#set_reddit_post_flair\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update Facebook page
     # Switch which Facebook Page is active for a connected account.
     # @param account_id [String] 
@@ -2483,6 +2626,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#update_youtube_default_playlist\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Vote on a Reddit post or comment
+    # Cast, change, or clear the connected account's vote on a Reddit post or comment.  **Reddit requires that votes be cast by humans.** Reddit's API terms permit a client to proxy a human's action one-for-one, and prohibit a bot from deciding how to vote or from amplifying a human's vote. Call this endpoint only in direct response to an explicit action by the account owner. Automated or agent-decided voting is vote manipulation and puts API access at risk. 
+    # @param account_id [String] The ID of the Reddit account casting the vote
+    # @param vote_reddit_thing_request [VoteRedditThingRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def vote_reddit_thing(account_id, vote_reddit_thing_request, opts = {})
+      data, _status_code, _headers = vote_reddit_thing_with_http_info(account_id, vote_reddit_thing_request, opts)
+      data
+    end
+
+    # Vote on a Reddit post or comment
+    # Cast, change, or clear the connected account&#39;s vote on a Reddit post or comment.  **Reddit requires that votes be cast by humans.** Reddit&#39;s API terms permit a client to proxy a human&#39;s action one-for-one, and prohibit a bot from deciding how to vote or from amplifying a human&#39;s vote. Call this endpoint only in direct response to an explicit action by the account owner. Automated or agent-decided voting is vote manipulation and puts API access at risk. 
+    # @param account_id [String] The ID of the Reddit account casting the vote
+    # @param vote_reddit_thing_request [VoteRedditThingRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def vote_reddit_thing_with_http_info(account_id, vote_reddit_thing_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.vote_reddit_thing ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.vote_reddit_thing"
+      end
+      # verify the required parameter 'vote_reddit_thing_request' is set
+      if @api_client.config.client_side_validation && vote_reddit_thing_request.nil?
+        fail ArgumentError, "Missing the required parameter 'vote_reddit_thing_request' when calling ConnectApi.vote_reddit_thing"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/reddit-vote'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(vote_reddit_thing_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.vote_reddit_thing",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#vote_reddit_thing\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

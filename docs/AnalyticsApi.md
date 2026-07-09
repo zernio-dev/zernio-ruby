@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_content_decay**](AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay |
 | [**get_daily_metrics**](AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics |
 | [**get_facebook_page_insights**](AnalyticsApi.md#get_facebook_page_insights) | **GET** /v1/analytics/facebook/page-insights | Get Facebook Page insights |
+| [**get_facebook_post_reactions**](AnalyticsApi.md#get_facebook_post_reactions) | **GET** /v1/accounts/{accountId}/facebook-post-reactions | Get Facebook post reactions |
 | [**get_follower_stats**](AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**get_google_business_performance**](AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get GBP performance metrics |
 | [**get_google_business_search_keywords**](AnalyticsApi.md#get_google_business_search_keywords) | **GET** /v1/analytics/googlebusiness/search-keywords | Get GBP search keywords |
@@ -425,6 +426,77 @@ end
 ### Return type
 
 [**InstagramAccountInsightsResponse**](InstagramAccountInsightsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_facebook_post_reactions
+
+> <GetFacebookPostReactions200Response> get_facebook_post_reactions(account_id, post_id)
+
+Get Facebook post reactions
+
+Returns the reaction breakdown for a Facebook Page post: a count per reaction type plus the overall total.  The whole breakdown is fetched in a single Graph call. Note that the post analytics endpoint reports only an aggregate reaction count (surfaced there as `likes`), so use this endpoint when you need per-type counts. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | The ID of the Facebook Page account
+post_id = '1234567890_9876543210' # String | The Facebook post ID
+
+begin
+  # Get Facebook post reactions
+  result = api_instance.get_facebook_post_reactions(account_id, post_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_facebook_post_reactions: #{e}"
+end
+```
+
+#### Using the get_facebook_post_reactions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetFacebookPostReactions200Response>, Integer, Hash)> get_facebook_post_reactions_with_http_info(account_id, post_id)
+
+```ruby
+begin
+  # Get Facebook post reactions
+  data, status_code, headers = api_instance.get_facebook_post_reactions_with_http_info(account_id, post_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetFacebookPostReactions200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_facebook_post_reactions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of the Facebook Page account |  |
+| **post_id** | **String** | The Facebook post ID |  |
+
+### Return type
+
+[**GetFacebookPostReactions200Response**](GetFacebookPostReactions200Response.md)
 
 ### Authorization
 
