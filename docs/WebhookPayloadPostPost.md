@@ -10,6 +10,7 @@
 | **scheduled_for** | **Time** |  |  |
 | **published_at** | **Time** |  | [optional] |
 | **platforms** | [**Array&lt;WebhookPayloadPostPostPlatformsInner&gt;**](WebhookPayloadPostPostPlatformsInner.md) |  |  |
+| **metadata** | **Hash&lt;String, Object&gt;** | The free-form &#x60;metadata&#x60; object supplied when the post was created, echoed back so you can map events onto your own records. Omitted when the post was created without it. | [optional] |
 
 ## Example
 
@@ -22,7 +23,8 @@ instance = Zernio::WebhookPayloadPostPost.new(
   status: null,
   scheduled_for: null,
   published_at: null,
-  platforms: null
+  platforms: null,
+  metadata: null
 )
 ```
 

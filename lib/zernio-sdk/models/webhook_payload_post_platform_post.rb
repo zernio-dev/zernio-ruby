@@ -28,6 +28,9 @@ module Zernio
 
     attr_accessor :platforms
 
+    # The free-form `metadata` object supplied when the post was created, echoed back so you can map events onto your own records. Omitted when the post was created without it.
+    attr_accessor :metadata
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -36,7 +39,8 @@ module Zernio
         :'status' => :'status',
         :'scheduled_for' => :'scheduledFor',
         :'published_at' => :'publishedAt',
-        :'platforms' => :'platforms'
+        :'platforms' => :'platforms',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -58,7 +62,8 @@ module Zernio
         :'status' => :'String',
         :'scheduled_for' => :'Time',
         :'published_at' => :'Time',
-        :'platforms' => :'Array<WebhookPayloadPostPlatformPostPlatformsInner>'
+        :'platforms' => :'Array<WebhookPayloadPostPlatformPostPlatformsInner>',
+        :'metadata' => :'Hash<String, Object>'
       }
     end
 
@@ -118,6 +123,12 @@ module Zernio
         end
       else
         self.platforms = nil
+      end
+
+      if attributes.key?(:'metadata')
+        if (value = attributes[:'metadata']).is_a?(Hash)
+          self.metadata = value
+        end
       end
     end
 
@@ -221,7 +232,8 @@ module Zernio
           status == o.status &&
           scheduled_for == o.scheduled_for &&
           published_at == o.published_at &&
-          platforms == o.platforms
+          platforms == o.platforms &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -233,7 +245,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, content, status, scheduled_for, published_at, platforms].hash
+      [id, content, status, scheduled_for, published_at, platforms, metadata].hash
     end
 
     # Builds the object from hash
