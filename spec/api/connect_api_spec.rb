@@ -422,7 +422,7 @@ describe 'ConnectApi' do
   end
 
   # unit tests for set_reddit_post_flair
-  # Set flair on a published Reddit post
+  # Set Reddit post flair
   # Applies a flair to a post the connected account already published. Use the GET on this path to list the available &#x60;flairTemplateId&#x60; values for the subreddit.  Flair can also be set at submit time by passing &#x60;flairId&#x60; in &#x60;platformSpecificData&#x60; when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user&#39;s post requires moderator permissions, which Zernio does not request. 
   # @param account_id The ID of the Reddit account that owns the post
   # @param set_reddit_post_flair_request 

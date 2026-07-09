@@ -2112,7 +2112,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Set flair on a published Reddit post
+    # Set Reddit post flair
     # Applies a flair to a post the connected account already published. Use the GET on this path to list the available `flairTemplateId` values for the subreddit.  Flair can also be set at submit time by passing `flairId` in `platformSpecificData` when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user's post requires moderator permissions, which Zernio does not request. 
     # @param account_id [String] The ID of the Reddit account that owns the post
     # @param set_reddit_post_flair_request [SetRedditPostFlairRequest] 
@@ -2123,7 +2123,7 @@ module Zernio
       data
     end
 
-    # Set flair on a published Reddit post
+    # Set Reddit post flair
     # Applies a flair to a post the connected account already published. Use the GET on this path to list the available &#x60;flairTemplateId&#x60; values for the subreddit.  Flair can also be set at submit time by passing &#x60;flairId&#x60; in &#x60;platformSpecificData&#x60; when creating the post. This endpoint is for changing it afterwards.  The subreddit must allow users to select their own post flair. Setting flair on another user&#39;s post requires moderator permissions, which Zernio does not request. 
     # @param account_id [String] The ID of the Reddit account that owns the post
     # @param set_reddit_post_flair_request [SetRedditPostFlairRequest] 

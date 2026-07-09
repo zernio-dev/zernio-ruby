@@ -8,7 +8,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_discord_guild_role**](DiscordApi.md#create_discord_guild_role) | **POST** /v1/discord/guilds/{guildId}/roles | Create a Discord guild role |
 | [**create_discord_scheduled_event**](DiscordApi.md#create_discord_scheduled_event) | **POST** /v1/discord/guilds/{guildId}/events | Create a Discord scheduled event |
 | [**create_discord_thread**](DiscordApi.md#create_discord_thread) | **POST** /v1/discord/channels/{channelId}/threads | Create a Discord public thread |
-| [**crosspost_discord_message**](DiscordApi.md#crosspost_discord_message) | **POST** /v1/discord/channels/{channelId}/messages/{messageId}/crosspost | Crosspost a Discord announcement message |
+| [**crosspost_discord_message**](DiscordApi.md#crosspost_discord_message) | **POST** /v1/discord/channels/{channelId}/messages/{messageId}/crosspost | Crosspost Discord message |
 | [**delete_discord_guild_role**](DiscordApi.md#delete_discord_guild_role) | **DELETE** /v1/discord/guilds/{guildId}/roles/{roleId} | Delete a Discord guild role |
 | [**delete_discord_message**](DiscordApi.md#delete_discord_message) | **DELETE** /v1/discord/channels/{channelId}/messages/{messageId} | Delete a Discord channel message |
 | [**delete_discord_scheduled_event**](DiscordApi.md#delete_discord_scheduled_event) | **DELETE** /v1/discord/guilds/{guildId}/events/{eventId} | Delete a Discord scheduled event |
@@ -324,7 +324,7 @@ end
 
 > <CrosspostDiscordMessage200Response> crosspost_discord_message(channel_id, message_id, account_id)
 
-Crosspost a Discord announcement message
+Crosspost Discord message
 
 Publishes a message from an announcement channel so it propagates to every server following that channel.  The source channel must be an announcement channel. Calling this on a regular text channel returns a 400 before Discord is contacted, because Discord's own error for this case is opaque. 
 
@@ -345,7 +345,7 @@ message_id = 'message_id_example' # String | Discord message snowflake ID
 account_id = 'account_id_example' # String | SocialAccount _id of the Discord account bound to this channel's guild
 
 begin
-  # Crosspost a Discord announcement message
+  # Crosspost Discord message
   result = api_instance.crosspost_discord_message(channel_id, message_id, account_id)
   p result
 rescue Zernio::ApiError => e
@@ -361,7 +361,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Crosspost a Discord announcement message
+  # Crosspost Discord message
   data, status_code, headers = api_instance.crosspost_discord_message_with_http_info(channel_id, message_id, account_id)
   p status_code # => 2xx
   p headers # => { ... }

@@ -89,7 +89,7 @@ describe 'DiscordApi' do
   end
 
   # unit tests for crosspost_discord_message
-  # Crosspost a Discord announcement message
+  # Crosspost Discord message
   # Publishes a message from an announcement channel so it propagates to every server following that channel.  The source channel must be an announcement channel. Calling this on a regular text channel returns a 400 before Discord is contacted, because Discord&#39;s own error for this case is opaque. 
   # @param channel_id Discord announcement channel snowflake ID
   # @param message_id Discord message snowflake ID

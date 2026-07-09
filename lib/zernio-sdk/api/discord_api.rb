@@ -337,7 +337,7 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Crosspost a Discord announcement message
+    # Crosspost Discord message
     # Publishes a message from an announcement channel so it propagates to every server following that channel.  The source channel must be an announcement channel. Calling this on a regular text channel returns a 400 before Discord is contacted, because Discord's own error for this case is opaque. 
     # @param channel_id [String] Discord announcement channel snowflake ID
     # @param message_id [String] Discord message snowflake ID
@@ -349,7 +349,7 @@ module Zernio
       data
     end
 
-    # Crosspost a Discord announcement message
+    # Crosspost Discord message
     # Publishes a message from an announcement channel so it propagates to every server following that channel.  The source channel must be an announcement channel. Calling this on a regular text channel returns a 400 before Discord is contacted, because Discord&#39;s own error for this case is opaque. 
     # @param channel_id [String] Discord announcement channel snowflake ID
     # @param message_id [String] Discord message snowflake ID
