@@ -30,7 +30,7 @@ describe Zernio::CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements do
   describe 'test attribute "publisher_platforms"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["facebook", "instagram", "threads", "messenger", "audience_network"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["facebook", "instagram", "threads", "messenger", "audience_network", "whatsapp"])
       # validator.allowable_values.each do |value|
       #   expect { instance.publisher_platforms = value }.not_to raise_error
       # end
