@@ -691,7 +691,7 @@ end
 
 Search conversations
 
-Search message text across your conversations and get back the conversations that contain the query, each with up to 3 most-recent matching messages. Useful for finding threads about a topic, or (with direction=outgoing) collecting examples of how you write to customers, for example to teach an AI agent your tone of voice.  Only platforms whose messages are stored by Zernio are searchable: WhatsApp, SMS, Telegram, Facebook and Instagram. Twitter/X, Bluesky and Reddit conversations are fetched live from the platforms and cannot be searched; those accounts are listed in meta.accountsSkipped.  Matching is word-based: case-insensitive and accent-insensitive, exact tokens only (no substrings, no stemming). Quote a phrase to match it exactly. 
+Search your conversations two ways at once, and get back the matching conversations, most-recent match first:  - Message text: matches words inside message bodies. Case-insensitive and accent-insensitive, exact tokens only (no substrings, no stemming). Each hit carries up to 3 most-recent matching messages. With direction=outgoing you can collect examples of how you write to customers, for example to teach an AI agent your tone of voice. - Contact identity: matches the participant's name, username, or phone number as a case-insensitive substring. These hits have matchCount 0 and an empty matches array.  A conversation that matches both ways is returned once, carrying its message matches.  Only platforms whose messages are stored by Zernio are searchable: WhatsApp, SMS, Telegram, Facebook, Instagram, Twitter/X and Reddit. Bluesky conversations are fetched live from the platform and cannot be searched; those accounts are listed in meta.accountsSkipped. 
 
 ### Examples
 
@@ -705,9 +705,9 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagesApi.new
-query = 'query_example' # String | Text to search for in message content
+query = 'query_example' # String | Text to search for, in message content and in the contact's name, username, or phone number
 opts = {
-  direction: 'incoming', # String | Only match messages sent to you (incoming) or by you (outgoing)
+  direction: 'incoming', # String | Only match messages sent to you (incoming) or by you (outgoing). Contact-identity matching is not applied when this is set.
   profile_id: 'profile_id_example', # String | Filter by profile ID
   platform: 'facebook', # String | Filter by platform (searchable platforms only)
   account_id: 'account_id_example', # String | Filter by specific social account ID
@@ -746,8 +746,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **query** | **String** | Text to search for in message content |  |
-| **direction** | **String** | Only match messages sent to you (incoming) or by you (outgoing) | [optional] |
+| **query** | **String** | Text to search for, in message content and in the contact&#39;s name, username, or phone number |  |
+| **direction** | **String** | Only match messages sent to you (incoming) or by you (outgoing). Contact-identity matching is not applied when this is set. | [optional] |
 | **profile_id** | **String** | Filter by profile ID | [optional] |
 | **platform** | **String** | Filter by platform (searchable platforms only) | [optional] |
 | **account_id** | **String** | Filter by specific social account ID | [optional] |

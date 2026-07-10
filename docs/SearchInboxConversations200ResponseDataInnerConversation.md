@@ -11,6 +11,7 @@
 | **participant_username** | **String** |  | [optional] |
 | **participant_picture** | **String** |  | [optional] |
 | **status** | **String** |  | [optional] |
+| **last_message** | **String** | The conversation&#39;s most recent message preview | [optional] |
 | **last_message_at** | **Time** |  | [optional] |
 
 ## Example
@@ -26,6 +27,7 @@ instance = Zernio::SearchInboxConversations200ResponseDataInnerConversation.new(
   participant_username: null,
   participant_picture: null,
   status: null,
+  last_message: null,
   last_message_at: null
 )
 ```

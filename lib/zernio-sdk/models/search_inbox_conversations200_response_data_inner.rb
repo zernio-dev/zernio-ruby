@@ -17,10 +17,10 @@ module Zernio
   class SearchInboxConversations200ResponseDataInner < ApiModelBase
     attr_accessor :conversation
 
-    # Total number of matching messages in this conversation
+    # Number of matching messages in this conversation. 0 when the conversation matched only on contact identity (name, username, or phone number), not on message text.
     attr_accessor :match_count
 
-    # Up to 3 most-recent matching messages
+    # Up to 3 most-recent matching messages (empty for an identity-only match)
     attr_accessor :matches
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -30,6 +30,9 @@ module Zernio
 
     attr_accessor :status
 
+    # The conversation's most recent message preview
+    attr_accessor :last_message
+
     attr_accessor :last_message_at
 
     class EnumAttributeValidator
@@ -64,6 +67,7 @@ module Zernio
         :'participant_username' => :'participantUsername',
         :'participant_picture' => :'participantPicture',
         :'status' => :'status',
+        :'last_message' => :'lastMessage',
         :'last_message_at' => :'lastMessageAt'
       }
     end
@@ -88,6 +92,7 @@ module Zernio
         :'participant_username' => :'String',
         :'participant_picture' => :'String',
         :'status' => :'String',
+        :'last_message' => :'String',
         :'last_message_at' => :'Time'
       }
     end
@@ -98,6 +103,7 @@ module Zernio
         :'participant_name',
         :'participant_username',
         :'participant_picture',
+        :'last_message',
         :'last_message_at'
       ])
     end
@@ -146,6 +152,10 @@ module Zernio
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'last_message')
+        self.last_message = attributes[:'last_message']
+      end
+
       if attributes.key?(:'last_message_at')
         self.last_message_at = attributes[:'last_message_at']
       end
@@ -190,6 +200,7 @@ module Zernio
           participant_username == o.participant_username &&
           participant_picture == o.participant_picture &&
           status == o.status &&
+          last_message == o.last_message &&
           last_message_at == o.last_message_at
     end
 
@@ -202,7 +213,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, participant_name, participant_username, participant_picture, status, last_message_at].hash
+      [id, platform, account_id, participant_name, participant_username, participant_picture, status, last_message, last_message_at].hash
     end
 
     # Builds the object from hash
