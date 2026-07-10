@@ -77,6 +77,8 @@ module Zernio
     # Custom audience ID to target.
     attr_accessor :audience_id
 
+    attr_accessor :placements
+
     # Meta's Advantage+ audience expansion. `0` (default) keeps targeting strict; `1` lets Meta expand beyond the supplied targeting when its delivery system finds better matches. Always sent on CREATE (Meta requires it). 
     attr_accessor :advantage_audience
 
@@ -145,6 +147,7 @@ module Zernio
         :'age_max' => :'ageMax',
         :'interests' => :'interests',
         :'audience_id' => :'audienceId',
+        :'placements' => :'placements',
         :'advantage_audience' => :'advantageAudience',
         :'objective' => :'objective',
         :'bid_strategy' => :'bidStrategy',
@@ -190,6 +193,7 @@ module Zernio
         :'age_max' => :'Integer',
         :'interests' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
         :'audience_id' => :'String',
+        :'placements' => :'CreateCtwaAdRequestPlacements',
         :'advantage_audience' => :'Integer',
         :'objective' => :'String',
         :'bid_strategy' => :'String',
@@ -334,6 +338,10 @@ module Zernio
 
       if attributes.key?(:'audience_id')
         self.audience_id = attributes[:'audience_id']
+      end
+
+      if attributes.key?(:'placements')
+        self.placements = attributes[:'placements']
       end
 
       if attributes.key?(:'advantage_audience')
@@ -735,6 +743,7 @@ module Zernio
           age_max == o.age_max &&
           interests == o.interests &&
           audience_id == o.audience_id &&
+          placements == o.placements &&
           advantage_audience == o.advantage_audience &&
           objective == o.objective &&
           bid_strategy == o.bid_strategy &&
@@ -753,7 +762,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, advantage_audience, objective, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

@@ -689,6 +689,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateCtwaAdRequestCitiesInner](docs/CreateCtwaAdRequestCitiesInner.md)
  - [Zernio::CreateCtwaAdRequestCreativesInner](docs/CreateCtwaAdRequestCreativesInner.md)
  - [Zernio::CreateCtwaAdRequestCreativesInnerVideo](docs/CreateCtwaAdRequestCreativesInnerVideo.md)
+ - [Zernio::CreateCtwaAdRequestPlacements](docs/CreateCtwaAdRequestPlacements.md)
  - [Zernio::CreateCtwaAdRequestRegionsInner](docs/CreateCtwaAdRequestRegionsInner.md)
  - [Zernio::CreateCtwaAdRequestVideo](docs/CreateCtwaAdRequestVideo.md)
  - [Zernio::CreateCtwaAdRequestZipsInner](docs/CreateCtwaAdRequestZipsInner.md)
