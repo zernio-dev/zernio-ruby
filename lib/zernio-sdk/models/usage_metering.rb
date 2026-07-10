@@ -35,6 +35,8 @@ module Zernio
 
     attr_accessor :period
 
+    attr_accessor :tax
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -67,7 +69,8 @@ module Zernio
         :'line_items' => :'lineItems',
         :'peaks' => :'peaks',
         :'call_usage' => :'callUsage',
-        :'period' => :'period'
+        :'period' => :'period',
+        :'tax' => :'tax'
       }
     end
 
@@ -91,7 +94,8 @@ module Zernio
         :'line_items' => :'Array<UsageMeteringLineItemsInner>',
         :'peaks' => :'UsageMeteringPeaks',
         :'call_usage' => :'UsageMeteringCallUsage',
-        :'period' => :'UsageMeteringPeriod'
+        :'period' => :'UsageMeteringPeriod',
+        :'tax' => :'UsageMeteringTax'
       }
     end
 
@@ -152,6 +156,10 @@ module Zernio
       if attributes.key?(:'period')
         self.period = attributes[:'period']
       end
+
+      if attributes.key?(:'tax')
+        self.tax = attributes[:'tax']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -193,7 +201,8 @@ module Zernio
           line_items == o.line_items &&
           peaks == o.peaks &&
           call_usage == o.call_usage &&
-          period == o.period
+          period == o.period &&
+          tax == o.tax
     end
 
     # @see the `==` method
@@ -205,7 +214,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [supported, granularity, days, totals, line_items, peaks, call_usage, period].hash
+      [supported, granularity, days, totals, line_items, peaks, call_usage, period, tax].hash
     end
 
     # Builds the object from hash

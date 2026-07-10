@@ -1743,6 +1743,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UsageMeteringLineItemsInner](docs/UsageMeteringLineItemsInner.md)
  - [Zernio::UsageMeteringPeaks](docs/UsageMeteringPeaks.md)
  - [Zernio::UsageMeteringPeriod](docs/UsageMeteringPeriod.md)
+ - [Zernio::UsageMeteringTax](docs/UsageMeteringTax.md)
  - [Zernio::UsageMeteringTotals](docs/UsageMeteringTotals.md)
  - [Zernio::UsageStats](docs/UsageStats.md)
  - [Zernio::UsageStatsLimits](docs/UsageStatsLimits.md)

@@ -1257,6 +1257,7 @@ docs/UsageMeteringDaysInner.md
 docs/UsageMeteringLineItemsInner.md
 docs/UsageMeteringPeaks.md
 docs/UsageMeteringPeriod.md
+docs/UsageMeteringTax.md
 docs/UsageMeteringTotals.md
 docs/UsageStats.md
 docs/UsageStatsLimits.md
@@ -2674,6 +2675,7 @@ lib/zernio-sdk/models/usage_metering_days_inner.rb
 lib/zernio-sdk/models/usage_metering_line_items_inner.rb
 lib/zernio-sdk/models/usage_metering_peaks.rb
 lib/zernio-sdk/models/usage_metering_period.rb
+lib/zernio-sdk/models/usage_metering_tax.rb
 lib/zernio-sdk/models/usage_metering_totals.rb
 lib/zernio-sdk/models/usage_stats.rb
 lib/zernio-sdk/models/usage_stats_limits.rb
@@ -4073,6 +4075,7 @@ spec/models/usage_metering_line_items_inner_spec.rb
 spec/models/usage_metering_peaks_spec.rb
 spec/models/usage_metering_period_spec.rb
 spec/models/usage_metering_spec.rb
+spec/models/usage_metering_tax_spec.rb
 spec/models/usage_metering_totals_spec.rb
 spec/models/usage_stats_limits_spec.rb
 spec/models/usage_stats_spec.rb

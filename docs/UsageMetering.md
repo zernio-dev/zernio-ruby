@@ -12,6 +12,7 @@
 | **peaks** | [**UsageMeteringPeaks**](UsageMeteringPeaks.md) |  | [optional] |
 | **call_usage** | [**UsageMeteringCallUsage**](UsageMeteringCallUsage.md) |  | [optional] |
 | **period** | [**UsageMeteringPeriod**](UsageMeteringPeriod.md) |  | [optional] |
+| **tax** | [**UsageMeteringTax**](UsageMeteringTax.md) |  | [optional] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = Zernio::UsageMetering.new(
   line_items: null,
   peaks: null,
   call_usage: null,
-  period: null
+  period: null,
+  tax: null
 )
 ```
 
