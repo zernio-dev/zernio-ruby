@@ -86,7 +86,7 @@ describe 'WhatsAppCallingApi' do
 
   # unit tests for get_whats_app_call
   # Get a single call
-  # @param call_id 
+  # @param id 
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppCall200Response]
@@ -127,7 +127,7 @@ describe 'WhatsAppCallingApi' do
   # unit tests for get_whats_app_call_recording
   # Get a call recording
   # Resolves a fresh, playable MP3 URL for the call&#39;s recording. Provider-signed recording URLs expire ~10 minutes after signing, so the &#x60;recordingUrl&#x60; stored on the call is usually stale by the time it is played; this endpoint re-signs on demand. Default responds &#x60;302 Found&#x60; redirecting to the fresh URL (point an &#x60;&lt;audio&gt;&#x60; element or a link straight at this endpoint); pass &#x60;as&#x3D;json&#x60; to receive &#x60;{ url }&#x60; instead. 
-  # @param call_id 
+  # @param id 
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :as &#x60;json&#x60; returns &#x60;{ url }&#x60; instead of a 302 redirect.

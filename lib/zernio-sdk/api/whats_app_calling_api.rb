@@ -308,34 +308,34 @@ module Zernio
     end
 
     # Get a single call
-    # @param call_id [String] 
+    # @param id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppCall200Response]
-    def get_whats_app_call(call_id, account_id, opts = {})
-      data, _status_code, _headers = get_whats_app_call_with_http_info(call_id, account_id, opts)
+    def get_whats_app_call(id, account_id, opts = {})
+      data, _status_code, _headers = get_whats_app_call_with_http_info(id, account_id, opts)
       data
     end
 
     # Get a single call
-    # @param call_id [String] 
+    # @param id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppCall200Response, Integer, Hash)>] GetWhatsAppCall200Response data, response status code and response headers
-    def get_whats_app_call_with_http_info(call_id, account_id, opts = {})
+    def get_whats_app_call_with_http_info(id, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.get_whats_app_call ...'
       end
-      # verify the required parameter 'call_id' is set
-      if @api_client.config.client_side_validation && call_id.nil?
-        fail ArgumentError, "Missing the required parameter 'call_id' when calling WhatsAppCallingApi.get_whats_app_call"
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.get_whats_app_call"
       end
       # verify the required parameter 'account_id' is set
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppCallingApi.get_whats_app_call"
       end
       # resource path
-      local_var_path = '/v1/whatsapp/calls/{callId}'.sub('{' + 'callId' + '}', CGI.escape(call_id.to_s))
+      local_var_path = '/v1/whatsapp/calls/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -533,30 +533,30 @@ module Zernio
 
     # Get a call recording
     # Resolves a fresh, playable MP3 URL for the call's recording. Provider-signed recording URLs expire ~10 minutes after signing, so the `recordingUrl` stored on the call is usually stale by the time it is played; this endpoint re-signs on demand. Default responds `302 Found` redirecting to the fresh URL (point an `<audio>` element or a link straight at this endpoint); pass `as=json` to receive `{ url }` instead. 
-    # @param call_id [String] 
+    # @param id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :as &#x60;json&#x60; returns &#x60;{ url }&#x60; instead of a 302 redirect.
     # @return [GetWhatsAppCallRecording200Response]
-    def get_whats_app_call_recording(call_id, account_id, opts = {})
-      data, _status_code, _headers = get_whats_app_call_recording_with_http_info(call_id, account_id, opts)
+    def get_whats_app_call_recording(id, account_id, opts = {})
+      data, _status_code, _headers = get_whats_app_call_recording_with_http_info(id, account_id, opts)
       data
     end
 
     # Get a call recording
     # Resolves a fresh, playable MP3 URL for the call&#39;s recording. Provider-signed recording URLs expire ~10 minutes after signing, so the &#x60;recordingUrl&#x60; stored on the call is usually stale by the time it is played; this endpoint re-signs on demand. Default responds &#x60;302 Found&#x60; redirecting to the fresh URL (point an &#x60;&lt;audio&gt;&#x60; element or a link straight at this endpoint); pass &#x60;as&#x3D;json&#x60; to receive &#x60;{ url }&#x60; instead. 
-    # @param call_id [String] 
+    # @param id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :as &#x60;json&#x60; returns &#x60;{ url }&#x60; instead of a 302 redirect.
     # @return [Array<(GetWhatsAppCallRecording200Response, Integer, Hash)>] GetWhatsAppCallRecording200Response data, response status code and response headers
-    def get_whats_app_call_recording_with_http_info(call_id, account_id, opts = {})
+    def get_whats_app_call_recording_with_http_info(id, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.get_whats_app_call_recording ...'
       end
-      # verify the required parameter 'call_id' is set
-      if @api_client.config.client_side_validation && call_id.nil?
-        fail ArgumentError, "Missing the required parameter 'call_id' when calling WhatsAppCallingApi.get_whats_app_call_recording"
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.get_whats_app_call_recording"
       end
       # verify the required parameter 'account_id' is set
       if @api_client.config.client_side_validation && account_id.nil?
@@ -567,7 +567,7 @@ module Zernio
         fail ArgumentError, "invalid value for \"as\", must be one of #{allowable_values}"
       end
       # resource path
-      local_var_path = '/v1/whatsapp/calls/{callId}/recording'.sub('{' + 'callId' + '}', CGI.escape(call_id.to_s))
+      local_var_path = '/v1/whatsapp/calls/{id}/recording'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}

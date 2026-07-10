@@ -8,10 +8,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**disable_whats_app_calling_legacy**](WhatsAppCallingApi.md#disable_whats_app_calling_legacy) | **DELETE** /v1/whatsapp/phone-numbers/{id}/calling | Disable calling on a number |
 | [**enable_whats_app_calling**](WhatsAppCallingApi.md#enable_whats_app_calling) | **POST** /v1/phone-numbers/{id}/whatsapp/calling | Enable calling on a number |
 | [**enable_whats_app_calling_legacy**](WhatsAppCallingApi.md#enable_whats_app_calling_legacy) | **POST** /v1/whatsapp/phone-numbers/{id}/calling | Enable calling on a number |
-| [**get_whats_app_call**](WhatsAppCallingApi.md#get_whats_app_call) | **GET** /v1/whatsapp/calls/{callId} | Get a single call |
+| [**get_whats_app_call**](WhatsAppCallingApi.md#get_whats_app_call) | **GET** /v1/whatsapp/calls/{id} | Get a single call |
 | [**get_whats_app_call_estimate**](WhatsAppCallingApi.md#get_whats_app_call_estimate) | **GET** /v1/whatsapp/calls/estimate | Estimate per-minute cost |
 | [**get_whats_app_call_permissions**](WhatsAppCallingApi.md#get_whats_app_call_permissions) | **GET** /v1/whatsapp/call-permissions | Check call permission |
-| [**get_whats_app_call_recording**](WhatsAppCallingApi.md#get_whats_app_call_recording) | **GET** /v1/whatsapp/calls/{callId}/recording | Get a call recording |
+| [**get_whats_app_call_recording**](WhatsAppCallingApi.md#get_whats_app_call_recording) | **GET** /v1/whatsapp/calls/{id}/recording | Get a call recording |
 | [**get_whats_app_calling**](WhatsAppCallingApi.md#get_whats_app_calling) | **GET** /v1/phone-numbers/{id}/whatsapp/calling | Get calling config for a number |
 | [**get_whats_app_calling_config**](WhatsAppCallingApi.md#get_whats_app_calling_config) | **GET** /v1/whatsapp/calling | Get calling config for an account |
 | [**initiate_whats_app_call**](WhatsAppCallingApi.md#initiate_whats_app_call) | **POST** /v1/whatsapp/calls | Initiate outbound call |
@@ -304,7 +304,7 @@ end
 
 ## get_whats_app_call
 
-> <GetWhatsAppCall200Response> get_whats_app_call(call_id, account_id)
+> <GetWhatsAppCall200Response> get_whats_app_call(id, account_id)
 
 Get a single call
 
@@ -320,12 +320,12 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppCallingApi.new
-call_id = 'call_id_example' # String | 
+id = 'id_example' # String | 
 account_id = 'account_id_example' # String | 
 
 begin
   # Get a single call
-  result = api_instance.get_whats_app_call(call_id, account_id)
+  result = api_instance.get_whats_app_call(id, account_id)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppCallingApi->get_whats_app_call: #{e}"
@@ -336,12 +336,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetWhatsAppCall200Response>, Integer, Hash)> get_whats_app_call_with_http_info(call_id, account_id)
+> <Array(<GetWhatsAppCall200Response>, Integer, Hash)> get_whats_app_call_with_http_info(id, account_id)
 
 ```ruby
 begin
   # Get a single call
-  data, status_code, headers = api_instance.get_whats_app_call_with_http_info(call_id, account_id)
+  data, status_code, headers = api_instance.get_whats_app_call_with_http_info(id, account_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppCall200Response>
@@ -354,7 +354,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **call_id** | **String** |  |  |
+| **id** | **String** |  |  |
 | **account_id** | **String** |  |  |
 
 ### Return type
@@ -521,7 +521,7 @@ end
 
 ## get_whats_app_call_recording
 
-> <GetWhatsAppCallRecording200Response> get_whats_app_call_recording(call_id, account_id, opts)
+> <GetWhatsAppCallRecording200Response> get_whats_app_call_recording(id, account_id, opts)
 
 Get a call recording
 
@@ -539,7 +539,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppCallingApi.new
-call_id = 'call_id_example' # String | 
+id = 'id_example' # String | 
 account_id = 'account_id_example' # String | 
 opts = {
   as: 'json' # String | `json` returns `{ url }` instead of a 302 redirect.
@@ -547,7 +547,7 @@ opts = {
 
 begin
   # Get a call recording
-  result = api_instance.get_whats_app_call_recording(call_id, account_id, opts)
+  result = api_instance.get_whats_app_call_recording(id, account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppCallingApi->get_whats_app_call_recording: #{e}"
@@ -558,12 +558,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetWhatsAppCallRecording200Response>, Integer, Hash)> get_whats_app_call_recording_with_http_info(call_id, account_id, opts)
+> <Array(<GetWhatsAppCallRecording200Response>, Integer, Hash)> get_whats_app_call_recording_with_http_info(id, account_id, opts)
 
 ```ruby
 begin
   # Get a call recording
-  data, status_code, headers = api_instance.get_whats_app_call_recording_with_http_info(call_id, account_id, opts)
+  data, status_code, headers = api_instance.get_whats_app_call_recording_with_http_info(id, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppCallRecording200Response>
@@ -576,7 +576,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **call_id** | **String** |  |  |
+| **id** | **String** |  |  |
 | **account_id** | **String** |  |  |
 | **as** | **String** | &#x60;json&#x60; returns &#x60;{ url }&#x60; instead of a 302 redirect. | [optional] |
 
