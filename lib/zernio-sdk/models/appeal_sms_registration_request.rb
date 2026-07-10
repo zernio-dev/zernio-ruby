@@ -15,12 +15,23 @@ require 'time'
 
 module Zernio
   class AppealSmsRegistrationRequest < ApiModelBase
+    # Goes verbatim to the carrier reviewer — address the decline reason directly.
     attr_accessor :appeal_reason
+
+    # Corrected opt-in flow; include a link to the opt-in page/form.
+    attr_accessor :message_flow
+
+    attr_accessor :sample1
+
+    attr_accessor :sample2
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'appeal_reason' => :'appealReason'
+        :'appeal_reason' => :'appealReason',
+        :'message_flow' => :'messageFlow',
+        :'sample1' => :'sample1',
+        :'sample2' => :'sample2'
       }
     end
 
@@ -37,7 +48,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'appeal_reason' => :'String'
+        :'appeal_reason' => :'String',
+        :'message_flow' => :'String',
+        :'sample1' => :'String',
+        :'sample2' => :'String'
       }
     end
 
@@ -68,6 +82,18 @@ module Zernio
       else
         self.appeal_reason = nil
       end
+
+      if attributes.key?(:'message_flow')
+        self.message_flow = attributes[:'message_flow']
+      end
+
+      if attributes.key?(:'sample1')
+        self.sample1 = attributes[:'sample1']
+      end
+
+      if attributes.key?(:'sample2')
+        self.sample2 = attributes[:'sample2']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -87,6 +113,22 @@ module Zernio
         invalid_properties.push('invalid value for "appeal_reason", the character length must be greater than or equal to 10.')
       end
 
+      if !@message_flow.nil? && @message_flow.to_s.length > 2048
+        invalid_properties.push('invalid value for "message_flow", the character length must be smaller than or equal to 2048.')
+      end
+
+      if !@message_flow.nil? && @message_flow.to_s.length < 40
+        invalid_properties.push('invalid value for "message_flow", the character length must be greater than or equal to 40.')
+      end
+
+      if !@sample1.nil? && @sample1.to_s.length < 20
+        invalid_properties.push('invalid value for "sample1", the character length must be greater than or equal to 20.')
+      end
+
+      if !@sample2.nil? && @sample2.to_s.length < 20
+        invalid_properties.push('invalid value for "sample2", the character length must be greater than or equal to 20.')
+      end
+
       invalid_properties
     end
 
@@ -97,6 +139,10 @@ module Zernio
       return false if @appeal_reason.nil?
       return false if @appeal_reason.to_s.length > 2000
       return false if @appeal_reason.to_s.length < 10
+      return false if !@message_flow.nil? && @message_flow.to_s.length > 2048
+      return false if !@message_flow.nil? && @message_flow.to_s.length < 40
+      return false if !@sample1.nil? && @sample1.to_s.length < 20
+      return false if !@sample2.nil? && @sample2.to_s.length < 20
       true
     end
 
@@ -118,12 +164,61 @@ module Zernio
       @appeal_reason = appeal_reason
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] message_flow Value to be assigned
+    def message_flow=(message_flow)
+      if message_flow.nil?
+        fail ArgumentError, 'message_flow cannot be nil'
+      end
+
+      if message_flow.to_s.length > 2048
+        fail ArgumentError, 'invalid value for "message_flow", the character length must be smaller than or equal to 2048.'
+      end
+
+      if message_flow.to_s.length < 40
+        fail ArgumentError, 'invalid value for "message_flow", the character length must be greater than or equal to 40.'
+      end
+
+      @message_flow = message_flow
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sample1 Value to be assigned
+    def sample1=(sample1)
+      if sample1.nil?
+        fail ArgumentError, 'sample1 cannot be nil'
+      end
+
+      if sample1.to_s.length < 20
+        fail ArgumentError, 'invalid value for "sample1", the character length must be greater than or equal to 20.'
+      end
+
+      @sample1 = sample1
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sample2 Value to be assigned
+    def sample2=(sample2)
+      if sample2.nil?
+        fail ArgumentError, 'sample2 cannot be nil'
+      end
+
+      if sample2.to_s.length < 20
+        fail ArgumentError, 'invalid value for "sample2", the character length must be greater than or equal to 20.'
+      end
+
+      @sample2 = sample2
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          appeal_reason == o.appeal_reason
+          appeal_reason == o.appeal_reason &&
+          message_flow == o.message_flow &&
+          sample1 == o.sample1 &&
+          sample2 == o.sample2
     end
 
     # @see the `==` method
@@ -135,7 +230,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [appeal_reason].hash
+      [appeal_reason, message_flow, sample1, sample2].hash
     end
 
     # Builds the object from hash

@@ -577,6 +577,7 @@ docs/GetSequence200ResponseSequence.md
 docs/GetSequence200ResponseSequenceStepsInner.md
 docs/GetSequence200ResponseSequenceStepsInnerTemplate.md
 docs/GetSmsRegistration200Response.md
+docs/GetSmsRegistration200ResponseCampaignContent.md
 docs/GetSmsUsage200Response.md
 docs/GetSmsUsage200ResponseGroupsInner.md
 docs/GetSmsUsage200ResponseTotals.md
@@ -858,6 +859,8 @@ docs/MessagesApi.md
 docs/Money.md
 docs/MoveAccountToProfile200Response.md
 docs/MoveAccountToProfileRequest.md
+docs/OnWhatsAppAutomaticEventRequest.md
+docs/OnWhatsAppAutomaticEventRequestCustomData.md
 docs/OnWhatsAppNumberActionRequiredRequest.md
 docs/OnWhatsAppNumberActivatedRequest.md
 docs/OnWhatsAppNumberActivatedRequestNumber.md
@@ -2010,6 +2013,7 @@ lib/zernio-sdk/models/get_sequence200_response_sequence.rb
 lib/zernio-sdk/models/get_sequence200_response_sequence_steps_inner.rb
 lib/zernio-sdk/models/get_sequence200_response_sequence_steps_inner_template.rb
 lib/zernio-sdk/models/get_sms_registration200_response.rb
+lib/zernio-sdk/models/get_sms_registration200_response_campaign_content.rb
 lib/zernio-sdk/models/get_sms_usage200_response.rb
 lib/zernio-sdk/models/get_sms_usage200_response_groups_inner.rb
 lib/zernio-sdk/models/get_sms_usage200_response_totals.rb
@@ -2283,6 +2287,8 @@ lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/money.rb
 lib/zernio-sdk/models/move_account_to_profile200_response.rb
 lib/zernio-sdk/models/move_account_to_profile_request.rb
+lib/zernio-sdk/models/on_whats_app_automatic_event_request.rb
+lib/zernio-sdk/models/on_whats_app_automatic_event_request_custom_data.rb
 lib/zernio-sdk/models/on_whats_app_number_action_required_request.rb
 lib/zernio-sdk/models/on_whats_app_number_activated_request.rb
 lib/zernio-sdk/models/on_whats_app_number_activated_request_number.rb
@@ -3405,6 +3411,7 @@ spec/models/get_sequence200_response_sequence_spec.rb
 spec/models/get_sequence200_response_sequence_steps_inner_spec.rb
 spec/models/get_sequence200_response_sequence_steps_inner_template_spec.rb
 spec/models/get_sequence200_response_spec.rb
+spec/models/get_sms_registration200_response_campaign_content_spec.rb
 spec/models/get_sms_registration200_response_spec.rb
 spec/models/get_sms_usage200_response_groups_inner_spec.rb
 spec/models/get_sms_usage200_response_spec.rb
@@ -3679,6 +3686,8 @@ spec/models/media_upload_response_spec.rb
 spec/models/money_spec.rb
 spec/models/move_account_to_profile200_response_spec.rb
 spec/models/move_account_to_profile_request_spec.rb
+spec/models/on_whats_app_automatic_event_request_custom_data_spec.rb
+spec/models/on_whats_app_automatic_event_request_spec.rb
 spec/models/on_whats_app_number_action_required_request_spec.rb
 spec/models/on_whats_app_number_activated_request_number_spec.rb
 spec/models/on_whats_app_number_activated_request_spec.rb

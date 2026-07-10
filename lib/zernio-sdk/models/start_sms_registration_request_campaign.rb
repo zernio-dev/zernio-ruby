@@ -18,9 +18,12 @@ module Zernio
   class StartSmsRegistrationRequestCampaign < ApiModelBase
     attr_accessor :usecase
 
+    # The concrete kinds of messages a MIXED campaign sends (the carrier registry requires 2-5, and reviewers match them against the sample messages). Omitted: a default pair is applied for MIXED. 
+    attr_accessor :sub_usecases
+
     attr_accessor :description
 
-    # How a recipient ends up receiving your messages (the opt-in flow).
+    # How a recipient ends up receiving your messages (the opt-in flow). Include a link to the page or form where they opt in — carrier reviewers reject campaigns whose consent they can't verify.
     attr_accessor :message_flow
 
     attr_accessor :sample1
@@ -50,10 +53,33 @@ module Zernio
 
     attr_accessor :direct_lending
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'usecase' => :'usecase',
+        :'sub_usecases' => :'subUsecases',
         :'description' => :'description',
         :'message_flow' => :'messageFlow',
         :'sample1' => :'sample1',
@@ -86,6 +112,7 @@ module Zernio
     def self.openapi_types
       {
         :'usecase' => :'String',
+        :'sub_usecases' => :'Array<String>',
         :'description' => :'String',
         :'message_flow' => :'String',
         :'sample1' => :'String',
@@ -130,6 +157,12 @@ module Zernio
         self.usecase = attributes[:'usecase']
       else
         self.usecase = nil
+      end
+
+      if attributes.key?(:'sub_usecases')
+        if (value = attributes[:'sub_usecases']).is_a?(Array)
+          self.sub_usecases = value
+        end
       end
 
       if attributes.key?(:'description')
@@ -220,6 +253,14 @@ module Zernio
       invalid_properties = Array.new
       if @usecase.nil?
         invalid_properties.push('invalid value for "usecase", usecase cannot be nil.')
+      end
+
+      if !@sub_usecases.nil? && @sub_usecases.length > 5
+        invalid_properties.push('invalid value for "sub_usecases", number of items must be less than or equal to 5.')
+      end
+
+      if !@sub_usecases.nil? && @sub_usecases.length < 2
+        invalid_properties.push('invalid value for "sub_usecases", number of items must be greater than or equal to 2.')
       end
 
       if @description.nil?
@@ -318,6 +359,8 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @usecase.nil?
+      return false if !@sub_usecases.nil? && @sub_usecases.length > 5
+      return false if !@sub_usecases.nil? && @sub_usecases.length < 2
       return false if @description.nil?
       return false if @description.to_s.length > 4096
       return false if @description.to_s.length < 40
@@ -507,6 +550,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           usecase == o.usecase &&
+          sub_usecases == o.sub_usecases &&
           description == o.description &&
           message_flow == o.message_flow &&
           sample1 == o.sample1 &&
@@ -533,7 +577,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [usecase, description, message_flow, sample1, sample2, help_message, optin_keywords, optin_message, optout_keywords, optout_message, help_keywords, embedded_link, embedded_phone, number_pool, age_gated, direct_lending].hash
+      [usecase, sub_usecases, description, message_flow, sample1, sample2, help_message, optin_keywords, optin_message, optout_keywords, optout_message, help_keywords, embedded_link, embedded_phone, number_pool, age_gated, direct_lending].hash
     end
 
     # Builds the object from hash

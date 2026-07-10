@@ -38,6 +38,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
+| [**on_whats_app_automatic_event**](WebhookEventsApi.md#on_whats_app_automatic_event) | **POST** /whatsapp.automatic_event | WhatsApp automatic event detected |
 | [**on_whats_app_number_action_required**](WebhookEventsApi.md#on_whats_app_number_action_required) | **POST** /whatsapp.number.action_required | WhatsApp number action required event |
 | [**on_whats_app_number_activated**](WebhookEventsApi.md#on_whats_app_number_activated) | **POST** /whatsapp.number.activated | WhatsApp number activated event |
 | [**on_whats_app_number_declined**](WebhookEventsApi.md#on_whats_app_number_declined) | **POST** /whatsapp.number.declined | WhatsApp number declined event |
@@ -2346,6 +2347,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_test** | [**WebhookPayloadTest**](WebhookPayloadTest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_whats_app_automatic_event
+
+> on_whats_app_automatic_event(on_whats_app_automatic_event_request)
+
+WhatsApp automatic event detected
+
+Fired when Meta's automatic event identification (opt-in during Embedded Signup; not available for EU/UK/JP businesses) detects a lead or purchase in a Click-to-WhatsApp conversation. Branch on `eventName` (`LeadSubmitted` | `Purchase`). Carries the `ctwa_clid` even on coexistence numbers where the inbound referral omits it (this webhook is the only surface that delivers it there); the clid is also written back onto the conversation, so POST /v1/whatsapp/conversions becomes usable for the thread. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_whats_app_automatic_event_request =  # OnWhatsAppAutomaticEventRequest | 
+
+begin
+  # WhatsApp automatic event detected
+  api_instance.on_whats_app_automatic_event(on_whats_app_automatic_event_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_automatic_event: #{e}"
+end
+```
+
+#### Using the on_whats_app_automatic_event_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_automatic_event_with_http_info(on_whats_app_automatic_event_request)
+
+```ruby
+begin
+  # WhatsApp automatic event detected
+  data, status_code, headers = api_instance.on_whats_app_automatic_event_with_http_info(on_whats_app_automatic_event_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_automatic_event_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_whats_app_automatic_event_request** | [**OnWhatsAppAutomaticEventRequest**](OnWhatsAppAutomaticEventRequest.md) |  |  |
 
 ### Return type
 

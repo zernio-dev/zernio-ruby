@@ -14,24 +14,31 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetSmsRegistration200Response < ApiModelBase
+  class OnWhatsAppAutomaticEventRequest < ApiModelBase
     attr_accessor :id
 
-    attr_accessor :registration_type
+    attr_accessor :event
 
-    attr_accessor :status
+    attr_accessor :timestamp
 
-    attr_accessor :brand_status
+    # SocialAccount id of the WhatsApp number whose conversation was flagged.
+    attr_accessor :account_id
 
-    attr_accessor :campaign_status
+    # Zernio conversation id, when the thread could be resolved.
+    attr_accessor :conversation_id
 
-    attr_accessor :decline_reason
+    # The wamid of the message Meta's analysis flagged.
+    attr_accessor :platform_message_id
 
-    attr_accessor :phone_numbers
+    # Meta-detected event: `LeadSubmitted` | `Purchase`.
+    attr_accessor :event_name
 
-    attr_accessor :awaiting_otp
+    # Meta's CTWA click id, the Conversions API match key.
+    attr_accessor :ctwa_clid
 
-    attr_accessor :campaign_content
+    attr_accessor :custom_data
+
+    attr_accessor :detected_at
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -59,14 +66,15 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
-        :'registration_type' => :'registrationType',
-        :'status' => :'status',
-        :'brand_status' => :'brandStatus',
-        :'campaign_status' => :'campaignStatus',
-        :'decline_reason' => :'declineReason',
-        :'phone_numbers' => :'phoneNumbers',
-        :'awaiting_otp' => :'awaitingOtp',
-        :'campaign_content' => :'campaignContent'
+        :'event' => :'event',
+        :'timestamp' => :'timestamp',
+        :'account_id' => :'accountId',
+        :'conversation_id' => :'conversationId',
+        :'platform_message_id' => :'platformMessageId',
+        :'event_name' => :'eventName',
+        :'ctwa_clid' => :'ctwaClid',
+        :'custom_data' => :'customData',
+        :'detected_at' => :'detectedAt'
       }
     end
 
@@ -84,21 +92,21 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
-        :'registration_type' => :'String',
-        :'status' => :'String',
-        :'brand_status' => :'String',
-        :'campaign_status' => :'String',
-        :'decline_reason' => :'String',
-        :'phone_numbers' => :'Array<String>',
-        :'awaiting_otp' => :'Boolean',
-        :'campaign_content' => :'GetSmsRegistration200ResponseCampaignContent'
+        :'event' => :'String',
+        :'timestamp' => :'Time',
+        :'account_id' => :'String',
+        :'conversation_id' => :'String',
+        :'platform_message_id' => :'String',
+        :'event_name' => :'String',
+        :'ctwa_clid' => :'String',
+        :'custom_data' => :'OnWhatsAppAutomaticEventRequestCustomData',
+        :'detected_at' => :'Time'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'decline_reason',
       ])
     end
 
@@ -106,14 +114,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetSmsRegistration200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::OnWhatsAppAutomaticEventRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetSmsRegistration200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::OnWhatsAppAutomaticEventRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -122,38 +130,40 @@ module Zernio
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'registration_type')
-        self.registration_type = attributes[:'registration_type']
+      if attributes.key?(:'event')
+        self.event = attributes[:'event']
       end
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
       end
 
-      if attributes.key?(:'brand_status')
-        self.brand_status = attributes[:'brand_status']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'campaign_status')
-        self.campaign_status = attributes[:'campaign_status']
+      if attributes.key?(:'conversation_id')
+        self.conversation_id = attributes[:'conversation_id']
       end
 
-      if attributes.key?(:'decline_reason')
-        self.decline_reason = attributes[:'decline_reason']
+      if attributes.key?(:'platform_message_id')
+        self.platform_message_id = attributes[:'platform_message_id']
       end
 
-      if attributes.key?(:'phone_numbers')
-        if (value = attributes[:'phone_numbers']).is_a?(Array)
-          self.phone_numbers = value
-        end
+      if attributes.key?(:'event_name')
+        self.event_name = attributes[:'event_name']
       end
 
-      if attributes.key?(:'awaiting_otp')
-        self.awaiting_otp = attributes[:'awaiting_otp']
+      if attributes.key?(:'ctwa_clid')
+        self.ctwa_clid = attributes[:'ctwa_clid']
       end
 
-      if attributes.key?(:'campaign_content')
-        self.campaign_content = attributes[:'campaign_content']
+      if attributes.key?(:'custom_data')
+        self.custom_data = attributes[:'custom_data']
+      end
+
+      if attributes.key?(:'detected_at')
+        self.detected_at = attributes[:'detected_at']
       end
     end
 
@@ -169,31 +179,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      registration_type_validator = EnumAttributeValidator.new('String', ["standard_10dlc", "sole_prop_10dlc", "toll_free"])
-      return false unless registration_type_validator.valid?(@registration_type)
-      status_validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected"])
-      return false unless status_validator.valid?(@status)
+      event_validator = EnumAttributeValidator.new('String', ["whatsapp.automatic_event"])
+      return false unless event_validator.valid?(@event)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] registration_type Object to be assigned
-    def registration_type=(registration_type)
-      validator = EnumAttributeValidator.new('String', ["standard_10dlc", "sole_prop_10dlc", "toll_free"])
-      unless validator.valid?(registration_type)
-        fail ArgumentError, "invalid value for \"registration_type\", must be one of #{validator.allowable_values}."
+    # @param [Object] event Object to be assigned
+    def event=(event)
+      validator = EnumAttributeValidator.new('String', ["whatsapp.automatic_event"])
+      unless validator.valid?(event)
+        fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
       end
-      @registration_type = registration_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
+      @event = event
     end
 
     # Checks equality by comparing each attribute.
@@ -202,14 +200,15 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          registration_type == o.registration_type &&
-          status == o.status &&
-          brand_status == o.brand_status &&
-          campaign_status == o.campaign_status &&
-          decline_reason == o.decline_reason &&
-          phone_numbers == o.phone_numbers &&
-          awaiting_otp == o.awaiting_otp &&
-          campaign_content == o.campaign_content
+          event == o.event &&
+          timestamp == o.timestamp &&
+          account_id == o.account_id &&
+          conversation_id == o.conversation_id &&
+          platform_message_id == o.platform_message_id &&
+          event_name == o.event_name &&
+          ctwa_clid == o.ctwa_clid &&
+          custom_data == o.custom_data &&
+          detected_at == o.detected_at
     end
 
     # @see the `==` method
@@ -221,7 +220,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, registration_type, status, brand_status, campaign_status, decline_reason, phone_numbers, awaiting_otp, campaign_content].hash
+      [id, event, timestamp, account_id, conversation_id, platform_message_id, event_name, ctwa_clid, custom_data, detected_at].hash
     end
 
     # Builds the object from hash
