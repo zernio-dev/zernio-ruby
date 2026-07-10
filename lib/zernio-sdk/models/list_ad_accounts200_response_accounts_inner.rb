@@ -30,6 +30,12 @@ module Zernio
     # Signed UTC offset in hours, reflecting current DST (Meta only).
     attr_accessor :timezone_offset_hours_utc
 
+    # Meta only. Whether the account can create/run ads now. Absent (treat as true) on non-Meta platforms.
+    attr_accessor :selectable
+
+    # Meta only. Human-readable reason when selectable is false; null when selectable.
+    attr_accessor :unusable_reason
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +44,9 @@ module Zernio
         :'currency' => :'currency',
         :'status' => :'status',
         :'timezone_name' => :'timezoneName',
-        :'timezone_offset_hours_utc' => :'timezoneOffsetHoursUtc'
+        :'timezone_offset_hours_utc' => :'timezoneOffsetHoursUtc',
+        :'selectable' => :'selectable',
+        :'unusable_reason' => :'unusableReason'
       }
     end
 
@@ -60,7 +68,9 @@ module Zernio
         :'currency' => :'String',
         :'status' => :'String',
         :'timezone_name' => :'String',
-        :'timezone_offset_hours_utc' => :'Float'
+        :'timezone_offset_hours_utc' => :'Float',
+        :'selectable' => :'Boolean',
+        :'unusable_reason' => :'String'
       }
     end
 
@@ -109,6 +119,14 @@ module Zernio
       if attributes.key?(:'timezone_offset_hours_utc')
         self.timezone_offset_hours_utc = attributes[:'timezone_offset_hours_utc']
       end
+
+      if attributes.key?(:'selectable')
+        self.selectable = attributes[:'selectable']
+      end
+
+      if attributes.key?(:'unusable_reason')
+        self.unusable_reason = attributes[:'unusable_reason']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -136,7 +154,9 @@ module Zernio
           currency == o.currency &&
           status == o.status &&
           timezone_name == o.timezone_name &&
-          timezone_offset_hours_utc == o.timezone_offset_hours_utc
+          timezone_offset_hours_utc == o.timezone_offset_hours_utc &&
+          selectable == o.selectable &&
+          unusable_reason == o.unusable_reason
     end
 
     # @see the `==` method
@@ -148,7 +168,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, currency, status, timezone_name, timezone_offset_hours_utc].hash
+      [id, name, currency, status, timezone_name, timezone_offset_hours_utc, selectable, unusable_reason].hash
     end
 
     # Builds the object from hash
