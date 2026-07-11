@@ -715,6 +715,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateInboxConversation400Response](docs/CreateInboxConversation400Response.md)
  - [Zernio::CreateInboxConversation422Response](docs/CreateInboxConversation422Response.md)
  - [Zernio::CreateInboxConversationRequest](docs/CreateInboxConversationRequest.md)
+ - [Zernio::CreateInboxConversationRequestHeaderMedia](docs/CreateInboxConversationRequestHeaderMedia.md)
  - [Zernio::CreateInviteToken201Response](docs/CreateInviteToken201Response.md)
  - [Zernio::CreateInviteTokenRequest](docs/CreateInviteTokenRequest.md)
  - [Zernio::CreateLeadForm200Response](docs/CreateLeadForm200Response.md)
