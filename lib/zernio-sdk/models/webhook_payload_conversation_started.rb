@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Fired once when a new conversation begins, in either direction. A conversation starts the first time an account and a contact exchange a message on any DM platform (Instagram, Messenger/Facebook, Telegram, WhatsApp, Twitter, Reddit, Bluesky). Platform-agnostic — one subscription covers every DM platform. 
+  # Fired once when a new conversation begins, in either direction. A conversation starts the first time an account and a contact exchange a message on any DM platform (Instagram, Messenger/Facebook, Telegram, WhatsApp, Twitter, Reddit, Bluesky, SMS). Platform-agnostic — one subscription covers every DM platform. 
   class WebhookPayloadConversationStarted < ApiModelBase
     # Stable webhook event ID
     attr_accessor :id
