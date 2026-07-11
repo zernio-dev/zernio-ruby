@@ -2874,6 +2874,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Pause or resume a single ad
+    # Ad-scoped pause/resume — touches ONLY this ad, never its parent ad set or campaign (so sibling ads keep running). Thin wrapper over the `status` field of PUT /v1/ads/{adId}, for callers that want a URL symmetric to /v1/ads/campaigns/{campaignId}/status and /v1/ads/ad-sets/{adSetId}/status.  `{adId}` accepts the same identifier dialects as GET/PUT /v1/ads/{adId} (Zernio hex `_id`, Meta numeric `platformAdId`, or the creative's effective story/media IDs). `platform` is inferred from the ad, so it's not required in the body. Ads in terminal statuses (rejected, completed, cancelled) and no-op flips (already in the target state) are skipped. 
+    # @param ad_id [String] Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs.
+    # @param update_ad_status_request [UpdateAdStatusRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAdStatus200Response]
+    def update_ad_status(ad_id, update_ad_status_request, opts = {})
+      data, _status_code, _headers = update_ad_status_with_http_info(ad_id, update_ad_status_request, opts)
+      data
+    end
+
+    # Pause or resume a single ad
+    # Ad-scoped pause/resume — touches ONLY this ad, never its parent ad set or campaign (so sibling ads keep running). Thin wrapper over the &#x60;status&#x60; field of PUT /v1/ads/{adId}, for callers that want a URL symmetric to /v1/ads/campaigns/{campaignId}/status and /v1/ads/ad-sets/{adSetId}/status.  &#x60;{adId}&#x60; accepts the same identifier dialects as GET/PUT /v1/ads/{adId} (Zernio hex &#x60;_id&#x60;, Meta numeric &#x60;platformAdId&#x60;, or the creative&#39;s effective story/media IDs). &#x60;platform&#x60; is inferred from the ad, so it&#39;s not required in the body. Ads in terminal statuses (rejected, completed, cancelled) and no-op flips (already in the target state) are skipped. 
+    # @param ad_id [String] Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs.
+    # @param update_ad_status_request [UpdateAdStatusRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAdStatus200Response, Integer, Hash)>] UpdateAdStatus200Response data, response status code and response headers
+    def update_ad_status_with_http_info(ad_id, update_ad_status_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.update_ad_status ...'
+      end
+      # verify the required parameter 'ad_id' is set
+      if @api_client.config.client_side_validation && ad_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdsApi.update_ad_status"
+      end
+      # verify the required parameter 'update_ad_status_request' is set
+      if @api_client.config.client_side_validation && update_ad_status_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_status_request' when calling AdsApi.update_ad_status"
+      end
+      # resource path
+      local_var_path = '/v1/ads/{adId}/status'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_status_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAdStatus200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.update_ad_status",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#update_ad_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Set ad tracking tags
     # Unified update. Send only the fields for the ad's platform: - Meta: `urlTags` (array of {key,value}). Meta creatives are immutable, so this rebuilds the   creative and repoints the ad. By DEFAULT we PRESERVE the existing creative verbatim   (re-post its object_story_spec + the new url_tags, reusing the image), so you send `urlTags`   ALONE — no need to read back headline/body/CTA. `creative` (headline, body, callToAction,   linkUrl, imageUrl) is OPTIONAL and only needed to rebuild explicitly, or for SHARE / page-post   / dark / asset_feed creatives whose object_story_spec Meta strips (those return 422 asking for   `creative`). - Google: `trackingUrlTemplate` and/or `finalUrlSuffix` (full template strings; account quota applies). - LinkedIn: `dynamicValueParameters` and/or `customValueParameters` (campaign-level Dynamic UTM). 
     # @param ad_id [String] 

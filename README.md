@@ -144,6 +144,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
+*Zernio::AdsApi* | [**update_ad_status**](docs/AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
 *Zernio::AdsApi* | [**update_ad_tracking_tags**](docs/AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags
 *Zernio::AdsApi* | [**update_conversion_destination**](docs/AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
@@ -1640,6 +1641,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdSetRequest](docs/UpdateAdSetRequest.md)
  - [Zernio::UpdateAdSetRequestBudget](docs/UpdateAdSetRequestBudget.md)
  - [Zernio::UpdateAdSetStatus200Response](docs/UpdateAdSetStatus200Response.md)
+ - [Zernio::UpdateAdStatus200Response](docs/UpdateAdStatus200Response.md)
+ - [Zernio::UpdateAdStatusRequest](docs/UpdateAdStatusRequest.md)
  - [Zernio::UpdateAdTrackingTagsRequest](docs/UpdateAdTrackingTagsRequest.md)
  - [Zernio::UpdateAdTrackingTagsRequestCreative](docs/UpdateAdTrackingTagsRequestCreative.md)
  - [Zernio::UpdateAdTrackingTagsRequestUrlTagsInner](docs/UpdateAdTrackingTagsRequestUrlTagsInner.md)

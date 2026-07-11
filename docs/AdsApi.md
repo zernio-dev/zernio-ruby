@@ -42,6 +42,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**send_conversions**](AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events |
 | [**send_whats_app_conversion**](AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
+| [**update_ad_status**](AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
 | [**update_ad_tracking_tags**](AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags |
 | [**update_conversion_destination**](AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination |
 
@@ -2814,6 +2815,77 @@ end
 ### Return type
 
 [**UpdateAd200Response**](UpdateAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ad_status
+
+> <UpdateAdStatus200Response> update_ad_status(ad_id, update_ad_status_request)
+
+Pause or resume a single ad
+
+Ad-scoped pause/resume — touches ONLY this ad, never its parent ad set or campaign (so sibling ads keep running). Thin wrapper over the `status` field of PUT /v1/ads/{adId}, for callers that want a URL symmetric to /v1/ads/campaigns/{campaignId}/status and /v1/ads/ad-sets/{adSetId}/status.  `{adId}` accepts the same identifier dialects as GET/PUT /v1/ads/{adId} (Zernio hex `_id`, Meta numeric `platformAdId`, or the creative's effective story/media IDs). `platform` is inferred from the ad, so it's not required in the body. Ads in terminal statuses (rejected, completed, cancelled) and no-op flips (already in the target state) are skipped. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+ad_id = 'ad_id_example' # String | Zernio `_id` (hex), Meta `platformAdId` (numeric), or one of the creative's effective story/media IDs.
+update_ad_status_request = Zernio::UpdateAdStatusRequest.new({status: 'active'}) # UpdateAdStatusRequest | 
+
+begin
+  # Pause or resume a single ad
+  result = api_instance.update_ad_status(ad_id, update_ad_status_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->update_ad_status: #{e}"
+end
+```
+
+#### Using the update_ad_status_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAdStatus200Response>, Integer, Hash)> update_ad_status_with_http_info(ad_id, update_ad_status_request)
+
+```ruby
+begin
+  # Pause or resume a single ad
+  data, status_code, headers = api_instance.update_ad_status_with_http_info(ad_id, update_ad_status_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAdStatus200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->update_ad_status_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. |  |
+| **update_ad_status_request** | [**UpdateAdStatusRequest**](UpdateAdStatusRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAdStatus200Response**](UpdateAdStatus200Response.md)
 
 ### Authorization
 

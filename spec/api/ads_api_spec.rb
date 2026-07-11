@@ -554,6 +554,19 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for update_ad_status
+  # Pause or resume a single ad
+  # Ad-scoped pause/resume — touches ONLY this ad, never its parent ad set or campaign (so sibling ads keep running). Thin wrapper over the &#x60;status&#x60; field of PUT /v1/ads/{adId}, for callers that want a URL symmetric to /v1/ads/campaigns/{campaignId}/status and /v1/ads/ad-sets/{adSetId}/status.  &#x60;{adId}&#x60; accepts the same identifier dialects as GET/PUT /v1/ads/{adId} (Zernio hex &#x60;_id&#x60;, Meta numeric &#x60;platformAdId&#x60;, or the creative&#39;s effective story/media IDs). &#x60;platform&#x60; is inferred from the ad, so it&#39;s not required in the body. Ads in terminal statuses (rejected, completed, cancelled) and no-op flips (already in the target state) are skipped. 
+  # @param ad_id Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs.
+  # @param update_ad_status_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdStatus200Response]
+  describe 'update_ad_status test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_ad_tracking_tags
   # Set ad tracking tags
   # Unified update. Send only the fields for the ad&#39;s platform: - Meta: &#x60;urlTags&#x60; (array of {key,value}). Meta creatives are immutable, so this rebuilds the   creative and repoints the ad. By DEFAULT we PRESERVE the existing creative verbatim   (re-post its object_story_spec + the new url_tags, reusing the image), so you send &#x60;urlTags&#x60;   ALONE — no need to read back headline/body/CTA. &#x60;creative&#x60; (headline, body, callToAction,   linkUrl, imageUrl) is OPTIONAL and only needed to rebuild explicitly, or for SHARE / page-post   / dark / asset_feed creatives whose object_story_spec Meta strips (those return 422 asking for   &#x60;creative&#x60;). - Google: &#x60;trackingUrlTemplate&#x60; and/or &#x60;finalUrlSuffix&#x60; (full template strings; account quota applies). - LinkedIn: &#x60;dynamicValueParameters&#x60; and/or &#x60;customValueParameters&#x60; (campaign-level Dynamic UTM). 
