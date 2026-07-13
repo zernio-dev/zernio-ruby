@@ -20,6 +20,7 @@ module Zernio
 
     attr_accessor :auth_person_name
 
+    # Phone number on the losing carrier's bill. Defaults to the ported number itself on single-number orders.
     attr_accessor :billing_phone_number
 
     attr_accessor :account_number

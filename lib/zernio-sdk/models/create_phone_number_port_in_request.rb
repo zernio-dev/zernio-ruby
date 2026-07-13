@@ -26,10 +26,35 @@ module Zernio
     # Document id from POST /v1/phone-numbers/port-in/documents (kind=invoice).
     attr_accessor :invoice_document_id
 
-    # Requested port date; the carrier confirms the actual FOC later.
+    # Requested port date; the carrier confirms the actual FOC later. Defaults to one week out (shifted off weekends) when omitted.
     attr_accessor :foc_datetime_requested
 
     attr_accessor :customer_reference
+
+    # Whether the losing account ports all its numbers (full) or keeps some (partial).
+    attr_accessor :port_type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -39,7 +64,8 @@ module Zernio
         :'loa_document_id' => :'loaDocumentId',
         :'invoice_document_id' => :'invoiceDocumentId',
         :'foc_datetime_requested' => :'focDatetimeRequested',
-        :'customer_reference' => :'customerReference'
+        :'customer_reference' => :'customerReference',
+        :'port_type' => :'portType'
       }
     end
 
@@ -61,7 +87,8 @@ module Zernio
         :'loa_document_id' => :'String',
         :'invoice_document_id' => :'String',
         :'foc_datetime_requested' => :'Time',
-        :'customer_reference' => :'String'
+        :'customer_reference' => :'String',
+        :'port_type' => :'String'
       }
     end
 
@@ -120,6 +147,12 @@ module Zernio
       if attributes.key?(:'customer_reference')
         self.customer_reference = attributes[:'customer_reference']
       end
+
+      if attributes.key?(:'port_type')
+        self.port_type = attributes[:'port_type']
+      else
+        self.port_type = 'full'
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -169,6 +202,8 @@ module Zernio
       return false if @loa_document_id.nil?
       return false if @invoice_document_id.nil?
       return false if !@customer_reference.nil? && @customer_reference.to_s.length > 100
+      port_type_validator = EnumAttributeValidator.new('String', ["full", "partial"])
+      return false unless port_type_validator.valid?(@port_type)
       true
     end
 
@@ -234,6 +269,16 @@ module Zernio
       @customer_reference = customer_reference
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] port_type Object to be assigned
+    def port_type=(port_type)
+      validator = EnumAttributeValidator.new('String', ["full", "partial"])
+      unless validator.valid?(port_type)
+        fail ArgumentError, "invalid value for \"port_type\", must be one of #{validator.allowable_values}."
+      end
+      @port_type = port_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -244,7 +289,8 @@ module Zernio
           loa_document_id == o.loa_document_id &&
           invoice_document_id == o.invoice_document_id &&
           foc_datetime_requested == o.foc_datetime_requested &&
-          customer_reference == o.customer_reference
+          customer_reference == o.customer_reference &&
+          port_type == o.port_type
     end
 
     # @see the `==` method
@@ -256,7 +302,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_numbers, end_user, loa_document_id, invoice_document_id, foc_datetime_requested, customer_reference].hash
+      [phone_numbers, end_user, loa_document_id, invoice_document_id, foc_datetime_requested, customer_reference, port_type].hash
     end
 
     # Builds the object from hash
