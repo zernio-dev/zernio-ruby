@@ -23,6 +23,9 @@ module Zernio
     # Thumbnail URL (same as url for images)
     attr_accessor :thumbnail
 
+    # Accessibility alt text set on the media, when present.
+    attr_accessor :alt_text
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -50,7 +53,8 @@ module Zernio
       {
         :'type' => :'type',
         :'url' => :'url',
-        :'thumbnail' => :'thumbnail'
+        :'thumbnail' => :'thumbnail',
+        :'alt_text' => :'altText'
       }
     end
 
@@ -69,7 +73,8 @@ module Zernio
       {
         :'type' => :'String',
         :'url' => :'String',
-        :'thumbnail' => :'String'
+        :'thumbnail' => :'String',
+        :'alt_text' => :'String'
       }
     end
 
@@ -105,6 +110,10 @@ module Zernio
 
       if attributes.key?(:'thumbnail')
         self.thumbnail = attributes[:'thumbnail']
+      end
+
+      if attributes.key?(:'alt_text')
+        self.alt_text = attributes[:'alt_text']
       end
     end
 
@@ -142,7 +151,8 @@ module Zernio
       self.class == o.class &&
           type == o.type &&
           url == o.url &&
-          thumbnail == o.thumbnail
+          thumbnail == o.thumbnail &&
+          alt_text == o.alt_text
     end
 
     # @see the `==` method
@@ -154,7 +164,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, url, thumbnail].hash
+      [type, url, thumbnail, alt_text].hash
     end
 
     # Builds the object from hash
