@@ -14,7 +14,7 @@
 | **city** | **String** |  |  |
 | **state** | **String** |  |  |
 | **postal_code** | **String** |  |  |
-| **country** | **String** |  |  |
+| **country** | **String** | ISO 3166-1 alpha-2 country where the company is registered. Companies worldwide can register standard 10DLC (non-US companies use their local tax ID in &#x60;ein&#x60;; carrier vetting may take longer). SOLE_PROPRIETOR is US/CA only. |  |
 | **email** | **String** | Brand contact email; defaults to your account email when omitted. | [optional] |
 | **website** | **String** | The brand&#39;s website (sole proprietors may use a social profile such as LinkedIn or a business Facebook page). Carriers verify the brand against it; a bare domain is normalized to https://. |  |
 | **vertical** | **String** |  |  |

@@ -40,6 +40,7 @@ module Zernio
 
     attr_accessor :postal_code
 
+    # ISO 3166-1 alpha-2 country where the company is registered. Companies worldwide can register standard 10DLC (non-US companies use their local tax ID in `ein`; carrier vetting may take longer). SOLE_PROPRIETOR is US/CA only.
     attr_accessor :country
 
     # Brand contact email; defaults to your account email when omitted.
@@ -260,6 +261,14 @@ module Zernio
         invalid_properties.push('invalid value for "country", country cannot be nil.')
       end
 
+      if @country.to_s.length > 2
+        invalid_properties.push('invalid value for "country", the character length must be smaller than or equal to 2.')
+      end
+
+      if @country.to_s.length < 2
+        invalid_properties.push('invalid value for "country", the character length must be greater than or equal to 2.')
+      end
+
       if @website.nil?
         invalid_properties.push('invalid value for "website", website cannot be nil.')
       end
@@ -284,8 +293,8 @@ module Zernio
       return false if @state.nil?
       return false if @postal_code.nil?
       return false if @country.nil?
-      country_validator = EnumAttributeValidator.new('String', ["US", "CA"])
-      return false unless country_validator.valid?(@country)
+      return false if @country.to_s.length > 2
+      return false if @country.to_s.length < 2
       return false if @website.nil?
       return false if @vertical.nil?
       vertical_validator = EnumAttributeValidator.new('String', ["AGRICULTURE", "COMMUNICATION", "CONSTRUCTION", "EDUCATION", "ENERGY", "ENTERTAINMENT", "FINANCIAL", "GAMBLING", "GOVERNMENT", "HEALTHCARE", "HOSPITALITY", "HUMAN_RESOURCES", "INSURANCE", "LEGAL", "MANUFACTURING", "NGO", "POLITICAL", "POSTAL", "PROFESSIONAL", "REAL_ESTATE", "RETAIL", "TECHNOLOGY", "TRANSPORTATION"])
@@ -353,13 +362,21 @@ module Zernio
       @postal_code = postal_code
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] country Object to be assigned
+    # Custom attribute writer method with validation
+    # @param [Object] country Value to be assigned
     def country=(country)
-      validator = EnumAttributeValidator.new('String', ["US", "CA"])
-      unless validator.valid?(country)
-        fail ArgumentError, "invalid value for \"country\", must be one of #{validator.allowable_values}."
+      if country.nil?
+        fail ArgumentError, 'country cannot be nil'
       end
+
+      if country.to_s.length > 2
+        fail ArgumentError, 'invalid value for "country", the character length must be smaller than or equal to 2.'
+      end
+
+      if country.to_s.length < 2
+        fail ArgumentError, 'invalid value for "country", the character length must be greater than or equal to 2.'
+      end
+
       @country = country
     end
 

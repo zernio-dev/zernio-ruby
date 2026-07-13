@@ -94,10 +94,6 @@ describe Zernio::StartSmsRegistrationRequestBrand do
   describe 'test attribute "country"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["US", "CA"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.country = value }.not_to raise_error
-      # end
     end
   end
 
