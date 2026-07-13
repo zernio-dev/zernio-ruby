@@ -13,6 +13,8 @@
 | **text** | **String** |  | [optional] |
 | **created** | **Time** |  | [optional] |
 | **has_reply** | **Boolean** |  | [optional] |
+| **has_photos** | **Boolean** | Whether the review has at least one photo. Google Business only; always false for other platforms. | [optional] |
+| **photo_count** | **Integer** | Number of photos attached to the review (photos only; videos are not counted). Google Business only; 0 for other platforms. | [optional] |
 | **reply** | [**ListInboxReviews200ResponseDataInnerReply**](ListInboxReviews200ResponseDataInnerReply.md) |  | [optional] |
 | **review_url** | **String** |  | [optional] |
 
@@ -31,6 +33,8 @@ instance = Zernio::ListInboxReviews200ResponseDataInner.new(
   text: null,
   created: null,
   has_reply: null,
+  has_photos: null,
+  photo_count: null,
   reply: null,
   review_url: null
 )

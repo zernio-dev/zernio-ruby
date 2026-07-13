@@ -30,6 +30,9 @@ module Zernio
     # Signed UTC offset in hours, reflecting current DST (Meta only).
     attr_accessor :timezone_offset_hours_utc
 
+    # Meta only. Minimum daily budget for the account, in the account currency's major units. This is the impressions-billed minimum; other billing events have higher minimums. Absent when the connected token cannot read it.
+    attr_accessor :minimum_daily_budget
+
     # Meta only. Whether the account can create/run ads now. Absent (treat as true) on non-Meta platforms.
     attr_accessor :selectable
 
@@ -45,6 +48,7 @@ module Zernio
         :'status' => :'status',
         :'timezone_name' => :'timezoneName',
         :'timezone_offset_hours_utc' => :'timezoneOffsetHoursUtc',
+        :'minimum_daily_budget' => :'minimumDailyBudget',
         :'selectable' => :'selectable',
         :'unusable_reason' => :'unusableReason'
       }
@@ -69,6 +73,7 @@ module Zernio
         :'status' => :'String',
         :'timezone_name' => :'String',
         :'timezone_offset_hours_utc' => :'Float',
+        :'minimum_daily_budget' => :'Float',
         :'selectable' => :'Boolean',
         :'unusable_reason' => :'String'
       }
@@ -120,6 +125,10 @@ module Zernio
         self.timezone_offset_hours_utc = attributes[:'timezone_offset_hours_utc']
       end
 
+      if attributes.key?(:'minimum_daily_budget')
+        self.minimum_daily_budget = attributes[:'minimum_daily_budget']
+      end
+
       if attributes.key?(:'selectable')
         self.selectable = attributes[:'selectable']
       end
@@ -155,6 +164,7 @@ module Zernio
           status == o.status &&
           timezone_name == o.timezone_name &&
           timezone_offset_hours_utc == o.timezone_offset_hours_utc &&
+          minimum_daily_budget == o.minimum_daily_budget &&
           selectable == o.selectable &&
           unusable_reason == o.unusable_reason
     end
@@ -168,7 +178,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, currency, status, timezone_name, timezone_offset_hours_utc, selectable, unusable_reason].hash
+      [id, name, currency, status, timezone_name, timezone_offset_hours_utc, minimum_daily_budget, selectable, unusable_reason].hash
     end
 
     # Builds the object from hash

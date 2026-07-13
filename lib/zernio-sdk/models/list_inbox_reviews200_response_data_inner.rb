@@ -33,6 +33,12 @@ module Zernio
 
     attr_accessor :has_reply
 
+    # Whether the review has at least one photo. Google Business only; always false for other platforms.
+    attr_accessor :has_photos
+
+    # Number of photos attached to the review (photos only; videos are not counted). Google Business only; 0 for other platforms.
+    attr_accessor :photo_count
+
     attr_accessor :reply
 
     attr_accessor :review_url
@@ -49,6 +55,8 @@ module Zernio
         :'text' => :'text',
         :'created' => :'created',
         :'has_reply' => :'hasReply',
+        :'has_photos' => :'hasPhotos',
+        :'photo_count' => :'photoCount',
         :'reply' => :'reply',
         :'review_url' => :'reviewUrl'
       }
@@ -76,6 +84,8 @@ module Zernio
         :'text' => :'String',
         :'created' => :'Time',
         :'has_reply' => :'Boolean',
+        :'has_photos' => :'Boolean',
+        :'photo_count' => :'Integer',
         :'reply' => :'ListInboxReviews200ResponseDataInnerReply',
         :'review_url' => :'String'
       }
@@ -140,6 +150,14 @@ module Zernio
         self.has_reply = attributes[:'has_reply']
       end
 
+      if attributes.key?(:'has_photos')
+        self.has_photos = attributes[:'has_photos']
+      end
+
+      if attributes.key?(:'photo_count')
+        self.photo_count = attributes[:'photo_count']
+      end
+
       if attributes.key?(:'reply')
         self.reply = attributes[:'reply']
       end
@@ -178,6 +196,8 @@ module Zernio
           text == o.text &&
           created == o.created &&
           has_reply == o.has_reply &&
+          has_photos == o.has_photos &&
+          photo_count == o.photo_count &&
           reply == o.reply &&
           review_url == o.review_url
     end
@@ -191,7 +211,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, reviewer, rating, text, created, has_reply, reply, review_url].hash
+      [id, platform, account_id, account_username, reviewer, rating, text, created, has_reply, has_photos, photo_count, reply, review_url].hash
     end
 
     # Builds the object from hash
