@@ -25,10 +25,7 @@ module Zernio
     # Whether the team currently has a card on file in Stripe. Set when reason=free_tier_exceeded or reason=twitter_passthrough.
     attr_accessor :has_payment_method
 
-    # Public pricing ceiling (the published cap beyond which an enterprise contract is required). Only set when reason=enterprise_required.
-    attr_accessor :public_account_limit
-
-    # The cap actually applied to this team. Equals `public_account_limit` for organic teams; for teams with a per-customer override (grandfathered legacy customers, signed enterprise contracts) this can be higher. Only set when reason=enterprise_required. 
+    # The negotiated connected-account cap from the team's enterprise contract. Self-service teams have no cap and never receive this reason. Only set when reason=enterprise_required. 
     attr_accessor :effective_account_limit
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -37,7 +34,6 @@ module Zernio
         :'free_tier_account_limit' => :'free_tier_account_limit',
         :'current_account_count' => :'current_account_count',
         :'has_payment_method' => :'has_payment_method',
-        :'public_account_limit' => :'public_account_limit',
         :'effective_account_limit' => :'effective_account_limit'
       }
     end
@@ -58,7 +54,6 @@ module Zernio
         :'free_tier_account_limit' => :'Integer',
         :'current_account_count' => :'Integer',
         :'has_payment_method' => :'Boolean',
-        :'public_account_limit' => :'Integer',
         :'effective_account_limit' => :'Integer'
       }
     end
@@ -97,10 +92,6 @@ module Zernio
         self.has_payment_method = attributes[:'has_payment_method']
       end
 
-      if attributes.key?(:'public_account_limit')
-        self.public_account_limit = attributes[:'public_account_limit']
-      end
-
       if attributes.key?(:'effective_account_limit')
         self.effective_account_limit = attributes[:'effective_account_limit']
       end
@@ -129,7 +120,6 @@ module Zernio
           free_tier_account_limit == o.free_tier_account_limit &&
           current_account_count == o.current_account_count &&
           has_payment_method == o.has_payment_method &&
-          public_account_limit == o.public_account_limit &&
           effective_account_limit == o.effective_account_limit
     end
 
@@ -142,7 +132,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [free_tier_account_limit, current_account_count, has_payment_method, public_account_limit, effective_account_limit].hash
+      [free_tier_account_limit, current_account_count, has_payment_method, effective_account_limit].hash
     end
 
     # Builds the object from hash
