@@ -298,6 +298,32 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for get_dsa_defaults
+  # Get ad account DSA defaults
+  # Returns the default DSA beneficiary and payor currently set on a Meta ad account, whether they were set via &#x60;PATCH /v1/ads/accounts&#x60; or in Meta Ads Manager. Fields are omitted when no default is configured. Meta accounts only. 
+  # @param account_id Social account ID (metaads, or a facebook/instagram posting account)
+  # @param ad_account_id Meta ad account ID (act_...)
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdAccount200Response]
+  describe 'get_dsa_defaults test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_dsa_recommendations
+  # List DSA beneficiary/payor suggestions
+  # Returns Meta&#39;s suggested beneficiary/payor names for an ad account, derived by Meta from the account&#39;s recent activity. Useful for prefilling &#x60;dsaBeneficiary&#x60;/&#x60;dsaPayor&#x60; inputs, or the defaults sent to &#x60;PATCH /v1/ads/accounts&#x60;, in your own UI.  Meta returns a single flat list. Entries are not labeled as beneficiary or payor, and since these are legal disclosures Zernio never applies them automatically: let your user pick the right entity. The list may be empty for accounts with little activity. Meta accounts only. 
+  # @param account_id Social account ID (metaads, or a facebook/instagram posting account)
+  # @param ad_account_id Meta ad account ID (act_...)
+  # @param [Hash] opts the optional parameters
+  # @return [GetDsaRecommendations200Response]
+  describe 'get_dsa_recommendations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_lead_form
   # Get a lead form
   # @param form_id 
@@ -549,6 +575,18 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAd200Response]
   describe 'update_ad test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_account
+  # Update ad account settings
+  # Sets the default DSA beneficiary and payor on a Meta ad account (EU DSA, Article 26). Set them once and every EU-targeted call to &#x60;/v1/ads/create&#x60;, &#x60;/v1/ads/boost&#x60; and &#x60;/v1/ads/ctwa&#x60; on that ad account can omit &#x60;dsaBeneficiary&#x60;/&#x60;dsaPayor&#x60;: Meta applies the defaults automatically.  The values are written to the ad account on Meta, the same setting Ads Manager edits. Nothing is stored in Zernio, and defaults already set in Ads Manager work identically. Zernio never guesses these values for you. Beneficiary and payor are legal disclosures shown to EU users, so you must provide the entity names explicitly. Use &#x60;GET /v1/ads/dsa-recommendations&#x60; to offer suggestions in your UI.  If &#x60;defaultDsaPayor&#x60; is omitted, the beneficiary is also set as the payor, which covers the common case where the same entity benefits from and pays for the ads. Read the current values back with &#x60;GET /v1/ads/dsa-defaults&#x60;.  Currently supported for Meta accounts only; other platforms return 400. 
+  # @param update_ad_account_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdAccount200Response]
+  describe 'update_ad_account test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -126,6 +126,8 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination
 *Zernio::AdsApi* | [**get_conversion_metrics**](docs/AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics
 *Zernio::AdsApi* | [**get_conversions_quality**](docs/AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Get Event Match Quality
+*Zernio::AdsApi* | [**get_dsa_defaults**](docs/AdsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults
+*Zernio::AdsApi* | [**get_dsa_recommendations**](docs/AdsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions
 *Zernio::AdsApi* | [**get_lead_form**](docs/AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a lead form
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ad_catalog_product_sets**](docs/AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog's product sets
@@ -144,6 +146,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
+*Zernio::AdsApi* | [**update_ad_account**](docs/AdsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
 *Zernio::AdsApi* | [**update_ad_status**](docs/AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
 *Zernio::AdsApi* | [**update_ad_tracking_tags**](docs/AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags
 *Zernio::AdsApi* | [**update_conversion_destination**](docs/AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
@@ -946,6 +949,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetDiscordChannels200ResponseChannelsInner](docs/GetDiscordChannels200ResponseChannelsInner.md)
  - [Zernio::GetDiscordSettings200Response](docs/GetDiscordSettings200Response.md)
  - [Zernio::GetDiscordSettings200ResponseAccount](docs/GetDiscordSettings200ResponseAccount.md)
+ - [Zernio::GetDsaRecommendations200Response](docs/GetDsaRecommendations200Response.md)
  - [Zernio::GetFacebookPages200Response](docs/GetFacebookPages200Response.md)
  - [Zernio::GetFacebookPages200ResponsePagesInner](docs/GetFacebookPages200ResponsePagesInner.md)
  - [Zernio::GetFacebookPostReactions200Response](docs/GetFacebookPostReactions200Response.md)
@@ -1626,6 +1630,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAccountRequest](docs/UpdateAccountRequest.md)
  - [Zernio::UpdateAccountRequestXCapabilities](docs/UpdateAccountRequestXCapabilities.md)
  - [Zernio::UpdateAd200Response](docs/UpdateAd200Response.md)
+ - [Zernio::UpdateAdAccount200Response](docs/UpdateAdAccount200Response.md)
+ - [Zernio::UpdateAdAccount200ResponseDsaDefaults](docs/UpdateAdAccount200ResponseDsaDefaults.md)
+ - [Zernio::UpdateAdAccountRequest](docs/UpdateAdAccountRequest.md)
  - [Zernio::UpdateAdAudienceRequest](docs/UpdateAdAudienceRequest.md)
  - [Zernio::UpdateAdCampaign200Response](docs/UpdateAdCampaign200Response.md)
  - [Zernio::UpdateAdCampaignRequest](docs/UpdateAdCampaignRequest.md)

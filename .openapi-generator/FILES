@@ -440,6 +440,7 @@ docs/GetDiscordChannels200Response.md
 docs/GetDiscordChannels200ResponseChannelsInner.md
 docs/GetDiscordSettings200Response.md
 docs/GetDiscordSettings200ResponseAccount.md
+docs/GetDsaRecommendations200Response.md
 docs/GetFacebookPages200Response.md
 docs/GetFacebookPages200ResponsePagesInner.md
 docs/GetFacebookPostReactions200Response.md
@@ -1138,6 +1139,9 @@ docs/UpdateAccountGroupRequest.md
 docs/UpdateAccountRequest.md
 docs/UpdateAccountRequestXCapabilities.md
 docs/UpdateAd200Response.md
+docs/UpdateAdAccount200Response.md
+docs/UpdateAdAccount200ResponseDsaDefaults.md
+docs/UpdateAdAccountRequest.md
 docs/UpdateAdAudienceRequest.md
 docs/UpdateAdCampaign200Response.md
 docs/UpdateAdCampaignRequest.md
@@ -1881,6 +1885,7 @@ lib/zernio-sdk/models/get_discord_channels200_response.rb
 lib/zernio-sdk/models/get_discord_channels200_response_channels_inner.rb
 lib/zernio-sdk/models/get_discord_settings200_response.rb
 lib/zernio-sdk/models/get_discord_settings200_response_account.rb
+lib/zernio-sdk/models/get_dsa_recommendations200_response.rb
 lib/zernio-sdk/models/get_facebook_pages200_response.rb
 lib/zernio-sdk/models/get_facebook_pages200_response_pages_inner.rb
 lib/zernio-sdk/models/get_facebook_post_reactions200_response.rb
@@ -2561,6 +2566,9 @@ lib/zernio-sdk/models/update_account_group_request.rb
 lib/zernio-sdk/models/update_account_request.rb
 lib/zernio-sdk/models/update_account_request_x_capabilities.rb
 lib/zernio-sdk/models/update_ad200_response.rb
+lib/zernio-sdk/models/update_ad_account200_response.rb
+lib/zernio-sdk/models/update_ad_account200_response_dsa_defaults.rb
+lib/zernio-sdk/models/update_ad_account_request.rb
 lib/zernio-sdk/models/update_ad_audience_request.rb
 lib/zernio-sdk/models/update_ad_campaign200_response.rb
 lib/zernio-sdk/models/update_ad_campaign_request.rb
@@ -3285,6 +3293,7 @@ spec/models/get_discord_channels200_response_channels_inner_spec.rb
 spec/models/get_discord_channels200_response_spec.rb
 spec/models/get_discord_settings200_response_account_spec.rb
 spec/models/get_discord_settings200_response_spec.rb
+spec/models/get_dsa_recommendations200_response_spec.rb
 spec/models/get_facebook_pages200_response_pages_inner_spec.rb
 spec/models/get_facebook_pages200_response_spec.rb
 spec/models/get_facebook_post_reactions200_response_breakdown_spec.rb
@@ -3965,6 +3974,9 @@ spec/models/update_account_group_request_spec.rb
 spec/models/update_account_request_spec.rb
 spec/models/update_account_request_x_capabilities_spec.rb
 spec/models/update_ad200_response_spec.rb
+spec/models/update_ad_account200_response_dsa_defaults_spec.rb
+spec/models/update_ad_account200_response_spec.rb
+spec/models/update_ad_account_request_spec.rb
 spec/models/update_ad_audience_request_spec.rb
 spec/models/update_ad_campaign200_response_spec.rb
 spec/models/update_ad_campaign_request_budget_spec.rb

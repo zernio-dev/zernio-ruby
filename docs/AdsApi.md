@@ -24,6 +24,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_conversion_destination**](AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination |
 | [**get_conversion_metrics**](AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics |
 | [**get_conversions_quality**](AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Get Event Match Quality |
+| [**get_dsa_defaults**](AdsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults |
+| [**get_dsa_recommendations**](AdsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions |
 | [**get_lead_form**](AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a lead form |
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_catalog_product_sets**](AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog&#39;s product sets |
@@ -42,6 +44,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**send_conversions**](AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events |
 | [**send_whats_app_conversion**](AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
+| [**update_ad_account**](AdsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings |
 | [**update_ad_status**](AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
 | [**update_ad_tracking_tags**](AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags |
 | [**update_conversion_destination**](AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination |
@@ -1490,6 +1493,148 @@ end
 - **Accept**: application/json
 
 
+## get_dsa_defaults
+
+> <UpdateAdAccount200Response> get_dsa_defaults(account_id, ad_account_id)
+
+Get ad account DSA defaults
+
+Returns the default DSA beneficiary and payor currently set on a Meta ad account, whether they were set via `PATCH /v1/ads/accounts` or in Meta Ads Manager. Fields are omitted when no default is configured. Meta accounts only. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Social account ID (metaads, or a facebook/instagram posting account)
+ad_account_id = 'ad_account_id_example' # String | Meta ad account ID (act_...)
+
+begin
+  # Get ad account DSA defaults
+  result = api_instance.get_dsa_defaults(account_id, ad_account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_dsa_defaults: #{e}"
+end
+```
+
+#### Using the get_dsa_defaults_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAdAccount200Response>, Integer, Hash)> get_dsa_defaults_with_http_info(account_id, ad_account_id)
+
+```ruby
+begin
+  # Get ad account DSA defaults
+  data, status_code, headers = api_instance.get_dsa_defaults_with_http_info(account_id, ad_account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAdAccount200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_dsa_defaults_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Social account ID (metaads, or a facebook/instagram posting account) |  |
+| **ad_account_id** | **String** | Meta ad account ID (act_...) |  |
+
+### Return type
+
+[**UpdateAdAccount200Response**](UpdateAdAccount200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_dsa_recommendations
+
+> <GetDsaRecommendations200Response> get_dsa_recommendations(account_id, ad_account_id)
+
+List DSA beneficiary/payor suggestions
+
+Returns Meta's suggested beneficiary/payor names for an ad account, derived by Meta from the account's recent activity. Useful for prefilling `dsaBeneficiary`/`dsaPayor` inputs, or the defaults sent to `PATCH /v1/ads/accounts`, in your own UI.  Meta returns a single flat list. Entries are not labeled as beneficiary or payor, and since these are legal disclosures Zernio never applies them automatically: let your user pick the right entity. The list may be empty for accounts with little activity. Meta accounts only. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Social account ID (metaads, or a facebook/instagram posting account)
+ad_account_id = 'ad_account_id_example' # String | Meta ad account ID (act_...)
+
+begin
+  # List DSA beneficiary/payor suggestions
+  result = api_instance.get_dsa_recommendations(account_id, ad_account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_dsa_recommendations: #{e}"
+end
+```
+
+#### Using the get_dsa_recommendations_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetDsaRecommendations200Response>, Integer, Hash)> get_dsa_recommendations_with_http_info(account_id, ad_account_id)
+
+```ruby
+begin
+  # List DSA beneficiary/payor suggestions
+  data, status_code, headers = api_instance.get_dsa_recommendations_with_http_info(account_id, ad_account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetDsaRecommendations200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_dsa_recommendations_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Social account ID (metaads, or a facebook/instagram posting account) |  |
+| **ad_account_id** | **String** | Meta ad account ID (act_...) |  |
+
+### Return type
+
+[**GetDsaRecommendations200Response**](GetDsaRecommendations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_lead_form
 
 > <GetLeadForm200Response> get_lead_form(form_id, account_id)
@@ -2815,6 +2960,75 @@ end
 ### Return type
 
 [**UpdateAd200Response**](UpdateAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ad_account
+
+> <UpdateAdAccount200Response> update_ad_account(update_ad_account_request)
+
+Update ad account settings
+
+Sets the default DSA beneficiary and payor on a Meta ad account (EU DSA, Article 26). Set them once and every EU-targeted call to `/v1/ads/create`, `/v1/ads/boost` and `/v1/ads/ctwa` on that ad account can omit `dsaBeneficiary`/`dsaPayor`: Meta applies the defaults automatically.  The values are written to the ad account on Meta, the same setting Ads Manager edits. Nothing is stored in Zernio, and defaults already set in Ads Manager work identically. Zernio never guesses these values for you. Beneficiary and payor are legal disclosures shown to EU users, so you must provide the entity names explicitly. Use `GET /v1/ads/dsa-recommendations` to offer suggestions in your UI.  If `defaultDsaPayor` is omitted, the beneficiary is also set as the payor, which covers the common case where the same entity benefits from and pays for the ads. Read the current values back with `GET /v1/ads/dsa-defaults`.  Currently supported for Meta accounts only; other platforms return 400. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+update_ad_account_request = Zernio::UpdateAdAccountRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', default_dsa_beneficiary: 'default_dsa_beneficiary_example'}) # UpdateAdAccountRequest | 
+
+begin
+  # Update ad account settings
+  result = api_instance.update_ad_account(update_ad_account_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->update_ad_account: #{e}"
+end
+```
+
+#### Using the update_ad_account_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAdAccount200Response>, Integer, Hash)> update_ad_account_with_http_info(update_ad_account_request)
+
+```ruby
+begin
+  # Update ad account settings
+  data, status_code, headers = api_instance.update_ad_account_with_http_info(update_ad_account_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAdAccount200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->update_ad_account_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_ad_account_request** | [**UpdateAdAccountRequest**](UpdateAdAccountRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAdAccount200Response**](UpdateAdAccount200Response.md)
 
 ### Authorization
 
