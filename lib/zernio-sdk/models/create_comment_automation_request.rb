@@ -49,6 +49,12 @@ module Zernio
     # Optional public reply to the comment
     attr_accessor :comment_reply
 
+    # Optional alternate DM texts for random rotation. When set, each triggered comment sends one picked at random from [dmMessage, ...dmMessageVariations], so repeat commenters get slightly different DMs (helps avoid identical-message patterns). Up to 5. Buttons are attached to whichever text is picked, not varied.
+    attr_accessor :dm_message_variations
+
+    # Optional alternate public replies, rotated at random alongside commentReply (picked independently of the DM). Up to 5.
+    attr_accessor :comment_reply_variations
+
     # Wrap link buttons in the DM in a tracked redirect so clicks are counted (Link Clicks / CTR). Pass false to send links exactly as written. Defaults to on.
     attr_accessor :link_tracking
 
@@ -92,6 +98,8 @@ module Zernio
         :'dm_message' => :'dmMessage',
         :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
+        :'dm_message_variations' => :'dmMessageVariations',
+        :'comment_reply_variations' => :'commentReplyVariations',
         :'link_tracking' => :'linkTracking',
         :'click_tag' => :'clickTag'
       }
@@ -122,6 +130,8 @@ module Zernio
         :'dm_message' => :'String',
         :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
+        :'dm_message_variations' => :'Array<String>',
+        :'comment_reply_variations' => :'Array<String>',
         :'link_tracking' => :'Boolean',
         :'click_tag' => :'String'
       }
@@ -213,6 +223,18 @@ module Zernio
         self.comment_reply = attributes[:'comment_reply']
       end
 
+      if attributes.key?(:'dm_message_variations')
+        if (value = attributes[:'dm_message_variations']).is_a?(Array)
+          self.dm_message_variations = value
+        end
+      end
+
+      if attributes.key?(:'comment_reply_variations')
+        if (value = attributes[:'comment_reply_variations']).is_a?(Array)
+          self.comment_reply_variations = value
+        end
+      end
+
       if attributes.key?(:'link_tracking')
         self.link_tracking = attributes[:'link_tracking']
       else
@@ -249,6 +271,14 @@ module Zernio
         invalid_properties.push('invalid value for "buttons", number of items must be less than or equal to 3.')
       end
 
+      if !@dm_message_variations.nil? && @dm_message_variations.length > 5
+        invalid_properties.push('invalid value for "dm_message_variations", number of items must be less than or equal to 5.')
+      end
+
+      if !@comment_reply_variations.nil? && @comment_reply_variations.length > 5
+        invalid_properties.push('invalid value for "comment_reply_variations", number of items must be less than or equal to 5.')
+      end
+
       invalid_properties
     end
 
@@ -265,6 +295,8 @@ module Zernio
       return false unless match_mode_validator.valid?(@match_mode)
       return false if @dm_message.nil?
       return false if !@buttons.nil? && @buttons.length > 3
+      return false if !@dm_message_variations.nil? && @dm_message_variations.length > 5
+      return false if !@comment_reply_variations.nil? && @comment_reply_variations.length > 5
       true
     end
 
@@ -342,6 +374,34 @@ module Zernio
       @buttons = buttons
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] dm_message_variations Value to be assigned
+    def dm_message_variations=(dm_message_variations)
+      if dm_message_variations.nil?
+        fail ArgumentError, 'dm_message_variations cannot be nil'
+      end
+
+      if dm_message_variations.length > 5
+        fail ArgumentError, 'invalid value for "dm_message_variations", number of items must be less than or equal to 5.'
+      end
+
+      @dm_message_variations = dm_message_variations
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] comment_reply_variations Value to be assigned
+    def comment_reply_variations=(comment_reply_variations)
+      if comment_reply_variations.nil?
+        fail ArgumentError, 'comment_reply_variations cannot be nil'
+      end
+
+      if comment_reply_variations.length > 5
+        fail ArgumentError, 'invalid value for "comment_reply_variations", number of items must be less than or equal to 5.'
+      end
+
+      @comment_reply_variations = comment_reply_variations
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -359,6 +419,8 @@ module Zernio
           dm_message == o.dm_message &&
           buttons == o.buttons &&
           comment_reply == o.comment_reply &&
+          dm_message_variations == o.dm_message_variations &&
+          comment_reply_variations == o.comment_reply_variations &&
           link_tracking == o.link_tracking &&
           click_tag == o.click_tag
     end
@@ -372,7 +434,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, click_tag].hash
+      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag].hash
     end
 
     # Builds the object from hash

@@ -30,6 +30,12 @@ module Zernio
 
     attr_accessor :comment_reply
 
+    # Alternate DM texts rotated at random with dmMessage. Omitted when none.
+    attr_accessor :dm_message_variations
+
+    # Alternate public replies rotated at random with commentReply. Omitted when none.
+    attr_accessor :comment_reply_variations
+
     attr_accessor :is_active
 
     attr_accessor :updated_at
@@ -66,6 +72,8 @@ module Zernio
         :'dm_message' => :'dmMessage',
         :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
+        :'dm_message_variations' => :'dmMessageVariations',
+        :'comment_reply_variations' => :'commentReplyVariations',
         :'is_active' => :'isActive',
         :'updated_at' => :'updatedAt'
       }
@@ -91,6 +99,8 @@ module Zernio
         :'dm_message' => :'String',
         :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
+        :'dm_message_variations' => :'Array<String>',
+        :'comment_reply_variations' => :'Array<String>',
         :'is_active' => :'Boolean',
         :'updated_at' => :'Time'
       }
@@ -150,6 +160,18 @@ module Zernio
         self.comment_reply = attributes[:'comment_reply']
       end
 
+      if attributes.key?(:'dm_message_variations')
+        if (value = attributes[:'dm_message_variations']).is_a?(Array)
+          self.dm_message_variations = value
+        end
+      end
+
+      if attributes.key?(:'comment_reply_variations')
+        if (value = attributes[:'comment_reply_variations']).is_a?(Array)
+          self.comment_reply_variations = value
+        end
+      end
+
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
       end
@@ -198,6 +220,8 @@ module Zernio
           dm_message == o.dm_message &&
           buttons == o.buttons &&
           comment_reply == o.comment_reply &&
+          dm_message_variations == o.dm_message_variations &&
+          comment_reply_variations == o.comment_reply_variations &&
           is_active == o.is_active &&
           updated_at == o.updated_at
     end
@@ -211,7 +235,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, keywords, match_mode, dm_message, buttons, comment_reply, is_active, updated_at].hash
+      [id, name, keywords, match_mode, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, is_active, updated_at].hash
     end
 
     # Builds the object from hash

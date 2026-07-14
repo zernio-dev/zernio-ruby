@@ -40,6 +40,12 @@ module Zernio
 
     attr_accessor :comment_reply
 
+    # Alternate DM texts rotated at random with dmMessage. Omitted when none.
+    attr_accessor :dm_message_variations
+
+    # Alternate public replies rotated at random with commentReply. Omitted when none.
+    attr_accessor :comment_reply_variations
+
     # Whether link buttons in the DM are wrapped in a tracked redirect to count clicks.
     attr_accessor :link_tracking
 
@@ -89,6 +95,8 @@ module Zernio
         :'dm_message' => :'dmMessage',
         :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
+        :'dm_message_variations' => :'dmMessageVariations',
+        :'comment_reply_variations' => :'commentReplyVariations',
         :'link_tracking' => :'linkTracking',
         :'click_tag' => :'clickTag',
         :'is_active' => :'isActive',
@@ -122,6 +130,8 @@ module Zernio
         :'dm_message' => :'String',
         :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
+        :'dm_message_variations' => :'Array<String>',
+        :'comment_reply_variations' => :'Array<String>',
         :'link_tracking' => :'Boolean',
         :'click_tag' => :'String',
         :'is_active' => :'Boolean',
@@ -202,6 +212,18 @@ module Zernio
 
       if attributes.key?(:'comment_reply')
         self.comment_reply = attributes[:'comment_reply']
+      end
+
+      if attributes.key?(:'dm_message_variations')
+        if (value = attributes[:'dm_message_variations']).is_a?(Array)
+          self.dm_message_variations = value
+        end
+      end
+
+      if attributes.key?(:'comment_reply_variations')
+        if (value = attributes[:'comment_reply_variations']).is_a?(Array)
+          self.comment_reply_variations = value
+        end
       end
 
       if attributes.key?(:'link_tracking')
@@ -293,6 +315,8 @@ module Zernio
           dm_message == o.dm_message &&
           buttons == o.buttons &&
           comment_reply == o.comment_reply &&
+          dm_message_variations == o.dm_message_variations &&
+          comment_reply_variations == o.comment_reply_variations &&
           link_tracking == o.link_tracking &&
           click_tag == o.click_tag &&
           is_active == o.is_active &&
@@ -309,7 +333,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, trigger, account_id, platform_post_id, post_title, keywords, match_mode, dm_message, buttons, comment_reply, link_tracking, click_tag, is_active, stats, created_at].hash
+      [id, name, platform, trigger, account_id, platform_post_id, post_title, keywords, match_mode, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, is_active, stats, created_at].hash
     end
 
     # Builds the object from hash
