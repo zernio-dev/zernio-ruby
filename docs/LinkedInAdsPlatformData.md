@@ -15,7 +15,9 @@
 | **document** | [**LinkedInAdsPlatformDataDocument**](LinkedInAdsPlatformDataDocument.md) |  | [optional] |
 | **spotlight** | [**LinkedInAdsPlatformDataSpotlight**](LinkedInAdsPlatformDataSpotlight.md) |  | [optional] |
 | **follower** | [**LinkedInAdsPlatformDataFollower**](LinkedInAdsPlatformDataFollower.md) |  | [optional] |
+| **jobs** | [**LinkedInAdsPlatformDataJobs**](LinkedInAdsPlatformDataJobs.md) |  | [optional] |
 | **text_ad** | [**LinkedInAdsPlatformDataTextAd**](LinkedInAdsPlatformDataTextAd.md) |  | [optional] |
+| **conversation** | [**LinkedInAdsPlatformDataConversation**](LinkedInAdsPlatformDataConversation.md) |  | [optional] |
 | **event** | [**LinkedInAdsPlatformDataEvent**](LinkedInAdsPlatformDataEvent.md) |  | [optional] |
 
 ## Example
@@ -35,7 +37,9 @@ instance = Zernio::LinkedInAdsPlatformData.new(
   document: null,
   spotlight: null,
   follower: null,
+  jobs: null,
   text_ad: null,
+  conversation: null,
   event: null
 )
 ```

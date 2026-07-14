@@ -45,7 +45,11 @@ module Zernio
 
     attr_accessor :follower
 
+    attr_accessor :jobs
+
     attr_accessor :text_ad
+
+    attr_accessor :conversation
 
     attr_accessor :event
 
@@ -85,7 +89,9 @@ module Zernio
         :'document' => :'document',
         :'spotlight' => :'spotlight',
         :'follower' => :'follower',
+        :'jobs' => :'jobs',
         :'text_ad' => :'textAd',
+        :'conversation' => :'conversation',
         :'event' => :'event'
       }
     end
@@ -114,7 +120,9 @@ module Zernio
         :'document' => :'LinkedInAdsPlatformDataDocument',
         :'spotlight' => :'LinkedInAdsPlatformDataSpotlight',
         :'follower' => :'LinkedInAdsPlatformDataFollower',
+        :'jobs' => :'LinkedInAdsPlatformDataJobs',
         :'text_ad' => :'LinkedInAdsPlatformDataTextAd',
+        :'conversation' => :'LinkedInAdsPlatformDataConversation',
         :'event' => :'LinkedInAdsPlatformDataEvent'
       }
     end
@@ -185,8 +193,16 @@ module Zernio
         self.follower = attributes[:'follower']
       end
 
+      if attributes.key?(:'jobs')
+        self.jobs = attributes[:'jobs']
+      end
+
       if attributes.key?(:'text_ad')
         self.text_ad = attributes[:'text_ad']
+      end
+
+      if attributes.key?(:'conversation')
+        self.conversation = attributes[:'conversation']
       end
 
       if attributes.key?(:'event')
@@ -249,7 +265,9 @@ module Zernio
           document == o.document &&
           spotlight == o.spotlight &&
           follower == o.follower &&
+          jobs == o.jobs &&
           text_ad == o.text_ad &&
+          conversation == o.conversation &&
           event == o.event
     end
 
@@ -262,7 +280,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [cost_type, unit_cost, optimization_target_type, creative_selection, audience_expansion_enabled, offsite_delivery_enabled, connected_television_only, carousel, document, spotlight, follower, text_ad, event].hash
+      [cost_type, unit_cost, optimization_target_type, creative_selection, audience_expansion_enabled, offsite_delivery_enabled, connected_television_only, carousel, document, spotlight, follower, jobs, text_ad, conversation, event].hash
     end
 
     # Builds the object from hash

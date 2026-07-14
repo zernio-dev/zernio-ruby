@@ -347,7 +347,7 @@ module Zernio
       return false unless platform_validator.valid?(@platform)
       ad_type_validator = EnumAttributeValidator.new('String', ["boost", "standalone"])
       return false unless ad_type_validator.valid?(@ad_type)
-      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales"])
+      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "job_applicants"])
       return false unless goal_validator.valid?(@goal)
       true
     end
@@ -375,7 +375,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] goal Object to be assigned
     def goal=(goal)
-      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales"])
+      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "job_applicants"])
       unless validator.valid?(goal)
         fail ArgumentError, "invalid value for \"goal\", must be one of #{validator.allowable_values}."
       end
