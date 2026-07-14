@@ -54,10 +54,48 @@ describe Zernio::UploadedOrDerivedAudience do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["customer_list", "website", "lookalike"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "lookalike"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "source_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["VIDEO_ADS", "LEAD_GEN_FORMS", "ORGANIZATION_PAGES", "EVENT_PAGES", "SINGLE_IMAGE_ADS"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.source_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "trigger"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "lookback_days"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Integer', [30, 60, 90, 180, 365])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.lookback_days = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "engagement_sources"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "companies"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 

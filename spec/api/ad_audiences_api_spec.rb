@@ -88,7 +88,7 @@ describe 'AdAudiencesApi' do
   # @param ad_account_id Platform ad account ID
   # @param [Hash] opts the optional parameters
   # @option opts [String] :platform 
-  # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences.
+  # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences; the other types return uploaded/derived audiences.
   # @return [ListAdAudiences200Response]
   describe 'list_ad_audiences test' do
     it 'should work' do

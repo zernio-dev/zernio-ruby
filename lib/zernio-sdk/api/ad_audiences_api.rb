@@ -293,7 +293,7 @@ module Zernio
     # @param ad_account_id [String] Platform ad account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform 
-    # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences.
+    # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences; the other types return uploaded/derived audiences.
     # @return [ListAdAudiences200Response]
     def list_ad_audiences(account_id, ad_account_id, opts = {})
       data, _status_code, _headers = list_ad_audiences_with_http_info(account_id, ad_account_id, opts)
@@ -306,7 +306,7 @@ module Zernio
     # @param ad_account_id [String] Platform ad account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :platform 
-    # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences.
+    # @option opts [String] :type Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences; the other types return uploaded/derived audiences.
     # @return [Array<(ListAdAudiences200Response, Integer, Hash)>] ListAdAudiences200Response data, response status code and response headers
     def list_ad_audiences_with_http_info(account_id, ad_account_id, opts = {})
       if @api_client.config.debugging
@@ -324,7 +324,7 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
-      allowable_values = ["customer_list", "website", "lookalike", "saved_targeting"]
+      allowable_values = ["customer_list", "company_list", "engagement", "website", "lookalike", "saved_targeting"]
       if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
         fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
       end

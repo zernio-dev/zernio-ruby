@@ -27,6 +27,21 @@ module Zernio
 
     attr_accessor :type
 
+    # Required for engagement audiences (LinkedIn only): what members engaged with — a video/leadgen/single-image ad campaign, a Company Page or an Event page. 
+    attr_accessor :source_type
+
+    # Required for engagement audiences. The action, validated by LinkedIn against `sourceType`. Common values: VIDEO_ADS FIRST_QUARTILE / MIDPOINT / THIRD_QUARTILE / FULL_COMPLETE; LEAD_GEN_FORMS VIEW_FORM / LEAD_FORM_SUBMIT; ORGANIZATION_PAGES VIEW / CTA_CLICK; EVENT_PAGES RSVPED / VIDEO_VIEWED / ENGAGEMENT / CLICK. 
+    attr_accessor :trigger
+
+    # Required for engagement audiences. Rolling window.
+    attr_accessor :lookback_days
+
+    # Required for engagement audiences. Campaign URNs for the ad source types, organization URNs for pages and events. LinkedIn creates one rule per source, all sharing the same trigger and lookbackDays. 
+    attr_accessor :engagement_sources
+
+    # Required for company_list audiences (LinkedIn only): plain-text company rows for account targeting. Each row needs at least one identifier. LinkedIn recommends 1,000+ companies for a usable match rate and takes up to 48h to process the list. 
+    attr_accessor :companies
+
     # Required for website audiences
     attr_accessor :pixel_id
 
@@ -78,6 +93,11 @@ module Zernio
         :'name' => :'name',
         :'description' => :'description',
         :'type' => :'type',
+        :'source_type' => :'sourceType',
+        :'trigger' => :'trigger',
+        :'lookback_days' => :'lookbackDays',
+        :'engagement_sources' => :'engagementSources',
+        :'companies' => :'companies',
         :'pixel_id' => :'pixelId',
         :'retention_days' => :'retentionDays',
         :'source_audience_id' => :'sourceAudienceId',
@@ -106,6 +126,11 @@ module Zernio
         :'name' => :'String',
         :'description' => :'String',
         :'type' => :'String',
+        :'source_type' => :'String',
+        :'trigger' => :'String',
+        :'lookback_days' => :'Integer',
+        :'engagement_sources' => :'Array<String>',
+        :'companies' => :'Array<UploadedOrDerivedAudienceCompaniesInner>',
         :'pixel_id' => :'String',
         :'retention_days' => :'Integer',
         :'source_audience_id' => :'String',
@@ -166,6 +191,30 @@ module Zernio
         self.type = nil
       end
 
+      if attributes.key?(:'source_type')
+        self.source_type = attributes[:'source_type']
+      end
+
+      if attributes.key?(:'trigger')
+        self.trigger = attributes[:'trigger']
+      end
+
+      if attributes.key?(:'lookback_days')
+        self.lookback_days = attributes[:'lookback_days']
+      end
+
+      if attributes.key?(:'engagement_sources')
+        if (value = attributes[:'engagement_sources']).is_a?(Array)
+          self.engagement_sources = value
+        end
+      end
+
+      if attributes.key?(:'companies')
+        if (value = attributes[:'companies']).is_a?(Array)
+          self.companies = value
+        end
+      end
+
       if attributes.key?(:'pixel_id')
         self.pixel_id = attributes[:'pixel_id']
       end
@@ -220,6 +269,22 @@ module Zernio
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
+      if !@engagement_sources.nil? && @engagement_sources.length > 50
+        invalid_properties.push('invalid value for "engagement_sources", number of items must be less than or equal to 50.')
+      end
+
+      if !@engagement_sources.nil? && @engagement_sources.length < 1
+        invalid_properties.push('invalid value for "engagement_sources", number of items must be greater than or equal to 1.')
+      end
+
+      if !@companies.nil? && @companies.length > 300000
+        invalid_properties.push('invalid value for "companies", number of items must be less than or equal to 300000.')
+      end
+
+      if !@companies.nil? && @companies.length < 1
+        invalid_properties.push('invalid value for "companies", number of items must be greater than or equal to 1.')
+      end
+
       if !@retention_days.nil? && @retention_days > 180
         invalid_properties.push('invalid value for "retention_days", must be smaller than or equal to 180.')
       end
@@ -248,8 +313,16 @@ module Zernio
       return false if @name.nil?
       return false if @name.to_s.length > 255
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["customer_list", "website", "lookalike"])
+      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "lookalike"])
       return false unless type_validator.valid?(@type)
+      source_type_validator = EnumAttributeValidator.new('String', ["VIDEO_ADS", "LEAD_GEN_FORMS", "ORGANIZATION_PAGES", "EVENT_PAGES", "SINGLE_IMAGE_ADS"])
+      return false unless source_type_validator.valid?(@source_type)
+      lookback_days_validator = EnumAttributeValidator.new('Integer', [30, 60, 90, 180, 365])
+      return false unless lookback_days_validator.valid?(@lookback_days)
+      return false if !@engagement_sources.nil? && @engagement_sources.length > 50
+      return false if !@engagement_sources.nil? && @engagement_sources.length < 1
+      return false if !@companies.nil? && @companies.length > 300000
+      return false if !@companies.nil? && @companies.length < 1
       return false if !@retention_days.nil? && @retention_days > 180
       return false if !@retention_days.nil? && @retention_days < 1
       return false if !@ratio.nil? && @ratio > 0.2
@@ -294,11 +367,67 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["customer_list", "website", "lookalike"])
+      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "lookalike"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source_type Object to be assigned
+    def source_type=(source_type)
+      validator = EnumAttributeValidator.new('String', ["VIDEO_ADS", "LEAD_GEN_FORMS", "ORGANIZATION_PAGES", "EVENT_PAGES", "SINGLE_IMAGE_ADS"])
+      unless validator.valid?(source_type)
+        fail ArgumentError, "invalid value for \"source_type\", must be one of #{validator.allowable_values}."
+      end
+      @source_type = source_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] lookback_days Object to be assigned
+    def lookback_days=(lookback_days)
+      validator = EnumAttributeValidator.new('Integer', [30, 60, 90, 180, 365])
+      unless validator.valid?(lookback_days)
+        fail ArgumentError, "invalid value for \"lookback_days\", must be one of #{validator.allowable_values}."
+      end
+      @lookback_days = lookback_days
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] engagement_sources Value to be assigned
+    def engagement_sources=(engagement_sources)
+      if engagement_sources.nil?
+        fail ArgumentError, 'engagement_sources cannot be nil'
+      end
+
+      if engagement_sources.length > 50
+        fail ArgumentError, 'invalid value for "engagement_sources", number of items must be less than or equal to 50.'
+      end
+
+      if engagement_sources.length < 1
+        fail ArgumentError, 'invalid value for "engagement_sources", number of items must be greater than or equal to 1.'
+      end
+
+      @engagement_sources = engagement_sources
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] companies Value to be assigned
+    def companies=(companies)
+      if companies.nil?
+        fail ArgumentError, 'companies cannot be nil'
+      end
+
+      if companies.length > 300000
+        fail ArgumentError, 'invalid value for "companies", number of items must be less than or equal to 300000.'
+      end
+
+      if companies.length < 1
+        fail ArgumentError, 'invalid value for "companies", number of items must be greater than or equal to 1.'
+      end
+
+      @companies = companies
     end
 
     # Custom attribute writer method with validation
@@ -347,6 +476,11 @@ module Zernio
           name == o.name &&
           description == o.description &&
           type == o.type &&
+          source_type == o.source_type &&
+          trigger == o.trigger &&
+          lookback_days == o.lookback_days &&
+          engagement_sources == o.engagement_sources &&
+          companies == o.companies &&
           pixel_id == o.pixel_id &&
           retention_days == o.retention_days &&
           source_audience_id == o.source_audience_id &&
@@ -365,7 +499,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, description, type, pixel_id, retention_days, source_audience_id, country, ratio, rule, customer_file_source].hash
+      [account_id, ad_account_id, name, description, type, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, source_audience_id, country, ratio, rule, customer_file_source].hash
     end
 
     # Builds the object from hash

@@ -314,7 +314,7 @@ account_id = 'account_id_example' # String | Social account ID
 ad_account_id = 'ad_account_id_example' # String | Platform ad account ID
 opts = {
   platform: 'facebook', # String | 
-  type: 'customer_list' # String | Filter to one audience type. `saved_targeting` returns stored TargetingSpec audiences (each item carries a `spec`); the other types return uploaded/derived audiences.
+  type: 'customer_list' # String | Filter to one audience type. `saved_targeting` returns stored TargetingSpec audiences; the other types return uploaded/derived audiences.
 }
 
 begin
@@ -351,7 +351,7 @@ end
 | **account_id** | **String** | Social account ID |  |
 | **ad_account_id** | **String** | Platform ad account ID |  |
 | **platform** | **String** |  | [optional] |
-| **type** | **String** | Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences (each item carries a &#x60;spec&#x60;); the other types return uploaded/derived audiences. | [optional] |
+| **type** | **String** | Filter to one audience type. &#x60;saved_targeting&#x60; returns stored TargetingSpec audiences; the other types return uploaded/derived audiences. | [optional] |
 
 ### Return type
 
