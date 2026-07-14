@@ -45,6 +45,12 @@ describe Zernio::CheckPhoneNumberPortability200ResponseResultsInner do
     end
   end
 
+  describe 'test attribute "line_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "not_portable_reason"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

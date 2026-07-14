@@ -322,7 +322,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::PhoneNumbersApi.new
-create_phone_number_port_in_request = Zernio::CreatePhoneNumberPortInRequest.new({phone_numbers: ['phone_numbers_example'], end_user: Zernio::CreatePhoneNumberPortInRequestEndUser.new({entity_name: 'entity_name_example', auth_person_name: 'auth_person_name_example', street_address: 'street_address_example', locality: 'locality_example', administrative_area: 'administrative_area_example', postal_code: 'postal_code_example', country_code: 'country_code_example'}), loa_document_id: 'loa_document_id_example', invoice_document_id: 'invoice_document_id_example'}) # CreatePhoneNumberPortInRequest | 
+create_phone_number_port_in_request = Zernio::CreatePhoneNumberPortInRequest.new({phone_numbers: ['phone_numbers_example'], end_user: Zernio::CreatePhoneNumberPortInRequestEndUser.new({entity_name: 'entity_name_example', auth_person_name: 'auth_person_name_example', account_number: 'account_number_example', street_address: 'street_address_example', locality: 'locality_example', administrative_area: 'administrative_area_example', postal_code: 'postal_code_example', country_code: 'US'}), loa_document_id: 'loa_document_id_example', invoice_document_id: 'invoice_document_id_example'}) # CreatePhoneNumberPortInRequest | 
 
 begin
   # Port numbers in

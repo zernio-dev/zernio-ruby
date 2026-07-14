@@ -384,6 +384,7 @@ Class | Method | HTTP request | Description
 *Zernio::SMSApi* | [**list_sms_opt_outs**](docs/SMSApi.md#list_sms_opt_outs) | **GET** /v1/sms/opt-outs | List SMS opt-outs
 *Zernio::SMSApi* | [**list_sms_registrations**](docs/SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations
 *Zernio::SMSApi* | [**lookup_sms_number**](docs/SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type
+*Zernio::SMSApi* | [**resend_sms_registration_otp**](docs/SMSApi.md#resend_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP
 *Zernio::SMSApi* | [**reuse_sms_registration_for_number**](docs/SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration
 *Zernio::SMSApi* | [**send_sms**](docs/SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS
 *Zernio::SMSApi* | [**share_sms_registration**](docs/SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link
@@ -1441,6 +1442,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplyToInboxReviewRequest](docs/ReplyToInboxReviewRequest.md)
  - [Zernio::ReplyToMention200Response](docs/ReplyToMention200Response.md)
  - [Zernio::ReplyToMentionRequest](docs/ReplyToMentionRequest.md)
+ - [Zernio::ResendSmsRegistrationOtp200Response](docs/ResendSmsRegistrationOtp200Response.md)
  - [Zernio::RestoreWorkflowVersion200Response](docs/RestoreWorkflowVersion200Response.md)
  - [Zernio::RestoreWorkflowVersion200ResponseWorkflow](docs/RestoreWorkflowVersion200ResponseWorkflow.md)
  - [Zernio::RetweetPost200Response](docs/RetweetPost200Response.md)

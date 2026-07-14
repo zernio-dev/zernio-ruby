@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Required for 10DLC. What you'll send and how recipients opt in/out. Opt-in/opt-out/help auto-responses must name the registered brand and carry the carrier-required disclosures; submissions that don't (or that are blank) are automatically rewritten to a compliant, brand-named template before the campaign is filed. 
+  # Required for 10DLC. What you'll send and how recipients opt in/out. The opt-in/opt-out/help auto-responses (`optinMessage`, `optoutMessage`, `helpMessage`) are optional: when omitted, a compliant, brand-named template with the carrier-required disclosures is generated for you. If you do send them, they must name the registered brand and carry the disclosures — submissions that don't are rewritten to the compliant template before the campaign is filed. 
   class StartSmsRegistrationRequestCampaign < ApiModelBase
     attr_accessor :usecase
 
@@ -191,8 +191,6 @@ module Zernio
 
       if attributes.key?(:'help_message')
         self.help_message = attributes[:'help_message']
-      else
-        self.help_message = nil
       end
 
       if attributes.key?(:'optin_keywords')
@@ -203,8 +201,6 @@ module Zernio
 
       if attributes.key?(:'optin_message')
         self.optin_message = attributes[:'optin_message']
-      else
-        self.optin_message = nil
       end
 
       if attributes.key?(:'optout_keywords')
@@ -215,8 +211,6 @@ module Zernio
 
       if attributes.key?(:'optout_message')
         self.optout_message = attributes[:'optout_message']
-      else
-        self.optout_message = nil
       end
 
       if attributes.key?(:'help_keywords')
@@ -303,15 +297,11 @@ module Zernio
         invalid_properties.push('invalid value for "sample2", the character length must be greater than or equal to 20.')
       end
 
-      if @help_message.nil?
-        invalid_properties.push('invalid value for "help_message", help_message cannot be nil.')
-      end
-
-      if @help_message.to_s.length > 320
+      if !@help_message.nil? && @help_message.to_s.length > 320
         invalid_properties.push('invalid value for "help_message", the character length must be smaller than or equal to 320.')
       end
 
-      if @help_message.to_s.length < 20
+      if !@help_message.nil? && @help_message.to_s.length < 20
         invalid_properties.push('invalid value for "help_message", the character length must be greater than or equal to 20.')
       end
 
@@ -319,15 +309,11 @@ module Zernio
         invalid_properties.push('invalid value for "optin_keywords", optin_keywords cannot be nil.')
       end
 
-      if @optin_message.nil?
-        invalid_properties.push('invalid value for "optin_message", optin_message cannot be nil.')
-      end
-
-      if @optin_message.to_s.length > 320
+      if !@optin_message.nil? && @optin_message.to_s.length > 320
         invalid_properties.push('invalid value for "optin_message", the character length must be smaller than or equal to 320.')
       end
 
-      if @optin_message.to_s.length < 20
+      if !@optin_message.nil? && @optin_message.to_s.length < 20
         invalid_properties.push('invalid value for "optin_message", the character length must be greater than or equal to 20.')
       end
 
@@ -335,15 +321,11 @@ module Zernio
         invalid_properties.push('invalid value for "optout_keywords", optout_keywords cannot be nil.')
       end
 
-      if @optout_message.nil?
-        invalid_properties.push('invalid value for "optout_message", optout_message cannot be nil.')
-      end
-
-      if @optout_message.to_s.length > 320
+      if !@optout_message.nil? && @optout_message.to_s.length > 320
         invalid_properties.push('invalid value for "optout_message", the character length must be smaller than or equal to 320.')
       end
 
-      if @optout_message.to_s.length < 20
+      if !@optout_message.nil? && @optout_message.to_s.length < 20
         invalid_properties.push('invalid value for "optout_message", the character length must be greater than or equal to 20.')
       end
 
@@ -371,17 +353,14 @@ module Zernio
       return false if @sample1.to_s.length < 20
       return false if @sample2.nil?
       return false if @sample2.to_s.length < 20
-      return false if @help_message.nil?
-      return false if @help_message.to_s.length > 320
-      return false if @help_message.to_s.length < 20
+      return false if !@help_message.nil? && @help_message.to_s.length > 320
+      return false if !@help_message.nil? && @help_message.to_s.length < 20
       return false if @optin_keywords.nil?
-      return false if @optin_message.nil?
-      return false if @optin_message.to_s.length > 320
-      return false if @optin_message.to_s.length < 20
+      return false if !@optin_message.nil? && @optin_message.to_s.length > 320
+      return false if !@optin_message.nil? && @optin_message.to_s.length < 20
       return false if @optout_keywords.nil?
-      return false if @optout_message.nil?
-      return false if @optout_message.to_s.length > 320
-      return false if @optout_message.to_s.length < 20
+      return false if !@optout_message.nil? && @optout_message.to_s.length > 320
+      return false if !@optout_message.nil? && @optout_message.to_s.length < 20
       return false if @help_keywords.nil?
       true
     end

@@ -11,6 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_sms_opt_outs**](SMSApi.md#list_sms_opt_outs) | **GET** /v1/sms/opt-outs | List SMS opt-outs |
 | [**list_sms_registrations**](SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations |
 | [**lookup_sms_number**](SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type |
+| [**resend_sms_registration_otp**](SMSApi.md#resend_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP |
 | [**reuse_sms_registration_for_number**](SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration |
 | [**send_sms**](SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS |
 | [**share_sms_registration**](SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link |
@@ -491,6 +492,75 @@ end
 ### Return type
 
 [**LookupSmsNumber200Response**](LookupSmsNumber200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## resend_sms_registration_otp
+
+> <ResendSmsRegistrationOtp200Response> resend_sms_registration_otp(id)
+
+Re-send the sole-prop OTP
+
+Re-sends the sole-proprietor verification PIN to the brand's mobile number — use it when the original code expired or never arrived. Only valid while the registration is pending and awaiting its OTP; rate limited to one send per minute. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+id = 'id_example' # String | 
+
+begin
+  # Re-send the sole-prop OTP
+  result = api_instance.resend_sms_registration_otp(id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->resend_sms_registration_otp: #{e}"
+end
+```
+
+#### Using the resend_sms_registration_otp_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ResendSmsRegistrationOtp200Response>, Integer, Hash)> resend_sms_registration_otp_with_http_info(id)
+
+```ruby
+begin
+  # Re-send the sole-prop OTP
+  data, status_code, headers = api_instance.resend_sms_registration_otp_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ResendSmsRegistrationOtp200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->resend_sms_registration_otp_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+
+### Return type
+
+[**ResendSmsRegistrationOtp200Response**](ResendSmsRegistrationOtp200Response.md)
 
 ### Authorization
 

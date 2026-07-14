@@ -14,18 +14,21 @@ require 'date'
 require 'time'
 
 module Zernio
-  # End-user / current-carrier account info that authorizes the port.
+  # End-user / current-carrier account info that authorizes the port. The losing carrier matches every field against its records and rejects the whole port on a mismatch — enter values exactly as they appear on the carrier bill. 
   class CreatePhoneNumberPortInRequestEndUser < ApiModelBase
+    # Account holder / business name, as on the carrier account.
     attr_accessor :entity_name
 
+    # Full name (first + last) of the person authorizing the port — must match the LOA signature.
     attr_accessor :auth_person_name
 
-    # Phone number on the losing carrier's bill. Defaults to the ported number itself on single-number orders.
+    # Phone number on the losing carrier's bill. Defaults to the ported number itself on single-number orders. Validated as a real phone number when present.
     attr_accessor :billing_phone_number
 
+    # Account number with the losing carrier — required (carriers reject ports without it; on prepaid mobile plans it is often the phone number itself).
     attr_accessor :account_number
 
-    # Transfer PIN. Forwarded to the carrier, never stored.
+    # Transfer PIN. Required for mobile numbers (wireless carriers reject PIN-less ports). Forwarded to the carrier, never stored.
     attr_accessor :pin_passcode
 
     attr_accessor :street_address
@@ -34,11 +37,35 @@ module Zernio
 
     attr_accessor :locality
 
+    # 2-letter US state / CA province code (full names are accepted and normalized).
     attr_accessor :administrative_area
 
+    # US ZIP (5 digits) or Canadian postal code, matching countryCode.
     attr_accessor :postal_code
 
     attr_accessor :country_code
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -124,6 +151,8 @@ module Zernio
 
       if attributes.key?(:'account_number')
         self.account_number = attributes[:'account_number']
+      else
+        self.account_number = nil
       end
 
       if attributes.key?(:'pin_passcode')
@@ -178,6 +207,10 @@ module Zernio
         invalid_properties.push('invalid value for "auth_person_name", auth_person_name cannot be nil.')
       end
 
+      if @account_number.nil?
+        invalid_properties.push('invalid value for "account_number", account_number cannot be nil.')
+      end
+
       if @street_address.nil?
         invalid_properties.push('invalid value for "street_address", street_address cannot be nil.')
       end
@@ -215,11 +248,14 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @entity_name.nil?
       return false if @auth_person_name.nil?
+      return false if @account_number.nil?
       return false if @street_address.nil?
       return false if @locality.nil?
       return false if @administrative_area.nil?
       return false if @postal_code.nil?
       return false if @country_code.nil?
+      country_code_validator = EnumAttributeValidator.new('String', ["US", "CA"])
+      return false unless country_code_validator.valid?(@country_code)
       return false if @country_code.to_s.length > 2
       return false if @country_code.to_s.length < 2
       true
@@ -243,6 +279,16 @@ module Zernio
       end
 
       @auth_person_name = auth_person_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] account_number Value to be assigned
+    def account_number=(account_number)
+      if account_number.nil?
+        fail ArgumentError, 'account_number cannot be nil'
+      end
+
+      @account_number = account_number
     end
 
     # Custom attribute writer method with validation
@@ -285,21 +331,13 @@ module Zernio
       @postal_code = postal_code
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] country_code Value to be assigned
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] country_code Object to be assigned
     def country_code=(country_code)
-      if country_code.nil?
-        fail ArgumentError, 'country_code cannot be nil'
+      validator = EnumAttributeValidator.new('String', ["US", "CA"])
+      unless validator.valid?(country_code)
+        fail ArgumentError, "invalid value for \"country_code\", must be one of #{validator.allowable_values}."
       end
-
-      if country_code.to_s.length > 2
-        fail ArgumentError, 'invalid value for "country_code", the character length must be smaller than or equal to 2.'
-      end
-
-      if country_code.to_s.length < 2
-        fail ArgumentError, 'invalid value for "country_code", the character length must be greater than or equal to 2.'
-      end
-
       @country_code = country_code
     end
 

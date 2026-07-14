@@ -480,6 +480,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Re-send the sole-prop OTP
+    # Re-sends the sole-proprietor verification PIN to the brand's mobile number — use it when the original code expired or never arrived. Only valid while the registration is pending and awaiting its OTP; rate limited to one send per minute. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [ResendSmsRegistrationOtp200Response]
+    def resend_sms_registration_otp(id, opts = {})
+      data, _status_code, _headers = resend_sms_registration_otp_with_http_info(id, opts)
+      data
+    end
+
+    # Re-send the sole-prop OTP
+    # Re-sends the sole-proprietor verification PIN to the brand&#39;s mobile number — use it when the original code expired or never arrived. Only valid while the registration is pending and awaiting its OTP; rate limited to one send per minute. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ResendSmsRegistrationOtp200Response, Integer, Hash)>] ResendSmsRegistrationOtp200Response data, response status code and response headers
+    def resend_sms_registration_otp_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SMSApi.resend_sms_registration_otp ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling SMSApi.resend_sms_registration_otp"
+      end
+      # resource path
+      local_var_path = '/v1/sms/registrations/{id}/resend-otp'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ResendSmsRegistrationOtp200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"SMSApi.resend_sms_registration_otp",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SMSApi#resend_sms_registration_otp\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Add number to SMS registration
     # Attaches this number to your existing approved 10DLC campaign instead of running a fresh registration: the number inherits the campaign's approval (no new brand or campaign, no extra carrier fee). Enable SMS on the number first (`POST /v1/phone-numbers/{id}/sms`; its response tells you whether a reusable registration exists). 
     # @param id [String] 

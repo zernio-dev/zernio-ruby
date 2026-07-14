@@ -116,6 +116,18 @@ describe 'SMSApi' do
     end
   end
 
+  # unit tests for resend_sms_registration_otp
+  # Re-send the sole-prop OTP
+  # Re-sends the sole-proprietor verification PIN to the brand&#39;s mobile number — use it when the original code expired or never arrived. Only valid while the registration is pending and awaiting its OTP; rate limited to one send per minute. 
+  # @param id 
+  # @param [Hash] opts the optional parameters
+  # @return [ResendSmsRegistrationOtp200Response]
+  describe 'resend_sms_registration_otp test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for reuse_sms_registration_for_number
   # Add number to SMS registration
   # Attaches this number to your existing approved 10DLC campaign instead of running a fresh registration: the number inherits the campaign&#39;s approval (no new brand or campaign, no extra carrier fee). Enable SMS on the number first (&#x60;POST /v1/phone-numbers/{id}/sms&#x60;; its response tells you whether a reusable registration exists). 
