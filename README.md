@@ -1207,6 +1207,7 @@ Class | Method | HTTP request | Description
  - [Zernio::InstagramPlatformDataUserTagsInner](docs/InstagramPlatformDataUserTagsInner.md)
  - [Zernio::LikeInboxComment200Response](docs/LikeInboxComment200Response.md)
  - [Zernio::LikeInboxCommentRequest](docs/LikeInboxCommentRequest.md)
+ - [Zernio::LinkedInAdsPlatformData](docs/LinkedInAdsPlatformData.md)
  - [Zernio::LinkedInAggregateAnalyticsDailyResponse](docs/LinkedInAggregateAnalyticsDailyResponse.md)
  - [Zernio::LinkedInAggregateAnalyticsDailyResponseAnalytics](docs/LinkedInAggregateAnalyticsDailyResponseAnalytics.md)
  - [Zernio::LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner](docs/LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner.md)

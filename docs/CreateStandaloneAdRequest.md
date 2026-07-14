@@ -67,6 +67,7 @@
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) | Meta bid strategy applied to the ad set. | [optional] |
 | **bid_amount** | **Float** | Bid cap in WHOLE currency units (USD: 5 &#x3D; $5.00; JPY: 100 &#x3D; ¥100). Required when &#x60;bidStrategy&#x60; is &#x60;LOWEST_COST_WITH_BID_CAP&#x60; or &#x60;COST_CAP&#x60;.  | [optional] |
 | **roas_average_floor** | **Float** | Minimum ROAS as a decimal multiplier (e.g. 2.0 &#x3D; 2.0x ROAS). Required when &#x60;bidStrategy&#x60; is &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60;. Sent to Meta as &#x60;bid_constraints.roas_average_floor&#x60; × 10000.  | [optional] |
+| **platform_specific_data** | [**LinkedInAdsPlatformData**](LinkedInAdsPlatformData.md) |  | [optional] |
 | **dsa_beneficiary** | **String** | Legal entity that benefits from the ad. Required when targeting EU users (EU DSA, Article 26). Optional if the ad account has a default beneficiary: set it once via &#x60;PATCH /v1/ads/accounts&#x60; or in Meta Ads Manager, and Meta fills it in whenever the field is omitted.  | [optional] |
 | **dsa_payor** | **String** | Legal entity that pays for the ad. Can differ from &#x60;dsaBeneficiary&#x60; (for example, an agency paying for a client&#39;s ads). Same rules as &#x60;dsaBeneficiary&#x60;: required for EU targeting unless the ad account has a default payor.  | [optional] |
 | **brand_identity** | [**CreateStandaloneAdRequestBrandIdentity**](CreateStandaloneAdRequestBrandIdentity.md) |  | [optional] |
@@ -142,6 +143,7 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   bid_strategy: null,
   bid_amount: null,
   roas_average_floor: null,
+  platform_specific_data: null,
   dsa_beneficiary: null,
   dsa_payor: null,
   brand_identity: null,
