@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # LinkedIn campaign bidding and delivery controls for POST /v1/ads/boost and POST /v1/ads/create. Unknown keys are rejected. 
+  # LinkedIn-specific options for POST /v1/ads/boost and POST /v1/ads/create: campaign bidding and delivery controls, plus the LinkedIn-only creative formats on /v1/ads/create. Unknown keys are rejected. 
   class LinkedInAdsPlatformData < ApiModelBase
     # Campaign cost model (billing event). Defaults to `CPM`. Required when `unitCost` is set so the manual bid applies to an explicit cost model. 
     attr_accessor :cost_type
@@ -36,6 +36,18 @@ module Zernio
 
     # Restrict delivery to Connected TV inventory.
     attr_accessor :connected_television_only
+
+    attr_accessor :carousel
+
+    attr_accessor :document
+
+    attr_accessor :spotlight
+
+    attr_accessor :follower
+
+    attr_accessor :text_ad
+
+    attr_accessor :event
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -68,7 +80,13 @@ module Zernio
         :'creative_selection' => :'creativeSelection',
         :'audience_expansion_enabled' => :'audienceExpansionEnabled',
         :'offsite_delivery_enabled' => :'offsiteDeliveryEnabled',
-        :'connected_television_only' => :'connectedTelevisionOnly'
+        :'connected_television_only' => :'connectedTelevisionOnly',
+        :'carousel' => :'carousel',
+        :'document' => :'document',
+        :'spotlight' => :'spotlight',
+        :'follower' => :'follower',
+        :'text_ad' => :'textAd',
+        :'event' => :'event'
       }
     end
 
@@ -91,7 +109,13 @@ module Zernio
         :'creative_selection' => :'String',
         :'audience_expansion_enabled' => :'Boolean',
         :'offsite_delivery_enabled' => :'Boolean',
-        :'connected_television_only' => :'Boolean'
+        :'connected_television_only' => :'Boolean',
+        :'carousel' => :'LinkedInAdsPlatformDataCarousel',
+        :'document' => :'LinkedInAdsPlatformDataDocument',
+        :'spotlight' => :'LinkedInAdsPlatformDataSpotlight',
+        :'follower' => :'LinkedInAdsPlatformDataFollower',
+        :'text_ad' => :'LinkedInAdsPlatformDataTextAd',
+        :'event' => :'LinkedInAdsPlatformDataEvent'
       }
     end
 
@@ -143,6 +167,30 @@ module Zernio
 
       if attributes.key?(:'connected_television_only')
         self.connected_television_only = attributes[:'connected_television_only']
+      end
+
+      if attributes.key?(:'carousel')
+        self.carousel = attributes[:'carousel']
+      end
+
+      if attributes.key?(:'document')
+        self.document = attributes[:'document']
+      end
+
+      if attributes.key?(:'spotlight')
+        self.spotlight = attributes[:'spotlight']
+      end
+
+      if attributes.key?(:'follower')
+        self.follower = attributes[:'follower']
+      end
+
+      if attributes.key?(:'text_ad')
+        self.text_ad = attributes[:'text_ad']
+      end
+
+      if attributes.key?(:'event')
+        self.event = attributes[:'event']
       end
     end
 
@@ -196,7 +244,13 @@ module Zernio
           creative_selection == o.creative_selection &&
           audience_expansion_enabled == o.audience_expansion_enabled &&
           offsite_delivery_enabled == o.offsite_delivery_enabled &&
-          connected_television_only == o.connected_television_only
+          connected_television_only == o.connected_television_only &&
+          carousel == o.carousel &&
+          document == o.document &&
+          spotlight == o.spotlight &&
+          follower == o.follower &&
+          text_ad == o.text_ad &&
+          event == o.event
     end
 
     # @see the `==` method
@@ -208,7 +262,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [cost_type, unit_cost, optimization_target_type, creative_selection, audience_expansion_enabled, offsite_delivery_enabled, connected_television_only].hash
+      [cost_type, unit_cost, optimization_target_type, creative_selection, audience_expansion_enabled, offsite_delivery_enabled, connected_television_only, carousel, document, spotlight, follower, text_ad, event].hash
     end
 
     # Builds the object from hash

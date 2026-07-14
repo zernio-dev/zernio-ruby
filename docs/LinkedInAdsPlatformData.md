@@ -11,6 +11,12 @@
 | **audience_expansion_enabled** | **Boolean** | Enable LinkedIn audience expansion. Defaults to false. | [optional] |
 | **offsite_delivery_enabled** | **Boolean** | Deliver on the LinkedIn Audience Network. Defaults to false. | [optional] |
 | **connected_television_only** | **Boolean** | Restrict delivery to Connected TV inventory. | [optional] |
+| **carousel** | [**LinkedInAdsPlatformDataCarousel**](LinkedInAdsPlatformDataCarousel.md) |  | [optional] |
+| **document** | [**LinkedInAdsPlatformDataDocument**](LinkedInAdsPlatformDataDocument.md) |  | [optional] |
+| **spotlight** | [**LinkedInAdsPlatformDataSpotlight**](LinkedInAdsPlatformDataSpotlight.md) |  | [optional] |
+| **follower** | [**LinkedInAdsPlatformDataFollower**](LinkedInAdsPlatformDataFollower.md) |  | [optional] |
+| **text_ad** | [**LinkedInAdsPlatformDataTextAd**](LinkedInAdsPlatformDataTextAd.md) |  | [optional] |
+| **event** | [**LinkedInAdsPlatformDataEvent**](LinkedInAdsPlatformDataEvent.md) |  | [optional] |
 
 ## Example
 
@@ -24,7 +30,13 @@ instance = Zernio::LinkedInAdsPlatformData.new(
   creative_selection: null,
   audience_expansion_enabled: null,
   offsite_delivery_enabled: null,
-  connected_television_only: null
+  connected_television_only: null,
+  carousel: null,
+  document: null,
+  spotlight: null,
+  follower: null,
+  text_ad: null,
+  event: null
 )
 ```
 
