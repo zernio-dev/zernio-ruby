@@ -210,6 +210,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**connect_ads**](docs/ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform
 *Zernio::ConnectApi* | [**connect_bluesky_credentials**](docs/ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account
 *Zernio::ConnectApi* | [**connect_whats_app_credentials**](docs/ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials
+*Zernio::ConnectApi* | [**create_pinterest_board**](docs/ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board
 *Zernio::ConnectApi* | [**get_connect_url**](docs/ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL
 *Zernio::ConnectApi* | [**get_facebook_pages**](docs/ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages
 *Zernio::ConnectApi* | [**get_gmb_locations**](docs/ConnectApi.md#get_gmb_locations) | **GET** /v1/accounts/{accountId}/gmb-locations | List GBP locations
@@ -734,6 +735,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreatePhoneNumberPortIn201ResponseOrdersInner](docs/CreatePhoneNumberPortIn201ResponseOrdersInner.md)
  - [Zernio::CreatePhoneNumberPortInRequest](docs/CreatePhoneNumberPortInRequest.md)
  - [Zernio::CreatePhoneNumberPortInRequestEndUser](docs/CreatePhoneNumberPortInRequestEndUser.md)
+ - [Zernio::CreatePinterestBoard201Response](docs/CreatePinterestBoard201Response.md)
+ - [Zernio::CreatePinterestBoard201ResponseBoard](docs/CreatePinterestBoard201ResponseBoard.md)
+ - [Zernio::CreatePinterestBoardRequest](docs/CreatePinterestBoardRequest.md)
  - [Zernio::CreatePost403Response](docs/CreatePost403Response.md)
  - [Zernio::CreatePost409Response](docs/CreatePost409Response.md)
  - [Zernio::CreatePost409ResponseDetails](docs/CreatePost409ResponseDetails.md)

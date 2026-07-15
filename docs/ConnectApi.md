@@ -10,6 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**connect_ads**](ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform |
 | [**connect_bluesky_credentials**](ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account |
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
+| [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**get_facebook_pages**](ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages |
 | [**get_gmb_locations**](ConnectApi.md#get_gmb_locations) | **GET** /v1/accounts/{accountId}/gmb-locations | List GBP locations |
@@ -465,6 +466,77 @@ end
 ### Return type
 
 [**ConnectWhatsAppCredentials200Response**](ConnectWhatsAppCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_pinterest_board
+
+> <CreatePinterestBoard201Response> create_pinterest_board(account_id, create_pinterest_board_request)
+
+Create Pinterest board
+
+Creates a new board on the connected Pinterest account. The returned board ID can be used immediately as `platformSpecificData.boardId` when creating a Pinterest post.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | 
+create_pinterest_board_request = Zernio::CreatePinterestBoardRequest.new({name: 'name_example'}) # CreatePinterestBoardRequest | 
+
+begin
+  # Create Pinterest board
+  result = api_instance.create_pinterest_board(account_id, create_pinterest_board_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_pinterest_board: #{e}"
+end
+```
+
+#### Using the create_pinterest_board_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreatePinterestBoard201Response>, Integer, Hash)> create_pinterest_board_with_http_info(account_id, create_pinterest_board_request)
+
+```ruby
+begin
+  # Create Pinterest board
+  data, status_code, headers = api_instance.create_pinterest_board_with_http_info(account_id, create_pinterest_board_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreatePinterestBoard201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->create_pinterest_board_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **create_pinterest_board_request** | [**CreatePinterestBoardRequest**](CreatePinterestBoardRequest.md) |  |  |
+
+### Return type
+
+[**CreatePinterestBoard201Response**](CreatePinterestBoard201Response.md)
 
 ### Authorization
 

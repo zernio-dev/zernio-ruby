@@ -111,6 +111,19 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for create_pinterest_board
+  # Create Pinterest board
+  # Creates a new board on the connected Pinterest account. The returned board ID can be used immediately as &#x60;platformSpecificData.boardId&#x60; when creating a Pinterest post.
+  # @param account_id 
+  # @param create_pinterest_board_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreatePinterestBoard201Response]
+  describe 'create_pinterest_board test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_connect_url
   # Get OAuth connect URL
   # Initiate an OAuth connection flow. Returns an authUrl to redirect the user to. Standard flow: Zernio hosts the selection UI, then redirects to your redirect_url. Headless mode (headless&#x3D;true): user is redirected to your redirect_url with OAuth data for custom UI. Use the platform-specific selection endpoints to complete. 
