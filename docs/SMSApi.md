@@ -444,7 +444,7 @@ end
 
 ## list_sms_registrations
 
-> <ListSmsRegistrations200Response> list_sms_registrations
+> <ListSmsRegistrations200Response> list_sms_registrations(opts)
 
 List carrier registrations
 
@@ -460,10 +460,13 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::SMSApi.new
+opts = {
+  include_deactivated: true # Boolean | Deactivated (terminated) registrations are hidden by default — pass true to include them.
+}
 
 begin
   # List carrier registrations
-  result = api_instance.list_sms_registrations
+  result = api_instance.list_sms_registrations(opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling SMSApi->list_sms_registrations: #{e}"
@@ -474,12 +477,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListSmsRegistrations200Response>, Integer, Hash)> list_sms_registrations_with_http_info
+> <Array(<ListSmsRegistrations200Response>, Integer, Hash)> list_sms_registrations_with_http_info(opts)
 
 ```ruby
 begin
   # List carrier registrations
-  data, status_code, headers = api_instance.list_sms_registrations_with_http_info
+  data, status_code, headers = api_instance.list_sms_registrations_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ListSmsRegistrations200Response>
@@ -490,7 +493,9 @@ end
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **include_deactivated** | **Boolean** | Deactivated (terminated) registrations are hidden by default — pass true to include them. | [optional] |
 
 ### Return type
 

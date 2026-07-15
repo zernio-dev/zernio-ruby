@@ -109,6 +109,7 @@ describe 'SMSApi' do
   # unit tests for list_sms_registrations
   # List carrier registrations
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :include_deactivated Deactivated (terminated) registrations are hidden by default — pass true to include them.
   # @return [ListSmsRegistrations200Response]
   describe 'list_sms_registrations test' do
     it 'should work' do
