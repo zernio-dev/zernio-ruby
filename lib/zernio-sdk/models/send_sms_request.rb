@@ -27,13 +27,17 @@ module Zernio
     # Public media URLs to attach (sends as MMS). Max 10.
     attr_accessor :media_urls
 
+    # Optional. Schedule the send for a future time (ISO 8601 with offset, e.g. `2026-08-01T12:00:00Z`). Must be in the future. The message is queued and the `message.delivered` webhook fires when it actually sends.
+    attr_accessor :send_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'from' => :'from',
         :'to' => :'to',
         :'text' => :'text',
-        :'media_urls' => :'mediaUrls'
+        :'media_urls' => :'mediaUrls',
+        :'send_at' => :'sendAt'
       }
     end
 
@@ -53,7 +57,8 @@ module Zernio
         :'from' => :'String',
         :'to' => :'String',
         :'text' => :'String',
-        :'media_urls' => :'Array<String>'
+        :'media_urls' => :'Array<String>',
+        :'send_at' => :'Time'
       }
     end
 
@@ -99,6 +104,10 @@ module Zernio
         if (value = attributes[:'media_urls']).is_a?(Array)
           self.media_urls = value
         end
+      end
+
+      if attributes.key?(:'send_at')
+        self.send_at = attributes[:'send_at']
       end
     end
 
@@ -174,7 +183,8 @@ module Zernio
           from == o.from &&
           to == o.to &&
           text == o.text &&
-          media_urls == o.media_urls
+          media_urls == o.media_urls &&
+          send_at == o.send_at
     end
 
     # @see the `==` method
@@ -186,7 +196,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [from, to, text, media_urls].hash
+      [from, to, text, media_urls, send_at].hash
     end
 
     # Builds the object from hash
