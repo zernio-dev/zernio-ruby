@@ -287,6 +287,7 @@ docs/CrosspostDiscordMessage200Response.md
 docs/CtwaMultiResponse.md
 docs/CtwaSingleResponse.md
 docs/CustomFieldsApi.md
+docs/DeactivateSmsRegistration200Response.md
 docs/DeleteAccountGroup200Response.md
 docs/DeleteAdCampaign200Response.md
 docs/DeleteAdCampaignRequest.md
@@ -1777,6 +1778,7 @@ lib/zernio-sdk/models/create_workflow_request.rb
 lib/zernio-sdk/models/crosspost_discord_message200_response.rb
 lib/zernio-sdk/models/ctwa_multi_response.rb
 lib/zernio-sdk/models/ctwa_single_response.rb
+lib/zernio-sdk/models/deactivate_sms_registration200_response.rb
 lib/zernio-sdk/models/delete_account_group200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign_request.rb
@@ -3221,6 +3223,7 @@ spec/models/create_workflow_request_spec.rb
 spec/models/crosspost_discord_message200_response_spec.rb
 spec/models/ctwa_multi_response_spec.rb
 spec/models/ctwa_single_response_spec.rb
+spec/models/deactivate_sms_registration200_response_spec.rb
 spec/models/delete_account_group200_response_spec.rb
 spec/models/delete_ad_campaign200_response_spec.rb
 spec/models/delete_ad_campaign_request_spec.rb

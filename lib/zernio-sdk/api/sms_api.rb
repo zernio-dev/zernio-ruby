@@ -93,6 +93,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Deactivate a brand/campaign registration
+    # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts — receiving is unaffected — until they're registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [DeactivateSmsRegistration200Response]
+    def deactivate_sms_registration(id, opts = {})
+      data, _status_code, _headers = deactivate_sms_registration_with_http_info(id, opts)
+      data
+    end
+
+    # Deactivate a brand/campaign registration
+    # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts — receiving is unaffected — until they&#39;re registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeactivateSmsRegistration200Response, Integer, Hash)>] DeactivateSmsRegistration200Response data, response status code and response headers
+    def deactivate_sms_registration_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SMSApi.deactivate_sms_registration ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling SMSApi.deactivate_sms_registration"
+      end
+      # resource path
+      local_var_path = '/v1/sms/registrations/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeactivateSmsRegistration200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"SMSApi.deactivate_sms_registration",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SMSApi#deactivate_sms_registration\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Disable SMS on a number
     # Turns off SMS for the number (deactivates its SMS account). The carrier registration is untouched, so re-enabling later just reactivates it, with no re-registration. 
     # @param id [String] 

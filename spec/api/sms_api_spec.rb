@@ -45,6 +45,18 @@ describe 'SMSApi' do
     end
   end
 
+  # unit tests for deactivate_sms_registration
+  # Deactivate a brand/campaign registration
+  # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts — receiving is unaffected — until they&#39;re registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
+  # @param id 
+  # @param [Hash] opts the optional parameters
+  # @return [DeactivateSmsRegistration200Response]
+  describe 'deactivate_sms_registration test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for disable_sms_on_number
   # Disable SMS on a number
   # Turns off SMS for the number (deactivates its SMS account). The carrier registration is untouched, so re-enabling later just reactivates it, with no re-registration. 

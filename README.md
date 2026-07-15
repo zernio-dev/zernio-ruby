@@ -381,6 +381,7 @@ Class | Method | HTTP request | Description
 *Zernio::ReviewsApi* | [**list_inbox_reviews**](docs/ReviewsApi.md#list_inbox_reviews) | **GET** /v1/inbox/reviews | List reviews
 *Zernio::ReviewsApi* | [**reply_to_inbox_review**](docs/ReviewsApi.md#reply_to_inbox_review) | **POST** /v1/inbox/reviews/{reviewId}/reply | Reply to review
 *Zernio::SMSApi* | [**appeal_sms_registration**](docs/SMSApi.md#appeal_sms_registration) | **POST** /v1/sms/registrations/{id}/appeal | Appeal a rejected campaign
+*Zernio::SMSApi* | [**deactivate_sms_registration**](docs/SMSApi.md#deactivate_sms_registration) | **DELETE** /v1/sms/registrations/{id} | Deactivate a brand/campaign registration
 *Zernio::SMSApi* | [**disable_sms_on_number**](docs/SMSApi.md#disable_sms_on_number) | **DELETE** /v1/phone-numbers/{id}/sms | Disable SMS on a number
 *Zernio::SMSApi* | [**enable_sms_on_number**](docs/SMSApi.md#enable_sms_on_number) | **POST** /v1/phone-numbers/{id}/sms | Enable SMS on a number
 *Zernio::SMSApi* | [**get_sms_registration**](docs/SMSApi.md#get_sms_registration) | **GET** /v1/sms/registrations/{id} | Get a carrier registration
@@ -811,6 +812,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CrosspostDiscordMessage200Response](docs/CrosspostDiscordMessage200Response.md)
  - [Zernio::CtwaMultiResponse](docs/CtwaMultiResponse.md)
  - [Zernio::CtwaSingleResponse](docs/CtwaSingleResponse.md)
+ - [Zernio::DeactivateSmsRegistration200Response](docs/DeactivateSmsRegistration200Response.md)
  - [Zernio::DeleteAccountGroup200Response](docs/DeleteAccountGroup200Response.md)
  - [Zernio::DeleteAdCampaign200Response](docs/DeleteAdCampaign200Response.md)
  - [Zernio::DeleteAdCampaignRequest](docs/DeleteAdCampaignRequest.md)

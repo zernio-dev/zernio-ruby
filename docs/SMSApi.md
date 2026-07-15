@@ -5,6 +5,7 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**appeal_sms_registration**](SMSApi.md#appeal_sms_registration) | **POST** /v1/sms/registrations/{id}/appeal | Appeal a rejected campaign |
+| [**deactivate_sms_registration**](SMSApi.md#deactivate_sms_registration) | **DELETE** /v1/sms/registrations/{id} | Deactivate a brand/campaign registration |
 | [**disable_sms_on_number**](SMSApi.md#disable_sms_on_number) | **DELETE** /v1/phone-numbers/{id}/sms | Disable SMS on a number |
 | [**enable_sms_on_number**](SMSApi.md#enable_sms_on_number) | **POST** /v1/phone-numbers/{id}/sms | Enable SMS on a number |
 | [**get_sms_registration**](SMSApi.md#get_sms_registration) | **GET** /v1/sms/registrations/{id} | Get a carrier registration |
@@ -89,6 +90,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## deactivate_sms_registration
+
+> <DeactivateSmsRegistration200Response> deactivate_sms_registration(id)
+
+Deactivate a brand/campaign registration
+
+Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts — receiving is unaffected — until they're registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+id = 'id_example' # String | 
+
+begin
+  # Deactivate a brand/campaign registration
+  result = api_instance.deactivate_sms_registration(id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->deactivate_sms_registration: #{e}"
+end
+```
+
+#### Using the deactivate_sms_registration_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeactivateSmsRegistration200Response>, Integer, Hash)> deactivate_sms_registration_with_http_info(id)
+
+```ruby
+begin
+  # Deactivate a brand/campaign registration
+  data, status_code, headers = api_instance.deactivate_sms_registration_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeactivateSmsRegistration200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->deactivate_sms_registration_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+
+### Return type
+
+[**DeactivateSmsRegistration200Response**](DeactivateSmsRegistration200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
