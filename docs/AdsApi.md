@@ -27,6 +27,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_dsa_defaults**](AdsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults |
 | [**get_dsa_recommendations**](AdsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions |
 | [**get_lead_form**](AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a lead form |
+| [**get_linked_in_bid_pricing**](AdsApi.md#get_linked_in_bid_pricing) | **POST** /v1/ads/targeting/bid-pricing | Suggested bid and budget bounds (LinkedIn) |
+| [**get_linked_in_supply_forecast**](AdsApi.md#get_linked_in_supply_forecast) | **POST** /v1/ads/targeting/supply-forecast | Impressions, clicks and spend forecast (LinkedIn) |
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_catalog_product_sets**](AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog&#39;s product sets |
 | [**list_ad_catalogs**](AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs |
@@ -1701,6 +1703,144 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_linked_in_bid_pricing
+
+> <GetLinkedInBidPricing200Response> get_linked_in_bid_pricing(get_linked_in_bid_pricing_request)
+
+Suggested bid and budget bounds (LinkedIn)
+
+LinkedIn-only. Returns the suggested bid and bid limits for a targeting spec, plus the daily-budget bounds LinkedIn will accept. Use it before creating a campaign to pick a bid inside the allowed range and warn the user if their daily budget is below the minimum. Wraps LinkedIn's `adBudgetPricing` finder.  Non-LinkedIn accounts return `available: false` so clients can hide the pricing UI without treating it as a failure. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+get_linked_in_bid_pricing_request = Zernio::GetLinkedInBidPricingRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', spec: Zernio::TargetingSpec.new}) # GetLinkedInBidPricingRequest | 
+
+begin
+  # Suggested bid and budget bounds (LinkedIn)
+  result = api_instance.get_linked_in_bid_pricing(get_linked_in_bid_pricing_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_linked_in_bid_pricing: #{e}"
+end
+```
+
+#### Using the get_linked_in_bid_pricing_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetLinkedInBidPricing200Response>, Integer, Hash)> get_linked_in_bid_pricing_with_http_info(get_linked_in_bid_pricing_request)
+
+```ruby
+begin
+  # Suggested bid and budget bounds (LinkedIn)
+  data, status_code, headers = api_instance.get_linked_in_bid_pricing_with_http_info(get_linked_in_bid_pricing_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetLinkedInBidPricing200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_linked_in_bid_pricing_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **get_linked_in_bid_pricing_request** | [**GetLinkedInBidPricingRequest**](GetLinkedInBidPricingRequest.md) |  |  |
+
+### Return type
+
+[**GetLinkedInBidPricing200Response**](GetLinkedInBidPricing200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_linked_in_supply_forecast
+
+> <GetLinkedInSupplyForecast200Response> get_linked_in_supply_forecast(get_linked_in_supply_forecast_request)
+
+Impressions, clicks and spend forecast (LinkedIn)
+
+LinkedIn-only. Forecasted impressions, clicks, spend and ~20 other metrics for a targeting spec over a time range. Wraps LinkedIn's `adSupplyForecasts` finder.  Each returned series carries a `metricType` (IMPRESSION, CLICK, SPENDING, MAX_POTENTIAL_BUDGET, COST_PER_MILLION_IMPRESSIONS, ...) and a `granularity` (DAILY, SEVEN_DAY, THIRTY_DAY, CUSTOM). LinkedIn caps the daily spending forecast at 1.2x the daily budget and returns 0 once the total budget is exhausted.  Non-LinkedIn accounts return `available: false`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+get_linked_in_supply_forecast_request = Zernio::GetLinkedInSupplyForecastRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', spec: Zernio::TargetingSpec.new, time_range_start: 37, time_range_end: 37}) # GetLinkedInSupplyForecastRequest | 
+
+begin
+  # Impressions, clicks and spend forecast (LinkedIn)
+  result = api_instance.get_linked_in_supply_forecast(get_linked_in_supply_forecast_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_linked_in_supply_forecast: #{e}"
+end
+```
+
+#### Using the get_linked_in_supply_forecast_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetLinkedInSupplyForecast200Response>, Integer, Hash)> get_linked_in_supply_forecast_with_http_info(get_linked_in_supply_forecast_request)
+
+```ruby
+begin
+  # Impressions, clicks and spend forecast (LinkedIn)
+  data, status_code, headers = api_instance.get_linked_in_supply_forecast_with_http_info(get_linked_in_supply_forecast_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetLinkedInSupplyForecast200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_linked_in_supply_forecast_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **get_linked_in_supply_forecast_request** | [**GetLinkedInSupplyForecastRequest**](GetLinkedInSupplyForecastRequest.md) |  |  |
+
+### Return type
+
+[**GetLinkedInSupplyForecast200Response**](GetLinkedInSupplyForecast200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

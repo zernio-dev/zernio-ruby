@@ -336,6 +336,30 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for get_linked_in_bid_pricing
+  # Suggested bid and budget bounds (LinkedIn)
+  # LinkedIn-only. Returns the suggested bid and bid limits for a targeting spec, plus the daily-budget bounds LinkedIn will accept. Use it before creating a campaign to pick a bid inside the allowed range and warn the user if their daily budget is below the minimum. Wraps LinkedIn&#39;s &#x60;adBudgetPricing&#x60; finder.  Non-LinkedIn accounts return &#x60;available: false&#x60; so clients can hide the pricing UI without treating it as a failure. 
+  # @param get_linked_in_bid_pricing_request 
+  # @param [Hash] opts the optional parameters
+  # @return [GetLinkedInBidPricing200Response]
+  describe 'get_linked_in_bid_pricing test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_linked_in_supply_forecast
+  # Impressions, clicks and spend forecast (LinkedIn)
+  # LinkedIn-only. Forecasted impressions, clicks, spend and ~20 other metrics for a targeting spec over a time range. Wraps LinkedIn&#39;s &#x60;adSupplyForecasts&#x60; finder.  Each returned series carries a &#x60;metricType&#x60; (IMPRESSION, CLICK, SPENDING, MAX_POTENTIAL_BUDGET, COST_PER_MILLION_IMPRESSIONS, ...) and a &#x60;granularity&#x60; (DAILY, SEVEN_DAY, THIRTY_DAY, CUSTOM). LinkedIn caps the daily spending forecast at 1.2x the daily budget and returns 0 once the total budget is exhausted.  Non-LinkedIn accounts return &#x60;available: false&#x60;. 
+  # @param get_linked_in_supply_forecast_request 
+  # @param [Hash] opts the optional parameters
+  # @return [GetLinkedInSupplyForecast200Response]
+  describe 'get_linked_in_supply_forecast test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_accounts
   # List ad accounts
   # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok&#39;s &#x60;/advertiser/info/&#x60; endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time &#x60;advertiser_ids&#x60; list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 

@@ -129,6 +129,8 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_dsa_defaults**](docs/AdsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults
 *Zernio::AdsApi* | [**get_dsa_recommendations**](docs/AdsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions
 *Zernio::AdsApi* | [**get_lead_form**](docs/AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a lead form
+*Zernio::AdsApi* | [**get_linked_in_bid_pricing**](docs/AdsApi.md#get_linked_in_bid_pricing) | **POST** /v1/ads/targeting/bid-pricing | Suggested bid and budget bounds (LinkedIn)
+*Zernio::AdsApi* | [**get_linked_in_supply_forecast**](docs/AdsApi.md#get_linked_in_supply_forecast) | **POST** /v1/ads/targeting/supply-forecast | Impressions, clicks and spend forecast (LinkedIn)
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ad_catalog_product_sets**](docs/AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog's product sets
 *Zernio::AdsApi* | [**list_ad_catalogs**](docs/AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs
@@ -1053,6 +1055,11 @@ Class | Method | HTTP request | Description
  - [Zernio::GetLinkedInAggregateAnalytics400Response](docs/GetLinkedInAggregateAnalytics400Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics402Response](docs/GetLinkedInAggregateAnalytics402Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics403Response](docs/GetLinkedInAggregateAnalytics403Response.md)
+ - [Zernio::GetLinkedInBidPricing200Response](docs/GetLinkedInBidPricing200Response.md)
+ - [Zernio::GetLinkedInBidPricing200ResponsePricing](docs/GetLinkedInBidPricing200ResponsePricing.md)
+ - [Zernio::GetLinkedInBidPricing200ResponsePricingBidLimits](docs/GetLinkedInBidPricing200ResponsePricingBidLimits.md)
+ - [Zernio::GetLinkedInBidPricing200ResponsePricingSuggestedBid](docs/GetLinkedInBidPricing200ResponsePricingSuggestedBid.md)
+ - [Zernio::GetLinkedInBidPricingRequest](docs/GetLinkedInBidPricingRequest.md)
  - [Zernio::GetLinkedInMentions200Response](docs/GetLinkedInMentions200Response.md)
  - [Zernio::GetLinkedInOrganizations200Response](docs/GetLinkedInOrganizations200Response.md)
  - [Zernio::GetLinkedInOrganizations200ResponseOrganizationsInner](docs/GetLinkedInOrganizations200ResponseOrganizationsInner.md)
@@ -1065,6 +1072,12 @@ Class | Method | HTTP request | Description
  - [Zernio::GetLinkedInPostReactions200ResponseReactionsInner](docs/GetLinkedInPostReactions200ResponseReactionsInner.md)
  - [Zernio::GetLinkedInPostReactions200ResponseReactionsInnerFrom](docs/GetLinkedInPostReactions200ResponseReactionsInnerFrom.md)
  - [Zernio::GetLinkedInPostReactions400Response](docs/GetLinkedInPostReactions400Response.md)
+ - [Zernio::GetLinkedInSupplyForecast200Response](docs/GetLinkedInSupplyForecast200Response.md)
+ - [Zernio::GetLinkedInSupplyForecast200ResponseForecastInner](docs/GetLinkedInSupplyForecast200ResponseForecastInner.md)
+ - [Zernio::GetLinkedInSupplyForecast200ResponseForecastInnerTimeSeriesInner](docs/GetLinkedInSupplyForecast200ResponseForecastInnerTimeSeriesInner.md)
+ - [Zernio::GetLinkedInSupplyForecast200ResponseForecastInnerTimeSeriesInnerAdForecastRange](docs/GetLinkedInSupplyForecast200ResponseForecastInnerTimeSeriesInnerAdForecastRange.md)
+ - [Zernio::GetLinkedInSupplyForecastRequest](docs/GetLinkedInSupplyForecastRequest.md)
+ - [Zernio::GetLinkedInSupplyForecastRequestCompetingBid](docs/GetLinkedInSupplyForecastRequestCompetingBid.md)
  - [Zernio::GetMediaPresignedUrl200Response](docs/GetMediaPresignedUrl200Response.md)
  - [Zernio::GetMediaPresignedUrlRequest](docs/GetMediaPresignedUrlRequest.md)
  - [Zernio::GetMessengerMenu200Response](docs/GetMessengerMenu200Response.md)
@@ -1384,6 +1397,7 @@ Class | Method | HTTP request | Description
  - [Zernio::MediaItem](docs/MediaItem.md)
  - [Zernio::MediaUploadResponse](docs/MediaUploadResponse.md)
  - [Zernio::Money](docs/Money.md)
+ - [Zernio::MoneyAmount](docs/MoneyAmount.md)
  - [Zernio::MoveAccountToProfile200Response](docs/MoveAccountToProfile200Response.md)
  - [Zernio::MoveAccountToProfileRequest](docs/MoveAccountToProfileRequest.md)
  - [Zernio::OnWhatsAppAutomaticEventRequest](docs/OnWhatsAppAutomaticEventRequest.md)

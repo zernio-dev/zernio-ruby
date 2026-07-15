@@ -1684,6 +1684,142 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Suggested bid and budget bounds (LinkedIn)
+    # LinkedIn-only. Returns the suggested bid and bid limits for a targeting spec, plus the daily-budget bounds LinkedIn will accept. Use it before creating a campaign to pick a bid inside the allowed range and warn the user if their daily budget is below the minimum. Wraps LinkedIn's `adBudgetPricing` finder.  Non-LinkedIn accounts return `available: false` so clients can hide the pricing UI without treating it as a failure. 
+    # @param get_linked_in_bid_pricing_request [GetLinkedInBidPricingRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetLinkedInBidPricing200Response]
+    def get_linked_in_bid_pricing(get_linked_in_bid_pricing_request, opts = {})
+      data, _status_code, _headers = get_linked_in_bid_pricing_with_http_info(get_linked_in_bid_pricing_request, opts)
+      data
+    end
+
+    # Suggested bid and budget bounds (LinkedIn)
+    # LinkedIn-only. Returns the suggested bid and bid limits for a targeting spec, plus the daily-budget bounds LinkedIn will accept. Use it before creating a campaign to pick a bid inside the allowed range and warn the user if their daily budget is below the minimum. Wraps LinkedIn&#39;s &#x60;adBudgetPricing&#x60; finder.  Non-LinkedIn accounts return &#x60;available: false&#x60; so clients can hide the pricing UI without treating it as a failure. 
+    # @param get_linked_in_bid_pricing_request [GetLinkedInBidPricingRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetLinkedInBidPricing200Response, Integer, Hash)>] GetLinkedInBidPricing200Response data, response status code and response headers
+    def get_linked_in_bid_pricing_with_http_info(get_linked_in_bid_pricing_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_linked_in_bid_pricing ...'
+      end
+      # verify the required parameter 'get_linked_in_bid_pricing_request' is set
+      if @api_client.config.client_side_validation && get_linked_in_bid_pricing_request.nil?
+        fail ArgumentError, "Missing the required parameter 'get_linked_in_bid_pricing_request' when calling AdsApi.get_linked_in_bid_pricing"
+      end
+      # resource path
+      local_var_path = '/v1/ads/targeting/bid-pricing'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(get_linked_in_bid_pricing_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetLinkedInBidPricing200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_linked_in_bid_pricing",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_linked_in_bid_pricing\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Impressions, clicks and spend forecast (LinkedIn)
+    # LinkedIn-only. Forecasted impressions, clicks, spend and ~20 other metrics for a targeting spec over a time range. Wraps LinkedIn's `adSupplyForecasts` finder.  Each returned series carries a `metricType` (IMPRESSION, CLICK, SPENDING, MAX_POTENTIAL_BUDGET, COST_PER_MILLION_IMPRESSIONS, ...) and a `granularity` (DAILY, SEVEN_DAY, THIRTY_DAY, CUSTOM). LinkedIn caps the daily spending forecast at 1.2x the daily budget and returns 0 once the total budget is exhausted.  Non-LinkedIn accounts return `available: false`. 
+    # @param get_linked_in_supply_forecast_request [GetLinkedInSupplyForecastRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetLinkedInSupplyForecast200Response]
+    def get_linked_in_supply_forecast(get_linked_in_supply_forecast_request, opts = {})
+      data, _status_code, _headers = get_linked_in_supply_forecast_with_http_info(get_linked_in_supply_forecast_request, opts)
+      data
+    end
+
+    # Impressions, clicks and spend forecast (LinkedIn)
+    # LinkedIn-only. Forecasted impressions, clicks, spend and ~20 other metrics for a targeting spec over a time range. Wraps LinkedIn&#39;s &#x60;adSupplyForecasts&#x60; finder.  Each returned series carries a &#x60;metricType&#x60; (IMPRESSION, CLICK, SPENDING, MAX_POTENTIAL_BUDGET, COST_PER_MILLION_IMPRESSIONS, ...) and a &#x60;granularity&#x60; (DAILY, SEVEN_DAY, THIRTY_DAY, CUSTOM). LinkedIn caps the daily spending forecast at 1.2x the daily budget and returns 0 once the total budget is exhausted.  Non-LinkedIn accounts return &#x60;available: false&#x60;. 
+    # @param get_linked_in_supply_forecast_request [GetLinkedInSupplyForecastRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetLinkedInSupplyForecast200Response, Integer, Hash)>] GetLinkedInSupplyForecast200Response data, response status code and response headers
+    def get_linked_in_supply_forecast_with_http_info(get_linked_in_supply_forecast_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_linked_in_supply_forecast ...'
+      end
+      # verify the required parameter 'get_linked_in_supply_forecast_request' is set
+      if @api_client.config.client_side_validation && get_linked_in_supply_forecast_request.nil?
+        fail ArgumentError, "Missing the required parameter 'get_linked_in_supply_forecast_request' when calling AdsApi.get_linked_in_supply_forecast"
+      end
+      # resource path
+      local_var_path = '/v1/ads/targeting/supply-forecast'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(get_linked_in_supply_forecast_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetLinkedInSupplyForecast200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_linked_in_supply_forecast",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_linked_in_supply_forecast\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List ad accounts
     # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok's `/advertiser/info/` endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time `advertiser_ids` list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 
     # @param account_id [String] Social account ID
