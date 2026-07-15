@@ -14,27 +14,10 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdAudiences200ResponseAudiencesInner < ApiModelBase
-    attr_accessor :id
+  class UploadedOrDerivedAudienceMatchRulesInner < ApiModelBase
+    attr_accessor :match_type
 
-    # Social account the audience was created against. Returned for saved_targeting items.
-    attr_accessor :account_id
-
-    attr_accessor :platform_audience_id
-
-    attr_accessor :name
-
-    attr_accessor :description
-
-    attr_accessor :type
-
-    attr_accessor :spec
-
-    attr_accessor :platform
-
-    attr_accessor :size
-
-    attr_accessor :status
+    attr_accessor :match_value
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -61,16 +44,8 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'account_id' => :'accountId',
-        :'platform_audience_id' => :'platformAudienceId',
-        :'name' => :'name',
-        :'description' => :'description',
-        :'type' => :'type',
-        :'spec' => :'spec',
-        :'platform' => :'platform',
-        :'size' => :'size',
-        :'status' => :'status'
+        :'match_type' => :'matchType',
+        :'match_value' => :'matchValue'
       }
     end
 
@@ -87,24 +62,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'account_id' => :'String',
-        :'platform_audience_id' => :'String',
-        :'name' => :'String',
-        :'description' => :'String',
-        :'type' => :'String',
-        :'spec' => :'TargetingSpec',
-        :'platform' => :'String',
-        :'size' => :'Integer',
-        :'status' => :'String'
+        :'match_type' => :'String',
+        :'match_value' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'id',
-        :'spec',
       ])
     end
 
@@ -112,56 +77,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdAudiences200ResponseAudiencesInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UploadedOrDerivedAudienceMatchRulesInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdAudiences200ResponseAudiencesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UploadedOrDerivedAudienceMatchRulesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'match_type')
+        self.match_type = attributes[:'match_type']
+      else
+        self.match_type = nil
       end
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
-
-      if attributes.key?(:'platform_audience_id')
-        self.platform_audience_id = attributes[:'platform_audience_id']
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'description')
-        self.description = attributes[:'description']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'spec')
-        self.spec = attributes[:'spec']
-      end
-
-      if attributes.key?(:'platform')
-        self.platform = attributes[:'platform']
-      end
-
-      if attributes.key?(:'size')
-        self.size = attributes[:'size']
-      end
-
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'match_value')
+        self.match_value = attributes[:'match_value']
+      else
+        self.match_value = nil
       end
     end
 
@@ -170,6 +107,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @match_type.nil?
+        invalid_properties.push('invalid value for "match_type", match_type cannot be nil.')
+      end
+
+      if @match_value.nil?
+        invalid_properties.push('invalid value for "match_value", match_value cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -177,19 +122,31 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike", "saved_targeting"])
-      return false unless type_validator.valid?(@type)
+      return false if @match_type.nil?
+      match_type_validator = EnumAttributeValidator.new('String', ["EXACT", "STARTS_WITH", "CONTAINS", "ENDS_WITH"])
+      return false unless match_type_validator.valid?(@match_type)
+      return false if @match_value.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike", "saved_targeting"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+    # @param [Object] match_type Object to be assigned
+    def match_type=(match_type)
+      validator = EnumAttributeValidator.new('String', ["EXACT", "STARTS_WITH", "CONTAINS", "ENDS_WITH"])
+      unless validator.valid?(match_type)
+        fail ArgumentError, "invalid value for \"match_type\", must be one of #{validator.allowable_values}."
       end
-      @type = type
+      @match_type = match_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] match_value Value to be assigned
+    def match_value=(match_value)
+      if match_value.nil?
+        fail ArgumentError, 'match_value cannot be nil'
+      end
+
+      @match_value = match_value
     end
 
     # Checks equality by comparing each attribute.
@@ -197,16 +154,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          account_id == o.account_id &&
-          platform_audience_id == o.platform_audience_id &&
-          name == o.name &&
-          description == o.description &&
-          type == o.type &&
-          spec == o.spec &&
-          platform == o.platform &&
-          size == o.size &&
-          status == o.status
+          match_type == o.match_type &&
+          match_value == o.match_value
     end
 
     # @see the `==` method
@@ -218,7 +167,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, platform_audience_id, name, description, type, spec, platform, size, status].hash
+      [match_type, match_value].hash
     end
 
     # Builds the object from hash

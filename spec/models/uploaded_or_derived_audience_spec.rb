@@ -54,10 +54,16 @@ describe Zernio::UploadedOrDerivedAudience do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "lookalike"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "match_rules"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 

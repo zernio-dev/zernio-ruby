@@ -1275,6 +1275,7 @@ docs/UploadWhatsAppProfilePhotoRequest1.md
 docs/UploadedFile.md
 docs/UploadedOrDerivedAudience.md
 docs/UploadedOrDerivedAudienceCompaniesInner.md
+docs/UploadedOrDerivedAudienceMatchRulesInner.md
 docs/UsageApi.md
 docs/UsageMetering.md
 docs/UsageMeteringCallUsage.md
@@ -2720,6 +2721,7 @@ lib/zernio-sdk/models/upload_whats_app_profile_photo_request1.rb
 lib/zernio-sdk/models/uploaded_file.rb
 lib/zernio-sdk/models/uploaded_or_derived_audience.rb
 lib/zernio-sdk/models/uploaded_or_derived_audience_companies_inner.rb
+lib/zernio-sdk/models/uploaded_or_derived_audience_match_rules_inner.rb
 lib/zernio-sdk/models/usage_metering.rb
 lib/zernio-sdk/models/usage_metering_call_usage.rb
 lib/zernio-sdk/models/usage_metering_call_usage_whatsapp.rb
@@ -4145,6 +4147,7 @@ spec/models/upload_whats_app_flow_json_request_spec.rb
 spec/models/upload_whats_app_profile_photo_request1_spec.rb
 spec/models/uploaded_file_spec.rb
 spec/models/uploaded_or_derived_audience_companies_inner_spec.rb
+spec/models/uploaded_or_derived_audience_match_rules_inner_spec.rb
 spec/models/uploaded_or_derived_audience_spec.rb
 spec/models/usage_metering_call_usage_spec.rb
 spec/models/usage_metering_call_usage_whatsapp_spec.rb

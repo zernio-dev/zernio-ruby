@@ -27,6 +27,9 @@ module Zernio
 
     attr_accessor :type
 
+    # Required for website_retargeting audiences (LinkedIn only). Each rule is a URL pattern; a member who visits any matching page enters the segment. Needs the LinkedIn Insight Tag installed on the customer's site — the segment only starts filling once the tag reports visits. 
+    attr_accessor :match_rules
+
     # Required for engagement audiences (LinkedIn only): what members engaged with — a video/leadgen/single-image ad campaign, a Company Page or an Event page. 
     attr_accessor :source_type
 
@@ -93,6 +96,7 @@ module Zernio
         :'name' => :'name',
         :'description' => :'description',
         :'type' => :'type',
+        :'match_rules' => :'matchRules',
         :'source_type' => :'sourceType',
         :'trigger' => :'trigger',
         :'lookback_days' => :'lookbackDays',
@@ -126,6 +130,7 @@ module Zernio
         :'name' => :'String',
         :'description' => :'String',
         :'type' => :'String',
+        :'match_rules' => :'Array<UploadedOrDerivedAudienceMatchRulesInner>',
         :'source_type' => :'String',
         :'trigger' => :'String',
         :'lookback_days' => :'Integer',
@@ -189,6 +194,12 @@ module Zernio
         self.type = attributes[:'type']
       else
         self.type = nil
+      end
+
+      if attributes.key?(:'match_rules')
+        if (value = attributes[:'match_rules']).is_a?(Array)
+          self.match_rules = value
+        end
       end
 
       if attributes.key?(:'source_type')
@@ -269,6 +280,14 @@ module Zernio
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
+      if !@match_rules.nil? && @match_rules.length > 50
+        invalid_properties.push('invalid value for "match_rules", number of items must be less than or equal to 50.')
+      end
+
+      if !@match_rules.nil? && @match_rules.length < 1
+        invalid_properties.push('invalid value for "match_rules", number of items must be greater than or equal to 1.')
+      end
+
       if !@engagement_sources.nil? && @engagement_sources.length > 50
         invalid_properties.push('invalid value for "engagement_sources", number of items must be less than or equal to 50.')
       end
@@ -313,8 +332,10 @@ module Zernio
       return false if @name.nil?
       return false if @name.to_s.length > 255
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "lookalike"])
+      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike"])
       return false unless type_validator.valid?(@type)
+      return false if !@match_rules.nil? && @match_rules.length > 50
+      return false if !@match_rules.nil? && @match_rules.length < 1
       source_type_validator = EnumAttributeValidator.new('String', ["VIDEO_ADS", "LEAD_GEN_FORMS", "ORGANIZATION_PAGES", "EVENT_PAGES", "SINGLE_IMAGE_ADS"])
       return false unless source_type_validator.valid?(@source_type)
       lookback_days_validator = EnumAttributeValidator.new('Integer', [30, 60, 90, 180, 365])
@@ -367,11 +388,29 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "lookalike"])
+      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] match_rules Value to be assigned
+    def match_rules=(match_rules)
+      if match_rules.nil?
+        fail ArgumentError, 'match_rules cannot be nil'
+      end
+
+      if match_rules.length > 50
+        fail ArgumentError, 'invalid value for "match_rules", number of items must be less than or equal to 50.'
+      end
+
+      if match_rules.length < 1
+        fail ArgumentError, 'invalid value for "match_rules", number of items must be greater than or equal to 1.'
+      end
+
+      @match_rules = match_rules
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -476,6 +515,7 @@ module Zernio
           name == o.name &&
           description == o.description &&
           type == o.type &&
+          match_rules == o.match_rules &&
           source_type == o.source_type &&
           trigger == o.trigger &&
           lookback_days == o.lookback_days &&
@@ -499,7 +539,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, description, type, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, source_audience_id, country, ratio, rule, customer_file_source].hash
+      [account_id, ad_account_id, name, description, type, match_rules, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, source_audience_id, country, ratio, rule, customer_file_source].hash
     end
 
     # Builds the object from hash

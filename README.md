@@ -1767,6 +1767,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadedFile](docs/UploadedFile.md)
  - [Zernio::UploadedOrDerivedAudience](docs/UploadedOrDerivedAudience.md)
  - [Zernio::UploadedOrDerivedAudienceCompaniesInner](docs/UploadedOrDerivedAudienceCompaniesInner.md)
+ - [Zernio::UploadedOrDerivedAudienceMatchRulesInner](docs/UploadedOrDerivedAudienceMatchRulesInner.md)
  - [Zernio::UsageMetering](docs/UsageMetering.md)
  - [Zernio::UsageMeteringCallUsage](docs/UsageMeteringCallUsage.md)
  - [Zernio::UsageMeteringCallUsageWhatsapp](docs/UsageMeteringCallUsageWhatsapp.md)
