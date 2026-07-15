@@ -21,6 +21,7 @@ module Zernio
 
     attr_accessor :display_name
 
+    # requested/changes_requested = pre-submission review states; customers see them as pending / needs changes.
     attr_accessor :status
 
     # Carrier-registry brand status (e.g. VERIFIED).
@@ -212,7 +213,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       registration_type_validator = EnumAttributeValidator.new('String', ["standard_10dlc", "sole_prop_10dlc", "toll_free"])
       return false unless registration_type_validator.valid?(@registration_type)
-      status_validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected"])
+      status_validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected", "requested", "changes_requested", "deactivated"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -230,7 +231,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected"])
+      validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected", "requested", "changes_requested", "deactivated"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end

@@ -36,7 +36,7 @@ describe Zernio::ReuseSmsRegistrationForNumber200Response do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["pending", "approved", "rejected"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["pending", "approved", "rejected", "requested", "changes_requested", "deactivated"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end

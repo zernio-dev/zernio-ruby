@@ -24,6 +24,12 @@ module Zernio
 
     attr_accessor :campaign
 
+    # Raw dashboard-wizard answers, stored only to prefill edit-and-resubmit. API integrators can omit.
+    attr_accessor :wizard_values
+
+    # Resubmit a registration that was returned for changes — updates it in place instead of creating a new one.
+    attr_accessor :resubmit_request_id
+
     attr_accessor :toll_free
 
     class EnumAttributeValidator
@@ -55,6 +61,8 @@ module Zernio
         :'phone_numbers' => :'phoneNumbers',
         :'brand' => :'brand',
         :'campaign' => :'campaign',
+        :'wizard_values' => :'wizardValues',
+        :'resubmit_request_id' => :'resubmitRequestId',
         :'toll_free' => :'tollFree'
       }
     end
@@ -76,6 +84,8 @@ module Zernio
         :'phone_numbers' => :'Array<String>',
         :'brand' => :'StartSmsRegistrationRequestBrand',
         :'campaign' => :'StartSmsRegistrationRequestCampaign',
+        :'wizard_values' => :'Hash<String, String>',
+        :'resubmit_request_id' => :'String',
         :'toll_free' => :'StartSmsRegistrationRequestTollFree'
       }
     end
@@ -122,6 +132,16 @@ module Zernio
 
       if attributes.key?(:'campaign')
         self.campaign = attributes[:'campaign']
+      end
+
+      if attributes.key?(:'wizard_values')
+        if (value = attributes[:'wizard_values']).is_a?(Hash)
+          self.wizard_values = value
+        end
+      end
+
+      if attributes.key?(:'resubmit_request_id')
+        self.resubmit_request_id = attributes[:'resubmit_request_id']
       end
 
       if attributes.key?(:'toll_free')
@@ -194,6 +214,8 @@ module Zernio
           phone_numbers == o.phone_numbers &&
           brand == o.brand &&
           campaign == o.campaign &&
+          wizard_values == o.wizard_values &&
+          resubmit_request_id == o.resubmit_request_id &&
           toll_free == o.toll_free
     end
 
@@ -206,7 +228,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [registration_type, phone_numbers, brand, campaign, toll_free].hash
+      [registration_type, phone_numbers, brand, campaign, wizard_values, resubmit_request_id, toll_free].hash
     end
 
     # Builds the object from hash

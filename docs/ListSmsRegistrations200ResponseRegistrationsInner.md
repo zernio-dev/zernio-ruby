@@ -7,7 +7,7 @@
 | **id** | **String** |  | [optional] |
 | **registration_type** | **String** |  | [optional] |
 | **display_name** | **String** |  | [optional] |
-| **status** | **String** |  | [optional] |
+| **status** | **String** | requested/changes_requested &#x3D; pre-submission review states; customers see them as pending / needs changes. | [optional] |
 | **brand_status** | **String** | Carrier-registry brand status (e.g. VERIFIED). | [optional] |
 | **campaign_status** | **String** |  | [optional] |
 | **brand_id** | **String** | TCR brand id, useful when referencing the brand in carrier support threads. | [optional] |

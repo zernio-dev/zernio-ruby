@@ -17,6 +17,7 @@ module Zernio
   class ReuseSmsRegistrationForNumber200Response < ApiModelBase
     attr_accessor :registration_id
 
+    # requested/changes_requested = pre-submission review states; customers see them as pending / needs changes.
     attr_accessor :status
 
     class EnumAttributeValidator
@@ -110,7 +111,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected"])
+      status_validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected", "requested", "changes_requested", "deactivated"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -118,7 +119,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected"])
+      validator = EnumAttributeValidator.new('String', ["pending", "approved", "rejected", "requested", "changes_requested", "deactivated"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
