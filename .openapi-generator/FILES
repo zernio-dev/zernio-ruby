@@ -1268,7 +1268,7 @@ docs/UpdateYoutubeDefaultPlaylistRequest.md
 docs/UploadMediaDirect200Response.md
 docs/UploadPhoneNumberKycDocument200Response.md
 docs/UploadPhoneNumberPortInDocument200Response.md
-docs/UploadSmsOptInProof200Response.md
+docs/UploadSmsOptInProofFile200Response.md
 docs/UploadTokenResponse.md
 docs/UploadTokenStatusResponse.md
 docs/UploadWhatsAppFlowJson200Response.md
@@ -2718,7 +2718,7 @@ lib/zernio-sdk/models/update_youtube_default_playlist_request.rb
 lib/zernio-sdk/models/upload_media_direct200_response.rb
 lib/zernio-sdk/models/upload_phone_number_kyc_document200_response.rb
 lib/zernio-sdk/models/upload_phone_number_port_in_document200_response.rb
-lib/zernio-sdk/models/upload_sms_opt_in_proof200_response.rb
+lib/zernio-sdk/models/upload_sms_opt_in_proof_file200_response.rb
 lib/zernio-sdk/models/upload_token_response.rb
 lib/zernio-sdk/models/upload_token_status_response.rb
 lib/zernio-sdk/models/upload_whats_app_flow_json200_response.rb
@@ -4149,7 +4149,7 @@ spec/models/update_youtube_default_playlist_request_spec.rb
 spec/models/upload_media_direct200_response_spec.rb
 spec/models/upload_phone_number_kyc_document200_response_spec.rb
 spec/models/upload_phone_number_port_in_document200_response_spec.rb
-spec/models/upload_sms_opt_in_proof200_response_spec.rb
+spec/models/upload_sms_opt_in_proof_file200_response_spec.rb
 spec/models/upload_token_response_spec.rb
 spec/models/upload_token_status_response_spec.rb
 spec/models/upload_whats_app_flow_json200_response_spec.rb

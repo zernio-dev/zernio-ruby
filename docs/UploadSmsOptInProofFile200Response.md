@@ -1,4 +1,4 @@
-# Zernio::UploadSmsOptInProof200Response
+# Zernio::UploadSmsOptInProofFile200Response
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::UploadSmsOptInProof200Response.new(
+instance = Zernio::UploadSmsOptInProofFile200Response.new(
   url: null
 )
 ```

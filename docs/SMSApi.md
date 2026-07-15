@@ -17,6 +17,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**share_sms_registration**](SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link |
 | [**start_sms_registration**](SMSApi.md#start_sms_registration) | **POST** /v1/sms/registrations | Start a carrier registration |
 | [**upload_sms_opt_in_proof**](SMSApi.md#upload_sms_opt_in_proof) | **POST** /v1/sms/registrations/{id}/opt-in-proof | Upload opt-in form proof for an appeal |
+| [**upload_sms_opt_in_proof_file**](SMSApi.md#upload_sms_opt_in_proof_file) | **POST** /v1/sms/opt-in-proof | Upload opt-in form proof |
 | [**verify_sms_registration_otp**](SMSApi.md#verify_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/verify-otp | Submit the sole-prop OTP |
 
 
@@ -855,7 +856,7 @@ end
 
 ## upload_sms_opt_in_proof
 
-> <UploadSmsOptInProof200Response> upload_sms_opt_in_proof(id, file)
+> <UploadSmsOptInProofFile200Response> upload_sms_opt_in_proof(id, file)
 
 Upload opt-in form proof for an appeal
 
@@ -889,7 +890,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UploadSmsOptInProof200Response>, Integer, Hash)> upload_sms_opt_in_proof_with_http_info(id, file)
+> <Array(<UploadSmsOptInProofFile200Response>, Integer, Hash)> upload_sms_opt_in_proof_with_http_info(id, file)
 
 ```ruby
 begin
@@ -897,7 +898,7 @@ begin
   data, status_code, headers = api_instance.upload_sms_opt_in_proof_with_http_info(id, file)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UploadSmsOptInProof200Response>
+  p data # => <UploadSmsOptInProofFile200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling SMSApi->upload_sms_opt_in_proof_with_http_info: #{e}"
 end
@@ -912,7 +913,76 @@ end
 
 ### Return type
 
-[**UploadSmsOptInProof200Response**](UploadSmsOptInProof200Response.md)
+[**UploadSmsOptInProofFile200Response**](UploadSmsOptInProofFile200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
+- **Accept**: application/json
+
+
+## upload_sms_opt_in_proof_file
+
+> <UploadSmsOptInProofFile200Response> upload_sms_opt_in_proof_file(file)
+
+Upload opt-in form proof
+
+Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Include that URL in the campaign's `messageFlow` (the opt-in workflow text) — the carrier registry has no attachment field, so reviewers verify consent by opening links in that answer. Works before a registration exists (use it when registering) and for appeals. `/v1/sms/registrations/{id}/opt-in-proof` is an alias. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+file = File.new('/path/to/some/file') # File | PNG, JPG, WebP, GIF or PDF, max 4MB.
+
+begin
+  # Upload opt-in form proof
+  result = api_instance.upload_sms_opt_in_proof_file(file)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->upload_sms_opt_in_proof_file: #{e}"
+end
+```
+
+#### Using the upload_sms_opt_in_proof_file_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UploadSmsOptInProofFile200Response>, Integer, Hash)> upload_sms_opt_in_proof_file_with_http_info(file)
+
+```ruby
+begin
+  # Upload opt-in form proof
+  data, status_code, headers = api_instance.upload_sms_opt_in_proof_file_with_http_info(file)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UploadSmsOptInProofFile200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->upload_sms_opt_in_proof_file_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **file** | **File** | PNG, JPG, WebP, GIF or PDF, max 4MB. |  |
+
+### Return type
+
+[**UploadSmsOptInProofFile200Response**](UploadSmsOptInProofFile200Response.md)
 
 ### Authorization
 

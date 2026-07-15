@@ -822,7 +822,7 @@ module Zernio
     # @param id [String] 
     # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
     # @param [Hash] opts the optional parameters
-    # @return [UploadSmsOptInProof200Response]
+    # @return [UploadSmsOptInProofFile200Response]
     def upload_sms_opt_in_proof(id, file, opts = {})
       data, _status_code, _headers = upload_sms_opt_in_proof_with_http_info(id, file, opts)
       data
@@ -833,7 +833,7 @@ module Zernio
     # @param id [String] 
     # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UploadSmsOptInProof200Response, Integer, Hash)>] UploadSmsOptInProof200Response data, response status code and response headers
+    # @return [Array<(UploadSmsOptInProofFile200Response, Integer, Hash)>] UploadSmsOptInProofFile200Response data, response status code and response headers
     def upload_sms_opt_in_proof_with_http_info(id, file, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SMSApi.upload_sms_opt_in_proof ...'
@@ -870,7 +870,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UploadSmsOptInProof200Response'
+      return_type = opts[:debug_return_type] || 'UploadSmsOptInProofFile200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -888,6 +888,75 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SMSApi#upload_sms_opt_in_proof\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Upload opt-in form proof
+    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Include that URL in the campaign's `messageFlow` (the opt-in workflow text) — the carrier registry has no attachment field, so reviewers verify consent by opening links in that answer. Works before a registration exists (use it when registering) and for appeals. `/v1/sms/registrations/{id}/opt-in-proof` is an alias. 
+    # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
+    # @param [Hash] opts the optional parameters
+    # @return [UploadSmsOptInProofFile200Response]
+    def upload_sms_opt_in_proof_file(file, opts = {})
+      data, _status_code, _headers = upload_sms_opt_in_proof_file_with_http_info(file, opts)
+      data
+    end
+
+    # Upload opt-in form proof
+    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Include that URL in the campaign&#39;s &#x60;messageFlow&#x60; (the opt-in workflow text) — the carrier registry has no attachment field, so reviewers verify consent by opening links in that answer. Works before a registration exists (use it when registering) and for appeals. &#x60;/v1/sms/registrations/{id}/opt-in-proof&#x60; is an alias. 
+    # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UploadSmsOptInProofFile200Response, Integer, Hash)>] UploadSmsOptInProofFile200Response data, response status code and response headers
+    def upload_sms_opt_in_proof_file_with_http_info(file, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SMSApi.upload_sms_opt_in_proof_file ...'
+      end
+      # verify the required parameter 'file' is set
+      if @api_client.config.client_side_validation && file.nil?
+        fail ArgumentError, "Missing the required parameter 'file' when calling SMSApi.upload_sms_opt_in_proof_file"
+      end
+      # resource path
+      local_var_path = '/v1/sms/opt-in-proof'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['multipart/form-data'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+      form_params['file'] = file
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UploadSmsOptInProofFile200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"SMSApi.upload_sms_opt_in_proof_file",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SMSApi#upload_sms_opt_in_proof_file\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

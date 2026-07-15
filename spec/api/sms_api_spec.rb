@@ -183,8 +183,20 @@ describe 'SMSApi' do
   # @param id 
   # @param file PNG, JPG, WebP, GIF or PDF, max 4MB.
   # @param [Hash] opts the optional parameters
-  # @return [UploadSmsOptInProof200Response]
+  # @return [UploadSmsOptInProofFile200Response]
   describe 'upload_sms_opt_in_proof test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for upload_sms_opt_in_proof_file
+  # Upload opt-in form proof
+  # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Include that URL in the campaign&#39;s &#x60;messageFlow&#x60; (the opt-in workflow text) — the carrier registry has no attachment field, so reviewers verify consent by opening links in that answer. Works before a registration exists (use it when registering) and for appeals. &#x60;/v1/sms/registrations/{id}/opt-in-proof&#x60; is an alias. 
+  # @param file PNG, JPG, WebP, GIF or PDF, max 4MB.
+  # @param [Hash] opts the optional parameters
+  # @return [UploadSmsOptInProofFile200Response]
+  describe 'upload_sms_opt_in_proof_file test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
