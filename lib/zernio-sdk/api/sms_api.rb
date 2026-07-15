@@ -817,6 +817,81 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Upload opt-in form proof for an appeal
+    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Carrier reviewers reject campaigns whose consent can't be verified and ask for a \"link/screenshot of the opt-in form\" — the registry has no attachment field, so include the returned URL inside the `messageFlow` you submit with the appeal (`POST /v1/sms/registrations/{id}/appeal`). 
+    # @param id [String] 
+    # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
+    # @param [Hash] opts the optional parameters
+    # @return [UploadSmsOptInProof200Response]
+    def upload_sms_opt_in_proof(id, file, opts = {})
+      data, _status_code, _headers = upload_sms_opt_in_proof_with_http_info(id, file, opts)
+      data
+    end
+
+    # Upload opt-in form proof for an appeal
+    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Carrier reviewers reject campaigns whose consent can&#39;t be verified and ask for a \&quot;link/screenshot of the opt-in form\&quot; — the registry has no attachment field, so include the returned URL inside the &#x60;messageFlow&#x60; you submit with the appeal (&#x60;POST /v1/sms/registrations/{id}/appeal&#x60;). 
+    # @param id [String] 
+    # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UploadSmsOptInProof200Response, Integer, Hash)>] UploadSmsOptInProof200Response data, response status code and response headers
+    def upload_sms_opt_in_proof_with_http_info(id, file, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SMSApi.upload_sms_opt_in_proof ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling SMSApi.upload_sms_opt_in_proof"
+      end
+      # verify the required parameter 'file' is set
+      if @api_client.config.client_side_validation && file.nil?
+        fail ArgumentError, "Missing the required parameter 'file' when calling SMSApi.upload_sms_opt_in_proof"
+      end
+      # resource path
+      local_var_path = '/v1/sms/registrations/{id}/opt-in-proof'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['multipart/form-data'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+      form_params['file'] = file
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UploadSmsOptInProof200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"SMSApi.upload_sms_opt_in_proof",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SMSApi#upload_sms_opt_in_proof\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Submit the sole-prop OTP
     # Completes sole-proprietor 10DLC brand verification by submitting the one-time PIN texted to the brand's mobile number. On success the registration continues to campaign creation automatically. 
     # @param id [String] 

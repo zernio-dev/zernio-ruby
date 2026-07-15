@@ -390,6 +390,7 @@ Class | Method | HTTP request | Description
 *Zernio::SMSApi* | [**send_sms**](docs/SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS
 *Zernio::SMSApi* | [**share_sms_registration**](docs/SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link
 *Zernio::SMSApi* | [**start_sms_registration**](docs/SMSApi.md#start_sms_registration) | **POST** /v1/sms/registrations | Start a carrier registration
+*Zernio::SMSApi* | [**upload_sms_opt_in_proof**](docs/SMSApi.md#upload_sms_opt_in_proof) | **POST** /v1/sms/registrations/{id}/opt-in-proof | Upload opt-in form proof for an appeal
 *Zernio::SMSApi* | [**verify_sms_registration_otp**](docs/SMSApi.md#verify_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/verify-otp | Submit the sole-prop OTP
 *Zernio::SequencesApi* | [**activate_sequence**](docs/SequencesApi.md#activate_sequence) | **POST** /v1/sequences/{sequenceId}/activate | Activate sequence
 *Zernio::SequencesApi* | [**create_sequence**](docs/SequencesApi.md#create_sequence) | **POST** /v1/sequences | Create sequence
@@ -1761,6 +1762,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadMediaDirect200Response](docs/UploadMediaDirect200Response.md)
  - [Zernio::UploadPhoneNumberKycDocument200Response](docs/UploadPhoneNumberKycDocument200Response.md)
  - [Zernio::UploadPhoneNumberPortInDocument200Response](docs/UploadPhoneNumberPortInDocument200Response.md)
+ - [Zernio::UploadSmsOptInProof200Response](docs/UploadSmsOptInProof200Response.md)
  - [Zernio::UploadTokenResponse](docs/UploadTokenResponse.md)
  - [Zernio::UploadTokenStatusResponse](docs/UploadTokenStatusResponse.md)
  - [Zernio::UploadWhatsAppFlowJson200Response](docs/UploadWhatsAppFlowJson200Response.md)

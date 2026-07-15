@@ -16,6 +16,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**send_sms**](SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS |
 | [**share_sms_registration**](SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link |
 | [**start_sms_registration**](SMSApi.md#start_sms_registration) | **POST** /v1/sms/registrations | Start a carrier registration |
+| [**upload_sms_opt_in_proof**](SMSApi.md#upload_sms_opt_in_proof) | **POST** /v1/sms/registrations/{id}/opt-in-proof | Upload opt-in form proof for an appeal |
 | [**verify_sms_registration_otp**](SMSApi.md#verify_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/verify-otp | Submit the sole-prop OTP |
 
 
@@ -849,6 +850,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## upload_sms_opt_in_proof
+
+> <UploadSmsOptInProof200Response> upload_sms_opt_in_proof(id, file)
+
+Upload opt-in form proof for an appeal
+
+Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Carrier reviewers reject campaigns whose consent can't be verified and ask for a \"link/screenshot of the opt-in form\" — the registry has no attachment field, so include the returned URL inside the `messageFlow` you submit with the appeal (`POST /v1/sms/registrations/{id}/appeal`). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+id = 'id_example' # String | 
+file = File.new('/path/to/some/file') # File | PNG, JPG, WebP, GIF or PDF, max 4MB.
+
+begin
+  # Upload opt-in form proof for an appeal
+  result = api_instance.upload_sms_opt_in_proof(id, file)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->upload_sms_opt_in_proof: #{e}"
+end
+```
+
+#### Using the upload_sms_opt_in_proof_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UploadSmsOptInProof200Response>, Integer, Hash)> upload_sms_opt_in_proof_with_http_info(id, file)
+
+```ruby
+begin
+  # Upload opt-in form proof for an appeal
+  data, status_code, headers = api_instance.upload_sms_opt_in_proof_with_http_info(id, file)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UploadSmsOptInProof200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->upload_sms_opt_in_proof_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+| **file** | **File** | PNG, JPG, WebP, GIF or PDF, max 4MB. |  |
+
+### Return type
+
+[**UploadSmsOptInProof200Response**](UploadSmsOptInProof200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 

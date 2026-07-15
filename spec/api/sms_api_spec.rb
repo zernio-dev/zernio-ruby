@@ -177,6 +177,19 @@ describe 'SMSApi' do
     end
   end
 
+  # unit tests for upload_sms_opt_in_proof
+  # Upload opt-in form proof for an appeal
+  # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Carrier reviewers reject campaigns whose consent can&#39;t be verified and ask for a \&quot;link/screenshot of the opt-in form\&quot; — the registry has no attachment field, so include the returned URL inside the &#x60;messageFlow&#x60; you submit with the appeal (&#x60;POST /v1/sms/registrations/{id}/appeal&#x60;). 
+  # @param id 
+  # @param file PNG, JPG, WebP, GIF or PDF, max 4MB.
+  # @param [Hash] opts the optional parameters
+  # @return [UploadSmsOptInProof200Response]
+  describe 'upload_sms_opt_in_proof test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for verify_sms_registration_otp
   # Submit the sole-prop OTP
   # Completes sole-proprietor 10DLC brand verification by submitting the one-time PIN texted to the brand&#39;s mobile number. On success the registration continues to campaign creation automatically. 
