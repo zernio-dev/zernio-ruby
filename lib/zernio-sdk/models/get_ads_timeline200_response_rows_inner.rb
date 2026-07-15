@@ -37,7 +37,7 @@ module Zernio
     # Cost per 1000 impressions in native currency.
     attr_accessor :cpm
 
-    # Sum of conversion events matching the campaign optimization goal. Meta-only at time of writing.
+    # Sum of conversion events over the range. Meta: events matching the campaign optimization goal. Google: tracked conversions. X / LinkedIn: reported website/lead conversions (added 2026-07).
     attr_accessor :conversions
 
     attr_accessor :cost_per_conversion

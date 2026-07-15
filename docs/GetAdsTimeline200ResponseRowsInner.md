@@ -13,7 +13,7 @@
 | **ctr** | **Float** | Click-through rate as a percentage (0–100). | [optional] |
 | **cpc** | **Float** | Cost per click in native currency. | [optional] |
 | **cpm** | **Float** | Cost per 1000 impressions in native currency. | [optional] |
-| **conversions** | **Integer** | Sum of conversion events matching the campaign optimization goal. Meta-only at time of writing. | [optional] |
+| **conversions** | **Integer** | Sum of conversion events over the range. Meta: events matching the campaign optimization goal. Google: tracked conversions. X / LinkedIn: reported website/lead conversions (added 2026-07). | [optional] |
 | **cost_per_conversion** | **Float** |  | [optional] |
 | **actions** | **Hash&lt;String, Float&gt;** | Per-action-type counts merged across all ads on this day. Keys are platform-native action types. | [optional] |
 | **action_values** | **Hash&lt;String, Float&gt;** | Monetary mirror of &#x60;actions&#x60; in native currency. | [optional] |
