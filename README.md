@@ -1243,6 +1243,7 @@ Class | Method | HTTP request | Description
  - [Zernio::LinkedInAdsPlatformDataJobsHeadline](docs/LinkedInAdsPlatformDataJobsHeadline.md)
  - [Zernio::LinkedInAdsPlatformDataSpotlight](docs/LinkedInAdsPlatformDataSpotlight.md)
  - [Zernio::LinkedInAdsPlatformDataTextAd](docs/LinkedInAdsPlatformDataTextAd.md)
+ - [Zernio::LinkedInAdsPlatformDataThoughtLeader](docs/LinkedInAdsPlatformDataThoughtLeader.md)
  - [Zernio::LinkedInAggregateAnalyticsDailyResponse](docs/LinkedInAggregateAnalyticsDailyResponse.md)
  - [Zernio::LinkedInAggregateAnalyticsDailyResponseAnalytics](docs/LinkedInAggregateAnalyticsDailyResponseAnalytics.md)
  - [Zernio::LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner](docs/LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner.md)

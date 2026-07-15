@@ -53,6 +53,8 @@ module Zernio
 
     attr_accessor :event
 
+    attr_accessor :thought_leader
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -92,7 +94,8 @@ module Zernio
         :'jobs' => :'jobs',
         :'text_ad' => :'textAd',
         :'conversation' => :'conversation',
-        :'event' => :'event'
+        :'event' => :'event',
+        :'thought_leader' => :'thoughtLeader'
       }
     end
 
@@ -123,7 +126,8 @@ module Zernio
         :'jobs' => :'LinkedInAdsPlatformDataJobs',
         :'text_ad' => :'LinkedInAdsPlatformDataTextAd',
         :'conversation' => :'LinkedInAdsPlatformDataConversation',
-        :'event' => :'LinkedInAdsPlatformDataEvent'
+        :'event' => :'LinkedInAdsPlatformDataEvent',
+        :'thought_leader' => :'LinkedInAdsPlatformDataThoughtLeader'
       }
     end
 
@@ -208,6 +212,10 @@ module Zernio
       if attributes.key?(:'event')
         self.event = attributes[:'event']
       end
+
+      if attributes.key?(:'thought_leader')
+        self.thought_leader = attributes[:'thought_leader']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -268,7 +276,8 @@ module Zernio
           jobs == o.jobs &&
           text_ad == o.text_ad &&
           conversation == o.conversation &&
-          event == o.event
+          event == o.event &&
+          thought_leader == o.thought_leader
     end
 
     # @see the `==` method
@@ -280,7 +289,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [cost_type, unit_cost, optimization_target_type, creative_selection, audience_expansion_enabled, offsite_delivery_enabled, connected_television_only, carousel, document, spotlight, follower, jobs, text_ad, conversation, event].hash
+      [cost_type, unit_cost, optimization_target_type, creative_selection, audience_expansion_enabled, offsite_delivery_enabled, connected_television_only, carousel, document, spotlight, follower, jobs, text_ad, conversation, event, thought_leader].hash
     end
 
     # Builds the object from hash

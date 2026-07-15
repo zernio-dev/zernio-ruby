@@ -731,6 +731,7 @@ docs/LinkedInAdsPlatformDataJobsButtonLabel.md
 docs/LinkedInAdsPlatformDataJobsHeadline.md
 docs/LinkedInAdsPlatformDataSpotlight.md
 docs/LinkedInAdsPlatformDataTextAd.md
+docs/LinkedInAdsPlatformDataThoughtLeader.md
 docs/LinkedInAggregateAnalyticsDailyResponse.md
 docs/LinkedInAggregateAnalyticsDailyResponseAnalytics.md
 docs/LinkedInAggregateAnalyticsDailyResponseAnalyticsImpressionsInner.md
@@ -2208,6 +2209,7 @@ lib/zernio-sdk/models/linked_in_ads_platform_data_jobs_button_label.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data_jobs_headline.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data_spotlight.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data_text_ad.rb
+lib/zernio-sdk/models/linked_in_ads_platform_data_thought_leader.rb
 lib/zernio-sdk/models/linked_in_aggregate_analytics_daily_response.rb
 lib/zernio-sdk/models/linked_in_aggregate_analytics_daily_response_analytics.rb
 lib/zernio-sdk/models/linked_in_aggregate_analytics_daily_response_analytics_impressions_inner.rb
@@ -3651,6 +3653,7 @@ spec/models/linked_in_ads_platform_data_jobs_spec.rb
 spec/models/linked_in_ads_platform_data_spec.rb
 spec/models/linked_in_ads_platform_data_spotlight_spec.rb
 spec/models/linked_in_ads_platform_data_text_ad_spec.rb
+spec/models/linked_in_ads_platform_data_thought_leader_spec.rb
 spec/models/linked_in_aggregate_analytics_daily_response_analytics_impressions_inner_spec.rb
 spec/models/linked_in_aggregate_analytics_daily_response_analytics_spec.rb
 spec/models/linked_in_aggregate_analytics_daily_response_spec.rb

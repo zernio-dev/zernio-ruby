@@ -19,6 +19,7 @@
 | **text_ad** | [**LinkedInAdsPlatformDataTextAd**](LinkedInAdsPlatformDataTextAd.md) |  | [optional] |
 | **conversation** | [**LinkedInAdsPlatformDataConversation**](LinkedInAdsPlatformDataConversation.md) |  | [optional] |
 | **event** | [**LinkedInAdsPlatformDataEvent**](LinkedInAdsPlatformDataEvent.md) |  | [optional] |
+| **thought_leader** | [**LinkedInAdsPlatformDataThoughtLeader**](LinkedInAdsPlatformDataThoughtLeader.md) |  | [optional] |
 
 ## Example
 
@@ -40,7 +41,8 @@ instance = Zernio::LinkedInAdsPlatformData.new(
   jobs: null,
   text_ad: null,
   conversation: null,
-  event: null
+  event: null,
+  thought_leader: null
 )
 ```
 
