@@ -16,11 +16,13 @@
 | **optout_keywords** | **String** |  |  |
 | **optout_message** | **String** |  | [optional] |
 | **help_keywords** | **String** |  |  |
-| **embedded_link** | **Boolean** |  | [optional] |
-| **embedded_phone** | **Boolean** |  | [optional] |
+| **embedded_link** | **Boolean** | Whether messages carry links. Auto-derived from the samples when omitted, so the declaration matches what the reviewer reads. | [optional] |
+| **embedded_phone** | **Boolean** | Whether messages carry phone numbers. Auto-derived from the samples when omitted. | [optional] |
 | **number_pool** | **Boolean** |  | [optional] |
 | **age_gated** | **Boolean** |  | [optional] |
 | **direct_lending** | **Boolean** |  | [optional] |
+| **privacy_policy_link** | **String** | Link to your privacy policy. Recommended: reviewers check that it says mobile information is not sold or shared with third parties for promotional purposes. A bare domain is normalized to https://. | [optional] |
+| **terms_and_conditions_link** | **String** | Link to your terms &amp; conditions. A bare domain is normalized to https://. | [optional] |
 
 ## Example
 
@@ -44,7 +46,9 @@ instance = Zernio::StartSmsRegistrationRequestCampaign.new(
   embedded_phone: null,
   number_pool: null,
   age_gated: null,
-  direct_lending: null
+  direct_lending: null,
+  privacy_policy_link: null,
+  terms_and_conditions_link: null
 )
 ```
 

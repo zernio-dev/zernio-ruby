@@ -43,8 +43,10 @@ module Zernio
 
     attr_accessor :help_keywords
 
+    # Whether messages carry links. Auto-derived from the samples when omitted, so the declaration matches what the reviewer reads.
     attr_accessor :embedded_link
 
+    # Whether messages carry phone numbers. Auto-derived from the samples when omitted.
     attr_accessor :embedded_phone
 
     attr_accessor :number_pool
@@ -52,6 +54,12 @@ module Zernio
     attr_accessor :age_gated
 
     attr_accessor :direct_lending
+
+    # Link to your privacy policy. Recommended: reviewers check that it says mobile information is not sold or shared with third parties for promotional purposes. A bare domain is normalized to https://.
+    attr_accessor :privacy_policy_link
+
+    # Link to your terms & conditions. A bare domain is normalized to https://.
+    attr_accessor :terms_and_conditions_link
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -94,7 +102,9 @@ module Zernio
         :'embedded_phone' => :'embeddedPhone',
         :'number_pool' => :'numberPool',
         :'age_gated' => :'ageGated',
-        :'direct_lending' => :'directLending'
+        :'direct_lending' => :'directLending',
+        :'privacy_policy_link' => :'privacyPolicyLink',
+        :'terms_and_conditions_link' => :'termsAndConditionsLink'
       }
     end
 
@@ -127,7 +137,9 @@ module Zernio
         :'embedded_phone' => :'Boolean',
         :'number_pool' => :'Boolean',
         :'age_gated' => :'Boolean',
-        :'direct_lending' => :'Boolean'
+        :'direct_lending' => :'Boolean',
+        :'privacy_policy_link' => :'String',
+        :'terms_and_conditions_link' => :'String'
       }
     end
 
@@ -237,6 +249,14 @@ module Zernio
 
       if attributes.key?(:'direct_lending')
         self.direct_lending = attributes[:'direct_lending']
+      end
+
+      if attributes.key?(:'privacy_policy_link')
+        self.privacy_policy_link = attributes[:'privacy_policy_link']
+      end
+
+      if attributes.key?(:'terms_and_conditions_link')
+        self.terms_and_conditions_link = attributes[:'terms_and_conditions_link']
       end
     end
 
@@ -544,7 +564,9 @@ module Zernio
           embedded_phone == o.embedded_phone &&
           number_pool == o.number_pool &&
           age_gated == o.age_gated &&
-          direct_lending == o.direct_lending
+          direct_lending == o.direct_lending &&
+          privacy_policy_link == o.privacy_policy_link &&
+          terms_and_conditions_link == o.terms_and_conditions_link
     end
 
     # @see the `==` method
@@ -556,7 +578,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [usecase, sub_usecases, description, message_flow, sample1, sample2, help_message, optin_keywords, optin_message, optout_keywords, optout_message, help_keywords, embedded_link, embedded_phone, number_pool, age_gated, direct_lending].hash
+      [usecase, sub_usecases, description, message_flow, sample1, sample2, help_message, optin_keywords, optin_message, optout_keywords, optout_message, help_keywords, embedded_link, embedded_phone, number_pool, age_gated, direct_lending, privacy_policy_link, terms_and_conditions_link].hash
     end
 
     # Builds the object from hash
