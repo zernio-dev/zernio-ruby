@@ -83,11 +83,11 @@ end
 
 ## delete_queue_slot
 
-> <QueueDeleteResponse> delete_queue_slot(profile_id, queue_id)
+> <QueueDeleteResponse> delete_queue_slot(profile_id, opts)
 
 Delete schedule
 
-Delete a queue from a profile. Requires queueId to specify which queue to delete. If deleting the default queue, another queue will be promoted to default. 
+Delete a queue from a profile. Pass queueId to delete a specific queue; omit it to delete all queues for the profile. If deleting the default queue, another queue will be promoted to default. 
 
 ### Examples
 
@@ -102,11 +102,13 @@ end
 
 api_instance = Zernio::QueueApi.new
 profile_id = 'profile_id_example' # String | 
-queue_id = 'queue_id_example' # String | Queue ID to delete
+opts = {
+  queue_id: 'queue_id_example' # String | Queue ID to delete. Omit to delete all queues for the profile
+}
 
 begin
   # Delete schedule
-  result = api_instance.delete_queue_slot(profile_id, queue_id)
+  result = api_instance.delete_queue_slot(profile_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling QueueApi->delete_queue_slot: #{e}"
@@ -117,12 +119,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<QueueDeleteResponse>, Integer, Hash)> delete_queue_slot_with_http_info(profile_id, queue_id)
+> <Array(<QueueDeleteResponse>, Integer, Hash)> delete_queue_slot_with_http_info(profile_id, opts)
 
 ```ruby
 begin
   # Delete schedule
-  data, status_code, headers = api_instance.delete_queue_slot_with_http_info(profile_id, queue_id)
+  data, status_code, headers = api_instance.delete_queue_slot_with_http_info(profile_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <QueueDeleteResponse>
@@ -136,7 +138,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** |  |  |
-| **queue_id** | **String** | Queue ID to delete |  |
+| **queue_id** | **String** | Queue ID to delete. Omit to delete all queues for the profile | [optional] |
 
 ### Return type
 

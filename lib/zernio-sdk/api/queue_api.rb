@@ -88,23 +88,23 @@ module Zernio
     end
 
     # Delete schedule
-    # Delete a queue from a profile. Requires queueId to specify which queue to delete. If deleting the default queue, another queue will be promoted to default. 
+    # Delete a queue from a profile. Pass queueId to delete a specific queue; omit it to delete all queues for the profile. If deleting the default queue, another queue will be promoted to default. 
     # @param profile_id [String] 
-    # @param queue_id [String] Queue ID to delete
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :queue_id Queue ID to delete. Omit to delete all queues for the profile
     # @return [QueueDeleteResponse]
-    def delete_queue_slot(profile_id, queue_id, opts = {})
-      data, _status_code, _headers = delete_queue_slot_with_http_info(profile_id, queue_id, opts)
+    def delete_queue_slot(profile_id, opts = {})
+      data, _status_code, _headers = delete_queue_slot_with_http_info(profile_id, opts)
       data
     end
 
     # Delete schedule
-    # Delete a queue from a profile. Requires queueId to specify which queue to delete. If deleting the default queue, another queue will be promoted to default. 
+    # Delete a queue from a profile. Pass queueId to delete a specific queue; omit it to delete all queues for the profile. If deleting the default queue, another queue will be promoted to default. 
     # @param profile_id [String] 
-    # @param queue_id [String] Queue ID to delete
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :queue_id Queue ID to delete. Omit to delete all queues for the profile
     # @return [Array<(QueueDeleteResponse, Integer, Hash)>] QueueDeleteResponse data, response status code and response headers
-    def delete_queue_slot_with_http_info(profile_id, queue_id, opts = {})
+    def delete_queue_slot_with_http_info(profile_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: QueueApi.delete_queue_slot ...'
       end
@@ -112,17 +112,13 @@ module Zernio
       if @api_client.config.client_side_validation && profile_id.nil?
         fail ArgumentError, "Missing the required parameter 'profile_id' when calling QueueApi.delete_queue_slot"
       end
-      # verify the required parameter 'queue_id' is set
-      if @api_client.config.client_side_validation && queue_id.nil?
-        fail ArgumentError, "Missing the required parameter 'queue_id' when calling QueueApi.delete_queue_slot"
-      end
       # resource path
       local_var_path = '/v1/queue/slots'
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'profileId'] = profile_id
-      query_params[:'queueId'] = queue_id
+      query_params[:'queueId'] = opts[:'queue_id'] if !opts[:'queue_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -252,7 +248,7 @@ module Zernio
       if @api_client.config.client_side_validation && profile_id.nil?
         fail ArgumentError, "Missing the required parameter 'profile_id' when calling QueueApi.list_queue_slots"
       end
-      allowable_values = ["true"]
+      allowable_values = ["true", "false"]
       if @api_client.config.client_side_validation && opts[:'all'] && !allowable_values.include?(opts[:'all'])
         fail ArgumentError, "invalid value for \"all\", must be one of #{allowable_values}"
       end

@@ -46,10 +46,10 @@ describe 'QueueApi' do
 
   # unit tests for delete_queue_slot
   # Delete schedule
-  # Delete a queue from a profile. Requires queueId to specify which queue to delete. If deleting the default queue, another queue will be promoted to default. 
+  # Delete a queue from a profile. Pass queueId to delete a specific queue; omit it to delete all queues for the profile. If deleting the default queue, another queue will be promoted to default. 
   # @param profile_id 
-  # @param queue_id Queue ID to delete
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :queue_id Queue ID to delete. Omit to delete all queues for the profile
   # @return [QueueDeleteResponse]
   describe 'delete_queue_slot test' do
     it 'should work' do

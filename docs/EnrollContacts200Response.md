@@ -6,7 +6,8 @@
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** |  | [optional] |
 | **enrolled** | **Integer** | Number of contacts successfully enrolled | [optional] |
-| **skipped** | **Integer** | Number skipped (already enrolled or missing channel) | [optional] |
+| **failed** | **Integer** | Number that failed (already enrolled, or no subscribed channel on the sequence platform) | [optional] |
+| **results** | [**Array&lt;EnrollContacts200ResponseResultsInner&gt;**](EnrollContacts200ResponseResultsInner.md) | Per-contact outcome | [optional] |
 
 ## Example
 
@@ -16,7 +17,8 @@ require 'zernio-sdk'
 instance = Zernio::EnrollContacts200Response.new(
   success: null,
   enrolled: null,
-  skipped: null
+  failed: null,
+  results: null
 )
 ```
 

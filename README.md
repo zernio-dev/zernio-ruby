@@ -870,6 +870,7 @@ Class | Method | HTTP request | Description
  - [Zernio::EnableWhatsAppCallingLegacyRequest](docs/EnableWhatsAppCallingLegacyRequest.md)
  - [Zernio::EndVoiceCall200Response](docs/EndVoiceCall200Response.md)
  - [Zernio::EnrollContacts200Response](docs/EnrollContacts200Response.md)
+ - [Zernio::EnrollContacts200ResponseResultsInner](docs/EnrollContacts200ResponseResultsInner.md)
  - [Zernio::EnrollContactsRequest](docs/EnrollContactsRequest.md)
  - [Zernio::ErrorResponse](docs/ErrorResponse.md)
  - [Zernio::EstimateAdReach200Response](docs/EstimateAdReach200Response.md)

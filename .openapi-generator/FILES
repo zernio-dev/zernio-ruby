@@ -346,6 +346,7 @@ docs/EnableWhatsAppCallingLegacy200Response.md
 docs/EnableWhatsAppCallingLegacyRequest.md
 docs/EndVoiceCall200Response.md
 docs/EnrollContacts200Response.md
+docs/EnrollContacts200ResponseResultsInner.md
 docs/EnrollContactsRequest.md
 docs/ErrorResponse.md
 docs/EstimateAdReach200Response.md
@@ -1838,6 +1839,7 @@ lib/zernio-sdk/models/enable_whats_app_calling_legacy200_response.rb
 lib/zernio-sdk/models/enable_whats_app_calling_legacy_request.rb
 lib/zernio-sdk/models/end_voice_call200_response.rb
 lib/zernio-sdk/models/enroll_contacts200_response.rb
+lib/zernio-sdk/models/enroll_contacts200_response_results_inner.rb
 lib/zernio-sdk/models/enroll_contacts_request.rb
 lib/zernio-sdk/models/error_response.rb
 lib/zernio-sdk/models/estimate_ad_reach200_response.rb
@@ -3284,6 +3286,7 @@ spec/models/enable_voice_on_number_request_spec.rb
 spec/models/enable_whats_app_calling_legacy200_response_spec.rb
 spec/models/enable_whats_app_calling_legacy_request_spec.rb
 spec/models/end_voice_call200_response_spec.rb
+spec/models/enroll_contacts200_response_results_inner_spec.rb
 spec/models/enroll_contacts200_response_spec.rb
 spec/models/enroll_contacts_request_spec.rb
 spec/models/error_response_spec.rb
