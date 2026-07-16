@@ -39,6 +39,9 @@ module Zernio
     # Number of photos attached to the review (photos only; videos are not counted). Google Business only; 0 for other platforms.
     attr_accessor :photo_count
 
+    # Photos attached to the review. Google Business only; always an empty array for other platforms.
+    attr_accessor :photos
+
     attr_accessor :reply
 
     attr_accessor :review_url
@@ -57,6 +60,7 @@ module Zernio
         :'has_reply' => :'hasReply',
         :'has_photos' => :'hasPhotos',
         :'photo_count' => :'photoCount',
+        :'photos' => :'photos',
         :'reply' => :'reply',
         :'review_url' => :'reviewUrl'
       }
@@ -86,6 +90,7 @@ module Zernio
         :'has_reply' => :'Boolean',
         :'has_photos' => :'Boolean',
         :'photo_count' => :'Integer',
+        :'photos' => :'Array<GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner>',
         :'reply' => :'ListInboxReviews200ResponseDataInnerReply',
         :'review_url' => :'String'
       }
@@ -158,6 +163,12 @@ module Zernio
         self.photo_count = attributes[:'photo_count']
       end
 
+      if attributes.key?(:'photos')
+        if (value = attributes[:'photos']).is_a?(Array)
+          self.photos = value
+        end
+      end
+
       if attributes.key?(:'reply')
         self.reply = attributes[:'reply']
       end
@@ -198,6 +209,7 @@ module Zernio
           has_reply == o.has_reply &&
           has_photos == o.has_photos &&
           photo_count == o.photo_count &&
+          photos == o.photos &&
           reply == o.reply &&
           review_url == o.review_url
     end
@@ -211,7 +223,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, reviewer, rating, text, created, has_reply, has_photos, photo_count, reply, review_url].hash
+      [id, platform, account_id, account_username, reviewer, rating, text, created, has_reply, has_photos, photo_count, photos, reply, review_url].hash
     end
 
     # Builds the object from hash

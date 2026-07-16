@@ -104,7 +104,10 @@ module Zernio
     # LinkedIn only. The Company Page that authors the Direct Sponsored Content (\"dark\") post backing the ad — accepts a numeric organization ID or a full `urn:li:organization:N` URN. Required unless the resolved `accountId` is a connected LinkedIn Company-Page account (defaults to that page) or the LinkedIn ad account is org-owned (defaults to the account's owning organization). The authenticated member must be an ADMINISTRATOR or DIRECT_SPONSORED_CONTENT_POSTER of this page (and the page must be associated with the ad account), or LinkedIn returns 403. Ignored by every other platform.
     attr_accessor :organization_id
 
-    # ISO 3166-1 alpha-2 country codes (e.g. ['NL']). Defaults to ['US'] when no `cities` or `regions` are provided. (LinkedIn currently honours country-level targeting only.)
+    # Nested targeting object — the same TargetingSpec shape as `POST /v1/ads/boost`, `POST /v1/ads/targeting/reach-estimate`, and `saved_targeting` audiences. Merged UNDER the flat inline targeting fields below: `savedTargetingId` < `targeting` < flat fields (a flat field present on the body replaces the nested value entirely). Both forms are equivalent; use whichever your integration already builds. 
+    attr_accessor :targeting
+
+    # ISO 3166-1 alpha-2 country codes (e.g. ['NL']). Defaults to ['US'] when no other geo targeting (flat or nested `targeting`) is provided. (LinkedIn currently honours country-level targeting only.)
     attr_accessor :countries
 
     # Meta-only. City-level geo targeting. Each city is targeted by Meta's opaque `key` (the city ID) which can be looked up via `GET /v1/ads/targeting/search?type=city&q=<name>&country_code=<ISO>`. Optional `radius` + `distance_unit` extend the targeting beyond the city limits (e.g. radius 25 km around the city center). Both must be set together, or both omitted (Meta defaults to ~16 km when omitted).  Cannot overlap with the same country in `countries` (Meta returns a \"locations overlap\" error). Either drop the country or scope it to a different country. 
@@ -267,6 +270,7 @@ module Zernio
         :'business_name' => :'businessName',
         :'board_id' => :'boardId',
         :'organization_id' => :'organizationId',
+        :'targeting' => :'targeting',
         :'countries' => :'countries',
         :'cities' => :'cities',
         :'regions' => :'regions',
@@ -353,6 +357,7 @@ module Zernio
         :'business_name' => :'String',
         :'board_id' => :'String',
         :'organization_id' => :'String',
+        :'targeting' => :'TargetingSpec',
         :'countries' => :'Array<String>',
         :'cities' => :'Array<CreateStandaloneAdRequestCitiesInner>',
         :'regions' => :'Array<CreateStandaloneAdRequestRegionsInner>',
@@ -552,6 +557,10 @@ module Zernio
 
       if attributes.key?(:'organization_id')
         self.organization_id = attributes[:'organization_id']
+      end
+
+      if attributes.key?(:'targeting')
+        self.targeting = attributes[:'targeting']
       end
 
       if attributes.key?(:'countries')
@@ -1222,6 +1231,7 @@ module Zernio
           business_name == o.business_name &&
           board_id == o.board_id &&
           organization_id == o.organization_id &&
+          targeting == o.targeting &&
           countries == o.countries &&
           cities == o.cities &&
           regions == o.regions &&
@@ -1271,7 +1281,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

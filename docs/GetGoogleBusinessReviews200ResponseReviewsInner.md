@@ -13,6 +13,8 @@
 | **create_time** | **Time** |  | [optional] |
 | **update_time** | **Time** |  | [optional] |
 | **review_reply** | [**GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply**](GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply.md) |  | [optional] |
+| **photo_count** | **Integer** | Number of photos attached to the review (photos only, videos are not counted) | [optional] |
+| **photos** | [**Array&lt;GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner&gt;**](GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner.md) | Photos attached to the review by the reviewer | [optional] |
 
 ## Example
 
@@ -28,7 +30,9 @@ instance = Zernio::GetGoogleBusinessReviews200ResponseReviewsInner.new(
   comment: null,
   create_time: null,
   update_time: null,
-  review_reply: null
+  review_reply: null,
+  photo_count: null,
+  photos: null
 )
 ```
 

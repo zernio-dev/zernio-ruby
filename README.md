@@ -999,6 +999,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetGoogleBusinessPerformance400Response](docs/GetGoogleBusinessPerformance400Response.md)
  - [Zernio::GetGoogleBusinessReviews200Response](docs/GetGoogleBusinessReviews200Response.md)
  - [Zernio::GetGoogleBusinessReviews200ResponseReviewsInner](docs/GetGoogleBusinessReviews200ResponseReviewsInner.md)
+ - [Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner](docs/GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner.md)
  - [Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply](docs/GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply.md)
  - [Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer](docs/GetGoogleBusinessReviews200ResponseReviewsInnerReviewer.md)
  - [Zernio::GetGoogleBusinessSearchKeywords200Response](docs/GetGoogleBusinessSearchKeywords200Response.md)

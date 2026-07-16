@@ -38,6 +38,12 @@ module Zernio
 
     attr_accessor :review_reply
 
+    # Number of photos attached to the review (photos only, videos are not counted)
+    attr_accessor :photo_count
+
+    # Photos attached to the review by the reviewer
+    attr_accessor :photos
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -71,7 +77,9 @@ module Zernio
         :'comment' => :'comment',
         :'create_time' => :'createTime',
         :'update_time' => :'updateTime',
-        :'review_reply' => :'reviewReply'
+        :'review_reply' => :'reviewReply',
+        :'photo_count' => :'photoCount',
+        :'photos' => :'photos'
       }
     end
 
@@ -96,7 +104,9 @@ module Zernio
         :'comment' => :'String',
         :'create_time' => :'Time',
         :'update_time' => :'Time',
-        :'review_reply' => :'GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply'
+        :'review_reply' => :'GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply',
+        :'photo_count' => :'Integer',
+        :'photos' => :'Array<GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner>'
       }
     end
 
@@ -156,6 +166,16 @@ module Zernio
 
       if attributes.key?(:'review_reply')
         self.review_reply = attributes[:'review_reply']
+      end
+
+      if attributes.key?(:'photo_count')
+        self.photo_count = attributes[:'photo_count']
+      end
+
+      if attributes.key?(:'photos')
+        if (value = attributes[:'photos']).is_a?(Array)
+          self.photos = value
+        end
       end
     end
 
@@ -227,7 +247,9 @@ module Zernio
           comment == o.comment &&
           create_time == o.create_time &&
           update_time == o.update_time &&
-          review_reply == o.review_reply
+          review_reply == o.review_reply &&
+          photo_count == o.photo_count &&
+          photos == o.photos
     end
 
     # @see the `==` method
@@ -239,7 +261,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, reviewer, rating, star_rating, comment, create_time, update_time, review_reply].hash
+      [id, name, reviewer, rating, star_rating, comment, create_time, update_time, review_reply, photo_count, photos].hash
     end
 
     # Builds the object from hash

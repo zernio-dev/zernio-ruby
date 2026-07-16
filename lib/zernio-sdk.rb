@@ -471,6 +471,7 @@ require 'zernio-sdk/models/get_google_business_performance200_response_metrics_v
 require 'zernio-sdk/models/get_google_business_performance400_response'
 require 'zernio-sdk/models/get_google_business_reviews200_response'
 require 'zernio-sdk/models/get_google_business_reviews200_response_reviews_inner'
+require 'zernio-sdk/models/get_google_business_reviews200_response_reviews_inner_photos_inner'
 require 'zernio-sdk/models/get_google_business_reviews200_response_reviews_inner_review_reply'
 require 'zernio-sdk/models/get_google_business_reviews200_response_reviews_inner_reviewer'
 require 'zernio-sdk/models/get_google_business_search_keywords200_response'

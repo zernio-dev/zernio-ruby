@@ -14,26 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  class EstimateAdReachRequest < ApiModelBase
-    # Zernio social account ID on the target ad platform (the estimate runs against its platform).
-    attr_accessor :account_id
-
-    # Required. The platform ad-account ID the reach call runs against (Meta act_..., LinkedIn numeric sponsoredAccount ID, Pinterest ad-account ID, X account ID) - every backing reach API is scoped to one ad account. Get it from GET /v1/ads/accounts.
-    attr_accessor :ad_account_id
-
-    # The targeting spec to estimate. Same shape used by POST /v1/ads/create.
-    attr_accessor :spec
-
-    # Optional. The optimization goal the estimate should assume (platform's own vocabulary, e.g. Meta `REACH`, `LINK_CLICKS`, `OFFSITE_CONVERSIONS`). Some platforms vary the estimate by goal; omit to use the platform default. 
-    attr_accessor :optimization_goal
+  class GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner < ApiModelBase
+    attr_accessor :url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
-        :'ad_account_id' => :'adAccountId',
-        :'spec' => :'spec',
-        :'optimization_goal' => :'optimizationGoal'
+        :'url' => :'url'
       }
     end
 
@@ -50,17 +37,13 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
-        :'ad_account_id' => :'String',
-        :'spec' => :'TargetingSpec',
-        :'optimization_goal' => :'String'
+        :'url' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'spec',
       ])
     end
 
@@ -68,38 +51,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::EstimateAdReachRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::EstimateAdReachRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      else
-        self.account_id = nil
-      end
-
-      if attributes.key?(:'ad_account_id')
-        self.ad_account_id = attributes[:'ad_account_id']
-      else
-        self.ad_account_id = nil
-      end
-
-      if attributes.key?(:'spec')
-        self.spec = attributes[:'spec']
-      else
-        self.spec = nil
-      end
-
-      if attributes.key?(:'optimization_goal')
-        self.optimization_goal = attributes[:'optimization_goal']
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
       end
     end
 
@@ -108,14 +73,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
-      if @ad_account_id.nil?
-        invalid_properties.push('invalid value for "ad_account_id", ad_account_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -123,29 +80,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
-      return false if @ad_account_id.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
-      end
-
-      @account_id = account_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ad_account_id Value to be assigned
-    def ad_account_id=(ad_account_id)
-      if ad_account_id.nil?
-        fail ArgumentError, 'ad_account_id cannot be nil'
-      end
-
-      @ad_account_id = ad_account_id
     end
 
     # Checks equality by comparing each attribute.
@@ -153,10 +88,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          ad_account_id == o.ad_account_id &&
-          spec == o.spec &&
-          optimization_goal == o.optimization_goal
+          url == o.url
     end
 
     # @see the `==` method
@@ -168,7 +100,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, spec, optimization_goal].hash
+      [url].hash
     end
 
     # Builds the object from hash
