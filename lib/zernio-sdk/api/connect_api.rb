@@ -673,11 +673,12 @@ module Zernio
     end
 
     # List GBP locations
-    # Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all. 
+    # Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all, or raise limit to enumerate an account with more than 100 locations. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :search Free-text search on the business name, applied server-side by Google. Use for accounts with many locations.
     # @option opts [String] :filter Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode&#x3D;\&quot;LH279411\&quot;.
+    # @option opts [Integer] :limit Max locations to return (default 100, max 500). Raise it to enumerate an account with more than 100 locations; for accounts with thousands, use search/filter instead. (default to 100)
     # @return [GetGmbLocations200Response]
     def get_gmb_locations(account_id, opts = {})
       data, _status_code, _headers = get_gmb_locations_with_http_info(account_id, opts)
@@ -685,11 +686,12 @@ module Zernio
     end
 
     # List GBP locations
-    # Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all. 
+    # Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all, or raise limit to enumerate an account with more than 100 locations. 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :search Free-text search on the business name, applied server-side by Google. Use for accounts with many locations.
     # @option opts [String] :filter Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode&#x3D;\&quot;LH279411\&quot;.
+    # @option opts [Integer] :limit Max locations to return (default 100, max 500). Raise it to enumerate an account with more than 100 locations; for accounts with thousands, use search/filter instead. (default to 100)
     # @return [Array<(GetGmbLocations200Response, Integer, Hash)>] GetGmbLocations200Response data, response status code and response headers
     def get_gmb_locations_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -699,6 +701,14 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.get_gmb_locations"
       end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 500
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ConnectApi.get_gmb_locations, must be smaller than or equal to 500.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ConnectApi.get_gmb_locations, must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/accounts/{accountId}/gmb-locations'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 
@@ -706,6 +716,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'search'] = opts[:'search'] if !opts[:'search'].nil?
       query_params[:'filter'] = opts[:'filter'] if !opts[:'filter'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

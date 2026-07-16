@@ -706,7 +706,7 @@ end
 
 List GBP locations
 
-Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all. 
+Returns Google Business Profile locations the connected account can access, plus the currently selected location. The list is bounded (see hasMore); for accounts that own many locations, use the search or filter query params to find a specific one instead of loading them all, or raise limit to enumerate an account with more than 100 locations. 
 
 ### Examples
 
@@ -723,7 +723,8 @@ api_instance = Zernio::ConnectApi.new
 account_id = 'account_id_example' # String | 
 opts = {
   search: 'search_example', # String | Free-text search on the business name, applied server-side by Google. Use for accounts with many locations.
-  filter: 'filter_example' # String | Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode=\"LH279411\".
+  filter: 'filter_example', # String | Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode=\"LH279411\".
+  limit: 56 # Integer | Max locations to return (default 100, max 500). Raise it to enumerate an account with more than 100 locations; for accounts with thousands, use search/filter instead.
 }
 
 begin
@@ -760,6 +761,7 @@ end
 | **account_id** | **String** |  |  |
 | **search** | **String** | Free-text search on the business name, applied server-side by Google. Use for accounts with many locations. | [optional] |
 | **filter** | **String** | Raw Google Business Information API filter expression (advanced; takes precedence over search), e.g. storeCode&#x3D;\&quot;LH279411\&quot;. | [optional] |
+| **limit** | **Integer** | Max locations to return (default 100, max 500). Raise it to enumerate an account with more than 100 locations; for accounts with thousands, use search/filter instead. | [optional][default to 100] |
 
 ### Return type
 

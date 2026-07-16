@@ -132,7 +132,7 @@ module Zernio
     # Normalized household-income tier. Meta and TikTok express all four; Google maps only `top_10`; rejected on LinkedIn, X, and Pinterest. On Meta, income targeting is incompatible with housing/employment/credit `specialAdCategories`. 
     attr_accessor :income_tier
 
-    # Language codes (e.g. ['en']). Restricts the audience by language.
+    # Language codes restricting the audience by language. On Meta, ISO 639-1 codes (e.g. ['en'], ['de']); a bare code targets all regional variants (\"en\" = all English), or use a region-qualified code for a specific one (\"en_GB\", \"pt_BR\", \"zh_TW\"). Unknown codes are rejected. Other ad platforms use their own language-code systems.
     attr_accessor :languages
 
     attr_accessor :placements
