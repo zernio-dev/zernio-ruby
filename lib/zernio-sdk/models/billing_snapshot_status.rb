@@ -69,6 +69,10 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'suspended_at',
+        :'suspension_reason',
+        :'open_invoice_url',
+        :'decline_reason',
       ])
     end
 

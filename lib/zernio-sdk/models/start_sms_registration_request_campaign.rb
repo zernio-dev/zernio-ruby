@@ -28,7 +28,7 @@ module Zernio
 
     attr_accessor :sample1
 
-    # Second example message; carriers require two distinct samples
+    # Second example message; carriers require two distinct samples, so it must differ from sample1.
     attr_accessor :sample2
 
     attr_accessor :help_message

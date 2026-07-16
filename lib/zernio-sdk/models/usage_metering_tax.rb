@@ -16,13 +16,13 @@ require 'time'
 module Zernio
   # Estimated tax on the window's net `totals.total`, computed with Stripe Tax against the billing address (the same engine the real invoice uses; invoices apply exclusive tax, so the card is charged total + tax). Null when the account has no billing address on file, the total is zero or negative, or the estimate failed. 
   class UsageMeteringTax < ApiModelBase
-    # Estimated tax in USD
+    # Estimated tax in USD, added on top of `totals.total`.
     attr_accessor :tax_usd
 
-    # Combined rate percentage
+    # Combined rate percentage, e.g. 21.
     attr_accessor :rate_percent
 
-    # Human jurisdiction label
+    # Human jurisdiction label, e.g. \"ES VAT\" or \"WA sales tax\".
     attr_accessor :jurisdiction_label
 
     # True for EU/UK B2B reverse charge (0 tax added by design).
