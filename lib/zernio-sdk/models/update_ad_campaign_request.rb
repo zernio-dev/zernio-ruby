@@ -22,8 +22,10 @@ module Zernio
     # Campaign-level default. Ad sets inherit this unless they override.
     attr_accessor :bid_strategy
 
-    # Rename the campaign (Meta only; other platforms return 501). At least one of budget/bidStrategy/name is required.
+    # Rename the campaign (Meta only; other platforms return 501). At least one of budget/bidStrategy/name/platformSpecificData is required.
     attr_accessor :name
+
+    attr_accessor :platform_specific_data
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -53,7 +55,8 @@ module Zernio
         :'platform' => :'platform',
         :'budget' => :'budget',
         :'bid_strategy' => :'bidStrategy',
-        :'name' => :'name'
+        :'name' => :'name',
+        :'platform_specific_data' => :'platformSpecificData'
       }
     end
 
@@ -73,7 +76,8 @@ module Zernio
         :'platform' => :'String',
         :'budget' => :'UpdateAdCampaignRequestBudget',
         :'bid_strategy' => :'BidStrategy',
-        :'name' => :'String'
+        :'name' => :'String',
+        :'platform_specific_data' => :'UpdateAdCampaignRequestPlatformSpecificData'
       }
     end
 
@@ -115,6 +119,10 @@ module Zernio
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'platform_specific_data')
+        self.platform_specific_data = attributes[:'platform_specific_data']
       end
     end
 
@@ -177,7 +185,8 @@ module Zernio
           platform == o.platform &&
           budget == o.budget &&
           bid_strategy == o.bid_strategy &&
-          name == o.name
+          name == o.name &&
+          platform_specific_data == o.platform_specific_data
     end
 
     # @see the `==` method
@@ -189,7 +198,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, budget, bid_strategy, name].hash
+      [platform, budget, bid_strategy, name, platform_specific_data].hash
     end
 
     # Builds the object from hash

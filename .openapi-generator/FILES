@@ -1183,6 +1183,7 @@ docs/UpdateAdAudienceRequest.md
 docs/UpdateAdCampaign200Response.md
 docs/UpdateAdCampaignRequest.md
 docs/UpdateAdCampaignRequestBudget.md
+docs/UpdateAdCampaignRequestPlatformSpecificData.md
 docs/UpdateAdCampaignStatus200Response.md
 docs/UpdateAdCampaignStatusRequest.md
 docs/UpdateAdRequest.md
@@ -1193,6 +1194,8 @@ docs/UpdateAdRequestTargetingInterestsInner.md
 docs/UpdateAdSet200Response.md
 docs/UpdateAdSetRequest.md
 docs/UpdateAdSetRequestBudget.md
+docs/UpdateAdSetRequestPlatformSpecificData.md
+docs/UpdateAdSetRequestPlatformSpecificDataPromotedObject.md
 docs/UpdateAdSetStatus200Response.md
 docs/UpdateAdStatus200Response.md
 docs/UpdateAdStatusRequest.md
@@ -2650,6 +2653,7 @@ lib/zernio-sdk/models/update_ad_audience_request.rb
 lib/zernio-sdk/models/update_ad_campaign200_response.rb
 lib/zernio-sdk/models/update_ad_campaign_request.rb
 lib/zernio-sdk/models/update_ad_campaign_request_budget.rb
+lib/zernio-sdk/models/update_ad_campaign_request_platform_specific_data.rb
 lib/zernio-sdk/models/update_ad_campaign_status200_response.rb
 lib/zernio-sdk/models/update_ad_campaign_status_request.rb
 lib/zernio-sdk/models/update_ad_request.rb
@@ -2660,6 +2664,8 @@ lib/zernio-sdk/models/update_ad_request_targeting_interests_inner.rb
 lib/zernio-sdk/models/update_ad_set200_response.rb
 lib/zernio-sdk/models/update_ad_set_request.rb
 lib/zernio-sdk/models/update_ad_set_request_budget.rb
+lib/zernio-sdk/models/update_ad_set_request_platform_specific_data.rb
+lib/zernio-sdk/models/update_ad_set_request_platform_specific_data_promoted_object.rb
 lib/zernio-sdk/models/update_ad_set_status200_response.rb
 lib/zernio-sdk/models/update_ad_status200_response.rb
 lib/zernio-sdk/models/update_ad_status_request.rb
@@ -4097,6 +4103,7 @@ spec/models/update_ad_account_request_spec.rb
 spec/models/update_ad_audience_request_spec.rb
 spec/models/update_ad_campaign200_response_spec.rb
 spec/models/update_ad_campaign_request_budget_spec.rb
+spec/models/update_ad_campaign_request_platform_specific_data_spec.rb
 spec/models/update_ad_campaign_request_spec.rb
 spec/models/update_ad_campaign_status200_response_spec.rb
 spec/models/update_ad_campaign_status_request_spec.rb
@@ -4107,6 +4114,8 @@ spec/models/update_ad_request_targeting_interests_inner_spec.rb
 spec/models/update_ad_request_targeting_spec.rb
 spec/models/update_ad_set200_response_spec.rb
 spec/models/update_ad_set_request_budget_spec.rb
+spec/models/update_ad_set_request_platform_specific_data_promoted_object_spec.rb
+spec/models/update_ad_set_request_platform_specific_data_spec.rb
 spec/models/update_ad_set_request_spec.rb
 spec/models/update_ad_set_status200_response_spec.rb
 spec/models/update_ad_status200_response_spec.rb

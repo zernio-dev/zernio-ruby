@@ -38,6 +38,9 @@ module Zernio
     # Meta only. Explicit ad-set `optimization_goal` (e.g. `LANDING_PAGE_VIEWS`, `LINK_CLICKS`, `REACH`, `IMPRESSIONS`, `OFFSITE_CONVERSIONS`, `THRUPLAY`, `LEAD_GENERATION`). Overrides the default derived from `goal` (e.g. `traffic` defaults to `LINK_CLICKS`). Forwarded verbatim to Meta, which validates compatibility with the campaign objective and rejects incompatible combinations.
     attr_accessor :optimization_goal
 
+    # Meta only. Explicit ad-set `billing_event`. Defaults to `IMPRESSIONS`. Forwarded verbatim to Meta, which validates compatibility with the optimization goal.
+    attr_accessor :billing_event
+
     # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_amount
 
@@ -241,6 +244,7 @@ module Zernio
         :'tracking' => :'tracking',
         :'goal' => :'goal',
         :'optimization_goal' => :'optimizationGoal',
+        :'billing_event' => :'billingEvent',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
         :'status' => :'status',
@@ -326,6 +330,7 @@ module Zernio
         :'tracking' => :'CreateStandaloneAdRequestTracking',
         :'goal' => :'String',
         :'optimization_goal' => :'String',
+        :'billing_event' => :'String',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
         :'status' => :'String',
@@ -451,6 +456,10 @@ module Zernio
 
       if attributes.key?(:'optimization_goal')
         self.optimization_goal = attributes[:'optimization_goal']
+      end
+
+      if attributes.key?(:'billing_event')
+        self.billing_event = attributes[:'billing_event']
       end
 
       if attributes.key?(:'budget_amount')
@@ -1190,6 +1199,7 @@ module Zernio
           tracking == o.tracking &&
           goal == o.goal &&
           optimization_goal == o.optimization_goal &&
+          billing_event == o.billing_event &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
           status == o.status &&
@@ -1261,7 +1271,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

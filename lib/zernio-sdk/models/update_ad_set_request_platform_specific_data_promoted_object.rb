@@ -14,47 +14,35 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdCampaign200Response < ApiModelBase
-    attr_accessor :updated
+  # Meta ad-set promoted_object, forwarded verbatim (same shape as /v1/ads/create).
+  class UpdateAdSetRequestPlatformSpecificDataPromotedObject < ApiModelBase
+    attr_accessor :pixel_id
 
-    attr_accessor :budget
+    attr_accessor :custom_event_type
 
-    attr_accessor :budget_level
+    attr_accessor :page_id
 
-    attr_accessor :bid_strategy
+    attr_accessor :application_id
 
-    attr_accessor :platform_specific_data
+    attr_accessor :object_store_url
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :custom_conversion_id
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
+    attr_accessor :product_catalog_id
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :product_set_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'updated' => :'updated',
-        :'budget' => :'budget',
-        :'budget_level' => :'budgetLevel',
-        :'bid_strategy' => :'bidStrategy',
-        :'platform_specific_data' => :'platformSpecificData'
+        :'pixel_id' => :'pixelId',
+        :'custom_event_type' => :'customEventType',
+        :'page_id' => :'pageId',
+        :'application_id' => :'applicationId',
+        :'object_store_url' => :'objectStoreUrl',
+        :'custom_conversion_id' => :'customConversionId',
+        :'product_catalog_id' => :'productCatalogId',
+        :'product_set_id' => :'productSetId'
       }
     end
 
@@ -71,11 +59,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'updated' => :'Integer',
-        :'budget' => :'AdBudget',
-        :'budget_level' => :'String',
-        :'bid_strategy' => :'BidStrategy',
-        :'platform_specific_data' => :'Object'
+        :'pixel_id' => :'String',
+        :'custom_event_type' => :'String',
+        :'page_id' => :'String',
+        :'application_id' => :'String',
+        :'object_store_url' => :'String',
+        :'custom_conversion_id' => :'String',
+        :'product_catalog_id' => :'String',
+        :'product_set_id' => :'String'
       }
     end
 
@@ -89,36 +80,48 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdCampaign200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdSetRequestPlatformSpecificDataPromotedObject` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdCampaign200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdSetRequestPlatformSpecificDataPromotedObject`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'updated')
-        self.updated = attributes[:'updated']
+      if attributes.key?(:'pixel_id')
+        self.pixel_id = attributes[:'pixel_id']
       end
 
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
+      if attributes.key?(:'custom_event_type')
+        self.custom_event_type = attributes[:'custom_event_type']
       end
 
-      if attributes.key?(:'budget_level')
-        self.budget_level = attributes[:'budget_level']
+      if attributes.key?(:'page_id')
+        self.page_id = attributes[:'page_id']
       end
 
-      if attributes.key?(:'bid_strategy')
-        self.bid_strategy = attributes[:'bid_strategy']
+      if attributes.key?(:'application_id')
+        self.application_id = attributes[:'application_id']
       end
 
-      if attributes.key?(:'platform_specific_data')
-        self.platform_specific_data = attributes[:'platform_specific_data']
+      if attributes.key?(:'object_store_url')
+        self.object_store_url = attributes[:'object_store_url']
+      end
+
+      if attributes.key?(:'custom_conversion_id')
+        self.custom_conversion_id = attributes[:'custom_conversion_id']
+      end
+
+      if attributes.key?(:'product_catalog_id')
+        self.product_catalog_id = attributes[:'product_catalog_id']
+      end
+
+      if attributes.key?(:'product_set_id')
+        self.product_set_id = attributes[:'product_set_id']
       end
     end
 
@@ -134,19 +137,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      budget_level_validator = EnumAttributeValidator.new('String', ["campaign"])
-      return false unless budget_level_validator.valid?(@budget_level)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] budget_level Object to be assigned
-    def budget_level=(budget_level)
-      validator = EnumAttributeValidator.new('String', ["campaign"])
-      unless validator.valid?(budget_level)
-        fail ArgumentError, "invalid value for \"budget_level\", must be one of #{validator.allowable_values}."
-      end
-      @budget_level = budget_level
     end
 
     # Checks equality by comparing each attribute.
@@ -154,11 +145,14 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          updated == o.updated &&
-          budget == o.budget &&
-          budget_level == o.budget_level &&
-          bid_strategy == o.bid_strategy &&
-          platform_specific_data == o.platform_specific_data
+          pixel_id == o.pixel_id &&
+          custom_event_type == o.custom_event_type &&
+          page_id == o.page_id &&
+          application_id == o.application_id &&
+          object_store_url == o.object_store_url &&
+          custom_conversion_id == o.custom_conversion_id &&
+          product_catalog_id == o.product_catalog_id &&
+          product_set_id == o.product_set_id
     end
 
     # @see the `==` method
@@ -170,7 +164,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, budget, budget_level, bid_strategy, platform_specific_data].hash
+      [pixel_id, custom_event_type, page_id, application_id, object_store_url, custom_conversion_id, product_catalog_id, product_set_id].hash
     end
 
     # Builds the object from hash

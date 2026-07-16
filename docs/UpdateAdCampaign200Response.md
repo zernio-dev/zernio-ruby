@@ -8,6 +8,7 @@
 | **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
 | **budget_level** | **String** |  | [optional] |
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
+| **platform_specific_data** | **Object** |  | [optional] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = Zernio::UpdateAdCampaign200Response.new(
   updated: null,
   budget: null,
   budget_level: null,
-  bid_strategy: null
+  bid_strategy: null,
+  platform_specific_data: null
 )
 ```
 

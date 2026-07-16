@@ -34,6 +34,8 @@ module Zernio
     # Minimum ROAS as a decimal multiplier (2.0 = 2.0x). Required when bidStrategy is LOWEST_COST_WITH_MIN_ROAS. Sent to Meta as `bid_constraints.roas_average_floor` × 10000. 
     attr_accessor :roas_average_floor
 
+    attr_accessor :platform_specific_data
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -65,7 +67,8 @@ module Zernio
         :'name' => :'name',
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
-        :'roas_average_floor' => :'roasAverageFloor'
+        :'roas_average_floor' => :'roasAverageFloor',
+        :'platform_specific_data' => :'platformSpecificData'
       }
     end
 
@@ -88,7 +91,8 @@ module Zernio
         :'name' => :'String',
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
-        :'roas_average_floor' => :'Float'
+        :'roas_average_floor' => :'Float',
+        :'platform_specific_data' => :'UpdateAdSetRequestPlatformSpecificData'
       }
     end
 
@@ -142,6 +146,10 @@ module Zernio
 
       if attributes.key?(:'roas_average_floor')
         self.roas_average_floor = attributes[:'roas_average_floor']
+      end
+
+      if attributes.key?(:'platform_specific_data')
+        self.platform_specific_data = attributes[:'platform_specific_data']
       end
     end
 
@@ -219,7 +227,8 @@ module Zernio
           name == o.name &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
-          roas_average_floor == o.roas_average_floor
+          roas_average_floor == o.roas_average_floor &&
+          platform_specific_data == o.platform_specific_data
     end
 
     # @see the `==` method
@@ -231,7 +240,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, budget, status, name, bid_strategy, bid_amount, roas_average_floor].hash
+      [platform, budget, status, name, bid_strategy, bid_amount, roas_average_floor, platform_specific_data].hash
     end
 
     # Builds the object from hash

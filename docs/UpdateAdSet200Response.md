@@ -12,6 +12,7 @@
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
 | **bid_amount** | **Float** |  | [optional] |
 | **roas_average_floor** | **Float** |  | [optional] |
+| **platform_specific_data** | **Object** |  | [optional] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = Zernio::UpdateAdSet200Response.new(
   status_skipped: null,
   bid_strategy: null,
   bid_amount: null,
-  roas_average_floor: null
+  roas_average_floor: null,
+  platform_specific_data: null
 )
 ```
 

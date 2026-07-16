@@ -14,47 +14,30 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdCampaign200Response < ApiModelBase
-    attr_accessor :updated
+  # Platform-specific post-launch delivery settings. The platform is implied by the `platform` body param. Meta only; other platforms return 400. Unknown keys are rejected. 
+  class UpdateAdSetRequestPlatformSpecificData < ApiModelBase
+    # Meta ad-set optimization_goal (e.g. OFFSITE_CONVERSIONS, LANDING_PAGE_VIEWS).
+    attr_accessor :optimization_goal
 
-    attr_accessor :budget
+    # Meta ad-set billing_event (e.g. IMPRESSIONS, LINK_CLICKS, THRUPLAY).
+    attr_accessor :billing_event
 
-    attr_accessor :budget_level
+    # Ad set start_time (ISO 8601).
+    attr_accessor :start_date
 
-    attr_accessor :bid_strategy
+    # Ad set end_time (ISO 8601).
+    attr_accessor :end_date
 
-    attr_accessor :platform_specific_data
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :promoted_object
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'updated' => :'updated',
-        :'budget' => :'budget',
-        :'budget_level' => :'budgetLevel',
-        :'bid_strategy' => :'bidStrategy',
-        :'platform_specific_data' => :'platformSpecificData'
+        :'optimization_goal' => :'optimizationGoal',
+        :'billing_event' => :'billingEvent',
+        :'start_date' => :'startDate',
+        :'end_date' => :'endDate',
+        :'promoted_object' => :'promotedObject'
       }
     end
 
@@ -71,11 +54,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'updated' => :'Integer',
-        :'budget' => :'AdBudget',
-        :'budget_level' => :'String',
-        :'bid_strategy' => :'BidStrategy',
-        :'platform_specific_data' => :'Object'
+        :'optimization_goal' => :'String',
+        :'billing_event' => :'String',
+        :'start_date' => :'String',
+        :'end_date' => :'String',
+        :'promoted_object' => :'UpdateAdSetRequestPlatformSpecificDataPromotedObject'
       }
     end
 
@@ -89,36 +72,36 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdCampaign200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdSetRequestPlatformSpecificData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdCampaign200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdSetRequestPlatformSpecificData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'updated')
-        self.updated = attributes[:'updated']
+      if attributes.key?(:'optimization_goal')
+        self.optimization_goal = attributes[:'optimization_goal']
       end
 
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
+      if attributes.key?(:'billing_event')
+        self.billing_event = attributes[:'billing_event']
       end
 
-      if attributes.key?(:'budget_level')
-        self.budget_level = attributes[:'budget_level']
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
       end
 
-      if attributes.key?(:'bid_strategy')
-        self.bid_strategy = attributes[:'bid_strategy']
+      if attributes.key?(:'end_date')
+        self.end_date = attributes[:'end_date']
       end
 
-      if attributes.key?(:'platform_specific_data')
-        self.platform_specific_data = attributes[:'platform_specific_data']
+      if attributes.key?(:'promoted_object')
+        self.promoted_object = attributes[:'promoted_object']
       end
     end
 
@@ -134,19 +117,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      budget_level_validator = EnumAttributeValidator.new('String', ["campaign"])
-      return false unless budget_level_validator.valid?(@budget_level)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] budget_level Object to be assigned
-    def budget_level=(budget_level)
-      validator = EnumAttributeValidator.new('String', ["campaign"])
-      unless validator.valid?(budget_level)
-        fail ArgumentError, "invalid value for \"budget_level\", must be one of #{validator.allowable_values}."
-      end
-      @budget_level = budget_level
     end
 
     # Checks equality by comparing each attribute.
@@ -154,11 +125,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          updated == o.updated &&
-          budget == o.budget &&
-          budget_level == o.budget_level &&
-          bid_strategy == o.bid_strategy &&
-          platform_specific_data == o.platform_specific_data
+          optimization_goal == o.optimization_goal &&
+          billing_event == o.billing_event &&
+          start_date == o.start_date &&
+          end_date == o.end_date &&
+          promoted_object == o.promoted_object
     end
 
     # @see the `==` method
@@ -170,7 +141,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, budget, budget_level, bid_strategy, platform_specific_data].hash
+      [optimization_goal, billing_event, start_date, end_date, promoted_object].hash
     end
 
     # Builds the object from hash

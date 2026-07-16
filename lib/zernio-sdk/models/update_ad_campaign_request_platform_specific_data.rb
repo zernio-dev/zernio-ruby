@@ -14,47 +14,15 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdCampaign200Response < ApiModelBase
-    attr_accessor :updated
-
-    attr_accessor :budget
-
-    attr_accessor :budget_level
-
-    attr_accessor :bid_strategy
-
-    attr_accessor :platform_specific_data
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  # Platform-specific campaign settings. The platform is implied by the `platform` body param (same convention as platformSpecificData on POST /v1/ads/create). Meta (facebook/instagram) only; other platforms return 400. 
+  class UpdateAdCampaignRequestPlatformSpecificData < ApiModelBase
+    # Campaign lifetime spend cap, in the ad account's currency (Meta `spend_cap`). Pass null to remove the cap (0 is rejected by Meta).
+    attr_accessor :spend_cap
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'updated' => :'updated',
-        :'budget' => :'budget',
-        :'budget_level' => :'budgetLevel',
-        :'bid_strategy' => :'bidStrategy',
-        :'platform_specific_data' => :'platformSpecificData'
+        :'spend_cap' => :'spendCap'
       }
     end
 
@@ -71,17 +39,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'updated' => :'Integer',
-        :'budget' => :'AdBudget',
-        :'budget_level' => :'String',
-        :'bid_strategy' => :'BidStrategy',
-        :'platform_specific_data' => :'Object'
+        :'spend_cap' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'spend_cap'
       ])
     end
 
@@ -89,36 +54,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdCampaign200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdCampaignRequestPlatformSpecificData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdCampaign200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdCampaignRequestPlatformSpecificData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'updated')
-        self.updated = attributes[:'updated']
-      end
-
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
-      end
-
-      if attributes.key?(:'budget_level')
-        self.budget_level = attributes[:'budget_level']
-      end
-
-      if attributes.key?(:'bid_strategy')
-        self.bid_strategy = attributes[:'bid_strategy']
-      end
-
-      if attributes.key?(:'platform_specific_data')
-        self.platform_specific_data = attributes[:'platform_specific_data']
+      if attributes.key?(:'spend_cap')
+        self.spend_cap = attributes[:'spend_cap']
       end
     end
 
@@ -134,19 +83,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      budget_level_validator = EnumAttributeValidator.new('String', ["campaign"])
-      return false unless budget_level_validator.valid?(@budget_level)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] budget_level Object to be assigned
-    def budget_level=(budget_level)
-      validator = EnumAttributeValidator.new('String', ["campaign"])
-      unless validator.valid?(budget_level)
-        fail ArgumentError, "invalid value for \"budget_level\", must be one of #{validator.allowable_values}."
-      end
-      @budget_level = budget_level
     end
 
     # Checks equality by comparing each attribute.
@@ -154,11 +91,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          updated == o.updated &&
-          budget == o.budget &&
-          budget_level == o.budget_level &&
-          bid_strategy == o.bid_strategy &&
-          platform_specific_data == o.platform_specific_data
+          spend_cap == o.spend_cap
     end
 
     # @see the `==` method
@@ -170,7 +103,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, budget, budget_level, bid_strategy, platform_specific_data].hash
+      [spend_cap].hash
     end
 
     # Builds the object from hash
