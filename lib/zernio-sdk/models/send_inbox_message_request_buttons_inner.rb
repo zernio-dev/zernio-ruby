@@ -15,16 +15,16 @@ require 'time'
 
 module Zernio
   class SendInboxMessageRequestButtonsInner < ApiModelBase
-    # Button type. phone is Facebook only.
+    # Button type. phone is Facebook only. Ignored on WhatsApp (buttons always render as reply buttons).
     attr_accessor :type
 
     # Button label (max 20 chars)
     attr_accessor :title
 
-    # URL for url-type buttons
+    # URL for url-type buttons (Facebook/Instagram only)
     attr_accessor :url
 
-    # Payload for postback-type buttons
+    # Payload for postback-type buttons. On WhatsApp, this is the reply ID returned on the message.received webhook when the button is tapped.
     attr_accessor :payload
 
     # Phone number for phone-type buttons (Facebook only)
