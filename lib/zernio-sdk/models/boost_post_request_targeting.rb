@@ -32,7 +32,7 @@ module Zernio
     # Region/state targeting. `key` from /v1/ads/targeting/search?dimension=geo&geoType=region.
     attr_accessor :regions
 
-    # City targeting. Optional `radius` + `distance_unit` extend beyond the city limits (both set together, Meta only).
+    # City targeting. Optional `radius` + `distanceUnit` extend beyond the city limits (both set together, Meta only).
     attr_accessor :cities
 
     # Postal/ZIP targeting. `key` is the platform's postal location ID (e.g. Meta `US:94304`).

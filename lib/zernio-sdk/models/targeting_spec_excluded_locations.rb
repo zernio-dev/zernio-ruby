@@ -20,7 +20,7 @@ module Zernio
 
     attr_accessor :regions
 
-    # Cities to exclude. Optional `radius` + `distance_unit` exclude a catchment around the city (both must be set together or both omitted); Meta honours the radius on excluded cities.
+    # Cities to exclude. Optional `radius` + `distanceUnit` exclude a catchment around the city (both must be set together or both omitted); Meta honours the radius on excluded cities.
     attr_accessor :cities
 
     attr_accessor :zips

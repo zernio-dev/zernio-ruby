@@ -22,6 +22,15 @@ module Zernio
 
     attr_accessor :platform
 
+    # Present only when demographics are scoped to a single video
+    attr_accessor :video_id
+
+    # Video title (video mode only)
+    attr_accessor :title
+
+    # Video publish date (video mode only)
+    attr_accessor :published_at
+
     # Object keyed by breakdown dimension (age, gender, country)
     attr_accessor :demographics
 
@@ -35,6 +44,9 @@ module Zernio
         :'success' => :'success',
         :'account_id' => :'accountId',
         :'platform' => :'platform',
+        :'video_id' => :'videoId',
+        :'title' => :'title',
+        :'published_at' => :'publishedAt',
         :'demographics' => :'demographics',
         :'date_range' => :'dateRange',
         :'note' => :'note'
@@ -57,6 +69,9 @@ module Zernio
         :'success' => :'Boolean',
         :'account_id' => :'String',
         :'platform' => :'String',
+        :'video_id' => :'String',
+        :'title' => :'String',
+        :'published_at' => :'Time',
         :'demographics' => :'Hash<String, Array<YouTubeDemographicsResponseDemographicsValueInner>>',
         :'date_range' => :'YouTubeDemographicsResponseDateRange',
         :'note' => :'String'
@@ -66,6 +81,8 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'title',
+        :'published_at',
       ])
     end
 
@@ -95,6 +112,18 @@ module Zernio
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
+      end
+
+      if attributes.key?(:'video_id')
+        self.video_id = attributes[:'video_id']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'published_at')
+        self.published_at = attributes[:'published_at']
       end
 
       if attributes.key?(:'demographics')
@@ -135,6 +164,9 @@ module Zernio
           success == o.success &&
           account_id == o.account_id &&
           platform == o.platform &&
+          video_id == o.video_id &&
+          title == o.title &&
+          published_at == o.published_at &&
           demographics == o.demographics &&
           date_range == o.date_range &&
           note == o.note
@@ -149,7 +181,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, account_id, platform, demographics, date_range, note].hash
+      [success, account_id, platform, video_id, title, published_at, demographics, date_range, note].hash
     end
 
     # Builds the object from hash

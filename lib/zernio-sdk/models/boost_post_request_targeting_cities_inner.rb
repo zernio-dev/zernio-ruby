@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :name
 
-    # Requires distance_unit.
+    # Requires distanceUnit. Meta enforces a minimum city radius (~17 km / 10 mi); smaller values resolve to a 0-size audience and the ad fails at launch. For a tighter catchment use customLocations (lat/lng).
     attr_accessor :radius
 
     attr_accessor :distance_unit
@@ -52,7 +52,7 @@ module Zernio
         :'key' => :'key',
         :'name' => :'name',
         :'radius' => :'radius',
-        :'distance_unit' => :'distance_unit'
+        :'distance_unit' => :'distanceUnit'
       }
     end
 

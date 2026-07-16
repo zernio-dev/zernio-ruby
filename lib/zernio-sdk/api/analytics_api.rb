@@ -1682,11 +1682,12 @@ module Zernio
     end
 
     # Get YouTube demographics
-    # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
+    # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Pass videoId to get the audience profile of a single video instead of the whole channel. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. YouTube suppresses demographics for videos with too few signed-in views, so low-traffic videos can return empty breakdowns. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the YouTube account
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :video_id YouTube video ID. When provided, demographics are scoped to this single video (must belong to the connected channel; otherwise 404 video_not_found). 
     # @option opts [String] :breakdown Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
-    # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago. 
+    # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video&#39;s publish date (lifetime) when videoId is provided. 
     # @option opts [Date] :end_date End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
     # @return [YouTubeDemographicsResponse]
     def get_you_tube_demographics(account_id, opts = {})
@@ -1695,11 +1696,12 @@ module Zernio
     end
 
     # Get YouTube demographics
-    # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
+    # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Pass videoId to get the audience profile of a single video instead of the whole channel. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. YouTube suppresses demographics for videos with too few signed-in views, so low-traffic videos can return empty breakdowns. Requires the Analytics add-on. 
     # @param account_id [String] The Zernio SocialAccount ID for the YouTube account
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :video_id YouTube video ID. When provided, demographics are scoped to this single video (must belong to the connected channel; otherwise 404 video_not_found). 
     # @option opts [String] :breakdown Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
-    # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago. 
+    # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video&#39;s publish date (lifetime) when videoId is provided. 
     # @option opts [Date] :end_date End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
     # @return [Array<(YouTubeDemographicsResponse, Integer, Hash)>] YouTubeDemographicsResponse data, response status code and response headers
     def get_you_tube_demographics_with_http_info(account_id, opts = {})
@@ -1716,6 +1718,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'videoId'] = opts[:'video_id'] if !opts[:'video_id'].nil?
       query_params[:'breakdown'] = opts[:'breakdown'] if !opts[:'breakdown'].nil?
       query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
       query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?

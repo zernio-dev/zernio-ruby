@@ -18,7 +18,7 @@ module Zernio
     # Meta city ID, from /v1/ads/targeting/search results.
     attr_accessor :key
 
-    # Optional radius around the city. Must be set together with distance_unit.
+    # Optional radius around the city. Must be set together with distance_unit. Meta enforces a minimum city radius (~17 km / 10 mi); smaller values resolve to a 0-size audience and the ad fails at launch. For a tighter catchment use customLocations (lat/lng).
     attr_accessor :radius
 
     # Unit for radius. Required if radius is set.

@@ -17,7 +17,7 @@ module Zernio
   class TargetingSpecExcludedLocationsCitiesInner < ApiModelBase
     attr_accessor :key
 
-    # Radius around the excluded city. Requires distance_unit.
+    # Radius around the excluded city. Requires distanceUnit.
     attr_accessor :radius
 
     # Required if radius is set.
@@ -50,7 +50,7 @@ module Zernio
       {
         :'key' => :'key',
         :'radius' => :'radius',
-        :'distance_unit' => :'distance_unit'
+        :'distance_unit' => :'distanceUnit'
       }
     end
 

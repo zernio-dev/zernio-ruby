@@ -1675,7 +1675,7 @@ end
 
 Get YouTube demographics
 
-Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
+Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Pass videoId to get the audience profile of a single video instead of the whole channel. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. YouTube suppresses demographics for videos with too few signed-in views, so low-traffic videos can return empty breakdowns. Requires the Analytics add-on. 
 
 ### Examples
 
@@ -1691,8 +1691,9 @@ end
 api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the YouTube account
 opts = {
+  video_id: 'video_id_example', # String | YouTube video ID. When provided, demographics are scoped to this single video (must belong to the connected channel; otherwise 404 video_not_found). 
   breakdown: 'breakdown_example', # String | Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
-  start_date: Date.parse('2013-10-20'), # Date | Start date in YYYY-MM-DD format. Defaults to 90 days ago. 
+  start_date: Date.parse('2013-10-20'), # Date | Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video's publish date (lifetime) when videoId is provided. 
   end_date: Date.parse('2013-10-20') # Date | End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
 }
 
@@ -1728,8 +1729,9 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the YouTube account |  |
+| **video_id** | **String** | YouTube video ID. When provided, demographics are scoped to this single video (must belong to the connected channel; otherwise 404 video_not_found).  | [optional] |
 | **breakdown** | **String** | Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted.  | [optional] |
-| **start_date** | **Date** | Start date in YYYY-MM-DD format. Defaults to 90 days ago.  | [optional] |
+| **start_date** | **Date** | Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video&#39;s publish date (lifetime) when videoId is provided.  | [optional] |
 | **end_date** | **Date** | End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency).  | [optional] |
 
 ### Return type

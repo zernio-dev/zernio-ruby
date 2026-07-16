@@ -362,11 +362,12 @@ describe 'AnalyticsApi' do
 
   # unit tests for get_you_tube_demographics
   # Get YouTube demographics
-  # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. Requires the Analytics add-on. 
+  # Returns audience demographic insights for a YouTube channel, broken down by age, gender, and/or country. Pass videoId to get the audience profile of a single video instead of the whole channel. Age and gender values are viewer percentages (0-100). Country values are view counts. Data is based on signed-in viewers only, with a 2-3 day delay. YouTube suppresses demographics for videos with too few signed-in views, so low-traffic videos can return empty breakdowns. Requires the Analytics add-on. 
   # @param account_id The Zernio SocialAccount ID for the YouTube account
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :video_id YouTube video ID. When provided, demographics are scoped to this single video (must belong to the connected channel; otherwise 404 video_not_found). 
   # @option opts [String] :breakdown Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
-  # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago. 
+  # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video&#39;s publish date (lifetime) when videoId is provided. 
   # @option opts [Date] :end_date End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
   # @return [YouTubeDemographicsResponse]
   describe 'get_you_tube_demographics test' do

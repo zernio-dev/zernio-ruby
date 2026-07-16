@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **key** | **String** |  |  |
-| **radius** | **Float** | Radius around the excluded city. Requires distance_unit. | [optional] |
+| **radius** | **Float** | Radius around the excluded city. Requires distanceUnit. | [optional] |
 | **distance_unit** | **String** | Required if radius is set. | [optional] |
 
 ## Example
