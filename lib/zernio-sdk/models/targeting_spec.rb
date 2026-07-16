@@ -135,10 +135,10 @@ module Zernio
     def self.openapi_types
       {
         :'countries' => :'Array<String>',
-        :'regions' => :'Array<CreateStandaloneAdRequestZipsInner>',
+        :'regions' => :'Array<BoostPostRequestTargetingRegionsInner>',
         :'cities' => :'Array<TargetingSpecCitiesInner>',
-        :'zips' => :'Array<CreateStandaloneAdRequestZipsInner>',
-        :'metros' => :'Array<CreateStandaloneAdRequestZipsInner>',
+        :'zips' => :'Array<BoostPostRequestTargetingRegionsInner>',
+        :'metros' => :'Array<BoostPostRequestTargetingRegionsInner>',
         :'custom_locations' => :'Array<TargetingSpecCustomLocationsInner>',
         :'excluded_locations' => :'TargetingSpecExcludedLocations',
         :'age_min' => :'Integer',

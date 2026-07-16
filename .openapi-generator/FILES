@@ -92,6 +92,9 @@ docs/BoostPostRequest.md
 docs/BoostPostRequestBudget.md
 docs/BoostPostRequestSchedule.md
 docs/BoostPostRequestTargeting.md
+docs/BoostPostRequestTargetingCitiesInner.md
+docs/BoostPostRequestTargetingCustomLocationsInner.md
+docs/BoostPostRequestTargetingRegionsInner.md
 docs/BoostPostRequestTracking.md
 docs/BroadcastsApi.md
 docs/BulkCreateContacts200Response.md
@@ -254,7 +257,6 @@ docs/CreateStandaloneAdRequestPromotedObject.md
 docs/CreateStandaloneAdRequestRegionsInner.md
 docs/CreateStandaloneAdRequestTracking.md
 docs/CreateStandaloneAdRequestVideo.md
-docs/CreateStandaloneAdRequestZipsInner.md
 docs/CreateTestLead200Response.md
 docs/CreateTestLead200ResponseTestLead.md
 docs/CreateTestLeadRequest.md
@@ -1590,6 +1592,9 @@ lib/zernio-sdk/models/boost_post_request.rb
 lib/zernio-sdk/models/boost_post_request_budget.rb
 lib/zernio-sdk/models/boost_post_request_schedule.rb
 lib/zernio-sdk/models/boost_post_request_targeting.rb
+lib/zernio-sdk/models/boost_post_request_targeting_cities_inner.rb
+lib/zernio-sdk/models/boost_post_request_targeting_custom_locations_inner.rb
+lib/zernio-sdk/models/boost_post_request_targeting_regions_inner.rb
 lib/zernio-sdk/models/boost_post_request_tracking.rb
 lib/zernio-sdk/models/bulk_create_contacts200_response.rb
 lib/zernio-sdk/models/bulk_create_contacts_request.rb
@@ -1746,7 +1751,6 @@ lib/zernio-sdk/models/create_standalone_ad_request_promoted_object.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_tracking.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
-lib/zernio-sdk/models/create_standalone_ad_request_zips_inner.rb
 lib/zernio-sdk/models/create_test_lead200_response.rb
 lib/zernio-sdk/models/create_test_lead200_response_test_lead.rb
 lib/zernio-sdk/models/create_test_lead_request.rb
@@ -3034,6 +3038,9 @@ spec/models/bookmark_post_request_spec.rb
 spec/models/boost_post_request_budget_spec.rb
 spec/models/boost_post_request_schedule_spec.rb
 spec/models/boost_post_request_spec.rb
+spec/models/boost_post_request_targeting_cities_inner_spec.rb
+spec/models/boost_post_request_targeting_custom_locations_inner_spec.rb
+spec/models/boost_post_request_targeting_regions_inner_spec.rb
 spec/models/boost_post_request_targeting_spec.rb
 spec/models/boost_post_request_tracking_spec.rb
 spec/models/bulk_create_contacts200_response_spec.rb
@@ -3191,7 +3198,6 @@ spec/models/create_standalone_ad_request_regions_inner_spec.rb
 spec/models/create_standalone_ad_request_spec.rb
 spec/models/create_standalone_ad_request_tracking_spec.rb
 spec/models/create_standalone_ad_request_video_spec.rb
-spec/models/create_standalone_ad_request_zips_inner_spec.rb
 spec/models/create_test_lead200_response_spec.rb
 spec/models/create_test_lead200_response_test_lead_spec.rb
 spec/models/create_test_lead_request_field_data_inner_spec.rb

@@ -14,13 +14,35 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Same geo/demographic fields as the `TargetingSpec` used by /v1/ads/create. Geo keys (`regions`/`cities`/`zips`/`metros`) resolve via GET /v1/ads/targeting/search?dimension=geo. City radius and lat/lng `customLocations` are Meta-only and preserve the boosted post's social proof (the ad references the existing post). 
   class BoostPostRequestTargeting < ApiModelBase
     attr_accessor :age_min
 
     attr_accessor :age_max
 
+    # Meta only.
+    attr_accessor :gender
+
+    # Meta locale ids (numeric), passed through as given.
+    attr_accessor :languages
+
     # ISO country codes. Required for TikTok boosts (TikTok's ad group requires location_ids); optional on other platforms.
     attr_accessor :countries
+
+    # Region/state targeting. `key` from /v1/ads/targeting/search?dimension=geo&geoType=region.
+    attr_accessor :regions
+
+    # City targeting. Optional `radius` + `distance_unit` extend beyond the city limits (both set together, Meta only).
+    attr_accessor :cities
+
+    # Postal/ZIP targeting. `key` is the platform's postal location ID (e.g. Meta `US:94304`).
+    attr_accessor :zips
+
+    # DMA / metro-area targeting. `key` is the platform's metro ID (e.g. Meta `DMA:807`).
+    attr_accessor :metros
+
+    # Point-radius (lat/lng) targeting (Meta custom_locations). No geo `key` lookup needed.
+    attr_accessor :custom_locations
 
     # Interest objects from /v1/ads/interests. Each must include id and name.
     attr_accessor :interests
@@ -55,7 +77,14 @@ module Zernio
       {
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
+        :'gender' => :'gender',
+        :'languages' => :'languages',
         :'countries' => :'countries',
+        :'regions' => :'regions',
+        :'cities' => :'cities',
+        :'zips' => :'zips',
+        :'metros' => :'metros',
+        :'custom_locations' => :'customLocations',
         :'interests' => :'interests',
         :'advantage_audience' => :'advantage_audience'
       }
@@ -76,7 +105,14 @@ module Zernio
       {
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
+        :'gender' => :'String',
+        :'languages' => :'Array<String>',
         :'countries' => :'Array<String>',
+        :'regions' => :'Array<BoostPostRequestTargetingRegionsInner>',
+        :'cities' => :'Array<BoostPostRequestTargetingCitiesInner>',
+        :'zips' => :'Array<BoostPostRequestTargetingRegionsInner>',
+        :'metros' => :'Array<BoostPostRequestTargetingRegionsInner>',
+        :'custom_locations' => :'Array<BoostPostRequestTargetingCustomLocationsInner>',
         :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>',
         :'advantage_audience' => :'Integer'
       }
@@ -112,9 +148,49 @@ module Zernio
         self.age_max = attributes[:'age_max']
       end
 
+      if attributes.key?(:'gender')
+        self.gender = attributes[:'gender']
+      end
+
+      if attributes.key?(:'languages')
+        if (value = attributes[:'languages']).is_a?(Array)
+          self.languages = value
+        end
+      end
+
       if attributes.key?(:'countries')
         if (value = attributes[:'countries']).is_a?(Array)
           self.countries = value
+        end
+      end
+
+      if attributes.key?(:'regions')
+        if (value = attributes[:'regions']).is_a?(Array)
+          self.regions = value
+        end
+      end
+
+      if attributes.key?(:'cities')
+        if (value = attributes[:'cities']).is_a?(Array)
+          self.cities = value
+        end
+      end
+
+      if attributes.key?(:'zips')
+        if (value = attributes[:'zips']).is_a?(Array)
+          self.zips = value
+        end
+      end
+
+      if attributes.key?(:'metros')
+        if (value = attributes[:'metros']).is_a?(Array)
+          self.metros = value
+        end
+      end
+
+      if attributes.key?(:'custom_locations')
+        if (value = attributes[:'custom_locations']).is_a?(Array)
+          self.custom_locations = value
         end
       end
 
@@ -161,6 +237,8 @@ module Zernio
       return false if !@age_min.nil? && @age_min < 13
       return false if !@age_max.nil? && @age_max > 65
       return false if !@age_max.nil? && @age_max < 13
+      gender_validator = EnumAttributeValidator.new('String', ["all", "male", "female"])
+      return false unless gender_validator.valid?(@gender)
       advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
       return false unless advantage_audience_validator.valid?(@advantage_audience)
       true
@@ -203,6 +281,16 @@ module Zernio
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] gender Object to be assigned
+    def gender=(gender)
+      validator = EnumAttributeValidator.new('String', ["all", "male", "female"])
+      unless validator.valid?(gender)
+        fail ArgumentError, "invalid value for \"gender\", must be one of #{validator.allowable_values}."
+      end
+      @gender = gender
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] advantage_audience Object to be assigned
     def advantage_audience=(advantage_audience)
       validator = EnumAttributeValidator.new('Integer', [0, 1])
@@ -219,7 +307,14 @@ module Zernio
       self.class == o.class &&
           age_min == o.age_min &&
           age_max == o.age_max &&
+          gender == o.gender &&
+          languages == o.languages &&
           countries == o.countries &&
+          regions == o.regions &&
+          cities == o.cities &&
+          zips == o.zips &&
+          metros == o.metros &&
+          custom_locations == o.custom_locations &&
           interests == o.interests &&
           advantage_audience == o.advantage_audience
     end
@@ -233,7 +328,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [age_min, age_max, countries, interests, advantage_audience].hash
+      [age_min, age_max, gender, languages, countries, regions, cities, zips, metros, custom_locations, interests, advantage_audience].hash
     end
 
     # Builds the object from hash

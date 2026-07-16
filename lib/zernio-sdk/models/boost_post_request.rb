@@ -40,6 +40,9 @@ module Zernio
 
     attr_accessor :targeting
 
+    # Meta only. A verbatim Meta-native targeting spec (e.g. `{ \"geo_locations\": { \"cities\": [{ \"key\": \"...\", \"radius\": 15, \"distance_unit\": \"kilometer\" }] } }`), forwarded unchanged. Mutually exclusive with `targeting` (sending both is a 400). Use for advanced fields the structured object does not expose (flexible_spec, excluded audiences, business places). 
+    attr_accessor :raw_targeting
+
     # Meta bid strategy applied to the ad set. On TikTok, mapped to `bid_type` / `bid_price` / `deep_bid_type` automatically. 
     attr_accessor :bid_strategy
 
@@ -106,6 +109,7 @@ module Zernio
         :'currency' => :'currency',
         :'schedule' => :'schedule',
         :'targeting' => :'targeting',
+        :'raw_targeting' => :'rawTargeting',
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
@@ -143,6 +147,7 @@ module Zernio
         :'currency' => :'String',
         :'schedule' => :'BoostPostRequestSchedule',
         :'targeting' => :'BoostPostRequestTargeting',
+        :'raw_targeting' => :'Hash<String, Object>',
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
@@ -227,6 +232,12 @@ module Zernio
 
       if attributes.key?(:'targeting')
         self.targeting = attributes[:'targeting']
+      end
+
+      if attributes.key?(:'raw_targeting')
+        if (value = attributes[:'raw_targeting']).is_a?(Hash)
+          self.raw_targeting = value
+        end
       end
 
       if attributes.key?(:'bid_strategy')
@@ -430,6 +441,7 @@ module Zernio
           currency == o.currency &&
           schedule == o.schedule &&
           targeting == o.targeting &&
+          raw_targeting == o.raw_targeting &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
@@ -452,7 +464,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

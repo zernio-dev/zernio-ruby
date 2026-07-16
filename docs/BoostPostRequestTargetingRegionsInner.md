@@ -1,4 +1,4 @@
-# Zernio::CreateStandaloneAdRequestZipsInner
+# Zernio::BoostPostRequestTargetingRegionsInner
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateStandaloneAdRequestZipsInner.new(
+instance = Zernio::BoostPostRequestTargetingRegionsInner.new(
   key: null,
   name: null
 )
