@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **platform** | **String** |  |  |
 | **deep_copy** | **Boolean** | Copy child ad sets + ads + creatives + targeting | [optional][default to true] |
-| **status_option** | **String** |  | [optional][default to &#39;PAUSED&#39;] |
+| **status_option** | **String** | ACTIVE &#x3D; launch the clone immediately (spends the moment LinkedIn approves it). PAUSED &#x3D; clone stays DRAFT, safe default. INHERITED_FROM_SOURCE &#x3D; mirror each entity&#39;s source status per-entity. Duplicating an ACTIVE campaign this way starts a second front of spend.  | [optional][default to &#39;PAUSED&#39;] |
 | **start_time** | **Time** | Reschedule the copied hierarchy&#39;s start time | [optional] |
 | **end_time** | **Time** |  | [optional] |
 | **rename_strategy** | **String** |  | [optional] |

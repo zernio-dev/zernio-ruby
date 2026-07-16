@@ -20,6 +20,7 @@ module Zernio
     # Copy child ad sets + ads + creatives + targeting
     attr_accessor :deep_copy
 
+    # ACTIVE = launch the clone immediately (spends the moment LinkedIn approves it). PAUSED = clone stays DRAFT, safe default. INHERITED_FROM_SOURCE = mirror each entity's source status per-entity. Duplicating an ACTIVE campaign this way starts a second front of spend. 
     attr_accessor :status_option
 
     # Reschedule the copied hierarchy's start time
@@ -182,7 +183,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok"])
+      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin"])
       return false unless platform_validator.valid?(@platform)
       status_option_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED", "INHERITED_FROM_SOURCE"])
       return false unless status_option_validator.valid?(@status_option)
@@ -194,7 +195,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok"])
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
