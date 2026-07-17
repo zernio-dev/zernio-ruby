@@ -83,6 +83,18 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for create_ad_insights_report
+  # Submit an async insights report run (Meta)
+  # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a &#x60;reportRunId&#x60; to poll via GET /v1/ads/insights/reports/{reportRunId}. Meta only. 
+  # @param create_ad_insights_report_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateAdInsightsReport202Response]
+  describe 'create_ad_insights_report test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_conversion_destination
   # Create a conversion destination
   # Create a new conversion destination on the platform. Supported for LinkedIn (conversion rule) and Google Ads (conversion action). Meta manages destinations in its own UI and returns 405.  **LinkedIn:** creation is NOT idempotent. A retry creates a second destination. Deduplicate before retrying.  **Google Ads:** calling with a name that already exists reuses the existing conversion action transparently (the response is identical to a fresh create). Calling with the same name but a different category returns a typed &#x60;IDEMPOTENCY_CONFLICT&#x60; (409) rather than silently returning the mismatched action.  **LinkedIn:** the rule is created with &#x60;conversionMethod&#x3D;CONVERSIONS_API&#x60; and (by default) auto-associated with all of the ad account&#39;s campaigns via &#x60;autoAssociationType&#x3D;ALL_CAMPAIGNS&#x60;. Pass &#x60;autoAssociationType: NONE&#x60; to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for &#x60;SUBMIT_APPLICATION&#x60;, &#x60;PURCHASE&#x60;, &#x60;ADD_TO_CART&#x60;, &#x60;QUALIFIED_LEAD&#x60;, and &#x60;LEAD&#x60; rule types; the API rejects other combinations locally.  **Google Ads:** the conversion action is created with &#x60;type&#x3D;UPLOAD_CLICKS&#x60; (required for API-uploaded offline conversions, immutable after creation). The &#x60;type&#x60; field carries the Google &#x60;ConversionActionCategory&#x60; enum value, e.g. &#x60;PURCHASE&#x60;, &#x60;SUBSCRIBE_PAID&#x60;, &#x60;SIGNUP&#x60;, &#x60;IMPORTED_LEAD&#x60;, &#x60;BOOK_APPOINTMENT&#x60;. Unified standard event names (e.g. &#x60;Purchase&#x60;, &#x60;Subscribe&#x60;, &#x60;CompleteRegistration&#x60;, &#x60;Lead&#x60;, &#x60;Schedule&#x60;) are resolved to their Google category equivalents automatically. The action defaults to secondary (non-primary) to avoid immediately steering Smart Bidding; pass &#x60;primaryForGoal: true&#x60; to opt in. 
@@ -221,6 +233,21 @@ describe 'AdsApi' do
   # @option opts [String] :cursor Pagination cursor from a previous response.
   # @return [GetAdComments200Response]
   describe 'get_ad_comments test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_ad_insights_report
+  # Poll an async insights report run (Meta)
+  # Status and results for a report run created via POST /v1/ads/insights/reports. While the job runs, returns &#x60;status&#x60; and &#x60;percentCompletion&#x60;. Once &#x60;status&#x60; is \&quot;Job Completed\&quot; the response also carries a &#x60;data&#x60; page, cursor-paginated via &#x60;limit&#x60; / &#x60;after&#x60;. 
+  # @param report_run_id 
+  # @param account_id Zernio SocialAccount id used to resolve the Meta token (must be the same connection that created the run).
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit 
+  # @option opts [String] :after 
+  # @return [GetAdInsightsReport200Response]
+  describe 'get_ad_insights_report test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -517,6 +544,29 @@ describe 'AdsApi' do
   # @option opts [Integer] :limit Max events to return (1-200, default 50).
   # @return [ListWhatsAppConversions200Response]
   describe 'list_whats_app_conversions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for query_ad_insights
+  # Flexible live insights query (Meta)
+  # Live, flexible insights query against Meta&#39;s Graph API. Unlike GET /v1/ads/{adId}/analytics (fixed metric set, cached), this forwards caller-chosen &#x60;fields&#x60;, &#x60;breakdowns&#x60; and &#x60;filtering&#x60; to any Meta insights node and returns Meta&#39;s rows verbatim.  &#x60;objectId&#x60; selects the node: an ad account, campaign, ad set or ad platform id. &#x60;level&#x60; sets row granularity independently of the node.  Semantic validation is Meta&#39;s: an unknown field or invalid breakdown combination returns a 400 carrying Meta&#39;s message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports). Meta only. 
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param object_id Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :level Row granularity
+  # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
+  # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
+  # @option opts [String] :filtering JSON array of Meta filter objects: [{\&quot;field\&quot;, \&quot;operator\&quot;, \&quot;value\&quot;}]. Applied server-side by Meta.
+  # @option opts [String] :date_preset Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate.
+  # @option opts [Date] :from_date Start of range (YYYY-MM-DD); requires toDate.
+  # @option opts [Date] :to_date End of range (YYYY-MM-DD); requires fromDate.
+  # @option opts [String] :time_increment Days per row (1-90), monthly, or all_days.
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [QueryAdInsights200Response]
+  describe 'query_ad_insights test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

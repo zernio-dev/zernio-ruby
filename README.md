@@ -110,6 +110,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**adjust_conversions**](docs/AdsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust uploaded conversions
 *Zernio::AdsApi* | [**archive_lead_form**](docs/AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
+*Zernio::AdsApi* | [**create_ad_insights_report**](docs/AdsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run (Meta)
 *Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination
 *Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad
 *Zernio::AdsApi* | [**create_lead_form**](docs/AdsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form
@@ -121,6 +122,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
+*Zernio::AdsApi* | [**get_ad_insights_report**](docs/AdsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run (Meta)
 *Zernio::AdsApi* | [**get_ad_tracking_tags**](docs/AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
 *Zernio::AdsApi* | [**get_campaign_analytics**](docs/AdsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
 *Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination
@@ -142,6 +144,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**list_lead_forms**](docs/AdsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List lead forms
 *Zernio::AdsApi* | [**list_leads**](docs/AdsApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads
 *Zernio::AdsApi* | [**list_whats_app_conversions**](docs/AdsApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events
+*Zernio::AdsApi* | [**query_ad_insights**](docs/AdsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query (Meta)
 *Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns
 *Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
 *Zernio::AdsApi* | [**search_ad_targeting**](docs/AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options
@@ -681,6 +684,10 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
  - [Zernio::CreateAdAudience201Response](docs/CreateAdAudience201Response.md)
  - [Zernio::CreateAdAudienceRequest](docs/CreateAdAudienceRequest.md)
+ - [Zernio::CreateAdInsightsReport202Response](docs/CreateAdInsightsReport202Response.md)
+ - [Zernio::CreateAdInsightsReportRequest](docs/CreateAdInsightsReportRequest.md)
+ - [Zernio::CreateAdInsightsReportRequestFilteringInner](docs/CreateAdInsightsReportRequestFilteringInner.md)
+ - [Zernio::CreateAdInsightsReportRequestTimeIncrement](docs/CreateAdInsightsReportRequestTimeIncrement.md)
  - [Zernio::CreateApiKey201Response](docs/CreateApiKey201Response.md)
  - [Zernio::CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
  - [Zernio::CreateBroadcast200Response](docs/CreateBroadcast200Response.md)
@@ -916,6 +923,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdComments200Response](docs/GetAdComments200Response.md)
  - [Zernio::GetAdComments200ResponseMeta](docs/GetAdComments200ResponseMeta.md)
  - [Zernio::GetAdComments200ResponsePagination](docs/GetAdComments200ResponsePagination.md)
+ - [Zernio::GetAdInsightsReport200Response](docs/GetAdInsightsReport200Response.md)
+ - [Zernio::GetAdInsightsReport200ResponsePaging](docs/GetAdInsightsReport200ResponsePaging.md)
  - [Zernio::GetAdTrackingTags200Response](docs/GetAdTrackingTags200Response.md)
  - [Zernio::GetAdTree200Response](docs/GetAdTree200Response.md)
  - [Zernio::GetAdsTimeline200Response](docs/GetAdsTimeline200Response.md)
@@ -1457,6 +1466,8 @@ Class | Method | HTTP request | Description
  - [Zernio::PurchasePhoneNumber409Response](docs/PurchasePhoneNumber409Response.md)
  - [Zernio::PurchasePhoneNumberRequest](docs/PurchasePhoneNumberRequest.md)
  - [Zernio::PurchaseWhatsAppPhoneNumberRequest](docs/PurchaseWhatsAppPhoneNumberRequest.md)
+ - [Zernio::QueryAdInsights200Response](docs/QueryAdInsights200Response.md)
+ - [Zernio::QueryAdInsights200ResponsePaging](docs/QueryAdInsights200ResponsePaging.md)
  - [Zernio::QueueDeleteResponse](docs/QueueDeleteResponse.md)
  - [Zernio::QueueNextSlotResponse](docs/QueueNextSlotResponse.md)
  - [Zernio::QueuePreviewResponse](docs/QueuePreviewResponse.md)

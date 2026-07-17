@@ -305,6 +305,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Submit an async insights report run (Meta)
+    # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a `reportRunId` to poll via GET /v1/ads/insights/reports/{reportRunId}. Meta only. 
+    # @param create_ad_insights_report_request [CreateAdInsightsReportRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateAdInsightsReport202Response]
+    def create_ad_insights_report(create_ad_insights_report_request, opts = {})
+      data, _status_code, _headers = create_ad_insights_report_with_http_info(create_ad_insights_report_request, opts)
+      data
+    end
+
+    # Submit an async insights report run (Meta)
+    # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a &#x60;reportRunId&#x60; to poll via GET /v1/ads/insights/reports/{reportRunId}. Meta only. 
+    # @param create_ad_insights_report_request [CreateAdInsightsReportRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateAdInsightsReport202Response, Integer, Hash)>] CreateAdInsightsReport202Response data, response status code and response headers
+    def create_ad_insights_report_with_http_info(create_ad_insights_report_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.create_ad_insights_report ...'
+      end
+      # verify the required parameter 'create_ad_insights_report_request' is set
+      if @api_client.config.client_side_validation && create_ad_insights_report_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_ad_insights_report_request' when calling AdsApi.create_ad_insights_report"
+      end
+      # resource path
+      local_var_path = '/v1/ads/insights/reports'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_ad_insights_report_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateAdInsightsReport202Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.create_ad_insights_report",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#create_ad_insights_report\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create a conversion destination
     # Create a new conversion destination on the platform. Supported for LinkedIn (conversion rule) and Google Ads (conversion action). Meta manages destinations in its own UI and returns 405.  **LinkedIn:** creation is NOT idempotent. A retry creates a second destination. Deduplicate before retrying.  **Google Ads:** calling with a name that already exists reuses the existing conversion action transparently (the response is identical to a fresh create). Calling with the same name but a different category returns a typed `IDEMPOTENCY_CONFLICT` (409) rather than silently returning the mismatched action.  **LinkedIn:** the rule is created with `conversionMethod=CONVERSIONS_API` and (by default) auto-associated with all of the ad account's campaigns via `autoAssociationType=ALL_CAMPAIGNS`. Pass `autoAssociationType: NONE` to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for `SUBMIT_APPLICATION`, `PURCHASE`, `ADD_TO_CART`, `QUALIFIED_LEAD`, and `LEAD` rule types; the API rejects other combinations locally.  **Google Ads:** the conversion action is created with `type=UPLOAD_CLICKS` (required for API-uploaded offline conversions, immutable after creation). The `type` field carries the Google `ConversionActionCategory` enum value, e.g. `PURCHASE`, `SUBSCRIBE_PAID`, `SIGNUP`, `IMPORTED_LEAD`, `BOOK_APPOINTMENT`. Unified standard event names (e.g. `Purchase`, `Subscribe`, `CompleteRegistration`, `Lead`, `Schedule`) are resolved to their Google category equivalents automatically. The action defaults to secondary (non-primary) to avoid immediately steering Smart Bidding; pass `primaryForGoal: true` to opt in. 
     # @param account_id [String] SocialAccount ID (linkedinads or googleads).
@@ -1082,6 +1150,90 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#get_ad_comments\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Poll an async insights report run (Meta)
+    # Status and results for a report run created via POST /v1/ads/insights/reports. While the job runs, returns `status` and `percentCompletion`. Once `status` is \"Job Completed\" the response also carries a `data` page, cursor-paginated via `limit` / `after`. 
+    # @param report_run_id [String] 
+    # @param account_id [String] Zernio SocialAccount id used to resolve the Meta token (must be the same connection that created the run).
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [String] :after 
+    # @return [GetAdInsightsReport200Response]
+    def get_ad_insights_report(report_run_id, account_id, opts = {})
+      data, _status_code, _headers = get_ad_insights_report_with_http_info(report_run_id, account_id, opts)
+      data
+    end
+
+    # Poll an async insights report run (Meta)
+    # Status and results for a report run created via POST /v1/ads/insights/reports. While the job runs, returns &#x60;status&#x60; and &#x60;percentCompletion&#x60;. Once &#x60;status&#x60; is \&quot;Job Completed\&quot; the response also carries a &#x60;data&#x60; page, cursor-paginated via &#x60;limit&#x60; / &#x60;after&#x60;. 
+    # @param report_run_id [String] 
+    # @param account_id [String] Zernio SocialAccount id used to resolve the Meta token (must be the same connection that created the run).
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @option opts [String] :after 
+    # @return [Array<(GetAdInsightsReport200Response, Integer, Hash)>] GetAdInsightsReport200Response data, response status code and response headers
+    def get_ad_insights_report_with_http_info(report_run_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_ad_insights_report ...'
+      end
+      # verify the required parameter 'report_run_id' is set
+      if @api_client.config.client_side_validation && report_run_id.nil?
+        fail ArgumentError, "Missing the required parameter 'report_run_id' when calling AdsApi.get_ad_insights_report"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.get_ad_insights_report"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 500
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.get_ad_insights_report, must be smaller than or equal to 500.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.get_ad_insights_report, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/insights/reports/{reportRunId}'.sub('{' + 'reportRunId' + '}', CGI.escape(report_run_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdInsightsReport200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_ad_insights_report",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_ad_insights_report\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2677,6 +2829,119 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#list_whats_app_conversions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Flexible live insights query (Meta)
+    # Live, flexible insights query against Meta's Graph API. Unlike GET /v1/ads/{adId}/analytics (fixed metric set, cached), this forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim.  `objectId` selects the node: an ad account, campaign, ad set or ad platform id. `level` sets row granularity independently of the node.  Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports). Meta only. 
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param object_id [String] Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :level Row granularity
+    # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
+    # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
+    # @option opts [String] :filtering JSON array of Meta filter objects: [{\&quot;field\&quot;, \&quot;operator\&quot;, \&quot;value\&quot;}]. Applied server-side by Meta.
+    # @option opts [String] :date_preset Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate.
+    # @option opts [Date] :from_date Start of range (YYYY-MM-DD); requires toDate.
+    # @option opts [Date] :to_date End of range (YYYY-MM-DD); requires fromDate.
+    # @option opts [String] :time_increment Days per row (1-90), monthly, or all_days.
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [QueryAdInsights200Response]
+    def query_ad_insights(account_id, object_id, opts = {})
+      data, _status_code, _headers = query_ad_insights_with_http_info(account_id, object_id, opts)
+      data
+    end
+
+    # Flexible live insights query (Meta)
+    # Live, flexible insights query against Meta&#39;s Graph API. Unlike GET /v1/ads/{adId}/analytics (fixed metric set, cached), this forwards caller-chosen &#x60;fields&#x60;, &#x60;breakdowns&#x60; and &#x60;filtering&#x60; to any Meta insights node and returns Meta&#39;s rows verbatim.  &#x60;objectId&#x60; selects the node: an ad account, campaign, ad set or ad platform id. &#x60;level&#x60; sets row granularity independently of the node.  Semantic validation is Meta&#39;s: an unknown field or invalid breakdown combination returns a 400 carrying Meta&#39;s message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports). Meta only. 
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param object_id [String] Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :level Row granularity
+    # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
+    # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
+    # @option opts [String] :filtering JSON array of Meta filter objects: [{\&quot;field\&quot;, \&quot;operator\&quot;, \&quot;value\&quot;}]. Applied server-side by Meta.
+    # @option opts [String] :date_preset Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate.
+    # @option opts [Date] :from_date Start of range (YYYY-MM-DD); requires toDate.
+    # @option opts [Date] :to_date End of range (YYYY-MM-DD); requires fromDate.
+    # @option opts [String] :time_increment Days per row (1-90), monthly, or all_days.
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [Array<(QueryAdInsights200Response, Integer, Hash)>] QueryAdInsights200Response data, response status code and response headers
+    def query_ad_insights_with_http_info(account_id, object_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.query_ad_insights ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.query_ad_insights"
+      end
+      # verify the required parameter 'object_id' is set
+      if @api_client.config.client_side_validation && object_id.nil?
+        fail ArgumentError, "Missing the required parameter 'object_id' when calling AdsApi.query_ad_insights"
+      end
+      allowable_values = ["ad", "adset", "campaign", "account"]
+      if @api_client.config.client_side_validation && opts[:'level'] && !allowable_values.include?(opts[:'level'])
+        fail ArgumentError, "invalid value for \"level\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 500
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.query_ad_insights, must be smaller than or equal to 500.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.query_ad_insights, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/insights'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'objectId'] = object_id
+      query_params[:'level'] = opts[:'level'] if !opts[:'level'].nil?
+      query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
+      query_params[:'breakdowns'] = opts[:'breakdowns'] if !opts[:'breakdowns'].nil?
+      query_params[:'filtering'] = opts[:'filtering'] if !opts[:'filtering'].nil?
+      query_params[:'datePreset'] = opts[:'date_preset'] if !opts[:'date_preset'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'timeIncrement'] = opts[:'time_increment'] if !opts[:'time_increment'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'QueryAdInsights200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.query_ad_insights",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#query_ad_insights\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

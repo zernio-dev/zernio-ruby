@@ -8,6 +8,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**adjust_conversions**](AdsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust uploaded conversions |
 | [**archive_lead_form**](AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form |
 | [**boost_post**](AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
+| [**create_ad_insights_report**](AdsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run (Meta) |
 | [**create_conversion_destination**](AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination |
 | [**create_ctwa_ad**](AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad |
 | [**create_lead_form**](AdsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form |
@@ -19,6 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad**](AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
 | [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**get_ad_comments**](AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
+| [**get_ad_insights_report**](AdsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run (Meta) |
 | [**get_ad_tracking_tags**](AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags |
 | [**get_campaign_analytics**](AdsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics |
 | [**get_conversion_destination**](AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination |
@@ -40,6 +42,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_lead_forms**](AdsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List lead forms |
 | [**list_leads**](AdsApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads |
 | [**list_whats_app_conversions**](AdsApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events |
+| [**query_ad_insights**](AdsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query (Meta) |
 | [**remove_conversion_associations**](AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns |
 | [**search_ad_interests**](AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests |
 | [**search_ad_targeting**](AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options |
@@ -323,6 +326,75 @@ end
 ### Return type
 
 [**UpdateAd200Response**](UpdateAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_ad_insights_report
+
+> <CreateAdInsightsReport202Response> create_ad_insights_report(create_ad_insights_report_request)
+
+Submit an async insights report run (Meta)
+
+Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a `reportRunId` to poll via GET /v1/ads/insights/reports/{reportRunId}. Meta only. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+create_ad_insights_report_request = Zernio::CreateAdInsightsReportRequest.new({account_id: 'account_id_example', object_id: 'object_id_example'}) # CreateAdInsightsReportRequest | 
+
+begin
+  # Submit an async insights report run (Meta)
+  result = api_instance.create_ad_insights_report(create_ad_insights_report_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->create_ad_insights_report: #{e}"
+end
+```
+
+#### Using the create_ad_insights_report_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateAdInsightsReport202Response>, Integer, Hash)> create_ad_insights_report_with_http_info(create_ad_insights_report_request)
+
+```ruby
+begin
+  # Submit an async insights report run (Meta)
+  data, status_code, headers = api_instance.create_ad_insights_report_with_http_info(create_ad_insights_report_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateAdInsightsReport202Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->create_ad_insights_report_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_ad_insights_report_request** | [**CreateAdInsightsReportRequest**](CreateAdInsightsReportRequest.md) |  |  |
+
+### Return type
+
+[**CreateAdInsightsReport202Response**](CreateAdInsightsReport202Response.md)
 
 ### Authorization
 
@@ -1111,6 +1183,83 @@ end
 ### Return type
 
 [**GetAdComments200Response**](GetAdComments200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_insights_report
+
+> <GetAdInsightsReport200Response> get_ad_insights_report(report_run_id, account_id, opts)
+
+Poll an async insights report run (Meta)
+
+Status and results for a report run created via POST /v1/ads/insights/reports. While the job runs, returns `status` and `percentCompletion`. Once `status` is \"Job Completed\" the response also carries a `data` page, cursor-paginated via `limit` / `after`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+report_run_id = 'report_run_id_example' # String | 
+account_id = 'account_id_example' # String | Zernio SocialAccount id used to resolve the Meta token (must be the same connection that created the run).
+opts = {
+  limit: 56, # Integer | 
+  after: 'after_example' # String | 
+}
+
+begin
+  # Poll an async insights report run (Meta)
+  result = api_instance.get_ad_insights_report(report_run_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_insights_report: #{e}"
+end
+```
+
+#### Using the get_ad_insights_report_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdInsightsReport200Response>, Integer, Hash)> get_ad_insights_report_with_http_info(report_run_id, account_id, opts)
+
+```ruby
+begin
+  # Poll an async insights report run (Meta)
+  data, status_code, headers = api_instance.get_ad_insights_report_with_http_info(report_run_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdInsightsReport200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_insights_report_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **report_run_id** | **String** |  |  |
+| **account_id** | **String** | Zernio SocialAccount id used to resolve the Meta token (must be the same connection that created the run). |  |
+| **limit** | **Integer** |  | [optional][default to 25] |
+| **after** | **String** |  | [optional] |
+
+### Return type
+
+[**GetAdInsightsReport200Response**](GetAdInsightsReport200Response.md)
 
 ### Authorization
 
@@ -2664,6 +2813,99 @@ end
 ### Return type
 
 [**ListWhatsAppConversions200Response**](ListWhatsAppConversions200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## query_ad_insights
+
+> <QueryAdInsights200Response> query_ad_insights(account_id, object_id, opts)
+
+Flexible live insights query (Meta)
+
+Live, flexible insights query against Meta's Graph API. Unlike GET /v1/ads/{adId}/analytics (fixed metric set, cached), this forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim.  `objectId` selects the node: an ad account, campaign, ad set or ad platform id. `level` sets row granularity independently of the node.  Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports). Meta only. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+object_id = 'object_id_example' # String | Meta insights node: act_<n>, campaign id, ad set id or ad id.
+opts = {
+  level: 'ad', # String | Row granularity
+  fields: 'fields_example', # String | Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted = Meta's default set.
+  breakdowns: 'breakdowns_example', # String | Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
+  filtering: 'filtering_example', # String | JSON array of Meta filter objects: [{\"field\", \"operator\", \"value\"}]. Applied server-side by Meta.
+  date_preset: 'date_preset_example', # String | Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate.
+  from_date: Date.parse('2013-10-20'), # Date | Start of range (YYYY-MM-DD); requires toDate.
+  to_date: Date.parse('2013-10-20'), # Date | End of range (YYYY-MM-DD); requires fromDate.
+  time_increment: 'time_increment_example', # String | Days per row (1-90), monthly, or all_days.
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # Flexible live insights query (Meta)
+  result = api_instance.query_ad_insights(account_id, object_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->query_ad_insights: #{e}"
+end
+```
+
+#### Using the query_ad_insights_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<QueryAdInsights200Response>, Integer, Hash)> query_ad_insights_with_http_info(account_id, object_id, opts)
+
+```ruby
+begin
+  # Flexible live insights query (Meta)
+  data, status_code, headers = api_instance.query_ad_insights_with_http_info(account_id, object_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <QueryAdInsights200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->query_ad_insights_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **object_id** | **String** | Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id. |  |
+| **level** | **String** | Row granularity | [optional] |
+| **fields** | **String** | Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. | [optional] |
+| **breakdowns** | **String** | Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform). | [optional] |
+| **filtering** | **String** | JSON array of Meta filter objects: [{\&quot;field\&quot;, \&quot;operator\&quot;, \&quot;value\&quot;}]. Applied server-side by Meta. | [optional] |
+| **date_preset** | **String** | Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate. | [optional] |
+| **from_date** | **Date** | Start of range (YYYY-MM-DD); requires toDate. | [optional] |
+| **to_date** | **Date** | End of range (YYYY-MM-DD); requires fromDate. | [optional] |
+| **time_increment** | **String** | Days per row (1-90), monthly, or all_days. | [optional] |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**QueryAdInsights200Response**](QueryAdInsights200Response.md)
 
 ### Authorization
 
