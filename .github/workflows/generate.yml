@@ -164,7 +164,6 @@ jobs:
         run: |
           gem build zernio-sdk.gemspec
           gem push zernio-sdk-${{ steps.version.outputs.gem_version }}.gem
-        continue-on-error: true
 
       - name: Build and publish late-sdk (legacy alias)
         if: steps.changes.outputs.has_changes == 'true'
@@ -176,7 +175,6 @@ jobs:
           gem build late-sdk.gemspec
           gem push late-sdk-${{ steps.version.outputs.gem_version }}.gem
           rm -f late-sdk.gemspec
-        continue-on-error: true
 
       - name: Create GitHub Release
         if: steps.changes.outputs.has_changes == 'true'
