@@ -33,10 +33,10 @@ module Zernio
     # Meta only. Minimum daily budget for the account, in the account currency's major units. This is the impressions-billed minimum; other billing events have higher minimums. Absent when the connected token cannot read it.
     attr_accessor :minimum_daily_budget
 
-    # Meta only. Whether the account can create/run ads now. Absent (treat as true) on non-Meta platforms.
+    # Meta and X only. Whether the account can create/run ads now. Absent (treat as true) on other platforms.
     attr_accessor :selectable
 
-    # Meta only. Human-readable reason when selectable is false; null when selectable.
+    # Meta and X only. Human-readable reason when selectable is false; null when selectable.
     attr_accessor :unusable_reason
 
     # Attribute mapping from ruby-style variable name to JSON key.
