@@ -206,6 +206,7 @@ Class | Method | HTTP request | Description
 *Zernio::CommentsApi* | [**set_comment_moderation**](docs/CommentsApi.md#set_comment_moderation) | **POST** /v1/inbox/comments/{postId}/{commentId}/moderation | Set comment moderation status
 *Zernio::CommentsApi* | [**unhide_inbox_comment**](docs/CommentsApi.md#unhide_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment
 *Zernio::CommentsApi* | [**unlike_inbox_comment**](docs/CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
+*Zernio::ConnectApi* | [**assign_google_business_location**](docs/ConnectApi.md#assign_google_business_location) | **POST** /v1/accounts/{accountId}/gmb-locations/assign | Assign GBP location to another profile
 *Zernio::ConnectApi* | [**complete_telegram_connect**](docs/ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status
 *Zernio::ConnectApi* | [**complete_whats_app_phone_selection**](docs/ConnectApi.md#complete_whats_app_phone_selection) | **POST** /v1/connect/whatsapp/select-phone-number | Complete number selection
 *Zernio::ConnectApi* | [**configure_tik_tok_ads_brand_identity**](docs/ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Set TikTok brand identity
@@ -601,6 +602,9 @@ Class | Method | HTTP request | Description
  - [Zernio::AppealSmsRegistrationRequest](docs/AppealSmsRegistrationRequest.md)
  - [Zernio::ApproveWhatsAppGroupJoinRequestsRequest](docs/ApproveWhatsAppGroupJoinRequestsRequest.md)
  - [Zernio::ArchiveLeadForm200Response](docs/ArchiveLeadForm200Response.md)
+ - [Zernio::AssignGoogleBusinessLocation200Response](docs/AssignGoogleBusinessLocation200Response.md)
+ - [Zernio::AssignGoogleBusinessLocation200ResponseAccount](docs/AssignGoogleBusinessLocation200ResponseAccount.md)
+ - [Zernio::AssignGoogleBusinessLocationRequest](docs/AssignGoogleBusinessLocationRequest.md)
  - [Zernio::BatchGetGoogleBusinessReviews200Response](docs/BatchGetGoogleBusinessReviews200Response.md)
  - [Zernio::BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner](docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md)
  - [Zernio::BatchGetGoogleBusinessReviewsRequest](docs/BatchGetGoogleBusinessReviewsRequest.md)
@@ -1341,6 +1345,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListLogs200ResponsePagination](docs/ListLogs200ResponsePagination.md)
  - [Zernio::ListPhoneNumberCountries200Response](docs/ListPhoneNumberCountries200Response.md)
  - [Zernio::ListPhoneNumberCountries200ResponseCountriesInner](docs/ListPhoneNumberCountries200ResponseCountriesInner.md)
+ - [Zernio::ListPhoneNumberCountries200ResponseCountriesInnerTypesInner](docs/ListPhoneNumberCountries200ResponseCountriesInnerTypesInner.md)
  - [Zernio::ListPhoneNumberPortIns200Response](docs/ListPhoneNumberPortIns200Response.md)
  - [Zernio::ListPhoneNumberPortIns200ResponseOrdersInner](docs/ListPhoneNumberPortIns200ResponseOrdersInner.md)
  - [Zernio::ListPhoneNumbers200Response](docs/ListPhoneNumbers200Response.md)
@@ -1518,6 +1523,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SearchReddit200Response](docs/SearchReddit200Response.md)
  - [Zernio::SelectFacebookPage200Response](docs/SelectFacebookPage200Response.md)
  - [Zernio::SelectFacebookPage200ResponseAccount](docs/SelectFacebookPage200ResponseAccount.md)
+ - [Zernio::SelectFacebookPage409Response](docs/SelectFacebookPage409Response.md)
  - [Zernio::SelectFacebookPageRequest](docs/SelectFacebookPageRequest.md)
  - [Zernio::SelectFacebookPageRequestUserProfile](docs/SelectFacebookPageRequestUserProfile.md)
  - [Zernio::SelectGoogleBusinessLocation200Response](docs/SelectGoogleBusinessLocation200Response.md)

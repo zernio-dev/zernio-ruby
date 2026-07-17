@@ -14,15 +14,10 @@ require 'date'
 require 'time'
 
 module Zernio
-  class PurchasePhoneNumber202Response < ApiModelBase
-    attr_accessor :status
+  class SelectFacebookPage409Response < ApiModelBase
+    attr_accessor :error
 
-    attr_accessor :country
-
-    # The type that will be ordered after KYC approval.
-    attr_accessor :number_type
-
-    attr_accessor :kyc_url
+    attr_accessor :code
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -49,10 +44,8 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'country' => :'country',
-        :'number_type' => :'numberType',
-        :'kyc_url' => :'kycUrl'
+        :'error' => :'error',
+        :'code' => :'code'
       }
     end
 
@@ -69,10 +62,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'country' => :'String',
-        :'number_type' => :'String',
-        :'kyc_url' => :'String'
+        :'error' => :'String',
+        :'code' => :'String'
       }
     end
 
@@ -86,32 +77,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchasePhoneNumber202Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SelectFacebookPage409Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchasePhoneNumber202Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SelectFacebookPage409Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
       end
 
-      if attributes.key?(:'country')
-        self.country = attributes[:'country']
-      end
-
-      if attributes.key?(:'number_type')
-        self.number_type = attributes[:'number_type']
-      end
-
-      if attributes.key?(:'kyc_url')
-        self.kyc_url = attributes[:'kyc_url']
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
     end
 
@@ -127,19 +110,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["kyc_required"])
-      return false unless status_validator.valid?(@status)
+      code_validator = EnumAttributeValidator.new('String', ["RECONNECT_ACCOUNT_MISMATCH"])
+      return false unless code_validator.valid?(@code)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["kyc_required"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+    # @param [Object] code Object to be assigned
+    def code=(code)
+      validator = EnumAttributeValidator.new('String', ["RECONNECT_ACCOUNT_MISMATCH"])
+      unless validator.valid?(code)
+        fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
       end
-      @status = status
+      @code = code
     end
 
     # Checks equality by comparing each attribute.
@@ -147,10 +130,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          country == o.country &&
-          number_type == o.number_type &&
-          kyc_url == o.kyc_url
+          error == o.error &&
+          code == o.code
     end
 
     # @see the `==` method
@@ -162,7 +143,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, country, number_type, kyc_url].hash
+      [error, code].hash
     end
 
     # Builds the object from hash

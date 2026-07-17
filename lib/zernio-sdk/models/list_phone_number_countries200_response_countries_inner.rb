@@ -36,6 +36,12 @@ module Zernio
     # WhatsApp Business Calling (BIC) outbound availability, a Meta feature blocked in some countries. NOT the PSTN Calls feature (`callsAvailable`).
     attr_accessor :outbound_calling_available
 
+    # Live carrier-stock snapshot (refreshed every 6h + on availability checks): false when NO offered type currently has deliverable inventory, so a purchase would fail. Treat as advisory; the purchase itself re-checks.
+    attr_accessor :in_stock
+
+    # Every number type offered in this country (default first). Capabilities, KYC tier, monthly price, and stock are per type. The country-level fields above mirror the first (default) entry. Pass the chosen `numberType` to POST /v1/phone-numbers/purchase. 
+    attr_accessor :types
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -68,7 +74,9 @@ module Zernio
         :'calls_available' => :'callsAvailable',
         :'whatsapp_available' => :'whatsappAvailable',
         :'sms_available' => :'smsAvailable',
-        :'outbound_calling_available' => :'outboundCallingAvailable'
+        :'outbound_calling_available' => :'outboundCallingAvailable',
+        :'in_stock' => :'inStock',
+        :'types' => :'types'
       }
     end
 
@@ -92,7 +100,9 @@ module Zernio
         :'calls_available' => :'Boolean',
         :'whatsapp_available' => :'Boolean',
         :'sms_available' => :'Boolean',
-        :'outbound_calling_available' => :'Boolean'
+        :'outbound_calling_available' => :'Boolean',
+        :'in_stock' => :'Boolean',
+        :'types' => :'Array<ListPhoneNumberCountries200ResponseCountriesInnerTypesInner>'
       }
     end
 
@@ -149,6 +159,16 @@ module Zernio
       if attributes.key?(:'outbound_calling_available')
         self.outbound_calling_available = attributes[:'outbound_calling_available']
       end
+
+      if attributes.key?(:'in_stock')
+        self.in_stock = attributes[:'in_stock']
+      end
+
+      if attributes.key?(:'types')
+        if (value = attributes[:'types']).is_a?(Array)
+          self.types = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -190,7 +210,9 @@ module Zernio
           calls_available == o.calls_available &&
           whatsapp_available == o.whatsapp_available &&
           sms_available == o.sms_available &&
-          outbound_calling_available == o.outbound_calling_available
+          outbound_calling_available == o.outbound_calling_available &&
+          in_stock == o.in_stock &&
+          types == o.types
     end
 
     # @see the `==` method
@@ -202,7 +224,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, tier, monthly_cents, needs_kyc, calls_available, whatsapp_available, sms_available, outbound_calling_available].hash
+      [code, tier, monthly_cents, needs_kyc, calls_available, whatsapp_available, sms_available, outbound_calling_available, in_stock, types].hash
     end
 
     # Builds the object from hash

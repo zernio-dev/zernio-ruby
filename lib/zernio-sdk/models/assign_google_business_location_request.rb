@@ -14,45 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class PurchasePhoneNumber202Response < ApiModelBase
-    attr_accessor :status
+  class AssignGoogleBusinessLocationRequest < ApiModelBase
+    # Target profile to connect the location onto.
+    attr_accessor :profile_id
 
-    attr_accessor :country
+    # The Google Business location ID to assign (e.g. \"locations/123\").
+    attr_accessor :selected_location_id
 
-    # The type that will be ordered after KYC approval.
-    attr_accessor :number_type
-
-    attr_accessor :kyc_url
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Optional but recommended. The Google Business Account resource name (\"accounts/123\") that owns the location (from GET gmb-locations). When provided the location is resolved directly instead of by enumerating the account, required for accounts with many locations. 
+    attr_accessor :google_account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'country' => :'country',
-        :'number_type' => :'numberType',
-        :'kyc_url' => :'kycUrl'
+        :'profile_id' => :'profileId',
+        :'selected_location_id' => :'selectedLocationId',
+        :'google_account_id' => :'googleAccountId'
       }
     end
 
@@ -69,10 +46,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'country' => :'String',
-        :'number_type' => :'String',
-        :'kyc_url' => :'String'
+        :'profile_id' => :'String',
+        :'selected_location_id' => :'String',
+        :'google_account_id' => :'String'
       }
     end
 
@@ -86,32 +62,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchasePhoneNumber202Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::AssignGoogleBusinessLocationRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchasePhoneNumber202Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::AssignGoogleBusinessLocationRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'profile_id')
+        self.profile_id = attributes[:'profile_id']
+      else
+        self.profile_id = nil
       end
 
-      if attributes.key?(:'country')
-        self.country = attributes[:'country']
+      if attributes.key?(:'selected_location_id')
+        self.selected_location_id = attributes[:'selected_location_id']
+      else
+        self.selected_location_id = nil
       end
 
-      if attributes.key?(:'number_type')
-        self.number_type = attributes[:'number_type']
-      end
-
-      if attributes.key?(:'kyc_url')
-        self.kyc_url = attributes[:'kyc_url']
+      if attributes.key?(:'google_account_id')
+        self.google_account_id = attributes[:'google_account_id']
       end
     end
 
@@ -120,6 +96,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @profile_id.nil?
+        invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
+      end
+
+      if @selected_location_id.nil?
+        invalid_properties.push('invalid value for "selected_location_id", selected_location_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -127,19 +111,29 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["kyc_required"])
-      return false unless status_validator.valid?(@status)
+      return false if @profile_id.nil?
+      return false if @selected_location_id.nil?
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["kyc_required"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] profile_id Value to be assigned
+    def profile_id=(profile_id)
+      if profile_id.nil?
+        fail ArgumentError, 'profile_id cannot be nil'
       end
-      @status = status
+
+      @profile_id = profile_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] selected_location_id Value to be assigned
+    def selected_location_id=(selected_location_id)
+      if selected_location_id.nil?
+        fail ArgumentError, 'selected_location_id cannot be nil'
+      end
+
+      @selected_location_id = selected_location_id
     end
 
     # Checks equality by comparing each attribute.
@@ -147,10 +141,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          country == o.country &&
-          number_type == o.number_type &&
-          kyc_url == o.kyc_url
+          profile_id == o.profile_id &&
+          selected_location_id == o.selected_location_id &&
+          google_account_id == o.google_account_id
     end
 
     # @see the `==` method
@@ -162,7 +155,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, country, number_type, kyc_url].hash
+      [profile_id, selected_location_id, google_account_id].hash
     end
 
     # Builds the object from hash

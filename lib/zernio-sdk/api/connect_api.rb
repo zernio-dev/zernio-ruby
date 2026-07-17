@@ -19,6 +19,80 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Assign GBP location to another profile
+    # Connect a Google Business location onto a DIFFERENT profile by reusing the OAuth grant from an already-connected GBP account — no browser, no re-authorization. Built for agencies whose single Google account has manager access to many client locations and who run one profile per client: connect one location the normal way (browser OAuth), then bulk-assign the rest onto each client's profile via this endpoint. The path `accountId` is a SOURCE connected GBP account (the token holder); the body `profileId` is the TARGET profile. Returns 409 if the target profile already has a Google Business connection (switch its location with PUT gmb-locations instead). 
+    # @param account_id [String] A source connected GBP account whose OAuth grant is reused.
+    # @param assign_google_business_location_request [AssignGoogleBusinessLocationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AssignGoogleBusinessLocation200Response]
+    def assign_google_business_location(account_id, assign_google_business_location_request, opts = {})
+      data, _status_code, _headers = assign_google_business_location_with_http_info(account_id, assign_google_business_location_request, opts)
+      data
+    end
+
+    # Assign GBP location to another profile
+    # Connect a Google Business location onto a DIFFERENT profile by reusing the OAuth grant from an already-connected GBP account — no browser, no re-authorization. Built for agencies whose single Google account has manager access to many client locations and who run one profile per client: connect one location the normal way (browser OAuth), then bulk-assign the rest onto each client&#39;s profile via this endpoint. The path &#x60;accountId&#x60; is a SOURCE connected GBP account (the token holder); the body &#x60;profileId&#x60; is the TARGET profile. Returns 409 if the target profile already has a Google Business connection (switch its location with PUT gmb-locations instead). 
+    # @param account_id [String] A source connected GBP account whose OAuth grant is reused.
+    # @param assign_google_business_location_request [AssignGoogleBusinessLocationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AssignGoogleBusinessLocation200Response, Integer, Hash)>] AssignGoogleBusinessLocation200Response data, response status code and response headers
+    def assign_google_business_location_with_http_info(account_id, assign_google_business_location_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.assign_google_business_location ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.assign_google_business_location"
+      end
+      # verify the required parameter 'assign_google_business_location_request' is set
+      if @api_client.config.client_side_validation && assign_google_business_location_request.nil?
+        fail ArgumentError, "Missing the required parameter 'assign_google_business_location_request' when calling ConnectApi.assign_google_business_location"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/gmb-locations/assign'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(assign_google_business_location_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AssignGoogleBusinessLocation200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.assign_google_business_location",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#assign_google_business_location\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Check Telegram status
     # Poll this endpoint to check if a Telegram access code has been used to connect a channel/group. Recommended polling interval: 3 seconds. Status values: pending (waiting for user), connected (channel/group linked), expired (generate a new code). 
     # @param code [String] The access code to check status for

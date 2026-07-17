@@ -69,6 +69,9 @@ docs/AppealSmsRegistration200Response.md
 docs/AppealSmsRegistrationRequest.md
 docs/ApproveWhatsAppGroupJoinRequestsRequest.md
 docs/ArchiveLeadForm200Response.md
+docs/AssignGoogleBusinessLocation200Response.md
+docs/AssignGoogleBusinessLocation200ResponseAccount.md
+docs/AssignGoogleBusinessLocationRequest.md
 docs/BatchGetGoogleBusinessReviews200Response.md
 docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md
 docs/BatchGetGoogleBusinessReviewsRequest.md
@@ -829,6 +832,7 @@ docs/ListLogs200ResponseLogsInner.md
 docs/ListLogs200ResponsePagination.md
 docs/ListPhoneNumberCountries200Response.md
 docs/ListPhoneNumberCountries200ResponseCountriesInner.md
+docs/ListPhoneNumberCountries200ResponseCountriesInnerTypesInner.md
 docs/ListPhoneNumberPortIns200Response.md
 docs/ListPhoneNumberPortIns200ResponseOrdersInner.md
 docs/ListPhoneNumbers200Response.md
@@ -1017,6 +1021,7 @@ docs/SearchInboxConversations200ResponseMetaFailedAccountsInner.md
 docs/SearchReddit200Response.md
 docs/SelectFacebookPage200Response.md
 docs/SelectFacebookPage200ResponseAccount.md
+docs/SelectFacebookPage409Response.md
 docs/SelectFacebookPageRequest.md
 docs/SelectFacebookPageRequestUserProfile.md
 docs/SelectGoogleBusinessLocation200Response.md
@@ -1574,6 +1579,9 @@ lib/zernio-sdk/models/appeal_sms_registration200_response.rb
 lib/zernio-sdk/models/appeal_sms_registration_request.rb
 lib/zernio-sdk/models/approve_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/archive_lead_form200_response.rb
+lib/zernio-sdk/models/assign_google_business_location200_response.rb
+lib/zernio-sdk/models/assign_google_business_location200_response_account.rb
+lib/zernio-sdk/models/assign_google_business_location_request.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response_location_reviews_inner.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews_request.rb
@@ -2314,6 +2322,7 @@ lib/zernio-sdk/models/list_logs200_response_logs_inner.rb
 lib/zernio-sdk/models/list_logs200_response_pagination.rb
 lib/zernio-sdk/models/list_phone_number_countries200_response.rb
 lib/zernio-sdk/models/list_phone_number_countries200_response_countries_inner.rb
+lib/zernio-sdk/models/list_phone_number_countries200_response_countries_inner_types_inner.rb
 lib/zernio-sdk/models/list_phone_number_port_ins200_response.rb
 lib/zernio-sdk/models/list_phone_number_port_ins200_response_orders_inner.rb
 lib/zernio-sdk/models/list_phone_numbers200_response.rb
@@ -2491,6 +2500,7 @@ lib/zernio-sdk/models/search_inbox_conversations200_response_meta_failed_account
 lib/zernio-sdk/models/search_reddit200_response.rb
 lib/zernio-sdk/models/select_facebook_page200_response.rb
 lib/zernio-sdk/models/select_facebook_page200_response_account.rb
+lib/zernio-sdk/models/select_facebook_page409_response.rb
 lib/zernio-sdk/models/select_facebook_page_request.rb
 lib/zernio-sdk/models/select_facebook_page_request_user_profile.rb
 lib/zernio-sdk/models/select_google_business_location200_response.rb
@@ -3026,6 +3036,9 @@ spec/models/appeal_sms_registration200_response_spec.rb
 spec/models/appeal_sms_registration_request_spec.rb
 spec/models/approve_whats_app_group_join_requests_request_spec.rb
 spec/models/archive_lead_form200_response_spec.rb
+spec/models/assign_google_business_location200_response_account_spec.rb
+spec/models/assign_google_business_location200_response_spec.rb
+spec/models/assign_google_business_location_request_spec.rb
 spec/models/batch_get_google_business_reviews200_response_location_reviews_inner_spec.rb
 spec/models/batch_get_google_business_reviews200_response_spec.rb
 spec/models/batch_get_google_business_reviews_request_spec.rb
@@ -3765,6 +3778,7 @@ spec/models/list_logs200_response_logs_inner_spec.rb
 spec/models/list_logs200_response_pagination_spec.rb
 spec/models/list_logs200_response_spec.rb
 spec/models/list_phone_number_countries200_response_countries_inner_spec.rb
+spec/models/list_phone_number_countries200_response_countries_inner_types_inner_spec.rb
 spec/models/list_phone_number_countries200_response_spec.rb
 spec/models/list_phone_number_port_ins200_response_orders_inner_spec.rb
 spec/models/list_phone_number_port_ins200_response_spec.rb
@@ -3943,6 +3957,7 @@ spec/models/search_inbox_conversations200_response_spec.rb
 spec/models/search_reddit200_response_spec.rb
 spec/models/select_facebook_page200_response_account_spec.rb
 spec/models/select_facebook_page200_response_spec.rb
+spec/models/select_facebook_page409_response_spec.rb
 spec/models/select_facebook_page_request_spec.rb
 spec/models/select_facebook_page_request_user_profile_spec.rb
 spec/models/select_google_business_location200_response_account_spec.rb

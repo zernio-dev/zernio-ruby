@@ -23,7 +23,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## check_whats_app_number_availability
 
-> <CheckPhoneNumberAvailability200Response> check_whats_app_number_availability(country)
+> <CheckPhoneNumberAvailability200Response> check_whats_app_number_availability(country, opts)
 
 Check country availability
 
@@ -42,10 +42,13 @@ end
 
 api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 country = 'country_example' # String | ISO-2 country code.
+opts = {
+  number_type: 'local' # String | Check a specific offered type (stock and address constraints are per type). Omitted = the country's default type.
+}
 
 begin
   # Check country availability
-  result = api_instance.check_whats_app_number_availability(country)
+  result = api_instance.check_whats_app_number_availability(country, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->check_whats_app_number_availability: #{e}"
@@ -56,12 +59,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CheckPhoneNumberAvailability200Response>, Integer, Hash)> check_whats_app_number_availability_with_http_info(country)
+> <Array(<CheckPhoneNumberAvailability200Response>, Integer, Hash)> check_whats_app_number_availability_with_http_info(country, opts)
 
 ```ruby
 begin
   # Check country availability
-  data, status_code, headers = api_instance.check_whats_app_number_availability_with_http_info(country)
+  data, status_code, headers = api_instance.check_whats_app_number_availability_with_http_info(country, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CheckPhoneNumberAvailability200Response>
@@ -75,6 +78,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **country** | **String** | ISO-2 country code. |  |
+| **number_type** | **String** | Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type. | [optional] |
 
 ### Return type
 

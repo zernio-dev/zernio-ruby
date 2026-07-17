@@ -14,15 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
-  class PurchasePhoneNumber202Response < ApiModelBase
-    attr_accessor :status
-
-    attr_accessor :country
-
-    # The type that will be ordered after KYC approval.
+  class ListPhoneNumberCountries200ResponseCountriesInnerTypesInner < ApiModelBase
     attr_accessor :number_type
 
-    attr_accessor :kyc_url
+    attr_accessor :tier
+
+    attr_accessor :needs_kyc
+
+    attr_accessor :monthly_cents
+
+    # Always false for toll_free (WhatsApp does not reliably register toll-free numbers).
+    attr_accessor :whatsapp_available
+
+    attr_accessor :sms_available
+
+    attr_accessor :calls_available
+
+    attr_accessor :in_stock
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -49,10 +57,14 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'country' => :'country',
         :'number_type' => :'numberType',
-        :'kyc_url' => :'kycUrl'
+        :'tier' => :'tier',
+        :'needs_kyc' => :'needsKyc',
+        :'monthly_cents' => :'monthlyCents',
+        :'whatsapp_available' => :'whatsappAvailable',
+        :'sms_available' => :'smsAvailable',
+        :'calls_available' => :'callsAvailable',
+        :'in_stock' => :'inStock'
       }
     end
 
@@ -69,10 +81,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'country' => :'String',
         :'number_type' => :'String',
-        :'kyc_url' => :'String'
+        :'tier' => :'Integer',
+        :'needs_kyc' => :'Boolean',
+        :'monthly_cents' => :'Integer',
+        :'whatsapp_available' => :'Boolean',
+        :'sms_available' => :'Boolean',
+        :'calls_available' => :'Boolean',
+        :'in_stock' => :'Boolean'
       }
     end
 
@@ -86,32 +102,48 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchasePhoneNumber202Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListPhoneNumberCountries200ResponseCountriesInnerTypesInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchasePhoneNumber202Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListPhoneNumberCountries200ResponseCountriesInnerTypesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'country')
-        self.country = attributes[:'country']
-      end
 
       if attributes.key?(:'number_type')
         self.number_type = attributes[:'number_type']
       end
 
-      if attributes.key?(:'kyc_url')
-        self.kyc_url = attributes[:'kyc_url']
+      if attributes.key?(:'tier')
+        self.tier = attributes[:'tier']
+      end
+
+      if attributes.key?(:'needs_kyc')
+        self.needs_kyc = attributes[:'needs_kyc']
+      end
+
+      if attributes.key?(:'monthly_cents')
+        self.monthly_cents = attributes[:'monthly_cents']
+      end
+
+      if attributes.key?(:'whatsapp_available')
+        self.whatsapp_available = attributes[:'whatsapp_available']
+      end
+
+      if attributes.key?(:'sms_available')
+        self.sms_available = attributes[:'sms_available']
+      end
+
+      if attributes.key?(:'calls_available')
+        self.calls_available = attributes[:'calls_available']
+      end
+
+      if attributes.key?(:'in_stock')
+        self.in_stock = attributes[:'in_stock']
       end
     end
 
@@ -127,19 +159,31 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["kyc_required"])
-      return false unless status_validator.valid?(@status)
+      number_type_validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      return false unless number_type_validator.valid?(@number_type)
+      tier_validator = EnumAttributeValidator.new('Integer', [1, 2, 3, 4])
+      return false unless tier_validator.valid?(@tier)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["kyc_required"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+    # @param [Object] number_type Object to be assigned
+    def number_type=(number_type)
+      validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      unless validator.valid?(number_type)
+        fail ArgumentError, "invalid value for \"number_type\", must be one of #{validator.allowable_values}."
       end
-      @status = status
+      @number_type = number_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tier Object to be assigned
+    def tier=(tier)
+      validator = EnumAttributeValidator.new('Integer', [1, 2, 3, 4])
+      unless validator.valid?(tier)
+        fail ArgumentError, "invalid value for \"tier\", must be one of #{validator.allowable_values}."
+      end
+      @tier = tier
     end
 
     # Checks equality by comparing each attribute.
@@ -147,10 +191,14 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          country == o.country &&
           number_type == o.number_type &&
-          kyc_url == o.kyc_url
+          tier == o.tier &&
+          needs_kyc == o.needs_kyc &&
+          monthly_cents == o.monthly_cents &&
+          whatsapp_available == o.whatsapp_available &&
+          sms_available == o.sms_available &&
+          calls_available == o.calls_available &&
+          in_stock == o.in_stock
     end
 
     # @see the `==` method
@@ -162,7 +210,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, country, number_type, kyc_url].hash
+      [number_type, tier, needs_kyc, monthly_cents, whatsapp_available, sms_available, calls_available, in_stock].hash
     end
 
     # Builds the object from hash

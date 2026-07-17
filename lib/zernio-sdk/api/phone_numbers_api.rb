@@ -86,6 +86,7 @@ module Zernio
     # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - `addressConstraint: geo`  → the registered address MUST be in one of     the returned `areas` (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - `addressConstraint: country` → any in-country address works.   - `addressConstraint: none` → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :number_type Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type.
     # @return [CheckPhoneNumberAvailability200Response]
     def check_phone_number_availability(country, opts = {})
       data, _status_code, _headers = check_phone_number_availability_with_http_info(country, opts)
@@ -96,6 +97,7 @@ module Zernio
     # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :number_type Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type.
     # @return [Array<(CheckPhoneNumberAvailability200Response, Integer, Hash)>] CheckPhoneNumberAvailability200Response data, response status code and response headers
     def check_phone_number_availability_with_http_info(country, opts = {})
       if @api_client.config.debugging
@@ -105,12 +107,17 @@ module Zernio
       if @api_client.config.client_side_validation && country.nil?
         fail ArgumentError, "Missing the required parameter 'country' when calling PhoneNumbersApi.check_phone_number_availability"
       end
+      allowable_values = ["local", "mobile", "national", "toll_free"]
+      if @api_client.config.client_side_validation && opts[:'number_type'] && !allowable_values.include?(opts[:'number_type'])
+        fail ArgumentError, "invalid value for \"number_type\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/phone-numbers/availability'
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'country'] = country
+      query_params[:'numberType'] = opts[:'number_type'] if !opts[:'number_type'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -417,6 +424,7 @@ module Zernio
     # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
     # @param country [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :number_type Requirements and reuse eligibility are per (country, type). Omitted &#x3D; the country&#39;s default type. Pass the same value on the POST.
     # @return [GetPhoneNumberKycForm200Response]
     def get_phone_number_kyc_form(country, opts = {})
       data, _status_code, _headers = get_phone_number_kyc_form_with_http_info(country, opts)
@@ -427,6 +435,7 @@ module Zernio
     # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
     # @param country [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :number_type Requirements and reuse eligibility are per (country, type). Omitted &#x3D; the country&#39;s default type. Pass the same value on the POST.
     # @return [Array<(GetPhoneNumberKycForm200Response, Integer, Hash)>] GetPhoneNumberKycForm200Response data, response status code and response headers
     def get_phone_number_kyc_form_with_http_info(country, opts = {})
       if @api_client.config.debugging
@@ -436,12 +445,17 @@ module Zernio
       if @api_client.config.client_side_validation && country.nil?
         fail ArgumentError, "Missing the required parameter 'country' when calling PhoneNumbersApi.get_phone_number_kyc_form"
       end
+      allowable_values = ["local", "mobile", "national", "toll_free"]
+      if @api_client.config.client_side_validation && opts[:'number_type'] && !allowable_values.include?(opts[:'number_type'])
+        fail ArgumentError, "invalid value for \"number_type\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/phone-numbers/kyc'
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'country'] = country
+      query_params[:'numberType'] = opts[:'number_type'] if !opts[:'number_type'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

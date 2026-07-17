@@ -97,7 +97,7 @@ end
 
 ## check_phone_number_availability
 
-> <CheckPhoneNumberAvailability200Response> check_phone_number_availability(country)
+> <CheckPhoneNumberAvailability200Response> check_phone_number_availability(country, opts)
 
 Check country availability
 
@@ -116,10 +116,13 @@ end
 
 api_instance = Zernio::PhoneNumbersApi.new
 country = 'country_example' # String | ISO-2 country code.
+opts = {
+  number_type: 'local' # String | Check a specific offered type (stock and address constraints are per type). Omitted = the country's default type.
+}
 
 begin
   # Check country availability
-  result = api_instance.check_phone_number_availability(country)
+  result = api_instance.check_phone_number_availability(country, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling PhoneNumbersApi->check_phone_number_availability: #{e}"
@@ -130,12 +133,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CheckPhoneNumberAvailability200Response>, Integer, Hash)> check_phone_number_availability_with_http_info(country)
+> <Array(<CheckPhoneNumberAvailability200Response>, Integer, Hash)> check_phone_number_availability_with_http_info(country, opts)
 
 ```ruby
 begin
   # Check country availability
-  data, status_code, headers = api_instance.check_phone_number_availability_with_http_info(country)
+  data, status_code, headers = api_instance.check_phone_number_availability_with_http_info(country, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CheckPhoneNumberAvailability200Response>
@@ -149,6 +152,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **country** | **String** | ISO-2 country code. |  |
+| **number_type** | **String** | Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type. | [optional] |
 
 ### Return type
 
@@ -442,7 +446,7 @@ end
 
 ## get_phone_number_kyc_form
 
-> <GetPhoneNumberKycForm200Response> get_phone_number_kyc_form(country)
+> <GetPhoneNumberKycForm200Response> get_phone_number_kyc_form(country, opts)
 
 Get KYC form spec
 
@@ -461,10 +465,13 @@ end
 
 api_instance = Zernio::PhoneNumbersApi.new
 country = 'country_example' # String | 
+opts = {
+  number_type: 'local' # String | Requirements and reuse eligibility are per (country, type). Omitted = the country's default type. Pass the same value on the POST.
+}
 
 begin
   # Get KYC form spec
-  result = api_instance.get_phone_number_kyc_form(country)
+  result = api_instance.get_phone_number_kyc_form(country, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling PhoneNumbersApi->get_phone_number_kyc_form: #{e}"
@@ -475,12 +482,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetPhoneNumberKycForm200Response>, Integer, Hash)> get_phone_number_kyc_form_with_http_info(country)
+> <Array(<GetPhoneNumberKycForm200Response>, Integer, Hash)> get_phone_number_kyc_form_with_http_info(country, opts)
 
 ```ruby
 begin
   # Get KYC form spec
-  data, status_code, headers = api_instance.get_phone_number_kyc_form_with_http_info(country)
+  data, status_code, headers = api_instance.get_phone_number_kyc_form_with_http_info(country, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetPhoneNumberKycForm200Response>
@@ -494,6 +501,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **country** | **String** |  |  |
+| **number_type** | **String** | Requirements and reuse eligibility are per (country, type). Omitted &#x3D; the country&#39;s default type. Pass the same value on the POST. | [optional] |
 
 ### Return type
 

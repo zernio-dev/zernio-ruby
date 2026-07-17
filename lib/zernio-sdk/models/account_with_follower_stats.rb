@@ -33,6 +33,9 @@ module Zernio
 
     attr_accessor :is_active
 
+    # The platform definitively reported the stored OAuth token as dead. While true, GET /v1/connect/{platform}/ads returns a fresh authUrl (implicit force=true) instead of alreadyConnected, so re-running the connect flow recovers the account. Cleared automatically when the account is re-authorized. 
+    attr_accessor :needs_reconnection
+
     # Follower count (only included if user has analytics add-on)
     attr_accessor :followers_count
 
@@ -97,6 +100,7 @@ module Zernio
         :'profile_picture' => :'profilePicture',
         :'profile_url' => :'profileUrl',
         :'is_active' => :'isActive',
+        :'needs_reconnection' => :'needsReconnection',
         :'followers_count' => :'followersCount',
         :'followers_last_updated' => :'followersLastUpdated',
         :'parent_account_id' => :'parentAccountId',
@@ -132,6 +136,7 @@ module Zernio
         :'profile_picture' => :'String',
         :'profile_url' => :'String',
         :'is_active' => :'Boolean',
+        :'needs_reconnection' => :'Boolean',
         :'followers_count' => :'Float',
         :'followers_last_updated' => :'Time',
         :'parent_account_id' => :'String',
@@ -213,6 +218,10 @@ module Zernio
         self.is_active = attributes[:'is_active']
       else
         self.is_active = nil
+      end
+
+      if attributes.key?(:'needs_reconnection')
+        self.needs_reconnection = attributes[:'needs_reconnection']
       end
 
       if attributes.key?(:'followers_count')
@@ -350,6 +359,7 @@ module Zernio
           profile_picture == o.profile_picture &&
           profile_url == o.profile_url &&
           is_active == o.is_active &&
+          needs_reconnection == o.needs_reconnection &&
           followers_count == o.followers_count &&
           followers_last_updated == o.followers_last_updated &&
           parent_account_id == o.parent_account_id &&
@@ -372,7 +382,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, platform, profile_id, username, display_name, profile_picture, profile_url, is_active, followers_count, followers_last_updated, parent_account_id, enabled, metadata, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
+      [_id, platform, profile_id, username, display_name, profile_picture, profile_url, is_active, needs_reconnection, followers_count, followers_last_updated, parent_account_id, enabled, metadata, current_followers, last_updated, growth, growth_percentage, data_points, account_stats].hash
     end
 
     # Builds the object from hash

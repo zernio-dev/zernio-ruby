@@ -21,6 +21,9 @@ module Zernio
     # ISO 3166-1 alpha-2 country for the number (default US). International numbers require usage-based billing. Tier 3/4 countries return 202 { status: \"kyc_required\", kycUrl } — the customer must complete KYC at that URL before the number is ordered. See GET /v1/phone-numbers/countries. 
     attr_accessor :country
 
+    # Which of the country's offered number types to order (see `types[]` on GET /v1/phone-numbers/countries). Omitted = the country's default type, which is always the WhatsApp-safe choice. Capabilities, price, and KYC requirements are per (country, type): toll_free can never connect WhatsApp (400 when combined with connectWhatsapp:true), and wantsSms:true requires an SMS-capable type. 
+    attr_accessor :number_type
+
     # A phone number is the unit; WhatsApp is one optional feature. Pass false to buy a STANDALONE number (Calls/SMS only): provisioning skips the Meta pre-verify/OTP steps and the number activates immediately. Omitted defaults to the WhatsApp provisioning path. WhatsApp can be connected to a standalone number later from the connect flow. 
     attr_accessor :connect_whatsapp
 
@@ -33,11 +36,34 @@ module Zernio
     # Any second purchase within 10 minutes of a previous one is rejected with 409 code PURCHASE_VELOCITY as duplicate protection. Pass true to confirm the additional purchase is intentional (e.g. bulk provisioning). 
     attr_accessor :allow_multiple
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'profile_id' => :'profileId',
         :'country' => :'country',
+        :'number_type' => :'numberType',
         :'connect_whatsapp' => :'connectWhatsapp',
         :'wants_sms' => :'wantsSms',
         :'purchase_intent_id' => :'purchaseIntentId',
@@ -60,6 +86,7 @@ module Zernio
       {
         :'profile_id' => :'String',
         :'country' => :'String',
+        :'number_type' => :'String',
         :'connect_whatsapp' => :'Boolean',
         :'wants_sms' => :'Boolean',
         :'purchase_intent_id' => :'String',
@@ -99,6 +126,10 @@ module Zernio
         self.country = attributes[:'country']
       else
         self.country = 'US'
+      end
+
+      if attributes.key?(:'number_type')
+        self.number_type = attributes[:'number_type']
       end
 
       if attributes.key?(:'connect_whatsapp')
@@ -145,6 +176,8 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @profile_id.nil?
+      number_type_validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      return false unless number_type_validator.valid?(@number_type)
       return false if !@purchase_intent_id.nil? && @purchase_intent_id.to_s.length > 100
       true
     end
@@ -157,6 +190,16 @@ module Zernio
       end
 
       @profile_id = profile_id
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] number_type Object to be assigned
+    def number_type=(number_type)
+      validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      unless validator.valid?(number_type)
+        fail ArgumentError, "invalid value for \"number_type\", must be one of #{validator.allowable_values}."
+      end
+      @number_type = number_type
     end
 
     # Custom attribute writer method with validation
@@ -180,6 +223,7 @@ module Zernio
       self.class == o.class &&
           profile_id == o.profile_id &&
           country == o.country &&
+          number_type == o.number_type &&
           connect_whatsapp == o.connect_whatsapp &&
           wants_sms == o.wants_sms &&
           purchase_intent_id == o.purchase_intent_id &&
@@ -195,7 +239,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, connect_whatsapp, wants_sms, purchase_intent_id, allow_multiple].hash
+      [profile_id, country, number_type, connect_whatsapp, wants_sms, purchase_intent_id, allow_multiple].hash
     end
 
     # Builds the object from hash

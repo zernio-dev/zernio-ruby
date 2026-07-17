@@ -32,6 +32,19 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for assign_google_business_location
+  # Assign GBP location to another profile
+  # Connect a Google Business location onto a DIFFERENT profile by reusing the OAuth grant from an already-connected GBP account — no browser, no re-authorization. Built for agencies whose single Google account has manager access to many client locations and who run one profile per client: connect one location the normal way (browser OAuth), then bulk-assign the rest onto each client&#39;s profile via this endpoint. The path &#x60;accountId&#x60; is a SOURCE connected GBP account (the token holder); the body &#x60;profileId&#x60; is the TARGET profile. Returns 409 if the target profile already has a Google Business connection (switch its location with PUT gmb-locations instead). 
+  # @param account_id A source connected GBP account whose OAuth grant is reused.
+  # @param assign_google_business_location_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AssignGoogleBusinessLocation200Response]
+  describe 'assign_google_business_location test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for complete_telegram_connect
   # Check Telegram status
   # Poll this endpoint to check if a Telegram access code has been used to connect a channel/group. Recommended polling interval: 3 seconds. Status values: pending (waiting for user), connected (channel/group linked), expired (generate a new code). 

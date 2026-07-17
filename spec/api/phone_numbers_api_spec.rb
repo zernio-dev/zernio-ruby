@@ -49,6 +49,7 @@ describe 'PhoneNumbersApi' do
   # Pre-purchase check, so you can warn BEFORE a customer invests in KYC (regulated review is async, 1-3 days). Tells you whether we have deliverable inventory, and what address the customer needs:   - &#x60;addressConstraint: geo&#x60;  → the registered address MUST be in one of     the returned &#x60;areas&#x60; (the only place we have stock). A different-area     address passes pre-approval but the number can never be assigned.   - &#x60;addressConstraint: country&#x60; → any in-country address works.   - &#x60;addressConstraint: none&#x60; → field-only / instant country, no address. Call this before starting the KYC form for regulated countries. 
   # @param country ISO-2 country code.
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :number_type Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type.
   # @return [CheckPhoneNumberAvailability200Response]
   describe 'check_phone_number_availability test' do
     it 'should work' do
@@ -109,6 +110,7 @@ describe 'PhoneNumbersApi' do
   # For a Tier 3/4 country, the fields the end customer must provide (Telnyx regulatory requirements) before a number can be ordered: text, date, address, or file (document) per requirement. 
   # @param country 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :number_type Requirements and reuse eligibility are per (country, type). Omitted &#x3D; the country&#39;s default type. Pass the same value on the POST.
   # @return [GetPhoneNumberKycForm200Response]
   describe 'get_phone_number_kyc_form test' do
     it 'should work' do

@@ -4,6 +4,7 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**assign_google_business_location**](ConnectApi.md#assign_google_business_location) | **POST** /v1/accounts/{accountId}/gmb-locations/assign | Assign GBP location to another profile |
 | [**complete_telegram_connect**](ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status |
 | [**complete_whats_app_phone_selection**](ConnectApi.md#complete_whats_app_phone_selection) | **POST** /v1/connect/whatsapp/select-phone-number | Complete number selection |
 | [**configure_tik_tok_ads_brand_identity**](ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Set TikTok brand identity |
@@ -43,6 +44,77 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_reddit_subreddits**](ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit |
 | [**update_youtube_default_playlist**](ConnectApi.md#update_youtube_default_playlist) | **PUT** /v1/accounts/{accountId}/youtube-playlists | Set default YouTube playlist |
 | [**vote_reddit_thing**](ConnectApi.md#vote_reddit_thing) | **POST** /v1/accounts/{accountId}/reddit-vote | Vote on a Reddit post or comment |
+
+
+## assign_google_business_location
+
+> <AssignGoogleBusinessLocation200Response> assign_google_business_location(account_id, assign_google_business_location_request)
+
+Assign GBP location to another profile
+
+Connect a Google Business location onto a DIFFERENT profile by reusing the OAuth grant from an already-connected GBP account — no browser, no re-authorization. Built for agencies whose single Google account has manager access to many client locations and who run one profile per client: connect one location the normal way (browser OAuth), then bulk-assign the rest onto each client's profile via this endpoint. The path `accountId` is a SOURCE connected GBP account (the token holder); the body `profileId` is the TARGET profile. Returns 409 if the target profile already has a Google Business connection (switch its location with PUT gmb-locations instead). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | A source connected GBP account whose OAuth grant is reused.
+assign_google_business_location_request = Zernio::AssignGoogleBusinessLocationRequest.new({profile_id: 'profile_id_example', selected_location_id: 'selected_location_id_example'}) # AssignGoogleBusinessLocationRequest | 
+
+begin
+  # Assign GBP location to another profile
+  result = api_instance.assign_google_business_location(account_id, assign_google_business_location_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->assign_google_business_location: #{e}"
+end
+```
+
+#### Using the assign_google_business_location_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AssignGoogleBusinessLocation200Response>, Integer, Hash)> assign_google_business_location_with_http_info(account_id, assign_google_business_location_request)
+
+```ruby
+begin
+  # Assign GBP location to another profile
+  data, status_code, headers = api_instance.assign_google_business_location_with_http_info(account_id, assign_google_business_location_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AssignGoogleBusinessLocation200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->assign_google_business_location_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | A source connected GBP account whose OAuth grant is reused. |  |
+| **assign_google_business_location_request** | [**AssignGoogleBusinessLocationRequest**](AssignGoogleBusinessLocationRequest.md) |  |  |
+
+### Return type
+
+[**AssignGoogleBusinessLocation200Response**](AssignGoogleBusinessLocation200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## complete_telegram_connect

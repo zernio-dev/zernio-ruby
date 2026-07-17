@@ -14,45 +14,31 @@ require 'date'
 require 'time'
 
 module Zernio
-  class PurchasePhoneNumber202Response < ApiModelBase
-    attr_accessor :status
+  class AssignGoogleBusinessLocation200ResponseAccount < ApiModelBase
+    attr_accessor :account_id
 
-    attr_accessor :country
+    attr_accessor :platform
 
-    # The type that will be ordered after KYC approval.
-    attr_accessor :number_type
+    attr_accessor :username
 
-    attr_accessor :kyc_url
+    attr_accessor :display_name
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :is_active
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
+    attr_accessor :selected_location_name
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :selected_location_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'country' => :'country',
-        :'number_type' => :'numberType',
-        :'kyc_url' => :'kycUrl'
+        :'account_id' => :'accountId',
+        :'platform' => :'platform',
+        :'username' => :'username',
+        :'display_name' => :'displayName',
+        :'is_active' => :'isActive',
+        :'selected_location_name' => :'selectedLocationName',
+        :'selected_location_id' => :'selectedLocationId'
       }
     end
 
@@ -69,10 +55,13 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'country' => :'String',
-        :'number_type' => :'String',
-        :'kyc_url' => :'String'
+        :'account_id' => :'String',
+        :'platform' => :'String',
+        :'username' => :'String',
+        :'display_name' => :'String',
+        :'is_active' => :'Boolean',
+        :'selected_location_name' => :'String',
+        :'selected_location_id' => :'String'
       }
     end
 
@@ -86,32 +75,44 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchasePhoneNumber202Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::AssignGoogleBusinessLocation200ResponseAccount` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchasePhoneNumber202Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::AssignGoogleBusinessLocation200ResponseAccount`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'country')
-        self.country = attributes[:'country']
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
       end
 
-      if attributes.key?(:'number_type')
-        self.number_type = attributes[:'number_type']
+      if attributes.key?(:'username')
+        self.username = attributes[:'username']
       end
 
-      if attributes.key?(:'kyc_url')
-        self.kyc_url = attributes[:'kyc_url']
+      if attributes.key?(:'display_name')
+        self.display_name = attributes[:'display_name']
+      end
+
+      if attributes.key?(:'is_active')
+        self.is_active = attributes[:'is_active']
+      end
+
+      if attributes.key?(:'selected_location_name')
+        self.selected_location_name = attributes[:'selected_location_name']
+      end
+
+      if attributes.key?(:'selected_location_id')
+        self.selected_location_id = attributes[:'selected_location_id']
       end
     end
 
@@ -127,19 +128,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["kyc_required"])
-      return false unless status_validator.valid?(@status)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["kyc_required"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -147,10 +136,13 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          country == o.country &&
-          number_type == o.number_type &&
-          kyc_url == o.kyc_url
+          account_id == o.account_id &&
+          platform == o.platform &&
+          username == o.username &&
+          display_name == o.display_name &&
+          is_active == o.is_active &&
+          selected_location_name == o.selected_location_name &&
+          selected_location_id == o.selected_location_id
     end
 
     # @see the `==` method
@@ -162,7 +154,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, country, number_type, kyc_url].hash
+      [account_id, platform, username, display_name, is_active, selected_location_name, selected_location_id].hash
     end
 
     # Builds the object from hash
