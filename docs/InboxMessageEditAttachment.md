@@ -1,4 +1,4 @@
-# Zernio::GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner
+# Zernio::InboxMessageEditAttachment
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner.new(
+instance = Zernio::InboxMessageEditAttachment.new(
   type: null,
   url: null,
   payload: null

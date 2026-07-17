@@ -90,7 +90,7 @@ module Zernio
         :'id' => :'String',
         :'event' => :'String',
         :'message' => :'InboxWebhookMessage',
-        :'edit_history' => :'Array<WebhookPayloadMessageEditedEditHistoryInner>',
+        :'edit_history' => :'Array<InboxMessageEditHistoryEntry>',
         :'edit_count' => :'Integer',
         :'edited_at' => :'Time',
         :'conversation' => :'InboxWebhookConversation',

@@ -14,19 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInner < ApiModelBase
-    attr_accessor :text
+  # Attachment snapshot inside an edit-history entry.
+  class InboxMessageEditAttachment < ApiModelBase
+    attr_accessor :type
 
-    attr_accessor :attachments
+    attr_accessor :url
 
-    attr_accessor :edited_at
+    attr_accessor :payload
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'text' => :'text',
-        :'attachments' => :'attachments',
-        :'edited_at' => :'editedAt'
+        :'type' => :'type',
+        :'url' => :'url',
+        :'payload' => :'payload'
       }
     end
 
@@ -43,16 +44,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'text' => :'String',
-        :'attachments' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner>',
-        :'edited_at' => :'Time'
+        :'type' => :'String',
+        :'url' => :'String',
+        :'payload' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'text',
       ])
     end
 
@@ -60,30 +60,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InboxMessageEditAttachment` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InboxMessageEditAttachment`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'text')
-        self.text = attributes[:'text']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'attachments')
-        if (value = attributes[:'attachments']).is_a?(Array)
-          self.attachments = value
-        end
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
       end
 
-      if attributes.key?(:'edited_at')
-        self.edited_at = attributes[:'edited_at']
+      if attributes.key?(:'payload')
+        self.payload = attributes[:'payload']
       end
     end
 
@@ -107,9 +105,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          text == o.text &&
-          attachments == o.attachments &&
-          edited_at == o.edited_at
+          type == o.type &&
+          url == o.url &&
+          payload == o.payload
     end
 
     # @see the `==` method
@@ -121,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [text, attachments, edited_at].hash
+      [type, url, payload].hash
     end
 
     # Builds the object from hash

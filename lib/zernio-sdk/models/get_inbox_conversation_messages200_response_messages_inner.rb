@@ -167,7 +167,7 @@ module Zernio
         :'is_edited' => :'Boolean',
         :'edited_at' => :'Time',
         :'edit_count' => :'Integer',
-        :'edit_history' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInner>',
+        :'edit_history' => :'Array<InboxMessageEditHistoryEntry>',
         :'is_deleted' => :'Boolean',
         :'deleted_at' => :'Time',
         :'delivery_status' => :'String',

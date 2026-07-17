@@ -14,19 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner < ApiModelBase
-    attr_accessor :type
+  # One prior version of an edited message.
+  class InboxMessageEditHistoryEntry < ApiModelBase
+    attr_accessor :text
 
-    attr_accessor :url
+    attr_accessor :attachments
 
-    attr_accessor :payload
+    attr_accessor :edited_at
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'url' => :'url',
-        :'payload' => :'payload'
+        :'text' => :'text',
+        :'attachments' => :'attachments',
+        :'edited_at' => :'editedAt'
       }
     end
 
@@ -43,15 +44,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'url' => :'String',
-        :'payload' => :'Object'
+        :'text' => :'String',
+        :'attachments' => :'Array<InboxMessageEditAttachment>',
+        :'edited_at' => :'Time'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'text',
       ])
     end
 
@@ -59,28 +61,36 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InboxMessageEditHistoryEntry` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetInboxConversationMessages200ResponseMessagesInnerEditHistoryInnerAttachmentsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InboxMessageEditHistoryEntry`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'text')
+        self.text = attributes[:'text']
+      else
+        self.text = nil
       end
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'attachments')
+        if (value = attributes[:'attachments']).is_a?(Array)
+          self.attachments = value
+        end
+      else
+        self.attachments = nil
       end
 
-      if attributes.key?(:'payload')
-        self.payload = attributes[:'payload']
+      if attributes.key?(:'edited_at')
+        self.edited_at = attributes[:'edited_at']
+      else
+        self.edited_at = nil
       end
     end
 
@@ -89,6 +99,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @attachments.nil?
+        invalid_properties.push('invalid value for "attachments", attachments cannot be nil.')
+      end
+
+      if @edited_at.nil?
+        invalid_properties.push('invalid value for "edited_at", edited_at cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -96,7 +114,29 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @attachments.nil?
+      return false if @edited_at.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] attachments Value to be assigned
+    def attachments=(attachments)
+      if attachments.nil?
+        fail ArgumentError, 'attachments cannot be nil'
+      end
+
+      @attachments = attachments
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] edited_at Value to be assigned
+    def edited_at=(edited_at)
+      if edited_at.nil?
+        fail ArgumentError, 'edited_at cannot be nil'
+      end
+
+      @edited_at = edited_at
     end
 
     # Checks equality by comparing each attribute.
@@ -104,9 +144,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          url == o.url &&
-          payload == o.payload
+          text == o.text &&
+          attachments == o.attachments &&
+          edited_at == o.edited_at
     end
 
     # @see the `==` method
@@ -118,7 +158,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, url, payload].hash
+      [text, attachments, edited_at].hash
     end
 
     # Builds the object from hash
