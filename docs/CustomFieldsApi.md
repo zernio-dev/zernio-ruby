@@ -364,7 +364,7 @@ nil (empty response body)
 
 ## update_custom_field
 
-> <UpdateCustomField200Response> update_custom_field(field_id, opts)
+> <UpdateCustomField200Response> update_custom_field(field_id, update_custom_field_request)
 
 Update custom field
 
@@ -383,13 +383,11 @@ end
 
 api_instance = Zernio::CustomFieldsApi.new
 field_id = 'field_id_example' # String | 
-opts = {
-  update_custom_field_request: Zernio::UpdateCustomFieldRequest.new # UpdateCustomFieldRequest | 
-}
+update_custom_field_request = Zernio::UpdateCustomFieldRequest.new # UpdateCustomFieldRequest | 
 
 begin
   # Update custom field
-  result = api_instance.update_custom_field(field_id, opts)
+  result = api_instance.update_custom_field(field_id, update_custom_field_request)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling CustomFieldsApi->update_custom_field: #{e}"
@@ -400,12 +398,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateCustomField200Response>, Integer, Hash)> update_custom_field_with_http_info(field_id, opts)
+> <Array(<UpdateCustomField200Response>, Integer, Hash)> update_custom_field_with_http_info(field_id, update_custom_field_request)
 
 ```ruby
 begin
   # Update custom field
-  data, status_code, headers = api_instance.update_custom_field_with_http_info(field_id, opts)
+  data, status_code, headers = api_instance.update_custom_field_with_http_info(field_id, update_custom_field_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateCustomField200Response>
@@ -419,7 +417,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **field_id** | **String** |  |  |
-| **update_custom_field_request** | [**UpdateCustomFieldRequest**](UpdateCustomFieldRequest.md) |  | [optional] |
+| **update_custom_field_request** | [**UpdateCustomFieldRequest**](UpdateCustomFieldRequest.md) |  |  |
 
 ### Return type
 

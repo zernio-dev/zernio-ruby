@@ -362,27 +362,31 @@ module Zernio
     # Update custom field
     # Update a custom field definition. The field type cannot be changed after creation.
     # @param field_id [String] 
+    # @param update_custom_field_request [UpdateCustomFieldRequest] 
     # @param [Hash] opts the optional parameters
-    # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 
     # @return [UpdateCustomField200Response]
-    def update_custom_field(field_id, opts = {})
-      data, _status_code, _headers = update_custom_field_with_http_info(field_id, opts)
+    def update_custom_field(field_id, update_custom_field_request, opts = {})
+      data, _status_code, _headers = update_custom_field_with_http_info(field_id, update_custom_field_request, opts)
       data
     end
 
     # Update custom field
     # Update a custom field definition. The field type cannot be changed after creation.
     # @param field_id [String] 
+    # @param update_custom_field_request [UpdateCustomFieldRequest] 
     # @param [Hash] opts the optional parameters
-    # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 
     # @return [Array<(UpdateCustomField200Response, Integer, Hash)>] UpdateCustomField200Response data, response status code and response headers
-    def update_custom_field_with_http_info(field_id, opts = {})
+    def update_custom_field_with_http_info(field_id, update_custom_field_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomFieldsApi.update_custom_field ...'
       end
       # verify the required parameter 'field_id' is set
       if @api_client.config.client_side_validation && field_id.nil?
         fail ArgumentError, "Missing the required parameter 'field_id' when calling CustomFieldsApi.update_custom_field"
+      end
+      # verify the required parameter 'update_custom_field_request' is set
+      if @api_client.config.client_side_validation && update_custom_field_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_custom_field_request' when calling CustomFieldsApi.update_custom_field"
       end
       # resource path
       local_var_path = '/v1/custom-fields/{fieldId}'.sub('{' + 'fieldId' + '}', CGI.escape(field_id.to_s))
@@ -404,7 +408,7 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_custom_field_request'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_custom_field_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'UpdateCustomField200Response'

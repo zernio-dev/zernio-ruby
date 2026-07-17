@@ -99,8 +99,8 @@ describe 'CustomFieldsApi' do
   # Update custom field
   # Update a custom field definition. The field type cannot be changed after creation.
   # @param field_id 
+  # @param update_custom_field_request 
   # @param [Hash] opts the optional parameters
-  # @option opts [UpdateCustomFieldRequest] :update_custom_field_request 
   # @return [UpdateCustomField200Response]
   describe 'update_custom_field test' do
     it 'should work' do
