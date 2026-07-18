@@ -186,7 +186,7 @@ end
 
 api_instance = Zernio::GMBAttributesApi.new
 account_id = 'account_id_example' # String | 
-update_google_business_attributes_request = Zernio::UpdateGoogleBusinessAttributesRequest.new({attributes: [Zernio::UpdateGoogleBusinessAttributesRequestAttributesInner.new], attribute_mask: 'attribute_mask_example'}) # UpdateGoogleBusinessAttributesRequest | 
+update_google_business_attributes_request = Zernio::UpdateGoogleBusinessAttributesRequest.new({attributes: [Zernio::UpdateGoogleBusinessAttributesRequestAttributesInner.new({name: 'name_example'})], attribute_mask: 'attribute_mask_example'}) # UpdateGoogleBusinessAttributesRequest | 
 opts = {
   location_id: 'location_id_example' # String | Override which location to target. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
 }

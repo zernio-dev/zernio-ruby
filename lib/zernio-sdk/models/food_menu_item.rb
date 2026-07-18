@@ -100,6 +100,10 @@ module Zernio
         invalid_properties.push('invalid value for "labels", labels cannot be nil.')
       end
 
+      if @labels.length < 1
+        invalid_properties.push('invalid value for "labels", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -108,6 +112,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @labels.nil?
+      return false if @labels.length < 1
       true
     end
 
@@ -116,6 +121,10 @@ module Zernio
     def labels=(labels)
       if labels.nil?
         fail ArgumentError, 'labels cannot be nil'
+      end
+
+      if labels.length < 1
+        fail ArgumentError, 'invalid value for "labels", number of items must be greater than or equal to 1.'
       end
 
       @labels = labels

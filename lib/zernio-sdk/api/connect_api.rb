@@ -1045,6 +1045,10 @@ module Zernio
       if @api_client.config.client_side_validation && subreddit.nil?
         fail ArgumentError, "Missing the required parameter 'subreddit' when calling ConnectApi.get_reddit_flairs"
       end
+      if @api_client.config.client_side_validation && subreddit.to_s.length < 1
+        fail ArgumentError, 'invalid value for "subreddit" when calling ConnectApi.get_reddit_flairs, the character length must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/accounts/{accountId}/reddit-flairs'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 
@@ -2501,7 +2505,7 @@ module Zernio
     # @param account_id [String] 
     # @param update_linked_in_organization_request [UpdateLinkedInOrganizationRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [ConnectBlueskyCredentials200Response]
+    # @return [UpdateLinkedInOrganization200Response]
     def update_linked_in_organization(account_id, update_linked_in_organization_request, opts = {})
       data, _status_code, _headers = update_linked_in_organization_with_http_info(account_id, update_linked_in_organization_request, opts)
       data
@@ -2512,7 +2516,7 @@ module Zernio
     # @param account_id [String] 
     # @param update_linked_in_organization_request [UpdateLinkedInOrganizationRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ConnectBlueskyCredentials200Response, Integer, Hash)>] ConnectBlueskyCredentials200Response data, response status code and response headers
+    # @return [Array<(UpdateLinkedInOrganization200Response, Integer, Hash)>] UpdateLinkedInOrganization200Response data, response status code and response headers
     def update_linked_in_organization_with_http_info(account_id, update_linked_in_organization_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConnectApi.update_linked_in_organization ...'
@@ -2548,7 +2552,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_linked_in_organization_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ConnectBlueskyCredentials200Response'
+      return_type = opts[:debug_return_type] || 'UpdateLinkedInOrganization200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

@@ -81,6 +81,27 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@command.nil? && @command.to_s.length > 32
+        invalid_properties.push('invalid value for "command", the character length must be smaller than or equal to 32.')
+      end
+
+      if !@command.nil? && @command.to_s.length < 1
+        invalid_properties.push('invalid value for "command", the character length must be greater than or equal to 1.')
+      end
+
+      pattern = Regexp.new(/^[a-z0-9_]+$/)
+      if !@command.nil? && @command !~ pattern
+        invalid_properties.push("invalid value for \"command\", must conform to the pattern #{pattern}.")
+      end
+
+      if !@description.nil? && @description.to_s.length > 256
+        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 256.')
+      end
+
+      if !@description.nil? && @description.to_s.length < 1
+        invalid_properties.push('invalid value for "description", the character length must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -88,7 +109,53 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@command.nil? && @command.to_s.length > 32
+      return false if !@command.nil? && @command.to_s.length < 1
+      return false if !@command.nil? && @command !~ Regexp.new(/^[a-z0-9_]+$/)
+      return false if !@description.nil? && @description.to_s.length > 256
+      return false if !@description.nil? && @description.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] command Value to be assigned
+    def command=(command)
+      if command.nil?
+        fail ArgumentError, 'command cannot be nil'
+      end
+
+      if command.to_s.length > 32
+        fail ArgumentError, 'invalid value for "command", the character length must be smaller than or equal to 32.'
+      end
+
+      if command.to_s.length < 1
+        fail ArgumentError, 'invalid value for "command", the character length must be greater than or equal to 1.'
+      end
+
+      pattern = Regexp.new(/^[a-z0-9_]+$/)
+      if command !~ pattern
+        fail ArgumentError, "invalid value for \"command\", must conform to the pattern #{pattern}."
+      end
+
+      @command = command
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if description.nil?
+        fail ArgumentError, 'description cannot be nil'
+      end
+
+      if description.to_s.length > 256
+        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 256.'
+      end
+
+      if description.to_s.length < 1
+        fail ArgumentError, 'invalid value for "description", the character length must be greater than or equal to 1.'
+      end
+
+      @description = description
     end
 
     # Checks equality by comparing each attribute.

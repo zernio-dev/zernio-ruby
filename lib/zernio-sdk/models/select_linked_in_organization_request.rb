@@ -78,7 +78,7 @@ module Zernio
         :'temp_token' => :'String',
         :'user_profile' => :'Object',
         :'account_type' => :'String',
-        :'selected_organization' => :'Object',
+        :'selected_organization' => :'SelectLinkedInOrganizationRequestSelectedOrganization',
         :'redirect_url' => :'String'
       }
     end

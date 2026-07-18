@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **structured_service_item** | [**GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerStructuredServiceItem**](GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerStructuredServiceItem.md) |  | [optional] |
-| **free_form_service_item** | [**GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem**](GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem.md) |  | [optional] |
-| **price** | [**GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerPrice**](GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerPrice.md) |  | [optional] |
+| **structured_service_item** | [**UpdateGoogleBusinessServicesRequestServiceItemsInnerStructuredServiceItem**](UpdateGoogleBusinessServicesRequestServiceItemsInnerStructuredServiceItem.md) |  | [optional] |
+| **free_form_service_item** | [**UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItem**](UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItem.md) |  | [optional] |
+| **price** | [**UpdateGoogleBusinessServicesRequestServiceItemsInnerPrice**](UpdateGoogleBusinessServicesRequestServiceItemsInnerPrice.md) |  | [optional] |
 
 ## Example
 

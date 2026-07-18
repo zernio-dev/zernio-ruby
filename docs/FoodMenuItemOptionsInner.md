@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **labels** | [**Array&lt;FoodMenuLabel&gt;**](FoodMenuLabel.md) |  | [optional] |
-| **attributes** | [**FoodMenuItemAttributes**](FoodMenuItemAttributes.md) |  | [optional] |
+| **labels** | [**Array&lt;FoodMenuLabel&gt;**](FoodMenuLabel.md) |  |  |
+| **attributes** | [**FoodMenuItemAttributes**](FoodMenuItemAttributes.md) |  |  |
 
 ## Example
 

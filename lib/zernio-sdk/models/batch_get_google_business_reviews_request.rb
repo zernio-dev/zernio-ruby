@@ -102,8 +102,20 @@ module Zernio
         invalid_properties.push('invalid value for "location_names", location_names cannot be nil.')
       end
 
+      if @location_names.length < 1
+        invalid_properties.push('invalid value for "location_names", number of items must be greater than or equal to 1.')
+      end
+
       if !@page_size.nil? && @page_size > 50
         invalid_properties.push('invalid value for "page_size", must be smaller than or equal to 50.')
+      end
+
+      if !@page_size.nil? && @page_size < 1
+        invalid_properties.push('invalid value for "page_size", must be greater than or equal to 1.')
+      end
+
+      if !@page_token.nil? && @page_token.to_s.length < 1
+        invalid_properties.push('invalid value for "page_token", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -114,7 +126,10 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @location_names.nil?
+      return false if @location_names.length < 1
       return false if !@page_size.nil? && @page_size > 50
+      return false if !@page_size.nil? && @page_size < 1
+      return false if !@page_token.nil? && @page_token.to_s.length < 1
       true
     end
 
@@ -123,6 +138,10 @@ module Zernio
     def location_names=(location_names)
       if location_names.nil?
         fail ArgumentError, 'location_names cannot be nil'
+      end
+
+      if location_names.length < 1
+        fail ArgumentError, 'invalid value for "location_names", number of items must be greater than or equal to 1.'
       end
 
       @location_names = location_names
@@ -139,7 +158,25 @@ module Zernio
         fail ArgumentError, 'invalid value for "page_size", must be smaller than or equal to 50.'
       end
 
+      if page_size < 1
+        fail ArgumentError, 'invalid value for "page_size", must be greater than or equal to 1.'
+      end
+
       @page_size = page_size
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] page_token Value to be assigned
+    def page_token=(page_token)
+      if page_token.nil?
+        fail ArgumentError, 'page_token cannot be nil'
+      end
+
+      if page_token.to_s.length < 1
+        fail ArgumentError, 'invalid value for "page_token", the character length must be greater than or equal to 1.'
+      end
+
+      @page_token = page_token
     end
 
     # Checks equality by comparing each attribute.

@@ -1229,7 +1229,7 @@ account_id = 'account_id_example' # String | The ID of the LinkedIn organization
 urn = 'urn:li:share:7123456789012345678' # String | The LinkedIn post URN
 opts = {
   limit: 56, # Integer | Maximum number of reactions to return per page
-  cursor: 'cursor_example' # String | Offset-based pagination start index
+  cursor: 56 # Integer | Offset-based pagination start index
 }
 
 begin
@@ -1266,7 +1266,7 @@ end
 | **account_id** | **String** | The ID of the LinkedIn organization account |  |
 | **urn** | **String** | The LinkedIn post URN |  |
 | **limit** | **Integer** | Maximum number of reactions to return per page | [optional][default to 25] |
-| **cursor** | **String** | Offset-based pagination start index | [optional] |
+| **cursor** | **Integer** | Offset-based pagination start index | [optional][default to 0] |
 
 ### Return type
 

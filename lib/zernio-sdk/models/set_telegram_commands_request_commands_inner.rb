@@ -91,8 +91,29 @@ module Zernio
         invalid_properties.push('invalid value for "command", command cannot be nil.')
       end
 
+      if @command.to_s.length > 32
+        invalid_properties.push('invalid value for "command", the character length must be smaller than or equal to 32.')
+      end
+
+      if @command.to_s.length < 1
+        invalid_properties.push('invalid value for "command", the character length must be greater than or equal to 1.')
+      end
+
+      pattern = Regexp.new(/^[a-z0-9_]+$/)
+      if @command !~ pattern
+        invalid_properties.push("invalid value for \"command\", must conform to the pattern #{pattern}.")
+      end
+
       if @description.nil?
         invalid_properties.push('invalid value for "description", description cannot be nil.')
+      end
+
+      if @description.to_s.length > 256
+        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 256.')
+      end
+
+      if @description.to_s.length < 1
+        invalid_properties.push('invalid value for "description", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -103,7 +124,12 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @command.nil?
+      return false if @command.to_s.length > 32
+      return false if @command.to_s.length < 1
+      return false if @command !~ Regexp.new(/^[a-z0-9_]+$/)
       return false if @description.nil?
+      return false if @description.to_s.length > 256
+      return false if @description.to_s.length < 1
       true
     end
 
@@ -114,6 +140,19 @@ module Zernio
         fail ArgumentError, 'command cannot be nil'
       end
 
+      if command.to_s.length > 32
+        fail ArgumentError, 'invalid value for "command", the character length must be smaller than or equal to 32.'
+      end
+
+      if command.to_s.length < 1
+        fail ArgumentError, 'invalid value for "command", the character length must be greater than or equal to 1.'
+      end
+
+      pattern = Regexp.new(/^[a-z0-9_]+$/)
+      if command !~ pattern
+        fail ArgumentError, "invalid value for \"command\", must conform to the pattern #{pattern}."
+      end
+
       @command = command
     end
 
@@ -122,6 +161,14 @@ module Zernio
     def description=(description)
       if description.nil?
         fail ArgumentError, 'description cannot be nil'
+      end
+
+      if description.to_s.length > 256
+        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 256.'
+      end
+
+      if description.to_s.length < 1
+        fail ArgumentError, 'invalid value for "description", the character length must be greater than or equal to 1.'
       end
 
       @description = description

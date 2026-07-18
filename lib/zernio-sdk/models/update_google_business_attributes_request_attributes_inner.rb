@@ -17,16 +17,44 @@ module Zernio
   class UpdateGoogleBusinessAttributesRequestAttributesInner < ApiModelBase
     attr_accessor :name
 
+    attr_accessor :value_type
+
     attr_accessor :values
 
     attr_accessor :repeated_enum_value
+
+    attr_accessor :uri_values
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
+        :'value_type' => :'valueType',
         :'values' => :'values',
-        :'repeated_enum_value' => :'repeatedEnumValue'
+        :'repeated_enum_value' => :'repeatedEnumValue',
+        :'uri_values' => :'uriValues'
       }
     end
 
@@ -44,8 +72,10 @@ module Zernio
     def self.openapi_types
       {
         :'name' => :'String',
+        :'value_type' => :'String',
         :'values' => :'Array<Object>',
-        :'repeated_enum_value' => :'GetGoogleBusinessAttributes200ResponseAttributesInnerRepeatedEnumValue'
+        :'repeated_enum_value' => :'GetGoogleBusinessAttributes200ResponseAttributesInnerRepeatedEnumValue',
+        :'uri_values' => :'Array<UpdateGoogleBusinessAttributesRequestAttributesInnerUriValuesInner>'
       }
     end
 
@@ -73,6 +103,12 @@ module Zernio
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
+      end
+
+      if attributes.key?(:'value_type')
+        self.value_type = attributes[:'value_type']
       end
 
       if attributes.key?(:'values')
@@ -84,6 +120,12 @@ module Zernio
       if attributes.key?(:'repeated_enum_value')
         self.repeated_enum_value = attributes[:'repeated_enum_value']
       end
+
+      if attributes.key?(:'uri_values')
+        if (value = attributes[:'uri_values']).is_a?(Array)
+          self.uri_values = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -91,6 +133,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @name.to_s.length < 1
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -98,7 +148,35 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @name.nil?
+      return false if @name.to_s.length < 1
+      value_type_validator = EnumAttributeValidator.new('String', ["ATTRIBUTE_VALUE_TYPE_UNSPECIFIED", "BOOL", "ENUM", "URL", "REPEATED_ENUM"])
+      return false unless value_type_validator.valid?(@value_type)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      if name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 1.'
+      end
+
+      @name = name
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] value_type Object to be assigned
+    def value_type=(value_type)
+      validator = EnumAttributeValidator.new('String', ["ATTRIBUTE_VALUE_TYPE_UNSPECIFIED", "BOOL", "ENUM", "URL", "REPEATED_ENUM"])
+      unless validator.valid?(value_type)
+        fail ArgumentError, "invalid value for \"value_type\", must be one of #{validator.allowable_values}."
+      end
+      @value_type = value_type
     end
 
     # Checks equality by comparing each attribute.
@@ -107,8 +185,10 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
+          value_type == o.value_type &&
           values == o.values &&
-          repeated_enum_value == o.repeated_enum_value
+          repeated_enum_value == o.repeated_enum_value &&
+          uri_values == o.uri_values
     end
 
     # @see the `==` method
@@ -120,7 +200,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, values, repeated_enum_value].hash
+      [name, value_type, values, repeated_enum_value, uri_values].hash
     end
 
     # Builds the object from hash

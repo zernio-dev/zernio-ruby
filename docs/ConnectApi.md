@@ -2570,7 +2570,7 @@ end
 
 ## update_linked_in_organization
 
-> <ConnectBlueskyCredentials200Response> update_linked_in_organization(account_id, update_linked_in_organization_request)
+> <UpdateLinkedInOrganization200Response> update_linked_in_organization(account_id, update_linked_in_organization_request)
 
 Switch LinkedIn account type
 
@@ -2604,7 +2604,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ConnectBlueskyCredentials200Response>, Integer, Hash)> update_linked_in_organization_with_http_info(account_id, update_linked_in_organization_request)
+> <Array(<UpdateLinkedInOrganization200Response>, Integer, Hash)> update_linked_in_organization_with_http_info(account_id, update_linked_in_organization_request)
 
 ```ruby
 begin
@@ -2612,7 +2612,7 @@ begin
   data, status_code, headers = api_instance.update_linked_in_organization_with_http_info(account_id, update_linked_in_organization_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ConnectBlueskyCredentials200Response>
+  p data # => <UpdateLinkedInOrganization200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling ConnectApi->update_linked_in_organization_with_http_info: #{e}"
 end
@@ -2627,7 +2627,7 @@ end
 
 ### Return type
 
-[**ConnectBlueskyCredentials200Response**](ConnectBlueskyCredentials200Response.md)
+[**UpdateLinkedInOrganization200Response**](UpdateLinkedInOrganization200Response.md)
 
 ### Authorization
 

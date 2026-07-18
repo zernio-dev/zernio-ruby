@@ -56,6 +56,10 @@ module Zernio
       if @api_client.config.client_side_validation && complete_google_business_verification_request.nil?
         fail ArgumentError, "Missing the required parameter 'complete_google_business_verification_request' when calling GMBVerificationsApi.complete_google_business_verification"
       end
+      if @api_client.config.client_side_validation && !opts[:'location_id'].nil? && opts[:'location_id'].to_s.length < 1
+        fail ArgumentError, 'invalid value for "opts[:"location_id"]" when calling GMBVerificationsApi.complete_google_business_verification, the character length must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/accounts/{accountId}/gmb-verifications/{verificationId}/complete'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'verificationId' + '}', CGI.escape(verification_id.to_s))
 
@@ -133,6 +137,10 @@ module Zernio
       if @api_client.config.client_side_validation && fetch_google_business_verification_options_request.nil?
         fail ArgumentError, "Missing the required parameter 'fetch_google_business_verification_options_request' when calling GMBVerificationsApi.fetch_google_business_verification_options"
       end
+      if @api_client.config.client_side_validation && !opts[:'location_id'].nil? && opts[:'location_id'].to_s.length < 1
+        fail ArgumentError, 'invalid value for "opts[:"location_id"]" when calling GMBVerificationsApi.fetch_google_business_verification_options, the character length must be greater than or equal to 1.'
+      end
+
       # resource path
       local_var_path = '/v1/accounts/{accountId}/gmb-verifications/options'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 

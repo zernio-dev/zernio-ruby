@@ -43,9 +43,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'structured_service_item' => :'GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerStructuredServiceItem',
-        :'free_form_service_item' => :'GetGoogleBusinessServices200ResponseServicesInnerFreeFormServiceItem',
-        :'price' => :'GetGoogleBusinessLocationDetails200ResponseServiceItemsInnerPrice'
+        :'structured_service_item' => :'UpdateGoogleBusinessServicesRequestServiceItemsInnerStructuredServiceItem',
+        :'free_form_service_item' => :'UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItem',
+        :'price' => :'UpdateGoogleBusinessServicesRequestServiceItemsInnerPrice'
       }
     end
 

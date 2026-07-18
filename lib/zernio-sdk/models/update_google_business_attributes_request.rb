@@ -96,6 +96,10 @@ module Zernio
         invalid_properties.push('invalid value for "attribute_mask", attribute_mask cannot be nil.')
       end
 
+      if @attribute_mask.to_s.length < 1
+        invalid_properties.push('invalid value for "attribute_mask", the character length must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -105,6 +109,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @attributes.nil?
       return false if @attribute_mask.nil?
+      return false if @attribute_mask.to_s.length < 1
       true
     end
 
@@ -123,6 +128,10 @@ module Zernio
     def attribute_mask=(attribute_mask)
       if attribute_mask.nil?
         fail ArgumentError, 'attribute_mask cannot be nil'
+      end
+
+      if attribute_mask.to_s.length < 1
+        fail ArgumentError, 'invalid value for "attribute_mask", the character length must be greater than or equal to 1.'
       end
 
       @attribute_mask = attribute_mask

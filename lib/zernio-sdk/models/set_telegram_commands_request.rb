@@ -81,6 +81,10 @@ module Zernio
         invalid_properties.push('invalid value for "commands", commands cannot be nil.')
       end
 
+      if @commands.length > 100
+        invalid_properties.push('invalid value for "commands", number of items must be less than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -89,6 +93,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @commands.nil?
+      return false if @commands.length > 100
       true
     end
 
@@ -97,6 +102,10 @@ module Zernio
     def commands=(commands)
       if commands.nil?
         fail ArgumentError, 'commands cannot be nil'
+      end
+
+      if commands.length > 100
+        fail ArgumentError, 'invalid value for "commands", number of items must be less than or equal to 100.'
       end
 
       @commands = commands

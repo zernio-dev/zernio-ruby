@@ -35,6 +35,28 @@ module Zernio
     # Media references for item photos
     attr_accessor :media_keys
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -135,6 +157,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@serves_num_people.nil? && @serves_num_people < 1
+        invalid_properties.push('invalid value for "serves_num_people", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -142,7 +168,34 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      spiciness_validator = EnumAttributeValidator.new('String', ["SPICINESS_UNSPECIFIED", "MILD", "MEDIUM", "HOT"])
+      return false unless spiciness_validator.valid?(@spiciness)
+      return false if !@serves_num_people.nil? && @serves_num_people < 1
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] spiciness Object to be assigned
+    def spiciness=(spiciness)
+      validator = EnumAttributeValidator.new('String', ["SPICINESS_UNSPECIFIED", "MILD", "MEDIUM", "HOT"])
+      unless validator.valid?(spiciness)
+        fail ArgumentError, "invalid value for \"spiciness\", must be one of #{validator.allowable_values}."
+      end
+      @spiciness = spiciness
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] serves_num_people Value to be assigned
+    def serves_num_people=(serves_num_people)
+      if serves_num_people.nil?
+        fail ArgumentError, 'serves_num_people cannot be nil'
+      end
+
+      if serves_num_people < 1
+        fail ArgumentError, 'invalid value for "serves_num_people", must be greater than or equal to 1.'
+      end
+
+      @serves_num_people = serves_num_people
     end
 
     # Checks equality by comparing each attribute.

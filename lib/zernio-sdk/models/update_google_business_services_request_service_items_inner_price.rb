@@ -14,24 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class FoodMenu < ApiModelBase
-    attr_accessor :labels
+  class UpdateGoogleBusinessServicesRequestServiceItemsInnerPrice < ApiModelBase
+    attr_accessor :currency_code
 
-    attr_accessor :sections
+    attr_accessor :units
 
-    # Cuisine types (e.g. AMERICAN, ITALIAN, JAPANESE)
-    attr_accessor :cuisines
-
-    # URL of the original menu source
-    attr_accessor :source_url
+    attr_accessor :nanos
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'labels' => :'labels',
-        :'sections' => :'sections',
-        :'cuisines' => :'cuisines',
-        :'source_url' => :'sourceUrl'
+        :'currency_code' => :'currencyCode',
+        :'units' => :'units',
+        :'nanos' => :'nanos'
       }
     end
 
@@ -48,10 +43,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'labels' => :'Array<FoodMenuLabel>',
-        :'sections' => :'Array<FoodMenuSection>',
-        :'cuisines' => :'Array<String>',
-        :'source_url' => :'String'
+        :'currency_code' => :'String',
+        :'units' => :'String',
+        :'nanos' => :'Integer'
       }
     end
 
@@ -65,40 +59,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::FoodMenu` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateGoogleBusinessServicesRequestServiceItemsInnerPrice` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::FoodMenu`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateGoogleBusinessServicesRequestServiceItemsInnerPrice`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'labels')
-        if (value = attributes[:'labels']).is_a?(Array)
-          self.labels = value
-        end
-      else
-        self.labels = nil
+      if attributes.key?(:'currency_code')
+        self.currency_code = attributes[:'currency_code']
       end
 
-      if attributes.key?(:'sections')
-        if (value = attributes[:'sections']).is_a?(Array)
-          self.sections = value
-        end
+      if attributes.key?(:'units')
+        self.units = attributes[:'units']
       end
 
-      if attributes.key?(:'cuisines')
-        if (value = attributes[:'cuisines']).is_a?(Array)
-          self.cuisines = value
-        end
-      end
-
-      if attributes.key?(:'source_url')
-        self.source_url = attributes[:'source_url']
+      if attributes.key?(:'nanos')
+        self.nanos = attributes[:'nanos']
       end
     end
 
@@ -107,12 +89,12 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @labels.nil?
-        invalid_properties.push('invalid value for "labels", labels cannot be nil.')
+      if !@currency_code.nil? && @currency_code.to_s.length < 1
+        invalid_properties.push('invalid value for "currency_code", the character length must be greater than or equal to 1.')
       end
 
-      if @labels.length < 1
-        invalid_properties.push('invalid value for "labels", number of items must be greater than or equal to 1.')
+      if !@units.nil? && @units.to_s.length < 1
+        invalid_properties.push('invalid value for "units", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -122,23 +104,37 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @labels.nil?
-      return false if @labels.length < 1
+      return false if !@currency_code.nil? && @currency_code.to_s.length < 1
+      return false if !@units.nil? && @units.to_s.length < 1
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] labels Value to be assigned
-    def labels=(labels)
-      if labels.nil?
-        fail ArgumentError, 'labels cannot be nil'
+    # @param [Object] currency_code Value to be assigned
+    def currency_code=(currency_code)
+      if currency_code.nil?
+        fail ArgumentError, 'currency_code cannot be nil'
       end
 
-      if labels.length < 1
-        fail ArgumentError, 'invalid value for "labels", number of items must be greater than or equal to 1.'
+      if currency_code.to_s.length < 1
+        fail ArgumentError, 'invalid value for "currency_code", the character length must be greater than or equal to 1.'
       end
 
-      @labels = labels
+      @currency_code = currency_code
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] units Value to be assigned
+    def units=(units)
+      if units.nil?
+        fail ArgumentError, 'units cannot be nil'
+      end
+
+      if units.to_s.length < 1
+        fail ArgumentError, 'invalid value for "units", the character length must be greater than or equal to 1.'
+      end
+
+      @units = units
     end
 
     # Checks equality by comparing each attribute.
@@ -146,10 +142,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          labels == o.labels &&
-          sections == o.sections &&
-          cuisines == o.cuisines &&
-          source_url == o.source_url
+          currency_code == o.currency_code &&
+          units == o.units &&
+          nanos == o.nanos
     end
 
     # @see the `==` method
@@ -161,7 +156,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [labels, sections, cuisines, source_url].hash
+      [currency_code, units, nanos].hash
     end
 
     # Builds the object from hash

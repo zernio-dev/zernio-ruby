@@ -52,7 +52,7 @@ describe Zernio::CreateGoogleBusinessMediaRequest do
   describe 'test attribute "category"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["COVER", "PROFILE", "LOGO", "EXTERIOR", "INTERIOR", "FOOD_AND_DRINK", "MENU", "PRODUCT", "TEAMS", "ADDITIONAL"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["CATEGORY_UNSPECIFIED", "COVER", "PROFILE", "LOGO", "EXTERIOR", "INTERIOR", "PRODUCT", "FOOD_AND_DRINK", "MENU", "COMMON_AREA", "ROOMS", "TEAMS", "AT_WORK", "ADDITIONAL"])
       # validator.allowable_values.each do |value|
       #   expect { instance.category = value }.not_to raise_error
       # end

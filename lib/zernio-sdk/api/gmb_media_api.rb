@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Upload photo
-    # Creates a media item (photo) for a location from a publicly accessible URL.  Categories determine where the photo appears: COVER, PROFILE, LOGO, EXTERIOR, INTERIOR, FOOD_AND_DRINK, MENU, PRODUCT, TEAMS, ADDITIONAL. 
+    # Creates a media item (photo) for a location from a publicly accessible URL.  Categories determine where the photo appears: CATEGORY_UNSPECIFIED, COVER, PROFILE, LOGO, EXTERIOR, INTERIOR, PRODUCT, FOOD_AND_DRINK, MENU, COMMON_AREA, ROOMS, TEAMS, AT_WORK, ADDITIONAL. 
     # @param account_id [String] 
     # @param create_google_business_media_request [CreateGoogleBusinessMediaRequest] 
     # @param [Hash] opts the optional parameters
@@ -32,7 +32,7 @@ module Zernio
     end
 
     # Upload photo
-    # Creates a media item (photo) for a location from a publicly accessible URL.  Categories determine where the photo appears: COVER, PROFILE, LOGO, EXTERIOR, INTERIOR, FOOD_AND_DRINK, MENU, PRODUCT, TEAMS, ADDITIONAL. 
+    # Creates a media item (photo) for a location from a publicly accessible URL.  Categories determine where the photo appears: CATEGORY_UNSPECIFIED, COVER, PROFILE, LOGO, EXTERIOR, INTERIOR, PRODUCT, FOOD_AND_DRINK, MENU, COMMON_AREA, ROOMS, TEAMS, AT_WORK, ADDITIONAL. 
     # @param account_id [String] 
     # @param create_google_business_media_request [CreateGoogleBusinessMediaRequest] 
     # @param [Hash] opts the optional parameters
@@ -200,6 +200,10 @@ module Zernio
       end
       if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling GMBMediaApi.list_google_business_media, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling GMBMediaApi.list_google_business_media, must be greater than or equal to 1.'
       end
 
       # resource path

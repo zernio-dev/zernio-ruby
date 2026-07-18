@@ -71,10 +71,14 @@ module Zernio
         if (value = attributes[:'labels']).is_a?(Array)
           self.labels = value
         end
+      else
+        self.labels = nil
       end
 
       if attributes.key?(:'attributes')
         self.attributes = attributes[:'attributes']
+      else
+        self.attributes = nil
       end
     end
 
@@ -83,6 +87,18 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @labels.nil?
+        invalid_properties.push('invalid value for "labels", labels cannot be nil.')
+      end
+
+      if @labels.length < 1
+        invalid_properties.push('invalid value for "labels", number of items must be greater than or equal to 1.')
+      end
+
+      if @attributes.nil?
+        invalid_properties.push('invalid value for "attributes", attributes cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -90,7 +106,34 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @labels.nil?
+      return false if @labels.length < 1
+      return false if @attributes.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] labels Value to be assigned
+    def labels=(labels)
+      if labels.nil?
+        fail ArgumentError, 'labels cannot be nil'
+      end
+
+      if labels.length < 1
+        fail ArgumentError, 'invalid value for "labels", number of items must be greater than or equal to 1.'
+      end
+
+      @labels = labels
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] attributes Value to be assigned
+    def attributes=(attributes)
+      if attributes.nil?
+        fail ArgumentError, 'attributes cannot be nil'
+      end
+
+      @attributes = attributes
     end
 
     # Checks equality by comparing each attribute.

@@ -8,7 +8,7 @@
 | **temp_token** | **String** |  |  |
 | **user_profile** | **Object** |  |  |
 | **account_type** | **String** |  |  |
-| **selected_organization** | **Object** |  | [optional] |
+| **selected_organization** | [**SelectLinkedInOrganizationRequestSelectedOrganization**](SelectLinkedInOrganizationRequestSelectedOrganization.md) |  | [optional] |
 | **redirect_url** | **String** |  | [optional] |
 
 ## Example

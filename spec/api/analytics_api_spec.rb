@@ -276,7 +276,7 @@ describe 'AnalyticsApi' do
   # @param urn The LinkedIn post URN
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit Maximum number of reactions to return per page
-  # @option opts [String] :cursor Offset-based pagination start index
+  # @option opts [Integer] :cursor Offset-based pagination start index
   # @return [GetLinkedInPostReactions200Response]
   describe 'get_linked_in_post_reactions test' do
     it 'should work' do

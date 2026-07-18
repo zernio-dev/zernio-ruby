@@ -1223,7 +1223,7 @@ module Zernio
     # @param urn [String] The LinkedIn post URN
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Maximum number of reactions to return per page (default to 25)
-    # @option opts [String] :cursor Offset-based pagination start index
+    # @option opts [Integer] :cursor Offset-based pagination start index (default to 0)
     # @return [GetLinkedInPostReactions200Response]
     def get_linked_in_post_reactions(account_id, urn, opts = {})
       data, _status_code, _headers = get_linked_in_post_reactions_with_http_info(account_id, urn, opts)
@@ -1236,7 +1236,7 @@ module Zernio
     # @param urn [String] The LinkedIn post URN
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Maximum number of reactions to return per page (default to 25)
-    # @option opts [String] :cursor Offset-based pagination start index
+    # @option opts [Integer] :cursor Offset-based pagination start index (default to 0)
     # @return [Array<(GetLinkedInPostReactions200Response, Integer, Hash)>] GetLinkedInPostReactions200Response data, response status code and response headers
     def get_linked_in_post_reactions_with_http_info(account_id, urn, opts = {})
       if @api_client.config.debugging
@@ -1250,12 +1250,21 @@ module Zernio
       if @api_client.config.client_side_validation && urn.nil?
         fail ArgumentError, "Missing the required parameter 'urn' when calling AnalyticsApi.get_linked_in_post_reactions"
       end
+      pattern = Regexp.new(/^urn:li:(share|ugcPost|activity):[0-9]+$/)
+      if @api_client.config.client_side_validation && urn !~ pattern
+        fail ArgumentError, "invalid value for 'urn' when calling AnalyticsApi.get_linked_in_post_reactions, must conform to the pattern #{pattern}."
+      end
+
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
         fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AnalyticsApi.get_linked_in_post_reactions, must be smaller than or equal to 100.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
         fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AnalyticsApi.get_linked_in_post_reactions, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'cursor'].nil? && opts[:'cursor'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"cursor"]" when calling AnalyticsApi.get_linked_in_post_reactions, must be greater than or equal to 0.'
       end
 
       # resource path

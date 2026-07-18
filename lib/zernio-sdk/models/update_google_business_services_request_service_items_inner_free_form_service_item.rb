@@ -14,24 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  class FoodMenu < ApiModelBase
-    attr_accessor :labels
+  class UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItem < ApiModelBase
+    attr_accessor :category
 
-    attr_accessor :sections
-
-    # Cuisine types (e.g. AMERICAN, ITALIAN, JAPANESE)
-    attr_accessor :cuisines
-
-    # URL of the original menu source
-    attr_accessor :source_url
+    attr_accessor :label
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'labels' => :'labels',
-        :'sections' => :'sections',
-        :'cuisines' => :'cuisines',
-        :'source_url' => :'sourceUrl'
+        :'category' => :'category',
+        :'label' => :'label'
       }
     end
 
@@ -48,10 +40,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'labels' => :'Array<FoodMenuLabel>',
-        :'sections' => :'Array<FoodMenuSection>',
-        :'cuisines' => :'Array<String>',
-        :'source_url' => :'String'
+        :'category' => :'String',
+        :'label' => :'UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItemLabel'
       }
     end
 
@@ -65,40 +55,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::FoodMenu` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItem` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::FoodMenu`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateGoogleBusinessServicesRequestServiceItemsInnerFreeFormServiceItem`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'labels')
-        if (value = attributes[:'labels']).is_a?(Array)
-          self.labels = value
-        end
+      if attributes.key?(:'category')
+        self.category = attributes[:'category']
       else
-        self.labels = nil
+        self.category = nil
       end
 
-      if attributes.key?(:'sections')
-        if (value = attributes[:'sections']).is_a?(Array)
-          self.sections = value
-        end
-      end
-
-      if attributes.key?(:'cuisines')
-        if (value = attributes[:'cuisines']).is_a?(Array)
-          self.cuisines = value
-        end
-      end
-
-      if attributes.key?(:'source_url')
-        self.source_url = attributes[:'source_url']
+      if attributes.key?(:'label')
+        self.label = attributes[:'label']
+      else
+        self.label = nil
       end
     end
 
@@ -107,12 +85,16 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @labels.nil?
-        invalid_properties.push('invalid value for "labels", labels cannot be nil.')
+      if @category.nil?
+        invalid_properties.push('invalid value for "category", category cannot be nil.')
       end
 
-      if @labels.length < 1
-        invalid_properties.push('invalid value for "labels", number of items must be greater than or equal to 1.')
+      if @category.to_s.length < 1
+        invalid_properties.push('invalid value for "category", the character length must be greater than or equal to 1.')
+      end
+
+      if @label.nil?
+        invalid_properties.push('invalid value for "label", label cannot be nil.')
       end
 
       invalid_properties
@@ -122,23 +104,34 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @labels.nil?
-      return false if @labels.length < 1
+      return false if @category.nil?
+      return false if @category.to_s.length < 1
+      return false if @label.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] labels Value to be assigned
-    def labels=(labels)
-      if labels.nil?
-        fail ArgumentError, 'labels cannot be nil'
+    # @param [Object] category Value to be assigned
+    def category=(category)
+      if category.nil?
+        fail ArgumentError, 'category cannot be nil'
       end
 
-      if labels.length < 1
-        fail ArgumentError, 'invalid value for "labels", number of items must be greater than or equal to 1.'
+      if category.to_s.length < 1
+        fail ArgumentError, 'invalid value for "category", the character length must be greater than or equal to 1.'
       end
 
-      @labels = labels
+      @category = category
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] label Value to be assigned
+    def label=(label)
+      if label.nil?
+        fail ArgumentError, 'label cannot be nil'
+      end
+
+      @label = label
     end
 
     # Checks equality by comparing each attribute.
@@ -146,10 +139,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          labels == o.labels &&
-          sections == o.sections &&
-          cuisines == o.cuisines &&
-          source_url == o.source_url
+          category == o.category &&
+          label == o.label
     end
 
     # @see the `==` method
@@ -161,7 +152,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [labels, sections, cuisines, source_url].hash
+      [category, label].hash
     end
 
     # Builds the object from hash

@@ -93,8 +93,16 @@ module Zernio
         invalid_properties.push('invalid value for "question", the character length must be smaller than or equal to 80.')
       end
 
+      if @question.to_s.length < 1
+        invalid_properties.push('invalid value for "question", the character length must be greater than or equal to 1.')
+      end
+
       if @payload.nil?
         invalid_properties.push('invalid value for "payload", payload cannot be nil.')
+      end
+
+      if @payload.to_s.length < 1
+        invalid_properties.push('invalid value for "payload", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -106,7 +114,9 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @question.nil?
       return false if @question.to_s.length > 80
+      return false if @question.to_s.length < 1
       return false if @payload.nil?
+      return false if @payload.to_s.length < 1
       true
     end
 
@@ -121,6 +131,10 @@ module Zernio
         fail ArgumentError, 'invalid value for "question", the character length must be smaller than or equal to 80.'
       end
 
+      if question.to_s.length < 1
+        fail ArgumentError, 'invalid value for "question", the character length must be greater than or equal to 1.'
+      end
+
       @question = question
     end
 
@@ -129,6 +143,10 @@ module Zernio
     def payload=(payload)
       if payload.nil?
         fail ArgumentError, 'payload cannot be nil'
+      end
+
+      if payload.to_s.length < 1
+        fail ArgumentError, 'invalid value for "payload", the character length must be greater than or equal to 1.'
       end
 
       @payload = payload

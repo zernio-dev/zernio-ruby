@@ -130,6 +130,10 @@ module Zernio
         invalid_properties.push('invalid value for "source_url", source_url cannot be nil.')
       end
 
+      if !@description.nil? && @description.to_s.length < 1
+        invalid_properties.push('invalid value for "description", the character length must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -140,7 +144,8 @@ module Zernio
       return false if @source_url.nil?
       media_format_validator = EnumAttributeValidator.new('String', ["PHOTO", "VIDEO"])
       return false unless media_format_validator.valid?(@media_format)
-      category_validator = EnumAttributeValidator.new('String', ["COVER", "PROFILE", "LOGO", "EXTERIOR", "INTERIOR", "FOOD_AND_DRINK", "MENU", "PRODUCT", "TEAMS", "ADDITIONAL"])
+      return false if !@description.nil? && @description.to_s.length < 1
+      category_validator = EnumAttributeValidator.new('String', ["CATEGORY_UNSPECIFIED", "COVER", "PROFILE", "LOGO", "EXTERIOR", "INTERIOR", "PRODUCT", "FOOD_AND_DRINK", "MENU", "COMMON_AREA", "ROOMS", "TEAMS", "AT_WORK", "ADDITIONAL"])
       return false unless category_validator.valid?(@category)
       true
     end
@@ -165,10 +170,24 @@ module Zernio
       @media_format = media_format
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if description.nil?
+        fail ArgumentError, 'description cannot be nil'
+      end
+
+      if description.to_s.length < 1
+        fail ArgumentError, 'invalid value for "description", the character length must be greater than or equal to 1.'
+      end
+
+      @description = description
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] category Object to be assigned
     def category=(category)
-      validator = EnumAttributeValidator.new('String', ["COVER", "PROFILE", "LOGO", "EXTERIOR", "INTERIOR", "FOOD_AND_DRINK", "MENU", "PRODUCT", "TEAMS", "ADDITIONAL"])
+      validator = EnumAttributeValidator.new('String', ["CATEGORY_UNSPECIFIED", "COVER", "PROFILE", "LOGO", "EXTERIOR", "INTERIOR", "PRODUCT", "FOOD_AND_DRINK", "MENU", "COMMON_AREA", "ROOMS", "TEAMS", "AT_WORK", "ADDITIONAL"])
       unless validator.valid?(category)
         fail ArgumentError, "invalid value for \"category\", must be one of #{validator.allowable_values}."
       end

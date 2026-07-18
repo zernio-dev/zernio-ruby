@@ -79,6 +79,10 @@ module Zernio
         invalid_properties.push('invalid value for "default_subreddit", default_subreddit cannot be nil.')
       end
 
+      if @default_subreddit.to_s.length < 1
+        invalid_properties.push('invalid value for "default_subreddit", the character length must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -87,6 +91,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @default_subreddit.nil?
+      return false if @default_subreddit.to_s.length < 1
       true
     end
 
@@ -95,6 +100,10 @@ module Zernio
     def default_subreddit=(default_subreddit)
       if default_subreddit.nil?
         fail ArgumentError, 'default_subreddit cannot be nil'
+      end
+
+      if default_subreddit.to_s.length < 1
+        fail ArgumentError, 'invalid value for "default_subreddit", the character length must be greater than or equal to 1.'
       end
 
       @default_subreddit = default_subreddit

@@ -111,12 +111,24 @@ module Zernio
         invalid_properties.push('invalid value for "subreddit", subreddit cannot be nil.')
       end
 
+      if @subreddit.to_s.length < 1
+        invalid_properties.push('invalid value for "subreddit", the character length must be greater than or equal to 1.')
+      end
+
       if @post_id.nil?
         invalid_properties.push('invalid value for "post_id", post_id cannot be nil.')
       end
 
+      if @post_id.to_s.length < 1
+        invalid_properties.push('invalid value for "post_id", the character length must be greater than or equal to 1.')
+      end
+
       if @flair_template_id.nil?
         invalid_properties.push('invalid value for "flair_template_id", flair_template_id cannot be nil.')
+      end
+
+      if @flair_template_id.to_s.length < 1
+        invalid_properties.push('invalid value for "flair_template_id", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -127,8 +139,11 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @subreddit.nil?
+      return false if @subreddit.to_s.length < 1
       return false if @post_id.nil?
+      return false if @post_id.to_s.length < 1
       return false if @flair_template_id.nil?
+      return false if @flair_template_id.to_s.length < 1
       true
     end
 
@@ -137,6 +152,10 @@ module Zernio
     def subreddit=(subreddit)
       if subreddit.nil?
         fail ArgumentError, 'subreddit cannot be nil'
+      end
+
+      if subreddit.to_s.length < 1
+        fail ArgumentError, 'invalid value for "subreddit", the character length must be greater than or equal to 1.'
       end
 
       @subreddit = subreddit
@@ -149,6 +168,10 @@ module Zernio
         fail ArgumentError, 'post_id cannot be nil'
       end
 
+      if post_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "post_id", the character length must be greater than or equal to 1.'
+      end
+
       @post_id = post_id
     end
 
@@ -157,6 +180,10 @@ module Zernio
     def flair_template_id=(flair_template_id)
       if flair_template_id.nil?
         fail ArgumentError, 'flair_template_id cannot be nil'
+      end
+
+      if flair_template_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "flair_template_id", the character length must be greater than or equal to 1.'
       end
 
       @flair_template_id = flair_template_id

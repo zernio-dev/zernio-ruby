@@ -14,24 +14,25 @@ require 'date'
 require 'time'
 
 module Zernio
-  class FoodMenu < ApiModelBase
-    attr_accessor :labels
+  class SelectLinkedInOrganizationRequestSelectedOrganization < ApiModelBase
+    attr_accessor :id
 
-    attr_accessor :sections
+    attr_accessor :urn
 
-    # Cuisine types (e.g. AMERICAN, ITALIAN, JAPANESE)
-    attr_accessor :cuisines
+    attr_accessor :name
 
-    # URL of the original menu source
-    attr_accessor :source_url
+    attr_accessor :logo_url
+
+    attr_accessor :vanity_name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'labels' => :'labels',
-        :'sections' => :'sections',
-        :'cuisines' => :'cuisines',
-        :'source_url' => :'sourceUrl'
+        :'id' => :'id',
+        :'urn' => :'urn',
+        :'name' => :'name',
+        :'logo_url' => :'logoUrl',
+        :'vanity_name' => :'vanityName'
       }
     end
 
@@ -48,10 +49,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'labels' => :'Array<FoodMenuLabel>',
-        :'sections' => :'Array<FoodMenuSection>',
-        :'cuisines' => :'Array<String>',
-        :'source_url' => :'String'
+        :'id' => :'String',
+        :'urn' => :'String',
+        :'name' => :'String',
+        :'logo_url' => :'String',
+        :'vanity_name' => :'String'
       }
     end
 
@@ -65,40 +67,42 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::FoodMenu` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SelectLinkedInOrganizationRequestSelectedOrganization` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::FoodMenu`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SelectLinkedInOrganizationRequestSelectedOrganization`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'labels')
-        if (value = attributes[:'labels']).is_a?(Array)
-          self.labels = value
-        end
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       else
-        self.labels = nil
+        self.id = nil
       end
 
-      if attributes.key?(:'sections')
-        if (value = attributes[:'sections']).is_a?(Array)
-          self.sections = value
-        end
+      if attributes.key?(:'urn')
+        self.urn = attributes[:'urn']
+      else
+        self.urn = nil
       end
 
-      if attributes.key?(:'cuisines')
-        if (value = attributes[:'cuisines']).is_a?(Array)
-          self.cuisines = value
-        end
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
-      if attributes.key?(:'source_url')
-        self.source_url = attributes[:'source_url']
+      if attributes.key?(:'logo_url')
+        self.logo_url = attributes[:'logo_url']
+      end
+
+      if attributes.key?(:'vanity_name')
+        self.vanity_name = attributes[:'vanity_name']
       end
     end
 
@@ -107,12 +111,29 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @labels.nil?
-        invalid_properties.push('invalid value for "labels", labels cannot be nil.')
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
       end
 
-      if @labels.length < 1
-        invalid_properties.push('invalid value for "labels", number of items must be greater than or equal to 1.')
+      if @id.to_s.length < 1
+        invalid_properties.push('invalid value for "id", the character length must be greater than or equal to 1.')
+      end
+
+      if @urn.nil?
+        invalid_properties.push('invalid value for "urn", urn cannot be nil.')
+      end
+
+      pattern = Regexp.new(/^urn:li:organization:/)
+      if @urn !~ pattern
+        invalid_properties.push("invalid value for \"urn\", must conform to the pattern #{pattern}.")
+      end
+
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @name.to_s.length < 1
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -122,23 +143,56 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @labels.nil?
-      return false if @labels.length < 1
+      return false if @id.nil?
+      return false if @id.to_s.length < 1
+      return false if @urn.nil?
+      return false if @urn !~ Regexp.new(/^urn:li:organization:/)
+      return false if @name.nil?
+      return false if @name.to_s.length < 1
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] labels Value to be assigned
-    def labels=(labels)
-      if labels.nil?
-        fail ArgumentError, 'labels cannot be nil'
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
       end
 
-      if labels.length < 1
-        fail ArgumentError, 'invalid value for "labels", number of items must be greater than or equal to 1.'
+      if id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "id", the character length must be greater than or equal to 1.'
       end
 
-      @labels = labels
+      @id = id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] urn Value to be assigned
+    def urn=(urn)
+      if urn.nil?
+        fail ArgumentError, 'urn cannot be nil'
+      end
+
+      pattern = Regexp.new(/^urn:li:organization:/)
+      if urn !~ pattern
+        fail ArgumentError, "invalid value for \"urn\", must conform to the pattern #{pattern}."
+      end
+
+      @urn = urn
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] name Value to be assigned
+    def name=(name)
+      if name.nil?
+        fail ArgumentError, 'name cannot be nil'
+      end
+
+      if name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 1.'
+      end
+
+      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -146,10 +200,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          labels == o.labels &&
-          sections == o.sections &&
-          cuisines == o.cuisines &&
-          source_url == o.source_url
+          id == o.id &&
+          urn == o.urn &&
+          name == o.name &&
+          logo_url == o.logo_url &&
+          vanity_name == o.vanity_name
     end
 
     # @see the `==` method
@@ -161,7 +216,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [labels, sections, cuisines, source_url].hash
+      [id, urn, name, logo_url, vanity_name].hash
     end
 
     # Builds the object from hash

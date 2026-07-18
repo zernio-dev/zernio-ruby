@@ -4,9 +4,11 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** |  | [optional] |
+| **name** | **String** |  |  |
+| **value_type** | **String** |  | [optional] |
 | **values** | **Array&lt;Object&gt;** |  | [optional] |
 | **repeated_enum_value** | [**GetGoogleBusinessAttributes200ResponseAttributesInnerRepeatedEnumValue**](GetGoogleBusinessAttributes200ResponseAttributesInnerRepeatedEnumValue.md) |  | [optional] |
+| **uri_values** | [**Array&lt;UpdateGoogleBusinessAttributesRequestAttributesInnerUriValuesInner&gt;**](UpdateGoogleBusinessAttributesRequestAttributesInnerUriValuesInner.md) |  | [optional] |
 
 ## Example
 
@@ -15,8 +17,10 @@ require 'zernio-sdk'
 
 instance = Zernio::UpdateGoogleBusinessAttributesRequestAttributesInner.new(
   name: null,
+  value_type: null,
   values: null,
-  repeated_enum_value: null
+  repeated_enum_value: null,
+  uri_values: null
 )
 ```
 

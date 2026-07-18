@@ -36,6 +36,10 @@ describe Zernio::FoodMenuItemAttributes do
   describe 'test attribute "spiciness"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["SPICINESS_UNSPECIFIED", "MILD", "MEDIUM", "HOT"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.spiciness = value }.not_to raise_error
+      # end
     end
   end
 

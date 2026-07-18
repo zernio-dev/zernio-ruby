@@ -85,6 +85,10 @@ module Zernio
         invalid_properties.push('invalid value for "ice_breakers", number of items must be less than or equal to 4.')
       end
 
+      if @ice_breakers.length < 1
+        invalid_properties.push('invalid value for "ice_breakers", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -94,6 +98,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @ice_breakers.nil?
       return false if @ice_breakers.length > 4
+      return false if @ice_breakers.length < 1
       true
     end
 
@@ -106,6 +111,10 @@ module Zernio
 
       if ice_breakers.length > 4
         fail ArgumentError, 'invalid value for "ice_breakers", number of items must be less than or equal to 4.'
+      end
+
+      if ice_breakers.length < 1
+        fail ArgumentError, 'invalid value for "ice_breakers", number of items must be greater than or equal to 1.'
       end
 
       @ice_breakers = ice_breakers

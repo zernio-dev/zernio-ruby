@@ -494,7 +494,7 @@ describe 'ConnectApi' do
   # @param account_id 
   # @param update_linked_in_organization_request 
   # @param [Hash] opts the optional parameters
-  # @return [ConnectBlueskyCredentials200Response]
+  # @return [UpdateLinkedInOrganization200Response]
   describe 'update_linked_in_organization test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
