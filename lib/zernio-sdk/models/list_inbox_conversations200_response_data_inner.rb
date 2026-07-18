@@ -15,6 +15,7 @@ require 'time'
 
 module Zernio
   class ListInboxConversations200ResponseDataInner < ApiModelBase
+    # Opaque conversation identifier. Pass it back verbatim to any /v1/inbox/conversations/{conversationId} route; do not assume a fixed format.
     attr_accessor :id
 
     attr_accessor :platform
