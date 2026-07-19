@@ -20,15 +20,11 @@ module Zernio
     # Optional but recommended. The Google Business Account resource name (\"accounts/123\") that owns the new location (from GET gmb-locations). When provided, the location is resolved directly instead of by enumerating the account, which is required for accounts with many locations. Named `googleAccountId` to disambiguate from the path `accountId` (the Zernio account). The legacy field name `accountId` is still accepted for backwards compatibility. 
     attr_accessor :google_account_id
 
-    # Legacy alias for googleAccountId. Use googleAccountId for new integrations.
-    attr_accessor :account_id
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'selected_location_id' => :'selectedLocationId',
-        :'google_account_id' => :'googleAccountId',
-        :'account_id' => :'accountId'
+        :'google_account_id' => :'googleAccountId'
       }
     end
 
@@ -46,8 +42,7 @@ module Zernio
     def self.openapi_types
       {
         :'selected_location_id' => :'String',
-        :'google_account_id' => :'String',
-        :'account_id' => :'String'
+        :'google_account_id' => :'String'
       }
     end
 
@@ -82,10 +77,6 @@ module Zernio
       if attributes.key?(:'google_account_id')
         self.google_account_id = attributes[:'google_account_id']
       end
-
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -105,10 +96,6 @@ module Zernio
         invalid_properties.push('invalid value for "google_account_id", the character length must be greater than or equal to 1.')
       end
 
-      if !@account_id.nil? && @account_id.to_s.length < 1
-        invalid_properties.push('invalid value for "account_id", the character length must be greater than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -119,7 +106,6 @@ module Zernio
       return false if @selected_location_id.nil?
       return false if @selected_location_id.to_s.length < 1
       return false if !@google_account_id.nil? && @google_account_id.to_s.length < 1
-      return false if !@account_id.nil? && @account_id.to_s.length < 1
       true
     end
 
@@ -151,28 +137,13 @@ module Zernio
       @google_account_id = google_account_id
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
-      end
-
-      if account_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "account_id", the character length must be greater than or equal to 1.'
-      end
-
-      @account_id = account_id
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           selected_location_id == o.selected_location_id &&
-          google_account_id == o.google_account_id &&
-          account_id == o.account_id
+          google_account_id == o.google_account_id
     end
 
     # @see the `==` method
@@ -184,7 +155,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [selected_location_id, google_account_id, account_id].hash
+      [selected_location_id, google_account_id].hash
     end
 
     # Builds the object from hash

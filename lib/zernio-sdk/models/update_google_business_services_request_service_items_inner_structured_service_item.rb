@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Exactly one of structuredServiceItem or freeFormServiceItem is required per item (enforced server-side; not modeled as oneOf because required-only oneOf branches break SDK generators).
   class UpdateGoogleBusinessServicesRequestServiceItemsInnerStructuredServiceItem < ApiModelBase
     attr_accessor :service_type_id
 

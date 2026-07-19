@@ -276,6 +276,10 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling GMBPlaceActionsApi.update_google_business_place_action"
       end
+      # verify the required parameter 'update_google_business_place_action_request' is set
+      if @api_client.config.client_side_validation && update_google_business_place_action_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_google_business_place_action_request' when calling GMBPlaceActionsApi.update_google_business_place_action"
+      end
       # resource path
       local_var_path = '/v1/accounts/{accountId}/gmb-place-actions'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 
