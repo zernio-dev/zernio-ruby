@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class CreateStandaloneAdRequestRegionsInner < ApiModelBase
-    # Meta region ID, from /v1/ads/targeting/search results.
+    # Platform region ID, from /v1/ads/targeting/search results.
     attr_accessor :key
 
     # Attribute mapping from ruby-style variable name to JSON key.
