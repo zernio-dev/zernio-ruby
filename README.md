@@ -111,18 +111,22 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**archive_lead_form**](docs/AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdsApi* | [**create_ad_insights_report**](docs/AdsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run (Meta)
+*Zernio::AdsApi* | [**create_call_ad**](docs/AdsApi.md#create_call_ad) | **POST** /v1/ads/call | Create Click-to-Call ad
 *Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination
-*Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad
+*Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad (deprecated)
 *Zernio::AdsApi* | [**create_lead_form**](docs/AdsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form
+*Zernio::AdsApi* | [**create_messaging_ad**](docs/AdsApi.md#create_messaging_ad) | **POST** /v1/ads/messaging | Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Zernio::AdsApi* | [**create_test_lead**](docs/AdsApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a test lead
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdsApi* | [**delete_conversion_destination**](docs/AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Delete a conversion destination
 *Zernio::AdsApi* | [**estimate_ad_reach**](docs/AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
+*Zernio::AdsApi* | [**generate_ad_previews**](docs/AdsApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews (Meta)
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdsApi* | [**get_ad_insights_report**](docs/AdsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run (Meta)
+*Zernio::AdsApi* | [**get_ad_previews**](docs/AdsApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad (Meta)
 *Zernio::AdsApi* | [**get_ad_tracking_tags**](docs/AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
 *Zernio::AdsApi* | [**get_campaign_analytics**](docs/AdsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
 *Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination
@@ -698,6 +702,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateBroadcastRequestSegmentFilters](docs/CreateBroadcastRequestSegmentFilters.md)
  - [Zernio::CreateBroadcastRequestTemplate](docs/CreateBroadcastRequestTemplate.md)
  - [Zernio::CreateBroadcastRequestTemplateVariableMappingValue](docs/CreateBroadcastRequestTemplateVariableMappingValue.md)
+ - [Zernio::CreateCallAdRequest](docs/CreateCallAdRequest.md)
  - [Zernio::CreateCommentAutomation200Response](docs/CreateCommentAutomation200Response.md)
  - [Zernio::CreateCommentAutomation200ResponseAutomation](docs/CreateCommentAutomation200ResponseAutomation.md)
  - [Zernio::CreateCommentAutomation200ResponseAutomationStats](docs/CreateCommentAutomation200ResponseAutomationStats.md)
@@ -710,14 +715,6 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateConversionDestinationRequest](docs/CreateConversionDestinationRequest.md)
  - [Zernio::CreateConversionDestinationRequestValue](docs/CreateConversionDestinationRequestValue.md)
  - [Zernio::CreateCtwaAd201Response](docs/CreateCtwaAd201Response.md)
- - [Zernio::CreateCtwaAdRequest](docs/CreateCtwaAdRequest.md)
- - [Zernio::CreateCtwaAdRequestCitiesInner](docs/CreateCtwaAdRequestCitiesInner.md)
- - [Zernio::CreateCtwaAdRequestCreativesInner](docs/CreateCtwaAdRequestCreativesInner.md)
- - [Zernio::CreateCtwaAdRequestCreativesInnerVideo](docs/CreateCtwaAdRequestCreativesInnerVideo.md)
- - [Zernio::CreateCtwaAdRequestPlacements](docs/CreateCtwaAdRequestPlacements.md)
- - [Zernio::CreateCtwaAdRequestRegionsInner](docs/CreateCtwaAdRequestRegionsInner.md)
- - [Zernio::CreateCtwaAdRequestVideo](docs/CreateCtwaAdRequestVideo.md)
- - [Zernio::CreateCtwaAdRequestZipsInner](docs/CreateCtwaAdRequestZipsInner.md)
  - [Zernio::CreateCustomField200Response](docs/CreateCustomField200Response.md)
  - [Zernio::CreateCustomFieldRequest](docs/CreateCustomFieldRequest.md)
  - [Zernio::CreateDiscordGuildRole201Response](docs/CreateDiscordGuildRole201Response.md)
@@ -747,6 +744,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateLeadFormRequest](docs/CreateLeadFormRequest.md)
  - [Zernio::CreateLeadFormRequestQuestionsInner](docs/CreateLeadFormRequestQuestionsInner.md)
  - [Zernio::CreateLeadFormRequestQuestionsInnerOptionsInner](docs/CreateLeadFormRequestQuestionsInnerOptionsInner.md)
+ - [Zernio::CreateMessagingAdRequest](docs/CreateMessagingAdRequest.md)
  - [Zernio::CreatePhoneNumberKycLink200Response](docs/CreatePhoneNumberKycLink200Response.md)
  - [Zernio::CreatePhoneNumberKycLinkRequest](docs/CreatePhoneNumberKycLinkRequest.md)
  - [Zernio::CreatePhoneNumberKycLinkRequestBranding](docs/CreatePhoneNumberKycLinkRequestBranding.md)
@@ -824,6 +822,14 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateWorkflow200ResponseWorkflow](docs/CreateWorkflow200ResponseWorkflow.md)
  - [Zernio::CreateWorkflowRequest](docs/CreateWorkflowRequest.md)
  - [Zernio::CrosspostDiscordMessage200Response](docs/CrosspostDiscordMessage200Response.md)
+ - [Zernio::CtwaAdRequestBody](docs/CtwaAdRequestBody.md)
+ - [Zernio::CtwaAdRequestBodyCitiesInner](docs/CtwaAdRequestBodyCitiesInner.md)
+ - [Zernio::CtwaAdRequestBodyCreativesInner](docs/CtwaAdRequestBodyCreativesInner.md)
+ - [Zernio::CtwaAdRequestBodyCreativesInnerVideo](docs/CtwaAdRequestBodyCreativesInnerVideo.md)
+ - [Zernio::CtwaAdRequestBodyPlacements](docs/CtwaAdRequestBodyPlacements.md)
+ - [Zernio::CtwaAdRequestBodyRegionsInner](docs/CtwaAdRequestBodyRegionsInner.md)
+ - [Zernio::CtwaAdRequestBodyVideo](docs/CtwaAdRequestBodyVideo.md)
+ - [Zernio::CtwaAdRequestBodyZipsInner](docs/CtwaAdRequestBodyZipsInner.md)
  - [Zernio::CtwaMultiResponse](docs/CtwaMultiResponse.md)
  - [Zernio::CtwaSingleResponse](docs/CtwaSingleResponse.md)
  - [Zernio::DeactivateSmsRegistration200Response](docs/DeactivateSmsRegistration200Response.md)
@@ -912,6 +918,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GbpSpecialHourPeriod](docs/GbpSpecialHourPeriod.md)
  - [Zernio::GbpSpecialHourPeriodStartDate](docs/GbpSpecialHourPeriodStartDate.md)
  - [Zernio::GbpUpdateFreeFormServiceItemLabel](docs/GbpUpdateFreeFormServiceItemLabel.md)
+ - [Zernio::GenerateAdPreviews200Response](docs/GenerateAdPreviews200Response.md)
+ - [Zernio::GenerateAdPreviews200ResponsePreviewsInner](docs/GenerateAdPreviews200ResponsePreviewsInner.md)
+ - [Zernio::GenerateAdPreviewsRequest](docs/GenerateAdPreviewsRequest.md)
  - [Zernio::GeoRestriction](docs/GeoRestriction.md)
  - [Zernio::GetAccountHealth200Response](docs/GetAccountHealth200Response.md)
  - [Zernio::GetAccountHealth200ResponsePermissions](docs/GetAccountHealth200ResponsePermissions.md)
@@ -926,6 +935,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdComments200ResponsePagination](docs/GetAdComments200ResponsePagination.md)
  - [Zernio::GetAdInsightsReport200Response](docs/GetAdInsightsReport200Response.md)
  - [Zernio::GetAdInsightsReport200ResponsePaging](docs/GetAdInsightsReport200ResponsePaging.md)
+ - [Zernio::GetAdPreviews200Response](docs/GetAdPreviews200Response.md)
  - [Zernio::GetAdTrackingTags200Response](docs/GetAdTrackingTags200Response.md)
  - [Zernio::GetAdTree200Response](docs/GetAdTree200Response.md)
  - [Zernio::GetAdsTimeline200Response](docs/GetAdsTimeline200Response.md)
