@@ -250,6 +250,7 @@ docs/CreateStandaloneAdRequest.md
 docs/CreateStandaloneAdRequestAttributionSpecInner.md
 docs/CreateStandaloneAdRequestBehaviorsInner.md
 docs/CreateStandaloneAdRequestBrandIdentity.md
+docs/CreateStandaloneAdRequestCarouselCardsInner.md
 docs/CreateStandaloneAdRequestCitiesInner.md
 docs/CreateStandaloneAdRequestCreativesInner.md
 docs/CreateStandaloneAdRequestCreativesInnerVideo.md
@@ -1767,6 +1768,7 @@ lib/zernio-sdk/models/create_standalone_ad_request.rb
 lib/zernio-sdk/models/create_standalone_ad_request_attribution_spec_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_behaviors_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_brand_identity.rb
+lib/zernio-sdk/models/create_standalone_ad_request_carousel_cards_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_cities_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_creatives_inner_video.rb
@@ -3236,6 +3238,7 @@ spec/models/create_standalone_ad201_response_spec.rb
 spec/models/create_standalone_ad_request_attribution_spec_inner_spec.rb
 spec/models/create_standalone_ad_request_behaviors_inner_spec.rb
 spec/models/create_standalone_ad_request_brand_identity_spec.rb
+spec/models/create_standalone_ad_request_carousel_cards_inner_spec.rb
 spec/models/create_standalone_ad_request_cities_inner_spec.rb
 spec/models/create_standalone_ad_request_creatives_inner_spec.rb
 spec/models/create_standalone_ad_request_creatives_inner_video_spec.rb

@@ -163,6 +163,9 @@ module Zernio
 
     attr_accessor :dynamic_creative
 
+    # Meta only. Hand-built carousel: 2-10 authored cards in DETERMINISTIC order, mapped to the creative's `link_data.child_attachments`. Unlike `dynamicCreative`, you control the card order and per-card copy/link. Requires top-level `body`, `linkUrl` and `callToAction`. Mutually exclusive with `imageUrl`/`video`, `creatives[]`, `dynamicCreative`, `placementAssets`, `existingCreativeId`, `adSetId`, `leadGenFormId` and goal `catalog_sales`. 
+    attr_accessor :carousel_cards
+
     attr_accessor :placement_assets
 
     # Custom audience ID for targeting
@@ -291,6 +294,7 @@ module Zernio
         :'start_date' => :'startDate',
         :'instagram_account_id' => :'instagramAccountId',
         :'dynamic_creative' => :'dynamicCreative',
+        :'carousel_cards' => :'carouselCards',
         :'placement_assets' => :'placementAssets',
         :'audience_id' => :'audienceId',
         :'campaign_type' => :'campaignType',
@@ -378,6 +382,7 @@ module Zernio
         :'start_date' => :'Time',
         :'instagram_account_id' => :'String',
         :'dynamic_creative' => :'CreateStandaloneAdRequestDynamicCreative',
+        :'carousel_cards' => :'Array<CreateStandaloneAdRequestCarouselCardsInner>',
         :'placement_assets' => :'CreateStandaloneAdRequestPlacementAssets',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
@@ -665,6 +670,12 @@ module Zernio
         self.dynamic_creative = attributes[:'dynamic_creative']
       end
 
+      if attributes.key?(:'carousel_cards')
+        if (value = attributes[:'carousel_cards']).is_a?(Array)
+          self.carousel_cards = value
+        end
+      end
+
       if attributes.key?(:'placement_assets')
         self.placement_assets = attributes[:'placement_assets']
       end
@@ -815,6 +826,14 @@ module Zernio
         invalid_properties.push('invalid value for "age_max", must be greater than or equal to 13.')
       end
 
+      if !@carousel_cards.nil? && @carousel_cards.length > 10
+        invalid_properties.push('invalid value for "carousel_cards", number of items must be less than or equal to 10.')
+      end
+
+      if !@carousel_cards.nil? && @carousel_cards.length < 2
+        invalid_properties.push('invalid value for "carousel_cards", number of items must be greater than or equal to 2.')
+      end
+
       if !@attribution_spec.nil? && @attribution_spec.length > 3
         invalid_properties.push('invalid value for "attribution_spec", number of items must be less than or equal to 3.')
       end
@@ -865,6 +884,8 @@ module Zernio
       return false if !@age_max.nil? && @age_max < 13
       income_tier_validator = EnumAttributeValidator.new('String', ["top_5", "top_10", "top_10_25", "top_25_50"])
       return false unless income_tier_validator.valid?(@income_tier)
+      return false if !@carousel_cards.nil? && @carousel_cards.length > 10
+      return false if !@carousel_cards.nil? && @carousel_cards.length < 2
       campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search"])
       return false unless campaign_type_validator.valid?(@campaign_type)
       advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
@@ -1108,6 +1129,24 @@ module Zernio
       @income_tier = income_tier
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] carousel_cards Value to be assigned
+    def carousel_cards=(carousel_cards)
+      if carousel_cards.nil?
+        fail ArgumentError, 'carousel_cards cannot be nil'
+      end
+
+      if carousel_cards.length > 10
+        fail ArgumentError, 'invalid value for "carousel_cards", number of items must be less than or equal to 10.'
+      end
+
+      if carousel_cards.length < 2
+        fail ArgumentError, 'invalid value for "carousel_cards", number of items must be greater than or equal to 2.'
+      end
+
+      @carousel_cards = carousel_cards
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] campaign_type Object to be assigned
     def campaign_type=(campaign_type)
@@ -1252,6 +1291,7 @@ module Zernio
           start_date == o.start_date &&
           instagram_account_id == o.instagram_account_id &&
           dynamic_creative == o.dynamic_creative &&
+          carousel_cards == o.carousel_cards &&
           placement_assets == o.placement_assets &&
           audience_id == o.audience_id &&
           campaign_type == o.campaign_type &&
@@ -1281,7 +1321,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

@@ -2841,6 +2841,10 @@ module Zernio
     # @option opts [String] :level Row granularity
     # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
     # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
+    # @option opts [String] :action_breakdowns Comma-separated Graph action breakdowns. Segments the actions[] arrays in each row.
+    # @option opts [String] :action_attribution_windows Comma-separated Meta attribution windows. Action values are returned keyed per window.
+    # @option opts [String] :action_report_time When actions are counted: impression, conversion or mixed.
+    # @option opts [Boolean] :use_unified_attribution_setting Use the ad sets&#39; own attribution settings for action counting.
     # @option opts [String] :filtering JSON array of Meta filter objects: [{\&quot;field\&quot;, \&quot;operator\&quot;, \&quot;value\&quot;}]. Applied server-side by Meta.
     # @option opts [String] :date_preset Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate.
     # @option opts [Date] :from_date Start of range (YYYY-MM-DD); requires toDate.
@@ -2862,6 +2866,10 @@ module Zernio
     # @option opts [String] :level Row granularity
     # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
     # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
+    # @option opts [String] :action_breakdowns Comma-separated Graph action breakdowns. Segments the actions[] arrays in each row.
+    # @option opts [String] :action_attribution_windows Comma-separated Meta attribution windows. Action values are returned keyed per window.
+    # @option opts [String] :action_report_time When actions are counted: impression, conversion or mixed.
+    # @option opts [Boolean] :use_unified_attribution_setting Use the ad sets&#39; own attribution settings for action counting.
     # @option opts [String] :filtering JSON array of Meta filter objects: [{\&quot;field\&quot;, \&quot;operator\&quot;, \&quot;value\&quot;}]. Applied server-side by Meta.
     # @option opts [String] :date_preset Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate.
     # @option opts [Date] :from_date Start of range (YYYY-MM-DD); requires toDate.
@@ -2904,6 +2912,10 @@ module Zernio
       query_params[:'level'] = opts[:'level'] if !opts[:'level'].nil?
       query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
       query_params[:'breakdowns'] = opts[:'breakdowns'] if !opts[:'breakdowns'].nil?
+      query_params[:'actionBreakdowns'] = opts[:'action_breakdowns'] if !opts[:'action_breakdowns'].nil?
+      query_params[:'actionAttributionWindows'] = opts[:'action_attribution_windows'] if !opts[:'action_attribution_windows'].nil?
+      query_params[:'actionReportTime'] = opts[:'action_report_time'] if !opts[:'action_report_time'].nil?
+      query_params[:'useUnifiedAttributionSetting'] = opts[:'use_unified_attribution_setting'] if !opts[:'use_unified_attribution_setting'].nil?
       query_params[:'filtering'] = opts[:'filtering'] if !opts[:'filtering'].nil?
       query_params[:'datePreset'] = opts[:'date_preset'] if !opts[:'date_preset'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?

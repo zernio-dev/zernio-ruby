@@ -780,6 +780,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestAttributionSpecInner](docs/CreateStandaloneAdRequestAttributionSpecInner.md)
  - [Zernio::CreateStandaloneAdRequestBehaviorsInner](docs/CreateStandaloneAdRequestBehaviorsInner.md)
  - [Zernio::CreateStandaloneAdRequestBrandIdentity](docs/CreateStandaloneAdRequestBrandIdentity.md)
+ - [Zernio::CreateStandaloneAdRequestCarouselCardsInner](docs/CreateStandaloneAdRequestCarouselCardsInner.md)
  - [Zernio::CreateStandaloneAdRequestCitiesInner](docs/CreateStandaloneAdRequestCitiesInner.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInner](docs/CreateStandaloneAdRequestCreativesInner.md)
  - [Zernio::CreateStandaloneAdRequestCreativesInnerVideo](docs/CreateStandaloneAdRequestCreativesInnerVideo.md)

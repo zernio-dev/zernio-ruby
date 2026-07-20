@@ -558,6 +558,10 @@ describe 'AdsApi' do
   # @option opts [String] :level Row granularity
   # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
   # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
+  # @option opts [String] :action_breakdowns Comma-separated Graph action breakdowns. Segments the actions[] arrays in each row.
+  # @option opts [String] :action_attribution_windows Comma-separated Meta attribution windows. Action values are returned keyed per window.
+  # @option opts [String] :action_report_time When actions are counted: impression, conversion or mixed.
+  # @option opts [Boolean] :use_unified_attribution_setting Use the ad sets&#39; own attribution settings for action counting.
   # @option opts [String] :filtering JSON array of Meta filter objects: [{\&quot;field\&quot;, \&quot;operator\&quot;, \&quot;value\&quot;}]. Applied server-side by Meta.
   # @option opts [String] :date_preset Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate.
   # @option opts [Date] :from_date Start of range (YYYY-MM-DD); requires toDate.

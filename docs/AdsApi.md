@@ -2850,6 +2850,10 @@ opts = {
   level: 'ad', # String | Row granularity
   fields: 'fields_example', # String | Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted = Meta's default set.
   breakdowns: 'breakdowns_example', # String | Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
+  action_breakdowns: 'action_breakdowns_example', # String | Comma-separated Graph action breakdowns. Segments the actions[] arrays in each row.
+  action_attribution_windows: 'action_attribution_windows_example', # String | Comma-separated Meta attribution windows. Action values are returned keyed per window.
+  action_report_time: 'action_report_time_example', # String | When actions are counted: impression, conversion or mixed.
+  use_unified_attribution_setting: true, # Boolean | Use the ad sets' own attribution settings for action counting.
   filtering: 'filtering_example', # String | JSON array of Meta filter objects: [{\"field\", \"operator\", \"value\"}]. Applied server-side by Meta.
   date_preset: 'date_preset_example', # String | Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate.
   from_date: Date.parse('2013-10-20'), # Date | Start of range (YYYY-MM-DD); requires toDate.
@@ -2895,6 +2899,10 @@ end
 | **level** | **String** | Row granularity | [optional] |
 | **fields** | **String** | Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set. | [optional] |
 | **breakdowns** | **String** | Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform). | [optional] |
+| **action_breakdowns** | **String** | Comma-separated Graph action breakdowns. Segments the actions[] arrays in each row. | [optional] |
+| **action_attribution_windows** | **String** | Comma-separated Meta attribution windows. Action values are returned keyed per window. | [optional] |
+| **action_report_time** | **String** | When actions are counted: impression, conversion or mixed. | [optional] |
+| **use_unified_attribution_setting** | **Boolean** | Use the ad sets&#39; own attribution settings for action counting. | [optional] |
 | **filtering** | **String** | JSON array of Meta filter objects: [{\&quot;field\&quot;, \&quot;operator\&quot;, \&quot;value\&quot;}]. Applied server-side by Meta. | [optional] |
 | **date_preset** | **String** | Meta date_preset (e.g. last_7d, last_30d, this_month). Mutually exclusive with fromDate/toDate. | [optional] |
 | **from_date** | **Date** | Start of range (YYYY-MM-DD); requires toDate. | [optional] |

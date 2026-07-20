@@ -29,6 +29,18 @@ module Zernio
     # Comma-separated Graph breakdowns.
     attr_accessor :breakdowns
 
+    # Comma-separated Graph action breakdowns (e.g. action_type,action_destination).
+    attr_accessor :action_breakdowns
+
+    # Meta attribution windows (e.g. [\"7d_click\", \"1d_view\"]). Action values are returned keyed per window.
+    attr_accessor :action_attribution_windows
+
+    # When actions are counted: impression, conversion or mixed.
+    attr_accessor :action_report_time
+
+    # Use the ad sets' own attribution settings for action counting.
+    attr_accessor :use_unified_attribution_setting
+
     # Meta filter objects, applied server-side.
     attr_accessor :filtering
 
@@ -71,6 +83,10 @@ module Zernio
         :'level' => :'level',
         :'fields' => :'fields',
         :'breakdowns' => :'breakdowns',
+        :'action_breakdowns' => :'actionBreakdowns',
+        :'action_attribution_windows' => :'actionAttributionWindows',
+        :'action_report_time' => :'actionReportTime',
+        :'use_unified_attribution_setting' => :'useUnifiedAttributionSetting',
         :'filtering' => :'filtering',
         :'date_preset' => :'datePreset',
         :'from_date' => :'fromDate',
@@ -97,6 +113,10 @@ module Zernio
         :'level' => :'String',
         :'fields' => :'String',
         :'breakdowns' => :'String',
+        :'action_breakdowns' => :'String',
+        :'action_attribution_windows' => :'Array<String>',
+        :'action_report_time' => :'String',
+        :'use_unified_attribution_setting' => :'Boolean',
         :'filtering' => :'Array<CreateAdInsightsReportRequestFilteringInner>',
         :'date_preset' => :'String',
         :'from_date' => :'Date',
@@ -149,6 +169,24 @@ module Zernio
 
       if attributes.key?(:'breakdowns')
         self.breakdowns = attributes[:'breakdowns']
+      end
+
+      if attributes.key?(:'action_breakdowns')
+        self.action_breakdowns = attributes[:'action_breakdowns']
+      end
+
+      if attributes.key?(:'action_attribution_windows')
+        if (value = attributes[:'action_attribution_windows']).is_a?(Array)
+          self.action_attribution_windows = value
+        end
+      end
+
+      if attributes.key?(:'action_report_time')
+        self.action_report_time = attributes[:'action_report_time']
+      end
+
+      if attributes.key?(:'use_unified_attribution_setting')
+        self.use_unified_attribution_setting = attributes[:'use_unified_attribution_setting']
       end
 
       if attributes.key?(:'filtering')
@@ -241,6 +279,10 @@ module Zernio
           level == o.level &&
           fields == o.fields &&
           breakdowns == o.breakdowns &&
+          action_breakdowns == o.action_breakdowns &&
+          action_attribution_windows == o.action_attribution_windows &&
+          action_report_time == o.action_report_time &&
+          use_unified_attribution_setting == o.use_unified_attribution_setting &&
           filtering == o.filtering &&
           date_preset == o.date_preset &&
           from_date == o.from_date &&
@@ -257,7 +299,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, object_id, level, fields, breakdowns, filtering, date_preset, from_date, to_date, time_increment].hash
+      [account_id, object_id, level, fields, breakdowns, action_breakdowns, action_attribution_windows, action_report_time, use_unified_attribution_setting, filtering, date_preset, from_date, to_date, time_increment].hash
     end
 
     # Builds the object from hash
