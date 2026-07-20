@@ -19,6 +19,9 @@ module Zernio
 
     attr_accessor :message
 
+    # (Facebook only) URL of an image to attach, publishing a photo comment alongside the text. The URL must be publicly accessible so Meta can fetch it. Returns 400 for other platforms.
+    attr_accessor :attachment_url
+
     # Reply to specific comment (optional)
     attr_accessor :comment_id
 
@@ -36,6 +39,7 @@ module Zernio
       {
         :'account_id' => :'accountId',
         :'message' => :'message',
+        :'attachment_url' => :'attachmentUrl',
         :'comment_id' => :'commentId',
         :'parent_cid' => :'parentCid',
         :'root_uri' => :'rootUri',
@@ -58,6 +62,7 @@ module Zernio
       {
         :'account_id' => :'String',
         :'message' => :'String',
+        :'attachment_url' => :'String',
         :'comment_id' => :'String',
         :'parent_cid' => :'String',
         :'root_uri' => :'String',
@@ -97,6 +102,10 @@ module Zernio
         self.message = attributes[:'message']
       else
         self.message = nil
+      end
+
+      if attributes.key?(:'attachment_url')
+        self.attachment_url = attributes[:'attachment_url']
       end
 
       if attributes.key?(:'comment_id')
@@ -168,6 +177,7 @@ module Zernio
       self.class == o.class &&
           account_id == o.account_id &&
           message == o.message &&
+          attachment_url == o.attachment_url &&
           comment_id == o.comment_id &&
           parent_cid == o.parent_cid &&
           root_uri == o.root_uri &&
@@ -183,7 +193,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, comment_id, parent_cid, root_uri, root_cid].hash
+      [account_id, message, attachment_url, comment_id, parent_cid, root_uri, root_cid].hash
     end
 
     # Builds the object from hash
