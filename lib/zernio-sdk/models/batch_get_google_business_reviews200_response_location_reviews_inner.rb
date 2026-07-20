@@ -15,10 +15,10 @@ require 'time'
 
 module Zernio
   class BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner < ApiModelBase
-    # Full review resource name (accounts/*/locations/*/reviews/*)
+    # LOCATION resource name the review belongs to (accounts/{accountId}/locations/{locationId}) - NOT the review resource name. Use it to attribute the review to a location; the review identity is review.reviewId (full review resource name at review.name).
     attr_accessor :name
 
-    # The review object (reviewId, starRating, comment, reviewer, createTime, updateTime, reviewReply)
+    # The review object: reviewId (the review's identity), name (full review resource name, accounts/*/locations/*/reviews/*), starRating, comment, reviewer, createTime, updateTime, reviewReply, and reviewMediaItems (review photos/videos; photo items carry thumbnailUrl, video items carry videoUrl)
     attr_accessor :review
 
     # Attribute mapping from ruby-style variable name to JSON key.

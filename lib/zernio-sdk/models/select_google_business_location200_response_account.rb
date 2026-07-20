@@ -26,8 +26,10 @@ module Zernio
 
     attr_accessor :is_active
 
+    # Human-readable location display name, NOT a resource name. Do not use it to build API paths.
     attr_accessor :selected_location_name
 
+    # Bare GBP location id. Combine with the GBP account id as accounts/{gbpAccountId}/locations/{selectedLocationId} to form the location resource names that gmb-reviews/batch expects in locationNames.
     attr_accessor :selected_location_id
 
     class EnumAttributeValidator

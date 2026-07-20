@@ -4,10 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  | [optional] |
+| **id** | **String** | Review identifier. For Google Business this is the full review resource name (accounts/{accountId}/locations/{locationId}/reviews/{reviewId}), so it also encodes the location. | [optional] |
 | **platform** | **String** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **account_username** | **String** |  | [optional] |
+| **location_id** | **String** | Bare GBP location id the review belongs to. Google Business only; absent for other platforms. | [optional] |
+| **location_name** | **String** | Human-readable GBP location display name. Google Business only; absent for other platforms. | [optional] |
 | **reviewer** | [**ListInboxReviews200ResponseDataInnerReviewer**](ListInboxReviews200ResponseDataInnerReviewer.md) |  | [optional] |
 | **rating** | **Integer** |  | [optional] |
 | **text** | **String** |  | [optional] |
@@ -29,6 +31,8 @@ instance = Zernio::ListInboxReviews200ResponseDataInner.new(
   platform: null,
   account_id: null,
   account_username: null,
+  location_id: null,
+  location_name: null,
   reviewer: null,
   rating: null,
   text: null,

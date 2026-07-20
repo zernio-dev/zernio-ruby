@@ -45,4 +45,14 @@ describe Zernio::BatchGetGoogleBusinessReviewsRequest do
     end
   end
 
+  describe 'test attribute "order_by"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["updateTime desc", "rating", "rating desc"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.order_by = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

@@ -23,16 +23,20 @@ module Zernio
 
     attr_accessor :account_username
 
+    # The post text/caption. On ad rows (isAd: true) this is the AD NAME, not the underlying post's caption — the creative text isn't exposed here.
     attr_accessor :content
 
+    # Post media thumbnail. On ad rows this is the ad creative thumbnail.
     attr_accessor :picture
 
+    # Public URL of the post. On ad rows: the Facebook dark-post URL (facebook placement) or the IG media permalink (instagram placement); may be null when unknown.
     attr_accessor :permalink
 
     attr_accessor :created_time
 
     attr_accessor :comment_count
 
+    # Not fetched for ad rows (always 0 there).
     attr_accessor :like_count
 
     # Bluesky content identifier

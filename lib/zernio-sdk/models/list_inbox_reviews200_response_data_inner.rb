@@ -15,6 +15,7 @@ require 'time'
 
 module Zernio
   class ListInboxReviews200ResponseDataInner < ApiModelBase
+    # Review identifier. For Google Business this is the full review resource name (accounts/{accountId}/locations/{locationId}/reviews/{reviewId}), so it also encodes the location.
     attr_accessor :id
 
     attr_accessor :platform
@@ -22,6 +23,12 @@ module Zernio
     attr_accessor :account_id
 
     attr_accessor :account_username
+
+    # Bare GBP location id the review belongs to. Google Business only; absent for other platforms.
+    attr_accessor :location_id
+
+    # Human-readable GBP location display name. Google Business only; absent for other platforms.
+    attr_accessor :location_name
 
     attr_accessor :reviewer
 
@@ -53,6 +60,8 @@ module Zernio
         :'platform' => :'platform',
         :'account_id' => :'accountId',
         :'account_username' => :'accountUsername',
+        :'location_id' => :'locationId',
+        :'location_name' => :'locationName',
         :'reviewer' => :'reviewer',
         :'rating' => :'rating',
         :'text' => :'text',
@@ -83,6 +92,8 @@ module Zernio
         :'platform' => :'String',
         :'account_id' => :'String',
         :'account_username' => :'String',
+        :'location_id' => :'String',
+        :'location_name' => :'String',
         :'reviewer' => :'ListInboxReviews200ResponseDataInnerReviewer',
         :'rating' => :'Integer',
         :'text' => :'String',
@@ -99,6 +110,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'location_name',
         :'review_url'
       ])
     end
@@ -133,6 +145,14 @@ module Zernio
 
       if attributes.key?(:'account_username')
         self.account_username = attributes[:'account_username']
+      end
+
+      if attributes.key?(:'location_id')
+        self.location_id = attributes[:'location_id']
+      end
+
+      if attributes.key?(:'location_name')
+        self.location_name = attributes[:'location_name']
       end
 
       if attributes.key?(:'reviewer')
@@ -202,6 +222,8 @@ module Zernio
           platform == o.platform &&
           account_id == o.account_id &&
           account_username == o.account_username &&
+          location_id == o.location_id &&
+          location_name == o.location_name &&
           reviewer == o.reviewer &&
           rating == o.rating &&
           text == o.text &&
@@ -223,7 +245,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, reviewer, rating, text, created, has_reply, has_photos, photo_count, photos, reply, review_url].hash
+      [id, platform, account_id, account_username, location_id, location_name, reviewer, rating, text, created, has_reply, has_photos, photo_count, photos, reply, review_url].hash
     end
 
     # Builds the object from hash

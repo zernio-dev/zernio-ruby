@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class BatchGetGoogleBusinessReviewsRequest < ApiModelBase
-    # Array of full location resource names (e.g. ['accounts/123/locations/456'])
+    # Array of full location resource names (e.g. ['accounts/123/locations/456']). Max 50 per request (Google's batchGetReviews cap); chunk larger sets into multiple requests.
     attr_accessor :location_names
 
     # Number of reviews per page (max 50)
@@ -24,12 +24,38 @@ module Zernio
     # Pagination token from previous response
     attr_accessor :page_token
 
+    # Sort order requested from Google. Defaults to 'updateTime desc' (newest first), which allows early-stopping pagination once results cross your date window.
+    attr_accessor :order_by
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'location_names' => :'locationNames',
         :'page_size' => :'pageSize',
-        :'page_token' => :'pageToken'
+        :'page_token' => :'pageToken',
+        :'order_by' => :'orderBy'
       }
     end
 
@@ -48,7 +74,8 @@ module Zernio
       {
         :'location_names' => :'Array<String>',
         :'page_size' => :'Integer',
-        :'page_token' => :'String'
+        :'page_token' => :'String',
+        :'order_by' => :'String'
       }
     end
 
@@ -91,6 +118,12 @@ module Zernio
       if attributes.key?(:'page_token')
         self.page_token = attributes[:'page_token']
       end
+
+      if attributes.key?(:'order_by')
+        self.order_by = attributes[:'order_by']
+      else
+        self.order_by = 'updateTime desc'
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -100,6 +133,10 @@ module Zernio
       invalid_properties = Array.new
       if @location_names.nil?
         invalid_properties.push('invalid value for "location_names", location_names cannot be nil.')
+      end
+
+      if @location_names.length > 50
+        invalid_properties.push('invalid value for "location_names", number of items must be less than or equal to 50.')
       end
 
       if @location_names.length < 1
@@ -126,10 +163,13 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @location_names.nil?
+      return false if @location_names.length > 50
       return false if @location_names.length < 1
       return false if !@page_size.nil? && @page_size > 50
       return false if !@page_size.nil? && @page_size < 1
       return false if !@page_token.nil? && @page_token.to_s.length < 1
+      order_by_validator = EnumAttributeValidator.new('String', ["updateTime desc", "rating", "rating desc"])
+      return false unless order_by_validator.valid?(@order_by)
       true
     end
 
@@ -138,6 +178,10 @@ module Zernio
     def location_names=(location_names)
       if location_names.nil?
         fail ArgumentError, 'location_names cannot be nil'
+      end
+
+      if location_names.length > 50
+        fail ArgumentError, 'invalid value for "location_names", number of items must be less than or equal to 50.'
       end
 
       if location_names.length < 1
@@ -179,6 +223,16 @@ module Zernio
       @page_token = page_token
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] order_by Object to be assigned
+    def order_by=(order_by)
+      validator = EnumAttributeValidator.new('String', ["updateTime desc", "rating", "rating desc"])
+      unless validator.valid?(order_by)
+        fail ArgumentError, "invalid value for \"order_by\", must be one of #{validator.allowable_values}."
+      end
+      @order_by = order_by
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -186,7 +240,8 @@ module Zernio
       self.class == o.class &&
           location_names == o.location_names &&
           page_size == o.page_size &&
-          page_token == o.page_token
+          page_token == o.page_token &&
+          order_by == o.order_by
     end
 
     # @see the `==` method
@@ -198,7 +253,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [location_names, page_size, page_token].hash
+      [location_names, page_size, page_token, order_by].hash
     end
 
     # Builds the object from hash
