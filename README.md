@@ -400,13 +400,17 @@ Class | Method | HTTP request | Description
 *Zernio::ReviewsApi* | [**list_inbox_reviews**](docs/ReviewsApi.md#list_inbox_reviews) | **GET** /v1/inbox/reviews | List reviews
 *Zernio::ReviewsApi* | [**reply_to_inbox_review**](docs/ReviewsApi.md#reply_to_inbox_review) | **POST** /v1/inbox/reviews/{reviewId}/reply | Reply to review
 *Zernio::SMSApi* | [**appeal_sms_registration**](docs/SMSApi.md#appeal_sms_registration) | **POST** /v1/sms/registrations/{id}/appeal | Appeal a rejected campaign
+*Zernio::SMSApi* | [**create_sms_sender_id**](docs/SMSApi.md#create_sms_sender_id) | **POST** /v1/sms/sender-ids | Create an alphanumeric sender ID
 *Zernio::SMSApi* | [**deactivate_sms_registration**](docs/SMSApi.md#deactivate_sms_registration) | **DELETE** /v1/sms/registrations/{id} | Deactivate a brand/campaign registration
+*Zernio::SMSApi* | [**delete_sms_sender_id**](docs/SMSApi.md#delete_sms_sender_id) | **DELETE** /v1/sms/sender-ids/{id} | Delete an alphanumeric sender ID
 *Zernio::SMSApi* | [**disable_sms_on_number**](docs/SMSApi.md#disable_sms_on_number) | **DELETE** /v1/phone-numbers/{id}/sms | Disable SMS on a number
 *Zernio::SMSApi* | [**enable_sms_on_number**](docs/SMSApi.md#enable_sms_on_number) | **POST** /v1/phone-numbers/{id}/sms | Enable SMS on a number
 *Zernio::SMSApi* | [**get_sms_registration**](docs/SMSApi.md#get_sms_registration) | **GET** /v1/sms/registrations/{id} | Get a carrier registration
 *Zernio::SMSApi* | [**list_sms_opt_outs**](docs/SMSApi.md#list_sms_opt_outs) | **GET** /v1/sms/opt-outs | List SMS opt-outs
 *Zernio::SMSApi* | [**list_sms_registrations**](docs/SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations
+*Zernio::SMSApi* | [**list_sms_sender_ids**](docs/SMSApi.md#list_sms_sender_ids) | **GET** /v1/sms/sender-ids | List alphanumeric sender IDs
 *Zernio::SMSApi* | [**lookup_sms_number**](docs/SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type
+*Zernio::SMSApi* | [**request_sms_sender_id_limit_increase**](docs/SMSApi.md#request_sms_sender_id_limit_increase) | **POST** /v1/sms/sender-ids/limit-request | Request a higher sender ID daily limit
 *Zernio::SMSApi* | [**resend_sms_registration_otp**](docs/SMSApi.md#resend_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP
 *Zernio::SMSApi* | [**reuse_sms_registration_for_number**](docs/SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration
 *Zernio::SMSApi* | [**send_sms**](docs/SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS
@@ -785,6 +789,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateSequenceRequestStepsInner](docs/CreateSequenceRequestStepsInner.md)
  - [Zernio::CreateSequenceRequestStepsInnerTemplate](docs/CreateSequenceRequestStepsInnerTemplate.md)
  - [Zernio::CreateSequenceRequestStepsInnerTemplateVariableMappingValue](docs/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md)
+ - [Zernio::CreateSmsSenderId200Response](docs/CreateSmsSenderId200Response.md)
+ - [Zernio::CreateSmsSenderIdRequest](docs/CreateSmsSenderIdRequest.md)
  - [Zernio::CreateStandaloneAd201Response](docs/CreateStandaloneAd201Response.md)
  - [Zernio::CreateStandaloneAd201ResponseOneOf](docs/CreateStandaloneAd201ResponseOneOf.md)
  - [Zernio::CreateStandaloneAd201ResponseOneOf1](docs/CreateStandaloneAd201ResponseOneOf1.md)
@@ -857,6 +863,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxComment200Response](docs/DeleteInboxComment200Response.md)
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
+ - [Zernio::DeleteSmsSenderId200Response](docs/DeleteSmsSenderId200Response.md)
  - [Zernio::DeleteWhatsappBusinessUsernameRequest](docs/DeleteWhatsappBusinessUsernameRequest.md)
  - [Zernio::DialVoiceWebCall200Response](docs/DialVoiceWebCall200Response.md)
  - [Zernio::DialVoiceWebCallRequest](docs/DialVoiceWebCallRequest.md)
@@ -1408,6 +1415,10 @@ Class | Method | HTTP request | Description
  - [Zernio::ListSmsRegistrations200Response](docs/ListSmsRegistrations200Response.md)
  - [Zernio::ListSmsRegistrations200ResponseRegistrationsInner](docs/ListSmsRegistrations200ResponseRegistrationsInner.md)
  - [Zernio::ListSmsRegistrations200ResponseRegistrationsInnerThroughput](docs/ListSmsRegistrations200ResponseRegistrationsInnerThroughput.md)
+ - [Zernio::ListSmsSenderIds200Response](docs/ListSmsSenderIds200Response.md)
+ - [Zernio::ListSmsSenderIds200ResponseBudget](docs/ListSmsSenderIds200ResponseBudget.md)
+ - [Zernio::ListSmsSenderIds200ResponseBudgetPendingRequest](docs/ListSmsSenderIds200ResponseBudgetPendingRequest.md)
+ - [Zernio::ListSmsSenderIds200ResponseSenderIdsInner](docs/ListSmsSenderIds200ResponseSenderIdsInner.md)
  - [Zernio::ListSnapchatProfiles200Response](docs/ListSnapchatProfiles200Response.md)
  - [Zernio::ListSnapchatProfiles200ResponsePublicProfilesInner](docs/ListSnapchatProfiles200ResponsePublicProfilesInner.md)
  - [Zernio::ListTrackingTagSharedAccounts200Response](docs/ListTrackingTagSharedAccounts200Response.md)
@@ -1533,6 +1544,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplyToInboxReviewRequest](docs/ReplyToInboxReviewRequest.md)
  - [Zernio::ReplyToMention200Response](docs/ReplyToMention200Response.md)
  - [Zernio::ReplyToMentionRequest](docs/ReplyToMentionRequest.md)
+ - [Zernio::RequestSmsSenderIdLimitIncrease200Response](docs/RequestSmsSenderIdLimitIncrease200Response.md)
+ - [Zernio::RequestSmsSenderIdLimitIncreaseRequest](docs/RequestSmsSenderIdLimitIncreaseRequest.md)
  - [Zernio::ResendSmsRegistrationOtp200Response](docs/ResendSmsRegistrationOtp200Response.md)
  - [Zernio::ReserveRfPrediction201Response](docs/ReserveRfPrediction201Response.md)
  - [Zernio::ReserveRfPredictionRequest](docs/ReserveRfPredictionRequest.md)

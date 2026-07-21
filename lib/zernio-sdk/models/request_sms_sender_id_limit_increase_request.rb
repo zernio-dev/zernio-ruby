@@ -14,30 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SendSmsRequest < ApiModelBase
-    # One of your SMS-enabled numbers (E.164; formatting is normalized), or an approved alphanumeric sender ID (3-11 letters/digits/spaces, created via `/v1/sms/sender-ids`).
-    attr_accessor :from
+  class RequestSmsSenderIdLimitIncreaseRequest < ApiModelBase
+    # Desired daily message cap. Must exceed the current cap.
+    attr_accessor :requested_cap
 
-    # Recipient number (E.164).
-    attr_accessor :to
-
-    # Message body. Required unless `mediaUrls` is set. Max 10 SMS segments (1530 GSM-7 or 670 unicode characters).
-    attr_accessor :text
-
-    # Public media URLs to attach (sends as MMS). Max 10.
-    attr_accessor :media_urls
-
-    # Optional. Schedule the send for a future time (ISO 8601 with offset, e.g. `2026-08-01T12:00:00Z`). Must be in the future. The message is queued and the `message.delivered` webhook fires when it actually sends.
-    attr_accessor :send_at
+    # Use case and audience (what you send, to whom, opt-in status).
+    attr_accessor :reason
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'from' => :'from',
-        :'to' => :'to',
-        :'text' => :'text',
-        :'media_urls' => :'mediaUrls',
-        :'send_at' => :'sendAt'
+        :'requested_cap' => :'requestedCap',
+        :'reason' => :'reason'
       }
     end
 
@@ -54,11 +42,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'from' => :'String',
-        :'to' => :'String',
-        :'text' => :'String',
-        :'media_urls' => :'Array<String>',
-        :'send_at' => :'Time'
+        :'requested_cap' => :'Integer',
+        :'reason' => :'String'
       }
     end
 
@@ -72,42 +57,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendSmsRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::RequestSmsSenderIdLimitIncreaseRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendSmsRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::RequestSmsSenderIdLimitIncreaseRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'from')
-        self.from = attributes[:'from']
+      if attributes.key?(:'requested_cap')
+        self.requested_cap = attributes[:'requested_cap']
       else
-        self.from = nil
+        self.requested_cap = nil
       end
 
-      if attributes.key?(:'to')
-        self.to = attributes[:'to']
+      if attributes.key?(:'reason')
+        self.reason = attributes[:'reason']
       else
-        self.to = nil
-      end
-
-      if attributes.key?(:'text')
-        self.text = attributes[:'text']
-      end
-
-      if attributes.key?(:'media_urls')
-        if (value = attributes[:'media_urls']).is_a?(Array)
-          self.media_urls = value
-        end
-      end
-
-      if attributes.key?(:'send_at')
-        self.send_at = attributes[:'send_at']
+        self.reason = nil
       end
     end
 
@@ -116,16 +87,20 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @from.nil?
-        invalid_properties.push('invalid value for "from", from cannot be nil.')
+      if @requested_cap.nil?
+        invalid_properties.push('invalid value for "requested_cap", requested_cap cannot be nil.')
       end
 
-      if @to.nil?
-        invalid_properties.push('invalid value for "to", to cannot be nil.')
+      if @reason.nil?
+        invalid_properties.push('invalid value for "reason", reason cannot be nil.')
       end
 
-      if !@media_urls.nil? && @media_urls.length > 10
-        invalid_properties.push('invalid value for "media_urls", number of items must be less than or equal to 10.')
+      if @reason.to_s.length > 2000
+        invalid_properties.push('invalid value for "reason", the character length must be smaller than or equal to 2000.')
+      end
+
+      if @reason.to_s.length < 10
+        invalid_properties.push('invalid value for "reason", the character length must be greater than or equal to 10.')
       end
 
       invalid_properties
@@ -135,44 +110,39 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @from.nil?
-      return false if @to.nil?
-      return false if !@media_urls.nil? && @media_urls.length > 10
+      return false if @requested_cap.nil?
+      return false if @reason.nil?
+      return false if @reason.to_s.length > 2000
+      return false if @reason.to_s.length < 10
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] from Value to be assigned
-    def from=(from)
-      if from.nil?
-        fail ArgumentError, 'from cannot be nil'
+    # @param [Object] requested_cap Value to be assigned
+    def requested_cap=(requested_cap)
+      if requested_cap.nil?
+        fail ArgumentError, 'requested_cap cannot be nil'
       end
 
-      @from = from
+      @requested_cap = requested_cap
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] to Value to be assigned
-    def to=(to)
-      if to.nil?
-        fail ArgumentError, 'to cannot be nil'
+    # @param [Object] reason Value to be assigned
+    def reason=(reason)
+      if reason.nil?
+        fail ArgumentError, 'reason cannot be nil'
       end
 
-      @to = to
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] media_urls Value to be assigned
-    def media_urls=(media_urls)
-      if media_urls.nil?
-        fail ArgumentError, 'media_urls cannot be nil'
+      if reason.to_s.length > 2000
+        fail ArgumentError, 'invalid value for "reason", the character length must be smaller than or equal to 2000.'
       end
 
-      if media_urls.length > 10
-        fail ArgumentError, 'invalid value for "media_urls", number of items must be less than or equal to 10.'
+      if reason.to_s.length < 10
+        fail ArgumentError, 'invalid value for "reason", the character length must be greater than or equal to 10.'
       end
 
-      @media_urls = media_urls
+      @reason = reason
     end
 
     # Checks equality by comparing each attribute.
@@ -180,11 +150,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          from == o.from &&
-          to == o.to &&
-          text == o.text &&
-          media_urls == o.media_urls &&
-          send_at == o.send_at
+          requested_cap == o.requested_cap &&
+          reason == o.reason
     end
 
     # @see the `==` method
@@ -196,7 +163,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [from, to, text, media_urls, send_at].hash
+      [requested_cap, reason].hash
     end
 
     # Builds the object from hash

@@ -5,13 +5,17 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**appeal_sms_registration**](SMSApi.md#appeal_sms_registration) | **POST** /v1/sms/registrations/{id}/appeal | Appeal a rejected campaign |
+| [**create_sms_sender_id**](SMSApi.md#create_sms_sender_id) | **POST** /v1/sms/sender-ids | Create an alphanumeric sender ID |
 | [**deactivate_sms_registration**](SMSApi.md#deactivate_sms_registration) | **DELETE** /v1/sms/registrations/{id} | Deactivate a brand/campaign registration |
+| [**delete_sms_sender_id**](SMSApi.md#delete_sms_sender_id) | **DELETE** /v1/sms/sender-ids/{id} | Delete an alphanumeric sender ID |
 | [**disable_sms_on_number**](SMSApi.md#disable_sms_on_number) | **DELETE** /v1/phone-numbers/{id}/sms | Disable SMS on a number |
 | [**enable_sms_on_number**](SMSApi.md#enable_sms_on_number) | **POST** /v1/phone-numbers/{id}/sms | Enable SMS on a number |
 | [**get_sms_registration**](SMSApi.md#get_sms_registration) | **GET** /v1/sms/registrations/{id} | Get a carrier registration |
 | [**list_sms_opt_outs**](SMSApi.md#list_sms_opt_outs) | **GET** /v1/sms/opt-outs | List SMS opt-outs |
 | [**list_sms_registrations**](SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations |
+| [**list_sms_sender_ids**](SMSApi.md#list_sms_sender_ids) | **GET** /v1/sms/sender-ids | List alphanumeric sender IDs |
 | [**lookup_sms_number**](SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type |
+| [**request_sms_sender_id_limit_increase**](SMSApi.md#request_sms_sender_id_limit_increase) | **POST** /v1/sms/sender-ids/limit-request | Request a higher sender ID daily limit |
 | [**resend_sms_registration_otp**](SMSApi.md#resend_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP |
 | [**reuse_sms_registration_for_number**](SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration |
 | [**send_sms**](SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS |
@@ -93,6 +97,75 @@ end
 - **Accept**: application/json
 
 
+## create_sms_sender_id
+
+> <CreateSmsSenderId200Response> create_sms_sender_id(create_sms_sender_id_request)
+
+Create an alphanumeric sender ID
+
+Registers an alphanumeric sender ID (e.g. `ZERNIO`) — a branded `from` for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as `from` on `POST /v1/sms/messages`.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected, and an ID already registered by another workspace returns 409 (active sender IDs are globally unique, first-come-first-served). Creating the same sender ID again is a no-op (re-activates it after a delete). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+create_sms_sender_id_request = Zernio::CreateSmsSenderIdRequest.new({sender_id: 'sender_id_example'}) # CreateSmsSenderIdRequest | 
+
+begin
+  # Create an alphanumeric sender ID
+  result = api_instance.create_sms_sender_id(create_sms_sender_id_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->create_sms_sender_id: #{e}"
+end
+```
+
+#### Using the create_sms_sender_id_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateSmsSenderId200Response>, Integer, Hash)> create_sms_sender_id_with_http_info(create_sms_sender_id_request)
+
+```ruby
+begin
+  # Create an alphanumeric sender ID
+  data, status_code, headers = api_instance.create_sms_sender_id_with_http_info(create_sms_sender_id_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateSmsSenderId200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->create_sms_sender_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_sms_sender_id_request** | [**CreateSmsSenderIdRequest**](CreateSmsSenderIdRequest.md) |  |  |
+
+### Return type
+
+[**CreateSmsSenderId200Response**](CreateSmsSenderId200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## deactivate_sms_registration
 
 > <DeactivateSmsRegistration200Response> deactivate_sms_registration(id)
@@ -151,6 +224,75 @@ end
 ### Return type
 
 [**DeactivateSmsRegistration200Response**](DeactivateSmsRegistration200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## delete_sms_sender_id
+
+> <DeleteSmsSenderId200Response> delete_sms_sender_id(id)
+
+Delete an alphanumeric sender ID
+
+Deactivates the sender ID so it can no longer send. Re-creating the same sender ID via `POST /v1/sms/sender-ids` re-activates it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+id = 'id_example' # String | Sender ID resource id.
+
+begin
+  # Delete an alphanumeric sender ID
+  result = api_instance.delete_sms_sender_id(id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->delete_sms_sender_id: #{e}"
+end
+```
+
+#### Using the delete_sms_sender_id_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteSmsSenderId200Response>, Integer, Hash)> delete_sms_sender_id_with_http_info(id)
+
+```ruby
+begin
+  # Delete an alphanumeric sender ID
+  data, status_code, headers = api_instance.delete_sms_sender_id_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteSmsSenderId200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->delete_sms_sender_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Sender ID resource id. |  |
+
+### Return type
+
+[**DeleteSmsSenderId200Response**](DeleteSmsSenderId200Response.md)
 
 ### Authorization
 
@@ -511,6 +653,70 @@ end
 - **Accept**: application/json
 
 
+## list_sms_sender_ids
+
+> <ListSmsSenderIds200Response> list_sms_sender_ids
+
+List alphanumeric sender IDs
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+
+begin
+  # List alphanumeric sender IDs
+  result = api_instance.list_sms_sender_ids
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->list_sms_sender_ids: #{e}"
+end
+```
+
+#### Using the list_sms_sender_ids_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListSmsSenderIds200Response>, Integer, Hash)> list_sms_sender_ids_with_http_info
+
+```ruby
+begin
+  # List alphanumeric sender IDs
+  data, status_code, headers = api_instance.list_sms_sender_ids_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListSmsSenderIds200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->list_sms_sender_ids_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListSmsSenderIds200Response**](ListSmsSenderIds200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## lookup_sms_number
 
 > <LookupSmsNumber200Response> lookup_sms_number(number)
@@ -577,6 +783,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## request_sms_sender_id_limit_increase
+
+> <RequestSmsSenderIdLimitIncrease200Response> request_sms_sender_id_limit_increase(request_sms_sender_id_limit_increase_request)
+
+Request a higher sender ID daily limit
+
+Asks support to raise the workspace's daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+request_sms_sender_id_limit_increase_request = Zernio::RequestSmsSenderIdLimitIncreaseRequest.new({requested_cap: 37, reason: 'reason_example'}) # RequestSmsSenderIdLimitIncreaseRequest | 
+
+begin
+  # Request a higher sender ID daily limit
+  result = api_instance.request_sms_sender_id_limit_increase(request_sms_sender_id_limit_increase_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->request_sms_sender_id_limit_increase: #{e}"
+end
+```
+
+#### Using the request_sms_sender_id_limit_increase_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RequestSmsSenderIdLimitIncrease200Response>, Integer, Hash)> request_sms_sender_id_limit_increase_with_http_info(request_sms_sender_id_limit_increase_request)
+
+```ruby
+begin
+  # Request a higher sender ID daily limit
+  data, status_code, headers = api_instance.request_sms_sender_id_limit_increase_with_http_info(request_sms_sender_id_limit_increase_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RequestSmsSenderIdLimitIncrease200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->request_sms_sender_id_limit_increase_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **request_sms_sender_id_limit_increase_request** | [**RequestSmsSenderIdLimitIncreaseRequest**](RequestSmsSenderIdLimitIncreaseRequest.md) |  |  |
+
+### Return type
+
+[**RequestSmsSenderIdLimitIncrease200Response**](RequestSmsSenderIdLimitIncrease200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -724,7 +999,7 @@ end
 
 Send an SMS/MMS
 
-Sends an SMS (or MMS when `mediaUrls` is set) from one of your SMS-enabled numbers. At least one of `text` / `mediaUrls` is required. Both numbers are normalized to E.164, so `from` matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (`/v1/sms/registrations`) before messages deliver.  **Idempotency:** send an `Idempotency-Key` header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409. 
+Sends an SMS (or MMS when `mediaUrls` is set) from one of your SMS-enabled numbers, or from an approved alphanumeric sender ID (`/v1/sms/sender-ids`). At least one of `text` / `mediaUrls` is required. Numbers are normalized to E.164, so `from` matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (`/v1/sms/registrations`) before messages deliver.  **Alphanumeric sender IDs** are one-way and international only: they cannot reach the US, Canada, or Puerto Rico (403), are text-only (no MMS), and recipients cannot reply. Some destination countries substitute a numeric sender to ensure delivery.  **Idempotency:** send an `Idempotency-Key` header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409. 
 
 ### Examples
 

@@ -240,6 +240,8 @@ docs/CreateSequenceRequest.md
 docs/CreateSequenceRequestStepsInner.md
 docs/CreateSequenceRequestStepsInnerTemplate.md
 docs/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md
+docs/CreateSmsSenderId200Response.md
+docs/CreateSmsSenderIdRequest.md
 docs/CreateStandaloneAd201Response.md
 docs/CreateStandaloneAd201ResponseOneOf.md
 docs/CreateStandaloneAd201ResponseOneOf1.md
@@ -313,6 +315,7 @@ docs/DeleteGoogleBusinessReviewReply200Response.md
 docs/DeleteInboxComment200Response.md
 docs/DeleteInboxReviewReply200Response.md
 docs/DeleteInboxReviewReplyRequest.md
+docs/DeleteSmsSenderId200Response.md
 docs/DeleteWhatsappBusinessUsernameRequest.md
 docs/DialVoiceWebCall200Response.md
 docs/DialVoiceWebCallRequest.md
@@ -877,6 +880,10 @@ docs/ListSmsOptOuts200ResponseOptOutsInner.md
 docs/ListSmsRegistrations200Response.md
 docs/ListSmsRegistrations200ResponseRegistrationsInner.md
 docs/ListSmsRegistrations200ResponseRegistrationsInnerThroughput.md
+docs/ListSmsSenderIds200Response.md
+docs/ListSmsSenderIds200ResponseBudget.md
+docs/ListSmsSenderIds200ResponseBudgetPendingRequest.md
+docs/ListSmsSenderIds200ResponseSenderIdsInner.md
 docs/ListSnapchatProfiles200Response.md
 docs/ListSnapchatProfiles200ResponsePublicProfilesInner.md
 docs/ListTrackingTagSharedAccounts200Response.md
@@ -1011,6 +1018,8 @@ docs/ReplyToInboxReview200Response.md
 docs/ReplyToInboxReviewRequest.md
 docs/ReplyToMention200Response.md
 docs/ReplyToMentionRequest.md
+docs/RequestSmsSenderIdLimitIncrease200Response.md
+docs/RequestSmsSenderIdLimitIncreaseRequest.md
 docs/ResendSmsRegistrationOtp200Response.md
 docs/ReserveRfPrediction201Response.md
 docs/ReserveRfPredictionRequest.md
@@ -1782,6 +1791,8 @@ lib/zernio-sdk/models/create_sequence_request.rb
 lib/zernio-sdk/models/create_sequence_request_steps_inner.rb
 lib/zernio-sdk/models/create_sequence_request_steps_inner_template.rb
 lib/zernio-sdk/models/create_sequence_request_steps_inner_template_variable_mapping_value.rb
+lib/zernio-sdk/models/create_sms_sender_id200_response.rb
+lib/zernio-sdk/models/create_sms_sender_id_request.rb
 lib/zernio-sdk/models/create_standalone_ad201_response.rb
 lib/zernio-sdk/models/create_standalone_ad201_response_one_of.rb
 lib/zernio-sdk/models/create_standalone_ad201_response_one_of1.rb
@@ -1854,6 +1865,7 @@ lib/zernio-sdk/models/delete_google_business_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_comment200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
+lib/zernio-sdk/models/delete_sms_sender_id200_response.rb
 lib/zernio-sdk/models/delete_whatsapp_business_username_request.rb
 lib/zernio-sdk/models/dial_voice_web_call200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call_request.rb
@@ -2405,6 +2417,10 @@ lib/zernio-sdk/models/list_sms_opt_outs200_response_opt_outs_inner.rb
 lib/zernio-sdk/models/list_sms_registrations200_response.rb
 lib/zernio-sdk/models/list_sms_registrations200_response_registrations_inner.rb
 lib/zernio-sdk/models/list_sms_registrations200_response_registrations_inner_throughput.rb
+lib/zernio-sdk/models/list_sms_sender_ids200_response.rb
+lib/zernio-sdk/models/list_sms_sender_ids200_response_budget.rb
+lib/zernio-sdk/models/list_sms_sender_ids200_response_budget_pending_request.rb
+lib/zernio-sdk/models/list_sms_sender_ids200_response_sender_ids_inner.rb
 lib/zernio-sdk/models/list_snapchat_profiles200_response.rb
 lib/zernio-sdk/models/list_snapchat_profiles200_response_public_profiles_inner.rb
 lib/zernio-sdk/models/list_tracking_tag_shared_accounts200_response.rb
@@ -2530,6 +2546,8 @@ lib/zernio-sdk/models/reply_to_inbox_review200_response.rb
 lib/zernio-sdk/models/reply_to_inbox_review_request.rb
 lib/zernio-sdk/models/reply_to_mention200_response.rb
 lib/zernio-sdk/models/reply_to_mention_request.rb
+lib/zernio-sdk/models/request_sms_sender_id_limit_increase200_response.rb
+lib/zernio-sdk/models/request_sms_sender_id_limit_increase_request.rb
 lib/zernio-sdk/models/resend_sms_registration_otp200_response.rb
 lib/zernio-sdk/models/reserve_rf_prediction201_response.rb
 lib/zernio-sdk/models/reserve_rf_prediction_request.rb
@@ -3277,6 +3295,8 @@ spec/models/create_sequence_request_spec.rb
 spec/models/create_sequence_request_steps_inner_spec.rb
 spec/models/create_sequence_request_steps_inner_template_spec.rb
 spec/models/create_sequence_request_steps_inner_template_variable_mapping_value_spec.rb
+spec/models/create_sms_sender_id200_response_spec.rb
+spec/models/create_sms_sender_id_request_spec.rb
 spec/models/create_standalone_ad201_response_one_of1_spec.rb
 spec/models/create_standalone_ad201_response_one_of_spec.rb
 spec/models/create_standalone_ad201_response_spec.rb
@@ -3349,6 +3369,7 @@ spec/models/delete_google_business_review_reply200_response_spec.rb
 spec/models/delete_inbox_comment200_response_spec.rb
 spec/models/delete_inbox_review_reply200_response_spec.rb
 spec/models/delete_inbox_review_reply_request_spec.rb
+spec/models/delete_sms_sender_id200_response_spec.rb
 spec/models/delete_whatsapp_business_username_request_spec.rb
 spec/models/dial_voice_web_call200_response_spec.rb
 spec/models/dial_voice_web_call_request_spec.rb
@@ -3900,6 +3921,10 @@ spec/models/list_sms_opt_outs200_response_spec.rb
 spec/models/list_sms_registrations200_response_registrations_inner_spec.rb
 spec/models/list_sms_registrations200_response_registrations_inner_throughput_spec.rb
 spec/models/list_sms_registrations200_response_spec.rb
+spec/models/list_sms_sender_ids200_response_budget_pending_request_spec.rb
+spec/models/list_sms_sender_ids200_response_budget_spec.rb
+spec/models/list_sms_sender_ids200_response_sender_ids_inner_spec.rb
+spec/models/list_sms_sender_ids200_response_spec.rb
 spec/models/list_snapchat_profiles200_response_public_profiles_inner_spec.rb
 spec/models/list_snapchat_profiles200_response_spec.rb
 spec/models/list_tracking_tag_shared_accounts200_response_spec.rb
@@ -4025,6 +4050,8 @@ spec/models/reply_to_inbox_review200_response_spec.rb
 spec/models/reply_to_inbox_review_request_spec.rb
 spec/models/reply_to_mention200_response_spec.rb
 spec/models/reply_to_mention_request_spec.rb
+spec/models/request_sms_sender_id_limit_increase200_response_spec.rb
+spec/models/request_sms_sender_id_limit_increase_request_spec.rb
 spec/models/resend_sms_registration_otp200_response_spec.rb
 spec/models/reserve_rf_prediction201_response_spec.rb
 spec/models/reserve_rf_prediction_request_spec.rb
