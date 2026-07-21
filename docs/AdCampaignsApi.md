@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**bulk_update_ad_campaign_status**](AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns |
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
+| [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase (Meta) |
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
@@ -224,6 +225,81 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_ad_set_details
+
+> <GetAdSetDetails200Response> get_ad_set_details(ad_set_id, account_id, opts)
+
+Live ad-set details incl. learning phase (Meta)
+
+Reads the ad set live from Meta, returned verbatim. The default projection includes `learning_stage_info` (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING — Meta omits its `status` key on paused ad sets), delivery settings, budgets, schedule and targeting. `fields` is a raw-passthrough override; unknown fields return Meta's 400 verbatim. Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_set_id = 'ad_set_id_example' # String | Meta ad set id (platformAdSetId).
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+opts = {
+  fields: 'fields_example' # String | Comma-separated Graph field override (supports nested {} projections).
+}
+
+begin
+  # Live ad-set details incl. learning phase (Meta)
+  result = api_instance.get_ad_set_details(ad_set_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_ad_set_details: #{e}"
+end
+```
+
+#### Using the get_ad_set_details_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdSetDetails200Response>, Integer, Hash)> get_ad_set_details_with_http_info(ad_set_id, account_id, opts)
+
+```ruby
+begin
+  # Live ad-set details incl. learning phase (Meta)
+  data, status_code, headers = api_instance.get_ad_set_details_with_http_info(ad_set_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdSetDetails200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_ad_set_details_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_set_id** | **String** | Meta ad set id (platformAdSetId). |  |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+
+### Return type
+
+[**GetAdSetDetails200Response**](GetAdSetDetails200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

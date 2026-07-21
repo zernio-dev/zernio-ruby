@@ -874,7 +874,7 @@ module Zernio
       return false unless budget_level_validator.valid?(@budget_level)
       return false if !@long_headline.nil? && @long_headline.to_s.length > 90
       return false if !@description.nil? && @description.to_s.length > 255
-      call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
+      call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "ADD_TO_CART", "APPLY_NOW", "BOOK_NOW", "BUY_TICKETS", "DONATE", "DONATE_NOW", "GET_DIRECTIONS", "GET_SHOWTIMES", "LISTEN_NOW", "ORDER_NOW", "PLAY_GAME", "REQUEST_TIME", "SEE_MENU", "START_ORDER", "INSTALL_MOBILE_APP", "USE_APP", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
       return false unless call_to_action_validator.valid?(@call_to_action)
       return false if !@creatives.nil? && @creatives.length < 1
       return false if !@business_name.nil? && @business_name.to_s.length > 25
@@ -1048,7 +1048,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] call_to_action Object to be assigned
     def call_to_action=(call_to_action)
-      validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
+      validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "ADD_TO_CART", "APPLY_NOW", "BOOK_NOW", "BUY_TICKETS", "DONATE", "DONATE_NOW", "GET_DIRECTIONS", "GET_SHOWTIMES", "LISTEN_NOW", "ORDER_NOW", "PLAY_GAME", "REQUEST_TIME", "SEE_MENU", "START_ORDER", "INSTALL_MOBILE_APP", "USE_APP", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
       unless validator.valid?(call_to_action)
         fail ArgumentError, "invalid value for \"call_to_action\", must be one of #{validator.allowable_values}."
       end

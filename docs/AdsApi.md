@@ -21,11 +21,13 @@ All URIs are relative to *https://zernio.com/api*
 | [**estimate_ad_reach**](AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach |
 | [**generate_ad_previews**](AdsApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews (Meta) |
 | [**get_ad**](AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
+| [**get_ad_account_finance**](AdsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances (Meta) |
 | [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**get_ad_comments**](AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
 | [**get_ad_insights_report**](AdsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run (Meta) |
 | [**get_ad_previews**](AdsApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad (Meta) |
 | [**get_ad_tracking_tags**](AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags |
+| [**get_ads_activity_log**](AdsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log (Meta) |
 | [**get_campaign_analytics**](AdsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics |
 | [**get_conversion_destination**](AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination |
 | [**get_conversion_metrics**](AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics |
@@ -38,6 +40,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_catalog_product_sets**](AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog&#39;s product sets |
 | [**list_ad_catalogs**](AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs |
+| [**list_ad_studies**](AdsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies (Meta) |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**list_ads_business_centers**](AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
 | [**list_conversion_associations**](AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List associated campaigns |
@@ -57,6 +60,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_ad_status**](AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
 | [**update_ad_tracking_tags**](AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags |
 | [**update_conversion_destination**](AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination |
+| [**upload_ad_image**](AdsApi.md#upload_ad_image) | **POST** /v1/ads/images | Upload an ad image from base64 (Meta) |
 
 
 ## add_conversion_associations
@@ -1249,6 +1253,77 @@ end
 - **Accept**: application/json
 
 
+## get_ad_account_finance
+
+> <GetAdAccountFinance200Response> get_ad_account_finance(account_id, ad_account_id)
+
+Ad account finances (Meta)
+
+Finances of one Meta ad account: prepaid `balance`, lifetime `amountSpent`, account `spendCap` (null = no cap) and the `fundingSource`. Money values are converted from Meta's minor units to whole units of `currency`. Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+
+begin
+  # Ad account finances (Meta)
+  result = api_instance.get_ad_account_finance(account_id, ad_account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_account_finance: #{e}"
+end
+```
+
+#### Using the get_ad_account_finance_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdAccountFinance200Response>, Integer, Hash)> get_ad_account_finance_with_http_info(account_id, ad_account_id)
+
+```ruby
+begin
+  # Ad account finances (Meta)
+  data, status_code, headers = api_instance.get_ad_account_finance_with_http_info(account_id, ad_account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdAccountFinance200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_account_finance_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+
+### Return type
+
+[**GetAdAccountFinance200Response**](GetAdAccountFinance200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_ad_analytics
 
 > <GetAdAnalytics200Response> get_ad_analytics(ad_id, opts)
@@ -1611,6 +1686,89 @@ end
 ### Return type
 
 [**GetAdTrackingTags200Response**](GetAdTrackingTags200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ads_activity_log
+
+> <GetAdsActivityLog200Response> get_ads_activity_log(account_id, ad_account_id, opts)
+
+Ad account change / audit log (Meta)
+
+Account-level audit log from Meta's `/act_X/activities`: who changed what and when (creates, edits, status flips, budget changes...) with Meta's translated event names and the structured before/after in `extra_data`. Rows are returned verbatim. Meta has no server-side per-object filter on this edge, so `objectId` filters the returned page client-side (combine with paging to walk history for one campaign/ad set/ad). Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  since: Date.parse('2013-10-20'), # Date | Start of range (YYYY-MM-DD).
+  _until: Date.parse('2013-10-20'), # Date | End of range (YYYY-MM-DD).
+  object_id: 'object_id_example', # String | Client-side filter to one Meta object id (campaign, ad set or ad).
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # Ad account change / audit log (Meta)
+  result = api_instance.get_ads_activity_log(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ads_activity_log: #{e}"
+end
+```
+
+#### Using the get_ads_activity_log_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdsActivityLog200Response>, Integer, Hash)> get_ads_activity_log_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # Ad account change / audit log (Meta)
+  data, status_code, headers = api_instance.get_ads_activity_log_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdsActivityLog200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ads_activity_log_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **since** | **Date** | Start of range (YYYY-MM-DD). | [optional] |
+| **_until** | **Date** | End of range (YYYY-MM-DD). | [optional] |
+| **object_id** | **String** | Client-side filter to one Meta object id (campaign, ad set or ad). | [optional] |
+| **limit** | **Integer** | Rows per page | [optional][default to 50] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**GetAdsActivityLog200Response**](GetAdsActivityLog200Response.md)
 
 ### Authorization
 
@@ -2481,6 +2639,85 @@ end
 ### Return type
 
 [**ListAdCatalogs200Response**](ListAdCatalogs200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_studies
+
+> <ListAdStudies200Response> list_ad_studies(account_id, ad_account_id, opts)
+
+A/B tests and lift studies (Meta)
+
+Lists the ad account's A/B tests and lift studies (Meta's `/act_X/ad_studies`), rows returned verbatim. The default projection covers id, name, type, timing and cells with split percentages; `fields` is a raw-passthrough override. Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  fields: 'fields_example', # String | Comma-separated Graph field override (supports nested {} projections).
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # A/B tests and lift studies (Meta)
+  result = api_instance.list_ad_studies(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_studies: #{e}"
+end
+```
+
+#### Using the list_ad_studies_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdStudies200Response>, Integer, Hash)> list_ad_studies_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # A/B tests and lift studies (Meta)
+  data, status_code, headers = api_instance.list_ad_studies_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdStudies200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_studies_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**ListAdStudies200Response**](ListAdStudies200Response.md)
 
 ### Authorization
 
@@ -3915,6 +4152,75 @@ end
 ### Return type
 
 [**GetConversionDestination200Response**](GetConversionDestination200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## upload_ad_image
+
+> <UploadAdImage201Response> upload_ad_image(upload_ad_image_request)
+
+Upload an ad image from base64 (Meta)
+
+Uploads raw image bytes to the Meta ad account's image library — for callers whose creatives aren't hosted at a public URL. Returns the image `hash` (Meta's identifier for the asset) and the Meta-hosted `url`, which can be used directly as `imageUrl` on the create endpoints. Max 30 MB decoded. Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+upload_ad_image_request = Zernio::UploadAdImageRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', image_base64: 'image_base64_example'}) # UploadAdImageRequest | 
+
+begin
+  # Upload an ad image from base64 (Meta)
+  result = api_instance.upload_ad_image(upload_ad_image_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->upload_ad_image: #{e}"
+end
+```
+
+#### Using the upload_ad_image_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UploadAdImage201Response>, Integer, Hash)> upload_ad_image_with_http_info(upload_ad_image_request)
+
+```ruby
+begin
+  # Upload an ad image from base64 (Meta)
+  data, status_code, headers = api_instance.upload_ad_image_with_http_info(upload_ad_image_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UploadAdImage201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->upload_ad_image_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **upload_ad_image_request** | [**UploadAdImageRequest**](UploadAdImageRequest.md) |  |  |
+
+### Return type
+
+[**UploadAdImage201Response**](UploadAdImage201Response.md)
 
 ### Authorization
 

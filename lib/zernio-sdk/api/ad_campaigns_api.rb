@@ -235,6 +235,79 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Live ad-set details incl. learning phase (Meta)
+    # Reads the ad set live from Meta, returned verbatim. The default projection includes `learning_stage_info` (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING — Meta omits its `status` key on paused ad sets), delivery settings, budgets, schedule and targeting. `fields` is a raw-passthrough override; unknown fields return Meta's 400 verbatim. Meta only.
+    # @param ad_set_id [String] Meta ad set id (platformAdSetId).
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @return [GetAdSetDetails200Response]
+    def get_ad_set_details(ad_set_id, account_id, opts = {})
+      data, _status_code, _headers = get_ad_set_details_with_http_info(ad_set_id, account_id, opts)
+      data
+    end
+
+    # Live ad-set details incl. learning phase (Meta)
+    # Reads the ad set live from Meta, returned verbatim. The default projection includes &#x60;learning_stage_info&#x60; (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING — Meta omits its &#x60;status&#x60; key on paused ad sets), delivery settings, budgets, schedule and targeting. &#x60;fields&#x60; is a raw-passthrough override; unknown fields return Meta&#39;s 400 verbatim. Meta only.
+    # @param ad_set_id [String] Meta ad set id (platformAdSetId).
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @return [Array<(GetAdSetDetails200Response, Integer, Hash)>] GetAdSetDetails200Response data, response status code and response headers
+    def get_ad_set_details_with_http_info(ad_set_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.get_ad_set_details ...'
+      end
+      # verify the required parameter 'ad_set_id' is set
+      if @api_client.config.client_side_validation && ad_set_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_set_id' when calling AdCampaignsApi.get_ad_set_details"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdCampaignsApi.get_ad_set_details"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ad-sets/{adSetId}'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdSetDetails200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.get_ad_set_details",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#get_ad_set_details\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get campaign tree
     # Returns a nested Campaign > Ad Set > Ad hierarchy with rolled-up metrics at each level. Uses a two-stage aggregation: ads are grouped into ad sets, then ad sets into campaigns. Metrics are computed over an optional date range, then rolled up from ad level to ad set and campaign levels. Pagination is at the campaign level. Ads without a campaign or ad set ID are grouped into synthetic \"Ungrouped\" buckets. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max.  Pass `timeIncrement=1` to also get a daily breakdown: each node gains a `daily[]` array of per-day metrics (same fields as the aggregated `metrics`) in the same call. Use `dailyLevel` (`campaign` default, or `adset` / `ad`) to choose which levels carry the series. This replaces calling the tree once per day for per-campaign daily trends. 
     # @param [Hash] opts the optional parameters

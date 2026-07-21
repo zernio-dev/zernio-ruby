@@ -205,7 +205,7 @@ module Zernio
       return false if !@description.nil? && @description.to_s.length > 255
       return false if @link_url.nil?
       return false if @call_to_action.nil?
-      call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
+      call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "ADD_TO_CART", "APPLY_NOW", "BOOK_NOW", "BUY_TICKETS", "DONATE", "DONATE_NOW", "GET_DIRECTIONS", "GET_SHOWTIMES", "LISTEN_NOW", "ORDER_NOW", "PLAY_GAME", "REQUEST_TIME", "SEE_MENU", "START_ORDER", "INSTALL_MOBILE_APP", "USE_APP"])
       return false unless call_to_action_validator.valid?(@call_to_action)
       true
     end
@@ -275,7 +275,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] call_to_action Object to be assigned
     def call_to_action=(call_to_action)
-      validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE"])
+      validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "ADD_TO_CART", "APPLY_NOW", "BOOK_NOW", "BUY_TICKETS", "DONATE", "DONATE_NOW", "GET_DIRECTIONS", "GET_SHOWTIMES", "LISTEN_NOW", "ORDER_NOW", "PLAY_GAME", "REQUEST_TIME", "SEE_MENU", "START_ORDER", "INSTALL_MOBILE_APP", "USE_APP"])
       unless validator.valid?(call_to_action)
         fail ArgumentError, "invalid value for \"call_to_action\", must be one of #{validator.allowable_values}."
       end

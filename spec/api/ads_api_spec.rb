@@ -244,6 +244,19 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for get_ad_account_finance
+  # Ad account finances (Meta)
+  # Finances of one Meta ad account: prepaid &#x60;balance&#x60;, lifetime &#x60;amountSpent&#x60;, account &#x60;spendCap&#x60; (null &#x3D; no cap) and the &#x60;fundingSource&#x60;. Money values are converted from Meta&#39;s minor units to whole units of &#x60;currency&#x60;. Meta only.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param ad_account_id Meta ad account id (act_&lt;n&gt;).
+  # @param [Hash] opts the optional parameters
+  # @return [GetAdAccountFinance200Response]
+  describe 'get_ad_account_finance test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_ad_analytics
   # Get ad analytics
   # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
@@ -309,6 +322,24 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetAdTrackingTags200Response]
   describe 'get_ad_tracking_tags test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_ads_activity_log
+  # Ad account change / audit log (Meta)
+  # Account-level audit log from Meta&#39;s &#x60;/act_X/activities&#x60;: who changed what and when (creates, edits, status flips, budget changes...) with Meta&#39;s translated event names and the structured before/after in &#x60;extra_data&#x60;. Rows are returned verbatim. Meta has no server-side per-object filter on this edge, so &#x60;objectId&#x60; filters the returned page client-side (combine with paging to walk history for one campaign/ad set/ad). Meta only.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param ad_account_id Meta ad account id (act_&lt;n&gt;).
+  # @param [Hash] opts the optional parameters
+  # @option opts [Date] :since Start of range (YYYY-MM-DD).
+  # @option opts [Date] :_until End of range (YYYY-MM-DD).
+  # @option opts [String] :object_id Client-side filter to one Meta object id (campaign, ad set or ad).
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [GetAdsActivityLog200Response]
+  describe 'get_ads_activity_log test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -471,6 +502,22 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [ListAdCatalogs200Response]
   describe 'list_ad_catalogs test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_ad_studies
+  # A/B tests and lift studies (Meta)
+  # Lists the ad account&#39;s A/B tests and lift studies (Meta&#39;s &#x60;/act_X/ad_studies&#x60;), rows returned verbatim. The default projection covers id, name, type, timing and cells with split percentages; &#x60;fields&#x60; is a raw-passthrough override. Meta only.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param ad_account_id Meta ad account id (act_&lt;n&gt;).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [ListAdStudies200Response]
+  describe 'list_ad_studies test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -754,6 +801,18 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetConversionDestination200Response]
   describe 'update_conversion_destination test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for upload_ad_image
+  # Upload an ad image from base64 (Meta)
+  # Uploads raw image bytes to the Meta ad account&#39;s image library — for callers whose creatives aren&#39;t hosted at a public URL. Returns the image &#x60;hash&#x60; (Meta&#39;s identifier for the asset) and the Meta-hosted &#x60;url&#x60;, which can be used directly as &#x60;imageUrl&#x60; on the create endpoints. Max 30 MB decoded. Meta only.
+  # @param upload_ad_image_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UploadAdImage201Response]
+  describe 'upload_ad_image test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -14,39 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Batch-level user consent. Required by Google for EEA/UK events under the Feb 2026 restrictions. On Meta, any DENIED flag enables Limited Data Use on every event in the batch (data_processing_options [\"LDU\"] with geolocation, country 0 / state 0); GRANTED or absent consent sends events with Meta's default processing. Ignored by LinkedIn. 
-  class SendConversionsRequestConsent < ApiModelBase
-    attr_accessor :ad_user_data
+  class UploadAdImage201Response < ApiModelBase
+    attr_accessor :ad_account_id
 
-    attr_accessor :ad_personalization
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :image
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'ad_user_data' => :'adUserData',
-        :'ad_personalization' => :'adPersonalization'
+        :'ad_account_id' => :'adAccountId',
+        :'image' => :'image'
       }
     end
 
@@ -63,8 +40,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ad_user_data' => :'String',
-        :'ad_personalization' => :'String'
+        :'ad_account_id' => :'String',
+        :'image' => :'UploadAdImage201ResponseImage'
       }
     end
 
@@ -78,24 +55,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendConversionsRequestConsent` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UploadAdImage201Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendConversionsRequestConsent`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UploadAdImage201Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'ad_user_data')
-        self.ad_user_data = attributes[:'ad_user_data']
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
       end
 
-      if attributes.key?(:'ad_personalization')
-        self.ad_personalization = attributes[:'ad_personalization']
+      if attributes.key?(:'image')
+        self.image = attributes[:'image']
       end
     end
 
@@ -111,31 +88,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      ad_user_data_validator = EnumAttributeValidator.new('String', ["GRANTED", "DENIED"])
-      return false unless ad_user_data_validator.valid?(@ad_user_data)
-      ad_personalization_validator = EnumAttributeValidator.new('String', ["GRANTED", "DENIED"])
-      return false unless ad_personalization_validator.valid?(@ad_personalization)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] ad_user_data Object to be assigned
-    def ad_user_data=(ad_user_data)
-      validator = EnumAttributeValidator.new('String', ["GRANTED", "DENIED"])
-      unless validator.valid?(ad_user_data)
-        fail ArgumentError, "invalid value for \"ad_user_data\", must be one of #{validator.allowable_values}."
-      end
-      @ad_user_data = ad_user_data
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] ad_personalization Object to be assigned
-    def ad_personalization=(ad_personalization)
-      validator = EnumAttributeValidator.new('String', ["GRANTED", "DENIED"])
-      unless validator.valid?(ad_personalization)
-        fail ArgumentError, "invalid value for \"ad_personalization\", must be one of #{validator.allowable_values}."
-      end
-      @ad_personalization = ad_personalization
     end
 
     # Checks equality by comparing each attribute.
@@ -143,8 +96,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          ad_user_data == o.ad_user_data &&
-          ad_personalization == o.ad_personalization
+          ad_account_id == o.ad_account_id &&
+          image == o.image
     end
 
     # @see the `==` method
@@ -156,7 +109,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad_user_data, ad_personalization].hash
+      [ad_account_id, image].hash
     end
 
     # Builds the object from hash

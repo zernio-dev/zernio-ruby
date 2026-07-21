@@ -14,39 +14,26 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Batch-level user consent. Required by Google for EEA/UK events under the Feb 2026 restrictions. On Meta, any DENIED flag enables Limited Data Use on every event in the batch (data_processing_options [\"LDU\"] with geolocation, country 0 / state 0); GRANTED or absent consent sends events with Meta's default processing. Ignored by LinkedIn. 
-  class SendConversionsRequestConsent < ApiModelBase
-    attr_accessor :ad_user_data
+  class UploadAdImageRequest < ApiModelBase
+    # Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    attr_accessor :account_id
 
-    attr_accessor :ad_personalization
+    # Meta ad account id (act_<n>).
+    attr_accessor :ad_account_id
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    # Raw base64 image bytes, or a full data URL (the data:image/...;base64, prefix is stripped).
+    attr_accessor :image_base64
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Optional filename shown in Meta's image library. Defaults to ad_image.jpg.
+    attr_accessor :filename
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'ad_user_data' => :'adUserData',
-        :'ad_personalization' => :'adPersonalization'
+        :'account_id' => :'accountId',
+        :'ad_account_id' => :'adAccountId',
+        :'image_base64' => :'imageBase64',
+        :'filename' => :'filename'
       }
     end
 
@@ -63,8 +50,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ad_user_data' => :'String',
-        :'ad_personalization' => :'String'
+        :'account_id' => :'String',
+        :'ad_account_id' => :'String',
+        :'image_base64' => :'String',
+        :'filename' => :'String'
       }
     end
 
@@ -78,24 +67,38 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendConversionsRequestConsent` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UploadAdImageRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendConversionsRequestConsent`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UploadAdImageRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'ad_user_data')
-        self.ad_user_data = attributes[:'ad_user_data']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      else
+        self.account_id = nil
       end
 
-      if attributes.key?(:'ad_personalization')
-        self.ad_personalization = attributes[:'ad_personalization']
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
+      else
+        self.ad_account_id = nil
+      end
+
+      if attributes.key?(:'image_base64')
+        self.image_base64 = attributes[:'image_base64']
+      else
+        self.image_base64 = nil
+      end
+
+      if attributes.key?(:'filename')
+        self.filename = attributes[:'filename']
       end
     end
 
@@ -104,6 +107,18 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
+      if @ad_account_id.nil?
+        invalid_properties.push('invalid value for "ad_account_id", ad_account_id cannot be nil.')
+      end
+
+      if @image_base64.nil?
+        invalid_properties.push('invalid value for "image_base64", image_base64 cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -111,31 +126,40 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      ad_user_data_validator = EnumAttributeValidator.new('String', ["GRANTED", "DENIED"])
-      return false unless ad_user_data_validator.valid?(@ad_user_data)
-      ad_personalization_validator = EnumAttributeValidator.new('String', ["GRANTED", "DENIED"])
-      return false unless ad_personalization_validator.valid?(@ad_personalization)
+      return false if @account_id.nil?
+      return false if @ad_account_id.nil?
+      return false if @image_base64.nil?
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] ad_user_data Object to be assigned
-    def ad_user_data=(ad_user_data)
-      validator = EnumAttributeValidator.new('String', ["GRANTED", "DENIED"])
-      unless validator.valid?(ad_user_data)
-        fail ArgumentError, "invalid value for \"ad_user_data\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] account_id Value to be assigned
+    def account_id=(account_id)
+      if account_id.nil?
+        fail ArgumentError, 'account_id cannot be nil'
       end
-      @ad_user_data = ad_user_data
+
+      @account_id = account_id
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] ad_personalization Object to be assigned
-    def ad_personalization=(ad_personalization)
-      validator = EnumAttributeValidator.new('String', ["GRANTED", "DENIED"])
-      unless validator.valid?(ad_personalization)
-        fail ArgumentError, "invalid value for \"ad_personalization\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] ad_account_id Value to be assigned
+    def ad_account_id=(ad_account_id)
+      if ad_account_id.nil?
+        fail ArgumentError, 'ad_account_id cannot be nil'
       end
-      @ad_personalization = ad_personalization
+
+      @ad_account_id = ad_account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] image_base64 Value to be assigned
+    def image_base64=(image_base64)
+      if image_base64.nil?
+        fail ArgumentError, 'image_base64 cannot be nil'
+      end
+
+      @image_base64 = image_base64
     end
 
     # Checks equality by comparing each attribute.
@@ -143,8 +167,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          ad_user_data == o.ad_user_data &&
-          ad_personalization == o.ad_personalization
+          account_id == o.account_id &&
+          ad_account_id == o.ad_account_id &&
+          image_base64 == o.image_base64 &&
+          filename == o.filename
     end
 
     # @see the `==` method
@@ -156,7 +182,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad_user_data, ad_personalization].hash
+      [account_id, ad_account_id, image_base64, filename].hash
     end
 
     # Builds the object from hash

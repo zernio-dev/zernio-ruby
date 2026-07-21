@@ -99,6 +99,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
 *Zernio::AdCampaignsApi* | [**delete_ad_campaign**](docs/AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign
 *Zernio::AdCampaignsApi* | [**duplicate_ad_campaign**](docs/AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign
+*Zernio::AdCampaignsApi* | [**get_ad_set_details**](docs/AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase (Meta)
 *Zernio::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Zernio::AdCampaignsApi* | [**get_ads_timeline**](docs/AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics
 *Zernio::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
@@ -123,11 +124,13 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**estimate_ad_reach**](docs/AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
 *Zernio::AdsApi* | [**generate_ad_previews**](docs/AdsApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews (Meta)
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
+*Zernio::AdsApi* | [**get_ad_account_finance**](docs/AdsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances (Meta)
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdsApi* | [**get_ad_insights_report**](docs/AdsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run (Meta)
 *Zernio::AdsApi* | [**get_ad_previews**](docs/AdsApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad (Meta)
 *Zernio::AdsApi* | [**get_ad_tracking_tags**](docs/AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
+*Zernio::AdsApi* | [**get_ads_activity_log**](docs/AdsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log (Meta)
 *Zernio::AdsApi* | [**get_campaign_analytics**](docs/AdsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
 *Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination
 *Zernio::AdsApi* | [**get_conversion_metrics**](docs/AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics
@@ -140,6 +143,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ad_catalog_product_sets**](docs/AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog's product sets
 *Zernio::AdsApi* | [**list_ad_catalogs**](docs/AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs
+*Zernio::AdsApi* | [**list_ad_studies**](docs/AdsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies (Meta)
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdsApi* | [**list_ads_business_centers**](docs/AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
 *Zernio::AdsApi* | [**list_conversion_associations**](docs/AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List associated campaigns
@@ -159,6 +163,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**update_ad_status**](docs/AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
 *Zernio::AdsApi* | [**update_ad_tracking_tags**](docs/AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags
 *Zernio::AdsApi* | [**update_conversion_destination**](docs/AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
+*Zernio::AdsApi* | [**upload_ad_image**](docs/AdsApi.md#upload_ad_image) | **POST** /v1/ads/images | Upload an ad image from base64 (Meta)
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Zernio::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
 *Zernio::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
@@ -927,6 +932,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAccountHealth200ResponsePermissionsPostingInner](docs/GetAccountHealth200ResponsePermissionsPostingInner.md)
  - [Zernio::GetAccountHealth200ResponseTokenStatus](docs/GetAccountHealth200ResponseTokenStatus.md)
  - [Zernio::GetAd200Response](docs/GetAd200Response.md)
+ - [Zernio::GetAdAccountFinance200Response](docs/GetAdAccountFinance200Response.md)
+ - [Zernio::GetAdAccountFinance200ResponseFundingSource](docs/GetAdAccountFinance200ResponseFundingSource.md)
  - [Zernio::GetAdAnalytics200Response](docs/GetAdAnalytics200Response.md)
  - [Zernio::GetAdAnalytics200ResponseAd](docs/GetAdAnalytics200ResponseAd.md)
  - [Zernio::GetAdAudience200Response](docs/GetAdAudience200Response.md)
@@ -936,8 +943,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdInsightsReport200Response](docs/GetAdInsightsReport200Response.md)
  - [Zernio::GetAdInsightsReport200ResponsePaging](docs/GetAdInsightsReport200ResponsePaging.md)
  - [Zernio::GetAdPreviews200Response](docs/GetAdPreviews200Response.md)
+ - [Zernio::GetAdSetDetails200Response](docs/GetAdSetDetails200Response.md)
  - [Zernio::GetAdTrackingTags200Response](docs/GetAdTrackingTags200Response.md)
  - [Zernio::GetAdTree200Response](docs/GetAdTree200Response.md)
+ - [Zernio::GetAdsActivityLog200Response](docs/GetAdsActivityLog200Response.md)
  - [Zernio::GetAdsTimeline200Response](docs/GetAdsTimeline200Response.md)
  - [Zernio::GetAdsTimeline200ResponseRowsInner](docs/GetAdsTimeline200ResponseRowsInner.md)
  - [Zernio::GetAllAccountsHealth200Response](docs/GetAllAccountsHealth200Response.md)
@@ -1290,6 +1299,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdCatalogProductSets200ResponseProductSetsInner](docs/ListAdCatalogProductSets200ResponseProductSetsInner.md)
  - [Zernio::ListAdCatalogs200Response](docs/ListAdCatalogs200Response.md)
  - [Zernio::ListAdCatalogs200ResponseCatalogsInner](docs/ListAdCatalogs200ResponseCatalogsInner.md)
+ - [Zernio::ListAdStudies200Response](docs/ListAdStudies200Response.md)
  - [Zernio::ListAds200Response](docs/ListAds200Response.md)
  - [Zernio::ListAdsBusinessCenters200Response](docs/ListAdsBusinessCenters200Response.md)
  - [Zernio::ListApiKeys200Response](docs/ListApiKeys200Response.md)
@@ -1818,6 +1828,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateWorkflowRequest](docs/UpdateWorkflowRequest.md)
  - [Zernio::UpdateYoutubeDefaultPlaylist200Response](docs/UpdateYoutubeDefaultPlaylist200Response.md)
  - [Zernio::UpdateYoutubeDefaultPlaylistRequest](docs/UpdateYoutubeDefaultPlaylistRequest.md)
+ - [Zernio::UploadAdImage201Response](docs/UploadAdImage201Response.md)
+ - [Zernio::UploadAdImage201ResponseImage](docs/UploadAdImage201ResponseImage.md)
+ - [Zernio::UploadAdImageRequest](docs/UploadAdImageRequest.md)
  - [Zernio::UploadMediaDirect200Response](docs/UploadMediaDirect200Response.md)
  - [Zernio::UploadPhoneNumberKycDocument200Response](docs/UploadPhoneNumberKycDocument200Response.md)
  - [Zernio::UploadPhoneNumberPortInDocument200Response](docs/UploadPhoneNumberPortInDocument200Response.md)
