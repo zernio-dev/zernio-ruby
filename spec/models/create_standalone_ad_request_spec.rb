@@ -91,6 +91,22 @@ describe Zernio::CreateStandaloneAdRequest do
     end
   end
 
+  describe 'test attribute "buying_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["AUCTION", "RESERVED"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.buying_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "rf_prediction_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "budget_amount"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

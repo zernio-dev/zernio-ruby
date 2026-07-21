@@ -305,6 +305,83 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Cancel a Reach & Frequency reservation (Meta)
+    # Releases a RESERVATION's locked price and inventory. Unreserved predictions expire on their own.
+    # @param prediction_id [String] 
+    # @param account_id [String] 
+    # @param ad_account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def cancel_rf_reservation(prediction_id, account_id, ad_account_id, opts = {})
+      cancel_rf_reservation_with_http_info(prediction_id, account_id, ad_account_id, opts)
+      nil
+    end
+
+    # Cancel a Reach &amp; Frequency reservation (Meta)
+    # Releases a RESERVATION&#39;s locked price and inventory. Unreserved predictions expire on their own.
+    # @param prediction_id [String] 
+    # @param account_id [String] 
+    # @param ad_account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def cancel_rf_reservation_with_http_info(prediction_id, account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.cancel_rf_reservation ...'
+      end
+      # verify the required parameter 'prediction_id' is set
+      if @api_client.config.client_side_validation && prediction_id.nil?
+        fail ArgumentError, "Missing the required parameter 'prediction_id' when calling AdsApi.cancel_rf_reservation"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.cancel_rf_reservation"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.cancel_rf_reservation"
+      end
+      # resource path
+      local_var_path = '/v1/ads/rf-predictions/{predictionId}'.sub('{' + 'predictionId' + '}', CGI.escape(prediction_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.cancel_rf_reservation",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#cancel_rf_reservation\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Submit an async insights report run (Meta)
     # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a `reportRunId` to poll via GET /v1/ads/insights/reports/{reportRunId}. Meta only. 
     # @param create_ad_insights_report_request [CreateAdInsightsReportRequest] 
@@ -715,6 +792,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#create_messaging_ad\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create a Reach & Frequency prediction (Meta)
+    # Creates an R&F prediction — a QUOTE, nothing is bought and no ad entities are created. Provide a date range plus exactly one of `budgetAmount` (Meta predicts reach) or `reach` (Meta predicts the budget). The response carries the estimate and its allowed bounds (min/max budget and reach). Predictions expire on their own; to buy, reserve one via POST /v1/ads/rf-predictions/{predictionId}/reserve and pass the RESERVED id to POST /v1/ads/create with `buyingType: \"RESERVED\"`.  Reservation campaigns reject automatic placements, so omitted `placements` default to Facebook feed (+ Instagram stream when a linked IG professional account resolves); Instagram placements require that IG account. Meta only.
+    # @param create_rf_prediction_request [CreateRfPredictionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateRfPrediction201Response]
+    def create_rf_prediction(create_rf_prediction_request, opts = {})
+      data, _status_code, _headers = create_rf_prediction_with_http_info(create_rf_prediction_request, opts)
+      data
+    end
+
+    # Create a Reach &amp; Frequency prediction (Meta)
+    # Creates an R&amp;F prediction — a QUOTE, nothing is bought and no ad entities are created. Provide a date range plus exactly one of &#x60;budgetAmount&#x60; (Meta predicts reach) or &#x60;reach&#x60; (Meta predicts the budget). The response carries the estimate and its allowed bounds (min/max budget and reach). Predictions expire on their own; to buy, reserve one via POST /v1/ads/rf-predictions/{predictionId}/reserve and pass the RESERVED id to POST /v1/ads/create with &#x60;buyingType: \&quot;RESERVED\&quot;&#x60;.  Reservation campaigns reject automatic placements, so omitted &#x60;placements&#x60; default to Facebook feed (+ Instagram stream when a linked IG professional account resolves); Instagram placements require that IG account. Meta only.
+    # @param create_rf_prediction_request [CreateRfPredictionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateRfPrediction201Response, Integer, Hash)>] CreateRfPrediction201Response data, response status code and response headers
+    def create_rf_prediction_with_http_info(create_rf_prediction_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.create_rf_prediction ...'
+      end
+      # verify the required parameter 'create_rf_prediction_request' is set
+      if @api_client.config.client_side_validation && create_rf_prediction_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_rf_prediction_request' when calling AdsApi.create_rf_prediction"
+      end
+      # resource path
+      local_var_path = '/v1/ads/rf-predictions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_rf_prediction_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateRfPrediction201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.create_rf_prediction",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#create_rf_prediction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2407,6 +2552,81 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Read a Reach & Frequency prediction (Meta)
+    # @param prediction_id [String] 
+    # @param account_id [String] 
+    # @param ad_account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateRfPrediction201Response]
+    def get_rf_prediction(prediction_id, account_id, ad_account_id, opts = {})
+      data, _status_code, _headers = get_rf_prediction_with_http_info(prediction_id, account_id, ad_account_id, opts)
+      data
+    end
+
+    # Read a Reach &amp; Frequency prediction (Meta)
+    # @param prediction_id [String] 
+    # @param account_id [String] 
+    # @param ad_account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateRfPrediction201Response, Integer, Hash)>] CreateRfPrediction201Response data, response status code and response headers
+    def get_rf_prediction_with_http_info(prediction_id, account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_rf_prediction ...'
+      end
+      # verify the required parameter 'prediction_id' is set
+      if @api_client.config.client_side_validation && prediction_id.nil?
+        fail ArgumentError, "Missing the required parameter 'prediction_id' when calling AdsApi.get_rf_prediction"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.get_rf_prediction"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.get_rf_prediction"
+      end
+      # resource path
+      local_var_path = '/v1/ads/rf-predictions/{predictionId}'.sub('{' + 'predictionId' + '}', CGI.escape(prediction_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateRfPrediction201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_rf_prediction",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_rf_prediction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List ad accounts
     # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok's `/advertiser/info/` endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time `advertiser_ids` list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 
     # @param account_id [String] Social account ID
@@ -3560,6 +3780,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#remove_conversion_associations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Reserve a Reach & Frequency prediction (Meta)
+    # Locks the quoted price + inventory until the returned `expiresAt` and mints a NEW prediction id — pass that RESERVED id (not the original) as `rfPredictionId` on POST /v1/ads/create. Release an unused reservation via DELETE. Meta only.
+    # @param prediction_id [String] 
+    # @param reserve_rf_prediction_request [ReserveRfPredictionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ReserveRfPrediction201Response]
+    def reserve_rf_prediction(prediction_id, reserve_rf_prediction_request, opts = {})
+      data, _status_code, _headers = reserve_rf_prediction_with_http_info(prediction_id, reserve_rf_prediction_request, opts)
+      data
+    end
+
+    # Reserve a Reach &amp; Frequency prediction (Meta)
+    # Locks the quoted price + inventory until the returned &#x60;expiresAt&#x60; and mints a NEW prediction id — pass that RESERVED id (not the original) as &#x60;rfPredictionId&#x60; on POST /v1/ads/create. Release an unused reservation via DELETE. Meta only.
+    # @param prediction_id [String] 
+    # @param reserve_rf_prediction_request [ReserveRfPredictionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ReserveRfPrediction201Response, Integer, Hash)>] ReserveRfPrediction201Response data, response status code and response headers
+    def reserve_rf_prediction_with_http_info(prediction_id, reserve_rf_prediction_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.reserve_rf_prediction ...'
+      end
+      # verify the required parameter 'prediction_id' is set
+      if @api_client.config.client_side_validation && prediction_id.nil?
+        fail ArgumentError, "Missing the required parameter 'prediction_id' when calling AdsApi.reserve_rf_prediction"
+      end
+      # verify the required parameter 'reserve_rf_prediction_request' is set
+      if @api_client.config.client_side_validation && reserve_rf_prediction_request.nil?
+        fail ArgumentError, "Missing the required parameter 'reserve_rf_prediction_request' when calling AdsApi.reserve_rf_prediction"
+      end
+      # resource path
+      local_var_path = '/v1/ads/rf-predictions/{predictionId}/reserve'.sub('{' + 'predictionId' + '}', CGI.escape(prediction_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(reserve_rf_prediction_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReserveRfPrediction201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.reserve_rf_prediction",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#reserve_rf_prediction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -41,6 +41,12 @@ module Zernio
     # Meta only. Explicit ad-set `billing_event`. Defaults to `IMPRESSIONS`. Forwarded verbatim to Meta, which validates compatibility with the optimization goal.
     attr_accessor :billing_event
 
+    # Meta only. RESERVED = Reach & Frequency: requires `rfPredictionId` (a RESERVED prediction from /v1/ads/rf-predictions + /reserve). Budget, schedule and pricing come from the reservation, so budgetAmount/budgetType are not required and bid fields are ignored. Only the plain single-ad shape (no creatives[], adSetId, existingCampaignId or dynamicCreative).
+    attr_accessor :buying_type
+
+    # Meta only. The RESERVED prediction id the R&F ad set runs on (reserving mints a new id — pass that one). Requires buyingType RESERVED.
+    attr_accessor :rf_prediction_id
+
     # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_amount
 
@@ -251,6 +257,8 @@ module Zernio
         :'goal' => :'goal',
         :'optimization_goal' => :'optimizationGoal',
         :'billing_event' => :'billingEvent',
+        :'buying_type' => :'buyingType',
+        :'rf_prediction_id' => :'rfPredictionId',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
         :'status' => :'status',
@@ -339,6 +347,8 @@ module Zernio
         :'goal' => :'String',
         :'optimization_goal' => :'String',
         :'billing_event' => :'String',
+        :'buying_type' => :'String',
+        :'rf_prediction_id' => :'String',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
         :'status' => :'String',
@@ -470,6 +480,14 @@ module Zernio
 
       if attributes.key?(:'billing_event')
         self.billing_event = attributes[:'billing_event']
+      end
+
+      if attributes.key?(:'buying_type')
+        self.buying_type = attributes[:'buying_type']
+      end
+
+      if attributes.key?(:'rf_prediction_id')
+        self.rf_prediction_id = attributes[:'rf_prediction_id']
       end
 
       if attributes.key?(:'budget_amount')
@@ -866,6 +884,8 @@ module Zernio
       return false if !@ad_name.nil? && @ad_name.to_s.length > 255
       goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "job_applicants"])
       return false unless goal_validator.valid?(@goal)
+      buying_type_validator = EnumAttributeValidator.new('String', ["AUCTION", "RESERVED"])
+      return false unless buying_type_validator.valid?(@buying_type)
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
       status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
@@ -985,6 +1005,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"goal\", must be one of #{validator.allowable_values}."
       end
       @goal = goal
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] buying_type Object to be assigned
+    def buying_type=(buying_type)
+      validator = EnumAttributeValidator.new('String', ["AUCTION", "RESERVED"])
+      unless validator.valid?(buying_type)
+        fail ArgumentError, "invalid value for \"buying_type\", must be one of #{validator.allowable_values}."
+      end
+      @buying_type = buying_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -1248,6 +1278,8 @@ module Zernio
           goal == o.goal &&
           optimization_goal == o.optimization_goal &&
           billing_event == o.billing_event &&
+          buying_type == o.buying_type &&
+          rf_prediction_id == o.rf_prediction_id &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
           status == o.status &&
@@ -1321,7 +1353,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

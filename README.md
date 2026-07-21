@@ -111,12 +111,14 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**adjust_conversions**](docs/AdsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust uploaded conversions
 *Zernio::AdsApi* | [**archive_lead_form**](docs/AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
+*Zernio::AdsApi* | [**cancel_rf_reservation**](docs/AdsApi.md#cancel_rf_reservation) | **DELETE** /v1/ads/rf-predictions/{predictionId} | Cancel a Reach & Frequency reservation (Meta)
 *Zernio::AdsApi* | [**create_ad_insights_report**](docs/AdsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run (Meta)
 *Zernio::AdsApi* | [**create_call_ad**](docs/AdsApi.md#create_call_ad) | **POST** /v1/ads/call | Create Click-to-Call ad
 *Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination
 *Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad (deprecated)
 *Zernio::AdsApi* | [**create_lead_form**](docs/AdsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form
 *Zernio::AdsApi* | [**create_messaging_ad**](docs/AdsApi.md#create_messaging_ad) | **POST** /v1/ads/messaging | Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)
+*Zernio::AdsApi* | [**create_rf_prediction**](docs/AdsApi.md#create_rf_prediction) | **POST** /v1/ads/rf-predictions | Create a Reach & Frequency prediction (Meta)
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Zernio::AdsApi* | [**create_test_lead**](docs/AdsApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a test lead
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
@@ -140,6 +142,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**get_lead_form**](docs/AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a lead form
 *Zernio::AdsApi* | [**get_linked_in_bid_pricing**](docs/AdsApi.md#get_linked_in_bid_pricing) | **POST** /v1/ads/targeting/bid-pricing | Suggested bid and budget bounds (LinkedIn)
 *Zernio::AdsApi* | [**get_linked_in_supply_forecast**](docs/AdsApi.md#get_linked_in_supply_forecast) | **POST** /v1/ads/targeting/supply-forecast | Impressions, clicks and spend forecast (LinkedIn)
+*Zernio::AdsApi* | [**get_rf_prediction**](docs/AdsApi.md#get_rf_prediction) | **GET** /v1/ads/rf-predictions/{predictionId} | Read a Reach & Frequency prediction (Meta)
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ad_catalog_product_sets**](docs/AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog's product sets
 *Zernio::AdsApi* | [**list_ad_catalogs**](docs/AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs
@@ -154,6 +157,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**list_whats_app_conversions**](docs/AdsApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events
 *Zernio::AdsApi* | [**query_ad_insights**](docs/AdsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query (Meta)
 *Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns
+*Zernio::AdsApi* | [**reserve_rf_prediction**](docs/AdsApi.md#reserve_rf_prediction) | **POST** /v1/ads/rf-predictions/{predictionId}/reserve | Reserve a Reach & Frequency prediction (Meta)
 *Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
 *Zernio::AdsApi* | [**search_ad_targeting**](docs/AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options
 *Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events
@@ -770,6 +774,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateProfileRequest](docs/CreateProfileRequest.md)
  - [Zernio::CreateQueueSlot201Response](docs/CreateQueueSlot201Response.md)
  - [Zernio::CreateQueueSlotRequest](docs/CreateQueueSlotRequest.md)
+ - [Zernio::CreateRfPrediction201Response](docs/CreateRfPrediction201Response.md)
+ - [Zernio::CreateRfPredictionRequest](docs/CreateRfPredictionRequest.md)
  - [Zernio::CreateSequence200Response](docs/CreateSequence200Response.md)
  - [Zernio::CreateSequence200ResponseSequence](docs/CreateSequence200ResponseSequence.md)
  - [Zernio::CreateSequenceRequest](docs/CreateSequenceRequest.md)
@@ -1521,6 +1527,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplyToMention200Response](docs/ReplyToMention200Response.md)
  - [Zernio::ReplyToMentionRequest](docs/ReplyToMentionRequest.md)
  - [Zernio::ResendSmsRegistrationOtp200Response](docs/ResendSmsRegistrationOtp200Response.md)
+ - [Zernio::ReserveRfPrediction201Response](docs/ReserveRfPrediction201Response.md)
+ - [Zernio::ReserveRfPredictionRequest](docs/ReserveRfPredictionRequest.md)
  - [Zernio::RestoreWorkflowVersion200Response](docs/RestoreWorkflowVersion200Response.md)
  - [Zernio::RestoreWorkflowVersion200ResponseWorkflow](docs/RestoreWorkflowVersion200ResponseWorkflow.md)
  - [Zernio::RetweetPost200Response](docs/RetweetPost200Response.md)
@@ -1532,6 +1540,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ReviewWebhookReview](docs/ReviewWebhookReview.md)
  - [Zernio::ReviewWebhookReviewReply](docs/ReviewWebhookReviewReply.md)
  - [Zernio::ReviewWebhookReviewReviewer](docs/ReviewWebhookReviewReviewer.md)
+ - [Zernio::RfPrediction](docs/RfPrediction.md)
  - [Zernio::SavedTargetingAudience](docs/SavedTargetingAudience.md)
  - [Zernio::ScheduleBroadcast200Response](docs/ScheduleBroadcast200Response.md)
  - [Zernio::ScheduleBroadcast200ResponseBroadcast](docs/ScheduleBroadcast200ResponseBroadcast.md)

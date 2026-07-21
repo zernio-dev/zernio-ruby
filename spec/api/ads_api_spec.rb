@@ -83,6 +83,20 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for cancel_rf_reservation
+  # Cancel a Reach &amp; Frequency reservation (Meta)
+  # Releases a RESERVATION&#39;s locked price and inventory. Unreserved predictions expire on their own.
+  # @param prediction_id 
+  # @param account_id 
+  # @param ad_account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'cancel_rf_reservation test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_ad_insights_report
   # Submit an async insights report run (Meta)
   # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a &#x60;reportRunId&#x60; to poll via GET /v1/ads/insights/reports/{reportRunId}. Meta only. 
@@ -151,6 +165,18 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'create_messaging_ad test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_rf_prediction
+  # Create a Reach &amp; Frequency prediction (Meta)
+  # Creates an R&amp;F prediction — a QUOTE, nothing is bought and no ad entities are created. Provide a date range plus exactly one of &#x60;budgetAmount&#x60; (Meta predicts reach) or &#x60;reach&#x60; (Meta predicts the budget). The response carries the estimate and its allowed bounds (min/max budget and reach). Predictions expire on their own; to buy, reserve one via POST /v1/ads/rf-predictions/{predictionId}/reserve and pass the RESERVED id to POST /v1/ads/create with &#x60;buyingType: \&quot;RESERVED\&quot;&#x60;.  Reservation campaigns reject automatic placements, so omitted &#x60;placements&#x60; default to Facebook feed (+ Instagram stream when a linked IG professional account resolves); Instagram placements require that IG account. Meta only.
+  # @param create_rf_prediction_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateRfPrediction201Response]
+  describe 'create_rf_prediction test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -467,6 +493,19 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for get_rf_prediction
+  # Read a Reach &amp; Frequency prediction (Meta)
+  # @param prediction_id 
+  # @param account_id 
+  # @param ad_account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateRfPrediction201Response]
+  describe 'get_rf_prediction test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_accounts
   # List ad accounts
   # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok&#39;s &#x60;/advertiser/info/&#x60; endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time &#x60;advertiser_ids&#x60; list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry. 
@@ -682,6 +721,19 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [RemoveConversionAssociations200Response]
   describe 'remove_conversion_associations test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for reserve_rf_prediction
+  # Reserve a Reach &amp; Frequency prediction (Meta)
+  # Locks the quoted price + inventory until the returned &#x60;expiresAt&#x60; and mints a NEW prediction id — pass that RESERVED id (not the original) as &#x60;rfPredictionId&#x60; on POST /v1/ads/create. Release an unused reservation via DELETE. Meta only.
+  # @param prediction_id 
+  # @param reserve_rf_prediction_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ReserveRfPrediction201Response]
+  describe 'reserve_rf_prediction test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

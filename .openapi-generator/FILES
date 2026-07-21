@@ -231,6 +231,8 @@ docs/CreatePostRequestPlatformsInnerPlatformSpecificData.md
 docs/CreateProfileRequest.md
 docs/CreateQueueSlot201Response.md
 docs/CreateQueueSlotRequest.md
+docs/CreateRfPrediction201Response.md
+docs/CreateRfPredictionRequest.md
 docs/CreateSequence200Response.md
 docs/CreateSequence200ResponseSequence.md
 docs/CreateSequenceRequest.md
@@ -1005,6 +1007,8 @@ docs/ReplyToInboxReviewRequest.md
 docs/ReplyToMention200Response.md
 docs/ReplyToMentionRequest.md
 docs/ResendSmsRegistrationOtp200Response.md
+docs/ReserveRfPrediction201Response.md
+docs/ReserveRfPredictionRequest.md
 docs/RestoreWorkflowVersion200Response.md
 docs/RestoreWorkflowVersion200ResponseWorkflow.md
 docs/RetweetPost200Response.md
@@ -1017,6 +1021,7 @@ docs/ReviewWebhookReview.md
 docs/ReviewWebhookReviewReply.md
 docs/ReviewWebhookReviewReviewer.md
 docs/ReviewsApi.md
+docs/RfPrediction.md
 docs/SMSApi.md
 docs/SavedTargetingAudience.md
 docs/ScheduleBroadcast200Response.md
@@ -1763,6 +1768,8 @@ lib/zernio-sdk/models/create_post_request_platforms_inner_platform_specific_data
 lib/zernio-sdk/models/create_profile_request.rb
 lib/zernio-sdk/models/create_queue_slot201_response.rb
 lib/zernio-sdk/models/create_queue_slot_request.rb
+lib/zernio-sdk/models/create_rf_prediction201_response.rb
+lib/zernio-sdk/models/create_rf_prediction_request.rb
 lib/zernio-sdk/models/create_sequence200_response.rb
 lib/zernio-sdk/models/create_sequence200_response_sequence.rb
 lib/zernio-sdk/models/create_sequence_request.rb
@@ -2514,6 +2521,8 @@ lib/zernio-sdk/models/reply_to_inbox_review_request.rb
 lib/zernio-sdk/models/reply_to_mention200_response.rb
 lib/zernio-sdk/models/reply_to_mention_request.rb
 lib/zernio-sdk/models/resend_sms_registration_otp200_response.rb
+lib/zernio-sdk/models/reserve_rf_prediction201_response.rb
+lib/zernio-sdk/models/reserve_rf_prediction_request.rb
 lib/zernio-sdk/models/restore_workflow_version200_response.rb
 lib/zernio-sdk/models/restore_workflow_version200_response_workflow.rb
 lib/zernio-sdk/models/retweet_post200_response.rb
@@ -2525,6 +2534,7 @@ lib/zernio-sdk/models/review_phone_number_kyc_packet_request.rb
 lib/zernio-sdk/models/review_webhook_review.rb
 lib/zernio-sdk/models/review_webhook_review_reply.rb
 lib/zernio-sdk/models/review_webhook_review_reviewer.rb
+lib/zernio-sdk/models/rf_prediction.rb
 lib/zernio-sdk/models/saved_targeting_audience.rb
 lib/zernio-sdk/models/schedule_broadcast200_response.rb
 lib/zernio-sdk/models/schedule_broadcast200_response_broadcast.rb
@@ -3248,6 +3258,8 @@ spec/models/create_post_request_spec.rb
 spec/models/create_profile_request_spec.rb
 spec/models/create_queue_slot201_response_spec.rb
 spec/models/create_queue_slot_request_spec.rb
+spec/models/create_rf_prediction201_response_spec.rb
+spec/models/create_rf_prediction_request_spec.rb
 spec/models/create_sequence200_response_sequence_spec.rb
 spec/models/create_sequence200_response_spec.rb
 spec/models/create_sequence_request_spec.rb
@@ -3999,6 +4011,8 @@ spec/models/reply_to_inbox_review_request_spec.rb
 spec/models/reply_to_mention200_response_spec.rb
 spec/models/reply_to_mention_request_spec.rb
 spec/models/resend_sms_registration_otp200_response_spec.rb
+spec/models/reserve_rf_prediction201_response_spec.rb
+spec/models/reserve_rf_prediction_request_spec.rb
 spec/models/restore_workflow_version200_response_spec.rb
 spec/models/restore_workflow_version200_response_workflow_spec.rb
 spec/models/retweet_post200_response_spec.rb
@@ -4010,6 +4024,7 @@ spec/models/review_phone_number_kyc_packet_request_spec.rb
 spec/models/review_webhook_review_reply_spec.rb
 spec/models/review_webhook_review_reviewer_spec.rb
 spec/models/review_webhook_review_spec.rb
+spec/models/rf_prediction_spec.rb
 spec/models/saved_targeting_audience_spec.rb
 spec/models/schedule_broadcast200_response_broadcast_spec.rb
 spec/models/schedule_broadcast200_response_spec.rb
