@@ -290,7 +290,7 @@ module Zernio
     end
 
     # Port numbers in
-    # Submit a port-in for one or more existing numbers from another carrier. Creates the carrier order(s), attaches the end-user (current account) info plus the LOA and invoice documents, and submits to the losing carrier. The transfer PIN is forwarded to the carrier and never stored. Ported numbers arrive voice-ready (and SMS-ready where the order supports messaging).  Run the portability check (POST /v1/phone-numbers/port-in/check) and upload the two documents (POST /v1/phone-numbers/port-in/documents) first. The carrier may split the numbers into several orders (by country, number type, losing carrier); `orders` carries per-order results, and a partial failure still returns 201 with the failed orders' `error` set (they stay as cancellable drafts). 
+    # Submit a port-in for one or more existing numbers from another carrier. Creates the carrier order(s), attaches the end-user (current account) info plus the LOA and invoice documents, and submits to the losing carrier. The transfer PIN is forwarded to the carrier and never stored. Ported numbers arrive voice-ready (and SMS-ready where the order supports messaging).  Run the portability check (POST /v1/phone-numbers/port-in/check) and upload the two documents (POST /v1/phone-numbers/port-in/documents) first — uploaded documents must be attached to an order within 30 minutes or the carrier deletes them, so upload right before this call. The carrier may split the numbers into several orders (by country, number type, losing carrier); `orders` carries per-order results, and a partial failure still returns 201 with the failed orders' `error` set (they stay as cancellable drafts).  Non-US/CA numbers additionally need the country-specific values from GET /v1/phone-numbers/port-in/requirements, passed via `requirements`, and must be submitted one country per request. When required information is still missing after submission, the order is kept as a resumable draft whose `error` / `declineReason` names the gaps. 
     # @param create_phone_number_port_in_request [CreatePhoneNumberPortInRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreatePhoneNumberPortIn201Response]
@@ -300,7 +300,7 @@ module Zernio
     end
 
     # Port numbers in
-    # Submit a port-in for one or more existing numbers from another carrier. Creates the carrier order(s), attaches the end-user (current account) info plus the LOA and invoice documents, and submits to the losing carrier. The transfer PIN is forwarded to the carrier and never stored. Ported numbers arrive voice-ready (and SMS-ready where the order supports messaging).  Run the portability check (POST /v1/phone-numbers/port-in/check) and upload the two documents (POST /v1/phone-numbers/port-in/documents) first. The carrier may split the numbers into several orders (by country, number type, losing carrier); &#x60;orders&#x60; carries per-order results, and a partial failure still returns 201 with the failed orders&#39; &#x60;error&#x60; set (they stay as cancellable drafts). 
+    # Submit a port-in for one or more existing numbers from another carrier. Creates the carrier order(s), attaches the end-user (current account) info plus the LOA and invoice documents, and submits to the losing carrier. The transfer PIN is forwarded to the carrier and never stored. Ported numbers arrive voice-ready (and SMS-ready where the order supports messaging).  Run the portability check (POST /v1/phone-numbers/port-in/check) and upload the two documents (POST /v1/phone-numbers/port-in/documents) first — uploaded documents must be attached to an order within 30 minutes or the carrier deletes them, so upload right before this call. The carrier may split the numbers into several orders (by country, number type, losing carrier); &#x60;orders&#x60; carries per-order results, and a partial failure still returns 201 with the failed orders&#39; &#x60;error&#x60; set (they stay as cancellable drafts).  Non-US/CA numbers additionally need the country-specific values from GET /v1/phone-numbers/port-in/requirements, passed via &#x60;requirements&#x60;, and must be submitted one country per request. When required information is still missing after submission, the order is kept as a resumable draft whose &#x60;error&#x60; / &#x60;declineReason&#x60; names the gaps. 
     # @param create_phone_number_port_in_request [CreatePhoneNumberPortInRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreatePhoneNumberPortIn201Response, Integer, Hash)>] CreatePhoneNumberPortIn201Response data, response status code and response headers
@@ -487,6 +487,148 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PhoneNumbersApi#get_phone_number_kyc_form\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # A port-in order's pending requirements
+    # The live requirements on an EXISTING porting order: which are filled, which are still pending, and which bounced on review (`requirement-info-exception`). Use it to fix and resubmit a rejected international port. Same field shape as the country-level requirements endpoint, plus per-requirement status. 
+    # @param id [String] Porting order ID (from the port-in list).
+    # @param [Hash] opts the optional parameters
+    # @return [GetPhoneNumberPortInOrderRequirements200Response]
+    def get_phone_number_port_in_order_requirements(id, opts = {})
+      data, _status_code, _headers = get_phone_number_port_in_order_requirements_with_http_info(id, opts)
+      data
+    end
+
+    # A port-in order&#39;s pending requirements
+    # The live requirements on an EXISTING porting order: which are filled, which are still pending, and which bounced on review (&#x60;requirement-info-exception&#x60;). Use it to fix and resubmit a rejected international port. Same field shape as the country-level requirements endpoint, plus per-requirement status. 
+    # @param id [String] Porting order ID (from the port-in list).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetPhoneNumberPortInOrderRequirements200Response, Integer, Hash)>] GetPhoneNumberPortInOrderRequirements200Response data, response status code and response headers
+    def get_phone_number_port_in_order_requirements_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.get_phone_number_port_in_order_requirements ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling PhoneNumbersApi.get_phone_number_port_in_order_requirements"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/port-in/{id}/requirements'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetPhoneNumberPortInOrderRequirements200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.get_phone_number_port_in_order_requirements",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#get_phone_number_port_in_order_requirements\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Country porting requirements
+    # The country-specific information a port-in needs BEYOND the LOA, invoice, and account/address details — e.g. an ID copy, proof of address, a tax id, or a porting code. Call it after the portability check (which returns each number's `countryCode` and `phoneNumberType`), render the fields, and pass the collected values as the create request's `requirements`. US/CA return an empty list. 
+    # @param country [String] ISO country of the numbers being ported (a supported port-in country).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :number_type The portability check&#39;s phoneNumberType — requirements differ by type. (default to 'local')
+    # @return [GetPhoneNumberPortInRequirements200Response]
+    def get_phone_number_port_in_requirements(country, opts = {})
+      data, _status_code, _headers = get_phone_number_port_in_requirements_with_http_info(country, opts)
+      data
+    end
+
+    # Country porting requirements
+    # The country-specific information a port-in needs BEYOND the LOA, invoice, and account/address details — e.g. an ID copy, proof of address, a tax id, or a porting code. Call it after the portability check (which returns each number&#39;s &#x60;countryCode&#x60; and &#x60;phoneNumberType&#x60;), render the fields, and pass the collected values as the create request&#39;s &#x60;requirements&#x60;. US/CA return an empty list. 
+    # @param country [String] ISO country of the numbers being ported (a supported port-in country).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :number_type The portability check&#39;s phoneNumberType — requirements differ by type. (default to 'local')
+    # @return [Array<(GetPhoneNumberPortInRequirements200Response, Integer, Hash)>] GetPhoneNumberPortInRequirements200Response data, response status code and response headers
+    def get_phone_number_port_in_requirements_with_http_info(country, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.get_phone_number_port_in_requirements ...'
+      end
+      # verify the required parameter 'country' is set
+      if @api_client.config.client_side_validation && country.nil?
+        fail ArgumentError, "Missing the required parameter 'country' when calling PhoneNumbersApi.get_phone_number_port_in_requirements"
+      end
+      if @api_client.config.client_side_validation && country.to_s.length > 2
+        fail ArgumentError, 'invalid value for "country" when calling PhoneNumbersApi.get_phone_number_port_in_requirements, the character length must be smaller than or equal to 2.'
+      end
+
+      if @api_client.config.client_side_validation && country.to_s.length < 2
+        fail ArgumentError, 'invalid value for "country" when calling PhoneNumbersApi.get_phone_number_port_in_requirements, the character length must be greater than or equal to 2.'
+      end
+
+      allowable_values = ["local", "mobile", "national", "toll_free"]
+      if @api_client.config.client_side_validation && opts[:'number_type'] && !allowable_values.include?(opts[:'number_type'])
+        fail ArgumentError, "invalid value for \"number_type\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/port-in/requirements'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'country'] = country
+      query_params[:'numberType'] = opts[:'number_type'] if !opts[:'number_type'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetPhoneNumberPortInRequirements200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.get_phone_number_port_in_requirements",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#get_phone_number_port_in_requirements\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1234,10 +1376,10 @@ module Zernio
     end
 
     # Upload a porting document
-    # Upload ONE porting document (the signed LOA or a recent carrier invoice) and get back its `documentId`, which the port-in create request takes as `loaDocumentId` / `invoiceDocumentId`. PDF, JPEG, or PNG, 10MB max. 
+    # Upload ONE porting document and get back its `documentId`. For the signed LOA / carrier invoice the id goes to `loaDocumentId` / `invoiceDocumentId`; for a country-specific document requirement (international ports) it becomes that requirement's `fieldValue`. Requirement documents are normalized to PDF automatically (regulators reject raw images). PDF, JPEG, or PNG, 10MB max. Uploads must be attached to an order within 30 minutes or the carrier deletes them. 
     # @param file [File] The document (PDF/JPEG/PNG, 10MB max).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :kind Informational; used for the stored filename.
+    # @option opts [String] :kind &#39;loa&#39;, &#39;invoice&#39;, or any short slug for requirement documents. Informational; used for the stored filename.
     # @return [UploadPhoneNumberPortInDocument200Response]
     def upload_phone_number_port_in_document(file, opts = {})
       data, _status_code, _headers = upload_phone_number_port_in_document_with_http_info(file, opts)
@@ -1245,10 +1387,10 @@ module Zernio
     end
 
     # Upload a porting document
-    # Upload ONE porting document (the signed LOA or a recent carrier invoice) and get back its &#x60;documentId&#x60;, which the port-in create request takes as &#x60;loaDocumentId&#x60; / &#x60;invoiceDocumentId&#x60;. PDF, JPEG, or PNG, 10MB max. 
+    # Upload ONE porting document and get back its &#x60;documentId&#x60;. For the signed LOA / carrier invoice the id goes to &#x60;loaDocumentId&#x60; / &#x60;invoiceDocumentId&#x60;; for a country-specific document requirement (international ports) it becomes that requirement&#39;s &#x60;fieldValue&#x60;. Requirement documents are normalized to PDF automatically (regulators reject raw images). PDF, JPEG, or PNG, 10MB max. Uploads must be attached to an order within 30 minutes or the carrier deletes them. 
     # @param file [File] The document (PDF/JPEG/PNG, 10MB max).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :kind Informational; used for the stored filename.
+    # @option opts [String] :kind &#39;loa&#39;, &#39;invoice&#39;, or any short slug for requirement documents. Informational; used for the stored filename.
     # @return [Array<(UploadPhoneNumberPortInDocument200Response, Integer, Hash)>] UploadPhoneNumberPortInDocument200Response data, response status code and response headers
     def upload_phone_number_port_in_document_with_http_info(file, opts = {})
       if @api_client.config.debugging
@@ -1257,10 +1399,6 @@ module Zernio
       # verify the required parameter 'file' is set
       if @api_client.config.client_side_validation && file.nil?
         fail ArgumentError, "Missing the required parameter 'file' when calling PhoneNumbersApi.upload_phone_number_port_in_document"
-      end
-      allowable_values = ["loa", "invoice"]
-      if @api_client.config.client_side_validation && opts[:'kind'] && !allowable_values.include?(opts[:'kind'])
-        fail ArgumentError, "invalid value for \"kind\", must be one of #{allowable_values}"
       end
       # resource path
       local_var_path = '/v1/phone-numbers/port-in/documents'

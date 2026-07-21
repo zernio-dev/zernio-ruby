@@ -83,7 +83,7 @@ describe 'PhoneNumbersApi' do
 
   # unit tests for create_phone_number_port_in
   # Port numbers in
-  # Submit a port-in for one or more existing numbers from another carrier. Creates the carrier order(s), attaches the end-user (current account) info plus the LOA and invoice documents, and submits to the losing carrier. The transfer PIN is forwarded to the carrier and never stored. Ported numbers arrive voice-ready (and SMS-ready where the order supports messaging).  Run the portability check (POST /v1/phone-numbers/port-in/check) and upload the two documents (POST /v1/phone-numbers/port-in/documents) first. The carrier may split the numbers into several orders (by country, number type, losing carrier); &#x60;orders&#x60; carries per-order results, and a partial failure still returns 201 with the failed orders&#39; &#x60;error&#x60; set (they stay as cancellable drafts). 
+  # Submit a port-in for one or more existing numbers from another carrier. Creates the carrier order(s), attaches the end-user (current account) info plus the LOA and invoice documents, and submits to the losing carrier. The transfer PIN is forwarded to the carrier and never stored. Ported numbers arrive voice-ready (and SMS-ready where the order supports messaging).  Run the portability check (POST /v1/phone-numbers/port-in/check) and upload the two documents (POST /v1/phone-numbers/port-in/documents) first — uploaded documents must be attached to an order within 30 minutes or the carrier deletes them, so upload right before this call. The carrier may split the numbers into several orders (by country, number type, losing carrier); &#x60;orders&#x60; carries per-order results, and a partial failure still returns 201 with the failed orders&#39; &#x60;error&#x60; set (they stay as cancellable drafts).  Non-US/CA numbers additionally need the country-specific values from GET /v1/phone-numbers/port-in/requirements, passed via &#x60;requirements&#x60;, and must be submitted one country per request. When required information is still missing after submission, the order is kept as a resumable draft whose &#x60;error&#x60; / &#x60;declineReason&#x60; names the gaps. 
   # @param create_phone_number_port_in_request 
   # @param [Hash] opts the optional parameters
   # @return [CreatePhoneNumberPortIn201Response]
@@ -113,6 +113,31 @@ describe 'PhoneNumbersApi' do
   # @option opts [String] :number_type Requirements and reuse eligibility are per (country, type). Omitted &#x3D; the country&#39;s default type. Pass the same value on the POST.
   # @return [GetPhoneNumberKycForm200Response]
   describe 'get_phone_number_kyc_form test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_phone_number_port_in_order_requirements
+  # A port-in order&#39;s pending requirements
+  # The live requirements on an EXISTING porting order: which are filled, which are still pending, and which bounced on review (&#x60;requirement-info-exception&#x60;). Use it to fix and resubmit a rejected international port. Same field shape as the country-level requirements endpoint, plus per-requirement status. 
+  # @param id Porting order ID (from the port-in list).
+  # @param [Hash] opts the optional parameters
+  # @return [GetPhoneNumberPortInOrderRequirements200Response]
+  describe 'get_phone_number_port_in_order_requirements test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_phone_number_port_in_requirements
+  # Country porting requirements
+  # The country-specific information a port-in needs BEYOND the LOA, invoice, and account/address details — e.g. an ID copy, proof of address, a tax id, or a porting code. Call it after the portability check (which returns each number&#39;s &#x60;countryCode&#x60; and &#x60;phoneNumberType&#x60;), render the fields, and pass the collected values as the create request&#39;s &#x60;requirements&#x60;. US/CA return an empty list. 
+  # @param country ISO country of the numbers being ported (a supported port-in country).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :number_type The portability check&#39;s phoneNumberType — requirements differ by type.
+  # @return [GetPhoneNumberPortInRequirements200Response]
+  describe 'get_phone_number_port_in_requirements test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -259,10 +284,10 @@ describe 'PhoneNumbersApi' do
 
   # unit tests for upload_phone_number_port_in_document
   # Upload a porting document
-  # Upload ONE porting document (the signed LOA or a recent carrier invoice) and get back its &#x60;documentId&#x60;, which the port-in create request takes as &#x60;loaDocumentId&#x60; / &#x60;invoiceDocumentId&#x60;. PDF, JPEG, or PNG, 10MB max. 
+  # Upload ONE porting document and get back its &#x60;documentId&#x60;. For the signed LOA / carrier invoice the id goes to &#x60;loaDocumentId&#x60; / &#x60;invoiceDocumentId&#x60;; for a country-specific document requirement (international ports) it becomes that requirement&#39;s &#x60;fieldValue&#x60;. Requirement documents are normalized to PDF automatically (regulators reject raw images). PDF, JPEG, or PNG, 10MB max. Uploads must be attached to an order within 30 minutes or the carrier deletes them. 
   # @param file The document (PDF/JPEG/PNG, 10MB max).
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :kind Informational; used for the stored filename.
+  # @option opts [String] :kind &#39;loa&#39;, &#39;invoice&#39;, or any short slug for requirement documents. Informational; used for the stored filename.
   # @return [UploadPhoneNumberPortInDocument200Response]
   describe 'upload_phone_number_port_in_document test' do
     it 'should work' do

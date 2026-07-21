@@ -11,6 +11,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_phone_number_port_in**](PhoneNumbersApi.md#create_phone_number_port_in) | **POST** /v1/phone-numbers/port-in | Port numbers in |
 | [**get_phone_number**](PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number |
 | [**get_phone_number_kyc_form**](PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec |
+| [**get_phone_number_port_in_order_requirements**](PhoneNumbersApi.md#get_phone_number_port_in_order_requirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order&#39;s pending requirements |
+| [**get_phone_number_port_in_requirements**](PhoneNumbersApi.md#get_phone_number_port_in_requirements) | **GET** /v1/phone-numbers/port-in/requirements | Country porting requirements |
 | [**get_phone_number_remediation**](PhoneNumbersApi.md#get_phone_number_remediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements |
 | [**list_phone_number_countries**](PhoneNumbersApi.md#list_phone_number_countries) | **GET** /v1/phone-numbers/countries | List offerable number countries |
 | [**list_phone_number_port_ins**](PhoneNumbersApi.md#list_phone_number_port_ins) | **GET** /v1/phone-numbers/port-in | List port-in orders |
@@ -312,7 +314,7 @@ end
 
 Port numbers in
 
-Submit a port-in for one or more existing numbers from another carrier. Creates the carrier order(s), attaches the end-user (current account) info plus the LOA and invoice documents, and submits to the losing carrier. The transfer PIN is forwarded to the carrier and never stored. Ported numbers arrive voice-ready (and SMS-ready where the order supports messaging).  Run the portability check (POST /v1/phone-numbers/port-in/check) and upload the two documents (POST /v1/phone-numbers/port-in/documents) first. The carrier may split the numbers into several orders (by country, number type, losing carrier); `orders` carries per-order results, and a partial failure still returns 201 with the failed orders' `error` set (they stay as cancellable drafts). 
+Submit a port-in for one or more existing numbers from another carrier. Creates the carrier order(s), attaches the end-user (current account) info plus the LOA and invoice documents, and submits to the losing carrier. The transfer PIN is forwarded to the carrier and never stored. Ported numbers arrive voice-ready (and SMS-ready where the order supports messaging).  Run the portability check (POST /v1/phone-numbers/port-in/check) and upload the two documents (POST /v1/phone-numbers/port-in/documents) first — uploaded documents must be attached to an order within 30 minutes or the carrier deletes them, so upload right before this call. The carrier may split the numbers into several orders (by country, number type, losing carrier); `orders` carries per-order results, and a partial failure still returns 201 with the failed orders' `error` set (they stay as cancellable drafts).  Non-US/CA numbers additionally need the country-specific values from GET /v1/phone-numbers/port-in/requirements, passed via `requirements`, and must be submitted one country per request. When required information is still missing after submission, the order is kept as a resumable draft whose `error` / `declineReason` names the gaps. 
 
 ### Examples
 
@@ -326,7 +328,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::PhoneNumbersApi.new
-create_phone_number_port_in_request = Zernio::CreatePhoneNumberPortInRequest.new({phone_numbers: ['phone_numbers_example'], end_user: Zernio::CreatePhoneNumberPortInRequestEndUser.new({entity_name: 'entity_name_example', auth_person_name: 'auth_person_name_example', account_number: 'account_number_example', street_address: 'street_address_example', locality: 'locality_example', administrative_area: 'administrative_area_example', postal_code: 'postal_code_example', country_code: 'US'}), loa_document_id: 'loa_document_id_example', invoice_document_id: 'invoice_document_id_example'}) # CreatePhoneNumberPortInRequest | 
+create_phone_number_port_in_request = Zernio::CreatePhoneNumberPortInRequest.new({phone_numbers: ['phone_numbers_example'], end_user: Zernio::CreatePhoneNumberPortInRequestEndUser.new({entity_name: 'entity_name_example', auth_person_name: 'auth_person_name_example', account_number: 'account_number_example', street_address: 'street_address_example', locality: 'locality_example', postal_code: 'postal_code_example', country_code: 'US'}), loa_document_id: 'loa_document_id_example', invoice_document_id: 'invoice_document_id_example'}) # CreatePhoneNumberPortInRequest | 
 
 begin
   # Port numbers in
@@ -506,6 +508,148 @@ end
 ### Return type
 
 [**GetPhoneNumberKycForm200Response**](GetPhoneNumberKycForm200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_phone_number_port_in_order_requirements
+
+> <GetPhoneNumberPortInOrderRequirements200Response> get_phone_number_port_in_order_requirements(id)
+
+A port-in order's pending requirements
+
+The live requirements on an EXISTING porting order: which are filled, which are still pending, and which bounced on review (`requirement-info-exception`). Use it to fix and resubmit a rejected international port. Same field shape as the country-level requirements endpoint, plus per-requirement status. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+id = 'id_example' # String | Porting order ID (from the port-in list).
+
+begin
+  # A port-in order's pending requirements
+  result = api_instance.get_phone_number_port_in_order_requirements(id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->get_phone_number_port_in_order_requirements: #{e}"
+end
+```
+
+#### Using the get_phone_number_port_in_order_requirements_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetPhoneNumberPortInOrderRequirements200Response>, Integer, Hash)> get_phone_number_port_in_order_requirements_with_http_info(id)
+
+```ruby
+begin
+  # A port-in order's pending requirements
+  data, status_code, headers = api_instance.get_phone_number_port_in_order_requirements_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetPhoneNumberPortInOrderRequirements200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->get_phone_number_port_in_order_requirements_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Porting order ID (from the port-in list). |  |
+
+### Return type
+
+[**GetPhoneNumberPortInOrderRequirements200Response**](GetPhoneNumberPortInOrderRequirements200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_phone_number_port_in_requirements
+
+> <GetPhoneNumberPortInRequirements200Response> get_phone_number_port_in_requirements(country, opts)
+
+Country porting requirements
+
+The country-specific information a port-in needs BEYOND the LOA, invoice, and account/address details — e.g. an ID copy, proof of address, a tax id, or a porting code. Call it after the portability check (which returns each number's `countryCode` and `phoneNumberType`), render the fields, and pass the collected values as the create request's `requirements`. US/CA return an empty list. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+country = 'country_example' # String | ISO country of the numbers being ported (a supported port-in country).
+opts = {
+  number_type: 'local' # String | The portability check's phoneNumberType — requirements differ by type.
+}
+
+begin
+  # Country porting requirements
+  result = api_instance.get_phone_number_port_in_requirements(country, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->get_phone_number_port_in_requirements: #{e}"
+end
+```
+
+#### Using the get_phone_number_port_in_requirements_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetPhoneNumberPortInRequirements200Response>, Integer, Hash)> get_phone_number_port_in_requirements_with_http_info(country, opts)
+
+```ruby
+begin
+  # Country porting requirements
+  data, status_code, headers = api_instance.get_phone_number_port_in_requirements_with_http_info(country, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetPhoneNumberPortInRequirements200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->get_phone_number_port_in_requirements_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **country** | **String** | ISO country of the numbers being ported (a supported port-in country). |  |
+| **number_type** | **String** | The portability check&#39;s phoneNumberType — requirements differ by type. | [optional][default to &#39;local&#39;] |
+
+### Return type
+
+[**GetPhoneNumberPortInRequirements200Response**](GetPhoneNumberPortInRequirements200Response.md)
 
 ### Authorization
 
@@ -1298,7 +1442,7 @@ end
 
 Upload a porting document
 
-Upload ONE porting document (the signed LOA or a recent carrier invoice) and get back its `documentId`, which the port-in create request takes as `loaDocumentId` / `invoiceDocumentId`. PDF, JPEG, or PNG, 10MB max. 
+Upload ONE porting document and get back its `documentId`. For the signed LOA / carrier invoice the id goes to `loaDocumentId` / `invoiceDocumentId`; for a country-specific document requirement (international ports) it becomes that requirement's `fieldValue`. Requirement documents are normalized to PDF automatically (regulators reject raw images). PDF, JPEG, or PNG, 10MB max. Uploads must be attached to an order within 30 minutes or the carrier deletes them. 
 
 ### Examples
 
@@ -1314,7 +1458,7 @@ end
 api_instance = Zernio::PhoneNumbersApi.new
 file = File.new('/path/to/some/file') # File | The document (PDF/JPEG/PNG, 10MB max).
 opts = {
-  kind: 'loa' # String | Informational; used for the stored filename.
+  kind: 'kind_example' # String | 'loa', 'invoice', or any short slug for requirement documents. Informational; used for the stored filename.
 }
 
 begin
@@ -1349,7 +1493,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file** | **File** | The document (PDF/JPEG/PNG, 10MB max). |  |
-| **kind** | **String** | Informational; used for the stored filename. | [optional] |
+| **kind** | **String** | &#39;loa&#39;, &#39;invoice&#39;, or any short slug for requirement documents. Informational; used for the stored filename. | [optional] |
 
 ### Return type
 

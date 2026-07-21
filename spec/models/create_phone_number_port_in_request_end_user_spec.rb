@@ -57,6 +57,18 @@ describe Zernio::CreatePhoneNumberPortInRequestEndUser do
     end
   end
 
+  describe 'test attribute "tax_identifier"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "business_identifier"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "street_address"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -90,7 +102,7 @@ describe Zernio::CreatePhoneNumberPortInRequestEndUser do
   describe 'test attribute "country_code"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["US", "CA"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["US", "CA", "GB", "ES", "DE", "FR", "NL", "AU"])
       # validator.allowable_values.each do |value|
       #   expect { instance.country_code = value }.not_to raise_error
       # end

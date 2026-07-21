@@ -358,6 +358,8 @@ Class | Method | HTTP request | Description
 *Zernio::PhoneNumbersApi* | [**create_phone_number_port_in**](docs/PhoneNumbersApi.md#create_phone_number_port_in) | **POST** /v1/phone-numbers/port-in | Port numbers in
 *Zernio::PhoneNumbersApi* | [**get_phone_number**](docs/PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number
 *Zernio::PhoneNumbersApi* | [**get_phone_number_kyc_form**](docs/PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec
+*Zernio::PhoneNumbersApi* | [**get_phone_number_port_in_order_requirements**](docs/PhoneNumbersApi.md#get_phone_number_port_in_order_requirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order's pending requirements
+*Zernio::PhoneNumbersApi* | [**get_phone_number_port_in_requirements**](docs/PhoneNumbersApi.md#get_phone_number_port_in_requirements) | **GET** /v1/phone-numbers/port-in/requirements | Country porting requirements
 *Zernio::PhoneNumbersApi* | [**get_phone_number_remediation**](docs/PhoneNumbersApi.md#get_phone_number_remediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements
 *Zernio::PhoneNumbersApi* | [**list_phone_number_countries**](docs/PhoneNumbersApi.md#list_phone_number_countries) | **GET** /v1/phone-numbers/countries | List offerable number countries
 *Zernio::PhoneNumbersApi* | [**list_phone_number_port_ins**](docs/PhoneNumbersApi.md#list_phone_number_port_ins) | **GET** /v1/phone-numbers/port-in | List port-in orders
@@ -761,6 +763,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreatePhoneNumberPortIn201ResponseOrdersInner](docs/CreatePhoneNumberPortIn201ResponseOrdersInner.md)
  - [Zernio::CreatePhoneNumberPortInRequest](docs/CreatePhoneNumberPortInRequest.md)
  - [Zernio::CreatePhoneNumberPortInRequestEndUser](docs/CreatePhoneNumberPortInRequestEndUser.md)
+ - [Zernio::CreatePhoneNumberPortInRequestRequirementsInner](docs/CreatePhoneNumberPortInRequestRequirementsInner.md)
  - [Zernio::CreatePinterestBoard201Response](docs/CreatePinterestBoard201Response.md)
  - [Zernio::CreatePinterestBoard201ResponseBoard](docs/CreatePinterestBoard201ResponseBoard.md)
  - [Zernio::CreatePinterestBoardRequest](docs/CreatePinterestBoardRequest.md)
@@ -1132,6 +1135,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetPhoneNumberKycForm200ResponseReusable](docs/GetPhoneNumberKycForm200ResponseReusable.md)
  - [Zernio::GetPhoneNumberKycForm200ResponseReusableDetailsInner](docs/GetPhoneNumberKycForm200ResponseReusableDetailsInner.md)
  - [Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInner](docs/GetPhoneNumberKycForm200ResponseReusableOptionsInner.md)
+ - [Zernio::GetPhoneNumberPortInOrderRequirements200Response](docs/GetPhoneNumberPortInOrderRequirements200Response.md)
+ - [Zernio::GetPhoneNumberPortInOrderRequirements200ResponseRequirementsInner](docs/GetPhoneNumberPortInOrderRequirements200ResponseRequirementsInner.md)
+ - [Zernio::GetPhoneNumberPortInRequirements200Response](docs/GetPhoneNumberPortInRequirements200Response.md)
+ - [Zernio::GetPhoneNumberPortInRequirements200ResponseFieldsInner](docs/GetPhoneNumberPortInRequirements200ResponseFieldsInner.md)
  - [Zernio::GetPhoneNumberRemediation200Response](docs/GetPhoneNumberRemediation200Response.md)
  - [Zernio::GetPinterestBoards200Response](docs/GetPinterestBoards200Response.md)
  - [Zernio::GetPinterestBoards200ResponseBoardsInner](docs/GetPinterestBoards200ResponseBoardsInner.md)

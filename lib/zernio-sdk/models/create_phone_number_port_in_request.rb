@@ -26,13 +26,16 @@ module Zernio
     # Document id from POST /v1/phone-numbers/port-in/documents (kind=invoice).
     attr_accessor :invoice_document_id
 
-    # Requested port date; the carrier confirms the actual FOC later. Defaults to one week out (shifted off weekends) when omitted.
+    # Requested port date; the carrier confirms the actual FOC later. US/CA default is one week out (shifted off weekends); international orders are scheduled into the carrier's next allowed porting window at or after this date.
     attr_accessor :foc_datetime_requested
 
     attr_accessor :customer_reference
 
     # Whether the losing account ports all its numbers (full) or keeps some (partial).
     attr_accessor :port_type
+
+    # Country-specific requirement values for international ports (from GET /v1/phone-numbers/port-in/requirements). Not needed for US/CA. The LOA and invoice requirements are satisfied automatically by loaDocumentId/invoiceDocumentId, and address-type requirements by the endUser service address.
+    attr_accessor :requirements
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -65,7 +68,8 @@ module Zernio
         :'invoice_document_id' => :'invoiceDocumentId',
         :'foc_datetime_requested' => :'focDatetimeRequested',
         :'customer_reference' => :'customerReference',
-        :'port_type' => :'portType'
+        :'port_type' => :'portType',
+        :'requirements' => :'requirements'
       }
     end
 
@@ -88,7 +92,8 @@ module Zernio
         :'invoice_document_id' => :'String',
         :'foc_datetime_requested' => :'Time',
         :'customer_reference' => :'String',
-        :'port_type' => :'String'
+        :'port_type' => :'String',
+        :'requirements' => :'Array<CreatePhoneNumberPortInRequestRequirementsInner>'
       }
     end
 
@@ -153,6 +158,12 @@ module Zernio
       else
         self.port_type = 'full'
       end
+
+      if attributes.key?(:'requirements')
+        if (value = attributes[:'requirements']).is_a?(Array)
+          self.requirements = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -188,6 +199,10 @@ module Zernio
         invalid_properties.push('invalid value for "customer_reference", the character length must be smaller than or equal to 100.')
       end
 
+      if !@requirements.nil? && @requirements.length > 30
+        invalid_properties.push('invalid value for "requirements", number of items must be less than or equal to 30.')
+      end
+
       invalid_properties
     end
 
@@ -204,6 +219,7 @@ module Zernio
       return false if !@customer_reference.nil? && @customer_reference.to_s.length > 100
       port_type_validator = EnumAttributeValidator.new('String', ["full", "partial"])
       return false unless port_type_validator.valid?(@port_type)
+      return false if !@requirements.nil? && @requirements.length > 30
       true
     end
 
@@ -279,6 +295,20 @@ module Zernio
       @port_type = port_type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] requirements Value to be assigned
+    def requirements=(requirements)
+      if requirements.nil?
+        fail ArgumentError, 'requirements cannot be nil'
+      end
+
+      if requirements.length > 30
+        fail ArgumentError, 'invalid value for "requirements", number of items must be less than or equal to 30.'
+      end
+
+      @requirements = requirements
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -290,7 +320,8 @@ module Zernio
           invoice_document_id == o.invoice_document_id &&
           foc_datetime_requested == o.foc_datetime_requested &&
           customer_reference == o.customer_reference &&
-          port_type == o.port_type
+          port_type == o.port_type &&
+          requirements == o.requirements
     end
 
     # @see the `==` method
@@ -302,7 +333,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_numbers, end_user, loa_document_id, invoice_document_id, foc_datetime_requested, customer_reference, port_type].hash
+      [phone_numbers, end_user, loa_document_id, invoice_document_id, foc_datetime_requested, customer_reference, port_type, requirements].hash
     end
 
     # Builds the object from hash

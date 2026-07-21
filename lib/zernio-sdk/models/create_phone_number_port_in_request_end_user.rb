@@ -28,8 +28,14 @@ module Zernio
     # Account number with the losing carrier — required (carriers reject ports without it; on prepaid mobile plans it is often the phone number itself).
     attr_accessor :account_number
 
-    # Transfer PIN. Required for mobile numbers (wireless carriers reject PIN-less ports). Forwarded to the carrier, never stored.
+    # Transfer PIN. Required for US/CA mobile numbers (wireless carriers reject PIN-less ports). Forwarded to the carrier, never stored. International porting codes (e.g. the UK PAC) go through `requirements` instead.
     attr_accessor :pin_passcode
+
+    # Company tax id on the carrier account (EU ports, e.g. Spanish CIF).
+    attr_accessor :tax_identifier
+
+    # Business registration id on the carrier account (EU ports).
+    attr_accessor :business_identifier
 
     attr_accessor :street_address
 
@@ -37,12 +43,13 @@ module Zernio
 
     attr_accessor :locality
 
-    # 2-letter US state / CA province code (full names are accepted and normalized).
+    # Region. Required for US/CA as the 2-letter state/province code (full names are accepted and normalized); optional elsewhere.
     attr_accessor :administrative_area
 
-    # US ZIP (5 digits) or Canadian postal code, matching countryCode.
+    # Postal code. Validated as a US ZIP / Canadian postal code for US/CA; free-form elsewhere.
     attr_accessor :postal_code
 
+    # Service-address country (a supported port-in country).
     attr_accessor :country_code
 
     class EnumAttributeValidator
@@ -75,6 +82,8 @@ module Zernio
         :'billing_phone_number' => :'billingPhoneNumber',
         :'account_number' => :'accountNumber',
         :'pin_passcode' => :'pinPasscode',
+        :'tax_identifier' => :'taxIdentifier',
+        :'business_identifier' => :'businessIdentifier',
         :'street_address' => :'streetAddress',
         :'extended_address' => :'extendedAddress',
         :'locality' => :'locality',
@@ -102,6 +111,8 @@ module Zernio
         :'billing_phone_number' => :'String',
         :'account_number' => :'String',
         :'pin_passcode' => :'String',
+        :'tax_identifier' => :'String',
+        :'business_identifier' => :'String',
         :'street_address' => :'String',
         :'extended_address' => :'String',
         :'locality' => :'String',
@@ -159,6 +170,14 @@ module Zernio
         self.pin_passcode = attributes[:'pin_passcode']
       end
 
+      if attributes.key?(:'tax_identifier')
+        self.tax_identifier = attributes[:'tax_identifier']
+      end
+
+      if attributes.key?(:'business_identifier')
+        self.business_identifier = attributes[:'business_identifier']
+      end
+
       if attributes.key?(:'street_address')
         self.street_address = attributes[:'street_address']
       else
@@ -177,8 +196,6 @@ module Zernio
 
       if attributes.key?(:'administrative_area')
         self.administrative_area = attributes[:'administrative_area']
-      else
-        self.administrative_area = nil
       end
 
       if attributes.key?(:'postal_code')
@@ -211,16 +228,20 @@ module Zernio
         invalid_properties.push('invalid value for "account_number", account_number cannot be nil.')
       end
 
+      if !@tax_identifier.nil? && @tax_identifier.to_s.length > 50
+        invalid_properties.push('invalid value for "tax_identifier", the character length must be smaller than or equal to 50.')
+      end
+
+      if !@business_identifier.nil? && @business_identifier.to_s.length > 50
+        invalid_properties.push('invalid value for "business_identifier", the character length must be smaller than or equal to 50.')
+      end
+
       if @street_address.nil?
         invalid_properties.push('invalid value for "street_address", street_address cannot be nil.')
       end
 
       if @locality.nil?
         invalid_properties.push('invalid value for "locality", locality cannot be nil.')
-      end
-
-      if @administrative_area.nil?
-        invalid_properties.push('invalid value for "administrative_area", administrative_area cannot be nil.')
       end
 
       if @postal_code.nil?
@@ -249,12 +270,13 @@ module Zernio
       return false if @entity_name.nil?
       return false if @auth_person_name.nil?
       return false if @account_number.nil?
+      return false if !@tax_identifier.nil? && @tax_identifier.to_s.length > 50
+      return false if !@business_identifier.nil? && @business_identifier.to_s.length > 50
       return false if @street_address.nil?
       return false if @locality.nil?
-      return false if @administrative_area.nil?
       return false if @postal_code.nil?
       return false if @country_code.nil?
-      country_code_validator = EnumAttributeValidator.new('String', ["US", "CA"])
+      country_code_validator = EnumAttributeValidator.new('String', ["US", "CA", "GB", "ES", "DE", "FR", "NL", "AU"])
       return false unless country_code_validator.valid?(@country_code)
       return false if @country_code.to_s.length > 2
       return false if @country_code.to_s.length < 2
@@ -292,6 +314,34 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] tax_identifier Value to be assigned
+    def tax_identifier=(tax_identifier)
+      if tax_identifier.nil?
+        fail ArgumentError, 'tax_identifier cannot be nil'
+      end
+
+      if tax_identifier.to_s.length > 50
+        fail ArgumentError, 'invalid value for "tax_identifier", the character length must be smaller than or equal to 50.'
+      end
+
+      @tax_identifier = tax_identifier
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] business_identifier Value to be assigned
+    def business_identifier=(business_identifier)
+      if business_identifier.nil?
+        fail ArgumentError, 'business_identifier cannot be nil'
+      end
+
+      if business_identifier.to_s.length > 50
+        fail ArgumentError, 'invalid value for "business_identifier", the character length must be smaller than or equal to 50.'
+      end
+
+      @business_identifier = business_identifier
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] street_address Value to be assigned
     def street_address=(street_address)
       if street_address.nil?
@@ -312,16 +362,6 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] administrative_area Value to be assigned
-    def administrative_area=(administrative_area)
-      if administrative_area.nil?
-        fail ArgumentError, 'administrative_area cannot be nil'
-      end
-
-      @administrative_area = administrative_area
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] postal_code Value to be assigned
     def postal_code=(postal_code)
       if postal_code.nil?
@@ -334,7 +374,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country_code Object to be assigned
     def country_code=(country_code)
-      validator = EnumAttributeValidator.new('String', ["US", "CA"])
+      validator = EnumAttributeValidator.new('String', ["US", "CA", "GB", "ES", "DE", "FR", "NL", "AU"])
       unless validator.valid?(country_code)
         fail ArgumentError, "invalid value for \"country_code\", must be one of #{validator.allowable_values}."
       end
@@ -351,6 +391,8 @@ module Zernio
           billing_phone_number == o.billing_phone_number &&
           account_number == o.account_number &&
           pin_passcode == o.pin_passcode &&
+          tax_identifier == o.tax_identifier &&
+          business_identifier == o.business_identifier &&
           street_address == o.street_address &&
           extended_address == o.extended_address &&
           locality == o.locality &&
@@ -368,7 +410,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [entity_name, auth_person_name, billing_phone_number, account_number, pin_passcode, street_address, extended_address, locality, administrative_area, postal_code, country_code].hash
+      [entity_name, auth_person_name, billing_phone_number, account_number, pin_passcode, tax_identifier, business_identifier, street_address, extended_address, locality, administrative_area, postal_code, country_code].hash
     end
 
     # Builds the object from hash

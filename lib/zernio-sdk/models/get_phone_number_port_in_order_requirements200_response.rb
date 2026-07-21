@@ -14,36 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CheckPhoneNumberPortability200ResponseResultsInner < ApiModelBase
-    attr_accessor :phone_number
+  class GetPhoneNumberPortInOrderRequirements200Response < ApiModelBase
+    attr_accessor :country
 
-    attr_accessor :portable
-
-    # Qualifies for the carrier's accelerated FastPort lane.
-    attr_accessor :fast_portable
-
-    # Line type when known (mobile, landline, voip…). A US/CA mobile number requires the transfer PIN at submit.
-    attr_accessor :line_type
-
-    # ISO country of the number — pass it to GET /v1/phone-numbers/port-in/requirements for international numbers.
-    attr_accessor :country_code
-
-    # Carrier number-type classification (local, mobile, national, toll_free…) — the numberType for the requirements endpoint.
-    attr_accessor :phone_number_type
-
-    # Carrier reason when not portable; null when portable.
-    attr_accessor :not_portable_reason
+    attr_accessor :requirements
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'phone_number' => :'phoneNumber',
-        :'portable' => :'portable',
-        :'fast_portable' => :'fastPortable',
-        :'line_type' => :'lineType',
-        :'country_code' => :'countryCode',
-        :'phone_number_type' => :'phoneNumberType',
-        :'not_portable_reason' => :'notPortableReason'
+        :'country' => :'country',
+        :'requirements' => :'requirements'
       }
     end
 
@@ -60,23 +40,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'phone_number' => :'String',
-        :'portable' => :'Boolean',
-        :'fast_portable' => :'Boolean',
-        :'line_type' => :'String',
-        :'country_code' => :'String',
-        :'phone_number_type' => :'String',
-        :'not_portable_reason' => :'String'
+        :'country' => :'String',
+        :'requirements' => :'Array<GetPhoneNumberPortInOrderRequirements200ResponseRequirementsInner>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'line_type',
-        :'country_code',
-        :'phone_number_type',
-        :'not_portable_reason'
       ])
     end
 
@@ -84,44 +55,26 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CheckPhoneNumberPortability200ResponseResultsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetPhoneNumberPortInOrderRequirements200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CheckPhoneNumberPortability200ResponseResultsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetPhoneNumberPortInOrderRequirements200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'phone_number')
-        self.phone_number = attributes[:'phone_number']
+      if attributes.key?(:'country')
+        self.country = attributes[:'country']
       end
 
-      if attributes.key?(:'portable')
-        self.portable = attributes[:'portable']
-      end
-
-      if attributes.key?(:'fast_portable')
-        self.fast_portable = attributes[:'fast_portable']
-      end
-
-      if attributes.key?(:'line_type')
-        self.line_type = attributes[:'line_type']
-      end
-
-      if attributes.key?(:'country_code')
-        self.country_code = attributes[:'country_code']
-      end
-
-      if attributes.key?(:'phone_number_type')
-        self.phone_number_type = attributes[:'phone_number_type']
-      end
-
-      if attributes.key?(:'not_portable_reason')
-        self.not_portable_reason = attributes[:'not_portable_reason']
+      if attributes.key?(:'requirements')
+        if (value = attributes[:'requirements']).is_a?(Array)
+          self.requirements = value
+        end
       end
     end
 
@@ -145,13 +98,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          phone_number == o.phone_number &&
-          portable == o.portable &&
-          fast_portable == o.fast_portable &&
-          line_type == o.line_type &&
-          country_code == o.country_code &&
-          phone_number_type == o.phone_number_type &&
-          not_portable_reason == o.not_portable_reason
+          country == o.country &&
+          requirements == o.requirements
     end
 
     # @see the `==` method
@@ -163,7 +111,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_number, portable, fast_portable, line_type, country_code, phone_number_type, not_portable_reason].hash
+      [country, requirements].hash
     end
 
     # Builds the object from hash
