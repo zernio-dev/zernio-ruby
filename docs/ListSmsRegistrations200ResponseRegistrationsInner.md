@@ -13,6 +13,7 @@
 | **brand_id** | **String** | TCR brand id, useful when referencing the brand in carrier support threads. | [optional] |
 | **campaign_id** | **String** | TCR campaign id. | [optional] |
 | **decline_reason** | **String** |  | [optional] |
+| **tf_action_required_at** | **Time** | Toll-free only: when the carrier requested changes (\&quot;Waiting For Customer\&quot;). The request must be resubmitted within 7 days of this timestamp or it expires. | [optional] |
 | **phone_numbers** | **Array&lt;String&gt;** |  | [optional] |
 | **awaiting_otp** | **Boolean** | Sole-prop 10DLC only; the OTP step is still pending. | [optional] |
 | **trust_score** | **Float** | Carrier-assigned brand trust score; drives throughput. | [optional] |
@@ -33,6 +34,7 @@ instance = Zernio::ListSmsRegistrations200ResponseRegistrationsInner.new(
   brand_id: null,
   campaign_id: null,
   decline_reason: null,
+  tf_action_required_at: null,
   phone_numbers: null,
   awaiting_otp: null,
   trust_score: null,

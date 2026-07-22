@@ -89,6 +89,12 @@ describe Zernio::ListSmsRegistrations200ResponseRegistrationsInner do
     end
   end
 
+  describe 'test attribute "tf_action_required_at"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "phone_numbers"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

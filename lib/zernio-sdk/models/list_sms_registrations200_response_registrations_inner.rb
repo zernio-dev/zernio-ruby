@@ -37,6 +37,9 @@ module Zernio
 
     attr_accessor :decline_reason
 
+    # Toll-free only: when the carrier requested changes (\"Waiting For Customer\"). The request must be resubmitted within 7 days of this timestamp or it expires.
+    attr_accessor :tf_action_required_at
+
     attr_accessor :phone_numbers
 
     # Sole-prop 10DLC only; the OTP step is still pending.
@@ -81,6 +84,7 @@ module Zernio
         :'brand_id' => :'brandId',
         :'campaign_id' => :'campaignId',
         :'decline_reason' => :'declineReason',
+        :'tf_action_required_at' => :'tfActionRequiredAt',
         :'phone_numbers' => :'phoneNumbers',
         :'awaiting_otp' => :'awaitingOtp',
         :'trust_score' => :'trustScore',
@@ -110,6 +114,7 @@ module Zernio
         :'brand_id' => :'String',
         :'campaign_id' => :'String',
         :'decline_reason' => :'String',
+        :'tf_action_required_at' => :'Time',
         :'phone_numbers' => :'Array<String>',
         :'awaiting_otp' => :'Boolean',
         :'trust_score' => :'Float',
@@ -124,6 +129,7 @@ module Zernio
         :'brand_id',
         :'campaign_id',
         :'decline_reason',
+        :'tf_action_required_at',
         :'trust_score',
       ])
     end
@@ -178,6 +184,10 @@ module Zernio
 
       if attributes.key?(:'decline_reason')
         self.decline_reason = attributes[:'decline_reason']
+      end
+
+      if attributes.key?(:'tf_action_required_at')
+        self.tf_action_required_at = attributes[:'tf_action_required_at']
       end
 
       if attributes.key?(:'phone_numbers')
@@ -252,6 +262,7 @@ module Zernio
           brand_id == o.brand_id &&
           campaign_id == o.campaign_id &&
           decline_reason == o.decline_reason &&
+          tf_action_required_at == o.tf_action_required_at &&
           phone_numbers == o.phone_numbers &&
           awaiting_otp == o.awaiting_otp &&
           trust_score == o.trust_score &&
@@ -267,7 +278,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, registration_type, display_name, status, brand_status, campaign_status, brand_id, campaign_id, decline_reason, phone_numbers, awaiting_otp, trust_score, throughput].hash
+      [id, registration_type, display_name, status, brand_status, campaign_status, brand_id, campaign_id, decline_reason, tf_action_required_at, phone_numbers, awaiting_otp, trust_score, throughput].hash
     end
 
     # Builds the object from hash
