@@ -718,7 +718,6 @@ docs/HandleOAuthCallbackRequest.md
 docs/HideInboxComment200Response.md
 docs/HideInboxCommentRequest.md
 docs/InboxAnalyticsApi.md
-docs/InboxApi.md
 docs/InboxMessageEditAttachment.md
 docs/InboxMessageEditHistoryEntry.md
 docs/InboxWebhookAccount.md
@@ -1540,7 +1539,6 @@ lib/zernio-sdk/api/gmb_reviews_api.rb
 lib/zernio-sdk/api/gmb_services_api.rb
 lib/zernio-sdk/api/gmb_verifications_api.rb
 lib/zernio-sdk/api/inbox_analytics_api.rb
-lib/zernio-sdk/api/inbox_api.rb
 lib/zernio-sdk/api/instagram_api.rb
 lib/zernio-sdk/api/invites_api.rb
 lib/zernio-sdk/api/linked_in_mentions_api.rb
@@ -3052,7 +3050,6 @@ spec/api/gmb_reviews_api_spec.rb
 spec/api/gmb_services_api_spec.rb
 spec/api/gmb_verifications_api_spec.rb
 spec/api/inbox_analytics_api_spec.rb
-spec/api/inbox_api_spec.rb
 spec/api/instagram_api_spec.rb
 spec/api/invites_api_spec.rb
 spec/api/linked_in_mentions_api_spec.rb

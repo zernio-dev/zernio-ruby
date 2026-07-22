@@ -321,7 +321,6 @@ Class | Method | HTTP request | Description
 *Zernio::GMBVerificationsApi* | [**fetch_google_business_verification_options**](docs/GMBVerificationsApi.md#fetch_google_business_verification_options) | **POST** /v1/accounts/{accountId}/gmb-verifications/options | Fetch verification options
 *Zernio::GMBVerificationsApi* | [**get_google_business_verifications**](docs/GMBVerificationsApi.md#get_google_business_verifications) | **GET** /v1/accounts/{accountId}/gmb-verifications | Get verification state
 *Zernio::GMBVerificationsApi* | [**start_google_business_verification**](docs/GMBVerificationsApi.md#start_google_business_verification) | **POST** /v1/accounts/{accountId}/gmb-verifications | Start a verification
-*Zernio::InboxApi* | [**get_whats_app_media**](docs/InboxApi.md#get_whats_app_media) | **GET** /v1/whatsapp/media/{mediaId} | Download WhatsApp media
 *Zernio::InboxAnalyticsApi* | [**get_inbox_conversation_analytics**](docs/InboxAnalyticsApi.md#get_inbox_conversation_analytics) | **GET** /v1/analytics/inbox/conversations/{conversationId} | Get conversation analytics
 *Zernio::InboxAnalyticsApi* | [**get_inbox_heatmap**](docs/InboxAnalyticsApi.md#get_inbox_heatmap) | **GET** /v1/analytics/inbox/heatmap | Get day × hour heatmap
 *Zernio::InboxAnalyticsApi* | [**get_inbox_response_time**](docs/InboxAnalyticsApi.md#get_inbox_response_time) | **GET** /v1/analytics/inbox/response-time | Get inbox response-time stats
@@ -488,6 +487,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**get_whats_app_dataset**](docs/WhatsAppApi.md#get_whats_app_dataset) | **GET** /v1/whatsapp/dataset | Get CTWA conversions dataset
 *Zernio::WhatsAppApi* | [**get_whats_app_display_name**](docs/WhatsAppApi.md#get_whats_app_display_name) | **GET** /v1/whatsapp/business-profile/display-name | Get display name status
 *Zernio::WhatsAppApi* | [**get_whats_app_group_chat**](docs/WhatsAppApi.md#get_whats_app_group_chat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info
+*Zernio::WhatsAppApi* | [**get_whats_app_media**](docs/WhatsAppApi.md#get_whats_app_media) | **GET** /v1/whatsapp/media/{mediaId} | Download WhatsApp media
 *Zernio::WhatsAppApi* | [**get_whats_app_template**](docs/WhatsAppApi.md#get_whats_app_template) | **GET** /v1/whatsapp/templates/{templateName} | Get template
 *Zernio::WhatsAppApi* | [**get_whats_app_templates**](docs/WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates
 *Zernio::WhatsAppApi* | [**get_whatsapp_business_username**](docs/WhatsAppApi.md#get_whatsapp_business_username) | **GET** /v1/whatsapp/business-profile/username | Get business username

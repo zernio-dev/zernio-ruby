@@ -235,6 +235,19 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for get_whats_app_media
+  # Download WhatsApp media
+  # Streams the binary for a WhatsApp attachment. This is the endpoint the &#x60;url&#x60; on a WhatsApp &#x60;attachments[]&#x60; entry points at, in both the &#x60;message.received&#x60; webhook and the List messages response.  **This is an authenticated endpoint, not a public link.** Send &#x60;Authorization: Bearer &lt;your API key&gt;&#x60; exactly as you would for any other call. Passing the URL straight to a browser, an LLM vision API, or a no-code \&quot;download file\&quot; step without the header returns &#x60;401&#x60;. This is the most common integration mistake on this endpoint, and it differs from Instagram, Facebook and Telegram, whose &#x60;attachments[].url&#x60; is a direct CDN link that needs no header.  **Fetch on receipt, not lazily.** WhatsApp media lives in Meta&#39;s media store, not ours, and it is removed after a limited retention window (currently 7 days, and Meta has been dropping some inbound media sooner). Once Meta drops it the media is unrecoverable and this endpoint answers &#x60;400&#x60; permanently, so retrying will never succeed. Download and store the bytes when the webhook arrives. 
+  # @param media_id The media id from &#x60;attachments[].payload.id&#x60;.
+  # @param account_id The WhatsApp account that received the media.
+  # @param [Hash] opts the optional parameters
+  # @return [File]
+  describe 'get_whats_app_media test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_whats_app_template
   # Get template
   # Retrieve a single message template by name. 
