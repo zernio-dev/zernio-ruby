@@ -14,14 +14,31 @@ require 'date'
 require 'time'
 
 module Zernio
-  class OnWhatsAppNumberKycSubmittedRequest < ApiModelBase
+  # A managed OTP verification. The code itself is never returned or stored (hash only).
+  class Verification < ApiModelBase
     attr_accessor :id
 
-    attr_accessor :event
+    attr_accessor :status
 
-    attr_accessor :timestamp
+    attr_accessor :channel
 
-    attr_accessor :number
+    attr_accessor :to
+
+    attr_accessor :expires_at
+
+    attr_accessor :attempts
+
+    attr_accessor :max_attempts
+
+    # Accepted deliveries (initial send + resends); each bills one verification fee.
+    attr_accessor :send_count
+
+    attr_accessor :last_sent_at
+
+    attr_accessor :created_at
+
+    # Present on create responses: true when an active verification was resent instead of created.
+    attr_accessor :resend
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -49,9 +66,16 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
-        :'event' => :'event',
-        :'timestamp' => :'timestamp',
-        :'number' => :'number'
+        :'status' => :'status',
+        :'channel' => :'channel',
+        :'to' => :'to',
+        :'expires_at' => :'expiresAt',
+        :'attempts' => :'attempts',
+        :'max_attempts' => :'maxAttempts',
+        :'send_count' => :'sendCount',
+        :'last_sent_at' => :'lastSentAt',
+        :'created_at' => :'createdAt',
+        :'resend' => :'resend'
       }
     end
 
@@ -69,15 +93,23 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
-        :'event' => :'String',
-        :'timestamp' => :'Time',
-        :'number' => :'OnWhatsAppNumberDeclinedRequestNumber'
+        :'status' => :'String',
+        :'channel' => :'String',
+        :'to' => :'String',
+        :'expires_at' => :'Time',
+        :'attempts' => :'Integer',
+        :'max_attempts' => :'Integer',
+        :'send_count' => :'Integer',
+        :'last_sent_at' => :'Time',
+        :'created_at' => :'Time',
+        :'resend' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'last_sent_at',
       ])
     end
 
@@ -85,14 +117,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::OnWhatsAppNumberKycSubmittedRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::Verification` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::OnWhatsAppNumberKycSubmittedRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::Verification`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -101,16 +133,44 @@ module Zernio
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'event')
-        self.event = attributes[:'event']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'timestamp')
-        self.timestamp = attributes[:'timestamp']
+      if attributes.key?(:'channel')
+        self.channel = attributes[:'channel']
       end
 
-      if attributes.key?(:'number')
-        self.number = attributes[:'number']
+      if attributes.key?(:'to')
+        self.to = attributes[:'to']
+      end
+
+      if attributes.key?(:'expires_at')
+        self.expires_at = attributes[:'expires_at']
+      end
+
+      if attributes.key?(:'attempts')
+        self.attempts = attributes[:'attempts']
+      end
+
+      if attributes.key?(:'max_attempts')
+        self.max_attempts = attributes[:'max_attempts']
+      end
+
+      if attributes.key?(:'send_count')
+        self.send_count = attributes[:'send_count']
+      end
+
+      if attributes.key?(:'last_sent_at')
+        self.last_sent_at = attributes[:'last_sent_at']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'resend')
+        self.resend = attributes[:'resend']
       end
     end
 
@@ -126,19 +186,31 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      event_validator = EnumAttributeValidator.new('String', ["whatsapp.number.kyc_submitted", "verification.approved", "verification.failed"])
-      return false unless event_validator.valid?(@event)
+      status_validator = EnumAttributeValidator.new('String', ["pending", "approved", "expired", "max_attempts_reached", "canceled", "delivery_failed"])
+      return false unless status_validator.valid?(@status)
+      channel_validator = EnumAttributeValidator.new('String', ["sms"])
+      return false unless channel_validator.valid?(@channel)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] event Object to be assigned
-    def event=(event)
-      validator = EnumAttributeValidator.new('String', ["whatsapp.number.kyc_submitted", "verification.approved", "verification.failed"])
-      unless validator.valid?(event)
-        fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["pending", "approved", "expired", "max_attempts_reached", "canceled", "delivery_failed"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
-      @event = event
+      @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] channel Object to be assigned
+    def channel=(channel)
+      validator = EnumAttributeValidator.new('String', ["sms"])
+      unless validator.valid?(channel)
+        fail ArgumentError, "invalid value for \"channel\", must be one of #{validator.allowable_values}."
+      end
+      @channel = channel
     end
 
     # Checks equality by comparing each attribute.
@@ -147,9 +219,16 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          event == o.event &&
-          timestamp == o.timestamp &&
-          number == o.number
+          status == o.status &&
+          channel == o.channel &&
+          to == o.to &&
+          expires_at == o.expires_at &&
+          attempts == o.attempts &&
+          max_attempts == o.max_attempts &&
+          send_count == o.send_count &&
+          last_sent_at == o.last_sent_at &&
+          created_at == o.created_at &&
+          resend == o.resend
     end
 
     # @see the `==` method
@@ -161,7 +240,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event, timestamp, number].hash
+      [id, status, channel, to, expires_at, attempts, max_attempts, send_count, last_sent_at, created_at, resend].hash
     end
 
     # Builds the object from hash

@@ -123,6 +123,8 @@ docs/CheckPhoneNumberAvailability200Response.md
 docs/CheckPhoneNumberPortability200Response.md
 docs/CheckPhoneNumberPortability200ResponseResultsInner.md
 docs/CheckPhoneNumberPortabilityRequest.md
+docs/CheckVerification200Response.md
+docs/CheckVerificationRequest.md
 docs/CommentAutomationsApi.md
 docs/CommentsApi.md
 docs/CompleteGoogleBusinessVerificationRequest.md
@@ -275,6 +277,7 @@ docs/CreateTestLeadRequest.md
 docs/CreateTestLeadRequestFieldDataInner.md
 docs/CreateTrackingTag201Response.md
 docs/CreateTrackingTagRequest.md
+docs/CreateVerificationRequest.md
 docs/CreateVoiceCall200Response.md
 docs/CreateVoiceCallRequest.md
 docs/CreateVoiceWebSession200Response.md
@@ -949,6 +952,10 @@ docs/Money.md
 docs/MoneyAmount.md
 docs/MoveAccountToProfile200Response.md
 docs/MoveAccountToProfileRequest.md
+docs/OnVerificationApprovedRequest.md
+docs/OnVerificationApprovedRequestVerification.md
+docs/OnVerificationFailedRequest.md
+docs/OnVerificationFailedRequestVerification.md
 docs/OnWhatsAppAutomaticEventRequest.md
 docs/OnWhatsAppAutomaticEventRequestCustomData.md
 docs/OnWhatsAppNumberActionRequiredRequest.md
@@ -1413,6 +1420,8 @@ docs/ValidateSubreddit200Response.md
 docs/ValidateSubreddit200ResponseOneOf.md
 docs/ValidateSubreddit200ResponseOneOf1.md
 docs/ValidateSubreddit200ResponseOneOfSubreddit.md
+docs/Verification.md
+docs/VerifyApi.md
 docs/VerifySmsRegistrationOtp200Response.md
 docs/VerifySmsRegistrationOtpRequest.md
 docs/VoiceApi.md
@@ -1574,6 +1583,7 @@ lib/zernio-sdk/api/twitter_engagement_api.rb
 lib/zernio-sdk/api/usage_api.rb
 lib/zernio-sdk/api/users_api.rb
 lib/zernio-sdk/api/validate_api.rb
+lib/zernio-sdk/api/verify_api.rb
 lib/zernio-sdk/api/voice_api.rb
 lib/zernio-sdk/api/webhook_events_api.rb
 lib/zernio-sdk/api/webhooks_api.rb
@@ -1695,6 +1705,8 @@ lib/zernio-sdk/models/check_phone_number_availability200_response.rb
 lib/zernio-sdk/models/check_phone_number_portability200_response.rb
 lib/zernio-sdk/models/check_phone_number_portability200_response_results_inner.rb
 lib/zernio-sdk/models/check_phone_number_portability_request.rb
+lib/zernio-sdk/models/check_verification200_response.rb
+lib/zernio-sdk/models/check_verification_request.rb
 lib/zernio-sdk/models/complete_google_business_verification_request.rb
 lib/zernio-sdk/models/complete_telegram_connect200_response.rb
 lib/zernio-sdk/models/complete_whats_app_phone_selection200_response.rb
@@ -1843,6 +1855,7 @@ lib/zernio-sdk/models/create_test_lead_request.rb
 lib/zernio-sdk/models/create_test_lead_request_field_data_inner.rb
 lib/zernio-sdk/models/create_tracking_tag201_response.rb
 lib/zernio-sdk/models/create_tracking_tag_request.rb
+lib/zernio-sdk/models/create_verification_request.rb
 lib/zernio-sdk/models/create_voice_call200_response.rb
 lib/zernio-sdk/models/create_voice_call_request.rb
 lib/zernio-sdk/models/create_voice_web_session200_response.rb
@@ -2499,6 +2512,10 @@ lib/zernio-sdk/models/money.rb
 lib/zernio-sdk/models/money_amount.rb
 lib/zernio-sdk/models/move_account_to_profile200_response.rb
 lib/zernio-sdk/models/move_account_to_profile_request.rb
+lib/zernio-sdk/models/on_verification_approved_request.rb
+lib/zernio-sdk/models/on_verification_approved_request_verification.rb
+lib/zernio-sdk/models/on_verification_failed_request.rb
+lib/zernio-sdk/models/on_verification_failed_request_verification.rb
 lib/zernio-sdk/models/on_whats_app_automatic_event_request.rb
 lib/zernio-sdk/models/on_whats_app_automatic_event_request_custom_data.rb
 lib/zernio-sdk/models/on_whats_app_number_action_required_request.rb
@@ -2950,6 +2967,7 @@ lib/zernio-sdk/models/validate_subreddit200_response.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of1.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of_subreddit.rb
+lib/zernio-sdk/models/verification.rb
 lib/zernio-sdk/models/verify_sms_registration_otp200_response.rb
 lib/zernio-sdk/models/verify_sms_registration_otp_request.rb
 lib/zernio-sdk/models/vote_reddit_thing_request.rb
@@ -3100,6 +3118,7 @@ spec/api/twitter_engagement_api_spec.rb
 spec/api/usage_api_spec.rb
 spec/api/users_api_spec.rb
 spec/api/validate_api_spec.rb
+spec/api/verify_api_spec.rb
 spec/api/voice_api_spec.rb
 spec/api/webhooks_api_spec.rb
 spec/api/whats_app_api_spec.rb
@@ -3216,6 +3235,8 @@ spec/models/check_phone_number_availability200_response_spec.rb
 spec/models/check_phone_number_portability200_response_results_inner_spec.rb
 spec/models/check_phone_number_portability200_response_spec.rb
 spec/models/check_phone_number_portability_request_spec.rb
+spec/models/check_verification200_response_spec.rb
+spec/models/check_verification_request_spec.rb
 spec/models/complete_google_business_verification_request_spec.rb
 spec/models/complete_telegram_connect200_response_spec.rb
 spec/models/complete_whats_app_phone_selection200_response_account_spec.rb
@@ -3364,6 +3385,7 @@ spec/models/create_test_lead_request_field_data_inner_spec.rb
 spec/models/create_test_lead_request_spec.rb
 spec/models/create_tracking_tag201_response_spec.rb
 spec/models/create_tracking_tag_request_spec.rb
+spec/models/create_verification_request_spec.rb
 spec/models/create_voice_call200_response_spec.rb
 spec/models/create_voice_call_request_spec.rb
 spec/models/create_voice_web_session200_response_spec.rb
@@ -4020,6 +4042,10 @@ spec/models/money_amount_spec.rb
 spec/models/money_spec.rb
 spec/models/move_account_to_profile200_response_spec.rb
 spec/models/move_account_to_profile_request_spec.rb
+spec/models/on_verification_approved_request_spec.rb
+spec/models/on_verification_approved_request_verification_spec.rb
+spec/models/on_verification_failed_request_spec.rb
+spec/models/on_verification_failed_request_verification_spec.rb
 spec/models/on_whats_app_automatic_event_request_custom_data_spec.rb
 spec/models/on_whats_app_automatic_event_request_spec.rb
 spec/models/on_whats_app_number_action_required_request_spec.rb
@@ -4471,6 +4497,7 @@ spec/models/validate_subreddit200_response_one_of1_spec.rb
 spec/models/validate_subreddit200_response_one_of_spec.rb
 spec/models/validate_subreddit200_response_one_of_subreddit_spec.rb
 spec/models/validate_subreddit200_response_spec.rb
+spec/models/verification_spec.rb
 spec/models/verify_sms_registration_otp200_response_spec.rb
 spec/models/verify_sms_registration_otp_request_spec.rb
 spec/models/vote_reddit_thing_request_spec.rb

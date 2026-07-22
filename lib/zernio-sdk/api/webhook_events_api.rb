@@ -2197,6 +2197,138 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Verification approved event
+    # Fired when a managed-OTP verification is approved (the user submitted the correct code to POST /v1/verify/verifications/{verificationId}/check). 
+    # @param on_verification_approved_request [OnVerificationApprovedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_verification_approved(on_verification_approved_request, opts = {})
+      on_verification_approved_with_http_info(on_verification_approved_request, opts)
+      nil
+    end
+
+    # Verification approved event
+    # Fired when a managed-OTP verification is approved (the user submitted the correct code to POST /v1/verify/verifications/{verificationId}/check). 
+    # @param on_verification_approved_request [OnVerificationApprovedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_verification_approved_with_http_info(on_verification_approved_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_verification_approved ...'
+      end
+      # verify the required parameter 'on_verification_approved_request' is set
+      if @api_client.config.client_side_validation && on_verification_approved_request.nil?
+        fail ArgumentError, "Missing the required parameter 'on_verification_approved_request' when calling WebhookEventsApi.on_verification_approved"
+      end
+      # resource path
+      local_var_path = '/verification.approved'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(on_verification_approved_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_verification_approved",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_verification_approved\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Verification failed event
+    # Fired when a managed-OTP verification is exhausted (the maximum number of wrong code attempts was reached). 
+    # @param on_verification_failed_request [OnVerificationFailedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_verification_failed(on_verification_failed_request, opts = {})
+      on_verification_failed_with_http_info(on_verification_failed_request, opts)
+      nil
+    end
+
+    # Verification failed event
+    # Fired when a managed-OTP verification is exhausted (the maximum number of wrong code attempts was reached). 
+    # @param on_verification_failed_request [OnVerificationFailedRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_verification_failed_with_http_info(on_verification_failed_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_verification_failed ...'
+      end
+      # verify the required parameter 'on_verification_failed_request' is set
+      if @api_client.config.client_side_validation && on_verification_failed_request.nil?
+        fail ArgumentError, "Missing the required parameter 'on_verification_failed_request' when calling WebhookEventsApi.on_verification_failed"
+      end
+      # resource path
+      local_var_path = '/verification.failed'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(on_verification_failed_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_verification_failed",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_verification_failed\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Webhook test event
     # Fired when sending a test webhook to verify the endpoint configuration.
     # @param webhook_payload_test [WebhookPayloadTest] 

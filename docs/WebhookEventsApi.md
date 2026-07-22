@@ -37,6 +37,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_reaction_received**](WebhookEventsApi.md#on_reaction_received) | **POST** /reaction.received | Reaction received event |
 | [**on_review_new**](WebhookEventsApi.md#on_review_new) | **POST** /review.new | Review new event |
 | [**on_review_updated**](WebhookEventsApi.md#on_review_updated) | **POST** /review.updated | Review updated event |
+| [**on_verification_approved**](WebhookEventsApi.md#on_verification_approved) | **POST** /verification.approved | Verification approved event |
+| [**on_verification_failed**](WebhookEventsApi.md#on_verification_failed) | **POST** /verification.failed | Verification failed event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
 | [**on_whats_app_automatic_event**](WebhookEventsApi.md#on_whats_app_automatic_event) | **POST** /whatsapp.automatic_event | WhatsApp automatic event detected |
 | [**on_whats_app_number_action_required**](WebhookEventsApi.md#on_whats_app_number_action_required) | **POST** /whatsapp.number.action_required | WhatsApp number action required event |
@@ -2279,6 +2281,142 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_review_updated** | [**WebhookPayloadReviewUpdated**](WebhookPayloadReviewUpdated.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_verification_approved
+
+> on_verification_approved(on_verification_approved_request)
+
+Verification approved event
+
+Fired when a managed-OTP verification is approved (the user submitted the correct code to POST /v1/verify/verifications/{verificationId}/check). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_verification_approved_request =  # OnVerificationApprovedRequest | 
+
+begin
+  # Verification approved event
+  api_instance.on_verification_approved(on_verification_approved_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_verification_approved: #{e}"
+end
+```
+
+#### Using the on_verification_approved_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_verification_approved_with_http_info(on_verification_approved_request)
+
+```ruby
+begin
+  # Verification approved event
+  data, status_code, headers = api_instance.on_verification_approved_with_http_info(on_verification_approved_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_verification_approved_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_verification_approved_request** | [**OnVerificationApprovedRequest**](OnVerificationApprovedRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_verification_failed
+
+> on_verification_failed(on_verification_failed_request)
+
+Verification failed event
+
+Fired when a managed-OTP verification is exhausted (the maximum number of wrong code attempts was reached). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+on_verification_failed_request =  # OnVerificationFailedRequest | 
+
+begin
+  # Verification failed event
+  api_instance.on_verification_failed(on_verification_failed_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_verification_failed: #{e}"
+end
+```
+
+#### Using the on_verification_failed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_verification_failed_with_http_info(on_verification_failed_request)
+
+```ruby
+begin
+  # Verification failed event
+  data, status_code, headers = api_instance.on_verification_failed_with_http_info(on_verification_failed_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_verification_failed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **on_verification_failed_request** | [**OnVerificationFailedRequest**](OnVerificationFailedRequest.md) |  |  |
 
 ### Return type
 

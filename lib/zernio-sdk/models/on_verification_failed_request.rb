@@ -14,14 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  class OnWhatsAppNumberKycSubmittedRequest < ApiModelBase
+  class OnVerificationFailedRequest < ApiModelBase
     attr_accessor :id
 
     attr_accessor :event
 
     attr_accessor :timestamp
 
-    attr_accessor :number
+    attr_accessor :verification
+
+    attr_accessor :reason
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -51,7 +53,8 @@ module Zernio
         :'id' => :'id',
         :'event' => :'event',
         :'timestamp' => :'timestamp',
-        :'number' => :'number'
+        :'verification' => :'verification',
+        :'reason' => :'reason'
       }
     end
 
@@ -71,7 +74,8 @@ module Zernio
         :'id' => :'String',
         :'event' => :'String',
         :'timestamp' => :'Time',
-        :'number' => :'OnWhatsAppNumberDeclinedRequestNumber'
+        :'verification' => :'OnVerificationFailedRequestVerification',
+        :'reason' => :'String'
       }
     end
 
@@ -85,14 +89,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::OnWhatsAppNumberKycSubmittedRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::OnVerificationFailedRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::OnWhatsAppNumberKycSubmittedRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::OnVerificationFailedRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -109,8 +113,12 @@ module Zernio
         self.timestamp = attributes[:'timestamp']
       end
 
-      if attributes.key?(:'number')
-        self.number = attributes[:'number']
+      if attributes.key?(:'verification')
+        self.verification = attributes[:'verification']
+      end
+
+      if attributes.key?(:'reason')
+        self.reason = attributes[:'reason']
       end
     end
 
@@ -126,19 +134,31 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      event_validator = EnumAttributeValidator.new('String', ["whatsapp.number.kyc_submitted", "verification.approved", "verification.failed"])
+      event_validator = EnumAttributeValidator.new('String', ["verification.failed"])
       return false unless event_validator.valid?(@event)
+      reason_validator = EnumAttributeValidator.new('String', ["max_attempts_reached"])
+      return false unless reason_validator.valid?(@reason)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] event Object to be assigned
     def event=(event)
-      validator = EnumAttributeValidator.new('String', ["whatsapp.number.kyc_submitted", "verification.approved", "verification.failed"])
+      validator = EnumAttributeValidator.new('String', ["verification.failed"])
       unless validator.valid?(event)
         fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
       end
       @event = event
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] reason Object to be assigned
+    def reason=(reason)
+      validator = EnumAttributeValidator.new('String', ["max_attempts_reached"])
+      unless validator.valid?(reason)
+        fail ArgumentError, "invalid value for \"reason\", must be one of #{validator.allowable_values}."
+      end
+      @reason = reason
     end
 
     # Checks equality by comparing each attribute.
@@ -149,7 +169,8 @@ module Zernio
           id == o.id &&
           event == o.event &&
           timestamp == o.timestamp &&
-          number == o.number
+          verification == o.verification &&
+          reason == o.reason
     end
 
     # @see the `==` method
@@ -161,7 +182,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event, timestamp, number].hash
+      [id, event, timestamp, verification, reason].hash
     end
 
     # Builds the object from hash

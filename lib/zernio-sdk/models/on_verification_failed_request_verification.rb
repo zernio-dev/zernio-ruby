@@ -14,14 +14,12 @@ require 'date'
 require 'time'
 
 module Zernio
-  class OnWhatsAppNumberKycSubmittedRequest < ApiModelBase
-    attr_accessor :id
+  class OnVerificationFailedRequestVerification < ApiModelBase
+    attr_accessor :verification_id
 
-    attr_accessor :event
+    attr_accessor :channel
 
-    attr_accessor :timestamp
-
-    attr_accessor :number
+    attr_accessor :to
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -48,10 +46,9 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'event' => :'event',
-        :'timestamp' => :'timestamp',
-        :'number' => :'number'
+        :'verification_id' => :'verificationId',
+        :'channel' => :'channel',
+        :'to' => :'to'
       }
     end
 
@@ -68,10 +65,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'event' => :'String',
-        :'timestamp' => :'Time',
-        :'number' => :'OnWhatsAppNumberDeclinedRequestNumber'
+        :'verification_id' => :'String',
+        :'channel' => :'String',
+        :'to' => :'String'
       }
     end
 
@@ -85,32 +81,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::OnWhatsAppNumberKycSubmittedRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::OnVerificationFailedRequestVerification` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::OnWhatsAppNumberKycSubmittedRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::OnVerificationFailedRequestVerification`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'verification_id')
+        self.verification_id = attributes[:'verification_id']
       end
 
-      if attributes.key?(:'event')
-        self.event = attributes[:'event']
+      if attributes.key?(:'channel')
+        self.channel = attributes[:'channel']
       end
 
-      if attributes.key?(:'timestamp')
-        self.timestamp = attributes[:'timestamp']
-      end
-
-      if attributes.key?(:'number')
-        self.number = attributes[:'number']
+      if attributes.key?(:'to')
+        self.to = attributes[:'to']
       end
     end
 
@@ -126,19 +118,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      event_validator = EnumAttributeValidator.new('String', ["whatsapp.number.kyc_submitted", "verification.approved", "verification.failed"])
-      return false unless event_validator.valid?(@event)
+      channel_validator = EnumAttributeValidator.new('String', ["sms"])
+      return false unless channel_validator.valid?(@channel)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] event Object to be assigned
-    def event=(event)
-      validator = EnumAttributeValidator.new('String', ["whatsapp.number.kyc_submitted", "verification.approved", "verification.failed"])
-      unless validator.valid?(event)
-        fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
+    # @param [Object] channel Object to be assigned
+    def channel=(channel)
+      validator = EnumAttributeValidator.new('String', ["sms"])
+      unless validator.valid?(channel)
+        fail ArgumentError, "invalid value for \"channel\", must be one of #{validator.allowable_values}."
       end
-      @event = event
+      @channel = channel
     end
 
     # Checks equality by comparing each attribute.
@@ -146,10 +138,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          event == o.event &&
-          timestamp == o.timestamp &&
-          number == o.number
+          verification_id == o.verification_id &&
+          channel == o.channel &&
+          to == o.to
     end
 
     # @see the `==` method
@@ -161,7 +152,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event, timestamp, number].hash
+      [verification_id, channel, to].hash
     end
 
     # Builds the object from hash

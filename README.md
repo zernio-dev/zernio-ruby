@@ -466,6 +466,9 @@ Class | Method | HTTP request | Description
 *Zernio::ValidateApi* | [**validate_post**](docs/ValidateApi.md#validate_post) | **POST** /v1/tools/validate/post | Validate post content
 *Zernio::ValidateApi* | [**validate_post_length**](docs/ValidateApi.md#validate_post_length) | **POST** /v1/tools/validate/post-length | Validate character count
 *Zernio::ValidateApi* | [**validate_subreddit**](docs/ValidateApi.md#validate_subreddit) | **GET** /v1/tools/validate/subreddit | Check subreddit existence
+*Zernio::VerifyApi* | [**check_verification**](docs/VerifyApi.md#check_verification) | **POST** /v1/verify/verifications/{verificationId}/check | Check a verification code
+*Zernio::VerifyApi* | [**create_verification**](docs/VerifyApi.md#create_verification) | **POST** /v1/verify/verifications | Send a verification code
+*Zernio::VerifyApi* | [**get_verification**](docs/VerifyApi.md#get_verification) | **GET** /v1/verify/verifications/{verificationId} | Get a verification
 *Zernio::VoiceApi* | [**create_voice_call**](docs/VoiceApi.md#create_voice_call) | **POST** /v1/voice/calls | Place an outbound phone call
 *Zernio::VoiceApi* | [**create_voice_web_session**](docs/VoiceApi.md#create_voice_web_session) | **POST** /v1/voice/calls/web | Mint a browser softphone session
 *Zernio::VoiceApi* | [**dial_voice_web_call**](docs/VoiceApi.md#dial_voice_web_call) | **POST** /v1/voice/calls/web/dial | Dial from the browser softphone
@@ -687,6 +690,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CheckPhoneNumberPortability200Response](docs/CheckPhoneNumberPortability200Response.md)
  - [Zernio::CheckPhoneNumberPortability200ResponseResultsInner](docs/CheckPhoneNumberPortability200ResponseResultsInner.md)
  - [Zernio::CheckPhoneNumberPortabilityRequest](docs/CheckPhoneNumberPortabilityRequest.md)
+ - [Zernio::CheckVerification200Response](docs/CheckVerification200Response.md)
+ - [Zernio::CheckVerificationRequest](docs/CheckVerificationRequest.md)
  - [Zernio::CompleteGoogleBusinessVerificationRequest](docs/CompleteGoogleBusinessVerificationRequest.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
  - [Zernio::CompleteWhatsAppPhoneSelection200Response](docs/CompleteWhatsAppPhoneSelection200Response.md)
@@ -835,6 +840,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateTestLeadRequestFieldDataInner](docs/CreateTestLeadRequestFieldDataInner.md)
  - [Zernio::CreateTrackingTag201Response](docs/CreateTrackingTag201Response.md)
  - [Zernio::CreateTrackingTagRequest](docs/CreateTrackingTagRequest.md)
+ - [Zernio::CreateVerificationRequest](docs/CreateVerificationRequest.md)
  - [Zernio::CreateVoiceCall200Response](docs/CreateVoiceCall200Response.md)
  - [Zernio::CreateVoiceCallRequest](docs/CreateVoiceCallRequest.md)
  - [Zernio::CreateVoiceWebSession200Response](docs/CreateVoiceWebSession200Response.md)
@@ -1491,6 +1497,10 @@ Class | Method | HTTP request | Description
  - [Zernio::MoneyAmount](docs/MoneyAmount.md)
  - [Zernio::MoveAccountToProfile200Response](docs/MoveAccountToProfile200Response.md)
  - [Zernio::MoveAccountToProfileRequest](docs/MoveAccountToProfileRequest.md)
+ - [Zernio::OnVerificationApprovedRequest](docs/OnVerificationApprovedRequest.md)
+ - [Zernio::OnVerificationApprovedRequestVerification](docs/OnVerificationApprovedRequestVerification.md)
+ - [Zernio::OnVerificationFailedRequest](docs/OnVerificationFailedRequest.md)
+ - [Zernio::OnVerificationFailedRequestVerification](docs/OnVerificationFailedRequestVerification.md)
  - [Zernio::OnWhatsAppAutomaticEventRequest](docs/OnWhatsAppAutomaticEventRequest.md)
  - [Zernio::OnWhatsAppAutomaticEventRequestCustomData](docs/OnWhatsAppAutomaticEventRequestCustomData.md)
  - [Zernio::OnWhatsAppNumberActionRequiredRequest](docs/OnWhatsAppNumberActionRequiredRequest.md)
@@ -1942,6 +1952,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ValidateSubreddit200ResponseOneOf](docs/ValidateSubreddit200ResponseOneOf.md)
  - [Zernio::ValidateSubreddit200ResponseOneOf1](docs/ValidateSubreddit200ResponseOneOf1.md)
  - [Zernio::ValidateSubreddit200ResponseOneOfSubreddit](docs/ValidateSubreddit200ResponseOneOfSubreddit.md)
+ - [Zernio::Verification](docs/Verification.md)
  - [Zernio::VerifySmsRegistrationOtp200Response](docs/VerifySmsRegistrationOtp200Response.md)
  - [Zernio::VerifySmsRegistrationOtpRequest](docs/VerifySmsRegistrationOtpRequest.md)
  - [Zernio::VoteRedditThingRequest](docs/VoteRedditThingRequest.md)
