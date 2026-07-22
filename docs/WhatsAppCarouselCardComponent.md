@@ -1,4 +1,4 @@
-# Zernio::WhatsAppTemplateComponent
+# Zernio::WhatsAppCarouselCardComponent
 
 ## Class instance methods
 
@@ -11,15 +11,12 @@ Returns the list of classes defined in oneOf.
 ```ruby
 require 'zernio-sdk'
 
-Zernio::WhatsAppTemplateComponent.openapi_one_of
+Zernio::WhatsAppCarouselCardComponent.openapi_one_of
 # =>
 # [
 #   :'WhatsAppBodyComponent',
 #   :'WhatsAppButtonsComponent',
-#   :'WhatsAppCarouselComponent',
-#   :'WhatsAppFooterComponent',
-#   :'WhatsAppHeaderComponent',
-#   :'WhatsAppLimitedTimeOfferComponent'
+#   :'WhatsAppHeaderComponent'
 # ]
 ```
 
@@ -32,7 +29,7 @@ Returns the discriminator's property name.
 ```ruby
 require 'zernio-sdk'
 
-Zernio::WhatsAppTemplateComponent.openapi_discriminator_name
+Zernio::WhatsAppCarouselCardComponent.openapi_discriminator_name
 # => :'type'
 ```
 
@@ -45,15 +42,12 @@ Returns the discriminator's mapping.
 ```ruby
 require 'zernio-sdk'
 
-Zernio::WhatsAppTemplateComponent.openapi_discriminator_mapping
+Zernio::WhatsAppCarouselCardComponent.openapi_discriminator_mapping
 # =>
 # {
 #   :'body' => :'WhatsAppBodyComponent',
 #   :'buttons' => :'WhatsAppButtonsComponent',
-#   :'carousel' => :'WhatsAppCarouselComponent',
-#   :'footer' => :'WhatsAppFooterComponent',
-#   :'header' => :'WhatsAppHeaderComponent',
-#   :'limited_time_offer' => :'WhatsAppLimitedTimeOfferComponent'
+#   :'header' => :'WhatsAppHeaderComponent'
 # }
 ```
 
@@ -66,10 +60,10 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 ```ruby
 require 'zernio-sdk'
 
-Zernio::WhatsAppTemplateComponent.build(data)
+Zernio::WhatsAppCarouselCardComponent.build(data)
 # => #<WhatsAppBodyComponent:0x00007fdd4aab02a0>
 
-Zernio::WhatsAppTemplateComponent.build(data_that_doesnt_match)
+Zernio::WhatsAppCarouselCardComponent.build(data_that_doesnt_match)
 # => nil
 ```
 
@@ -83,9 +77,6 @@ Zernio::WhatsAppTemplateComponent.build(data_that_doesnt_match)
 
 - `WhatsAppBodyComponent`
 - `WhatsAppButtonsComponent`
-- `WhatsAppCarouselComponent`
-- `WhatsAppFooterComponent`
 - `WhatsAppHeaderComponent`
-- `WhatsAppLimitedTimeOfferComponent`
 - `nil` (if no type matches)
 

@@ -30,6 +30,9 @@ module Zernio
     # SMS capability is per-number, not per-country. Pass true to provision from the SMS-capable inventory pool so the number can actually text (see also GET /v1/phone-numbers/available with sms=true, and smsAvailable on GET /v1/phone-numbers/countries). 
     attr_accessor :wants_sms
 
+    # Declare WhatsApp intent on a STANDALONE purchase (connectWhatsapp:false). The number still activates and bills immediately, but if WhatsApp's buy-time check rejects the assigned number, it is automatically swapped for a WhatsApp-eligible one during the purchase instead of being delivered with WhatsApp unavailable. Ignored on the WhatsApp provisioning path (connectWhatsapp omitted or true), which always delivers a WhatsApp-verified number. 
+    attr_accessor :wants_whatsapp
+
     # Optional idempotency key. Send the same value when retrying a purchase: if a number was already bought under this key, the API returns { status: \"already_purchased\", numberId, phoneNumber } instead of provisioning a second number. Generate a fresh key for each genuinely new purchase. 
     attr_accessor :purchase_intent_id
 
@@ -66,6 +69,7 @@ module Zernio
         :'number_type' => :'numberType',
         :'connect_whatsapp' => :'connectWhatsapp',
         :'wants_sms' => :'wantsSms',
+        :'wants_whatsapp' => :'wantsWhatsapp',
         :'purchase_intent_id' => :'purchaseIntentId',
         :'allow_multiple' => :'allowMultiple'
       }
@@ -89,6 +93,7 @@ module Zernio
         :'number_type' => :'String',
         :'connect_whatsapp' => :'Boolean',
         :'wants_sms' => :'Boolean',
+        :'wants_whatsapp' => :'Boolean',
         :'purchase_intent_id' => :'String',
         :'allow_multiple' => :'Boolean'
       }
@@ -142,6 +147,12 @@ module Zernio
         self.wants_sms = attributes[:'wants_sms']
       else
         self.wants_sms = false
+      end
+
+      if attributes.key?(:'wants_whatsapp')
+        self.wants_whatsapp = attributes[:'wants_whatsapp']
+      else
+        self.wants_whatsapp = false
       end
 
       if attributes.key?(:'purchase_intent_id')
@@ -226,6 +237,7 @@ module Zernio
           number_type == o.number_type &&
           connect_whatsapp == o.connect_whatsapp &&
           wants_sms == o.wants_sms &&
+          wants_whatsapp == o.wants_whatsapp &&
           purchase_intent_id == o.purchase_intent_id &&
           allow_multiple == o.allow_multiple
     end
@@ -239,7 +251,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, number_type, connect_whatsapp, wants_sms, purchase_intent_id, allow_multiple].hash
+      [profile_id, country, number_type, connect_whatsapp, wants_sms, wants_whatsapp, purchase_intent_id, allow_multiple].hash
     end
 
     # Builds the object from hash

@@ -14,17 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  module WhatsAppTemplateComponent
+  module WhatsAppCarouselCardComponent
     class << self
       # List of class defined in oneOf (OpenAPI v3)
       def openapi_one_of
         [
           :'WhatsAppBodyComponent',
           :'WhatsAppButtonsComponent',
-          :'WhatsAppCarouselComponent',
-          :'WhatsAppFooterComponent',
-          :'WhatsAppHeaderComponent',
-          :'WhatsAppLimitedTimeOfferComponent'
+          :'WhatsAppHeaderComponent'
         ]
       end
 
@@ -38,10 +35,7 @@ module Zernio
         {
           :'body' => :'WhatsAppBodyComponent',
           :'buttons' => :'WhatsAppButtonsComponent',
-          :'carousel' => :'WhatsAppCarouselComponent',
-          :'footer' => :'WhatsAppFooterComponent',
-          :'header' => :'WhatsAppHeaderComponent',
-          :'limited_time_offer' => :'WhatsAppLimitedTimeOfferComponent'
+          :'header' => :'WhatsAppHeaderComponent'
         }
       end
 
