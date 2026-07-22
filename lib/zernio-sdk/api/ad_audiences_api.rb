@@ -372,8 +372,8 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Update saved targeting audience
-    # Update a `saved_targeting` audience's name, description, or spec. Only `saved_targeting` audiences are updatable (they exist only on Zernio); uploaded/derived audiences return 422, delete and recreate those instead. `spec` replaces the stored spec wholesale (no merge). Ads already created from this audience are unaffected, they snapshot the targeting at creation. 
+    # Update an audience
+    # Update an audience. `saved_targeting` audiences accept `name`, `description`, and `spec` (full replacement, no merge, Zernio-only, no platform call). Platform audiences (uploaded/website/lookalike) accept `name` and `description` only, updated on the platform first and then mirrored locally; their rules are immutable, so `spec` returns 400 for them. Platform audience updates are Meta-only for now (other platforms return 501). Ads already created from a saved_targeting audience are unaffected, they snapshot the targeting at creation. 
     # @param audience_id [String] 
     # @param update_ad_audience_request [UpdateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
@@ -383,8 +383,8 @@ module Zernio
       data
     end
 
-    # Update saved targeting audience
-    # Update a &#x60;saved_targeting&#x60; audience&#39;s name, description, or spec. Only &#x60;saved_targeting&#x60; audiences are updatable (they exist only on Zernio); uploaded/derived audiences return 422, delete and recreate those instead. &#x60;spec&#x60; replaces the stored spec wholesale (no merge). Ads already created from this audience are unaffected, they snapshot the targeting at creation. 
+    # Update an audience
+    # Update an audience. &#x60;saved_targeting&#x60; audiences accept &#x60;name&#x60;, &#x60;description&#x60;, and &#x60;spec&#x60; (full replacement, no merge, Zernio-only, no platform call). Platform audiences (uploaded/website/lookalike) accept &#x60;name&#x60; and &#x60;description&#x60; only, updated on the platform first and then mirrored locally; their rules are immutable, so &#x60;spec&#x60; returns 400 for them. Platform audience updates are Meta-only for now (other platforms return 501). Ads already created from a saved_targeting audience are unaffected, they snapshot the targeting at creation. 
     # @param audience_id [String] 
     # @param update_ad_audience_request [UpdateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters

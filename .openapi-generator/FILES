@@ -154,6 +154,11 @@ docs/CreateAccountGroup201ResponseGroup.md
 docs/CreateAccountGroupRequest.md
 docs/CreateAdAudience201Response.md
 docs/CreateAdAudienceRequest.md
+docs/CreateAdCampaign201Response.md
+docs/CreateAdCampaignRequest.md
+docs/CreateAdCreative201Response.md
+docs/CreateAdCreativeRequest.md
+docs/CreateAdCreativeRequestCarouselCardsInner.md
 docs/CreateAdInsightsReport202Response.md
 docs/CreateAdInsightsReportRequest.md
 docs/CreateAdInsightsReportRequestFilteringInner.md
@@ -308,6 +313,7 @@ docs/DeactivateSmsRegistration200Response.md
 docs/DeleteAccountGroup200Response.md
 docs/DeleteAdCampaign200Response.md
 docs/DeleteAdCampaignRequest.md
+docs/DeleteAdCreative200Response.md
 docs/DeleteDiscordScheduledEvent200Response.md
 docs/DeleteGoogleBusinessMedia200Response.md
 docs/DeleteGoogleBusinessPlaceAction200Response.md
@@ -336,8 +342,12 @@ docs/DiscordRole.md
 docs/DiscordScheduledEvent.md
 docs/DiscordScheduledEventEntityMetadata.md
 docs/DmButton.md
+docs/DuplicateAd200Response.md
 docs/DuplicateAdCampaign200Response.md
 docs/DuplicateAdCampaignRequest.md
+docs/DuplicateAdRequest.md
+docs/DuplicateAdSet200Response.md
+docs/DuplicateAdSetRequest.md
 docs/DuplicateWorkflow201Response.md
 docs/DuplicateWorkflow201ResponseWorkflow.md
 docs/EditDiscordGuildRoleRequest.md
@@ -417,6 +427,7 @@ docs/GetAdAudience200Response.md
 docs/GetAdComments200Response.md
 docs/GetAdComments200ResponseMeta.md
 docs/GetAdComments200ResponsePagination.md
+docs/GetAdCreative200Response.md
 docs/GetAdInsightsReport200Response.md
 docs/GetAdInsightsReport200ResponsePaging.md
 docs/GetAdPreviews200Response.md
@@ -784,6 +795,9 @@ docs/ListAdCatalogProductSets200Response.md
 docs/ListAdCatalogProductSets200ResponseProductSetsInner.md
 docs/ListAdCatalogs200Response.md
 docs/ListAdCatalogs200ResponseCatalogsInner.md
+docs/ListAdCreatives200Response.md
+docs/ListAdImages200Response.md
+docs/ListAdLabels200Response.md
 docs/ListAdStudies200Response.md
 docs/ListAds200Response.md
 docs/ListAdsBusinessCenters200Response.md
@@ -828,6 +842,7 @@ docs/ListGoogleBusinessMedia200ResponseMediaItemsInner.md
 docs/ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation.md
 docs/ListGoogleBusinessPlaceActions200Response.md
 docs/ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner.md
+docs/ListHighDemandPeriods200Response.md
 docs/ListInboxComments200Response.md
 docs/ListInboxComments200ResponseDataInner.md
 docs/ListInboxConversationAnalytics200Response.md
@@ -1231,6 +1246,8 @@ docs/UpdateAdCampaignRequestBudget.md
 docs/UpdateAdCampaignRequestPlatformSpecificData.md
 docs/UpdateAdCampaignStatus200Response.md
 docs/UpdateAdCampaignStatusRequest.md
+docs/UpdateAdCreative200Response.md
+docs/UpdateAdCreativeRequest.md
 docs/UpdateAdRequest.md
 docs/UpdateAdRequestBudget.md
 docs/UpdateAdRequestCreative.md
@@ -1705,6 +1722,11 @@ lib/zernio-sdk/models/create_account_group201_response_group.rb
 lib/zernio-sdk/models/create_account_group_request.rb
 lib/zernio-sdk/models/create_ad_audience201_response.rb
 lib/zernio-sdk/models/create_ad_audience_request.rb
+lib/zernio-sdk/models/create_ad_campaign201_response.rb
+lib/zernio-sdk/models/create_ad_campaign_request.rb
+lib/zernio-sdk/models/create_ad_creative201_response.rb
+lib/zernio-sdk/models/create_ad_creative_request.rb
+lib/zernio-sdk/models/create_ad_creative_request_carousel_cards_inner.rb
 lib/zernio-sdk/models/create_ad_insights_report202_response.rb
 lib/zernio-sdk/models/create_ad_insights_report_request.rb
 lib/zernio-sdk/models/create_ad_insights_report_request_filtering_inner.rb
@@ -1858,6 +1880,7 @@ lib/zernio-sdk/models/deactivate_sms_registration200_response.rb
 lib/zernio-sdk/models/delete_account_group200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign_request.rb
+lib/zernio-sdk/models/delete_ad_creative200_response.rb
 lib/zernio-sdk/models/delete_discord_scheduled_event200_response.rb
 lib/zernio-sdk/models/delete_google_business_media200_response.rb
 lib/zernio-sdk/models/delete_google_business_place_action200_response.rb
@@ -1885,8 +1908,12 @@ lib/zernio-sdk/models/discord_role.rb
 lib/zernio-sdk/models/discord_scheduled_event.rb
 lib/zernio-sdk/models/discord_scheduled_event_entity_metadata.rb
 lib/zernio-sdk/models/dm_button.rb
+lib/zernio-sdk/models/duplicate_ad200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign200_response.rb
 lib/zernio-sdk/models/duplicate_ad_campaign_request.rb
+lib/zernio-sdk/models/duplicate_ad_request.rb
+lib/zernio-sdk/models/duplicate_ad_set200_response.rb
+lib/zernio-sdk/models/duplicate_ad_set_request.rb
 lib/zernio-sdk/models/duplicate_workflow201_response.rb
 lib/zernio-sdk/models/duplicate_workflow201_response_workflow.rb
 lib/zernio-sdk/models/edit_discord_guild_role_request.rb
@@ -1958,6 +1985,7 @@ lib/zernio-sdk/models/get_ad_audience200_response.rb
 lib/zernio-sdk/models/get_ad_comments200_response.rb
 lib/zernio-sdk/models/get_ad_comments200_response_meta.rb
 lib/zernio-sdk/models/get_ad_comments200_response_pagination.rb
+lib/zernio-sdk/models/get_ad_creative200_response.rb
 lib/zernio-sdk/models/get_ad_insights_report200_response.rb
 lib/zernio-sdk/models/get_ad_insights_report200_response_paging.rb
 lib/zernio-sdk/models/get_ad_previews200_response.rb
@@ -2321,6 +2349,9 @@ lib/zernio-sdk/models/list_ad_catalog_product_sets200_response.rb
 lib/zernio-sdk/models/list_ad_catalog_product_sets200_response_product_sets_inner.rb
 lib/zernio-sdk/models/list_ad_catalogs200_response.rb
 lib/zernio-sdk/models/list_ad_catalogs200_response_catalogs_inner.rb
+lib/zernio-sdk/models/list_ad_creatives200_response.rb
+lib/zernio-sdk/models/list_ad_images200_response.rb
+lib/zernio-sdk/models/list_ad_labels200_response.rb
 lib/zernio-sdk/models/list_ad_studies200_response.rb
 lib/zernio-sdk/models/list_ads200_response.rb
 lib/zernio-sdk/models/list_ads_business_centers200_response.rb
@@ -2365,6 +2396,7 @@ lib/zernio-sdk/models/list_google_business_media200_response_media_items_inner.r
 lib/zernio-sdk/models/list_google_business_media200_response_media_items_inner_location_association.rb
 lib/zernio-sdk/models/list_google_business_place_actions200_response.rb
 lib/zernio-sdk/models/list_google_business_place_actions200_response_place_action_links_inner.rb
+lib/zernio-sdk/models/list_high_demand_periods200_response.rb
 lib/zernio-sdk/models/list_inbox_comments200_response.rb
 lib/zernio-sdk/models/list_inbox_comments200_response_data_inner.rb
 lib/zernio-sdk/models/list_inbox_conversation_analytics200_response.rb
@@ -2754,6 +2786,8 @@ lib/zernio-sdk/models/update_ad_campaign_request_budget.rb
 lib/zernio-sdk/models/update_ad_campaign_request_platform_specific_data.rb
 lib/zernio-sdk/models/update_ad_campaign_status200_response.rb
 lib/zernio-sdk/models/update_ad_campaign_status_request.rb
+lib/zernio-sdk/models/update_ad_creative200_response.rb
+lib/zernio-sdk/models/update_ad_creative_request.rb
 lib/zernio-sdk/models/update_ad_request.rb
 lib/zernio-sdk/models/update_ad_request_budget.rb
 lib/zernio-sdk/models/update_ad_request_creative.rb
@@ -3209,6 +3243,11 @@ spec/models/create_account_group201_response_spec.rb
 spec/models/create_account_group_request_spec.rb
 spec/models/create_ad_audience201_response_spec.rb
 spec/models/create_ad_audience_request_spec.rb
+spec/models/create_ad_campaign201_response_spec.rb
+spec/models/create_ad_campaign_request_spec.rb
+spec/models/create_ad_creative201_response_spec.rb
+spec/models/create_ad_creative_request_carousel_cards_inner_spec.rb
+spec/models/create_ad_creative_request_spec.rb
 spec/models/create_ad_insights_report202_response_spec.rb
 spec/models/create_ad_insights_report_request_filtering_inner_spec.rb
 spec/models/create_ad_insights_report_request_spec.rb
@@ -3362,6 +3401,7 @@ spec/models/deactivate_sms_registration200_response_spec.rb
 spec/models/delete_account_group200_response_spec.rb
 spec/models/delete_ad_campaign200_response_spec.rb
 spec/models/delete_ad_campaign_request_spec.rb
+spec/models/delete_ad_creative200_response_spec.rb
 spec/models/delete_discord_scheduled_event200_response_spec.rb
 spec/models/delete_google_business_media200_response_spec.rb
 spec/models/delete_google_business_place_action200_response_spec.rb
@@ -3389,8 +3429,12 @@ spec/models/discord_role_spec.rb
 spec/models/discord_scheduled_event_entity_metadata_spec.rb
 spec/models/discord_scheduled_event_spec.rb
 spec/models/dm_button_spec.rb
+spec/models/duplicate_ad200_response_spec.rb
 spec/models/duplicate_ad_campaign200_response_spec.rb
 spec/models/duplicate_ad_campaign_request_spec.rb
+spec/models/duplicate_ad_request_spec.rb
+spec/models/duplicate_ad_set200_response_spec.rb
+spec/models/duplicate_ad_set_request_spec.rb
 spec/models/duplicate_workflow201_response_spec.rb
 spec/models/duplicate_workflow201_response_workflow_spec.rb
 spec/models/edit_discord_guild_role_request_spec.rb
@@ -3462,6 +3506,7 @@ spec/models/get_ad_audience200_response_spec.rb
 spec/models/get_ad_comments200_response_meta_spec.rb
 spec/models/get_ad_comments200_response_pagination_spec.rb
 spec/models/get_ad_comments200_response_spec.rb
+spec/models/get_ad_creative200_response_spec.rb
 spec/models/get_ad_insights_report200_response_paging_spec.rb
 spec/models/get_ad_insights_report200_response_spec.rb
 spec/models/get_ad_previews200_response_spec.rb
@@ -3825,6 +3870,9 @@ spec/models/list_ad_catalog_product_sets200_response_product_sets_inner_spec.rb
 spec/models/list_ad_catalog_product_sets200_response_spec.rb
 spec/models/list_ad_catalogs200_response_catalogs_inner_spec.rb
 spec/models/list_ad_catalogs200_response_spec.rb
+spec/models/list_ad_creatives200_response_spec.rb
+spec/models/list_ad_images200_response_spec.rb
+spec/models/list_ad_labels200_response_spec.rb
 spec/models/list_ad_studies200_response_spec.rb
 spec/models/list_ads200_response_spec.rb
 spec/models/list_ads_business_centers200_response_spec.rb
@@ -3869,6 +3917,7 @@ spec/models/list_google_business_media200_response_media_items_inner_spec.rb
 spec/models/list_google_business_media200_response_spec.rb
 spec/models/list_google_business_place_actions200_response_place_action_links_inner_spec.rb
 spec/models/list_google_business_place_actions200_response_spec.rb
+spec/models/list_high_demand_periods200_response_spec.rb
 spec/models/list_inbox_comments200_response_data_inner_spec.rb
 spec/models/list_inbox_comments200_response_spec.rb
 spec/models/list_inbox_conversation_analytics200_response_items_inner_spec.rb
@@ -4258,6 +4307,8 @@ spec/models/update_ad_campaign_request_platform_specific_data_spec.rb
 spec/models/update_ad_campaign_request_spec.rb
 spec/models/update_ad_campaign_status200_response_spec.rb
 spec/models/update_ad_campaign_status_request_spec.rb
+spec/models/update_ad_creative200_response_spec.rb
+spec/models/update_ad_creative_request_spec.rb
 spec/models/update_ad_request_budget_spec.rb
 spec/models/update_ad_request_creative_spec.rb
 spec/models/update_ad_request_spec.rb

@@ -382,6 +382,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a standalone creative (Meta)
+    # Creates a creative in the library WITHOUT an ad, reusable on the create endpoints via `existingCreativeId`. Provide exactly one of `imageUrl` (uploaded server-side), `imageHash` (from POST /v1/ads/images or the library list), or `carouselCards` (2-10 hand-built cards). The Page (and linked Instagram account, when present) is resolved from `accountId` as the story actor. Meta only.
+    # @param create_ad_creative_request [CreateAdCreativeRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateAdCreative201Response]
+    def create_ad_creative(create_ad_creative_request, opts = {})
+      data, _status_code, _headers = create_ad_creative_with_http_info(create_ad_creative_request, opts)
+      data
+    end
+
+    # Create a standalone creative (Meta)
+    # Creates a creative in the library WITHOUT an ad, reusable on the create endpoints via &#x60;existingCreativeId&#x60;. Provide exactly one of &#x60;imageUrl&#x60; (uploaded server-side), &#x60;imageHash&#x60; (from POST /v1/ads/images or the library list), or &#x60;carouselCards&#x60; (2-10 hand-built cards). The Page (and linked Instagram account, when present) is resolved from &#x60;accountId&#x60; as the story actor. Meta only.
+    # @param create_ad_creative_request [CreateAdCreativeRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateAdCreative201Response, Integer, Hash)>] CreateAdCreative201Response data, response status code and response headers
+    def create_ad_creative_with_http_info(create_ad_creative_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.create_ad_creative ...'
+      end
+      # verify the required parameter 'create_ad_creative_request' is set
+      if @api_client.config.client_side_validation && create_ad_creative_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_ad_creative_request' when calling AdsApi.create_ad_creative"
+      end
+      # resource path
+      local_var_path = '/v1/ads/creatives'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_ad_creative_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateAdCreative201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.create_ad_creative",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#create_ad_creative\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Submit an async insights report run (Meta)
     # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a `reportRunId` to poll via GET /v1/ads/insights/reports/{reportRunId}. Meta only. 
     # @param create_ad_insights_report_request [CreateAdInsightsReportRequest] 
@@ -1076,6 +1144,76 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Delete a creative (Meta)
+    # Deletes a creative from the library. Meta only allows deleting creatives not referenced by any ad — otherwise its 400 surfaces verbatim.
+    # @param creative_id [String] Platform creative id
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @return [DeleteAdCreative200Response]
+    def delete_ad_creative(creative_id, account_id, opts = {})
+      data, _status_code, _headers = delete_ad_creative_with_http_info(creative_id, account_id, opts)
+      data
+    end
+
+    # Delete a creative (Meta)
+    # Deletes a creative from the library. Meta only allows deleting creatives not referenced by any ad — otherwise its 400 surfaces verbatim.
+    # @param creative_id [String] Platform creative id
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeleteAdCreative200Response, Integer, Hash)>] DeleteAdCreative200Response data, response status code and response headers
+    def delete_ad_creative_with_http_info(creative_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.delete_ad_creative ...'
+      end
+      # verify the required parameter 'creative_id' is set
+      if @api_client.config.client_side_validation && creative_id.nil?
+        fail ArgumentError, "Missing the required parameter 'creative_id' when calling AdsApi.delete_ad_creative"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.delete_ad_creative"
+      end
+      # resource path
+      local_var_path = '/v1/ads/creatives/{creativeId}'.sub('{' + 'creativeId' + '}', CGI.escape(creative_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteAdCreative200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.delete_ad_creative",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#delete_ad_creative\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Delete a conversion destination
     # LinkedIn-only today. LinkedIn does not expose hard-delete on conversion rules — what their UI calls \"delete\" is the same `enabled: false` flip we apply here. The rule remains fetchable via GET with `status: 'inactive'`; the unified discovery endpoint hides it by default.  `adAccountId` may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. 
     # @param account_id [String] 
@@ -1144,6 +1282,76 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#delete_conversion_destination\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Duplicate an ad (Meta)
+    # Duplicates a single ad via Meta's native `POST /{ad-id}/copies`. The copy is created paused. `adSetId` retargets the copy into another ad set; omitted = the source's own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (`syncAfter: false` to skip). Meta only.
+    # @param ad_id [String] Zernio ad ID or platform ad ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [DuplicateAdRequest] :duplicate_ad_request 
+    # @return [DuplicateAd200Response]
+    def duplicate_ad(ad_id, opts = {})
+      data, _status_code, _headers = duplicate_ad_with_http_info(ad_id, opts)
+      data
+    end
+
+    # Duplicate an ad (Meta)
+    # Duplicates a single ad via Meta&#39;s native &#x60;POST /{ad-id}/copies&#x60;. The copy is created paused. &#x60;adSetId&#x60; retargets the copy into another ad set; omitted &#x3D; the source&#39;s own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (&#x60;syncAfter: false&#x60; to skip). Meta only.
+    # @param ad_id [String] Zernio ad ID or platform ad ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [DuplicateAdRequest] :duplicate_ad_request 
+    # @return [Array<(DuplicateAd200Response, Integer, Hash)>] DuplicateAd200Response data, response status code and response headers
+    def duplicate_ad_with_http_info(ad_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.duplicate_ad ...'
+      end
+      # verify the required parameter 'ad_id' is set
+      if @api_client.config.client_side_validation && ad_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdsApi.duplicate_ad"
+      end
+      # resource path
+      local_var_path = '/v1/ads/{adId}/duplicate'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'duplicate_ad_request'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DuplicateAd200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.duplicate_ad",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#duplicate_ad\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1570,6 +1778,79 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#get_ad_comments\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Creative details (Meta)
+    # One creative's details, verbatim from Meta. `fields` is a raw-passthrough override of the default projection. Meta only.
+    # @param creative_id [String] Platform creative id
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @return [GetAdCreative200Response]
+    def get_ad_creative(creative_id, account_id, opts = {})
+      data, _status_code, _headers = get_ad_creative_with_http_info(creative_id, account_id, opts)
+      data
+    end
+
+    # Creative details (Meta)
+    # One creative&#39;s details, verbatim from Meta. &#x60;fields&#x60; is a raw-passthrough override of the default projection. Meta only.
+    # @param creative_id [String] Platform creative id
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @return [Array<(GetAdCreative200Response, Integer, Hash)>] GetAdCreative200Response data, response status code and response headers
+    def get_ad_creative_with_http_info(creative_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.get_ad_creative ...'
+      end
+      # verify the required parameter 'creative_id' is set
+      if @api_client.config.client_side_validation && creative_id.nil?
+        fail ArgumentError, "Missing the required parameter 'creative_id' when calling AdsApi.get_ad_creative"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.get_ad_creative"
+      end
+      # resource path
+      local_var_path = '/v1/ads/creatives/{creativeId}'.sub('{' + 'creativeId' + '}', CGI.escape(creative_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdCreative200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.get_ad_creative",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#get_ad_creative\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2846,6 +3127,267 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Creative library (Meta)
+    # Lists the ad account's creative library (Meta's `/act_X/adcreatives`), rows returned verbatim. The default projection covers id, name, status, object type, thumbnail, object_story_spec / asset_feed_spec and url_tags; `fields` is a raw-passthrough override. Any creative id here is reusable on the create endpoints via `existingCreativeId`. Meta only.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [ListAdCreatives200Response]
+    def list_ad_creatives(account_id, ad_account_id, opts = {})
+      data, _status_code, _headers = list_ad_creatives_with_http_info(account_id, ad_account_id, opts)
+      data
+    end
+
+    # Creative library (Meta)
+    # Lists the ad account&#39;s creative library (Meta&#39;s &#x60;/act_X/adcreatives&#x60;), rows returned verbatim. The default projection covers id, name, status, object type, thumbnail, object_story_spec / asset_feed_spec and url_tags; &#x60;fields&#x60; is a raw-passthrough override. Any creative id here is reusable on the create endpoints via &#x60;existingCreativeId&#x60;. Meta only.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [Array<(ListAdCreatives200Response, Integer, Hash)>] ListAdCreatives200Response data, response status code and response headers
+    def list_ad_creatives_with_http_info(account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_ad_creatives ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_ad_creatives"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.list_ad_creatives"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_ad_creatives, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_ad_creatives, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/creatives'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+      query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdCreatives200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_ad_creatives",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_ad_creatives\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Ad image library (Meta)
+    # Lists the ad account's image library (Meta's `/act_X/adimages`), rows returned verbatim. The default projection covers hash, url, name, dimensions and status; `fields` is a raw-passthrough override. Any `hash` here is reusable wherever Meta accepts `image_hash` (e.g. `imageHash` on POST /v1/ads/creatives). Meta only.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [ListAdImages200Response]
+    def list_ad_images(account_id, ad_account_id, opts = {})
+      data, _status_code, _headers = list_ad_images_with_http_info(account_id, ad_account_id, opts)
+      data
+    end
+
+    # Ad image library (Meta)
+    # Lists the ad account&#39;s image library (Meta&#39;s &#x60;/act_X/adimages&#x60;), rows returned verbatim. The default projection covers hash, url, name, dimensions and status; &#x60;fields&#x60; is a raw-passthrough override. Any &#x60;hash&#x60; here is reusable wherever Meta accepts &#x60;image_hash&#x60; (e.g. &#x60;imageHash&#x60; on POST /v1/ads/creatives). Meta only.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [Array<(ListAdImages200Response, Integer, Hash)>] ListAdImages200Response data, response status code and response headers
+    def list_ad_images_with_http_info(account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_ad_images ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_ad_images"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.list_ad_images"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_ad_images, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_ad_images, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/images'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+      query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdImages200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_ad_images",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_ad_images\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Ad labels (Meta)
+    # Lists the ad account's organizational labels (Meta's `/act_X/adlabels`), rows returned verbatim (id, name, created/updated time). Meta only.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [ListAdLabels200Response]
+    def list_ad_labels(account_id, ad_account_id, opts = {})
+      data, _status_code, _headers = list_ad_labels_with_http_info(account_id, ad_account_id, opts)
+      data
+    end
+
+    # Ad labels (Meta)
+    # Lists the ad account&#39;s organizational labels (Meta&#39;s &#x60;/act_X/adlabels&#x60;), rows returned verbatim (id, name, created/updated time). Meta only.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [Array<(ListAdLabels200Response, Integer, Hash)>] ListAdLabels200Response data, response status code and response headers
+    def list_ad_labels_with_http_info(account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_ad_labels ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_ad_labels"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdsApi.list_ad_labels"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_ad_labels, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_ad_labels, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/labels'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdLabels200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_ad_labels",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_ad_labels\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # A/B tests and lift studies (Meta)
     # Lists the ad account's A/B tests and lift studies (Meta's `/act_X/ad_studies`), rows returned verbatim. The default projection covers id, name, type, timing and cells with split percentages; `fields` is a raw-passthrough override. Meta only.
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
@@ -3339,6 +3881,90 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#list_form_leads\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # High demand periods / budget schedules (Meta)
+    # Scheduled budget increases (Meta's budget-scheduling API). The Graph edge lives on the campaign and ad-set nodes only, so exactly one of `campaignId` / `adSetId` (platform ids) is required. Rows returned verbatim (budget_value, budget_value_type, time window, recurrence). Meta only.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :campaign_id Platform campaign id. Exactly one of campaignId / adSetId.
+    # @option opts [String] :ad_set_id Platform ad set id. Exactly one of campaignId / adSetId.
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [ListHighDemandPeriods200Response]
+    def list_high_demand_periods(account_id, opts = {})
+      data, _status_code, _headers = list_high_demand_periods_with_http_info(account_id, opts)
+      data
+    end
+
+    # High demand periods / budget schedules (Meta)
+    # Scheduled budget increases (Meta&#39;s budget-scheduling API). The Graph edge lives on the campaign and ad-set nodes only, so exactly one of &#x60;campaignId&#x60; / &#x60;adSetId&#x60; (platform ids) is required. Rows returned verbatim (budget_value, budget_value_type, time window, recurrence). Meta only.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :campaign_id Platform campaign id. Exactly one of campaignId / adSetId.
+    # @option opts [String] :ad_set_id Platform ad set id. Exactly one of campaignId / adSetId.
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [Array<(ListHighDemandPeriods200Response, Integer, Hash)>] ListHighDemandPeriods200Response data, response status code and response headers
+    def list_high_demand_periods_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.list_high_demand_periods ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdsApi.list_high_demand_periods"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_high_demand_periods, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdsApi.list_high_demand_periods, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/high-demand-periods'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'adSetId'] = opts[:'ad_set_id'] if !opts[:'ad_set_id'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListHighDemandPeriods200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.list_high_demand_periods",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#list_high_demand_periods\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -4310,6 +4936,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdsApi#update_ad_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Rename a creative (Meta)
+    # Renames a creative. Creatives are immutable on Meta beyond `name` — for content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with `creative`). Meta only.
+    # @param creative_id [String] Platform creative id
+    # @param update_ad_creative_request [UpdateAdCreativeRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAdCreative200Response]
+    def update_ad_creative(creative_id, update_ad_creative_request, opts = {})
+      data, _status_code, _headers = update_ad_creative_with_http_info(creative_id, update_ad_creative_request, opts)
+      data
+    end
+
+    # Rename a creative (Meta)
+    # Renames a creative. Creatives are immutable on Meta beyond &#x60;name&#x60; — for content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with &#x60;creative&#x60;). Meta only.
+    # @param creative_id [String] Platform creative id
+    # @param update_ad_creative_request [UpdateAdCreativeRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAdCreative200Response, Integer, Hash)>] UpdateAdCreative200Response data, response status code and response headers
+    def update_ad_creative_with_http_info(creative_id, update_ad_creative_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdsApi.update_ad_creative ...'
+      end
+      # verify the required parameter 'creative_id' is set
+      if @api_client.config.client_side_validation && creative_id.nil?
+        fail ArgumentError, "Missing the required parameter 'creative_id' when calling AdsApi.update_ad_creative"
+      end
+      # verify the required parameter 'update_ad_creative_request' is set
+      if @api_client.config.client_side_validation && update_ad_creative_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_creative_request' when calling AdsApi.update_ad_creative"
+      end
+      # resource path
+      local_var_path = '/v1/ads/creatives/{creativeId}'.sub('{' + 'creativeId' + '}', CGI.escape(creative_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_creative_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAdCreative200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdsApi.update_ad_creative",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdsApi#update_ad_creative\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
