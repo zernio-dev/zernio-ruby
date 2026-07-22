@@ -93,74 +93,6 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Create an alphanumeric sender ID
-    # Registers an alphanumeric sender ID (e.g. `ZERNIO`) — a branded `from` for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as `from` on `POST /v1/sms/messages`.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected, and an ID already registered by another workspace returns 409 (active sender IDs are globally unique, first-come-first-served). Creating the same sender ID again is a no-op (re-activates it after a delete). 
-    # @param create_sms_sender_id_request [CreateSmsSenderIdRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [CreateSmsSenderId200Response]
-    def create_sms_sender_id(create_sms_sender_id_request, opts = {})
-      data, _status_code, _headers = create_sms_sender_id_with_http_info(create_sms_sender_id_request, opts)
-      data
-    end
-
-    # Create an alphanumeric sender ID
-    # Registers an alphanumeric sender ID (e.g. &#x60;ZERNIO&#x60;) — a branded &#x60;from&#x60; for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as &#x60;from&#x60; on &#x60;POST /v1/sms/messages&#x60;.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected, and an ID already registered by another workspace returns 409 (active sender IDs are globally unique, first-come-first-served). Creating the same sender ID again is a no-op (re-activates it after a delete). 
-    # @param create_sms_sender_id_request [CreateSmsSenderIdRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateSmsSenderId200Response, Integer, Hash)>] CreateSmsSenderId200Response data, response status code and response headers
-    def create_sms_sender_id_with_http_info(create_sms_sender_id_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: SMSApi.create_sms_sender_id ...'
-      end
-      # verify the required parameter 'create_sms_sender_id_request' is set
-      if @api_client.config.client_side_validation && create_sms_sender_id_request.nil?
-        fail ArgumentError, "Missing the required parameter 'create_sms_sender_id_request' when calling SMSApi.create_sms_sender_id"
-      end
-      # resource path
-      local_var_path = '/v1/sms/sender-ids'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_sms_sender_id_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'CreateSmsSenderId200Response'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['bearerAuth']
-
-      new_options = opts.merge(
-        :operation => :"SMSApi.create_sms_sender_id",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SMSApi#create_sms_sender_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Deactivate a brand/campaign registration
     # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts — receiving is unaffected — until they're registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
     # @param id [String] 
@@ -220,69 +152,6 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SMSApi#deactivate_sms_registration\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Delete an alphanumeric sender ID
-    # Deactivates the sender ID so it can no longer send. Re-creating the same sender ID via `POST /v1/sms/sender-ids` re-activates it. 
-    # @param id [String] Sender ID resource id.
-    # @param [Hash] opts the optional parameters
-    # @return [DeleteSmsSenderId200Response]
-    def delete_sms_sender_id(id, opts = {})
-      data, _status_code, _headers = delete_sms_sender_id_with_http_info(id, opts)
-      data
-    end
-
-    # Delete an alphanumeric sender ID
-    # Deactivates the sender ID so it can no longer send. Re-creating the same sender ID via &#x60;POST /v1/sms/sender-ids&#x60; re-activates it. 
-    # @param id [String] Sender ID resource id.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(DeleteSmsSenderId200Response, Integer, Hash)>] DeleteSmsSenderId200Response data, response status code and response headers
-    def delete_sms_sender_id_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: SMSApi.delete_sms_sender_id ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling SMSApi.delete_sms_sender_id"
-      end
-      # resource path
-      local_var_path = '/v1/sms/sender-ids/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'DeleteSmsSenderId200Response'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['bearerAuth']
-
-      new_options = opts.merge(
-        :operation => :"SMSApi.delete_sms_sender_id",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SMSApi#delete_sms_sender_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -609,61 +478,6 @@ module Zernio
       return data, status_code, headers
     end
 
-    # List alphanumeric sender IDs
-    # @param [Hash] opts the optional parameters
-    # @return [ListSmsSenderIds200Response]
-    def list_sms_sender_ids(opts = {})
-      data, _status_code, _headers = list_sms_sender_ids_with_http_info(opts)
-      data
-    end
-
-    # List alphanumeric sender IDs
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ListSmsSenderIds200Response, Integer, Hash)>] ListSmsSenderIds200Response data, response status code and response headers
-    def list_sms_sender_ids_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: SMSApi.list_sms_sender_ids ...'
-      end
-      # resource path
-      local_var_path = '/v1/sms/sender-ids'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ListSmsSenderIds200Response'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['bearerAuth']
-
-      new_options = opts.merge(
-        :operation => :"SMSApi.list_sms_sender_ids",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SMSApi#list_sms_sender_ids\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Look up carrier + line type
     # Carrier name and line type (mobile / landline / voip / toll-free) for a number, plus `smsReachable` (landlines can't receive SMS). Use it to validate recipients before sending. Each lookup is billed by the carrier-data provider, so call it explicitly (e.g. pre-validating an opt-in list), not on every send. 
     # @param number [String] Number to look up (E.164; formatting is normalized).
@@ -728,74 +542,6 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SMSApi#lookup_sms_number\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Request a higher sender ID daily limit
-    # Asks support to raise the workspace's daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
-    # @param request_sms_sender_id_limit_increase_request [RequestSmsSenderIdLimitIncreaseRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [RequestSmsSenderIdLimitIncrease200Response]
-    def request_sms_sender_id_limit_increase(request_sms_sender_id_limit_increase_request, opts = {})
-      data, _status_code, _headers = request_sms_sender_id_limit_increase_with_http_info(request_sms_sender_id_limit_increase_request, opts)
-      data
-    end
-
-    # Request a higher sender ID daily limit
-    # Asks support to raise the workspace&#39;s daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
-    # @param request_sms_sender_id_limit_increase_request [RequestSmsSenderIdLimitIncreaseRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(RequestSmsSenderIdLimitIncrease200Response, Integer, Hash)>] RequestSmsSenderIdLimitIncrease200Response data, response status code and response headers
-    def request_sms_sender_id_limit_increase_with_http_info(request_sms_sender_id_limit_increase_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: SMSApi.request_sms_sender_id_limit_increase ...'
-      end
-      # verify the required parameter 'request_sms_sender_id_limit_increase_request' is set
-      if @api_client.config.client_side_validation && request_sms_sender_id_limit_increase_request.nil?
-        fail ArgumentError, "Missing the required parameter 'request_sms_sender_id_limit_increase_request' when calling SMSApi.request_sms_sender_id_limit_increase"
-      end
-      # resource path
-      local_var_path = '/v1/sms/sender-ids/limit-request'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_sms_sender_id_limit_increase_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'RequestSmsSenderIdLimitIncrease200Response'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['bearerAuth']
-
-      new_options = opts.merge(
-        :operation => :"SMSApi.request_sms_sender_id_limit_increase",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: SMSApi#request_sms_sender_id_limit_increase\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -927,7 +673,7 @@ module Zernio
     end
 
     # Send an SMS/MMS
-    # Sends an SMS (or MMS when `mediaUrls` is set) from one of your SMS-enabled numbers, or from an approved alphanumeric sender ID (`/v1/sms/sender-ids`). At least one of `text` / `mediaUrls` is required. Numbers are normalized to E.164, so `from` matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (`/v1/sms/registrations`) before messages deliver.  **Alphanumeric sender IDs** are one-way and international only: they cannot reach the US, Canada, or Puerto Rico (403), are text-only (no MMS), and recipients cannot reply. Some destination countries substitute a numeric sender to ensure delivery.  **Idempotency:** send an `Idempotency-Key` header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409. 
+    # Sends an SMS (or MMS when `mediaUrls` is set) from one of your SMS-enabled numbers. At least one of `text` / `mediaUrls` is required. Both numbers are normalized to E.164, so `from` matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (`/v1/sms/registrations`) before messages deliver.  **Idempotency:** send an `Idempotency-Key` header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409. 
     # @param send_sms_request [SendSmsRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes send retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
@@ -938,7 +684,7 @@ module Zernio
     end
 
     # Send an SMS/MMS
-    # Sends an SMS (or MMS when &#x60;mediaUrls&#x60; is set) from one of your SMS-enabled numbers, or from an approved alphanumeric sender ID (&#x60;/v1/sms/sender-ids&#x60;). At least one of &#x60;text&#x60; / &#x60;mediaUrls&#x60; is required. Numbers are normalized to E.164, so &#x60;from&#x60; matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (&#x60;/v1/sms/registrations&#x60;) before messages deliver.  **Alphanumeric sender IDs** are one-way and international only: they cannot reach the US, Canada, or Puerto Rico (403), are text-only (no MMS), and recipients cannot reply. Some destination countries substitute a numeric sender to ensure delivery.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409. 
+    # Sends an SMS (or MMS when &#x60;mediaUrls&#x60; is set) from one of your SMS-enabled numbers. At least one of &#x60;text&#x60; / &#x60;mediaUrls&#x60; is required. Both numbers are normalized to E.164, so &#x60;from&#x60; matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (&#x60;/v1/sms/registrations&#x60;) before messages deliver.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409. 
     # @param send_sms_request [SendSmsRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes send retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.

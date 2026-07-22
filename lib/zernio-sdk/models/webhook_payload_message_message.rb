@@ -96,7 +96,7 @@ module Zernio
         :'platform_message_id' => :'String',
         :'direction' => :'String',
         :'text' => :'String',
-        :'attachments' => :'Array<InboxWebhookMessageAttachmentsInner>',
+        :'attachments' => :'Array<WebhookPayloadMessageMessageAttachmentsInner>',
         :'sender' => :'WebhookPayloadMessageMessageSender',
         :'sent_at' => :'Time',
         :'is_read' => :'Boolean'

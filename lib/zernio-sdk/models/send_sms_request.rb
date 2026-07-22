@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class SendSmsRequest < ApiModelBase
-    # One of your SMS-enabled numbers (E.164; formatting is normalized), or an approved alphanumeric sender ID (3-11 letters/digits/spaces, created via `/v1/sms/sender-ids`).
+    # One of your SMS-enabled numbers (E.164; formatting is normalized).
     attr_accessor :from
 
     # Recipient number (E.164).

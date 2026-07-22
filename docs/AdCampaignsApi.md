@@ -5,10 +5,8 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**bulk_update_ad_campaign_status**](AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns |
-| [**create_ad_campaign**](AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign (Meta) |
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
-| [**duplicate_ad_set**](AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set (Meta) |
 | [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase (Meta) |
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
@@ -77,75 +75,6 @@ end
 ### Return type
 
 [**BulkUpdateAdCampaignStatus200Response**](BulkUpdateAdCampaignStatus200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## create_ad_campaign
-
-> <CreateAdCampaign201Response> create_ad_campaign(create_ad_campaign_request)
-
-Create a standalone campaign (Meta)
-
-Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass. Meta only.
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::AdCampaignsApi.new
-create_ad_campaign_request = Zernio::CreateAdCampaignRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement'}) # CreateAdCampaignRequest | 
-
-begin
-  # Create a standalone campaign (Meta)
-  result = api_instance.create_ad_campaign(create_ad_campaign_request)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling AdCampaignsApi->create_ad_campaign: #{e}"
-end
-```
-
-#### Using the create_ad_campaign_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<CreateAdCampaign201Response>, Integer, Hash)> create_ad_campaign_with_http_info(create_ad_campaign_request)
-
-```ruby
-begin
-  # Create a standalone campaign (Meta)
-  data, status_code, headers = api_instance.create_ad_campaign_with_http_info(create_ad_campaign_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <CreateAdCampaign201Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling AdCampaignsApi->create_ad_campaign_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **create_ad_campaign_request** | [**CreateAdCampaignRequest**](CreateAdCampaignRequest.md) |  |  |
-
-### Return type
-
-[**CreateAdCampaign201Response**](CreateAdCampaign201Response.md)
 
 ### Authorization
 
@@ -288,77 +217,6 @@ end
 ### Return type
 
 [**DuplicateAdCampaign200Response**](DuplicateAdCampaign200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## duplicate_ad_set
-
-> <DuplicateAdSet200Response> duplicate_ad_set(ad_set_id, duplicate_ad_set_request)
-
-Duplicate an ad set (Meta)
-
-Duplicates an ad set, including its ads and creatives by default (`deepCopy: true`), via Meta's native `POST /{adset-id}/copies`. The copy is created paused so callers can review before launching. `campaignId` retargets the copy into another campaign; omitted = the source's own campaign. The new hierarchy materializes asynchronously — sync discovery is triggered automatically (`syncAfter: false` to skip). Meta only.
-
-### Examples
-
-```ruby
-require 'time'
-require 'zernio-sdk'
-# setup authorization
-Zernio.configure do |config|
-  # Configure Bearer authorization (JWT): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = Zernio::AdCampaignsApi.new
-ad_set_id = 'ad_set_id_example' # String | Source platform ad set ID
-duplicate_ad_set_request = Zernio::DuplicateAdSetRequest.new({platform: 'facebook'}) # DuplicateAdSetRequest | 
-
-begin
-  # Duplicate an ad set (Meta)
-  result = api_instance.duplicate_ad_set(ad_set_id, duplicate_ad_set_request)
-  p result
-rescue Zernio::ApiError => e
-  puts "Error when calling AdCampaignsApi->duplicate_ad_set: #{e}"
-end
-```
-
-#### Using the duplicate_ad_set_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<DuplicateAdSet200Response>, Integer, Hash)> duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request)
-
-```ruby
-begin
-  # Duplicate an ad set (Meta)
-  data, status_code, headers = api_instance.duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <DuplicateAdSet200Response>
-rescue Zernio::ApiError => e
-  puts "Error when calling AdCampaignsApi->duplicate_ad_set_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **ad_set_id** | **String** | Source platform ad set ID |  |
-| **duplicate_ad_set_request** | [**DuplicateAdSetRequest**](DuplicateAdSetRequest.md) |  |  |
-
-### Return type
-
-[**DuplicateAdSet200Response**](DuplicateAdSet200Response.md)
 
 ### Authorization
 

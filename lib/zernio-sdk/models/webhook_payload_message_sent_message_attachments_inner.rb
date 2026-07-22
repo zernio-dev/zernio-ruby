@@ -14,19 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdCreative200Response < ApiModelBase
-    attr_accessor :creative_id
+  class WebhookPayloadMessageSentMessageAttachmentsInner < ApiModelBase
+    # Attachment type (image, video, file, sticker, audio)
+    attr_accessor :type
 
-    attr_accessor :name
+    # Where to fetch the attachment. For outgoing messages this is the media URL as sent, so for WhatsApp it is the URL you supplied when publishing (WhatsApp sends media by link), not a Zernio endpoint, and it needs no Zernio credentials. Contrast the inbound direction: `message.received` attachment URLs on WhatsApp point at the authenticated `GET /v1/whatsapp/media/{mediaId}`. 
+    attr_accessor :url
 
-    attr_accessor :message
+    # Additional attachment metadata
+    attr_accessor :payload
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'creative_id' => :'creativeId',
-        :'name' => :'name',
-        :'message' => :'message'
+        :'type' => :'type',
+        :'url' => :'url',
+        :'payload' => :'payload'
       }
     end
 
@@ -43,9 +46,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'creative_id' => :'String',
-        :'name' => :'String',
-        :'message' => :'String'
+        :'type' => :'String',
+        :'url' => :'String',
+        :'payload' => :'Object'
       }
     end
 
@@ -59,28 +62,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdCreative200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessageSentMessageAttachmentsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdCreative200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessageSentMessageAttachmentsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'creative_id')
-        self.creative_id = attributes[:'creative_id']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      else
+        self.type = nil
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
+      else
+        self.url = nil
       end
 
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.key?(:'payload')
+        self.payload = attributes[:'payload']
       end
     end
 
@@ -89,6 +96,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @url.nil?
+        invalid_properties.push('invalid value for "url", url cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -96,7 +111,29 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @type.nil?
+      return false if @url.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] type Value to be assigned
+    def type=(type)
+      if type.nil?
+        fail ArgumentError, 'type cannot be nil'
+      end
+
+      @type = type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] url Value to be assigned
+    def url=(url)
+      if url.nil?
+        fail ArgumentError, 'url cannot be nil'
+      end
+
+      @url = url
     end
 
     # Checks equality by comparing each attribute.
@@ -104,9 +141,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          creative_id == o.creative_id &&
-          name == o.name &&
-          message == o.message
+          type == o.type &&
+          url == o.url &&
+          payload == o.payload
     end
 
     # @see the `==` method
@@ -118,7 +155,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [creative_id, name, message].hash
+      [type, url, payload].hash
     end
 
     # Builds the object from hash

@@ -18,7 +18,7 @@ module Zernio
     # Attachment type (image, video, file, sticker, audio)
     attr_accessor :type
 
-    # Attachment URL (may expire for Meta platforms)
+    # Where to fetch the attachment. The contract depends on direction and platform: inbound WhatsApp media points at the authenticated `GET /v1/whatsapp/media/{mediaId}` and requires `Authorization: Bearer <your API key>`, while outgoing media carries the URL originally supplied and Instagram / Facebook / Telegram carry direct platform CDN links that need no authentication. 
     attr_accessor :url
 
     # Additional attachment metadata

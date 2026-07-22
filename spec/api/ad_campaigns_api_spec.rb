@@ -44,18 +44,6 @@ describe 'AdCampaignsApi' do
     end
   end
 
-  # unit tests for create_ad_campaign
-  # Create a standalone campaign (Meta)
-  # Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via &#x60;existingCampaignId&#x60; on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created &#x60;PAUSED&#x60; unless &#x60;status: ACTIVE&#x60;. The campaign materializes in &#x60;/v1/ads/tree&#x60; via the next sync discovery pass. Meta only.
-  # @param create_ad_campaign_request 
-  # @param [Hash] opts the optional parameters
-  # @return [CreateAdCampaign201Response]
-  describe 'create_ad_campaign test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
   # unit tests for delete_ad_campaign
   # Delete a campaign
   # Deletes the whole campaign on the platform, cascading to its ad sets and ads. Locally, all Ad documents for this campaign are marked &#x60;status: cancelled&#x60;.  Meta-only for now. Other platforms return 501 Not Implemented — fall back to DELETE /v1/ads/{adId} per ad in the meantime. 
@@ -77,19 +65,6 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @return [DuplicateAdCampaign200Response]
   describe 'duplicate_ad_campaign test' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  # unit tests for duplicate_ad_set
-  # Duplicate an ad set (Meta)
-  # Duplicates an ad set, including its ads and creatives by default (&#x60;deepCopy: true&#x60;), via Meta&#39;s native &#x60;POST /{adset-id}/copies&#x60;. The copy is created paused so callers can review before launching. &#x60;campaignId&#x60; retargets the copy into another campaign; omitted &#x3D; the source&#39;s own campaign. The new hierarchy materializes asynchronously — sync discovery is triggered automatically (&#x60;syncAfter: false&#x60; to skip). Meta only.
-  # @param ad_set_id Source platform ad set ID
-  # @param duplicate_ad_set_request 
-  # @param [Hash] opts the optional parameters
-  # @return [DuplicateAdSet200Response]
-  describe 'duplicate_ad_set test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
