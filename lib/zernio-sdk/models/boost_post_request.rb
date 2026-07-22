@@ -59,6 +59,9 @@ module Zernio
     # Meta only. Required for housing, employment, credit, or political ads.
     attr_accessor :special_ad_categories
 
+    # Meta (metaads) only. 2-letter ISO country codes the special ad category applies to. Requires specialAdCategories to be set (400 otherwise).
+    attr_accessor :special_ad_category_country
+
     # TikTok-only. Custom destination URL for the Spark Ad. Without this, TikTok Spark Ads have no clickable destination — required for traffic / conversion objectives. Maps to `landing_page_url` on the creative entry of /v2/ad/create/ (TikTok SDK `AdcreateCreatives.landing_page_url`). Ignored on Meta / LinkedIn / Pinterest / X / Google (those infer the destination from the boosted post). 
     attr_accessor :link_url
 
@@ -116,6 +119,7 @@ module Zernio
         :'platform_specific_data' => :'platformSpecificData',
         :'tracking' => :'tracking',
         :'special_ad_categories' => :'specialAdCategories',
+        :'special_ad_category_country' => :'specialAdCategoryCountry',
         :'link_url' => :'linkUrl',
         :'call_to_action' => :'callToAction',
         :'spark_auth_code' => :'sparkAuthCode',
@@ -154,6 +158,7 @@ module Zernio
         :'platform_specific_data' => :'LinkedInAdsPlatformData',
         :'tracking' => :'BoostPostRequestTracking',
         :'special_ad_categories' => :'Array<String>',
+        :'special_ad_category_country' => :'Array<String>',
         :'link_url' => :'String',
         :'call_to_action' => :'String',
         :'spark_auth_code' => :'String',
@@ -263,6 +268,12 @@ module Zernio
       if attributes.key?(:'special_ad_categories')
         if (value = attributes[:'special_ad_categories']).is_a?(Array)
           self.special_ad_categories = value
+        end
+      end
+
+      if attributes.key?(:'special_ad_category_country')
+        if (value = attributes[:'special_ad_category_country']).is_a?(Array)
+          self.special_ad_category_country = value
         end
       end
 
@@ -448,6 +459,7 @@ module Zernio
           platform_specific_data == o.platform_specific_data &&
           tracking == o.tracking &&
           special_ad_categories == o.special_ad_categories &&
+          special_ad_category_country == o.special_ad_category_country &&
           link_url == o.link_url &&
           call_to_action == o.call_to_action &&
           spark_auth_code == o.spark_auth_code &&
@@ -464,7 +476,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor].hash
     end
 
     # Builds the object from hash

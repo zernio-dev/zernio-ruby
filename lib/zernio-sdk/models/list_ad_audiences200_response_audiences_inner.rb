@@ -177,7 +177,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike", "saved_targeting"])
+      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "website", "website_retargeting", "lookalike", "saved_targeting"])
       return false unless type_validator.valid?(@type)
       true
     end
@@ -185,7 +185,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike", "saved_targeting"])
+      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "website", "website_retargeting", "lookalike", "saved_targeting"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

@@ -12,6 +12,8 @@
 | **custom_conversion_id** | **String** |  | [optional] |
 | **product_catalog_id** | **String** |  | [optional] |
 | **product_set_id** | **String** |  | [optional] |
+| **offline_conversion_data_set_id** | **String** |  | [optional] |
+| **whatsapp_phone_number** | **String** |  | [optional] |
 
 ## Example
 
@@ -26,7 +28,9 @@ instance = Zernio::UpdateAdSetRequestPlatformSpecificDataPromotedObject.new(
   object_store_url: null,
   custom_conversion_id: null,
   product_catalog_id: null,
-  product_set_id: null
+  product_set_id: null,
+  offline_conversion_data_set_id: null,
+  whatsapp_phone_number: null
 )
 ```
 

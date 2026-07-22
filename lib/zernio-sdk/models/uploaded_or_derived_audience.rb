@@ -48,8 +48,17 @@ module Zernio
     # Required for website audiences
     attr_accessor :pixel_id
 
-    # Required for website audiences
+    # Required for website (max 180) and meta_engagement (max 365) audiences.
     attr_accessor :retention_days
+
+    # Required for meta_engagement audiences (Meta only): what people engaged with. `page` = a Facebook Page, `instagram` = an IG professional account, `video` = a video. The source object must be eligible for engagement audiences or Meta rejects with subcode 1713151 (\"Invalid Event Name\"), surfaced verbatim. 
+    attr_accessor :engagement_source
+
+    # Required for meta_engagement: the Page / IG account / video id.
+    attr_accessor :source_id
+
+    # meta_engagement only. The engagement event; defaults per source (page → page_engaged, instagram → ig_business_profile_all, video → video_watched). Ignored when `rule` is provided. 
+    attr_accessor :event
 
     # Required for lookalike audiences
     attr_accessor :source_audience_id
@@ -60,7 +69,7 @@ module Zernio
     # Required for lookalike audiences
     attr_accessor :ratio
 
-    # Pixel event rule for website audiences (optional)
+    # Optional raw Meta rule, forwarded verbatim: pixel event rule for website audiences, or the engagement rule for meta_engagement (overrides the built rule, e.g. for event/canvas/lead-form sources).
     attr_accessor :rule
 
     # Data source declaration for GDPR compliance (customer_list only)
@@ -104,6 +113,9 @@ module Zernio
         :'companies' => :'companies',
         :'pixel_id' => :'pixelId',
         :'retention_days' => :'retentionDays',
+        :'engagement_source' => :'engagementSource',
+        :'source_id' => :'sourceId',
+        :'event' => :'event',
         :'source_audience_id' => :'sourceAudienceId',
         :'country' => :'country',
         :'ratio' => :'ratio',
@@ -138,6 +150,9 @@ module Zernio
         :'companies' => :'Array<UploadedOrDerivedAudienceCompaniesInner>',
         :'pixel_id' => :'String',
         :'retention_days' => :'Integer',
+        :'engagement_source' => :'String',
+        :'source_id' => :'String',
+        :'event' => :'String',
         :'source_audience_id' => :'String',
         :'country' => :'String',
         :'ratio' => :'Float',
@@ -234,6 +249,18 @@ module Zernio
         self.retention_days = attributes[:'retention_days']
       end
 
+      if attributes.key?(:'engagement_source')
+        self.engagement_source = attributes[:'engagement_source']
+      end
+
+      if attributes.key?(:'source_id')
+        self.source_id = attributes[:'source_id']
+      end
+
+      if attributes.key?(:'event')
+        self.event = attributes[:'event']
+      end
+
       if attributes.key?(:'source_audience_id')
         self.source_audience_id = attributes[:'source_audience_id']
       end
@@ -304,8 +331,8 @@ module Zernio
         invalid_properties.push('invalid value for "companies", number of items must be greater than or equal to 1.')
       end
 
-      if !@retention_days.nil? && @retention_days > 180
-        invalid_properties.push('invalid value for "retention_days", must be smaller than or equal to 180.')
+      if !@retention_days.nil? && @retention_days > 365
+        invalid_properties.push('invalid value for "retention_days", must be smaller than or equal to 365.')
       end
 
       if !@retention_days.nil? && @retention_days < 1
@@ -332,7 +359,7 @@ module Zernio
       return false if @name.nil?
       return false if @name.to_s.length > 255
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike"])
+      type_validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "website", "website_retargeting", "lookalike"])
       return false unless type_validator.valid?(@type)
       return false if !@match_rules.nil? && @match_rules.length > 50
       return false if !@match_rules.nil? && @match_rules.length < 1
@@ -344,8 +371,10 @@ module Zernio
       return false if !@engagement_sources.nil? && @engagement_sources.length < 1
       return false if !@companies.nil? && @companies.length > 300000
       return false if !@companies.nil? && @companies.length < 1
-      return false if !@retention_days.nil? && @retention_days > 180
+      return false if !@retention_days.nil? && @retention_days > 365
       return false if !@retention_days.nil? && @retention_days < 1
+      engagement_source_validator = EnumAttributeValidator.new('String', ["page", "instagram", "video"])
+      return false unless engagement_source_validator.valid?(@engagement_source)
       return false if !@ratio.nil? && @ratio > 0.2
       return false if !@ratio.nil? && @ratio < 0.01
       true
@@ -388,7 +417,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike"])
+      validator = EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "website", "website_retargeting", "lookalike"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -476,8 +505,8 @@ module Zernio
         fail ArgumentError, 'retention_days cannot be nil'
       end
 
-      if retention_days > 180
-        fail ArgumentError, 'invalid value for "retention_days", must be smaller than or equal to 180.'
+      if retention_days > 365
+        fail ArgumentError, 'invalid value for "retention_days", must be smaller than or equal to 365.'
       end
 
       if retention_days < 1
@@ -485,6 +514,16 @@ module Zernio
       end
 
       @retention_days = retention_days
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] engagement_source Object to be assigned
+    def engagement_source=(engagement_source)
+      validator = EnumAttributeValidator.new('String', ["page", "instagram", "video"])
+      unless validator.valid?(engagement_source)
+        fail ArgumentError, "invalid value for \"engagement_source\", must be one of #{validator.allowable_values}."
+      end
+      @engagement_source = engagement_source
     end
 
     # Custom attribute writer method with validation
@@ -523,6 +562,9 @@ module Zernio
           companies == o.companies &&
           pixel_id == o.pixel_id &&
           retention_days == o.retention_days &&
+          engagement_source == o.engagement_source &&
+          source_id == o.source_id &&
+          event == o.event &&
           source_audience_id == o.source_audience_id &&
           country == o.country &&
           ratio == o.ratio &&
@@ -539,7 +581,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, description, type, match_rules, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, source_audience_id, country, ratio, rule, customer_file_source].hash
+      [account_id, ad_account_id, name, description, type, match_rules, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, engagement_source, source_id, event, source_audience_id, country, ratio, rule, customer_file_source].hash
     end
 
     # Builds the object from hash

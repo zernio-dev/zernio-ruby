@@ -40,6 +40,12 @@ module Zernio
     # Product Set ID inside the catalog.
     attr_accessor :product_set_id
 
+    # Meta only. Offline event set (dataset) to optimise toward. Post-merger these are datasets: the id is the dataset id (for pixel-backed datasets, the pixel id).
+    attr_accessor :offline_conversion_data_set_id
+
+    # Meta only. WhatsApp number on messaging-destination ad sets.
+    attr_accessor :whatsapp_phone_number
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -50,7 +56,9 @@ module Zernio
         :'object_store_url' => :'objectStoreUrl',
         :'custom_conversion_id' => :'customConversionId',
         :'product_catalog_id' => :'productCatalogId',
-        :'product_set_id' => :'productSetId'
+        :'product_set_id' => :'productSetId',
+        :'offline_conversion_data_set_id' => :'offlineConversionDataSetId',
+        :'whatsapp_phone_number' => :'whatsappPhoneNumber'
       }
     end
 
@@ -74,7 +82,9 @@ module Zernio
         :'object_store_url' => :'String',
         :'custom_conversion_id' => :'String',
         :'product_catalog_id' => :'String',
-        :'product_set_id' => :'String'
+        :'product_set_id' => :'String',
+        :'offline_conversion_data_set_id' => :'String',
+        :'whatsapp_phone_number' => :'String'
       }
     end
 
@@ -131,6 +141,14 @@ module Zernio
       if attributes.key?(:'product_set_id')
         self.product_set_id = attributes[:'product_set_id']
       end
+
+      if attributes.key?(:'offline_conversion_data_set_id')
+        self.offline_conversion_data_set_id = attributes[:'offline_conversion_data_set_id']
+      end
+
+      if attributes.key?(:'whatsapp_phone_number')
+        self.whatsapp_phone_number = attributes[:'whatsapp_phone_number']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -160,7 +178,9 @@ module Zernio
           object_store_url == o.object_store_url &&
           custom_conversion_id == o.custom_conversion_id &&
           product_catalog_id == o.product_catalog_id &&
-          product_set_id == o.product_set_id
+          product_set_id == o.product_set_id &&
+          offline_conversion_data_set_id == o.offline_conversion_data_set_id &&
+          whatsapp_phone_number == o.whatsapp_phone_number
     end
 
     # @see the `==` method
@@ -172,7 +192,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [pixel_id, custom_event_type, page_id, application_id, object_store_url, custom_conversion_id, product_catalog_id, product_set_id].hash
+      [pixel_id, custom_event_type, page_id, application_id, object_store_url, custom_conversion_id, product_catalog_id, product_set_id, offline_conversion_data_set_id, whatsapp_phone_number].hash
     end
 
     # Builds the object from hash

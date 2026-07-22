@@ -12,6 +12,8 @@
 | **custom_conversion_id** | **String** | Custom Conversion ID, when optimising against one instead of a standard event. | [optional] |
 | **product_catalog_id** | **String** | Catalog ID for catalog/Advantage+ Shopping campaigns. | [optional] |
 | **product_set_id** | **String** | Product Set ID inside the catalog. | [optional] |
+| **offline_conversion_data_set_id** | **String** | Meta only. Offline event set (dataset) to optimise toward. Post-merger these are datasets: the id is the dataset id (for pixel-backed datasets, the pixel id). | [optional] |
+| **whatsapp_phone_number** | **String** | Meta only. WhatsApp number on messaging-destination ad sets. | [optional] |
 
 ## Example
 
@@ -26,7 +28,9 @@ instance = Zernio::CreateStandaloneAdRequestPromotedObject.new(
   object_store_url: null,
   custom_conversion_id: null,
   product_catalog_id: null,
-  product_set_id: null
+  product_set_id: null,
+  offline_conversion_data_set_id: null,
+  whatsapp_phone_number: null
 )
 ```
 

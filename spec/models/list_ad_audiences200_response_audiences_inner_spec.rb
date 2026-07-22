@@ -60,7 +60,7 @@ describe Zernio::ListAdAudiences200ResponseAudiencesInner do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "website", "website_retargeting", "lookalike", "saved_targeting"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["customer_list", "company_list", "engagement", "meta_engagement", "website", "website_retargeting", "lookalike", "saved_targeting"])
       # validator.allowable_values.each do |value|
       #   expect { instance.type = value }.not_to raise_error
       # end

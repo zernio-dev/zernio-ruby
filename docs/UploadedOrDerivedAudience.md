@@ -16,11 +16,14 @@
 | **engagement_sources** | **Array&lt;String&gt;** | Required for engagement audiences. Campaign URNs for the ad source types, organization URNs for pages and events. LinkedIn creates one rule per source, all sharing the same trigger and lookbackDays.  | [optional] |
 | **companies** | [**Array&lt;UploadedOrDerivedAudienceCompaniesInner&gt;**](UploadedOrDerivedAudienceCompaniesInner.md) | Required for company_list audiences (LinkedIn only): plain-text company rows for account targeting. Each row needs at least one identifier. LinkedIn recommends 1,000+ companies for a usable match rate and takes up to 48h to process the list.  | [optional] |
 | **pixel_id** | **String** | Required for website audiences | [optional] |
-| **retention_days** | **Integer** | Required for website audiences | [optional] |
+| **retention_days** | **Integer** | Required for website (max 180) and meta_engagement (max 365) audiences. | [optional] |
+| **engagement_source** | **String** | Required for meta_engagement audiences (Meta only): what people engaged with. &#x60;page&#x60; &#x3D; a Facebook Page, &#x60;instagram&#x60; &#x3D; an IG professional account, &#x60;video&#x60; &#x3D; a video. The source object must be eligible for engagement audiences or Meta rejects with subcode 1713151 (\&quot;Invalid Event Name\&quot;), surfaced verbatim.  | [optional] |
+| **source_id** | **String** | Required for meta_engagement: the Page / IG account / video id. | [optional] |
+| **event** | **String** | meta_engagement only. The engagement event; defaults per source (page → page_engaged, instagram → ig_business_profile_all, video → video_watched). Ignored when &#x60;rule&#x60; is provided.  | [optional] |
 | **source_audience_id** | **String** | Required for lookalike audiences | [optional] |
 | **country** | **String** | 2-letter code, required for lookalike audiences | [optional] |
 | **ratio** | **Float** | Required for lookalike audiences | [optional] |
-| **rule** | **Object** | Pixel event rule for website audiences (optional) | [optional] |
+| **rule** | **Object** | Optional raw Meta rule, forwarded verbatim: pixel event rule for website audiences, or the engagement rule for meta_engagement (overrides the built rule, e.g. for event/canvas/lead-form sources). | [optional] |
 | **customer_file_source** | **String** | Data source declaration for GDPR compliance (customer_list only) | [optional] |
 
 ## Example
@@ -42,6 +45,9 @@ instance = Zernio::UploadedOrDerivedAudience.new(
   companies: null,
   pixel_id: null,
   retention_days: null,
+  engagement_source: null,
+  source_id: null,
+  event: null,
   source_audience_id: null,
   country: null,
   ratio: null,
