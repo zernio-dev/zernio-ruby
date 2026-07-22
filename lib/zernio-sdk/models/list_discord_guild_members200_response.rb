@@ -40,7 +40,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<ListDiscordGuildMembers200ResponseDataInner>',
+        :'data' => :'Array<DiscordGuildMember>',
         :'pagination' => :'ListDiscordGuildMembers200ResponsePagination'
       }
     end

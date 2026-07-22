@@ -47,6 +47,12 @@ module Zernio
     # Meta only. The RESERVED prediction id the R&F ad set runs on (reserving mints a new id — pass that one). Requires buyingType RESERVED.
     attr_accessor :rf_prediction_id
 
+    # Meta only. Advantage+ creative enhancements: a partial map of Meta creative feature keys (snake_case, e.g. enhance_cta, image_brightness_and_contrast, text_optimizations) to enroll status, forwarded as degrees_of_freedom_spec.creative_features_spec. Meta validates the keys; unspecified features default to OPT_OUT. The legacy standard_enhancements bundle is deprecated by Meta and rejected.
+    attr_accessor :creative_features
+
+    # Meta only, single standalone shape only (no creatives[], adSetId, or RESERVED). Dry-run: each node runs Meta's execution_options validate_only and NOTHING is created or persisted. Children need real parents, so a fresh tree validates the campaign + creative (the ad set needs its campaign to exist — pass existingCampaignId to validate it too; the ad itself is never validatable pre-create). A Meta validation failure returns the 400 verbatim; success returns 200 with per-node results instead of an ad.
+    attr_accessor :validate_only
+
     # Required on legacy + multi-creative shapes. Inherited on attach.
     attr_accessor :budget_amount
 
@@ -259,6 +265,8 @@ module Zernio
         :'billing_event' => :'billingEvent',
         :'buying_type' => :'buyingType',
         :'rf_prediction_id' => :'rfPredictionId',
+        :'creative_features' => :'creativeFeatures',
+        :'validate_only' => :'validateOnly',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
         :'status' => :'status',
@@ -349,6 +357,8 @@ module Zernio
         :'billing_event' => :'String',
         :'buying_type' => :'String',
         :'rf_prediction_id' => :'String',
+        :'creative_features' => :'Hash<String, String>',
+        :'validate_only' => :'Boolean',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
         :'status' => :'String',
@@ -488,6 +498,16 @@ module Zernio
 
       if attributes.key?(:'rf_prediction_id')
         self.rf_prediction_id = attributes[:'rf_prediction_id']
+      end
+
+      if attributes.key?(:'creative_features')
+        if (value = attributes[:'creative_features']).is_a?(Hash)
+          self.creative_features = value
+        end
+      end
+
+      if attributes.key?(:'validate_only')
+        self.validate_only = attributes[:'validate_only']
       end
 
       if attributes.key?(:'budget_amount')
@@ -1280,6 +1300,8 @@ module Zernio
           billing_event == o.billing_event &&
           buying_type == o.buying_type &&
           rf_prediction_id == o.rf_prediction_id &&
+          creative_features == o.creative_features &&
+          validate_only == o.validate_only &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
           status == o.status &&
@@ -1353,7 +1375,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

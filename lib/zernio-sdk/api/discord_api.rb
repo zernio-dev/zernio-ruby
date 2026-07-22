@@ -791,6 +791,82 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get a Discord guild member
+    # Fetch a single guild member by Discord user id.  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403. 
+    # @param guild_id [String] 
+    # @param user_id [String] Discord user snowflake.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetDiscordGuildMember200Response]
+    def get_discord_guild_member(guild_id, user_id, account_id, opts = {})
+      data, _status_code, _headers = get_discord_guild_member_with_http_info(guild_id, user_id, account_id, opts)
+      data
+    end
+
+    # Get a Discord guild member
+    # Fetch a single guild member by Discord user id.  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403. 
+    # @param guild_id [String] 
+    # @param user_id [String] Discord user snowflake.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetDiscordGuildMember200Response, Integer, Hash)>] GetDiscordGuildMember200Response data, response status code and response headers
+    def get_discord_guild_member_with_http_info(guild_id, user_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DiscordApi.get_discord_guild_member ...'
+      end
+      # verify the required parameter 'guild_id' is set
+      if @api_client.config.client_side_validation && guild_id.nil?
+        fail ArgumentError, "Missing the required parameter 'guild_id' when calling DiscordApi.get_discord_guild_member"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling DiscordApi.get_discord_guild_member"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DiscordApi.get_discord_guild_member"
+      end
+      # resource path
+      local_var_path = '/v1/discord/guilds/{guildId}/members/{userId}'.sub('{' + 'guildId' + '}', CGI.escape(guild_id.to_s)).sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetDiscordGuildMember200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"DiscordApi.get_discord_guild_member",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DiscordApi#get_discord_guild_member\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get a Discord scheduled event
     # @param guild_id [String] 
     # @param event_id [String] 
@@ -929,7 +1005,7 @@ module Zernio
     end
 
     # List Discord guild members
-    # Cursor-paginated list of guild members. Returns Discord's raw member objects so callers can build community-ops automation (e.g. \"add role to all members joined in the last 7 days\") on the actual platform shape.  **Important:** this endpoint requires the privileged \"Server Members Intent\" enabled on the Discord app (Developer Portal → Bot tab → toggle \"Server Members Intent\" ON, then Save). Without it, Discord returns an empty array with no error. Verify the intent is enabled before relying on this endpoint.  Pagination: pass `after` = the last `user.id` from the previous page. Omit on the first call. Response includes a `nextCursor` and `hasMore` flag so callers don't need to know Discord's pagination shape. 
+    # Cursor-paginated list of guild members. Returns Discord's raw member objects so callers can build community-ops automation (e.g. \"add role to all members joined in the last 7 days\") on the actual platform shape.  **Important:** this endpoint requires the privileged \"Server Members Intent\" on the Discord application. If the intent is not enabled, Discord rejects the call and this endpoint returns **403**. Single member lookup and prefix search (see the sibling endpoints) do not need the intent.  Pagination: pass `after` = the last `user.id` from the previous page. Omit on the first call. Response includes a `nextCursor` and `hasMore` flag so callers don't need to know Discord's pagination shape. 
     # @param guild_id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
@@ -942,7 +1018,7 @@ module Zernio
     end
 
     # List Discord guild members
-    # Cursor-paginated list of guild members. Returns Discord&#39;s raw member objects so callers can build community-ops automation (e.g. \&quot;add role to all members joined in the last 7 days\&quot;) on the actual platform shape.  **Important:** this endpoint requires the privileged \&quot;Server Members Intent\&quot; enabled on the Discord app (Developer Portal → Bot tab → toggle \&quot;Server Members Intent\&quot; ON, then Save). Without it, Discord returns an empty array with no error. Verify the intent is enabled before relying on this endpoint.  Pagination: pass &#x60;after&#x60; &#x3D; the last &#x60;user.id&#x60; from the previous page. Omit on the first call. Response includes a &#x60;nextCursor&#x60; and &#x60;hasMore&#x60; flag so callers don&#39;t need to know Discord&#39;s pagination shape. 
+    # Cursor-paginated list of guild members. Returns Discord&#39;s raw member objects so callers can build community-ops automation (e.g. \&quot;add role to all members joined in the last 7 days\&quot;) on the actual platform shape.  **Important:** this endpoint requires the privileged \&quot;Server Members Intent\&quot; on the Discord application. If the intent is not enabled, Discord rejects the call and this endpoint returns **403**. Single member lookup and prefix search (see the sibling endpoints) do not need the intent.  Pagination: pass &#x60;after&#x60; &#x3D; the last &#x60;user.id&#x60; from the previous page. Omit on the first call. Response includes a &#x60;nextCursor&#x60; and &#x60;hasMore&#x60; flag so callers don&#39;t need to know Discord&#39;s pagination shape. 
     # @param guild_id [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
@@ -1379,6 +1455,102 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DiscordApi#remove_discord_member_role\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Search Discord guild members
+    # Search guild members whose username or nickname **starts with** the query (Discord matches prefixes only, not substrings).  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403. 
+    # @param guild_id [String] 
+    # @param account_id [String] 
+    # @param query [String] Username or nickname prefix to match.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @return [SearchDiscordGuildMembers200Response]
+    def search_discord_guild_members(guild_id, account_id, query, opts = {})
+      data, _status_code, _headers = search_discord_guild_members_with_http_info(guild_id, account_id, query, opts)
+      data
+    end
+
+    # Search Discord guild members
+    # Search guild members whose username or nickname **starts with** the query (Discord matches prefixes only, not substrings).  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403. 
+    # @param guild_id [String] 
+    # @param account_id [String] 
+    # @param query [String] Username or nickname prefix to match.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit  (default to 25)
+    # @return [Array<(SearchDiscordGuildMembers200Response, Integer, Hash)>] SearchDiscordGuildMembers200Response data, response status code and response headers
+    def search_discord_guild_members_with_http_info(guild_id, account_id, query, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DiscordApi.search_discord_guild_members ...'
+      end
+      # verify the required parameter 'guild_id' is set
+      if @api_client.config.client_side_validation && guild_id.nil?
+        fail ArgumentError, "Missing the required parameter 'guild_id' when calling DiscordApi.search_discord_guild_members"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling DiscordApi.search_discord_guild_members"
+      end
+      # verify the required parameter 'query' is set
+      if @api_client.config.client_side_validation && query.nil?
+        fail ArgumentError, "Missing the required parameter 'query' when calling DiscordApi.search_discord_guild_members"
+      end
+      if @api_client.config.client_side_validation && query.to_s.length > 100
+        fail ArgumentError, 'invalid value for "query" when calling DiscordApi.search_discord_guild_members, the character length must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && query.to_s.length < 1
+        fail ArgumentError, 'invalid value for "query" when calling DiscordApi.search_discord_guild_members, the character length must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling DiscordApi.search_discord_guild_members, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling DiscordApi.search_discord_guild_members, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/discord/guilds/{guildId}/members/search'.sub('{' + 'guildId' + '}', CGI.escape(guild_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'query'] = query
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SearchDiscordGuildMembers200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"DiscordApi.search_discord_guild_members",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DiscordApi#search_discord_guild_members\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

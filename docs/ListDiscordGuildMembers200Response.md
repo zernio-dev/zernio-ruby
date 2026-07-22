@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**Array&lt;ListDiscordGuildMembers200ResponseDataInner&gt;**](ListDiscordGuildMembers200ResponseDataInner.md) |  | [optional] |
+| **data** | [**Array&lt;DiscordGuildMember&gt;**](DiscordGuildMember.md) |  | [optional] |
 | **pagination** | [**ListDiscordGuildMembers200ResponsePagination**](ListDiscordGuildMembers200ResponsePagination.md) |  | [optional] |
 
 ## Example

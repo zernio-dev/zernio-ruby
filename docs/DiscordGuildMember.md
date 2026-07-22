@@ -1,10 +1,10 @@
-# Zernio::ListDiscordGuildMembers200ResponseDataInner
+# Zernio::DiscordGuildMember
 
 ## Properties
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **user** | [**ListDiscordGuildMembers200ResponseDataInnerUser**](ListDiscordGuildMembers200ResponseDataInnerUser.md) |  | [optional] |
+| **user** | [**DiscordGuildMemberUser**](DiscordGuildMemberUser.md) |  | [optional] |
 | **nick** | **String** | Guild-specific nickname | [optional] |
 | **roles** | **Array&lt;String&gt;** | Snowflake IDs of roles assigned to this member | [optional] |
 | **joined_at** | **Time** |  | [optional] |
@@ -15,7 +15,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ListDiscordGuildMembers200ResponseDataInner.new(
+instance = Zernio::DiscordGuildMember.new(
   user: null,
   nick: null,
   roles: null,

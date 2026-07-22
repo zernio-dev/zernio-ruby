@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**archive_lead_form**](AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form |
 | [**boost_post**](AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
 | [**cancel_rf_reservation**](AdsApi.md#cancel_rf_reservation) | **DELETE** /v1/ads/rf-predictions/{predictionId} | Cancel a Reach &amp; Frequency reservation (Meta) |
+| [**create_ad_creative**](AdsApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative (Meta) |
 | [**create_ad_insights_report**](AdsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run (Meta) |
 | [**create_call_ad**](AdsApi.md#create_call_ad) | **POST** /v1/ads/call | Create Click-to-Call ad |
 | [**create_conversion_destination**](AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination |
@@ -19,13 +20,16 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_standalone_ad**](AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad |
 | [**create_test_lead**](AdsApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a test lead |
 | [**delete_ad**](AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
+| [**delete_ad_creative**](AdsApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative (Meta) |
 | [**delete_conversion_destination**](AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Delete a conversion destination |
+| [**duplicate_ad**](AdsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad (Meta) |
 | [**estimate_ad_reach**](AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach |
 | [**generate_ad_previews**](AdsApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews (Meta) |
 | [**get_ad**](AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
 | [**get_ad_account_finance**](AdsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances (Meta) |
 | [**get_ad_analytics**](AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**get_ad_comments**](AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
+| [**get_ad_creative**](AdsApi.md#get_ad_creative) | **GET** /v1/ads/creatives/{creativeId} | Creative details (Meta) |
 | [**get_ad_insights_report**](AdsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run (Meta) |
 | [**get_ad_previews**](AdsApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad (Meta) |
 | [**get_ad_tracking_tags**](AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags |
@@ -43,14 +47,19 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_accounts**](AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_catalog_product_sets**](AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog&#39;s product sets |
 | [**list_ad_catalogs**](AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs |
+| [**list_ad_creatives**](AdsApi.md#list_ad_creatives) | **GET** /v1/ads/creatives | Creative library (Meta) |
+| [**list_ad_images**](AdsApi.md#list_ad_images) | **GET** /v1/ads/images | Ad image library (Meta) |
+| [**list_ad_labels**](AdsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels (Meta) |
 | [**list_ad_studies**](AdsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies (Meta) |
 | [**list_ads**](AdsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**list_ads_business_centers**](AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
 | [**list_conversion_associations**](AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List associated campaigns |
 | [**list_conversion_destinations**](AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List conversion destinations |
 | [**list_form_leads**](AdsApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form |
+| [**list_high_demand_periods**](AdsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules (Meta) |
 | [**list_lead_forms**](AdsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List lead forms |
 | [**list_leads**](AdsApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads |
+| [**list_meta_businesses**](AdsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list (Meta) |
 | [**list_whats_app_conversions**](AdsApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events |
 | [**query_ad_insights**](AdsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query (Meta) |
 | [**remove_conversion_associations**](AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns |
@@ -61,6 +70,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**send_whats_app_conversion**](AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**update_ad**](AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 | [**update_ad_account**](AdsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings |
+| [**update_ad_creative**](AdsApi.md#update_ad_creative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative (Meta) |
 | [**update_ad_status**](AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
 | [**update_ad_tracking_tags**](AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags |
 | [**update_conversion_destination**](AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination |
@@ -418,6 +428,75 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## create_ad_creative
+
+> <CreateAdCreative201Response> create_ad_creative(create_ad_creative_request)
+
+Create a standalone creative (Meta)
+
+Creates a creative in the library WITHOUT an ad, reusable on the create endpoints via `existingCreativeId`. Provide exactly one of `imageUrl` (uploaded server-side), `imageHash` (from POST /v1/ads/images or the library list), or `carouselCards` (2-10 hand-built cards). The Page (and linked Instagram account, when present) is resolved from `accountId` as the story actor. Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+create_ad_creative_request = Zernio::CreateAdCreativeRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', headline: 'headline_example', body: 'body_example', link_url: 'link_url_example'}) # CreateAdCreativeRequest | 
+
+begin
+  # Create a standalone creative (Meta)
+  result = api_instance.create_ad_creative(create_ad_creative_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->create_ad_creative: #{e}"
+end
+```
+
+#### Using the create_ad_creative_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateAdCreative201Response>, Integer, Hash)> create_ad_creative_with_http_info(create_ad_creative_request)
+
+```ruby
+begin
+  # Create a standalone creative (Meta)
+  data, status_code, headers = api_instance.create_ad_creative_with_http_info(create_ad_creative_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateAdCreative201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->create_ad_creative_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_ad_creative_request** | [**CreateAdCreativeRequest**](CreateAdCreativeRequest.md) |  |  |
+
+### Return type
+
+[**CreateAdCreative201Response**](CreateAdCreative201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -906,7 +985,7 @@ end
 
 ## create_standalone_ad
 
-> <CreateStandaloneAd201Response> create_standalone_ad(create_standalone_ad_request, opts)
+> <CreateStandaloneAd200Response> create_standalone_ad(create_standalone_ad_request, opts)
 
 Create standalone ad
 
@@ -942,7 +1021,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateStandaloneAd201Response>, Integer, Hash)> create_standalone_ad_with_http_info(create_standalone_ad_request, opts)
+> <Array(<CreateStandaloneAd200Response>, Integer, Hash)> create_standalone_ad_with_http_info(create_standalone_ad_request, opts)
 
 ```ruby
 begin
@@ -950,7 +1029,7 @@ begin
   data, status_code, headers = api_instance.create_standalone_ad_with_http_info(create_standalone_ad_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateStandaloneAd201Response>
+  p data # => <CreateStandaloneAd200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdsApi->create_standalone_ad_with_http_info: #{e}"
 end
@@ -965,7 +1044,7 @@ end
 
 ### Return type
 
-[**CreateStandaloneAd201Response**](CreateStandaloneAd201Response.md)
+[**CreateStandaloneAd200Response**](CreateStandaloneAd200Response.md)
 
 ### Authorization
 
@@ -1117,6 +1196,77 @@ end
 - **Accept**: application/json
 
 
+## delete_ad_creative
+
+> <DeleteAdCreative200Response> delete_ad_creative(creative_id, account_id)
+
+Delete a creative (Meta)
+
+Deletes a creative from the library. Meta only allows deleting creatives not referenced by any ad — otherwise its 400 surfaces verbatim.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+creative_id = 'creative_id_example' # String | Platform creative id
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+
+begin
+  # Delete a creative (Meta)
+  result = api_instance.delete_ad_creative(creative_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->delete_ad_creative: #{e}"
+end
+```
+
+#### Using the delete_ad_creative_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteAdCreative200Response>, Integer, Hash)> delete_ad_creative_with_http_info(creative_id, account_id)
+
+```ruby
+begin
+  # Delete a creative (Meta)
+  data, status_code, headers = api_instance.delete_ad_creative_with_http_info(creative_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteAdCreative200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->delete_ad_creative_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **creative_id** | **String** | Platform creative id |  |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+
+### Return type
+
+[**DeleteAdCreative200Response**](DeleteAdCreative200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## delete_conversion_destination
 
 > delete_conversion_destination(account_id, destination_id, opts)
@@ -1188,6 +1338,79 @@ nil (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## duplicate_ad
+
+> <DuplicateAd200Response> duplicate_ad(ad_id, opts)
+
+Duplicate an ad (Meta)
+
+Duplicates a single ad via Meta's native `POST /{ad-id}/copies`. The copy is created paused. `adSetId` retargets the copy into another ad set; omitted = the source's own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (`syncAfter: false` to skip). Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+ad_id = 'ad_id_example' # String | Zernio ad ID or platform ad ID
+opts = {
+  duplicate_ad_request: Zernio::DuplicateAdRequest.new # DuplicateAdRequest | 
+}
+
+begin
+  # Duplicate an ad (Meta)
+  result = api_instance.duplicate_ad(ad_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->duplicate_ad: #{e}"
+end
+```
+
+#### Using the duplicate_ad_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DuplicateAd200Response>, Integer, Hash)> duplicate_ad_with_http_info(ad_id, opts)
+
+```ruby
+begin
+  # Duplicate an ad (Meta)
+  data, status_code, headers = api_instance.duplicate_ad_with_http_info(ad_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DuplicateAd200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->duplicate_ad_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Zernio ad ID or platform ad ID |  |
+| **duplicate_ad_request** | [**DuplicateAdRequest**](DuplicateAdRequest.md) |  | [optional] |
+
+### Return type
+
+[**DuplicateAd200Response**](DuplicateAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -1612,6 +1835,81 @@ end
 ### Return type
 
 [**GetAdComments200Response**](GetAdComments200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_creative
+
+> <GetAdCreative200Response> get_ad_creative(creative_id, account_id, opts)
+
+Creative details (Meta)
+
+One creative's details, verbatim from Meta. `fields` is a raw-passthrough override of the default projection. Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+creative_id = 'creative_id_example' # String | Platform creative id
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+opts = {
+  fields: 'fields_example' # String | Comma-separated Graph field override (supports nested {} projections).
+}
+
+begin
+  # Creative details (Meta)
+  result = api_instance.get_ad_creative(creative_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_creative: #{e}"
+end
+```
+
+#### Using the get_ad_creative_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdCreative200Response>, Integer, Hash)> get_ad_creative_with_http_info(creative_id, account_id, opts)
+
+```ruby
+begin
+  # Creative details (Meta)
+  data, status_code, headers = api_instance.get_ad_creative_with_http_info(creative_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdCreative200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->get_ad_creative_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **creative_id** | **String** | Platform creative id |  |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+
+### Return type
+
+[**GetAdCreative200Response**](GetAdCreative200Response.md)
 
 ### Authorization
 
@@ -2866,6 +3164,241 @@ end
 - **Accept**: application/json
 
 
+## list_ad_creatives
+
+> <ListAdCreatives200Response> list_ad_creatives(account_id, ad_account_id, opts)
+
+Creative library (Meta)
+
+Lists the ad account's creative library (Meta's `/act_X/adcreatives`), rows returned verbatim. The default projection covers id, name, status, object type, thumbnail, object_story_spec / asset_feed_spec and url_tags; `fields` is a raw-passthrough override. Any creative id here is reusable on the create endpoints via `existingCreativeId`. Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  fields: 'fields_example', # String | Comma-separated Graph field override (supports nested {} projections).
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # Creative library (Meta)
+  result = api_instance.list_ad_creatives(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_creatives: #{e}"
+end
+```
+
+#### Using the list_ad_creatives_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdCreatives200Response>, Integer, Hash)> list_ad_creatives_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # Creative library (Meta)
+  data, status_code, headers = api_instance.list_ad_creatives_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdCreatives200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_creatives_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**ListAdCreatives200Response**](ListAdCreatives200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_images
+
+> <ListAdImages200Response> list_ad_images(account_id, ad_account_id, opts)
+
+Ad image library (Meta)
+
+Lists the ad account's image library (Meta's `/act_X/adimages`), rows returned verbatim. The default projection covers hash, url, name, dimensions and status; `fields` is a raw-passthrough override. Any `hash` here is reusable wherever Meta accepts `image_hash` (e.g. `imageHash` on POST /v1/ads/creatives). Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  fields: 'fields_example', # String | Comma-separated Graph field override (supports nested {} projections).
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # Ad image library (Meta)
+  result = api_instance.list_ad_images(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_images: #{e}"
+end
+```
+
+#### Using the list_ad_images_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdImages200Response>, Integer, Hash)> list_ad_images_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # Ad image library (Meta)
+  data, status_code, headers = api_instance.list_ad_images_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdImages200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_images_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**ListAdImages200Response**](ListAdImages200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_labels
+
+> <ListAdLabels200Response> list_ad_labels(account_id, ad_account_id, opts)
+
+Ad labels (Meta)
+
+Lists the ad account's organizational labels (Meta's `/act_X/adlabels`), rows returned verbatim (id, name, created/updated time). Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # Ad labels (Meta)
+  result = api_instance.list_ad_labels(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_labels: #{e}"
+end
+```
+
+#### Using the list_ad_labels_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdLabels200Response>, Integer, Hash)> list_ad_labels_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # Ad labels (Meta)
+  data, status_code, headers = api_instance.list_ad_labels_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdLabels200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_ad_labels_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**ListAdLabels200Response**](ListAdLabels200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_ad_studies
 
 > <ListAdStudies200Response> list_ad_studies(account_id, ad_account_id, opts)
@@ -3332,6 +3865,85 @@ end
 - **Accept**: application/json
 
 
+## list_high_demand_periods
+
+> <ListHighDemandPeriods200Response> list_high_demand_periods(account_id, opts)
+
+High demand periods / budget schedules (Meta)
+
+Scheduled budget increases (Meta's budget-scheduling API). The Graph edge lives on the campaign and ad-set nodes only, so exactly one of `campaignId` / `adSetId` (platform ids) is required. Rows returned verbatim (budget_value, budget_value_type, time window, recurrence). Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+opts = {
+  campaign_id: 'campaign_id_example', # String | Platform campaign id. Exactly one of campaignId / adSetId.
+  ad_set_id: 'ad_set_id_example', # String | Platform ad set id. Exactly one of campaignId / adSetId.
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # High demand periods / budget schedules (Meta)
+  result = api_instance.list_high_demand_periods(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_high_demand_periods: #{e}"
+end
+```
+
+#### Using the list_high_demand_periods_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListHighDemandPeriods200Response>, Integer, Hash)> list_high_demand_periods_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # High demand periods / budget schedules (Meta)
+  data, status_code, headers = api_instance.list_high_demand_periods_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListHighDemandPeriods200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_high_demand_periods_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **campaign_id** | **String** | Platform campaign id. Exactly one of campaignId / adSetId. | [optional] |
+| **ad_set_id** | **String** | Platform ad set id. Exactly one of campaignId / adSetId. | [optional] |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**ListHighDemandPeriods200Response**](ListHighDemandPeriods200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_lead_forms
 
 > <ListLeadForms200Response> list_lead_forms(account_id, opts)
@@ -3475,6 +4087,81 @@ end
 ### Return type
 
 [**ListLeads200Response**](ListLeads200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_meta_businesses
+
+> <ListMetaBusinesses200Response> list_meta_businesses(account_id, opts)
+
+Businesses list (Meta)
+
+Business Manager portfolios the connected Meta user belongs to (Meta's `/me/businesses`), rows returned verbatim (id, name, verification_status, created_time). Token-scoped, so no `adAccountId` is needed. Meta only; for TikTok Business Centers use `GET /v1/ads/business-centers`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+opts = {
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # Businesses list (Meta)
+  result = api_instance.list_meta_businesses(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_meta_businesses: #{e}"
+end
+```
+
+#### Using the list_meta_businesses_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListMetaBusinesses200Response>, Integer, Hash)> list_meta_businesses_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Businesses list (Meta)
+  data, status_code, headers = api_instance.list_meta_businesses_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListMetaBusinesses200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->list_meta_businesses_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**ListMetaBusinesses200Response**](ListMetaBusinesses200Response.md)
 
 ### Authorization
 
@@ -4225,6 +4912,77 @@ end
 ### Return type
 
 [**UpdateAdAccount200Response**](UpdateAdAccount200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ad_creative
+
+> <UpdateAdCreative200Response> update_ad_creative(creative_id, update_ad_creative_request)
+
+Rename a creative (Meta)
+
+Renames a creative. Creatives are immutable on Meta beyond `name` — for content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with `creative`). Meta only.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdsApi.new
+creative_id = 'creative_id_example' # String | Platform creative id
+update_ad_creative_request = Zernio::UpdateAdCreativeRequest.new({account_id: 'account_id_example', name: 'name_example'}) # UpdateAdCreativeRequest | 
+
+begin
+  # Rename a creative (Meta)
+  result = api_instance.update_ad_creative(creative_id, update_ad_creative_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->update_ad_creative: #{e}"
+end
+```
+
+#### Using the update_ad_creative_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAdCreative200Response>, Integer, Hash)> update_ad_creative_with_http_info(creative_id, update_ad_creative_request)
+
+```ruby
+begin
+  # Rename a creative (Meta)
+  data, status_code, headers = api_instance.update_ad_creative_with_http_info(creative_id, update_ad_creative_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAdCreative200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdsApi->update_ad_creative_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **creative_id** | **String** | Platform creative id |  |
+| **update_ad_creative_request** | [**UpdateAdCreativeRequest**](UpdateAdCreativeRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAdCreative200Response**](UpdateAdCreative200Response.md)
 
 ### Authorization
 

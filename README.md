@@ -95,10 +95,12 @@ Class | Method | HTTP request | Description
 *Zernio::AdAudiencesApi* | [**delete_ad_audience**](docs/AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience
 *Zernio::AdAudiencesApi* | [**get_ad_audience**](docs/AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details
 *Zernio::AdAudiencesApi* | [**list_ad_audiences**](docs/AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences
-*Zernio::AdAudiencesApi* | [**update_ad_audience**](docs/AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update saved targeting audience
+*Zernio::AdAudiencesApi* | [**update_ad_audience**](docs/AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
+*Zernio::AdCampaignsApi* | [**create_ad_campaign**](docs/AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign (Meta)
 *Zernio::AdCampaignsApi* | [**delete_ad_campaign**](docs/AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign
 *Zernio::AdCampaignsApi* | [**duplicate_ad_campaign**](docs/AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign
+*Zernio::AdCampaignsApi* | [**duplicate_ad_set**](docs/AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set (Meta)
 *Zernio::AdCampaignsApi* | [**get_ad_set_details**](docs/AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase (Meta)
 *Zernio::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Zernio::AdCampaignsApi* | [**get_ads_timeline**](docs/AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics
@@ -112,6 +114,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**archive_lead_form**](docs/AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form
 *Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdsApi* | [**cancel_rf_reservation**](docs/AdsApi.md#cancel_rf_reservation) | **DELETE** /v1/ads/rf-predictions/{predictionId} | Cancel a Reach & Frequency reservation (Meta)
+*Zernio::AdsApi* | [**create_ad_creative**](docs/AdsApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative (Meta)
 *Zernio::AdsApi* | [**create_ad_insights_report**](docs/AdsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run (Meta)
 *Zernio::AdsApi* | [**create_call_ad**](docs/AdsApi.md#create_call_ad) | **POST** /v1/ads/call | Create Click-to-Call ad
 *Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination
@@ -122,13 +125,16 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Zernio::AdsApi* | [**create_test_lead**](docs/AdsApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a test lead
 *Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
+*Zernio::AdsApi* | [**delete_ad_creative**](docs/AdsApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative (Meta)
 *Zernio::AdsApi* | [**delete_conversion_destination**](docs/AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Delete a conversion destination
+*Zernio::AdsApi* | [**duplicate_ad**](docs/AdsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad (Meta)
 *Zernio::AdsApi* | [**estimate_ad_reach**](docs/AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
 *Zernio::AdsApi* | [**generate_ad_previews**](docs/AdsApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews (Meta)
 *Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
 *Zernio::AdsApi* | [**get_ad_account_finance**](docs/AdsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances (Meta)
 *Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
+*Zernio::AdsApi* | [**get_ad_creative**](docs/AdsApi.md#get_ad_creative) | **GET** /v1/ads/creatives/{creativeId} | Creative details (Meta)
 *Zernio::AdsApi* | [**get_ad_insights_report**](docs/AdsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run (Meta)
 *Zernio::AdsApi* | [**get_ad_previews**](docs/AdsApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad (Meta)
 *Zernio::AdsApi* | [**get_ad_tracking_tags**](docs/AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
@@ -146,14 +152,19 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdsApi* | [**list_ad_catalog_product_sets**](docs/AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog's product sets
 *Zernio::AdsApi* | [**list_ad_catalogs**](docs/AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs
+*Zernio::AdsApi* | [**list_ad_creatives**](docs/AdsApi.md#list_ad_creatives) | **GET** /v1/ads/creatives | Creative library (Meta)
+*Zernio::AdsApi* | [**list_ad_images**](docs/AdsApi.md#list_ad_images) | **GET** /v1/ads/images | Ad image library (Meta)
+*Zernio::AdsApi* | [**list_ad_labels**](docs/AdsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels (Meta)
 *Zernio::AdsApi* | [**list_ad_studies**](docs/AdsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies (Meta)
 *Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdsApi* | [**list_ads_business_centers**](docs/AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
 *Zernio::AdsApi* | [**list_conversion_associations**](docs/AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List associated campaigns
 *Zernio::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List conversion destinations
 *Zernio::AdsApi* | [**list_form_leads**](docs/AdsApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form
+*Zernio::AdsApi* | [**list_high_demand_periods**](docs/AdsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules (Meta)
 *Zernio::AdsApi* | [**list_lead_forms**](docs/AdsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List lead forms
 *Zernio::AdsApi* | [**list_leads**](docs/AdsApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads
+*Zernio::AdsApi* | [**list_meta_businesses**](docs/AdsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list (Meta)
 *Zernio::AdsApi* | [**list_whats_app_conversions**](docs/AdsApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events
 *Zernio::AdsApi* | [**query_ad_insights**](docs/AdsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query (Meta)
 *Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns
@@ -164,6 +175,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
 *Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Zernio::AdsApi* | [**update_ad_account**](docs/AdsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
+*Zernio::AdsApi* | [**update_ad_creative**](docs/AdsApi.md#update_ad_creative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative (Meta)
 *Zernio::AdsApi* | [**update_ad_status**](docs/AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
 *Zernio::AdsApi* | [**update_ad_tracking_tags**](docs/AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags
 *Zernio::AdsApi* | [**update_conversion_destination**](docs/AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
@@ -285,6 +297,7 @@ Class | Method | HTTP request | Description
 *Zernio::DiscordApi* | [**delete_discord_scheduled_event**](docs/DiscordApi.md#delete_discord_scheduled_event) | **DELETE** /v1/discord/guilds/{guildId}/events/{eventId} | Delete a Discord scheduled event
 *Zernio::DiscordApi* | [**edit_discord_guild_role**](docs/DiscordApi.md#edit_discord_guild_role) | **PATCH** /v1/discord/guilds/{guildId}/roles/{roleId} | Edit a Discord guild role
 *Zernio::DiscordApi* | [**get_discord_channels**](docs/DiscordApi.md#get_discord_channels) | **GET** /v1/accounts/{accountId}/discord-channels | List Discord guild channels
+*Zernio::DiscordApi* | [**get_discord_guild_member**](docs/DiscordApi.md#get_discord_guild_member) | **GET** /v1/discord/guilds/{guildId}/members/{userId} | Get a Discord guild member
 *Zernio::DiscordApi* | [**get_discord_scheduled_event**](docs/DiscordApi.md#get_discord_scheduled_event) | **GET** /v1/discord/guilds/{guildId}/events/{eventId} | Get a Discord scheduled event
 *Zernio::DiscordApi* | [**get_discord_settings**](docs/DiscordApi.md#get_discord_settings) | **GET** /v1/accounts/{accountId}/discord-settings | Get Discord account settings
 *Zernio::DiscordApi* | [**list_discord_guild_members**](docs/DiscordApi.md#list_discord_guild_members) | **GET** /v1/discord/guilds/{guildId}/members | List Discord guild members
@@ -293,6 +306,7 @@ Class | Method | HTTP request | Description
 *Zernio::DiscordApi* | [**list_discord_scheduled_events**](docs/DiscordApi.md#list_discord_scheduled_events) | **GET** /v1/discord/guilds/{guildId}/events | List Discord scheduled events
 *Zernio::DiscordApi* | [**pin_discord_message**](docs/DiscordApi.md#pin_discord_message) | **PUT** /v1/discord/channels/{channelId}/pins/{messageId} | Pin a Discord message
 *Zernio::DiscordApi* | [**remove_discord_member_role**](docs/DiscordApi.md#remove_discord_member_role) | **DELETE** /v1/discord/guilds/{guildId}/members/{userId}/roles/{roleId} | Remove a role from a guild member
+*Zernio::DiscordApi* | [**search_discord_guild_members**](docs/DiscordApi.md#search_discord_guild_members) | **GET** /v1/discord/guilds/{guildId}/members/search | Search Discord guild members
 *Zernio::DiscordApi* | [**send_discord_direct_message**](docs/DiscordApi.md#send_discord_direct_message) | **POST** /v1/discord/dms | Send a Discord Direct Message
 *Zernio::DiscordApi* | [**unpin_discord_message**](docs/DiscordApi.md#unpin_discord_message) | **DELETE** /v1/discord/channels/{channelId}/pins/{messageId} | Unpin a Discord message
 *Zernio::DiscordApi* | [**update_discord_scheduled_event**](docs/DiscordApi.md#update_discord_scheduled_event) | **PATCH** /v1/discord/guilds/{guildId}/events/{eventId} | Update a Discord scheduled event
@@ -400,13 +414,17 @@ Class | Method | HTTP request | Description
 *Zernio::ReviewsApi* | [**list_inbox_reviews**](docs/ReviewsApi.md#list_inbox_reviews) | **GET** /v1/inbox/reviews | List reviews
 *Zernio::ReviewsApi* | [**reply_to_inbox_review**](docs/ReviewsApi.md#reply_to_inbox_review) | **POST** /v1/inbox/reviews/{reviewId}/reply | Reply to review
 *Zernio::SMSApi* | [**appeal_sms_registration**](docs/SMSApi.md#appeal_sms_registration) | **POST** /v1/sms/registrations/{id}/appeal | Appeal a rejected campaign
+*Zernio::SMSApi* | [**create_sms_sender_id**](docs/SMSApi.md#create_sms_sender_id) | **POST** /v1/sms/sender-ids | Create an alphanumeric sender ID
 *Zernio::SMSApi* | [**deactivate_sms_registration**](docs/SMSApi.md#deactivate_sms_registration) | **DELETE** /v1/sms/registrations/{id} | Deactivate a brand/campaign registration
+*Zernio::SMSApi* | [**delete_sms_sender_id**](docs/SMSApi.md#delete_sms_sender_id) | **DELETE** /v1/sms/sender-ids/{id} | Delete an alphanumeric sender ID
 *Zernio::SMSApi* | [**disable_sms_on_number**](docs/SMSApi.md#disable_sms_on_number) | **DELETE** /v1/phone-numbers/{id}/sms | Disable SMS on a number
 *Zernio::SMSApi* | [**enable_sms_on_number**](docs/SMSApi.md#enable_sms_on_number) | **POST** /v1/phone-numbers/{id}/sms | Enable SMS on a number
 *Zernio::SMSApi* | [**get_sms_registration**](docs/SMSApi.md#get_sms_registration) | **GET** /v1/sms/registrations/{id} | Get a carrier registration
 *Zernio::SMSApi* | [**list_sms_opt_outs**](docs/SMSApi.md#list_sms_opt_outs) | **GET** /v1/sms/opt-outs | List SMS opt-outs
 *Zernio::SMSApi* | [**list_sms_registrations**](docs/SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations
+*Zernio::SMSApi* | [**list_sms_sender_ids**](docs/SMSApi.md#list_sms_sender_ids) | **GET** /v1/sms/sender-ids | List alphanumeric sender IDs
 *Zernio::SMSApi* | [**lookup_sms_number**](docs/SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type
+*Zernio::SMSApi* | [**request_sms_sender_id_limit_increase**](docs/SMSApi.md#request_sms_sender_id_limit_increase) | **POST** /v1/sms/sender-ids/limit-request | Request a higher sender ID daily limit
 *Zernio::SMSApi* | [**resend_sms_registration_otp**](docs/SMSApi.md#resend_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP
 *Zernio::SMSApi* | [**reuse_sms_registration_for_number**](docs/SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration
 *Zernio::SMSApi* | [**send_sms**](docs/SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS
@@ -705,6 +723,11 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
  - [Zernio::CreateAdAudience201Response](docs/CreateAdAudience201Response.md)
  - [Zernio::CreateAdAudienceRequest](docs/CreateAdAudienceRequest.md)
+ - [Zernio::CreateAdCampaign201Response](docs/CreateAdCampaign201Response.md)
+ - [Zernio::CreateAdCampaignRequest](docs/CreateAdCampaignRequest.md)
+ - [Zernio::CreateAdCreative201Response](docs/CreateAdCreative201Response.md)
+ - [Zernio::CreateAdCreativeRequest](docs/CreateAdCreativeRequest.md)
+ - [Zernio::CreateAdCreativeRequestCarouselCardsInner](docs/CreateAdCreativeRequestCarouselCardsInner.md)
  - [Zernio::CreateAdInsightsReport202Response](docs/CreateAdInsightsReport202Response.md)
  - [Zernio::CreateAdInsightsReportRequest](docs/CreateAdInsightsReportRequest.md)
  - [Zernio::CreateAdInsightsReportRequestFilteringInner](docs/CreateAdInsightsReportRequestFilteringInner.md)
@@ -791,6 +814,10 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateSequenceRequestStepsInner](docs/CreateSequenceRequestStepsInner.md)
  - [Zernio::CreateSequenceRequestStepsInnerTemplate](docs/CreateSequenceRequestStepsInnerTemplate.md)
  - [Zernio::CreateSequenceRequestStepsInnerTemplateVariableMappingValue](docs/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md)
+ - [Zernio::CreateSmsSenderId200Response](docs/CreateSmsSenderId200Response.md)
+ - [Zernio::CreateSmsSenderIdRequest](docs/CreateSmsSenderIdRequest.md)
+ - [Zernio::CreateStandaloneAd200Response](docs/CreateStandaloneAd200Response.md)
+ - [Zernio::CreateStandaloneAd200ResponseResultsInner](docs/CreateStandaloneAd200ResponseResultsInner.md)
  - [Zernio::CreateStandaloneAd201Response](docs/CreateStandaloneAd201Response.md)
  - [Zernio::CreateStandaloneAd201ResponseOneOf](docs/CreateStandaloneAd201ResponseOneOf.md)
  - [Zernio::CreateStandaloneAd201ResponseOneOf1](docs/CreateStandaloneAd201ResponseOneOf1.md)
@@ -857,6 +884,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteAccountGroup200Response](docs/DeleteAccountGroup200Response.md)
  - [Zernio::DeleteAdCampaign200Response](docs/DeleteAdCampaign200Response.md)
  - [Zernio::DeleteAdCampaignRequest](docs/DeleteAdCampaignRequest.md)
+ - [Zernio::DeleteAdCreative200Response](docs/DeleteAdCreative200Response.md)
  - [Zernio::DeleteDiscordScheduledEvent200Response](docs/DeleteDiscordScheduledEvent200Response.md)
  - [Zernio::DeleteGoogleBusinessMedia200Response](docs/DeleteGoogleBusinessMedia200Response.md)
  - [Zernio::DeleteGoogleBusinessPlaceAction200Response](docs/DeleteGoogleBusinessPlaceAction200Response.md)
@@ -864,11 +892,14 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxComment200Response](docs/DeleteInboxComment200Response.md)
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
+ - [Zernio::DeleteSmsSenderId200Response](docs/DeleteSmsSenderId200Response.md)
  - [Zernio::DeleteWhatsappBusinessUsernameRequest](docs/DeleteWhatsappBusinessUsernameRequest.md)
  - [Zernio::DialVoiceWebCall200Response](docs/DialVoiceWebCall200Response.md)
  - [Zernio::DialVoiceWebCallRequest](docs/DialVoiceWebCallRequest.md)
  - [Zernio::DisableSmsOnNumber200Response](docs/DisableSmsOnNumber200Response.md)
  - [Zernio::DisableVoiceOnNumber200Response](docs/DisableVoiceOnNumber200Response.md)
+ - [Zernio::DiscordGuildMember](docs/DiscordGuildMember.md)
+ - [Zernio::DiscordGuildMemberUser](docs/DiscordGuildMemberUser.md)
  - [Zernio::DiscordPlatformData](docs/DiscordPlatformData.md)
  - [Zernio::DiscordPlatformDataEmbedsInner](docs/DiscordPlatformDataEmbedsInner.md)
  - [Zernio::DiscordPlatformDataEmbedsInnerAuthor](docs/DiscordPlatformDataEmbedsInnerAuthor.md)
@@ -883,8 +914,12 @@ Class | Method | HTTP request | Description
  - [Zernio::DiscordScheduledEvent](docs/DiscordScheduledEvent.md)
  - [Zernio::DiscordScheduledEventEntityMetadata](docs/DiscordScheduledEventEntityMetadata.md)
  - [Zernio::DmButton](docs/DmButton.md)
+ - [Zernio::DuplicateAd200Response](docs/DuplicateAd200Response.md)
  - [Zernio::DuplicateAdCampaign200Response](docs/DuplicateAdCampaign200Response.md)
  - [Zernio::DuplicateAdCampaignRequest](docs/DuplicateAdCampaignRequest.md)
+ - [Zernio::DuplicateAdRequest](docs/DuplicateAdRequest.md)
+ - [Zernio::DuplicateAdSet200Response](docs/DuplicateAdSet200Response.md)
+ - [Zernio::DuplicateAdSetRequest](docs/DuplicateAdSetRequest.md)
  - [Zernio::DuplicateWorkflow201Response](docs/DuplicateWorkflow201Response.md)
  - [Zernio::DuplicateWorkflow201ResponseWorkflow](docs/DuplicateWorkflow201ResponseWorkflow.md)
  - [Zernio::EditDiscordGuildRoleRequest](docs/EditDiscordGuildRoleRequest.md)
@@ -956,6 +991,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdComments200Response](docs/GetAdComments200Response.md)
  - [Zernio::GetAdComments200ResponseMeta](docs/GetAdComments200ResponseMeta.md)
  - [Zernio::GetAdComments200ResponsePagination](docs/GetAdComments200ResponsePagination.md)
+ - [Zernio::GetAdCreative200Response](docs/GetAdCreative200Response.md)
  - [Zernio::GetAdInsightsReport200Response](docs/GetAdInsightsReport200Response.md)
  - [Zernio::GetAdInsightsReport200ResponsePaging](docs/GetAdInsightsReport200ResponsePaging.md)
  - [Zernio::GetAdPreviews200Response](docs/GetAdPreviews200Response.md)
@@ -1010,6 +1046,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetDailyMetrics200ResponsePlatformBreakdownInner](docs/GetDailyMetrics200ResponsePlatformBreakdownInner.md)
  - [Zernio::GetDiscordChannels200Response](docs/GetDiscordChannels200Response.md)
  - [Zernio::GetDiscordChannels200ResponseChannelsInner](docs/GetDiscordChannels200ResponseChannelsInner.md)
+ - [Zernio::GetDiscordGuildMember200Response](docs/GetDiscordGuildMember200Response.md)
  - [Zernio::GetDiscordSettings200Response](docs/GetDiscordSettings200Response.md)
  - [Zernio::GetDiscordSettings200ResponseAccount](docs/GetDiscordSettings200ResponseAccount.md)
  - [Zernio::GetDsaRecommendations200Response](docs/GetDsaRecommendations200Response.md)
@@ -1319,6 +1356,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdCatalogProductSets200ResponseProductSetsInner](docs/ListAdCatalogProductSets200ResponseProductSetsInner.md)
  - [Zernio::ListAdCatalogs200Response](docs/ListAdCatalogs200Response.md)
  - [Zernio::ListAdCatalogs200ResponseCatalogsInner](docs/ListAdCatalogs200ResponseCatalogsInner.md)
+ - [Zernio::ListAdCreatives200Response](docs/ListAdCreatives200Response.md)
+ - [Zernio::ListAdImages200Response](docs/ListAdImages200Response.md)
+ - [Zernio::ListAdLabels200Response](docs/ListAdLabels200Response.md)
  - [Zernio::ListAdStudies200Response](docs/ListAdStudies200Response.md)
  - [Zernio::ListAds200Response](docs/ListAds200Response.md)
  - [Zernio::ListAdsBusinessCenters200Response](docs/ListAdsBusinessCenters200Response.md)
@@ -1344,8 +1384,6 @@ Class | Method | HTTP request | Description
  - [Zernio::ListCustomFields200Response](docs/ListCustomFields200Response.md)
  - [Zernio::ListCustomFields200ResponseFieldsInner](docs/ListCustomFields200ResponseFieldsInner.md)
  - [Zernio::ListDiscordGuildMembers200Response](docs/ListDiscordGuildMembers200Response.md)
- - [Zernio::ListDiscordGuildMembers200ResponseDataInner](docs/ListDiscordGuildMembers200ResponseDataInner.md)
- - [Zernio::ListDiscordGuildMembers200ResponseDataInnerUser](docs/ListDiscordGuildMembers200ResponseDataInnerUser.md)
  - [Zernio::ListDiscordGuildMembers200ResponsePagination](docs/ListDiscordGuildMembers200ResponsePagination.md)
  - [Zernio::ListDiscordGuildRoles200Response](docs/ListDiscordGuildRoles200Response.md)
  - [Zernio::ListDiscordGuildRoles200ResponseDataInner](docs/ListDiscordGuildRoles200ResponseDataInner.md)
@@ -1363,6 +1401,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation](docs/ListGoogleBusinessMedia200ResponseMediaItemsInnerLocationAssociation.md)
  - [Zernio::ListGoogleBusinessPlaceActions200Response](docs/ListGoogleBusinessPlaceActions200Response.md)
  - [Zernio::ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner](docs/ListGoogleBusinessPlaceActions200ResponsePlaceActionLinksInner.md)
+ - [Zernio::ListHighDemandPeriods200Response](docs/ListHighDemandPeriods200Response.md)
  - [Zernio::ListInboxComments200Response](docs/ListInboxComments200Response.md)
  - [Zernio::ListInboxComments200ResponseDataInner](docs/ListInboxComments200ResponseDataInner.md)
  - [Zernio::ListInboxConversationAnalytics200Response](docs/ListInboxConversationAnalytics200Response.md)
@@ -1392,6 +1431,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListLogs200Response](docs/ListLogs200Response.md)
  - [Zernio::ListLogs200ResponseLogsInner](docs/ListLogs200ResponseLogsInner.md)
  - [Zernio::ListLogs200ResponsePagination](docs/ListLogs200ResponsePagination.md)
+ - [Zernio::ListMetaBusinesses200Response](docs/ListMetaBusinesses200Response.md)
  - [Zernio::ListPhoneNumberCountries200Response](docs/ListPhoneNumberCountries200Response.md)
  - [Zernio::ListPhoneNumberCountries200ResponseCountriesInner](docs/ListPhoneNumberCountries200ResponseCountriesInner.md)
  - [Zernio::ListPhoneNumberCountries200ResponseCountriesInnerTypesInner](docs/ListPhoneNumberCountries200ResponseCountriesInnerTypesInner.md)
@@ -1415,6 +1455,10 @@ Class | Method | HTTP request | Description
  - [Zernio::ListSmsRegistrations200Response](docs/ListSmsRegistrations200Response.md)
  - [Zernio::ListSmsRegistrations200ResponseRegistrationsInner](docs/ListSmsRegistrations200ResponseRegistrationsInner.md)
  - [Zernio::ListSmsRegistrations200ResponseRegistrationsInnerThroughput](docs/ListSmsRegistrations200ResponseRegistrationsInnerThroughput.md)
+ - [Zernio::ListSmsSenderIds200Response](docs/ListSmsSenderIds200Response.md)
+ - [Zernio::ListSmsSenderIds200ResponseBudget](docs/ListSmsSenderIds200ResponseBudget.md)
+ - [Zernio::ListSmsSenderIds200ResponseBudgetPendingRequest](docs/ListSmsSenderIds200ResponseBudgetPendingRequest.md)
+ - [Zernio::ListSmsSenderIds200ResponseSenderIdsInner](docs/ListSmsSenderIds200ResponseSenderIdsInner.md)
  - [Zernio::ListSnapchatProfiles200Response](docs/ListSnapchatProfiles200Response.md)
  - [Zernio::ListSnapchatProfiles200ResponsePublicProfilesInner](docs/ListSnapchatProfiles200ResponsePublicProfilesInner.md)
  - [Zernio::ListTrackingTagSharedAccounts200Response](docs/ListTrackingTagSharedAccounts200Response.md)
@@ -1544,6 +1588,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplyToInboxReviewRequest](docs/ReplyToInboxReviewRequest.md)
  - [Zernio::ReplyToMention200Response](docs/ReplyToMention200Response.md)
  - [Zernio::ReplyToMentionRequest](docs/ReplyToMentionRequest.md)
+ - [Zernio::RequestSmsSenderIdLimitIncrease200Response](docs/RequestSmsSenderIdLimitIncrease200Response.md)
+ - [Zernio::RequestSmsSenderIdLimitIncreaseRequest](docs/RequestSmsSenderIdLimitIncreaseRequest.md)
  - [Zernio::ResendSmsRegistrationOtp200Response](docs/ResendSmsRegistrationOtp200Response.md)
  - [Zernio::ReserveRfPrediction201Response](docs/ReserveRfPrediction201Response.md)
  - [Zernio::ReserveRfPredictionRequest](docs/ReserveRfPredictionRequest.md)
@@ -1571,6 +1617,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SearchAvailablePhoneNumbers200ResponseNumbersInner](docs/SearchAvailablePhoneNumbers200ResponseNumbersInner.md)
  - [Zernio::SearchAvailableWhatsAppNumbers200Response](docs/SearchAvailableWhatsAppNumbers200Response.md)
  - [Zernio::SearchAvailableWhatsAppNumbers200ResponseNumbersInner](docs/SearchAvailableWhatsAppNumbers200ResponseNumbersInner.md)
+ - [Zernio::SearchDiscordGuildMembers200Response](docs/SearchDiscordGuildMembers200Response.md)
  - [Zernio::SearchInboxConversations200Response](docs/SearchInboxConversations200Response.md)
  - [Zernio::SearchInboxConversations200ResponseDataInner](docs/SearchInboxConversations200ResponseDataInner.md)
  - [Zernio::SearchInboxConversations200ResponseDataInnerConversation](docs/SearchInboxConversations200ResponseDataInnerConversation.md)
@@ -1750,6 +1797,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdCampaignRequestPlatformSpecificData](docs/UpdateAdCampaignRequestPlatformSpecificData.md)
  - [Zernio::UpdateAdCampaignStatus200Response](docs/UpdateAdCampaignStatus200Response.md)
  - [Zernio::UpdateAdCampaignStatusRequest](docs/UpdateAdCampaignStatusRequest.md)
+ - [Zernio::UpdateAdCreative200Response](docs/UpdateAdCreative200Response.md)
+ - [Zernio::UpdateAdCreativeRequest](docs/UpdateAdCreativeRequest.md)
  - [Zernio::UpdateAdRequest](docs/UpdateAdRequest.md)
  - [Zernio::UpdateAdRequestBudget](docs/UpdateAdRequestBudget.md)
  - [Zernio::UpdateAdRequestCreative](docs/UpdateAdRequestCreative.md)

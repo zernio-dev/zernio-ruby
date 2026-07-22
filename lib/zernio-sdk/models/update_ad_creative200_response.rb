@@ -14,28 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListDiscordGuildMembers200ResponseDataInner < ApiModelBase
-    attr_accessor :user
+  class UpdateAdCreative200Response < ApiModelBase
+    attr_accessor :creative_id
 
-    # Guild-specific nickname
-    attr_accessor :nick
+    attr_accessor :name
 
-    # Snowflake IDs of roles assigned to this member
-    attr_accessor :roles
-
-    attr_accessor :joined_at
-
-    # When the user started boosting the server
-    attr_accessor :premium_since
+    attr_accessor :message
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'user' => :'user',
-        :'nick' => :'nick',
-        :'roles' => :'roles',
-        :'joined_at' => :'joined_at',
-        :'premium_since' => :'premium_since'
+        :'creative_id' => :'creativeId',
+        :'name' => :'name',
+        :'message' => :'message'
       }
     end
 
@@ -52,19 +43,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'user' => :'ListDiscordGuildMembers200ResponseDataInnerUser',
-        :'nick' => :'String',
-        :'roles' => :'Array<String>',
-        :'joined_at' => :'Time',
-        :'premium_since' => :'Time'
+        :'creative_id' => :'String',
+        :'name' => :'String',
+        :'message' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'nick',
-        :'premium_since'
       ])
     end
 
@@ -72,38 +59,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListDiscordGuildMembers200ResponseDataInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdCreative200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListDiscordGuildMembers200ResponseDataInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdCreative200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'user')
-        self.user = attributes[:'user']
+      if attributes.key?(:'creative_id')
+        self.creative_id = attributes[:'creative_id']
       end
 
-      if attributes.key?(:'nick')
-        self.nick = attributes[:'nick']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'roles')
-        if (value = attributes[:'roles']).is_a?(Array)
-          self.roles = value
-        end
-      end
-
-      if attributes.key?(:'joined_at')
-        self.joined_at = attributes[:'joined_at']
-      end
-
-      if attributes.key?(:'premium_since')
-        self.premium_since = attributes[:'premium_since']
+      if attributes.key?(:'message')
+        self.message = attributes[:'message']
       end
     end
 
@@ -127,11 +104,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          user == o.user &&
-          nick == o.nick &&
-          roles == o.roles &&
-          joined_at == o.joined_at &&
-          premium_since == o.premium_since
+          creative_id == o.creative_id &&
+          name == o.name &&
+          message == o.message
     end
 
     # @see the `==` method
@@ -143,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [user, nick, roles, joined_at, premium_since].hash
+      [creative_id, name, message].hash
     end
 
     # Builds the object from hash

@@ -171,6 +171,20 @@ describe 'DiscordApi' do
     end
   end
 
+  # unit tests for get_discord_guild_member
+  # Get a Discord guild member
+  # Fetch a single guild member by Discord user id.  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403. 
+  # @param guild_id 
+  # @param user_id Discord user snowflake.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetDiscordGuildMember200Response]
+  describe 'get_discord_guild_member test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_discord_scheduled_event
   # Get a Discord scheduled event
   # @param guild_id 
@@ -198,7 +212,7 @@ describe 'DiscordApi' do
 
   # unit tests for list_discord_guild_members
   # List Discord guild members
-  # Cursor-paginated list of guild members. Returns Discord&#39;s raw member objects so callers can build community-ops automation (e.g. \&quot;add role to all members joined in the last 7 days\&quot;) on the actual platform shape.  **Important:** this endpoint requires the privileged \&quot;Server Members Intent\&quot; enabled on the Discord app (Developer Portal → Bot tab → toggle \&quot;Server Members Intent\&quot; ON, then Save). Without it, Discord returns an empty array with no error. Verify the intent is enabled before relying on this endpoint.  Pagination: pass &#x60;after&#x60; &#x3D; the last &#x60;user.id&#x60; from the previous page. Omit on the first call. Response includes a &#x60;nextCursor&#x60; and &#x60;hasMore&#x60; flag so callers don&#39;t need to know Discord&#39;s pagination shape. 
+  # Cursor-paginated list of guild members. Returns Discord&#39;s raw member objects so callers can build community-ops automation (e.g. \&quot;add role to all members joined in the last 7 days\&quot;) on the actual platform shape.  **Important:** this endpoint requires the privileged \&quot;Server Members Intent\&quot; on the Discord application. If the intent is not enabled, Discord rejects the call and this endpoint returns **403**. Single member lookup and prefix search (see the sibling endpoints) do not need the intent.  Pagination: pass &#x60;after&#x60; &#x3D; the last &#x60;user.id&#x60; from the previous page. Omit on the first call. Response includes a &#x60;nextCursor&#x60; and &#x60;hasMore&#x60; flag so callers don&#39;t need to know Discord&#39;s pagination shape. 
   # @param guild_id 
   # @param account_id 
   # @param [Hash] opts the optional parameters
@@ -275,6 +289,21 @@ describe 'DiscordApi' do
   # @param [Hash] opts the optional parameters
   # @return [RemoveDiscordMemberRole200Response]
   describe 'remove_discord_member_role test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for search_discord_guild_members
+  # Search Discord guild members
+  # Search guild members whose username or nickname **starts with** the query (Discord matches prefixes only, not substrings).  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403. 
+  # @param guild_id 
+  # @param account_id 
+  # @param query Username or nickname prefix to match.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit 
+  # @return [SearchDiscordGuildMembers200Response]
+  describe 'search_discord_guild_members test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

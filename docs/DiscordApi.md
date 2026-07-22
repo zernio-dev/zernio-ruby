@@ -14,6 +14,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_discord_scheduled_event**](DiscordApi.md#delete_discord_scheduled_event) | **DELETE** /v1/discord/guilds/{guildId}/events/{eventId} | Delete a Discord scheduled event |
 | [**edit_discord_guild_role**](DiscordApi.md#edit_discord_guild_role) | **PATCH** /v1/discord/guilds/{guildId}/roles/{roleId} | Edit a Discord guild role |
 | [**get_discord_channels**](DiscordApi.md#get_discord_channels) | **GET** /v1/accounts/{accountId}/discord-channels | List Discord guild channels |
+| [**get_discord_guild_member**](DiscordApi.md#get_discord_guild_member) | **GET** /v1/discord/guilds/{guildId}/members/{userId} | Get a Discord guild member |
 | [**get_discord_scheduled_event**](DiscordApi.md#get_discord_scheduled_event) | **GET** /v1/discord/guilds/{guildId}/events/{eventId} | Get a Discord scheduled event |
 | [**get_discord_settings**](DiscordApi.md#get_discord_settings) | **GET** /v1/accounts/{accountId}/discord-settings | Get Discord account settings |
 | [**list_discord_guild_members**](DiscordApi.md#list_discord_guild_members) | **GET** /v1/discord/guilds/{guildId}/members | List Discord guild members |
@@ -22,6 +23,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_discord_scheduled_events**](DiscordApi.md#list_discord_scheduled_events) | **GET** /v1/discord/guilds/{guildId}/events | List Discord scheduled events |
 | [**pin_discord_message**](DiscordApi.md#pin_discord_message) | **PUT** /v1/discord/channels/{channelId}/pins/{messageId} | Pin a Discord message |
 | [**remove_discord_member_role**](DiscordApi.md#remove_discord_member_role) | **DELETE** /v1/discord/guilds/{guildId}/members/{userId}/roles/{roleId} | Remove a role from a guild member |
+| [**search_discord_guild_members**](DiscordApi.md#search_discord_guild_members) | **GET** /v1/discord/guilds/{guildId}/members/search | Search Discord guild members |
 | [**send_discord_direct_message**](DiscordApi.md#send_discord_direct_message) | **POST** /v1/discord/dms | Send a Discord Direct Message |
 | [**unpin_discord_message**](DiscordApi.md#unpin_discord_message) | **DELETE** /v1/discord/channels/{channelId}/pins/{messageId} | Unpin a Discord message |
 | [**update_discord_scheduled_event**](DiscordApi.md#update_discord_scheduled_event) | **PATCH** /v1/discord/guilds/{guildId}/events/{eventId} | Update a Discord scheduled event |
@@ -756,6 +758,79 @@ end
 - **Accept**: application/json
 
 
+## get_discord_guild_member
+
+> <GetDiscordGuildMember200Response> get_discord_guild_member(guild_id, user_id, account_id)
+
+Get a Discord guild member
+
+Fetch a single guild member by Discord user id.  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::DiscordApi.new
+guild_id = 'guild_id_example' # String | 
+user_id = 'user_id_example' # String | Discord user snowflake.
+account_id = 'account_id_example' # String | 
+
+begin
+  # Get a Discord guild member
+  result = api_instance.get_discord_guild_member(guild_id, user_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->get_discord_guild_member: #{e}"
+end
+```
+
+#### Using the get_discord_guild_member_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetDiscordGuildMember200Response>, Integer, Hash)> get_discord_guild_member_with_http_info(guild_id, user_id, account_id)
+
+```ruby
+begin
+  # Get a Discord guild member
+  data, status_code, headers = api_instance.get_discord_guild_member_with_http_info(guild_id, user_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetDiscordGuildMember200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->get_discord_guild_member_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **guild_id** | **String** |  |  |
+| **user_id** | **String** | Discord user snowflake. |  |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**GetDiscordGuildMember200Response**](GetDiscordGuildMember200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_discord_scheduled_event
 
 > <CreateDiscordScheduledEvent200Response> get_discord_scheduled_event(guild_id, event_id, account_id)
@@ -902,7 +977,7 @@ end
 
 List Discord guild members
 
-Cursor-paginated list of guild members. Returns Discord's raw member objects so callers can build community-ops automation (e.g. \"add role to all members joined in the last 7 days\") on the actual platform shape.  **Important:** this endpoint requires the privileged \"Server Members Intent\" enabled on the Discord app (Developer Portal → Bot tab → toggle \"Server Members Intent\" ON, then Save). Without it, Discord returns an empty array with no error. Verify the intent is enabled before relying on this endpoint.  Pagination: pass `after` = the last `user.id` from the previous page. Omit on the first call. Response includes a `nextCursor` and `hasMore` flag so callers don't need to know Discord's pagination shape. 
+Cursor-paginated list of guild members. Returns Discord's raw member objects so callers can build community-ops automation (e.g. \"add role to all members joined in the last 7 days\") on the actual platform shape.  **Important:** this endpoint requires the privileged \"Server Members Intent\" on the Discord application. If the intent is not enabled, Discord rejects the call and this endpoint returns **403**. Single member lookup and prefix search (see the sibling endpoints) do not need the intent.  Pagination: pass `after` = the last `user.id` from the previous page. Omit on the first call. Response includes a `nextCursor` and `hasMore` flag so callers don't need to know Discord's pagination shape. 
 
 ### Examples
 
@@ -1327,6 +1402,83 @@ end
 ### Return type
 
 [**RemoveDiscordMemberRole200Response**](RemoveDiscordMemberRole200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## search_discord_guild_members
+
+> <SearchDiscordGuildMembers200Response> search_discord_guild_members(guild_id, account_id, query, opts)
+
+Search Discord guild members
+
+Search guild members whose username or nickname **starts with** the query (Discord matches prefixes only, not substrings).  Does not require the privileged Server Members Intent, so this works even where the full member listing returns 403. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::DiscordApi.new
+guild_id = 'guild_id_example' # String | 
+account_id = 'account_id_example' # String | 
+query = 'query_example' # String | Username or nickname prefix to match.
+opts = {
+  limit: 56 # Integer | 
+}
+
+begin
+  # Search Discord guild members
+  result = api_instance.search_discord_guild_members(guild_id, account_id, query, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->search_discord_guild_members: #{e}"
+end
+```
+
+#### Using the search_discord_guild_members_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchDiscordGuildMembers200Response>, Integer, Hash)> search_discord_guild_members_with_http_info(guild_id, account_id, query, opts)
+
+```ruby
+begin
+  # Search Discord guild members
+  data, status_code, headers = api_instance.search_discord_guild_members_with_http_info(guild_id, account_id, query, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchDiscordGuildMembers200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling DiscordApi->search_discord_guild_members_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **guild_id** | **String** |  |  |
+| **account_id** | **String** |  |  |
+| **query** | **String** | Username or nickname prefix to match. |  |
+| **limit** | **Integer** |  | [optional][default to 25] |
+
+### Return type
+
+[**SearchDiscordGuildMembers200Response**](SearchDiscordGuildMembers200Response.md)
 
 ### Authorization
 

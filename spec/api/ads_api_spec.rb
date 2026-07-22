@@ -97,6 +97,18 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for create_ad_creative
+  # Create a standalone creative (Meta)
+  # Creates a creative in the library WITHOUT an ad, reusable on the create endpoints via &#x60;existingCreativeId&#x60;. Provide exactly one of &#x60;imageUrl&#x60; (uploaded server-side), &#x60;imageHash&#x60; (from POST /v1/ads/images or the library list), or &#x60;carouselCards&#x60; (2-10 hand-built cards). The Page (and linked Instagram account, when present) is resolved from &#x60;accountId&#x60; as the story actor. Meta only.
+  # @param create_ad_creative_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateAdCreative201Response]
+  describe 'create_ad_creative test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_ad_insights_report
   # Submit an async insights report run (Meta)
   # Submits an asynchronous Meta insights report. Same query surface as GET /v1/ads/insights, but in the JSON body; Meta processes the report server-side, which is the right choice for long ranges or large accounts where the sync query is slow or rate-limited. Returns a &#x60;reportRunId&#x60; to poll via GET /v1/ads/insights/reports/{reportRunId}. Meta only. 
@@ -188,7 +200,7 @@ describe 'AdsApi' do
   # @param create_standalone_ad_request 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
-  # @return [CreateStandaloneAd201Response]
+  # @return [CreateStandaloneAd200Response]
   describe 'create_standalone_ad test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -220,6 +232,19 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for delete_ad_creative
+  # Delete a creative (Meta)
+  # Deletes a creative from the library. Meta only allows deleting creatives not referenced by any ad — otherwise its 400 surfaces verbatim.
+  # @param creative_id Platform creative id
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteAdCreative200Response]
+  describe 'delete_ad_creative test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for delete_conversion_destination
   # Delete a conversion destination
   # LinkedIn-only today. LinkedIn does not expose hard-delete on conversion rules — what their UI calls \&quot;delete\&quot; is the same &#x60;enabled: false&#x60; flip we apply here. The rule remains fetchable via GET with &#x60;status: &#39;inactive&#39;&#x60;; the unified discovery endpoint hides it by default.  &#x60;adAccountId&#x60; may be passed as a query parameter (recommended) or as a JSON body field for clients that can send DELETE bodies. 
@@ -229,6 +254,19 @@ describe 'AdsApi' do
   # @option opts [String] :ad_account_id Required as query OR in JSON body.
   # @return [nil]
   describe 'delete_conversion_destination test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for duplicate_ad
+  # Duplicate an ad (Meta)
+  # Duplicates a single ad via Meta&#39;s native &#x60;POST /{ad-id}/copies&#x60;. The copy is created paused. &#x60;adSetId&#x60; retargets the copy into another ad set; omitted &#x3D; the source&#39;s own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (&#x60;syncAfter: false&#x60; to skip). Meta only.
+  # @param ad_id Zernio ad ID or platform ad ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [DuplicateAdRequest] :duplicate_ad_request 
+  # @return [DuplicateAd200Response]
+  describe 'duplicate_ad test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -308,6 +346,20 @@ describe 'AdsApi' do
   # @option opts [String] :cursor Pagination cursor from a previous response.
   # @return [GetAdComments200Response]
   describe 'get_ad_comments test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_ad_creative
+  # Creative details (Meta)
+  # One creative&#39;s details, verbatim from Meta. &#x60;fields&#x60; is a raw-passthrough override of the default projection. Meta only.
+  # @param creative_id Platform creative id
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+  # @return [GetAdCreative200Response]
+  describe 'get_ad_creative test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -546,6 +598,53 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for list_ad_creatives
+  # Creative library (Meta)
+  # Lists the ad account&#39;s creative library (Meta&#39;s &#x60;/act_X/adcreatives&#x60;), rows returned verbatim. The default projection covers id, name, status, object type, thumbnail, object_story_spec / asset_feed_spec and url_tags; &#x60;fields&#x60; is a raw-passthrough override. Any creative id here is reusable on the create endpoints via &#x60;existingCreativeId&#x60;. Meta only.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param ad_account_id Meta ad account id (act_&lt;n&gt;).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [ListAdCreatives200Response]
+  describe 'list_ad_creatives test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_ad_images
+  # Ad image library (Meta)
+  # Lists the ad account&#39;s image library (Meta&#39;s &#x60;/act_X/adimages&#x60;), rows returned verbatim. The default projection covers hash, url, name, dimensions and status; &#x60;fields&#x60; is a raw-passthrough override. Any &#x60;hash&#x60; here is reusable wherever Meta accepts &#x60;image_hash&#x60; (e.g. &#x60;imageHash&#x60; on POST /v1/ads/creatives). Meta only.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param ad_account_id Meta ad account id (act_&lt;n&gt;).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [ListAdImages200Response]
+  describe 'list_ad_images test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_ad_labels
+  # Ad labels (Meta)
+  # Lists the ad account&#39;s organizational labels (Meta&#39;s &#x60;/act_X/adlabels&#x60;), rows returned verbatim (id, name, created/updated time). Meta only.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param ad_account_id Meta ad account id (act_&lt;n&gt;).
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [ListAdLabels200Response]
+  describe 'list_ad_labels test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_studies
   # A/B tests and lift studies (Meta)
   # Lists the ad account&#39;s A/B tests and lift studies (Meta&#39;s &#x60;/act_X/ad_studies&#x60;), rows returned verbatim. The default projection covers id, name, type, timing and cells with split percentages; &#x60;fields&#x60; is a raw-passthrough override. Meta only.
@@ -641,6 +740,22 @@ describe 'AdsApi' do
     end
   end
 
+  # unit tests for list_high_demand_periods
+  # High demand periods / budget schedules (Meta)
+  # Scheduled budget increases (Meta&#39;s budget-scheduling API). The Graph edge lives on the campaign and ad-set nodes only, so exactly one of &#x60;campaignId&#x60; / &#x60;adSetId&#x60; (platform ids) is required. Rows returned verbatim (budget_value, budget_value_type, time window, recurrence). Meta only.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :campaign_id Platform campaign id. Exactly one of campaignId / adSetId.
+  # @option opts [String] :ad_set_id Platform ad set id. Exactly one of campaignId / adSetId.
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [ListHighDemandPeriods200Response]
+  describe 'list_high_demand_periods test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_lead_forms
   # List lead forms
   # Lists the Lead Gen forms owned by the connected Facebook Page. Requires the Ads add-on.
@@ -666,6 +781,20 @@ describe 'AdsApi' do
   # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor.
   # @return [ListLeads200Response]
   describe 'list_leads test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_meta_businesses
+  # Businesses list (Meta)
+  # Business Manager portfolios the connected Meta user belongs to (Meta&#39;s &#x60;/me/businesses&#x60;), rows returned verbatim (id, name, verification_status, created_time). Token-scoped, so no &#x60;adAccountId&#x60; is needed. Meta only; for TikTok Business Centers use &#x60;GET /v1/ads/business-centers&#x60;.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [ListMetaBusinesses200Response]
+  describe 'list_meta_businesses test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -813,6 +942,19 @@ describe 'AdsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAdAccount200Response]
   describe 'update_ad_account test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_creative
+  # Rename a creative (Meta)
+  # Renames a creative. Creatives are immutable on Meta beyond &#x60;name&#x60; — for content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with &#x60;creative&#x60;). Meta only.
+  # @param creative_id Platform creative id
+  # @param update_ad_creative_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdCreative200Response]
+  describe 'update_ad_creative test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

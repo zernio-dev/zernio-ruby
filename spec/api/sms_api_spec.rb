@@ -45,6 +45,18 @@ describe 'SMSApi' do
     end
   end
 
+  # unit tests for create_sms_sender_id
+  # Create an alphanumeric sender ID
+  # Registers an alphanumeric sender ID (e.g. &#x60;ZERNIO&#x60;) — a branded &#x60;from&#x60; for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as &#x60;from&#x60; on &#x60;POST /v1/sms/messages&#x60;.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected, and an ID already registered by another workspace returns 409 (active sender IDs are globally unique, first-come-first-served). Creating the same sender ID again is a no-op (re-activates it after a delete). 
+  # @param create_sms_sender_id_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateSmsSenderId200Response]
+  describe 'create_sms_sender_id test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for deactivate_sms_registration
   # Deactivate a brand/campaign registration
   # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts — receiving is unaffected — until they&#39;re registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
@@ -52,6 +64,18 @@ describe 'SMSApi' do
   # @param [Hash] opts the optional parameters
   # @return [DeactivateSmsRegistration200Response]
   describe 'deactivate_sms_registration test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_sms_sender_id
+  # Delete an alphanumeric sender ID
+  # Deactivates the sender ID so it can no longer send. Re-creating the same sender ID via &#x60;POST /v1/sms/sender-ids&#x60; re-activates it. 
+  # @param id Sender ID resource id.
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteSmsSenderId200Response]
+  describe 'delete_sms_sender_id test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -117,6 +141,16 @@ describe 'SMSApi' do
     end
   end
 
+  # unit tests for list_sms_sender_ids
+  # List alphanumeric sender IDs
+  # @param [Hash] opts the optional parameters
+  # @return [ListSmsSenderIds200Response]
+  describe 'list_sms_sender_ids test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for lookup_sms_number
   # Look up carrier + line type
   # Carrier name and line type (mobile / landline / voip / toll-free) for a number, plus &#x60;smsReachable&#x60; (landlines can&#39;t receive SMS). Use it to validate recipients before sending. Each lookup is billed by the carrier-data provider, so call it explicitly (e.g. pre-validating an opt-in list), not on every send. 
@@ -124,6 +158,18 @@ describe 'SMSApi' do
   # @param [Hash] opts the optional parameters
   # @return [LookupSmsNumber200Response]
   describe 'lookup_sms_number test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for request_sms_sender_id_limit_increase
+  # Request a higher sender ID daily limit
+  # Asks support to raise the workspace&#39;s daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
+  # @param request_sms_sender_id_limit_increase_request 
+  # @param [Hash] opts the optional parameters
+  # @return [RequestSmsSenderIdLimitIncrease200Response]
+  describe 'request_sms_sender_id_limit_increase test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

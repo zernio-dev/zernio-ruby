@@ -16,6 +16,8 @@
 | **billing_event** | **String** | Meta only. Explicit ad-set &#x60;billing_event&#x60;. Defaults to &#x60;IMPRESSIONS&#x60;. Forwarded verbatim to Meta, which validates compatibility with the optimization goal. | [optional] |
 | **buying_type** | **String** | Meta only. RESERVED &#x3D; Reach &amp; Frequency: requires &#x60;rfPredictionId&#x60; (a RESERVED prediction from /v1/ads/rf-predictions + /reserve). Budget, schedule and pricing come from the reservation, so budgetAmount/budgetType are not required and bid fields are ignored. Only the plain single-ad shape (no creatives[], adSetId, existingCampaignId or dynamicCreative). | [optional] |
 | **rf_prediction_id** | **String** | Meta only. The RESERVED prediction id the R&amp;F ad set runs on (reserving mints a new id — pass that one). Requires buyingType RESERVED. | [optional] |
+| **creative_features** | **Hash&lt;String, String&gt;** | Meta only. Advantage+ creative enhancements: a partial map of Meta creative feature keys (snake_case, e.g. enhance_cta, image_brightness_and_contrast, text_optimizations) to enroll status, forwarded as degrees_of_freedom_spec.creative_features_spec. Meta validates the keys; unspecified features default to OPT_OUT. The legacy standard_enhancements bundle is deprecated by Meta and rejected. | [optional] |
+| **validate_only** | **Boolean** | Meta only, single standalone shape only (no creatives[], adSetId, or RESERVED). Dry-run: each node runs Meta&#39;s execution_options validate_only and NOTHING is created or persisted. Children need real parents, so a fresh tree validates the campaign + creative (the ad set needs its campaign to exist — pass existingCampaignId to validate it too; the ad itself is never validatable pre-create). A Meta validation failure returns the 400 verbatim; success returns 200 with per-node results instead of an ad. | [optional] |
 | **budget_amount** | **Float** | Required on legacy + multi-creative shapes. Inherited on attach. | [optional] |
 | **budget_type** | **String** | Required on legacy + multi-creative shapes. Inherited on attach. | [optional] |
 | **status** | **String** | Meta and TikTok. Publish state of the created entities. Omitted or ACTIVE publishes live (default, back-compat); PAUSED creates them paused and skips activation, so you can review before they spend. On TikTok the whole campaign &gt; ad group &gt; ad hierarchy stays paused. | [optional] |
@@ -97,6 +99,8 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   billing_event: null,
   buying_type: null,
   rf_prediction_id: null,
+  creative_features: null,
+  validate_only: null,
   budget_amount: null,
   budget_type: null,
   status: null,

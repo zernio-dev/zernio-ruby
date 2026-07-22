@@ -1,4 +1,4 @@
-# Zernio::ListDiscordGuildMembers200ResponseDataInnerUser
+# Zernio::DiscordGuildMemberUser
 
 ## Properties
 
@@ -15,7 +15,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ListDiscordGuildMembers200ResponseDataInnerUser.new(
+instance = Zernio::DiscordGuildMemberUser.new(
   id: null,
   username: null,
   discriminator: null,
