@@ -15,33 +15,12 @@ require 'time'
 
 module Zernio
   class CreateStandaloneAd200Response < ApiModelBase
+    # Always true in a validate-only response.
     attr_accessor :validate_only
 
     attr_accessor :results
 
     attr_accessor :message
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -120,19 +99,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      validate_only_validator = EnumAttributeValidator.new('Boolean', ["true"])
-      return false unless validate_only_validator.valid?(@validate_only)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] validate_only Object to be assigned
-    def validate_only=(validate_only)
-      validator = EnumAttributeValidator.new('Boolean', ["true"])
-      unless validator.valid?(validate_only)
-        fail ArgumentError, "invalid value for \"validate_only\", must be one of #{validator.allowable_values}."
-      end
-      @validate_only = validate_only
     end
 
     # Checks equality by comparing each attribute.
