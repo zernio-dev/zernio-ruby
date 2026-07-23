@@ -21,6 +21,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**release_phone_number**](PhoneNumbersApi.md#release_phone_number) | **DELETE** /v1/phone-numbers/{id} | Release phone number |
 | [**remediate_phone_number**](PhoneNumbersApi.md#remediate_phone_number) | **POST** /v1/phone-numbers/{id}/remediate | Resubmit a declined number |
 | [**reply_to_phone_number_reviewer**](PhoneNumbersApi.md#reply_to_phone_number_reviewer) | **POST** /v1/phone-numbers/{id}/remediate/reply | Reply to the regulatory reviewer |
+| [**respond_to_phone_number_reviewer**](PhoneNumbersApi.md#respond_to_phone_number_reviewer) | **POST** /v1/phone-numbers/{id}/remediate/respond | Respond to the regulatory reviewer (message + corrections) |
 | [**review_phone_number_kyc_packet**](PhoneNumbersApi.md#review_phone_number_kyc_packet) | **POST** /v1/phone-numbers/kyc/review-packet | Pre-review a KYC packet |
 | [**search_available_phone_numbers**](PhoneNumbersApi.md#search_available_phone_numbers) | **GET** /v1/phone-numbers/available | Search available numbers |
 | [**submit_phone_number_kyc**](PhoneNumbersApi.md#submit_phone_number_kyc) | **POST** /v1/phone-numbers/kyc | Submit KYC |
@@ -1206,6 +1207,77 @@ end
 ### Return type
 
 [**ReplyToPhoneNumberReviewer200Response**](ReplyToPhoneNumberReviewer200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## respond_to_phone_number_reviewer
+
+> <RespondToPhoneNumberReviewer200Response> respond_to_phone_number_reviewer(id, respond_to_phone_number_reviewer_request)
+
+Respond to the regulatory reviewer (message + corrections)
+
+Send a single response to the reviewer on a number awaiting remediation: a free-text message and/or corrected requirement documents, in one call. If corrections are present they are PATCHed onto the requirement group and re-submitted (the number goes back to \"in review\"); if a message or file attachments are present they are posted to the reviewer's comment thread. When both are present, your message is the thread comment and the resubmit drives the state change. At least one of message, corrections, or attachments is required. `documents` correct requirement slots; `attachments` are loose files (their links are added to your message). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+id = 'id_example' # String | 
+respond_to_phone_number_reviewer_request = Zernio::RespondToPhoneNumberReviewerRequest.new # RespondToPhoneNumberReviewerRequest | 
+
+begin
+  # Respond to the regulatory reviewer (message + corrections)
+  result = api_instance.respond_to_phone_number_reviewer(id, respond_to_phone_number_reviewer_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->respond_to_phone_number_reviewer: #{e}"
+end
+```
+
+#### Using the respond_to_phone_number_reviewer_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RespondToPhoneNumberReviewer200Response>, Integer, Hash)> respond_to_phone_number_reviewer_with_http_info(id, respond_to_phone_number_reviewer_request)
+
+```ruby
+begin
+  # Respond to the regulatory reviewer (message + corrections)
+  data, status_code, headers = api_instance.respond_to_phone_number_reviewer_with_http_info(id, respond_to_phone_number_reviewer_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RespondToPhoneNumberReviewer200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->respond_to_phone_number_reviewer_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+| **respond_to_phone_number_reviewer_request** | [**RespondToPhoneNumberReviewerRequest**](RespondToPhoneNumberReviewerRequest.md) |  |  |
+
+### Return type
+
+[**RespondToPhoneNumberReviewer200Response**](RespondToPhoneNumberReviewer200Response.md)
 
 ### Authorization
 

@@ -240,6 +240,19 @@ describe 'PhoneNumbersApi' do
     end
   end
 
+  # unit tests for respond_to_phone_number_reviewer
+  # Respond to the regulatory reviewer (message + corrections)
+  # Send a single response to the reviewer on a number awaiting remediation: a free-text message and/or corrected requirement documents, in one call. If corrections are present they are PATCHed onto the requirement group and re-submitted (the number goes back to \&quot;in review\&quot;); if a message or file attachments are present they are posted to the reviewer&#39;s comment thread. When both are present, your message is the thread comment and the resubmit drives the state change. At least one of message, corrections, or attachments is required. &#x60;documents&#x60; correct requirement slots; &#x60;attachments&#x60; are loose files (their links are added to your message). 
+  # @param id 
+  # @param respond_to_phone_number_reviewer_request 
+  # @param [Hash] opts the optional parameters
+  # @return [RespondToPhoneNumberReviewer200Response]
+  describe 'respond_to_phone_number_reviewer test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for review_phone_number_kyc_packet
   # Pre-review a KYC packet
   # Advisory dry-run of a regulated-KYC packet before submitting: reviews the exact documents the regulator will see (referenced by the ids from POST /v1/phone-numbers/kyc/upload-document) against the declared values and address, and returns plain-language advisories for likely decline reasons (wrong document type, mismatched address, one-sided ID scans). Non-blocking: advisories are warnings, submitting anyway is always allowed, and any review failure degrades to an empty list. 
