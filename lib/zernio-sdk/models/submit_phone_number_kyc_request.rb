@@ -28,7 +28,10 @@ module Zernio
     # Reuse a prior approved verification for this country (skips document/field collection; places the order immediately).
     attr_accessor :reuse
 
-    # Which approved verification to reuse when several exist: the phone number it was originally approved for (GET reusable.options[].fromPhoneNumber). Omitted = newest. No match = 409.
+    # Which reusable verification to use (GET reusable.options[].id). The unambiguous selection key. Omitted = the approved default. No match = 409.
+    attr_accessor :reuse_option_id
+
+    # Legacy fallback for `reuseOptionId`: the source phone number (GET reusable.options[].fromPhoneNumber). Ambiguous when a number labels two verifications — prefer `reuseOptionId`. Omitted = the approved default. No match = 409.
     attr_accessor :reuse_from
 
     # End user's legal first name. Required when the country has an action/ID-verification (Onfido) requirement.
@@ -53,6 +56,7 @@ module Zernio
         :'submission_id' => :'submissionId',
         :'quantity' => :'quantity',
         :'reuse' => :'reuse',
+        :'reuse_option_id' => :'reuseOptionId',
         :'reuse_from' => :'reuseFrom',
         :'end_user_first_name' => :'endUserFirstName',
         :'end_user_last_name' => :'endUserLastName',
@@ -80,6 +84,7 @@ module Zernio
         :'submission_id' => :'String',
         :'quantity' => :'Integer',
         :'reuse' => :'Boolean',
+        :'reuse_option_id' => :'String',
         :'reuse_from' => :'String',
         :'end_user_first_name' => :'String',
         :'end_user_last_name' => :'String',
@@ -135,6 +140,10 @@ module Zernio
 
       if attributes.key?(:'reuse')
         self.reuse = attributes[:'reuse']
+      end
+
+      if attributes.key?(:'reuse_option_id')
+        self.reuse_option_id = attributes[:'reuse_option_id']
       end
 
       if attributes.key?(:'reuse_from')
@@ -249,6 +258,7 @@ module Zernio
           submission_id == o.submission_id &&
           quantity == o.quantity &&
           reuse == o.reuse &&
+          reuse_option_id == o.reuse_option_id &&
           reuse_from == o.reuse_from &&
           end_user_first_name == o.end_user_first_name &&
           end_user_last_name == o.end_user_last_name &&
@@ -266,7 +276,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, submission_id, quantity, reuse, reuse_from, end_user_first_name, end_user_last_name, values, documents, address].hash
+      [profile_id, country, submission_id, quantity, reuse, reuse_option_id, reuse_from, end_user_first_name, end_user_last_name, values, documents, address].hash
     end
 
     # Builds the object from hash

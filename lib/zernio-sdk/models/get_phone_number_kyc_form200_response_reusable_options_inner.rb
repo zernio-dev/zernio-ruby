@@ -15,14 +15,23 @@ require 'time'
 
 module Zernio
   class GetPhoneNumberKycForm200ResponseReusableOptionsInner < ApiModelBase
+    # Opaque option id — pass as `reuseOptionId` on POST. Stable selection key (a phone number is not unique across verifications).
+    attr_accessor :id
+
+    # Display only — the number this verification was submitted for. Not a selection key.
     attr_accessor :from_phone_number
+
+    # true = group-approved, a new order activates in minutes; false = documents are reused but the order still queues for carrier review (1-3 days).
+    attr_accessor :instant
 
     attr_accessor :details
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'from_phone_number' => :'fromPhoneNumber',
+        :'instant' => :'instant',
         :'details' => :'details'
       }
     end
@@ -40,7 +49,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
         :'from_phone_number' => :'String',
+        :'instant' => :'Boolean',
         :'details' => :'Array<GetPhoneNumberKycForm200ResponseReusableDetailsInner>'
       }
     end
@@ -67,8 +78,16 @@ module Zernio
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.key?(:'from_phone_number')
         self.from_phone_number = attributes[:'from_phone_number']
+      end
+
+      if attributes.key?(:'instant')
+        self.instant = attributes[:'instant']
       end
 
       if attributes.key?(:'details')
@@ -98,7 +117,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           from_phone_number == o.from_phone_number &&
+          instant == o.instant &&
           details == o.details
     end
 
@@ -111,7 +132,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [from_phone_number, details].hash
+      [id, from_phone_number, instant, details].hash
     end
 
     # Builds the object from hash

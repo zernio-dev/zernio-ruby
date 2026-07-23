@@ -4,7 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **from_phone_number** | **String** |  | [optional] |
+| **id** | **String** | Opaque option id — pass as &#x60;reuseOptionId&#x60; on POST. Stable selection key (a phone number is not unique across verifications). | [optional] |
+| **from_phone_number** | **String** | Display only — the number this verification was submitted for. Not a selection key. | [optional] |
+| **instant** | **Boolean** | true &#x3D; group-approved, a new order activates in minutes; false &#x3D; documents are reused but the order still queues for carrier review (1-3 days). | [optional] |
 | **details** | [**Array&lt;GetPhoneNumberKycForm200ResponseReusableDetailsInner&gt;**](GetPhoneNumberKycForm200ResponseReusableDetailsInner.md) |  | [optional] |
 
 ## Example
@@ -13,7 +15,9 @@
 require 'zernio-sdk'
 
 instance = Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInner.new(
+  id: null,
   from_phone_number: null,
+  instant: null,
   details: null
 )
 ```

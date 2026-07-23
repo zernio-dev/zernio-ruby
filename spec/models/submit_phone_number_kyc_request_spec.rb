@@ -57,6 +57,12 @@ describe Zernio::SubmitPhoneNumberKycRequest do
     end
   end
 
+  describe 'test attribute "reuse_option_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "reuse_from"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
