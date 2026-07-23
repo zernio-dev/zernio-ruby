@@ -34,9 +34,10 @@ describe 'ProfilesApi' do
 
   # unit tests for create_profile
   # Create profile
-  # Creates a new profile with a name, optional description, and color.
+  # Creates a new profile with a name, optional description, and color. Names are unique per workspace: a duplicate returns a 409 whose details.existingProfileId carries the id of the existing profile. Send an Idempotency-Key header to make retries safe: a retried create with the same key and body replays the original 201 (same _id) instead of conflicting.
   # @param create_profile_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
   # @return [ProfileCreateResponse]
   describe 'create_profile test' do
     it 'should work' do
@@ -70,9 +71,12 @@ describe 'ProfilesApi' do
 
   # unit tests for list_profiles
   # List profiles
-  # Returns profiles sorted by creation date. Use includeOverLimit&#x3D;true to include profiles that exceed the plan limit.
+  # Returns profiles sorted default-first, then by creation date. Filter with name (exact match) and paginate with limit/skip; without those params the full list is returned unchanged. Use includeOverLimit&#x3D;true to include profiles that exceed the plan limit.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_over_limit When true, includes over-limit profiles (marked with isOverLimit: true).
+  # @option opts [String] :name Exact-match filter on the profile name. Useful to recover a profile id after an ambiguous create (timeout followed by a 409 on retry).
+  # @option opts [Integer] :limit Page size. When limit or skip is present, the response includes total and skip (and echoes limit).
+  # @option opts [Integer] :skip Number of profiles to skip, applied after sorting and filtering.
   # @return [ProfilesListResponse]
   describe 'list_profiles test' do
     it 'should work' do

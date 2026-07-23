@@ -13,11 +13,11 @@ All URIs are relative to *https://zernio.com/api*
 
 ## create_profile
 
-> <ProfileCreateResponse> create_profile(create_profile_request)
+> <ProfileCreateResponse> create_profile(create_profile_request, opts)
 
 Create profile
 
-Creates a new profile with a name, optional description, and color.
+Creates a new profile with a name, optional description, and color. Names are unique per workspace: a duplicate returns a 409 whose details.existingProfileId carries the id of the existing profile. Send an Idempotency-Key header to make retries safe: a retried create with the same key and body replays the original 201 (same _id) instead of conflicting.
 
 ### Examples
 
@@ -32,10 +32,13 @@ end
 
 api_instance = Zernio::ProfilesApi.new
 create_profile_request = Zernio::CreateProfileRequest.new({name: 'name_example'}) # CreateProfileRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+}
 
 begin
   # Create profile
-  result = api_instance.create_profile(create_profile_request)
+  result = api_instance.create_profile(create_profile_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling ProfilesApi->create_profile: #{e}"
@@ -46,12 +49,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ProfileCreateResponse>, Integer, Hash)> create_profile_with_http_info(create_profile_request)
+> <Array(<ProfileCreateResponse>, Integer, Hash)> create_profile_with_http_info(create_profile_request, opts)
 
 ```ruby
 begin
   # Create profile
-  data, status_code, headers = api_instance.create_profile_with_http_info(create_profile_request)
+  data, status_code, headers = api_instance.create_profile_with_http_info(create_profile_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ProfileCreateResponse>
@@ -65,6 +68,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_profile_request** | [**CreateProfileRequest**](CreateProfileRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 
@@ -224,7 +228,7 @@ end
 
 List profiles
 
-Returns profiles sorted by creation date. Use includeOverLimit=true to include profiles that exceed the plan limit.
+Returns profiles sorted default-first, then by creation date. Filter with name (exact match) and paginate with limit/skip; without those params the full list is returned unchanged. Use includeOverLimit=true to include profiles that exceed the plan limit.
 
 ### Examples
 
@@ -239,7 +243,10 @@ end
 
 api_instance = Zernio::ProfilesApi.new
 opts = {
-  include_over_limit: true # Boolean | When true, includes over-limit profiles (marked with isOverLimit: true).
+  include_over_limit: true, # Boolean | When true, includes over-limit profiles (marked with isOverLimit: true).
+  name: 'name_example', # String | Exact-match filter on the profile name. Useful to recover a profile id after an ambiguous create (timeout followed by a 409 on retry).
+  limit: 56, # Integer | Page size. When limit or skip is present, the response includes total and skip (and echoes limit).
+  skip: 56 # Integer | Number of profiles to skip, applied after sorting and filtering.
 }
 
 begin
@@ -274,6 +281,9 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **include_over_limit** | **Boolean** | When true, includes over-limit profiles (marked with isOverLimit: true). | [optional][default to false] |
+| **name** | **String** | Exact-match filter on the profile name. Useful to recover a profile id after an ambiguous create (timeout followed by a 409 on retry). | [optional] |
+| **limit** | **Integer** | Page size. When limit or skip is present, the response includes total and skip (and echoes limit). | [optional] |
+| **skip** | **Integer** | Number of profiles to skip, applied after sorting and filtering. | [optional] |
 
 ### Return type
 

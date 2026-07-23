@@ -20,9 +20,10 @@ module Zernio
       @api_client = api_client
     end
     # Create profile
-    # Creates a new profile with a name, optional description, and color.
+    # Creates a new profile with a name, optional description, and color. Names are unique per workspace: a duplicate returns a 409 whose details.existingProfileId carries the id of the existing profile. Send an Idempotency-Key header to make retries safe: a retried create with the same key and body replays the original 201 (same _id) instead of conflicting.
     # @param create_profile_request [CreateProfileRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [ProfileCreateResponse]
     def create_profile(create_profile_request, opts = {})
       data, _status_code, _headers = create_profile_with_http_info(create_profile_request, opts)
@@ -30,9 +31,10 @@ module Zernio
     end
 
     # Create profile
-    # Creates a new profile with a name, optional description, and color.
+    # Creates a new profile with a name, optional description, and color. Names are unique per workspace: a duplicate returns a 409 whose details.existingProfileId carries the id of the existing profile. Send an Idempotency-Key header to make retries safe: a retried create with the same key and body replays the original 201 (same _id) instead of conflicting.
     # @param create_profile_request [CreateProfileRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [Array<(ProfileCreateResponse, Integer, Hash)>] ProfileCreateResponse data, response status code and response headers
     def create_profile_with_http_info(create_profile_request, opts = {})
       if @api_client.config.debugging
@@ -42,6 +44,10 @@ module Zernio
       if @api_client.config.client_side_validation && create_profile_request.nil?
         fail ArgumentError, "Missing the required parameter 'create_profile_request' when calling ProfilesApi.create_profile"
       end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling ProfilesApi.create_profile, the character length must be smaller than or equal to 255.'
+      end
+
       # resource path
       local_var_path = '/v1/profiles'
 
@@ -57,6 +63,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -214,9 +221,12 @@ module Zernio
     end
 
     # List profiles
-    # Returns profiles sorted by creation date. Use includeOverLimit=true to include profiles that exceed the plan limit.
+    # Returns profiles sorted default-first, then by creation date. Filter with name (exact match) and paginate with limit/skip; without those params the full list is returned unchanged. Use includeOverLimit=true to include profiles that exceed the plan limit.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_over_limit When true, includes over-limit profiles (marked with isOverLimit: true). (default to false)
+    # @option opts [String] :name Exact-match filter on the profile name. Useful to recover a profile id after an ambiguous create (timeout followed by a 409 on retry).
+    # @option opts [Integer] :limit Page size. When limit or skip is present, the response includes total and skip (and echoes limit).
+    # @option opts [Integer] :skip Number of profiles to skip, applied after sorting and filtering.
     # @return [ProfilesListResponse]
     def list_profiles(opts = {})
       data, _status_code, _headers = list_profiles_with_http_info(opts)
@@ -224,20 +234,38 @@ module Zernio
     end
 
     # List profiles
-    # Returns profiles sorted by creation date. Use includeOverLimit&#x3D;true to include profiles that exceed the plan limit.
+    # Returns profiles sorted default-first, then by creation date. Filter with name (exact match) and paginate with limit/skip; without those params the full list is returned unchanged. Use includeOverLimit&#x3D;true to include profiles that exceed the plan limit.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_over_limit When true, includes over-limit profiles (marked with isOverLimit: true). (default to false)
+    # @option opts [String] :name Exact-match filter on the profile name. Useful to recover a profile id after an ambiguous create (timeout followed by a 409 on retry).
+    # @option opts [Integer] :limit Page size. When limit or skip is present, the response includes total and skip (and echoes limit).
+    # @option opts [Integer] :skip Number of profiles to skip, applied after sorting and filtering.
     # @return [Array<(ProfilesListResponse, Integer, Hash)>] ProfilesListResponse data, response status code and response headers
     def list_profiles_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProfilesApi.list_profiles ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProfilesApi.list_profiles, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProfilesApi.list_profiles, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'skip'].nil? && opts[:'skip'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"skip"]" when calling ProfilesApi.list_profiles, must be greater than or equal to 0.'
+      end
+
       # resource path
       local_var_path = '/v1/profiles'
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'includeOverLimit'] = opts[:'include_over_limit'] if !opts[:'include_over_limit'].nil?
+      query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'skip'] = opts[:'skip'] if !opts[:'skip'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

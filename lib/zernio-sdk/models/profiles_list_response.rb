@@ -17,10 +17,22 @@ module Zernio
   class ProfilesListResponse < ApiModelBase
     attr_accessor :profiles
 
+    # Total matching profiles across all pages. Present only when limit or skip was passed.
+    attr_accessor :total
+
+    # Offset applied. Present only when limit or skip was passed.
+    attr_accessor :skip
+
+    # Echo of the limit query param. Present only when it was passed.
+    attr_accessor :limit
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'profiles' => :'profiles'
+        :'profiles' => :'profiles',
+        :'total' => :'total',
+        :'skip' => :'skip',
+        :'limit' => :'limit'
       }
     end
 
@@ -37,7 +49,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'profiles' => :'Array<Profile>'
+        :'profiles' => :'Array<Profile>',
+        :'total' => :'Integer',
+        :'skip' => :'Integer',
+        :'limit' => :'Integer'
       }
     end
 
@@ -68,6 +83,18 @@ module Zernio
           self.profiles = value
         end
       end
+
+      if attributes.key?(:'total')
+        self.total = attributes[:'total']
+      end
+
+      if attributes.key?(:'skip')
+        self.skip = attributes[:'skip']
+      end
+
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -90,7 +117,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          profiles == o.profiles
+          profiles == o.profiles &&
+          total == o.total &&
+          skip == o.skip &&
+          limit == o.limit
     end
 
     # @see the `==` method
@@ -102,7 +132,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profiles].hash
+      [profiles, total, skip, limit].hash
     end
 
     # Builds the object from hash
