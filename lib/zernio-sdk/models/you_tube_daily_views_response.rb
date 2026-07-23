@@ -25,6 +25,9 @@ module Zernio
 
     attr_accessor :date_range
 
+    # Present only when the range reaches into YouTube's ~3-day processing window: the first date whose numbers are provisional and may still be revised by YouTube.
+    attr_accessor :provisional_since
+
     # Sum of views across all days in the range
     attr_accessor :total_views
 
@@ -42,6 +45,7 @@ module Zernio
         :'video_id' => :'videoId',
         :'duration_seconds' => :'durationSeconds',
         :'date_range' => :'dateRange',
+        :'provisional_since' => :'provisionalSince',
         :'total_views' => :'totalViews',
         :'daily_views' => :'dailyViews',
         :'last_synced_at' => :'lastSyncedAt',
@@ -66,6 +70,7 @@ module Zernio
         :'video_id' => :'String',
         :'duration_seconds' => :'Integer',
         :'date_range' => :'YouTubeDailyViewsResponseDateRange',
+        :'provisional_since' => :'Date',
         :'total_views' => :'Integer',
         :'daily_views' => :'Array<YouTubeDailyViewsResponseDailyViewsInner>',
         :'last_synced_at' => :'Time',
@@ -113,6 +118,10 @@ module Zernio
         self.date_range = attributes[:'date_range']
       end
 
+      if attributes.key?(:'provisional_since')
+        self.provisional_since = attributes[:'provisional_since']
+      end
+
       if attributes.key?(:'total_views')
         self.total_views = attributes[:'total_views']
       end
@@ -156,6 +165,7 @@ module Zernio
           video_id == o.video_id &&
           duration_seconds == o.duration_seconds &&
           date_range == o.date_range &&
+          provisional_since == o.provisional_since &&
           total_views == o.total_views &&
           daily_views == o.daily_views &&
           last_synced_at == o.last_synced_at &&
@@ -171,7 +181,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, video_id, duration_seconds, date_range, total_views, daily_views, last_synced_at, scope_status].hash
+      [success, video_id, duration_seconds, date_range, provisional_since, total_views, daily_views, last_synced_at, scope_status].hash
     end
 
     # Builds the object from hash

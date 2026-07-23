@@ -90,96 +90,66 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**list_accounts**](docs/AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts
 *Zernio::AccountsApi* | [**move_account_to_profile**](docs/AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
+*Zernio::AdAccountsApi* | [**get_ad_account_finance**](docs/AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances
+*Zernio::AdAccountsApi* | [**get_ad_comments**](docs/AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
+*Zernio::AdAccountsApi* | [**get_ads_activity_log**](docs/AdAccountsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log
+*Zernio::AdAccountsApi* | [**get_dsa_defaults**](docs/AdAccountsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults
+*Zernio::AdAccountsApi* | [**get_dsa_recommendations**](docs/AdAccountsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions
+*Zernio::AdAccountsApi* | [**list_ad_accounts**](docs/AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
+*Zernio::AdAccountsApi* | [**list_ad_labels**](docs/AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels
+*Zernio::AdAccountsApi* | [**list_ad_studies**](docs/AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies
+*Zernio::AdAccountsApi* | [**list_ads_business_centers**](docs/AdAccountsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
+*Zernio::AdAccountsApi* | [**list_high_demand_periods**](docs/AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules
+*Zernio::AdAccountsApi* | [**list_meta_businesses**](docs/AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list
+*Zernio::AdAccountsApi* | [**update_ad_account**](docs/AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
 *Zernio::AdAudiencesApi* | [**add_users_to_ad_audience**](docs/AdAudiencesApi.md#add_users_to_ad_audience) | **POST** /v1/ads/audiences/{audienceId}/users | Add users to audience
 *Zernio::AdAudiencesApi* | [**create_ad_audience**](docs/AdAudiencesApi.md#create_ad_audience) | **POST** /v1/ads/audiences | Create custom audience
 *Zernio::AdAudiencesApi* | [**delete_ad_audience**](docs/AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience
 *Zernio::AdAudiencesApi* | [**get_ad_audience**](docs/AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details
 *Zernio::AdAudiencesApi* | [**list_ad_audiences**](docs/AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences
 *Zernio::AdAudiencesApi* | [**update_ad_audience**](docs/AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience
+*Zernio::AdCampaignsApi* | [**boost_post**](docs/AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
-*Zernio::AdCampaignsApi* | [**create_ad_campaign**](docs/AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign (Meta)
+*Zernio::AdCampaignsApi* | [**create_ad_campaign**](docs/AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign
+*Zernio::AdCampaignsApi* | [**create_standalone_ad**](docs/AdCampaignsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
+*Zernio::AdCampaignsApi* | [**delete_ad**](docs/AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdCampaignsApi* | [**delete_ad_campaign**](docs/AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign
+*Zernio::AdCampaignsApi* | [**duplicate_ad**](docs/AdCampaignsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad
 *Zernio::AdCampaignsApi* | [**duplicate_ad_campaign**](docs/AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign
-*Zernio::AdCampaignsApi* | [**duplicate_ad_set**](docs/AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set (Meta)
-*Zernio::AdCampaignsApi* | [**get_ad_set_details**](docs/AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase (Meta)
+*Zernio::AdCampaignsApi* | [**duplicate_ad_set**](docs/AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set
+*Zernio::AdCampaignsApi* | [**get_ad**](docs/AdCampaignsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
+*Zernio::AdCampaignsApi* | [**get_ad_set_details**](docs/AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase
 *Zernio::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Zernio::AdCampaignsApi* | [**get_ads_timeline**](docs/AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics
 *Zernio::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
+*Zernio::AdCampaignsApi* | [**list_ads**](docs/AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads
+*Zernio::AdCampaignsApi* | [**update_ad**](docs/AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Zernio::AdCampaignsApi* | [**update_ad_campaign**](docs/AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign
 *Zernio::AdCampaignsApi* | [**update_ad_campaign_status**](docs/AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign
 *Zernio::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
-*Zernio::AdsApi* | [**add_conversion_associations**](docs/AdsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns
-*Zernio::AdsApi* | [**adjust_conversions**](docs/AdsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust uploaded conversions
-*Zernio::AdsApi* | [**archive_lead_form**](docs/AdsApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form
-*Zernio::AdsApi* | [**boost_post**](docs/AdsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
-*Zernio::AdsApi* | [**cancel_rf_reservation**](docs/AdsApi.md#cancel_rf_reservation) | **DELETE** /v1/ads/rf-predictions/{predictionId} | Cancel a Reach & Frequency reservation (Meta)
-*Zernio::AdsApi* | [**create_ad_creative**](docs/AdsApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative (Meta)
-*Zernio::AdsApi* | [**create_ad_insights_report**](docs/AdsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run (Meta)
-*Zernio::AdsApi* | [**create_call_ad**](docs/AdsApi.md#create_call_ad) | **POST** /v1/ads/call | Create Click-to-Call ad
-*Zernio::AdsApi* | [**create_conversion_destination**](docs/AdsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination
-*Zernio::AdsApi* | [**create_ctwa_ad**](docs/AdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad (deprecated)
-*Zernio::AdsApi* | [**create_lead_form**](docs/AdsApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form
-*Zernio::AdsApi* | [**create_messaging_ad**](docs/AdsApi.md#create_messaging_ad) | **POST** /v1/ads/messaging | Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)
-*Zernio::AdsApi* | [**create_rf_prediction**](docs/AdsApi.md#create_rf_prediction) | **POST** /v1/ads/rf-predictions | Create a Reach & Frequency prediction (Meta)
-*Zernio::AdsApi* | [**create_standalone_ad**](docs/AdsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
-*Zernio::AdsApi* | [**create_test_lead**](docs/AdsApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a test lead
-*Zernio::AdsApi* | [**delete_ad**](docs/AdsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
-*Zernio::AdsApi* | [**delete_ad_creative**](docs/AdsApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative (Meta)
-*Zernio::AdsApi* | [**delete_conversion_destination**](docs/AdsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Delete a conversion destination
-*Zernio::AdsApi* | [**duplicate_ad**](docs/AdsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad (Meta)
-*Zernio::AdsApi* | [**estimate_ad_reach**](docs/AdsApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
-*Zernio::AdsApi* | [**generate_ad_previews**](docs/AdsApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews (Meta)
-*Zernio::AdsApi* | [**get_ad**](docs/AdsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details
-*Zernio::AdsApi* | [**get_ad_account_finance**](docs/AdsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances (Meta)
-*Zernio::AdsApi* | [**get_ad_analytics**](docs/AdsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
-*Zernio::AdsApi* | [**get_ad_comments**](docs/AdsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
-*Zernio::AdsApi* | [**get_ad_creative**](docs/AdsApi.md#get_ad_creative) | **GET** /v1/ads/creatives/{creativeId} | Creative details (Meta)
-*Zernio::AdsApi* | [**get_ad_insights_report**](docs/AdsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run (Meta)
-*Zernio::AdsApi* | [**get_ad_previews**](docs/AdsApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad (Meta)
-*Zernio::AdsApi* | [**get_ad_tracking_tags**](docs/AdsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
-*Zernio::AdsApi* | [**get_ads_activity_log**](docs/AdsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log (Meta)
-*Zernio::AdsApi* | [**get_campaign_analytics**](docs/AdsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
-*Zernio::AdsApi* | [**get_conversion_destination**](docs/AdsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination
-*Zernio::AdsApi* | [**get_conversion_metrics**](docs/AdsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics
-*Zernio::AdsApi* | [**get_conversions_quality**](docs/AdsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Get Event Match Quality
-*Zernio::AdsApi* | [**get_dsa_defaults**](docs/AdsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults
-*Zernio::AdsApi* | [**get_dsa_recommendations**](docs/AdsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions
-*Zernio::AdsApi* | [**get_lead_form**](docs/AdsApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a lead form
-*Zernio::AdsApi* | [**get_linked_in_bid_pricing**](docs/AdsApi.md#get_linked_in_bid_pricing) | **POST** /v1/ads/targeting/bid-pricing | Suggested bid and budget bounds (LinkedIn)
-*Zernio::AdsApi* | [**get_linked_in_supply_forecast**](docs/AdsApi.md#get_linked_in_supply_forecast) | **POST** /v1/ads/targeting/supply-forecast | Impressions, clicks and spend forecast (LinkedIn)
-*Zernio::AdsApi* | [**get_rf_prediction**](docs/AdsApi.md#get_rf_prediction) | **GET** /v1/ads/rf-predictions/{predictionId} | Read a Reach & Frequency prediction (Meta)
-*Zernio::AdsApi* | [**list_ad_accounts**](docs/AdsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
-*Zernio::AdsApi* | [**list_ad_catalog_product_sets**](docs/AdsApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog's product sets
-*Zernio::AdsApi* | [**list_ad_catalogs**](docs/AdsApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs
-*Zernio::AdsApi* | [**list_ad_creatives**](docs/AdsApi.md#list_ad_creatives) | **GET** /v1/ads/creatives | Creative library (Meta)
-*Zernio::AdsApi* | [**list_ad_images**](docs/AdsApi.md#list_ad_images) | **GET** /v1/ads/images | Ad image library (Meta)
-*Zernio::AdsApi* | [**list_ad_labels**](docs/AdsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels (Meta)
-*Zernio::AdsApi* | [**list_ad_studies**](docs/AdsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies (Meta)
-*Zernio::AdsApi* | [**list_ads**](docs/AdsApi.md#list_ads) | **GET** /v1/ads | List ads
-*Zernio::AdsApi* | [**list_ads_business_centers**](docs/AdsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
-*Zernio::AdsApi* | [**list_conversion_associations**](docs/AdsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List associated campaigns
-*Zernio::AdsApi* | [**list_conversion_destinations**](docs/AdsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List conversion destinations
-*Zernio::AdsApi* | [**list_form_leads**](docs/AdsApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form
-*Zernio::AdsApi* | [**list_high_demand_periods**](docs/AdsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules (Meta)
-*Zernio::AdsApi* | [**list_lead_forms**](docs/AdsApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List lead forms
-*Zernio::AdsApi* | [**list_leads**](docs/AdsApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads
-*Zernio::AdsApi* | [**list_meta_businesses**](docs/AdsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list (Meta)
-*Zernio::AdsApi* | [**list_whats_app_conversions**](docs/AdsApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events
-*Zernio::AdsApi* | [**query_ad_insights**](docs/AdsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query (Meta)
-*Zernio::AdsApi* | [**remove_conversion_associations**](docs/AdsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns
-*Zernio::AdsApi* | [**reserve_rf_prediction**](docs/AdsApi.md#reserve_rf_prediction) | **POST** /v1/ads/rf-predictions/{predictionId}/reserve | Reserve a Reach & Frequency prediction (Meta)
-*Zernio::AdsApi* | [**search_ad_interests**](docs/AdsApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
-*Zernio::AdsApi* | [**search_ad_targeting**](docs/AdsApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options
-*Zernio::AdsApi* | [**send_conversions**](docs/AdsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events
-*Zernio::AdsApi* | [**send_whats_app_conversion**](docs/AdsApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
-*Zernio::AdsApi* | [**update_ad**](docs/AdsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
-*Zernio::AdsApi* | [**update_ad_account**](docs/AdsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
-*Zernio::AdsApi* | [**update_ad_creative**](docs/AdsApi.md#update_ad_creative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative (Meta)
-*Zernio::AdsApi* | [**update_ad_status**](docs/AdsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
-*Zernio::AdsApi* | [**update_ad_tracking_tags**](docs/AdsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags
-*Zernio::AdsApi* | [**update_conversion_destination**](docs/AdsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
-*Zernio::AdsApi* | [**upload_ad_image**](docs/AdsApi.md#upload_ad_image) | **POST** /v1/ads/images | Upload an ad image from base64 (Meta)
+*Zernio::AdCampaignsApi* | [**update_ad_status**](docs/AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
+*Zernio::AdCreativesApi* | [**create_ad_creative**](docs/AdCreativesApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative
+*Zernio::AdCreativesApi* | [**delete_ad_creative**](docs/AdCreativesApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative
+*Zernio::AdCreativesApi* | [**generate_ad_previews**](docs/AdCreativesApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews
+*Zernio::AdCreativesApi* | [**get_ad_creative**](docs/AdCreativesApi.md#get_ad_creative) | **GET** /v1/ads/creatives/{creativeId} | Creative details
+*Zernio::AdCreativesApi* | [**get_ad_previews**](docs/AdCreativesApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad
+*Zernio::AdCreativesApi* | [**list_ad_catalog_product_sets**](docs/AdCreativesApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog's product sets
+*Zernio::AdCreativesApi* | [**list_ad_catalogs**](docs/AdCreativesApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs
+*Zernio::AdCreativesApi* | [**list_ad_creatives**](docs/AdCreativesApi.md#list_ad_creatives) | **GET** /v1/ads/creatives | Creative library
+*Zernio::AdCreativesApi* | [**list_ad_images**](docs/AdCreativesApi.md#list_ad_images) | **GET** /v1/ads/images | Ad image library
+*Zernio::AdCreativesApi* | [**update_ad_creative**](docs/AdCreativesApi.md#update_ad_creative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative
+*Zernio::AdCreativesApi* | [**upload_ad_image**](docs/AdCreativesApi.md#upload_ad_image) | **POST** /v1/ads/images | Upload an ad image from base64
+*Zernio::AdInsightsApi* | [**create_ad_insights_report**](docs/AdInsightsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run
+*Zernio::AdInsightsApi* | [**get_ad_analytics**](docs/AdInsightsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
+*Zernio::AdInsightsApi* | [**get_ad_insights_report**](docs/AdInsightsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run
+*Zernio::AdInsightsApi* | [**get_campaign_analytics**](docs/AdInsightsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
+*Zernio::AdInsightsApi* | [**query_ad_insights**](docs/AdInsightsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query
+*Zernio::AdTargetingApi* | [**estimate_ad_reach**](docs/AdTargetingApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
+*Zernio::AdTargetingApi* | [**get_linked_in_bid_pricing**](docs/AdTargetingApi.md#get_linked_in_bid_pricing) | **POST** /v1/ads/targeting/bid-pricing | Suggested bid and budget bounds
+*Zernio::AdTargetingApi* | [**get_linked_in_supply_forecast**](docs/AdTargetingApi.md#get_linked_in_supply_forecast) | **POST** /v1/ads/targeting/supply-forecast | Impressions, clicks and spend forecast
+*Zernio::AdTargetingApi* | [**search_ad_interests**](docs/AdTargetingApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
+*Zernio::AdTargetingApi* | [**search_ad_targeting**](docs/AdTargetingApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
 *Zernio::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
 *Zernio::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
@@ -281,6 +251,18 @@ Class | Method | HTTP request | Description
 *Zernio::ContactsApi* | [**get_contact_channels**](docs/ContactsApi.md#get_contact_channels) | **GET** /v1/contacts/{contactId}/channels | List channels for a contact
 *Zernio::ContactsApi* | [**list_contacts**](docs/ContactsApi.md#list_contacts) | **GET** /v1/contacts | List contacts
 *Zernio::ContactsApi* | [**update_contact**](docs/ContactsApi.md#update_contact) | **PATCH** /v1/contacts/{contactId} | Update contact
+*Zernio::ConversionsApi* | [**add_conversion_associations**](docs/ConversionsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns
+*Zernio::ConversionsApi* | [**adjust_conversions**](docs/ConversionsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust uploaded conversions
+*Zernio::ConversionsApi* | [**create_conversion_destination**](docs/ConversionsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination
+*Zernio::ConversionsApi* | [**delete_conversion_destination**](docs/ConversionsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Delete a conversion destination
+*Zernio::ConversionsApi* | [**get_conversion_destination**](docs/ConversionsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination
+*Zernio::ConversionsApi* | [**get_conversion_metrics**](docs/ConversionsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics
+*Zernio::ConversionsApi* | [**get_conversions_quality**](docs/ConversionsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Get Event Match Quality
+*Zernio::ConversionsApi* | [**list_conversion_associations**](docs/ConversionsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List associated campaigns
+*Zernio::ConversionsApi* | [**list_conversion_destinations**](docs/ConversionsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List conversion destinations
+*Zernio::ConversionsApi* | [**remove_conversion_associations**](docs/ConversionsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns
+*Zernio::ConversionsApi* | [**send_conversions**](docs/ConversionsApi.md#send_conversions) | **POST** /v1/ads/conversions | Send conversion events
+*Zernio::ConversionsApi* | [**update_conversion_destination**](docs/ConversionsApi.md#update_conversion_destination) | **PATCH** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Update a conversion destination
 *Zernio::CustomFieldsApi* | [**clear_contact_field_value**](docs/CustomFieldsApi.md#clear_contact_field_value) | **DELETE** /v1/contacts/{contactId}/fields/{slug} | Clear custom field value
 *Zernio::CustomFieldsApi* | [**create_custom_field**](docs/CustomFieldsApi.md#create_custom_field) | **POST** /v1/custom-fields | Create custom field
 *Zernio::CustomFieldsApi* | [**delete_custom_field**](docs/CustomFieldsApi.md#delete_custom_field) | **DELETE** /v1/custom-fields/{fieldId} | Delete custom field
@@ -346,6 +328,13 @@ Class | Method | HTTP request | Description
 *Zernio::InstagramApi* | [**get_instagram_story_insights**](docs/InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights
 *Zernio::InstagramApi* | [**list_instagram_stories**](docs/InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories
 *Zernio::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
+*Zernio::LeadGenApi* | [**archive_lead_form**](docs/LeadGenApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form
+*Zernio::LeadGenApi* | [**create_lead_form**](docs/LeadGenApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form
+*Zernio::LeadGenApi* | [**create_test_lead**](docs/LeadGenApi.md#create_test_lead) | **POST** /v1/ads/lead-forms/{formId}/test-leads | Create a test lead
+*Zernio::LeadGenApi* | [**get_lead_form**](docs/LeadGenApi.md#get_lead_form) | **GET** /v1/ads/lead-forms/{formId} | Get a lead form
+*Zernio::LeadGenApi* | [**list_form_leads**](docs/LeadGenApi.md#list_form_leads) | **GET** /v1/ads/lead-forms/{formId}/leads | List leads for a single form
+*Zernio::LeadGenApi* | [**list_lead_forms**](docs/LeadGenApi.md#list_lead_forms) | **GET** /v1/ads/lead-forms | List lead forms
+*Zernio::LeadGenApi* | [**list_leads**](docs/LeadGenApi.md#list_leads) | **GET** /v1/ads/leads | List submitted leads
 *Zernio::LinkedInMentionsApi* | [**get_linked_in_mentions**](docs/LinkedInMentionsApi.md#get_linked_in_mentions) | **GET** /v1/accounts/{accountId}/linkedin-mentions | Resolve LinkedIn mention
 *Zernio::LogsApi* | [**list_logs**](docs/LogsApi.md#list_logs) | **GET** /v1/logs | List activity logs
 *Zernio::MediaApi* | [**get_media_presigned_url**](docs/MediaApi.md#get_media_presigned_url) | **POST** /v1/media/presign | Get upload URL
@@ -365,6 +354,9 @@ Class | Method | HTTP request | Description
 *Zernio::MessagesApi* | [**send_typing_indicator**](docs/MessagesApi.md#send_typing_indicator) | **POST** /v1/inbox/conversations/{conversationId}/typing | Send typing indicator
 *Zernio::MessagesApi* | [**update_inbox_conversation**](docs/MessagesApi.md#update_inbox_conversation) | **PUT** /v1/inbox/conversations/{conversationId} | Update conversation status
 *Zernio::MessagesApi* | [**upload_media_direct**](docs/MessagesApi.md#upload_media_direct) | **POST** /v1/media/upload-direct | Upload media file
+*Zernio::MessagingAdsApi* | [**create_call_ad**](docs/MessagingAdsApi.md#create_call_ad) | **POST** /v1/ads/call | Create Click-to-Call ad
+*Zernio::MessagingAdsApi* | [**create_ctwa_ad**](docs/MessagingAdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad (deprecated)
+*Zernio::MessagingAdsApi* | [**create_messaging_ad**](docs/MessagingAdsApi.md#create_messaging_ad) | **POST** /v1/ads/messaging | Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)
 *Zernio::PhoneNumbersApi* | [**cancel_phone_number_port_in**](docs/PhoneNumbersApi.md#cancel_phone_number_port_in) | **DELETE** /v1/phone-numbers/port-in/{id} | Cancel a port-in
 *Zernio::PhoneNumbersApi* | [**check_phone_number_availability**](docs/PhoneNumbersApi.md#check_phone_number_availability) | **GET** /v1/phone-numbers/availability | Check country availability
 *Zernio::PhoneNumbersApi* | [**check_phone_number_portability**](docs/PhoneNumbersApi.md#check_phone_number_portability) | **POST** /v1/phone-numbers/port-in/check | Check portability
@@ -408,6 +400,10 @@ Class | Method | HTTP request | Description
 *Zernio::QueueApi* | [**list_queue_slots**](docs/QueueApi.md#list_queue_slots) | **GET** /v1/queue/slots | List schedules
 *Zernio::QueueApi* | [**preview_queue**](docs/QueueApi.md#preview_queue) | **GET** /v1/queue/preview | Preview upcoming slots
 *Zernio::QueueApi* | [**update_queue_slot**](docs/QueueApi.md#update_queue_slot) | **PUT** /v1/queue/slots | Update schedule
+*Zernio::ReachAndFrequencyApi* | [**cancel_rf_reservation**](docs/ReachAndFrequencyApi.md#cancel_rf_reservation) | **DELETE** /v1/ads/rf-predictions/{predictionId} | Cancel a Reach & Frequency reservation
+*Zernio::ReachAndFrequencyApi* | [**create_rf_prediction**](docs/ReachAndFrequencyApi.md#create_rf_prediction) | **POST** /v1/ads/rf-predictions | Create a Reach & Frequency prediction
+*Zernio::ReachAndFrequencyApi* | [**get_rf_prediction**](docs/ReachAndFrequencyApi.md#get_rf_prediction) | **GET** /v1/ads/rf-predictions/{predictionId} | Read a Reach & Frequency prediction
+*Zernio::ReachAndFrequencyApi* | [**reserve_rf_prediction**](docs/ReachAndFrequencyApi.md#reserve_rf_prediction) | **POST** /v1/ads/rf-predictions/{predictionId}/reserve | Reserve a Reach & Frequency prediction
 *Zernio::RedditSearchApi* | [**get_reddit_feed**](docs/RedditSearchApi.md#get_reddit_feed) | **GET** /v1/reddit/feed | Get subreddit feed
 *Zernio::RedditSearchApi* | [**search_reddit**](docs/RedditSearchApi.md#search_reddit) | **GET** /v1/reddit/search | Search posts
 *Zernio::ReviewsApi* | [**delete_inbox_review_reply**](docs/ReviewsApi.md#delete_inbox_review_reply) | **DELETE** /v1/inbox/reviews/{reviewId}/reply | Delete review reply
@@ -445,11 +441,13 @@ Class | Method | HTTP request | Description
 *Zernio::SequencesApi* | [**update_sequence**](docs/SequencesApi.md#update_sequence) | **PATCH** /v1/sequences/{sequenceId} | Update sequence
 *Zernio::TrackingTagsApi* | [**add_tracking_tag_shared_account**](docs/TrackingTagsApi.md#add_tracking_tag_shared_account) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Share with an ad account
 *Zernio::TrackingTagsApi* | [**create_tracking_tag**](docs/TrackingTagsApi.md#create_tracking_tag) | **POST** /v1/accounts/{accountId}/tracking-tags | Create a tracking tag
+*Zernio::TrackingTagsApi* | [**get_ad_tracking_tags**](docs/TrackingTagsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
 *Zernio::TrackingTagsApi* | [**get_tracking_tag**](docs/TrackingTagsApi.md#get_tracking_tag) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId} | Get a tracking tag
 *Zernio::TrackingTagsApi* | [**get_tracking_tag_stats**](docs/TrackingTagsApi.md#get_tracking_tag_stats) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/stats | Get aggregated event stats
 *Zernio::TrackingTagsApi* | [**list_tracking_tag_shared_accounts**](docs/TrackingTagsApi.md#list_tracking_tag_shared_accounts) | **GET** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | List accounts it is shared with
 *Zernio::TrackingTagsApi* | [**list_tracking_tags**](docs/TrackingTagsApi.md#list_tracking_tags) | **GET** /v1/accounts/{accountId}/tracking-tags | List tracking tags
 *Zernio::TrackingTagsApi* | [**remove_tracking_tag_shared_account**](docs/TrackingTagsApi.md#remove_tracking_tag_shared_account) | **DELETE** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Stop sharing with an account
+*Zernio::TrackingTagsApi* | [**update_ad_tracking_tags**](docs/TrackingTagsApi.md#update_ad_tracking_tags) | **PATCH** /v1/ads/{adId}/tracking-tags | Set ad tracking tags
 *Zernio::TrackingTagsApi* | [**update_tracking_tag**](docs/TrackingTagsApi.md#update_tracking_tag) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId} | Update a tracking tag
 *Zernio::TwitterEngagementApi* | [**bookmark_post**](docs/TwitterEngagementApi.md#bookmark_post) | **POST** /v1/twitter/bookmark | Bookmark a tweet
 *Zernio::TwitterEngagementApi* | [**follow_user**](docs/TwitterEngagementApi.md#follow_user) | **POST** /v1/twitter/follow | Follow a user

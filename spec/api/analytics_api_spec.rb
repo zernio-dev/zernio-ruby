@@ -347,12 +347,12 @@ describe 'AnalyticsApi' do
 
   # unit tests for get_you_tube_daily_views
   # Get YouTube daily views
-  # Returns daily view counts for a YouTube video including views, watch time, and subscriber changes. Requires yt-analytics.readonly scope (re-authorization may be needed). Data has a 2-3 day delay. Max 90 days, defaults to last 30 days. 
+  # Returns daily view counts for a YouTube video including views, watch time, and subscriber changes. Requires yt-analytics.readonly scope (re-authorization may be needed). YouTube finalizes analytics with a ~3-day delay; by default only finalized days are returned, and an explicit endDate can reach into the delay window (see the endDate parameter). Max 90 days, defaults to last 30 days. 
   # @param video_id The YouTube video ID (e.g., \&quot;dQw4w9WgXcQ\&quot;)
   # @param account_id The Zernio account ID for the YouTube account
   # @param [Hash] opts the optional parameters
   # @option opts [Date] :start_date Start date (YYYY-MM-DD). Defaults to 30 days ago.
-  # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to 3 days ago (YouTube data latency).
+  # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response), and days YouTube has not processed yet are omitted from dailyViews. 
   # @return [YouTubeDailyViewsResponse]
   describe 'get_you_tube_daily_views test' do
     it 'should work' do
@@ -368,7 +368,7 @@ describe 'AnalyticsApi' do
   # @option opts [String] :video_id YouTube video ID. When provided, demographics are scoped to this single video (must belong to the connected channel; otherwise 404 video_not_found). 
   # @option opts [String] :breakdown Comma-separated list of demographic dimensions: age, gender, country. Defaults to all three if omitted. 
   # @option opts [Date] :start_date Start date in YYYY-MM-DD format. Defaults to 90 days ago, or to the video&#39;s publish date (lifetime) when videoId is provided. 
-  # @option opts [Date] :end_date End date in YYYY-MM-DD format. Defaults to 3 days ago (YouTube data latency). 
+  # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response). 
   # @return [YouTubeDemographicsResponse]
   describe 'get_you_tube_demographics test' do
     it 'should work' do
@@ -383,7 +383,7 @@ describe 'AnalyticsApi' do
   # @param account_id The Zernio account ID for the YouTube account
   # @param [Hash] opts the optional parameters
   # @option opts [Date] :start_date Start date (YYYY-MM-DD). Defaults to the video&#39;s publish date (lifetime curve).
-  # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to 3 days ago (YouTube data latency).
+  # @option opts [Date] :end_date End date (YYYY-MM-DD). Defaults to 3 days ago, the newest fully finalized day (YouTube finalizes analytics with a ~3-day delay). An explicit endDate is honored up to today: days inside the delay window are provisional and may still be revised by YouTube (see provisionalSince in the response). 
   # @return [YouTubeVideoRetentionResponse]
   describe 'get_you_tube_video_retention test' do
     it 'should work' do

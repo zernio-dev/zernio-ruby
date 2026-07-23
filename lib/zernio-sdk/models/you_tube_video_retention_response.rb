@@ -34,6 +34,9 @@ module Zernio
 
     attr_accessor :date_range
 
+    # Present only when the range reaches into YouTube's ~3-day processing window: the first date whose numbers are provisional and may still be revised by YouTube.
+    attr_accessor :provisional_since
+
     # Up to 100 points covering the video timeline, aggregated over the date range. Empty for videos with very few views.
     attr_accessor :retention_curve
 
@@ -52,6 +55,7 @@ module Zernio
         :'published_at' => :'publishedAt',
         :'duration_seconds' => :'durationSeconds',
         :'date_range' => :'dateRange',
+        :'provisional_since' => :'provisionalSince',
         :'retention_curve' => :'retentionCurve',
         :'note' => :'note',
         :'scope_status' => :'scopeStatus'
@@ -78,6 +82,7 @@ module Zernio
         :'published_at' => :'Time',
         :'duration_seconds' => :'Integer',
         :'date_range' => :'YouTubeDailyViewsResponseDateRange',
+        :'provisional_since' => :'Date',
         :'retention_curve' => :'Array<YouTubeVideoRetentionResponseRetentionCurveInner>',
         :'note' => :'String',
         :'scope_status' => :'YouTubeDailyViewsResponseScopeStatus'
@@ -137,6 +142,10 @@ module Zernio
         self.date_range = attributes[:'date_range']
       end
 
+      if attributes.key?(:'provisional_since')
+        self.provisional_since = attributes[:'provisional_since']
+      end
+
       if attributes.key?(:'retention_curve')
         if (value = attributes[:'retention_curve']).is_a?(Array)
           self.retention_curve = value
@@ -179,6 +188,7 @@ module Zernio
           published_at == o.published_at &&
           duration_seconds == o.duration_seconds &&
           date_range == o.date_range &&
+          provisional_since == o.provisional_since &&
           retention_curve == o.retention_curve &&
           note == o.note &&
           scope_status == o.scope_status
@@ -193,7 +203,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, account_id, video_id, title, published_at, duration_seconds, date_range, retention_curve, note, scope_status].hash
+      [success, account_id, video_id, title, published_at, duration_seconds, date_range, provisional_since, retention_curve, note, scope_status].hash
     end
 
     # Builds the object from hash

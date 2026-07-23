@@ -4,19 +4,96 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**boost_post**](AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
 | [**bulk_update_ad_campaign_status**](AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns |
-| [**create_ad_campaign**](AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign (Meta) |
+| [**create_ad_campaign**](AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign |
+| [**create_standalone_ad**](AdCampaignsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad |
+| [**delete_ad**](AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
+| [**duplicate_ad**](AdCampaignsApi.md#duplicate_ad) | **POST** /v1/ads/{adId}/duplicate | Duplicate an ad |
 | [**duplicate_ad_campaign**](AdCampaignsApi.md#duplicate_ad_campaign) | **POST** /v1/ads/campaigns/{campaignId}/duplicate | Duplicate a campaign |
-| [**duplicate_ad_set**](AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set (Meta) |
-| [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase (Meta) |
+| [**duplicate_ad_set**](AdCampaignsApi.md#duplicate_ad_set) | **POST** /v1/ads/ad-sets/{adSetId}/duplicate | Duplicate an ad set |
+| [**get_ad**](AdCampaignsApi.md#get_ad) | **GET** /v1/ads/{adId} | Get ad details |
+| [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase |
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
+| [**list_ads**](AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads |
+| [**update_ad**](AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 | [**update_ad_campaign**](AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign |
 | [**update_ad_campaign_status**](AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign |
 | [**update_ad_set**](AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set |
 | [**update_ad_set_status**](AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set |
+| [**update_ad_status**](AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
+
+
+## boost_post
+
+> <UpdateAd200Response> boost_post(boost_post_request)
+
+Boost post as ad
+
+Creates a paid ad campaign from an existing published post. Creates the full platform campaign hierarchy (campaign, ad set, ad).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+boost_post_request = Zernio::BoostPostRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement', budget: Zernio::BoostPostRequestBudget.new({amount: 3.56, type: 'daily'})}) # BoostPostRequest | 
+
+begin
+  # Boost post as ad
+  result = api_instance.boost_post(boost_post_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->boost_post: #{e}"
+end
+```
+
+#### Using the boost_post_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAd200Response>, Integer, Hash)> boost_post_with_http_info(boost_post_request)
+
+```ruby
+begin
+  # Boost post as ad
+  data, status_code, headers = api_instance.boost_post_with_http_info(boost_post_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAd200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->boost_post_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **boost_post_request** | [**BoostPostRequest**](BoostPostRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAd200Response**](UpdateAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## bulk_update_ad_campaign_status
@@ -92,9 +169,9 @@ end
 
 > <CreateAdCampaign201Response> create_ad_campaign(create_ad_campaign_request)
 
-Create a standalone campaign (Meta)
+Create a standalone campaign
 
-Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass. Meta only.
+Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass.
 
 ### Examples
 
@@ -111,7 +188,7 @@ api_instance = Zernio::AdCampaignsApi.new
 create_ad_campaign_request = Zernio::CreateAdCampaignRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement'}) # CreateAdCampaignRequest | 
 
 begin
-  # Create a standalone campaign (Meta)
+  # Create a standalone campaign
   result = api_instance.create_ad_campaign(create_ad_campaign_request)
   p result
 rescue Zernio::ApiError => e
@@ -127,7 +204,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Create a standalone campaign (Meta)
+  # Create a standalone campaign
   data, status_code, headers = api_instance.create_ad_campaign_with_http_info(create_ad_campaign_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -154,6 +231,148 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_standalone_ad
+
+> <CreateStandaloneAd200Response> create_standalone_ad(create_standalone_ad_request, opts)
+
+Create standalone ad
+
+Creates a paid ad with custom creative across Meta, Google Ads, Pinterest, TikTok, X/Twitter, and LinkedIn. Supports three mutually-exclusive request shapes selected by the body, a legacy single-creative shape (all platforms, default), a Meta-only multi-creative shape via the creatives array (one ad set with N ads sharing budget and targeting), and a Meta-only attach shape via adSetId (adds one new ad to an existing ad set). Per-platform required fields, budget minimums, and video-ad rules are documented on each property below. LinkedIn creates a Single Image or Single Video Ad backed by a Direct Sponsored Content \"dark post\" authored by a Company Page (see `organizationId`); supported goals are engagement, traffic, awareness, and video_views (video ads use the `video` field; video_views requires a video), and traffic ads require `linkUrl`.  **Idempotency:** this endpoint is not idempotent at the platform level (a blind retry creates a second campaign/ad set/ad). Send an `Idempotency-Key` header to make retries safe: the first request with a given key creates the ad and we store the response; a retry with the same key replays that exact response (with `Idempotent-Replayed: true`) instead of creating duplicates. Reusing a key with a different body returns 422; a key whose first request is still in flight returns 409 (retry after a short backoff). Keys are scoped to your credential and expire after 24h.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+create_standalone_ad_request = Zernio::CreateStandaloneAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CreateStandaloneAdRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+}
+
+begin
+  # Create standalone ad
+  result = api_instance.create_standalone_ad(create_standalone_ad_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->create_standalone_ad: #{e}"
+end
+```
+
+#### Using the create_standalone_ad_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateStandaloneAd200Response>, Integer, Hash)> create_standalone_ad_with_http_info(create_standalone_ad_request, opts)
+
+```ruby
+begin
+  # Create standalone ad
+  data, status_code, headers = api_instance.create_standalone_ad_with_http_info(create_standalone_ad_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateStandaloneAd200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->create_standalone_ad_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_standalone_ad_request** | [**CreateStandaloneAdRequest**](CreateStandaloneAdRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes create retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
+
+### Return type
+
+[**CreateStandaloneAd200Response**](CreateStandaloneAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## delete_ad
+
+> <DeleteAccountGroup200Response> delete_ad(ad_id)
+
+Cancel an ad
+
+Cancels the ad on the platform and marks it as cancelled in the database. The ad is preserved for history.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_id = 'ad_id_example' # String | 
+
+begin
+  # Cancel an ad
+  result = api_instance.delete_ad(ad_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->delete_ad: #{e}"
+end
+```
+
+#### Using the delete_ad_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteAccountGroup200Response>, Integer, Hash)> delete_ad_with_http_info(ad_id)
+
+```ruby
+begin
+  # Cancel an ad
+  data, status_code, headers = api_instance.delete_ad_with_http_info(ad_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteAccountGroup200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->delete_ad_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** |  |  |
+
+### Return type
+
+[**DeleteAccountGroup200Response**](DeleteAccountGroup200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -217,6 +436,79 @@ end
 ### Return type
 
 [**DeleteAdCampaign200Response**](DeleteAdCampaign200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## duplicate_ad
+
+> <DuplicateAd200Response> duplicate_ad(ad_id, opts)
+
+Duplicate an ad
+
+Duplicates a single ad via Meta's native `POST /{ad-id}/copies`. The copy is created paused. `adSetId` retargets the copy into another ad set; omitted = the source's own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (`syncAfter: false` to skip).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_id = 'ad_id_example' # String | Zernio ad ID or platform ad ID
+opts = {
+  duplicate_ad_request: Zernio::DuplicateAdRequest.new # DuplicateAdRequest | 
+}
+
+begin
+  # Duplicate an ad
+  result = api_instance.duplicate_ad(ad_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->duplicate_ad: #{e}"
+end
+```
+
+#### Using the duplicate_ad_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DuplicateAd200Response>, Integer, Hash)> duplicate_ad_with_http_info(ad_id, opts)
+
+```ruby
+begin
+  # Duplicate an ad
+  data, status_code, headers = api_instance.duplicate_ad_with_http_info(ad_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DuplicateAd200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->duplicate_ad_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Zernio ad ID or platform ad ID |  |
+| **duplicate_ad_request** | [**DuplicateAdRequest**](DuplicateAdRequest.md) |  | [optional] |
+
+### Return type
+
+[**DuplicateAd200Response**](DuplicateAd200Response.md)
 
 ### Authorization
 
@@ -303,9 +595,9 @@ end
 
 > <DuplicateAdSet200Response> duplicate_ad_set(ad_set_id, duplicate_ad_set_request)
 
-Duplicate an ad set (Meta)
+Duplicate an ad set
 
-Duplicates an ad set, including its ads and creatives by default (`deepCopy: true`), via Meta's native `POST /{adset-id}/copies`. The copy is created paused so callers can review before launching. `campaignId` retargets the copy into another campaign; omitted = the source's own campaign. The new hierarchy materializes asynchronously — sync discovery is triggered automatically (`syncAfter: false` to skip). Meta only.
+Duplicates an ad set, including its ads and creatives by default (`deepCopy: true`), via Meta's native `POST /{adset-id}/copies`. The copy is created paused so callers can review before launching. `campaignId` retargets the copy into another campaign; omitted = the source's own campaign. The new hierarchy materializes asynchronously — sync discovery is triggered automatically (`syncAfter: false` to skip).
 
 ### Examples
 
@@ -323,7 +615,7 @@ ad_set_id = 'ad_set_id_example' # String | Source platform ad set ID
 duplicate_ad_set_request = Zernio::DuplicateAdSetRequest.new({platform: 'facebook'}) # DuplicateAdSetRequest | 
 
 begin
-  # Duplicate an ad set (Meta)
+  # Duplicate an ad set
   result = api_instance.duplicate_ad_set(ad_set_id, duplicate_ad_set_request)
   p result
 rescue Zernio::ApiError => e
@@ -339,7 +631,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Duplicate an ad set (Meta)
+  # Duplicate an ad set
   data, status_code, headers = api_instance.duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -370,13 +662,82 @@ end
 - **Accept**: application/json
 
 
+## get_ad
+
+> <GetAd200Response> get_ad(ad_id)
+
+Get ad details
+
+Returns an ad with its creative, targeting, status, and performance metrics.  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal `_id` (24-char hex) - Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`) - the creative's `effective_object_story_id` (`{pageId}_{postId}` shape, Facebook side) - the creative's `effective_instagram_media_id` (Instagram side)  Any of the four resolve to the same ad. Caller doesn't need a translation step. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_id = 'ad_id_example' # String | Zernio `_id` (hex), Meta `platformAdId` (numeric), or one of the creative's effective story/media IDs. See description for details. 
+
+begin
+  # Get ad details
+  result = api_instance.get_ad(ad_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_ad: #{e}"
+end
+```
+
+#### Using the get_ad_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAd200Response>, Integer, Hash)> get_ad_with_http_info(ad_id)
+
+```ruby
+begin
+  # Get ad details
+  data, status_code, headers = api_instance.get_ad_with_http_info(ad_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAd200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_ad_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. See description for details.  |  |
+
+### Return type
+
+[**GetAd200Response**](GetAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_ad_set_details
 
 > <GetAdSetDetails200Response> get_ad_set_details(ad_set_id, account_id, opts)
 
-Live ad-set details incl. learning phase (Meta)
+Live ad-set details incl. learning phase
 
-Reads the ad set live from Meta, returned verbatim. The default projection includes `learning_stage_info` (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING — Meta omits its `status` key on paused ad sets), delivery settings, budgets, schedule and targeting. `fields` is a raw-passthrough override; unknown fields return Meta's 400 verbatim. Meta only.
+Reads the ad set live from Meta, returned verbatim. The default projection includes `learning_stage_info` (learning-phase status: LEARNING / SUCCESS / FAIL / WAIVING — Meta omits its `status` key on paused ad sets), delivery settings, budgets, schedule and targeting. `fields` is a raw-passthrough override; unknown fields return Meta's 400 verbatim.
 
 ### Examples
 
@@ -397,7 +758,7 @@ opts = {
 }
 
 begin
-  # Live ad-set details incl. learning phase (Meta)
+  # Live ad-set details incl. learning phase
   result = api_instance.get_ad_set_details(ad_set_id, account_id, opts)
   p result
 rescue Zernio::ApiError => e
@@ -413,7 +774,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Live ad-set details incl. learning phase (Meta)
+  # Live ad-set details incl. learning phase
   data, status_code, headers = api_instance.get_ad_set_details_with_http_info(ad_set_id, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -710,6 +1071,174 @@ end
 - **Accept**: application/json
 
 
+## list_ads
+
+> <ListAds200Response> list_ads(opts)
+
+List ads
+
+Returns a paginated list of ads with metrics computed over an optional date range. Use source=all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max.  To find the Zernio ad behind a comment you see in Meta Business Manager, filter by platformAdId (the Meta ad ID), effectiveObjectStoryId (Facebook), or effectiveInstagramMediaId (Instagram) — those are the post/media the ad's engagement lives on, and are also returned on each ad's `creative` object. Then call GET /v1/ads/{adId}/comments with the returned ad id. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+opts = {
+  page: 56, # Integer | Page number (1-based)
+  limit: 56, # Integer | 
+  source: 'zernio', # String | all (default) = Zernio-created + platform-discovered ads. zernio = restrict to Zernio-created only.
+  status: Zernio::AdStatus::ACTIVE, # AdStatus | 
+  platform: 'facebook', # String | 
+  account_id: 'account_id_example', # String | Social account ID
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
+  profile_id: 'profile_id_example', # String | Profile ID
+  campaign_id: 'campaign_id_example', # String | Platform campaign ID (filter ads within a campaign)
+  platform_ad_id: 'platform_ad_id_example', # String | Meta ad ID. Returns the ad with this platform-side ad ID.
+  effective_object_story_id: 'effective_object_story_id_example', # String | Facebook `{pageId}_{postId}` of the post the ad's engagement lives on (Meta `effective_object_story_id`). Use to map a Business-Manager-visible post back to the Zernio ad.
+  effective_instagram_media_id: 'effective_instagram_media_id_example', # String | Instagram media ID of the boosted post (Meta `effective_instagram_media_id`). Use to map a Business-Manager-visible IG post back to the Zernio ad.
+  from_date: Date.parse('2013-10-20'), # Date | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
+  to_date: Date.parse('2013-10-20') # Date | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+}
+
+begin
+  # List ads
+  result = api_instance.list_ads(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ads: #{e}"
+end
+```
+
+#### Using the list_ads_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAds200Response>, Integer, Hash)> list_ads_with_http_info(opts)
+
+```ruby
+begin
+  # List ads
+  data, status_code, headers = api_instance.list_ads_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAds200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ads_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **page** | **Integer** | Page number (1-based) | [optional][default to 1] |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **source** | **String** | all (default) &#x3D; Zernio-created + platform-discovered ads. zernio &#x3D; restrict to Zernio-created only. | [optional][default to &#39;all&#39;] |
+| **status** | [**AdStatus**](.md) |  | [optional] |
+| **platform** | **String** |  | [optional] |
+| **account_id** | **String** | Social account ID | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (e.g. act_123 for Meta). Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. | [optional] |
+| **profile_id** | **String** | Profile ID | [optional] |
+| **campaign_id** | **String** | Platform campaign ID (filter ads within a campaign) | [optional] |
+| **platform_ad_id** | **String** | Meta ad ID. Returns the ad with this platform-side ad ID. | [optional] |
+| **effective_object_story_id** | **String** | Facebook &#x60;{pageId}_{postId}&#x60; of the post the ad&#39;s engagement lives on (Meta &#x60;effective_object_story_id&#x60;). Use to map a Business-Manager-visible post back to the Zernio ad. | [optional] |
+| **effective_instagram_media_id** | **String** | Instagram media ID of the boosted post (Meta &#x60;effective_instagram_media_id&#x60;). Use to map a Business-Manager-visible IG post back to the Zernio ad. | [optional] |
+| **from_date** | **Date** | Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago. | [optional] |
+| **to_date** | **Date** | End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range. | [optional] |
+
+### Return type
+
+[**ListAds200Response**](ListAds200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## update_ad
+
+> <UpdateAd200Response> update_ad(ad_id, update_ad_request)
+
+Update ad
+
+Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via `/v2/adgroup/update/`), and creative   (via `/v2/ad/update/` patch-style — `headline` is ignored, `body` becomes `ad_text`). - **Pinterest / X / LinkedIn / Google**: status + budget only. Sending `targeting`   or `creative` returns 501 with code `unsupported_platform_operation`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_id = 'ad_id_example' # String | 
+update_ad_request = Zernio::UpdateAdRequest.new # UpdateAdRequest | 
+
+begin
+  # Update ad
+  result = api_instance.update_ad(ad_id, update_ad_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_ad: #{e}"
+end
+```
+
+#### Using the update_ad_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAd200Response>, Integer, Hash)> update_ad_with_http_info(ad_id, update_ad_request)
+
+```ruby
+begin
+  # Update ad
+  data, status_code, headers = api_instance.update_ad_with_http_info(ad_id, update_ad_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAd200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_ad_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** |  |  |
+| **update_ad_request** | [**UpdateAdRequest**](UpdateAdRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAd200Response**](UpdateAd200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_ad_campaign
 
 > <UpdateAdCampaign200Response> update_ad_campaign(campaign_id, update_ad_campaign_request)
@@ -983,6 +1512,77 @@ end
 ### Return type
 
 [**UpdateAdSetStatus200Response**](UpdateAdSetStatus200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ad_status
+
+> <UpdateAdStatus200Response> update_ad_status(ad_id, update_ad_status_request)
+
+Pause or resume a single ad
+
+Ad-scoped pause/resume — touches ONLY this ad, never its parent ad set or campaign (so sibling ads keep running). Thin wrapper over the `status` field of PUT /v1/ads/{adId}, for callers that want a URL symmetric to /v1/ads/campaigns/{campaignId}/status and /v1/ads/ad-sets/{adSetId}/status.  `{adId}` accepts the same identifier dialects as GET/PUT /v1/ads/{adId} (Zernio hex `_id`, Meta numeric `platformAdId`, or the creative's effective story/media IDs). `platform` is inferred from the ad, so it's not required in the body. Ads in terminal statuses (rejected, completed, cancelled) and no-op flips (already in the target state) are skipped. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_id = 'ad_id_example' # String | Zernio `_id` (hex), Meta `platformAdId` (numeric), or one of the creative's effective story/media IDs.
+update_ad_status_request = Zernio::UpdateAdStatusRequest.new({status: 'active'}) # UpdateAdStatusRequest | 
+
+begin
+  # Pause or resume a single ad
+  result = api_instance.update_ad_status(ad_id, update_ad_status_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_ad_status: #{e}"
+end
+```
+
+#### Using the update_ad_status_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAdStatus200Response>, Integer, Hash)> update_ad_status_with_http_info(ad_id, update_ad_status_request)
+
+```ruby
+begin
+  # Pause or resume a single ad
+  data, status_code, headers = api_instance.update_ad_status_with_http_info(ad_id, update_ad_status_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAdStatus200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_ad_status_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. |  |
+| **update_ad_status_request** | [**UpdateAdStatusRequest**](UpdateAdStatusRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAdStatus200Response**](UpdateAdStatus200Response.md)
 
 ### Authorization
 

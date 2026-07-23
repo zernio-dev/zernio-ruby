@@ -36,6 +36,9 @@ module Zernio
 
     attr_accessor :date_range
 
+    # Present only when the range reaches into YouTube's ~3-day processing window: the first date whose numbers are provisional and may still be revised by YouTube.
+    attr_accessor :provisional_since
+
     attr_accessor :note
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -49,6 +52,7 @@ module Zernio
         :'published_at' => :'publishedAt',
         :'demographics' => :'demographics',
         :'date_range' => :'dateRange',
+        :'provisional_since' => :'provisionalSince',
         :'note' => :'note'
       }
     end
@@ -74,6 +78,7 @@ module Zernio
         :'published_at' => :'Time',
         :'demographics' => :'Hash<String, Array<YouTubeDemographicsResponseDemographicsValueInner>>',
         :'date_range' => :'YouTubeDemographicsResponseDateRange',
+        :'provisional_since' => :'Date',
         :'note' => :'String'
       }
     end
@@ -136,6 +141,10 @@ module Zernio
         self.date_range = attributes[:'date_range']
       end
 
+      if attributes.key?(:'provisional_since')
+        self.provisional_since = attributes[:'provisional_since']
+      end
+
       if attributes.key?(:'note')
         self.note = attributes[:'note']
       end
@@ -169,6 +178,7 @@ module Zernio
           published_at == o.published_at &&
           demographics == o.demographics &&
           date_range == o.date_range &&
+          provisional_since == o.provisional_since &&
           note == o.note
     end
 
@@ -181,7 +191,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, account_id, platform, video_id, title, published_at, demographics, date_range, note].hash
+      [success, account_id, platform, video_id, title, published_at, demographics, date_range, provisional_since, note].hash
     end
 
     # Builds the object from hash
