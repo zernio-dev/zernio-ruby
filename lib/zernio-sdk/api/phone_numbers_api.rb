@@ -1514,5 +1514,68 @@ module Zernio
       end
       return data, status_code, headers
     end
+
+    # View a KYC document on file
+    # Stream a document backing a reusable verification (the `documentId` values from GET /v1/phone-numbers/kyc `reusable.options[].details[]`), so the account holder can see what's on file before reusing it. Returned inline as `application/pdf` (uploads are normalized to PDF). Auth-scoped: a document is viewable only when its id is referenced by one of the caller's own numbers — otherwise `404`. 
+    # @param document_id [String] The Telnyx document id (from &#x60;reusable.options[].details[].documentId&#x60;).
+    # @param [Hash] opts the optional parameters
+    # @return [File]
+    def view_phone_number_kyc_document(document_id, opts = {})
+      data, _status_code, _headers = view_phone_number_kyc_document_with_http_info(document_id, opts)
+      data
+    end
+
+    # View a KYC document on file
+    # Stream a document backing a reusable verification (the &#x60;documentId&#x60; values from GET /v1/phone-numbers/kyc &#x60;reusable.options[].details[]&#x60;), so the account holder can see what&#39;s on file before reusing it. Returned inline as &#x60;application/pdf&#x60; (uploads are normalized to PDF). Auth-scoped: a document is viewable only when its id is referenced by one of the caller&#39;s own numbers — otherwise &#x60;404&#x60;. 
+    # @param document_id [String] The Telnyx document id (from &#x60;reusable.options[].details[].documentId&#x60;).
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
+    def view_phone_number_kyc_document_with_http_info(document_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.view_phone_number_kyc_document ...'
+      end
+      # verify the required parameter 'document_id' is set
+      if @api_client.config.client_side_validation && document_id.nil?
+        fail ArgumentError, "Missing the required parameter 'document_id' when calling PhoneNumbersApi.view_phone_number_kyc_document"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/kyc/document/{documentId}'.sub('{' + 'documentId' + '}', CGI.escape(document_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/pdf', 'application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'File'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.view_phone_number_kyc_document",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#view_phone_number_kyc_document\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end

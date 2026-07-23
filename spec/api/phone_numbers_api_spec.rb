@@ -307,4 +307,16 @@ describe 'PhoneNumbersApi' do
     end
   end
 
+  # unit tests for view_phone_number_kyc_document
+  # View a KYC document on file
+  # Stream a document backing a reusable verification (the &#x60;documentId&#x60; values from GET /v1/phone-numbers/kyc &#x60;reusable.options[].details[]&#x60;), so the account holder can see what&#39;s on file before reusing it. Returned inline as &#x60;application/pdf&#x60; (uploads are normalized to PDF). Auth-scoped: a document is viewable only when its id is referenced by one of the caller&#39;s own numbers — otherwise &#x60;404&#x60;. 
+  # @param document_id The Telnyx document id (from &#x60;reusable.options[].details[].documentId&#x60;).
+  # @param [Hash] opts the optional parameters
+  # @return [File]
+  describe 'view_phone_number_kyc_document test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

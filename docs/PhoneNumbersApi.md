@@ -26,6 +26,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**upload_phone_number_kyc_document**](PhoneNumbersApi.md#upload_phone_number_kyc_document) | **POST** /v1/phone-numbers/kyc/upload-document | Upload a KYC document |
 | [**upload_phone_number_port_in_document**](PhoneNumbersApi.md#upload_phone_number_port_in_document) | **POST** /v1/phone-numbers/port-in/documents | Upload a porting document |
 | [**validate_phone_number_kyc_address**](PhoneNumbersApi.md#validate_phone_number_kyc_address) | **POST** /v1/phone-numbers/kyc/validate-address | Pre-validate KYC address |
+| [**view_phone_number_kyc_document**](PhoneNumbersApi.md#view_phone_number_kyc_document) | **GET** /v1/phone-numbers/kyc/document/{documentId} | View a KYC document on file |
 
 
 ## cancel_phone_number_port_in
@@ -1576,4 +1577,73 @@ end
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+
+## view_phone_number_kyc_document
+
+> File view_phone_number_kyc_document(document_id)
+
+View a KYC document on file
+
+Stream a document backing a reusable verification (the `documentId` values from GET /v1/phone-numbers/kyc `reusable.options[].details[]`), so the account holder can see what's on file before reusing it. Returned inline as `application/pdf` (uploads are normalized to PDF). Auth-scoped: a document is viewable only when its id is referenced by one of the caller's own numbers — otherwise `404`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+document_id = 'document_id_example' # String | The Telnyx document id (from `reusable.options[].details[].documentId`).
+
+begin
+  # View a KYC document on file
+  result = api_instance.view_phone_number_kyc_document(document_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->view_phone_number_kyc_document: #{e}"
+end
+```
+
+#### Using the view_phone_number_kyc_document_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(File, Integer, Hash)> view_phone_number_kyc_document_with_http_info(document_id)
+
+```ruby
+begin
+  # View a KYC document on file
+  data, status_code, headers = api_instance.view_phone_number_kyc_document_with_http_info(document_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => File
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->view_phone_number_kyc_document_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **document_id** | **String** | The Telnyx document id (from &#x60;reusable.options[].details[].documentId&#x60;). |  |
+
+### Return type
+
+**File**
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/pdf, application/json
 

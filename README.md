@@ -380,6 +380,7 @@ Class | Method | HTTP request | Description
 *Zernio::PhoneNumbersApi* | [**upload_phone_number_kyc_document**](docs/PhoneNumbersApi.md#upload_phone_number_kyc_document) | **POST** /v1/phone-numbers/kyc/upload-document | Upload a KYC document
 *Zernio::PhoneNumbersApi* | [**upload_phone_number_port_in_document**](docs/PhoneNumbersApi.md#upload_phone_number_port_in_document) | **POST** /v1/phone-numbers/port-in/documents | Upload a porting document
 *Zernio::PhoneNumbersApi* | [**validate_phone_number_kyc_address**](docs/PhoneNumbersApi.md#validate_phone_number_kyc_address) | **POST** /v1/phone-numbers/kyc/validate-address | Pre-validate KYC address
+*Zernio::PhoneNumbersApi* | [**view_phone_number_kyc_document**](docs/PhoneNumbersApi.md#view_phone_number_kyc_document) | **GET** /v1/phone-numbers/kyc/document/{documentId} | View a KYC document on file
 *Zernio::PostsApi* | [**bulk_upload_posts**](docs/PostsApi.md#bulk_upload_posts) | **POST** /v1/posts/bulk-upload | Bulk upload from CSV
 *Zernio::PostsApi* | [**create_post**](docs/PostsApi.md#create_post) | **POST** /v1/posts | Create post
 *Zernio::PostsApi* | [**delete_post**](docs/PostsApi.md#delete_post) | **DELETE** /v1/posts/{postId} | Delete post
@@ -1180,6 +1181,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetPhoneNumberKycForm200ResponseReusable](docs/GetPhoneNumberKycForm200ResponseReusable.md)
  - [Zernio::GetPhoneNumberKycForm200ResponseReusableDetailsInner](docs/GetPhoneNumberKycForm200ResponseReusableDetailsInner.md)
  - [Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInner](docs/GetPhoneNumberKycForm200ResponseReusableOptionsInner.md)
+ - [Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInnerDetailsInner](docs/GetPhoneNumberKycForm200ResponseReusableOptionsInnerDetailsInner.md)
  - [Zernio::GetPhoneNumberPortInOrderRequirements200Response](docs/GetPhoneNumberPortInOrderRequirements200Response.md)
  - [Zernio::GetPhoneNumberPortInOrderRequirements200ResponseRequirementsInner](docs/GetPhoneNumberPortInOrderRequirements200ResponseRequirementsInner.md)
  - [Zernio::GetPhoneNumberPortInRequirements200Response](docs/GetPhoneNumberPortInRequirements200Response.md)

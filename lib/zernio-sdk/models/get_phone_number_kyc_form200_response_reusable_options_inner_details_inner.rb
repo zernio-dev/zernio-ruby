@@ -14,25 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetPhoneNumberKycForm200ResponseReusableOptionsInner < ApiModelBase
-    # Opaque option id — pass as `reuseOptionId` on POST. Stable selection key (a phone number is not unique across verifications).
-    attr_accessor :id
+  class GetPhoneNumberKycForm200ResponseReusableOptionsInnerDetailsInner < ApiModelBase
+    attr_accessor :label
 
-    # Display only — the number this verification was submitted for. Not a selection key.
-    attr_accessor :from_phone_number
+    attr_accessor :value
 
-    # true = group-approved, a new order activates in minutes; false = documents are reused but the order still queues for carrier review (1-3 days).
-    attr_accessor :instant
-
-    attr_accessor :details
+    # Present on document rows — the Telnyx document id. GET /v1/whatsapp/phone-numbers/kyc/document/{documentId} streams it (auth-scoped, inline PDF).
+    attr_accessor :document_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'from_phone_number' => :'fromPhoneNumber',
-        :'instant' => :'instant',
-        :'details' => :'details'
+        :'label' => :'label',
+        :'value' => :'value',
+        :'document_id' => :'documentId'
       }
     end
 
@@ -49,10 +44,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'from_phone_number' => :'String',
-        :'instant' => :'Boolean',
-        :'details' => :'Array<GetPhoneNumberKycForm200ResponseReusableOptionsInnerDetailsInner>'
+        :'label' => :'String',
+        :'value' => :'String',
+        :'document_id' => :'String'
       }
     end
 
@@ -66,34 +60,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInnerDetailsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetPhoneNumberKycForm200ResponseReusableOptionsInnerDetailsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'label')
+        self.label = attributes[:'label']
       end
 
-      if attributes.key?(:'from_phone_number')
-        self.from_phone_number = attributes[:'from_phone_number']
+      if attributes.key?(:'value')
+        self.value = attributes[:'value']
       end
 
-      if attributes.key?(:'instant')
-        self.instant = attributes[:'instant']
-      end
-
-      if attributes.key?(:'details')
-        if (value = attributes[:'details']).is_a?(Array)
-          self.details = value
-        end
+      if attributes.key?(:'document_id')
+        self.document_id = attributes[:'document_id']
       end
     end
 
@@ -117,10 +105,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          from_phone_number == o.from_phone_number &&
-          instant == o.instant &&
-          details == o.details
+          label == o.label &&
+          value == o.value &&
+          document_id == o.document_id
     end
 
     # @see the `==` method
@@ -132,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, from_phone_number, instant, details].hash
+      [label, value, document_id].hash
     end
 
     # Builds the object from hash
