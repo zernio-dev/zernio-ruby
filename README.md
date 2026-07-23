@@ -210,6 +210,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**configure_tik_tok_ads_brand_identity**](docs/ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Set TikTok brand identity
 *Zernio::ConnectApi* | [**connect_ads**](docs/ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform
 *Zernio::ConnectApi* | [**connect_bluesky_credentials**](docs/ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account
+*Zernio::ConnectApi* | [**connect_open_ai_ads_credentials**](docs/ConnectApi.md#connect_open_ai_ads_credentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account
 *Zernio::ConnectApi* | [**connect_whats_app_credentials**](docs/ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials
 *Zernio::ConnectApi* | [**create_pinterest_board**](docs/ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board
 *Zernio::ConnectApi* | [**get_connect_url**](docs/ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL
@@ -707,6 +708,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ConnectAds200ResponseOneOf1](docs/ConnectAds200ResponseOneOf1.md)
  - [Zernio::ConnectBlueskyCredentials200Response](docs/ConnectBlueskyCredentials200Response.md)
  - [Zernio::ConnectBlueskyCredentialsRequest](docs/ConnectBlueskyCredentialsRequest.md)
+ - [Zernio::ConnectOpenAIAdsCredentials200Response](docs/ConnectOpenAIAdsCredentials200Response.md)
+ - [Zernio::ConnectOpenAIAdsCredentialsRequest](docs/ConnectOpenAIAdsCredentialsRequest.md)
  - [Zernio::ConnectWhatsAppCredentials200Response](docs/ConnectWhatsAppCredentials200Response.md)
  - [Zernio::ConnectWhatsAppCredentials200ResponseAccount](docs/ConnectWhatsAppCredentials200ResponseAccount.md)
  - [Zernio::ConnectWhatsAppCredentialsRequest](docs/ConnectWhatsAppCredentialsRequest.md)
@@ -1214,6 +1217,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetTikTokCreatorInfo200ResponseCreator](docs/GetTikTokCreatorInfo200ResponseCreator.md)
  - [Zernio::GetTikTokCreatorInfo200ResponsePostingLimits](docs/GetTikTokCreatorInfo200ResponsePostingLimits.md)
  - [Zernio::GetTikTokCreatorInfo200ResponsePrivacyLevelsInner](docs/GetTikTokCreatorInfo200ResponsePrivacyLevelsInner.md)
+ - [Zernio::GetTrackingTag200Response](docs/GetTrackingTag200Response.md)
  - [Zernio::GetTrackingTagStats200Response](docs/GetTrackingTagStats200Response.md)
  - [Zernio::GetTrackingTagStats200ResponseStats](docs/GetTrackingTagStats200ResponseStats.md)
  - [Zernio::GetUsage200Response](docs/GetUsage200Response.md)

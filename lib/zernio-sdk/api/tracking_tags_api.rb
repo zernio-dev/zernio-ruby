@@ -100,8 +100,8 @@ module Zernio
     end
 
     # Create a tracking tag
-    # Creates a Meta Pixel on the given ad account (`POST /act_{id}/adspixels` — `name` is the only input). Returns the created tag including its install `code`. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with `ownerBusinessId: null` and can't be shared with other ad accounts.  Creating a pixel does NOT install it — install the returned `code` snippet on the site, or send events server-side via `POST /v1/ads/conversions`. The check `installed` is derived from `lastFiredTime`.  NOT idempotent: each call creates a new pixel. Do not retry blindly on timeout. Meta only (platform `metaads`); other platforms return 405. 
-    # @param account_id [String] Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
+    # Meta: creates a Meta Pixel on the given ad account (`POST /act_{id}/adspixels` — `name` is the only input). Returns the created tag including its install `code`. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with `ownerBusinessId: null` and can't be shared with other ad accounts.  Creating a Meta pixel does NOT install it — install the returned `code` snippet on the site, or send events server-side via `POST /v1/ads/conversions`. The check `installed` is derived from `lastFiredTime`.  OpenAI Ads: creates an OpenAI pixel AND provisions a Conversions API key for it in the same call (`adAccountId` is required by this endpoint but ignored — one API key maps to exactly one ad account, so there's nothing to select). Returns 422 (`FEATURE_NOT_AVAILABLE`) if the ad account isn't enabled for pixel management; contact your OpenAI partner representative to enable it. There is no delete API for OpenAI pixels. If the pixel is created but the Conversions API key provisioning then fails, the pixel is left live on OpenAI (it cannot be cleaned up) and the error message names the surviving pixel id and warns against retrying, since a retry would create a second, orphaned pixel.  NOT idempotent on either platform: each call creates a new pixel (and, for OpenAI, a new Conversions API key). Do not retry blindly on timeout. Meta (platform `metaads`) and OpenAI Ads (platform `openaiads`); other platforms return 405. 
+    # @param account_id [String] Ads SocialAccount id (platform &#x60;metaads&#x60; or &#x60;openaiads&#x60;).
     # @param create_tracking_tag_request [CreateTrackingTagRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateTrackingTag201Response]
@@ -111,8 +111,8 @@ module Zernio
     end
 
     # Create a tracking tag
-    # Creates a Meta Pixel on the given ad account (&#x60;POST /act_{id}/adspixels&#x60; — &#x60;name&#x60; is the only input). Returns the created tag including its install &#x60;code&#x60;. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with &#x60;ownerBusinessId: null&#x60; and can&#39;t be shared with other ad accounts.  Creating a pixel does NOT install it — install the returned &#x60;code&#x60; snippet on the site, or send events server-side via &#x60;POST /v1/ads/conversions&#x60;. The check &#x60;installed&#x60; is derived from &#x60;lastFiredTime&#x60;.  NOT idempotent: each call creates a new pixel. Do not retry blindly on timeout. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
-    # @param account_id [String] Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
+    # Meta: creates a Meta Pixel on the given ad account (&#x60;POST /act_{id}/adspixels&#x60; — &#x60;name&#x60; is the only input). Returns the created tag including its install &#x60;code&#x60;. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with &#x60;ownerBusinessId: null&#x60; and can&#39;t be shared with other ad accounts.  Creating a Meta pixel does NOT install it — install the returned &#x60;code&#x60; snippet on the site, or send events server-side via &#x60;POST /v1/ads/conversions&#x60;. The check &#x60;installed&#x60; is derived from &#x60;lastFiredTime&#x60;.  OpenAI Ads: creates an OpenAI pixel AND provisions a Conversions API key for it in the same call (&#x60;adAccountId&#x60; is required by this endpoint but ignored — one API key maps to exactly one ad account, so there&#39;s nothing to select). Returns 422 (&#x60;FEATURE_NOT_AVAILABLE&#x60;) if the ad account isn&#39;t enabled for pixel management; contact your OpenAI partner representative to enable it. There is no delete API for OpenAI pixels. If the pixel is created but the Conversions API key provisioning then fails, the pixel is left live on OpenAI (it cannot be cleaned up) and the error message names the surviving pixel id and warns against retrying, since a retry would create a second, orphaned pixel.  NOT idempotent on either platform: each call creates a new pixel (and, for OpenAI, a new Conversions API key). Do not retry blindly on timeout. Meta (platform &#x60;metaads&#x60;) and OpenAI Ads (platform &#x60;openaiads&#x60;); other platforms return 405. 
+    # @param account_id [String] Ads SocialAccount id (platform &#x60;metaads&#x60; or &#x60;openaiads&#x60;).
     # @param create_tracking_tag_request [CreateTrackingTagRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateTrackingTag201Response, Integer, Hash)>] CreateTrackingTag201Response data, response status code and response headers
@@ -237,22 +237,22 @@ module Zernio
     end
 
     # Get a tracking tag
-    # Returns the full tag record including the base-code `code` snippet, `lastFiredTime`, `ownerBusinessId`, `isUnavailable`, etc. Meta only (platform `metaads`); other platforms return 405. 
+    # Returns the full tag record including the base-code `code` snippet, `lastFiredTime`, `ownerBusinessId`, `isUnavailable`, etc. Meta only (platform `metaads`); other platforms return 405. OpenAI Ads has no get-by-id endpoint, so it 405s here too — use `GET /v1/accounts/{accountId}/tracking-tags` (list) instead. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
     # @param [Hash] opts the optional parameters
-    # @return [CreateTrackingTag201Response]
+    # @return [GetTrackingTag200Response]
     def get_tracking_tag(account_id, tag_id, opts = {})
       data, _status_code, _headers = get_tracking_tag_with_http_info(account_id, tag_id, opts)
       data
     end
 
     # Get a tracking tag
-    # Returns the full tag record including the base-code &#x60;code&#x60; snippet, &#x60;lastFiredTime&#x60;, &#x60;ownerBusinessId&#x60;, &#x60;isUnavailable&#x60;, etc. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
+    # Returns the full tag record including the base-code &#x60;code&#x60; snippet, &#x60;lastFiredTime&#x60;, &#x60;ownerBusinessId&#x60;, &#x60;isUnavailable&#x60;, etc. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. OpenAI Ads has no get-by-id endpoint, so it 405s here too — use &#x60;GET /v1/accounts/{accountId}/tracking-tags&#x60; (list) instead. 
     # @param account_id [String] 
     # @param tag_id [String] Pixel id.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateTrackingTag201Response, Integer, Hash)>] CreateTrackingTag201Response data, response status code and response headers
+    # @return [Array<(GetTrackingTag200Response, Integer, Hash)>] GetTrackingTag200Response data, response status code and response headers
     def get_tracking_tag_with_http_info(account_id, tag_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TrackingTagsApi.get_tracking_tag ...'
@@ -283,7 +283,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CreateTrackingTag201Response'
+      return_type = opts[:debug_return_type] || 'GetTrackingTag200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -457,10 +457,10 @@ module Zernio
     end
 
     # List tracking tags
-    # Returns the tracking tags (Meta Pixels) the connected ads account can see. Pass `?adAccountId=act_...` to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits `code` — call `getTrackingTag` for the install snippet and full detail.  Meta only today (platform `metaads`); other platforms return 405. The `accountId` must be the Meta *ads* SocialAccount created by the Ads add-on connect flow, not a Facebook/Instagram posting account. Get your `act_...` ids from `GET /v1/ads/accounts`. 
-    # @param account_id [String] Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
+    # Returns the tracking tags (Meta Pixels, or OpenAI Ads pixels) the connected ads account can see. Pass `?adAccountId=act_...` (Meta only) to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits `code` — call `getTrackingTag` for the install snippet and full detail (Meta only; OpenAI Ads has no get-by-id endpoint).  Meta (platform `metaads`) and OpenAI Ads (platform `openaiads`); other platforms return 405. The `accountId` must be the ads SocialAccount created by the Ads add-on connect flow (Meta) or the OpenAI Ads connect flow, not a Facebook/Instagram posting account. Get your Meta `act_...` ids from `GET /v1/ads/accounts`; `adAccountId` is ignored for OpenAI Ads (one API key maps to exactly one ad account). 
+    # @param account_id [String] Ads SocialAccount id (platform &#x60;metaads&#x60; or &#x60;openaiads&#x60;).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :ad_account_id Optional. Scope to one ad account, e.g. &#x60;act_123456789&#x60;.
+    # @option opts [String] :ad_account_id Optional, Meta only. Scope to one ad account, e.g. &#x60;act_123456789&#x60;. Ignored for OpenAI Ads.
     # @return [ListTrackingTags200Response]
     def list_tracking_tags(account_id, opts = {})
       data, _status_code, _headers = list_tracking_tags_with_http_info(account_id, opts)
@@ -468,10 +468,10 @@ module Zernio
     end
 
     # List tracking tags
-    # Returns the tracking tags (Meta Pixels) the connected ads account can see. Pass &#x60;?adAccountId&#x3D;act_...&#x60; to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits &#x60;code&#x60; — call &#x60;getTrackingTag&#x60; for the install snippet and full detail.  Meta only today (platform &#x60;metaads&#x60;); other platforms return 405. The &#x60;accountId&#x60; must be the Meta *ads* SocialAccount created by the Ads add-on connect flow, not a Facebook/Instagram posting account. Get your &#x60;act_...&#x60; ids from &#x60;GET /v1/ads/accounts&#x60;. 
-    # @param account_id [String] Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
+    # Returns the tracking tags (Meta Pixels, or OpenAI Ads pixels) the connected ads account can see. Pass &#x60;?adAccountId&#x3D;act_...&#x60; (Meta only) to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits &#x60;code&#x60; — call &#x60;getTrackingTag&#x60; for the install snippet and full detail (Meta only; OpenAI Ads has no get-by-id endpoint).  Meta (platform &#x60;metaads&#x60;) and OpenAI Ads (platform &#x60;openaiads&#x60;); other platforms return 405. The &#x60;accountId&#x60; must be the ads SocialAccount created by the Ads add-on connect flow (Meta) or the OpenAI Ads connect flow, not a Facebook/Instagram posting account. Get your Meta &#x60;act_...&#x60; ids from &#x60;GET /v1/ads/accounts&#x60;; &#x60;adAccountId&#x60; is ignored for OpenAI Ads (one API key maps to exactly one ad account). 
+    # @param account_id [String] Ads SocialAccount id (platform &#x60;metaads&#x60; or &#x60;openaiads&#x60;).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :ad_account_id Optional. Scope to one ad account, e.g. &#x60;act_123456789&#x60;.
+    # @option opts [String] :ad_account_id Optional, Meta only. Scope to one ad account, e.g. &#x60;act_123456789&#x60;. Ignored for OpenAI Ads.
     # @return [Array<(ListTrackingTags200Response, Integer, Hash)>] ListTrackingTags200Response data, response status code and response headers
     def list_tracking_tags_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -674,7 +674,7 @@ module Zernio
     # @param tag_id [String] Pixel id.
     # @param update_tracking_tag_request [UpdateTrackingTagRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [CreateTrackingTag201Response]
+    # @return [GetTrackingTag200Response]
     def update_tracking_tag(account_id, tag_id, update_tracking_tag_request, opts = {})
       data, _status_code, _headers = update_tracking_tag_with_http_info(account_id, tag_id, update_tracking_tag_request, opts)
       data
@@ -686,7 +686,7 @@ module Zernio
     # @param tag_id [String] Pixel id.
     # @param update_tracking_tag_request [UpdateTrackingTagRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateTrackingTag201Response, Integer, Hash)>] CreateTrackingTag201Response data, response status code and response headers
+    # @return [Array<(GetTrackingTag200Response, Integer, Hash)>] GetTrackingTag200Response data, response status code and response headers
     def update_tracking_tag_with_http_info(account_id, tag_id, update_tracking_tag_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TrackingTagsApi.update_tracking_tag ...'
@@ -726,7 +726,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_tracking_tag_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CreateTrackingTag201Response'
+      return_type = opts[:debug_return_type] || 'GetTrackingTag200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

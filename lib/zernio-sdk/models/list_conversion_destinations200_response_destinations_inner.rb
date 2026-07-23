@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class ListConversionDestinations200ResponseDestinationsInner < ApiModelBase
-    # Destination identifier. Meta: pixel ID. Google: conversion action resource name. LinkedIn: numeric conversion rule ID. 
+    # Destination identifier. Meta: pixel ID. Google: conversion action resource name. LinkedIn: numeric conversion rule ID. OpenAI Ads: pixel wire id. 
     attr_accessor :id
 
     attr_accessor :name

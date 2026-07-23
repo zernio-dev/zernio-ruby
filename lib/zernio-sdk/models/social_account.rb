@@ -242,7 +242,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @_id.nil?
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads"])
+      platform_validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads", "openaiads"])
       return false unless platform_validator.valid?(@platform)
       return false if @profile_id.nil?
       return false if @is_active.nil?
@@ -262,7 +262,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads"])
+      validator = EnumAttributeValidator.new('String', ["tiktok", "instagram", "facebook", "youtube", "linkedin", "twitter", "threads", "pinterest", "reddit", "bluesky", "googlebusiness", "telegram", "snapchat", "discord", "whatsapp", "linkedinads", "metaads", "pinterestads", "tiktokads", "xads", "googleads", "openaiads"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **ad_account_id** | **String** | Meta ad account id, e.g. &#x60;act_123456789&#x60;. |  |
+| **ad_account_id** | **String** | Meta ad account id, e.g. &#x60;act_123456789&#x60;. Required by this endpoint but ignored for OpenAI Ads. |  |
 | **name** | **String** |  |  |
 
 ## Example

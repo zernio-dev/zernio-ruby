@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class CreateTrackingTagRequest < ApiModelBase
-    # Meta ad account id, e.g. `act_123456789`.
+    # Meta ad account id, e.g. `act_123456789`. Required by this endpoint but ignored for OpenAI Ads.
     attr_accessor :ad_account_id
 
     attr_accessor :name

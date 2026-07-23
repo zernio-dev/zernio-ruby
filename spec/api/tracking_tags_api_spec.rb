@@ -48,8 +48,8 @@ describe 'TrackingTagsApi' do
 
   # unit tests for create_tracking_tag
   # Create a tracking tag
-  # Creates a Meta Pixel on the given ad account (&#x60;POST /act_{id}/adspixels&#x60; — &#x60;name&#x60; is the only input). Returns the created tag including its install &#x60;code&#x60;. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with &#x60;ownerBusinessId: null&#x60; and can&#39;t be shared with other ad accounts.  Creating a pixel does NOT install it — install the returned &#x60;code&#x60; snippet on the site, or send events server-side via &#x60;POST /v1/ads/conversions&#x60;. The check &#x60;installed&#x60; is derived from &#x60;lastFiredTime&#x60;.  NOT idempotent: each call creates a new pixel. Do not retry blindly on timeout. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
-  # @param account_id Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
+  # Meta: creates a Meta Pixel on the given ad account (&#x60;POST /act_{id}/adspixels&#x60; — &#x60;name&#x60; is the only input). Returns the created tag including its install &#x60;code&#x60;. The pixel is owned by the Business Manager that owns the ad account; a pixel created on a personal (non-BM) ad account ends up with &#x60;ownerBusinessId: null&#x60; and can&#39;t be shared with other ad accounts.  Creating a Meta pixel does NOT install it — install the returned &#x60;code&#x60; snippet on the site, or send events server-side via &#x60;POST /v1/ads/conversions&#x60;. The check &#x60;installed&#x60; is derived from &#x60;lastFiredTime&#x60;.  OpenAI Ads: creates an OpenAI pixel AND provisions a Conversions API key for it in the same call (&#x60;adAccountId&#x60; is required by this endpoint but ignored — one API key maps to exactly one ad account, so there&#39;s nothing to select). Returns 422 (&#x60;FEATURE_NOT_AVAILABLE&#x60;) if the ad account isn&#39;t enabled for pixel management; contact your OpenAI partner representative to enable it. There is no delete API for OpenAI pixels. If the pixel is created but the Conversions API key provisioning then fails, the pixel is left live on OpenAI (it cannot be cleaned up) and the error message names the surviving pixel id and warns against retrying, since a retry would create a second, orphaned pixel.  NOT idempotent on either platform: each call creates a new pixel (and, for OpenAI, a new Conversions API key). Do not retry blindly on timeout. Meta (platform &#x60;metaads&#x60;) and OpenAI Ads (platform &#x60;openaiads&#x60;); other platforms return 405. 
+  # @param account_id Ads SocialAccount id (platform &#x60;metaads&#x60; or &#x60;openaiads&#x60;).
   # @param create_tracking_tag_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateTrackingTag201Response]
@@ -73,11 +73,11 @@ describe 'TrackingTagsApi' do
 
   # unit tests for get_tracking_tag
   # Get a tracking tag
-  # Returns the full tag record including the base-code &#x60;code&#x60; snippet, &#x60;lastFiredTime&#x60;, &#x60;ownerBusinessId&#x60;, &#x60;isUnavailable&#x60;, etc. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. 
+  # Returns the full tag record including the base-code &#x60;code&#x60; snippet, &#x60;lastFiredTime&#x60;, &#x60;ownerBusinessId&#x60;, &#x60;isUnavailable&#x60;, etc. Meta only (platform &#x60;metaads&#x60;); other platforms return 405. OpenAI Ads has no get-by-id endpoint, so it 405s here too — use &#x60;GET /v1/accounts/{accountId}/tracking-tags&#x60; (list) instead. 
   # @param account_id 
   # @param tag_id Pixel id.
   # @param [Hash] opts the optional parameters
-  # @return [CreateTrackingTag201Response]
+  # @return [GetTrackingTag200Response]
   describe 'get_tracking_tag test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -115,10 +115,10 @@ describe 'TrackingTagsApi' do
 
   # unit tests for list_tracking_tags
   # List tracking tags
-  # Returns the tracking tags (Meta Pixels) the connected ads account can see. Pass &#x60;?adAccountId&#x3D;act_...&#x60; to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits &#x60;code&#x60; — call &#x60;getTrackingTag&#x60; for the install snippet and full detail.  Meta only today (platform &#x60;metaads&#x60;); other platforms return 405. The &#x60;accountId&#x60; must be the Meta *ads* SocialAccount created by the Ads add-on connect flow, not a Facebook/Instagram posting account. Get your &#x60;act_...&#x60; ids from &#x60;GET /v1/ads/accounts&#x60;. 
-  # @param account_id Meta ads SocialAccount id (platform &#x60;metaads&#x60;).
+  # Returns the tracking tags (Meta Pixels, or OpenAI Ads pixels) the connected ads account can see. Pass &#x60;?adAccountId&#x3D;act_...&#x60; (Meta only) to scope the list to a single ad account; omit it to list every pixel reachable by the token (the name is then suffixed with the ad account it was discovered on, for disambiguation). The list view omits &#x60;code&#x60; — call &#x60;getTrackingTag&#x60; for the install snippet and full detail (Meta only; OpenAI Ads has no get-by-id endpoint).  Meta (platform &#x60;metaads&#x60;) and OpenAI Ads (platform &#x60;openaiads&#x60;); other platforms return 405. The &#x60;accountId&#x60; must be the ads SocialAccount created by the Ads add-on connect flow (Meta) or the OpenAI Ads connect flow, not a Facebook/Instagram posting account. Get your Meta &#x60;act_...&#x60; ids from &#x60;GET /v1/ads/accounts&#x60;; &#x60;adAccountId&#x60; is ignored for OpenAI Ads (one API key maps to exactly one ad account). 
+  # @param account_id Ads SocialAccount id (platform &#x60;metaads&#x60; or &#x60;openaiads&#x60;).
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :ad_account_id Optional. Scope to one ad account, e.g. &#x60;act_123456789&#x60;.
+  # @option opts [String] :ad_account_id Optional, Meta only. Scope to one ad account, e.g. &#x60;act_123456789&#x60;. Ignored for OpenAI Ads.
   # @return [ListTrackingTags200Response]
   describe 'list_tracking_tags test' do
     it 'should work' do
@@ -160,7 +160,7 @@ describe 'TrackingTagsApi' do
   # @param tag_id Pixel id.
   # @param update_tracking_tag_request 
   # @param [Hash] opts the optional parameters
-  # @return [CreateTrackingTag201Response]
+  # @return [GetTrackingTag200Response]
   describe 'update_tracking_tag test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

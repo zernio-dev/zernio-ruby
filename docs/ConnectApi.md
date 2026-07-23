@@ -10,6 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**configure_tik_tok_ads_brand_identity**](ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Set TikTok brand identity |
 | [**connect_ads**](ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform |
 | [**connect_bluesky_credentials**](ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account |
+| [**connect_open_ai_ads_credentials**](ConnectApi.md#connect_open_ai_ads_credentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account |
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
 | [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
@@ -471,6 +472,75 @@ end
 ### Return type
 
 [**ConnectBlueskyCredentials200Response**](ConnectBlueskyCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_open_ai_ads_credentials
+
+> <ConnectOpenAIAdsCredentials200Response> connect_open_ai_ads_credentials(connect_open_ai_ads_credentials_request)
+
+Connect an OpenAI Ads account
+
+Connect an OpenAI Ads account using an API key from ChatGPT Ads Manager.  The key grants full campaign write access on OpenAI's side (OpenAI does not offer a read-only key scope). Zernio uses it to read ads and performance, and to create and manage campaigns you set up through Zernio (create, status, budget, and cancel). Campaigns created directly in ChatGPT Ads Manager can still be managed there. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_open_ai_ads_credentials_request = Zernio::ConnectOpenAIAdsCredentialsRequest.new({api_key: 'api_key_example', profile_id: 'profile_id_example'}) # ConnectOpenAIAdsCredentialsRequest | 
+
+begin
+  # Connect an OpenAI Ads account
+  result = api_instance.connect_open_ai_ads_credentials(connect_open_ai_ads_credentials_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_open_ai_ads_credentials: #{e}"
+end
+```
+
+#### Using the connect_open_ai_ads_credentials_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ConnectOpenAIAdsCredentials200Response>, Integer, Hash)> connect_open_ai_ads_credentials_with_http_info(connect_open_ai_ads_credentials_request)
+
+```ruby
+begin
+  # Connect an OpenAI Ads account
+  data, status_code, headers = api_instance.connect_open_ai_ads_credentials_with_http_info(connect_open_ai_ads_credentials_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ConnectOpenAIAdsCredentials200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_open_ai_ads_credentials_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_open_ai_ads_credentials_request** | [**ConnectOpenAIAdsCredentialsRequest**](ConnectOpenAIAdsCredentialsRequest.md) |  |  |
+
+### Return type
+
+[**ConnectOpenAIAdsCredentials200Response**](ConnectOpenAIAdsCredentials200Response.md)
 
 ### Authorization
 

@@ -14,40 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class UpdateAdRequestBudget < ApiModelBase
-    # Minimum varies by platform: TikTok=$20, Pinterest=$5, others=$1
-    attr_accessor :amount
+  class ConnectOpenAIAdsCredentials200Response < ApiModelBase
+    attr_accessor :account_id
 
-    # OpenAI Ads accepts lifetime only; sending daily returns 422.
-    attr_accessor :type
+    attr_accessor :ad_account_name
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :redirect_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'amount' => :'amount',
-        :'type' => :'type'
+        :'account_id' => :'accountId',
+        :'ad_account_name' => :'adAccountName',
+        :'redirect_url' => :'redirectUrl'
       }
     end
 
@@ -64,8 +43,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'amount' => :'Float',
-        :'type' => :'String'
+        :'account_id' => :'String',
+        :'ad_account_name' => :'String',
+        :'redirect_url' => :'String'
       }
     end
 
@@ -79,24 +59,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdRequestBudget` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ConnectOpenAIAdsCredentials200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdRequestBudget`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ConnectOpenAIAdsCredentials200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'ad_account_name')
+        self.ad_account_name = attributes[:'ad_account_name']
+      end
+
+      if attributes.key?(:'redirect_url')
+        self.redirect_url = attributes[:'redirect_url']
       end
     end
 
@@ -112,19 +96,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
-      return false unless type_validator.valid?(@type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -132,8 +104,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          amount == o.amount &&
-          type == o.type
+          account_id == o.account_id &&
+          ad_account_name == o.ad_account_name &&
+          redirect_url == o.redirect_url
     end
 
     # @see the `==` method
@@ -145,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [amount, type].hash
+      [account_id, ad_account_name, redirect_url].hash
     end
 
     # Builds the object from hash

@@ -25,7 +25,7 @@ module Zernio
 
     attr_accessor :failures
 
-    # Platform trace ID for debugging. fbtrace_id for Meta, requestId for Google. Absent for LinkedIn (LinkedIn's conversionEvents endpoint does not surface a trace ID). 
+    # Platform trace ID for debugging. fbtrace_id for Meta, requestId for Google. Absent for LinkedIn (LinkedIn's conversionEvents endpoint does not surface a trace ID) and OpenAI Ads (no trace ID surfaced). 
     attr_accessor :trace_id
 
     class EnumAttributeValidator
@@ -139,7 +139,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      platform_validator = EnumAttributeValidator.new('String', ["metaads", "googleads", "linkedinads", "tiktokads"])
+      platform_validator = EnumAttributeValidator.new('String', ["metaads", "googleads", "linkedinads", "tiktokads", "openaiads"])
       return false unless platform_validator.valid?(@platform)
       true
     end
@@ -147,7 +147,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["metaads", "googleads", "linkedinads", "tiktokads"])
+      validator = EnumAttributeValidator.new('String', ["metaads", "googleads", "linkedinads", "tiktokads", "openaiads"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end

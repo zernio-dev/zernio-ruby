@@ -16,7 +16,7 @@ require 'time'
 module Zernio
   # A single conversion event to relay to the ad platform. All PII fields (email, phone, names) are hashed with SHA-256 server-side using each platform's normalization rules before they leave Zernio. Callers send plaintext. 
   class ConversionEvent < ApiModelBase
-    # Standard event name (Purchase, Lead, CompleteRegistration, AddToCart, InitiateCheckout, AddPaymentInfo, Subscribe, StartTrial, ViewContent, Search, Contact, SubmitApplication, Schedule) or a custom string (only supported on platforms that accept custom events — Meta).  Per-platform behavior: - Meta: free-form; standard names match Meta's built-ins. - Google: ignored — the conversion action's category determines the type. - LinkedIn: ignored — the conversion rule's `type` is locked to the destination. 
+    # Standard event name (Purchase, Lead, CompleteRegistration, AddToCart, InitiateCheckout, AddPaymentInfo, Subscribe, StartTrial, ViewContent, Search, Contact, SubmitApplication, Schedule) or a custom string (only supported on platforms that accept custom events — Meta and OpenAI Ads).  Per-platform behavior: - Meta: free-form; standard names match Meta's built-ins. - Google: ignored — the conversion action's category determines the type. - LinkedIn: ignored — the conversion rule's `type` is locked to the destination. - OpenAI Ads: a fixed subset of standard names (Purchase, Lead, AddToCart, ViewContent, InitiateCheckout, CompleteRegistration, Subscribe, StartTrial, Schedule) maps 1:1 onto OpenAI's own event-type enum; anything else is sent as a custom event with the name preserved. 
     attr_accessor :event_name
 
     # When the conversion happened, in unix seconds.

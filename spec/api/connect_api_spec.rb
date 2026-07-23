@@ -113,6 +113,18 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for connect_open_ai_ads_credentials
+  # Connect an OpenAI Ads account
+  # Connect an OpenAI Ads account using an API key from ChatGPT Ads Manager.  The key grants full campaign write access on OpenAI&#39;s side (OpenAI does not offer a read-only key scope). Zernio uses it to read ads and performance, and to create and manage campaigns you set up through Zernio (create, status, budget, and cancel). Campaigns created directly in ChatGPT Ads Manager can still be managed there. 
+  # @param connect_open_ai_ads_credentials_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ConnectOpenAIAdsCredentials200Response]
+  describe 'connect_open_ai_ads_credentials test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for connect_whats_app_credentials
   # Connect WhatsApp via credentials
   # Connect a WhatsApp Business Account by providing Meta credentials directly. This is the headless alternative to the Embedded Signup browser flow.  To get the required credentials: 1. Go to Meta Business Suite (business.facebook.com) 2. Create or select a WhatsApp Business Account 3. In Business Settings &gt; System Users, create a System User 4. Assign it the whatsapp_business_management and whatsapp_business_messaging permissions 5. Generate a permanent access token 6. Get the WABA ID from WhatsApp Manager &gt; Account Tools &gt; Phone Numbers 7. Get the Phone Number ID from the same page (click on the number) 

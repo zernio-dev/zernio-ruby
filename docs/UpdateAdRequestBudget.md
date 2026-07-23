@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **amount** | **Float** | Minimum varies by platform: TikTok&#x3D;$20, Pinterest&#x3D;$5, others&#x3D;$1 | [optional] |
-| **type** | **String** |  | [optional] |
+| **type** | **String** | OpenAI Ads accepts lifetime only; sending daily returns 422. | [optional] |
 
 ## Example
 
