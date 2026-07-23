@@ -1082,6 +1082,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Reply to the regulatory reviewer
+    # Post a free-text reply (with optional file attachments) to the reviewer on a number awaiting remediation — for asks the structured form can't express (e.g. \"is this personal or business?\"). Attachments are stored by us and their links are added to the reviewer's comment thread (the carrier's number order takes no loose files). A reply to a comment-style ask moves the number back to \"in review\"; a reply on a formal decline is supplementary and you must still resubmit the fix. Requires text or at least one attachment. 
+    # @param id [String] 
+    # @param reply_to_phone_number_reviewer_request [ReplyToPhoneNumberReviewerRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ReplyToPhoneNumberReviewer200Response]
+    def reply_to_phone_number_reviewer(id, reply_to_phone_number_reviewer_request, opts = {})
+      data, _status_code, _headers = reply_to_phone_number_reviewer_with_http_info(id, reply_to_phone_number_reviewer_request, opts)
+      data
+    end
+
+    # Reply to the regulatory reviewer
+    # Post a free-text reply (with optional file attachments) to the reviewer on a number awaiting remediation — for asks the structured form can&#39;t express (e.g. \&quot;is this personal or business?\&quot;). Attachments are stored by us and their links are added to the reviewer&#39;s comment thread (the carrier&#39;s number order takes no loose files). A reply to a comment-style ask moves the number back to \&quot;in review\&quot;; a reply on a formal decline is supplementary and you must still resubmit the fix. Requires text or at least one attachment. 
+    # @param id [String] 
+    # @param reply_to_phone_number_reviewer_request [ReplyToPhoneNumberReviewerRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ReplyToPhoneNumberReviewer200Response, Integer, Hash)>] ReplyToPhoneNumberReviewer200Response data, response status code and response headers
+    def reply_to_phone_number_reviewer_with_http_info(id, reply_to_phone_number_reviewer_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.reply_to_phone_number_reviewer ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling PhoneNumbersApi.reply_to_phone_number_reviewer"
+      end
+      # verify the required parameter 'reply_to_phone_number_reviewer_request' is set
+      if @api_client.config.client_side_validation && reply_to_phone_number_reviewer_request.nil?
+        fail ArgumentError, "Missing the required parameter 'reply_to_phone_number_reviewer_request' when calling PhoneNumbersApi.reply_to_phone_number_reviewer"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/{id}/remediate/reply'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(reply_to_phone_number_reviewer_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplyToPhoneNumberReviewer200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.reply_to_phone_number_reviewer",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#reply_to_phone_number_reviewer\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Pre-review a KYC packet
     # Advisory dry-run of a regulated-KYC packet before submitting: reviews the exact documents the regulator will see (referenced by the ids from POST /v1/phone-numbers/kyc/upload-document) against the declared values and address, and returns plain-language advisories for likely decline reasons (wrong document type, mismatched address, one-sided ID scans). Non-blocking: advisories are warnings, submitting anyway is always allowed, and any review failure degrades to an empty list. 
     # @param review_phone_number_kyc_packet_request [ReviewPhoneNumberKycPacketRequest] 

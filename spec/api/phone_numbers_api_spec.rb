@@ -227,6 +227,19 @@ describe 'PhoneNumbersApi' do
     end
   end
 
+  # unit tests for reply_to_phone_number_reviewer
+  # Reply to the regulatory reviewer
+  # Post a free-text reply (with optional file attachments) to the reviewer on a number awaiting remediation — for asks the structured form can&#39;t express (e.g. \&quot;is this personal or business?\&quot;). Attachments are stored by us and their links are added to the reviewer&#39;s comment thread (the carrier&#39;s number order takes no loose files). A reply to a comment-style ask moves the number back to \&quot;in review\&quot;; a reply on a formal decline is supplementary and you must still resubmit the fix. Requires text or at least one attachment. 
+  # @param id 
+  # @param reply_to_phone_number_reviewer_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ReplyToPhoneNumberReviewer200Response]
+  describe 'reply_to_phone_number_reviewer test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for review_phone_number_kyc_packet
   # Pre-review a KYC packet
   # Advisory dry-run of a regulated-KYC packet before submitting: reviews the exact documents the regulator will see (referenced by the ids from POST /v1/phone-numbers/kyc/upload-document) against the declared values and address, and returns plain-language advisories for likely decline reasons (wrong document type, mismatched address, one-sided ID scans). Non-blocking: advisories are warnings, submitting anyway is always allowed, and any review failure degrades to an empty list. 

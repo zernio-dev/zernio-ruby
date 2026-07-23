@@ -20,6 +20,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**purchase_phone_number**](PhoneNumbersApi.md#purchase_phone_number) | **POST** /v1/phone-numbers/purchase | Purchase phone number |
 | [**release_phone_number**](PhoneNumbersApi.md#release_phone_number) | **DELETE** /v1/phone-numbers/{id} | Release phone number |
 | [**remediate_phone_number**](PhoneNumbersApi.md#remediate_phone_number) | **POST** /v1/phone-numbers/{id}/remediate | Resubmit a declined number |
+| [**reply_to_phone_number_reviewer**](PhoneNumbersApi.md#reply_to_phone_number_reviewer) | **POST** /v1/phone-numbers/{id}/remediate/reply | Reply to the regulatory reviewer |
 | [**review_phone_number_kyc_packet**](PhoneNumbersApi.md#review_phone_number_kyc_packet) | **POST** /v1/phone-numbers/kyc/review-packet | Pre-review a KYC packet |
 | [**search_available_phone_numbers**](PhoneNumbersApi.md#search_available_phone_numbers) | **GET** /v1/phone-numbers/available | Search available numbers |
 | [**submit_phone_number_kyc**](PhoneNumbersApi.md#submit_phone_number_kyc) | **POST** /v1/phone-numbers/kyc | Submit KYC |
@@ -1134,6 +1135,77 @@ end
 ### Return type
 
 [**RemediatePhoneNumber200Response**](RemediatePhoneNumber200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## reply_to_phone_number_reviewer
+
+> <ReplyToPhoneNumberReviewer200Response> reply_to_phone_number_reviewer(id, reply_to_phone_number_reviewer_request)
+
+Reply to the regulatory reviewer
+
+Post a free-text reply (with optional file attachments) to the reviewer on a number awaiting remediation — for asks the structured form can't express (e.g. \"is this personal or business?\"). Attachments are stored by us and their links are added to the reviewer's comment thread (the carrier's number order takes no loose files). A reply to a comment-style ask moves the number back to \"in review\"; a reply on a formal decline is supplementary and you must still resubmit the fix. Requires text or at least one attachment. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+id = 'id_example' # String | 
+reply_to_phone_number_reviewer_request = Zernio::ReplyToPhoneNumberReviewerRequest.new # ReplyToPhoneNumberReviewerRequest | 
+
+begin
+  # Reply to the regulatory reviewer
+  result = api_instance.reply_to_phone_number_reviewer(id, reply_to_phone_number_reviewer_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->reply_to_phone_number_reviewer: #{e}"
+end
+```
+
+#### Using the reply_to_phone_number_reviewer_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ReplyToPhoneNumberReviewer200Response>, Integer, Hash)> reply_to_phone_number_reviewer_with_http_info(id, reply_to_phone_number_reviewer_request)
+
+```ruby
+begin
+  # Reply to the regulatory reviewer
+  data, status_code, headers = api_instance.reply_to_phone_number_reviewer_with_http_info(id, reply_to_phone_number_reviewer_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ReplyToPhoneNumberReviewer200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->reply_to_phone_number_reviewer_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+| **reply_to_phone_number_reviewer_request** | [**ReplyToPhoneNumberReviewerRequest**](ReplyToPhoneNumberReviewerRequest.md) |  |  |
+
+### Return type
+
+[**ReplyToPhoneNumberReviewer200Response**](ReplyToPhoneNumberReviewer200Response.md)
 
 ### Authorization
 
