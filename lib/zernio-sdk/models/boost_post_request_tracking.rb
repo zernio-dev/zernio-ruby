@@ -18,6 +18,7 @@ module Zernio
   class BoostPostRequestTracking < ApiModelBase
     attr_accessor :pixel_id
 
+    # URL parameters appended to the ad link, rendered as `key=value` pairs joined with `&`.
     attr_accessor :url_tags
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -42,7 +43,7 @@ module Zernio
     def self.openapi_types
       {
         :'pixel_id' => :'String',
-        :'url_tags' => :'String'
+        :'url_tags' => :'Array<BoostPostRequestTrackingUrlTagsInner>'
       }
     end
 
@@ -73,7 +74,9 @@ module Zernio
       end
 
       if attributes.key?(:'url_tags')
-        self.url_tags = attributes[:'url_tags']
+        if (value = attributes[:'url_tags']).is_a?(Array)
+          self.url_tags = value
+        end
       end
     end
 

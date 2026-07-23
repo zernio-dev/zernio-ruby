@@ -55,7 +55,7 @@ module Zernio
         :'type' => :'String',
         :'key' => :'String',
         :'label' => :'String',
-        :'options' => :'Array<CreateLeadFormRequestQuestionsInnerOptionsInner>',
+        :'options' => :'Array<BoostPostRequestTrackingUrlTagsInner>',
         :'inline_context' => :'String'
       }
     end

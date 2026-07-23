@@ -1,4 +1,4 @@
-# Zernio::CreateLeadFormRequestQuestionsInnerOptionsInner
+# Zernio::BoostPostRequestTrackingUrlTagsInner
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreateLeadFormRequestQuestionsInnerOptionsInner.new(
+instance = Zernio::BoostPostRequestTrackingUrlTagsInner.new(
   key: null,
   value: null
 )
