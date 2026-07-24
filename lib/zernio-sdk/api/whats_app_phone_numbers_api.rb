@@ -24,6 +24,7 @@ module Zernio
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :number_type Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type.
+    # @option opts [Boolean] :sms Pass true when the buyer wants SMS: availability, areas, and areaOptions then describe the SMS-capable pool (an SMS purchase orders from it), not the wider voice-only pool.
     # @return [CheckPhoneNumberAvailability200Response]
     def check_whats_app_number_availability(country, opts = {})
       data, _status_code, _headers = check_whats_app_number_availability_with_http_info(country, opts)
@@ -35,6 +36,7 @@ module Zernio
     # @param country [String] ISO-2 country code.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :number_type Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type.
+    # @option opts [Boolean] :sms Pass true when the buyer wants SMS: availability, areas, and areaOptions then describe the SMS-capable pool (an SMS purchase orders from it), not the wider voice-only pool.
     # @return [Array<(CheckPhoneNumberAvailability200Response, Integer, Hash)>] CheckPhoneNumberAvailability200Response data, response status code and response headers
     def check_whats_app_number_availability_with_http_info(country, opts = {})
       if @api_client.config.debugging
@@ -55,6 +57,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'country'] = country
       query_params[:'numberType'] = opts[:'number_type'] if !opts[:'number_type'].nil?
+      query_params[:'sms'] = opts[:'sms'] if !opts[:'sms'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

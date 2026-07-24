@@ -695,6 +695,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
  - [Zernio::CancelPhoneNumberPortIn200Response](docs/CancelPhoneNumberPortIn200Response.md)
  - [Zernio::CheckPhoneNumberAvailability200Response](docs/CheckPhoneNumberAvailability200Response.md)
+ - [Zernio::CheckPhoneNumberAvailability200ResponseAreaOptionsInner](docs/CheckPhoneNumberAvailability200ResponseAreaOptionsInner.md)
  - [Zernio::CheckPhoneNumberPortability200Response](docs/CheckPhoneNumberPortability200Response.md)
  - [Zernio::CheckPhoneNumberPortability200ResponseResultsInner](docs/CheckPhoneNumberPortability200ResponseResultsInner.md)
  - [Zernio::CheckPhoneNumberPortabilityRequest](docs/CheckPhoneNumberPortabilityRequest.md)

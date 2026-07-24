@@ -34,6 +34,9 @@ module Zernio
     # Legacy fallback for `reuseOptionId`: the source phone number (GET reusable.options[].fromPhoneNumber). Ambiguous when a number labels two verifications — prefer `reuseOptionId`. Omitted = the approved default. No match = 409.
     attr_accessor :reuse_from
 
+    # Area code (NDC) the number must be in. Hard constraint: an empty area pool fails with 409 code AREA_CODE_UNAVAILABLE instead of ordering from another area. Omit for any area. Options come from GET /v1/phone-numbers/availability (areaOptions); the purchase 202 kycUrl echoes the areaCode picked at purchase time so it can be passed here.
+    attr_accessor :area_code
+
     # End user's legal first name. Required when the country has an action/ID-verification (Onfido) requirement.
     attr_accessor :end_user_first_name
 
@@ -58,6 +61,7 @@ module Zernio
         :'reuse' => :'reuse',
         :'reuse_option_id' => :'reuseOptionId',
         :'reuse_from' => :'reuseFrom',
+        :'area_code' => :'areaCode',
         :'end_user_first_name' => :'endUserFirstName',
         :'end_user_last_name' => :'endUserLastName',
         :'values' => :'values',
@@ -86,6 +90,7 @@ module Zernio
         :'reuse' => :'Boolean',
         :'reuse_option_id' => :'String',
         :'reuse_from' => :'String',
+        :'area_code' => :'String',
         :'end_user_first_name' => :'String',
         :'end_user_last_name' => :'String',
         :'values' => :'Hash<String, String>',
@@ -150,6 +155,10 @@ module Zernio
         self.reuse_from = attributes[:'reuse_from']
       end
 
+      if attributes.key?(:'area_code')
+        self.area_code = attributes[:'area_code']
+      end
+
       if attributes.key?(:'end_user_first_name')
         self.end_user_first_name = attributes[:'end_user_first_name']
       end
@@ -196,6 +205,11 @@ module Zernio
         invalid_properties.push('invalid value for "quantity", must be greater than or equal to 1.')
       end
 
+      pattern = Regexp.new(/^\d{1,4}$/)
+      if !@area_code.nil? && @area_code !~ pattern
+        invalid_properties.push("invalid value for \"area_code\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -207,6 +221,7 @@ module Zernio
       return false if @country.nil?
       return false if !@quantity.nil? && @quantity > 5
       return false if !@quantity.nil? && @quantity < 1
+      return false if !@area_code.nil? && @area_code !~ Regexp.new(/^\d{1,4}$/)
       true
     end
 
@@ -248,6 +263,21 @@ module Zernio
       @quantity = quantity
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] area_code Value to be assigned
+    def area_code=(area_code)
+      if area_code.nil?
+        fail ArgumentError, 'area_code cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d{1,4}$/)
+      if area_code !~ pattern
+        fail ArgumentError, "invalid value for \"area_code\", must conform to the pattern #{pattern}."
+      end
+
+      @area_code = area_code
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -260,6 +290,7 @@ module Zernio
           reuse == o.reuse &&
           reuse_option_id == o.reuse_option_id &&
           reuse_from == o.reuse_from &&
+          area_code == o.area_code &&
           end_user_first_name == o.end_user_first_name &&
           end_user_last_name == o.end_user_last_name &&
           values == o.values &&
@@ -276,7 +307,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, submission_id, quantity, reuse, reuse_option_id, reuse_from, end_user_first_name, end_user_last_name, values, documents, address].hash
+      [profile_id, country, submission_id, quantity, reuse, reuse_option_id, reuse_from, area_code, end_user_first_name, end_user_last_name, values, documents, address].hash
     end
 
     # Builds the object from hash

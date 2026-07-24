@@ -36,7 +36,7 @@ describe Zernio::PurchasePhoneNumber409Response do
   describe 'test attribute "code"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PURCHASE_VELOCITY"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PURCHASE_VELOCITY", "AREA_CODE_UNAVAILABLE"])
       # validator.allowable_values.each do |value|
       #   expect { instance.code = value }.not_to raise_error
       # end

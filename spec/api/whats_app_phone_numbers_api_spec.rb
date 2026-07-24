@@ -38,6 +38,7 @@ describe 'WhatsAppPhoneNumbersApi' do
   # @param country ISO-2 country code.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :number_type Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type.
+  # @option opts [Boolean] :sms Pass true when the buyer wants SMS: availability, areas, and areaOptions then describe the SMS-capable pool (an SMS purchase orders from it), not the wider voice-only pool.
   # @return [CheckPhoneNumberAvailability200Response]
   describe 'check_whats_app_number_availability test' do
     it 'should work' do

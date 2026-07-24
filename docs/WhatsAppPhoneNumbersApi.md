@@ -43,7 +43,8 @@ end
 api_instance = Zernio::WhatsAppPhoneNumbersApi.new
 country = 'country_example' # String | ISO-2 country code.
 opts = {
-  number_type: 'local' # String | Check a specific offered type (stock and address constraints are per type). Omitted = the country's default type.
+  number_type: 'local', # String | Check a specific offered type (stock and address constraints are per type). Omitted = the country's default type.
+  sms: true # Boolean | Pass true when the buyer wants SMS: availability, areas, and areaOptions then describe the SMS-capable pool (an SMS purchase orders from it), not the wider voice-only pool.
 }
 
 begin
@@ -79,6 +80,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **country** | **String** | ISO-2 country code. |  |
 | **number_type** | **String** | Check a specific offered type (stock and address constraints are per type). Omitted &#x3D; the country&#39;s default type. | [optional] |
+| **sms** | **Boolean** | Pass true when the buyer wants SMS: availability, areas, and areaOptions then describe the SMS-capable pool (an SMS purchase orders from it), not the wider voice-only pool. | [optional] |
 
 ### Return type
 

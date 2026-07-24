@@ -20,6 +20,9 @@ module Zernio
     # ISO 3166-1 alpha-2 country code (must be a regulated/KYC country).
     attr_accessor :country
 
+    # Area code (NDC) the eventual number must be in. Hard constraint carried by the link; the end customer filling the form makes no area choice. Options come from GET /v1/phone-numbers/availability (areaOptions).
+    attr_accessor :area_code
+
     attr_accessor :branding
 
     # Where to send the end customer's browser after a successful submit. On completion Zernio appends `kyc=submitted` and `country=<ISO-2>` as query params. When omitted, the hosted page shows a built-in confirmation screen instead. 
@@ -30,6 +33,7 @@ module Zernio
       {
         :'profile_id' => :'profileId',
         :'country' => :'country',
+        :'area_code' => :'areaCode',
         :'branding' => :'branding',
         :'redirect_url' => :'redirect_url'
       }
@@ -50,6 +54,7 @@ module Zernio
       {
         :'profile_id' => :'String',
         :'country' => :'String',
+        :'area_code' => :'String',
         :'branding' => :'CreatePhoneNumberKycLinkRequestBranding',
         :'redirect_url' => :'String'
       }
@@ -89,6 +94,10 @@ module Zernio
         self.country = nil
       end
 
+      if attributes.key?(:'area_code')
+        self.area_code = attributes[:'area_code']
+      end
+
       if attributes.key?(:'branding')
         self.branding = attributes[:'branding']
       end
@@ -119,6 +128,11 @@ module Zernio
         invalid_properties.push('invalid value for "country", the character length must be greater than or equal to 2.')
       end
 
+      pattern = Regexp.new(/^\d{1,4}$/)
+      if !@area_code.nil? && @area_code !~ pattern
+        invalid_properties.push("invalid value for \"area_code\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -130,6 +144,7 @@ module Zernio
       return false if @country.nil?
       return false if @country.to_s.length > 2
       return false if @country.to_s.length < 2
+      return false if !@area_code.nil? && @area_code !~ Regexp.new(/^\d{1,4}$/)
       true
     end
 
@@ -161,6 +176,21 @@ module Zernio
       @country = country
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] area_code Value to be assigned
+    def area_code=(area_code)
+      if area_code.nil?
+        fail ArgumentError, 'area_code cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d{1,4}$/)
+      if area_code !~ pattern
+        fail ArgumentError, "invalid value for \"area_code\", must conform to the pattern #{pattern}."
+      end
+
+      @area_code = area_code
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -168,6 +198,7 @@ module Zernio
       self.class == o.class &&
           profile_id == o.profile_id &&
           country == o.country &&
+          area_code == o.area_code &&
           branding == o.branding &&
           redirect_url == o.redirect_url
     end
@@ -181,7 +212,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, branding, redirect_url].hash
+      [profile_id, country, area_code, branding, redirect_url].hash
     end
 
     # Builds the object from hash

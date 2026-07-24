@@ -69,6 +69,12 @@ describe Zernio::SubmitPhoneNumberKycRequest do
     end
   end
 
+  describe 'test attribute "area_code"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "end_user_first_name"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

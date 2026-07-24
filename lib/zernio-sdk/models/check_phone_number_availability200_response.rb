@@ -27,6 +27,9 @@ module Zernio
     # For `geo` only — the area(s) the registered address must be in.
     attr_accessor :areas
 
+    # Live inventory grouped by area code, largest stock first. Empty when out of stock (or the area lookup failed). Pass a chosen `ndc` as `areaCode` on POST /v1/phone-numbers/purchase (or on the KYC submit for regulated countries) to require that area. 
+    attr_accessor :area_options
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -56,7 +59,8 @@ module Zernio
         :'number_type' => :'numberType',
         :'available' => :'available',
         :'address_constraint' => :'addressConstraint',
-        :'areas' => :'areas'
+        :'areas' => :'areas',
+        :'area_options' => :'areaOptions'
       }
     end
 
@@ -77,7 +81,8 @@ module Zernio
         :'number_type' => :'String',
         :'available' => :'Boolean',
         :'address_constraint' => :'String',
-        :'areas' => :'Array<String>'
+        :'areas' => :'Array<String>',
+        :'area_options' => :'Array<CheckPhoneNumberAvailability200ResponseAreaOptionsInner>'
       }
     end
 
@@ -124,6 +129,12 @@ module Zernio
           self.areas = value
         end
       end
+
+      if attributes.key?(:'area_options')
+        if (value = attributes[:'area_options']).is_a?(Array)
+          self.area_options = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -162,7 +173,8 @@ module Zernio
           number_type == o.number_type &&
           available == o.available &&
           address_constraint == o.address_constraint &&
-          areas == o.areas
+          areas == o.areas &&
+          area_options == o.area_options
     end
 
     # @see the `==` method
@@ -174,7 +186,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country, number_type, available, address_constraint, areas].hash
+      [country, number_type, available, address_constraint, areas, area_options].hash
     end
 
     # Builds the object from hash

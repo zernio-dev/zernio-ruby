@@ -14,38 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class PurchasePhoneNumber409Response < ApiModelBase
-    attr_accessor :error
+  class CheckPhoneNumberAvailability200ResponseAreaOptionsInner < ApiModelBase
+    # Area code (national destination code), e.g. \"11\".
+    attr_accessor :ndc
 
-    attr_accessor :code
+    # Human-readable area name, e.g. \"Sao Paulo\".
+    attr_accessor :name
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Deliverable numbers seen in this area on the latest inventory page.
+    attr_accessor :count
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error',
-        :'code' => :'code'
+        :'ndc' => :'ndc',
+        :'name' => :'name',
+        :'count' => :'count'
       }
     end
 
@@ -62,8 +46,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'String',
-        :'code' => :'String'
+        :'ndc' => :'String',
+        :'name' => :'String',
+        :'count' => :'Integer'
       }
     end
 
@@ -77,24 +62,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchasePhoneNumber409Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CheckPhoneNumberAvailability200ResponseAreaOptionsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchasePhoneNumber409Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CheckPhoneNumberAvailability200ResponseAreaOptionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.key?(:'ndc')
+        self.ndc = attributes[:'ndc']
       end
 
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'count')
+        self.count = attributes[:'count']
       end
     end
 
@@ -110,19 +99,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["PURCHASE_VELOCITY", "AREA_CODE_UNAVAILABLE"])
-      return false unless code_validator.valid?(@code)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] code Object to be assigned
-    def code=(code)
-      validator = EnumAttributeValidator.new('String', ["PURCHASE_VELOCITY", "AREA_CODE_UNAVAILABLE"])
-      unless validator.valid?(code)
-        fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
-      end
-      @code = code
     end
 
     # Checks equality by comparing each attribute.
@@ -130,8 +107,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error &&
-          code == o.code
+          ndc == o.ndc &&
+          name == o.name &&
+          count == o.count
     end
 
     # @see the `==` method
@@ -143,7 +121,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, code].hash
+      [ndc, name, count].hash
     end
 
     # Builds the object from hash
