@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Webhook payload for message sent events (fired when a message is sent via the API)
+  # Webhook payload for message sent events (fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers)
   class WebhookPayloadMessageSent < ApiModelBase
     # Stable webhook event ID
     attr_accessor :id

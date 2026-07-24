@@ -1142,7 +1142,7 @@ module Zernio
     end
 
     # Message sent event
-    # Fired when a message is sent via the API.
+    # Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers.
     # @param webhook_payload_message_sent [WebhookPayloadMessageSent] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -1152,7 +1152,7 @@ module Zernio
     end
 
     # Message sent event
-    # Fired when a message is sent via the API.
+    # Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers.
     # @param webhook_payload_message_sent [WebhookPayloadMessageSent] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

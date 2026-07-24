@@ -95,4 +95,14 @@ describe Zernio::WebhookPayloadMessageSentMessage do
     end
   end
 
+  describe 'test attribute "source"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["whatsapp_business_app", "cloud_api"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.source = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

@@ -39,6 +39,9 @@ module Zernio
 
     attr_accessor :is_read
 
+    # WhatsApp send origin. whatsapp_business_app when sent from the WhatsApp Business phone app on a Coexistence number; cloud_api when sent through Zernio (dashboard, API, or broadcasts). Absent on non-WhatsApp platforms. This is not the inbox metadata.source lineage field.
+    attr_accessor :source
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -73,7 +76,8 @@ module Zernio
         :'attachments' => :'attachments',
         :'sender' => :'sender',
         :'sent_at' => :'sentAt',
-        :'is_read' => :'isRead'
+        :'is_read' => :'isRead',
+        :'source' => :'source'
       }
     end
 
@@ -99,7 +103,8 @@ module Zernio
         :'attachments' => :'Array<WebhookPayloadMessageSentMessageAttachmentsInner>',
         :'sender' => :'WebhookPayloadMessageSentMessageSender',
         :'sent_at' => :'Time',
-        :'is_read' => :'Boolean'
+        :'is_read' => :'Boolean',
+        :'source' => :'String'
       }
     end
 
@@ -187,6 +192,10 @@ module Zernio
       else
         self.is_read = nil
       end
+
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -250,6 +259,8 @@ module Zernio
       return false if @sender.nil?
       return false if @sent_at.nil?
       return false if @is_read.nil?
+      source_validator = EnumAttributeValidator.new('String', ["whatsapp_business_app", "cloud_api"])
+      return false unless source_validator.valid?(@source)
       true
     end
 
@@ -343,6 +354,16 @@ module Zernio
       @is_read = is_read
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source Object to be assigned
+    def source=(source)
+      validator = EnumAttributeValidator.new('String', ["whatsapp_business_app", "cloud_api"])
+      unless validator.valid?(source)
+        fail ArgumentError, "invalid value for \"source\", must be one of #{validator.allowable_values}."
+      end
+      @source = source
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -357,7 +378,8 @@ module Zernio
           attachments == o.attachments &&
           sender == o.sender &&
           sent_at == o.sent_at &&
-          is_read == o.is_read
+          is_read == o.is_read &&
+          source == o.source
     end
 
     # @see the `==` method
@@ -369,7 +391,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, conversation_id, platform, platform_message_id, direction, text, attachments, sender, sent_at, is_read].hash
+      [id, conversation_id, platform, platform_message_id, direction, text, attachments, sender, sent_at, is_read, source].hash
     end
 
     # Builds the object from hash

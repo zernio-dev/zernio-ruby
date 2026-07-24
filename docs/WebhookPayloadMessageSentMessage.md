@@ -14,6 +14,7 @@
 | **sender** | [**WebhookPayloadMessageSentMessageSender**](WebhookPayloadMessageSentMessageSender.md) |  |  |
 | **sent_at** | **Time** |  |  |
 | **is_read** | **Boolean** |  |  |
+| **source** | **String** | WhatsApp send origin. whatsapp_business_app when sent from the WhatsApp Business phone app on a Coexistence number; cloud_api when sent through Zernio (dashboard, API, or broadcasts). Absent on non-WhatsApp platforms. This is not the inbox metadata.source lineage field. | [optional] |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = Zernio::WebhookPayloadMessageSentMessage.new(
   attachments: null,
   sender: null,
   sent_at: null,
-  is_read: null
+  is_read: null,
+  source: null
 )
 ```
 
