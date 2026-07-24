@@ -96,6 +96,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@phones.nil? && @phones.length > 20000
+        invalid_properties.push('invalid value for "phones", number of items must be less than or equal to 20000.')
+      end
+
       invalid_properties
     end
 
@@ -103,7 +107,22 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@phones.nil? && @phones.length > 20000
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] phones Value to be assigned
+    def phones=(phones)
+      if phones.nil?
+        fail ArgumentError, 'phones cannot be nil'
+      end
+
+      if phones.length > 20000
+        fail ArgumentError, 'invalid value for "phones", number of items must be less than or equal to 20000.'
+      end
+
+      @phones = phones
     end
 
     # Checks equality by comparing each attribute.
