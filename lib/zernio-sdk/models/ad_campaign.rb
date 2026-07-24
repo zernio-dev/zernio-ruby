@@ -24,7 +24,6 @@ module Zernio
     # Delivery status derived from child ad statuses. Distinct from `reviewStatus`.
     attr_accessor :status
 
-    # Platform-side review state of the campaign. See AdTreeCampaign.reviewStatus for the full description.
     attr_accessor :review_status
 
     # Raw platform-level campaign status (Meta `effective_status`).
@@ -154,7 +153,7 @@ module Zernio
         :'platform' => :'String',
         :'campaign_name' => :'String',
         :'status' => :'AdStatus',
-        :'review_status' => :'String',
+        :'review_status' => :'AdReviewStatus',
         :'platform_campaign_status' => :'String',
         :'campaign_issues_info' => :'Array<Object>',
         :'ad_count' => :'Integer',
@@ -341,8 +340,6 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"])
       return false unless platform_validator.valid?(@platform)
-      review_status_validator = EnumAttributeValidator.new('String', ["in_review", "approved", "rejected", "with_issues"])
-      return false unless review_status_validator.valid?(@review_status)
       budget_level_validator = EnumAttributeValidator.new('String', ["campaign", "adset"])
       return false unless budget_level_validator.valid?(@budget_level)
       true
@@ -356,16 +353,6 @@ module Zernio
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] review_status Object to be assigned
-    def review_status=(review_status)
-      validator = EnumAttributeValidator.new('String', ["in_review", "approved", "rejected", "with_issues"])
-      unless validator.valid?(review_status)
-        fail ArgumentError, "invalid value for \"review_status\", must be one of #{validator.allowable_values}."
-      end
-      @review_status = review_status
     end
 
     # Custom attribute writer method checking allowed values (enum).

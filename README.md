@@ -604,6 +604,7 @@ Class | Method | HTTP request | Description
  - [Zernio::AdDailyMetrics](docs/AdDailyMetrics.md)
  - [Zernio::AdMetrics](docs/AdMetrics.md)
  - [Zernio::AdPromotedObject](docs/AdPromotedObject.md)
+ - [Zernio::AdReviewStatus](docs/AdReviewStatus.md)
  - [Zernio::AdSchedule](docs/AdSchedule.md)
  - [Zernio::AdStatus](docs/AdStatus.md)
  - [Zernio::AdTreeAdSet](docs/AdTreeAdSet.md)

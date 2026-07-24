@@ -30,6 +30,7 @@ docs/AdDailyMetrics.md
 docs/AdInsightsApi.md
 docs/AdMetrics.md
 docs/AdPromotedObject.md
+docs/AdReviewStatus.md
 docs/AdSchedule.md
 docs/AdStatus.md
 docs/AdTargetingApi.md
@@ -1649,6 +1650,7 @@ lib/zernio-sdk/models/ad_creative.rb
 lib/zernio-sdk/models/ad_daily_metrics.rb
 lib/zernio-sdk/models/ad_metrics.rb
 lib/zernio-sdk/models/ad_promoted_object.rb
+lib/zernio-sdk/models/ad_review_status.rb
 lib/zernio-sdk/models/ad_schedule.rb
 lib/zernio-sdk/models/ad_status.rb
 lib/zernio-sdk/models/ad_tree_ad_set.rb
@@ -3207,6 +3209,7 @@ spec/models/ad_creative_spec.rb
 spec/models/ad_daily_metrics_spec.rb
 spec/models/ad_metrics_spec.rb
 spec/models/ad_promoted_object_spec.rb
+spec/models/ad_review_status_spec.rb
 spec/models/ad_schedule_spec.rb
 spec/models/ad_spec.rb
 spec/models/ad_status_spec.rb

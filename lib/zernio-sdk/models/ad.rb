@@ -21,7 +21,14 @@ module Zernio
 
     attr_accessor :platform
 
+    # Delivery status. Derived from the platform `effective_status`, so it inherits ancestor pauses (an ACTIVE ad under a PAUSED campaign reads `paused`). For the ad's own on/off toggle use `configuredStatus`; for the review state use `reviewStatus`.
     attr_accessor :status
+
+    # The ad's own on/off toggle as configured on the platform (Meta `configured_status`: ACTIVE / PAUSED), unaffected by ancestor (ad set / campaign) pauses. Distinct from `status`, which is the ancestor-cascaded delivery status. Only present for Meta ads synced after this field was added.
+    attr_accessor :configured_status
+
+    # Platform review state of this ad, independent of delivery `status` / `configuredStatus`. Absent when the platform reports no review signal.
+    attr_accessor :review_status
 
     attr_accessor :ad_type
 
@@ -111,6 +118,8 @@ module Zernio
         :'name' => :'name',
         :'platform' => :'platform',
         :'status' => :'status',
+        :'configured_status' => :'configuredStatus',
+        :'review_status' => :'reviewStatus',
         :'ad_type' => :'adType',
         :'goal' => :'goal',
         :'is_external' => :'isExternal',
@@ -156,6 +165,8 @@ module Zernio
         :'name' => :'String',
         :'platform' => :'String',
         :'status' => :'AdStatus',
+        :'configured_status' => :'String',
+        :'review_status' => :'AdReviewStatus',
         :'ad_type' => :'String',
         :'goal' => :'String',
         :'is_external' => :'Boolean',
@@ -187,6 +198,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'configured_status',
         :'metrics',
         :'platform_objective',
         :'optimization_goal',
@@ -228,6 +240,14 @@ module Zernio
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'configured_status')
+        self.configured_status = attributes[:'configured_status']
+      end
+
+      if attributes.key?(:'review_status')
+        self.review_status = attributes[:'review_status']
       end
 
       if attributes.key?(:'ad_type')
@@ -391,6 +411,8 @@ module Zernio
           name == o.name &&
           platform == o.platform &&
           status == o.status &&
+          configured_status == o.configured_status &&
+          review_status == o.review_status &&
           ad_type == o.ad_type &&
           goal == o.goal &&
           is_external == o.is_external &&
@@ -427,7 +449,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, platform, status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, platform_ad_account_name, platform_created_at, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
+      [_id, name, platform, status, configured_status, review_status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, platform_ad_account_name, platform_created_at, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
     end
 
     # Builds the object from hash

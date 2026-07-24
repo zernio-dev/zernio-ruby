@@ -8,7 +8,7 @@
 | **platform** | **String** |  | [optional] |
 | **campaign_name** | **String** |  | [optional] |
 | **status** | [**AdStatus**](AdStatus.md) | Delivery status derived from child ad statuses. Distinct from &#x60;reviewStatus&#x60;. | [optional] |
-| **review_status** | **String** | Platform-side review state of the campaign. See AdTreeCampaign.reviewStatus for the full description. | [optional] |
+| **review_status** | [**AdReviewStatus**](AdReviewStatus.md) |  | [optional] |
 | **platform_campaign_status** | **String** | Raw platform-level campaign status (Meta &#x60;effective_status&#x60;). | [optional] |
 | **campaign_issues_info** | **Array&lt;Object&gt;** | Platform-reported campaign issues (Meta &#x60;issues_info[]&#x60;). | [optional] |
 | **ad_count** | **Integer** |  | [optional] |
