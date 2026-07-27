@@ -17,6 +17,9 @@ module Zernio
   class ValidatePostRequestPlatformsInner < ApiModelBase
     attr_accessor :platform
 
+    # Account to validate against. For twitter, resolves X Premium status to apply the 25000 character limit instead of 280.
+    attr_accessor :account_id
+
     attr_accessor :custom_content
 
     attr_accessor :platform_specific_data
@@ -49,6 +52,7 @@ module Zernio
     def self.attribute_map
       {
         :'platform' => :'platform',
+        :'account_id' => :'accountId',
         :'custom_content' => :'customContent',
         :'platform_specific_data' => :'platformSpecificData',
         :'custom_media' => :'customMedia'
@@ -69,6 +73,7 @@ module Zernio
     def self.openapi_types
       {
         :'platform' => :'String',
+        :'account_id' => :'String',
         :'custom_content' => :'String',
         :'platform_specific_data' => :'Object',
         :'custom_media' => :'Array<MediaItem>'
@@ -101,6 +106,10 @@ module Zernio
         self.platform = attributes[:'platform']
       else
         self.platform = nil
+      end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
       if attributes.key?(:'custom_content')
@@ -156,6 +165,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           platform == o.platform &&
+          account_id == o.account_id &&
           custom_content == o.custom_content &&
           platform_specific_data == o.platform_specific_data &&
           custom_media == o.custom_media
@@ -170,7 +180,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, custom_content, platform_specific_data, custom_media].hash
+      [platform, account_id, custom_content, platform_specific_data, custom_media].hash
     end
 
     # Builds the object from hash
