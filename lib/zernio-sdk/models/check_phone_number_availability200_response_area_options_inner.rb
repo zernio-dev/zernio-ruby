@@ -18,10 +18,10 @@ module Zernio
     # Area code (national destination code), e.g. \"11\".
     attr_accessor :ndc
 
-    # Human-readable area name, e.g. \"Sao Paulo\".
+    # Area name: state/province for US/CA (e.g. \"Minnesota\"), city otherwise (e.g. \"Sao Paulo\").
     attr_accessor :name
 
-    # Deliverable numbers seen in this area on the latest inventory page.
+    # Numbers available in this area: country-wide count for US/CA, numbers seen on the latest inventory page otherwise.
     attr_accessor :count
 
     # Attribute mapping from ruby-style variable name to JSON key.
