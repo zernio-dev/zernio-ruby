@@ -14,52 +14,63 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateLeadFormRequest < ApiModelBase
-    attr_accessor :account_id
-
-    attr_accessor :name
-
-    # Deprecated (Meta legacy shape): use platformSpecificData.questions.
+  class MetaLeadFormPlatformData < ApiModelBase
     attr_accessor :questions
 
-    attr_accessor :privacy_policy_url
-
-    # Deprecated: use platformSpecificData.privacyPolicyLinkText.
     attr_accessor :privacy_policy_link_text
 
-    # Deprecated: use platformSpecificData.followUpActionUrl.
     attr_accessor :follow_up_action_url
 
-    # Deprecated: use platformSpecificData.locale.
     attr_accessor :locale
 
-    # Deprecated: use platformSpecificData.thankYouTitle.
     attr_accessor :thank_you_title
 
-    # Deprecated: use platformSpecificData.thankYouBody.
     attr_accessor :thank_you_body
 
-    # Deprecated: use platformSpecificData.thankYouButtonText.
     attr_accessor :thank_you_button_text
 
-    # Deprecated: use platformSpecificData.thankYouButtonType.
     attr_accessor :thank_you_button_type
 
-    # Deprecated: use platformSpecificData.thankYouWebsiteUrl.
     attr_accessor :thank_you_website_url
 
-    # Deprecated: use platformSpecificData.isOptimizedForQuality.
     attr_accessor :is_optimized_for_quality
 
-    attr_accessor :platform_specific_data
+    attr_accessor :form_type
+
+    attr_accessor :block_display_for_non_targeted_viewer
+
+    attr_accessor :allow_organic_lead_gen
+
+    attr_accessor :question_page_custom_headline
+
+    attr_accessor :context_card
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
-        :'name' => :'name',
         :'questions' => :'questions',
-        :'privacy_policy_url' => :'privacyPolicyUrl',
         :'privacy_policy_link_text' => :'privacyPolicyLinkText',
         :'follow_up_action_url' => :'followUpActionUrl',
         :'locale' => :'locale',
@@ -69,7 +80,11 @@ module Zernio
         :'thank_you_button_type' => :'thankYouButtonType',
         :'thank_you_website_url' => :'thankYouWebsiteUrl',
         :'is_optimized_for_quality' => :'isOptimizedForQuality',
-        :'platform_specific_data' => :'platformSpecificData'
+        :'form_type' => :'formType',
+        :'block_display_for_non_targeted_viewer' => :'blockDisplayForNonTargetedViewer',
+        :'allow_organic_lead_gen' => :'allowOrganicLeadGen',
+        :'question_page_custom_headline' => :'questionPageCustomHeadline',
+        :'context_card' => :'contextCard'
       }
     end
 
@@ -86,10 +101,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
-        :'name' => :'String',
         :'questions' => :'Array<CreateLeadFormRequestQuestionsInner>',
-        :'privacy_policy_url' => :'String',
         :'privacy_policy_link_text' => :'String',
         :'follow_up_action_url' => :'String',
         :'locale' => :'String',
@@ -99,7 +111,11 @@ module Zernio
         :'thank_you_button_type' => :'String',
         :'thank_you_website_url' => :'String',
         :'is_optimized_for_quality' => :'Boolean',
-        :'platform_specific_data' => :'CreateLeadFormRequestPlatformSpecificData'
+        :'form_type' => :'String',
+        :'block_display_for_non_targeted_viewer' => :'Boolean',
+        :'allow_organic_lead_gen' => :'Boolean',
+        :'question_page_custom_headline' => :'String',
+        :'context_card' => :'MetaLeadFormPlatformDataContextCard'
       }
     end
 
@@ -113,40 +129,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateLeadFormRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::MetaLeadFormPlatformData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateLeadFormRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::MetaLeadFormPlatformData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      else
-        self.account_id = nil
-      end
-
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      else
-        self.name = nil
-      end
 
       if attributes.key?(:'questions')
         if (value = attributes[:'questions']).is_a?(Array)
           self.questions = value
         end
-      end
-
-      if attributes.key?(:'privacy_policy_url')
-        self.privacy_policy_url = attributes[:'privacy_policy_url']
       else
-        self.privacy_policy_url = nil
+        self.questions = nil
       end
 
       if attributes.key?(:'privacy_policy_link_text')
@@ -185,8 +185,24 @@ module Zernio
         self.is_optimized_for_quality = attributes[:'is_optimized_for_quality']
       end
 
-      if attributes.key?(:'platform_specific_data')
-        self.platform_specific_data = attributes[:'platform_specific_data']
+      if attributes.key?(:'form_type')
+        self.form_type = attributes[:'form_type']
+      end
+
+      if attributes.key?(:'block_display_for_non_targeted_viewer')
+        self.block_display_for_non_targeted_viewer = attributes[:'block_display_for_non_targeted_viewer']
+      end
+
+      if attributes.key?(:'allow_organic_lead_gen')
+        self.allow_organic_lead_gen = attributes[:'allow_organic_lead_gen']
+      end
+
+      if attributes.key?(:'question_page_custom_headline')
+        self.question_page_custom_headline = attributes[:'question_page_custom_headline']
+      end
+
+      if attributes.key?(:'context_card')
+        self.context_card = attributes[:'context_card']
       end
     end
 
@@ -195,24 +211,12 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      if @questions.nil?
+        invalid_properties.push('invalid value for "questions", questions cannot be nil.')
       end
 
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @name.to_s.length > 200
-        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 200.')
-      end
-
-      if !@questions.nil? && @questions.length < 1
+      if @questions.length < 1
         invalid_properties.push('invalid value for "questions", number of items must be greater than or equal to 1.')
-      end
-
-      if @privacy_policy_url.nil?
-        invalid_properties.push('invalid value for "privacy_policy_url", privacy_policy_url cannot be nil.')
       end
 
       if !@privacy_policy_link_text.nil? && @privacy_policy_link_text.to_s.length > 70
@@ -226,37 +230,12 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
-      return false if @name.nil?
-      return false if @name.to_s.length > 200
-      return false if !@questions.nil? && @questions.length < 1
-      return false if @privacy_policy_url.nil?
+      return false if @questions.nil?
+      return false if @questions.length < 1
       return false if !@privacy_policy_link_text.nil? && @privacy_policy_link_text.to_s.length > 70
+      form_type_validator = EnumAttributeValidator.new('String', ["MORE_VOLUME", "HIGHER_INTENT", "RICH_CREATIVE"])
+      return false unless form_type_validator.valid?(@form_type)
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
-      end
-
-      @account_id = account_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      if name.to_s.length > 200
-        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 200.'
-      end
-
-      @name = name
     end
 
     # Custom attribute writer method with validation
@@ -274,16 +253,6 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] privacy_policy_url Value to be assigned
-    def privacy_policy_url=(privacy_policy_url)
-      if privacy_policy_url.nil?
-        fail ArgumentError, 'privacy_policy_url cannot be nil'
-      end
-
-      @privacy_policy_url = privacy_policy_url
-    end
-
-    # Custom attribute writer method with validation
     # @param [Object] privacy_policy_link_text Value to be assigned
     def privacy_policy_link_text=(privacy_policy_link_text)
       if privacy_policy_link_text.nil?
@@ -297,15 +266,22 @@ module Zernio
       @privacy_policy_link_text = privacy_policy_link_text
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] form_type Object to be assigned
+    def form_type=(form_type)
+      validator = EnumAttributeValidator.new('String', ["MORE_VOLUME", "HIGHER_INTENT", "RICH_CREATIVE"])
+      unless validator.valid?(form_type)
+        fail ArgumentError, "invalid value for \"form_type\", must be one of #{validator.allowable_values}."
+      end
+      @form_type = form_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          name == o.name &&
           questions == o.questions &&
-          privacy_policy_url == o.privacy_policy_url &&
           privacy_policy_link_text == o.privacy_policy_link_text &&
           follow_up_action_url == o.follow_up_action_url &&
           locale == o.locale &&
@@ -315,7 +291,11 @@ module Zernio
           thank_you_button_type == o.thank_you_button_type &&
           thank_you_website_url == o.thank_you_website_url &&
           is_optimized_for_quality == o.is_optimized_for_quality &&
-          platform_specific_data == o.platform_specific_data
+          form_type == o.form_type &&
+          block_display_for_non_targeted_viewer == o.block_display_for_non_targeted_viewer &&
+          allow_organic_lead_gen == o.allow_organic_lead_gen &&
+          question_page_custom_headline == o.question_page_custom_headline &&
+          context_card == o.context_card
     end
 
     # @see the `==` method
@@ -327,7 +307,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, name, questions, privacy_policy_url, privacy_policy_link_text, follow_up_action_url, locale, thank_you_title, thank_you_body, thank_you_button_text, thank_you_button_type, thank_you_website_url, is_optimized_for_quality, platform_specific_data].hash
+      [questions, privacy_policy_link_text, follow_up_action_url, locale, thank_you_title, thank_you_body, thank_you_button_text, thank_you_button_type, thank_you_website_url, is_optimized_for_quality, form_type, block_display_for_non_targeted_viewer, allow_organic_lead_gen, question_page_custom_headline, context_card].hash
     end
 
     # Builds the object from hash

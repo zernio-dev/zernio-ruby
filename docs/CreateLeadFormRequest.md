@@ -6,17 +6,18 @@
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
 | **name** | **String** |  |  |
-| **questions** | [**Array&lt;CreateLeadFormRequestQuestionsInner&gt;**](CreateLeadFormRequestQuestionsInner.md) |  |  |
+| **questions** | [**Array&lt;CreateLeadFormRequestQuestionsInner&gt;**](CreateLeadFormRequestQuestionsInner.md) | Deprecated (Meta legacy shape): use platformSpecificData.questions. | [optional] |
 | **privacy_policy_url** | **String** |  |  |
-| **privacy_policy_link_text** | **String** |  | [optional] |
-| **follow_up_action_url** | **String** |  | [optional] |
-| **locale** | **String** |  | [optional] |
-| **thank_you_title** | **String** |  | [optional] |
-| **thank_you_body** | **String** |  | [optional] |
-| **thank_you_button_text** | **String** |  | [optional] |
-| **thank_you_button_type** | **String** |  | [optional] |
-| **thank_you_website_url** | **String** |  | [optional] |
-| **is_optimized_for_quality** | **Boolean** |  | [optional] |
+| **privacy_policy_link_text** | **String** | Deprecated: use platformSpecificData.privacyPolicyLinkText. | [optional] |
+| **follow_up_action_url** | **String** | Deprecated: use platformSpecificData.followUpActionUrl. | [optional] |
+| **locale** | **String** | Deprecated: use platformSpecificData.locale. | [optional] |
+| **thank_you_title** | **String** | Deprecated: use platformSpecificData.thankYouTitle. | [optional] |
+| **thank_you_body** | **String** | Deprecated: use platformSpecificData.thankYouBody. | [optional] |
+| **thank_you_button_text** | **String** | Deprecated: use platformSpecificData.thankYouButtonText. | [optional] |
+| **thank_you_button_type** | **String** | Deprecated: use platformSpecificData.thankYouButtonType. | [optional] |
+| **thank_you_website_url** | **String** | Deprecated: use platformSpecificData.thankYouWebsiteUrl. | [optional] |
+| **is_optimized_for_quality** | **Boolean** | Deprecated: use platformSpecificData.isOptimizedForQuality. | [optional] |
+| **platform_specific_data** | [**CreateLeadFormRequestPlatformSpecificData**](CreateLeadFormRequestPlatformSpecificData.md) |  | [optional] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = Zernio::CreateLeadFormRequest.new(
   thank_you_button_text: null,
   thank_you_button_type: VIEW_WEBSITE,
   thank_you_website_url: null,
-  is_optimized_for_quality: null
+  is_optimized_for_quality: null,
+  platform_specific_data: null
 )
 ```
 

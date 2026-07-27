@@ -34,9 +34,9 @@ describe 'LeadGenApi' do
 
   # unit tests for archive_lead_form
   # Archive a lead form
-  # Meta has no hard delete for forms; this archives the form (status&#x3D;ARCHIVED).
-  # @param form_id 
-  # @param account_id 
+  # Neither platform hard-deletes a form; this archives it (Meta status&#x3D;ARCHIVED; LinkedIn state&#x3D;ARCHIVED via PARTIAL_UPDATE).
+  # @param form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
+  # @param account_id Connected facebook or linkedin ads account id (selects the platform).
   # @param [Hash] opts the optional parameters
   # @return [ArchiveLeadForm200Response]
   describe 'archive_lead_form test' do
@@ -47,7 +47,7 @@ describe 'LeadGenApi' do
 
   # unit tests for create_lead_form
   # Create a lead form
-  # Creates a Lead Gen form on the connected Facebook Page (POST /{page-id}/leadgen_forms). NOT idempotent — a retry creates a second form. Prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. Requires the Ads add-on. 
+  # Creates a Lead Gen form. The form content goes inside &#x60;platformSpecificData&#x60; for both platforms (the shape is selected by the accountId&#39;s platform). Meta: created on the connected Facebook Page (POST /{page-id}/leadgen_forms); the old top-level Meta fields (questions, thankYou*, contextCard, …) are DEPRECATED but still accepted while platformSpecificData is absent — mixing both shapes is a 400. LinkedIn: created on the ad account&#39;s Company Page. NOT idempotent — a retry creates a second form. Meta prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. LinkedIn exposes only free-text and multiple-choice questions via API (prefilled-from-profile fields are Campaign Manager UI-only). Requires the Ads add-on. 
   # @param create_lead_form_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateLeadForm200Response]
@@ -72,8 +72,8 @@ describe 'LeadGenApi' do
 
   # unit tests for get_lead_form
   # Get a lead form
-  # @param form_id 
-  # @param account_id 
+  # @param form_id Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
+  # @param account_id Connected facebook or linkedin ads account id (selects the platform).
   # @param [Hash] opts the optional parameters
   # @return [GetLeadForm200Response]
   describe 'get_lead_form test' do
@@ -100,9 +100,10 @@ describe 'LeadGenApi' do
 
   # unit tests for list_lead_forms
   # List lead forms
-  # Lists the Lead Gen forms owned by the connected Facebook Page. Requires the Ads add-on.
-  # @param account_id Connected facebook account id.
+  # Lists the Lead Gen forms owned by the account. Meta: forms on the connected Facebook Page. LinkedIn: forms owned by the ad account&#39;s Company Page — pass &#x60;adAccountId&#x60; (LinkedIn forms are org-owned). Requires the Ads add-on. 
+  # @param account_id Connected facebook or linkedin ads account id.
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn.
   # @option opts [Integer] :limit 
   # @option opts [String] :cursor 
   # @return [ListLeadForms200Response]
@@ -114,13 +115,14 @@ describe 'LeadGenApi' do
 
   # unit tests for list_leads
   # List submitted leads
-  # Returns persisted Meta Lead Gen leads for your team, newest-first, with keyset pagination on &#x60;cursor&#x60;. Leads are ingested in real time from the &#x60;leadgen&#x60; webhook. Requires the Ads add-on. 
+  # Returns submitted Lead Gen leads for your team, newest-first, with keyset pagination on &#x60;cursor&#x60;. For Meta (default) leads are served from the persisted cache, ingested in real time from the &#x60;leadgen&#x60; webhook. When &#x60;accountId&#x60; is a LinkedIn ads account, leads are fetched live from LinkedIn&#39;s &#x60;leadFormResponses&#x60; (LinkedIn has no webhook and enforces 90-day retention, so nothing is persisted) and &#x60;adAccountId&#x60; is required. Reading LinkedIn responses needs the &#x60;r_marketing_leadgen_automation&#x60; permission; accounts connected before it was added must reconnect. Requires the Ads add-on. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :form_id Filter to a single lead form.
-  # @option opts [String] :account_id Filter to a single connected account.
+  # @option opts [String] :account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch.
+  # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder).
   # @option opts [Integer] :limit 
-  # @option opts [Integer] :since Unix seconds; only leads created at/after this Meta timestamp.
-  # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor.
+  # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp.
+  # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset).
   # @return [ListLeads200Response]
   describe 'list_leads test' do
     it 'should work' do

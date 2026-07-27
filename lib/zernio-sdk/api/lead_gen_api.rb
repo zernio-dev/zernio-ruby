@@ -20,9 +20,9 @@ module Zernio
       @api_client = api_client
     end
     # Archive a lead form
-    # Meta has no hard delete for forms; this archives the form (status=ARCHIVED).
-    # @param form_id [String] 
-    # @param account_id [String] 
+    # Neither platform hard-deletes a form; this archives it (Meta status=ARCHIVED; LinkedIn state=ARCHIVED via PARTIAL_UPDATE).
+    # @param form_id [String] Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
+    # @param account_id [String] Connected facebook or linkedin ads account id (selects the platform).
     # @param [Hash] opts the optional parameters
     # @return [ArchiveLeadForm200Response]
     def archive_lead_form(form_id, account_id, opts = {})
@@ -31,9 +31,9 @@ module Zernio
     end
 
     # Archive a lead form
-    # Meta has no hard delete for forms; this archives the form (status&#x3D;ARCHIVED).
-    # @param form_id [String] 
-    # @param account_id [String] 
+    # Neither platform hard-deletes a form; this archives it (Meta status&#x3D;ARCHIVED; LinkedIn state&#x3D;ARCHIVED via PARTIAL_UPDATE).
+    # @param form_id [String] Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
+    # @param account_id [String] Connected facebook or linkedin ads account id (selects the platform).
     # @param [Hash] opts the optional parameters
     # @return [Array<(ArchiveLeadForm200Response, Integer, Hash)>] ArchiveLeadForm200Response data, response status code and response headers
     def archive_lead_form_with_http_info(form_id, account_id, opts = {})
@@ -90,7 +90,7 @@ module Zernio
     end
 
     # Create a lead form
-    # Creates a Lead Gen form on the connected Facebook Page (POST /{page-id}/leadgen_forms). NOT idempotent — a retry creates a second form. Prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. Requires the Ads add-on. 
+    # Creates a Lead Gen form. The form content goes inside `platformSpecificData` for both platforms (the shape is selected by the accountId's platform). Meta: created on the connected Facebook Page (POST /{page-id}/leadgen_forms); the old top-level Meta fields (questions, thankYou*, contextCard, …) are DEPRECATED but still accepted while platformSpecificData is absent — mixing both shapes is a 400. LinkedIn: created on the ad account's Company Page. NOT idempotent — a retry creates a second form. Meta prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. LinkedIn exposes only free-text and multiple-choice questions via API (prefilled-from-profile fields are Campaign Manager UI-only). Requires the Ads add-on. 
     # @param create_lead_form_request [CreateLeadFormRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateLeadForm200Response]
@@ -100,7 +100,7 @@ module Zernio
     end
 
     # Create a lead form
-    # Creates a Lead Gen form on the connected Facebook Page (POST /{page-id}/leadgen_forms). NOT idempotent — a retry creates a second form. Prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. Requires the Ads add-on. 
+    # Creates a Lead Gen form. The form content goes inside &#x60;platformSpecificData&#x60; for both platforms (the shape is selected by the accountId&#39;s platform). Meta: created on the connected Facebook Page (POST /{page-id}/leadgen_forms); the old top-level Meta fields (questions, thankYou*, contextCard, …) are DEPRECATED but still accepted while platformSpecificData is absent — mixing both shapes is a 400. LinkedIn: created on the ad account&#39;s Company Page. NOT idempotent — a retry creates a second form. Meta prefilled question types (EMAIL, PHONE, FULL_NAME, …) must omit label/key; CUSTOM questions require both. LinkedIn exposes only free-text and multiple-choice questions via API (prefilled-from-profile fields are Campaign Manager UI-only). Requires the Ads add-on. 
     # @param create_lead_form_request [CreateLeadFormRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateLeadForm200Response, Integer, Hash)>] CreateLeadForm200Response data, response status code and response headers
@@ -232,8 +232,8 @@ module Zernio
     end
 
     # Get a lead form
-    # @param form_id [String] 
-    # @param account_id [String] 
+    # @param form_id [String] Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
+    # @param account_id [String] Connected facebook or linkedin ads account id (selects the platform).
     # @param [Hash] opts the optional parameters
     # @return [GetLeadForm200Response]
     def get_lead_form(form_id, account_id, opts = {})
@@ -242,8 +242,8 @@ module Zernio
     end
 
     # Get a lead form
-    # @param form_id [String] 
-    # @param account_id [String] 
+    # @param form_id [String] Numeric form id (Meta leadgen_form id or LinkedIn leadForm id).
+    # @param account_id [String] Connected facebook or linkedin ads account id (selects the platform).
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetLeadForm200Response, Integer, Hash)>] GetLeadForm200Response data, response status code and response headers
     def get_lead_form_with_http_info(form_id, account_id, opts = {})
@@ -387,9 +387,10 @@ module Zernio
     end
 
     # List lead forms
-    # Lists the Lead Gen forms owned by the connected Facebook Page. Requires the Ads add-on.
-    # @param account_id [String] Connected facebook account id.
+    # Lists the Lead Gen forms owned by the account. Meta: forms on the connected Facebook Page. LinkedIn: forms owned by the ad account's Company Page — pass `adAccountId` (LinkedIn forms are org-owned). Requires the Ads add-on. 
+    # @param account_id [String] Connected facebook or linkedin ads account id.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn.
     # @option opts [Integer] :limit  (default to 25)
     # @option opts [String] :cursor 
     # @return [ListLeadForms200Response]
@@ -399,9 +400,10 @@ module Zernio
     end
 
     # List lead forms
-    # Lists the Lead Gen forms owned by the connected Facebook Page. Requires the Ads add-on.
-    # @param account_id [String] Connected facebook account id.
+    # Lists the Lead Gen forms owned by the account. Meta: forms on the connected Facebook Page. LinkedIn: forms owned by the ad account&#39;s Company Page — pass &#x60;adAccountId&#x60; (LinkedIn forms are org-owned). Requires the Ads add-on. 
+    # @param account_id [String] Connected facebook or linkedin ads account id.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id (used to resolve the owning organization). Required for LinkedIn.
     # @option opts [Integer] :limit  (default to 25)
     # @option opts [String] :cursor 
     # @return [Array<(ListLeadForms200Response, Integer, Hash)>] ListLeadForms200Response data, response status code and response headers
@@ -427,6 +429,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
 
@@ -465,13 +468,14 @@ module Zernio
     end
 
     # List submitted leads
-    # Returns persisted Meta Lead Gen leads for your team, newest-first, with keyset pagination on `cursor`. Leads are ingested in real time from the `leadgen` webhook. Requires the Ads add-on. 
+    # Returns submitted Lead Gen leads for your team, newest-first, with keyset pagination on `cursor`. For Meta (default) leads are served from the persisted cache, ingested in real time from the `leadgen` webhook. When `accountId` is a LinkedIn ads account, leads are fetched live from LinkedIn's `leadFormResponses` (LinkedIn has no webhook and enforces 90-day retention, so nothing is persisted) and `adAccountId` is required. Reading LinkedIn responses needs the `r_marketing_leadgen_automation` permission; accounts connected before it was added must reconnect. Requires the Ads add-on. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :form_id Filter to a single lead form.
-    # @option opts [String] :account_id Filter to a single connected account.
+    # @option opts [String] :account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch.
+    # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder).
     # @option opts [Integer] :limit  (default to 25)
-    # @option opts [Integer] :since Unix seconds; only leads created at/after this Meta timestamp.
-    # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor.
+    # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp.
+    # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset).
     # @return [ListLeads200Response]
     def list_leads(opts = {})
       data, _status_code, _headers = list_leads_with_http_info(opts)
@@ -479,13 +483,14 @@ module Zernio
     end
 
     # List submitted leads
-    # Returns persisted Meta Lead Gen leads for your team, newest-first, with keyset pagination on &#x60;cursor&#x60;. Leads are ingested in real time from the &#x60;leadgen&#x60; webhook. Requires the Ads add-on. 
+    # Returns submitted Lead Gen leads for your team, newest-first, with keyset pagination on &#x60;cursor&#x60;. For Meta (default) leads are served from the persisted cache, ingested in real time from the &#x60;leadgen&#x60; webhook. When &#x60;accountId&#x60; is a LinkedIn ads account, leads are fetched live from LinkedIn&#39;s &#x60;leadFormResponses&#x60; (LinkedIn has no webhook and enforces 90-day retention, so nothing is persisted) and &#x60;adAccountId&#x60; is required. Reading LinkedIn responses needs the &#x60;r_marketing_leadgen_automation&#x60; permission; accounts connected before it was added must reconnect. Requires the Ads add-on. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :form_id Filter to a single lead form.
-    # @option opts [String] :account_id Filter to a single connected account.
+    # @option opts [String] :account_id Filter to a single connected account. LinkedIn ads accounts switch to the live fetch.
+    # @option opts [String] :ad_account_id LinkedIn only: the LinkedIn ad account id whose responses to read (owner-scoped finder).
     # @option opts [Integer] :limit  (default to 25)
-    # @option opts [Integer] :since Unix seconds; only leads created at/after this Meta timestamp.
-    # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor.
+    # @option opts [Integer] :since Unix seconds; only leads created at/after this timestamp.
+    # @option opts [String] :cursor Keyset cursor from a previous response&#39;s pagination.cursor (Meta: AdLead id; LinkedIn: numeric start offset).
     # @return [Array<(ListLeads200Response, Integer, Hash)>] ListLeads200Response data, response status code and response headers
     def list_leads_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -506,6 +511,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'formId'] = opts[:'form_id'] if !opts[:'form_id'].nil?
       query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
       query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
