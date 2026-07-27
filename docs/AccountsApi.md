@@ -385,7 +385,7 @@ end
 
 List accounts
 
-Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). 
+Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). page and limit must be supplied together; out-of-range page/limit values are rejected with 400 rather than silently clamped. 
 
 ### Examples
 
@@ -400,12 +400,12 @@ end
 
 api_instance = Zernio::AccountsApi.new
 opts = {
-  profile_id: 'profile_id_example', # String | Filter accounts by profile ID
+  profile_id: 'profile_id_example', # String | Filter accounts by profile ID. Must be a valid ObjectId.
   platform: 'platform_example', # String | Filter accounts by platform (e.g. \"instagram\", \"twitter\").
   status: 'connected', # String | Filter accounts by connection status. `connected` returns healthy accounts; `disconnected` returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. 
   include_over_limit: true, # Boolean | When true, includes accounts from over-limit profiles.
-  page: 56, # Integer | Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
-  limit: 56 # Integer | Page size. Required alongside page for pagination.
+  page: 56, # Integer | Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. 
+  limit: 56 # Integer | Page size. Must be provided together with page; sending only one of the two returns 400. 
 }
 
 begin
@@ -439,12 +439,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **profile_id** | **String** | Filter accounts by profile ID | [optional] |
+| **profile_id** | **String** | Filter accounts by profile ID. Must be a valid ObjectId. | [optional] |
 | **platform** | **String** | Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;). | [optional] |
 | **status** | **String** | Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set.  | [optional] |
 | **include_over_limit** | **Boolean** | When true, includes accounts from over-limit profiles. | [optional][default to false] |
-| **page** | **Integer** | Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts. | [optional] |
-| **limit** | **Integer** | Page size. Required alongside page for pagination. | [optional] |
+| **page** | **Integer** | Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts.  | [optional] |
+| **limit** | **Integer** | Page size. Must be provided together with page; sending only one of the two returns 400.  | [optional] |
 
 ### Return type
 

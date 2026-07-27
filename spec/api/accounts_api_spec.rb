@@ -101,14 +101,14 @@ describe 'AccountsApi' do
 
   # unit tests for list_accounts
   # List accounts
-  # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). 
+  # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). page and limit must be supplied together; out-of-range page/limit values are rejected with 400 rather than silently clamped. 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :profile_id Filter accounts by profile ID
+  # @option opts [String] :profile_id Filter accounts by profile ID. Must be a valid ObjectId.
   # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
   # @option opts [String] :status Filter accounts by connection status. &#x60;connected&#x60; returns healthy accounts; &#x60;disconnected&#x60; returns accounts that need reconnection (per the same reconnection check surfaced in the dashboard). Omit to return accounts in any status. When combined with page/limit, pagination totals reflect the filtered result set. 
   # @option opts [Boolean] :include_over_limit When true, includes accounts from over-limit profiles.
-  # @option opts [Integer] :page Page number (1-based). When provided with limit, enables server-side pagination. Omit for all accounts.
-  # @option opts [Integer] :limit Page size. Required alongside page for pagination.
+  # @option opts [Integer] :page Page number (1-based). Must be provided together with limit to enable server-side pagination; sending only one of the two returns 400. Omit both for all accounts. 
+  # @option opts [Integer] :limit Page size. Must be provided together with page; sending only one of the two returns 400. 
   # @return [AccountsListResponse]
   describe 'list_accounts test' do
     it 'should work' do
