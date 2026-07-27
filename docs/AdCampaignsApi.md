@@ -18,6 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
+| [**list_ad_keywords**](AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords |
 | [**list_ads**](AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**update_ad**](AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 | [**update_ad_campaign**](AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign |
@@ -1060,6 +1061,97 @@ end
 ### Return type
 
 [**ListAdCampaigns200Response**](ListAdCampaigns200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_keywords
+
+> <ListAdKeywords200Response> list_ad_keywords(opts)
+
+List Search keywords
+
+Returns the Google Search keyword criteria (positive and negative) synced from connected Google Ads accounts, one row per ad-group keyword. Populated by the periodic ads discovery sweep (roughly every 3 hours per account), so keywords added on Google appear with that delay. Campaign-level negative keywords are not included; only ad-group-level criteria are. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+opts = {
+  page: 56, # Integer | Page number (1-based)
+  limit: 56, # Integer | 
+  account_id: 'account_id_example', # String | Social account ID
+  ad_account_id: 'ad_account_id_example', # String | Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads.
+  profile_id: 'profile_id_example', # String | Profile ID
+  campaign_id: 'campaign_id_example', # String | Platform campaign ID
+  ad_set_id: 'ad_set_id_example', # String | Platform ad group ID (Google ad group)
+  status: 'active', # String | Keyword criterion status
+  match_type: 'exact', # String | 
+  negative: true, # Boolean | true = negative keywords only, false = positive only. Omit for both.
+  search: 'search_example' # String | Case-insensitive substring match on the keyword text
+}
+
+begin
+  # List Search keywords
+  result = api_instance.list_ad_keywords(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ad_keywords: #{e}"
+end
+```
+
+#### Using the list_ad_keywords_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdKeywords200Response>, Integer, Hash)> list_ad_keywords_with_http_info(opts)
+
+```ruby
+begin
+  # List Search keywords
+  data, status_code, headers = api_instance.list_ad_keywords_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdKeywords200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ad_keywords_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **page** | **Integer** | Page number (1-based) | [optional][default to 1] |
+| **limit** | **Integer** |  | [optional][default to 50] |
+| **account_id** | **String** | Social account ID | [optional] |
+| **ad_account_id** | **String** | Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads. | [optional] |
+| **profile_id** | **String** | Profile ID | [optional] |
+| **campaign_id** | **String** | Platform campaign ID | [optional] |
+| **ad_set_id** | **String** | Platform ad group ID (Google ad group) | [optional] |
+| **status** | **String** | Keyword criterion status | [optional] |
+| **match_type** | **String** |  | [optional] |
+| **negative** | **Boolean** | true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both. | [optional] |
+| **search** | **String** | Case-insensitive substring match on the keyword text | [optional] |
+
+### Return type
+
+[**ListAdKeywords200Response**](ListAdKeywords200Response.md)
 
 ### Authorization
 

@@ -1107,6 +1107,120 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List Search keywords
+    # Returns the Google Search keyword criteria (positive and negative) synced from connected Google Ads accounts, one row per ad-group keyword. Populated by the periodic ads discovery sweep (roughly every 3 hours per account), so keywords added on Google appear with that delay. Campaign-level negative keywords are not included; only ad-group-level criteria are. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page Page number (1-based) (default to 1)
+    # @option opts [Integer] :limit  (default to 50)
+    # @option opts [String] :account_id Social account ID
+    # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads.
+    # @option opts [String] :profile_id Profile ID
+    # @option opts [String] :campaign_id Platform campaign ID
+    # @option opts [String] :ad_set_id Platform ad group ID (Google ad group)
+    # @option opts [String] :status Keyword criterion status
+    # @option opts [String] :match_type 
+    # @option opts [Boolean] :negative true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both.
+    # @option opts [String] :search Case-insensitive substring match on the keyword text
+    # @return [ListAdKeywords200Response]
+    def list_ad_keywords(opts = {})
+      data, _status_code, _headers = list_ad_keywords_with_http_info(opts)
+      data
+    end
+
+    # List Search keywords
+    # Returns the Google Search keyword criteria (positive and negative) synced from connected Google Ads accounts, one row per ad-group keyword. Populated by the periodic ads discovery sweep (roughly every 3 hours per account), so keywords added on Google appear with that delay. Campaign-level negative keywords are not included; only ad-group-level criteria are. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page Page number (1-based) (default to 1)
+    # @option opts [Integer] :limit  (default to 50)
+    # @option opts [String] :account_id Social account ID
+    # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads.
+    # @option opts [String] :profile_id Profile ID
+    # @option opts [String] :campaign_id Platform campaign ID
+    # @option opts [String] :ad_set_id Platform ad group ID (Google ad group)
+    # @option opts [String] :status Keyword criterion status
+    # @option opts [String] :match_type 
+    # @option opts [Boolean] :negative true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both.
+    # @option opts [String] :search Case-insensitive substring match on the keyword text
+    # @return [Array<(ListAdKeywords200Response, Integer, Hash)>] ListAdKeywords200Response data, response status code and response headers
+    def list_ad_keywords_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.list_ad_keywords ...'
+      end
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling AdCampaignsApi.list_ad_keywords, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 500
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdCampaignsApi.list_ad_keywords, must be smaller than or equal to 500.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdCampaignsApi.list_ad_keywords, must be greater than or equal to 1.'
+      end
+
+      allowable_values = ["active", "paused"]
+      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
+        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["exact", "phrase", "broad", "unknown"]
+      if @api_client.config.client_side_validation && opts[:'match_type'] && !allowable_values.include?(opts[:'match_type'])
+        fail ArgumentError, "invalid value for \"match_type\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'search'].nil? && opts[:'search'].to_s.length > 200
+        fail ArgumentError, 'invalid value for "opts[:"search"]" when calling AdCampaignsApi.list_ad_keywords, the character length must be smaller than or equal to 200.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/keywords'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'adAccountId'] = opts[:'ad_account_id'] if !opts[:'ad_account_id'].nil?
+      query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+      query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'adSetId'] = opts[:'ad_set_id'] if !opts[:'ad_set_id'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
+      query_params[:'matchType'] = opts[:'match_type'] if !opts[:'match_type'].nil?
+      query_params[:'negative'] = opts[:'negative'] if !opts[:'negative'].nil?
+      query_params[:'search'] = opts[:'search'] if !opts[:'search'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdKeywords200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.list_ad_keywords",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#list_ad_keywords\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List ads
     # Returns a paginated list of ads with metrics computed over an optional date range. Use source=all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max.  To find the Zernio ad behind a comment you see in Meta Business Manager, filter by platformAdId (the Meta ad ID), effectiveObjectStoryId (Facebook), or effectiveInstagramMediaId (Instagram) — those are the post/media the ad's engagement lives on, and are also returned on each ad's `creative` object. Then call GET /v1/ads/{adId}/comments with the returned ad id. 
     # @param [Hash] opts the optional parameters

@@ -233,6 +233,28 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for list_ad_keywords
+  # List Search keywords
+  # Returns the Google Search keyword criteria (positive and negative) synced from connected Google Ads accounts, one row per ad-group keyword. Populated by the periodic ads discovery sweep (roughly every 3 hours per account), so keywords added on Google appear with that delay. Campaign-level negative keywords are not included; only ad-group-level criteria are. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page Page number (1-based)
+  # @option opts [Integer] :limit 
+  # @option opts [String] :account_id Social account ID
+  # @option opts [String] :ad_account_id Platform ad account ID (Google customer ID). Mirrors the same filter on /v1/ads.
+  # @option opts [String] :profile_id Profile ID
+  # @option opts [String] :campaign_id Platform campaign ID
+  # @option opts [String] :ad_set_id Platform ad group ID (Google ad group)
+  # @option opts [String] :status Keyword criterion status
+  # @option opts [String] :match_type 
+  # @option opts [Boolean] :negative true &#x3D; negative keywords only, false &#x3D; positive only. Omit for both.
+  # @option opts [String] :search Case-insensitive substring match on the keyword text
+  # @return [ListAdKeywords200Response]
+  describe 'list_ad_keywords test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ads
   # List ads
   # Returns a paginated list of ads with metrics computed over an optional date range. Use source&#x3D;all to include externally-synced ads from platform ad managers. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max.  To find the Zernio ad behind a comment you see in Meta Business Manager, filter by platformAdId (the Meta ad ID), effectiveObjectStoryId (Facebook), or effectiveInstagramMediaId (Instagram) — those are the post/media the ad&#39;s engagement lives on, and are also returned on each ad&#39;s &#x60;creative&#x60; object. Then call GET /v1/ads/{adId}/comments with the returned ad id. 

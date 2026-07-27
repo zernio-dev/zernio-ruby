@@ -122,6 +122,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Zernio::AdCampaignsApi* | [**get_ads_timeline**](docs/AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics
 *Zernio::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
+*Zernio::AdCampaignsApi* | [**list_ad_keywords**](docs/AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords
 *Zernio::AdCampaignsApi* | [**list_ads**](docs/AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdCampaignsApi* | [**update_ad**](docs/AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Zernio::AdCampaignsApi* | [**update_ad_campaign**](docs/AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign
@@ -1366,6 +1367,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdCatalogs200ResponseCatalogsInner](docs/ListAdCatalogs200ResponseCatalogsInner.md)
  - [Zernio::ListAdCreatives200Response](docs/ListAdCreatives200Response.md)
  - [Zernio::ListAdImages200Response](docs/ListAdImages200Response.md)
+ - [Zernio::ListAdKeywords200Response](docs/ListAdKeywords200Response.md)
+ - [Zernio::ListAdKeywords200ResponseKeywordsInner](docs/ListAdKeywords200ResponseKeywordsInner.md)
  - [Zernio::ListAdLabels200Response](docs/ListAdLabels200Response.md)
  - [Zernio::ListAdStudies200Response](docs/ListAdStudies200Response.md)
  - [Zernio::ListAds200Response](docs/ListAds200Response.md)
