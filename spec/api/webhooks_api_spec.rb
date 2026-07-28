@@ -34,7 +34,7 @@ describe 'WebhooksApi' do
 
   # unit tests for create_webhook_settings
   # Create webhook
-  # Create a new webhook configuration. Maximum 10 webhooks per user.  &#x60;name&#x60;, &#x60;url&#x60; and &#x60;events&#x60; are required. &#x60;url&#x60; must be a valid URL and &#x60;events&#x60; must contain at least one event. Whitespace is trimmed from &#x60;url&#x60; before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures. 
+  # Create a new webhook configuration. Maximum 50 webhooks per user.  &#x60;name&#x60;, &#x60;url&#x60; and &#x60;events&#x60; are required. &#x60;url&#x60; must be a valid URL and &#x60;events&#x60; must contain at least one event. Whitespace is trimmed from &#x60;url&#x60; before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures. 
   # @param create_webhook_settings_request 
   # @param [Hash] opts the optional parameters
   # @return [UpdateWebhookSettings200Response]
@@ -75,7 +75,7 @@ describe 'WebhooksApi' do
 
   # unit tests for get_webhook_settings
   # List webhooks
-  # Retrieve all configured webhooks for the authenticated user. Supports up to 10 webhooks per user.
+  # Retrieve all configured webhooks for the authenticated user. Supports up to 50 webhooks per user.
   # @param [Hash] opts the optional parameters
   # @return [GetWebhookSettings200Response]
   describe 'get_webhook_settings test' do

@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Create webhook
-    # Create a new webhook configuration. Maximum 10 webhooks per user.  `name`, `url` and `events` are required. `url` must be a valid URL and `events` must contain at least one event. Whitespace is trimmed from `url` before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures. 
+    # Create a new webhook configuration. Maximum 50 webhooks per user.  `name`, `url` and `events` are required. `url` must be a valid URL and `events` must contain at least one event. Whitespace is trimmed from `url` before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures. 
     # @param create_webhook_settings_request [CreateWebhookSettingsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateWebhookSettings200Response]
@@ -30,7 +30,7 @@ module Zernio
     end
 
     # Create webhook
-    # Create a new webhook configuration. Maximum 10 webhooks per user.  &#x60;name&#x60;, &#x60;url&#x60; and &#x60;events&#x60; are required. &#x60;url&#x60; must be a valid URL and &#x60;events&#x60; must contain at least one event. Whitespace is trimmed from &#x60;url&#x60; before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures. 
+    # Create a new webhook configuration. Maximum 50 webhooks per user.  &#x60;name&#x60;, &#x60;url&#x60; and &#x60;events&#x60; are required. &#x60;url&#x60; must be a valid URL and &#x60;events&#x60; must contain at least one event. Whitespace is trimmed from &#x60;url&#x60; before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures. 
     # @param create_webhook_settings_request [CreateWebhookSettingsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateWebhookSettings200Response, Integer, Hash)>] UpdateWebhookSettings200Response data, response status code and response headers
@@ -271,7 +271,7 @@ module Zernio
     end
 
     # List webhooks
-    # Retrieve all configured webhooks for the authenticated user. Supports up to 10 webhooks per user.
+    # Retrieve all configured webhooks for the authenticated user. Supports up to 50 webhooks per user.
     # @param [Hash] opts the optional parameters
     # @return [GetWebhookSettings200Response]
     def get_webhook_settings(opts = {})
@@ -280,7 +280,7 @@ module Zernio
     end
 
     # List webhooks
-    # Retrieve all configured webhooks for the authenticated user. Supports up to 10 webhooks per user.
+    # Retrieve all configured webhooks for the authenticated user. Supports up to 50 webhooks per user.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWebhookSettings200Response, Integer, Hash)>] GetWebhookSettings200Response data, response status code and response headers
     def get_webhook_settings_with_http_info(opts = {})
