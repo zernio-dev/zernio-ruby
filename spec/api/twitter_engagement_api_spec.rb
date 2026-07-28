@@ -81,6 +81,26 @@ describe 'TwitterEngagementApi' do
     end
   end
 
+  # unit tests for search_tweets
+  # Search recent tweets
+  # Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X&#39;s search operators (&#x60;from:user&#x60;, &#x60;-is:retweet&#x60;, &#x60;is:reply&#x60;, &#x60;lang:en&#x60;, &#x60;\&quot;exact phrase\&quot;&#x60;, &#x60;conversation_id:123&#x60;, boolean &#x60;OR&#x60;, ...). Note that standalone operators like &#x60;is:&#x60; / &#x60;has:&#x60; / &#x60;lang:&#x60; must be combined with a keyword or &#x60;from:&#x60; clause.  To reply to a found tweet, pass its &#x60;id&#x60; as the twitter platform entry&#39;s &#x60;platformSpecificData.replyToTweetId&#x60; when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
+  # @param account_id The social account ID
+  # @param query X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Results per page. X requires a minimum of 10; values below 10 are rejected.
+  # @option opts [String] :since_id Only return tweets with an ID greater than (more recent than) this numeric tweet ID. Non-numeric values are rejected with 400.
+  # @option opts [String] :until_id Only return tweets with an ID less than (older than) this numeric tweet ID. Non-numeric values are rejected with 400.
+  # @option opts [Time] :start_time Oldest UTC timestamp (ISO 8601, inclusive), within the last 7 days
+  # @option opts [Time] :end_time Newest UTC timestamp (ISO 8601, exclusive), within the last 7 days
+  # @option opts [String] :cursor Pagination cursor from a previous response
+  # @option opts [String] :sort_order 
+  # @return [SearchTweets200Response]
+  describe 'search_tweets test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for undo_retweet
   # Undo retweet
   # Undo a retweet (un-repost a tweet). 

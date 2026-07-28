@@ -294,6 +294,128 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Search recent tweets
+    # Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X's search operators (`from:user`, `-is:retweet`, `is:reply`, `lang:en`, `\"exact phrase\"`, `conversation_id:123`, boolean `OR`, ...). Note that standalone operators like `is:` / `has:` / `lang:` must be combined with a keyword or `from:` clause.  To reply to a found tweet, pass its `id` as the twitter platform entry's `platformSpecificData.replyToTweetId` when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
+    # @param account_id [String] The social account ID
+    # @param query [String] X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Results per page. X requires a minimum of 10; values below 10 are rejected. (default to 10)
+    # @option opts [String] :since_id Only return tweets with an ID greater than (more recent than) this numeric tweet ID. Non-numeric values are rejected with 400.
+    # @option opts [String] :until_id Only return tweets with an ID less than (older than) this numeric tweet ID. Non-numeric values are rejected with 400.
+    # @option opts [Time] :start_time Oldest UTC timestamp (ISO 8601, inclusive), within the last 7 days
+    # @option opts [Time] :end_time Newest UTC timestamp (ISO 8601, exclusive), within the last 7 days
+    # @option opts [String] :cursor Pagination cursor from a previous response
+    # @option opts [String] :sort_order  (default to 'recency')
+    # @return [SearchTweets200Response]
+    def search_tweets(account_id, query, opts = {})
+      data, _status_code, _headers = search_tweets_with_http_info(account_id, query, opts)
+      data
+    end
+
+    # Search recent tweets
+    # Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X&#39;s search operators (&#x60;from:user&#x60;, &#x60;-is:retweet&#x60;, &#x60;is:reply&#x60;, &#x60;lang:en&#x60;, &#x60;\&quot;exact phrase\&quot;&#x60;, &#x60;conversation_id:123&#x60;, boolean &#x60;OR&#x60;, ...). Note that standalone operators like &#x60;is:&#x60; / &#x60;has:&#x60; / &#x60;lang:&#x60; must be combined with a keyword or &#x60;from:&#x60; clause.  To reply to a found tweet, pass its &#x60;id&#x60; as the twitter platform entry&#39;s &#x60;platformSpecificData.replyToTweetId&#x60; when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
+    # @param account_id [String] The social account ID
+    # @param query [String] X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Results per page. X requires a minimum of 10; values below 10 are rejected. (default to 10)
+    # @option opts [String] :since_id Only return tweets with an ID greater than (more recent than) this numeric tweet ID. Non-numeric values are rejected with 400.
+    # @option opts [String] :until_id Only return tweets with an ID less than (older than) this numeric tweet ID. Non-numeric values are rejected with 400.
+    # @option opts [Time] :start_time Oldest UTC timestamp (ISO 8601, inclusive), within the last 7 days
+    # @option opts [Time] :end_time Newest UTC timestamp (ISO 8601, exclusive), within the last 7 days
+    # @option opts [String] :cursor Pagination cursor from a previous response
+    # @option opts [String] :sort_order  (default to 'recency')
+    # @return [Array<(SearchTweets200Response, Integer, Hash)>] SearchTweets200Response data, response status code and response headers
+    def search_tweets_with_http_info(account_id, query, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TwitterEngagementApi.search_tweets ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TwitterEngagementApi.search_tweets"
+      end
+      # verify the required parameter 'query' is set
+      if @api_client.config.client_side_validation && query.nil?
+        fail ArgumentError, "Missing the required parameter 'query' when calling TwitterEngagementApi.search_tweets"
+      end
+      if @api_client.config.client_side_validation && query.to_s.length > 512
+        fail ArgumentError, 'invalid value for "query" when calling TwitterEngagementApi.search_tweets, the character length must be smaller than or equal to 512.'
+      end
+
+      if @api_client.config.client_side_validation && query.to_s.length < 1
+        fail ArgumentError, 'invalid value for "query" when calling TwitterEngagementApi.search_tweets, the character length must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TwitterEngagementApi.search_tweets, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 10
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling TwitterEngagementApi.search_tweets, must be greater than or equal to 10.'
+      end
+
+      pattern = Regexp.new(/^[0-9]{1,19}$/)
+      if @api_client.config.client_side_validation && !opts[:'since_id'].nil? && opts[:'since_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"since_id\"]' when calling TwitterEngagementApi.search_tweets, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^[0-9]{1,19}$/)
+      if @api_client.config.client_side_validation && !opts[:'until_id'].nil? && opts[:'until_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"until_id\"]' when calling TwitterEngagementApi.search_tweets, must conform to the pattern #{pattern}."
+      end
+
+      allowable_values = ["recency", "relevancy"]
+      if @api_client.config.client_side_validation && opts[:'sort_order'] && !allowable_values.include?(opts[:'sort_order'])
+        fail ArgumentError, "invalid value for \"sort_order\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/twitter/search'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'query'] = query
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'sinceId'] = opts[:'since_id'] if !opts[:'since_id'].nil?
+      query_params[:'untilId'] = opts[:'until_id'] if !opts[:'until_id'].nil?
+      query_params[:'startTime'] = opts[:'start_time'] if !opts[:'start_time'].nil?
+      query_params[:'endTime'] = opts[:'end_time'] if !opts[:'end_time'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+      query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SearchTweets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"TwitterEngagementApi.search_tweets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TwitterEngagementApi#search_tweets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Undo retweet
     # Undo a retweet (un-repost a tweet). 
     # @param account_id [String] 

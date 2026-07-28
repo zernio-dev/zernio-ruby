@@ -8,6 +8,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**follow_user**](TwitterEngagementApi.md#follow_user) | **POST** /v1/twitter/follow | Follow a user |
 | [**remove_bookmark**](TwitterEngagementApi.md#remove_bookmark) | **DELETE** /v1/twitter/bookmark | Remove bookmark |
 | [**retweet_post**](TwitterEngagementApi.md#retweet_post) | **POST** /v1/twitter/retweet | Retweet a post |
+| [**search_tweets**](TwitterEngagementApi.md#search_tweets) | **GET** /v1/twitter/search | Search recent tweets |
 | [**undo_retweet**](TwitterEngagementApi.md#undo_retweet) | **DELETE** /v1/twitter/retweet | Undo retweet |
 | [**unfollow_user**](TwitterEngagementApi.md#unfollow_user) | **DELETE** /v1/twitter/follow | Unfollow a user |
 
@@ -287,6 +288,93 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## search_tweets
+
+> <SearchTweets200Response> search_tweets(account_id, query, opts)
+
+Search recent tweets
+
+Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X's search operators (`from:user`, `-is:retweet`, `is:reply`, `lang:en`, `\"exact phrase\"`, `conversation_id:123`, boolean `OR`, ...). Note that standalone operators like `is:` / `has:` / `lang:` must be combined with a keyword or `from:` clause.  To reply to a found tweet, pass its `id` as the twitter platform entry's `platformSpecificData.replyToTweetId` when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TwitterEngagementApi.new
+account_id = 'account_id_example' # String | The social account ID
+query = 'query_example' # String | X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400.
+opts = {
+  limit: 56, # Integer | Results per page. X requires a minimum of 10; values below 10 are rejected.
+  since_id: 'since_id_example', # String | Only return tweets with an ID greater than (more recent than) this numeric tweet ID. Non-numeric values are rejected with 400.
+  until_id: 'until_id_example', # String | Only return tweets with an ID less than (older than) this numeric tweet ID. Non-numeric values are rejected with 400.
+  start_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Oldest UTC timestamp (ISO 8601, inclusive), within the last 7 days
+  end_time: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Newest UTC timestamp (ISO 8601, exclusive), within the last 7 days
+  cursor: 'cursor_example', # String | Pagination cursor from a previous response
+  sort_order: 'recency' # String | 
+}
+
+begin
+  # Search recent tweets
+  result = api_instance.search_tweets(account_id, query, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TwitterEngagementApi->search_tweets: #{e}"
+end
+```
+
+#### Using the search_tweets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchTweets200Response>, Integer, Hash)> search_tweets_with_http_info(account_id, query, opts)
+
+```ruby
+begin
+  # Search recent tweets
+  data, status_code, headers = api_instance.search_tweets_with_http_info(account_id, query, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchTweets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TwitterEngagementApi->search_tweets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The social account ID |  |
+| **query** | **String** | X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400. |  |
+| **limit** | **Integer** | Results per page. X requires a minimum of 10; values below 10 are rejected. | [optional][default to 10] |
+| **since_id** | **String** | Only return tweets with an ID greater than (more recent than) this numeric tweet ID. Non-numeric values are rejected with 400. | [optional] |
+| **until_id** | **String** | Only return tweets with an ID less than (older than) this numeric tweet ID. Non-numeric values are rejected with 400. | [optional] |
+| **start_time** | **Time** | Oldest UTC timestamp (ISO 8601, inclusive), within the last 7 days | [optional] |
+| **end_time** | **Time** | Newest UTC timestamp (ISO 8601, exclusive), within the last 7 days | [optional] |
+| **cursor** | **String** | Pagination cursor from a previous response | [optional] |
+| **sort_order** | **String** |  | [optional][default to &#39;recency&#39;] |
+
+### Return type
+
+[**SearchTweets200Response**](SearchTweets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

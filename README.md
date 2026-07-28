@@ -458,6 +458,7 @@ Class | Method | HTTP request | Description
 *Zernio::TwitterEngagementApi* | [**follow_user**](docs/TwitterEngagementApi.md#follow_user) | **POST** /v1/twitter/follow | Follow a user
 *Zernio::TwitterEngagementApi* | [**remove_bookmark**](docs/TwitterEngagementApi.md#remove_bookmark) | **DELETE** /v1/twitter/bookmark | Remove bookmark
 *Zernio::TwitterEngagementApi* | [**retweet_post**](docs/TwitterEngagementApi.md#retweet_post) | **POST** /v1/twitter/retweet | Retweet a post
+*Zernio::TwitterEngagementApi* | [**search_tweets**](docs/TwitterEngagementApi.md#search_tweets) | **GET** /v1/twitter/search | Search recent tweets
 *Zernio::TwitterEngagementApi* | [**undo_retweet**](docs/TwitterEngagementApi.md#undo_retweet) | **DELETE** /v1/twitter/retweet | Undo retweet
 *Zernio::TwitterEngagementApi* | [**unfollow_user**](docs/TwitterEngagementApi.md#unfollow_user) | **DELETE** /v1/twitter/follow | Unfollow a user
 *Zernio::UsageApi* | [**get_billing**](docs/UsageApi.md#get_billing) | **GET** /v1/billing | Account billing snapshot (plan, cycle, balance, caps, status)
@@ -1653,6 +1654,10 @@ Class | Method | HTTP request | Description
  - [Zernio::SearchInboxConversations200ResponseMetaAccountsSkippedInner](docs/SearchInboxConversations200ResponseMetaAccountsSkippedInner.md)
  - [Zernio::SearchInboxConversations200ResponseMetaFailedAccountsInner](docs/SearchInboxConversations200ResponseMetaFailedAccountsInner.md)
  - [Zernio::SearchReddit200Response](docs/SearchReddit200Response.md)
+ - [Zernio::SearchTweets200Response](docs/SearchTweets200Response.md)
+ - [Zernio::SearchTweets200ResponseMeta](docs/SearchTweets200ResponseMeta.md)
+ - [Zernio::SearchTweets200ResponseTweetsInner](docs/SearchTweets200ResponseTweetsInner.md)
+ - [Zernio::SearchTweets200ResponseTweetsInnerAuthor](docs/SearchTweets200ResponseTweetsInnerAuthor.md)
  - [Zernio::SelectFacebookPage200Response](docs/SelectFacebookPage200Response.md)
  - [Zernio::SelectFacebookPage200ResponseAccount](docs/SelectFacebookPage200ResponseAccount.md)
  - [Zernio::SelectFacebookPage409Response](docs/SelectFacebookPage409Response.md)
