@@ -39,7 +39,7 @@ module Zernio
     # Clicks on the post (organization accounts only)
     attr_accessor :clicks
 
-    # Video views (video posts only). Organization accounts require the connected LinkedIn user to be an ADMINISTRATOR of the page; CONTENT_ADMINISTRATOR returns 0.
+    # Video views (video posts only)
     attr_accessor :views
 
     # Engagement rate as percentage
