@@ -15,8 +15,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_sms_registrations**](SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations |
 | [**list_sms_sender_ids**](SMSApi.md#list_sms_sender_ids) | **GET** /v1/sms/sender-ids | List alphanumeric sender IDs |
 | [**lookup_sms_number**](SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type |
+| [**preflight_sms_registration**](SMSApi.md#preflight_sms_registration) | **POST** /v1/sms/registrations/preflight | Pre-check a carrier registration |
 | [**request_sms_sender_id_limit_increase**](SMSApi.md#request_sms_sender_id_limit_increase) | **POST** /v1/sms/sender-ids/limit-request | Request a higher sender ID daily limit |
 | [**resend_sms_registration_otp**](SMSApi.md#resend_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP |
+| [**respond_to_sms_registration_review**](SMSApi.md#respond_to_sms_registration_review) | **POST** /v1/sms/registrations/{id}/respond | Reply to a change request |
 | [**reuse_sms_registration_for_number**](SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration |
 | [**send_sms**](SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS |
 | [**share_sms_registration**](SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link |
@@ -786,6 +788,75 @@ end
 - **Accept**: application/json
 
 
+## preflight_sms_registration
+
+> <PreflightSmsRegistration200Response> preflight_sms_registration(preflight_sms_registration_request)
+
+Pre-check a carrier registration
+
+Dry-run of `POST /v1/sms/registrations` for 10DLC: validates and composes the exact brand/campaign payloads a submission would store (branding, disclosures, auto-replies), runs deterministic compliance lints plus an AI reviewer over them, and returns the findings WITHOUT creating anything. Use it to fix issues before submitting; `block` severity findings indicate a near-certain carrier rejection. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+preflight_sms_registration_request = Zernio::PreflightSmsRegistrationRequest.new({registration_type: 'standard_10dlc', brand: 3.56, campaign: 3.56}) # PreflightSmsRegistrationRequest | 
+
+begin
+  # Pre-check a carrier registration
+  result = api_instance.preflight_sms_registration(preflight_sms_registration_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->preflight_sms_registration: #{e}"
+end
+```
+
+#### Using the preflight_sms_registration_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PreflightSmsRegistration200Response>, Integer, Hash)> preflight_sms_registration_with_http_info(preflight_sms_registration_request)
+
+```ruby
+begin
+  # Pre-check a carrier registration
+  data, status_code, headers = api_instance.preflight_sms_registration_with_http_info(preflight_sms_registration_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PreflightSmsRegistration200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->preflight_sms_registration_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **preflight_sms_registration_request** | [**PreflightSmsRegistrationRequest**](PreflightSmsRegistrationRequest.md) |  |  |
+
+### Return type
+
+[**PreflightSmsRegistration200Response**](PreflightSmsRegistration200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## request_sms_sender_id_limit_increase
 
 > <RequestSmsSenderIdLimitIncrease200Response> request_sms_sender_id_limit_increase(request_sms_sender_id_limit_increase_request)
@@ -921,6 +992,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## respond_to_sms_registration_review
+
+> <RespondToSmsRegistrationReview200Response> respond_to_sms_registration_review(id, respond_to_sms_registration_review_request)
+
+Reply to a change request
+
+Replies to a reviewer change request on a registration in `changes_requested` state: a note, hosted document URLs (from `POST /v1/sms/opt-in-proof`), or both, sent together. The registration returns to `requested` (back in review) — no need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via `POST /v1/sms/registrations` with `resubmitRequestId` instead. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::SMSApi.new
+id = 'id_example' # String | 
+respond_to_sms_registration_review_request = Zernio::RespondToSmsRegistrationReviewRequest.new # RespondToSmsRegistrationReviewRequest | 
+
+begin
+  # Reply to a change request
+  result = api_instance.respond_to_sms_registration_review(id, respond_to_sms_registration_review_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->respond_to_sms_registration_review: #{e}"
+end
+```
+
+#### Using the respond_to_sms_registration_review_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RespondToSmsRegistrationReview200Response>, Integer, Hash)> respond_to_sms_registration_review_with_http_info(id, respond_to_sms_registration_review_request)
+
+```ruby
+begin
+  # Reply to a change request
+  data, status_code, headers = api_instance.respond_to_sms_registration_review_with_http_info(id, respond_to_sms_registration_review_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RespondToSmsRegistrationReview200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling SMSApi->respond_to_sms_registration_review_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+| **respond_to_sms_registration_review_request** | [**RespondToSmsRegistrationReviewRequest**](RespondToSmsRegistrationReviewRequest.md) |  |  |
+
+### Return type
+
+[**RespondToSmsRegistrationReview200Response**](RespondToSmsRegistrationReview200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

@@ -14,26 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  class StartSmsRegistrationRequest < ApiModelBase
+  class PreflightSmsRegistrationRequest < ApiModelBase
     attr_accessor :registration_type
 
-    # Your numbers this registration covers.
     attr_accessor :phone_numbers
 
+    # Same shape as the registration `brand`.
     attr_accessor :brand
 
+    # Same shape as the registration `campaign`.
     attr_accessor :campaign
 
-    # DBA / trade name used to brand message content (samples and auto-replies) when it differs from the legal name, e.g. a sole proprietor texting under a business name. The legal `brand.displayName` is still what the carrier vets.
     attr_accessor :messaging_brand_name
-
-    # Raw dashboard-wizard answers, stored only to prefill edit-and-resubmit. API integrators can omit.
-    attr_accessor :wizard_values
-
-    # Resubmit a registration that was returned for changes — updates it in place instead of creating a new one.
-    attr_accessor :resubmit_request_id
-
-    attr_accessor :toll_free
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -64,10 +56,7 @@ module Zernio
         :'phone_numbers' => :'phoneNumbers',
         :'brand' => :'brand',
         :'campaign' => :'campaign',
-        :'messaging_brand_name' => :'messagingBrandName',
-        :'wizard_values' => :'wizardValues',
-        :'resubmit_request_id' => :'resubmitRequestId',
-        :'toll_free' => :'tollFree'
+        :'messaging_brand_name' => :'messagingBrandName'
       }
     end
 
@@ -86,12 +75,9 @@ module Zernio
       {
         :'registration_type' => :'String',
         :'phone_numbers' => :'Array<String>',
-        :'brand' => :'StartSmsRegistrationRequestBrand',
-        :'campaign' => :'StartSmsRegistrationRequestCampaign',
-        :'messaging_brand_name' => :'String',
-        :'wizard_values' => :'Hash<String, String>',
-        :'resubmit_request_id' => :'String',
-        :'toll_free' => :'StartSmsRegistrationRequestTollFree'
+        :'brand' => :'Object',
+        :'campaign' => :'Object',
+        :'messaging_brand_name' => :'String'
       }
     end
 
@@ -105,14 +91,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::StartSmsRegistrationRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PreflightSmsRegistrationRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::StartSmsRegistrationRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PreflightSmsRegistrationRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -127,34 +113,22 @@ module Zernio
         if (value = attributes[:'phone_numbers']).is_a?(Array)
           self.phone_numbers = value
         end
-      else
-        self.phone_numbers = nil
       end
 
       if attributes.key?(:'brand')
         self.brand = attributes[:'brand']
+      else
+        self.brand = nil
       end
 
       if attributes.key?(:'campaign')
         self.campaign = attributes[:'campaign']
+      else
+        self.campaign = nil
       end
 
       if attributes.key?(:'messaging_brand_name')
         self.messaging_brand_name = attributes[:'messaging_brand_name']
-      end
-
-      if attributes.key?(:'wizard_values')
-        if (value = attributes[:'wizard_values']).is_a?(Hash)
-          self.wizard_values = value
-        end
-      end
-
-      if attributes.key?(:'resubmit_request_id')
-        self.resubmit_request_id = attributes[:'resubmit_request_id']
-      end
-
-      if attributes.key?(:'toll_free')
-        self.toll_free = attributes[:'toll_free']
       end
     end
 
@@ -167,12 +141,12 @@ module Zernio
         invalid_properties.push('invalid value for "registration_type", registration_type cannot be nil.')
       end
 
-      if @phone_numbers.nil?
-        invalid_properties.push('invalid value for "phone_numbers", phone_numbers cannot be nil.')
+      if @brand.nil?
+        invalid_properties.push('invalid value for "brand", brand cannot be nil.')
       end
 
-      if @phone_numbers.length < 1
-        invalid_properties.push('invalid value for "phone_numbers", number of items must be greater than or equal to 1.')
+      if @campaign.nil?
+        invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
       end
 
       if !@messaging_brand_name.nil? && @messaging_brand_name.to_s.length > 60
@@ -191,10 +165,10 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @registration_type.nil?
-      registration_type_validator = EnumAttributeValidator.new('String', ["standard_10dlc", "sole_prop_10dlc", "toll_free"])
+      registration_type_validator = EnumAttributeValidator.new('String', ["standard_10dlc", "sole_prop_10dlc"])
       return false unless registration_type_validator.valid?(@registration_type)
-      return false if @phone_numbers.nil?
-      return false if @phone_numbers.length < 1
+      return false if @brand.nil?
+      return false if @campaign.nil?
       return false if !@messaging_brand_name.nil? && @messaging_brand_name.to_s.length > 60
       return false if !@messaging_brand_name.nil? && @messaging_brand_name.to_s.length < 2
       true
@@ -203,7 +177,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] registration_type Object to be assigned
     def registration_type=(registration_type)
-      validator = EnumAttributeValidator.new('String', ["standard_10dlc", "sole_prop_10dlc", "toll_free"])
+      validator = EnumAttributeValidator.new('String', ["standard_10dlc", "sole_prop_10dlc"])
       unless validator.valid?(registration_type)
         fail ArgumentError, "invalid value for \"registration_type\", must be one of #{validator.allowable_values}."
       end
@@ -211,17 +185,23 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] phone_numbers Value to be assigned
-    def phone_numbers=(phone_numbers)
-      if phone_numbers.nil?
-        fail ArgumentError, 'phone_numbers cannot be nil'
+    # @param [Object] brand Value to be assigned
+    def brand=(brand)
+      if brand.nil?
+        fail ArgumentError, 'brand cannot be nil'
       end
 
-      if phone_numbers.length < 1
-        fail ArgumentError, 'invalid value for "phone_numbers", number of items must be greater than or equal to 1.'
+      @brand = brand
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] campaign Value to be assigned
+    def campaign=(campaign)
+      if campaign.nil?
+        fail ArgumentError, 'campaign cannot be nil'
       end
 
-      @phone_numbers = phone_numbers
+      @campaign = campaign
     end
 
     # Custom attribute writer method with validation
@@ -251,10 +231,7 @@ module Zernio
           phone_numbers == o.phone_numbers &&
           brand == o.brand &&
           campaign == o.campaign &&
-          messaging_brand_name == o.messaging_brand_name &&
-          wizard_values == o.wizard_values &&
-          resubmit_request_id == o.resubmit_request_id &&
-          toll_free == o.toll_free
+          messaging_brand_name == o.messaging_brand_name
     end
 
     # @see the `==` method
@@ -266,7 +243,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [registration_type, phone_numbers, brand, campaign, messaging_brand_name, wizard_values, resubmit_request_id, toll_free].hash
+      [registration_type, phone_numbers, brand, campaign, messaging_brand_name].hash
     end
 
     # Builds the object from hash

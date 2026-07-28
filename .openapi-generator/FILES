@@ -1016,6 +1016,10 @@ docs/PostUpdateResponse.md
 docs/PostUserId.md
 docs/PostsApi.md
 docs/PostsListResponse.md
+docs/PreflightSmsRegistration200Response.md
+docs/PreflightSmsRegistration200ResponseAdvisoriesInner.md
+docs/PreflightSmsRegistration200ResponseComposed.md
+docs/PreflightSmsRegistrationRequest.md
 docs/Profile.md
 docs/ProfileCreateResponse.md
 docs/ProfileDeleteResponse.md
@@ -1080,6 +1084,8 @@ docs/ReserveRfPredictionRequest.md
 docs/RespondToPhoneNumberReviewer200Response.md
 docs/RespondToPhoneNumberReviewerRequest.md
 docs/RespondToPhoneNumberReviewerRequestDocumentsInner.md
+docs/RespondToSmsRegistrationReview200Response.md
+docs/RespondToSmsRegistrationReviewRequest.md
 docs/RestoreWorkflowVersion200Response.md
 docs/RestoreWorkflowVersion200ResponseWorkflow.md
 docs/RetweetPost200Response.md
@@ -2622,6 +2628,10 @@ lib/zernio-sdk/models/post_retry_response.rb
 lib/zernio-sdk/models/post_update_response.rb
 lib/zernio-sdk/models/post_user_id.rb
 lib/zernio-sdk/models/posts_list_response.rb
+lib/zernio-sdk/models/preflight_sms_registration200_response.rb
+lib/zernio-sdk/models/preflight_sms_registration200_response_advisories_inner.rb
+lib/zernio-sdk/models/preflight_sms_registration200_response_composed.rb
+lib/zernio-sdk/models/preflight_sms_registration_request.rb
 lib/zernio-sdk/models/profile.rb
 lib/zernio-sdk/models/profile_create_response.rb
 lib/zernio-sdk/models/profile_delete_response.rb
@@ -2682,6 +2692,8 @@ lib/zernio-sdk/models/reserve_rf_prediction_request.rb
 lib/zernio-sdk/models/respond_to_phone_number_reviewer200_response.rb
 lib/zernio-sdk/models/respond_to_phone_number_reviewer_request.rb
 lib/zernio-sdk/models/respond_to_phone_number_reviewer_request_documents_inner.rb
+lib/zernio-sdk/models/respond_to_sms_registration_review200_response.rb
+lib/zernio-sdk/models/respond_to_sms_registration_review_request.rb
 lib/zernio-sdk/models/restore_workflow_version200_response.rb
 lib/zernio-sdk/models/restore_workflow_version200_response_workflow.rb
 lib/zernio-sdk/models/retweet_post200_response.rb
@@ -4199,6 +4211,10 @@ spec/models/post_spec.rb
 spec/models/post_update_response_spec.rb
 spec/models/post_user_id_spec.rb
 spec/models/posts_list_response_spec.rb
+spec/models/preflight_sms_registration200_response_advisories_inner_spec.rb
+spec/models/preflight_sms_registration200_response_composed_spec.rb
+spec/models/preflight_sms_registration200_response_spec.rb
+spec/models/preflight_sms_registration_request_spec.rb
 spec/models/profile_create_response_spec.rb
 spec/models/profile_delete_response_spec.rb
 spec/models/profile_get_response_spec.rb
@@ -4259,6 +4275,8 @@ spec/models/reserve_rf_prediction_request_spec.rb
 spec/models/respond_to_phone_number_reviewer200_response_spec.rb
 spec/models/respond_to_phone_number_reviewer_request_documents_inner_spec.rb
 spec/models/respond_to_phone_number_reviewer_request_spec.rb
+spec/models/respond_to_sms_registration_review200_response_spec.rb
+spec/models/respond_to_sms_registration_review_request_spec.rb
 spec/models/restore_workflow_version200_response_spec.rb
 spec/models/restore_workflow_version200_response_workflow_spec.rb
 spec/models/retweet_post200_response_spec.rb

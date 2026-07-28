@@ -163,6 +163,18 @@ describe 'SMSApi' do
     end
   end
 
+  # unit tests for preflight_sms_registration
+  # Pre-check a carrier registration
+  # Dry-run of &#x60;POST /v1/sms/registrations&#x60; for 10DLC: validates and composes the exact brand/campaign payloads a submission would store (branding, disclosures, auto-replies), runs deterministic compliance lints plus an AI reviewer over them, and returns the findings WITHOUT creating anything. Use it to fix issues before submitting; &#x60;block&#x60; severity findings indicate a near-certain carrier rejection. 
+  # @param preflight_sms_registration_request 
+  # @param [Hash] opts the optional parameters
+  # @return [PreflightSmsRegistration200Response]
+  describe 'preflight_sms_registration test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for request_sms_sender_id_limit_increase
   # Request a higher sender ID daily limit
   # Asks support to raise the workspace&#39;s daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
@@ -182,6 +194,19 @@ describe 'SMSApi' do
   # @param [Hash] opts the optional parameters
   # @return [ResendSmsRegistrationOtp200Response]
   describe 'resend_sms_registration_otp test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for respond_to_sms_registration_review
+  # Reply to a change request
+  # Replies to a reviewer change request on a registration in &#x60;changes_requested&#x60; state: a note, hosted document URLs (from &#x60;POST /v1/sms/opt-in-proof&#x60;), or both, sent together. The registration returns to &#x60;requested&#x60; (back in review) — no need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via &#x60;POST /v1/sms/registrations&#x60; with &#x60;resubmitRequestId&#x60; instead. 
+  # @param id 
+  # @param respond_to_sms_registration_review_request 
+  # @param [Hash] opts the optional parameters
+  # @return [RespondToSmsRegistrationReview200Response]
+  describe 'respond_to_sms_registration_review test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

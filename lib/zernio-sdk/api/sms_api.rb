@@ -732,6 +732,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Pre-check a carrier registration
+    # Dry-run of `POST /v1/sms/registrations` for 10DLC: validates and composes the exact brand/campaign payloads a submission would store (branding, disclosures, auto-replies), runs deterministic compliance lints plus an AI reviewer over them, and returns the findings WITHOUT creating anything. Use it to fix issues before submitting; `block` severity findings indicate a near-certain carrier rejection. 
+    # @param preflight_sms_registration_request [PreflightSmsRegistrationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [PreflightSmsRegistration200Response]
+    def preflight_sms_registration(preflight_sms_registration_request, opts = {})
+      data, _status_code, _headers = preflight_sms_registration_with_http_info(preflight_sms_registration_request, opts)
+      data
+    end
+
+    # Pre-check a carrier registration
+    # Dry-run of &#x60;POST /v1/sms/registrations&#x60; for 10DLC: validates and composes the exact brand/campaign payloads a submission would store (branding, disclosures, auto-replies), runs deterministic compliance lints plus an AI reviewer over them, and returns the findings WITHOUT creating anything. Use it to fix issues before submitting; &#x60;block&#x60; severity findings indicate a near-certain carrier rejection. 
+    # @param preflight_sms_registration_request [PreflightSmsRegistrationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(PreflightSmsRegistration200Response, Integer, Hash)>] PreflightSmsRegistration200Response data, response status code and response headers
+    def preflight_sms_registration_with_http_info(preflight_sms_registration_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SMSApi.preflight_sms_registration ...'
+      end
+      # verify the required parameter 'preflight_sms_registration_request' is set
+      if @api_client.config.client_side_validation && preflight_sms_registration_request.nil?
+        fail ArgumentError, "Missing the required parameter 'preflight_sms_registration_request' when calling SMSApi.preflight_sms_registration"
+      end
+      # resource path
+      local_var_path = '/v1/sms/registrations/preflight'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(preflight_sms_registration_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PreflightSmsRegistration200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"SMSApi.preflight_sms_registration",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SMSApi#preflight_sms_registration\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Request a higher sender ID daily limit
     # Asks support to raise the workspace's daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
     # @param request_sms_sender_id_limit_increase_request [RequestSmsSenderIdLimitIncreaseRequest] 
@@ -859,6 +927,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: SMSApi#resend_sms_registration_otp\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Reply to a change request
+    # Replies to a reviewer change request on a registration in `changes_requested` state: a note, hosted document URLs (from `POST /v1/sms/opt-in-proof`), or both, sent together. The registration returns to `requested` (back in review) — no need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via `POST /v1/sms/registrations` with `resubmitRequestId` instead. 
+    # @param id [String] 
+    # @param respond_to_sms_registration_review_request [RespondToSmsRegistrationReviewRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [RespondToSmsRegistrationReview200Response]
+    def respond_to_sms_registration_review(id, respond_to_sms_registration_review_request, opts = {})
+      data, _status_code, _headers = respond_to_sms_registration_review_with_http_info(id, respond_to_sms_registration_review_request, opts)
+      data
+    end
+
+    # Reply to a change request
+    # Replies to a reviewer change request on a registration in &#x60;changes_requested&#x60; state: a note, hosted document URLs (from &#x60;POST /v1/sms/opt-in-proof&#x60;), or both, sent together. The registration returns to &#x60;requested&#x60; (back in review) — no need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via &#x60;POST /v1/sms/registrations&#x60; with &#x60;resubmitRequestId&#x60; instead. 
+    # @param id [String] 
+    # @param respond_to_sms_registration_review_request [RespondToSmsRegistrationReviewRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RespondToSmsRegistrationReview200Response, Integer, Hash)>] RespondToSmsRegistrationReview200Response data, response status code and response headers
+    def respond_to_sms_registration_review_with_http_info(id, respond_to_sms_registration_review_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: SMSApi.respond_to_sms_registration_review ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling SMSApi.respond_to_sms_registration_review"
+      end
+      # verify the required parameter 'respond_to_sms_registration_review_request' is set
+      if @api_client.config.client_side_validation && respond_to_sms_registration_review_request.nil?
+        fail ArgumentError, "Missing the required parameter 'respond_to_sms_registration_review_request' when calling SMSApi.respond_to_sms_registration_review"
+      end
+      # resource path
+      local_var_path = '/v1/sms/registrations/{id}/respond'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(respond_to_sms_registration_review_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RespondToSmsRegistrationReview200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"SMSApi.respond_to_sms_registration_review",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: SMSApi#respond_to_sms_registration_review\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

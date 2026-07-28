@@ -425,8 +425,10 @@ Class | Method | HTTP request | Description
 *Zernio::SMSApi* | [**list_sms_registrations**](docs/SMSApi.md#list_sms_registrations) | **GET** /v1/sms/registrations | List carrier registrations
 *Zernio::SMSApi* | [**list_sms_sender_ids**](docs/SMSApi.md#list_sms_sender_ids) | **GET** /v1/sms/sender-ids | List alphanumeric sender IDs
 *Zernio::SMSApi* | [**lookup_sms_number**](docs/SMSApi.md#lookup_sms_number) | **GET** /v1/sms/lookup | Look up carrier + line type
+*Zernio::SMSApi* | [**preflight_sms_registration**](docs/SMSApi.md#preflight_sms_registration) | **POST** /v1/sms/registrations/preflight | Pre-check a carrier registration
 *Zernio::SMSApi* | [**request_sms_sender_id_limit_increase**](docs/SMSApi.md#request_sms_sender_id_limit_increase) | **POST** /v1/sms/sender-ids/limit-request | Request a higher sender ID daily limit
 *Zernio::SMSApi* | [**resend_sms_registration_otp**](docs/SMSApi.md#resend_sms_registration_otp) | **POST** /v1/sms/registrations/{id}/resend-otp | Re-send the sole-prop OTP
+*Zernio::SMSApi* | [**respond_to_sms_registration_review**](docs/SMSApi.md#respond_to_sms_registration_review) | **POST** /v1/sms/registrations/{id}/respond | Reply to a change request
 *Zernio::SMSApi* | [**reuse_sms_registration_for_number**](docs/SMSApi.md#reuse_sms_registration_for_number) | **POST** /v1/phone-numbers/{id}/sms/reuse-registration | Add number to SMS registration
 *Zernio::SMSApi* | [**send_sms**](docs/SMSApi.md#send_sms) | **POST** /v1/sms/messages | Send an SMS/MMS
 *Zernio::SMSApi* | [**share_sms_registration**](docs/SMSApi.md#share_sms_registration) | **POST** /v1/sms/registrations/share | Create a registration share link
@@ -1561,6 +1563,10 @@ Class | Method | HTTP request | Description
  - [Zernio::PostUpdateResponse](docs/PostUpdateResponse.md)
  - [Zernio::PostUserId](docs/PostUserId.md)
  - [Zernio::PostsListResponse](docs/PostsListResponse.md)
+ - [Zernio::PreflightSmsRegistration200Response](docs/PreflightSmsRegistration200Response.md)
+ - [Zernio::PreflightSmsRegistration200ResponseAdvisoriesInner](docs/PreflightSmsRegistration200ResponseAdvisoriesInner.md)
+ - [Zernio::PreflightSmsRegistration200ResponseComposed](docs/PreflightSmsRegistration200ResponseComposed.md)
+ - [Zernio::PreflightSmsRegistrationRequest](docs/PreflightSmsRegistrationRequest.md)
  - [Zernio::Profile](docs/Profile.md)
  - [Zernio::ProfileCreateResponse](docs/ProfileCreateResponse.md)
  - [Zernio::ProfileDeleteResponse](docs/ProfileDeleteResponse.md)
@@ -1621,6 +1627,8 @@ Class | Method | HTTP request | Description
  - [Zernio::RespondToPhoneNumberReviewer200Response](docs/RespondToPhoneNumberReviewer200Response.md)
  - [Zernio::RespondToPhoneNumberReviewerRequest](docs/RespondToPhoneNumberReviewerRequest.md)
  - [Zernio::RespondToPhoneNumberReviewerRequestDocumentsInner](docs/RespondToPhoneNumberReviewerRequestDocumentsInner.md)
+ - [Zernio::RespondToSmsRegistrationReview200Response](docs/RespondToSmsRegistrationReview200Response.md)
+ - [Zernio::RespondToSmsRegistrationReviewRequest](docs/RespondToSmsRegistrationReviewRequest.md)
  - [Zernio::RestoreWorkflowVersion200Response](docs/RestoreWorkflowVersion200Response.md)
  - [Zernio::RestoreWorkflowVersion200ResponseWorkflow](docs/RestoreWorkflowVersion200ResponseWorkflow.md)
  - [Zernio::RetweetPost200Response](docs/RetweetPost200Response.md)
