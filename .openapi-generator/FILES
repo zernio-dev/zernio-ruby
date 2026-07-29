@@ -1165,6 +1165,7 @@ docs/SendDiscordDirectMessageRequestAttachmentsInner.md
 docs/SendInboxMessage200Response.md
 docs/SendInboxMessage200ResponseData.md
 docs/SendInboxMessage400Response.md
+docs/SendInboxMessage400ResponsePlatformError.md
 docs/SendInboxMessageRequest.md
 docs/SendInboxMessageRequestButtonsInner.md
 docs/SendInboxMessageRequestContactsInner.md
@@ -1204,6 +1205,7 @@ docs/SendInboxMessageRequestTemplate.md
 docs/SendInboxMessageRequestTemplateElementsInner.md
 docs/SendInboxMessageRequestTemplateElementsInnerButtonsInner.md
 docs/SendPrivateReplyToComment200Response.md
+docs/SendPrivateReplyToComment400Response.md
 docs/SendPrivateReplyToCommentRequest.md
 docs/SendPrivateReplyToCommentRequestButtonsInner.md
 docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf.md
@@ -2778,6 +2780,7 @@ lib/zernio-sdk/models/send_discord_direct_message_request_attachments_inner.rb
 lib/zernio-sdk/models/send_inbox_message200_response.rb
 lib/zernio-sdk/models/send_inbox_message200_response_data.rb
 lib/zernio-sdk/models/send_inbox_message400_response.rb
+lib/zernio-sdk/models/send_inbox_message400_response_platform_error.rb
 lib/zernio-sdk/models/send_inbox_message_request.rb
 lib/zernio-sdk/models/send_inbox_message_request_buttons_inner.rb
 lib/zernio-sdk/models/send_inbox_message_request_contacts_inner.rb
@@ -2817,6 +2820,7 @@ lib/zernio-sdk/models/send_inbox_message_request_template.rb
 lib/zernio-sdk/models/send_inbox_message_request_template_elements_inner.rb
 lib/zernio-sdk/models/send_inbox_message_request_template_elements_inner_buttons_inner.rb
 lib/zernio-sdk/models/send_private_reply_to_comment200_response.rb
+lib/zernio-sdk/models/send_private_reply_to_comment400_response.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request_buttons_inner.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request_buttons_inner_one_of.rb
@@ -4367,6 +4371,7 @@ spec/models/send_discord_direct_message_request_attachments_inner_spec.rb
 spec/models/send_discord_direct_message_request_spec.rb
 spec/models/send_inbox_message200_response_data_spec.rb
 spec/models/send_inbox_message200_response_spec.rb
+spec/models/send_inbox_message400_response_platform_error_spec.rb
 spec/models/send_inbox_message400_response_spec.rb
 spec/models/send_inbox_message_request_buttons_inner_spec.rb
 spec/models/send_inbox_message_request_contacts_inner_emails_inner_spec.rb
@@ -4407,6 +4412,7 @@ spec/models/send_inbox_message_request_template_elements_inner_buttons_inner_spe
 spec/models/send_inbox_message_request_template_elements_inner_spec.rb
 spec/models/send_inbox_message_request_template_spec.rb
 spec/models/send_private_reply_to_comment200_response_spec.rb
+spec/models/send_private_reply_to_comment400_response_spec.rb
 spec/models/send_private_reply_to_comment_request_buttons_inner_one_of1_spec.rb
 spec/models/send_private_reply_to_comment_request_buttons_inner_one_of2_spec.rb
 spec/models/send_private_reply_to_comment_request_buttons_inner_one_of_spec.rb

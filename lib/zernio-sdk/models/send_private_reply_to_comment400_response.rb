@@ -14,13 +14,10 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SendInboxMessage400Response < ApiModelBase
+  class SendPrivateReplyToComment400Response < ApiModelBase
     attr_accessor :error
 
-    # Stable machine-readable reason. PLATFORM_LIMITATION covers a capability the platform does not offer (e.g. Bluesky and Reddit DMs reject media); MISSING_PARTICIPANT means the stored conversation has no recipient to send to.
     attr_accessor :code
-
-    attr_accessor :platform_error
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -48,8 +45,7 @@ module Zernio
     def self.attribute_map
       {
         :'error' => :'error',
-        :'code' => :'code',
-        :'platform_error' => :'platformError'
+        :'code' => :'code'
       }
     end
 
@@ -67,8 +63,7 @@ module Zernio
     def self.openapi_types
       {
         :'error' => :'String',
-        :'code' => :'String',
-        :'platform_error' => :'SendInboxMessage400ResponsePlatformError'
+        :'code' => :'String'
       }
     end
 
@@ -82,14 +77,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessage400Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendPrivateReplyToComment400Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessage400Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendPrivateReplyToComment400Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -100,10 +95,6 @@ module Zernio
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
-      end
-
-      if attributes.key?(:'platform_error')
-        self.platform_error = attributes[:'platform_error']
       end
     end
 
@@ -119,7 +110,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT"])
+      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION"])
       return false unless code_validator.valid?(@code)
       true
     end
@@ -127,7 +118,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code)
-      validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT"])
+      validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION"])
       unless validator.valid?(code)
         fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
       end
@@ -140,8 +131,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           error == o.error &&
-          code == o.code &&
-          platform_error == o.platform_error
+          code == o.code
     end
 
     # @see the `==` method
@@ -153,7 +143,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, code, platform_error].hash
+      [error, code].hash
     end
 
     # Builds the object from hash
