@@ -17,7 +17,7 @@ module Zernio
   class StartSmsRegistrationRequest < ApiModelBase
     attr_accessor :registration_type
 
-    # Your numbers this registration covers.
+    # Your numbers this registration covers. When omitted or empty on a 10DLC registration, defaults to your active SMS-enabled US local numbers not already covered by another registration.
     attr_accessor :phone_numbers
 
     attr_accessor :brand
@@ -127,8 +127,6 @@ module Zernio
         if (value = attributes[:'phone_numbers']).is_a?(Array)
           self.phone_numbers = value
         end
-      else
-        self.phone_numbers = nil
       end
 
       if attributes.key?(:'brand')
@@ -167,14 +165,6 @@ module Zernio
         invalid_properties.push('invalid value for "registration_type", registration_type cannot be nil.')
       end
 
-      if @phone_numbers.nil?
-        invalid_properties.push('invalid value for "phone_numbers", phone_numbers cannot be nil.')
-      end
-
-      if @phone_numbers.length < 1
-        invalid_properties.push('invalid value for "phone_numbers", number of items must be greater than or equal to 1.')
-      end
-
       if !@messaging_brand_name.nil? && @messaging_brand_name.to_s.length > 60
         invalid_properties.push('invalid value for "messaging_brand_name", the character length must be smaller than or equal to 60.')
       end
@@ -193,8 +183,6 @@ module Zernio
       return false if @registration_type.nil?
       registration_type_validator = EnumAttributeValidator.new('String', ["standard_10dlc", "sole_prop_10dlc", "toll_free"])
       return false unless registration_type_validator.valid?(@registration_type)
-      return false if @phone_numbers.nil?
-      return false if @phone_numbers.length < 1
       return false if !@messaging_brand_name.nil? && @messaging_brand_name.to_s.length > 60
       return false if !@messaging_brand_name.nil? && @messaging_brand_name.to_s.length < 2
       true
@@ -208,20 +196,6 @@ module Zernio
         fail ArgumentError, "invalid value for \"registration_type\", must be one of #{validator.allowable_values}."
       end
       @registration_type = registration_type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] phone_numbers Value to be assigned
-    def phone_numbers=(phone_numbers)
-      if phone_numbers.nil?
-        fail ArgumentError, 'phone_numbers cannot be nil'
-      end
-
-      if phone_numbers.length < 1
-        fail ArgumentError, 'invalid value for "phone_numbers", number of items must be greater than or equal to 1.'
-      end
-
-      @phone_numbers = phone_numbers
     end
 
     # Custom attribute writer method with validation

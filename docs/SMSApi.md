@@ -1297,7 +1297,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::SMSApi.new
-start_sms_registration_request = Zernio::StartSmsRegistrationRequest.new({registration_type: 'standard_10dlc', phone_numbers: ['phone_numbers_example']}) # StartSmsRegistrationRequest | 
+start_sms_registration_request = Zernio::StartSmsRegistrationRequest.new({registration_type: 'standard_10dlc'}) # StartSmsRegistrationRequest | 
 
 begin
   # Start a carrier registration
