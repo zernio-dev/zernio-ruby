@@ -45,7 +45,7 @@ module Zernio
       {
         :'status' => :'String',
         :'leads' => :'Array<ListLeads200ResponseLeadsInner>',
-        :'pagination' => :'GetInboxPostComments200ResponsePagination'
+        :'pagination' => :'SearchTweets200ResponsePagination'
       }
     end
 

@@ -17,6 +17,7 @@ module Zernio
   class GetInboxPostComments200ResponsePagination < ApiModelBase
     attr_accessor :has_more
 
+    # Only present when hasMore is true. Absent on the last page, so treat its absence as the end of the thread.
     attr_accessor :cursor
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -14,19 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListFormLeads200Response < ApiModelBase
-    attr_accessor :status
+  class SearchTweets200ResponsePagination < ApiModelBase
+    attr_accessor :has_more
 
-    attr_accessor :leads
-
-    attr_accessor :pagination
+    attr_accessor :cursor
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'leads' => :'leads',
-        :'pagination' => :'pagination'
+        :'has_more' => :'hasMore',
+        :'cursor' => :'cursor'
       }
     end
 
@@ -43,15 +40,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'leads' => :'Array<ListFormLeads200ResponseLeadsInner>',
-        :'pagination' => :'SearchTweets200ResponsePagination'
+        :'has_more' => :'Boolean',
+        :'cursor' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'cursor'
       ])
     end
 
@@ -59,30 +56,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListFormLeads200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SearchTweets200ResponsePagination` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListFormLeads200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SearchTweets200ResponsePagination`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
       end
 
-      if attributes.key?(:'leads')
-        if (value = attributes[:'leads']).is_a?(Array)
-          self.leads = value
-        end
-      end
-
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'cursor')
+        self.cursor = attributes[:'cursor']
       end
     end
 
@@ -106,9 +97,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          leads == o.leads &&
-          pagination == o.pagination
+          has_more == o.has_more &&
+          cursor == o.cursor
     end
 
     # @see the `==` method
@@ -120,7 +110,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, leads, pagination].hash
+      [has_more, cursor].hash
     end
 
     # Builds the object from hash

@@ -1676,6 +1676,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SearchReddit200Response](docs/SearchReddit200Response.md)
  - [Zernio::SearchTweets200Response](docs/SearchTweets200Response.md)
  - [Zernio::SearchTweets200ResponseMeta](docs/SearchTweets200ResponseMeta.md)
+ - [Zernio::SearchTweets200ResponsePagination](docs/SearchTweets200ResponsePagination.md)
  - [Zernio::SearchTweets200ResponseTweetsInner](docs/SearchTweets200ResponseTweetsInner.md)
  - [Zernio::SearchTweets200ResponseTweetsInnerAuthor](docs/SearchTweets200ResponseTweetsInnerAuthor.md)
  - [Zernio::SelectFacebookPage200Response](docs/SelectFacebookPage200Response.md)

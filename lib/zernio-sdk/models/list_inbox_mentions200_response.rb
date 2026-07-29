@@ -44,7 +44,7 @@ module Zernio
     def self.openapi_types
       {
         :'data' => :'Array<ListInboxMentions200ResponseDataInner>',
-        :'pagination' => :'GetInboxPostComments200ResponsePagination',
+        :'pagination' => :'SearchTweets200ResponsePagination',
         :'meta' => :'ListInboxMentions200ResponseMeta'
       }
     end

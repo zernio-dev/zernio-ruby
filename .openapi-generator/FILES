@@ -1131,6 +1131,7 @@ docs/SearchInboxConversations200ResponseMetaFailedAccountsInner.md
 docs/SearchReddit200Response.md
 docs/SearchTweets200Response.md
 docs/SearchTweets200ResponseMeta.md
+docs/SearchTweets200ResponsePagination.md
 docs/SearchTweets200ResponseTweetsInner.md
 docs/SearchTweets200ResponseTweetsInnerAuthor.md
 docs/SelectFacebookPage200Response.md
@@ -2749,6 +2750,7 @@ lib/zernio-sdk/models/search_inbox_conversations200_response_meta_failed_account
 lib/zernio-sdk/models/search_reddit200_response.rb
 lib/zernio-sdk/models/search_tweets200_response.rb
 lib/zernio-sdk/models/search_tweets200_response_meta.rb
+lib/zernio-sdk/models/search_tweets200_response_pagination.rb
 lib/zernio-sdk/models/search_tweets200_response_tweets_inner.rb
 lib/zernio-sdk/models/search_tweets200_response_tweets_inner_author.rb
 lib/zernio-sdk/models/select_facebook_page200_response.rb
@@ -4343,6 +4345,7 @@ spec/models/search_inbox_conversations200_response_meta_spec.rb
 spec/models/search_inbox_conversations200_response_spec.rb
 spec/models/search_reddit200_response_spec.rb
 spec/models/search_tweets200_response_meta_spec.rb
+spec/models/search_tweets200_response_pagination_spec.rb
 spec/models/search_tweets200_response_spec.rb
 spec/models/search_tweets200_response_tweets_inner_author_spec.rb
 spec/models/search_tweets200_response_tweets_inner_spec.rb

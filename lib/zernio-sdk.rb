@@ -1097,6 +1097,7 @@ require 'zernio-sdk/models/search_inbox_conversations200_response_meta_failed_ac
 require 'zernio-sdk/models/search_reddit200_response'
 require 'zernio-sdk/models/search_tweets200_response'
 require 'zernio-sdk/models/search_tweets200_response_meta'
+require 'zernio-sdk/models/search_tweets200_response_pagination'
 require 'zernio-sdk/models/search_tweets200_response_tweets_inner'
 require 'zernio-sdk/models/search_tweets200_response_tweets_inner_author'
 require 'zernio-sdk/models/select_facebook_page200_response'

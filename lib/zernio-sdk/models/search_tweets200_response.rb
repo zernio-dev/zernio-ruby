@@ -48,7 +48,7 @@ module Zernio
       {
         :'status' => :'String',
         :'tweets' => :'Array<SearchTweets200ResponseTweetsInner>',
-        :'pagination' => :'GetInboxPostComments200ResponsePagination',
+        :'pagination' => :'SearchTweets200ResponsePagination',
         :'meta' => :'SearchTweets200ResponseMeta'
       }
     end

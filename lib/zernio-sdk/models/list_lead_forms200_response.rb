@@ -45,7 +45,7 @@ module Zernio
       {
         :'status' => :'String',
         :'forms' => :'Array<Object>',
-        :'pagination' => :'GetInboxPostComments200ResponsePagination'
+        :'pagination' => :'SearchTweets200ResponsePagination'
       }
     end
 
