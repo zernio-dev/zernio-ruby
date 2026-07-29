@@ -135,7 +135,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @filename.nil?
       return false if @content_type.nil?
-      content_type_validator = EnumAttributeValidator.new('String', ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "video/mp4", "video/mpeg", "video/quicktime", "video/avi", "video/x-msvideo", "video/webm", "video/x-m4v", "application/pdf"])
+      content_type_validator = EnumAttributeValidator.new('String', ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "video/mp4", "video/mpeg", "video/quicktime", "video/avi", "video/x-msvideo", "video/webm", "video/x-m4v", "application/pdf", "audio/mpeg", "audio/mp4", "audio/aac", "audio/ogg", "audio/wav", "audio/webm", "audio/x-m4a"])
       return false unless content_type_validator.valid?(@content_type)
       true
     end
@@ -153,7 +153,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] content_type Object to be assigned
     def content_type=(content_type)
-      validator = EnumAttributeValidator.new('String', ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "video/mp4", "video/mpeg", "video/quicktime", "video/avi", "video/x-msvideo", "video/webm", "video/x-m4v", "application/pdf"])
+      validator = EnumAttributeValidator.new('String', ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "video/mp4", "video/mpeg", "video/quicktime", "video/avi", "video/x-msvideo", "video/webm", "video/x-m4v", "application/pdf", "audio/mpeg", "audio/mp4", "audio/aac", "audio/ogg", "audio/wav", "audio/webm", "audio/x-m4a"])
       unless validator.valid?(content_type)
         fail ArgumentError, "invalid value for \"content_type\", must be one of #{validator.allowable_values}."
       end
