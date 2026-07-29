@@ -779,7 +779,7 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'direction'] && !allowable_values.include?(opts[:'direction'])
         fail ArgumentError, "invalid value for \"direction\", must be one of #{allowable_values}"
       end
-      allowable_values = ["facebook", "instagram", "telegram", "whatsapp", "sms"]
+      allowable_values = ["facebook", "instagram", "telegram", "whatsapp", "sms", "slack"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
