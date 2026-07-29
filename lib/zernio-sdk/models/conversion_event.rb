@@ -39,7 +39,7 @@ module Zernio
     # URL where the conversion originated (used by Meta).
     attr_accessor :source_url
 
-    # Where the conversion happened. Used by Meta; Google ignores.
+    # Where the conversion happened. Used by Meta. Google also requires an event source internally; omitting this field sends OTHER to Google. Send an explicit value for accurate origin reporting.
     attr_accessor :action_source
 
     # Escape hatch for platform-specific fields we haven't normalized. Forwarded as-is.
