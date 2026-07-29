@@ -550,7 +550,7 @@ module Zernio
     # Deprecated alias of `/v1/phone-numbers/purchase`; same contract. New integrations should use that path.  Payment-first: you do not pick a specific number, the system provisions one and auto-assigns it. With usage-based billing active and a payment method on file, the number provisions inline and bills per month on your usage-based invoice (there is no checkout redirect). No payment method on file returns `402 PAYMENT_REQUIRED`; a regulated country returns `202` with `status: \"kyc_required\"` and a `kycUrl`.  Requires usage-based billing (the Usage plan). The maximum number of phone numbers is determined by the user's plan. 
     # @param purchase_whats_app_phone_number_request [PurchaseWhatsAppPhoneNumberRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [PurchasePhoneNumber200Response]
+    # @return [PurchaseWhatsAppPhoneNumber200Response]
     def purchase_whats_app_phone_number(purchase_whats_app_phone_number_request, opts = {})
       data, _status_code, _headers = purchase_whats_app_phone_number_with_http_info(purchase_whats_app_phone_number_request, opts)
       data
@@ -560,7 +560,7 @@ module Zernio
     # Deprecated alias of &#x60;/v1/phone-numbers/purchase&#x60;; same contract. New integrations should use that path.  Payment-first: you do not pick a specific number, the system provisions one and auto-assigns it. With usage-based billing active and a payment method on file, the number provisions inline and bills per month on your usage-based invoice (there is no checkout redirect). No payment method on file returns &#x60;402 PAYMENT_REQUIRED&#x60;; a regulated country returns &#x60;202&#x60; with &#x60;status: \&quot;kyc_required\&quot;&#x60; and a &#x60;kycUrl&#x60;.  Requires usage-based billing (the Usage plan). The maximum number of phone numbers is determined by the user&#39;s plan. 
     # @param purchase_whats_app_phone_number_request [PurchaseWhatsAppPhoneNumberRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(PurchasePhoneNumber200Response, Integer, Hash)>] PurchasePhoneNumber200Response data, response status code and response headers
+    # @return [Array<(PurchaseWhatsAppPhoneNumber200Response, Integer, Hash)>] PurchaseWhatsAppPhoneNumber200Response data, response status code and response headers
     def purchase_whats_app_phone_number_with_http_info(purchase_whats_app_phone_number_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.purchase_whats_app_phone_number ...'
@@ -592,7 +592,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(purchase_whats_app_phone_number_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PurchasePhoneNumber200Response'
+      return_type = opts[:debug_return_type] || 'PurchaseWhatsAppPhoneNumber200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

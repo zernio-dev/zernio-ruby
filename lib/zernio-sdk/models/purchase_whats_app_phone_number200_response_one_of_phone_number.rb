@@ -14,46 +14,31 @@ require 'date'
 require 'time'
 
 module Zernio
-  # A number was already purchased under the supplied purchaseIntentId; no new number was provisioned. 
-  class PurchasePhoneNumber200ResponseOneOf2 < ApiModelBase
-    attr_accessor :status
-
-    attr_accessor :number_id
+  class PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber < ApiModelBase
+    attr_accessor :id
 
     attr_accessor :phone_number
 
-    # The profile the number was actually assigned to.
-    attr_accessor :profile_id
+    attr_accessor :status
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :country
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
+    attr_accessor :provisioned_at
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :meta_preverified_id
+
+    attr_accessor :meta_verification_status
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'number_id' => :'numberId',
+        :'id' => :'id',
         :'phone_number' => :'phoneNumber',
-        :'profile_id' => :'profileId'
+        :'status' => :'status',
+        :'country' => :'country',
+        :'provisioned_at' => :'provisionedAt',
+        :'meta_preverified_id' => :'metaPreverifiedId',
+        :'meta_verification_status' => :'metaVerificationStatus'
       }
     end
 
@@ -70,10 +55,13 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'number_id' => :'String',
+        :'id' => :'String',
         :'phone_number' => :'String',
-        :'profile_id' => :'String'
+        :'status' => :'String',
+        :'country' => :'String',
+        :'provisioned_at' => :'Time',
+        :'meta_preverified_id' => :'String',
+        :'meta_verification_status' => :'String'
       }
     end
 
@@ -87,32 +75,44 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchasePhoneNumber200ResponseOneOf2` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchasePhoneNumber200ResponseOneOf2`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOfPhoneNumber`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'number_id')
-        self.number_id = attributes[:'number_id']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'phone_number')
         self.phone_number = attributes[:'phone_number']
       end
 
-      if attributes.key?(:'profile_id')
-        self.profile_id = attributes[:'profile_id']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'country')
+        self.country = attributes[:'country']
+      end
+
+      if attributes.key?(:'provisioned_at')
+        self.provisioned_at = attributes[:'provisioned_at']
+      end
+
+      if attributes.key?(:'meta_preverified_id')
+        self.meta_preverified_id = attributes[:'meta_preverified_id']
+      end
+
+      if attributes.key?(:'meta_verification_status')
+        self.meta_verification_status = attributes[:'meta_verification_status']
       end
     end
 
@@ -128,19 +128,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["already_purchased"])
-      return false unless status_validator.valid?(@status)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["already_purchased"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -148,10 +136,13 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          number_id == o.number_id &&
+          id == o.id &&
           phone_number == o.phone_number &&
-          profile_id == o.profile_id
+          status == o.status &&
+          country == o.country &&
+          provisioned_at == o.provisioned_at &&
+          meta_preverified_id == o.meta_preverified_id &&
+          meta_verification_status == o.meta_verification_status
     end
 
     # @see the `==` method
@@ -163,7 +154,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, number_id, phone_number, profile_id].hash
+      [id, phone_number, status, country, provisioned_at, meta_preverified_id, meta_verification_status].hash
     end
 
     # Builds the object from hash

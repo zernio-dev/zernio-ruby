@@ -584,7 +584,7 @@ This endpoint does not need any parameter.
 
 ## purchase_whats_app_phone_number
 
-> <PurchasePhoneNumber200Response> purchase_whats_app_phone_number(purchase_whats_app_phone_number_request)
+> <PurchaseWhatsAppPhoneNumber200Response> purchase_whats_app_phone_number(purchase_whats_app_phone_number_request)
 
 Purchase phone number
 
@@ -617,7 +617,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PurchasePhoneNumber200Response>, Integer, Hash)> purchase_whats_app_phone_number_with_http_info(purchase_whats_app_phone_number_request)
+> <Array(<PurchaseWhatsAppPhoneNumber200Response>, Integer, Hash)> purchase_whats_app_phone_number_with_http_info(purchase_whats_app_phone_number_request)
 
 ```ruby
 begin
@@ -625,7 +625,7 @@ begin
   data, status_code, headers = api_instance.purchase_whats_app_phone_number_with_http_info(purchase_whats_app_phone_number_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PurchasePhoneNumber200Response>
+  p data # => <PurchaseWhatsAppPhoneNumber200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppPhoneNumbersApi->purchase_whats_app_phone_number_with_http_info: #{e}"
 end
@@ -639,7 +639,7 @@ end
 
 ### Return type
 
-[**PurchasePhoneNumber200Response**](PurchasePhoneNumber200Response.md)
+[**PurchaseWhatsAppPhoneNumber200Response**](PurchaseWhatsAppPhoneNumber200Response.md)
 
 ### Authorization
 

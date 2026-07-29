@@ -29,6 +29,9 @@ module Zernio
 
     attr_accessor :meta_verification_status
 
+    # The profile the number was actually assigned to.
+    attr_accessor :profile_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +41,8 @@ module Zernio
         :'country' => :'country',
         :'provisioned_at' => :'provisionedAt',
         :'meta_preverified_id' => :'metaPreverifiedId',
-        :'meta_verification_status' => :'metaVerificationStatus'
+        :'meta_verification_status' => :'metaVerificationStatus',
+        :'profile_id' => :'profileId'
       }
     end
 
@@ -61,7 +65,8 @@ module Zernio
         :'country' => :'String',
         :'provisioned_at' => :'Time',
         :'meta_preverified_id' => :'String',
-        :'meta_verification_status' => :'String'
+        :'meta_verification_status' => :'String',
+        :'profile_id' => :'String'
       }
     end
 
@@ -114,6 +119,10 @@ module Zernio
       if attributes.key?(:'meta_verification_status')
         self.meta_verification_status = attributes[:'meta_verification_status']
       end
+
+      if attributes.key?(:'profile_id')
+        self.profile_id = attributes[:'profile_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -142,7 +151,8 @@ module Zernio
           country == o.country &&
           provisioned_at == o.provisioned_at &&
           meta_preverified_id == o.meta_preverified_id &&
-          meta_verification_status == o.meta_verification_status
+          meta_verification_status == o.meta_verification_status &&
+          profile_id == o.profile_id
     end
 
     # @see the `==` method
@@ -154,7 +164,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, phone_number, status, country, provisioned_at, meta_preverified_id, meta_verification_status].hash
+      [id, phone_number, status, country, provisioned_at, meta_preverified_id, meta_verification_status, profile_id].hash
     end
 
     # Builds the object from hash

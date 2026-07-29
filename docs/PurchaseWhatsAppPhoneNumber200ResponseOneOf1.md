@@ -1,4 +1,4 @@
-# Zernio::PurchasePhoneNumber200ResponseOneOf2
+# Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf1
 
 ## Properties
 
@@ -7,18 +7,16 @@
 | **status** | **String** |  | [optional] |
 | **number_id** | **String** |  | [optional] |
 | **phone_number** | **String** |  | [optional] |
-| **profile_id** | **String** | The profile the number was actually assigned to. | [optional] |
 
 ## Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::PurchasePhoneNumber200ResponseOneOf2.new(
+instance = Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf1.new(
   status: null,
   number_id: null,
-  phone_number: null,
-  profile_id: null
+  phone_number: null
 )
 ```
 

@@ -15,15 +15,12 @@ require 'time'
 
 module Zernio
   # A number was already purchased under the supplied purchaseIntentId; no new number was provisioned. 
-  class PurchasePhoneNumber200ResponseOneOf2 < ApiModelBase
+  class PurchaseWhatsAppPhoneNumber200ResponseOneOf1 < ApiModelBase
     attr_accessor :status
 
     attr_accessor :number_id
 
     attr_accessor :phone_number
-
-    # The profile the number was actually assigned to.
-    attr_accessor :profile_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -52,8 +49,7 @@ module Zernio
       {
         :'status' => :'status',
         :'number_id' => :'numberId',
-        :'phone_number' => :'phoneNumber',
-        :'profile_id' => :'profileId'
+        :'phone_number' => :'phoneNumber'
       }
     end
 
@@ -72,8 +68,7 @@ module Zernio
       {
         :'status' => :'String',
         :'number_id' => :'String',
-        :'phone_number' => :'String',
-        :'profile_id' => :'String'
+        :'phone_number' => :'String'
       }
     end
 
@@ -87,14 +82,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchasePhoneNumber200ResponseOneOf2` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf1` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchasePhoneNumber200ResponseOneOf2`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PurchaseWhatsAppPhoneNumber200ResponseOneOf1`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -109,10 +104,6 @@ module Zernio
 
       if attributes.key?(:'phone_number')
         self.phone_number = attributes[:'phone_number']
-      end
-
-      if attributes.key?(:'profile_id')
-        self.profile_id = attributes[:'profile_id']
       end
     end
 
@@ -150,8 +141,7 @@ module Zernio
       self.class == o.class &&
           status == o.status &&
           number_id == o.number_id &&
-          phone_number == o.phone_number &&
-          profile_id == o.profile_id
+          phone_number == o.phone_number
     end
 
     # @see the `==` method
@@ -163,7 +153,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, number_id, phone_number, profile_id].hash
+      [status, number_id, phone_number].hash
     end
 
     # Builds the object from hash
