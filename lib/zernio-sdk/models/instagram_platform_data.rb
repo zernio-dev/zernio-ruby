@@ -30,7 +30,7 @@ module Zernio
 
     attr_accessor :trial_params
 
-    # Tag Instagram users in photos by username and position. Not supported for stories or videos. For carousels, use mediaIndex to target specific slides (defaults to 0). Tags on video items are silently skipped.
+    # Tag Instagram users by username. The tag shape depends on the media: photos require x/y coordinates, Reels and videos take username only (coordinates are ignored), stories accept optional coordinates. For carousels, use mediaIndex to target specific slides (defaults to 0); video slides take username-only tags. Photo tags without valid coordinates are skipped.
     attr_accessor :user_tags
 
     # Custom name for original audio in Reels. Replaces the default \"Original Audio\" label. Can only be set once.

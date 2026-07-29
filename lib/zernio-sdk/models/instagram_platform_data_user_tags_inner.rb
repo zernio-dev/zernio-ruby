@@ -18,13 +18,13 @@ module Zernio
     # Instagram username (@ symbol is optional and will be removed automatically)
     attr_accessor :username
 
-    # X coordinate position from left edge (0.0 = left, 0.5 = center, 1.0 = right)
+    # X coordinate position from left edge (0.0 = left, 0.5 = center, 1.0 = right). Required for photos, ignored for Reels/videos, optional for stories.
     attr_accessor :x
 
-    # Y coordinate position from top edge (0.0 = top, 0.5 = center, 1.0 = bottom)
+    # Y coordinate position from top edge (0.0 = top, 0.5 = center, 1.0 = bottom). Required for photos, ignored for Reels/videos, optional for stories.
     attr_accessor :y
 
-    # Zero-based index of the carousel item to tag. Defaults to 0. Tags on video items or out-of-range indices are ignored.
+    # Zero-based index of the carousel item to tag. Defaults to 0. Tags on out-of-range indices are ignored.
     attr_accessor :media_index
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -87,14 +87,10 @@ module Zernio
 
       if attributes.key?(:'x')
         self.x = attributes[:'x']
-      else
-        self.x = nil
       end
 
       if attributes.key?(:'y')
         self.y = attributes[:'y']
-      else
-        self.y = nil
       end
 
       if attributes.key?(:'media_index')
@@ -111,27 +107,19 @@ module Zernio
         invalid_properties.push('invalid value for "username", username cannot be nil.')
       end
 
-      if @x.nil?
-        invalid_properties.push('invalid value for "x", x cannot be nil.')
-      end
-
-      if @x > 1
+      if !@x.nil? && @x > 1
         invalid_properties.push('invalid value for "x", must be smaller than or equal to 1.')
       end
 
-      if @x < 0
+      if !@x.nil? && @x < 0
         invalid_properties.push('invalid value for "x", must be greater than or equal to 0.')
       end
 
-      if @y.nil?
-        invalid_properties.push('invalid value for "y", y cannot be nil.')
-      end
-
-      if @y > 1
+      if !@y.nil? && @y > 1
         invalid_properties.push('invalid value for "y", must be smaller than or equal to 1.')
       end
 
-      if @y < 0
+      if !@y.nil? && @y < 0
         invalid_properties.push('invalid value for "y", must be greater than or equal to 0.')
       end
 
@@ -147,12 +135,10 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @username.nil?
-      return false if @x.nil?
-      return false if @x > 1
-      return false if @x < 0
-      return false if @y.nil?
-      return false if @y > 1
-      return false if @y < 0
+      return false if !@x.nil? && @x > 1
+      return false if !@x.nil? && @x < 0
+      return false if !@y.nil? && @y > 1
+      return false if !@y.nil? && @y < 0
       return false if !@media_index.nil? && @media_index < 0
       true
     end
