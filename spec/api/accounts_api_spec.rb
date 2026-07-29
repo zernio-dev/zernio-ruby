@@ -86,6 +86,18 @@ describe 'AccountsApi' do
     end
   end
 
+  # unit tests for get_slack_settings
+  # Get Slack account settings
+  # Returns the connected Slack channel details and the default message identity (name and avatar shown as the author on every post, with Slack&#39;s APP badge). The identity applies to messages only; the app&#39;s own Slack profile is global and cannot be changed per workspace.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetSlackSettings200Response]
+  describe 'get_slack_settings test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_tik_tok_creator_info
   # Get TikTok creator info
   # Returns TikTok creator details, available privacy levels, posting limits, and commercial content options for a specific TikTok account. Only works with TikTok accounts.
@@ -137,6 +149,19 @@ describe 'AccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAccount200Response]
   describe 'update_account test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_slack_settings
+  # Update Slack account settings
+  # Set or clear the default message identity for this channel. Empty string clears a field; per-post platformSpecificData.username/iconUrl still override these defaults.
+  # @param account_id 
+  # @param update_slack_settings_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'update_slack_settings test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -86,10 +86,12 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**get_account_health**](docs/AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health
 *Zernio::AccountsApi* | [**get_all_accounts_health**](docs/AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health
 *Zernio::AccountsApi* | [**get_follower_stats**](docs/AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
+*Zernio::AccountsApi* | [**get_slack_settings**](docs/AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings
 *Zernio::AccountsApi* | [**get_tik_tok_creator_info**](docs/AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info
 *Zernio::AccountsApi* | [**list_accounts**](docs/AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts
 *Zernio::AccountsApi* | [**move_account_to_profile**](docs/AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
+*Zernio::AccountsApi* | [**update_slack_settings**](docs/AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
 *Zernio::AdAccountsApi* | [**get_ad_account_finance**](docs/AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances
 *Zernio::AdAccountsApi* | [**get_ad_comments**](docs/AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdAccountsApi* | [**get_ads_activity_log**](docs/AdAccountsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log
@@ -1221,6 +1223,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetSequence200ResponseSequence](docs/GetSequence200ResponseSequence.md)
  - [Zernio::GetSequence200ResponseSequenceStepsInner](docs/GetSequence200ResponseSequenceStepsInner.md)
  - [Zernio::GetSequence200ResponseSequenceStepsInnerTemplate](docs/GetSequence200ResponseSequenceStepsInnerTemplate.md)
+ - [Zernio::GetSlackSettings200Response](docs/GetSlackSettings200Response.md)
+ - [Zernio::GetSlackSettings200ResponseAccount](docs/GetSlackSettings200ResponseAccount.md)
  - [Zernio::GetSmsRegistration200Response](docs/GetSmsRegistration200Response.md)
  - [Zernio::GetSmsRegistration200ResponseCampaignContent](docs/GetSmsRegistration200ResponseCampaignContent.md)
  - [Zernio::GetSmsUsage200Response](docs/GetSmsUsage200Response.md)
@@ -1937,6 +1941,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateSequenceRequest](docs/UpdateSequenceRequest.md)
  - [Zernio::UpdateSequenceRequestStepsInner](docs/UpdateSequenceRequestStepsInner.md)
  - [Zernio::UpdateSequenceRequestStepsInnerTemplate](docs/UpdateSequenceRequestStepsInnerTemplate.md)
+ - [Zernio::UpdateSlackSettingsRequest](docs/UpdateSlackSettingsRequest.md)
  - [Zernio::UpdateTrackingTagRequest](docs/UpdateTrackingTagRequest.md)
  - [Zernio::UpdateWebhookSettings200Response](docs/UpdateWebhookSettings200Response.md)
  - [Zernio::UpdateWebhookSettingsRequest](docs/UpdateWebhookSettingsRequest.md)
