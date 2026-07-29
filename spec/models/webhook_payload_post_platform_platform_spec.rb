@@ -36,7 +36,7 @@ describe Zernio::WebhookPayloadPostPlatformPlatform do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["published", "failed"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["published", "failed", "deleted"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -56,6 +56,12 @@ describe Zernio::WebhookPayloadPostPlatformPlatform do
   end
 
   describe 'test attribute "error"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "deleted_at"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

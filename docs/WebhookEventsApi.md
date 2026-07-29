@@ -28,6 +28,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_post_external_updated**](WebhookEventsApi.md#on_post_external_updated) | **POST** /post.external.updated | External post updated event |
 | [**on_post_failed**](WebhookEventsApi.md#on_post_failed) | **POST** /post.failed | Post failed event |
 | [**on_post_partial**](WebhookEventsApi.md#on_post_partial) | **POST** /post.partial | Post partial event |
+| [**on_post_platform_deleted**](WebhookEventsApi.md#on_post_platform_deleted) | **POST** /post.platform.deleted | Post platform deleted event |
 | [**on_post_platform_failed**](WebhookEventsApi.md#on_post_platform_failed) | **POST** /post.platform.failed | Post platform failed event |
 | [**on_post_platform_published**](WebhookEventsApi.md#on_post_platform_published) | **POST** /post.platform.published | Post platform published event |
 | [**on_post_published**](WebhookEventsApi.md#on_post_published) | **POST** /post.published | Post published event |
@@ -1669,6 +1670,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_post** | [**WebhookPayloadPost**](WebhookPayloadPost.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_post_platform_deleted
+
+> on_post_platform_deleted(webhook_payload_post_platform)
+
+Post platform deleted event
+
+Fired when Zernio's background sync detects that a platform target published through Zernio was later deleted on the platform (e.g. the user deleted the Instagram post natively). Detection is poll-driven (~hourly), not real-time, and fires once per platform target. `platform.deletedAt` carries the detection time. Detection is listing-based: a false positive self-heals in Zernio's data when the post reappears, but the event is not retracted. Coverage is bounded to the posts the platform listing returns. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_post_platform =  # WebhookPayloadPostPlatform | 
+
+begin
+  # Post platform deleted event
+  api_instance.on_post_platform_deleted(webhook_payload_post_platform)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_platform_deleted: #{e}"
+end
+```
+
+#### Using the on_post_platform_deleted_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_post_platform_deleted_with_http_info(webhook_payload_post_platform)
+
+```ruby
+begin
+  # Post platform deleted event
+  data, status_code, headers = api_instance.on_post_platform_deleted_with_http_info(webhook_payload_post_platform)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_post_platform_deleted_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_post_platform** | [**WebhookPayloadPostPlatform**](WebhookPayloadPostPlatform.md) |  |  |
 
 ### Return type
 

@@ -22,14 +22,17 @@ module Zernio
     # Terminal status this event fires on. Matches the event suffix.
     attr_accessor :status
 
-    # Platform-native post id. Present on `published`, absent on `failed`.
+    # Platform-native post id. Present on `published` and `deleted`, absent on `failed`.
     attr_accessor :platform_post_id
 
-    # Public URL to the platform-side post. Present on `published` (when the platform exposes one and it is not a draft).
+    # Public URL to the platform-side post. Present on `published` (when the platform exposes one and it is not a draft) and on `deleted` (when one was recorded at publish time).
     attr_accessor :published_url
 
-    # Error message from the platform. Present on `failed`, absent on `published`.
+    # Error message from the platform. Present on `failed` only.
     attr_accessor :error
+
+    # When the platform-side deletion was detected by Zernio sync (ISO 8601). Present only on `post.platform.deleted`.
+    attr_accessor :deleted_at
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -60,7 +63,8 @@ module Zernio
         :'status' => :'status',
         :'platform_post_id' => :'platformPostId',
         :'published_url' => :'publishedUrl',
-        :'error' => :'error'
+        :'error' => :'error',
+        :'deleted_at' => :'deletedAt'
       }
     end
 
@@ -81,7 +85,8 @@ module Zernio
         :'status' => :'String',
         :'platform_post_id' => :'String',
         :'published_url' => :'String',
-        :'error' => :'String'
+        :'error' => :'String',
+        :'deleted_at' => :'Time'
       }
     end
 
@@ -130,6 +135,10 @@ module Zernio
       if attributes.key?(:'error')
         self.error = attributes[:'error']
       end
+
+      if attributes.key?(:'deleted_at')
+        self.deleted_at = attributes[:'deleted_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -154,7 +163,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @name.nil?
       return false if @status.nil?
-      status_validator = EnumAttributeValidator.new('String', ["published", "failed"])
+      status_validator = EnumAttributeValidator.new('String', ["published", "failed", "deleted"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -172,7 +181,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["published", "failed"])
+      validator = EnumAttributeValidator.new('String', ["published", "failed", "deleted"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
@@ -188,7 +197,8 @@ module Zernio
           status == o.status &&
           platform_post_id == o.platform_post_id &&
           published_url == o.published_url &&
-          error == o.error
+          error == o.error &&
+          deleted_at == o.deleted_at
     end
 
     # @see the `==` method
@@ -200,7 +210,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, status, platform_post_id, published_url, error].hash
+      [name, status, platform_post_id, published_url, error, deleted_at].hash
     end
 
     # Builds the object from hash
