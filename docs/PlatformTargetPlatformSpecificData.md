@@ -22,6 +22,7 @@ Zernio::PlatformTargetPlatformSpecificData.openapi_one_of
 #   :'LinkedInPlatformData',
 #   :'PinterestPlatformData',
 #   :'RedditPlatformData',
+#   :'SlackPlatformData',
 #   :'SnapchatPlatformData',
 #   :'TelegramPlatformData',
 #   :'ThreadsPlatformData',
@@ -63,6 +64,7 @@ Zernio::PlatformTargetPlatformSpecificData.build(data_that_doesnt_match)
 - `LinkedInPlatformData`
 - `PinterestPlatformData`
 - `RedditPlatformData`
+- `SlackPlatformData`
 - `SnapchatPlatformData`
 - `TelegramPlatformData`
 - `ThreadsPlatformData`

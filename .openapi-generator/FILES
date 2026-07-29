@@ -1233,6 +1233,7 @@ docs/SetWhatsappBusinessUsernameRequest.md
 docs/ShareSmsRegistration200Response.md
 docs/ShareSmsRegistrationRequest.md
 docs/SharedAdAccount.md
+docs/SlackPlatformData.md
 docs/SnapchatPlatformData.md
 docs/SocialAccount.md
 docs/SocialAccountProfileId.md
@@ -2844,6 +2845,7 @@ lib/zernio-sdk/models/set_whatsapp_business_username_request.rb
 lib/zernio-sdk/models/share_sms_registration200_response.rb
 lib/zernio-sdk/models/share_sms_registration_request.rb
 lib/zernio-sdk/models/shared_ad_account.rb
+lib/zernio-sdk/models/slack_platform_data.rb
 lib/zernio-sdk/models/snapchat_platform_data.rb
 lib/zernio-sdk/models/social_account.rb
 lib/zernio-sdk/models/social_account_profile_id.rb
@@ -4433,6 +4435,7 @@ spec/models/set_whatsapp_business_username_request_spec.rb
 spec/models/share_sms_registration200_response_spec.rb
 spec/models/share_sms_registration_request_spec.rb
 spec/models/shared_ad_account_spec.rb
+spec/models/slack_platform_data_spec.rb
 spec/models/snapchat_platform_data_spec.rb
 spec/models/social_account_profile_id_spec.rb
 spec/models/social_account_spec.rb

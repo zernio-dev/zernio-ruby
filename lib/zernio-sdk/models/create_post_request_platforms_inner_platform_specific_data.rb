@@ -27,6 +27,7 @@ module Zernio
           :'LinkedInPlatformData',
           :'PinterestPlatformData',
           :'RedditPlatformData',
+          :'SlackPlatformData',
           :'SnapchatPlatformData',
           :'TelegramPlatformData',
           :'ThreadsPlatformData',

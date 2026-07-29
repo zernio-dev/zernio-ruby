@@ -22,6 +22,7 @@ Zernio::CreatePostRequestPlatformsInnerPlatformSpecificData.openapi_one_of
 #   :'LinkedInPlatformData',
 #   :'PinterestPlatformData',
 #   :'RedditPlatformData',
+#   :'SlackPlatformData',
 #   :'SnapchatPlatformData',
 #   :'TelegramPlatformData',
 #   :'ThreadsPlatformData',
@@ -63,6 +64,7 @@ Zernio::CreatePostRequestPlatformsInnerPlatformSpecificData.build(data_that_does
 - `LinkedInPlatformData`
 - `PinterestPlatformData`
 - `RedditPlatformData`
+- `SlackPlatformData`
 - `SnapchatPlatformData`
 - `TelegramPlatformData`
 - `ThreadsPlatformData`

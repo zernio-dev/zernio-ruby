@@ -1775,6 +1775,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ShareSmsRegistration200Response](docs/ShareSmsRegistration200Response.md)
  - [Zernio::ShareSmsRegistrationRequest](docs/ShareSmsRegistrationRequest.md)
  - [Zernio::SharedAdAccount](docs/SharedAdAccount.md)
+ - [Zernio::SlackPlatformData](docs/SlackPlatformData.md)
  - [Zernio::SnapchatPlatformData](docs/SnapchatPlatformData.md)
  - [Zernio::SocialAccount](docs/SocialAccount.md)
  - [Zernio::SocialAccountProfileId](docs/SocialAccountProfileId.md)
