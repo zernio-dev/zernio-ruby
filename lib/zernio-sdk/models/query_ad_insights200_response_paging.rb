@@ -15,13 +15,17 @@ require 'time'
 
 module Zernio
   class QueryAdInsights200ResponsePaging < ApiModelBase
-    # Cursor for the next page; null when exhausted.
+    # Meta cursor for the next page; null when exhausted.
     attr_accessor :after
+
+    # Google cursor for the next page; null when exhausted.
+    attr_accessor :next_page_token
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'after' => :'after'
+        :'after' => :'after',
+        :'next_page_token' => :'nextPageToken'
       }
     end
 
@@ -38,14 +42,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'after' => :'String'
+        :'after' => :'String',
+        :'next_page_token' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'after'
+        :'after',
+        :'next_page_token'
       ])
     end
 
@@ -67,6 +73,10 @@ module Zernio
 
       if attributes.key?(:'after')
         self.after = attributes[:'after']
+      end
+
+      if attributes.key?(:'next_page_token')
+        self.next_page_token = attributes[:'next_page_token']
       end
     end
 
@@ -90,7 +100,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          after == o.after
+          after == o.after &&
+          next_page_token == o.next_page_token
     end
 
     # @see the `==` method
@@ -102,7 +113,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [after].hash
+      [after, next_page_token].hash
     end
 
     # Builds the object from hash

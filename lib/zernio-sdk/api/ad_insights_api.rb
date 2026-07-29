@@ -87,6 +87,142 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Historical keyword metrics (Google Keyword Planner)
+    # Google Ads only. Runs Keyword Planner's generateKeywordHistoricalMetrics for up to 1,000 exact keywords: historical search volume, competition and top-of-page bid ranges, plus averageCpcMicros when includeAverageCpc is set. Rows come back verbatim; counters are int64s encoded as strings, bid/CPC values are micros of the account currency. 
+    # @param generate_keyword_historical_metrics_request [GenerateKeywordHistoricalMetricsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [GenerateKeywordHistoricalMetrics200Response]
+    def generate_keyword_historical_metrics(generate_keyword_historical_metrics_request, opts = {})
+      data, _status_code, _headers = generate_keyword_historical_metrics_with_http_info(generate_keyword_historical_metrics_request, opts)
+      data
+    end
+
+    # Historical keyword metrics (Google Keyword Planner)
+    # Google Ads only. Runs Keyword Planner&#39;s generateKeywordHistoricalMetrics for up to 1,000 exact keywords: historical search volume, competition and top-of-page bid ranges, plus averageCpcMicros when includeAverageCpc is set. Rows come back verbatim; counters are int64s encoded as strings, bid/CPC values are micros of the account currency. 
+    # @param generate_keyword_historical_metrics_request [GenerateKeywordHistoricalMetricsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GenerateKeywordHistoricalMetrics200Response, Integer, Hash)>] GenerateKeywordHistoricalMetrics200Response data, response status code and response headers
+    def generate_keyword_historical_metrics_with_http_info(generate_keyword_historical_metrics_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdInsightsApi.generate_keyword_historical_metrics ...'
+      end
+      # verify the required parameter 'generate_keyword_historical_metrics_request' is set
+      if @api_client.config.client_side_validation && generate_keyword_historical_metrics_request.nil?
+        fail ArgumentError, "Missing the required parameter 'generate_keyword_historical_metrics_request' when calling AdInsightsApi.generate_keyword_historical_metrics"
+      end
+      # resource path
+      local_var_path = '/v1/ads/keywords/historical-metrics'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(generate_keyword_historical_metrics_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GenerateKeywordHistoricalMetrics200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdInsightsApi.generate_keyword_historical_metrics",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdInsightsApi#generate_keyword_historical_metrics\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Generate keyword ideas (Google Keyword Planner)
+    # Google Ads only. Runs Keyword Planner's generateKeywordIdeas from seed keywords, a seed URL, or both, returning idea rows verbatim (avgMonthlySearches, competition, competitionIndex, top-of-page bid micros, monthlySearchVolumes). Counters are int64s encoded as strings; bid values are micros of the account currency. Omitting `countries` targets worldwide. 
+    # @param generate_keyword_ideas_request [GenerateKeywordIdeasRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [GenerateKeywordIdeas200Response]
+    def generate_keyword_ideas(generate_keyword_ideas_request, opts = {})
+      data, _status_code, _headers = generate_keyword_ideas_with_http_info(generate_keyword_ideas_request, opts)
+      data
+    end
+
+    # Generate keyword ideas (Google Keyword Planner)
+    # Google Ads only. Runs Keyword Planner&#39;s generateKeywordIdeas from seed keywords, a seed URL, or both, returning idea rows verbatim (avgMonthlySearches, competition, competitionIndex, top-of-page bid micros, monthlySearchVolumes). Counters are int64s encoded as strings; bid values are micros of the account currency. Omitting &#x60;countries&#x60; targets worldwide. 
+    # @param generate_keyword_ideas_request [GenerateKeywordIdeasRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GenerateKeywordIdeas200Response, Integer, Hash)>] GenerateKeywordIdeas200Response data, response status code and response headers
+    def generate_keyword_ideas_with_http_info(generate_keyword_ideas_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdInsightsApi.generate_keyword_ideas ...'
+      end
+      # verify the required parameter 'generate_keyword_ideas_request' is set
+      if @api_client.config.client_side_validation && generate_keyword_ideas_request.nil?
+        fail ArgumentError, "Missing the required parameter 'generate_keyword_ideas_request' when calling AdInsightsApi.generate_keyword_ideas"
+      end
+      # resource path
+      local_var_path = '/v1/ads/keywords/ideas'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(generate_keyword_ideas_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GenerateKeywordIdeas200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdInsightsApi.generate_keyword_ideas",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdInsightsApi#generate_keyword_ideas\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get ad analytics
     # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
     # @param ad_id [String] 
@@ -319,10 +455,13 @@ module Zernio
     end
 
     # Flexible live insights query
-    # Live, flexible insights query against Meta's Graph API. Unlike GET /v1/ads/{adId}/analytics (fixed metric set, cached), this forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim.  `objectId` selects the node: an ad account, campaign, ad set or ad platform id. `level` sets row granularity independently of the node.  Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports). 
-    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-    # @param object_id [String] Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id.
+    # Live, flexible insights query. The account's platform picks the contract:  **Meta (facebook/instagram)**: forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim. `objectId` (required) selects the node; `level` sets row granularity. Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).  **Google Ads (googleads)**: raw GAQL passthrough. Send any read-only GAQL SELECT via `query` (campaign/keyword/search-term/geo/demographic/asset/shopping resources, `change_event`, any `segments.*`) and rows come back verbatim (camelCase, counters as strings). Results are paged at a fixed 10,000 rows; follow `paging.nextPageToken` with `pageToken`. `customerId` is only needed when the connection has several Google Ads accounts. Semantic validation is Google's: an invalid query returns a 400 carrying Google's message (note: selecting `segments.date` requires a finite date filter). 
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id.
+    # @option opts [String] :query Google only (required there): the GAQL SELECT statement to run.
+    # @option opts [String] :customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts.
+    # @option opts [String] :page_token Google only: cursor from paging.nextPageToken of the previous page.
     # @option opts [String] :level Row granularity
     # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
     # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
@@ -338,16 +477,19 @@ module Zernio
     # @option opts [Integer] :limit Rows per page (default to 25)
     # @option opts [String] :after Cursor from paging.after of the previous page.
     # @return [QueryAdInsights200Response]
-    def query_ad_insights(account_id, object_id, opts = {})
-      data, _status_code, _headers = query_ad_insights_with_http_info(account_id, object_id, opts)
+    def query_ad_insights(account_id, opts = {})
+      data, _status_code, _headers = query_ad_insights_with_http_info(account_id, opts)
       data
     end
 
     # Flexible live insights query
-    # Live, flexible insights query against Meta&#39;s Graph API. Unlike GET /v1/ads/{adId}/analytics (fixed metric set, cached), this forwards caller-chosen &#x60;fields&#x60;, &#x60;breakdowns&#x60; and &#x60;filtering&#x60; to any Meta insights node and returns Meta&#39;s rows verbatim.  &#x60;objectId&#x60; selects the node: an ad account, campaign, ad set or ad platform id. &#x60;level&#x60; sets row granularity independently of the node.  Semantic validation is Meta&#39;s: an unknown field or invalid breakdown combination returns a 400 carrying Meta&#39;s message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports). 
-    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-    # @param object_id [String] Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id.
+    # Live, flexible insights query. The account&#39;s platform picks the contract:  **Meta (facebook/instagram)**: forwards caller-chosen &#x60;fields&#x60;, &#x60;breakdowns&#x60; and &#x60;filtering&#x60; to any Meta insights node and returns Meta&#39;s rows verbatim. &#x60;objectId&#x60; (required) selects the node; &#x60;level&#x60; sets row granularity. Semantic validation is Meta&#39;s: an unknown field or invalid breakdown combination returns a 400 carrying Meta&#39;s message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).  **Google Ads (googleads)**: raw GAQL passthrough. Send any read-only GAQL SELECT via &#x60;query&#x60; (campaign/keyword/search-term/geo/demographic/asset/shopping resources, &#x60;change_event&#x60;, any &#x60;segments.*&#x60;) and rows come back verbatim (camelCase, counters as strings). Results are paged at a fixed 10,000 rows; follow &#x60;paging.nextPageToken&#x60; with &#x60;pageToken&#x60;. &#x60;customerId&#x60; is only needed when the connection has several Google Ads accounts. Semantic validation is Google&#39;s: an invalid query returns a 400 carrying Google&#39;s message (note: selecting &#x60;segments.date&#x60; requires a finite date filter). 
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id.
+    # @option opts [String] :query Google only (required there): the GAQL SELECT statement to run.
+    # @option opts [String] :customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts.
+    # @option opts [String] :page_token Google only: cursor from paging.nextPageToken of the previous page.
     # @option opts [String] :level Row granularity
     # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
     # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).
@@ -363,7 +505,7 @@ module Zernio
     # @option opts [Integer] :limit Rows per page (default to 25)
     # @option opts [String] :after Cursor from paging.after of the previous page.
     # @return [Array<(QueryAdInsights200Response, Integer, Hash)>] QueryAdInsights200Response data, response status code and response headers
-    def query_ad_insights_with_http_info(account_id, object_id, opts = {})
+    def query_ad_insights_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdInsightsApi.query_ad_insights ...'
       end
@@ -371,10 +513,10 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling AdInsightsApi.query_ad_insights"
       end
-      # verify the required parameter 'object_id' is set
-      if @api_client.config.client_side_validation && object_id.nil?
-        fail ArgumentError, "Missing the required parameter 'object_id' when calling AdInsightsApi.query_ad_insights"
+      if @api_client.config.client_side_validation && !opts[:'query'].nil? && opts[:'query'].to_s.length > 10000
+        fail ArgumentError, 'invalid value for "opts[:"query"]" when calling AdInsightsApi.query_ad_insights, the character length must be smaller than or equal to 10000.'
       end
+
       allowable_values = ["ad", "adset", "campaign", "account"]
       if @api_client.config.client_side_validation && opts[:'level'] && !allowable_values.include?(opts[:'level'])
         fail ArgumentError, "invalid value for \"level\", must be one of #{allowable_values}"
@@ -393,7 +535,10 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
-      query_params[:'objectId'] = object_id
+      query_params[:'objectId'] = opts[:'object_id'] if !opts[:'object_id'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+      query_params[:'pageToken'] = opts[:'page_token'] if !opts[:'page_token'].nil?
       query_params[:'level'] = opts[:'level'] if !opts[:'level'].nil?
       query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
       query_params[:'breakdowns'] = opts[:'breakdowns'] if !opts[:'breakdowns'].nil?

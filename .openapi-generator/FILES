@@ -429,6 +429,11 @@ docs/GbpUpdateFreeFormServiceItemLabel.md
 docs/GenerateAdPreviews200Response.md
 docs/GenerateAdPreviews200ResponsePreviewsInner.md
 docs/GenerateAdPreviewsRequest.md
+docs/GenerateKeywordHistoricalMetrics200Response.md
+docs/GenerateKeywordHistoricalMetricsRequest.md
+docs/GenerateKeywordIdeas200Response.md
+docs/GenerateKeywordIdeas200ResponsePaging.md
+docs/GenerateKeywordIdeasRequest.md
 docs/GeoRestriction.md
 docs/GetAccountHealth200Response.md
 docs/GetAccountHealth200ResponsePermissions.md
@@ -451,6 +456,7 @@ docs/GetAdSetDetails200Response.md
 docs/GetAdTrackingTags200Response.md
 docs/GetAdTree200Response.md
 docs/GetAdsActivityLog200Response.md
+docs/GetAdsActivityLog200ResponsePaging.md
 docs/GetAdsTimeline200Response.md
 docs/GetAdsTimeline200ResponseRowsInner.md
 docs/GetAllAccountsHealth200Response.md
@@ -2053,6 +2059,11 @@ lib/zernio-sdk/models/gbp_update_free_form_service_item_label.rb
 lib/zernio-sdk/models/generate_ad_previews200_response.rb
 lib/zernio-sdk/models/generate_ad_previews200_response_previews_inner.rb
 lib/zernio-sdk/models/generate_ad_previews_request.rb
+lib/zernio-sdk/models/generate_keyword_historical_metrics200_response.rb
+lib/zernio-sdk/models/generate_keyword_historical_metrics_request.rb
+lib/zernio-sdk/models/generate_keyword_ideas200_response.rb
+lib/zernio-sdk/models/generate_keyword_ideas200_response_paging.rb
+lib/zernio-sdk/models/generate_keyword_ideas_request.rb
 lib/zernio-sdk/models/geo_restriction.rb
 lib/zernio-sdk/models/get_account_health200_response.rb
 lib/zernio-sdk/models/get_account_health200_response_permissions.rb
@@ -2075,6 +2086,7 @@ lib/zernio-sdk/models/get_ad_set_details200_response.rb
 lib/zernio-sdk/models/get_ad_tracking_tags200_response.rb
 lib/zernio-sdk/models/get_ad_tree200_response.rb
 lib/zernio-sdk/models/get_ads_activity_log200_response.rb
+lib/zernio-sdk/models/get_ads_activity_log200_response_paging.rb
 lib/zernio-sdk/models/get_ads_timeline200_response.rb
 lib/zernio-sdk/models/get_ads_timeline200_response_rows_inner.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response.rb
@@ -3636,6 +3648,11 @@ spec/models/gbp_update_free_form_service_item_label_spec.rb
 spec/models/generate_ad_previews200_response_previews_inner_spec.rb
 spec/models/generate_ad_previews200_response_spec.rb
 spec/models/generate_ad_previews_request_spec.rb
+spec/models/generate_keyword_historical_metrics200_response_spec.rb
+spec/models/generate_keyword_historical_metrics_request_spec.rb
+spec/models/generate_keyword_ideas200_response_paging_spec.rb
+spec/models/generate_keyword_ideas200_response_spec.rb
+spec/models/generate_keyword_ideas_request_spec.rb
 spec/models/geo_restriction_spec.rb
 spec/models/get_account_health200_response_permissions_posting_inner_spec.rb
 spec/models/get_account_health200_response_permissions_spec.rb
@@ -3657,6 +3674,7 @@ spec/models/get_ad_previews200_response_spec.rb
 spec/models/get_ad_set_details200_response_spec.rb
 spec/models/get_ad_tracking_tags200_response_spec.rb
 spec/models/get_ad_tree200_response_spec.rb
+spec/models/get_ads_activity_log200_response_paging_spec.rb
 spec/models/get_ads_activity_log200_response_spec.rb
 spec/models/get_ads_timeline200_response_rows_inner_spec.rb
 spec/models/get_ads_timeline200_response_spec.rb

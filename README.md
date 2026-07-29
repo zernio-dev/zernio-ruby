@@ -142,6 +142,8 @@ Class | Method | HTTP request | Description
 *Zernio::AdCreativesApi* | [**update_ad_creative**](docs/AdCreativesApi.md#update_ad_creative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative
 *Zernio::AdCreativesApi* | [**upload_ad_image**](docs/AdCreativesApi.md#upload_ad_image) | **POST** /v1/ads/images | Upload an ad image from base64
 *Zernio::AdInsightsApi* | [**create_ad_insights_report**](docs/AdInsightsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run
+*Zernio::AdInsightsApi* | [**generate_keyword_historical_metrics**](docs/AdInsightsApi.md#generate_keyword_historical_metrics) | **POST** /v1/ads/keywords/historical-metrics | Historical keyword metrics (Google Keyword Planner)
+*Zernio::AdInsightsApi* | [**generate_keyword_ideas**](docs/AdInsightsApi.md#generate_keyword_ideas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas (Google Keyword Planner)
 *Zernio::AdInsightsApi* | [**get_ad_analytics**](docs/AdInsightsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdInsightsApi* | [**get_ad_insights_report**](docs/AdInsightsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run
 *Zernio::AdInsightsApi* | [**get_campaign_analytics**](docs/AdInsightsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
@@ -988,6 +990,11 @@ Class | Method | HTTP request | Description
  - [Zernio::GenerateAdPreviews200Response](docs/GenerateAdPreviews200Response.md)
  - [Zernio::GenerateAdPreviews200ResponsePreviewsInner](docs/GenerateAdPreviews200ResponsePreviewsInner.md)
  - [Zernio::GenerateAdPreviewsRequest](docs/GenerateAdPreviewsRequest.md)
+ - [Zernio::GenerateKeywordHistoricalMetrics200Response](docs/GenerateKeywordHistoricalMetrics200Response.md)
+ - [Zernio::GenerateKeywordHistoricalMetricsRequest](docs/GenerateKeywordHistoricalMetricsRequest.md)
+ - [Zernio::GenerateKeywordIdeas200Response](docs/GenerateKeywordIdeas200Response.md)
+ - [Zernio::GenerateKeywordIdeas200ResponsePaging](docs/GenerateKeywordIdeas200ResponsePaging.md)
+ - [Zernio::GenerateKeywordIdeasRequest](docs/GenerateKeywordIdeasRequest.md)
  - [Zernio::GeoRestriction](docs/GeoRestriction.md)
  - [Zernio::GetAccountHealth200Response](docs/GetAccountHealth200Response.md)
  - [Zernio::GetAccountHealth200ResponsePermissions](docs/GetAccountHealth200ResponsePermissions.md)
@@ -1010,6 +1017,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdTrackingTags200Response](docs/GetAdTrackingTags200Response.md)
  - [Zernio::GetAdTree200Response](docs/GetAdTree200Response.md)
  - [Zernio::GetAdsActivityLog200Response](docs/GetAdsActivityLog200Response.md)
+ - [Zernio::GetAdsActivityLog200ResponsePaging](docs/GetAdsActivityLog200ResponsePaging.md)
  - [Zernio::GetAdsTimeline200Response](docs/GetAdsTimeline200Response.md)
  - [Zernio::GetAdsTimeline200ResponseRowsInner](docs/GetAdsTimeline200ResponseRowsInner.md)
  - [Zernio::GetAllAccountsHealth200Response](docs/GetAllAccountsHealth200Response.md)

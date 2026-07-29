@@ -15,7 +15,14 @@ require 'time'
 
 module Zernio
   class QueryAdInsights200Response < ApiModelBase
+    # Meta responses only.
     attr_accessor :object_id
+
+    # Google responses only: the customer the query ran against.
+    attr_accessor :customer_id
+
+    # Google responses only: the selected fields echoed by Google.
+    attr_accessor :field_mask
 
     attr_accessor :data
 
@@ -25,6 +32,8 @@ module Zernio
     def self.attribute_map
       {
         :'object_id' => :'objectId',
+        :'customer_id' => :'customerId',
+        :'field_mask' => :'fieldMask',
         :'data' => :'data',
         :'paging' => :'paging'
       }
@@ -44,6 +53,8 @@ module Zernio
     def self.openapi_types
       {
         :'object_id' => :'String',
+        :'customer_id' => :'String',
+        :'field_mask' => :'String',
         :'data' => :'Array<Object>',
         :'paging' => :'QueryAdInsights200ResponsePaging'
       }
@@ -52,6 +63,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'field_mask',
       ])
     end
 
@@ -73,6 +85,14 @@ module Zernio
 
       if attributes.key?(:'object_id')
         self.object_id = attributes[:'object_id']
+      end
+
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
+      end
+
+      if attributes.key?(:'field_mask')
+        self.field_mask = attributes[:'field_mask']
       end
 
       if attributes.key?(:'data')
@@ -107,6 +127,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           object_id == o.object_id &&
+          customer_id == o.customer_id &&
+          field_mask == o.field_mask &&
           data == o.data &&
           paging == o.paging
     end
@@ -120,7 +142,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [object_id, data, paging].hash
+      [object_id, customer_id, field_mask, data, paging].hash
     end
 
     # Builds the object from hash

@@ -45,7 +45,7 @@ module Zernio
       {
         :'ad_account_id' => :'String',
         :'data' => :'Array<Object>',
-        :'paging' => :'QueryAdInsights200ResponsePaging'
+        :'paging' => :'GetAdsActivityLog200ResponsePaging'
       }
     end
 

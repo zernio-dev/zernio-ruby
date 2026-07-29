@@ -41,7 +41,7 @@ module Zernio
     def self.openapi_types
       {
         :'data' => :'Array<Object>',
-        :'paging' => :'QueryAdInsights200ResponsePaging'
+        :'paging' => :'GetAdsActivityLog200ResponsePaging'
       }
     end
 

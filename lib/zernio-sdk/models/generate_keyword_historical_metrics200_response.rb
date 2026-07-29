@@ -14,19 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdCreatives200Response < ApiModelBase
-    attr_accessor :ad_account_id
+  class GenerateKeywordHistoricalMetrics200Response < ApiModelBase
+    # The customer the request ran against.
+    attr_accessor :customer_id
 
     attr_accessor :data
 
-    attr_accessor :paging
+    attr_accessor :aggregate_metric_results
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'ad_account_id' => :'adAccountId',
+        :'customer_id' => :'customerId',
         :'data' => :'data',
-        :'paging' => :'paging'
+        :'aggregate_metric_results' => :'aggregateMetricResults'
       }
     end
 
@@ -43,15 +44,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ad_account_id' => :'String',
+        :'customer_id' => :'String',
         :'data' => :'Array<Object>',
-        :'paging' => :'GetAdsActivityLog200ResponsePaging'
+        :'aggregate_metric_results' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'aggregate_metric_results'
       ])
     end
 
@@ -59,20 +61,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdCreatives200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GenerateKeywordHistoricalMetrics200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdCreatives200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GenerateKeywordHistoricalMetrics200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'ad_account_id')
-        self.ad_account_id = attributes[:'ad_account_id']
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
       end
 
       if attributes.key?(:'data')
@@ -81,8 +83,8 @@ module Zernio
         end
       end
 
-      if attributes.key?(:'paging')
-        self.paging = attributes[:'paging']
+      if attributes.key?(:'aggregate_metric_results')
+        self.aggregate_metric_results = attributes[:'aggregate_metric_results']
       end
     end
 
@@ -106,9 +108,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          ad_account_id == o.ad_account_id &&
+          customer_id == o.customer_id &&
           data == o.data &&
-          paging == o.paging
+          aggregate_metric_results == o.aggregate_metric_results
     end
 
     # @see the `==` method
@@ -120,7 +122,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad_account_id, data, paging].hash
+      [customer_id, data, aggregate_metric_results].hash
     end
 
     # Builds the object from hash

@@ -44,6 +44,30 @@ describe 'AdInsightsApi' do
     end
   end
 
+  # unit tests for generate_keyword_historical_metrics
+  # Historical keyword metrics (Google Keyword Planner)
+  # Google Ads only. Runs Keyword Planner&#39;s generateKeywordHistoricalMetrics for up to 1,000 exact keywords: historical search volume, competition and top-of-page bid ranges, plus averageCpcMicros when includeAverageCpc is set. Rows come back verbatim; counters are int64s encoded as strings, bid/CPC values are micros of the account currency. 
+  # @param generate_keyword_historical_metrics_request 
+  # @param [Hash] opts the optional parameters
+  # @return [GenerateKeywordHistoricalMetrics200Response]
+  describe 'generate_keyword_historical_metrics test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for generate_keyword_ideas
+  # Generate keyword ideas (Google Keyword Planner)
+  # Google Ads only. Runs Keyword Planner&#39;s generateKeywordIdeas from seed keywords, a seed URL, or both, returning idea rows verbatim (avgMonthlySearches, competition, competitionIndex, top-of-page bid micros, monthlySearchVolumes). Counters are int64s encoded as strings; bid values are micros of the account currency. Omitting &#x60;countries&#x60; targets worldwide. 
+  # @param generate_keyword_ideas_request 
+  # @param [Hash] opts the optional parameters
+  # @return [GenerateKeywordIdeas200Response]
+  describe 'generate_keyword_ideas test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_ad_analytics
   # Get ad analytics
   # Returns detailed performance analytics for an ad. Includes summary metrics, a daily timeline over the requested date range, and optional demographic breakdowns (Meta and TikTok only). If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
@@ -92,10 +116,13 @@ describe 'AdInsightsApi' do
 
   # unit tests for query_ad_insights
   # Flexible live insights query
-  # Live, flexible insights query against Meta&#39;s Graph API. Unlike GET /v1/ads/{adId}/analytics (fixed metric set, cached), this forwards caller-chosen &#x60;fields&#x60;, &#x60;breakdowns&#x60; and &#x60;filtering&#x60; to any Meta insights node and returns Meta&#39;s rows verbatim.  &#x60;objectId&#x60; selects the node: an ad account, campaign, ad set or ad platform id. &#x60;level&#x60; sets row granularity independently of the node.  Semantic validation is Meta&#39;s: an unknown field or invalid breakdown combination returns a 400 carrying Meta&#39;s message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports). 
-  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
-  # @param object_id Meta insights node: act_&lt;n&gt;, campaign id, ad set id or ad id.
+  # Live, flexible insights query. The account&#39;s platform picks the contract:  **Meta (facebook/instagram)**: forwards caller-chosen &#x60;fields&#x60;, &#x60;breakdowns&#x60; and &#x60;filtering&#x60; to any Meta insights node and returns Meta&#39;s rows verbatim. &#x60;objectId&#x60; (required) selects the node; &#x60;level&#x60; sets row granularity. Semantic validation is Meta&#39;s: an unknown field or invalid breakdown combination returns a 400 carrying Meta&#39;s message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).  **Google Ads (googleads)**: raw GAQL passthrough. Send any read-only GAQL SELECT via &#x60;query&#x60; (campaign/keyword/search-term/geo/demographic/asset/shopping resources, &#x60;change_event&#x60;, any &#x60;segments.*&#x60;) and rows come back verbatim (camelCase, counters as strings). Results are paged at a fixed 10,000 rows; follow &#x60;paging.nextPageToken&#x60; with &#x60;pageToken&#x60;. &#x60;customerId&#x60; is only needed when the connection has several Google Ads accounts. Semantic validation is Google&#39;s: an invalid query returns a 400 carrying Google&#39;s message (note: selecting &#x60;segments.date&#x60; requires a finite date filter). 
+  # @param account_id Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract.
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id.
+  # @option opts [String] :query Google only (required there): the GAQL SELECT statement to run.
+  # @option opts [String] :customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts.
+  # @option opts [String] :page_token Google only: cursor from paging.nextPageToken of the previous page.
   # @option opts [String] :level Row granularity
   # @option opts [String] :fields Comma-separated Graph insights fields (e.g. spend,impressions,frequency,website_purchase_roas). Omitted &#x3D; Meta&#39;s default set.
   # @option opts [String] :breakdowns Comma-separated Graph breakdowns (e.g. age,gender or publisher_platform).

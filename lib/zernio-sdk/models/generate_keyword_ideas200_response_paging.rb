@@ -14,19 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdCreatives200Response < ApiModelBase
-    attr_accessor :ad_account_id
-
-    attr_accessor :data
-
-    attr_accessor :paging
+  class GenerateKeywordIdeas200ResponsePaging < ApiModelBase
+    # Cursor for the next page; null when exhausted.
+    attr_accessor :next_page_token
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'ad_account_id' => :'adAccountId',
-        :'data' => :'data',
-        :'paging' => :'paging'
+        :'next_page_token' => :'nextPageToken'
       }
     end
 
@@ -43,15 +38,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ad_account_id' => :'String',
-        :'data' => :'Array<Object>',
-        :'paging' => :'GetAdsActivityLog200ResponsePaging'
+        :'next_page_token' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'next_page_token'
       ])
     end
 
@@ -59,30 +53,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdCreatives200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GenerateKeywordIdeas200ResponsePaging` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdCreatives200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GenerateKeywordIdeas200ResponsePaging`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'ad_account_id')
-        self.ad_account_id = attributes[:'ad_account_id']
-      end
-
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
-      end
-
-      if attributes.key?(:'paging')
-        self.paging = attributes[:'paging']
+      if attributes.key?(:'next_page_token')
+        self.next_page_token = attributes[:'next_page_token']
       end
     end
 
@@ -106,9 +90,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          ad_account_id == o.ad_account_id &&
-          data == o.data &&
-          paging == o.paging
+          next_page_token == o.next_page_token
     end
 
     # @see the `==` method
@@ -120,7 +102,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad_account_id, data, paging].hash
+      [next_page_token].hash
     end
 
     # Builds the object from hash
