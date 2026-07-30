@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UpdateAdTrackingTagsRequest < ApiModelBase
-    # Meta only. Click-URL params appended to a freshly-rebuilt creative.
+    # Meta only. Click-URL params appended to a freshly-rebuilt creative. Meta dynamic macros ({{ad.id}}, {{campaign.id}}, {{placement}}, ...) are sent through unescaped so Meta expands them; every other character is percent-encoded.
     attr_accessor :url_tags
 
     attr_accessor :creative

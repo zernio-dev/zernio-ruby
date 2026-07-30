@@ -18,7 +18,7 @@ module Zernio
   class BoostPostRequestTracking < ApiModelBase
     attr_accessor :pixel_id
 
-    # URL parameters appended to the ad link, rendered as `key=value` pairs joined with `&`.
+    # URL parameters appended to the ad link, rendered as `key=value` pairs joined with `&`. Meta dynamic macros ({{ad.id}}, {{campaign.id}}, {{placement}}, ...) are sent through unescaped so Meta expands them; every other character is percent-encoded.
     attr_accessor :url_tags
 
     # Attribute mapping from ruby-style variable name to JSON key.

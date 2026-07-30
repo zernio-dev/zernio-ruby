@@ -19,7 +19,7 @@ module Zernio
     # Meta Pixel ID to attach for offsite-conversion measurement.
     attr_accessor :pixel_id
 
-    # Click-URL params appended to the ad's destination as `url_tags` (e.g. utm_source).
+    # Click-URL params appended to the ad's destination as `url_tags` (e.g. utm_source). Meta dynamic macros ({{ad.id}}, {{campaign.id}}, {{placement}}, ...) are sent through unescaped so Meta expands them; every other character is percent-encoded.
     attr_accessor :url_tags
 
     # Attribute mapping from ruby-style variable name to JSON key.
