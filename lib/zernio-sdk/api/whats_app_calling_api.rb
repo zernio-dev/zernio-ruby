@@ -908,6 +908,76 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Start caller-ID verification for a customer-brought number
+    # Customer-brought (BYO) WhatsApp numbers cannot present themselves as caller ID on `tel:` call forwards until verified (carrier anti-spoofing); until then forwarded calls show a Zernio number (`callerIdMode: platform` on the calling config). This sends a one-time code to the number by SMS or voice call. Re-POST to resend. Zernio-purchased numbers never need this and get a 400. 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param [Hash] opts the optional parameters
+    # @option opts [StartWhatsAppCallerIdVerificationRequest] :start_whats_app_caller_id_verification_request 
+    # @return [StartWhatsAppCallerIdVerification200Response]
+    def start_whats_app_caller_id_verification(id, opts = {})
+      data, _status_code, _headers = start_whats_app_caller_id_verification_with_http_info(id, opts)
+      data
+    end
+
+    # Start caller-ID verification for a customer-brought number
+    # Customer-brought (BYO) WhatsApp numbers cannot present themselves as caller ID on &#x60;tel:&#x60; call forwards until verified (carrier anti-spoofing); until then forwarded calls show a Zernio number (&#x60;callerIdMode: platform&#x60; on the calling config). This sends a one-time code to the number by SMS or voice call. Re-POST to resend. Zernio-purchased numbers never need this and get a 400. 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param [Hash] opts the optional parameters
+    # @option opts [StartWhatsAppCallerIdVerificationRequest] :start_whats_app_caller_id_verification_request 
+    # @return [Array<(StartWhatsAppCallerIdVerification200Response, Integer, Hash)>] StartWhatsAppCallerIdVerification200Response data, response status code and response headers
+    def start_whats_app_caller_id_verification_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.start_whats_app_caller_id_verification ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.start_whats_app_caller_id_verification"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/{id}/whatsapp/caller-id-verification'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'start_whats_app_caller_id_verification_request'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'StartWhatsAppCallerIdVerification200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppCallingApi.start_whats_app_caller_id_verification",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#start_whats_app_caller_id_verification\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update calling config
     # Update fields on an already-enabled number. Only fields present in the body are written; `undefined` leaves the stored value alone, explicit `null` clears a nullable field. No Meta side effect, this only changes local routing state consumed by the Telnyx webhook handler. 
     # @param id [String] 
@@ -1052,6 +1122,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppCallingApi#update_whats_app_calling_legacy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Confirm the caller-ID verification code
+    # Submits the one-time code the number received. On success, `tel:` call forwards present the business number itself as caller ID (`callerIdMode: business`). 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param verify_whats_app_caller_id_request [VerifyWhatsAppCallerIdRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [VerifySmsRegistrationOtp200Response]
+    def verify_whats_app_caller_id(id, verify_whats_app_caller_id_request, opts = {})
+      data, _status_code, _headers = verify_whats_app_caller_id_with_http_info(id, verify_whats_app_caller_id_request, opts)
+      data
+    end
+
+    # Confirm the caller-ID verification code
+    # Submits the one-time code the number received. On success, &#x60;tel:&#x60; call forwards present the business number itself as caller ID (&#x60;callerIdMode: business&#x60;). 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param verify_whats_app_caller_id_request [VerifyWhatsAppCallerIdRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(VerifySmsRegistrationOtp200Response, Integer, Hash)>] VerifySmsRegistrationOtp200Response data, response status code and response headers
+    def verify_whats_app_caller_id_with_http_info(id, verify_whats_app_caller_id_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppCallingApi.verify_whats_app_caller_id ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppCallingApi.verify_whats_app_caller_id"
+      end
+      # verify the required parameter 'verify_whats_app_caller_id_request' is set
+      if @api_client.config.client_side_validation && verify_whats_app_caller_id_request.nil?
+        fail ArgumentError, "Missing the required parameter 'verify_whats_app_caller_id_request' when calling WhatsAppCallingApi.verify_whats_app_caller_id"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/{id}/whatsapp/caller-id-verification/verify'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(verify_whats_app_caller_id_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VerifySmsRegistrationOtp200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppCallingApi.verify_whats_app_caller_id",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppCallingApi#verify_whats_app_caller_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

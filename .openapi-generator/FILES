@@ -1258,6 +1258,8 @@ docs/StartSmsRegistrationRequest.md
 docs/StartSmsRegistrationRequestBrand.md
 docs/StartSmsRegistrationRequestCampaign.md
 docs/StartSmsRegistrationRequestTollFree.md
+docs/StartWhatsAppCallerIdVerification200Response.md
+docs/StartWhatsAppCallerIdVerificationRequest.md
 docs/SubmitPhoneNumberKyc200Response.md
 docs/SubmitPhoneNumberKyc200ResponseNumbersInner.md
 docs/SubmitPhoneNumberKyc200ResponsePhoneNumber.md
@@ -1491,6 +1493,7 @@ docs/Verification.md
 docs/VerifyApi.md
 docs/VerifySmsRegistrationOtp200Response.md
 docs/VerifySmsRegistrationOtpRequest.md
+docs/VerifyWhatsAppCallerIdRequest.md
 docs/VoiceApi.md
 docs/VoteRedditThingRequest.md
 docs/Webhook.md
@@ -2884,6 +2887,8 @@ lib/zernio-sdk/models/start_sms_registration_request.rb
 lib/zernio-sdk/models/start_sms_registration_request_brand.rb
 lib/zernio-sdk/models/start_sms_registration_request_campaign.rb
 lib/zernio-sdk/models/start_sms_registration_request_toll_free.rb
+lib/zernio-sdk/models/start_whats_app_caller_id_verification200_response.rb
+lib/zernio-sdk/models/start_whats_app_caller_id_verification_request.rb
 lib/zernio-sdk/models/submit_phone_number_kyc200_response.rb
 lib/zernio-sdk/models/submit_phone_number_kyc200_response_numbers_inner.rb
 lib/zernio-sdk/models/submit_phone_number_kyc200_response_phone_number.rb
@@ -3111,6 +3116,7 @@ lib/zernio-sdk/models/validate_subreddit200_response_one_of_subreddit.rb
 lib/zernio-sdk/models/verification.rb
 lib/zernio-sdk/models/verify_sms_registration_otp200_response.rb
 lib/zernio-sdk/models/verify_sms_registration_otp_request.rb
+lib/zernio-sdk/models/verify_whats_app_caller_id_request.rb
 lib/zernio-sdk/models/vote_reddit_thing_request.rb
 lib/zernio-sdk/models/webhook.rb
 lib/zernio-sdk/models/webhook_log.rb
@@ -4488,6 +4494,8 @@ spec/models/start_sms_registration_request_brand_spec.rb
 spec/models/start_sms_registration_request_campaign_spec.rb
 spec/models/start_sms_registration_request_spec.rb
 spec/models/start_sms_registration_request_toll_free_spec.rb
+spec/models/start_whats_app_caller_id_verification200_response_spec.rb
+spec/models/start_whats_app_caller_id_verification_request_spec.rb
 spec/models/submit_phone_number_kyc200_response_numbers_inner_spec.rb
 spec/models/submit_phone_number_kyc200_response_phone_number_spec.rb
 spec/models/submit_phone_number_kyc200_response_spec.rb
@@ -4715,6 +4723,7 @@ spec/models/validate_subreddit200_response_spec.rb
 spec/models/verification_spec.rb
 spec/models/verify_sms_registration_otp200_response_spec.rb
 spec/models/verify_sms_registration_otp_request_spec.rb
+spec/models/verify_whats_app_caller_id_request_spec.rb
 spec/models/vote_reddit_thing_request_spec.rb
 spec/models/webhook_log_spec.rb
 spec/models/webhook_payload_account_ads_initial_sync_completed_account_spec.rb

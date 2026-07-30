@@ -546,8 +546,10 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppCallingApi* | [**get_whats_app_calling_config**](docs/WhatsAppCallingApi.md#get_whats_app_calling_config) | **GET** /v1/whatsapp/calling | Get calling config for an account
 *Zernio::WhatsAppCallingApi* | [**initiate_whats_app_call**](docs/WhatsAppCallingApi.md#initiate_whats_app_call) | **POST** /v1/whatsapp/calls | Initiate outbound call
 *Zernio::WhatsAppCallingApi* | [**list_whats_app_calls**](docs/WhatsAppCallingApi.md#list_whats_app_calls) | **GET** /v1/whatsapp/calls | List call history for an account
+*Zernio::WhatsAppCallingApi* | [**start_whats_app_caller_id_verification**](docs/WhatsAppCallingApi.md#start_whats_app_caller_id_verification) | **POST** /v1/phone-numbers/{id}/whatsapp/caller-id-verification | Start caller-ID verification for a customer-brought number
 *Zernio::WhatsAppCallingApi* | [**update_whats_app_calling**](docs/WhatsAppCallingApi.md#update_whats_app_calling) | **PATCH** /v1/phone-numbers/{id}/whatsapp/calling | Update calling config
 *Zernio::WhatsAppCallingApi* | [**update_whats_app_calling_legacy**](docs/WhatsAppCallingApi.md#update_whats_app_calling_legacy) | **PATCH** /v1/whatsapp/phone-numbers/{id}/calling | Update calling config
+*Zernio::WhatsAppCallingApi* | [**verify_whats_app_caller_id**](docs/WhatsAppCallingApi.md#verify_whats_app_caller_id) | **POST** /v1/phone-numbers/{id}/whatsapp/caller-id-verification/verify | Confirm the caller-ID verification code
 *Zernio::WhatsAppFlowsApi* | [**create_whats_app_flow**](docs/WhatsAppFlowsApi.md#create_whats_app_flow) | **POST** /v1/whatsapp/flows | Create flow
 *Zernio::WhatsAppFlowsApi* | [**delete_whats_app_flow**](docs/WhatsAppFlowsApi.md#delete_whats_app_flow) | **DELETE** /v1/whatsapp/flows/{flowId} | Delete flow
 *Zernio::WhatsAppFlowsApi* | [**deprecate_whats_app_flow**](docs/WhatsAppFlowsApi.md#deprecate_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/deprecate | Deprecate flow
@@ -1803,6 +1805,8 @@ Class | Method | HTTP request | Description
  - [Zernio::StartSmsRegistrationRequestBrand](docs/StartSmsRegistrationRequestBrand.md)
  - [Zernio::StartSmsRegistrationRequestCampaign](docs/StartSmsRegistrationRequestCampaign.md)
  - [Zernio::StartSmsRegistrationRequestTollFree](docs/StartSmsRegistrationRequestTollFree.md)
+ - [Zernio::StartWhatsAppCallerIdVerification200Response](docs/StartWhatsAppCallerIdVerification200Response.md)
+ - [Zernio::StartWhatsAppCallerIdVerificationRequest](docs/StartWhatsAppCallerIdVerificationRequest.md)
  - [Zernio::SubmitPhoneNumberKyc200Response](docs/SubmitPhoneNumberKyc200Response.md)
  - [Zernio::SubmitPhoneNumberKyc200ResponseNumbersInner](docs/SubmitPhoneNumberKyc200ResponseNumbersInner.md)
  - [Zernio::SubmitPhoneNumberKyc200ResponsePhoneNumber](docs/SubmitPhoneNumberKyc200ResponsePhoneNumber.md)
@@ -2030,6 +2034,7 @@ Class | Method | HTTP request | Description
  - [Zernio::Verification](docs/Verification.md)
  - [Zernio::VerifySmsRegistrationOtp200Response](docs/VerifySmsRegistrationOtp200Response.md)
  - [Zernio::VerifySmsRegistrationOtpRequest](docs/VerifySmsRegistrationOtpRequest.md)
+ - [Zernio::VerifyWhatsAppCallerIdRequest](docs/VerifyWhatsAppCallerIdRequest.md)
  - [Zernio::VoteRedditThingRequest](docs/VoteRedditThingRequest.md)
  - [Zernio::Webhook](docs/Webhook.md)
  - [Zernio::WebhookLog](docs/WebhookLog.md)

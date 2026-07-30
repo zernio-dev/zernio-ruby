@@ -16,8 +16,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_calling_config**](WhatsAppCallingApi.md#get_whats_app_calling_config) | **GET** /v1/whatsapp/calling | Get calling config for an account |
 | [**initiate_whats_app_call**](WhatsAppCallingApi.md#initiate_whats_app_call) | **POST** /v1/whatsapp/calls | Initiate outbound call |
 | [**list_whats_app_calls**](WhatsAppCallingApi.md#list_whats_app_calls) | **GET** /v1/whatsapp/calls | List call history for an account |
+| [**start_whats_app_caller_id_verification**](WhatsAppCallingApi.md#start_whats_app_caller_id_verification) | **POST** /v1/phone-numbers/{id}/whatsapp/caller-id-verification | Start caller-ID verification for a customer-brought number |
 | [**update_whats_app_calling**](WhatsAppCallingApi.md#update_whats_app_calling) | **PATCH** /v1/phone-numbers/{id}/whatsapp/calling | Update calling config |
 | [**update_whats_app_calling_legacy**](WhatsAppCallingApi.md#update_whats_app_calling_legacy) | **PATCH** /v1/whatsapp/phone-numbers/{id}/calling | Update calling config |
+| [**verify_whats_app_caller_id**](WhatsAppCallingApi.md#verify_whats_app_caller_id) | **POST** /v1/phone-numbers/{id}/whatsapp/caller-id-verification/verify | Confirm the caller-ID verification code |
 
 
 ## disable_whats_app_calling
@@ -888,6 +890,79 @@ end
 - **Accept**: application/json
 
 
+## start_whats_app_caller_id_verification
+
+> <StartWhatsAppCallerIdVerification200Response> start_whats_app_caller_id_verification(id, opts)
+
+Start caller-ID verification for a customer-brought number
+
+Customer-brought (BYO) WhatsApp numbers cannot present themselves as caller ID on `tel:` call forwards until verified (carrier anti-spoofing); until then forwarded calls show a Zernio number (`callerIdMode: platform` on the calling config). This sends a one-time code to the number by SMS or voice call. Re-POST to resend. Zernio-purchased numbers never need this and get a 400. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppCallingApi.new
+id = 'id_example' # String | Phone number record ID (from GET /v1/phone-numbers).
+opts = {
+  start_whats_app_caller_id_verification_request: Zernio::StartWhatsAppCallerIdVerificationRequest.new # StartWhatsAppCallerIdVerificationRequest | 
+}
+
+begin
+  # Start caller-ID verification for a customer-brought number
+  result = api_instance.start_whats_app_caller_id_verification(id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppCallingApi->start_whats_app_caller_id_verification: #{e}"
+end
+```
+
+#### Using the start_whats_app_caller_id_verification_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<StartWhatsAppCallerIdVerification200Response>, Integer, Hash)> start_whats_app_caller_id_verification_with_http_info(id, opts)
+
+```ruby
+begin
+  # Start caller-ID verification for a customer-brought number
+  data, status_code, headers = api_instance.start_whats_app_caller_id_verification_with_http_info(id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <StartWhatsAppCallerIdVerification200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppCallingApi->start_whats_app_caller_id_verification_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Phone number record ID (from GET /v1/phone-numbers). |  |
+| **start_whats_app_caller_id_verification_request** | [**StartWhatsAppCallerIdVerificationRequest**](StartWhatsAppCallerIdVerificationRequest.md) |  | [optional] |
+
+### Return type
+
+[**StartWhatsAppCallerIdVerification200Response**](StartWhatsAppCallerIdVerification200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_whats_app_calling
 
 > update_whats_app_calling(id, update_whats_app_calling_legacy_request)
@@ -1017,6 +1092,77 @@ end
 ### Return type
 
 nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## verify_whats_app_caller_id
+
+> <VerifySmsRegistrationOtp200Response> verify_whats_app_caller_id(id, verify_whats_app_caller_id_request)
+
+Confirm the caller-ID verification code
+
+Submits the one-time code the number received. On success, `tel:` call forwards present the business number itself as caller ID (`callerIdMode: business`). 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppCallingApi.new
+id = 'id_example' # String | Phone number record ID (from GET /v1/phone-numbers).
+verify_whats_app_caller_id_request = Zernio::VerifyWhatsAppCallerIdRequest.new({code: 'code_example'}) # VerifyWhatsAppCallerIdRequest | 
+
+begin
+  # Confirm the caller-ID verification code
+  result = api_instance.verify_whats_app_caller_id(id, verify_whats_app_caller_id_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppCallingApi->verify_whats_app_caller_id: #{e}"
+end
+```
+
+#### Using the verify_whats_app_caller_id_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<VerifySmsRegistrationOtp200Response>, Integer, Hash)> verify_whats_app_caller_id_with_http_info(id, verify_whats_app_caller_id_request)
+
+```ruby
+begin
+  # Confirm the caller-ID verification code
+  data, status_code, headers = api_instance.verify_whats_app_caller_id_with_http_info(id, verify_whats_app_caller_id_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <VerifySmsRegistrationOtp200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppCallingApi->verify_whats_app_caller_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Phone number record ID (from GET /v1/phone-numbers). |  |
+| **verify_whats_app_caller_id_request** | [**VerifyWhatsAppCallerIdRequest**](VerifyWhatsAppCallerIdRequest.md) |  |  |
+
+### Return type
+
+[**VerifySmsRegistrationOtp200Response**](VerifySmsRegistrationOtp200Response.md)
 
 ### Authorization
 

@@ -193,6 +193,19 @@ describe 'WhatsAppCallingApi' do
     end
   end
 
+  # unit tests for start_whats_app_caller_id_verification
+  # Start caller-ID verification for a customer-brought number
+  # Customer-brought (BYO) WhatsApp numbers cannot present themselves as caller ID on &#x60;tel:&#x60; call forwards until verified (carrier anti-spoofing); until then forwarded calls show a Zernio number (&#x60;callerIdMode: platform&#x60; on the calling config). This sends a one-time code to the number by SMS or voice call. Re-POST to resend. Zernio-purchased numbers never need this and get a 400. 
+  # @param id Phone number record ID (from GET /v1/phone-numbers).
+  # @param [Hash] opts the optional parameters
+  # @option opts [StartWhatsAppCallerIdVerificationRequest] :start_whats_app_caller_id_verification_request 
+  # @return [StartWhatsAppCallerIdVerification200Response]
+  describe 'start_whats_app_caller_id_verification test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_whats_app_calling
   # Update calling config
   # Update fields on an already-enabled number. Only fields present in the body are written; &#x60;undefined&#x60; leaves the stored value alone, explicit &#x60;null&#x60; clears a nullable field. No Meta side effect, this only changes local routing state consumed by the Telnyx webhook handler. 
@@ -214,6 +227,19 @@ describe 'WhatsAppCallingApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'update_whats_app_calling_legacy test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for verify_whats_app_caller_id
+  # Confirm the caller-ID verification code
+  # Submits the one-time code the number received. On success, &#x60;tel:&#x60; call forwards present the business number itself as caller ID (&#x60;callerIdMode: business&#x60;). 
+  # @param id Phone number record ID (from GET /v1/phone-numbers).
+  # @param verify_whats_app_caller_id_request 
+  # @param [Hash] opts the optional parameters
+  # @return [VerifySmsRegistrationOtp200Response]
+  describe 'verify_whats_app_caller_id test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
