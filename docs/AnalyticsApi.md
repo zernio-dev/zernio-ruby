@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_content_decay**](AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay |
 | [**get_daily_metrics**](AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics |
 | [**get_facebook_page_insights**](AnalyticsApi.md#get_facebook_page_insights) | **GET** /v1/analytics/facebook/page-insights | Get Facebook Page insights |
+| [**get_facebook_post_earnings**](AnalyticsApi.md#get_facebook_post_earnings) | **GET** /v1/analytics/facebook/post-earnings | Get Facebook post monetization earnings |
 | [**get_facebook_post_reactions**](AnalyticsApi.md#get_facebook_post_reactions) | **GET** /v1/accounts/{accountId}/facebook-post-reactions | Get Facebook post reactions |
 | [**get_follower_stats**](AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**get_google_business_performance**](AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get GBP performance metrics |
@@ -380,7 +381,7 @@ end
 api_instance = Zernio::AnalyticsApi.new
 account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the connected Facebook Page.
 opts = {
-  metrics: 'metrics_example', # String | Comma-separated list of metrics. Defaults to \"page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\".  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost 
+  metrics: 'metrics_example', # String | Comma-separated list of metrics. Defaults to \"page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\".  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \"micro_amount\" plus an ISO 4217 \"currency\". monetization_approximate_earnings returns a bare number per day, so its unit is always \"unspecified\" and its \"currency\" is always null. The two are on different scales and are not comparable to each other. Both keep their daily \"values\" on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \"total\" is their sum. Meta does not document whether a bucket carries that day's earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \"total\" against the Page's own Meta export before relying on it; the daily \"values\" are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \"metrics\": Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \"unavailableMetrics\" covers the narrower case where Meta returned no bucket for the metric at all (\"no_data\") or rejected the request outright, and the metric is then omitted from \"metrics\" rather than reported as 0. 
   since: Date.parse('2013-10-20'), # Date | Start date (YYYY-MM-DD). Defaults to 30 days ago.
   _until: Date.parse('2013-10-20'), # Date | End date (YYYY-MM-DD). Defaults to today.
   metric_type: 'time_series' # String | \"total_value\" (default) returns aggregated totals only. \"time_series\" returns daily values in the \"values\" array. 
@@ -418,7 +419,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | The Zernio SocialAccount ID for the connected Facebook Page. |  |
-| **metrics** | **String** | Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  | [optional] |
+| **metrics** | **String** | Comma-separated list of metrics. Defaults to \&quot;page_media_view,page_post_engagements,page_follows,followers_gained,followers_lost\&quot;.  Live Meta metrics (current names, post-Nov-2025):   - page_media_view       (replaces deprecated page_impressions)   - page_views_total   - page_post_engagements   - page_video_views   - page_video_view_time   - page_follows          (replaces deprecated page_fans)  Zernio-synthesized from daily follower snapshots (filling the Nov-2025 gap left by the page_fan_adds / page_fan_removes deprecation):   - followers_gained   - followers_lost  Monetization (opt-in, not in the defaults):   - content_monetization_earnings   - monetization_approximate_earnings  Each monetization metric is fetched with its own separate Graph call, so requesting both adds two calls. Values are approximate and Meta restates them after the fact.  content_monetization_earnings returns an object per day and always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings returns a bare number per day, so its unit is always \&quot;unspecified\&quot; and its \&quot;currency\&quot; is always null. The two are on different scales and are not comparable to each other. Both keep their daily \&quot;values\&quot; on every metricType and are never rescaled by Zernio.  Earnings here are Page-level daily buckets and \&quot;total\&quot; is their sum. Meta does not document whether a bucket carries that day&#39;s earnings or a running total, and every Page measured so far earned exactly 0, so reconcile \&quot;total\&quot; against the Page&#39;s own Meta export before relying on it; the daily \&quot;values\&quot; are always returned for that purpose. Per-post lifetime earnings are served by GET /v1/analytics/facebook/post-earnings.  A Page that is not enrolled in monetization, or that earned nothing, returns normal daily buckets of 0 in \&quot;metrics\&quot;: Meta does not distinguish the two, so a 0 total here does NOT mean the Page is enrolled. \&quot;unavailableMetrics\&quot; covers the narrower case where Meta returned no bucket for the metric at all (\&quot;no_data\&quot;) or rejected the request outright, and the metric is then omitted from \&quot;metrics\&quot; rather than reported as 0.  | [optional] |
 | **since** | **Date** | Start date (YYYY-MM-DD). Defaults to 30 days ago. | [optional] |
 | **_until** | **Date** | End date (YYYY-MM-DD). Defaults to today. | [optional] |
 | **metric_type** | **String** | \&quot;total_value\&quot; (default) returns aggregated totals only. \&quot;time_series\&quot; returns daily values in the \&quot;values\&quot; array.  | [optional][default to &#39;total_value&#39;] |
@@ -426,6 +427,81 @@ end
 ### Return type
 
 [**InstagramAccountInsightsResponse**](InstagramAccountInsightsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_facebook_post_earnings
+
+> <FacebookPostEarningsResponse> get_facebook_post_earnings(account_id, post_id, opts)
+
+Get Facebook post monetization earnings
+
+Returns lifetime monetization earnings for ONE Facebook post, read live from Meta on every request. Requires the Analytics add-on.  Earnings are CUMULATIVE since the post was published, not earnings within a date range, so this endpoint takes no since/until and the totals must not be summed across dates or across posts. Page-level daily earnings live on /v1/analytics/facebook/page-insights.  A post on a Page that is not enrolled in monetization, or that earned nothing, returns \"total\": 0 rather than an error: Meta does not distinguish the two. A metric Meta returned no bucket for at all is reported in \"unavailableMetrics\" and omitted from \"metrics\", never as a 0.  Amounts are the platform's raw numbers in the stated \"unit\" and are never rescaled by Zernio. Breakdown dimensions are not exposed and a \"breakdown\" param is rejected with 400. So are \"since\", \"until\", \"period\", and \"metricType\": scoping this endpoint to a window is not possible, and silently returning the lifetime total for one would let a caller sum a year of weekly requests into a figure ~52x the post's real earnings. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AnalyticsApi.new
+account_id = 'account_id_example' # String | The Zernio SocialAccount ID for the connected Facebook Page.
+post_id = 'post_id_example' # String | The platform post ID, exactly as returned in platformAnalytics[].platformPostId by /v1/analytics: \"{pageId}_{postId}\", or the bare video ID for Reels. 
+opts = {
+  metrics: 'metrics_example' # String | Comma-separated list of monetization metrics. Defaults to both:   - content_monetization_earnings   - monetization_approximate_earnings  content_monetization_earnings always carries unit \"micro_amount\" plus an ISO 4217 \"currency\". monetization_approximate_earnings is always a bare number, so its unit is \"unspecified\" and its \"currency\" is null. The two are on different scales and are not comparable to each other. Any other metric name is rejected with 400. 
+}
+
+begin
+  # Get Facebook post monetization earnings
+  result = api_instance.get_facebook_post_earnings(account_id, post_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_facebook_post_earnings: #{e}"
+end
+```
+
+#### Using the get_facebook_post_earnings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<FacebookPostEarningsResponse>, Integer, Hash)> get_facebook_post_earnings_with_http_info(account_id, post_id, opts)
+
+```ruby
+begin
+  # Get Facebook post monetization earnings
+  data, status_code, headers = api_instance.get_facebook_post_earnings_with_http_info(account_id, post_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <FacebookPostEarningsResponse>
+rescue Zernio::ApiError => e
+  puts "Error when calling AnalyticsApi->get_facebook_post_earnings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio SocialAccount ID for the connected Facebook Page. |  |
+| **post_id** | **String** | The platform post ID, exactly as returned in platformAnalytics[].platformPostId by /v1/analytics: \&quot;{pageId}_{postId}\&quot;, or the bare video ID for Reels.  |  |
+| **metrics** | **String** | Comma-separated list of monetization metrics. Defaults to both:   - content_monetization_earnings   - monetization_approximate_earnings  content_monetization_earnings always carries unit \&quot;micro_amount\&quot; plus an ISO 4217 \&quot;currency\&quot;. monetization_approximate_earnings is always a bare number, so its unit is \&quot;unspecified\&quot; and its \&quot;currency\&quot; is null. The two are on different scales and are not comparable to each other. Any other metric name is rejected with 400.  | [optional] |
+
+### Return type
+
+[**FacebookPostEarningsResponse**](FacebookPostEarningsResponse.md)
 
 ### Authorization
 

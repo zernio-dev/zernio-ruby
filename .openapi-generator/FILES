@@ -400,6 +400,9 @@ docs/ExternalPostSummaryAnalytics.md
 docs/ExternalPostWebhookPost.md
 docs/FacebookPlatformData.md
 docs/FacebookPlatformDataCarouselCardsInner.md
+docs/FacebookPostEarningsResponse.md
+docs/FacebookPostEarningsResponseMetricsValue.md
+docs/FacebookPostEarningsResponseUnavailableMetricsInner.md
 docs/FetchGoogleBusinessVerificationOptions200Response.md
 docs/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.md
 docs/FetchGoogleBusinessVerificationOptionsRequest.md
@@ -778,6 +781,7 @@ docs/InstagramAccountInsightsResponseDateRange.md
 docs/InstagramAccountInsightsResponseMetricsValue.md
 docs/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.md
 docs/InstagramAccountInsightsResponseMetricsValueValuesInner.md
+docs/InstagramAccountInsightsResponseUnavailableMetricsInner.md
 docs/InstagramApi.md
 docs/InstagramDemographicsResponse.md
 docs/InstagramDemographicsResponseDemographicsValueInner.md
@@ -2049,6 +2053,9 @@ lib/zernio-sdk/models/external_post_summary_analytics.rb
 lib/zernio-sdk/models/external_post_webhook_post.rb
 lib/zernio-sdk/models/facebook_platform_data.rb
 lib/zernio-sdk/models/facebook_platform_data_carousel_cards_inner.rb
+lib/zernio-sdk/models/facebook_post_earnings_response.rb
+lib/zernio-sdk/models/facebook_post_earnings_response_metrics_value.rb
+lib/zernio-sdk/models/facebook_post_earnings_response_unavailable_metrics_inner.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options200_response.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options200_response_options_inner.rb
 lib/zernio-sdk/models/fetch_google_business_verification_options_request.rb
@@ -2418,6 +2425,7 @@ lib/zernio-sdk/models/instagram_account_insights_response_date_range.rb
 lib/zernio-sdk/models/instagram_account_insights_response_metrics_value.rb
 lib/zernio-sdk/models/instagram_account_insights_response_metrics_value_breakdowns_inner.rb
 lib/zernio-sdk/models/instagram_account_insights_response_metrics_value_values_inner.rb
+lib/zernio-sdk/models/instagram_account_insights_response_unavailable_metrics_inner.rb
 lib/zernio-sdk/models/instagram_demographics_response.rb
 lib/zernio-sdk/models/instagram_demographics_response_demographics_value_inner.rb
 lib/zernio-sdk/models/instagram_platform_data.rb
@@ -3649,6 +3657,9 @@ spec/models/external_post_summary_spec.rb
 spec/models/external_post_webhook_post_spec.rb
 spec/models/facebook_platform_data_carousel_cards_inner_spec.rb
 spec/models/facebook_platform_data_spec.rb
+spec/models/facebook_post_earnings_response_metrics_value_spec.rb
+spec/models/facebook_post_earnings_response_spec.rb
+spec/models/facebook_post_earnings_response_unavailable_metrics_inner_spec.rb
 spec/models/fetch_google_business_verification_options200_response_options_inner_spec.rb
 spec/models/fetch_google_business_verification_options200_response_spec.rb
 spec/models/fetch_google_business_verification_options_request_spec.rb
@@ -4018,6 +4029,7 @@ spec/models/instagram_account_insights_response_metrics_value_breakdowns_inner_s
 spec/models/instagram_account_insights_response_metrics_value_spec.rb
 spec/models/instagram_account_insights_response_metrics_value_values_inner_spec.rb
 spec/models/instagram_account_insights_response_spec.rb
+spec/models/instagram_account_insights_response_unavailable_metrics_inner_spec.rb
 spec/models/instagram_demographics_response_demographics_value_inner_spec.rb
 spec/models/instagram_demographics_response_spec.rb
 spec/models/instagram_platform_data_spec.rb

@@ -31,8 +31,11 @@ module Zernio
     # Breakdown dimension used (only present when breakdown was requested)
     attr_accessor :breakdown
 
-    # Object keyed by metric name. For time_series: each metric has \"total\" (number) and \"values\" (array of {date, value}). For total_value: each metric has \"total\" (number) and optionally \"breakdowns\" (array of {dimension, value}). 
+    # Object keyed by metric name. For time_series: each metric has \"total\" (number) and \"values\" (array of {date, value}). For total_value: each metric has \"total\" (number) and optionally \"breakdowns\" (array of {dimension, value}).  Monetary metrics additionally carry \"unit\" and \"currency\". Zernio never rescales money: \"total\" and every \"values[].value\" are the platform's raw numbers in the stated unit. Monetary metrics also keep \"values\" on metricType=total_value, because their \"total\" is the sum of the daily buckets the platform returned over the range: keep the series so you can reconcile that sum against the platform's own reporting before invoicing on it. A metric that could not be served is absent from this object and listed in \"unavailableMetrics\" instead, so an unavailable metric is never reported as a zero. 
     attr_accessor :metrics
+
+    # Requested metrics that could not be served. Present only when at least one metric is unavailable, and absent otherwise. Each listed metric is OMITTED from \"metrics\" rather than reported as 0, which is how an unavailable metric is distinguished from a genuine zero. The request itself still succeeds with HTTP 200. 
+    attr_accessor :unavailable_metrics
 
     attr_accessor :data_delay
 
@@ -68,6 +71,7 @@ module Zernio
         :'metric_type' => :'metricType',
         :'breakdown' => :'breakdown',
         :'metrics' => :'metrics',
+        :'unavailable_metrics' => :'unavailableMetrics',
         :'data_delay' => :'dataDelay'
       }
     end
@@ -92,6 +96,7 @@ module Zernio
         :'metric_type' => :'String',
         :'breakdown' => :'String',
         :'metrics' => :'Hash<String, InstagramAccountInsightsResponseMetricsValue>',
+        :'unavailable_metrics' => :'Array<InstagramAccountInsightsResponseUnavailableMetricsInner>',
         :'data_delay' => :'String'
       }
     end
@@ -145,6 +150,12 @@ module Zernio
       if attributes.key?(:'metrics')
         if (value = attributes[:'metrics']).is_a?(Hash)
           self.metrics = value
+        end
+      end
+
+      if attributes.key?(:'unavailable_metrics')
+        if (value = attributes[:'unavailable_metrics']).is_a?(Array)
+          self.unavailable_metrics = value
         end
       end
 
@@ -204,6 +215,7 @@ module Zernio
           metric_type == o.metric_type &&
           breakdown == o.breakdown &&
           metrics == o.metrics &&
+          unavailable_metrics == o.unavailable_metrics &&
           data_delay == o.data_delay
     end
 
@@ -216,7 +228,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, account_id, platform, date_range, metric_type, breakdown, metrics, data_delay].hash
+      [success, account_id, platform, date_range, metric_type, breakdown, metrics, unavailable_metrics, data_delay].hash
     end
 
     # Builds the object from hash

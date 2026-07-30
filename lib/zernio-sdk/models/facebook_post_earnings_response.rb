@@ -14,21 +14,27 @@ require 'date'
 require 'time'
 
 module Zernio
-  class InstagramAccountInsightsResponseMetricsValue < ApiModelBase
-    # Sum or aggregate value for the metric
-    attr_accessor :total
+  # Lifetime monetization earnings for one Facebook post. Same \"unit\" / \"currency\" contract and same unavailable-vs-zero contract as the Page-level response; there is no date range, no metricType, and no daily \"values\", because the single lifetime bucket IS the total. 
+  class FacebookPostEarningsResponse < ApiModelBase
+    attr_accessor :success
 
-    # Daily values (for time_series, and always on monetary metrics)
-    attr_accessor :values
+    attr_accessor :account_id
 
-    # Breakdown values (only for total_value with breakdown)
-    attr_accessor :breakdowns
+    # The platform post ID that was queried, echoed back.
+    attr_accessor :post_id
 
-    # Present on monetary metrics only. The scale of \"total\" and of every \"values[].value\", exactly as the platform returned them.  \"micro_amount\": the platform returned an object shape carrying a micro amount, and the values are that integer, summed, unconverted. Zernio does not publish a divisor because Meta does not document one; divide by the scale you have verified against the Page's own Meta Business Suite export. On Facebook Page insights this is always content_monetization_earnings.  \"unspecified\": the platform returned a bare number with no unit metadata. It is passed through as-is; the platform does not state whether it is major or minor currency units. On Facebook Page insights this is always monetization_approximate_earnings. 
-    attr_accessor :unit
+    attr_accessor :platform
 
-    # ISO 4217 currency of a monetary metric, or null when the platform omitted it. Always null on monetization_approximate_earnings, which Meta returns as a bare number with no currency; always present on content_monetization_earnings. 
-    attr_accessor :currency
+    # Always \"lifetime\": the total is cumulative since publication and must not be summed across dates or across posts. 
+    attr_accessor :period
+
+    # One entry per served metric. A metric reported here with \"total\": 0 genuinely earned nothing (or its Page is not enrolled, which Meta reports identically). 
+    attr_accessor :metrics
+
+    # Requested metrics Meta could not serve. Present only when at least one metric is unavailable, and absent otherwise. Each listed metric is OMITTED from \"metrics\" rather than reported as 0. The request itself still succeeds with HTTP 200. 
+    attr_accessor :unavailable_metrics
+
+    attr_accessor :data_delay
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -55,11 +61,14 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'total' => :'total',
-        :'values' => :'values',
-        :'breakdowns' => :'breakdowns',
-        :'unit' => :'unit',
-        :'currency' => :'currency'
+        :'success' => :'success',
+        :'account_id' => :'accountId',
+        :'post_id' => :'postId',
+        :'platform' => :'platform',
+        :'period' => :'period',
+        :'metrics' => :'metrics',
+        :'unavailable_metrics' => :'unavailableMetrics',
+        :'data_delay' => :'dataDelay'
       }
     end
 
@@ -76,18 +85,20 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'total' => :'Float',
-        :'values' => :'Array<InstagramAccountInsightsResponseMetricsValueValuesInner>',
-        :'breakdowns' => :'Array<InstagramAccountInsightsResponseMetricsValueBreakdownsInner>',
-        :'unit' => :'String',
-        :'currency' => :'String'
+        :'success' => :'Boolean',
+        :'account_id' => :'String',
+        :'post_id' => :'String',
+        :'platform' => :'String',
+        :'period' => :'String',
+        :'metrics' => :'Hash<String, FacebookPostEarningsResponseMetricsValue>',
+        :'unavailable_metrics' => :'Array<FacebookPostEarningsResponseUnavailableMetricsInner>',
+        :'data_delay' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'currency'
       ])
     end
 
@@ -95,40 +106,52 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InstagramAccountInsightsResponseMetricsValue` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::FacebookPostEarningsResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InstagramAccountInsightsResponseMetricsValue`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::FacebookPostEarningsResponse`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'total')
-        self.total = attributes[:'total']
+      if attributes.key?(:'success')
+        self.success = attributes[:'success']
       end
 
-      if attributes.key?(:'values')
-        if (value = attributes[:'values']).is_a?(Array)
-          self.values = value
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
+
+      if attributes.key?(:'post_id')
+        self.post_id = attributes[:'post_id']
+      end
+
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
+      end
+
+      if attributes.key?(:'period')
+        self.period = attributes[:'period']
+      end
+
+      if attributes.key?(:'metrics')
+        if (value = attributes[:'metrics']).is_a?(Hash)
+          self.metrics = value
         end
       end
 
-      if attributes.key?(:'breakdowns')
-        if (value = attributes[:'breakdowns']).is_a?(Array)
-          self.breakdowns = value
+      if attributes.key?(:'unavailable_metrics')
+        if (value = attributes[:'unavailable_metrics']).is_a?(Array)
+          self.unavailable_metrics = value
         end
       end
 
-      if attributes.key?(:'unit')
-        self.unit = attributes[:'unit']
-      end
-
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
+      if attributes.key?(:'data_delay')
+        self.data_delay = attributes[:'data_delay']
       end
     end
 
@@ -144,19 +167,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      unit_validator = EnumAttributeValidator.new('String', ["micro_amount", "unspecified"])
-      return false unless unit_validator.valid?(@unit)
+      period_validator = EnumAttributeValidator.new('String', ["lifetime"])
+      return false unless period_validator.valid?(@period)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] unit Object to be assigned
-    def unit=(unit)
-      validator = EnumAttributeValidator.new('String', ["micro_amount", "unspecified"])
-      unless validator.valid?(unit)
-        fail ArgumentError, "invalid value for \"unit\", must be one of #{validator.allowable_values}."
+    # @param [Object] period Object to be assigned
+    def period=(period)
+      validator = EnumAttributeValidator.new('String', ["lifetime"])
+      unless validator.valid?(period)
+        fail ArgumentError, "invalid value for \"period\", must be one of #{validator.allowable_values}."
       end
-      @unit = unit
+      @period = period
     end
 
     # Checks equality by comparing each attribute.
@@ -164,11 +187,14 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          total == o.total &&
-          values == o.values &&
-          breakdowns == o.breakdowns &&
-          unit == o.unit &&
-          currency == o.currency
+          success == o.success &&
+          account_id == o.account_id &&
+          post_id == o.post_id &&
+          platform == o.platform &&
+          period == o.period &&
+          metrics == o.metrics &&
+          unavailable_metrics == o.unavailable_metrics &&
+          data_delay == o.data_delay
     end
 
     # @see the `==` method
@@ -180,7 +206,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total, values, breakdowns, unit, currency].hash
+      [success, account_id, post_id, platform, period, metrics, unavailable_metrics, data_delay].hash
     end
 
     # Builds the object from hash

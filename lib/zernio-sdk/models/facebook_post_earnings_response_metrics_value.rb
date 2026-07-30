@@ -14,20 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  class InstagramAccountInsightsResponseMetricsValue < ApiModelBase
-    # Sum or aggregate value for the metric
+  class FacebookPostEarningsResponseMetricsValue < ApiModelBase
+    # Lifetime earnings in \"unit\", exactly as Meta returned them. Never rescaled.
     attr_accessor :total
 
-    # Daily values (for time_series, and always on monetary metrics)
-    attr_accessor :values
-
-    # Breakdown values (only for total_value with breakdown)
-    attr_accessor :breakdowns
-
-    # Present on monetary metrics only. The scale of \"total\" and of every \"values[].value\", exactly as the platform returned them.  \"micro_amount\": the platform returned an object shape carrying a micro amount, and the values are that integer, summed, unconverted. Zernio does not publish a divisor because Meta does not document one; divide by the scale you have verified against the Page's own Meta Business Suite export. On Facebook Page insights this is always content_monetization_earnings.  \"unspecified\": the platform returned a bare number with no unit metadata. It is passed through as-is; the platform does not state whether it is major or minor currency units. On Facebook Page insights this is always monetization_approximate_earnings. 
+    # \"micro_amount\": Meta returned an object shape carrying a micro amount, and \"total\" is that integer, unconverted. Zernio does not publish a divisor because Meta does not document one; divide by the scale you have verified against the Page's own Meta Business Suite export. This is always content_monetization_earnings.  \"unspecified\": Meta returned a bare number with no unit metadata, passed through as-is; Meta does not state whether it is major or minor currency units. This is always monetization_approximate_earnings. 
     attr_accessor :unit
 
-    # ISO 4217 currency of a monetary metric, or null when the platform omitted it. Always null on monetization_approximate_earnings, which Meta returns as a bare number with no currency; always present on content_monetization_earnings. 
+    # ISO 4217 currency, or null when Meta omitted it. Always null on monetization_approximate_earnings; always present on content_monetization_earnings. 
     attr_accessor :currency
 
     class EnumAttributeValidator
@@ -56,8 +50,6 @@ module Zernio
     def self.attribute_map
       {
         :'total' => :'total',
-        :'values' => :'values',
-        :'breakdowns' => :'breakdowns',
         :'unit' => :'unit',
         :'currency' => :'currency'
       }
@@ -77,8 +69,6 @@ module Zernio
     def self.openapi_types
       {
         :'total' => :'Float',
-        :'values' => :'Array<InstagramAccountInsightsResponseMetricsValueValuesInner>',
-        :'breakdowns' => :'Array<InstagramAccountInsightsResponseMetricsValueBreakdownsInner>',
         :'unit' => :'String',
         :'currency' => :'String'
       }
@@ -95,32 +85,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InstagramAccountInsightsResponseMetricsValue` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::FacebookPostEarningsResponseMetricsValue` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InstagramAccountInsightsResponseMetricsValue`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::FacebookPostEarningsResponseMetricsValue`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      end
-
-      if attributes.key?(:'values')
-        if (value = attributes[:'values']).is_a?(Array)
-          self.values = value
-        end
-      end
-
-      if attributes.key?(:'breakdowns')
-        if (value = attributes[:'breakdowns']).is_a?(Array)
-          self.breakdowns = value
-        end
       end
 
       if attributes.key?(:'unit')
@@ -165,8 +143,6 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           total == o.total &&
-          values == o.values &&
-          breakdowns == o.breakdowns &&
           unit == o.unit &&
           currency == o.currency
     end
@@ -180,7 +156,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total, values, breakdowns, unit, currency].hash
+      [total, unit, currency].hash
     end
 
     # Builds the object from hash

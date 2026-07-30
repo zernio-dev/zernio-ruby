@@ -160,6 +160,7 @@ Class | Method | HTTP request | Description
 *Zernio::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
 *Zernio::AnalyticsApi* | [**get_daily_metrics**](docs/AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics
 *Zernio::AnalyticsApi* | [**get_facebook_page_insights**](docs/AnalyticsApi.md#get_facebook_page_insights) | **GET** /v1/analytics/facebook/page-insights | Get Facebook Page insights
+*Zernio::AnalyticsApi* | [**get_facebook_post_earnings**](docs/AnalyticsApi.md#get_facebook_post_earnings) | **GET** /v1/analytics/facebook/post-earnings | Get Facebook post monetization earnings
 *Zernio::AnalyticsApi* | [**get_facebook_post_reactions**](docs/AnalyticsApi.md#get_facebook_post_reactions) | **GET** /v1/accounts/{accountId}/facebook-post-reactions | Get Facebook post reactions
 *Zernio::AnalyticsApi* | [**get_follower_stats**](docs/AnalyticsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
 *Zernio::AnalyticsApi* | [**get_google_business_performance**](docs/AnalyticsApi.md#get_google_business_performance) | **GET** /v1/analytics/googlebusiness/performance | Get GBP performance metrics
@@ -971,6 +972,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ExternalPostWebhookPost](docs/ExternalPostWebhookPost.md)
  - [Zernio::FacebookPlatformData](docs/FacebookPlatformData.md)
  - [Zernio::FacebookPlatformDataCarouselCardsInner](docs/FacebookPlatformDataCarouselCardsInner.md)
+ - [Zernio::FacebookPostEarningsResponse](docs/FacebookPostEarningsResponse.md)
+ - [Zernio::FacebookPostEarningsResponseMetricsValue](docs/FacebookPostEarningsResponseMetricsValue.md)
+ - [Zernio::FacebookPostEarningsResponseUnavailableMetricsInner](docs/FacebookPostEarningsResponseUnavailableMetricsInner.md)
  - [Zernio::FetchGoogleBusinessVerificationOptions200Response](docs/FetchGoogleBusinessVerificationOptions200Response.md)
  - [Zernio::FetchGoogleBusinessVerificationOptions200ResponseOptionsInner](docs/FetchGoogleBusinessVerificationOptions200ResponseOptionsInner.md)
  - [Zernio::FetchGoogleBusinessVerificationOptionsRequest](docs/FetchGoogleBusinessVerificationOptionsRequest.md)
@@ -1340,6 +1344,7 @@ Class | Method | HTTP request | Description
  - [Zernio::InstagramAccountInsightsResponseMetricsValue](docs/InstagramAccountInsightsResponseMetricsValue.md)
  - [Zernio::InstagramAccountInsightsResponseMetricsValueBreakdownsInner](docs/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.md)
  - [Zernio::InstagramAccountInsightsResponseMetricsValueValuesInner](docs/InstagramAccountInsightsResponseMetricsValueValuesInner.md)
+ - [Zernio::InstagramAccountInsightsResponseUnavailableMetricsInner](docs/InstagramAccountInsightsResponseUnavailableMetricsInner.md)
  - [Zernio::InstagramDemographicsResponse](docs/InstagramDemographicsResponse.md)
  - [Zernio::InstagramDemographicsResponseDemographicsValueInner](docs/InstagramDemographicsResponseDemographicsValueInner.md)
  - [Zernio::InstagramPlatformData](docs/InstagramPlatformData.md)
