@@ -362,12 +362,12 @@ module Zernio
     # Returns a paginated list of posts. Published posts include platformPostUrl with the public URL on each platform.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
-    # @option opts [Integer] :limit Page size (default to 10)
+    # @option opts [Integer] :limit Page size. Values above the maximum return 400 rather than being clamped. (default to 10)
     # @option opts [String] :source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (default to 'zernio')
     # @option opts [String] :status 
     # @option opts [String] :platform 
     # @option opts [String] :profile_id 
-    # @option opts [String] :created_by 
+    # @option opts [String] :created_by Filter posts to those created by a specific team user (24-char hex ObjectId).
     # @option opts [Date] :date_from 
     # @option opts [Date] :date_to 
     # @option opts [Boolean] :include_hidden  (default to false)
@@ -384,12 +384,12 @@ module Zernio
     # Returns a paginated list of posts. Published posts include platformPostUrl with the public URL on each platform.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Page number (1-based) (default to 1)
-    # @option opts [Integer] :limit Page size (default to 10)
+    # @option opts [Integer] :limit Page size. Values above the maximum return 400 rather than being clamped. (default to 10)
     # @option opts [String] :source Which collection to read. &#x60;zernio&#x60; (default) returns posts authored through Zernio. &#x60;external&#x60; returns posts synced from the platform (existing/historical posts that were published outside Zernio). Combine with &#x60;accountId&#x60; and paginate via &#x60;page&#x60;/&#x60;limit&#x60; to walk the full synced history (we keep up to the last ~12 months per account). (default to 'zernio')
     # @option opts [String] :status 
     # @option opts [String] :platform 
     # @option opts [String] :profile_id 
-    # @option opts [String] :created_by 
+    # @option opts [String] :created_by Filter posts to those created by a specific team user (24-char hex ObjectId).
     # @option opts [Date] :date_from 
     # @option opts [Date] :date_to 
     # @option opts [Boolean] :include_hidden  (default to false)
@@ -405,8 +405,8 @@ module Zernio
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PostsApi.list_posts, must be greater than or equal to 1.'
       end
 
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PostsApi.list_posts, must be smaller than or equal to 100.'
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 500
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PostsApi.list_posts, must be smaller than or equal to 500.'
       end
 
       if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
