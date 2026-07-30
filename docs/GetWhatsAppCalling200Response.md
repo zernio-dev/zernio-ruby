@@ -15,6 +15,8 @@
 | **outbound_disabled** | **Boolean** | True when the number&#39;s country blocks business-initiated (outbound) WhatsApp calling; inbound still works. | [optional] |
 | **caller_id_mode** | **String** | Caller ID the forward-leg callee sees on tel: forwards. business &#x3D; this WhatsApp number; platform &#x3D; a Zernio number (used when the number was brought by the customer and its caller ID is not verified for PSTN origination). | [optional] |
 | **caller_id_verified** | **Boolean** | True once the number completed caller-ID verification, making tel: forwards display the business number itself. | [optional] |
+| **max_call_duration_seconds** | **Integer** | Hard cap (seconds) on forwarded calls; null &#x3D; no cap. | [optional] |
+| **forward_caller_id** | **String** |  | [optional] |
 
 ## Example
 
@@ -32,7 +34,9 @@ instance = Zernio::GetWhatsAppCalling200Response.new(
   call_icon_countries: null,
   outbound_disabled: null,
   caller_id_mode: null,
-  caller_id_verified: null
+  caller_id_verified: null,
+  max_call_duration_seconds: null,
+  forward_caller_id: null
 )
 ```
 

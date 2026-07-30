@@ -29,6 +29,34 @@ module Zernio
 
     attr_accessor :call_icon_countries
 
+    # Hard cap (seconds) on a forwarded call; the carrier hangs up both legs when it fires. Safety valve against dead-air billing when a destination hangs up but the signal is lost.
+    attr_accessor :max_call_duration_seconds
+
+    # Caller ID presented to the forward destination. caller = the WhatsApp user's number (sip: destinations only; ignored on tel: forwards). Fixes AI-agent trunks that reject seeing the business number call itself.
+    attr_accessor :forward_caller_id
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -37,7 +65,9 @@ module Zernio
         :'sip_auth_username' => :'sipAuthUsername',
         :'sip_auth_password' => :'sipAuthPassword',
         :'recording_enabled' => :'recordingEnabled',
-        :'call_icon_countries' => :'callIconCountries'
+        :'call_icon_countries' => :'callIconCountries',
+        :'max_call_duration_seconds' => :'maxCallDurationSeconds',
+        :'forward_caller_id' => :'forwardCallerId'
       }
     end
 
@@ -59,7 +89,9 @@ module Zernio
         :'sip_auth_username' => :'String',
         :'sip_auth_password' => :'String',
         :'recording_enabled' => :'Boolean',
-        :'call_icon_countries' => :'Array<String>'
+        :'call_icon_countries' => :'Array<String>',
+        :'max_call_duration_seconds' => :'Integer',
+        :'forward_caller_id' => :'String'
       }
     end
 
@@ -116,6 +148,16 @@ module Zernio
           self.call_icon_countries = value
         end
       end
+
+      if attributes.key?(:'max_call_duration_seconds')
+        self.max_call_duration_seconds = attributes[:'max_call_duration_seconds']
+      end
+
+      if attributes.key?(:'forward_caller_id')
+        self.forward_caller_id = attributes[:'forward_caller_id']
+      else
+        self.forward_caller_id = 'business'
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -131,6 +173,14 @@ module Zernio
         invalid_properties.push('invalid value for "forward_to", forward_to cannot be nil.')
       end
 
+      if !@max_call_duration_seconds.nil? && @max_call_duration_seconds > 14400
+        invalid_properties.push('invalid value for "max_call_duration_seconds", must be smaller than or equal to 14400.')
+      end
+
+      if !@max_call_duration_seconds.nil? && @max_call_duration_seconds < 30
+        invalid_properties.push('invalid value for "max_call_duration_seconds", must be greater than or equal to 30.')
+      end
+
       invalid_properties
     end
 
@@ -140,6 +190,10 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
       return false if @forward_to.nil?
+      return false if !@max_call_duration_seconds.nil? && @max_call_duration_seconds > 14400
+      return false if !@max_call_duration_seconds.nil? && @max_call_duration_seconds < 30
+      forward_caller_id_validator = EnumAttributeValidator.new('String', ["business", "caller"])
+      return false unless forward_caller_id_validator.valid?(@forward_caller_id)
       true
     end
 
@@ -163,6 +217,34 @@ module Zernio
       @forward_to = forward_to
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] max_call_duration_seconds Value to be assigned
+    def max_call_duration_seconds=(max_call_duration_seconds)
+      if max_call_duration_seconds.nil?
+        fail ArgumentError, 'max_call_duration_seconds cannot be nil'
+      end
+
+      if max_call_duration_seconds > 14400
+        fail ArgumentError, 'invalid value for "max_call_duration_seconds", must be smaller than or equal to 14400.'
+      end
+
+      if max_call_duration_seconds < 30
+        fail ArgumentError, 'invalid value for "max_call_duration_seconds", must be greater than or equal to 30.'
+      end
+
+      @max_call_duration_seconds = max_call_duration_seconds
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] forward_caller_id Object to be assigned
+    def forward_caller_id=(forward_caller_id)
+      validator = EnumAttributeValidator.new('String', ["business", "caller"])
+      unless validator.valid?(forward_caller_id)
+        fail ArgumentError, "invalid value for \"forward_caller_id\", must be one of #{validator.allowable_values}."
+      end
+      @forward_caller_id = forward_caller_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -173,7 +255,9 @@ module Zernio
           sip_auth_username == o.sip_auth_username &&
           sip_auth_password == o.sip_auth_password &&
           recording_enabled == o.recording_enabled &&
-          call_icon_countries == o.call_icon_countries
+          call_icon_countries == o.call_icon_countries &&
+          max_call_duration_seconds == o.max_call_duration_seconds &&
+          forward_caller_id == o.forward_caller_id
     end
 
     # @see the `==` method
@@ -185,7 +269,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, forward_to, sip_auth_username, sip_auth_password, recording_enabled, call_icon_countries].hash
+      [account_id, forward_to, sip_auth_username, sip_auth_password, recording_enabled, call_icon_countries, max_call_duration_seconds, forward_caller_id].hash
     end
 
     # Builds the object from hash

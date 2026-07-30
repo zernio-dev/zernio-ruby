@@ -15,6 +15,8 @@
 | **call_icon_countries** | **Array&lt;String&gt;** |  | [optional] |
 | **caller_id_mode** | **String** | Caller ID the forward-leg callee sees on tel: forwards. business &#x3D; this WhatsApp number; platform &#x3D; a Zernio number (customer-brought number without verified caller ID; verify via /v1/phone-numbers/{id}/whatsapp/caller-id-verification). | [optional] |
 | **caller_id_verified** | **Boolean** | True once the number completed caller-ID verification. | [optional] |
+| **max_call_duration_seconds** | **Integer** | Hard cap (seconds) on forwarded calls; null &#x3D; no cap. | [optional] |
+| **forward_caller_id** | **String** |  | [optional] |
 
 ## Example
 
@@ -32,7 +34,9 @@ instance = Zernio::GetWhatsAppCallingConfig200Response.new(
   sip_auth_password_configured: null,
   call_icon_countries: null,
   caller_id_mode: null,
-  caller_id_verified: null
+  caller_id_verified: null,
+  max_call_duration_seconds: null,
+  forward_caller_id: null
 )
 ```
 

@@ -43,6 +43,11 @@ module Zernio
     # True once the number completed caller-ID verification.
     attr_accessor :caller_id_verified
 
+    # Hard cap (seconds) on forwarded calls; null = no cap.
+    attr_accessor :max_call_duration_seconds
+
+    attr_accessor :forward_caller_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -78,7 +83,9 @@ module Zernio
         :'sip_auth_password_configured' => :'sipAuthPasswordConfigured',
         :'call_icon_countries' => :'callIconCountries',
         :'caller_id_mode' => :'callerIdMode',
-        :'caller_id_verified' => :'callerIdVerified'
+        :'caller_id_verified' => :'callerIdVerified',
+        :'max_call_duration_seconds' => :'maxCallDurationSeconds',
+        :'forward_caller_id' => :'forwardCallerId'
       }
     end
 
@@ -105,7 +112,9 @@ module Zernio
         :'sip_auth_password_configured' => :'Boolean',
         :'call_icon_countries' => :'Array<String>',
         :'caller_id_mode' => :'String',
-        :'caller_id_verified' => :'Boolean'
+        :'caller_id_verified' => :'Boolean',
+        :'max_call_duration_seconds' => :'Integer',
+        :'forward_caller_id' => :'String'
       }
     end
 
@@ -116,6 +125,7 @@ module Zernio
         :'forward_to',
         :'sip_auth_username',
         :'call_icon_countries',
+        :'max_call_duration_seconds',
       ])
     end
 
@@ -180,6 +190,14 @@ module Zernio
       if attributes.key?(:'caller_id_verified')
         self.caller_id_verified = attributes[:'caller_id_verified']
       end
+
+      if attributes.key?(:'max_call_duration_seconds')
+        self.max_call_duration_seconds = attributes[:'max_call_duration_seconds']
+      end
+
+      if attributes.key?(:'forward_caller_id')
+        self.forward_caller_id = attributes[:'forward_caller_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -196,6 +214,8 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       caller_id_mode_validator = EnumAttributeValidator.new('String', ["business", "platform"])
       return false unless caller_id_mode_validator.valid?(@caller_id_mode)
+      forward_caller_id_validator = EnumAttributeValidator.new('String', ["business", "caller"])
+      return false unless forward_caller_id_validator.valid?(@forward_caller_id)
       true
     end
 
@@ -207,6 +227,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"caller_id_mode\", must be one of #{validator.allowable_values}."
       end
       @caller_id_mode = caller_id_mode
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] forward_caller_id Object to be assigned
+    def forward_caller_id=(forward_caller_id)
+      validator = EnumAttributeValidator.new('String', ["business", "caller"])
+      unless validator.valid?(forward_caller_id)
+        fail ArgumentError, "invalid value for \"forward_caller_id\", must be one of #{validator.allowable_values}."
+      end
+      @forward_caller_id = forward_caller_id
     end
 
     # Checks equality by comparing each attribute.
@@ -224,7 +254,9 @@ module Zernio
           sip_auth_password_configured == o.sip_auth_password_configured &&
           call_icon_countries == o.call_icon_countries &&
           caller_id_mode == o.caller_id_mode &&
-          caller_id_verified == o.caller_id_verified
+          caller_id_verified == o.caller_id_verified &&
+          max_call_duration_seconds == o.max_call_duration_seconds &&
+          forward_caller_id == o.forward_caller_id
     end
 
     # @see the `==` method
@@ -236,7 +268,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_number_doc_id, phone_number, calling_enabled, call_deep_link, forward_to, recording_enabled, sip_auth_username, sip_auth_password_configured, call_icon_countries, caller_id_mode, caller_id_verified].hash
+      [phone_number_doc_id, phone_number, calling_enabled, call_deep_link, forward_to, recording_enabled, sip_auth_username, sip_auth_password_configured, call_icon_countries, caller_id_mode, caller_id_verified, max_call_duration_seconds, forward_caller_id].hash
     end
 
     # Builds the object from hash
