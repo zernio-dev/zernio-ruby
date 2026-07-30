@@ -13,6 +13,8 @@
 | **sip_auth_password_configured** | **Boolean** | True when a SIP digest password is stored. The plaintext is never returned. | [optional] |
 | **call_icon_countries** | **Array&lt;String&gt;** |  | [optional] |
 | **outbound_disabled** | **Boolean** | True when the number&#39;s country blocks business-initiated (outbound) WhatsApp calling; inbound still works. | [optional] |
+| **caller_id_mode** | **String** | Caller ID the forward-leg callee sees on tel: forwards. business &#x3D; this WhatsApp number; platform &#x3D; a Zernio number (used when the number was brought by the customer and its caller ID is not verified for PSTN origination). | [optional] |
+| **caller_id_verified** | **Boolean** | True once the number completed caller-ID verification, making tel: forwards display the business number itself. | [optional] |
 
 ## Example
 
@@ -28,7 +30,9 @@ instance = Zernio::GetWhatsAppCalling200Response.new(
   sip_auth_username: null,
   sip_auth_password_configured: null,
   call_icon_countries: null,
-  outbound_disabled: null
+  outbound_disabled: null,
+  caller_id_mode: null,
+  caller_id_verified: null
 )
 ```
 

@@ -37,6 +37,34 @@ module Zernio
     # True when the number's country blocks business-initiated (outbound) WhatsApp calling; inbound still works.
     attr_accessor :outbound_disabled
 
+    # Caller ID the forward-leg callee sees on tel: forwards. business = this WhatsApp number; platform = a Zernio number (used when the number was brought by the customer and its caller ID is not verified for PSTN origination).
+    attr_accessor :caller_id_mode
+
+    # True once the number completed caller-ID verification, making tel: forwards display the business number itself.
+    attr_accessor :caller_id_verified
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -48,7 +76,9 @@ module Zernio
         :'sip_auth_username' => :'sipAuthUsername',
         :'sip_auth_password_configured' => :'sipAuthPasswordConfigured',
         :'call_icon_countries' => :'callIconCountries',
-        :'outbound_disabled' => :'outboundDisabled'
+        :'outbound_disabled' => :'outboundDisabled',
+        :'caller_id_mode' => :'callerIdMode',
+        :'caller_id_verified' => :'callerIdVerified'
       }
     end
 
@@ -73,7 +103,9 @@ module Zernio
         :'sip_auth_username' => :'String',
         :'sip_auth_password_configured' => :'Boolean',
         :'call_icon_countries' => :'Array<String>',
-        :'outbound_disabled' => :'Boolean'
+        :'outbound_disabled' => :'Boolean',
+        :'caller_id_mode' => :'String',
+        :'caller_id_verified' => :'Boolean'
       }
     end
 
@@ -140,6 +172,14 @@ module Zernio
       if attributes.key?(:'outbound_disabled')
         self.outbound_disabled = attributes[:'outbound_disabled']
       end
+
+      if attributes.key?(:'caller_id_mode')
+        self.caller_id_mode = attributes[:'caller_id_mode']
+      end
+
+      if attributes.key?(:'caller_id_verified')
+        self.caller_id_verified = attributes[:'caller_id_verified']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -154,7 +194,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      caller_id_mode_validator = EnumAttributeValidator.new('String', ["business", "platform"])
+      return false unless caller_id_mode_validator.valid?(@caller_id_mode)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] caller_id_mode Object to be assigned
+    def caller_id_mode=(caller_id_mode)
+      validator = EnumAttributeValidator.new('String', ["business", "platform"])
+      unless validator.valid?(caller_id_mode)
+        fail ArgumentError, "invalid value for \"caller_id_mode\", must be one of #{validator.allowable_values}."
+      end
+      @caller_id_mode = caller_id_mode
     end
 
     # Checks equality by comparing each attribute.
@@ -170,7 +222,9 @@ module Zernio
           sip_auth_username == o.sip_auth_username &&
           sip_auth_password_configured == o.sip_auth_password_configured &&
           call_icon_countries == o.call_icon_countries &&
-          outbound_disabled == o.outbound_disabled
+          outbound_disabled == o.outbound_disabled &&
+          caller_id_mode == o.caller_id_mode &&
+          caller_id_verified == o.caller_id_verified
     end
 
     # @see the `==` method
@@ -182,7 +236,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_number, calling_enabled, call_deep_link, forward_to, recording_enabled, sip_auth_username, sip_auth_password_configured, call_icon_countries, outbound_disabled].hash
+      [phone_number, calling_enabled, call_deep_link, forward_to, recording_enabled, sip_auth_username, sip_auth_password_configured, call_icon_countries, outbound_disabled, caller_id_mode, caller_id_verified].hash
     end
 
     # Builds the object from hash

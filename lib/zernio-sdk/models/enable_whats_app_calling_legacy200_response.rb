@@ -23,13 +23,39 @@ module Zernio
 
     attr_accessor :forward_to
 
+    # Caller ID the forward-leg callee sees on tel: forwards. business = this WhatsApp number; platform = a Zernio number (customer-brought number without verified caller ID).
+    attr_accessor :caller_id_mode
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'success' => :'success',
         :'calling_enabled' => :'callingEnabled',
         :'sip_hostname' => :'sipHostname',
-        :'forward_to' => :'forwardTo'
+        :'forward_to' => :'forwardTo',
+        :'caller_id_mode' => :'callerIdMode'
       }
     end
 
@@ -49,7 +75,8 @@ module Zernio
         :'success' => :'Boolean',
         :'calling_enabled' => :'Boolean',
         :'sip_hostname' => :'String',
-        :'forward_to' => :'String'
+        :'forward_to' => :'String',
+        :'caller_id_mode' => :'String'
       }
     end
 
@@ -90,6 +117,10 @@ module Zernio
       if attributes.key?(:'forward_to')
         self.forward_to = attributes[:'forward_to']
       end
+
+      if attributes.key?(:'caller_id_mode')
+        self.caller_id_mode = attributes[:'caller_id_mode']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -104,7 +135,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      caller_id_mode_validator = EnumAttributeValidator.new('String', ["business", "platform"])
+      return false unless caller_id_mode_validator.valid?(@caller_id_mode)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] caller_id_mode Object to be assigned
+    def caller_id_mode=(caller_id_mode)
+      validator = EnumAttributeValidator.new('String', ["business", "platform"])
+      unless validator.valid?(caller_id_mode)
+        fail ArgumentError, "invalid value for \"caller_id_mode\", must be one of #{validator.allowable_values}."
+      end
+      @caller_id_mode = caller_id_mode
     end
 
     # Checks equality by comparing each attribute.
@@ -115,7 +158,8 @@ module Zernio
           success == o.success &&
           calling_enabled == o.calling_enabled &&
           sip_hostname == o.sip_hostname &&
-          forward_to == o.forward_to
+          forward_to == o.forward_to &&
+          caller_id_mode == o.caller_id_mode
     end
 
     # @see the `==` method
@@ -127,7 +171,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, calling_enabled, sip_hostname, forward_to].hash
+      [success, calling_enabled, sip_hostname, forward_to, caller_id_mode].hash
     end
 
     # Builds the object from hash
