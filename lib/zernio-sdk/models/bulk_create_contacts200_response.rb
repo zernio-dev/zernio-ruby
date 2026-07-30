@@ -21,6 +21,7 @@ module Zernio
 
     attr_accessor :skipped
 
+    # Per-contact failures, e.g. an identifier that is not a valid phone number
     attr_accessor :errors
 
     attr_accessor :total
@@ -52,7 +53,7 @@ module Zernio
         :'success' => :'Boolean',
         :'created' => :'Integer',
         :'skipped' => :'Integer',
-        :'errors' => :'Array<Object>',
+        :'errors' => :'Array<String>',
         :'total' => :'Integer'
       }
     end
