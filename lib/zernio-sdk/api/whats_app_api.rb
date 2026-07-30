@@ -1693,6 +1693,76 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Register a connected WhatsApp number on the Cloud API
+    # Re-runs Meta's Cloud API registration for a WhatsApp account that is already connected. Use it when the number has its own two-step verification PIN: the connect flows register with a default PIN, Meta rejects that with error 133005, and the number then fails every send with the misleading '(#200) You do not have the necessary permission to send messages' while the account still shows as connected. The PIN is used for this call only and is not stored. 
+    # @param account_id [String] The WhatsApp account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [RegisterWhatsAppNumberRequest] :register_whats_app_number_request 
+    # @return [RegisterWhatsAppNumber200Response]
+    def register_whats_app_number(account_id, opts = {})
+      data, _status_code, _headers = register_whats_app_number_with_http_info(account_id, opts)
+      data
+    end
+
+    # Register a connected WhatsApp number on the Cloud API
+    # Re-runs Meta&#39;s Cloud API registration for a WhatsApp account that is already connected. Use it when the number has its own two-step verification PIN: the connect flows register with a default PIN, Meta rejects that with error 133005, and the number then fails every send with the misleading &#39;(#200) You do not have the necessary permission to send messages&#39; while the account still shows as connected. The PIN is used for this call only and is not stored. 
+    # @param account_id [String] The WhatsApp account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [RegisterWhatsAppNumberRequest] :register_whats_app_number_request 
+    # @return [Array<(RegisterWhatsAppNumber200Response, Integer, Hash)>] RegisterWhatsAppNumber200Response data, response status code and response headers
+    def register_whats_app_number_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.register_whats_app_number ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.register_whats_app_number"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/whatsapp/register'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'register_whats_app_number_request'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RegisterWhatsAppNumber200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.register_whats_app_number",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#register_whats_app_number\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Reject join requests
     # Reject pending join requests for a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID

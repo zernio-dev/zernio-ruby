@@ -337,6 +337,19 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for register_whats_app_number
+  # Register a connected WhatsApp number on the Cloud API
+  # Re-runs Meta&#39;s Cloud API registration for a WhatsApp account that is already connected. Use it when the number has its own two-step verification PIN: the connect flows register with a default PIN, Meta rejects that with error 133005, and the number then fails every send with the misleading &#39;(#200) You do not have the necessary permission to send messages&#39; while the account still shows as connected. The PIN is used for this call only and is not stored. 
+  # @param account_id The WhatsApp account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [RegisterWhatsAppNumberRequest] :register_whats_app_number_request 
+  # @return [RegisterWhatsAppNumber200Response]
+  describe 'register_whats_app_number test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for reject_whats_app_group_join_requests
   # Reject join requests
   # Reject pending join requests for a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 

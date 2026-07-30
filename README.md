@@ -524,6 +524,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**list_whats_app_conversions**](docs/WhatsAppApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events
 *Zernio::WhatsAppApi* | [**list_whats_app_group_chats**](docs/WhatsAppApi.md#list_whats_app_group_chats) | **GET** /v1/whatsapp/wa-groups | List active groups
 *Zernio::WhatsAppApi* | [**list_whats_app_group_join_requests**](docs/WhatsAppApi.md#list_whats_app_group_join_requests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests
+*Zernio::WhatsAppApi* | [**register_whats_app_number**](docs/WhatsAppApi.md#register_whats_app_number) | **POST** /v1/accounts/{accountId}/whatsapp/register | Register a connected WhatsApp number on the Cloud API
 *Zernio::WhatsAppApi* | [**reject_whats_app_group_join_requests**](docs/WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests
 *Zernio::WhatsAppApi* | [**remove_whats_app_group_participants**](docs/WhatsAppApi.md#remove_whats_app_group_participants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants
 *Zernio::WhatsAppApi* | [**send_whats_app_conversion**](docs/WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
@@ -1618,6 +1619,8 @@ Class | Method | HTTP request | Description
  - [Zernio::RecyclingState](docs/RecyclingState.md)
  - [Zernio::RedditPlatformData](docs/RedditPlatformData.md)
  - [Zernio::RedditPost](docs/RedditPost.md)
+ - [Zernio::RegisterWhatsAppNumber200Response](docs/RegisterWhatsAppNumber200Response.md)
+ - [Zernio::RegisterWhatsAppNumberRequest](docs/RegisterWhatsAppNumberRequest.md)
  - [Zernio::RejectWhatsAppGroupJoinRequestsRequest](docs/RejectWhatsAppGroupJoinRequestsRequest.md)
  - [Zernio::ReleasePhoneNumber200Response](docs/ReleasePhoneNumber200Response.md)
  - [Zernio::ReleasePhoneNumber200ResponsePhoneNumber](docs/ReleasePhoneNumber200ResponsePhoneNumber.md)

@@ -1068,6 +1068,8 @@ docs/RecyclingState.md
 docs/RedditPlatformData.md
 docs/RedditPost.md
 docs/RedditSearchApi.md
+docs/RegisterWhatsAppNumber200Response.md
+docs/RegisterWhatsAppNumberRequest.md
 docs/RejectWhatsAppGroupJoinRequestsRequest.md
 docs/ReleasePhoneNumber200Response.md
 docs/ReleasePhoneNumber200ResponsePhoneNumber.md
@@ -2700,6 +2702,8 @@ lib/zernio-sdk/models/recycling_config.rb
 lib/zernio-sdk/models/recycling_state.rb
 lib/zernio-sdk/models/reddit_platform_data.rb
 lib/zernio-sdk/models/reddit_post.rb
+lib/zernio-sdk/models/register_whats_app_number200_response.rb
+lib/zernio-sdk/models/register_whats_app_number_request.rb
 lib/zernio-sdk/models/reject_whats_app_group_join_requests_request.rb
 lib/zernio-sdk/models/release_phone_number200_response.rb
 lib/zernio-sdk/models/release_phone_number200_response_phone_number.rb
@@ -4307,6 +4311,8 @@ spec/models/recycling_config_spec.rb
 spec/models/recycling_state_spec.rb
 spec/models/reddit_platform_data_spec.rb
 spec/models/reddit_post_spec.rb
+spec/models/register_whats_app_number200_response_spec.rb
+spec/models/register_whats_app_number_request_spec.rb
 spec/models/reject_whats_app_group_join_requests_request_spec.rb
 spec/models/release_phone_number200_response_phone_number_spec.rb
 spec/models/release_phone_number200_response_spec.rb

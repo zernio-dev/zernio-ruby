@@ -28,6 +28,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_whats_app_conversions**](WhatsAppApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events |
 | [**list_whats_app_group_chats**](WhatsAppApi.md#list_whats_app_group_chats) | **GET** /v1/whatsapp/wa-groups | List active groups |
 | [**list_whats_app_group_join_requests**](WhatsAppApi.md#list_whats_app_group_join_requests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests |
+| [**register_whats_app_number**](WhatsAppApi.md#register_whats_app_number) | **POST** /v1/accounts/{accountId}/whatsapp/register | Register a connected WhatsApp number on the Cloud API |
 | [**reject_whats_app_group_join_requests**](WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests |
 | [**remove_whats_app_group_participants**](WhatsAppApi.md#remove_whats_app_group_participants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants |
 | [**send_whats_app_conversion**](WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
@@ -1733,6 +1734,79 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## register_whats_app_number
+
+> <RegisterWhatsAppNumber200Response> register_whats_app_number(account_id, opts)
+
+Register a connected WhatsApp number on the Cloud API
+
+Re-runs Meta's Cloud API registration for a WhatsApp account that is already connected. Use it when the number has its own two-step verification PIN: the connect flows register with a default PIN, Meta rejects that with error 133005, and the number then fails every send with the misleading '(#200) You do not have the necessary permission to send messages' while the account still shows as connected. The PIN is used for this call only and is not stored. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | The WhatsApp account ID
+opts = {
+  register_whats_app_number_request: Zernio::RegisterWhatsAppNumberRequest.new # RegisterWhatsAppNumberRequest | 
+}
+
+begin
+  # Register a connected WhatsApp number on the Cloud API
+  result = api_instance.register_whats_app_number(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->register_whats_app_number: #{e}"
+end
+```
+
+#### Using the register_whats_app_number_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RegisterWhatsAppNumber200Response>, Integer, Hash)> register_whats_app_number_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Register a connected WhatsApp number on the Cloud API
+  data, status_code, headers = api_instance.register_whats_app_number_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RegisterWhatsAppNumber200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->register_whats_app_number_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The WhatsApp account ID |  |
+| **register_whats_app_number_request** | [**RegisterWhatsAppNumberRequest**](RegisterWhatsAppNumberRequest.md) |  | [optional] |
+
+### Return type
+
+[**RegisterWhatsAppNumber200Response**](RegisterWhatsAppNumber200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

@@ -27,13 +27,17 @@ module Zernio
     # Phone Number ID from Meta WhatsApp Manager
     attr_accessor :phone_number_id
 
+    # The 6-digit two-step verification PIN set on the number. Required if you enabled two-step verification for it, otherwise Meta rejects the Cloud API registration with error 133005 and the number cannot send messages.
+    attr_accessor :pin
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'profile_id' => :'profileId',
         :'access_token' => :'accessToken',
         :'waba_id' => :'wabaId',
-        :'phone_number_id' => :'phoneNumberId'
+        :'phone_number_id' => :'phoneNumberId',
+        :'pin' => :'pin'
       }
     end
 
@@ -53,7 +57,8 @@ module Zernio
         :'profile_id' => :'String',
         :'access_token' => :'String',
         :'waba_id' => :'String',
-        :'phone_number_id' => :'String'
+        :'phone_number_id' => :'String',
+        :'pin' => :'String'
       }
     end
 
@@ -102,6 +107,10 @@ module Zernio
       else
         self.phone_number_id = nil
       end
+
+      if attributes.key?(:'pin')
+        self.pin = attributes[:'pin']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -125,6 +134,11 @@ module Zernio
         invalid_properties.push('invalid value for "phone_number_id", phone_number_id cannot be nil.')
       end
 
+      pattern = Regexp.new(/^\d{6}$/)
+      if !@pin.nil? && @pin !~ pattern
+        invalid_properties.push("invalid value for \"pin\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -136,6 +150,7 @@ module Zernio
       return false if @access_token.nil?
       return false if @waba_id.nil?
       return false if @phone_number_id.nil?
+      return false if !@pin.nil? && @pin !~ Regexp.new(/^\d{6}$/)
       true
     end
 
@@ -179,6 +194,21 @@ module Zernio
       @phone_number_id = phone_number_id
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] pin Value to be assigned
+    def pin=(pin)
+      if pin.nil?
+        fail ArgumentError, 'pin cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d{6}$/)
+      if pin !~ pattern
+        fail ArgumentError, "invalid value for \"pin\", must conform to the pattern #{pattern}."
+      end
+
+      @pin = pin
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -187,7 +217,8 @@ module Zernio
           profile_id == o.profile_id &&
           access_token == o.access_token &&
           waba_id == o.waba_id &&
-          phone_number_id == o.phone_number_id
+          phone_number_id == o.phone_number_id &&
+          pin == o.pin
     end
 
     # @see the `==` method
@@ -199,7 +230,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, access_token, waba_id, phone_number_id].hash
+      [profile_id, access_token, waba_id, phone_number_id, pin].hash
     end
 
     # Builds the object from hash
