@@ -39,6 +39,9 @@ module Zernio
     # Optional top-level \"See more\" destination shown on the carousel end card. Defaults to the first card's link when omitted. Only used together with carouselCards. 
     attr_accessor :carousel_link
 
+    # Facebook-defined preset ID that renders the post as large text on a colored background (Graph `text_format_preset_id`). Supply the raw numeric ID from Meta; we do not publish a catalog of presets and Facebook may change the available set. Pages only (ignored on personal profiles and groups) and text-only feed posts only: the request is rejected with 400 when mediaItems or carouselCards are present, when contentType is story or reel, when content is empty, or when content exceeds 130 characters. Those are Facebook limits, and above them Facebook silently drops the background and publishes a plain text post instead of returning an error, so we reject up front rather than let the background disappear. A URL detected in the content is NOT attached as a link preview while a preset is set, because a link attachment also makes Facebook drop the background. 
+    attr_accessor :text_format_preset_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -71,7 +74,8 @@ module Zernio
         :'page_id' => :'pageId',
         :'geo_restriction' => :'geoRestriction',
         :'carousel_cards' => :'carouselCards',
-        :'carousel_link' => :'carouselLink'
+        :'carousel_link' => :'carouselLink',
+        :'text_format_preset_id' => :'textFormatPresetId'
       }
     end
 
@@ -95,7 +99,8 @@ module Zernio
         :'page_id' => :'String',
         :'geo_restriction' => :'GeoRestriction',
         :'carousel_cards' => :'Array<FacebookPlatformDataCarouselCardsInner>',
-        :'carousel_link' => :'String'
+        :'carousel_link' => :'String',
+        :'text_format_preset_id' => :'String'
       }
     end
 
@@ -156,6 +161,10 @@ module Zernio
       if attributes.key?(:'carousel_link')
         self.carousel_link = attributes[:'carousel_link']
       end
+
+      if attributes.key?(:'text_format_preset_id')
+        self.text_format_preset_id = attributes[:'text_format_preset_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -171,6 +180,11 @@ module Zernio
         invalid_properties.push('invalid value for "carousel_cards", number of items must be greater than or equal to 2.')
       end
 
+      pattern = Regexp.new(/^\d+$/)
+      if !@text_format_preset_id.nil? && @text_format_preset_id !~ pattern
+        invalid_properties.push("invalid value for \"text_format_preset_id\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -182,6 +196,7 @@ module Zernio
       return false unless content_type_validator.valid?(@content_type)
       return false if !@carousel_cards.nil? && @carousel_cards.length > 5
       return false if !@carousel_cards.nil? && @carousel_cards.length < 2
+      return false if !@text_format_preset_id.nil? && @text_format_preset_id !~ Regexp.new(/^\d+$/)
       true
     end
 
@@ -213,6 +228,21 @@ module Zernio
       @carousel_cards = carousel_cards
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] text_format_preset_id Value to be assigned
+    def text_format_preset_id=(text_format_preset_id)
+      if text_format_preset_id.nil?
+        fail ArgumentError, 'text_format_preset_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if text_format_preset_id !~ pattern
+        fail ArgumentError, "invalid value for \"text_format_preset_id\", must conform to the pattern #{pattern}."
+      end
+
+      @text_format_preset_id = text_format_preset_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -225,7 +255,8 @@ module Zernio
           page_id == o.page_id &&
           geo_restriction == o.geo_restriction &&
           carousel_cards == o.carousel_cards &&
-          carousel_link == o.carousel_link
+          carousel_link == o.carousel_link &&
+          text_format_preset_id == o.text_format_preset_id
     end
 
     # @see the `==` method
@@ -237,7 +268,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [draft, content_type, title, first_comment, page_id, geo_restriction, carousel_cards, carousel_link].hash
+      [draft, content_type, title, first_comment, page_id, geo_restriction, carousel_cards, carousel_link, text_format_preset_id].hash
     end
 
     # Builds the object from hash
