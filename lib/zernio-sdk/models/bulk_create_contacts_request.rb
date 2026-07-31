@@ -17,8 +17,10 @@ module Zernio
   class BulkCreateContactsRequest < ApiModelBase
     attr_accessor :profile_id
 
+    # Required when contacts carry channel data (platformIdentifier or a row-level accountId). Omit for a plain CRM import with no channels.
     attr_accessor :account_id
 
+    # Ignored when accountId is set: the platform is derived from the resolved account. Only relevant to disambiguate accountId lookup; a mismatch 404s.
     attr_accessor :platform
 
     attr_accessor :contacts
@@ -83,14 +85,10 @@ module Zernio
 
       if attributes.key?(:'account_id')
         self.account_id = attributes[:'account_id']
-      else
-        self.account_id = nil
       end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
-      else
-        self.platform = nil
       end
 
       if attributes.key?(:'contacts')
@@ -111,14 +109,6 @@ module Zernio
         invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
       end
 
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
-      if @platform.nil?
-        invalid_properties.push('invalid value for "platform", platform cannot be nil.')
-      end
-
       if @contacts.nil?
         invalid_properties.push('invalid value for "contacts", contacts cannot be nil.')
       end
@@ -135,8 +125,6 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @profile_id.nil?
-      return false if @account_id.nil?
-      return false if @platform.nil?
       return false if @contacts.nil?
       return false if @contacts.length > 1000
       true
@@ -150,26 +138,6 @@ module Zernio
       end
 
       @profile_id = profile_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
-      end
-
-      @account_id = account_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] platform Value to be assigned
-    def platform=(platform)
-      if platform.nil?
-        fail ArgumentError, 'platform cannot be nil'
-      end
-
-      @platform = platform
     end
 
     # Custom attribute writer method with validation
