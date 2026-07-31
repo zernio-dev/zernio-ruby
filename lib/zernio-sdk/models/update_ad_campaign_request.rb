@@ -15,6 +15,9 @@ require 'time'
 
 module Zernio
   class UpdateAdCampaignRequest < ApiModelBase
+    # Zernio SocialAccount id owning the ad account. Required only to update an EMPTY campaign (zero ads), which has no local Ad documents to resolve a token from.
+    attr_accessor :account_id
+
     attr_accessor :platform
 
     attr_accessor :budget
@@ -52,6 +55,7 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'account_id' => :'accountId',
         :'platform' => :'platform',
         :'budget' => :'budget',
         :'bid_strategy' => :'bidStrategy',
@@ -73,6 +77,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'account_id' => :'String',
         :'platform' => :'String',
         :'budget' => :'UpdateAdCampaignRequestBudget',
         :'bid_strategy' => :'BidStrategy',
@@ -102,6 +107,10 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
 
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
@@ -182,6 +191,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          account_id == o.account_id &&
           platform == o.platform &&
           budget == o.budget &&
           bid_strategy == o.bid_strategy &&
@@ -198,7 +208,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, budget, bid_strategy, name, platform_specific_data].hash
+      [account_id, platform, budget, bid_strategy, name, platform_specific_data].hash
     end
 
     # Builds the object from hash
