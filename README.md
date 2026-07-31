@@ -251,6 +251,8 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**update_reddit_subreddits**](docs/ConnectApi.md#update_reddit_subreddits) | **PUT** /v1/accounts/{accountId}/reddit-subreddits | Set default subreddit
 *Zernio::ConnectApi* | [**update_youtube_default_playlist**](docs/ConnectApi.md#update_youtube_default_playlist) | **PUT** /v1/accounts/{accountId}/youtube-playlists | Set default YouTube playlist
 *Zernio::ConnectApi* | [**vote_reddit_thing**](docs/ConnectApi.md#vote_reddit_thing) | **POST** /v1/accounts/{accountId}/reddit-vote | Vote on a Reddit post or comment
+*Zernio::ConnectedAppsApi* | [**list_connected_apps**](docs/ConnectedAppsApi.md#list_connected_apps) | **GET** /v1/me/connected-apps | List connected apps
+*Zernio::ConnectedAppsApi* | [**revoke_connected_app**](docs/ConnectedAppsApi.md#revoke_connected_app) | **DELETE** /v1/me/connected-apps/{clientId} | Revoke connected app
 *Zernio::ContactsApi* | [**bulk_create_contacts**](docs/ContactsApi.md#bulk_create_contacts) | **POST** /v1/contacts/bulk | Bulk create contacts
 *Zernio::ContactsApi* | [**create_contact**](docs/ContactsApi.md#create_contact) | **POST** /v1/contacts | Create contact
 *Zernio::ContactsApi* | [**delete_contact**](docs/ContactsApi.md#delete_contact) | **DELETE** /v1/contacts/{contactId} | Delete contact
@@ -732,6 +734,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ConnectWhatsAppCredentialsRequest](docs/ConnectWhatsAppCredentialsRequest.md)
  - [Zernio::Connected](docs/Connected.md)
  - [Zernio::ConnectedAccount](docs/ConnectedAccount.md)
+ - [Zernio::ConnectedApp](docs/ConnectedApp.md)
  - [Zernio::ConversionDestination](docs/ConversionDestination.md)
  - [Zernio::ConversionEvent](docs/ConversionEvent.md)
  - [Zernio::ConversionEventItemsInner](docs/ConversionEventItemsInner.md)
@@ -1415,6 +1418,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListCommentAutomations200Response](docs/ListCommentAutomations200Response.md)
  - [Zernio::ListCommentAutomations200ResponseAutomationsInner](docs/ListCommentAutomations200ResponseAutomationsInner.md)
  - [Zernio::ListCommentAutomations200ResponseAutomationsInnerStats](docs/ListCommentAutomations200ResponseAutomationsInnerStats.md)
+ - [Zernio::ListConnectedApps200Response](docs/ListConnectedApps200Response.md)
  - [Zernio::ListContacts200Response](docs/ListContacts200Response.md)
  - [Zernio::ListContacts200ResponseContactsInner](docs/ListContacts200ResponseContactsInner.md)
  - [Zernio::ListContacts200ResponseFilters](docs/ListContacts200ResponseFilters.md)
@@ -1666,6 +1670,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ReviewWebhookReview](docs/ReviewWebhookReview.md)
  - [Zernio::ReviewWebhookReviewReply](docs/ReviewWebhookReviewReply.md)
  - [Zernio::ReviewWebhookReviewReviewer](docs/ReviewWebhookReviewReviewer.md)
+ - [Zernio::RevokeConnectedApp200Response](docs/RevokeConnectedApp200Response.md)
  - [Zernio::RfPrediction](docs/RfPrediction.md)
  - [Zernio::SavedTargetingAudience](docs/SavedTargetingAudience.md)
  - [Zernio::ScheduleBroadcast200Response](docs/ScheduleBroadcast200Response.md)

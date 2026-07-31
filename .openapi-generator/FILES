@@ -153,6 +153,8 @@ docs/ConnectWhatsAppCredentials200ResponseAccount.md
 docs/ConnectWhatsAppCredentialsRequest.md
 docs/Connected.md
 docs/ConnectedAccount.md
+docs/ConnectedApp.md
+docs/ConnectedAppsApi.md
 docs/ContactsApi.md
 docs/ConversionDestination.md
 docs/ConversionEvent.md
@@ -853,6 +855,7 @@ docs/ListCommentAutomationLogs200Response.md
 docs/ListCommentAutomations200Response.md
 docs/ListCommentAutomations200ResponseAutomationsInner.md
 docs/ListCommentAutomations200ResponseAutomationsInnerStats.md
+docs/ListConnectedApps200Response.md
 docs/ListContacts200Response.md
 docs/ListContacts200ResponseContactsInner.md
 docs/ListContacts200ResponseFilters.md
@@ -1116,6 +1119,7 @@ docs/ReviewWebhookReview.md
 docs/ReviewWebhookReviewReply.md
 docs/ReviewWebhookReviewReviewer.md
 docs/ReviewsApi.md
+docs/RevokeConnectedApp200Response.md
 docs/RfPrediction.md
 docs/SMSApi.md
 docs/SavedTargetingAudience.md
@@ -1633,6 +1637,7 @@ lib/zernio-sdk/api/calls_api.rb
 lib/zernio-sdk/api/comment_automations_api.rb
 lib/zernio-sdk/api/comments_api.rb
 lib/zernio-sdk/api/connect_api.rb
+lib/zernio-sdk/api/connected_apps_api.rb
 lib/zernio-sdk/api/contacts_api.rb
 lib/zernio-sdk/api/conversions_api.rb
 lib/zernio-sdk/api/custom_fields_api.rb
@@ -1815,6 +1820,7 @@ lib/zernio-sdk/models/connect_whats_app_credentials200_response_account.rb
 lib/zernio-sdk/models/connect_whats_app_credentials_request.rb
 lib/zernio-sdk/models/connected.rb
 lib/zernio-sdk/models/connected_account.rb
+lib/zernio-sdk/models/connected_app.rb
 lib/zernio-sdk/models/conversion_destination.rb
 lib/zernio-sdk/models/conversion_event.rb
 lib/zernio-sdk/models/conversion_event_items_inner.rb
@@ -2498,6 +2504,7 @@ lib/zernio-sdk/models/list_comment_automation_logs200_response.rb
 lib/zernio-sdk/models/list_comment_automations200_response.rb
 lib/zernio-sdk/models/list_comment_automations200_response_automations_inner.rb
 lib/zernio-sdk/models/list_comment_automations200_response_automations_inner_stats.rb
+lib/zernio-sdk/models/list_connected_apps200_response.rb
 lib/zernio-sdk/models/list_contacts200_response.rb
 lib/zernio-sdk/models/list_contacts200_response_contacts_inner.rb
 lib/zernio-sdk/models/list_contacts200_response_filters.rb
@@ -2749,6 +2756,7 @@ lib/zernio-sdk/models/review_phone_number_kyc_packet_request.rb
 lib/zernio-sdk/models/review_webhook_review.rb
 lib/zernio-sdk/models/review_webhook_review_reply.rb
 lib/zernio-sdk/models/review_webhook_review_reviewer.rb
+lib/zernio-sdk/models/revoke_connected_app200_response.rb
 lib/zernio-sdk/models/rf_prediction.rb
 lib/zernio-sdk/models/saved_targeting_audience.rb
 lib/zernio-sdk/models/schedule_broadcast200_response.rb
@@ -3247,6 +3255,7 @@ spec/api/calls_api_spec.rb
 spec/api/comment_automations_api_spec.rb
 spec/api/comments_api_spec.rb
 spec/api/connect_api_spec.rb
+spec/api/connected_apps_api_spec.rb
 spec/api/contacts_api_spec.rb
 spec/api/conversions_api_spec.rb
 spec/api/custom_fields_api_spec.rb
@@ -3423,6 +3432,7 @@ spec/models/connect_whats_app_credentials200_response_account_spec.rb
 spec/models/connect_whats_app_credentials200_response_spec.rb
 spec/models/connect_whats_app_credentials_request_spec.rb
 spec/models/connected_account_spec.rb
+spec/models/connected_app_spec.rb
 spec/models/connected_spec.rb
 spec/models/conversion_destination_spec.rb
 spec/models/conversion_event_items_inner_spec.rb
@@ -4107,6 +4117,7 @@ spec/models/list_comment_automation_logs200_response_spec.rb
 spec/models/list_comment_automations200_response_automations_inner_spec.rb
 spec/models/list_comment_automations200_response_automations_inner_stats_spec.rb
 spec/models/list_comment_automations200_response_spec.rb
+spec/models/list_connected_apps200_response_spec.rb
 spec/models/list_contacts200_response_contacts_inner_spec.rb
 spec/models/list_contacts200_response_filters_spec.rb
 spec/models/list_contacts200_response_pagination_spec.rb
@@ -4358,6 +4369,7 @@ spec/models/review_phone_number_kyc_packet_request_spec.rb
 spec/models/review_webhook_review_reply_spec.rb
 spec/models/review_webhook_review_reviewer_spec.rb
 spec/models/review_webhook_review_spec.rb
+spec/models/revoke_connected_app200_response_spec.rb
 spec/models/rf_prediction_spec.rb
 spec/models/saved_targeting_audience_spec.rb
 spec/models/schedule_broadcast200_response_broadcast_spec.rb
