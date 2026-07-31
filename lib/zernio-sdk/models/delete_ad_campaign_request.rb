@@ -17,6 +17,9 @@ module Zernio
   class DeleteAdCampaignRequest < ApiModelBase
     attr_accessor :platform
 
+    # Zernio SocialAccount id owning the ad account. Required only to delete an EMPTY campaign (zero ads), which has no local Ad documents to resolve a token from.
+    attr_accessor :account_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -42,7 +45,8 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'platform' => :'platform'
+        :'platform' => :'platform',
+        :'account_id' => :'accountId'
       }
     end
 
@@ -59,7 +63,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'platform' => :'String'
+        :'platform' => :'String',
+        :'account_id' => :'String'
       }
     end
 
@@ -89,6 +94,10 @@ module Zernio
         self.platform = attributes[:'platform']
       else
         self.platform = nil
+      end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
     end
 
@@ -129,7 +138,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          platform == o.platform
+          platform == o.platform &&
+          account_id == o.account_id
     end
 
     # @see the `==` method
@@ -141,7 +151,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform].hash
+      [platform, account_id].hash
     end
 
     # Builds the object from hash

@@ -18,13 +18,13 @@ module Zernio
     # Language code, resolved to Meta's numeric locale id. Bare codes target the '(All)' umbrella (`es` = every Spanish variant); region-qualified codes target the variant (`pt_BR`, `en_GB`).
     attr_accessor :locale
 
-    # Headline for this language. Inherits the top-level `headline` when omitted.
+    # Headline for this language. REQUIRED, and must differ from every other locale and from the ad's top-level headline.
     attr_accessor :headline
 
-    # Primary text for this language. Inherits the top-level `body` when omitted.
+    # Primary text for this language. REQUIRED, and must differ from every other locale and from the ad's top-level body.
     attr_accessor :body
 
-    # Link description for this language. Inherits the top-level `description` when omitted.
+    # Link description for this language. REQUIRED, and must differ from every other locale and from the ad's top-level description.
     attr_accessor :description
 
     # Image for this language. Inherits the ad's `imageUrl` when omitted. The feed is all-image OR all-video.
@@ -102,14 +102,20 @@ module Zernio
 
       if attributes.key?(:'headline')
         self.headline = attributes[:'headline']
+      else
+        self.headline = nil
       end
 
       if attributes.key?(:'body')
         self.body = attributes[:'body']
+      else
+        self.body = nil
       end
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
+      else
+        self.description = nil
       end
 
       if attributes.key?(:'image_url')
@@ -134,11 +140,23 @@ module Zernio
         invalid_properties.push('invalid value for "locale", locale cannot be nil.')
       end
 
-      if !@headline.nil? && @headline.to_s.length > 255
+      if @headline.nil?
+        invalid_properties.push('invalid value for "headline", headline cannot be nil.')
+      end
+
+      if @headline.to_s.length > 255
         invalid_properties.push('invalid value for "headline", the character length must be smaller than or equal to 255.')
       end
 
-      if !@description.nil? && @description.to_s.length > 255
+      if @body.nil?
+        invalid_properties.push('invalid value for "body", body cannot be nil.')
+      end
+
+      if @description.nil?
+        invalid_properties.push('invalid value for "description", description cannot be nil.')
+      end
+
+      if @description.to_s.length > 255
         invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 255.')
       end
 
@@ -150,8 +168,11 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @locale.nil?
-      return false if !@headline.nil? && @headline.to_s.length > 255
-      return false if !@description.nil? && @description.to_s.length > 255
+      return false if @headline.nil?
+      return false if @headline.to_s.length > 255
+      return false if @body.nil?
+      return false if @description.nil?
+      return false if @description.to_s.length > 255
       true
     end
 
@@ -177,6 +198,16 @@ module Zernio
       end
 
       @headline = headline
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] body Value to be assigned
+    def body=(body)
+      if body.nil?
+        fail ArgumentError, 'body cannot be nil'
+      end
+
+      @body = body
     end
 
     # Custom attribute writer method with validation
