@@ -40,7 +40,7 @@ module Zernio
 
     attr_accessor :age_max
 
-    # Restrict by gender. 'all' (default) targets everyone.
+    # Restrict by gender. 'all' (default) targets everyone. Applied on Meta, TikTok and Pinterest. Ignored on Google, LinkedIn and X.
     attr_accessor :gender
 
     # Normalized household-income tier (ZIP/percentile based). Meta and TikTok express all four. Google maps only `top_10` (its INCOME_RANGE_90_UP); other tiers on Google, and any income tier on LinkedIn / X / Pinterest, are rejected. On Meta, income/zip targeting requires the relevant `specialAdCategories` to be unset (housing/employment/credit ads cannot use it). 

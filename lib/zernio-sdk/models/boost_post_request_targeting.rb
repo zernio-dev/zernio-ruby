@@ -20,7 +20,7 @@ module Zernio
 
     attr_accessor :age_max
 
-    # Meta only.
+    # Applied on Meta, TikTok and Pinterest. Ignored on Google, LinkedIn and X.
     attr_accessor :gender
 
     # Meta locale ids (numeric), passed through as given.

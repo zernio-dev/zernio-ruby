@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **age_min** | **Integer** |  | [optional] |
 | **age_max** | **Integer** |  | [optional] |
-| **gender** | **String** | Meta only. | [optional] |
+| **gender** | **String** | Applied on Meta, TikTok and Pinterest. Ignored on Google, LinkedIn and X. | [optional] |
 | **languages** | **Array&lt;String&gt;** | Meta locale ids (numeric), passed through as given. | [optional] |
 | **countries** | **Array&lt;String&gt;** | ISO country codes. Required for TikTok boosts (TikTok&#39;s ad group requires location_ids); optional on other platforms. | [optional] |
 | **regions** | [**Array&lt;BoostPostRequestTargetingRegionsInner&gt;**](BoostPostRequestTargetingRegionsInner.md) | Region/state targeting. &#x60;key&#x60; from /v1/ads/targeting/search?dimension&#x3D;geo&amp;geoType&#x3D;region. | [optional] |
