@@ -21,7 +21,7 @@
 | **queued_from_profile** | **String** | Profile ID to schedule via queue. | [optional] |
 | **queue_id** | **String** | Specific queue ID to use when scheduling via queue. | [optional] |
 | **tiktok_settings** | [**TikTokPlatformData**](TikTokPlatformData.md) | Root-level TikTok settings applied to all TikTok platforms. Merged into each platform&#39;s platformSpecificData, with platform-specific settings taking precedence. | [optional] |
-| **facebook_settings** | [**FacebookPlatformData**](FacebookPlatformData.md) | Root-level Facebook settings applied to all Facebook platforms. Merged into each platform&#39;s platformSpecificData, with platform-specific settings taking precedence. | [optional] |
+| **facebook_settings** | [**FacebookSettings**](FacebookSettings.md) | Root-level Facebook settings applied to all Facebook platforms. Merged into each platform&#39;s platformSpecificData.facebookSettings, with platform-specific settings taking precedence. | [optional] |
 | **recycling** | [**RecyclingConfig**](RecyclingConfig.md) |  | [optional] |
 
 ## Example

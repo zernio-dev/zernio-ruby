@@ -54,7 +54,7 @@ module Zernio
     # Root-level TikTok settings applied to all TikTok platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
     attr_accessor :tiktok_settings
 
-    # Root-level Facebook settings applied to all Facebook platforms. Merged into each platform's platformSpecificData, with platform-specific settings taking precedence.
+    # Root-level Facebook settings applied to all Facebook platforms. Merged into each platform's platformSpecificData.facebookSettings, with platform-specific settings taking precedence.
     attr_accessor :facebook_settings
 
     attr_accessor :recycling
@@ -136,7 +136,7 @@ module Zernio
         :'queued_from_profile' => :'String',
         :'queue_id' => :'String',
         :'tiktok_settings' => :'TikTokPlatformData',
-        :'facebook_settings' => :'FacebookPlatformData',
+        :'facebook_settings' => :'FacebookSettings',
         :'recycling' => :'RecyclingConfig'
       }
     end

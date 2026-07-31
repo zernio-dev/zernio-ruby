@@ -14,18 +14,15 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Feed posts support up to 10 images (no mixed video+image). Stories require single media (24h, no captions). Reels require single vertical video (9:16, 3-60s). Carousel posts (carouselCards) render a 2-5 card multi-link post, images only, mutually exclusive with story/reel. Geo-restriction is a hard visibility restriction: users outside the specified countries cannot see the post. Not supported for stories. 
+  # Feed posts support up to 10 images (no mixed video+image). Stories require single media (24h, no captions). Reels require single vertical video (9:16, 3-60s). Geo-restriction is a hard visibility restriction: users outside the specified countries cannot see the post. Not supported for stories. Draft, carousel, and colored-background text options live under facebookSettings, see FacebookSettings. 
   class FacebookPlatformData < ApiModelBase
-    # When true, creates the post as a draft in Facebook Publishing Tools instead of publishing immediately. Supported for feed posts (text, link, image, video) and reels. Not supported for stories. Drafts expire after ~30 days.
-    attr_accessor :draft
-
     # Set to 'story' for Page Stories (24h ephemeral) or 'reel' for Reels (short vertical video). Defaults to feed post if omitted.
     attr_accessor :content_type
 
     # Reel title (only for contentType=reel). Separate from the caption/content field.
     attr_accessor :title
 
-    # Optional first comment to post immediately after publishing (feed posts and reels, not stories). Skipped when draft is true.
+    # Optional first comment to post immediately after publishing (feed posts and reels, not stories). Skipped when facebookSettings.draft is true.
     attr_accessor :first_comment
 
     # Target Facebook Page ID for multi-page posting. If omitted, uses the default page. Use GET /v1/accounts/{id}/facebook-page to list pages.
@@ -33,14 +30,7 @@ module Zernio
 
     attr_accessor :geo_restriction
 
-    # Renders the post as a multi-link carousel (organic Page post). When set, mediaItems must be provided with the same length and all items must be images (no videos). Each cards[i] adds the click-through link and headline for the image at mediaItems[i]. Mutually exclusive with contentType=story|reel. Facebook display truncates name at ~35 chars and description at ~30 chars; longer strings are accepted but get truncated on render. 
-    attr_accessor :carousel_cards
-
-    # Optional top-level \"See more\" destination shown on the carousel end card. Defaults to the first card's link when omitted. Only used together with carouselCards. 
-    attr_accessor :carousel_link
-
-    # Facebook-defined preset ID that renders the post as large text on a colored background (Graph `text_format_preset_id`). Supply the raw numeric ID from Meta; we do not publish a catalog of presets and Facebook may change the available set. Pages only (ignored on personal profiles and groups) and text-only feed posts only: the request is rejected with 400 when mediaItems or carouselCards are present, when contentType is story or reel, or when content is empty. An attachment makes Facebook drop the background silently, so those are rejected up front. Length is NOT rejected: Facebook's composer stops offering a background at around 130 characters, but Meta documents no API limit, so longer content publishes and returns a warning instead. A URL detected in the content is NOT attached as a link preview while a preset is set, because a link attachment also makes Facebook drop the background. 
-    attr_accessor :text_format_preset_id
+    attr_accessor :facebook_settings
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -67,15 +57,12 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'draft' => :'draft',
         :'content_type' => :'contentType',
         :'title' => :'title',
         :'first_comment' => :'firstComment',
         :'page_id' => :'pageId',
         :'geo_restriction' => :'geoRestriction',
-        :'carousel_cards' => :'carouselCards',
-        :'carousel_link' => :'carouselLink',
-        :'text_format_preset_id' => :'textFormatPresetId'
+        :'facebook_settings' => :'facebookSettings'
       }
     end
 
@@ -92,15 +79,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'draft' => :'Boolean',
         :'content_type' => :'String',
         :'title' => :'String',
         :'first_comment' => :'String',
         :'page_id' => :'String',
         :'geo_restriction' => :'GeoRestriction',
-        :'carousel_cards' => :'Array<FacebookPlatformDataCarouselCardsInner>',
-        :'carousel_link' => :'String',
-        :'text_format_preset_id' => :'String'
+        :'facebook_settings' => :'FacebookSettings'
       }
     end
 
@@ -126,12 +110,6 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'draft')
-        self.draft = attributes[:'draft']
-      else
-        self.draft = false
-      end
-
       if attributes.key?(:'content_type')
         self.content_type = attributes[:'content_type']
       end
@@ -152,18 +130,8 @@ module Zernio
         self.geo_restriction = attributes[:'geo_restriction']
       end
 
-      if attributes.key?(:'carousel_cards')
-        if (value = attributes[:'carousel_cards']).is_a?(Array)
-          self.carousel_cards = value
-        end
-      end
-
-      if attributes.key?(:'carousel_link')
-        self.carousel_link = attributes[:'carousel_link']
-      end
-
-      if attributes.key?(:'text_format_preset_id')
-        self.text_format_preset_id = attributes[:'text_format_preset_id']
+      if attributes.key?(:'facebook_settings')
+        self.facebook_settings = attributes[:'facebook_settings']
       end
     end
 
@@ -172,19 +140,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@carousel_cards.nil? && @carousel_cards.length > 5
-        invalid_properties.push('invalid value for "carousel_cards", number of items must be less than or equal to 5.')
-      end
-
-      if !@carousel_cards.nil? && @carousel_cards.length < 2
-        invalid_properties.push('invalid value for "carousel_cards", number of items must be greater than or equal to 2.')
-      end
-
-      pattern = Regexp.new(/^\d+$/)
-      if !@text_format_preset_id.nil? && @text_format_preset_id !~ pattern
-        invalid_properties.push("invalid value for \"text_format_preset_id\", must conform to the pattern #{pattern}.")
-      end
-
       invalid_properties
     end
 
@@ -194,9 +149,6 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       content_type_validator = EnumAttributeValidator.new('String', ["story", "reel"])
       return false unless content_type_validator.valid?(@content_type)
-      return false if !@carousel_cards.nil? && @carousel_cards.length > 5
-      return false if !@carousel_cards.nil? && @carousel_cards.length < 2
-      return false if !@text_format_preset_id.nil? && @text_format_preset_id !~ Regexp.new(/^\d+$/)
       true
     end
 
@@ -210,53 +162,17 @@ module Zernio
       @content_type = content_type
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] carousel_cards Value to be assigned
-    def carousel_cards=(carousel_cards)
-      if carousel_cards.nil?
-        fail ArgumentError, 'carousel_cards cannot be nil'
-      end
-
-      if carousel_cards.length > 5
-        fail ArgumentError, 'invalid value for "carousel_cards", number of items must be less than or equal to 5.'
-      end
-
-      if carousel_cards.length < 2
-        fail ArgumentError, 'invalid value for "carousel_cards", number of items must be greater than or equal to 2.'
-      end
-
-      @carousel_cards = carousel_cards
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] text_format_preset_id Value to be assigned
-    def text_format_preset_id=(text_format_preset_id)
-      if text_format_preset_id.nil?
-        fail ArgumentError, 'text_format_preset_id cannot be nil'
-      end
-
-      pattern = Regexp.new(/^\d+$/)
-      if text_format_preset_id !~ pattern
-        fail ArgumentError, "invalid value for \"text_format_preset_id\", must conform to the pattern #{pattern}."
-      end
-
-      @text_format_preset_id = text_format_preset_id
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          draft == o.draft &&
           content_type == o.content_type &&
           title == o.title &&
           first_comment == o.first_comment &&
           page_id == o.page_id &&
           geo_restriction == o.geo_restriction &&
-          carousel_cards == o.carousel_cards &&
-          carousel_link == o.carousel_link &&
-          text_format_preset_id == o.text_format_preset_id
+          facebook_settings == o.facebook_settings
     end
 
     # @see the `==` method
@@ -268,7 +184,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [draft, content_type, title, first_comment, page_id, geo_restriction, carousel_cards, carousel_link, text_format_preset_id].hash
+      [content_type, title, first_comment, page_id, geo_restriction, facebook_settings].hash
     end
 
     # Builds the object from hash

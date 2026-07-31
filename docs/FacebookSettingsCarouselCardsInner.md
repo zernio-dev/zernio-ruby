@@ -1,4 +1,4 @@
-# Zernio::FacebookPlatformDataCarouselCardsInner
+# Zernio::FacebookSettingsCarouselCardsInner
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::FacebookPlatformDataCarouselCardsInner.new(
+instance = Zernio::FacebookSettingsCarouselCardsInner.new(
   link: null,
   name: null,
   description: null
