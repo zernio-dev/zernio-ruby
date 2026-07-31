@@ -35,6 +35,15 @@ module Zernio
 
     attr_accessor :status
 
+    # Campaign bid strategy. Meta puts `bid_strategy` where the budget lives, so this applies only alongside a campaign budget (CBO). Previously settable only via `PUT /v1/ads/campaigns/{campaignId}`.
+    attr_accessor :bid_strategy
+
+    # Whole currency units (USD: 5 = $5.00). Required for LOWEST_COST_WITH_BID_CAP and COST_CAP; ignored otherwise.
+    attr_accessor :bid_amount
+
+    # Decimal ROAS multiplier (2.0 = 2.0x). Required for LOWEST_COST_WITH_MIN_ROAS.
+    attr_accessor :roas_average_floor
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -67,7 +76,10 @@ module Zernio
         :'special_ad_categories' => :'specialAdCategories',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor'
       }
     end
 
@@ -91,7 +103,10 @@ module Zernio
         :'special_ad_categories' => :'Array<String>',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'bid_strategy' => :'String',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float'
       }
     end
 
@@ -160,6 +175,18 @@ module Zernio
       else
         self.status = 'PAUSED'
       end
+
+      if attributes.key?(:'bid_strategy')
+        self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -205,6 +232,8 @@ module Zernio
       return false unless budget_type_validator.valid?(@budget_type)
       status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
       return false unless status_validator.valid?(@status)
+      bid_strategy_validator = EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
+      return false unless bid_strategy_validator.valid?(@bid_strategy)
       true
     end
 
@@ -272,6 +301,16 @@ module Zernio
       @status = status
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] bid_strategy Object to be assigned
+    def bid_strategy=(bid_strategy)
+      validator = EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
+      unless validator.valid?(bid_strategy)
+        fail ArgumentError, "invalid value for \"bid_strategy\", must be one of #{validator.allowable_values}."
+      end
+      @bid_strategy = bid_strategy
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -284,7 +323,10 @@ module Zernio
           special_ad_categories == o.special_ad_categories &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
-          status == o.status
+          status == o.status &&
+          bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor
     end
 
     # @see the `==` method
@@ -296,7 +338,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, special_ad_categories, budget_amount, budget_type, status].hash
+      [account_id, ad_account_id, name, goal, special_ad_categories, budget_amount, budget_type, status, bid_strategy, bid_amount, roas_average_floor].hash
     end
 
     # Builds the object from hash

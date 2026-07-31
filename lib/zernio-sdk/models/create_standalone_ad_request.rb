@@ -181,6 +181,12 @@ module Zernio
     # Meta only. Hand-built carousel: 2-10 authored cards in DETERMINISTIC order, mapped to the creative's `link_data.child_attachments`. Unlike `dynamicCreative`, you control the card order and per-card copy/link. Requires top-level `body`, `linkUrl` and `callToAction`. Mutually exclusive with `imageUrl`/`video`, `creatives[]`, `dynamicCreative`, `placementAssets`, `existingCreativeId`, `adSetId`, `leadGenFormId` and goal `catalog_sales`. 
     attr_accessor :carousel_cards
 
+    # Meta only. Language the top-level copy is written in (e.g. `en`, `pt_BR`), used by the `translations` default rule. Defaults to `en`. Meta rejects a language asset feed whose default rule carries no locales of its own.
+    attr_accessor :default_locale
+
+    # Meta only. Multi-language ads (Dynamic Language Optimization): ONE ad carrying per-locale copy and, optionally, per-locale media — the \"Languages\" toggle in Ads Manager. Keeps social proof (likes/comments/shares) on a SINGLE post instead of splitting it across one ad per language.  The ad's top-level copy and media are the DEFAULT every unlisted locale falls back to, and a variant inherits any field it omits, so send only what differs per language. Media shared across languages is uploaded once.  Mutually exclusive with `dynamicCreative`, `placementAssets`, `carouselCards` and `existingCreativeId` — Meta allows one `asset_feed_spec` shape per creative. 
+    attr_accessor :translations
+
     attr_accessor :placement_assets
 
     # Custom audience ID for targeting
@@ -315,6 +321,8 @@ module Zernio
         :'instagram_account_id' => :'instagramAccountId',
         :'dynamic_creative' => :'dynamicCreative',
         :'carousel_cards' => :'carouselCards',
+        :'default_locale' => :'defaultLocale',
+        :'translations' => :'translations',
         :'placement_assets' => :'placementAssets',
         :'audience_id' => :'audienceId',
         :'campaign_type' => :'campaignType',
@@ -408,6 +416,8 @@ module Zernio
         :'instagram_account_id' => :'String',
         :'dynamic_creative' => :'CreateStandaloneAdRequestDynamicCreative',
         :'carousel_cards' => :'Array<CreateStandaloneAdRequestCarouselCardsInner>',
+        :'default_locale' => :'String',
+        :'translations' => :'Array<CreateStandaloneAdRequestTranslationsInner>',
         :'placement_assets' => :'CreateStandaloneAdRequestPlacementAssets',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
@@ -725,6 +735,16 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'default_locale')
+        self.default_locale = attributes[:'default_locale']
+      end
+
+      if attributes.key?(:'translations')
+        if (value = attributes[:'translations']).is_a?(Array)
+          self.translations = value
+        end
+      end
+
       if attributes.key?(:'placement_assets')
         self.placement_assets = attributes[:'placement_assets']
       end
@@ -883,6 +903,14 @@ module Zernio
         invalid_properties.push('invalid value for "carousel_cards", number of items must be greater than or equal to 2.')
       end
 
+      if !@translations.nil? && @translations.length > 10
+        invalid_properties.push('invalid value for "translations", number of items must be less than or equal to 10.')
+      end
+
+      if !@translations.nil? && @translations.length < 1
+        invalid_properties.push('invalid value for "translations", number of items must be greater than or equal to 1.')
+      end
+
       if !@attribution_spec.nil? && @attribution_spec.length > 3
         invalid_properties.push('invalid value for "attribution_spec", number of items must be less than or equal to 3.')
       end
@@ -937,6 +965,8 @@ module Zernio
       return false unless income_tier_validator.valid?(@income_tier)
       return false if !@carousel_cards.nil? && @carousel_cards.length > 10
       return false if !@carousel_cards.nil? && @carousel_cards.length < 2
+      return false if !@translations.nil? && @translations.length > 10
+      return false if !@translations.nil? && @translations.length < 1
       campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search"])
       return false unless campaign_type_validator.valid?(@campaign_type)
       advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
@@ -1208,6 +1238,24 @@ module Zernio
       @carousel_cards = carousel_cards
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] translations Value to be assigned
+    def translations=(translations)
+      if translations.nil?
+        fail ArgumentError, 'translations cannot be nil'
+      end
+
+      if translations.length > 10
+        fail ArgumentError, 'invalid value for "translations", number of items must be less than or equal to 10.'
+      end
+
+      if translations.length < 1
+        fail ArgumentError, 'invalid value for "translations", number of items must be greater than or equal to 1.'
+      end
+
+      @translations = translations
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] campaign_type Object to be assigned
     def campaign_type=(campaign_type)
@@ -1358,6 +1406,8 @@ module Zernio
           instagram_account_id == o.instagram_account_id &&
           dynamic_creative == o.dynamic_creative &&
           carousel_cards == o.carousel_cards &&
+          default_locale == o.default_locale &&
+          translations == o.translations &&
           placement_assets == o.placement_assets &&
           audience_id == o.audience_id &&
           campaign_type == o.campaign_type &&
@@ -1387,7 +1437,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

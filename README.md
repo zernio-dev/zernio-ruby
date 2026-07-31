@@ -861,6 +861,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
  - [Zernio::CreateStandaloneAdRequestTracking](docs/CreateStandaloneAdRequestTracking.md)
+ - [Zernio::CreateStandaloneAdRequestTranslationsInner](docs/CreateStandaloneAdRequestTranslationsInner.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
  - [Zernio::CreateTestLead200Response](docs/CreateTestLead200Response.md)
  - [Zernio::CreateTestLead200ResponseTestLead](docs/CreateTestLead200ResponseTestLead.md)

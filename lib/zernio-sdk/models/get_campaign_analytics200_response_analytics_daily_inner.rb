@@ -34,7 +34,7 @@ module Zernio
 
     attr_accessor :engagement
 
-    # Count of conversion events over the requested date range. Meta: events matching the campaign's promoted_object.custom_event_type (PURCHASE, LEAD, etc.). Google: the account's tracked conversions. X and LinkedIn: their reported website/lead conversions (added 2026-07). 0 for non-conversion campaigns or when no events have fired.
+    # Count of conversion events over the requested date range. FRACTIONAL: attribution splits one conversion across touchpoints and Google additionally reports modeled conversions, so values like 0.347 are normal. Meta: events matching the campaign's promoted_object.custom_event_type (PURCHASE, LEAD, etc.). Google: the account's tracked conversions. X and LinkedIn: their reported website/lead conversions (added 2026-07). 0 for non-conversion campaigns or when no events have fired.
     attr_accessor :conversions
 
     # Derived spend / conversions in the same currency as spend. 0 when conversions is 0.
@@ -136,7 +136,7 @@ module Zernio
         :'cpc' => :'Float',
         :'cpm' => :'Float',
         :'engagement' => :'Integer',
-        :'conversions' => :'Integer',
+        :'conversions' => :'Float',
         :'cost_per_conversion' => :'Float',
         :'actions' => :'Hash<String, Integer>',
         :'action_values' => :'Hash<String, Float>',

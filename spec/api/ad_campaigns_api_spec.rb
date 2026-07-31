@@ -58,9 +58,10 @@ describe 'AdCampaignsApi' do
 
   # unit tests for create_ad_campaign
   # Create a standalone campaign
-  # Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via &#x60;existingCampaignId&#x60; on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created &#x60;PAUSED&#x60; unless &#x60;status: ACTIVE&#x60;. The campaign materializes in &#x60;/v1/ads/tree&#x60; via the next sync discovery pass.
+  # Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via &#x60;existingCampaignId&#x60; on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created &#x60;PAUSED&#x60; unless &#x60;status: ACTIVE&#x60;. The campaign materializes in &#x60;/v1/ads/tree&#x60; via the next sync discovery pass.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe.
   # @param create_ad_campaign_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
   # @return [CreateAdCampaign201Response]
   describe 'create_ad_campaign test' do
     it 'should work' do
@@ -111,6 +112,7 @@ describe 'AdCampaignsApi' do
   # Duplicates a single ad via Meta&#39;s native &#x60;POST /{ad-id}/copies&#x60;. The copy is created paused. &#x60;adSetId&#x60; retargets the copy into another ad set; omitted &#x3D; the source&#39;s own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (&#x60;syncAfter: false&#x60; to skip).
   # @param ad_id Zernio ad ID or platform ad ID
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
   # @option opts [DuplicateAdRequest] :duplicate_ad_request 
   # @return [DuplicateAd200Response]
   describe 'duplicate_ad test' do
@@ -125,6 +127,7 @@ describe 'AdCampaignsApi' do
   # @param campaign_id Source platform campaign ID
   # @param duplicate_ad_campaign_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
   # @return [DuplicateAdCampaign200Response]
   describe 'duplicate_ad_campaign test' do
     it 'should work' do
@@ -138,6 +141,7 @@ describe 'AdCampaignsApi' do
   # @param ad_set_id Source platform ad set ID
   # @param duplicate_ad_set_request 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
   # @return [DuplicateAdSet200Response]
   describe 'duplicate_ad_set test' do
     it 'should work' do

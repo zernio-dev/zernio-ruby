@@ -37,7 +37,7 @@ module Zernio
     # Cost per 1000 impressions in native currency.
     attr_accessor :cpm
 
-    # Sum of conversion events over the range. Meta: events matching the campaign optimization goal. Google: tracked conversions. X / LinkedIn: reported website/lead conversions (added 2026-07).
+    # Sum of conversion events over the range. Fractional values are normal (attribution splitting + Google modeled conversions). Meta: events matching the campaign optimization goal. Google: tracked conversions. X / LinkedIn: reported website/lead conversions (added 2026-07).
     attr_accessor :conversions
 
     attr_accessor :cost_per_conversion
@@ -97,7 +97,7 @@ module Zernio
         :'ctr' => :'Float',
         :'cpc' => :'Float',
         :'cpm' => :'Float',
-        :'conversions' => :'Integer',
+        :'conversions' => :'Float',
         :'cost_per_conversion' => :'Float',
         :'actions' => :'Hash<String, Float>',
         :'action_values' => :'Hash<String, Float>',

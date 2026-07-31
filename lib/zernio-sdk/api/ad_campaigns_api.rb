@@ -156,9 +156,10 @@ module Zernio
     end
 
     # Create a standalone campaign
-    # Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass.
+    # Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass.  **Idempotency:** send an `Idempotency-Key` header to make retries safe.
     # @param create_ad_campaign_request [CreateAdCampaignRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
     # @return [CreateAdCampaign201Response]
     def create_ad_campaign(create_ad_campaign_request, opts = {})
       data, _status_code, _headers = create_ad_campaign_with_http_info(create_ad_campaign_request, opts)
@@ -166,9 +167,10 @@ module Zernio
     end
 
     # Create a standalone campaign
-    # Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via &#x60;existingCampaignId&#x60; on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created &#x60;PAUSED&#x60; unless &#x60;status: ACTIVE&#x60;. The campaign materializes in &#x60;/v1/ads/tree&#x60; via the next sync discovery pass.
+    # Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via &#x60;existingCampaignId&#x60; on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created &#x60;PAUSED&#x60; unless &#x60;status: ACTIVE&#x60;. The campaign materializes in &#x60;/v1/ads/tree&#x60; via the next sync discovery pass.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe.
     # @param create_ad_campaign_request [CreateAdCampaignRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
     # @return [Array<(CreateAdCampaign201Response, Integer, Hash)>] CreateAdCampaign201Response data, response status code and response headers
     def create_ad_campaign_with_http_info(create_ad_campaign_request, opts = {})
       if @api_client.config.debugging
@@ -178,6 +180,10 @@ module Zernio
       if @api_client.config.client_side_validation && create_ad_campaign_request.nil?
         fail ArgumentError, "Missing the required parameter 'create_ad_campaign_request' when calling AdCampaignsApi.create_ad_campaign"
       end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling AdCampaignsApi.create_ad_campaign, the character length must be smaller than or equal to 255.'
+      end
+
       # resource path
       local_var_path = '/v1/ads/campaigns'
 
@@ -193,6 +199,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -439,6 +446,7 @@ module Zernio
     # Duplicates a single ad via Meta's native `POST /{ad-id}/copies`. The copy is created paused. `adSetId` retargets the copy into another ad set; omitted = the source's own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (`syncAfter: false` to skip).
     # @param ad_id [String] Zernio ad ID or platform ad ID
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
     # @option opts [DuplicateAdRequest] :duplicate_ad_request 
     # @return [DuplicateAd200Response]
     def duplicate_ad(ad_id, opts = {})
@@ -450,6 +458,7 @@ module Zernio
     # Duplicates a single ad via Meta&#39;s native &#x60;POST /{ad-id}/copies&#x60;. The copy is created paused. &#x60;adSetId&#x60; retargets the copy into another ad set; omitted &#x3D; the source&#39;s own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (&#x60;syncAfter: false&#x60; to skip).
     # @param ad_id [String] Zernio ad ID or platform ad ID
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
     # @option opts [DuplicateAdRequest] :duplicate_ad_request 
     # @return [Array<(DuplicateAd200Response, Integer, Hash)>] DuplicateAd200Response data, response status code and response headers
     def duplicate_ad_with_http_info(ad_id, opts = {})
@@ -460,6 +469,10 @@ module Zernio
       if @api_client.config.client_side_validation && ad_id.nil?
         fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdCampaignsApi.duplicate_ad"
       end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling AdCampaignsApi.duplicate_ad, the character length must be smaller than or equal to 255.'
+      end
+
       # resource path
       local_var_path = '/v1/ads/{adId}/duplicate'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s))
 
@@ -475,6 +488,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -510,6 +524,7 @@ module Zernio
     # @param campaign_id [String] Source platform campaign ID
     # @param duplicate_ad_campaign_request [DuplicateAdCampaignRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
     # @return [DuplicateAdCampaign200Response]
     def duplicate_ad_campaign(campaign_id, duplicate_ad_campaign_request, opts = {})
       data, _status_code, _headers = duplicate_ad_campaign_with_http_info(campaign_id, duplicate_ad_campaign_request, opts)
@@ -521,6 +536,7 @@ module Zernio
     # @param campaign_id [String] Source platform campaign ID
     # @param duplicate_ad_campaign_request [DuplicateAdCampaignRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
     # @return [Array<(DuplicateAdCampaign200Response, Integer, Hash)>] DuplicateAdCampaign200Response data, response status code and response headers
     def duplicate_ad_campaign_with_http_info(campaign_id, duplicate_ad_campaign_request, opts = {})
       if @api_client.config.debugging
@@ -534,6 +550,10 @@ module Zernio
       if @api_client.config.client_side_validation && duplicate_ad_campaign_request.nil?
         fail ArgumentError, "Missing the required parameter 'duplicate_ad_campaign_request' when calling AdCampaignsApi.duplicate_ad_campaign"
       end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling AdCampaignsApi.duplicate_ad_campaign, the character length must be smaller than or equal to 255.'
+      end
+
       # resource path
       local_var_path = '/v1/ads/campaigns/{campaignId}/duplicate'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -549,6 +569,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -584,6 +605,7 @@ module Zernio
     # @param ad_set_id [String] Source platform ad set ID
     # @param duplicate_ad_set_request [DuplicateAdSetRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
     # @return [DuplicateAdSet200Response]
     def duplicate_ad_set(ad_set_id, duplicate_ad_set_request, opts = {})
       data, _status_code, _headers = duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request, opts)
@@ -595,6 +617,7 @@ module Zernio
     # @param ad_set_id [String] Source platform ad set ID
     # @param duplicate_ad_set_request [DuplicateAdSetRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
     # @return [Array<(DuplicateAdSet200Response, Integer, Hash)>] DuplicateAdSet200Response data, response status code and response headers
     def duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request, opts = {})
       if @api_client.config.debugging
@@ -608,6 +631,10 @@ module Zernio
       if @api_client.config.client_side_validation && duplicate_ad_set_request.nil?
         fail ArgumentError, "Missing the required parameter 'duplicate_ad_set_request' when calling AdCampaignsApi.duplicate_ad_set"
       end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling AdCampaignsApi.duplicate_ad_set, the character length must be smaller than or equal to 255.'
+      end
+
       # resource path
       local_var_path = '/v1/ads/ad-sets/{adSetId}/duplicate'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
 
@@ -623,6 +650,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}

@@ -168,11 +168,11 @@ end
 
 ## create_ad_campaign
 
-> <CreateAdCampaign201Response> create_ad_campaign(create_ad_campaign_request)
+> <CreateAdCampaign201Response> create_ad_campaign(create_ad_campaign_request, opts)
 
 Create a standalone campaign
 
-Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass.
+Creates a campaign WITHOUT its first ad set / ad (the ODAX shell only). Ad sets join it later via `existingCampaignId` on the create endpoints. A budget here is campaign-level (CBO) by definition; omit it for ABO (each ad set carries its own budget). Created `PAUSED` unless `status: ACTIVE`. The campaign materializes in `/v1/ads/tree` via the next sync discovery pass.  **Idempotency:** send an `Idempotency-Key` header to make retries safe.
 
 ### Examples
 
@@ -187,10 +187,13 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 create_ad_campaign_request = Zernio::CreateAdCampaignRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement'}) # CreateAdCampaignRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
+}
 
 begin
   # Create a standalone campaign
-  result = api_instance.create_ad_campaign(create_ad_campaign_request)
+  result = api_instance.create_ad_campaign(create_ad_campaign_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->create_ad_campaign: #{e}"
@@ -201,12 +204,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateAdCampaign201Response>, Integer, Hash)> create_ad_campaign_with_http_info(create_ad_campaign_request)
+> <Array(<CreateAdCampaign201Response>, Integer, Hash)> create_ad_campaign_with_http_info(create_ad_campaign_request, opts)
 
 ```ruby
 begin
   # Create a standalone campaign
-  data, status_code, headers = api_instance.create_ad_campaign_with_http_info(create_ad_campaign_request)
+  data, status_code, headers = api_instance.create_ad_campaign_with_http_info(create_ad_campaign_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <CreateAdCampaign201Response>
@@ -220,6 +223,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_ad_campaign_request** | [**CreateAdCampaignRequest**](CreateAdCampaignRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
 
 ### Return type
 
@@ -470,6 +474,7 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 ad_id = 'ad_id_example' # String | Zernio ad ID or platform ad ID
 opts = {
+  idempotency_key: 'idempotency_key_example', # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
   duplicate_ad_request: Zernio::DuplicateAdRequest.new # DuplicateAdRequest | 
 }
 
@@ -505,6 +510,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** | Zernio ad ID or platform ad ID |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
 | **duplicate_ad_request** | [**DuplicateAdRequest**](DuplicateAdRequest.md) |  | [optional] |
 
 ### Return type
@@ -523,7 +529,7 @@ end
 
 ## duplicate_ad_campaign
 
-> <DuplicateAdCampaign200Response> duplicate_ad_campaign(campaign_id, duplicate_ad_campaign_request)
+> <DuplicateAdCampaign200Response> duplicate_ad_campaign(campaign_id, duplicate_ad_campaign_request, opts)
 
 Duplicate a campaign
 
@@ -543,10 +549,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 campaign_id = 'campaign_id_example' # String | Source platform campaign ID
 duplicate_ad_campaign_request = Zernio::DuplicateAdCampaignRequest.new({platform: 'facebook'}) # DuplicateAdCampaignRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
+}
 
 begin
   # Duplicate a campaign
-  result = api_instance.duplicate_ad_campaign(campaign_id, duplicate_ad_campaign_request)
+  result = api_instance.duplicate_ad_campaign(campaign_id, duplicate_ad_campaign_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->duplicate_ad_campaign: #{e}"
@@ -557,12 +566,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DuplicateAdCampaign200Response>, Integer, Hash)> duplicate_ad_campaign_with_http_info(campaign_id, duplicate_ad_campaign_request)
+> <Array(<DuplicateAdCampaign200Response>, Integer, Hash)> duplicate_ad_campaign_with_http_info(campaign_id, duplicate_ad_campaign_request, opts)
 
 ```ruby
 begin
   # Duplicate a campaign
-  data, status_code, headers = api_instance.duplicate_ad_campaign_with_http_info(campaign_id, duplicate_ad_campaign_request)
+  data, status_code, headers = api_instance.duplicate_ad_campaign_with_http_info(campaign_id, duplicate_ad_campaign_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DuplicateAdCampaign200Response>
@@ -577,6 +586,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Source platform campaign ID |  |
 | **duplicate_ad_campaign_request** | [**DuplicateAdCampaignRequest**](DuplicateAdCampaignRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
 
 ### Return type
 
@@ -594,7 +604,7 @@ end
 
 ## duplicate_ad_set
 
-> <DuplicateAdSet200Response> duplicate_ad_set(ad_set_id, duplicate_ad_set_request)
+> <DuplicateAdSet200Response> duplicate_ad_set(ad_set_id, duplicate_ad_set_request, opts)
 
 Duplicate an ad set
 
@@ -614,10 +624,13 @@ end
 api_instance = Zernio::AdCampaignsApi.new
 ad_set_id = 'ad_set_id_example' # String | Source platform ad set ID
 duplicate_ad_set_request = Zernio::DuplicateAdSetRequest.new({platform: 'facebook'}) # DuplicateAdSetRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
+}
 
 begin
   # Duplicate an ad set
-  result = api_instance.duplicate_ad_set(ad_set_id, duplicate_ad_set_request)
+  result = api_instance.duplicate_ad_set(ad_set_id, duplicate_ad_set_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->duplicate_ad_set: #{e}"
@@ -628,12 +641,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DuplicateAdSet200Response>, Integer, Hash)> duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request)
+> <Array(<DuplicateAdSet200Response>, Integer, Hash)> duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request, opts)
 
 ```ruby
 begin
   # Duplicate an ad set
-  data, status_code, headers = api_instance.duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request)
+  data, status_code, headers = api_instance.duplicate_ad_set_with_http_info(ad_set_id, duplicate_ad_set_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DuplicateAdSet200Response>
@@ -648,6 +661,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **ad_set_id** | **String** | Source platform ad set ID |  |
 | **duplicate_ad_set_request** | [**DuplicateAdSetRequest**](DuplicateAdSetRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
 
 ### Return type
 

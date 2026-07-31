@@ -283,6 +283,7 @@ docs/CreateStandaloneAdRequestPlacements.md
 docs/CreateStandaloneAdRequestPromotedObject.md
 docs/CreateStandaloneAdRequestRegionsInner.md
 docs/CreateStandaloneAdRequestTracking.md
+docs/CreateStandaloneAdRequestTranslationsInner.md
 docs/CreateStandaloneAdRequestVideo.md
 docs/CreateTestLead200Response.md
 docs/CreateTestLead200ResponseTestLead.md
@@ -1947,6 +1948,7 @@ lib/zernio-sdk/models/create_standalone_ad_request_placements.rb
 lib/zernio-sdk/models/create_standalone_ad_request_promoted_object.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_tracking.rb
+lib/zernio-sdk/models/create_standalone_ad_request_translations_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
 lib/zernio-sdk/models/create_test_lead200_response.rb
 lib/zernio-sdk/models/create_test_lead200_response_test_lead.rb
@@ -3560,6 +3562,7 @@ spec/models/create_standalone_ad_request_promoted_object_spec.rb
 spec/models/create_standalone_ad_request_regions_inner_spec.rb
 spec/models/create_standalone_ad_request_spec.rb
 spec/models/create_standalone_ad_request_tracking_spec.rb
+spec/models/create_standalone_ad_request_translations_inner_spec.rb
 spec/models/create_standalone_ad_request_video_spec.rb
 spec/models/create_test_lead200_response_spec.rb
 spec/models/create_test_lead200_response_test_lead_spec.rb

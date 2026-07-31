@@ -16,8 +16,11 @@ require 'time'
 module Zernio
   # Meta (facebook, instagram) and LinkedIn. When set, creates a VIDEO ad on the legacy (or, for Meta, attach) shape. Mutually exclusive with `imageUrl`. For Meta multi-creative, set `video` per entry inside `creatives[]` instead. For LinkedIn the video is uploaded to LinkedIn under the authoring Company Page (see `organizationId`) and the campaign format is set to SINGLE_VIDEO; LinkedIn ignores `thumbnailUrl` (it auto-generates the poster frame) — supply MP4 H.264/AAC, 3s-30min, 75KB-500MB.
   class CreateStandaloneAdRequestVideo < ApiModelBase
-    # Public URL of the video. Meta: uploaded via chunked transfer on /act_X/advideos, then the request blocks on Meta's transcoding until status.video_status === 'ready'. LinkedIn: uploaded via the Videos API (multipart), then the request blocks until LinkedIn finishes transcoding (status AVAILABLE) — short clips take ~10-30s.
+    # Public URL of the video. Meta: uploaded via chunked transfer on /act_X/advideos, then the request blocks on Meta's transcoding until status.video_status === 'ready'. LinkedIn: uploaded via the Videos API (multipart), then the request blocks until LinkedIn finishes transcoding (status AVAILABLE) — short clips take ~10-30s. Provide either `url` or `id`.
     attr_accessor :url
+
+    # Meta only. Reuse a video ALREADY uploaded to this ad account instead of re-uploading the file: pass the `videoId` returned by a previous create. Wins over `url`, so N ads that differ only in copy share one upload (`existingCreativeId` only covers the identical-copy case). Provide either `url` or `id`.
+    attr_accessor :id
 
     # Public URL of a still-image thumbnail for the video. OPTIONAL: when omitted on Meta, the poster is auto-generated from Meta's own preferred video thumbnail (the same candidates Ads Manager shows), so video ads publish without supplying one. Provide it to control the poster frame exactly (uploaded as an ad image and referenced in object_story_spec.video_data). Ignored by LinkedIn (auto-generated poster frame).
     attr_accessor :thumbnail_url
@@ -26,6 +29,7 @@ module Zernio
     def self.attribute_map
       {
         :'url' => :'url',
+        :'id' => :'id',
         :'thumbnail_url' => :'thumbnailUrl'
       }
     end
@@ -44,6 +48,7 @@ module Zernio
     def self.openapi_types
       {
         :'url' => :'String',
+        :'id' => :'String',
         :'thumbnail_url' => :'String'
       }
     end
@@ -72,8 +77,10 @@ module Zernio
 
       if attributes.key?(:'url')
         self.url = attributes[:'url']
-      else
-        self.url = nil
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'thumbnail_url')
@@ -86,10 +93,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -97,18 +100,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @url.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] url Value to be assigned
-    def url=(url)
-      if url.nil?
-        fail ArgumentError, 'url cannot be nil'
-      end
-
-      @url = url
     end
 
     # Checks equality by comparing each attribute.
@@ -117,6 +109,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           url == o.url &&
+          id == o.id &&
           thumbnail_url == o.thumbnail_url
     end
 
@@ -129,7 +122,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [url, thumbnail_url].hash
+      [url, id, thumbnail_url].hash
     end
 
     # Builds the object from hash
