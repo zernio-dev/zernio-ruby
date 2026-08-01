@@ -350,6 +350,7 @@ module Zernio
     # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
     # @option opts [String] :search 
     # @option opts [String] :tag 
+    # @option opts [String] :tags Comma-separated tags, matches contacts carrying any of them
     # @option opts [String] :platform 
     # @option opts [String] :is_subscribed 
     # @option opts [Integer] :limit  (default to 50)
@@ -366,6 +367,7 @@ module Zernio
     # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
     # @option opts [String] :search 
     # @option opts [String] :tag 
+    # @option opts [String] :tags Comma-separated tags, matches contacts carrying any of them
     # @option opts [String] :platform 
     # @option opts [String] :is_subscribed 
     # @option opts [Integer] :limit  (default to 50)
@@ -395,6 +397,7 @@ module Zernio
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'search'] = opts[:'search'] if !opts[:'search'].nil?
       query_params[:'tag'] = opts[:'tag'] if !opts[:'tag'].nil?
+      query_params[:'tags'] = opts[:'tags'] if !opts[:'tags'].nil?
       query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
       query_params[:'isSubscribed'] = opts[:'is_subscribed'] if !opts[:'is_subscribed'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?

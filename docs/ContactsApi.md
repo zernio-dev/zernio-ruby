@@ -381,6 +381,7 @@ opts = {
   profile_id: 'profile_id_example', # String | Filter by profile. Omit to list across all profiles
   search: 'search_example', # String | 
   tag: 'tag_example', # String | 
+  tags: 'tags_example', # String | Comma-separated tags, matches contacts carrying any of them
   platform: 'instagram', # String | 
   is_subscribed: 'true', # String | 
   limit: 56, # Integer | 
@@ -421,6 +422,7 @@ end
 | **profile_id** | **String** | Filter by profile. Omit to list across all profiles | [optional] |
 | **search** | **String** |  | [optional] |
 | **tag** | **String** |  | [optional] |
+| **tags** | **String** | Comma-separated tags, matches contacts carrying any of them | [optional] |
 | **platform** | **String** |  | [optional] |
 | **is_subscribed** | **String** |  | [optional] |
 | **limit** | **Integer** |  | [optional][default to 50] |

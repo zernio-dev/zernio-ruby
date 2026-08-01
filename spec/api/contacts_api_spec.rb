@@ -99,6 +99,7 @@ describe 'ContactsApi' do
   # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles
   # @option opts [String] :search 
   # @option opts [String] :tag 
+  # @option opts [String] :tags Comma-separated tags, matches contacts carrying any of them
   # @option opts [String] :platform 
   # @option opts [String] :is_subscribed 
   # @option opts [Integer] :limit 
