@@ -17,6 +17,7 @@ module Zernio
   class BulkCreateContactsRequestContactsInner < ApiModelBase
     attr_accessor :name
 
+    # Required when the top-level accountId is set (channel mode). A row missing it in that mode is rejected individually and reported in errors[], not a 400 for the whole import.
     attr_accessor :platform_identifier
 
     attr_accessor :display_identifier
@@ -91,8 +92,6 @@ module Zernio
 
       if attributes.key?(:'platform_identifier')
         self.platform_identifier = attributes[:'platform_identifier']
-      else
-        self.platform_identifier = nil
       end
 
       if attributes.key?(:'display_identifier')
@@ -123,10 +122,6 @@ module Zernio
         invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @platform_identifier.nil?
-        invalid_properties.push('invalid value for "platform_identifier", platform_identifier cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -135,7 +130,6 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @name.nil?
-      return false if @platform_identifier.nil?
       true
     end
 
@@ -147,16 +141,6 @@ module Zernio
       end
 
       @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] platform_identifier Value to be assigned
-    def platform_identifier=(platform_identifier)
-      if platform_identifier.nil?
-        fail ArgumentError, 'platform_identifier cannot be nil'
-      end
-
-      @platform_identifier = platform_identifier
     end
 
     # Checks equality by comparing each attribute.
