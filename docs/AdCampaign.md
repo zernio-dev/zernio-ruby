@@ -24,9 +24,9 @@
 | **profile_id** | **String** |  | [optional] |
 | **advertising_channel_type** | **String** | Google-only. Raw campaign.advertising_channel_type. See AdTreeCampaign.advertisingChannelType. | [optional] |
 | **platform_objective** | **String** | Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC) | [optional] |
-| **optimization_goal** | **String** | Meta optimization goal shared across ad sets, or comma-separated values when ad sets differ (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION) | [optional] |
+| **optimization_goal** | **String** | Optimization goal shared across ad sets, or comma-separated values when ad sets differ. Meta: e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION. LinkedIn: the campaign optimizationTargetType (e.g. MAX_CLICK, MAX_IMPRESSION, NONE); &#x60;NONE&#x60; with a manual costType is a campaign LinkedIn will not deliver. | [optional] |
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
-| **bid_amount** | **Float** | Representative bid cap from the top-spending ad set (whole currency units). Populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. | [optional] |
+| **bid_amount** | **Float** | Representative bid from the top-spending ad set (whole currency units). Meta: populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. LinkedIn: the campaign unitCost, ungated, where 0 is a real delivery-stopping value. | [optional] |
 | **roas_average_floor** | **Float** | Representative ROAS floor from the top-spending ad set. Decimal multiplier (2.0 &#x3D; 2.0x). | [optional] |
 | **promoted_object** | [**AdTreeCampaignPromotedObject**](AdTreeCampaignPromotedObject.md) |  | [optional] |
 | **earliest_ad** | **Time** |  | [optional] |

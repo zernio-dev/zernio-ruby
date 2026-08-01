@@ -57,8 +57,14 @@ module Zernio
     # Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC). Only present for Meta ads.
     attr_accessor :platform_objective
 
-    # Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION, LINK_CLICKS). Only present for Meta ads.
+    # What the delivery system optimizes for, at ad-set level. The value space depends on `platform`:  - Meta: ad set `optimization_goal` (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION, LINK_CLICKS). - LinkedIn: the campaign's EFFECTIVE `optimizationTargetType`, refreshed from LinkedIn on every   sync rather than echoing what was passed on create. `NONE` means manual bidding, and it is a   real value, not missing data. Auto-bid values are MAX_IMPRESSION / MAX_CLICK / MAX_CONVERSION /   MAX_VIDEO_VIEW / MAX_LEAD / MAX_REACH; target-cost values are TARGET_COST_PER_CLICK /   TARGET_COST_PER_IMPRESSION / TARGET_COST_PER_VIDEO_VIEW; cost-cap values are the   CAP_COST_AND_MAXIMIZE_* family. 
     attr_accessor :optimization_goal
+
+    # LinkedIn only. The campaign's EFFECTIVE cost model (billing event) as applied by LinkedIn, refreshed on every sync rather than echoing what was passed on create. One of `CPM` (cost per thousand impressions), `CPC` (cost per click) or `CPV` (cost per video view). On LinkedIn this is the axis that pairs with `bidAmount`; there is no `bidStrategy`. For campaign type SPONSORED_INMAILS, `CPM` bills as cost-per-send x 1000. `null` for non-LinkedIn ads. 
+    attr_accessor :cost_type
+
+    # LinkedIn only. Why the parent campaign is (or is not) delivering, verbatim from LinkedIn. A campaign can report `status: ACTIVE` and still serve nothing; this array is what says so.  - `[]` means no serving data: a non-LinkedIn ad, or a LinkedIn ad not yet re-synced. - `[\"RUNNABLE\"]` means the campaign is eligible to serve. - Anything else is a hold. Known values include ACCOUNT_SERVING_HOLD, ACCOUNT_TOTAL_BUDGET_HOLD,   ACCOUNT_END_DATE_HOLD, CAMPAIGN_START_DATE_HOLD, CAMPAIGN_END_DATE_HOLD,   CAMPAIGN_TOTAL_BUDGET_HOLD, CAMPAIGN_AUDIENCE_COUNT_HOLD, CAMPAIGN_GROUP_START_DATE_HOLD,   CAMPAIGN_GROUP_END_DATE_HOLD, CAMPAIGN_GROUP_TOTAL_BUDGET_HOLD, CAMPAIGN_GROUP_STATUS_HOLD and   STOPPED. The list is open on purpose, so treat unrecognized values as holds rather than errors.  The end-date and total-budget holds are terminal and surface as `status: completed`; the rest surface as `status: paused`. Note that a hold is not the only cause of zero delivery: with manual, target-cost or cost-cap bidding, a `bidAmount` of 0 stops delivery while `servingStatuses` still reads `[\"RUNNABLE\"]`. Check `costType` / `bidAmount` / `optimizationGoal` as well. 
+    attr_accessor :serving_statuses
 
     # Human-readable advertiser/account name (Meta `AdAccount.name`, TikTok `advertiser_name`, LinkedIn / X / Pinterest equivalents). Refreshed every sync so platform-side renames propagate within one cycle. `null` when the platform doesn't return a name or the sync hasn't run yet. 
     attr_accessor :platform_ad_account_name
@@ -68,7 +74,7 @@ module Zernio
 
     attr_accessor :bid_strategy
 
-    # Bid cap in WHOLE currency units of the ad account (USD: 5 = $5.00; JPY: 100 = ¥100). Populated when bidStrategy is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. `null` for auto-bid (`LOWEST_COST_WITHOUT_CAP`).  - Meta source: `bid_amount` on the ad set (smallest-denomination int, decoded here). - TikTok source: priority order `bid_price` -> `conversion_bid_price` -> `deep_cpa_bid`   (whichever is set on the ad group). TikTok stores all three in whole currency units.  Source: facebook-business-sdk-codegen api_specs/specs/AdSet.json (`bid_amount`). 
+    # Bid amount in WHOLE currency units of the ad account (USD: 5 = $5.00; JPY: 100 = ¥100).  - Meta source: `bid_amount` on the ad set (smallest-denomination int, decoded here). Populated   when bidStrategy is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`; `null` for auto-bid   (`LOWEST_COST_WITHOUT_CAP`). - TikTok source: priority order `bid_price` -> `conversion_bid_price` -> `deep_cpa_bid`   (whichever is set on the ad group). TikTok stores all three in whole currency units. - LinkedIn source: the campaign's EFFECTIVE `unitCost`, refreshed on every sync rather than   echoing what was passed on create. Its meaning depends on the bidding mode implied by   `optimizationGoal`: bid amount (manual), target cost, or cost cap. It pairs with `costType`,   NOT with `bidStrategy`, which LinkedIn does not have. A value of `0` is a real, delivery-   stopping configuration and not \"unset\", so do not gate this field on `bidStrategy` for   LinkedIn ads.  Source: facebook-business-sdk-codegen api_specs/specs/AdSet.json (`bid_amount`). 
     attr_accessor :bid_amount
 
     # Minimum ROAS as a decimal multiplier (2.0 = 2.0x ROAS). Populated when bidStrategy is `LOWEST_COST_WITH_MIN_ROAS`.  - Meta source: decoded from `bid_constraints.roas_average_floor` (Meta stores as   fixed-point int × 10000; we return the decimal). - TikTok source: `roas_bid` on the ad group (already a decimal).  Source: facebook-business-sdk-codegen api_specs/specs/AdCampaignBidConstraint.json. 
@@ -133,6 +139,8 @@ module Zernio
         :'ad_set_name' => :'adSetName',
         :'platform_objective' => :'platformObjective',
         :'optimization_goal' => :'optimizationGoal',
+        :'cost_type' => :'costType',
+        :'serving_statuses' => :'servingStatuses',
         :'platform_ad_account_name' => :'platformAdAccountName',
         :'platform_created_at' => :'platformCreatedAt',
         :'bid_strategy' => :'bidStrategy',
@@ -180,6 +188,8 @@ module Zernio
         :'ad_set_name' => :'String',
         :'platform_objective' => :'String',
         :'optimization_goal' => :'String',
+        :'cost_type' => :'String',
+        :'serving_statuses' => :'Array<String>',
         :'platform_ad_account_name' => :'String',
         :'platform_created_at' => :'Time',
         :'bid_strategy' => :'BidStrategy',
@@ -202,6 +212,7 @@ module Zernio
         :'metrics',
         :'platform_objective',
         :'optimization_goal',
+        :'cost_type',
         :'platform_ad_account_name',
         :'platform_created_at',
         :'bid_strategy',
@@ -300,6 +311,16 @@ module Zernio
 
       if attributes.key?(:'optimization_goal')
         self.optimization_goal = attributes[:'optimization_goal']
+      end
+
+      if attributes.key?(:'cost_type')
+        self.cost_type = attributes[:'cost_type']
+      end
+
+      if attributes.key?(:'serving_statuses')
+        if (value = attributes[:'serving_statuses']).is_a?(Array)
+          self.serving_statuses = value
+        end
       end
 
       if attributes.key?(:'platform_ad_account_name')
@@ -426,6 +447,8 @@ module Zernio
           ad_set_name == o.ad_set_name &&
           platform_objective == o.platform_objective &&
           optimization_goal == o.optimization_goal &&
+          cost_type == o.cost_type &&
+          serving_statuses == o.serving_statuses &&
           platform_ad_account_name == o.platform_ad_account_name &&
           platform_created_at == o.platform_created_at &&
           bid_strategy == o.bid_strategy &&
@@ -449,7 +472,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, platform, status, configured_status, review_status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, platform_ad_account_name, platform_created_at, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
+      [_id, name, platform, status, configured_status, review_status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, cost_type, serving_statuses, platform_ad_account_name, platform_created_at, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
     end
 
     # Builds the object from hash

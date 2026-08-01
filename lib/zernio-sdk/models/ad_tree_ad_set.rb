@@ -31,16 +31,22 @@ module Zernio
 
     attr_accessor :metrics
 
-    # Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
+    # What the delivery system optimizes for. Meta ad set optimization goal (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION), or on LinkedIn the campaign's effective optimizationTargetType (NONE means manual bidding). See the `optimizationGoal` field on `Ad` for the full value spaces.
     attr_accessor :optimization_goal
 
     attr_accessor :bid_strategy
 
-    # Bid cap in whole currency units. Populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP.
+    # Bid amount in whole currency units. On Meta/TikTok populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP; on LinkedIn it is the campaign's effective unitCost and pairs with `costType`, where 0 is a real, delivery-stopping value.
     attr_accessor :bid_amount
 
     # Minimum ROAS as a decimal multiplier (2.0 = 2.0x). Populated when bidStrategy is LOWEST_COST_WITH_MIN_ROAS.
     attr_accessor :roas_average_floor
+
+    # LinkedIn only. Effective cost model (billing event) of the LinkedIn campaign backing this ad set: CPM, CPC or CPV. Null for non-LinkedIn ad sets.
+    attr_accessor :cost_type
+
+    # LinkedIn only. Why the LinkedIn campaign backing this ad set is (or is not) delivering. A LinkedIn Campaign maps to this ad-set node, so this is the level where LinkedIn's holds actually apply. Empty means no serving data, [\"RUNNABLE\"] means eligible to serve, anything else is a hold. See the `servingStatuses` field on `Ad` for the known values.
+    attr_accessor :serving_statuses
 
     attr_accessor :promoted_object
 
@@ -86,6 +92,8 @@ module Zernio
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
+        :'cost_type' => :'costType',
+        :'serving_statuses' => :'servingStatuses',
         :'promoted_object' => :'promotedObject',
         :'ads' => :'ads',
         :'daily' => :'daily'
@@ -116,6 +124,8 @@ module Zernio
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
+        :'cost_type' => :'String',
+        :'serving_statuses' => :'Array<String>',
         :'promoted_object' => :'AdTreeAdSetPromotedObject',
         :'ads' => :'Array<Ad>',
         :'daily' => :'Array<AdDailyMetrics>'
@@ -129,6 +139,7 @@ module Zernio
         :'bid_strategy',
         :'bid_amount',
         :'roas_average_floor',
+        :'cost_type',
       ])
     end
 
@@ -192,6 +203,16 @@ module Zernio
         self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
+      if attributes.key?(:'cost_type')
+        self.cost_type = attributes[:'cost_type']
+      end
+
+      if attributes.key?(:'serving_statuses')
+        if (value = attributes[:'serving_statuses']).is_a?(Array)
+          self.serving_statuses = value
+        end
+      end
+
       if attributes.key?(:'promoted_object')
         self.promoted_object = attributes[:'promoted_object']
       end
@@ -240,6 +261,8 @@ module Zernio
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
+          cost_type == o.cost_type &&
+          serving_statuses == o.serving_statuses &&
           promoted_object == o.promoted_object &&
           ads == o.ads &&
           daily == o.daily
@@ -254,7 +277,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_ad_set_id, ad_set_name, status, ad_count, budget, ad_set_budget, metrics, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ads, daily].hash
+      [platform_ad_set_id, ad_set_name, status, ad_count, budget, ad_set_budget, metrics, optimization_goal, bid_strategy, bid_amount, roas_average_floor, cost_type, serving_statuses, promoted_object, ads, daily].hash
     end
 
     # Builds the object from hash

@@ -52,6 +52,12 @@ module Zernio
     # All media URLs for this ad (carousel images, multiple assets). Populated for Meta (carousel child_attachments), Google Ads (responsive display marketing_images), and LinkedIn (multi-image posts).
     attr_accessor :media_urls
 
+    # LinkedIn only. Whether LinkedIn is currently serving this specific creative. Complements the ad-level `servingStatuses`, which describes the parent campaign.
+    attr_accessor :is_serving
+
+    # LinkedIn only. Why this specific creative is not being served. Empty when it is serving. A superset of the ad-level `servingStatuses`: it repeats the inherited campaign, campaign group and account holds AND adds creative-only causes such as UNDER_REVIEW, REJECTED, PROCESSING, PROCESSING_FAILED, FORM_HOLD (lead-gen-form creatives), REFERRED_CONTENT_QUALITY_HOLD, JOB_POSTING_ON_HOLD and JOB_POSTING_INVALID (job ads). Some values are format-specific and will never appear on other ad formats. The list is open, so treat unrecognized values as holds rather than errors. 
+    attr_accessor :serving_hold_reasons
+
     # Ad copy/text
     attr_accessor :body
 
@@ -85,6 +91,8 @@ module Zernio
         :'instagram_user_id' => :'instagramUserId',
         :'instagram_permalink_url' => :'instagramPermalinkUrl',
         :'media_urls' => :'mediaUrls',
+        :'is_serving' => :'isServing',
+        :'serving_hold_reasons' => :'servingHoldReasons',
         :'body' => :'body',
         :'google_headline' => :'googleHeadline',
         :'google_description' => :'googleDescription',
@@ -120,6 +128,8 @@ module Zernio
         :'instagram_user_id' => :'String',
         :'instagram_permalink_url' => :'String',
         :'media_urls' => :'Array<String>',
+        :'is_serving' => :'Boolean',
+        :'serving_hold_reasons' => :'Array<String>',
         :'body' => :'String',
         :'google_headline' => :'String',
         :'google_description' => :'String',
@@ -141,6 +151,7 @@ module Zernio
         :'effective_instagram_media_id',
         :'instagram_user_id',
         :'instagram_permalink_url',
+        :'is_serving',
       ])
     end
 
@@ -210,6 +221,16 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'is_serving')
+        self.is_serving = attributes[:'is_serving']
+      end
+
+      if attributes.key?(:'serving_hold_reasons')
+        if (value = attributes[:'serving_hold_reasons']).is_a?(Array)
+          self.serving_hold_reasons = value
+        end
+      end
+
       if attributes.key?(:'body')
         self.body = attributes[:'body']
       end
@@ -271,6 +292,8 @@ module Zernio
           instagram_user_id == o.instagram_user_id &&
           instagram_permalink_url == o.instagram_permalink_url &&
           media_urls == o.media_urls &&
+          is_serving == o.is_serving &&
+          serving_hold_reasons == o.serving_hold_reasons &&
           body == o.body &&
           google_headline == o.google_headline &&
           google_description == o.google_description &&
@@ -289,7 +312,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thumbnail_url, image_url, video_id, video_url, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
+      [thumbnail_url, image_url, video_id, video_url, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
     end
 
     # Builds the object from hash

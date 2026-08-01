@@ -16,6 +16,8 @@
 | **instagram_user_id** | **String** | Meta &#x60;instagram_user_id&#x60; — the Instagram-scoped business ID that owns the boosted media. | [optional] |
 | **instagram_permalink_url** | **String** | Meta &#x60;instagram_permalink_url&#x60; — public Instagram post URL of the boosted media. | [optional] |
 | **media_urls** | **Array&lt;String&gt;** | All media URLs for this ad (carousel images, multiple assets). Populated for Meta (carousel child_attachments), Google Ads (responsive display marketing_images), and LinkedIn (multi-image posts). | [optional] |
+| **is_serving** | **Boolean** | LinkedIn only. Whether LinkedIn is currently serving this specific creative. Complements the ad-level &#x60;servingStatuses&#x60;, which describes the parent campaign. | [optional] |
+| **serving_hold_reasons** | **Array&lt;String&gt;** | LinkedIn only. Why this specific creative is not being served. Empty when it is serving. A superset of the ad-level &#x60;servingStatuses&#x60;: it repeats the inherited campaign, campaign group and account holds AND adds creative-only causes such as UNDER_REVIEW, REJECTED, PROCESSING, PROCESSING_FAILED, FORM_HOLD (lead-gen-form creatives), REFERRED_CONTENT_QUALITY_HOLD, JOB_POSTING_ON_HOLD and JOB_POSTING_INVALID (job ads). Some values are format-specific and will never appear on other ad formats. The list is open, so treat unrecognized values as holds rather than errors.  | [optional] |
 | **body** | **String** | Ad copy/text | [optional] |
 | **google_headline** | **String** | Google Ads headline | [optional] |
 | **google_description** | **String** | Google Ads description | [optional] |
@@ -42,6 +44,8 @@ instance = Zernio::AdCreative.new(
   instagram_user_id: null,
   instagram_permalink_url: null,
   media_urls: null,
+  is_serving: null,
+  serving_hold_reasons: [UNDER_REVIEW],
   body: null,
   google_headline: null,
   google_description: null,

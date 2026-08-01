@@ -64,12 +64,12 @@ module Zernio
     # Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC)
     attr_accessor :platform_objective
 
-    # Meta optimization goal shared across ad sets, or comma-separated values when ad sets differ (e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION)
+    # Optimization goal shared across ad sets, or comma-separated values when ad sets differ. Meta: e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION. LinkedIn: the campaign optimizationTargetType (e.g. MAX_CLICK, MAX_IMPRESSION, NONE); `NONE` with a manual costType is a campaign LinkedIn will not deliver.
     attr_accessor :optimization_goal
 
     attr_accessor :bid_strategy
 
-    # Representative bid cap from the top-spending ad set (whole currency units). Populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP.
+    # Representative bid from the top-spending ad set (whole currency units). Meta: populated when bidStrategy is LOWEST_COST_WITH_BID_CAP or COST_CAP. LinkedIn: the campaign unitCost, ungated, where 0 is a real delivery-stopping value.
     attr_accessor :bid_amount
 
     # Representative ROAS floor from the top-spending ad set. Decimal multiplier (2.0 = 2.0x).
