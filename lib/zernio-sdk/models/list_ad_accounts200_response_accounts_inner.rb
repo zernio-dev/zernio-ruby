@@ -22,7 +22,16 @@ module Zernio
 
     attr_accessor :currency
 
+    # LinkedIn only. LinkedIn's own ad account status. In practice always `ACTIVE`, because the LinkedIn query filters to active accounts. Meta, Google, TikTok and Pinterest report `accountStatus` instead; X reports `approvalStatus`.
     attr_accessor :status
+
+    attr_accessor :account_status
+
+    # X only. X's own ad account approval status. Observed values are `ACCEPTED`, `PENDING` and `REJECTED`, but X does not publish the full vocabulary, so treat an unrecognised value as not usable. Other platforms report `accountStatus` or `status` instead.
+    attr_accessor :approval_status
+
+    # Meta only. Meta's `disable_reason` code, forwarded unchanged. Present when `accountStatus` is `2` (DISABLED) and Meta gives a reason, which is what separates a policy action from a payment problem. Meta does not publish a stable list of values for this field, so none are enumerated here: resolve the code against Meta's own ad account reference. Absent when Meta reports no reason, or when the connected token cannot read the field.
+    attr_accessor :disable_reason
 
     # IANA timezone of the ad account (Meta only). Drives daily-budget reset and Insights day boundaries.
     attr_accessor :timezone_name
@@ -46,6 +55,9 @@ module Zernio
         :'name' => :'name',
         :'currency' => :'currency',
         :'status' => :'status',
+        :'account_status' => :'accountStatus',
+        :'approval_status' => :'approvalStatus',
+        :'disable_reason' => :'disableReason',
         :'timezone_name' => :'timezoneName',
         :'timezone_offset_hours_utc' => :'timezoneOffsetHoursUtc',
         :'minimum_daily_budget' => :'minimumDailyBudget',
@@ -71,6 +83,9 @@ module Zernio
         :'name' => :'String',
         :'currency' => :'String',
         :'status' => :'String',
+        :'account_status' => :'Object',
+        :'approval_status' => :'String',
+        :'disable_reason' => :'Integer',
         :'timezone_name' => :'String',
         :'timezone_offset_hours_utc' => :'Float',
         :'minimum_daily_budget' => :'Float',
@@ -82,6 +97,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'account_status',
         :'unusable_reason'
       ])
     end
@@ -116,6 +132,18 @@ module Zernio
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'account_status')
+        self.account_status = attributes[:'account_status']
+      end
+
+      if attributes.key?(:'approval_status')
+        self.approval_status = attributes[:'approval_status']
+      end
+
+      if attributes.key?(:'disable_reason')
+        self.disable_reason = attributes[:'disable_reason']
       end
 
       if attributes.key?(:'timezone_name')
@@ -163,6 +191,9 @@ module Zernio
           name == o.name &&
           currency == o.currency &&
           status == o.status &&
+          account_status == o.account_status &&
+          approval_status == o.approval_status &&
+          disable_reason == o.disable_reason &&
           timezone_name == o.timezone_name &&
           timezone_offset_hours_utc == o.timezone_offset_hours_utc &&
           minimum_daily_budget == o.minimum_daily_budget &&
@@ -179,7 +210,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, currency, status, timezone_name, timezone_offset_hours_utc, minimum_daily_budget, selectable, unusable_reason].hash
+      [id, name, currency, status, account_status, approval_status, disable_reason, timezone_name, timezone_offset_hours_utc, minimum_daily_budget, selectable, unusable_reason].hash
     end
 
     # Builds the object from hash
