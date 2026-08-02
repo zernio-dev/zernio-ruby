@@ -15,6 +15,7 @@
 | **follows** | **Integer** | Instagram feed posts and stories only: organic accounts that started following from this post. 0 for reels and other platforms. | [optional] |
 | **ig_reels_avg_watch_time** | **Integer** | Instagram Reels only: average watch time per play, in milliseconds. 0 for non-Reels media and other platforms. | [optional] |
 | **ig_reels_video_view_total_time** | **Integer** | Instagram Reels only: total watch time including replays, in milliseconds. 0 for non-Reels media and other platforms. | [optional] |
+| **video_duration_seconds** | **Integer** | Video length in seconds. Currently Instagram Reels only; combine with igReelsAvgWatchTime (ms) to estimate retention. Null when unknown (other platforms, non-video media, or when Instagram does not expose the media URL, e.g. reels with copyrighted audio). | [optional] |
 | **engagement_rate** | **Float** |  | [optional] |
 | **last_updated** | **Time** |  | [optional] |
 
@@ -35,6 +36,7 @@ instance = Zernio::PostAnalytics.new(
   follows: 0,
   ig_reels_avg_watch_time: 0,
   ig_reels_video_view_total_time: 0,
+  video_duration_seconds: 30,
   engagement_rate: 0,
   last_updated: null
 )

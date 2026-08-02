@@ -41,6 +41,9 @@ module Zernio
     # Instagram Reels only: total watch time including replays, in milliseconds. 0 for non-Reels media and other platforms.
     attr_accessor :ig_reels_video_view_total_time
 
+    # Video length in seconds. Currently Instagram Reels only; combine with igReelsAvgWatchTime (ms) to estimate retention. Null when unknown (other platforms, non-video media, or when Instagram does not expose the media URL, e.g. reels with copyrighted audio).
+    attr_accessor :video_duration_seconds
+
     attr_accessor :engagement_rate
 
     attr_accessor :last_updated
@@ -59,6 +62,7 @@ module Zernio
         :'follows' => :'follows',
         :'ig_reels_avg_watch_time' => :'igReelsAvgWatchTime',
         :'ig_reels_video_view_total_time' => :'igReelsVideoViewTotalTime',
+        :'video_duration_seconds' => :'videoDurationSeconds',
         :'engagement_rate' => :'engagementRate',
         :'last_updated' => :'lastUpdated'
       }
@@ -88,6 +92,7 @@ module Zernio
         :'follows' => :'Integer',
         :'ig_reels_avg_watch_time' => :'Integer',
         :'ig_reels_video_view_total_time' => :'Integer',
+        :'video_duration_seconds' => :'Integer',
         :'engagement_rate' => :'Float',
         :'last_updated' => :'Time'
       }
@@ -96,6 +101,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'video_duration_seconds',
       ])
     end
 
@@ -159,6 +165,10 @@ module Zernio
         self.ig_reels_video_view_total_time = attributes[:'ig_reels_video_view_total_time']
       end
 
+      if attributes.key?(:'video_duration_seconds')
+        self.video_duration_seconds = attributes[:'video_duration_seconds']
+      end
+
       if attributes.key?(:'engagement_rate')
         self.engagement_rate = attributes[:'engagement_rate']
       end
@@ -199,6 +209,7 @@ module Zernio
           follows == o.follows &&
           ig_reels_avg_watch_time == o.ig_reels_avg_watch_time &&
           ig_reels_video_view_total_time == o.ig_reels_video_view_total_time &&
+          video_duration_seconds == o.video_duration_seconds &&
           engagement_rate == o.engagement_rate &&
           last_updated == o.last_updated
     end
@@ -212,7 +223,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [impressions, reach, likes, comments, shares, saves, clicks, views, follows, ig_reels_avg_watch_time, ig_reels_video_view_total_time, engagement_rate, last_updated].hash
+      [impressions, reach, likes, comments, shares, saves, clicks, views, follows, ig_reels_avg_watch_time, ig_reels_video_view_total_time, video_duration_seconds, engagement_rate, last_updated].hash
     end
 
     # Builds the object from hash
