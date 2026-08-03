@@ -24,14 +24,17 @@ module Zernio
     # Recipient handle/username — an X or Bluesky handle (with or without @) or a Reddit username (with or without u/). Resolved via lookup. Provide either this or participantId.
     attr_accessor :participant_username
 
-    # Text content of the message. At least one of message, attachment, or (for WhatsApp) templateName is required.
+    # Text content of the message. At least one of message, attachment, or (for WhatsApp) templateName is required. Required when category is set (a Direct Send utility message is a text message).
     attr_accessor :message
 
     # X/Twitter only. Skip the receives_your_dm eligibility check before sending. Use if you have already verified the recipient accepts DMs.
     attr_accessor :skip_dm_check
 
-    # WhatsApp only. Name of the approved template to start the conversation with (required for WhatsApp).
+    # WhatsApp only. Name of the approved template to start the conversation with. Required for WhatsApp unless category is used instead (Direct Send). Cannot be combined with category.
     attr_accessor :template_name
+
+    # WhatsApp only (Meta Direct Send). Combined with message and without templateName, starts the conversation with a business-initiated UTILITY message and no pre-approved template; Meta matches or auto-creates a template asynchronously. The WhatsApp Business Account must be eligible for Direct Send, otherwise the send fails with an error telling you to use an approved message template instead. Cannot be combined with templateName (templates are already categorized at creation). Utility messages only; marketing content is not allowed under this category. Accepted on the JSON body only, not on multipart requests.
+    attr_accessor :category
 
     # WhatsApp only. Template language code (e.g. en_US).
     attr_accessor :template_language
@@ -40,6 +43,28 @@ module Zernio
     attr_accessor :template_params
 
     attr_accessor :header_media
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -50,6 +75,7 @@ module Zernio
         :'message' => :'message',
         :'skip_dm_check' => :'skipDmCheck',
         :'template_name' => :'templateName',
+        :'category' => :'category',
         :'template_language' => :'templateLanguage',
         :'template_params' => :'templateParams',
         :'header_media' => :'headerMedia'
@@ -75,6 +101,7 @@ module Zernio
         :'message' => :'String',
         :'skip_dm_check' => :'Boolean',
         :'template_name' => :'String',
+        :'category' => :'String',
         :'template_language' => :'String',
         :'template_params' => :'Array<String>',
         :'header_media' => :'CreateInboxConversationRequestHeaderMedia'
@@ -131,6 +158,10 @@ module Zernio
         self.template_name = attributes[:'template_name']
       end
 
+      if attributes.key?(:'category')
+        self.category = attributes[:'category']
+      end
+
       if attributes.key?(:'template_language')
         self.template_language = attributes[:'template_language']
       end
@@ -163,6 +194,8 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
+      category_validator = EnumAttributeValidator.new('String', ["utility"])
+      return false unless category_validator.valid?(@category)
       true
     end
 
@@ -176,6 +209,16 @@ module Zernio
       @account_id = account_id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] category Object to be assigned
+    def category=(category)
+      validator = EnumAttributeValidator.new('String', ["utility"])
+      unless validator.valid?(category)
+        fail ArgumentError, "invalid value for \"category\", must be one of #{validator.allowable_values}."
+      end
+      @category = category
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -187,6 +230,7 @@ module Zernio
           message == o.message &&
           skip_dm_check == o.skip_dm_check &&
           template_name == o.template_name &&
+          category == o.category &&
           template_language == o.template_language &&
           template_params == o.template_params &&
           header_media == o.header_media
@@ -201,7 +245,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, template_language, template_params, header_media].hash
+      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, template_language, template_params, header_media].hash
     end
 
     # Builds the object from hash
