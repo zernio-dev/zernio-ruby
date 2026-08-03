@@ -276,7 +276,7 @@ module Zernio
       return false if @locality.nil?
       return false if @postal_code.nil?
       return false if @country_code.nil?
-      country_code_validator = EnumAttributeValidator.new('String', ["US", "CA", "GB", "ES", "DE", "FR", "NL", "AU"])
+      country_code_validator = EnumAttributeValidator.new('String', ["US", "CA", "GB", "ES", "DE", "FR", "NL", "AU", "BR"])
       return false unless country_code_validator.valid?(@country_code)
       return false if @country_code.to_s.length > 2
       return false if @country_code.to_s.length < 2
@@ -374,7 +374,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] country_code Object to be assigned
     def country_code=(country_code)
-      validator = EnumAttributeValidator.new('String', ["US", "CA", "GB", "ES", "DE", "FR", "NL", "AU"])
+      validator = EnumAttributeValidator.new('String', ["US", "CA", "GB", "ES", "DE", "FR", "NL", "AU", "BR"])
       unless validator.valid?(country_code)
         fail ArgumentError, "invalid value for \"country_code\", must be one of #{validator.allowable_values}."
       end
