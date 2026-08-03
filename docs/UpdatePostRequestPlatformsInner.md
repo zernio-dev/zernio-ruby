@@ -9,7 +9,7 @@
 | **custom_content** | **String** | Platform-specific text override. | [optional] |
 | **custom_media** | [**Array&lt;MediaItem&gt;**](MediaItem.md) |  | [optional] |
 | **scheduled_for** | **Time** | Optional per-platform scheduled time override. | [optional] |
-| **platform_specific_data** | **Hash&lt;String, Object&gt;** |  | [optional] |
+| **platform_specific_data** | **Hash&lt;String, Object&gt;** | A &lt;platform&gt;Settings namespace (e.g. facebookSettings, tiktokSettings) omitted from the request is preserved from the stored post. Sending the key replaces the whole namespace; it is not deep-merged. | [optional] |
 
 ## Example
 

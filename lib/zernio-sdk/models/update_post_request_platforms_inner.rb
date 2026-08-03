@@ -27,6 +27,7 @@ module Zernio
     # Optional per-platform scheduled time override.
     attr_accessor :scheduled_for
 
+    # A <platform>Settings namespace (e.g. facebookSettings, tiktokSettings) omitted from the request is preserved from the stored post. Sending the key replaces the whole namespace; it is not deep-merged.
     attr_accessor :platform_specific_data
 
     # Attribute mapping from ruby-style variable name to JSON key.
