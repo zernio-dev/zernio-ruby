@@ -22,6 +22,7 @@ module Zernio
 
     attr_accessor :impressions
 
+    # Reach summed across the account's ads for this single day. A person seen by two ads the same day counts twice, and reach is de-duplicated per day only: do NOT sum it across days (people reached on multiple days would be double-counted).
     attr_accessor :reach
 
     attr_accessor :clicks
