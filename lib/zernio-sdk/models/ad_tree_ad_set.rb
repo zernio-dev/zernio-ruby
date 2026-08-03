@@ -50,7 +50,7 @@ module Zernio
 
     attr_accessor :promoted_object
 
-    # Individual ads within this ad set (capped at 100). Returns a subset of Ad fields from the aggregation (core fields like _id, name, platform, status, budget, metrics, creative, goal are included; targeting and schedule may be absent). When `timeIncrement=1&dailyLevel=ad`, each entry also carries a `daily[]` array of `AdDailyMetrics`.
+    # Individual ads within this ad set (capped at 100). Returns a subset of Ad fields from the aggregation: `_id`, `name`, `platform`, `status`, `configuredStatus`, `reviewStatus`, `budget`, `metrics`, `creative`, `goal` and the `platform*` ids are always included; `targeting` and `schedule` may be absent. `configuredStatus` (the ad's own on/off toggle) and `reviewStatus` (the platform's review verdict) are part of this contract, not incidental: a rejected ad is only distinguishable from a healthy one through `reviewStatus`. When `timeIncrement=1&dailyLevel=ad`, each entry also carries a `daily[]` array of `AdDailyMetrics`.
     attr_accessor :ads
 
     # Per-day metric series for this ad set. Present only when `GET /v1/ads/tree` is called with `timeIncrement=1` and `dailyLevel` is `adset` or `ad`.

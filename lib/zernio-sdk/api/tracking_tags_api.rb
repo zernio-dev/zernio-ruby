@@ -174,7 +174,7 @@ module Zernio
     end
 
     # Get ad tracking tags
-    # Unified read of the platform's native click-URL tracking params. - Meta (facebook/instagram): the creative's `url_tags` (and template_url_spec). - Google (googleads): the campaign's `trackingUrlTemplate` + `finalUrlSuffix`.   Subject to the Google Ads API access-tier daily quota; bulk audits need Standard access. - LinkedIn (linkedinads): the campaign's Dynamic UTM `dynamicValueParameters` + `customValueParameters`. Returns 405 for platforms without a click-URL tracking surface (TikTok, X, Pinterest). 
+    # Unified read of the platform's native click-URL tracking params. - Meta (facebook/instagram): the creative's `url_tags` (and template_url_spec). - Google (googleads): the campaign's `trackingUrlTemplate` + `finalUrlSuffix`.   Subject to the Google Ads API access-tier daily quota; bulk audits need Standard access. - LinkedIn (linkedinads): the campaign's Dynamic UTM `dynamicValueParameters` + `customValueParameters`. Returns 405 for platforms without a click-URL tracking surface (TikTok, X, Pinterest).  **Not pixels.** Despite the shared path segment, this endpoint has nothing to do with measurement tags. For an ad account's pixels use `GET /v1/accounts/{accountId}/tracking-tags?adAccountId=act_...` (Meta Pixels, with `kind` and `ownerAdAccountId`) or `GET /v1/accounts/{accountId}/conversion-destinations`. 
     # @param ad_id [String] Ad id (hex _id, platformAdId, or effective story/media id).
     # @param [Hash] opts the optional parameters
     # @return [GetAdTrackingTags200Response]
@@ -184,7 +184,7 @@ module Zernio
     end
 
     # Get ad tracking tags
-    # Unified read of the platform&#39;s native click-URL tracking params. - Meta (facebook/instagram): the creative&#39;s &#x60;url_tags&#x60; (and template_url_spec). - Google (googleads): the campaign&#39;s &#x60;trackingUrlTemplate&#x60; + &#x60;finalUrlSuffix&#x60;.   Subject to the Google Ads API access-tier daily quota; bulk audits need Standard access. - LinkedIn (linkedinads): the campaign&#39;s Dynamic UTM &#x60;dynamicValueParameters&#x60; + &#x60;customValueParameters&#x60;. Returns 405 for platforms without a click-URL tracking surface (TikTok, X, Pinterest). 
+    # Unified read of the platform&#39;s native click-URL tracking params. - Meta (facebook/instagram): the creative&#39;s &#x60;url_tags&#x60; (and template_url_spec). - Google (googleads): the campaign&#39;s &#x60;trackingUrlTemplate&#x60; + &#x60;finalUrlSuffix&#x60;.   Subject to the Google Ads API access-tier daily quota; bulk audits need Standard access. - LinkedIn (linkedinads): the campaign&#39;s Dynamic UTM &#x60;dynamicValueParameters&#x60; + &#x60;customValueParameters&#x60;. Returns 405 for platforms without a click-URL tracking surface (TikTok, X, Pinterest).  **Not pixels.** Despite the shared path segment, this endpoint has nothing to do with measurement tags. For an ad account&#39;s pixels use &#x60;GET /v1/accounts/{accountId}/tracking-tags?adAccountId&#x3D;act_...&#x60; (Meta Pixels, with &#x60;kind&#x60; and &#x60;ownerAdAccountId&#x60;) or &#x60;GET /v1/accounts/{accountId}/conversion-destinations&#x60;. 
     # @param ad_id [String] Ad id (hex _id, platformAdId, or effective story/media id).
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetAdTrackingTags200Response, Integer, Hash)>] GetAdTrackingTags200Response data, response status code and response headers
