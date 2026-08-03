@@ -739,7 +739,7 @@ module Zernio
     # Initiates an outbound Business-Initiated Call. The Telnyx-side SIP leg is originated server-side (Option B: SIP-first). Telnyx INVITEs Meta directly over TLS:5061 with the SIP digest credentials we captured at calling-enablement time). No client-side SDP is required; pass only `accountId` and `to`.  To send the consumer the call-consent prompt instead of placing a call, pass `action: \"send_call_permission_request\"` (+ optional `bodyText`). The consumer must tap Allow in WhatsApp before `start_call` is permitted; Meta limits the prompt to 1 per consumer per 24h (2 per 7 days) and requires an open 24h service window.  **Idempotency:** send an `Idempotency-Key` header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
     # @param initiate_whats_app_call_request [InitiateWhatsAppCallRequest] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [InitiateWhatsAppCall200Response]
     def initiate_whats_app_call(initiate_whats_app_call_request, opts = {})
       data, _status_code, _headers = initiate_whats_app_call_with_http_info(initiate_whats_app_call_request, opts)
@@ -750,7 +750,7 @@ module Zernio
     # Initiates an outbound Business-Initiated Call. The Telnyx-side SIP leg is originated server-side (Option B: SIP-first). Telnyx INVITEs Meta directly over TLS:5061 with the SIP digest credentials we captured at calling-enablement time). No client-side SDP is required; pass only &#x60;accountId&#x60; and &#x60;to&#x60;.  To send the consumer the call-consent prompt instead of placing a call, pass &#x60;action: \&quot;send_call_permission_request\&quot;&#x60; (+ optional &#x60;bodyText&#x60;). The consumer must tap Allow in WhatsApp before &#x60;start_call&#x60; is permitted; Meta limits the prompt to 1 per consumer per 24h (2 per 7 days) and requires an open 24h service window.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
     # @param initiate_whats_app_call_request [InitiateWhatsAppCallRequest] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [Array<(InitiateWhatsAppCall200Response, Integer, Hash)>] InitiateWhatsAppCall200Response data, response status code and response headers
     def initiate_whats_app_call_with_http_info(initiate_whats_app_call_request, opts = {})
       if @api_client.config.debugging

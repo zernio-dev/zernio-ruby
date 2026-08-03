@@ -839,10 +839,11 @@ module Zernio
     end
 
     # Send message
-    # Send a message in a conversation. Supports text, attachments, quick replies, buttons, templates, and message tags. Attachment and interactive message support varies by platform.  WhatsApp template messages: to send an approved template into this conversation (required when the 24-hour customer-service window is closed), use the `template` field with a single element carrying the template reference: `{ \"elements\": [{ \"name\": ..., \"language\": ..., \"components\": [...] }] }`. See the `template` field below for the exact shape. To send a template to a phone number you have no conversation with yet, use the create-conversation endpoint (POST /v1/inbox/conversations) instead.  WhatsApp rich interactive messages (list, CTA URL, Flow, location request) are available via the `interactive` field. Tap events are delivered through the `message.received` webhook with WhatsApp-specific `metadata` fields (`interactiveType`, `interactiveId`, `flowResponseJson`, `flowResponseData`). 
+    # Send a message in a conversation. Supports text, attachments, quick replies, buttons, templates, and message tags. Attachment and interactive message support varies by platform.  WhatsApp template messages: to send an approved template into this conversation (required when the 24-hour customer-service window is closed), use the `template` field with a single element carrying the template reference: `{ \"elements\": [{ \"name\": ..., \"language\": ..., \"components\": [...] }] }`. See the `template` field below for the exact shape. To send a template to a phone number you have no conversation with yet, use the create-conversation endpoint (POST /v1/inbox/conversations) instead.  WhatsApp rich interactive messages (list, CTA URL, Flow, location request) are available via the `interactive` field. Tap events are delivered through the `message.received` webhook with WhatsApp-specific `metadata` fields (`interactiveType`, `interactiveId`, `flowResponseJson`, `flowResponseData`).  **Idempotency:** send an `Idempotency-Key` header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with `Idempotent-Replayed: true`) instead of sending the message a second time; same key + different body returns 422; a key still in flight returns 409. Works for JSON and multipart (file upload) requests alike. Keys are retained for 24 hours. 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
     # @param send_inbox_message_request [SendInboxMessageRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [SendInboxMessage200Response]
     def send_inbox_message(conversation_id, send_inbox_message_request, opts = {})
       data, _status_code, _headers = send_inbox_message_with_http_info(conversation_id, send_inbox_message_request, opts)
@@ -850,10 +851,11 @@ module Zernio
     end
 
     # Send message
-    # Send a message in a conversation. Supports text, attachments, quick replies, buttons, templates, and message tags. Attachment and interactive message support varies by platform.  WhatsApp template messages: to send an approved template into this conversation (required when the 24-hour customer-service window is closed), use the &#x60;template&#x60; field with a single element carrying the template reference: &#x60;{ \&quot;elements\&quot;: [{ \&quot;name\&quot;: ..., \&quot;language\&quot;: ..., \&quot;components\&quot;: [...] }] }&#x60;. See the &#x60;template&#x60; field below for the exact shape. To send a template to a phone number you have no conversation with yet, use the create-conversation endpoint (POST /v1/inbox/conversations) instead.  WhatsApp rich interactive messages (list, CTA URL, Flow, location request) are available via the &#x60;interactive&#x60; field. Tap events are delivered through the &#x60;message.received&#x60; webhook with WhatsApp-specific &#x60;metadata&#x60; fields (&#x60;interactiveType&#x60;, &#x60;interactiveId&#x60;, &#x60;flowResponseJson&#x60;, &#x60;flowResponseData&#x60;). 
+    # Send a message in a conversation. Supports text, attachments, quick replies, buttons, templates, and message tags. Attachment and interactive message support varies by platform.  WhatsApp template messages: to send an approved template into this conversation (required when the 24-hour customer-service window is closed), use the &#x60;template&#x60; field with a single element carrying the template reference: &#x60;{ \&quot;elements\&quot;: [{ \&quot;name\&quot;: ..., \&quot;language\&quot;: ..., \&quot;components\&quot;: [...] }] }&#x60;. See the &#x60;template&#x60; field below for the exact shape. To send a template to a phone number you have no conversation with yet, use the create-conversation endpoint (POST /v1/inbox/conversations) instead.  WhatsApp rich interactive messages (list, CTA URL, Flow, location request) are available via the &#x60;interactive&#x60; field. Tap events are delivered through the &#x60;message.received&#x60; webhook with WhatsApp-specific &#x60;metadata&#x60; fields (&#x60;interactiveType&#x60;, &#x60;interactiveId&#x60;, &#x60;flowResponseJson&#x60;, &#x60;flowResponseData&#x60;).  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with &#x60;Idempotent-Replayed: true&#x60;) instead of sending the message a second time; same key + different body returns 422; a key still in flight returns 409. Works for JSON and multipart (file upload) requests alike. Keys are retained for 24 hours. 
     # @param conversation_id [String] The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
     # @param send_inbox_message_request [SendInboxMessageRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [Array<(SendInboxMessage200Response, Integer, Hash)>] SendInboxMessage200Response data, response status code and response headers
     def send_inbox_message_with_http_info(conversation_id, send_inbox_message_request, opts = {})
       if @api_client.config.debugging
@@ -867,6 +869,10 @@ module Zernio
       if @api_client.config.client_side_validation && send_inbox_message_request.nil?
         fail ArgumentError, "Missing the required parameter 'send_inbox_message_request' when calling MessagesApi.send_inbox_message"
       end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling MessagesApi.send_inbox_message, the character length must be smaller than or equal to 255.'
+      end
+
       # resource path
       local_var_path = '/v1/inbox/conversations/{conversationId}/messages'.sub('{' + 'conversationId' + '}', CGI.escape(conversation_id.to_s))
 
@@ -882,6 +888,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}

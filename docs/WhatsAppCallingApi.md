@@ -756,7 +756,7 @@ end
 api_instance = Zernio::WhatsAppCallingApi.new
 initiate_whats_app_call_request = Zernio::InitiateWhatsAppCallRequest.new({account_id: 'account_id_example', to: 'to_example'}) # InitiateWhatsAppCallRequest | 
 opts = {
-  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
 }
 
 begin
@@ -791,7 +791,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **initiate_whats_app_call_request** | [**InitiateWhatsAppCallRequest**](InitiateWhatsAppCallRequest.md) |  |  |
-| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 

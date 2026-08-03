@@ -229,7 +229,7 @@ describe 'SMSApi' do
   # Sends an SMS (or MMS when &#x60;mediaUrls&#x60; is set) from one of your SMS-enabled numbers. At least one of &#x60;text&#x60; / &#x60;mediaUrls&#x60; is required. Both numbers are normalized to E.164, so &#x60;from&#x60; matches regardless of formatting and replies thread into the same inbox conversation.  US numbers must have an approved carrier registration (&#x60;/v1/sms/registrations&#x60;) before messages deliver.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe: same key + same body replays the original response instead of sending a second message; same key + different body returns 422; a key still in flight returns 409. 
   # @param send_sms_request 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes send retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
   # @return [SendSms200Response]
   describe 'send_sms test' do
     it 'should work' do

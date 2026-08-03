@@ -23,7 +23,7 @@ module Zernio
     # Dials `to` FROM one of your voice-enabled numbers and, on answer, bridges the callee to the number's stored forward destination, or to the per-call `forwardTo` override. Destinations can be your own AI voice agent (Vapi/Retell), a phone, or a SIP endpoint. An optional `greeting` is spoken to the callee before the bridge.  The 200 response means the call is dialing; the lifecycle continues asynchronously (track it via `GET /v1/voice/calls/{id}` or the `call.*` webhooks). Outbound calls are capped per rolling hour (429 when hit).  **Idempotency:** send an `Idempotency-Key` header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
     # @param create_voice_call_request [CreateVoiceCallRequest] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [CreateVoiceCall200Response]
     def create_voice_call(create_voice_call_request, opts = {})
       data, _status_code, _headers = create_voice_call_with_http_info(create_voice_call_request, opts)
@@ -34,7 +34,7 @@ module Zernio
     # Dials &#x60;to&#x60; FROM one of your voice-enabled numbers and, on answer, bridges the callee to the number&#39;s stored forward destination, or to the per-call &#x60;forwardTo&#x60; override. Destinations can be your own AI voice agent (Vapi/Retell), a phone, or a SIP endpoint. An optional &#x60;greeting&#x60; is spoken to the callee before the bridge.  The 200 response means the call is dialing; the lifecycle continues asynchronously (track it via &#x60;GET /v1/voice/calls/{id}&#x60; or the &#x60;call.*&#x60; webhooks). Outbound calls are capped per rolling hour (429 when hit).  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
     # @param create_voice_call_request [CreateVoiceCallRequest] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes dial retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [Array<(CreateVoiceCall200Response, Integer, Hash)>] CreateVoiceCall200Response data, response status code and response headers
     def create_voice_call_with_http_info(create_voice_call_request, opts = {})
       if @api_client.config.debugging
