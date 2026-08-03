@@ -47,6 +47,8 @@ module Zernio
 
     attr_accessor :instagram_profile
 
+    attr_accessor :metadata
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -85,7 +87,8 @@ module Zernio
         :'status' => :'status',
         :'unread_count' => :'unreadCount',
         :'url' => :'url',
-        :'instagram_profile' => :'instagramProfile'
+        :'instagram_profile' => :'instagramProfile',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -115,7 +118,8 @@ module Zernio
         :'status' => :'String',
         :'unread_count' => :'Integer',
         :'url' => :'String',
-        :'instagram_profile' => :'ListInboxConversations200ResponseDataInnerInstagramProfile'
+        :'instagram_profile' => :'ListInboxConversations200ResponseDataInnerInstagramProfile',
+        :'metadata' => :'ListInboxConversations200ResponseDataInnerMetadata'
       }
     end
 
@@ -200,6 +204,10 @@ module Zernio
       if attributes.key?(:'instagram_profile')
         self.instagram_profile = attributes[:'instagram_profile']
       end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -259,7 +267,8 @@ module Zernio
           status == o.status &&
           unread_count == o.unread_count &&
           url == o.url &&
-          instagram_profile == o.instagram_profile
+          instagram_profile == o.instagram_profile &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -271,7 +280,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform, account_id, account_username, participant_id, participant_name, participant_picture, participant_verified_type, last_message, updated_time, status, unread_count, url, instagram_profile].hash
+      [id, platform, account_id, account_username, participant_id, participant_name, participant_picture, participant_verified_type, last_message, updated_time, status, unread_count, url, instagram_profile, metadata].hash
     end
 
     # Builds the object from hash

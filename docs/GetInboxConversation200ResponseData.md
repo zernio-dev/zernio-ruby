@@ -17,6 +17,7 @@
 | **updated_time** | **Time** |  | [optional] |
 | **participants** | [**Array&lt;UpdateFacebookPage200ResponseSelectedPage&gt;**](UpdateFacebookPage200ResponseSelectedPage.md) |  | [optional] |
 | **instagram_profile** | [**ListInboxConversations200ResponseDataInnerInstagramProfile**](ListInboxConversations200ResponseDataInnerInstagramProfile.md) |  | [optional] |
+| **metadata** | [**GetInboxConversation200ResponseDataMetadata**](GetInboxConversation200ResponseDataMetadata.md) |  | [optional] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = Zernio::GetInboxConversation200ResponseData.new(
   last_message_at: null,
   updated_time: null,
   participants: null,
-  instagram_profile: null
+  instagram_profile: null,
+  metadata: null
 )
 ```
 

@@ -42,6 +42,8 @@ module Zernio
 
     attr_accessor :instagram_profile
 
+    attr_accessor :metadata
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -79,7 +81,8 @@ module Zernio
         :'last_message_at' => :'lastMessageAt',
         :'updated_time' => :'updatedTime',
         :'participants' => :'participants',
-        :'instagram_profile' => :'instagramProfile'
+        :'instagram_profile' => :'instagramProfile',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -108,7 +111,8 @@ module Zernio
         :'last_message_at' => :'Time',
         :'updated_time' => :'Time',
         :'participants' => :'Array<UpdateFacebookPage200ResponseSelectedPage>',
-        :'instagram_profile' => :'ListInboxConversations200ResponseDataInnerInstagramProfile'
+        :'instagram_profile' => :'ListInboxConversations200ResponseDataInnerInstagramProfile',
+        :'metadata' => :'GetInboxConversation200ResponseDataMetadata'
       }
     end
 
@@ -188,6 +192,10 @@ module Zernio
       if attributes.key?(:'instagram_profile')
         self.instagram_profile = attributes[:'instagram_profile']
       end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -246,7 +254,8 @@ module Zernio
           last_message_at == o.last_message_at &&
           updated_time == o.updated_time &&
           participants == o.participants &&
-          instagram_profile == o.instagram_profile
+          instagram_profile == o.instagram_profile &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -258,7 +267,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, account_username, platform, status, participant_name, participant_id, participant_verified_type, last_message, last_message_at, updated_time, participants, instagram_profile].hash
+      [id, account_id, account_username, platform, status, participant_name, participant_id, participant_verified_type, last_message, last_message_at, updated_time, participants, instagram_profile, metadata].hash
     end
 
     # Builds the object from hash

@@ -18,6 +18,7 @@
 | **unread_count** | **Integer** | Number of unread messages | [optional] |
 | **url** | **String** | Direct link to open the conversation on the platform (if available) | [optional] |
 | **instagram_profile** | [**ListInboxConversations200ResponseDataInnerInstagramProfile**](ListInboxConversations200ResponseDataInnerInstagramProfile.md) |  | [optional] |
+| **metadata** | [**ListInboxConversations200ResponseDataInnerMetadata**](ListInboxConversations200ResponseDataInnerMetadata.md) |  | [optional] |
 
 ## Example
 
@@ -38,7 +39,8 @@ instance = Zernio::ListInboxConversations200ResponseDataInner.new(
   status: null,
   unread_count: null,
   url: null,
-  instagram_profile: null
+  instagram_profile: null,
+  metadata: null
 )
 ```
 

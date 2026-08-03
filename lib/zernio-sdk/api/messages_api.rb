@@ -515,7 +515,7 @@ module Zernio
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: MessagesApi.list_inbox_conversations ...'
       end
-      allowable_values = ["facebook", "instagram", "twitter", "bluesky", "reddit", "telegram"]
+      allowable_values = ["facebook", "instagram", "twitter", "bluesky", "reddit", "telegram", "whatsapp"]
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
