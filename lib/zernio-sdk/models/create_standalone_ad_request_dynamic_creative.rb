@@ -14,10 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta only. Dynamic Creative: supply a POOL of assets and Meta auto-combines and optimises them into the best-performing variations within a single ad (mapped to the creative's `asset_feed_spec`). When set, the top-level single-creative fields (`imageUrl`, `headline`, `body`, `linkUrl`, `callToAction`) are ignored. Mutually exclusive with the `creatives[]` multi-creative shape. Meta limits: ≤10 images, ≤5 bodies / titles / descriptions. 
+  # Meta only. Dynamic Creative: supply a POOL of assets and Meta auto-combines and optimises them into the best-performing variations within a single ad (mapped to the creative's `asset_feed_spec`). When set, the top-level single-creative fields (`imageUrl`, `headline`, `body`, `linkUrl`, `callToAction`) are ignored. Mutually exclusive with the `creatives[]` multi-creative shape. Exactly ONE of `imageUrls` / `videoUrls` is required (Meta allows one ad format per asset feed; sending both → 400). Meta limits: ≤10 images or ≤10 videos, ≤5 bodies / titles / descriptions. 
   class CreateStandaloneAdRequestDynamicCreative < ApiModelBase
-    # Pool of image URLs (1-10). Uploaded to the ad account and referenced by hash in the asset feed.
+    # Pool of image URLs (1-10). Uploaded to the ad account and referenced by hash in the asset feed. Mutually exclusive with `videoUrls`.
     attr_accessor :image_urls
+
+    # Pool of video URLs (1-10). Uploaded to the ad account and referenced by video id in the asset feed. No thumbnails are needed: Meta auto-generates a poster per video. Mutually exclusive with `imageUrls`; `adFormat` defaults to SINGLE_VIDEO.
+    attr_accessor :video_urls
 
     # Primary-text variations (the body copy).
     attr_accessor :bodies
@@ -34,7 +37,7 @@ module Zernio
     # CTA-button variations. Required.
     attr_accessor :call_to_action_types
 
-    # Asset-feed ad format. Defaults to SINGLE_IMAGE.
+    # Asset-feed ad format. Must match the pool: SINGLE_IMAGE / CAROUSEL_IMAGE require `imageUrls`, SINGLE_VIDEO requires `videoUrls` (400 otherwise). Defaults to SINGLE_IMAGE with `imageUrls`, SINGLE_VIDEO with `videoUrls`.
     attr_accessor :ad_format
 
     class EnumAttributeValidator
@@ -63,6 +66,7 @@ module Zernio
     def self.attribute_map
       {
         :'image_urls' => :'imageUrls',
+        :'video_urls' => :'videoUrls',
         :'bodies' => :'bodies',
         :'titles' => :'titles',
         :'descriptions' => :'descriptions',
@@ -86,6 +90,7 @@ module Zernio
     def self.openapi_types
       {
         :'image_urls' => :'Array<String>',
+        :'video_urls' => :'Array<String>',
         :'bodies' => :'Array<String>',
         :'titles' => :'Array<String>',
         :'descriptions' => :'Array<String>',
@@ -121,8 +126,12 @@ module Zernio
         if (value = attributes[:'image_urls']).is_a?(Array)
           self.image_urls = value
         end
-      else
-        self.image_urls = nil
+      end
+
+      if attributes.key?(:'video_urls')
+        if (value = attributes[:'video_urls']).is_a?(Array)
+          self.video_urls = value
+        end
       end
 
       if attributes.key?(:'bodies')
@@ -157,8 +166,6 @@ module Zernio
 
       if attributes.key?(:'ad_format')
         self.ad_format = attributes[:'ad_format']
-      else
-        self.ad_format = 'SINGLE_IMAGE'
       end
     end
 
@@ -167,16 +174,20 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @image_urls.nil?
-        invalid_properties.push('invalid value for "image_urls", image_urls cannot be nil.')
-      end
-
-      if @image_urls.length > 10
+      if !@image_urls.nil? && @image_urls.length > 10
         invalid_properties.push('invalid value for "image_urls", number of items must be less than or equal to 10.')
       end
 
-      if @image_urls.length < 1
+      if !@image_urls.nil? && @image_urls.length < 1
         invalid_properties.push('invalid value for "image_urls", number of items must be greater than or equal to 1.')
+      end
+
+      if !@video_urls.nil? && @video_urls.length > 10
+        invalid_properties.push('invalid value for "video_urls", number of items must be less than or equal to 10.')
+      end
+
+      if !@video_urls.nil? && @video_urls.length < 1
+        invalid_properties.push('invalid value for "video_urls", number of items must be greater than or equal to 1.')
       end
 
       if !@bodies.nil? && @bodies.length > 5
@@ -198,13 +209,14 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @image_urls.nil?
-      return false if @image_urls.length > 10
-      return false if @image_urls.length < 1
+      return false if !@image_urls.nil? && @image_urls.length > 10
+      return false if !@image_urls.nil? && @image_urls.length < 1
+      return false if !@video_urls.nil? && @video_urls.length > 10
+      return false if !@video_urls.nil? && @video_urls.length < 1
       return false if !@bodies.nil? && @bodies.length > 5
       return false if !@titles.nil? && @titles.length > 5
       return false if !@descriptions.nil? && @descriptions.length > 5
-      ad_format_validator = EnumAttributeValidator.new('String', ["SINGLE_IMAGE", "CAROUSEL_IMAGE"])
+      ad_format_validator = EnumAttributeValidator.new('String', ["SINGLE_IMAGE", "CAROUSEL_IMAGE", "SINGLE_VIDEO"])
       return false unless ad_format_validator.valid?(@ad_format)
       true
     end
@@ -225,6 +237,24 @@ module Zernio
       end
 
       @image_urls = image_urls
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] video_urls Value to be assigned
+    def video_urls=(video_urls)
+      if video_urls.nil?
+        fail ArgumentError, 'video_urls cannot be nil'
+      end
+
+      if video_urls.length > 10
+        fail ArgumentError, 'invalid value for "video_urls", number of items must be less than or equal to 10.'
+      end
+
+      if video_urls.length < 1
+        fail ArgumentError, 'invalid value for "video_urls", number of items must be greater than or equal to 1.'
+      end
+
+      @video_urls = video_urls
     end
 
     # Custom attribute writer method with validation
@@ -272,7 +302,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] ad_format Object to be assigned
     def ad_format=(ad_format)
-      validator = EnumAttributeValidator.new('String', ["SINGLE_IMAGE", "CAROUSEL_IMAGE"])
+      validator = EnumAttributeValidator.new('String', ["SINGLE_IMAGE", "CAROUSEL_IMAGE", "SINGLE_VIDEO"])
       unless validator.valid?(ad_format)
         fail ArgumentError, "invalid value for \"ad_format\", must be one of #{validator.allowable_values}."
       end
@@ -285,6 +315,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           image_urls == o.image_urls &&
+          video_urls == o.video_urls &&
           bodies == o.bodies &&
           titles == o.titles &&
           descriptions == o.descriptions &&
@@ -302,7 +333,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [image_urls, bodies, titles, descriptions, link_urls, call_to_action_types, ad_format].hash
+      [image_urls, video_urls, bodies, titles, descriptions, link_urls, call_to_action_types, ad_format].hash
     end
 
     # Builds the object from hash

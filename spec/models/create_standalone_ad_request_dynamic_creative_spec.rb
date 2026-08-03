@@ -33,6 +33,12 @@ describe Zernio::CreateStandaloneAdRequestDynamicCreative do
     end
   end
 
+  describe 'test attribute "video_urls"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "bodies"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -70,7 +76,7 @@ describe Zernio::CreateStandaloneAdRequestDynamicCreative do
   describe 'test attribute "ad_format"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["SINGLE_IMAGE", "CAROUSEL_IMAGE"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["SINGLE_IMAGE", "CAROUSEL_IMAGE", "SINGLE_VIDEO"])
       # validator.allowable_values.each do |value|
       #   expect { instance.ad_format = value }.not_to raise_error
       # end
