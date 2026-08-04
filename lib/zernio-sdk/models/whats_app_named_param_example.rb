@@ -14,18 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  class WhatsAppBodyComponentExample < ApiModelBase
-    # Sample values for body variables (array of arrays)
-    attr_accessor :body_text
+  class WhatsAppNamedParamExample < ApiModelBase
+    # Variable name as it appears in the text, without braces (e.g. customer_name for {{customer_name}}).
+    attr_accessor :param_name
 
-    # Sample values for NAMED body variables (templates using {{customer_name}}-style tokens with parameter_format: NAMED).
-    attr_accessor :body_text_named_params
+    # Sample value for this variable.
+    attr_accessor :example
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'body_text' => :'body_text',
-        :'body_text_named_params' => :'body_text_named_params'
+        :'param_name' => :'param_name',
+        :'example' => :'example'
       }
     end
 
@@ -42,8 +42,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'body_text' => :'Array<Array<String>>',
-        :'body_text_named_params' => :'Array<WhatsAppNamedParamExample>'
+        :'param_name' => :'String',
+        :'example' => :'String'
       }
     end
 
@@ -57,28 +57,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WhatsAppBodyComponentExample` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WhatsAppNamedParamExample` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WhatsAppBodyComponentExample`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WhatsAppNamedParamExample`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'body_text')
-        if (value = attributes[:'body_text']).is_a?(Array)
-          self.body_text = value
-        end
+      if attributes.key?(:'param_name')
+        self.param_name = attributes[:'param_name']
+      else
+        self.param_name = nil
       end
 
-      if attributes.key?(:'body_text_named_params')
-        if (value = attributes[:'body_text_named_params']).is_a?(Array)
-          self.body_text_named_params = value
-        end
+      if attributes.key?(:'example')
+        self.example = attributes[:'example']
+      else
+        self.example = nil
       end
     end
 
@@ -87,6 +87,19 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @param_name.nil?
+        invalid_properties.push('invalid value for "param_name", param_name cannot be nil.')
+      end
+
+      pattern = Regexp.new(/^[a-z0-9_]+$/)
+      if @param_name !~ pattern
+        invalid_properties.push("invalid value for \"param_name\", must conform to the pattern #{pattern}.")
+      end
+
+      if @example.nil?
+        invalid_properties.push('invalid value for "example", example cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -94,7 +107,35 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @param_name.nil?
+      return false if @param_name !~ Regexp.new(/^[a-z0-9_]+$/)
+      return false if @example.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] param_name Value to be assigned
+    def param_name=(param_name)
+      if param_name.nil?
+        fail ArgumentError, 'param_name cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[a-z0-9_]+$/)
+      if param_name !~ pattern
+        fail ArgumentError, "invalid value for \"param_name\", must conform to the pattern #{pattern}."
+      end
+
+      @param_name = param_name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] example Value to be assigned
+    def example=(example)
+      if example.nil?
+        fail ArgumentError, 'example cannot be nil'
+      end
+
+      @example = example
     end
 
     # Checks equality by comparing each attribute.
@@ -102,8 +143,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          body_text == o.body_text &&
-          body_text_named_params == o.body_text_named_params
+          param_name == o.param_name &&
+          example == o.example
     end
 
     # @see the `==` method
@@ -115,7 +156,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [body_text, body_text_named_params].hash
+      [param_name, example].hash
     end
 
     # Builds the object from hash

@@ -2133,6 +2133,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WhatsAppHeaderComponentExample](docs/WhatsAppHeaderComponentExample.md)
  - [Zernio::WhatsAppLimitedTimeOfferComponent](docs/WhatsAppLimitedTimeOfferComponent.md)
  - [Zernio::WhatsAppLimitedTimeOfferComponentLimitedTimeOffer](docs/WhatsAppLimitedTimeOfferComponentLimitedTimeOffer.md)
+ - [Zernio::WhatsAppNamedParamExample](docs/WhatsAppNamedParamExample.md)
  - [Zernio::WhatsAppSandboxSession](docs/WhatsAppSandboxSession.md)
  - [Zernio::WhatsAppTemplateButton](docs/WhatsAppTemplateButton.md)
  - [Zernio::WhatsAppTemplateComponent](docs/WhatsAppTemplateComponent.md)

@@ -18,6 +18,9 @@ module Zernio
     # Sample values for header text variables
     attr_accessor :header_text
 
+    # Sample values for NAMED header variables (templates using {{customer_name}}-style tokens with parameter_format: NAMED).
+    attr_accessor :header_text_named_params
+
     # When the header format is a media type (image, video, gif, document), provide a public URL here. Zernio will download and upload it to WhatsApp on your behalf, replacing it with the internal file handle before creating the template.
     attr_accessor :header_handle
 
@@ -25,6 +28,7 @@ module Zernio
     def self.attribute_map
       {
         :'header_text' => :'header_text',
+        :'header_text_named_params' => :'header_text_named_params',
         :'header_handle' => :'header_handle'
       }
     end
@@ -43,6 +47,7 @@ module Zernio
     def self.openapi_types
       {
         :'header_text' => :'Array<String>',
+        :'header_text_named_params' => :'Array<WhatsAppNamedParamExample>',
         :'header_handle' => :'Array<String>'
       }
     end
@@ -72,6 +77,12 @@ module Zernio
       if attributes.key?(:'header_text')
         if (value = attributes[:'header_text']).is_a?(Array)
           self.header_text = value
+        end
+      end
+
+      if attributes.key?(:'header_text_named_params')
+        if (value = attributes[:'header_text_named_params']).is_a?(Array)
+          self.header_text_named_params = value
         end
       end
 
@@ -131,6 +142,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           header_text == o.header_text &&
+          header_text_named_params == o.header_text_named_params &&
           header_handle == o.header_handle
     end
 
@@ -143,7 +155,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [header_text, header_handle].hash
+      [header_text, header_text_named_params, header_handle].hash
     end
 
     # Builds the object from hash

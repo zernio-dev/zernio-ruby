@@ -55,6 +55,16 @@ describe Zernio::CreateWhatsAppTemplateRequest do
     end
   end
 
+  describe 'test attribute "parameter_format"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["POSITIONAL", "NAMED", "positional", "named"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.parameter_format = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "components"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

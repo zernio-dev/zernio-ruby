@@ -1596,6 +1596,7 @@ docs/WhatsAppHeaderComponent.md
 docs/WhatsAppHeaderComponentExample.md
 docs/WhatsAppLimitedTimeOfferComponent.md
 docs/WhatsAppLimitedTimeOfferComponentLimitedTimeOffer.md
+docs/WhatsAppNamedParamExample.md
 docs/WhatsAppPhoneNumbersApi.md
 docs/WhatsAppSandboxApi.md
 docs/WhatsAppSandboxSession.md
@@ -3223,6 +3224,7 @@ lib/zernio-sdk/models/whats_app_header_component.rb
 lib/zernio-sdk/models/whats_app_header_component_example.rb
 lib/zernio-sdk/models/whats_app_limited_time_offer_component.rb
 lib/zernio-sdk/models/whats_app_limited_time_offer_component_limited_time_offer.rb
+lib/zernio-sdk/models/whats_app_named_param_example.rb
 lib/zernio-sdk/models/whats_app_sandbox_session.rb
 lib/zernio-sdk/models/whats_app_template_button.rb
 lib/zernio-sdk/models/whats_app_template_component.rb
@@ -4840,6 +4842,7 @@ spec/models/whats_app_header_component_example_spec.rb
 spec/models/whats_app_header_component_spec.rb
 spec/models/whats_app_limited_time_offer_component_limited_time_offer_spec.rb
 spec/models/whats_app_limited_time_offer_component_spec.rb
+spec/models/whats_app_named_param_example_spec.rb
 spec/models/whats_app_sandbox_session_spec.rb
 spec/models/whats_app_template_button_spec.rb
 spec/models/whats_app_template_component_spec.rb

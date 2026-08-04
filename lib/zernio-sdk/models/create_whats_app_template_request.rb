@@ -27,6 +27,9 @@ module Zernio
     # Template language code (e.g., en_US)
     attr_accessor :language
 
+    # Variable style: POSITIONAL ({{1}}, the default) or NAMED ({{customer_name}}). Named templates provide examples via body_text_named_params / header_text_named_params. Inferred as NAMED when omitted but a named-params example is present.
+    attr_accessor :parameter_format
+
     # Template components (header, body, footer, buttons, carousel, limited_time_offer). Required for custom templates, omit when using library_template_name.
     attr_accessor :components
 
@@ -68,6 +71,7 @@ module Zernio
         :'name' => :'name',
         :'category' => :'category',
         :'language' => :'language',
+        :'parameter_format' => :'parameter_format',
         :'components' => :'components',
         :'library_template_name' => :'library_template_name',
         :'library_template_body_inputs' => :'library_template_body_inputs',
@@ -92,6 +96,7 @@ module Zernio
         :'name' => :'String',
         :'category' => :'String',
         :'language' => :'String',
+        :'parameter_format' => :'String',
         :'components' => :'Array<WhatsAppTemplateComponent>',
         :'library_template_name' => :'String',
         :'library_template_body_inputs' => :'Object',
@@ -143,6 +148,10 @@ module Zernio
         self.language = attributes[:'language']
       else
         self.language = nil
+      end
+
+      if attributes.key?(:'parameter_format')
+        self.parameter_format = attributes[:'parameter_format']
       end
 
       if attributes.key?(:'components')
@@ -210,6 +219,8 @@ module Zernio
       category_validator = EnumAttributeValidator.new('String', ["AUTHENTICATION", "MARKETING", "UTILITY"])
       return false unless category_validator.valid?(@category)
       return false if @language.nil?
+      parameter_format_validator = EnumAttributeValidator.new('String', ["POSITIONAL", "NAMED", "positional", "named"])
+      return false unless parameter_format_validator.valid?(@parameter_format)
       return false if !@components.nil? && @components.length < 1
       true
     end
@@ -259,6 +270,16 @@ module Zernio
       @language = language
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] parameter_format Object to be assigned
+    def parameter_format=(parameter_format)
+      validator = EnumAttributeValidator.new('String', ["POSITIONAL", "NAMED", "positional", "named"])
+      unless validator.valid?(parameter_format)
+        fail ArgumentError, "invalid value for \"parameter_format\", must be one of #{validator.allowable_values}."
+      end
+      @parameter_format = parameter_format
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] components Value to be assigned
     def components=(components)
@@ -282,6 +303,7 @@ module Zernio
           name == o.name &&
           category == o.category &&
           language == o.language &&
+          parameter_format == o.parameter_format &&
           components == o.components &&
           library_template_name == o.library_template_name &&
           library_template_body_inputs == o.library_template_body_inputs &&
@@ -297,7 +319,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, name, category, language, components, library_template_name, library_template_body_inputs, library_template_button_inputs].hash
+      [account_id, name, category, language, parameter_format, components, library_template_name, library_template_body_inputs, library_template_button_inputs].hash
     end
 
     # Builds the object from hash
