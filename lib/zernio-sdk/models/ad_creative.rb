@@ -143,6 +143,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'thumbnail_url',
         :'video_id',
         :'video_url',
         :'object_story_id',
