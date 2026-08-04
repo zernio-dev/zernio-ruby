@@ -155,6 +155,77 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Look up a tweet
+    # Resolve a single tweet by ID or URL into its text, author and public metrics.  Use this to render a post you are referencing, e.g. the tweet quoted by a quote-style post. Unlike `/v1/twitter/search` this is not limited to the last 7 days and works for any tweet visible to the connected account.  Billed as an X posts read ($0.005). Repeat lookups of the same tweet within the same UTC day are charged once. 
+    # @param account_id [String] The social account ID whose X token is used for the lookup
+    # @param id [String] Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
+    # @param [Hash] opts the optional parameters
+    # @return [GetTweet200Response]
+    def get_tweet(account_id, id, opts = {})
+      data, _status_code, _headers = get_tweet_with_http_info(account_id, id, opts)
+      data
+    end
+
+    # Look up a tweet
+    # Resolve a single tweet by ID or URL into its text, author and public metrics.  Use this to render a post you are referencing, e.g. the tweet quoted by a quote-style post. Unlike &#x60;/v1/twitter/search&#x60; this is not limited to the last 7 days and works for any tweet visible to the connected account.  Billed as an X posts read ($0.005). Repeat lookups of the same tweet within the same UTC day are charged once. 
+    # @param account_id [String] The social account ID whose X token is used for the lookup
+    # @param id [String] Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetTweet200Response, Integer, Hash)>] GetTweet200Response data, response status code and response headers
+    def get_tweet_with_http_info(account_id, id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TwitterEngagementApi.get_tweet ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TwitterEngagementApi.get_tweet"
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling TwitterEngagementApi.get_tweet"
+      end
+      # resource path
+      local_var_path = '/v1/twitter/tweet'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'id'] = id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetTweet200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"TwitterEngagementApi.get_tweet",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TwitterEngagementApi#get_tweet\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Remove bookmark
     # Remove a bookmark from a tweet. 
     # @param account_id [String] 

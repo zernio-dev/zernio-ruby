@@ -671,6 +671,8 @@ require 'zernio-sdk/models/get_tik_tok_creator_info200_response_privacy_levels_i
 require 'zernio-sdk/models/get_tracking_tag200_response'
 require 'zernio-sdk/models/get_tracking_tag_stats200_response'
 require 'zernio-sdk/models/get_tracking_tag_stats200_response_stats'
+require 'zernio-sdk/models/get_tweet200_response'
+require 'zernio-sdk/models/get_tweet200_response_tweet'
 require 'zernio-sdk/models/get_usage200_response'
 require 'zernio-sdk/models/get_user200_response'
 require 'zernio-sdk/models/get_user200_response_user'

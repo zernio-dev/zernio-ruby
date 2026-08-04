@@ -688,6 +688,8 @@ docs/GetTikTokCreatorInfo200ResponsePrivacyLevelsInner.md
 docs/GetTrackingTag200Response.md
 docs/GetTrackingTagStats200Response.md
 docs/GetTrackingTagStats200ResponseStats.md
+docs/GetTweet200Response.md
+docs/GetTweet200ResponseTweet.md
 docs/GetUsage200Response.md
 docs/GetUser200Response.md
 docs/GetUser200ResponseUser.md
@@ -2347,6 +2349,8 @@ lib/zernio-sdk/models/get_tik_tok_creator_info200_response_privacy_levels_inner.
 lib/zernio-sdk/models/get_tracking_tag200_response.rb
 lib/zernio-sdk/models/get_tracking_tag_stats200_response.rb
 lib/zernio-sdk/models/get_tracking_tag_stats200_response_stats.rb
+lib/zernio-sdk/models/get_tweet200_response.rb
+lib/zernio-sdk/models/get_tweet200_response_tweet.rb
 lib/zernio-sdk/models/get_usage200_response.rb
 lib/zernio-sdk/models/get_user200_response.rb
 lib/zernio-sdk/models/get_user200_response_user.rb
@@ -3965,6 +3969,8 @@ spec/models/get_tik_tok_creator_info200_response_spec.rb
 spec/models/get_tracking_tag200_response_spec.rb
 spec/models/get_tracking_tag_stats200_response_spec.rb
 spec/models/get_tracking_tag_stats200_response_stats_spec.rb
+spec/models/get_tweet200_response_spec.rb
+spec/models/get_tweet200_response_tweet_spec.rb
 spec/models/get_usage200_response_spec.rb
 spec/models/get_user200_response_spec.rb
 spec/models/get_user200_response_user_spec.rb

@@ -6,6 +6,7 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**bookmark_post**](TwitterEngagementApi.md#bookmark_post) | **POST** /v1/twitter/bookmark | Bookmark a tweet |
 | [**follow_user**](TwitterEngagementApi.md#follow_user) | **POST** /v1/twitter/follow | Follow a user |
+| [**get_tweet**](TwitterEngagementApi.md#get_tweet) | **GET** /v1/twitter/tweet | Look up a tweet |
 | [**remove_bookmark**](TwitterEngagementApi.md#remove_bookmark) | **DELETE** /v1/twitter/bookmark | Remove bookmark |
 | [**retweet_post**](TwitterEngagementApi.md#retweet_post) | **POST** /v1/twitter/retweet | Retweet a post |
 | [**search_tweets**](TwitterEngagementApi.md#search_tweets) | **GET** /v1/twitter/search | Search recent tweets |
@@ -148,6 +149,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_tweet
+
+> <GetTweet200Response> get_tweet(account_id, id)
+
+Look up a tweet
+
+Resolve a single tweet by ID or URL into its text, author and public metrics.  Use this to render a post you are referencing, e.g. the tweet quoted by a quote-style post. Unlike `/v1/twitter/search` this is not limited to the last 7 days and works for any tweet visible to the connected account.  Billed as an X posts read ($0.005). Repeat lookups of the same tweet within the same UTC day are charged once. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::TwitterEngagementApi.new
+account_id = 'account_id_example' # String | The social account ID whose X token is used for the lookup
+id = 'id_example' # String | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
+
+begin
+  # Look up a tweet
+  result = api_instance.get_tweet(account_id, id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling TwitterEngagementApi->get_tweet: #{e}"
+end
+```
+
+#### Using the get_tweet_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetTweet200Response>, Integer, Hash)> get_tweet_with_http_info(account_id, id)
+
+```ruby
+begin
+  # Look up a tweet
+  data, status_code, headers = api_instance.get_tweet_with_http_info(account_id, id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetTweet200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling TwitterEngagementApi->get_tweet_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The social account ID whose X token is used for the lookup |  |
+| **id** | **String** | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...) |  |
+
+### Return type
+
+[**GetTweet200Response**](GetTweet200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

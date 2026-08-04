@@ -465,6 +465,7 @@ Class | Method | HTTP request | Description
 *Zernio::TrackingTagsApi* | [**update_tracking_tag**](docs/TrackingTagsApi.md#update_tracking_tag) | **PATCH** /v1/accounts/{accountId}/tracking-tags/{tagId} | Update a tracking tag
 *Zernio::TwitterEngagementApi* | [**bookmark_post**](docs/TwitterEngagementApi.md#bookmark_post) | **POST** /v1/twitter/bookmark | Bookmark a tweet
 *Zernio::TwitterEngagementApi* | [**follow_user**](docs/TwitterEngagementApi.md#follow_user) | **POST** /v1/twitter/follow | Follow a user
+*Zernio::TwitterEngagementApi* | [**get_tweet**](docs/TwitterEngagementApi.md#get_tweet) | **GET** /v1/twitter/tweet | Look up a tweet
 *Zernio::TwitterEngagementApi* | [**remove_bookmark**](docs/TwitterEngagementApi.md#remove_bookmark) | **DELETE** /v1/twitter/bookmark | Remove bookmark
 *Zernio::TwitterEngagementApi* | [**retweet_post**](docs/TwitterEngagementApi.md#retweet_post) | **POST** /v1/twitter/retweet | Retweet a post
 *Zernio::TwitterEngagementApi* | [**search_tweets**](docs/TwitterEngagementApi.md#search_tweets) | **GET** /v1/twitter/search | Search recent tweets
@@ -1256,6 +1257,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetTrackingTag200Response](docs/GetTrackingTag200Response.md)
  - [Zernio::GetTrackingTagStats200Response](docs/GetTrackingTagStats200Response.md)
  - [Zernio::GetTrackingTagStats200ResponseStats](docs/GetTrackingTagStats200ResponseStats.md)
+ - [Zernio::GetTweet200Response](docs/GetTweet200Response.md)
+ - [Zernio::GetTweet200ResponseTweet](docs/GetTweet200ResponseTweet.md)
  - [Zernio::GetUsage200Response](docs/GetUsage200Response.md)
  - [Zernio::GetUser200Response](docs/GetUser200Response.md)
  - [Zernio::GetUser200ResponseUser](docs/GetUser200ResponseUser.md)

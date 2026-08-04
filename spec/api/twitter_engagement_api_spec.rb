@@ -56,6 +56,19 @@ describe 'TwitterEngagementApi' do
     end
   end
 
+  # unit tests for get_tweet
+  # Look up a tweet
+  # Resolve a single tweet by ID or URL into its text, author and public metrics.  Use this to render a post you are referencing, e.g. the tweet quoted by a quote-style post. Unlike &#x60;/v1/twitter/search&#x60; this is not limited to the last 7 days and works for any tweet visible to the connected account.  Billed as an X posts read ($0.005). Repeat lookups of the same tweet within the same UTC day are charged once. 
+  # @param account_id The social account ID whose X token is used for the lookup
+  # @param id Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
+  # @param [Hash] opts the optional parameters
+  # @return [GetTweet200Response]
+  describe 'get_tweet test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for remove_bookmark
   # Remove bookmark
   # Remove a bookmark from a tweet. 
