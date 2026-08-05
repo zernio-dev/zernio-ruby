@@ -77,6 +77,9 @@ module Zernio
     # Legal entity that pays for the ad. Can differ from `dsaBeneficiary` (for example, an agency paying for a client's ads). Same rules as `dsaBeneficiary`: required for EU targeting unless the ad account has a default payor. 
     attr_accessor :dsa_payor
 
+    # Meta only. Explicit ad-set `optimization_goal` override. When omitted, defaults to the value derived from `goal`. The value must be compatible with the objective Meta derives from `goal`, not with the objective used by `POST /v1/ads/create` for the same `goal` name: boost maps `goal: \"engagement\"` to objective `OUTCOME_AWARENESS`, which accepts `REACH`, `IMPRESSIONS`, `AD_RECALL_LIFT`, or THRUPLAY-class values, and rejects `POST_ENGAGEMENT` (that value is only valid under `OUTCOME_ENGAGEMENT`, which create uses for the same goal name). 
+    attr_accessor :optimization_goal
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -124,7 +127,8 @@ module Zernio
         :'call_to_action' => :'callToAction',
         :'spark_auth_code' => :'sparkAuthCode',
         :'dsa_beneficiary' => :'dsaBeneficiary',
-        :'dsa_payor' => :'dsaPayor'
+        :'dsa_payor' => :'dsaPayor',
+        :'optimization_goal' => :'optimizationGoal'
       }
     end
 
@@ -163,7 +167,8 @@ module Zernio
         :'call_to_action' => :'String',
         :'spark_auth_code' => :'String',
         :'dsa_beneficiary' => :'String',
-        :'dsa_payor' => :'String'
+        :'dsa_payor' => :'String',
+        :'optimization_goal' => :'String'
       }
     end
 
@@ -295,6 +300,10 @@ module Zernio
 
       if attributes.key?(:'dsa_payor')
         self.dsa_payor = attributes[:'dsa_payor']
+      end
+
+      if attributes.key?(:'optimization_goal')
+        self.optimization_goal = attributes[:'optimization_goal']
       end
     end
 
@@ -464,7 +473,8 @@ module Zernio
           call_to_action == o.call_to_action &&
           spark_auth_code == o.spark_auth_code &&
           dsa_beneficiary == o.dsa_beneficiary &&
-          dsa_payor == o.dsa_payor
+          dsa_payor == o.dsa_payor &&
+          optimization_goal == o.optimization_goal
     end
 
     # @see the `==` method
@@ -476,7 +486,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, optimization_goal].hash
     end
 
     # Builds the object from hash
