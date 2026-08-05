@@ -206,5 +206,62 @@ module Zernio
       end
       return data, status_code, headers
     end
+
+    # Verify credential
+    # Checks whether the bearer credential on this request is valid, without reading any data. Accepts an API key or an OAuth access token. Intended for clients that must validate a credential before use (for example an MCP server verifying an incoming token) so they do not have to call a data endpoint to do it.
+    # @param [Hash] opts the optional parameters
+    # @return [VerifyCredential200Response]
+    def verify_credential(opts = {})
+      data, _status_code, _headers = verify_credential_with_http_info(opts)
+      data
+    end
+
+    # Verify credential
+    # Checks whether the bearer credential on this request is valid, without reading any data. Accepts an API key or an OAuth access token. Intended for clients that must validate a credential before use (for example an MCP server verifying an incoming token) so they do not have to call a data endpoint to do it.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(VerifyCredential200Response, Integer, Hash)>] VerifyCredential200Response data, response status code and response headers
+    def verify_credential_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: APIKeysApi.verify_credential ...'
+      end
+      # resource path
+      local_var_path = '/v1/auth/verify'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VerifyCredential200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"APIKeysApi.verify_credential",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: APIKeysApi#verify_credential\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end

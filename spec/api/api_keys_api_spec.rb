@@ -67,4 +67,15 @@ describe 'APIKeysApi' do
     end
   end
 
+  # unit tests for verify_credential
+  # Verify credential
+  # Checks whether the bearer credential on this request is valid, without reading any data. Accepts an API key or an OAuth access token. Intended for clients that must validate a credential before use (for example an MCP server verifying an incoming token) so they do not have to call a data endpoint to do it.
+  # @param [Hash] opts the optional parameters
+  # @return [VerifyCredential200Response]
+  describe 'verify_credential test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

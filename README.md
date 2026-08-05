@@ -69,6 +69,7 @@ Class | Method | HTTP request | Description
 *Zernio::APIKeysApi* | [**create_api_key**](docs/APIKeysApi.md#create_api_key) | **POST** /v1/api-keys | Create key
 *Zernio::APIKeysApi* | [**delete_api_key**](docs/APIKeysApi.md#delete_api_key) | **DELETE** /v1/api-keys/{keyId} | Delete key
 *Zernio::APIKeysApi* | [**list_api_keys**](docs/APIKeysApi.md#list_api_keys) | **GET** /v1/api-keys | List keys
+*Zernio::APIKeysApi* | [**verify_credential**](docs/APIKeysApi.md#verify_credential) | **GET** /v1/auth/verify | Verify credential
 *Zernio::AccountGroupsApi* | [**create_account_group**](docs/AccountGroupsApi.md#create_account_group) | **POST** /v1/account-groups | Create group
 *Zernio::AccountGroupsApi* | [**delete_account_group**](docs/AccountGroupsApi.md#delete_account_group) | **DELETE** /v1/account-groups/{groupId} | Delete group
 *Zernio::AccountGroupsApi* | [**list_account_groups**](docs/AccountGroupsApi.md#list_account_groups) | **GET** /v1/account-groups | List groups
@@ -2063,6 +2064,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ValueRuleCriterion](docs/ValueRuleCriterion.md)
  - [Zernio::ValueRuleSet](docs/ValueRuleSet.md)
  - [Zernio::Verification](docs/Verification.md)
+ - [Zernio::VerifyCredential200Response](docs/VerifyCredential200Response.md)
  - [Zernio::VerifySmsRegistrationOtp200Response](docs/VerifySmsRegistrationOtp200Response.md)
  - [Zernio::VerifySmsRegistrationOtpRequest](docs/VerifySmsRegistrationOtpRequest.md)
  - [Zernio::VerifyWhatsAppCallerIdRequest](docs/VerifyWhatsAppCallerIdRequest.md)

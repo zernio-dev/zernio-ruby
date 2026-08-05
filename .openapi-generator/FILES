@@ -1514,6 +1514,7 @@ docs/ValueRuleCriterion.md
 docs/ValueRuleSet.md
 docs/Verification.md
 docs/VerifyApi.md
+docs/VerifyCredential200Response.md
 docs/VerifySmsRegistrationOtp200Response.md
 docs/VerifySmsRegistrationOtpRequest.md
 docs/VerifyWhatsAppCallerIdRequest.md
@@ -3161,6 +3162,7 @@ lib/zernio-sdk/models/value_rule.rb
 lib/zernio-sdk/models/value_rule_criterion.rb
 lib/zernio-sdk/models/value_rule_set.rb
 lib/zernio-sdk/models/verification.rb
+lib/zernio-sdk/models/verify_credential200_response.rb
 lib/zernio-sdk/models/verify_sms_registration_otp200_response.rb
 lib/zernio-sdk/models/verify_sms_registration_otp_request.rb
 lib/zernio-sdk/models/verify_whats_app_caller_id_request.rb
@@ -4792,6 +4794,7 @@ spec/models/value_rule_criterion_spec.rb
 spec/models/value_rule_set_spec.rb
 spec/models/value_rule_spec.rb
 spec/models/verification_spec.rb
+spec/models/verify_credential200_response_spec.rb
 spec/models/verify_sms_registration_otp200_response_spec.rb
 spec/models/verify_sms_registration_otp_request_spec.rb
 spec/models/verify_whats_app_caller_id_request_spec.rb

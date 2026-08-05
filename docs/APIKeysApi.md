@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_api_key**](APIKeysApi.md#create_api_key) | **POST** /v1/api-keys | Create key |
 | [**delete_api_key**](APIKeysApi.md#delete_api_key) | **DELETE** /v1/api-keys/{keyId} | Delete key |
 | [**list_api_keys**](APIKeysApi.md#list_api_keys) | **GET** /v1/api-keys | List keys |
+| [**verify_credential**](APIKeysApi.md#verify_credential) | **GET** /v1/auth/verify | Verify credential |
 
 
 ## create_api_key
@@ -202,6 +203,72 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ListApiKeys200Response**](ListApiKeys200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## verify_credential
+
+> <VerifyCredential200Response> verify_credential
+
+Verify credential
+
+Checks whether the bearer credential on this request is valid, without reading any data. Accepts an API key or an OAuth access token. Intended for clients that must validate a credential before use (for example an MCP server verifying an incoming token) so they do not have to call a data endpoint to do it.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::APIKeysApi.new
+
+begin
+  # Verify credential
+  result = api_instance.verify_credential
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling APIKeysApi->verify_credential: #{e}"
+end
+```
+
+#### Using the verify_credential_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<VerifyCredential200Response>, Integer, Hash)> verify_credential_with_http_info
+
+```ruby
+begin
+  # Verify credential
+  data, status_code, headers = api_instance.verify_credential_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <VerifyCredential200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling APIKeysApi->verify_credential_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**VerifyCredential200Response**](VerifyCredential200Response.md)
 
 ### Authorization
 
