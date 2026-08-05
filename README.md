@@ -459,6 +459,7 @@ Class | Method | HTTP request | Description
 *Zernio::SequencesApi* | [**pause_sequence**](docs/SequencesApi.md#pause_sequence) | **POST** /v1/sequences/{sequenceId}/pause | Pause sequence
 *Zernio::SequencesApi* | [**unenroll_contact**](docs/SequencesApi.md#unenroll_contact) | **DELETE** /v1/sequences/{sequenceId}/enroll/{contactId} | Unenroll contact
 *Zernio::SequencesApi* | [**update_sequence**](docs/SequencesApi.md#update_sequence) | **PATCH** /v1/sequences/{sequenceId} | Update sequence
+*Zernio::SlackApi* | [**list_slack_members**](docs/SlackApi.md#list_slack_members) | **GET** /v1/accounts/{accountId}/slack-members | List Slack workspace members
 *Zernio::TrackingTagsApi* | [**add_tracking_tag_shared_account**](docs/TrackingTagsApi.md#add_tracking_tag_shared_account) | **POST** /v1/accounts/{accountId}/tracking-tags/{tagId}/shared-accounts | Share with an ad account
 *Zernio::TrackingTagsApi* | [**create_tracking_tag**](docs/TrackingTagsApi.md#create_tracking_tag) | **POST** /v1/accounts/{accountId}/tracking-tags | Create a tracking tag
 *Zernio::TrackingTagsApi* | [**get_ad_tracking_tags**](docs/TrackingTagsApi.md#get_ad_tracking_tags) | **GET** /v1/ads/{adId}/tracking-tags | Get ad tracking tags
@@ -1513,6 +1514,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListSequenceEnrollments200ResponseEnrollmentsInner](docs/ListSequenceEnrollments200ResponseEnrollmentsInner.md)
  - [Zernio::ListSequences200Response](docs/ListSequences200Response.md)
  - [Zernio::ListSequences200ResponseSequencesInner](docs/ListSequences200ResponseSequencesInner.md)
+ - [Zernio::ListSlackMembers200Response](docs/ListSlackMembers200Response.md)
+ - [Zernio::ListSlackMembers200ResponseMembersInner](docs/ListSlackMembers200ResponseMembersInner.md)
  - [Zernio::ListSmsOptOuts200Response](docs/ListSmsOptOuts200Response.md)
  - [Zernio::ListSmsOptOuts200ResponseOptOutsInner](docs/ListSmsOptOuts200ResponseOptOutsInner.md)
  - [Zernio::ListSmsRegistrations200Response](docs/ListSmsRegistrations200Response.md)
