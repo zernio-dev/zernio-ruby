@@ -399,8 +399,8 @@ opts = {
   platform: 'twitter', # String | 
   profile_id: 'profile_id_example', # String | Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send `all` or an empty value, to list posts across every profile.
   created_by: 'created_by_example', # String | Filter posts to those created by a specific team user (24-char hex ObjectId).
-  date_from: Date.parse('2013-10-20'), # Date | 
-  date_to: Date.parse('2013-10-20'), # Date | 
+  date_from: Date.parse('2013-10-20'), # Date | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
+  date_to: Date.parse('2013-10-20'), # Date | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
   include_hidden: true, # Boolean | 
   search: 'search_example', # String | Search posts by text content.
   sort_by: 'scheduled-desc', # String | Sort order for results.
@@ -445,8 +445,8 @@ end
 | **platform** | **String** |  | [optional] |
 | **profile_id** | **String** | Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send &#x60;all&#x60; or an empty value, to list posts across every profile. | [optional] |
 | **created_by** | **String** | Filter posts to those created by a specific team user (24-char hex ObjectId). | [optional] |
-| **date_from** | **Date** |  | [optional] |
-| **date_to** | **Date** |  | [optional] |
+| **date_from** | **Date** | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. | [optional] |
+| **date_to** | **Date** | Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400. | [optional] |
 | **include_hidden** | **Boolean** |  | [optional][default to false] |
 | **search** | **String** | Search posts by text content. | [optional] |
 | **sort_by** | **String** | Sort order for results. | [optional][default to &#39;scheduled-desc&#39;] |

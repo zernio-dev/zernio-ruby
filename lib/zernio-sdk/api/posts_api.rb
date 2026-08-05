@@ -368,8 +368,8 @@ module Zernio
     # @option opts [String] :platform 
     # @option opts [String] :profile_id Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send &#x60;all&#x60; or an empty value, to list posts across every profile.
     # @option opts [String] :created_by Filter posts to those created by a specific team user (24-char hex ObjectId).
-    # @option opts [Date] :date_from 
-    # @option opts [Date] :date_to 
+    # @option opts [Date] :date_from Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
+    # @option opts [Date] :date_to Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
     # @option opts [Boolean] :include_hidden  (default to false)
     # @option opts [String] :search Search posts by text content.
     # @option opts [String] :sort_by Sort order for results. (default to 'scheduled-desc')
@@ -390,8 +390,8 @@ module Zernio
     # @option opts [String] :platform 
     # @option opts [String] :profile_id Filter posts to a specific profile (24-char hex ObjectId). Omit it, or send &#x60;all&#x60; or an empty value, to list posts across every profile.
     # @option opts [String] :created_by Filter posts to those created by a specific team user (24-char hex ObjectId).
-    # @option opts [Date] :date_from 
-    # @option opts [Date] :date_to 
+    # @option opts [Date] :date_from Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
+    # @option opts [Date] :date_to Zero-padded YYYY-MM-DD, or a full ISO 8601 datetime. An empty value means no date filter; any other malformed value returns 400.
     # @option opts [Boolean] :include_hidden  (default to false)
     # @option opts [String] :search Search posts by text content.
     # @option opts [String] :sort_by Sort order for results. (default to 'scheduled-desc')
