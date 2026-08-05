@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **message** | **String** |  | [optional] |
 | **post** | [**Post**](Post.md) |  | [optional] |
+| **warnings** | **Array&lt;String&gt;** |  | [optional] |
 
 ## Example
 
@@ -14,7 +15,8 @@ require 'zernio-sdk'
 
 instance = Zernio::PostUpdateResponse.new(
   message: null,
-  post: null
+  post: null,
+  warnings: null
 )
 ```
 
