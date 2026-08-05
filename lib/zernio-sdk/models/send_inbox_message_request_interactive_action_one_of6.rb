@@ -14,19 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Multi-product action. `type` on the parent must be `product_list`. Requires a Meta catalog connected to the WhatsApp Business Account in Commerce Manager. 
+  # Single-product action. `type` on the parent must be `product`. Requires a Meta catalog connected to the WhatsApp Business Account in Commerce Manager. 
   class SendInboxMessageRequestInteractiveActionOneOf6 < ApiModelBase
     # Meta catalog ID connected to the WhatsApp Business Account.
     attr_accessor :catalog_id
 
-    # 1-10 sections. Total products across all sections cannot exceed 30.
-    attr_accessor :sections
+    # Retailer ID (SKU) of the product inside the catalog.
+    attr_accessor :product_retailer_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'catalog_id' => :'catalog_id',
-        :'sections' => :'sections'
+        :'product_retailer_id' => :'product_retailer_id'
       }
     end
 
@@ -44,7 +44,7 @@ module Zernio
     def self.openapi_types
       {
         :'catalog_id' => :'String',
-        :'sections' => :'Array<SendInboxMessageRequestInteractiveActionOneOf6SectionsInner>'
+        :'product_retailer_id' => :'String'
       }
     end
 
@@ -76,12 +76,10 @@ module Zernio
         self.catalog_id = nil
       end
 
-      if attributes.key?(:'sections')
-        if (value = attributes[:'sections']).is_a?(Array)
-          self.sections = value
-        end
+      if attributes.key?(:'product_retailer_id')
+        self.product_retailer_id = attributes[:'product_retailer_id']
       else
-        self.sections = nil
+        self.product_retailer_id = nil
       end
     end
 
@@ -94,16 +92,8 @@ module Zernio
         invalid_properties.push('invalid value for "catalog_id", catalog_id cannot be nil.')
       end
 
-      if @sections.nil?
-        invalid_properties.push('invalid value for "sections", sections cannot be nil.')
-      end
-
-      if @sections.length > 10
-        invalid_properties.push('invalid value for "sections", number of items must be less than or equal to 10.')
-      end
-
-      if @sections.length < 1
-        invalid_properties.push('invalid value for "sections", number of items must be greater than or equal to 1.')
+      if @product_retailer_id.nil?
+        invalid_properties.push('invalid value for "product_retailer_id", product_retailer_id cannot be nil.')
       end
 
       invalid_properties
@@ -114,9 +104,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @catalog_id.nil?
-      return false if @sections.nil?
-      return false if @sections.length > 10
-      return false if @sections.length < 1
+      return false if @product_retailer_id.nil?
       true
     end
 
@@ -131,21 +119,13 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] sections Value to be assigned
-    def sections=(sections)
-      if sections.nil?
-        fail ArgumentError, 'sections cannot be nil'
+    # @param [Object] product_retailer_id Value to be assigned
+    def product_retailer_id=(product_retailer_id)
+      if product_retailer_id.nil?
+        fail ArgumentError, 'product_retailer_id cannot be nil'
       end
 
-      if sections.length > 10
-        fail ArgumentError, 'invalid value for "sections", number of items must be less than or equal to 10.'
-      end
-
-      if sections.length < 1
-        fail ArgumentError, 'invalid value for "sections", number of items must be greater than or equal to 1.'
-      end
-
-      @sections = sections
+      @product_retailer_id = product_retailer_id
     end
 
     # Checks equality by comparing each attribute.
@@ -154,7 +134,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           catalog_id == o.catalog_id &&
-          sections == o.sections
+          product_retailer_id == o.product_retailer_id
     end
 
     # @see the `==` method
@@ -166,7 +146,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [catalog_id, sections].hash
+      [catalog_id, product_retailer_id].hash
     end
 
     # Builds the object from hash

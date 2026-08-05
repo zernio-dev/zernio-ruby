@@ -27,17 +27,13 @@ describe Zernio::SendInboxMessageRequestInteractiveActionOneOf7 do
     end
   end
 
-  describe 'test attribute "name"' do
+  describe 'test attribute "catalog_id"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["catalog_message"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.name = value }.not_to raise_error
-      # end
     end
   end
 
-  describe 'test attribute "parameters"' do
+  describe 'test attribute "sections"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

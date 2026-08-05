@@ -14,19 +14,36 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Single-product action. `type` on the parent must be `product`. Requires a Meta catalog connected to the WhatsApp Business Account in Commerce Manager. 
+  # Contact-info request action. `type` on the parent must be `request_contact_info`. May be omitted entirely; it is defaulted.
   class SendInboxMessageRequestInteractiveActionOneOf5 < ApiModelBase
-    # Meta catalog ID connected to the WhatsApp Business Account.
-    attr_accessor :catalog_id
+    attr_accessor :name
 
-    # Retailer ID (SKU) of the product inside the catalog.
-    attr_accessor :product_retailer_id
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'catalog_id' => :'catalog_id',
-        :'product_retailer_id' => :'product_retailer_id'
+        :'name' => :'name'
       }
     end
 
@@ -43,8 +60,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'catalog_id' => :'String',
-        :'product_retailer_id' => :'String'
+        :'name' => :'String'
       }
     end
 
@@ -70,16 +86,10 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'catalog_id')
-        self.catalog_id = attributes[:'catalog_id']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       else
-        self.catalog_id = nil
-      end
-
-      if attributes.key?(:'product_retailer_id')
-        self.product_retailer_id = attributes[:'product_retailer_id']
-      else
-        self.product_retailer_id = nil
+        self.name = nil
       end
     end
 
@@ -88,12 +98,8 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @catalog_id.nil?
-        invalid_properties.push('invalid value for "catalog_id", catalog_id cannot be nil.')
-      end
-
-      if @product_retailer_id.nil?
-        invalid_properties.push('invalid value for "product_retailer_id", product_retailer_id cannot be nil.')
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
       invalid_properties
@@ -103,29 +109,20 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @catalog_id.nil?
-      return false if @product_retailer_id.nil?
+      return false if @name.nil?
+      name_validator = EnumAttributeValidator.new('String', ["request_contact_info"])
+      return false unless name_validator.valid?(@name)
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] catalog_id Value to be assigned
-    def catalog_id=(catalog_id)
-      if catalog_id.nil?
-        fail ArgumentError, 'catalog_id cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] name Object to be assigned
+    def name=(name)
+      validator = EnumAttributeValidator.new('String', ["request_contact_info"])
+      unless validator.valid?(name)
+        fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
       end
-
-      @catalog_id = catalog_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] product_retailer_id Value to be assigned
-    def product_retailer_id=(product_retailer_id)
-      if product_retailer_id.nil?
-        fail ArgumentError, 'product_retailer_id cannot be nil'
-      end
-
-      @product_retailer_id = product_retailer_id
+      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -133,8 +130,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          catalog_id == o.catalog_id &&
-          product_retailer_id == o.product_retailer_id
+          name == o.name
     end
 
     # @see the `==` method
@@ -146,7 +142,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [catalog_id, product_retailer_id].hash
+      [name].hash
     end
 
     # Builds the object from hash

@@ -1,4 +1,4 @@
-# Zernio::SendInboxMessageRequestInteractiveActionOneOf7Parameters
+# Zernio::SendInboxMessageRequestInteractiveActionOneOf8Parameters
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf7Parameters.new(
+instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf8Parameters.new(
   thumbnail_product_retailer_id: null
 )
 ```

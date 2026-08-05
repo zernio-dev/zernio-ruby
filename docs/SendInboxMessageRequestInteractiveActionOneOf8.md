@@ -4,7 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **cards** | [**Array&lt;SendInboxMessageRequestInteractiveActionOneOf8CardsInner&gt;**](SendInboxMessageRequestInteractiveActionOneOf8CardsInner.md) |  |  |
+| **name** | **String** |  |  |
+| **parameters** | [**SendInboxMessageRequestInteractiveActionOneOf8Parameters**](SendInboxMessageRequestInteractiveActionOneOf8Parameters.md) |  | [optional] |
 
 ## Example
 
@@ -12,7 +13,8 @@
 require 'zernio-sdk'
 
 instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf8.new(
-  cards: null
+  name: null,
+  parameters: null
 )
 ```
 

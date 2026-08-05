@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** |  |  |
-| **parameters** | [**SendInboxMessageRequestInteractiveActionOneOf7Parameters**](SendInboxMessageRequestInteractiveActionOneOf7Parameters.md) |  | [optional] |
+| **catalog_id** | **String** | Meta catalog ID connected to the WhatsApp Business Account. |  |
+| **sections** | [**Array&lt;SendInboxMessageRequestInteractiveActionOneOf7SectionsInner&gt;**](SendInboxMessageRequestInteractiveActionOneOf7SectionsInner.md) | 1-10 sections. Total products across all sections cannot exceed 30. |  |
 
 ## Example
 
@@ -13,8 +13,8 @@
 require 'zernio-sdk'
 
 instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf7.new(
-  name: null,
-  parameters: null
+  catalog_id: null,
+  sections: null
 )
 ```
 

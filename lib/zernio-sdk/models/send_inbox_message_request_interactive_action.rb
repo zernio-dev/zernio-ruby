@@ -27,7 +27,8 @@ module Zernio
           :'SendInboxMessageRequestInteractiveActionOneOf5',
           :'SendInboxMessageRequestInteractiveActionOneOf6',
           :'SendInboxMessageRequestInteractiveActionOneOf7',
-          :'SendInboxMessageRequestInteractiveActionOneOf8'
+          :'SendInboxMessageRequestInteractiveActionOneOf8',
+          :'SendInboxMessageRequestInteractiveActionOneOf9'
         ]
       end
 

@@ -1,4 +1,4 @@
-# Zernio::SendInboxMessageRequestInteractiveActionOneOf8CardsInner
+# Zernio::SendInboxMessageRequestInteractiveActionOneOf9CardsInner
 
 ## Properties
 
@@ -15,7 +15,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf8CardsInner.new(
+instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf9CardsInner.new(
   card_index: null,
   type: null,
   header: null,

@@ -1,4 +1,4 @@
-# Zernio::SendInboxMessageRequestInteractiveActionOneOf6SectionsInnerProductItemsInner
+# Zernio::SendInboxMessageRequestInteractiveActionOneOf7SectionsInnerProductItemsInner
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf6SectionsInnerProductItemsInner.new(
+instance = Zernio::SendInboxMessageRequestInteractiveActionOneOf7SectionsInnerProductItemsInner.new(
   product_retailer_id: null
 )
 ```

@@ -14,39 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Catalog-message action. `type` on the parent must be `catalog_message`. May be omitted entirely; it is defaulted to `{ \"name\": \"catalog_message\" }`. Requires a Meta catalog connected to the WhatsApp Business Account in Commerce Manager. 
+  # Multi-product action. `type` on the parent must be `product_list`. Requires a Meta catalog connected to the WhatsApp Business Account in Commerce Manager. 
   class SendInboxMessageRequestInteractiveActionOneOf7 < ApiModelBase
-    attr_accessor :name
+    # Meta catalog ID connected to the WhatsApp Business Account.
+    attr_accessor :catalog_id
 
-    attr_accessor :parameters
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # 1-10 sections. Total products across all sections cannot exceed 30.
+    attr_accessor :sections
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'parameters' => :'parameters'
+        :'catalog_id' => :'catalog_id',
+        :'sections' => :'sections'
       }
     end
 
@@ -63,8 +43,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'parameters' => :'SendInboxMessageRequestInteractiveActionOneOf7Parameters'
+        :'catalog_id' => :'String',
+        :'sections' => :'Array<SendInboxMessageRequestInteractiveActionOneOf7SectionsInner>'
       }
     end
 
@@ -90,14 +70,18 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'catalog_id')
+        self.catalog_id = attributes[:'catalog_id']
       else
-        self.name = nil
+        self.catalog_id = nil
       end
 
-      if attributes.key?(:'parameters')
-        self.parameters = attributes[:'parameters']
+      if attributes.key?(:'sections')
+        if (value = attributes[:'sections']).is_a?(Array)
+          self.sections = value
+        end
+      else
+        self.sections = nil
       end
     end
 
@@ -106,8 +90,20 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      if @catalog_id.nil?
+        invalid_properties.push('invalid value for "catalog_id", catalog_id cannot be nil.')
+      end
+
+      if @sections.nil?
+        invalid_properties.push('invalid value for "sections", sections cannot be nil.')
+      end
+
+      if @sections.length > 10
+        invalid_properties.push('invalid value for "sections", number of items must be less than or equal to 10.')
+      end
+
+      if @sections.length < 1
+        invalid_properties.push('invalid value for "sections", number of items must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -117,20 +113,39 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @name.nil?
-      name_validator = EnumAttributeValidator.new('String', ["catalog_message"])
-      return false unless name_validator.valid?(@name)
+      return false if @catalog_id.nil?
+      return false if @sections.nil?
+      return false if @sections.length > 10
+      return false if @sections.length < 1
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] name Object to be assigned
-    def name=(name)
-      validator = EnumAttributeValidator.new('String', ["catalog_message"])
-      unless validator.valid?(name)
-        fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] catalog_id Value to be assigned
+    def catalog_id=(catalog_id)
+      if catalog_id.nil?
+        fail ArgumentError, 'catalog_id cannot be nil'
       end
-      @name = name
+
+      @catalog_id = catalog_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] sections Value to be assigned
+    def sections=(sections)
+      if sections.nil?
+        fail ArgumentError, 'sections cannot be nil'
+      end
+
+      if sections.length > 10
+        fail ArgumentError, 'invalid value for "sections", number of items must be less than or equal to 10.'
+      end
+
+      if sections.length < 1
+        fail ArgumentError, 'invalid value for "sections", number of items must be greater than or equal to 1.'
+      end
+
+      @sections = sections
     end
 
     # Checks equality by comparing each attribute.
@@ -138,8 +153,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          parameters == o.parameters
+          catalog_id == o.catalog_id &&
+          sections == o.sections
     end
 
     # @see the `==` method
@@ -151,7 +166,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, parameters].hash
+      [catalog_id, sections].hash
     end
 
     # Builds the object from hash

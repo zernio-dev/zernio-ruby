@@ -14,14 +14,30 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SendInboxMessageRequestInteractiveActionOneOf7Parameters < ApiModelBase
-    # Optional product whose image is used as the message thumbnail. Falls back to the first catalog item when omitted.
-    attr_accessor :thumbnail_product_retailer_id
+  class SendInboxMessageRequestInteractiveActionOneOf9CardsInner < ApiModelBase
+    # Card position. Auto-filled sequentially when omitted.
+    attr_accessor :card_index
+
+    # `product` for a product card; media cards use `cta_url` or a quick-reply type.
+    attr_accessor :type
+
+    # Media cards only, required. Carries the card's image or video.
+    attr_accessor :header
+
+    # Optional card body text.
+    attr_accessor :body
+
+    # Product cards: `{ catalog_id, product_retailer_id }` (required). Media cards: the card's button action (e.g. `cta_url` with `parameters.display_text` and `parameters.url`).
+    attr_accessor :action
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'thumbnail_product_retailer_id' => :'thumbnail_product_retailer_id'
+        :'card_index' => :'card_index',
+        :'type' => :'type',
+        :'header' => :'header',
+        :'body' => :'body',
+        :'action' => :'action'
       }
     end
 
@@ -38,7 +54,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'thumbnail_product_retailer_id' => :'String'
+        :'card_index' => :'Integer',
+        :'type' => :'String',
+        :'header' => :'Object',
+        :'body' => :'Object',
+        :'action' => :'Object'
       }
     end
 
@@ -52,20 +72,36 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestInteractiveActionOneOf7Parameters` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestInteractiveActionOneOf9CardsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestInteractiveActionOneOf7Parameters`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestInteractiveActionOneOf9CardsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'thumbnail_product_retailer_id')
-        self.thumbnail_product_retailer_id = attributes[:'thumbnail_product_retailer_id']
+      if attributes.key?(:'card_index')
+        self.card_index = attributes[:'card_index']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'header')
+        self.header = attributes[:'header']
+      end
+
+      if attributes.key?(:'body')
+        self.body = attributes[:'body']
+      end
+
+      if attributes.key?(:'action')
+        self.action = attributes[:'action']
       end
     end
 
@@ -74,6 +110,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@card_index.nil? && @card_index > 9
+        invalid_properties.push('invalid value for "card_index", must be smaller than or equal to 9.')
+      end
+
+      if !@card_index.nil? && @card_index < 0
+        invalid_properties.push('invalid value for "card_index", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
@@ -81,7 +125,27 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@card_index.nil? && @card_index > 9
+      return false if !@card_index.nil? && @card_index < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] card_index Value to be assigned
+    def card_index=(card_index)
+      if card_index.nil?
+        fail ArgumentError, 'card_index cannot be nil'
+      end
+
+      if card_index > 9
+        fail ArgumentError, 'invalid value for "card_index", must be smaller than or equal to 9.'
+      end
+
+      if card_index < 0
+        fail ArgumentError, 'invalid value for "card_index", must be greater than or equal to 0.'
+      end
+
+      @card_index = card_index
     end
 
     # Checks equality by comparing each attribute.
@@ -89,7 +153,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          thumbnail_product_retailer_id == o.thumbnail_product_retailer_id
+          card_index == o.card_index &&
+          type == o.type &&
+          header == o.header &&
+          body == o.body &&
+          action == o.action
     end
 
     # @see the `==` method
@@ -101,7 +169,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thumbnail_product_retailer_id].hash
+      [card_index, type, header, body, action].hash
     end
 
     # Builds the object from hash
