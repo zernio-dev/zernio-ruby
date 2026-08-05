@@ -34,6 +34,12 @@ module Zernio
     # Minimum ROAS as a decimal multiplier (2.0 = 2.0x). Required when bidStrategy is LOWEST_COST_WITH_MIN_ROAS. Sent to Meta as `bid_constraints.roas_average_floor` × 10000. Not supported on OpenAI (422). 
     attr_accessor :roas_average_floor
 
+    # Meta only (other platforms return 501). Value rule set to attach to this ad set, from `/v1/ads/value-rule-sets`. Sending a different id replaces the current association. To DETACH, send `valueRulesApplied: false` and omit this field. 
+    attr_accessor :value_rule_set_id
+
+    # Meta only (other platforms return 501). `false` DETACHES the ad set's value rule set and must be sent WITHOUT `valueRuleSetId`; the combination returns 400. `true` is optional when attaching, since attachment is driven by `valueRuleSetId`, and requires it to be present. 
+    attr_accessor :value_rules_applied
+
     attr_accessor :platform_specific_data
 
     class EnumAttributeValidator
@@ -68,6 +74,8 @@ module Zernio
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
+        :'value_rule_set_id' => :'valueRuleSetId',
+        :'value_rules_applied' => :'valueRulesApplied',
         :'platform_specific_data' => :'platformSpecificData'
       }
     end
@@ -92,6 +100,8 @@ module Zernio
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
+        :'value_rule_set_id' => :'String',
+        :'value_rules_applied' => :'Boolean',
         :'platform_specific_data' => :'UpdateAdSetRequestPlatformSpecificData'
       }
     end
@@ -148,6 +158,14 @@ module Zernio
         self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
+      if attributes.key?(:'value_rule_set_id')
+        self.value_rule_set_id = attributes[:'value_rule_set_id']
+      end
+
+      if attributes.key?(:'value_rules_applied')
+        self.value_rules_applied = attributes[:'value_rules_applied']
+      end
+
       if attributes.key?(:'platform_specific_data')
         self.platform_specific_data = attributes[:'platform_specific_data']
       end
@@ -166,6 +184,11 @@ module Zernio
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
       end
 
+      pattern = Regexp.new(/^\d+$/)
+      if !@value_rule_set_id.nil? && @value_rule_set_id !~ pattern
+        invalid_properties.push("invalid value for \"value_rule_set_id\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -179,6 +202,7 @@ module Zernio
       status_validator = EnumAttributeValidator.new('String', ["active", "paused"])
       return false unless status_validator.valid?(@status)
       return false if !@name.nil? && @name.to_s.length > 255
+      return false if !@value_rule_set_id.nil? && @value_rule_set_id !~ Regexp.new(/^\d+$/)
       true
     end
 
@@ -216,6 +240,21 @@ module Zernio
       @name = name
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] value_rule_set_id Value to be assigned
+    def value_rule_set_id=(value_rule_set_id)
+      if value_rule_set_id.nil?
+        fail ArgumentError, 'value_rule_set_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if value_rule_set_id !~ pattern
+        fail ArgumentError, "invalid value for \"value_rule_set_id\", must conform to the pattern #{pattern}."
+      end
+
+      @value_rule_set_id = value_rule_set_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -228,6 +267,8 @@ module Zernio
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
+          value_rule_set_id == o.value_rule_set_id &&
+          value_rules_applied == o.value_rules_applied &&
           platform_specific_data == o.platform_specific_data
     end
 
@@ -240,7 +281,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, budget, status, name, bid_strategy, bid_amount, roas_average_floor, platform_specific_data].hash
+      [platform, budget, status, name, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data].hash
     end
 
     # Builds the object from hash

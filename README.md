@@ -92,18 +92,23 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**move_account_to_profile**](docs/AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
 *Zernio::AccountsApi* | [**update_slack_settings**](docs/AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
+*Zernio::AdAccountsApi* | [**create_value_rule_set**](docs/AdAccountsApi.md#create_value_rule_set) | **POST** /v1/ads/value-rule-sets | Create a value rule set
+*Zernio::AdAccountsApi* | [**delete_value_rule_set**](docs/AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set
 *Zernio::AdAccountsApi* | [**get_ad_account_finance**](docs/AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances
 *Zernio::AdAccountsApi* | [**get_ad_comments**](docs/AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
 *Zernio::AdAccountsApi* | [**get_ads_activity_log**](docs/AdAccountsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log
 *Zernio::AdAccountsApi* | [**get_dsa_defaults**](docs/AdAccountsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults
 *Zernio::AdAccountsApi* | [**get_dsa_recommendations**](docs/AdAccountsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions
+*Zernio::AdAccountsApi* | [**get_value_rule_set**](docs/AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set
 *Zernio::AdAccountsApi* | [**list_ad_accounts**](docs/AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdAccountsApi* | [**list_ad_labels**](docs/AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels
 *Zernio::AdAccountsApi* | [**list_ad_studies**](docs/AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies
 *Zernio::AdAccountsApi* | [**list_ads_business_centers**](docs/AdAccountsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
 *Zernio::AdAccountsApi* | [**list_high_demand_periods**](docs/AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules
 *Zernio::AdAccountsApi* | [**list_meta_businesses**](docs/AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list
+*Zernio::AdAccountsApi* | [**list_value_rule_sets**](docs/AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets
 *Zernio::AdAccountsApi* | [**update_ad_account**](docs/AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
+*Zernio::AdAccountsApi* | [**update_value_rule_set**](docs/AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set
 *Zernio::AdAudiencesApi* | [**add_users_to_ad_audience**](docs/AdAudiencesApi.md#add_users_to_ad_audience) | **POST** /v1/ads/audiences/{audienceId}/users | Add users to audience
 *Zernio::AdAudiencesApi* | [**create_ad_audience**](docs/AdAudiencesApi.md#create_ad_audience) | **POST** /v1/ads/audiences | Create custom audience
 *Zernio::AdAudiencesApi* | [**delete_ad_audience**](docs/AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience
@@ -870,6 +875,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateTestLeadRequestFieldDataInner](docs/CreateTestLeadRequestFieldDataInner.md)
  - [Zernio::CreateTrackingTag201Response](docs/CreateTrackingTag201Response.md)
  - [Zernio::CreateTrackingTagRequest](docs/CreateTrackingTagRequest.md)
+ - [Zernio::CreateValueRuleSet201Response](docs/CreateValueRuleSet201Response.md)
+ - [Zernio::CreateValueRuleSetRequest](docs/CreateValueRuleSetRequest.md)
  - [Zernio::CreateVerificationRequest](docs/CreateVerificationRequest.md)
  - [Zernio::CreateVoiceCall200Response](docs/CreateVoiceCall200Response.md)
  - [Zernio::CreateVoiceCallRequest](docs/CreateVoiceCallRequest.md)
@@ -917,6 +924,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxReviewReply200Response](docs/DeleteInboxReviewReply200Response.md)
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
  - [Zernio::DeleteSmsSenderId200Response](docs/DeleteSmsSenderId200Response.md)
+ - [Zernio::DeleteValueRuleSet200Response](docs/DeleteValueRuleSet200Response.md)
  - [Zernio::DeleteWhatsappBusinessUsernameRequest](docs/DeleteWhatsappBusinessUsernameRequest.md)
  - [Zernio::DialVoiceWebCall200Response](docs/DialVoiceWebCall200Response.md)
  - [Zernio::DialVoiceWebCallRequest](docs/DialVoiceWebCallRequest.md)
@@ -1262,6 +1270,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetUsage200Response](docs/GetUsage200Response.md)
  - [Zernio::GetUser200Response](docs/GetUser200Response.md)
  - [Zernio::GetUser200ResponseUser](docs/GetUser200ResponseUser.md)
+ - [Zernio::GetValueRuleSet200Response](docs/GetValueRuleSet200Response.md)
  - [Zernio::GetVoiceCall200Response](docs/GetVoiceCall200Response.md)
  - [Zernio::GetVoiceCallEstimate200Response](docs/GetVoiceCallEstimate200Response.md)
  - [Zernio::GetVoiceCallEstimate200ResponseBreakdown](docs/GetVoiceCallEstimate200ResponseBreakdown.md)
@@ -1518,6 +1527,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListTrackingTags200Response](docs/ListTrackingTags200Response.md)
  - [Zernio::ListUsers200Response](docs/ListUsers200Response.md)
  - [Zernio::ListUsers200ResponseUsersInner](docs/ListUsers200ResponseUsersInner.md)
+ - [Zernio::ListValueRuleSets200Response](docs/ListValueRuleSets200Response.md)
+ - [Zernio::ListValueRuleSets200ResponsePaging](docs/ListValueRuleSets200ResponsePaging.md)
  - [Zernio::ListVoiceCalls200Response](docs/ListVoiceCalls200Response.md)
  - [Zernio::ListWhatsAppCalls200Response](docs/ListWhatsAppCalls200Response.md)
  - [Zernio::ListWhatsAppCalls200ResponseCallsInner](docs/ListWhatsAppCalls200ResponseCallsInner.md)
@@ -1972,6 +1983,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateSequenceRequestStepsInnerTemplate](docs/UpdateSequenceRequestStepsInnerTemplate.md)
  - [Zernio::UpdateSlackSettingsRequest](docs/UpdateSlackSettingsRequest.md)
  - [Zernio::UpdateTrackingTagRequest](docs/UpdateTrackingTagRequest.md)
+ - [Zernio::UpdateValueRuleSet200Response](docs/UpdateValueRuleSet200Response.md)
+ - [Zernio::UpdateValueRuleSetRequest](docs/UpdateValueRuleSetRequest.md)
  - [Zernio::UpdateWebhookSettings200Response](docs/UpdateWebhookSettings200Response.md)
  - [Zernio::UpdateWebhookSettingsRequest](docs/UpdateWebhookSettingsRequest.md)
  - [Zernio::UpdateWhatsAppBusinessProfileRequest](docs/UpdateWhatsAppBusinessProfileRequest.md)
@@ -2046,6 +2059,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ValidateSubreddit200ResponseOneOf](docs/ValidateSubreddit200ResponseOneOf.md)
  - [Zernio::ValidateSubreddit200ResponseOneOf1](docs/ValidateSubreddit200ResponseOneOf1.md)
  - [Zernio::ValidateSubreddit200ResponseOneOfSubreddit](docs/ValidateSubreddit200ResponseOneOfSubreddit.md)
+ - [Zernio::ValueRule](docs/ValueRule.md)
+ - [Zernio::ValueRuleCriterion](docs/ValueRuleCriterion.md)
+ - [Zernio::ValueRuleSet](docs/ValueRuleSet.md)
  - [Zernio::Verification](docs/Verification.md)
  - [Zernio::VerifySmsRegistrationOtp200Response](docs/VerifySmsRegistrationOtp200Response.md)
  - [Zernio::VerifySmsRegistrationOtpRequest](docs/VerifySmsRegistrationOtpRequest.md)

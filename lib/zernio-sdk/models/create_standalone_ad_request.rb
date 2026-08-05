@@ -222,6 +222,12 @@ module Zernio
     # Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sent to Meta as `bid_constraints.roas_average_floor` × 10000. 
     attr_accessor :roas_average_floor
 
+    # Meta only (facebook, instagram; other platforms return 400). Value rule set to attach to the new ad set, from `/v1/ads/value-rule-sets`. Attachment is driven by this id, so `valueRulesApplied` is optional alongside it.  Rejected with 400 in `adSetId` attach mode: that shape inherits the existing ad set's attachment, so the field would be silently ignored. Use `PUT /v1/ads/ad-sets/{adSetId}` there instead.  Ignored (stripped before the ad-set create) when `buyingType` is `RESERVED`: value rules only apply to auction ad sets on `LOWEST_COST_WITHOUT_CAP` or `COST_CAP`, and a Reach & Frequency reservation has no auction bid strategy.  Read back with `GET /v1/ads/ad-sets/{adSetId}?fields=value_rule_set_id`; the attachment is not mirrored onto Zernio's ad documents. 
+    attr_accessor :value_rule_set_id
+
+    # Meta only (facebook, instagram; other platforms return 400). Optional when attaching, and requires `valueRuleSetId`. `false` is REJECTED here with 400: a newly created ad set has nothing to detach, so detaching lives on `PUT /v1/ads/ad-sets/{adSetId}`. 
+    attr_accessor :value_rules_applied
+
     attr_accessor :platform_specific_data
 
     # Legal entity that benefits from the ad. Required when targeting EU users (EU DSA, Article 26). Optional if the ad account has a default beneficiary: set it once via `PATCH /v1/ads/accounts` or in Meta Ads Manager, and Meta fills it in whenever the field is omitted. 
@@ -335,6 +341,8 @@ module Zernio
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
+        :'value_rule_set_id' => :'valueRuleSetId',
+        :'value_rules_applied' => :'valueRulesApplied',
         :'platform_specific_data' => :'platformSpecificData',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor',
@@ -430,6 +438,8 @@ module Zernio
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
+        :'value_rule_set_id' => :'String',
+        :'value_rules_applied' => :'Boolean',
         :'platform_specific_data' => :'LinkedInAdsPlatformData',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String',
@@ -805,6 +815,14 @@ module Zernio
         self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
+      if attributes.key?(:'value_rule_set_id')
+        self.value_rule_set_id = attributes[:'value_rule_set_id']
+      end
+
+      if attributes.key?(:'value_rules_applied')
+        self.value_rules_applied = attributes[:'value_rules_applied']
+      end
+
       if attributes.key?(:'platform_specific_data')
         self.platform_specific_data = attributes[:'platform_specific_data']
       end
@@ -919,6 +937,11 @@ module Zernio
         invalid_properties.push('invalid value for "attribution_spec", number of items must be greater than or equal to 1.')
       end
 
+      pattern = Regexp.new(/^\d+$/)
+      if !@value_rule_set_id.nil? && @value_rule_set_id !~ pattern
+        invalid_properties.push("invalid value for \"value_rule_set_id\", must conform to the pattern #{pattern}.")
+      end
+
       if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
         invalid_properties.push('invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.')
       end
@@ -975,6 +998,7 @@ module Zernio
       return false if !@attribution_spec.nil? && @attribution_spec.length < 1
       gender_validator = EnumAttributeValidator.new('String', ["all", "male", "female"])
       return false unless gender_validator.valid?(@gender)
+      return false if !@value_rule_set_id.nil? && @value_rule_set_id !~ Regexp.new(/^\d+$/)
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       identity_type_validator = EnumAttributeValidator.new('String', ["TT_USER", "CUSTOMIZED_USER"])
@@ -1305,6 +1329,21 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] value_rule_set_id Value to be assigned
+    def value_rule_set_id=(value_rule_set_id)
+      if value_rule_set_id.nil?
+        fail ArgumentError, 'value_rule_set_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if value_rule_set_id !~ pattern
+        fail ArgumentError, "invalid value for \"value_rule_set_id\", must conform to the pattern #{pattern}."
+      end
+
+      @value_rule_set_id = value_rule_set_id
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] dsa_beneficiary Value to be assigned
     def dsa_beneficiary=(dsa_beneficiary)
       if dsa_beneficiary.nil?
@@ -1420,6 +1459,8 @@ module Zernio
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
+          value_rule_set_id == o.value_rule_set_id &&
+          value_rules_applied == o.value_rules_applied &&
           platform_specific_data == o.platform_specific_data &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor &&
@@ -1437,7 +1478,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

@@ -4,18 +4,163 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**create_value_rule_set**](AdAccountsApi.md#create_value_rule_set) | **POST** /v1/ads/value-rule-sets | Create a value rule set |
+| [**delete_value_rule_set**](AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set |
 | [**get_ad_account_finance**](AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances |
 | [**get_ad_comments**](AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad |
 | [**get_ads_activity_log**](AdAccountsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log |
 | [**get_dsa_defaults**](AdAccountsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults |
 | [**get_dsa_recommendations**](AdAccountsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions |
+| [**get_value_rule_set**](AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set |
 | [**list_ad_accounts**](AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_labels**](AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels |
 | [**list_ad_studies**](AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies |
 | [**list_ads_business_centers**](AdAccountsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers |
 | [**list_high_demand_periods**](AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules |
 | [**list_meta_businesses**](AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list |
+| [**list_value_rule_sets**](AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets |
 | [**update_ad_account**](AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings |
+| [**update_value_rule_set**](AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set |
+
+
+## create_value_rule_set
+
+> <CreateValueRuleSet201Response> create_value_rule_set(create_value_rule_set_request)
+
+Create a value rule set
+
+Creates a value rule set on the ad account (Meta's `POST /act_X/value_rule_set`). Attach the returned id to an ad set with `valueRuleSetId` on `POST /v1/ads/create` or `PUT /v1/ads/ad-sets/{adSetId}`.  **Rule order is semantic**: rules are evaluated in array order and only the first matching rule adjusts the bid for an overlapping audience.  `adjustValue` is an unsigned magnitude in percent; the direction lives in `adjustSign`. `INCREASE` accepts 1-1000, `DECREASE` accepts 1-90. There is no signed field and 0 is out of range.  `criteriaValueTypes` is positionally paired with `criteriaValues` (same length, same order). Every type is the literal `\"NONE\"` except on `LOCATION`, which uses `LOCATION_COUNTRY` / `LOCATION_REGION` / `LOCATION_CITY` / `LOCATION_COMSCORE_MARKET` and may mix them within one criterion. Location values are Targeting-Search keys: a two-letter country code for `LOCATION_COUNTRY`, a numeric key for the rest.  `LOCATION_DMA` was replaced by `LOCATION_COMSCORE_MARKET` on 2026-06-22 and rules using DMAs are no longer active, so this API rejects it.  `AUDIENCE_LABEL` values (e.g. `HIGH_VALUE`) are applied to a Custom Audience in Ads Manager. There is no API to provision them, so label strings are passed through unvalidated and a typo produces a rule that never fires.  Ads Manager turns a rule set read-only (this API stays editable) when a rule uses more than 2 criteria, a custom age range, or the placements `FB_MARKETPLACE`, `FB_SEARCH`, `FB_VIDEO` or `IG_EXPLORE`.  Limits: 6 rule sets per ad account, 10 rules per set, 4 criteria per rule. The per-account cap is enforced by Meta, not here.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+create_value_rule_set_request = Zernio::CreateValueRuleSetRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', rules: [Zernio::ValueRule.new({name: 'name_example', adjust_sign: 'INCREASE', adjust_value: 37, criteria: [Zernio::ValueRuleCriterion.new({criteria_type: 'AGE', operator: 'CONTAINS', criteria_values: ['criteria_values_example'], criteria_value_types: ['criteria_value_types_example']})]})]}) # CreateValueRuleSetRequest | 
+
+begin
+  # Create a value rule set
+  result = api_instance.create_value_rule_set(create_value_rule_set_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->create_value_rule_set: #{e}"
+end
+```
+
+#### Using the create_value_rule_set_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateValueRuleSet201Response>, Integer, Hash)> create_value_rule_set_with_http_info(create_value_rule_set_request)
+
+```ruby
+begin
+  # Create a value rule set
+  data, status_code, headers = api_instance.create_value_rule_set_with_http_info(create_value_rule_set_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateValueRuleSet201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->create_value_rule_set_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_value_rule_set_request** | [**CreateValueRuleSetRequest**](CreateValueRuleSetRequest.md) |  |  |
+
+### Return type
+
+[**CreateValueRuleSet201Response**](CreateValueRuleSet201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## delete_value_rule_set
+
+> <DeleteValueRuleSet200Response> delete_value_rule_set(value_rule_set_id, account_id)
+
+Delete a value rule set
+
+Deletes the rule set (Meta's `POST /{value-rule-set-id}/delete_rule_set`, a custom action edge rather than an HTTP DELETE on its side). Ad sets pointing at it are not modified here; detach them first with `valueRulesApplied: false` on `PUT /v1/ads/ad-sets/{adSetId}`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+value_rule_set_id = 'value_rule_set_id_example' # String | Platform value rule set id.
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+
+begin
+  # Delete a value rule set
+  result = api_instance.delete_value_rule_set(value_rule_set_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->delete_value_rule_set: #{e}"
+end
+```
+
+#### Using the delete_value_rule_set_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteValueRuleSet200Response>, Integer, Hash)> delete_value_rule_set_with_http_info(value_rule_set_id, account_id)
+
+```ruby
+begin
+  # Delete a value rule set
+  data, status_code, headers = api_instance.delete_value_rule_set_with_http_info(value_rule_set_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteValueRuleSet200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->delete_value_rule_set_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **value_rule_set_id** | **String** | Platform value rule set id. |  |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+
+### Return type
+
+[**DeleteValueRuleSet200Response**](DeleteValueRuleSet200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## get_ad_account_finance
@@ -380,6 +525,77 @@ end
 ### Return type
 
 [**GetDsaRecommendations200Response**](GetDsaRecommendations200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_value_rule_set
+
+> <GetValueRuleSet200Response> get_value_rule_set(value_rule_set_id, account_id)
+
+Read a value rule set
+
+Reads one value rule set including every nested rule id and criterion id. This is step one of any edit: `PUT` is a full replace, so you need the ids before you can keep the objects you are not changing.  Meta's own read returns `GENDER` values lowercase (`\"male\"`) while writes require `\"MALE\"`. Values are passed through untouched, so never case-compare a stored rule against a fetched one.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+value_rule_set_id = 'value_rule_set_id_example' # String | Platform value rule set id.
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+
+begin
+  # Read a value rule set
+  result = api_instance.get_value_rule_set(value_rule_set_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_value_rule_set: #{e}"
+end
+```
+
+#### Using the get_value_rule_set_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetValueRuleSet200Response>, Integer, Hash)> get_value_rule_set_with_http_info(value_rule_set_id, account_id)
+
+```ruby
+begin
+  # Read a value rule set
+  data, status_code, headers = api_instance.get_value_rule_set_with_http_info(value_rule_set_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetValueRuleSet200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->get_value_rule_set_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **value_rule_set_id** | **String** | Platform value rule set id. |  |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+
+### Return type
+
+[**GetValueRuleSet200Response**](GetValueRuleSet200Response.md)
 
 ### Authorization
 
@@ -845,6 +1061,83 @@ end
 - **Accept**: application/json
 
 
+## list_value_rule_sets
+
+> <ListValueRuleSets200Response> list_value_rule_sets(account_id, ad_account_id, opts)
+
+List value rule sets
+
+Lists the ad account's value rule sets (Meta's `/act_X/value_rule_set`). A value rule set adjusts the auction bid up or down for audience segments you value differently; attach one to an ad set with `valueRuleSetId` on `POST /v1/ads/create` or `PUT /v1/ads/ad-sets/{adSetId}`.  Rows are returned in the same camelCase shape the `PUT` body takes, ids included, so a set round-trips 1:1: **the update is a full replace, not a patch**, so you GET, mutate and send the whole thing back.  Limits: 6 rule sets per ad account, 10 rules per set, 4 criteria per rule.  **Rule order is semantic.** Rules are evaluated in array order and only the FIRST matching rule adjusts the bid for an overlapping audience. The order you send is the order that is stored and returned.  Eligibility: value rule sets apply only to ad sets on the `LOWEST_COST_WITHOUT_CAP` (auto-bid) or `COST_CAP` bid strategies. Meta rejects the rest server-side.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page. Meta does not document paging on this edge; `after` comes back null when it omits cursors.
+}
+
+begin
+  # List value rule sets
+  result = api_instance.list_value_rule_sets(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_value_rule_sets: #{e}"
+end
+```
+
+#### Using the list_value_rule_sets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListValueRuleSets200Response>, Integer, Hash)> list_value_rule_sets_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # List value rule sets
+  data, status_code, headers = api_instance.list_value_rule_sets_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListValueRuleSets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_value_rule_sets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. Meta does not document paging on this edge; &#x60;after&#x60; comes back null when it omits cursors. | [optional] |
+
+### Return type
+
+[**ListValueRuleSets200Response**](ListValueRuleSets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## update_ad_account
 
 > <UpdateAdAccount200Response> update_ad_account(update_ad_account_request)
@@ -903,6 +1196,77 @@ end
 ### Return type
 
 [**UpdateAdAccount200Response**](UpdateAdAccount200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_value_rule_set
+
+> <UpdateValueRuleSet200Response> update_value_rule_set(value_rule_set_id, update_value_rule_set_request)
+
+Replace a value rule set
+
+**THIS IS A FULL REPLACE, NOT A PATCH.** Meta's update is declarative: the body you send becomes the rule set.  - `GET /v1/ads/value-rule-sets/{valueRuleSetId}` FIRST. - Keep a rule or criterion by echoing its `id`. - Create one by including the object WITHOUT an `id`. - Delete one by OMITTING it from the array. There is no warning and no undo.  `name` and `rules` are both required for exactly this reason: a partial body would silently destroy every rule left out.  **Rule order is semantic**: the array order you send is the evaluation order, and only the first matching rule adjusts the bid for an overlapping audience.  Existing rule sets created elsewhere may contain `LOCATION_DMA` criteria. Those went inert on 2026-06-22 and are rejected here; migrate them to `LOCATION_COMSCORE_MARKET`.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+value_rule_set_id = 'value_rule_set_id_example' # String | Platform value rule set id.
+update_value_rule_set_request = Zernio::UpdateValueRuleSetRequest.new({account_id: 'account_id_example', name: 'name_example', rules: [Zernio::ValueRule.new({name: 'name_example', adjust_sign: 'INCREASE', adjust_value: 37, criteria: [Zernio::ValueRuleCriterion.new({criteria_type: 'AGE', operator: 'CONTAINS', criteria_values: ['criteria_values_example'], criteria_value_types: ['criteria_value_types_example']})]})]}) # UpdateValueRuleSetRequest | 
+
+begin
+  # Replace a value rule set
+  result = api_instance.update_value_rule_set(value_rule_set_id, update_value_rule_set_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_value_rule_set: #{e}"
+end
+```
+
+#### Using the update_value_rule_set_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateValueRuleSet200Response>, Integer, Hash)> update_value_rule_set_with_http_info(value_rule_set_id, update_value_rule_set_request)
+
+```ruby
+begin
+  # Replace a value rule set
+  data, status_code, headers = api_instance.update_value_rule_set_with_http_info(value_rule_set_id, update_value_rule_set_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateValueRuleSet200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_value_rule_set_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **value_rule_set_id** | **String** | Platform value rule set id. |  |
+| **update_value_rule_set_request** | [**UpdateValueRuleSetRequest**](UpdateValueRuleSetRequest.md) |  |  |
+
+### Return type
+
+[**UpdateValueRuleSet200Response**](UpdateValueRuleSet200Response.md)
 
 ### Authorization
 

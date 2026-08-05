@@ -291,6 +291,8 @@ docs/CreateTestLeadRequest.md
 docs/CreateTestLeadRequestFieldDataInner.md
 docs/CreateTrackingTag201Response.md
 docs/CreateTrackingTagRequest.md
+docs/CreateValueRuleSet201Response.md
+docs/CreateValueRuleSetRequest.md
 docs/CreateVerificationRequest.md
 docs/CreateVoiceCall200Response.md
 docs/CreateVoiceCallRequest.md
@@ -339,6 +341,7 @@ docs/DeleteInboxComment200Response.md
 docs/DeleteInboxReviewReply200Response.md
 docs/DeleteInboxReviewReplyRequest.md
 docs/DeleteSmsSenderId200Response.md
+docs/DeleteValueRuleSet200Response.md
 docs/DeleteWhatsappBusinessUsernameRequest.md
 docs/DialVoiceWebCall200Response.md
 docs/DialVoiceWebCallRequest.md
@@ -693,6 +696,7 @@ docs/GetTweet200ResponseTweet.md
 docs/GetUsage200Response.md
 docs/GetUser200Response.md
 docs/GetUser200ResponseUser.md
+docs/GetValueRuleSet200Response.md
 docs/GetVoiceCall200Response.md
 docs/GetVoiceCallEstimate200Response.md
 docs/GetVoiceCallEstimate200ResponseBreakdown.md
@@ -954,6 +958,8 @@ docs/ListTrackingTagSharedAccounts200Response.md
 docs/ListTrackingTags200Response.md
 docs/ListUsers200Response.md
 docs/ListUsers200ResponseUsersInner.md
+docs/ListValueRuleSets200Response.md
+docs/ListValueRuleSets200ResponsePaging.md
 docs/ListVoiceCalls200Response.md
 docs/ListWhatsAppCalls200Response.md
 docs/ListWhatsAppCalls200ResponseCallsInner.md
@@ -1424,6 +1430,8 @@ docs/UpdateSequenceRequestStepsInner.md
 docs/UpdateSequenceRequestStepsInnerTemplate.md
 docs/UpdateSlackSettingsRequest.md
 docs/UpdateTrackingTagRequest.md
+docs/UpdateValueRuleSet200Response.md
+docs/UpdateValueRuleSetRequest.md
 docs/UpdateWebhookSettings200Response.md
 docs/UpdateWebhookSettingsRequest.md
 docs/UpdateWhatsAppBusinessProfileRequest.md
@@ -1501,6 +1509,9 @@ docs/ValidateSubreddit200Response.md
 docs/ValidateSubreddit200ResponseOneOf.md
 docs/ValidateSubreddit200ResponseOneOf1.md
 docs/ValidateSubreddit200ResponseOneOfSubreddit.md
+docs/ValueRule.md
+docs/ValueRuleCriterion.md
+docs/ValueRuleSet.md
 docs/Verification.md
 docs/VerifyApi.md
 docs/VerifySmsRegistrationOtp200Response.md
@@ -1962,6 +1973,8 @@ lib/zernio-sdk/models/create_test_lead_request.rb
 lib/zernio-sdk/models/create_test_lead_request_field_data_inner.rb
 lib/zernio-sdk/models/create_tracking_tag201_response.rb
 lib/zernio-sdk/models/create_tracking_tag_request.rb
+lib/zernio-sdk/models/create_value_rule_set201_response.rb
+lib/zernio-sdk/models/create_value_rule_set_request.rb
 lib/zernio-sdk/models/create_verification_request.rb
 lib/zernio-sdk/models/create_voice_call200_response.rb
 lib/zernio-sdk/models/create_voice_call_request.rb
@@ -2009,6 +2022,7 @@ lib/zernio-sdk/models/delete_inbox_comment200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
 lib/zernio-sdk/models/delete_sms_sender_id200_response.rb
+lib/zernio-sdk/models/delete_value_rule_set200_response.rb
 lib/zernio-sdk/models/delete_whatsapp_business_username_request.rb
 lib/zernio-sdk/models/dial_voice_web_call200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call_request.rb
@@ -2354,6 +2368,7 @@ lib/zernio-sdk/models/get_tweet200_response_tweet.rb
 lib/zernio-sdk/models/get_usage200_response.rb
 lib/zernio-sdk/models/get_user200_response.rb
 lib/zernio-sdk/models/get_user200_response_user.rb
+lib/zernio-sdk/models/get_value_rule_set200_response.rb
 lib/zernio-sdk/models/get_voice_call200_response.rb
 lib/zernio-sdk/models/get_voice_call_estimate200_response.rb
 lib/zernio-sdk/models/get_voice_call_estimate200_response_breakdown.rb
@@ -2610,6 +2625,8 @@ lib/zernio-sdk/models/list_tracking_tag_shared_accounts200_response.rb
 lib/zernio-sdk/models/list_tracking_tags200_response.rb
 lib/zernio-sdk/models/list_users200_response.rb
 lib/zernio-sdk/models/list_users200_response_users_inner.rb
+lib/zernio-sdk/models/list_value_rule_sets200_response.rb
+lib/zernio-sdk/models/list_value_rule_sets200_response_paging.rb
 lib/zernio-sdk/models/list_voice_calls200_response.rb
 lib/zernio-sdk/models/list_whats_app_calls200_response.rb
 lib/zernio-sdk/models/list_whats_app_calls200_response_calls_inner.rb
@@ -3064,6 +3081,8 @@ lib/zernio-sdk/models/update_sequence_request_steps_inner.rb
 lib/zernio-sdk/models/update_sequence_request_steps_inner_template.rb
 lib/zernio-sdk/models/update_slack_settings_request.rb
 lib/zernio-sdk/models/update_tracking_tag_request.rb
+lib/zernio-sdk/models/update_value_rule_set200_response.rb
+lib/zernio-sdk/models/update_value_rule_set_request.rb
 lib/zernio-sdk/models/update_webhook_settings200_response.rb
 lib/zernio-sdk/models/update_webhook_settings_request.rb
 lib/zernio-sdk/models/update_whats_app_business_profile_request.rb
@@ -3138,6 +3157,9 @@ lib/zernio-sdk/models/validate_subreddit200_response.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of1.rb
 lib/zernio-sdk/models/validate_subreddit200_response_one_of_subreddit.rb
+lib/zernio-sdk/models/value_rule.rb
+lib/zernio-sdk/models/value_rule_criterion.rb
+lib/zernio-sdk/models/value_rule_set.rb
 lib/zernio-sdk/models/verification.rb
 lib/zernio-sdk/models/verify_sms_registration_otp200_response.rb
 lib/zernio-sdk/models/verify_sms_registration_otp_request.rb
@@ -3582,6 +3604,8 @@ spec/models/create_test_lead_request_field_data_inner_spec.rb
 spec/models/create_test_lead_request_spec.rb
 spec/models/create_tracking_tag201_response_spec.rb
 spec/models/create_tracking_tag_request_spec.rb
+spec/models/create_value_rule_set201_response_spec.rb
+spec/models/create_value_rule_set_request_spec.rb
 spec/models/create_verification_request_spec.rb
 spec/models/create_voice_call200_response_spec.rb
 spec/models/create_voice_call_request_spec.rb
@@ -3629,6 +3653,7 @@ spec/models/delete_inbox_comment200_response_spec.rb
 spec/models/delete_inbox_review_reply200_response_spec.rb
 spec/models/delete_inbox_review_reply_request_spec.rb
 spec/models/delete_sms_sender_id200_response_spec.rb
+spec/models/delete_value_rule_set200_response_spec.rb
 spec/models/delete_whatsapp_business_username_request_spec.rb
 spec/models/dial_voice_web_call200_response_spec.rb
 spec/models/dial_voice_web_call_request_spec.rb
@@ -3974,6 +3999,7 @@ spec/models/get_tweet200_response_tweet_spec.rb
 spec/models/get_usage200_response_spec.rb
 spec/models/get_user200_response_spec.rb
 spec/models/get_user200_response_user_spec.rb
+spec/models/get_value_rule_set200_response_spec.rb
 spec/models/get_voice_call200_response_spec.rb
 spec/models/get_voice_call_estimate200_response_breakdown_spec.rb
 spec/models/get_voice_call_estimate200_response_spec.rb
@@ -4230,6 +4256,8 @@ spec/models/list_tracking_tag_shared_accounts200_response_spec.rb
 spec/models/list_tracking_tags200_response_spec.rb
 spec/models/list_users200_response_spec.rb
 spec/models/list_users200_response_users_inner_spec.rb
+spec/models/list_value_rule_sets200_response_paging_spec.rb
+spec/models/list_value_rule_sets200_response_spec.rb
 spec/models/list_voice_calls200_response_spec.rb
 spec/models/list_whats_app_calls200_response_calls_inner_billing_spec.rb
 spec/models/list_whats_app_calls200_response_calls_inner_spec.rb
@@ -4684,6 +4712,8 @@ spec/models/update_sequence_request_steps_inner_spec.rb
 spec/models/update_sequence_request_steps_inner_template_spec.rb
 spec/models/update_slack_settings_request_spec.rb
 spec/models/update_tracking_tag_request_spec.rb
+spec/models/update_value_rule_set200_response_spec.rb
+spec/models/update_value_rule_set_request_spec.rb
 spec/models/update_webhook_settings200_response_spec.rb
 spec/models/update_webhook_settings_request_spec.rb
 spec/models/update_whats_app_business_profile_request_spec.rb
@@ -4758,6 +4788,9 @@ spec/models/validate_subreddit200_response_one_of1_spec.rb
 spec/models/validate_subreddit200_response_one_of_spec.rb
 spec/models/validate_subreddit200_response_one_of_subreddit_spec.rb
 spec/models/validate_subreddit200_response_spec.rb
+spec/models/value_rule_criterion_spec.rb
+spec/models/value_rule_set_spec.rb
+spec/models/value_rule_spec.rb
 spec/models/verification_spec.rb
 spec/models/verify_sms_registration_otp200_response_spec.rb
 spec/models/verify_sms_registration_otp_request_spec.rb
