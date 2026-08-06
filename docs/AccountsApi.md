@@ -8,6 +8,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_account_health**](AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health |
 | [**get_all_accounts_health**](AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health |
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
+| [**get_instagram_follow_status**](AccountsApi.md#get_instagram_follow_status) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account |
 | [**get_slack_settings**](AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings |
 | [**get_tik_tok_creator_info**](AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info |
 | [**list_accounts**](AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts |
@@ -297,6 +298,81 @@ end
 ### Return type
 
 [**FollowerStatsResponse**](FollowerStatsResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_instagram_follow_status
+
+> <GetInstagramFollowStatus200Response> get_instagram_follow_status(account_id, user_id, opts)
+
+Check whether an Instagram user follows the account
+
+Resolves the follow relationship between an Instagram user and the connected account, plus their public profile counters.  `userId` is the Instagram-scoped id (IGSID) Meta gives you on a webhook: `sender.id` on `message.received`, `comment.author.id` on `comment.received`.  **Meta only answers for people who have MESSAGED the account.** Commenting grants no consent, so a commenter who has never DMed you is unresolvable - that is a platform rule, not a limitation of this endpoint. When it cannot be resolved the response is still `200` with `isFollower: null` and an `unavailableReason`, because \"unknown\" is a normal state to branch on:    * `consent_required` - the user has never messaged this account.   * `dm_access_disabled` - the account owner turned off Instagram Direct API access.   * `not_messageable` - the id is not a messaging-scoped id.   * `error` - a transient Graph API failure.  To gate a comment automation on this, use the automation's `audience` rules instead of calling this per comment - they run the same lookup only on comments that actually match a keyword, and can ask the commenter to confirm with one tap.  Answers are cached briefly per (account, user). Pass `refresh=true` right after asking someone to follow, so a follow from a moment ago is visible. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | Instagram account ID
+user_id = 'user_id_example' # String | Instagram-scoped user id (IGSID) from a webhook payload
+opts = {
+  refresh: true # Boolean | Bypass the cache and re-query Meta
+}
+
+begin
+  # Check whether an Instagram user follows the account
+  result = api_instance.get_instagram_follow_status(account_id, user_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_instagram_follow_status: #{e}"
+end
+```
+
+#### Using the get_instagram_follow_status_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetInstagramFollowStatus200Response>, Integer, Hash)> get_instagram_follow_status_with_http_info(account_id, user_id, opts)
+
+```ruby
+begin
+  # Check whether an Instagram user follows the account
+  data, status_code, headers = api_instance.get_instagram_follow_status_with_http_info(account_id, user_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetInstagramFollowStatus200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_instagram_follow_status_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Instagram account ID |  |
+| **user_id** | **String** | Instagram-scoped user id (IGSID) from a webhook payload |  |
+| **refresh** | **Boolean** | Bypass the cache and re-query Meta | [optional] |
+
+### Return type
+
+[**GetInstagramFollowStatus200Response**](GetInstagramFollowStatus200Response.md)
 
 ### Authorization
 

@@ -68,6 +68,10 @@ module Zernio
     # Optional tag applied to a contact when they click a tracked link (requires linkTracking). Lets you segment clickers for broadcasts/sequences.
     attr_accessor :click_tag
 
+    attr_accessor :audience
+
+    attr_accessor :follow_gate
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -110,7 +114,9 @@ module Zernio
         :'dm_message_variations' => :'dmMessageVariations',
         :'comment_reply_variations' => :'commentReplyVariations',
         :'link_tracking' => :'linkTracking',
-        :'click_tag' => :'clickTag'
+        :'click_tag' => :'clickTag',
+        :'audience' => :'audience',
+        :'follow_gate' => :'followGate'
       }
     end
 
@@ -144,7 +150,9 @@ module Zernio
         :'dm_message_variations' => :'Array<String>',
         :'comment_reply_variations' => :'Array<String>',
         :'link_tracking' => :'Boolean',
-        :'click_tag' => :'String'
+        :'click_tag' => :'String',
+        :'audience' => :'CommentAutomationAudience',
+        :'follow_gate' => :'CommentAutomationFollowGate'
       }
     end
 
@@ -264,6 +272,14 @@ module Zernio
 
       if attributes.key?(:'click_tag')
         self.click_tag = attributes[:'click_tag']
+      end
+
+      if attributes.key?(:'audience')
+        self.audience = attributes[:'audience']
+      end
+
+      if attributes.key?(:'follow_gate')
+        self.follow_gate = attributes[:'follow_gate']
       end
     end
 
@@ -445,7 +461,9 @@ module Zernio
           dm_message_variations == o.dm_message_variations &&
           comment_reply_variations == o.comment_reply_variations &&
           link_tracking == o.link_tracking &&
-          click_tag == o.click_tag
+          click_tag == o.click_tag &&
+          audience == o.audience &&
+          follow_gate == o.follow_gate
     end
 
     # @see the `==` method
@@ -457,7 +475,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag].hash
+      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, audience, follow_gate].hash
     end
 
     # Builds the object from hash

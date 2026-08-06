@@ -133,6 +133,8 @@ docs/CheckPhoneNumberPortability200ResponseResultsInner.md
 docs/CheckPhoneNumberPortabilityRequest.md
 docs/CheckVerification200Response.md
 docs/CheckVerificationRequest.md
+docs/CommentAutomationAudience.md
+docs/CommentAutomationFollowGate.md
 docs/CommentAutomationsApi.md
 docs/CommentsApi.md
 docs/CompleteGoogleBusinessVerificationRequest.md
@@ -607,6 +609,7 @@ docs/GetInboxVolume200ResponseSummary.md
 docs/GetInboxVolume200ResponseTimeseriesInner.md
 docs/GetInboxVolume400Response.md
 docs/GetInstagramAccountInsights404Response.md
+docs/GetInstagramFollowStatus200Response.md
 docs/GetInstagramPublishingLimit200Response.md
 docs/GetInstagramStoryInsights200Response.md
 docs/GetInstagramStoryInsights200ResponseData.md
@@ -1559,6 +1562,7 @@ docs/WebhookPayloadCommentComment.md
 docs/WebhookPayloadCommentCommentAd.md
 docs/WebhookPayloadCommentCommentAttachment.md
 docs/WebhookPayloadCommentCommentAuthor.md
+docs/WebhookPayloadCommentCommentAuthorInstagramProfile.md
 docs/WebhookPayloadCommentPost.md
 docs/WebhookPayloadConversationStarted.md
 docs/WebhookPayloadConversationStartedConversation.md
@@ -1832,6 +1836,8 @@ lib/zernio-sdk/models/check_phone_number_portability200_response_results_inner.r
 lib/zernio-sdk/models/check_phone_number_portability_request.rb
 lib/zernio-sdk/models/check_verification200_response.rb
 lib/zernio-sdk/models/check_verification_request.rb
+lib/zernio-sdk/models/comment_automation_audience.rb
+lib/zernio-sdk/models/comment_automation_follow_gate.rb
 lib/zernio-sdk/models/complete_google_business_verification_request.rb
 lib/zernio-sdk/models/complete_telegram_connect200_response.rb
 lib/zernio-sdk/models/complete_whats_app_phone_selection200_response.rb
@@ -2290,6 +2296,7 @@ lib/zernio-sdk/models/get_inbox_volume200_response_summary.rb
 lib/zernio-sdk/models/get_inbox_volume200_response_timeseries_inner.rb
 lib/zernio-sdk/models/get_inbox_volume400_response.rb
 lib/zernio-sdk/models/get_instagram_account_insights404_response.rb
+lib/zernio-sdk/models/get_instagram_follow_status200_response.rb
 lib/zernio-sdk/models/get_instagram_publishing_limit200_response.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response_data.rb
@@ -3214,6 +3221,7 @@ lib/zernio-sdk/models/webhook_payload_comment_comment.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_ad.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_attachment.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_author.rb
+lib/zernio-sdk/models/webhook_payload_comment_comment_author_instagram_profile.rb
 lib/zernio-sdk/models/webhook_payload_comment_post.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started_conversation.rb
@@ -3473,6 +3481,8 @@ spec/models/check_phone_number_portability200_response_spec.rb
 spec/models/check_phone_number_portability_request_spec.rb
 spec/models/check_verification200_response_spec.rb
 spec/models/check_verification_request_spec.rb
+spec/models/comment_automation_audience_spec.rb
+spec/models/comment_automation_follow_gate_spec.rb
 spec/models/complete_google_business_verification_request_spec.rb
 spec/models/complete_telegram_connect200_response_spec.rb
 spec/models/complete_whats_app_phone_selection200_response_account_spec.rb
@@ -3931,6 +3941,7 @@ spec/models/get_inbox_volume200_response_summary_spec.rb
 spec/models/get_inbox_volume200_response_timeseries_inner_spec.rb
 spec/models/get_inbox_volume400_response_spec.rb
 spec/models/get_instagram_account_insights404_response_spec.rb
+spec/models/get_instagram_follow_status200_response_spec.rb
 spec/models/get_instagram_publishing_limit200_response_spec.rb
 spec/models/get_instagram_story_insights200_response_data_metrics_spec.rb
 spec/models/get_instagram_story_insights200_response_data_spec.rb
@@ -4851,6 +4862,7 @@ spec/models/webhook_payload_call_received_spec.rb
 spec/models/webhook_payload_comment_account_spec.rb
 spec/models/webhook_payload_comment_comment_ad_spec.rb
 spec/models/webhook_payload_comment_comment_attachment_spec.rb
+spec/models/webhook_payload_comment_comment_author_instagram_profile_spec.rb
 spec/models/webhook_payload_comment_comment_author_spec.rb
 spec/models/webhook_payload_comment_comment_spec.rb
 spec/models/webhook_payload_comment_post_spec.rb

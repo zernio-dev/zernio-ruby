@@ -43,6 +43,10 @@ module Zernio
     # Alternate public replies rotated at random with commentReply. Omitted when none.
     attr_accessor :comment_reply_variations
 
+    attr_accessor :audience
+
+    attr_accessor :follow_gate
+
     attr_accessor :is_active
 
     attr_accessor :updated_at
@@ -83,6 +87,8 @@ module Zernio
         :'comment_reply' => :'commentReply',
         :'dm_message_variations' => :'dmMessageVariations',
         :'comment_reply_variations' => :'commentReplyVariations',
+        :'audience' => :'audience',
+        :'follow_gate' => :'followGate',
         :'is_active' => :'isActive',
         :'updated_at' => :'updatedAt'
       }
@@ -112,6 +118,8 @@ module Zernio
         :'comment_reply' => :'String',
         :'dm_message_variations' => :'Array<String>',
         :'comment_reply_variations' => :'Array<String>',
+        :'audience' => :'CommentAutomationAudience',
+        :'follow_gate' => :'CommentAutomationFollowGate',
         :'is_active' => :'Boolean',
         :'updated_at' => :'Time'
       }
@@ -193,6 +201,14 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'audience')
+        self.audience = attributes[:'audience']
+      end
+
+      if attributes.key?(:'follow_gate')
+        self.follow_gate = attributes[:'follow_gate']
+      end
+
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
       end
@@ -245,6 +261,8 @@ module Zernio
           comment_reply == o.comment_reply &&
           dm_message_variations == o.dm_message_variations &&
           comment_reply_variations == o.comment_reply_variations &&
+          audience == o.audience &&
+          follow_gate == o.follow_gate &&
           is_active == o.is_active &&
           updated_at == o.updated_at
     end
@@ -258,7 +276,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, is_active, updated_at].hash
+      [id, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, audience, follow_gate, is_active, updated_at].hash
     end
 
     # Builds the object from hash

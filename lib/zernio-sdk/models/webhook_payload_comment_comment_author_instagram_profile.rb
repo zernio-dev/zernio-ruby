@@ -14,26 +14,25 @@ require 'date'
 require 'time'
 
 module Zernio
-  class WebhookPayloadCommentCommentAuthor < ApiModelBase
-    # Author's platform ID
-    attr_accessor :id
+  # Instagram only, best-effort. Present ONLY for commenters who have messaged the account before: Meta gates the follow relationship behind messaging consent, and commenting does not grant it. Absent otherwise - treat a missing object as \"unknown\", never as \"not a follower\". To check on demand, call GET /v1/accounts/{accountId}/follow-status/{userId}. 
+  class WebhookPayloadCommentCommentAuthorInstagramProfile < ApiModelBase
+    # The commenter follows this account.
+    attr_accessor :is_follower
 
-    attr_accessor :username
+    # This account follows the commenter.
+    attr_accessor :is_following
 
-    attr_accessor :name
+    attr_accessor :follower_count
 
-    attr_accessor :picture
-
-    attr_accessor :instagram_profile
+    attr_accessor :is_verified
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'username' => :'username',
-        :'name' => :'name',
-        :'picture' => :'picture',
-        :'instagram_profile' => :'instagramProfile'
+        :'is_follower' => :'isFollower',
+        :'is_following' => :'isFollowing',
+        :'follower_count' => :'followerCount',
+        :'is_verified' => :'isVerified'
       }
     end
 
@@ -50,18 +49,20 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'username' => :'String',
-        :'name' => :'String',
-        :'picture' => :'String',
-        :'instagram_profile' => :'WebhookPayloadCommentCommentAuthorInstagramProfile'
+        :'is_follower' => :'Boolean',
+        :'is_following' => :'Boolean',
+        :'follower_count' => :'Integer',
+        :'is_verified' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'picture',
+        :'is_follower',
+        :'is_following',
+        :'follower_count',
+        :'is_verified'
       ])
     end
 
@@ -69,38 +70,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadCommentCommentAuthor` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadCommentCommentAuthorInstagramProfile` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadCommentCommentAuthor`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadCommentCommentAuthorInstagramProfile`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      else
-        self.id = nil
+      if attributes.key?(:'is_follower')
+        self.is_follower = attributes[:'is_follower']
       end
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'is_following')
+        self.is_following = attributes[:'is_following']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'follower_count')
+        self.follower_count = attributes[:'follower_count']
       end
 
-      if attributes.key?(:'picture')
-        self.picture = attributes[:'picture']
-      end
-
-      if attributes.key?(:'instagram_profile')
-        self.instagram_profile = attributes[:'instagram_profile']
+      if attributes.key?(:'is_verified')
+        self.is_verified = attributes[:'is_verified']
       end
     end
 
@@ -109,10 +104,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -120,18 +111,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.nil?
-        fail ArgumentError, 'id cannot be nil'
-      end
-
-      @id = id
     end
 
     # Checks equality by comparing each attribute.
@@ -139,11 +119,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          username == o.username &&
-          name == o.name &&
-          picture == o.picture &&
-          instagram_profile == o.instagram_profile
+          is_follower == o.is_follower &&
+          is_following == o.is_following &&
+          follower_count == o.follower_count &&
+          is_verified == o.is_verified
     end
 
     # @see the `==` method
@@ -155,7 +134,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, username, name, picture, instagram_profile].hash
+      [is_follower, is_following, follower_count, is_verified].hash
     end
 
     # Builds the object from hash

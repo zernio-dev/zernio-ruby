@@ -8,6 +8,7 @@
 | **username** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
 | **picture** | **String** |  | [optional] |
+| **instagram_profile** | [**WebhookPayloadCommentCommentAuthorInstagramProfile**](WebhookPayloadCommentCommentAuthorInstagramProfile.md) |  | [optional] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = Zernio::WebhookPayloadCommentCommentAuthor.new(
   id: null,
   username: null,
   name: null,
-  picture: null
+  picture: null,
+  instagram_profile: null
 )
 ```
 

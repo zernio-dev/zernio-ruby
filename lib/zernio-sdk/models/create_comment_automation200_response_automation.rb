@@ -53,6 +53,10 @@ module Zernio
 
     attr_accessor :click_tag
 
+    attr_accessor :audience
+
+    attr_accessor :follow_gate
+
     attr_accessor :is_active
 
     attr_accessor :stats
@@ -100,6 +104,8 @@ module Zernio
         :'comment_reply_variations' => :'commentReplyVariations',
         :'link_tracking' => :'linkTracking',
         :'click_tag' => :'clickTag',
+        :'audience' => :'audience',
+        :'follow_gate' => :'followGate',
         :'is_active' => :'isActive',
         :'stats' => :'stats',
         :'created_at' => :'createdAt'
@@ -135,6 +141,8 @@ module Zernio
         :'comment_reply_variations' => :'Array<String>',
         :'link_tracking' => :'Boolean',
         :'click_tag' => :'String',
+        :'audience' => :'CommentAutomationAudience',
+        :'follow_gate' => :'CommentAutomationFollowGate',
         :'is_active' => :'Boolean',
         :'stats' => :'CreateCommentAutomation200ResponseAutomationStats',
         :'created_at' => :'Time'
@@ -237,6 +245,14 @@ module Zernio
         self.click_tag = attributes[:'click_tag']
       end
 
+      if attributes.key?(:'audience')
+        self.audience = attributes[:'audience']
+      end
+
+      if attributes.key?(:'follow_gate')
+        self.follow_gate = attributes[:'follow_gate']
+      end
+
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
       end
@@ -310,6 +326,8 @@ module Zernio
           comment_reply_variations == o.comment_reply_variations &&
           link_tracking == o.link_tracking &&
           click_tag == o.click_tag &&
+          audience == o.audience &&
+          follow_gate == o.follow_gate &&
           is_active == o.is_active &&
           stats == o.stats &&
           created_at == o.created_at
@@ -324,7 +342,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, trigger, platform_post_id, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, is_active, stats, created_at].hash
+      [id, name, platform, trigger, platform_post_id, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, audience, follow_gate, is_active, stats, created_at].hash
     end
 
     # Builds the object from hash

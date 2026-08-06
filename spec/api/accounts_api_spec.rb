@@ -86,6 +86,20 @@ describe 'AccountsApi' do
     end
   end
 
+  # unit tests for get_instagram_follow_status
+  # Check whether an Instagram user follows the account
+  # Resolves the follow relationship between an Instagram user and the connected account, plus their public profile counters.  &#x60;userId&#x60; is the Instagram-scoped id (IGSID) Meta gives you on a webhook: &#x60;sender.id&#x60; on &#x60;message.received&#x60;, &#x60;comment.author.id&#x60; on &#x60;comment.received&#x60;.  **Meta only answers for people who have MESSAGED the account.** Commenting grants no consent, so a commenter who has never DMed you is unresolvable - that is a platform rule, not a limitation of this endpoint. When it cannot be resolved the response is still &#x60;200&#x60; with &#x60;isFollower: null&#x60; and an &#x60;unavailableReason&#x60;, because \&quot;unknown\&quot; is a normal state to branch on:    * &#x60;consent_required&#x60; - the user has never messaged this account.   * &#x60;dm_access_disabled&#x60; - the account owner turned off Instagram Direct API access.   * &#x60;not_messageable&#x60; - the id is not a messaging-scoped id.   * &#x60;error&#x60; - a transient Graph API failure.  To gate a comment automation on this, use the automation&#39;s &#x60;audience&#x60; rules instead of calling this per comment - they run the same lookup only on comments that actually match a keyword, and can ask the commenter to confirm with one tap.  Answers are cached briefly per (account, user). Pass &#x60;refresh&#x3D;true&#x60; right after asking someone to follow, so a follow from a moment ago is visible. 
+  # @param account_id Instagram account ID
+  # @param user_id Instagram-scoped user id (IGSID) from a webhook payload
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :refresh Bypass the cache and re-query Meta
+  # @return [GetInstagramFollowStatus200Response]
+  describe 'get_instagram_follow_status test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_slack_settings
   # Get Slack account settings
   # Returns the connected Slack channel details and the default message identity (name and avatar shown as the author on every post, with Slack&#39;s APP badge). The identity applies to messages only; the app&#39;s own Slack profile is global and cannot be changed per workspace.

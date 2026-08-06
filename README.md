@@ -87,6 +87,7 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**get_account_health**](docs/AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health
 *Zernio::AccountsApi* | [**get_all_accounts_health**](docs/AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health
 *Zernio::AccountsApi* | [**get_follower_stats**](docs/AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
+*Zernio::AccountsApi* | [**get_instagram_follow_status**](docs/AccountsApi.md#get_instagram_follow_status) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account
 *Zernio::AccountsApi* | [**get_slack_settings**](docs/AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings
 *Zernio::AccountsApi* | [**get_tik_tok_creator_info**](docs/AccountsApi.md#get_tik_tok_creator_info) | **GET** /v1/accounts/{accountId}/tiktok/creator-info | Get TikTok creator info
 *Zernio::AccountsApi* | [**list_accounts**](docs/AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts
@@ -725,6 +726,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CheckPhoneNumberPortabilityRequest](docs/CheckPhoneNumberPortabilityRequest.md)
  - [Zernio::CheckVerification200Response](docs/CheckVerification200Response.md)
  - [Zernio::CheckVerificationRequest](docs/CheckVerificationRequest.md)
+ - [Zernio::CommentAutomationAudience](docs/CommentAutomationAudience.md)
+ - [Zernio::CommentAutomationFollowGate](docs/CommentAutomationFollowGate.md)
  - [Zernio::CompleteGoogleBusinessVerificationRequest](docs/CompleteGoogleBusinessVerificationRequest.md)
  - [Zernio::CompleteTelegramConnect200Response](docs/CompleteTelegramConnect200Response.md)
  - [Zernio::CompleteWhatsAppPhoneSelection200Response](docs/CompleteWhatsAppPhoneSelection200Response.md)
@@ -1183,6 +1186,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInboxVolume200ResponseTimeseriesInner](docs/GetInboxVolume200ResponseTimeseriesInner.md)
  - [Zernio::GetInboxVolume400Response](docs/GetInboxVolume400Response.md)
  - [Zernio::GetInstagramAccountInsights404Response](docs/GetInstagramAccountInsights404Response.md)
+ - [Zernio::GetInstagramFollowStatus200Response](docs/GetInstagramFollowStatus200Response.md)
  - [Zernio::GetInstagramPublishingLimit200Response](docs/GetInstagramPublishingLimit200Response.md)
  - [Zernio::GetInstagramStoryInsights200Response](docs/GetInstagramStoryInsights200Response.md)
  - [Zernio::GetInstagramStoryInsights200ResponseData](docs/GetInstagramStoryInsights200ResponseData.md)
@@ -2107,6 +2111,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadCommentCommentAd](docs/WebhookPayloadCommentCommentAd.md)
  - [Zernio::WebhookPayloadCommentCommentAttachment](docs/WebhookPayloadCommentCommentAttachment.md)
  - [Zernio::WebhookPayloadCommentCommentAuthor](docs/WebhookPayloadCommentCommentAuthor.md)
+ - [Zernio::WebhookPayloadCommentCommentAuthorInstagramProfile](docs/WebhookPayloadCommentCommentAuthorInstagramProfile.md)
  - [Zernio::WebhookPayloadCommentPost](docs/WebhookPayloadCommentPost.md)
  - [Zernio::WebhookPayloadConversationStarted](docs/WebhookPayloadConversationStarted.md)
  - [Zernio::WebhookPayloadConversationStartedConversation](docs/WebhookPayloadConversationStartedConversation.md)

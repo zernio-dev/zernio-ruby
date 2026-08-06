@@ -295,6 +295,78 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Check whether an Instagram user follows the account
+    # Resolves the follow relationship between an Instagram user and the connected account, plus their public profile counters.  `userId` is the Instagram-scoped id (IGSID) Meta gives you on a webhook: `sender.id` on `message.received`, `comment.author.id` on `comment.received`.  **Meta only answers for people who have MESSAGED the account.** Commenting grants no consent, so a commenter who has never DMed you is unresolvable - that is a platform rule, not a limitation of this endpoint. When it cannot be resolved the response is still `200` with `isFollower: null` and an `unavailableReason`, because \"unknown\" is a normal state to branch on:    * `consent_required` - the user has never messaged this account.   * `dm_access_disabled` - the account owner turned off Instagram Direct API access.   * `not_messageable` - the id is not a messaging-scoped id.   * `error` - a transient Graph API failure.  To gate a comment automation on this, use the automation's `audience` rules instead of calling this per comment - they run the same lookup only on comments that actually match a keyword, and can ask the commenter to confirm with one tap.  Answers are cached briefly per (account, user). Pass `refresh=true` right after asking someone to follow, so a follow from a moment ago is visible. 
+    # @param account_id [String] Instagram account ID
+    # @param user_id [String] Instagram-scoped user id (IGSID) from a webhook payload
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :refresh Bypass the cache and re-query Meta
+    # @return [GetInstagramFollowStatus200Response]
+    def get_instagram_follow_status(account_id, user_id, opts = {})
+      data, _status_code, _headers = get_instagram_follow_status_with_http_info(account_id, user_id, opts)
+      data
+    end
+
+    # Check whether an Instagram user follows the account
+    # Resolves the follow relationship between an Instagram user and the connected account, plus their public profile counters.  &#x60;userId&#x60; is the Instagram-scoped id (IGSID) Meta gives you on a webhook: &#x60;sender.id&#x60; on &#x60;message.received&#x60;, &#x60;comment.author.id&#x60; on &#x60;comment.received&#x60;.  **Meta only answers for people who have MESSAGED the account.** Commenting grants no consent, so a commenter who has never DMed you is unresolvable - that is a platform rule, not a limitation of this endpoint. When it cannot be resolved the response is still &#x60;200&#x60; with &#x60;isFollower: null&#x60; and an &#x60;unavailableReason&#x60;, because \&quot;unknown\&quot; is a normal state to branch on:    * &#x60;consent_required&#x60; - the user has never messaged this account.   * &#x60;dm_access_disabled&#x60; - the account owner turned off Instagram Direct API access.   * &#x60;not_messageable&#x60; - the id is not a messaging-scoped id.   * &#x60;error&#x60; - a transient Graph API failure.  To gate a comment automation on this, use the automation&#39;s &#x60;audience&#x60; rules instead of calling this per comment - they run the same lookup only on comments that actually match a keyword, and can ask the commenter to confirm with one tap.  Answers are cached briefly per (account, user). Pass &#x60;refresh&#x3D;true&#x60; right after asking someone to follow, so a follow from a moment ago is visible. 
+    # @param account_id [String] Instagram account ID
+    # @param user_id [String] Instagram-scoped user id (IGSID) from a webhook payload
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :refresh Bypass the cache and re-query Meta
+    # @return [Array<(GetInstagramFollowStatus200Response, Integer, Hash)>] GetInstagramFollowStatus200Response data, response status code and response headers
+    def get_instagram_follow_status_with_http_info(account_id, user_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountsApi.get_instagram_follow_status ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.get_instagram_follow_status"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling AccountsApi.get_instagram_follow_status"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/follow-status/{userId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'refresh'] = opts[:'refresh'] if !opts[:'refresh'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetInstagramFollowStatus200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountsApi.get_instagram_follow_status",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#get_instagram_follow_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Slack account settings
     # Returns the connected Slack channel details and the default message identity (name and avatar shown as the author on every post, with Slack's APP badge). The identity applies to messages only; the app's own Slack profile is global and cannot be changed per workspace.
     # @param account_id [String] 

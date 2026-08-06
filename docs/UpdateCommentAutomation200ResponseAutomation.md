@@ -15,6 +15,8 @@
 | **comment_reply** | **String** |  | [optional] |
 | **dm_message_variations** | **Array&lt;String&gt;** | Alternate DM texts rotated at random with dmMessage. Omitted when none. | [optional] |
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional] |
+| **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
+| **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **updated_at** | **Time** |  | [optional] |
 
@@ -35,6 +37,8 @@ instance = Zernio::UpdateCommentAutomation200ResponseAutomation.new(
   comment_reply: null,
   dm_message_variations: null,
   comment_reply_variations: null,
+  audience: null,
+  follow_gate: null,
   is_active: null,
   updated_at: null
 )

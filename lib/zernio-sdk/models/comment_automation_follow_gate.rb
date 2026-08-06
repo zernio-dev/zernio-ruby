@@ -14,26 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
-  class WebhookPayloadCommentCommentAuthor < ApiModelBase
-    # Author's platform ID
-    attr_accessor :id
+  # Copy for the follow gate. Sensible defaults are used for any field left empty.
+  class CommentAutomationFollowGate < ApiModelBase
+    # Confirmation DM sent when whenUnknown=verify.
+    attr_accessor :message
 
-    attr_accessor :username
+    # Confirm button label. Defaults to \"I'm following\".
+    attr_accessor :button_label
 
-    attr_accessor :name
-
-    attr_accessor :picture
-
-    attr_accessor :instagram_profile
+    # Sent to a commenter we know does not follow (followerStatus=follower). Omit to stay silent on a keyword comment; a confirm tap always gets an answer.
+    attr_accessor :not_following_message
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'username' => :'username',
-        :'name' => :'name',
-        :'picture' => :'picture',
-        :'instagram_profile' => :'instagramProfile'
+        :'message' => :'message',
+        :'button_label' => :'buttonLabel',
+        :'not_following_message' => :'notFollowingMessage'
       }
     end
 
@@ -50,18 +47,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'username' => :'String',
-        :'name' => :'String',
-        :'picture' => :'String',
-        :'instagram_profile' => :'WebhookPayloadCommentCommentAuthorInstagramProfile'
+        :'message' => :'String',
+        :'button_label' => :'String',
+        :'not_following_message' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'picture',
       ])
     end
 
@@ -69,38 +63,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadCommentCommentAuthor` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CommentAutomationFollowGate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadCommentCommentAuthor`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CommentAutomationFollowGate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      else
-        self.id = nil
+      if attributes.key?(:'message')
+        self.message = attributes[:'message']
       end
 
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
+      if attributes.key?(:'button_label')
+        self.button_label = attributes[:'button_label']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'picture')
-        self.picture = attributes[:'picture']
-      end
-
-      if attributes.key?(:'instagram_profile')
-        self.instagram_profile = attributes[:'instagram_profile']
+      if attributes.key?(:'not_following_message')
+        self.not_following_message = attributes[:'not_following_message']
       end
     end
 
@@ -109,8 +93,16 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      if !@message.nil? && @message.to_s.length > 640
+        invalid_properties.push('invalid value for "message", the character length must be smaller than or equal to 640.')
+      end
+
+      if !@button_label.nil? && @button_label.to_s.length > 20
+        invalid_properties.push('invalid value for "button_label", the character length must be smaller than or equal to 20.')
+      end
+
+      if !@not_following_message.nil? && @not_following_message.to_s.length > 1000
+        invalid_properties.push('invalid value for "not_following_message", the character length must be smaller than or equal to 1000.')
       end
 
       invalid_properties
@@ -120,18 +112,52 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
+      return false if !@message.nil? && @message.to_s.length > 640
+      return false if !@button_label.nil? && @button_label.to_s.length > 20
+      return false if !@not_following_message.nil? && @not_following_message.to_s.length > 1000
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] id Value to be assigned
-    def id=(id)
-      if id.nil?
-        fail ArgumentError, 'id cannot be nil'
+    # @param [Object] message Value to be assigned
+    def message=(message)
+      if message.nil?
+        fail ArgumentError, 'message cannot be nil'
       end
 
-      @id = id
+      if message.to_s.length > 640
+        fail ArgumentError, 'invalid value for "message", the character length must be smaller than or equal to 640.'
+      end
+
+      @message = message
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] button_label Value to be assigned
+    def button_label=(button_label)
+      if button_label.nil?
+        fail ArgumentError, 'button_label cannot be nil'
+      end
+
+      if button_label.to_s.length > 20
+        fail ArgumentError, 'invalid value for "button_label", the character length must be smaller than or equal to 20.'
+      end
+
+      @button_label = button_label
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] not_following_message Value to be assigned
+    def not_following_message=(not_following_message)
+      if not_following_message.nil?
+        fail ArgumentError, 'not_following_message cannot be nil'
+      end
+
+      if not_following_message.to_s.length > 1000
+        fail ArgumentError, 'invalid value for "not_following_message", the character length must be smaller than or equal to 1000.'
+      end
+
+      @not_following_message = not_following_message
     end
 
     # Checks equality by comparing each attribute.
@@ -139,11 +165,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          username == o.username &&
-          name == o.name &&
-          picture == o.picture &&
-          instagram_profile == o.instagram_profile
+          message == o.message &&
+          button_label == o.button_label &&
+          not_following_message == o.not_following_message
     end
 
     # @see the `==` method
@@ -155,7 +179,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, username, name, picture, instagram_profile].hash
+      [message, button_label, not_following_message].hash
     end
 
     # Builds the object from hash

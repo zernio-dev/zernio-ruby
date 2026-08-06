@@ -25,8 +25,16 @@ module Zernio
 
     attr_accessor :comment_text
 
-    # DM outcome
+    # DM outcome. 'gated' = the follow-gate confirmation DM went out and we are waiting for the tap; it flips to 'sent' or 'skipped' when they tap.
     attr_accessor :status
+
+    # How the audience rule resolved. Absent on automations without one.
+    attr_accessor :audience_outcome
+
+    # Follow relationship at decision time. Absent when Instagram would not tell us (the commenter never messaged the account).
+    attr_accessor :commenter_is_follower
+
+    attr_accessor :commenter_follower_count
 
     # DM error message if status is failed
     attr_accessor :error
@@ -70,6 +78,9 @@ module Zernio
         :'commenter_name' => :'commenterName',
         :'comment_text' => :'commentText',
         :'status' => :'status',
+        :'audience_outcome' => :'audienceOutcome',
+        :'commenter_is_follower' => :'commenterIsFollower',
+        :'commenter_follower_count' => :'commenterFollowerCount',
         :'error' => :'error',
         :'comment_reply_status' => :'commentReplyStatus',
         :'comment_reply_error' => :'commentReplyError',
@@ -96,6 +107,9 @@ module Zernio
         :'commenter_name' => :'String',
         :'comment_text' => :'String',
         :'status' => :'String',
+        :'audience_outcome' => :'String',
+        :'commenter_is_follower' => :'Boolean',
+        :'commenter_follower_count' => :'Integer',
         :'error' => :'String',
         :'comment_reply_status' => :'String',
         :'comment_reply_error' => :'String',
@@ -149,6 +163,18 @@ module Zernio
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'audience_outcome')
+        self.audience_outcome = attributes[:'audience_outcome']
+      end
+
+      if attributes.key?(:'commenter_is_follower')
+        self.commenter_is_follower = attributes[:'commenter_is_follower']
+      end
+
+      if attributes.key?(:'commenter_follower_count')
+        self.commenter_follower_count = attributes[:'commenter_follower_count']
+      end
+
       if attributes.key?(:'error')
         self.error = attributes[:'error']
       end
@@ -178,8 +204,10 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped"])
+      status_validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped", "gated"])
       return false unless status_validator.valid?(@status)
+      audience_outcome_validator = EnumAttributeValidator.new('String', ["passed", "blocked", "gate_sent", "gate_passed", "gate_failed"])
+      return false unless audience_outcome_validator.valid?(@audience_outcome)
       comment_reply_status_validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped"])
       return false unless comment_reply_status_validator.valid?(@comment_reply_status)
       true
@@ -188,11 +216,21 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped"])
+      validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped", "gated"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
       @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] audience_outcome Object to be assigned
+    def audience_outcome=(audience_outcome)
+      validator = EnumAttributeValidator.new('String', ["passed", "blocked", "gate_sent", "gate_passed", "gate_failed"])
+      unless validator.valid?(audience_outcome)
+        fail ArgumentError, "invalid value for \"audience_outcome\", must be one of #{validator.allowable_values}."
+      end
+      @audience_outcome = audience_outcome
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -216,6 +254,9 @@ module Zernio
           commenter_name == o.commenter_name &&
           comment_text == o.comment_text &&
           status == o.status &&
+          audience_outcome == o.audience_outcome &&
+          commenter_is_follower == o.commenter_is_follower &&
+          commenter_follower_count == o.commenter_follower_count &&
           error == o.error &&
           comment_reply_status == o.comment_reply_status &&
           comment_reply_error == o.comment_reply_error &&
@@ -231,7 +272,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, comment_id, commenter_id, commenter_name, comment_text, status, error, comment_reply_status, comment_reply_error, created_at].hash
+      [id, comment_id, commenter_id, commenter_name, comment_text, status, audience_outcome, commenter_is_follower, commenter_follower_count, error, comment_reply_status, comment_reply_error, created_at].hash
     end
 
     # Builds the object from hash

@@ -20,6 +20,8 @@
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional] |
 | **link_tracking** | **Boolean** |  | [optional] |
 | **click_tag** | **String** |  | [optional] |
+| **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
+| **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **stats** | [**CreateCommentAutomation200ResponseAutomationStats**](CreateCommentAutomation200ResponseAutomationStats.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
@@ -46,6 +48,8 @@ instance = Zernio::CreateCommentAutomation200ResponseAutomation.new(
   comment_reply_variations: null,
   link_tracking: null,
   click_tag: null,
+  audience: null,
+  follow_gate: null,
   is_active: null,
   stats: null,
   created_at: null

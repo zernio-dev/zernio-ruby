@@ -60,10 +60,32 @@ describe Zernio::GetCommentAutomation200ResponseLogsInner do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["sent", "failed", "skipped"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["sent", "failed", "skipped", "gated"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "audience_outcome"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["passed", "blocked", "gate_sent", "gate_passed", "gate_failed"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.audience_outcome = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "commenter_is_follower"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "commenter_follower_count"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 

@@ -17,6 +17,8 @@
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies for random rotation. Pass [] to clear. | [optional] |
 | **link_tracking** | **Boolean** | Wrap link buttons in a tracked redirect to count clicks. Pass false to send links untouched. | [optional] |
 | **click_tag** | **String** | Tag applied to a contact when they click a tracked link (requires linkTracking). Empty string clears it. | [optional] |
+| **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
+| **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 
 ## Example
@@ -38,6 +40,8 @@ instance = Zernio::UpdateCommentAutomationRequest.new(
   comment_reply_variations: null,
   link_tracking: null,
   click_tag: null,
+  audience: null,
+  follow_gate: null,
   is_active: null
 )
 ```

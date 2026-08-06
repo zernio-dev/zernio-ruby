@@ -22,6 +22,8 @@
 | **comment_reply_variations** | **Array&lt;String&gt;** | Optional alternate public replies, rotated at random alongside commentReply (picked independently of the DM). Up to 5. | [optional] |
 | **link_tracking** | **Boolean** | Wrap link buttons in the DM in a tracked redirect so clicks are counted (Link Clicks / CTR). Pass false to send links exactly as written. Defaults to on. | [optional][default to true] |
 | **click_tag** | **String** | Optional tag applied to a contact when they click a tracked link (requires linkTracking). Lets you segment clickers for broadcasts/sequences. | [optional] |
+| **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
+| **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
 
 ## Example
 
@@ -46,7 +48,9 @@ instance = Zernio::CreateCommentAutomationRequest.new(
   dm_message_variations: null,
   comment_reply_variations: null,
   link_tracking: null,
-  click_tag: null
+  click_tag: null,
+  audience: null,
+  follow_gate: null
 )
 ```
 
