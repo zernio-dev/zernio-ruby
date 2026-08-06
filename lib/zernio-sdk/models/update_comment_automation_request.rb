@@ -17,6 +17,9 @@ module Zernio
   class UpdateCommentAutomationRequest < ApiModelBase
     attr_accessor :name
 
+    # What fires the automation. Changing it detaches the automation from its bound post or story (a post id and a story id are different objects), unless this same request sets a new binding. 'story_reply' is Instagram only.
+    attr_accessor :trigger
+
     attr_accessor :keywords
 
     # How a keyword is compared with the comment. 'contains' (default) matches anywhere, even inside another word (keyword 'app' fires on 'happy'). 'word' matches the keyword only as a standalone word. 'exact' requires the whole comment to be exactly the keyword.
@@ -75,6 +78,7 @@ module Zernio
     def self.attribute_map
       {
         :'name' => :'name',
+        :'trigger' => :'trigger',
         :'keywords' => :'keywords',
         :'match_mode' => :'matchMode',
         :'exclude_keywords' => :'excludeKeywords',
@@ -104,6 +108,7 @@ module Zernio
     def self.openapi_types
       {
         :'name' => :'String',
+        :'trigger' => :'String',
         :'keywords' => :'Array<String>',
         :'match_mode' => :'String',
         :'exclude_keywords' => :'Array<String>',
@@ -143,6 +148,10 @@ module Zernio
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'trigger')
+        self.trigger = attributes[:'trigger']
       end
 
       if attributes.key?(:'keywords')
@@ -228,12 +237,24 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      trigger_validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      return false unless trigger_validator.valid?(@trigger)
       match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains", "word"])
       return false unless match_mode_validator.valid?(@match_mode)
       return false if !@buttons.nil? && @buttons.length > 3
       return false if !@dm_message_variations.nil? && @dm_message_variations.length > 5
       return false if !@comment_reply_variations.nil? && @comment_reply_variations.length > 5
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] trigger Object to be assigned
+    def trigger=(trigger)
+      validator = EnumAttributeValidator.new('String', ["comment", "story_reply"])
+      unless validator.valid?(trigger)
+        fail ArgumentError, "invalid value for \"trigger\", must be one of #{validator.allowable_values}."
+      end
+      @trigger = trigger
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -294,6 +315,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
+          trigger == o.trigger &&
           keywords == o.keywords &&
           match_mode == o.match_mode &&
           exclude_keywords == o.exclude_keywords &&
@@ -317,7 +339,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, is_active].hash
+      [name, trigger, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, is_active].hash
     end
 
     # Builds the object from hash
