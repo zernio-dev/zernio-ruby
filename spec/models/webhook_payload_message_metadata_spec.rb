@@ -27,6 +27,12 @@ describe Zernio::WebhookPayloadMessageMetadata do
     end
   end
 
+  describe 'test attribute "quoted_message_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "quick_reply_payload"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **quoted_message_id** | **String** | platformMessageId of the message this one is a quote-reply to. WhatsApp (&#x60;context.id&#x60;), Instagram and Facebook Messenger (&#x60;reply_to.mid&#x60;). On &#x60;message.sent&#x60; echoes (operator replied from the native app) this is the only metadata field populated.  | [optional] |
 | **quick_reply_payload** | **String** | Payload from a quick reply tap (Facebook/Instagram Messenger). | [optional] |
 | **postback_payload** | **String** | Payload from a postback button tap (Facebook/Instagram Messenger). | [optional] |
 | **postback_title** | **String** | Title of the tapped postback button (Facebook/Instagram Messenger). | [optional] |
@@ -27,6 +28,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::WebhookPayloadMessageMetadata.new(
+  quoted_message_id: null,
   quick_reply_payload: null,
   postback_payload: null,
   postback_title: null,
