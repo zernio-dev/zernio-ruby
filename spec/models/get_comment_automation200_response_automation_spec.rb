@@ -88,10 +88,22 @@ describe Zernio::GetCommentAutomation200ResponseAutomation do
   describe 'test attribute "match_mode"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["exact", "contains"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["exact", "contains", "word"])
       # validator.allowable_values.each do |value|
       #   expect { instance.match_mode = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "exclude_keywords"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "typo_tolerance"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 

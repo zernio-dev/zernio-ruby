@@ -19,7 +19,14 @@ module Zernio
 
     attr_accessor :keywords
 
+    # How a keyword is compared with the comment. 'contains' (default) matches anywhere, even inside another word (keyword 'app' fires on 'happy'). 'word' matches the keyword only as a standalone word. 'exact' requires the whole comment to be exactly the keyword.
     attr_accessor :match_mode
+
+    # Comments containing one of these never trigger the automation, even when a trigger keyword also matches. Compared using the same matchMode.
+    attr_accessor :exclude_keywords
+
+    # Only with matchMode=word: also fire on close misspellings of a keyword (one edit for 4-7 character keywords, two from 8 up). Keywords shorter than 4 characters are never fuzzy-matched.
+    attr_accessor :typo_tolerance
 
     attr_accessor :dm_message
 
@@ -70,6 +77,8 @@ module Zernio
         :'name' => :'name',
         :'keywords' => :'keywords',
         :'match_mode' => :'matchMode',
+        :'exclude_keywords' => :'excludeKeywords',
+        :'typo_tolerance' => :'typoTolerance',
         :'dm_message' => :'dmMessage',
         :'buttons' => :'buttons',
         :'comment_reply' => :'commentReply',
@@ -97,6 +106,8 @@ module Zernio
         :'name' => :'String',
         :'keywords' => :'Array<String>',
         :'match_mode' => :'String',
+        :'exclude_keywords' => :'Array<String>',
+        :'typo_tolerance' => :'Boolean',
         :'dm_message' => :'String',
         :'buttons' => :'Array<DmButton>',
         :'comment_reply' => :'String',
@@ -142,6 +153,16 @@ module Zernio
 
       if attributes.key?(:'match_mode')
         self.match_mode = attributes[:'match_mode']
+      end
+
+      if attributes.key?(:'exclude_keywords')
+        if (value = attributes[:'exclude_keywords']).is_a?(Array)
+          self.exclude_keywords = value
+        end
+      end
+
+      if attributes.key?(:'typo_tolerance')
+        self.typo_tolerance = attributes[:'typo_tolerance']
       end
 
       if attributes.key?(:'dm_message')
@@ -207,7 +228,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains"])
+      match_mode_validator = EnumAttributeValidator.new('String', ["exact", "contains", "word"])
       return false unless match_mode_validator.valid?(@match_mode)
       return false if !@buttons.nil? && @buttons.length > 3
       return false if !@dm_message_variations.nil? && @dm_message_variations.length > 5
@@ -218,7 +239,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] match_mode Object to be assigned
     def match_mode=(match_mode)
-      validator = EnumAttributeValidator.new('String', ["exact", "contains"])
+      validator = EnumAttributeValidator.new('String', ["exact", "contains", "word"])
       unless validator.valid?(match_mode)
         fail ArgumentError, "invalid value for \"match_mode\", must be one of #{validator.allowable_values}."
       end
@@ -275,6 +296,8 @@ module Zernio
           name == o.name &&
           keywords == o.keywords &&
           match_mode == o.match_mode &&
+          exclude_keywords == o.exclude_keywords &&
+          typo_tolerance == o.typo_tolerance &&
           dm_message == o.dm_message &&
           buttons == o.buttons &&
           comment_reply == o.comment_reply &&
@@ -294,7 +317,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, keywords, match_mode, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, is_active].hash
+      [name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, is_active].hash
     end
 
     # Builds the object from hash
