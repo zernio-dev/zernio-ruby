@@ -77,6 +77,16 @@ describe Zernio::Ad do
     end
   end
 
+  describe 'test attribute "creative_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["carousel", "video", "document", "image"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.creative_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "goal"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

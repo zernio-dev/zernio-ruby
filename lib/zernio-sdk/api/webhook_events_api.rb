@@ -1868,7 +1868,7 @@ module Zernio
     end
 
     # Post recycled event
-    # Fired when a post is recycled (cloned and re-scheduled for publishing).
+    # Fired when a post is recycled (cloned and re-scheduled for publishing). The new clone also fires a post.scheduled event.
     # @param webhook_payload_post [WebhookPayloadPost] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -1878,7 +1878,7 @@ module Zernio
     end
 
     # Post recycled event
-    # Fired when a post is recycled (cloned and re-scheduled for publishing).
+    # Fired when a post is recycled (cloned and re-scheduled for publishing). The new clone also fires a post.scheduled event.
     # @param webhook_payload_post [WebhookPayloadPost] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -1934,7 +1934,7 @@ module Zernio
     end
 
     # Post scheduled event
-    # Fired when a post is created and scheduled for publishing.
+    # Fired whenever a post enters the scheduled state: created with a schedule, added to a queue, a draft promoted to scheduled or queued, a failed or partial post retried, or a recycled clone created. Not fired when an already-scheduled post is edited or rescheduled.
     # @param webhook_payload_post [WebhookPayloadPost] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -1944,7 +1944,7 @@ module Zernio
     end
 
     # Post scheduled event
-    # Fired when a post is created and scheduled for publishing.
+    # Fired whenever a post enters the scheduled state: created with a schedule, added to a queue, a draft promoted to scheduled or queued, a failed or partial post retried, or a recycled clone created. Not fired when an already-scheduled post is edited or rescheduled.
     # @param webhook_payload_post [WebhookPayloadPost] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

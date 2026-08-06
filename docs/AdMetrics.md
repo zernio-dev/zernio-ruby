@@ -27,6 +27,9 @@
 | **video_p95_watched_actions** | **Integer** | Views reaching 95% of the video&#39;s length. Meta &#x60;video_p95_watched_actions&#x60;. | [optional] |
 | **video_p100_watched_actions** | **Integer** | Views reaching 100% of the video&#39;s length. Meta &#x60;video_p100_watched_actions&#x60;. | [optional] |
 | **video_avg_time_watched_actions** | **Float** | Average seconds watched per play (Meta &#x60;video_avg_time_watched_actions&#x60;). Aggregated over date ranges and across children as a play-weighted average (total watch time / total plays), never a plain average of averages. | [optional] |
+| **cost_per_thruplay** | **Float** | Derived &#x60;spend / videoThruplayWatchedActions&#x60;, in ad-account native currency. Rounded to 4 decimals rather than the usual 2 because a ThruPlay routinely costs well under a cent. 0 when the ad has no ThruPlays. | [optional] |
+| **funnel** | [**AdFunnelCounts**](AdFunnelCounts.md) |  | [optional] |
+| **engagement_breakdown** | [**AdEngagementCounts**](AdEngagementCounts.md) |  | [optional] |
 | **last_synced_at** | **Time** | Present on individual ads only, not on campaign aggregations | [optional] |
 
 ## Example
@@ -58,6 +61,9 @@ instance = Zernio::AdMetrics.new(
   video_p95_watched_actions: null,
   video_p100_watched_actions: null,
   video_avg_time_watched_actions: null,
+  cost_per_thruplay: null,
+  funnel: null,
+  engagement_breakdown: null,
   last_synced_at: null
 )
 ```

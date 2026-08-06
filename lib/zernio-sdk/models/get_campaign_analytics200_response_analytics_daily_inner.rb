@@ -80,6 +80,13 @@ module Zernio
     # Average seconds watched per play (Meta `video_avg_time_watched_actions`). Aggregated over date ranges and across children as a play-weighted average (total watch time / total plays), never a plain average of averages.
     attr_accessor :video_avg_time_watched_actions
 
+    # Derived `spend / videoThruplayWatchedActions`, in ad-account native currency. Rounded to 4 decimals rather than the usual 2 because a ThruPlay routinely costs well under a cent. 0 when the ad has no ThruPlays.
+    attr_accessor :cost_per_thruplay
+
+    attr_accessor :funnel
+
+    attr_accessor :engagement_breakdown
+
     # Present on individual ads only, not on campaign aggregations
     attr_accessor :last_synced_at
 
@@ -111,6 +118,9 @@ module Zernio
         :'video_p95_watched_actions' => :'videoP95WatchedActions',
         :'video_p100_watched_actions' => :'videoP100WatchedActions',
         :'video_avg_time_watched_actions' => :'videoAvgTimeWatchedActions',
+        :'cost_per_thruplay' => :'costPerThruplay',
+        :'funnel' => :'funnel',
+        :'engagement_breakdown' => :'engagementBreakdown',
         :'last_synced_at' => :'lastSyncedAt',
         :'date' => :'date'
       }
@@ -152,6 +162,9 @@ module Zernio
         :'video_p95_watched_actions' => :'Integer',
         :'video_p100_watched_actions' => :'Integer',
         :'video_avg_time_watched_actions' => :'Float',
+        :'cost_per_thruplay' => :'Float',
+        :'funnel' => :'AdFunnelCounts',
+        :'engagement_breakdown' => :'AdEngagementCounts',
         :'last_synced_at' => :'Time',
         :'date' => :'Date'
       }
@@ -282,6 +295,18 @@ module Zernio
         self.video_avg_time_watched_actions = attributes[:'video_avg_time_watched_actions']
       end
 
+      if attributes.key?(:'cost_per_thruplay')
+        self.cost_per_thruplay = attributes[:'cost_per_thruplay']
+      end
+
+      if attributes.key?(:'funnel')
+        self.funnel = attributes[:'funnel']
+      end
+
+      if attributes.key?(:'engagement_breakdown')
+        self.engagement_breakdown = attributes[:'engagement_breakdown']
+      end
+
       if attributes.key?(:'last_synced_at')
         self.last_synced_at = attributes[:'last_synced_at']
       end
@@ -334,6 +359,9 @@ module Zernio
           video_p95_watched_actions == o.video_p95_watched_actions &&
           video_p100_watched_actions == o.video_p100_watched_actions &&
           video_avg_time_watched_actions == o.video_avg_time_watched_actions &&
+          cost_per_thruplay == o.cost_per_thruplay &&
+          funnel == o.funnel &&
+          engagement_breakdown == o.engagement_breakdown &&
           last_synced_at == o.last_synced_at &&
           date == o.date
     end
@@ -347,7 +375,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, action_values, purchase_value, roas, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video_avg_time_watched_actions, last_synced_at, date].hash
+      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, action_values, purchase_value, roas, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video_avg_time_watched_actions, cost_per_thruplay, funnel, engagement_breakdown, last_synced_at, date].hash
     end
 
     # Builds the object from hash

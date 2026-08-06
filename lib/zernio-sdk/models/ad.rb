@@ -32,6 +32,9 @@ module Zernio
 
     attr_accessor :ad_type
 
+    # Creative format, classified from the media the creative carries. `null` when the creative carries no media to classify — an unsynced creative and a genuine text-only ad are indistinguishable, so neither is guessed at. Returned by `GET /v1/ads`, `GET /v1/ads/{adId}` and the ad nodes of `GET /v1/ads/tree`.
+    attr_accessor :creative_type
+
     # Available goals vary by platform. Meta (Facebook/Instagram) supports all 9 (incl. `lead_conversion` = website pixel lead optimization and `catalog_sales` = Advantage+ catalog ads). TikTok supports the 7 non-`lead_conversion` goals. LinkedIn supports all except app_promotion / lead_conversion. Twitter/X supports engagement, traffic, awareness, video_views, app_promotion. Pinterest and Google Ads support only engagement, traffic, awareness, video_views.
     attr_accessor :goal
 
@@ -127,6 +130,7 @@ module Zernio
         :'configured_status' => :'configuredStatus',
         :'review_status' => :'reviewStatus',
         :'ad_type' => :'adType',
+        :'creative_type' => :'creativeType',
         :'goal' => :'goal',
         :'is_external' => :'isExternal',
         :'budget' => :'budget',
@@ -176,6 +180,7 @@ module Zernio
         :'configured_status' => :'String',
         :'review_status' => :'AdReviewStatus',
         :'ad_type' => :'String',
+        :'creative_type' => :'String',
         :'goal' => :'String',
         :'is_external' => :'Boolean',
         :'budget' => :'AdBudget',
@@ -209,6 +214,7 @@ module Zernio
     def self.openapi_nullable
       Set.new([
         :'configured_status',
+        :'creative_type',
         :'metrics',
         :'platform_objective',
         :'optimization_goal',
@@ -263,6 +269,10 @@ module Zernio
 
       if attributes.key?(:'ad_type')
         self.ad_type = attributes[:'ad_type']
+      end
+
+      if attributes.key?(:'creative_type')
+        self.creative_type = attributes[:'creative_type']
       end
 
       if attributes.key?(:'goal')
@@ -388,6 +398,8 @@ module Zernio
       return false unless platform_validator.valid?(@platform)
       ad_type_validator = EnumAttributeValidator.new('String', ["boost", "standalone"])
       return false unless ad_type_validator.valid?(@ad_type)
+      creative_type_validator = EnumAttributeValidator.new('String', ["carousel", "video", "document", "image"])
+      return false unless creative_type_validator.valid?(@creative_type)
       goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "job_applicants"])
       return false unless goal_validator.valid?(@goal)
       true
@@ -414,6 +426,16 @@ module Zernio
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] creative_type Object to be assigned
+    def creative_type=(creative_type)
+      validator = EnumAttributeValidator.new('String', ["carousel", "video", "document", "image"])
+      unless validator.valid?(creative_type)
+        fail ArgumentError, "invalid value for \"creative_type\", must be one of #{validator.allowable_values}."
+      end
+      @creative_type = creative_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] goal Object to be assigned
     def goal=(goal)
       validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "job_applicants"])
@@ -435,6 +457,7 @@ module Zernio
           configured_status == o.configured_status &&
           review_status == o.review_status &&
           ad_type == o.ad_type &&
+          creative_type == o.creative_type &&
           goal == o.goal &&
           is_external == o.is_external &&
           budget == o.budget &&
@@ -472,7 +495,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, platform, status, configured_status, review_status, ad_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, cost_type, serving_statuses, platform_ad_account_name, platform_created_at, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
+      [_id, name, platform, status, configured_status, review_status, ad_type, creative_type, goal, is_external, budget, metrics, platform_ad_id, platform_ad_account_id, platform_campaign_id, platform_ad_set_id, campaign_name, ad_set_name, platform_objective, optimization_goal, cost_type, serving_statuses, platform_ad_account_name, platform_created_at, bid_strategy, bid_amount, roas_average_floor, promoted_object, creative, targeting, schedule, rejection_reason, created_at, updated_at].hash
     end
 
     # Builds the object from hash

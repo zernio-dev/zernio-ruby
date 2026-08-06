@@ -27,6 +27,8 @@ docs/AdCampaignsApi.md
 docs/AdCreative.md
 docs/AdCreativesApi.md
 docs/AdDailyMetrics.md
+docs/AdEngagementCounts.md
+docs/AdFunnelCounts.md
 docs/AdInsightsApi.md
 docs/AdMetrics.md
 docs/AdPromotedObject.md
@@ -1727,6 +1729,8 @@ lib/zernio-sdk/models/ad_campaign_budget.rb
 lib/zernio-sdk/models/ad_campaign_campaign_budget.rb
 lib/zernio-sdk/models/ad_creative.rb
 lib/zernio-sdk/models/ad_daily_metrics.rb
+lib/zernio-sdk/models/ad_engagement_counts.rb
+lib/zernio-sdk/models/ad_funnel_counts.rb
 lib/zernio-sdk/models/ad_metrics.rb
 lib/zernio-sdk/models/ad_promoted_object.rb
 lib/zernio-sdk/models/ad_review_status.rb
@@ -3363,6 +3367,8 @@ spec/models/ad_campaign_campaign_budget_spec.rb
 spec/models/ad_campaign_spec.rb
 spec/models/ad_creative_spec.rb
 spec/models/ad_daily_metrics_spec.rb
+spec/models/ad_engagement_counts_spec.rb
+spec/models/ad_funnel_counts_spec.rb
 spec/models/ad_metrics_spec.rb
 spec/models/ad_promoted_object_spec.rb
 spec/models/ad_review_status_spec.rb

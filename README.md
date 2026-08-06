@@ -624,6 +624,8 @@ Class | Method | HTTP request | Description
  - [Zernio::AdCampaignCampaignBudget](docs/AdCampaignCampaignBudget.md)
  - [Zernio::AdCreative](docs/AdCreative.md)
  - [Zernio::AdDailyMetrics](docs/AdDailyMetrics.md)
+ - [Zernio::AdEngagementCounts](docs/AdEngagementCounts.md)
+ - [Zernio::AdFunnelCounts](docs/AdFunnelCounts.md)
  - [Zernio::AdMetrics](docs/AdMetrics.md)
  - [Zernio::AdPromotedObject](docs/AdPromotedObject.md)
  - [Zernio::AdReviewStatus](docs/AdReviewStatus.md)
