@@ -14,22 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListCommentAutomationLogs200Response < ApiModelBase
-    attr_accessor :success
+  # Comments that reached this automation but matched none of its keywords. These produce no log entry, so this is the only signal that a keyword is catching nothing. Retained for a short window, then dropped.
+  class ListCommentAutomationLogs200ResponseMisses < ApiModelBase
+    # Number of non-matching comments in the retention window
+    attr_accessor :total
 
-    attr_accessor :logs
+    # How many days of non-matching comments the total covers
+    attr_accessor :retention_days
 
-    attr_accessor :pagination
-
-    attr_accessor :misses
+    # A few of the most recent non-matching comments, for diagnosing a keyword setup.
+    attr_accessor :samples
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'logs' => :'logs',
-        :'pagination' => :'pagination',
-        :'misses' => :'misses'
+        :'total' => :'total',
+        :'retention_days' => :'retentionDays',
+        :'samples' => :'samples'
       }
     end
 
@@ -46,10 +47,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'logs' => :'Array<GetCommentAutomation200ResponseLogsInner>',
-        :'pagination' => :'ListContacts200ResponsePagination',
-        :'misses' => :'ListCommentAutomationLogs200ResponseMisses'
+        :'total' => :'Integer',
+        :'retention_days' => :'Integer',
+        :'samples' => :'Array<ListCommentAutomationLogs200ResponseMissesSamplesInner>'
       }
     end
 
@@ -63,34 +63,30 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListCommentAutomationLogs200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListCommentAutomationLogs200ResponseMisses` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListCommentAutomationLogs200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListCommentAutomationLogs200ResponseMisses`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'total')
+        self.total = attributes[:'total']
       end
 
-      if attributes.key?(:'logs')
-        if (value = attributes[:'logs']).is_a?(Array)
-          self.logs = value
+      if attributes.key?(:'retention_days')
+        self.retention_days = attributes[:'retention_days']
+      end
+
+      if attributes.key?(:'samples')
+        if (value = attributes[:'samples']).is_a?(Array)
+          self.samples = value
         end
-      end
-
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
-      end
-
-      if attributes.key?(:'misses')
-        self.misses = attributes[:'misses']
       end
     end
 
@@ -114,10 +110,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          logs == o.logs &&
-          pagination == o.pagination &&
-          misses == o.misses
+          total == o.total &&
+          retention_days == o.retention_days &&
+          samples == o.samples
     end
 
     # @see the `==` method
@@ -129,7 +124,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, logs, pagination, misses].hash
+      [total, retention_days, samples].hash
     end
 
     # Builds the object from hash

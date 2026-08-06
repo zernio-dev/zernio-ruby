@@ -864,6 +864,8 @@ docs/ListBroadcasts200ResponseBroadcastsInner.md
 docs/ListCalls200Response.md
 docs/ListCalls200ResponseCallsInner.md
 docs/ListCommentAutomationLogs200Response.md
+docs/ListCommentAutomationLogs200ResponseMisses.md
+docs/ListCommentAutomationLogs200ResponseMissesSamplesInner.md
 docs/ListCommentAutomations200Response.md
 docs/ListCommentAutomations200ResponseAutomationsInner.md
 docs/ListCommentAutomations200ResponseAutomationsInnerStats.md
@@ -2540,6 +2542,8 @@ lib/zernio-sdk/models/list_broadcasts200_response_broadcasts_inner.rb
 lib/zernio-sdk/models/list_calls200_response.rb
 lib/zernio-sdk/models/list_calls200_response_calls_inner.rb
 lib/zernio-sdk/models/list_comment_automation_logs200_response.rb
+lib/zernio-sdk/models/list_comment_automation_logs200_response_misses.rb
+lib/zernio-sdk/models/list_comment_automation_logs200_response_misses_samples_inner.rb
 lib/zernio-sdk/models/list_comment_automations200_response.rb
 lib/zernio-sdk/models/list_comment_automations200_response_automations_inner.rb
 lib/zernio-sdk/models/list_comment_automations200_response_automations_inner_stats.rb
@@ -4178,6 +4182,8 @@ spec/models/list_broadcasts200_response_broadcasts_inner_spec.rb
 spec/models/list_broadcasts200_response_spec.rb
 spec/models/list_calls200_response_calls_inner_spec.rb
 spec/models/list_calls200_response_spec.rb
+spec/models/list_comment_automation_logs200_response_misses_samples_inner_spec.rb
+spec/models/list_comment_automation_logs200_response_misses_spec.rb
 spec/models/list_comment_automation_logs200_response_spec.rb
 spec/models/list_comment_automations200_response_automations_inner_spec.rb
 spec/models/list_comment_automations200_response_automations_inner_stats_spec.rb

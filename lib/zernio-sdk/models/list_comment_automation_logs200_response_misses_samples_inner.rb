@@ -14,22 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListCommentAutomationLogs200Response < ApiModelBase
-    attr_accessor :success
+  class ListCommentAutomationLogs200ResponseMissesSamplesInner < ApiModelBase
+    attr_accessor :comment_text
 
-    attr_accessor :logs
+    attr_accessor :commenter_name
 
-    attr_accessor :pagination
+    # Set when an exclusion keyword vetoed an otherwise matching comment
+    attr_accessor :excluded_by
 
-    attr_accessor :misses
+    attr_accessor :at
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'logs' => :'logs',
-        :'pagination' => :'pagination',
-        :'misses' => :'misses'
+        :'comment_text' => :'commentText',
+        :'commenter_name' => :'commenterName',
+        :'excluded_by' => :'excludedBy',
+        :'at' => :'at'
       }
     end
 
@@ -46,10 +47,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'logs' => :'Array<GetCommentAutomation200ResponseLogsInner>',
-        :'pagination' => :'ListContacts200ResponsePagination',
-        :'misses' => :'ListCommentAutomationLogs200ResponseMisses'
+        :'comment_text' => :'String',
+        :'commenter_name' => :'String',
+        :'excluded_by' => :'String',
+        :'at' => :'Time'
       }
     end
 
@@ -63,34 +64,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListCommentAutomationLogs200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListCommentAutomationLogs200ResponseMissesSamplesInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListCommentAutomationLogs200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListCommentAutomationLogs200ResponseMissesSamplesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'comment_text')
+        self.comment_text = attributes[:'comment_text']
       end
 
-      if attributes.key?(:'logs')
-        if (value = attributes[:'logs']).is_a?(Array)
-          self.logs = value
-        end
+      if attributes.key?(:'commenter_name')
+        self.commenter_name = attributes[:'commenter_name']
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'excluded_by')
+        self.excluded_by = attributes[:'excluded_by']
       end
 
-      if attributes.key?(:'misses')
-        self.misses = attributes[:'misses']
+      if attributes.key?(:'at')
+        self.at = attributes[:'at']
       end
     end
 
@@ -114,10 +113,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          logs == o.logs &&
-          pagination == o.pagination &&
-          misses == o.misses
+          comment_text == o.comment_text &&
+          commenter_name == o.commenter_name &&
+          excluded_by == o.excluded_by &&
+          at == o.at
     end
 
     # @see the `==` method
@@ -129,7 +128,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, logs, pagination, misses].hash
+      [comment_text, commenter_name, excluded_by, at].hash
     end
 
     # Builds the object from hash

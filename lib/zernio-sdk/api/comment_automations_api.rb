@@ -246,6 +246,18 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 200
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CommentAutomationsApi.list_comment_automation_logs, must be smaller than or equal to 200.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CommentAutomationsApi.list_comment_automation_logs, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'skip'].nil? && opts[:'skip'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"skip"]" when calling CommentAutomationsApi.list_comment_automation_logs, must be greater than or equal to 0.'
+      end
+
       # resource path
       local_var_path = '/v1/comment-automations/{automationId}/logs'.sub('{' + 'automationId' + '}', CGI.escape(automation_id.to_s))
 

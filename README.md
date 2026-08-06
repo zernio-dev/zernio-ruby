@@ -1435,6 +1435,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListCalls200Response](docs/ListCalls200Response.md)
  - [Zernio::ListCalls200ResponseCallsInner](docs/ListCalls200ResponseCallsInner.md)
  - [Zernio::ListCommentAutomationLogs200Response](docs/ListCommentAutomationLogs200Response.md)
+ - [Zernio::ListCommentAutomationLogs200ResponseMisses](docs/ListCommentAutomationLogs200ResponseMisses.md)
+ - [Zernio::ListCommentAutomationLogs200ResponseMissesSamplesInner](docs/ListCommentAutomationLogs200ResponseMissesSamplesInner.md)
  - [Zernio::ListCommentAutomations200Response](docs/ListCommentAutomations200Response.md)
  - [Zernio::ListCommentAutomations200ResponseAutomationsInner](docs/ListCommentAutomations200ResponseAutomationsInner.md)
  - [Zernio::ListCommentAutomations200ResponseAutomationsInnerStats](docs/ListCommentAutomations200ResponseAutomationsInnerStats.md)
