@@ -36,6 +36,9 @@ module Zernio
     # Custom headers to include in webhook requests
     attr_accessor :custom_headers
 
+    # Replaces the subscription's denylist. Send an empty array to clear it and receive every event in `events` again. Omitting the field leaves the current denylist untouched. Applies to events emitted after the update; already-queued events can still deliver for up to five minutes after they were enqueued. When the caller is a restricted (zrk_) key, that key's own disabled groups are unioned back in either way, so a restricted key can neither clear nor widen a subscription past its own groups.
+    attr_accessor :disabled_resource_groups
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -67,7 +70,8 @@ module Zernio
         :'secret' => :'secret',
         :'events' => :'events',
         :'is_active' => :'isActive',
-        :'custom_headers' => :'customHeaders'
+        :'custom_headers' => :'customHeaders',
+        :'disabled_resource_groups' => :'disabledResourceGroups'
       }
     end
 
@@ -90,7 +94,8 @@ module Zernio
         :'secret' => :'String',
         :'events' => :'Array<String>',
         :'is_active' => :'Boolean',
-        :'custom_headers' => :'Hash<String, String>'
+        :'custom_headers' => :'Hash<String, String>',
+        :'disabled_resource_groups' => :'Array<String>'
       }
     end
 
@@ -147,6 +152,12 @@ module Zernio
       if attributes.key?(:'custom_headers')
         if (value = attributes[:'custom_headers']).is_a?(Hash)
           self.custom_headers = value
+        end
+      end
+
+      if attributes.key?(:'disabled_resource_groups')
+        if (value = attributes[:'disabled_resource_groups']).is_a?(Array)
+          self.disabled_resource_groups = value
         end
       end
     end
@@ -225,7 +236,8 @@ module Zernio
           secret == o.secret &&
           events == o.events &&
           is_active == o.is_active &&
-          custom_headers == o.custom_headers
+          custom_headers == o.custom_headers &&
+          disabled_resource_groups == o.disabled_resource_groups
     end
 
     # @see the `==` method
@@ -237,7 +249,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, url, secret, events, is_active, custom_headers].hash
+      [_id, name, url, secret, events, is_active, custom_headers, disabled_resource_groups].hash
     end
 
     # Builds the object from hash

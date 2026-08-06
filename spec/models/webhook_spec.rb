@@ -85,4 +85,14 @@ describe Zernio::Webhook do
     end
   end
 
+  describe 'test attribute "disabled_resource_groups"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["publishing", "engagement", "messages", "contacts", "analytics", "ads", "telephony", "accounts", "billing", "webhooks"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.disabled_resource_groups = value }.not_to raise_error
+      # end
+    end
+  end
+
 end
