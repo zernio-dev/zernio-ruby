@@ -42,6 +42,9 @@ module Zernio
     # Timestamp when the post was published to this platform
     attr_accessor :published_at
 
+    # Set when a post that was successfully published later disappears from the platform (deleted on-platform or taken down by the platform). status stays \"published\" (it reflects the publish outcome); poll this field to detect post-publish removals. Absent while the post is live, and cleared if the post reappears. Detection runs with the analytics sync, so expect up to a few hours of lag.
+    attr_accessor :removed_from_platform_at
+
     # Present and true only when this Instagram reel was launched as a Trial through Zernio (created with platformSpecificData.trialParams). Use it to segment trial reels in analytics. Note: Instagram's Graph API exposes no readable trial field, so this reflects creation-time intent only. It indicates the reel STARTED as a trial, not whether or when it graduated.
     attr_accessor :is_trial_reel
 
@@ -92,6 +95,7 @@ module Zernio
         :'platform_post_id' => :'platformPostId',
         :'platform_post_url' => :'platformPostUrl',
         :'published_at' => :'publishedAt',
+        :'removed_from_platform_at' => :'removedFromPlatformAt',
         :'is_trial_reel' => :'isTrialReel',
         :'trial_graduation_strategy' => :'trialGraduationStrategy',
         :'error_message' => :'errorMessage',
@@ -123,6 +127,7 @@ module Zernio
         :'platform_post_id' => :'String',
         :'platform_post_url' => :'String',
         :'published_at' => :'Time',
+        :'removed_from_platform_at' => :'Time',
         :'is_trial_reel' => :'Boolean',
         :'trial_graduation_strategy' => :'String',
         :'error_message' => :'String',
@@ -134,6 +139,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'removed_from_platform_at',
       ])
     end
 
@@ -193,6 +199,10 @@ module Zernio
 
       if attributes.key?(:'published_at')
         self.published_at = attributes[:'published_at']
+      end
+
+      if attributes.key?(:'removed_from_platform_at')
+        self.removed_from_platform_at = attributes[:'removed_from_platform_at']
       end
 
       if attributes.key?(:'is_trial_reel')
@@ -282,6 +292,7 @@ module Zernio
           platform_post_id == o.platform_post_id &&
           platform_post_url == o.platform_post_url &&
           published_at == o.published_at &&
+          removed_from_platform_at == o.removed_from_platform_at &&
           is_trial_reel == o.is_trial_reel &&
           trial_graduation_strategy == o.trial_graduation_strategy &&
           error_message == o.error_message &&
@@ -298,7 +309,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, account_id, custom_content, custom_media, scheduled_for, platform_specific_data, status, platform_post_id, platform_post_url, published_at, is_trial_reel, trial_graduation_strategy, error_message, error_category, error_source].hash
+      [platform, account_id, custom_content, custom_media, scheduled_for, platform_specific_data, status, platform_post_id, platform_post_url, published_at, removed_from_platform_at, is_trial_reel, trial_graduation_strategy, error_message, error_category, error_source].hash
     end
 
     # Builds the object from hash
