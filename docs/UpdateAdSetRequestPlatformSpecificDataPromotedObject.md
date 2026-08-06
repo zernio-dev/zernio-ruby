@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **pixel_id** | **String** |  | [optional] |
 | **custom_event_type** | **String** |  | [optional] |
+| **custom_event_str** | **String** | Pixel custom-event name (custom_event_str); requires customEventType OTHER. Same pairing rules as /v1/ads/create. | [optional] |
 | **page_id** | **String** |  | [optional] |
 | **application_id** | **String** |  | [optional] |
 | **object_store_url** | **String** |  | [optional] |
@@ -23,6 +24,7 @@ require 'zernio-sdk'
 instance = Zernio::UpdateAdSetRequestPlatformSpecificDataPromotedObject.new(
   pixel_id: null,
   custom_event_type: null,
+  custom_event_str: null,
   page_id: null,
   application_id: null,
   object_store_url: null,

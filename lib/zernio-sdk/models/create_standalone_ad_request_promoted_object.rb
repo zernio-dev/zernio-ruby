@@ -14,13 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  # What the ad optimises against. Behaviour depends on the platform.  **Meta**: forwarded to the ad set's `promoted_object` (snake-cased). Required for goals whose ad-set optimization_goal points at a specific event/page/app (without it Meta rejects the ad-set create with `error_subcode: 1815430` \"Please select a promoted object for your ad set\"):   - `goal: conversions` / `lead_conversion` (OFFSITE_CONVERSIONS): requires `pixelId` + `customEventType`, or `customConversionId` when optimising against a Custom Conversion (the conversion carries its own event definition)   - `goal: app_promotion` (APP_INSTALLS): requires `applicationId` + `objectStoreUrl`   - `goal: lead_generation` (LEAD_GENERATION): `pageId` is auto-filled from the connected Page when omitted  Other Meta goals (engagement, traffic, awareness, video_views) ignore this field.  **TikTok**: only `goal: conversions` uses it.   - `pixelId` maps to the ad group's `pixel_id`. Required: a TikTok website-conversion     ad group without a pixel is rejected with `40002: Please select a pixel`.   - `customEventType` maps to the ad group's `optimization_event` (the pixel event to     optimise for). Optional: TikTok accepts a pixel-only auto-bid conversion ad group.     See the `customEventType` field below for the valid TikTok codes.  The remaining `promotedObject.*` fields are Meta-only. Platforms other than Meta and TikTok ignore `promotedObject` entirely. 
+  # What the ad optimises against. Behaviour depends on the platform.  **Meta**: forwarded to the ad set's `promoted_object` (snake-cased). Required for goals whose ad-set optimization_goal points at a specific event/page/app (without it Meta rejects the ad-set create with `error_subcode: 1815430` \"Please select a promoted object for your ad set\"):   - `goal: conversions` / `lead_conversion` (OFFSITE_CONVERSIONS): requires `pixelId` + `customEventType`, or `customConversionId` when optimising against a Custom Conversion (the conversion carries its own event definition). For a pixel CUSTOM event (one you named yourself in CAPI/Events Manager), send `customEventType: OTHER` + `customEventStr` with the event name.   - `goal: app_promotion` (APP_INSTALLS): requires `applicationId` + `objectStoreUrl`   - `goal: lead_generation` (LEAD_GENERATION): `pageId` is auto-filled from the connected Page when omitted  Other Meta goals (engagement, traffic, awareness, video_views) ignore this field.  **TikTok**: only `goal: conversions` uses it.   - `pixelId` maps to the ad group's `pixel_id`. Required: a TikTok website-conversion     ad group without a pixel is rejected with `40002: Please select a pixel`.   - `customEventType` maps to the ad group's `optimization_event` (the pixel event to     optimise for). Optional: TikTok accepts a pixel-only auto-bid conversion ad group.     See the `customEventType` field below for the valid TikTok codes.  The remaining `promotedObject.*` fields are Meta-only. Platforms other than Meta and TikTok ignore `promotedObject` entirely. 
   class CreateStandaloneAdRequestPromotedObject < ApiModelBase
     # Pixel ID. **Meta:** Facebook Pixel ID, required for `goal: conversions`. **TikTok:** TikTok Pixel ID, required for `goal: conversions`. To discover the pixels an ad account can use, call `GET /v1/accounts/{accountId}/tracking-tags?adAccountId=act_...` (each entry carries `kind` and `ownerAdAccountId`), or `GET /v1/accounts/{accountId}/conversion-destinations`. Note this is a different resource from `GET /v1/ads/{adId}/tracking-tags`, which reads an ad's click-URL params (`url_tags`), not pixels. 
     attr_accessor :pixel_id
 
     # The event the campaign/ad group optimises against.  **Meta:** standard event like `PURCHASE`, `LEAD`, `COMPLETE_REGISTRATION`, `ADD_TO_CART`. Uppercased internally so callers can pass any case. Required for `goal: conversions`.  **TikTok:** an `optimization_event` code (UPPER_SNAKE, not Meta's vocabulary and not PascalCase), OR the exact event name shown in TikTok Events Manager (auto-resolved to its code). Must be one of the event types your TikTok Pixel tracks; custom events are not optimizable. Current taxonomy: `SHOPPING` (Purchase), `ON_WEB_CART` (Add to Cart), `INITIATE_ORDER` (Initiate Checkout), `FORM` (Lead), `ON_WEB_REGISTER` (Complete Registration), `ON_WEB_DETAIL` (View Content). `ON_WEB_ORDER` is deprecated. On rejection the error lists the event types your pixel actually tracks. Optional for `goal: conversions`. 
     attr_accessor :custom_event_type
+
+    # Meta only. Pixel custom-event name to optimise against (Meta's `custom_event_str`), exactly as it appears in Events Manager and in your CAPI payloads (case-sensitive, not uppercased). Requires `customEventType: OTHER`, and `OTHER` requires this field (400 either way). The same as picking a custom event in Ads Manager's conversion-event dropdown. For rule-based Custom Conversions use `customConversionId` instead. 
+    attr_accessor :custom_event_str
 
     # Facebook Page ID. Used by `goal: lead_generation`. Auto-filled from the connected Page when omitted. 
     attr_accessor :page_id
@@ -51,6 +54,7 @@ module Zernio
       {
         :'pixel_id' => :'pixelId',
         :'custom_event_type' => :'customEventType',
+        :'custom_event_str' => :'customEventStr',
         :'page_id' => :'pageId',
         :'application_id' => :'applicationId',
         :'object_store_url' => :'objectStoreUrl',
@@ -77,6 +81,7 @@ module Zernio
       {
         :'pixel_id' => :'String',
         :'custom_event_type' => :'String',
+        :'custom_event_str' => :'String',
         :'page_id' => :'String',
         :'application_id' => :'String',
         :'object_store_url' => :'String',
@@ -116,6 +121,10 @@ module Zernio
 
       if attributes.key?(:'custom_event_type')
         self.custom_event_type = attributes[:'custom_event_type']
+      end
+
+      if attributes.key?(:'custom_event_str')
+        self.custom_event_str = attributes[:'custom_event_str']
       end
 
       if attributes.key?(:'page_id')
@@ -173,6 +182,7 @@ module Zernio
       self.class == o.class &&
           pixel_id == o.pixel_id &&
           custom_event_type == o.custom_event_type &&
+          custom_event_str == o.custom_event_str &&
           page_id == o.page_id &&
           application_id == o.application_id &&
           object_store_url == o.object_store_url &&
@@ -192,7 +202,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [pixel_id, custom_event_type, page_id, application_id, object_store_url, custom_conversion_id, product_catalog_id, product_set_id, offline_conversion_data_set_id, whatsapp_phone_number].hash
+      [pixel_id, custom_event_type, custom_event_str, page_id, application_id, object_store_url, custom_conversion_id, product_catalog_id, product_set_id, offline_conversion_data_set_id, whatsapp_phone_number].hash
     end
 
     # Builds the object from hash

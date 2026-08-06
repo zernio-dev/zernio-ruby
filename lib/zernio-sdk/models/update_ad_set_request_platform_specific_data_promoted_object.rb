@@ -20,6 +20,9 @@ module Zernio
 
     attr_accessor :custom_event_type
 
+    # Pixel custom-event name (custom_event_str); requires customEventType OTHER. Same pairing rules as /v1/ads/create.
+    attr_accessor :custom_event_str
+
     attr_accessor :page_id
 
     attr_accessor :application_id
@@ -41,6 +44,7 @@ module Zernio
       {
         :'pixel_id' => :'pixelId',
         :'custom_event_type' => :'customEventType',
+        :'custom_event_str' => :'customEventStr',
         :'page_id' => :'pageId',
         :'application_id' => :'applicationId',
         :'object_store_url' => :'objectStoreUrl',
@@ -67,6 +71,7 @@ module Zernio
       {
         :'pixel_id' => :'String',
         :'custom_event_type' => :'String',
+        :'custom_event_str' => :'String',
         :'page_id' => :'String',
         :'application_id' => :'String',
         :'object_store_url' => :'String',
@@ -106,6 +111,10 @@ module Zernio
 
       if attributes.key?(:'custom_event_type')
         self.custom_event_type = attributes[:'custom_event_type']
+      end
+
+      if attributes.key?(:'custom_event_str')
+        self.custom_event_str = attributes[:'custom_event_str']
       end
 
       if attributes.key?(:'page_id')
@@ -163,6 +172,7 @@ module Zernio
       self.class == o.class &&
           pixel_id == o.pixel_id &&
           custom_event_type == o.custom_event_type &&
+          custom_event_str == o.custom_event_str &&
           page_id == o.page_id &&
           application_id == o.application_id &&
           object_store_url == o.object_store_url &&
@@ -182,7 +192,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [pixel_id, custom_event_type, page_id, application_id, object_store_url, custom_conversion_id, product_catalog_id, product_set_id, offline_conversion_data_set_id, whatsapp_phone_number].hash
+      [pixel_id, custom_event_type, custom_event_str, page_id, application_id, object_store_url, custom_conversion_id, product_catalog_id, product_set_id, offline_conversion_data_set_id, whatsapp_phone_number].hash
     end
 
     # Builds the object from hash
