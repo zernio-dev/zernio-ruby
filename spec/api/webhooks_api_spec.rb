@@ -34,7 +34,7 @@ describe 'WebhooksApi' do
 
   # unit tests for create_webhook_settings
   # Create webhook
-  # Create a new webhook configuration. Maximum 50 webhooks per user.  &#x60;name&#x60;, &#x60;url&#x60; and &#x60;events&#x60; are required. &#x60;url&#x60; must be a valid URL and &#x60;events&#x60; must contain at least one event. Whitespace is trimmed from &#x60;url&#x60; before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures. 
+  # Create a new webhook configuration. Maximum 50 webhooks per user.  &#x60;name&#x60;, &#x60;url&#x60; and &#x60;events&#x60; are required. &#x60;url&#x60; must be a valid URL and &#x60;events&#x60; must contain at least one event. Whitespace is trimmed from &#x60;url&#x60; before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures.  A restricted (zrk_) API key can only subscribe to events whose resource group the key holds; an event outside the key&#39;s groups is rejected with 403. Note that the KEY cannot access private messages; the ACCOUNT&#39;s pre-existing webhook subscriptions are a separate grant surface. 
   # @param create_webhook_settings_request 
   # @param [Hash] opts the optional parameters
   # @return [UpdateWebhookSettings200Response]
@@ -58,7 +58,7 @@ describe 'WebhooksApi' do
 
   # unit tests for get_webhook_logs
   # List webhook delivery logs
-  # Retrieve recorded webhook delivery attempts for the authenticated user, most recent first. Logs are retained for 30 days. Supports filtering by status, event type, webhook ID, and event ID, plus offset-based pagination. 
+  # Retrieve recorded webhook delivery attempts for the authenticated user, most recent first. Logs are retained for 30 days. Supports filtering by status, event type, webhook ID, and event ID, plus offset-based pagination.  For a restricted (zrk_) API key, rows for events outside the key&#39;s resource groups are omitted (&#x60;pagination.total&#x60; may over-count), and an &#x60;event&#x60; filter naming such an event is rejected with 403. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit Maximum number of logs to return
   # @option opts [Integer] :skip Number of logs to skip (offset-based pagination)
@@ -98,7 +98,7 @@ describe 'WebhooksApi' do
 
   # unit tests for update_webhook_settings
   # Update webhook
-  # Update an existing webhook configuration. All fields except &#x60;_id&#x60; are optional; only provided fields will be updated.  When provided, &#x60;name&#x60; must be 1-50 characters, &#x60;url&#x60; must be a valid URL, and &#x60;events&#x60; must contain at least one event. Whitespace is trimmed from &#x60;url&#x60; before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures. 
+  # Update an existing webhook configuration. All fields except &#x60;_id&#x60; are optional; only provided fields will be updated.  When provided, &#x60;name&#x60; must be 1-50 characters, &#x60;url&#x60; must be a valid URL, and &#x60;events&#x60; must contain at least one event. Whitespace is trimmed from &#x60;url&#x60; before validation.  Webhooks are automatically disabled after 10 consecutive delivery failures.  A restricted (zrk_) API key can only set &#x60;events&#x60; to events whose resource group the key holds; an event outside the key&#39;s groups is rejected with 403. 
   # @param update_webhook_settings_request 
   # @param [Hash] opts the optional parameters
   # @return [UpdateWebhookSettings200Response]

@@ -14,13 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
-  class InlineObject2 < ApiModelBase
+  class InlineObject3 < ApiModelBase
+    # Human-readable error message suitable for end-user display.
     attr_accessor :error
 
+    # Machine-readable error code. Stable across versions.
     attr_accessor :code
 
-    # The resource group the key needs for this operation. Absent on admin-plane and unclassified-path denials.
-    attr_accessor :required_group
+    # Discriminator for which gate fired.
+    attr_accessor :reason
+
+    # Link to the relevant documentation page.
+    attr_accessor :documentation_url
+
+    # Deep-link to send the end-user to. For `free_tier_exceeded` and `twitter_passthrough` this is the Zernio billing tab. For `enterprise_required` this is the Zernio enterprise contact page. 
+    attr_accessor :dashboard_url
+
+    attr_accessor :details
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -49,7 +59,10 @@ module Zernio
       {
         :'error' => :'error',
         :'code' => :'code',
-        :'required_group' => :'required_group'
+        :'reason' => :'reason',
+        :'documentation_url' => :'documentation_url',
+        :'dashboard_url' => :'dashboard_url',
+        :'details' => :'details'
       }
     end
 
@@ -68,7 +81,10 @@ module Zernio
       {
         :'error' => :'String',
         :'code' => :'String',
-        :'required_group' => :'String'
+        :'reason' => :'String',
+        :'documentation_url' => :'String',
+        :'dashboard_url' => :'String',
+        :'details' => :'InlineObject3Details'
       }
     end
 
@@ -82,28 +98,46 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InlineObject2` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InlineObject3` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InlineObject2`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InlineObject3`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'error')
         self.error = attributes[:'error']
+      else
+        self.error = nil
       end
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
+      else
+        self.code = nil
       end
 
-      if attributes.key?(:'required_group')
-        self.required_group = attributes[:'required_group']
+      if attributes.key?(:'reason')
+        self.reason = attributes[:'reason']
+      else
+        self.reason = nil
+      end
+
+      if attributes.key?(:'documentation_url')
+        self.documentation_url = attributes[:'documentation_url']
+      end
+
+      if attributes.key?(:'dashboard_url')
+        self.dashboard_url = attributes[:'dashboard_url']
+      end
+
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
       end
     end
 
@@ -112,6 +146,18 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @error.nil?
+        invalid_properties.push('invalid value for "error", error cannot be nil.')
+      end
+
+      if @code.nil?
+        invalid_properties.push('invalid value for "code", code cannot be nil.')
+      end
+
+      if @reason.nil?
+        invalid_properties.push('invalid value for "reason", reason cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -119,17 +165,30 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["insufficient_permissions", "unclassified_resource"])
+      return false if @error.nil?
+      return false if @code.nil?
+      code_validator = EnumAttributeValidator.new('String', ["PAYMENT_REQUIRED"])
       return false unless code_validator.valid?(@code)
-      required_group_validator = EnumAttributeValidator.new('String', ["publishing", "engagement", "messages", "contacts", "analytics", "ads", "telephony", "accounts", "billing", "webhooks"])
-      return false unless required_group_validator.valid?(@required_group)
+      return false if @reason.nil?
+      reason_validator = EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required"])
+      return false unless reason_validator.valid?(@reason)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] error Value to be assigned
+    def error=(error)
+      if error.nil?
+        fail ArgumentError, 'error cannot be nil'
+      end
+
+      @error = error
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code)
-      validator = EnumAttributeValidator.new('String', ["insufficient_permissions", "unclassified_resource"])
+      validator = EnumAttributeValidator.new('String', ["PAYMENT_REQUIRED"])
       unless validator.valid?(code)
         fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
       end
@@ -137,13 +196,13 @@ module Zernio
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] required_group Object to be assigned
-    def required_group=(required_group)
-      validator = EnumAttributeValidator.new('String', ["publishing", "engagement", "messages", "contacts", "analytics", "ads", "telephony", "accounts", "billing", "webhooks"])
-      unless validator.valid?(required_group)
-        fail ArgumentError, "invalid value for \"required_group\", must be one of #{validator.allowable_values}."
+    # @param [Object] reason Object to be assigned
+    def reason=(reason)
+      validator = EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required"])
+      unless validator.valid?(reason)
+        fail ArgumentError, "invalid value for \"reason\", must be one of #{validator.allowable_values}."
       end
-      @required_group = required_group
+      @reason = reason
     end
 
     # Checks equality by comparing each attribute.
@@ -153,7 +212,10 @@ module Zernio
       self.class == o.class &&
           error == o.error &&
           code == o.code &&
-          required_group == o.required_group
+          reason == o.reason &&
+          documentation_url == o.documentation_url &&
+          dashboard_url == o.dashboard_url &&
+          details == o.details
     end
 
     # @see the `==` method
@@ -165,7 +227,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, code, required_group].hash
+      [error, code, reason, documentation_url, dashboard_url, details].hash
     end
 
     # Builds the object from hash

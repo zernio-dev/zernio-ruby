@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # List connected apps
-    # Returns the OAuth clients (AI assistants and MCP connectors) the authenticated user has authorized and that still hold a live token.  Requires a session or a full-scope API key. A profile-scoped API key or an OAuth access token is rejected with 403: an app must not be able to enumerate its sibling authorizations. 
+    # Returns the OAuth clients (AI assistants and MCP connectors) the authenticated user has authorized and that still hold a live token.  Requires a session or a full-access API key. A profile-scoped API key, a restricted (zrk_) API key, or an OAuth access token is rejected with 403: an app must not be able to enumerate its sibling authorizations, and connected-app management is admin-plane. 
     # @param [Hash] opts the optional parameters
     # @return [ListConnectedApps200Response]
     def list_connected_apps(opts = {})
@@ -29,7 +29,7 @@ module Zernio
     end
 
     # List connected apps
-    # Returns the OAuth clients (AI assistants and MCP connectors) the authenticated user has authorized and that still hold a live token.  Requires a session or a full-scope API key. A profile-scoped API key or an OAuth access token is rejected with 403: an app must not be able to enumerate its sibling authorizations. 
+    # Returns the OAuth clients (AI assistants and MCP connectors) the authenticated user has authorized and that still hold a live token.  Requires a session or a full-access API key. A profile-scoped API key, a restricted (zrk_) API key, or an OAuth access token is rejected with 403: an app must not be able to enumerate its sibling authorizations, and connected-app management is admin-plane. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListConnectedApps200Response, Integer, Hash)>] ListConnectedApps200Response data, response status code and response headers
     def list_connected_apps_with_http_info(opts = {})
@@ -77,7 +77,7 @@ module Zernio
     end
 
     # Revoke connected app
-    # Ends an app's access: invalidates the client's pending authorization codes and revokes every live token it holds for the authenticated user. Takes effect on the app's next request.  Idempotent while the authorization is still on record: revoking an app that was already revoked returns 200 with `revokedTokens: 0`. 
+    # Ends an app's access: invalidates the client's pending authorization codes and revokes every live token it holds for the authenticated user. Takes effect on the app's next request.  Idempotent while the authorization is still on record: revoking an app that was already revoked returns 200 with `revokedTokens: 0`.  Requires a session or a full-access API key. A profile-scoped API key, a restricted (zrk_) API key, or an OAuth access token is rejected with 403. 
     # @param client_id [String] OAuth client id, as returned by GET /v1/me/connected-apps.
     # @param [Hash] opts the optional parameters
     # @return [RevokeConnectedApp200Response]
@@ -87,7 +87,7 @@ module Zernio
     end
 
     # Revoke connected app
-    # Ends an app&#39;s access: invalidates the client&#39;s pending authorization codes and revokes every live token it holds for the authenticated user. Takes effect on the app&#39;s next request.  Idempotent while the authorization is still on record: revoking an app that was already revoked returns 200 with &#x60;revokedTokens: 0&#x60;. 
+    # Ends an app&#39;s access: invalidates the client&#39;s pending authorization codes and revokes every live token it holds for the authenticated user. Takes effect on the app&#39;s next request.  Idempotent while the authorization is still on record: revoking an app that was already revoked returns 200 with &#x60;revokedTokens: 0&#x60;.  Requires a session or a full-access API key. A profile-scoped API key, a restricted (zrk_) API key, or an OAuth access token is rejected with 403. 
     # @param client_id [String] OAuth client id, as returned by GET /v1/me/connected-apps.
     # @param [Hash] opts the optional parameters
     # @return [Array<(RevokeConnectedApp200Response, Integer, Hash)>] RevokeConnectedApp200Response data, response status code and response headers

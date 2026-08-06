@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   # Structured context for SDK clients that want to render their own UX. Keys vary by `reason`.
-  class InlineObject2Details < ApiModelBase
+  class InlineObject3Details < ApiModelBase
     # How many accounts the free tier allows. Only set when reason=free_tier_exceeded.
     attr_accessor :free_tier_account_limit
 
@@ -68,14 +68,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InlineObject2Details` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::InlineObject3Details` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InlineObject2Details`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::InlineObject3Details`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }

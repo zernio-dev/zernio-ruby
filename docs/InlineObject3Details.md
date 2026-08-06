@@ -1,4 +1,4 @@
-# Zernio::InlineObject2Details
+# Zernio::InlineObject3Details
 
 ## Properties
 
@@ -14,7 +14,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::InlineObject2Details.new(
+instance = Zernio::InlineObject3Details.new(
   free_tier_account_limit: 2,
   current_account_count: 5,
   has_payment_method: null,

@@ -37,6 +37,9 @@ module Zernio
     # 'read-write' allows all operations, 'read' restricts to GET requests only
     attr_accessor :permission
 
+    # Resource groups this key can NOT access (opt-out denylist). Absent or empty means legacy full access. A key with any group disabled is a restricted key (zrk_ prefix) and can never manage API keys, invites, or member identity. Each operation's group is published as x-resource-group. With 'messages' disabled, the KEY cannot access private messages; the ACCOUNT's pre-existing webhook subscriptions are a separate grant surface.
+    attr_accessor :disabled_resource_groups
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -70,7 +73,8 @@ module Zernio
         :'key' => :'key',
         :'scope' => :'scope',
         :'profile_ids' => :'profileIds',
-        :'permission' => :'permission'
+        :'permission' => :'permission',
+        :'disabled_resource_groups' => :'disabledResourceGroups'
       }
     end
 
@@ -95,7 +99,8 @@ module Zernio
         :'key' => :'String',
         :'scope' => :'String',
         :'profile_ids' => :'Array<ApiKeyProfileIdsInner>',
-        :'permission' => :'String'
+        :'permission' => :'String',
+        :'disabled_resource_groups' => :'Array<String>'
       }
     end
 
@@ -162,6 +167,12 @@ module Zernio
       else
         self.permission = 'read-write'
       end
+
+      if attributes.key?(:'disabled_resource_groups')
+        if (value = attributes[:'disabled_resource_groups']).is_a?(Array)
+          self.disabled_resource_groups = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -216,7 +227,8 @@ module Zernio
           key == o.key &&
           scope == o.scope &&
           profile_ids == o.profile_ids &&
-          permission == o.permission
+          permission == o.permission &&
+          disabled_resource_groups == o.disabled_resource_groups
     end
 
     # @see the `==` method
@@ -228,7 +240,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, key_preview, expires_at, created_at, key, scope, profile_ids, permission].hash
+      [id, name, key_preview, expires_at, created_at, key, scope, profile_ids, permission, disabled_resource_groups].hash
     end
 
     # Builds the object from hash

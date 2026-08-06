@@ -29,6 +29,9 @@ module Zernio
     # 'read-write' allows all operations (default), 'read' restricts to GET requests only
     attr_accessor :permission
 
+    # Resource groups to DISABLE on this key (opt-out denylist). Omit for a legacy full-access key. A key with any group disabled mints with the zrk_ prefix, gets 403 with code=insufficient_permissions and required_group on operations in disabled groups (each operation's group is published as x-resource-group), and can never manage API keys, invites, or member identity. With 'messages' disabled, the KEY cannot access private messages; the ACCOUNT's pre-existing webhook subscriptions are a separate grant surface.
+    attr_accessor :disabled_resource_groups
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -58,7 +61,8 @@ module Zernio
         :'expires_in' => :'expiresIn',
         :'scope' => :'scope',
         :'profile_ids' => :'profileIds',
-        :'permission' => :'permission'
+        :'permission' => :'permission',
+        :'disabled_resource_groups' => :'disabledResourceGroups'
       }
     end
 
@@ -79,7 +83,8 @@ module Zernio
         :'expires_in' => :'Integer',
         :'scope' => :'String',
         :'profile_ids' => :'Array<String>',
-        :'permission' => :'String'
+        :'permission' => :'String',
+        :'disabled_resource_groups' => :'Array<String>'
       }
     end
 
@@ -131,6 +136,12 @@ module Zernio
         self.permission = attributes[:'permission']
       else
         self.permission = 'read-write'
+      end
+
+      if attributes.key?(:'disabled_resource_groups')
+        if (value = attributes[:'disabled_resource_groups']).is_a?(Array)
+          self.disabled_resource_groups = value
+        end
       end
     end
 
@@ -197,7 +208,8 @@ module Zernio
           expires_in == o.expires_in &&
           scope == o.scope &&
           profile_ids == o.profile_ids &&
-          permission == o.permission
+          permission == o.permission &&
+          disabled_resource_groups == o.disabled_resource_groups
     end
 
     # @see the `==` method
@@ -209,7 +221,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, expires_in, scope, profile_ids, permission].hash
+      [name, expires_in, scope, profile_ids, permission, disabled_resource_groups].hash
     end
 
     # Builds the object from hash

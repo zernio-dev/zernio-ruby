@@ -36,38 +36,20 @@ describe Zernio::InlineObject2 do
   describe 'test attribute "code"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PAYMENT_REQUIRED"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["insufficient_permissions", "unclassified_resource"])
       # validator.allowable_values.each do |value|
       #   expect { instance.code = value }.not_to raise_error
       # end
     end
   end
 
-  describe 'test attribute "reason"' do
+  describe 'test attribute "required_group"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["free_tier_exceeded", "twitter_passthrough", "enterprise_required"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["publishing", "engagement", "messages", "contacts", "analytics", "ads", "telephony", "accounts", "billing", "webhooks"])
       # validator.allowable_values.each do |value|
-      #   expect { instance.reason = value }.not_to raise_error
+      #   expect { instance.required_group = value }.not_to raise_error
       # end
-    end
-  end
-
-  describe 'test attribute "documentation_url"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "dashboard_url"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "details"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 
