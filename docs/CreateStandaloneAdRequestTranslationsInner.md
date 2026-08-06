@@ -8,6 +8,7 @@
 | **headline** | **String** | Headline for this language. REQUIRED, and must differ from every other locale and from the ad&#39;s top-level headline. |  |
 | **body** | **String** | Primary text for this language. REQUIRED, and must differ from every other locale and from the ad&#39;s top-level body. |  |
 | **description** | **String** | Link description for this language. REQUIRED, and must differ from every other locale and from the ad&#39;s top-level description. |  |
+| **link_url** | **String** | Destination URL for this language. Inherits the ad&#39;s top-level &#x60;linkUrl&#x60; when omitted, and requires it to be present (400 otherwise): the top-level URL is the destination for every locale you did not override. Unlike text, identical URLs across locales are fine (they share one asset). | [optional] |
 | **image_url** | **String** | Image for this language. Inherits the ad&#39;s &#x60;imageUrl&#x60; when omitted. The feed is all-image OR all-video. | [optional] |
 | **video_url** | **String** | Video for this language. Inherits the ad&#39;s &#x60;video.url&#x60; when omitted. The feed is all-image OR all-video. | [optional] |
 | **thumbnail_url** | **String** | Poster frame for this language&#39;s video. | [optional] |
@@ -22,6 +23,7 @@ instance = Zernio::CreateStandaloneAdRequestTranslationsInner.new(
   headline: null,
   body: null,
   description: null,
+  link_url: null,
   image_url: null,
   video_url: null,
   thumbnail_url: null

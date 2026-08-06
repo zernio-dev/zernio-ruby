@@ -27,6 +27,9 @@ module Zernio
     # Link description for this language. REQUIRED, and must differ from every other locale and from the ad's top-level description.
     attr_accessor :description
 
+    # Destination URL for this language. Inherits the ad's top-level `linkUrl` when omitted, and requires it to be present (400 otherwise): the top-level URL is the destination for every locale you did not override. Unlike text, identical URLs across locales are fine (they share one asset).
+    attr_accessor :link_url
+
     # Image for this language. Inherits the ad's `imageUrl` when omitted. The feed is all-image OR all-video.
     attr_accessor :image_url
 
@@ -43,6 +46,7 @@ module Zernio
         :'headline' => :'headline',
         :'body' => :'body',
         :'description' => :'description',
+        :'link_url' => :'linkUrl',
         :'image_url' => :'imageUrl',
         :'video_url' => :'videoUrl',
         :'thumbnail_url' => :'thumbnailUrl'
@@ -66,6 +70,7 @@ module Zernio
         :'headline' => :'String',
         :'body' => :'String',
         :'description' => :'String',
+        :'link_url' => :'String',
         :'image_url' => :'String',
         :'video_url' => :'String',
         :'thumbnail_url' => :'String'
@@ -116,6 +121,10 @@ module Zernio
         self.description = attributes[:'description']
       else
         self.description = nil
+      end
+
+      if attributes.key?(:'link_url')
+        self.link_url = attributes[:'link_url']
       end
 
       if attributes.key?(:'image_url')
@@ -233,6 +242,7 @@ module Zernio
           headline == o.headline &&
           body == o.body &&
           description == o.description &&
+          link_url == o.link_url &&
           image_url == o.image_url &&
           video_url == o.video_url &&
           thumbnail_url == o.thumbnail_url
@@ -247,7 +257,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [locale, headline, body, description, image_url, video_url, thumbnail_url].hash
+      [locale, headline, body, description, link_url, image_url, video_url, thumbnail_url].hash
     end
 
     # Builds the object from hash
