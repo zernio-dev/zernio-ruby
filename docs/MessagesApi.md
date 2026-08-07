@@ -788,7 +788,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagesApi.new
-conversation_id = 'conversation_id_example' # String | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
+conversation_id = 'conversation_id_example' # String | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed.
 send_inbox_message_request = Zernio::SendInboxMessageRequest.new({account_id: 'account_id_example'}) # SendInboxMessageRequest | 
 opts = {
   idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
@@ -825,7 +825,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **conversation_id** | **String** | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. |  |
+| **conversation_id** | **String** | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. |  |
 | **send_inbox_message_request** | [**SendInboxMessageRequest**](SendInboxMessageRequest.md) |  |  |
 | **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
