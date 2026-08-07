@@ -29,7 +29,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagingAdsApi.new
-create_call_ad_request = Zernio::CreateCallAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', budget_amount: 3.56, budget_type: 'daily', phone_number: 'phone_number_example', link_url: 'link_url_example'}) # CreateCallAdRequest | 
+create_call_ad_request = Zernio::CreateCallAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', phone_number: 'phone_number_example', link_url: 'link_url_example'}) # CreateCallAdRequest | 
 
 begin
   # Create Click-to-Call ad
@@ -83,7 +83,7 @@ nil (empty response body)
 
 Create Click-to-WhatsApp ad (deprecated)
 
-Deprecated: use POST /v1/ads/messaging with `destination: whatsapp`. This endpoint stays available for back-compat; no removal planned.  Creates one or more Click-to-WhatsApp (CTWA) ads on Meta under a single campaign and ad set. When tapped, each ad opens a WhatsApp conversation with the business attached to the supplied Facebook Page. The full hierarchy (campaign, ad set, creative(s), ad(s)) is created and activated in one call. The CTA is locked to WHATSAPP_MESSAGE and the destination is hard-coded to api.whatsapp.com/send; Meta resolves the actual WhatsApp number from the Page-to-WA pairing configured in Page settings or Business Manager.  Supports two mutually-exclusive shapes:  - **Single-creative**: supply top-level `headline`, `body`, and one of `imageUrl` / `video`. Creates 1 campaign + 1 ad set + 1 ad.  - **Multi-creative**: supply a `creatives[]` array with N entries (each carrying its own headline, body, and image/video). Creates 1 campaign + 1 ad set + N ads sharing budget and targeting so Meta A/Bs the creatives inside a single auction instead of fragmenting budget across N parallel campaigns. Recommended when launching multiple creative variants for the same campaign.  Prerequisites enforced by Meta (surfaced as platform_error on failure): the Facebook Page must be paired with a verified WhatsApp Business number, the WhatsApp Business Account must be business-verified, and the Meta access token must carry ads_management.
+Deprecated: use POST /v1/ads/messaging with `destination: whatsapp`. This endpoint stays available for back-compat; no removal planned.  Creates one or more Click-to-WhatsApp (CTWA) ads on Meta under a single campaign and ad set. When tapped, each ad opens a WhatsApp conversation with the business attached to the supplied Facebook Page. The full hierarchy (campaign, ad set, creative(s), ad(s)) is created and activated in one call. The CTA is locked to WHATSAPP_MESSAGE and the destination is hard-coded to api.whatsapp.com/send; Meta resolves the actual WhatsApp number from the Page-to-WA pairing configured in Page settings or Business Manager.  Supports two mutually-exclusive shapes:  - **Single-creative**: supply top-level `headline`, `body`, and one of `imageUrl` / `video`. Creates 1 campaign + 1 ad set + 1 ad.  - **Multi-creative**: supply a `creatives[]` array with N entries (each carrying its own headline, body, and image/video). Creates 1 campaign + 1 ad set + N ads sharing budget and targeting so Meta A/Bs the creatives inside a single auction instead of fragmenting budget across N parallel campaigns. Recommended when launching multiple creative variants for the same campaign.  **Attach shape.** Send `adSetId` (with either creative shape) to add the ads to an EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase — the way to refresh a CTWA creative without resetting delivery. The ad set then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests` and `audienceId` are rejected with a 400 alongside it rather than silently dropped. The target ad set's `destination_type` must match the ad's destination (a WhatsApp ad needs a `WHATSAPP` ad set), otherwise Meta would accept an ad that never delivers.  Prerequisites enforced by Meta (surfaced as platform_error on failure): the Facebook Page must be paired with a verified WhatsApp Business number, the WhatsApp Business Account must be business-verified, and the Meta access token must carry ads_management.
 
 ### Examples
 
@@ -97,7 +97,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagingAdsApi.new
-ctwa_ad_request_body = Zernio::CtwaAdRequestBody.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', budget_amount: 3.56, budget_type: 'daily'}) # CtwaAdRequestBody | 
+ctwa_ad_request_body = Zernio::CtwaAdRequestBody.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example'}) # CtwaAdRequestBody | 
 
 begin
   # Create Click-to-WhatsApp ad (deprecated)
@@ -166,7 +166,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagingAdsApi.new
-create_messaging_ad_request = Zernio::CreateMessagingAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', budget_amount: 3.56, budget_type: 'daily', destination: 'whatsapp'}) # CreateMessagingAdRequest | 
+create_messaging_ad_request = Zernio::CreateMessagingAdRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', destination: 'whatsapp'}) # CreateMessagingAdRequest | 
 
 begin
   # Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)

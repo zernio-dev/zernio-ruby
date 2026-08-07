@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Required unless adSetId is set.
   class BoostPostRequestBudget < ApiModelBase
     # Minimum varies: TikTok=$20, Pinterest=$5, others=$1
     attr_accessor :amount

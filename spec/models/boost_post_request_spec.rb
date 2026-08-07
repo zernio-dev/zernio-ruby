@@ -67,9 +67,31 @@ describe Zernio::BoostPostRequest do
     end
   end
 
+  describe 'test attribute "ad_set_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "budget"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "instagram_account_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "destination_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.destination_type = value }.not_to raise_error
+      # end
     end
   end
 

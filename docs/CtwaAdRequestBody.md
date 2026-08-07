@@ -12,8 +12,9 @@
 | **image_url** | **String** | Image asset for single-creative shape. Mutually exclusive with &#x60;video&#x60; and with &#x60;creatives[]&#x60;. Required on the single-creative shape if &#x60;video&#x60; is not supplied.  | [optional] |
 | **video** | [**CtwaAdRequestBodyVideo**](CtwaAdRequestBodyVideo.md) |  | [optional] |
 | **creatives** | [**Array&lt;CtwaAdRequestBodyCreativesInner&gt;**](CtwaAdRequestBodyCreativesInner.md) | Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (&#x60;headline&#x60; / &#x60;body&#x60; / &#x60;imageUrl&#x60; / &#x60;video&#x60;). Each entry must supply its own headline, body, and exactly one of &#x60;imageUrl&#x60; / &#x60;video&#x60;.  | [optional] |
-| **budget_amount** | **Float** | Budget amount in the ad account&#39;s currency major units (e.g. dollars for USD, not cents). Must be &gt; 0.  |  |
-| **budget_type** | **String** |  |  |
+| **ad_set_id** | **String** | Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so &#x60;budgetAmount&#x60;, &#x60;budgetType&#x60;, &#x60;endDate&#x60;, &#x60;objective&#x60;, &#x60;countries&#x60;, &#x60;interests&#x60; and &#x60;audienceId&#x60; are rejected with a 400 alongside it. Its &#x60;destination_type&#x60; must match the ad&#39;s destination.  | [optional] |
+| **budget_amount** | **Float** | Budget amount in the ad account&#39;s currency major units (e.g. dollars for USD, not cents). Must be &gt; 0. Required unless &#x60;adSetId&#x60; is set, where the ad set owns it.  | [optional] |
+| **budget_type** | **String** | Required unless &#x60;adSetId&#x60; is set. | [optional] |
 | **currency** | **String** | ISO 4217 currency code matching the ad account&#39;s currency (e.g. &#x60;USD&#x60;). Optional; Meta infers from the ad account when omitted.  | [optional] |
 | **end_date** | **Time** | ISO 8601 datetime. Required when &#x60;budgetType&#x60; is &#x60;lifetime&#x60;.  | [optional] |
 | **countries** | **Array&lt;String&gt;** | ISO 3166-1 alpha-2 country codes. Defaults to &#x60;[\&quot;US\&quot;]&#x60; only when no other geo (&#x60;cities&#x60;, &#x60;regions&#x60;, &#x60;zips&#x60;, &#x60;metros&#x60;, &#x60;customLocations&#x60;) is supplied.  | [optional] |
@@ -49,6 +50,7 @@ instance = Zernio::CtwaAdRequestBody.new(
   image_url: null,
   video: null,
   creatives: null,
+  ad_set_id: null,
   budget_amount: null,
   budget_type: null,
   currency: null,

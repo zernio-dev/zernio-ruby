@@ -38,9 +38,13 @@ module Zernio
     # Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (`headline` / `body` / `imageUrl` / `video`). Each entry must supply its own headline, body, and exactly one of `imageUrl` / `video`. 
     attr_accessor :creatives
 
-    # Budget amount in the ad account's currency major units (e.g. dollars for USD, not cents). Must be > 0. 
+    # Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests` and `audienceId` are rejected with a 400 alongside it. Its `destination_type` must match the ad's destination. 
+    attr_accessor :ad_set_id
+
+    # Budget amount in the ad account's currency major units (e.g. dollars for USD, not cents). Must be > 0. Required unless `adSetId` is set, where the ad set owns it. 
     attr_accessor :budget_amount
 
+    # Required unless `adSetId` is set.
     attr_accessor :budget_type
 
     # ISO 4217 currency code matching the ad account's currency (e.g. `USD`). Optional; Meta infers from the ad account when omitted. 
@@ -138,6 +142,7 @@ module Zernio
         :'image_url' => :'imageUrl',
         :'video' => :'video',
         :'creatives' => :'creatives',
+        :'ad_set_id' => :'adSetId',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
         :'currency' => :'currency',
@@ -186,6 +191,7 @@ module Zernio
         :'image_url' => :'String',
         :'video' => :'CtwaAdRequestBodyVideo',
         :'creatives' => :'Array<CtwaAdRequestBodyCreativesInner>',
+        :'ad_set_id' => :'String',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
         :'currency' => :'String',
@@ -282,16 +288,16 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'ad_set_id')
+        self.ad_set_id = attributes[:'ad_set_id']
+      end
+
       if attributes.key?(:'budget_amount')
         self.budget_amount = attributes[:'budget_amount']
-      else
-        self.budget_amount = nil
       end
 
       if attributes.key?(:'budget_type')
         self.budget_type = attributes[:'budget_type']
-      else
-        self.budget_type = nil
       end
 
       if attributes.key?(:'currency')
@@ -446,14 +452,6 @@ module Zernio
         invalid_properties.push('invalid value for "creatives", number of items must be greater than or equal to 1.')
       end
 
-      if @budget_amount.nil?
-        invalid_properties.push('invalid value for "budget_amount", budget_amount cannot be nil.')
-      end
-
-      if @budget_type.nil?
-        invalid_properties.push('invalid value for "budget_type", budget_type cannot be nil.')
-      end
-
       if !@currency.nil? && @currency.to_s.length > 3
         invalid_properties.push('invalid value for "currency", the character length must be smaller than or equal to 3.')
       end
@@ -511,8 +509,6 @@ module Zernio
       return false if !@headline.nil? && @headline.to_s.length < 1
       return false if !@body.nil? && @body.to_s.length < 1
       return false if !@creatives.nil? && @creatives.length < 1
-      return false if @budget_amount.nil?
-      return false if @budget_type.nil?
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
       return false if !@currency.nil? && @currency.to_s.length > 3
@@ -620,16 +616,6 @@ module Zernio
       end
 
       @creatives = creatives
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] budget_amount Value to be assigned
-    def budget_amount=(budget_amount)
-      if budget_amount.nil?
-        fail ArgumentError, 'budget_amount cannot be nil'
-      end
-
-      @budget_amount = budget_amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -787,6 +773,7 @@ module Zernio
           image_url == o.image_url &&
           video == o.video &&
           creatives == o.creatives &&
+          ad_set_id == o.ad_set_id &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
           currency == o.currency &&
@@ -822,7 +809,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, phone_number, link_url].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, phone_number, link_url].hash
     end
 
     # Builds the object from hash

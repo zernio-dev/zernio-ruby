@@ -32,7 +32,16 @@ module Zernio
     # Available goals vary by platform. Meta (Facebook/Instagram) and TikTok support all 7. LinkedIn supports all except app_promotion. Twitter/X supports engagement, traffic, awareness, video_views, app_promotion. Pinterest and Google Ads support only engagement, traffic, awareness, video_views.
     attr_accessor :goal
 
+    # Meta only. Attach the boosted post to this existing ad set instead of creating a campaign. The ad set then owns budget, schedule and targeting; sending those too is a 400.
+    attr_accessor :ad_set_id
+
     attr_accessor :budget
+
+    # Meta only. Instagram identity the ad runs AS (creative.instagram_user_id), overriding the account linked to the Page. Live-verified against a Page-post creative.
+    attr_accessor :instagram_account_id
+
+    # Meta only. Ad-set destination_type — where the click LANDS, as opposed to instagramAccountId which is who the ad runs as. Lead ads force ON_AD and ignore this.
+    attr_accessor :destination_type
 
     attr_accessor :currency
 
@@ -62,10 +71,10 @@ module Zernio
     # Meta (metaads) only. 2-letter ISO country codes the special ad category applies to. Requires specialAdCategories to be set (400 otherwise).
     attr_accessor :special_ad_category_country
 
-    # TikTok-only. Custom destination URL for the Spark Ad. Without this, TikTok Spark Ads have no clickable destination — required for traffic / conversion objectives. Maps to `landing_page_url` on the creative entry of /v2/ad/create/ (TikTok SDK `AdcreateCreatives.landing_page_url`). Ignored on Meta / LinkedIn / Pinterest / X / Google (those infer the destination from the boosted post). 
+    # Destination URL for the CTA button. Send it together with `callToAction`.  **Meta**: adds a top-level `call_to_action` to the post-reference creative. This is what gives a `traffic` boost a clickable destination without replacing the creative and losing the post's social proof. Ignored when `leadGenFormId` is set, which supplies its own destination. Live-verified against a Page-post creative.  **TikTok**: maps to `landing_page_url` on the Spark Ad creative (`AdcreateCreatives.landing_page_url`); Spark Ads have no clickable destination without it.  Ignored on LinkedIn / Pinterest / X / Google, which infer the destination from the boosted post. 
     attr_accessor :link_url
 
-    # TikTok-only. Call-to-action button label on the Spark Ad creative (e.g. `LEARN_MORE`, `SHOP_NOW`, `DOWNLOAD_NOW`, `SIGN_UP`, `WATCH_NOW`). Maps to `call_to_action` on the creative entry of /v2/ad/create/. Pass-through — the platform validates the value. See TikTok's \"Enumeration - Call-to-Action\" reference for the full list. 
+    # CTA button label. Send it together with `linkUrl` — a CTA without a destination produces a button that goes nowhere, so sending one alone is a 400.  **Meta**: validated against the Meta CTA enum (same values as POST /v1/ads/create), e.g. `LEARN_MORE`, `SHOP_NOW`, `SIGN_UP`.  **TikTok**: pass-through to `call_to_action` on the Spark Ad creative; the platform validates the value. See TikTok's \"Enumeration - Call-to-Action\". 
     attr_accessor :call_to_action
 
     # TikTok-only. Spark Code (creator's `auth_code`) authorizing cross-creator Spark Ads — the advertiser can boost a video owned by a DIFFERENT TikTok account. Without this, boosts are limited to videos owned by the same account running the ads (same-BC creators only). The creator generates the code in their TikTok app's Promote settings and shares it with the advertiser. Maps to `auth_code` on the creative entry of /v2/ad/create/. 
@@ -111,7 +120,10 @@ module Zernio
         :'ad_account_id' => :'adAccountId',
         :'name' => :'name',
         :'goal' => :'goal',
+        :'ad_set_id' => :'adSetId',
         :'budget' => :'budget',
+        :'instagram_account_id' => :'instagramAccountId',
+        :'destination_type' => :'destinationType',
         :'currency' => :'currency',
         :'schedule' => :'schedule',
         :'targeting' => :'targeting',
@@ -151,7 +163,10 @@ module Zernio
         :'ad_account_id' => :'String',
         :'name' => :'String',
         :'goal' => :'String',
+        :'ad_set_id' => :'String',
         :'budget' => :'BoostPostRequestBudget',
+        :'instagram_account_id' => :'String',
+        :'destination_type' => :'String',
         :'currency' => :'String',
         :'schedule' => :'BoostPostRequestSchedule',
         :'targeting' => :'BoostPostRequestTargeting',
@@ -226,10 +241,20 @@ module Zernio
         self.goal = nil
       end
 
+      if attributes.key?(:'ad_set_id')
+        self.ad_set_id = attributes[:'ad_set_id']
+      end
+
       if attributes.key?(:'budget')
         self.budget = attributes[:'budget']
-      else
-        self.budget = nil
+      end
+
+      if attributes.key?(:'instagram_account_id')
+        self.instagram_account_id = attributes[:'instagram_account_id']
+      end
+
+      if attributes.key?(:'destination_type')
+        self.destination_type = attributes[:'destination_type']
       end
 
       if attributes.key?(:'currency')
@@ -332,10 +357,6 @@ module Zernio
         invalid_properties.push('invalid value for "goal", goal cannot be nil.')
       end
 
-      if @budget.nil?
-        invalid_properties.push('invalid value for "budget", budget cannot be nil.')
-      end
-
       if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
         invalid_properties.push('invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.')
       end
@@ -358,7 +379,8 @@ module Zernio
       return false if @goal.nil?
       goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "conversions", "app_promotion"])
       return false unless goal_validator.valid?(@goal)
-      return false if @budget.nil?
+      destination_type_validator = EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP"])
+      return false unless destination_type_validator.valid?(@destination_type)
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       true
@@ -408,14 +430,14 @@ module Zernio
       @goal = goal
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] budget Value to be assigned
-    def budget=(budget)
-      if budget.nil?
-        fail ArgumentError, 'budget cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] destination_type Object to be assigned
+    def destination_type=(destination_type)
+      validator = EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP"])
+      unless validator.valid?(destination_type)
+        fail ArgumentError, "invalid value for \"destination_type\", must be one of #{validator.allowable_values}."
       end
-
-      @budget = budget
+      @destination_type = destination_type
     end
 
     # Custom attribute writer method with validation
@@ -457,7 +479,10 @@ module Zernio
           ad_account_id == o.ad_account_id &&
           name == o.name &&
           goal == o.goal &&
+          ad_set_id == o.ad_set_id &&
           budget == o.budget &&
+          instagram_account_id == o.instagram_account_id &&
+          destination_type == o.destination_type &&
           currency == o.currency &&
           schedule == o.schedule &&
           targeting == o.targeting &&
@@ -486,7 +511,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, budget, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, optimization_goal].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, optimization_goal].hash
     end
 
     # Builds the object from hash
