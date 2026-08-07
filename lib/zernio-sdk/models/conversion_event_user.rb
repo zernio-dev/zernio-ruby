@@ -55,6 +55,9 @@ module Zernio
     # Meta advanced matching (ge). 'f' or 'm'; hashed server-side. Meta only.
     attr_accessor :gender
 
+    # Meta lead ID from a Lead Ad submission, as a string. Required for Conversion Leads CRM events: send it with `actionSource: 'crm'` and `platformData: { event_source: 'crm', lead_event_source: '<CRM name>' }`. Forwarded unhashed to Meta's `user_data.lead_id`. Meta only. 
+    attr_accessor :lead_id
+
     attr_accessor :click_ids
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -73,6 +76,7 @@ module Zernio
         :'zip' => :'zip',
         :'dob' => :'dob',
         :'gender' => :'gender',
+        :'lead_id' => :'leadId',
         :'click_ids' => :'clickIds'
       }
     end
@@ -103,6 +107,7 @@ module Zernio
         :'zip' => :'String',
         :'dob' => :'String',
         :'gender' => :'String',
+        :'lead_id' => :'String',
         :'click_ids' => :'ConversionEventUserClickIds'
       }
     end
@@ -181,6 +186,10 @@ module Zernio
         self.gender = attributes[:'gender']
       end
 
+      if attributes.key?(:'lead_id')
+        self.lead_id = attributes[:'lead_id']
+      end
+
       if attributes.key?(:'click_ids')
         self.click_ids = attributes[:'click_ids']
       end
@@ -219,6 +228,7 @@ module Zernio
           zip == o.zip &&
           dob == o.dob &&
           gender == o.gender &&
+          lead_id == o.lead_id &&
           click_ids == o.click_ids
     end
 
@@ -231,7 +241,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [email, phone, first_name, last_name, external_id, ip_address, user_agent, country, city, state, zip, dob, gender, click_ids].hash
+      [email, phone, first_name, last_name, external_id, ip_address, user_agent, country, city, state, zip, dob, gender, lead_id, click_ids].hash
     end
 
     # Builds the object from hash

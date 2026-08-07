@@ -23,6 +23,8 @@
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional] |
 | **link_tracking** | **Boolean** |  | [optional] |
 | **click_tag** | **String** |  | [optional] |
+| **dm_delay_seconds** | **Integer** | Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately. | [optional] |
+| **comment_reply_delay_seconds** | **Integer** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional] |
 | **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
 | **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
@@ -55,6 +57,8 @@ instance = Zernio::GetCommentAutomation200ResponseAutomation.new(
   comment_reply_variations: null,
   link_tracking: null,
   click_tag: null,
+  dm_delay_seconds: null,
+  comment_reply_delay_seconds: null,
   audience: null,
   follow_gate: null,
   is_active: null,

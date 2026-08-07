@@ -22,6 +22,8 @@
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional] |
 | **link_tracking** | **Boolean** | Whether link buttons in the DM are wrapped in a tracked redirect to count clicks. | [optional] |
 | **click_tag** | **String** | Tag applied to a contact when they click a tracked link. | [optional] |
+| **dm_delay_seconds** | **Integer** | Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately. | [optional] |
+| **comment_reply_delay_seconds** | **Integer** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **stats** | [**ListCommentAutomations200ResponseAutomationsInnerStats**](ListCommentAutomations200ResponseAutomationsInnerStats.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
@@ -50,6 +52,8 @@ instance = Zernio::ListCommentAutomations200ResponseAutomationsInner.new(
   comment_reply_variations: null,
   link_tracking: null,
   click_tag: null,
+  dm_delay_seconds: null,
+  comment_reply_delay_seconds: null,
   is_active: null,
   stats: null,
   created_at: null

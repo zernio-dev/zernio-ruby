@@ -68,6 +68,12 @@ module Zernio
     # Optional tag applied to a contact when they click a tracked link (requires linkTracking). Lets you segment clickers for broadcasts/sequences.
     attr_accessor :click_tag
 
+    # Seconds to wait after the trigger before sending the DM. Omit or send 0 to reply immediately (the default). Max 86400 (24h). The trigger is still matched and deduplicated the moment the comment arrives, so a delay only moves when the response is sent.
+    attr_accessor :dm_delay_seconds
+
+    # Seconds to wait before posting the public comment reply. Omit or send 0 to post it right after the DM (the default). The reply never goes out before the DM, so a value below dmDelaySeconds is raised to it. Ignored when trigger=story_reply, which has no public reply.
+    attr_accessor :comment_reply_delay_seconds
+
     attr_accessor :audience
 
     attr_accessor :follow_gate
@@ -115,6 +121,8 @@ module Zernio
         :'comment_reply_variations' => :'commentReplyVariations',
         :'link_tracking' => :'linkTracking',
         :'click_tag' => :'clickTag',
+        :'dm_delay_seconds' => :'dmDelaySeconds',
+        :'comment_reply_delay_seconds' => :'commentReplyDelaySeconds',
         :'audience' => :'audience',
         :'follow_gate' => :'followGate'
       }
@@ -151,6 +159,8 @@ module Zernio
         :'comment_reply_variations' => :'Array<String>',
         :'link_tracking' => :'Boolean',
         :'click_tag' => :'String',
+        :'dm_delay_seconds' => :'Integer',
+        :'comment_reply_delay_seconds' => :'Integer',
         :'audience' => :'CommentAutomationAudience',
         :'follow_gate' => :'CommentAutomationFollowGate'
       }
@@ -274,6 +284,14 @@ module Zernio
         self.click_tag = attributes[:'click_tag']
       end
 
+      if attributes.key?(:'dm_delay_seconds')
+        self.dm_delay_seconds = attributes[:'dm_delay_seconds']
+      end
+
+      if attributes.key?(:'comment_reply_delay_seconds')
+        self.comment_reply_delay_seconds = attributes[:'comment_reply_delay_seconds']
+      end
+
       if attributes.key?(:'audience')
         self.audience = attributes[:'audience']
       end
@@ -316,6 +334,22 @@ module Zernio
         invalid_properties.push('invalid value for "comment_reply_variations", number of items must be less than or equal to 5.')
       end
 
+      if !@dm_delay_seconds.nil? && @dm_delay_seconds > 86400
+        invalid_properties.push('invalid value for "dm_delay_seconds", must be smaller than or equal to 86400.')
+      end
+
+      if !@dm_delay_seconds.nil? && @dm_delay_seconds < 0
+        invalid_properties.push('invalid value for "dm_delay_seconds", must be greater than or equal to 0.')
+      end
+
+      if !@comment_reply_delay_seconds.nil? && @comment_reply_delay_seconds > 86400
+        invalid_properties.push('invalid value for "comment_reply_delay_seconds", must be smaller than or equal to 86400.')
+      end
+
+      if !@comment_reply_delay_seconds.nil? && @comment_reply_delay_seconds < 0
+        invalid_properties.push('invalid value for "comment_reply_delay_seconds", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
@@ -334,6 +368,10 @@ module Zernio
       return false if !@buttons.nil? && @buttons.length > 3
       return false if !@dm_message_variations.nil? && @dm_message_variations.length > 5
       return false if !@comment_reply_variations.nil? && @comment_reply_variations.length > 5
+      return false if !@dm_delay_seconds.nil? && @dm_delay_seconds > 86400
+      return false if !@dm_delay_seconds.nil? && @dm_delay_seconds < 0
+      return false if !@comment_reply_delay_seconds.nil? && @comment_reply_delay_seconds > 86400
+      return false if !@comment_reply_delay_seconds.nil? && @comment_reply_delay_seconds < 0
       true
     end
 
@@ -439,6 +477,42 @@ module Zernio
       @comment_reply_variations = comment_reply_variations
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] dm_delay_seconds Value to be assigned
+    def dm_delay_seconds=(dm_delay_seconds)
+      if dm_delay_seconds.nil?
+        fail ArgumentError, 'dm_delay_seconds cannot be nil'
+      end
+
+      if dm_delay_seconds > 86400
+        fail ArgumentError, 'invalid value for "dm_delay_seconds", must be smaller than or equal to 86400.'
+      end
+
+      if dm_delay_seconds < 0
+        fail ArgumentError, 'invalid value for "dm_delay_seconds", must be greater than or equal to 0.'
+      end
+
+      @dm_delay_seconds = dm_delay_seconds
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] comment_reply_delay_seconds Value to be assigned
+    def comment_reply_delay_seconds=(comment_reply_delay_seconds)
+      if comment_reply_delay_seconds.nil?
+        fail ArgumentError, 'comment_reply_delay_seconds cannot be nil'
+      end
+
+      if comment_reply_delay_seconds > 86400
+        fail ArgumentError, 'invalid value for "comment_reply_delay_seconds", must be smaller than or equal to 86400.'
+      end
+
+      if comment_reply_delay_seconds < 0
+        fail ArgumentError, 'invalid value for "comment_reply_delay_seconds", must be greater than or equal to 0.'
+      end
+
+      @comment_reply_delay_seconds = comment_reply_delay_seconds
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -462,6 +536,8 @@ module Zernio
           comment_reply_variations == o.comment_reply_variations &&
           link_tracking == o.link_tracking &&
           click_tag == o.click_tag &&
+          dm_delay_seconds == o.dm_delay_seconds &&
+          comment_reply_delay_seconds == o.comment_reply_delay_seconds &&
           audience == o.audience &&
           follow_gate == o.follow_gate
     end
@@ -475,7 +551,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, audience, follow_gate].hash
+      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate].hash
     end
 
     # Builds the object from hash

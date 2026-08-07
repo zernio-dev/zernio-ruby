@@ -59,6 +59,12 @@ module Zernio
 
     attr_accessor :click_tag
 
+    # Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately.
+    attr_accessor :dm_delay_seconds
+
+    # Seconds waited before the public reply is posted. Absent when it follows the DM immediately.
+    attr_accessor :comment_reply_delay_seconds
+
     attr_accessor :audience
 
     attr_accessor :follow_gate
@@ -115,6 +121,8 @@ module Zernio
         :'comment_reply_variations' => :'commentReplyVariations',
         :'link_tracking' => :'linkTracking',
         :'click_tag' => :'clickTag',
+        :'dm_delay_seconds' => :'dmDelaySeconds',
+        :'comment_reply_delay_seconds' => :'commentReplyDelaySeconds',
         :'audience' => :'audience',
         :'follow_gate' => :'followGate',
         :'is_active' => :'isActive',
@@ -156,6 +164,8 @@ module Zernio
         :'comment_reply_variations' => :'Array<String>',
         :'link_tracking' => :'Boolean',
         :'click_tag' => :'String',
+        :'dm_delay_seconds' => :'Integer',
+        :'comment_reply_delay_seconds' => :'Integer',
         :'audience' => :'CommentAutomationAudience',
         :'follow_gate' => :'CommentAutomationFollowGate',
         :'is_active' => :'Boolean',
@@ -273,6 +283,14 @@ module Zernio
         self.click_tag = attributes[:'click_tag']
       end
 
+      if attributes.key?(:'dm_delay_seconds')
+        self.dm_delay_seconds = attributes[:'dm_delay_seconds']
+      end
+
+      if attributes.key?(:'comment_reply_delay_seconds')
+        self.comment_reply_delay_seconds = attributes[:'comment_reply_delay_seconds']
+      end
+
       if attributes.key?(:'audience')
         self.audience = attributes[:'audience']
       end
@@ -361,6 +379,8 @@ module Zernio
           comment_reply_variations == o.comment_reply_variations &&
           link_tracking == o.link_tracking &&
           click_tag == o.click_tag &&
+          dm_delay_seconds == o.dm_delay_seconds &&
+          comment_reply_delay_seconds == o.comment_reply_delay_seconds &&
           audience == o.audience &&
           follow_gate == o.follow_gate &&
           is_active == o.is_active &&
@@ -378,7 +398,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, trigger, account_id, platform_post_id, post_id, post_title, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, audience, follow_gate, is_active, stats, created_at, updated_at].hash
+      [id, name, platform, trigger, account_id, platform_post_id, post_id, post_title, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate, is_active, stats, created_at, updated_at].hash
     end
 
     # Builds the object from hash

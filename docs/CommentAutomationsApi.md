@@ -240,7 +240,7 @@ end
 api_instance = Zernio::CommentAutomationsApi.new
 automation_id = 'automation_id_example' # String | 
 opts = {
-  status: 'sent', # String | Filter by result status
+  status: 'pending', # String | Filter by result status
   limit: 56, # Integer | 
   skip: 56 # Integer | 
 }

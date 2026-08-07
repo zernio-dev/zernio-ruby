@@ -242,7 +242,7 @@ module Zernio
       if @api_client.config.client_side_validation && automation_id.nil?
         fail ArgumentError, "Missing the required parameter 'automation_id' when calling CommentAutomationsApi.list_comment_automation_logs"
       end
-      allowable_values = ["sent", "failed", "skipped", "gated"]
+      allowable_values = ["pending", "sent", "failed", "skipped", "gated"]
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end

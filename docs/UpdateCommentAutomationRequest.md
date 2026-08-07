@@ -17,6 +17,8 @@
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies for random rotation. Pass [] to clear. | [optional] |
 | **link_tracking** | **Boolean** | Wrap link buttons in a tracked redirect to count clicks. Pass false to send links untouched. | [optional] |
 | **click_tag** | **String** | Tag applied to a contact when they click a tracked link (requires linkTracking). Empty string clears it. | [optional] |
+| **dm_delay_seconds** | **Integer** | Seconds to wait after the trigger before sending the DM. Send 0 to clear the delay and reply immediately. | [optional] |
+| **comment_reply_delay_seconds** | **Integer** | Seconds to wait before posting the public comment reply. Send 0 to clear it. The reply never goes out before the DM. | [optional] |
 | **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
 | **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
@@ -40,6 +42,8 @@ instance = Zernio::UpdateCommentAutomationRequest.new(
   comment_reply_variations: null,
   link_tracking: null,
   click_tag: null,
+  dm_delay_seconds: null,
+  comment_reply_delay_seconds: null,
   audience: null,
   follow_gate: null,
   is_active: null

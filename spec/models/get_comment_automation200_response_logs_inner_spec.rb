@@ -60,7 +60,7 @@ describe Zernio::GetCommentAutomation200ResponseLogsInner do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["sent", "failed", "skipped", "gated"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["pending", "sent", "failed", "skipped", "gated"])
       # validator.allowable_values.each do |value|
       #   expect { instance.status = value }.not_to raise_error
       # end
@@ -106,6 +106,12 @@ describe Zernio::GetCommentAutomation200ResponseLogsInner do
   end
 
   describe 'test attribute "comment_reply_error"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "next_due_at"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
