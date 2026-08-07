@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Platform-specific campaign settings. The platform is implied by the `platform` body param (same convention as platformSpecificData on POST /v1/ads/create). Meta (facebook/instagram) only; other platforms return 400. 
+  # **Meta only.** Platform implied by the `platform` body param, same convention as POST /v1/ads/create.
   class UpdateAdCampaignRequestPlatformSpecificData < ApiModelBase
-    # Campaign lifetime spend cap, in the ad account's currency (Meta `spend_cap`). Pass null to remove the cap (0 is rejected by Meta).
+    # Campaign lifetime spend cap, in the ad account's currency (Meta `spend_cap`). Pass null to remove the cap; 0 is rejected by Meta.
     attr_accessor :spend_cap
 
     # Attribute mapping from ruby-style variable name to JSON key.

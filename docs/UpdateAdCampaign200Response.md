@@ -4,10 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **updated** | **Integer** |  | [optional] |
+| **updated** | **Integer** | Local Ad documents mirrored. 0 on the empty-campaign path. | [optional] |
 | **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
 | **budget_level** | **String** |  | [optional] |
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
+| **bid_amount** | **Float** |  | [optional] |
+| **roas_average_floor** | **Float** |  | [optional] |
 | **platform_specific_data** | **Object** |  | [optional] |
 
 ## Example
@@ -20,6 +22,8 @@ instance = Zernio::UpdateAdCampaign200Response.new(
   budget: null,
   budget_level: null,
   bid_strategy: null,
+  bid_amount: null,
+  roas_average_floor: null,
   platform_specific_data: null
 )
 ```

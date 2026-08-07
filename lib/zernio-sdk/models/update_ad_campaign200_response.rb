@@ -14,7 +14,9 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Echoes back only the fields you sent, plus `updated`.
   class UpdateAdCampaign200Response < ApiModelBase
+    # Local Ad documents mirrored. 0 on the empty-campaign path.
     attr_accessor :updated
 
     attr_accessor :budget
@@ -22,6 +24,10 @@ module Zernio
     attr_accessor :budget_level
 
     attr_accessor :bid_strategy
+
+    attr_accessor :bid_amount
+
+    attr_accessor :roas_average_floor
 
     attr_accessor :platform_specific_data
 
@@ -54,6 +60,8 @@ module Zernio
         :'budget' => :'budget',
         :'budget_level' => :'budgetLevel',
         :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor',
         :'platform_specific_data' => :'platformSpecificData'
       }
     end
@@ -75,6 +83,8 @@ module Zernio
         :'budget' => :'AdBudget',
         :'budget_level' => :'String',
         :'bid_strategy' => :'BidStrategy',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float',
         :'platform_specific_data' => :'Object'
       }
     end
@@ -115,6 +125,14 @@ module Zernio
 
       if attributes.key?(:'bid_strategy')
         self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
       if attributes.key?(:'platform_specific_data')
@@ -158,6 +176,8 @@ module Zernio
           budget == o.budget &&
           budget_level == o.budget_level &&
           bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor &&
           platform_specific_data == o.platform_specific_data
     end
 
@@ -170,7 +190,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, budget, budget_level, bid_strategy, platform_specific_data].hash
+      [updated, budget, budget_level, bid_strategy, bid_amount, roas_average_floor, platform_specific_data].hash
     end
 
     # Builds the object from hash

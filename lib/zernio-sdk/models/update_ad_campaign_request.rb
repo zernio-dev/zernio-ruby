@@ -15,17 +15,24 @@ require 'time'
 
 module Zernio
   class UpdateAdCampaignRequest < ApiModelBase
-    # Zernio SocialAccount id owning the ad account. Required only to update an EMPTY campaign (zero ads), which has no local Ad documents to resolve a token from.
+    # Required: platform campaign IDs are not globally unique.
+    attr_accessor :platform
+
+    # **Meta only.** Zernio SocialAccount id owning the ad account. Needed only for an EMPTY campaign (zero ads); ignored otherwise.
     attr_accessor :account_id
 
-    attr_accessor :platform
+    # **Meta + Google.** On Meta, the campaign default that ad sets inherit unless they override it. On Google, the campaign's own bidding strategy.
+    attr_accessor :bid_strategy
+
+    # **Google only.** Whole currency units (USD: 12 = $12.00). Max CPC for LOWEST_COST_WITH_BID_CAP, CPA target for COST_CAP; required for both.
+    attr_accessor :bid_amount
+
+    # **Google only.** Decimal ROAS multiplier (2.0 = 2.0x), required for LOWEST_COST_WITH_MIN_ROAS.
+    attr_accessor :roas_average_floor
 
     attr_accessor :budget
 
-    # Campaign-level default. Ad sets inherit this unless they override.
-    attr_accessor :bid_strategy
-
-    # Rename the campaign (Meta only; other platforms return 501). At least one of budget/bidStrategy/name/platformSpecificData is required.
+    # **Meta only.** Rename the campaign.
     attr_accessor :name
 
     attr_accessor :platform_specific_data
@@ -55,10 +62,12 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
         :'platform' => :'platform',
-        :'budget' => :'budget',
+        :'account_id' => :'accountId',
         :'bid_strategy' => :'bidStrategy',
+        :'bid_amount' => :'bidAmount',
+        :'roas_average_floor' => :'roasAverageFloor',
+        :'budget' => :'budget',
         :'name' => :'name',
         :'platform_specific_data' => :'platformSpecificData'
       }
@@ -77,10 +86,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
         :'platform' => :'String',
-        :'budget' => :'UpdateAdCampaignRequestBudget',
+        :'account_id' => :'String',
         :'bid_strategy' => :'BidStrategy',
+        :'bid_amount' => :'Float',
+        :'roas_average_floor' => :'Float',
+        :'budget' => :'UpdateAdCampaignRequestBudget',
         :'name' => :'String',
         :'platform_specific_data' => :'UpdateAdCampaignRequestPlatformSpecificData'
       }
@@ -108,22 +119,30 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
-
       if attributes.key?(:'platform')
         self.platform = attributes[:'platform']
       else
         self.platform = nil
       end
 
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
       if attributes.key?(:'bid_strategy')
         self.bid_strategy = attributes[:'bid_strategy']
+      end
+
+      if attributes.key?(:'bid_amount')
+        self.bid_amount = attributes[:'bid_amount']
+      end
+
+      if attributes.key?(:'roas_average_floor')
+        self.roas_average_floor = attributes[:'roas_average_floor']
+      end
+
+      if attributes.key?(:'budget')
+        self.budget = attributes[:'budget']
       end
 
       if attributes.key?(:'name')
@@ -156,7 +175,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "google"])
       return false unless platform_validator.valid?(@platform)
       return false if !@name.nil? && @name.to_s.length > 255
       true
@@ -165,7 +184,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "google"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
@@ -191,10 +210,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
           platform == o.platform &&
-          budget == o.budget &&
+          account_id == o.account_id &&
           bid_strategy == o.bid_strategy &&
+          bid_amount == o.bid_amount &&
+          roas_average_floor == o.roas_average_floor &&
+          budget == o.budget &&
           name == o.name &&
           platform_specific_data == o.platform_specific_data
     end
@@ -208,7 +229,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, platform, budget, bid_strategy, name, platform_specific_data].hash
+      [platform, account_id, bid_strategy, bid_amount, roas_average_floor, budget, name, platform_specific_data].hash
     end
 
     # Builds the object from hash
