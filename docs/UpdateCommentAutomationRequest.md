@@ -12,6 +12,7 @@
 | **typo_tolerance** | **Boolean** | Only with matchMode&#x3D;word: also fire on close misspellings of a keyword (one edit for 4-7 character keywords, two from 8 up). Keywords shorter than 4 characters are never fuzzy-matched. | [optional] |
 | **dm_message** | **String** |  | [optional] |
 | **buttons** | [**Array&lt;DmButton&gt;**](DmButton.md) | Inline DM buttons (1-3). Pass [] to clear all buttons. | [optional] |
+| **template** | [**CommentAutomationTemplate**](CommentAutomationTemplate.md) |  | [optional] |
 | **comment_reply** | **String** |  | [optional] |
 | **dm_message_variations** | **Array&lt;String&gt;** | Alternate DM texts for random rotation (see create). Pass [] to clear. | [optional] |
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies for random rotation. Pass [] to clear. | [optional] |
@@ -37,6 +38,7 @@ instance = Zernio::UpdateCommentAutomationRequest.new(
   typo_tolerance: null,
   dm_message: null,
   buttons: null,
+  template: null,
   comment_reply: null,
   dm_message_variations: null,
   comment_reply_variations: null,

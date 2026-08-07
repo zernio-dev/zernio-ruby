@@ -14,9 +14,8 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Platform-dependent template payload. Ignored on Telegram.  Instagram / Facebook: a generic template (carousel). Set `type: generic` and provide up to 10 `elements`, each with a `title` (required) and optional `subtitle`, `imageUrl`, and `buttons`. Mutually exclusive with the top-level `buttons` field (sending both is a 400); put the card's buttons on its `elements` instead.  WhatsApp: sends an approved WhatsApp template message, the only message type WhatsApp accepts when the 24-hour customer-service window is closed. Provide exactly one element carrying the template reference: `{ \"elements\": [{ \"name\": \"order_update\", \"language\": \"en_US\", \"components\": [...] }] }` (`type` is ignored on WhatsApp). `components` is optional and is forwarded unchanged as the `template.components` array of Meta's Cloud API send payload; use it to fill body/header variables and button parameters, e.g. `[{ \"type\": \"body\", \"parameters\": [{ \"type\": \"text\", \"text\": \"John\" }] }]`. Templates with media headers (image, video, document) must include the header component with its media link here at send time. To send a template to a phone number with no existing conversation, or to have media headers filled in automatically from the template definition, use the create-conversation endpoint (POST /v1/inbox/conversations) instead. 
-  class SendInboxMessageRequestTemplate < ApiModelBase
-    # Template type. Required for Instagram/Facebook generic templates; ignored on WhatsApp.
+  # A Meta generic template (product card) sent as the automation's first DM. It REPLACES the plain `dmMessage` bubble: a Meta message carries one body shape, and a comment gets exactly one private reply, so the card and the text cannot both be delivered. Put your selling copy in `subtitle`. Mutually exclusive with `buttons` (sending both is a 400). Works on both the `comment` and `story_reply` triggers. Up to 10 elements, rendered as a horizontally swipeable carousel. Rendering confirmed on the Instagram and Messenger mobile apps. 
+  class CommentAutomationTemplate < ApiModelBase
     attr_accessor :type
 
     attr_accessor :elements
@@ -65,7 +64,7 @@ module Zernio
     def self.openapi_types
       {
         :'type' => :'String',
-        :'elements' => :'Array<SendInboxMessageRequestTemplateElementsInner>'
+        :'elements' => :'Array<CommentAutomationTemplateElement>'
       }
     end
 
@@ -79,26 +78,30 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestTemplate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CommentAutomationTemplate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestTemplate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CommentAutomationTemplate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
+      else
+        self.type = nil
       end
 
       if attributes.key?(:'elements')
         if (value = attributes[:'elements']).is_a?(Array)
           self.elements = value
         end
+      else
+        self.elements = nil
       end
     end
 
@@ -107,8 +110,20 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@elements.nil? && @elements.length > 10
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @elements.nil?
+        invalid_properties.push('invalid value for "elements", elements cannot be nil.')
+      end
+
+      if @elements.length > 10
         invalid_properties.push('invalid value for "elements", number of items must be less than or equal to 10.')
+      end
+
+      if @elements.length < 1
+        invalid_properties.push('invalid value for "elements", number of items must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -118,9 +133,12 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["generic"])
       return false unless type_validator.valid?(@type)
-      return false if !@elements.nil? && @elements.length > 10
+      return false if @elements.nil?
+      return false if @elements.length > 10
+      return false if @elements.length < 1
       true
     end
 
@@ -143,6 +161,10 @@ module Zernio
 
       if elements.length > 10
         fail ArgumentError, 'invalid value for "elements", number of items must be less than or equal to 10.'
+      end
+
+      if elements.length < 1
+        fail ArgumentError, 'invalid value for "elements", number of items must be greater than or equal to 1.'
       end
 
       @elements = elements

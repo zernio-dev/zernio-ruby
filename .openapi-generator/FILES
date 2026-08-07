@@ -135,6 +135,9 @@ docs/CheckVerification200Response.md
 docs/CheckVerificationRequest.md
 docs/CommentAutomationAudience.md
 docs/CommentAutomationFollowGate.md
+docs/CommentAutomationTemplate.md
+docs/CommentAutomationTemplateElement.md
+docs/CommentAutomationTemplateElementButtonsInner.md
 docs/CommentAutomationsApi.md
 docs/CommentsApi.md
 docs/CompleteGoogleBusinessVerificationRequest.md
@@ -1838,6 +1841,9 @@ lib/zernio-sdk/models/check_verification200_response.rb
 lib/zernio-sdk/models/check_verification_request.rb
 lib/zernio-sdk/models/comment_automation_audience.rb
 lib/zernio-sdk/models/comment_automation_follow_gate.rb
+lib/zernio-sdk/models/comment_automation_template.rb
+lib/zernio-sdk/models/comment_automation_template_element.rb
+lib/zernio-sdk/models/comment_automation_template_element_buttons_inner.rb
 lib/zernio-sdk/models/complete_google_business_verification_request.rb
 lib/zernio-sdk/models/complete_telegram_connect200_response.rb
 lib/zernio-sdk/models/complete_whats_app_phone_selection200_response.rb
@@ -3483,6 +3489,9 @@ spec/models/check_verification200_response_spec.rb
 spec/models/check_verification_request_spec.rb
 spec/models/comment_automation_audience_spec.rb
 spec/models/comment_automation_follow_gate_spec.rb
+spec/models/comment_automation_template_element_buttons_inner_spec.rb
+spec/models/comment_automation_template_element_spec.rb
+spec/models/comment_automation_template_spec.rb
 spec/models/complete_google_business_verification_request_spec.rb
 spec/models/complete_telegram_connect200_response_spec.rb
 spec/models/complete_whats_app_phone_selection200_response_account_spec.rb

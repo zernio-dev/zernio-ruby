@@ -14,12 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Platform-dependent template payload. Ignored on Telegram.  Instagram / Facebook: a generic template (carousel). Set `type: generic` and provide up to 10 `elements`, each with a `title` (required) and optional `subtitle`, `imageUrl`, and `buttons`. Mutually exclusive with the top-level `buttons` field (sending both is a 400); put the card's buttons on its `elements` instead.  WhatsApp: sends an approved WhatsApp template message, the only message type WhatsApp accepts when the 24-hour customer-service window is closed. Provide exactly one element carrying the template reference: `{ \"elements\": [{ \"name\": \"order_update\", \"language\": \"en_US\", \"components\": [...] }] }` (`type` is ignored on WhatsApp). `components` is optional and is forwarded unchanged as the `template.components` array of Meta's Cloud API send payload; use it to fill body/header variables and button parameters, e.g. `[{ \"type\": \"body\", \"parameters\": [{ \"type\": \"text\", \"text\": \"John\" }] }]`. Templates with media headers (image, video, document) must include the header component with its media link here at send time. To send a template to a phone number with no existing conversation, or to have media headers filled in automatically from the template definition, use the create-conversation endpoint (POST /v1/inbox/conversations) instead. 
-  class SendInboxMessageRequestTemplate < ApiModelBase
-    # Template type. Required for Instagram/Facebook generic templates; ignored on WhatsApp.
+  class CommentAutomationTemplateElementButtonsInner < ApiModelBase
     attr_accessor :type
 
-    attr_accessor :elements
+    attr_accessor :title
+
+    # Target URL (required when type is url)
+    attr_accessor :url
+
+    # Postback payload delivered via the messaging_postbacks webhook (required when type is postback)
+    attr_accessor :payload
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -47,7 +51,9 @@ module Zernio
     def self.attribute_map
       {
         :'type' => :'type',
-        :'elements' => :'elements'
+        :'title' => :'title',
+        :'url' => :'url',
+        :'payload' => :'payload'
       }
     end
 
@@ -65,7 +71,9 @@ module Zernio
     def self.openapi_types
       {
         :'type' => :'String',
-        :'elements' => :'Array<SendInboxMessageRequestTemplateElementsInner>'
+        :'title' => :'String',
+        :'url' => :'String',
+        :'payload' => :'String'
       }
     end
 
@@ -79,26 +87,36 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestTemplate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CommentAutomationTemplateElementButtonsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestTemplate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CommentAutomationTemplateElementButtonsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
+      else
+        self.type = nil
       end
 
-      if attributes.key?(:'elements')
-        if (value = attributes[:'elements']).is_a?(Array)
-          self.elements = value
-        end
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      else
+        self.title = nil
+      end
+
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
+      end
+
+      if attributes.key?(:'payload')
+        self.payload = attributes[:'payload']
       end
     end
 
@@ -107,8 +125,16 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@elements.nil? && @elements.length > 10
-        invalid_properties.push('invalid value for "elements", number of items must be less than or equal to 10.')
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @title.nil?
+        invalid_properties.push('invalid value for "title", title cannot be nil.')
+      end
+
+      if @title.to_s.length > 20
+        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 20.')
       end
 
       invalid_properties
@@ -118,16 +144,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["generic"])
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["url", "postback"])
       return false unless type_validator.valid?(@type)
-      return false if !@elements.nil? && @elements.length > 10
+      return false if @title.nil?
+      return false if @title.to_s.length > 20
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["generic"])
+      validator = EnumAttributeValidator.new('String', ["url", "postback"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -135,17 +163,17 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] elements Value to be assigned
-    def elements=(elements)
-      if elements.nil?
-        fail ArgumentError, 'elements cannot be nil'
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
       end
 
-      if elements.length > 10
-        fail ArgumentError, 'invalid value for "elements", number of items must be less than or equal to 10.'
+      if title.to_s.length > 20
+        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 20.'
       end
 
-      @elements = elements
+      @title = title
     end
 
     # Checks equality by comparing each attribute.
@@ -154,7 +182,9 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
-          elements == o.elements
+          title == o.title &&
+          url == o.url &&
+          payload == o.payload
     end
 
     # @see the `==` method
@@ -166,7 +196,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, elements].hash
+      [type, title, url, payload].hash
     end
 
     # Builds the object from hash

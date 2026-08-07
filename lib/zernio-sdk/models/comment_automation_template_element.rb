@@ -14,40 +14,26 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Platform-dependent template payload. Ignored on Telegram.  Instagram / Facebook: a generic template (carousel). Set `type: generic` and provide up to 10 `elements`, each with a `title` (required) and optional `subtitle`, `imageUrl`, and `buttons`. Mutually exclusive with the top-level `buttons` field (sending both is a 400); put the card's buttons on its `elements` instead.  WhatsApp: sends an approved WhatsApp template message, the only message type WhatsApp accepts when the 24-hour customer-service window is closed. Provide exactly one element carrying the template reference: `{ \"elements\": [{ \"name\": \"order_update\", \"language\": \"en_US\", \"components\": [...] }] }` (`type` is ignored on WhatsApp). `components` is optional and is forwarded unchanged as the `template.components` array of Meta's Cloud API send payload; use it to fill body/header variables and button parameters, e.g. `[{ \"type\": \"body\", \"parameters\": [{ \"type\": \"text\", \"text\": \"John\" }] }]`. Templates with media headers (image, video, document) must include the header component with its media link here at send time. To send a template to a phone number with no existing conversation, or to have media headers filled in automatically from the template definition, use the create-conversation endpoint (POST /v1/inbox/conversations) instead. 
-  class SendInboxMessageRequestTemplate < ApiModelBase
-    # Template type. Required for Instagram/Facebook generic templates; ignored on WhatsApp.
-    attr_accessor :type
+  class CommentAutomationTemplateElement < ApiModelBase
+    # Card headline (80 chars max). Also used as the Inbox preview for the sent DM.
+    attr_accessor :title
 
-    attr_accessor :elements
+    # Card description, e.g. the price or a short pitch (80 chars max).
+    attr_accessor :subtitle
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    # Publicly reachable http(s) image rendered large above the card.
+    attr_accessor :image_url
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Up to 3 card buttons. A generic template has NO phone button, on either platform. `url` buttons are click-tracked when linkTracking is on.
+    attr_accessor :buttons
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'elements' => :'elements'
+        :'title' => :'title',
+        :'subtitle' => :'subtitle',
+        :'image_url' => :'imageUrl',
+        :'buttons' => :'buttons'
       }
     end
 
@@ -64,8 +50,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'elements' => :'Array<SendInboxMessageRequestTemplateElementsInner>'
+        :'title' => :'String',
+        :'subtitle' => :'String',
+        :'image_url' => :'String',
+        :'buttons' => :'Array<CommentAutomationTemplateElementButtonsInner>'
       }
     end
 
@@ -79,25 +67,35 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessageRequestTemplate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CommentAutomationTemplateElement` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessageRequestTemplate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CommentAutomationTemplateElement`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      else
+        self.title = nil
       end
 
-      if attributes.key?(:'elements')
-        if (value = attributes[:'elements']).is_a?(Array)
-          self.elements = value
+      if attributes.key?(:'subtitle')
+        self.subtitle = attributes[:'subtitle']
+      end
+
+      if attributes.key?(:'image_url')
+        self.image_url = attributes[:'image_url']
+      end
+
+      if attributes.key?(:'buttons')
+        if (value = attributes[:'buttons']).is_a?(Array)
+          self.buttons = value
         end
       end
     end
@@ -107,8 +105,20 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@elements.nil? && @elements.length > 10
-        invalid_properties.push('invalid value for "elements", number of items must be less than or equal to 10.')
+      if @title.nil?
+        invalid_properties.push('invalid value for "title", title cannot be nil.')
+      end
+
+      if @title.to_s.length > 80
+        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 80.')
+      end
+
+      if !@subtitle.nil? && @subtitle.to_s.length > 80
+        invalid_properties.push('invalid value for "subtitle", the character length must be smaller than or equal to 80.')
+      end
+
+      if !@buttons.nil? && @buttons.length > 3
+        invalid_properties.push('invalid value for "buttons", number of items must be less than or equal to 3.')
       end
 
       invalid_properties
@@ -118,34 +128,53 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["generic"])
-      return false unless type_validator.valid?(@type)
-      return false if !@elements.nil? && @elements.length > 10
+      return false if @title.nil?
+      return false if @title.to_s.length > 80
+      return false if !@subtitle.nil? && @subtitle.to_s.length > 80
+      return false if !@buttons.nil? && @buttons.length > 3
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["generic"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if title.nil?
+        fail ArgumentError, 'title cannot be nil'
       end
-      @type = type
+
+      if title.to_s.length > 80
+        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 80.'
+      end
+
+      @title = title
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] elements Value to be assigned
-    def elements=(elements)
-      if elements.nil?
-        fail ArgumentError, 'elements cannot be nil'
+    # @param [Object] subtitle Value to be assigned
+    def subtitle=(subtitle)
+      if subtitle.nil?
+        fail ArgumentError, 'subtitle cannot be nil'
       end
 
-      if elements.length > 10
-        fail ArgumentError, 'invalid value for "elements", number of items must be less than or equal to 10.'
+      if subtitle.to_s.length > 80
+        fail ArgumentError, 'invalid value for "subtitle", the character length must be smaller than or equal to 80.'
       end
 
-      @elements = elements
+      @subtitle = subtitle
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] buttons Value to be assigned
+    def buttons=(buttons)
+      if buttons.nil?
+        fail ArgumentError, 'buttons cannot be nil'
+      end
+
+      if buttons.length > 3
+        fail ArgumentError, 'invalid value for "buttons", number of items must be less than or equal to 3.'
+      end
+
+      @buttons = buttons
     end
 
     # Checks equality by comparing each attribute.
@@ -153,8 +182,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          elements == o.elements
+          title == o.title &&
+          subtitle == o.subtitle &&
+          image_url == o.image_url &&
+          buttons == o.buttons
     end
 
     # @see the `==` method
@@ -166,7 +197,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, elements].hash
+      [title, subtitle, image_url, buttons].hash
     end
 
     # Builds the object from hash

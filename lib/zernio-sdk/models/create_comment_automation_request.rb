@@ -53,6 +53,9 @@ module Zernio
     # Optional inline DM buttons (1-3). Phone buttons are Facebook-only. Omit or pass [] for a plain-text DM.
     attr_accessor :buttons
 
+    # Optional product card sent INSTEAD of the plain dmMessage bubble. Mutually exclusive with buttons. dmMessage stays required: it is what gets sent the moment the card is cleared.
+    attr_accessor :template
+
     # Optional public reply to the comment
     attr_accessor :comment_reply
 
@@ -116,6 +119,7 @@ module Zernio
         :'typo_tolerance' => :'typoTolerance',
         :'dm_message' => :'dmMessage',
         :'buttons' => :'buttons',
+        :'template' => :'template',
         :'comment_reply' => :'commentReply',
         :'dm_message_variations' => :'dmMessageVariations',
         :'comment_reply_variations' => :'commentReplyVariations',
@@ -154,6 +158,7 @@ module Zernio
         :'typo_tolerance' => :'Boolean',
         :'dm_message' => :'String',
         :'buttons' => :'Array<DmButton>',
+        :'template' => :'CommentAutomationTemplate',
         :'comment_reply' => :'String',
         :'dm_message_variations' => :'Array<String>',
         :'comment_reply_variations' => :'Array<String>',
@@ -169,6 +174,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'template',
       ])
     end
 
@@ -256,6 +262,10 @@ module Zernio
         if (value = attributes[:'buttons']).is_a?(Array)
           self.buttons = value
         end
+      end
+
+      if attributes.key?(:'template')
+        self.template = attributes[:'template']
       end
 
       if attributes.key?(:'comment_reply')
@@ -531,6 +541,7 @@ module Zernio
           typo_tolerance == o.typo_tolerance &&
           dm_message == o.dm_message &&
           buttons == o.buttons &&
+          template == o.template &&
           comment_reply == o.comment_reply &&
           dm_message_variations == o.dm_message_variations &&
           comment_reply_variations == o.comment_reply_variations &&
@@ -551,7 +562,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate].hash
+      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate].hash
     end
 
     # Builds the object from hash

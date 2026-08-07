@@ -17,6 +17,7 @@
 | **typo_tolerance** | **Boolean** | Only with matchMode&#x3D;word: also fire on close misspellings of a keyword (one edit for 4-7 character keywords, two from 8 up). Keywords shorter than 4 characters are never fuzzy-matched. | [optional] |
 | **dm_message** | **String** | DM text to send to commenter. Max 640 chars when buttons are set, otherwise ~1000. |  |
 | **buttons** | [**Array&lt;DmButton&gt;**](DmButton.md) | Optional inline DM buttons (1-3). Phone buttons are Facebook-only. Omit or pass [] for a plain-text DM. | [optional] |
+| **template** | [**CommentAutomationTemplate**](CommentAutomationTemplate.md) | Optional product card sent INSTEAD of the plain dmMessage bubble. Mutually exclusive with buttons. dmMessage stays required: it is what gets sent the moment the card is cleared. | [optional] |
 | **comment_reply** | **String** | Optional public reply to the comment | [optional] |
 | **dm_message_variations** | **Array&lt;String&gt;** | Optional alternate DM texts for random rotation. When set, each triggered comment sends one picked at random from [dmMessage, ...dmMessageVariations], so repeat commenters get slightly different DMs (helps avoid identical-message patterns). Up to 5. Buttons are attached to whichever text is picked, not varied. | [optional] |
 | **comment_reply_variations** | **Array&lt;String&gt;** | Optional alternate public replies, rotated at random alongside commentReply (picked independently of the DM). Up to 5. | [optional] |
@@ -46,6 +47,7 @@ instance = Zernio::CreateCommentAutomationRequest.new(
   typo_tolerance: null,
   dm_message: null,
   buttons: null,
+  template: null,
   comment_reply: null,
   dm_message_variations: null,
   comment_reply_variations: null,
