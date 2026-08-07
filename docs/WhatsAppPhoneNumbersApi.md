@@ -12,6 +12,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#get_whats_app_phone_number) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number |
 | [**get_whats_app_phone_numbers**](WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers |
 | [**list_whats_app_number_countries**](WhatsAppPhoneNumbersApi.md#list_whats_app_number_countries) | **GET** /v1/whatsapp/phone-numbers/countries | List offerable number countries |
+| [**move_whats_app_number_to_profile**](WhatsAppPhoneNumbersApi.md#move_whats_app_number_to_profile) | **PATCH** /v1/whatsapp/phone-numbers/{id}/profile | Move a number to another profile |
 | [**purchase_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number |
 | [**release_whats_app_phone_number**](WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number |
 | [**remediate_whats_app_number**](WhatsAppPhoneNumbersApi.md#remediate_whats_app_number) | **POST** /v1/whatsapp/phone-numbers/{id}/remediate | Resubmit a declined number |
@@ -579,6 +580,77 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## move_whats_app_number_to_profile
+
+> <MoveWhatsAppNumberToProfile200Response> move_whats_app_number_to_profile(id, move_whats_app_number_to_profile_request)
+
+Move a number to another profile
+
+Move a provisioned number to a different profile.  A number is not a single record. Alongside the number itself there are hidden telephony owner accounts (platform `phone`, plus `sms` when SMS is enabled) and, once WhatsApp is connected, the `whatsapp` account. They all carry a profileId and this endpoint moves them together.  Use this instead of `PATCH /v1/accounts/{accountId}`: that one moves the social account only and leaves the number itself pinned to its original profile, which splits the number across two profiles. Connecting a provisioned number always places it on the profile the NUMBER is on, so a `profileId` passed to `GET /v1/connect/whatsapp` cannot re-home it and a later reconnect pulls the account back. This endpoint is how you re-home it.  `id` is the number record id from `GET /v1/phone-numbers`, not an account id.  A profile holds at most one account per platform, so the destination must be free of every platform this number occupies. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppPhoneNumbersApi.new
+id = 'id_example' # String | WhatsAppPhoneNumber id.
+move_whats_app_number_to_profile_request = Zernio::MoveWhatsAppNumberToProfileRequest.new({profile_id: 'profile_id_example'}) # MoveWhatsAppNumberToProfileRequest | 
+
+begin
+  # Move a number to another profile
+  result = api_instance.move_whats_app_number_to_profile(id, move_whats_app_number_to_profile_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->move_whats_app_number_to_profile: #{e}"
+end
+```
+
+#### Using the move_whats_app_number_to_profile_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<MoveWhatsAppNumberToProfile200Response>, Integer, Hash)> move_whats_app_number_to_profile_with_http_info(id, move_whats_app_number_to_profile_request)
+
+```ruby
+begin
+  # Move a number to another profile
+  data, status_code, headers = api_instance.move_whats_app_number_to_profile_with_http_info(id, move_whats_app_number_to_profile_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <MoveWhatsAppNumberToProfile200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppPhoneNumbersApi->move_whats_app_number_to_profile_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | WhatsAppPhoneNumber id. |  |
+| **move_whats_app_number_to_profile_request** | [**MoveWhatsAppNumberToProfileRequest**](MoveWhatsAppNumberToProfileRequest.md) |  |  |
+
+### Return type
+
+[**MoveWhatsAppNumberToProfile200Response**](MoveWhatsAppNumberToProfile200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

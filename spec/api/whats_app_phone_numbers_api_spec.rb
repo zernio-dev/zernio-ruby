@@ -131,6 +131,19 @@ describe 'WhatsAppPhoneNumbersApi' do
     end
   end
 
+  # unit tests for move_whats_app_number_to_profile
+  # Move a number to another profile
+  # Move a provisioned number to a different profile.  A number is not a single record. Alongside the number itself there are hidden telephony owner accounts (platform &#x60;phone&#x60;, plus &#x60;sms&#x60; when SMS is enabled) and, once WhatsApp is connected, the &#x60;whatsapp&#x60; account. They all carry a profileId and this endpoint moves them together.  Use this instead of &#x60;PATCH /v1/accounts/{accountId}&#x60;: that one moves the social account only and leaves the number itself pinned to its original profile, which splits the number across two profiles. Connecting a provisioned number always places it on the profile the NUMBER is on, so a &#x60;profileId&#x60; passed to &#x60;GET /v1/connect/whatsapp&#x60; cannot re-home it and a later reconnect pulls the account back. This endpoint is how you re-home it.  &#x60;id&#x60; is the number record id from &#x60;GET /v1/phone-numbers&#x60;, not an account id.  A profile holds at most one account per platform, so the destination must be free of every platform this number occupies. 
+  # @param id WhatsAppPhoneNumber id.
+  # @param move_whats_app_number_to_profile_request 
+  # @param [Hash] opts the optional parameters
+  # @return [MoveWhatsAppNumberToProfile200Response]
+  describe 'move_whats_app_number_to_profile test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for purchase_whats_app_phone_number
   # Purchase phone number
   # Deprecated alias of &#x60;/v1/phone-numbers/purchase&#x60;; same contract. New integrations should use that path.  Payment-first: you do not pick a specific number, the system provisions one and auto-assigns it. With usage-based billing active and a payment method on file, the number provisions inline and bills per month on your usage-based invoice (there is no checkout redirect). No payment method on file returns &#x60;402 PAYMENT_REQUIRED&#x60;; a regulated country returns &#x60;202&#x60; with &#x60;status: \&quot;kyc_required\&quot;&#x60; and a &#x60;kycUrl&#x60;.  Requires usage-based billing (the Usage plan). The maximum number of phone numbers is determined by the user&#39;s plan. 

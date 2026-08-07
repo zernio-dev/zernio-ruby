@@ -583,6 +583,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_number) | **GET** /v1/whatsapp/phone-numbers/{phoneNumberId} | Get phone number
 *Zernio::WhatsAppPhoneNumbersApi* | [**get_whats_app_phone_numbers**](docs/WhatsAppPhoneNumbersApi.md#get_whats_app_phone_numbers) | **GET** /v1/whatsapp/phone-numbers | List phone numbers
 *Zernio::WhatsAppPhoneNumbersApi* | [**list_whats_app_number_countries**](docs/WhatsAppPhoneNumbersApi.md#list_whats_app_number_countries) | **GET** /v1/whatsapp/phone-numbers/countries | List offerable number countries
+*Zernio::WhatsAppPhoneNumbersApi* | [**move_whats_app_number_to_profile**](docs/WhatsAppPhoneNumbersApi.md#move_whats_app_number_to_profile) | **PATCH** /v1/whatsapp/phone-numbers/{id}/profile | Move a number to another profile
 *Zernio::WhatsAppPhoneNumbersApi* | [**purchase_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#purchase_whats_app_phone_number) | **POST** /v1/whatsapp/phone-numbers/purchase | Purchase phone number
 *Zernio::WhatsAppPhoneNumbersApi* | [**release_whats_app_phone_number**](docs/WhatsAppPhoneNumbersApi.md#release_whats_app_phone_number) | **DELETE** /v1/whatsapp/phone-numbers/{phoneNumberId} | Release phone number
 *Zernio::WhatsAppPhoneNumbersApi* | [**remediate_whats_app_number**](docs/WhatsAppPhoneNumbersApi.md#remediate_whats_app_number) | **POST** /v1/whatsapp/phone-numbers/{id}/remediate | Resubmit a declined number
@@ -1587,6 +1588,8 @@ Class | Method | HTTP request | Description
  - [Zernio::MoneyAmount](docs/MoneyAmount.md)
  - [Zernio::MoveAccountToProfile200Response](docs/MoveAccountToProfile200Response.md)
  - [Zernio::MoveAccountToProfileRequest](docs/MoveAccountToProfileRequest.md)
+ - [Zernio::MoveWhatsAppNumberToProfile200Response](docs/MoveWhatsAppNumberToProfile200Response.md)
+ - [Zernio::MoveWhatsAppNumberToProfileRequest](docs/MoveWhatsAppNumberToProfileRequest.md)
  - [Zernio::OnVerificationApprovedRequest](docs/OnVerificationApprovedRequest.md)
  - [Zernio::OnVerificationApprovedRequestVerification](docs/OnVerificationApprovedRequestVerification.md)
  - [Zernio::OnVerificationFailedRequest](docs/OnVerificationFailedRequest.md)

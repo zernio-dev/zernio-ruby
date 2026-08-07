@@ -546,6 +546,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Move a number to another profile
+    # Move a provisioned number to a different profile.  A number is not a single record. Alongside the number itself there are hidden telephony owner accounts (platform `phone`, plus `sms` when SMS is enabled) and, once WhatsApp is connected, the `whatsapp` account. They all carry a profileId and this endpoint moves them together.  Use this instead of `PATCH /v1/accounts/{accountId}`: that one moves the social account only and leaves the number itself pinned to its original profile, which splits the number across two profiles. Connecting a provisioned number always places it on the profile the NUMBER is on, so a `profileId` passed to `GET /v1/connect/whatsapp` cannot re-home it and a later reconnect pulls the account back. This endpoint is how you re-home it.  `id` is the number record id from `GET /v1/phone-numbers`, not an account id.  A profile holds at most one account per platform, so the destination must be free of every platform this number occupies. 
+    # @param id [String] WhatsAppPhoneNumber id.
+    # @param move_whats_app_number_to_profile_request [MoveWhatsAppNumberToProfileRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [MoveWhatsAppNumberToProfile200Response]
+    def move_whats_app_number_to_profile(id, move_whats_app_number_to_profile_request, opts = {})
+      data, _status_code, _headers = move_whats_app_number_to_profile_with_http_info(id, move_whats_app_number_to_profile_request, opts)
+      data
+    end
+
+    # Move a number to another profile
+    # Move a provisioned number to a different profile.  A number is not a single record. Alongside the number itself there are hidden telephony owner accounts (platform &#x60;phone&#x60;, plus &#x60;sms&#x60; when SMS is enabled) and, once WhatsApp is connected, the &#x60;whatsapp&#x60; account. They all carry a profileId and this endpoint moves them together.  Use this instead of &#x60;PATCH /v1/accounts/{accountId}&#x60;: that one moves the social account only and leaves the number itself pinned to its original profile, which splits the number across two profiles. Connecting a provisioned number always places it on the profile the NUMBER is on, so a &#x60;profileId&#x60; passed to &#x60;GET /v1/connect/whatsapp&#x60; cannot re-home it and a later reconnect pulls the account back. This endpoint is how you re-home it.  &#x60;id&#x60; is the number record id from &#x60;GET /v1/phone-numbers&#x60;, not an account id.  A profile holds at most one account per platform, so the destination must be free of every platform this number occupies. 
+    # @param id [String] WhatsAppPhoneNumber id.
+    # @param move_whats_app_number_to_profile_request [MoveWhatsAppNumberToProfileRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(MoveWhatsAppNumberToProfile200Response, Integer, Hash)>] MoveWhatsAppNumberToProfile200Response data, response status code and response headers
+    def move_whats_app_number_to_profile_with_http_info(id, move_whats_app_number_to_profile_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppPhoneNumbersApi.move_whats_app_number_to_profile ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling WhatsAppPhoneNumbersApi.move_whats_app_number_to_profile"
+      end
+      # verify the required parameter 'move_whats_app_number_to_profile_request' is set
+      if @api_client.config.client_side_validation && move_whats_app_number_to_profile_request.nil?
+        fail ArgumentError, "Missing the required parameter 'move_whats_app_number_to_profile_request' when calling WhatsAppPhoneNumbersApi.move_whats_app_number_to_profile"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/phone-numbers/{id}/profile'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(move_whats_app_number_to_profile_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'MoveWhatsAppNumberToProfile200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppPhoneNumbersApi.move_whats_app_number_to_profile",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppPhoneNumbersApi#move_whats_app_number_to_profile\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Purchase phone number
     # Deprecated alias of `/v1/phone-numbers/purchase`; same contract. New integrations should use that path.  Payment-first: you do not pick a specific number, the system provisions one and auto-assigns it. With usage-based billing active and a payment method on file, the number provisions inline and bills per month on your usage-based invoice (there is no checkout redirect). No payment method on file returns `402 PAYMENT_REQUIRED`; a regulated country returns `202` with `status: \"kyc_required\"` and a `kycUrl`.  Requires usage-based billing (the Usage plan). The maximum number of phone numbers is determined by the user's plan. 
     # @param purchase_whats_app_phone_number_request [PurchaseWhatsAppPhoneNumberRequest] 
