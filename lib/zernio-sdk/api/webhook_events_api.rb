@@ -2066,7 +2066,7 @@ module Zernio
     end
 
     # Reaction received event
-    # Fired when a participant adds or removes an emoji reaction on a message. Supported on WhatsApp and Telegram. Distinct from message.received so a reaction (e.g. a thumbs-up) is not mistaken for an inbound message. The `reaction.action` field is `added` or `removed`. On WhatsApp removals the platform does not report which emoji was removed, so `reaction.emoji` may be an empty string. Requires the Inbox add-on. 
+    # Fired when a participant adds or removes an emoji reaction on a message. Supported on WhatsApp, Telegram, Slack, Instagram and Facebook Messenger. Distinct from message.received so a reaction (e.g. a thumbs-up) is not mistaken for an inbound message. The `reaction.action` field is `added` or `removed`. On WhatsApp and Meta removals the platform does not report which emoji was removed, so `reaction.emoji` may be an empty string. Instagram and Facebook accounts connected before reactions shipped only emit this event after their webhook subscription is refreshed; reconnect the account if reactions never arrive. Requires the Inbox add-on. 
     # @param webhook_payload_reaction [WebhookPayloadReaction] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -2076,7 +2076,7 @@ module Zernio
     end
 
     # Reaction received event
-    # Fired when a participant adds or removes an emoji reaction on a message. Supported on WhatsApp and Telegram. Distinct from message.received so a reaction (e.g. a thumbs-up) is not mistaken for an inbound message. The &#x60;reaction.action&#x60; field is &#x60;added&#x60; or &#x60;removed&#x60;. On WhatsApp removals the platform does not report which emoji was removed, so &#x60;reaction.emoji&#x60; may be an empty string. Requires the Inbox add-on. 
+    # Fired when a participant adds or removes an emoji reaction on a message. Supported on WhatsApp, Telegram, Slack, Instagram and Facebook Messenger. Distinct from message.received so a reaction (e.g. a thumbs-up) is not mistaken for an inbound message. The &#x60;reaction.action&#x60; field is &#x60;added&#x60; or &#x60;removed&#x60;. On WhatsApp and Meta removals the platform does not report which emoji was removed, so &#x60;reaction.emoji&#x60; may be an empty string. Instagram and Facebook accounts connected before reactions shipped only emit this event after their webhook subscription is refreshed; reconnect the account if reactions never arrive. Requires the Inbox add-on. 
     # @param webhook_payload_reaction [WebhookPayloadReaction] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

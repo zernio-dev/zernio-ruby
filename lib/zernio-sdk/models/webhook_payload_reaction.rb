@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Webhook payload for reaction received events (WhatsApp, Telegram)
+  # Webhook payload for reaction received events (WhatsApp, Telegram, Slack, Instagram, Facebook Messenger)
   class WebhookPayloadReaction < ApiModelBase
     # Stable webhook event ID
     attr_accessor :id
