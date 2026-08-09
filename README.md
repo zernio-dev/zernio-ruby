@@ -211,12 +211,14 @@ Class | Method | HTTP request | Description
 *Zernio::CommentsApi* | [**get_inbox_post_comments**](docs/CommentsApi.md#get_inbox_post_comments) | **GET** /v1/inbox/comments/{postId} | Get post comments
 *Zernio::CommentsApi* | [**hide_inbox_comment**](docs/CommentsApi.md#hide_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/hide | Hide comment
 *Zernio::CommentsApi* | [**like_inbox_comment**](docs/CommentsApi.md#like_inbox_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/like | Like comment
+*Zernio::CommentsApi* | [**like_post**](docs/CommentsApi.md#like_post) | **POST** /v1/inbox/posts/{postId}/like | Like post
 *Zernio::CommentsApi* | [**list_inbox_comments**](docs/CommentsApi.md#list_inbox_comments) | **GET** /v1/inbox/comments | List commented posts
 *Zernio::CommentsApi* | [**reply_to_inbox_post**](docs/CommentsApi.md#reply_to_inbox_post) | **POST** /v1/inbox/comments/{postId} | Reply to comment
 *Zernio::CommentsApi* | [**send_private_reply_to_comment**](docs/CommentsApi.md#send_private_reply_to_comment) | **POST** /v1/inbox/comments/{postId}/{commentId}/private-reply | Send private reply
 *Zernio::CommentsApi* | [**set_comment_moderation**](docs/CommentsApi.md#set_comment_moderation) | **POST** /v1/inbox/comments/{postId}/{commentId}/moderation | Set comment moderation status
 *Zernio::CommentsApi* | [**unhide_inbox_comment**](docs/CommentsApi.md#unhide_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/hide | Unhide comment
 *Zernio::CommentsApi* | [**unlike_inbox_comment**](docs/CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
+*Zernio::CommentsApi* | [**unlike_post**](docs/CommentsApi.md#unlike_post) | **DELETE** /v1/inbox/posts/{postId}/like | Unlike post
 *Zernio::ConnectApi* | [**assign_google_business_location**](docs/ConnectApi.md#assign_google_business_location) | **POST** /v1/accounts/{accountId}/gmb-locations/assign | Assign GBP location to another profile
 *Zernio::ConnectApi* | [**complete_telegram_connect**](docs/ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status
 *Zernio::ConnectApi* | [**complete_whats_app_phone_selection**](docs/ConnectApi.md#complete_whats_app_phone_selection) | **POST** /v1/connect/whatsapp/select-phone-number | Complete number selection
@@ -1390,6 +1392,8 @@ Class | Method | HTTP request | Description
  - [Zernio::InstagramPlatformDataUserTagsInner](docs/InstagramPlatformDataUserTagsInner.md)
  - [Zernio::LikeInboxComment200Response](docs/LikeInboxComment200Response.md)
  - [Zernio::LikeInboxCommentRequest](docs/LikeInboxCommentRequest.md)
+ - [Zernio::LikePost200Response](docs/LikePost200Response.md)
+ - [Zernio::LikePostRequest](docs/LikePostRequest.md)
  - [Zernio::LinkedInAdsPlatformData](docs/LinkedInAdsPlatformData.md)
  - [Zernio::LinkedInAdsPlatformDataCarousel](docs/LinkedInAdsPlatformDataCarousel.md)
  - [Zernio::LinkedInAdsPlatformDataCarouselCardsInner](docs/LinkedInAdsPlatformDataCarouselCardsInner.md)
@@ -1902,6 +1906,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UndoRetweet200Response](docs/UndoRetweet200Response.md)
  - [Zernio::UnfollowUser200Response](docs/UnfollowUser200Response.md)
  - [Zernio::UnlikeInboxComment200Response](docs/UnlikeInboxComment200Response.md)
+ - [Zernio::UnlikePost200Response](docs/UnlikePost200Response.md)
  - [Zernio::UnpinDiscordMessage200Response](docs/UnpinDiscordMessage200Response.md)
  - [Zernio::UnpublishPost200Response](docs/UnpublishPost200Response.md)
  - [Zernio::UnpublishPostRequest](docs/UnpublishPostRequest.md)

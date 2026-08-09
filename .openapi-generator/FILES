@@ -813,6 +813,8 @@ docs/InvitesApi.md
 docs/LeadGenApi.md
 docs/LikeInboxComment200Response.md
 docs/LikeInboxCommentRequest.md
+docs/LikePost200Response.md
+docs/LikePostRequest.md
 docs/LinkedInAdsPlatformData.md
 docs/LinkedInAdsPlatformDataCarousel.md
 docs/LinkedInAdsPlatformDataCarouselCardsInner.md
@@ -1343,6 +1345,7 @@ docs/UnblockWhatsAppUsersRequest.md
 docs/UndoRetweet200Response.md
 docs/UnfollowUser200Response.md
 docs/UnlikeInboxComment200Response.md
+docs/UnlikePost200Response.md
 docs/UnpinDiscordMessage200Response.md
 docs/UnpublishPost200Response.md
 docs/UnpublishPostRequest.md
@@ -2508,6 +2511,8 @@ lib/zernio-sdk/models/instagram_platform_data_trial_params.rb
 lib/zernio-sdk/models/instagram_platform_data_user_tags_inner.rb
 lib/zernio-sdk/models/like_inbox_comment200_response.rb
 lib/zernio-sdk/models/like_inbox_comment_request.rb
+lib/zernio-sdk/models/like_post200_response.rb
+lib/zernio-sdk/models/like_post_request.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data_carousel.rb
 lib/zernio-sdk/models/linked_in_ads_platform_data_carousel_cards_inner.rb
@@ -3020,6 +3025,7 @@ lib/zernio-sdk/models/unblock_whats_app_users_request.rb
 lib/zernio-sdk/models/undo_retweet200_response.rb
 lib/zernio-sdk/models/unfollow_user200_response.rb
 lib/zernio-sdk/models/unlike_inbox_comment200_response.rb
+lib/zernio-sdk/models/unlike_post200_response.rb
 lib/zernio-sdk/models/unpin_discord_message200_response.rb
 lib/zernio-sdk/models/unpublish_post200_response.rb
 lib/zernio-sdk/models/unpublish_post_request.rb
@@ -4165,6 +4171,8 @@ spec/models/instagram_platform_data_trial_params_spec.rb
 spec/models/instagram_platform_data_user_tags_inner_spec.rb
 spec/models/like_inbox_comment200_response_spec.rb
 spec/models/like_inbox_comment_request_spec.rb
+spec/models/like_post200_response_spec.rb
+spec/models/like_post_request_spec.rb
 spec/models/linked_in_ads_platform_data_carousel_cards_inner_spec.rb
 spec/models/linked_in_ads_platform_data_carousel_spec.rb
 spec/models/linked_in_ads_platform_data_conversation_messages_inner_buttons_inner_spec.rb
@@ -4677,6 +4685,7 @@ spec/models/unblock_whats_app_users_request_spec.rb
 spec/models/undo_retweet200_response_spec.rb
 spec/models/unfollow_user200_response_spec.rb
 spec/models/unlike_inbox_comment200_response_spec.rb
+spec/models/unlike_post200_response_spec.rb
 spec/models/unpin_discord_message200_response_spec.rb
 spec/models/unpublish_post200_response_spec.rb
 spec/models/unpublish_post_request_spec.rb

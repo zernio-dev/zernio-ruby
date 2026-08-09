@@ -347,7 +347,7 @@ module Zernio
     end
 
     # Like comment
-    # Like or upvote a comment on a post. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit. For Bluesky, the cid (content identifier) is required in the request body. 
+    # Like or upvote a comment on a post. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit, LinkedIn. For Bluesky, the cid (content identifier) is required in the request body. For LinkedIn, pass the composite comment URN returned by the comments endpoints as commentId; an optional reactionType picks the reaction (defaults to LIKE), and accounts connected before the social-feed scopes were requested get a 403 with code `linkedin_reconnect_required`. 
     # @param post_id [String] 
     # @param comment_id [String] 
     # @param like_inbox_comment_request [LikeInboxCommentRequest] 
@@ -359,7 +359,7 @@ module Zernio
     end
 
     # Like comment
-    # Like or upvote a comment on a post. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit. For Bluesky, the cid (content identifier) is required in the request body. 
+    # Like or upvote a comment on a post. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit, LinkedIn. For Bluesky, the cid (content identifier) is required in the request body. For LinkedIn, pass the composite comment URN returned by the comments endpoints as commentId; an optional reactionType picks the reaction (defaults to LIKE), and accounts connected before the social-feed scopes were requested get a 403 with code &#x60;linkedin_reconnect_required&#x60;. 
     # @param post_id [String] 
     # @param comment_id [String] 
     # @param like_inbox_comment_request [LikeInboxCommentRequest] 
@@ -422,6 +422,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CommentsApi#like_inbox_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Like post
+    # Like (or react to) a post as a connected account. Supported platforms: LinkedIn, Twitter/X, Facebook, YouTube, Bluesky. Instagram, Threads, TikTok and Pinterest expose no like endpoint in their APIs and return 400. Reddit returns 400 too, pointing at `POST /v1/accounts/{accountId}/reddit-vote`, which covers upvote, downvote and clear on both posts and comments.  The account does not have to be the one that published the post, which is what makes executive engagement possible: pass an exec's `accountId` and the brand post's ID. `postId` accepts either a Zernio post ID or the platform's native post ID. A Zernio post ID resolves to the entry for `accountId`, falling back to the post's single entry on the same platform (two entries on that platform is a 400, so pass the native ID).  LinkedIn requires the `w_member_social_feed` / `w_organization_social_feed` scopes, which are not retroactive: accounts connected before those were requested get a 403 with code `linkedin_reconnect_required` until the user reconnects the account. YouTube spends 50 quota units per call. 
+    # @param post_id [String] Zernio post ID or the platform&#39;s native post ID
+    # @param like_post_request [LikePostRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [LikePost200Response]
+    def like_post(post_id, like_post_request, opts = {})
+      data, _status_code, _headers = like_post_with_http_info(post_id, like_post_request, opts)
+      data
+    end
+
+    # Like post
+    # Like (or react to) a post as a connected account. Supported platforms: LinkedIn, Twitter/X, Facebook, YouTube, Bluesky. Instagram, Threads, TikTok and Pinterest expose no like endpoint in their APIs and return 400. Reddit returns 400 too, pointing at &#x60;POST /v1/accounts/{accountId}/reddit-vote&#x60;, which covers upvote, downvote and clear on both posts and comments.  The account does not have to be the one that published the post, which is what makes executive engagement possible: pass an exec&#39;s &#x60;accountId&#x60; and the brand post&#39;s ID. &#x60;postId&#x60; accepts either a Zernio post ID or the platform&#39;s native post ID. A Zernio post ID resolves to the entry for &#x60;accountId&#x60;, falling back to the post&#39;s single entry on the same platform (two entries on that platform is a 400, so pass the native ID).  LinkedIn requires the &#x60;w_member_social_feed&#x60; / &#x60;w_organization_social_feed&#x60; scopes, which are not retroactive: accounts connected before those were requested get a 403 with code &#x60;linkedin_reconnect_required&#x60; until the user reconnects the account. YouTube spends 50 quota units per call. 
+    # @param post_id [String] Zernio post ID or the platform&#39;s native post ID
+    # @param like_post_request [LikePostRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(LikePost200Response, Integer, Hash)>] LikePost200Response data, response status code and response headers
+    def like_post_with_http_info(post_id, like_post_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CommentsApi.like_post ...'
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling CommentsApi.like_post"
+      end
+      # verify the required parameter 'like_post_request' is set
+      if @api_client.config.client_side_validation && like_post_request.nil?
+        fail ArgumentError, "Missing the required parameter 'like_post_request' when calling CommentsApi.like_post"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/posts/{postId}/like'.sub('{' + 'postId' + '}', CGI.escape(post_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(like_post_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LikePost200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"CommentsApi.like_post",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CommentsApi#like_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -845,7 +919,7 @@ module Zernio
     end
 
     # Unlike comment
-    # Remove a like from a comment. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit. For Bluesky, the likeUri query parameter is required. 
+    # Remove a like from a comment. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit, LinkedIn. For Bluesky, the likeUri query parameter is required. 
     # @param post_id [String] 
     # @param comment_id [String] 
     # @param account_id [String] 
@@ -858,7 +932,7 @@ module Zernio
     end
 
     # Unlike comment
-    # Remove a like from a comment. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit. For Bluesky, the likeUri query parameter is required. 
+    # Remove a like from a comment. Supported platforms: Facebook, Twitter/X, Bluesky, Reddit, LinkedIn. For Bluesky, the likeUri query parameter is required. 
     # @param post_id [String] 
     # @param comment_id [String] 
     # @param account_id [String] 
@@ -919,6 +993,79 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: CommentsApi#unlike_inbox_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Unlike post
+    # Remove this account's like from a post. Supported platforms: LinkedIn, Twitter/X, Facebook, YouTube, Bluesky. On YouTube this clears the rating. For Bluesky, `likeUri` (returned when the post was liked) is required. Reddit uses `POST /v1/accounts/{accountId}/reddit-vote` with `direction: 0`. 
+    # @param post_id [String] Zernio post ID or the platform&#39;s native post ID
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :like_uri (Bluesky only) The like URI returned when liking
+    # @return [UnlikePost200Response]
+    def unlike_post(post_id, account_id, opts = {})
+      data, _status_code, _headers = unlike_post_with_http_info(post_id, account_id, opts)
+      data
+    end
+
+    # Unlike post
+    # Remove this account&#39;s like from a post. Supported platforms: LinkedIn, Twitter/X, Facebook, YouTube, Bluesky. On YouTube this clears the rating. For Bluesky, &#x60;likeUri&#x60; (returned when the post was liked) is required. Reddit uses &#x60;POST /v1/accounts/{accountId}/reddit-vote&#x60; with &#x60;direction: 0&#x60;. 
+    # @param post_id [String] Zernio post ID or the platform&#39;s native post ID
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :like_uri (Bluesky only) The like URI returned when liking
+    # @return [Array<(UnlikePost200Response, Integer, Hash)>] UnlikePost200Response data, response status code and response headers
+    def unlike_post_with_http_info(post_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CommentsApi.unlike_post ...'
+      end
+      # verify the required parameter 'post_id' is set
+      if @api_client.config.client_side_validation && post_id.nil?
+        fail ArgumentError, "Missing the required parameter 'post_id' when calling CommentsApi.unlike_post"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling CommentsApi.unlike_post"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/posts/{postId}/like'.sub('{' + 'postId' + '}', CGI.escape(post_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'likeUri'] = opts[:'like_uri'] if !opts[:'like_uri'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UnlikePost200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"CommentsApi.unlike_post",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CommentsApi#unlike_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
