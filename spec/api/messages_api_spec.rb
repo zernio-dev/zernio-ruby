@@ -115,6 +115,22 @@ describe 'MessagesApi' do
     end
   end
 
+  # unit tests for get_message_attachment
+  # Resolve message attachment
+  # Resolve one attachment on a message to a media url that works right now.  Instagram and Facebook sign DM media urls per request and expire them, so the &#x60;url&#x60; on a message is a snapshot: it works when you read the message and stops working later. This endpoint checks the stored url and, when it has gone stale, re-mints the message&#39;s media from Meta and persists it before answering. The message id never expires, so this URL is the one to store — it is returned on each attachment as &#x60;refreshUrl&#x60;.  By default it responds &#x60;302&#x60; to the live media url, so it can be used directly as an &#x60;&lt;img src&gt;&#x60; on a browser session. API-key integrators should pass &#x60;?format&#x3D;json&#x60; and read &#x60;url&#x60; off the body, since a browser cannot attach an Authorization header to an image request.  Only Instagram and Facebook media can be re-minted. On other platforms the stored url is returned as-is when it still resolves, and &#x60;404&#x60; otherwise. 
+  # @param conversation_id The conversation ID (Zernio id or platform conversation id)
+  # @param message_id The message id as returned by the list-messages endpoint (the platform message id)
+  # @param index Zero-based position of the attachment in the message&#39;s attachments array
+  # @param account_id Social account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body
+  # @return [GetMessageAttachment200Response]
+  describe 'get_message_attachment test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_inbox_conversations
   # List conversations
   # Fetch conversations (DMs) from all connected messaging accounts in a single API call. Supports filtering by profile and platform. Results are aggregated and deduplicated. Supported platforms: Facebook, Instagram, Twitter/X, Bluesky, Reddit, Telegram.  Twitter/X limitation: X has replaced traditional DMs with encrypted \&quot;X Chat\&quot; for many accounts. Messages sent or received through encrypted X Chat are not accessible via X&#39;s API (the /2/dm_events endpoint only returns legacy unencrypted DMs). This means some Twitter/X conversations may show only outgoing messages or appear empty. This is an X platform limitation that affects all third-party applications. See X&#39;s docs on encrypted messaging for more details.  Instagram and Facebook pre-connect history: when one of these accounts is connected, Zernio replays the DM history the account already holds on Meta, so conversations that began before the account was connected appear here. Up to 500 conversations per account are replayed. The replay runs in the background and can finish after a listing you have already taken, and replayed conversations keep their original lastMessageAt, so they sort into date order rather than appearing at the top. If you mirror this endpoint into your own store, re-run the sweep rather than relying on a single pass at connect time. Replayed history emits no webhooks and is stored as already read, so it never affects unread counts. Threads that Meta refuses to serve are skipped, and an account whose Instagram \&quot;connected tools\&quot; message access is turned off is not replayed at all. 

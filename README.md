@@ -364,6 +364,7 @@ Class | Method | HTTP request | Description
 *Zernio::MessagesApi* | [**edit_inbox_message**](docs/MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message
 *Zernio::MessagesApi* | [**get_inbox_conversation**](docs/MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation
 *Zernio::MessagesApi* | [**get_inbox_conversation_messages**](docs/MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages
+*Zernio::MessagesApi* | [**get_message_attachment**](docs/MessagesApi.md#get_message_attachment) | **GET** /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index} | Resolve message attachment
 *Zernio::MessagesApi* | [**list_inbox_conversations**](docs/MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations
 *Zernio::MessagesApi* | [**mark_conversation_read**](docs/MessagesApi.md#mark_conversation_read) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read
 *Zernio::MessagesApi* | [**remove_message_reaction**](docs/MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction
@@ -1226,6 +1227,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetLinkedInSupplyForecastRequestCompetingBid](docs/GetLinkedInSupplyForecastRequestCompetingBid.md)
  - [Zernio::GetMediaPresignedUrl200Response](docs/GetMediaPresignedUrl200Response.md)
  - [Zernio::GetMediaPresignedUrlRequest](docs/GetMediaPresignedUrlRequest.md)
+ - [Zernio::GetMessageAttachment200Response](docs/GetMessageAttachment200Response.md)
  - [Zernio::GetMessengerMenu200Response](docs/GetMessengerMenu200Response.md)
  - [Zernio::GetPendingOAuthData200Response](docs/GetPendingOAuthData200Response.md)
  - [Zernio::GetPendingOAuthData200ResponseOrganizationsInner](docs/GetPendingOAuthData200ResponseOrganizationsInner.md)

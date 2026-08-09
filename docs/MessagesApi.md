@@ -10,6 +10,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**edit_inbox_message**](MessagesApi.md#edit_inbox_message) | **PATCH** /v1/inbox/conversations/{conversationId}/messages/{messageId} | Edit message |
 | [**get_inbox_conversation**](MessagesApi.md#get_inbox_conversation) | **GET** /v1/inbox/conversations/{conversationId} | Get conversation |
 | [**get_inbox_conversation_messages**](MessagesApi.md#get_inbox_conversation_messages) | **GET** /v1/inbox/conversations/{conversationId}/messages | List messages |
+| [**get_message_attachment**](MessagesApi.md#get_message_attachment) | **GET** /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index} | Resolve message attachment |
 | [**list_inbox_conversations**](MessagesApi.md#list_inbox_conversations) | **GET** /v1/inbox/conversations | List conversations |
 | [**mark_conversation_read**](MessagesApi.md#mark_conversation_read) | **POST** /v1/inbox/conversations/{conversationId}/read | Mark a conversation as read |
 | [**remove_message_reaction**](MessagesApi.md#remove_message_reaction) | **DELETE** /v1/inbox/conversations/{conversationId}/messages/{messageId}/reactions | Remove reaction |
@@ -447,6 +448,85 @@ end
 ### Return type
 
 [**GetInboxConversationMessages200Response**](GetInboxConversationMessages200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_message_attachment
+
+> <GetMessageAttachment200Response> get_message_attachment(conversation_id, message_id, index, account_id, opts)
+
+Resolve message attachment
+
+Resolve one attachment on a message to a media url that works right now.  Instagram and Facebook sign DM media urls per request and expire them, so the `url` on a message is a snapshot: it works when you read the message and stops working later. This endpoint checks the stored url and, when it has gone stale, re-mints the message's media from Meta and persists it before answering. The message id never expires, so this URL is the one to store — it is returned on each attachment as `refreshUrl`.  By default it responds `302` to the live media url, so it can be used directly as an `<img src>` on a browser session. API-key integrators should pass `?format=json` and read `url` off the body, since a browser cannot attach an Authorization header to an image request.  Only Instagram and Facebook media can be re-minted. On other platforms the stored url is returned as-is when it still resolves, and `404` otherwise. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::MessagesApi.new
+conversation_id = 'conversation_id_example' # String | The conversation ID (Zernio id or platform conversation id)
+message_id = 'message_id_example' # String | The message id as returned by the list-messages endpoint (the platform message id)
+index = 56 # Integer | Zero-based position of the attachment in the message's attachments array
+account_id = 'account_id_example' # String | Social account ID
+opts = {
+  format: 'redirect' # String | `redirect` (default) answers 302 to the media; `json` returns the url in the body
+}
+
+begin
+  # Resolve message attachment
+  result = api_instance.get_message_attachment(conversation_id, message_id, index, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->get_message_attachment: #{e}"
+end
+```
+
+#### Using the get_message_attachment_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetMessageAttachment200Response>, Integer, Hash)> get_message_attachment_with_http_info(conversation_id, message_id, index, account_id, opts)
+
+```ruby
+begin
+  # Resolve message attachment
+  data, status_code, headers = api_instance.get_message_attachment_with_http_info(conversation_id, message_id, index, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetMessageAttachment200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling MessagesApi->get_message_attachment_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **conversation_id** | **String** | The conversation ID (Zernio id or platform conversation id) |  |
+| **message_id** | **String** | The message id as returned by the list-messages endpoint (the platform message id) |  |
+| **index** | **Integer** | Zero-based position of the attachment in the message&#39;s attachments array |  |
+| **account_id** | **String** | Social account ID |  |
+| **format** | **String** | &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body | [optional][default to &#39;redirect&#39;] |
+
+### Return type
+
+[**GetMessageAttachment200Response**](GetMessageAttachment200Response.md)
 
 ### Authorization
 

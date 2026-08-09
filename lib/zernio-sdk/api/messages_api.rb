@@ -484,6 +484,99 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Resolve message attachment
+    # Resolve one attachment on a message to a media url that works right now.  Instagram and Facebook sign DM media urls per request and expire them, so the `url` on a message is a snapshot: it works when you read the message and stops working later. This endpoint checks the stored url and, when it has gone stale, re-mints the message's media from Meta and persists it before answering. The message id never expires, so this URL is the one to store — it is returned on each attachment as `refreshUrl`.  By default it responds `302` to the live media url, so it can be used directly as an `<img src>` on a browser session. API-key integrators should pass `?format=json` and read `url` off the body, since a browser cannot attach an Authorization header to an image request.  Only Instagram and Facebook media can be re-minted. On other platforms the stored url is returned as-is when it still resolves, and `404` otherwise. 
+    # @param conversation_id [String] The conversation ID (Zernio id or platform conversation id)
+    # @param message_id [String] The message id as returned by the list-messages endpoint (the platform message id)
+    # @param index [Integer] Zero-based position of the attachment in the message&#39;s attachments array
+    # @param account_id [String] Social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (default to 'redirect')
+    # @return [GetMessageAttachment200Response]
+    def get_message_attachment(conversation_id, message_id, index, account_id, opts = {})
+      data, _status_code, _headers = get_message_attachment_with_http_info(conversation_id, message_id, index, account_id, opts)
+      data
+    end
+
+    # Resolve message attachment
+    # Resolve one attachment on a message to a media url that works right now.  Instagram and Facebook sign DM media urls per request and expire them, so the &#x60;url&#x60; on a message is a snapshot: it works when you read the message and stops working later. This endpoint checks the stored url and, when it has gone stale, re-mints the message&#39;s media from Meta and persists it before answering. The message id never expires, so this URL is the one to store — it is returned on each attachment as &#x60;refreshUrl&#x60;.  By default it responds &#x60;302&#x60; to the live media url, so it can be used directly as an &#x60;&lt;img src&gt;&#x60; on a browser session. API-key integrators should pass &#x60;?format&#x3D;json&#x60; and read &#x60;url&#x60; off the body, since a browser cannot attach an Authorization header to an image request.  Only Instagram and Facebook media can be re-minted. On other platforms the stored url is returned as-is when it still resolves, and &#x60;404&#x60; otherwise. 
+    # @param conversation_id [String] The conversation ID (Zernio id or platform conversation id)
+    # @param message_id [String] The message id as returned by the list-messages endpoint (the platform message id)
+    # @param index [Integer] Zero-based position of the attachment in the message&#39;s attachments array
+    # @param account_id [String] Social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :format &#x60;redirect&#x60; (default) answers 302 to the media; &#x60;json&#x60; returns the url in the body (default to 'redirect')
+    # @return [Array<(GetMessageAttachment200Response, Integer, Hash)>] GetMessageAttachment200Response data, response status code and response headers
+    def get_message_attachment_with_http_info(conversation_id, message_id, index, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MessagesApi.get_message_attachment ...'
+      end
+      # verify the required parameter 'conversation_id' is set
+      if @api_client.config.client_side_validation && conversation_id.nil?
+        fail ArgumentError, "Missing the required parameter 'conversation_id' when calling MessagesApi.get_message_attachment"
+      end
+      # verify the required parameter 'message_id' is set
+      if @api_client.config.client_side_validation && message_id.nil?
+        fail ArgumentError, "Missing the required parameter 'message_id' when calling MessagesApi.get_message_attachment"
+      end
+      # verify the required parameter 'index' is set
+      if @api_client.config.client_side_validation && index.nil?
+        fail ArgumentError, "Missing the required parameter 'index' when calling MessagesApi.get_message_attachment"
+      end
+      if @api_client.config.client_side_validation && index < 0
+        fail ArgumentError, 'invalid value for "index" when calling MessagesApi.get_message_attachment, must be greater than or equal to 0.'
+      end
+
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling MessagesApi.get_message_attachment"
+      end
+      allowable_values = ["redirect", "json"]
+      if @api_client.config.client_side_validation && opts[:'format'] && !allowable_values.include?(opts[:'format'])
+        fail ArgumentError, "invalid value for \"format\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index}'.sub('{' + 'conversationId' + '}', CGI.escape(conversation_id.to_s)).sub('{' + 'messageId' + '}', CGI.escape(message_id.to_s)).sub('{' + 'index' + '}', CGI.escape(index.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'format'] = opts[:'format'] if !opts[:'format'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetMessageAttachment200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"MessagesApi.get_message_attachment",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MessagesApi#get_message_attachment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List conversations
     # Fetch conversations (DMs) from all connected messaging accounts in a single API call. Supports filtering by profile and platform. Results are aggregated and deduplicated. Supported platforms: Facebook, Instagram, Twitter/X, Bluesky, Reddit, Telegram.  Twitter/X limitation: X has replaced traditional DMs with encrypted \"X Chat\" for many accounts. Messages sent or received through encrypted X Chat are not accessible via X's API (the /2/dm_events endpoint only returns legacy unencrypted DMs). This means some Twitter/X conversations may show only outgoing messages or appear empty. This is an X platform limitation that affects all third-party applications. See X's docs on encrypted messaging for more details.  Instagram and Facebook pre-connect history: when one of these accounts is connected, Zernio replays the DM history the account already holds on Meta, so conversations that began before the account was connected appear here. Up to 500 conversations per account are replayed. The replay runs in the background and can finish after a listing you have already taken, and replayed conversations keep their original lastMessageAt, so they sort into date order rather than appearing at the top. If you mirror this endpoint into your own store, re-run the sweep rather than relying on a single pass at connect time. Replayed history emits no webhooks and is stored as already read, so it never affects unread counts. Threads that Meta refuses to serve are skipped, and an account whose Instagram \"connected tools\" message access is turned off is not replayed at all. 
     # @param [Hash] opts the optional parameters

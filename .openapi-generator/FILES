@@ -646,6 +646,7 @@ docs/GetLinkedInSupplyForecastRequest.md
 docs/GetLinkedInSupplyForecastRequestCompetingBid.md
 docs/GetMediaPresignedUrl200Response.md
 docs/GetMediaPresignedUrlRequest.md
+docs/GetMessageAttachment200Response.md
 docs/GetMessengerMenu200Response.md
 docs/GetPendingOAuthData200Response.md
 docs/GetPendingOAuthData200ResponseOrganizationsInner.md
@@ -2344,6 +2345,7 @@ lib/zernio-sdk/models/get_linked_in_supply_forecast_request.rb
 lib/zernio-sdk/models/get_linked_in_supply_forecast_request_competing_bid.rb
 lib/zernio-sdk/models/get_media_presigned_url200_response.rb
 lib/zernio-sdk/models/get_media_presigned_url_request.rb
+lib/zernio-sdk/models/get_message_attachment200_response.rb
 lib/zernio-sdk/models/get_messenger_menu200_response.rb
 lib/zernio-sdk/models/get_pending_o_auth_data200_response.rb
 lib/zernio-sdk/models/get_pending_o_auth_data200_response_organizations_inner.rb
@@ -4000,6 +4002,7 @@ spec/models/get_linked_in_supply_forecast_request_competing_bid_spec.rb
 spec/models/get_linked_in_supply_forecast_request_spec.rb
 spec/models/get_media_presigned_url200_response_spec.rb
 spec/models/get_media_presigned_url_request_spec.rb
+spec/models/get_message_attachment200_response_spec.rb
 spec/models/get_messenger_menu200_response_spec.rb
 spec/models/get_pending_o_auth_data200_response_organizations_inner_spec.rb
 spec/models/get_pending_o_auth_data200_response_spec.rb
