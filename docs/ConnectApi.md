@@ -28,12 +28,14 @@ All URIs are relative to *https://zernio.com/api*
 | [**initiate_telegram_connect**](ConnectApi.md#initiate_telegram_connect) | **POST** /v1/connect/telegram | Connect Telegram directly |
 | [**list_facebook_pages**](ConnectApi.md#list_facebook_pages) | **GET** /v1/connect/facebook/select-page | List Facebook pages |
 | [**list_google_business_locations**](ConnectApi.md#list_google_business_locations) | **GET** /v1/connect/googlebusiness/locations | List GBP locations |
+| [**list_instagram_pages**](ConnectApi.md#list_instagram_pages) | **GET** /v1/connect/instagram/select-account | List Pages with a linked Instagram account |
 | [**list_linked_in_organizations**](ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs |
 | [**list_pinterest_boards_for_selection**](ConnectApi.md#list_pinterest_boards_for_selection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards |
 | [**list_snapchat_profiles**](ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles |
 | [**list_whats_app_phone_numbers**](ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection |
 | [**select_facebook_page**](ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page |
 | [**select_google_business_location**](ConnectApi.md#select_google_business_location) | **POST** /v1/connect/googlebusiness/select-location | Select GBP location |
+| [**select_instagram_account**](ConnectApi.md#select_instagram_account) | **POST** /v1/connect/instagram/select-account | Select the Page whose Instagram account to connect |
 | [**select_linked_in_organization**](ConnectApi.md#select_linked_in_organization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org |
 | [**select_pinterest_board**](ConnectApi.md#select_pinterest_board) | **POST** /v1/connect/pinterest/select-board | Select Pinterest board |
 | [**select_snapchat_profile**](ConnectApi.md#select_snapchat_profile) | **POST** /v1/connect/snapchat/select-profile | Select Snapchat profile |
@@ -716,7 +718,8 @@ platform = 'facebook' # String | Social media platform to connect
 profile_id = 'profile_id_example' # String | Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409.
 opts = {
   redirect_url: 'redirect_url_example', # String | Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected={platform}&profileId=X&accountId=Y&username=Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.
-  headless: true # Boolean | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio's default account selection UI. Use this to build a custom connect experience.
+  headless: true, # Boolean | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio's default account selection UI. Use this to build a custom connect experience.
+  login_method: 'instagram_login' # String | Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  `instagram_login` (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  `facebook_login`: the Facebook Login dialog, i.e. \"Instagram API with Facebook Login\". The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, `/v1/connect/instagram/select-account`.  `facebook_login` does not support `headless=true`: its callback always redirects to Zernio's hosted account-selection page. Pass a `redirect_url` and let the standard flow return the user to you. 
 }
 
 begin
@@ -754,6 +757,7 @@ end
 | **profile_id** | **String** | Your Zernio profile ID (get from /v1/profiles). For WhatsApp, a Zernio-provisioned number can only be connected on the profile it was provisioned to; connecting from any other profile is rejected with a 409. |  |
 | **redirect_url** | **String** | Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId. | [optional] |
 | **headless** | **Boolean** | When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. | [optional][default to false] |
+| **login_method** | **String** | Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; does not support &#x60;headless&#x3D;true&#x60;: its callback always redirects to Zernio&#39;s hosted account-selection page. Pass a &#x60;redirect_url&#x60; and let the standard flow return the user to you.  | [optional][default to &#39;instagram_login&#39;] |
 
 ### Return type
 
@@ -1774,6 +1778,82 @@ end
 - **Accept**: application/json
 
 
+## list_instagram_pages
+
+> <ListInstagramPages200Response> list_instagram_pages(profile_id, temp_token)
+
+List Pages with a linked Instagram account
+
+Completes the `loginMethod=facebook_login` Instagram flow, i.e. \"Instagram API with Facebook Login\".  After the user authorizes on Facebook, extract `tempToken` from the redirect params and pass it here to list the Facebook Pages they manage. Only Pages that have a linked Instagram professional account are returned, so an empty array means the user has no eligible Page. Use the X-Connect-Token header if connecting via API key.  Not used by the default `instagram_login` flow, which creates the account without a selection step. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Profile ID from your connection flow
+temp_token = 'temp_token_example' # String | Long-lived Facebook user access token from the OAuth callback redirect
+
+begin
+  # List Pages with a linked Instagram account
+  result = api_instance.list_instagram_pages(profile_id, temp_token)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_instagram_pages: #{e}"
+end
+```
+
+#### Using the list_instagram_pages_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListInstagramPages200Response>, Integer, Hash)> list_instagram_pages_with_http_info(profile_id, temp_token)
+
+```ruby
+begin
+  # List Pages with a linked Instagram account
+  data, status_code, headers = api_instance.list_instagram_pages_with_http_info(profile_id, temp_token)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListInstagramPages200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_instagram_pages_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Profile ID from your connection flow |  |
+| **temp_token** | **String** | Long-lived Facebook user access token from the OAuth callback redirect |  |
+
+### Return type
+
+[**ListInstagramPages200Response**](ListInstagramPages200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_linked_in_organizations
 
 > <ListLinkedInOrganizations200Response> list_linked_in_organizations(temp_token, org_ids)
@@ -2203,6 +2283,80 @@ end
 ### Return type
 
 [**SelectGoogleBusinessLocation200Response**](SelectGoogleBusinessLocation200Response.md)
+
+### Authorization
+
+[connectToken](../README.md#connectToken), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## select_instagram_account
+
+> <SelectInstagramAccount200Response> select_instagram_account(select_instagram_account_request)
+
+Select the Page whose Instagram account to connect
+
+Saves the selected Page as an Instagram account connected via Facebook Login. The Page access token becomes the account's access token, so every Instagram call for it runs against the Facebook Graph host.  One Instagram account per profile: if the profile already has an Instagram account, this replaces it, and picking a different Instagram identity purges the previous account's conversations, external posts and stats. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure API key authorization: connectToken
+  config.api_key['X-Connect-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Connect-Token'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+select_instagram_account_request = Zernio::SelectInstagramAccountRequest.new({profile_id: 'profile_id_example', page_id: 'page_id_example', temp_token: 'temp_token_example'}) # SelectInstagramAccountRequest | 
+
+begin
+  # Select the Page whose Instagram account to connect
+  result = api_instance.select_instagram_account(select_instagram_account_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->select_instagram_account: #{e}"
+end
+```
+
+#### Using the select_instagram_account_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SelectInstagramAccount200Response>, Integer, Hash)> select_instagram_account_with_http_info(select_instagram_account_request)
+
+```ruby
+begin
+  # Select the Page whose Instagram account to connect
+  data, status_code, headers = api_instance.select_instagram_account_with_http_info(select_instagram_account_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SelectInstagramAccount200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->select_instagram_account_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **select_instagram_account_request** | [**SelectInstagramAccountRequest**](SelectInstagramAccountRequest.md) |  |  |
+
+### Return type
+
+[**SelectInstagramAccount200Response**](SelectInstagramAccount200Response.md)
 
 ### Authorization
 

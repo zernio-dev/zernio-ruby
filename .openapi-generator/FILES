@@ -925,6 +925,9 @@ docs/ListInboxReviews200ResponseDataInner.md
 docs/ListInboxReviews200ResponseDataInnerReply.md
 docs/ListInboxReviews200ResponseDataInnerReviewer.md
 docs/ListInboxReviews200ResponseSummary.md
+docs/ListInstagramPages200Response.md
+docs/ListInstagramPages200ResponsePagesInner.md
+docs/ListInstagramPages200ResponsePagesInnerInstagramBusinessAccount.md
 docs/ListInstagramStories200Response.md
 docs/ListInstagramStories200ResponseDataInner.md
 docs/ListLeadForms200Response.md
@@ -1183,6 +1186,9 @@ docs/SelectFacebookPageRequestUserProfile.md
 docs/SelectGoogleBusinessLocation200Response.md
 docs/SelectGoogleBusinessLocation200ResponseAccount.md
 docs/SelectGoogleBusinessLocationRequest.md
+docs/SelectInstagramAccount200Response.md
+docs/SelectInstagramAccount200ResponseAccount.md
+docs/SelectInstagramAccountRequest.md
 docs/SelectLinkedInOrganization200Response.md
 docs/SelectLinkedInOrganization200ResponseAccount.md
 docs/SelectLinkedInOrganization200ResponseBulkRefresh.md
@@ -2612,6 +2618,9 @@ lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner_reply.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_data_inner_reviewer.rb
 lib/zernio-sdk/models/list_inbox_reviews200_response_summary.rb
+lib/zernio-sdk/models/list_instagram_pages200_response.rb
+lib/zernio-sdk/models/list_instagram_pages200_response_pages_inner.rb
+lib/zernio-sdk/models/list_instagram_pages200_response_pages_inner_instagram_business_account.rb
 lib/zernio-sdk/models/list_instagram_stories200_response.rb
 lib/zernio-sdk/models/list_instagram_stories200_response_data_inner.rb
 lib/zernio-sdk/models/list_lead_forms200_response.rb
@@ -2857,6 +2866,9 @@ lib/zernio-sdk/models/select_facebook_page_request_user_profile.rb
 lib/zernio-sdk/models/select_google_business_location200_response.rb
 lib/zernio-sdk/models/select_google_business_location200_response_account.rb
 lib/zernio-sdk/models/select_google_business_location_request.rb
+lib/zernio-sdk/models/select_instagram_account200_response.rb
+lib/zernio-sdk/models/select_instagram_account200_response_account.rb
+lib/zernio-sdk/models/select_instagram_account_request.rb
 lib/zernio-sdk/models/select_linked_in_organization200_response.rb
 lib/zernio-sdk/models/select_linked_in_organization200_response_account.rb
 lib/zernio-sdk/models/select_linked_in_organization200_response_bulk_refresh.rb
@@ -4262,6 +4274,9 @@ spec/models/list_inbox_reviews200_response_data_inner_reviewer_spec.rb
 spec/models/list_inbox_reviews200_response_data_inner_spec.rb
 spec/models/list_inbox_reviews200_response_spec.rb
 spec/models/list_inbox_reviews200_response_summary_spec.rb
+spec/models/list_instagram_pages200_response_pages_inner_instagram_business_account_spec.rb
+spec/models/list_instagram_pages200_response_pages_inner_spec.rb
+spec/models/list_instagram_pages200_response_spec.rb
 spec/models/list_instagram_stories200_response_data_inner_spec.rb
 spec/models/list_instagram_stories200_response_spec.rb
 spec/models/list_lead_forms200_response_spec.rb
@@ -4507,6 +4522,9 @@ spec/models/select_facebook_page_request_user_profile_spec.rb
 spec/models/select_google_business_location200_response_account_spec.rb
 spec/models/select_google_business_location200_response_spec.rb
 spec/models/select_google_business_location_request_spec.rb
+spec/models/select_instagram_account200_response_account_spec.rb
+spec/models/select_instagram_account200_response_spec.rb
+spec/models/select_instagram_account_request_spec.rb
 spec/models/select_linked_in_organization200_response_account_spec.rb
 spec/models/select_linked_in_organization200_response_bulk_refresh_spec.rb
 spec/models/select_linked_in_organization200_response_spec.rb

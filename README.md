@@ -241,12 +241,14 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**initiate_telegram_connect**](docs/ConnectApi.md#initiate_telegram_connect) | **POST** /v1/connect/telegram | Connect Telegram directly
 *Zernio::ConnectApi* | [**list_facebook_pages**](docs/ConnectApi.md#list_facebook_pages) | **GET** /v1/connect/facebook/select-page | List Facebook pages
 *Zernio::ConnectApi* | [**list_google_business_locations**](docs/ConnectApi.md#list_google_business_locations) | **GET** /v1/connect/googlebusiness/locations | List GBP locations
+*Zernio::ConnectApi* | [**list_instagram_pages**](docs/ConnectApi.md#list_instagram_pages) | **GET** /v1/connect/instagram/select-account | List Pages with a linked Instagram account
 *Zernio::ConnectApi* | [**list_linked_in_organizations**](docs/ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs
 *Zernio::ConnectApi* | [**list_pinterest_boards_for_selection**](docs/ConnectApi.md#list_pinterest_boards_for_selection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards
 *Zernio::ConnectApi* | [**list_snapchat_profiles**](docs/ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles
 *Zernio::ConnectApi* | [**list_whats_app_phone_numbers**](docs/ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection
 *Zernio::ConnectApi* | [**select_facebook_page**](docs/ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page
 *Zernio::ConnectApi* | [**select_google_business_location**](docs/ConnectApi.md#select_google_business_location) | **POST** /v1/connect/googlebusiness/select-location | Select GBP location
+*Zernio::ConnectApi* | [**select_instagram_account**](docs/ConnectApi.md#select_instagram_account) | **POST** /v1/connect/instagram/select-account | Select the Page whose Instagram account to connect
 *Zernio::ConnectApi* | [**select_linked_in_organization**](docs/ConnectApi.md#select_linked_in_organization) | **POST** /v1/connect/linkedin/select-organization | Select LinkedIn org
 *Zernio::ConnectApi* | [**select_pinterest_board**](docs/ConnectApi.md#select_pinterest_board) | **POST** /v1/connect/pinterest/select-board | Select Pinterest board
 *Zernio::ConnectApi* | [**select_snapchat_profile**](docs/ConnectApi.md#select_snapchat_profile) | **POST** /v1/connect/snapchat/select-profile | Select Snapchat profile
@@ -1498,6 +1500,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ListInboxReviews200ResponseDataInnerReply](docs/ListInboxReviews200ResponseDataInnerReply.md)
  - [Zernio::ListInboxReviews200ResponseDataInnerReviewer](docs/ListInboxReviews200ResponseDataInnerReviewer.md)
  - [Zernio::ListInboxReviews200ResponseSummary](docs/ListInboxReviews200ResponseSummary.md)
+ - [Zernio::ListInstagramPages200Response](docs/ListInstagramPages200Response.md)
+ - [Zernio::ListInstagramPages200ResponsePagesInner](docs/ListInstagramPages200ResponsePagesInner.md)
+ - [Zernio::ListInstagramPages200ResponsePagesInnerInstagramBusinessAccount](docs/ListInstagramPages200ResponsePagesInnerInstagramBusinessAccount.md)
  - [Zernio::ListInstagramStories200Response](docs/ListInstagramStories200Response.md)
  - [Zernio::ListInstagramStories200ResponseDataInner](docs/ListInstagramStories200ResponseDataInner.md)
  - [Zernio::ListLeadForms200Response](docs/ListLeadForms200Response.md)
@@ -1743,6 +1748,9 @@ Class | Method | HTTP request | Description
  - [Zernio::SelectGoogleBusinessLocation200Response](docs/SelectGoogleBusinessLocation200Response.md)
  - [Zernio::SelectGoogleBusinessLocation200ResponseAccount](docs/SelectGoogleBusinessLocation200ResponseAccount.md)
  - [Zernio::SelectGoogleBusinessLocationRequest](docs/SelectGoogleBusinessLocationRequest.md)
+ - [Zernio::SelectInstagramAccount200Response](docs/SelectInstagramAccount200Response.md)
+ - [Zernio::SelectInstagramAccount200ResponseAccount](docs/SelectInstagramAccount200ResponseAccount.md)
+ - [Zernio::SelectInstagramAccountRequest](docs/SelectInstagramAccountRequest.md)
  - [Zernio::SelectLinkedInOrganization200Response](docs/SelectLinkedInOrganization200Response.md)
  - [Zernio::SelectLinkedInOrganization200ResponseAccount](docs/SelectLinkedInOrganization200ResponseAccount.md)
  - [Zernio::SelectLinkedInOrganization200ResponseBulkRefresh](docs/SelectLinkedInOrganization200ResponseBulkRefresh.md)

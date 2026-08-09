@@ -674,6 +674,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.
     # @option opts [Boolean] :headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (default to false)
+    # @option opts [String] :login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; does not support &#x60;headless&#x3D;true&#x60;: its callback always redirects to Zernio&#39;s hosted account-selection page. Pass a &#x60;redirect_url&#x60; and let the standard flow return the user to you.  (default to 'instagram_login')
     # @return [GetConnectUrl200Response]
     def get_connect_url(platform, profile_id, opts = {})
       data, _status_code, _headers = get_connect_url_with_http_info(platform, profile_id, opts)
@@ -687,6 +688,7 @@ module Zernio
     # @param [Hash] opts the optional parameters
     # @option opts [String] :redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.
     # @option opts [Boolean] :headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (default to false)
+    # @option opts [String] :login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; does not support &#x60;headless&#x3D;true&#x60;: its callback always redirects to Zernio&#39;s hosted account-selection page. Pass a &#x60;redirect_url&#x60; and let the standard flow return the user to you.  (default to 'instagram_login')
     # @return [Array<(GetConnectUrl200Response, Integer, Hash)>] GetConnectUrl200Response data, response status code and response headers
     def get_connect_url_with_http_info(platform, profile_id, opts = {})
       if @api_client.config.debugging
@@ -705,6 +707,10 @@ module Zernio
       if @api_client.config.client_side_validation && profile_id.nil?
         fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConnectApi.get_connect_url"
       end
+      allowable_values = ["instagram_login", "facebook_login"]
+      if @api_client.config.client_side_validation && opts[:'login_method'] && !allowable_values.include?(opts[:'login_method'])
+        fail ArgumentError, "invalid value for \"login_method\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/connect/{platform}'.sub('{' + 'platform' + '}', CGI.escape(platform.to_s))
 
@@ -713,6 +719,7 @@ module Zernio
       query_params[:'profileId'] = profile_id
       query_params[:'redirect_url'] = opts[:'redirect_url'] if !opts[:'redirect_url'].nil?
       query_params[:'headless'] = opts[:'headless'] if !opts[:'headless'].nil?
+      query_params[:'loginMethod'] = opts[:'login_method'] if !opts[:'login_method'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1702,6 +1709,77 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List Pages with a linked Instagram account
+    # Completes the `loginMethod=facebook_login` Instagram flow, i.e. \"Instagram API with Facebook Login\".  After the user authorizes on Facebook, extract `tempToken` from the redirect params and pass it here to list the Facebook Pages they manage. Only Pages that have a linked Instagram professional account are returned, so an empty array means the user has no eligible Page. Use the X-Connect-Token header if connecting via API key.  Not used by the default `instagram_login` flow, which creates the account without a selection step. 
+    # @param profile_id [String] Profile ID from your connection flow
+    # @param temp_token [String] Long-lived Facebook user access token from the OAuth callback redirect
+    # @param [Hash] opts the optional parameters
+    # @return [ListInstagramPages200Response]
+    def list_instagram_pages(profile_id, temp_token, opts = {})
+      data, _status_code, _headers = list_instagram_pages_with_http_info(profile_id, temp_token, opts)
+      data
+    end
+
+    # List Pages with a linked Instagram account
+    # Completes the &#x60;loginMethod&#x3D;facebook_login&#x60; Instagram flow, i.e. \&quot;Instagram API with Facebook Login\&quot;.  After the user authorizes on Facebook, extract &#x60;tempToken&#x60; from the redirect params and pass it here to list the Facebook Pages they manage. Only Pages that have a linked Instagram professional account are returned, so an empty array means the user has no eligible Page. Use the X-Connect-Token header if connecting via API key.  Not used by the default &#x60;instagram_login&#x60; flow, which creates the account without a selection step. 
+    # @param profile_id [String] Profile ID from your connection flow
+    # @param temp_token [String] Long-lived Facebook user access token from the OAuth callback redirect
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListInstagramPages200Response, Integer, Hash)>] ListInstagramPages200Response data, response status code and response headers
+    def list_instagram_pages_with_http_info(profile_id, temp_token, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.list_instagram_pages ...'
+      end
+      # verify the required parameter 'profile_id' is set
+      if @api_client.config.client_side_validation && profile_id.nil?
+        fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConnectApi.list_instagram_pages"
+      end
+      # verify the required parameter 'temp_token' is set
+      if @api_client.config.client_side_validation && temp_token.nil?
+        fail ArgumentError, "Missing the required parameter 'temp_token' when calling ConnectApi.list_instagram_pages"
+      end
+      # resource path
+      local_var_path = '/v1/connect/instagram/select-account'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'profileId'] = profile_id
+      query_params[:'tempToken'] = temp_token
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListInstagramPages200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['connectToken', 'bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.list_instagram_pages",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#list_instagram_pages\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List LinkedIn orgs
     # Fetch full LinkedIn organization details (logos, vanity names, websites) for custom UI. No authentication required, just the tempToken from OAuth.
     # @param temp_token [String] The temporary LinkedIn access token from the OAuth redirect
@@ -2135,6 +2213,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#select_google_business_location\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Select the Page whose Instagram account to connect
+    # Saves the selected Page as an Instagram account connected via Facebook Login. The Page access token becomes the account's access token, so every Instagram call for it runs against the Facebook Graph host.  One Instagram account per profile: if the profile already has an Instagram account, this replaces it, and picking a different Instagram identity purges the previous account's conversations, external posts and stats. 
+    # @param select_instagram_account_request [SelectInstagramAccountRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [SelectInstagramAccount200Response]
+    def select_instagram_account(select_instagram_account_request, opts = {})
+      data, _status_code, _headers = select_instagram_account_with_http_info(select_instagram_account_request, opts)
+      data
+    end
+
+    # Select the Page whose Instagram account to connect
+    # Saves the selected Page as an Instagram account connected via Facebook Login. The Page access token becomes the account&#39;s access token, so every Instagram call for it runs against the Facebook Graph host.  One Instagram account per profile: if the profile already has an Instagram account, this replaces it, and picking a different Instagram identity purges the previous account&#39;s conversations, external posts and stats. 
+    # @param select_instagram_account_request [SelectInstagramAccountRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SelectInstagramAccount200Response, Integer, Hash)>] SelectInstagramAccount200Response data, response status code and response headers
+    def select_instagram_account_with_http_info(select_instagram_account_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.select_instagram_account ...'
+      end
+      # verify the required parameter 'select_instagram_account_request' is set
+      if @api_client.config.client_side_validation && select_instagram_account_request.nil?
+        fail ArgumentError, "Missing the required parameter 'select_instagram_account_request' when calling ConnectApi.select_instagram_account"
+      end
+      # resource path
+      local_var_path = '/v1/connect/instagram/select-account'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(select_instagram_account_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SelectInstagramAccount200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['connectToken', 'bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.select_instagram_account",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#select_instagram_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
