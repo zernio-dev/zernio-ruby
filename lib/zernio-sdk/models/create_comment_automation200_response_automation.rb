@@ -65,6 +65,9 @@ module Zernio
 
     attr_accessor :follow_gate
 
+    # Whether these keywords also fire on a plain inbound DM.
+    attr_accessor :also_match_in_dms
+
     attr_accessor :is_active
 
     attr_accessor :stats
@@ -117,6 +120,7 @@ module Zernio
         :'comment_reply_delay_seconds' => :'commentReplyDelaySeconds',
         :'audience' => :'audience',
         :'follow_gate' => :'followGate',
+        :'also_match_in_dms' => :'alsoMatchInDms',
         :'is_active' => :'isActive',
         :'stats' => :'stats',
         :'created_at' => :'createdAt'
@@ -157,6 +161,7 @@ module Zernio
         :'comment_reply_delay_seconds' => :'Integer',
         :'audience' => :'CommentAutomationAudience',
         :'follow_gate' => :'CommentAutomationFollowGate',
+        :'also_match_in_dms' => :'Boolean',
         :'is_active' => :'Boolean',
         :'stats' => :'CreateCommentAutomation200ResponseAutomationStats',
         :'created_at' => :'Time'
@@ -280,6 +285,10 @@ module Zernio
         self.follow_gate = attributes[:'follow_gate']
       end
 
+      if attributes.key?(:'also_match_in_dms')
+        self.also_match_in_dms = attributes[:'also_match_in_dms']
+      end
+
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
       end
@@ -358,6 +367,7 @@ module Zernio
           comment_reply_delay_seconds == o.comment_reply_delay_seconds &&
           audience == o.audience &&
           follow_gate == o.follow_gate &&
+          also_match_in_dms == o.also_match_in_dms &&
           is_active == o.is_active &&
           stats == o.stats &&
           created_at == o.created_at
@@ -372,7 +382,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, trigger, platform_post_id, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate, is_active, stats, created_at].hash
+      [id, name, platform, trigger, platform_post_id, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate, also_match_in_dms, is_active, stats, created_at].hash
     end
 
     # Builds the object from hash

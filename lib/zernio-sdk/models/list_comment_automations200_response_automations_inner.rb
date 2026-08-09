@@ -67,6 +67,9 @@ module Zernio
     # Seconds waited before the public reply is posted. Absent when it follows the DM immediately.
     attr_accessor :comment_reply_delay_seconds
 
+    # Whether these keywords also fire on a plain inbound DM.
+    attr_accessor :also_match_in_dms
+
     attr_accessor :is_active
 
     attr_accessor :stats
@@ -119,6 +122,7 @@ module Zernio
         :'click_tag' => :'clickTag',
         :'dm_delay_seconds' => :'dmDelaySeconds',
         :'comment_reply_delay_seconds' => :'commentReplyDelaySeconds',
+        :'also_match_in_dms' => :'alsoMatchInDms',
         :'is_active' => :'isActive',
         :'stats' => :'stats',
         :'created_at' => :'createdAt'
@@ -159,6 +163,7 @@ module Zernio
         :'click_tag' => :'String',
         :'dm_delay_seconds' => :'Integer',
         :'comment_reply_delay_seconds' => :'Integer',
+        :'also_match_in_dms' => :'Boolean',
         :'is_active' => :'Boolean',
         :'stats' => :'ListCommentAutomations200ResponseAutomationsInnerStats',
         :'created_at' => :'Time'
@@ -281,6 +286,10 @@ module Zernio
         self.comment_reply_delay_seconds = attributes[:'comment_reply_delay_seconds']
       end
 
+      if attributes.key?(:'also_match_in_dms')
+        self.also_match_in_dms = attributes[:'also_match_in_dms']
+      end
+
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
       end
@@ -371,6 +380,7 @@ module Zernio
           click_tag == o.click_tag &&
           dm_delay_seconds == o.dm_delay_seconds &&
           comment_reply_delay_seconds == o.comment_reply_delay_seconds &&
+          also_match_in_dms == o.also_match_in_dms &&
           is_active == o.is_active &&
           stats == o.stats &&
           created_at == o.created_at
@@ -385,7 +395,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, trigger, account_id, platform_post_id, post_title, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, is_active, stats, created_at].hash
+      [id, name, platform, trigger, account_id, platform_post_id, post_title, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, also_match_in_dms, is_active, stats, created_at].hash
     end
 
     # Builds the object from hash

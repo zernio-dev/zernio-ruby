@@ -49,6 +49,9 @@ module Zernio
 
     attr_accessor :follow_gate
 
+    # Whether these keywords also fire on a plain inbound DM.
+    attr_accessor :also_match_in_dms
+
     attr_accessor :is_active
 
     attr_accessor :updated_at
@@ -92,6 +95,7 @@ module Zernio
         :'comment_reply_variations' => :'commentReplyVariations',
         :'audience' => :'audience',
         :'follow_gate' => :'followGate',
+        :'also_match_in_dms' => :'alsoMatchInDms',
         :'is_active' => :'isActive',
         :'updated_at' => :'updatedAt'
       }
@@ -124,6 +128,7 @@ module Zernio
         :'comment_reply_variations' => :'Array<String>',
         :'audience' => :'CommentAutomationAudience',
         :'follow_gate' => :'CommentAutomationFollowGate',
+        :'also_match_in_dms' => :'Boolean',
         :'is_active' => :'Boolean',
         :'updated_at' => :'Time'
       }
@@ -218,6 +223,10 @@ module Zernio
         self.follow_gate = attributes[:'follow_gate']
       end
 
+      if attributes.key?(:'also_match_in_dms')
+        self.also_match_in_dms = attributes[:'also_match_in_dms']
+      end
+
       if attributes.key?(:'is_active')
         self.is_active = attributes[:'is_active']
       end
@@ -273,6 +282,7 @@ module Zernio
           comment_reply_variations == o.comment_reply_variations &&
           audience == o.audience &&
           follow_gate == o.follow_gate &&
+          also_match_in_dms == o.also_match_in_dms &&
           is_active == o.is_active &&
           updated_at == o.updated_at
     end
@@ -286,7 +296,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, audience, follow_gate, is_active, updated_at].hash
+      [id, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, audience, follow_gate, also_match_in_dms, is_active, updated_at].hash
     end
 
     # Builds the object from hash

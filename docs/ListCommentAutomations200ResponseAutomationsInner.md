@@ -25,6 +25,7 @@
 | **click_tag** | **String** | Tag applied to a contact when they click a tracked link. | [optional] |
 | **dm_delay_seconds** | **Integer** | Seconds waited after the trigger before the DM is sent. Absent when the DM goes out immediately. | [optional] |
 | **comment_reply_delay_seconds** | **Integer** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional] |
+| **also_match_in_dms** | **Boolean** | Whether these keywords also fire on a plain inbound DM. | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **stats** | [**ListCommentAutomations200ResponseAutomationsInnerStats**](ListCommentAutomations200ResponseAutomationsInnerStats.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
@@ -56,6 +57,7 @@ instance = Zernio::ListCommentAutomations200ResponseAutomationsInner.new(
   click_tag: null,
   dm_delay_seconds: null,
   comment_reply_delay_seconds: null,
+  also_match_in_dms: null,
   is_active: null,
   stats: null,
   created_at: null

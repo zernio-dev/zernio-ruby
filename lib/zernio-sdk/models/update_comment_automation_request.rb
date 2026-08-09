@@ -52,6 +52,9 @@ module Zernio
     # Tag applied to a contact when they click a tracked link (requires linkTracking). Empty string clears it.
     attr_accessor :click_tag
 
+    # Also fire these keywords on a plain inbound DM. Enabling it requires the automation to end up with at least one keyword (this request's keywords if you send them, otherwise the stored ones) and is rejected on story_reply automations.
+    attr_accessor :also_match_in_dms
+
     # Seconds to wait after the trigger before sending the DM. Send 0 to clear the delay and reply immediately.
     attr_accessor :dm_delay_seconds
 
@@ -103,6 +106,7 @@ module Zernio
         :'comment_reply_variations' => :'commentReplyVariations',
         :'link_tracking' => :'linkTracking',
         :'click_tag' => :'clickTag',
+        :'also_match_in_dms' => :'alsoMatchInDms',
         :'dm_delay_seconds' => :'dmDelaySeconds',
         :'comment_reply_delay_seconds' => :'commentReplyDelaySeconds',
         :'audience' => :'audience',
@@ -138,6 +142,7 @@ module Zernio
         :'comment_reply_variations' => :'Array<String>',
         :'link_tracking' => :'Boolean',
         :'click_tag' => :'String',
+        :'also_match_in_dms' => :'Boolean',
         :'dm_delay_seconds' => :'Integer',
         :'comment_reply_delay_seconds' => :'Integer',
         :'audience' => :'CommentAutomationAudience',
@@ -233,6 +238,10 @@ module Zernio
 
       if attributes.key?(:'click_tag')
         self.click_tag = attributes[:'click_tag']
+      end
+
+      if attributes.key?(:'also_match_in_dms')
+        self.also_match_in_dms = attributes[:'also_match_in_dms']
       end
 
       if attributes.key?(:'dm_delay_seconds')
@@ -427,6 +436,7 @@ module Zernio
           comment_reply_variations == o.comment_reply_variations &&
           link_tracking == o.link_tracking &&
           click_tag == o.click_tag &&
+          also_match_in_dms == o.also_match_in_dms &&
           dm_delay_seconds == o.dm_delay_seconds &&
           comment_reply_delay_seconds == o.comment_reply_delay_seconds &&
           audience == o.audience &&
@@ -443,7 +453,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, trigger, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate, is_active].hash
+      [name, trigger, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, also_match_in_dms, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate, is_active].hash
     end
 
     # Builds the object from hash

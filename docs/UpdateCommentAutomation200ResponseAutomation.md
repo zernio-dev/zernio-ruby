@@ -18,6 +18,7 @@
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies rotated at random with commentReply. Omitted when none. | [optional] |
 | **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
 | **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
+| **also_match_in_dms** | **Boolean** | Whether these keywords also fire on a plain inbound DM. | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **updated_at** | **Time** |  | [optional] |
 
@@ -41,6 +42,7 @@ instance = Zernio::UpdateCommentAutomation200ResponseAutomation.new(
   comment_reply_variations: null,
   audience: null,
   follow_gate: null,
+  also_match_in_dms: null,
   is_active: null,
   updated_at: null
 )

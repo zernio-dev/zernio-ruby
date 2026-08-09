@@ -9,6 +9,7 @@
 | **commenter_id** | **String** |  | [optional] |
 | **commenter_name** | **String** |  | [optional] |
 | **comment_text** | **String** |  | [optional] |
+| **source** | **String** | Which door triggered this send. Absent on rows written before this field existed (all of those are comment-triggered). | [optional] |
 | **status** | **String** | DM outcome. &#39;pending&#39; &#x3D; the automation has a dmDelaySeconds and the response is queued but not sent yet. &#39;gated&#39; &#x3D; the follow-gate confirmation DM went out and we are waiting for the tap; it flips to &#39;sent&#39; or &#39;skipped&#39; when they tap. | [optional] |
 | **audience_outcome** | **String** | How the audience rule resolved. Absent on automations without one. | [optional] |
 | **commenter_is_follower** | **Boolean** | Follow relationship at decision time. Absent when Instagram would not tell us (the commenter never messaged the account). | [optional] |
@@ -30,6 +31,7 @@ instance = Zernio::GetCommentAutomation200ResponseLogsInner.new(
   commenter_id: null,
   commenter_name: null,
   comment_text: null,
+  source: null,
   status: null,
   audience_outcome: null,
   commenter_is_follower: null,

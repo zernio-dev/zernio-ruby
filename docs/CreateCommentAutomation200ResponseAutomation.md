@@ -25,6 +25,7 @@
 | **comment_reply_delay_seconds** | **Integer** | Seconds waited before the public reply is posted. Absent when it follows the DM immediately. | [optional] |
 | **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
 | **follow_gate** | [**CommentAutomationFollowGate**](CommentAutomationFollowGate.md) |  | [optional] |
+| **also_match_in_dms** | **Boolean** | Whether these keywords also fire on a plain inbound DM. | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **stats** | [**CreateCommentAutomation200ResponseAutomationStats**](CreateCommentAutomation200ResponseAutomationStats.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
@@ -56,6 +57,7 @@ instance = Zernio::CreateCommentAutomation200ResponseAutomation.new(
   comment_reply_delay_seconds: null,
   audience: null,
   follow_gate: null,
+  also_match_in_dms: null,
   is_active: null,
   stats: null,
   created_at: null

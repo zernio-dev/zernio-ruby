@@ -25,6 +25,9 @@ module Zernio
 
     attr_accessor :comment_text
 
+    # Which door triggered this send. Absent on rows written before this field existed (all of those are comment-triggered).
+    attr_accessor :source
+
     # DM outcome. 'pending' = the automation has a dmDelaySeconds and the response is queued but not sent yet. 'gated' = the follow-gate confirmation DM went out and we are waiting for the tap; it flips to 'sent' or 'skipped' when they tap.
     attr_accessor :status
 
@@ -80,6 +83,7 @@ module Zernio
         :'commenter_id' => :'commenterId',
         :'commenter_name' => :'commenterName',
         :'comment_text' => :'commentText',
+        :'source' => :'source',
         :'status' => :'status',
         :'audience_outcome' => :'audienceOutcome',
         :'commenter_is_follower' => :'commenterIsFollower',
@@ -110,6 +114,7 @@ module Zernio
         :'commenter_id' => :'String',
         :'commenter_name' => :'String',
         :'comment_text' => :'String',
+        :'source' => :'String',
         :'status' => :'String',
         :'audience_outcome' => :'String',
         :'commenter_is_follower' => :'Boolean',
@@ -164,6 +169,10 @@ module Zernio
         self.comment_text = attributes[:'comment_text']
       end
 
+      if attributes.key?(:'source')
+        self.source = attributes[:'source']
+      end
+
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
@@ -213,6 +222,8 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      source_validator = EnumAttributeValidator.new('String', ["comment", "story_reply", "dm"])
+      return false unless source_validator.valid?(@source)
       status_validator = EnumAttributeValidator.new('String', ["pending", "sent", "failed", "skipped", "gated"])
       return false unless status_validator.valid?(@status)
       audience_outcome_validator = EnumAttributeValidator.new('String', ["passed", "blocked", "gate_sent", "gate_passed", "gate_failed"])
@@ -220,6 +231,16 @@ module Zernio
       comment_reply_status_validator = EnumAttributeValidator.new('String', ["sent", "failed", "skipped"])
       return false unless comment_reply_status_validator.valid?(@comment_reply_status)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] source Object to be assigned
+    def source=(source)
+      validator = EnumAttributeValidator.new('String', ["comment", "story_reply", "dm"])
+      unless validator.valid?(source)
+        fail ArgumentError, "invalid value for \"source\", must be one of #{validator.allowable_values}."
+      end
+      @source = source
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -262,6 +283,7 @@ module Zernio
           commenter_id == o.commenter_id &&
           commenter_name == o.commenter_name &&
           comment_text == o.comment_text &&
+          source == o.source &&
           status == o.status &&
           audience_outcome == o.audience_outcome &&
           commenter_is_follower == o.commenter_is_follower &&
@@ -282,7 +304,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, comment_id, commenter_id, commenter_name, comment_text, status, audience_outcome, commenter_is_follower, commenter_follower_count, error, comment_reply_status, comment_reply_error, next_due_at, created_at].hash
+      [id, comment_id, commenter_id, commenter_name, comment_text, source, status, audience_outcome, commenter_is_follower, commenter_follower_count, error, comment_reply_status, comment_reply_error, next_due_at, created_at].hash
     end
 
     # Builds the object from hash

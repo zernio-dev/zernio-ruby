@@ -77,6 +77,9 @@ module Zernio
     # Seconds to wait before posting the public comment reply. Omit or send 0 to post it right after the DM (the default). The reply never goes out before the DM, so a value below dmDelaySeconds is raised to it. Ignored when trigger=story_reply, which has no public reply.
     attr_accessor :comment_reply_delay_seconds
 
+    # Also fire these keywords on a plain inbound DM, so the automation answers people who message the keyword instead of commenting it. Requires at least one keyword (an empty keyword list means 'match anything', which would answer every inbound message) and is rejected on story_reply automations, which already trigger on DMs. Dedup is per door: a contact who already received the DM from their comment can still receive it from a DM.
+    attr_accessor :also_match_in_dms
+
     attr_accessor :audience
 
     attr_accessor :follow_gate
@@ -127,6 +130,7 @@ module Zernio
         :'click_tag' => :'clickTag',
         :'dm_delay_seconds' => :'dmDelaySeconds',
         :'comment_reply_delay_seconds' => :'commentReplyDelaySeconds',
+        :'also_match_in_dms' => :'alsoMatchInDms',
         :'audience' => :'audience',
         :'follow_gate' => :'followGate'
       }
@@ -166,6 +170,7 @@ module Zernio
         :'click_tag' => :'String',
         :'dm_delay_seconds' => :'Integer',
         :'comment_reply_delay_seconds' => :'Integer',
+        :'also_match_in_dms' => :'Boolean',
         :'audience' => :'CommentAutomationAudience',
         :'follow_gate' => :'CommentAutomationFollowGate'
       }
@@ -300,6 +305,12 @@ module Zernio
 
       if attributes.key?(:'comment_reply_delay_seconds')
         self.comment_reply_delay_seconds = attributes[:'comment_reply_delay_seconds']
+      end
+
+      if attributes.key?(:'also_match_in_dms')
+        self.also_match_in_dms = attributes[:'also_match_in_dms']
+      else
+        self.also_match_in_dms = false
       end
 
       if attributes.key?(:'audience')
@@ -549,6 +560,7 @@ module Zernio
           click_tag == o.click_tag &&
           dm_delay_seconds == o.dm_delay_seconds &&
           comment_reply_delay_seconds == o.comment_reply_delay_seconds &&
+          also_match_in_dms == o.also_match_in_dms &&
           audience == o.audience &&
           follow_gate == o.follow_gate
     end
@@ -562,7 +574,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, audience, follow_gate].hash
+      [profile_id, account_id, trigger, platform_post_id, post_id, post_title, name, keywords, match_mode, exclude_keywords, typo_tolerance, dm_message, buttons, template, comment_reply, dm_message_variations, comment_reply_variations, link_tracking, click_tag, dm_delay_seconds, comment_reply_delay_seconds, also_match_in_dms, audience, follow_gate].hash
     end
 
     # Builds the object from hash

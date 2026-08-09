@@ -18,6 +18,7 @@
 | **comment_reply_variations** | **Array&lt;String&gt;** | Alternate public replies for random rotation. Pass [] to clear. | [optional] |
 | **link_tracking** | **Boolean** | Wrap link buttons in a tracked redirect to count clicks. Pass false to send links untouched. | [optional] |
 | **click_tag** | **String** | Tag applied to a contact when they click a tracked link (requires linkTracking). Empty string clears it. | [optional] |
+| **also_match_in_dms** | **Boolean** | Also fire these keywords on a plain inbound DM. Enabling it requires the automation to end up with at least one keyword (this request&#39;s keywords if you send them, otherwise the stored ones) and is rejected on story_reply automations. | [optional] |
 | **dm_delay_seconds** | **Integer** | Seconds to wait after the trigger before sending the DM. Send 0 to clear the delay and reply immediately. | [optional] |
 | **comment_reply_delay_seconds** | **Integer** | Seconds to wait before posting the public comment reply. Send 0 to clear it. The reply never goes out before the DM. | [optional] |
 | **audience** | [**CommentAutomationAudience**](CommentAutomationAudience.md) |  | [optional] |
@@ -44,6 +45,7 @@ instance = Zernio::UpdateCommentAutomationRequest.new(
   comment_reply_variations: null,
   link_tracking: null,
   click_tag: null,
+  also_match_in_dms: null,
   dm_delay_seconds: null,
   comment_reply_delay_seconds: null,
   audience: null,
