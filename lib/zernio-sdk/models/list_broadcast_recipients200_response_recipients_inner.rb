@@ -37,6 +37,9 @@ module Zernio
     # Plain-language translation of errorCode (e.g. for 131026, that the recipient has likely opted out of marketing messages). Null for unmapped codes; fall back to error.
     attr_accessor :error_explanation
 
+    # Meta trace id (fbtrace_id) for the failed send. Quote this when escalating to Meta Direct Support. Only populated for status=failed on Meta platforms.
+    attr_accessor :error_trace_id
+
     attr_accessor :sent_at
 
     attr_accessor :delivered_at
@@ -78,6 +81,7 @@ module Zernio
         :'error' => :'error',
         :'error_code' => :'errorCode',
         :'error_explanation' => :'errorExplanation',
+        :'error_trace_id' => :'errorTraceId',
         :'sent_at' => :'sentAt',
         :'delivered_at' => :'deliveredAt',
         :'read_at' => :'readAt'
@@ -107,6 +111,7 @@ module Zernio
         :'error' => :'String',
         :'error_code' => :'Integer',
         :'error_explanation' => :'String',
+        :'error_trace_id' => :'String',
         :'sent_at' => :'Time',
         :'delivered_at' => :'Time',
         :'read_at' => :'Time'
@@ -118,6 +123,7 @@ module Zernio
       Set.new([
         :'error_code',
         :'error_explanation',
+        :'error_trace_id',
       ])
     end
 
@@ -177,6 +183,10 @@ module Zernio
         self.error_explanation = attributes[:'error_explanation']
       end
 
+      if attributes.key?(:'error_trace_id')
+        self.error_trace_id = attributes[:'error_trace_id']
+      end
+
       if attributes.key?(:'sent_at')
         self.sent_at = attributes[:'sent_at']
       end
@@ -232,6 +242,7 @@ module Zernio
           error == o.error &&
           error_code == o.error_code &&
           error_explanation == o.error_explanation &&
+          error_trace_id == o.error_trace_id &&
           sent_at == o.sent_at &&
           delivered_at == o.delivered_at &&
           read_at == o.read_at
@@ -246,7 +257,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, contact_id, channel_id, platform_identifier, contact_name, status, message_id, error, error_code, error_explanation, sent_at, delivered_at, read_at].hash
+      [id, contact_id, channel_id, platform_identifier, contact_name, status, message_id, error, error_code, error_explanation, error_trace_id, sent_at, delivered_at, read_at].hash
     end
 
     # Builds the object from hash
