@@ -24,6 +24,9 @@ module Zernio
     # Optional file size in bytes for pre-validation (max 5GB)
     attr_accessor :size
 
+    # Write the file to permanent storage instead of temporary storage. Temporary files auto-delete 7 days after upload; permanent files never expire.
+    attr_accessor :permanent
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -51,7 +54,8 @@ module Zernio
       {
         :'filename' => :'filename',
         :'content_type' => :'contentType',
-        :'size' => :'size'
+        :'size' => :'size',
+        :'permanent' => :'permanent'
       }
     end
 
@@ -70,7 +74,8 @@ module Zernio
       {
         :'filename' => :'String',
         :'content_type' => :'String',
-        :'size' => :'Integer'
+        :'size' => :'Integer',
+        :'permanent' => :'Boolean'
       }
     end
 
@@ -110,6 +115,12 @@ module Zernio
 
       if attributes.key?(:'size')
         self.size = attributes[:'size']
+      end
+
+      if attributes.key?(:'permanent')
+        self.permanent = attributes[:'permanent']
+      else
+        self.permanent = false
       end
     end
 
@@ -167,7 +178,8 @@ module Zernio
       self.class == o.class &&
           filename == o.filename &&
           content_type == o.content_type &&
-          size == o.size
+          size == o.size &&
+          permanent == o.permanent
     end
 
     # @see the `==` method
@@ -179,7 +191,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [filename, content_type, size].hash
+      [filename, content_type, size, permanent].hash
     end
 
     # Builds the object from hash

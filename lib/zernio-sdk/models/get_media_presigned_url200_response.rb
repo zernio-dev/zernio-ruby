@@ -18,10 +18,10 @@ module Zernio
     # Presigned URL to PUT your file to (expires in 1 hour)
     attr_accessor :upload_url
 
-    # Public URL where the file will be accessible after upload
+    # Public URL where the file will be accessible after upload. Served from the temp/ prefix by default (expires 7 days after upload) or from media/ when permanent is true.
     attr_accessor :public_url
 
-    # Storage key/path of the file
+    # Storage key/path of the file. Prefixed temp/ by default, media/ when permanent is true.
     attr_accessor :key
 
     # Seconds until the presigned uploadUrl expires (always 3600)
