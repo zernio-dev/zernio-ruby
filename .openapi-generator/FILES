@@ -99,6 +99,7 @@ docs/BookmarkPost200Response.md
 docs/BookmarkPostRequest.md
 docs/BoostPostRequest.md
 docs/BoostPostRequestBudget.md
+docs/BoostPostRequestPlatformSpecificData.md
 docs/BoostPostRequestSchedule.md
 docs/BoostPostRequestTargeting.md
 docs/BoostPostRequestTargetingCitiesInner.md
@@ -479,6 +480,9 @@ docs/GetAdTrackingTags200Response.md
 docs/GetAdTree200Response.md
 docs/GetAdsActivityLog200Response.md
 docs/GetAdsActivityLog200ResponsePaging.md
+docs/GetAdsSearchTerms200Response.md
+docs/GetAdsSearchTerms200ResponseDataInner.md
+docs/GetAdsSearchTerms200ResponsePaging.md
 docs/GetAdsTimeline200Response.md
 docs/GetAdsTimeline200ResponseRowsInner.md
 docs/GetAllAccountsHealth200Response.md
@@ -1026,6 +1030,7 @@ docs/MediaUploadResponse.md
 docs/MentionsApi.md
 docs/MessagesApi.md
 docs/MessagingAdsApi.md
+docs/MetaAdsPlatformData.md
 docs/MetaLeadFormPlatformData.md
 docs/MetaLeadFormPlatformDataContextCard.md
 docs/Money.md
@@ -1825,6 +1830,7 @@ lib/zernio-sdk/models/bookmark_post200_response.rb
 lib/zernio-sdk/models/bookmark_post_request.rb
 lib/zernio-sdk/models/boost_post_request.rb
 lib/zernio-sdk/models/boost_post_request_budget.rb
+lib/zernio-sdk/models/boost_post_request_platform_specific_data.rb
 lib/zernio-sdk/models/boost_post_request_schedule.rb
 lib/zernio-sdk/models/boost_post_request_targeting.rb
 lib/zernio-sdk/models/boost_post_request_targeting_cities_inner.rb
@@ -2187,6 +2193,9 @@ lib/zernio-sdk/models/get_ad_tracking_tags200_response.rb
 lib/zernio-sdk/models/get_ad_tree200_response.rb
 lib/zernio-sdk/models/get_ads_activity_log200_response.rb
 lib/zernio-sdk/models/get_ads_activity_log200_response_paging.rb
+lib/zernio-sdk/models/get_ads_search_terms200_response.rb
+lib/zernio-sdk/models/get_ads_search_terms200_response_data_inner.rb
+lib/zernio-sdk/models/get_ads_search_terms200_response_paging.rb
 lib/zernio-sdk/models/get_ads_timeline200_response.rb
 lib/zernio-sdk/models/get_ads_timeline200_response_rows_inner.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response.rb
@@ -2724,6 +2733,7 @@ lib/zernio-sdk/models/lookup_sms_number200_response.rb
 lib/zernio-sdk/models/mark_conversation_read200_response.rb
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
+lib/zernio-sdk/models/meta_ads_platform_data.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data_context_card.rb
 lib/zernio-sdk/models/money.rb
@@ -3490,6 +3500,7 @@ spec/models/bluesky_platform_data_spec.rb
 spec/models/bookmark_post200_response_spec.rb
 spec/models/bookmark_post_request_spec.rb
 spec/models/boost_post_request_budget_spec.rb
+spec/models/boost_post_request_platform_specific_data_spec.rb
 spec/models/boost_post_request_schedule_spec.rb
 spec/models/boost_post_request_spec.rb
 spec/models/boost_post_request_targeting_cities_inner_spec.rb
@@ -3853,6 +3864,9 @@ spec/models/get_ad_tracking_tags200_response_spec.rb
 spec/models/get_ad_tree200_response_spec.rb
 spec/models/get_ads_activity_log200_response_paging_spec.rb
 spec/models/get_ads_activity_log200_response_spec.rb
+spec/models/get_ads_search_terms200_response_data_inner_spec.rb
+spec/models/get_ads_search_terms200_response_paging_spec.rb
+spec/models/get_ads_search_terms200_response_spec.rb
 spec/models/get_ads_timeline200_response_rows_inner_spec.rb
 spec/models/get_ads_timeline200_response_spec.rb
 spec/models/get_all_accounts_health200_response_accounts_inner_spec.rb
@@ -4390,6 +4404,7 @@ spec/models/lookup_sms_number200_response_spec.rb
 spec/models/mark_conversation_read200_response_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
+spec/models/meta_ads_platform_data_spec.rb
 spec/models/meta_lead_form_platform_data_context_card_spec.rb
 spec/models/meta_lead_form_platform_data_spec.rb
 spec/models/money_amount_spec.rb

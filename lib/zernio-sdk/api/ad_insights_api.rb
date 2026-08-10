@@ -379,6 +379,88 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Google Ads search terms report
+    # The actual search queries that triggered your ads, with matched-keyword status and spend metrics — the raw material for wasted-spend analysis and negative-keyword lists. Reads Google's `search_term_view` live; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget.
+    # @param account_id [String] Google ads SocialAccount id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+    # @option opts [Date] :from_date Defaults to 30 days ago.
+    # @option opts [Date] :to_date Defaults to today.
+    # @option opts [String] :campaign_id Numeric Google campaign id filter.
+    # @option opts [String] :ad_group_id Numeric Google ad group id filter.
+    # @option opts [String] :page_token Cursor from paging.nextPageToken of the previous page.
+    # @return [GetAdsSearchTerms200Response]
+    def get_ads_search_terms(account_id, opts = {})
+      data, _status_code, _headers = get_ads_search_terms_with_http_info(account_id, opts)
+      data
+    end
+
+    # Google Ads search terms report
+    # The actual search queries that triggered your ads, with matched-keyword status and spend metrics — the raw material for wasted-spend analysis and negative-keyword lists. Reads Google&#39;s &#x60;search_term_view&#x60; live; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget.
+    # @param account_id [String] Google ads SocialAccount id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+    # @option opts [Date] :from_date Defaults to 30 days ago.
+    # @option opts [Date] :to_date Defaults to today.
+    # @option opts [String] :campaign_id Numeric Google campaign id filter.
+    # @option opts [String] :ad_group_id Numeric Google ad group id filter.
+    # @option opts [String] :page_token Cursor from paging.nextPageToken of the previous page.
+    # @return [Array<(GetAdsSearchTerms200Response, Integer, Hash)>] GetAdsSearchTerms200Response data, response status code and response headers
+    def get_ads_search_terms_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdInsightsApi.get_ads_search_terms ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdInsightsApi.get_ads_search_terms"
+      end
+      # resource path
+      local_var_path = '/v1/ads/search-terms'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+      query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
+      query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'adGroupId'] = opts[:'ad_group_id'] if !opts[:'ad_group_id'].nil?
+      query_params[:'pageToken'] = opts[:'page_token'] if !opts[:'page_token'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdsSearchTerms200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdInsightsApi.get_ads_search_terms",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdInsightsApi#get_ads_search_terms\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get campaign analytics
     # Returns performance analytics for a whole campaign in one call: summary metrics, a daily timeline over the requested date range (summed across the campaign's ads), and optional demographic breakdowns. Breakdowns are fetched live from Meta at the campaign level (one call per dimension, no per-ad fan-out), so an agency dashboard gets campaign-level age/gender/etc. without summing thousands of per-ad reads. `campaignId` is the platform campaign id; pass `platform` when a campaign id could be ambiguous across platforms. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
     # @param campaign_id [String] Platform campaign id (platformCampaignId).

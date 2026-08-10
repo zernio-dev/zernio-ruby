@@ -14,30 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class WebhookPayloadCommentPost < ApiModelBase
-    # Internal post ID (null for posts not published through Zernio)
-    attr_accessor :id
+  class GetAdsSearchTerms200Response < ApiModelBase
+    attr_accessor :customer_id
 
-    # Platform's post ID
-    attr_accessor :platform_post_id
+    attr_accessor :data
 
-    # Post text, from our synced copy — no platform call is made on the comment path, so null when the post was never synced.
-    attr_accessor :content
-
-    # Post thumbnail or first media item URL. Platform CDN URLs expire, fetch promptly.
-    attr_accessor :image_url
-
-    # Public URL of the post. Null for posts published through Zernio that were never re-synced.
-    attr_accessor :permalink
+    attr_accessor :paging
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'platform_post_id' => :'platformPostId',
-        :'content' => :'content',
-        :'image_url' => :'imageUrl',
-        :'permalink' => :'permalink'
+        :'customer_id' => :'customerId',
+        :'data' => :'data',
+        :'paging' => :'paging'
       }
     end
 
@@ -54,21 +43,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'platform_post_id' => :'String',
-        :'content' => :'String',
-        :'image_url' => :'String',
-        :'permalink' => :'String'
+        :'customer_id' => :'String',
+        :'data' => :'Array<GetAdsSearchTerms200ResponseDataInner>',
+        :'paging' => :'GetAdsSearchTerms200ResponsePaging'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'id',
-        :'content',
-        :'image_url',
-        :'permalink'
       ])
     end
 
@@ -76,46 +59,30 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadCommentPost` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetAdsSearchTerms200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadCommentPost`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetAdsSearchTerms200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      else
-        self.id = nil
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
       end
 
-      if attributes.key?(:'platform_post_id')
-        self.platform_post_id = attributes[:'platform_post_id']
-      else
-        self.platform_post_id = nil
+      if attributes.key?(:'data')
+        if (value = attributes[:'data']).is_a?(Array)
+          self.data = value
+        end
       end
 
-      if attributes.key?(:'content')
-        self.content = attributes[:'content']
-      else
-        self.content = nil
-      end
-
-      if attributes.key?(:'image_url')
-        self.image_url = attributes[:'image_url']
-      else
-        self.image_url = nil
-      end
-
-      if attributes.key?(:'permalink')
-        self.permalink = attributes[:'permalink']
-      else
-        self.permalink = nil
+      if attributes.key?(:'paging')
+        self.paging = attributes[:'paging']
       end
     end
 
@@ -124,10 +91,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @platform_post_id.nil?
-        invalid_properties.push('invalid value for "platform_post_id", platform_post_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -135,18 +98,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @platform_post_id.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] platform_post_id Value to be assigned
-    def platform_post_id=(platform_post_id)
-      if platform_post_id.nil?
-        fail ArgumentError, 'platform_post_id cannot be nil'
-      end
-
-      @platform_post_id = platform_post_id
     end
 
     # Checks equality by comparing each attribute.
@@ -154,11 +106,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          platform_post_id == o.platform_post_id &&
-          content == o.content &&
-          image_url == o.image_url &&
-          permalink == o.permalink
+          customer_id == o.customer_id &&
+          data == o.data &&
+          paging == o.paging
     end
 
     # @see the `==` method
@@ -170,7 +120,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, platform_post_id, content, image_url, permalink].hash
+      [customer_id, data, paging].hash
     end
 
     # Builds the object from hash

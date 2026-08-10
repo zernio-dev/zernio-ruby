@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**generate_keyword_ideas**](AdInsightsApi.md#generate_keyword_ideas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas (Google Keyword Planner) |
 | [**get_ad_analytics**](AdInsightsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics |
 | [**get_ad_insights_report**](AdInsightsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run |
+| [**get_ads_search_terms**](AdInsightsApi.md#get_ads_search_terms) | **GET** /v1/ads/search-terms | Google Ads search terms report |
 | [**get_campaign_analytics**](AdInsightsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics |
 | [**query_ad_insights**](AdInsightsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query |
 
@@ -363,6 +364,89 @@ end
 ### Return type
 
 [**GetAdInsightsReport200Response**](GetAdInsightsReport200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ads_search_terms
+
+> <GetAdsSearchTerms200Response> get_ads_search_terms(account_id, opts)
+
+Google Ads search terms report
+
+The actual search queries that triggered your ads, with matched-keyword status and spend metrics — the raw material for wasted-spend analysis and negative-keyword lists. Reads Google's `search_term_view` live; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdInsightsApi.new
+account_id = 'account_id_example' # String | Google ads SocialAccount id.
+opts = {
+  customer_id: 'customer_id_example', # String | Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+  from_date: Date.parse('2013-10-20'), # Date | Defaults to 30 days ago.
+  to_date: Date.parse('2013-10-20'), # Date | Defaults to today.
+  campaign_id: 'campaign_id_example', # String | Numeric Google campaign id filter.
+  ad_group_id: 'ad_group_id_example', # String | Numeric Google ad group id filter.
+  page_token: 'page_token_example' # String | Cursor from paging.nextPageToken of the previous page.
+}
+
+begin
+  # Google Ads search terms report
+  result = api_instance.get_ads_search_terms(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdInsightsApi->get_ads_search_terms: #{e}"
+end
+```
+
+#### Using the get_ads_search_terms_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdsSearchTerms200Response>, Integer, Hash)> get_ads_search_terms_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Google Ads search terms report
+  data, status_code, headers = api_instance.get_ads_search_terms_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdsSearchTerms200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdInsightsApi->get_ads_search_terms_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Google ads SocialAccount id. |  |
+| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+| **from_date** | **Date** | Defaults to 30 days ago. | [optional] |
+| **to_date** | **Date** | Defaults to today. | [optional] |
+| **campaign_id** | **String** | Numeric Google campaign id filter. | [optional] |
+| **ad_group_id** | **String** | Numeric Google ad group id filter. | [optional] |
+| **page_token** | **String** | Cursor from paging.nextPageToken of the previous page. | [optional] |
+
+### Return type
+
+[**GetAdsSearchTerms200Response**](GetAdsSearchTerms200Response.md)
 
 ### Authorization
 

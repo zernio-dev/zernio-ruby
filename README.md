@@ -158,6 +158,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdInsightsApi* | [**generate_keyword_ideas**](docs/AdInsightsApi.md#generate_keyword_ideas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas (Google Keyword Planner)
 *Zernio::AdInsightsApi* | [**get_ad_analytics**](docs/AdInsightsApi.md#get_ad_analytics) | **GET** /v1/ads/{adId}/analytics | Get ad analytics
 *Zernio::AdInsightsApi* | [**get_ad_insights_report**](docs/AdInsightsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run
+*Zernio::AdInsightsApi* | [**get_ads_search_terms**](docs/AdInsightsApi.md#get_ads_search_terms) | **GET** /v1/ads/search-terms | Google Ads search terms report
 *Zernio::AdInsightsApi* | [**get_campaign_analytics**](docs/AdInsightsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
 *Zernio::AdInsightsApi* | [**query_ad_insights**](docs/AdInsightsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query
 *Zernio::AdTargetingApi* | [**estimate_ad_reach**](docs/AdTargetingApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
@@ -703,6 +704,7 @@ Class | Method | HTTP request | Description
  - [Zernio::BookmarkPostRequest](docs/BookmarkPostRequest.md)
  - [Zernio::BoostPostRequest](docs/BoostPostRequest.md)
  - [Zernio::BoostPostRequestBudget](docs/BoostPostRequestBudget.md)
+ - [Zernio::BoostPostRequestPlatformSpecificData](docs/BoostPostRequestPlatformSpecificData.md)
  - [Zernio::BoostPostRequestSchedule](docs/BoostPostRequestSchedule.md)
  - [Zernio::BoostPostRequestTargeting](docs/BoostPostRequestTargeting.md)
  - [Zernio::BoostPostRequestTargetingCitiesInner](docs/BoostPostRequestTargetingCitiesInner.md)
@@ -1065,6 +1067,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdTree200Response](docs/GetAdTree200Response.md)
  - [Zernio::GetAdsActivityLog200Response](docs/GetAdsActivityLog200Response.md)
  - [Zernio::GetAdsActivityLog200ResponsePaging](docs/GetAdsActivityLog200ResponsePaging.md)
+ - [Zernio::GetAdsSearchTerms200Response](docs/GetAdsSearchTerms200Response.md)
+ - [Zernio::GetAdsSearchTerms200ResponseDataInner](docs/GetAdsSearchTerms200ResponseDataInner.md)
+ - [Zernio::GetAdsSearchTerms200ResponsePaging](docs/GetAdsSearchTerms200ResponsePaging.md)
  - [Zernio::GetAdsTimeline200Response](docs/GetAdsTimeline200Response.md)
  - [Zernio::GetAdsTimeline200ResponseRowsInner](docs/GetAdsTimeline200ResponseRowsInner.md)
  - [Zernio::GetAllAccountsHealth200Response](docs/GetAllAccountsHealth200Response.md)
@@ -1602,6 +1607,7 @@ Class | Method | HTTP request | Description
  - [Zernio::MarkConversationRead200Response](docs/MarkConversationRead200Response.md)
  - [Zernio::MediaItem](docs/MediaItem.md)
  - [Zernio::MediaUploadResponse](docs/MediaUploadResponse.md)
+ - [Zernio::MetaAdsPlatformData](docs/MetaAdsPlatformData.md)
  - [Zernio::MetaLeadFormPlatformData](docs/MetaLeadFormPlatformData.md)
  - [Zernio::MetaLeadFormPlatformDataContextCard](docs/MetaLeadFormPlatformDataContextCard.md)
  - [Zernio::Money](docs/Money.md)

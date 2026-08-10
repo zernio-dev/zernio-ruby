@@ -98,6 +98,24 @@ describe 'AdInsightsApi' do
     end
   end
 
+  # unit tests for get_ads_search_terms
+  # Google Ads search terms report
+  # The actual search queries that triggered your ads, with matched-keyword status and spend metrics — the raw material for wasted-spend analysis and negative-keyword lists. Reads Google&#39;s &#x60;search_term_view&#x60; live; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget.
+  # @param account_id Google ads SocialAccount id.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+  # @option opts [Date] :from_date Defaults to 30 days ago.
+  # @option opts [Date] :to_date Defaults to today.
+  # @option opts [String] :campaign_id Numeric Google campaign id filter.
+  # @option opts [String] :ad_group_id Numeric Google ad group id filter.
+  # @option opts [String] :page_token Cursor from paging.nextPageToken of the previous page.
+  # @return [GetAdsSearchTerms200Response]
+  describe 'get_ads_search_terms test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_campaign_analytics
   # Get campaign analytics
   # Returns performance analytics for a whole campaign in one call: summary metrics, a daily timeline over the requested date range (summed across the campaign&#39;s ads), and optional demographic breakdowns. Breakdowns are fetched live from Meta at the campaign level (one call per dimension, no per-ad fan-out), so an agency dashboard gets campaign-level age/gender/etc. without summing thousands of per-ad reads. &#x60;campaignId&#x60; is the platform campaign id; pass &#x60;platform&#x60; when a campaign id could be ambiguous across platforms. If no date range is provided, defaults to the last 90 days. Date range is capped at 730 days max. 
