@@ -94,6 +94,8 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**move_account_to_profile**](docs/AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
 *Zernio::AccountsApi* | [**update_slack_settings**](docs/AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
+*Zernio::AdAccountsApi* | [**create_custom_conversion**](docs/AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion
+*Zernio::AdAccountsApi* | [**create_high_demand_period**](docs/AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase
 *Zernio::AdAccountsApi* | [**create_value_rule_set**](docs/AdAccountsApi.md#create_value_rule_set) | **POST** /v1/ads/value-rule-sets | Create a value rule set
 *Zernio::AdAccountsApi* | [**delete_value_rule_set**](docs/AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set
 *Zernio::AdAccountsApi* | [**get_ad_account_finance**](docs/AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances
@@ -106,6 +108,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**list_ad_labels**](docs/AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels
 *Zernio::AdAccountsApi* | [**list_ad_studies**](docs/AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies
 *Zernio::AdAccountsApi* | [**list_ads_business_centers**](docs/AdAccountsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
+*Zernio::AdAccountsApi* | [**list_custom_conversions**](docs/AdAccountsApi.md#list_custom_conversions) | **GET** /v1/accounts/{accountId}/custom-conversions | List custom conversions
 *Zernio::AdAccountsApi* | [**list_high_demand_periods**](docs/AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules
 *Zernio::AdAccountsApi* | [**list_meta_businesses**](docs/AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list
 *Zernio::AdAccountsApi* | [**list_value_rule_sets**](docs/AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets
@@ -799,6 +802,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateConversionDestinationRequest](docs/CreateConversionDestinationRequest.md)
  - [Zernio::CreateConversionDestinationRequestValue](docs/CreateConversionDestinationRequestValue.md)
  - [Zernio::CreateCtwaAd201Response](docs/CreateCtwaAd201Response.md)
+ - [Zernio::CreateCustomConversionRequest](docs/CreateCustomConversionRequest.md)
  - [Zernio::CreateCustomField200Response](docs/CreateCustomField200Response.md)
  - [Zernio::CreateCustomFieldRequest](docs/CreateCustomFieldRequest.md)
  - [Zernio::CreateDiscordGuildRole201Response](docs/CreateDiscordGuildRole201Response.md)
@@ -816,6 +820,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateGoogleBusinessMediaRequest](docs/CreateGoogleBusinessMediaRequest.md)
  - [Zernio::CreateGoogleBusinessPlaceAction200Response](docs/CreateGoogleBusinessPlaceAction200Response.md)
  - [Zernio::CreateGoogleBusinessPlaceActionRequest](docs/CreateGoogleBusinessPlaceActionRequest.md)
+ - [Zernio::CreateHighDemandPeriod201Response](docs/CreateHighDemandPeriod201Response.md)
+ - [Zernio::CreateHighDemandPeriodRequest](docs/CreateHighDemandPeriodRequest.md)
  - [Zernio::CreateInboxConversation201Response](docs/CreateInboxConversation201Response.md)
  - [Zernio::CreateInboxConversation201ResponseData](docs/CreateInboxConversation201ResponseData.md)
  - [Zernio::CreateInboxConversation400Response](docs/CreateInboxConversation400Response.md)
@@ -927,6 +933,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CtwaAdRequestBodyZipsInner](docs/CtwaAdRequestBodyZipsInner.md)
  - [Zernio::CtwaMultiResponse](docs/CtwaMultiResponse.md)
  - [Zernio::CtwaSingleResponse](docs/CtwaSingleResponse.md)
+ - [Zernio::CustomConversion](docs/CustomConversion.md)
+ - [Zernio::CustomConversionResult](docs/CustomConversionResult.md)
  - [Zernio::DeactivateSmsRegistration200Response](docs/DeactivateSmsRegistration200Response.md)
  - [Zernio::DeleteAccountGroup200Response](docs/DeleteAccountGroup200Response.md)
  - [Zernio::DeleteAdCampaign200Response](docs/DeleteAdCampaign200Response.md)
@@ -1465,6 +1473,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListConversionAssociations200ResponseAssociationsInner](docs/ListConversionAssociations200ResponseAssociationsInner.md)
  - [Zernio::ListConversionDestinations200Response](docs/ListConversionDestinations200Response.md)
  - [Zernio::ListConversionDestinations200ResponseDestinationsInner](docs/ListConversionDestinations200ResponseDestinationsInner.md)
+ - [Zernio::ListCustomConversions200Response](docs/ListCustomConversions200Response.md)
  - [Zernio::ListCustomFields200Response](docs/ListCustomFields200Response.md)
  - [Zernio::ListCustomFields200ResponseFieldsInner](docs/ListCustomFields200ResponseFieldsInner.md)
  - [Zernio::ListDiscordGuildMembers200Response](docs/ListDiscordGuildMembers200Response.md)

@@ -48,6 +48,9 @@ module Zernio
     # Advantage+ creative enhancements: partial map of Meta creative feature keys (snake_case) to enroll status, forwarded as degrees_of_freedom_spec.creative_features_spec. Unspecified features default to OPT_OUT.
     attr_accessor :creative_features
 
+    # Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers' in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a `creativeFeatures` key — Meta rejects it there.
+    attr_accessor :multi_advertiser
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -84,7 +87,8 @@ module Zernio
         :'image_hash' => :'imageHash',
         :'carousel_cards' => :'carouselCards',
         :'url_tags' => :'urlTags',
-        :'creative_features' => :'creativeFeatures'
+        :'creative_features' => :'creativeFeatures',
+        :'multi_advertiser' => :'multiAdvertiser'
       }
     end
 
@@ -112,7 +116,8 @@ module Zernio
         :'image_hash' => :'String',
         :'carousel_cards' => :'Array<CreateAdCreativeRequestCarouselCardsInner>',
         :'url_tags' => :'String',
-        :'creative_features' => :'Hash<String, String>'
+        :'creative_features' => :'Hash<String, String>',
+        :'multi_advertiser' => :'String'
       }
     end
 
@@ -201,6 +206,10 @@ module Zernio
           self.creative_features = value
         end
       end
+
+      if attributes.key?(:'multi_advertiser')
+        self.multi_advertiser = attributes[:'multi_advertiser']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -260,6 +269,8 @@ module Zernio
       return false if @link_url.nil?
       return false if !@carousel_cards.nil? && @carousel_cards.length > 10
       return false if !@carousel_cards.nil? && @carousel_cards.length < 2
+      multi_advertiser_validator = EnumAttributeValidator.new('String', ["OPT_IN", "OPT_OUT"])
+      return false unless multi_advertiser_validator.valid?(@multi_advertiser)
       true
     end
 
@@ -349,6 +360,16 @@ module Zernio
       @carousel_cards = carousel_cards
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] multi_advertiser Object to be assigned
+    def multi_advertiser=(multi_advertiser)
+      validator = EnumAttributeValidator.new('String', ["OPT_IN", "OPT_OUT"])
+      unless validator.valid?(multi_advertiser)
+        fail ArgumentError, "invalid value for \"multi_advertiser\", must be one of #{validator.allowable_values}."
+      end
+      @multi_advertiser = multi_advertiser
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -365,7 +386,8 @@ module Zernio
           image_hash == o.image_hash &&
           carousel_cards == o.carousel_cards &&
           url_tags == o.url_tags &&
-          creative_features == o.creative_features
+          creative_features == o.creative_features &&
+          multi_advertiser == o.multi_advertiser
     end
 
     # @see the `==` method
@@ -377,7 +399,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, headline, body, description, call_to_action, link_url, image_url, image_hash, carousel_cards, url_tags, creative_features].hash
+      [account_id, ad_account_id, headline, body, description, call_to_action, link_url, image_url, image_hash, carousel_cards, url_tags, creative_features, multi_advertiser].hash
     end
 
     # Builds the object from hash

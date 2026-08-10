@@ -103,4 +103,14 @@ describe Zernio::CreateAdCreativeRequest do
     end
   end
 
+  describe 'test attribute "multi_advertiser"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["OPT_IN", "OPT_OUT"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.multi_advertiser = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

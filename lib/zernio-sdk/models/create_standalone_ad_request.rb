@@ -50,6 +50,9 @@ module Zernio
     # Meta only. Advantage+ creative enhancements: a partial map of Meta creative feature keys (snake_case, e.g. enhance_cta, image_brightness_and_contrast, text_optimizations) to enroll status, forwarded as degrees_of_freedom_spec.creative_features_spec. Meta validates the keys; unspecified features default to OPT_OUT. The legacy standard_enhancements bundle is deprecated by Meta and rejected.
     attr_accessor :creative_features
 
+    # Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers' in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a `creativeFeatures` key — Meta rejects it there.
+    attr_accessor :multi_advertiser
+
     # Meta only, single standalone shape only (no creatives[], adSetId, or RESERVED). Dry-run: each node runs Meta's execution_options validate_only and NOTHING is created or persisted. Children need real parents, so a fresh tree validates the campaign + creative (the ad set needs its campaign to exist — pass existingCampaignId to validate it too; the ad itself is never validatable pre-create). A Meta validation failure returns the 400 verbatim; success returns 200 with per-node results instead of an ad.
     attr_accessor :validate_only
 
@@ -281,6 +284,7 @@ module Zernio
         :'buying_type' => :'buyingType',
         :'rf_prediction_id' => :'rfPredictionId',
         :'creative_features' => :'creativeFeatures',
+        :'multi_advertiser' => :'multiAdvertiser',
         :'validate_only' => :'validateOnly',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
@@ -378,6 +382,7 @@ module Zernio
         :'buying_type' => :'String',
         :'rf_prediction_id' => :'String',
         :'creative_features' => :'Hash<String, String>',
+        :'multi_advertiser' => :'String',
         :'validate_only' => :'Boolean',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
@@ -529,6 +534,10 @@ module Zernio
         if (value = attributes[:'creative_features']).is_a?(Hash)
           self.creative_features = value
         end
+      end
+
+      if attributes.key?(:'multi_advertiser')
+        self.multi_advertiser = attributes[:'multi_advertiser']
       end
 
       if attributes.key?(:'validate_only')
@@ -968,6 +977,8 @@ module Zernio
       return false unless goal_validator.valid?(@goal)
       buying_type_validator = EnumAttributeValidator.new('String', ["AUCTION", "RESERVED"])
       return false unless buying_type_validator.valid?(@buying_type)
+      multi_advertiser_validator = EnumAttributeValidator.new('String', ["OPT_IN", "OPT_OUT"])
+      return false unless multi_advertiser_validator.valid?(@multi_advertiser)
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
       status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
@@ -1100,6 +1111,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"buying_type\", must be one of #{validator.allowable_values}."
       end
       @buying_type = buying_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] multi_advertiser Object to be assigned
+    def multi_advertiser=(multi_advertiser)
+      validator = EnumAttributeValidator.new('String', ["OPT_IN", "OPT_OUT"])
+      unless validator.valid?(multi_advertiser)
+        fail ArgumentError, "invalid value for \"multi_advertiser\", must be one of #{validator.allowable_values}."
+      end
+      @multi_advertiser = multi_advertiser
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -1399,6 +1420,7 @@ module Zernio
           buying_type == o.buying_type &&
           rf_prediction_id == o.rf_prediction_id &&
           creative_features == o.creative_features &&
+          multi_advertiser == o.multi_advertiser &&
           validate_only == o.validate_only &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
@@ -1478,7 +1500,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

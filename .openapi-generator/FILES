@@ -206,6 +206,7 @@ docs/CreateConversionDestination201Response.md
 docs/CreateConversionDestinationRequest.md
 docs/CreateConversionDestinationRequestValue.md
 docs/CreateCtwaAd201Response.md
+docs/CreateCustomConversionRequest.md
 docs/CreateCustomField200Response.md
 docs/CreateCustomFieldRequest.md
 docs/CreateDiscordGuildRole201Response.md
@@ -223,6 +224,8 @@ docs/CreateGoogleBusinessMedia200Response.md
 docs/CreateGoogleBusinessMediaRequest.md
 docs/CreateGoogleBusinessPlaceAction200Response.md
 docs/CreateGoogleBusinessPlaceActionRequest.md
+docs/CreateHighDemandPeriod201Response.md
+docs/CreateHighDemandPeriodRequest.md
 docs/CreateInboxConversation201Response.md
 docs/CreateInboxConversation201ResponseData.md
 docs/CreateInboxConversation400Response.md
@@ -334,6 +337,8 @@ docs/CtwaAdRequestBodyVideo.md
 docs/CtwaAdRequestBodyZipsInner.md
 docs/CtwaMultiResponse.md
 docs/CtwaSingleResponse.md
+docs/CustomConversion.md
+docs/CustomConversionResult.md
 docs/CustomFieldsApi.md
 docs/DeactivateSmsRegistration200Response.md
 docs/DeleteAccountGroup200Response.md
@@ -887,6 +892,7 @@ docs/ListConversionAssociations200Response.md
 docs/ListConversionAssociations200ResponseAssociationsInner.md
 docs/ListConversionDestinations200Response.md
 docs/ListConversionDestinations200ResponseDestinationsInner.md
+docs/ListCustomConversions200Response.md
 docs/ListCustomFields200Response.md
 docs/ListCustomFields200ResponseFieldsInner.md
 docs/ListDiscordGuildMembers200Response.md
@@ -1918,6 +1924,7 @@ lib/zernio-sdk/models/create_conversion_destination201_response.rb
 lib/zernio-sdk/models/create_conversion_destination_request.rb
 lib/zernio-sdk/models/create_conversion_destination_request_value.rb
 lib/zernio-sdk/models/create_ctwa_ad201_response.rb
+lib/zernio-sdk/models/create_custom_conversion_request.rb
 lib/zernio-sdk/models/create_custom_field200_response.rb
 lib/zernio-sdk/models/create_custom_field_request.rb
 lib/zernio-sdk/models/create_discord_guild_role201_response.rb
@@ -1935,6 +1942,8 @@ lib/zernio-sdk/models/create_google_business_media200_response.rb
 lib/zernio-sdk/models/create_google_business_media_request.rb
 lib/zernio-sdk/models/create_google_business_place_action200_response.rb
 lib/zernio-sdk/models/create_google_business_place_action_request.rb
+lib/zernio-sdk/models/create_high_demand_period201_response.rb
+lib/zernio-sdk/models/create_high_demand_period_request.rb
 lib/zernio-sdk/models/create_inbox_conversation201_response.rb
 lib/zernio-sdk/models/create_inbox_conversation201_response_data.rb
 lib/zernio-sdk/models/create_inbox_conversation400_response.rb
@@ -2046,6 +2055,8 @@ lib/zernio-sdk/models/ctwa_ad_request_body_video.rb
 lib/zernio-sdk/models/ctwa_ad_request_body_zips_inner.rb
 lib/zernio-sdk/models/ctwa_multi_response.rb
 lib/zernio-sdk/models/ctwa_single_response.rb
+lib/zernio-sdk/models/custom_conversion.rb
+lib/zernio-sdk/models/custom_conversion_result.rb
 lib/zernio-sdk/models/deactivate_sms_registration200_response.rb
 lib/zernio-sdk/models/delete_account_group200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign200_response.rb
@@ -2584,6 +2595,7 @@ lib/zernio-sdk/models/list_conversion_associations200_response.rb
 lib/zernio-sdk/models/list_conversion_associations200_response_associations_inner.rb
 lib/zernio-sdk/models/list_conversion_destinations200_response.rb
 lib/zernio-sdk/models/list_conversion_destinations200_response_destinations_inner.rb
+lib/zernio-sdk/models/list_custom_conversions200_response.rb
 lib/zernio-sdk/models/list_custom_fields200_response.rb
 lib/zernio-sdk/models/list_custom_fields200_response_fields_inner.rb
 lib/zernio-sdk/models/list_discord_guild_members200_response.rb
@@ -3578,6 +3590,7 @@ spec/models/create_conversion_destination201_response_spec.rb
 spec/models/create_conversion_destination_request_spec.rb
 spec/models/create_conversion_destination_request_value_spec.rb
 spec/models/create_ctwa_ad201_response_spec.rb
+spec/models/create_custom_conversion_request_spec.rb
 spec/models/create_custom_field200_response_spec.rb
 spec/models/create_custom_field_request_spec.rb
 spec/models/create_discord_guild_role201_response_spec.rb
@@ -3595,6 +3608,8 @@ spec/models/create_google_business_media200_response_spec.rb
 spec/models/create_google_business_media_request_spec.rb
 spec/models/create_google_business_place_action200_response_spec.rb
 spec/models/create_google_business_place_action_request_spec.rb
+spec/models/create_high_demand_period201_response_spec.rb
+spec/models/create_high_demand_period_request_spec.rb
 spec/models/create_inbox_conversation201_response_data_spec.rb
 spec/models/create_inbox_conversation201_response_spec.rb
 spec/models/create_inbox_conversation400_response_spec.rb
@@ -3706,6 +3721,8 @@ spec/models/ctwa_ad_request_body_video_spec.rb
 spec/models/ctwa_ad_request_body_zips_inner_spec.rb
 spec/models/ctwa_multi_response_spec.rb
 spec/models/ctwa_single_response_spec.rb
+spec/models/custom_conversion_result_spec.rb
+spec/models/custom_conversion_spec.rb
 spec/models/deactivate_sms_registration200_response_spec.rb
 spec/models/delete_account_group200_response_spec.rb
 spec/models/delete_ad_campaign200_response_spec.rb
@@ -4244,6 +4261,7 @@ spec/models/list_conversion_associations200_response_associations_inner_spec.rb
 spec/models/list_conversion_associations200_response_spec.rb
 spec/models/list_conversion_destinations200_response_destinations_inner_spec.rb
 spec/models/list_conversion_destinations200_response_spec.rb
+spec/models/list_custom_conversions200_response_spec.rb
 spec/models/list_custom_fields200_response_fields_inner_spec.rb
 spec/models/list_custom_fields200_response_spec.rb
 spec/models/list_discord_guild_members200_response_pagination_spec.rb
