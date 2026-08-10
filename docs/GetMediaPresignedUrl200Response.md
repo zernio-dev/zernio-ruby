@@ -5,8 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **upload_url** | **String** | Presigned URL to PUT your file to (expires in 1 hour) | [optional] |
-| **public_url** | **String** | Public URL where the file will be accessible after upload. Served from the temp/ prefix by default (expires 7 days after upload) or from media/ when permanent is true. | [optional] |
-| **key** | **String** | Storage key/path of the file. Prefixed temp/ by default, media/ when permanent is true. | [optional] |
+| **public_url** | **String** | Public URL where the file will be accessible after upload | [optional] |
+| **key** | **String** | Storage key/path of the file | [optional] |
 | **expires_in** | **Integer** | Seconds until the presigned uploadUrl expires (always 3600) | [optional] |
 
 ## Example
