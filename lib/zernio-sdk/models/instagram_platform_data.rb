@@ -33,8 +33,10 @@ module Zernio
     # Tag Instagram users by username. The tag shape depends on the media: photos require x/y coordinates, Reels and videos take username only (coordinates are ignored), stories accept optional coordinates. For carousels, use mediaIndex to target specific slides (defaults to 0); video slides take username-only tags. Photo tags without valid coordinates are skipped.
     attr_accessor :user_tags
 
-    # Custom name for original audio in Reels. Replaces the default \"Original Audio\" label. Can only be set once.
+    # Custom name for original audio in Reels. Replaces the default \"Original Audio\" label. Can only be set once. Unrelated to audioConfiguration, which attaches a catalog track.
     attr_accessor :audio_name
+
+    attr_accessor :audio_configuration
 
     # Millisecond offset from video start for the Reel cover frame. Ignored when instagramThumbnail or reelCover is provided. Defaults to 0.
     attr_accessor :thumb_offset
@@ -80,6 +82,7 @@ module Zernio
         :'trial_params' => :'trialParams',
         :'user_tags' => :'userTags',
         :'audio_name' => :'audioName',
+        :'audio_configuration' => :'audioConfiguration',
         :'thumb_offset' => :'thumbOffset',
         :'instagram_thumbnail' => :'instagramThumbnail',
         :'reel_cover' => :'reelCover',
@@ -107,6 +110,7 @@ module Zernio
         :'trial_params' => :'InstagramPlatformDataTrialParams',
         :'user_tags' => :'Array<InstagramPlatformDataUserTagsInner>',
         :'audio_name' => :'String',
+        :'audio_configuration' => :'InstagramPlatformDataAudioConfiguration',
         :'thumb_offset' => :'Integer',
         :'instagram_thumbnail' => :'String',
         :'reel_cover' => :'String',
@@ -168,6 +172,10 @@ module Zernio
 
       if attributes.key?(:'audio_name')
         self.audio_name = attributes[:'audio_name']
+      end
+
+      if attributes.key?(:'audio_configuration')
+        self.audio_configuration = attributes[:'audio_configuration']
       end
 
       if attributes.key?(:'thumb_offset')
@@ -247,6 +255,7 @@ module Zernio
           trial_params == o.trial_params &&
           user_tags == o.user_tags &&
           audio_name == o.audio_name &&
+          audio_configuration == o.audio_configuration &&
           thumb_offset == o.thumb_offset &&
           instagram_thumbnail == o.instagram_thumbnail &&
           reel_cover == o.reel_cover &&
@@ -262,7 +271,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, thumb_offset, instagram_thumbnail, reel_cover, is_ai_generated].hash
+      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, audio_configuration, thumb_offset, instagram_thumbnail, reel_cover, is_ai_generated].hash
     end
 
     # Builds the object from hash

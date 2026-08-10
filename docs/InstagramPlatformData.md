@@ -10,7 +10,8 @@
 | **first_comment** | **String** | Optional first comment to add after the post is created (not applied to Stories) | [optional] |
 | **trial_params** | [**InstagramPlatformDataTrialParams**](InstagramPlatformDataTrialParams.md) |  | [optional] |
 | **user_tags** | [**Array&lt;InstagramPlatformDataUserTagsInner&gt;**](InstagramPlatformDataUserTagsInner.md) | Tag Instagram users by username. The tag shape depends on the media: photos require x/y coordinates, Reels and videos take username only (coordinates are ignored), stories accept optional coordinates. For carousels, use mediaIndex to target specific slides (defaults to 0); video slides take username-only tags. Photo tags without valid coordinates are skipped. | [optional] |
-| **audio_name** | **String** | Custom name for original audio in Reels. Replaces the default \&quot;Original Audio\&quot; label. Can only be set once. | [optional] |
+| **audio_name** | **String** | Custom name for original audio in Reels. Replaces the default \&quot;Original Audio\&quot; label. Can only be set once. Unrelated to audioConfiguration, which attaches a catalog track. | [optional] |
+| **audio_configuration** | [**InstagramPlatformDataAudioConfiguration**](InstagramPlatformDataAudioConfiguration.md) |  | [optional] |
 | **thumb_offset** | **Integer** | Millisecond offset from video start for the Reel cover frame. Ignored when instagramThumbnail or reelCover is provided. Defaults to 0. | [optional] |
 | **instagram_thumbnail** | **String** | Custom cover image URL for Instagram Reels (JPG or PNG, publicly accessible). Overrides thumbOffset when provided. Also accepted as reelCover (alias). | [optional] |
 | **reel_cover** | **String** | Alias for instagramThumbnail. If both are provided, instagramThumbnail takes priority. | [optional] |
@@ -29,6 +30,7 @@ instance = Zernio::InstagramPlatformData.new(
   trial_params: null,
   user_tags: null,
   audio_name: My Podcast Intro,
+  audio_configuration: null,
   thumb_offset: 5000,
   instagram_thumbnail: null,
   reel_cover: null,

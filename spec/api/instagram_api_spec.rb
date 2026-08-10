@@ -32,6 +32,19 @@ describe 'InstagramApi' do
     end
   end
 
+  # unit tests for get_instagram_audio
+  # Get Instagram audio metadata
+  # Fetch one audio asset&#39;s metadata by ID. Use it to re-validate a stored &#x60;audioId&#x60; before a scheduled Reel publishes, or to refresh the preview &#x60;downloadUrl&#x60; (Meta expires preview URLs after roughly 1.5 days).  Same connection requirement as the search endpoint: Facebook-Login Instagram accounts only. 
+  # @param account_id The ID of the Instagram account
+  # @param audio_id Instagram audio asset ID
+  # @param [Hash] opts the optional parameters
+  # @return [GetInstagramAudio200Response]
+  describe 'get_instagram_audio test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_instagram_publishing_limit
   # Get Instagram publishing limit
   # Returns the account&#39;s remaining content-publishing quota for Instagram&#39;s rolling 24-hour window, so you can pace publishing and warn before the cap is reached.  &#x60;quotaUsage&#x60; counts containers published since the start of the window. Always compare against the returned &#x60;quotaTotal&#x60; rather than hardcoding a number: Meta&#39;s prose documentation and the live API disagree on the value, and the live value is authoritative. 
@@ -64,6 +77,20 @@ describe 'InstagramApi' do
   # @param [Hash] opts the optional parameters
   # @return [ListInstagramStories200Response]
   describe 'list_instagram_stories test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for search_instagram_audio
+  # Search Instagram audio
+  # Search Instagram&#39;s audio catalog (licensed music or original sounds), or list what is currently trending by omitting &#x60;q&#x60;. Returns up to ~30 assets; Meta exposes no pagination on this edge.  Pass the returned &#x60;audioId&#x60; as &#x60;platformSpecificData.audioConfiguration.audioId&#x60; when creating a Reel to publish it with that track.  Requires an Instagram account connected via **Facebook Login**. Meta hosts this catalog on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (&#x60;instagram_audio_requires_facebook_login&#x60;) and must be reconnected choosing the Facebook option. 
+  # @param account_id The ID of the Instagram account
+  # @param audio_type Catalog to search: licensed music or original sounds from Reels.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :q Search keywords. Omit to get the current trending list.
+  # @return [SearchInstagramAudio200Response]
+  describe 'search_instagram_audio test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

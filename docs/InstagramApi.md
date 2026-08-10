@@ -4,9 +4,82 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**get_instagram_audio**](InstagramApi.md#get_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio/{audioId} | Get Instagram audio metadata |
 | [**get_instagram_publishing_limit**](InstagramApi.md#get_instagram_publishing_limit) | **GET** /v1/accounts/{accountId}/instagram/publishing-limit | Get Instagram publishing limit |
 | [**get_instagram_story_insights**](InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights |
 | [**list_instagram_stories**](InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories |
+| [**search_instagram_audio**](InstagramApi.md#search_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio | Search Instagram audio |
+
+
+## get_instagram_audio
+
+> <GetInstagramAudio200Response> get_instagram_audio(account_id, audio_id)
+
+Get Instagram audio metadata
+
+Fetch one audio asset's metadata by ID. Use it to re-validate a stored `audioId` before a scheduled Reel publishes, or to refresh the preview `downloadUrl` (Meta expires preview URLs after roughly 1.5 days).  Same connection requirement as the search endpoint: Facebook-Login Instagram accounts only. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of the Instagram account
+audio_id = 'audio_id_example' # String | Instagram audio asset ID
+
+begin
+  # Get Instagram audio metadata
+  result = api_instance.get_instagram_audio(account_id, audio_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_audio: #{e}"
+end
+```
+
+#### Using the get_instagram_audio_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetInstagramAudio200Response>, Integer, Hash)> get_instagram_audio_with_http_info(account_id, audio_id)
+
+```ruby
+begin
+  # Get Instagram audio metadata
+  data, status_code, headers = api_instance.get_instagram_audio_with_http_info(account_id, audio_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetInstagramAudio200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->get_instagram_audio_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of the Instagram account |  |
+| **audio_id** | **String** | Instagram audio asset ID |  |
+
+### Return type
+
+[**GetInstagramAudio200Response**](GetInstagramAudio200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## get_instagram_publishing_limit
@@ -207,6 +280,81 @@ end
 ### Return type
 
 [**ListInstagramStories200Response**](ListInstagramStories200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## search_instagram_audio
+
+> <SearchInstagramAudio200Response> search_instagram_audio(account_id, audio_type, opts)
+
+Search Instagram audio
+
+Search Instagram's audio catalog (licensed music or original sounds), or list what is currently trending by omitting `q`. Returns up to ~30 assets; Meta exposes no pagination on this edge.  Pass the returned `audioId` as `platformSpecificData.audioConfiguration.audioId` when creating a Reel to publish it with that track.  Requires an Instagram account connected via **Facebook Login**. Meta hosts this catalog on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (`instagram_audio_requires_facebook_login`) and must be reconnected choosing the Facebook option. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::InstagramApi.new
+account_id = 'account_id_example' # String | The ID of the Instagram account
+audio_type = 'music' # String | Catalog to search: licensed music or original sounds from Reels.
+opts = {
+  q: 'q_example' # String | Search keywords. Omit to get the current trending list.
+}
+
+begin
+  # Search Instagram audio
+  result = api_instance.search_instagram_audio(account_id, audio_type, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->search_instagram_audio: #{e}"
+end
+```
+
+#### Using the search_instagram_audio_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<SearchInstagramAudio200Response>, Integer, Hash)> search_instagram_audio_with_http_info(account_id, audio_type, opts)
+
+```ruby
+begin
+  # Search Instagram audio
+  data, status_code, headers = api_instance.search_instagram_audio_with_http_info(account_id, audio_type, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <SearchInstagramAudio200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling InstagramApi->search_instagram_audio_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The ID of the Instagram account |  |
+| **audio_type** | **String** | Catalog to search: licensed music or original sounds from Reels. |  |
+| **q** | **String** | Search keywords. Omit to get the current trending list. | [optional] |
+
+### Return type
+
+[**SearchInstagramAudio200Response**](SearchInstagramAudio200Response.md)
 
 ### Authorization
 

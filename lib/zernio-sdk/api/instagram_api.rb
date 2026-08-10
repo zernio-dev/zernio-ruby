@@ -19,6 +19,80 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Get Instagram audio metadata
+    # Fetch one audio asset's metadata by ID. Use it to re-validate a stored `audioId` before a scheduled Reel publishes, or to refresh the preview `downloadUrl` (Meta expires preview URLs after roughly 1.5 days).  Same connection requirement as the search endpoint: Facebook-Login Instagram accounts only. 
+    # @param account_id [String] The ID of the Instagram account
+    # @param audio_id [String] Instagram audio asset ID
+    # @param [Hash] opts the optional parameters
+    # @return [GetInstagramAudio200Response]
+    def get_instagram_audio(account_id, audio_id, opts = {})
+      data, _status_code, _headers = get_instagram_audio_with_http_info(account_id, audio_id, opts)
+      data
+    end
+
+    # Get Instagram audio metadata
+    # Fetch one audio asset&#39;s metadata by ID. Use it to re-validate a stored &#x60;audioId&#x60; before a scheduled Reel publishes, or to refresh the preview &#x60;downloadUrl&#x60; (Meta expires preview URLs after roughly 1.5 days).  Same connection requirement as the search endpoint: Facebook-Login Instagram accounts only. 
+    # @param account_id [String] The ID of the Instagram account
+    # @param audio_id [String] Instagram audio asset ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetInstagramAudio200Response, Integer, Hash)>] GetInstagramAudio200Response data, response status code and response headers
+    def get_instagram_audio_with_http_info(account_id, audio_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: InstagramApi.get_instagram_audio ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling InstagramApi.get_instagram_audio"
+      end
+      # verify the required parameter 'audio_id' is set
+      if @api_client.config.client_side_validation && audio_id.nil?
+        fail ArgumentError, "Missing the required parameter 'audio_id' when calling InstagramApi.get_instagram_audio"
+      end
+      pattern = Regexp.new(/^\d{1,30}$/)
+      if @api_client.config.client_side_validation && audio_id !~ pattern
+        fail ArgumentError, "invalid value for 'audio_id' when calling InstagramApi.get_instagram_audio, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/instagram/audio/{audioId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'audioId' + '}', CGI.escape(audio_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetInstagramAudio200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"InstagramApi.get_instagram_audio",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: InstagramApi#get_instagram_audio\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Instagram publishing limit
     # Returns the account's remaining content-publishing quota for Instagram's rolling 24-hour window, so you can pace publishing and warn before the cap is reached.  `quotaUsage` counts containers published since the start of the window. Always compare against the returned `quotaTotal` rather than hardcoding a number: Meta's prose documentation and the live API disagree on the value, and the live value is authoritative. 
     # @param account_id [String] The ID of the Instagram account
@@ -210,6 +284,92 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: InstagramApi#list_instagram_stories\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Search Instagram audio
+    # Search Instagram's audio catalog (licensed music or original sounds), or list what is currently trending by omitting `q`. Returns up to ~30 assets; Meta exposes no pagination on this edge.  Pass the returned `audioId` as `platformSpecificData.audioConfiguration.audioId` when creating a Reel to publish it with that track.  Requires an Instagram account connected via **Facebook Login**. Meta hosts this catalog on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (`instagram_audio_requires_facebook_login`) and must be reconnected choosing the Facebook option. 
+    # @param account_id [String] The ID of the Instagram account
+    # @param audio_type [String] Catalog to search: licensed music or original sounds from Reels.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :q Search keywords. Omit to get the current trending list.
+    # @return [SearchInstagramAudio200Response]
+    def search_instagram_audio(account_id, audio_type, opts = {})
+      data, _status_code, _headers = search_instagram_audio_with_http_info(account_id, audio_type, opts)
+      data
+    end
+
+    # Search Instagram audio
+    # Search Instagram&#39;s audio catalog (licensed music or original sounds), or list what is currently trending by omitting &#x60;q&#x60;. Returns up to ~30 assets; Meta exposes no pagination on this edge.  Pass the returned &#x60;audioId&#x60; as &#x60;platformSpecificData.audioConfiguration.audioId&#x60; when creating a Reel to publish it with that track.  Requires an Instagram account connected via **Facebook Login**. Meta hosts this catalog on graph.facebook.com only, so accounts connected with classic Instagram Login receive a 400 (&#x60;instagram_audio_requires_facebook_login&#x60;) and must be reconnected choosing the Facebook option. 
+    # @param account_id [String] The ID of the Instagram account
+    # @param audio_type [String] Catalog to search: licensed music or original sounds from Reels.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :q Search keywords. Omit to get the current trending list.
+    # @return [Array<(SearchInstagramAudio200Response, Integer, Hash)>] SearchInstagramAudio200Response data, response status code and response headers
+    def search_instagram_audio_with_http_info(account_id, audio_type, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: InstagramApi.search_instagram_audio ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling InstagramApi.search_instagram_audio"
+      end
+      # verify the required parameter 'audio_type' is set
+      if @api_client.config.client_side_validation && audio_type.nil?
+        fail ArgumentError, "Missing the required parameter 'audio_type' when calling InstagramApi.search_instagram_audio"
+      end
+      # verify enum value
+      allowable_values = ["music", "original_sound"]
+      if @api_client.config.client_side_validation && !allowable_values.include?(audio_type)
+        fail ArgumentError, "invalid value for \"audio_type\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'q'].nil? && opts[:'q'].to_s.length > 200
+        fail ArgumentError, 'invalid value for "opts[:"q"]" when calling InstagramApi.search_instagram_audio, the character length must be smaller than or equal to 200.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'q'].nil? && opts[:'q'].to_s.length < 1
+        fail ArgumentError, 'invalid value for "opts[:"q"]" when calling InstagramApi.search_instagram_audio, the character length must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/instagram/audio'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'audioType'] = audio_type
+      query_params[:'q'] = opts[:'q'] if !opts[:'q'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SearchInstagramAudio200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"InstagramApi.search_instagram_audio",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: InstagramApi#search_instagram_audio\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

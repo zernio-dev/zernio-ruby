@@ -348,9 +348,11 @@ Class | Method | HTTP request | Description
 *Zernio::InboxAnalyticsApi* | [**get_inbox_top_accounts**](docs/InboxAnalyticsApi.md#get_inbox_top_accounts) | **GET** /v1/analytics/inbox/top-accounts | Get top accounts by inbox volume
 *Zernio::InboxAnalyticsApi* | [**get_inbox_volume**](docs/InboxAnalyticsApi.md#get_inbox_volume) | **GET** /v1/analytics/inbox/volume | Get inbox messaging volume
 *Zernio::InboxAnalyticsApi* | [**list_inbox_conversation_analytics**](docs/InboxAnalyticsApi.md#list_inbox_conversation_analytics) | **GET** /v1/analytics/inbox/conversations | List conversation analytics
+*Zernio::InstagramApi* | [**get_instagram_audio**](docs/InstagramApi.md#get_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio/{audioId} | Get Instagram audio metadata
 *Zernio::InstagramApi* | [**get_instagram_publishing_limit**](docs/InstagramApi.md#get_instagram_publishing_limit) | **GET** /v1/accounts/{accountId}/instagram/publishing-limit | Get Instagram publishing limit
 *Zernio::InstagramApi* | [**get_instagram_story_insights**](docs/InstagramApi.md#get_instagram_story_insights) | **GET** /v1/accounts/{accountId}/instagram/stories/{storyId}/insights | Get Instagram story insights
 *Zernio::InstagramApi* | [**list_instagram_stories**](docs/InstagramApi.md#list_instagram_stories) | **GET** /v1/accounts/{accountId}/instagram/stories | List active Instagram stories
+*Zernio::InstagramApi* | [**search_instagram_audio**](docs/InstagramApi.md#search_instagram_audio) | **GET** /v1/accounts/{accountId}/instagram/audio | Search Instagram audio
 *Zernio::InvitesApi* | [**create_invite_token**](docs/InvitesApi.md#create_invite_token) | **POST** /v1/invite/tokens | Create invite token
 *Zernio::LeadGenApi* | [**archive_lead_form**](docs/LeadGenApi.md#archive_lead_form) | **DELETE** /v1/ads/lead-forms/{formId} | Archive a lead form
 *Zernio::LeadGenApi* | [**create_lead_form**](docs/LeadGenApi.md#create_lead_form) | **POST** /v1/ads/lead-forms | Create a lead form
@@ -1209,6 +1211,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInboxVolume200ResponseTimeseriesInner](docs/GetInboxVolume200ResponseTimeseriesInner.md)
  - [Zernio::GetInboxVolume400Response](docs/GetInboxVolume400Response.md)
  - [Zernio::GetInstagramAccountInsights404Response](docs/GetInstagramAccountInsights404Response.md)
+ - [Zernio::GetInstagramAudio200Response](docs/GetInstagramAudio200Response.md)
  - [Zernio::GetInstagramFollowStatus200Response](docs/GetInstagramFollowStatus200Response.md)
  - [Zernio::GetInstagramPublishingLimit200Response](docs/GetInstagramPublishingLimit200Response.md)
  - [Zernio::GetInstagramStoryInsights200Response](docs/GetInstagramStoryInsights200Response.md)
@@ -1399,9 +1402,11 @@ Class | Method | HTTP request | Description
  - [Zernio::InstagramAccountInsightsResponseMetricsValueBreakdownsInner](docs/InstagramAccountInsightsResponseMetricsValueBreakdownsInner.md)
  - [Zernio::InstagramAccountInsightsResponseMetricsValueValuesInner](docs/InstagramAccountInsightsResponseMetricsValueValuesInner.md)
  - [Zernio::InstagramAccountInsightsResponseUnavailableMetricsInner](docs/InstagramAccountInsightsResponseUnavailableMetricsInner.md)
+ - [Zernio::InstagramAudioAsset](docs/InstagramAudioAsset.md)
  - [Zernio::InstagramDemographicsResponse](docs/InstagramDemographicsResponse.md)
  - [Zernio::InstagramDemographicsResponseDemographicsValueInner](docs/InstagramDemographicsResponseDemographicsValueInner.md)
  - [Zernio::InstagramPlatformData](docs/InstagramPlatformData.md)
+ - [Zernio::InstagramPlatformDataAudioConfiguration](docs/InstagramPlatformDataAudioConfiguration.md)
  - [Zernio::InstagramPlatformDataTrialParams](docs/InstagramPlatformDataTrialParams.md)
  - [Zernio::InstagramPlatformDataUserTagsInner](docs/InstagramPlatformDataUserTagsInner.md)
  - [Zernio::LikeInboxComment200Response](docs/LikeInboxComment200Response.md)
@@ -1756,6 +1761,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SearchInboxConversations200ResponseMeta](docs/SearchInboxConversations200ResponseMeta.md)
  - [Zernio::SearchInboxConversations200ResponseMetaAccountsSkippedInner](docs/SearchInboxConversations200ResponseMetaAccountsSkippedInner.md)
  - [Zernio::SearchInboxConversations200ResponseMetaFailedAccountsInner](docs/SearchInboxConversations200ResponseMetaFailedAccountsInner.md)
+ - [Zernio::SearchInstagramAudio200Response](docs/SearchInstagramAudio200Response.md)
  - [Zernio::SearchReddit200Response](docs/SearchReddit200Response.md)
  - [Zernio::SearchTweets200Response](docs/SearchTweets200Response.md)
  - [Zernio::SearchTweets200ResponseMeta](docs/SearchTweets200ResponseMeta.md)
