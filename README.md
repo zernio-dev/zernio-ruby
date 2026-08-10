@@ -888,6 +888,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestPlacementAssetsRulesInner](docs/CreateStandaloneAdRequestPlacementAssetsRulesInner.md)
  - [Zernio::CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements](docs/CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.md)
  - [Zernio::CreateStandaloneAdRequestPlacements](docs/CreateStandaloneAdRequestPlacements.md)
+ - [Zernio::CreateStandaloneAdRequestPlatformSpecificData](docs/CreateStandaloneAdRequestPlatformSpecificData.md)
  - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
  - [Zernio::CreateStandaloneAdRequestTracking](docs/CreateStandaloneAdRequestTracking.md)
