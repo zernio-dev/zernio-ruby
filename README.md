@@ -1956,6 +1956,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdRequestCreative](docs/UpdateAdRequestCreative.md)
  - [Zernio::UpdateAdRequestTargeting](docs/UpdateAdRequestTargeting.md)
  - [Zernio::UpdateAdRequestTargetingInterestsInner](docs/UpdateAdRequestTargetingInterestsInner.md)
+ - [Zernio::UpdateAdRequestTargetingKeywordsInner](docs/UpdateAdRequestTargetingKeywordsInner.md)
+ - [Zernio::UpdateAdRequestTargetingKeywordsInnerOneOf](docs/UpdateAdRequestTargetingKeywordsInnerOneOf.md)
  - [Zernio::UpdateAdSet200Response](docs/UpdateAdSet200Response.md)
  - [Zernio::UpdateAdSetRequest](docs/UpdateAdSetRequest.md)
  - [Zernio::UpdateAdSetRequestBudget](docs/UpdateAdSetRequestBudget.md)

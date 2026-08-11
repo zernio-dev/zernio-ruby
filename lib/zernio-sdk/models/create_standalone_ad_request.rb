@@ -198,8 +198,11 @@ module Zernio
     # Google only
     attr_accessor :campaign_type
 
-    # Google Search only
+    # Google Search only. BROAD-match keywords on the new ad group (first 20).
     attr_accessor :keywords
+
+    # Google Search only; other platforms return 400. BROAD-match negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords.
+    attr_accessor :negative_keywords
 
     # Google Search RSA only. Extra headlines.
     attr_accessor :additional_headlines
@@ -337,6 +340,7 @@ module Zernio
         :'audience_id' => :'audienceId',
         :'campaign_type' => :'campaignType',
         :'keywords' => :'keywords',
+        :'negative_keywords' => :'negativeKeywords',
         :'additional_headlines' => :'additionalHeadlines',
         :'additional_descriptions' => :'additionalDescriptions',
         :'advantage_audience' => :'advantageAudience',
@@ -435,6 +439,7 @@ module Zernio
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
         :'keywords' => :'Array<String>',
+        :'negative_keywords' => :'Array<String>',
         :'additional_headlines' => :'Array<String>',
         :'additional_descriptions' => :'Array<String>',
         :'advantage_audience' => :'Integer',
@@ -781,6 +786,12 @@ module Zernio
       if attributes.key?(:'keywords')
         if (value = attributes[:'keywords']).is_a?(Array)
           self.keywords = value
+        end
+      end
+
+      if attributes.key?(:'negative_keywords')
+        if (value = attributes[:'negative_keywords']).is_a?(Array)
+          self.negative_keywords = value
         end
       end
 
@@ -1473,6 +1484,7 @@ module Zernio
           audience_id == o.audience_id &&
           campaign_type == o.campaign_type &&
           keywords == o.keywords &&
+          negative_keywords == o.negative_keywords &&
           additional_headlines == o.additional_headlines &&
           additional_descriptions == o.additional_descriptions &&
           advantage_audience == o.advantage_audience &&
@@ -1500,7 +1512,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
     end
 
     # Builds the object from hash

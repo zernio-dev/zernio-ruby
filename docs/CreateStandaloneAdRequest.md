@@ -69,7 +69,8 @@
 | **placement_assets** | [**CreateStandaloneAdRequestPlacementAssets**](CreateStandaloneAdRequestPlacementAssets.md) |  | [optional] |
 | **audience_id** | **String** | Custom audience ID for targeting | [optional] |
 | **campaign_type** | **String** | Google only | [optional][default to &#39;display&#39;] |
-| **keywords** | **Array&lt;String&gt;** | Google Search only | [optional] |
+| **keywords** | **Array&lt;String&gt;** | Google Search only. BROAD-match keywords on the new ad group (first 20). | [optional] |
+| **negative_keywords** | **Array&lt;String&gt;** | Google Search only; other platforms return 400. BROAD-match negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords. | [optional] |
 | **additional_headlines** | **Array&lt;String&gt;** | Google Search RSA only. Extra headlines. | [optional] |
 | **additional_descriptions** | **Array&lt;String&gt;** | Google Search RSA only. Extra descriptions. | [optional] |
 | **advantage_audience** | **Integer** | Meta only. Controls the Advantage audience feature (targeting_automation). 0 &#x3D; disabled (default), 1 &#x3D; enabled. Meta Marketing API requires this field on all ad set creation requests. | [optional] |
@@ -159,6 +160,7 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   audience_id: null,
   campaign_type: null,
   keywords: null,
+  negative_keywords: null,
   additional_headlines: null,
   additional_descriptions: null,
   advantage_audience: null,

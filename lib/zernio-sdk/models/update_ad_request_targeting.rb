@@ -14,8 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta + TikTok only. Pinterest / X / LinkedIn / Google return 501. 
+  # Meta + TikTok (demographics/interests) and Google (keyword edits only). Pinterest / X / LinkedIn return 501. 
   class UpdateAdRequestTargeting < ApiModelBase
+    # Google only. The FULL new set of positive keywords for the ad group; live keywords not listed are removed. Entries are strings (BROAD) or { text, matchType } with matchType exact | phrase | broad. Mirrored to GET /v1/ads/keywords immediately.
+    attr_accessor :keywords
+
+    # Google only. Same declarative contract as keywords, for the ad group's negative keywords.
+    attr_accessor :negative_keywords
+
     attr_accessor :age_min
 
     attr_accessor :age_max
@@ -53,6 +59,8 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'keywords' => :'keywords',
+        :'negative_keywords' => :'negativeKeywords',
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
         :'countries' => :'countries',
@@ -74,6 +82,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'keywords' => :'Array<UpdateAdRequestTargetingKeywordsInner>',
+        :'negative_keywords' => :'Array<UpdateAdRequestTargetingKeywordsInner>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'countries' => :'Array<String>',
@@ -103,6 +113,18 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'keywords')
+        if (value = attributes[:'keywords']).is_a?(Array)
+          self.keywords = value
+        end
+      end
+
+      if attributes.key?(:'negative_keywords')
+        if (value = attributes[:'negative_keywords']).is_a?(Array)
+          self.negative_keywords = value
+        end
+      end
 
       if attributes.key?(:'age_min')
         self.age_min = attributes[:'age_min']
@@ -217,6 +239,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          keywords == o.keywords &&
+          negative_keywords == o.negative_keywords &&
           age_min == o.age_min &&
           age_max == o.age_max &&
           countries == o.countries &&
@@ -233,7 +257,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [age_min, age_max, countries, interests, advantage_audience].hash
+      [keywords, negative_keywords, age_min, age_max, countries, interests, advantage_audience].hash
     end
 
     # Builds the object from hash
