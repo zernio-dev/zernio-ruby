@@ -53,6 +53,27 @@ module Zernio
     # Return on ad spend — derived as `purchaseValue / spend`. 0 when `spend` is 0. Equivalent to Meta's `purchase_roas` under default attribution. At ad-set and campaign levels this is recomputed from summed purchaseValue + spend (NOT averaged across children) so it's mathematically correct at every rollup level.
     attr_accessor :roas
 
+    # Derived `spend / actions[type]` for every action type with a non-zero count, in ad-account native currency. Same keys as `actions`. Rounded to 4 decimals because cheap actions cost well under a cent. Recomputed from summed spend + counts at every rollup level. Empty object when spend is 0 or no actions are reported.
+    attr_accessor :cost_per_action
+
+    # Clicks leading off Meta's surfaces to the advertiser's destination. Meta-only; other platforms report 0.
+    attr_accessor :outbound_clicks
+
+    # Derived `outboundClicks / impressions * 100`, recomputed from sums at every rollup level.
+    attr_accessor :outbound_clicks_ctr
+
+    # In-session link clicks. Differs from the attributed `link_click` count in `actions`/`engagementBreakdown.linkClicks`, which uses the attribution window. Meta-only.
+    attr_accessor :inline_link_clicks
+
+    # Derived `inlineLinkClicks / impressions * 100`, recomputed from sums at every rollup level.
+    attr_accessor :inline_link_click_ctr
+
+    # People who clicked at least once. NOT additive: summed across days/children it overcounts people who clicked on multiple days or ads, so treat rollups as an upper bound (same caveat as `reach`). Meta-only.
+    attr_accessor :unique_clicks
+
+    # Derived `uniqueClicks / impressions * 100` (NOT Meta's reach-based unique_ctr). Inherits the non-additivity caveat of `uniqueClicks`.
+    attr_accessor :unique_ctr
+
     # Number of times the video started playing, summed over the date range and across children at ad-set/campaign level. 0 for non-video ads. Sources: Meta `video_play_actions`, TikTok `video_play_actions`.
     attr_accessor :video_play_actions
 
@@ -107,6 +128,13 @@ module Zernio
         :'action_values' => :'actionValues',
         :'purchase_value' => :'purchaseValue',
         :'roas' => :'roas',
+        :'cost_per_action' => :'costPerAction',
+        :'outbound_clicks' => :'outboundClicks',
+        :'outbound_clicks_ctr' => :'outboundClicksCtr',
+        :'inline_link_clicks' => :'inlineLinkClicks',
+        :'inline_link_click_ctr' => :'inlineLinkClickCtr',
+        :'unique_clicks' => :'uniqueClicks',
+        :'unique_ctr' => :'uniqueCtr',
         :'video_play_actions' => :'videoPlayActions',
         :'video30_sec_watched_actions' => :'video30SecWatchedActions',
         :'video_thruplay_watched_actions' => :'videoThruplayWatchedActions',
@@ -150,6 +178,13 @@ module Zernio
         :'action_values' => :'Hash<String, Float>',
         :'purchase_value' => :'Float',
         :'roas' => :'Float',
+        :'cost_per_action' => :'Hash<String, Float>',
+        :'outbound_clicks' => :'Integer',
+        :'outbound_clicks_ctr' => :'Float',
+        :'inline_link_clicks' => :'Integer',
+        :'inline_link_click_ctr' => :'Float',
+        :'unique_clicks' => :'Integer',
+        :'unique_ctr' => :'Float',
         :'video_play_actions' => :'Integer',
         :'video30_sec_watched_actions' => :'Integer',
         :'video_thruplay_watched_actions' => :'Integer',
@@ -248,6 +283,36 @@ module Zernio
         self.roas = attributes[:'roas']
       end
 
+      if attributes.key?(:'cost_per_action')
+        if (value = attributes[:'cost_per_action']).is_a?(Hash)
+          self.cost_per_action = value
+        end
+      end
+
+      if attributes.key?(:'outbound_clicks')
+        self.outbound_clicks = attributes[:'outbound_clicks']
+      end
+
+      if attributes.key?(:'outbound_clicks_ctr')
+        self.outbound_clicks_ctr = attributes[:'outbound_clicks_ctr']
+      end
+
+      if attributes.key?(:'inline_link_clicks')
+        self.inline_link_clicks = attributes[:'inline_link_clicks']
+      end
+
+      if attributes.key?(:'inline_link_click_ctr')
+        self.inline_link_click_ctr = attributes[:'inline_link_click_ctr']
+      end
+
+      if attributes.key?(:'unique_clicks')
+        self.unique_clicks = attributes[:'unique_clicks']
+      end
+
+      if attributes.key?(:'unique_ctr')
+        self.unique_ctr = attributes[:'unique_ctr']
+      end
+
       if attributes.key?(:'video_play_actions')
         self.video_play_actions = attributes[:'video_play_actions']
       end
@@ -335,6 +400,13 @@ module Zernio
           action_values == o.action_values &&
           purchase_value == o.purchase_value &&
           roas == o.roas &&
+          cost_per_action == o.cost_per_action &&
+          outbound_clicks == o.outbound_clicks &&
+          outbound_clicks_ctr == o.outbound_clicks_ctr &&
+          inline_link_clicks == o.inline_link_clicks &&
+          inline_link_click_ctr == o.inline_link_click_ctr &&
+          unique_clicks == o.unique_clicks &&
+          unique_ctr == o.unique_ctr &&
           video_play_actions == o.video_play_actions &&
           video30_sec_watched_actions == o.video30_sec_watched_actions &&
           video_thruplay_watched_actions == o.video_thruplay_watched_actions &&
@@ -359,7 +431,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, action_values, purchase_value, roas, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video_avg_time_watched_actions, cost_per_thruplay, funnel, engagement_breakdown, last_synced_at].hash
+      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, action_values, purchase_value, roas, cost_per_action, outbound_clicks, outbound_clicks_ctr, inline_link_clicks, inline_link_click_ctr, unique_clicks, unique_ctr, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video_avg_time_watched_actions, cost_per_thruplay, funnel, engagement_breakdown, last_synced_at].hash
     end
 
     # Builds the object from hash

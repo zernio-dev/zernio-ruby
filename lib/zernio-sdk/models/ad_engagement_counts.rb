@@ -40,7 +40,7 @@ module Zernio
     # 3-second video views (`video_view`). For completion-based counts use `videoThruplayWatchedActions`.
     attr_accessor :video_views
 
-    # Attributed link clicks (`link_click`). This is the attribution-window count, which differs from the in-session `inline_link_clicks` reported by `GET /v1/ads/{adId}/analytics`.
+    # Attributed link clicks (`link_click`). This is the attribution-window count, which differs from the in-session count in the sibling `inlineLinkClicks` field.
     attr_accessor :link_clicks
 
     # Attribute mapping from ruby-style variable name to JSON key.
