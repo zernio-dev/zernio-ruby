@@ -34,9 +34,6 @@ module Zernio
     # Media type (e.g. image, video, carousel)
     attr_accessor :media_type
 
-    # Primary media URL
-    attr_accessor :media_url
-
     # Thumbnail URL
     attr_accessor :thumbnail_url
 
@@ -54,7 +51,6 @@ module Zernio
         :'content' => :'content',
         :'published_at' => :'publishedAt',
         :'media_type' => :'mediaType',
-        :'media_url' => :'mediaUrl',
         :'thumbnail_url' => :'thumbnailUrl',
         :'media_items' => :'mediaItems',
         :'analytics' => :'analytics'
@@ -80,7 +76,6 @@ module Zernio
         :'content' => :'String',
         :'published_at' => :'Time',
         :'media_type' => :'String',
-        :'media_url' => :'String',
         :'thumbnail_url' => :'String',
         :'media_items' => :'Array<Object>',
         :'analytics' => :'ExternalPostSummaryAnalytics'
@@ -133,10 +128,6 @@ module Zernio
         self.media_type = attributes[:'media_type']
       end
 
-      if attributes.key?(:'media_url')
-        self.media_url = attributes[:'media_url']
-      end
-
       if attributes.key?(:'thumbnail_url')
         self.thumbnail_url = attributes[:'thumbnail_url']
       end
@@ -178,7 +169,6 @@ module Zernio
           content == o.content &&
           published_at == o.published_at &&
           media_type == o.media_type &&
-          media_url == o.media_url &&
           thumbnail_url == o.thumbnail_url &&
           media_items == o.media_items &&
           analytics == o.analytics
@@ -193,7 +183,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, platform_post_id, platform_post_url, content, published_at, media_type, media_url, thumbnail_url, media_items, analytics].hash
+      [platform, platform_post_id, platform_post_url, content, published_at, media_type, thumbnail_url, media_items, analytics].hash
     end
 
     # Builds the object from hash
