@@ -837,8 +837,10 @@ module Zernio
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
     # @option opts [String] :campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads.
-    # @option opts [Date] :from_date Start of the METRICS date range (YYYY-MM-DD). Affects only the spend/impression numbers overlaid on each node, NOT which campaigns are returned. Defaults to 90 days ago.
+    # @option opts [Date] :from_date Start of the METRICS date range (YYYY-MM-DD). On its own it affects only the spend/impression numbers overlaid on each node, not which campaigns are returned — pass &#x60;hasDelivery&#x60; or &#x60;minSpend&#x60; to also filter the campaign set to this window. Defaults to 90 days ago.
     # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+    # @option opts [Boolean] :has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window, so a campaign that spent then and is paused today is still returned. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns.
+    # @option opts [Float] :min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount. Expressed in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign node): spend is stored per ad account in its native currency and one response can span several. Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter.
     # @option opts [String] :sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (default to 'newest')
     # @option opts [Integer] :time_increment Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it.
     # @option opts [String] :daily_level Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest — a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset. (default to 'campaign')
@@ -861,8 +863,10 @@ module Zernio
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
     # @option opts [String] :campaign_id Restrict the tree to a single campaign by its platform campaign id (the id the platform assigns, e.g. Meta&#39;s numeric campaign id). Filters the campaign set itself, so it works regardless of account size and pagination — pass this when you already hold a campaign id instead of paging the tree to find it. Mirrors the &#x60;campaignId&#x60; filter on GET /v1/ads.
-    # @option opts [Date] :from_date Start of the METRICS date range (YYYY-MM-DD). Affects only the spend/impression numbers overlaid on each node, NOT which campaigns are returned. Defaults to 90 days ago.
+    # @option opts [Date] :from_date Start of the METRICS date range (YYYY-MM-DD). On its own it affects only the spend/impression numbers overlaid on each node, not which campaigns are returned — pass &#x60;hasDelivery&#x60; or &#x60;minSpend&#x60; to also filter the campaign set to this window. Defaults to 90 days ago.
     # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
+    # @option opts [Boolean] :has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window, so a campaign that spent then and is paused today is still returned. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns.
+    # @option opts [Float] :min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount. Expressed in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign node): spend is stored per ad account in its native currency and one response can span several. Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter.
     # @option opts [String] :sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end. (default to 'newest')
     # @option opts [Integer] :time_increment Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it.
     # @option opts [String] :daily_level Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest — a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset. (default to 'campaign')
@@ -891,6 +895,10 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
+      if @api_client.config.client_side_validation && !opts[:'min_spend'].nil? && opts[:'min_spend'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"min_spend"]" when calling AdCampaignsApi.get_ad_tree, must be greater than or equal to 0.'
+      end
+
       allowable_values = ["newest", "oldest", "spend_desc", "spend_asc"]
       if @api_client.config.client_side_validation && opts[:'sort'] && !allowable_values.include?(opts[:'sort'])
         fail ArgumentError, "invalid value for \"sort\", must be one of #{allowable_values}"
@@ -920,6 +928,8 @@ module Zernio
       query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'hasDelivery'] = opts[:'has_delivery'] if !opts[:'has_delivery'].nil?
+      query_params[:'minSpend'] = opts[:'min_spend'] if !opts[:'min_spend'].nil?
       query_params[:'sort'] = opts[:'sort'] if !opts[:'sort'].nil?
       query_params[:'timeIncrement'] = opts[:'time_increment'] if !opts[:'time_increment'].nil?
       query_params[:'dailyLevel'] = opts[:'daily_level'] if !opts[:'daily_level'].nil?
@@ -1053,6 +1063,8 @@ module Zernio
     # @option opts [String] :profile_id Profile ID
     # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted.
     # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range.
+    # @option opts [Boolean] :has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. Mirrors the same filter on /v1/ads/tree.
+    # @option opts [Float] :min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount, in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign). Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. Mirrors the same filter on /v1/ads/tree.
     # @return [ListAdCampaigns200Response]
     def list_ad_campaigns(opts = {})
       data, _status_code, _headers = list_ad_campaigns_with_http_info(opts)
@@ -1074,6 +1086,8 @@ module Zernio
     # @option opts [String] :profile_id Profile ID
     # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD, inclusive). Defaults to 90 days ago when both date params are omitted.
     # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD, inclusive). Defaults to today. Max 730-day range.
+    # @option opts [Boolean] :has_delivery Return only campaigns that delivered between &#x60;fromDate&#x60; and &#x60;toDate&#x60; — spend above zero, or impressions served at zero spend. Unlike &#x60;status&#x60;, which reads a campaign&#39;s CURRENT state, this filters on what happened inside the window. Filters the campaign set itself, so &#x60;pagination.total&#x60; counts only matching campaigns. Mirrors the same filter on /v1/ads/tree.
+    # @option opts [Float] :min_spend Return only campaigns whose spend between &#x60;fromDate&#x60; and &#x60;toDate&#x60; reaches this amount, in each campaign&#39;s OWN currency (the &#x60;currency&#x60; field on the campaign). Implies &#x60;hasDelivery&#x60;; &#x60;minSpend&#x3D;0&#x60; applies no filter. Mirrors the same filter on /v1/ads/tree.
     # @return [Array<(ListAdCampaigns200Response, Integer, Hash)>] ListAdCampaigns200Response data, response status code and response headers
     def list_ad_campaigns_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1099,6 +1113,10 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
         fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
+      if @api_client.config.client_side_validation && !opts[:'min_spend'].nil? && opts[:'min_spend'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"min_spend"]" when calling AdCampaignsApi.list_ad_campaigns, must be greater than or equal to 0.'
+      end
+
       # resource path
       local_var_path = '/v1/ads/campaigns'
 
@@ -1116,6 +1134,8 @@ module Zernio
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'fromDate'] = opts[:'from_date'] if !opts[:'from_date'].nil?
       query_params[:'toDate'] = opts[:'to_date'] if !opts[:'to_date'].nil?
+      query_params[:'hasDelivery'] = opts[:'has_delivery'] if !opts[:'has_delivery'].nil?
+      query_params[:'minSpend'] = opts[:'min_spend'] if !opts[:'min_spend'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
