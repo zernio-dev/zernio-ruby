@@ -247,6 +247,9 @@ module Zernio
     # TikTok only. Forces the identity attribution on the ad:    - `TT_USER`: the posting account's open_id (real @username     branding). Requires a connected TikTok posting account     on the same profile.   - `CUSTOMIZED_USER`: synthetic Brand Identity (display     name + avatar). Requires a configured Brand Identity     (cached on the `tiktokads` SocialAccount via     `PATCH /v1/connect/tiktok-ads`) or an inline     `brandIdentity` to create one on the fly.  When omitted, defaults to `TT_USER` if a posting account is connected on this profile, else `CUSTOMIZED_USER`. Spark Ads (`POST /v1/ads/boost`) always use `TT_USER` regardless of this field — TikTok requires the original organic post's author identity for Spark. 
     attr_accessor :identity_type
 
+    # TikTok only. Creates the ad as a TikTok Upgraded Smart+ campaign: TikTok automates targeting, bidding and delivery. Supports goals `conversions` (Smart+ Web Conversions), `lead_generation` (Smart+ Lead Generation with a website form on `linkUrl`; TikTok Instant Forms not supported) and `app_promotion` (Smart+ App installs; the ad's destination is the app store, so `linkUrl` is not used). The web goals require `promotedObject.pixelId` AND `promotedObject.customEventType`; `app_promotion` requires `promotedObject.applicationId` instead. Targeting works like on any TikTok ad (defaults to `countries: [\"US\"]` when omitted); TikTok automates delivery within it. The budget lives on the Smart+ campaign (Campaign Budget Optimization); a `lifetime` budget additionally requires `endDate`. Cannot be combined with `adSetId`. 
+    attr_accessor :smart_plus
+
     attr_accessor :promoted_object
 
     class EnumAttributeValidator
@@ -356,6 +359,7 @@ module Zernio
         :'dsa_payor' => :'dsaPayor',
         :'brand_identity' => :'brandIdentity',
         :'identity_type' => :'identityType',
+        :'smart_plus' => :'smartPlus',
         :'promoted_object' => :'promotedObject'
       }
     end
@@ -455,6 +459,7 @@ module Zernio
         :'dsa_payor' => :'String',
         :'brand_identity' => :'CreateStandaloneAdRequestBrandIdentity',
         :'identity_type' => :'String',
+        :'smart_plus' => :'Boolean',
         :'promoted_object' => :'CreateStandaloneAdRequestPromotedObject'
       }
     end
@@ -861,6 +866,10 @@ module Zernio
 
       if attributes.key?(:'identity_type')
         self.identity_type = attributes[:'identity_type']
+      end
+
+      if attributes.key?(:'smart_plus')
+        self.smart_plus = attributes[:'smart_plus']
       end
 
       if attributes.key?(:'promoted_object')
@@ -1500,6 +1509,7 @@ module Zernio
           dsa_payor == o.dsa_payor &&
           brand_identity == o.brand_identity &&
           identity_type == o.identity_type &&
+          smart_plus == o.smart_plus &&
           promoted_object == o.promoted_object
     end
 
@@ -1512,7 +1522,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
     end
 
     # Builds the object from hash
