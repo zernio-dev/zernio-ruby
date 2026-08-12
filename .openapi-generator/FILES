@@ -1632,6 +1632,7 @@ docs/WebhookPayloadMessageMetadataReferral.md
 docs/WebhookPayloadMessageMetadataReferralAdsContextData.md
 docs/WebhookPayloadMessageMetadataReferredProduct.md
 docs/WebhookPayloadMessageMetadataStoryReply.md
+docs/WebhookPayloadMessageMetadataUnsupported.md
 docs/WebhookPayloadMessageSent.md
 docs/WebhookPayloadMessageSentMessage.md
 docs/WebhookPayloadMessageSentMessageAttachmentsInner.md
@@ -3337,6 +3338,7 @@ lib/zernio-sdk/models/webhook_payload_message_metadata_referral.rb
 lib/zernio-sdk/models/webhook_payload_message_metadata_referral_ads_context_data.rb
 lib/zernio-sdk/models/webhook_payload_message_metadata_referred_product.rb
 lib/zernio-sdk/models/webhook_payload_message_metadata_story_reply.rb
+lib/zernio-sdk/models/webhook_payload_message_metadata_unsupported.rb
 lib/zernio-sdk/models/webhook_payload_message_sent.rb
 lib/zernio-sdk/models/webhook_payload_message_sent_message.rb
 lib/zernio-sdk/models/webhook_payload_message_sent_message_attachments_inner.rb
@@ -5026,6 +5028,7 @@ spec/models/webhook_payload_message_metadata_referral_spec.rb
 spec/models/webhook_payload_message_metadata_referred_product_spec.rb
 spec/models/webhook_payload_message_metadata_spec.rb
 spec/models/webhook_payload_message_metadata_story_reply_spec.rb
+spec/models/webhook_payload_message_metadata_unsupported_spec.rb
 spec/models/webhook_payload_message_sent_message_attachments_inner_spec.rb
 spec/models/webhook_payload_message_sent_message_sender_spec.rb
 spec/models/webhook_payload_message_sent_message_spec.rb

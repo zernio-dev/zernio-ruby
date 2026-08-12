@@ -63,6 +63,8 @@ module Zernio
 
     attr_accessor :referral
 
+    attr_accessor :unsupported
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -104,7 +106,8 @@ module Zernio
         :'contacts_origin' => :'contactsOrigin',
         :'story_reply' => :'storyReply',
         :'is_story_mention' => :'isStoryMention',
-        :'referral' => :'referral'
+        :'referral' => :'referral',
+        :'unsupported' => :'unsupported'
       }
     end
 
@@ -137,7 +140,8 @@ module Zernio
         :'contacts_origin' => :'String',
         :'story_reply' => :'WebhookPayloadMessageMetadataStoryReply',
         :'is_story_mention' => :'Boolean',
-        :'referral' => :'WebhookPayloadMessageMetadataReferral'
+        :'referral' => :'WebhookPayloadMessageMetadataReferral',
+        :'unsupported' => :'WebhookPayloadMessageMetadataUnsupported'
       }
     end
 
@@ -234,6 +238,10 @@ module Zernio
       if attributes.key?(:'referral')
         self.referral = attributes[:'referral']
       end
+
+      if attributes.key?(:'unsupported')
+        self.unsupported = attributes[:'unsupported']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -296,7 +304,8 @@ module Zernio
           contacts_origin == o.contacts_origin &&
           story_reply == o.story_reply &&
           is_story_mention == o.is_story_mention &&
-          referral == o.referral
+          referral == o.referral &&
+          unsupported == o.unsupported
     end
 
     # @see the `==` method
@@ -308,7 +317,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quoted_message_id, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral].hash
+      [quoted_message_id, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported].hash
     end
 
     # Builds the object from hash

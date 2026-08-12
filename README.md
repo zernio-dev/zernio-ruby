@@ -2195,6 +2195,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadMessageMetadataReferralAdsContextData](docs/WebhookPayloadMessageMetadataReferralAdsContextData.md)
  - [Zernio::WebhookPayloadMessageMetadataReferredProduct](docs/WebhookPayloadMessageMetadataReferredProduct.md)
  - [Zernio::WebhookPayloadMessageMetadataStoryReply](docs/WebhookPayloadMessageMetadataStoryReply.md)
+ - [Zernio::WebhookPayloadMessageMetadataUnsupported](docs/WebhookPayloadMessageMetadataUnsupported.md)
  - [Zernio::WebhookPayloadMessageSent](docs/WebhookPayloadMessageSent.md)
  - [Zernio::WebhookPayloadMessageSentMessage](docs/WebhookPayloadMessageSentMessage.md)
  - [Zernio::WebhookPayloadMessageSentMessageAttachmentsInner](docs/WebhookPayloadMessageSentMessageAttachmentsInner.md)
