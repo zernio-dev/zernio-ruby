@@ -30,11 +30,11 @@ All URIs are relative to *https://zernio.com/api*
 
 ## boost_post
 
-> <UpdateAd200Response> boost_post(boost_post_request)
+> <UpdateAd200Response> boost_post(boost_post_request, opts)
 
 Boost post as ad
 
-Creates a paid ad from an existing published post, keeping the post's engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send `adSetId` to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns `budget`, `schedule` and `targeting`, and sending any of those alongside `adSetId` is a 400 rather than a silent drop. `budget` is required only without `adSetId`.  `instagramAccountId`, `destinationType` and `adSetId` are Meta-only and return 400 on other platforms. 
+Creates a paid ad from an existing published post, keeping the post's engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send `adSetId` to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns `budget`, `schedule` and `targeting`, and sending any of those alongside `adSetId` is a 400 rather than a silent drop. `budget` is required only without `adSetId`.  `instagramAccountId`, `destinationType` and `adSetId` are Meta-only and return 400 on other platforms.  **Retries.** Boosts are NOT idempotent and can take minutes when Meta requires re-hosting an Instagram video, so do not retry on client timeout. Send an Idempotency-Key header to make retries safe: same key and body replays the original 201, and distinct keys always create distinct ads. Without the header, an identical request is treated as a retry: while one is in flight it returns 409, and within 10 minutes of a completed boost it returns the already-created ad instead of creating another. To intentionally duplicate an ad, send distinct Idempotency-Keys (or vary the body, e.g. the name). 
 
 ### Examples
 
@@ -49,10 +49,13 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 boost_post_request = Zernio::BoostPostRequest.new({account_id: 'account_id_example', ad_account_id: 'ad_account_id_example', name: 'name_example', goal: 'engagement'}) # BoostPostRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
+}
 
 begin
   # Boost post as ad
-  result = api_instance.boost_post(boost_post_request)
+  result = api_instance.boost_post(boost_post_request, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->boost_post: #{e}"
@@ -63,12 +66,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAd200Response>, Integer, Hash)> boost_post_with_http_info(boost_post_request)
+> <Array(<UpdateAd200Response>, Integer, Hash)> boost_post_with_http_info(boost_post_request, opts)
 
 ```ruby
 begin
   # Boost post as ad
-  data, status_code, headers = api_instance.boost_post_with_http_info(boost_post_request)
+  data, status_code, headers = api_instance.boost_post_with_http_info(boost_post_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAd200Response>
@@ -82,6 +85,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **boost_post_request** | [**BoostPostRequest**](BoostPostRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 
 ### Return type
 
