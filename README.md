@@ -160,6 +160,8 @@ Class | Method | HTTP request | Description
 *Zernio::AdInsightsApi* | [**get_ad_insights_report**](docs/AdInsightsApi.md#get_ad_insights_report) | **GET** /v1/ads/insights/reports/{reportRunId} | Poll an async insights report run
 *Zernio::AdInsightsApi* | [**get_ads_search_terms**](docs/AdInsightsApi.md#get_ads_search_terms) | **GET** /v1/ads/search-terms | Google Ads search terms report
 *Zernio::AdInsightsApi* | [**get_campaign_analytics**](docs/AdInsightsApi.md#get_campaign_analytics) | **GET** /v1/ads/campaigns/{campaignId}/analytics | Get campaign analytics
+*Zernio::AdInsightsApi* | [**list_local_services_lead_conversations**](docs/AdInsightsApi.md#list_local_services_lead_conversations) | **GET** /v1/ads/local-services/leads/{leadId}/conversations | Conversations of a Local Services lead
+*Zernio::AdInsightsApi* | [**list_local_services_leads**](docs/AdInsightsApi.md#list_local_services_leads) | **GET** /v1/ads/local-services/leads | Google Local Services Ads leads
 *Zernio::AdInsightsApi* | [**query_ad_insights**](docs/AdInsightsApi.md#query_ad_insights) | **GET** /v1/ads/insights | Flexible live insights query
 *Zernio::AdTargetingApi* | [**estimate_ad_reach**](docs/AdTargetingApi.md#estimate_ad_reach) | **POST** /v1/ads/targeting/reach-estimate | Estimate audience reach
 *Zernio::AdTargetingApi* | [**get_linked_in_bid_pricing**](docs/AdTargetingApi.md#get_linked_in_bid_pricing) | **POST** /v1/ads/targeting/bid-pricing | Suggested bid and budget bounds
@@ -1542,6 +1544,13 @@ Class | Method | HTTP request | Description
  - [Zernio::ListLeads200ResponseLeadsInner](docs/ListLeads200ResponseLeadsInner.md)
  - [Zernio::ListLinkedInOrganizations200Response](docs/ListLinkedInOrganizations200Response.md)
  - [Zernio::ListLinkedInOrganizations200ResponseOrganizationsInner](docs/ListLinkedInOrganizations200ResponseOrganizationsInner.md)
+ - [Zernio::ListLocalServicesLeadConversations200Response](docs/ListLocalServicesLeadConversations200Response.md)
+ - [Zernio::ListLocalServicesLeadConversations200ResponseDataInner](docs/ListLocalServicesLeadConversations200ResponseDataInner.md)
+ - [Zernio::ListLocalServicesLeadConversations200ResponseDataInnerMessage](docs/ListLocalServicesLeadConversations200ResponseDataInnerMessage.md)
+ - [Zernio::ListLocalServicesLeadConversations200ResponseDataInnerPhoneCall](docs/ListLocalServicesLeadConversations200ResponseDataInnerPhoneCall.md)
+ - [Zernio::ListLocalServicesLeads200Response](docs/ListLocalServicesLeads200Response.md)
+ - [Zernio::ListLocalServicesLeads200ResponseDataInner](docs/ListLocalServicesLeads200ResponseDataInner.md)
+ - [Zernio::ListLocalServicesLeads200ResponseDataInnerContact](docs/ListLocalServicesLeads200ResponseDataInnerContact.md)
  - [Zernio::ListLogs200Response](docs/ListLogs200Response.md)
  - [Zernio::ListLogs200ResponseLogsInner](docs/ListLogs200ResponseLogsInner.md)
  - [Zernio::ListLogs200ResponsePagination](docs/ListLogs200ResponsePagination.md)
