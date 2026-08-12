@@ -363,7 +363,7 @@ end
 
 List contacts
 
-List and search contacts for a profile. Supports filtering by tags, platform, subscription status, and full-text search.
+List and search contacts for a profile. Supports filtering by tags, platform, subscription status, and text search on name, email and company.
 
 ### Examples
 
@@ -380,7 +380,7 @@ api_instance = Zernio::ContactsApi.new
 opts = {
   profile_id: 'profile_id_example', # String | Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead.
   account_id: 'account_id_example', # String | Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list.
-  search: 'search_example', # String | 
+  search: 'search_example', # String | Case-insensitive substring match on the contact name, email and company. Phone numbers and other platform identifiers are not matched: they live on the contact channel, not on the contact. To reach a contact from an inbox webhook, use the conversation.contactId it already carries.
   tag: 'tag_example', # String | 
   tags: 'tags_example', # String | Comma-separated tags, matches contacts carrying any of them
   platform: 'instagram', # String | 
@@ -422,7 +422,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **profile_id** | **String** | Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead. | [optional] |
 | **account_id** | **String** | Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list. | [optional] |
-| **search** | **String** |  | [optional] |
+| **search** | **String** | Case-insensitive substring match on the contact name, email and company. Phone numbers and other platform identifiers are not matched: they live on the contact channel, not on the contact. To reach a contact from an inbox webhook, use the conversation.contactId it already carries. | [optional] |
 | **tag** | **String** |  | [optional] |
 | **tags** | **String** | Comma-separated tags, matches contacts carrying any of them | [optional] |
 | **platform** | **String** |  | [optional] |

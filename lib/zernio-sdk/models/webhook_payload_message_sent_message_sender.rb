@@ -17,7 +17,7 @@ module Zernio
   class WebhookPayloadMessageSentMessageSender < ApiModelBase
     attr_accessor :id
 
-    # Zernio CRM Contact id for this sender, when one exists.
+    # Always omitted on this event: the sender is the business, not a contact. Use conversation.contactId to join back to the CRM Contact.
     attr_accessor :contact_id
 
     attr_accessor :name

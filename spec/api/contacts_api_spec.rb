@@ -94,11 +94,11 @@ describe 'ContactsApi' do
 
   # unit tests for list_contacts
   # List contacts
-  # List and search contacts for a profile. Supports filtering by tags, platform, subscription status, and full-text search.
+  # List and search contacts for a profile. Supports filtering by tags, platform, subscription status, and text search on name, email and company.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :profile_id Filter by profile. Omit to list across all profiles. Matches the profile recorded on the contact itself, which is set when the contact is created and is independent of the profile its account currently belongs to. Filter by accountId to list a contact through its channel instead.
   # @option opts [String] :account_id Filter by the SocialAccount that owns the contact channel. Contacts are resolved through their channels, so the profileId contact filter is not applied while accountId is set. A profileId sent alongside is still access-checked and still scopes the returned filters.tags list.
-  # @option opts [String] :search 
+  # @option opts [String] :search Case-insensitive substring match on the contact name, email and company. Phone numbers and other platform identifiers are not matched: they live on the contact channel, not on the contact. To reach a contact from an inbox webhook, use the conversation.contactId it already carries.
   # @option opts [String] :tag 
   # @option opts [String] :tags Comma-separated tags, matches contacts carrying any of them
   # @option opts [String] :platform 
