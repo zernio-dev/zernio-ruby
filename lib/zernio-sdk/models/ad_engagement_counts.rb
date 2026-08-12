@@ -14,21 +14,21 @@ require 'date'
 require 'time'
 
 module Zernio
-  # The single `engagement` total split into the interactions behind it.  Note that `engagement` is not the sum of these: Meta's own `post_engagement` and `page_engagement` totals already contain the individual interactions, and all of them are counted into `engagement`. Use these fields when you need a specific interaction, and `engagement` only as the coarse total it has always been.  Meta-only; other platforms leave these at 0. 
+  # The single `engagement` total split into the interactions behind it.  Note that `engagement` is not the sum of these: Meta's own `post_engagement` and `page_engagement` totals already contain the individual interactions, and all of them are counted into `engagement`. Use these fields when you need a specific interaction, and `engagement` only as the coarse total it has always been.  Populated for Meta and, since 2026-08, TikTok (`reactions` = paid likes, `comments`, `shares`; TikTok's `follow` count lives in `actions.follow`, not here). Other platforms leave these at 0. TikTok history note: paused TikTok ads are not re-synced, so campaigns that ended before the rollout keep 0s here. 
   class AdEngagementCounts < ApiModelBase
-    # Meta's own post-engagement total (`post_engagement`).
+    # Meta's own post-engagement total (`post_engagement`). Meta-only.
     attr_accessor :post_engagement
 
-    # Meta's own page-engagement total (`page_engagement`).
+    # Meta's own page-engagement total (`page_engagement`). Meta-only.
     attr_accessor :page_engagement
 
-    # Reactions on the ad's post (`post_reaction`).
+    # Reactions on the ad's post (`post_reaction`). For TikTok these are its paid likes.
     attr_accessor :reactions
 
     # Comments on the ad's post.
     attr_accessor :comments
 
-    # Shares of the ad's post. Meta reports these under the action type literally named `post`.
+    # Shares of the ad's post. Meta reports these under the action type literally named `post`; TikTok under `share`.
     attr_accessor :shares
 
     # Saves of the ad's post (`onsite_conversion.post_save`).
