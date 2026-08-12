@@ -223,7 +223,7 @@ end
 
 ## get_ad_analytics
 
-> <GetAdAnalytics200Response> get_ad_analytics(ad_id, opts)
+> <AdAnalyticsResponse> get_ad_analytics(ad_id, opts)
 
 Get ad analytics
 
@@ -261,7 +261,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetAdAnalytics200Response>, Integer, Hash)> get_ad_analytics_with_http_info(ad_id, opts)
+> <Array(<AdAnalyticsResponse>, Integer, Hash)> get_ad_analytics_with_http_info(ad_id, opts)
 
 ```ruby
 begin
@@ -269,7 +269,7 @@ begin
   data, status_code, headers = api_instance.get_ad_analytics_with_http_info(ad_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetAdAnalytics200Response>
+  p data # => <AdAnalyticsResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling AdInsightsApi->get_ad_analytics_with_http_info: #{e}"
 end
@@ -286,7 +286,7 @@ end
 
 ### Return type
 
-[**GetAdAnalytics200Response**](GetAdAnalytics200Response.md)
+[**AdAnalyticsResponse**](AdAnalyticsResponse.md)
 
 ### Authorization
 
@@ -460,7 +460,7 @@ end
 
 ## get_campaign_analytics
 
-> <GetCampaignAnalytics200Response> get_campaign_analytics(campaign_id, opts)
+> <CampaignAnalyticsResponse> get_campaign_analytics(campaign_id, opts)
 
 Get campaign analytics
 
@@ -499,7 +499,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetCampaignAnalytics200Response>, Integer, Hash)> get_campaign_analytics_with_http_info(campaign_id, opts)
+> <Array(<CampaignAnalyticsResponse>, Integer, Hash)> get_campaign_analytics_with_http_info(campaign_id, opts)
 
 ```ruby
 begin
@@ -507,7 +507,7 @@ begin
   data, status_code, headers = api_instance.get_campaign_analytics_with_http_info(campaign_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetCampaignAnalytics200Response>
+  p data # => <CampaignAnalyticsResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling AdInsightsApi->get_campaign_analytics_with_http_info: #{e}"
 end
@@ -525,7 +525,7 @@ end
 
 ### Return type
 
-[**GetCampaignAnalytics200Response**](GetCampaignAnalytics200Response.md)
+[**CampaignAnalyticsResponse**](CampaignAnalyticsResponse.md)
 
 ### Authorization
 

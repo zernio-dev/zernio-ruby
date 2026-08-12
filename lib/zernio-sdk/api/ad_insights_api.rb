@@ -230,7 +230,7 @@ module Zernio
     # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
     # @option opts [String] :breakdowns Comma-separated breakdown dimensions.  **Meta**: age, gender, country, publisher_platform, device_platform, region.  **TikTok**: gender, age, country_code, platform, ac, language.  **LinkedIn** (firmographics): job_title, job_function, seniority, industry, company, company_size, country, region. Rows carry the raw pivot &#x60;value&#x60; plus a resolved &#x60;name&#x60;. LinkedIn serves these aggregated over the whole range, delays the data 12-24h, and omits segments with fewer than 3 events. 
-    # @return [GetAdAnalytics200Response]
+    # @return [AdAnalyticsResponse]
     def get_ad_analytics(ad_id, opts = {})
       data, _status_code, _headers = get_ad_analytics_with_http_info(ad_id, opts)
       data
@@ -243,7 +243,7 @@ module Zernio
     # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
     # @option opts [String] :breakdowns Comma-separated breakdown dimensions.  **Meta**: age, gender, country, publisher_platform, device_platform, region.  **TikTok**: gender, age, country_code, platform, ac, language.  **LinkedIn** (firmographics): job_title, job_function, seniority, industry, company, company_size, country, region. Rows carry the raw pivot &#x60;value&#x60; plus a resolved &#x60;name&#x60;. LinkedIn serves these aggregated over the whole range, delays the data 12-24h, and omits segments with fewer than 3 events. 
-    # @return [Array<(GetAdAnalytics200Response, Integer, Hash)>] GetAdAnalytics200Response data, response status code and response headers
+    # @return [Array<(AdAnalyticsResponse, Integer, Hash)>] AdAnalyticsResponse data, response status code and response headers
     def get_ad_analytics_with_http_info(ad_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdInsightsApi.get_ad_analytics ...'
@@ -273,7 +273,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetAdAnalytics200Response'
+      return_type = opts[:debug_return_type] || 'AdAnalyticsResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -469,7 +469,7 @@ module Zernio
     # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
     # @option opts [String] :breakdowns Comma-separated breakdown dimensions.  **Meta**: age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.  **LinkedIn** (firmographics): job_title, job_function, seniority, industry, company, company_size, country, region. Rows carry the raw pivot &#x60;value&#x60; plus a resolved &#x60;name&#x60;. LinkedIn serves these aggregated over the whole range, delays the data 12-24h, and omits segments with fewer than 3 events. 
-    # @return [GetCampaignAnalytics200Response]
+    # @return [CampaignAnalyticsResponse]
     def get_campaign_analytics(campaign_id, opts = {})
       data, _status_code, _headers = get_campaign_analytics_with_http_info(campaign_id, opts)
       data
@@ -483,7 +483,7 @@ module Zernio
     # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
     # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
     # @option opts [String] :breakdowns Comma-separated breakdown dimensions.  **Meta**: age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.  **LinkedIn** (firmographics): job_title, job_function, seniority, industry, company, company_size, country, region. Rows carry the raw pivot &#x60;value&#x60; plus a resolved &#x60;name&#x60;. LinkedIn serves these aggregated over the whole range, delays the data 12-24h, and omits segments with fewer than 3 events. 
-    # @return [Array<(GetCampaignAnalytics200Response, Integer, Hash)>] GetCampaignAnalytics200Response data, response status code and response headers
+    # @return [Array<(CampaignAnalyticsResponse, Integer, Hash)>] CampaignAnalyticsResponse data, response status code and response headers
     def get_campaign_analytics_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdInsightsApi.get_campaign_analytics ...'
@@ -514,7 +514,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetCampaignAnalytics200Response'
+      return_type = opts[:debug_return_type] || 'CampaignAnalyticsResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

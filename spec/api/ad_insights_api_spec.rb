@@ -76,7 +76,7 @@ describe 'AdInsightsApi' do
   # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
   # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   # @option opts [String] :breakdowns Comma-separated breakdown dimensions.  **Meta**: age, gender, country, publisher_platform, device_platform, region.  **TikTok**: gender, age, country_code, platform, ac, language.  **LinkedIn** (firmographics): job_title, job_function, seniority, industry, company, company_size, country, region. Rows carry the raw pivot &#x60;value&#x60; plus a resolved &#x60;name&#x60;. LinkedIn serves these aggregated over the whole range, delays the data 12-24h, and omits segments with fewer than 3 events. 
-  # @return [GetAdAnalytics200Response]
+  # @return [AdAnalyticsResponse]
   describe 'get_ad_analytics test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -125,7 +125,7 @@ describe 'AdInsightsApi' do
   # @option opts [Date] :from_date Start of date range (YYYY-MM-DD). Defaults to 90 days ago.
   # @option opts [Date] :to_date End of date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   # @option opts [String] :breakdowns Comma-separated breakdown dimensions.  **Meta**: age, gender, country, publisher_platform, device_platform, region, platform_position, impression_device, video_asset, image_asset, body_asset, title_asset.  **LinkedIn** (firmographics): job_title, job_function, seniority, industry, company, company_size, country, region. Rows carry the raw pivot &#x60;value&#x60; plus a resolved &#x60;name&#x60;. LinkedIn serves these aggregated over the whole range, delays the data 12-24h, and omits segments with fewer than 3 events. 
-  # @return [GetCampaignAnalytics200Response]
+  # @return [CampaignAnalyticsResponse]
   describe 'get_campaign_analytics test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

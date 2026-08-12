@@ -823,7 +823,7 @@ end
 
 ## get_ad_tree
 
-> <GetAdTree200Response> get_ad_tree(opts)
+> <AdTreeResponse> get_ad_tree(opts)
 
 Get campaign tree
 
@@ -872,7 +872,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetAdTree200Response>, Integer, Hash)> get_ad_tree_with_http_info(opts)
+> <Array(<AdTreeResponse>, Integer, Hash)> get_ad_tree_with_http_info(opts)
 
 ```ruby
 begin
@@ -880,7 +880,7 @@ begin
   data, status_code, headers = api_instance.get_ad_tree_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetAdTree200Response>
+  p data # => <AdTreeResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->get_ad_tree_with_http_info: #{e}"
 end
@@ -908,7 +908,7 @@ end
 
 ### Return type
 
-[**GetAdTree200Response**](GetAdTree200Response.md)
+[**AdTreeResponse**](AdTreeResponse.md)
 
 ### Authorization
 
@@ -922,7 +922,7 @@ end
 
 ## get_ads_timeline
 
-> <GetAdsTimeline200Response> get_ads_timeline(account_id, opts)
+> <AdsTimelineResponse> get_ads_timeline(account_id, opts)
 
 Get daily account metrics
 
@@ -961,7 +961,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetAdsTimeline200Response>, Integer, Hash)> get_ads_timeline_with_http_info(account_id, opts)
+> <Array(<AdsTimelineResponse>, Integer, Hash)> get_ads_timeline_with_http_info(account_id, opts)
 
 ```ruby
 begin
@@ -969,7 +969,7 @@ begin
   data, status_code, headers = api_instance.get_ads_timeline_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetAdsTimeline200Response>
+  p data # => <AdsTimelineResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->get_ads_timeline_with_http_info: #{e}"
 end
@@ -987,7 +987,7 @@ end
 
 ### Return type
 
-[**GetAdsTimeline200Response**](GetAdsTimeline200Response.md)
+[**AdsTimelineResponse**](AdsTimelineResponse.md)
 
 ### Authorization
 
@@ -1185,7 +1185,7 @@ end
 
 ## list_ads
 
-> <ListAds200Response> list_ads(opts)
+> <AdsListResponse> list_ads(opts)
 
 List ads
 
@@ -1234,7 +1234,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListAds200Response>, Integer, Hash)> list_ads_with_http_info(opts)
+> <Array(<AdsListResponse>, Integer, Hash)> list_ads_with_http_info(opts)
 
 ```ruby
 begin
@@ -1242,7 +1242,7 @@ begin
   data, status_code, headers = api_instance.list_ads_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ListAds200Response>
+  p data # => <AdsListResponse>
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->list_ads_with_http_info: #{e}"
 end
@@ -1270,7 +1270,7 @@ end
 
 ### Return type
 
-[**ListAds200Response**](ListAds200Response.md)
+[**AdsListResponse**](AdsListResponse.md)
 
 ### Authorization
 

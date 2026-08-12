@@ -194,7 +194,7 @@ describe 'AdCampaignsApi' do
   # @option opts [String] :sort Campaign-level sort order. &#x60;newest&#x60; (default) / &#x60;oldest&#x60; order by the campaign&#39;s newest-ad createdAt. &#x60;spend_desc&#x60; / &#x60;spend_asc&#x60; order by aggregated spend in the requested date range; campaigns with no spend land at the end.
   # @option opts [Integer] :time_increment Set to &#x60;1&#x60; to also return a daily breakdown. Mirrors Meta Insights&#39; &#x60;time_increment&#x3D;1&#x60;: each node gains a &#x60;daily[]&#x60; array of per-day metrics (same fields as the aggregated &#x60;metrics&#x60;) alongside the range total, so you get per-entity daily trends in ONE call instead of calling the tree once per day. Only &#x60;1&#x60; (daily) is supported. The daily series covers the same date range and uses the same source data as &#x60;metrics&#x60;, except &#x60;reach&#x60; on Meta and TikTok: the range total is the platform&#39;s de-duplicated value, so daily reach does not sum to it. See &#x60;dailyLevel&#x60; to control which levels carry it.
   # @option opts [String] :daily_level Which tree levels get the &#x60;daily[]&#x60; series when &#x60;timeIncrement&#x3D;1&#x60;. &#x60;campaign&#x60; (default) attaches it on campaign nodes only — the common per-campaign-trend case, and the smallest payload. &#x60;adset&#x60; adds it on ad sets too; &#x60;ad&#x60; adds it on every ad in &#x60;ads[]&#x60; as well (heaviest — a long range × up to 100 ads per ad set). Scope with &#x60;campaignId&#x60; to keep &#x60;ad&#x60;-level responses small. Ignored when &#x60;timeIncrement&#x60; is unset.
-  # @return [GetAdTree200Response]
+  # @return [AdTreeResponse]
   describe 'get_ad_tree test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -210,7 +210,7 @@ describe 'AdCampaignsApi' do
   # @option opts [Date] :from_date Inclusive start of metrics range (YYYY-MM-DD). Defaults to 90 days ago.
   # @option opts [Date] :to_date Inclusive end of metrics range (YYYY-MM-DD). Defaults to today. Max 730-day range.
   # @option opts [String] :platform Restrict to one platform.
-  # @return [GetAdsTimeline200Response]
+  # @return [AdsTimelineResponse]
   describe 'get_ads_timeline test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -281,7 +281,7 @@ describe 'AdCampaignsApi' do
   # @option opts [String] :effective_instagram_media_id Instagram media ID of the boosted post (Meta &#x60;effective_instagram_media_id&#x60;). Use to map a Business-Manager-visible IG post back to the Zernio ad.
   # @option opts [Date] :from_date Start of metrics date range (YYYY-MM-DD). Defaults to 90 days ago.
   # @option opts [Date] :to_date End of metrics date range (YYYY-MM-DD). Defaults to today. Max 730-day range.
-  # @return [ListAds200Response]
+  # @return [AdsListResponse]
   describe 'list_ads test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
