@@ -1448,6 +1448,7 @@ Class | Method | HTTP request | Description
  - [Zernio::LinkedInLeadFormPlatformDataQuestionsInnerOneOf1](docs/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1.md)
  - [Zernio::LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner](docs/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner.md)
  - [Zernio::LinkedInPlatformData](docs/LinkedInPlatformData.md)
+ - [Zernio::LinkedInPlatformDataPoll](docs/LinkedInPlatformDataPoll.md)
  - [Zernio::ListAccountGroups200Response](docs/ListAccountGroups200Response.md)
  - [Zernio::ListAccountGroups200ResponseGroupsInner](docs/ListAccountGroups200ResponseGroupsInner.md)
  - [Zernio::ListAdAccounts200Response](docs/ListAdAccounts200Response.md)

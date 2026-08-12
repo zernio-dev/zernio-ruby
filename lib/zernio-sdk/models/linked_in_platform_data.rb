@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Up to 20 images, no multi-video. Single PDF supported (max 100MB). Link previews auto-generated when no media attached. Use organizationUrn for multi-org posting. Geo-restriction only works for organization pages (not personal profiles) and requires the targeted audience to exceed 300 followers. 
+  # Up to 20 images, no multi-video. Single PDF supported (max 100MB). Link previews auto-generated when no media attached. Use organizationUrn for multi-org posting. Geo-restriction only works for organization pages (not personal profiles) and requires the targeted audience to exceed 300 followers. Polls are supported via the poll object: 2-4 options, cannot be combined with media or reshareUrl, cannot be edited after publishing, and API-created polls are non-sponsored only. 
   class LinkedInPlatformData < ApiModelBase
     # Title displayed on LinkedIn document (PDF/carousel) posts. Required by LinkedIn for document posts. If omitted, falls back to the media item title, then the filename.
     attr_accessor :document_title
@@ -33,6 +33,8 @@ module Zernio
 
     attr_accessor :geo_restriction
 
+    attr_accessor :poll
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -41,7 +43,8 @@ module Zernio
         :'first_comment' => :'firstComment',
         :'disable_link_preview' => :'disableLinkPreview',
         :'reshare_url' => :'reshareUrl',
-        :'geo_restriction' => :'geoRestriction'
+        :'geo_restriction' => :'geoRestriction',
+        :'poll' => :'poll'
       }
     end
 
@@ -63,7 +66,8 @@ module Zernio
         :'first_comment' => :'String',
         :'disable_link_preview' => :'Boolean',
         :'reshare_url' => :'String',
-        :'geo_restriction' => :'GeoRestriction'
+        :'geo_restriction' => :'GeoRestriction',
+        :'poll' => :'LinkedInPlatformDataPoll'
       }
     end
 
@@ -112,6 +116,10 @@ module Zernio
       if attributes.key?(:'geo_restriction')
         self.geo_restriction = attributes[:'geo_restriction']
       end
+
+      if attributes.key?(:'poll')
+        self.poll = attributes[:'poll']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -139,7 +147,8 @@ module Zernio
           first_comment == o.first_comment &&
           disable_link_preview == o.disable_link_preview &&
           reshare_url == o.reshare_url &&
-          geo_restriction == o.geo_restriction
+          geo_restriction == o.geo_restriction &&
+          poll == o.poll
     end
 
     # @see the `==` method
@@ -151,7 +160,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [document_title, organization_urn, first_comment, disable_link_preview, reshare_url, geo_restriction].hash
+      [document_title, organization_urn, first_comment, disable_link_preview, reshare_url, geo_restriction, poll].hash
     end
 
     # Builds the object from hash

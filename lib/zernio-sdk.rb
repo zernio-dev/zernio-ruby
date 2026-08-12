@@ -842,6 +842,7 @@ require 'zernio-sdk/models/linked_in_lead_form_platform_data_questions_inner_one
 require 'zernio-sdk/models/linked_in_lead_form_platform_data_questions_inner_one_of1'
 require 'zernio-sdk/models/linked_in_lead_form_platform_data_questions_inner_one_of1_choices_inner'
 require 'zernio-sdk/models/linked_in_platform_data'
+require 'zernio-sdk/models/linked_in_platform_data_poll'
 require 'zernio-sdk/models/list_account_groups200_response'
 require 'zernio-sdk/models/list_account_groups200_response_groups_inner'
 require 'zernio-sdk/models/list_ad_accounts200_response'
