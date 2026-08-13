@@ -37,7 +37,7 @@ describe 'CommentsApi' do
   # Delete a comment on a post. Supported by Facebook, Instagram, Bluesky, Reddit, YouTube, and LinkedIn. Requires accountId and commentId query parameters. 
   # @param post_id Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
   # @param account_id 
-  # @param comment_id 
+  # @param comment_id For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id))
   # @param [Hash] opts the optional parameters
   # @return [DeleteInboxComment200Response]
   describe 'delete_inbox_comment test' do

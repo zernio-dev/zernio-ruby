@@ -41,7 +41,7 @@ end
 api_instance = Zernio::CommentsApi.new
 post_id = 'post_id_example' # String | Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID.
 account_id = 'account_id_example' # String | 
-comment_id = 'comment_id_example' # String | 
+comment_id = 'comment_id_example' # String | For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id))
 
 begin
   # Delete comment
@@ -76,7 +76,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **post_id** | **String** | Zernio post ID or platform-specific post ID. LinkedIn third-party posts accept full activity URN or numeric ID. |  |
 | **account_id** | **String** |  |  |
-| **comment_id** | **String** |  |  |
+| **comment_id** | **String** | For LinkedIn, accepts either the numeric comment ID or the composite comment URN returned by the comments listing (e.g. urn:li:comment:(threadUrn,id)) |  |
 
 ### Return type
 
