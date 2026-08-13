@@ -25,6 +25,7 @@ module Zernio
 
     attr_accessor :like_count
 
+    # The platform's own reply count, which includes hidden and deleted replies. Can exceed replies[].length even when repliesHasMore is false or absent.
     attr_accessor :reply_count
 
     # The platform this comment is from
@@ -34,6 +35,9 @@ module Zernio
     attr_accessor :url
 
     attr_accessor :replies
+
+    # Facebook only. True when replies[] (capped at 10) does not hold the comment's full reply thread; fetch the rest by passing the comment id as postId to GET /v1/inbox/comments/{postId}. Absent (not false) on every other platform, including Instagram, which has no equivalent signal.
+    attr_accessor :replies_has_more
 
     attr_accessor :can_reply
 
@@ -78,6 +82,7 @@ module Zernio
         :'platform' => :'platform',
         :'url' => :'url',
         :'replies' => :'replies',
+        :'replies_has_more' => :'repliesHasMore',
         :'can_reply' => :'canReply',
         :'can_delete' => :'canDelete',
         :'can_hide' => :'canHide',
@@ -114,6 +119,7 @@ module Zernio
         :'platform' => :'String',
         :'url' => :'String',
         :'replies' => :'Array<Object>',
+        :'replies_has_more' => :'Boolean',
         :'can_reply' => :'Boolean',
         :'can_delete' => :'Boolean',
         :'can_hide' => :'Boolean',
@@ -194,6 +200,10 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'replies_has_more')
+        self.replies_has_more = attributes[:'replies_has_more']
+      end
+
       if attributes.key?(:'can_reply')
         self.can_reply = attributes[:'can_reply']
       end
@@ -268,6 +278,7 @@ module Zernio
           platform == o.platform &&
           url == o.url &&
           replies == o.replies &&
+          replies_has_more == o.replies_has_more &&
           can_reply == o.can_reply &&
           can_delete == o.can_delete &&
           can_hide == o.can_hide &&
@@ -290,7 +301,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, message, created_time, from, like_count, reply_count, platform, url, replies, can_reply, can_delete, can_hide, can_like, is_hidden, is_liked, like_uri, cid, parent_id, root_uri, root_cid].hash
+      [id, message, created_time, from, like_count, reply_count, platform, url, replies, replies_has_more, can_reply, can_delete, can_hide, can_like, is_hidden, is_liked, like_uri, cid, parent_id, root_uri, root_cid].hash
     end
 
     # Builds the object from hash

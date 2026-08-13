@@ -9,10 +9,11 @@
 | **created_time** | **Time** |  | [optional] |
 | **from** | [**GetInboxPostComments200ResponseCommentsInnerFrom**](GetInboxPostComments200ResponseCommentsInnerFrom.md) |  | [optional] |
 | **like_count** | **Integer** |  | [optional] |
-| **reply_count** | **Integer** |  | [optional] |
+| **reply_count** | **Integer** | The platform&#39;s own reply count, which includes hidden and deleted replies. Can exceed replies[].length even when repliesHasMore is false or absent. | [optional] |
 | **platform** | **String** | The platform this comment is from | [optional] |
 | **url** | **String** | Direct link to the comment on the platform (if available) | [optional] |
 | **replies** | **Array&lt;Object&gt;** |  | [optional] |
+| **replies_has_more** | **Boolean** | Facebook only. True when replies[] (capped at 10) does not hold the comment&#39;s full reply thread; fetch the rest by passing the comment id as postId to GET /v1/inbox/comments/{postId}. Absent (not false) on every other platform, including Instagram, which has no equivalent signal. | [optional] |
 | **can_reply** | **Boolean** |  | [optional] |
 | **can_delete** | **Boolean** |  | [optional] |
 | **can_hide** | **Boolean** | Whether this comment can be hidden (Facebook, Instagram, Threads) | [optional] |
@@ -40,6 +41,7 @@ instance = Zernio::GetInboxPostComments200ResponseCommentsInner.new(
   platform: null,
   url: null,
   replies: null,
+  replies_has_more: null,
   can_reply: null,
   can_delete: null,
   can_hide: null,
