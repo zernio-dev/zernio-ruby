@@ -21,7 +21,7 @@ module Zernio
     # Human-readable label.
     attr_accessor :name
 
-    # What the result is (e.g. city, region, country, zip, metro, interest, behavior, income).
+    # What the result is (e.g. city, region, country, zip, metro, location, interest, behavior, income).
     attr_accessor :type
 
     # Optional breadcrumb of parent labels (e.g. ['United States', 'California', 'Los Angeles']). Disambiguates same-named results.
