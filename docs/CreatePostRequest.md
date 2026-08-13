@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **title** | **String** |  | [optional] |
-| **content** | **String** | Post caption/text. Optional when media is attached or all platforms have customContent. Required for text-only posts. | [optional] |
+| **content** | **String** | Post caption/text. Optional when media is attached, all platforms have customContent, or every platform entry is a LinkedIn plain repost (platformSpecificData.reshareUrl with no text). Required for text-only posts. | [optional] |
 | **media_items** | [**Array&lt;MediaItem&gt;**](MediaItem.md) |  | [optional] |
 | **platforms** | [**Array&lt;CreatePostRequestPlatformsInner&gt;**](CreatePostRequestPlatformsInner.md) | Target platforms and accounts for this post. Required for non-draft posts (returns 400 if empty). Drafts can omit platforms. | [optional] |
 | **scheduled_for** | **Time** |  | [optional] |
