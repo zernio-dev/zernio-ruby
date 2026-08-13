@@ -27,6 +27,9 @@ module Zernio
 
     attr_accessor :position
 
+    # Optional display name shown on the builder canvas and inspector, falling back to the node type when absent. The nodes array is replaced wholesale on update, so it must be resent to be kept.
+    attr_accessor :label
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -55,7 +58,8 @@ module Zernio
         :'id' => :'id',
         :'type' => :'type',
         :'config' => :'config',
-        :'position' => :'position'
+        :'position' => :'position',
+        :'label' => :'label'
       }
     end
 
@@ -75,7 +79,8 @@ module Zernio
         :'id' => :'String',
         :'type' => :'String',
         :'config' => :'Hash<String, Object>',
-        :'position' => :'WorkflowNodePosition'
+        :'position' => :'WorkflowNodePosition',
+        :'label' => :'String'
       }
     end
 
@@ -122,6 +127,10 @@ module Zernio
       if attributes.key?(:'position')
         self.position = attributes[:'position']
       end
+
+      if attributes.key?(:'label')
+        self.label = attributes[:'label']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -137,6 +146,14 @@ module Zernio
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
+      if !@label.nil? && @label.to_s.length > 80
+        invalid_properties.push('invalid value for "label", the character length must be smaller than or equal to 80.')
+      end
+
+      if !@label.nil? && @label.to_s.length < 1
+        invalid_properties.push('invalid value for "label", the character length must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -148,6 +165,8 @@ module Zernio
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["trigger", "send_message", "wait_for_reply", "condition", "set_variable", "delay", "webhook", "ai", "handoff", "start_call", "a_b_split", "set_field", "enroll_sequence", "add_tag", "remove_tag", "end"])
       return false unless type_validator.valid?(@type)
+      return false if !@label.nil? && @label.to_s.length > 80
+      return false if !@label.nil? && @label.to_s.length < 1
       true
     end
 
@@ -171,6 +190,24 @@ module Zernio
       @type = type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] label Value to be assigned
+    def label=(label)
+      if label.nil?
+        fail ArgumentError, 'label cannot be nil'
+      end
+
+      if label.to_s.length > 80
+        fail ArgumentError, 'invalid value for "label", the character length must be smaller than or equal to 80.'
+      end
+
+      if label.to_s.length < 1
+        fail ArgumentError, 'invalid value for "label", the character length must be greater than or equal to 1.'
+      end
+
+      @label = label
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -179,7 +216,8 @@ module Zernio
           id == o.id &&
           type == o.type &&
           config == o.config &&
-          position == o.position
+          position == o.position &&
+          label == o.label
     end
 
     # @see the `==` method
@@ -191,7 +229,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, config, position].hash
+      [id, type, config, position, label].hash
     end
 
     # Builds the object from hash
