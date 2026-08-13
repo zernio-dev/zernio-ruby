@@ -193,6 +193,16 @@ Class | Method | HTTP request | Description
 *Zernio::AnalyticsApi* | [**get_you_tube_demographics**](docs/AnalyticsApi.md#get_you_tube_demographics) | **GET** /v1/analytics/youtube/demographics | Get YouTube demographics
 *Zernio::AnalyticsApi* | [**get_you_tube_video_retention**](docs/AnalyticsApi.md#get_you_tube_video_retention) | **GET** /v1/analytics/youtube/video-retention | Get YouTube video retention curve
 *Zernio::AnalyticsApi* | [**sync_external_posts**](docs/AnalyticsApi.md#sync_external_posts) | **POST** /v1/posts/sync-external | Sync an external post
+*Zernio::BlogsApi* | [**create_blog**](docs/BlogsApi.md#create_blog) | **POST** /v1/accounts/{accountId}/blogs | Create a blog
+*Zernio::BlogsApi* | [**create_blog_article**](docs/BlogsApi.md#create_blog_article) | **POST** /v1/accounts/{accountId}/blogs/{blogId}/articles | Create a blog article
+*Zernio::BlogsApi* | [**delete_blog**](docs/BlogsApi.md#delete_blog) | **DELETE** /v1/accounts/{accountId}/blogs/{blogId} | Delete a blog
+*Zernio::BlogsApi* | [**delete_blog_article**](docs/BlogsApi.md#delete_blog_article) | **DELETE** /v1/accounts/{accountId}/blogs/{blogId}/articles/{articleId} | Delete a blog article
+*Zernio::BlogsApi* | [**get_blog**](docs/BlogsApi.md#get_blog) | **GET** /v1/accounts/{accountId}/blogs/{blogId} | Get a blog
+*Zernio::BlogsApi* | [**get_blog_article**](docs/BlogsApi.md#get_blog_article) | **GET** /v1/accounts/{accountId}/blogs/{blogId}/articles/{articleId} | Get a blog article
+*Zernio::BlogsApi* | [**list_blog_articles**](docs/BlogsApi.md#list_blog_articles) | **GET** /v1/accounts/{accountId}/blogs/{blogId}/articles | List blog articles
+*Zernio::BlogsApi* | [**list_blogs**](docs/BlogsApi.md#list_blogs) | **GET** /v1/accounts/{accountId}/blogs | List blogs
+*Zernio::BlogsApi* | [**update_blog**](docs/BlogsApi.md#update_blog) | **PATCH** /v1/accounts/{accountId}/blogs/{blogId} | Update a blog
+*Zernio::BlogsApi* | [**update_blog_article**](docs/BlogsApi.md#update_blog_article) | **PATCH** /v1/accounts/{accountId}/blogs/{blogId}/articles/{articleId} | Update a blog article
 *Zernio::BroadcastsApi* | [**add_broadcast_recipients**](docs/BroadcastsApi.md#add_broadcast_recipients) | **POST** /v1/broadcasts/{broadcastId}/recipients | Add recipients to a broadcast
 *Zernio::BroadcastsApi* | [**cancel_broadcast**](docs/BroadcastsApi.md#cancel_broadcast) | **POST** /v1/broadcasts/{broadcastId}/cancel | Cancel broadcast
 *Zernio::BroadcastsApi* | [**create_broadcast**](docs/BroadcastsApi.md#create_broadcast) | **POST** /v1/broadcasts | Create broadcast draft
@@ -242,6 +252,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**get_pinterest_boards**](docs/ConnectApi.md#get_pinterest_boards) | **GET** /v1/accounts/{accountId}/pinterest-boards | List Pinterest boards
 *Zernio::ConnectApi* | [**get_reddit_flairs**](docs/ConnectApi.md#get_reddit_flairs) | **GET** /v1/accounts/{accountId}/reddit-flairs | List subreddit flairs
 *Zernio::ConnectApi* | [**get_reddit_subreddits**](docs/ConnectApi.md#get_reddit_subreddits) | **GET** /v1/accounts/{accountId}/reddit-subreddits | List Reddit subreddits
+*Zernio::ConnectApi* | [**get_shopify_connect_url**](docs/ConnectApi.md#get_shopify_connect_url) | **GET** /v1/connect/shopify | Get Shopify OAuth connect URL
 *Zernio::ConnectApi* | [**get_subreddit_rules**](docs/ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules
 *Zernio::ConnectApi* | [**get_telegram_connect_status**](docs/ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code
 *Zernio::ConnectApi* | [**get_youtube_playlists**](docs/ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists
@@ -709,6 +720,9 @@ Class | Method | HTTP request | Description
  - [Zernio::BlockWhatsAppUsers200ResponseBlockedInner](docs/BlockWhatsAppUsers200ResponseBlockedInner.md)
  - [Zernio::BlockWhatsAppUsers200ResponseFailedInner](docs/BlockWhatsAppUsers200ResponseFailedInner.md)
  - [Zernio::BlockWhatsAppUsersRequest](docs/BlockWhatsAppUsersRequest.md)
+ - [Zernio::Blog](docs/Blog.md)
+ - [Zernio::BlogArticle](docs/BlogArticle.md)
+ - [Zernio::BlogArticleImage](docs/BlogArticleImage.md)
  - [Zernio::BlueskyPlatformData](docs/BlueskyPlatformData.md)
  - [Zernio::BookmarkPost200Response](docs/BookmarkPost200Response.md)
  - [Zernio::BookmarkPostRequest](docs/BookmarkPostRequest.md)
@@ -797,6 +811,12 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAdInsightsReportRequestTimeIncrement](docs/CreateAdInsightsReportRequestTimeIncrement.md)
  - [Zernio::CreateApiKey201Response](docs/CreateApiKey201Response.md)
  - [Zernio::CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
+ - [Zernio::CreateBlog201Response](docs/CreateBlog201Response.md)
+ - [Zernio::CreateBlogArticle201Response](docs/CreateBlogArticle201Response.md)
+ - [Zernio::CreateBlogArticleRequest](docs/CreateBlogArticleRequest.md)
+ - [Zernio::CreateBlogArticleRequestImage](docs/CreateBlogArticleRequestImage.md)
+ - [Zernio::CreateBlogArticleRequestSeo](docs/CreateBlogArticleRequestSeo.md)
+ - [Zernio::CreateBlogRequest](docs/CreateBlogRequest.md)
  - [Zernio::CreateBroadcast200Response](docs/CreateBroadcast200Response.md)
  - [Zernio::CreateBroadcast200ResponseBroadcast](docs/CreateBroadcast200ResponseBroadcast.md)
  - [Zernio::CreateBroadcastRequest](docs/CreateBroadcastRequest.md)
@@ -1471,6 +1491,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAds202Response](docs/ListAds202Response.md)
  - [Zernio::ListAdsBusinessCenters200Response](docs/ListAdsBusinessCenters200Response.md)
  - [Zernio::ListApiKeys200Response](docs/ListApiKeys200Response.md)
+ - [Zernio::ListBlogArticles200Response](docs/ListBlogArticles200Response.md)
+ - [Zernio::ListBlogs200Response](docs/ListBlogs200Response.md)
  - [Zernio::ListBroadcastRecipients200Response](docs/ListBroadcastRecipients200Response.md)
  - [Zernio::ListBroadcastRecipients200ResponseRecipientsInner](docs/ListBroadcastRecipients200ResponseRecipientsInner.md)
  - [Zernio::ListBroadcasts200Response](docs/ListBroadcasts200Response.md)
@@ -1984,6 +2006,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdTrackingTagsRequest](docs/UpdateAdTrackingTagsRequest.md)
  - [Zernio::UpdateAdTrackingTagsRequestCreative](docs/UpdateAdTrackingTagsRequestCreative.md)
  - [Zernio::UpdateAdTrackingTagsRequestUrlTagsInner](docs/UpdateAdTrackingTagsRequestUrlTagsInner.md)
+ - [Zernio::UpdateBlogArticleRequest](docs/UpdateBlogArticleRequest.md)
+ - [Zernio::UpdateBlogRequest](docs/UpdateBlogRequest.md)
  - [Zernio::UpdateBroadcast200Response](docs/UpdateBroadcast200Response.md)
  - [Zernio::UpdateBroadcast200ResponseBroadcast](docs/UpdateBroadcast200ResponseBroadcast.md)
  - [Zernio::UpdateBroadcastRequest](docs/UpdateBroadcastRequest.md)

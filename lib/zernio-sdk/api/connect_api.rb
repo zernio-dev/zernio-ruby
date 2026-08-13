@@ -675,6 +675,7 @@ module Zernio
     # @option opts [String] :redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.
     # @option opts [Boolean] :headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (default to false)
     # @option opts [String] :login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; supports &#x60;headless&#x3D;true&#x60; like the other selection platforms: the callback redirects to your &#x60;redirect_url&#x60; with &#x60;profileId&#x60;, &#x60;tempToken&#x60;, &#x60;platform&#x3D;instagram&#x60;, &#x60;step&#x3D;select_account&#x60; and &#x60;connect_token&#x60;, which you pass into the select-account endpoints to finish. The default &#x60;instagram_login&#x60; has no selection step, so it connects the account directly.  (default to 'instagram_login')
+    # @option opts [String] :onboarding WhatsApp only. Ignored for every other platform. Controls which screen Meta&#39;s Embedded Signup popup shows.  If omitted, the connection defaults to coexistence (same as &#x60;business_app&#x60; below), preserving existing behavior for numbers already on the WhatsApp Business app.  &#x60;api&#x60;: standard Embedded Signup, showing Meta&#39;s WABA/number picker. Use this to connect a phone number already on Cloud API elsewhere.  &#x60;business_app&#x60;: coexistence, i.e. &#39;Connect existing WhatsApp Business app&#39; (a number shared between Cloud API and the consumer WhatsApp Business app). 
     # @return [GetConnectUrl200Response]
     def get_connect_url(platform, profile_id, opts = {})
       data, _status_code, _headers = get_connect_url_with_http_info(platform, profile_id, opts)
@@ -689,6 +690,7 @@ module Zernio
     # @option opts [String] :redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. Result params are appended with the URL API, so an existing query string is preserved. Standard mode appends connected&#x3D;{platform}&amp;profileId&#x3D;X&amp;accountId&#x3D;Y&amp;username&#x3D;Z. Headless mode appends OAuth data params for platforms requiring selection (e.g. LinkedIn orgs, Facebook pages). If no selection is needed, the account is created directly and the redirect includes accountId.
     # @option opts [Boolean] :headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (default to false)
     # @option opts [String] :login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; supports &#x60;headless&#x3D;true&#x60; like the other selection platforms: the callback redirects to your &#x60;redirect_url&#x60; with &#x60;profileId&#x60;, &#x60;tempToken&#x60;, &#x60;platform&#x3D;instagram&#x60;, &#x60;step&#x3D;select_account&#x60; and &#x60;connect_token&#x60;, which you pass into the select-account endpoints to finish. The default &#x60;instagram_login&#x60; has no selection step, so it connects the account directly.  (default to 'instagram_login')
+    # @option opts [String] :onboarding WhatsApp only. Ignored for every other platform. Controls which screen Meta&#39;s Embedded Signup popup shows.  If omitted, the connection defaults to coexistence (same as &#x60;business_app&#x60; below), preserving existing behavior for numbers already on the WhatsApp Business app.  &#x60;api&#x60;: standard Embedded Signup, showing Meta&#39;s WABA/number picker. Use this to connect a phone number already on Cloud API elsewhere.  &#x60;business_app&#x60;: coexistence, i.e. &#39;Connect existing WhatsApp Business app&#39; (a number shared between Cloud API and the consumer WhatsApp Business app). 
     # @return [Array<(GetConnectUrl200Response, Integer, Hash)>] GetConnectUrl200Response data, response status code and response headers
     def get_connect_url_with_http_info(platform, profile_id, opts = {})
       if @api_client.config.debugging
@@ -711,6 +713,10 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'login_method'] && !allowable_values.include?(opts[:'login_method'])
         fail ArgumentError, "invalid value for \"login_method\", must be one of #{allowable_values}"
       end
+      allowable_values = ["api", "business_app"]
+      if @api_client.config.client_side_validation && opts[:'onboarding'] && !allowable_values.include?(opts[:'onboarding'])
+        fail ArgumentError, "invalid value for \"onboarding\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/connect/{platform}'.sub('{' + 'platform' + '}', CGI.escape(platform.to_s))
 
@@ -720,6 +726,7 @@ module Zernio
       query_params[:'redirect_url'] = opts[:'redirect_url'] if !opts[:'redirect_url'].nil?
       query_params[:'headless'] = opts[:'headless'] if !opts[:'headless'].nil?
       query_params[:'loginMethod'] = opts[:'login_method'] if !opts[:'login_method'].nil?
+      query_params[:'onboarding'] = opts[:'onboarding'] if !opts[:'onboarding'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1224,6 +1231,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#get_reddit_subreddits\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get Shopify OAuth connect URL
+    # Initiate the Shopify OAuth flow for a store. Shopify is a connect-only platform: the connected account does not publish social posts, it powers the Blogs API (`/v1/accounts/{accountId}/blogs`). Returns an `authUrl` to redirect the merchant to; after they approve the install, Shopify redirects their browser to Zernio's callback, the account is created on the profile (platform `shopify`), and the browser is redirected to `redirect_url` (or the Zernio dashboard when omitted). Requested scopes are `read_content` and `write_content` (content only; no customer or order data). Connecting the same profile to a store again refreshes the stored token in place. 
+    # @param profile_id [String] Your Zernio profile ID (get from /v1/profiles).
+    # @param shop [String] The myshopify.com store domain to connect, e.g. &#x60;your-store.myshopify.com&#x60; (the bare &#x60;your-store&#x60; prefix is accepted too).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. On failure an &#x60;error&#x60; query param is appended.
+    # @return [GetConnectUrl200Response]
+    def get_shopify_connect_url(profile_id, shop, opts = {})
+      data, _status_code, _headers = get_shopify_connect_url_with_http_info(profile_id, shop, opts)
+      data
+    end
+
+    # Get Shopify OAuth connect URL
+    # Initiate the Shopify OAuth flow for a store. Shopify is a connect-only platform: the connected account does not publish social posts, it powers the Blogs API (&#x60;/v1/accounts/{accountId}/blogs&#x60;). Returns an &#x60;authUrl&#x60; to redirect the merchant to; after they approve the install, Shopify redirects their browser to Zernio&#39;s callback, the account is created on the profile (platform &#x60;shopify&#x60;), and the browser is redirected to &#x60;redirect_url&#x60; (or the Zernio dashboard when omitted). Requested scopes are &#x60;read_content&#x60; and &#x60;write_content&#x60; (content only; no customer or order data). Connecting the same profile to a store again refreshes the stored token in place. 
+    # @param profile_id [String] Your Zernio profile ID (get from /v1/profiles).
+    # @param shop [String] The myshopify.com store domain to connect, e.g. &#x60;your-store.myshopify.com&#x60; (the bare &#x60;your-store&#x60; prefix is accepted too).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :redirect_url Your custom redirect URL after connection completes. Accepts an http(s) URL, a custom app scheme for mobile deeplinks (e.g. myapp://callback), or a relative path. On failure an &#x60;error&#x60; query param is appended.
+    # @return [Array<(GetConnectUrl200Response, Integer, Hash)>] GetConnectUrl200Response data, response status code and response headers
+    def get_shopify_connect_url_with_http_info(profile_id, shop, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.get_shopify_connect_url ...'
+      end
+      # verify the required parameter 'profile_id' is set
+      if @api_client.config.client_side_validation && profile_id.nil?
+        fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConnectApi.get_shopify_connect_url"
+      end
+      # verify the required parameter 'shop' is set
+      if @api_client.config.client_side_validation && shop.nil?
+        fail ArgumentError, "Missing the required parameter 'shop' when calling ConnectApi.get_shopify_connect_url"
+      end
+      # resource path
+      local_var_path = '/v1/connect/shopify'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'profileId'] = profile_id
+      query_params[:'shop'] = shop
+      query_params[:'redirect_url'] = opts[:'redirect_url'] if !opts[:'redirect_url'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetConnectUrl200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.get_shopify_connect_url",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#get_shopify_connect_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -100,6 +100,10 @@ docs/BlockWhatsAppUsers200Response.md
 docs/BlockWhatsAppUsers200ResponseBlockedInner.md
 docs/BlockWhatsAppUsers200ResponseFailedInner.md
 docs/BlockWhatsAppUsersRequest.md
+docs/Blog.md
+docs/BlogArticle.md
+docs/BlogArticleImage.md
+docs/BlogsApi.md
 docs/BlueskyPlatformData.md
 docs/BookmarkPost200Response.md
 docs/BookmarkPostRequest.md
@@ -196,6 +200,12 @@ docs/CreateAdInsightsReportRequestFilteringInner.md
 docs/CreateAdInsightsReportRequestTimeIncrement.md
 docs/CreateApiKey201Response.md
 docs/CreateApiKeyRequest.md
+docs/CreateBlog201Response.md
+docs/CreateBlogArticle201Response.md
+docs/CreateBlogArticleRequest.md
+docs/CreateBlogArticleRequestImage.md
+docs/CreateBlogArticleRequestSeo.md
+docs/CreateBlogRequest.md
 docs/CreateBroadcast200Response.md
 docs/CreateBroadcast200ResponseBroadcast.md
 docs/CreateBroadcastRequest.md
@@ -885,6 +895,8 @@ docs/ListAdStudies200Response.md
 docs/ListAds202Response.md
 docs/ListAdsBusinessCenters200Response.md
 docs/ListApiKeys200Response.md
+docs/ListBlogArticles200Response.md
+docs/ListBlogs200Response.md
 docs/ListBroadcastRecipients200Response.md
 docs/ListBroadcastRecipients200ResponseRecipientsInner.md
 docs/ListBroadcasts200Response.md
@@ -1415,6 +1427,8 @@ docs/UpdateAdStatusRequest.md
 docs/UpdateAdTrackingTagsRequest.md
 docs/UpdateAdTrackingTagsRequestCreative.md
 docs/UpdateAdTrackingTagsRequestUrlTagsInner.md
+docs/UpdateBlogArticleRequest.md
+docs/UpdateBlogRequest.md
 docs/UpdateBroadcast200Response.md
 docs/UpdateBroadcast200ResponseBroadcast.md
 docs/UpdateBroadcastRequest.md
@@ -1711,6 +1725,7 @@ lib/zernio-sdk/api/ad_insights_api.rb
 lib/zernio-sdk/api/ad_targeting_api.rb
 lib/zernio-sdk/api/analytics_api.rb
 lib/zernio-sdk/api/api_keys_api.rb
+lib/zernio-sdk/api/blogs_api.rb
 lib/zernio-sdk/api/broadcasts_api.rb
 lib/zernio-sdk/api/calls_api.rb
 lib/zernio-sdk/api/comment_automations_api.rb
@@ -1852,6 +1867,9 @@ lib/zernio-sdk/models/block_whats_app_users200_response.rb
 lib/zernio-sdk/models/block_whats_app_users200_response_blocked_inner.rb
 lib/zernio-sdk/models/block_whats_app_users200_response_failed_inner.rb
 lib/zernio-sdk/models/block_whats_app_users_request.rb
+lib/zernio-sdk/models/blog.rb
+lib/zernio-sdk/models/blog_article.rb
+lib/zernio-sdk/models/blog_article_image.rb
 lib/zernio-sdk/models/bluesky_platform_data.rb
 lib/zernio-sdk/models/bookmark_post200_response.rb
 lib/zernio-sdk/models/bookmark_post_request.rb
@@ -1940,6 +1958,12 @@ lib/zernio-sdk/models/create_ad_insights_report_request_filtering_inner.rb
 lib/zernio-sdk/models/create_ad_insights_report_request_time_increment.rb
 lib/zernio-sdk/models/create_api_key201_response.rb
 lib/zernio-sdk/models/create_api_key_request.rb
+lib/zernio-sdk/models/create_blog201_response.rb
+lib/zernio-sdk/models/create_blog_article201_response.rb
+lib/zernio-sdk/models/create_blog_article_request.rb
+lib/zernio-sdk/models/create_blog_article_request_image.rb
+lib/zernio-sdk/models/create_blog_article_request_seo.rb
+lib/zernio-sdk/models/create_blog_request.rb
 lib/zernio-sdk/models/create_broadcast200_response.rb
 lib/zernio-sdk/models/create_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/create_broadcast_request.rb
@@ -2614,6 +2638,8 @@ lib/zernio-sdk/models/list_ad_studies200_response.rb
 lib/zernio-sdk/models/list_ads202_response.rb
 lib/zernio-sdk/models/list_ads_business_centers200_response.rb
 lib/zernio-sdk/models/list_api_keys200_response.rb
+lib/zernio-sdk/models/list_blog_articles200_response.rb
+lib/zernio-sdk/models/list_blogs200_response.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response_recipients_inner.rb
 lib/zernio-sdk/models/list_broadcasts200_response.rb
@@ -3127,6 +3153,8 @@ lib/zernio-sdk/models/update_ad_status_request.rb
 lib/zernio-sdk/models/update_ad_tracking_tags_request.rb
 lib/zernio-sdk/models/update_ad_tracking_tags_request_creative.rb
 lib/zernio-sdk/models/update_ad_tracking_tags_request_url_tags_inner.rb
+lib/zernio-sdk/models/update_blog_article_request.rb
+lib/zernio-sdk/models/update_blog_request.rb
 lib/zernio-sdk/models/update_broadcast200_response.rb
 lib/zernio-sdk/models/update_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/update_broadcast_request.rb
@@ -3408,6 +3436,7 @@ spec/api/ad_insights_api_spec.rb
 spec/api/ad_targeting_api_spec.rb
 spec/api/analytics_api_spec.rb
 spec/api/api_keys_api_spec.rb
+spec/api/blogs_api_spec.rb
 spec/api/broadcasts_api_spec.rb
 spec/api/calls_api_spec.rb
 spec/api/comment_automations_api_spec.rb
@@ -3544,6 +3573,9 @@ spec/models/block_whats_app_users200_response_blocked_inner_spec.rb
 spec/models/block_whats_app_users200_response_failed_inner_spec.rb
 spec/models/block_whats_app_users200_response_spec.rb
 spec/models/block_whats_app_users_request_spec.rb
+spec/models/blog_article_image_spec.rb
+spec/models/blog_article_spec.rb
+spec/models/blog_spec.rb
 spec/models/bluesky_platform_data_spec.rb
 spec/models/bookmark_post200_response_spec.rb
 spec/models/bookmark_post_request_spec.rb
@@ -3632,6 +3664,12 @@ spec/models/create_ad_insights_report_request_spec.rb
 spec/models/create_ad_insights_report_request_time_increment_spec.rb
 spec/models/create_api_key201_response_spec.rb
 spec/models/create_api_key_request_spec.rb
+spec/models/create_blog201_response_spec.rb
+spec/models/create_blog_article201_response_spec.rb
+spec/models/create_blog_article_request_image_spec.rb
+spec/models/create_blog_article_request_seo_spec.rb
+spec/models/create_blog_article_request_spec.rb
+spec/models/create_blog_request_spec.rb
 spec/models/create_broadcast200_response_broadcast_spec.rb
 spec/models/create_broadcast200_response_spec.rb
 spec/models/create_broadcast_request_message_attachments_inner_spec.rb
@@ -4306,6 +4344,8 @@ spec/models/list_ad_studies200_response_spec.rb
 spec/models/list_ads202_response_spec.rb
 spec/models/list_ads_business_centers200_response_spec.rb
 spec/models/list_api_keys200_response_spec.rb
+spec/models/list_blog_articles200_response_spec.rb
+spec/models/list_blogs200_response_spec.rb
 spec/models/list_broadcast_recipients200_response_recipients_inner_spec.rb
 spec/models/list_broadcast_recipients200_response_spec.rb
 spec/models/list_broadcasts200_response_broadcasts_inner_spec.rb
@@ -4819,6 +4859,8 @@ spec/models/update_ad_status_request_spec.rb
 spec/models/update_ad_tracking_tags_request_creative_spec.rb
 spec/models/update_ad_tracking_tags_request_spec.rb
 spec/models/update_ad_tracking_tags_request_url_tags_inner_spec.rb
+spec/models/update_blog_article_request_spec.rb
+spec/models/update_blog_request_spec.rb
 spec/models/update_broadcast200_response_broadcast_spec.rb
 spec/models/update_broadcast200_response_spec.rb
 spec/models/update_broadcast_request_message_spec.rb
