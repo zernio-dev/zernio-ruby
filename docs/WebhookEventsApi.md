@@ -51,6 +51,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_whats_app_number_released**](WebhookEventsApi.md#on_whats_app_number_released) | **POST** /whatsapp.number.released | WhatsApp number released event |
 | [**on_whats_app_number_suspended**](WebhookEventsApi.md#on_whats_app_number_suspended) | **POST** /whatsapp.number.suspended | WhatsApp number suspended event |
 | [**on_whats_app_number_verification_required**](WebhookEventsApi.md#on_whats_app_number_verification_required) | **POST** /whatsapp.number.verification_required | WhatsApp number verification-required event |
+| [**on_whats_app_template_category_updated**](WebhookEventsApi.md#on_whats_app_template_category_updated) | **POST** /whatsapp.template.category_updated | WhatsApp template category updated event |
 | [**on_whats_app_template_status_updated**](WebhookEventsApi.md#on_whats_app_template_status_updated) | **POST** /whatsapp.template.status_updated | WhatsApp template status updated event |
 
 
@@ -3235,6 +3236,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **on_whats_app_number_verification_required_request** | [**OnWhatsAppNumberVerificationRequiredRequest**](OnWhatsAppNumberVerificationRequiredRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_whats_app_template_category_updated
+
+> on_whats_app_template_category_updated(webhook_payload_whats_app_template_category_updated)
+
+WhatsApp template category updated event
+
+Fired when Meta reclassifies a WhatsApp Business template's category after approval. Forwarded from Meta's `template_category_update` webhook field on the WhatsApp Business Account. Category drives Meta's per-conversation tariff and whether the template is subject to the recipient's marketing opt-out. `template.changeType` is `scheduled` (24h advance notice) or `applied`; `template.category` is always the category right now. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_whats_app_template_category_updated =  # WebhookPayloadWhatsAppTemplateCategoryUpdated | 
+
+begin
+  # WhatsApp template category updated event
+  api_instance.on_whats_app_template_category_updated(webhook_payload_whats_app_template_category_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_template_category_updated: #{e}"
+end
+```
+
+#### Using the on_whats_app_template_category_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_template_category_updated_with_http_info(webhook_payload_whats_app_template_category_updated)
+
+```ruby
+begin
+  # WhatsApp template category updated event
+  data, status_code, headers = api_instance.on_whats_app_template_category_updated_with_http_info(webhook_payload_whats_app_template_category_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_template_category_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_whats_app_template_category_updated** | [**WebhookPayloadWhatsAppTemplateCategoryUpdated**](WebhookPayloadWhatsAppTemplateCategoryUpdated.md) |  |  |
 
 ### Return type
 

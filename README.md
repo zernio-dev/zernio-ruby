@@ -2244,6 +2244,8 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadReviewNewAccount](docs/WebhookPayloadReviewNewAccount.md)
  - [Zernio::WebhookPayloadReviewUpdated](docs/WebhookPayloadReviewUpdated.md)
  - [Zernio::WebhookPayloadTest](docs/WebhookPayloadTest.md)
+ - [Zernio::WebhookPayloadWhatsAppTemplateCategoryUpdated](docs/WebhookPayloadWhatsAppTemplateCategoryUpdated.md)
+ - [Zernio::WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplate](docs/WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplate.md)
  - [Zernio::WebhookPayloadWhatsAppTemplateStatusUpdated](docs/WebhookPayloadWhatsAppTemplateStatusUpdated.md)
  - [Zernio::WebhookPayloadWhatsAppTemplateStatusUpdatedAccount](docs/WebhookPayloadWhatsAppTemplateStatusUpdatedAccount.md)
  - [Zernio::WebhookPayloadWhatsAppTemplateStatusUpdatedTemplate](docs/WebhookPayloadWhatsAppTemplateStatusUpdatedTemplate.md)
