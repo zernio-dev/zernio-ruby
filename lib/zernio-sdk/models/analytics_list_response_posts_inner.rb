@@ -117,7 +117,7 @@ module Zernio
         :'profile_id' => :'String',
         :'thumbnail_url' => :'String',
         :'media_type' => :'String',
-        :'media_items' => :'Array<AnalyticsSinglePostResponseMediaItemsInner>'
+        :'media_items' => :'Array<AnalyticsListResponsePostsInnerMediaItemsInner>'
       }
     end
 

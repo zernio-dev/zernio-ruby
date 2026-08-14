@@ -14,13 +14,21 @@ require 'date'
 require 'time'
 
 module Zernio
-  # A media item on a native (external/synced) post, as carried by post.external.* webhook payloads. Distinct from the richer MediaItem used for Zernio-authored posts: external items are always already-published (url required) and limited to image or video. Kept as a separate schema so the generated SDK model does not collide with MediaItem. 
+  # A media item on a native (external/synced) post, as carried by post.external.* webhook payloads. Distinct from the richer MediaItem used for Zernio-authored posts: external items are always already-published and limited to image or video. Kept as a separate schema so the generated SDK model does not collide with MediaItem. 
   class ExternalPostMediaItem < ApiModelBase
     attr_accessor :type
 
+    # 'Direct URL to the media file. Null when the platform withholds it: check mediaStatus before downloading. Instagram omits the video file for Reels it flags as containing copyrighted material (its docs name audio as the usual cause), so type stays \"video\" while the file is permanently unreachable.'
     attr_accessor :url
 
+    # Cover image. Still present when url is null.
     attr_accessor :thumbnail
+
+    # Present only when the media file could not be retrieved. Absent means the file is available at url.
+    attr_accessor :media_status
+
+    # Why the file is missing. platform_withheld means the platform declined to return it and retrying will not help.
+    attr_accessor :unavailable_reason
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -49,7 +57,9 @@ module Zernio
       {
         :'type' => :'type',
         :'url' => :'url',
-        :'thumbnail' => :'thumbnail'
+        :'thumbnail' => :'thumbnail',
+        :'media_status' => :'mediaStatus',
+        :'unavailable_reason' => :'unavailableReason'
       }
     end
 
@@ -68,13 +78,16 @@ module Zernio
       {
         :'type' => :'String',
         :'url' => :'String',
-        :'thumbnail' => :'String'
+        :'thumbnail' => :'String',
+        :'media_status' => :'String',
+        :'unavailable_reason' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'url',
       ])
     end
 
@@ -109,6 +122,14 @@ module Zernio
       if attributes.key?(:'thumbnail')
         self.thumbnail = attributes[:'thumbnail']
       end
+
+      if attributes.key?(:'media_status')
+        self.media_status = attributes[:'media_status']
+      end
+
+      if attributes.key?(:'unavailable_reason')
+        self.unavailable_reason = attributes[:'unavailable_reason']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -118,10 +139,6 @@ module Zernio
       invalid_properties = Array.new
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
       end
 
       invalid_properties
@@ -134,7 +151,10 @@ module Zernio
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["image", "video"])
       return false unless type_validator.valid?(@type)
-      return false if @url.nil?
+      media_status_validator = EnumAttributeValidator.new('String', ["unavailable"])
+      return false unless media_status_validator.valid?(@media_status)
+      unavailable_reason_validator = EnumAttributeValidator.new('String', ["platform_withheld"])
+      return false unless unavailable_reason_validator.valid?(@unavailable_reason)
       true
     end
 
@@ -148,14 +168,24 @@ module Zernio
       @type = type
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] url Value to be assigned
-    def url=(url)
-      if url.nil?
-        fail ArgumentError, 'url cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] media_status Object to be assigned
+    def media_status=(media_status)
+      validator = EnumAttributeValidator.new('String', ["unavailable"])
+      unless validator.valid?(media_status)
+        fail ArgumentError, "invalid value for \"media_status\", must be one of #{validator.allowable_values}."
       end
+      @media_status = media_status
+    end
 
-      @url = url
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] unavailable_reason Object to be assigned
+    def unavailable_reason=(unavailable_reason)
+      validator = EnumAttributeValidator.new('String', ["platform_withheld"])
+      unless validator.valid?(unavailable_reason)
+        fail ArgumentError, "invalid value for \"unavailable_reason\", must be one of #{validator.allowable_values}."
+      end
+      @unavailable_reason = unavailable_reason
     end
 
     # Checks equality by comparing each attribute.
@@ -165,7 +195,9 @@ module Zernio
       self.class == o.class &&
           type == o.type &&
           url == o.url &&
-          thumbnail == o.thumbnail
+          thumbnail == o.thumbnail &&
+          media_status == o.media_status &&
+          unavailable_reason == o.unavailable_reason
     end
 
     # @see the `==` method
@@ -177,7 +209,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, url, thumbnail].hash
+      [type, url, thumbnail, media_status, unavailable_reason].hash
     end
 
     # Builds the object from hash

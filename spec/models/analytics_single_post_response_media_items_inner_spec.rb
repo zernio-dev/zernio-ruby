@@ -55,4 +55,24 @@ describe Zernio::AnalyticsSinglePostResponseMediaItemsInner do
     end
   end
 
+  describe 'test attribute "media_status"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["unavailable"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.media_status = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "unavailable_reason"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["platform_withheld"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.unavailable_reason = value }.not_to raise_error
+      # end
+    end
+  end
+
 end

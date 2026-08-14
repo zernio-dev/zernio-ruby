@@ -691,6 +691,7 @@ Class | Method | HTTP request | Description
  - [Zernio::AdsTimelineResponseRowsInner](docs/AdsTimelineResponseRowsInner.md)
  - [Zernio::AnalyticsListResponse](docs/AnalyticsListResponse.md)
  - [Zernio::AnalyticsListResponsePostsInner](docs/AnalyticsListResponsePostsInner.md)
+ - [Zernio::AnalyticsListResponsePostsInnerMediaItemsInner](docs/AnalyticsListResponsePostsInnerMediaItemsInner.md)
  - [Zernio::AnalyticsOverview](docs/AnalyticsOverview.md)
  - [Zernio::AnalyticsOverviewDataStaleness](docs/AnalyticsOverviewDataStaleness.md)
  - [Zernio::AnalyticsSinglePostResponse](docs/AnalyticsSinglePostResponse.md)

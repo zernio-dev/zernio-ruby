@@ -71,6 +71,7 @@ docs/AdsTimelineResponseRowsInner.md
 docs/AnalyticsApi.md
 docs/AnalyticsListResponse.md
 docs/AnalyticsListResponsePostsInner.md
+docs/AnalyticsListResponsePostsInnerMediaItemsInner.md
 docs/AnalyticsOverview.md
 docs/AnalyticsOverviewDataStaleness.md
 docs/AnalyticsSinglePostResponse.md
@@ -1842,6 +1843,7 @@ lib/zernio-sdk/models/ads_timeline_response.rb
 lib/zernio-sdk/models/ads_timeline_response_rows_inner.rb
 lib/zernio-sdk/models/analytics_list_response.rb
 lib/zernio-sdk/models/analytics_list_response_posts_inner.rb
+lib/zernio-sdk/models/analytics_list_response_posts_inner_media_items_inner.rb
 lib/zernio-sdk/models/analytics_overview.rb
 lib/zernio-sdk/models/analytics_overview_data_staleness.rb
 lib/zernio-sdk/models/analytics_single_post_response.rb
@@ -3550,6 +3552,7 @@ spec/models/adjust_conversions_request_spec.rb
 spec/models/ads_list_response_spec.rb
 spec/models/ads_timeline_response_rows_inner_spec.rb
 spec/models/ads_timeline_response_spec.rb
+spec/models/analytics_list_response_posts_inner_media_items_inner_spec.rb
 spec/models/analytics_list_response_posts_inner_spec.rb
 spec/models/analytics_list_response_spec.rb
 spec/models/analytics_overview_data_staleness_spec.rb
