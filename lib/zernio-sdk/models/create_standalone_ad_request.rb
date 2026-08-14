@@ -68,6 +68,7 @@ module Zernio
     # Meta only. Where the budget lives, which selects the Meta budget model:   - `adset` (default): ABO (Ad-set Budget Optimization). The budget is set on the     ad set. This is the back-compatible behaviour — omit this field to keep it.   - `campaign`: CBO (Campaign Budget Optimization / Advantage Campaign Budget). The     budget AND `bidStrategy` are set on the CAMPAIGN, and Meta distributes spend     across ad sets automatically. Meta requires the budget at exactly one level, never both. Non-Meta platforms ignore this field. Ignored on the attach shape (`adSetId`), which inherits the existing budget. 
     attr_accessor :budget_level
 
+    # ISO 4217 currency code matching the ad account's currency (e.g. `USD`). Meta only. Optional: Zernio resolves it from the ad account when omitted. The value selects the minor-unit exponent Zernio converts budget/bid amounts by before calling Meta (most currencies are cents; zero-decimal currencies like JPY/KRW are sent as-is).
     attr_accessor :currency
 
     # Required for Meta, Google, Pinterest, LinkedIn, and OpenAI Ads on legacy + attach shapes (skip for multi-creative — use `creatives[].headline`). Ignored for TikTok and X/Twitter. Max: Meta=255, Google=30, Pinterest=100, LinkedIn=400, OpenAI=50 (min 3). On LinkedIn this is the ad's headline (the bold text on the creative); for traffic ads it's the link card title. On OpenAI Ads this is the chat card's title.
@@ -910,6 +911,14 @@ module Zernio
         invalid_properties.push('invalid value for "ad_name", the character length must be smaller than or equal to 255.')
       end
 
+      if !@currency.nil? && @currency.to_s.length > 3
+        invalid_properties.push('invalid value for "currency", the character length must be smaller than or equal to 3.')
+      end
+
+      if !@currency.nil? && @currency.to_s.length < 3
+        invalid_properties.push('invalid value for "currency", the character length must be greater than or equal to 3.')
+      end
+
       if !@long_headline.nil? && @long_headline.to_s.length > 90
         invalid_properties.push('invalid value for "long_headline", the character length must be smaller than or equal to 90.')
       end
@@ -1005,6 +1014,8 @@ module Zernio
       return false unless status_validator.valid?(@status)
       budget_level_validator = EnumAttributeValidator.new('String', ["adset", "campaign"])
       return false unless budget_level_validator.valid?(@budget_level)
+      return false if !@currency.nil? && @currency.to_s.length > 3
+      return false if !@currency.nil? && @currency.to_s.length < 3
       return false if !@long_headline.nil? && @long_headline.to_s.length > 90
       return false if !@description.nil? && @description.to_s.length > 255
       call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "ADD_TO_CART", "APPLY_NOW", "BOOK_NOW", "BUY_TICKETS", "DONATE", "DONATE_NOW", "GET_DIRECTIONS", "GET_SHOWTIMES", "LISTEN_NOW", "ORDER_NOW", "PLAY_GAME", "REQUEST_TIME", "SEE_MENU", "START_ORDER", "INSTALL_MOBILE_APP", "USE_APP", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
@@ -1171,6 +1182,24 @@ module Zernio
         fail ArgumentError, "invalid value for \"budget_level\", must be one of #{validator.allowable_values}."
       end
       @budget_level = budget_level
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] currency Value to be assigned
+    def currency=(currency)
+      if currency.nil?
+        fail ArgumentError, 'currency cannot be nil'
+      end
+
+      if currency.to_s.length > 3
+        fail ArgumentError, 'invalid value for "currency", the character length must be smaller than or equal to 3.'
+      end
+
+      if currency.to_s.length < 3
+        fail ArgumentError, 'invalid value for "currency", the character length must be greater than or equal to 3.'
+      end
+
+      @currency = currency
     end
 
     # Custom attribute writer method with validation

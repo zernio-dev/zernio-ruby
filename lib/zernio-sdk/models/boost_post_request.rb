@@ -43,6 +43,7 @@ module Zernio
     # Meta only. Ad-set destination_type — where the click LANDS, as opposed to instagramAccountId which is who the ad runs as. Lead ads force ON_AD and ignore this.
     attr_accessor :destination_type
 
+    # ISO 4217 currency code matching the ad account's currency. Meta only. Optional: Zernio resolves it from the ad account when omitted. The value selects the minor-unit exponent Zernio converts budget/bid amounts by before calling Meta (most currencies are cents; zero-decimal currencies like JPY/KRW are sent as-is).
     attr_accessor :currency
 
     attr_accessor :schedule
@@ -357,6 +358,14 @@ module Zernio
         invalid_properties.push('invalid value for "goal", goal cannot be nil.')
       end
 
+      if !@currency.nil? && @currency.to_s.length > 3
+        invalid_properties.push('invalid value for "currency", the character length must be smaller than or equal to 3.')
+      end
+
+      if !@currency.nil? && @currency.to_s.length < 3
+        invalid_properties.push('invalid value for "currency", the character length must be greater than or equal to 3.')
+      end
+
       if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
         invalid_properties.push('invalid value for "dsa_beneficiary", the character length must be smaller than or equal to 100.')
       end
@@ -381,6 +390,8 @@ module Zernio
       return false unless goal_validator.valid?(@goal)
       destination_type_validator = EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP"])
       return false unless destination_type_validator.valid?(@destination_type)
+      return false if !@currency.nil? && @currency.to_s.length > 3
+      return false if !@currency.nil? && @currency.to_s.length < 3
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       true
@@ -438,6 +449,24 @@ module Zernio
         fail ArgumentError, "invalid value for \"destination_type\", must be one of #{validator.allowable_values}."
       end
       @destination_type = destination_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] currency Value to be assigned
+    def currency=(currency)
+      if currency.nil?
+        fail ArgumentError, 'currency cannot be nil'
+      end
+
+      if currency.to_s.length > 3
+        fail ArgumentError, 'invalid value for "currency", the character length must be smaller than or equal to 3.'
+      end
+
+      if currency.to_s.length < 3
+        fail ArgumentError, 'invalid value for "currency", the character length must be greater than or equal to 3.'
+      end
+
+      @currency = currency
     end
 
     # Custom attribute writer method with validation
