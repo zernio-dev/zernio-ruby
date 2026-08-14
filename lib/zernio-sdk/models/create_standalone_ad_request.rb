@@ -176,7 +176,7 @@ module Zernio
     # Meta only. Ad-set start time (ISO 8601, e.g. \"2026-06-10T09:00:00Z\"), mapped to the ad set's `start_time`. When omitted the ad starts delivering immediately. For lifetime budgets Meta also requires `endDate`. (Same `schedule.startDate` semantics already available on `POST /v1/ads/boost`.) 
     attr_accessor :start_date
 
-    # Meta only. Override the Instagram account the ad is delivered as — pass an Instagram Business Account ID (e.g. 17841...), mapped to the creative's `instagram_user_id`. When omitted we auto-resolve the IG account linked to the connected Facebook Page (the existing default). Useful when a Page has more than one eligible IG account. 
+    # Meta only. Override the Instagram account the ad is delivered as — pass an Instagram Business Account ID (e.g. 17841...), mapped to the creative's `instagram_user_id`. When omitted we use the Instagram actor Meta already runs the Page's other ads as, falling back to the Page's page-backed Instagram account. Useful when a Page has more than one eligible IG account. 
     attr_accessor :instagram_account_id
 
     attr_accessor :dynamic_creative
