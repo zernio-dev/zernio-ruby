@@ -1662,6 +1662,10 @@ docs/WebhookPayloadPostPostPlatformsInner.md
 docs/WebhookPayloadReaction.md
 docs/WebhookPayloadReactionReaction.md
 docs/WebhookPayloadReactionReactionSender.md
+docs/WebhookPayloadReferral.md
+docs/WebhookPayloadReferralReferral.md
+docs/WebhookPayloadReferralReferralAdsContextData.md
+docs/WebhookPayloadReferralSender.md
 docs/WebhookPayloadReviewNew.md
 docs/WebhookPayloadReviewNewAccount.md
 docs/WebhookPayloadReviewUpdated.md
@@ -3382,6 +3386,10 @@ lib/zernio-sdk/models/webhook_payload_post_post_platforms_inner.rb
 lib/zernio-sdk/models/webhook_payload_reaction.rb
 lib/zernio-sdk/models/webhook_payload_reaction_reaction.rb
 lib/zernio-sdk/models/webhook_payload_reaction_reaction_sender.rb
+lib/zernio-sdk/models/webhook_payload_referral.rb
+lib/zernio-sdk/models/webhook_payload_referral_referral.rb
+lib/zernio-sdk/models/webhook_payload_referral_referral_ads_context_data.rb
+lib/zernio-sdk/models/webhook_payload_referral_sender.rb
 lib/zernio-sdk/models/webhook_payload_review_new.rb
 lib/zernio-sdk/models/webhook_payload_review_new_account.rb
 lib/zernio-sdk/models/webhook_payload_review_updated.rb
@@ -5087,6 +5095,10 @@ spec/models/webhook_payload_post_spec.rb
 spec/models/webhook_payload_reaction_reaction_sender_spec.rb
 spec/models/webhook_payload_reaction_reaction_spec.rb
 spec/models/webhook_payload_reaction_spec.rb
+spec/models/webhook_payload_referral_referral_ads_context_data_spec.rb
+spec/models/webhook_payload_referral_referral_spec.rb
+spec/models/webhook_payload_referral_sender_spec.rb
+spec/models/webhook_payload_referral_spec.rb
 spec/models/webhook_payload_review_new_account_spec.rb
 spec/models/webhook_payload_review_new_spec.rb
 spec/models/webhook_payload_review_updated_spec.rb

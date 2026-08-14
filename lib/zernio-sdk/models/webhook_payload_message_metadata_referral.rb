@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Ad-click attribution forwarded verbatim from Meta. Populated only on the FIRST inbound message after the click; absent on subsequent messages of the same conversation.  The populated subset identifies the source platform:   - `ctwa_clid` and `source_*` fields: WhatsApp CTWA     (Click-to-WhatsApp). Attribution window is 7 days from click.     Forward to Meta Conversions API for Business Messaging replay.   - `ad_id` and `ads_context_data`: Facebook Messenger CTM     (Click-to-Message) or Instagram CTD (Click-to-Direct). Use     `ad_id` to attribute the conversation to a specific ad. 
+  # Click attribution forwarded verbatim from Meta. Populated only on the FIRST inbound message after the click; absent on subsequent messages of the same conversation. On Instagram and Messenger a RETURNING click also attaches it to the first message that follows, so read it on every `message.received` for per-click attribution; a click that opens an existing thread WITHOUT a message arrives as the separate `referral.received` event.  The populated subset identifies the source:   - `ctwa_clid` and `source_*` fields: WhatsApp CTWA     (Click-to-WhatsApp). Attribution window is 7 days from click.     Forward to Meta Conversions API for Business Messaging replay.   - `ad_id` and `ads_context_data`: Facebook Messenger CTM     (Click-to-Message) or Instagram CTD (Click-to-Direct). Use     `ad_id` to attribute the conversation to a specific ad.   - `ref` without `ad_id`: an ig.me / m.me link carrying a     `?ref=` parameter (`source` is `SHORTLINK`, `SHORTLINKS` or     `IGME-SOURCE-LINK` depending on surface - treat it as     opaque). Instagram delivers ig.me refs on new threads only     when the account has at least one Ice Breaker configured     (`PUT /v1/accounts/{accountId}/instagram-ice-breakers`). 
   class WebhookPayloadMessageMetadataReferral < ApiModelBase
     # Meta's GCLID-equivalent click identifier.
     attr_accessor :ctwa_clid
@@ -40,14 +40,17 @@ module Zernio
     # Facebook Messenger CTM / Instagram CTD only. The Meta ad ID the user clicked to start the conversation. 
     attr_accessor :ad_id
 
-    # Optional `ref` parameter passed through from the Meta ad creative. Facebook Messenger CTM / Instagram CTD only. 
+    # The `ref` parameter passed through from the Meta ad creative or from an ig.me / m.me link. Instagram / Facebook Messenger only. 
     attr_accessor :ref
 
-    # Meta-supplied source identifier (e.g. `ADS`). Facebook Messenger CTM / Instagram CTD only. 
+    # Meta-supplied source identifier (`ADS` for ad clicks; `SHORTLINK`, `SHORTLINKS` or `IGME-SOURCE-LINK` for ref links). Instagram / Facebook Messenger only. 
     attr_accessor :source
 
-    # Meta-supplied referral type (e.g. `OPEN_THREAD`). Facebook Messenger CTM / Instagram CTD only. 
+    # Meta-supplied referral type (e.g. `OPEN_THREAD`). Instagram / Facebook Messenger only. 
     attr_accessor :type
+
+    # URI of the originating site, when Meta supplies one (m.me links opened from the web). Facebook Messenger only. 
+    attr_accessor :referer_uri
 
     attr_accessor :ads_context_data
 
@@ -68,6 +71,7 @@ module Zernio
         :'ref' => :'ref',
         :'source' => :'source',
         :'type' => :'type',
+        :'referer_uri' => :'referer_uri',
         :'ads_context_data' => :'ads_context_data'
       }
     end
@@ -99,6 +103,7 @@ module Zernio
         :'ref' => :'String',
         :'source' => :'String',
         :'type' => :'String',
+        :'referer_uri' => :'String',
         :'ads_context_data' => :'WebhookPayloadMessageMetadataReferralAdsContextData'
       }
     end
@@ -181,6 +186,10 @@ module Zernio
         self.type = attributes[:'type']
       end
 
+      if attributes.key?(:'referer_uri')
+        self.referer_uri = attributes[:'referer_uri']
+      end
+
       if attributes.key?(:'ads_context_data')
         self.ads_context_data = attributes[:'ads_context_data']
       end
@@ -220,6 +229,7 @@ module Zernio
           ref == o.ref &&
           source == o.source &&
           type == o.type &&
+          referer_uri == o.referer_uri &&
           ads_context_data == o.ads_context_data
     end
 
@@ -232,7 +242,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ctwa_clid, source_id, source_type, source_url, headline, body, media_type, image_url, video_url, thumbnail_url, ad_id, ref, source, type, ads_context_data].hash
+      [ctwa_clid, source_id, source_type, source_url, headline, body, media_type, image_url, video_url, thumbnail_url, ad_id, ref, source, type, referer_uri, ads_context_data].hash
     end
 
     # Builds the object from hash
