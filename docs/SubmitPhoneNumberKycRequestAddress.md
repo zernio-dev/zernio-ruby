@@ -10,6 +10,7 @@
 | **first_name** | **String** |  | [optional] |
 | **last_name** | **String** |  | [optional] |
 | **street_address** | **String** |  | [optional] |
+| **extended_address** | **String** | Address complement: apartment, suite, unit, or the quadra/lote used in some countries. Optional. Does not substitute for a building number on street_address. | [optional] |
 | **locality** | **String** |  | [optional] |
 | **administrative_area** | **String** |  | [optional] |
 | **postal_code** | **String** |  | [optional] |
@@ -26,6 +27,7 @@ instance = Zernio::SubmitPhoneNumberKycRequestAddress.new(
   first_name: null,
   last_name: null,
   street_address: null,
+  extended_address: null,
   locality: null,
   administrative_area: null,
   postal_code: null

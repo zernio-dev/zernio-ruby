@@ -27,6 +27,9 @@ module Zernio
 
     attr_accessor :street_address
 
+    # Address complement: apartment, suite, unit, or the quadra/lote used in some countries. Optional. Does not substitute for a building number on street_address.
+    attr_accessor :extended_address
+
     attr_accessor :locality
 
     attr_accessor :administrative_area
@@ -42,6 +45,7 @@ module Zernio
         :'first_name' => :'first_name',
         :'last_name' => :'last_name',
         :'street_address' => :'street_address',
+        :'extended_address' => :'extended_address',
         :'locality' => :'locality',
         :'administrative_area' => :'administrative_area',
         :'postal_code' => :'postal_code'
@@ -67,6 +71,7 @@ module Zernio
         :'first_name' => :'String',
         :'last_name' => :'String',
         :'street_address' => :'String',
+        :'extended_address' => :'String',
         :'locality' => :'String',
         :'administrative_area' => :'String',
         :'postal_code' => :'String'
@@ -119,6 +124,10 @@ module Zernio
         self.street_address = attributes[:'street_address']
       end
 
+      if attributes.key?(:'extended_address')
+        self.extended_address = attributes[:'extended_address']
+      end
+
       if attributes.key?(:'locality')
         self.locality = attributes[:'locality']
       end
@@ -158,6 +167,7 @@ module Zernio
           first_name == o.first_name &&
           last_name == o.last_name &&
           street_address == o.street_address &&
+          extended_address == o.extended_address &&
           locality == o.locality &&
           administrative_area == o.administrative_area &&
           postal_code == o.postal_code
@@ -172,7 +182,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [requirement_id, country_code, business_name, first_name, last_name, street_address, locality, administrative_area, postal_code].hash
+      [requirement_id, country_code, business_name, first_name, last_name, street_address, extended_address, locality, administrative_area, postal_code].hash
     end
 
     # Builds the object from hash
