@@ -83,7 +83,7 @@ module Zernio
     end
 
     # Check account health
-    # Returns detailed health info for a specific account including token status, permissions, and recommendations.
+    # Returns detailed health info for a specific account including token status, permissions, and recommendations.  For WhatsApp accounts the response also includes `platformConnection`, a live probe of the Meta link behind the channel (the same read as `GET /v1/whatsapp/number-info`). The OAuth token can be perfectly valid while Meta refuses to serve the phone-number object (for example after a phone-side coexistence disconnect), so `tokenStatus` alone is not a liveness signal for WhatsApp. When the Meta link is dead, `platformConnection.status` is `disconnected` and the overall `status` is `error`. 
     # @param account_id [String] The account ID to check
     # @param [Hash] opts the optional parameters
     # @return [GetAccountHealth200Response]
@@ -93,7 +93,7 @@ module Zernio
     end
 
     # Check account health
-    # Returns detailed health info for a specific account including token status, permissions, and recommendations.
+    # Returns detailed health info for a specific account including token status, permissions, and recommendations.  For WhatsApp accounts the response also includes &#x60;platformConnection&#x60;, a live probe of the Meta link behind the channel (the same read as &#x60;GET /v1/whatsapp/number-info&#x60;). The OAuth token can be perfectly valid while Meta refuses to serve the phone-number object (for example after a phone-side coexistence disconnect), so &#x60;tokenStatus&#x60; alone is not a liveness signal for WhatsApp. When the Meta link is dead, &#x60;platformConnection.status&#x60; is &#x60;disconnected&#x60; and the overall &#x60;status&#x60; is &#x60;error&#x60;. 
     # @param account_id [String] The account ID to check
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetAccountHealth200Response, Integer, Hash)>] GetAccountHealth200Response data, response status code and response headers

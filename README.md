@@ -1084,6 +1084,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAccountHealth200Response](docs/GetAccountHealth200Response.md)
  - [Zernio::GetAccountHealth200ResponsePermissions](docs/GetAccountHealth200ResponsePermissions.md)
  - [Zernio::GetAccountHealth200ResponsePermissionsPostingInner](docs/GetAccountHealth200ResponsePermissionsPostingInner.md)
+ - [Zernio::GetAccountHealth200ResponsePlatformConnection](docs/GetAccountHealth200ResponsePlatformConnection.md)
+ - [Zernio::GetAccountHealth200ResponsePlatformConnectionMetaError](docs/GetAccountHealth200ResponsePlatformConnectionMetaError.md)
  - [Zernio::GetAccountHealth200ResponseTokenStatus](docs/GetAccountHealth200ResponseTokenStatus.md)
  - [Zernio::GetAd200Response](docs/GetAd200Response.md)
  - [Zernio::GetAdAccountFinance200Response](docs/GetAdAccountFinance200Response.md)

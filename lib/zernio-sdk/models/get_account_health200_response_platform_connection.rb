@@ -14,29 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetAccountHealth200Response < ApiModelBase
-    attr_accessor :account_id
-
-    attr_accessor :platform
-
-    attr_accessor :username
-
-    attr_accessor :display_name
-
-    # Overall health status
+  # WhatsApp accounts only. Live probe of the Meta link behind the channel, performed at request time (the same read as GET /v1/whatsapp/number-info).
+  class GetAccountHealth200ResponsePlatformConnection < ApiModelBase
+    # `connected` = Meta served the channel object. `disconnected` = Meta refused to serve it (Graph error 100, subcode 33), which is how a phone-side coexistence disconnect surfaces. `unknown` = the live read failed for another reason (timeout, transient Meta error), not evidence either way.
     attr_accessor :status
 
-    attr_accessor :token_status
+    # When this live probe ran (always the current request; never cached)
+    attr_accessor :checked_at
 
-    attr_accessor :permissions
+    # Meta's own `status` field from the phone-number node (for example CONNECTED), when the object was readable
+    attr_accessor :phone_status
 
-    # List of issues found
-    attr_accessor :issues
-
-    # Actionable recommendations to fix issues
-    attr_accessor :recommendations
-
-    attr_accessor :platform_connection
+    attr_accessor :meta_error
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -63,16 +52,10 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
-        :'platform' => :'platform',
-        :'username' => :'username',
-        :'display_name' => :'displayName',
         :'status' => :'status',
-        :'token_status' => :'tokenStatus',
-        :'permissions' => :'permissions',
-        :'issues' => :'issues',
-        :'recommendations' => :'recommendations',
-        :'platform_connection' => :'platformConnection'
+        :'checked_at' => :'checkedAt',
+        :'phone_status' => :'phoneStatus',
+        :'meta_error' => :'metaError'
       }
     end
 
@@ -89,22 +72,17 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
-        :'platform' => :'String',
-        :'username' => :'String',
-        :'display_name' => :'String',
         :'status' => :'String',
-        :'token_status' => :'GetAccountHealth200ResponseTokenStatus',
-        :'permissions' => :'GetAccountHealth200ResponsePermissions',
-        :'issues' => :'Array<String>',
-        :'recommendations' => :'Array<String>',
-        :'platform_connection' => :'GetAccountHealth200ResponsePlatformConnection'
+        :'checked_at' => :'Time',
+        :'phone_status' => :'String',
+        :'meta_error' => :'GetAccountHealth200ResponsePlatformConnectionMetaError'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'phone_status',
       ])
     end
 
@@ -112,60 +90,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetAccountHealth200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetAccountHealth200ResponsePlatformConnection` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetAccountHealth200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetAccountHealth200ResponsePlatformConnection`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
-
-      if attributes.key?(:'platform')
-        self.platform = attributes[:'platform']
-      end
-
-      if attributes.key?(:'username')
-        self.username = attributes[:'username']
-      end
-
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
-      end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'token_status')
-        self.token_status = attributes[:'token_status']
+      if attributes.key?(:'checked_at')
+        self.checked_at = attributes[:'checked_at']
       end
 
-      if attributes.key?(:'permissions')
-        self.permissions = attributes[:'permissions']
+      if attributes.key?(:'phone_status')
+        self.phone_status = attributes[:'phone_status']
       end
 
-      if attributes.key?(:'issues')
-        if (value = attributes[:'issues']).is_a?(Array)
-          self.issues = value
-        end
-      end
-
-      if attributes.key?(:'recommendations')
-        if (value = attributes[:'recommendations']).is_a?(Array)
-          self.recommendations = value
-        end
-      end
-
-      if attributes.key?(:'platform_connection')
-        self.platform_connection = attributes[:'platform_connection']
+      if attributes.key?(:'meta_error')
+        self.meta_error = attributes[:'meta_error']
       end
     end
 
@@ -181,7 +131,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["healthy", "warning", "error"])
+      status_validator = EnumAttributeValidator.new('String', ["connected", "disconnected", "unknown"])
       return false unless status_validator.valid?(@status)
       true
     end
@@ -189,7 +139,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["healthy", "warning", "error"])
+      validator = EnumAttributeValidator.new('String', ["connected", "disconnected", "unknown"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
@@ -201,16 +151,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          platform == o.platform &&
-          username == o.username &&
-          display_name == o.display_name &&
           status == o.status &&
-          token_status == o.token_status &&
-          permissions == o.permissions &&
-          issues == o.issues &&
-          recommendations == o.recommendations &&
-          platform_connection == o.platform_connection
+          checked_at == o.checked_at &&
+          phone_status == o.phone_status &&
+          meta_error == o.meta_error
     end
 
     # @see the `==` method
@@ -222,7 +166,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, platform, username, display_name, status, token_status, permissions, issues, recommendations, platform_connection].hash
+      [status, checked_at, phone_status, meta_error].hash
     end
 
     # Builds the object from hash

@@ -483,6 +483,8 @@ docs/GeoRestriction.md
 docs/GetAccountHealth200Response.md
 docs/GetAccountHealth200ResponsePermissions.md
 docs/GetAccountHealth200ResponsePermissionsPostingInner.md
+docs/GetAccountHealth200ResponsePlatformConnection.md
+docs/GetAccountHealth200ResponsePlatformConnectionMetaError.md
 docs/GetAccountHealth200ResponseTokenStatus.md
 docs/GetAd200Response.md
 docs/GetAdAccountFinance200Response.md
@@ -2238,6 +2240,8 @@ lib/zernio-sdk/models/geo_restriction.rb
 lib/zernio-sdk/models/get_account_health200_response.rb
 lib/zernio-sdk/models/get_account_health200_response_permissions.rb
 lib/zernio-sdk/models/get_account_health200_response_permissions_posting_inner.rb
+lib/zernio-sdk/models/get_account_health200_response_platform_connection.rb
+lib/zernio-sdk/models/get_account_health200_response_platform_connection_meta_error.rb
 lib/zernio-sdk/models/get_account_health200_response_token_status.rb
 lib/zernio-sdk/models/get_ad200_response.rb
 lib/zernio-sdk/models/get_ad_account_finance200_response.rb
@@ -3950,6 +3954,8 @@ spec/models/generate_keyword_ideas_request_spec.rb
 spec/models/geo_restriction_spec.rb
 spec/models/get_account_health200_response_permissions_posting_inner_spec.rb
 spec/models/get_account_health200_response_permissions_spec.rb
+spec/models/get_account_health200_response_platform_connection_meta_error_spec.rb
+spec/models/get_account_health200_response_platform_connection_spec.rb
 spec/models/get_account_health200_response_spec.rb
 spec/models/get_account_health200_response_token_status_spec.rb
 spec/models/get_ad200_response_spec.rb
