@@ -834,7 +834,7 @@ module Zernio
     # @option opts [String] :platform Filter by platform (searchable platforms only)
     # @option opts [String] :account_id Filter by specific social account ID
     # @option opts [Integer] :limit Maximum number of conversations to return (default to 20)
-    # @option opts [String] :cursor Pagination cursor for next page
+    # @option opts [String] :cursor Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one.
     # @return [SearchInboxConversations200Response]
     def search_inbox_conversations(query, opts = {})
       data, _status_code, _headers = search_inbox_conversations_with_http_info(query, opts)
@@ -850,7 +850,7 @@ module Zernio
     # @option opts [String] :platform Filter by platform (searchable platforms only)
     # @option opts [String] :account_id Filter by specific social account ID
     # @option opts [Integer] :limit Maximum number of conversations to return (default to 20)
-    # @option opts [String] :cursor Pagination cursor for next page
+    # @option opts [String] :cursor Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one.
     # @return [Array<(SearchInboxConversations200Response, Integer, Hash)>] SearchInboxConversations200Response data, response status code and response headers
     def search_inbox_conversations_with_http_info(query, opts = {})
       if @api_client.config.debugging

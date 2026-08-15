@@ -186,7 +186,7 @@ describe 'MessagesApi' do
   # @option opts [String] :platform Filter by platform (searchable platforms only)
   # @option opts [String] :account_id Filter by specific social account ID
   # @option opts [Integer] :limit Maximum number of conversations to return
-  # @option opts [String] :cursor Pagination cursor for next page
+  # @option opts [String] :cursor Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one.
   # @return [SearchInboxConversations200Response]
   describe 'search_inbox_conversations test' do
     it 'should work' do

@@ -792,7 +792,7 @@ opts = {
   platform: 'facebook', # String | Filter by platform (searchable platforms only)
   account_id: 'account_id_example', # String | Filter by specific social account ID
   limit: 56, # Integer | Maximum number of conversations to return
-  cursor: 'cursor_example' # String | Pagination cursor for next page
+  cursor: 'cursor_example' # String | Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one.
 }
 
 begin
@@ -832,7 +832,7 @@ end
 | **platform** | **String** | Filter by platform (searchable platforms only) | [optional] |
 | **account_id** | **String** | Filter by specific social account ID | [optional] |
 | **limit** | **Integer** | Maximum number of conversations to return | [optional][default to 20] |
-| **cursor** | **String** | Pagination cursor for next page | [optional] |
+| **cursor** | **String** | Opaque pagination cursor. Pass back pagination.nextCursor verbatim; do not construct one. | [optional] |
 
 ### Return type
 
