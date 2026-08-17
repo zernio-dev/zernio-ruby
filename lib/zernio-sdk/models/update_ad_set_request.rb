@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :budget
 
-    # Omit if not toggling delivery state
+    # Writes the ad set's own on/off switch (Meta: `configured_status`) on Meta and LinkedIn, whatever delivery status its ads report. Omit if not toggling delivery state.
     attr_accessor :status
 
     # Rename the ad set (Meta only; other platforms return 501). At least one of budget/status/bidStrategy/name is required.

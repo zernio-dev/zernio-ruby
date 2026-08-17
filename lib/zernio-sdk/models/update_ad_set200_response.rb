@@ -19,11 +19,20 @@ module Zernio
 
     attr_accessor :budget_level
 
+    # The status written to the ad set. Absent when nothing was written (see statusMessage).
     attr_accessor :status
 
+    # Number of ads whose own stored status changed alongside the ad set switch
     attr_accessor :status_updated
 
+    # Number of ads whose own status was left as it was
     attr_accessor :status_skipped
+
+    # Why each group of ads was skipped
+    attr_accessor :status_skipped_reasons
+
+    # Present only where the platform has no ad-set switch and no child ad was actionable; `status` is then absent because nothing was written
+    attr_accessor :status_message
 
     attr_accessor :bid_strategy
 
@@ -63,6 +72,8 @@ module Zernio
         :'status' => :'status',
         :'status_updated' => :'statusUpdated',
         :'status_skipped' => :'statusSkipped',
+        :'status_skipped_reasons' => :'statusSkippedReasons',
+        :'status_message' => :'statusMessage',
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
@@ -88,6 +99,8 @@ module Zernio
         :'status' => :'String',
         :'status_updated' => :'Integer',
         :'status_skipped' => :'Integer',
+        :'status_skipped_reasons' => :'Array<String>',
+        :'status_message' => :'String',
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
@@ -137,6 +150,16 @@ module Zernio
 
       if attributes.key?(:'status_skipped')
         self.status_skipped = attributes[:'status_skipped']
+      end
+
+      if attributes.key?(:'status_skipped_reasons')
+        if (value = attributes[:'status_skipped_reasons']).is_a?(Array)
+          self.status_skipped_reasons = value
+        end
+      end
+
+      if attributes.key?(:'status_message')
+        self.status_message = attributes[:'status_message']
       end
 
       if attributes.key?(:'bid_strategy')
@@ -205,6 +228,8 @@ module Zernio
           status == o.status &&
           status_updated == o.status_updated &&
           status_skipped == o.status_skipped &&
+          status_skipped_reasons == o.status_skipped_reasons &&
+          status_message == o.status_message &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
@@ -220,7 +245,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [budget, budget_level, status, status_updated, status_skipped, bid_strategy, bid_amount, roas_average_floor, platform_specific_data].hash
+      [budget, budget_level, status, status_updated, status_skipped, status_skipped_reasons, status_message, bid_strategy, bid_amount, roas_average_floor, platform_specific_data].hash
     end
 
     # Builds the object from hash

@@ -15,24 +15,47 @@ require 'time'
 
 module Zernio
   class UpdateAdCampaignStatus200Response < ApiModelBase
-    # Number of ads updated
+    # The status written to the campaign
+    attr_accessor :status
+
+    # Number of ads whose own stored status changed too. 0 is normal on a resume whose ads are all awaiting the platform.
     attr_accessor :updated
 
-    # Number of ads skipped
+    # Number of ads whose own status was left as it was
     attr_accessor :skipped
 
+    # Why each group of ads was skipped
     attr_accessor :skipped_reasons
 
-    # Human-readable summary (present when no ads were actionable)
-    attr_accessor :message
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'status' => :'status',
         :'updated' => :'updated',
         :'skipped' => :'skipped',
-        :'skipped_reasons' => :'skippedReasons',
-        :'message' => :'message'
+        :'skipped_reasons' => :'skippedReasons'
       }
     end
 
@@ -49,10 +72,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'status' => :'String',
         :'updated' => :'Integer',
         :'skipped' => :'Integer',
-        :'skipped_reasons' => :'Array<String>',
-        :'message' => :'String'
+        :'skipped_reasons' => :'Array<String>'
       }
     end
 
@@ -78,6 +101,10 @@ module Zernio
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
       if attributes.key?(:'updated')
         self.updated = attributes[:'updated']
       end
@@ -90,10 +117,6 @@ module Zernio
         if (value = attributes[:'skipped_reasons']).is_a?(Array)
           self.skipped_reasons = value
         end
-      end
-
-      if attributes.key?(:'message')
-        self.message = attributes[:'message']
       end
     end
 
@@ -109,7 +132,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      status_validator = EnumAttributeValidator.new('String', ["active", "paused"])
+      return false unless status_validator.valid?(@status)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["active", "paused"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -117,10 +152,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          status == o.status &&
           updated == o.updated &&
           skipped == o.skipped &&
-          skipped_reasons == o.skipped_reasons &&
-          message == o.message
+          skipped_reasons == o.skipped_reasons
     end
 
     # @see the `==` method
@@ -132,7 +167,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, skipped, skipped_reasons, message].hash
+      [status, updated, skipped, skipped_reasons].hash
     end
 
     # Builds the object from hash

@@ -27,6 +27,16 @@ describe Zernio::UpdateAdCampaignStatus200Response do
     end
   end
 
+  describe 'test attribute "status"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["active", "paused"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.status = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "updated"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -40,12 +50,6 @@ describe Zernio::UpdateAdCampaignStatus200Response do
   end
 
   describe 'test attribute "skipped_reasons"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-    end
-  end
-
-  describe 'test attribute "message"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
