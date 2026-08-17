@@ -37,6 +37,12 @@ module Zernio
 
     attr_accessor :end_reason
 
+    # Raw carrier hangup cause behind endReason (e.g. normal_clearing, call_rejected, not_found). Null when the carrier reported none.
+    attr_accessor :hangup_cause
+
+    # SIP response code that ended the call when SIP-signalled (e.g. '403', '486', '603'). endReason collapses all three to 'rejected', so this is what separates a refused destination from a busy line. Null on non-SIP legs.
+    attr_accessor :sip_hangup_cause
+
     attr_accessor :recording_url
 
     attr_accessor :recording_expires_at
@@ -79,6 +85,8 @@ module Zernio
         :'ended_at' => :'endedAt',
         :'duration_seconds' => :'durationSeconds',
         :'end_reason' => :'endReason',
+        :'hangup_cause' => :'hangupCause',
+        :'sip_hangup_cause' => :'sipHangupCause',
         :'recording_url' => :'recordingUrl',
         :'recording_expires_at' => :'recordingExpiresAt',
         :'billing' => :'billing'
@@ -109,6 +117,8 @@ module Zernio
         :'ended_at' => :'Time',
         :'duration_seconds' => :'Integer',
         :'end_reason' => :'String',
+        :'hangup_cause' => :'String',
+        :'sip_hangup_cause' => :'String',
         :'recording_url' => :'String',
         :'recording_expires_at' => :'Time',
         :'billing' => :'WebhookPayloadCallEndedCallBilling'
@@ -119,6 +129,8 @@ module Zernio
     def self.openapi_nullable
       Set.new([
         :'meta_call_id',
+        :'hangup_cause',
+        :'sip_hangup_cause',
       ])
     end
 
@@ -180,6 +192,14 @@ module Zernio
 
       if attributes.key?(:'end_reason')
         self.end_reason = attributes[:'end_reason']
+      end
+
+      if attributes.key?(:'hangup_cause')
+        self.hangup_cause = attributes[:'hangup_cause']
+      end
+
+      if attributes.key?(:'sip_hangup_cause')
+        self.sip_hangup_cause = attributes[:'sip_hangup_cause']
       end
 
       if attributes.key?(:'recording_url')
@@ -250,6 +270,8 @@ module Zernio
           ended_at == o.ended_at &&
           duration_seconds == o.duration_seconds &&
           end_reason == o.end_reason &&
+          hangup_cause == o.hangup_cause &&
+          sip_hangup_cause == o.sip_hangup_cause &&
           recording_url == o.recording_url &&
           recording_expires_at == o.recording_expires_at &&
           billing == o.billing
@@ -264,7 +286,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, meta_call_id, account_id, phone_number_id, direction, from, to, started_at, ended_at, duration_seconds, end_reason, recording_url, recording_expires_at, billing].hash
+      [id, meta_call_id, account_id, phone_number_id, direction, from, to, started_at, ended_at, duration_seconds, end_reason, hangup_cause, sip_hangup_cause, recording_url, recording_expires_at, billing].hash
     end
 
     # Builds the object from hash

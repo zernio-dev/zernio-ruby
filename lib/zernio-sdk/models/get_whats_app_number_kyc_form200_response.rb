@@ -23,13 +23,17 @@ module Zernio
 
     attr_accessor :reusable
 
+    # true when this account already has a number for this country in regulatory review (status pending_regulatory). Scope is the whole account across all profiles, and the country only (any number type), so it is not a per-end-client signal on a multi-tenant setup. Informational only: it never blocks a submission, and several same-country numbers may sit in review at once. For a per-end-client view, call GET /v1/phone-numbers with `profileId` and `status=pending_regulatory`; that view also lists numbers declined in the last 30 days.
+    attr_accessor :pending_review
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'country' => :'country',
         :'number_type' => :'numberType',
         :'fields' => :'fields',
-        :'reusable' => :'reusable'
+        :'reusable' => :'reusable',
+        :'pending_review' => :'pendingReview'
       }
     end
 
@@ -49,7 +53,8 @@ module Zernio
         :'country' => :'String',
         :'number_type' => :'String',
         :'fields' => :'Array<GetWhatsAppNumberKycForm200ResponseFieldsInner>',
-        :'reusable' => :'GetPhoneNumberKycForm200ResponseReusable'
+        :'reusable' => :'GetPhoneNumberKycForm200ResponseReusable',
+        :'pending_review' => :'Boolean'
       }
     end
 
@@ -92,6 +97,10 @@ module Zernio
       if attributes.key?(:'reusable')
         self.reusable = attributes[:'reusable']
       end
+
+      if attributes.key?(:'pending_review')
+        self.pending_review = attributes[:'pending_review']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,7 +126,8 @@ module Zernio
           country == o.country &&
           number_type == o.number_type &&
           fields == o.fields &&
-          reusable == o.reusable
+          reusable == o.reusable &&
+          pending_review == o.pending_review
     end
 
     # @see the `==` method
@@ -129,7 +139,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country, number_type, fields, reusable].hash
+      [country, number_type, fields, reusable, pending_review].hash
     end
 
     # Builds the object from hash

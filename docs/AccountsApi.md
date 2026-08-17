@@ -7,6 +7,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_account**](AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account |
 | [**get_account_health**](AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health |
 | [**get_all_accounts_health**](AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health |
+| [**get_bluesky_settings**](AccountsApi.md#get_bluesky_settings) | **GET** /v1/accounts/{accountId}/bluesky-settings | Get Bluesky account settings |
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
 | [**get_instagram_follow_status**](AccountsApi.md#get_instagram_follow_status) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account |
 | [**get_slack_settings**](AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings |
@@ -14,6 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_accounts**](AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts |
 | [**move_account_to_profile**](AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile |
 | [**update_account**](AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account |
+| [**update_bluesky_settings**](AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings |
 | [**update_slack_settings**](AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings |
 
 
@@ -219,6 +221,75 @@ end
 ### Return type
 
 [**GetAllAccountsHealth200Response**](GetAllAccountsHealth200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_bluesky_settings
+
+> <GetBlueskySettings200Response> get_bluesky_settings(account_id)
+
+Get Bluesky account settings
+
+Returns the account's default post languages (defaultLangs), applied at publish time whenever a post's platformSpecificData.langs is absent. Null when no default is set.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | 
+
+begin
+  # Get Bluesky account settings
+  result = api_instance.get_bluesky_settings(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_bluesky_settings: #{e}"
+end
+```
+
+#### Using the get_bluesky_settings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetBlueskySettings200Response>, Integer, Hash)> get_bluesky_settings_with_http_info(account_id)
+
+```ruby
+begin
+  # Get Bluesky account settings
+  data, status_code, headers = api_instance.get_bluesky_settings_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetBlueskySettings200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_bluesky_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**GetBlueskySettings200Response**](GetBlueskySettings200Response.md)
 
 ### Authorization
 
@@ -738,6 +809,76 @@ end
 ### Return type
 
 [**UpdateAccount200Response**](UpdateAccount200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_bluesky_settings
+
+> update_bluesky_settings(account_id, update_bluesky_settings_request)
+
+Update Bluesky account settings
+
+Set or clear the account's default post languages. 1-3 BCP-47 codes (e.g. \"pt\", \"en-US\"), the same validation as per-post langs; explicit null clears the default. Per-post platformSpecificData.langs always overrides this default. Applies to posts published after the change; already-published posts cannot be retagged (Bluesky has no post edit).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | 
+update_bluesky_settings_request = Zernio::UpdateBlueskySettingsRequest.new({default_langs: ["pt"]}) # UpdateBlueskySettingsRequest | 
+
+begin
+  # Update Bluesky account settings
+  api_instance.update_bluesky_settings(account_id, update_bluesky_settings_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->update_bluesky_settings: #{e}"
+end
+```
+
+#### Using the update_bluesky_settings_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> update_bluesky_settings_with_http_info(account_id, update_bluesky_settings_request)
+
+```ruby
+begin
+  # Update Bluesky account settings
+  data, status_code, headers = api_instance.update_bluesky_settings_with_http_info(account_id, update_bluesky_settings_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->update_bluesky_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **update_bluesky_settings_request** | [**UpdateBlueskySettingsRequest**](UpdateBlueskySettingsRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
 
 ### Authorization
 

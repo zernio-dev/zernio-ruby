@@ -516,6 +516,7 @@ docs/GetAnalytics402Response.md
 docs/GetBestTimeToPost200Response.md
 docs/GetBestTimeToPost200ResponseSlotsInner.md
 docs/GetBestTimeToPost403Response.md
+docs/GetBlueskySettings200Response.md
 docs/GetBroadcast200Response.md
 docs/GetBroadcast200ResponseBroadcast.md
 docs/GetBroadcast200ResponseBroadcastMessage.md
@@ -1432,6 +1433,7 @@ docs/UpdateAdTrackingTagsRequestCreative.md
 docs/UpdateAdTrackingTagsRequestUrlTagsInner.md
 docs/UpdateBlogArticleRequest.md
 docs/UpdateBlogRequest.md
+docs/UpdateBlueskySettingsRequest.md
 docs/UpdateBroadcast200Response.md
 docs/UpdateBroadcast200ResponseBroadcast.md
 docs/UpdateBroadcastRequest.md
@@ -2273,6 +2275,7 @@ lib/zernio-sdk/models/get_analytics402_response.rb
 lib/zernio-sdk/models/get_best_time_to_post200_response.rb
 lib/zernio-sdk/models/get_best_time_to_post200_response_slots_inner.rb
 lib/zernio-sdk/models/get_best_time_to_post403_response.rb
+lib/zernio-sdk/models/get_bluesky_settings200_response.rb
 lib/zernio-sdk/models/get_broadcast200_response.rb
 lib/zernio-sdk/models/get_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/get_broadcast200_response_broadcast_message.rb
@@ -3167,6 +3170,7 @@ lib/zernio-sdk/models/update_ad_tracking_tags_request_creative.rb
 lib/zernio-sdk/models/update_ad_tracking_tags_request_url_tags_inner.rb
 lib/zernio-sdk/models/update_blog_article_request.rb
 lib/zernio-sdk/models/update_blog_request.rb
+lib/zernio-sdk/models/update_bluesky_settings_request.rb
 lib/zernio-sdk/models/update_broadcast200_response.rb
 lib/zernio-sdk/models/update_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/update_broadcast_request.rb
@@ -3988,6 +3992,7 @@ spec/models/get_analytics402_response_spec.rb
 spec/models/get_best_time_to_post200_response_slots_inner_spec.rb
 spec/models/get_best_time_to_post200_response_spec.rb
 spec/models/get_best_time_to_post403_response_spec.rb
+spec/models/get_bluesky_settings200_response_spec.rb
 spec/models/get_broadcast200_response_broadcast_message_spec.rb
 spec/models/get_broadcast200_response_broadcast_spec.rb
 spec/models/get_broadcast200_response_broadcast_template_spec.rb
@@ -4882,6 +4887,7 @@ spec/models/update_ad_tracking_tags_request_spec.rb
 spec/models/update_ad_tracking_tags_request_url_tags_inner_spec.rb
 spec/models/update_blog_article_request_spec.rb
 spec/models/update_blog_request_spec.rb
+spec/models/update_bluesky_settings_request_spec.rb
 spec/models/update_broadcast200_response_broadcast_spec.rb
 spec/models/update_broadcast200_response_spec.rb
 spec/models/update_broadcast_request_message_spec.rb

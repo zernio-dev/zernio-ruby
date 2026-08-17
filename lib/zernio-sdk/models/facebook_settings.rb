@@ -106,8 +106,8 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@carousel_cards.nil? && @carousel_cards.length > 5
-        invalid_properties.push('invalid value for "carousel_cards", number of items must be less than or equal to 5.')
+      if !@carousel_cards.nil? && @carousel_cards.length > 10
+        invalid_properties.push('invalid value for "carousel_cards", number of items must be less than or equal to 10.')
       end
 
       if !@carousel_cards.nil? && @carousel_cards.length < 2
@@ -126,7 +126,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@carousel_cards.nil? && @carousel_cards.length > 5
+      return false if !@carousel_cards.nil? && @carousel_cards.length > 10
       return false if !@carousel_cards.nil? && @carousel_cards.length < 2
       return false if !@text_format_preset_id.nil? && @text_format_preset_id !~ Regexp.new(/^\d+$/)
       true
@@ -139,8 +139,8 @@ module Zernio
         fail ArgumentError, 'carousel_cards cannot be nil'
       end
 
-      if carousel_cards.length > 5
-        fail ArgumentError, 'invalid value for "carousel_cards", number of items must be less than or equal to 5.'
+      if carousel_cards.length > 10
+        fail ArgumentError, 'invalid value for "carousel_cards", number of items must be less than or equal to 10.'
       end
 
       if carousel_cards.length < 2

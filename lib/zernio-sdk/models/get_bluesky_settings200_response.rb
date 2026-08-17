@@ -14,19 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Bluesky post settings. Supports text posts with up to 4 images or a single video. threadItems creates a reply chain (Bluesky thread). Images exceeding 1MB are automatically compressed. Alt text supported via mediaItem properties. Use langs to tag post language for feed-generator filtering. 
-  class BlueskyPlatformData < ApiModelBase
-    # Language(s) of the post text as 1-3 BCP-47 codes (e.g. \"pt\", \"en-US\"), written to the post record's langs field. Bluesky feed generators filter on this field, so posts without it never appear in language-scoped feeds. Can only be set at creation (Bluesky has no post editing). When threadItems is used, every item in the thread carries the same langs. When omitted, the account's default (set via PATCH /v1/accounts/{accountId}/bluesky-settings) applies; with no default either, the field is absent from the record. 
-    attr_accessor :langs
-
-    # Complete sequence of posts in a Bluesky thread. The first item becomes the root post, subsequent items are chained as replies. When threadItems is provided, the top-level content field is used only for display and search purposes, it is NOT published. You must include your first post as threadItems[0]. 
-    attr_accessor :thread_items
+  class GetBlueskySettings200Response < ApiModelBase
+    attr_accessor :default_langs
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'langs' => :'langs',
-        :'thread_items' => :'threadItems'
+        :'default_langs' => :'defaultLangs'
       }
     end
 
@@ -43,14 +37,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'langs' => :'Array<String>',
-        :'thread_items' => :'Array<TwitterPlatformDataThreadItemsInner>'
+        :'default_langs' => :'Array<String>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'default_langs'
       ])
     end
 
@@ -58,27 +52,21 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::BlueskyPlatformData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetBlueskySettings200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::BlueskyPlatformData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetBlueskySettings200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'langs')
-        if (value = attributes[:'langs']).is_a?(Array)
-          self.langs = value
-        end
-      end
-
-      if attributes.key?(:'thread_items')
-        if (value = attributes[:'thread_items']).is_a?(Array)
-          self.thread_items = value
+      if attributes.key?(:'default_langs')
+        if (value = attributes[:'default_langs']).is_a?(Array)
+          self.default_langs = value
         end
       end
     end
@@ -88,14 +76,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@langs.nil? && @langs.length > 3
-        invalid_properties.push('invalid value for "langs", number of items must be less than or equal to 3.')
-      end
-
-      if !@langs.nil? && @langs.length < 1
-        invalid_properties.push('invalid value for "langs", number of items must be greater than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -103,27 +83,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@langs.nil? && @langs.length > 3
-      return false if !@langs.nil? && @langs.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] langs Value to be assigned
-    def langs=(langs)
-      if langs.nil?
-        fail ArgumentError, 'langs cannot be nil'
-      end
-
-      if langs.length > 3
-        fail ArgumentError, 'invalid value for "langs", number of items must be less than or equal to 3.'
-      end
-
-      if langs.length < 1
-        fail ArgumentError, 'invalid value for "langs", number of items must be greater than or equal to 1.'
-      end
-
-      @langs = langs
     end
 
     # Checks equality by comparing each attribute.
@@ -131,8 +91,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          langs == o.langs &&
-          thread_items == o.thread_items
+          default_langs == o.default_langs
     end
 
     # @see the `==` method
@@ -144,7 +103,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [langs, thread_items].hash
+      [default_langs].hash
     end
 
     # Builds the object from hash

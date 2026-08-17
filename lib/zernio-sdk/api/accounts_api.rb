@@ -219,6 +219,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get Bluesky account settings
+    # Returns the account's default post languages (defaultLangs), applied at publish time whenever a post's platformSpecificData.langs is absent. Null when no default is set.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetBlueskySettings200Response]
+    def get_bluesky_settings(account_id, opts = {})
+      data, _status_code, _headers = get_bluesky_settings_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get Bluesky account settings
+    # Returns the account&#39;s default post languages (defaultLangs), applied at publish time whenever a post&#39;s platformSpecificData.langs is absent. Null when no default is set.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetBlueskySettings200Response, Integer, Hash)>] GetBlueskySettings200Response data, response status code and response headers
+    def get_bluesky_settings_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountsApi.get_bluesky_settings ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.get_bluesky_settings"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/bluesky-settings'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetBlueskySettings200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountsApi.get_bluesky_settings",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#get_bluesky_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get follower stats
     # Returns follower count history and growth metrics for connected social accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
     # @param [Hash] opts the optional parameters
@@ -735,6 +798,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AccountsApi#update_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Bluesky account settings
+    # Set or clear the account's default post languages. 1-3 BCP-47 codes (e.g. \"pt\", \"en-US\"), the same validation as per-post langs; explicit null clears the default. Per-post platformSpecificData.langs always overrides this default. Applies to posts published after the change; already-published posts cannot be retagged (Bluesky has no post edit).
+    # @param account_id [String] 
+    # @param update_bluesky_settings_request [UpdateBlueskySettingsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def update_bluesky_settings(account_id, update_bluesky_settings_request, opts = {})
+      update_bluesky_settings_with_http_info(account_id, update_bluesky_settings_request, opts)
+      nil
+    end
+
+    # Update Bluesky account settings
+    # Set or clear the account&#39;s default post languages. 1-3 BCP-47 codes (e.g. \&quot;pt\&quot;, \&quot;en-US\&quot;), the same validation as per-post langs; explicit null clears the default. Per-post platformSpecificData.langs always overrides this default. Applies to posts published after the change; already-published posts cannot be retagged (Bluesky has no post edit).
+    # @param account_id [String] 
+    # @param update_bluesky_settings_request [UpdateBlueskySettingsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def update_bluesky_settings_with_http_info(account_id, update_bluesky_settings_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountsApi.update_bluesky_settings ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.update_bluesky_settings"
+      end
+      # verify the required parameter 'update_bluesky_settings_request' is set
+      if @api_client.config.client_side_validation && update_bluesky_settings_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_bluesky_settings_request' when calling AccountsApi.update_bluesky_settings"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/bluesky-settings'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_bluesky_settings_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountsApi.update_bluesky_settings",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#update_bluesky_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

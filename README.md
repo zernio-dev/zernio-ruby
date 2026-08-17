@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**delete_account**](docs/AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account
 *Zernio::AccountsApi* | [**get_account_health**](docs/AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health
 *Zernio::AccountsApi* | [**get_all_accounts_health**](docs/AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health
+*Zernio::AccountsApi* | [**get_bluesky_settings**](docs/AccountsApi.md#get_bluesky_settings) | **GET** /v1/accounts/{accountId}/bluesky-settings | Get Bluesky account settings
 *Zernio::AccountsApi* | [**get_follower_stats**](docs/AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
 *Zernio::AccountsApi* | [**get_instagram_follow_status**](docs/AccountsApi.md#get_instagram_follow_status) | **GET** /v1/accounts/{accountId}/follow-status/{userId} | Check whether an Instagram user follows the account
 *Zernio::AccountsApi* | [**get_slack_settings**](docs/AccountsApi.md#get_slack_settings) | **GET** /v1/accounts/{accountId}/slack-settings | Get Slack account settings
@@ -93,6 +94,7 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**list_accounts**](docs/AccountsApi.md#list_accounts) | **GET** /v1/accounts | List accounts
 *Zernio::AccountsApi* | [**move_account_to_profile**](docs/AccountsApi.md#move_account_to_profile) | **PATCH** /v1/accounts/{accountId} | Move account to another profile
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
+*Zernio::AccountsApi* | [**update_bluesky_settings**](docs/AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings
 *Zernio::AccountsApi* | [**update_slack_settings**](docs/AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
 *Zernio::AdAccountsApi* | [**create_custom_conversion**](docs/AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion
 *Zernio::AdAccountsApi* | [**create_high_demand_period**](docs/AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase
@@ -1117,6 +1119,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetBestTimeToPost200Response](docs/GetBestTimeToPost200Response.md)
  - [Zernio::GetBestTimeToPost200ResponseSlotsInner](docs/GetBestTimeToPost200ResponseSlotsInner.md)
  - [Zernio::GetBestTimeToPost403Response](docs/GetBestTimeToPost403Response.md)
+ - [Zernio::GetBlueskySettings200Response](docs/GetBlueskySettings200Response.md)
  - [Zernio::GetBroadcast200Response](docs/GetBroadcast200Response.md)
  - [Zernio::GetBroadcast200ResponseBroadcast](docs/GetBroadcast200ResponseBroadcast.md)
  - [Zernio::GetBroadcast200ResponseBroadcastMessage](docs/GetBroadcast200ResponseBroadcastMessage.md)
@@ -2011,6 +2014,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdTrackingTagsRequestUrlTagsInner](docs/UpdateAdTrackingTagsRequestUrlTagsInner.md)
  - [Zernio::UpdateBlogArticleRequest](docs/UpdateBlogArticleRequest.md)
  - [Zernio::UpdateBlogRequest](docs/UpdateBlogRequest.md)
+ - [Zernio::UpdateBlueskySettingsRequest](docs/UpdateBlueskySettingsRequest.md)
  - [Zernio::UpdateBroadcast200Response](docs/UpdateBroadcast200Response.md)
  - [Zernio::UpdateBroadcast200ResponseBroadcast](docs/UpdateBroadcast200ResponseBroadcast.md)
  - [Zernio::UpdateBroadcastRequest](docs/UpdateBroadcastRequest.md)

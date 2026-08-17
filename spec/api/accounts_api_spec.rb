@@ -70,6 +70,18 @@ describe 'AccountsApi' do
     end
   end
 
+  # unit tests for get_bluesky_settings
+  # Get Bluesky account settings
+  # Returns the account&#39;s default post languages (defaultLangs), applied at publish time whenever a post&#39;s platformSpecificData.langs is absent. Null when no default is set.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetBlueskySettings200Response]
+  describe 'get_bluesky_settings test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_follower_stats
   # Get follower stats
   # Returns follower count history and growth metrics for connected social accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
@@ -163,6 +175,19 @@ describe 'AccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAccount200Response]
   describe 'update_account test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_bluesky_settings
+  # Update Bluesky account settings
+  # Set or clear the account&#39;s default post languages. 1-3 BCP-47 codes (e.g. \&quot;pt\&quot;, \&quot;en-US\&quot;), the same validation as per-post langs; explicit null clears the default. Per-post platformSpecificData.langs always overrides this default. Applies to posts published after the change; already-published posts cannot be retagged (Bluesky has no post edit).
+  # @param account_id 
+  # @param update_bluesky_settings_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'update_bluesky_settings test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

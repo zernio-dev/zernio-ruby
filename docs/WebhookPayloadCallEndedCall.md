@@ -15,6 +15,8 @@
 | **ended_at** | **Time** |  | [optional] |
 | **duration_seconds** | **Integer** |  | [optional] |
 | **end_reason** | **String** |  | [optional] |
+| **hangup_cause** | **String** | Raw carrier hangup cause behind endReason (e.g. normal_clearing, call_rejected, not_found). Null when the carrier reported none. | [optional] |
+| **sip_hangup_cause** | **String** | SIP response code that ended the call when SIP-signalled (e.g. &#39;403&#39;, &#39;486&#39;, &#39;603&#39;). endReason collapses all three to &#39;rejected&#39;, so this is what separates a refused destination from a busy line. Null on non-SIP legs. | [optional] |
 | **recording_url** | **String** |  | [optional] |
 | **recording_expires_at** | **Time** |  | [optional] |
 | **billing** | [**WebhookPayloadCallEndedCallBilling**](WebhookPayloadCallEndedCallBilling.md) |  | [optional] |
@@ -36,6 +38,8 @@ instance = Zernio::WebhookPayloadCallEndedCall.new(
   ended_at: null,
   duration_seconds: null,
   end_reason: null,
+  hangup_cause: null,
+  sip_hangup_cause: null,
   recording_url: null,
   recording_expires_at: null,
   billing: null
