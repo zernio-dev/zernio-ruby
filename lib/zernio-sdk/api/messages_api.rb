@@ -399,7 +399,7 @@ module Zernio
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of messages to return per page. Default 100, max 100. (default to 100)
-    # @option opts [String] :cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response.
+    # @option opts [String] :cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page.
     # @option opts [String] :sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). Twitter, Instagram, Telegram, WhatsApp and Reddit honor this order across cursor pages. For Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response.  (default to 'asc')
     # @return [GetInboxConversationMessages200Response]
     def get_inbox_conversation_messages(conversation_id, account_id, opts = {})
@@ -413,7 +413,7 @@ module Zernio
     # @param account_id [String] Social account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of messages to return per page. Default 100, max 100. (default to 100)
-    # @option opts [String] :cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response.
+    # @option opts [String] :cursor Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page.
     # @option opts [String] :sort_order Order of returned messages. Default &#x60;asc&#x60; (oldest first, chat style). Twitter, Instagram, Telegram, WhatsApp and Reddit honor this order across cursor pages. For Facebook and Bluesky, only intra-page ordering is affected — pages always walk newest→oldest. See &#x60;sortOrderApplied&#x60; in the response.  (default to 'asc')
     # @return [Array<(GetInboxConversationMessages200Response, Integer, Hash)>] GetInboxConversationMessages200Response data, response status code and response headers
     def get_inbox_conversation_messages_with_http_info(conversation_id, account_id, opts = {})
