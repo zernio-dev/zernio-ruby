@@ -42,7 +42,7 @@ module Zernio
     # Video views (video posts only)
     attr_accessor :views
 
-    # Engagement rate as percentage
+    # Engagement rate, as a percentage rounded to 2 decimals: (likes + comments + shares + clicks + saves + sends) / impressions * 100. Unlike PostAnalytics.engagementRate on GET /v1/analytics, this one DOES count clicks and has no fallback denominator, so it is 0 whenever impressions is 0. For organization accounts the value is the rate LinkedIn returns, not one computed here.
     attr_accessor :engagement_rate
 
     # Attribute mapping from ruby-style variable name to JSON key.

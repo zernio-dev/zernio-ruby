@@ -34,6 +34,7 @@ module Zernio
 
     attr_accessor :impressions
 
+    # Percentage, rounded to 2 decimals. Same definition as PostAnalytics.engagementRate: (likes + comments + shares + saves) / (impressions or reach or views) * 100, where the denominator is the first of the three that is non-zero. Clicks and follows are never counted.
     attr_accessor :engagement_rate
 
     # When these metrics were last refreshed
