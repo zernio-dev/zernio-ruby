@@ -121,6 +121,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'contact_name',
         :'error_code',
         :'error_explanation',
         :'error_trace_id',
