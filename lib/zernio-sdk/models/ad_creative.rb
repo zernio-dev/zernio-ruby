@@ -28,6 +28,9 @@ module Zernio
     # Public Facebook watch URL for VIDEO-type ads (https://www.facebook.com/watch/?v={videoId}). Null for non-video ads.
     attr_accessor :video_url
 
+    # Meta ad creative id backing this ad. Reusable via existingCreativeId on POST /v1/ads/create.
+    attr_accessor :creative_id
+
     # Meta creative object_type (e.g. SHARE, VIDEO, PRIVACY_CHECK_FAIL, POST_DELETED). Use this to render state-aware previews — when Meta moderation strips image/video fields, only thumbnailUrl at 64x64 is available.
     attr_accessor :object_type
 
@@ -83,6 +86,7 @@ module Zernio
         :'image_url' => :'imageUrl',
         :'video_id' => :'videoId',
         :'video_url' => :'videoUrl',
+        :'creative_id' => :'creativeId',
         :'object_type' => :'objectType',
         :'object_story_id' => :'objectStoryId',
         :'effective_object_story_id' => :'effectiveObjectStoryId',
@@ -120,6 +124,7 @@ module Zernio
         :'image_url' => :'String',
         :'video_id' => :'String',
         :'video_url' => :'String',
+        :'creative_id' => :'String',
         :'object_type' => :'String',
         :'object_story_id' => :'String',
         :'effective_object_story_id' => :'String',
@@ -146,6 +151,7 @@ module Zernio
         :'thumbnail_url',
         :'video_id',
         :'video_url',
+        :'creative_id',
         :'object_story_id',
         :'effective_object_story_id',
         :'page_id',
@@ -186,6 +192,10 @@ module Zernio
 
       if attributes.key?(:'video_url')
         self.video_url = attributes[:'video_url']
+      end
+
+      if attributes.key?(:'creative_id')
+        self.creative_id = attributes[:'creative_id']
       end
 
       if attributes.key?(:'object_type')
@@ -285,6 +295,7 @@ module Zernio
           image_url == o.image_url &&
           video_id == o.video_id &&
           video_url == o.video_url &&
+          creative_id == o.creative_id &&
           object_type == o.object_type &&
           object_story_id == o.object_story_id &&
           effective_object_story_id == o.effective_object_story_id &&
@@ -313,7 +324,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thumbnail_url, image_url, video_id, video_url, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
+      [thumbnail_url, image_url, video_id, video_url, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
     end
 
     # Builds the object from hash
