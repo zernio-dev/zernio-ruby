@@ -65,6 +65,9 @@ module Zernio
 
     attr_accessor :unsupported
 
+    # Instagram / Facebook Messenger only. Set when the message carries nothing an integrator can render (a `template` attachment with no text and no parseable content, or Meta's own `is_unsupported` flag). Sibling of `unsupported` above (WhatsApp only, carries Meta's error code/title/details): this field has no error envelope, just the boolean. Absence means \"not flagged\", never \"checked and renderable\". 
+    attr_accessor :no_renderable_content
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -107,7 +110,8 @@ module Zernio
         :'story_reply' => :'storyReply',
         :'is_story_mention' => :'isStoryMention',
         :'referral' => :'referral',
-        :'unsupported' => :'unsupported'
+        :'unsupported' => :'unsupported',
+        :'no_renderable_content' => :'noRenderableContent'
       }
     end
 
@@ -141,7 +145,8 @@ module Zernio
         :'story_reply' => :'WebhookPayloadMessageMetadataStoryReply',
         :'is_story_mention' => :'Boolean',
         :'referral' => :'WebhookPayloadMessageMetadataReferral',
-        :'unsupported' => :'WebhookPayloadMessageMetadataUnsupported'
+        :'unsupported' => :'WebhookPayloadMessageMetadataUnsupported',
+        :'no_renderable_content' => :'Boolean'
       }
     end
 
@@ -242,6 +247,10 @@ module Zernio
       if attributes.key?(:'unsupported')
         self.unsupported = attributes[:'unsupported']
       end
+
+      if attributes.key?(:'no_renderable_content')
+        self.no_renderable_content = attributes[:'no_renderable_content']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -305,7 +314,8 @@ module Zernio
           story_reply == o.story_reply &&
           is_story_mention == o.is_story_mention &&
           referral == o.referral &&
-          unsupported == o.unsupported
+          unsupported == o.unsupported &&
+          no_renderable_content == o.no_renderable_content
     end
 
     # @see the `==` method
@@ -317,7 +327,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quoted_message_id, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported].hash
+      [quoted_message_id, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
     end
 
     # Builds the object from hash
