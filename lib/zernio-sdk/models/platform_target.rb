@@ -54,7 +54,7 @@ module Zernio
     # Human-readable error message when status is failed. Contains platform-specific error details explaining why the publish failed.
     attr_accessor :error_message
 
-    # Error category for programmatic handling: auth_expired (token expired/revoked), user_content (wrong format/too long), user_abuse (rate limits/spam), account_issue (config problems), platform_rejected (policy violation), platform_error (5xx/maintenance), system_error (Zernio infra), unknown
+    # Error category for programmatic handling: auth_expired (token expired/revoked), user_content (wrong format/too long), user_abuse (rate limits/spam), account_issue (config problems), platform_rejected (policy violation), platform_error (5xx/maintenance), platform_rate_limit (platform throttling, retried automatically), quota_exhausted (shared daily API quota empty, resumes at the platform's reset), system_error (Zernio infra), unknown
     attr_accessor :error_category
 
     # Who caused the error: user (fix content/reconnect), platform (outage/API change), system (Zernio issue, rare)
@@ -240,7 +240,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       trial_graduation_strategy_validator = EnumAttributeValidator.new('String', ["MANUAL", "SS_PERFORMANCE"])
       return false unless trial_graduation_strategy_validator.valid?(@trial_graduation_strategy)
-      error_category_validator = EnumAttributeValidator.new('String', ["auth_expired", "user_content", "user_abuse", "account_issue", "platform_rejected", "platform_error", "system_error", "unknown"])
+      error_category_validator = EnumAttributeValidator.new('String', ["auth_expired", "user_content", "user_abuse", "account_issue", "platform_rejected", "platform_error", "platform_rate_limit", "quota_exhausted", "system_error", "unknown"])
       return false unless error_category_validator.valid?(@error_category)
       error_source_validator = EnumAttributeValidator.new('String', ["user", "platform", "system"])
       return false unless error_source_validator.valid?(@error_source)
@@ -260,7 +260,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] error_category Object to be assigned
     def error_category=(error_category)
-      validator = EnumAttributeValidator.new('String', ["auth_expired", "user_content", "user_abuse", "account_issue", "platform_rejected", "platform_error", "system_error", "unknown"])
+      validator = EnumAttributeValidator.new('String', ["auth_expired", "user_content", "user_abuse", "account_issue", "platform_rejected", "platform_error", "platform_rate_limit", "quota_exhausted", "system_error", "unknown"])
       unless validator.valid?(error_category)
         fail ArgumentError, "invalid value for \"error_category\", must be one of #{validator.allowable_values}."
       end

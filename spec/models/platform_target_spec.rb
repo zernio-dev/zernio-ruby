@@ -118,7 +118,7 @@ describe Zernio::PlatformTarget do
   describe 'test attribute "error_category"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["auth_expired", "user_content", "user_abuse", "account_issue", "platform_rejected", "platform_error", "system_error", "unknown"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["auth_expired", "user_content", "user_abuse", "account_issue", "platform_rejected", "platform_error", "platform_rate_limit", "quota_exhausted", "system_error", "unknown"])
       # validator.allowable_values.each do |value|
       #   expect { instance.error_category = value }.not_to raise_error
       # end
