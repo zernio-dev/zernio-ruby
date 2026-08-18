@@ -36,6 +36,9 @@ module Zernio
     # WhatsApp only (Meta Direct Send). Combined with message and without templateName, starts the conversation with a business-initiated UTILITY message and no pre-approved template; Meta matches or auto-creates a template asynchronously. The WhatsApp Business Account must be eligible for Direct Send, otherwise the send fails with an error telling you to use an approved message template instead. Cannot be combined with templateName (templates are already categorized at creation). Utility messages only; marketing content is not allowed under this category. Accepted on the JSON body only, not on multipart requests.
     attr_accessor :category
 
+    # WhatsApp only. Set false to send the Direct Send (category: 'utility') text message without a link-preview thumbnail for the first URL in the text. Defaults to true, which is how every WhatsApp text has been sent to date. Does not apply to template sends. Accepted on the JSON body only, not on multipart requests.
+    attr_accessor :link_preview
+
     # WhatsApp only. Template language code (e.g. en_US).
     attr_accessor :template_language
 
@@ -76,6 +79,7 @@ module Zernio
         :'skip_dm_check' => :'skipDmCheck',
         :'template_name' => :'templateName',
         :'category' => :'category',
+        :'link_preview' => :'linkPreview',
         :'template_language' => :'templateLanguage',
         :'template_params' => :'templateParams',
         :'header_media' => :'headerMedia'
@@ -102,6 +106,7 @@ module Zernio
         :'skip_dm_check' => :'Boolean',
         :'template_name' => :'String',
         :'category' => :'String',
+        :'link_preview' => :'Boolean',
         :'template_language' => :'String',
         :'template_params' => :'Array<String>',
         :'header_media' => :'CreateInboxConversationRequestHeaderMedia'
@@ -160,6 +165,12 @@ module Zernio
 
       if attributes.key?(:'category')
         self.category = attributes[:'category']
+      end
+
+      if attributes.key?(:'link_preview')
+        self.link_preview = attributes[:'link_preview']
+      else
+        self.link_preview = true
       end
 
       if attributes.key?(:'template_language')
@@ -231,6 +242,7 @@ module Zernio
           skip_dm_check == o.skip_dm_check &&
           template_name == o.template_name &&
           category == o.category &&
+          link_preview == o.link_preview &&
           template_language == o.template_language &&
           template_params == o.template_params &&
           header_media == o.header_media
@@ -245,7 +257,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, template_language, template_params, header_media].hash
+      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, link_preview, template_language, template_params, header_media].hash
     end
 
     # Builds the object from hash

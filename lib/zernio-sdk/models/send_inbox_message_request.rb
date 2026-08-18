@@ -27,6 +27,9 @@ module Zernio
     # WhatsApp only (Meta Direct Send). Sends this message as a business-initiated UTILITY message without an approved template, for example outside the 24-hour customer service window; Meta matches or auto-creates a template asynchronously. The WhatsApp Business Account must be eligible for Direct Send, otherwise the send fails with an error telling you to use an approved message template instead. Supported only for text messages (link preview ok) and interactive messages (reply buttons, CTA URL buttons, voice-call button, header of text/image/video/document). Cannot be combined with template, attachments, location, or contacts. Utility messages only; marketing content is not allowed under this category. Accepted on the JSON body only, not on multipart requests.
     attr_accessor :category
 
+    # WhatsApp only. Set false to send the message without a link-preview thumbnail for the first URL in the text. Defaults to true, which is how every WhatsApp text has been sent to date. Ignored on other platforms. Accepted on the JSON body only, not on multipart requests.
+    attr_accessor :link_preview
+
     # Type of attachment. Defaults to file if not specified.
     attr_accessor :attachment_type
 
@@ -91,6 +94,7 @@ module Zernio
         :'message' => :'message',
         :'attachment_url' => :'attachmentUrl',
         :'category' => :'category',
+        :'link_preview' => :'linkPreview',
         :'attachment_type' => :'attachmentType',
         :'attachment_name' => :'attachmentName',
         :'voice_note' => :'voiceNote',
@@ -124,6 +128,7 @@ module Zernio
         :'message' => :'String',
         :'attachment_url' => :'String',
         :'category' => :'String',
+        :'link_preview' => :'Boolean',
         :'attachment_type' => :'String',
         :'attachment_name' => :'String',
         :'voice_note' => :'Boolean',
@@ -178,6 +183,12 @@ module Zernio
 
       if attributes.key?(:'category')
         self.category = attributes[:'category']
+      end
+
+      if attributes.key?(:'link_preview')
+        self.link_preview = attributes[:'link_preview']
+      else
+        self.link_preview = true
       end
 
       if attributes.key?(:'attachment_type')
@@ -364,6 +375,7 @@ module Zernio
           message == o.message &&
           attachment_url == o.attachment_url &&
           category == o.category &&
+          link_preview == o.link_preview &&
           attachment_type == o.attachment_type &&
           attachment_name == o.attachment_name &&
           voice_note == o.voice_note &&
@@ -388,7 +400,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, message, attachment_url, category, attachment_type, attachment_name, voice_note, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to, location, contacts].hash
+      [account_id, message, attachment_url, category, link_preview, attachment_type, attachment_name, voice_note, quick_replies, buttons, template, interactive, reply_markup, messaging_type, message_tag, reply_to, location, contacts].hash
     end
 
     # Builds the object from hash
