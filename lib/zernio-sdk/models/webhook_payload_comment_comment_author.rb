@@ -24,6 +24,9 @@ module Zernio
 
     attr_accessor :picture
 
+    # True when this comment was authored by the connected account itself (Meta re-delivers the account's own replies as comments events). Populated on the Instagram and Facebook realtime webhooks only; absent means not evaluated, never \"not the account\".
+    attr_accessor :is_own_account
+
     attr_accessor :instagram_profile
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -33,6 +36,7 @@ module Zernio
         :'username' => :'username',
         :'name' => :'name',
         :'picture' => :'picture',
+        :'is_own_account' => :'isOwnAccount',
         :'instagram_profile' => :'instagramProfile'
       }
     end
@@ -54,6 +58,7 @@ module Zernio
         :'username' => :'String',
         :'name' => :'String',
         :'picture' => :'String',
+        :'is_own_account' => :'Boolean',
         :'instagram_profile' => :'WebhookPayloadCommentCommentAuthorInstagramProfile'
       }
     end
@@ -97,6 +102,10 @@ module Zernio
 
       if attributes.key?(:'picture')
         self.picture = attributes[:'picture']
+      end
+
+      if attributes.key?(:'is_own_account')
+        self.is_own_account = attributes[:'is_own_account']
       end
 
       if attributes.key?(:'instagram_profile')
@@ -143,6 +152,7 @@ module Zernio
           username == o.username &&
           name == o.name &&
           picture == o.picture &&
+          is_own_account == o.is_own_account &&
           instagram_profile == o.instagram_profile
     end
 
@@ -155,7 +165,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, username, name, picture, instagram_profile].hash
+      [id, username, name, picture, is_own_account, instagram_profile].hash
     end
 
     # Builds the object from hash
