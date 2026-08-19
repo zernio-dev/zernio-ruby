@@ -14,8 +14,10 @@ require 'date'
 require 'time'
 
 module Zernio
-  # X (Twitter) geo-restriction applies at the media level. Media in geo-restricted tweets will be hidden for users outside the specified countries; the tweet text itself remains visible globally. Requires media to be attached (ignored for text-only tweets). 
+  # X-specific post options. The article field creates a long-form X Article and is mutually exclusive with tweet media and tweet-only options. Geo-restriction applies at the media level: media is hidden outside the specified countries while tweet text remains visible. 
   class TwitterPlatformData < ApiModelBase
+    attr_accessor :article
+
     # ID of an existing tweet to reply to. The published tweet will appear as a reply in that tweet's thread. For threads, only the first tweet replies to the target; subsequent tweets chain normally. X only permits replying to your own posts or posts you are mentioned in; replying to an arbitrary other account's post is rejected by X.
     attr_accessor :reply_to_tweet_id
 
@@ -68,6 +70,7 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'article' => :'article',
         :'reply_to_tweet_id' => :'replyToTweetId',
         :'quote_tweet_id' => :'quoteTweetId',
         :'reply_settings' => :'replySettings',
@@ -94,6 +97,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'article' => :'XArticle',
         :'reply_to_tweet_id' => :'String',
         :'quote_tweet_id' => :'String',
         :'reply_settings' => :'String',
@@ -128,6 +132,10 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'article')
+        self.article = attributes[:'article']
+      end
 
       if attributes.key?(:'reply_to_tweet_id')
         self.reply_to_tweet_id = attributes[:'reply_to_tweet_id']
@@ -210,6 +218,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          article == o.article &&
           reply_to_tweet_id == o.reply_to_tweet_id &&
           quote_tweet_id == o.quote_tweet_id &&
           reply_settings == o.reply_settings &&
@@ -231,7 +240,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [reply_to_tweet_id, quote_tweet_id, reply_settings, thread_items, poll, long_video, geo_restriction, paid_partnership, made_with_ai, sensitive_media].hash
+      [article, reply_to_tweet_id, quote_tweet_id, reply_settings, thread_items, poll, long_video, geo_restriction, paid_partnership, made_with_ai, sensitive_media].hash
     end
 
     # Builds the object from hash
