@@ -36,7 +36,7 @@ module Zernio
     # The native post ID on the platform (populated after successful publish)
     attr_accessor :platform_post_id
 
-    # Public URL of the published post. Included in the response for immediate posts; for scheduled posts, fetch via GET /v1/posts/{postId} after publish time.
+    # Public URL of the published post. Included in the response for immediate posts; for scheduled posts, fetch via GET /v1/posts/{postId} after publish time. Empty when the platform confirmed the publish without returning an id a permalink can be built from (TikTok returns a publish id for some uploads); the TikTok reconcile cron backfills it later.
     attr_accessor :platform_post_url
 
     # Timestamp when the post was published to this platform
@@ -139,6 +139,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'platform_post_url',
         :'removed_from_platform_at',
       ])
     end
