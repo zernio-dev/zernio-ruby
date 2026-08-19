@@ -18,7 +18,7 @@ module Zernio
     # Zernio lead id.
     attr_accessor :id
 
-    # Meta lead id.
+    # Meta lead id. On LinkedIn, the leadFormResponse id.
     attr_accessor :leadgen_id
 
     attr_accessor :form_id
@@ -31,6 +31,7 @@ module Zernio
 
     attr_accessor :adset_id
 
+    # On LinkedIn, this is the LinkedIn Campaign id, which corresponds to platformAdSetId on GET /v1/ads (LinkedIn's Campaign Group is Zernio's campaign).
     attr_accessor :campaign_id
 
     attr_accessor :is_organic
@@ -38,7 +39,7 @@ module Zernio
     # ISO 8601.
     attr_accessor :created_time
 
-    # Question key → answer.
+    # Question key → answer. On LinkedIn, the key is the lowercased predefinedField, else the question name, else the numeric questionId; multiple-choice values are option labels (unlike Meta, which returns the option key).
     attr_accessor :fields
 
     # Raw Meta field_data.
