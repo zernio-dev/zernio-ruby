@@ -12,7 +12,7 @@
 | **duration_seconds** | **Integer** | Video length in seconds (from YouTube contentDetails.duration) | [optional] |
 | **date_range** | [**YouTubeDailyViewsResponseDateRange**](YouTubeDailyViewsResponseDateRange.md) |  | [optional] |
 | **provisional_since** | **Date** | Present only when the range reaches into YouTube&#39;s ~3-day processing window: the first date whose numbers are provisional and may still be revised by YouTube. | [optional] |
-| **retention_curve** | [**Array&lt;YouTubeVideoRetentionResponseRetentionCurveInner&gt;**](YouTubeVideoRetentionResponseRetentionCurveInner.md) | Up to 100 points covering the video timeline, aggregated over the date range. Empty for videos with very few views. | [optional] |
+| **retention_curve** | [**Array&lt;YouTubeVideoRetentionResponseRetentionCurveInner&gt;**](YouTubeVideoRetentionResponseRetentionCurveInner.md) | Up to 100 points covering the video timeline, aggregated over the date range. Can be empty when YouTube has no retention data for the video in the given range. | [optional] |
 | **note** | **String** | Present only when the curve is empty, explaining why | [optional] |
 | **scope_status** | [**YouTubeDailyViewsResponseScopeStatus**](YouTubeDailyViewsResponseScopeStatus.md) |  | [optional] |
 

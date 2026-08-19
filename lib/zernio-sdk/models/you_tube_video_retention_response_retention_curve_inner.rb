@@ -24,10 +24,10 @@ module Zernio
     # Retention vs videos of similar length (0 = worst, 0.5 = median, 1 = best)
     attr_accessor :relative_retention_performance
 
-    # Viewers who started watching in this segment
+    # Viewers who started watching in this segment. 0 when YouTube has no segment-level data for the video.
     attr_accessor :started_watching
 
-    # Viewers who stopped watching in this segment
+    # Viewers who stopped watching in this segment. 0 when YouTube has no segment-level data for the video.
     attr_accessor :stopped_watching
 
     # Total views of this segment, including rewatches
