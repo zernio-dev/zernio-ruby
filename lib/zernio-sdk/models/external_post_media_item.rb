@@ -18,13 +18,13 @@ module Zernio
   class ExternalPostMediaItem < ApiModelBase
     attr_accessor :type
 
-    # 'Direct URL to the media file. Null when the platform withholds it: check mediaStatus before downloading. Instagram omits the video file for Reels it flags as containing copyrighted material (its docs name audio as the usual cause), so type stays \"video\" while the file is permanently unreachable.'
+    # 'Direct URL to the media file. Null when the platform withholds it: check mediaStatus before downloading. Instagram omits the video file for Reels it flags as containing copyrighted material (its docs name audio as the usual cause), so type stays \"video\" while the file is permanently unreachable. For LinkedIn videos where the platform returns no file, url falls back to the cover image and the item carries mediaStatus: unavailable.'
     attr_accessor :url
 
     # Cover image. Still present when url is null.
     attr_accessor :thumbnail
 
-    # Present only when the media file could not be retrieved. Absent means the file is available at url.
+    # 'Present only when the media file could not be retrieved (url is null or, for LinkedIn videos, a cover image standing in for the file). Absent means the file is available at url.'
     attr_accessor :media_status
 
     # Why the file is missing. platform_withheld means the platform declined to return it and retrying will not help.
