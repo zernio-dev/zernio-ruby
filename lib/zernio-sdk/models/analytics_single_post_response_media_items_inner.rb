@@ -26,7 +26,7 @@ module Zernio
     # Accessibility alt text set on the media, when present.
     attr_accessor :alt_text
 
-    # Present only when the media file could not be retrieved. Absent means the file is available at url.
+    # unavailable means the media file could not be retrieved (url is null or, for LinkedIn videos, a cover image standing in for the file). available or absent means the file is available at url (older synced items omit the field).
     attr_accessor :media_status
 
     # Why the file is missing. platform_withheld means the platform declined to return it and retrying will not help.
@@ -151,7 +151,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["image", "video"])
       return false unless type_validator.valid?(@type)
-      media_status_validator = EnumAttributeValidator.new('String', ["unavailable"])
+      media_status_validator = EnumAttributeValidator.new('String', ["available", "unavailable"])
       return false unless media_status_validator.valid?(@media_status)
       unavailable_reason_validator = EnumAttributeValidator.new('String', ["platform_withheld"])
       return false unless unavailable_reason_validator.valid?(@unavailable_reason)
@@ -171,7 +171,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] media_status Object to be assigned
     def media_status=(media_status)
-      validator = EnumAttributeValidator.new('String', ["unavailable"])
+      validator = EnumAttributeValidator.new('String', ["available", "unavailable"])
       unless validator.valid?(media_status)
         fail ArgumentError, "invalid value for \"media_status\", must be one of #{validator.allowable_values}."
       end

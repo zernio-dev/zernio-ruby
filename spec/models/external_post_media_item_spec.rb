@@ -52,7 +52,7 @@ describe Zernio::ExternalPostMediaItem do
   describe 'test attribute "media_status"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["unavailable"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["available", "unavailable"])
       # validator.allowable_values.each do |value|
       #   expect { instance.media_status = value }.not_to raise_error
       # end
