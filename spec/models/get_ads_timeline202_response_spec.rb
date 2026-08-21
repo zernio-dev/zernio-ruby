@@ -30,10 +30,6 @@ describe Zernio::GetAdsTimeline202Response do
   describe 'test attribute "backfill_pending"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Boolean', ["true"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.backfill_pending = value }.not_to raise_error
-      # end
     end
   end
 

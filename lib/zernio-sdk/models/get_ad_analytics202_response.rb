@@ -15,33 +15,12 @@ require 'time'
 
 module Zernio
   class GetAdAnalytics202Response < ApiModelBase
+    # Always true on this response. Part of the requested range is still being backfilled; retry until the request returns 200.
     attr_accessor :backfill_pending
 
     attr_accessor :ad
 
     attr_accessor :analytics
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -132,18 +111,16 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @backfill_pending.nil?
-      backfill_pending_validator = EnumAttributeValidator.new('Boolean', ["true"])
-      return false unless backfill_pending_validator.valid?(@backfill_pending)
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] backfill_pending Object to be assigned
+    # Custom attribute writer method with validation
+    # @param [Object] backfill_pending Value to be assigned
     def backfill_pending=(backfill_pending)
-      validator = EnumAttributeValidator.new('Boolean', ["true"])
-      unless validator.valid?(backfill_pending)
-        fail ArgumentError, "invalid value for \"backfill_pending\", must be one of #{validator.allowable_values}."
+      if backfill_pending.nil?
+        fail ArgumentError, 'backfill_pending cannot be nil'
       end
+
       @backfill_pending = backfill_pending
     end
 

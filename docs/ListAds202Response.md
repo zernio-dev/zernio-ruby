@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **ads** | [**Array&lt;Ad&gt;**](Ad.md) |  | [optional] |
 | **pagination** | [**Pagination**](Pagination.md) |  | [optional] |
-| **backfill_pending** | **Boolean** |  |  |
+| **backfill_pending** | **Boolean** | Always true on this response. Part of the requested range is still being backfilled; retry until the request returns 200. |  |
 
 ## Example
 

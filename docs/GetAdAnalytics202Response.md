@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **backfill_pending** | **Boolean** |  |  |
+| **backfill_pending** | **Boolean** | Always true on this response. Part of the requested range is still being backfilled; retry until the request returns 200. |  |
 | **ad** | [**AdAnalyticsResponseAd**](AdAnalyticsResponseAd.md) |  | [optional] |
 | **analytics** | [**CampaignAnalyticsResponseAnalytics**](CampaignAnalyticsResponseAnalytics.md) |  | [optional] |
 
