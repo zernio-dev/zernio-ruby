@@ -25,6 +25,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_templates**](WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates |
 | [**get_whatsapp_business_username**](WhatsAppApi.md#get_whatsapp_business_username) | **GET** /v1/whatsapp/business-profile/username | Get business username |
 | [**get_whatsapp_business_username_suggestions**](WhatsAppApi.md#get_whatsapp_business_username_suggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions |
+| [**list_whats_app_account_events**](WhatsAppApi.md#list_whats_app_account_events) | **GET** /v1/whatsapp/account-events | List account notifications |
 | [**list_whats_app_conversions**](WhatsAppApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events |
 | [**list_whats_app_group_chats**](WhatsAppApi.md#list_whats_app_group_chats) | **GET** /v1/whatsapp/wa-groups | List active groups |
 | [**list_whats_app_group_join_requests**](WhatsAppApi.md#list_whats_app_group_join_requests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests |
@@ -1507,6 +1508,79 @@ end
 ### Return type
 
 [**GetWhatsappBusinessUsernameSuggestions200Response**](GetWhatsappBusinessUsernameSuggestions200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_whats_app_account_events
+
+> <ListWhatsAppAccountEvents200Response> list_whats_app_account_events(account_id, opts)
+
+List account notifications
+
+Returns Meta-originated events recorded for a WhatsApp account, newest first: template review outcomes (approved, rejected, paused, category changes) and WABA status changes (restricted, disabled, reinstated, disconnected). Events are captured from Meta webhooks as they happen; the feed starts at the account's first recorded event and is not backfilled. Complements the push events `whatsapp.template.status_updated` and `account.disconnected` with a pollable history. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | WhatsApp social account ID
+opts = {
+  limit: 56 # Integer | Maximum events to return
+}
+
+begin
+  # List account notifications
+  result = api_instance.list_whats_app_account_events(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->list_whats_app_account_events: #{e}"
+end
+```
+
+#### Using the list_whats_app_account_events_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListWhatsAppAccountEvents200Response>, Integer, Hash)> list_whats_app_account_events_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List account notifications
+  data, status_code, headers = api_instance.list_whats_app_account_events_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListWhatsAppAccountEvents200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->list_whats_app_account_events_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp social account ID |  |
+| **limit** | **Integer** | Maximum events to return | [optional][default to 50] |
+
+### Return type
+
+[**ListWhatsAppAccountEvents200Response**](ListWhatsAppAccountEvents200Response.md)
 
 ### Authorization
 

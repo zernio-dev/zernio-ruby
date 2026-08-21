@@ -559,6 +559,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**get_whats_app_templates**](docs/WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates
 *Zernio::WhatsAppApi* | [**get_whatsapp_business_username**](docs/WhatsAppApi.md#get_whatsapp_business_username) | **GET** /v1/whatsapp/business-profile/username | Get business username
 *Zernio::WhatsAppApi* | [**get_whatsapp_business_username_suggestions**](docs/WhatsAppApi.md#get_whatsapp_business_username_suggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions
+*Zernio::WhatsAppApi* | [**list_whats_app_account_events**](docs/WhatsAppApi.md#list_whats_app_account_events) | **GET** /v1/whatsapp/account-events | List account notifications
 *Zernio::WhatsAppApi* | [**list_whats_app_conversions**](docs/WhatsAppApi.md#list_whats_app_conversions) | **GET** /v1/whatsapp/conversions | List conversion events
 *Zernio::WhatsAppApi* | [**list_whats_app_group_chats**](docs/WhatsAppApi.md#list_whats_app_group_chats) | **GET** /v1/whatsapp/wa-groups | List active groups
 *Zernio::WhatsAppApi* | [**list_whats_app_group_join_requests**](docs/WhatsAppApi.md#list_whats_app_group_join_requests) | **GET** /v1/whatsapp/wa-groups/{groupId}/join-requests | List join requests
@@ -1625,6 +1626,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListValueRuleSets200Response](docs/ListValueRuleSets200Response.md)
  - [Zernio::ListValueRuleSets200ResponsePaging](docs/ListValueRuleSets200ResponsePaging.md)
  - [Zernio::ListVoiceCalls200Response](docs/ListVoiceCalls200Response.md)
+ - [Zernio::ListWhatsAppAccountEvents200Response](docs/ListWhatsAppAccountEvents200Response.md)
+ - [Zernio::ListWhatsAppAccountEvents200ResponseEventsInner](docs/ListWhatsAppAccountEvents200ResponseEventsInner.md)
  - [Zernio::ListWhatsAppCalls200Response](docs/ListWhatsAppCalls200Response.md)
  - [Zernio::ListWhatsAppCalls200ResponseCallsInner](docs/ListWhatsAppCalls200ResponseCallsInner.md)
  - [Zernio::ListWhatsAppCalls200ResponseCallsInnerBilling](docs/ListWhatsAppCalls200ResponseCallsInnerBilling.md)

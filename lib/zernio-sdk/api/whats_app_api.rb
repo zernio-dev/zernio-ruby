@@ -1474,6 +1474,81 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List account notifications
+    # Returns Meta-originated events recorded for a WhatsApp account, newest first: template review outcomes (approved, rejected, paused, category changes) and WABA status changes (restricted, disabled, reinstated, disconnected). Events are captured from Meta webhooks as they happen; the feed starts at the account's first recorded event and is not backfilled. Complements the push events `whatsapp.template.status_updated` and `account.disconnected` with a pollable history. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Maximum events to return (default to 50)
+    # @return [ListWhatsAppAccountEvents200Response]
+    def list_whats_app_account_events(account_id, opts = {})
+      data, _status_code, _headers = list_whats_app_account_events_with_http_info(account_id, opts)
+      data
+    end
+
+    # List account notifications
+    # Returns Meta-originated events recorded for a WhatsApp account, newest first: template review outcomes (approved, rejected, paused, category changes) and WABA status changes (restricted, disabled, reinstated, disconnected). Events are captured from Meta webhooks as they happen; the feed starts at the account&#39;s first recorded event and is not backfilled. Complements the push events &#x60;whatsapp.template.status_updated&#x60; and &#x60;account.disconnected&#x60; with a pollable history. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Maximum events to return (default to 50)
+    # @return [Array<(ListWhatsAppAccountEvents200Response, Integer, Hash)>] ListWhatsAppAccountEvents200Response data, response status code and response headers
+    def list_whats_app_account_events_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.list_whats_app_account_events ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.list_whats_app_account_events"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 200
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WhatsAppApi.list_whats_app_account_events, must be smaller than or equal to 200.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling WhatsAppApi.list_whats_app_account_events, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/whatsapp/account-events'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListWhatsAppAccountEvents200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.list_whats_app_account_events",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#list_whats_app_account_events\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List conversion events
     # Returns the most recent conversion events sent through `POST /v1/whatsapp/conversions` for the given WhatsApp account. Sourced from delivery logs (Axiom `late` dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \"recent activity\" panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: `eventName`, `conversationId`, `eventsReceived`, `eventsFailed`, `traceId`, `durationMs`, and the wall-clock `timestamp`. 
     # @param account_id [String] WhatsApp social account ID
