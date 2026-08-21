@@ -110,6 +110,11 @@ module Zernio
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling WebhooksApi.delete_webhook_settings"
       end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && id !~ pattern
+        fail ArgumentError, "invalid value for 'id' when calling WebhooksApi.delete_webhook_settings, must conform to the pattern #{pattern}."
+      end
+
       # resource path
       local_var_path = '/v1/webhooks/settings'
 
