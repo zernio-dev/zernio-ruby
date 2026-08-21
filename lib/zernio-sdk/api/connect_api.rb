@@ -525,6 +525,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Connect a Shopify store with a custom-app Admin token
+    # Token-paste alternative to the OAuth flow: connect a store using the Admin API access token of a custom app the merchant created in their own Shopify admin (Settings → Apps and sales channels → Develop apps, with the `read_content`/`write_content` scopes). Use this when the one-click OAuth connect is unavailable or when your users prefer not to install a third-party app on their store. The token is validated against the store before anything is saved; custom-app tokens do not expire. Connecting the same profile to a store again replaces the stored token in place. 
+    # @param connect_shopify_with_token_request [ConnectShopifyWithTokenRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ConnectShopifyWithToken200Response]
+    def connect_shopify_with_token(connect_shopify_with_token_request, opts = {})
+      data, _status_code, _headers = connect_shopify_with_token_with_http_info(connect_shopify_with_token_request, opts)
+      data
+    end
+
+    # Connect a Shopify store with a custom-app Admin token
+    # Token-paste alternative to the OAuth flow: connect a store using the Admin API access token of a custom app the merchant created in their own Shopify admin (Settings → Apps and sales channels → Develop apps, with the &#x60;read_content&#x60;/&#x60;write_content&#x60; scopes). Use this when the one-click OAuth connect is unavailable or when your users prefer not to install a third-party app on their store. The token is validated against the store before anything is saved; custom-app tokens do not expire. Connecting the same profile to a store again replaces the stored token in place. 
+    # @param connect_shopify_with_token_request [ConnectShopifyWithTokenRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ConnectShopifyWithToken200Response, Integer, Hash)>] ConnectShopifyWithToken200Response data, response status code and response headers
+    def connect_shopify_with_token_with_http_info(connect_shopify_with_token_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.connect_shopify_with_token ...'
+      end
+      # verify the required parameter 'connect_shopify_with_token_request' is set
+      if @api_client.config.client_side_validation && connect_shopify_with_token_request.nil?
+        fail ArgumentError, "Missing the required parameter 'connect_shopify_with_token_request' when calling ConnectApi.connect_shopify_with_token"
+      end
+      # resource path
+      local_var_path = '/v1/connect/shopify/token'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(connect_shopify_with_token_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ConnectShopifyWithToken200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.connect_shopify_with_token",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#connect_shopify_with_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Connect WhatsApp via credentials
     # Connect a WhatsApp Business Account by providing Meta credentials directly. This is the headless alternative to the Embedded Signup browser flow.  To get the required credentials: 1. Go to Meta Business Suite (business.facebook.com) 2. Create or select a WhatsApp Business Account 3. In Business Settings > System Users, create a System User 4. Assign it the whatsapp_business_management and whatsapp_business_messaging permissions 5. Generate a permanent access token 6. Get the WABA ID from WhatsApp Manager > Account Tools > Phone Numbers 7. Get the Phone Number ID from the same page (click on the number) 
     # @param connect_whats_app_credentials_request [ConnectWhatsAppCredentialsRequest] 

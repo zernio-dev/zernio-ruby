@@ -171,6 +171,9 @@ docs/ConnectBlueskyCredentials200Response.md
 docs/ConnectBlueskyCredentialsRequest.md
 docs/ConnectOpenAIAdsCredentials200Response.md
 docs/ConnectOpenAIAdsCredentialsRequest.md
+docs/ConnectShopifyWithToken200Response.md
+docs/ConnectShopifyWithToken200ResponseAccount.md
+docs/ConnectShopifyWithTokenRequest.md
 docs/ConnectWhatsAppCredentials200Response.md
 docs/ConnectWhatsAppCredentials200ResponseAccount.md
 docs/ConnectWhatsAppCredentialsRequest.md
@@ -1969,6 +1972,9 @@ lib/zernio-sdk/models/connect_bluesky_credentials200_response.rb
 lib/zernio-sdk/models/connect_bluesky_credentials_request.rb
 lib/zernio-sdk/models/connect_open_ai_ads_credentials200_response.rb
 lib/zernio-sdk/models/connect_open_ai_ads_credentials_request.rb
+lib/zernio-sdk/models/connect_shopify_with_token200_response.rb
+lib/zernio-sdk/models/connect_shopify_with_token200_response_account.rb
+lib/zernio-sdk/models/connect_shopify_with_token_request.rb
 lib/zernio-sdk/models/connect_whats_app_credentials200_response.rb
 lib/zernio-sdk/models/connect_whats_app_credentials200_response_account.rb
 lib/zernio-sdk/models/connect_whats_app_credentials_request.rb
@@ -3712,6 +3718,9 @@ spec/models/connect_bluesky_credentials200_response_spec.rb
 spec/models/connect_bluesky_credentials_request_spec.rb
 spec/models/connect_open_ai_ads_credentials200_response_spec.rb
 spec/models/connect_open_ai_ads_credentials_request_spec.rb
+spec/models/connect_shopify_with_token200_response_account_spec.rb
+spec/models/connect_shopify_with_token200_response_spec.rb
+spec/models/connect_shopify_with_token_request_spec.rb
 spec/models/connect_whats_app_credentials200_response_account_spec.rb
 spec/models/connect_whats_app_credentials200_response_spec.rb
 spec/models/connect_whats_app_credentials_request_spec.rb

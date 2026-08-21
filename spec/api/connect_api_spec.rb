@@ -125,6 +125,18 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for connect_shopify_with_token
+  # Connect a Shopify store with a custom-app Admin token
+  # Token-paste alternative to the OAuth flow: connect a store using the Admin API access token of a custom app the merchant created in their own Shopify admin (Settings → Apps and sales channels → Develop apps, with the &#x60;read_content&#x60;/&#x60;write_content&#x60; scopes). Use this when the one-click OAuth connect is unavailable or when your users prefer not to install a third-party app on their store. The token is validated against the store before anything is saved; custom-app tokens do not expire. Connecting the same profile to a store again replaces the stored token in place. 
+  # @param connect_shopify_with_token_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ConnectShopifyWithToken200Response]
+  describe 'connect_shopify_with_token test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for connect_whats_app_credentials
   # Connect WhatsApp via credentials
   # Connect a WhatsApp Business Account by providing Meta credentials directly. This is the headless alternative to the Embedded Signup browser flow.  To get the required credentials: 1. Go to Meta Business Suite (business.facebook.com) 2. Create or select a WhatsApp Business Account 3. In Business Settings &gt; System Users, create a System User 4. Assign it the whatsapp_business_management and whatsapp_business_messaging permissions 5. Generate a permanent access token 6. Get the WABA ID from WhatsApp Manager &gt; Account Tools &gt; Phone Numbers 7. Get the Phone Number ID from the same page (click on the number) 

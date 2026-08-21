@@ -244,6 +244,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**connect_ads**](docs/ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform
 *Zernio::ConnectApi* | [**connect_bluesky_credentials**](docs/ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account
 *Zernio::ConnectApi* | [**connect_open_ai_ads_credentials**](docs/ConnectApi.md#connect_open_ai_ads_credentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account
+*Zernio::ConnectApi* | [**connect_shopify_with_token**](docs/ConnectApi.md#connect_shopify_with_token) | **POST** /v1/connect/shopify/token | Connect a Shopify store with a custom-app Admin token
 *Zernio::ConnectApi* | [**connect_whats_app_credentials**](docs/ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials
 *Zernio::ConnectApi* | [**create_pinterest_board**](docs/ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board
 *Zernio::ConnectApi* | [**get_connect_url**](docs/ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL
@@ -787,6 +788,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ConnectBlueskyCredentialsRequest](docs/ConnectBlueskyCredentialsRequest.md)
  - [Zernio::ConnectOpenAIAdsCredentials200Response](docs/ConnectOpenAIAdsCredentials200Response.md)
  - [Zernio::ConnectOpenAIAdsCredentialsRequest](docs/ConnectOpenAIAdsCredentialsRequest.md)
+ - [Zernio::ConnectShopifyWithToken200Response](docs/ConnectShopifyWithToken200Response.md)
+ - [Zernio::ConnectShopifyWithToken200ResponseAccount](docs/ConnectShopifyWithToken200ResponseAccount.md)
+ - [Zernio::ConnectShopifyWithTokenRequest](docs/ConnectShopifyWithTokenRequest.md)
  - [Zernio::ConnectWhatsAppCredentials200Response](docs/ConnectWhatsAppCredentials200Response.md)
  - [Zernio::ConnectWhatsAppCredentials200ResponseAccount](docs/ConnectWhatsAppCredentials200ResponseAccount.md)
  - [Zernio::ConnectWhatsAppCredentialsRequest](docs/ConnectWhatsAppCredentialsRequest.md)
