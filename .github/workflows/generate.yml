@@ -5,6 +5,12 @@ on:
     types: [openapi-updated]
   workflow_dispatch:
 
+# Serialize runs: two dispatches computing the same next version from the same
+# tag state would double-publish (the second gem push is rejected).
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   generate:
     name: Regenerate from OpenAPI
@@ -122,10 +128,17 @@ jobs:
         if: steps.changes.outputs.has_changes == 'true'
         id: version
         run: |
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          NEW_VERSION=$(echo $LATEST_TAG | awk -F. '{printf "v%d.%d.%d", $1, $2, $3+1}' | sed 's/vv/v/')
-          GEM_VERSION=$(echo $NEW_VERSION | sed 's/v//')
-          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          # Base = max(highest tag, highest published gem). git describe alone
+          # gets stuck when a run publishes the gem but dies before tagging
+          # (2026-08-12: a TLS flake in the Release step left 0.0.716 published
+          # but untagged, and every following run recomputed 0.0.716 → rejected).
+          # Checking rubygems too self-heals from any publish/tag divergence.
+          TAG_VERSION=$(git tag -l 'v*' | sed 's/^v//' | sort -V | tail -1)
+          ZERNIO_PUBLISHED=$(curl -sf --retry 3 https://rubygems.org/api/v1/gems/zernio-sdk.json | jq -r '.version' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' || echo "0.0.0")
+          LATE_PUBLISHED=$(curl -sf --retry 3 https://rubygems.org/api/v1/gems/late-sdk.json | jq -r '.version' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' || echo "0.0.0")
+          BASE=$(printf '%s\n' "${TAG_VERSION:-0.0.0}" "$ZERNIO_PUBLISHED" "$LATE_PUBLISHED" | sort -V | tail -1)
+          GEM_VERSION=$(echo "$BASE" | awk -F. '{printf "%d.%d.%d", $1, $2, $3+1}')
+          echo "new_version=v$GEM_VERSION" >> $GITHUB_OUTPUT
           echo "gem_version=$GEM_VERSION" >> $GITHUB_OUTPUT
 
       - name: Update gem version
