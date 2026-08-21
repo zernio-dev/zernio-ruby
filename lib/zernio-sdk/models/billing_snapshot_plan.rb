@@ -19,11 +19,15 @@ module Zernio
 
     attr_accessor :is_usage_based
 
+    # True when the key belongs to an account with an active paid billing relationship (Stripe subscription, Metronome enrollment, or Shopify-managed billing).
+    attr_accessor :is_paid
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'is_usage_based' => :'isUsageBased'
+        :'is_usage_based' => :'isUsageBased',
+        :'is_paid' => :'isPaid'
       }
     end
 
@@ -41,7 +45,8 @@ module Zernio
     def self.openapi_types
       {
         :'name' => :'String',
-        :'is_usage_based' => :'Boolean'
+        :'is_usage_based' => :'Boolean',
+        :'is_paid' => :'Boolean'
       }
     end
 
@@ -74,6 +79,10 @@ module Zernio
       if attributes.key?(:'is_usage_based')
         self.is_usage_based = attributes[:'is_usage_based']
       end
+
+      if attributes.key?(:'is_paid')
+        self.is_paid = attributes[:'is_paid']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -97,7 +106,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          is_usage_based == o.is_usage_based
+          is_usage_based == o.is_usage_based &&
+          is_paid == o.is_paid
     end
 
     # @see the `==` method
@@ -109,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, is_usage_based].hash
+      [name, is_usage_based, is_paid].hash
     end
 
     # Builds the object from hash

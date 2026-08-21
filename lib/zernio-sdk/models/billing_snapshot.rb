@@ -20,6 +20,9 @@ module Zernio
 
     attr_accessor :plan
 
+    # myshopify.com domain owning the subscription; present only when billingSystem is shopify.
+    attr_accessor :shopify_shop_domain
+
     attr_accessor :period
 
     attr_accessor :balance
@@ -57,6 +60,7 @@ module Zernio
       {
         :'billing_system' => :'billingSystem',
         :'plan' => :'plan',
+        :'shopify_shop_domain' => :'shopifyShopDomain',
         :'period' => :'period',
         :'balance' => :'balance',
         :'caps' => :'caps',
@@ -80,6 +84,7 @@ module Zernio
       {
         :'billing_system' => :'String',
         :'plan' => :'BillingSnapshotPlan',
+        :'shopify_shop_domain' => :'String',
         :'period' => :'BillingSnapshotPeriod',
         :'balance' => :'BillingSnapshotBalance',
         :'caps' => :'BillingSnapshotCaps',
@@ -91,6 +96,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'shopify_shop_domain',
       ])
     end
 
@@ -116,6 +122,10 @@ module Zernio
 
       if attributes.key?(:'plan')
         self.plan = attributes[:'plan']
+      end
+
+      if attributes.key?(:'shopify_shop_domain')
+        self.shopify_shop_domain = attributes[:'shopify_shop_domain']
       end
 
       if attributes.key?(:'period')
@@ -151,7 +161,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      billing_system_validator = EnumAttributeValidator.new('String', ["metronome", "stripe"])
+      billing_system_validator = EnumAttributeValidator.new('String', ["metronome", "stripe", "shopify"])
       return false unless billing_system_validator.valid?(@billing_system)
       true
     end
@@ -159,7 +169,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] billing_system Object to be assigned
     def billing_system=(billing_system)
-      validator = EnumAttributeValidator.new('String', ["metronome", "stripe"])
+      validator = EnumAttributeValidator.new('String', ["metronome", "stripe", "shopify"])
       unless validator.valid?(billing_system)
         fail ArgumentError, "invalid value for \"billing_system\", must be one of #{validator.allowable_values}."
       end
@@ -173,6 +183,7 @@ module Zernio
       self.class == o.class &&
           billing_system == o.billing_system &&
           plan == o.plan &&
+          shopify_shop_domain == o.shopify_shop_domain &&
           period == o.period &&
           balance == o.balance &&
           caps == o.caps &&
@@ -189,7 +200,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [billing_system, plan, period, balance, caps, status, legacy].hash
+      [billing_system, plan, shopify_shop_domain, period, balance, caps, status, legacy].hash
     end
 
     # Builds the object from hash

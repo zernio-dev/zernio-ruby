@@ -30,7 +30,7 @@ describe Zernio::BillingSnapshot do
   describe 'test attribute "billing_system"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["metronome", "stripe"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["metronome", "stripe", "shopify"])
       # validator.allowable_values.each do |value|
       #   expect { instance.billing_system = value }.not_to raise_error
       # end
@@ -38,6 +38,12 @@ describe Zernio::BillingSnapshot do
   end
 
   describe 'test attribute "plan"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "shopify_shop_domain"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
