@@ -20,6 +20,7 @@
 | **end_user_first_name** | **String** |  | [optional] |
 | **end_user_last_name** | **String** |  | [optional] |
 | **regulatory_decline_reason** | **String** | Reviewer rejection reason when status is regulatory_declined. | [optional] |
+| **calling_enabled** | **Boolean** | Whether WhatsApp Business Calling is enabled on this number (manage via /v1/whatsapp/phone-numbers/{id}/calling). | [optional] |
 | **created_at** | **Time** |  | [optional] |
 
 ## Example
@@ -44,6 +45,7 @@ instance = Zernio::ListPhoneNumbers200ResponseNumbersInner.new(
   end_user_first_name: null,
   end_user_last_name: null,
   regulatory_decline_reason: null,
+  calling_enabled: null,
   created_at: null
 )
 ```

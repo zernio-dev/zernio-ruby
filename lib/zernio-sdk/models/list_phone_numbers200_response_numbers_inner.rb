@@ -53,6 +53,9 @@ module Zernio
     # Reviewer rejection reason when status is regulatory_declined.
     attr_accessor :regulatory_decline_reason
 
+    # Whether WhatsApp Business Calling is enabled on this number (manage via /v1/whatsapp/phone-numbers/{id}/calling).
+    attr_accessor :calling_enabled
+
     attr_accessor :created_at
 
     class EnumAttributeValidator
@@ -96,6 +99,7 @@ module Zernio
         :'end_user_first_name' => :'endUserFirstName',
         :'end_user_last_name' => :'endUserLastName',
         :'regulatory_decline_reason' => :'regulatoryDeclineReason',
+        :'calling_enabled' => :'callingEnabled',
         :'created_at' => :'createdAt'
       }
     end
@@ -129,6 +133,7 @@ module Zernio
         :'end_user_first_name' => :'String',
         :'end_user_last_name' => :'String',
         :'regulatory_decline_reason' => :'String',
+        :'calling_enabled' => :'Boolean',
         :'created_at' => :'Time'
       }
     end
@@ -225,6 +230,10 @@ module Zernio
         self.regulatory_decline_reason = attributes[:'regulatory_decline_reason']
       end
 
+      if attributes.key?(:'calling_enabled')
+        self.calling_enabled = attributes[:'calling_enabled']
+      end
+
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
       end
@@ -278,6 +287,7 @@ module Zernio
           end_user_first_name == o.end_user_first_name &&
           end_user_last_name == o.end_user_last_name &&
           regulatory_decline_reason == o.regulatory_decline_reason &&
+          calling_enabled == o.calling_enabled &&
           created_at == o.created_at
     end
 
@@ -290,7 +300,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, phone_number, country, status, registrant_name, telnyx_order_id, monthly_cents, hosted_by_zernio, profile_id, provisioned_at, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, created_at].hash
+      [_id, phone_number, country, status, registrant_name, telnyx_order_id, monthly_cents, hosted_by_zernio, profile_id, provisioned_at, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, calling_enabled, created_at].hash
     end
 
     # Builds the object from hash

@@ -25,6 +25,9 @@ module Zernio
 
     attr_accessor :connected_at
 
+    # Whether WhatsApp Business Calling is enabled on this number.
+    attr_accessor :calling_enabled
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -32,7 +35,8 @@ module Zernio
         :'phone_number' => :'phoneNumber',
         :'display_name' => :'displayName',
         :'profile_id' => :'profileId',
-        :'connected_at' => :'connectedAt'
+        :'connected_at' => :'connectedAt',
+        :'calling_enabled' => :'callingEnabled'
       }
     end
 
@@ -53,7 +57,8 @@ module Zernio
         :'phone_number' => :'String',
         :'display_name' => :'String',
         :'profile_id' => :'String',
-        :'connected_at' => :'Time'
+        :'connected_at' => :'Time',
+        :'calling_enabled' => :'Boolean'
       }
     end
 
@@ -63,7 +68,7 @@ module Zernio
         :'phone_number',
         :'display_name',
         :'profile_id',
-        :'connected_at'
+        :'connected_at',
       ])
     end
 
@@ -102,6 +107,10 @@ module Zernio
       if attributes.key?(:'connected_at')
         self.connected_at = attributes[:'connected_at']
       end
+
+      if attributes.key?(:'calling_enabled')
+        self.calling_enabled = attributes[:'calling_enabled']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -128,7 +137,8 @@ module Zernio
           phone_number == o.phone_number &&
           display_name == o.display_name &&
           profile_id == o.profile_id &&
-          connected_at == o.connected_at
+          connected_at == o.connected_at &&
+          calling_enabled == o.calling_enabled
     end
 
     # @see the `==` method
@@ -140,7 +150,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, phone_number, display_name, profile_id, connected_at].hash
+      [account_id, phone_number, display_name, profile_id, connected_at, calling_enabled].hash
     end
 
     # Builds the object from hash

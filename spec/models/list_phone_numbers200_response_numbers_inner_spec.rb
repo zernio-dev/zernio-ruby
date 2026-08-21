@@ -127,6 +127,12 @@ describe Zernio::ListPhoneNumbers200ResponseNumbersInner do
     end
   end
 
+  describe 'test attribute "calling_enabled"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "created_at"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

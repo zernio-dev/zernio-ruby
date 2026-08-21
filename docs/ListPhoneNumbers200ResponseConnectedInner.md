@@ -9,6 +9,7 @@
 | **display_name** | **String** |  | [optional] |
 | **profile_id** | **String** |  | [optional] |
 | **connected_at** | **Time** |  | [optional] |
+| **calling_enabled** | **Boolean** | Whether WhatsApp Business Calling is enabled on this number. | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Zernio::ListPhoneNumbers200ResponseConnectedInner.new(
   phone_number: null,
   display_name: null,
   profile_id: null,
-  connected_at: null
+  connected_at: null,
+  calling_enabled: null
 )
 ```
 
