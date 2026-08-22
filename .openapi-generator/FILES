@@ -1273,6 +1273,7 @@ docs/SendDiscordDirectMessageRequest.md
 docs/SendDiscordDirectMessageRequestAttachmentsInner.md
 docs/SendInboxMessage200Response.md
 docs/SendInboxMessage200ResponseData.md
+docs/SendInboxMessage200ResponseDataAttachmentsInner.md
 docs/SendInboxMessage400Response.md
 docs/SendInboxMessage400ResponsePlatformError.md
 docs/SendInboxMessageRequest.md
@@ -3051,6 +3052,7 @@ lib/zernio-sdk/models/send_discord_direct_message_request.rb
 lib/zernio-sdk/models/send_discord_direct_message_request_attachments_inner.rb
 lib/zernio-sdk/models/send_inbox_message200_response.rb
 lib/zernio-sdk/models/send_inbox_message200_response_data.rb
+lib/zernio-sdk/models/send_inbox_message200_response_data_attachments_inner.rb
 lib/zernio-sdk/models/send_inbox_message400_response.rb
 lib/zernio-sdk/models/send_inbox_message400_response_platform_error.rb
 lib/zernio-sdk/models/send_inbox_message_request.rb
@@ -4803,6 +4805,7 @@ spec/models/send_discord_direct_message200_response_recipient_spec.rb
 spec/models/send_discord_direct_message200_response_spec.rb
 spec/models/send_discord_direct_message_request_attachments_inner_spec.rb
 spec/models/send_discord_direct_message_request_spec.rb
+spec/models/send_inbox_message200_response_data_attachments_inner_spec.rb
 spec/models/send_inbox_message200_response_data_spec.rb
 spec/models/send_inbox_message200_response_spec.rb
 spec/models/send_inbox_message400_response_platform_error_spec.rb

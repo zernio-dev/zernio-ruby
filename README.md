@@ -1862,6 +1862,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SendDiscordDirectMessageRequestAttachmentsInner](docs/SendDiscordDirectMessageRequestAttachmentsInner.md)
  - [Zernio::SendInboxMessage200Response](docs/SendInboxMessage200Response.md)
  - [Zernio::SendInboxMessage200ResponseData](docs/SendInboxMessage200ResponseData.md)
+ - [Zernio::SendInboxMessage200ResponseDataAttachmentsInner](docs/SendInboxMessage200ResponseDataAttachmentsInner.md)
  - [Zernio::SendInboxMessage400Response](docs/SendInboxMessage400Response.md)
  - [Zernio::SendInboxMessage400ResponsePlatformError](docs/SendInboxMessage400ResponsePlatformError.md)
  - [Zernio::SendInboxMessageRequest](docs/SendInboxMessageRequest.md)
