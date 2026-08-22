@@ -681,6 +681,94 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Ad video library
+    # Lists the ad account's video library (Meta's `/act_X/advideos`), rows returned verbatim. The default projection covers id, title, status, poster frames and length; `fields` is a raw-passthrough override. Any `id` here is reusable as `video.id` on the create endpoints, so N ads that differ only in copy share one upload.  This is the only way to reach a video uploaded OUTSIDE Zernio (Ads Manager, another tool); videos we uploaded also come back as `creative.videoId` on GET /v1/ads.  Meta transcodes asynchronously, so a row is only usable once `status.video_status` reads `ready`. There is no upload operation here: upload by URL inline via `video.url` on POST /v1/ads/create.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [ListAdVideos200Response]
+    def list_ad_videos(account_id, ad_account_id, opts = {})
+      data, _status_code, _headers = list_ad_videos_with_http_info(account_id, ad_account_id, opts)
+      data
+    end
+
+    # Ad video library
+    # Lists the ad account&#39;s video library (Meta&#39;s &#x60;/act_X/advideos&#x60;), rows returned verbatim. The default projection covers id, title, status, poster frames and length; &#x60;fields&#x60; is a raw-passthrough override. Any &#x60;id&#x60; here is reusable as &#x60;video.id&#x60; on the create endpoints, so N ads that differ only in copy share one upload.  This is the only way to reach a video uploaded OUTSIDE Zernio (Ads Manager, another tool); videos we uploaded also come back as &#x60;creative.videoId&#x60; on GET /v1/ads.  Meta transcodes asynchronously, so a row is only usable once &#x60;status.video_status&#x60; reads &#x60;ready&#x60;. There is no upload operation here: upload by URL inline via &#x60;video.url&#x60; on POST /v1/ads/create.
+    # @param account_id [String] Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # @param ad_account_id [String] Meta ad account id (act_&lt;n&gt;).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+    # @option opts [Integer] :limit Rows per page (default to 25)
+    # @option opts [String] :after Cursor from paging.after of the previous page.
+    # @return [Array<(ListAdVideos200Response, Integer, Hash)>] ListAdVideos200Response data, response status code and response headers
+    def list_ad_videos_with_http_info(account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCreativesApi.list_ad_videos ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdCreativesApi.list_ad_videos"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdCreativesApi.list_ad_videos"
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdCreativesApi.list_ad_videos, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AdCreativesApi.list_ad_videos, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/videos'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+      query_params[:'fields'] = opts[:'fields'] if !opts[:'fields'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdVideos200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCreativesApi.list_ad_videos",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCreativesApi#list_ad_videos\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Rename a creative
     # Renames a creative. Creatives are immutable on Meta beyond `name` — for content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with `creative`).
     # @param creative_id [String] Platform creative id

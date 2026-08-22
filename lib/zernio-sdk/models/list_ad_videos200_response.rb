@@ -14,23 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta (facebook, instagram) and LinkedIn. Creates a single VIDEO ad. Mutually exclusive with `imageUrl`. Supply `url` to upload a file, or `id` to reuse a video already on the ad account (list them with GET /v1/ads/videos). Works on the single-ad and attach (`adSetId`) shapes; for Meta multi-creative, set `video` per entry inside `creatives[]` instead. For LinkedIn the video is uploaded to LinkedIn under the authoring Company Page (see `organizationId`) and the campaign format is set to SINGLE_VIDEO; LinkedIn ignores `thumbnailUrl` (it auto-generates the poster frame) — supply MP4 H.264/AAC, 3s-30min, 75KB-500MB.
-  class CreateStandaloneAdRequestVideo < ApiModelBase
-    # Public URL of the video. Meta: uploaded via chunked transfer on /act_X/advideos, then the request blocks on Meta's transcoding until status.video_status === 'ready'. LinkedIn: uploaded via the Videos API (multipart), then the request blocks until LinkedIn finishes transcoding (status AVAILABLE) — short clips take ~10-30s. Provide either `url` or `id`.
-    attr_accessor :url
+  class ListAdVideos200Response < ApiModelBase
+    attr_accessor :ad_account_id
 
-    # Meta only. Reuse a video ALREADY uploaded to this ad account instead of re-uploading the file: pass the `videoId` returned by a previous create. Wins over `url`, so N ads that differ only in copy share one upload (`existingCreativeId` only covers the identical-copy case). Provide either `url` or `id`.
-    attr_accessor :id
+    attr_accessor :data
 
-    # Public URL of a still-image thumbnail for the video. OPTIONAL: when omitted on Meta, the poster is auto-generated from Meta's own preferred video thumbnail (the same candidates Ads Manager shows), so video ads usually publish without supplying one. When Meta produces no candidate the request fails with a 502 platform_error (reason: video_thumbnail_unavailable) — retry, or supply this field. Provide it to control the poster frame exactly (uploaded as an ad image and referenced in object_story_spec.video_data). Ignored by LinkedIn (auto-generated poster frame).
-    attr_accessor :thumbnail_url
+    attr_accessor :paging
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'url' => :'url',
-        :'id' => :'id',
-        :'thumbnail_url' => :'thumbnailUrl'
+        :'ad_account_id' => :'adAccountId',
+        :'data' => :'data',
+        :'paging' => :'paging'
       }
     end
 
@@ -47,9 +43,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'url' => :'String',
-        :'id' => :'String',
-        :'thumbnail_url' => :'String'
+        :'ad_account_id' => :'String',
+        :'data' => :'Array<Object>',
+        :'paging' => :'GetAdsActivityLog200ResponsePaging'
       }
     end
 
@@ -63,28 +59,30 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateStandaloneAdRequestVideo` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdVideos200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateStandaloneAdRequestVideo`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdVideos200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'ad_account_id')
+        self.ad_account_id = attributes[:'ad_account_id']
       end
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'data')
+        if (value = attributes[:'data']).is_a?(Array)
+          self.data = value
+        end
       end
 
-      if attributes.key?(:'thumbnail_url')
-        self.thumbnail_url = attributes[:'thumbnail_url']
+      if attributes.key?(:'paging')
+        self.paging = attributes[:'paging']
       end
     end
 
@@ -108,9 +106,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          url == o.url &&
-          id == o.id &&
-          thumbnail_url == o.thumbnail_url
+          ad_account_id == o.ad_account_id &&
+          data == o.data &&
+          paging == o.paging
     end
 
     # @see the `==` method
@@ -122,7 +120,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [url, id, thumbnail_url].hash
+      [ad_account_id, data, paging].hash
     end
 
     # Builds the object from hash

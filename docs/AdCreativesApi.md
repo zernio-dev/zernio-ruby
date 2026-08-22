@@ -13,6 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_catalogs**](AdCreativesApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs |
 | [**list_ad_creatives**](AdCreativesApi.md#list_ad_creatives) | **GET** /v1/ads/creatives | Creative library |
 | [**list_ad_images**](AdCreativesApi.md#list_ad_images) | **GET** /v1/ads/images | Ad image library |
+| [**list_ad_videos**](AdCreativesApi.md#list_ad_videos) | **GET** /v1/ads/videos | Ad video library |
 | [**update_ad_creative**](AdCreativesApi.md#update_ad_creative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative |
 | [**upload_ad_image**](AdCreativesApi.md#upload_ad_image) | **POST** /v1/ads/images | Upload an ad image from base64 |
 
@@ -663,6 +664,85 @@ end
 ### Return type
 
 [**ListAdImages200Response**](ListAdImages200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_videos
+
+> <ListAdVideos200Response> list_ad_videos(account_id, ad_account_id, opts)
+
+Ad video library
+
+Lists the ad account's video library (Meta's `/act_X/advideos`), rows returned verbatim. The default projection covers id, title, status, poster frames and length; `fields` is a raw-passthrough override. Any `id` here is reusable as `video.id` on the create endpoints, so N ads that differ only in copy share one upload.  This is the only way to reach a video uploaded OUTSIDE Zernio (Ads Manager, another tool); videos we uploaded also come back as `creative.videoId` on GET /v1/ads.  Meta transcodes asynchronously, so a row is only usable once `status.video_status` reads `ready`. There is no upload operation here: upload by URL inline via `video.url` on POST /v1/ads/create.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCreativesApi.new
+account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+ad_account_id = 'ad_account_id_example' # String | Meta ad account id (act_<n>).
+opts = {
+  fields: 'fields_example', # String | Comma-separated Graph field override (supports nested {} projections).
+  limit: 56, # Integer | Rows per page
+  after: 'after_example' # String | Cursor from paging.after of the previous page.
+}
+
+begin
+  # Ad video library
+  result = api_instance.list_ad_videos(account_id, ad_account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->list_ad_videos: #{e}"
+end
+```
+
+#### Using the list_ad_videos_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdVideos200Response>, Integer, Hash)> list_ad_videos_with_http_info(account_id, ad_account_id, opts)
+
+```ruby
+begin
+  # Ad video library
+  data, status_code, headers = api_instance.list_ad_videos_with_http_info(account_id, ad_account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdVideos200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->list_ad_videos_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
+| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **fields** | **String** | Comma-separated Graph field override (supports nested {} projections). | [optional] |
+| **limit** | **Integer** | Rows per page | [optional][default to 25] |
+| **after** | **String** | Cursor from paging.after of the previous page. | [optional] |
+
+### Return type
+
+[**ListAdVideos200Response**](ListAdVideos200Response.md)
 
 ### Authorization
 

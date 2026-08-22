@@ -154,6 +154,22 @@ describe 'AdCreativesApi' do
     end
   end
 
+  # unit tests for list_ad_videos
+  # Ad video library
+  # Lists the ad account&#39;s video library (Meta&#39;s &#x60;/act_X/advideos&#x60;), rows returned verbatim. The default projection covers id, title, status, poster frames and length; &#x60;fields&#x60; is a raw-passthrough override. Any &#x60;id&#x60; here is reusable as &#x60;video.id&#x60; on the create endpoints, so N ads that differ only in copy share one upload.  This is the only way to reach a video uploaded OUTSIDE Zernio (Ads Manager, another tool); videos we uploaded also come back as &#x60;creative.videoId&#x60; on GET /v1/ads.  Meta transcodes asynchronously, so a row is only usable once &#x60;status.video_status&#x60; reads &#x60;ready&#x60;. There is no upload operation here: upload by URL inline via &#x60;video.url&#x60; on POST /v1/ads/create.
+  # @param account_id Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+  # @param ad_account_id Meta ad account id (act_&lt;n&gt;).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :fields Comma-separated Graph field override (supports nested {} projections).
+  # @option opts [Integer] :limit Rows per page
+  # @option opts [String] :after Cursor from paging.after of the previous page.
+  # @return [ListAdVideos200Response]
+  describe 'list_ad_videos test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_ad_creative
   # Rename a creative
   # Renames a creative. Creatives are immutable on Meta beyond &#x60;name&#x60; — for content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with &#x60;creative&#x60;).

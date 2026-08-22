@@ -69,7 +69,10 @@ module Zernio
     # Required for lookalike audiences
     attr_accessor :ratio
 
-    # Optional raw Meta rule, forwarded verbatim: pixel event rule for website audiences, or the engagement rule for meta_engagement (overrides the built rule, e.g. for event/canvas/lead-form sources).
+    # website only. Narrows the audience from all visitors to visitors of URLs containing this substring. Ignored when `rule` is supplied. 
+    attr_accessor :url_contains
+
+    # Optional raw Meta rule, replacing the one we build. Omit it for all visitors of `pixelId`, or use `urlContains` for the common page-match case.  For `website` this is Meta's Flexible Audience Rule and is VALIDATED before we call Meta: every entry in `inclusions.rules` (and `exclusions.rules`) must carry `event_sources`, `retention_seconds` AND `filter`. Meta rejects a rule missing any of the three with code 100 / subcode 1713098 (\"Invalid rule JSON format\"), so a bad shape is a 400 here instead. The pre-2018 flat shapes (`{url: ...}`, `{event: ...}`) are not accepted by Meta at all (subcode 1870029).  Example, visitors of /checkout in the last 30 days: `{\"inclusions\":{\"operator\":\"or\",\"rules\":[{\"event_sources\":[{\"id\":\"<pixelId>\",\"type\":\"pixel\"}],\"retention_seconds\":2592000,\"filter\":{\"operator\":\"and\",\"filters\":[{\"field\":\"url\",\"operator\":\"i_contains\",\"value\":\"/checkout\"}]}}]}}`  Note Meta DERIVES `retention_days` from `retention_seconds` and stores `event_sources[].id` as a number, so a rule read back will not be byte-identical to the one you sent.  For `meta_engagement` the rule is forwarded verbatim and NOT validated: that type has two dialects (the `video` source uses a legacy flat array), so no single schema covers both. 
     attr_accessor :rule
 
     # Data source declaration for GDPR compliance (customer_list only)
@@ -119,6 +122,7 @@ module Zernio
         :'source_audience_id' => :'sourceAudienceId',
         :'country' => :'country',
         :'ratio' => :'ratio',
+        :'url_contains' => :'urlContains',
         :'rule' => :'rule',
         :'customer_file_source' => :'customerFileSource'
       }
@@ -156,6 +160,7 @@ module Zernio
         :'source_audience_id' => :'String',
         :'country' => :'String',
         :'ratio' => :'Float',
+        :'url_contains' => :'String',
         :'rule' => :'Object',
         :'customer_file_source' => :'String'
       }
@@ -271,6 +276,10 @@ module Zernio
 
       if attributes.key?(:'ratio')
         self.ratio = attributes[:'ratio']
+      end
+
+      if attributes.key?(:'url_contains')
+        self.url_contains = attributes[:'url_contains']
       end
 
       if attributes.key?(:'rule')
@@ -568,6 +577,7 @@ module Zernio
           source_audience_id == o.source_audience_id &&
           country == o.country &&
           ratio == o.ratio &&
+          url_contains == o.url_contains &&
           rule == o.rule &&
           customer_file_source == o.customer_file_source
     end
@@ -581,7 +591,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, description, type, match_rules, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, engagement_source, source_id, event, source_audience_id, country, ratio, rule, customer_file_source].hash
+      [account_id, ad_account_id, name, description, type, match_rules, source_type, trigger, lookback_days, engagement_sources, companies, pixel_id, retention_days, engagement_source, source_id, event, source_audience_id, country, ratio, url_contains, rule, customer_file_source].hash
     end
 
     # Builds the object from hash
