@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad_audience**](AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience |
 | [**get_ad_audience**](AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details |
 | [**list_ad_audiences**](AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences |
+| [**replace_ad_audience_companies**](AdAudiencesApi.md#replace_ad_audience_companies) | **POST** /v1/ads/audiences/{audienceId}/companies | Replace audience companies |
 | [**update_ad_audience**](AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience |
 
 
@@ -18,7 +19,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Add users to audience
 
-Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request. 
+Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request.  customer_list only. A LinkedIn `company_list` audience takes company rows, not people: send those to `POST /v1/ads/audiences/{audienceId}/companies`. This endpoint 422s for every other audience type. 
 
 ### Examples
 
@@ -89,7 +90,7 @@ end
 
 Create custom audience
 
-Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only. `saved_targeting` stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via `savedTargetingId` on `POST /v1/ads/create`. Upload-backed audiences are created empty, add members via `POST /v1/ads/audiences/{audienceId}/users`. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is `pending`). Create is not idempotent, never auto-retry. 
+Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only; `company_list`, `engagement` and `website_retargeting` are LinkedIn-only. `saved_targeting` stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via `savedTargetingId` on `POST /v1/ads/create`.  How the audience gets filled depends on the type:  - `customer_list` is created empty. Add members with `POST /v1/ads/audiences/{audienceId}/users`.   On TikTok and Pinterest the audience is provisioned lazily on that first upload (until then its status is `pending`). - `company_list` is filled AT CREATION from the `companies` array below, which is required. To change the list   afterwards send the new full list to `POST /v1/ads/audiences/{audienceId}/companies` (a replace, not a merge).   The `/users` endpoint rejects these audiences with a 422. - `website`, `website_retargeting`, `engagement`, `meta_engagement` and `lookalike` fill themselves from the pixel,   engagement source or seed audience you point them at. They take no member upload at all.  Create is not idempotent, never auto-retry. 
 
 ### Examples
 
@@ -364,6 +365,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## replace_ad_audience_companies
+
+> <ReplaceAdAudienceCompanies200Response> replace_ad_audience_companies(audience_id, replace_ad_audience_companies_request)
+
+Replace audience companies
+
+Upload the company rows of a LinkedIn `company_list` audience (account-based marketing). LinkedIn-only, every other platform returns 422.  A LinkedIn audience segment holds exactly one uploaded list, so the list you send here REPLACES the segment's list instead of being appended to it: always send the full set of companies. LinkedIn returns only the identifier of the uploaded file, never its rows, so the merge cannot be done for you, keep the source list on your side. LinkedIn does not document how quickly companies dropped from the list stop being targeted, so treat removals as eventual rather than immediate. Rows are plain text (not hashed), matched against LinkedIn's own company graph. Matching is asynchronous: LinkedIn takes up to 48h for a new audience and up to 24h for a later update, and the audience stays `processing` meanwhile. LinkedIn recommends at least 1,000 companies for a usable match rate, and caps a list at 300,000.  The initial list is sent with `companies` on `POST /v1/ads/audiences`; this endpoint is for every change after that. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAudiencesApi.new
+audience_id = 'audience_id_example' # String | 
+replace_ad_audience_companies_request = Zernio::ReplaceAdAudienceCompaniesRequest.new({companies: [Zernio::ReplaceAdAudienceCompaniesRequestCompaniesInner.new]}) # ReplaceAdAudienceCompaniesRequest | 
+
+begin
+  # Replace audience companies
+  result = api_instance.replace_ad_audience_companies(audience_id, replace_ad_audience_companies_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->replace_ad_audience_companies: #{e}"
+end
+```
+
+#### Using the replace_ad_audience_companies_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ReplaceAdAudienceCompanies200Response>, Integer, Hash)> replace_ad_audience_companies_with_http_info(audience_id, replace_ad_audience_companies_request)
+
+```ruby
+begin
+  # Replace audience companies
+  data, status_code, headers = api_instance.replace_ad_audience_companies_with_http_info(audience_id, replace_ad_audience_companies_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ReplaceAdAudienceCompanies200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAudiencesApi->replace_ad_audience_companies_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **audience_id** | **String** |  |  |
+| **replace_ad_audience_companies_request** | [**ReplaceAdAudienceCompaniesRequest**](ReplaceAdAudienceCompaniesRequest.md) |  |  |
+
+### Return type
+
+[**ReplaceAdAudienceCompanies200Response**](ReplaceAdAudienceCompanies200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

@@ -11,5 +11,5 @@ Generator version: 7.19.0
 =end
 
 module Zernio
-  VERSION = '0.0.724'
+  VERSION = '0.0.725'
 end

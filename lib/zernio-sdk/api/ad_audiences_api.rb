@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Add users to audience
-    # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request. 
+    # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request.  customer_list only. A LinkedIn `company_list` audience takes company rows, not people: send those to `POST /v1/ads/audiences/{audienceId}/companies`. This endpoint 422s for every other audience type. 
     # @param audience_id [String] 
     # @param add_users_to_ad_audience_request [AddUsersToAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
@@ -31,7 +31,7 @@ module Zernio
     end
 
     # Add users to audience
-    # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request. 
+    # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request.  customer_list only. A LinkedIn &#x60;company_list&#x60; audience takes company rows, not people: send those to &#x60;POST /v1/ads/audiences/{audienceId}/companies&#x60;. This endpoint 422s for every other audience type. 
     # @param audience_id [String] 
     # @param add_users_to_ad_audience_request [AddUsersToAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
@@ -94,7 +94,7 @@ module Zernio
     end
 
     # Create custom audience
-    # Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only. `saved_targeting` stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via `savedTargetingId` on `POST /v1/ads/create`. Upload-backed audiences are created empty, add members via `POST /v1/ads/audiences/{audienceId}/users`. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is `pending`). Create is not idempotent, never auto-retry. 
+    # Create a custom audience. `customer_list` is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; `website` and `lookalike` are Meta-only; `company_list`, `engagement` and `website_retargeting` are LinkedIn-only. `saved_targeting` stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via `savedTargetingId` on `POST /v1/ads/create`.  How the audience gets filled depends on the type:  - `customer_list` is created empty. Add members with `POST /v1/ads/audiences/{audienceId}/users`.   On TikTok and Pinterest the audience is provisioned lazily on that first upload (until then its status is `pending`). - `company_list` is filled AT CREATION from the `companies` array below, which is required. To change the list   afterwards send the new full list to `POST /v1/ads/audiences/{audienceId}/companies` (a replace, not a merge).   The `/users` endpoint rejects these audiences with a 422. - `website`, `website_retargeting`, `engagement`, `meta_engagement` and `lookalike` fill themselves from the pixel,   engagement source or seed audience you point them at. They take no member upload at all.  Create is not idempotent, never auto-retry. 
     # @param create_ad_audience_request [CreateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateAdAudience201Response]
@@ -104,7 +104,7 @@ module Zernio
     end
 
     # Create custom audience
-    # Create a custom audience. &#x60;customer_list&#x60; is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; &#x60;website&#x60; and &#x60;lookalike&#x60; are Meta-only. &#x60;saved_targeting&#x60; stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via &#x60;savedTargetingId&#x60; on &#x60;POST /v1/ads/create&#x60;. Upload-backed audiences are created empty, add members via &#x60;POST /v1/ads/audiences/{audienceId}/users&#x60;. On TikTok and Pinterest the audience is provisioned lazily on the first member upload (until then its status is &#x60;pending&#x60;). Create is not idempotent, never auto-retry. 
+    # Create a custom audience. &#x60;customer_list&#x60; is supported on Meta, Google, X, LinkedIn, TikTok, and Pinterest; &#x60;website&#x60; and &#x60;lookalike&#x60; are Meta-only; &#x60;company_list&#x60;, &#x60;engagement&#x60; and &#x60;website_retargeting&#x60; are LinkedIn-only. &#x60;saved_targeting&#x60; stores a reusable TargetingSpec (no member upload, no adAccountId) that you reference later via &#x60;savedTargetingId&#x60; on &#x60;POST /v1/ads/create&#x60;.  How the audience gets filled depends on the type:  - &#x60;customer_list&#x60; is created empty. Add members with &#x60;POST /v1/ads/audiences/{audienceId}/users&#x60;.   On TikTok and Pinterest the audience is provisioned lazily on that first upload (until then its status is &#x60;pending&#x60;). - &#x60;company_list&#x60; is filled AT CREATION from the &#x60;companies&#x60; array below, which is required. To change the list   afterwards send the new full list to &#x60;POST /v1/ads/audiences/{audienceId}/companies&#x60; (a replace, not a merge).   The &#x60;/users&#x60; endpoint rejects these audiences with a 422. - &#x60;website&#x60;, &#x60;website_retargeting&#x60;, &#x60;engagement&#x60;, &#x60;meta_engagement&#x60; and &#x60;lookalike&#x60; fill themselves from the pixel,   engagement source or seed audience you point them at. They take no member upload at all.  Create is not idempotent, never auto-retry. 
     # @param create_ad_audience_request [CreateAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateAdAudience201Response, Integer, Hash)>] CreateAdAudience201Response data, response status code and response headers
@@ -368,6 +368,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAudiencesApi#list_ad_audiences\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Replace audience companies
+    # Upload the company rows of a LinkedIn `company_list` audience (account-based marketing). LinkedIn-only, every other platform returns 422.  A LinkedIn audience segment holds exactly one uploaded list, so the list you send here REPLACES the segment's list instead of being appended to it: always send the full set of companies. LinkedIn returns only the identifier of the uploaded file, never its rows, so the merge cannot be done for you, keep the source list on your side. LinkedIn does not document how quickly companies dropped from the list stop being targeted, so treat removals as eventual rather than immediate. Rows are plain text (not hashed), matched against LinkedIn's own company graph. Matching is asynchronous: LinkedIn takes up to 48h for a new audience and up to 24h for a later update, and the audience stays `processing` meanwhile. LinkedIn recommends at least 1,000 companies for a usable match rate, and caps a list at 300,000.  The initial list is sent with `companies` on `POST /v1/ads/audiences`; this endpoint is for every change after that. 
+    # @param audience_id [String] 
+    # @param replace_ad_audience_companies_request [ReplaceAdAudienceCompaniesRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ReplaceAdAudienceCompanies200Response]
+    def replace_ad_audience_companies(audience_id, replace_ad_audience_companies_request, opts = {})
+      data, _status_code, _headers = replace_ad_audience_companies_with_http_info(audience_id, replace_ad_audience_companies_request, opts)
+      data
+    end
+
+    # Replace audience companies
+    # Upload the company rows of a LinkedIn &#x60;company_list&#x60; audience (account-based marketing). LinkedIn-only, every other platform returns 422.  A LinkedIn audience segment holds exactly one uploaded list, so the list you send here REPLACES the segment&#39;s list instead of being appended to it: always send the full set of companies. LinkedIn returns only the identifier of the uploaded file, never its rows, so the merge cannot be done for you, keep the source list on your side. LinkedIn does not document how quickly companies dropped from the list stop being targeted, so treat removals as eventual rather than immediate. Rows are plain text (not hashed), matched against LinkedIn&#39;s own company graph. Matching is asynchronous: LinkedIn takes up to 48h for a new audience and up to 24h for a later update, and the audience stays &#x60;processing&#x60; meanwhile. LinkedIn recommends at least 1,000 companies for a usable match rate, and caps a list at 300,000.  The initial list is sent with &#x60;companies&#x60; on &#x60;POST /v1/ads/audiences&#x60;; this endpoint is for every change after that. 
+    # @param audience_id [String] 
+    # @param replace_ad_audience_companies_request [ReplaceAdAudienceCompaniesRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ReplaceAdAudienceCompanies200Response, Integer, Hash)>] ReplaceAdAudienceCompanies200Response data, response status code and response headers
+    def replace_ad_audience_companies_with_http_info(audience_id, replace_ad_audience_companies_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAudiencesApi.replace_ad_audience_companies ...'
+      end
+      # verify the required parameter 'audience_id' is set
+      if @api_client.config.client_side_validation && audience_id.nil?
+        fail ArgumentError, "Missing the required parameter 'audience_id' when calling AdAudiencesApi.replace_ad_audience_companies"
+      end
+      # verify the required parameter 'replace_ad_audience_companies_request' is set
+      if @api_client.config.client_side_validation && replace_ad_audience_companies_request.nil?
+        fail ArgumentError, "Missing the required parameter 'replace_ad_audience_companies_request' when calling AdAudiencesApi.replace_ad_audience_companies"
+      end
+      # resource path
+      local_var_path = '/v1/ads/audiences/{audienceId}/companies'.sub('{' + 'audienceId' + '}', CGI.escape(audience_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(replace_ad_audience_companies_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplaceAdAudienceCompanies200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAudiencesApi.replace_ad_audience_companies",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAudiencesApi#replace_ad_audience_companies\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

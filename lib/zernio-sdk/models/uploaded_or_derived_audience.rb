@@ -42,7 +42,7 @@ module Zernio
     # Required for engagement audiences. Campaign URNs for the ad source types, organization URNs for pages and events. LinkedIn creates one rule per source, all sharing the same trigger and lookbackDays. 
     attr_accessor :engagement_sources
 
-    # Required for company_list audiences (LinkedIn only): plain-text company rows for account targeting. Each row needs at least one identifier. LinkedIn recommends 1,000+ companies for a usable match rate and takes up to 48h to process the list. 
+    # Required for company_list audiences (LinkedIn only): plain-text company rows for account targeting. Each row needs at least one identifier. Not hashed, LinkedIn matches these against its own company graph. LinkedIn recommends 1,000+ companies for a usable match rate and takes up to 48h to process the list. Replace the list later with POST /v1/ads/audiences/{audienceId}/companies. 
     attr_accessor :companies
 
     # Required for website audiences

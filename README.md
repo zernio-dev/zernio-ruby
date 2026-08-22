@@ -121,6 +121,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAudiencesApi* | [**delete_ad_audience**](docs/AdAudiencesApi.md#delete_ad_audience) | **DELETE** /v1/ads/audiences/{audienceId} | Delete custom audience
 *Zernio::AdAudiencesApi* | [**get_ad_audience**](docs/AdAudiencesApi.md#get_ad_audience) | **GET** /v1/ads/audiences/{audienceId} | Get audience details
 *Zernio::AdAudiencesApi* | [**list_ad_audiences**](docs/AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences
+*Zernio::AdAudiencesApi* | [**replace_ad_audience_companies**](docs/AdAudiencesApi.md#replace_ad_audience_companies) | **POST** /v1/ads/audiences/{audienceId}/companies | Replace audience companies
 *Zernio::AdAudiencesApi* | [**update_ad_audience**](docs/AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience
 *Zernio::AdCampaignsApi* | [**boost_post**](docs/AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
@@ -1760,6 +1761,9 @@ Class | Method | HTTP request | Description
  - [Zernio::RemoveConversionAssociations200Response](docs/RemoveConversionAssociations200Response.md)
  - [Zernio::RemoveDiscordMemberRole200Response](docs/RemoveDiscordMemberRole200Response.md)
  - [Zernio::RemoveWhatsAppGroupParticipantsRequest](docs/RemoveWhatsAppGroupParticipantsRequest.md)
+ - [Zernio::ReplaceAdAudienceCompanies200Response](docs/ReplaceAdAudienceCompanies200Response.md)
+ - [Zernio::ReplaceAdAudienceCompaniesRequest](docs/ReplaceAdAudienceCompaniesRequest.md)
+ - [Zernio::ReplaceAdAudienceCompaniesRequestCompaniesInner](docs/ReplaceAdAudienceCompaniesRequestCompaniesInner.md)
  - [Zernio::ReplyToGoogleBusinessReview200Response](docs/ReplyToGoogleBusinessReview200Response.md)
  - [Zernio::ReplyToGoogleBusinessReviewRequest](docs/ReplyToGoogleBusinessReviewRequest.md)
  - [Zernio::ReplyToInboxPost200Response](docs/ReplyToInboxPost200Response.md)
