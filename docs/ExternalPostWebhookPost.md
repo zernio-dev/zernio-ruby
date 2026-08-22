@@ -13,6 +13,10 @@
 | **media_items** | [**Array&lt;ExternalPostMediaItem&gt;**](ExternalPostMediaItem.md) |  |  |
 | **thumbnail_url** | **String** |  |  |
 | **published_at** | **Time** |  |  |
+| **media_product_type** | **String** | Instagram only: the platform media product type (e.g. FEED, REELS, STORY, AD). Absent when the platform did not report it. | [optional] |
+| **is_ai_generated** | **Boolean** | Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it. | [optional] |
+| **is_shared_to_feed** | **Boolean** | Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it. | [optional] |
+| **media_audio_type** | **String** | Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it. | [optional] |
 | **source** | **String** | Always \&quot;external\&quot; — distinguishes these from Zernio-originated post.* events. |  |
 | **deleted_at** | **Time** | Detection time of deletion. Present on post.external.deleted; null/absent otherwise. | [optional] |
 
@@ -31,6 +35,10 @@ instance = Zernio::ExternalPostWebhookPost.new(
   media_items: null,
   thumbnail_url: null,
   published_at: null,
+  media_product_type: null,
+  is_ai_generated: null,
+  is_shared_to_feed: null,
+  media_audio_type: null,
   source: null,
   deleted_at: null
 )

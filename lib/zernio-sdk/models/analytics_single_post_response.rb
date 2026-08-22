@@ -52,6 +52,18 @@ module Zernio
     # All media items for this post. Carousel posts contain one entry per slide.
     attr_accessor :media_items
 
+    # Instagram only: the platform media product type (e.g. FEED, REELS, STORY, AD). Absent when the platform did not report it.
+    attr_accessor :media_product_type
+
+    # Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it.
+    attr_accessor :is_ai_generated
+
+    # Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it.
+    attr_accessor :is_shared_to_feed
+
+    # Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it.
+    attr_accessor :media_audio_type
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -92,7 +104,11 @@ module Zernio
         :'message' => :'message',
         :'thumbnail_url' => :'thumbnailUrl',
         :'media_type' => :'mediaType',
-        :'media_items' => :'mediaItems'
+        :'media_items' => :'mediaItems',
+        :'media_product_type' => :'mediaProductType',
+        :'is_ai_generated' => :'isAiGenerated',
+        :'is_shared_to_feed' => :'isSharedToFeed',
+        :'media_audio_type' => :'mediaAudioType'
       }
     end
 
@@ -124,7 +140,11 @@ module Zernio
         :'message' => :'String',
         :'thumbnail_url' => :'String',
         :'media_type' => :'String',
-        :'media_items' => :'Array<AnalyticsSinglePostResponseMediaItemsInner>'
+        :'media_items' => :'Array<AnalyticsSinglePostResponseMediaItemsInner>',
+        :'media_product_type' => :'String',
+        :'is_ai_generated' => :'Boolean',
+        :'is_shared_to_feed' => :'Boolean',
+        :'media_audio_type' => :'String'
       }
     end
 
@@ -223,6 +243,22 @@ module Zernio
           self.media_items = value
         end
       end
+
+      if attributes.key?(:'media_product_type')
+        self.media_product_type = attributes[:'media_product_type']
+      end
+
+      if attributes.key?(:'is_ai_generated')
+        self.is_ai_generated = attributes[:'is_ai_generated']
+      end
+
+      if attributes.key?(:'is_shared_to_feed')
+        self.is_shared_to_feed = attributes[:'is_shared_to_feed']
+      end
+
+      if attributes.key?(:'media_audio_type')
+        self.media_audio_type = attributes[:'media_audio_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -296,7 +332,11 @@ module Zernio
           message == o.message &&
           thumbnail_url == o.thumbnail_url &&
           media_type == o.media_type &&
-          media_items == o.media_items
+          media_items == o.media_items &&
+          media_product_type == o.media_product_type &&
+          is_ai_generated == o.is_ai_generated &&
+          is_shared_to_feed == o.is_shared_to_feed &&
+          media_audio_type == o.media_audio_type
     end
 
     # @see the `==` method
@@ -308,7 +348,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, late_post_id, status, content, scheduled_for, published_at, analytics, platform_analytics, platform, platform_post_url, is_external, sync_status, message, thumbnail_url, media_type, media_items].hash
+      [post_id, late_post_id, status, content, scheduled_for, published_at, analytics, platform_analytics, platform, platform_post_url, is_external, sync_status, message, thumbnail_url, media_type, media_items, media_product_type, is_ai_generated, is_shared_to_feed, media_audio_type].hash
     end
 
     # Builds the object from hash

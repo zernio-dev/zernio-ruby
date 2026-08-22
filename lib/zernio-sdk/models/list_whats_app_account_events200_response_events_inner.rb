@@ -17,6 +17,9 @@ module Zernio
   class ListWhatsAppAccountEvents200ResponseEventsInner < ApiModelBase
     attr_accessor :id
 
+    # WhatsApp social account the event belongs to
+    attr_accessor :account_id
+
     # Event kind, e.g. template_approved, template_rejected, account_restricted, account_disconnected
     attr_accessor :type
 
@@ -54,6 +57,7 @@ module Zernio
     def self.attribute_map
       {
         :'id' => :'id',
+        :'account_id' => :'accountId',
         :'type' => :'type',
         :'severity' => :'severity',
         :'title' => :'title',
@@ -76,6 +80,7 @@ module Zernio
     def self.openapi_types
       {
         :'id' => :'String',
+        :'account_id' => :'String',
         :'type' => :'String',
         :'severity' => :'String',
         :'title' => :'String',
@@ -109,6 +114,10 @@ module Zernio
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
       if attributes.key?(:'type')
@@ -165,6 +174,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          account_id == o.account_id &&
           type == o.type &&
           severity == o.severity &&
           title == o.title &&
@@ -181,7 +191,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, severity, title, detail, created_at].hash
+      [id, account_id, type, severity, title, detail, created_at].hash
     end
 
     # Builds the object from hash

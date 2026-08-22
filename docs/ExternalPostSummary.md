@@ -12,6 +12,10 @@
 | **media_type** | **String** | Media type (e.g. image, video, carousel) | [optional] |
 | **thumbnail_url** | **String** | Thumbnail URL | [optional] |
 | **media_items** | **Array&lt;Object&gt;** | Per-item media (for carousels / multi-media posts) | [optional] |
+| **media_product_type** | **String** | Instagram only: the platform media product type (e.g. FEED, REELS, STORY, AD). Absent when the platform did not report it. | [optional] |
+| **is_ai_generated** | **Boolean** | Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it. | [optional] |
+| **is_shared_to_feed** | **Boolean** | Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it. | [optional] |
+| **media_audio_type** | **String** | Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it. | [optional] |
 | **analytics** | [**ExternalPostSummaryAnalytics**](ExternalPostSummaryAnalytics.md) |  | [optional] |
 
 ## Example
@@ -28,6 +32,10 @@ instance = Zernio::ExternalPostSummary.new(
   media_type: null,
   thumbnail_url: null,
   media_items: null,
+  media_product_type: null,
+  is_ai_generated: null,
+  is_shared_to_feed: null,
+  media_audio_type: null,
   analytics: null
 )
 ```

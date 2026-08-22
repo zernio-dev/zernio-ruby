@@ -40,6 +40,18 @@ module Zernio
     # Per-item media (for carousels / multi-media posts)
     attr_accessor :media_items
 
+    # Instagram only: the platform media product type (e.g. FEED, REELS, STORY, AD). Absent when the platform did not report it.
+    attr_accessor :media_product_type
+
+    # Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it.
+    attr_accessor :is_ai_generated
+
+    # Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it.
+    attr_accessor :is_shared_to_feed
+
+    # Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it.
+    attr_accessor :media_audio_type
+
     attr_accessor :analytics
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -53,6 +65,10 @@ module Zernio
         :'media_type' => :'mediaType',
         :'thumbnail_url' => :'thumbnailUrl',
         :'media_items' => :'mediaItems',
+        :'media_product_type' => :'mediaProductType',
+        :'is_ai_generated' => :'isAiGenerated',
+        :'is_shared_to_feed' => :'isSharedToFeed',
+        :'media_audio_type' => :'mediaAudioType',
         :'analytics' => :'analytics'
       }
     end
@@ -78,6 +94,10 @@ module Zernio
         :'media_type' => :'String',
         :'thumbnail_url' => :'String',
         :'media_items' => :'Array<Object>',
+        :'media_product_type' => :'String',
+        :'is_ai_generated' => :'Boolean',
+        :'is_shared_to_feed' => :'Boolean',
+        :'media_audio_type' => :'String',
         :'analytics' => :'ExternalPostSummaryAnalytics'
       }
     end
@@ -138,6 +158,22 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'media_product_type')
+        self.media_product_type = attributes[:'media_product_type']
+      end
+
+      if attributes.key?(:'is_ai_generated')
+        self.is_ai_generated = attributes[:'is_ai_generated']
+      end
+
+      if attributes.key?(:'is_shared_to_feed')
+        self.is_shared_to_feed = attributes[:'is_shared_to_feed']
+      end
+
+      if attributes.key?(:'media_audio_type')
+        self.media_audio_type = attributes[:'media_audio_type']
+      end
+
       if attributes.key?(:'analytics')
         self.analytics = attributes[:'analytics']
       end
@@ -171,6 +207,10 @@ module Zernio
           media_type == o.media_type &&
           thumbnail_url == o.thumbnail_url &&
           media_items == o.media_items &&
+          media_product_type == o.media_product_type &&
+          is_ai_generated == o.is_ai_generated &&
+          is_shared_to_feed == o.is_shared_to_feed &&
+          media_audio_type == o.media_audio_type &&
           analytics == o.analytics
     end
 
@@ -183,7 +223,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, platform_post_id, platform_post_url, content, published_at, media_type, thumbnail_url, media_items, analytics].hash
+      [platform, platform_post_id, platform_post_url, content, published_at, media_type, thumbnail_url, media_items, media_product_type, is_ai_generated, is_shared_to_feed, media_audio_type, analytics].hash
     end
 
     # Builds the object from hash

@@ -20,6 +20,10 @@
 | **thumbnail_url** | **String** |  | [optional] |
 | **media_type** | **String** |  | [optional] |
 | **media_items** | [**Array&lt;AnalyticsSinglePostResponseMediaItemsInner&gt;**](AnalyticsSinglePostResponseMediaItemsInner.md) | All media items for this post. Carousel posts contain one entry per slide. | [optional] |
+| **media_product_type** | **String** | Instagram only: the platform media product type (e.g. FEED, REELS, STORY, AD). Absent when the platform did not report it. | [optional] |
+| **is_ai_generated** | **Boolean** | Instagram only: whether Instagram labeled the media as AI-generated. Absent when the platform did not report it. | [optional] |
+| **is_shared_to_feed** | **Boolean** | Instagram reels only: whether the reel is also shared to the main feed. Absent when the platform did not report it. | [optional] |
+| **media_audio_type** | **String** | Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it. | [optional] |
 
 ## Example
 
@@ -42,7 +46,11 @@ instance = Zernio::AnalyticsSinglePostResponse.new(
   message: null,
   thumbnail_url: null,
   media_type: null,
-  media_items: null
+  media_items: null,
+  media_product_type: null,
+  is_ai_generated: null,
+  is_shared_to_feed: null,
+  media_audio_type: null
 )
 ```
 
