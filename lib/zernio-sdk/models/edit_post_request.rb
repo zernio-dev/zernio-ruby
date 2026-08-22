@@ -21,6 +21,9 @@ module Zernio
     # The new post text content
     attr_accessor :content
 
+    # Which account's copy of the post to edit when the post was published to several accounts on the same platform; defaults to the first. 
+    attr_accessor :account_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -47,7 +50,8 @@ module Zernio
     def self.attribute_map
       {
         :'platform' => :'platform',
-        :'content' => :'content'
+        :'content' => :'content',
+        :'account_id' => :'accountId'
       }
     end
 
@@ -65,7 +69,8 @@ module Zernio
     def self.openapi_types
       {
         :'platform' => :'String',
-        :'content' => :'String'
+        :'content' => :'String',
+        :'account_id' => :'String'
       }
     end
 
@@ -102,6 +107,10 @@ module Zernio
       else
         self.content = nil
       end
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -125,7 +134,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["twitter", "discord", "facebook", "reddit"])
+      platform_validator = EnumAttributeValidator.new('String', ["twitter", "discord", "facebook", "reddit", "linkedin", "telegram", "pinterest", "googlebusiness", "youtube", "slack"])
       return false unless platform_validator.valid?(@platform)
       return false if @content.nil?
       true
@@ -134,7 +143,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["twitter", "discord", "facebook", "reddit"])
+      validator = EnumAttributeValidator.new('String', ["twitter", "discord", "facebook", "reddit", "linkedin", "telegram", "pinterest", "googlebusiness", "youtube", "slack"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
@@ -157,7 +166,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           platform == o.platform &&
-          content == o.content
+          content == o.content &&
+          account_id == o.account_id
     end
 
     # @see the `==` method
@@ -169,7 +179,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, content].hash
+      [platform, content, account_id].hash
     end
 
     # Builds the object from hash

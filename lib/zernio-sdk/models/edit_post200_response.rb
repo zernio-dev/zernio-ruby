@@ -17,7 +17,7 @@ module Zernio
   class EditPost200Response < ApiModelBase
     attr_accessor :success
 
-    # The platform post ID after the edit. X assigns a new ID; Discord, Facebook, and Reddit return the original ID unchanged. 
+    # The platform post ID after the edit. X assigns a new ID; every other platform returns the original ID unchanged. 
     attr_accessor :id
 
     # URL of the edited post
