@@ -51,7 +51,7 @@ module Zernio
     # Required for website (max 180) and meta_engagement (max 365) audiences.
     attr_accessor :retention_days
 
-    # Required for meta_engagement audiences (Meta only): what people engaged with. `page` = a Facebook Page, `instagram` = an IG professional account, `video` = a video. The source object must be eligible for engagement audiences or Meta rejects with subcode 1713151 (\"Invalid Event Name\"), surfaced verbatim. 
+    # Required for meta_engagement audiences (Meta only): what people engaged with. `page` = a Facebook Page, `instagram` = an IG professional account, `video` = a video. 
     attr_accessor :engagement_source
 
     # Required for meta_engagement: the Page / IG account / video id.
