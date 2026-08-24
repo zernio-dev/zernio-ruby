@@ -798,7 +798,7 @@ module Zernio
     end
 
     # Update flow
-    # Update metadata (name, categories) of a DRAFT flow. Published flows are immutable. 
+    # Update metadata (name, categories, endpointUri) of a DRAFT flow. Published flows are immutable. 
     # @param flow_id [String] Flow ID
     # @param update_whats_app_flow_request [UpdateWhatsAppFlowRequest] 
     # @param [Hash] opts the optional parameters
@@ -809,7 +809,7 @@ module Zernio
     end
 
     # Update flow
-    # Update metadata (name, categories) of a DRAFT flow. Published flows are immutable. 
+    # Update metadata (name, categories, endpointUri) of a DRAFT flow. Published flows are immutable. 
     # @param flow_id [String] Flow ID
     # @param update_whats_app_flow_request [UpdateWhatsAppFlowRequest] 
     # @param [Hash] opts the optional parameters

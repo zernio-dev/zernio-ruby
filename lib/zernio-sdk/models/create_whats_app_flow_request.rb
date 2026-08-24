@@ -30,6 +30,9 @@ module Zernio
     # When cloning, true keeps the clone in cloneFlowId's version lineage (auto-numbered next version); false/absent creates an independent flow. Ignored without cloneFlowId.
     attr_accessor :as_version
 
+    # HTTPS-only data exchange endpoint for the flow. Settable only while the flow is in DRAFT, and the flow's uploaded Flow JSON must declare data_api_version \"3.0\" for the endpoint to be used.
+    attr_accessor :endpoint_uri
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -59,7 +62,8 @@ module Zernio
         :'name' => :'name',
         :'categories' => :'categories',
         :'clone_flow_id' => :'cloneFlowId',
-        :'as_version' => :'asVersion'
+        :'as_version' => :'asVersion',
+        :'endpoint_uri' => :'endpointUri'
       }
     end
 
@@ -80,7 +84,8 @@ module Zernio
         :'name' => :'String',
         :'categories' => :'Array<String>',
         :'clone_flow_id' => :'String',
-        :'as_version' => :'Boolean'
+        :'as_version' => :'Boolean',
+        :'endpoint_uri' => :'String'
       }
     end
 
@@ -132,6 +137,10 @@ module Zernio
 
       if attributes.key?(:'as_version')
         self.as_version = attributes[:'as_version']
+      end
+
+      if attributes.key?(:'endpoint_uri')
+        self.endpoint_uri = attributes[:'endpoint_uri']
       end
     end
 
@@ -208,7 +217,8 @@ module Zernio
           name == o.name &&
           categories == o.categories &&
           clone_flow_id == o.clone_flow_id &&
-          as_version == o.as_version
+          as_version == o.as_version &&
+          endpoint_uri == o.endpoint_uri
     end
 
     # @see the `==` method
@@ -220,7 +230,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, name, categories, clone_flow_id, as_version].hash
+      [account_id, name, categories, clone_flow_id, as_version, endpoint_uri].hash
     end
 
     # Builds the object from hash

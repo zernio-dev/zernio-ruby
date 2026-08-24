@@ -177,7 +177,7 @@ describe 'WhatsAppFlowsApi' do
 
   # unit tests for update_whats_app_flow
   # Update flow
-  # Update metadata (name, categories) of a DRAFT flow. Published flows are immutable. 
+  # Update metadata (name, categories, endpointUri) of a DRAFT flow. Published flows are immutable. 
   # @param flow_id Flow ID
   # @param update_whats_app_flow_request 
   # @param [Hash] opts the optional parameters

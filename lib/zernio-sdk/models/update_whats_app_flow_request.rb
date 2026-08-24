@@ -23,6 +23,9 @@ module Zernio
 
     attr_accessor :categories
 
+    # HTTPS-only data exchange endpoint for the flow. Settable only while the flow is in DRAFT, and the flow's uploaded Flow JSON must declare data_api_version \"3.0\" for the endpoint to be used.
+    attr_accessor :endpoint_uri
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -50,7 +53,8 @@ module Zernio
       {
         :'account_id' => :'accountId',
         :'name' => :'name',
-        :'categories' => :'categories'
+        :'categories' => :'categories',
+        :'endpoint_uri' => :'endpointUri'
       }
     end
 
@@ -69,7 +73,8 @@ module Zernio
       {
         :'account_id' => :'String',
         :'name' => :'String',
-        :'categories' => :'Array<String>'
+        :'categories' => :'Array<String>',
+        :'endpoint_uri' => :'String'
       }
     end
 
@@ -109,6 +114,10 @@ module Zernio
         if (value = attributes[:'categories']).is_a?(Array)
           self.categories = value
         end
+      end
+
+      if attributes.key?(:'endpoint_uri')
+        self.endpoint_uri = attributes[:'endpoint_uri']
       end
     end
 
@@ -173,7 +182,8 @@ module Zernio
       self.class == o.class &&
           account_id == o.account_id &&
           name == o.name &&
-          categories == o.categories
+          categories == o.categories &&
+          endpoint_uri == o.endpoint_uri
     end
 
     # @see the `==` method
@@ -185,7 +195,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, name, categories].hash
+      [account_id, name, categories, endpoint_uri].hash
     end
 
     # Builds the object from hash

@@ -9,6 +9,7 @@
 | **categories** | **Array&lt;String&gt;** | Flow categories |  |
 | **clone_flow_id** | **String** | Optional: ID of an existing flow to clone the Flow JSON from | [optional] |
 | **as_version** | **Boolean** | When cloning, true keeps the clone in cloneFlowId&#39;s version lineage (auto-numbered next version); false/absent creates an independent flow. Ignored without cloneFlowId. | [optional] |
+| **endpoint_uri** | **String** | HTTPS-only data exchange endpoint for the flow. Settable only while the flow is in DRAFT, and the flow&#39;s uploaded Flow JSON must declare data_api_version \&quot;3.0\&quot; for the endpoint to be used. | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Zernio::CreateWhatsAppFlowRequest.new(
   name: null,
   categories: null,
   clone_flow_id: null,
-  as_version: null
+  as_version: null,
+  endpoint_uri: null
 )
 ```
 

@@ -812,7 +812,7 @@ end
 
 Update flow
 
-Update metadata (name, categories) of a DRAFT flow. Published flows are immutable. 
+Update metadata (name, categories, endpointUri) of a DRAFT flow. Published flows are immutable. 
 
 ### Examples
 
