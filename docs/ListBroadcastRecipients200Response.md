@@ -7,6 +7,7 @@
 | **success** | **Boolean** |  | [optional] |
 | **recipients** | [**Array&lt;ListBroadcastRecipients200ResponseRecipientsInner&gt;**](ListBroadcastRecipients200ResponseRecipientsInner.md) |  | [optional] |
 | **pagination** | [**ListContacts200ResponsePagination**](ListContacts200ResponsePagination.md) |  | [optional] |
+| **summary** | [**ListBroadcastRecipients200ResponseSummary**](ListBroadcastRecipients200ResponseSummary.md) |  | [optional] |
 
 ## Example
 
@@ -16,7 +17,8 @@ require 'zernio-sdk'
 instance = Zernio::ListBroadcastRecipients200Response.new(
   success: null,
   recipients: null,
-  pagination: null
+  pagination: null,
+  summary: null
 )
 ```
 

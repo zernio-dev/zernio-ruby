@@ -1536,6 +1536,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListBlogs200Response](docs/ListBlogs200Response.md)
  - [Zernio::ListBroadcastRecipients200Response](docs/ListBroadcastRecipients200Response.md)
  - [Zernio::ListBroadcastRecipients200ResponseRecipientsInner](docs/ListBroadcastRecipients200ResponseRecipientsInner.md)
+ - [Zernio::ListBroadcastRecipients200ResponseSummary](docs/ListBroadcastRecipients200ResponseSummary.md)
  - [Zernio::ListBroadcasts200Response](docs/ListBroadcasts200Response.md)
  - [Zernio::ListBroadcasts200ResponseBroadcastsInner](docs/ListBroadcasts200ResponseBroadcastsInner.md)
  - [Zernio::ListCalls200Response](docs/ListCalls200Response.md)

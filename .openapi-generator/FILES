@@ -918,6 +918,7 @@ docs/ListBlogArticles200Response.md
 docs/ListBlogs200Response.md
 docs/ListBroadcastRecipients200Response.md
 docs/ListBroadcastRecipients200ResponseRecipientsInner.md
+docs/ListBroadcastRecipients200ResponseSummary.md
 docs/ListBroadcasts200Response.md
 docs/ListBroadcasts200ResponseBroadcastsInner.md
 docs/ListCalls200Response.md
@@ -2723,6 +2724,7 @@ lib/zernio-sdk/models/list_blog_articles200_response.rb
 lib/zernio-sdk/models/list_blogs200_response.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response.rb
 lib/zernio-sdk/models/list_broadcast_recipients200_response_recipients_inner.rb
+lib/zernio-sdk/models/list_broadcast_recipients200_response_summary.rb
 lib/zernio-sdk/models/list_broadcasts200_response.rb
 lib/zernio-sdk/models/list_broadcasts200_response_broadcasts_inner.rb
 lib/zernio-sdk/models/list_calls200_response.rb
@@ -4491,6 +4493,7 @@ spec/models/list_blog_articles200_response_spec.rb
 spec/models/list_blogs200_response_spec.rb
 spec/models/list_broadcast_recipients200_response_recipients_inner_spec.rb
 spec/models/list_broadcast_recipients200_response_spec.rb
+spec/models/list_broadcast_recipients200_response_summary_spec.rb
 spec/models/list_broadcasts200_response_broadcasts_inner_spec.rb
 spec/models/list_broadcasts200_response_spec.rb
 spec/models/list_calls200_response_calls_inner_spec.rb
