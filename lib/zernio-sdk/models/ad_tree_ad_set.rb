@@ -23,6 +23,9 @@ module Zernio
     # Derived from child ad statuses
     attr_accessor :status
 
+    # Earliest `platformCreatedAt` (platform ad creation time; falls back to `createdAt`, Zernio's sync time, for ads synced before that field existed) across this ad set's ads. Not the ad set's own creation time on the platform — a proxy usable for sorting.
+    attr_accessor :created_time
+
     attr_accessor :ad_count
 
     attr_accessor :budget
@@ -84,6 +87,7 @@ module Zernio
         :'platform_ad_set_id' => :'platformAdSetId',
         :'ad_set_name' => :'adSetName',
         :'status' => :'status',
+        :'created_time' => :'createdTime',
         :'ad_count' => :'adCount',
         :'budget' => :'budget',
         :'ad_set_budget' => :'adSetBudget',
@@ -116,6 +120,7 @@ module Zernio
         :'platform_ad_set_id' => :'String',
         :'ad_set_name' => :'String',
         :'status' => :'AdStatus',
+        :'created_time' => :'Time',
         :'ad_count' => :'Integer',
         :'budget' => :'AdTreeAdSetBudget',
         :'ad_set_budget' => :'AdTreeAdSetAdSetBudget',
@@ -135,6 +140,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'created_time',
         :'optimization_goal',
         :'bid_strategy',
         :'bid_amount',
@@ -169,6 +175,10 @@ module Zernio
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'created_time')
+        self.created_time = attributes[:'created_time']
       end
 
       if attributes.key?(:'ad_count')
@@ -253,6 +263,7 @@ module Zernio
           platform_ad_set_id == o.platform_ad_set_id &&
           ad_set_name == o.ad_set_name &&
           status == o.status &&
+          created_time == o.created_time &&
           ad_count == o.ad_count &&
           budget == o.budget &&
           ad_set_budget == o.ad_set_budget &&
@@ -277,7 +288,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_ad_set_id, ad_set_name, status, ad_count, budget, ad_set_budget, metrics, optimization_goal, bid_strategy, bid_amount, roas_average_floor, cost_type, serving_statuses, promoted_object, ads, daily].hash
+      [platform_ad_set_id, ad_set_name, status, created_time, ad_count, budget, ad_set_budget, metrics, optimization_goal, bid_strategy, bid_amount, roas_average_floor, cost_type, serving_statuses, promoted_object, ads, daily].hash
     end
 
     # Builds the object from hash

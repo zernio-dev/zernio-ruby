@@ -22,6 +22,9 @@ module Zernio
 
     attr_accessor :campaign_name
 
+    # Earliest `platformCreatedAt` (platform ad creation time; falls back to `createdAt`, Zernio's sync time, for ads synced before that field existed) across every ad in the campaign. Not the platform campaign's own creation time (Meta's `Campaign.created_time` etc. is not synced) — a campaign created empty and populated later will show its first ad's time, not the campaign's. Usable for sorting \"most recently created\" without the numeric-campaign-id heuristic. Same source as `AdTreeAdSet.createdTime` and `Ad.platformCreatedAt`; mirrors `AdCampaign.earliestAd`.
+    attr_accessor :created_time
+
     # Delivery status derived from child ad statuses. Distinct from `reviewStatus`, which reflects the platform-side review state.
     attr_accessor :status
 
@@ -113,6 +116,7 @@ module Zernio
         :'platform_campaign_id' => :'platformCampaignId',
         :'platform' => :'platform',
         :'campaign_name' => :'campaignName',
+        :'created_time' => :'createdTime',
         :'status' => :'status',
         :'review_status' => :'reviewStatus',
         :'platform_campaign_status' => :'platformCampaignStatus',
@@ -157,6 +161,7 @@ module Zernio
         :'platform_campaign_id' => :'String',
         :'platform' => :'String',
         :'campaign_name' => :'String',
+        :'created_time' => :'Time',
         :'status' => :'AdStatus',
         :'review_status' => :'AdReviewStatus',
         :'platform_campaign_status' => :'String',
@@ -188,6 +193,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'created_time',
         :'review_status',
         :'platform_campaign_status',
         :'campaign_issues_info',
@@ -228,6 +234,10 @@ module Zernio
 
       if attributes.key?(:'campaign_name')
         self.campaign_name = attributes[:'campaign_name']
+      end
+
+      if attributes.key?(:'created_time')
+        self.created_time = attributes[:'created_time']
       end
 
       if attributes.key?(:'status')
@@ -386,6 +396,7 @@ module Zernio
           platform_campaign_id == o.platform_campaign_id &&
           platform == o.platform &&
           campaign_name == o.campaign_name &&
+          created_time == o.created_time &&
           status == o.status &&
           review_status == o.review_status &&
           platform_campaign_status == o.platform_campaign_status &&
@@ -422,7 +433,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform_campaign_id, platform, campaign_name, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, ad_set_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, platform_ad_account_name, account_id, profile_id, advertising_channel_type, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ad_sets, daily].hash
+      [platform_campaign_id, platform, campaign_name, created_time, status, review_status, platform_campaign_status, campaign_issues_info, ad_count, ad_set_count, budget, campaign_budget, budget_level, is_budget_schedule_enabled, currency, metrics, platform_ad_account_id, platform_ad_account_name, account_id, profile_id, advertising_channel_type, platform_objective, optimization_goal, bid_strategy, bid_amount, roas_average_floor, promoted_object, ad_sets, daily].hash
     end
 
     # Builds the object from hash
