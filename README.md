@@ -156,6 +156,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_ad_status**](docs/AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
 *Zernio::AdCreativesApi* | [**create_ad_creative**](docs/AdCreativesApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative
 *Zernio::AdCreativesApi* | [**delete_ad_creative**](docs/AdCreativesApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative
+*Zernio::AdCreativesApi* | [**delete_ad_video**](docs/AdCreativesApi.md#delete_ad_video) | **DELETE** /v1/ads/videos/{videoId} | Delete an ad video
 *Zernio::AdCreativesApi* | [**generate_ad_previews**](docs/AdCreativesApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews
 *Zernio::AdCreativesApi* | [**get_ad_creative**](docs/AdCreativesApi.md#get_ad_creative) | **GET** /v1/ads/creatives/{creativeId} | Creative details
 *Zernio::AdCreativesApi* | [**get_ad_previews**](docs/AdCreativesApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad
@@ -166,6 +167,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCreativesApi* | [**list_ad_videos**](docs/AdCreativesApi.md#list_ad_videos) | **GET** /v1/ads/videos | Ad video library
 *Zernio::AdCreativesApi* | [**update_ad_creative**](docs/AdCreativesApi.md#update_ad_creative) | **PUT** /v1/ads/creatives/{creativeId} | Rename a creative
 *Zernio::AdCreativesApi* | [**upload_ad_image**](docs/AdCreativesApi.md#upload_ad_image) | **POST** /v1/ads/images | Upload an ad image from base64
+*Zernio::AdCreativesApi* | [**upload_ad_video**](docs/AdCreativesApi.md#upload_ad_video) | **POST** /v1/ads/videos | Upload an ad video
 *Zernio::AdInsightsApi* | [**create_ad_insights_report**](docs/AdInsightsApi.md#create_ad_insights_report) | **POST** /v1/ads/insights/reports | Submit an async insights report run
 *Zernio::AdInsightsApi* | [**generate_keyword_historical_metrics**](docs/AdInsightsApi.md#generate_keyword_historical_metrics) | **POST** /v1/ads/keywords/historical-metrics | Historical keyword metrics (Google Keyword Planner)
 *Zernio::AdInsightsApi* | [**generate_keyword_ideas**](docs/AdInsightsApi.md#generate_keyword_ideas) | **POST** /v1/ads/keywords/ideas | Generate keyword ideas (Google Keyword Planner)
@@ -1011,6 +1013,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteAdCampaign200Response](docs/DeleteAdCampaign200Response.md)
  - [Zernio::DeleteAdCampaignRequest](docs/DeleteAdCampaignRequest.md)
  - [Zernio::DeleteAdCreative200Response](docs/DeleteAdCreative200Response.md)
+ - [Zernio::DeleteAdVideo200Response](docs/DeleteAdVideo200Response.md)
  - [Zernio::DeleteDiscordScheduledEvent200Response](docs/DeleteDiscordScheduledEvent200Response.md)
  - [Zernio::DeleteGoogleBusinessMedia200Response](docs/DeleteGoogleBusinessMedia200Response.md)
  - [Zernio::DeleteGoogleBusinessPlaceAction200Response](docs/DeleteGoogleBusinessPlaceAction200Response.md)
@@ -2156,6 +2159,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadAdImage201Response](docs/UploadAdImage201Response.md)
  - [Zernio::UploadAdImage201ResponseImage](docs/UploadAdImage201ResponseImage.md)
  - [Zernio::UploadAdImageRequest](docs/UploadAdImageRequest.md)
+ - [Zernio::UploadAdVideo201Response](docs/UploadAdVideo201Response.md)
+ - [Zernio::UploadAdVideo201ResponseVideo](docs/UploadAdVideo201ResponseVideo.md)
+ - [Zernio::UploadAdVideoRequest](docs/UploadAdVideoRequest.md)
  - [Zernio::UploadMediaDirect200Response](docs/UploadMediaDirect200Response.md)
  - [Zernio::UploadPhoneNumberKycDocument200Response](docs/UploadPhoneNumberKycDocument200Response.md)
  - [Zernio::UploadPhoneNumberPortInDocument200Response](docs/UploadPhoneNumberPortInDocument200Response.md)

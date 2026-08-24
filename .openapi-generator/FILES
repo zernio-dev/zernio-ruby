@@ -379,6 +379,7 @@ docs/DeleteAccountGroup200Response.md
 docs/DeleteAdCampaign200Response.md
 docs/DeleteAdCampaignRequest.md
 docs/DeleteAdCreative200Response.md
+docs/DeleteAdVideo200Response.md
 docs/DeleteDiscordScheduledEvent200Response.md
 docs/DeleteGoogleBusinessMedia200Response.md
 docs/DeleteGoogleBusinessPlaceAction200Response.md
@@ -1555,6 +1556,9 @@ docs/UpdateYoutubeDefaultPlaylistRequest.md
 docs/UploadAdImage201Response.md
 docs/UploadAdImage201ResponseImage.md
 docs/UploadAdImageRequest.md
+docs/UploadAdVideo201Response.md
+docs/UploadAdVideo201ResponseVideo.md
+docs/UploadAdVideoRequest.md
 docs/UploadMediaDirect200Response.md
 docs/UploadPhoneNumberKycDocument200Response.md
 docs/UploadPhoneNumberPortInDocument200Response.md
@@ -2199,6 +2203,7 @@ lib/zernio-sdk/models/delete_account_group200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign_request.rb
 lib/zernio-sdk/models/delete_ad_creative200_response.rb
+lib/zernio-sdk/models/delete_ad_video200_response.rb
 lib/zernio-sdk/models/delete_discord_scheduled_event200_response.rb
 lib/zernio-sdk/models/delete_google_business_media200_response.rb
 lib/zernio-sdk/models/delete_google_business_place_action200_response.rb
@@ -3344,6 +3349,9 @@ lib/zernio-sdk/models/update_youtube_default_playlist_request.rb
 lib/zernio-sdk/models/upload_ad_image201_response.rb
 lib/zernio-sdk/models/upload_ad_image201_response_image.rb
 lib/zernio-sdk/models/upload_ad_image_request.rb
+lib/zernio-sdk/models/upload_ad_video201_response.rb
+lib/zernio-sdk/models/upload_ad_video201_response_video.rb
+lib/zernio-sdk/models/upload_ad_video_request.rb
 lib/zernio-sdk/models/upload_media_direct200_response.rb
 lib/zernio-sdk/models/upload_phone_number_kyc_document200_response.rb
 lib/zernio-sdk/models/upload_phone_number_port_in_document200_response.rb
@@ -3968,6 +3976,7 @@ spec/models/delete_account_group200_response_spec.rb
 spec/models/delete_ad_campaign200_response_spec.rb
 spec/models/delete_ad_campaign_request_spec.rb
 spec/models/delete_ad_creative200_response_spec.rb
+spec/models/delete_ad_video200_response_spec.rb
 spec/models/delete_discord_scheduled_event200_response_spec.rb
 spec/models/delete_google_business_media200_response_spec.rb
 spec/models/delete_google_business_place_action200_response_spec.rb
@@ -5113,6 +5122,9 @@ spec/models/update_youtube_default_playlist_request_spec.rb
 spec/models/upload_ad_image201_response_image_spec.rb
 spec/models/upload_ad_image201_response_spec.rb
 spec/models/upload_ad_image_request_spec.rb
+spec/models/upload_ad_video201_response_spec.rb
+spec/models/upload_ad_video201_response_video_spec.rb
+spec/models/upload_ad_video_request_spec.rb
 spec/models/upload_media_direct200_response_spec.rb
 spec/models/upload_phone_number_kyc_document200_response_spec.rb
 spec/models/upload_phone_number_port_in_document200_response_spec.rb
