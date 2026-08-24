@@ -45,6 +45,7 @@ docs/AdTreeAdSetPromotedObject.md
 docs/AdTreeCampaign.md
 docs/AdTreeCampaignBudget.md
 docs/AdTreeCampaignCampaignBudget.md
+docs/AdTreeCampaignOptimizationGoal.md
 docs/AdTreeCampaignPromotedObject.md
 docs/AdTreeResponse.md
 docs/AddBroadcastRecipients200Response.md
@@ -1874,6 +1875,7 @@ lib/zernio-sdk/models/ad_tree_ad_set_promoted_object.rb
 lib/zernio-sdk/models/ad_tree_campaign.rb
 lib/zernio-sdk/models/ad_tree_campaign_budget.rb
 lib/zernio-sdk/models/ad_tree_campaign_campaign_budget.rb
+lib/zernio-sdk/models/ad_tree_campaign_optimization_goal.rb
 lib/zernio-sdk/models/ad_tree_campaign_promoted_object.rb
 lib/zernio-sdk/models/ad_tree_response.rb
 lib/zernio-sdk/models/add_broadcast_recipients200_response.rb
@@ -3640,6 +3642,7 @@ spec/models/ad_tree_ad_set_promoted_object_spec.rb
 spec/models/ad_tree_ad_set_spec.rb
 spec/models/ad_tree_campaign_budget_spec.rb
 spec/models/ad_tree_campaign_campaign_budget_spec.rb
+spec/models/ad_tree_campaign_optimization_goal_spec.rb
 spec/models/ad_tree_campaign_promoted_object_spec.rb
 spec/models/ad_tree_campaign_spec.rb
 spec/models/ad_tree_response_spec.rb

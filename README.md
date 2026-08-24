@@ -679,6 +679,7 @@ Class | Method | HTTP request | Description
  - [Zernio::AdTreeCampaign](docs/AdTreeCampaign.md)
  - [Zernio::AdTreeCampaignBudget](docs/AdTreeCampaignBudget.md)
  - [Zernio::AdTreeCampaignCampaignBudget](docs/AdTreeCampaignCampaignBudget.md)
+ - [Zernio::AdTreeCampaignOptimizationGoal](docs/AdTreeCampaignOptimizationGoal.md)
  - [Zernio::AdTreeCampaignPromotedObject](docs/AdTreeCampaignPromotedObject.md)
  - [Zernio::AdTreeResponse](docs/AdTreeResponse.md)
  - [Zernio::AddBroadcastRecipients200Response](docs/AddBroadcastRecipients200Response.md)

@@ -64,7 +64,6 @@ module Zernio
     # Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC)
     attr_accessor :platform_objective
 
-    # Optimization goal shared across ad sets, or comma-separated values when ad sets differ. Meta: e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION. LinkedIn: the campaign optimizationTargetType (e.g. MAX_CLICK, MAX_IMPRESSION, NONE); `NONE` with a manual costType is a campaign LinkedIn will not deliver.
     attr_accessor :optimization_goal
 
     attr_accessor :bid_strategy
@@ -169,7 +168,7 @@ module Zernio
         :'profile_id' => :'String',
         :'advertising_channel_type' => :'String',
         :'platform_objective' => :'String',
-        :'optimization_goal' => :'String',
+        :'optimization_goal' => :'AdTreeCampaignOptimizationGoal',
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
@@ -190,7 +189,6 @@ module Zernio
         :'platform_ad_account_name',
         :'advertising_channel_type',
         :'platform_objective',
-        :'optimization_goal',
         :'bid_strategy',
         :'bid_amount',
         :'roas_average_floor',
