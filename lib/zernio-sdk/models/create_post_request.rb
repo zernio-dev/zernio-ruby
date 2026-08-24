@@ -17,7 +17,7 @@ module Zernio
   class CreatePostRequest < ApiModelBase
     attr_accessor :title
 
-    # Post caption/text. Optional when media is attached, all platforms have customContent, every platform entry is an X Article (platformSpecificData.article), or every platform entry is a LinkedIn plain repost (platformSpecificData.reshareUrl with no text). Required for other text-only posts.
+    # Post caption/text. Optional when media is attached, all platforms have customContent, every platform entry is an X Article (platformSpecificData.article), or every platform entry is a LinkedIn text-free reshare (platformSpecificData.reshareUrl with no text). Required for other text-only posts.
     attr_accessor :content
 
     attr_accessor :media_items
