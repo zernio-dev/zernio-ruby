@@ -35,6 +35,7 @@ module Zernio
 
     attr_accessor :sender
 
+    # When the message was sent, as reported by the platform and passed through unmodified. Full ISO 8601 date-time: Instagram and Facebook carry millisecond precision, while some platforms (for example WhatsApp and Telegram) report whole seconds. Use this field as the chronological ordering key. If two messages share the same value, fetch the conversation messages with sortOrder=desc for the deterministic order.
     attr_accessor :sent_at
 
     attr_accessor :is_read
