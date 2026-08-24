@@ -38,7 +38,7 @@ module Zernio
     # Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (`headline` / `body` / `imageUrl` / `video`). Each entry must supply its own headline, body, and exactly one of `imageUrl` / `video`. 
     attr_accessor :creatives
 
-    # Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests` and `audienceId` are rejected with a 400 alongside it. Its `destination_type` must match the ad's destination. 
+    # Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests`, `audienceId` and `campaignStatus` are rejected with a 400 alongside it. Its `destination_type` must match the ad's destination. 
     attr_accessor :ad_set_id
 
     # Budget amount in the ad account's currency major units (e.g. dollars for USD, not cents). Must be > 0. Required unless `adSetId` is set, where the ad set owns it. 
@@ -87,6 +87,12 @@ module Zernio
 
     # Defaults to `OUTCOME_ENGAGEMENT`. `OUTCOME_SALES` and `OUTCOME_LEADS` require additional account configuration (Dataset linked to the WABA for sales) and may be rejected by Meta if missing. 
     attr_accessor :objective
+
+    # Ad-level status. Defaults to `ACTIVE`. `PAUSED` skips activating the newly created ad(s) after Meta accepts them. 
+    attr_accessor :status
+
+    # Campaign-level status, same semantics as `POST /v1/ads/create`. Defaults to `ACTIVE`. `PAUSED` holds activation at the campaign so it never spends before the advertiser reviews it, while the ad set and ad still switch on (one resume call brings the whole hierarchy live). Only meaningful when a new campaign is being created; rejected with a 400 alongside `adSetId` (the attach shape reuses an existing campaign). 
+    attr_accessor :campaign_status
 
     # Meta bid strategy applied to the shared ad set. Defaults to `LOWEST_COST_WITHOUT_CAP` (auto-bid) when omitted. `LOWEST_COST_WITH_BID_CAP` and `COST_CAP` require `bidAmount`. `LOWEST_COST_WITH_MIN_ROAS` requires `roasAverageFloor`. CTWA's `optimization_goal` is fixed to `CONVERSATIONS`, but the bid strategy is independent. 
     attr_accessor :bid_strategy
@@ -157,6 +163,8 @@ module Zernio
         :'placements' => :'placements',
         :'advantage_audience' => :'advantageAudience',
         :'objective' => :'objective',
+        :'status' => :'status',
+        :'campaign_status' => :'campaignStatus',
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
@@ -205,6 +213,8 @@ module Zernio
         :'placements' => :'CtwaAdRequestBodyPlacements',
         :'advantage_audience' => :'Integer',
         :'objective' => :'String',
+        :'status' => :'String',
+        :'campaign_status' => :'String',
         :'bid_strategy' => :'String',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
@@ -369,6 +379,14 @@ module Zernio
         self.objective = attributes[:'objective']
       end
 
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'campaign_status')
+        self.campaign_status = attributes[:'campaign_status']
+      end
+
       if attributes.key?(:'bid_strategy')
         self.bid_strategy = attributes[:'bid_strategy']
       end
@@ -506,6 +524,10 @@ module Zernio
       return false unless advantage_audience_validator.valid?(@advantage_audience)
       objective_validator = EnumAttributeValidator.new('String', ["OUTCOME_ENGAGEMENT", "OUTCOME_SALES", "OUTCOME_LEADS"])
       return false unless objective_validator.valid?(@objective)
+      status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      return false unless status_validator.valid?(@status)
+      campaign_status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      return false unless campaign_status_validator.valid?(@campaign_status)
       bid_strategy_validator = EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
       return false unless bid_strategy_validator.valid?(@bid_strategy)
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
@@ -689,6 +711,26 @@ module Zernio
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] campaign_status Object to be assigned
+    def campaign_status=(campaign_status)
+      validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      unless validator.valid?(campaign_status)
+        fail ArgumentError, "invalid value for \"campaign_status\", must be one of #{validator.allowable_values}."
+      end
+      @campaign_status = campaign_status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] bid_strategy Object to be assigned
     def bid_strategy=(bid_strategy)
       validator = EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
@@ -767,6 +809,8 @@ module Zernio
           placements == o.placements &&
           advantage_audience == o.advantage_audience &&
           objective == o.objective &&
+          status == o.status &&
+          campaign_status == o.campaign_status &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
@@ -784,7 +828,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, destination].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, destination].hash
     end
 
     # Builds the object from hash

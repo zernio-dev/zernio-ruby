@@ -16,15 +16,20 @@ require 'time'
 module Zernio
   # Video creative. Mutually exclusive with this entry's `imageUrl`. Required if `imageUrl` is not supplied. 
   class CtwaAdRequestBodyCreativesInnerVideo < ApiModelBase
+    # Public URL of the video to upload. Provide either `url` or `id`.
     attr_accessor :url
 
-    # Required by Meta for every video creative. Used as the ad thumbnail. 
+    # Reuse a video already uploaded to this ad account (list them with GET /v1/ads/videos) instead of re-uploading. Wins over `url`. Provide either `url` or `id`.
+    attr_accessor :id
+
+    # OPTIONAL: when omitted, the poster is auto-generated from Meta's own preferred video thumbnail. When Meta produces no candidate the request fails with a 502 platform_error (reason: video_thumbnail_unavailable). 
     attr_accessor :thumbnail_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'url' => :'url',
+        :'id' => :'id',
         :'thumbnail_url' => :'thumbnailUrl'
       }
     end
@@ -43,6 +48,7 @@ module Zernio
     def self.openapi_types
       {
         :'url' => :'String',
+        :'id' => :'String',
         :'thumbnail_url' => :'String'
       }
     end
@@ -71,14 +77,14 @@ module Zernio
 
       if attributes.key?(:'url')
         self.url = attributes[:'url']
-      else
-        self.url = nil
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'thumbnail_url')
         self.thumbnail_url = attributes[:'thumbnail_url']
-      else
-        self.thumbnail_url = nil
       end
     end
 
@@ -87,14 +93,6 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
-      end
-
-      if @thumbnail_url.nil?
-        invalid_properties.push('invalid value for "thumbnail_url", thumbnail_url cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -102,29 +100,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @url.nil?
-      return false if @thumbnail_url.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] url Value to be assigned
-    def url=(url)
-      if url.nil?
-        fail ArgumentError, 'url cannot be nil'
-      end
-
-      @url = url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] thumbnail_url Value to be assigned
-    def thumbnail_url=(thumbnail_url)
-      if thumbnail_url.nil?
-        fail ArgumentError, 'thumbnail_url cannot be nil'
-      end
-
-      @thumbnail_url = thumbnail_url
     end
 
     # Checks equality by comparing each attribute.
@@ -133,6 +109,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           url == o.url &&
+          id == o.id &&
           thumbnail_url == o.thumbnail_url
     end
 
@@ -145,7 +122,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [url, thumbnail_url].hash
+      [url, id, thumbnail_url].hash
     end
 
     # Builds the object from hash
