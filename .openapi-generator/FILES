@@ -85,6 +85,8 @@ docs/ArchiveLeadForm200Response.md
 docs/AssignGoogleBusinessLocation200Response.md
 docs/AssignGoogleBusinessLocation200ResponseAccount.md
 docs/AssignGoogleBusinessLocationRequest.md
+docs/AttachNumberToSipTrunk200Response.md
+docs/AttachNumberToSipTrunkRequest.md
 docs/BatchGetGoogleBusinessReviews200Response.md
 docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md
 docs/BatchGetGoogleBusinessReviewsRequest.md
@@ -295,6 +297,9 @@ docs/CreateSequenceRequest.md
 docs/CreateSequenceRequestStepsInner.md
 docs/CreateSequenceRequestStepsInnerTemplate.md
 docs/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md
+docs/CreateSipTrunk201Response.md
+docs/CreateSipTrunk201ResponseTermination.md
+docs/CreateSipTrunkRequest.md
 docs/CreateSmsSenderId200Response.md
 docs/CreateSmsSenderIdRequest.md
 docs/CreateStandaloneAd200Response.md
@@ -383,6 +388,7 @@ docs/DeleteInboxReviewReplyRequest.md
 docs/DeleteSmsSenderId200Response.md
 docs/DeleteValueRuleSet200Response.md
 docs/DeleteWhatsappBusinessUsernameRequest.md
+docs/DetachNumberFromSipTrunk200Response.md
 docs/DialVoiceWebCall200Response.md
 docs/DialVoiceWebCallRequest.md
 docs/DisableSmsOnNumber200Response.md
@@ -715,6 +721,8 @@ docs/GetSequence200Response.md
 docs/GetSequence200ResponseSequence.md
 docs/GetSequence200ResponseSequenceStepsInner.md
 docs/GetSequence200ResponseSequenceStepsInnerTemplate.md
+docs/GetSipTrunk200Response.md
+docs/GetSipTrunk200ResponseNumbersInner.md
 docs/GetSlackSettings200Response.md
 docs/GetSlackSettings200ResponseAccount.md
 docs/GetSmsRegistration200Response.md
@@ -1009,6 +1017,9 @@ docs/ListSequenceEnrollments200Response.md
 docs/ListSequenceEnrollments200ResponseEnrollmentsInner.md
 docs/ListSequences200Response.md
 docs/ListSequences200ResponseSequencesInner.md
+docs/ListSipTrunks200Response.md
+docs/ListSipTrunks200ResponseTrunksInner.md
+docs/ListSipTrunks200ResponseTrunksInnerTermination.md
 docs/ListSlackMembers200Response.md
 docs/ListSlackMembers200ResponseMembersInner.md
 docs/ListSmsOptOuts200Response.md
@@ -1209,6 +1220,7 @@ docs/ReviewWebhookReviewReviewer.md
 docs/ReviewsApi.md
 docs/RevokeConnectedApp200Response.md
 docs/RfPrediction.md
+docs/RotateSipTrunkCredentials200Response.md
 docs/SMSApi.md
 docs/SavedTargetingAudience.md
 docs/ScheduleBroadcast200Response.md
@@ -1901,6 +1913,8 @@ lib/zernio-sdk/models/archive_lead_form200_response.rb
 lib/zernio-sdk/models/assign_google_business_location200_response.rb
 lib/zernio-sdk/models/assign_google_business_location200_response_account.rb
 lib/zernio-sdk/models/assign_google_business_location_request.rb
+lib/zernio-sdk/models/attach_number_to_sip_trunk200_response.rb
+lib/zernio-sdk/models/attach_number_to_sip_trunk_request.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews200_response_location_reviews_inner.rb
 lib/zernio-sdk/models/batch_get_google_business_reviews_request.rb
@@ -2102,6 +2116,9 @@ lib/zernio-sdk/models/create_sequence_request.rb
 lib/zernio-sdk/models/create_sequence_request_steps_inner.rb
 lib/zernio-sdk/models/create_sequence_request_steps_inner_template.rb
 lib/zernio-sdk/models/create_sequence_request_steps_inner_template_variable_mapping_value.rb
+lib/zernio-sdk/models/create_sip_trunk201_response.rb
+lib/zernio-sdk/models/create_sip_trunk201_response_termination.rb
+lib/zernio-sdk/models/create_sip_trunk_request.rb
 lib/zernio-sdk/models/create_sms_sender_id200_response.rb
 lib/zernio-sdk/models/create_sms_sender_id_request.rb
 lib/zernio-sdk/models/create_standalone_ad200_response.rb
@@ -2189,6 +2206,7 @@ lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
 lib/zernio-sdk/models/delete_sms_sender_id200_response.rb
 lib/zernio-sdk/models/delete_value_rule_set200_response.rb
 lib/zernio-sdk/models/delete_whatsapp_business_username_request.rb
+lib/zernio-sdk/models/detach_number_from_sip_trunk200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call_request.rb
 lib/zernio-sdk/models/disable_sms_on_number200_response.rb
@@ -2512,6 +2530,8 @@ lib/zernio-sdk/models/get_sequence200_response.rb
 lib/zernio-sdk/models/get_sequence200_response_sequence.rb
 lib/zernio-sdk/models/get_sequence200_response_sequence_steps_inner.rb
 lib/zernio-sdk/models/get_sequence200_response_sequence_steps_inner_template.rb
+lib/zernio-sdk/models/get_sip_trunk200_response.rb
+lib/zernio-sdk/models/get_sip_trunk200_response_numbers_inner.rb
 lib/zernio-sdk/models/get_slack_settings200_response.rb
 lib/zernio-sdk/models/get_slack_settings200_response_account.rb
 lib/zernio-sdk/models/get_sms_registration200_response.rb
@@ -2801,6 +2821,9 @@ lib/zernio-sdk/models/list_sequence_enrollments200_response.rb
 lib/zernio-sdk/models/list_sequence_enrollments200_response_enrollments_inner.rb
 lib/zernio-sdk/models/list_sequences200_response.rb
 lib/zernio-sdk/models/list_sequences200_response_sequences_inner.rb
+lib/zernio-sdk/models/list_sip_trunks200_response.rb
+lib/zernio-sdk/models/list_sip_trunks200_response_trunks_inner.rb
+lib/zernio-sdk/models/list_sip_trunks200_response_trunks_inner_termination.rb
 lib/zernio-sdk/models/list_slack_members200_response.rb
 lib/zernio-sdk/models/list_slack_members200_response_members_inner.rb
 lib/zernio-sdk/models/list_sms_opt_outs200_response.rb
@@ -2989,6 +3012,7 @@ lib/zernio-sdk/models/review_webhook_review_reply.rb
 lib/zernio-sdk/models/review_webhook_review_reviewer.rb
 lib/zernio-sdk/models/revoke_connected_app200_response.rb
 lib/zernio-sdk/models/rf_prediction.rb
+lib/zernio-sdk/models/rotate_sip_trunk_credentials200_response.rb
 lib/zernio-sdk/models/saved_targeting_audience.rb
 lib/zernio-sdk/models/schedule_broadcast200_response.rb
 lib/zernio-sdk/models/schedule_broadcast200_response_broadcast.rb
@@ -3656,6 +3680,8 @@ spec/models/archive_lead_form200_response_spec.rb
 spec/models/assign_google_business_location200_response_account_spec.rb
 spec/models/assign_google_business_location200_response_spec.rb
 spec/models/assign_google_business_location_request_spec.rb
+spec/models/attach_number_to_sip_trunk200_response_spec.rb
+spec/models/attach_number_to_sip_trunk_request_spec.rb
 spec/models/batch_get_google_business_reviews200_response_location_reviews_inner_spec.rb
 spec/models/batch_get_google_business_reviews200_response_spec.rb
 spec/models/batch_get_google_business_reviews_request_spec.rb
@@ -3857,6 +3883,9 @@ spec/models/create_sequence_request_spec.rb
 spec/models/create_sequence_request_steps_inner_spec.rb
 spec/models/create_sequence_request_steps_inner_template_spec.rb
 spec/models/create_sequence_request_steps_inner_template_variable_mapping_value_spec.rb
+spec/models/create_sip_trunk201_response_spec.rb
+spec/models/create_sip_trunk201_response_termination_spec.rb
+spec/models/create_sip_trunk_request_spec.rb
 spec/models/create_sms_sender_id200_response_spec.rb
 spec/models/create_sms_sender_id_request_spec.rb
 spec/models/create_standalone_ad200_response_results_inner_spec.rb
@@ -3944,6 +3973,7 @@ spec/models/delete_inbox_review_reply_request_spec.rb
 spec/models/delete_sms_sender_id200_response_spec.rb
 spec/models/delete_value_rule_set200_response_spec.rb
 spec/models/delete_whatsapp_business_username_request_spec.rb
+spec/models/detach_number_from_sip_trunk200_response_spec.rb
 spec/models/dial_voice_web_call200_response_spec.rb
 spec/models/dial_voice_web_call_request_spec.rb
 spec/models/disable_sms_on_number200_response_spec.rb
@@ -4267,6 +4297,8 @@ spec/models/get_sequence200_response_sequence_spec.rb
 spec/models/get_sequence200_response_sequence_steps_inner_spec.rb
 spec/models/get_sequence200_response_sequence_steps_inner_template_spec.rb
 spec/models/get_sequence200_response_spec.rb
+spec/models/get_sip_trunk200_response_numbers_inner_spec.rb
+spec/models/get_sip_trunk200_response_spec.rb
 spec/models/get_slack_settings200_response_account_spec.rb
 spec/models/get_slack_settings200_response_spec.rb
 spec/models/get_sms_registration200_response_campaign_content_spec.rb
@@ -4556,6 +4588,9 @@ spec/models/list_sequence_enrollments200_response_enrollments_inner_spec.rb
 spec/models/list_sequence_enrollments200_response_spec.rb
 spec/models/list_sequences200_response_sequences_inner_spec.rb
 spec/models/list_sequences200_response_spec.rb
+spec/models/list_sip_trunks200_response_spec.rb
+spec/models/list_sip_trunks200_response_trunks_inner_spec.rb
+spec/models/list_sip_trunks200_response_trunks_inner_termination_spec.rb
 spec/models/list_slack_members200_response_members_inner_spec.rb
 spec/models/list_slack_members200_response_spec.rb
 spec/models/list_sms_opt_outs200_response_opt_outs_inner_spec.rb
@@ -4744,6 +4779,7 @@ spec/models/review_webhook_review_reviewer_spec.rb
 spec/models/review_webhook_review_spec.rb
 spec/models/revoke_connected_app200_response_spec.rb
 spec/models/rf_prediction_spec.rb
+spec/models/rotate_sip_trunk_credentials200_response_spec.rb
 spec/models/saved_targeting_audience_spec.rb
 spec/models/schedule_broadcast200_response_broadcast_spec.rb
 spec/models/schedule_broadcast200_response_spec.rb

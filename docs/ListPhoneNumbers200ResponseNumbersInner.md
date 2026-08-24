@@ -12,6 +12,7 @@
 | **telnyx_order_id** | **String** | Present once the number order has been placed (i.e. the requirement group was approved). Absent while still in identity review. | [optional] |
 | **monthly_cents** | **Integer** | Per-country monthly price in cents ($2..$25). | [optional] |
 | **hosted_by_zernio** | **Boolean** | False for numbers you brought yourself (connected via Meta embedded signup) — they live on your own carrier, so SMS/Calls can&#39;t be enabled on them. | [optional] |
+| **sip_trunk_id** | **String** | SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409. | [optional] |
 | **profile_id** | **Object** |  | [optional] |
 | **provisioned_at** | **Time** |  | [optional] |
 | **meta_preverified_id** | **String** |  | [optional] |
@@ -37,6 +38,7 @@ instance = Zernio::ListPhoneNumbers200ResponseNumbersInner.new(
   telnyx_order_id: null,
   monthly_cents: null,
   hosted_by_zernio: null,
+  sip_trunk_id: null,
   profile_id: null,
   provisioned_at: null,
   meta_preverified_id: null,

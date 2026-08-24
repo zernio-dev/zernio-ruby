@@ -32,6 +32,31 @@ describe 'VoiceApi' do
     end
   end
 
+  # unit tests for attach_number_to_sip_trunk
+  # Attach a number to a SIP trunk
+  # Routes the number&#39;s calls to the trunk: the external platform receives its inbound directly and can present it as outbound caller ID. While attached, Zernio-side voice features are off for this number (call forwarding, IVR, voicemail, recording, the softphone, and WhatsApp calling), so the number must have Calls and WhatsApp calling disabled before attaching. SMS and WhatsApp messaging are unaffected. 
+  # @param id Phone number record ID (from GET /v1/phone-numbers).
+  # @param attach_number_to_sip_trunk_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AttachNumberToSipTrunk200Response]
+  describe 'attach_number_to_sip_trunk test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for create_sip_trunk
+  # Create a SIP trunk
+  # Creates a SIP trunk an external voice platform (Retell, ElevenLabs, Vapi, or any SIP endpoint) can import your Zernio numbers into. The trunk carries both directions: inbound calls on attached numbers are delivered to &#x60;sipHost&#x60;, and the platform originates outbound calls through &#x60;termination.uri&#x60; with the digest credentials.  The &#x60;digestPassword&#x60; is returned only by this call (and by rotate-credentials); store it immediately. Attach any number of numbers to a trunk. Several trunks may point at the same host — each carries its own credentials and spend cap, so separate destination workspaces (e.g. an agency&#39;s clients) stay isolated. 
+  # @param create_sip_trunk_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateSipTrunk201Response]
+  describe 'create_sip_trunk test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_voice_call
   # Place an outbound phone call
   # Dials &#x60;to&#x60; FROM one of your voice-enabled numbers and, on answer, bridges the callee to the number&#39;s stored forward destination, or to the per-call &#x60;forwardTo&#x60; override. Destinations can be your own AI voice agent (Vapi/Retell), a phone, or a SIP endpoint. An optional &#x60;greeting&#x60; is spoken to the callee before the bridge.  The 200 response means the call is dialing; the lifecycle continues asynchronously (track it via &#x60;GET /v1/voice/calls/{id}&#x60; or the &#x60;call.*&#x60; webhooks). Outbound calls are capped per rolling hour (429 when hit).  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
@@ -51,6 +76,30 @@ describe 'VoiceApi' do
   # @param [Hash] opts the optional parameters
   # @return [CreateVoiceWebSession200Response]
   describe 'create_voice_web_session test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_sip_trunk
+  # Delete a SIP trunk
+  # Tears down the trunk and its carrier-side objects. Refused while any number is still attached: detach them first. 
+  # @param id 
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteSmsSenderId200Response]
+  describe 'delete_sip_trunk test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for detach_number_from_sip_trunk
+  # Detach a number from its SIP trunk
+  # Returns the number&#39;s calls to Zernio routing. Idempotent when the number is not attached to any trunk. 
+  # @param id 
+  # @param [Hash] opts the optional parameters
+  # @return [DetachNumberFromSipTrunk200Response]
+  describe 'detach_number_from_sip_trunk test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -105,6 +154,17 @@ describe 'VoiceApi' do
     end
   end
 
+  # unit tests for get_sip_trunk
+  # Get a SIP trunk
+  # @param id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetSipTrunk200Response]
+  describe 'get_sip_trunk test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_voice_call
   # Get a phone call
   # Full call detail, including the transcript segments when transcription was on.
@@ -145,6 +205,16 @@ describe 'VoiceApi' do
     end
   end
 
+  # unit tests for list_sip_trunks
+  # List SIP trunks
+  # @param [Hash] opts the optional parameters
+  # @return [ListSipTrunks200Response]
+  describe 'list_sip_trunks test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_voice_calls
   # List phone calls
   # Your PSTN voice calls (inbound + outbound), newest first. Cursor pagination: pass the returned &#x60;nextCursor&#x60; as &#x60;before&#x60; for the next page. For a history that also includes WhatsApp calls, use &#x60;GET /v1/calls&#x60;. 
@@ -156,6 +226,18 @@ describe 'VoiceApi' do
   # @option opts [Integer] :limit 
   # @return [ListVoiceCalls200Response]
   describe 'list_voice_calls test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for rotate_sip_trunk_credentials
+  # Rotate a SIP trunk&#39;s password
+  # Mints a new digest password on the trunk. The old password stops working immediately, so update the destination platform right away. 
+  # @param id 
+  # @param [Hash] opts the optional parameters
+  # @return [RotateSipTrunkCredentials200Response]
+  describe 'rotate_sip_trunk_credentials test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

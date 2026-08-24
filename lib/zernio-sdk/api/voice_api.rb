@@ -19,6 +19,148 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Attach a number to a SIP trunk
+    # Routes the number's calls to the trunk: the external platform receives its inbound directly and can present it as outbound caller ID. While attached, Zernio-side voice features are off for this number (call forwarding, IVR, voicemail, recording, the softphone, and WhatsApp calling), so the number must have Calls and WhatsApp calling disabled before attaching. SMS and WhatsApp messaging are unaffected. 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param attach_number_to_sip_trunk_request [AttachNumberToSipTrunkRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AttachNumberToSipTrunk200Response]
+    def attach_number_to_sip_trunk(id, attach_number_to_sip_trunk_request, opts = {})
+      data, _status_code, _headers = attach_number_to_sip_trunk_with_http_info(id, attach_number_to_sip_trunk_request, opts)
+      data
+    end
+
+    # Attach a number to a SIP trunk
+    # Routes the number&#39;s calls to the trunk: the external platform receives its inbound directly and can present it as outbound caller ID. While attached, Zernio-side voice features are off for this number (call forwarding, IVR, voicemail, recording, the softphone, and WhatsApp calling), so the number must have Calls and WhatsApp calling disabled before attaching. SMS and WhatsApp messaging are unaffected. 
+    # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
+    # @param attach_number_to_sip_trunk_request [AttachNumberToSipTrunkRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AttachNumberToSipTrunk200Response, Integer, Hash)>] AttachNumberToSipTrunk200Response data, response status code and response headers
+    def attach_number_to_sip_trunk_with_http_info(id, attach_number_to_sip_trunk_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VoiceApi.attach_number_to_sip_trunk ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling VoiceApi.attach_number_to_sip_trunk"
+      end
+      # verify the required parameter 'attach_number_to_sip_trunk_request' is set
+      if @api_client.config.client_side_validation && attach_number_to_sip_trunk_request.nil?
+        fail ArgumentError, "Missing the required parameter 'attach_number_to_sip_trunk_request' when calling VoiceApi.attach_number_to_sip_trunk"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/{id}/sip-trunk'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(attach_number_to_sip_trunk_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AttachNumberToSipTrunk200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"VoiceApi.attach_number_to_sip_trunk",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VoiceApi#attach_number_to_sip_trunk\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create a SIP trunk
+    # Creates a SIP trunk an external voice platform (Retell, ElevenLabs, Vapi, or any SIP endpoint) can import your Zernio numbers into. The trunk carries both directions: inbound calls on attached numbers are delivered to `sipHost`, and the platform originates outbound calls through `termination.uri` with the digest credentials.  The `digestPassword` is returned only by this call (and by rotate-credentials); store it immediately. Attach any number of numbers to a trunk. Several trunks may point at the same host — each carries its own credentials and spend cap, so separate destination workspaces (e.g. an agency's clients) stay isolated. 
+    # @param create_sip_trunk_request [CreateSipTrunkRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateSipTrunk201Response]
+    def create_sip_trunk(create_sip_trunk_request, opts = {})
+      data, _status_code, _headers = create_sip_trunk_with_http_info(create_sip_trunk_request, opts)
+      data
+    end
+
+    # Create a SIP trunk
+    # Creates a SIP trunk an external voice platform (Retell, ElevenLabs, Vapi, or any SIP endpoint) can import your Zernio numbers into. The trunk carries both directions: inbound calls on attached numbers are delivered to &#x60;sipHost&#x60;, and the platform originates outbound calls through &#x60;termination.uri&#x60; with the digest credentials.  The &#x60;digestPassword&#x60; is returned only by this call (and by rotate-credentials); store it immediately. Attach any number of numbers to a trunk. Several trunks may point at the same host — each carries its own credentials and spend cap, so separate destination workspaces (e.g. an agency&#39;s clients) stay isolated. 
+    # @param create_sip_trunk_request [CreateSipTrunkRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateSipTrunk201Response, Integer, Hash)>] CreateSipTrunk201Response data, response status code and response headers
+    def create_sip_trunk_with_http_info(create_sip_trunk_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VoiceApi.create_sip_trunk ...'
+      end
+      # verify the required parameter 'create_sip_trunk_request' is set
+      if @api_client.config.client_side_validation && create_sip_trunk_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_sip_trunk_request' when calling VoiceApi.create_sip_trunk"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/sip-trunks'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_sip_trunk_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateSipTrunk201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"VoiceApi.create_sip_trunk",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VoiceApi#create_sip_trunk\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Place an outbound phone call
     # Dials `to` FROM one of your voice-enabled numbers and, on answer, bridges the callee to the number's stored forward destination, or to the per-call `forwardTo` override. Destinations can be your own AI voice agent (Vapi/Retell), a phone, or a SIP endpoint. An optional `greeting` is spoken to the callee before the bridge.  The 200 response means the call is dialing; the lifecycle continues asynchronously (track it via `GET /v1/voice/calls/{id}` or the `call.*` webhooks). Outbound calls are capped per rolling hour (429 when hit).  **Idempotency:** send an `Idempotency-Key` header to make retries safe; same key + same body replays the original response instead of dialing (and billing) a second call. 
     # @param create_voice_call_request [CreateVoiceCallRequest] 
@@ -147,6 +289,132 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: VoiceApi#create_voice_web_session\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete a SIP trunk
+    # Tears down the trunk and its carrier-side objects. Refused while any number is still attached: detach them first. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [DeleteSmsSenderId200Response]
+    def delete_sip_trunk(id, opts = {})
+      data, _status_code, _headers = delete_sip_trunk_with_http_info(id, opts)
+      data
+    end
+
+    # Delete a SIP trunk
+    # Tears down the trunk and its carrier-side objects. Refused while any number is still attached: detach them first. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeleteSmsSenderId200Response, Integer, Hash)>] DeleteSmsSenderId200Response data, response status code and response headers
+    def delete_sip_trunk_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VoiceApi.delete_sip_trunk ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling VoiceApi.delete_sip_trunk"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/sip-trunks/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteSmsSenderId200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"VoiceApi.delete_sip_trunk",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VoiceApi#delete_sip_trunk\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Detach a number from its SIP trunk
+    # Returns the number's calls to Zernio routing. Idempotent when the number is not attached to any trunk. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [DetachNumberFromSipTrunk200Response]
+    def detach_number_from_sip_trunk(id, opts = {})
+      data, _status_code, _headers = detach_number_from_sip_trunk_with_http_info(id, opts)
+      data
+    end
+
+    # Detach a number from its SIP trunk
+    # Returns the number&#39;s calls to Zernio routing. Idempotent when the number is not attached to any trunk. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DetachNumberFromSipTrunk200Response, Integer, Hash)>] DetachNumberFromSipTrunk200Response data, response status code and response headers
+    def detach_number_from_sip_trunk_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VoiceApi.detach_number_from_sip_trunk ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling VoiceApi.detach_number_from_sip_trunk"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/{id}/sip-trunk'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DetachNumberFromSipTrunk200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"VoiceApi.detach_number_from_sip_trunk",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VoiceApi#detach_number_from_sip_trunk\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -415,6 +683,67 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get a SIP trunk
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetSipTrunk200Response]
+    def get_sip_trunk(id, opts = {})
+      data, _status_code, _headers = get_sip_trunk_with_http_info(id, opts)
+      data
+    end
+
+    # Get a SIP trunk
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetSipTrunk200Response, Integer, Hash)>] GetSipTrunk200Response data, response status code and response headers
+    def get_sip_trunk_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VoiceApi.get_sip_trunk ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling VoiceApi.get_sip_trunk"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/sip-trunks/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetSipTrunk200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"VoiceApi.get_sip_trunk",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VoiceApi#get_sip_trunk\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get a phone call
     # Full call detail, including the transcript segments when transcription was on.
     # @param id [String] 
@@ -629,6 +958,61 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List SIP trunks
+    # @param [Hash] opts the optional parameters
+    # @return [ListSipTrunks200Response]
+    def list_sip_trunks(opts = {})
+      data, _status_code, _headers = list_sip_trunks_with_http_info(opts)
+      data
+    end
+
+    # List SIP trunks
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListSipTrunks200Response, Integer, Hash)>] ListSipTrunks200Response data, response status code and response headers
+    def list_sip_trunks_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VoiceApi.list_sip_trunks ...'
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/sip-trunks'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListSipTrunks200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"VoiceApi.list_sip_trunks",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VoiceApi#list_sip_trunks\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List phone calls
     # Your PSTN voice calls (inbound + outbound), newest first. Cursor pagination: pass the returned `nextCursor` as `before` for the next page. For a history that also includes WhatsApp calls, use `GET /v1/calls`. 
     # @param [Hash] opts the optional parameters
@@ -713,6 +1097,69 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: VoiceApi#list_voice_calls\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Rotate a SIP trunk's password
+    # Mints a new digest password on the trunk. The old password stops working immediately, so update the destination platform right away. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [RotateSipTrunkCredentials200Response]
+    def rotate_sip_trunk_credentials(id, opts = {})
+      data, _status_code, _headers = rotate_sip_trunk_credentials_with_http_info(id, opts)
+      data
+    end
+
+    # Rotate a SIP trunk&#39;s password
+    # Mints a new digest password on the trunk. The old password stops working immediately, so update the destination platform right away. 
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RotateSipTrunkCredentials200Response, Integer, Hash)>] RotateSipTrunkCredentials200Response data, response status code and response headers
+    def rotate_sip_trunk_credentials_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VoiceApi.rotate_sip_trunk_credentials ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling VoiceApi.rotate_sip_trunk_credentials"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/sip-trunks/{id}/rotate-credentials'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RotateSipTrunkCredentials200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"VoiceApi.rotate_sip_trunk_credentials",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VoiceApi#rotate_sip_trunk_credentials\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

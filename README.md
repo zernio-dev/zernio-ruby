@@ -523,16 +523,23 @@ Class | Method | HTTP request | Description
 *Zernio::VerifyApi* | [**check_verification**](docs/VerifyApi.md#check_verification) | **POST** /v1/verify/verifications/{verificationId}/check | Check a verification code
 *Zernio::VerifyApi* | [**create_verification**](docs/VerifyApi.md#create_verification) | **POST** /v1/verify/verifications | Send a verification code
 *Zernio::VerifyApi* | [**get_verification**](docs/VerifyApi.md#get_verification) | **GET** /v1/verify/verifications/{verificationId} | Get a verification
+*Zernio::VoiceApi* | [**attach_number_to_sip_trunk**](docs/VoiceApi.md#attach_number_to_sip_trunk) | **POST** /v1/phone-numbers/{id}/sip-trunk | Attach a number to a SIP trunk
+*Zernio::VoiceApi* | [**create_sip_trunk**](docs/VoiceApi.md#create_sip_trunk) | **POST** /v1/phone-numbers/sip-trunks | Create a SIP trunk
 *Zernio::VoiceApi* | [**create_voice_call**](docs/VoiceApi.md#create_voice_call) | **POST** /v1/voice/calls | Place an outbound phone call
 *Zernio::VoiceApi* | [**create_voice_web_session**](docs/VoiceApi.md#create_voice_web_session) | **POST** /v1/voice/calls/web | Mint a browser softphone session
+*Zernio::VoiceApi* | [**delete_sip_trunk**](docs/VoiceApi.md#delete_sip_trunk) | **DELETE** /v1/phone-numbers/sip-trunks/{id} | Delete a SIP trunk
+*Zernio::VoiceApi* | [**detach_number_from_sip_trunk**](docs/VoiceApi.md#detach_number_from_sip_trunk) | **DELETE** /v1/phone-numbers/{id}/sip-trunk | Detach a number from its SIP trunk
 *Zernio::VoiceApi* | [**dial_voice_web_call**](docs/VoiceApi.md#dial_voice_web_call) | **POST** /v1/voice/calls/web/dial | Dial from the browser softphone
 *Zernio::VoiceApi* | [**disable_voice_on_number**](docs/VoiceApi.md#disable_voice_on_number) | **DELETE** /v1/phone-numbers/{id}/voice | Disable phone calling on a number
 *Zernio::VoiceApi* | [**enable_voice_on_number**](docs/VoiceApi.md#enable_voice_on_number) | **POST** /v1/phone-numbers/{id}/voice | Enable phone calling on a number
 *Zernio::VoiceApi* | [**end_voice_call**](docs/VoiceApi.md#end_voice_call) | **POST** /v1/voice/calls/{id}/end | Hang up a live call
+*Zernio::VoiceApi* | [**get_sip_trunk**](docs/VoiceApi.md#get_sip_trunk) | **GET** /v1/phone-numbers/sip-trunks/{id} | Get a SIP trunk
 *Zernio::VoiceApi* | [**get_voice_call**](docs/VoiceApi.md#get_voice_call) | **GET** /v1/voice/calls/{id} | Get a phone call
 *Zernio::VoiceApi* | [**get_voice_call_estimate**](docs/VoiceApi.md#get_voice_call_estimate) | **GET** /v1/voice/calls/estimate | Estimate call cost
 *Zernio::VoiceApi* | [**get_voice_call_recording**](docs/VoiceApi.md#get_voice_call_recording) | **GET** /v1/voice/calls/{id}/recording | Get a call recording
+*Zernio::VoiceApi* | [**list_sip_trunks**](docs/VoiceApi.md#list_sip_trunks) | **GET** /v1/phone-numbers/sip-trunks | List SIP trunks
 *Zernio::VoiceApi* | [**list_voice_calls**](docs/VoiceApi.md#list_voice_calls) | **GET** /v1/voice/calls | List phone calls
+*Zernio::VoiceApi* | [**rotate_sip_trunk_credentials**](docs/VoiceApi.md#rotate_sip_trunk_credentials) | **POST** /v1/phone-numbers/sip-trunks/{id}/rotate-credentials | Rotate a SIP trunk's password
 *Zernio::VoiceApi* | [**transfer_voice_call**](docs/VoiceApi.md#transfer_voice_call) | **POST** /v1/voice/calls/{id}/transfer | Blind-transfer a live call
 *Zernio::WebhooksApi* | [**create_webhook_settings**](docs/WebhooksApi.md#create_webhook_settings) | **POST** /v1/webhooks/settings | Create webhook
 *Zernio::WebhooksApi* | [**delete_webhook_settings**](docs/WebhooksApi.md#delete_webhook_settings) | **DELETE** /v1/webhooks/settings | Delete webhook
@@ -711,6 +718,8 @@ Class | Method | HTTP request | Description
  - [Zernio::AssignGoogleBusinessLocation200Response](docs/AssignGoogleBusinessLocation200Response.md)
  - [Zernio::AssignGoogleBusinessLocation200ResponseAccount](docs/AssignGoogleBusinessLocation200ResponseAccount.md)
  - [Zernio::AssignGoogleBusinessLocationRequest](docs/AssignGoogleBusinessLocationRequest.md)
+ - [Zernio::AttachNumberToSipTrunk200Response](docs/AttachNumberToSipTrunk200Response.md)
+ - [Zernio::AttachNumberToSipTrunkRequest](docs/AttachNumberToSipTrunkRequest.md)
  - [Zernio::BatchGetGoogleBusinessReviews200Response](docs/BatchGetGoogleBusinessReviews200Response.md)
  - [Zernio::BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner](docs/BatchGetGoogleBusinessReviews200ResponseLocationReviewsInner.md)
  - [Zernio::BatchGetGoogleBusinessReviewsRequest](docs/BatchGetGoogleBusinessReviewsRequest.md)
@@ -912,6 +921,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateSequenceRequestStepsInner](docs/CreateSequenceRequestStepsInner.md)
  - [Zernio::CreateSequenceRequestStepsInnerTemplate](docs/CreateSequenceRequestStepsInnerTemplate.md)
  - [Zernio::CreateSequenceRequestStepsInnerTemplateVariableMappingValue](docs/CreateSequenceRequestStepsInnerTemplateVariableMappingValue.md)
+ - [Zernio::CreateSipTrunk201Response](docs/CreateSipTrunk201Response.md)
+ - [Zernio::CreateSipTrunk201ResponseTermination](docs/CreateSipTrunk201ResponseTermination.md)
+ - [Zernio::CreateSipTrunkRequest](docs/CreateSipTrunkRequest.md)
  - [Zernio::CreateSmsSenderId200Response](docs/CreateSmsSenderId200Response.md)
  - [Zernio::CreateSmsSenderIdRequest](docs/CreateSmsSenderIdRequest.md)
  - [Zernio::CreateStandaloneAd200Response](docs/CreateStandaloneAd200Response.md)
@@ -999,6 +1011,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteSmsSenderId200Response](docs/DeleteSmsSenderId200Response.md)
  - [Zernio::DeleteValueRuleSet200Response](docs/DeleteValueRuleSet200Response.md)
  - [Zernio::DeleteWhatsappBusinessUsernameRequest](docs/DeleteWhatsappBusinessUsernameRequest.md)
+ - [Zernio::DetachNumberFromSipTrunk200Response](docs/DetachNumberFromSipTrunk200Response.md)
  - [Zernio::DialVoiceWebCall200Response](docs/DialVoiceWebCall200Response.md)
  - [Zernio::DialVoiceWebCallRequest](docs/DialVoiceWebCallRequest.md)
  - [Zernio::DisableSmsOnNumber200Response](docs/DisableSmsOnNumber200Response.md)
@@ -1322,6 +1335,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetSequence200ResponseSequence](docs/GetSequence200ResponseSequence.md)
  - [Zernio::GetSequence200ResponseSequenceStepsInner](docs/GetSequence200ResponseSequenceStepsInner.md)
  - [Zernio::GetSequence200ResponseSequenceStepsInnerTemplate](docs/GetSequence200ResponseSequenceStepsInnerTemplate.md)
+ - [Zernio::GetSipTrunk200Response](docs/GetSipTrunk200Response.md)
+ - [Zernio::GetSipTrunk200ResponseNumbersInner](docs/GetSipTrunk200ResponseNumbersInner.md)
  - [Zernio::GetSlackSettings200Response](docs/GetSlackSettings200Response.md)
  - [Zernio::GetSlackSettings200ResponseAccount](docs/GetSlackSettings200ResponseAccount.md)
  - [Zernio::GetSmsRegistration200Response](docs/GetSmsRegistration200Response.md)
@@ -1611,6 +1626,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ListSequenceEnrollments200ResponseEnrollmentsInner](docs/ListSequenceEnrollments200ResponseEnrollmentsInner.md)
  - [Zernio::ListSequences200Response](docs/ListSequences200Response.md)
  - [Zernio::ListSequences200ResponseSequencesInner](docs/ListSequences200ResponseSequencesInner.md)
+ - [Zernio::ListSipTrunks200Response](docs/ListSipTrunks200Response.md)
+ - [Zernio::ListSipTrunks200ResponseTrunksInner](docs/ListSipTrunks200ResponseTrunksInner.md)
+ - [Zernio::ListSipTrunks200ResponseTrunksInnerTermination](docs/ListSipTrunks200ResponseTrunksInnerTermination.md)
  - [Zernio::ListSlackMembers200Response](docs/ListSlackMembers200Response.md)
  - [Zernio::ListSlackMembers200ResponseMembersInner](docs/ListSlackMembers200ResponseMembersInner.md)
  - [Zernio::ListSmsOptOuts200Response](docs/ListSmsOptOuts200Response.md)
@@ -1799,6 +1817,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ReviewWebhookReviewReviewer](docs/ReviewWebhookReviewReviewer.md)
  - [Zernio::RevokeConnectedApp200Response](docs/RevokeConnectedApp200Response.md)
  - [Zernio::RfPrediction](docs/RfPrediction.md)
+ - [Zernio::RotateSipTrunkCredentials200Response](docs/RotateSipTrunkCredentials200Response.md)
  - [Zernio::SavedTargetingAudience](docs/SavedTargetingAudience.md)
  - [Zernio::ScheduleBroadcast200Response](docs/ScheduleBroadcast200Response.md)
  - [Zernio::ScheduleBroadcast200ResponseBroadcast](docs/ScheduleBroadcast200ResponseBroadcast.md)

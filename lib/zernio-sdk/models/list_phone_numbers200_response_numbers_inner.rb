@@ -35,6 +35,9 @@ module Zernio
     # False for numbers you brought yourself (connected via Meta embedded signup) — they live on your own carrier, so SMS/Calls can't be enabled on them.
     attr_accessor :hosted_by_zernio
 
+    # SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409.
+    attr_accessor :sip_trunk_id
+
     attr_accessor :profile_id
 
     attr_accessor :provisioned_at
@@ -91,6 +94,7 @@ module Zernio
         :'telnyx_order_id' => :'telnyxOrderId',
         :'monthly_cents' => :'monthlyCents',
         :'hosted_by_zernio' => :'hostedByZernio',
+        :'sip_trunk_id' => :'sipTrunkId',
         :'profile_id' => :'profileId',
         :'provisioned_at' => :'provisionedAt',
         :'meta_preverified_id' => :'metaPreverifiedId',
@@ -125,6 +129,7 @@ module Zernio
         :'telnyx_order_id' => :'String',
         :'monthly_cents' => :'Integer',
         :'hosted_by_zernio' => :'Boolean',
+        :'sip_trunk_id' => :'String',
         :'profile_id' => :'Object',
         :'provisioned_at' => :'Time',
         :'meta_preverified_id' => :'String',
@@ -143,6 +148,7 @@ module Zernio
       Set.new([
         :'registrant_name',
         :'telnyx_order_id',
+        :'sip_trunk_id',
         :'onfido_verification_url',
         :'end_user_first_name',
         :'end_user_last_name',
@@ -196,6 +202,10 @@ module Zernio
 
       if attributes.key?(:'hosted_by_zernio')
         self.hosted_by_zernio = attributes[:'hosted_by_zernio']
+      end
+
+      if attributes.key?(:'sip_trunk_id')
+        self.sip_trunk_id = attributes[:'sip_trunk_id']
       end
 
       if attributes.key?(:'profile_id')
@@ -279,6 +289,7 @@ module Zernio
           telnyx_order_id == o.telnyx_order_id &&
           monthly_cents == o.monthly_cents &&
           hosted_by_zernio == o.hosted_by_zernio &&
+          sip_trunk_id == o.sip_trunk_id &&
           profile_id == o.profile_id &&
           provisioned_at == o.provisioned_at &&
           meta_preverified_id == o.meta_preverified_id &&
@@ -300,7 +311,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, phone_number, country, status, registrant_name, telnyx_order_id, monthly_cents, hosted_by_zernio, profile_id, provisioned_at, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, calling_enabled, created_at].hash
+      [_id, phone_number, country, status, registrant_name, telnyx_order_id, monthly_cents, hosted_by_zernio, sip_trunk_id, profile_id, provisioned_at, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, calling_enabled, created_at].hash
     end
 
     # Builds the object from hash

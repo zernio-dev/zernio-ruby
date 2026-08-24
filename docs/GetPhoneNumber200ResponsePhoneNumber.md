@@ -15,6 +15,7 @@
 | **end_user_last_name** | **String** |  | [optional] |
 | **regulatory_decline_reason** | **String** | Reviewer rejection reason when status is regulatory_declined. | [optional] |
 | **provisioned_at** | **Time** |  | [optional] |
+| **sip_trunk_id** | **String** | SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409. | [optional] |
 
 ## Example
 
@@ -32,7 +33,8 @@ instance = Zernio::GetPhoneNumber200ResponsePhoneNumber.new(
   end_user_first_name: null,
   end_user_last_name: null,
   regulatory_decline_reason: null,
-  provisioned_at: null
+  provisioned_at: null,
+  sip_trunk_id: null
 )
 ```
 

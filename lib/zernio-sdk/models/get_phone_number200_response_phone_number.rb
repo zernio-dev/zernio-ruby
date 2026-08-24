@@ -39,6 +39,9 @@ module Zernio
 
     attr_accessor :provisioned_at
 
+    # SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409.
+    attr_accessor :sip_trunk_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -74,7 +77,8 @@ module Zernio
         :'end_user_first_name' => :'endUserFirstName',
         :'end_user_last_name' => :'endUserLastName',
         :'regulatory_decline_reason' => :'regulatoryDeclineReason',
-        :'provisioned_at' => :'provisionedAt'
+        :'provisioned_at' => :'provisionedAt',
+        :'sip_trunk_id' => :'sipTrunkId'
       }
     end
 
@@ -101,7 +105,8 @@ module Zernio
         :'end_user_first_name' => :'String',
         :'end_user_last_name' => :'String',
         :'regulatory_decline_reason' => :'String',
-        :'provisioned_at' => :'Time'
+        :'provisioned_at' => :'Time',
+        :'sip_trunk_id' => :'String'
       }
     end
 
@@ -112,6 +117,7 @@ module Zernio
         :'end_user_first_name',
         :'end_user_last_name',
         :'regulatory_decline_reason',
+        :'sip_trunk_id'
       ])
     end
 
@@ -174,6 +180,10 @@ module Zernio
       if attributes.key?(:'provisioned_at')
         self.provisioned_at = attributes[:'provisioned_at']
       end
+
+      if attributes.key?(:'sip_trunk_id')
+        self.sip_trunk_id = attributes[:'sip_trunk_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -218,7 +228,8 @@ module Zernio
           end_user_first_name == o.end_user_first_name &&
           end_user_last_name == o.end_user_last_name &&
           regulatory_decline_reason == o.regulatory_decline_reason &&
-          provisioned_at == o.provisioned_at
+          provisioned_at == o.provisioned_at &&
+          sip_trunk_id == o.sip_trunk_id
     end
 
     # @see the `==` method
@@ -230,7 +241,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, phone_number, status, country, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, provisioned_at].hash
+      [id, phone_number, status, country, meta_preverified_id, meta_verification_status, onfido_verification_url, end_user_first_name, end_user_last_name, regulatory_decline_reason, provisioned_at, sip_trunk_id].hash
     end
 
     # Builds the object from hash
