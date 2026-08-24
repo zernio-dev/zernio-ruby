@@ -20,6 +20,9 @@ module Zernio
     # Present when the account was created but Meta rejected the Cloud API registration. The number cannot send messages until this is resolved.
     attr_accessor :registration_warning
 
+    # Present when the WABA webhook subscription (with the Zernio override callback) succeeded. Explains the delivery cutover and warns against unsubscribing the app from the WABA afterward.
+    attr_accessor :webhook_notice
+
     attr_accessor :account
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -27,6 +30,7 @@ module Zernio
       {
         :'message' => :'message',
         :'registration_warning' => :'registrationWarning',
+        :'webhook_notice' => :'webhookNotice',
         :'account' => :'account'
       }
     end
@@ -46,6 +50,7 @@ module Zernio
       {
         :'message' => :'String',
         :'registration_warning' => :'String',
+        :'webhook_notice' => :'String',
         :'account' => :'ConnectWhatsAppCredentials200ResponseAccount'
       }
     end
@@ -80,6 +85,10 @@ module Zernio
         self.registration_warning = attributes[:'registration_warning']
       end
 
+      if attributes.key?(:'webhook_notice')
+        self.webhook_notice = attributes[:'webhook_notice']
+      end
+
       if attributes.key?(:'account')
         self.account = attributes[:'account']
       end
@@ -107,6 +116,7 @@ module Zernio
       self.class == o.class &&
           message == o.message &&
           registration_warning == o.registration_warning &&
+          webhook_notice == o.webhook_notice &&
           account == o.account
     end
 
@@ -119,7 +129,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message, registration_warning, account].hash
+      [message, registration_warning, webhook_notice, account].hash
     end
 
     # Builds the object from hash

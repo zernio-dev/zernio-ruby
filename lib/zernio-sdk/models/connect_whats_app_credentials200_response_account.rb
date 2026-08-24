@@ -28,7 +28,13 @@ module Zernio
     attr_accessor :is_active
 
     # The connected phone number
-    attr_accessor :selected_phone_number
+    attr_accessor :phone_number
+
+    # Meta-verified business name for the phone number
+    attr_accessor :verified_name
+
+    # Meta quality rating for the phone number (e.g. GREEN, YELLOW, RED, UNKNOWN)
+    attr_accessor :quality_rating
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -60,7 +66,9 @@ module Zernio
         :'username' => :'username',
         :'display_name' => :'displayName',
         :'is_active' => :'isActive',
-        :'selected_phone_number' => :'selectedPhoneNumber'
+        :'phone_number' => :'phoneNumber',
+        :'verified_name' => :'verifiedName',
+        :'quality_rating' => :'qualityRating'
       }
     end
 
@@ -82,7 +90,9 @@ module Zernio
         :'username' => :'String',
         :'display_name' => :'String',
         :'is_active' => :'Boolean',
-        :'selected_phone_number' => :'String'
+        :'phone_number' => :'String',
+        :'verified_name' => :'String',
+        :'quality_rating' => :'String'
       }
     end
 
@@ -128,8 +138,16 @@ module Zernio
         self.is_active = attributes[:'is_active']
       end
 
-      if attributes.key?(:'selected_phone_number')
-        self.selected_phone_number = attributes[:'selected_phone_number']
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
+      end
+
+      if attributes.key?(:'verified_name')
+        self.verified_name = attributes[:'verified_name']
+      end
+
+      if attributes.key?(:'quality_rating')
+        self.quality_rating = attributes[:'quality_rating']
       end
     end
 
@@ -170,7 +188,9 @@ module Zernio
           username == o.username &&
           display_name == o.display_name &&
           is_active == o.is_active &&
-          selected_phone_number == o.selected_phone_number
+          phone_number == o.phone_number &&
+          verified_name == o.verified_name &&
+          quality_rating == o.quality_rating
     end
 
     # @see the `==` method
@@ -182,7 +202,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, platform, username, display_name, is_active, selected_phone_number].hash
+      [account_id, platform, username, display_name, is_active, phone_number, verified_name, quality_rating].hash
     end
 
     # Builds the object from hash

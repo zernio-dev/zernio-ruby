@@ -61,7 +61,19 @@ describe Zernio::ConnectWhatsAppCredentials200ResponseAccount do
     end
   end
 
-  describe 'test attribute "selected_phone_number"' do
+  describe 'test attribute "phone_number"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "verified_name"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "quality_rating"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

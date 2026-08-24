@@ -9,7 +9,9 @@
 | **username** | **String** | Display phone number | [optional] |
 | **display_name** | **String** | Meta-verified business name | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
-| **selected_phone_number** | **String** | The connected phone number | [optional] |
+| **phone_number** | **String** | The connected phone number | [optional] |
+| **verified_name** | **String** | Meta-verified business name for the phone number | [optional] |
+| **quality_rating** | **String** | Meta quality rating for the phone number (e.g. GREEN, YELLOW, RED, UNKNOWN) | [optional] |
 
 ## Example
 
@@ -22,7 +24,9 @@ instance = Zernio::ConnectWhatsAppCredentials200ResponseAccount.new(
   username: null,
   display_name: null,
   is_active: null,
-  selected_phone_number: null
+  phone_number: null,
+  verified_name: null,
+  quality_rating: null
 )
 ```
 
