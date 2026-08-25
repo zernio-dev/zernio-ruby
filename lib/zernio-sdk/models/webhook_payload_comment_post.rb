@@ -27,7 +27,7 @@ module Zernio
     # Post thumbnail or first media item URL. Platform CDN URLs expire, fetch promptly.
     attr_accessor :image_url
 
-    # Public URL of the post. Null for posts published through Zernio that were never re-synced.
+    # Public URL of the post. Null when no URL was ever stored for it, for example a platform draft or a post recovered without one.
     attr_accessor :permalink
 
     # Attribute mapping from ruby-style variable name to JSON key.
