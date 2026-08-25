@@ -48,7 +48,7 @@ describe Zernio::CreateAdCampaignRequest do
   describe 'test attribute "goal"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "job_applicants", "conversions", "app_promotion", "catalog_sales"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "job_applicants", "conversions", "app_promotion", "catalog_sales", "page_likes"])
       # validator.allowable_values.each do |value|
       #   expect { instance.goal = value }.not_to raise_error
       # end

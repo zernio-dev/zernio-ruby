@@ -226,7 +226,7 @@ module Zernio
       return false if @name.nil?
       return false if @name.to_s.length > 255
       return false if @goal.nil?
-      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "job_applicants", "conversions", "app_promotion", "catalog_sales"])
+      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "job_applicants", "conversions", "app_promotion", "catalog_sales", "page_likes"])
       return false unless goal_validator.valid?(@goal)
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
@@ -274,7 +274,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] goal Object to be assigned
     def goal=(goal)
-      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "job_applicants", "conversions", "app_promotion", "catalog_sales"])
+      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "job_applicants", "conversions", "app_promotion", "catalog_sales", "page_likes"])
       unless validator.valid?(goal)
         fail ArgumentError, "invalid value for \"goal\", must be one of #{validator.allowable_values}."
       end

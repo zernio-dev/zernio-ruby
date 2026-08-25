@@ -35,7 +35,7 @@ module Zernio
     # Creative format, classified from the media the creative carries. `null` when the creative carries no media to classify — an unsynced creative and a genuine text-only ad are indistinguishable, so neither is guessed at. Returned by `GET /v1/ads`, `GET /v1/ads/{adId}` and the ad nodes of `GET /v1/ads/tree`.
     attr_accessor :creative_type
 
-    # Available goals vary by platform. Meta (Facebook/Instagram) supports all 9 (incl. `lead_conversion` = website pixel lead optimization and `catalog_sales` = Advantage+ catalog ads). TikTok supports the 7 non-`lead_conversion` goals. LinkedIn supports all except app_promotion / lead_conversion. Twitter/X supports engagement, traffic, awareness, video_views, app_promotion. Pinterest and Google Ads support only engagement, traffic, awareness, video_views.
+    # Available goals vary by platform. Meta (Facebook/Instagram) supports all 10 (incl. `lead_conversion` = website pixel lead optimization, `catalog_sales` = Advantage+ catalog ads and `page_likes` = Page Likes conversion location under Engagement). TikTok supports engagement, traffic, awareness, video_views, lead_generation, conversions, app_promotion. LinkedIn supports all Meta goals except app_promotion / lead_conversion / catalog_sales / page_likes. Twitter/X supports engagement, traffic, awareness, video_views, app_promotion. Pinterest and Google Ads support only engagement, traffic, awareness, video_views.
     attr_accessor :goal
 
     # True for ads synced from platform ad managers
@@ -400,7 +400,7 @@ module Zernio
       return false unless ad_type_validator.valid?(@ad_type)
       creative_type_validator = EnumAttributeValidator.new('String', ["carousel", "video", "document", "image"])
       return false unless creative_type_validator.valid?(@creative_type)
-      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "job_applicants"])
+      goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "page_likes", "job_applicants"])
       return false unless goal_validator.valid?(@goal)
       true
     end
@@ -438,7 +438,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] goal Object to be assigned
     def goal=(goal)
-      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "job_applicants"])
+      validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "conversions", "app_promotion", "catalog_sales", "page_likes", "job_applicants"])
       unless validator.valid?(goal)
         fail ArgumentError, "invalid value for \"goal\", must be one of #{validator.allowable_values}."
       end
