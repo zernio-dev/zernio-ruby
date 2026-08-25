@@ -832,7 +832,7 @@ module Zernio
     # @option opts [String] :source &#x60;all&#x60; (default) returns both Zernio-created ads and those discovered from the platform&#39;s ad manager — matches the web UI&#39;s default view. Pass &#x60;zernio&#x60; to restrict to isExternal&#x3D;false only. Status is NOT filtered by default — use the &#x60;status&#x60; param for that. (default to 'all')
     # @option opts [String] :platform 
     # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
-    # @option opts [String] :ad_account_id Platform ad account ID
+    # @option opts [String] :ad_account_id One or more platform ad account IDs to scope the tree to (agency profiles connect a whole Business Manager but a workspace usually cares about a subset). Comma-separate for multiple (&#x60;?adAccountId&#x3D;act_1,act_2,act_3&#x60;); single value keeps its old shape. Max 50 accounts per request; the plural aliases &#x60;adAccountIds&#x60; and &#x60;platformAdAccountIds&#x60; are rejected with a 400 to stop them from silently returning the unfiltered fleet.
     # @option opts [String] :page_id Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns.
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
@@ -858,7 +858,7 @@ module Zernio
     # @option opts [String] :source &#x60;all&#x60; (default) returns both Zernio-created ads and those discovered from the platform&#39;s ad manager — matches the web UI&#39;s default view. Pass &#x60;zernio&#x60; to restrict to isExternal&#x3D;false only. Status is NOT filtered by default — use the &#x60;status&#x60; param for that. (default to 'all')
     # @option opts [String] :platform 
     # @option opts [AdStatus] :status Filter by derived campaign status (post-aggregation)
-    # @option opts [String] :ad_account_id Platform ad account ID
+    # @option opts [String] :ad_account_id One or more platform ad account IDs to scope the tree to (agency profiles connect a whole Business Manager but a workspace usually cares about a subset). Comma-separate for multiple (&#x60;?adAccountId&#x3D;act_1,act_2,act_3&#x60;); single value keeps its old shape. Max 50 accounts per request; the plural aliases &#x60;adAccountIds&#x60; and &#x60;platformAdAccountIds&#x60; are rejected with a 400 to stop them from silently returning the unfiltered fleet.
     # @option opts [String] :page_id Meta only: Facebook Page ID. Prunes the tree to ads whose creative is backed by this Page — campaigns and ad sets with no ad on the Page drop out, and rolled-up metrics cover only the Page&#39;s ads. Mirrors the same filter on /v1/ads and /v1/ads/campaigns.
     # @option opts [String] :account_id Social account ID
     # @option opts [String] :profile_id Profile ID
