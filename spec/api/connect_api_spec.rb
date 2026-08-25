@@ -113,6 +113,18 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for connect_discord_channel
+  # Connect a Discord channel
+  # Finalize a Discord connect by binding one channel to a profile. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. One connected account per channel: repeat the call with a different channelId to add another.
+  # @param connect_discord_channel_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'connect_discord_channel test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for connect_open_ai_ads_credentials
   # Connect an OpenAI Ads account
   # Connect an OpenAI Ads account using an API key from ChatGPT Ads Manager.  The key grants full campaign write access on OpenAI&#39;s side (OpenAI does not offer a read-only key scope). Zernio uses it to read ads and performance, and to create and manage campaigns you set up through Zernio (create, status, budget, and cancel). Campaigns created directly in ChatGPT Ads Manager can still be managed there. 
@@ -137,6 +149,18 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for connect_slack_channel
+  # Connect a Slack channel
+  # Finalize a Slack connect by creating the per-channel account. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. Send pendingDataToken for a first connect (the nonce from the OAuth redirect) or accountId to add another channel to a workspace already connected.
+  # @param connect_slack_channel_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'connect_slack_channel test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for connect_whats_app_credentials
   # Connect WhatsApp via credentials
   # Connect a WhatsApp Business Account by providing Meta credentials directly. This is the headless alternative to the Embedded Signup browser flow.  To get the required credentials: 1. Go to Meta Business Suite (business.facebook.com) 2. Create or select a WhatsApp Business Account 3. In Business Settings &gt; System Users, create a System User 4. Assign it the whatsapp_business_management and whatsapp_business_messaging permissions 5. Generate a permanent access token 6. Get the WABA ID from WhatsApp Manager &gt; Account Tools &gt; Phone Numbers 7. Get the Phone Number ID from the same page (click on the number)  Warning: connecting subscribes your own Meta app to this WABA with an override callback that redirects its webhook delivery to Zernio. This WABA&#39;s events stop reaching any callback URL you had configured before, immediately and with no overlap window. Do not unsubscribe your app from the WABA afterward: that also cuts off Zernio&#39;s delivery, and recovery requires calling this endpoint again. 
@@ -144,6 +168,18 @@ describe 'ConnectApi' do
   # @param [Hash] opts the optional parameters
   # @return [ConnectWhatsAppCredentials200Response]
   describe 'connect_whats_app_credentials test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for connect_whats_app_embedded_signup
+  # Connect WhatsApp from Embedded Signup
+  # Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
+  # @param connect_whats_app_embedded_signup_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'connect_whats_app_embedded_signup test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -321,8 +357,8 @@ describe 'ConnectApi' do
 
   # unit tests for handle_o_auth_callback
   # Complete OAuth callback
-  # Exchange the OAuth authorization code for tokens and connect the account to the specified profile.
-  # @param platform 
+  # Exchange the OAuth authorization code for tokens and connect the account to the specified profile.  Facebook, Google Business, Snapchat and WhatsApp are not accepted here: their account identity is a destination chosen after OAuth, which this single-shot exchange cannot do. Connect them through the redirect flow from &#x60;GET /v1/connect/{platform}&#x60;, or, for WhatsApp Embedded Signup, through &#x60;POST /v1/connect/whatsapp/embedded-signup&#x60;. 
+  # @param platform Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. 
   # @param handle_o_auth_callback_request 
   # @param [Hash] opts the optional parameters
   # @return [nil]

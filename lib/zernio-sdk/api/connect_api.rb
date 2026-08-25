@@ -457,6 +457,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Connect a Discord channel
+    # Finalize a Discord connect by binding one channel to a profile. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. One connected account per channel: repeat the call with a different channelId to add another.
+    # @param connect_discord_channel_request [ConnectDiscordChannelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def connect_discord_channel(connect_discord_channel_request, opts = {})
+      connect_discord_channel_with_http_info(connect_discord_channel_request, opts)
+      nil
+    end
+
+    # Connect a Discord channel
+    # Finalize a Discord connect by binding one channel to a profile. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. One connected account per channel: repeat the call with a different channelId to add another.
+    # @param connect_discord_channel_request [ConnectDiscordChannelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def connect_discord_channel_with_http_info(connect_discord_channel_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.connect_discord_channel ...'
+      end
+      # verify the required parameter 'connect_discord_channel_request' is set
+      if @api_client.config.client_side_validation && connect_discord_channel_request.nil?
+        fail ArgumentError, "Missing the required parameter 'connect_discord_channel_request' when calling ConnectApi.connect_discord_channel"
+      end
+      # resource path
+      local_var_path = '/v1/connect/discord'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(connect_discord_channel_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.connect_discord_channel",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#connect_discord_channel\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Connect an OpenAI Ads account
     # Connect an OpenAI Ads account using an API key from ChatGPT Ads Manager.  The key grants full campaign write access on OpenAI's side (OpenAI does not offer a read-only key scope). Zernio uses it to read ads and performance, and to create and manage campaigns you set up through Zernio (create, status, budget, and cancel). Campaigns created directly in ChatGPT Ads Manager can still be managed there. 
     # @param connect_open_ai_ads_credentials_request [ConnectOpenAIAdsCredentialsRequest] 
@@ -593,6 +661,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Connect a Slack channel
+    # Finalize a Slack connect by creating the per-channel account. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. Send pendingDataToken for a first connect (the nonce from the OAuth redirect) or accountId to add another channel to a workspace already connected.
+    # @param connect_slack_channel_request [ConnectSlackChannelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def connect_slack_channel(connect_slack_channel_request, opts = {})
+      connect_slack_channel_with_http_info(connect_slack_channel_request, opts)
+      nil
+    end
+
+    # Connect a Slack channel
+    # Finalize a Slack connect by creating the per-channel account. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. Send pendingDataToken for a first connect (the nonce from the OAuth redirect) or accountId to add another channel to a workspace already connected.
+    # @param connect_slack_channel_request [ConnectSlackChannelRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def connect_slack_channel_with_http_info(connect_slack_channel_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.connect_slack_channel ...'
+      end
+      # verify the required parameter 'connect_slack_channel_request' is set
+      if @api_client.config.client_side_validation && connect_slack_channel_request.nil?
+        fail ArgumentError, "Missing the required parameter 'connect_slack_channel_request' when calling ConnectApi.connect_slack_channel"
+      end
+      # resource path
+      local_var_path = '/v1/connect/slack'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(connect_slack_channel_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.connect_slack_channel",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#connect_slack_channel\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Connect WhatsApp via credentials
     # Connect a WhatsApp Business Account by providing Meta credentials directly. This is the headless alternative to the Embedded Signup browser flow.  To get the required credentials: 1. Go to Meta Business Suite (business.facebook.com) 2. Create or select a WhatsApp Business Account 3. In Business Settings > System Users, create a System User 4. Assign it the whatsapp_business_management and whatsapp_business_messaging permissions 5. Generate a permanent access token 6. Get the WABA ID from WhatsApp Manager > Account Tools > Phone Numbers 7. Get the Phone Number ID from the same page (click on the number)  Warning: connecting subscribes your own Meta app to this WABA with an override callback that redirects its webhook delivery to Zernio. This WABA's events stop reaching any callback URL you had configured before, immediately and with no overlap window. Do not unsubscribe your app from the WABA afterward: that also cuts off Zernio's delivery, and recovery requires calling this endpoint again. 
     # @param connect_whats_app_credentials_request [ConnectWhatsAppCredentialsRequest] 
@@ -657,6 +793,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#connect_whats_app_credentials\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Connect WhatsApp from Embedded Signup
+    # Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
+    # @param connect_whats_app_embedded_signup_request [ConnectWhatsAppEmbeddedSignupRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def connect_whats_app_embedded_signup(connect_whats_app_embedded_signup_request, opts = {})
+      connect_whats_app_embedded_signup_with_http_info(connect_whats_app_embedded_signup_request, opts)
+      nil
+    end
+
+    # Connect WhatsApp from Embedded Signup
+    # Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
+    # @param connect_whats_app_embedded_signup_request [ConnectWhatsAppEmbeddedSignupRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def connect_whats_app_embedded_signup_with_http_info(connect_whats_app_embedded_signup_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.connect_whats_app_embedded_signup ...'
+      end
+      # verify the required parameter 'connect_whats_app_embedded_signup_request' is set
+      if @api_client.config.client_side_validation && connect_whats_app_embedded_signup_request.nil?
+        fail ArgumentError, "Missing the required parameter 'connect_whats_app_embedded_signup_request' when calling ConnectApi.connect_whats_app_embedded_signup"
+      end
+      # resource path
+      local_var_path = '/v1/connect/whatsapp/embedded-signup'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(connect_whats_app_embedded_signup_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.connect_whats_app_embedded_signup",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#connect_whats_app_embedded_signup\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1574,8 +1778,8 @@ module Zernio
     end
 
     # Complete OAuth callback
-    # Exchange the OAuth authorization code for tokens and connect the account to the specified profile.
-    # @param platform [String] 
+    # Exchange the OAuth authorization code for tokens and connect the account to the specified profile.  Facebook, Google Business, Snapchat and WhatsApp are not accepted here: their account identity is a destination chosen after OAuth, which this single-shot exchange cannot do. Connect them through the redirect flow from `GET /v1/connect/{platform}`, or, for WhatsApp Embedded Signup, through `POST /v1/connect/whatsapp/embedded-signup`. 
+    # @param platform [String] Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. 
     # @param handle_o_auth_callback_request [HandleOAuthCallbackRequest] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -1585,8 +1789,8 @@ module Zernio
     end
 
     # Complete OAuth callback
-    # Exchange the OAuth authorization code for tokens and connect the account to the specified profile.
-    # @param platform [String] 
+    # Exchange the OAuth authorization code for tokens and connect the account to the specified profile.  Facebook, Google Business, Snapchat and WhatsApp are not accepted here: their account identity is a destination chosen after OAuth, which this single-shot exchange cannot do. Connect them through the redirect flow from &#x60;GET /v1/connect/{platform}&#x60;, or, for WhatsApp Embedded Signup, through &#x60;POST /v1/connect/whatsapp/embedded-signup&#x60;. 
+    # @param platform [String] Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. 
     # @param handle_o_auth_callback_request [HandleOAuthCallbackRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -1597,6 +1801,11 @@ module Zernio
       # verify the required parameter 'platform' is set
       if @api_client.config.client_side_validation && platform.nil?
         fail ArgumentError, "Missing the required parameter 'platform' when calling ConnectApi.handle_o_auth_callback"
+      end
+      # verify enum value
+      allowable_values = ["instagram", "twitter", "threads", "linkedin", "youtube", "tiktok", "reddit", "pinterest"]
+      if @api_client.config.client_side_validation && !allowable_values.include?(platform)
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
       # verify the required parameter 'handle_o_auth_callback_request' is set
       if @api_client.config.client_side_validation && handle_o_auth_callback_request.nil?

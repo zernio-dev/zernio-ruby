@@ -10,9 +10,12 @@ All URIs are relative to *https://zernio.com/api*
 | [**configure_tik_tok_ads_brand_identity**](ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Set TikTok brand identity |
 | [**connect_ads**](ConnectApi.md#connect_ads) | **GET** /v1/connect/{platform}/ads | Connect ads for a platform |
 | [**connect_bluesky_credentials**](ConnectApi.md#connect_bluesky_credentials) | **POST** /v1/connect/bluesky/credentials | Connect Bluesky account |
+| [**connect_discord_channel**](ConnectApi.md#connect_discord_channel) | **POST** /v1/connect/discord | Connect a Discord channel |
 | [**connect_open_ai_ads_credentials**](ConnectApi.md#connect_open_ai_ads_credentials) | **POST** /v1/connect/openai-ads/credentials | Connect an OpenAI Ads account |
 | [**connect_shopify_with_token**](ConnectApi.md#connect_shopify_with_token) | **POST** /v1/connect/shopify/token | Connect a Shopify store with a custom-app Admin token |
+| [**connect_slack_channel**](ConnectApi.md#connect_slack_channel) | **POST** /v1/connect/slack | Connect a Slack channel |
 | [**connect_whats_app_credentials**](ConnectApi.md#connect_whats_app_credentials) | **POST** /v1/connect/whatsapp/credentials | Connect WhatsApp via credentials |
+| [**connect_whats_app_embedded_signup**](ConnectApi.md#connect_whats_app_embedded_signup) | **POST** /v1/connect/whatsapp/embedded-signup | Connect WhatsApp from Embedded Signup |
 | [**create_pinterest_board**](ConnectApi.md#create_pinterest_board) | **POST** /v1/accounts/{accountId}/pinterest-boards | Create Pinterest board |
 | [**get_connect_url**](ConnectApi.md#get_connect_url) | **GET** /v1/connect/{platform} | Get OAuth connect URL |
 | [**get_facebook_pages**](ConnectApi.md#get_facebook_pages) | **GET** /v1/accounts/{accountId}/facebook-page | List Facebook pages |
@@ -487,6 +490,74 @@ end
 - **Accept**: application/json
 
 
+## connect_discord_channel
+
+> connect_discord_channel(connect_discord_channel_request)
+
+Connect a Discord channel
+
+Finalize a Discord connect by binding one channel to a profile. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. One connected account per channel: repeat the call with a different channelId to add another.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_discord_channel_request = Zernio::ConnectDiscordChannelRequest.new({guild_id: 'guild_id_example', channel_id: 'channel_id_example', profile_id: 'profile_id_example'}) # ConnectDiscordChannelRequest | 
+
+begin
+  # Connect a Discord channel
+  api_instance.connect_discord_channel(connect_discord_channel_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_discord_channel: #{e}"
+end
+```
+
+#### Using the connect_discord_channel_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> connect_discord_channel_with_http_info(connect_discord_channel_request)
+
+```ruby
+begin
+  # Connect a Discord channel
+  data, status_code, headers = api_instance.connect_discord_channel_with_http_info(connect_discord_channel_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_discord_channel_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_discord_channel_request** | [**ConnectDiscordChannelRequest**](ConnectDiscordChannelRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## connect_open_ai_ads_credentials
 
 > <ConnectOpenAIAdsCredentials200Response> connect_open_ai_ads_credentials(connect_open_ai_ads_credentials_request)
@@ -625,6 +696,74 @@ end
 - **Accept**: application/json
 
 
+## connect_slack_channel
+
+> connect_slack_channel(connect_slack_channel_request)
+
+Connect a Slack channel
+
+Finalize a Slack connect by creating the per-channel account. Served by a dedicated route, so it is not reachable through POST /v1/connect/{platform}. Send pendingDataToken for a first connect (the nonce from the OAuth redirect) or accountId to add another channel to a workspace already connected.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_slack_channel_request = Zernio::ConnectSlackChannelRequest.new({profile_id: 'profile_id_example', channel_id: 'channel_id_example'}) # ConnectSlackChannelRequest | 
+
+begin
+  # Connect a Slack channel
+  api_instance.connect_slack_channel(connect_slack_channel_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_slack_channel: #{e}"
+end
+```
+
+#### Using the connect_slack_channel_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> connect_slack_channel_with_http_info(connect_slack_channel_request)
+
+```ruby
+begin
+  # Connect a Slack channel
+  data, status_code, headers = api_instance.connect_slack_channel_with_http_info(connect_slack_channel_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_slack_channel_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_slack_channel_request** | [**ConnectSlackChannelRequest**](ConnectSlackChannelRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## connect_whats_app_credentials
 
 > <ConnectWhatsAppCredentials200Response> connect_whats_app_credentials(connect_whats_app_credentials_request)
@@ -683,6 +822,74 @@ end
 ### Return type
 
 [**ConnectWhatsAppCredentials200Response**](ConnectWhatsAppCredentials200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## connect_whats_app_embedded_signup
+
+> connect_whats_app_embedded_signup(connect_whats_app_embedded_signup_request)
+
+Connect WhatsApp from Embedded Signup
+
+Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+connect_whats_app_embedded_signup_request = Zernio::ConnectWhatsAppEmbeddedSignupRequest.new({code: 'code_example', profile_id: 'profile_id_example'}) # ConnectWhatsAppEmbeddedSignupRequest | 
+
+begin
+  # Connect WhatsApp from Embedded Signup
+  api_instance.connect_whats_app_embedded_signup(connect_whats_app_embedded_signup_request)
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_whats_app_embedded_signup: #{e}"
+end
+```
+
+#### Using the connect_whats_app_embedded_signup_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> connect_whats_app_embedded_signup_with_http_info(connect_whats_app_embedded_signup_request)
+
+```ruby
+begin
+  # Connect WhatsApp from Embedded Signup
+  data, status_code, headers = api_instance.connect_whats_app_embedded_signup_with_http_info(connect_whats_app_embedded_signup_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->connect_whats_app_embedded_signup_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **connect_whats_app_embedded_signup_request** | [**ConnectWhatsAppEmbeddedSignupRequest**](ConnectWhatsAppEmbeddedSignupRequest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
 
 ### Authorization
 
@@ -1633,7 +1840,7 @@ end
 
 Complete OAuth callback
 
-Exchange the OAuth authorization code for tokens and connect the account to the specified profile.
+Exchange the OAuth authorization code for tokens and connect the account to the specified profile.  Facebook, Google Business, Snapchat and WhatsApp are not accepted here: their account identity is a destination chosen after OAuth, which this single-shot exchange cannot do. Connect them through the redirect flow from `GET /v1/connect/{platform}`, or, for WhatsApp Embedded Signup, through `POST /v1/connect/whatsapp/embedded-signup`. 
 
 ### Examples
 
@@ -1647,7 +1854,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ConnectApi.new
-platform = 'platform_example' # String | 
+platform = 'instagram' # String | Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately. 
 handle_o_auth_callback_request = Zernio::HandleOAuthCallbackRequest.new({code: 'code_example', state: 'state_example', profile_id: 'profile_id_example'}) # HandleOAuthCallbackRequest | 
 
 begin
@@ -1680,7 +1887,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **platform** | **String** |  |  |
+| **platform** | **String** | Social platform to complete the connect for. Discord, Slack and Telegram are absent because they are served by their own dedicated routes, documented separately.  |  |
 | **handle_o_auth_callback_request** | [**HandleOAuthCallbackRequest**](HandleOAuthCallbackRequest.md) |  |  |
 
 ### Return type
