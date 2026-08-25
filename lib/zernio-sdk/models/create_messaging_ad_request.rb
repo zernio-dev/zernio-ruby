@@ -35,6 +35,8 @@ module Zernio
 
     attr_accessor :video
 
+    attr_accessor :welcome_message
+
     # Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (`headline` / `body` / `imageUrl` / `video`): setting both is a 400, unlike `POST /v1/ads/create` where the top-level fields are silently ignored in multi-creative mode. Each entry must supply its own headline, body, and exactly one of `imageUrl` / `video`. 
     attr_accessor :creatives
 
@@ -144,6 +146,7 @@ module Zernio
         :'body' => :'body',
         :'image_url' => :'imageUrl',
         :'video' => :'video',
+        :'welcome_message' => :'welcomeMessage',
         :'creatives' => :'creatives',
         :'ad_set_id' => :'adSetId',
         :'budget_amount' => :'budgetAmount',
@@ -194,6 +197,7 @@ module Zernio
         :'body' => :'String',
         :'image_url' => :'String',
         :'video' => :'CtwaAdRequestBodyVideo',
+        :'welcome_message' => :'CtwaAdRequestBodyWelcomeMessage',
         :'creatives' => :'Array<CtwaAdRequestBodyCreativesInner>',
         :'ad_set_id' => :'String',
         :'budget_amount' => :'Float',
@@ -285,6 +289,10 @@ module Zernio
 
       if attributes.key?(:'video')
         self.video = attributes[:'video']
+      end
+
+      if attributes.key?(:'welcome_message')
+        self.welcome_message = attributes[:'welcome_message']
       end
 
       if attributes.key?(:'creatives')
@@ -790,6 +798,7 @@ module Zernio
           body == o.body &&
           image_url == o.image_url &&
           video == o.video &&
+          welcome_message == o.welcome_message &&
           creatives == o.creatives &&
           ad_set_id == o.ad_set_id &&
           budget_amount == o.budget_amount &&
@@ -828,7 +837,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, destination].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, destination].hash
     end
 
     # Builds the object from hash

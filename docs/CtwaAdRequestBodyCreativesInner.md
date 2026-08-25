@@ -8,6 +8,7 @@
 | **body** | **String** | Primary text shown above the image / video. |  |
 | **image_url** | **String** | Image asset. Mutually exclusive with this entry&#39;s &#x60;video&#x60;. Required if &#x60;video&#x60; is not supplied.  | [optional] |
 | **video** | [**CtwaAdRequestBodyCreativesInnerVideo**](CtwaAdRequestBodyCreativesInnerVideo.md) |  | [optional] |
+| **welcome_message** | [**CtwaAdRequestBodyCreativesInnerWelcomeMessage**](CtwaAdRequestBodyCreativesInnerWelcomeMessage.md) |  | [optional] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = Zernio::CtwaAdRequestBodyCreativesInner.new(
   headline: null,
   body: null,
   image_url: null,
-  video: null
+  video: null,
+  welcome_message: null
 )
 ```
 

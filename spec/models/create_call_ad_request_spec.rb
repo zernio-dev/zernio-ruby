@@ -69,6 +69,12 @@ describe Zernio::CreateCallAdRequest do
     end
   end
 
+  describe 'test attribute "welcome_message"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "creatives"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

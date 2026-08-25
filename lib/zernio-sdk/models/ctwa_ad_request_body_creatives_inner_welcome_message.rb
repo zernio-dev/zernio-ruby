@@ -14,28 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Each entry must also include exactly one of `imageUrl` or `video`. 
-  class CtwaAdRequestBodyCreativesInner < ApiModelBase
-    attr_accessor :headline
+  # Custom chat welcome message for this entry. See the top-level `welcomeMessage` for the single-creative shape.
+  class CtwaAdRequestBodyCreativesInnerWelcomeMessage < ApiModelBase
+    # Greeting shown when the chat opens. Replaces Meta's default.
+    attr_accessor :text
 
-    # Primary text shown above the image / video.
-    attr_accessor :body
-
-    # Image asset. Mutually exclusive with this entry's `video`. Required if `video` is not supplied. 
-    attr_accessor :image_url
-
-    attr_accessor :video
-
-    attr_accessor :welcome_message
+    # Message put into the user's text input, ready to send. Replaces Meta's default.
+    attr_accessor :prefill_text
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'headline' => :'headline',
-        :'body' => :'body',
-        :'image_url' => :'imageUrl',
-        :'video' => :'video',
-        :'welcome_message' => :'welcomeMessage'
+        :'text' => :'text',
+        :'prefill_text' => :'prefillText'
       }
     end
 
@@ -52,11 +43,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'headline' => :'String',
-        :'body' => :'String',
-        :'image_url' => :'String',
-        :'video' => :'CtwaAdRequestBodyCreativesInnerVideo',
-        :'welcome_message' => :'CtwaAdRequestBodyCreativesInnerWelcomeMessage'
+        :'text' => :'String',
+        :'prefill_text' => :'String'
       }
     end
 
@@ -70,40 +58,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CtwaAdRequestBodyCreativesInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CtwaAdRequestBodyCreativesInnerWelcomeMessage` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CtwaAdRequestBodyCreativesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CtwaAdRequestBodyCreativesInnerWelcomeMessage`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'headline')
-        self.headline = attributes[:'headline']
+      if attributes.key?(:'text')
+        self.text = attributes[:'text']
       else
-        self.headline = nil
+        self.text = nil
       end
 
-      if attributes.key?(:'body')
-        self.body = attributes[:'body']
+      if attributes.key?(:'prefill_text')
+        self.prefill_text = attributes[:'prefill_text']
       else
-        self.body = nil
-      end
-
-      if attributes.key?(:'image_url')
-        self.image_url = attributes[:'image_url']
-      end
-
-      if attributes.key?(:'video')
-        self.video = attributes[:'video']
-      end
-
-      if attributes.key?(:'welcome_message')
-        self.welcome_message = attributes[:'welcome_message']
+        self.prefill_text = nil
       end
     end
 
@@ -112,24 +88,20 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @headline.nil?
-        invalid_properties.push('invalid value for "headline", headline cannot be nil.')
+      if @text.nil?
+        invalid_properties.push('invalid value for "text", text cannot be nil.')
       end
 
-      if @headline.to_s.length > 255
-        invalid_properties.push('invalid value for "headline", the character length must be smaller than or equal to 255.')
+      if @text.to_s.length < 1
+        invalid_properties.push('invalid value for "text", the character length must be greater than or equal to 1.')
       end
 
-      if @headline.to_s.length < 1
-        invalid_properties.push('invalid value for "headline", the character length must be greater than or equal to 1.')
+      if @prefill_text.nil?
+        invalid_properties.push('invalid value for "prefill_text", prefill_text cannot be nil.')
       end
 
-      if @body.nil?
-        invalid_properties.push('invalid value for "body", body cannot be nil.')
-      end
-
-      if @body.to_s.length < 1
-        invalid_properties.push('invalid value for "body", the character length must be greater than or equal to 1.')
+      if @prefill_text.to_s.length < 1
+        invalid_properties.push('invalid value for "prefill_text", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -139,44 +111,39 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @headline.nil?
-      return false if @headline.to_s.length > 255
-      return false if @headline.to_s.length < 1
-      return false if @body.nil?
-      return false if @body.to_s.length < 1
+      return false if @text.nil?
+      return false if @text.to_s.length < 1
+      return false if @prefill_text.nil?
+      return false if @prefill_text.to_s.length < 1
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] headline Value to be assigned
-    def headline=(headline)
-      if headline.nil?
-        fail ArgumentError, 'headline cannot be nil'
+    # @param [Object] text Value to be assigned
+    def text=(text)
+      if text.nil?
+        fail ArgumentError, 'text cannot be nil'
       end
 
-      if headline.to_s.length > 255
-        fail ArgumentError, 'invalid value for "headline", the character length must be smaller than or equal to 255.'
+      if text.to_s.length < 1
+        fail ArgumentError, 'invalid value for "text", the character length must be greater than or equal to 1.'
       end
 
-      if headline.to_s.length < 1
-        fail ArgumentError, 'invalid value for "headline", the character length must be greater than or equal to 1.'
-      end
-
-      @headline = headline
+      @text = text
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] body Value to be assigned
-    def body=(body)
-      if body.nil?
-        fail ArgumentError, 'body cannot be nil'
+    # @param [Object] prefill_text Value to be assigned
+    def prefill_text=(prefill_text)
+      if prefill_text.nil?
+        fail ArgumentError, 'prefill_text cannot be nil'
       end
 
-      if body.to_s.length < 1
-        fail ArgumentError, 'invalid value for "body", the character length must be greater than or equal to 1.'
+      if prefill_text.to_s.length < 1
+        fail ArgumentError, 'invalid value for "prefill_text", the character length must be greater than or equal to 1.'
       end
 
-      @body = body
+      @prefill_text = prefill_text
     end
 
     # Checks equality by comparing each attribute.
@@ -184,11 +151,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          headline == o.headline &&
-          body == o.body &&
-          image_url == o.image_url &&
-          video == o.video &&
-          welcome_message == o.welcome_message
+          text == o.text &&
+          prefill_text == o.prefill_text
     end
 
     # @see the `==` method
@@ -200,7 +164,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headline, body, image_url, video, welcome_message].hash
+      [text, prefill_text].hash
     end
 
     # Builds the object from hash
