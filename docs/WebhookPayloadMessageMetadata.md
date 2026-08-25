@@ -9,11 +9,12 @@
 | **postback_payload** | **String** | Payload from a postback button tap (Facebook/Instagram Messenger). | [optional] |
 | **postback_title** | **String** | Title of the tapped postback button (Facebook/Instagram Messenger). | [optional] |
 | **callback_data** | **String** | Callback data from an inline keyboard button tap (Telegram). | [optional] |
-| **interactive_type** | **String** | WhatsApp only. Which kind of interactive reply the user sent: &#x60;button_reply&#x60; (tap on an interactive button), &#x60;list_reply&#x60; (tap on a list row), or &#x60;nfm_reply&#x60; (a WhatsApp Flow submission).  | [optional] |
+| **interactive_type** | **String** | WhatsApp only. Which kind of interactive reply the user sent: &#x60;button_reply&#x60; (tap on an interactive button), &#x60;list_reply&#x60; (tap on a list row), or &#x60;nfm_reply&#x60; (a WhatsApp Flow submission or an &#x60;address_message&#x60; submission, see &#x60;nfmReplyName&#x60;).  | [optional] |
 | **interactive_id** | **String** | WhatsApp only. The &#x60;id&#x60; of the tapped button or list row, matching the &#x60;id&#x60; you supplied when the message was sent. Not set for Flow responses.  | [optional] |
 | **button_payload** | **String** | WhatsApp only. Payload attached to a tapped template button. Template buttons emit a plain &#x60;button&#x60; webhook (not an interactive reply), so &#x60;interactiveType&#x60; is empty while this field is populated.  | [optional] |
 | **flow_response_json** | **String** | WhatsApp only. Raw &#x60;nfm_reply.response_json&#x60; string returned by a Flow submission. Useful if you need the exact wire payload; for typed access use &#x60;flowResponseData&#x60; instead.  | [optional] |
-| **flow_response_data** | **Hash&lt;String, Object&gt;** | WhatsApp only. Parsed Flow response JSON. Populated when &#x60;flowResponseJson&#x60; is valid JSON; otherwise omitted. Keys and value types depend on the specific Flow that was submitted.  | [optional] |
+| **flow_response_data** | **Hash&lt;String, Object&gt;** | WhatsApp only. Parsed Flow response JSON. Populated when &#x60;flowResponseJson&#x60; is valid JSON; otherwise omitted. Keys and value types depend on the specific Flow that was submitted. An &#x60;address_message&#x60; submission (&#x60;nfmReplyName: address_message&#x60;) carries the address fields (&#x60;name&#x60;, &#x60;address&#x60;, &#x60;city&#x60;, &#x60;state&#x60;, &#x60;in_pin_code&#x60;, ...), either at the top level or nested under &#x60;values&#x60;; read both.  | [optional] |
+| **nfm_reply_name** | **String** | WhatsApp only. &#x60;nfm_reply.name&#x60; as Meta sent it, e.g. &#x60;flow&#x60; or &#x60;address_message&#x60;. Address submissions share the &#x60;nfm_reply&#x60; envelope with Flow submissions and are otherwise indistinguishable in &#x60;flowResponseData&#x60;; use this field to tell them apart.  | [optional] |
 | **order** | [**WebhookPayloadMessageMetadataOrder**](WebhookPayloadMessageMetadataOrder.md) |  | [optional] |
 | **referred_product** | [**WebhookPayloadMessageMetadataReferredProduct**](WebhookPayloadMessageMetadataReferredProduct.md) |  | [optional] |
 | **contacts** | **Array&lt;Hash&lt;String, Object&gt;&gt;** | WhatsApp only. Contact cards the user shared, forwarded verbatim from Meta. Read &#x60;contactsOrigin&#x60; before treating any number here as the sender&#39;s own.  | [optional] |
@@ -40,6 +41,7 @@ instance = Zernio::WebhookPayloadMessageMetadata.new(
   button_payload: null,
   flow_response_json: null,
   flow_response_data: null,
+  nfm_reply_name: null,
   order: null,
   referred_product: null,
   contacts: null,

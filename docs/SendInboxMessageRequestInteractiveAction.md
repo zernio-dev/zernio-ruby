@@ -16,6 +16,7 @@ Zernio::SendInboxMessageRequestInteractiveAction.openapi_one_of
 # [
 #   :'SendInboxMessageRequestInteractiveActionOneOf',
 #   :'SendInboxMessageRequestInteractiveActionOneOf1',
+#   :'SendInboxMessageRequestInteractiveActionOneOf10',
 #   :'SendInboxMessageRequestInteractiveActionOneOf2',
 #   :'SendInboxMessageRequestInteractiveActionOneOf3',
 #   :'SendInboxMessageRequestInteractiveActionOneOf4',
@@ -53,6 +54,7 @@ Zernio::SendInboxMessageRequestInteractiveAction.build(data_that_doesnt_match)
 
 - `SendInboxMessageRequestInteractiveActionOneOf`
 - `SendInboxMessageRequestInteractiveActionOneOf1`
+- `SendInboxMessageRequestInteractiveActionOneOf10`
 - `SendInboxMessageRequestInteractiveActionOneOf2`
 - `SendInboxMessageRequestInteractiveActionOneOf3`
 - `SendInboxMessageRequestInteractiveActionOneOf4`

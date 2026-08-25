@@ -31,7 +31,7 @@ module Zernio
     # Callback data from an inline keyboard button tap (Telegram).
     attr_accessor :callback_data
 
-    # WhatsApp only. Which kind of interactive reply the user sent: `button_reply` (tap on an interactive button), `list_reply` (tap on a list row), or `nfm_reply` (a WhatsApp Flow submission). 
+    # WhatsApp only. Which kind of interactive reply the user sent: `button_reply` (tap on an interactive button), `list_reply` (tap on a list row), or `nfm_reply` (a WhatsApp Flow submission or an `address_message` submission, see `nfmReplyName`). 
     attr_accessor :interactive_type
 
     # WhatsApp only. The `id` of the tapped button or list row, matching the `id` you supplied when the message was sent. Not set for Flow responses. 
@@ -43,8 +43,11 @@ module Zernio
     # WhatsApp only. Raw `nfm_reply.response_json` string returned by a Flow submission. Useful if you need the exact wire payload; for typed access use `flowResponseData` instead. 
     attr_accessor :flow_response_json
 
-    # WhatsApp only. Parsed Flow response JSON. Populated when `flowResponseJson` is valid JSON; otherwise omitted. Keys and value types depend on the specific Flow that was submitted. 
+    # WhatsApp only. Parsed Flow response JSON. Populated when `flowResponseJson` is valid JSON; otherwise omitted. Keys and value types depend on the specific Flow that was submitted. An `address_message` submission (`nfmReplyName: address_message`) carries the address fields (`name`, `address`, `city`, `state`, `in_pin_code`, ...), either at the top level or nested under `values`; read both. 
     attr_accessor :flow_response_data
+
+    # WhatsApp only. `nfm_reply.name` as Meta sent it, e.g. `flow` or `address_message`. Address submissions share the `nfm_reply` envelope with Flow submissions and are otherwise indistinguishable in `flowResponseData`; use this field to tell them apart. 
+    attr_accessor :nfm_reply_name
 
     attr_accessor :order
 
@@ -103,6 +106,7 @@ module Zernio
         :'button_payload' => :'buttonPayload',
         :'flow_response_json' => :'flowResponseJson',
         :'flow_response_data' => :'flowResponseData',
+        :'nfm_reply_name' => :'nfmReplyName',
         :'order' => :'order',
         :'referred_product' => :'referredProduct',
         :'contacts' => :'contacts',
@@ -138,6 +142,7 @@ module Zernio
         :'button_payload' => :'String',
         :'flow_response_json' => :'String',
         :'flow_response_data' => :'Hash<String, Object>',
+        :'nfm_reply_name' => :'String',
         :'order' => :'WebhookPayloadMessageMetadataOrder',
         :'referred_product' => :'WebhookPayloadMessageMetadataReferredProduct',
         :'contacts' => :'Array<Hash<String, Object>>',
@@ -212,6 +217,10 @@ module Zernio
         if (value = attributes[:'flow_response_data']).is_a?(Hash)
           self.flow_response_data = value
         end
+      end
+
+      if attributes.key?(:'nfm_reply_name')
+        self.nfm_reply_name = attributes[:'nfm_reply_name']
       end
 
       if attributes.key?(:'order')
@@ -307,6 +316,7 @@ module Zernio
           button_payload == o.button_payload &&
           flow_response_json == o.flow_response_json &&
           flow_response_data == o.flow_response_data &&
+          nfm_reply_name == o.nfm_reply_name &&
           order == o.order &&
           referred_product == o.referred_product &&
           contacts == o.contacts &&
@@ -327,7 +337,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quoted_message_id, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
+      [quoted_message_id, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, nfm_reply_name, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
     end
 
     # Builds the object from hash

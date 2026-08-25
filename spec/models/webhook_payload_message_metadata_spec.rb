@@ -91,6 +91,12 @@ describe Zernio::WebhookPayloadMessageMetadata do
     end
   end
 
+  describe 'test attribute "nfm_reply_name"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "order"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

@@ -1913,6 +1913,8 @@ Class | Method | HTTP request | Description
  - [Zernio::SendInboxMessageRequestInteractiveAction](docs/SendInboxMessageRequestInteractiveAction.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOf](docs/SendInboxMessageRequestInteractiveActionOneOf.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOf1](docs/SendInboxMessageRequestInteractiveActionOneOf1.md)
+ - [Zernio::SendInboxMessageRequestInteractiveActionOneOf10](docs/SendInboxMessageRequestInteractiveActionOneOf10.md)
+ - [Zernio::SendInboxMessageRequestInteractiveActionOneOf10Parameters](docs/SendInboxMessageRequestInteractiveActionOneOf10Parameters.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOf1Parameters](docs/SendInboxMessageRequestInteractiveActionOneOf1Parameters.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOf2](docs/SendInboxMessageRequestInteractiveActionOneOf2.md)
  - [Zernio::SendInboxMessageRequestInteractiveActionOneOf2Parameters](docs/SendInboxMessageRequestInteractiveActionOneOf2Parameters.md)
