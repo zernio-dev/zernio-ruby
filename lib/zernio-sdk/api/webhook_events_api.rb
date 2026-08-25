@@ -2527,6 +2527,72 @@ module Zernio
       return data, status_code, headers
     end
 
+    # WhatsApp display-name review outcome event
+    # Fired when Meta finishes reviewing a WhatsApp Business display-name change. Forwarded from Meta's `phone_number_name_update` webhook field on the WhatsApp Business Account. Fires only on a review outcome (`name.status` APPROVED, DECLINED, or PENDING_REVIEW); a name applied without review reports `name_status: AVAILABLE_WITHOUT_REVIEW` on the phone node instead and produces no event here. `decision` REJECTED maps to DECLINED and DEFERRED maps to PENDING_REVIEW, matching the `name_status` vocabulary returned by `GET /v1/whatsapp/number-info`. Delivery is at-least-once; dedupe on `(account.accountId, name.status, name.requestedName)`. 
+    # @param webhook_payload_whats_app_account_name_status_updated [WebhookPayloadWhatsAppAccountNameStatusUpdated] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_whats_app_account_name_status_updated(webhook_payload_whats_app_account_name_status_updated, opts = {})
+      on_whats_app_account_name_status_updated_with_http_info(webhook_payload_whats_app_account_name_status_updated, opts)
+      nil
+    end
+
+    # WhatsApp display-name review outcome event
+    # Fired when Meta finishes reviewing a WhatsApp Business display-name change. Forwarded from Meta&#39;s &#x60;phone_number_name_update&#x60; webhook field on the WhatsApp Business Account. Fires only on a review outcome (&#x60;name.status&#x60; APPROVED, DECLINED, or PENDING_REVIEW); a name applied without review reports &#x60;name_status: AVAILABLE_WITHOUT_REVIEW&#x60; on the phone node instead and produces no event here. &#x60;decision&#x60; REJECTED maps to DECLINED and DEFERRED maps to PENDING_REVIEW, matching the &#x60;name_status&#x60; vocabulary returned by &#x60;GET /v1/whatsapp/number-info&#x60;. Delivery is at-least-once; dedupe on &#x60;(account.accountId, name.status, name.requestedName)&#x60;. 
+    # @param webhook_payload_whats_app_account_name_status_updated [WebhookPayloadWhatsAppAccountNameStatusUpdated] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_whats_app_account_name_status_updated_with_http_info(webhook_payload_whats_app_account_name_status_updated, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_whats_app_account_name_status_updated ...'
+      end
+      # verify the required parameter 'webhook_payload_whats_app_account_name_status_updated' is set
+      if @api_client.config.client_side_validation && webhook_payload_whats_app_account_name_status_updated.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_whats_app_account_name_status_updated' when calling WebhookEventsApi.on_whats_app_account_name_status_updated"
+      end
+      # resource path
+      local_var_path = '/whatsapp.account.name_status_updated'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_whats_app_account_name_status_updated)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_whats_app_account_name_status_updated",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_whats_app_account_name_status_updated\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # WhatsApp automatic event detected
     # Fired when Meta's automatic event identification (opt-in during Embedded Signup; not available for EU/UK/JP businesses) detects a lead or purchase in a Click-to-WhatsApp conversation. Branch on `eventName` (`LeadSubmitted` | `Purchase`). Carries the `ctwa_clid` even on coexistence numbers where the inbound referral omits it (this webhook is the only surface that delivers it there); the clid is also written back onto the conversation, so POST /v1/whatsapp/conversions becomes usable for the thread. 
     # @param on_whats_app_automatic_event_request [OnWhatsAppAutomaticEventRequest] 

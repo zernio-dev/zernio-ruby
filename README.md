@@ -2309,6 +2309,8 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadReviewNewAccount](docs/WebhookPayloadReviewNewAccount.md)
  - [Zernio::WebhookPayloadReviewUpdated](docs/WebhookPayloadReviewUpdated.md)
  - [Zernio::WebhookPayloadTest](docs/WebhookPayloadTest.md)
+ - [Zernio::WebhookPayloadWhatsAppAccountNameStatusUpdated](docs/WebhookPayloadWhatsAppAccountNameStatusUpdated.md)
+ - [Zernio::WebhookPayloadWhatsAppAccountNameStatusUpdatedName](docs/WebhookPayloadWhatsAppAccountNameStatusUpdatedName.md)
  - [Zernio::WebhookPayloadWhatsAppTemplateCategoryUpdated](docs/WebhookPayloadWhatsAppTemplateCategoryUpdated.md)
  - [Zernio::WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplate](docs/WebhookPayloadWhatsAppTemplateCategoryUpdatedTemplate.md)
  - [Zernio::WebhookPayloadWhatsAppTemplateStatusUpdated](docs/WebhookPayloadWhatsAppTemplateStatusUpdated.md)

@@ -42,6 +42,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_verification_approved**](WebhookEventsApi.md#on_verification_approved) | **POST** /verification.approved | Verification approved event |
 | [**on_verification_failed**](WebhookEventsApi.md#on_verification_failed) | **POST** /verification.failed | Verification failed event |
 | [**on_webhook_test**](WebhookEventsApi.md#on_webhook_test) | **POST** /webhook.test | Webhook test event |
+| [**on_whats_app_account_name_status_updated**](WebhookEventsApi.md#on_whats_app_account_name_status_updated) | **POST** /whatsapp.account.name_status_updated | WhatsApp display-name review outcome event |
 | [**on_whats_app_automatic_event**](WebhookEventsApi.md#on_whats_app_automatic_event) | **POST** /whatsapp.automatic_event | WhatsApp automatic event detected |
 | [**on_whats_app_number_action_required**](WebhookEventsApi.md#on_whats_app_number_action_required) | **POST** /whatsapp.number.action_required | WhatsApp number action required event |
 | [**on_whats_app_number_activated**](WebhookEventsApi.md#on_whats_app_number_activated) | **POST** /whatsapp.number.activated | WhatsApp number activated event |
@@ -2624,6 +2625,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_test** | [**WebhookPayloadTest**](WebhookPayloadTest.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_whats_app_account_name_status_updated
+
+> on_whats_app_account_name_status_updated(webhook_payload_whats_app_account_name_status_updated)
+
+WhatsApp display-name review outcome event
+
+Fired when Meta finishes reviewing a WhatsApp Business display-name change. Forwarded from Meta's `phone_number_name_update` webhook field on the WhatsApp Business Account. Fires only on a review outcome (`name.status` APPROVED, DECLINED, or PENDING_REVIEW); a name applied without review reports `name_status: AVAILABLE_WITHOUT_REVIEW` on the phone node instead and produces no event here. `decision` REJECTED maps to DECLINED and DEFERRED maps to PENDING_REVIEW, matching the `name_status` vocabulary returned by `GET /v1/whatsapp/number-info`. Delivery is at-least-once; dedupe on `(account.accountId, name.status, name.requestedName)`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_whats_app_account_name_status_updated =  # WebhookPayloadWhatsAppAccountNameStatusUpdated | 
+
+begin
+  # WhatsApp display-name review outcome event
+  api_instance.on_whats_app_account_name_status_updated(webhook_payload_whats_app_account_name_status_updated)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_account_name_status_updated: #{e}"
+end
+```
+
+#### Using the on_whats_app_account_name_status_updated_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_whats_app_account_name_status_updated_with_http_info(webhook_payload_whats_app_account_name_status_updated)
+
+```ruby
+begin
+  # WhatsApp display-name review outcome event
+  data, status_code, headers = api_instance.on_whats_app_account_name_status_updated_with_http_info(webhook_payload_whats_app_account_name_status_updated)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_whats_app_account_name_status_updated_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_whats_app_account_name_status_updated** | [**WebhookPayloadWhatsAppAccountNameStatusUpdated**](WebhookPayloadWhatsAppAccountNameStatusUpdated.md) |  |  |
 
 ### Return type
 
