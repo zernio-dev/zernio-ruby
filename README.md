@@ -968,6 +968,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestPlatformSpecificData](docs/CreateStandaloneAdRequestPlatformSpecificData.md)
  - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
+ - [Zernio::CreateStandaloneAdRequestSitelinksInner](docs/CreateStandaloneAdRequestSitelinksInner.md)
  - [Zernio::CreateStandaloneAdRequestTracking](docs/CreateStandaloneAdRequestTracking.md)
  - [Zernio::CreateStandaloneAdRequestTranslationsInner](docs/CreateStandaloneAdRequestTranslationsInner.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)

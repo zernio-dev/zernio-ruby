@@ -214,6 +214,9 @@ module Zernio
     # Google Search RSA only. Extra descriptions.
     attr_accessor :additional_descriptions
 
+    # Google Search only. Sitelink assets to create and attach at the campaign level. Each entry becomes an Asset (with sitelink_asset + Asset.final_urls) plus a CampaignAsset link (field_type SITELINK). Approval is async — Google reviews assets after creation; poll asset.policy_summary later to read the verdict. Google requires at least two sitelinks to surface them on an ad; four or more is Google's own recommendation for maximum visibility. The response's creative.sitelinks[] echoes each input plus its Google resourceName. 
+    attr_accessor :sitelinks
+
     # Meta only. Controls the Advantage audience feature (targeting_automation). 0 = disabled (default), 1 = enabled. Meta Marketing API requires this field on all ad set creation requests.
     attr_accessor :advantage_audience
 
@@ -351,6 +354,7 @@ module Zernio
         :'negative_keywords' => :'negativeKeywords',
         :'additional_headlines' => :'additionalHeadlines',
         :'additional_descriptions' => :'additionalDescriptions',
+        :'sitelinks' => :'sitelinks',
         :'advantage_audience' => :'advantageAudience',
         :'attribution_spec' => :'attributionSpec',
         :'gender' => :'gender',
@@ -452,6 +456,7 @@ module Zernio
         :'negative_keywords' => :'Array<String>',
         :'additional_headlines' => :'Array<String>',
         :'additional_descriptions' => :'Array<String>',
+        :'sitelinks' => :'Array<CreateStandaloneAdRequestSitelinksInner>',
         :'advantage_audience' => :'Integer',
         :'attribution_spec' => :'Array<CreateStandaloneAdRequestAttributionSpecInner>',
         :'gender' => :'String',
@@ -822,6 +827,12 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'sitelinks')
+        if (value = attributes[:'sitelinks']).is_a?(Array)
+          self.sitelinks = value
+        end
+      end
+
       if attributes.key?(:'advantage_audience')
         self.advantage_audience = attributes[:'advantage_audience']
       end
@@ -976,6 +987,14 @@ module Zernio
         invalid_properties.push('invalid value for "translations", number of items must be greater than or equal to 1.')
       end
 
+      if !@sitelinks.nil? && @sitelinks.length > 20
+        invalid_properties.push('invalid value for "sitelinks", number of items must be less than or equal to 20.')
+      end
+
+      if !@sitelinks.nil? && @sitelinks.length < 2
+        invalid_properties.push('invalid value for "sitelinks", number of items must be greater than or equal to 2.')
+      end
+
       if !@attribution_spec.nil? && @attribution_spec.length > 3
         invalid_properties.push('invalid value for "attribution_spec", number of items must be less than or equal to 3.')
       end
@@ -1045,6 +1064,8 @@ module Zernio
       return false if !@translations.nil? && @translations.length < 1
       campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search"])
       return false unless campaign_type_validator.valid?(@campaign_type)
+      return false if !@sitelinks.nil? && @sitelinks.length > 20
+      return false if !@sitelinks.nil? && @sitelinks.length < 2
       advantage_audience_validator = EnumAttributeValidator.new('Integer', [0, 1])
       return false unless advantage_audience_validator.valid?(@advantage_audience)
       return false if !@attribution_spec.nil? && @attribution_spec.length > 3
@@ -1381,6 +1402,24 @@ module Zernio
       @campaign_type = campaign_type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] sitelinks Value to be assigned
+    def sitelinks=(sitelinks)
+      if sitelinks.nil?
+        fail ArgumentError, 'sitelinks cannot be nil'
+      end
+
+      if sitelinks.length > 20
+        fail ArgumentError, 'invalid value for "sitelinks", number of items must be less than or equal to 20.'
+      end
+
+      if sitelinks.length < 2
+        fail ArgumentError, 'invalid value for "sitelinks", number of items must be greater than or equal to 2.'
+      end
+
+      @sitelinks = sitelinks
+    end
+
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] advantage_audience Object to be assigned
     def advantage_audience=(advantage_audience)
@@ -1547,6 +1586,7 @@ module Zernio
           negative_keywords == o.negative_keywords &&
           additional_headlines == o.additional_headlines &&
           additional_descriptions == o.additional_descriptions &&
+          sitelinks == o.sitelinks &&
           advantage_audience == o.advantage_audience &&
           attribution_spec == o.attribution_spec &&
           gender == o.gender &&
@@ -1573,7 +1613,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, sitelinks, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
     end
 
     # Builds the object from hash
