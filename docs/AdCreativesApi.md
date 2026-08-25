@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_ad_video**](AdCreativesApi.md#delete_ad_video) | **DELETE** /v1/ads/videos/{videoId} | Delete an ad video |
 | [**generate_ad_previews**](AdCreativesApi.md#generate_ad_previews) | **POST** /v1/ads/preview | Render pre-create ad previews |
 | [**get_ad_creative**](AdCreativesApi.md#get_ad_creative) | **GET** /v1/ads/creatives/{creativeId} | Creative details |
+| [**get_ad_media**](AdCreativesApi.md#get_ad_media) | **GET** /v1/ads/{adId}/media | Direct video and image URLs for an ad |
 | [**get_ad_previews**](AdCreativesApi.md#get_ad_previews) | **GET** /v1/ads/{adId}/preview | Render previews of an existing ad |
 | [**list_ad_catalog_product_sets**](AdCreativesApi.md#list_ad_catalog_product_sets) | **GET** /v1/ads/catalogs/{catalogId}/product-sets | List a catalog&#39;s product sets |
 | [**list_ad_catalogs**](AdCreativesApi.md#list_ad_catalogs) | **GET** /v1/ads/catalogs | List Meta product catalogs |
@@ -366,6 +367,75 @@ end
 ### Return type
 
 [**GetAdCreative200Response**](GetAdCreative200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ad_media
+
+> <GetAdMedia200Response> get_ad_media(ad_id)
+
+Direct video and image URLs for an ad
+
+Returns the direct signed URLs for every video and image asset used by an ad's live creative, normalised across shapes: single image/video, carousel, Reels/Story (`object_story_spec.video_data`) and dynamic creative (`asset_feed_spec`). Video items include Meta's poster thumbnail and the video's Meta id when available.  Reads Meta live rather than the stored creative blob because Meta's signed fbcdn URLs carry an `oe=<hex>` expiration (image_url ~24 h, video source ~12 d). Treat URLs as short-lived — re-fetch this endpoint before serving or downloading assets instead of caching URLs beyond that window.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCreativesApi.new
+ad_id = 'ad_id_example' # String | Zernio ad id (24-char hex) or platform ad id.
+
+begin
+  # Direct video and image URLs for an ad
+  result = api_instance.get_ad_media(ad_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->get_ad_media: #{e}"
+end
+```
+
+#### Using the get_ad_media_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAdMedia200Response>, Integer, Hash)> get_ad_media_with_http_info(ad_id)
+
+```ruby
+begin
+  # Direct video and image URLs for an ad
+  data, status_code, headers = api_instance.get_ad_media_with_http_info(ad_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAdMedia200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCreativesApi->get_ad_media_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_id** | **String** | Zernio ad id (24-char hex) or platform ad id. |  |
+
+### Return type
+
+[**GetAdMedia200Response**](GetAdMedia200Response.md)
 
 ### Authorization
 
