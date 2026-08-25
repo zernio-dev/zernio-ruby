@@ -467,7 +467,7 @@ describe 'WhatsAppApi' do
 
   # unit tests for update_whats_app_template
   # Update template
-  # Update a message template&#39;s components. Only certain fields can be updated depending on the template&#39;s current approval state. Approved templates can only have components updated. 
+  # Update a message template&#39;s components. Only certain fields can be updated depending on the template&#39;s current approval state. Approved templates can only have components updated.  A successful update sends the template back to Meta for review, so the &#x60;status&#x60; returned here is normally &#x60;PENDING&#x60;. The final outcome arrives later on the &#x60;whatsapp.template.status_updated&#x60; webhook. A template already in &#x60;PENDING&#x60; cannot be edited again until Meta finishes reviewing it. 
   # @param template_name Template name
   # @param update_whats_app_template_request 
   # @param [Hash] opts the optional parameters

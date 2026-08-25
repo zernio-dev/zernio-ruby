@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
-| **status** | **String** |  | [optional] |
+| **status** | **String** | Approval state read back from Meta after the update, normally PENDING. If the state cannot be read back, the last known status is returned instead. | [optional] |
 
 ## Example
 
@@ -16,7 +16,7 @@ require 'zernio-sdk'
 instance = Zernio::UpdateWhatsAppTemplate200ResponseTemplate.new(
   id: null,
   name: null,
-  status: null
+  status: PENDING
 )
 ```
 

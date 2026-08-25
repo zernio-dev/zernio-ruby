@@ -19,6 +19,7 @@ module Zernio
 
     attr_accessor :name
 
+    # Approval state read back from Meta after the update, normally PENDING. If the state cannot be read back, the last known status is returned instead.
     attr_accessor :status
 
     # Attribute mapping from ruby-style variable name to JSON key.
