@@ -23,13 +23,17 @@ module Zernio
 
     attr_accessor :last_updated
 
+    # Connected accounts that were not queried: their platform does not support this feature, or the account is not enabled for it
+    attr_accessor :accounts_skipped
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'accounts_queried' => :'accountsQueried',
         :'accounts_failed' => :'accountsFailed',
         :'failed_accounts' => :'failedAccounts',
-        :'last_updated' => :'lastUpdated'
+        :'last_updated' => :'lastUpdated',
+        :'accounts_skipped' => :'accountsSkipped'
       }
     end
 
@@ -49,7 +53,8 @@ module Zernio
         :'accounts_queried' => :'Integer',
         :'accounts_failed' => :'Integer',
         :'failed_accounts' => :'Array<ListInboxConversations200ResponseMetaFailedAccountsInner>',
-        :'last_updated' => :'Time'
+        :'last_updated' => :'Time',
+        :'accounts_skipped' => :'Array<ListInboxConversations200ResponseMetaAccountsSkippedInner>'
       }
     end
 
@@ -92,6 +97,12 @@ module Zernio
       if attributes.key?(:'last_updated')
         self.last_updated = attributes[:'last_updated']
       end
+
+      if attributes.key?(:'accounts_skipped')
+        if (value = attributes[:'accounts_skipped']).is_a?(Array)
+          self.accounts_skipped = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,7 +128,8 @@ module Zernio
           accounts_queried == o.accounts_queried &&
           accounts_failed == o.accounts_failed &&
           failed_accounts == o.failed_accounts &&
-          last_updated == o.last_updated
+          last_updated == o.last_updated &&
+          accounts_skipped == o.accounts_skipped
     end
 
     # @see the `==` method
@@ -129,7 +141,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accounts_queried, accounts_failed, failed_accounts, last_updated].hash
+      [accounts_queried, accounts_failed, failed_accounts, last_updated, accounts_skipped].hash
     end
 
     # Builds the object from hash

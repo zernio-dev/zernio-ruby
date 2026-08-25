@@ -1,4 +1,4 @@
-# Zernio::SearchInboxConversations200ResponseMetaAccountsSkippedInner
+# Zernio::ListInboxConversations200ResponseMetaAccountsSkippedInner
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::SearchInboxConversations200ResponseMetaAccountsSkippedInner.new(
+instance = Zernio::ListInboxConversations200ResponseMetaAccountsSkippedInner.new(
   account_id: null,
   platform: null
 )

@@ -54,7 +54,7 @@ module Zernio
         :'accounts_failed' => :'Integer',
         :'failed_accounts' => :'Array<SearchInboxConversations200ResponseMetaFailedAccountsInner>',
         :'last_updated' => :'Time',
-        :'accounts_skipped' => :'Array<SearchInboxConversations200ResponseMetaAccountsSkippedInner>'
+        :'accounts_skipped' => :'Array<ListInboxConversations200ResponseMetaAccountsSkippedInner>'
       }
     end
 

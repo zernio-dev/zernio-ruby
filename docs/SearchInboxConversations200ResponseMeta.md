@@ -8,7 +8,7 @@
 | **accounts_failed** | **Integer** |  | [optional] |
 | **failed_accounts** | [**Array&lt;SearchInboxConversations200ResponseMetaFailedAccountsInner&gt;**](SearchInboxConversations200ResponseMetaFailedAccountsInner.md) |  | [optional] |
 | **last_updated** | **Time** |  | [optional] |
-| **accounts_skipped** | [**Array&lt;SearchInboxConversations200ResponseMetaAccountsSkippedInner&gt;**](SearchInboxConversations200ResponseMetaAccountsSkippedInner.md) | Connected messaging accounts that cannot be searched (live-fetched platforms) | [optional] |
+| **accounts_skipped** | [**Array&lt;ListInboxConversations200ResponseMetaAccountsSkippedInner&gt;**](ListInboxConversations200ResponseMetaAccountsSkippedInner.md) | Connected messaging accounts that cannot be searched (live-fetched platforms) | [optional] |
 
 ## Example
 
