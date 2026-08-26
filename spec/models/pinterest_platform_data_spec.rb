@@ -39,6 +39,12 @@ describe Zernio::PinterestPlatformData do
     end
   end
 
+  describe 'test attribute "board_section_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "link"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -52,6 +58,12 @@ describe Zernio::PinterestPlatformData do
   end
 
   describe 'test attribute "cover_image_key_frame_time"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "is_ai_generated"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

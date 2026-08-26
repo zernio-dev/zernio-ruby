@@ -21,6 +21,9 @@ module Zernio
     # Target Pinterest board ID. If omitted, the first available board is used.
     attr_accessor :board_id
 
+    # Target section inside the board. Optional; the pin lands on the board itself when omitted. Pinterest rejects the pin if the section does not belong to boardId, so send both together.
+    attr_accessor :board_section_id
+
     # Destination link (pin URL)
     attr_accessor :link
 
@@ -30,14 +33,19 @@ module Zernio
     # Optional key frame time in seconds for derived video cover
     attr_accessor :cover_image_key_frame_time
 
+    # When true, the Pin is created with Pinterest's AI_MODIFIED disclosure (ai_disclosures), which shows an \"AI modified\" label. Applies to image and video Pins. Pinterest offers no \"not AI\" value, so false simply omits the disclosure. Pinterest may still label a Pin on its own detection.
+    attr_accessor :is_ai_generated
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'title' => :'title',
         :'board_id' => :'boardId',
+        :'board_section_id' => :'boardSectionId',
         :'link' => :'link',
         :'cover_image_url' => :'coverImageUrl',
-        :'cover_image_key_frame_time' => :'coverImageKeyFrameTime'
+        :'cover_image_key_frame_time' => :'coverImageKeyFrameTime',
+        :'is_ai_generated' => :'isAiGenerated'
       }
     end
 
@@ -56,9 +64,11 @@ module Zernio
       {
         :'title' => :'String',
         :'board_id' => :'String',
+        :'board_section_id' => :'String',
         :'link' => :'String',
         :'cover_image_url' => :'String',
-        :'cover_image_key_frame_time' => :'Integer'
+        :'cover_image_key_frame_time' => :'Integer',
+        :'is_ai_generated' => :'Boolean'
       }
     end
 
@@ -92,6 +102,10 @@ module Zernio
         self.board_id = attributes[:'board_id']
       end
 
+      if attributes.key?(:'board_section_id')
+        self.board_section_id = attributes[:'board_section_id']
+      end
+
       if attributes.key?(:'link')
         self.link = attributes[:'link']
       end
@@ -102,6 +116,12 @@ module Zernio
 
       if attributes.key?(:'cover_image_key_frame_time')
         self.cover_image_key_frame_time = attributes[:'cover_image_key_frame_time']
+      end
+
+      if attributes.key?(:'is_ai_generated')
+        self.is_ai_generated = attributes[:'is_ai_generated']
+      else
+        self.is_ai_generated = false
       end
     end
 
@@ -146,9 +166,11 @@ module Zernio
       self.class == o.class &&
           title == o.title &&
           board_id == o.board_id &&
+          board_section_id == o.board_section_id &&
           link == o.link &&
           cover_image_url == o.cover_image_url &&
-          cover_image_key_frame_time == o.cover_image_key_frame_time
+          cover_image_key_frame_time == o.cover_image_key_frame_time &&
+          is_ai_generated == o.is_ai_generated
     end
 
     # @see the `==` method
@@ -160,7 +182,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, board_id, link, cover_image_url, cover_image_key_frame_time].hash
+      [title, board_id, board_section_id, link, cover_image_url, cover_image_key_frame_time, is_ai_generated].hash
     end
 
     # Builds the object from hash
