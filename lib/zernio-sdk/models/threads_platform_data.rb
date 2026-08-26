@@ -19,6 +19,9 @@ module Zernio
     # Topic tag for post categorization and discoverability on Threads. Must be 1-50 characters, cannot contain periods (.) or ampersands (&). Overrides auto-extraction from content hashtags when provided.
     attr_accessor :topic_tag
 
+    # Optional first comment to post immediately after publishing, as a reply to the published post. With threadItems, it replies to the root post. Up to 500 characters (the Threads post limit). The reply is itself a Threads post, so it consumes one of the 250 posts a profile may publish per 24 hours.
+    attr_accessor :first_comment
+
     # Complete sequence of posts in a Threads thread. The first item becomes the root post, subsequent items are chained as replies. When threadItems is provided, the top-level content field is used only for display and search purposes, it is NOT published. You must include your first post as threadItems[0]. 
     attr_accessor :thread_items
 
@@ -26,6 +29,7 @@ module Zernio
     def self.attribute_map
       {
         :'topic_tag' => :'topic_tag',
+        :'first_comment' => :'firstComment',
         :'thread_items' => :'threadItems'
       }
     end
@@ -44,6 +48,7 @@ module Zernio
     def self.openapi_types
       {
         :'topic_tag' => :'String',
+        :'first_comment' => :'String',
         :'thread_items' => :'Array<TwitterPlatformDataThreadItemsInner>'
       }
     end
@@ -74,6 +79,10 @@ module Zernio
         self.topic_tag = attributes[:'topic_tag']
       end
 
+      if attributes.key?(:'first_comment')
+        self.first_comment = attributes[:'first_comment']
+      end
+
       if attributes.key?(:'thread_items')
         if (value = attributes[:'thread_items']).is_a?(Array)
           self.thread_items = value
@@ -94,6 +103,10 @@ module Zernio
         invalid_properties.push('invalid value for "topic_tag", the character length must be greater than or equal to 1.')
       end
 
+      if !@first_comment.nil? && @first_comment.to_s.length > 500
+        invalid_properties.push('invalid value for "first_comment", the character length must be smaller than or equal to 500.')
+      end
+
       invalid_properties
     end
 
@@ -103,6 +116,7 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@topic_tag.nil? && @topic_tag.to_s.length > 50
       return false if !@topic_tag.nil? && @topic_tag.to_s.length < 1
+      return false if !@first_comment.nil? && @first_comment.to_s.length > 500
       true
     end
 
@@ -124,12 +138,27 @@ module Zernio
       @topic_tag = topic_tag
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] first_comment Value to be assigned
+    def first_comment=(first_comment)
+      if first_comment.nil?
+        fail ArgumentError, 'first_comment cannot be nil'
+      end
+
+      if first_comment.to_s.length > 500
+        fail ArgumentError, 'invalid value for "first_comment", the character length must be smaller than or equal to 500.'
+      end
+
+      @first_comment = first_comment
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           topic_tag == o.topic_tag &&
+          first_comment == o.first_comment &&
           thread_items == o.thread_items
     end
 
@@ -142,7 +171,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [topic_tag, thread_items].hash
+      [topic_tag, first_comment, thread_items].hash
     end
 
     # Builds the object from hash
