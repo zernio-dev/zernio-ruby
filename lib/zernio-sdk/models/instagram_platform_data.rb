@@ -38,6 +38,9 @@ module Zernio
 
     attr_accessor :audio_configuration
 
+    # Publish the video without sound. Applies to Reels, Stories, and video carousel slides; ignored for images. Instagram has no mute parameter, so we strip the audio track from the file before handing it to Instagram: the published video is permanently silent and the original audio cannot be restored from Instagram. If the audio cannot be stripped the post fails rather than publishing with sound; videos above 200MB cannot be muted at all, so mute them before uploading. Unrelated to audioConfiguration.videoVolume, which only lowers the original sound when a catalog track is attached.
+    attr_accessor :mute_audio
+
     # Millisecond offset from video start for the Reel cover frame. Ignored when instagramThumbnail or reelCover is provided. Defaults to 0.
     attr_accessor :thumb_offset
 
@@ -83,6 +86,7 @@ module Zernio
         :'user_tags' => :'userTags',
         :'audio_name' => :'audioName',
         :'audio_configuration' => :'audioConfiguration',
+        :'mute_audio' => :'muteAudio',
         :'thumb_offset' => :'thumbOffset',
         :'instagram_thumbnail' => :'instagramThumbnail',
         :'reel_cover' => :'reelCover',
@@ -111,6 +115,7 @@ module Zernio
         :'user_tags' => :'Array<InstagramPlatformDataUserTagsInner>',
         :'audio_name' => :'String',
         :'audio_configuration' => :'InstagramPlatformDataAudioConfiguration',
+        :'mute_audio' => :'Boolean',
         :'thumb_offset' => :'Integer',
         :'instagram_thumbnail' => :'String',
         :'reel_cover' => :'String',
@@ -176,6 +181,12 @@ module Zernio
 
       if attributes.key?(:'audio_configuration')
         self.audio_configuration = attributes[:'audio_configuration']
+      end
+
+      if attributes.key?(:'mute_audio')
+        self.mute_audio = attributes[:'mute_audio']
+      else
+        self.mute_audio = false
       end
 
       if attributes.key?(:'thumb_offset')
@@ -256,6 +267,7 @@ module Zernio
           user_tags == o.user_tags &&
           audio_name == o.audio_name &&
           audio_configuration == o.audio_configuration &&
+          mute_audio == o.mute_audio &&
           thumb_offset == o.thumb_offset &&
           instagram_thumbnail == o.instagram_thumbnail &&
           reel_cover == o.reel_cover &&
@@ -271,7 +283,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, audio_configuration, thumb_offset, instagram_thumbnail, reel_cover, is_ai_generated].hash
+      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, audio_configuration, mute_audio, thumb_offset, instagram_thumbnail, reel_cover, is_ai_generated].hash
     end
 
     # Builds the object from hash

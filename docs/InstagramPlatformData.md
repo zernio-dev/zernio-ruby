@@ -12,6 +12,7 @@
 | **user_tags** | [**Array&lt;InstagramPlatformDataUserTagsInner&gt;**](InstagramPlatformDataUserTagsInner.md) | Tag Instagram users by username. The tag shape depends on the media: photos require x/y coordinates, Reels and videos take username only (coordinates are ignored), stories accept optional coordinates. For carousels, use mediaIndex to target specific slides (defaults to 0); video slides take username-only tags. Photo tags without valid coordinates are skipped. | [optional] |
 | **audio_name** | **String** | Custom name for original audio in Reels. Replaces the default \&quot;Original Audio\&quot; label. Can only be set once. Unrelated to audioConfiguration, which attaches a catalog track. | [optional] |
 | **audio_configuration** | [**InstagramPlatformDataAudioConfiguration**](InstagramPlatformDataAudioConfiguration.md) |  | [optional] |
+| **mute_audio** | **Boolean** | Publish the video without sound. Applies to Reels, Stories, and video carousel slides; ignored for images. Instagram has no mute parameter, so we strip the audio track from the file before handing it to Instagram: the published video is permanently silent and the original audio cannot be restored from Instagram. If the audio cannot be stripped the post fails rather than publishing with sound; videos above 200MB cannot be muted at all, so mute them before uploading. Unrelated to audioConfiguration.videoVolume, which only lowers the original sound when a catalog track is attached. | [optional][default to false] |
 | **thumb_offset** | **Integer** | Millisecond offset from video start for the Reel cover frame. Ignored when instagramThumbnail or reelCover is provided. Defaults to 0. | [optional] |
 | **instagram_thumbnail** | **String** | Custom cover image URL for Instagram Reels (JPG or PNG, publicly accessible). Overrides thumbOffset when provided. Also accepted as reelCover (alias). | [optional] |
 | **reel_cover** | **String** | Alias for instagramThumbnail. If both are provided, instagramThumbnail takes priority. | [optional] |
@@ -31,6 +32,7 @@ instance = Zernio::InstagramPlatformData.new(
   user_tags: null,
   audio_name: My Podcast Intro,
   audio_configuration: null,
+  mute_audio: true,
   thumb_offset: 5000,
   instagram_thumbnail: null,
   reel_cover: null,

@@ -79,6 +79,12 @@ describe Zernio::InstagramPlatformData do
     end
   end
 
+  describe 'test attribute "mute_audio"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "thumb_offset"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
