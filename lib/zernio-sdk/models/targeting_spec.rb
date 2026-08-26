@@ -36,8 +36,10 @@ module Zernio
 
     attr_accessor :excluded_locations
 
+    # Minimum age. Applied on Meta, TikTok and Pinterest; ignored on Google, LinkedIn and X. Each platform clamps to its own range: Meta and Pinterest effectively cap at 65 (65 = 65+), TikTok maps up to 100. Pinterest has no under-18 bucket, so an ageMin below 18 starts at 18 there.
     attr_accessor :age_min
 
+    # Maximum age. Same per-platform application and clamping as ageMin.
     attr_accessor :age_max
 
     # Restrict by gender. 'all' (default) targets everyone. Applied on Meta, TikTok and Pinterest. Ignored on Google, LinkedIn and X.

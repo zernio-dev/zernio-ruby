@@ -42,8 +42,11 @@ module Zernio
     # WhatsApp only. Template language code (e.g. en_US).
     attr_accessor :template_language
 
-    # WhatsApp only. Template variable values as one flat array, in the order the variables appear across the whole template: text-header variables first, then body variables, then one value per dynamic URL button (in button order). Works with positional placeholders ({{1}}, {{2}}, ...) and with named placeholders ({{name}}, {{company}} - how Meta Business Manager creates templates), where values fill the named slots in order of appearance. Example - a body with {{1}}, {{2}} plus a URL button https://example.com/{{1}} takes three values: [body1, body2, buttonSuffix]. Media headers (image, video, document) are filled automatically from the approved template and take no value here (use headerMedia to override the header asset per send).
+    # WhatsApp only. Template variable values as one flat array, in the order the variables appear across the whole template: text-header variables first, then body variables, then one value per dynamic URL button (in button order). Works with positional placeholders ({{1}}, {{2}}, ...) and with named placeholders ({{name}}, {{company}} - how Meta Business Manager creates templates), where values fill the named slots in order of appearance. Example - a body with {{1}}, {{2}} plus a URL button https://example.com/{{1}} takes three values: [body1, body2, buttonSuffix]. Media headers (image, video, document) are filled automatically from the approved template and take no value here (use headerMedia to override the header asset per send). Buttons that are not dynamic-URL buttons (copy-code, flow) take no value here either; use templateButtonParams.
     attr_accessor :template_params
+
+    # WhatsApp only. Values for template buttons that carry one at send time, each addressed by the button's position in the approved template. This is the only way to send a copy-code button's payload (a Pix payment code, a coupon) or a flow token, because templateParams is a flat array of text variables and covers dynamic URL buttons only. Supplying a button here overrides whatever templateParams would have derived for that same index, so the send never carries one button twice; repeating an index within this array is rejected with 400. Each index must name a button of the matching kind on the approved template, which is also checked before the send and returns 400 (INVALID_TEMPLATE_BUTTON_PARAM) rather than a Meta rejection.
+    attr_accessor :template_button_params
 
     attr_accessor :header_media
 
@@ -82,6 +85,7 @@ module Zernio
         :'link_preview' => :'linkPreview',
         :'template_language' => :'templateLanguage',
         :'template_params' => :'templateParams',
+        :'template_button_params' => :'templateButtonParams',
         :'header_media' => :'headerMedia'
       }
     end
@@ -109,6 +113,7 @@ module Zernio
         :'link_preview' => :'Boolean',
         :'template_language' => :'String',
         :'template_params' => :'Array<String>',
+        :'template_button_params' => :'Array<CreateInboxConversationRequestTemplateButtonParamsInner>',
         :'header_media' => :'CreateInboxConversationRequestHeaderMedia'
       }
     end
@@ -183,6 +188,12 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'template_button_params')
+        if (value = attributes[:'template_button_params']).is_a?(Array)
+          self.template_button_params = value
+        end
+      end
+
       if attributes.key?(:'header_media')
         self.header_media = attributes[:'header_media']
       end
@@ -197,6 +208,10 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
+      if !@template_button_params.nil? && @template_button_params.length > 10
+        invalid_properties.push('invalid value for "template_button_params", number of items must be less than or equal to 10.')
+      end
+
       invalid_properties
     end
 
@@ -207,6 +222,7 @@ module Zernio
       return false if @account_id.nil?
       category_validator = EnumAttributeValidator.new('String', ["utility"])
       return false unless category_validator.valid?(@category)
+      return false if !@template_button_params.nil? && @template_button_params.length > 10
       true
     end
 
@@ -230,6 +246,20 @@ module Zernio
       @category = category
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] template_button_params Value to be assigned
+    def template_button_params=(template_button_params)
+      if template_button_params.nil?
+        fail ArgumentError, 'template_button_params cannot be nil'
+      end
+
+      if template_button_params.length > 10
+        fail ArgumentError, 'invalid value for "template_button_params", number of items must be less than or equal to 10.'
+      end
+
+      @template_button_params = template_button_params
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -245,6 +275,7 @@ module Zernio
           link_preview == o.link_preview &&
           template_language == o.template_language &&
           template_params == o.template_params &&
+          template_button_params == o.template_button_params &&
           header_media == o.header_media
     end
 
@@ -257,7 +288,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, link_preview, template_language, template_params, header_media].hash
+      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, link_preview, template_language, template_params, template_button_params, header_media].hash
     end
 
     # Builds the object from hash

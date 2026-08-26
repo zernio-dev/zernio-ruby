@@ -31,7 +31,7 @@ module Zernio
     # @option opts [Date] :to_date Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
     # @option opts [Integer] :limit Page size (default 50) (default to 50)
     # @option opts [Integer] :page Page number (default 1) (default to 1)
-    # @option opts [String] :sort_by Sort by date, engagement, or a specific metric (default to 'date')
+    # @option opts [String] :sort_by Sort by date, engagement, or a specific metric. Instagram-only metrics (follows, reposts, reels_skip_rate, ig_reels_*) sort posts with no value as 0. (default to 'date')
     # @option opts [String] :order Sort order (default to 'desc')
     # @return [GetAnalytics200Response]
     def get_analytics(opts = {})
@@ -51,7 +51,7 @@ module Zernio
     # @option opts [Date] :to_date Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
     # @option opts [Integer] :limit Page size (default 50) (default to 50)
     # @option opts [Integer] :page Page number (default 1) (default to 1)
-    # @option opts [String] :sort_by Sort by date, engagement, or a specific metric (default to 'date')
+    # @option opts [String] :sort_by Sort by date, engagement, or a specific metric. Instagram-only metrics (follows, reposts, reels_skip_rate, ig_reels_*) sort posts with no value as 0. (default to 'date')
     # @option opts [String] :order Sort order (default to 'desc')
     # @return [Array<(GetAnalytics200Response, Integer, Hash)>] GetAnalytics200Response data, response status code and response headers
     def get_analytics_with_http_info(opts = {})
@@ -74,7 +74,7 @@ module Zernio
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling AnalyticsApi.get_analytics, must be greater than or equal to 1.'
       end
 
-      allowable_values = ["date", "engagement", "impressions", "reach", "likes", "comments", "shares", "saves", "clicks", "views", "follows"]
+      allowable_values = ["date", "engagement", "impressions", "reach", "likes", "comments", "shares", "saves", "clicks", "views", "follows", "ig_reels_avg_watch_time", "ig_reels_video_view_total_time", "reposts", "reels_skip_rate"]
       if @api_client.config.client_side_validation && opts[:'sort_by'] && !allowable_values.include?(opts[:'sort_by'])
         fail ArgumentError, "invalid value for \"sort_by\", must be one of #{allowable_values}"
       end

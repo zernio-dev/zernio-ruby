@@ -7159,6 +7159,8 @@ components:
         follows: { type: integer, example: 0, description: 'Instagram feed posts and stories only: organic accounts that started following from this post. 0 for reels and other platforms.' }
         igReelsAvgWatchTime: { type: integer, example: 0, description: 'Instagram Reels only: average watch time per play, in milliseconds. 0 for non-Reels media and other platforms.' }
         igReelsVideoViewTotalTime: { type: integer, example: 0, description: 'Instagram Reels only: total watch time including replays, in milliseconds. 0 for non-Reels media and other platforms.' }
+        reelsSkipRate: { type: number, example: 0, description: 'Instagram Reels only: the rate of initial views that skipped the reel within its first 3 seconds, as reported by Meta. Passed through exactly as Meta reports it, with no rescaling, so do not assume a 0-1 share. Meta labels the metric estimated and in development, so it can move between syncs. 0 for non-Reels media and other platforms. When a post is published to several accounts, the aggregate is weighted by views.' }
+        reposts: { type: integer, example: 0, description: 'Instagram only: reposts of the media by other users, minus deleted reposts. Available on feed posts, reels and stories. 0 for other platforms, including Threads, where reposts are counted in shares instead.' }
         videoDurationSeconds: { type: [integer, "null"], example: 30, description: 'Video length in seconds. Currently Instagram Reels only; combine with igReelsAvgWatchTime (ms) to estimate retention. Null when unknown (other platforms, non-video media, or when Instagram does not expose the media URL, e.g. reels with copyrighted audio).' }
         engagementRate: { type: number, example: 6.59, description: 'Percentage, rounded to 2 decimals: (likes + comments + shares + saves) / (impressions or reach or views) * 100. Clicks and follows are never counted. The denominator is the FIRST of impressions, reach, views that is non-zero, so it is not the same basis on every post: a post with impressions divides by impressions, one without falls back to reach, then to views. If you need a single consistent basis (e.g. interactions / reach), compute it from the raw fields above. The engagementRate on the LinkedIn account endpoints is a different formula.' }
         lastUpdated: { type: string, format: date-time }
@@ -8186,8 +8188,8 @@ components:
                   distanceUnit: { type: string, enum: [mile, kilometer] }
                   name: { type: string }
                   address: { type: string, description: "Optional label, sent to Meta as `address_string`. latitude/longitude take precedence for the pin location." }
-        ageMin: { type: integer, minimum: 13, maximum: 100 }
-        ageMax: { type: integer, minimum: 13, maximum: 100 }
+        ageMin: { type: integer, minimum: 13, maximum: 100, description: "Minimum age. Applied on Meta, TikTok and Pinterest; ignored on Google, LinkedIn and X. Each platform clamps to its own range: Meta and Pinterest effectively cap at 65 (65 = 65+), TikTok maps up to 100. Pinterest has no under-18 bucket, so an ageMin below 18 starts at 18 there." }
+        ageMax: { type: integer, minimum: 13, maximum: 100, description: "Maximum age. Same per-platform application and clamping as ageMin." }
         gender: { type: string, enum: [all, male, female], description: "Restrict by gender. 'all' (default) targets everyone. Applied on Meta, TikTok and Pinterest. Ignored on Google, LinkedIn and X." }
         incomeTier:
           type: string
@@ -8552,8 +8554,12 @@ components:
           description: "Google-only. Raw campaign.advertising_channel_type (SEARCH, PERFORMANCE_MAX, LOCAL_SERVICES, VIDEO, DEMAND_GEN, DISPLAY, SHOPPING, ...). Serving surface, distinct from platformObjective (advertiser intent). Null/absent for non-Google platforms."
         platformObjective: { type: [string, "null"], description: "Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC)" }
         optimizationGoal:
-          type: [string, array]
-          items: { type: string }
+          # anyOf, not type: [string, array]: hey-api resolves a type-array carrying items
+          # through the array branch and drops the string one (@zernio/node 0.2.640).
+          anyOf:
+            - type: string
+            - type: array
+              items: { type: string }
           description: 'A single string when every ad set shares one optimization goal; a JSON array of the distinct goals when ad sets differ (never a comma-joined string); array element order is not guaranteed, treat it as an unordered set; the key is absent when no ad set carries a goal. Meta: e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION. LinkedIn: the campaign optimizationTargetType (e.g. MAX_CLICK, MAX_IMPRESSION, NONE); `NONE` with a manual costType is a campaign LinkedIn will not deliver.'
         bidStrategy:
           anyOf:
@@ -8630,8 +8636,12 @@ components:
           description: "Google-only. Raw campaign.advertising_channel_type. See AdTreeCampaign.advertisingChannelType."
         platformObjective: { type: [string, "null"], description: "Raw Meta campaign objective (e.g. OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_TRAFFIC)" }
         optimizationGoal:
-          type: [string, array]
-          items: { type: string }
+          # anyOf, not type: [string, array]: hey-api resolves a type-array carrying items
+          # through the array branch and drops the string one (@zernio/node 0.2.640).
+          anyOf:
+            - type: string
+            - type: array
+              items: { type: string }
           description: 'A single string when every ad set shares one optimization goal; a JSON array of the distinct goals when ad sets differ (never a comma-joined string); array element order is not guaranteed, treat it as an unordered set; the key is absent when no ad set carries a goal. Meta: e.g. OFFSITE_CONVERSIONS, VALUE, LEAD_GENERATION. LinkedIn: the campaign optimizationTargetType (e.g. MAX_CLICK, MAX_IMPRESSION, NONE); `NONE` with a manual costType is a campaign LinkedIn will not deliver.'
         bidStrategy:
           anyOf:
@@ -10443,8 +10453,8 @@ paths:
           description: Page number (default 1)
         - name: sortBy
           in: query
-          schema: { type: string, enum: [date, engagement, impressions, reach, likes, comments, shares, saves, clicks, views, follows], default: date }
-          description: Sort by date, engagement, or a specific metric
+          schema: { type: string, enum: [date, engagement, impressions, reach, likes, comments, shares, saves, clicks, views, follows, ig_reels_avg_watch_time, ig_reels_video_view_total_time, reposts, reels_skip_rate], default: date }
+          description: 'Sort by date, engagement, or a specific metric. Instagram-only metrics (follows, reposts, reels_skip_rate, ig_reels_*) sort posts with no value as 0.'
         - name: order
           in: query
           schema: { type: string, enum: [asc, desc], default: desc }
@@ -25576,7 +25586,7 @@ paths:
 
         Slack: pass a workspace member id as participantId (list them with GET /v1/accounts/{accountId}/slack-members). Zernio opens the DM channel with that member and sends the message; the thread then behaves like any other Slack conversation in the inbox. The member must belong to the connected workspace.
 
-        WhatsApp: this is the endpoint for sending an approved template message to a phone number. Provide templateName, templateLanguage, and templateParams (variable values for the text header, body and dynamic URL buttons, in that order), with the recipient phone in participantId. A template is required because WhatsApp does not permit freeform messages to open a conversation; a missing template returns TEMPLATE_REQUIRED. Templates with media headers (image, video, document) are handled automatically: Zernio reads the approved template definition and fills the header at send time with the template's approved sample asset. To send a DIFFERENT asset per message (e.g. a distinct invoice PDF for each recipient), pass the headerMedia field with a public link (or a Meta media id); it overrides the sample for that send. Calling this for a number you already have a thread with simply sends the template into that thread, which also makes it the way to re-engage a contact after the 24-hour customer-service window has closed. Once the recipient replies (opening the 24h window), send freeform messages with the send-message endpoint (POST /v1/inbox/conversations/{conversationId}/messages). Template fields are accepted on the JSON body only, not on multipart requests. Alternatively, WhatsApp Business Accounts eligible for Meta Direct Send can open a conversation with a business-initiated utility text message and no template: pass category: 'utility' together with message (and no templateName). See the category field below.
+        WhatsApp: this is the endpoint for sending an approved template message to a phone number. Provide templateName, templateLanguage, and templateParams (variable values for the text header, body and dynamic URL buttons, in that order), with the recipient phone in participantId. A template is required because WhatsApp does not permit freeform messages to open a conversation; a missing template returns TEMPLATE_REQUIRED. Templates with media headers (image, video, document) are handled automatically: Zernio reads the approved template definition and fills the header at send time with the template's approved sample asset. To send a DIFFERENT asset per message (e.g. a distinct invoice PDF for each recipient), pass the headerMedia field with a public link (or a Meta media id); it overrides the sample for that send. A button that carries its own value at send time (a copy-code button holding a Pix payment code or a coupon, a flow token) is sent with templateButtonParams, addressed by the button's index; templateParams covers text variables and dynamic URL buttons only. Calling this for a number you already have a thread with simply sends the template into that thread, which also makes it the way to re-engage a contact after the 24-hour customer-service window has closed. Once the recipient replies (opening the 24h window), send freeform messages with the send-message endpoint (POST /v1/inbox/conversations/{conversationId}/messages). Template fields are accepted on the JSON body only, not on multipart requests. Alternatively, WhatsApp Business Accounts eligible for Meta Direct Send can open a conversation with a business-initiated utility text message and no template: pass category: 'utility' together with message (and no templateName). See the category field below.
 
         DM eligibility (X/Twitter): Before sending, the endpoint checks if the recipient accepts DMs from your account (via the receives_your_dm field). If not, a 422 error with code DM_NOT_ALLOWED is returned. You can skip this check with skipDmCheck: true if you have already verified eligibility.
 
@@ -25651,7 +25661,42 @@ paths:
                     {{1}}, {{2}} plus a URL button https://example.com/{{1}} takes three values:
                     [body1, body2, buttonSuffix]. Media headers (image, video, document) are filled
                     automatically from the approved template and take no value here (use headerMedia
-                    to override the header asset per send).
+                    to override the header asset per send). Buttons that are not dynamic-URL buttons
+                    (copy-code, flow) take no value here either; use templateButtonParams.
+                templateButtonParams:
+                  type: array
+                  maxItems: 10
+                  description: >-
+                    WhatsApp only. Values for template buttons that carry one at send time, each
+                    addressed by the button's position in the approved template. This is the only
+                    way to send a copy-code button's payload (a Pix payment code, a coupon) or a
+                    flow token, because templateParams is a flat array of text variables and covers
+                    dynamic URL buttons only. Supplying a button here overrides whatever
+                    templateParams would have derived for that same index, so the send never
+                    carries one button twice; repeating an index within this array is rejected
+                    with 400. Each index must name a button of the matching kind on the approved
+                    template, which is also checked before the send and returns 400
+                    (INVALID_TEMPLATE_BUTTON_PARAM) rather than a Meta rejection.
+                  items:
+                    type: object
+                    required: [index, subType, value]
+                    properties:
+                      index:
+                        type: integer
+                        minimum: 0
+                        maximum: 9
+                        description: 'Zero-based position of the button in the approved template''s buttons.'
+                      subType:
+                        type: string
+                        enum: [url, copy_code, flow]
+                        description: >-
+                          The button kind, which decides how the value is sent: copy_code sends it
+                          as the coupon_code payload, flow as the flow token, url as the dynamic
+                          suffix appended to the button's base URL.
+                      value:
+                        type: string
+                        minLength: 1
+                        description: 'The value to send (e.g. the Pix copy-and-paste code for a copy_code button).'
                 headerMedia:
                   type: object
                   description: >-
@@ -40508,6 +40553,85 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '404': { description: Ad not found }
 
+  /v1/ads/campaigns/{campaignId}/assets:
+    post:
+      x-resource-group: "ads"
+      operationId: attachCampaignAssets
+      tags: ["Ad Campaigns"]
+      x-platforms: ["google"]
+      summary: Attach extension assets to a Google Search campaign
+      description: |-
+        Attach sitelinks, callouts and/or structured snippets to an already-existing Google
+        Search campaign — the same builders POST /v1/ads/create uses, but without rebuilding
+        the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.
+
+        Google-only. Other platforms have no equivalent extension surface and return 501.
+
+        Approval status is Google-async; poll `asset.policy_summary` after review. Assets
+        stay in the account library even if the campaign is later deleted.
+      security:
+        - bearerAuth: []
+      parameters:
+        - { name: campaignId, in: path, required: true, schema: { type: string }, description: "Numeric Google platform campaign id." }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [accountId]
+              properties:
+                accountId: { type: string, description: "Zernio Google Ads SocialAccount id — resolves the customer id + refresh token." }
+                sitelinks:
+                  type: array
+                  minItems: 2
+                  maxItems: 20
+                  description: "See POST /v1/ads/create sitelinks — same shape."
+                  items:
+                    type: object
+                    required: [text, linkUrl]
+                    properties:
+                      text: { type: string, minLength: 1, maxLength: 25 }
+                      linkUrl: { type: string, format: uri }
+                      description1: { type: string, minLength: 1, maxLength: 35 }
+                      description2: { type: string, minLength: 1, maxLength: 35 }
+                callouts:
+                  type: array
+                  minItems: 1
+                  maxItems: 20
+                  items: { type: string, minLength: 1, maxLength: 25 }
+                structuredSnippets:
+                  type: array
+                  minItems: 1
+                  maxItems: 20
+                  items:
+                    type: object
+                    required: [header, values]
+                    properties:
+                      header:
+                        type: string
+                        enum: [Amenities, Brands, Courses, Degree programs, Destinations, Featured hotels, Insurance coverage, Models, Neighborhoods, Service catalog, Shows, Styles, Types]
+                      values:
+                        type: array
+                        minItems: 3
+                        maxItems: 10
+                        items: { type: string, minLength: 1, maxLength: 25 }
+      responses:
+        '201':
+          description: Assets attached
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  campaignId: { type: string }
+                  sitelinkAssetResourceNames: { type: array, items: { type: string } }
+                  calloutAssetResourceNames: { type: array, items: { type: string } }
+                  structuredSnippetAssetResourceNames: { type: array, items: { type: string } }
+        '400': { description: "Invalid input, or Google rejected the assets" }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '501': { description: Only supported on Google Ads }
+
   /v1/ads/campaigns/{campaignId}/analytics:
     get:
       x-resource-group: "ads"
@@ -43349,6 +43473,39 @@ paths:
                       linkUrl: { type: string, format: uri, description: "Final URL the sitelink navigates to." }
                       description1: { type: string, minLength: 1, maxLength: 35, description: "First description line under the link text (optional). 35-char cap." }
                       description2: { type: string, minLength: 1, maxLength: 35, description: "Second description line (optional; usually paired with description1)." }
+                callouts:
+                  type: array
+                  minItems: 1
+                  maxItems: 20
+                  items: { type: string, minLength: 1, maxLength: 25 }
+                  description: |
+                    Google Search only. Short callout texts (max 25 chars each) that appear as
+                    non-clickable annotations under the ad, e.g. "Free shipping", "24/7 support".
+                    Each becomes one Asset (`callout_asset`) plus a CampaignAsset link with
+                    field_type CALLOUT. Response's creative.callouts[] echoes each input plus
+                    its Google resourceName.
+                structuredSnippets:
+                  type: array
+                  minItems: 1
+                  maxItems: 20
+                  description: |
+                    Google Search only. Structured snippets — one header from Google's
+                    predefined list plus 3-10 values (max 25 chars each). Each becomes one
+                    Asset (`structured_snippet_asset`) plus a CampaignAsset link with
+                    field_type STRUCTURED_SNIPPET.
+                  items:
+                    type: object
+                    required: [header, values]
+                    properties:
+                      header:
+                        type: string
+                        enum: [Amenities, Brands, Courses, Degree programs, Destinations, Featured hotels, Insurance coverage, Models, Neighborhoods, Service catalog, Shows, Styles, Types]
+                        description: "One of Google's 13 predefined snippet headers."
+                      values:
+                        type: array
+                        minItems: 3
+                        maxItems: 10
+                        items: { type: string, minLength: 1, maxLength: 25 }
                 advantageAudience: { type: integer, enum: [0, 1], description: "Meta only. Controls the Advantage audience feature (targeting_automation). 0 = disabled (default), 1 = enabled. Meta Marketing API requires this field on all ad set creation requests." }
                 attributionSpec:
                   type: array

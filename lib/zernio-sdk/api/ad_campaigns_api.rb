@@ -19,6 +19,80 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Attach extension assets to a Google Search campaign
+    # Attach sitelinks, callouts and/or structured snippets to an already-existing Google Search campaign — the same builders POST /v1/ads/create uses, but without rebuilding the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.  Google-only. Other platforms have no equivalent extension surface and return 501.  Approval status is Google-async; poll `asset.policy_summary` after review. Assets stay in the account library even if the campaign is later deleted.
+    # @param campaign_id [String] Numeric Google platform campaign id.
+    # @param attach_campaign_assets_request [AttachCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AttachCampaignAssets201Response]
+    def attach_campaign_assets(campaign_id, attach_campaign_assets_request, opts = {})
+      data, _status_code, _headers = attach_campaign_assets_with_http_info(campaign_id, attach_campaign_assets_request, opts)
+      data
+    end
+
+    # Attach extension assets to a Google Search campaign
+    # Attach sitelinks, callouts and/or structured snippets to an already-existing Google Search campaign — the same builders POST /v1/ads/create uses, but without rebuilding the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.  Google-only. Other platforms have no equivalent extension surface and return 501.  Approval status is Google-async; poll &#x60;asset.policy_summary&#x60; after review. Assets stay in the account library even if the campaign is later deleted.
+    # @param campaign_id [String] Numeric Google platform campaign id.
+    # @param attach_campaign_assets_request [AttachCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AttachCampaignAssets201Response, Integer, Hash)>] AttachCampaignAssets201Response data, response status code and response headers
+    def attach_campaign_assets_with_http_info(campaign_id, attach_campaign_assets_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.attach_campaign_assets ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.attach_campaign_assets"
+      end
+      # verify the required parameter 'attach_campaign_assets_request' is set
+      if @api_client.config.client_side_validation && attach_campaign_assets_request.nil?
+        fail ArgumentError, "Missing the required parameter 'attach_campaign_assets_request' when calling AdCampaignsApi.attach_campaign_assets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/assets'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(attach_campaign_assets_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AttachCampaignAssets201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.attach_campaign_assets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#attach_campaign_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Boost post as ad
     # Creates a paid ad from an existing published post, keeping the post's engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send `adSetId` to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns `budget`, `schedule` and `targeting`, and sending any of those alongside `adSetId` is a 400 rather than a silent drop. `budget` is required only without `adSetId`.  `instagramAccountId`, `destinationType` and `adSetId` are Meta-only and return 400 on other platforms.  **Retries.** Boosts are NOT idempotent and can take minutes when Meta requires re-hosting an Instagram video, so do not retry on client timeout. Send an Idempotency-Key header to make retries safe: same key and body replays the original 201, and distinct keys always create distinct ads. Without the header, an identical request is treated as a retry: while one is in flight it returns 409, and within 10 minutes of a completed boost it returns the already-created ad instead of creating another. To intentionally duplicate an ad, send distinct Idempotency-Keys (or vary the body, e.g. the name). 
     # @param boost_post_request [BoostPostRequest] 

@@ -132,6 +132,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAudiencesApi* | [**list_ad_audiences**](docs/AdAudiencesApi.md#list_ad_audiences) | **GET** /v1/ads/audiences | List custom audiences
 *Zernio::AdAudiencesApi* | [**replace_ad_audience_companies**](docs/AdAudiencesApi.md#replace_ad_audience_companies) | **POST** /v1/ads/audiences/{audienceId}/companies | Replace audience companies
 *Zernio::AdAudiencesApi* | [**update_ad_audience**](docs/AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience
+*Zernio::AdCampaignsApi* | [**attach_campaign_assets**](docs/AdCampaignsApi.md#attach_campaign_assets) | **POST** /v1/ads/campaigns/{campaignId}/assets | Attach extension assets to a Google Search campaign
 *Zernio::AdCampaignsApi* | [**boost_post**](docs/AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
 *Zernio::AdCampaignsApi* | [**create_ad_campaign**](docs/AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign
@@ -736,6 +737,10 @@ Class | Method | HTTP request | Description
  - [Zernio::AssignGoogleBusinessLocation200Response](docs/AssignGoogleBusinessLocation200Response.md)
  - [Zernio::AssignGoogleBusinessLocation200ResponseAccount](docs/AssignGoogleBusinessLocation200ResponseAccount.md)
  - [Zernio::AssignGoogleBusinessLocationRequest](docs/AssignGoogleBusinessLocationRequest.md)
+ - [Zernio::AttachCampaignAssets201Response](docs/AttachCampaignAssets201Response.md)
+ - [Zernio::AttachCampaignAssetsRequest](docs/AttachCampaignAssetsRequest.md)
+ - [Zernio::AttachCampaignAssetsRequestSitelinksInner](docs/AttachCampaignAssetsRequestSitelinksInner.md)
+ - [Zernio::AttachCampaignAssetsRequestStructuredSnippetsInner](docs/AttachCampaignAssetsRequestStructuredSnippetsInner.md)
  - [Zernio::AttachNumberToSipTrunk200Response](docs/AttachNumberToSipTrunk200Response.md)
  - [Zernio::AttachNumberToSipTrunkRequest](docs/AttachNumberToSipTrunkRequest.md)
  - [Zernio::BatchGetGoogleBusinessReviews200Response](docs/BatchGetGoogleBusinessReviews200Response.md)
@@ -906,6 +911,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateInboxConversation429Response](docs/CreateInboxConversation429Response.md)
  - [Zernio::CreateInboxConversationRequest](docs/CreateInboxConversationRequest.md)
  - [Zernio::CreateInboxConversationRequestHeaderMedia](docs/CreateInboxConversationRequestHeaderMedia.md)
+ - [Zernio::CreateInboxConversationRequestTemplateButtonParamsInner](docs/CreateInboxConversationRequestTemplateButtonParamsInner.md)
  - [Zernio::CreateInviteToken201Response](docs/CreateInviteToken201Response.md)
  - [Zernio::CreateInviteTokenRequest](docs/CreateInviteTokenRequest.md)
  - [Zernio::CreateLeadForm200Response](docs/CreateLeadForm200Response.md)
@@ -971,6 +977,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
  - [Zernio::CreateStandaloneAdRequestSitelinksInner](docs/CreateStandaloneAdRequestSitelinksInner.md)
+ - [Zernio::CreateStandaloneAdRequestStructuredSnippetsInner](docs/CreateStandaloneAdRequestStructuredSnippetsInner.md)
  - [Zernio::CreateStandaloneAdRequestTracking](docs/CreateStandaloneAdRequestTracking.md)
  - [Zernio::CreateStandaloneAdRequestTranslationsInner](docs/CreateStandaloneAdRequestTranslationsInner.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
