@@ -25,6 +25,8 @@ module Zernio
 
     attr_accessor :body_params
 
+    attr_accessor :available_languages
+
     attr_accessor :buttons
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -35,6 +37,7 @@ module Zernio
         :'category' => :'category',
         :'body' => :'body',
         :'body_params' => :'body_params',
+        :'available_languages' => :'availableLanguages',
         :'buttons' => :'buttons'
       }
     end
@@ -57,6 +60,7 @@ module Zernio
         :'category' => :'String',
         :'body' => :'String',
         :'body_params' => :'Array<String>',
+        :'available_languages' => :'Array<String>',
         :'buttons' => :'Array<GetWhatsAppLibraryTemplate200ResponseTemplateButtonsInner>'
       }
     end
@@ -105,6 +109,12 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'available_languages')
+        if (value = attributes[:'available_languages']).is_a?(Array)
+          self.available_languages = value
+        end
+      end
+
       if attributes.key?(:'buttons')
         if (value = attributes[:'buttons']).is_a?(Array)
           self.buttons = value
@@ -137,6 +147,7 @@ module Zernio
           category == o.category &&
           body == o.body &&
           body_params == o.body_params &&
+          available_languages == o.available_languages &&
           buttons == o.buttons
     end
 
@@ -149,7 +160,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, language, category, body, body_params, buttons].hash
+      [name, language, category, body, body_params, available_languages, buttons].hash
     end
 
     # Builds the object from hash

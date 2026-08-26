@@ -57,6 +57,12 @@ describe Zernio::GetWhatsAppLibraryTemplate200ResponseTemplate do
     end
   end
 
+  describe 'test attribute "available_languages"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "buttons"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

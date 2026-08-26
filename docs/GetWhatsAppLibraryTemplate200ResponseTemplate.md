@@ -9,6 +9,7 @@
 | **category** | **String** |  | [optional] |
 | **body** | **String** |  | [optional] |
 | **body_params** | **Array&lt;String&gt;** |  | [optional] |
+| **available_languages** | **Array&lt;String&gt;** |  | [optional] |
 | **buttons** | [**Array&lt;GetWhatsAppLibraryTemplate200ResponseTemplateButtonsInner&gt;**](GetWhatsAppLibraryTemplate200ResponseTemplateButtonsInner.md) |  | [optional] |
 
 ## Example
@@ -22,6 +23,7 @@ instance = Zernio::GetWhatsAppLibraryTemplate200ResponseTemplate.new(
   category: null,
   body: null,
   body_params: null,
+  available_languages: null,
   buttons: null
 )
 ```

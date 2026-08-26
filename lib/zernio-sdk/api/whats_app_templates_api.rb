@@ -24,6 +24,7 @@ module Zernio
     # @param account_id [String] WhatsApp social account ID
     # @param name [String] Exact library template name
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field.
     # @return [GetWhatsAppLibraryTemplate200Response]
     def get_whats_app_library_template(account_id, name, opts = {})
       data, _status_code, _headers = get_whats_app_library_template_with_http_info(account_id, name, opts)
@@ -35,6 +36,7 @@ module Zernio
     # @param account_id [String] WhatsApp social account ID
     # @param name [String] Exact library template name
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field.
     # @return [Array<(GetWhatsAppLibraryTemplate200Response, Integer, Hash)>] GetWhatsAppLibraryTemplate200Response data, response status code and response headers
     def get_whats_app_library_template_with_http_info(account_id, name, opts = {})
       if @api_client.config.debugging
@@ -55,6 +57,7 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
       query_params[:'name'] = name
+      query_params[:'language'] = opts[:'language'] if !opts[:'language'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

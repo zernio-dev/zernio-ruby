@@ -38,6 +38,7 @@ describe 'WhatsAppTemplatesApi' do
   # @param account_id WhatsApp social account ID
   # @param name Exact library template name
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field.
   # @return [GetWhatsAppLibraryTemplate200Response]
   describe 'get_whats_app_library_template test' do
     it 'should work' do
