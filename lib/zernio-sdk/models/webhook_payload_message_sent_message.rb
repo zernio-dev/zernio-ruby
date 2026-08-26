@@ -41,8 +41,11 @@ module Zernio
 
     attr_accessor :is_read
 
-    # WhatsApp send origin. whatsapp_business_app when sent from the WhatsApp Business phone app on a Coexistence number; cloud_api when sent through Zernio (dashboard, API, or broadcasts). Absent on non-WhatsApp platforms. This is not the inbox metadata.source lineage field.
+    # WhatsApp send origin. whatsapp_business_app when sent from the WhatsApp Business phone app on a Coexistence number; cloud_api when sent through Zernio (dashboard, API, or broadcasts). Absent on non-WhatsApp platforms. Says where WhatsApp saw the send come from, not which Zernio surface produced it: read sentVia for that.
     attr_accessor :source
+
+    # Which Zernio surface produced this message: `human` (an operator in the Zernio inbox), `api` (a call to this API), `broadcast`, `sequence`, `workflow`, `comment_automation`, or `bulk-api` (POST /v1/whatsapp/bulk). Same vocabulary as the `source` filter on the inbox analytics endpoints, and the same value a later GET on this message returns.  Always present, and `null` whenever the lineage is unknown: a message sent from the platform's own app, and every message stored before this field shipped (2026-08). Existing messages are NOT backfilled, so treat `null` as \"unknown\", never as \"sent by a human\". 
+    attr_accessor :sent_via
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -79,7 +82,8 @@ module Zernio
         :'sender' => :'sender',
         :'sent_at' => :'sentAt',
         :'is_read' => :'isRead',
-        :'source' => :'source'
+        :'source' => :'source',
+        :'sent_via' => :'sentVia'
       }
     end
 
@@ -106,7 +110,8 @@ module Zernio
         :'sender' => :'WebhookPayloadMessageSentMessageSender',
         :'sent_at' => :'Time',
         :'is_read' => :'Boolean',
-        :'source' => :'String'
+        :'source' => :'String',
+        :'sent_via' => :'String'
       }
     end
 
@@ -114,6 +119,7 @@ module Zernio
     def self.openapi_nullable
       Set.new([
         :'text',
+        :'sent_via'
       ])
     end
 
@@ -198,6 +204,10 @@ module Zernio
       if attributes.key?(:'source')
         self.source = attributes[:'source']
       end
+
+      if attributes.key?(:'sent_via')
+        self.sent_via = attributes[:'sent_via']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -263,6 +273,8 @@ module Zernio
       return false if @is_read.nil?
       source_validator = EnumAttributeValidator.new('String', ["whatsapp_business_app", "cloud_api"])
       return false unless source_validator.valid?(@source)
+      sent_via_validator = EnumAttributeValidator.new('String', ["human", "api", "broadcast", "sequence", "workflow", "comment_automation", "bulk-api"])
+      return false unless sent_via_validator.valid?(@sent_via)
       true
     end
 
@@ -366,6 +378,16 @@ module Zernio
       @source = source
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sent_via Object to be assigned
+    def sent_via=(sent_via)
+      validator = EnumAttributeValidator.new('String', ["human", "api", "broadcast", "sequence", "workflow", "comment_automation", "bulk-api"])
+      unless validator.valid?(sent_via)
+        fail ArgumentError, "invalid value for \"sent_via\", must be one of #{validator.allowable_values}."
+      end
+      @sent_via = sent_via
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -381,7 +403,8 @@ module Zernio
           sender == o.sender &&
           sent_at == o.sent_at &&
           is_read == o.is_read &&
-          source == o.source
+          source == o.source &&
+          sent_via == o.sent_via
     end
 
     # @see the `==` method
@@ -393,7 +416,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, conversation_id, platform, platform_message_id, direction, text, attachments, sender, sent_at, is_read, source].hash
+      [id, conversation_id, platform, platform_message_id, direction, text, attachments, sender, sent_at, is_read, source, sent_via].hash
     end
 
     # Builds the object from hash

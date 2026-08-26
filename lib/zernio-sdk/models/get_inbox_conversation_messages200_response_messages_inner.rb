@@ -79,8 +79,11 @@ module Zernio
     # Emoji reactions on this message (WhatsApp / Telegram). At most one per party in a 1:1 thread.
     attr_accessor :reactions
 
-    # Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (platformMessageId this message replies to), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps `interactiveType` / `interactiveId`. 
+    # Platform-specific extras. Free-form, but commonly includes: `quotedMessageId` (platformMessageId this message replies to), `waInteractive` (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps `interactiveType` / `interactiveId`. It can also carry `source` (`whatsapp_business_app` / `coexistence_history` on a WhatsApp Coexistence number, `bulk-api` on a POST /v1/whatsapp/bulk send), which is where the message reached us from rather than who produced it: read `sentVia` for that. 
     attr_accessor :metadata
+
+    # Which Zernio surface produced this outgoing message: `human` (an operator in the Zernio inbox), `api` (a call to this API), `broadcast`, `sequence`, `workflow`, `comment_automation`, or `bulk-api` (POST /v1/whatsapp/bulk). Same vocabulary as the `source` filter on the inbox analytics endpoints.  Always present, and `null` whenever the lineage is unknown: every incoming message, any outgoing message sent from the platform's own app, and every message stored before this field shipped (2026-08). Existing messages are NOT backfilled, so treat `null` as \"unknown\", never as \"sent by a human\". 
+    attr_accessor :sent_via
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -133,7 +136,8 @@ module Zernio
         :'sent_at' => :'sentAt',
         :'delivery_error' => :'deliveryError',
         :'reactions' => :'reactions',
-        :'metadata' => :'metadata'
+        :'metadata' => :'metadata',
+        :'sent_via' => :'sentVia'
       }
     end
 
@@ -176,7 +180,8 @@ module Zernio
         :'sent_at' => :'Time',
         :'delivery_error' => :'GetInboxConversationMessages200ResponseMessagesInnerDeliveryError',
         :'reactions' => :'Array<GetInboxConversationMessages200ResponseMessagesInnerReactionsInner>',
-        :'metadata' => :'Hash<String, Object>'
+        :'metadata' => :'Hash<String, Object>',
+        :'sent_via' => :'String'
       }
     end
 
@@ -194,6 +199,7 @@ module Zernio
         :'delivered_at',
         :'read_at',
         :'sent_at',
+        :'sent_via'
       ])
     end
 
@@ -328,6 +334,10 @@ module Zernio
           self.metadata = value
         end
       end
+
+      if attributes.key?(:'sent_via')
+        self.sent_via = attributes[:'sent_via']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -348,6 +358,8 @@ module Zernio
       return false unless direction_validator.valid?(@direction)
       delivery_status_validator = EnumAttributeValidator.new('String', ["sent", "delivered", "read", "failed", "deleted"])
       return false unless delivery_status_validator.valid?(@delivery_status)
+      sent_via_validator = EnumAttributeValidator.new('String', ["human", "api", "broadcast", "sequence", "workflow", "comment_automation", "bulk-api"])
+      return false unless sent_via_validator.valid?(@sent_via)
       true
     end
 
@@ -381,6 +393,16 @@ module Zernio
       @delivery_status = delivery_status
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sent_via Object to be assigned
+    def sent_via=(sent_via)
+      validator = EnumAttributeValidator.new('String', ["human", "api", "broadcast", "sequence", "workflow", "comment_automation", "bulk-api"])
+      unless validator.valid?(sent_via)
+        fail ArgumentError, "invalid value for \"sent_via\", must be one of #{validator.allowable_values}."
+      end
+      @sent_via = sent_via
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -412,7 +434,8 @@ module Zernio
           sent_at == o.sent_at &&
           delivery_error == o.delivery_error &&
           reactions == o.reactions &&
-          metadata == o.metadata
+          metadata == o.metadata &&
+          sent_via == o.sent_via
     end
 
     # @see the `==` method
@@ -424,7 +447,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention, is_edited, edited_at, edit_count, edit_history, is_deleted, deleted_at, delivery_status, delivered_at, read_at, sent_at, delivery_error, reactions, metadata].hash
+      [id, conversation_id, account_id, platform, message, sender_id, sender_name, sender_verified_type, direction, created_at, attachments, subject, story_reply, is_story_mention, is_edited, edited_at, edit_count, edit_history, is_deleted, deleted_at, delivery_status, delivered_at, read_at, sent_at, delivery_error, reactions, metadata, sent_via].hash
     end
 
     # Builds the object from hash

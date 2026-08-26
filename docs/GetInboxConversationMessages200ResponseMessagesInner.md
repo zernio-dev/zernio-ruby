@@ -30,7 +30,8 @@
 | **sent_at** | **Time** | Original send time for outgoing messages (used for Messenger watermark queries). | [optional] |
 | **delivery_error** | [**GetInboxConversationMessages200ResponseMessagesInnerDeliveryError**](GetInboxConversationMessages200ResponseMessagesInnerDeliveryError.md) |  | [optional] |
 | **reactions** | [**Array&lt;GetInboxConversationMessages200ResponseMessagesInnerReactionsInner&gt;**](GetInboxConversationMessages200ResponseMessagesInnerReactionsInner.md) | Emoji reactions on this message (WhatsApp / Telegram). At most one per party in a 1:1 thread. | [optional] |
-| **metadata** | **Hash&lt;String, Object&gt;** | Platform-specific extras. Free-form, but commonly includes: &#x60;quotedMessageId&#x60; (platformMessageId this message replies to), &#x60;waInteractive&#x60; (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps &#x60;interactiveType&#x60; / &#x60;interactiveId&#x60;.  | [optional] |
+| **metadata** | **Hash&lt;String, Object&gt;** | Platform-specific extras. Free-form, but commonly includes: &#x60;quotedMessageId&#x60; (platformMessageId this message replies to), &#x60;waInteractive&#x60; (a compact descriptor of WhatsApp interactive content sent: buttons / list / cta_url / flow / location_request), and for inbound interactive taps &#x60;interactiveType&#x60; / &#x60;interactiveId&#x60;. It can also carry &#x60;source&#x60; (&#x60;whatsapp_business_app&#x60; / &#x60;coexistence_history&#x60; on a WhatsApp Coexistence number, &#x60;bulk-api&#x60; on a POST /v1/whatsapp/bulk send), which is where the message reached us from rather than who produced it: read &#x60;sentVia&#x60; for that.  | [optional] |
+| **sent_via** | **String** | Which Zernio surface produced this outgoing message: &#x60;human&#x60; (an operator in the Zernio inbox), &#x60;api&#x60; (a call to this API), &#x60;broadcast&#x60;, &#x60;sequence&#x60;, &#x60;workflow&#x60;, &#x60;comment_automation&#x60;, or &#x60;bulk-api&#x60; (POST /v1/whatsapp/bulk). Same vocabulary as the &#x60;source&#x60; filter on the inbox analytics endpoints.  Always present, and &#x60;null&#x60; whenever the lineage is unknown: every incoming message, any outgoing message sent from the platform&#39;s own app, and every message stored before this field shipped (2026-08). Existing messages are NOT backfilled, so treat &#x60;null&#x60; as \&quot;unknown\&quot;, never as \&quot;sent by a human\&quot;.  | [optional] |
 
 ## Example
 
@@ -64,7 +65,8 @@ instance = Zernio::GetInboxConversationMessages200ResponseMessagesInner.new(
   sent_at: null,
   delivery_error: null,
   reactions: null,
-  metadata: null
+  metadata: null,
+  sent_via: null
 )
 ```
 

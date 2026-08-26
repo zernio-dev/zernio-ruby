@@ -40,6 +40,9 @@ module Zernio
 
     attr_accessor :is_read
 
+    # Which Zernio surface produced the message. Always present and always `null` on this event, since nobody on our side produced an inbound message; it is only informative on `message.sent`, which documents the vocabulary. 
+    attr_accessor :sent_via
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -74,7 +77,8 @@ module Zernio
         :'attachments' => :'attachments',
         :'sender' => :'sender',
         :'sent_at' => :'sentAt',
-        :'is_read' => :'isRead'
+        :'is_read' => :'isRead',
+        :'sent_via' => :'sentVia'
       }
     end
 
@@ -100,7 +104,8 @@ module Zernio
         :'attachments' => :'Array<WebhookPayloadMessageMessageAttachmentsInner>',
         :'sender' => :'WebhookPayloadMessageMessageSender',
         :'sent_at' => :'Time',
-        :'is_read' => :'Boolean'
+        :'is_read' => :'Boolean',
+        :'sent_via' => :'String'
       }
     end
 
@@ -108,6 +113,7 @@ module Zernio
     def self.openapi_nullable
       Set.new([
         :'text',
+        :'sent_via'
       ])
     end
 
@@ -188,6 +194,10 @@ module Zernio
       else
         self.is_read = nil
       end
+
+      if attributes.key?(:'sent_via')
+        self.sent_via = attributes[:'sent_via']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -251,6 +261,8 @@ module Zernio
       return false if @sender.nil?
       return false if @sent_at.nil?
       return false if @is_read.nil?
+      sent_via_validator = EnumAttributeValidator.new('String', ["human", "api", "broadcast", "sequence", "workflow", "comment_automation", "bulk-api"])
+      return false unless sent_via_validator.valid?(@sent_via)
       true
     end
 
@@ -344,6 +356,16 @@ module Zernio
       @is_read = is_read
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sent_via Object to be assigned
+    def sent_via=(sent_via)
+      validator = EnumAttributeValidator.new('String', ["human", "api", "broadcast", "sequence", "workflow", "comment_automation", "bulk-api"])
+      unless validator.valid?(sent_via)
+        fail ArgumentError, "invalid value for \"sent_via\", must be one of #{validator.allowable_values}."
+      end
+      @sent_via = sent_via
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -358,7 +380,8 @@ module Zernio
           attachments == o.attachments &&
           sender == o.sender &&
           sent_at == o.sent_at &&
-          is_read == o.is_read
+          is_read == o.is_read &&
+          sent_via == o.sent_via
     end
 
     # @see the `==` method
@@ -370,7 +393,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, conversation_id, platform, platform_message_id, direction, text, attachments, sender, sent_at, is_read].hash
+      [id, conversation_id, platform, platform_message_id, direction, text, attachments, sender, sent_at, is_read, sent_via].hash
     end
 
     # Builds the object from hash

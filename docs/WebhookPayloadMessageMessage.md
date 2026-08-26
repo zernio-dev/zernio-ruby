@@ -14,6 +14,7 @@
 | **sender** | [**WebhookPayloadMessageMessageSender**](WebhookPayloadMessageMessageSender.md) |  |  |
 | **sent_at** | **Time** | When the message was sent, as reported by the platform and passed through unmodified. Full ISO 8601 date-time: Instagram and Facebook carry millisecond precision, while some platforms (for example WhatsApp and Telegram) report whole seconds. Use this field as the chronological ordering key. If two messages share the same value, fetch the conversation messages with sortOrder&#x3D;desc for the deterministic order. |  |
 | **is_read** | **Boolean** |  |  |
+| **sent_via** | **String** | Which Zernio surface produced the message. Always present and always &#x60;null&#x60; on this event, since nobody on our side produced an inbound message; it is only informative on &#x60;message.sent&#x60;, which documents the vocabulary.  | [optional] |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = Zernio::WebhookPayloadMessageMessage.new(
   attachments: null,
   sender: null,
   sent_at: null,
-  is_read: null
+  is_read: null,
+  sent_via: null
 )
 ```
 
