@@ -9,6 +9,7 @@
 | **message** | [**WebhookPayloadMessageSentMessage**](WebhookPayloadMessageSentMessage.md) |  |  |
 | **conversation** | [**InboxWebhookConversation**](InboxWebhookConversation.md) |  |  |
 | **account** | [**InboxWebhookAccount**](InboxWebhookAccount.md) |  |  |
+| **metadata** | [**WebhookPayloadMessageSentMetadata**](WebhookPayloadMessageSentMetadata.md) |  | [optional] |
 | **timestamp** | **Time** | UTC time at which Zernio generated this event (set once when the event payload is built, before delivery is queued). Retries and redeliveries keep the original value, so it reflects the event, not the delivery attempt. |  |
 
 ## Example
@@ -22,6 +23,7 @@ instance = Zernio::WebhookPayloadMessageSent.new(
   message: null,
   conversation: null,
   account: null,
+  metadata: null,
   timestamp: null
 )
 ```

@@ -14,35 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListUsers200ResponseUsersInner < ApiModelBase
-    attr_accessor :_id
+  # Platform-specific context for the sent message. The key is present only when the send carried some context, and absent otherwise: it is never null and never an empty object.
+  class WebhookPayloadMessageSentMetadata < ApiModelBase
+    # platformMessageId of the message this send is a quote-reply to. Set when the reply was sent through Zernio with `replyTo` on the inbox send API (WhatsApp and Telegram), and when the operator replied from the native WhatsApp Business, Instagram or Messenger app. WhatsApp API sends carry it on the event fired from the delivery status, so it arrives on the same `message.sent` as any other WhatsApp send. 
+    attr_accessor :quoted_message_id
 
-    attr_accessor :name
-
-    attr_accessor :email
-
-    attr_accessor :role
-
-    attr_accessor :is_root
-
-    attr_accessor :profile_access
-
-    attr_accessor :created_at
-
-    # Last sign-in, stamped at most once an hour, so it is accurate to within an hour rather than to the exact session. Omitted for members with no recorded sign-in since the field shipped, which does not mean they never signed in.
-    attr_accessor :last_login_at
+    # Slack only. Parent thread ts of the sent message. Pass it back as `replyTo` on the inbox send API to keep replying inside the thread. 
+    attr_accessor :thread_ts
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'_id' => :'_id',
-        :'name' => :'name',
-        :'email' => :'email',
-        :'role' => :'role',
-        :'is_root' => :'isRoot',
-        :'profile_access' => :'profileAccess',
-        :'created_at' => :'createdAt',
-        :'last_login_at' => :'lastLoginAt'
+        :'quoted_message_id' => :'quotedMessageId',
+        :'thread_ts' => :'threadTs'
       }
     end
 
@@ -59,14 +43,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'_id' => :'String',
-        :'name' => :'String',
-        :'email' => :'String',
-        :'role' => :'String',
-        :'is_root' => :'Boolean',
-        :'profile_access' => :'Array<String>',
-        :'created_at' => :'Time',
-        :'last_login_at' => :'Time'
+        :'quoted_message_id' => :'String',
+        :'thread_ts' => :'String'
       }
     end
 
@@ -80,50 +58,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListUsers200ResponseUsersInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::WebhookPayloadMessageSentMetadata` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListUsers200ResponseUsersInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::WebhookPayloadMessageSentMetadata`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'_id')
-        self._id = attributes[:'_id']
+      if attributes.key?(:'quoted_message_id')
+        self.quoted_message_id = attributes[:'quoted_message_id']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.key?(:'email')
-        self.email = attributes[:'email']
-      end
-
-      if attributes.key?(:'role')
-        self.role = attributes[:'role']
-      end
-
-      if attributes.key?(:'is_root')
-        self.is_root = attributes[:'is_root']
-      end
-
-      if attributes.key?(:'profile_access')
-        if (value = attributes[:'profile_access']).is_a?(Array)
-          self.profile_access = value
-        end
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'last_login_at')
-        self.last_login_at = attributes[:'last_login_at']
+      if attributes.key?(:'thread_ts')
+        self.thread_ts = attributes[:'thread_ts']
       end
     end
 
@@ -147,14 +99,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          _id == o._id &&
-          name == o.name &&
-          email == o.email &&
-          role == o.role &&
-          is_root == o.is_root &&
-          profile_access == o.profile_access &&
-          created_at == o.created_at &&
-          last_login_at == o.last_login_at
+          quoted_message_id == o.quoted_message_id &&
+          thread_ts == o.thread_ts
     end
 
     # @see the `==` method
@@ -166,7 +112,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [_id, name, email, role, is_root, profile_access, created_at, last_login_at].hash
+      [quoted_message_id, thread_ts].hash
     end
 
     # Builds the object from hash

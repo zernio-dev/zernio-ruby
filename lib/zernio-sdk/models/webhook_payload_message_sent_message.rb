@@ -21,6 +21,7 @@ module Zernio
     # Internal conversation ID
     attr_accessor :conversation_id
 
+    # Every platform whose outgoing messages Zernio observes. sms is absent on purpose: its carrier receipts update delivery status and never raise message.sent.
     attr_accessor :platform
 
     # Platform's message ID
@@ -250,7 +251,7 @@ module Zernio
       return false if @id.nil?
       return false if @conversation_id.nil?
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "whatsapp"])
+      platform_validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "whatsapp", "twitter", "reddit", "bluesky", "slack"])
       return false unless platform_validator.valid?(@platform)
       return false if @platform_message_id.nil?
       return false if @direction.nil?
@@ -288,7 +289,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "whatsapp"])
+      validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "whatsapp", "twitter", "reddit", "bluesky", "slack"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end

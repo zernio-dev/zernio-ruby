@@ -1699,6 +1699,7 @@ docs/WebhookPayloadMessageSent.md
 docs/WebhookPayloadMessageSentMessage.md
 docs/WebhookPayloadMessageSentMessageAttachmentsInner.md
 docs/WebhookPayloadMessageSentMessageSender.md
+docs/WebhookPayloadMessageSentMetadata.md
 docs/WebhookPayloadPost.md
 docs/WebhookPayloadPostPlatform.md
 docs/WebhookPayloadPostPlatformAccount.md
@@ -3501,6 +3502,7 @@ lib/zernio-sdk/models/webhook_payload_message_sent.rb
 lib/zernio-sdk/models/webhook_payload_message_sent_message.rb
 lib/zernio-sdk/models/webhook_payload_message_sent_message_attachments_inner.rb
 lib/zernio-sdk/models/webhook_payload_message_sent_message_sender.rb
+lib/zernio-sdk/models/webhook_payload_message_sent_metadata.rb
 lib/zernio-sdk/models/webhook_payload_post.rb
 lib/zernio-sdk/models/webhook_payload_post_platform.rb
 lib/zernio-sdk/models/webhook_payload_post_platform_account.rb
@@ -5286,6 +5288,7 @@ spec/models/webhook_payload_message_metadata_unsupported_spec.rb
 spec/models/webhook_payload_message_sent_message_attachments_inner_spec.rb
 spec/models/webhook_payload_message_sent_message_sender_spec.rb
 spec/models/webhook_payload_message_sent_message_spec.rb
+spec/models/webhook_payload_message_sent_metadata_spec.rb
 spec/models/webhook_payload_message_sent_spec.rb
 spec/models/webhook_payload_message_spec.rb
 spec/models/webhook_payload_post_platform_account_spec.rb

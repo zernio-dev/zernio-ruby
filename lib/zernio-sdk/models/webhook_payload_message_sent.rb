@@ -27,6 +27,8 @@ module Zernio
 
     attr_accessor :account
 
+    attr_accessor :metadata
+
     # UTC time at which Zernio generated this event (set once when the event payload is built, before delivery is queued). Retries and redeliveries keep the original value, so it reflects the event, not the delivery attempt.
     attr_accessor :timestamp
 
@@ -60,6 +62,7 @@ module Zernio
         :'message' => :'message',
         :'conversation' => :'conversation',
         :'account' => :'account',
+        :'metadata' => :'metadata',
         :'timestamp' => :'timestamp'
       }
     end
@@ -82,6 +85,7 @@ module Zernio
         :'message' => :'WebhookPayloadMessageSentMessage',
         :'conversation' => :'InboxWebhookConversation',
         :'account' => :'InboxWebhookAccount',
+        :'metadata' => :'WebhookPayloadMessageSentMetadata',
         :'timestamp' => :'Time'
       }
     end
@@ -136,6 +140,10 @@ module Zernio
         self.account = attributes[:'account']
       else
         self.account = nil
+      end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
 
       if attributes.key?(:'timestamp')
@@ -262,6 +270,7 @@ module Zernio
           message == o.message &&
           conversation == o.conversation &&
           account == o.account &&
+          metadata == o.metadata &&
           timestamp == o.timestamp
     end
 
@@ -274,7 +283,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, event, message, conversation, account, timestamp].hash
+      [id, event, message, conversation, account, metadata, timestamp].hash
     end
 
     # Builds the object from hash

@@ -2301,6 +2301,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadMessageSentMessage](docs/WebhookPayloadMessageSentMessage.md)
  - [Zernio::WebhookPayloadMessageSentMessageAttachmentsInner](docs/WebhookPayloadMessageSentMessageAttachmentsInner.md)
  - [Zernio::WebhookPayloadMessageSentMessageSender](docs/WebhookPayloadMessageSentMessageSender.md)
+ - [Zernio::WebhookPayloadMessageSentMetadata](docs/WebhookPayloadMessageSentMetadata.md)
  - [Zernio::WebhookPayloadPost](docs/WebhookPayloadPost.md)
  - [Zernio::WebhookPayloadPostPlatform](docs/WebhookPayloadPostPlatform.md)
  - [Zernio::WebhookPayloadPostPlatformAccount](docs/WebhookPayloadPostPlatformAccount.md)
