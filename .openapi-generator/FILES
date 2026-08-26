@@ -54,6 +54,7 @@ docs/AddConversionAssociations200Response.md
 docs/AddConversionAssociations200ResponseFailedInner.md
 docs/AddConversionAssociationsRequest.md
 docs/AddDiscordMemberRole200Response.md
+docs/AddMessageReaction200Response.md
 docs/AddMessageReactionRequest.md
 docs/AddTrackingTagSharedAccount201Response.md
 docs/AddTrackingTagSharedAccountRequest.md
@@ -1193,6 +1194,7 @@ docs/RemediatePhoneNumberRequestDocumentsInnerOneOf.md
 docs/RemoveBookmark200Response.md
 docs/RemoveConversionAssociations200Response.md
 docs/RemoveDiscordMemberRole200Response.md
+docs/RemoveMessageReaction200Response.md
 docs/RemoveWhatsAppGroupParticipantsRequest.md
 docs/ReplaceAdAudienceCompanies200Response.md
 docs/ReplaceAdAudienceCompaniesRequest.md
@@ -1902,6 +1904,7 @@ lib/zernio-sdk/models/add_conversion_associations200_response.rb
 lib/zernio-sdk/models/add_conversion_associations200_response_failed_inner.rb
 lib/zernio-sdk/models/add_conversion_associations_request.rb
 lib/zernio-sdk/models/add_discord_member_role200_response.rb
+lib/zernio-sdk/models/add_message_reaction200_response.rb
 lib/zernio-sdk/models/add_message_reaction_request.rb
 lib/zernio-sdk/models/add_tracking_tag_shared_account201_response.rb
 lib/zernio-sdk/models/add_tracking_tag_shared_account_request.rb
@@ -3005,6 +3008,7 @@ lib/zernio-sdk/models/remediate_phone_number_request_documents_inner_one_of.rb
 lib/zernio-sdk/models/remove_bookmark200_response.rb
 lib/zernio-sdk/models/remove_conversion_associations200_response.rb
 lib/zernio-sdk/models/remove_discord_member_role200_response.rb
+lib/zernio-sdk/models/remove_message_reaction200_response.rb
 lib/zernio-sdk/models/remove_whats_app_group_participants_request.rb
 lib/zernio-sdk/models/replace_ad_audience_companies200_response.rb
 lib/zernio-sdk/models/replace_ad_audience_companies_request.rb
@@ -3688,6 +3692,7 @@ spec/models/add_conversion_associations200_response_failed_inner_spec.rb
 spec/models/add_conversion_associations200_response_spec.rb
 spec/models/add_conversion_associations_request_spec.rb
 spec/models/add_discord_member_role200_response_spec.rb
+spec/models/add_message_reaction200_response_spec.rb
 spec/models/add_message_reaction_request_spec.rb
 spec/models/add_tracking_tag_shared_account201_response_spec.rb
 spec/models/add_tracking_tag_shared_account_request_spec.rb
@@ -4791,6 +4796,7 @@ spec/models/remediate_phone_number_request_spec.rb
 spec/models/remove_bookmark200_response_spec.rb
 spec/models/remove_conversion_associations200_response_spec.rb
 spec/models/remove_discord_member_role200_response_spec.rb
+spec/models/remove_message_reaction200_response_spec.rb
 spec/models/remove_whats_app_group_participants_request_spec.rb
 spec/models/replace_ad_audience_companies200_response_spec.rb
 spec/models/replace_ad_audience_companies_request_companies_inner_spec.rb

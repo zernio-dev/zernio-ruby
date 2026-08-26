@@ -23,7 +23,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## add_message_reaction
 
-> <UpdateYoutubeDefaultPlaylist200Response> add_message_reaction(conversation_id, message_id, add_message_reaction_request)
+> <AddMessageReaction200Response> add_message_reaction(conversation_id, message_id, add_message_reaction_request)
 
 Add reaction
 
@@ -42,7 +42,7 @@ end
 
 api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID
-message_id = 'message_id_example' # String | The platform message ID to react to
+message_id = 'message_id_example' # String | The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook)
 add_message_reaction_request = Zernio::AddMessageReactionRequest.new({account_id: 'account_id_example', emoji: '👍'}) # AddMessageReactionRequest | 
 
 begin
@@ -58,7 +58,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request)
+> <Array(<AddMessageReaction200Response>, Integer, Hash)> add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request)
 
 ```ruby
 begin
@@ -66,7 +66,7 @@ begin
   data, status_code, headers = api_instance.add_message_reaction_with_http_info(conversation_id, message_id, add_message_reaction_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+  p data # => <AddMessageReaction200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->add_message_reaction_with_http_info: #{e}"
 end
@@ -77,12 +77,12 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **conversation_id** | **String** | The conversation ID |  |
-| **message_id** | **String** | The platform message ID to react to |  |
+| **message_id** | **String** | The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) |  |
 | **add_message_reaction_request** | [**AddMessageReactionRequest**](AddMessageReactionRequest.md) |  |  |
 
 ### Return type
 
-[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+[**AddMessageReaction200Response**](AddMessageReaction200Response.md)
 
 ### Authorization
 
@@ -694,7 +694,7 @@ end
 
 ## remove_message_reaction
 
-> <UpdateYoutubeDefaultPlaylist200Response> remove_message_reaction(conversation_id, message_id, account_id)
+> <RemoveMessageReaction200Response> remove_message_reaction(conversation_id, message_id, account_id)
 
 Remove reaction
 
@@ -713,7 +713,7 @@ end
 
 api_instance = Zernio::MessagesApi.new
 conversation_id = 'conversation_id_example' # String | The conversation ID
-message_id = 'message_id_example' # String | The platform message ID
+message_id = 'message_id_example' # String | The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook)
 account_id = 'account_id_example' # String | Social account ID
 
 begin
@@ -729,7 +729,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> remove_message_reaction_with_http_info(conversation_id, message_id, account_id)
+> <Array(<RemoveMessageReaction200Response>, Integer, Hash)> remove_message_reaction_with_http_info(conversation_id, message_id, account_id)
 
 ```ruby
 begin
@@ -737,7 +737,7 @@ begin
   data, status_code, headers = api_instance.remove_message_reaction_with_http_info(conversation_id, message_id, account_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+  p data # => <RemoveMessageReaction200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling MessagesApi->remove_message_reaction_with_http_info: #{e}"
 end
@@ -748,12 +748,12 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **conversation_id** | **String** | The conversation ID |  |
-| **message_id** | **String** | The platform message ID |  |
+| **message_id** | **String** | The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook) |  |
 | **account_id** | **String** | Social account ID |  |
 
 ### Return type
 
-[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
+[**RemoveMessageReaction200Response**](RemoveMessageReaction200Response.md)
 
 ### Authorization
 

@@ -36,10 +36,10 @@ describe 'MessagesApi' do
   # Add reaction
   # Add an emoji reaction to a message. Platform support: - Telegram: Supports a subset of Unicode emoji reactions - WhatsApp: Supports any standard emoji (one reaction per message per sender) - Instagram and Facebook Messenger: Any standard emoji, subject to Meta&#39;s 24h messaging window - Slack: The emoji must have a Slack name (e.g. &#x60;:thumbsup:&#x60;); unnamed characters return 400 - All others: Returns 400 (not supported) 
   # @param conversation_id The conversation ID
-  # @param message_id The platform message ID to react to
+  # @param message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook)
   # @param add_message_reaction_request 
   # @param [Hash] opts the optional parameters
-  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  # @return [AddMessageReaction200Response]
   describe 'add_message_reaction test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
@@ -166,10 +166,10 @@ describe 'MessagesApi' do
   # Remove reaction
   # Remove a reaction from a message. Platform support: - Telegram: Send empty reaction array to clear - WhatsApp: Send empty emoji to remove - Instagram and Facebook Messenger: Sends Meta&#39;s &#x60;unreact&#x60; action; the emoji does not need to be repeated - Slack: Removes the reaction we previously sent on that message - All others: Returns 400 (not supported) 
   # @param conversation_id The conversation ID
-  # @param message_id The platform message ID
+  # @param message_id The platform message ID (as returned by GET /messages) or the Zernio message ID (as returned by the reaction webhook)
   # @param account_id Social account ID
   # @param [Hash] opts the optional parameters
-  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  # @return [RemoveMessageReaction200Response]
   describe 'remove_message_reaction test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

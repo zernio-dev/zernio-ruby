@@ -33,8 +33,14 @@ module Zernio
 
     attr_accessor :thank_you_website_url
 
+    # Adds a 'Continue in Messenger' option to the thank-you page (Meta thank_you_page.enable_messenger), so the lead can carry on chatting with the Page. Set thankYouButtonType to MESSAGE_BUSINESS or P2B_MESSENGER to make the chat the primary button.
+    attr_accessor :thank_you_enable_messenger
+
     # Set true for a higher-intent form (adds a review step before submit).
     attr_accessor :is_optimized_for_quality
+
+    # Requires the lead to verify their phone number over SMS before the form submits (Meta is_phone_sms_verify_enabled). Only meaningful on a form with a PHONE question. Meta can restrict this parameter to apps holding a capability: when it does, the create fails with a 422 naming platformSpecificData.isPhoneSmsVerifyEnabled, and the toggle then has to be set in Meta's form builder.
+    attr_accessor :is_phone_sms_verify_enabled
 
     attr_accessor :block_display_for_non_targeted_viewer
 
@@ -54,7 +60,9 @@ module Zernio
         :'thank_you_button_text' => :'thankYouButtonText',
         :'thank_you_button_type' => :'thankYouButtonType',
         :'thank_you_website_url' => :'thankYouWebsiteUrl',
+        :'thank_you_enable_messenger' => :'thankYouEnableMessenger',
         :'is_optimized_for_quality' => :'isOptimizedForQuality',
+        :'is_phone_sms_verify_enabled' => :'isPhoneSmsVerifyEnabled',
         :'block_display_for_non_targeted_viewer' => :'blockDisplayForNonTargetedViewer',
         :'question_page_custom_headline' => :'questionPageCustomHeadline',
         :'context_card' => :'contextCard'
@@ -83,7 +91,9 @@ module Zernio
         :'thank_you_button_text' => :'String',
         :'thank_you_button_type' => :'String',
         :'thank_you_website_url' => :'String',
+        :'thank_you_enable_messenger' => :'Boolean',
         :'is_optimized_for_quality' => :'Boolean',
+        :'is_phone_sms_verify_enabled' => :'Boolean',
         :'block_display_for_non_targeted_viewer' => :'Boolean',
         :'question_page_custom_headline' => :'String',
         :'context_card' => :'MetaLeadFormPlatformDataContextCard'
@@ -152,8 +162,20 @@ module Zernio
         self.thank_you_website_url = attributes[:'thank_you_website_url']
       end
 
+      if attributes.key?(:'thank_you_enable_messenger')
+        self.thank_you_enable_messenger = attributes[:'thank_you_enable_messenger']
+      else
+        self.thank_you_enable_messenger = false
+      end
+
       if attributes.key?(:'is_optimized_for_quality')
         self.is_optimized_for_quality = attributes[:'is_optimized_for_quality']
+      end
+
+      if attributes.key?(:'is_phone_sms_verify_enabled')
+        self.is_phone_sms_verify_enabled = attributes[:'is_phone_sms_verify_enabled']
+      else
+        self.is_phone_sms_verify_enabled = false
       end
 
       if attributes.key?(:'block_display_for_non_targeted_viewer')
@@ -241,7 +263,9 @@ module Zernio
           thank_you_button_text == o.thank_you_button_text &&
           thank_you_button_type == o.thank_you_button_type &&
           thank_you_website_url == o.thank_you_website_url &&
+          thank_you_enable_messenger == o.thank_you_enable_messenger &&
           is_optimized_for_quality == o.is_optimized_for_quality &&
+          is_phone_sms_verify_enabled == o.is_phone_sms_verify_enabled &&
           block_display_for_non_targeted_viewer == o.block_display_for_non_targeted_viewer &&
           question_page_custom_headline == o.question_page_custom_headline &&
           context_card == o.context_card
@@ -256,7 +280,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [questions, privacy_policy_link_text, follow_up_action_url, locale, thank_you_title, thank_you_body, thank_you_button_text, thank_you_button_type, thank_you_website_url, is_optimized_for_quality, block_display_for_non_targeted_viewer, question_page_custom_headline, context_card].hash
+      [questions, privacy_policy_link_text, follow_up_action_url, locale, thank_you_title, thank_you_body, thank_you_button_text, thank_you_button_type, thank_you_website_url, thank_you_enable_messenger, is_optimized_for_quality, is_phone_sms_verify_enabled, block_display_for_non_targeted_viewer, question_page_custom_headline, context_card].hash
     end
 
     # Builds the object from hash

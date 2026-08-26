@@ -81,7 +81,19 @@ describe Zernio::MetaLeadFormPlatformData do
     end
   end
 
+  describe 'test attribute "thank_you_enable_messenger"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "is_optimized_for_quality"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "is_phone_sms_verify_enabled"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
