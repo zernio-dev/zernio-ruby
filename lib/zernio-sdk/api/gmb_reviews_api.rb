@@ -162,6 +162,78 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get a review
+    # Returns one Google Business review, in the same shape as the entries of GET /v1/accounts/{accountId}/gmb-reviews. The review is read from the account's selected location unless locationId overrides it, and Google returns 404 for a review id that belongs to another location. Read the review before replying if a human may have answered it already: replies are overwritten in place and Google keeps no history. 
+    # @param account_id [String] The Zernio account ID (from /v1/accounts)
+    # @param review_id [String] The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to read the review from. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
+    # @return [GetGoogleBusinessReview200Response]
+    def get_google_business_review(account_id, review_id, opts = {})
+      data, _status_code, _headers = get_google_business_review_with_http_info(account_id, review_id, opts)
+      data
+    end
+
+    # Get a review
+    # Returns one Google Business review, in the same shape as the entries of GET /v1/accounts/{accountId}/gmb-reviews. The review is read from the account&#39;s selected location unless locationId overrides it, and Google returns 404 for a review id that belongs to another location. Read the review before replying if a human may have answered it already: replies are overwritten in place and Google keeps no history. 
+    # @param account_id [String] The Zernio account ID (from /v1/accounts)
+    # @param review_id [String] The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :location_id Override which location to read the review from. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
+    # @return [Array<(GetGoogleBusinessReview200Response, Integer, Hash)>] GetGoogleBusinessReview200Response data, response status code and response headers
+    def get_google_business_review_with_http_info(account_id, review_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: GMBReviewsApi.get_google_business_review ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling GMBReviewsApi.get_google_business_review"
+      end
+      # verify the required parameter 'review_id' is set
+      if @api_client.config.client_side_validation && review_id.nil?
+        fail ArgumentError, "Missing the required parameter 'review_id' when calling GMBReviewsApi.get_google_business_review"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/gmb-reviews/{reviewId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'reviewId' + '}', CGI.escape(review_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'locationId'] = opts[:'location_id'] if !opts[:'location_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetGoogleBusinessReview200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"GMBReviewsApi.get_google_business_review",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: GMBReviewsApi#get_google_business_review\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get reviews
     # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)

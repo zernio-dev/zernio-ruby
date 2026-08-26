@@ -101,7 +101,7 @@ module Zernio
         :'has_reply' => :'Boolean',
         :'has_photos' => :'Boolean',
         :'photo_count' => :'Integer',
-        :'photos' => :'Array<GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner>',
+        :'photos' => :'Array<ListInboxReviews200ResponseDataInnerPhotosInner>',
         :'reply' => :'ListInboxReviews200ResponseDataInnerReply',
         :'review_url' => :'String'
       }

@@ -14,34 +14,17 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetGoogleBusinessReviews200Response < ApiModelBase
-    attr_accessor :success
+  class GoogleBusinessReviewReviewReply < ApiModelBase
+    # Business owner reply
+    attr_accessor :comment
 
-    attr_accessor :account_id
-
-    attr_accessor :location_id
-
-    attr_accessor :reviews
-
-    # Overall average rating
-    attr_accessor :average_rating
-
-    # Total number of reviews
-    attr_accessor :total_review_count
-
-    # Token for next page
-    attr_accessor :next_page_token
+    attr_accessor :update_time
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'success' => :'success',
-        :'account_id' => :'accountId',
-        :'location_id' => :'locationId',
-        :'reviews' => :'reviews',
-        :'average_rating' => :'averageRating',
-        :'total_review_count' => :'totalReviewCount',
-        :'next_page_token' => :'nextPageToken'
+        :'comment' => :'comment',
+        :'update_time' => :'updateTime'
       }
     end
 
@@ -58,20 +41,14 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'success' => :'Boolean',
-        :'account_id' => :'String',
-        :'location_id' => :'String',
-        :'reviews' => :'Array<GoogleBusinessReview>',
-        :'average_rating' => :'Float',
-        :'total_review_count' => :'Integer',
-        :'next_page_token' => :'String'
+        :'comment' => :'String',
+        :'update_time' => :'Time'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'next_page_token'
       ])
     end
 
@@ -79,46 +56,24 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetGoogleBusinessReviews200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GoogleBusinessReviewReviewReply` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetGoogleBusinessReviews200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GoogleBusinessReviewReviewReply`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'success')
-        self.success = attributes[:'success']
+      if attributes.key?(:'comment')
+        self.comment = attributes[:'comment']
       end
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
-
-      if attributes.key?(:'location_id')
-        self.location_id = attributes[:'location_id']
-      end
-
-      if attributes.key?(:'reviews')
-        if (value = attributes[:'reviews']).is_a?(Array)
-          self.reviews = value
-        end
-      end
-
-      if attributes.key?(:'average_rating')
-        self.average_rating = attributes[:'average_rating']
-      end
-
-      if attributes.key?(:'total_review_count')
-        self.total_review_count = attributes[:'total_review_count']
-      end
-
-      if attributes.key?(:'next_page_token')
-        self.next_page_token = attributes[:'next_page_token']
+      if attributes.key?(:'update_time')
+        self.update_time = attributes[:'update_time']
       end
     end
 
@@ -142,13 +97,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          success == o.success &&
-          account_id == o.account_id &&
-          location_id == o.location_id &&
-          reviews == o.reviews &&
-          average_rating == o.average_rating &&
-          total_review_count == o.total_review_count &&
-          next_page_token == o.next_page_token
+          comment == o.comment &&
+          update_time == o.update_time
     end
 
     # @see the `==` method
@@ -160,7 +110,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [success, account_id, location_id, reviews, average_rating, total_review_count, next_page_token].hash
+      [comment, update_time].hash
     end
 
     # Builds the object from hash

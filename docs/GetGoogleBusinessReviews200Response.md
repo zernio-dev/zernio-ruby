@@ -7,7 +7,7 @@
 | **success** | **Boolean** |  | [optional] |
 | **account_id** | **String** |  | [optional] |
 | **location_id** | **String** |  | [optional] |
-| **reviews** | [**Array&lt;GetGoogleBusinessReviews200ResponseReviewsInner&gt;**](GetGoogleBusinessReviews200ResponseReviewsInner.md) |  | [optional] |
+| **reviews** | [**Array&lt;GoogleBusinessReview&gt;**](GoogleBusinessReview.md) |  | [optional] |
 | **average_rating** | **Float** | Overall average rating | [optional] |
 | **total_review_count** | **Integer** | Total number of reviews | [optional] |
 | **next_page_token** | **String** | Token for next page | [optional] |

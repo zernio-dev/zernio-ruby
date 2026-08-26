@@ -14,17 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply < ApiModelBase
-    # Business owner reply
-    attr_accessor :comment
+  class GoogleBusinessReviewReviewer < ApiModelBase
+    attr_accessor :display_name
 
-    attr_accessor :update_time
+    attr_accessor :profile_photo_url
+
+    attr_accessor :is_anonymous
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'comment' => :'comment',
-        :'update_time' => :'updateTime'
+        :'display_name' => :'displayName',
+        :'profile_photo_url' => :'profilePhotoUrl',
+        :'is_anonymous' => :'isAnonymous'
       }
     end
 
@@ -41,14 +43,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'comment' => :'String',
-        :'update_time' => :'Time'
+        :'display_name' => :'String',
+        :'profile_photo_url' => :'String',
+        :'is_anonymous' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'profile_photo_url',
       ])
     end
 
@@ -56,24 +60,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GoogleBusinessReviewReviewer` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GoogleBusinessReviewReviewer`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'comment')
-        self.comment = attributes[:'comment']
+      if attributes.key?(:'display_name')
+        self.display_name = attributes[:'display_name']
       end
 
-      if attributes.key?(:'update_time')
-        self.update_time = attributes[:'update_time']
+      if attributes.key?(:'profile_photo_url')
+        self.profile_photo_url = attributes[:'profile_photo_url']
+      end
+
+      if attributes.key?(:'is_anonymous')
+        self.is_anonymous = attributes[:'is_anonymous']
       end
     end
 
@@ -97,8 +105,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          comment == o.comment &&
-          update_time == o.update_time
+          display_name == o.display_name &&
+          profile_photo_url == o.profile_photo_url &&
+          is_anonymous == o.is_anonymous
     end
 
     # @see the `==` method
@@ -110,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [comment, update_time].hash
+      [display_name, profile_photo_url, is_anonymous].hash
     end
 
     # Builds the object from hash

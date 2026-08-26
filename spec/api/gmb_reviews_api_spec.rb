@@ -58,6 +58,20 @@ describe 'GMBReviewsApi' do
     end
   end
 
+  # unit tests for get_google_business_review
+  # Get a review
+  # Returns one Google Business review, in the same shape as the entries of GET /v1/accounts/{accountId}/gmb-reviews. The review is read from the account&#39;s selected location unless locationId overrides it, and Google returns 404 for a review id that belongs to another location. Read the review before replying if a human may have answered it already: replies are overwritten in place and Google keeps no history. 
+  # @param account_id The Zernio account ID (from /v1/accounts)
+  # @param review_id The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :location_id Override which location to read the review from. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
+  # @return [GetGoogleBusinessReview200Response]
+  describe 'get_google_business_review test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_google_business_reviews
   # Get reviews
   # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.

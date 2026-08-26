@@ -14,19 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetGoogleBusinessReviews200ResponseReviewsInnerReviewer < ApiModelBase
-    attr_accessor :display_name
+  class GetGoogleBusinessReview200Response < ApiModelBase
+    attr_accessor :success
 
-    attr_accessor :profile_photo_url
+    attr_accessor :account_id
 
-    attr_accessor :is_anonymous
+    attr_accessor :location_id
+
+    attr_accessor :review
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'display_name' => :'displayName',
-        :'profile_photo_url' => :'profilePhotoUrl',
-        :'is_anonymous' => :'isAnonymous'
+        :'success' => :'success',
+        :'account_id' => :'accountId',
+        :'location_id' => :'locationId',
+        :'review' => :'review'
       }
     end
 
@@ -43,16 +46,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'display_name' => :'String',
-        :'profile_photo_url' => :'String',
-        :'is_anonymous' => :'Boolean'
+        :'success' => :'Boolean',
+        :'account_id' => :'String',
+        :'location_id' => :'String',
+        :'review' => :'GoogleBusinessReview'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'profile_photo_url',
       ])
     end
 
@@ -60,28 +63,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetGoogleBusinessReview200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetGoogleBusinessReview200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'success')
+        self.success = attributes[:'success']
       end
 
-      if attributes.key?(:'profile_photo_url')
-        self.profile_photo_url = attributes[:'profile_photo_url']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'is_anonymous')
-        self.is_anonymous = attributes[:'is_anonymous']
+      if attributes.key?(:'location_id')
+        self.location_id = attributes[:'location_id']
+      end
+
+      if attributes.key?(:'review')
+        self.review = attributes[:'review']
       end
     end
 
@@ -105,9 +112,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          display_name == o.display_name &&
-          profile_photo_url == o.profile_photo_url &&
-          is_anonymous == o.is_anonymous
+          success == o.success &&
+          account_id == o.account_id &&
+          location_id == o.location_id &&
+          review == o.review
     end
 
     # @see the `==` method
@@ -119,7 +127,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [display_name, profile_photo_url, is_anonymous].hash
+      [success, account_id, location_id, review].hash
     end
 
     # Builds the object from hash

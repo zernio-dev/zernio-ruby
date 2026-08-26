@@ -366,6 +366,7 @@ Class | Method | HTTP request | Description
 *Zernio::GMBPlaceActionsApi* | [**update_google_business_place_action**](docs/GMBPlaceActionsApi.md#update_google_business_place_action) | **PATCH** /v1/accounts/{accountId}/gmb-place-actions | Update action link
 *Zernio::GMBReviewsApi* | [**batch_get_google_business_reviews**](docs/GMBReviewsApi.md#batch_get_google_business_reviews) | **POST** /v1/accounts/{accountId}/gmb-reviews/batch | Batch get reviews
 *Zernio::GMBReviewsApi* | [**delete_google_business_review_reply**](docs/GMBReviewsApi.md#delete_google_business_review_reply) | **DELETE** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Delete a review reply
+*Zernio::GMBReviewsApi* | [**get_google_business_review**](docs/GMBReviewsApi.md#get_google_business_review) | **GET** /v1/accounts/{accountId}/gmb-reviews/{reviewId} | Get a review
 *Zernio::GMBReviewsApi* | [**get_google_business_reviews**](docs/GMBReviewsApi.md#get_google_business_reviews) | **GET** /v1/accounts/{accountId}/gmb-reviews | Get reviews
 *Zernio::GMBReviewsApi* | [**reply_to_google_business_review**](docs/GMBReviewsApi.md#reply_to_google_business_review) | **POST** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Reply to a review
 *Zernio::GMBServicesApi* | [**get_google_business_services**](docs/GMBServicesApi.md#get_google_business_services) | **GET** /v1/accounts/{accountId}/gmb-services | Get services
@@ -1237,11 +1238,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetGoogleBusinessPerformance200ResponseMetricsValue](docs/GetGoogleBusinessPerformance200ResponseMetricsValue.md)
  - [Zernio::GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner](docs/GetGoogleBusinessPerformance200ResponseMetricsValueValuesInner.md)
  - [Zernio::GetGoogleBusinessPerformance400Response](docs/GetGoogleBusinessPerformance400Response.md)
+ - [Zernio::GetGoogleBusinessReview200Response](docs/GetGoogleBusinessReview200Response.md)
  - [Zernio::GetGoogleBusinessReviews200Response](docs/GetGoogleBusinessReviews200Response.md)
- - [Zernio::GetGoogleBusinessReviews200ResponseReviewsInner](docs/GetGoogleBusinessReviews200ResponseReviewsInner.md)
- - [Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner](docs/GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner.md)
- - [Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply](docs/GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply.md)
- - [Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer](docs/GetGoogleBusinessReviews200ResponseReviewsInnerReviewer.md)
  - [Zernio::GetGoogleBusinessSearchKeywords200Response](docs/GetGoogleBusinessSearchKeywords200Response.md)
  - [Zernio::GetGoogleBusinessSearchKeywords200ResponseKeywordsInner](docs/GetGoogleBusinessSearchKeywords200ResponseKeywordsInner.md)
  - [Zernio::GetGoogleBusinessSearchKeywords200ResponseMonthRange](docs/GetGoogleBusinessSearchKeywords200ResponseMonthRange.md)
@@ -1457,6 +1455,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GoogleBusinessPlatformDataEventScheduleStartDate](docs/GoogleBusinessPlatformDataEventScheduleStartDate.md)
  - [Zernio::GoogleBusinessPlatformDataEventScheduleStartTime](docs/GoogleBusinessPlatformDataEventScheduleStartTime.md)
  - [Zernio::GoogleBusinessPlatformDataOffer](docs/GoogleBusinessPlatformDataOffer.md)
+ - [Zernio::GoogleBusinessReview](docs/GoogleBusinessReview.md)
+ - [Zernio::GoogleBusinessReviewReviewReply](docs/GoogleBusinessReviewReviewReply.md)
+ - [Zernio::GoogleBusinessReviewReviewer](docs/GoogleBusinessReviewReviewer.md)
  - [Zernio::HandleOAuthCallbackRequest](docs/HandleOAuthCallbackRequest.md)
  - [Zernio::HideInboxComment200Response](docs/HideInboxComment200Response.md)
  - [Zernio::HideInboxCommentRequest](docs/HideInboxCommentRequest.md)
@@ -1611,6 +1612,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListInboxMentions200ResponseMeta](docs/ListInboxMentions200ResponseMeta.md)
  - [Zernio::ListInboxReviews200Response](docs/ListInboxReviews200Response.md)
  - [Zernio::ListInboxReviews200ResponseDataInner](docs/ListInboxReviews200ResponseDataInner.md)
+ - [Zernio::ListInboxReviews200ResponseDataInnerPhotosInner](docs/ListInboxReviews200ResponseDataInnerPhotosInner.md)
  - [Zernio::ListInboxReviews200ResponseDataInnerReply](docs/ListInboxReviews200ResponseDataInnerReply.md)
  - [Zernio::ListInboxReviews200ResponseDataInnerReviewer](docs/ListInboxReviews200ResponseDataInnerReviewer.md)
  - [Zernio::ListInboxReviews200ResponseSummary](docs/ListInboxReviews200ResponseSummary.md)

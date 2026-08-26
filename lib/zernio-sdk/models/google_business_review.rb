@@ -14,7 +14,8 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetGoogleBusinessReviews200ResponseReviewsInner < ApiModelBase
+  # A Google Business Profile review, as returned by every gmb-reviews read endpoint.
+  class GoogleBusinessReview < ApiModelBase
     # Review ID
     attr_accessor :id
 
@@ -23,7 +24,7 @@ module Zernio
 
     attr_accessor :reviewer
 
-    # Numeric star rating
+    # Numeric star rating (0 when Google sends no rating)
     attr_accessor :rating
 
     # Google's string rating
@@ -98,15 +99,15 @@ module Zernio
       {
         :'id' => :'String',
         :'name' => :'String',
-        :'reviewer' => :'GetGoogleBusinessReviews200ResponseReviewsInnerReviewer',
+        :'reviewer' => :'GoogleBusinessReviewReviewer',
         :'rating' => :'Integer',
         :'star_rating' => :'String',
         :'comment' => :'String',
         :'create_time' => :'Time',
         :'update_time' => :'Time',
-        :'review_reply' => :'GetGoogleBusinessReviews200ResponseReviewsInnerReviewReply',
+        :'review_reply' => :'GoogleBusinessReviewReviewReply',
         :'photo_count' => :'Integer',
-        :'photos' => :'Array<GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner>'
+        :'photos' => :'Array<ListInboxReviews200ResponseDataInnerPhotosInner>'
       }
     end
 
@@ -120,14 +121,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetGoogleBusinessReviews200ResponseReviewsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GoogleBusinessReview` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetGoogleBusinessReviews200ResponseReviewsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GoogleBusinessReview`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -188,8 +189,8 @@ module Zernio
         invalid_properties.push('invalid value for "rating", must be smaller than or equal to 5.')
       end
 
-      if !@rating.nil? && @rating < 1
-        invalid_properties.push('invalid value for "rating", must be greater than or equal to 1.')
+      if !@rating.nil? && @rating < 0
+        invalid_properties.push('invalid value for "rating", must be greater than or equal to 0.')
       end
 
       invalid_properties
@@ -200,7 +201,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@rating.nil? && @rating > 5
-      return false if !@rating.nil? && @rating < 1
+      return false if !@rating.nil? && @rating < 0
       star_rating_validator = EnumAttributeValidator.new('String', ["ONE", "TWO", "THREE", "FOUR", "FIVE"])
       return false unless star_rating_validator.valid?(@star_rating)
       true
@@ -217,8 +218,8 @@ module Zernio
         fail ArgumentError, 'invalid value for "rating", must be smaller than or equal to 5.'
       end
 
-      if rating < 1
-        fail ArgumentError, 'invalid value for "rating", must be greater than or equal to 1.'
+      if rating < 0
+        fail ArgumentError, 'invalid value for "rating", must be greater than or equal to 0.'
       end
 
       @rating = rating

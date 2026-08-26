@@ -17,7 +17,7 @@
 | **has_reply** | **Boolean** |  | [optional] |
 | **has_photos** | **Boolean** | Whether the review has at least one photo. Google Business only; always false for other platforms. | [optional] |
 | **photo_count** | **Integer** | Number of photos attached to the review (photos only; videos are not counted). Google Business only; 0 for other platforms. | [optional] |
-| **photos** | [**Array&lt;GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner&gt;**](GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner.md) | Photos attached to the review. Google Business only; always an empty array for other platforms. | [optional] |
+| **photos** | [**Array&lt;ListInboxReviews200ResponseDataInnerPhotosInner&gt;**](ListInboxReviews200ResponseDataInnerPhotosInner.md) | Photos attached to the review. Google Business only; always an empty array for other platforms. | [optional] |
 | **reply** | [**ListInboxReviews200ResponseDataInnerReply**](ListInboxReviews200ResponseDataInnerReply.md) |  | [optional] |
 | **review_url** | **String** |  | [optional] |
 

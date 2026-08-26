@@ -1,4 +1,4 @@
-# Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer
+# Zernio::GoogleBusinessReviewReviewer
 
 ## Properties
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerReviewer.new(
+instance = Zernio::GoogleBusinessReviewReviewer.new(
   display_name: null,
   profile_photo_url: null,
   is_anonymous: null

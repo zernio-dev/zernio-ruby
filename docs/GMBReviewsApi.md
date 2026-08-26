@@ -6,6 +6,7 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**batch_get_google_business_reviews**](GMBReviewsApi.md#batch_get_google_business_reviews) | **POST** /v1/accounts/{accountId}/gmb-reviews/batch | Batch get reviews |
 | [**delete_google_business_review_reply**](GMBReviewsApi.md#delete_google_business_review_reply) | **DELETE** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Delete a review reply |
+| [**get_google_business_review**](GMBReviewsApi.md#get_google_business_review) | **GET** /v1/accounts/{accountId}/gmb-reviews/{reviewId} | Get a review |
 | [**get_google_business_reviews**](GMBReviewsApi.md#get_google_business_reviews) | **GET** /v1/accounts/{accountId}/gmb-reviews | Get reviews |
 | [**reply_to_google_business_review**](GMBReviewsApi.md#reply_to_google_business_review) | **POST** /v1/accounts/{accountId}/gmb-reviews/{reviewId}/reply | Reply to a review |
 
@@ -141,6 +142,81 @@ end
 ### Return type
 
 [**DeleteGoogleBusinessReviewReply200Response**](DeleteGoogleBusinessReviewReply200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_google_business_review
+
+> <GetGoogleBusinessReview200Response> get_google_business_review(account_id, review_id, opts)
+
+Get a review
+
+Returns one Google Business review, in the same shape as the entries of GET /v1/accounts/{accountId}/gmb-reviews. The review is read from the account's selected location unless locationId overrides it, and Google returns 404 for a review id that belongs to another location. Read the review before replying if a human may have answered it already: replies are overwritten in place and Google keeps no history. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::GMBReviewsApi.new
+account_id = 'account_id_example' # String | The Zernio account ID (from /v1/accounts)
+review_id = 'review_id_example' # String | The review ID portion (e.g. \"AIe9_BGx1234567890\"), not the full resource name
+opts = {
+  location_id: 'location_id_example' # String | Override which location to read the review from. If omitted, uses the account's selected location. Use GET /gmb-locations to list valid IDs.
+}
+
+begin
+  # Get a review
+  result = api_instance.get_google_business_review(account_id, review_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling GMBReviewsApi->get_google_business_review: #{e}"
+end
+```
+
+#### Using the get_google_business_review_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetGoogleBusinessReview200Response>, Integer, Hash)> get_google_business_review_with_http_info(account_id, review_id, opts)
+
+```ruby
+begin
+  # Get a review
+  data, status_code, headers = api_instance.get_google_business_review_with_http_info(account_id, review_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetGoogleBusinessReview200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling GMBReviewsApi->get_google_business_review_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The Zernio account ID (from /v1/accounts) |  |
+| **review_id** | **String** | The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name |  |
+| **location_id** | **String** | Override which location to read the review from. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs. | [optional] |
+
+### Return type
+
+[**GetGoogleBusinessReview200Response**](GetGoogleBusinessReview200Response.md)
 
 ### Authorization
 

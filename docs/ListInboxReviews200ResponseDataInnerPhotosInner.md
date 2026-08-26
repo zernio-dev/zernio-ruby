@@ -1,4 +1,4 @@
-# Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner
+# Zernio::ListInboxReviews200ResponseDataInnerPhotosInner
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::GetGoogleBusinessReviews200ResponseReviewsInnerPhotosInner.new(
+instance = Zernio::ListInboxReviews200ResponseDataInnerPhotosInner.new(
   url: null
 )
 ```
