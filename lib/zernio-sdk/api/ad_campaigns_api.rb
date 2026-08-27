@@ -523,6 +523,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Delete an ad set
+    # Deletes the ad set on the platform, cascading to its ads only (never the campaign). Locally, every Ad document under the ad set is marked `status: cancelled`.  Delete is soft on platforms that have no hard delete: LinkedIn moves the campaign to `PENDING_DELETION`, Pinterest archives the ad group, and X soft-flags the line item. Google removes the ad group. All remain readable for reporting. 
+    # @param ad_set_id [String] Platform ad set ID
+    # @param [Hash] opts the optional parameters
+    # @return [DeleteAdSet200Response]
+    def delete_ad_set(ad_set_id, opts = {})
+      data, _status_code, _headers = delete_ad_set_with_http_info(ad_set_id, opts)
+      data
+    end
+
+    # Delete an ad set
+    # Deletes the ad set on the platform, cascading to its ads only (never the campaign). Locally, every Ad document under the ad set is marked &#x60;status: cancelled&#x60;.  Delete is soft on platforms that have no hard delete: LinkedIn moves the campaign to &#x60;PENDING_DELETION&#x60;, Pinterest archives the ad group, and X soft-flags the line item. Google removes the ad group. All remain readable for reporting. 
+    # @param ad_set_id [String] Platform ad set ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeleteAdSet200Response, Integer, Hash)>] DeleteAdSet200Response data, response status code and response headers
+    def delete_ad_set_with_http_info(ad_set_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.delete_ad_set ...'
+      end
+      # verify the required parameter 'ad_set_id' is set
+      if @api_client.config.client_side_validation && ad_set_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_set_id' when calling AdCampaignsApi.delete_ad_set"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ad-sets/{adSetId}'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteAdSet200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.delete_ad_set",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#delete_ad_set\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Duplicate an ad
     # Duplicates a single ad via Meta's native `POST /{ad-id}/copies`. The copy is created paused. `adSetId` retargets the copy into another ad set; omitted = the source's own ad set. Accepts the Zernio ad id or the platform ad id. Sync discovery is triggered automatically (`syncAfter: false` to skip).
     # @param ad_id [String] Zernio ad ID or platform ad ID
