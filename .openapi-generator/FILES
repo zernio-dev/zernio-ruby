@@ -1097,6 +1097,7 @@ docs/LogsApi.md
 docs/LookupSmsNumber200Response.md
 docs/MarkConversationRead200Response.md
 docs/MediaApi.md
+docs/MediaContentType.md
 docs/MediaItem.md
 docs/MediaUploadResponse.md
 docs/MentionsApi.md
@@ -1136,7 +1137,6 @@ docs/PinterestPlatformData.md
 docs/PlatformAnalytics.md
 docs/PlatformTarget.md
 docs/PlatformTargetAccountId.md
-docs/PlatformTargetPlatformSpecificData.md
 docs/Post.md
 docs/PostAnalytics.md
 docs/PostCreateResponse.md
@@ -2927,6 +2927,7 @@ lib/zernio-sdk/models/list_workflows200_response.rb
 lib/zernio-sdk/models/list_workflows200_response_workflows_inner.rb
 lib/zernio-sdk/models/lookup_sms_number200_response.rb
 lib/zernio-sdk/models/mark_conversation_read200_response.rb
+lib/zernio-sdk/models/media_content_type.rb
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/meta_ads_platform_data.rb
@@ -2962,7 +2963,6 @@ lib/zernio-sdk/models/pinterest_platform_data.rb
 lib/zernio-sdk/models/platform_analytics.rb
 lib/zernio-sdk/models/platform_target.rb
 lib/zernio-sdk/models/platform_target_account_id.rb
-lib/zernio-sdk/models/platform_target_platform_specific_data.rb
 lib/zernio-sdk/models/post.rb
 lib/zernio-sdk/models/post_analytics.rb
 lib/zernio-sdk/models/post_create_response.rb
@@ -4722,6 +4722,7 @@ spec/models/list_workflows200_response_spec.rb
 spec/models/list_workflows200_response_workflows_inner_spec.rb
 spec/models/lookup_sms_number200_response_spec.rb
 spec/models/mark_conversation_read200_response_spec.rb
+spec/models/media_content_type_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
 spec/models/meta_ads_platform_data_spec.rb
@@ -4756,7 +4757,6 @@ spec/models/pin_discord_message200_response_spec.rb
 spec/models/pinterest_platform_data_spec.rb
 spec/models/platform_analytics_spec.rb
 spec/models/platform_target_account_id_spec.rb
-spec/models/platform_target_platform_specific_data_spec.rb
 spec/models/platform_target_spec.rb
 spec/models/post_analytics_spec.rb
 spec/models/post_create_response_spec.rb

@@ -18,7 +18,6 @@ module Zernio
     # Name of the file to upload
     attr_accessor :filename
 
-    # MIME type of the file
     attr_accessor :content_type
 
     # Optional file size in bytes for pre-validation (max 5GB)
@@ -69,7 +68,7 @@ module Zernio
     def self.openapi_types
       {
         :'filename' => :'String',
-        :'content_type' => :'String',
+        :'content_type' => :'MediaContentType',
         :'size' => :'Integer'
       }
     end
@@ -135,8 +134,6 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @filename.nil?
       return false if @content_type.nil?
-      content_type_validator = EnumAttributeValidator.new('String', ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "video/mp4", "video/mpeg", "video/quicktime", "video/avi", "video/x-msvideo", "video/webm", "video/x-m4v", "application/pdf", "audio/mpeg", "audio/mp4", "audio/aac", "audio/ogg", "audio/wav", "audio/webm", "audio/x-m4a"])
-      return false unless content_type_validator.valid?(@content_type)
       true
     end
 
@@ -150,13 +147,13 @@ module Zernio
       @filename = filename
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] content_type Object to be assigned
+    # Custom attribute writer method with validation
+    # @param [Object] content_type Value to be assigned
     def content_type=(content_type)
-      validator = EnumAttributeValidator.new('String', ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "video/mp4", "video/mpeg", "video/quicktime", "video/avi", "video/x-msvideo", "video/webm", "video/x-m4v", "application/pdf", "audio/mpeg", "audio/mp4", "audio/aac", "audio/ogg", "audio/wav", "audio/webm", "audio/x-m4a"])
-      unless validator.valid?(content_type)
-        fail ArgumentError, "invalid value for \"content_type\", must be one of #{validator.allowable_values}."
+      if content_type.nil?
+        fail ArgumentError, 'content_type cannot be nil'
       end
+
       @content_type = content_type
     end
 

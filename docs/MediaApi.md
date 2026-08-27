@@ -27,7 +27,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MediaApi.new
-get_media_presigned_url_request = Zernio::GetMediaPresignedUrlRequest.new({filename: 'my-video.mp4', content_type: 'image/jpeg'}) # GetMediaPresignedUrlRequest | 
+get_media_presigned_url_request = Zernio::GetMediaPresignedUrlRequest.new({filename: 'my-video.mp4', content_type: Zernio::MediaContentType::IMAGE_JPEG}) # GetMediaPresignedUrlRequest | 
 
 begin
   # Get upload URL

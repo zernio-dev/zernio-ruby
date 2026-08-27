@@ -36,10 +36,6 @@ describe Zernio::GetMediaPresignedUrlRequest do
   describe 'test attribute "content_type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "video/mp4", "video/mpeg", "video/quicktime", "video/avi", "video/x-msvideo", "video/webm", "video/x-m4v", "application/pdf", "audio/mpeg", "audio/mp4", "audio/aac", "audio/ogg", "audio/wav", "audio/webm", "audio/x-m4a"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.content_type = value }.not_to raise_error
-      # end
     end
   end
 

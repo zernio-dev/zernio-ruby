@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **filename** | **String** | Name of the file to upload |  |
-| **content_type** | **String** | MIME type of the file |  |
+| **content_type** | [**MediaContentType**](MediaContentType.md) |  |  |
 | **size** | **Integer** | Optional file size in bytes for pre-validation (max 5GB) | [optional] |
 
 ## Example
@@ -15,7 +15,7 @@ require 'zernio-sdk'
 
 instance = Zernio::GetMediaPresignedUrlRequest.new(
   filename: my-video.mp4,
-  content_type: video/mp4,
+  content_type: null,
   size: 15234567
 )
 ```
