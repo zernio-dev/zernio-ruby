@@ -31,7 +31,7 @@ module Zernio
     # DMA / metro-area targeting. `key` is the platform's metro ID (e.g. Meta `DMA:807`).
     attr_accessor :metros
 
-    # Point-radius (lat/lng) targeting (Meta custom_locations / Google proximity). Honoured only where the capability map allows radius (Meta).
+    # Point-radius (lat/lng) targeting (Meta custom_locations / Google proximity). Honoured on Meta and Google; ignored on platforms without radius support.
     attr_accessor :custom_locations
 
     attr_accessor :excluded_locations
