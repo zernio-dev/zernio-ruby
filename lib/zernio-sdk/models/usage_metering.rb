@@ -37,6 +37,10 @@ module Zernio
 
     attr_accessor :tax
 
+    attr_accessor :attribution
+
+    attr_accessor :scope
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -70,7 +74,9 @@ module Zernio
         :'peaks' => :'peaks',
         :'call_usage' => :'callUsage',
         :'period' => :'period',
-        :'tax' => :'tax'
+        :'tax' => :'tax',
+        :'attribution' => :'attribution',
+        :'scope' => :'scope'
       }
     end
 
@@ -95,7 +101,9 @@ module Zernio
         :'peaks' => :'UsageMeteringPeaks',
         :'call_usage' => :'UsageMeteringCallUsage',
         :'period' => :'UsageMeteringPeriod',
-        :'tax' => :'UsageMeteringTax'
+        :'tax' => :'UsageMeteringTax',
+        :'attribution' => :'UsageMeteringAttribution',
+        :'scope' => :'UsageMeteringScope'
       }
     end
 
@@ -160,6 +168,14 @@ module Zernio
       if attributes.key?(:'tax')
         self.tax = attributes[:'tax']
       end
+
+      if attributes.key?(:'attribution')
+        self.attribution = attributes[:'attribution']
+      end
+
+      if attributes.key?(:'scope')
+        self.scope = attributes[:'scope']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -202,7 +218,9 @@ module Zernio
           peaks == o.peaks &&
           call_usage == o.call_usage &&
           period == o.period &&
-          tax == o.tax
+          tax == o.tax &&
+          attribution == o.attribution &&
+          scope == o.scope
     end
 
     # @see the `==` method
@@ -214,7 +232,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [supported, granularity, days, totals, line_items, peaks, call_usage, period, tax].hash
+      [supported, granularity, days, totals, line_items, peaks, call_usage, period, tax, attribution, scope].hash
     end
 
     # Builds the object from hash

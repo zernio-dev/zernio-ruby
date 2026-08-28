@@ -14,17 +14,51 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Peak counts over the window (Metronome COUNT metrics + live active-number count). Null when `profileId` / `accountId` is set.
-  class UsageMeteringPeaks < ApiModelBase
-    attr_accessor :accounts
+  # Present with `groupBy`. The window's spend split per profile or account; `sum(groups) + unattributed` equals `totals` per product.
+  class UsageMeteringAttribution < ApiModelBase
+    attr_accessor :group_by
 
-    attr_accessor :numbers
+    attr_accessor :groups
+
+    # Spend no profile/account can claim: credits, 10DLC fees, Verify, and usage whose record no longer resolves to an account. Zero for a restricted principal.
+    attr_accessor :unattributed
+
+    # The window totals; for a restricted principal, the sum of the visible groups.
+    attr_accessor :totals
+
+    # True when the caller (profile-scoped API key or member) cannot see every profile: `groups` are filtered, `totals` sum them, `unattributed` is zero, and the top-level `days` / `totals` / `lineItems` are projected onto the visible groups with `peaks`, `callUsage` and `tax` null.
+    attr_accessor :restricted
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'accounts' => :'accounts',
-        :'numbers' => :'numbers'
+        :'group_by' => :'groupBy',
+        :'groups' => :'groups',
+        :'unattributed' => :'unattributed',
+        :'totals' => :'totals',
+        :'restricted' => :'restricted'
       }
     end
 
@@ -41,8 +75,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'accounts' => :'Integer',
-        :'numbers' => :'Integer'
+        :'group_by' => :'String',
+        :'groups' => :'Array<UsageAttributionGroup>',
+        :'unattributed' => :'UsageAttributionSlice',
+        :'totals' => :'UsageAttributionSlice',
+        :'restricted' => :'Boolean'
       }
     end
 
@@ -56,24 +93,38 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UsageMeteringPeaks` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UsageMeteringAttribution` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UsageMeteringPeaks`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UsageMeteringAttribution`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'accounts')
-        self.accounts = attributes[:'accounts']
+      if attributes.key?(:'group_by')
+        self.group_by = attributes[:'group_by']
       end
 
-      if attributes.key?(:'numbers')
-        self.numbers = attributes[:'numbers']
+      if attributes.key?(:'groups')
+        if (value = attributes[:'groups']).is_a?(Array)
+          self.groups = value
+        end
+      end
+
+      if attributes.key?(:'unattributed')
+        self.unattributed = attributes[:'unattributed']
+      end
+
+      if attributes.key?(:'totals')
+        self.totals = attributes[:'totals']
+      end
+
+      if attributes.key?(:'restricted')
+        self.restricted = attributes[:'restricted']
       end
     end
 
@@ -89,7 +140,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      group_by_validator = EnumAttributeValidator.new('String', ["profile", "account"])
+      return false unless group_by_validator.valid?(@group_by)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] group_by Object to be assigned
+    def group_by=(group_by)
+      validator = EnumAttributeValidator.new('String', ["profile", "account"])
+      unless validator.valid?(group_by)
+        fail ArgumentError, "invalid value for \"group_by\", must be one of #{validator.allowable_values}."
+      end
+      @group_by = group_by
     end
 
     # Checks equality by comparing each attribute.
@@ -97,8 +160,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          accounts == o.accounts &&
-          numbers == o.numbers
+          group_by == o.group_by &&
+          groups == o.groups &&
+          unattributed == o.unattributed &&
+          totals == o.totals &&
+          restricted == o.restricted
     end
 
     # @see the `==` method
@@ -110,7 +176,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accounts, numbers].hash
+      [group_by, groups, unattributed, totals, restricted].hash
     end
 
     # Builds the object from hash

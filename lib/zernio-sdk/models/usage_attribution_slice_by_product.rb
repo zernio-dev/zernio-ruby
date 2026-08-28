@@ -14,17 +14,38 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Peak counts over the window (Metronome COUNT metrics + live active-number count). Null when `profileId` / `accountId` is set.
-  class UsageMeteringPeaks < ApiModelBase
+  # USD per product family.
+  class UsageAttributionSliceByProduct < ApiModelBase
     attr_accessor :accounts
 
     attr_accessor :numbers
+
+    attr_accessor :calls
+
+    attr_accessor :sms
+
+    attr_accessor :verify
+
+    attr_accessor :dlc
+
+    attr_accessor :x_api
+
+    attr_accessor :credits
+
+    attr_accessor :other
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'accounts' => :'accounts',
-        :'numbers' => :'numbers'
+        :'numbers' => :'numbers',
+        :'calls' => :'calls',
+        :'sms' => :'sms',
+        :'verify' => :'verify',
+        :'dlc' => :'dlc',
+        :'x_api' => :'xApi',
+        :'credits' => :'credits',
+        :'other' => :'other'
       }
     end
 
@@ -41,8 +62,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'accounts' => :'Integer',
-        :'numbers' => :'Integer'
+        :'accounts' => :'Float',
+        :'numbers' => :'Float',
+        :'calls' => :'Float',
+        :'sms' => :'Float',
+        :'verify' => :'Float',
+        :'dlc' => :'Float',
+        :'x_api' => :'Float',
+        :'credits' => :'Float',
+        :'other' => :'Float'
       }
     end
 
@@ -56,14 +84,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UsageMeteringPeaks` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UsageAttributionSliceByProduct` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UsageMeteringPeaks`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UsageAttributionSliceByProduct`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -74,6 +102,34 @@ module Zernio
 
       if attributes.key?(:'numbers')
         self.numbers = attributes[:'numbers']
+      end
+
+      if attributes.key?(:'calls')
+        self.calls = attributes[:'calls']
+      end
+
+      if attributes.key?(:'sms')
+        self.sms = attributes[:'sms']
+      end
+
+      if attributes.key?(:'verify')
+        self.verify = attributes[:'verify']
+      end
+
+      if attributes.key?(:'dlc')
+        self.dlc = attributes[:'dlc']
+      end
+
+      if attributes.key?(:'x_api')
+        self.x_api = attributes[:'x_api']
+      end
+
+      if attributes.key?(:'credits')
+        self.credits = attributes[:'credits']
+      end
+
+      if attributes.key?(:'other')
+        self.other = attributes[:'other']
       end
     end
 
@@ -98,7 +154,14 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           accounts == o.accounts &&
-          numbers == o.numbers
+          numbers == o.numbers &&
+          calls == o.calls &&
+          sms == o.sms &&
+          verify == o.verify &&
+          dlc == o.dlc &&
+          x_api == o.x_api &&
+          credits == o.credits &&
+          other == o.other
     end
 
     # @see the `==` method
@@ -110,7 +173,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accounts, numbers].hash
+      [accounts, numbers, calls, sms, verify, dlc, x_api, credits, other].hash
     end
 
     # Builds the object from hash

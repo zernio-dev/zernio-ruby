@@ -14,17 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Peak counts over the window (Metronome COUNT metrics + live active-number count). Null when `profileId` / `accountId` is set.
-  class UsageMeteringPeaks < ApiModelBase
-    attr_accessor :accounts
+  class UsageAttributionGroup < ApiModelBase
+    attr_accessor :by_product
 
-    attr_accessor :numbers
+    attr_accessor :total_usd
+
+    # Profile id or account id, per `groupBy`.
+    attr_accessor :key
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'accounts' => :'accounts',
-        :'numbers' => :'numbers'
+        :'by_product' => :'byProduct',
+        :'total_usd' => :'totalUsd',
+        :'key' => :'key'
       }
     end
 
@@ -41,8 +44,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'accounts' => :'Integer',
-        :'numbers' => :'Integer'
+        :'by_product' => :'UsageAttributionSliceByProduct',
+        :'total_usd' => :'Float',
+        :'key' => :'String'
       }
     end
 
@@ -52,28 +56,41 @@ module Zernio
       ])
     end
 
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'UsageAttributionSlice'
+      ]
+    end
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UsageMeteringPeaks` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UsageAttributionGroup` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UsageMeteringPeaks`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UsageAttributionGroup`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'accounts')
-        self.accounts = attributes[:'accounts']
+      if attributes.key?(:'by_product')
+        self.by_product = attributes[:'by_product']
       end
 
-      if attributes.key?(:'numbers')
-        self.numbers = attributes[:'numbers']
+      if attributes.key?(:'total_usd')
+        self.total_usd = attributes[:'total_usd']
+      end
+
+      if attributes.key?(:'key')
+        self.key = attributes[:'key']
+      else
+        self.key = nil
       end
     end
 
@@ -82,6 +99,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @key.nil?
+        invalid_properties.push('invalid value for "key", key cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -89,7 +110,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @key.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] key Value to be assigned
+    def key=(key)
+      if key.nil?
+        fail ArgumentError, 'key cannot be nil'
+      end
+
+      @key = key
     end
 
     # Checks equality by comparing each attribute.
@@ -97,8 +129,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          accounts == o.accounts &&
-          numbers == o.numbers
+          by_product == o.by_product &&
+          total_usd == o.total_usd &&
+          key == o.key
     end
 
     # @see the `==` method
@@ -110,7 +143,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accounts, numbers].hash
+      [by_product, total_usd, key].hash
     end
 
     # Builds the object from hash
