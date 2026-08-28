@@ -360,6 +360,135 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Watch an out-of-stock country
+    # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the `phone_number.stock_available` webhook. Stock is re-checked every 6h. One watch per country; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 countries can be watched at once. 
+    # @param create_phone_number_stock_watch_request [CreatePhoneNumberStockWatchRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [PhoneNumberStockWatch]
+    def create_phone_number_stock_watch(create_phone_number_stock_watch_request, opts = {})
+      data, _status_code, _headers = create_phone_number_stock_watch_with_http_info(create_phone_number_stock_watch_request, opts)
+      data
+    end
+
+    # Watch an out-of-stock country
+    # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the &#x60;phone_number.stock_available&#x60; webhook. Stock is re-checked every 6h. One watch per country; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 countries can be watched at once. 
+    # @param create_phone_number_stock_watch_request [CreatePhoneNumberStockWatchRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(PhoneNumberStockWatch, Integer, Hash)>] PhoneNumberStockWatch data, response status code and response headers
+    def create_phone_number_stock_watch_with_http_info(create_phone_number_stock_watch_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.create_phone_number_stock_watch ...'
+      end
+      # verify the required parameter 'create_phone_number_stock_watch_request' is set
+      if @api_client.config.client_side_validation && create_phone_number_stock_watch_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_phone_number_stock_watch_request' when calling PhoneNumbersApi.create_phone_number_stock_watch"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/stock-watches'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_phone_number_stock_watch_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PhoneNumberStockWatch'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.create_phone_number_stock_watch",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#create_phone_number_stock_watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Stop watching a country
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [DeleteSmsSenderId200Response]
+    def delete_phone_number_stock_watch(id, opts = {})
+      data, _status_code, _headers = delete_phone_number_stock_watch_with_http_info(id, opts)
+      data
+    end
+
+    # Stop watching a country
+    # @param id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeleteSmsSenderId200Response, Integer, Hash)>] DeleteSmsSenderId200Response data, response status code and response headers
+    def delete_phone_number_stock_watch_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.delete_phone_number_stock_watch ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling PhoneNumbersApi.delete_phone_number_stock_watch"
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/stock-watches/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteSmsSenderId200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.delete_phone_number_stock_watch",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#delete_phone_number_stock_watch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get phone number
     # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, `onfidoVerificationUrl` appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
     # @param id [String] Phone number record ID
@@ -809,6 +938,61 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PhoneNumbersApi#list_phone_number_port_ins\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List stock watches
+    # @param [Hash] opts the optional parameters
+    # @return [ListPhoneNumberStockWatches200Response]
+    def list_phone_number_stock_watches(opts = {})
+      data, _status_code, _headers = list_phone_number_stock_watches_with_http_info(opts)
+      data
+    end
+
+    # List stock watches
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListPhoneNumberStockWatches200Response, Integer, Hash)>] ListPhoneNumberStockWatches200Response data, response status code and response headers
+    def list_phone_number_stock_watches_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhoneNumbersApi.list_phone_number_stock_watches ...'
+      end
+      # resource path
+      local_var_path = '/v1/phone-numbers/stock-watches'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListPhoneNumberStockWatches200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"PhoneNumbersApi.list_phone_number_stock_watches",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhoneNumbersApi#list_phone_number_stock_watches\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

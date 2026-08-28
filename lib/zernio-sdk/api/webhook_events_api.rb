@@ -1207,6 +1207,72 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Phone-number stock available event
+    # Fired by the stock sweep (every 6h) the first time a country you watch via POST /v1/phone-numbers/stock-watches has deliverable numbers again. The watch is consumed, so the event fires once per watch; the stock counts are a snapshot and numbers are sold first come, first served. Buy with POST /v1/phone-numbers/purchase. 
+    # @param webhook_payload_phone_number_stock_available [WebhookPayloadPhoneNumberStockAvailable] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def on_phone_number_stock_available(webhook_payload_phone_number_stock_available, opts = {})
+      on_phone_number_stock_available_with_http_info(webhook_payload_phone_number_stock_available, opts)
+      nil
+    end
+
+    # Phone-number stock available event
+    # Fired by the stock sweep (every 6h) the first time a country you watch via POST /v1/phone-numbers/stock-watches has deliverable numbers again. The watch is consumed, so the event fires once per watch; the stock counts are a snapshot and numbers are sold first come, first served. Buy with POST /v1/phone-numbers/purchase. 
+    # @param webhook_payload_phone_number_stock_available [WebhookPayloadPhoneNumberStockAvailable] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def on_phone_number_stock_available_with_http_info(webhook_payload_phone_number_stock_available, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhookEventsApi.on_phone_number_stock_available ...'
+      end
+      # verify the required parameter 'webhook_payload_phone_number_stock_available' is set
+      if @api_client.config.client_side_validation && webhook_payload_phone_number_stock_available.nil?
+        fail ArgumentError, "Missing the required parameter 'webhook_payload_phone_number_stock_available' when calling WebhookEventsApi.on_phone_number_stock_available"
+      end
+      # resource path
+      local_var_path = '/phone_number.stock_available'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(webhook_payload_phone_number_stock_available)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhookEventsApi.on_phone_number_stock_available",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhookEventsApi#on_phone_number_stock_available\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Post cancelled event
     # Fired when a post publishing job is cancelled.
     # @param webhook_payload_post [WebhookPayloadPost] 

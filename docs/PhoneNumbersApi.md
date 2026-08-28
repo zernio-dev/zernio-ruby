@@ -9,6 +9,8 @@ All URIs are relative to *https://zernio.com/api*
 | [**check_phone_number_portability**](PhoneNumbersApi.md#check_phone_number_portability) | **POST** /v1/phone-numbers/port-in/check | Check portability |
 | [**create_phone_number_kyc_link**](PhoneNumbersApi.md#create_phone_number_kyc_link) | **POST** /v1/phone-numbers/kyc/share | Create a hosted KYC link |
 | [**create_phone_number_port_in**](PhoneNumbersApi.md#create_phone_number_port_in) | **POST** /v1/phone-numbers/port-in | Port numbers in |
+| [**create_phone_number_stock_watch**](PhoneNumbersApi.md#create_phone_number_stock_watch) | **POST** /v1/phone-numbers/stock-watches | Watch an out-of-stock country |
+| [**delete_phone_number_stock_watch**](PhoneNumbersApi.md#delete_phone_number_stock_watch) | **DELETE** /v1/phone-numbers/stock-watches/{id} | Stop watching a country |
 | [**get_phone_number**](PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number |
 | [**get_phone_number_kyc_form**](PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec |
 | [**get_phone_number_port_in_order_requirements**](PhoneNumbersApi.md#get_phone_number_port_in_order_requirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order&#39;s pending requirements |
@@ -16,6 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_phone_number_remediation**](PhoneNumbersApi.md#get_phone_number_remediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements |
 | [**list_phone_number_countries**](PhoneNumbersApi.md#list_phone_number_countries) | **GET** /v1/phone-numbers/countries | List offerable number countries |
 | [**list_phone_number_port_ins**](PhoneNumbersApi.md#list_phone_number_port_ins) | **GET** /v1/phone-numbers/port-in | List port-in orders |
+| [**list_phone_number_stock_watches**](PhoneNumbersApi.md#list_phone_number_stock_watches) | **GET** /v1/phone-numbers/stock-watches | List stock watches |
 | [**list_phone_numbers**](PhoneNumbersApi.md#list_phone_numbers) | **GET** /v1/phone-numbers | List phone numbers |
 | [**purchase_phone_number**](PhoneNumbersApi.md#purchase_phone_number) | **POST** /v1/phone-numbers/purchase | Purchase phone number |
 | [**release_phone_number**](PhoneNumbersApi.md#release_phone_number) | **DELETE** /v1/phone-numbers/{id} | Release phone number |
@@ -379,6 +382,142 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_phone_number_stock_watch
+
+> <PhoneNumberStockWatch> create_phone_number_stock_watch(create_phone_number_stock_watch_request)
+
+Watch an out-of-stock country
+
+Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the `phone_number.stock_available` webhook. Stock is re-checked every 6h. One watch per country; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 countries can be watched at once. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+create_phone_number_stock_watch_request = Zernio::CreatePhoneNumberStockWatchRequest.new({country: 'country_example'}) # CreatePhoneNumberStockWatchRequest | 
+
+begin
+  # Watch an out-of-stock country
+  result = api_instance.create_phone_number_stock_watch(create_phone_number_stock_watch_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->create_phone_number_stock_watch: #{e}"
+end
+```
+
+#### Using the create_phone_number_stock_watch_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PhoneNumberStockWatch>, Integer, Hash)> create_phone_number_stock_watch_with_http_info(create_phone_number_stock_watch_request)
+
+```ruby
+begin
+  # Watch an out-of-stock country
+  data, status_code, headers = api_instance.create_phone_number_stock_watch_with_http_info(create_phone_number_stock_watch_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PhoneNumberStockWatch>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->create_phone_number_stock_watch_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_phone_number_stock_watch_request** | [**CreatePhoneNumberStockWatchRequest**](CreatePhoneNumberStockWatchRequest.md) |  |  |
+
+### Return type
+
+[**PhoneNumberStockWatch**](PhoneNumberStockWatch.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## delete_phone_number_stock_watch
+
+> <DeleteSmsSenderId200Response> delete_phone_number_stock_watch(id)
+
+Stop watching a country
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+id = 'id_example' # String | 
+
+begin
+  # Stop watching a country
+  result = api_instance.delete_phone_number_stock_watch(id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->delete_phone_number_stock_watch: #{e}"
+end
+```
+
+#### Using the delete_phone_number_stock_watch_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteSmsSenderId200Response>, Integer, Hash)> delete_phone_number_stock_watch_with_http_info(id)
+
+```ruby
+begin
+  # Stop watching a country
+  data, status_code, headers = api_instance.delete_phone_number_stock_watch_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteSmsSenderId200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->delete_phone_number_stock_watch_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  |  |
+
+### Return type
+
+[**DeleteSmsSenderId200Response**](DeleteSmsSenderId200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -856,6 +995,70 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ListPhoneNumberPortIns200Response**](ListPhoneNumberPortIns200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_phone_number_stock_watches
+
+> <ListPhoneNumberStockWatches200Response> list_phone_number_stock_watches
+
+List stock watches
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::PhoneNumbersApi.new
+
+begin
+  # List stock watches
+  result = api_instance.list_phone_number_stock_watches
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->list_phone_number_stock_watches: #{e}"
+end
+```
+
+#### Using the list_phone_number_stock_watches_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListPhoneNumberStockWatches200Response>, Integer, Hash)> list_phone_number_stock_watches_with_http_info
+
+```ruby
+begin
+  # List stock watches
+  data, status_code, headers = api_instance.list_phone_number_stock_watches_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListPhoneNumberStockWatches200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling PhoneNumbersApi->list_phone_number_stock_watches_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListPhoneNumberStockWatches200Response**](ListPhoneNumberStockWatches200Response.md)
 
 ### Authorization
 

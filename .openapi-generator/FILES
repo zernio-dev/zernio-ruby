@@ -286,6 +286,7 @@ docs/CreatePhoneNumberPortIn201ResponseOrdersInner.md
 docs/CreatePhoneNumberPortInRequest.md
 docs/CreatePhoneNumberPortInRequestEndUser.md
 docs/CreatePhoneNumberPortInRequestRequirementsInner.md
+docs/CreatePhoneNumberStockWatchRequest.md
 docs/CreatePinterestBoard201Response.md
 docs/CreatePinterestBoard201ResponseBoard.md
 docs/CreatePinterestBoardRequest.md
@@ -1028,6 +1029,7 @@ docs/ListPhoneNumberCountries200ResponseCountriesInner.md
 docs/ListPhoneNumberCountries200ResponseCountriesInnerTypesInner.md
 docs/ListPhoneNumberPortIns200Response.md
 docs/ListPhoneNumberPortIns200ResponseOrdersInner.md
+docs/ListPhoneNumberStockWatches200Response.md
 docs/ListPhoneNumbers200Response.md
 docs/ListPhoneNumbers200ResponseConnectedInner.md
 docs/ListPhoneNumbers200ResponseNumbersInner.md
@@ -1135,6 +1137,7 @@ docs/OnWhatsAppNumberVerificationRequiredRequest.md
 docs/Pagination.md
 docs/PauseWorkflow200Response.md
 docs/Pending.md
+docs/PhoneNumberStockWatch.md
 docs/PhoneNumbersApi.md
 docs/PinDiscordMessage200Response.md
 docs/PinterestPlatformData.md
@@ -1716,6 +1719,9 @@ docs/WebhookPayloadMessageSentMessage.md
 docs/WebhookPayloadMessageSentMessageAttachmentsInner.md
 docs/WebhookPayloadMessageSentMessageSender.md
 docs/WebhookPayloadMessageSentMetadata.md
+docs/WebhookPayloadPhoneNumberStockAvailable.md
+docs/WebhookPayloadPhoneNumberStockAvailableStock.md
+docs/WebhookPayloadPhoneNumberStockAvailableStockTypesInner.md
 docs/WebhookPayloadPost.md
 docs/WebhookPayloadPostPlatform.md
 docs/WebhookPayloadPostPlatformAccount.md
@@ -2143,6 +2149,7 @@ lib/zernio-sdk/models/create_phone_number_port_in201_response_orders_inner.rb
 lib/zernio-sdk/models/create_phone_number_port_in_request.rb
 lib/zernio-sdk/models/create_phone_number_port_in_request_end_user.rb
 lib/zernio-sdk/models/create_phone_number_port_in_request_requirements_inner.rb
+lib/zernio-sdk/models/create_phone_number_stock_watch_request.rb
 lib/zernio-sdk/models/create_pinterest_board201_response.rb
 lib/zernio-sdk/models/create_pinterest_board201_response_board.rb
 lib/zernio-sdk/models/create_pinterest_board_request.rb
@@ -2870,6 +2877,7 @@ lib/zernio-sdk/models/list_phone_number_countries200_response_countries_inner.rb
 lib/zernio-sdk/models/list_phone_number_countries200_response_countries_inner_types_inner.rb
 lib/zernio-sdk/models/list_phone_number_port_ins200_response.rb
 lib/zernio-sdk/models/list_phone_number_port_ins200_response_orders_inner.rb
+lib/zernio-sdk/models/list_phone_number_stock_watches200_response.rb
 lib/zernio-sdk/models/list_phone_numbers200_response.rb
 lib/zernio-sdk/models/list_phone_numbers200_response_connected_inner.rb
 lib/zernio-sdk/models/list_phone_numbers200_response_numbers_inner.rb
@@ -2972,6 +2980,7 @@ lib/zernio-sdk/models/on_whats_app_number_verification_required_request.rb
 lib/zernio-sdk/models/pagination.rb
 lib/zernio-sdk/models/pause_workflow200_response.rb
 lib/zernio-sdk/models/pending.rb
+lib/zernio-sdk/models/phone_number_stock_watch.rb
 lib/zernio-sdk/models/pin_discord_message200_response.rb
 lib/zernio-sdk/models/pinterest_platform_data.rb
 lib/zernio-sdk/models/platform_analytics.rb
@@ -3535,6 +3544,9 @@ lib/zernio-sdk/models/webhook_payload_message_sent_message.rb
 lib/zernio-sdk/models/webhook_payload_message_sent_message_attachments_inner.rb
 lib/zernio-sdk/models/webhook_payload_message_sent_message_sender.rb
 lib/zernio-sdk/models/webhook_payload_message_sent_metadata.rb
+lib/zernio-sdk/models/webhook_payload_phone_number_stock_available.rb
+lib/zernio-sdk/models/webhook_payload_phone_number_stock_available_stock.rb
+lib/zernio-sdk/models/webhook_payload_phone_number_stock_available_stock_types_inner.rb
 lib/zernio-sdk/models/webhook_payload_post.rb
 lib/zernio-sdk/models/webhook_payload_post_platform.rb
 lib/zernio-sdk/models/webhook_payload_post_platform_account.rb
@@ -3948,6 +3960,7 @@ spec/models/create_phone_number_port_in201_response_spec.rb
 spec/models/create_phone_number_port_in_request_end_user_spec.rb
 spec/models/create_phone_number_port_in_request_requirements_inner_spec.rb
 spec/models/create_phone_number_port_in_request_spec.rb
+spec/models/create_phone_number_stock_watch_request_spec.rb
 spec/models/create_pinterest_board201_response_board_spec.rb
 spec/models/create_pinterest_board201_response_spec.rb
 spec/models/create_pinterest_board_request_spec.rb
@@ -4675,6 +4688,7 @@ spec/models/list_phone_number_countries200_response_countries_inner_types_inner_
 spec/models/list_phone_number_countries200_response_spec.rb
 spec/models/list_phone_number_port_ins200_response_orders_inner_spec.rb
 spec/models/list_phone_number_port_ins200_response_spec.rb
+spec/models/list_phone_number_stock_watches200_response_spec.rb
 spec/models/list_phone_numbers200_response_connected_inner_spec.rb
 spec/models/list_phone_numbers200_response_numbers_inner_spec.rb
 spec/models/list_phone_numbers200_response_sandbox_spec.rb
@@ -4777,6 +4791,7 @@ spec/models/on_whats_app_number_verification_required_request_spec.rb
 spec/models/pagination_spec.rb
 spec/models/pause_workflow200_response_spec.rb
 spec/models/pending_spec.rb
+spec/models/phone_number_stock_watch_spec.rb
 spec/models/pin_discord_message200_response_spec.rb
 spec/models/pinterest_platform_data_spec.rb
 spec/models/platform_analytics_spec.rb
@@ -5339,6 +5354,9 @@ spec/models/webhook_payload_message_sent_message_spec.rb
 spec/models/webhook_payload_message_sent_metadata_spec.rb
 spec/models/webhook_payload_message_sent_spec.rb
 spec/models/webhook_payload_message_spec.rb
+spec/models/webhook_payload_phone_number_stock_available_spec.rb
+spec/models/webhook_payload_phone_number_stock_available_stock_spec.rb
+spec/models/webhook_payload_phone_number_stock_available_stock_types_inner_spec.rb
 spec/models/webhook_payload_post_platform_account_spec.rb
 spec/models/webhook_payload_post_platform_platform_spec.rb
 spec/models/webhook_payload_post_platform_post_platforms_inner_spec.rb

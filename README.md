@@ -426,6 +426,8 @@ Class | Method | HTTP request | Description
 *Zernio::PhoneNumbersApi* | [**check_phone_number_portability**](docs/PhoneNumbersApi.md#check_phone_number_portability) | **POST** /v1/phone-numbers/port-in/check | Check portability
 *Zernio::PhoneNumbersApi* | [**create_phone_number_kyc_link**](docs/PhoneNumbersApi.md#create_phone_number_kyc_link) | **POST** /v1/phone-numbers/kyc/share | Create a hosted KYC link
 *Zernio::PhoneNumbersApi* | [**create_phone_number_port_in**](docs/PhoneNumbersApi.md#create_phone_number_port_in) | **POST** /v1/phone-numbers/port-in | Port numbers in
+*Zernio::PhoneNumbersApi* | [**create_phone_number_stock_watch**](docs/PhoneNumbersApi.md#create_phone_number_stock_watch) | **POST** /v1/phone-numbers/stock-watches | Watch an out-of-stock country
+*Zernio::PhoneNumbersApi* | [**delete_phone_number_stock_watch**](docs/PhoneNumbersApi.md#delete_phone_number_stock_watch) | **DELETE** /v1/phone-numbers/stock-watches/{id} | Stop watching a country
 *Zernio::PhoneNumbersApi* | [**get_phone_number**](docs/PhoneNumbersApi.md#get_phone_number) | **GET** /v1/phone-numbers/{id} | Get phone number
 *Zernio::PhoneNumbersApi* | [**get_phone_number_kyc_form**](docs/PhoneNumbersApi.md#get_phone_number_kyc_form) | **GET** /v1/phone-numbers/kyc | Get KYC form spec
 *Zernio::PhoneNumbersApi* | [**get_phone_number_port_in_order_requirements**](docs/PhoneNumbersApi.md#get_phone_number_port_in_order_requirements) | **GET** /v1/phone-numbers/port-in/{id}/requirements | A port-in order's pending requirements
@@ -433,6 +435,7 @@ Class | Method | HTTP request | Description
 *Zernio::PhoneNumbersApi* | [**get_phone_number_remediation**](docs/PhoneNumbersApi.md#get_phone_number_remediation) | **GET** /v1/phone-numbers/{id}/remediate | Get declined requirements
 *Zernio::PhoneNumbersApi* | [**list_phone_number_countries**](docs/PhoneNumbersApi.md#list_phone_number_countries) | **GET** /v1/phone-numbers/countries | List offerable number countries
 *Zernio::PhoneNumbersApi* | [**list_phone_number_port_ins**](docs/PhoneNumbersApi.md#list_phone_number_port_ins) | **GET** /v1/phone-numbers/port-in | List port-in orders
+*Zernio::PhoneNumbersApi* | [**list_phone_number_stock_watches**](docs/PhoneNumbersApi.md#list_phone_number_stock_watches) | **GET** /v1/phone-numbers/stock-watches | List stock watches
 *Zernio::PhoneNumbersApi* | [**list_phone_numbers**](docs/PhoneNumbersApi.md#list_phone_numbers) | **GET** /v1/phone-numbers | List phone numbers
 *Zernio::PhoneNumbersApi* | [**purchase_phone_number**](docs/PhoneNumbersApi.md#purchase_phone_number) | **POST** /v1/phone-numbers/purchase | Purchase phone number
 *Zernio::PhoneNumbersApi* | [**release_phone_number**](docs/PhoneNumbersApi.md#release_phone_number) | **DELETE** /v1/phone-numbers/{id} | Release phone number
@@ -929,6 +932,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreatePhoneNumberPortInRequest](docs/CreatePhoneNumberPortInRequest.md)
  - [Zernio::CreatePhoneNumberPortInRequestEndUser](docs/CreatePhoneNumberPortInRequestEndUser.md)
  - [Zernio::CreatePhoneNumberPortInRequestRequirementsInner](docs/CreatePhoneNumberPortInRequestRequirementsInner.md)
+ - [Zernio::CreatePhoneNumberStockWatchRequest](docs/CreatePhoneNumberStockWatchRequest.md)
  - [Zernio::CreatePinterestBoard201Response](docs/CreatePinterestBoard201Response.md)
  - [Zernio::CreatePinterestBoard201ResponseBoard](docs/CreatePinterestBoard201ResponseBoard.md)
  - [Zernio::CreatePinterestBoardRequest](docs/CreatePinterestBoardRequest.md)
@@ -1656,6 +1660,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListPhoneNumberCountries200ResponseCountriesInnerTypesInner](docs/ListPhoneNumberCountries200ResponseCountriesInnerTypesInner.md)
  - [Zernio::ListPhoneNumberPortIns200Response](docs/ListPhoneNumberPortIns200Response.md)
  - [Zernio::ListPhoneNumberPortIns200ResponseOrdersInner](docs/ListPhoneNumberPortIns200ResponseOrdersInner.md)
+ - [Zernio::ListPhoneNumberStockWatches200Response](docs/ListPhoneNumberStockWatches200Response.md)
  - [Zernio::ListPhoneNumbers200Response](docs/ListPhoneNumbers200Response.md)
  - [Zernio::ListPhoneNumbers200ResponseConnectedInner](docs/ListPhoneNumbers200ResponseConnectedInner.md)
  - [Zernio::ListPhoneNumbers200ResponseNumbersInner](docs/ListPhoneNumbers200ResponseNumbersInner.md)
@@ -1758,6 +1763,7 @@ Class | Method | HTTP request | Description
  - [Zernio::Pagination](docs/Pagination.md)
  - [Zernio::PauseWorkflow200Response](docs/PauseWorkflow200Response.md)
  - [Zernio::Pending](docs/Pending.md)
+ - [Zernio::PhoneNumberStockWatch](docs/PhoneNumberStockWatch.md)
  - [Zernio::PinDiscordMessage200Response](docs/PinDiscordMessage200Response.md)
  - [Zernio::PinterestPlatformData](docs/PinterestPlatformData.md)
  - [Zernio::PlatformAnalytics](docs/PlatformAnalytics.md)
@@ -2321,6 +2327,9 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadMessageSentMessageAttachmentsInner](docs/WebhookPayloadMessageSentMessageAttachmentsInner.md)
  - [Zernio::WebhookPayloadMessageSentMessageSender](docs/WebhookPayloadMessageSentMessageSender.md)
  - [Zernio::WebhookPayloadMessageSentMetadata](docs/WebhookPayloadMessageSentMetadata.md)
+ - [Zernio::WebhookPayloadPhoneNumberStockAvailable](docs/WebhookPayloadPhoneNumberStockAvailable.md)
+ - [Zernio::WebhookPayloadPhoneNumberStockAvailableStock](docs/WebhookPayloadPhoneNumberStockAvailableStock.md)
+ - [Zernio::WebhookPayloadPhoneNumberStockAvailableStockTypesInner](docs/WebhookPayloadPhoneNumberStockAvailableStockTypesInner.md)
  - [Zernio::WebhookPayloadPost](docs/WebhookPayloadPost.md)
  - [Zernio::WebhookPayloadPostPlatform](docs/WebhookPayloadPostPlatform.md)
  - [Zernio::WebhookPayloadPostPlatformAccount](docs/WebhookPayloadPostPlatformAccount.md)

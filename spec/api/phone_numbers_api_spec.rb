@@ -94,6 +94,29 @@ describe 'PhoneNumbersApi' do
     end
   end
 
+  # unit tests for create_phone_number_stock_watch
+  # Watch an out-of-stock country
+  # Get notified the first time an out-of-stock country has deliverable numbers again: an email to the account holder plus the &#x60;phone_number.stock_available&#x60; webhook. Stock is re-checked every 6h. One watch per country; a repeat request returns the existing watch (200). The watch is consumed when it fires, so re-create it if you miss the stock. Up to 20 countries can be watched at once. 
+  # @param create_phone_number_stock_watch_request 
+  # @param [Hash] opts the optional parameters
+  # @return [PhoneNumberStockWatch]
+  describe 'create_phone_number_stock_watch test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_phone_number_stock_watch
+  # Stop watching a country
+  # @param id 
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteSmsSenderId200Response]
+  describe 'delete_phone_number_stock_watch test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_phone_number
   # Get phone number
   # Retrieve the current status of a purchased phone number. Poll this to track Meta pre-verification (US sync path) and, for regulated (Tier 3/4) numbers, the async lifecycle: pending_regulatory → active (or regulatory_declined). When a regulated number has an Onfido ID step, &#x60;onfidoVerificationUrl&#x60; appears here once the order is placed — forward it to the end user. (Or subscribe to the whatsapp.number.* webhooks instead of polling.) 
@@ -173,6 +196,16 @@ describe 'PhoneNumbersApi' do
   # @param [Hash] opts the optional parameters
   # @return [ListPhoneNumberPortIns200Response]
   describe 'list_phone_number_port_ins test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_phone_number_stock_watches
+  # List stock watches
+  # @param [Hash] opts the optional parameters
+  # @return [ListPhoneNumberStockWatches200Response]
+  describe 'list_phone_number_stock_watches test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -22,6 +22,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_message_read**](WebhookEventsApi.md#on_message_read) | **POST** /message.read | Message read event |
 | [**on_message_received**](WebhookEventsApi.md#on_message_received) | **POST** /message.received | Message received event |
 | [**on_message_sent**](WebhookEventsApi.md#on_message_sent) | **POST** /message.sent | Message sent event |
+| [**on_phone_number_stock_available**](WebhookEventsApi.md#on_phone_number_stock_available) | **POST** /phone_number.stock_available | Phone-number stock available event |
 | [**on_post_cancelled**](WebhookEventsApi.md#on_post_cancelled) | **POST** /post.cancelled | Post cancelled event |
 | [**on_post_external_created**](WebhookEventsApi.md#on_post_external_created) | **POST** /post.external.created | External post created event |
 | [**on_post_external_deleted**](WebhookEventsApi.md#on_post_external_deleted) | **POST** /post.external.deleted | External post deleted event |
@@ -1265,6 +1266,74 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **webhook_payload_message_sent** | [**WebhookPayloadMessageSent**](WebhookPayloadMessageSent.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
+## on_phone_number_stock_available
+
+> on_phone_number_stock_available(webhook_payload_phone_number_stock_available)
+
+Phone-number stock available event
+
+Fired by the stock sweep (every 6h) the first time a country you watch via POST /v1/phone-numbers/stock-watches has deliverable numbers again. The watch is consumed, so the event fires once per watch; the stock counts are a snapshot and numbers are sold first come, first served. Buy with POST /v1/phone-numbers/purchase. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_phone_number_stock_available =  # WebhookPayloadPhoneNumberStockAvailable | 
+
+begin
+  # Phone-number stock available event
+  api_instance.on_phone_number_stock_available(webhook_payload_phone_number_stock_available)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_phone_number_stock_available: #{e}"
+end
+```
+
+#### Using the on_phone_number_stock_available_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_phone_number_stock_available_with_http_info(webhook_payload_phone_number_stock_available)
+
+```ruby
+begin
+  # Phone-number stock available event
+  data, status_code, headers = api_instance.on_phone_number_stock_available_with_http_info(webhook_payload_phone_number_stock_available)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_phone_number_stock_available_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_phone_number_stock_available** | [**WebhookPayloadPhoneNumberStockAvailable**](WebhookPayloadPhoneNumberStockAvailable.md) |  |  |
 
 ### Return type
 
