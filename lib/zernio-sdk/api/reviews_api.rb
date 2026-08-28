@@ -217,10 +217,11 @@ module Zernio
     end
 
     # Reply to review
-    # Post a reply to a review. Requires accountId in request body.
+    # Post a reply to a review. Requires accountId in request body.  **Idempotency:** send an `Idempotency-Key` header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with `Idempotent-Replayed: true`) instead of sending the reply to the platform again; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different reviewId returns 422 rather than replaying the other review's response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \"request succeeded but the response was lost\" case. After an ambiguous failure (a 5xx or a network timeout) fetch the review before retrying with the same key, and treat a missing reply as inconclusive rather than as proof nothing was sent. 
     # @param review_id [String] Review ID (URL-encoded for Google Business)
     # @param reply_to_inbox_review_request [ReplyToInboxReviewRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [ReplyToInboxReview200Response]
     def reply_to_inbox_review(review_id, reply_to_inbox_review_request, opts = {})
       data, _status_code, _headers = reply_to_inbox_review_with_http_info(review_id, reply_to_inbox_review_request, opts)
@@ -228,10 +229,11 @@ module Zernio
     end
 
     # Reply to review
-    # Post a reply to a review. Requires accountId in request body.
+    # Post a reply to a review. Requires accountId in request body.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with &#x60;Idempotent-Replayed: true&#x60;) instead of sending the reply to the platform again; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different reviewId returns 422 rather than replaying the other review&#39;s response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \&quot;request succeeded but the response was lost\&quot; case. After an ambiguous failure (a 5xx or a network timeout) fetch the review before retrying with the same key, and treat a missing reply as inconclusive rather than as proof nothing was sent. 
     # @param review_id [String] Review ID (URL-encoded for Google Business)
     # @param reply_to_inbox_review_request [ReplyToInboxReviewRequest] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
     # @return [Array<(ReplyToInboxReview200Response, Integer, Hash)>] ReplyToInboxReview200Response data, response status code and response headers
     def reply_to_inbox_review_with_http_info(review_id, reply_to_inbox_review_request, opts = {})
       if @api_client.config.debugging
@@ -245,6 +247,10 @@ module Zernio
       if @api_client.config.client_side_validation && reply_to_inbox_review_request.nil?
         fail ArgumentError, "Missing the required parameter 'reply_to_inbox_review_request' when calling ReviewsApi.reply_to_inbox_review"
       end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling ReviewsApi.reply_to_inbox_review, the character length must be smaller than or equal to 255.'
+      end
+
       # resource path
       local_var_path = '/v1/inbox/reviews/{reviewId}/reply'.sub('{' + 'reviewId' + '}', CGI.escape(review_id.to_s))
 
@@ -260,6 +266,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}
