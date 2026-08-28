@@ -343,6 +343,22 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for get_youtube_captions
+  # Get a YouTube video transcript
+  # Returns the caption track YouTube already holds for one of the connected channel&#39;s own videos, as plain text plus timed cues. Use it instead of downloading and transcribing the video yourself.  Auto-generated (ASR) tracks are included: YouTube serves them to the channel owner, which is what the connected account is. Uploaded tracks win over auto-generated ones when both exist for a language.  Caching: we store the transcript on first read and serve it from there afterwards, so you do not need to cache it yourself. A cached read costs no YouTube quota and does not call YouTube at all. &#x60;source&#x60; tells you which happened (&#x60;youtube&#x60; on the first read, &#x60;cache&#x60; after). Pass &#x60;refresh&#x3D;true&#x60; only when the captions actually changed on YouTube, since that re-downloads.  Notes: - Only videos owned by this connected channel. Anything else returns 404. - &#x60;contentDetails.caption&#x60; in YouTube&#39;s own API reads &#x60;false&#x60; on videos that DO have a serving auto-generated track, so it is not a usable availability signal. Call this endpoint and handle the 404. - YouTube generates auto-captions only for videos with recognisable speech, and can take a few hours after upload to publish them. 
+  # @param account_id The connected YouTube account.
+  # @param video_id The YouTube video id (the &#x60;platformPostId&#x60; on a synced external post).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :language BCP-47 language tag as YouTube labels the track. &#x60;en&#x60; also matches an &#x60;en-GB&#x60; track. Omit to take the best available track.
+  # @option opts [String] :format &#x60;json&#x60; returns timed &#x60;cues&#x60;; &#x60;srt&#x60; returns the raw SubRip body instead. &#x60;text&#x60; is present either way.
+  # @option opts [Boolean] :refresh Re-download from YouTube instead of serving the stored copy. Spends 200 quota units.
+  # @return [GetYoutubeCaptions200Response]
+  describe 'get_youtube_captions test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_youtube_playlists
   # List YouTube playlists
   # Returns the playlists available for a connected YouTube account. Use this to get a playlist ID when creating a YouTube post with the playlistId field.

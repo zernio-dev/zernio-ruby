@@ -28,6 +28,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_shopify_connect_url**](ConnectApi.md#get_shopify_connect_url) | **GET** /v1/connect/shopify | Get Shopify OAuth connect URL |
 | [**get_subreddit_rules**](ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules |
 | [**get_telegram_connect_status**](ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code |
+| [**get_youtube_captions**](ConnectApi.md#get_youtube_captions) | **GET** /v1/accounts/{accountId}/youtube-captions | Get a YouTube video transcript |
 | [**get_youtube_playlists**](ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists |
 | [**handle_o_auth_callback**](ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback |
 | [**initiate_telegram_connect**](ConnectApi.md#initiate_telegram_connect) | **POST** /v1/connect/telegram | Connect Telegram directly |
@@ -1754,6 +1755,85 @@ end
 ### Return type
 
 [**GetTelegramConnectStatus200Response**](GetTelegramConnectStatus200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_youtube_captions
+
+> <GetYoutubeCaptions200Response> get_youtube_captions(account_id, video_id, opts)
+
+Get a YouTube video transcript
+
+Returns the caption track YouTube already holds for one of the connected channel's own videos, as plain text plus timed cues. Use it instead of downloading and transcribing the video yourself.  Auto-generated (ASR) tracks are included: YouTube serves them to the channel owner, which is what the connected account is. Uploaded tracks win over auto-generated ones when both exist for a language.  Caching: we store the transcript on first read and serve it from there afterwards, so you do not need to cache it yourself. A cached read costs no YouTube quota and does not call YouTube at all. `source` tells you which happened (`youtube` on the first read, `cache` after). Pass `refresh=true` only when the captions actually changed on YouTube, since that re-downloads.  Notes: - Only videos owned by this connected channel. Anything else returns 404. - `contentDetails.caption` in YouTube's own API reads `false` on videos that DO have a serving auto-generated track, so it is not a usable availability signal. Call this endpoint and handle the 404. - YouTube generates auto-captions only for videos with recognisable speech, and can take a few hours after upload to publish them. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+account_id = 'account_id_example' # String | The connected YouTube account.
+video_id = 'video_id_example' # String | The YouTube video id (the `platformPostId` on a synced external post).
+opts = {
+  language: 'language_example', # String | BCP-47 language tag as YouTube labels the track. `en` also matches an `en-GB` track. Omit to take the best available track.
+  format: 'json', # String | `json` returns timed `cues`; `srt` returns the raw SubRip body instead. `text` is present either way.
+  refresh: true # Boolean | Re-download from YouTube instead of serving the stored copy. Spends 200 quota units.
+}
+
+begin
+  # Get a YouTube video transcript
+  result = api_instance.get_youtube_captions(account_id, video_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_youtube_captions: #{e}"
+end
+```
+
+#### Using the get_youtube_captions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetYoutubeCaptions200Response>, Integer, Hash)> get_youtube_captions_with_http_info(account_id, video_id, opts)
+
+```ruby
+begin
+  # Get a YouTube video transcript
+  data, status_code, headers = api_instance.get_youtube_captions_with_http_info(account_id, video_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetYoutubeCaptions200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->get_youtube_captions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The connected YouTube account. |  |
+| **video_id** | **String** | The YouTube video id (the &#x60;platformPostId&#x60; on a synced external post). |  |
+| **language** | **String** | BCP-47 language tag as YouTube labels the track. &#x60;en&#x60; also matches an &#x60;en-GB&#x60; track. Omit to take the best available track. | [optional] |
+| **format** | **String** | &#x60;json&#x60; returns timed &#x60;cues&#x60;; &#x60;srt&#x60; returns the raw SubRip body instead. &#x60;text&#x60; is present either way. | [optional][default to &#39;json&#39;] |
+| **refresh** | **Boolean** | Re-download from YouTube instead of serving the stored copy. Spends 200 quota units. | [optional][default to false] |
+
+### Return type
+
+[**GetYoutubeCaptions200Response**](GetYoutubeCaptions200Response.md)
 
 ### Authorization
 

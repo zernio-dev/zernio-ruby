@@ -277,6 +277,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**get_shopify_connect_url**](docs/ConnectApi.md#get_shopify_connect_url) | **GET** /v1/connect/shopify | Get Shopify OAuth connect URL
 *Zernio::ConnectApi* | [**get_subreddit_rules**](docs/ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules
 *Zernio::ConnectApi* | [**get_telegram_connect_status**](docs/ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code
+*Zernio::ConnectApi* | [**get_youtube_captions**](docs/ConnectApi.md#get_youtube_captions) | **GET** /v1/accounts/{accountId}/youtube-captions | Get a YouTube video transcript
 *Zernio::ConnectApi* | [**get_youtube_playlists**](docs/ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists
 *Zernio::ConnectApi* | [**handle_o_auth_callback**](docs/ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback
 *Zernio::ConnectApi* | [**initiate_telegram_connect**](docs/ConnectApi.md#initiate_telegram_connect) | **POST** /v1/connect/telegram | Connect Telegram directly
@@ -1454,6 +1455,9 @@ Class | Method | HTTP request | Description
  - [Zernio::GetYouTubeDemographics412Response](docs/GetYouTubeDemographics412Response.md)
  - [Zernio::GetYouTubeDemographics412ResponseScopeStatus](docs/GetYouTubeDemographics412ResponseScopeStatus.md)
  - [Zernio::GetYouTubeVideoRetention404Response](docs/GetYouTubeVideoRetention404Response.md)
+ - [Zernio::GetYoutubeCaptions200Response](docs/GetYoutubeCaptions200Response.md)
+ - [Zernio::GetYoutubeCaptions200ResponseAvailableTracksInner](docs/GetYoutubeCaptions200ResponseAvailableTracksInner.md)
+ - [Zernio::GetYoutubeCaptions200ResponseCuesInner](docs/GetYoutubeCaptions200ResponseCuesInner.md)
  - [Zernio::GetYoutubePlaylists200Response](docs/GetYoutubePlaylists200Response.md)
  - [Zernio::GetYoutubePlaylists200ResponsePlaylistsInner](docs/GetYoutubePlaylists200ResponsePlaylistsInner.md)
  - [Zernio::GoogleBusinessPlatformData](docs/GoogleBusinessPlatformData.md)

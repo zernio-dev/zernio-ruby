@@ -1714,6 +1714,89 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get a YouTube video transcript
+    # Returns the caption track YouTube already holds for one of the connected channel's own videos, as plain text plus timed cues. Use it instead of downloading and transcribing the video yourself.  Auto-generated (ASR) tracks are included: YouTube serves them to the channel owner, which is what the connected account is. Uploaded tracks win over auto-generated ones when both exist for a language.  Caching: we store the transcript on first read and serve it from there afterwards, so you do not need to cache it yourself. A cached read costs no YouTube quota and does not call YouTube at all. `source` tells you which happened (`youtube` on the first read, `cache` after). Pass `refresh=true` only when the captions actually changed on YouTube, since that re-downloads.  Notes: - Only videos owned by this connected channel. Anything else returns 404. - `contentDetails.caption` in YouTube's own API reads `false` on videos that DO have a serving auto-generated track, so it is not a usable availability signal. Call this endpoint and handle the 404. - YouTube generates auto-captions only for videos with recognisable speech, and can take a few hours after upload to publish them. 
+    # @param account_id [String] The connected YouTube account.
+    # @param video_id [String] The YouTube video id (the &#x60;platformPostId&#x60; on a synced external post).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :language BCP-47 language tag as YouTube labels the track. &#x60;en&#x60; also matches an &#x60;en-GB&#x60; track. Omit to take the best available track.
+    # @option opts [String] :format &#x60;json&#x60; returns timed &#x60;cues&#x60;; &#x60;srt&#x60; returns the raw SubRip body instead. &#x60;text&#x60; is present either way. (default to 'json')
+    # @option opts [Boolean] :refresh Re-download from YouTube instead of serving the stored copy. Spends 200 quota units. (default to false)
+    # @return [GetYoutubeCaptions200Response]
+    def get_youtube_captions(account_id, video_id, opts = {})
+      data, _status_code, _headers = get_youtube_captions_with_http_info(account_id, video_id, opts)
+      data
+    end
+
+    # Get a YouTube video transcript
+    # Returns the caption track YouTube already holds for one of the connected channel&#39;s own videos, as plain text plus timed cues. Use it instead of downloading and transcribing the video yourself.  Auto-generated (ASR) tracks are included: YouTube serves them to the channel owner, which is what the connected account is. Uploaded tracks win over auto-generated ones when both exist for a language.  Caching: we store the transcript on first read and serve it from there afterwards, so you do not need to cache it yourself. A cached read costs no YouTube quota and does not call YouTube at all. &#x60;source&#x60; tells you which happened (&#x60;youtube&#x60; on the first read, &#x60;cache&#x60; after). Pass &#x60;refresh&#x3D;true&#x60; only when the captions actually changed on YouTube, since that re-downloads.  Notes: - Only videos owned by this connected channel. Anything else returns 404. - &#x60;contentDetails.caption&#x60; in YouTube&#39;s own API reads &#x60;false&#x60; on videos that DO have a serving auto-generated track, so it is not a usable availability signal. Call this endpoint and handle the 404. - YouTube generates auto-captions only for videos with recognisable speech, and can take a few hours after upload to publish them. 
+    # @param account_id [String] The connected YouTube account.
+    # @param video_id [String] The YouTube video id (the &#x60;platformPostId&#x60; on a synced external post).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :language BCP-47 language tag as YouTube labels the track. &#x60;en&#x60; also matches an &#x60;en-GB&#x60; track. Omit to take the best available track.
+    # @option opts [String] :format &#x60;json&#x60; returns timed &#x60;cues&#x60;; &#x60;srt&#x60; returns the raw SubRip body instead. &#x60;text&#x60; is present either way. (default to 'json')
+    # @option opts [Boolean] :refresh Re-download from YouTube instead of serving the stored copy. Spends 200 quota units. (default to false)
+    # @return [Array<(GetYoutubeCaptions200Response, Integer, Hash)>] GetYoutubeCaptions200Response data, response status code and response headers
+    def get_youtube_captions_with_http_info(account_id, video_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.get_youtube_captions ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConnectApi.get_youtube_captions"
+      end
+      # verify the required parameter 'video_id' is set
+      if @api_client.config.client_side_validation && video_id.nil?
+        fail ArgumentError, "Missing the required parameter 'video_id' when calling ConnectApi.get_youtube_captions"
+      end
+      allowable_values = ["json", "srt"]
+      if @api_client.config.client_side_validation && opts[:'format'] && !allowable_values.include?(opts[:'format'])
+        fail ArgumentError, "invalid value for \"format\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/youtube-captions'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'videoId'] = video_id
+      query_params[:'language'] = opts[:'language'] if !opts[:'language'].nil?
+      query_params[:'format'] = opts[:'format'] if !opts[:'format'].nil?
+      query_params[:'refresh'] = opts[:'refresh'] if !opts[:'refresh'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetYoutubeCaptions200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.get_youtube_captions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#get_youtube_captions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List YouTube playlists
     # Returns the playlists available for a connected YouTube account. Use this to get a playlist ID when creating a YouTube post with the playlistId field.
     # @param account_id [String] 
