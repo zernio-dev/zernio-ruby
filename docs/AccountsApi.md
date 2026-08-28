@@ -6,6 +6,7 @@ All URIs are relative to *https://zernio.com/api*
 | ------ | ------------ | ----------- |
 | [**delete_account**](AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account |
 | [**get_account_health**](AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health |
+| [**get_account_posts**](AccountsApi.md#get_account_posts) | **GET** /v1/accounts/{accountId}/posts | List posts published on the platform |
 | [**get_all_accounts_health**](AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health |
 | [**get_bluesky_settings**](AccountsApi.md#get_bluesky_settings) | **GET** /v1/accounts/{accountId}/bluesky-settings | Get Bluesky account settings |
 | [**get_follower_stats**](AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats |
@@ -146,6 +147,75 @@ end
 ### Return type
 
 [**GetAccountHealth200Response**](GetAccountHealth200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_account_posts
+
+> <GetAccountPosts200Response> get_account_posts(account_id)
+
+List posts published on the platform
+
+Returns the 25 most recent posts that exist on the platform for a connected account, read live from the platform API. This covers everything on the account, including posts that were never created through Zernio.  Use it to obtain the platform's own post id, which the analytics endpoints take as input. On YouTube the returned `id` is the video ID that `GET /v1/analytics/youtube/daily-views`, `/video-retention` and `/demographics` expect as `videoId`, so this endpoint is what backs a video picker in your own UI.  Not every field applies to every platform: `reactionCount` is Facebook and LinkedIn, `shareCount` is platform dependent, `cid` is the Bluesky content id needed to reply, and `subreddit` is Reddit only. Absent fields are omitted from the response.  The account's token is refreshed before the call when it has expired. When the refresh cannot recover it, the response is a 401 with code `TOKEN_EXPIRED` and the account has to be reconnected. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AccountsApi.new
+account_id = 'account_id_example' # String | 
+
+begin
+  # List posts published on the platform
+  result = api_instance.get_account_posts(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_account_posts: #{e}"
+end
+```
+
+#### Using the get_account_posts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetAccountPosts200Response>, Integer, Hash)> get_account_posts_with_http_info(account_id)
+
+```ruby
+begin
+  # List posts published on the platform
+  data, status_code, headers = api_instance.get_account_posts_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetAccountPosts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AccountsApi->get_account_posts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+
+### Return type
+
+[**GetAccountPosts200Response**](GetAccountPosts200Response.md)
 
 ### Authorization
 

@@ -145,6 +145,69 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List posts published on the platform
+    # Returns the 25 most recent posts that exist on the platform for a connected account, read live from the platform API. This covers everything on the account, including posts that were never created through Zernio.  Use it to obtain the platform's own post id, which the analytics endpoints take as input. On YouTube the returned `id` is the video ID that `GET /v1/analytics/youtube/daily-views`, `/video-retention` and `/demographics` expect as `videoId`, so this endpoint is what backs a video picker in your own UI.  Not every field applies to every platform: `reactionCount` is Facebook and LinkedIn, `shareCount` is platform dependent, `cid` is the Bluesky content id needed to reply, and `subreddit` is Reddit only. Absent fields are omitted from the response.  The account's token is refreshed before the call when it has expired. When the refresh cannot recover it, the response is a 401 with code `TOKEN_EXPIRED` and the account has to be reconnected. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [GetAccountPosts200Response]
+    def get_account_posts(account_id, opts = {})
+      data, _status_code, _headers = get_account_posts_with_http_info(account_id, opts)
+      data
+    end
+
+    # List posts published on the platform
+    # Returns the 25 most recent posts that exist on the platform for a connected account, read live from the platform API. This covers everything on the account, including posts that were never created through Zernio.  Use it to obtain the platform&#39;s own post id, which the analytics endpoints take as input. On YouTube the returned &#x60;id&#x60; is the video ID that &#x60;GET /v1/analytics/youtube/daily-views&#x60;, &#x60;/video-retention&#x60; and &#x60;/demographics&#x60; expect as &#x60;videoId&#x60;, so this endpoint is what backs a video picker in your own UI.  Not every field applies to every platform: &#x60;reactionCount&#x60; is Facebook and LinkedIn, &#x60;shareCount&#x60; is platform dependent, &#x60;cid&#x60; is the Bluesky content id needed to reply, and &#x60;subreddit&#x60; is Reddit only. Absent fields are omitted from the response.  The account&#39;s token is refreshed before the call when it has expired. When the refresh cannot recover it, the response is a 401 with code &#x60;TOKEN_EXPIRED&#x60; and the account has to be reconnected. 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetAccountPosts200Response, Integer, Hash)>] GetAccountPosts200Response data, response status code and response headers
+    def get_account_posts_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountsApi.get_account_posts ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountsApi.get_account_posts"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/posts'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAccountPosts200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AccountsApi.get_account_posts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountsApi#get_account_posts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Check accounts health
     # Returns health status of all connected accounts including token validity, permissions, and issues needing attention.
     # @param [Hash] opts the optional parameters

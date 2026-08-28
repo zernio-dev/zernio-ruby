@@ -94,6 +94,7 @@ Class | Method | HTTP request | Description
 *Zernio::AccountSettingsApi* | [**set_telegram_commands**](docs/AccountSettingsApi.md#set_telegram_commands) | **PUT** /v1/accounts/{accountId}/telegram-commands | Set TG bot commands
 *Zernio::AccountsApi* | [**delete_account**](docs/AccountsApi.md#delete_account) | **DELETE** /v1/accounts/{accountId} | Disconnect account
 *Zernio::AccountsApi* | [**get_account_health**](docs/AccountsApi.md#get_account_health) | **GET** /v1/accounts/{accountId}/health | Check account health
+*Zernio::AccountsApi* | [**get_account_posts**](docs/AccountsApi.md#get_account_posts) | **GET** /v1/accounts/{accountId}/posts | List posts published on the platform
 *Zernio::AccountsApi* | [**get_all_accounts_health**](docs/AccountsApi.md#get_all_accounts_health) | **GET** /v1/accounts/health | Check accounts health
 *Zernio::AccountsApi* | [**get_bluesky_settings**](docs/AccountsApi.md#get_bluesky_settings) | **GET** /v1/accounts/{accountId}/bluesky-settings | Get Bluesky account settings
 *Zernio::AccountsApi* | [**get_follower_stats**](docs/AccountsApi.md#get_follower_stats) | **GET** /v1/accounts/follower-stats | Get follower stats
@@ -1150,6 +1151,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAccountHealth200ResponsePlatformConnection](docs/GetAccountHealth200ResponsePlatformConnection.md)
  - [Zernio::GetAccountHealth200ResponsePlatformConnectionMetaError](docs/GetAccountHealth200ResponsePlatformConnectionMetaError.md)
  - [Zernio::GetAccountHealth200ResponseTokenStatus](docs/GetAccountHealth200ResponseTokenStatus.md)
+ - [Zernio::GetAccountPosts200Response](docs/GetAccountPosts200Response.md)
+ - [Zernio::GetAccountPosts200ResponsePostsInner](docs/GetAccountPosts200ResponsePostsInner.md)
  - [Zernio::GetAd200Response](docs/GetAd200Response.md)
  - [Zernio::GetAdAccountFinance200Response](docs/GetAdAccountFinance200Response.md)
  - [Zernio::GetAdAccountFinance200ResponseFundingSource](docs/GetAdAccountFinance200ResponseFundingSource.md)

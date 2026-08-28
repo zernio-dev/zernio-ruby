@@ -56,6 +56,18 @@ describe 'AccountsApi' do
     end
   end
 
+  # unit tests for get_account_posts
+  # List posts published on the platform
+  # Returns the 25 most recent posts that exist on the platform for a connected account, read live from the platform API. This covers everything on the account, including posts that were never created through Zernio.  Use it to obtain the platform&#39;s own post id, which the analytics endpoints take as input. On YouTube the returned &#x60;id&#x60; is the video ID that &#x60;GET /v1/analytics/youtube/daily-views&#x60;, &#x60;/video-retention&#x60; and &#x60;/demographics&#x60; expect as &#x60;videoId&#x60;, so this endpoint is what backs a video picker in your own UI.  Not every field applies to every platform: &#x60;reactionCount&#x60; is Facebook and LinkedIn, &#x60;shareCount&#x60; is platform dependent, &#x60;cid&#x60; is the Bluesky content id needed to reply, and &#x60;subreddit&#x60; is Reddit only. Absent fields are omitted from the response.  The account&#39;s token is refreshed before the call when it has expired. When the refresh cannot recover it, the response is a 401 with code &#x60;TOKEN_EXPIRED&#x60; and the account has to be reconnected. 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [GetAccountPosts200Response]
+  describe 'get_account_posts test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_all_accounts_health
   # Check accounts health
   # Returns health status of all connected accounts including token validity, permissions, and issues needing attention.

@@ -496,6 +496,8 @@ require 'zernio-sdk/models/get_account_health200_response_permissions_posting_in
 require 'zernio-sdk/models/get_account_health200_response_platform_connection'
 require 'zernio-sdk/models/get_account_health200_response_platform_connection_meta_error'
 require 'zernio-sdk/models/get_account_health200_response_token_status'
+require 'zernio-sdk/models/get_account_posts200_response'
+require 'zernio-sdk/models/get_account_posts200_response_posts_inner'
 require 'zernio-sdk/models/get_ad200_response'
 require 'zernio-sdk/models/get_ad_account_finance200_response'
 require 'zernio-sdk/models/get_ad_account_finance200_response_funding_source'
