@@ -14,29 +14,42 @@ require 'date'
 require 'time'
 
 module Zernio
-  class SendInboxMessage200ResponseData < ApiModelBase
-    # Platform id of the sent message (not returned for Reddit). For WhatsApp this is the raw Meta wamid, the same id delivered as message.platformMessageId on webhooks and delivery-status updates, and the value to pass as replyTo to quote-reply.
-    attr_accessor :message_id
+  # Facebook/Instagram only. The attachment was delivered but the follow-up text message was rejected by Meta and was not stored; the response is still a 200 because the attachment send succeeded.
+  class SendInboxMessage200ResponseDataPartialFailure < ApiModelBase
+    attr_accessor :part
 
-    # Zernio conversation id, echoed so the thread can be read back or replied to. It equals the id the list-conversations endpoint returns for Telegram, WhatsApp, SMS and Slack; for Facebook, Instagram, Bluesky and Reddit that endpoint returns the platform thread id instead, so do not correlate the two by equality. For X (Twitter), when the request addressed the conversation by its Twitter dm_conversation_id, that platform id is echoed back instead. Omitted when the send succeeded but the conversation could not be resolved to a stored record.
-    attr_accessor :conversation_id
+    attr_accessor :error
 
-    # Echo of the sent attachment with its resolved public URL, when one is available (Facebook, Instagram, Telegram, WhatsApp).
-    attr_accessor :attachments
+    attr_accessor :platform_error
 
-    # Facebook/Instagram only. Present when an attachment and text were both requested: Meta has no single body shape for both, so the send is two Meta messages under the hood. First element === messageId (the attachment); second is the follow-up text.
-    attr_accessor :message_ids
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    attr_accessor :partial_failure
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message_id' => :'messageId',
-        :'conversation_id' => :'conversationId',
-        :'attachments' => :'attachments',
-        :'message_ids' => :'messageIds',
-        :'partial_failure' => :'partialFailure'
+        :'part' => :'part',
+        :'error' => :'error',
+        :'platform_error' => :'platformError'
       }
     end
 
@@ -53,11 +66,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'message_id' => :'String',
-        :'conversation_id' => :'String',
-        :'attachments' => :'Array<SendInboxMessage200ResponseDataAttachmentsInner>',
-        :'message_ids' => :'Array<String>',
-        :'partial_failure' => :'SendInboxMessage200ResponseDataPartialFailure'
+        :'part' => :'String',
+        :'error' => :'String',
+        :'platform_error' => :'SendInboxMessage200ResponseDataPartialFailurePlatformError'
       }
     end
 
@@ -71,40 +82,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessage200ResponseData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::SendInboxMessage200ResponseDataPartialFailure` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessage200ResponseData`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::SendInboxMessage200ResponseDataPartialFailure`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'message_id')
-        self.message_id = attributes[:'message_id']
+      if attributes.key?(:'part')
+        self.part = attributes[:'part']
       end
 
-      if attributes.key?(:'conversation_id')
-        self.conversation_id = attributes[:'conversation_id']
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
       end
 
-      if attributes.key?(:'attachments')
-        if (value = attributes[:'attachments']).is_a?(Array)
-          self.attachments = value
-        end
-      end
-
-      if attributes.key?(:'message_ids')
-        if (value = attributes[:'message_ids']).is_a?(Array)
-          self.message_ids = value
-        end
-      end
-
-      if attributes.key?(:'partial_failure')
-        self.partial_failure = attributes[:'partial_failure']
+      if attributes.key?(:'platform_error')
+        self.platform_error = attributes[:'platform_error']
       end
     end
 
@@ -120,7 +119,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      part_validator = EnumAttributeValidator.new('String', ["text"])
+      return false unless part_validator.valid?(@part)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] part Object to be assigned
+    def part=(part)
+      validator = EnumAttributeValidator.new('String', ["text"])
+      unless validator.valid?(part)
+        fail ArgumentError, "invalid value for \"part\", must be one of #{validator.allowable_values}."
+      end
+      @part = part
     end
 
     # Checks equality by comparing each attribute.
@@ -128,11 +139,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message_id == o.message_id &&
-          conversation_id == o.conversation_id &&
-          attachments == o.attachments &&
-          message_ids == o.message_ids &&
-          partial_failure == o.partial_failure
+          part == o.part &&
+          error == o.error &&
+          platform_error == o.platform_error
     end
 
     # @see the `==` method
@@ -144,7 +153,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message_id, conversation_id, attachments, message_ids, partial_failure].hash
+      [part, error, platform_error].hash
     end
 
     # Builds the object from hash

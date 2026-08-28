@@ -1280,6 +1280,8 @@ require 'zernio-sdk/models/send_discord_direct_message_request_attachments_inner
 require 'zernio-sdk/models/send_inbox_message200_response'
 require 'zernio-sdk/models/send_inbox_message200_response_data'
 require 'zernio-sdk/models/send_inbox_message200_response_data_attachments_inner'
+require 'zernio-sdk/models/send_inbox_message200_response_data_partial_failure'
+require 'zernio-sdk/models/send_inbox_message200_response_data_partial_failure_platform_error'
 require 'zernio-sdk/models/send_inbox_message400_response'
 require 'zernio-sdk/models/send_inbox_message400_response_platform_error'
 require 'zernio-sdk/models/send_inbox_message_request'
