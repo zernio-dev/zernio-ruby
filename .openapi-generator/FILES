@@ -405,6 +405,8 @@ docs/DeleteInboxReviewReply200Response.md
 docs/DeleteInboxReviewReplyRequest.md
 docs/DeleteSmsSenderId200Response.md
 docs/DeleteValueRuleSet200Response.md
+docs/DeleteWhatsAppTemplate200Response.md
+docs/DeleteWhatsAppTemplateById200Response.md
 docs/DeleteWhatsappBusinessUsernameRequest.md
 docs/DetachNumberFromSipTrunk200Response.md
 docs/DialVoiceWebCall200Response.md
@@ -812,6 +814,8 @@ docs/GetWhatsAppNumberKycForm200ResponseFieldsInner.md
 docs/GetWhatsAppNumberRemediation200Response.md
 docs/GetWhatsAppTemplate200Response.md
 docs/GetWhatsAppTemplate200ResponseTemplate.md
+docs/GetWhatsAppTemplate409Response.md
+docs/GetWhatsAppTemplate409ResponseDetails.md
 docs/GetWhatsAppTemplates200Response.md
 docs/GetWhatsAppTemplates200ResponseTemplatesInner.md
 docs/GetWhatsappBusinessUsername200Response.md
@@ -1578,6 +1582,9 @@ docs/UpdateWhatsAppFlowRequest.md
 docs/UpdateWhatsAppGroupChatRequest.md
 docs/UpdateWhatsAppTemplate200Response.md
 docs/UpdateWhatsAppTemplate200ResponseTemplate.md
+docs/UpdateWhatsAppTemplateById200Response.md
+docs/UpdateWhatsAppTemplateById200ResponseTemplate.md
+docs/UpdateWhatsAppTemplateByIdRequest.md
 docs/UpdateWhatsAppTemplateRequest.md
 docs/UpdateWorkflow200Response.md
 docs/UpdateWorkflow200ResponseWorkflow.md
@@ -2272,6 +2279,8 @@ lib/zernio-sdk/models/delete_inbox_review_reply200_response.rb
 lib/zernio-sdk/models/delete_inbox_review_reply_request.rb
 lib/zernio-sdk/models/delete_sms_sender_id200_response.rb
 lib/zernio-sdk/models/delete_value_rule_set200_response.rb
+lib/zernio-sdk/models/delete_whats_app_template200_response.rb
+lib/zernio-sdk/models/delete_whats_app_template_by_id200_response.rb
 lib/zernio-sdk/models/delete_whatsapp_business_username_request.rb
 lib/zernio-sdk/models/detach_number_from_sip_trunk200_response.rb
 lib/zernio-sdk/models/dial_voice_web_call200_response.rb
@@ -2670,6 +2679,8 @@ lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response_fields_inner.rb
 lib/zernio-sdk/models/get_whats_app_number_remediation200_response.rb
 lib/zernio-sdk/models/get_whats_app_template200_response.rb
 lib/zernio-sdk/models/get_whats_app_template200_response_template.rb
+lib/zernio-sdk/models/get_whats_app_template409_response.rb
+lib/zernio-sdk/models/get_whats_app_template409_response_details.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response.rb
 lib/zernio-sdk/models/get_whats_app_templates200_response_templates_inner.rb
 lib/zernio-sdk/models/get_whatsapp_business_username200_response.rb
@@ -3414,6 +3425,9 @@ lib/zernio-sdk/models/update_whats_app_flow_request.rb
 lib/zernio-sdk/models/update_whats_app_group_chat_request.rb
 lib/zernio-sdk/models/update_whats_app_template200_response.rb
 lib/zernio-sdk/models/update_whats_app_template200_response_template.rb
+lib/zernio-sdk/models/update_whats_app_template_by_id200_response.rb
+lib/zernio-sdk/models/update_whats_app_template_by_id200_response_template.rb
+lib/zernio-sdk/models/update_whats_app_template_by_id_request.rb
 lib/zernio-sdk/models/update_whats_app_template_request.rb
 lib/zernio-sdk/models/update_workflow200_response.rb
 lib/zernio-sdk/models/update_workflow200_response_workflow.rb
@@ -4088,6 +4102,8 @@ spec/models/delete_inbox_review_reply200_response_spec.rb
 spec/models/delete_inbox_review_reply_request_spec.rb
 spec/models/delete_sms_sender_id200_response_spec.rb
 spec/models/delete_value_rule_set200_response_spec.rb
+spec/models/delete_whats_app_template200_response_spec.rb
+spec/models/delete_whats_app_template_by_id200_response_spec.rb
 spec/models/delete_whatsapp_business_username_request_spec.rb
 spec/models/detach_number_from_sip_trunk200_response_spec.rb
 spec/models/dial_voice_web_call200_response_spec.rb
@@ -4486,6 +4502,8 @@ spec/models/get_whats_app_number_kyc_form200_response_spec.rb
 spec/models/get_whats_app_number_remediation200_response_spec.rb
 spec/models/get_whats_app_template200_response_spec.rb
 spec/models/get_whats_app_template200_response_template_spec.rb
+spec/models/get_whats_app_template409_response_details_spec.rb
+spec/models/get_whats_app_template409_response_spec.rb
 spec/models/get_whats_app_templates200_response_spec.rb
 spec/models/get_whats_app_templates200_response_templates_inner_spec.rb
 spec/models/get_whatsapp_business_username200_response_spec.rb
@@ -5230,6 +5248,9 @@ spec/models/update_whats_app_flow_request_spec.rb
 spec/models/update_whats_app_group_chat_request_spec.rb
 spec/models/update_whats_app_template200_response_spec.rb
 spec/models/update_whats_app_template200_response_template_spec.rb
+spec/models/update_whats_app_template_by_id200_response_spec.rb
+spec/models/update_whats_app_template_by_id200_response_template_spec.rb
+spec/models/update_whats_app_template_by_id_request_spec.rb
 spec/models/update_whats_app_template_request_spec.rb
 spec/models/update_workflow200_response_spec.rb
 spec/models/update_workflow200_response_workflow_spec.rb

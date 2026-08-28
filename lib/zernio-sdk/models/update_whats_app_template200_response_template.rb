@@ -15,9 +15,13 @@ require 'time'
 
 module Zernio
   class UpdateWhatsAppTemplate200ResponseTemplate < ApiModelBase
+    # Meta id of the edited variant.
     attr_accessor :id
 
     attr_accessor :name
+
+    # The variant that was edited.
+    attr_accessor :language
 
     # Approval state read back from Meta after the update, normally PENDING. If the state cannot be read back, the last known status is returned instead.
     attr_accessor :status
@@ -27,6 +31,7 @@ module Zernio
       {
         :'id' => :'id',
         :'name' => :'name',
+        :'language' => :'language',
         :'status' => :'status'
       }
     end
@@ -46,6 +51,7 @@ module Zernio
       {
         :'id' => :'String',
         :'name' => :'String',
+        :'language' => :'String',
         :'status' => :'String'
       }
     end
@@ -80,6 +86,10 @@ module Zernio
         self.name = attributes[:'name']
       end
 
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
+      end
+
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
@@ -107,6 +117,7 @@ module Zernio
       self.class == o.class &&
           id == o.id &&
           name == o.name &&
+          language == o.language &&
           status == o.status
     end
 
@@ -119,7 +130,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, status].hash
+      [id, name, language, status].hash
     end
 
     # Builds the object from hash

@@ -33,6 +33,12 @@ describe Zernio::UpdateWhatsAppTemplateRequest do
     end
   end
 
+  describe 'test attribute "language"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "components"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

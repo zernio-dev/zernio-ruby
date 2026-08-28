@@ -136,12 +136,26 @@ describe 'WhatsAppApi' do
 
   # unit tests for delete_whats_app_template
   # Delete template
-  # Permanently delete a message template by name. 
-  # @param template_name Template name
+  # Permanently delete a message template.  **Without &#x60;language&#x60; this deletes every language variant of the name** (Meta&#39;s own contract for deletion by name). Pass &#x60;language&#x60; to delete one variant only; the response &#x60;scope&#x60; says which happened. Meta keeps a deleted approved template in &#x60;PENDING_DELETION&#x60; for a while and the name cannot be reused for 30 days. 
+  # @param template_name Template name (the family).
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
-  # @return [UnpublishPost200Response]
+  # @option opts [String] :language Delete only this language variant (e.g. es). Omit to delete the whole family.
+  # @return [DeleteWhatsAppTemplate200Response]
   describe 'delete_whats_app_template test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_whats_app_template_by_id
+  # Delete template by id
+  # Delete one language variant by its Meta id. Other languages of the same name are untouched. The name cannot be reused for 30 days once its last variant is deleted. 
+  # @param template_id Meta template id (numeric).
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteWhatsAppTemplateById200Response]
+  describe 'delete_whats_app_template_by_id test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -250,10 +264,11 @@ describe 'WhatsAppApi' do
 
   # unit tests for get_whats_app_template
   # Get template
-  # Retrieve a single message template by name. 
-  # @param template_name Template name
+  # Retrieve one message template variant by name.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass &#x60;language&#x60; to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns &#x60;409 ambiguous_template&#x60; with &#x60;details.languages&#x60;. A bare language (&#x60;es&#x60;) matches a single regional variant (&#x60;es_ES&#x60;); if the family has several regional variants for it, that is also a 409. A full code (&#x60;es_ES&#x60;) must match exactly. Variants in &#x60;PENDING_DELETION&#x60; are not part of the family. 
+  # @param template_name Template name (the family).
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages.
   # @return [GetWhatsAppTemplate200Response]
   describe 'get_whats_app_template test' do
     it 'should work' do
@@ -261,11 +276,27 @@ describe 'WhatsAppApi' do
     end
   end
 
-  # unit tests for get_whats_app_templates
-  # List templates
-  # List all message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. 
+  # unit tests for get_whats_app_template_by_id
+  # Get template by id
+  # Retrieve one template variant by its Meta id, the id every variant of a family has on its own and the one the &#x60;whatsapp.template.status_updated&#x60; webhook carries. 
+  # @param template_id Meta template id (numeric).
   # @param account_id WhatsApp social account ID
   # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppTemplate200Response]
+  describe 'get_whats_app_template_by_id test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_whats_app_templates
+  # List templates
+  # List message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. One entry per **name + language**: a multi-language template appears once per language, each with its own Meta &#x60;id&#x60;. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :name Exact template name; returns every language variant of that family.
+  # @option opts [String] :language Exact language code (e.g. en_US).
+  # @option opts [String] :status 
   # @return [GetWhatsAppTemplates200Response]
   describe 'get_whats_app_templates test' do
     it 'should work' do
@@ -467,12 +498,25 @@ describe 'WhatsAppApi' do
 
   # unit tests for update_whats_app_template
   # Update template
-  # Update a message template&#39;s components. Only certain fields can be updated depending on the template&#39;s current approval state. Approved templates can only have components updated.  A successful update sends the template back to Meta for review, so the &#x60;status&#x60; returned here is normally &#x60;PENDING&#x60;. The final outcome arrives later on the &#x60;whatsapp.template.status_updated&#x60; webhook. A template already in &#x60;PENDING&#x60; cannot be edited again until Meta finishes reviewing it. 
-  # @param template_name Template name
+  # Update one variant&#39;s components. Name, language and category cannot change after creation.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass &#x60;language&#x60; to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns &#x60;409 ambiguous_template&#x60; with &#x60;details.languages&#x60;. A bare language (&#x60;es&#x60;) matches a single regional variant (&#x60;es_ES&#x60;); if the family has several regional variants for it, that is also a 409. A full code (&#x60;es_ES&#x60;) must match exactly. Variants in &#x60;PENDING_DELETION&#x60; are not part of the family.  Meta only allows editing templates in &#x60;APPROVED&#x60;, &#x60;REJECTED&#x60; or &#x60;PAUSED&#x60; state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the &#x60;status&#x60; returned here is normally &#x60;PENDING&#x60;. The final outcome arrives on the &#x60;whatsapp.template.status_updated&#x60; webhook (which carries the variant&#39;s &#x60;templateId&#x60; and &#x60;language&#x60;). A variant already in &#x60;PENDING&#x60; cannot be edited again until Meta finishes reviewing it. 
+  # @param template_name Template name (the family).
   # @param update_whats_app_template_request 
   # @param [Hash] opts the optional parameters
   # @return [UpdateWhatsAppTemplate200Response]
   describe 'update_whats_app_template test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_whats_app_template_by_id
+  # Update template by id
+  # Update one variant&#39;s components by its Meta id. Name, language and category cannot change.  Meta only allows editing templates in &#x60;APPROVED&#x60;, &#x60;REJECTED&#x60; or &#x60;PAUSED&#x60; state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the &#x60;status&#x60; returned here is normally &#x60;PENDING&#x60;. The final outcome arrives on the &#x60;whatsapp.template.status_updated&#x60; webhook (which carries the variant&#39;s &#x60;templateId&#x60; and &#x60;language&#x60;). A variant already in &#x60;PENDING&#x60; cannot be edited again until Meta finishes reviewing it. 
+  # @param template_id Meta template id (numeric).
+  # @param update_whats_app_template_by_id_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateWhatsAppTemplateById200Response]
+  describe 'update_whats_app_template_by_id test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

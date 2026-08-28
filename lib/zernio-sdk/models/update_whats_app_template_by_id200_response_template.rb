@@ -14,38 +14,23 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetWhatsAppTemplate200ResponseTemplate < ApiModelBase
-    # Meta template id. Unique per language variant; usable on /v1/whatsapp/templates/id/{templateId}.
+  class UpdateWhatsAppTemplateById200ResponseTemplate < ApiModelBase
     attr_accessor :id
 
     attr_accessor :name
 
-    attr_accessor :status
-
-    attr_accessor :category
-
-    # The variant actually returned.
     attr_accessor :language
 
-    attr_accessor :components
-
-    # Only when status is REJECTED.
-    attr_accessor :rejected_reason
-
-    # Post-approval quality (GREEN/YELLOW/RED), when Meta reports one.
-    attr_accessor :quality_score
+    # Approval state read back from Meta after the update, normally PENDING. If the state cannot be read back, the last known status is returned instead.
+    attr_accessor :status
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'name' => :'name',
-        :'status' => :'status',
-        :'category' => :'category',
         :'language' => :'language',
-        :'components' => :'components',
-        :'rejected_reason' => :'rejected_reason',
-        :'quality_score' => :'quality_score'
+        :'status' => :'status'
       }
     end
 
@@ -64,12 +49,8 @@ module Zernio
       {
         :'id' => :'String',
         :'name' => :'String',
-        :'status' => :'String',
-        :'category' => :'String',
         :'language' => :'String',
-        :'components' => :'Array<Object>',
-        :'rejected_reason' => :'String',
-        :'quality_score' => :'Object'
+        :'status' => :'String'
       }
     end
 
@@ -83,14 +64,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetWhatsAppTemplate200ResponseTemplate` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateWhatsAppTemplateById200ResponseTemplate` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetWhatsAppTemplate200ResponseTemplate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateWhatsAppTemplateById200ResponseTemplate`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -103,30 +84,12 @@ module Zernio
         self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'category')
-        self.category = attributes[:'category']
-      end
-
       if attributes.key?(:'language')
         self.language = attributes[:'language']
       end
 
-      if attributes.key?(:'components')
-        if (value = attributes[:'components']).is_a?(Array)
-          self.components = value
-        end
-      end
-
-      if attributes.key?(:'rejected_reason')
-        self.rejected_reason = attributes[:'rejected_reason']
-      end
-
-      if attributes.key?(:'quality_score')
-        self.quality_score = attributes[:'quality_score']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -152,12 +115,8 @@ module Zernio
       self.class == o.class &&
           id == o.id &&
           name == o.name &&
-          status == o.status &&
-          category == o.category &&
           language == o.language &&
-          components == o.components &&
-          rejected_reason == o.rejected_reason &&
-          quality_score == o.quality_score
+          status == o.status
     end
 
     # @see the `==` method
@@ -169,7 +128,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, status, category, language, components, rejected_reason, quality_score].hash
+      [id, name, language, status].hash
     end
 
     # Builds the object from hash

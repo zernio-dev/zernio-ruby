@@ -594,22 +594,24 @@ module Zernio
     end
 
     # Delete template
-    # Permanently delete a message template by name. 
-    # @param template_name [String] Template name
+    # Permanently delete a message template.  **Without `language` this deletes every language variant of the name** (Meta's own contract for deletion by name). Pass `language` to delete one variant only; the response `scope` says which happened. Meta keeps a deleted approved template in `PENDING_DELETION` for a while and the name cannot be reused for 30 days. 
+    # @param template_name [String] Template name (the family).
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
-    # @return [UnpublishPost200Response]
+    # @option opts [String] :language Delete only this language variant (e.g. es). Omit to delete the whole family.
+    # @return [DeleteWhatsAppTemplate200Response]
     def delete_whats_app_template(template_name, account_id, opts = {})
       data, _status_code, _headers = delete_whats_app_template_with_http_info(template_name, account_id, opts)
       data
     end
 
     # Delete template
-    # Permanently delete a message template by name. 
-    # @param template_name [String] Template name
+    # Permanently delete a message template.  **Without &#x60;language&#x60; this deletes every language variant of the name** (Meta&#39;s own contract for deletion by name). Pass &#x60;language&#x60; to delete one variant only; the response &#x60;scope&#x60; says which happened. Meta keeps a deleted approved template in &#x60;PENDING_DELETION&#x60; for a while and the name cannot be reused for 30 days. 
+    # @param template_name [String] Template name (the family).
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
+    # @option opts [String] :language Delete only this language variant (e.g. es). Omit to delete the whole family.
+    # @return [Array<(DeleteWhatsAppTemplate200Response, Integer, Hash)>] DeleteWhatsAppTemplate200Response data, response status code and response headers
     def delete_whats_app_template_with_http_info(template_name, account_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: WhatsAppApi.delete_whats_app_template ...'
@@ -628,6 +630,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'language'] = opts[:'language'] if !opts[:'language'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -641,7 +644,7 @@ module Zernio
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UnpublishPost200Response'
+      return_type = opts[:debug_return_type] || 'DeleteWhatsAppTemplate200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -659,6 +662,76 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppApi#delete_whats_app_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete template by id
+    # Delete one language variant by its Meta id. Other languages of the same name are untouched. The name cannot be reused for 30 days once its last variant is deleted. 
+    # @param template_id [String] Meta template id (numeric).
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [DeleteWhatsAppTemplateById200Response]
+    def delete_whats_app_template_by_id(template_id, account_id, opts = {})
+      data, _status_code, _headers = delete_whats_app_template_by_id_with_http_info(template_id, account_id, opts)
+      data
+    end
+
+    # Delete template by id
+    # Delete one language variant by its Meta id. Other languages of the same name are untouched. The name cannot be reused for 30 days once its last variant is deleted. 
+    # @param template_id [String] Meta template id (numeric).
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeleteWhatsAppTemplateById200Response, Integer, Hash)>] DeleteWhatsAppTemplateById200Response data, response status code and response headers
+    def delete_whats_app_template_by_id_with_http_info(template_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.delete_whats_app_template_by_id ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling WhatsAppApi.delete_whats_app_template_by_id"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.delete_whats_app_template_by_id"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/templates/id/{templateId}'.sub('{' + 'templateId' + '}', CGI.escape(template_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteWhatsAppTemplateById200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.delete_whats_app_template_by_id",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#delete_whats_app_template_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1213,10 +1286,11 @@ module Zernio
     end
 
     # Get template
-    # Retrieve a single message template by name. 
-    # @param template_name [String] Template name
+    # Retrieve one message template variant by name.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass `language` to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns `409 ambiguous_template` with `details.languages`. A bare language (`es`) matches a single regional variant (`es_ES`); if the family has several regional variants for it, that is also a 409. A full code (`es_ES`) must match exactly. Variants in `PENDING_DELETION` are not part of the family. 
+    # @param template_name [String] Template name (the family).
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages.
     # @return [GetWhatsAppTemplate200Response]
     def get_whats_app_template(template_name, account_id, opts = {})
       data, _status_code, _headers = get_whats_app_template_with_http_info(template_name, account_id, opts)
@@ -1224,10 +1298,11 @@ module Zernio
     end
 
     # Get template
-    # Retrieve a single message template by name. 
-    # @param template_name [String] Template name
+    # Retrieve one message template variant by name.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass &#x60;language&#x60; to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns &#x60;409 ambiguous_template&#x60; with &#x60;details.languages&#x60;. A bare language (&#x60;es&#x60;) matches a single regional variant (&#x60;es_ES&#x60;); if the family has several regional variants for it, that is also a 409. A full code (&#x60;es_ES&#x60;) must match exactly. Variants in &#x60;PENDING_DELETION&#x60; are not part of the family. 
+    # @param template_name [String] Template name (the family).
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages.
     # @return [Array<(GetWhatsAppTemplate200Response, Integer, Hash)>] GetWhatsAppTemplate200Response data, response status code and response headers
     def get_whats_app_template_with_http_info(template_name, account_id, opts = {})
       if @api_client.config.debugging
@@ -1247,6 +1322,7 @@ module Zernio
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'language'] = opts[:'language'] if !opts[:'language'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1282,10 +1358,83 @@ module Zernio
       return data, status_code, headers
     end
 
-    # List templates
-    # List all message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. 
+    # Get template by id
+    # Retrieve one template variant by its Meta id, the id every variant of a family has on its own and the one the `whatsapp.template.status_updated` webhook carries. 
+    # @param template_id [String] Meta template id (numeric).
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
+    # @return [GetWhatsAppTemplate200Response]
+    def get_whats_app_template_by_id(template_id, account_id, opts = {})
+      data, _status_code, _headers = get_whats_app_template_by_id_with_http_info(template_id, account_id, opts)
+      data
+    end
+
+    # Get template by id
+    # Retrieve one template variant by its Meta id, the id every variant of a family has on its own and the one the &#x60;whatsapp.template.status_updated&#x60; webhook carries. 
+    # @param template_id [String] Meta template id (numeric).
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsAppTemplate200Response, Integer, Hash)>] GetWhatsAppTemplate200Response data, response status code and response headers
+    def get_whats_app_template_by_id_with_http_info(template_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.get_whats_app_template_by_id ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling WhatsAppApi.get_whats_app_template_by_id"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.get_whats_app_template_by_id"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/templates/id/{templateId}'.sub('{' + 'templateId' + '}', CGI.escape(template_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppTemplate200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.get_whats_app_template_by_id",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#get_whats_app_template_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List templates
+    # List message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. One entry per **name + language**: a multi-language template appears once per language, each with its own Meta `id`. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :name Exact template name; returns every language variant of that family.
+    # @option opts [String] :language Exact language code (e.g. en_US).
+    # @option opts [String] :status 
     # @return [GetWhatsAppTemplates200Response]
     def get_whats_app_templates(account_id, opts = {})
       data, _status_code, _headers = get_whats_app_templates_with_http_info(account_id, opts)
@@ -1293,9 +1442,12 @@ module Zernio
     end
 
     # List templates
-    # List all message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. 
+    # List message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. One entry per **name + language**: a multi-language template appears once per language, each with its own Meta &#x60;id&#x60;. 
     # @param account_id [String] WhatsApp social account ID
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :name Exact template name; returns every language variant of that family.
+    # @option opts [String] :language Exact language code (e.g. en_US).
+    # @option opts [String] :status 
     # @return [Array<(GetWhatsAppTemplates200Response, Integer, Hash)>] GetWhatsAppTemplates200Response data, response status code and response headers
     def get_whats_app_templates_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -1305,12 +1457,19 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.get_whats_app_templates"
       end
+      allowable_values = ["APPROVED", "REJECTED", "PENDING", "PAUSED", "DISABLED", "IN_APPEAL", "PENDING_DELETION"]
+      if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
+        fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/whatsapp/templates'
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'accountId'] = account_id
+      query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
+      query_params[:'language'] = opts[:'language'] if !opts[:'language'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -2422,8 +2581,8 @@ module Zernio
     end
 
     # Update template
-    # Update a message template's components. Only certain fields can be updated depending on the template's current approval state. Approved templates can only have components updated.  A successful update sends the template back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives later on the `whatsapp.template.status_updated` webhook. A template already in `PENDING` cannot be edited again until Meta finishes reviewing it. 
-    # @param template_name [String] Template name
+    # Update one variant's components. Name, language and category cannot change after creation.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass `language` to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns `409 ambiguous_template` with `details.languages`. A bare language (`es`) matches a single regional variant (`es_ES`); if the family has several regional variants for it, that is also a 409. A full code (`es_ES`) must match exactly. Variants in `PENDING_DELETION` are not part of the family.  Meta only allows editing templates in `APPROVED`, `REJECTED` or `PAUSED` state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives on the `whatsapp.template.status_updated` webhook (which carries the variant's `templateId` and `language`). A variant already in `PENDING` cannot be edited again until Meta finishes reviewing it. 
+    # @param template_name [String] Template name (the family).
     # @param update_whats_app_template_request [UpdateWhatsAppTemplateRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateWhatsAppTemplate200Response]
@@ -2433,8 +2592,8 @@ module Zernio
     end
 
     # Update template
-    # Update a message template&#39;s components. Only certain fields can be updated depending on the template&#39;s current approval state. Approved templates can only have components updated.  A successful update sends the template back to Meta for review, so the &#x60;status&#x60; returned here is normally &#x60;PENDING&#x60;. The final outcome arrives later on the &#x60;whatsapp.template.status_updated&#x60; webhook. A template already in &#x60;PENDING&#x60; cannot be edited again until Meta finishes reviewing it. 
-    # @param template_name [String] Template name
+    # Update one variant&#39;s components. Name, language and category cannot change after creation.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass &#x60;language&#x60; to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns &#x60;409 ambiguous_template&#x60; with &#x60;details.languages&#x60;. A bare language (&#x60;es&#x60;) matches a single regional variant (&#x60;es_ES&#x60;); if the family has several regional variants for it, that is also a 409. A full code (&#x60;es_ES&#x60;) must match exactly. Variants in &#x60;PENDING_DELETION&#x60; are not part of the family.  Meta only allows editing templates in &#x60;APPROVED&#x60;, &#x60;REJECTED&#x60; or &#x60;PAUSED&#x60; state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the &#x60;status&#x60; returned here is normally &#x60;PENDING&#x60;. The final outcome arrives on the &#x60;whatsapp.template.status_updated&#x60; webhook (which carries the variant&#39;s &#x60;templateId&#x60; and &#x60;language&#x60;). A variant already in &#x60;PENDING&#x60; cannot be edited again until Meta finishes reviewing it. 
+    # @param template_name [String] Template name (the family).
     # @param update_whats_app_template_request [UpdateWhatsAppTemplateRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateWhatsAppTemplate200Response, Integer, Hash)>] UpdateWhatsAppTemplate200Response data, response status code and response headers
@@ -2491,6 +2650,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppApi#update_whats_app_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update template by id
+    # Update one variant's components by its Meta id. Name, language and category cannot change.  Meta only allows editing templates in `APPROVED`, `REJECTED` or `PAUSED` state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives on the `whatsapp.template.status_updated` webhook (which carries the variant's `templateId` and `language`). A variant already in `PENDING` cannot be edited again until Meta finishes reviewing it. 
+    # @param template_id [String] Meta template id (numeric).
+    # @param update_whats_app_template_by_id_request [UpdateWhatsAppTemplateByIdRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateWhatsAppTemplateById200Response]
+    def update_whats_app_template_by_id(template_id, update_whats_app_template_by_id_request, opts = {})
+      data, _status_code, _headers = update_whats_app_template_by_id_with_http_info(template_id, update_whats_app_template_by_id_request, opts)
+      data
+    end
+
+    # Update template by id
+    # Update one variant&#39;s components by its Meta id. Name, language and category cannot change.  Meta only allows editing templates in &#x60;APPROVED&#x60;, &#x60;REJECTED&#x60; or &#x60;PAUSED&#x60; state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the &#x60;status&#x60; returned here is normally &#x60;PENDING&#x60;. The final outcome arrives on the &#x60;whatsapp.template.status_updated&#x60; webhook (which carries the variant&#39;s &#x60;templateId&#x60; and &#x60;language&#x60;). A variant already in &#x60;PENDING&#x60; cannot be edited again until Meta finishes reviewing it. 
+    # @param template_id [String] Meta template id (numeric).
+    # @param update_whats_app_template_by_id_request [UpdateWhatsAppTemplateByIdRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateWhatsAppTemplateById200Response, Integer, Hash)>] UpdateWhatsAppTemplateById200Response data, response status code and response headers
+    def update_whats_app_template_by_id_with_http_info(template_id, update_whats_app_template_by_id_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.update_whats_app_template_by_id ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling WhatsAppApi.update_whats_app_template_by_id"
+      end
+      # verify the required parameter 'update_whats_app_template_by_id_request' is set
+      if @api_client.config.client_side_validation && update_whats_app_template_by_id_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_whats_app_template_by_id_request' when calling WhatsAppApi.update_whats_app_template_by_id"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/templates/id/{templateId}'.sub('{' + 'templateId' + '}', CGI.escape(template_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_whats_app_template_by_id_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateWhatsAppTemplateById200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.update_whats_app_template_by_id",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#update_whats_app_template_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

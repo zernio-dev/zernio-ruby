@@ -13,6 +13,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**create_whats_app_template**](WhatsAppApi.md#create_whats_app_template) | **POST** /v1/whatsapp/templates | Create template |
 | [**delete_whats_app_group_chat**](WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group |
 | [**delete_whats_app_template**](WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template |
+| [**delete_whats_app_template_by_id**](WhatsAppApi.md#delete_whats_app_template_by_id) | **DELETE** /v1/whatsapp/templates/id/{templateId} | Delete template by id |
 | [**delete_whatsapp_business_username**](WhatsAppApi.md#delete_whatsapp_business_username) | **DELETE** /v1/whatsapp/business-profile/username | Delete business username |
 | [**get_whats_app_block_status**](WhatsAppApi.md#get_whats_app_block_status) | **GET** /v1/whatsapp/block-users/status | Check if a user is blocked |
 | [**get_whats_app_blocked_users**](WhatsAppApi.md#get_whats_app_blocked_users) | **GET** /v1/whatsapp/block-users | List blocked users |
@@ -22,6 +23,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_group_chat**](WhatsAppApi.md#get_whats_app_group_chat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info |
 | [**get_whats_app_media**](WhatsAppApi.md#get_whats_app_media) | **GET** /v1/whatsapp/media/{mediaId} | Download WhatsApp media |
 | [**get_whats_app_template**](WhatsAppApi.md#get_whats_app_template) | **GET** /v1/whatsapp/templates/{templateName} | Get template |
+| [**get_whats_app_template_by_id**](WhatsAppApi.md#get_whats_app_template_by_id) | **GET** /v1/whatsapp/templates/id/{templateId} | Get template by id |
 | [**get_whats_app_templates**](WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates |
 | [**get_whatsapp_business_username**](WhatsAppApi.md#get_whatsapp_business_username) | **GET** /v1/whatsapp/business-profile/username | Get business username |
 | [**get_whatsapp_business_username_suggestions**](WhatsAppApi.md#get_whatsapp_business_username_suggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions |
@@ -39,6 +41,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_whats_app_display_name**](WhatsAppApi.md#update_whats_app_display_name) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change |
 | [**update_whats_app_group_chat**](WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings |
 | [**update_whats_app_template**](WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template |
+| [**update_whats_app_template_by_id**](WhatsAppApi.md#update_whats_app_template_by_id) | **PATCH** /v1/whatsapp/templates/id/{templateId} | Update template by id |
 | [**upload_whats_app_profile_photo**](WhatsAppApi.md#upload_whats_app_profile_photo) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture |
 
 
@@ -608,11 +611,11 @@ end
 
 ## delete_whats_app_template
 
-> <UnpublishPost200Response> delete_whats_app_template(template_name, account_id)
+> <DeleteWhatsAppTemplate200Response> delete_whats_app_template(template_name, account_id, opts)
 
 Delete template
 
-Permanently delete a message template by name. 
+Permanently delete a message template.  **Without `language` this deletes every language variant of the name** (Meta's own contract for deletion by name). Pass `language` to delete one variant only; the response `scope` says which happened. Meta keeps a deleted approved template in `PENDING_DELETION` for a while and the name cannot be reused for 30 days. 
 
 ### Examples
 
@@ -626,12 +629,15 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-template_name = 'template_name_example' # String | Template name
+template_name = 'template_name_example' # String | Template name (the family).
 account_id = 'account_id_example' # String | WhatsApp social account ID
+opts = {
+  language: 'language_example' # String | Delete only this language variant (e.g. es). Omit to delete the whole family.
+}
 
 begin
   # Delete template
-  result = api_instance.delete_whats_app_template(template_name, account_id)
+  result = api_instance.delete_whats_app_template(template_name, account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->delete_whats_app_template: #{e}"
@@ -642,15 +648,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UnpublishPost200Response>, Integer, Hash)> delete_whats_app_template_with_http_info(template_name, account_id)
+> <Array(<DeleteWhatsAppTemplate200Response>, Integer, Hash)> delete_whats_app_template_with_http_info(template_name, account_id, opts)
 
 ```ruby
 begin
   # Delete template
-  data, status_code, headers = api_instance.delete_whats_app_template_with_http_info(template_name, account_id)
+  data, status_code, headers = api_instance.delete_whats_app_template_with_http_info(template_name, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UnpublishPost200Response>
+  p data # => <DeleteWhatsAppTemplate200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->delete_whats_app_template_with_http_info: #{e}"
 end
@@ -660,12 +666,84 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **template_name** | **String** | Template name |  |
+| **template_name** | **String** | Template name (the family). |  |
+| **account_id** | **String** | WhatsApp social account ID |  |
+| **language** | **String** | Delete only this language variant (e.g. es). Omit to delete the whole family. | [optional] |
+
+### Return type
+
+[**DeleteWhatsAppTemplate200Response**](DeleteWhatsAppTemplate200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## delete_whats_app_template_by_id
+
+> <DeleteWhatsAppTemplateById200Response> delete_whats_app_template_by_id(template_id, account_id)
+
+Delete template by id
+
+Delete one language variant by its Meta id. Other languages of the same name are untouched. The name cannot be reused for 30 days once its last variant is deleted. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+template_id = 'template_id_example' # String | Meta template id (numeric).
+account_id = 'account_id_example' # String | WhatsApp social account ID
+
+begin
+  # Delete template by id
+  result = api_instance.delete_whats_app_template_by_id(template_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->delete_whats_app_template_by_id: #{e}"
+end
+```
+
+#### Using the delete_whats_app_template_by_id_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DeleteWhatsAppTemplateById200Response>, Integer, Hash)> delete_whats_app_template_by_id_with_http_info(template_id, account_id)
+
+```ruby
+begin
+  # Delete template by id
+  data, status_code, headers = api_instance.delete_whats_app_template_by_id_with_http_info(template_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DeleteWhatsAppTemplateById200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->delete_whats_app_template_by_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **template_id** | **String** | Meta template id (numeric). |  |
 | **account_id** | **String** | WhatsApp social account ID |  |
 
 ### Return type
 
-[**UnpublishPost200Response**](UnpublishPost200Response.md)
+[**DeleteWhatsAppTemplateById200Response**](DeleteWhatsAppTemplateById200Response.md)
 
 ### Authorization
 
@@ -1243,11 +1321,11 @@ end
 
 ## get_whats_app_template
 
-> <GetWhatsAppTemplate200Response> get_whats_app_template(template_name, account_id)
+> <GetWhatsAppTemplate200Response> get_whats_app_template(template_name, account_id, opts)
 
 Get template
 
-Retrieve a single message template by name. 
+Retrieve one message template variant by name.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass `language` to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns `409 ambiguous_template` with `details.languages`. A bare language (`es`) matches a single regional variant (`es_ES`); if the family has several regional variants for it, that is also a 409. A full code (`es_ES`) must match exactly. Variants in `PENDING_DELETION` are not part of the family. 
 
 ### Examples
 
@@ -1261,12 +1339,15 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-template_name = 'template_name_example' # String | Template name
+template_name = 'template_name_example' # String | Template name (the family).
 account_id = 'account_id_example' # String | WhatsApp social account ID
+opts = {
+  language: 'language_example' # String | Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages.
+}
 
 begin
   # Get template
-  result = api_instance.get_whats_app_template(template_name, account_id)
+  result = api_instance.get_whats_app_template(template_name, account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_template: #{e}"
@@ -1277,12 +1358,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetWhatsAppTemplate200Response>, Integer, Hash)> get_whats_app_template_with_http_info(template_name, account_id)
+> <Array(<GetWhatsAppTemplate200Response>, Integer, Hash)> get_whats_app_template_with_http_info(template_name, account_id, opts)
 
 ```ruby
 begin
   # Get template
-  data, status_code, headers = api_instance.get_whats_app_template_with_http_info(template_name, account_id)
+  data, status_code, headers = api_instance.get_whats_app_template_with_http_info(template_name, account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppTemplate200Response>
@@ -1295,7 +1376,79 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **template_name** | **String** | Template name |  |
+| **template_name** | **String** | Template name (the family). |  |
+| **account_id** | **String** | WhatsApp social account ID |  |
+| **language** | **String** | Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages. | [optional] |
+
+### Return type
+
+[**GetWhatsAppTemplate200Response**](GetWhatsAppTemplate200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_whats_app_template_by_id
+
+> <GetWhatsAppTemplate200Response> get_whats_app_template_by_id(template_id, account_id)
+
+Get template by id
+
+Retrieve one template variant by its Meta id, the id every variant of a family has on its own and the one the `whatsapp.template.status_updated` webhook carries. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+template_id = 'template_id_example' # String | Meta template id (numeric).
+account_id = 'account_id_example' # String | WhatsApp social account ID
+
+begin
+  # Get template by id
+  result = api_instance.get_whats_app_template_by_id(template_id, account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whats_app_template_by_id: #{e}"
+end
+```
+
+#### Using the get_whats_app_template_by_id_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppTemplate200Response>, Integer, Hash)> get_whats_app_template_by_id_with_http_info(template_id, account_id)
+
+```ruby
+begin
+  # Get template by id
+  data, status_code, headers = api_instance.get_whats_app_template_by_id_with_http_info(template_id, account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppTemplate200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->get_whats_app_template_by_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **template_id** | **String** | Meta template id (numeric). |  |
 | **account_id** | **String** | WhatsApp social account ID |  |
 
 ### Return type
@@ -1314,11 +1467,11 @@ end
 
 ## get_whats_app_templates
 
-> <GetWhatsAppTemplates200Response> get_whats_app_templates(account_id)
+> <GetWhatsAppTemplates200Response> get_whats_app_templates(account_id, opts)
 
 List templates
 
-List all message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. 
+List message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. One entry per **name + language**: a multi-language template appears once per language, each with its own Meta `id`. 
 
 ### Examples
 
@@ -1333,10 +1486,15 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 account_id = 'account_id_example' # String | WhatsApp social account ID
+opts = {
+  name: 'name_example', # String | Exact template name; returns every language variant of that family.
+  language: 'language_example', # String | Exact language code (e.g. en_US).
+  status: 'APPROVED' # String | 
+}
 
 begin
   # List templates
-  result = api_instance.get_whats_app_templates(account_id)
+  result = api_instance.get_whats_app_templates(account_id, opts)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling WhatsAppApi->get_whats_app_templates: #{e}"
@@ -1347,12 +1505,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetWhatsAppTemplates200Response>, Integer, Hash)> get_whats_app_templates_with_http_info(account_id)
+> <Array(<GetWhatsAppTemplates200Response>, Integer, Hash)> get_whats_app_templates_with_http_info(account_id, opts)
 
 ```ruby
 begin
   # List templates
-  data, status_code, headers = api_instance.get_whats_app_templates_with_http_info(account_id)
+  data, status_code, headers = api_instance.get_whats_app_templates_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetWhatsAppTemplates200Response>
@@ -1366,6 +1524,9 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | WhatsApp social account ID |  |
+| **name** | **String** | Exact template name; returns every language variant of that family. | [optional] |
+| **language** | **String** | Exact language code (e.g. en_US). | [optional] |
+| **status** | **String** |  | [optional] |
 
 ### Return type
 
@@ -2454,7 +2615,7 @@ end
 
 Update template
 
-Update a message template's components. Only certain fields can be updated depending on the template's current approval state. Approved templates can only have components updated.  A successful update sends the template back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives later on the `whatsapp.template.status_updated` webhook. A template already in `PENDING` cannot be edited again until Meta finishes reviewing it. 
+Update one variant's components. Name, language and category cannot change after creation.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass `language` to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns `409 ambiguous_template` with `details.languages`. A bare language (`es`) matches a single regional variant (`es_ES`); if the family has several regional variants for it, that is also a 409. A full code (`es_ES`) must match exactly. Variants in `PENDING_DELETION` are not part of the family.  Meta only allows editing templates in `APPROVED`, `REJECTED` or `PAUSED` state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives on the `whatsapp.template.status_updated` webhook (which carries the variant's `templateId` and `language`). A variant already in `PENDING` cannot be edited again until Meta finishes reviewing it. 
 
 ### Examples
 
@@ -2468,7 +2629,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-template_name = 'template_name_example' # String | Template name
+template_name = 'template_name_example' # String | Template name (the family).
 update_whats_app_template_request = Zernio::UpdateWhatsAppTemplateRequest.new({account_id: 'account_id_example', components: [Zernio::WhatsAppBodyComponent.new({type: 'body', text: 'text_example'})]}) # UpdateWhatsAppTemplateRequest | 
 
 begin
@@ -2502,12 +2663,83 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **template_name** | **String** | Template name |  |
+| **template_name** | **String** | Template name (the family). |  |
 | **update_whats_app_template_request** | [**UpdateWhatsAppTemplateRequest**](UpdateWhatsAppTemplateRequest.md) |  |  |
 
 ### Return type
 
 [**UpdateWhatsAppTemplate200Response**](UpdateWhatsAppTemplate200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_whats_app_template_by_id
+
+> <UpdateWhatsAppTemplateById200Response> update_whats_app_template_by_id(template_id, update_whats_app_template_by_id_request)
+
+Update template by id
+
+Update one variant's components by its Meta id. Name, language and category cannot change.  Meta only allows editing templates in `APPROVED`, `REJECTED` or `PAUSED` state; an approved template can be edited once per 24 hours and up to 10 times per 30 days. A successful update sends the variant back to Meta for review, so the `status` returned here is normally `PENDING`. The final outcome arrives on the `whatsapp.template.status_updated` webhook (which carries the variant's `templateId` and `language`). A variant already in `PENDING` cannot be edited again until Meta finishes reviewing it. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+template_id = 'template_id_example' # String | Meta template id (numeric).
+update_whats_app_template_by_id_request = Zernio::UpdateWhatsAppTemplateByIdRequest.new({account_id: 'account_id_example', components: [Zernio::WhatsAppBodyComponent.new({type: 'body', text: 'text_example'})]}) # UpdateWhatsAppTemplateByIdRequest | 
+
+begin
+  # Update template by id
+  result = api_instance.update_whats_app_template_by_id(template_id, update_whats_app_template_by_id_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->update_whats_app_template_by_id: #{e}"
+end
+```
+
+#### Using the update_whats_app_template_by_id_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateWhatsAppTemplateById200Response>, Integer, Hash)> update_whats_app_template_by_id_with_http_info(template_id, update_whats_app_template_by_id_request)
+
+```ruby
+begin
+  # Update template by id
+  data, status_code, headers = api_instance.update_whats_app_template_by_id_with_http_info(template_id, update_whats_app_template_by_id_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateWhatsAppTemplateById200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->update_whats_app_template_by_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **template_id** | **String** | Meta template id (numeric). |  |
+| **update_whats_app_template_by_id_request** | [**UpdateWhatsAppTemplateByIdRequest**](UpdateWhatsAppTemplateByIdRequest.md) |  |  |
+
+### Return type
+
+[**UpdateWhatsAppTemplateById200Response**](UpdateWhatsAppTemplateById200Response.md)
 
 ### Authorization
 

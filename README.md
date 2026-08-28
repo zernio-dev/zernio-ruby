@@ -579,6 +579,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**create_whats_app_template**](docs/WhatsAppApi.md#create_whats_app_template) | **POST** /v1/whatsapp/templates | Create template
 *Zernio::WhatsAppApi* | [**delete_whats_app_group_chat**](docs/WhatsAppApi.md#delete_whats_app_group_chat) | **DELETE** /v1/whatsapp/wa-groups/{groupId} | Delete group
 *Zernio::WhatsAppApi* | [**delete_whats_app_template**](docs/WhatsAppApi.md#delete_whats_app_template) | **DELETE** /v1/whatsapp/templates/{templateName} | Delete template
+*Zernio::WhatsAppApi* | [**delete_whats_app_template_by_id**](docs/WhatsAppApi.md#delete_whats_app_template_by_id) | **DELETE** /v1/whatsapp/templates/id/{templateId} | Delete template by id
 *Zernio::WhatsAppApi* | [**delete_whatsapp_business_username**](docs/WhatsAppApi.md#delete_whatsapp_business_username) | **DELETE** /v1/whatsapp/business-profile/username | Delete business username
 *Zernio::WhatsAppApi* | [**get_whats_app_block_status**](docs/WhatsAppApi.md#get_whats_app_block_status) | **GET** /v1/whatsapp/block-users/status | Check if a user is blocked
 *Zernio::WhatsAppApi* | [**get_whats_app_blocked_users**](docs/WhatsAppApi.md#get_whats_app_blocked_users) | **GET** /v1/whatsapp/block-users | List blocked users
@@ -588,6 +589,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**get_whats_app_group_chat**](docs/WhatsAppApi.md#get_whats_app_group_chat) | **GET** /v1/whatsapp/wa-groups/{groupId} | Get group info
 *Zernio::WhatsAppApi* | [**get_whats_app_media**](docs/WhatsAppApi.md#get_whats_app_media) | **GET** /v1/whatsapp/media/{mediaId} | Download WhatsApp media
 *Zernio::WhatsAppApi* | [**get_whats_app_template**](docs/WhatsAppApi.md#get_whats_app_template) | **GET** /v1/whatsapp/templates/{templateName} | Get template
+*Zernio::WhatsAppApi* | [**get_whats_app_template_by_id**](docs/WhatsAppApi.md#get_whats_app_template_by_id) | **GET** /v1/whatsapp/templates/id/{templateId} | Get template by id
 *Zernio::WhatsAppApi* | [**get_whats_app_templates**](docs/WhatsAppApi.md#get_whats_app_templates) | **GET** /v1/whatsapp/templates | List templates
 *Zernio::WhatsAppApi* | [**get_whatsapp_business_username**](docs/WhatsAppApi.md#get_whatsapp_business_username) | **GET** /v1/whatsapp/business-profile/username | Get business username
 *Zernio::WhatsAppApi* | [**get_whatsapp_business_username_suggestions**](docs/WhatsAppApi.md#get_whatsapp_business_username_suggestions) | **GET** /v1/whatsapp/business-profile/username/suggestions | Get username suggestions
@@ -605,6 +607,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**update_whats_app_display_name**](docs/WhatsAppApi.md#update_whats_app_display_name) | **POST** /v1/whatsapp/business-profile/display-name | Request display name change
 *Zernio::WhatsAppApi* | [**update_whats_app_group_chat**](docs/WhatsAppApi.md#update_whats_app_group_chat) | **POST** /v1/whatsapp/wa-groups/{groupId} | Update group settings
 *Zernio::WhatsAppApi* | [**update_whats_app_template**](docs/WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template
+*Zernio::WhatsAppApi* | [**update_whats_app_template_by_id**](docs/WhatsAppApi.md#update_whats_app_template_by_id) | **PATCH** /v1/whatsapp/templates/id/{templateId} | Update template by id
 *Zernio::WhatsAppApi* | [**upload_whats_app_profile_photo**](docs/WhatsAppApi.md#upload_whats_app_profile_photo) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture
 *Zernio::WhatsAppCallingApi* | [**disable_whats_app_calling**](docs/WhatsAppCallingApi.md#disable_whats_app_calling) | **DELETE** /v1/phone-numbers/{id}/whatsapp/calling | Disable calling on a number
 *Zernio::WhatsAppCallingApi* | [**disable_whats_app_calling_legacy**](docs/WhatsAppCallingApi.md#disable_whats_app_calling_legacy) | **DELETE** /v1/whatsapp/phone-numbers/{id}/calling | Disable calling on a number
@@ -1051,6 +1054,8 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteInboxReviewReplyRequest](docs/DeleteInboxReviewReplyRequest.md)
  - [Zernio::DeleteSmsSenderId200Response](docs/DeleteSmsSenderId200Response.md)
  - [Zernio::DeleteValueRuleSet200Response](docs/DeleteValueRuleSet200Response.md)
+ - [Zernio::DeleteWhatsAppTemplate200Response](docs/DeleteWhatsAppTemplate200Response.md)
+ - [Zernio::DeleteWhatsAppTemplateById200Response](docs/DeleteWhatsAppTemplateById200Response.md)
  - [Zernio::DeleteWhatsappBusinessUsernameRequest](docs/DeleteWhatsappBusinessUsernameRequest.md)
  - [Zernio::DetachNumberFromSipTrunk200Response](docs/DetachNumberFromSipTrunk200Response.md)
  - [Zernio::DialVoiceWebCall200Response](docs/DialVoiceWebCall200Response.md)
@@ -1449,6 +1454,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppNumberRemediation200Response](docs/GetWhatsAppNumberRemediation200Response.md)
  - [Zernio::GetWhatsAppTemplate200Response](docs/GetWhatsAppTemplate200Response.md)
  - [Zernio::GetWhatsAppTemplate200ResponseTemplate](docs/GetWhatsAppTemplate200ResponseTemplate.md)
+ - [Zernio::GetWhatsAppTemplate409Response](docs/GetWhatsAppTemplate409Response.md)
+ - [Zernio::GetWhatsAppTemplate409ResponseDetails](docs/GetWhatsAppTemplate409ResponseDetails.md)
  - [Zernio::GetWhatsAppTemplates200Response](docs/GetWhatsAppTemplates200Response.md)
  - [Zernio::GetWhatsAppTemplates200ResponseTemplatesInner](docs/GetWhatsAppTemplates200ResponseTemplatesInner.md)
  - [Zernio::GetWhatsappBusinessUsername200Response](docs/GetWhatsappBusinessUsername200Response.md)
@@ -2193,6 +2200,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateWhatsAppGroupChatRequest](docs/UpdateWhatsAppGroupChatRequest.md)
  - [Zernio::UpdateWhatsAppTemplate200Response](docs/UpdateWhatsAppTemplate200Response.md)
  - [Zernio::UpdateWhatsAppTemplate200ResponseTemplate](docs/UpdateWhatsAppTemplate200ResponseTemplate.md)
+ - [Zernio::UpdateWhatsAppTemplateById200Response](docs/UpdateWhatsAppTemplateById200Response.md)
+ - [Zernio::UpdateWhatsAppTemplateById200ResponseTemplate](docs/UpdateWhatsAppTemplateById200ResponseTemplate.md)
+ - [Zernio::UpdateWhatsAppTemplateByIdRequest](docs/UpdateWhatsAppTemplateByIdRequest.md)
  - [Zernio::UpdateWhatsAppTemplateRequest](docs/UpdateWhatsAppTemplateRequest.md)
  - [Zernio::UpdateWorkflow200Response](docs/UpdateWorkflow200Response.md)
  - [Zernio::UpdateWorkflow200ResponseWorkflow](docs/UpdateWorkflow200ResponseWorkflow.md)

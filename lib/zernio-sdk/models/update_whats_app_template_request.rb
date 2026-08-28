@@ -18,6 +18,9 @@ module Zernio
     # WhatsApp social account ID
     attr_accessor :account_id
 
+    # Language code of the variant to edit (e.g. en_US, es, pt_BR). Required when the family has several languages. Body only: a language query parameter on PATCH is a 400.
+    attr_accessor :language
+
     # Updated template components
     attr_accessor :components
 
@@ -25,6 +28,7 @@ module Zernio
     def self.attribute_map
       {
         :'account_id' => :'accountId',
+        :'language' => :'language',
         :'components' => :'components'
       }
     end
@@ -43,6 +47,7 @@ module Zernio
     def self.openapi_types
       {
         :'account_id' => :'String',
+        :'language' => :'String',
         :'components' => :'Array<WhatsAppTemplateComponent>'
       }
     end
@@ -73,6 +78,10 @@ module Zernio
         self.account_id = attributes[:'account_id']
       else
         self.account_id = nil
+      end
+
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
       end
 
       if attributes.key?(:'components')
@@ -144,6 +153,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           account_id == o.account_id &&
+          language == o.language &&
           components == o.components
     end
 
@@ -156,7 +166,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, components].hash
+      [account_id, language, components].hash
     end
 
     # Builds the object from hash
