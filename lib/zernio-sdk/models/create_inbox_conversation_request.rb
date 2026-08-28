@@ -50,6 +50,8 @@ module Zernio
 
     attr_accessor :header_media
 
+    attr_accessor :header_location
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -86,7 +88,8 @@ module Zernio
         :'template_language' => :'templateLanguage',
         :'template_params' => :'templateParams',
         :'template_button_params' => :'templateButtonParams',
-        :'header_media' => :'headerMedia'
+        :'header_media' => :'headerMedia',
+        :'header_location' => :'headerLocation'
       }
     end
 
@@ -114,7 +117,8 @@ module Zernio
         :'template_language' => :'String',
         :'template_params' => :'Array<String>',
         :'template_button_params' => :'Array<CreateInboxConversationRequestTemplateButtonParamsInner>',
-        :'header_media' => :'CreateInboxConversationRequestHeaderMedia'
+        :'header_media' => :'CreateInboxConversationRequestHeaderMedia',
+        :'header_location' => :'CreateInboxConversationRequestHeaderLocation'
       }
     end
 
@@ -197,6 +201,10 @@ module Zernio
       if attributes.key?(:'header_media')
         self.header_media = attributes[:'header_media']
       end
+
+      if attributes.key?(:'header_location')
+        self.header_location = attributes[:'header_location']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -276,7 +284,8 @@ module Zernio
           template_language == o.template_language &&
           template_params == o.template_params &&
           template_button_params == o.template_button_params &&
-          header_media == o.header_media
+          header_media == o.header_media &&
+          header_location == o.header_location
     end
 
     # @see the `==` method
@@ -288,7 +297,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, link_preview, template_language, template_params, template_button_params, header_media].hash
+      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, link_preview, template_language, template_params, template_button_params, header_media, header_location].hash
     end
 
     # Builds the object from hash

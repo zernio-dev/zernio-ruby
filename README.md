@@ -916,6 +916,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateInboxConversation422Response](docs/CreateInboxConversation422Response.md)
  - [Zernio::CreateInboxConversation429Response](docs/CreateInboxConversation429Response.md)
  - [Zernio::CreateInboxConversationRequest](docs/CreateInboxConversationRequest.md)
+ - [Zernio::CreateInboxConversationRequestHeaderLocation](docs/CreateInboxConversationRequestHeaderLocation.md)
  - [Zernio::CreateInboxConversationRequestHeaderMedia](docs/CreateInboxConversationRequestHeaderMedia.md)
  - [Zernio::CreateInboxConversationRequestTemplateButtonParamsInner](docs/CreateInboxConversationRequestTemplateButtonParamsInner.md)
  - [Zernio::CreateInviteToken201Response](docs/CreateInviteToken201Response.md)

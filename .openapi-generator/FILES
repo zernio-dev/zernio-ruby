@@ -269,6 +269,7 @@ docs/CreateInboxConversation404Response.md
 docs/CreateInboxConversation422Response.md
 docs/CreateInboxConversation429Response.md
 docs/CreateInboxConversationRequest.md
+docs/CreateInboxConversationRequestHeaderLocation.md
 docs/CreateInboxConversationRequestHeaderMedia.md
 docs/CreateInboxConversationRequestTemplateButtonParamsInner.md
 docs/CreateInviteToken201Response.md
@@ -2134,6 +2135,7 @@ lib/zernio-sdk/models/create_inbox_conversation404_response.rb
 lib/zernio-sdk/models/create_inbox_conversation422_response.rb
 lib/zernio-sdk/models/create_inbox_conversation429_response.rb
 lib/zernio-sdk/models/create_inbox_conversation_request.rb
+lib/zernio-sdk/models/create_inbox_conversation_request_header_location.rb
 lib/zernio-sdk/models/create_inbox_conversation_request_header_media.rb
 lib/zernio-sdk/models/create_inbox_conversation_request_template_button_params_inner.rb
 lib/zernio-sdk/models/create_invite_token201_response.rb
@@ -3946,6 +3948,7 @@ spec/models/create_inbox_conversation400_response_spec.rb
 spec/models/create_inbox_conversation404_response_spec.rb
 spec/models/create_inbox_conversation422_response_spec.rb
 spec/models/create_inbox_conversation429_response_spec.rb
+spec/models/create_inbox_conversation_request_header_location_spec.rb
 spec/models/create_inbox_conversation_request_header_media_spec.rb
 spec/models/create_inbox_conversation_request_spec.rb
 spec/models/create_inbox_conversation_request_template_button_params_inner_spec.rb
