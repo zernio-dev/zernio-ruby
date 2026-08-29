@@ -32,7 +32,7 @@ module Zernio
 
     attr_accessor :views
 
-    # Instagram feed posts and stories only: organic accounts that started following from this post. 0 for reels and other platforms.
+    # Instagram feed posts and stories only: organic accounts that started following from this post. Null on Instagram Reels and non-Reels video, where Meta does not expose this metric for the media. 0 for other platforms.
     attr_accessor :follows
 
     # Instagram Reels only: average watch time per play, in milliseconds. 0 for non-Reels media and other platforms.
@@ -112,6 +112,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'follows',
         :'video_duration_seconds',
       ])
     end

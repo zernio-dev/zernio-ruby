@@ -45,7 +45,7 @@ describe 'AnalyticsApi' do
   # @option opts [Date] :to_date Inclusive upper bound (YYYY-MM-DD). Defaults to today if omitted.
   # @option opts [Integer] :limit Page size (default 50)
   # @option opts [Integer] :page Page number (default 1)
-  # @option opts [String] :sort_by Sort by date, engagement, or a specific metric. Instagram-only metrics (follows, reposts, reels_skip_rate, ig_reels_*) sort posts with no value as 0.
+  # @option opts [String] :sort_by Sort by date, engagement, or a specific metric. Instagram-only metrics (follows, reposts, reels_skip_rate, ig_reels_*) sort a null value as 0.
   # @option opts [String] :order Sort order
   # @return [GetAnalytics200Response]
   describe 'get_analytics test' do
