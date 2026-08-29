@@ -18,6 +18,9 @@ module Zernio
     # Zernio Google Ads SocialAccount id — resolves the customer id + refresh token.
     attr_accessor :account_id
 
+    # Numeric Google Ads customer id. Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+    attr_accessor :customer_id
+
     # See POST /v1/ads/create sitelinks — same shape.
     attr_accessor :sitelinks
 
@@ -29,6 +32,7 @@ module Zernio
     def self.attribute_map
       {
         :'account_id' => :'accountId',
+        :'customer_id' => :'customerId',
         :'sitelinks' => :'sitelinks',
         :'callouts' => :'callouts',
         :'structured_snippets' => :'structuredSnippets'
@@ -49,6 +53,7 @@ module Zernio
     def self.openapi_types
       {
         :'account_id' => :'String',
+        :'customer_id' => :'String',
         :'sitelinks' => :'Array<AttachCampaignAssetsRequestSitelinksInner>',
         :'callouts' => :'Array<String>',
         :'structured_snippets' => :'Array<AttachCampaignAssetsRequestStructuredSnippetsInner>'
@@ -81,6 +86,10 @@ module Zernio
         self.account_id = attributes[:'account_id']
       else
         self.account_id = nil
+      end
+
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
       end
 
       if attributes.key?(:'sitelinks')
@@ -222,6 +231,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           account_id == o.account_id &&
+          customer_id == o.customer_id &&
           sitelinks == o.sitelinks &&
           callouts == o.callouts &&
           structured_snippets == o.structured_snippets
@@ -236,7 +246,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, sitelinks, callouts, structured_snippets].hash
+      [account_id, customer_id, sitelinks, callouts, structured_snippets].hash
     end
 
     # Builds the object from hash
