@@ -22,8 +22,8 @@
 | **company_sizes** | **Array&lt;String&gt;** | LinkedIn B2B only. | [optional] |
 | **seniorities** | **Array&lt;String&gt;** | LinkedIn B2B only. | [optional] |
 | **job_functions** | **Array&lt;String&gt;** | LinkedIn B2B only. | [optional] |
-| **audience_include** | **Array&lt;String&gt;** | Platform audience IDs to include. | [optional] |
-| **audience_exclude** | **Array&lt;String&gt;** | Platform audience IDs to exclude. | [optional] |
+| **audience_include** | **Array&lt;String&gt;** | Platform audience IDs to include. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate. | [optional] |
+| **audience_exclude** | **Array&lt;String&gt;** | Platform audience IDs to exclude. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate. | [optional] |
 
 ## Example
 

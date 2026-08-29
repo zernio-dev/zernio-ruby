@@ -69,10 +69,10 @@ module Zernio
     # LinkedIn B2B only.
     attr_accessor :job_functions
 
-    # Platform audience IDs to include.
+    # Platform audience IDs to include. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate.
     attr_accessor :audience_include
 
-    # Platform audience IDs to exclude.
+    # Platform audience IDs to exclude. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate.
     attr_accessor :audience_exclude
 
     class EnumAttributeValidator
