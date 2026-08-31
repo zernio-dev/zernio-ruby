@@ -1625,6 +1625,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListHighDemandPeriods200Response](docs/ListHighDemandPeriods200Response.md)
  - [Zernio::ListInboxComments200Response](docs/ListInboxComments200Response.md)
  - [Zernio::ListInboxComments200ResponseDataInner](docs/ListInboxComments200ResponseDataInner.md)
+ - [Zernio::ListInboxComments200ResponseMeta](docs/ListInboxComments200ResponseMeta.md)
+ - [Zernio::ListInboxComments200ResponseMetaFailedAccountsInner](docs/ListInboxComments200ResponseMetaFailedAccountsInner.md)
  - [Zernio::ListInboxConversationAnalytics200Response](docs/ListInboxConversationAnalytics200Response.md)
  - [Zernio::ListInboxConversationAnalytics200ResponseItemsInner](docs/ListInboxConversationAnalytics200ResponseItemsInner.md)
  - [Zernio::ListInboxConversationAnalytics200ResponsePagination](docs/ListInboxConversationAnalytics200ResponsePagination.md)

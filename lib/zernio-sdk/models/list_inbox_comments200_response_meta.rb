@@ -14,19 +14,26 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListInboxComments200Response < ApiModelBase
-    attr_accessor :data
+  class ListInboxComments200ResponseMeta < ApiModelBase
+    attr_accessor :accounts_queried
 
-    attr_accessor :pagination
+    attr_accessor :accounts_failed
 
-    attr_accessor :meta
+    attr_accessor :failed_accounts
+
+    attr_accessor :last_updated
+
+    # Connected accounts that were not queried: their platform does not support this feature, or the account is not enabled for it
+    attr_accessor :accounts_skipped
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'data' => :'data',
-        :'pagination' => :'pagination',
-        :'meta' => :'meta'
+        :'accounts_queried' => :'accountsQueried',
+        :'accounts_failed' => :'accountsFailed',
+        :'failed_accounts' => :'failedAccounts',
+        :'last_updated' => :'lastUpdated',
+        :'accounts_skipped' => :'accountsSkipped'
       }
     end
 
@@ -43,9 +50,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<ListInboxComments200ResponseDataInner>',
-        :'pagination' => :'ListInboxConversations200ResponsePagination',
-        :'meta' => :'ListInboxComments200ResponseMeta'
+        :'accounts_queried' => :'Integer',
+        :'accounts_failed' => :'Integer',
+        :'failed_accounts' => :'Array<ListInboxComments200ResponseMetaFailedAccountsInner>',
+        :'last_updated' => :'Time',
+        :'accounts_skipped' => :'Array<ListInboxConversations200ResponseMetaAccountsSkippedInner>'
       }
     end
 
@@ -59,30 +68,40 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListInboxComments200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListInboxComments200ResponseMeta` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListInboxComments200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListInboxComments200ResponseMeta`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
+      if attributes.key?(:'accounts_queried')
+        self.accounts_queried = attributes[:'accounts_queried']
+      end
+
+      if attributes.key?(:'accounts_failed')
+        self.accounts_failed = attributes[:'accounts_failed']
+      end
+
+      if attributes.key?(:'failed_accounts')
+        if (value = attributes[:'failed_accounts']).is_a?(Array)
+          self.failed_accounts = value
         end
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'last_updated')
+        self.last_updated = attributes[:'last_updated']
       end
 
-      if attributes.key?(:'meta')
-        self.meta = attributes[:'meta']
+      if attributes.key?(:'accounts_skipped')
+        if (value = attributes[:'accounts_skipped']).is_a?(Array)
+          self.accounts_skipped = value
+        end
       end
     end
 
@@ -106,9 +125,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data &&
-          pagination == o.pagination &&
-          meta == o.meta
+          accounts_queried == o.accounts_queried &&
+          accounts_failed == o.accounts_failed &&
+          failed_accounts == o.failed_accounts &&
+          last_updated == o.last_updated &&
+          accounts_skipped == o.accounts_skipped
     end
 
     # @see the `==` method
@@ -120,7 +141,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data, pagination, meta].hash
+      [accounts_queried, accounts_failed, failed_accounts, last_updated, accounts_skipped].hash
     end
 
     # Builds the object from hash

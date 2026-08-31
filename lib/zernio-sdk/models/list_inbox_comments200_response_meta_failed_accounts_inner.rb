@@ -14,19 +14,30 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListInboxComments200Response < ApiModelBase
-    attr_accessor :data
+  class ListInboxComments200ResponseMetaFailedAccountsInner < ApiModelBase
+    attr_accessor :account_id
 
-    attr_accessor :pagination
+    attr_accessor :account_username
 
-    attr_accessor :meta
+    attr_accessor :platform
+
+    attr_accessor :error
+
+    # Error code if available (e.g. TOKEN_EXPIRED, or X_INBOX_NOT_ENABLED for an X account whose owner has not enabled X inbox)
+    attr_accessor :code
+
+    # Seconds to wait before retry (rate limits)
+    attr_accessor :retry_after
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'data' => :'data',
-        :'pagination' => :'pagination',
-        :'meta' => :'meta'
+        :'account_id' => :'accountId',
+        :'account_username' => :'accountUsername',
+        :'platform' => :'platform',
+        :'error' => :'error',
+        :'code' => :'code',
+        :'retry_after' => :'retryAfter'
       }
     end
 
@@ -43,15 +54,21 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<ListInboxComments200ResponseDataInner>',
-        :'pagination' => :'ListInboxConversations200ResponsePagination',
-        :'meta' => :'ListInboxComments200ResponseMeta'
+        :'account_id' => :'String',
+        :'account_username' => :'String',
+        :'platform' => :'String',
+        :'error' => :'String',
+        :'code' => :'String',
+        :'retry_after' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'account_username',
+        :'code',
+        :'retry_after'
       ])
     end
 
@@ -59,30 +76,40 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListInboxComments200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListInboxComments200ResponseMetaFailedAccountsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListInboxComments200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListInboxComments200ResponseMetaFailedAccountsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'account_username')
+        self.account_username = attributes[:'account_username']
       end
 
-      if attributes.key?(:'meta')
-        self.meta = attributes[:'meta']
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
+      end
+
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
+      end
+
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
+      end
+
+      if attributes.key?(:'retry_after')
+        self.retry_after = attributes[:'retry_after']
       end
     end
 
@@ -106,9 +133,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data &&
-          pagination == o.pagination &&
-          meta == o.meta
+          account_id == o.account_id &&
+          account_username == o.account_username &&
+          platform == o.platform &&
+          error == o.error &&
+          code == o.code &&
+          retry_after == o.retry_after
     end
 
     # @see the `==` method
@@ -120,7 +150,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data, pagination, meta].hash
+      [account_id, account_username, platform, error, code, retry_after].hash
     end
 
     # Builds the object from hash

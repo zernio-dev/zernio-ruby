@@ -967,6 +967,8 @@ require 'zernio-sdk/models/list_google_business_place_actions200_response_place_
 require 'zernio-sdk/models/list_high_demand_periods200_response'
 require 'zernio-sdk/models/list_inbox_comments200_response'
 require 'zernio-sdk/models/list_inbox_comments200_response_data_inner'
+require 'zernio-sdk/models/list_inbox_comments200_response_meta'
+require 'zernio-sdk/models/list_inbox_comments200_response_meta_failed_accounts_inner'
 require 'zernio-sdk/models/list_inbox_conversation_analytics200_response'
 require 'zernio-sdk/models/list_inbox_conversation_analytics200_response_items_inner'
 require 'zernio-sdk/models/list_inbox_conversation_analytics200_response_pagination'
