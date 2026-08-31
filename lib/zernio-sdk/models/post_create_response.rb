@@ -19,11 +19,15 @@ module Zernio
 
     attr_accessor :post
 
+    # Advisory notices about a post that was still created: media truncated for a platform, a recycling caveat, or a field that was ignored because it sat outside platforms[].platformSpecificData. Absent when there are none.
+    attr_accessor :warnings
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'message' => :'message',
-        :'post' => :'post'
+        :'post' => :'post',
+        :'warnings' => :'warnings'
       }
     end
 
@@ -41,7 +45,8 @@ module Zernio
     def self.openapi_types
       {
         :'message' => :'String',
-        :'post' => :'Post'
+        :'post' => :'Post',
+        :'warnings' => :'Array<String>'
       }
     end
 
@@ -74,6 +79,12 @@ module Zernio
       if attributes.key?(:'post')
         self.post = attributes[:'post']
       end
+
+      if attributes.key?(:'warnings')
+        if (value = attributes[:'warnings']).is_a?(Array)
+          self.warnings = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -97,7 +108,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           message == o.message &&
-          post == o.post
+          post == o.post &&
+          warnings == o.warnings
     end
 
     # @see the `==` method
@@ -109,7 +121,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message, post].hash
+      [message, post, warnings].hash
     end
 
     # Builds the object from hash
