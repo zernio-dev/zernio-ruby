@@ -28,7 +28,7 @@ module Zernio
     # One entry per CSV data row, in row order.
     attr_accessor :results
 
-    # Top-level advisory warnings (e.g. `rows_exceed_advisory_limit:500`). Empty when none.
+    # Top-level advisory warnings, e.g. `rows_exceed_advisory_limit:500` or `unknown_columns:<a,b,c>` (comma-separated unrecognized CSV column names). Empty when none.
     attr_accessor :warnings
 
     # Present only when one or more rows targeted an account currently in cooldown. Lets callers map `rate_limited:*` row errors back to structured metadata without parsing the error strings. 

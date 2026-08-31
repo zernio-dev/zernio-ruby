@@ -87,6 +87,12 @@ module Zernio
     # Legal entity that pays for the ad. Can differ from `dsaBeneficiary` (for example, an agency paying for a client's ads). Same rules as `dsaBeneficiary`: required for EU targeting unless the ad account has a default payor. 
     attr_accessor :dsa_payor
 
+    # Lead Gen form ID to attach to the boosted ad's creative. REQUIRED when `goal` is `lead_generation`. On Meta this is the leadgen_forms ID (create one via POST /v1/ads/lead-forms). On LinkedIn this is the adForm ID (create one via POST /v1/ads/lead-forms with a LinkedIn account); the creative's `leadgenCallToAction.destination` is set to `urn:li:adForm:{id}`. Ignored for other goals.
+    attr_accessor :lead_gen_form_id
+
+    # Meta, TikTok, and LinkedIn. Publish state of the created entities. Omitted or ACTIVE publishes live (default); PAUSED creates them paused so you can review before they spend. On LinkedIn the whole campaign group, campaign, and creative hierarchy stays PAUSED (intendedStatus PAUSED on each).
+    attr_accessor :status
+
     # Meta only. Explicit ad-set `optimization_goal` override. When omitted, defaults to the value derived from `goal`. The value must be compatible with the objective Meta derives from `goal`, not with the objective used by `POST /v1/ads/create` for the same `goal` name: boost maps `goal: \"engagement\"` to objective `OUTCOME_AWARENESS`, which accepts `REACH`, `IMPRESSIONS`, `AD_RECALL_LIFT`, or THRUPLAY-class values, and rejects `POST_ENGAGEMENT` (that value is only valid under `OUTCOME_ENGAGEMENT`, which create uses for the same goal name). 
     attr_accessor :optimization_goal
 
@@ -141,6 +147,8 @@ module Zernio
         :'spark_auth_code' => :'sparkAuthCode',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor',
+        :'lead_gen_form_id' => :'leadGenFormId',
+        :'status' => :'status',
         :'optimization_goal' => :'optimizationGoal'
       }
     end
@@ -184,6 +192,8 @@ module Zernio
         :'spark_auth_code' => :'String',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String',
+        :'lead_gen_form_id' => :'String',
+        :'status' => :'String',
         :'optimization_goal' => :'String'
       }
     end
@@ -328,6 +338,14 @@ module Zernio
         self.dsa_payor = attributes[:'dsa_payor']
       end
 
+      if attributes.key?(:'lead_gen_form_id')
+        self.lead_gen_form_id = attributes[:'lead_gen_form_id']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
       if attributes.key?(:'optimization_goal')
         self.optimization_goal = attributes[:'optimization_goal']
       end
@@ -394,6 +412,8 @@ module Zernio
       return false if !@currency.nil? && @currency.to_s.length < 3
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
+      status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      return false unless status_validator.valid?(@status)
       true
     end
 
@@ -497,6 +517,16 @@ module Zernio
       @dsa_payor = dsa_payor
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -528,6 +558,8 @@ module Zernio
           spark_auth_code == o.spark_auth_code &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor &&
+          lead_gen_form_id == o.lead_gen_form_id &&
+          status == o.status &&
           optimization_goal == o.optimization_goal
     end
 
@@ -540,7 +572,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, optimization_goal].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
     end
 
     # Builds the object from hash

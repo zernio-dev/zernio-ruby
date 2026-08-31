@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta + TikTok (demographics/interests) and Google (keyword edits only). Pinterest / X / LinkedIn return 501. 
+  # Meta + TikTok (demographics/interests), Google (keyword edits only), and LinkedIn (geo countries). Pinterest / X return 501. 
   class UpdateAdRequestTargeting < ApiModelBase
     # Google only. The FULL new set of positive keywords for the ad group; live keywords not listed are removed. Entries are strings (BROAD) or { text, matchType } with matchType exact | phrase | broad. Mirrored to GET /v1/ads/keywords immediately.
     attr_accessor :keywords
