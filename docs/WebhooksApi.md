@@ -8,6 +8,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**delete_webhook_settings**](WebhooksApi.md#delete_webhook_settings) | **DELETE** /v1/webhooks/settings | Delete webhook |
 | [**get_webhook_logs**](WebhooksApi.md#get_webhook_logs) | **GET** /v1/webhooks/logs | List webhook delivery logs |
 | [**get_webhook_settings**](WebhooksApi.md#get_webhook_settings) | **GET** /v1/webhooks/settings | List webhooks |
+| [**redeliver_webhook_event**](WebhooksApi.md#redeliver_webhook_event) | **POST** /v1/webhooks/logs/redeliver | Redeliver a webhook event |
 | [**test_webhook**](WebhooksApi.md#test_webhook) | **POST** /v1/webhooks/test | Send test webhook |
 | [**update_webhook_settings**](WebhooksApi.md#update_webhook_settings) | **PUT** /v1/webhooks/settings | Update webhook |
 
@@ -294,6 +295,75 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## redeliver_webhook_event
+
+> <UnpublishPost200Response> redeliver_webhook_event(redeliver_webhook_event_request)
+
+Redeliver a webhook event
+
+Replay a past delivery: the original payload is re-sent, byte for byte, to the subscription's current URL. The original event ID is preserved so your endpoint can dedupe, and the replay is recorded as a fresh attempt, so it shows up in `GET /v1/webhooks/logs` next to the delivery it replays.  Both `webhookId` and `eventId` come from a row of `GET /v1/webhooks/logs`. Because the stored payload is replayed as-is, a redelivery reflects the event as it was emitted, not the current state of the resource.  Only deliveries inside the 30-day log retention window can be replayed; past that the payload is gone and the request fails with a 500. Replays run the same resource-group checks as live delivery, against both the key's groups and the subscription's `disabledResourceGroups`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhooksApi.new
+redeliver_webhook_event_request = Zernio::RedeliverWebhookEventRequest.new({webhook_id: 'webhook_id_example', event_id: 'event_id_example'}) # RedeliverWebhookEventRequest | 
+
+begin
+  # Redeliver a webhook event
+  result = api_instance.redeliver_webhook_event(redeliver_webhook_event_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhooksApi->redeliver_webhook_event: #{e}"
+end
+```
+
+#### Using the redeliver_webhook_event_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UnpublishPost200Response>, Integer, Hash)> redeliver_webhook_event_with_http_info(redeliver_webhook_event_request)
+
+```ruby
+begin
+  # Redeliver a webhook event
+  data, status_code, headers = api_instance.redeliver_webhook_event_with_http_info(redeliver_webhook_event_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UnpublishPost200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhooksApi->redeliver_webhook_event_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **redeliver_webhook_event_request** | [**RedeliverWebhookEventRequest**](RedeliverWebhookEventRequest.md) |  |  |
+
+### Return type
+
+[**UnpublishPost200Response**](UnpublishPost200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

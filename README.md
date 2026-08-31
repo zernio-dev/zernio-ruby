@@ -568,6 +568,7 @@ Class | Method | HTTP request | Description
 *Zernio::WebhooksApi* | [**delete_webhook_settings**](docs/WebhooksApi.md#delete_webhook_settings) | **DELETE** /v1/webhooks/settings | Delete webhook
 *Zernio::WebhooksApi* | [**get_webhook_logs**](docs/WebhooksApi.md#get_webhook_logs) | **GET** /v1/webhooks/logs | List webhook delivery logs
 *Zernio::WebhooksApi* | [**get_webhook_settings**](docs/WebhooksApi.md#get_webhook_settings) | **GET** /v1/webhooks/settings | List webhooks
+*Zernio::WebhooksApi* | [**redeliver_webhook_event**](docs/WebhooksApi.md#redeliver_webhook_event) | **POST** /v1/webhooks/logs/redeliver | Redeliver a webhook event
 *Zernio::WebhooksApi* | [**test_webhook**](docs/WebhooksApi.md#test_webhook) | **POST** /v1/webhooks/test | Send test webhook
 *Zernio::WebhooksApi* | [**update_webhook_settings**](docs/WebhooksApi.md#update_webhook_settings) | **PUT** /v1/webhooks/settings | Update webhook
 *Zernio::WhatsAppApi* | [**add_whats_app_group_participants**](docs/WhatsAppApi.md#add_whats_app_group_participants) | **POST** /v1/whatsapp/wa-groups/{groupId}/participants | Add participants
@@ -1827,6 +1828,7 @@ Class | Method | HTTP request | Description
  - [Zernio::RecyclingState](docs/RecyclingState.md)
  - [Zernio::RedditPlatformData](docs/RedditPlatformData.md)
  - [Zernio::RedditPost](docs/RedditPost.md)
+ - [Zernio::RedeliverWebhookEventRequest](docs/RedeliverWebhookEventRequest.md)
  - [Zernio::RegisterWhatsAppNumber200Response](docs/RegisterWhatsAppNumber200Response.md)
  - [Zernio::RegisterWhatsAppNumberRequest](docs/RegisterWhatsAppNumberRequest.md)
  - [Zernio::RejectWhatsAppGroupJoinRequestsRequest](docs/RejectWhatsAppGroupJoinRequestsRequest.md)

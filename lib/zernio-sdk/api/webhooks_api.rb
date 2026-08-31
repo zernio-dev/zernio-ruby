@@ -332,6 +332,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Redeliver a webhook event
+    # Replay a past delivery: the original payload is re-sent, byte for byte, to the subscription's current URL. The original event ID is preserved so your endpoint can dedupe, and the replay is recorded as a fresh attempt, so it shows up in `GET /v1/webhooks/logs` next to the delivery it replays.  Both `webhookId` and `eventId` come from a row of `GET /v1/webhooks/logs`. Because the stored payload is replayed as-is, a redelivery reflects the event as it was emitted, not the current state of the resource.  Only deliveries inside the 30-day log retention window can be replayed; past that the payload is gone and the request fails with a 500. Replays run the same resource-group checks as live delivery, against both the key's groups and the subscription's `disabledResourceGroups`. 
+    # @param redeliver_webhook_event_request [RedeliverWebhookEventRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UnpublishPost200Response]
+    def redeliver_webhook_event(redeliver_webhook_event_request, opts = {})
+      data, _status_code, _headers = redeliver_webhook_event_with_http_info(redeliver_webhook_event_request, opts)
+      data
+    end
+
+    # Redeliver a webhook event
+    # Replay a past delivery: the original payload is re-sent, byte for byte, to the subscription&#39;s current URL. The original event ID is preserved so your endpoint can dedupe, and the replay is recorded as a fresh attempt, so it shows up in &#x60;GET /v1/webhooks/logs&#x60; next to the delivery it replays.  Both &#x60;webhookId&#x60; and &#x60;eventId&#x60; come from a row of &#x60;GET /v1/webhooks/logs&#x60;. Because the stored payload is replayed as-is, a redelivery reflects the event as it was emitted, not the current state of the resource.  Only deliveries inside the 30-day log retention window can be replayed; past that the payload is gone and the request fails with a 500. Replays run the same resource-group checks as live delivery, against both the key&#39;s groups and the subscription&#39;s &#x60;disabledResourceGroups&#x60;. 
+    # @param redeliver_webhook_event_request [RedeliverWebhookEventRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
+    def redeliver_webhook_event_with_http_info(redeliver_webhook_event_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WebhooksApi.redeliver_webhook_event ...'
+      end
+      # verify the required parameter 'redeliver_webhook_event_request' is set
+      if @api_client.config.client_side_validation && redeliver_webhook_event_request.nil?
+        fail ArgumentError, "Missing the required parameter 'redeliver_webhook_event_request' when calling WebhooksApi.redeliver_webhook_event"
+      end
+      # resource path
+      local_var_path = '/v1/webhooks/logs/redeliver'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(redeliver_webhook_event_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UnpublishPost200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WebhooksApi.redeliver_webhook_event",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WebhooksApi#redeliver_webhook_event\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Send test webhook
     # Send a test webhook to verify your endpoint is configured correctly. The test payload includes event: \"webhook.test\" to distinguish it from real events.  `webhook.test` belongs to the `webhooks` resource group, so a key with that group disabled is rejected with 403, as is a test fire on a subscription that lists `webhooks` in its own `disabledResourceGroups` (a 403, not a reported delivery failure). Replays of real events (redelivery, dead-letter requeue) run the same checks as live delivery, against both the key's groups and the subscription's. 
     # @param test_webhook_request [TestWebhookRequest] 

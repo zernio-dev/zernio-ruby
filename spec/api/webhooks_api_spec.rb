@@ -84,6 +84,18 @@ describe 'WebhooksApi' do
     end
   end
 
+  # unit tests for redeliver_webhook_event
+  # Redeliver a webhook event
+  # Replay a past delivery: the original payload is re-sent, byte for byte, to the subscription&#39;s current URL. The original event ID is preserved so your endpoint can dedupe, and the replay is recorded as a fresh attempt, so it shows up in &#x60;GET /v1/webhooks/logs&#x60; next to the delivery it replays.  Both &#x60;webhookId&#x60; and &#x60;eventId&#x60; come from a row of &#x60;GET /v1/webhooks/logs&#x60;. Because the stored payload is replayed as-is, a redelivery reflects the event as it was emitted, not the current state of the resource.  Only deliveries inside the 30-day log retention window can be replayed; past that the payload is gone and the request fails with a 500. Replays run the same resource-group checks as live delivery, against both the key&#39;s groups and the subscription&#39;s &#x60;disabledResourceGroups&#x60;. 
+  # @param redeliver_webhook_event_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UnpublishPost200Response]
+  describe 'redeliver_webhook_event test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for test_webhook
   # Send test webhook
   # Send a test webhook to verify your endpoint is configured correctly. The test payload includes event: \&quot;webhook.test\&quot; to distinguish it from real events.  &#x60;webhook.test&#x60; belongs to the &#x60;webhooks&#x60; resource group, so a key with that group disabled is rejected with 403, as is a test fire on a subscription that lists &#x60;webhooks&#x60; in its own &#x60;disabledResourceGroups&#x60; (a 403, not a reported delivery failure). Replays of real events (redelivery, dead-letter requeue) run the same checks as live delivery, against both the key&#39;s groups and the subscription&#39;s. 
