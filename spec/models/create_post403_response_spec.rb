@@ -36,7 +36,7 @@ describe Zernio::CreatePost403Response do
   describe 'test attribute "code"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ACCOUNT_DISCONNECTED", "PROFILE_OVER_LIMIT"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ACCOUNT_DISCONNECTED", "ACCOUNT_NOT_ENABLED_FOR_POSTING", "PROFILE_OVER_LIMIT"])
       # validator.allowable_values.each do |value|
       #   expect { instance.code = value }.not_to raise_error
       # end
