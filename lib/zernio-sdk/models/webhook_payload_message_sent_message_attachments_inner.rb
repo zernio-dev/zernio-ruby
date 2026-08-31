@@ -15,10 +15,13 @@ require 'time'
 
 module Zernio
   class WebhookPayloadMessageSentMessageAttachmentsInner < ApiModelBase
-    # Attachment type (image, video, file, sticker, audio)
+    # Attachment type (image, video, file, sticker, audio, share)
     attr_accessor :type
 
-    # Where to fetch the attachment. For outgoing messages this is the media URL as sent, so for WhatsApp it is the URL you supplied when publishing (WhatsApp sends media by link), not a Zernio endpoint, and it needs no Zernio credentials. Contrast the inbound direction: `message.received` attachment URLs on WhatsApp point at the authenticated `GET /v1/whatsapp/media/{mediaId}`. 
+    # Instagram and Facebook only, and present only when it differs from `type`. Meta's own attachment type before Zernio normalized it. See the same field on message.received for the full mapping.
+    attr_accessor :original_type
+
+    # Where to fetch the attachment. For outgoing messages this is the media URL as sent, so for WhatsApp it is the URL you supplied when publishing (WhatsApp sends media by link), not a Zernio endpoint, and it needs no Zernio credentials. Contrast the inbound direction: `message.received` attachment URLs on WhatsApp point at the authenticated `GET /v1/whatsapp/media/{mediaId}`.  As on `message.received`, webhook attachments carry no `refreshUrl`: that field is stamped only on the REST read. Resolve Instagram and Facebook media through `GET /v1/inbox/conversations/{conversationId}/messages/{messageId}/attachments/{index}?accountId={accountId}`. 
     attr_accessor :url
 
     # Additional attachment metadata
@@ -28,6 +31,7 @@ module Zernio
     def self.attribute_map
       {
         :'type' => :'type',
+        :'original_type' => :'originalType',
         :'url' => :'url',
         :'payload' => :'payload'
       }
@@ -47,6 +51,7 @@ module Zernio
     def self.openapi_types
       {
         :'type' => :'String',
+        :'original_type' => :'String',
         :'url' => :'String',
         :'payload' => :'Object'
       }
@@ -78,6 +83,10 @@ module Zernio
         self.type = attributes[:'type']
       else
         self.type = nil
+      end
+
+      if attributes.key?(:'original_type')
+        self.original_type = attributes[:'original_type']
       end
 
       if attributes.key?(:'url')
@@ -142,6 +151,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
+          original_type == o.original_type &&
           url == o.url &&
           payload == o.payload
     end
@@ -155,7 +165,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, url, payload].hash
+      [type, original_type, url, payload].hash
     end
 
     # Builds the object from hash

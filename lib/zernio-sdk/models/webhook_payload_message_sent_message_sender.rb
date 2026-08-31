@@ -14,16 +14,21 @@ require 'date'
 require 'time'
 
 module Zernio
+  # **On this event the sender is your own business, not the person you are talking to.** `id` is the Zernio account id and `name`, `username` and `picture` are that connected account's own profile.  Do not read these to name or update a contact: doing so on an echo relabels the customer's record with your business name. The other party is `conversation.participantId` / `participantName` / `participantUsername`, which are populated in both directions. 
   class WebhookPayloadMessageSentMessageSender < ApiModelBase
+    # The Zernio account id of the connected account that sent the message, not a contact id.
     attr_accessor :id
 
     # Always omitted on this event: the sender is the business, not a contact. Use conversation.contactId to join back to the CRM Contact.
     attr_accessor :contact_id
 
+    # Display name of your connected account.
     attr_accessor :name
 
+    # Username of your connected account.
     attr_accessor :username
 
+    # Profile picture of your connected account.
     attr_accessor :picture
 
     # Attribute mapping from ruby-style variable name to JSON key.

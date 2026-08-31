@@ -19,6 +19,9 @@ module Zernio
 
     attr_accessor :type
 
+    # Instagram and Facebook only, and present only when it differs from `type`. Meta's own type before normalization: `ig_reel` and `reel` become `video`, while `ig_post`, `post`, `ig_story` and `story_mention` become `share`. A story mention is `type: \"share\"` with `originalType: \"story_mention\"`; render on this field, since `share` alone is ambiguous.
+    attr_accessor :original_type
+
     # Direct media link. On Instagram and Facebook this is a signed Meta CDN url that EXPIRES: use it now, do not store it. Persist `refreshUrl` instead.
     attr_accessor :url
 
@@ -56,6 +59,7 @@ module Zernio
       {
         :'id' => :'id',
         :'type' => :'type',
+        :'original_type' => :'originalType',
         :'url' => :'url',
         :'refresh_url' => :'refreshUrl',
         :'filename' => :'filename',
@@ -78,6 +82,7 @@ module Zernio
       {
         :'id' => :'String',
         :'type' => :'String',
+        :'original_type' => :'String',
         :'url' => :'String',
         :'refresh_url' => :'String',
         :'filename' => :'String',
@@ -116,6 +121,10 @@ module Zernio
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'original_type')
+        self.original_type = attributes[:'original_type']
       end
 
       if attributes.key?(:'url')
@@ -169,6 +178,7 @@ module Zernio
       self.class == o.class &&
           id == o.id &&
           type == o.type &&
+          original_type == o.original_type &&
           url == o.url &&
           refresh_url == o.refresh_url &&
           filename == o.filename &&
@@ -184,7 +194,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, url, refresh_url, filename, preview_url].hash
+      [id, type, original_type, url, refresh_url, filename, preview_url].hash
     end
 
     # Builds the object from hash
