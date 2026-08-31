@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :user_id
 
-    # YouTube: title must be ≤ 100 characters. 
+    # Stored on the post for reference/display only. This field is NOT used as the video title when publishing. To set a YouTube video title, use platformSpecificData.title on the youtube platform target (falls back to the first line of content when omitted).
     attr_accessor :title
 
     attr_accessor :content
@@ -37,6 +37,7 @@ module Zernio
     # YouTube constraints: each tag max 100 chars, combined max 500 chars, duplicates removed.
     attr_accessor :tags
 
+    # Stored for reference only. Hashtags are NOT automatically appended to the caption when publishing. Include hashtags directly in the content field (platforms like Instagram only support hashtags as caption text). For YouTube keywords, use the tags field instead.
     attr_accessor :hashtags
 
     # Stored for reference only. This field does NOT automatically create @mentions when publishing. For LinkedIn @mentions, use the /v1/accounts/{accountId}/linkedin-mentions endpoint to resolve profile URLs to URNs, then embed the returned mentionFormat directly in the post content field.
