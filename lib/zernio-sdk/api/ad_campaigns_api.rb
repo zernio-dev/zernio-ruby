@@ -1435,6 +1435,7 @@ module Zernio
     # @option opts [String] :page_id Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
     # @option opts [String] :profile_id Profile ID
     # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
+    # @option opts [String] :ad_set_id Platform ad set ID (filter ads within an ad set, the /{adset_id}/ads read of an adset-centric dashboard).
     # @option opts [String] :platform_ad_id Meta ad ID. Returns the ad with this platform-side ad ID.
     # @option opts [String] :effective_object_story_id Facebook &#x60;{pageId}_{postId}&#x60; of the post the ad&#39;s engagement lives on (Meta &#x60;effective_object_story_id&#x60;). Use to map a Business-Manager-visible post back to the Zernio ad.
     # @option opts [String] :effective_instagram_media_id Instagram media ID of the boosted post (Meta &#x60;effective_instagram_media_id&#x60;). Use to map a Business-Manager-visible IG post back to the Zernio ad.
@@ -1459,6 +1460,7 @@ module Zernio
     # @option opts [String] :page_id Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
     # @option opts [String] :profile_id Profile ID
     # @option opts [String] :campaign_id Platform campaign ID (filter ads within a campaign)
+    # @option opts [String] :ad_set_id Platform ad set ID (filter ads within an ad set, the /{adset_id}/ads read of an adset-centric dashboard).
     # @option opts [String] :platform_ad_id Meta ad ID. Returns the ad with this platform-side ad ID.
     # @option opts [String] :effective_object_story_id Facebook &#x60;{pageId}_{postId}&#x60; of the post the ad&#39;s engagement lives on (Meta &#x60;effective_object_story_id&#x60;). Use to map a Business-Manager-visible post back to the Zernio ad.
     # @option opts [String] :effective_instagram_media_id Instagram media ID of the boosted post (Meta &#x60;effective_instagram_media_id&#x60;). Use to map a Business-Manager-visible IG post back to the Zernio ad.
@@ -1504,6 +1506,7 @@ module Zernio
       query_params[:'pageId'] = opts[:'page_id'] if !opts[:'page_id'].nil?
       query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
       query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'adSetId'] = opts[:'ad_set_id'] if !opts[:'ad_set_id'].nil?
       query_params[:'platformAdId'] = opts[:'platform_ad_id'] if !opts[:'platform_ad_id'].nil?
       query_params[:'effectiveObjectStoryId'] = opts[:'effective_object_story_id'] if !opts[:'effective_object_story_id'].nil?
       query_params[:'effectiveInstagramMediaId'] = opts[:'effective_instagram_media_id'] if !opts[:'effective_instagram_media_id'].nil?

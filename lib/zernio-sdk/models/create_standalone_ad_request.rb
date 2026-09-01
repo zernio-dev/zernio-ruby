@@ -154,6 +154,15 @@ module Zernio
     # Behaviour entities from /v1/ads/targeting/search?dimension=behavior. Supported on Meta and TikTok. Each must include id.
     attr_accessor :behaviors
 
+    # Meta only. Job title entities from /v1/ads/targeting/search?dimension=workPosition. Each must include id. Rejected on other platforms (use LinkedIn's `jobTitles` there).
+    attr_accessor :work_positions
+
+    # Meta only. Employer entities from /v1/ads/targeting/search?dimension=workEmployer. Each must include id.
+    attr_accessor :work_employers
+
+    # Meta only. Work-industry entities from /v1/ads/targeting/search?dimension=workIndustry. Each must include id. Rejected on other platforms (use LinkedIn's `industries` there).
+    attr_accessor :work_industries
+
     # Normalized household-income tier. Meta and TikTok express all four; Google maps only `top_10`; rejected on LinkedIn, X, and Pinterest. On Meta, income targeting is incompatible with housing/employment/credit `specialAdCategories`. 
     attr_accessor :income_tier
 
@@ -339,6 +348,9 @@ module Zernio
         :'metros' => :'metros',
         :'custom_locations' => :'customLocations',
         :'behaviors' => :'behaviors',
+        :'work_positions' => :'workPositions',
+        :'work_employers' => :'workEmployers',
+        :'work_industries' => :'workIndustries',
         :'income_tier' => :'incomeTier',
         :'languages' => :'languages',
         :'placements' => :'placements',
@@ -443,6 +455,9 @@ module Zernio
         :'metros' => :'Array<BoostPostRequestTargetingRegionsInner>',
         :'custom_locations' => :'Array<CreateStandaloneAdRequestCustomLocationsInner>',
         :'behaviors' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
+        :'work_positions' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
+        :'work_employers' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
+        :'work_industries' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
         :'income_tier' => :'String',
         :'languages' => :'Array<String>',
         :'placements' => :'CreateStandaloneAdRequestPlacements',
@@ -728,6 +743,24 @@ module Zernio
       if attributes.key?(:'behaviors')
         if (value = attributes[:'behaviors']).is_a?(Array)
           self.behaviors = value
+        end
+      end
+
+      if attributes.key?(:'work_positions')
+        if (value = attributes[:'work_positions']).is_a?(Array)
+          self.work_positions = value
+        end
+      end
+
+      if attributes.key?(:'work_employers')
+        if (value = attributes[:'work_employers']).is_a?(Array)
+          self.work_employers = value
+        end
+      end
+
+      if attributes.key?(:'work_industries')
+        if (value = attributes[:'work_industries']).is_a?(Array)
+          self.work_industries = value
         end
       end
 
@@ -1643,6 +1676,9 @@ module Zernio
           metros == o.metros &&
           custom_locations == o.custom_locations &&
           behaviors == o.behaviors &&
+          work_positions == o.work_positions &&
+          work_employers == o.work_employers &&
+          work_industries == o.work_industries &&
           income_tier == o.income_tier &&
           languages == o.languages &&
           placements == o.placements &&
@@ -1693,7 +1729,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
     end
 
     # Builds the object from hash

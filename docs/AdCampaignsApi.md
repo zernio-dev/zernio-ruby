@@ -1368,6 +1368,7 @@ opts = {
   page_id: 'page_id_example', # String | Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad's `creative.pageId`; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree.
   profile_id: 'profile_id_example', # String | Profile ID
   campaign_id: 'campaign_id_example', # String | Platform campaign ID (filter ads within a campaign)
+  ad_set_id: 'ad_set_id_example', # String | Platform ad set ID (filter ads within an ad set, the /{adset_id}/ads read of an adset-centric dashboard).
   platform_ad_id: 'platform_ad_id_example', # String | Meta ad ID. Returns the ad with this platform-side ad ID.
   effective_object_story_id: 'effective_object_story_id_example', # String | Facebook `{pageId}_{postId}` of the post the ad's engagement lives on (Meta `effective_object_story_id`). Use to map a Business-Manager-visible post back to the Zernio ad.
   effective_instagram_media_id: 'effective_instagram_media_id_example', # String | Instagram media ID of the boosted post (Meta `effective_instagram_media_id`). Use to map a Business-Manager-visible IG post back to the Zernio ad.
@@ -1416,6 +1417,7 @@ end
 | **page_id** | **String** | Meta only: Facebook Page ID. Returns only ads whose creative is backed by this Page (a Meta ad account serves ads for every Page in the Business Manager). Matches each ad&#39;s &#x60;creative.pageId&#x60;; ads with no page signal (rare IG-only creatives) never match. Mirrors the same filter on /v1/ads/campaigns and /v1/ads/tree. | [optional] |
 | **profile_id** | **String** | Profile ID | [optional] |
 | **campaign_id** | **String** | Platform campaign ID (filter ads within a campaign) | [optional] |
+| **ad_set_id** | **String** | Platform ad set ID (filter ads within an ad set, the /{adset_id}/ads read of an adset-centric dashboard). | [optional] |
 | **platform_ad_id** | **String** | Meta ad ID. Returns the ad with this platform-side ad ID. | [optional] |
 | **effective_object_story_id** | **String** | Facebook &#x60;{pageId}_{postId}&#x60; of the post the ad&#39;s engagement lives on (Meta &#x60;effective_object_story_id&#x60;). Use to map a Business-Manager-visible post back to the Zernio ad. | [optional] |
 | **effective_instagram_media_id** | **String** | Instagram media ID of the boosted post (Meta &#x60;effective_instagram_media_id&#x60;). Use to map a Business-Manager-visible IG post back to the Zernio ad. | [optional] |

@@ -57,6 +57,15 @@ module Zernio
     # Behaviour entities from /v1/ads/targeting/search?dimension=behavior. Supported on Meta and TikTok.
     attr_accessor :behaviors
 
+    # Meta only. Job title entities from /v1/ads/targeting/search?dimension=workPosition. Not interchangeable with the LinkedIn `jobTitles` URN fragments.
+    attr_accessor :work_positions
+
+    # Meta only. Employer entities from /v1/ads/targeting/search?dimension=workEmployer.
+    attr_accessor :work_employers
+
+    # Meta only. Work-industry entities from /v1/ads/targeting/search?dimension=workIndustry. Not interchangeable with the LinkedIn `industries` URN fragments.
+    attr_accessor :work_industries
+
     # LinkedIn B2B only. Industry URN id fragments.
     attr_accessor :industries
 
@@ -69,10 +78,10 @@ module Zernio
     # LinkedIn B2B only.
     attr_accessor :job_functions
 
-    # Platform audience IDs to include. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate.
+    # Platform audience IDs to include, as returned by GET /v1/ads/audiences (Meta custom audience ids, TikTok audience ids, Pinterest customer list ids, LinkedIn segment ids (bare, urn:li:adSegment or urn:li:dmpSegment forms accepted), Google user list ids, X custom audience ids). Not supported on OpenAI (400).
     attr_accessor :audience_include
 
-    # Platform audience IDs to exclude. Not supported on any platform (no builder maps it): rejected with a 400 on ad create, boost, and reach estimate.
+    # Platform audience IDs to exclude; same ID formats as audienceInclude. Not supported on OpenAI (400).
     attr_accessor :audience_exclude
 
     class EnumAttributeValidator
@@ -114,6 +123,9 @@ module Zernio
         :'languages' => :'languages',
         :'interests' => :'interests',
         :'behaviors' => :'behaviors',
+        :'work_positions' => :'workPositions',
+        :'work_employers' => :'workEmployers',
+        :'work_industries' => :'workIndustries',
         :'industries' => :'industries',
         :'company_sizes' => :'companySizes',
         :'seniorities' => :'seniorities',
@@ -150,6 +162,9 @@ module Zernio
         :'languages' => :'Array<String>',
         :'interests' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
         :'behaviors' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
+        :'work_positions' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
+        :'work_employers' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
+        :'work_industries' => :'Array<CreateStandaloneAdRequestBehaviorsInner>',
         :'industries' => :'Array<String>',
         :'company_sizes' => :'Array<String>',
         :'seniorities' => :'Array<String>',
@@ -252,6 +267,24 @@ module Zernio
       if attributes.key?(:'behaviors')
         if (value = attributes[:'behaviors']).is_a?(Array)
           self.behaviors = value
+        end
+      end
+
+      if attributes.key?(:'work_positions')
+        if (value = attributes[:'work_positions']).is_a?(Array)
+          self.work_positions = value
+        end
+      end
+
+      if attributes.key?(:'work_employers')
+        if (value = attributes[:'work_employers']).is_a?(Array)
+          self.work_employers = value
+        end
+      end
+
+      if attributes.key?(:'work_industries')
+        if (value = attributes[:'work_industries']).is_a?(Array)
+          self.work_industries = value
         end
       end
 
@@ -406,6 +439,9 @@ module Zernio
           languages == o.languages &&
           interests == o.interests &&
           behaviors == o.behaviors &&
+          work_positions == o.work_positions &&
+          work_employers == o.work_employers &&
+          work_industries == o.work_industries &&
           industries == o.industries &&
           company_sizes == o.company_sizes &&
           seniorities == o.seniorities &&
@@ -423,7 +459,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [countries, regions, cities, zips, metros, custom_locations, excluded_locations, age_min, age_max, gender, income_tier, languages, interests, behaviors, industries, company_sizes, seniorities, job_functions, audience_include, audience_exclude].hash
+      [countries, regions, cities, zips, metros, custom_locations, excluded_locations, age_min, age_max, gender, income_tier, languages, interests, behaviors, work_positions, work_employers, work_industries, industries, company_sizes, seniorities, job_functions, audience_include, audience_exclude].hash
     end
 
     # Builds the object from hash

@@ -14,12 +14,15 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Replace the ad's creative. Meta, TikTok, and LinkedIn.  - **Meta**: requires `headline`, `body`, `callToAction`, `linkUrl`, `imageUrl`. The   ad's existing creative is replaced via a new `/act_X/adcreatives` upload + ad   update. The old creative is retained on the ad account for historical reporting. - **TikTok**: patch-style. Pass any subset; `headline` is ignored (TikTok creatives   have no headline slot). `body` becomes the in-feed `ad_text`; `linkUrl` becomes   `landing_page_url`; `videoUrl` triggers a fresh upload. - **LinkedIn**: uploads new media (image via `imageUrl` or video via `videoUrl`),   creates a new inline media creative on the same campaign, and pauses the old   creative (best-effort). The old creative is retained for historical reporting. 
+  # Replace or patch the ad's creative. Meta, TikTok, and LinkedIn.  - **Meta**: patch-style. Pass any subset — fields you omit are preserved from the   live creative, including media (`image_hash`/`video_id` are reused, no re-upload)   and `url_tags`. Sending the full set (`headline`, `body`, `callToAction`,   `linkUrl`, `imageUrl`) rebuilds the creative from scratch instead. Partial   patching reads the live `object_story_spec`, which Meta strips on SHARE /   page-post / dark / asset_feed creatives — those return 422 asking for the full   set. A `videoUrl`/`videoId` on an image creative is a type change and also   needs the full set. `existingCreativeId` repoints the ad at a creative from   GET /v1/ads/creatives and ignores every other field. Meta creatives are   immutable, so any change creates a new creative and repoints the ad; the old   creative is retained on the ad account for historical reporting. - **TikTok**: patch-style. Pass any subset; `headline` is ignored (TikTok creatives   have no headline slot). `body` becomes the in-feed `ad_text`; `linkUrl` becomes   `landing_page_url`; `videoUrl` triggers a fresh upload. `description`, `videoId`   and `existingCreativeId` are Meta-only and return 400. - **LinkedIn**: uploads new media (image via `imageUrl` or video via `videoUrl`),   creates a new inline media creative on the same campaign, and pauses the old   creative (best-effort). The old creative is retained for historical reporting.   `videoId` and `existingCreativeId` are Meta-only and return 400. 
   class UpdateAdRequestCreative < ApiModelBase
-    # Meta only
+    # Meta and LinkedIn (TikTok has no headline slot)
     attr_accessor :headline
 
     attr_accessor :body
+
+    # Link description slot (Meta `link_data.description` / `video_data.link_description`, LinkedIn creative description).
+    attr_accessor :description
 
     attr_accessor :call_to_action
 
@@ -29,15 +32,24 @@ module Zernio
 
     attr_accessor :video_url
 
+    # Meta only. Reuse an already-uploaded ad video (from POST /v1/ads/videos or GET /v1/ads/videos) instead of re-uploading via videoUrl.
+    attr_accessor :video_id
+
+    # Meta only. Repoint the ad at an existing library creative (from GET /v1/ads/creatives); all other creative fields are ignored.
+    attr_accessor :existing_creative_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'headline' => :'headline',
         :'body' => :'body',
+        :'description' => :'description',
         :'call_to_action' => :'callToAction',
         :'link_url' => :'linkUrl',
         :'image_url' => :'imageUrl',
-        :'video_url' => :'videoUrl'
+        :'video_url' => :'videoUrl',
+        :'video_id' => :'videoId',
+        :'existing_creative_id' => :'existingCreativeId'
       }
     end
 
@@ -56,10 +68,13 @@ module Zernio
       {
         :'headline' => :'String',
         :'body' => :'String',
+        :'description' => :'String',
         :'call_to_action' => :'String',
         :'link_url' => :'String',
         :'image_url' => :'String',
-        :'video_url' => :'String'
+        :'video_url' => :'String',
+        :'video_id' => :'String',
+        :'existing_creative_id' => :'String'
       }
     end
 
@@ -93,6 +108,10 @@ module Zernio
         self.body = attributes[:'body']
       end
 
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
       if attributes.key?(:'call_to_action')
         self.call_to_action = attributes[:'call_to_action']
       end
@@ -108,6 +127,14 @@ module Zernio
       if attributes.key?(:'video_url')
         self.video_url = attributes[:'video_url']
       end
+
+      if attributes.key?(:'video_id')
+        self.video_id = attributes[:'video_id']
+      end
+
+      if attributes.key?(:'existing_creative_id')
+        self.existing_creative_id = attributes[:'existing_creative_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -115,6 +142,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@description.nil? && @description.to_s.length > 255
+        invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 255.')
+      end
+
       invalid_properties
     end
 
@@ -122,7 +153,22 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@description.nil? && @description.to_s.length > 255
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] description Value to be assigned
+    def description=(description)
+      if description.nil?
+        fail ArgumentError, 'description cannot be nil'
+      end
+
+      if description.to_s.length > 255
+        fail ArgumentError, 'invalid value for "description", the character length must be smaller than or equal to 255.'
+      end
+
+      @description = description
     end
 
     # Checks equality by comparing each attribute.
@@ -132,10 +178,13 @@ module Zernio
       self.class == o.class &&
           headline == o.headline &&
           body == o.body &&
+          description == o.description &&
           call_to_action == o.call_to_action &&
           link_url == o.link_url &&
           image_url == o.image_url &&
-          video_url == o.video_url
+          video_url == o.video_url &&
+          video_id == o.video_id &&
+          existing_creative_id == o.existing_creative_id
     end
 
     # @see the `==` method
@@ -147,7 +196,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headline, body, call_to_action, link_url, image_url, video_url].hash
+      [headline, body, description, call_to_action, link_url, image_url, video_url, video_id, existing_creative_id].hash
     end
 
     # Builds the object from hash
