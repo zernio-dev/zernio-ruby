@@ -12,7 +12,7 @@
 | **is_subscribed** | **Boolean** |  | [optional][default to true] |
 | **notes** | **String** |  | [optional] |
 | **account_id** | **String** | Optional. Creates a channel if provided with platform + platformIdentifier | [optional] |
-| **platform** | **String** |  | [optional] |
+| **platform** | **String** | Channel platform. Only the enum values support contact channels; any other platform is rejected with code platform_not_supported. | [optional] |
 | **platform_identifier** | **String** |  | [optional] |
 | **display_identifier** | **String** |  | [optional] |
 
