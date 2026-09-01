@@ -1142,7 +1142,7 @@ module Zernio
     end
 
     # Message sent event
-    # Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers. Sends that carry platform-specific context deliver it under `metadata`, so a quote-reply arrives with `metadata.quotedMessageId` and mirroring CRMs can thread it without a lookup. 
+    # Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers. Sends that carry platform-specific context deliver it under `metadata`, so a quote-reply sent through the API arrives with `metadata.quotedMessageId` and mirroring CRMs can thread it without a lookup. Which surfaces actually carry that reference is documented on `WebhookPayloadMessageSent.metadata.quotedMessageId`; a quote-reply sent from the WhatsApp Business or Instagram app is not one of them. 
     # @param webhook_payload_message_sent [WebhookPayloadMessageSent] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -1152,7 +1152,7 @@ module Zernio
     end
 
     # Message sent event
-    # Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers. Sends that carry platform-specific context deliver it under &#x60;metadata&#x60;, so a quote-reply arrives with &#x60;metadata.quotedMessageId&#x60; and mirroring CRMs can thread it without a lookup. 
+    # Fired when a message is sent via the API, or from the WhatsApp Business app on Coexistence numbers. Sends that carry platform-specific context deliver it under &#x60;metadata&#x60;, so a quote-reply sent through the API arrives with &#x60;metadata.quotedMessageId&#x60; and mirroring CRMs can thread it without a lookup. Which surfaces actually carry that reference is documented on &#x60;WebhookPayloadMessageSent.metadata.quotedMessageId&#x60;; a quote-reply sent from the WhatsApp Business or Instagram app is not one of them. 
     # @param webhook_payload_message_sent [WebhookPayloadMessageSent] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
