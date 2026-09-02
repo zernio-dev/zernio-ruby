@@ -18,7 +18,7 @@ module Zernio
     # Zernio SocialAccount id (posting or ads variant).
     attr_accessor :account_id
 
-    # Meta ad account id (act_<n>).
+    # Platform ad account id (Meta act_<n>, Google customer id, LinkedIn account id, ...).
     attr_accessor :ad_account_id
 
     # Whole currency units. Exactly one of budgetAmount / reach.

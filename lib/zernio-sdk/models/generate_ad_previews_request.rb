@@ -18,7 +18,7 @@ module Zernio
     # Zernio SocialAccount id used to resolve the Meta token.
     attr_accessor :account_id
 
-    # Meta ad account id (act_<n>).
+    # Platform ad account id (Meta act_<n>, Google customer id, LinkedIn account id, ...).
     attr_accessor :ad_account_id
 
     # Meta ad_format values, one preview per format. Defaults to [DESKTOP_FEED_STANDARD].

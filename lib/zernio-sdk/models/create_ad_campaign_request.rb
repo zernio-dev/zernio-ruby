@@ -15,10 +15,10 @@ require 'time'
 
 module Zernio
   class CreateAdCampaignRequest < ApiModelBase
-    # Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # Zernio SocialAccount id (posting or ads variant); its platform decides where the campaign is created.
     attr_accessor :account_id
 
-    # Meta ad account id (act_<n>).
+    # Platform ad account id (Meta act_<n>, Google customer id, LinkedIn account id, ...).
     attr_accessor :ad_account_id
 
     attr_accessor :name

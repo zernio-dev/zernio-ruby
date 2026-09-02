@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UpdateValueRuleSetRequest < ApiModelBase
-    # Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token.
+    # Zernio SocialAccount id (posting or ads variant); its platform decides where the campaign is created.
     attr_accessor :account_id
 
     # Required: the update replaces the whole set.

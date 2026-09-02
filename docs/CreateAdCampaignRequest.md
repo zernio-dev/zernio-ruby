@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant) used to resolve the Meta token. |  |
-| **ad_account_id** | **String** | Meta ad account id (act_&lt;n&gt;). |  |
+| **account_id** | **String** | Zernio SocialAccount id (posting or ads variant); its platform decides where the campaign is created. |  |
+| **ad_account_id** | **String** | Platform ad account id (Meta act_&lt;n&gt;, Google customer id, LinkedIn account id, ...). |  |
 | **name** | **String** |  |  |
 | **goal** | **String** | Mapped to the ODAX objective (same mapping as POST /v1/ads/create). |  |
 | **special_ad_categories** | **Array&lt;String&gt;** |  | [optional] |

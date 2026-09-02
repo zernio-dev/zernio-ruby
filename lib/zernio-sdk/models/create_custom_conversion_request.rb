@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class CreateCustomConversionRequest < ApiModelBase
-    # Meta ad account id (act_<n>).
+    # Platform ad account id (Meta act_<n>, Google customer id, LinkedIn account id, ...).
     attr_accessor :ad_account_id
 
     # Also the reuse key, together with pixelId.
