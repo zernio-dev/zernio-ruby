@@ -425,6 +425,12 @@ describe Zernio::CreateStandaloneAdRequest do
     end
   end
 
+  describe 'test attribute "regional_regulated_categories"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "end_date"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

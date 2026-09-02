@@ -111,6 +111,9 @@ module Zernio
     # Legal entity that pays for the ad. Can differ from `dsaBeneficiary` (for example, an agency paying for a client's ads). Same rules as `dsaBeneficiary`: required for EU targeting unless the ad account has a default payor. 
     attr_accessor :dsa_payor
 
+    # Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+    attr_accessor :regional_regulated_categories
+
     # Where the conversation opens when the ad is tapped.
     attr_accessor :destination
 
@@ -173,6 +176,7 @@ module Zernio
         :'roas_average_floor' => :'roasAverageFloor',
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor',
+        :'regional_regulated_categories' => :'regionalRegulatedCategories',
         :'destination' => :'destination'
       }
     end
@@ -224,6 +228,7 @@ module Zernio
         :'roas_average_floor' => :'Float',
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String',
+        :'regional_regulated_categories' => :'Array<String>',
         :'destination' => :'String'
       }
     end
@@ -413,6 +418,12 @@ module Zernio
 
       if attributes.key?(:'dsa_payor')
         self.dsa_payor = attributes[:'dsa_payor']
+      end
+
+      if attributes.key?(:'regional_regulated_categories')
+        if (value = attributes[:'regional_regulated_categories']).is_a?(Array)
+          self.regional_regulated_categories = value
+        end
       end
 
       if attributes.key?(:'destination')
@@ -825,6 +836,7 @@ module Zernio
           roas_average_floor == o.roas_average_floor &&
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor &&
+          regional_regulated_categories == o.regional_regulated_categories &&
           destination == o.destination
     end
 
@@ -837,7 +849,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, destination].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, destination].hash
     end
 
     # Builds the object from hash
