@@ -329,7 +329,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagesApi.new
-conversation_id = 'conversation_id_example' # String | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
+conversation_id = 'conversation_id_example' # String | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed.
 account_id = 'account_id_example' # String | The social account ID
 
 begin
@@ -363,7 +363,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **conversation_id** | **String** | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. |  |
+| **conversation_id** | **String** | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. |  |
 | **account_id** | **String** | The social account ID |  |
 
 ### Return type
@@ -400,7 +400,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagesApi.new
-conversation_id = 'conversation_id_example' # String | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
+conversation_id = 'conversation_id_example' # String | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed.
 account_id = 'account_id_example' # String | Social account ID
 opts = {
   limit: 56, # Integer | Number of messages to return per page. Default 100, max 100.
@@ -439,7 +439,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **conversation_id** | **String** | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. |  |
+| **conversation_id** | **String** | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. |  |
 | **account_id** | **String** | Social account ID |  |
 | **limit** | **Integer** | Number of messages to return per page. Default 100, max 100. | [optional][default to 100] |
 | **cursor** | **String** | Opaque pagination cursor. Pass &#x60;pagination.nextCursor&#x60; from a prior response verbatim: a cursor we cannot parse returns 400 rather than silently restarting from the first page. | [optional] |
@@ -1014,7 +1014,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::MessagesApi.new
-conversation_id = 'conversation_id_example' # String | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID.
+conversation_id = 'conversation_id_example' # String | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed.
 update_inbox_conversation_request = Zernio::UpdateInboxConversationRequest.new({account_id: 'account_id_example', status: 'active'}) # UpdateInboxConversationRequest | 
 
 begin
@@ -1048,7 +1048,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **conversation_id** | **String** | The conversation ID (id field from list conversations endpoint). This is the platform-specific conversation identifier, not an internal database ID. |  |
+| **conversation_id** | **String** | Opaque conversation identifier, accepted verbatim from the list endpoint or from the conversationId on inbox webhooks. Format not to be assumed. |  |
 | **update_inbox_conversation_request** | [**UpdateInboxConversationRequest**](UpdateInboxConversationRequest.md) |  |  |
 
 ### Return type
