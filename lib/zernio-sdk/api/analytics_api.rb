@@ -133,6 +133,83 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Analytics changed since a cursor
+    # Cursor feed of the analytics snapshots that CHANGED, across every account you can read, in one paginated stream. Built for integrations that would otherwise call `GET /v1/analytics` once per connected account. Each page carries changes from many accounts at once, so your call count scales with how much actually changed rather than with how many accounts you have. Measured against a fleet of roughly 1,600 connected accounts: about 1,599 per-account analytics calls an hour became about 205 delta calls an hour, a 7.8x reduction.  **Bootstrap once, then stay in sync.** Load your baseline from `GET /v1/analytics`, which is the historical endpoint. This one is a rolling 7-day change log and cannot replay history. Then call this endpoint with NO `cursor`: it answers with an empty `data` array plus the feed's current position in `nextCursor`. Send that `nextCursor` back on the next call and you receive everything written since. `nextCursor` is present on every response, empty pages included, so you always have something to advance with.  **Ordering.** Entries come back oldest first, in the order the feed received them. That order is NOT `syncedAt`: `syncedAt` is stamped when an account's sync cycle started, and a slow cycle writes its rows after a faster cycle that started later, so `syncedAt` can go backwards between consecutive entries. Do not sort, filter or resume on it. The cursor is the only stable position, and it is opaque: pass it back verbatim, and do not parse, construct or compare cursors.  **`hasMore: false` does not mean the feed ended.** This stream has no end and `nextCursor` is never null. `hasMore: true` means more changes are already waiting, so call again straight away. `hasMore: false` means you are caught up: keep the cursor and poll again on your normal interval.  **The newest changes settle before they are served.** The feed deliberately holds back its last few seconds of writes, so that a row can never become visible behind a cursor you have already advanced past. A read issued the instant an `analytics.synced` webhook lands will therefore often return an empty page for that account. Do not read an empty page as \"nothing changed\": poll again with the SAME cursor you just used rather than advancing.  **Repeats inside one instant.** A sync cycle occasionally records the same post twice at the same feed position. When that happens the feed delivers one of those rows, not both. Measured over a day of production traffic, about 1.3% of rows fall in such a group and 99.4% of those groups are identical rows, so this is far more often deduplication than loss. Metrics are absolute values rather than increments, so a later entry for the same post supersedes an earlier one.  **Retention is 7 days.** Changes older than that leave the feed. A cursor older than 6 days is rejected with a `400` (a day of margin, because expiry is lazy). Recover by re-bootstrapping from `GET /v1/analytics` and taking a fresh cursor from a call to this endpoint with no `cursor`. A consumer that polls at least daily never reaches this.  Pairs with the `analytics.synced` webhook, so changes can be read on notification instead of on a timer. That event carries no cursor of its own: keep using the `nextCursor` this endpoint gave you.  Requires the same analytics access as `GET /v1/analytics`, and shares the stricter per-second rate-limit window applied to analytics endpoints. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :cursor Opaque cursor from a previous response&#39;s &#x60;nextCursor&#x60;. Omit it to start from now: the response is then an empty page carrying the feed&#39;s current position. Rejected with a &#x60;400&#x60; when malformed, or when older than the retention window. 
+    # @option opts [Integer] :limit Page size. Out-of-range values are a 400, never a silent clamp. (default to 50)
+    # @option opts [String] :platform Filter to a single platform (for example \&quot;youtube\&quot;). Omit for every platform.
+    # @option opts [String] :profile_id Filter by profile ID (default \&quot;all\&quot;). Must be a valid profile ID or \&quot;all\&quot;. (default to 'all')
+    # @return [AnalyticsDeltaResponse]
+    def get_analytics_delta(opts = {})
+      data, _status_code, _headers = get_analytics_delta_with_http_info(opts)
+      data
+    end
+
+    # Analytics changed since a cursor
+    # Cursor feed of the analytics snapshots that CHANGED, across every account you can read, in one paginated stream. Built for integrations that would otherwise call &#x60;GET /v1/analytics&#x60; once per connected account. Each page carries changes from many accounts at once, so your call count scales with how much actually changed rather than with how many accounts you have. Measured against a fleet of roughly 1,600 connected accounts: about 1,599 per-account analytics calls an hour became about 205 delta calls an hour, a 7.8x reduction.  **Bootstrap once, then stay in sync.** Load your baseline from &#x60;GET /v1/analytics&#x60;, which is the historical endpoint. This one is a rolling 7-day change log and cannot replay history. Then call this endpoint with NO &#x60;cursor&#x60;: it answers with an empty &#x60;data&#x60; array plus the feed&#39;s current position in &#x60;nextCursor&#x60;. Send that &#x60;nextCursor&#x60; back on the next call and you receive everything written since. &#x60;nextCursor&#x60; is present on every response, empty pages included, so you always have something to advance with.  **Ordering.** Entries come back oldest first, in the order the feed received them. That order is NOT &#x60;syncedAt&#x60;: &#x60;syncedAt&#x60; is stamped when an account&#39;s sync cycle started, and a slow cycle writes its rows after a faster cycle that started later, so &#x60;syncedAt&#x60; can go backwards between consecutive entries. Do not sort, filter or resume on it. The cursor is the only stable position, and it is opaque: pass it back verbatim, and do not parse, construct or compare cursors.  **&#x60;hasMore: false&#x60; does not mean the feed ended.** This stream has no end and &#x60;nextCursor&#x60; is never null. &#x60;hasMore: true&#x60; means more changes are already waiting, so call again straight away. &#x60;hasMore: false&#x60; means you are caught up: keep the cursor and poll again on your normal interval.  **The newest changes settle before they are served.** The feed deliberately holds back its last few seconds of writes, so that a row can never become visible behind a cursor you have already advanced past. A read issued the instant an &#x60;analytics.synced&#x60; webhook lands will therefore often return an empty page for that account. Do not read an empty page as \&quot;nothing changed\&quot;: poll again with the SAME cursor you just used rather than advancing.  **Repeats inside one instant.** A sync cycle occasionally records the same post twice at the same feed position. When that happens the feed delivers one of those rows, not both. Measured over a day of production traffic, about 1.3% of rows fall in such a group and 99.4% of those groups are identical rows, so this is far more often deduplication than loss. Metrics are absolute values rather than increments, so a later entry for the same post supersedes an earlier one.  **Retention is 7 days.** Changes older than that leave the feed. A cursor older than 6 days is rejected with a &#x60;400&#x60; (a day of margin, because expiry is lazy). Recover by re-bootstrapping from &#x60;GET /v1/analytics&#x60; and taking a fresh cursor from a call to this endpoint with no &#x60;cursor&#x60;. A consumer that polls at least daily never reaches this.  Pairs with the &#x60;analytics.synced&#x60; webhook, so changes can be read on notification instead of on a timer. That event carries no cursor of its own: keep using the &#x60;nextCursor&#x60; this endpoint gave you.  Requires the same analytics access as &#x60;GET /v1/analytics&#x60;, and shares the stricter per-second rate-limit window applied to analytics endpoints. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :cursor Opaque cursor from a previous response&#39;s &#x60;nextCursor&#x60;. Omit it to start from now: the response is then an empty page carrying the feed&#39;s current position. Rejected with a &#x60;400&#x60; when malformed, or when older than the retention window. 
+    # @option opts [Integer] :limit Page size. Out-of-range values are a 400, never a silent clamp. (default to 50)
+    # @option opts [String] :platform Filter to a single platform (for example \&quot;youtube\&quot;). Omit for every platform.
+    # @option opts [String] :profile_id Filter by profile ID (default \&quot;all\&quot;). Must be a valid profile ID or \&quot;all\&quot;. (default to 'all')
+    # @return [Array<(AnalyticsDeltaResponse, Integer, Hash)>] AnalyticsDeltaResponse data, response status code and response headers
+    def get_analytics_delta_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AnalyticsApi.get_analytics_delta ...'
+      end
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AnalyticsApi.get_analytics_delta, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AnalyticsApi.get_analytics_delta, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/v1/analytics/delta'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'profileId'] = opts[:'profile_id'] if !opts[:'profile_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AnalyticsDeltaResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AnalyticsApi.get_analytics_delta",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AnalyticsApi#get_analytics_delta\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get best times to post
     # Returns the best times to post based on historical engagement data. Groups all published posts by day of week and hour (UTC), calculating average engagement per slot. Use this to auto-schedule posts at optimal times. Requires the Analytics add-on. 
     # @param [Hash] opts the optional parameters

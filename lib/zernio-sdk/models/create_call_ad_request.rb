@@ -111,8 +111,11 @@ module Zernio
     # Legal entity that pays for the ad. Can differ from `dsaBeneficiary` (for example, an agency paying for a client's ads). Same rules as `dsaBeneficiary`: required for EU targeting unless the ad account has a default payor. 
     attr_accessor :dsa_payor
 
-    # Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+    # Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV). Forwarded to the ad set.
     attr_accessor :regional_regulated_categories
+
+    # Meta only. Beneficiary/payer entity IDs required alongside regionalRegulatedCategories. Values are numeric IDs from the advertiser's Meta verification/authorization setup. Keys depend on the declared category: BRAZIL_REGULATION and THAILAND_UNIVERSAL use universal_beneficiary / universal_payer; SINGAPORE_UNIVERSAL uses singapore_universal_beneficiary / singapore_universal_payer; TAIWAN_UNIVERSAL uses taiwan_universal_beneficiary / taiwan_universal_payer; TAIWAN_FINSERV uses taiwan_finserv_beneficiary / taiwan_finserv_payer; AUSTRALIA_FINSERV uses australia_finserv_beneficiary / australia_finserv_payer; INDIA_FINSERV uses india_finserv_beneficiary / india_finserv_payer. Both beneficiary and payer must be included. If omitted and the advertiser has set defaults in Meta Ads Manager advertising settings, Meta auto-fills them. 
+    attr_accessor :regional_regulation_identities
 
     # E.164 number the CALL_NOW CTA dials (e.g. +34600111222).
     attr_accessor :phone_number
@@ -180,6 +183,7 @@ module Zernio
         :'dsa_beneficiary' => :'dsaBeneficiary',
         :'dsa_payor' => :'dsaPayor',
         :'regional_regulated_categories' => :'regionalRegulatedCategories',
+        :'regional_regulation_identities' => :'regionalRegulationIdentities',
         :'phone_number' => :'phoneNumber',
         :'link_url' => :'linkUrl'
       }
@@ -233,6 +237,7 @@ module Zernio
         :'dsa_beneficiary' => :'String',
         :'dsa_payor' => :'String',
         :'regional_regulated_categories' => :'Array<String>',
+        :'regional_regulation_identities' => :'Hash<String, Integer>',
         :'phone_number' => :'String',
         :'link_url' => :'String'
       }
@@ -428,6 +433,12 @@ module Zernio
       if attributes.key?(:'regional_regulated_categories')
         if (value = attributes[:'regional_regulated_categories']).is_a?(Array)
           self.regional_regulated_categories = value
+        end
+      end
+
+      if attributes.key?(:'regional_regulation_identities')
+        if (value = attributes[:'regional_regulation_identities']).is_a?(Hash)
+          self.regional_regulation_identities = value
         end
       end
 
@@ -861,6 +872,7 @@ module Zernio
           dsa_beneficiary == o.dsa_beneficiary &&
           dsa_payor == o.dsa_payor &&
           regional_regulated_categories == o.regional_regulated_categories &&
+          regional_regulation_identities == o.regional_regulation_identities &&
           phone_number == o.phone_number &&
           link_url == o.link_url
     end
@@ -874,7 +886,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, phone_number, link_url].hash
+      [account_id, ad_account_id, name, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, regional_regulation_identities, phone_number, link_url].hash
     end
 
     # Builds the object from hash

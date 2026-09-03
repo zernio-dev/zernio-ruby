@@ -188,6 +188,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdTargetingApi* | [**search_ad_interests**](docs/AdTargetingApi.md#search_ad_interests) | **GET** /v1/ads/interests | Search targeting interests
 *Zernio::AdTargetingApi* | [**search_ad_targeting**](docs/AdTargetingApi.md#search_ad_targeting) | **GET** /v1/ads/targeting/search | Search targeting options
 *Zernio::AnalyticsApi* | [**get_analytics**](docs/AnalyticsApi.md#get_analytics) | **GET** /v1/analytics | Get post analytics
+*Zernio::AnalyticsApi* | [**get_analytics_delta**](docs/AnalyticsApi.md#get_analytics_delta) | **GET** /v1/analytics/delta | Analytics changed since a cursor
 *Zernio::AnalyticsApi* | [**get_best_time_to_post**](docs/AnalyticsApi.md#get_best_time_to_post) | **GET** /v1/analytics/best-time | Get best times to post
 *Zernio::AnalyticsApi* | [**get_content_decay**](docs/AnalyticsApi.md#get_content_decay) | **GET** /v1/analytics/content-decay | Get content performance decay
 *Zernio::AnalyticsApi* | [**get_daily_metrics**](docs/AnalyticsApi.md#get_daily_metrics) | **GET** /v1/analytics/daily-metrics | Get daily aggregated metrics
@@ -731,6 +732,9 @@ Class | Method | HTTP request | Description
  - [Zernio::AdsListResponse](docs/AdsListResponse.md)
  - [Zernio::AdsTimelineResponse](docs/AdsTimelineResponse.md)
  - [Zernio::AdsTimelineResponseRowsInner](docs/AdsTimelineResponseRowsInner.md)
+ - [Zernio::AnalyticsDeltaEntry](docs/AnalyticsDeltaEntry.md)
+ - [Zernio::AnalyticsDeltaEntryMetrics](docs/AnalyticsDeltaEntryMetrics.md)
+ - [Zernio::AnalyticsDeltaResponse](docs/AnalyticsDeltaResponse.md)
  - [Zernio::AnalyticsListResponse](docs/AnalyticsListResponse.md)
  - [Zernio::AnalyticsListResponsePostsInner](docs/AnalyticsListResponsePostsInner.md)
  - [Zernio::AnalyticsListResponsePostsInnerMediaItemsInner](docs/AnalyticsListResponsePostsInnerMediaItemsInner.md)
@@ -2302,6 +2306,9 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadAdStatusChangedAdObject](docs/WebhookPayloadAdStatusChangedAdObject.md)
  - [Zernio::WebhookPayloadAdStatusChangedError](docs/WebhookPayloadAdStatusChangedError.md)
  - [Zernio::WebhookPayloadAdStatusChangedStatus](docs/WebhookPayloadAdStatusChangedStatus.md)
+ - [Zernio::WebhookPayloadAnalyticsSynced](docs/WebhookPayloadAnalyticsSynced.md)
+ - [Zernio::WebhookPayloadAnalyticsSyncedAccount](docs/WebhookPayloadAnalyticsSyncedAccount.md)
+ - [Zernio::WebhookPayloadAnalyticsSyncedSync](docs/WebhookPayloadAnalyticsSyncedSync.md)
  - [Zernio::WebhookPayloadCallEnded](docs/WebhookPayloadCallEnded.md)
  - [Zernio::WebhookPayloadCallEndedCall](docs/WebhookPayloadCallEndedCall.md)
  - [Zernio::WebhookPayloadCallEndedCallBilling](docs/WebhookPayloadCallEndedCallBilling.md)

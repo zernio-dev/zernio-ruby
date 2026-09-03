@@ -72,8 +72,11 @@ module Zernio
     # Meta (metaads) only. 2-letter ISO country codes the special ad category applies to. Requires specialAdCategories to be set (400 otherwise).
     attr_accessor :special_ad_category_country
 
-    # Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV). Forwarded to the ad set.
+    # Meta only. Regional regulation categories required when the ad set targets certain countries (e.g. BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV). Forwarded to the ad set.
     attr_accessor :regional_regulated_categories
+
+    # Meta only. Beneficiary/payer entity IDs for regionalRegulatedCategories. Values are numeric IDs from Meta verification. Keys vary by category (e.g. universal_beneficiary / universal_payer for BRAZIL_REGULATION and THAILAND_UNIVERSAL). If omitted, Meta uses Ads Manager defaults when configured.
+    attr_accessor :regional_regulation_identities
 
     # Destination URL for the CTA button. Send it together with `callToAction`.  **Meta**: adds a top-level `call_to_action` to the post-reference creative. This is what gives a `traffic` boost a clickable destination without replacing the creative and losing the post's social proof. Ignored when `leadGenFormId` is set, which supplies its own destination. Live-verified against a Page-post creative.  **TikTok**: maps to `landing_page_url` on the Spark Ad creative (`AdcreateCreatives.landing_page_url`); Spark Ads have no clickable destination without it.  Ignored on LinkedIn / Pinterest / X / Google, which infer the destination from the boosted post. 
     attr_accessor :link_url
@@ -146,6 +149,7 @@ module Zernio
         :'special_ad_categories' => :'specialAdCategories',
         :'special_ad_category_country' => :'specialAdCategoryCountry',
         :'regional_regulated_categories' => :'regionalRegulatedCategories',
+        :'regional_regulation_identities' => :'regionalRegulationIdentities',
         :'link_url' => :'linkUrl',
         :'call_to_action' => :'callToAction',
         :'spark_auth_code' => :'sparkAuthCode',
@@ -192,6 +196,7 @@ module Zernio
         :'special_ad_categories' => :'Array<String>',
         :'special_ad_category_country' => :'Array<String>',
         :'regional_regulated_categories' => :'Array<String>',
+        :'regional_regulation_identities' => :'Hash<String, Integer>',
         :'link_url' => :'String',
         :'call_to_action' => :'String',
         :'spark_auth_code' => :'String',
@@ -326,6 +331,12 @@ module Zernio
       if attributes.key?(:'regional_regulated_categories')
         if (value = attributes[:'regional_regulated_categories']).is_a?(Array)
           self.regional_regulated_categories = value
+        end
+      end
+
+      if attributes.key?(:'regional_regulation_identities')
+        if (value = attributes[:'regional_regulation_identities']).is_a?(Hash)
+          self.regional_regulation_identities = value
         end
       end
 
@@ -565,6 +576,7 @@ module Zernio
           special_ad_categories == o.special_ad_categories &&
           special_ad_category_country == o.special_ad_category_country &&
           regional_regulated_categories == o.regional_regulated_categories &&
+          regional_regulation_identities == o.regional_regulation_identities &&
           link_url == o.link_url &&
           call_to_action == o.call_to_action &&
           spark_auth_code == o.spark_auth_code &&
@@ -584,7 +596,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
     end
 
     # Builds the object from hash

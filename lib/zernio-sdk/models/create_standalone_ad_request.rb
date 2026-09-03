@@ -183,8 +183,11 @@ module Zernio
     # Meta (metaads) only. 2-letter ISO country codes the special ad category applies to. Requires specialAdCategories to be set (400 otherwise). Ignored when joining an existing campaign via existingCampaignId (the existing campaign's category/country already governs it). 
     attr_accessor :special_ad_category_country
 
-    # Meta only. Regional regulation categories required when the ad set targets certain countries. Known values: SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV. Meta rejects the ad set without this when the targeting geo includes the corresponding country. 
+    # Meta only. Regional regulation categories required when the ad set targets certain countries. Known values: BRAZIL_REGULATION, SINGAPORE_UNIVERSAL, TAIWAN_UNIVERSAL, THAILAND_UNIVERSAL, AUSTRALIA_FINSERV, INDIA_FINSERV, TAIWAN_FINSERV. Meta rejects the ad set without this when the targeting geo includes the corresponding country. 
     attr_accessor :regional_regulated_categories
+
+    # Meta only. Beneficiary/payer entity IDs for regionalRegulatedCategories. Values are numeric IDs from Meta verification. Keys vary by category (e.g. universal_beneficiary / universal_payer for BRAZIL_REGULATION and THAILAND_UNIVERSAL). If omitted, Meta uses Ads Manager defaults when configured. 
+    attr_accessor :regional_regulation_identities
 
     # Required for lifetime budgets
     attr_accessor :end_date
@@ -362,6 +365,7 @@ module Zernio
         :'special_ad_categories' => :'specialAdCategories',
         :'special_ad_category_country' => :'specialAdCategoryCountry',
         :'regional_regulated_categories' => :'regionalRegulatedCategories',
+        :'regional_regulation_identities' => :'regionalRegulationIdentities',
         :'end_date' => :'endDate',
         :'start_date' => :'startDate',
         :'instagram_account_id' => :'instagramAccountId',
@@ -470,6 +474,7 @@ module Zernio
         :'special_ad_categories' => :'Array<String>',
         :'special_ad_category_country' => :'Array<String>',
         :'regional_regulated_categories' => :'Array<String>',
+        :'regional_regulation_identities' => :'Hash<String, Integer>',
         :'end_date' => :'Time',
         :'start_date' => :'Time',
         :'instagram_account_id' => :'String',
@@ -808,6 +813,12 @@ module Zernio
       if attributes.key?(:'regional_regulated_categories')
         if (value = attributes[:'regional_regulated_categories']).is_a?(Array)
           self.regional_regulated_categories = value
+        end
+      end
+
+      if attributes.key?(:'regional_regulation_identities')
+        if (value = attributes[:'regional_regulation_identities']).is_a?(Hash)
+          self.regional_regulation_identities = value
         end
       end
 
@@ -1698,6 +1709,7 @@ module Zernio
           special_ad_categories == o.special_ad_categories &&
           special_ad_category_country == o.special_ad_category_country &&
           regional_regulated_categories == o.regional_regulated_categories &&
+          regional_regulation_identities == o.regional_regulation_identities &&
           end_date == o.end_date &&
           start_date == o.start_date &&
           instagram_account_id == o.instagram_account_id &&
@@ -1741,7 +1753,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
     end
 
     # Builds the object from hash
