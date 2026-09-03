@@ -83,8 +83,17 @@ module Zernio
     # Required on legacy + attach shapes. For X/Twitter this is the tweet text (max 280 chars including a ~24-char URL when `linkUrl` is set). On LinkedIn this is the post commentary (the intro text shown above the ad). On OpenAI Ads this is the chat card's body text. Max: Google=90, Pinterest=500, OpenAI=100.
     attr_accessor :body
 
-    # Meta only (facebook/instagram). Link description — the secondary text shown below the headline (Meta's link_data.description; on video creatives mapped to video_data.link_description). When omitted, Meta auto-pulls the destination URL's OpenGraph description. Applies on legacy, attach, and placementAssets shapes; for multi-creative use creatives[].description (this field is the shared fallback). For multi-text variations use dynamicCreative.descriptions instead.
+    # Meta only (facebook/instagram). Link description — the secondary text shown below the headline (Meta's link_data.description; on video creatives mapped to video_data.link_description). When omitted, Meta auto-pulls the destination URL's OpenGraph description. Applies on legacy, attach, and placementAssets shapes; for multi-creative use creatives[].description (this field is the shared fallback). For multi-text variations use `descriptions` (array) instead.
     attr_accessor :description
+
+    # Meta only. Multiple Text Options (Advantage+ Flexible Format): supply 1-5 primary-text variations and Meta optimises delivery across them, WITHOUT enabling full Dynamic Creative (`dynamicCreative`). Uses `optimization_type: DEGREES_OF_FREEDOM` on the asset feed, so multiple ads per ad set are allowed (unlike `dynamicCreative` which is limited to one). Requires `imageUrl` or `video`, `linkUrl`, and `callToAction`. When set, the top-level `body` field is used as the `object_story_spec.link_data.message` (the preview text) and `headlines` must also be present. Mutually exclusive with `dynamicCreative`, `placementAssets`, `carouselCards`, and `creatives[]`. 
+    attr_accessor :bodies
+
+    # Meta only. Headline variations for Multiple Text Options. Must be sent alongside `bodies`. The top-level `headline` field is used as the `object_story_spec.link_data.name`. 
+    attr_accessor :headlines
+
+    # Meta only. Optional description variations for Multiple Text Options. Sent alongside `bodies` and `headlines`.
+    attr_accessor :descriptions
 
     # Required on legacy + attach shapes for Meta. Honoured on TikTok (passes through to the Spark Ad creative's `call_to_action`) and on LinkedIn (the CTA button on the ad; defaults to LEARN_MORE when `linkUrl` is set). LinkedIn accepts: LEARN_MORE, SIGN_UP, DOWNLOAD, SUBSCRIBE, REGISTER, JOIN, ATTEND, REQUEST_DEMO, VIEW_QUOTE, APPLY, SEE_MORE, SHOP_NOW, BUY_NOW. Ignored by Google, Pinterest, and X/Twitter.
     attr_accessor :call_to_action
@@ -330,6 +339,9 @@ module Zernio
         :'long_headline' => :'longHeadline',
         :'body' => :'body',
         :'description' => :'description',
+        :'bodies' => :'bodies',
+        :'headlines' => :'headlines',
+        :'descriptions' => :'descriptions',
         :'call_to_action' => :'callToAction',
         :'link_url' => :'linkUrl',
         :'lead_gen_form_id' => :'leadGenFormId',
@@ -439,6 +451,9 @@ module Zernio
         :'long_headline' => :'String',
         :'body' => :'String',
         :'description' => :'String',
+        :'bodies' => :'Array<String>',
+        :'headlines' => :'Array<String>',
+        :'descriptions' => :'Array<String>',
         :'call_to_action' => :'String',
         :'link_url' => :'String',
         :'lead_gen_form_id' => :'String',
@@ -640,6 +655,24 @@ module Zernio
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'bodies')
+        if (value = attributes[:'bodies']).is_a?(Array)
+          self.bodies = value
+        end
+      end
+
+      if attributes.key?(:'headlines')
+        if (value = attributes[:'headlines']).is_a?(Array)
+          self.headlines = value
+        end
+      end
+
+      if attributes.key?(:'descriptions')
+        if (value = attributes[:'descriptions']).is_a?(Array)
+          self.descriptions = value
+        end
       end
 
       if attributes.key?(:'call_to_action')
@@ -1024,6 +1057,30 @@ module Zernio
         invalid_properties.push('invalid value for "description", the character length must be smaller than or equal to 255.')
       end
 
+      if !@bodies.nil? && @bodies.length > 5
+        invalid_properties.push('invalid value for "bodies", number of items must be less than or equal to 5.')
+      end
+
+      if !@bodies.nil? && @bodies.length < 1
+        invalid_properties.push('invalid value for "bodies", number of items must be greater than or equal to 1.')
+      end
+
+      if !@headlines.nil? && @headlines.length > 5
+        invalid_properties.push('invalid value for "headlines", number of items must be less than or equal to 5.')
+      end
+
+      if !@headlines.nil? && @headlines.length < 1
+        invalid_properties.push('invalid value for "headlines", number of items must be greater than or equal to 1.')
+      end
+
+      if !@descriptions.nil? && @descriptions.length > 5
+        invalid_properties.push('invalid value for "descriptions", number of items must be less than or equal to 5.')
+      end
+
+      if !@descriptions.nil? && @descriptions.length < 1
+        invalid_properties.push('invalid value for "descriptions", number of items must be greater than or equal to 1.')
+      end
+
       if !@creatives.nil? && @creatives.length < 1
         invalid_properties.push('invalid value for "creatives", number of items must be greater than or equal to 1.')
       end
@@ -1141,6 +1198,12 @@ module Zernio
       return false if !@currency.nil? && @currency.to_s.length < 3
       return false if !@long_headline.nil? && @long_headline.to_s.length > 90
       return false if !@description.nil? && @description.to_s.length > 255
+      return false if !@bodies.nil? && @bodies.length > 5
+      return false if !@bodies.nil? && @bodies.length < 1
+      return false if !@headlines.nil? && @headlines.length > 5
+      return false if !@headlines.nil? && @headlines.length < 1
+      return false if !@descriptions.nil? && @descriptions.length > 5
+      return false if !@descriptions.nil? && @descriptions.length < 1
       call_to_action_validator = EnumAttributeValidator.new('String', ["LEARN_MORE", "SHOP_NOW", "SIGN_UP", "BOOK_TRAVEL", "CONTACT_US", "DOWNLOAD", "GET_OFFER", "GET_QUOTE", "SUBSCRIBE", "WATCH_MORE", "ADD_TO_CART", "APPLY_NOW", "BOOK_NOW", "BUY_TICKETS", "DONATE", "DONATE_NOW", "GET_DIRECTIONS", "GET_SHOWTIMES", "LISTEN_NOW", "ORDER_NOW", "PLAY_GAME", "REQUEST_TIME", "SEE_MENU", "START_ORDER", "INSTALL_MOBILE_APP", "USE_APP", "REGISTER", "JOIN", "ATTEND", "REQUEST_DEMO", "VIEW_QUOTE", "APPLY", "SEE_MORE", "BUY_NOW"])
       return false unless call_to_action_validator.valid?(@call_to_action)
       return false if !@creatives.nil? && @creatives.length < 1
@@ -1367,6 +1430,60 @@ module Zernio
       end
 
       @description = description
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] bodies Value to be assigned
+    def bodies=(bodies)
+      if bodies.nil?
+        fail ArgumentError, 'bodies cannot be nil'
+      end
+
+      if bodies.length > 5
+        fail ArgumentError, 'invalid value for "bodies", number of items must be less than or equal to 5.'
+      end
+
+      if bodies.length < 1
+        fail ArgumentError, 'invalid value for "bodies", number of items must be greater than or equal to 1.'
+      end
+
+      @bodies = bodies
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] headlines Value to be assigned
+    def headlines=(headlines)
+      if headlines.nil?
+        fail ArgumentError, 'headlines cannot be nil'
+      end
+
+      if headlines.length > 5
+        fail ArgumentError, 'invalid value for "headlines", number of items must be less than or equal to 5.'
+      end
+
+      if headlines.length < 1
+        fail ArgumentError, 'invalid value for "headlines", number of items must be greater than or equal to 1.'
+      end
+
+      @headlines = headlines
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] descriptions Value to be assigned
+    def descriptions=(descriptions)
+      if descriptions.nil?
+        fail ArgumentError, 'descriptions cannot be nil'
+      end
+
+      if descriptions.length > 5
+        fail ArgumentError, 'invalid value for "descriptions", number of items must be less than or equal to 5.'
+      end
+
+      if descriptions.length < 1
+        fail ArgumentError, 'invalid value for "descriptions", number of items must be greater than or equal to 1.'
+      end
+
+      @descriptions = descriptions
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -1674,6 +1791,9 @@ module Zernio
           long_headline == o.long_headline &&
           body == o.body &&
           description == o.description &&
+          bodies == o.bodies &&
+          headlines == o.headlines &&
+          descriptions == o.descriptions &&
           call_to_action == o.call_to_action &&
           link_url == o.link_url &&
           lead_gen_form_id == o.lead_gen_form_id &&
@@ -1753,7 +1873,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
     end
 
     # Builds the object from hash
