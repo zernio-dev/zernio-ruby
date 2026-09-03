@@ -16,8 +16,10 @@ require 'time'
 module Zernio
   # Platform-specific message context (present when the message is a quick reply tap, postback button tap, inline keyboard callback, or a quote-reply to an earlier message)
   class WebhookPayloadMessageMetadata < ApiModelBase
-    # platformMessageId of the message this one is a quote-reply to. WhatsApp (`context.id`), Instagram and Facebook Messenger (`reply_to.mid`). On outgoing messages the same field appears on `message.sent`, but only on some surfaces: see WebhookPayloadMessageSent.metadata.quotedMessageId. 
+    # Raw platform envelope id (WhatsApp `context.id`; Instagram and Facebook Messenger `reply_to.mid`) of the message this one is a quote-reply to, forwarded verbatim. It may not equal the stored id of that message (see `quotedMessage.platformMessageId`). On outgoing messages the same field appears on `message.sent`, but only on some surfaces: see WebhookPayloadMessageSent.metadata.quotedMessageId. 
     attr_accessor :quoted_message_id
+
+    attr_accessor :quoted_message
 
     # Payload from a quick reply tap (Facebook/Instagram Messenger).
     attr_accessor :quick_reply_payload
@@ -97,6 +99,7 @@ module Zernio
     def self.attribute_map
       {
         :'quoted_message_id' => :'quotedMessageId',
+        :'quoted_message' => :'quotedMessage',
         :'quick_reply_payload' => :'quickReplyPayload',
         :'postback_payload' => :'postbackPayload',
         :'postback_title' => :'postbackTitle',
@@ -133,6 +136,7 @@ module Zernio
     def self.openapi_types
       {
         :'quoted_message_id' => :'String',
+        :'quoted_message' => :'WebhookPayloadMessageMetadataQuotedMessage',
         :'quick_reply_payload' => :'String',
         :'postback_payload' => :'String',
         :'postback_title' => :'String',
@@ -179,6 +183,10 @@ module Zernio
 
       if attributes.key?(:'quoted_message_id')
         self.quoted_message_id = attributes[:'quoted_message_id']
+      end
+
+      if attributes.key?(:'quoted_message')
+        self.quoted_message = attributes[:'quoted_message']
       end
 
       if attributes.key?(:'quick_reply_payload')
@@ -307,6 +315,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           quoted_message_id == o.quoted_message_id &&
+          quoted_message == o.quoted_message &&
           quick_reply_payload == o.quick_reply_payload &&
           postback_payload == o.postback_payload &&
           postback_title == o.postback_title &&
@@ -337,7 +346,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quoted_message_id, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, nfm_reply_name, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
+      [quoted_message_id, quoted_message, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, nfm_reply_name, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
     end
 
     # Builds the object from hash

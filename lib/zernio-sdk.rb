@@ -1684,6 +1684,7 @@ require 'zernio-sdk/models/webhook_payload_message_message_sender_instagram_prof
 require 'zernio-sdk/models/webhook_payload_message_metadata'
 require 'zernio-sdk/models/webhook_payload_message_metadata_order'
 require 'zernio-sdk/models/webhook_payload_message_metadata_order_product_items_inner'
+require 'zernio-sdk/models/webhook_payload_message_metadata_quoted_message'
 require 'zernio-sdk/models/webhook_payload_message_metadata_referral'
 require 'zernio-sdk/models/webhook_payload_message_metadata_referral_ads_context_data'
 require 'zernio-sdk/models/webhook_payload_message_metadata_referred_product'

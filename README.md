@@ -2344,6 +2344,7 @@ Class | Method | HTTP request | Description
  - [Zernio::WebhookPayloadMessageMetadata](docs/WebhookPayloadMessageMetadata.md)
  - [Zernio::WebhookPayloadMessageMetadataOrder](docs/WebhookPayloadMessageMetadataOrder.md)
  - [Zernio::WebhookPayloadMessageMetadataOrderProductItemsInner](docs/WebhookPayloadMessageMetadataOrderProductItemsInner.md)
+ - [Zernio::WebhookPayloadMessageMetadataQuotedMessage](docs/WebhookPayloadMessageMetadataQuotedMessage.md)
  - [Zernio::WebhookPayloadMessageMetadataReferral](docs/WebhookPayloadMessageMetadataReferral.md)
  - [Zernio::WebhookPayloadMessageMetadataReferralAdsContextData](docs/WebhookPayloadMessageMetadataReferralAdsContextData.md)
  - [Zernio::WebhookPayloadMessageMetadataReferredProduct](docs/WebhookPayloadMessageMetadataReferredProduct.md)
