@@ -633,11 +633,13 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow**](docs/WhatsAppFlowsApi.md#get_whats_app_flow) | **GET** /v1/whatsapp/flows/{flowId} | Get flow
 *Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow_json**](docs/WhatsAppFlowsApi.md#get_whats_app_flow_json) | **GET** /v1/whatsapp/flows/{flowId}/json | Get flow JSON asset
 *Zernio::WhatsAppFlowsApi* | [**get_whats_app_flow_preview**](docs/WhatsAppFlowsApi.md#get_whats_app_flow_preview) | **GET** /v1/whatsapp/flows/{flowId}/preview | Get flow preview URL
+*Zernio::WhatsAppFlowsApi* | [**get_whats_app_flows_encryption_key**](docs/WhatsAppFlowsApi.md#get_whats_app_flows_encryption_key) | **GET** /v1/whatsapp/flows/encryption-key | Get Flows encryption key status
 *Zernio::WhatsAppFlowsApi* | [**list_whats_app_flow_responses**](docs/WhatsAppFlowsApi.md#list_whats_app_flow_responses) | **GET** /v1/whatsapp/flow-responses | List flow responses
 *Zernio::WhatsAppFlowsApi* | [**list_whats_app_flow_versions**](docs/WhatsAppFlowsApi.md#list_whats_app_flow_versions) | **GET** /v1/whatsapp/flows/{flowId}/versions | List flow versions
 *Zernio::WhatsAppFlowsApi* | [**list_whats_app_flows**](docs/WhatsAppFlowsApi.md#list_whats_app_flows) | **GET** /v1/whatsapp/flows | List flows
 *Zernio::WhatsAppFlowsApi* | [**publish_whats_app_flow**](docs/WhatsAppFlowsApi.md#publish_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/publish | Publish flow
 *Zernio::WhatsAppFlowsApi* | [**send_whats_app_flow_message**](docs/WhatsAppFlowsApi.md#send_whats_app_flow_message) | **POST** /v1/whatsapp/flows/send | Send flow message
+*Zernio::WhatsAppFlowsApi* | [**set_whats_app_flows_encryption_key**](docs/WhatsAppFlowsApi.md#set_whats_app_flows_encryption_key) | **POST** /v1/whatsapp/flows/encryption-key | Register a Flows encryption key
 *Zernio::WhatsAppFlowsApi* | [**update_whats_app_flow**](docs/WhatsAppFlowsApi.md#update_whats_app_flow) | **PATCH** /v1/whatsapp/flows/{flowId} | Update flow
 *Zernio::WhatsAppFlowsApi* | [**upload_whats_app_flow_json**](docs/WhatsAppFlowsApi.md#upload_whats_app_flow_json) | **PUT** /v1/whatsapp/flows/{flowId}/json | Upload flow JSON
 *Zernio::WhatsAppPhoneNumbersApi* | [**check_whats_app_number_availability**](docs/WhatsAppPhoneNumbersApi.md#check_whats_app_number_availability) | **GET** /v1/whatsapp/phone-numbers/availability | Check country availability
@@ -1444,6 +1446,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppFlowJson200Response](docs/GetWhatsAppFlowJson200Response.md)
  - [Zernio::GetWhatsAppFlowJson200ResponseAssetsInner](docs/GetWhatsAppFlowJson200ResponseAssetsInner.md)
  - [Zernio::GetWhatsAppFlowPreview200Response](docs/GetWhatsAppFlowPreview200Response.md)
+ - [Zernio::GetWhatsAppFlowsEncryptionKey200Response](docs/GetWhatsAppFlowsEncryptionKey200Response.md)
  - [Zernio::GetWhatsAppGroupChat200Response](docs/GetWhatsAppGroupChat200Response.md)
  - [Zernio::GetWhatsAppGroupChat200ResponseGroup](docs/GetWhatsAppGroupChat200ResponseGroup.md)
  - [Zernio::GetWhatsAppGroupChat200ResponseGroupParticipantsInner](docs/GetWhatsAppGroupChat200ResponseGroupParticipantsInner.md)
@@ -2020,6 +2023,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SetRedditPostFlairRequest](docs/SetRedditPostFlairRequest.md)
  - [Zernio::SetTelegramCommandsRequest](docs/SetTelegramCommandsRequest.md)
  - [Zernio::SetTelegramCommandsRequestCommandsInner](docs/SetTelegramCommandsRequestCommandsInner.md)
+ - [Zernio::SetWhatsAppFlowsEncryptionKeyRequest](docs/SetWhatsAppFlowsEncryptionKeyRequest.md)
  - [Zernio::SetWhatsappBusinessUsername200Response](docs/SetWhatsappBusinessUsername200Response.md)
  - [Zernio::SetWhatsappBusinessUsernameRequest](docs/SetWhatsappBusinessUsernameRequest.md)
  - [Zernio::ShareSmsRegistration200Response](docs/ShareSmsRegistration200Response.md)

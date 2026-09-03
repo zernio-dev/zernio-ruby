@@ -10,11 +10,13 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_whats_app_flow**](WhatsAppFlowsApi.md#get_whats_app_flow) | **GET** /v1/whatsapp/flows/{flowId} | Get flow |
 | [**get_whats_app_flow_json**](WhatsAppFlowsApi.md#get_whats_app_flow_json) | **GET** /v1/whatsapp/flows/{flowId}/json | Get flow JSON asset |
 | [**get_whats_app_flow_preview**](WhatsAppFlowsApi.md#get_whats_app_flow_preview) | **GET** /v1/whatsapp/flows/{flowId}/preview | Get flow preview URL |
+| [**get_whats_app_flows_encryption_key**](WhatsAppFlowsApi.md#get_whats_app_flows_encryption_key) | **GET** /v1/whatsapp/flows/encryption-key | Get Flows encryption key status |
 | [**list_whats_app_flow_responses**](WhatsAppFlowsApi.md#list_whats_app_flow_responses) | **GET** /v1/whatsapp/flow-responses | List flow responses |
 | [**list_whats_app_flow_versions**](WhatsAppFlowsApi.md#list_whats_app_flow_versions) | **GET** /v1/whatsapp/flows/{flowId}/versions | List flow versions |
 | [**list_whats_app_flows**](WhatsAppFlowsApi.md#list_whats_app_flows) | **GET** /v1/whatsapp/flows | List flows |
 | [**publish_whats_app_flow**](WhatsAppFlowsApi.md#publish_whats_app_flow) | **POST** /v1/whatsapp/flows/{flowId}/publish | Publish flow |
 | [**send_whats_app_flow_message**](WhatsAppFlowsApi.md#send_whats_app_flow_message) | **POST** /v1/whatsapp/flows/send | Send flow message |
+| [**set_whats_app_flows_encryption_key**](WhatsAppFlowsApi.md#set_whats_app_flows_encryption_key) | **POST** /v1/whatsapp/flows/encryption-key | Register a Flows encryption key |
 | [**update_whats_app_flow**](WhatsAppFlowsApi.md#update_whats_app_flow) | **PATCH** /v1/whatsapp/flows/{flowId} | Update flow |
 | [**upload_whats_app_flow_json**](WhatsAppFlowsApi.md#upload_whats_app_flow_json) | **PUT** /v1/whatsapp/flows/{flowId}/json | Upload flow JSON |
 
@@ -451,6 +453,75 @@ end
 - **Accept**: application/json
 
 
+## get_whats_app_flows_encryption_key
+
+> <GetWhatsAppFlowsEncryptionKey200Response> get_whats_app_flows_encryption_key(account_id)
+
+Get Flows encryption key status
+
+Read the RSA business public key registered on the phone number for WhatsApp Flows endpoint encryption. Only one key is active per phone number at a time. Flows that use flow_action: data_exchange (an endpoint-backed flow) stop working at runtime until the endpoint serves the matching private key, and Meta rejects publish with error code 139002 (\"Missing Flows Signed Public Key\") when no key is registered. `registered` reflects whether a key is present, never `signatureStatus` alone: Meta reports an unregistered key as MISMATCH rather than a null/absent value. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppFlowsApi.new
+account_id = 'account_id_example' # String | WhatsApp social account ID
+
+begin
+  # Get Flows encryption key status
+  result = api_instance.get_whats_app_flows_encryption_key(account_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->get_whats_app_flows_encryption_key: #{e}"
+end
+```
+
+#### Using the get_whats_app_flows_encryption_key_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetWhatsAppFlowsEncryptionKey200Response>, Integer, Hash)> get_whats_app_flows_encryption_key_with_http_info(account_id)
+
+```ruby
+begin
+  # Get Flows encryption key status
+  data, status_code, headers = api_instance.get_whats_app_flows_encryption_key_with_http_info(account_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetWhatsAppFlowsEncryptionKey200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->get_whats_app_flows_encryption_key_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | WhatsApp social account ID |  |
+
+### Return type
+
+[**GetWhatsAppFlowsEncryptionKey200Response**](GetWhatsAppFlowsEncryptionKey200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_whats_app_flow_responses
 
 > <ListWhatsAppFlowResponses200Response> list_whats_app_flow_responses(account_id, opts)
@@ -795,6 +866,75 @@ end
 ### Return type
 
 [**SendWhatsAppFlowMessage200Response**](SendWhatsAppFlowMessage200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## set_whats_app_flows_encryption_key
+
+> <UpdateYoutubeDefaultPlaylist200Response> set_whats_app_flows_encryption_key(set_whats_app_flows_encryption_key_request)
+
+Register a Flows encryption key
+
+Register (or replace) the RSA business public key for WhatsApp Flows endpoint encryption on the phone number. Uploading a new key replaces the previous one: only one key is active per phone number. The corresponding private key must be served by the flow's endpoint, or endpoint-backed flows (flow_action: data_exchange) will fail at runtime even though the key is registered. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppFlowsApi.new
+set_whats_app_flows_encryption_key_request = Zernio::SetWhatsAppFlowsEncryptionKeyRequest.new({account_id: 'account_id_example', business_public_key: 'business_public_key_example'}) # SetWhatsAppFlowsEncryptionKeyRequest | 
+
+begin
+  # Register a Flows encryption key
+  result = api_instance.set_whats_app_flows_encryption_key(set_whats_app_flows_encryption_key_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->set_whats_app_flows_encryption_key: #{e}"
+end
+```
+
+#### Using the set_whats_app_flows_encryption_key_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateYoutubeDefaultPlaylist200Response>, Integer, Hash)> set_whats_app_flows_encryption_key_with_http_info(set_whats_app_flows_encryption_key_request)
+
+```ruby
+begin
+  # Register a Flows encryption key
+  data, status_code, headers = api_instance.set_whats_app_flows_encryption_key_with_http_info(set_whats_app_flows_encryption_key_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateYoutubeDefaultPlaylist200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppFlowsApi->set_whats_app_flows_encryption_key_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **set_whats_app_flows_encryption_key_request** | [**SetWhatsAppFlowsEncryptionKeyRequest**](SetWhatsAppFlowsEncryptionKeyRequest.md) |  |  |
+
+### Return type
+
+[**UpdateYoutubeDefaultPlaylist200Response**](UpdateYoutubeDefaultPlaylist200Response.md)
 
 ### Authorization
 

@@ -111,6 +111,18 @@ describe 'WhatsAppFlowsApi' do
     end
   end
 
+  # unit tests for get_whats_app_flows_encryption_key
+  # Get Flows encryption key status
+  # Read the RSA business public key registered on the phone number for WhatsApp Flows endpoint encryption. Only one key is active per phone number at a time. Flows that use flow_action: data_exchange (an endpoint-backed flow) stop working at runtime until the endpoint serves the matching private key, and Meta rejects publish with error code 139002 (\&quot;Missing Flows Signed Public Key\&quot;) when no key is registered. &#x60;registered&#x60; reflects whether a key is present, never &#x60;signatureStatus&#x60; alone: Meta reports an unregistered key as MISMATCH rather than a null/absent value. 
+  # @param account_id WhatsApp social account ID
+  # @param [Hash] opts the optional parameters
+  # @return [GetWhatsAppFlowsEncryptionKey200Response]
+  describe 'get_whats_app_flows_encryption_key test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_whats_app_flow_responses
   # List flow responses
   # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with &#x60;flowId&#x60; — this matches responses whose flow_token carries the &#x60;&lt;flowId&gt;:&#x60; prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
@@ -170,6 +182,18 @@ describe 'WhatsAppFlowsApi' do
   # @param [Hash] opts the optional parameters
   # @return [SendWhatsAppFlowMessage200Response]
   describe 'send_whats_app_flow_message test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for set_whats_app_flows_encryption_key
+  # Register a Flows encryption key
+  # Register (or replace) the RSA business public key for WhatsApp Flows endpoint encryption on the phone number. Uploading a new key replaces the previous one: only one key is active per phone number. The corresponding private key must be served by the flow&#39;s endpoint, or endpoint-backed flows (flow_action: data_exchange) will fail at runtime even though the key is registered. 
+  # @param set_whats_app_flows_encryption_key_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateYoutubeDefaultPlaylist200Response]
+  describe 'set_whats_app_flows_encryption_key test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

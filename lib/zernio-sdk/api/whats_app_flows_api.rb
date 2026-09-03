@@ -447,6 +447,70 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get Flows encryption key status
+    # Read the RSA business public key registered on the phone number for WhatsApp Flows endpoint encryption. Only one key is active per phone number at a time. Flows that use flow_action: data_exchange (an endpoint-backed flow) stop working at runtime until the endpoint serves the matching private key, and Meta rejects publish with error code 139002 (\"Missing Flows Signed Public Key\") when no key is registered. `registered` reflects whether a key is present, never `signatureStatus` alone: Meta reports an unregistered key as MISMATCH rather than a null/absent value. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [GetWhatsAppFlowsEncryptionKey200Response]
+    def get_whats_app_flows_encryption_key(account_id, opts = {})
+      data, _status_code, _headers = get_whats_app_flows_encryption_key_with_http_info(account_id, opts)
+      data
+    end
+
+    # Get Flows encryption key status
+    # Read the RSA business public key registered on the phone number for WhatsApp Flows endpoint encryption. Only one key is active per phone number at a time. Flows that use flow_action: data_exchange (an endpoint-backed flow) stop working at runtime until the endpoint serves the matching private key, and Meta rejects publish with error code 139002 (\&quot;Missing Flows Signed Public Key\&quot;) when no key is registered. &#x60;registered&#x60; reflects whether a key is present, never &#x60;signatureStatus&#x60; alone: Meta reports an unregistered key as MISMATCH rather than a null/absent value. 
+    # @param account_id [String] WhatsApp social account ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetWhatsAppFlowsEncryptionKey200Response, Integer, Hash)>] GetWhatsAppFlowsEncryptionKey200Response data, response status code and response headers
+    def get_whats_app_flows_encryption_key_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppFlowsApi.get_whats_app_flows_encryption_key ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppFlowsApi.get_whats_app_flows_encryption_key"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/flows/encryption-key'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppFlowsEncryptionKey200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppFlowsApi.get_whats_app_flows_encryption_key",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppFlowsApi#get_whats_app_flows_encryption_key\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List flow responses
     # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with `flowId` — this matches responses whose flow_token carries the `<flowId>:` prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
     # @param account_id [String] WhatsApp social account ID
@@ -793,6 +857,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppFlowsApi#send_whats_app_flow_message\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Register a Flows encryption key
+    # Register (or replace) the RSA business public key for WhatsApp Flows endpoint encryption on the phone number. Uploading a new key replaces the previous one: only one key is active per phone number. The corresponding private key must be served by the flow's endpoint, or endpoint-backed flows (flow_action: data_exchange) will fail at runtime even though the key is registered. 
+    # @param set_whats_app_flows_encryption_key_request [SetWhatsAppFlowsEncryptionKeyRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateYoutubeDefaultPlaylist200Response]
+    def set_whats_app_flows_encryption_key(set_whats_app_flows_encryption_key_request, opts = {})
+      data, _status_code, _headers = set_whats_app_flows_encryption_key_with_http_info(set_whats_app_flows_encryption_key_request, opts)
+      data
+    end
+
+    # Register a Flows encryption key
+    # Register (or replace) the RSA business public key for WhatsApp Flows endpoint encryption on the phone number. Uploading a new key replaces the previous one: only one key is active per phone number. The corresponding private key must be served by the flow&#39;s endpoint, or endpoint-backed flows (flow_action: data_exchange) will fail at runtime even though the key is registered. 
+    # @param set_whats_app_flows_encryption_key_request [SetWhatsAppFlowsEncryptionKeyRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
+    def set_whats_app_flows_encryption_key_with_http_info(set_whats_app_flows_encryption_key_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppFlowsApi.set_whats_app_flows_encryption_key ...'
+      end
+      # verify the required parameter 'set_whats_app_flows_encryption_key_request' is set
+      if @api_client.config.client_side_validation && set_whats_app_flows_encryption_key_request.nil?
+        fail ArgumentError, "Missing the required parameter 'set_whats_app_flows_encryption_key_request' when calling WhatsAppFlowsApi.set_whats_app_flows_encryption_key"
+      end
+      # resource path
+      local_var_path = '/v1/whatsapp/flows/encryption-key'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_whats_app_flows_encryption_key_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateYoutubeDefaultPlaylist200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppFlowsApi.set_whats_app_flows_encryption_key",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppFlowsApi#set_whats_app_flows_encryption_key\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
