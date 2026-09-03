@@ -21,6 +21,7 @@ module Zernio
 
     attr_accessor :needs_kyc
 
+    # Price a NEW number of this type costs per month, in cents.
     attr_accessor :monthly_cents
 
     # Always false for toll_free (WhatsApp does not reliably register toll-free numbers).

@@ -7,7 +7,7 @@
 | **number_type** | **String** |  | [optional] |
 | **tier** | **Integer** |  | [optional] |
 | **needs_kyc** | **Boolean** |  | [optional] |
-| **monthly_cents** | **Integer** |  | [optional] |
+| **monthly_cents** | **Integer** | Price a NEW number of this type costs per month, in cents. | [optional] |
 | **whatsapp_available** | **Boolean** | Always false for toll_free (WhatsApp does not reliably register toll-free numbers). | [optional] |
 | **sms_available** | **Boolean** |  | [optional] |
 | **calls_available** | **Boolean** |  | [optional] |

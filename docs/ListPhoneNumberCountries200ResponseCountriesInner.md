@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **code** | **String** | ISO 3166-1 alpha-2 | [optional] |
 | **tier** | **Integer** |  | [optional] |
-| **monthly_cents** | **Integer** |  | [optional] |
+| **monthly_cents** | **Integer** | Price a NEW number in this country costs per month, in cents, for the default (first) type. 1.5x the carrier&#39;s monthly cost, rounded up to a whole dollar, minimum $3. | [optional] |
 | **needs_kyc** | **Boolean** |  | [optional] |
 | **calls_available** | **Boolean** | Regular phone (PSTN) calling on the number, inbound + outbound. Available on every offerable country. | [optional] |
 | **whatsapp_available** | **Boolean** | WhatsApp can be enabled on numbers from this country. | [optional] |

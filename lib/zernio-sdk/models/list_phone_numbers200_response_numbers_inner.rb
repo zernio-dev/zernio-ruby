@@ -29,7 +29,7 @@ module Zernio
     # Present once the number order has been placed (i.e. the requirement group was approved). Absent while still in identity review.
     attr_accessor :telnyx_order_id
 
-    # Per-country monthly price in cents ($2..$25).
+    # What this number bills each month, in cents. Stamped when the number was bought, so an existing number keeps its price when the rate card changes.
     attr_accessor :monthly_cents
 
     # False for numbers you brought yourself (connected via Meta embedded signup) — they live on your own carrier, so SMS/Calls can't be enabled on them.
