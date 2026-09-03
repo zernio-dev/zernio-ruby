@@ -53,6 +53,18 @@ module Zernio
     # When true, the post is labeled by Instagram as containing AI-generated media. Per Meta, this self-disclosure label is for AI-generated media, not AI-written captions. Applies to feed posts, Reels, Stories, and carousels.
     attr_accessor :is_ai_generated
 
+    # When true, Instagram shows the \"Paid partnership\" label on the post. Applies to feed posts, Reels, and carousels; not supported on Stories (400). Requires an Instagram account connected via Facebook Login; classic Instagram Login accounts get a 400 (instagram_paid_partnership_requires_facebook_login). Implied when brandedContentSponsors is set.
+    attr_accessor :is_paid_partnership
+
+    # Up to 2 brands to tag as sponsors, each an Instagram username (leading @ optional) or a numeric Instagram user ID. Usernames are resolved at publish time via the Business Discovery API on the publishing account; a sponsor that cannot be resolved (private, personal, or nonexistent account) fails the post with a user error naming it. Sponsors must be professional (Business or Creator) accounts. A brand that has pre-approved the creator shows as \"Paid partnership with @brand\" immediately; otherwise the plain label shows and the brand receives an approval request. Sets isPaidPartnership. Same login and content-type rules as isPaidPartnership.
+    attr_accessor :branded_content_sponsors
+
+    # When false, comments are turned off on the post right after it is published (Meta exposes this as comment_enabled on the media object). Applies to feed posts, Reels, and carousels; ignored for Stories, which have no comments. Works with both Instagram connection methods. Best-effort: if the toggle fails after a successful publish, the post still succeeds and stays live with comments on.
+    attr_accessor :comments_enabled
+
+    # Tags the post with a location. The ID of a Facebook Page that has location data (digits only); it is sent to Instagram as location_id. Applies to feed posts, Reels, and the carousel as a whole; Stories and individual carousel slides are unsupported (a Story with locationId is rejected with a 400). A Page without location data or that does not exist fails the post with a user error at publish time.
+    attr_accessor :location_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -90,7 +102,11 @@ module Zernio
         :'thumb_offset' => :'thumbOffset',
         :'instagram_thumbnail' => :'instagramThumbnail',
         :'reel_cover' => :'reelCover',
-        :'is_ai_generated' => :'isAiGenerated'
+        :'is_ai_generated' => :'isAiGenerated',
+        :'is_paid_partnership' => :'isPaidPartnership',
+        :'branded_content_sponsors' => :'brandedContentSponsors',
+        :'comments_enabled' => :'commentsEnabled',
+        :'location_id' => :'locationId'
       }
     end
 
@@ -119,7 +135,11 @@ module Zernio
         :'thumb_offset' => :'Integer',
         :'instagram_thumbnail' => :'String',
         :'reel_cover' => :'String',
-        :'is_ai_generated' => :'Boolean'
+        :'is_ai_generated' => :'Boolean',
+        :'is_paid_partnership' => :'Boolean',
+        :'branded_content_sponsors' => :'Array<String>',
+        :'comments_enabled' => :'Boolean',
+        :'location_id' => :'String'
       }
     end
 
@@ -206,6 +226,28 @@ module Zernio
       else
         self.is_ai_generated = false
       end
+
+      if attributes.key?(:'is_paid_partnership')
+        self.is_paid_partnership = attributes[:'is_paid_partnership']
+      else
+        self.is_paid_partnership = false
+      end
+
+      if attributes.key?(:'branded_content_sponsors')
+        if (value = attributes[:'branded_content_sponsors']).is_a?(Array)
+          self.branded_content_sponsors = value
+        end
+      end
+
+      if attributes.key?(:'comments_enabled')
+        self.comments_enabled = attributes[:'comments_enabled']
+      else
+        self.comments_enabled = true
+      end
+
+      if attributes.key?(:'location_id')
+        self.location_id = attributes[:'location_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -215,6 +257,15 @@ module Zernio
       invalid_properties = Array.new
       if !@thumb_offset.nil? && @thumb_offset < 0
         invalid_properties.push('invalid value for "thumb_offset", must be greater than or equal to 0.')
+      end
+
+      if !@branded_content_sponsors.nil? && @branded_content_sponsors.length > 2
+        invalid_properties.push('invalid value for "branded_content_sponsors", number of items must be less than or equal to 2.')
+      end
+
+      pattern = Regexp.new(/^[0-9]+$/)
+      if !@location_id.nil? && @location_id !~ pattern
+        invalid_properties.push("invalid value for \"location_id\", must conform to the pattern #{pattern}.")
       end
 
       invalid_properties
@@ -227,6 +278,8 @@ module Zernio
       content_type_validator = EnumAttributeValidator.new('String', ["story"])
       return false unless content_type_validator.valid?(@content_type)
       return false if !@thumb_offset.nil? && @thumb_offset < 0
+      return false if !@branded_content_sponsors.nil? && @branded_content_sponsors.length > 2
+      return false if !@location_id.nil? && @location_id !~ Regexp.new(/^[0-9]+$/)
       true
     end
 
@@ -254,6 +307,35 @@ module Zernio
       @thumb_offset = thumb_offset
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] branded_content_sponsors Value to be assigned
+    def branded_content_sponsors=(branded_content_sponsors)
+      if branded_content_sponsors.nil?
+        fail ArgumentError, 'branded_content_sponsors cannot be nil'
+      end
+
+      if branded_content_sponsors.length > 2
+        fail ArgumentError, 'invalid value for "branded_content_sponsors", number of items must be less than or equal to 2.'
+      end
+
+      @branded_content_sponsors = branded_content_sponsors
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] location_id Value to be assigned
+    def location_id=(location_id)
+      if location_id.nil?
+        fail ArgumentError, 'location_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^[0-9]+$/)
+      if location_id !~ pattern
+        fail ArgumentError, "invalid value for \"location_id\", must conform to the pattern #{pattern}."
+      end
+
+      @location_id = location_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -271,7 +353,11 @@ module Zernio
           thumb_offset == o.thumb_offset &&
           instagram_thumbnail == o.instagram_thumbnail &&
           reel_cover == o.reel_cover &&
-          is_ai_generated == o.is_ai_generated
+          is_ai_generated == o.is_ai_generated &&
+          is_paid_partnership == o.is_paid_partnership &&
+          branded_content_sponsors == o.branded_content_sponsors &&
+          comments_enabled == o.comments_enabled &&
+          location_id == o.location_id
     end
 
     # @see the `==` method
@@ -283,7 +369,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, audio_configuration, mute_audio, thumb_offset, instagram_thumbnail, reel_cover, is_ai_generated].hash
+      [content_type, share_to_feed, collaborators, first_comment, trial_params, user_tags, audio_name, audio_configuration, mute_audio, thumb_offset, instagram_thumbnail, reel_cover, is_ai_generated, is_paid_partnership, branded_content_sponsors, comments_enabled, location_id].hash
     end
 
     # Builds the object from hash
