@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Disconnect account
-    # Disconnects and removes a connected social account.
+    # Disconnects and removes a connected social account. Repeating the call for an account already disconnected returns 404, the account stays in its 1h grace window and the disconnect is not re-run.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [DeleteAccountGroup200Response]
@@ -30,7 +30,7 @@ module Zernio
     end
 
     # Disconnect account
-    # Disconnects and removes a connected social account.
+    # Disconnects and removes a connected social account. Repeating the call for an account already disconnected returns 404, the account stays in its 1h grace window and the disconnect is not re-run.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeleteAccountGroup200Response, Integer, Hash)>] DeleteAccountGroup200Response data, response status code and response headers

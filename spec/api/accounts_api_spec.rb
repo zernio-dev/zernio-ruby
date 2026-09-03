@@ -34,7 +34,7 @@ describe 'AccountsApi' do
 
   # unit tests for delete_account
   # Disconnect account
-  # Disconnects and removes a connected social account.
+  # Disconnects and removes a connected social account. Repeating the call for an account already disconnected returns 404, the account stays in its 1h grace window and the disconnect is not re-run.
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @return [DeleteAccountGroup200Response]
