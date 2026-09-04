@@ -547,6 +547,7 @@ docs/GetAdsSearchTerms200ResponsePaging.md
 docs/GetAdsTimeline202Response.md
 docs/GetAllAccountsHealth200Response.md
 docs/GetAllAccountsHealth200ResponseAccountsInner.md
+docs/GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction.md
 docs/GetAllAccountsHealth200ResponseSummary.md
 docs/GetAnalytics200Response.md
 docs/GetAnalytics400Response.md
@@ -1373,7 +1374,6 @@ docs/SendInboxMessageRequestTemplate.md
 docs/SendInboxMessageRequestTemplateElementsInner.md
 docs/SendInboxMessageRequestTemplateElementsInnerButtonsInner.md
 docs/SendPrivateReplyToComment200Response.md
-docs/SendPrivateReplyToComment400Response.md
 docs/SendPrivateReplyToCommentRequest.md
 docs/SendPrivateReplyToCommentRequestButtonsInner.md
 docs/SendPrivateReplyToCommentRequestButtonsInnerOneOf.md
@@ -2424,6 +2424,7 @@ lib/zernio-sdk/models/get_ads_search_terms200_response_paging.rb
 lib/zernio-sdk/models/get_ads_timeline202_response.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response_accounts_inner.rb
+lib/zernio-sdk/models/get_all_accounts_health200_response_accounts_inner_messaging_restriction.rb
 lib/zernio-sdk/models/get_all_accounts_health200_response_summary.rb
 lib/zernio-sdk/models/get_analytics200_response.rb
 lib/zernio-sdk/models/get_analytics400_response.rb
@@ -3232,7 +3233,6 @@ lib/zernio-sdk/models/send_inbox_message_request_template.rb
 lib/zernio-sdk/models/send_inbox_message_request_template_elements_inner.rb
 lib/zernio-sdk/models/send_inbox_message_request_template_elements_inner_buttons_inner.rb
 lib/zernio-sdk/models/send_private_reply_to_comment200_response.rb
-lib/zernio-sdk/models/send_private_reply_to_comment400_response.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request_buttons_inner.rb
 lib/zernio-sdk/models/send_private_reply_to_comment_request_buttons_inner_one_of.rb
@@ -4257,6 +4257,7 @@ spec/models/get_ads_search_terms200_response_data_inner_spec.rb
 spec/models/get_ads_search_terms200_response_paging_spec.rb
 spec/models/get_ads_search_terms200_response_spec.rb
 spec/models/get_ads_timeline202_response_spec.rb
+spec/models/get_all_accounts_health200_response_accounts_inner_messaging_restriction_spec.rb
 spec/models/get_all_accounts_health200_response_accounts_inner_spec.rb
 spec/models/get_all_accounts_health200_response_spec.rb
 spec/models/get_all_accounts_health200_response_summary_spec.rb
@@ -5067,7 +5068,6 @@ spec/models/send_inbox_message_request_template_elements_inner_buttons_inner_spe
 spec/models/send_inbox_message_request_template_elements_inner_spec.rb
 spec/models/send_inbox_message_request_template_spec.rb
 spec/models/send_private_reply_to_comment200_response_spec.rb
-spec/models/send_private_reply_to_comment400_response_spec.rb
 spec/models/send_private_reply_to_comment_request_buttons_inner_one_of1_spec.rb
 spec/models/send_private_reply_to_comment_request_buttons_inner_one_of2_spec.rb
 spec/models/send_private_reply_to_comment_request_buttons_inner_one_of_spec.rb

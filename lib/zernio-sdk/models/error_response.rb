@@ -34,7 +34,7 @@ module Zernio
     # Raw error payload from the upstream platform, passed through verbatim so integrators can read provider-specific codes. For Meta this includes error_subcode, error_user_title, and error_user_msg. 
     attr_accessor :platform_error
 
-    # Additional structured context (e.g. field-level validation errors).
+    # Additional structured context (e.g. field-level validation errors), for example `privateReplyConsumed` on the private-reply endpoint's 400 when the comment's single reply is already spent.
     attr_accessor :details
 
     class EnumAttributeValidator

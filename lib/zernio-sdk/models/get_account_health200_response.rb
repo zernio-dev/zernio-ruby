@@ -36,6 +36,8 @@ module Zernio
     # Actionable recommendations to fix issues
     attr_accessor :recommendations
 
+    attr_accessor :messaging_restriction
+
     attr_accessor :platform_connection
 
     class EnumAttributeValidator
@@ -72,6 +74,7 @@ module Zernio
         :'permissions' => :'permissions',
         :'issues' => :'issues',
         :'recommendations' => :'recommendations',
+        :'messaging_restriction' => :'messagingRestriction',
         :'platform_connection' => :'platformConnection'
       }
     end
@@ -98,6 +101,7 @@ module Zernio
         :'permissions' => :'GetAccountHealth200ResponsePermissions',
         :'issues' => :'Array<String>',
         :'recommendations' => :'Array<String>',
+        :'messaging_restriction' => :'GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction',
         :'platform_connection' => :'GetAccountHealth200ResponsePlatformConnection'
       }
     end
@@ -164,6 +168,10 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'messaging_restriction')
+        self.messaging_restriction = attributes[:'messaging_restriction']
+      end
+
       if attributes.key?(:'platform_connection')
         self.platform_connection = attributes[:'platform_connection']
       end
@@ -210,6 +218,7 @@ module Zernio
           permissions == o.permissions &&
           issues == o.issues &&
           recommendations == o.recommendations &&
+          messaging_restriction == o.messaging_restriction &&
           platform_connection == o.platform_connection
     end
 
@@ -222,7 +231,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, platform, username, display_name, status, token_status, permissions, issues, recommendations, platform_connection].hash
+      [account_id, platform, username, display_name, status, token_status, permissions, issues, recommendations, messaging_restriction, platform_connection].hash
     end
 
     # Builds the object from hash

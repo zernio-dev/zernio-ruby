@@ -13,6 +13,7 @@
 | **permissions** | [**GetAccountHealth200ResponsePermissions**](GetAccountHealth200ResponsePermissions.md) |  | [optional] |
 | **issues** | **Array&lt;String&gt;** | List of issues found | [optional] |
 | **recommendations** | **Array&lt;String&gt;** | Actionable recommendations to fix issues | [optional] |
+| **messaging_restriction** | [**GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction**](GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction.md) |  | [optional] |
 | **platform_connection** | [**GetAccountHealth200ResponsePlatformConnection**](GetAccountHealth200ResponsePlatformConnection.md) |  | [optional] |
 
 ## Example
@@ -30,6 +31,7 @@ instance = Zernio::GetAccountHealth200Response.new(
   permissions: null,
   issues: null,
   recommendations: null,
+  messaging_restriction: null,
   platform_connection: null
 )
 ```

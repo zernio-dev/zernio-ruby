@@ -39,6 +39,8 @@ module Zernio
 
     attr_accessor :issues
 
+    attr_accessor :messaging_restriction
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -75,7 +77,8 @@ module Zernio
         :'token_valid' => :'tokenValid',
         :'token_expires_at' => :'tokenExpiresAt',
         :'needs_reconnect' => :'needsReconnect',
-        :'issues' => :'issues'
+        :'issues' => :'issues',
+        :'messaging_restriction' => :'messagingRestriction'
       }
     end
 
@@ -103,7 +106,8 @@ module Zernio
         :'token_valid' => :'Boolean',
         :'token_expires_at' => :'Time',
         :'needs_reconnect' => :'Boolean',
-        :'issues' => :'Array<String>'
+        :'issues' => :'Array<String>',
+        :'messaging_restriction' => :'GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction'
       }
     end
 
@@ -178,6 +182,10 @@ module Zernio
           self.issues = value
         end
       end
+
+      if attributes.key?(:'messaging_restriction')
+        self.messaging_restriction = attributes[:'messaging_restriction']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -223,7 +231,8 @@ module Zernio
           token_valid == o.token_valid &&
           token_expires_at == o.token_expires_at &&
           needs_reconnect == o.needs_reconnect &&
-          issues == o.issues
+          issues == o.issues &&
+          messaging_restriction == o.messaging_restriction
     end
 
     # @see the `==` method
@@ -235,7 +244,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, platform, username, display_name, profile_id, status, can_post, can_fetch_analytics, token_valid, token_expires_at, needs_reconnect, issues].hash
+      [account_id, platform, username, display_name, profile_id, status, can_post, can_fetch_analytics, token_valid, token_expires_at, needs_reconnect, issues, messaging_restriction].hash
     end
 
     # Builds the object from hash

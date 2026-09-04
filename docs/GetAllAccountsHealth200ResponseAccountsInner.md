@@ -16,6 +16,7 @@
 | **token_expires_at** | **Time** |  | [optional] |
 | **needs_reconnect** | **Boolean** |  | [optional] |
 | **issues** | **Array&lt;String&gt;** |  | [optional] |
+| **messaging_restriction** | [**GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction**](GetAllAccountsHealth200ResponseAccountsInnerMessagingRestriction.md) |  | [optional] |
 
 ## Example
 
@@ -34,7 +35,8 @@ instance = Zernio::GetAllAccountsHealth200ResponseAccountsInner.new(
   token_valid: null,
   token_expires_at: null,
   needs_reconnect: null,
-  issues: null
+  issues: null,
+  messaging_restriction: null
 )
 ```
 
