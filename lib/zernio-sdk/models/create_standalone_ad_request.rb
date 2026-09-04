@@ -226,7 +226,7 @@ module Zernio
     # Google only
     attr_accessor :campaign_type
 
-    # Google Search only. BROAD-match keywords on the new ad group (first 20).
+    # Google Search only. BROAD-match keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.keywords, which also sets match types.
     attr_accessor :keywords
 
     # Google Search only; other platforms return 400. BROAD-match negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords.
@@ -1121,6 +1121,10 @@ module Zernio
         invalid_properties.push('invalid value for "translations", number of items must be greater than or equal to 1.')
       end
 
+      if !@keywords.nil? && @keywords.length > 1000
+        invalid_properties.push('invalid value for "keywords", number of items must be less than or equal to 1000.')
+      end
+
       if !@sitelinks.nil? && @sitelinks.length > 20
         invalid_properties.push('invalid value for "sitelinks", number of items must be less than or equal to 20.')
       end
@@ -1220,6 +1224,7 @@ module Zernio
       return false if !@translations.nil? && @translations.length < 1
       campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search"])
       return false unless campaign_type_validator.valid?(@campaign_type)
+      return false if !@keywords.nil? && @keywords.length > 1000
       return false if !@sitelinks.nil? && @sitelinks.length > 20
       return false if !@sitelinks.nil? && @sitelinks.length < 2
       return false if !@callouts.nil? && @callouts.length > 20
@@ -1614,6 +1619,20 @@ module Zernio
         fail ArgumentError, "invalid value for \"campaign_type\", must be one of #{validator.allowable_values}."
       end
       @campaign_type = campaign_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] keywords Value to be assigned
+    def keywords=(keywords)
+      if keywords.nil?
+        fail ArgumentError, 'keywords cannot be nil'
+      end
+
+      if keywords.length > 1000
+        fail ArgumentError, 'invalid value for "keywords", number of items must be less than or equal to 1000.'
+      end
+
+      @keywords = keywords
     end
 
     # Custom attribute writer method with validation
