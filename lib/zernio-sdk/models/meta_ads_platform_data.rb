@@ -24,6 +24,12 @@ module Zernio
     # Decimal ROAS multiplier (2.0 = 2.0x). Required when bidStrategy is LOWEST_COST_WITH_MIN_ROAS; sending it without bidStrategy is a 400.
     attr_accessor :roas_average_floor
 
+    # Meta daily_min_spend_target on the ad set being created: the least it should spend per day, in whole currency units. It reserves a share of a CAMPAIGN budget, so it requires budgetLevel campaign or an existingCampaignId whose campaign has the budget (Advantage campaign budget / CBO); with an ad-set budget it is a 400, because Meta rejects a spend limit on an ad set that owns its budget. A target, not a guarantee. Mutually exclusive with lifetimeMinSpendTarget: the flavour must match the campaign budget type. Rejected with 400 on POST /v1/ads/boost and in adSetId attach mode: use PUT /v1/ads/ad-sets/{adSetId} for an ad set that already exists.
+    attr_accessor :daily_min_spend_target
+
+    # Meta lifetime_min_spend_target: the lifetime-budget flavour of dailyMinSpendTarget, in whole currency units. Same rules and same rejections.
+    attr_accessor :lifetime_min_spend_target
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -51,7 +57,9 @@ module Zernio
       {
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
-        :'roas_average_floor' => :'roasAverageFloor'
+        :'roas_average_floor' => :'roasAverageFloor',
+        :'daily_min_spend_target' => :'dailyMinSpendTarget',
+        :'lifetime_min_spend_target' => :'lifetimeMinSpendTarget'
       }
     end
 
@@ -70,7 +78,9 @@ module Zernio
       {
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
-        :'roas_average_floor' => :'Float'
+        :'roas_average_floor' => :'Float',
+        :'daily_min_spend_target' => :'Float',
+        :'lifetime_min_spend_target' => :'Float'
       }
     end
 
@@ -107,6 +117,14 @@ module Zernio
       if attributes.key?(:'roas_average_floor')
         self.roas_average_floor = attributes[:'roas_average_floor']
       end
+
+      if attributes.key?(:'daily_min_spend_target')
+        self.daily_min_spend_target = attributes[:'daily_min_spend_target']
+      end
+
+      if attributes.key?(:'lifetime_min_spend_target')
+        self.lifetime_min_spend_target = attributes[:'lifetime_min_spend_target']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -131,7 +149,9 @@ module Zernio
       self.class == o.class &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
-          roas_average_floor == o.roas_average_floor
+          roas_average_floor == o.roas_average_floor &&
+          daily_min_spend_target == o.daily_min_spend_target &&
+          lifetime_min_spend_target == o.lifetime_min_spend_target
     end
 
     # @see the `==` method
@@ -143,7 +163,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [bid_strategy, bid_amount, roas_average_floor].hash
+      [bid_strategy, bid_amount, roas_average_floor, daily_min_spend_target, lifetime_min_spend_target].hash
     end
 
     # Builds the object from hash

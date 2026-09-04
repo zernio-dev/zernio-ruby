@@ -28,6 +28,12 @@ module Zernio
     # Ad set end_time (ISO 8601).
     attr_accessor :end_date
 
+    # Meta `daily_min_spend_target`: the least this ad set should spend per day, in whole currency units of the ad account. It reserves a share of a CAMPAIGN budget for one ad set, so it requires a campaign using Advantage campaign budget (CBO). On an ad set that owns its budget (ABO) this returns 409 — move the budget to the campaign with `PUT /v1/ads/campaigns/{campaignId}` first. Meta treats it as a target, not a guarantee, and rejects the combined minimum of a campaign's ad sets going over the campaign budget. Mutually exclusive with `lifetimeMinSpendTarget` (400): the flavour must match the campaign budget type, a daily budget takes a daily target. Read it back with `GET /v1/ads/ad-sets/{adSetId}?fields=daily_min_spend_target`. 
+    attr_accessor :daily_min_spend_target
+
+    # Meta `lifetime_min_spend_target`: the lifetime-budget flavour of `dailyMinSpendTarget`, in whole currency units. Send this one when the campaign budget is a lifetime budget. Same rules and same rejections. 
+    attr_accessor :lifetime_min_spend_target
+
     attr_accessor :promoted_object
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -37,6 +43,8 @@ module Zernio
         :'billing_event' => :'billingEvent',
         :'start_date' => :'startDate',
         :'end_date' => :'endDate',
+        :'daily_min_spend_target' => :'dailyMinSpendTarget',
+        :'lifetime_min_spend_target' => :'lifetimeMinSpendTarget',
         :'promoted_object' => :'promotedObject'
       }
     end
@@ -58,6 +66,8 @@ module Zernio
         :'billing_event' => :'String',
         :'start_date' => :'String',
         :'end_date' => :'String',
+        :'daily_min_spend_target' => :'Float',
+        :'lifetime_min_spend_target' => :'Float',
         :'promoted_object' => :'UpdateAdSetRequestPlatformSpecificDataPromotedObject'
       }
     end
@@ -100,6 +110,14 @@ module Zernio
         self.end_date = attributes[:'end_date']
       end
 
+      if attributes.key?(:'daily_min_spend_target')
+        self.daily_min_spend_target = attributes[:'daily_min_spend_target']
+      end
+
+      if attributes.key?(:'lifetime_min_spend_target')
+        self.lifetime_min_spend_target = attributes[:'lifetime_min_spend_target']
+      end
+
       if attributes.key?(:'promoted_object')
         self.promoted_object = attributes[:'promoted_object']
       end
@@ -129,6 +147,8 @@ module Zernio
           billing_event == o.billing_event &&
           start_date == o.start_date &&
           end_date == o.end_date &&
+          daily_min_spend_target == o.daily_min_spend_target &&
+          lifetime_min_spend_target == o.lifetime_min_spend_target &&
           promoted_object == o.promoted_object
     end
 
@@ -141,7 +161,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [optimization_goal, billing_event, start_date, end_date, promoted_object].hash
+      [optimization_goal, billing_event, start_date, end_date, daily_min_spend_target, lifetime_min_spend_target, promoted_object].hash
     end
 
     # Builds the object from hash
