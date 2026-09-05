@@ -11,7 +11,7 @@
 | **events** | **Array&lt;String&gt;** | Events subscribed to | [optional] |
 | **is_active** | **Boolean** | Whether webhook delivery is enabled | [optional] |
 | **last_fired_at** | **Time** | Timestamp of last successful webhook delivery | [optional] |
-| **failure_count** | **Integer** | Consecutive delivery failures (resets on success, webhook disabled at 10) | [optional] |
+| **failure_count** | **Integer** | Consecutive terminal delivery failures (resets to 0 on any successful delivery). Auto-disable only triggers when the endpoint has had no successful delivery within a 3-day window AND either reaches 20 consecutive terminal failures or has been failing continuously for 3 days; any success within that window keeps the endpoint enabled regardless of the count. | [optional] |
 | **custom_headers** | **Hash&lt;String, String&gt;** | Custom headers included in webhook requests | [optional] |
 | **disabled_resource_groups** | **Array&lt;String&gt;** | Resource groups this subscription does not receive (opt-out denylist, same vocabulary and same semantics as the field on API keys). Absent or empty means the subscription receives every event listed in &#x60;events&#x60;, which is how every subscription created before this field existed behaves. An event whose group is listed here is dropped before delivery even when it is still present in &#x60;events&#x60;, and the same check runs on every replay path (test fire, redelivery, dead-letter requeue). Editing the denylist applies to every event emitted afterwards; events already queued when the edit landed can still be delivered for up to five minutes after they were enqueued. | [optional] |
 
