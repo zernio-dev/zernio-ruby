@@ -43,6 +43,12 @@ module Zernio
     # SIP response code that ended the call when SIP-signalled (e.g. '403', '486', '603'). endReason collapses all three to 'rejected', so this is what separates a refused destination from a busy line. Null on non-SIP legs.
     attr_accessor :sip_hangup_cause
 
+    # True when the inbound call was handled by voicemail, whether scheduled or because the forward did not connect.
+    attr_accessor :is_voicemail
+
+    # Failures recorded on the call up to hangup (bridge failed, dial failed, recording error). Empty on a clean call. `message` is free-form diagnostic text and is not stable, do not parse it. `code` is 0 unless a provider code is known. Errors the carrier reports after hangup appear only on GET /v1/calls/{id}.
+    attr_accessor :call_errors
+
     attr_accessor :recording_url
 
     attr_accessor :recording_expires_at
@@ -87,6 +93,8 @@ module Zernio
         :'end_reason' => :'endReason',
         :'hangup_cause' => :'hangupCause',
         :'sip_hangup_cause' => :'sipHangupCause',
+        :'is_voicemail' => :'isVoicemail',
+        :'call_errors' => :'callErrors',
         :'recording_url' => :'recordingUrl',
         :'recording_expires_at' => :'recordingExpiresAt',
         :'billing' => :'billing'
@@ -119,6 +127,8 @@ module Zernio
         :'end_reason' => :'String',
         :'hangup_cause' => :'String',
         :'sip_hangup_cause' => :'String',
+        :'is_voicemail' => :'Boolean',
+        :'call_errors' => :'Array<CallRecordCallErrorsInner>',
         :'recording_url' => :'String',
         :'recording_expires_at' => :'Time',
         :'billing' => :'WebhookPayloadCallEndedCallBilling'
@@ -202,6 +212,16 @@ module Zernio
         self.sip_hangup_cause = attributes[:'sip_hangup_cause']
       end
 
+      if attributes.key?(:'is_voicemail')
+        self.is_voicemail = attributes[:'is_voicemail']
+      end
+
+      if attributes.key?(:'call_errors')
+        if (value = attributes[:'call_errors']).is_a?(Array)
+          self.call_errors = value
+        end
+      end
+
       if attributes.key?(:'recording_url')
         self.recording_url = attributes[:'recording_url']
       end
@@ -272,6 +292,8 @@ module Zernio
           end_reason == o.end_reason &&
           hangup_cause == o.hangup_cause &&
           sip_hangup_cause == o.sip_hangup_cause &&
+          is_voicemail == o.is_voicemail &&
+          call_errors == o.call_errors &&
           recording_url == o.recording_url &&
           recording_expires_at == o.recording_expires_at &&
           billing == o.billing
@@ -286,7 +308,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, meta_call_id, account_id, phone_number_id, direction, from, to, started_at, ended_at, duration_seconds, end_reason, hangup_cause, sip_hangup_cause, recording_url, recording_expires_at, billing].hash
+      [id, meta_call_id, account_id, phone_number_id, direction, from, to, started_at, ended_at, duration_seconds, end_reason, hangup_cause, sip_hangup_cause, is_voicemail, call_errors, recording_url, recording_expires_at, billing].hash
     end
 
     # Builds the object from hash
