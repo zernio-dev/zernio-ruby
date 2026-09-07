@@ -20,6 +20,12 @@ module Zernio
     # Which targeting fields were applied.
     attr_accessor :updated
 
+    attr_accessor :devices
+
+    attr_accessor :locations
+
+    attr_accessor :languages
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -46,7 +52,10 @@ module Zernio
     def self.attribute_map
       {
         :'campaign_id' => :'campaignId',
-        :'updated' => :'updated'
+        :'updated' => :'updated',
+        :'devices' => :'devices',
+        :'locations' => :'locations',
+        :'languages' => :'languages'
       }
     end
 
@@ -64,7 +73,10 @@ module Zernio
     def self.openapi_types
       {
         :'campaign_id' => :'String',
-        :'updated' => :'Array<String>'
+        :'updated' => :'Array<String>',
+        :'devices' => :'Array<UpdateCampaignTargeting200ResponseDevicesInner>',
+        :'locations' => :'Array<GetCampaignTargeting200ResponseLocationsInner>',
+        :'languages' => :'Array<UpdateCampaignTargeting200ResponseLanguagesInner>'
       }
     end
 
@@ -99,6 +111,24 @@ module Zernio
           self.updated = value
         end
       end
+
+      if attributes.key?(:'devices')
+        if (value = attributes[:'devices']).is_a?(Array)
+          self.devices = value
+        end
+      end
+
+      if attributes.key?(:'locations')
+        if (value = attributes[:'locations']).is_a?(Array)
+          self.locations = value
+        end
+      end
+
+      if attributes.key?(:'languages')
+        if (value = attributes[:'languages']).is_a?(Array)
+          self.languages = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -122,7 +152,10 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           campaign_id == o.campaign_id &&
-          updated == o.updated
+          updated == o.updated &&
+          devices == o.devices &&
+          locations == o.locations &&
+          languages == o.languages
     end
 
     # @see the `==` method
@@ -134,7 +167,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign_id, updated].hash
+      [campaign_id, updated, devices, locations, languages].hash
     end
 
     # Builds the object from hash

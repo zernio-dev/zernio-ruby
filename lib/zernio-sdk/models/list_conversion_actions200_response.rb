@@ -20,11 +20,19 @@ module Zernio
 
     attr_accessor :actions
 
+    # When this list was fetched from Google. Null when it was never served from cache.
+    attr_accessor :cached_at
+
+    # True when Google's daily API quota was exhausted and this is the last successful fetch, not a live read.
+    attr_accessor :stale
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'customer_id' => :'customerId',
-        :'actions' => :'actions'
+        :'actions' => :'actions',
+        :'cached_at' => :'cachedAt',
+        :'stale' => :'stale'
       }
     end
 
@@ -42,13 +50,16 @@ module Zernio
     def self.openapi_types
       {
         :'customer_id' => :'String',
-        :'actions' => :'Array<ConversionAction>'
+        :'actions' => :'Array<ConversionAction>',
+        :'cached_at' => :'Time',
+        :'stale' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'cached_at',
       ])
     end
 
@@ -77,6 +88,14 @@ module Zernio
           self.actions = value
         end
       end
+
+      if attributes.key?(:'cached_at')
+        self.cached_at = attributes[:'cached_at']
+      end
+
+      if attributes.key?(:'stale')
+        self.stale = attributes[:'stale']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -100,7 +119,9 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           customer_id == o.customer_id &&
-          actions == o.actions
+          actions == o.actions &&
+          cached_at == o.cached_at &&
+          stale == o.stale
     end
 
     # @see the `==` method
@@ -112,7 +133,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer_id, actions].hash
+      [customer_id, actions, cached_at, stale].hash
     end
 
     # Builds the object from hash

@@ -25,6 +25,12 @@ module Zernio
 
     attr_accessor :portfolio
 
+    # When this data was fetched from Google. Null when it was never served from cache.
+    attr_accessor :cached_at
+
+    # True when Google's daily API quota was exhausted and this is the last successful fetch, not a live read.
+    attr_accessor :stale
+
     attr_accessor :campaign_id
 
     class EnumAttributeValidator
@@ -56,6 +62,8 @@ module Zernio
         :'bidding_strategy_type' => :'biddingStrategyType',
         :'bid_spec' => :'bidSpec',
         :'portfolio' => :'portfolio',
+        :'cached_at' => :'cachedAt',
+        :'stale' => :'stale',
         :'campaign_id' => :'campaignId'
       }
     end
@@ -77,6 +85,8 @@ module Zernio
         :'bidding_strategy_type' => :'String',
         :'bid_spec' => :'CampaignBiddingBidSpec',
         :'portfolio' => :'CampaignBiddingPortfolio',
+        :'cached_at' => :'Time',
+        :'stale' => :'Boolean',
         :'campaign_id' => :'String'
       }
     end
@@ -126,6 +136,14 @@ module Zernio
         self.portfolio = attributes[:'portfolio']
       end
 
+      if attributes.key?(:'cached_at')
+        self.cached_at = attributes[:'cached_at']
+      end
+
+      if attributes.key?(:'stale')
+        self.stale = attributes[:'stale']
+      end
+
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
       end
@@ -167,6 +185,8 @@ module Zernio
           bidding_strategy_type == o.bidding_strategy_type &&
           bid_spec == o.bid_spec &&
           portfolio == o.portfolio &&
+          cached_at == o.cached_at &&
+          stale == o.stale &&
           campaign_id == o.campaign_id
     end
 
@@ -179,7 +199,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [channel, bidding_strategy_type, bid_spec, portfolio, campaign_id].hash
+      [channel, bidding_strategy_type, bid_spec, portfolio, cached_at, stale, campaign_id].hash
     end
 
     # Builds the object from hash

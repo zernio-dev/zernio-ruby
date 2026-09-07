@@ -21,12 +21,20 @@ module Zernio
 
     attr_accessor :languages
 
+    # When this targeting was fetched from Google. Null when it was never served from cache.
+    attr_accessor :cached_at
+
+    # True when Google's daily API quota was exhausted and this is the last successful fetch, not a live read.
+    attr_accessor :stale
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'devices' => :'devices',
         :'locations' => :'locations',
-        :'languages' => :'languages'
+        :'languages' => :'languages',
+        :'cached_at' => :'cachedAt',
+        :'stale' => :'stale'
       }
     end
 
@@ -45,13 +53,16 @@ module Zernio
       {
         :'devices' => :'Array<GetCampaignTargeting200ResponseDevicesInner>',
         :'locations' => :'Array<GetCampaignTargeting200ResponseLocationsInner>',
-        :'languages' => :'Array<GetCampaignTargeting200ResponseLanguagesInner>'
+        :'languages' => :'Array<GetCampaignTargeting200ResponseLanguagesInner>',
+        :'cached_at' => :'Time',
+        :'stale' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'cached_at',
       ])
     end
 
@@ -88,6 +99,14 @@ module Zernio
           self.languages = value
         end
       end
+
+      if attributes.key?(:'cached_at')
+        self.cached_at = attributes[:'cached_at']
+      end
+
+      if attributes.key?(:'stale')
+        self.stale = attributes[:'stale']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -112,7 +131,9 @@ module Zernio
       self.class == o.class &&
           devices == o.devices &&
           locations == o.locations &&
-          languages == o.languages
+          languages == o.languages &&
+          cached_at == o.cached_at &&
+          stale == o.stale
     end
 
     # @see the `==` method
@@ -124,7 +145,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [devices, locations, languages].hash
+      [devices, locations, languages, cached_at, stale].hash
     end
 
     # Builds the object from hash

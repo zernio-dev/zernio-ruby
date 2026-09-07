@@ -14,24 +14,19 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAccountCallouts200Response < ApiModelBase
-    attr_accessor :customer_id
+  class UpdateCampaignTargeting200ResponseLanguagesInner < ApiModelBase
+    attr_accessor :code
 
-    attr_accessor :callouts
+    attr_accessor :id
 
-    # When this list was fetched from Google. Null when it was never served from cache.
-    attr_accessor :cached_at
-
-    # True when Google's daily API quota was exhausted and this is the last successful fetch, not a live read.
-    attr_accessor :stale
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'customer_id' => :'customerId',
-        :'callouts' => :'callouts',
-        :'cached_at' => :'cachedAt',
-        :'stale' => :'stale'
+        :'code' => :'code',
+        :'id' => :'id',
+        :'name' => :'name'
       }
     end
 
@@ -48,17 +43,15 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'customer_id' => :'String',
-        :'callouts' => :'Array<ListAccountCallouts200ResponseCalloutsInner>',
-        :'cached_at' => :'Time',
-        :'stale' => :'Boolean'
+        :'code' => :'String',
+        :'id' => :'String',
+        :'name' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'cached_at',
       ])
     end
 
@@ -66,34 +59,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAccountCallouts200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateCampaignTargeting200ResponseLanguagesInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAccountCallouts200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateCampaignTargeting200ResponseLanguagesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'customer_id')
-        self.customer_id = attributes[:'customer_id']
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
 
-      if attributes.key?(:'callouts')
-        if (value = attributes[:'callouts']).is_a?(Array)
-          self.callouts = value
-        end
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'cached_at')
-        self.cached_at = attributes[:'cached_at']
-      end
-
-      if attributes.key?(:'stale')
-        self.stale = attributes[:'stale']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
     end
 
@@ -117,10 +104,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          customer_id == o.customer_id &&
-          callouts == o.callouts &&
-          cached_at == o.cached_at &&
-          stale == o.stale
+          code == o.code &&
+          id == o.id &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -132,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer_id, callouts, cached_at, stale].hash
+      [code, id, name].hash
     end
 
     # Builds the object from hash

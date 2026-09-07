@@ -22,12 +22,20 @@ module Zernio
 
     attr_accessor :strategies
 
+    # When this data was fetched from Google. Null when it was never served from cache.
+    attr_accessor :cached_at
+
+    # True when Google's daily API quota was exhausted and this is the last successful fetch, not a live read.
+    attr_accessor :stale
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'customer_id' => :'customerId',
         :'currency' => :'currency',
-        :'strategies' => :'strategies'
+        :'strategies' => :'strategies',
+        :'cached_at' => :'cachedAt',
+        :'stale' => :'stale'
       }
     end
 
@@ -46,13 +54,16 @@ module Zernio
       {
         :'customer_id' => :'String',
         :'currency' => :'String',
-        :'strategies' => :'Array<PortfolioBidStrategy>'
+        :'strategies' => :'Array<PortfolioBidStrategy>',
+        :'cached_at' => :'Time',
+        :'stale' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'cached_at',
       ])
     end
 
@@ -85,6 +96,14 @@ module Zernio
           self.strategies = value
         end
       end
+
+      if attributes.key?(:'cached_at')
+        self.cached_at = attributes[:'cached_at']
+      end
+
+      if attributes.key?(:'stale')
+        self.stale = attributes[:'stale']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,7 +128,9 @@ module Zernio
       self.class == o.class &&
           customer_id == o.customer_id &&
           currency == o.currency &&
-          strategies == o.strategies
+          strategies == o.strategies &&
+          cached_at == o.cached_at &&
+          stale == o.stale
     end
 
     # @see the `==` method
@@ -121,7 +142,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer_id, currency, strategies].hash
+      [customer_id, currency, strategies, cached_at, stale].hash
     end
 
     # Builds the object from hash

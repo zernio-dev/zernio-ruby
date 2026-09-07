@@ -2214,6 +2214,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateBroadcastRequestTemplate](docs/UpdateBroadcastRequestTemplate.md)
  - [Zernio::UpdateBroadcastRequestTemplateVariableMappingValue](docs/UpdateBroadcastRequestTemplateVariableMappingValue.md)
  - [Zernio::UpdateCampaignTargeting200Response](docs/UpdateCampaignTargeting200Response.md)
+ - [Zernio::UpdateCampaignTargeting200ResponseDevicesInner](docs/UpdateCampaignTargeting200ResponseDevicesInner.md)
+ - [Zernio::UpdateCampaignTargeting200ResponseLanguagesInner](docs/UpdateCampaignTargeting200ResponseLanguagesInner.md)
  - [Zernio::UpdateCampaignTargetingRequest](docs/UpdateCampaignTargetingRequest.md)
  - [Zernio::UpdateCampaignTargetingRequestTargeting](docs/UpdateCampaignTargetingRequestTargeting.md)
  - [Zernio::UpdateCampaignTargetingRequestTargetingDevicesInner](docs/UpdateCampaignTargetingRequestTargetingDevicesInner.md)

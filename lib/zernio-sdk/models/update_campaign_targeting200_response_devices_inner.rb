@@ -14,24 +14,42 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAccountCallouts200Response < ApiModelBase
-    attr_accessor :customer_id
+  class UpdateCampaignTargeting200ResponseDevicesInner < ApiModelBase
+    attr_accessor :device
 
-    attr_accessor :callouts
+    attr_accessor :included
 
-    # When this list was fetched from Google. Null when it was never served from cache.
-    attr_accessor :cached_at
+    # Always null on this read; see GET's description.
+    attr_accessor :bid_modifier
 
-    # True when Google's daily API quota was exhausted and this is the last successful fetch, not a live read.
-    attr_accessor :stale
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'customer_id' => :'customerId',
-        :'callouts' => :'callouts',
-        :'cached_at' => :'cachedAt',
-        :'stale' => :'stale'
+        :'device' => :'device',
+        :'included' => :'included',
+        :'bid_modifier' => :'bidModifier'
       }
     end
 
@@ -48,17 +66,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'customer_id' => :'String',
-        :'callouts' => :'Array<ListAccountCallouts200ResponseCalloutsInner>',
-        :'cached_at' => :'Time',
-        :'stale' => :'Boolean'
+        :'device' => :'String',
+        :'included' => :'Boolean',
+        :'bid_modifier' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'cached_at',
+        :'bid_modifier'
       ])
     end
 
@@ -66,34 +83,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAccountCallouts200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateCampaignTargeting200ResponseDevicesInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAccountCallouts200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateCampaignTargeting200ResponseDevicesInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'customer_id')
-        self.customer_id = attributes[:'customer_id']
+      if attributes.key?(:'device')
+        self.device = attributes[:'device']
       end
 
-      if attributes.key?(:'callouts')
-        if (value = attributes[:'callouts']).is_a?(Array)
-          self.callouts = value
-        end
+      if attributes.key?(:'included')
+        self.included = attributes[:'included']
       end
 
-      if attributes.key?(:'cached_at')
-        self.cached_at = attributes[:'cached_at']
-      end
-
-      if attributes.key?(:'stale')
-        self.stale = attributes[:'stale']
+      if attributes.key?(:'bid_modifier')
+        self.bid_modifier = attributes[:'bid_modifier']
       end
     end
 
@@ -109,7 +120,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      device_validator = EnumAttributeValidator.new('String', ["MOBILE", "DESKTOP", "TABLET", "CONNECTED_TV"])
+      return false unless device_validator.valid?(@device)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] device Object to be assigned
+    def device=(device)
+      validator = EnumAttributeValidator.new('String', ["MOBILE", "DESKTOP", "TABLET", "CONNECTED_TV"])
+      unless validator.valid?(device)
+        fail ArgumentError, "invalid value for \"device\", must be one of #{validator.allowable_values}."
+      end
+      @device = device
     end
 
     # Checks equality by comparing each attribute.
@@ -117,10 +140,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          customer_id == o.customer_id &&
-          callouts == o.callouts &&
-          cached_at == o.cached_at &&
-          stale == o.stale
+          device == o.device &&
+          included == o.included &&
+          bid_modifier == o.bid_modifier
     end
 
     # @see the `==` method
@@ -132,7 +154,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer_id, callouts, cached_at, stale].hash
+      [device, included, bid_modifier].hash
     end
 
     # Builds the object from hash

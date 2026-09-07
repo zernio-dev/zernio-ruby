@@ -26,6 +26,12 @@ module Zernio
 
     attr_accessor :portfolio
 
+    # When this data was fetched from Google. Null when it was never served from cache.
+    attr_accessor :cached_at
+
+    # True when Google's daily API quota was exhausted and this is the last successful fetch, not a live read.
+    attr_accessor :stale
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -54,7 +60,9 @@ module Zernio
         :'channel' => :'channel',
         :'bidding_strategy_type' => :'biddingStrategyType',
         :'bid_spec' => :'bidSpec',
-        :'portfolio' => :'portfolio'
+        :'portfolio' => :'portfolio',
+        :'cached_at' => :'cachedAt',
+        :'stale' => :'stale'
       }
     end
 
@@ -74,13 +82,16 @@ module Zernio
         :'channel' => :'String',
         :'bidding_strategy_type' => :'String',
         :'bid_spec' => :'CampaignBiddingBidSpec',
-        :'portfolio' => :'CampaignBiddingPortfolio'
+        :'portfolio' => :'CampaignBiddingPortfolio',
+        :'cached_at' => :'Time',
+        :'stale' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'cached_at',
       ])
     end
 
@@ -114,6 +125,14 @@ module Zernio
 
       if attributes.key?(:'portfolio')
         self.portfolio = attributes[:'portfolio']
+      end
+
+      if attributes.key?(:'cached_at')
+        self.cached_at = attributes[:'cached_at']
+      end
+
+      if attributes.key?(:'stale')
+        self.stale = attributes[:'stale']
       end
     end
 
@@ -152,7 +171,9 @@ module Zernio
           channel == o.channel &&
           bidding_strategy_type == o.bidding_strategy_type &&
           bid_spec == o.bid_spec &&
-          portfolio == o.portfolio
+          portfolio == o.portfolio &&
+          cached_at == o.cached_at &&
+          stale == o.stale
     end
 
     # @see the `==` method
@@ -164,7 +185,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [channel, bidding_strategy_type, bid_spec, portfolio].hash
+      [channel, bidding_strategy_type, bid_spec, portfolio, cached_at, stale].hash
     end
 
     # Builds the object from hash
