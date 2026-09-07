@@ -21,7 +21,7 @@ module Zernio
     # **Meta only.** Zernio SocialAccount id owning the ad account. Needed only for an EMPTY campaign (zero ads); ignored otherwise.
     attr_accessor :account_id
 
-    # **Meta + Google.** On Meta, the campaign default that ad sets inherit unless they override it. On Google, the campaign's own bidding strategy.
+    # **Meta + Google.** On Meta, the campaign default that ad sets inherit unless they override it. On Google, the campaign's own bidding strategy. On Google: LOWEST_COST_WITHOUT_CAP = Maximize Conversions, COST_CAP + bidAmount = Target CPA, LOWEST_COST_WITH_MIN_ROAS + roasAverageFloor = Target ROAS, LOWEST_COST_WITH_BID_CAP + bidAmount = Maximize Clicks with a CPC ceiling; portfolioBidStrategyId attaches a portfolio strategy instead.
     attr_accessor :bid_strategy
 
     # **Google only.** Whole currency units (USD: 12 = $12.00). Max CPC for LOWEST_COST_WITH_BID_CAP, CPA target for COST_CAP; required for both.
@@ -29,6 +29,9 @@ module Zernio
 
     # **Google only.** Decimal ROAS multiplier (2.0 = 2.0x), required for LOWEST_COST_WITH_MIN_ROAS.
     attr_accessor :roas_average_floor
+
+    # **Google only.** Attach an existing portfolio bid strategy (numeric id from GET /v1/ads/bid-strategies) instead of setting bidStrategy. Exclusive with bidStrategy.
+    attr_accessor :portfolio_bid_strategy_id
 
     attr_accessor :budget
 
@@ -67,6 +70,7 @@ module Zernio
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
+        :'portfolio_bid_strategy_id' => :'portfolioBidStrategyId',
         :'budget' => :'budget',
         :'name' => :'name',
         :'platform_specific_data' => :'platformSpecificData'
@@ -91,6 +95,7 @@ module Zernio
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
+        :'portfolio_bid_strategy_id' => :'String',
         :'budget' => :'UpdateAdCampaignRequestBudget',
         :'name' => :'String',
         :'platform_specific_data' => :'UpdateAdCampaignRequestPlatformSpecificData'
@@ -141,6 +146,10 @@ module Zernio
         self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
+      if attributes.key?(:'portfolio_bid_strategy_id')
+        self.portfolio_bid_strategy_id = attributes[:'portfolio_bid_strategy_id']
+      end
+
       if attributes.key?(:'budget')
         self.budget = attributes[:'budget']
       end
@@ -163,6 +172,11 @@ module Zernio
         invalid_properties.push('invalid value for "platform", platform cannot be nil.')
       end
 
+      pattern = Regexp.new(/^\d+$/)
+      if !@portfolio_bid_strategy_id.nil? && @portfolio_bid_strategy_id !~ pattern
+        invalid_properties.push("invalid value for \"portfolio_bid_strategy_id\", must conform to the pattern #{pattern}.")
+      end
+
       if !@name.nil? && @name.to_s.length > 255
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 255.')
       end
@@ -177,6 +191,7 @@ module Zernio
       return false if @platform.nil?
       platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "google"])
       return false unless platform_validator.valid?(@platform)
+      return false if !@portfolio_bid_strategy_id.nil? && @portfolio_bid_strategy_id !~ Regexp.new(/^\d+$/)
       return false if !@name.nil? && @name.to_s.length > 255
       true
     end
@@ -189,6 +204,21 @@ module Zernio
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
       @platform = platform
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] portfolio_bid_strategy_id Value to be assigned
+    def portfolio_bid_strategy_id=(portfolio_bid_strategy_id)
+      if portfolio_bid_strategy_id.nil?
+        fail ArgumentError, 'portfolio_bid_strategy_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if portfolio_bid_strategy_id !~ pattern
+        fail ArgumentError, "invalid value for \"portfolio_bid_strategy_id\", must conform to the pattern #{pattern}."
+      end
+
+      @portfolio_bid_strategy_id = portfolio_bid_strategy_id
     end
 
     # Custom attribute writer method with validation
@@ -215,6 +245,7 @@ module Zernio
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
+          portfolio_bid_strategy_id == o.portfolio_bid_strategy_id &&
           budget == o.budget &&
           name == o.name &&
           platform_specific_data == o.platform_specific_data
@@ -229,7 +260,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, account_id, bid_strategy, bid_amount, roas_average_floor, budget, name, platform_specific_data].hash
+      [platform, account_id, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, budget, name, platform_specific_data].hash
     end
 
     # Builds the object from hash

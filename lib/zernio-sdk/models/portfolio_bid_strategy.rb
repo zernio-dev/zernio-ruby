@@ -14,25 +14,41 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Echoes back only the fields you sent, plus `updated`.
-  class UpdateAdCampaign200Response < ApiModelBase
-    # Local Ad documents mirrored. 0 on the empty-campaign path.
-    attr_accessor :updated
+  # A Google Ads portfolio bid strategy: a named bidding strategy shared across campaigns, with its R.130 report metrics over the queried date range.
+  class PortfolioBidStrategy < ApiModelBase
+    # Numeric bid strategy id; pass as portfolioBidStrategyId or in the {strategyId} path.
+    attr_accessor :id
 
-    attr_accessor :budget
+    attr_accessor :name
 
-    attr_accessor :budget_level
+    attr_accessor :type
 
-    attr_accessor :bid_strategy
+    # ENABLED or REMOVED.
+    attr_accessor :status
 
-    attr_accessor :bid_amount
+    # Number of campaigns currently attached.
+    attr_accessor :campaign_count
 
-    attr_accessor :roas_average_floor
+    attr_accessor :clicks
 
-    # Google only. Echoed back, but NOT mirrored onto local Ad documents (no column for it yet).
-    attr_accessor :portfolio_bid_strategy_id
+    # Cost in the account's currency units (converted from micros).
+    attr_accessor :cost
 
-    attr_accessor :platform_specific_data
+    # Cost per conversion in the account's currency units.
+    attr_accessor :cost_per_conversion
+
+    attr_accessor :impressions
+
+    # Average CPC in the account's currency units.
+    attr_accessor :average_cpc
+
+    attr_accessor :conversions
+
+    # Current target, in the account's currency units. Null for a ROAS-family type (TARGET_ROAS, MAXIMIZE_CONVERSION_VALUE), or a Maximize type with no target set. Pre-fills the edit form's target field.
+    attr_accessor :target_cpa
+
+    # Current target as a decimal multiplier (2.0 = 2.0x). Null for a CPA-family type (TARGET_CPA, MAXIMIZE_CONVERSIONS), or a Maximize type with no target set.
+    attr_accessor :target_roas
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -59,14 +75,19 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'updated' => :'updated',
-        :'budget' => :'budget',
-        :'budget_level' => :'budgetLevel',
-        :'bid_strategy' => :'bidStrategy',
-        :'bid_amount' => :'bidAmount',
-        :'roas_average_floor' => :'roasAverageFloor',
-        :'portfolio_bid_strategy_id' => :'portfolioBidStrategyId',
-        :'platform_specific_data' => :'platformSpecificData'
+        :'id' => :'id',
+        :'name' => :'name',
+        :'type' => :'type',
+        :'status' => :'status',
+        :'campaign_count' => :'campaignCount',
+        :'clicks' => :'clicks',
+        :'cost' => :'cost',
+        :'cost_per_conversion' => :'costPerConversion',
+        :'impressions' => :'impressions',
+        :'average_cpc' => :'averageCpc',
+        :'conversions' => :'conversions',
+        :'target_cpa' => :'targetCpa',
+        :'target_roas' => :'targetRoas'
       }
     end
 
@@ -83,20 +104,27 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'updated' => :'Integer',
-        :'budget' => :'AdBudget',
-        :'budget_level' => :'String',
-        :'bid_strategy' => :'BidStrategy',
-        :'bid_amount' => :'Float',
-        :'roas_average_floor' => :'Float',
-        :'portfolio_bid_strategy_id' => :'String',
-        :'platform_specific_data' => :'Object'
+        :'id' => :'String',
+        :'name' => :'String',
+        :'type' => :'String',
+        :'status' => :'String',
+        :'campaign_count' => :'Integer',
+        :'clicks' => :'Integer',
+        :'cost' => :'Float',
+        :'cost_per_conversion' => :'Float',
+        :'impressions' => :'Integer',
+        :'average_cpc' => :'Float',
+        :'conversions' => :'Float',
+        :'target_cpa' => :'Float',
+        :'target_roas' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'target_cpa',
+        :'target_roas'
       ])
     end
 
@@ -104,48 +132,68 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdCampaign200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::PortfolioBidStrategy` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdCampaign200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::PortfolioBidStrategy`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'updated')
-        self.updated = attributes[:'updated']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'budget_level')
-        self.budget_level = attributes[:'budget_level']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'bid_strategy')
-        self.bid_strategy = attributes[:'bid_strategy']
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'bid_amount')
-        self.bid_amount = attributes[:'bid_amount']
+      if attributes.key?(:'campaign_count')
+        self.campaign_count = attributes[:'campaign_count']
       end
 
-      if attributes.key?(:'roas_average_floor')
-        self.roas_average_floor = attributes[:'roas_average_floor']
+      if attributes.key?(:'clicks')
+        self.clicks = attributes[:'clicks']
       end
 
-      if attributes.key?(:'portfolio_bid_strategy_id')
-        self.portfolio_bid_strategy_id = attributes[:'portfolio_bid_strategy_id']
+      if attributes.key?(:'cost')
+        self.cost = attributes[:'cost']
       end
 
-      if attributes.key?(:'platform_specific_data')
-        self.platform_specific_data = attributes[:'platform_specific_data']
+      if attributes.key?(:'cost_per_conversion')
+        self.cost_per_conversion = attributes[:'cost_per_conversion']
+      end
+
+      if attributes.key?(:'impressions')
+        self.impressions = attributes[:'impressions']
+      end
+
+      if attributes.key?(:'average_cpc')
+        self.average_cpc = attributes[:'average_cpc']
+      end
+
+      if attributes.key?(:'conversions')
+        self.conversions = attributes[:'conversions']
+      end
+
+      if attributes.key?(:'target_cpa')
+        self.target_cpa = attributes[:'target_cpa']
+      end
+
+      if attributes.key?(:'target_roas')
+        self.target_roas = attributes[:'target_roas']
       end
     end
 
@@ -161,19 +209,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      budget_level_validator = EnumAttributeValidator.new('String', ["campaign"])
-      return false unless budget_level_validator.valid?(@budget_level)
+      type_validator = EnumAttributeValidator.new('String', ["TARGET_CPA", "TARGET_ROAS", "MAXIMIZE_CONVERSIONS", "MAXIMIZE_CONVERSION_VALUE"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] budget_level Object to be assigned
-    def budget_level=(budget_level)
-      validator = EnumAttributeValidator.new('String', ["campaign"])
-      unless validator.valid?(budget_level)
-        fail ArgumentError, "invalid value for \"budget_level\", must be one of #{validator.allowable_values}."
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["TARGET_CPA", "TARGET_ROAS", "MAXIMIZE_CONVERSIONS", "MAXIMIZE_CONVERSION_VALUE"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
-      @budget_level = budget_level
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -181,14 +229,19 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          updated == o.updated &&
-          budget == o.budget &&
-          budget_level == o.budget_level &&
-          bid_strategy == o.bid_strategy &&
-          bid_amount == o.bid_amount &&
-          roas_average_floor == o.roas_average_floor &&
-          portfolio_bid_strategy_id == o.portfolio_bid_strategy_id &&
-          platform_specific_data == o.platform_specific_data
+          id == o.id &&
+          name == o.name &&
+          type == o.type &&
+          status == o.status &&
+          campaign_count == o.campaign_count &&
+          clicks == o.clicks &&
+          cost == o.cost &&
+          cost_per_conversion == o.cost_per_conversion &&
+          impressions == o.impressions &&
+          average_cpc == o.average_cpc &&
+          conversions == o.conversions &&
+          target_cpa == o.target_cpa &&
+          target_roas == o.target_roas
     end
 
     # @see the `==` method
@@ -200,7 +253,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, budget, budget_level, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, platform_specific_data].hash
+      [id, name, type, status, campaign_count, clicks, cost, cost_per_conversion, impressions, average_cpc, conversions, target_cpa, target_roas].hash
     end
 
     # Builds the object from hash

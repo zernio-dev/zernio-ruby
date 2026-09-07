@@ -35,14 +35,17 @@ module Zernio
 
     attr_accessor :status
 
-    # Campaign bid strategy. Meta stores `bid_strategy` alongside the budget, so this REQUIRES `budgetAmount` + `budgetType` on the same request; sending it without a campaign budget is a 400. A campaign carrying a strategy without its `bid_amount` makes every ad set created under it fail with an error that names the ad set (code 100, subcode 1815857), so the bad state is rejected up front rather than accepted. To bid at ad-set level, set the strategy there instead.
+    # Campaign bid strategy. Meta stores `bid_strategy` alongside the budget, so this REQUIRES `budgetAmount` + `budgetType` on the same request; sending it without a campaign budget is a 400. A campaign carrying a strategy without its `bid_amount` makes every ad set created under it fail with an error that names the ad set (code 100, subcode 1815857), so the bad state is rejected up front rather than accepted. To bid at ad-set level on Meta, set the strategy there instead. On Google: LOWEST_COST_WITHOUT_CAP = Maximize Conversions, COST_CAP + bidAmount = Target CPA, LOWEST_COST_WITH_MIN_ROAS + roasAverageFloor = Target ROAS, LOWEST_COST_WITH_BID_CAP + bidAmount = Maximize Clicks with a CPC ceiling; portfolioBidStrategyId attaches a portfolio strategy instead.
     attr_accessor :bid_strategy
 
-    # Whole currency units (USD: 5 = $5.00). Required for LOWEST_COST_WITH_BID_CAP and COST_CAP; ignored otherwise. Validated here but NOT stored by Meta: the campaign object has no bid_amount field, only bid_strategy lives on it. The amount takes effect once an ad set joins this campaign (existingCampaignId on POST /v1/ads/create) and supplies its own bidAmount there.
+    # Whole currency units (USD: 5 = $5.00). Required for LOWEST_COST_WITH_BID_CAP and COST_CAP; ignored otherwise. On Meta, validated here but NOT stored: the campaign object has no bid_amount field, only bid_strategy lives on it, and the amount takes effect once an ad set joins this campaign (existingCampaignId on POST /v1/ads/create) and supplies its own bidAmount there. On Google, stored directly on the campaign's bidding strategy.
     attr_accessor :bid_amount
 
     # Decimal ROAS multiplier (2.0 = 2.0x). Required for LOWEST_COST_WITH_MIN_ROAS.
     attr_accessor :roas_average_floor
+
+    # Google only. Attach an existing portfolio bid strategy (numeric id from GET /v1/ads/bid-strategies) to the new campaign instead of a standard one. Exclusive with bidStrategy.
+    attr_accessor :portfolio_bid_strategy_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -79,7 +82,8 @@ module Zernio
         :'status' => :'status',
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
-        :'roas_average_floor' => :'roasAverageFloor'
+        :'roas_average_floor' => :'roasAverageFloor',
+        :'portfolio_bid_strategy_id' => :'portfolioBidStrategyId'
       }
     end
 
@@ -106,7 +110,8 @@ module Zernio
         :'status' => :'String',
         :'bid_strategy' => :'String',
         :'bid_amount' => :'Float',
-        :'roas_average_floor' => :'Float'
+        :'roas_average_floor' => :'Float',
+        :'portfolio_bid_strategy_id' => :'String'
       }
     end
 
@@ -187,6 +192,10 @@ module Zernio
       if attributes.key?(:'roas_average_floor')
         self.roas_average_floor = attributes[:'roas_average_floor']
       end
+
+      if attributes.key?(:'portfolio_bid_strategy_id')
+        self.portfolio_bid_strategy_id = attributes[:'portfolio_bid_strategy_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -214,6 +223,11 @@ module Zernio
         invalid_properties.push('invalid value for "goal", goal cannot be nil.')
       end
 
+      pattern = Regexp.new(/^\d+$/)
+      if !@portfolio_bid_strategy_id.nil? && @portfolio_bid_strategy_id !~ pattern
+        invalid_properties.push("invalid value for \"portfolio_bid_strategy_id\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -234,6 +248,7 @@ module Zernio
       return false unless status_validator.valid?(@status)
       bid_strategy_validator = EnumAttributeValidator.new('String', ["LOWEST_COST_WITHOUT_CAP", "LOWEST_COST_WITH_BID_CAP", "COST_CAP", "LOWEST_COST_WITH_MIN_ROAS"])
       return false unless bid_strategy_validator.valid?(@bid_strategy)
+      return false if !@portfolio_bid_strategy_id.nil? && @portfolio_bid_strategy_id !~ Regexp.new(/^\d+$/)
       true
     end
 
@@ -311,6 +326,21 @@ module Zernio
       @bid_strategy = bid_strategy
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] portfolio_bid_strategy_id Value to be assigned
+    def portfolio_bid_strategy_id=(portfolio_bid_strategy_id)
+      if portfolio_bid_strategy_id.nil?
+        fail ArgumentError, 'portfolio_bid_strategy_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if portfolio_bid_strategy_id !~ pattern
+        fail ArgumentError, "invalid value for \"portfolio_bid_strategy_id\", must conform to the pattern #{pattern}."
+      end
+
+      @portfolio_bid_strategy_id = portfolio_bid_strategy_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -326,7 +356,8 @@ module Zernio
           status == o.status &&
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
-          roas_average_floor == o.roas_average_floor
+          roas_average_floor == o.roas_average_floor &&
+          portfolio_bid_strategy_id == o.portfolio_bid_strategy_id
     end
 
     # @see the `==` method
@@ -338,7 +369,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, special_ad_categories, budget_amount, budget_type, status, bid_strategy, bid_amount, roas_average_floor].hash
+      [account_id, ad_account_id, name, goal, special_ad_categories, budget_amount, budget_type, status, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id].hash
     end
 
     # Builds the object from hash

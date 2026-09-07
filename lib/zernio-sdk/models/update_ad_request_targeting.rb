@@ -14,13 +14,16 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta + TikTok (demographics/interests), Google (keyword edits only), and LinkedIn (geo countries). Pinterest / X return 501. 
+  # Meta + TikTok (demographics/interests), Google (keyword and device bid adjustment edits only), and LinkedIn (geo countries). Pinterest / X return 501. 
   class UpdateAdRequestTargeting < ApiModelBase
     # Google only. The FULL new set of positive keywords for the ad group; live keywords not listed are removed. Entries are strings (BROAD) or { text, matchType } with matchType exact | phrase | broad. Mirrored to GET /v1/ads/keywords immediately.
     attr_accessor :keywords
 
     # Google only. Same declarative contract as keywords, for the ad group's negative keywords.
     attr_accessor :negative_keywords
+
+    # Google only. The FULL new set of device criteria for the campaign; devices not listed are excluded. Entries are a device name alone (included, no bid adjustment) or { device, bidModifier }.
+    attr_accessor :devices
 
     attr_accessor :age_min
 
@@ -61,6 +64,7 @@ module Zernio
       {
         :'keywords' => :'keywords',
         :'negative_keywords' => :'negativeKeywords',
+        :'devices' => :'devices',
         :'age_min' => :'ageMin',
         :'age_max' => :'ageMax',
         :'countries' => :'countries',
@@ -84,6 +88,7 @@ module Zernio
       {
         :'keywords' => :'Array<UpdateAdRequestTargetingKeywordsInner>',
         :'negative_keywords' => :'Array<UpdateAdRequestTargetingKeywordsInner>',
+        :'devices' => :'Array<UpdateAdRequestTargetingDevicesInner>',
         :'age_min' => :'Integer',
         :'age_max' => :'Integer',
         :'countries' => :'Array<String>',
@@ -123,6 +128,12 @@ module Zernio
       if attributes.key?(:'negative_keywords')
         if (value = attributes[:'negative_keywords']).is_a?(Array)
           self.negative_keywords = value
+        end
+      end
+
+      if attributes.key?(:'devices')
+        if (value = attributes[:'devices']).is_a?(Array)
+          self.devices = value
         end
       end
 
@@ -241,6 +252,7 @@ module Zernio
       self.class == o.class &&
           keywords == o.keywords &&
           negative_keywords == o.negative_keywords &&
+          devices == o.devices &&
           age_min == o.age_min &&
           age_max == o.age_max &&
           countries == o.countries &&
@@ -257,7 +269,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [keywords, negative_keywords, age_min, age_max, countries, interests, advantage_audience].hash
+      [keywords, negative_keywords, devices, age_min, age_max, countries, interests, advantage_audience].hash
     end
 
     # Builds the object from hash

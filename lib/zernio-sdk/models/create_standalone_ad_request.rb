@@ -259,7 +259,7 @@ module Zernio
     # Restrict the audience by gender. 'male' targets men only, 'female' targets women only, 'all' (default) targets everyone. Applied on Meta, TikTok and Pinterest. Ignored on Google, LinkedIn and X.
     attr_accessor :gender
 
-    # Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Meta bid strategy applied to the ad set.  OpenAI Ads: required on every ad group via this flat field, the only channel it supports (`platformSpecificData` is Meta/LinkedIn-only and returns 400 for OpenAI). No auto-bid option exists; send `LOWEST_COST_WITH_BID_CAP` or `COST_CAP` together with `bidAmount`, omitting it returns 400. 
+    # Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Meta bid strategy applied to the ad set.  OpenAI Ads: required on every ad group via this flat field, the only channel it supports (`platformSpecificData` is Meta/LinkedIn-only and returns 400 for OpenAI). No auto-bid option exists; send `LOWEST_COST_WITH_BID_CAP` or `COST_CAP` together with `bidAmount`, omitting it returns 400.  Google (not deprecated there, this shared flat field is Google's only shape): applied to the campaign this call creates. On Google: LOWEST_COST_WITHOUT_CAP = Maximize Conversions, COST_CAP + bidAmount = Target CPA, LOWEST_COST_WITH_MIN_ROAS + roasAverageFloor = Target ROAS, LOWEST_COST_WITH_BID_CAP + bidAmount = Maximize Clicks with a CPC ceiling; portfolioBidStrategyId attaches a portfolio strategy instead. Omitted, the campaign falls back to a goal-based default. 
     attr_accessor :bid_strategy
 
     # Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Bid cap in WHOLE currency units (USD: 5 = $5.00; JPY: 100 = ¥100). Required when `bidStrategy` is `LOWEST_COST_WITH_BID_CAP` or `COST_CAP`. Meta only: sending `bidAmount` WITHOUT `bidStrategy` requires `existingCampaignId` (400 otherwise), and sets the new ad set's cap under the joined campaign's COST_CAP / LOWEST_COST_WITH_BID_CAP parent. The strategy itself is inherited from the campaign. Restating bidStrategy here is accepted but has no effect on the ad set.  Rejected with 400 in `adSetId` attach mode: that shape inherits its cap from the platform. Use `PUT /v1/ads/ad-sets/{adSetId}` there instead. 
@@ -267,6 +267,9 @@ module Zernio
 
     # Deprecated: send it inside `platformSpecificData` instead (Meta today; TikTok's nested shape is planned). The flat field keeps working during the deprecation window; sending both shapes returns a 400.  Minimum ROAS as a decimal multiplier (e.g. 2.0 = 2.0x ROAS). Required when `bidStrategy` is `LOWEST_COST_WITH_MIN_ROAS`. Sending it without `bidStrategy` is a 400. Sent to Meta as `bid_constraints.roas_average_floor` × 10000. Known gap: a CBO campaign's ROAS floor lives on the campaign only (set via `POST /v1/ads/campaigns`); there is no supported way to set it while joining a CBO campaign here. 
     attr_accessor :roas_average_floor
+
+    # Google only. Attach an existing portfolio bid strategy (numeric id from GET /v1/ads/bid-strategies) to the new campaign instead of a standard one. Exclusive with bidStrategy.
+    attr_accessor :portfolio_bid_strategy_id
 
     # Meta only (facebook, instagram; other platforms return 400). Value rule set to attach to the new ad set, from `/v1/ads/value-rule-sets`. Attachment is driven by this id, so `valueRulesApplied` is optional alongside it.  Rejected with 400 in `adSetId` attach mode: that shape inherits the existing ad set's attachment, so the field would be silently ignored. Use `PUT /v1/ads/ad-sets/{adSetId}` there instead.  Ignored (stripped before the ad-set create) when `buyingType` is `RESERVED`: value rules only apply to auction ad sets on `LOWEST_COST_WITHOUT_CAP` or `COST_CAP`, and a Reach & Frequency reservation has no auction bid strategy.  Read back with `GET /v1/ads/ad-sets/{adSetId}?fields=value_rule_set_id`; the attachment is not mirrored onto Zernio's ad documents. 
     attr_accessor :value_rule_set_id
@@ -405,6 +408,7 @@ module Zernio
         :'bid_strategy' => :'bidStrategy',
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
+        :'portfolio_bid_strategy_id' => :'portfolioBidStrategyId',
         :'value_rule_set_id' => :'valueRuleSetId',
         :'value_rules_applied' => :'valueRulesApplied',
         :'platform_specific_data' => :'platformSpecificData',
@@ -518,6 +522,7 @@ module Zernio
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
+        :'portfolio_bid_strategy_id' => :'String',
         :'value_rule_set_id' => :'String',
         :'value_rules_applied' => :'Boolean',
         :'platform_specific_data' => :'CreateStandaloneAdRequestPlatformSpecificData',
@@ -982,6 +987,10 @@ module Zernio
         self.roas_average_floor = attributes[:'roas_average_floor']
       end
 
+      if attributes.key?(:'portfolio_bid_strategy_id')
+        self.portfolio_bid_strategy_id = attributes[:'portfolio_bid_strategy_id']
+      end
+
       if attributes.key?(:'value_rule_set_id')
         self.value_rule_set_id = attributes[:'value_rule_set_id']
       end
@@ -1177,6 +1186,11 @@ module Zernio
       end
 
       pattern = Regexp.new(/^\d+$/)
+      if !@portfolio_bid_strategy_id.nil? && @portfolio_bid_strategy_id !~ pattern
+        invalid_properties.push("invalid value for \"portfolio_bid_strategy_id\", must conform to the pattern #{pattern}.")
+      end
+
+      pattern = Regexp.new(/^\d+$/)
       if !@value_rule_set_id.nil? && @value_rule_set_id !~ pattern
         invalid_properties.push("invalid value for \"value_rule_set_id\", must conform to the pattern #{pattern}.")
       end
@@ -1258,6 +1272,7 @@ module Zernio
       return false if !@attribution_spec.nil? && @attribution_spec.length < 1
       gender_validator = EnumAttributeValidator.new('String', ["all", "male", "female"])
       return false unless gender_validator.valid?(@gender)
+      return false if !@portfolio_bid_strategy_id.nil? && @portfolio_bid_strategy_id !~ Regexp.new(/^\d+$/)
       return false if !@value_rule_set_id.nil? && @value_rule_set_id !~ Regexp.new(/^\d+$/)
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
@@ -1777,6 +1792,21 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] portfolio_bid_strategy_id Value to be assigned
+    def portfolio_bid_strategy_id=(portfolio_bid_strategy_id)
+      if portfolio_bid_strategy_id.nil?
+        fail ArgumentError, 'portfolio_bid_strategy_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if portfolio_bid_strategy_id !~ pattern
+        fail ArgumentError, "invalid value for \"portfolio_bid_strategy_id\", must conform to the pattern #{pattern}."
+      end
+
+      @portfolio_bid_strategy_id = portfolio_bid_strategy_id
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] value_rule_set_id Value to be assigned
     def value_rule_set_id=(value_rule_set_id)
       if value_rule_set_id.nil?
@@ -1922,6 +1952,7 @@ module Zernio
           bid_strategy == o.bid_strategy &&
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
+          portfolio_bid_strategy_id == o.portfolio_bid_strategy_id &&
           value_rule_set_id == o.value_rule_set_id &&
           value_rules_applied == o.value_rules_applied &&
           platform_specific_data == o.platform_specific_data &&
@@ -1942,7 +1973,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
     end
 
     # Builds the object from hash

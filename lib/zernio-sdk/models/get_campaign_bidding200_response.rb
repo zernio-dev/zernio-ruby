@@ -14,25 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Echoes back only the fields you sent, plus `updated`.
-  class UpdateAdCampaign200Response < ApiModelBase
-    # Local Ad documents mirrored. 0 on the empty-campaign path.
-    attr_accessor :updated
+  class GetCampaignBidding200Response < ApiModelBase
+    # campaign.advertising_channel_type. COST_CAP's underlying Google field differs by channel; see bidStrategy on PUT.
+    attr_accessor :channel
 
-    attr_accessor :budget
+    # Google's raw enum: MAXIMIZE_CONVERSIONS, TARGET_CPA, MAXIMIZE_CONVERSION_VALUE, TARGET_ROAS, TARGET_SPEND, MANUAL_CPC, TARGET_IMPRESSION_SHARE, or another Google adds later.
+    attr_accessor :bidding_strategy_type
 
-    attr_accessor :budget_level
+    attr_accessor :bid_spec
 
-    attr_accessor :bid_strategy
+    attr_accessor :portfolio
 
-    attr_accessor :bid_amount
-
-    attr_accessor :roas_average_floor
-
-    # Google only. Echoed back, but NOT mirrored onto local Ad documents (no column for it yet).
-    attr_accessor :portfolio_bid_strategy_id
-
-    attr_accessor :platform_specific_data
+    attr_accessor :campaign_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -59,14 +52,11 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'updated' => :'updated',
-        :'budget' => :'budget',
-        :'budget_level' => :'budgetLevel',
-        :'bid_strategy' => :'bidStrategy',
-        :'bid_amount' => :'bidAmount',
-        :'roas_average_floor' => :'roasAverageFloor',
-        :'portfolio_bid_strategy_id' => :'portfolioBidStrategyId',
-        :'platform_specific_data' => :'platformSpecificData'
+        :'channel' => :'channel',
+        :'bidding_strategy_type' => :'biddingStrategyType',
+        :'bid_spec' => :'bidSpec',
+        :'portfolio' => :'portfolio',
+        :'campaign_id' => :'campaignId'
       }
     end
 
@@ -83,14 +73,11 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'updated' => :'Integer',
-        :'budget' => :'AdBudget',
-        :'budget_level' => :'String',
-        :'bid_strategy' => :'BidStrategy',
-        :'bid_amount' => :'Float',
-        :'roas_average_floor' => :'Float',
-        :'portfolio_bid_strategy_id' => :'String',
-        :'platform_specific_data' => :'Object'
+        :'channel' => :'String',
+        :'bidding_strategy_type' => :'String',
+        :'bid_spec' => :'CampaignBiddingBidSpec',
+        :'portfolio' => :'CampaignBiddingPortfolio',
+        :'campaign_id' => :'String'
       }
     end
 
@@ -100,52 +87,47 @@ module Zernio
       ])
     end
 
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'CampaignBidding'
+      ]
+    end
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdCampaign200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetCampaignBidding200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdCampaign200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetCampaignBidding200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'updated')
-        self.updated = attributes[:'updated']
+      if attributes.key?(:'channel')
+        self.channel = attributes[:'channel']
       end
 
-      if attributes.key?(:'budget')
-        self.budget = attributes[:'budget']
+      if attributes.key?(:'bidding_strategy_type')
+        self.bidding_strategy_type = attributes[:'bidding_strategy_type']
       end
 
-      if attributes.key?(:'budget_level')
-        self.budget_level = attributes[:'budget_level']
+      if attributes.key?(:'bid_spec')
+        self.bid_spec = attributes[:'bid_spec']
       end
 
-      if attributes.key?(:'bid_strategy')
-        self.bid_strategy = attributes[:'bid_strategy']
+      if attributes.key?(:'portfolio')
+        self.portfolio = attributes[:'portfolio']
       end
 
-      if attributes.key?(:'bid_amount')
-        self.bid_amount = attributes[:'bid_amount']
-      end
-
-      if attributes.key?(:'roas_average_floor')
-        self.roas_average_floor = attributes[:'roas_average_floor']
-      end
-
-      if attributes.key?(:'portfolio_bid_strategy_id')
-        self.portfolio_bid_strategy_id = attributes[:'portfolio_bid_strategy_id']
-      end
-
-      if attributes.key?(:'platform_specific_data')
-        self.platform_specific_data = attributes[:'platform_specific_data']
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
       end
     end
 
@@ -161,19 +143,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      budget_level_validator = EnumAttributeValidator.new('String', ["campaign"])
-      return false unless budget_level_validator.valid?(@budget_level)
+      channel_validator = EnumAttributeValidator.new('String', ["SEARCH", "DISPLAY"])
+      return false unless channel_validator.valid?(@channel)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] budget_level Object to be assigned
-    def budget_level=(budget_level)
-      validator = EnumAttributeValidator.new('String', ["campaign"])
-      unless validator.valid?(budget_level)
-        fail ArgumentError, "invalid value for \"budget_level\", must be one of #{validator.allowable_values}."
+    # @param [Object] channel Object to be assigned
+    def channel=(channel)
+      validator = EnumAttributeValidator.new('String', ["SEARCH", "DISPLAY"])
+      unless validator.valid?(channel)
+        fail ArgumentError, "invalid value for \"channel\", must be one of #{validator.allowable_values}."
       end
-      @budget_level = budget_level
+      @channel = channel
     end
 
     # Checks equality by comparing each attribute.
@@ -181,14 +163,11 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          updated == o.updated &&
-          budget == o.budget &&
-          budget_level == o.budget_level &&
-          bid_strategy == o.bid_strategy &&
-          bid_amount == o.bid_amount &&
-          roas_average_floor == o.roas_average_floor &&
-          portfolio_bid_strategy_id == o.portfolio_bid_strategy_id &&
-          platform_specific_data == o.platform_specific_data
+          channel == o.channel &&
+          bidding_strategy_type == o.bidding_strategy_type &&
+          bid_spec == o.bid_spec &&
+          portfolio == o.portfolio &&
+          campaign_id == o.campaign_id
     end
 
     # @see the `==` method
@@ -200,7 +179,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [updated, budget, budget_level, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, platform_specific_data].hash
+      [channel, bidding_strategy_type, bid_spec, portfolio, campaign_id].hash
     end
 
     # Builds the object from hash

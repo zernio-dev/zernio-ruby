@@ -113,4 +113,10 @@ describe Zernio::CreateAdCampaignRequest do
     end
   end
 
+  describe 'test attribute "portfolio_bid_strategy_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

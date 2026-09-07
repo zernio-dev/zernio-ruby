@@ -142,6 +142,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
 *Zernio::AdCampaignsApi* | [**create_ad_campaign**](docs/AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign
 *Zernio::AdCampaignsApi* | [**create_ad_set**](docs/AdCampaignsApi.md#create_ad_set) | **POST** /v1/ads/ad-sets | Create a standalone ad group
+*Zernio::AdCampaignsApi* | [**create_bid_strategy**](docs/AdCampaignsApi.md#create_bid_strategy) | **POST** /v1/ads/bid-strategies | Create a Google Ads portfolio bid strategy
 *Zernio::AdCampaignsApi* | [**create_standalone_ad**](docs/AdCampaignsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Zernio::AdCampaignsApi* | [**delete_ad**](docs/AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdCampaignsApi* | [**delete_ad_campaign**](docs/AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign
@@ -153,11 +154,13 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**get_ad_set_details**](docs/AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase
 *Zernio::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Zernio::AdCampaignsApi* | [**get_ads_timeline**](docs/AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics
+*Zernio::AdCampaignsApi* | [**get_campaign_bidding**](docs/AdCampaignsApi.md#get_campaign_bidding) | **GET** /v1/ads/campaigns/{campaignId}/bidding | Read a campaign's current bidding
 *Zernio::AdCampaignsApi* | [**get_campaign_targeting**](docs/AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign's device, location, and language targeting
 *Zernio::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
 *Zernio::AdCampaignsApi* | [**list_ad_keywords**](docs/AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords
 *Zernio::AdCampaignsApi* | [**list_ad_sets**](docs/AdCampaignsApi.md#list_ad_sets) | **GET** /v1/ads/ad-sets | List ad sets
 *Zernio::AdCampaignsApi* | [**list_ads**](docs/AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads
+*Zernio::AdCampaignsApi* | [**list_bid_strategies**](docs/AdCampaignsApi.md#list_bid_strategies) | **GET** /v1/ads/bid-strategies | List Google Ads portfolio bid strategies
 *Zernio::AdCampaignsApi* | [**list_campaign_negative_keywords**](docs/AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords
 *Zernio::AdCampaignsApi* | [**remove_ad_keyword**](docs/AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword
 *Zernio::AdCampaignsApi* | [**replace_campaign_negative_keywords**](docs/AdCampaignsApi.md#replace_campaign_negative_keywords) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keywords | Replace campaign-level negative keywords
@@ -168,6 +171,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
 *Zernio::AdCampaignsApi* | [**update_ad_status**](docs/AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
+*Zernio::AdCampaignsApi* | [**update_bid_strategy**](docs/AdCampaignsApi.md#update_bid_strategy) | **PATCH** /v1/ads/bid-strategies/{strategyId} | Update a Google Ads portfolio bid strategy
 *Zernio::AdCampaignsApi* | [**update_campaign_targeting**](docs/AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign's device, location, or language targeting
 *Zernio::AdCreativesApi* | [**create_ad_creative**](docs/AdCreativesApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative
 *Zernio::AdCreativesApi* | [**delete_ad_creative**](docs/AdCreativesApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative
@@ -835,6 +839,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CampaignAnalyticsResponseAnalytics](docs/CampaignAnalyticsResponseAnalytics.md)
  - [Zernio::CampaignAnalyticsResponseAnalyticsDailyInner](docs/CampaignAnalyticsResponseAnalyticsDailyInner.md)
  - [Zernio::CampaignAnalyticsResponseCampaign](docs/CampaignAnalyticsResponseCampaign.md)
+ - [Zernio::CampaignBidding](docs/CampaignBidding.md)
+ - [Zernio::CampaignBiddingBidSpec](docs/CampaignBiddingBidSpec.md)
+ - [Zernio::CampaignBiddingPortfolio](docs/CampaignBiddingPortfolio.md)
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
  - [Zernio::CancelPhoneNumberPortIn200Response](docs/CancelPhoneNumberPortIn200Response.md)
  - [Zernio::ChannelPicker](docs/ChannelPicker.md)
@@ -903,6 +910,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAdSetRequest](docs/CreateAdSetRequest.md)
  - [Zernio::CreateApiKey201Response](docs/CreateApiKey201Response.md)
  - [Zernio::CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
+ - [Zernio::CreateBidStrategy201Response](docs/CreateBidStrategy201Response.md)
+ - [Zernio::CreateBidStrategy201ResponseStrategy](docs/CreateBidStrategy201ResponseStrategy.md)
+ - [Zernio::CreateBidStrategyRequest](docs/CreateBidStrategyRequest.md)
  - [Zernio::CreateBlog201Response](docs/CreateBlog201Response.md)
  - [Zernio::CreateBlogArticle201Response](docs/CreateBlogArticle201Response.md)
  - [Zernio::CreateBlogArticleRequest](docs/CreateBlogArticleRequest.md)
@@ -1244,6 +1254,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetCallsUsage200ResponseGroupsInner](docs/GetCallsUsage200ResponseGroupsInner.md)
  - [Zernio::GetCallsUsage200ResponseTotals](docs/GetCallsUsage200ResponseTotals.md)
  - [Zernio::GetCampaignAnalytics202Response](docs/GetCampaignAnalytics202Response.md)
+ - [Zernio::GetCampaignBidding200Response](docs/GetCampaignBidding200Response.md)
  - [Zernio::GetCampaignTargeting200Response](docs/GetCampaignTargeting200Response.md)
  - [Zernio::GetCampaignTargeting200ResponseDevicesInner](docs/GetCampaignTargeting200ResponseDevicesInner.md)
  - [Zernio::GetCampaignTargeting200ResponseLanguagesInner](docs/GetCampaignTargeting200ResponseLanguagesInner.md)
@@ -1633,6 +1644,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAds202Response](docs/ListAds202Response.md)
  - [Zernio::ListAdsBusinessCenters200Response](docs/ListAdsBusinessCenters200Response.md)
  - [Zernio::ListApiKeys200Response](docs/ListApiKeys200Response.md)
+ - [Zernio::ListBidStrategies200Response](docs/ListBidStrategies200Response.md)
  - [Zernio::ListBlogArticles200Response](docs/ListBlogArticles200Response.md)
  - [Zernio::ListBlogs200Response](docs/ListBlogs200Response.md)
  - [Zernio::ListBroadcastRecipients200Response](docs/ListBroadcastRecipients200Response.md)
@@ -1842,6 +1854,7 @@ Class | Method | HTTP request | Description
  - [Zernio::PlatformAnalytics](docs/PlatformAnalytics.md)
  - [Zernio::PlatformTarget](docs/PlatformTarget.md)
  - [Zernio::PlatformTargetAccountId](docs/PlatformTargetAccountId.md)
+ - [Zernio::PortfolioBidStrategy](docs/PortfolioBidStrategy.md)
  - [Zernio::Post](docs/Post.md)
  - [Zernio::PostAnalytics](docs/PostAnalytics.md)
  - [Zernio::PostCreateResponse](docs/PostCreateResponse.md)
@@ -2173,6 +2186,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdRequestBudget](docs/UpdateAdRequestBudget.md)
  - [Zernio::UpdateAdRequestCreative](docs/UpdateAdRequestCreative.md)
  - [Zernio::UpdateAdRequestTargeting](docs/UpdateAdRequestTargeting.md)
+ - [Zernio::UpdateAdRequestTargetingDevicesInner](docs/UpdateAdRequestTargetingDevicesInner.md)
+ - [Zernio::UpdateAdRequestTargetingDevicesInnerOneOf](docs/UpdateAdRequestTargetingDevicesInnerOneOf.md)
  - [Zernio::UpdateAdRequestTargetingInterestsInner](docs/UpdateAdRequestTargetingInterestsInner.md)
  - [Zernio::UpdateAdRequestTargetingKeywordsInner](docs/UpdateAdRequestTargetingKeywordsInner.md)
  - [Zernio::UpdateAdRequestTargetingKeywordsInnerOneOf](docs/UpdateAdRequestTargetingKeywordsInnerOneOf.md)
@@ -2186,6 +2201,9 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdTrackingTagsRequest](docs/UpdateAdTrackingTagsRequest.md)
  - [Zernio::UpdateAdTrackingTagsRequestCreative](docs/UpdateAdTrackingTagsRequestCreative.md)
  - [Zernio::UpdateAdTrackingTagsRequestUrlTagsInner](docs/UpdateAdTrackingTagsRequestUrlTagsInner.md)
+ - [Zernio::UpdateBidStrategy200Response](docs/UpdateBidStrategy200Response.md)
+ - [Zernio::UpdateBidStrategy200ResponseStrategy](docs/UpdateBidStrategy200ResponseStrategy.md)
+ - [Zernio::UpdateBidStrategyRequest](docs/UpdateBidStrategyRequest.md)
  - [Zernio::UpdateBlogArticleRequest](docs/UpdateBlogArticleRequest.md)
  - [Zernio::UpdateBlogRequest](docs/UpdateBlogRequest.md)
  - [Zernio::UpdateBlueskySettingsRequest](docs/UpdateBlueskySettingsRequest.md)

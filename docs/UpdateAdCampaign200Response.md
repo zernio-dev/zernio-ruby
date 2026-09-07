@@ -10,6 +10,7 @@
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
 | **bid_amount** | **Float** |  | [optional] |
 | **roas_average_floor** | **Float** |  | [optional] |
+| **portfolio_bid_strategy_id** | **String** | Google only. Echoed back, but NOT mirrored onto local Ad documents (no column for it yet). | [optional] |
 | **platform_specific_data** | **Object** |  | [optional] |
 
 ## Example
@@ -24,6 +25,7 @@ instance = Zernio::UpdateAdCampaign200Response.new(
   bid_strategy: null,
   bid_amount: null,
   roas_average_floor: null,
+  portfolio_bid_strategy_id: null,
   platform_specific_data: null
 )
 ```
