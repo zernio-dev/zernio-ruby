@@ -4,6 +4,7 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**add_account_callouts**](AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account-level callout extensions |
 | [**create_custom_conversion**](AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion |
 | [**create_high_demand_period**](AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase |
 | [**create_value_rule_set**](AdAccountsApi.md#create_value_rule_set) | **POST** /v1/ads/value-rule-sets | Create a value rule set |
@@ -14,6 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_dsa_defaults**](AdAccountsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults |
 | [**get_dsa_recommendations**](AdAccountsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions |
 | [**get_value_rule_set**](AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set |
+| [**list_account_callouts**](AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account-level callout extensions |
 | [**list_ad_accounts**](AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_labels**](AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels |
 | [**list_ad_studies**](AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies |
@@ -22,8 +24,78 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_high_demand_periods**](AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules |
 | [**list_meta_businesses**](AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list |
 | [**list_value_rule_sets**](AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets |
+| [**remove_account_callout**](AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove an account-level callout extension |
 | [**update_ad_account**](AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings |
 | [**update_value_rule_set**](AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set |
+
+
+## add_account_callouts
+
+> <AddAccountCallouts201Response> add_account_callouts(add_account_callouts_request)
+
+Add account-level callout extensions
+
+Creates one asset plus one `customerAsset` link (field type CALLOUT) per callout text, in a single mutate. Google only; every other platform returns 501.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+add_account_callouts_request = Zernio::AddAccountCalloutsRequest.new({account_id: 'account_id_example', callouts: ['callouts_example']}) # AddAccountCalloutsRequest | 
+
+begin
+  # Add account-level callout extensions
+  result = api_instance.add_account_callouts(add_account_callouts_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->add_account_callouts: #{e}"
+end
+```
+
+#### Using the add_account_callouts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AddAccountCallouts201Response>, Integer, Hash)> add_account_callouts_with_http_info(add_account_callouts_request)
+
+```ruby
+begin
+  # Add account-level callout extensions
+  data, status_code, headers = api_instance.add_account_callouts_with_http_info(add_account_callouts_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AddAccountCallouts201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->add_account_callouts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **add_account_callouts_request** | [**AddAccountCalloutsRequest**](AddAccountCalloutsRequest.md) |  |  |
+
+### Return type
+
+[**AddAccountCallouts201Response**](AddAccountCallouts201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## create_custom_conversion
@@ -750,6 +822,79 @@ end
 - **Accept**: application/json
 
 
+## list_account_callouts
+
+> <ListAccountCallouts200Response> list_account_callouts(account_id, opts)
+
+List account-level callout extensions
+
+Google Ads compliance row C.75: callout assets linked at the CUSTOMER level via `customer_asset` (not a campaign or ad group), so they serve fleet-wide across the account. Google only; every other platform returns 501. Draws on the shared Google Ads operations budget.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | Google ads SocialAccount id.
+opts = {
+  customer_id: 'customer_id_example' # String | Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+}
+
+begin
+  # List account-level callout extensions
+  result = api_instance.list_account_callouts(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_account_callouts: #{e}"
+end
+```
+
+#### Using the list_account_callouts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAccountCallouts200Response>, Integer, Hash)> list_account_callouts_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List account-level callout extensions
+  data, status_code, headers = api_instance.list_account_callouts_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAccountCallouts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_account_callouts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Google ads SocialAccount id. |  |
+| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+
+### Return type
+
+[**ListAccountCallouts200Response**](ListAccountCallouts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_ad_accounts
 
 > <ListAdAccounts200Response> list_ad_accounts(account_id, opts)
@@ -1349,6 +1494,75 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_account_callout
+
+> <RemoveAccountCallout200Response> remove_account_callout(remove_account_callout_request)
+
+Remove an account-level callout extension
+
+Removes the `customerAsset` link (`customers/{cid}/customerAssets/{assetId}~CALLOUT`). Google only; every other platform returns 501.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+remove_account_callout_request = Zernio::RemoveAccountCalloutRequest.new({account_id: 'account_id_example', asset_id: 'asset_id_example'}) # RemoveAccountCalloutRequest | 
+
+begin
+  # Remove an account-level callout extension
+  result = api_instance.remove_account_callout(remove_account_callout_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_account_callout: #{e}"
+end
+```
+
+#### Using the remove_account_callout_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_callout_with_http_info(remove_account_callout_request)
+
+```ruby
+begin
+  # Remove an account-level callout extension
+  data, status_code, headers = api_instance.remove_account_callout_with_http_info(remove_account_callout_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveAccountCallout200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_account_callout_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **remove_account_callout_request** | [**RemoveAccountCalloutRequest**](RemoveAccountCalloutRequest.md) |  |  |
+
+### Return type
+
+[**RemoveAccountCallout200Response**](RemoveAccountCallout200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

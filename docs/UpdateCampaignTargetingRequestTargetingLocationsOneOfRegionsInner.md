@@ -1,4 +1,4 @@
-# Zernio::BoostPostRequestTargetingRegionsInner
+# Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::BoostPostRequestTargetingRegionsInner.new(
+instance = Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.new(
   key: null,
   name: null
 )

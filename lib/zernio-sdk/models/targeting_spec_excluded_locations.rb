@@ -61,9 +61,9 @@ module Zernio
     def self.openapi_types
       {
         :'countries' => :'Array<String>',
-        :'regions' => :'Array<BoostPostRequestTargetingRegionsInner>',
+        :'regions' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
         :'cities' => :'Array<TargetingSpecExcludedLocationsCitiesInner>',
-        :'zips' => :'Array<BoostPostRequestTargetingRegionsInner>',
+        :'zips' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
         :'places' => :'Array<TargetingSpecExcludedLocationsPlacesInner>',
         :'neighborhoods' => :'Array<TargetingSpecExcludedLocationsPlacesInner>',
         :'custom_locations' => :'Array<TargetingSpecCustomLocationsInner>'

@@ -58,6 +58,18 @@ describe 'ConversionsApi' do
     end
   end
 
+  # unit tests for create_conversion_action
+  # Create a website conversion action
+  # Creates a &#x60;WEBPAGE&#x60; conversion action (category &#x60;DEFAULT&#x60;) and returns it with its tag snippets, read back after creation since Google never returns them on the create response itself. Google-only; other platforms return &#x60;501&#x60;. Requires the Ads add-on. 
+  # @param create_conversion_action_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateConversionAction201Response]
+  describe 'create_conversion_action test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_conversion_destination
   # Create a conversion destination
   # Create a new conversion destination on the platform. Supported for LinkedIn (conversion rule) and Google Ads (conversion action). Meta and OpenAI Ads pixels are created via their own tracking-tags flow instead (&#x60;POST /v1/accounts/{accountId}/tracking-tags&#x60;); this endpoint returns 405 for both.  **LinkedIn:** creation is NOT idempotent. A retry creates a second destination. Deduplicate before retrying.  **Google Ads:** calling with a name that already exists reuses the existing conversion action transparently (the response is identical to a fresh create). Calling with the same name but a different category returns a typed &#x60;IDEMPOTENCY_CONFLICT&#x60; (409) rather than silently returning the mismatched action.  **LinkedIn:** the rule is created with &#x60;conversionMethod&#x3D;CONVERSIONS_API&#x60; and (by default) auto-associated with all of the ad account&#39;s campaigns via &#x60;autoAssociationType&#x3D;ALL_CAMPAIGNS&#x60;. Pass &#x60;autoAssociationType: NONE&#x60; to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for &#x60;SUBMIT_APPLICATION&#x60;, &#x60;PURCHASE&#x60;, &#x60;ADD_TO_CART&#x60;, &#x60;QUALIFIED_LEAD&#x60;, and &#x60;LEAD&#x60; rule types; the API rejects other combinations locally.  **Google Ads:** the conversion action is created with &#x60;type&#x3D;UPLOAD_CLICKS&#x60; (required for API-uploaded offline conversions, immutable after creation). The &#x60;type&#x60; field carries the Google &#x60;ConversionActionCategory&#x60; enum value, e.g. &#x60;PURCHASE&#x60;, &#x60;SUBSCRIBE_PAID&#x60;, &#x60;SIGNUP&#x60;, &#x60;IMPORTED_LEAD&#x60;, &#x60;BOOK_APPOINTMENT&#x60;. Unified standard event names (e.g. &#x60;Purchase&#x60;, &#x60;Subscribe&#x60;, &#x60;CompleteRegistration&#x60;, &#x60;Lead&#x60;, &#x60;Schedule&#x60;) are resolved to their Google category equivalents automatically. The action defaults to secondary (non-primary) to avoid immediately steering Smart Bidding; pass &#x60;primaryForGoal: true&#x60; to opt in. 
@@ -124,6 +136,20 @@ describe 'ConversionsApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetConversionsQuality200Response]
   describe 'get_conversions_quality test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_conversion_actions
+  # List conversion actions and their tag snippets
+  # Lists Google Ads conversion actions on the resolved customer, all types by default. Each action&#39;s &#x60;tagSnippets&#x60; (global site tag + event snippet) is included when Google has them for that action&#39;s type, e.g. &#x60;WEBPAGE&#x60;. Google-only; other platforms return &#x60;501&#x60;. Requires the Ads add-on.  &#x60;customerId&#x60; is optional: when omitted, it is resolved from the connection&#39;s accessible Google Ads customers, and the call fails with &#x60;400&#x60; when more than one is accessible (pass &#x60;customerId&#x60; to disambiguate). 
+  # @param account_id SocialAccount _id (must be a googleads account).
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id Google Ads customer id (digits only). Resolved automatically when the connection has exactly one accessible customer.
+  # @option opts [String] :type Filter by Google&#39;s ConversionActionType enum (e.g. WEBPAGE, UPLOAD_CLICKS).
+  # @return [ListConversionActions200Response]
+  describe 'list_conversion_actions test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

@@ -19,6 +19,74 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Add account-level callout extensions
+    # Creates one asset plus one `customerAsset` link (field type CALLOUT) per callout text, in a single mutate. Google only; every other platform returns 501.
+    # @param add_account_callouts_request [AddAccountCalloutsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AddAccountCallouts201Response]
+    def add_account_callouts(add_account_callouts_request, opts = {})
+      data, _status_code, _headers = add_account_callouts_with_http_info(add_account_callouts_request, opts)
+      data
+    end
+
+    # Add account-level callout extensions
+    # Creates one asset plus one &#x60;customerAsset&#x60; link (field type CALLOUT) per callout text, in a single mutate. Google only; every other platform returns 501.
+    # @param add_account_callouts_request [AddAccountCalloutsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AddAccountCallouts201Response, Integer, Hash)>] AddAccountCallouts201Response data, response status code and response headers
+    def add_account_callouts_with_http_info(add_account_callouts_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.add_account_callouts ...'
+      end
+      # verify the required parameter 'add_account_callouts_request' is set
+      if @api_client.config.client_side_validation && add_account_callouts_request.nil?
+        fail ArgumentError, "Missing the required parameter 'add_account_callouts_request' when calling AdAccountsApi.add_account_callouts"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/callouts'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(add_account_callouts_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AddAccountCallouts201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.add_account_callouts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#add_account_callouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create or reuse a custom conversion
     # Provision the Meta custom conversion an ads flow optimises toward, and hand back the `customConversionId` for `promotedObject.customConversionId` on POST /v1/ads/create. Removes the manual \"create it in Ads Manager first\" step.  **Reuse is ours, not Meta's.** Meta's create is not idempotent, so a retried request would otherwise mint a duplicate carrying none of the original's optimisation history. A non-archived conversion with the same `name` on the same `pixelId` is returned instead of created, with `reused: true` and a 200 rather than a 201.  `rule` is forwarded verbatim in Meta's own grammar (e.g. `{\"url\": {\"i_contains\": \"thank-you\"}}`); Meta validates it and rejects a malformed one with \"A conversion rule is required at creation time\".
     # @param account_id [String] Meta ads SocialAccount id.
@@ -760,6 +828,73 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List account-level callout extensions
+    # Google Ads compliance row C.75: callout assets linked at the CUSTOMER level via `customer_asset` (not a campaign or ad group), so they serve fleet-wide across the account. Google only; every other platform returns 501. Draws on the shared Google Ads operations budget.
+    # @param account_id [String] Google ads SocialAccount id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+    # @return [ListAccountCallouts200Response]
+    def list_account_callouts(account_id, opts = {})
+      data, _status_code, _headers = list_account_callouts_with_http_info(account_id, opts)
+      data
+    end
+
+    # List account-level callout extensions
+    # Google Ads compliance row C.75: callout assets linked at the CUSTOMER level via &#x60;customer_asset&#x60; (not a campaign or ad group), so they serve fleet-wide across the account. Google only; every other platform returns 501. Draws on the shared Google Ads operations budget.
+    # @param account_id [String] Google ads SocialAccount id.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+    # @return [Array<(ListAccountCallouts200Response, Integer, Hash)>] ListAccountCallouts200Response data, response status code and response headers
+    def list_account_callouts_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.list_account_callouts ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_account_callouts"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/callouts'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAccountCallouts200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.list_account_callouts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#list_account_callouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List ad accounts
     # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok's `/advertiser/info/` endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time `advertiser_ids` list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry.  For Google Ads: responds `429` when Google's API quota is temporarily exhausted (instead of an empty list). Retry after a delay. 
     # @param account_id [String] Social account ID
@@ -1388,6 +1523,74 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#list_value_rule_sets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Remove an account-level callout extension
+    # Removes the `customerAsset` link (`customers/{cid}/customerAssets/{assetId}~CALLOUT`). Google only; every other platform returns 501.
+    # @param remove_account_callout_request [RemoveAccountCalloutRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [RemoveAccountCallout200Response]
+    def remove_account_callout(remove_account_callout_request, opts = {})
+      data, _status_code, _headers = remove_account_callout_with_http_info(remove_account_callout_request, opts)
+      data
+    end
+
+    # Remove an account-level callout extension
+    # Removes the &#x60;customerAsset&#x60; link (&#x60;customers/{cid}/customerAssets/{assetId}~CALLOUT&#x60;). Google only; every other platform returns 501.
+    # @param remove_account_callout_request [RemoveAccountCalloutRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RemoveAccountCallout200Response, Integer, Hash)>] RemoveAccountCallout200Response data, response status code and response headers
+    def remove_account_callout_with_http_info(remove_account_callout_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.remove_account_callout ...'
+      end
+      # verify the required parameter 'remove_account_callout_request' is set
+      if @api_client.config.client_side_validation && remove_account_callout_request.nil?
+        fail ArgumentError, "Missing the required parameter 'remove_account_callout_request' when calling AdAccountsApi.remove_account_callout"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/callouts'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(remove_account_callout_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveAccountCallout200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.remove_account_callout",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#remove_account_callout\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

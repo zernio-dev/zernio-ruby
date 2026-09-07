@@ -14,16 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class BoostPostRequestTargetingRegionsInner < ApiModelBase
-    attr_accessor :key
+  class RemoveAccountCalloutRequest < ApiModelBase
+    # Zernio SocialAccount id owning the Google Ads connection.
+    attr_accessor :account_id
 
-    attr_accessor :name
+    # Numeric Google Ads customer id. Only required when the connection has more than one.
+    attr_accessor :customer_id
+
+    # Numeric asset id from GET /v1/ads/accounts/callouts.
+    attr_accessor :asset_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'key' => :'key',
-        :'name' => :'name'
+        :'account_id' => :'accountId',
+        :'customer_id' => :'customerId',
+        :'asset_id' => :'assetId'
       }
     end
 
@@ -40,8 +46,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'key' => :'String',
-        :'name' => :'String'
+        :'account_id' => :'String',
+        :'customer_id' => :'String',
+        :'asset_id' => :'String'
       }
     end
 
@@ -55,26 +62,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::BoostPostRequestTargetingRegionsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::RemoveAccountCalloutRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::BoostPostRequestTargetingRegionsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::RemoveAccountCalloutRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'key')
-        self.key = attributes[:'key']
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
       else
-        self.key = nil
+        self.account_id = nil
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
+      end
+
+      if attributes.key?(:'asset_id')
+        self.asset_id = attributes[:'asset_id']
+      else
+        self.asset_id = nil
       end
     end
 
@@ -83,8 +96,12 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @key.nil?
-        invalid_properties.push('invalid value for "key", key cannot be nil.')
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
+      if @asset_id.nil?
+        invalid_properties.push('invalid value for "asset_id", asset_id cannot be nil.')
       end
 
       invalid_properties
@@ -94,18 +111,29 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @key.nil?
+      return false if @account_id.nil?
+      return false if @asset_id.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] key Value to be assigned
-    def key=(key)
-      if key.nil?
-        fail ArgumentError, 'key cannot be nil'
+    # @param [Object] account_id Value to be assigned
+    def account_id=(account_id)
+      if account_id.nil?
+        fail ArgumentError, 'account_id cannot be nil'
       end
 
-      @key = key
+      @account_id = account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] asset_id Value to be assigned
+    def asset_id=(asset_id)
+      if asset_id.nil?
+        fail ArgumentError, 'asset_id cannot be nil'
+      end
+
+      @asset_id = asset_id
     end
 
     # Checks equality by comparing each attribute.
@@ -113,8 +141,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          key == o.key &&
-          name == o.name
+          account_id == o.account_id &&
+          customer_id == o.customer_id &&
+          asset_id == o.asset_id
     end
 
     # @see the `==` method
@@ -126,7 +155,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [key, name].hash
+      [account_id, customer_id, asset_id].hash
     end
 
     # Builds the object from hash

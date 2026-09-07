@@ -167,6 +167,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a website conversion action
+    # Creates a `WEBPAGE` conversion action (category `DEFAULT`) and returns it with its tag snippets, read back after creation since Google never returns them on the create response itself. Google-only; other platforms return `501`. Requires the Ads add-on. 
+    # @param create_conversion_action_request [CreateConversionActionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateConversionAction201Response]
+    def create_conversion_action(create_conversion_action_request, opts = {})
+      data, _status_code, _headers = create_conversion_action_with_http_info(create_conversion_action_request, opts)
+      data
+    end
+
+    # Create a website conversion action
+    # Creates a &#x60;WEBPAGE&#x60; conversion action (category &#x60;DEFAULT&#x60;) and returns it with its tag snippets, read back after creation since Google never returns them on the create response itself. Google-only; other platforms return &#x60;501&#x60;. Requires the Ads add-on. 
+    # @param create_conversion_action_request [CreateConversionActionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateConversionAction201Response, Integer, Hash)>] CreateConversionAction201Response data, response status code and response headers
+    def create_conversion_action_with_http_info(create_conversion_action_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConversionsApi.create_conversion_action ...'
+      end
+      # verify the required parameter 'create_conversion_action_request' is set
+      if @api_client.config.client_side_validation && create_conversion_action_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_conversion_action_request' when calling ConversionsApi.create_conversion_action"
+      end
+      # resource path
+      local_var_path = '/v1/ads/conversions/actions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_conversion_action_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateConversionAction201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConversionsApi.create_conversion_action",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConversionsApi#create_conversion_action\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create a conversion destination
     # Create a new conversion destination on the platform. Supported for LinkedIn (conversion rule) and Google Ads (conversion action). Meta and OpenAI Ads pixels are created via their own tracking-tags flow instead (`POST /v1/accounts/{accountId}/tracking-tags`); this endpoint returns 405 for both.  **LinkedIn:** creation is NOT idempotent. A retry creates a second destination. Deduplicate before retrying.  **Google Ads:** calling with a name that already exists reuses the existing conversion action transparently (the response is identical to a fresh create). Calling with the same name but a different category returns a typed `IDEMPOTENCY_CONFLICT` (409) rather than silently returning the mismatched action.  **LinkedIn:** the rule is created with `conversionMethod=CONVERSIONS_API` and (by default) auto-associated with all of the ad account's campaigns via `autoAssociationType=ALL_CAMPAIGNS`. Pass `autoAssociationType: NONE` to opt out and manage associations explicitly via the associations endpoints below.  365-day attribution windows are only valid for `SUBMIT_APPLICATION`, `PURCHASE`, `ADD_TO_CART`, `QUALIFIED_LEAD`, and `LEAD` rule types; the API rejects other combinations locally.  **Google Ads:** the conversion action is created with `type=UPLOAD_CLICKS` (required for API-uploaded offline conversions, immutable after creation). The `type` field carries the Google `ConversionActionCategory` enum value, e.g. `PURCHASE`, `SUBSCRIBE_PAID`, `SIGNUP`, `IMPORTED_LEAD`, `BOOK_APPOINTMENT`. Unified standard event names (e.g. `Purchase`, `Subscribe`, `CompleteRegistration`, `Lead`, `Schedule`) are resolved to their Google category equivalents automatically. The action defaults to secondary (non-primary) to avoid immediately steering Smart Bidding; pass `primaryForGoal: true` to opt in. 
     # @param account_id [String] SocialAccount ID (linkedinads or googleads).
@@ -559,6 +627,76 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConversionsApi#get_conversions_quality\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List conversion actions and their tag snippets
+    # Lists Google Ads conversion actions on the resolved customer, all types by default. Each action's `tagSnippets` (global site tag + event snippet) is included when Google has them for that action's type, e.g. `WEBPAGE`. Google-only; other platforms return `501`. Requires the Ads add-on.  `customerId` is optional: when omitted, it is resolved from the connection's accessible Google Ads customers, and the call fails with `400` when more than one is accessible (pass `customerId` to disambiguate). 
+    # @param account_id [String] SocialAccount _id (must be a googleads account).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id Google Ads customer id (digits only). Resolved automatically when the connection has exactly one accessible customer.
+    # @option opts [String] :type Filter by Google&#39;s ConversionActionType enum (e.g. WEBPAGE, UPLOAD_CLICKS).
+    # @return [ListConversionActions200Response]
+    def list_conversion_actions(account_id, opts = {})
+      data, _status_code, _headers = list_conversion_actions_with_http_info(account_id, opts)
+      data
+    end
+
+    # List conversion actions and their tag snippets
+    # Lists Google Ads conversion actions on the resolved customer, all types by default. Each action&#39;s &#x60;tagSnippets&#x60; (global site tag + event snippet) is included when Google has them for that action&#39;s type, e.g. &#x60;WEBPAGE&#x60;. Google-only; other platforms return &#x60;501&#x60;. Requires the Ads add-on.  &#x60;customerId&#x60; is optional: when omitted, it is resolved from the connection&#39;s accessible Google Ads customers, and the call fails with &#x60;400&#x60; when more than one is accessible (pass &#x60;customerId&#x60; to disambiguate). 
+    # @param account_id [String] SocialAccount _id (must be a googleads account).
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id Google Ads customer id (digits only). Resolved automatically when the connection has exactly one accessible customer.
+    # @option opts [String] :type Filter by Google&#39;s ConversionActionType enum (e.g. WEBPAGE, UPLOAD_CLICKS).
+    # @return [Array<(ListConversionActions200Response, Integer, Hash)>] ListConversionActions200Response data, response status code and response headers
+    def list_conversion_actions_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConversionsApi.list_conversion_actions ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ConversionsApi.list_conversion_actions"
+      end
+      # resource path
+      local_var_path = '/v1/ads/conversions/actions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListConversionActions200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConversionsApi.list_conversion_actions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConversionsApi#list_conversion_actions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

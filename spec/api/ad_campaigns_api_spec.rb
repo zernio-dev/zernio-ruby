@@ -95,6 +95,19 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for create_ad_set
+  # Create a standalone ad group
+  # Google Ads compliance row C.190: creates an ad group WITHOUT an ad, under an existing campaign. Ads join it later via &#x60;existingAdGroupId&#x60; on POST /v1/ads/create. Google only; every other platform returns 501.  Created &#x60;PAUSED&#x60; unless &#x60;status: ACTIVE&#x60;. The new ad group has no ad yet, so it will not appear in GET /v1/ads/tree (built purely from &#x60;ads&#x60; rows) until one is added; use GET /v1/ads/ad-sets to see it in the meantime.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe.
+  # @param create_ad_set_request 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
+  # @return [CreateAdSet201Response]
+  describe 'create_ad_set test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_standalone_ad
   # Create standalone ad
   # Creates a paid ad with custom creative across Meta, Google Ads, Pinterest, TikTok, X/Twitter, LinkedIn, and OpenAI Ads (ChatGPT Ads). Supports three mutually-exclusive request shapes selected by the body, a legacy single-creative shape (all platforms, default), a Meta-only multi-creative shape via the creatives array (one ad set with N ads sharing budget and targeting), and an attach shape via adSetId that adds one new ad to an existing ad set, inheriting its budget, targeting, and schedule (Meta, TikTok, and LinkedIn; on LinkedIn adSetId is the existing Campaign id, and the budget, schedule, targeting and bidding fields must be omitted). Per-platform required fields, budget minimums, and video-ad rules are documented on each property below. LinkedIn creates a Single Image or Single Video Ad backed by a Direct Sponsored Content \&quot;dark post\&quot; authored by a Company Page (see &#x60;organizationId&#x60;); supported goals are engagement, traffic, awareness, and video_views (video ads use the &#x60;video&#x60; field; video_views requires a video), and traffic ads require &#x60;linkUrl&#x60;.  **Idempotency:** this endpoint is not idempotent at the platform level (a blind retry creates a second campaign/ad set/ad). Send an &#x60;Idempotency-Key&#x60; header to make retries safe: the first request with a given key creates the ad and we store the response; a retry with the same key replays that exact response (with &#x60;Idempotent-Replayed: true&#x60;) instead of creating duplicates. Reusing a key with a different body returns 422; a key whose first request is still in flight returns 409 (retry after a short backoff). Keys are scoped to your credential and expire after 24h.
@@ -257,6 +270,19 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for get_campaign_targeting
+  # Read a Google campaign&#39;s device, location, and language targeting
+  # Google Ads compliance requires geo, language, budget, and bidding targeting set at creation to stay editable afterwards; this reads the live campaign state so an integrator can build an editor around it. Google only; every other platform returns 501.  &#x60;devices&#x60; always lists all four device types with &#x60;included&#x60; reflecting Google&#39;s negative device criteria (a device absent from any negative criterion is included by default). This read has no bid-modifier source, so &#x60;bidModifier&#x60; is always &#x60;null&#x60; even for a device with one configured. 
+  # @param campaign_id Google platform campaign ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :platform Disambiguates when the same campaignId string exists on more than one connected platform.
+  # @return [GetCampaignTargeting200Response]
+  describe 'get_campaign_targeting test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_campaigns
   # List campaigns
   # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active &gt; pending_review &gt; paused &gt; error &gt; completed &gt; cancelled &gt; rejected). 
@@ -299,6 +325,20 @@ describe 'AdCampaignsApi' do
   # @option opts [String] :search Case-insensitive substring match on the keyword text
   # @return [ListAdKeywords200Response]
   describe 'list_ad_keywords test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_ad_sets
+  # List ad sets
+  # Ad sets (Google ad groups) synced for the connection, optionally filtered by platform and campaignId. Reads the &#x60;ad_sets&#x60; table directly, independent of the &#x60;ads&#x60; rollup GET /v1/ads/tree uses, so a just-created standalone ad group with no ad yet (POST /v1/ads/ad-sets, Google only) is visible here even though it is invisible in the tree until an ad joins it via &#x60;existingAdGroupId&#x60;. Returns at most 500 rows, newest first.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :account_id Social account ID
+  # @option opts [String] :campaign_id Platform campaign ID
+  # @option opts [String] :platform 
+  # @return [ListAdSets200Response]
+  describe 'list_ad_sets test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -455,6 +495,19 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAdStatus200Response]
   describe 'update_ad_status test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_campaign_targeting
+  # Edit a Google campaign&#39;s device, location, or language targeting
+  # Google Ads compliance row M.10: geo and language targeting set at creation must stay editable afterwards. Send at least one of &#x60;devices&#x60;, &#x60;locations&#x60;, &#x60;languages&#x60;; each provided field REPLACES that field&#39;s existing criteria on the campaign (a full set, not a delta). Fields left out of the body are untouched. Google only; every other platform returns 501.  &#x60;locations&#x60; accepts the same shapes as campaign creation: a bare array of ISO country codes, or an object with &#x60;countries&#x60;/&#x60;regions&#x60;/&#x60;cities&#x60;/&#x60;zips&#x60;/&#x60;metros&#x60; key lists (&#x60;key&#x60; from GET /v1/ads/targeting/search?dimension&#x3D;geo). Negative (excluded) locations are left untouched by this endpoint.  &#x60;languages&#x60; is an array of Google&#39;s language codes (ISO 639-1, plus variants such as &#x60;zh_CN&#x60;); an unknown code returns 400. 
+  # @param campaign_id Google platform campaign ID
+  # @param update_campaign_targeting_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateCampaignTargeting200Response]
+  describe 'update_campaign_targeting test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

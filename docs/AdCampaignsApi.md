@@ -9,6 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**boost_post**](AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
 | [**bulk_update_ad_campaign_status**](AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns |
 | [**create_ad_campaign**](AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign |
+| [**create_ad_set**](AdCampaignsApi.md#create_ad_set) | **POST** /v1/ads/ad-sets | Create a standalone ad group |
 | [**create_standalone_ad**](AdCampaignsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad |
 | [**delete_ad**](AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad |
 | [**delete_ad_campaign**](AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign |
@@ -20,8 +21,10 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ad_set_details**](AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase |
 | [**get_ad_tree**](AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree |
 | [**get_ads_timeline**](AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics |
+| [**get_campaign_targeting**](AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign&#39;s device, location, and language targeting |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
 | [**list_ad_keywords**](AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords |
+| [**list_ad_sets**](AdCampaignsApi.md#list_ad_sets) | **GET** /v1/ads/ad-sets | List ad sets |
 | [**list_ads**](AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**list_campaign_negative_keywords**](AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords |
 | [**remove_ad_keyword**](AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword |
@@ -33,6 +36,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_ad_set**](AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set |
 | [**update_ad_set_status**](AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set |
 | [**update_ad_status**](AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
+| [**update_campaign_targeting**](AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign&#39;s device, location, or language targeting |
 
 
 ## add_ad_keywords
@@ -379,6 +383,79 @@ end
 ### Return type
 
 [**CreateAdCampaign201Response**](CreateAdCampaign201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_ad_set
+
+> <CreateAdSet201Response> create_ad_set(create_ad_set_request, opts)
+
+Create a standalone ad group
+
+Google Ads compliance row C.190: creates an ad group WITHOUT an ad, under an existing campaign. Ads join it later via `existingAdGroupId` on POST /v1/ads/create. Google only; every other platform returns 501.  Created `PAUSED` unless `status: ACTIVE`. The new ad group has no ad yet, so it will not appear in GET /v1/ads/tree (built purely from `ads` rows) until one is added; use GET /v1/ads/ad-sets to see it in the meantime.  **Idempotency:** send an `Idempotency-Key` header to make retries safe.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+create_ad_set_request = Zernio::CreateAdSetRequest.new({account_id: 'account_id_example', platform: 'facebook', campaign_id: 'campaign_id_example', name: 'name_example'}) # CreateAdSetRequest | 
+opts = {
+  idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
+}
+
+begin
+  # Create a standalone ad group
+  result = api_instance.create_ad_set(create_ad_set_request, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->create_ad_set: #{e}"
+end
+```
+
+#### Using the create_ad_set_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateAdSet201Response>, Integer, Hash)> create_ad_set_with_http_info(create_ad_set_request, opts)
+
+```ruby
+begin
+  # Create a standalone ad group
+  data, status_code, headers = api_instance.create_ad_set_with_http_info(create_ad_set_request, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateAdSet201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->create_ad_set_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_ad_set_request** | [**CreateAdSetRequest**](CreateAdSetRequest.md) |  |  |
+| **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key. | [optional] |
+
+### Return type
+
+[**CreateAdSet201Response**](CreateAdSet201Response.md)
 
 ### Authorization
 
@@ -1223,6 +1300,79 @@ end
 - **Accept**: application/json
 
 
+## get_campaign_targeting
+
+> <GetCampaignTargeting200Response> get_campaign_targeting(campaign_id, opts)
+
+Read a Google campaign's device, location, and language targeting
+
+Google Ads compliance requires geo, language, budget, and bidding targeting set at creation to stay editable afterwards; this reads the live campaign state so an integrator can build an editor around it. Google only; every other platform returns 501.  `devices` always lists all four device types with `included` reflecting Google's negative device criteria (a device absent from any negative criterion is included by default). This read has no bid-modifier source, so `bidModifier` is always `null` even for a device with one configured. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Google platform campaign ID
+opts = {
+  platform: 'google' # String | Disambiguates when the same campaignId string exists on more than one connected platform.
+}
+
+begin
+  # Read a Google campaign's device, location, and language targeting
+  result = api_instance.get_campaign_targeting(campaign_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_campaign_targeting: #{e}"
+end
+```
+
+#### Using the get_campaign_targeting_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetCampaignTargeting200Response>, Integer, Hash)> get_campaign_targeting_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # Read a Google campaign's device, location, and language targeting
+  data, status_code, headers = api_instance.get_campaign_targeting_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetCampaignTargeting200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->get_campaign_targeting_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Google platform campaign ID |  |
+| **platform** | **String** | Disambiguates when the same campaignId string exists on more than one connected platform. | [optional] |
+
+### Return type
+
+[**GetCampaignTargeting200Response**](GetCampaignTargeting200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_ad_campaigns
 
 > <ListAdCampaigns200Response> list_ad_campaigns(opts)
@@ -1400,6 +1550,81 @@ end
 ### Return type
 
 [**ListAdKeywords200Response**](ListAdKeywords200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_ad_sets
+
+> <ListAdSets200Response> list_ad_sets(opts)
+
+List ad sets
+
+Ad sets (Google ad groups) synced for the connection, optionally filtered by platform and campaignId. Reads the `ad_sets` table directly, independent of the `ads` rollup GET /v1/ads/tree uses, so a just-created standalone ad group with no ad yet (POST /v1/ads/ad-sets, Google only) is visible here even though it is invisible in the tree until an ad joins it via `existingAdGroupId`. Returns at most 500 rows, newest first.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+opts = {
+  account_id: 'account_id_example', # String | Social account ID
+  campaign_id: 'campaign_id_example', # String | Platform campaign ID
+  platform: 'facebook' # String | 
+}
+
+begin
+  # List ad sets
+  result = api_instance.list_ad_sets(opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ad_sets: #{e}"
+end
+```
+
+#### Using the list_ad_sets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdSets200Response>, Integer, Hash)> list_ad_sets_with_http_info(opts)
+
+```ruby
+begin
+  # List ad sets
+  data, status_code, headers = api_instance.list_ad_sets_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdSets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ad_sets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | Social account ID | [optional] |
+| **campaign_id** | **String** | Platform campaign ID | [optional] |
+| **platform** | **String** |  | [optional] |
+
+### Return type
+
+[**ListAdSets200Response**](ListAdSets200Response.md)
 
 ### Authorization
 
@@ -2211,6 +2436,77 @@ end
 ### Return type
 
 [**UpdateAdStatus200Response**](UpdateAdStatus200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_campaign_targeting
+
+> <UpdateCampaignTargeting200Response> update_campaign_targeting(campaign_id, update_campaign_targeting_request)
+
+Edit a Google campaign's device, location, or language targeting
+
+Google Ads compliance row M.10: geo and language targeting set at creation must stay editable afterwards. Send at least one of `devices`, `locations`, `languages`; each provided field REPLACES that field's existing criteria on the campaign (a full set, not a delta). Fields left out of the body are untouched. Google only; every other platform returns 501.  `locations` accepts the same shapes as campaign creation: a bare array of ISO country codes, or an object with `countries`/`regions`/`cities`/`zips`/`metros` key lists (`key` from GET /v1/ads/targeting/search?dimension=geo). Negative (excluded) locations are left untouched by this endpoint.  `languages` is an array of Google's language codes (ISO 639-1, plus variants such as `zh_CN`); an unknown code returns 400. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Google platform campaign ID
+update_campaign_targeting_request = Zernio::UpdateCampaignTargetingRequest.new({platform: 'google', targeting: Zernio::UpdateCampaignTargetingRequestTargeting.new}) # UpdateCampaignTargetingRequest | 
+
+begin
+  # Edit a Google campaign's device, location, or language targeting
+  result = api_instance.update_campaign_targeting(campaign_id, update_campaign_targeting_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_campaign_targeting: #{e}"
+end
+```
+
+#### Using the update_campaign_targeting_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateCampaignTargeting200Response>, Integer, Hash)> update_campaign_targeting_with_http_info(campaign_id, update_campaign_targeting_request)
+
+```ruby
+begin
+  # Edit a Google campaign's device, location, or language targeting
+  data, status_code, headers = api_instance.update_campaign_targeting_with_http_info(campaign_id, update_campaign_targeting_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateCampaignTargeting200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_campaign_targeting_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Google platform campaign ID |  |
+| **update_campaign_targeting_request** | [**UpdateCampaignTargetingRequest**](UpdateCampaignTargetingRequest.md) |  |  |
+
+### Return type
+
+[**UpdateCampaignTargeting200Response**](UpdateCampaignTargeting200Response.md)
 
 ### Authorization
 

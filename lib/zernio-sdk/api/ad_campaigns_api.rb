@@ -379,6 +379,81 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a standalone ad group
+    # Google Ads compliance row C.190: creates an ad group WITHOUT an ad, under an existing campaign. Ads join it later via `existingAdGroupId` on POST /v1/ads/create. Google only; every other platform returns 501.  Created `PAUSED` unless `status: ACTIVE`. The new ad group has no ad yet, so it will not appear in GET /v1/ads/tree (built purely from `ads` rows) until one is added; use GET /v1/ads/ad-sets to see it in the meantime.  **Idempotency:** send an `Idempotency-Key` header to make retries safe.
+    # @param create_ad_set_request [CreateAdSetRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
+    # @return [CreateAdSet201Response]
+    def create_ad_set(create_ad_set_request, opts = {})
+      data, _status_code, _headers = create_ad_set_with_http_info(create_ad_set_request, opts)
+      data
+    end
+
+    # Create a standalone ad group
+    # Google Ads compliance row C.190: creates an ad group WITHOUT an ad, under an existing campaign. Ads join it later via &#x60;existingAdGroupId&#x60; on POST /v1/ads/create. Google only; every other platform returns 501.  Created &#x60;PAUSED&#x60; unless &#x60;status: ACTIVE&#x60;. The new ad group has no ad yet, so it will not appear in GET /v1/ads/tree (built purely from &#x60;ads&#x60; rows) until one is added; use GET /v1/ads/ad-sets to see it in the meantime.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe.
+    # @param create_ad_set_request [CreateAdSetRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
+    # @return [Array<(CreateAdSet201Response, Integer, Hash)>] CreateAdSet201Response data, response status code and response headers
+    def create_ad_set_with_http_info(create_ad_set_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.create_ad_set ...'
+      end
+      # verify the required parameter 'create_ad_set_request' is set
+      if @api_client.config.client_side_validation && create_ad_set_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_ad_set_request' when calling AdCampaignsApi.create_ad_set"
+      end
+      if @api_client.config.client_side_validation && !opts[:'idempotency_key'].nil? && opts[:'idempotency_key'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"idempotency_key"]" when calling AdCampaignsApi.create_ad_set, the character length must be smaller than or equal to 255.'
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/ad-sets'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+      header_params[:'Idempotency-Key'] = opts[:'idempotency_key'] if !opts[:'idempotency_key'].nil?
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_ad_set_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateAdSet201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.create_ad_set",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#create_ad_set\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create standalone ad
     # Creates a paid ad with custom creative across Meta, Google Ads, Pinterest, TikTok, X/Twitter, LinkedIn, and OpenAI Ads (ChatGPT Ads). Supports three mutually-exclusive request shapes selected by the body, a legacy single-creative shape (all platforms, default), a Meta-only multi-creative shape via the creatives array (one ad set with N ads sharing budget and targeting), and an attach shape via adSetId that adds one new ad to an existing ad set, inheriting its budget, targeting, and schedule (Meta, TikTok, and LinkedIn; on LinkedIn adSetId is the existing Campaign id, and the budget, schedule, targeting and bidding fields must be omitted). Per-platform required fields, budget minimums, and video-ad rules are documented on each property below. LinkedIn creates a Single Image or Single Video Ad backed by a Direct Sponsored Content \"dark post\" authored by a Company Page (see `organizationId`); supported goals are engagement, traffic, awareness, and video_views (video ads use the `video` field; video_views requires a video), and traffic ads require `linkUrl`.  **Idempotency:** this endpoint is not idempotent at the platform level (a blind retry creates a second campaign/ad set/ad). Send an `Idempotency-Key` header to make retries safe: the first request with a given key creates the ad and we store the response; a retry with the same key replays that exact response (with `Idempotent-Replayed: true`) instead of creating duplicates. Reusing a key with a different body returns 422; a key whose first request is still in flight returns 409 (retry after a short backoff). Keys are scoped to your credential and expire after 24h.
     # @param create_standalone_ad_request [CreateStandaloneAdRequest] 
@@ -1253,6 +1328,76 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Read a Google campaign's device, location, and language targeting
+    # Google Ads compliance requires geo, language, budget, and bidding targeting set at creation to stay editable afterwards; this reads the live campaign state so an integrator can build an editor around it. Google only; every other platform returns 501.  `devices` always lists all four device types with `included` reflecting Google's negative device criteria (a device absent from any negative criterion is included by default). This read has no bid-modifier source, so `bidModifier` is always `null` even for a device with one configured. 
+    # @param campaign_id [String] Google platform campaign ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Disambiguates when the same campaignId string exists on more than one connected platform.
+    # @return [GetCampaignTargeting200Response]
+    def get_campaign_targeting(campaign_id, opts = {})
+      data, _status_code, _headers = get_campaign_targeting_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Read a Google campaign&#39;s device, location, and language targeting
+    # Google Ads compliance requires geo, language, budget, and bidding targeting set at creation to stay editable afterwards; this reads the live campaign state so an integrator can build an editor around it. Google only; every other platform returns 501.  &#x60;devices&#x60; always lists all four device types with &#x60;included&#x60; reflecting Google&#39;s negative device criteria (a device absent from any negative criterion is included by default). This read has no bid-modifier source, so &#x60;bidModifier&#x60; is always &#x60;null&#x60; even for a device with one configured. 
+    # @param campaign_id [String] Google platform campaign ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Disambiguates when the same campaignId string exists on more than one connected platform.
+    # @return [Array<(GetCampaignTargeting200Response, Integer, Hash)>] GetCampaignTargeting200Response data, response status code and response headers
+    def get_campaign_targeting_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.get_campaign_targeting ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.get_campaign_targeting"
+      end
+      allowable_values = ["google"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/targeting'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetCampaignTargeting200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.get_campaign_targeting",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#get_campaign_targeting\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List campaigns
     # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active > pending_review > paused > error > completed > cancelled > rejected). 
     # @param [Hash] opts the optional parameters
@@ -1486,6 +1631,76 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdCampaignsApi#list_ad_keywords\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List ad sets
+    # Ad sets (Google ad groups) synced for the connection, optionally filtered by platform and campaignId. Reads the `ad_sets` table directly, independent of the `ads` rollup GET /v1/ads/tree uses, so a just-created standalone ad group with no ad yet (POST /v1/ads/ad-sets, Google only) is visible here even though it is invisible in the tree until an ad joins it via `existingAdGroupId`. Returns at most 500 rows, newest first.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :account_id Social account ID
+    # @option opts [String] :campaign_id Platform campaign ID
+    # @option opts [String] :platform 
+    # @return [ListAdSets200Response]
+    def list_ad_sets(opts = {})
+      data, _status_code, _headers = list_ad_sets_with_http_info(opts)
+      data
+    end
+
+    # List ad sets
+    # Ad sets (Google ad groups) synced for the connection, optionally filtered by platform and campaignId. Reads the &#x60;ad_sets&#x60; table directly, independent of the &#x60;ads&#x60; rollup GET /v1/ads/tree uses, so a just-created standalone ad group with no ad yet (POST /v1/ads/ad-sets, Google only) is visible here even though it is invisible in the tree until an ad joins it via &#x60;existingAdGroupId&#x60;. Returns at most 500 rows, newest first.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :account_id Social account ID
+    # @option opts [String] :campaign_id Platform campaign ID
+    # @option opts [String] :platform 
+    # @return [Array<(ListAdSets200Response, Integer, Hash)>] ListAdSets200Response data, response status code and response headers
+    def list_ad_sets_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.list_ad_sets ...'
+      end
+      allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ad-sets'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'campaignId'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdSets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.list_ad_sets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#list_ad_sets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2336,6 +2551,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdCampaignsApi#update_ad_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Edit a Google campaign's device, location, or language targeting
+    # Google Ads compliance row M.10: geo and language targeting set at creation must stay editable afterwards. Send at least one of `devices`, `locations`, `languages`; each provided field REPLACES that field's existing criteria on the campaign (a full set, not a delta). Fields left out of the body are untouched. Google only; every other platform returns 501.  `locations` accepts the same shapes as campaign creation: a bare array of ISO country codes, or an object with `countries`/`regions`/`cities`/`zips`/`metros` key lists (`key` from GET /v1/ads/targeting/search?dimension=geo). Negative (excluded) locations are left untouched by this endpoint.  `languages` is an array of Google's language codes (ISO 639-1, plus variants such as `zh_CN`); an unknown code returns 400. 
+    # @param campaign_id [String] Google platform campaign ID
+    # @param update_campaign_targeting_request [UpdateCampaignTargetingRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateCampaignTargeting200Response]
+    def update_campaign_targeting(campaign_id, update_campaign_targeting_request, opts = {})
+      data, _status_code, _headers = update_campaign_targeting_with_http_info(campaign_id, update_campaign_targeting_request, opts)
+      data
+    end
+
+    # Edit a Google campaign&#39;s device, location, or language targeting
+    # Google Ads compliance row M.10: geo and language targeting set at creation must stay editable afterwards. Send at least one of &#x60;devices&#x60;, &#x60;locations&#x60;, &#x60;languages&#x60;; each provided field REPLACES that field&#39;s existing criteria on the campaign (a full set, not a delta). Fields left out of the body are untouched. Google only; every other platform returns 501.  &#x60;locations&#x60; accepts the same shapes as campaign creation: a bare array of ISO country codes, or an object with &#x60;countries&#x60;/&#x60;regions&#x60;/&#x60;cities&#x60;/&#x60;zips&#x60;/&#x60;metros&#x60; key lists (&#x60;key&#x60; from GET /v1/ads/targeting/search?dimension&#x3D;geo). Negative (excluded) locations are left untouched by this endpoint.  &#x60;languages&#x60; is an array of Google&#39;s language codes (ISO 639-1, plus variants such as &#x60;zh_CN&#x60;); an unknown code returns 400. 
+    # @param campaign_id [String] Google platform campaign ID
+    # @param update_campaign_targeting_request [UpdateCampaignTargetingRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateCampaignTargeting200Response, Integer, Hash)>] UpdateCampaignTargeting200Response data, response status code and response headers
+    def update_campaign_targeting_with_http_info(campaign_id, update_campaign_targeting_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_campaign_targeting ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.update_campaign_targeting"
+      end
+      # verify the required parameter 'update_campaign_targeting_request' is set
+      if @api_client.config.client_side_validation && update_campaign_targeting_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_campaign_targeting_request' when calling AdCampaignsApi.update_campaign_targeting"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/targeting'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_campaign_targeting_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateCampaignTargeting200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.update_campaign_targeting",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#update_campaign_targeting\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

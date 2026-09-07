@@ -108,10 +108,10 @@ module Zernio
         :'gender' => :'String',
         :'languages' => :'Array<String>',
         :'countries' => :'Array<String>',
-        :'regions' => :'Array<BoostPostRequestTargetingRegionsInner>',
+        :'regions' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
         :'cities' => :'Array<BoostPostRequestTargetingCitiesInner>',
-        :'zips' => :'Array<BoostPostRequestTargetingRegionsInner>',
-        :'metros' => :'Array<BoostPostRequestTargetingRegionsInner>',
+        :'zips' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
+        :'metros' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
         :'custom_locations' => :'Array<BoostPostRequestTargetingCustomLocationsInner>',
         :'interests' => :'Array<UpdateAdRequestTargetingInterestsInner>',
         :'advantage_audience' => :'Integer'

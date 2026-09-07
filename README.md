@@ -106,6 +106,7 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
 *Zernio::AccountsApi* | [**update_bluesky_settings**](docs/AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings
 *Zernio::AccountsApi* | [**update_slack_settings**](docs/AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
+*Zernio::AdAccountsApi* | [**add_account_callouts**](docs/AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account-level callout extensions
 *Zernio::AdAccountsApi* | [**create_custom_conversion**](docs/AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion
 *Zernio::AdAccountsApi* | [**create_high_demand_period**](docs/AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase
 *Zernio::AdAccountsApi* | [**create_value_rule_set**](docs/AdAccountsApi.md#create_value_rule_set) | **POST** /v1/ads/value-rule-sets | Create a value rule set
@@ -116,6 +117,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**get_dsa_defaults**](docs/AdAccountsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults
 *Zernio::AdAccountsApi* | [**get_dsa_recommendations**](docs/AdAccountsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions
 *Zernio::AdAccountsApi* | [**get_value_rule_set**](docs/AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set
+*Zernio::AdAccountsApi* | [**list_account_callouts**](docs/AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account-level callout extensions
 *Zernio::AdAccountsApi* | [**list_ad_accounts**](docs/AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdAccountsApi* | [**list_ad_labels**](docs/AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels
 *Zernio::AdAccountsApi* | [**list_ad_studies**](docs/AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies
@@ -124,6 +126,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**list_high_demand_periods**](docs/AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules
 *Zernio::AdAccountsApi* | [**list_meta_businesses**](docs/AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list
 *Zernio::AdAccountsApi* | [**list_value_rule_sets**](docs/AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets
+*Zernio::AdAccountsApi* | [**remove_account_callout**](docs/AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove an account-level callout extension
 *Zernio::AdAccountsApi* | [**update_ad_account**](docs/AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
 *Zernio::AdAccountsApi* | [**update_value_rule_set**](docs/AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set
 *Zernio::AdAudiencesApi* | [**add_users_to_ad_audience**](docs/AdAudiencesApi.md#add_users_to_ad_audience) | **POST** /v1/ads/audiences/{audienceId}/users | Add users to audience
@@ -138,6 +141,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**boost_post**](docs/AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
 *Zernio::AdCampaignsApi* | [**create_ad_campaign**](docs/AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign
+*Zernio::AdCampaignsApi* | [**create_ad_set**](docs/AdCampaignsApi.md#create_ad_set) | **POST** /v1/ads/ad-sets | Create a standalone ad group
 *Zernio::AdCampaignsApi* | [**create_standalone_ad**](docs/AdCampaignsApi.md#create_standalone_ad) | **POST** /v1/ads/create | Create standalone ad
 *Zernio::AdCampaignsApi* | [**delete_ad**](docs/AdCampaignsApi.md#delete_ad) | **DELETE** /v1/ads/{adId} | Cancel an ad
 *Zernio::AdCampaignsApi* | [**delete_ad_campaign**](docs/AdCampaignsApi.md#delete_ad_campaign) | **DELETE** /v1/ads/campaigns/{campaignId} | Delete a campaign
@@ -149,8 +153,10 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**get_ad_set_details**](docs/AdCampaignsApi.md#get_ad_set_details) | **GET** /v1/ads/ad-sets/{adSetId} | Live ad-set details incl. learning phase
 *Zernio::AdCampaignsApi* | [**get_ad_tree**](docs/AdCampaignsApi.md#get_ad_tree) | **GET** /v1/ads/tree | Get campaign tree
 *Zernio::AdCampaignsApi* | [**get_ads_timeline**](docs/AdCampaignsApi.md#get_ads_timeline) | **GET** /v1/ads/timeline | Get daily account metrics
+*Zernio::AdCampaignsApi* | [**get_campaign_targeting**](docs/AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign's device, location, and language targeting
 *Zernio::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
 *Zernio::AdCampaignsApi* | [**list_ad_keywords**](docs/AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords
+*Zernio::AdCampaignsApi* | [**list_ad_sets**](docs/AdCampaignsApi.md#list_ad_sets) | **GET** /v1/ads/ad-sets | List ad sets
 *Zernio::AdCampaignsApi* | [**list_ads**](docs/AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdCampaignsApi* | [**list_campaign_negative_keywords**](docs/AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords
 *Zernio::AdCampaignsApi* | [**remove_ad_keyword**](docs/AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword
@@ -162,6 +168,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
 *Zernio::AdCampaignsApi* | [**update_ad_status**](docs/AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
+*Zernio::AdCampaignsApi* | [**update_campaign_targeting**](docs/AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign's device, location, or language targeting
 *Zernio::AdCreativesApi* | [**create_ad_creative**](docs/AdCreativesApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative
 *Zernio::AdCreativesApi* | [**delete_ad_creative**](docs/AdCreativesApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative
 *Zernio::AdCreativesApi* | [**delete_ad_video**](docs/AdCreativesApi.md#delete_ad_video) | **DELETE** /v1/ads/videos/{videoId} | Delete an ad video
@@ -322,11 +329,13 @@ Class | Method | HTTP request | Description
 *Zernio::ContactsApi* | [**update_contact**](docs/ContactsApi.md#update_contact) | **PATCH** /v1/contacts/{contactId} | Update contact
 *Zernio::ConversionsApi* | [**add_conversion_associations**](docs/ConversionsApi.md#add_conversion_associations) | **POST** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Associate campaigns
 *Zernio::ConversionsApi* | [**adjust_conversions**](docs/ConversionsApi.md#adjust_conversions) | **POST** /v1/ads/conversions/adjustments | Adjust uploaded conversions
+*Zernio::ConversionsApi* | [**create_conversion_action**](docs/ConversionsApi.md#create_conversion_action) | **POST** /v1/ads/conversions/actions | Create a website conversion action
 *Zernio::ConversionsApi* | [**create_conversion_destination**](docs/ConversionsApi.md#create_conversion_destination) | **POST** /v1/accounts/{accountId}/conversion-destinations | Create a conversion destination
 *Zernio::ConversionsApi* | [**delete_conversion_destination**](docs/ConversionsApi.md#delete_conversion_destination) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Delete a conversion destination
 *Zernio::ConversionsApi* | [**get_conversion_destination**](docs/ConversionsApi.md#get_conversion_destination) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId} | Get a conversion destination
 *Zernio::ConversionsApi* | [**get_conversion_metrics**](docs/ConversionsApi.md#get_conversion_metrics) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/metrics | Get attribution metrics
 *Zernio::ConversionsApi* | [**get_conversions_quality**](docs/ConversionsApi.md#get_conversions_quality) | **GET** /v1/ads/conversions/quality | Get Event Match Quality
+*Zernio::ConversionsApi* | [**list_conversion_actions**](docs/ConversionsApi.md#list_conversion_actions) | **GET** /v1/ads/conversions/actions | List conversion actions and their tag snippets
 *Zernio::ConversionsApi* | [**list_conversion_associations**](docs/ConversionsApi.md#list_conversion_associations) | **GET** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | List associated campaigns
 *Zernio::ConversionsApi* | [**list_conversion_destinations**](docs/ConversionsApi.md#list_conversion_destinations) | **GET** /v1/accounts/{accountId}/conversion-destinations | List conversion destinations
 *Zernio::ConversionsApi* | [**remove_conversion_associations**](docs/ConversionsApi.md#remove_conversion_associations) | **DELETE** /v1/accounts/{accountId}/conversion-destinations/{destinationId}/associations | Remove associated campaigns
@@ -721,6 +730,9 @@ Class | Method | HTTP request | Description
  - [Zernio::AdTreeCampaignOptimizationGoal](docs/AdTreeCampaignOptimizationGoal.md)
  - [Zernio::AdTreeCampaignPromotedObject](docs/AdTreeCampaignPromotedObject.md)
  - [Zernio::AdTreeResponse](docs/AdTreeResponse.md)
+ - [Zernio::AddAccountCallouts201Response](docs/AddAccountCallouts201Response.md)
+ - [Zernio::AddAccountCallouts201ResponseCalloutsInner](docs/AddAccountCallouts201ResponseCalloutsInner.md)
+ - [Zernio::AddAccountCalloutsRequest](docs/AddAccountCalloutsRequest.md)
  - [Zernio::AddAdKeywords201Response](docs/AddAdKeywords201Response.md)
  - [Zernio::AddAdKeywordsRequest](docs/AddAdKeywordsRequest.md)
  - [Zernio::AddAdKeywordsRequestKeywordsInner](docs/AddAdKeywordsRequestKeywordsInner.md)
@@ -801,7 +813,6 @@ Class | Method | HTTP request | Description
  - [Zernio::BoostPostRequestTargeting](docs/BoostPostRequestTargeting.md)
  - [Zernio::BoostPostRequestTargetingCitiesInner](docs/BoostPostRequestTargetingCitiesInner.md)
  - [Zernio::BoostPostRequestTargetingCustomLocationsInner](docs/BoostPostRequestTargetingCustomLocationsInner.md)
- - [Zernio::BoostPostRequestTargetingRegionsInner](docs/BoostPostRequestTargetingRegionsInner.md)
  - [Zernio::BoostPostRequestTracking](docs/BoostPostRequestTracking.md)
  - [Zernio::BoostPostRequestTrackingUrlTagsInner](docs/BoostPostRequestTrackingUrlTagsInner.md)
  - [Zernio::BulkCreateContacts200Response](docs/BulkCreateContacts200Response.md)
@@ -867,6 +878,8 @@ Class | Method | HTTP request | Description
  - [Zernio::Connected](docs/Connected.md)
  - [Zernio::ConnectedAccount](docs/ConnectedAccount.md)
  - [Zernio::ConnectedApp](docs/ConnectedApp.md)
+ - [Zernio::ConversionAction](docs/ConversionAction.md)
+ - [Zernio::ConversionActionTagSnippetsInner](docs/ConversionActionTagSnippetsInner.md)
  - [Zernio::ConversionDestination](docs/ConversionDestination.md)
  - [Zernio::ConversionEvent](docs/ConversionEvent.md)
  - [Zernio::ConversionEventItemsInner](docs/ConversionEventItemsInner.md)
@@ -886,6 +899,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAdInsightsReportRequest](docs/CreateAdInsightsReportRequest.md)
  - [Zernio::CreateAdInsightsReportRequestFilteringInner](docs/CreateAdInsightsReportRequestFilteringInner.md)
  - [Zernio::CreateAdInsightsReportRequestTimeIncrement](docs/CreateAdInsightsReportRequestTimeIncrement.md)
+ - [Zernio::CreateAdSet201Response](docs/CreateAdSet201Response.md)
+ - [Zernio::CreateAdSetRequest](docs/CreateAdSetRequest.md)
  - [Zernio::CreateApiKey201Response](docs/CreateApiKey201Response.md)
  - [Zernio::CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
  - [Zernio::CreateBlog201Response](docs/CreateBlog201Response.md)
@@ -911,6 +926,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateContact200ResponseChannel](docs/CreateContact200ResponseChannel.md)
  - [Zernio::CreateContact200ResponseContact](docs/CreateContact200ResponseContact.md)
  - [Zernio::CreateContactRequest](docs/CreateContactRequest.md)
+ - [Zernio::CreateConversionAction201Response](docs/CreateConversionAction201Response.md)
+ - [Zernio::CreateConversionActionRequest](docs/CreateConversionActionRequest.md)
  - [Zernio::CreateConversionDestination201Response](docs/CreateConversionDestination201Response.md)
  - [Zernio::CreateConversionDestinationRequest](docs/CreateConversionDestinationRequest.md)
  - [Zernio::CreateConversionDestinationRequestValue](docs/CreateConversionDestinationRequestValue.md)
@@ -1227,6 +1244,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GetCallsUsage200ResponseGroupsInner](docs/GetCallsUsage200ResponseGroupsInner.md)
  - [Zernio::GetCallsUsage200ResponseTotals](docs/GetCallsUsage200ResponseTotals.md)
  - [Zernio::GetCampaignAnalytics202Response](docs/GetCampaignAnalytics202Response.md)
+ - [Zernio::GetCampaignTargeting200Response](docs/GetCampaignTargeting200Response.md)
+ - [Zernio::GetCampaignTargeting200ResponseDevicesInner](docs/GetCampaignTargeting200ResponseDevicesInner.md)
+ - [Zernio::GetCampaignTargeting200ResponseLanguagesInner](docs/GetCampaignTargeting200ResponseLanguagesInner.md)
+ - [Zernio::GetCampaignTargeting200ResponseLocationsInner](docs/GetCampaignTargeting200ResponseLocationsInner.md)
  - [Zernio::GetCommentAutomation200Response](docs/GetCommentAutomation200Response.md)
  - [Zernio::GetCommentAutomation200ResponseAutomation](docs/GetCommentAutomation200ResponseAutomation.md)
  - [Zernio::GetCommentAutomation200ResponseLogsInner](docs/GetCommentAutomation200ResponseLogsInner.md)
@@ -1588,6 +1609,8 @@ Class | Method | HTTP request | Description
  - [Zernio::LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner](docs/LinkedInLeadFormPlatformDataQuestionsInnerOneOf1ChoicesInner.md)
  - [Zernio::LinkedInPlatformData](docs/LinkedInPlatformData.md)
  - [Zernio::LinkedInPlatformDataPoll](docs/LinkedInPlatformDataPoll.md)
+ - [Zernio::ListAccountCallouts200Response](docs/ListAccountCallouts200Response.md)
+ - [Zernio::ListAccountCallouts200ResponseCalloutsInner](docs/ListAccountCallouts200ResponseCalloutsInner.md)
  - [Zernio::ListAccountGroups200Response](docs/ListAccountGroups200Response.md)
  - [Zernio::ListAccountGroups200ResponseGroupsInner](docs/ListAccountGroups200ResponseGroupsInner.md)
  - [Zernio::ListAdAccounts200Response](docs/ListAdAccounts200Response.md)
@@ -1603,6 +1626,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdImages200Response](docs/ListAdImages200Response.md)
  - [Zernio::ListAdKeywords200Response](docs/ListAdKeywords200Response.md)
  - [Zernio::ListAdLabels200Response](docs/ListAdLabels200Response.md)
+ - [Zernio::ListAdSets200Response](docs/ListAdSets200Response.md)
+ - [Zernio::ListAdSets200ResponseAdSetsInner](docs/ListAdSets200ResponseAdSetsInner.md)
  - [Zernio::ListAdStudies200Response](docs/ListAdStudies200Response.md)
  - [Zernio::ListAdVideos200Response](docs/ListAdVideos200Response.md)
  - [Zernio::ListAds202Response](docs/ListAds202Response.md)
@@ -1630,6 +1655,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListContacts200ResponseContactsInner](docs/ListContacts200ResponseContactsInner.md)
  - [Zernio::ListContacts200ResponseFilters](docs/ListContacts200ResponseFilters.md)
  - [Zernio::ListContacts200ResponsePagination](docs/ListContacts200ResponsePagination.md)
+ - [Zernio::ListConversionActions200Response](docs/ListConversionActions200Response.md)
  - [Zernio::ListConversionAssociations200Response](docs/ListConversionAssociations200Response.md)
  - [Zernio::ListConversionAssociations200ResponseAssociationsInner](docs/ListConversionAssociations200ResponseAssociationsInner.md)
  - [Zernio::ListConversionDestinations200Response](docs/ListConversionDestinations200Response.md)
@@ -1874,6 +1900,8 @@ Class | Method | HTTP request | Description
  - [Zernio::RemediatePhoneNumberRequest](docs/RemediatePhoneNumberRequest.md)
  - [Zernio::RemediatePhoneNumberRequestDocumentsInner](docs/RemediatePhoneNumberRequestDocumentsInner.md)
  - [Zernio::RemediatePhoneNumberRequestDocumentsInnerOneOf](docs/RemediatePhoneNumberRequestDocumentsInnerOneOf.md)
+ - [Zernio::RemoveAccountCallout200Response](docs/RemoveAccountCallout200Response.md)
+ - [Zernio::RemoveAccountCalloutRequest](docs/RemoveAccountCalloutRequest.md)
  - [Zernio::RemoveAdKeyword200Response](docs/RemoveAdKeyword200Response.md)
  - [Zernio::RemoveBookmark200Response](docs/RemoveBookmark200Response.md)
  - [Zernio::RemoveConversionAssociations200Response](docs/RemoveConversionAssociations200Response.md)
@@ -2167,6 +2195,14 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateBroadcastRequestMessage](docs/UpdateBroadcastRequestMessage.md)
  - [Zernio::UpdateBroadcastRequestTemplate](docs/UpdateBroadcastRequestTemplate.md)
  - [Zernio::UpdateBroadcastRequestTemplateVariableMappingValue](docs/UpdateBroadcastRequestTemplateVariableMappingValue.md)
+ - [Zernio::UpdateCampaignTargeting200Response](docs/UpdateCampaignTargeting200Response.md)
+ - [Zernio::UpdateCampaignTargetingRequest](docs/UpdateCampaignTargetingRequest.md)
+ - [Zernio::UpdateCampaignTargetingRequestTargeting](docs/UpdateCampaignTargetingRequestTargeting.md)
+ - [Zernio::UpdateCampaignTargetingRequestTargetingDevicesInner](docs/UpdateCampaignTargetingRequestTargetingDevicesInner.md)
+ - [Zernio::UpdateCampaignTargetingRequestTargetingDevicesInnerOneOf](docs/UpdateCampaignTargetingRequestTargetingDevicesInnerOneOf.md)
+ - [Zernio::UpdateCampaignTargetingRequestTargetingLocations](docs/UpdateCampaignTargetingRequestTargetingLocations.md)
+ - [Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOf](docs/UpdateCampaignTargetingRequestTargetingLocationsOneOf.md)
+ - [Zernio::UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner](docs/UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner.md)
  - [Zernio::UpdateCommentAutomation200Response](docs/UpdateCommentAutomation200Response.md)
  - [Zernio::UpdateCommentAutomation200ResponseAutomation](docs/UpdateCommentAutomation200ResponseAutomation.md)
  - [Zernio::UpdateCommentAutomationRequest](docs/UpdateCommentAutomationRequest.md)
