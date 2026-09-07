@@ -32,6 +32,7 @@ docs/AdDailyMetrics.md
 docs/AdEngagementCounts.md
 docs/AdFunnelCounts.md
 docs/AdInsightsApi.md
+docs/AdLibraryApi.md
 docs/AdMetrics.md
 docs/AdPromotedObject.md
 docs/AdReviewStatus.md
@@ -1278,6 +1279,8 @@ docs/ScheduleBroadcast200ResponseBroadcast.md
 docs/ScheduleBroadcastRequest.md
 docs/SearchAdInterests200Response.md
 docs/SearchAdInterests200ResponseInterestsInner.md
+docs/SearchAdLibrary200Response.md
+docs/SearchAdLibrary200ResponsePaging.md
 docs/SearchAdTargeting200Response.md
 docs/SearchAdTargeting200ResponseResultsInner.md
 docs/SearchAvailablePhoneNumbers200Response.md
@@ -1858,6 +1861,7 @@ lib/zernio-sdk/api/ad_audiences_api.rb
 lib/zernio-sdk/api/ad_campaigns_api.rb
 lib/zernio-sdk/api/ad_creatives_api.rb
 lib/zernio-sdk/api/ad_insights_api.rb
+lib/zernio-sdk/api/ad_library_api.rb
 lib/zernio-sdk/api/ad_targeting_api.rb
 lib/zernio-sdk/api/analytics_api.rb
 lib/zernio-sdk/api/api_keys_api.rb
@@ -3144,6 +3148,8 @@ lib/zernio-sdk/models/schedule_broadcast200_response_broadcast.rb
 lib/zernio-sdk/models/schedule_broadcast_request.rb
 lib/zernio-sdk/models/search_ad_interests200_response.rb
 lib/zernio-sdk/models/search_ad_interests200_response_interests_inner.rb
+lib/zernio-sdk/models/search_ad_library200_response.rb
+lib/zernio-sdk/models/search_ad_library200_response_paging.rb
 lib/zernio-sdk/models/search_ad_targeting200_response.rb
 lib/zernio-sdk/models/search_ad_targeting200_response_results_inner.rb
 lib/zernio-sdk/models/search_available_phone_numbers200_response.rb
@@ -3705,6 +3711,7 @@ spec/api/ad_audiences_api_spec.rb
 spec/api/ad_campaigns_api_spec.rb
 spec/api/ad_creatives_api_spec.rb
 spec/api/ad_insights_api_spec.rb
+spec/api/ad_library_api_spec.rb
 spec/api/ad_targeting_api_spec.rb
 spec/api/analytics_api_spec.rb
 spec/api/api_keys_api_spec.rb
@@ -4986,6 +4993,8 @@ spec/models/schedule_broadcast200_response_spec.rb
 spec/models/schedule_broadcast_request_spec.rb
 spec/models/search_ad_interests200_response_interests_inner_spec.rb
 spec/models/search_ad_interests200_response_spec.rb
+spec/models/search_ad_library200_response_paging_spec.rb
+spec/models/search_ad_library200_response_spec.rb
 spec/models/search_ad_targeting200_response_results_inner_spec.rb
 spec/models/search_ad_targeting200_response_spec.rb
 spec/models/search_available_phone_numbers200_response_numbers_inner_spec.rb
