@@ -14,16 +14,25 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdKeywords200Response < ApiModelBase
+  class AddAdKeywordsRequest < ApiModelBase
+    # Social account ID (Google Ads)
+    attr_accessor :account_id
+
+    # Google ad group ID to add the keywords to
+    attr_accessor :ad_set_id
+
     attr_accessor :keywords
 
-    attr_accessor :pagination
+    # Add as ad-group-level negatives instead of positive keywords
+    attr_accessor :negative
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'account_id' => :'accountId',
+        :'ad_set_id' => :'adSetId',
         :'keywords' => :'keywords',
-        :'pagination' => :'pagination'
+        :'negative' => :'negative'
       }
     end
 
@@ -40,8 +49,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'keywords' => :'Array<AdKeyword>',
-        :'pagination' => :'Pagination'
+        :'account_id' => :'String',
+        :'ad_set_id' => :'String',
+        :'keywords' => :'Array<AddAdKeywordsRequestKeywordsInner>',
+        :'negative' => :'Boolean'
       }
     end
 
@@ -55,26 +66,42 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdKeywords200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::AddAdKeywordsRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdKeywords200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::AddAdKeywordsRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'account_id')
+        self.account_id = attributes[:'account_id']
+      else
+        self.account_id = nil
+      end
+
+      if attributes.key?(:'ad_set_id')
+        self.ad_set_id = attributes[:'ad_set_id']
+      else
+        self.ad_set_id = nil
+      end
 
       if attributes.key?(:'keywords')
         if (value = attributes[:'keywords']).is_a?(Array)
           self.keywords = value
         end
+      else
+        self.keywords = nil
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'negative')
+        self.negative = attributes[:'negative']
+      else
+        self.negative = false
       end
     end
 
@@ -83,6 +110,26 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
+      if @ad_set_id.nil?
+        invalid_properties.push('invalid value for "ad_set_id", ad_set_id cannot be nil.')
+      end
+
+      if @keywords.nil?
+        invalid_properties.push('invalid value for "keywords", keywords cannot be nil.')
+      end
+
+      if @keywords.length > 1000
+        invalid_properties.push('invalid value for "keywords", number of items must be less than or equal to 1000.')
+      end
+
+      if @keywords.length < 1
+        invalid_properties.push('invalid value for "keywords", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -90,7 +137,50 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @account_id.nil?
+      return false if @ad_set_id.nil?
+      return false if @keywords.nil?
+      return false if @keywords.length > 1000
+      return false if @keywords.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] account_id Value to be assigned
+    def account_id=(account_id)
+      if account_id.nil?
+        fail ArgumentError, 'account_id cannot be nil'
+      end
+
+      @account_id = account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] ad_set_id Value to be assigned
+    def ad_set_id=(ad_set_id)
+      if ad_set_id.nil?
+        fail ArgumentError, 'ad_set_id cannot be nil'
+      end
+
+      @ad_set_id = ad_set_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] keywords Value to be assigned
+    def keywords=(keywords)
+      if keywords.nil?
+        fail ArgumentError, 'keywords cannot be nil'
+      end
+
+      if keywords.length > 1000
+        fail ArgumentError, 'invalid value for "keywords", number of items must be less than or equal to 1000.'
+      end
+
+      if keywords.length < 1
+        fail ArgumentError, 'invalid value for "keywords", number of items must be greater than or equal to 1.'
+      end
+
+      @keywords = keywords
     end
 
     # Checks equality by comparing each attribute.
@@ -98,8 +188,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          account_id == o.account_id &&
+          ad_set_id == o.ad_set_id &&
           keywords == o.keywords &&
-          pagination == o.pagination
+          negative == o.negative
     end
 
     # @see the `==` method
@@ -111,7 +203,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [keywords, pagination].hash
+      [account_id, ad_set_id, keywords, negative].hash
     end
 
     # Builds the object from hash

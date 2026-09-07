@@ -78,8 +78,9 @@
 | **placement_assets** | [**CreateStandaloneAdRequestPlacementAssets**](CreateStandaloneAdRequestPlacementAssets.md) |  | [optional] |
 | **audience_id** | **String** | Custom audience ID for targeting | [optional] |
 | **campaign_type** | **String** | Google only | [optional][default to &#39;display&#39;] |
-| **keywords** | **Array&lt;String&gt;** | Google Search only. BROAD-match keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.keywords, which also sets match types. | [optional] |
-| **negative_keywords** | **Array&lt;String&gt;** | Google Search only; other platforms return 400. BROAD-match negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords. | [optional] |
+| **keywords** | [**Array&lt;KeywordEntry&gt;**](KeywordEntry.md) | Google Search only. Keywords on the new ad group; entries are strings (BROAD) or { text, matchType }. Editable later via PUT /v1/ads/{adId} targeting.keywords. | [optional] |
+| **negative_keywords** | [**Array&lt;KeywordEntry&gt;**](KeywordEntry.md) | Google Search only; other platforms return 400. Ad-group-level negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords. | [optional] |
+| **campaign_negative_keywords** | [**Array&lt;KeywordEntry&gt;**](KeywordEntry.md) | Google Search only; other platforms return 400. Campaign-level negative keywords (campaign_criterion.negative), created alongside the ad group. Editable later via PUT /v1/ads/campaigns/{campaignId}/negative-keywords. | [optional] |
 | **additional_headlines** | **Array&lt;String&gt;** | Google Search RSA only. Extra headlines. | [optional] |
 | **additional_descriptions** | **Array&lt;String&gt;** | Google Search RSA only. Extra descriptions. | [optional] |
 | **sitelinks** | [**Array&lt;CreateStandaloneAdRequestSitelinksInner&gt;**](CreateStandaloneAdRequestSitelinksInner.md) | Google Search only. Sitelink assets to create and attach at the campaign level. Each entry becomes an Asset (with sitelink_asset + Asset.final_urls) plus a CampaignAsset link (field_type SITELINK). Approval is async — Google reviews assets after creation; poll asset.policy_summary later to read the verdict. Google requires at least two sitelinks to surface them on an ad; four or more is Google&#39;s own recommendation for maximum visibility. The response&#39;s creative.sitelinks[] echoes each input plus its Google resourceName.  | [optional] |
@@ -183,6 +184,7 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   campaign_type: null,
   keywords: null,
   negative_keywords: null,
+  campaign_negative_keywords: null,
   additional_headlines: null,
   additional_descriptions: null,
   sitelinks: null,

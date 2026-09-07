@@ -19,6 +19,74 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Add Search keywords to an ad group
+    # Adds one or more keyword criteria to an existing Google Search ad group, without touching the keywords already there (unlike the whole-set diff on `PUT /v1/ads/{adId}`, `keywords`/`negativeKeywords` in `platformSpecificData`, which replaces the set). Set `negative: true` to add ad-group-level negatives instead of positive keywords. 
+    # @param add_ad_keywords_request [AddAdKeywordsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AddAdKeywords201Response]
+    def add_ad_keywords(add_ad_keywords_request, opts = {})
+      data, _status_code, _headers = add_ad_keywords_with_http_info(add_ad_keywords_request, opts)
+      data
+    end
+
+    # Add Search keywords to an ad group
+    # Adds one or more keyword criteria to an existing Google Search ad group, without touching the keywords already there (unlike the whole-set diff on &#x60;PUT /v1/ads/{adId}&#x60;, &#x60;keywords&#x60;/&#x60;negativeKeywords&#x60; in &#x60;platformSpecificData&#x60;, which replaces the set). Set &#x60;negative: true&#x60; to add ad-group-level negatives instead of positive keywords. 
+    # @param add_ad_keywords_request [AddAdKeywordsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AddAdKeywords201Response, Integer, Hash)>] AddAdKeywords201Response data, response status code and response headers
+    def add_ad_keywords_with_http_info(add_ad_keywords_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.add_ad_keywords ...'
+      end
+      # verify the required parameter 'add_ad_keywords_request' is set
+      if @api_client.config.client_side_validation && add_ad_keywords_request.nil?
+        fail ArgumentError, "Missing the required parameter 'add_ad_keywords_request' when calling AdCampaignsApi.add_ad_keywords"
+      end
+      # resource path
+      local_var_path = '/v1/ads/keywords'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(add_ad_keywords_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AddAdKeywords201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.add_ad_keywords",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#add_ad_keywords\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Attach extension assets to a Google Search campaign
     # Attach sitelinks, callouts and/or structured snippets to an already-existing Google Search campaign — the same builders POST /v1/ads/create uses, but without rebuilding the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.  Google-only. Other platforms have no equivalent extension surface and return 501.  Approval status is Google-async; poll `asset.policy_summary` after review. Assets stay in the account library even if the campaign is later deleted.
     # @param campaign_id [String] Numeric Google platform campaign id.
@@ -1547,6 +1615,213 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List campaign-level negative keywords
+    # Returns the campaign-level negative keywords (`campaign_criterion.negative`), distinct from the ad-group-level negatives under `GET /v1/ads/keywords`. Read live from Google on every call (not synced to Postgres), and gated by the shared Google Ads operations budget like every other on-demand Google surface.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not `platform` was passed. 
+    # @param campaign_id [String] Platform campaign ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Optional and NOT authoritative: the resolved campaign&#39;s own platform decides 200 vs 501, never this hint.
+    # @return [ListCampaignNegativeKeywords200Response]
+    def list_campaign_negative_keywords(campaign_id, opts = {})
+      data, _status_code, _headers = list_campaign_negative_keywords_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List campaign-level negative keywords
+    # Returns the campaign-level negative keywords (&#x60;campaign_criterion.negative&#x60;), distinct from the ad-group-level negatives under &#x60;GET /v1/ads/keywords&#x60;. Read live from Google on every call (not synced to Postgres), and gated by the shared Google Ads operations budget like every other on-demand Google surface.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not &#x60;platform&#x60; was passed. 
+    # @param campaign_id [String] Platform campaign ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Optional and NOT authoritative: the resolved campaign&#39;s own platform decides 200 vs 501, never this hint.
+    # @return [Array<(ListCampaignNegativeKeywords200Response, Integer, Hash)>] ListCampaignNegativeKeywords200Response data, response status code and response headers
+    def list_campaign_negative_keywords_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.list_campaign_negative_keywords ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.list_campaign_negative_keywords"
+      end
+      allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/negative-keywords'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListCampaignNegativeKeywords200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.list_campaign_negative_keywords",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#list_campaign_negative_keywords\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Remove a Search keyword
+    # Removes one keyword criterion (positive or negative) from its ad group (M.140).
+    # @param keyword_id [String] Zernio keyword ID (not the Google criterion ID)
+    # @param [Hash] opts the optional parameters
+    # @return [RemoveAdKeyword200Response]
+    def remove_ad_keyword(keyword_id, opts = {})
+      data, _status_code, _headers = remove_ad_keyword_with_http_info(keyword_id, opts)
+      data
+    end
+
+    # Remove a Search keyword
+    # Removes one keyword criterion (positive or negative) from its ad group (M.140).
+    # @param keyword_id [String] Zernio keyword ID (not the Google criterion ID)
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RemoveAdKeyword200Response, Integer, Hash)>] RemoveAdKeyword200Response data, response status code and response headers
+    def remove_ad_keyword_with_http_info(keyword_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.remove_ad_keyword ...'
+      end
+      # verify the required parameter 'keyword_id' is set
+      if @api_client.config.client_side_validation && keyword_id.nil?
+        fail ArgumentError, "Missing the required parameter 'keyword_id' when calling AdCampaignsApi.remove_ad_keyword"
+      end
+      # resource path
+      local_var_path = '/v1/ads/keywords/{keywordId}'.sub('{' + 'keywordId' + '}', CGI.escape(keyword_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveAdKeyword200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.remove_ad_keyword",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#remove_ad_keyword\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Replace campaign-level negative keywords
+    # Replaces the FULL set of campaign-level negative keywords (C.270): the desired list is diffed against what Google already has, and the difference is applied as one `create`/`remove` mutate. Send an empty array to clear every campaign negative.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not `platform` was sent. 
+    # @param campaign_id [String] Platform campaign ID
+    # @param replace_campaign_negative_keywords_request [ReplaceCampaignNegativeKeywordsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ReplaceCampaignNegativeKeywords200Response]
+    def replace_campaign_negative_keywords(campaign_id, replace_campaign_negative_keywords_request, opts = {})
+      data, _status_code, _headers = replace_campaign_negative_keywords_with_http_info(campaign_id, replace_campaign_negative_keywords_request, opts)
+      data
+    end
+
+    # Replace campaign-level negative keywords
+    # Replaces the FULL set of campaign-level negative keywords (C.270): the desired list is diffed against what Google already has, and the difference is applied as one &#x60;create&#x60;/&#x60;remove&#x60; mutate. Send an empty array to clear every campaign negative.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not &#x60;platform&#x60; was sent. 
+    # @param campaign_id [String] Platform campaign ID
+    # @param replace_campaign_negative_keywords_request [ReplaceCampaignNegativeKeywordsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ReplaceCampaignNegativeKeywords200Response, Integer, Hash)>] ReplaceCampaignNegativeKeywords200Response data, response status code and response headers
+    def replace_campaign_negative_keywords_with_http_info(campaign_id, replace_campaign_negative_keywords_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.replace_campaign_negative_keywords ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.replace_campaign_negative_keywords"
+      end
+      # verify the required parameter 'replace_campaign_negative_keywords_request' is set
+      if @api_client.config.client_side_validation && replace_campaign_negative_keywords_request.nil?
+        fail ArgumentError, "Missing the required parameter 'replace_campaign_negative_keywords_request' when calling AdCampaignsApi.replace_campaign_negative_keywords"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/negative-keywords'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(replace_campaign_negative_keywords_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplaceCampaignNegativeKeywords200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.replace_campaign_negative_keywords",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#replace_campaign_negative_keywords\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update ad
     # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via `/v2/adgroup/update/`), and creative   (via `/v2/ad/update/` patch-style — `headline` is ignored, `body` becomes `ad_text`). - **Google**: status, budget, and KEYWORD edits via `targeting.keywords` /   `targeting.negativeKeywords` — each list you send becomes the FULL new set of its   kind on the ad group (criteria not in the list are removed); a kind left out is   untouched. Any other `targeting` field returns 400: Google cannot mutate broad   targeting post-create without recreating the campaign. `creative` returns 501. - **LinkedIn**: status, budget, targeting (geo countries only, applied to the   LinkedIn Campaign via PARTIAL_UPDATE), and creative (uploads new media, creates a   replacement inline creative on the same campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   `targeting` or `creative` returns 501 with code `unsupported_platform_operation`.   OpenAI Ads budget is lifetime-only (see `budget.type` below). 
     # @param ad_id [String] 
@@ -1769,6 +2044,80 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Pause or enable a Search keyword
+    # Changes `ad_group_criterion.status` for one keyword criterion (M.140). Negative keywords have no status on Google and cannot be paused or enabled. 
+    # @param keyword_id [String] Zernio keyword ID (not the Google criterion ID)
+    # @param update_ad_keyword_request [UpdateAdKeywordRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAdKeyword200Response]
+    def update_ad_keyword(keyword_id, update_ad_keyword_request, opts = {})
+      data, _status_code, _headers = update_ad_keyword_with_http_info(keyword_id, update_ad_keyword_request, opts)
+      data
+    end
+
+    # Pause or enable a Search keyword
+    # Changes &#x60;ad_group_criterion.status&#x60; for one keyword criterion (M.140). Negative keywords have no status on Google and cannot be paused or enabled. 
+    # @param keyword_id [String] Zernio keyword ID (not the Google criterion ID)
+    # @param update_ad_keyword_request [UpdateAdKeywordRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAdKeyword200Response, Integer, Hash)>] UpdateAdKeyword200Response data, response status code and response headers
+    def update_ad_keyword_with_http_info(keyword_id, update_ad_keyword_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_ad_keyword ...'
+      end
+      # verify the required parameter 'keyword_id' is set
+      if @api_client.config.client_side_validation && keyword_id.nil?
+        fail ArgumentError, "Missing the required parameter 'keyword_id' when calling AdCampaignsApi.update_ad_keyword"
+      end
+      # verify the required parameter 'update_ad_keyword_request' is set
+      if @api_client.config.client_side_validation && update_ad_keyword_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_keyword_request' when calling AdCampaignsApi.update_ad_keyword"
+      end
+      # resource path
+      local_var_path = '/v1/ads/keywords/{keywordId}'.sub('{' + 'keywordId' + '}', CGI.escape(keyword_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_keyword_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAdKeyword200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.update_ad_keyword",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#update_ad_keyword\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update an ad set
     # Ad-set-level writes. Use this for ABO budget updates, ad-set-scoped pause/resume, bid-strategy edits, Meta value-rule-set attach/detach, and Meta-only post-launch delivery settings via `platformSpecificData`. At least one updatable field is required.  Value rule sets (Meta only, see `/v1/ads/value-rule-sets`): - ATTACH or REPLACE: send `valueRuleSetId`. Attachment is driven by the id's   presence, so `valueRulesApplied: true` is optional. Sending a different id   replaces the previous association; there is no separate replace call. - DETACH: send `valueRulesApplied: false` and OMIT `valueRuleSetId`. - Sending `valueRulesApplied: false` TOGETHER with `valueRuleSetId` returns 400   `mutually_exclusive_fields`. This is deliberate: Meta attaches the rule set   whenever `value_rule_set_id` is present, even with `value_rules_applied` false,   so echoing stored state while asking to detach would silently keep the bid   adjustments live. - Eligibility: only ad sets on `LOWEST_COST_WITHOUT_CAP` or `COST_CAP`. Meta   rejects the rest server-side. - Read back with `GET /v1/ads/ad-sets/{adSetId}?fields=value_rule_set_id`. Meta   does not document `value_rules_applied` as a readable ad-set field, so the   boolean cannot be read back.  Bid strategy compatibility (per Meta's spec): - `LOWEST_COST_WITHOUT_CAP`: no `bidAmount`, no `roasAverageFloor`. - `LOWEST_COST_WITH_BID_CAP` / `COST_CAP`: `bidAmount` REQUIRED (whole currency units). - `LOWEST_COST_WITH_MIN_ROAS`: `roasAverageFloor` REQUIRED (decimal multiplier, e.g. 2.0 = 2.0x ROAS). - Meta only: send `bidAmount` WITHOUT `bidStrategy` to change the cap amount on an ad set   under a COST_CAP / LOWEST_COST_WITH_BID_CAP parent campaign, leaving the strategy itself   (inherited from the campaign) untouched. `roasAverageFloor` without `bidStrategy` is   rejected (it has no meaning outside LOWEST_COST_WITH_MIN_ROAS).  Delivery settings are validated by Meta against the campaign objective; incompatible combinations (e.g. a billingEvent the optimization goal doesn't allow) surface as 400s from Meta.  When updating `budget` on an ABO campaign: if the parent campaign is CBO, the response is 409 with code BUDGET_LEVEL_MISMATCH — route to PUT /v1/ads/campaigns/{campaignId} instead. 
     # @param ad_set_id [String] Platform ad set ID
@@ -1920,21 +2269,21 @@ module Zernio
     # Pause or resume a single ad
     # Ad-scoped pause/resume — touches ONLY this ad, never its parent ad set or campaign (so sibling ads keep running). Thin wrapper over the `status` field of PUT /v1/ads/{adId}, for callers that want a URL symmetric to /v1/ads/campaigns/{campaignId}/status and /v1/ads/ad-sets/{adSetId}/status.  `{adId}` accepts the same identifier dialects as GET/PUT /v1/ads/{adId} (Zernio hex `_id`, Meta numeric `platformAdId`, or the creative's effective story/media IDs). `platform` is inferred from the ad, so it's not required in the body. Ads in terminal statuses (rejected, completed, cancelled) and no-op flips (already in the target state) are skipped. 
     # @param ad_id [String] Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs.
-    # @param update_ad_status_request [UpdateAdStatusRequest] 
+    # @param update_ad_keyword_request [UpdateAdKeywordRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UpdateAdStatus200Response]
-    def update_ad_status(ad_id, update_ad_status_request, opts = {})
-      data, _status_code, _headers = update_ad_status_with_http_info(ad_id, update_ad_status_request, opts)
+    def update_ad_status(ad_id, update_ad_keyword_request, opts = {})
+      data, _status_code, _headers = update_ad_status_with_http_info(ad_id, update_ad_keyword_request, opts)
       data
     end
 
     # Pause or resume a single ad
     # Ad-scoped pause/resume — touches ONLY this ad, never its parent ad set or campaign (so sibling ads keep running). Thin wrapper over the &#x60;status&#x60; field of PUT /v1/ads/{adId}, for callers that want a URL symmetric to /v1/ads/campaigns/{campaignId}/status and /v1/ads/ad-sets/{adSetId}/status.  &#x60;{adId}&#x60; accepts the same identifier dialects as GET/PUT /v1/ads/{adId} (Zernio hex &#x60;_id&#x60;, Meta numeric &#x60;platformAdId&#x60;, or the creative&#39;s effective story/media IDs). &#x60;platform&#x60; is inferred from the ad, so it&#39;s not required in the body. Ads in terminal statuses (rejected, completed, cancelled) and no-op flips (already in the target state) are skipped. 
     # @param ad_id [String] Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs.
-    # @param update_ad_status_request [UpdateAdStatusRequest] 
+    # @param update_ad_keyword_request [UpdateAdKeywordRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateAdStatus200Response, Integer, Hash)>] UpdateAdStatus200Response data, response status code and response headers
-    def update_ad_status_with_http_info(ad_id, update_ad_status_request, opts = {})
+    def update_ad_status_with_http_info(ad_id, update_ad_keyword_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_ad_status ...'
       end
@@ -1942,9 +2291,9 @@ module Zernio
       if @api_client.config.client_side_validation && ad_id.nil?
         fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdCampaignsApi.update_ad_status"
       end
-      # verify the required parameter 'update_ad_status_request' is set
-      if @api_client.config.client_side_validation && update_ad_status_request.nil?
-        fail ArgumentError, "Missing the required parameter 'update_ad_status_request' when calling AdCampaignsApi.update_ad_status"
+      # verify the required parameter 'update_ad_keyword_request' is set
+      if @api_client.config.client_side_validation && update_ad_keyword_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_keyword_request' when calling AdCampaignsApi.update_ad_status"
       end
       # resource path
       local_var_path = '/v1/ads/{adId}/status'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s))
@@ -1966,7 +2315,7 @@ module Zernio
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_status_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_keyword_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'UpdateAdStatus200Response'

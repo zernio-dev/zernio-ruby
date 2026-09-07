@@ -1,4 +1,4 @@
-# Zernio::UpdateAdStatusRequest
+# Zernio::UpdateAdKeywordRequest
 
 ## Properties
 
@@ -11,7 +11,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::UpdateAdStatusRequest.new(
+instance = Zernio::UpdateAdKeywordRequest.new(
   status: null
 )
 ```

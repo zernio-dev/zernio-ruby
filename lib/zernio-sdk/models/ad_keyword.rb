@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdKeywords200ResponseKeywordsInner < ApiModelBase
+  class AdKeyword < ApiModelBase
     attr_accessor :id
 
     # Social account ID owning the sync
@@ -48,7 +48,12 @@ module Zernio
 
     attr_accessor :negative
 
+    # Google Quality Score, 1-10. Null when unrated.
+    attr_accessor :quality_score
+
     attr_accessor :synced_at
+
+    attr_accessor :metrics
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -90,7 +95,9 @@ module Zernio
         :'match_type' => :'matchType',
         :'status' => :'status',
         :'negative' => :'negative',
-        :'synced_at' => :'syncedAt'
+        :'quality_score' => :'qualityScore',
+        :'synced_at' => :'syncedAt',
+        :'metrics' => :'metrics'
       }
     end
 
@@ -122,7 +129,9 @@ module Zernio
         :'match_type' => :'String',
         :'status' => :'String',
         :'negative' => :'Boolean',
-        :'synced_at' => :'Time'
+        :'quality_score' => :'Integer',
+        :'synced_at' => :'Time',
+        :'metrics' => :'AdKeywordMetrics'
       }
     end
 
@@ -133,7 +142,8 @@ module Zernio
         :'campaign_status',
         :'ad_set_name',
         :'ad_set_status',
-        :'synced_at'
+        :'quality_score',
+        :'synced_at',
       ])
     end
 
@@ -141,14 +151,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdKeywords200ResponseKeywordsInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::AdKeyword` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdKeywords200ResponseKeywordsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::AdKeyword`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -213,8 +223,16 @@ module Zernio
         self.negative = attributes[:'negative']
       end
 
+      if attributes.key?(:'quality_score')
+        self.quality_score = attributes[:'quality_score']
+      end
+
       if attributes.key?(:'synced_at')
         self.synced_at = attributes[:'synced_at']
+      end
+
+      if attributes.key?(:'metrics')
+        self.metrics = attributes[:'metrics']
       end
     end
 
@@ -289,7 +307,9 @@ module Zernio
           match_type == o.match_type &&
           status == o.status &&
           negative == o.negative &&
-          synced_at == o.synced_at
+          quality_score == o.quality_score &&
+          synced_at == o.synced_at &&
+          metrics == o.metrics
     end
 
     # @see the `==` method
@@ -301,7 +321,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account_id, profile_id, platform, ad_account_id, campaign_id, campaign_name, campaign_status, ad_set_id, ad_set_name, ad_set_status, keyword, match_type, status, negative, synced_at].hash
+      [id, account_id, profile_id, platform, ad_account_id, campaign_id, campaign_name, campaign_status, ad_set_id, ad_set_name, ad_set_status, keyword, match_type, status, negative, quality_score, synced_at, metrics].hash
     end
 
     # Builds the object from hash

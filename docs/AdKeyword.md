@@ -1,4 +1,4 @@
-# Zernio::ListAdKeywords200ResponseKeywordsInner
+# Zernio::AdKeyword
 
 ## Properties
 
@@ -19,14 +19,16 @@
 | **match_type** | **String** |  | [optional] |
 | **status** | **String** |  | [optional] |
 | **negative** | **Boolean** |  | [optional] |
+| **quality_score** | **Integer** | Google Quality Score, 1-10. Null when unrated. | [optional] |
 | **synced_at** | **Time** |  | [optional] |
+| **metrics** | [**AdKeywordMetrics**](AdKeywordMetrics.md) |  | [optional] |
 
 ## Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::ListAdKeywords200ResponseKeywordsInner.new(
+instance = Zernio::AdKeyword.new(
   id: null,
   account_id: null,
   profile_id: null,
@@ -42,7 +44,9 @@ instance = Zernio::ListAdKeywords200ResponseKeywordsInner.new(
   match_type: null,
   status: null,
   negative: null,
-  synced_at: null
+  quality_score: null,
+  synced_at: null,
+  metrics: null
 )
 ```
 

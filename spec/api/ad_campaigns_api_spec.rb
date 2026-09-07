@@ -32,6 +32,18 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for add_ad_keywords
+  # Add Search keywords to an ad group
+  # Adds one or more keyword criteria to an existing Google Search ad group, without touching the keywords already there (unlike the whole-set diff on &#x60;PUT /v1/ads/{adId}&#x60;, &#x60;keywords&#x60;/&#x60;negativeKeywords&#x60; in &#x60;platformSpecificData&#x60;, which replaces the set). Set &#x60;negative: true&#x60; to add ad-group-level negatives instead of positive keywords. 
+  # @param add_ad_keywords_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AddAdKeywords201Response]
+  describe 'add_ad_keywords test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for attach_campaign_assets
   # Attach extension assets to a Google Search campaign
   # Attach sitelinks, callouts and/or structured snippets to an already-existing Google Search campaign — the same builders POST /v1/ads/create uses, but without rebuilding the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.  Google-only. Other platforms have no equivalent extension surface and return 501.  Approval status is Google-async; poll &#x60;asset.policy_summary&#x60; after review. Assets stay in the account library even if the campaign is later deleted.
@@ -319,6 +331,44 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for list_campaign_negative_keywords
+  # List campaign-level negative keywords
+  # Returns the campaign-level negative keywords (&#x60;campaign_criterion.negative&#x60;), distinct from the ad-group-level negatives under &#x60;GET /v1/ads/keywords&#x60;. Read live from Google on every call (not synced to Postgres), and gated by the shared Google Ads operations budget like every other on-demand Google surface.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not &#x60;platform&#x60; was passed. 
+  # @param campaign_id Platform campaign ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :platform Optional and NOT authoritative: the resolved campaign&#39;s own platform decides 200 vs 501, never this hint.
+  # @return [ListCampaignNegativeKeywords200Response]
+  describe 'list_campaign_negative_keywords test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for remove_ad_keyword
+  # Remove a Search keyword
+  # Removes one keyword criterion (positive or negative) from its ad group (M.140).
+  # @param keyword_id Zernio keyword ID (not the Google criterion ID)
+  # @param [Hash] opts the optional parameters
+  # @return [RemoveAdKeyword200Response]
+  describe 'remove_ad_keyword test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for replace_campaign_negative_keywords
+  # Replace campaign-level negative keywords
+  # Replaces the FULL set of campaign-level negative keywords (C.270): the desired list is diffed against what Google already has, and the difference is applied as one &#x60;create&#x60;/&#x60;remove&#x60; mutate. Send an empty array to clear every campaign negative.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not &#x60;platform&#x60; was sent. 
+  # @param campaign_id Platform campaign ID
+  # @param replace_campaign_negative_keywords_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ReplaceCampaignNegativeKeywords200Response]
+  describe 'replace_campaign_negative_keywords test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_ad
   # Update ad
   # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via &#x60;/v2/adgroup/update/&#x60;), and creative   (via &#x60;/v2/ad/update/&#x60; patch-style — &#x60;headline&#x60; is ignored, &#x60;body&#x60; becomes &#x60;ad_text&#x60;). - **Google**: status, budget, and KEYWORD edits via &#x60;targeting.keywords&#x60; /   &#x60;targeting.negativeKeywords&#x60; — each list you send becomes the FULL new set of its   kind on the ad group (criteria not in the list are removed); a kind left out is   untouched. Any other &#x60;targeting&#x60; field returns 400: Google cannot mutate broad   targeting post-create without recreating the campaign. &#x60;creative&#x60; returns 501. - **LinkedIn**: status, budget, targeting (geo countries only, applied to the   LinkedIn Campaign via PARTIAL_UPDATE), and creative (uploads new media, creates a   replacement inline creative on the same campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   &#x60;targeting&#x60; or &#x60;creative&#x60; returns 501 with code &#x60;unsupported_platform_operation&#x60;.   OpenAI Ads budget is lifetime-only (see &#x60;budget.type&#x60; below). 
@@ -358,6 +408,19 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for update_ad_keyword
+  # Pause or enable a Search keyword
+  # Changes &#x60;ad_group_criterion.status&#x60; for one keyword criterion (M.140). Negative keywords have no status on Google and cannot be paused or enabled. 
+  # @param keyword_id Zernio keyword ID (not the Google criterion ID)
+  # @param update_ad_keyword_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdKeyword200Response]
+  describe 'update_ad_keyword test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_ad_set
   # Update an ad set
   # Ad-set-level writes. Use this for ABO budget updates, ad-set-scoped pause/resume, bid-strategy edits, Meta value-rule-set attach/detach, and Meta-only post-launch delivery settings via &#x60;platformSpecificData&#x60;. At least one updatable field is required.  Value rule sets (Meta only, see &#x60;/v1/ads/value-rule-sets&#x60;): - ATTACH or REPLACE: send &#x60;valueRuleSetId&#x60;. Attachment is driven by the id&#39;s   presence, so &#x60;valueRulesApplied: true&#x60; is optional. Sending a different id   replaces the previous association; there is no separate replace call. - DETACH: send &#x60;valueRulesApplied: false&#x60; and OMIT &#x60;valueRuleSetId&#x60;. - Sending &#x60;valueRulesApplied: false&#x60; TOGETHER with &#x60;valueRuleSetId&#x60; returns 400   &#x60;mutually_exclusive_fields&#x60;. This is deliberate: Meta attaches the rule set   whenever &#x60;value_rule_set_id&#x60; is present, even with &#x60;value_rules_applied&#x60; false,   so echoing stored state while asking to detach would silently keep the bid   adjustments live. - Eligibility: only ad sets on &#x60;LOWEST_COST_WITHOUT_CAP&#x60; or &#x60;COST_CAP&#x60;. Meta   rejects the rest server-side. - Read back with &#x60;GET /v1/ads/ad-sets/{adSetId}?fields&#x3D;value_rule_set_id&#x60;. Meta   does not document &#x60;value_rules_applied&#x60; as a readable ad-set field, so the   boolean cannot be read back.  Bid strategy compatibility (per Meta&#39;s spec): - &#x60;LOWEST_COST_WITHOUT_CAP&#x60;: no &#x60;bidAmount&#x60;, no &#x60;roasAverageFloor&#x60;. - &#x60;LOWEST_COST_WITH_BID_CAP&#x60; / &#x60;COST_CAP&#x60;: &#x60;bidAmount&#x60; REQUIRED (whole currency units). - &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60;: &#x60;roasAverageFloor&#x60; REQUIRED (decimal multiplier, e.g. 2.0 &#x3D; 2.0x ROAS). - Meta only: send &#x60;bidAmount&#x60; WITHOUT &#x60;bidStrategy&#x60; to change the cap amount on an ad set   under a COST_CAP / LOWEST_COST_WITH_BID_CAP parent campaign, leaving the strategy itself   (inherited from the campaign) untouched. &#x60;roasAverageFloor&#x60; without &#x60;bidStrategy&#x60; is   rejected (it has no meaning outside LOWEST_COST_WITH_MIN_ROAS).  Delivery settings are validated by Meta against the campaign objective; incompatible combinations (e.g. a billingEvent the optimization goal doesn&#39;t allow) surface as 400s from Meta.  When updating &#x60;budget&#x60; on an ABO campaign: if the parent campaign is CBO, the response is 409 with code BUDGET_LEVEL_MISMATCH — route to PUT /v1/ads/campaigns/{campaignId} instead. 
@@ -388,7 +451,7 @@ describe 'AdCampaignsApi' do
   # Pause or resume a single ad
   # Ad-scoped pause/resume — touches ONLY this ad, never its parent ad set or campaign (so sibling ads keep running). Thin wrapper over the &#x60;status&#x60; field of PUT /v1/ads/{adId}, for callers that want a URL symmetric to /v1/ads/campaigns/{campaignId}/status and /v1/ads/ad-sets/{adSetId}/status.  &#x60;{adId}&#x60; accepts the same identifier dialects as GET/PUT /v1/ads/{adId} (Zernio hex &#x60;_id&#x60;, Meta numeric &#x60;platformAdId&#x60;, or the creative&#39;s effective story/media IDs). &#x60;platform&#x60; is inferred from the ad, so it&#39;s not required in the body. Ads in terminal statuses (rejected, completed, cancelled) and no-op flips (already in the target state) are skipped. 
   # @param ad_id Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs.
-  # @param update_ad_status_request 
+  # @param update_ad_keyword_request 
   # @param [Hash] opts the optional parameters
   # @return [UpdateAdStatus200Response]
   describe 'update_ad_status test' do

@@ -4,6 +4,7 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**add_ad_keywords**](AdCampaignsApi.md#add_ad_keywords) | **POST** /v1/ads/keywords | Add Search keywords to an ad group |
 | [**attach_campaign_assets**](AdCampaignsApi.md#attach_campaign_assets) | **POST** /v1/ads/campaigns/{campaignId}/assets | Attach extension assets to a Google Search campaign |
 | [**boost_post**](AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
 | [**bulk_update_ad_campaign_status**](AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns |
@@ -22,12 +23,85 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
 | [**list_ad_keywords**](AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords |
 | [**list_ads**](AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads |
+| [**list_campaign_negative_keywords**](AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords |
+| [**remove_ad_keyword**](AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword |
+| [**replace_campaign_negative_keywords**](AdCampaignsApi.md#replace_campaign_negative_keywords) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keywords | Replace campaign-level negative keywords |
 | [**update_ad**](AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 | [**update_ad_campaign**](AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign |
 | [**update_ad_campaign_status**](AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign |
+| [**update_ad_keyword**](AdCampaignsApi.md#update_ad_keyword) | **PATCH** /v1/ads/keywords/{keywordId} | Pause or enable a Search keyword |
 | [**update_ad_set**](AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set |
 | [**update_ad_set_status**](AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set |
 | [**update_ad_status**](AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
+
+
+## add_ad_keywords
+
+> <AddAdKeywords201Response> add_ad_keywords(add_ad_keywords_request)
+
+Add Search keywords to an ad group
+
+Adds one or more keyword criteria to an existing Google Search ad group, without touching the keywords already there (unlike the whole-set diff on `PUT /v1/ads/{adId}`, `keywords`/`negativeKeywords` in `platformSpecificData`, which replaces the set). Set `negative: true` to add ad-group-level negatives instead of positive keywords. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+add_ad_keywords_request = Zernio::AddAdKeywordsRequest.new({account_id: 'account_id_example', ad_set_id: 'ad_set_id_example', keywords: [Zernio::AddAdKeywordsRequestKeywordsInner.new({text: 'text_example'})]}) # AddAdKeywordsRequest | 
+
+begin
+  # Add Search keywords to an ad group
+  result = api_instance.add_ad_keywords(add_ad_keywords_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->add_ad_keywords: #{e}"
+end
+```
+
+#### Using the add_ad_keywords_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AddAdKeywords201Response>, Integer, Hash)> add_ad_keywords_with_http_info(add_ad_keywords_request)
+
+```ruby
+begin
+  # Add Search keywords to an ad group
+  data, status_code, headers = api_instance.add_ad_keywords_with_http_info(add_ad_keywords_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AddAdKeywords201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->add_ad_keywords_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **add_ad_keywords_request** | [**AddAdKeywordsRequest**](AddAdKeywordsRequest.md) |  |  |
+
+### Return type
+
+[**AddAdKeywords201Response**](AddAdKeywords201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## attach_campaign_assets
@@ -1438,6 +1512,219 @@ end
 - **Accept**: application/json
 
 
+## list_campaign_negative_keywords
+
+> <ListCampaignNegativeKeywords200Response> list_campaign_negative_keywords(campaign_id, opts)
+
+List campaign-level negative keywords
+
+Returns the campaign-level negative keywords (`campaign_criterion.negative`), distinct from the ad-group-level negatives under `GET /v1/ads/keywords`. Read live from Google on every call (not synced to Postgres), and gated by the shared Google Ads operations budget like every other on-demand Google surface.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not `platform` was passed. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Platform campaign ID
+opts = {
+  platform: 'facebook' # String | Optional and NOT authoritative: the resolved campaign's own platform decides 200 vs 501, never this hint.
+}
+
+begin
+  # List campaign-level negative keywords
+  result = api_instance.list_campaign_negative_keywords(campaign_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_campaign_negative_keywords: #{e}"
+end
+```
+
+#### Using the list_campaign_negative_keywords_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCampaignNegativeKeywords200Response>, Integer, Hash)> list_campaign_negative_keywords_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # List campaign-level negative keywords
+  data, status_code, headers = api_instance.list_campaign_negative_keywords_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCampaignNegativeKeywords200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_campaign_negative_keywords_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Platform campaign ID |  |
+| **platform** | **String** | Optional and NOT authoritative: the resolved campaign&#39;s own platform decides 200 vs 501, never this hint. | [optional] |
+
+### Return type
+
+[**ListCampaignNegativeKeywords200Response**](ListCampaignNegativeKeywords200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_ad_keyword
+
+> <RemoveAdKeyword200Response> remove_ad_keyword(keyword_id)
+
+Remove a Search keyword
+
+Removes one keyword criterion (positive or negative) from its ad group (M.140).
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+keyword_id = 'keyword_id_example' # String | Zernio keyword ID (not the Google criterion ID)
+
+begin
+  # Remove a Search keyword
+  result = api_instance.remove_ad_keyword(keyword_id)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->remove_ad_keyword: #{e}"
+end
+```
+
+#### Using the remove_ad_keyword_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveAdKeyword200Response>, Integer, Hash)> remove_ad_keyword_with_http_info(keyword_id)
+
+```ruby
+begin
+  # Remove a Search keyword
+  data, status_code, headers = api_instance.remove_ad_keyword_with_http_info(keyword_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveAdKeyword200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->remove_ad_keyword_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **keyword_id** | **String** | Zernio keyword ID (not the Google criterion ID) |  |
+
+### Return type
+
+[**RemoveAdKeyword200Response**](RemoveAdKeyword200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## replace_campaign_negative_keywords
+
+> <ReplaceCampaignNegativeKeywords200Response> replace_campaign_negative_keywords(campaign_id, replace_campaign_negative_keywords_request)
+
+Replace campaign-level negative keywords
+
+Replaces the FULL set of campaign-level negative keywords (C.270): the desired list is diffed against what Google already has, and the difference is applied as one `create`/`remove` mutate. Send an empty array to clear every campaign negative.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not `platform` was sent. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Platform campaign ID
+replace_campaign_negative_keywords_request = Zernio::ReplaceCampaignNegativeKeywordsRequest.new({keywords: [Zernio::AddAdKeywordsRequestKeywordsInnerAnyOf.new({text: 'text_example'})]}) # ReplaceCampaignNegativeKeywordsRequest | 
+
+begin
+  # Replace campaign-level negative keywords
+  result = api_instance.replace_campaign_negative_keywords(campaign_id, replace_campaign_negative_keywords_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->replace_campaign_negative_keywords: #{e}"
+end
+```
+
+#### Using the replace_campaign_negative_keywords_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ReplaceCampaignNegativeKeywords200Response>, Integer, Hash)> replace_campaign_negative_keywords_with_http_info(campaign_id, replace_campaign_negative_keywords_request)
+
+```ruby
+begin
+  # Replace campaign-level negative keywords
+  data, status_code, headers = api_instance.replace_campaign_negative_keywords_with_http_info(campaign_id, replace_campaign_negative_keywords_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ReplaceCampaignNegativeKeywords200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->replace_campaign_negative_keywords_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Platform campaign ID |  |
+| **replace_campaign_negative_keywords_request** | [**ReplaceCampaignNegativeKeywordsRequest**](ReplaceCampaignNegativeKeywordsRequest.md) |  |  |
+
+### Return type
+
+[**ReplaceCampaignNegativeKeywords200Response**](ReplaceCampaignNegativeKeywords200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_ad
 
 > <UpdateAd200Response> update_ad(ad_id, update_ad_request)
@@ -1651,6 +1938,77 @@ end
 - **Accept**: application/json
 
 
+## update_ad_keyword
+
+> <UpdateAdKeyword200Response> update_ad_keyword(keyword_id, update_ad_keyword_request)
+
+Pause or enable a Search keyword
+
+Changes `ad_group_criterion.status` for one keyword criterion (M.140). Negative keywords have no status on Google and cannot be paused or enabled. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+keyword_id = 'keyword_id_example' # String | Zernio keyword ID (not the Google criterion ID)
+update_ad_keyword_request = Zernio::UpdateAdKeywordRequest.new({status: 'active'}) # UpdateAdKeywordRequest | 
+
+begin
+  # Pause or enable a Search keyword
+  result = api_instance.update_ad_keyword(keyword_id, update_ad_keyword_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_ad_keyword: #{e}"
+end
+```
+
+#### Using the update_ad_keyword_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAdKeyword200Response>, Integer, Hash)> update_ad_keyword_with_http_info(keyword_id, update_ad_keyword_request)
+
+```ruby
+begin
+  # Pause or enable a Search keyword
+  data, status_code, headers = api_instance.update_ad_keyword_with_http_info(keyword_id, update_ad_keyword_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAdKeyword200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_ad_keyword_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **keyword_id** | **String** | Zernio keyword ID (not the Google criterion ID) |  |
+| **update_ad_keyword_request** | [**UpdateAdKeywordRequest**](UpdateAdKeywordRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAdKeyword200Response**](UpdateAdKeyword200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_ad_set
 
 > <UpdateAdSet200Response> update_ad_set(ad_set_id, update_ad_set_request)
@@ -1795,7 +2153,7 @@ end
 
 ## update_ad_status
 
-> <UpdateAdStatus200Response> update_ad_status(ad_id, update_ad_status_request)
+> <UpdateAdStatus200Response> update_ad_status(ad_id, update_ad_keyword_request)
 
 Pause or resume a single ad
 
@@ -1814,11 +2172,11 @@ end
 
 api_instance = Zernio::AdCampaignsApi.new
 ad_id = 'ad_id_example' # String | Zernio `_id` (hex), Meta `platformAdId` (numeric), or one of the creative's effective story/media IDs.
-update_ad_status_request = Zernio::UpdateAdStatusRequest.new({status: 'active'}) # UpdateAdStatusRequest | 
+update_ad_keyword_request = Zernio::UpdateAdKeywordRequest.new({status: 'active'}) # UpdateAdKeywordRequest | 
 
 begin
   # Pause or resume a single ad
-  result = api_instance.update_ad_status(ad_id, update_ad_status_request)
+  result = api_instance.update_ad_status(ad_id, update_ad_keyword_request)
   p result
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->update_ad_status: #{e}"
@@ -1829,12 +2187,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UpdateAdStatus200Response>, Integer, Hash)> update_ad_status_with_http_info(ad_id, update_ad_status_request)
+> <Array(<UpdateAdStatus200Response>, Integer, Hash)> update_ad_status_with_http_info(ad_id, update_ad_keyword_request)
 
 ```ruby
 begin
   # Pause or resume a single ad
-  data, status_code, headers = api_instance.update_ad_status_with_http_info(ad_id, update_ad_status_request)
+  data, status_code, headers = api_instance.update_ad_status_with_http_info(ad_id, update_ad_keyword_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <UpdateAdStatus200Response>
@@ -1848,7 +2206,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** | Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. |  |
-| **update_ad_status_request** | [**UpdateAdStatusRequest**](UpdateAdStatusRequest.md) |  |  |
+| **update_ad_keyword_request** | [**UpdateAdKeywordRequest**](UpdateAdKeywordRequest.md) |  |  |
 
 ### Return type
 

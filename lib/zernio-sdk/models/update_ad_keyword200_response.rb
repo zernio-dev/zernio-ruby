@@ -14,16 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdKeywords200Response < ApiModelBase
-    attr_accessor :keywords
-
-    attr_accessor :pagination
+  class UpdateAdKeyword200Response < ApiModelBase
+    attr_accessor :keyword
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'keywords' => :'keywords',
-        :'pagination' => :'pagination'
+        :'keyword' => :'keyword'
       }
     end
 
@@ -40,8 +37,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'keywords' => :'Array<AdKeyword>',
-        :'pagination' => :'Pagination'
+        :'keyword' => :'AdKeyword'
       }
     end
 
@@ -55,26 +51,20 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdKeywords200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::UpdateAdKeyword200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdKeywords200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::UpdateAdKeyword200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'keywords')
-        if (value = attributes[:'keywords']).is_a?(Array)
-          self.keywords = value
-        end
-      end
-
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'keyword')
+        self.keyword = attributes[:'keyword']
       end
     end
 
@@ -98,8 +88,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          keywords == o.keywords &&
-          pagination == o.pagination
+          keyword == o.keyword
     end
 
     # @see the `==` method
@@ -111,7 +100,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [keywords, pagination].hash
+      [keyword].hash
     end
 
     # Builds the object from hash

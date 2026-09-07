@@ -14,16 +14,39 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdKeywords200Response < ApiModelBase
+  class ReplaceCampaignNegativeKeywordsRequest < ApiModelBase
+    # Optional and NOT authoritative: the resolved campaign's own platform decides 200 vs 501, never this hint.
+    attr_accessor :platform
+
     attr_accessor :keywords
 
-    attr_accessor :pagination
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'keywords' => :'keywords',
-        :'pagination' => :'pagination'
+        :'platform' => :'platform',
+        :'keywords' => :'keywords'
       }
     end
 
@@ -40,8 +63,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'keywords' => :'Array<AdKeyword>',
-        :'pagination' => :'Pagination'
+        :'platform' => :'String',
+        :'keywords' => :'Array<KeywordEntry>'
       }
     end
 
@@ -55,26 +78,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdKeywords200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ReplaceCampaignNegativeKeywordsRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdKeywords200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ReplaceCampaignNegativeKeywordsRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
+      end
 
       if attributes.key?(:'keywords')
         if (value = attributes[:'keywords']).is_a?(Array)
           self.keywords = value
         end
-      end
-
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      else
+        self.keywords = nil
       end
     end
 
@@ -83,6 +108,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @keywords.nil?
+        invalid_properties.push('invalid value for "keywords", keywords cannot be nil.')
+      end
+
+      if @keywords.length > 1000
+        invalid_properties.push('invalid value for "keywords", number of items must be less than or equal to 1000.')
+      end
+
       invalid_properties
     end
 
@@ -90,7 +123,35 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"])
+      return false unless platform_validator.valid?(@platform)
+      return false if @keywords.nil?
+      return false if @keywords.length > 1000
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] platform Object to be assigned
+    def platform=(platform)
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"])
+      unless validator.valid?(platform)
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
+      end
+      @platform = platform
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] keywords Value to be assigned
+    def keywords=(keywords)
+      if keywords.nil?
+        fail ArgumentError, 'keywords cannot be nil'
+      end
+
+      if keywords.length > 1000
+        fail ArgumentError, 'invalid value for "keywords", number of items must be less than or equal to 1000.'
+      end
+
+      @keywords = keywords
     end
 
     # Checks equality by comparing each attribute.
@@ -98,8 +159,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          keywords == o.keywords &&
-          pagination == o.pagination
+          platform == o.platform &&
+          keywords == o.keywords
     end
 
     # @see the `==` method
@@ -111,7 +172,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [keywords, pagination].hash
+      [platform, keywords].hash
     end
 
     # Builds the object from hash

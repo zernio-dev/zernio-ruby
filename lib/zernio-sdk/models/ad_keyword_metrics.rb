@@ -14,16 +14,35 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdKeywords200Response < ApiModelBase
-    attr_accessor :keywords
+  # Trailing 30-day window. Null on rows synced before the metrics columns existed (re-synced on the keyword's next weekly sweep).
+  class AdKeywordMetrics < ApiModelBase
+    attr_accessor :window_days
 
-    attr_accessor :pagination
+    attr_accessor :clicks
+
+    attr_accessor :impressions
+
+    # Account currency, not USD-normalized
+    attr_accessor :cost
+
+    attr_accessor :conversions
+
+    # Account currency
+    attr_accessor :first_page_cpc
+
+    # Account currency
+    attr_accessor :first_position_cpc
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'keywords' => :'keywords',
-        :'pagination' => :'pagination'
+        :'window_days' => :'windowDays',
+        :'clicks' => :'clicks',
+        :'impressions' => :'impressions',
+        :'cost' => :'cost',
+        :'conversions' => :'conversions',
+        :'first_page_cpc' => :'firstPageCpc',
+        :'first_position_cpc' => :'firstPositionCpc'
       }
     end
 
@@ -40,14 +59,21 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'keywords' => :'Array<AdKeyword>',
-        :'pagination' => :'Pagination'
+        :'window_days' => :'Integer',
+        :'clicks' => :'Integer',
+        :'impressions' => :'Integer',
+        :'cost' => :'Float',
+        :'conversions' => :'Float',
+        :'first_page_cpc' => :'Float',
+        :'first_position_cpc' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'first_page_cpc',
+        :'first_position_cpc'
       ])
     end
 
@@ -55,26 +81,44 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdKeywords200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::AdKeywordMetrics` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdKeywords200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::AdKeywordMetrics`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'keywords')
-        if (value = attributes[:'keywords']).is_a?(Array)
-          self.keywords = value
-        end
+      if attributes.key?(:'window_days')
+        self.window_days = attributes[:'window_days']
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'clicks')
+        self.clicks = attributes[:'clicks']
+      end
+
+      if attributes.key?(:'impressions')
+        self.impressions = attributes[:'impressions']
+      end
+
+      if attributes.key?(:'cost')
+        self.cost = attributes[:'cost']
+      end
+
+      if attributes.key?(:'conversions')
+        self.conversions = attributes[:'conversions']
+      end
+
+      if attributes.key?(:'first_page_cpc')
+        self.first_page_cpc = attributes[:'first_page_cpc']
+      end
+
+      if attributes.key?(:'first_position_cpc')
+        self.first_position_cpc = attributes[:'first_position_cpc']
       end
     end
 
@@ -98,8 +142,13 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          keywords == o.keywords &&
-          pagination == o.pagination
+          window_days == o.window_days &&
+          clicks == o.clicks &&
+          impressions == o.impressions &&
+          cost == o.cost &&
+          conversions == o.conversions &&
+          first_page_cpc == o.first_page_cpc &&
+          first_position_cpc == o.first_position_cpc
     end
 
     # @see the `==` method
@@ -111,7 +160,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [keywords, pagination].hash
+      [window_days, clicks, impressions, cost, conversions, first_page_cpc, first_position_cpc].hash
     end
 
     # Builds the object from hash

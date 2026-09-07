@@ -14,16 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdKeywords200Response < ApiModelBase
-    attr_accessor :keywords
+  class ReplaceCampaignNegativeKeywords200Response < ApiModelBase
+    # Negative criteria newly created on Google
+    attr_accessor :created
 
-    attr_accessor :pagination
+    # Negative criteria removed from Google
+    attr_accessor :removed
+
+    # The full negative-keyword set after the replace
+    attr_accessor :keywords
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'keywords' => :'keywords',
-        :'pagination' => :'pagination'
+        :'created' => :'created',
+        :'removed' => :'removed',
+        :'keywords' => :'keywords'
       }
     end
 
@@ -40,8 +46,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'keywords' => :'Array<AdKeyword>',
-        :'pagination' => :'Pagination'
+        :'created' => :'Integer',
+        :'removed' => :'Integer',
+        :'keywords' => :'Array<ListCampaignNegativeKeywords200ResponseKeywordsInner>'
       }
     end
 
@@ -55,26 +62,30 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdKeywords200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ReplaceCampaignNegativeKeywords200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdKeywords200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ReplaceCampaignNegativeKeywords200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'created')
+        self.created = attributes[:'created']
+      end
+
+      if attributes.key?(:'removed')
+        self.removed = attributes[:'removed']
+      end
 
       if attributes.key?(:'keywords')
         if (value = attributes[:'keywords']).is_a?(Array)
           self.keywords = value
         end
-      end
-
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
       end
     end
 
@@ -98,8 +109,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          keywords == o.keywords &&
-          pagination == o.pagination
+          created == o.created &&
+          removed == o.removed &&
+          keywords == o.keywords
     end
 
     # @see the `==` method
@@ -111,7 +123,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [keywords, pagination].hash
+      [created, removed, keywords].hash
     end
 
     # Builds the object from hash

@@ -14,16 +14,41 @@ require 'date'
 require 'time'
 
 module Zernio
-  class ListAdKeywords200Response < ApiModelBase
-    attr_accessor :keywords
+  class ListCampaignNegativeKeywords200ResponseKeywordsInner < ApiModelBase
+    attr_accessor :criterion_id
 
-    attr_accessor :pagination
+    attr_accessor :text
+
+    attr_accessor :match_type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'keywords' => :'keywords',
-        :'pagination' => :'pagination'
+        :'criterion_id' => :'criterionId',
+        :'text' => :'text',
+        :'match_type' => :'matchType'
       }
     end
 
@@ -40,8 +65,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'keywords' => :'Array<AdKeyword>',
-        :'pagination' => :'Pagination'
+        :'criterion_id' => :'String',
+        :'text' => :'String',
+        :'match_type' => :'String'
       }
     end
 
@@ -55,26 +81,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListAdKeywords200Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::ListCampaignNegativeKeywords200ResponseKeywordsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListAdKeywords200Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::ListCampaignNegativeKeywords200ResponseKeywordsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'keywords')
-        if (value = attributes[:'keywords']).is_a?(Array)
-          self.keywords = value
-        end
+      if attributes.key?(:'criterion_id')
+        self.criterion_id = attributes[:'criterion_id']
       end
 
-      if attributes.key?(:'pagination')
-        self.pagination = attributes[:'pagination']
+      if attributes.key?(:'text')
+        self.text = attributes[:'text']
+      end
+
+      if attributes.key?(:'match_type')
+        self.match_type = attributes[:'match_type']
       end
     end
 
@@ -90,7 +118,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      match_type_validator = EnumAttributeValidator.new('String', ["exact", "phrase", "broad"])
+      return false unless match_type_validator.valid?(@match_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] match_type Object to be assigned
+    def match_type=(match_type)
+      validator = EnumAttributeValidator.new('String', ["exact", "phrase", "broad"])
+      unless validator.valid?(match_type)
+        fail ArgumentError, "invalid value for \"match_type\", must be one of #{validator.allowable_values}."
+      end
+      @match_type = match_type
     end
 
     # Checks equality by comparing each attribute.
@@ -98,8 +138,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          keywords == o.keywords &&
-          pagination == o.pagination
+          criterion_id == o.criterion_id &&
+          text == o.text &&
+          match_type == o.match_type
     end
 
     # @see the `==` method
@@ -111,7 +152,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [keywords, pagination].hash
+      [criterion_id, text, match_type].hash
     end
 
     # Builds the object from hash

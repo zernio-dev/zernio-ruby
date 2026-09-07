@@ -226,11 +226,14 @@ module Zernio
     # Google only
     attr_accessor :campaign_type
 
-    # Google Search only. BROAD-match keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.keywords, which also sets match types.
+    # Google Search only. Keywords on the new ad group; entries are strings (BROAD) or { text, matchType }. Editable later via PUT /v1/ads/{adId} targeting.keywords.
     attr_accessor :keywords
 
-    # Google Search only; other platforms return 400. BROAD-match negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords.
+    # Google Search only; other platforms return 400. Ad-group-level negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords.
     attr_accessor :negative_keywords
+
+    # Google Search only; other platforms return 400. Campaign-level negative keywords (campaign_criterion.negative), created alongside the ad group. Editable later via PUT /v1/ads/campaigns/{campaignId}/negative-keywords.
+    attr_accessor :campaign_negative_keywords
 
     # Google Search RSA only. Extra headlines.
     attr_accessor :additional_headlines
@@ -390,6 +393,7 @@ module Zernio
         :'campaign_type' => :'campaignType',
         :'keywords' => :'keywords',
         :'negative_keywords' => :'negativeKeywords',
+        :'campaign_negative_keywords' => :'campaignNegativeKeywords',
         :'additional_headlines' => :'additionalHeadlines',
         :'additional_descriptions' => :'additionalDescriptions',
         :'sitelinks' => :'sitelinks',
@@ -500,8 +504,9 @@ module Zernio
         :'placement_assets' => :'CreateStandaloneAdRequestPlacementAssets',
         :'audience_id' => :'String',
         :'campaign_type' => :'String',
-        :'keywords' => :'Array<String>',
-        :'negative_keywords' => :'Array<String>',
+        :'keywords' => :'Array<KeywordEntry>',
+        :'negative_keywords' => :'Array<KeywordEntry>',
+        :'campaign_negative_keywords' => :'Array<KeywordEntry>',
         :'additional_headlines' => :'Array<String>',
         :'additional_descriptions' => :'Array<String>',
         :'sitelinks' => :'Array<CreateStandaloneAdRequestSitelinksInner>',
@@ -913,6 +918,12 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'campaign_negative_keywords')
+        if (value = attributes[:'campaign_negative_keywords']).is_a?(Array)
+          self.campaign_negative_keywords = value
+        end
+      end
+
       if attributes.key?(:'additional_headlines')
         if (value = attributes[:'additional_headlines']).is_a?(Array)
           self.additional_headlines = value
@@ -1125,6 +1136,14 @@ module Zernio
         invalid_properties.push('invalid value for "keywords", number of items must be less than or equal to 1000.')
       end
 
+      if !@negative_keywords.nil? && @negative_keywords.length > 1000
+        invalid_properties.push('invalid value for "negative_keywords", number of items must be less than or equal to 1000.')
+      end
+
+      if !@campaign_negative_keywords.nil? && @campaign_negative_keywords.length > 1000
+        invalid_properties.push('invalid value for "campaign_negative_keywords", number of items must be less than or equal to 1000.')
+      end
+
       if !@sitelinks.nil? && @sitelinks.length > 20
         invalid_properties.push('invalid value for "sitelinks", number of items must be less than or equal to 20.')
       end
@@ -1225,6 +1244,8 @@ module Zernio
       campaign_type_validator = EnumAttributeValidator.new('String', ["display", "search"])
       return false unless campaign_type_validator.valid?(@campaign_type)
       return false if !@keywords.nil? && @keywords.length > 1000
+      return false if !@negative_keywords.nil? && @negative_keywords.length > 1000
+      return false if !@campaign_negative_keywords.nil? && @campaign_negative_keywords.length > 1000
       return false if !@sitelinks.nil? && @sitelinks.length > 20
       return false if !@sitelinks.nil? && @sitelinks.length < 2
       return false if !@callouts.nil? && @callouts.length > 20
@@ -1636,6 +1657,34 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] negative_keywords Value to be assigned
+    def negative_keywords=(negative_keywords)
+      if negative_keywords.nil?
+        fail ArgumentError, 'negative_keywords cannot be nil'
+      end
+
+      if negative_keywords.length > 1000
+        fail ArgumentError, 'invalid value for "negative_keywords", number of items must be less than or equal to 1000.'
+      end
+
+      @negative_keywords = negative_keywords
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] campaign_negative_keywords Value to be assigned
+    def campaign_negative_keywords=(campaign_negative_keywords)
+      if campaign_negative_keywords.nil?
+        fail ArgumentError, 'campaign_negative_keywords cannot be nil'
+      end
+
+      if campaign_negative_keywords.length > 1000
+        fail ArgumentError, 'invalid value for "campaign_negative_keywords", number of items must be less than or equal to 1000.'
+      end
+
+      @campaign_negative_keywords = campaign_negative_keywords
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] sitelinks Value to be assigned
     def sitelinks=(sitelinks)
       if sitelinks.nil?
@@ -1861,6 +1910,7 @@ module Zernio
           campaign_type == o.campaign_type &&
           keywords == o.keywords &&
           negative_keywords == o.negative_keywords &&
+          campaign_negative_keywords == o.campaign_negative_keywords &&
           additional_headlines == o.additional_headlines &&
           additional_descriptions == o.additional_descriptions &&
           sitelinks == o.sitelinks &&
@@ -1892,7 +1942,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
     end
 
     # Builds the object from hash
