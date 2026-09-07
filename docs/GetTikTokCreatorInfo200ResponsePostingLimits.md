@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **max_video_duration_sec** | **Integer** | Maximum video duration in seconds | [optional] |
-| **interaction_settings** | **Object** | Available interaction toggles (comment, duet, stitch) and their defaults | [optional] |
+| **interaction_settings** | [**GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettings**](GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettings.md) |  | [optional] |
 
 ## Example
 

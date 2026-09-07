@@ -14,17 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetTikTokCreatorInfo200ResponsePostingLimits < ApiModelBase
-    # Maximum video duration in seconds
-    attr_accessor :max_video_duration_sec
+  # Per-interaction descriptors for the comment, duet and stitch toggles. Each key matches the tiktokSettings field of the same name on the create-post request. allow_duet and allow_stitch are null when mediaType is photo, because TikTok does not apply duet or stitch to photo posts.
+  class GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettings < ApiModelBase
+    attr_accessor :allow_comment
 
-    attr_accessor :interaction_settings
+    attr_accessor :allow_duet
+
+    attr_accessor :allow_stitch
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'max_video_duration_sec' => :'maxVideoDurationSec',
-        :'interaction_settings' => :'interactionSettings'
+        :'allow_comment' => :'allow_comment',
+        :'allow_duet' => :'allow_duet',
+        :'allow_stitch' => :'allow_stitch'
       }
     end
 
@@ -41,8 +44,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'max_video_duration_sec' => :'Integer',
-        :'interaction_settings' => :'GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettings'
+        :'allow_comment' => :'GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowComment',
+        :'allow_duet' => :'GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowDuet',
+        :'allow_stitch' => :'GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowStitch'
       }
     end
 
@@ -56,24 +60,28 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetTikTokCreatorInfo200ResponsePostingLimits` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettings` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetTikTokCreatorInfo200ResponsePostingLimits`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettings`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'max_video_duration_sec')
-        self.max_video_duration_sec = attributes[:'max_video_duration_sec']
+      if attributes.key?(:'allow_comment')
+        self.allow_comment = attributes[:'allow_comment']
       end
 
-      if attributes.key?(:'interaction_settings')
-        self.interaction_settings = attributes[:'interaction_settings']
+      if attributes.key?(:'allow_duet')
+        self.allow_duet = attributes[:'allow_duet']
+      end
+
+      if attributes.key?(:'allow_stitch')
+        self.allow_stitch = attributes[:'allow_stitch']
       end
     end
 
@@ -97,8 +105,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          max_video_duration_sec == o.max_video_duration_sec &&
-          interaction_settings == o.interaction_settings
+          allow_comment == o.allow_comment &&
+          allow_duet == o.allow_duet &&
+          allow_stitch == o.allow_stitch
     end
 
     # @see the `==` method
@@ -110,7 +119,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [max_video_duration_sec, interaction_settings].hash
+      [allow_comment, allow_duet, allow_stitch].hash
     end
 
     # Builds the object from hash

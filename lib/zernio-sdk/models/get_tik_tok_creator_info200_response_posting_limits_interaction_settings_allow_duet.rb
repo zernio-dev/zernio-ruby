@@ -14,17 +14,27 @@ require 'date'
 require 'time'
 
 module Zernio
-  class GetTikTokCreatorInfo200ResponsePostingLimits < ApiModelBase
-    # Maximum video duration in seconds
-    attr_accessor :max_video_duration_sec
+  # Descriptor for the allow_duet toggle. Null when mediaType is photo.
+  class GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowDuet < ApiModelBase
+    # Whether the creator permits this interaction. False means they disabled it in the TikTok app. This is availability, never the value the user selected.
+    attr_accessor :enabled
 
-    attr_accessor :interaction_settings
+    # Whether tiktokSettings.allow_duet must be supplied when creating a post. Always true, because TikTok forbids defaulting it.
+    attr_accessor :required
+
+    # Initial value a post composer should render. A UI seed only, never applied server-side when the field is omitted.
+    attr_accessor :default
+
+    # Human-readable toggle label.
+    attr_accessor :label
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'max_video_duration_sec' => :'maxVideoDurationSec',
-        :'interaction_settings' => :'interactionSettings'
+        :'enabled' => :'enabled',
+        :'required' => :'required',
+        :'default' => :'default',
+        :'label' => :'label'
       }
     end
 
@@ -41,8 +51,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'max_video_duration_sec' => :'Integer',
-        :'interaction_settings' => :'GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettings'
+        :'enabled' => :'Boolean',
+        :'required' => :'Boolean',
+        :'default' => :'Boolean',
+        :'label' => :'String'
       }
     end
 
@@ -56,24 +68,32 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetTikTokCreatorInfo200ResponsePostingLimits` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowDuet` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetTikTokCreatorInfo200ResponsePostingLimits`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetTikTokCreatorInfo200ResponsePostingLimitsInteractionSettingsAllowDuet`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'max_video_duration_sec')
-        self.max_video_duration_sec = attributes[:'max_video_duration_sec']
+      if attributes.key?(:'enabled')
+        self.enabled = attributes[:'enabled']
       end
 
-      if attributes.key?(:'interaction_settings')
-        self.interaction_settings = attributes[:'interaction_settings']
+      if attributes.key?(:'required')
+        self.required = attributes[:'required']
+      end
+
+      if attributes.key?(:'default')
+        self.default = attributes[:'default']
+      end
+
+      if attributes.key?(:'label')
+        self.label = attributes[:'label']
       end
     end
 
@@ -97,8 +117,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          max_video_duration_sec == o.max_video_duration_sec &&
-          interaction_settings == o.interaction_settings
+          enabled == o.enabled &&
+          required == o.required &&
+          default == o.default &&
+          label == o.label
     end
 
     # @see the `==` method
@@ -110,7 +132,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [max_video_duration_sec, interaction_settings].hash
+      [enabled, required, default, label].hash
     end
 
     # Builds the object from hash
