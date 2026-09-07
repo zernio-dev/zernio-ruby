@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Videos under 3 min auto-detected as Shorts. Custom thumbnails for regular videos only. Scheduled videos are uploaded immediately with the specified visibility.
+  # Videos under 3 min auto-detected as Shorts. Custom thumbnails for regular videos only. Scheduled videos are uploaded immediately with the specified visibility. There is no description field here: the video description comes from the post content, or from customContent on this platform target when set, and is truncated to 5000 characters.
   class YouTubePlatformData < ApiModelBase
     # Video title. Defaults to first line of content or \"Untitled Video\". Must be ≤ 100 characters.
     attr_accessor :title
