@@ -45,6 +45,16 @@ describe Zernio::PhoneNumberStockWatch do
     end
   end
 
+  describe 'test attribute "number_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.number_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "created_at"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

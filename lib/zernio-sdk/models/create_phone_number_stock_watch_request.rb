@@ -18,10 +18,36 @@ module Zernio
     # ISO 3166-1 alpha-2 code of a country listed by GET /v1/phone-numbers/countries.
     attr_accessor :country
 
+    # Narrow the watch to one number type. Omit to be notified when any type in the country is back.
+    attr_accessor :number_type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'country' => :'country'
+        :'country' => :'country',
+        :'number_type' => :'numberType'
       }
     end
 
@@ -38,7 +64,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'country' => :'String'
+        :'country' => :'String',
+        :'number_type' => :'String'
       }
     end
 
@@ -69,6 +96,10 @@ module Zernio
       else
         self.country = nil
       end
+
+      if attributes.key?(:'number_type')
+        self.number_type = attributes[:'number_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -98,6 +129,8 @@ module Zernio
       return false if @country.nil?
       return false if @country.to_s.length > 2
       return false if @country.to_s.length < 2
+      number_type_validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      return false unless number_type_validator.valid?(@number_type)
       true
     end
 
@@ -119,12 +152,23 @@ module Zernio
       @country = country
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] number_type Object to be assigned
+    def number_type=(number_type)
+      validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      unless validator.valid?(number_type)
+        fail ArgumentError, "invalid value for \"number_type\", must be one of #{validator.allowable_values}."
+      end
+      @number_type = number_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          country == o.country
+          country == o.country &&
+          number_type == o.number_type
     end
 
     # @see the `==` method
@@ -136,7 +180,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country].hash
+      [country, number_type].hash
     end
 
     # Builds the object from hash

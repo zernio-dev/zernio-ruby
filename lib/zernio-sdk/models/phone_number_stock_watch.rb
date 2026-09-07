@@ -22,7 +22,32 @@ module Zernio
 
     attr_accessor :country_name
 
+    # The watched number type, or null when the watch covers every type in the country.
+    attr_accessor :number_type
+
     attr_accessor :created_at
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -30,6 +55,7 @@ module Zernio
         :'id' => :'id',
         :'country' => :'country',
         :'country_name' => :'countryName',
+        :'number_type' => :'numberType',
         :'created_at' => :'createdAt'
       }
     end
@@ -50,6 +76,7 @@ module Zernio
         :'id' => :'String',
         :'country' => :'String',
         :'country_name' => :'String',
+        :'number_type' => :'String',
         :'created_at' => :'Time'
       }
     end
@@ -57,6 +84,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'number_type',
       ])
     end
 
@@ -92,6 +120,12 @@ module Zernio
         self.country_name = attributes[:'country_name']
       else
         self.country_name = nil
+      end
+
+      if attributes.key?(:'number_type')
+        self.number_type = attributes[:'number_type']
+      else
+        self.number_type = nil
       end
 
       if attributes.key?(:'created_at')
@@ -132,6 +166,8 @@ module Zernio
       return false if @id.nil?
       return false if @country.nil?
       return false if @country_name.nil?
+      number_type_validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      return false unless number_type_validator.valid?(@number_type)
       return false if @created_at.nil?
       true
     end
@@ -166,6 +202,16 @@ module Zernio
       @country_name = country_name
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] number_type Object to be assigned
+    def number_type=(number_type)
+      validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
+      unless validator.valid?(number_type)
+        fail ArgumentError, "invalid value for \"number_type\", must be one of #{validator.allowable_values}."
+      end
+      @number_type = number_type
+    end
+
     # Custom attribute writer method with validation
     # @param [Object] created_at Value to be assigned
     def created_at=(created_at)
@@ -184,6 +230,7 @@ module Zernio
           id == o.id &&
           country == o.country &&
           country_name == o.country_name &&
+          number_type == o.number_type &&
           created_at == o.created_at
     end
 
@@ -196,7 +243,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, country, country_name, created_at].hash
+      [id, country, country_name, number_type, created_at].hash
     end
 
     # Builds the object from hash
