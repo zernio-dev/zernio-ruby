@@ -36,6 +36,9 @@ module Zernio
     # When true, saves the post as a draft. When none of scheduledFor, publishNow, or queuedFromProfile are provided, the post defaults to draft automatically.
     attr_accessor :is_draft
 
+    # TikTok only. Preview whether each `tiktok` entry in `platforms` could publish right now under the TikTok Direct Post daily limits, without creating, scheduling or publishing anything: no post is persisted and no upload slot is claimed, so it can be repeated freely. The request still goes through auth, the payment gate and body validation, then returns HTTP 200 with `{ dryRun: true, canPublish, tiktok: [...] }` instead of 201. Only `tiktok` entries are evaluated; other platforms in the body are ignored, and a body with no `tiktok` entry is rejected with 400 `invalid_field_value` on `platforms`. An entry with `platformSpecificData.tiktokSettings.draft: true` (Creator Inbox upload) is not subject to the limit and always reports `canPublish: true`.
+    attr_accessor :dry_run
+
     # IANA timezone (`Europe/Madrid`, `America/New_York`) used to interpret a `scheduledFor` (root or per-platform) that carries no `Z` or offset. Has no effect on values that already carry one. An unknown name returns 400 when `scheduledFor` is set.
     attr_accessor :timezone
 
@@ -78,6 +81,7 @@ module Zernio
         :'scheduled_for' => :'scheduledFor',
         :'publish_now' => :'publishNow',
         :'is_draft' => :'isDraft',
+        :'dry_run' => :'dryRun',
         :'timezone' => :'timezone',
         :'tags' => :'tags',
         :'hashtags' => :'hashtags',
@@ -112,6 +116,7 @@ module Zernio
         :'scheduled_for' => :'Time',
         :'publish_now' => :'Boolean',
         :'is_draft' => :'Boolean',
+        :'dry_run' => :'Boolean',
         :'timezone' => :'String',
         :'tags' => :'Array<String>',
         :'hashtags' => :'Array<String>',
@@ -182,6 +187,12 @@ module Zernio
         self.is_draft = attributes[:'is_draft']
       else
         self.is_draft = false
+      end
+
+      if attributes.key?(:'dry_run')
+        self.dry_run = attributes[:'dry_run']
+      else
+        self.dry_run = false
       end
 
       if attributes.key?(:'timezone')
@@ -268,6 +279,7 @@ module Zernio
           scheduled_for == o.scheduled_for &&
           publish_now == o.publish_now &&
           is_draft == o.is_draft &&
+          dry_run == o.dry_run &&
           timezone == o.timezone &&
           tags == o.tags &&
           hashtags == o.hashtags &&
@@ -290,7 +302,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, content, media_items, platforms, scheduled_for, publish_now, is_draft, timezone, tags, hashtags, mentions, crossposting_enabled, metadata, tiktok_settings, facebook_settings, recycling, queued_from_profile, queue_id].hash
+      [title, content, media_items, platforms, scheduled_for, publish_now, is_draft, dry_run, timezone, tags, hashtags, mentions, crossposting_enabled, metadata, tiktok_settings, facebook_settings, recycling, queued_from_profile, queue_id].hash
     end
 
     # Builds the object from hash

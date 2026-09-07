@@ -32,6 +32,7 @@ module Zernio
 
     attr_accessor :timezone
 
+    # `cancelled` is set by DELETE /v1/posts/{postId}/unpublish once every platform entry has been removed from its platform (a post with published entries left becomes `partial`); cancelled posts can be edited and rescheduled like drafts.
     attr_accessor :status
 
     # YouTube constraints: each tag max 100 chars, combined max 500 chars, duplicates removed.
@@ -273,7 +274,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      status_validator = EnumAttributeValidator.new('String', ["draft", "scheduled", "publishing", "published", "failed", "partial"])
+      status_validator = EnumAttributeValidator.new('String', ["draft", "scheduled", "publishing", "published", "partial", "failed", "cancelled"])
       return false unless status_validator.valid?(@status)
       visibility_validator = EnumAttributeValidator.new('String', ["public", "private", "unlisted"])
       return false unless visibility_validator.valid?(@visibility)
@@ -283,7 +284,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ["draft", "scheduled", "publishing", "published", "failed", "partial"])
+      validator = EnumAttributeValidator.new('String', ["draft", "scheduled", "publishing", "published", "partial", "failed", "cancelled"])
       unless validator.valid?(status)
         fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end

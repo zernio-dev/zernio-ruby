@@ -25,7 +25,7 @@ module Zernio
     # Name of the webhook configuration at delivery time
     attr_accessor :webhook_name
 
-    # Stable webhook event ID (correlates to the delivered payload)
+    # Stable webhook event ID: the payload `id`, also sent as the X-Zernio-Event-Id header. Shared by every attempt and redelivery of the same event.
     attr_accessor :event_id
 
     # Event type that triggered the delivery (e.g. post.published)

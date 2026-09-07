@@ -92,7 +92,7 @@ module Zernio
     # @param create_post_request [CreatePostRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :x_request_id Optional client-generated request identifier for safe retry (idempotency). When two requests carry the same value, the second is treated as a retry of the first and returns the original post (HTTP 200) instead of creating a duplicate. Window is ~5 minutes from the first request. Generate a UUID per logical call. SDKs do this automatically; HTTP clients should set it themselves or omit it. See the operation description for the full idempotency contract. 
-    # @return [PostCreateResponse]
+    # @return [CreatePost200Response]
     def create_post(create_post_request, opts = {})
       data, _status_code, _headers = create_post_with_http_info(create_post_request, opts)
       data
@@ -103,7 +103,7 @@ module Zernio
     # @param create_post_request [CreatePostRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :x_request_id Optional client-generated request identifier for safe retry (idempotency). When two requests carry the same value, the second is treated as a retry of the first and returns the original post (HTTP 200) instead of creating a duplicate. Window is ~5 minutes from the first request. Generate a UUID per logical call. SDKs do this automatically; HTTP clients should set it themselves or omit it. See the operation description for the full idempotency contract. 
-    # @return [Array<(PostCreateResponse, Integer, Hash)>] PostCreateResponse data, response status code and response headers
+    # @return [Array<(CreatePost200Response, Integer, Hash)>] CreatePost200Response data, response status code and response headers
     def create_post_with_http_info(create_post_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PostsApi.create_post ...'
@@ -136,7 +136,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(create_post_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PostCreateResponse'
+      return_type = opts[:debug_return_type] || 'CreatePost200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -417,7 +417,7 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'source'] && !allowable_values.include?(opts[:'source'])
         fail ArgumentError, "invalid value for \"source\", must be one of #{allowable_values}"
       end
-      allowable_values = ["draft", "scheduled", "published", "failed"]
+      allowable_values = ["draft", "scheduled", "publishing", "published", "partial", "failed", "cancelled"]
       if @api_client.config.client_side_validation && opts[:'status'] && !allowable_values.include?(opts[:'status'])
         fail ArgumentError, "invalid value for \"status\", must be one of #{allowable_values}"
       end

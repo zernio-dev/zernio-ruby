@@ -51,7 +51,7 @@ describe 'PostsApi' do
   # @param create_post_request 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :x_request_id Optional client-generated request identifier for safe retry (idempotency). When two requests carry the same value, the second is treated as a retry of the first and returns the original post (HTTP 200) instead of creating a duplicate. Window is ~5 minutes from the first request. Generate a UUID per logical call. SDKs do this automatically; HTTP clients should set it themselves or omit it. See the operation description for the full idempotency contract. 
-  # @return [PostCreateResponse]
+  # @return [CreatePost200Response]
   describe 'create_post test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

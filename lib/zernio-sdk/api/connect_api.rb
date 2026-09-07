@@ -2370,6 +2370,83 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List Slack channels for the channel picker
+    # Serves the channel picker of the Slack connect flow. Slack's OAuth installs the bot into a workspace, not a channel, so after the redirect the caller lists the workspace's channels here and finalizes one with `POST /v1/connect/slack`. Served by a dedicated route that shadows `GET /v1/connect/{platform}` for `slack`.  Send exactly one of `pendingDataToken` (first connect: the nonce from the OAuth redirect, bound to the same `profileId`) or `accountId` (add another channel to a workspace already connected: the existing Slack account's workspace token is reused, no re-OAuth). With neither, the endpoint behaves like `GET /v1/connect/{platform}` and returns `authUrl` and `state` to start the OAuth flow.  Channels are read live from Slack (`conversations.list`, public and private, archived excluded, up to 2,000). `isMember` says whether the Zernio bot is already in the channel: a public channel is joined automatically on finalize, a private one must be invited (`/invite @Zernio`) first. 
+    # @param profile_id [String] Zernio profile the channel account will belong to. Must match the profile the OAuth flow was started on when &#x60;pendingDataToken&#x60; is used.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :pending_data_token Nonce from the OAuth redirect (first connect).
+    # @option opts [String] :account_id Existing active Slack account (yours or a team member&#39;s) whose workspace token is reused.
+    # @option opts [String] :redirect_url Start-OAuth mode only: where to send the user after the connect completes. &#x60;redirectUrl&#x60; is accepted as an alias.
+    # @return [ListSlackChannels200Response]
+    def list_slack_channels(profile_id, opts = {})
+      data, _status_code, _headers = list_slack_channels_with_http_info(profile_id, opts)
+      data
+    end
+
+    # List Slack channels for the channel picker
+    # Serves the channel picker of the Slack connect flow. Slack&#39;s OAuth installs the bot into a workspace, not a channel, so after the redirect the caller lists the workspace&#39;s channels here and finalizes one with &#x60;POST /v1/connect/slack&#x60;. Served by a dedicated route that shadows &#x60;GET /v1/connect/{platform}&#x60; for &#x60;slack&#x60;.  Send exactly one of &#x60;pendingDataToken&#x60; (first connect: the nonce from the OAuth redirect, bound to the same &#x60;profileId&#x60;) or &#x60;accountId&#x60; (add another channel to a workspace already connected: the existing Slack account&#39;s workspace token is reused, no re-OAuth). With neither, the endpoint behaves like &#x60;GET /v1/connect/{platform}&#x60; and returns &#x60;authUrl&#x60; and &#x60;state&#x60; to start the OAuth flow.  Channels are read live from Slack (&#x60;conversations.list&#x60;, public and private, archived excluded, up to 2,000). &#x60;isMember&#x60; says whether the Zernio bot is already in the channel: a public channel is joined automatically on finalize, a private one must be invited (&#x60;/invite @Zernio&#x60;) first. 
+    # @param profile_id [String] Zernio profile the channel account will belong to. Must match the profile the OAuth flow was started on when &#x60;pendingDataToken&#x60; is used.
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :pending_data_token Nonce from the OAuth redirect (first connect).
+    # @option opts [String] :account_id Existing active Slack account (yours or a team member&#39;s) whose workspace token is reused.
+    # @option opts [String] :redirect_url Start-OAuth mode only: where to send the user after the connect completes. &#x60;redirectUrl&#x60; is accepted as an alias.
+    # @return [Array<(ListSlackChannels200Response, Integer, Hash)>] ListSlackChannels200Response data, response status code and response headers
+    def list_slack_channels_with_http_info(profile_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.list_slack_channels ...'
+      end
+      # verify the required parameter 'profile_id' is set
+      if @api_client.config.client_side_validation && profile_id.nil?
+        fail ArgumentError, "Missing the required parameter 'profile_id' when calling ConnectApi.list_slack_channels"
+      end
+      if @api_client.config.client_side_validation && !opts[:'pending_data_token'].nil? && opts[:'pending_data_token'].to_s.length < 16
+        fail ArgumentError, 'invalid value for "opts[:"pending_data_token"]" when calling ConnectApi.list_slack_channels, the character length must be greater than or equal to 16.'
+      end
+
+      # resource path
+      local_var_path = '/v1/connect/slack'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'profileId'] = profile_id
+      query_params[:'pendingDataToken'] = opts[:'pending_data_token'] if !opts[:'pending_data_token'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
+      query_params[:'redirect_url'] = opts[:'redirect_url'] if !opts[:'redirect_url'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListSlackChannels200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.list_slack_channels",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#list_slack_channels\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Snapchat profiles
     # For headless flows. Returns Snapchat Public Profiles the user can post to. Use X-Connect-Token from the redirect URL.
     # @param x_connect_token [String] Short-lived connect token from the OAuth redirect

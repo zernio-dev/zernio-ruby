@@ -294,6 +294,7 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**list_instagram_pages**](docs/ConnectApi.md#list_instagram_pages) | **GET** /v1/connect/instagram/select-account | List Pages with a linked Instagram account
 *Zernio::ConnectApi* | [**list_linked_in_organizations**](docs/ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs
 *Zernio::ConnectApi* | [**list_pinterest_boards_for_selection**](docs/ConnectApi.md#list_pinterest_boards_for_selection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards
+*Zernio::ConnectApi* | [**list_slack_channels**](docs/ConnectApi.md#list_slack_channels) | **GET** /v1/connect/slack | List Slack channels for the channel picker
 *Zernio::ConnectApi* | [**list_snapchat_profiles**](docs/ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles
 *Zernio::ConnectApi* | [**list_whats_app_phone_numbers**](docs/ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection
 *Zernio::ConnectApi* | [**select_facebook_page**](docs/ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page
@@ -825,6 +826,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CampaignAnalyticsResponseCampaign](docs/CampaignAnalyticsResponseCampaign.md)
  - [Zernio::CancelBroadcast200Response](docs/CancelBroadcast200Response.md)
  - [Zernio::CancelPhoneNumberPortIn200Response](docs/CancelPhoneNumberPortIn200Response.md)
+ - [Zernio::ChannelPicker](docs/ChannelPicker.md)
+ - [Zernio::ChannelPickerChannelsInner](docs/ChannelPickerChannelsInner.md)
+ - [Zernio::ChannelPickerTeam](docs/ChannelPickerTeam.md)
  - [Zernio::CheckPhoneNumberAvailability200Response](docs/CheckPhoneNumberAvailability200Response.md)
  - [Zernio::CheckPhoneNumberAvailability200ResponseAreaOptionsInner](docs/CheckPhoneNumberAvailability200ResponseAreaOptionsInner.md)
  - [Zernio::CheckPhoneNumberPortability200Response](docs/CheckPhoneNumberPortability200Response.md)
@@ -960,6 +964,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreatePinterestBoard201Response](docs/CreatePinterestBoard201Response.md)
  - [Zernio::CreatePinterestBoard201ResponseBoard](docs/CreatePinterestBoard201ResponseBoard.md)
  - [Zernio::CreatePinterestBoardRequest](docs/CreatePinterestBoardRequest.md)
+ - [Zernio::CreatePost200Response](docs/CreatePost200Response.md)
+ - [Zernio::CreatePost200ResponseTiktokInner](docs/CreatePost200ResponseTiktokInner.md)
  - [Zernio::CreatePost403Response](docs/CreatePost403Response.md)
  - [Zernio::CreatePost409Response](docs/CreatePost409Response.md)
  - [Zernio::CreatePost409ResponseDetails](docs/CreatePost409ResponseDetails.md)
@@ -1717,6 +1723,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListSipTrunks200Response](docs/ListSipTrunks200Response.md)
  - [Zernio::ListSipTrunks200ResponseTrunksInner](docs/ListSipTrunks200ResponseTrunksInner.md)
  - [Zernio::ListSipTrunks200ResponseTrunksInnerTermination](docs/ListSipTrunks200ResponseTrunksInnerTermination.md)
+ - [Zernio::ListSlackChannels200Response](docs/ListSlackChannels200Response.md)
  - [Zernio::ListSlackMembers200Response](docs/ListSlackMembers200Response.md)
  - [Zernio::ListSlackMembers200ResponseMembersInner](docs/ListSlackMembers200ResponseMembersInner.md)
  - [Zernio::ListSmsOptOuts200Response](docs/ListSmsOptOuts200Response.md)
@@ -2062,6 +2069,7 @@ Class | Method | HTTP request | Description
  - [Zernio::StartGoogleBusinessVerification200Response](docs/StartGoogleBusinessVerification200Response.md)
  - [Zernio::StartGoogleBusinessVerification200ResponseVerification](docs/StartGoogleBusinessVerification200ResponseVerification.md)
  - [Zernio::StartGoogleBusinessVerificationRequest](docs/StartGoogleBusinessVerificationRequest.md)
+ - [Zernio::StartOAuth](docs/StartOAuth.md)
  - [Zernio::StartSmsRegistration200Response](docs/StartSmsRegistration200Response.md)
  - [Zernio::StartSmsRegistrationRequest](docs/StartSmsRegistrationRequest.md)
  - [Zernio::StartSmsRegistrationRequestBrand](docs/StartSmsRegistrationRequestBrand.md)

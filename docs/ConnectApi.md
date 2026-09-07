@@ -37,6 +37,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_instagram_pages**](ConnectApi.md#list_instagram_pages) | **GET** /v1/connect/instagram/select-account | List Pages with a linked Instagram account |
 | [**list_linked_in_organizations**](ConnectApi.md#list_linked_in_organizations) | **GET** /v1/connect/linkedin/organizations | List LinkedIn orgs |
 | [**list_pinterest_boards_for_selection**](ConnectApi.md#list_pinterest_boards_for_selection) | **GET** /v1/connect/pinterest/select-board | List Pinterest boards |
+| [**list_slack_channels**](ConnectApi.md#list_slack_channels) | **GET** /v1/connect/slack | List Slack channels for the channel picker |
 | [**list_snapchat_profiles**](ConnectApi.md#list_snapchat_profiles) | **GET** /v1/connect/snapchat/select-profile | List Snapchat profiles |
 | [**list_whats_app_phone_numbers**](ConnectApi.md#list_whats_app_phone_numbers) | **GET** /v1/connect/whatsapp/select-phone-number | List numbers for selection |
 | [**select_facebook_page**](ConnectApi.md#select_facebook_page) | **POST** /v1/connect/facebook/select-page | Select Facebook page |
@@ -2422,6 +2423,83 @@ end
 ### Return type
 
 [**ListPinterestBoardsForSelection200Response**](ListPinterestBoardsForSelection200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_slack_channels
+
+> <ListSlackChannels200Response> list_slack_channels(profile_id, opts)
+
+List Slack channels for the channel picker
+
+Serves the channel picker of the Slack connect flow. Slack's OAuth installs the bot into a workspace, not a channel, so after the redirect the caller lists the workspace's channels here and finalizes one with `POST /v1/connect/slack`. Served by a dedicated route that shadows `GET /v1/connect/{platform}` for `slack`.  Send exactly one of `pendingDataToken` (first connect: the nonce from the OAuth redirect, bound to the same `profileId`) or `accountId` (add another channel to a workspace already connected: the existing Slack account's workspace token is reused, no re-OAuth). With neither, the endpoint behaves like `GET /v1/connect/{platform}` and returns `authUrl` and `state` to start the OAuth flow.  Channels are read live from Slack (`conversations.list`, public and private, archived excluded, up to 2,000). `isMember` says whether the Zernio bot is already in the channel: a public channel is joined automatically on finalize, a private one must be invited (`/invite @Zernio`) first. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::ConnectApi.new
+profile_id = 'profile_id_example' # String | Zernio profile the channel account will belong to. Must match the profile the OAuth flow was started on when `pendingDataToken` is used.
+opts = {
+  pending_data_token: 'pending_data_token_example', # String | Nonce from the OAuth redirect (first connect).
+  account_id: 'account_id_example', # String | Existing active Slack account (yours or a team member's) whose workspace token is reused.
+  redirect_url: 'redirect_url_example' # String | Start-OAuth mode only: where to send the user after the connect completes. `redirectUrl` is accepted as an alias.
+}
+
+begin
+  # List Slack channels for the channel picker
+  result = api_instance.list_slack_channels(profile_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_slack_channels: #{e}"
+end
+```
+
+#### Using the list_slack_channels_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListSlackChannels200Response>, Integer, Hash)> list_slack_channels_with_http_info(profile_id, opts)
+
+```ruby
+begin
+  # List Slack channels for the channel picker
+  data, status_code, headers = api_instance.list_slack_channels_with_http_info(profile_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListSlackChannels200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling ConnectApi->list_slack_channels_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **profile_id** | **String** | Zernio profile the channel account will belong to. Must match the profile the OAuth flow was started on when &#x60;pendingDataToken&#x60; is used. |  |
+| **pending_data_token** | **String** | Nonce from the OAuth redirect (first connect). | [optional] |
+| **account_id** | **String** | Existing active Slack account (yours or a team member&#39;s) whose workspace token is reused. | [optional] |
+| **redirect_url** | **String** | Start-OAuth mode only: where to send the user after the connect completes. &#x60;redirectUrl&#x60; is accepted as an alias. | [optional] |
+
+### Return type
+
+[**ListSlackChannels200Response**](ListSlackChannels200Response.md)
 
 ### Authorization
 

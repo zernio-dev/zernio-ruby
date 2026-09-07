@@ -91,7 +91,7 @@ end
 
 ## create_post
 
-> <PostCreateResponse> create_post(create_post_request, opts)
+> <CreatePost200Response> create_post(create_post_request, opts)
 
 Create post
 
@@ -127,7 +127,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PostCreateResponse>, Integer, Hash)> create_post_with_http_info(create_post_request, opts)
+> <Array(<CreatePost200Response>, Integer, Hash)> create_post_with_http_info(create_post_request, opts)
 
 ```ruby
 begin
@@ -135,7 +135,7 @@ begin
   data, status_code, headers = api_instance.create_post_with_http_info(create_post_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PostCreateResponse>
+  p data # => <CreatePost200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling PostsApi->create_post_with_http_info: #{e}"
 end
@@ -150,7 +150,7 @@ end
 
 ### Return type
 
-[**PostCreateResponse**](PostCreateResponse.md)
+[**CreatePost200Response**](CreatePost200Response.md)
 
 ### Authorization
 

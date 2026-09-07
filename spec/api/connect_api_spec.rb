@@ -465,6 +465,21 @@ describe 'ConnectApi' do
     end
   end
 
+  # unit tests for list_slack_channels
+  # List Slack channels for the channel picker
+  # Serves the channel picker of the Slack connect flow. Slack&#39;s OAuth installs the bot into a workspace, not a channel, so after the redirect the caller lists the workspace&#39;s channels here and finalizes one with &#x60;POST /v1/connect/slack&#x60;. Served by a dedicated route that shadows &#x60;GET /v1/connect/{platform}&#x60; for &#x60;slack&#x60;.  Send exactly one of &#x60;pendingDataToken&#x60; (first connect: the nonce from the OAuth redirect, bound to the same &#x60;profileId&#x60;) or &#x60;accountId&#x60; (add another channel to a workspace already connected: the existing Slack account&#39;s workspace token is reused, no re-OAuth). With neither, the endpoint behaves like &#x60;GET /v1/connect/{platform}&#x60; and returns &#x60;authUrl&#x60; and &#x60;state&#x60; to start the OAuth flow.  Channels are read live from Slack (&#x60;conversations.list&#x60;, public and private, archived excluded, up to 2,000). &#x60;isMember&#x60; says whether the Zernio bot is already in the channel: a public channel is joined automatically on finalize, a private one must be invited (&#x60;/invite @Zernio&#x60;) first. 
+  # @param profile_id Zernio profile the channel account will belong to. Must match the profile the OAuth flow was started on when &#x60;pendingDataToken&#x60; is used.
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :pending_data_token Nonce from the OAuth redirect (first connect).
+  # @option opts [String] :account_id Existing active Slack account (yours or a team member&#39;s) whose workspace token is reused.
+  # @option opts [String] :redirect_url Start-OAuth mode only: where to send the user after the connect completes. &#x60;redirectUrl&#x60; is accepted as an alias.
+  # @return [ListSlackChannels200Response]
+  describe 'list_slack_channels test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_snapchat_profiles
   # List Snapchat profiles
   # For headless flows. Returns Snapchat Public Profiles the user can post to. Use X-Connect-Token from the redirect URL.

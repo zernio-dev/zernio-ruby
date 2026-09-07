@@ -12,7 +12,7 @@
 | **platforms** | [**Array&lt;PlatformTarget&gt;**](PlatformTarget.md) |  | [optional] |
 | **scheduled_for** | **Time** |  | [optional] |
 | **timezone** | **String** |  | [optional] |
-| **status** | **String** |  | [optional] |
+| **status** | **String** | &#x60;cancelled&#x60; is set by DELETE /v1/posts/{postId}/unpublish once every platform entry has been removed from its platform (a post with published entries left becomes &#x60;partial&#x60;); cancelled posts can be edited and rescheduled like drafts. | [optional] |
 | **tags** | **Array&lt;String&gt;** | YouTube constraints: each tag max 100 chars, combined max 500 chars, duplicates removed. | [optional] |
 | **hashtags** | **Array&lt;String&gt;** | Stored for reference only. Hashtags are NOT automatically appended to the caption when publishing. Include hashtags directly in the content field (platforms like Instagram only support hashtags as caption text). For YouTube keywords, use the tags field instead. | [optional] |
 | **mentions** | **Array&lt;String&gt;** | Stored for reference only. This field does NOT automatically create @mentions when publishing. For LinkedIn @mentions, use the /v1/accounts/{accountId}/linkedin-mentions endpoint to resolve profile URLs to URNs, then embed the returned mentionFormat directly in the post content field. | [optional] |
