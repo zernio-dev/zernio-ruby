@@ -17,7 +17,7 @@ module Zernio
   class SendInboxMessage400Response < ApiModelBase
     attr_accessor :error
 
-    # Stable machine-readable reason. PLATFORM_LIMITATION covers a capability the platform does not offer (e.g. Bluesky and Reddit DMs reject media); MISSING_PARTICIPANT means the stored conversation has no recipient to send to.
+    # Stable machine-readable reason. PLATFORM_LIMITATION covers a capability the platform does not offer (e.g. Bluesky and Reddit DMs reject media); MISSING_PARTICIPANT means the stored conversation has no recipient to send to; DIRECT_SEND_NOT_ELIGIBLE and DIRECT_SEND_BLOCKED mean the WhatsApp Business Account needs Meta to grant or restore Direct Send access; DIRECT_SEND_LIMITED is temporary, Meta lifts it on its own.
     attr_accessor :code
 
     attr_accessor :platform_error
@@ -119,7 +119,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT"])
+      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
       return false unless code_validator.valid?(@code)
       true
     end
@@ -127,7 +127,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code)
-      validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT"])
+      validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
       unless validator.valid?(code)
         fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
       end

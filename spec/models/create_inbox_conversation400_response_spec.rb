@@ -36,7 +36,7 @@ describe Zernio::CreateInboxConversation400Response do
   describe 'test attribute "code"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED", "PLATFORM_LIMITATION", "TEMPLATE_REQUIRED", "INVALID_TEMPLATE_PARAMS", "INVALID_TEMPLATE_BUTTON_PARAM", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
       # validator.allowable_values.each do |value|
       #   expect { instance.code = value }.not_to raise_error
       # end
