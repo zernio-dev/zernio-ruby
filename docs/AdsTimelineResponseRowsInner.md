@@ -14,6 +14,7 @@
 | **cpc** | **Float** | Cost per click in native currency. | [optional] |
 | **cpm** | **Float** | Cost per 1000 impressions in native currency. | [optional] |
 | **conversions** | **Float** | Sum of conversion events over the range. Fractional values are normal (attribution splitting + Google modeled conversions). Meta: events matching the campaign optimization goal. Google: tracked conversions. X / LinkedIn: reported website/lead conversions (added 2026-07). | [optional] |
+| **all_conversions** | **Float** | All conversions, including actions excluded from the Conversions column (Google metrics.all_conversions). 0 on platforms without the concept. | [optional] |
 | **cost_per_conversion** | **Float** |  | [optional] |
 | **actions** | **Hash&lt;String, Float&gt;** | Per-action-type counts merged across all ads on this day. Keys are platform-native action types. | [optional] |
 | **action_values** | **Hash&lt;String, Float&gt;** | Monetary mirror of &#x60;actions&#x60; in native currency. | [optional] |
@@ -36,6 +37,7 @@ instance = Zernio::AdsTimelineResponseRowsInner.new(
   cpc: null,
   cpm: null,
   conversions: null,
+  all_conversions: null,
   cost_per_conversion: null,
   actions: null,
   action_values: null,

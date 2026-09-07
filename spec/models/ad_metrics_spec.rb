@@ -81,6 +81,12 @@ describe Zernio::AdMetrics do
     end
   end
 
+  describe 'test attribute "all_conversions"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "cost_per_conversion"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

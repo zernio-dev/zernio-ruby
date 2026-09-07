@@ -38,6 +38,9 @@ module Zernio
     # Count of conversion events over the requested date range. FRACTIONAL: attribution splits one conversion across touchpoints and Google additionally reports modeled conversions, so values like 0.347 are normal. Meta: events matching the campaign's promoted_object.custom_event_type (PURCHASE, LEAD, etc.). Google: the account's tracked conversions. X and LinkedIn: their reported website/lead conversions (added 2026-07). 0 for non-conversion campaigns or when no events have fired.
     attr_accessor :conversions
 
+    # All conversions, including actions excluded from the Conversions column (Google metrics.all_conversions). 0 on platforms without the concept.
+    attr_accessor :all_conversions
+
     # Derived spend / conversions in the same currency as spend. 0 when conversions is 0.
     attr_accessor :cost_per_conversion
 
@@ -125,6 +128,7 @@ module Zernio
         :'cpm' => :'cpm',
         :'engagement' => :'engagement',
         :'conversions' => :'conversions',
+        :'all_conversions' => :'allConversions',
         :'cost_per_conversion' => :'costPerConversion',
         :'actions' => :'actions',
         :'action_values' => :'actionValues',
@@ -176,6 +180,7 @@ module Zernio
         :'cpm' => :'Float',
         :'engagement' => :'Integer',
         :'conversions' => :'Float',
+        :'all_conversions' => :'Float',
         :'cost_per_conversion' => :'Float',
         :'actions' => :'Hash<String, Integer>',
         :'action_values' => :'Hash<String, Float>',
@@ -268,6 +273,10 @@ module Zernio
 
       if attributes.key?(:'conversions')
         self.conversions = attributes[:'conversions']
+      end
+
+      if attributes.key?(:'all_conversions')
+        self.all_conversions = attributes[:'all_conversions']
       end
 
       if attributes.key?(:'cost_per_conversion')
@@ -410,6 +419,7 @@ module Zernio
           cpm == o.cpm &&
           engagement == o.engagement &&
           conversions == o.conversions &&
+          all_conversions == o.all_conversions &&
           cost_per_conversion == o.cost_per_conversion &&
           actions == o.actions &&
           action_values == o.action_values &&
@@ -447,7 +457,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, cost_per_conversion, actions, action_values, purchase_value, roas, cost_per_action, outbound_clicks, outbound_clicks_ctr, inline_link_clicks, inline_link_click_ctr, unique_clicks, unique_ctr, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video_avg_time_watched_actions, cost_per_thruplay, funnel, engagement_breakdown, last_synced_at, date].hash
+      [spend, impressions, reach, clicks, ctr, cpc, cpm, engagement, conversions, all_conversions, cost_per_conversion, actions, action_values, purchase_value, roas, cost_per_action, outbound_clicks, outbound_clicks_ctr, inline_link_clicks, inline_link_click_ctr, unique_clicks, unique_ctr, video_play_actions, video30_sec_watched_actions, video_thruplay_watched_actions, video_p25_watched_actions, video_p50_watched_actions, video_p75_watched_actions, video_p95_watched_actions, video_p100_watched_actions, video_avg_time_watched_actions, cost_per_thruplay, funnel, engagement_breakdown, last_synced_at, date].hash
     end
 
     # Builds the object from hash

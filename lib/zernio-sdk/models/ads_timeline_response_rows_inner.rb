@@ -41,6 +41,9 @@ module Zernio
     # Sum of conversion events over the range. Fractional values are normal (attribution splitting + Google modeled conversions). Meta: events matching the campaign optimization goal. Google: tracked conversions. X / LinkedIn: reported website/lead conversions (added 2026-07).
     attr_accessor :conversions
 
+    # All conversions, including actions excluded from the Conversions column (Google metrics.all_conversions). 0 on platforms without the concept.
+    attr_accessor :all_conversions
+
     attr_accessor :cost_per_conversion
 
     # Per-action-type counts merged across all ads on this day. Keys are platform-native action types.
@@ -68,6 +71,7 @@ module Zernio
         :'cpc' => :'cpc',
         :'cpm' => :'cpm',
         :'conversions' => :'conversions',
+        :'all_conversions' => :'allConversions',
         :'cost_per_conversion' => :'costPerConversion',
         :'actions' => :'actions',
         :'action_values' => :'actionValues',
@@ -99,6 +103,7 @@ module Zernio
         :'cpc' => :'Float',
         :'cpm' => :'Float',
         :'conversions' => :'Float',
+        :'all_conversions' => :'Float',
         :'cost_per_conversion' => :'Float',
         :'actions' => :'Hash<String, Float>',
         :'action_values' => :'Hash<String, Float>',
@@ -169,6 +174,10 @@ module Zernio
         self.conversions = attributes[:'conversions']
       end
 
+      if attributes.key?(:'all_conversions')
+        self.all_conversions = attributes[:'all_conversions']
+      end
+
       if attributes.key?(:'cost_per_conversion')
         self.cost_per_conversion = attributes[:'cost_per_conversion']
       end
@@ -224,6 +233,7 @@ module Zernio
           cpc == o.cpc &&
           cpm == o.cpm &&
           conversions == o.conversions &&
+          all_conversions == o.all_conversions &&
           cost_per_conversion == o.cost_per_conversion &&
           actions == o.actions &&
           action_values == o.action_values &&
@@ -240,7 +250,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, spend, impressions, reach, clicks, engagement, ctr, cpc, cpm, conversions, cost_per_conversion, actions, action_values, purchase_value, roas].hash
+      [date, spend, impressions, reach, clicks, engagement, ctr, cpc, cpm, conversions, all_conversions, cost_per_conversion, actions, action_values, purchase_value, roas].hash
     end
 
     # Builds the object from hash
