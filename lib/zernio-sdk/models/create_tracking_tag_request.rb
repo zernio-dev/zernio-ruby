@@ -20,11 +20,37 @@ module Zernio
 
     attr_accessor :name
 
+    # OpenAI Ads only (ignored by Meta). When set, also provisions a standard conversion event setting wired to the new pixel, so `goal: conversions` ad creates on `POST /v1/ads/create` have an event to reference immediately.
+    attr_accessor :default_event_type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'ad_account_id' => :'adAccountId',
-        :'name' => :'name'
+        :'name' => :'name',
+        :'default_event_type' => :'defaultEventType'
       }
     end
 
@@ -42,7 +68,8 @@ module Zernio
     def self.openapi_types
       {
         :'ad_account_id' => :'String',
-        :'name' => :'String'
+        :'name' => :'String',
+        :'default_event_type' => :'String'
       }
     end
 
@@ -79,6 +106,10 @@ module Zernio
       else
         self.name = nil
       end
+
+      if attributes.key?(:'default_event_type')
+        self.default_event_type = attributes[:'default_event_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -113,6 +144,8 @@ module Zernio
       return false if @name.nil?
       return false if @name.to_s.length > 200
       return false if @name.to_s.length < 1
+      default_event_type_validator = EnumAttributeValidator.new('String', ["order_created", "lead_created", "items_added", "contents_viewed", "checkout_started", "registration_completed", "subscription_created", "trial_started", "appointment_scheduled", "page_viewed", "app_installed", "app_opened"])
+      return false unless default_event_type_validator.valid?(@default_event_type)
       true
     end
 
@@ -144,13 +177,24 @@ module Zernio
       @name = name
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] default_event_type Object to be assigned
+    def default_event_type=(default_event_type)
+      validator = EnumAttributeValidator.new('String', ["order_created", "lead_created", "items_added", "contents_viewed", "checkout_started", "registration_completed", "subscription_created", "trial_started", "appointment_scheduled", "page_viewed", "app_installed", "app_opened"])
+      unless validator.valid?(default_event_type)
+        fail ArgumentError, "invalid value for \"default_event_type\", must be one of #{validator.allowable_values}."
+      end
+      @default_event_type = default_event_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           ad_account_id == o.ad_account_id &&
-          name == o.name
+          name == o.name &&
+          default_event_type == o.default_event_type
     end
 
     # @see the `==` method
@@ -162,7 +206,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad_account_id, name].hash
+      [ad_account_id, name, default_event_type].hash
     end
 
     # Builds the object from hash

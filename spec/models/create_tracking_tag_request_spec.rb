@@ -39,4 +39,14 @@ describe Zernio::CreateTrackingTagRequest do
     end
   end
 
+  describe 'test attribute "default_event_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["order_created", "lead_created", "items_added", "contents_viewed", "checkout_started", "registration_completed", "subscription_created", "trial_started", "appointment_scheduled", "page_viewed", "app_installed", "app_opened"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.default_event_type = value }.not_to raise_error
+      # end
+    end
+  end
+
 end
