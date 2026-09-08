@@ -33,24 +33,4 @@ describe Zernio::InlineObject2 do
     end
   end
 
-  describe 'test attribute "code"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["insufficient_permissions", "unclassified_resource"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.code = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe 'test attribute "required_group"' do
-    it 'should work' do
-      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["publishing", "engagement", "messages", "contacts", "analytics", "ads", "telephony", "accounts", "billing", "webhooks"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.required_group = value }.not_to raise_error
-      # end
-    end
-  end
-
 end

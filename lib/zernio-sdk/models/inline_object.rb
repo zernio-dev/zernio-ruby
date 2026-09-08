@@ -15,12 +15,12 @@ require 'time'
 
 module Zernio
   class InlineObject < ApiModelBase
-    attr_accessor :error
+    attr_accessor :success
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error'
+        :'success' => :'success'
       }
     end
 
@@ -37,7 +37,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'String'
+        :'success' => :'Boolean'
       }
     end
 
@@ -63,8 +63,10 @@ module Zernio
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.key?(:'success')
+        self.success = attributes[:'success']
+      else
+        self.success = nil
       end
     end
 
@@ -73,6 +75,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @success.nil?
+        invalid_properties.push('invalid value for "success", success cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -80,7 +86,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @success.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] success Value to be assigned
+    def success=(success)
+      if success.nil?
+        fail ArgumentError, 'success cannot be nil'
+      end
+
+      @success = success
     end
 
     # Checks equality by comparing each attribute.
@@ -88,7 +105,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error
+          success == o.success
     end
 
     # @see the `==` method
@@ -100,7 +117,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error].hash
+      [success].hash
     end
 
     # Builds the object from hash

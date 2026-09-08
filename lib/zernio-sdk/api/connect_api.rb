@@ -798,7 +798,7 @@ module Zernio
     end
 
     # Connect WhatsApp from Embedded Signup
-    # Finish a WhatsApp connection started with Meta's Embedded Signup in your own page (Facebook JavaScript SDK). The code never passes through a `redirect_url`, so `POST /v1/connect/{platform}` cannot accept it.  The flow: call `GET /v1/connect/whatsapp/sdk-config`, run `FB.login` with that `configId`, `response_type: 'code'`, `override_default_response_type: true` and `extras: { sessionInfoVersion: '3' }`, read `waba_id` and `phone_number_id` from the `WA_EMBEDDED_SIGNUP` message event Meta posts to your window, then send the `code` from the login response here together with those ids.  Always forward `wabaId` and `phoneNumberId`: Zernio connects exactly that number and no picker is shown. Without them Zernio falls back to the first number of the first WhatsApp Business Account the token can reach, which may not be the one the user picked.  The Zernio Meta app must list the domain that hosts the popup before `FB.login` will open there. Available on request: send the domains to support. 
+    # Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
     # @param connect_whats_app_embedded_signup_request [ConnectWhatsAppEmbeddedSignupRequest] 
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -808,7 +808,7 @@ module Zernio
     end
 
     # Connect WhatsApp from Embedded Signup
-    # Finish a WhatsApp connection started with Meta&#39;s Embedded Signup in your own page (Facebook JavaScript SDK). The code never passes through a &#x60;redirect_url&#x60;, so &#x60;POST /v1/connect/{platform}&#x60; cannot accept it.  The flow: call &#x60;GET /v1/connect/whatsapp/sdk-config&#x60;, run &#x60;FB.login&#x60; with that &#x60;configId&#x60;, &#x60;response_type: &#39;code&#39;&#x60;, &#x60;override_default_response_type: true&#x60; and &#x60;extras: { sessionInfoVersion: &#39;3&#39; }&#x60;, read &#x60;waba_id&#x60; and &#x60;phone_number_id&#x60; from the &#x60;WA_EMBEDDED_SIGNUP&#x60; message event Meta posts to your window, then send the &#x60;code&#x60; from the login response here together with those ids.  Always forward &#x60;wabaId&#x60; and &#x60;phoneNumberId&#x60;: Zernio connects exactly that number and no picker is shown. Without them Zernio falls back to the first number of the first WhatsApp Business Account the token can reach, which may not be the one the user picked.  The Zernio Meta app must list the domain that hosts the popup before &#x60;FB.login&#x60; will open there. Available on request: send the domains to support. 
+    # Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
     # @param connect_whats_app_embedded_signup_request [ConnectWhatsAppEmbeddedSignupRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -1710,63 +1710,6 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#get_telegram_connect_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get Embedded Signup SDK config
-    # The public values needed to run Meta's Embedded Signup inside your own page with the Facebook JavaScript SDK instead of the redirect flow: pass `appId` and `graphApiVersion` to `FB.init`, and `configId` as `config_id` to `FB.login`. The popup then reports the WhatsApp Business Account and phone number the user picked through the `WA_EMBEDDED_SIGNUP` message event, and you finish the connection with `POST /v1/connect/whatsapp/embedded-signup`. Because the number comes back from the popup, the user never sees a second number picker.  Available on request: `FB.login` only opens on HTTPS domains listed in the Zernio Meta app, so send the domains that will host the popup to support before going live. 
-    # @param [Hash] opts the optional parameters
-    # @return [GetWhatsAppSdkConfig200Response]
-    def get_whats_app_sdk_config(opts = {})
-      data, _status_code, _headers = get_whats_app_sdk_config_with_http_info(opts)
-      data
-    end
-
-    # Get Embedded Signup SDK config
-    # The public values needed to run Meta&#39;s Embedded Signup inside your own page with the Facebook JavaScript SDK instead of the redirect flow: pass &#x60;appId&#x60; and &#x60;graphApiVersion&#x60; to &#x60;FB.init&#x60;, and &#x60;configId&#x60; as &#x60;config_id&#x60; to &#x60;FB.login&#x60;. The popup then reports the WhatsApp Business Account and phone number the user picked through the &#x60;WA_EMBEDDED_SIGNUP&#x60; message event, and you finish the connection with &#x60;POST /v1/connect/whatsapp/embedded-signup&#x60;. Because the number comes back from the popup, the user never sees a second number picker.  Available on request: &#x60;FB.login&#x60; only opens on HTTPS domains listed in the Zernio Meta app, so send the domains that will host the popup to support before going live. 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(GetWhatsAppSdkConfig200Response, Integer, Hash)>] GetWhatsAppSdkConfig200Response data, response status code and response headers
-    def get_whats_app_sdk_config_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: ConnectApi.get_whats_app_sdk_config ...'
-      end
-      # resource path
-      local_var_path = '/v1/connect/whatsapp/sdk-config'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'GetWhatsAppSdkConfig200Response'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['bearerAuth']
-
-      new_options = opts.merge(
-        :operation => :"ConnectApi.get_whats_app_sdk_config",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ConnectApi#get_whats_app_sdk_config\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

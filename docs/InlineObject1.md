@@ -12,7 +12,7 @@
 require 'zernio-sdk'
 
 instance = Zernio::InlineObject1.new(
-  error: Not found
+  error: Unauthorized
 )
 ```
 

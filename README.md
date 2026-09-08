@@ -250,6 +250,61 @@ Class | Method | HTTP request | Description
 *Zernio::BroadcastsApi* | [**schedule_broadcast**](docs/BroadcastsApi.md#schedule_broadcast) | **POST** /v1/broadcasts/{broadcastId}/schedule | Schedule broadcast for later
 *Zernio::BroadcastsApi* | [**send_broadcast**](docs/BroadcastsApi.md#send_broadcast) | **POST** /v1/broadcasts/{broadcastId}/send | Send broadcast now
 *Zernio::BroadcastsApi* | [**update_broadcast**](docs/BroadcastsApi.md#update_broadcast) | **PATCH** /v1/broadcasts/{broadcastId} | Update broadcast
+*Zernio::BusinessAgentApi* | [**add_business_agent_allowlist_entry**](docs/BusinessAgentApi.md#add_business_agent_allowlist_entry) | **POST** /v1/accounts/{accountId}/business-agent/allowlist | Allowlist a consumer
+*Zernio::BusinessAgentApi* | [**add_business_agent_website**](docs/BusinessAgentApi.md#add_business_agent_website) | **POST** /v1/accounts/{accountId}/business-agent/websites | Add a website to crawl
+*Zernio::BusinessAgentApi* | [**create_business_agent_connector**](docs/BusinessAgentApi.md#create_business_agent_connector) | **POST** /v1/accounts/{accountId}/business-agent/connectors | Create a connector
+*Zernio::BusinessAgentApi* | [**create_business_agent_connector_tool**](docs/BusinessAgentApi.md#create_business_agent_connector_tool) | **POST** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/tools | Create a connector tool
+*Zernio::BusinessAgentApi* | [**create_business_agent_faq**](docs/BusinessAgentApi.md#create_business_agent_faq) | **POST** /v1/accounts/{accountId}/business-agent/faqs | Create a FAQ
+*Zernio::BusinessAgentApi* | [**create_business_agent_skill**](docs/BusinessAgentApi.md#create_business_agent_skill) | **POST** /v1/accounts/{accountId}/business-agent/skills | Create a skill
+*Zernio::BusinessAgentApi* | [**create_business_agent_ui_skill**](docs/BusinessAgentApi.md#create_business_agent_ui_skill) | **POST** /v1/accounts/{accountId}/business-agent/ui-skills | Create a UI skill
+*Zernio::BusinessAgentApi* | [**delete_business_agent_connector**](docs/BusinessAgentApi.md#delete_business_agent_connector) | **DELETE** /v1/accounts/{accountId}/business-agent/connectors/{connectorId} | Delete a connector
+*Zernio::BusinessAgentApi* | [**delete_business_agent_connector_tool**](docs/BusinessAgentApi.md#delete_business_agent_connector_tool) | **DELETE** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/tools/{toolId} | Delete a connector tool
+*Zernio::BusinessAgentApi* | [**delete_business_agent_faq**](docs/BusinessAgentApi.md#delete_business_agent_faq) | **DELETE** /v1/accounts/{accountId}/business-agent/faqs/{faqId} | Delete a FAQ
+*Zernio::BusinessAgentApi* | [**delete_business_agent_file**](docs/BusinessAgentApi.md#delete_business_agent_file) | **DELETE** /v1/accounts/{accountId}/business-agent/files/{fileId} | Delete a knowledge file
+*Zernio::BusinessAgentApi* | [**delete_business_agent_skill**](docs/BusinessAgentApi.md#delete_business_agent_skill) | **DELETE** /v1/accounts/{accountId}/business-agent/skills/{skillId} | Delete a skill
+*Zernio::BusinessAgentApi* | [**delete_business_agent_ui_skill**](docs/BusinessAgentApi.md#delete_business_agent_ui_skill) | **DELETE** /v1/accounts/{accountId}/business-agent/ui-skills/{uiSkillId} | Delete a UI skill
+*Zernio::BusinessAgentApi* | [**delete_business_agent_website**](docs/BusinessAgentApi.md#delete_business_agent_website) | **DELETE** /v1/accounts/{accountId}/business-agent/websites/{websiteId} | Remove a crawled website
+*Zernio::BusinessAgentApi* | [**get_business_agent_budget**](docs/BusinessAgentApi.md#get_business_agent_budget) | **GET** /v1/accounts/{accountId}/business-agent/budget | Get usage budgets
+*Zernio::BusinessAgentApi* | [**get_business_agent_business_information**](docs/BusinessAgentApi.md#get_business_agent_business_information) | **GET** /v1/accounts/{accountId}/business-agent/business-information | Get business information
+*Zernio::BusinessAgentApi* | [**get_business_agent_connector**](docs/BusinessAgentApi.md#get_business_agent_connector) | **GET** /v1/accounts/{accountId}/business-agent/connectors/{connectorId} | Get a connector
+*Zernio::BusinessAgentApi* | [**get_business_agent_connector_logs**](docs/BusinessAgentApi.md#get_business_agent_connector_logs) | **GET** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/logs | Get connector failure logs
+*Zernio::BusinessAgentApi* | [**get_business_agent_connector_tool**](docs/BusinessAgentApi.md#get_business_agent_connector_tool) | **GET** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/tools/{toolId} | Get a connector tool
+*Zernio::BusinessAgentApi* | [**get_business_agent_event**](docs/BusinessAgentApi.md#get_business_agent_event) | **GET** /v1/accounts/{accountId}/business-agent/events/{eventId} | Get a business event status
+*Zernio::BusinessAgentApi* | [**get_business_agent_faq**](docs/BusinessAgentApi.md#get_business_agent_faq) | **GET** /v1/accounts/{accountId}/business-agent/faqs/{faqId} | Get a FAQ
+*Zernio::BusinessAgentApi* | [**get_business_agent_file**](docs/BusinessAgentApi.md#get_business_agent_file) | **GET** /v1/accounts/{accountId}/business-agent/files/{fileId} | Get a knowledge file
+*Zernio::BusinessAgentApi* | [**get_business_agent_skill**](docs/BusinessAgentApi.md#get_business_agent_skill) | **GET** /v1/accounts/{accountId}/business-agent/skills/{skillId} | Get a skill
+*Zernio::BusinessAgentApi* | [**get_business_agent_status**](docs/BusinessAgentApi.md#get_business_agent_status) | **GET** /v1/accounts/{accountId}/business-agent | Get agent setup status
+*Zernio::BusinessAgentApi* | [**get_business_agent_ui_skill**](docs/BusinessAgentApi.md#get_business_agent_ui_skill) | **GET** /v1/accounts/{accountId}/business-agent/ui-skills/{uiSkillId} | Get a UI skill
+*Zernio::BusinessAgentApi* | [**get_business_agent_website**](docs/BusinessAgentApi.md#get_business_agent_website) | **GET** /v1/accounts/{accountId}/business-agent/websites/{websiteId} | Get a crawled website
+*Zernio::BusinessAgentApi* | [**list_business_agent_allowlist**](docs/BusinessAgentApi.md#list_business_agent_allowlist) | **GET** /v1/accounts/{accountId}/business-agent/allowlist | List allowlisted consumers
+*Zernio::BusinessAgentApi* | [**list_business_agent_connector_tools**](docs/BusinessAgentApi.md#list_business_agent_connector_tools) | **GET** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/tools | List connector tools
+*Zernio::BusinessAgentApi* | [**list_business_agent_connectors**](docs/BusinessAgentApi.md#list_business_agent_connectors) | **GET** /v1/accounts/{accountId}/business-agent/connectors | List connectors
+*Zernio::BusinessAgentApi* | [**list_business_agent_faqs**](docs/BusinessAgentApi.md#list_business_agent_faqs) | **GET** /v1/accounts/{accountId}/business-agent/faqs | List FAQs
+*Zernio::BusinessAgentApi* | [**list_business_agent_files**](docs/BusinessAgentApi.md#list_business_agent_files) | **GET** /v1/accounts/{accountId}/business-agent/files | List knowledge files
+*Zernio::BusinessAgentApi* | [**list_business_agent_settings**](docs/BusinessAgentApi.md#list_business_agent_settings) | **GET** /v1/accounts/{accountId}/business-agent/settings | List agent settings
+*Zernio::BusinessAgentApi* | [**list_business_agent_skills**](docs/BusinessAgentApi.md#list_business_agent_skills) | **GET** /v1/accounts/{accountId}/business-agent/skills | List skills
+*Zernio::BusinessAgentApi* | [**list_business_agent_ui_skills**](docs/BusinessAgentApi.md#list_business_agent_ui_skills) | **GET** /v1/accounts/{accountId}/business-agent/ui-skills | List UI skills
+*Zernio::BusinessAgentApi* | [**list_business_agent_websites**](docs/BusinessAgentApi.md#list_business_agent_websites) | **GET** /v1/accounts/{accountId}/business-agent/websites | List crawled websites
+*Zernio::BusinessAgentApi* | [**onboard_business_agent**](docs/BusinessAgentApi.md#onboard_business_agent) | **POST** /v1/accounts/{accountId}/business-agent/onboard | Create the agent
+*Zernio::BusinessAgentApi* | [**read_business_agent_evals**](docs/BusinessAgentApi.md#read_business_agent_evals) | **GET** /v1/accounts/{accountId}/business-agent/evals | Read evaluation data
+*Zernio::BusinessAgentApi* | [**refresh_business_agent_connector_tools**](docs/BusinessAgentApi.md#refresh_business_agent_connector_tools) | **POST** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/refresh-tools | Refresh MCP connector tools
+*Zernio::BusinessAgentApi* | [**remove_business_agent_allowlist_entry**](docs/BusinessAgentApi.md#remove_business_agent_allowlist_entry) | **DELETE** /v1/accounts/{accountId}/business-agent/allowlist/{entryId} | Remove an allowlisted consumer
+*Zernio::BusinessAgentApi* | [**replace_business_agent_budget**](docs/BusinessAgentApi.md#replace_business_agent_budget) | **PUT** /v1/accounts/{accountId}/business-agent/budget | Replace usage budgets
+*Zernio::BusinessAgentApi* | [**replace_business_agent_business_information**](docs/BusinessAgentApi.md#replace_business_agent_business_information) | **PUT** /v1/accounts/{accountId}/business-agent/business-information | Replace business information
+*Zernio::BusinessAgentApi* | [**reset_business_agent_business_information**](docs/BusinessAgentApi.md#reset_business_agent_business_information) | **DELETE** /v1/accounts/{accountId}/business-agent/business-information | Reset business information
+*Zernio::BusinessAgentApi* | [**run_business_agent_connector_tool**](docs/BusinessAgentApi.md#run_business_agent_connector_tool) | **POST** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/tools/{toolId}/run | Run a connector tool once
+*Zernio::BusinessAgentApi* | [**send_business_agent_event**](docs/BusinessAgentApi.md#send_business_agent_event) | **POST** /v1/accounts/{accountId}/business-agent/events | Send a business event
+*Zernio::BusinessAgentApi* | [**send_business_agent_test_message**](docs/BusinessAgentApi.md#send_business_agent_test_message) | **POST** /v1/accounts/{accountId}/business-agent/test-messages | Send a test message
+*Zernio::BusinessAgentApi* | [**set_business_agent_connector_credentials**](docs/BusinessAgentApi.md#set_business_agent_connector_credentials) | **POST** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/credentials | Set connector credentials
+*Zernio::BusinessAgentApi* | [**start_business_agent_eval_run**](docs/BusinessAgentApi.md#start_business_agent_eval_run) | **POST** /v1/accounts/{accountId}/business-agent/evals | Start an evaluation run
+*Zernio::BusinessAgentApi* | [**update_business_agent_connector**](docs/BusinessAgentApi.md#update_business_agent_connector) | **PUT** /v1/accounts/{accountId}/business-agent/connectors/{connectorId} | Update a connector
+*Zernio::BusinessAgentApi* | [**update_business_agent_connector_tool**](docs/BusinessAgentApi.md#update_business_agent_connector_tool) | **PUT** /v1/accounts/{accountId}/business-agent/connectors/{connectorId}/tools/{toolId} | Update a connector tool
+*Zernio::BusinessAgentApi* | [**update_business_agent_faq**](docs/BusinessAgentApi.md#update_business_agent_faq) | **PUT** /v1/accounts/{accountId}/business-agent/faqs/{faqId} | Update a FAQ
+*Zernio::BusinessAgentApi* | [**update_business_agent_settings**](docs/BusinessAgentApi.md#update_business_agent_settings) | **PATCH** /v1/accounts/{accountId}/business-agent/settings | Update agent settings
+*Zernio::BusinessAgentApi* | [**update_business_agent_skill**](docs/BusinessAgentApi.md#update_business_agent_skill) | **PUT** /v1/accounts/{accountId}/business-agent/skills/{skillId} | Update a skill
+*Zernio::BusinessAgentApi* | [**update_business_agent_ui_skill**](docs/BusinessAgentApi.md#update_business_agent_ui_skill) | **PUT** /v1/accounts/{accountId}/business-agent/ui-skills/{uiSkillId} | Update a UI skill
+*Zernio::BusinessAgentApi* | [**update_business_agent_website**](docs/BusinessAgentApi.md#update_business_agent_website) | **PUT** /v1/accounts/{accountId}/business-agent/websites/{websiteId} | Update a crawled website
+*Zernio::BusinessAgentApi* | [**upload_business_agent_file**](docs/BusinessAgentApi.md#upload_business_agent_file) | **POST** /v1/accounts/{accountId}/business-agent/files | Upload a knowledge file
 *Zernio::CallsApi* | [**get_call**](docs/CallsApi.md#get_call) | **GET** /v1/calls/{id} | Get a call (any channel)
 *Zernio::CallsApi* | [**get_call_recording**](docs/CallsApi.md#get_call_recording) | **GET** /v1/calls/{id}/recording | Get a call recording
 *Zernio::CallsApi* | [**list_calls**](docs/CallsApi.md#list_calls) | **GET** /v1/calls | List all calls (unified history)
@@ -296,7 +351,6 @@ Class | Method | HTTP request | Description
 *Zernio::ConnectApi* | [**get_shopify_connect_url**](docs/ConnectApi.md#get_shopify_connect_url) | **GET** /v1/connect/shopify | Get Shopify OAuth connect URL
 *Zernio::ConnectApi* | [**get_subreddit_rules**](docs/ConnectApi.md#get_subreddit_rules) | **GET** /v1/accounts/{accountId}/reddit-subreddits/{subreddit}/rules | Get subreddit rules
 *Zernio::ConnectApi* | [**get_telegram_connect_status**](docs/ConnectApi.md#get_telegram_connect_status) | **GET** /v1/connect/telegram | Generate Telegram code
-*Zernio::ConnectApi* | [**get_whats_app_sdk_config**](docs/ConnectApi.md#get_whats_app_sdk_config) | **GET** /v1/connect/whatsapp/sdk-config | Get Embedded Signup SDK config
 *Zernio::ConnectApi* | [**get_youtube_captions**](docs/ConnectApi.md#get_youtube_captions) | **GET** /v1/accounts/{accountId}/youtube-captions | Get a YouTube video transcript
 *Zernio::ConnectApi* | [**get_youtube_playlists**](docs/ConnectApi.md#get_youtube_playlists) | **GET** /v1/accounts/{accountId}/youtube-playlists | List YouTube playlists
 *Zernio::ConnectApi* | [**handle_o_auth_callback**](docs/ConnectApi.md#handle_o_auth_callback) | **POST** /v1/connect/{platform} | Complete OAuth callback
@@ -745,6 +799,7 @@ Class | Method | HTTP request | Description
  - [Zernio::AddAdKeywordsRequestKeywordsInnerAnyOf](docs/AddAdKeywordsRequestKeywordsInnerAnyOf.md)
  - [Zernio::AddBroadcastRecipients200Response](docs/AddBroadcastRecipients200Response.md)
  - [Zernio::AddBroadcastRecipientsRequest](docs/AddBroadcastRecipientsRequest.md)
+ - [Zernio::AddBusinessAgentAllowlistEntryRequest](docs/AddBusinessAgentAllowlistEntryRequest.md)
  - [Zernio::AddConversionAssociations200Response](docs/AddConversionAssociations200Response.md)
  - [Zernio::AddConversionAssociations200ResponseFailedInner](docs/AddConversionAssociations200ResponseFailedInner.md)
  - [Zernio::AddConversionAssociationsRequest](docs/AddConversionAssociationsRequest.md)
@@ -832,6 +887,38 @@ Class | Method | HTTP request | Description
  - [Zernio::BulkUploadResult](docs/BulkUploadResult.md)
  - [Zernio::BulkUploadResultRateLimitedAccountsInner](docs/BulkUploadResultRateLimitedAccountsInner.md)
  - [Zernio::BulkUploadResultResultsInner](docs/BulkUploadResultResultsInner.md)
+ - [Zernio::BusinessAgentAllowlistEntry](docs/BusinessAgentAllowlistEntry.md)
+ - [Zernio::BusinessAgentApiKeyConfig](docs/BusinessAgentApiKeyConfig.md)
+ - [Zernio::BusinessAgentApiKeyParamsInner](docs/BusinessAgentApiKeyParamsInner.md)
+ - [Zernio::BusinessAgentBudget](docs/BusinessAgentBudget.md)
+ - [Zernio::BusinessAgentBusinessInformation](docs/BusinessAgentBusinessInformation.md)
+ - [Zernio::BusinessAgentBusinessInformationContactInfo](docs/BusinessAgentBusinessInformationContactInfo.md)
+ - [Zernio::BusinessAgentConnector](docs/BusinessAgentConnector.md)
+ - [Zernio::BusinessAgentConnectorAllOfConnectionStatus](docs/BusinessAgentConnectorAllOfConnectionStatus.md)
+ - [Zernio::BusinessAgentConnectorInput](docs/BusinessAgentConnectorInput.md)
+ - [Zernio::BusinessAgentConnectorInputAuthConfig](docs/BusinessAgentConnectorInputAuthConfig.md)
+ - [Zernio::BusinessAgentConnectorInputUserAuthInjectionConfig](docs/BusinessAgentConnectorInputUserAuthInjectionConfig.md)
+ - [Zernio::BusinessAgentConnectorTool](docs/BusinessAgentConnectorTool.md)
+ - [Zernio::BusinessAgentConnectorToolInput](docs/BusinessAgentConnectorToolInput.md)
+ - [Zernio::BusinessAgentEventStatus](docs/BusinessAgentEventStatus.md)
+ - [Zernio::BusinessAgentFaq](docs/BusinessAgentFaq.md)
+ - [Zernio::BusinessAgentFaqInput](docs/BusinessAgentFaqInput.md)
+ - [Zernio::BusinessAgentKnowledgeFile](docs/BusinessAgentKnowledgeFile.md)
+ - [Zernio::BusinessAgentOAuthClientCredentials](docs/BusinessAgentOAuthClientCredentials.md)
+ - [Zernio::BusinessAgentSettings](docs/BusinessAgentSettings.md)
+ - [Zernio::BusinessAgentSettingsFollowup](docs/BusinessAgentSettingsFollowup.md)
+ - [Zernio::BusinessAgentSettingsHandoff](docs/BusinessAgentSettingsHandoff.md)
+ - [Zernio::BusinessAgentSettingsRollout](docs/BusinessAgentSettingsRollout.md)
+ - [Zernio::BusinessAgentSkill](docs/BusinessAgentSkill.md)
+ - [Zernio::BusinessAgentSkillInput](docs/BusinessAgentSkillInput.md)
+ - [Zernio::BusinessAgentStatus](docs/BusinessAgentStatus.md)
+ - [Zernio::BusinessAgentStatusManualStepsInner](docs/BusinessAgentStatusManualStepsInner.md)
+ - [Zernio::BusinessAgentStatusUnverifiedStepsInner](docs/BusinessAgentStatusUnverifiedStepsInner.md)
+ - [Zernio::BusinessAgentTestMessageResponse](docs/BusinessAgentTestMessageResponse.md)
+ - [Zernio::BusinessAgentUiSkill](docs/BusinessAgentUiSkill.md)
+ - [Zernio::BusinessAgentUiSkillInput](docs/BusinessAgentUiSkillInput.md)
+ - [Zernio::BusinessAgentWebsite](docs/BusinessAgentWebsite.md)
+ - [Zernio::BusinessAgentWebsiteInput](docs/BusinessAgentWebsiteInput.md)
  - [Zernio::BusinessCenter](docs/BusinessCenter.md)
  - [Zernio::CallRecord](docs/CallRecord.md)
  - [Zernio::CallRecordBilling](docs/CallRecordBilling.md)
@@ -1252,6 +1339,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetBroadcast200ResponseBroadcast](docs/GetBroadcast200ResponseBroadcast.md)
  - [Zernio::GetBroadcast200ResponseBroadcastMessage](docs/GetBroadcast200ResponseBroadcastMessage.md)
  - [Zernio::GetBroadcast200ResponseBroadcastTemplate](docs/GetBroadcast200ResponseBroadcastTemplate.md)
+ - [Zernio::GetBusinessAgentBudget200Response](docs/GetBusinessAgentBudget200Response.md)
+ - [Zernio::GetBusinessAgentConnectorLogs200Response](docs/GetBusinessAgentConnectorLogs200Response.md)
  - [Zernio::GetCall200Response](docs/GetCall200Response.md)
  - [Zernio::GetCallsUsage200Response](docs/GetCallsUsage200Response.md)
  - [Zernio::GetCallsUsage200ResponseGroupsInner](docs/GetCallsUsage200ResponseGroupsInner.md)
@@ -1518,7 +1607,6 @@ Class | Method | HTTP request | Description
  - [Zernio::GetWhatsAppNumberKycForm200Response](docs/GetWhatsAppNumberKycForm200Response.md)
  - [Zernio::GetWhatsAppNumberKycForm200ResponseFieldsInner](docs/GetWhatsAppNumberKycForm200ResponseFieldsInner.md)
  - [Zernio::GetWhatsAppNumberRemediation200Response](docs/GetWhatsAppNumberRemediation200Response.md)
- - [Zernio::GetWhatsAppSdkConfig200Response](docs/GetWhatsAppSdkConfig200Response.md)
  - [Zernio::GetWhatsAppTemplate200Response](docs/GetWhatsAppTemplate200Response.md)
  - [Zernio::GetWhatsAppTemplate200ResponseTemplate](docs/GetWhatsAppTemplate200ResponseTemplate.md)
  - [Zernio::GetWhatsAppTemplate409Response](docs/GetWhatsAppTemplate409Response.md)
@@ -1574,7 +1662,8 @@ Class | Method | HTTP request | Description
  - [Zernio::InlineObject1](docs/InlineObject1.md)
  - [Zernio::InlineObject2](docs/InlineObject2.md)
  - [Zernio::InlineObject3](docs/InlineObject3.md)
- - [Zernio::InlineObject3Details](docs/InlineObject3Details.md)
+ - [Zernio::InlineObject4](docs/InlineObject4.md)
+ - [Zernio::InlineObject4Details](docs/InlineObject4Details.md)
  - [Zernio::InstagramAccountInsightsResponse](docs/InstagramAccountInsightsResponse.md)
  - [Zernio::InstagramAccountInsightsResponseDateRange](docs/InstagramAccountInsightsResponseDateRange.md)
  - [Zernio::InstagramAccountInsightsResponseMetricsValue](docs/InstagramAccountInsightsResponseMetricsValue.md)
@@ -1656,6 +1745,15 @@ Class | Method | HTTP request | Description
  - [Zernio::ListBroadcastRecipients200ResponseSummary](docs/ListBroadcastRecipients200ResponseSummary.md)
  - [Zernio::ListBroadcasts200Response](docs/ListBroadcasts200Response.md)
  - [Zernio::ListBroadcasts200ResponseBroadcastsInner](docs/ListBroadcasts200ResponseBroadcastsInner.md)
+ - [Zernio::ListBusinessAgentAllowlist200Response](docs/ListBusinessAgentAllowlist200Response.md)
+ - [Zernio::ListBusinessAgentConnectorTools200Response](docs/ListBusinessAgentConnectorTools200Response.md)
+ - [Zernio::ListBusinessAgentConnectors200Response](docs/ListBusinessAgentConnectors200Response.md)
+ - [Zernio::ListBusinessAgentFaqs200Response](docs/ListBusinessAgentFaqs200Response.md)
+ - [Zernio::ListBusinessAgentFiles200Response](docs/ListBusinessAgentFiles200Response.md)
+ - [Zernio::ListBusinessAgentSettings200Response](docs/ListBusinessAgentSettings200Response.md)
+ - [Zernio::ListBusinessAgentSkills200Response](docs/ListBusinessAgentSkills200Response.md)
+ - [Zernio::ListBusinessAgentUiSkills200Response](docs/ListBusinessAgentUiSkills200Response.md)
+ - [Zernio::ListBusinessAgentWebsites200Response](docs/ListBusinessAgentWebsites200Response.md)
  - [Zernio::ListCalls200Response](docs/ListCalls200Response.md)
  - [Zernio::ListCalls200ResponseCallsInner](docs/ListCalls200ResponseCallsInner.md)
  - [Zernio::ListCampaignNegativeKeywords200Response](docs/ListCampaignNegativeKeywords200Response.md)
@@ -1849,6 +1947,7 @@ Class | Method | HTTP request | Description
  - [Zernio::OnWhatsAppNumberReleasedRequest](docs/OnWhatsAppNumberReleasedRequest.md)
  - [Zernio::OnWhatsAppNumberSuspendedRequest](docs/OnWhatsAppNumberSuspendedRequest.md)
  - [Zernio::OnWhatsAppNumberVerificationRequiredRequest](docs/OnWhatsAppNumberVerificationRequiredRequest.md)
+ - [Zernio::OnboardBusinessAgent201Response](docs/OnboardBusinessAgent201Response.md)
  - [Zernio::Pagination](docs/Pagination.md)
  - [Zernio::PauseWorkflow200Response](docs/PauseWorkflow200Response.md)
  - [Zernio::Pending](docs/Pending.md)
@@ -1967,6 +2066,8 @@ Class | Method | HTTP request | Description
  - [Zernio::RevokeConnectedApp200Response](docs/RevokeConnectedApp200Response.md)
  - [Zernio::RfPrediction](docs/RfPrediction.md)
  - [Zernio::RotateSipTrunkCredentials200Response](docs/RotateSipTrunkCredentials200Response.md)
+ - [Zernio::RunBusinessAgentConnectorTool200Response](docs/RunBusinessAgentConnectorTool200Response.md)
+ - [Zernio::RunBusinessAgentConnectorToolRequest](docs/RunBusinessAgentConnectorToolRequest.md)
  - [Zernio::SavedTargetingAudience](docs/SavedTargetingAudience.md)
  - [Zernio::ScheduleBroadcast200Response](docs/ScheduleBroadcast200Response.md)
  - [Zernio::ScheduleBroadcast200ResponseBroadcast](docs/ScheduleBroadcast200ResponseBroadcast.md)
@@ -2019,6 +2120,9 @@ Class | Method | HTTP request | Description
  - [Zernio::SelectSnapchatProfileRequest](docs/SelectSnapchatProfileRequest.md)
  - [Zernio::SelectSnapchatProfileRequestSelectedPublicProfile](docs/SelectSnapchatProfileRequestSelectedPublicProfile.md)
  - [Zernio::SendBroadcast200Response](docs/SendBroadcast200Response.md)
+ - [Zernio::SendBusinessAgentEvent202Response](docs/SendBusinessAgentEvent202Response.md)
+ - [Zernio::SendBusinessAgentEventRequest](docs/SendBusinessAgentEventRequest.md)
+ - [Zernio::SendBusinessAgentTestMessageRequest](docs/SendBusinessAgentTestMessageRequest.md)
  - [Zernio::SendConversions200Response](docs/SendConversions200Response.md)
  - [Zernio::SendConversions200ResponseFailuresInner](docs/SendConversions200ResponseFailuresInner.md)
  - [Zernio::SendConversions200ResponseFailuresInnerCode](docs/SendConversions200ResponseFailuresInnerCode.md)
@@ -2094,6 +2198,10 @@ Class | Method | HTTP request | Description
  - [Zernio::SendWhatsAppFlowMessageRequest](docs/SendWhatsAppFlowMessageRequest.md)
  - [Zernio::SendWhatsAppFlowMessageRequestFlowActionPayload](docs/SendWhatsAppFlowMessageRequestFlowActionPayload.md)
  - [Zernio::SendWhatsAppFlowMessageRequestHeader](docs/SendWhatsAppFlowMessageRequestHeader.md)
+ - [Zernio::SetBusinessAgentConnectorCredentialsRequest](docs/SetBusinessAgentConnectorCredentialsRequest.md)
+ - [Zernio::SetBusinessAgentConnectorCredentialsRequestOneOf](docs/SetBusinessAgentConnectorCredentialsRequestOneOf.md)
+ - [Zernio::SetBusinessAgentConnectorCredentialsRequestOneOf1](docs/SetBusinessAgentConnectorCredentialsRequestOneOf1.md)
+ - [Zernio::SetBusinessAgentConnectorCredentialsRequestOneOf2](docs/SetBusinessAgentConnectorCredentialsRequestOneOf2.md)
  - [Zernio::SetCommentModerationRequest](docs/SetCommentModerationRequest.md)
  - [Zernio::SetContactFieldValueRequest](docs/SetContactFieldValueRequest.md)
  - [Zernio::SetConversationThreadControl200Response](docs/SetConversationThreadControl200Response.md)
@@ -2115,6 +2223,8 @@ Class | Method | HTTP request | Description
  - [Zernio::SnapchatPlatformData](docs/SnapchatPlatformData.md)
  - [Zernio::SocialAccount](docs/SocialAccount.md)
  - [Zernio::SocialAccountProfileId](docs/SocialAccountProfileId.md)
+ - [Zernio::StartBusinessAgentEvalRun202Response](docs/StartBusinessAgentEvalRun202Response.md)
+ - [Zernio::StartBusinessAgentEvalRunRequest](docs/StartBusinessAgentEvalRunRequest.md)
  - [Zernio::StartGoogleBusinessVerification200Response](docs/StartGoogleBusinessVerification200Response.md)
  - [Zernio::StartGoogleBusinessVerification200ResponseVerification](docs/StartGoogleBusinessVerification200ResponseVerification.md)
  - [Zernio::StartGoogleBusinessVerificationRequest](docs/StartGoogleBusinessVerificationRequest.md)
@@ -2221,6 +2331,10 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateBroadcastRequestMessage](docs/UpdateBroadcastRequestMessage.md)
  - [Zernio::UpdateBroadcastRequestTemplate](docs/UpdateBroadcastRequestTemplate.md)
  - [Zernio::UpdateBroadcastRequestTemplateVariableMappingValue](docs/UpdateBroadcastRequestTemplateVariableMappingValue.md)
+ - [Zernio::UpdateBusinessAgentSettingsRequest](docs/UpdateBusinessAgentSettingsRequest.md)
+ - [Zernio::UpdateBusinessAgentSettingsRequestFollowup](docs/UpdateBusinessAgentSettingsRequestFollowup.md)
+ - [Zernio::UpdateBusinessAgentSettingsRequestHandoff](docs/UpdateBusinessAgentSettingsRequestHandoff.md)
+ - [Zernio::UpdateBusinessAgentSettingsRequestRollout](docs/UpdateBusinessAgentSettingsRequestRollout.md)
  - [Zernio::UpdateCampaignTargeting200Response](docs/UpdateCampaignTargeting200Response.md)
  - [Zernio::UpdateCampaignTargeting200ResponseDevicesInner](docs/UpdateCampaignTargeting200ResponseDevicesInner.md)
  - [Zernio::UpdateCampaignTargeting200ResponseLanguagesInner](docs/UpdateCampaignTargeting200ResponseLanguagesInner.md)
@@ -2327,6 +2441,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UploadAdVideo201Response](docs/UploadAdVideo201Response.md)
  - [Zernio::UploadAdVideo201ResponseVideo](docs/UploadAdVideo201ResponseVideo.md)
  - [Zernio::UploadAdVideoRequest](docs/UploadAdVideoRequest.md)
+ - [Zernio::UploadBusinessAgentFileRequest](docs/UploadBusinessAgentFileRequest.md)
  - [Zernio::UploadMediaDirect200Response](docs/UploadMediaDirect200Response.md)
  - [Zernio::UploadPhoneNumberKycDocument200Response](docs/UploadPhoneNumberKycDocument200Response.md)
  - [Zernio::UploadPhoneNumberPortInDocument200Response](docs/UploadPhoneNumberPortInDocument200Response.md)

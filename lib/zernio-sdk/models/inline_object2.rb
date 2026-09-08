@@ -17,39 +17,10 @@ module Zernio
   class InlineObject2 < ApiModelBase
     attr_accessor :error
 
-    attr_accessor :code
-
-    # The resource group the key needs for this operation. Absent on admin-plane and unclassified-path denials.
-    attr_accessor :required_group
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error',
-        :'code' => :'code',
-        :'required_group' => :'required_group'
+        :'error' => :'error'
       }
     end
 
@@ -66,9 +37,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'String',
-        :'code' => :'String',
-        :'required_group' => :'String'
+        :'error' => :'String'
       }
     end
 
@@ -97,14 +66,6 @@ module Zernio
       if attributes.key?(:'error')
         self.error = attributes[:'error']
       end
-
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
-      end
-
-      if attributes.key?(:'required_group')
-        self.required_group = attributes[:'required_group']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -119,31 +80,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["insufficient_permissions", "unclassified_resource"])
-      return false unless code_validator.valid?(@code)
-      required_group_validator = EnumAttributeValidator.new('String', ["publishing", "engagement", "messages", "contacts", "analytics", "ads", "telephony", "accounts", "billing", "webhooks"])
-      return false unless required_group_validator.valid?(@required_group)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] code Object to be assigned
-    def code=(code)
-      validator = EnumAttributeValidator.new('String', ["insufficient_permissions", "unclassified_resource"])
-      unless validator.valid?(code)
-        fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
-      end
-      @code = code
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] required_group Object to be assigned
-    def required_group=(required_group)
-      validator = EnumAttributeValidator.new('String', ["publishing", "engagement", "messages", "contacts", "analytics", "ads", "telephony", "accounts", "billing", "webhooks"])
-      unless validator.valid?(required_group)
-        fail ArgumentError, "invalid value for \"required_group\", must be one of #{validator.allowable_values}."
-      end
-      @required_group = required_group
     end
 
     # Checks equality by comparing each attribute.
@@ -151,9 +88,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error &&
-          code == o.code &&
-          required_group == o.required_group
+          error == o.error
     end
 
     # @see the `==` method
@@ -165,7 +100,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, code, required_group].hash
+      [error].hash
     end
 
     # Builds the object from hash
