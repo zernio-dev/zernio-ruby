@@ -191,7 +191,7 @@ module Zernio
       return false if @profile_id.nil?
       return false if @account_id.nil?
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "twitter", "bluesky", "reddit", "whatsapp"])
+      platform_validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "twitter", "bluesky", "reddit", "whatsapp", "slack"])
       return false unless platform_validator.valid?(@platform)
       return false if @name.nil?
       true
@@ -220,7 +220,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "twitter", "bluesky", "reddit", "whatsapp"])
+      validator = EnumAttributeValidator.new('String', ["instagram", "facebook", "telegram", "twitter", "bluesky", "reddit", "whatsapp", "slack"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
