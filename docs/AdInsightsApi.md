@@ -383,7 +383,7 @@ end
 
 Google Ads search terms report
 
-The actual search queries that triggered your ads, with matched-keyword status and spend metrics — the raw material for wasted-spend analysis and negative-keyword lists. Reads Google's `search_term_view`, cached for the quota window; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
+The actual search queries that triggered your ads, with matched-keyword status and spend metrics, the raw material for wasted-spend analysis and negative-keyword lists. Reads Google's `search_term_view`, cached for the quota window; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
 
 ### Examples
 
@@ -723,7 +723,7 @@ end
 api_instance = Zernio::AdInsightsApi.new
 account_id = 'account_id_example' # String | Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract.
 opts = {
-  object_id: 'object_id_example', # String | Meta only (required there): insights node — act_<n>, campaign id, ad set id or ad id.
+  object_id: 'object_id_example', # String | Meta only (required there): insights node (act_<n>, campaign id, ad set id or ad id).
   query: 'query_example', # String | Google only (required there): the GAQL SELECT statement to run.
   customer_id: 'customer_id_example', # String | Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts.
   page_token: 'page_token_example', # String | Google only: cursor from paging.nextPageToken of the previous page.
@@ -775,7 +775,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** | Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract. |  |
-| **object_id** | **String** | Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id. | [optional] |
+| **object_id** | **String** | Meta only (required there): insights node (act_&lt;n&gt;, campaign id, ad set id or ad id). | [optional] |
 | **query** | **String** | Google only (required there): the GAQL SELECT statement to run. | [optional] |
 | **customer_id** | **String** | Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts. | [optional] |
 | **page_token** | **String** | Google only: cursor from paging.nextPageToken of the previous page. | [optional] |

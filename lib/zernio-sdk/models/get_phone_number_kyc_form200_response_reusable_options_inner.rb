@@ -15,10 +15,10 @@ require 'time'
 
 module Zernio
   class GetPhoneNumberKycForm200ResponseReusableOptionsInner < ApiModelBase
-    # Opaque option id — pass as `reuseOptionId` on POST. Stable selection key (a phone number is not unique across verifications).
+    # Opaque option id. Pass as `reuseOptionId` on POST. Stable selection key (a phone number is not unique across verifications).
     attr_accessor :id
 
-    # Display only — the number this verification was submitted for. Not a selection key.
+    # Display only. The number this verification was submitted for. Not a selection key.
     attr_accessor :from_phone_number
 
     # true = group-approved, a new order activates in minutes; false = documents are reused but the order still queues for carrier review (1-3 days).

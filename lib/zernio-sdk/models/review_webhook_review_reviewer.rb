@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class ReviewWebhookReviewReviewer < ApiModelBase
-    # Platform reviewer ID. Null when the platform does not expose it (common on Google Business anonymous reviews).
+    # Platform reviewer ID. Null when the platform does not expose it (common on Google Business Profile anonymous reviews).
     attr_accessor :id
 
     attr_accessor :name

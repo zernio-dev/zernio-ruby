@@ -41,7 +41,7 @@ module Zernio
 
     attr_accessor :is_read
 
-    # WhatsApp send origin. whatsapp_business_app when sent from the WhatsApp Business phone app on a Coexistence number; cloud_api when sent through Zernio (dashboard, API, or broadcasts). Absent on non-WhatsApp platforms. Says where WhatsApp saw the send come from, not which Zernio surface produced it: read sentVia for that.
+    # WhatsApp send origin. whatsapp_business_app when sent from the WhatsApp Business phone app on a Coexistence number; cloud_api when sent through Zernio (dashboard, API, or broadcasts); meta_business_agent when Meta Business Agent answered on the number. Absent on non-WhatsApp platforms. Says where WhatsApp saw the send come from, not which Zernio surface produced it: read sentVia for that.
     attr_accessor :source
 
     # Which Zernio surface produced this message: `human` (an operator in the Zernio inbox), `api` (a call to this API), `broadcast`, `sequence`, `workflow`, `comment_automation`, or `bulk-api` (POST /v1/whatsapp/bulk). Same vocabulary as the `source` filter on the inbox analytics endpoints, and the same value a later GET on this message returns.  Always present, and `null` whenever the lineage is unknown: a message sent from the platform's own app, and every message stored before this field shipped (2026-08). Existing messages are NOT backfilled, so treat `null` as \"unknown\", never as \"sent by a human\". 
@@ -271,7 +271,7 @@ module Zernio
       return false if @sender.nil?
       return false if @sent_at.nil?
       return false if @is_read.nil?
-      source_validator = EnumAttributeValidator.new('String', ["whatsapp_business_app", "cloud_api"])
+      source_validator = EnumAttributeValidator.new('String', ["whatsapp_business_app", "cloud_api", "meta_business_agent"])
       return false unless source_validator.valid?(@source)
       sent_via_validator = EnumAttributeValidator.new('String', ["human", "api", "broadcast", "sequence", "workflow", "comment_automation", "bulk-api"])
       return false unless sent_via_validator.valid?(@sent_via)
@@ -371,7 +371,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] source Object to be assigned
     def source=(source)
-      validator = EnumAttributeValidator.new('String', ["whatsapp_business_app", "cloud_api"])
+      validator = EnumAttributeValidator.new('String', ["whatsapp_business_app", "cloud_api", "meta_business_agent"])
       unless validator.valid?(source)
         fail ArgumentError, "invalid value for \"source\", must be one of #{validator.allowable_values}."
       end

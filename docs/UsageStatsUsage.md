@@ -7,9 +7,9 @@
 | **uploads** | **Integer** | Stripe users only. Uploads consumed in the current period. | [optional] |
 | **profiles** | **Integer** | Stripe users only. Profiles currently owned. | [optional] |
 | **last_reset** | **Time** | Stripe users only. | [optional] |
-| **connected_accounts** | **Integer** | Metronome users only. Accounts currently connected across the team. | [optional] |
+| **connected_accounts** | **Integer** | Usage-based billing only. Accounts currently connected across the team. | [optional] |
 | **x_api_calls** | [**UsageStatsUsageXApiCalls**](UsageStatsUsageXApiCalls.md) |  | [optional] |
-| **x_api_calls_by_operation** | **Hash&lt;String, Integer&gt;** | Metronome users only. Per-operation X API call counts keyed by operation (e.g. &#x60;posts_read&#x60;, &#x60;content_create&#x60;, &#x60;content_create_with_url&#x60;). Resolve each key to price and metadata via &#x60;GET /v1/billing/x-pricing&#x60;. This is the canonical source — covers every price tier including the $0.200 URL tier that &#x60;xApiCalls&#x60; excludes.  | [optional] |
+| **x_api_calls_by_operation** | **Hash&lt;String, Integer&gt;** | Usage-based billing only. Per-operation X API call counts keyed by operation (e.g. &#x60;posts_read&#x60;, &#x60;content_create&#x60;, &#x60;content_create_with_url&#x60;). Resolve each key to price and metadata via &#x60;GET /v1/billing/x-pricing&#x60;. This is the canonical source: it covers every price tier including the $0.200 URL tier that &#x60;xApiCalls&#x60; excludes.  | [optional] |
 
 ## Example
 

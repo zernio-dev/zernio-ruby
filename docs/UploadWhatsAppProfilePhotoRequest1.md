@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **url** | **String** | Publicly reachable https URL of the image (JPEG or PNG, max 5MB, recommended 640x640). Fetched server-side; must resolve directly without redirects. |  |
 
 ## Example

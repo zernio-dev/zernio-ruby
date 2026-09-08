@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Multi-creative shape — N ads returned sharing platformCampaignId / platformAdSetId.
+  # Multi-creative shape: N ads returned sharing platformCampaignId / platformAdSetId.
   class CreateStandaloneAd201ResponseOneOf1 < ApiModelBase
     attr_accessor :ads
 

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **supported** | **Boolean** | False for legacy Stripe accounts (no Metronome invoice to split); &#x60;days&#x60; and &#x60;totals&#x60; are then empty/zero. | [optional] |
+| **supported** | **Boolean** | False for legacy Stripe accounts (no usage-based invoice to split); &#x60;days&#x60; and &#x60;totals&#x60; are then empty/zero. | [optional] |
 | **granularity** | **String** |  | [optional] |
 | **days** | [**Array&lt;UsageMeteringDaysInner&gt;**](UsageMeteringDaysInner.md) | One row per bucket. Empty when &#x60;granularity&#x3D;total&#x60;. &#x60;date&#x60; is a UTC date (month buckets use the 1st). | [optional] |
 | **totals** | [**UsageMeteringTotals**](UsageMeteringTotals.md) |  | [optional] |

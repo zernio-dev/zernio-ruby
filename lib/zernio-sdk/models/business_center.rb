@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # TikTok Business Center entity. Returned by `GET /v1/ads/business-centers`. BCs are TikTok's agency container — one BC owns N advertisers (ad accounts). Most solo advertisers don't have one; the agency token uses BCs to roll up multi-client access. 
+  # TikTok Business Center entity. Returned by `GET /v1/ads/business-centers`. BCs are TikTok's agency container: one BC owns N advertisers (ad accounts). Most solo advertisers don't have one; the agency token uses BCs to roll up multi-client access. 
   class BusinessCenter < ApiModelBase
     # Business Center ID
     attr_accessor :bc_id
@@ -22,7 +22,7 @@ module Zernio
     # Display name set by the BC owner
     attr_accessor :name
 
-    # Number of advertisers reachable under this BC for the calling token. `null` when the BC asset walk returned empty or failed (typical for agency apps without full BC asset read scope) — distinct from `0`, which would imply the BC genuinely has no advertisers. 
+    # Number of advertisers reachable under this BC for the calling token. `null` when the BC asset walk returned empty or failed (typical for agency apps without full BC asset read scope), distinct from `0`, which would imply the BC genuinely has no advertisers. 
     attr_accessor :advertiser_count
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -33,7 +33,7 @@ module Zernio
     # Optional key frame time in seconds for derived video cover
     attr_accessor :cover_image_key_frame_time
 
-    # When true, the Pin is created with Pinterest's AI_MODIFIED disclosure (ai_disclosures), which shows an \"AI modified\" label. Applies to image and video Pins. Pinterest offers no \"not AI\" value, so false simply omits the disclosure. Pinterest may still label a Pin on its own detection.
+    # When true, the Pin is created with Pinterest's AI_MODIFIED disclosure (ai_disclosures), which shows an \"AI modified\" label. Applies to image and video Pins. Pinterest offers no \"not AI\" value, so false omits the disclosure. Pinterest may still label a Pin on its own detection.
     attr_accessor :is_ai_generated
 
     # Attribute mapping from ruby-style variable name to JSON key.

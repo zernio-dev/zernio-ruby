@@ -111,7 +111,7 @@ end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Delete flow
@@ -145,7 +145,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **flow_id** | **String** | Flow ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -253,7 +253,7 @@ end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   fields: 'fields_example' # String | Comma-separated fields to return (default: id,name,status,categories,validation_errors,json_version,preview,data_api_version,endpoint_uri)
 }
@@ -290,7 +290,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **flow_id** | **String** | Flow ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **fields** | **String** | Comma-separated fields to return (default: id,name,status,categories,validation_errors,json_version,preview,data_api_version,endpoint_uri) | [optional] |
 
 ### Return type
@@ -328,7 +328,7 @@ end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get flow JSON asset
@@ -362,7 +362,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **flow_id** | **String** | Flow ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -399,7 +399,7 @@ end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   invalidate: true # Boolean | Mint a fresh preview link (default false)
 }
@@ -436,7 +436,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **flow_id** | **String** | Flow ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **invalidate** | **Boolean** | Mint a fresh preview link (default false) | [optional] |
 
 ### Return type
@@ -473,7 +473,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get Flows encryption key status
@@ -506,7 +506,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -528,7 +528,7 @@ end
 
 List flow responses
 
-List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with `flowId` — this matches responses whose flow_token carries the `<flowId>:` prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
+List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with `flowId`, which matches responses whose flow_token carries the `<flowId>:` prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
 
 ### Examples
 
@@ -542,7 +542,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   flow_id: 'flow_id_example', # String | Scope to responses for this flow
   limit: 56 # Integer | Max responses to return
@@ -579,7 +579,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **flow_id** | **String** | Scope to responses for this flow | [optional] |
 | **limit** | **Integer** | Max responses to return | [optional][default to 50] |
 
@@ -603,7 +603,7 @@ end
 
 List flow versions
 
-List the flow's version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version's live name and status from Meta. A flow with no lineage returns just itself as version 1. 
+List the flow's version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version's live name and status from Meta. A flow with no lineage returns only itself as version 1. 
 
 ### Examples
 
@@ -618,7 +618,7 @@ end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
 flow_id = 'flow_id_example' # String | Flow ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # List flow versions
@@ -652,7 +652,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **flow_id** | **String** | Flow ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -688,7 +688,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppFlowsApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # List flows
@@ -721,7 +721,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 

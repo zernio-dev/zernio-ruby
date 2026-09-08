@@ -18,7 +18,7 @@ module Zernio
   class SavedTargetingAudience < ApiModelBase
     attr_accessor :type
 
-    # Social account ID on the target ad platform.
+    # Account ID on the target ad platform.
     attr_accessor :account_id
 
     attr_accessor :name

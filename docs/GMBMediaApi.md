@@ -90,7 +90,7 @@ end
 
 Delete photo
 
-Deletes a photo or media item from a GBP location.
+Deletes a photo or media item from a Google Business Profile location.
 
 ### Examples
 

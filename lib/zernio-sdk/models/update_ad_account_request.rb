@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UpdateAdAccountRequest < ApiModelBase
-    # Social account ID (metaads, or a facebook/instagram posting account)
+    # Account ID (metaads, or a facebook/instagram posting account)
     attr_accessor :account_id
 
     # Meta ad account ID (act_...)

@@ -9,7 +9,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_sms_usage**](UsageApi.md#get_sms_usage) | **GET** /v1/usage/sms | SMS usage (volumes) |
 | [**get_usage**](UsageApi.md#get_usage) | **GET** /v1/usage | Usage snapshot (default) or billed-spend metering (with params) |
 | [**get_usage_stats**](UsageApi.md#get_usage_stats) | **GET** /v1/usage-stats | Get plan and usage snapshot (plan, limits, payment status) |
-| [**get_x_api_pricing**](UsageApi.md#get_x_api_pricing) | **GET** /v1/billing/x-pricing | Get X/Twitter API pricing table |
+| [**get_x_api_pricing**](UsageApi.md#get_x_api_pricing) | **GET** /v1/billing/x-pricing | Get X API pricing table |
 
 
 ## get_billing
@@ -18,7 +18,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Account billing snapshot (plan, cycle, balance, caps, status)
 
-The billing \"wallet/statement\" view: current plan, billing cycle, accrued balance + remaining credits this period, spend caps, and payment / access status. This is the billing half of the legacy `/v1/usage-stats` snapshot — the per-product consumption half is metering and lives on `GET /v1/usage`.  Usage-based (Metronome) accounts get a populated `balance`; legacy Stripe accounts get `balance: null` plus a deprecated `legacy.limits` block and, when payment-blocked, `status.openInvoiceUrl` / `status.declineReason`. 
+The billing \"wallet/statement\" view: current plan, billing cycle, accrued balance + remaining credits this period, spend caps, and payment / access status. This is the billing half of the legacy `/v1/usage-stats` snapshot. The per-product consumption half is metering and lives on `GET /v1/usage`.  Accounts on usage-based billing get a populated `balance`; legacy Stripe accounts get `balance: null` plus a deprecated `legacy.limits` block and, when payment-blocked, `status.openInvoiceUrl` / `status.declineReason`. 
 
 ### Examples
 
@@ -240,7 +240,7 @@ end
 
 Usage snapshot (default) or billed-spend metering (with params)
 
-Dual-mode endpoint, selected by query params — fully backward compatible:  **Without metering params (the default):** the plan / quota / usage snapshot — plan name, billing period, limits, usage counts, access state. Identical to `GET /v1/usage-stats`. Existing integrations keep working unchanged.  **With `range`, `granularity`, `from`, or `to`:** usage METERING — billed spend (USD) by product family (`accounts`, `numbers`, `calls`, `sms`, `dlc`, `xApi`, `credits`, `other`) over the window, at `day` / `month` / `total` granularity, from Metronome's invoice breakdown (the CHARGE view — always reconciles with what gets billed). Also served at `GET /v1/usage/daily`. Usage-based accounts only — legacy Stripe accounts get `{ \"supported\": false, \"days\": [] }`.  **Attribution (metering mode):** `groupBy=profile|account` adds an `attribution` breakdown of the window's spend per profile or account, assembled from your own records and pro-rated against the invoice so `sum(groups) + unattributed` equals `totals` exactly. `profileId` / `accountId` instead project the whole payload (`days`, `totals`, `lineItems`) onto that one group; `peaks`, `callUsage` and `tax` are then `null` (workspace-level facts). Projected `days` spread the group's period share over each day (usage is attributed per period, not per day). Profile-scoped API keys and members only see their profiles' groups (`attribution.restricted: true`, with `totals` summing the visible groups). Credits, 10DLC fees and Verify are always unattributed. `profileId` / `accountId` on their own do not select metering mode: pair them with `range`.  For per-domain consumption *volumes* use `GET /v1/usage/calls` and `GET /v1/usage/sms`. For the billing statement (balance, credits, caps, payment status) use `GET /v1/billing`. 
+Dual-mode endpoint, selected by query params, and fully backward compatible:  **Without metering params (the default):** the plan / quota / usage snapshot: plan name, billing period, limits, usage counts, access state. Identical to `GET /v1/usage-stats`. Existing integrations keep working unchanged.  **With `range`, `granularity`, `from`, or `to`:** usage METERING: billed spend (USD) by product family (`accounts`, `numbers`, `calls`, `sms`, `dlc`, `xApi`, `credits`, `other`) over the window, at `day` / `month` / `total` granularity, from the usage-based invoice breakdown (the CHARGE view, which always reconciles with what gets billed). Also served at `GET /v1/usage/daily`. Usage-based accounts only: legacy Stripe accounts get `{ \"supported\": false, \"days\": [] }`.  **Attribution (metering mode):** `groupBy=profile|account` adds an `attribution` breakdown of the window's spend per profile or account, assembled from your own records and pro-rated against the invoice so `sum(groups) + unattributed` equals `totals` exactly. `profileId` / `accountId` instead project the whole payload (`days`, `totals`, `lineItems`) onto that one group; `peaks`, `callUsage` and `tax` are then `null` (team-level facts). Projected `days` spread the group's period share over each day (usage is attributed per period, not per day). Profile-scoped API keys and members only see their profiles' groups (`attribution.restricted: true`, with `totals` summing the visible groups). Credits, 10DLC fees and Verify are always unattributed. `profileId` / `accountId` on their own do not select metering mode: pair them with `range`.  For per-domain consumption *volumes* use `GET /v1/usage/calls` and `GET /v1/usage/sms`. For the billing statement (balance, credits, caps, payment status) use `GET /v1/billing`. 
 
 ### Examples
 
@@ -259,9 +259,9 @@ opts = {
   range: 'cycle', # String | Window to report. `cycle` / `prev-cycle` resolve to the customer's real billing-period bounds (falling back to a trailing 30 days when no invoice exists yet); `7d`…`12mo` are trailing windows; `custom` uses `from` / `to`. 
   from: Date.parse('2013-10-20'), # Date | Inclusive start (UTC date). Required when `range=custom`.
   to: Date.parse('2013-10-20'), # Date | Inclusive end (UTC date). Required when `range=custom`. Max span 366 days.
-  granularity: 'day', # String | Bucketing of the `days` series: `day` (one row per UTC day), `month` (one row per calendar month, dated to the 1st), or `total` (no series — read `totals`). Does not affect `totals`. 
+  granularity: 'day', # String | Bucketing of the `days` series: `day` (one row per UTC day), `month` (one row per calendar month, dated to the 1st), or `total` (no series, read `totals`). Does not affect `totals`. 
   group_by: 'profile', # String | Metering mode. Adds `attribution`: the window's spend split per profile or per account (keys are ids; resolve names via `GET /v1/profiles` / `GET /v1/accounts`).
-  profile_id: 'profile_id_example', # String | Metering mode (pair with `range`). Project the payload onto this profile's attributed share. Mutually exclusive with `accountId`, and `groupBy` (if given) must be `profile`; 404 when the profile is not in your workspace (or outside a scoped key's profiles).
+  profile_id: 'profile_id_example', # String | Metering mode (pair with `range`). Project the payload onto this profile's attributed share. Mutually exclusive with `accountId`, and `groupBy` (if given) must be `profile`; 404 when the profile is not in your team (or outside a scoped key's profiles).
   account_id: 'account_id_example' # String | Metering mode (pair with `range`). Project the payload onto this account's attributed share. Mutually exclusive with `profileId`, and `groupBy` (if given) must be `account`; 404 when the account is not visible to the caller.
 }
 
@@ -300,9 +300,9 @@ end
 | **range** | **String** | Window to report. &#x60;cycle&#x60; / &#x60;prev-cycle&#x60; resolve to the customer&#39;s real billing-period bounds (falling back to a trailing 30 days when no invoice exists yet); &#x60;7d&#x60;…&#x60;12mo&#x60; are trailing windows; &#x60;custom&#x60; uses &#x60;from&#x60; / &#x60;to&#x60;.  | [optional][default to &#39;cycle&#39;] |
 | **from** | **Date** | Inclusive start (UTC date). Required when &#x60;range&#x3D;custom&#x60;. | [optional] |
 | **to** | **Date** | Inclusive end (UTC date). Required when &#x60;range&#x3D;custom&#x60;. Max span 366 days. | [optional] |
-| **granularity** | **String** | Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series — read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;.  | [optional][default to &#39;day&#39;] |
+| **granularity** | **String** | Bucketing of the &#x60;days&#x60; series: &#x60;day&#x60; (one row per UTC day), &#x60;month&#x60; (one row per calendar month, dated to the 1st), or &#x60;total&#x60; (no series, read &#x60;totals&#x60;). Does not affect &#x60;totals&#x60;.  | [optional][default to &#39;day&#39;] |
 | **group_by** | **String** | Metering mode. Adds &#x60;attribution&#x60;: the window&#39;s spend split per profile or per account (keys are ids; resolve names via &#x60;GET /v1/profiles&#x60; / &#x60;GET /v1/accounts&#x60;). | [optional] |
-| **profile_id** | **String** | Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your workspace (or outside a scoped key&#39;s profiles). | [optional] |
+| **profile_id** | **String** | Metering mode (pair with &#x60;range&#x60;). Project the payload onto this profile&#39;s attributed share. Mutually exclusive with &#x60;accountId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;profile&#x60;; 404 when the profile is not in your team (or outside a scoped key&#39;s profiles). | [optional] |
 | **account_id** | **String** | Metering mode (pair with &#x60;range&#x60;). Project the payload onto this account&#39;s attributed share. Mutually exclusive with &#x60;profileId&#x60;, and &#x60;groupBy&#x60; (if given) must be &#x60;account&#x60;; 404 when the account is not visible to the caller. | [optional] |
 
 ### Return type
@@ -325,7 +325,7 @@ end
 
 Get plan and usage snapshot (plan, limits, payment status)
 
-The plan / quota / payment-status snapshot: current plan name, billing period, plan limits, usage counts, and access state. Identical to a bare `GET /v1/usage` call (this path is its deprecated alias). For billed spend by product, call `GET /v1/usage` with `range` / `granularity` params. The statement view (balance, credits, caps, payment status) lives at `GET /v1/billing`.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Metronome (usage-based) users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts —     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers — new clients should     consume `xApiCallsByOperation` only. 
+The plan / quota / payment-status snapshot: current plan name, billing period, plan limits, usage counts, and access state. Identical to a bare `GET /v1/usage` call (this path is its deprecated alias). For billed spend by product, call `GET /v1/usage` with `range` / `granularity` params. The statement view (balance, credits, caps, payment status) lives at `GET /v1/billing`.  The response shape depends on the account's `billingSystem`:   * Stripe users: per-period `usage.uploads` / `usage.profiles` counters.   * Usage-based billing users: `usage.connectedAccounts`,     `usage.xApiCallsByOperation` (per-operation X API call counts;     resolve keys via `GET /v1/billing/x-pricing`), plus a `spend`     block with `currentPeriodCents`, `xSpendCents`, and     `xSpendLimitCents`. The legacy `usage.xApiCalls` 3-tier     aggregate is still emitted for back-compat but excludes the     $0.200 URL tier and any future tiers, so new clients should     consume `xApiCallsByOperation` only. 
 
 ### Examples
 
@@ -394,9 +394,9 @@ end
 
 > <XApiPricing> get_x_api_pricing
 
-Get X/Twitter API pricing table
+Get X API pricing table
 
-Returns Zernio's canonical X/Twitter API pricing table. Each X action has its own Metronome product and its own rate, and Zernio passes X API costs through at exact rates with zero markup.  The response is identical for every authenticated user (pricing is universal), so it is safe to cache on the client for the duration of a billing period.  To compute your own per-operation spend, pair this endpoint with `GET /v1/usage-stats` — that endpoint returns `usage.xApiCallsByOperation` keyed by the same `operation` field you get here. 
+Returns Zernio's canonical X API pricing table. Each X action has its own billing product and its own rate, and Zernio passes X API costs through at exact rates with zero markup.  The response is identical for every authenticated user (pricing is universal), so it is safe to cache on the client for the duration of a billing period.  To compute your own per-operation spend, pair this endpoint with `GET /v1/usage-stats`, which returns `usage.xApiCallsByOperation` keyed by the same `operation` field you get here. 
 
 ### Examples
 
@@ -412,7 +412,7 @@ end
 api_instance = Zernio::UsageApi.new
 
 begin
-  # Get X/Twitter API pricing table
+  # Get X API pricing table
   result = api_instance.get_x_api_pricing
   p result
 rescue Zernio::ApiError => e
@@ -428,7 +428,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get X/Twitter API pricing table
+  # Get X API pricing table
   data, status_code, headers = api_instance.get_x_api_pricing_with_http_info
   p status_code # => 2xx
   p headers # => { ... }

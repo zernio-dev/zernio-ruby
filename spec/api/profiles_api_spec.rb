@@ -34,7 +34,7 @@ describe 'ProfilesApi' do
 
   # unit tests for create_profile
   # Create profile
-  # Creates a new profile with a name, optional description, and color. Names are unique per workspace: a duplicate returns a 409 whose details.existingProfileId carries the id of the existing profile. Send an Idempotency-Key header to make retries safe: a retried create with the same key and body replays the original 201 (same _id) instead of conflicting.
+  # Creates a new profile with a name, optional description, and color. Names are unique per team: a duplicate returns a 409 whose details.existingProfileId carries the id of the existing profile. Send an Idempotency-Key header to make retries safe: a retried create with the same key and body replays the original 201 (same _id) instead of conflicting.
   # @param create_profile_request 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.

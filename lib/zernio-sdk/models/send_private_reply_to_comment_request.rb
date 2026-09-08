@@ -15,13 +15,13 @@ require 'time'
 
 module Zernio
   class SendPrivateReplyToCommentRequest < ApiModelBase
-    # The social account ID (Instagram or Facebook)
+    # The account ID (Instagram or Facebook)
     attr_accessor :account_id
 
     # The message text to send as a private DM
     attr_accessor :message
 
-    # Optional quick-reply chips appended to the message. Visible only in the Instagram and Messenger apps (not on web). Maximum 13 entries. Mutually exclusive with `buttons`. Note: chips do NOT render in the Instagram Message Requests folder where DMs from non-followers land — use `buttons` instead for cold reach. 
+    # Optional quick-reply chips appended to the message. Visible only in the Instagram and Messenger apps (not on web). Maximum 13 entries. Mutually exclusive with `buttons`. Note: chips do NOT render in the Instagram Message Requests folder where DMs from non-followers land. Use `buttons` instead for cold reach. 
     attr_accessor :quick_replies
 
     # Optional 1-3 inline buttons rendered as part of the same message bubble via Meta's button_template. Visible in the Instagram Message Requests folder (unlike quick replies). Mutually exclusive with `quickReplies`. 

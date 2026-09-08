@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Webhook payload for comment received events (Instagram, Facebook, Twitter/X, YouTube, LinkedIn, Bluesky, Reddit)
+  # Webhook payload for comment received events (Instagram, Facebook, X, YouTube, LinkedIn, Bluesky, Reddit)
   class WebhookPayloadComment < ApiModelBase
     # Stable webhook event ID
     attr_accessor :id

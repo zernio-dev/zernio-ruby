@@ -36,7 +36,7 @@ describe 'MentionsApi' do
   # List mentions
   # Returns mentions of your connected organization accounts, delivered via platform webhooks. Currently supports LinkedIn organization mentions.  Requires Inbox addon. 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :account_id Filter by social account ID
+  # @option opts [String] :account_id Filter by account ID
   # @option opts [String] :profile_id Filter by profile ID
   # @option opts [String] :sort_order Sort order by publishedAt
   # @option opts [Integer] :limit 
@@ -50,7 +50,7 @@ describe 'MentionsApi' do
 
   # unit tests for reply_to_mention
   # Reply to a mention
-  # Reply to a mention of the connected account. Supported on Instagram only.  Two shapes, selected by whether &#x60;commentId&#x60; is present:  - **Comment mention** (someone @mentioned the account inside a comment): pass both   &#x60;mediaId&#x60; and &#x60;commentId&#x60;. Instagram posts a reply under that comment. - **Caption mention** (someone @mentioned the account in their media caption, so no   comment exists): pass &#x60;mediaId&#x60; only. Instagram posts a comment on their media.  Story mentions are not supported by Instagram&#39;s API.  Note that &#x60;GET /v1/inbox/mentions&#x60; currently returns LinkedIn mentions only and does not surface Instagram mentions. Source &#x60;mediaId&#x60; and &#x60;commentId&#x60; from Instagram&#39;s &#x60;comments&#x60; webhook, which is where mention notifications are delivered for accounts connected through Instagram Login. 
+  # Reply to a mention of the connected account. Supported on Instagram only.  Two shapes, selected by whether &#x60;commentId&#x60; is present:  - **Comment mention** (someone @mentioned the account inside a comment): pass both   &#x60;mediaId&#x60; and &#x60;commentId&#x60;. Instagram posts a reply under that comment. - **Caption mention** (someone @mentioned the account in their media caption, so no   comment exists): pass &#x60;mediaId&#x60; only. Instagram posts a comment on their media.  Story mentions are not supported by Instagram&#39;s API.  &#x60;GET /v1/inbox/mentions&#x60; currently returns LinkedIn mentions only and does not surface Instagram mentions. Source &#x60;mediaId&#x60; and &#x60;commentId&#x60; from Instagram&#39;s &#x60;comments&#x60; webhook, which is where mention notifications are delivered for accounts connected through Instagram Login. 
   # @param reply_to_mention_request 
   # @param [Hash] opts the optional parameters
   # @return [ReplyToMention200Response]

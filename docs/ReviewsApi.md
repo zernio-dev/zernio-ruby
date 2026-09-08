@@ -15,7 +15,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Delete review reply
 
-Delete a reply to a review (Google Business only). Requires accountId in request body.
+Delete a reply to a review (Google Business Profile only). Requires accountId in request body.
 
 ### Examples
 
@@ -86,7 +86,7 @@ end
 
 List reviews
 
-Fetch reviews from all connected Facebook Pages and Google Business accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business. 
+Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile. 
 
 ### Examples
 
@@ -110,7 +110,7 @@ opts = {
   sort_order: 'asc', # String | 
   limit: 56, # Integer | 
   cursor: 'cursor_example', # String | 
-  account_id: 'account_id_example' # String | Filter by specific social account ID
+  account_id: 'account_id_example' # String | Filter by specific account ID
 }
 
 begin
@@ -153,7 +153,7 @@ end
 | **sort_order** | **String** |  | [optional][default to &#39;desc&#39;] |
 | **limit** | **Integer** |  | [optional][default to 25] |
 | **cursor** | **String** |  | [optional] |
-| **account_id** | **String** | Filter by specific social account ID | [optional] |
+| **account_id** | **String** | Filter by specific account ID | [optional] |
 
 ### Return type
 
@@ -189,7 +189,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::ReviewsApi.new
-review_id = 'review_id_example' # String | Review ID (URL-encoded for Google Business)
+review_id = 'review_id_example' # String | Review ID (URL-encoded for Google Business Profile)
 reply_to_inbox_review_request = Zernio::ReplyToInboxReviewRequest.new({account_id: 'account_id_example', message: 'message_example'}) # ReplyToInboxReviewRequest | 
 opts = {
   idempotency_key: 'idempotency_key_example' # String | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
@@ -226,7 +226,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **review_id** | **String** | Review ID (URL-encoded for Google Business) |  |
+| **review_id** | **String** | Review ID (URL-encoded for Google Business Profile) |  |
 | **reply_to_inbox_review_request** | [**ReplyToInboxReviewRequest**](ReplyToInboxReviewRequest.md) |  |  |
 | **idempotency_key** | **String** | Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. | [optional] |
 

@@ -17,7 +17,7 @@ module Zernio
   class ListWhatsAppAccountEvents200ResponseEventsInner < ApiModelBase
     attr_accessor :id
 
-    # WhatsApp social account the event belongs to
+    # WhatsApp account the event belongs to
     attr_accessor :account_id
 
     # Event kind, e.g. template_approved, template_rejected, account_restricted, account_disconnected

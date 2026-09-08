@@ -83,7 +83,7 @@ module Zernio
     end
 
     # List users
-    # Returns all users in the workspace including roles and profile access. Also returns the currentUserId of the caller.
+    # Returns all users in the team including roles and profile access. Also returns the currentUserId of the caller.
     # @param [Hash] opts the optional parameters
     # @return [ListUsers200Response]
     def list_users(opts = {})
@@ -92,7 +92,7 @@ module Zernio
     end
 
     # List users
-    # Returns all users in the workspace including roles and profile access. Also returns the currentUserId of the caller.
+    # Returns all users in the team including roles and profile access. Also returns the currentUserId of the caller.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListUsers200Response, Integer, Hash)>] ListUsers200Response data, response status code and response headers
     def list_users_with_http_info(opts = {})

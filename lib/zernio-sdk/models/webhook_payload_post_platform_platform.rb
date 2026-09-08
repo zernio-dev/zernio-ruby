@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # The specific platform that just transitioned to a terminal state.
+  # The specific platform that transitioned to a terminal state.
   class WebhookPayloadPostPlatformPlatform < ApiModelBase
     # Platform name (e.g. `twitter`, `tiktok`, `instagram`).
     attr_accessor :name

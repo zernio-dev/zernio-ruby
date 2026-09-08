@@ -22,7 +22,7 @@ module Zernio
     # Platform the post lives on (e.g. \"googlebusiness\").
     attr_accessor :platform
 
-    # Zernio social account ID the post belongs to.
+    # Zernio account ID the post belongs to.
     attr_accessor :account_id
 
     # Direct URL to the post on the platform, when available.
@@ -52,7 +52,7 @@ module Zernio
     # Instagram only: audio type of the media (MUSIC or ORIGINAL_SOUND). Absent when the platform did not report it.
     attr_accessor :media_audio_type
 
-    # Always \"external\" — distinguishes these from Zernio-originated post.* events.
+    # Always \"external\". Distinguishes these from Zernio-originated post.* events.
     attr_accessor :source
 
     # Detection time of deletion. Present on post.external.deleted; null/absent otherwise.

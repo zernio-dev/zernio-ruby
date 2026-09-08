@@ -18,10 +18,10 @@ module Zernio
     # Profile ID from your connection flow
     attr_accessor :profile_id
 
-    # The Google Business location ID selected by the user
+    # The Google Business Profile location ID selected by the user
     attr_accessor :location_id
 
-    # Optional but recommended. The Google Business Account resource name (\"accounts/123\") that owns the selected location (returned per-location by GET /v1/connect/googlebusiness/locations). When provided, the location is resolved directly instead of by enumerating the account, which is required for accounts that own many locations. Omit only for small accounts. 
+    # Optional but recommended. The Google Business Profile Account resource name (\"accounts/123\") that owns the selected location (returned per-location by GET /v1/connect/googlebusiness/locations). When provided, the location is resolved directly instead of by enumerating the account, which is required for accounts that own many locations. Omit only for small accounts. 
     attr_accessor :account_id
 
     # Token from the OAuth callback redirect (pendingDataToken query param). Tokens and profile data are retrieved server-side from this token.

@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Delete review reply
-    # Delete a reply to a review (Google Business only). Requires accountId in request body.
+    # Delete a reply to a review (Google Business Profile only). Requires accountId in request body.
     # @param review_id [String] 
     # @param delete_inbox_review_reply_request [DeleteInboxReviewReplyRequest] 
     # @param [Hash] opts the optional parameters
@@ -31,7 +31,7 @@ module Zernio
     end
 
     # Delete review reply
-    # Delete a reply to a review (Google Business only). Requires accountId in request body.
+    # Delete a reply to a review (Google Business Profile only). Requires accountId in request body.
     # @param review_id [String] 
     # @param delete_inbox_review_reply_request [DeleteInboxReviewReplyRequest] 
     # @param [Hash] opts the optional parameters
@@ -94,7 +94,7 @@ module Zernio
     end
 
     # List reviews
-    # Fetch reviews from all connected Facebook Pages and Google Business accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business. 
+    # Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id 
     # @option opts [String] :platform 
@@ -105,7 +105,7 @@ module Zernio
     # @option opts [String] :sort_order  (default to 'desc')
     # @option opts [Integer] :limit  (default to 25)
     # @option opts [String] :cursor 
-    # @option opts [String] :account_id Filter by specific social account ID
+    # @option opts [String] :account_id Filter by specific account ID
     # @return [ListInboxReviews200Response]
     def list_inbox_reviews(opts = {})
       data, _status_code, _headers = list_inbox_reviews_with_http_info(opts)
@@ -113,7 +113,7 @@ module Zernio
     end
 
     # List reviews
-    # Fetch reviews from all connected Facebook Pages and Google Business accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business. 
+    # Fetch reviews from all connected Facebook Pages and Google Business Profile accounts. Aggregates data with filtering and sorting options. Supported platforms: Facebook, Google Business Profile. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id 
     # @option opts [String] :platform 
@@ -124,7 +124,7 @@ module Zernio
     # @option opts [String] :sort_order  (default to 'desc')
     # @option opts [Integer] :limit  (default to 25)
     # @option opts [String] :cursor 
-    # @option opts [String] :account_id Filter by specific social account ID
+    # @option opts [String] :account_id Filter by specific account ID
     # @return [Array<(ListInboxReviews200Response, Integer, Hash)>] ListInboxReviews200Response data, response status code and response headers
     def list_inbox_reviews_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -218,7 +218,7 @@ module Zernio
 
     # Reply to review
     # Post a reply to a review. Requires accountId in request body.  **Idempotency:** send an `Idempotency-Key` header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with `Idempotent-Replayed: true`) instead of sending the reply to the platform again; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different reviewId returns 422 rather than replaying the other review's response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \"request succeeded but the response was lost\" case. After an ambiguous failure (a 5xx or a network timeout) fetch the review before retrying with the same key, and treat a missing reply as inconclusive rather than as proof nothing was sent. 
-    # @param review_id [String] Review ID (URL-encoded for Google Business)
+    # @param review_id [String] Review ID (URL-encoded for Google Business Profile)
     # @param reply_to_inbox_review_request [ReplyToInboxReviewRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
@@ -230,7 +230,7 @@ module Zernio
 
     # Reply to review
     # Post a reply to a review. Requires accountId in request body.  **Idempotency:** send an &#x60;Idempotency-Key&#x60; header to make retries safe (e.g. after a client-side timeout where delivery is unknown): same key + same body replays the original response (with &#x60;Idempotent-Replayed: true&#x60;) instead of sending the reply to the platform again; same key + different body returns 422; a key still in flight returns 409. Keys are retained for 24 hours and are scoped to the credential and to this exact path, so reusing a key against a different reviewId returns 422 rather than replaying the other review&#39;s response.  Only successful (2xx) responses are stored for replay. If the request throws or returns a non-2xx status the key is released, so the header protects the \&quot;request succeeded but the response was lost\&quot; case. After an ambiguous failure (a 5xx or a network timeout) fetch the review before retrying with the same key, and treat a missing reply as inconclusive rather than as proof nothing was sent. 
-    # @param review_id [String] Review ID (URL-encoded for Google Business)
+    # @param review_id [String] Review ID (URL-encoded for Google Business Profile)
     # @param reply_to_inbox_review_request [ReplyToInboxReviewRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.

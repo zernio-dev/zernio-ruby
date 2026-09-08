@@ -23,21 +23,21 @@ module Zernio
     # Transaction ID of the original conversion (the `eventId` you sent). Recommended; required for ENHANCEMENT.
     attr_accessor :order_id
 
-    # Alternative key — the original click ID. Pair with `conversionTime`. Not valid for ENHANCEMENT.
+    # Alternative key. The original click ID. Pair with `conversionTime`. Not valid for ENHANCEMENT.
     attr_accessor :gclid
 
     # The original conversion's time, unix seconds. Required when identifying by `gclid`.
     attr_accessor :conversion_time
 
-    # RESTATEMENT only — the corrected TOTAL conversion value.
+    # RESTATEMENT only. The corrected TOTAL conversion value.
     attr_accessor :restatement_value
 
-    # RESTATEMENT only — ISO 4217 currency for `restatementValue`.
+    # RESTATEMENT only. ISO 4217 currency for `restatementValue`.
     attr_accessor :currency
 
     attr_accessor :user
 
-    # ENHANCEMENT only — the original conversion's user agent (improves match quality).
+    # ENHANCEMENT only. The original conversion's user agent (improves match quality).
     attr_accessor :user_agent
 
     class EnumAttributeValidator

@@ -18,7 +18,7 @@ module Zernio
   class CallRecord < ApiModelBase
     attr_accessor :_id
 
-    # Owning social account. The unified /v1/calls/{id} detail + recording endpoints work for any channel; the channel-specific endpoints remain for account-scoped access.
+    # Owning account. The unified /v1/calls/{id} detail + recording endpoints work for any channel; the channel-specific endpoints remain for account-scoped access.
     attr_accessor :account_id
 
     # Inbox conversation with the counterparty, when one exists.
@@ -77,7 +77,7 @@ module Zernio
 
     attr_accessor :end_reason
 
-    # Raw carrier hangup cause behind endReason (e.g. normal_clearing, not_found, time_limit) — the actual motive when endReason is a coarse bucket.
+    # Raw carrier hangup cause behind endReason (e.g. normal_clearing, not_found, time_limit). The actual motive when endReason is a coarse bucket.
     attr_accessor :hangup_cause
 
     # SIP response code that ended the call, when SIP-signalled (e.g. '403', '488'). The real failure reason for SIP legs.

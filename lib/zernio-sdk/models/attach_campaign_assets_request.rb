@@ -15,13 +15,13 @@ require 'time'
 
 module Zernio
   class AttachCampaignAssetsRequest < ApiModelBase
-    # Zernio Google Ads SocialAccount id — resolves the customer id + refresh token.
+    # Zernio Google Ads SocialAccount id. Resolves the customer id + refresh token.
     attr_accessor :account_id
 
     # Numeric Google Ads customer id. Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
     attr_accessor :customer_id
 
-    # See POST /v1/ads/create sitelinks — same shape.
+    # See POST /v1/ads/create sitelinks, same shape.
     attr_accessor :sitelinks
 
     attr_accessor :callouts

@@ -59,7 +59,7 @@ describe 'AdAccountsApi' do
 
   # unit tests for create_high_demand_period
   # Schedule a budget increase
-  # Pre-schedule a temporary budget increase (Black Friday, a launch, a sale) instead of editing the budget by hand on the day. Same target rule as the GET: exactly one of &#x60;campaignId&#x60; / &#x60;adSetId&#x60;.  Two Meta constraints worth knowing before you call it. &#x60;timeStart&#x60; / &#x60;timeEnd&#x60; must fall on a 15-minute boundary, and a campaign cannot mix &#x60;ABSOLUTE&#x60; and &#x60;MULTIPLIER&#x60; across its schedules — the second type is rejected with \&quot;Can&#39;t mix your budget scaling selection\&quot;. Window rules (must sit inside the campaign&#39;s run dates, minimum lead time, no overlap) are Meta&#39;s and its message is forwarded verbatim.
+  # Pre-schedule a temporary budget increase (Black Friday, a launch, a sale) instead of editing the budget by hand on the day. Same target rule as the GET: exactly one of &#x60;campaignId&#x60; / &#x60;adSetId&#x60;.  Two Meta constraints worth knowing before you call it. &#x60;timeStart&#x60; / &#x60;timeEnd&#x60; must fall on a 15-minute boundary, and a campaign cannot mix &#x60;ABSOLUTE&#x60; and &#x60;MULTIPLIER&#x60; across its schedules; the second type is rejected with \&quot;Can&#39;t mix your budget scaling selection\&quot;. Window rules (must sit inside the campaign&#39;s run dates, minimum lead time, no overlap) are Meta&#39;s and its message is forwarded verbatim.
   # @param create_high_demand_period_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateHighDemandPeriod201Response]
@@ -109,7 +109,7 @@ describe 'AdAccountsApi' do
 
   # unit tests for get_ad_comments
   # List comments on an ad
-  # Returns comments on an ad&#39;s underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular GET /v1/inbox/comments/{postId} endpoint cannot serve because dark posts are not in Zernio&#39;s post database.  An ad that runs on both Facebook feed and Instagram feed has two separate underlying posts with separate comment threads (the creative&#39;s effective_object_story_id and effective_instagram_media_id). Use the &#x60;placement&#x60; query param to pick one; with no param the Instagram side is returned when it exists, otherwise Facebook. The identifiers are read from the ad record (persisted during sync) with a Marketing-API fallback for ads that predate the field.  For Instagram-placed comments, the Instagram account that runs the ad must be connected to Zernio — those comments are read through that account&#39;s token. If no connected Instagram account on the profile can read the ad&#39;s media, the call returns ads_connection_required (the Facebook side, if any, is still readable via ?placement&#x3D;facebook).  Meta-only for now. Other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) are not wired to this endpoint and return feature_not_available.  Requires the Ads add-on. Response shape matches GET /v1/inbox/comments/{postId}.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: Zernio internal &#x60;_id&#x60; (24-char hex), Meta&#39;s numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;), or the creative&#39;s &#x60;effective_object_story_id&#x60; / &#x60;effective_instagram_media_id&#x60;. Caller doesn&#39;t need a translation step. 
+  # Returns comments on an ad&#39;s underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular GET /v1/inbox/comments/{postId} endpoint cannot serve because dark posts are not in Zernio&#39;s post database.  An ad that runs on both Facebook feed and Instagram feed has two separate underlying posts with separate comment threads (the creative&#39;s effective_object_story_id and effective_instagram_media_id). Use the &#x60;placement&#x60; query param to pick one; with no param the Instagram side is returned when it exists, otherwise Facebook. The identifiers are read from the ad record (persisted during sync) with a Marketing-API fallback for ads that predate the field.  For Instagram-placed comments, the Instagram account that runs the ad must be connected to Zernio, because those comments are read through that account&#39;s token. If no connected Instagram account on the profile can read the ad&#39;s media, the call returns ads_connection_required (the Facebook side, if any, is still readable via ?placement&#x3D;facebook).  Meta-only for now. Other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) are not wired to this endpoint and return feature_not_available.  Requires the Ads add-on. Response shape matches GET /v1/inbox/comments/{postId}.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: Zernio internal &#x60;_id&#x60; (24-char hex), Meta&#39;s numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;), or the creative&#39;s &#x60;effective_object_story_id&#x60; / &#x60;effective_instagram_media_id&#x60;. Caller doesn&#39;t need a translation step. 
   # @param ad_id Internal Zernio ad ID (ObjectId).
   # @param [Hash] opts the optional parameters
   # @option opts [String] :placement Which side of the ad to return comments for. Omit to default to the Instagram side when present, else Facebook. Returns ad_not_commentable if the ad has no such placement.
@@ -143,7 +143,7 @@ describe 'AdAccountsApi' do
   # unit tests for get_dsa_defaults
   # Get ad account DSA defaults
   # Returns the default DSA beneficiary and payor currently set on a Meta ad account, whether they were set via &#x60;PATCH /v1/ads/accounts&#x60; or in Meta Ads Manager. Fields are omitted when no default is configured. Meta accounts only. 
-  # @param account_id Social account ID (metaads, or a facebook/instagram posting account)
+  # @param account_id Account ID (metaads, or a facebook/instagram posting account)
   # @param ad_account_id Meta ad account ID (act_...)
   # @param [Hash] opts the optional parameters
   # @return [UpdateAdAccount200Response]
@@ -156,7 +156,7 @@ describe 'AdAccountsApi' do
   # unit tests for get_dsa_recommendations
   # List DSA beneficiary/payor suggestions
   # Returns Meta&#39;s suggested beneficiary/payor names for an ad account, derived by Meta from the account&#39;s recent activity. Useful for prefilling &#x60;dsaBeneficiary&#x60;/&#x60;dsaPayor&#x60; inputs, or the defaults sent to &#x60;PATCH /v1/ads/accounts&#x60;, in your own UI.  Meta returns a single flat list. Entries are not labeled as beneficiary or payor, and since these are legal disclosures Zernio never applies them automatically: let your user pick the right entity. The list may be empty for accounts with little activity. Meta accounts only. 
-  # @param account_id Social account ID (metaads, or a facebook/instagram posting account)
+  # @param account_id Account ID (metaads, or a facebook/instagram posting account)
   # @param ad_account_id Meta ad account ID (act_...)
   # @param [Hash] opts the optional parameters
   # @return [GetDsaRecommendations200Response]
@@ -194,8 +194,8 @@ describe 'AdAccountsApi' do
 
   # unit tests for list_ad_accounts
   # List ad accounts
-  # Returns the platform ad accounts available for the given social account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok&#39;s &#x60;/advertiser/info/&#x60; endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time &#x60;advertiser_ids&#x60; list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry.  For Google Ads: responds &#x60;429&#x60; when Google&#39;s API quota is temporarily exhausted (instead of an empty list). Retry after a delay. 
-  # @param account_id Social account ID
+  # Returns the platform ad accounts available for the given account (e.g. Meta ad accounts, TikTok advertiser IDs, Google Ads customer IDs).  For TikTok agencies: enumerates every advertiser under every Business Center the token can read (paginated server-side), then chunks the lookup against TikTok&#39;s &#x60;/advertiser/info/&#x60; endpoint (which has a per-call cap of ≤100 IDs). Solo advertisers without a BC fall back to the OAuth-time &#x60;advertiser_ids&#x60; list. Cached for 1h on the SocialAccount; lazy-refreshed on first call after expiry.  For Google Ads: responds &#x60;429&#x60; when Google&#39;s API quota is temporarily exhausted (instead of an empty list). Retry after a delay. 
+  # @param account_id Account ID
   # @param [Hash] opts the optional parameters
   # @option opts [String] :ad_account_id Filter response to a single platform ad account ID (e.g. &#x60;act_123&#x60; for Meta, advertiser_id for TikTok). Returns at most one item.
   # @option opts [Integer] :limit Clamp the returned &#x60;accounts[]&#x60; length. Useful for typeahead pickers on agency tokens with hundreds of advertisers.

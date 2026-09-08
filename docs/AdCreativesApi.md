@@ -96,7 +96,7 @@ end
 
 Delete a creative
 
-Deletes a creative from the library. Meta only allows deleting creatives not referenced by any ad — otherwise its 400 surfaces verbatim.
+Deletes a creative from the library. Meta only allows deleting creatives not referenced by any ad; otherwise its 400 surfaces verbatim.
 
 ### Examples
 
@@ -384,7 +384,7 @@ end
 
 Direct video and image URLs for an ad
 
-Returns the direct signed URLs for every video and image asset used by an ad's live creative, normalised across shapes: single image/video, carousel, Reels/Story (`object_story_spec.video_data`) and dynamic creative (`asset_feed_spec`). Video items include Meta's poster thumbnail and the video's Meta id when available.  Reads Meta live rather than the stored creative blob because Meta's signed fbcdn URLs carry an `oe=<hex>` expiration (image_url ~24 h, video source ~12 d). Treat URLs as short-lived — re-fetch this endpoint before serving or downloading assets instead of caching URLs beyond that window.
+Returns the direct signed URLs for every video and image asset used by an ad's live creative, normalised across shapes: single image/video, carousel, Reels/Story (`object_story_spec.video_data`) and dynamic creative (`asset_feed_spec`). Video items include Meta's poster thumbnail and the video's Meta id when available.  Reads Meta live rather than the stored creative blob because Meta's signed fbcdn URLs carry an `oe=<hex>` expiration (image_url ~24 h, video source ~12 d). Treat URLs as short-lived: re-fetch this endpoint before serving or downloading assets instead of caching URLs beyond that window.
 
 ### Examples
 
@@ -526,7 +526,7 @@ end
 
 List a catalog's product sets
 
-Lists a Meta product catalog's product sets — the unit a catalog ad promotes. Pass the chosen set as `promotedObject.productSetId` on POST /v1/ads/create with `goal: catalog_sales`.
+Lists a Meta product catalog's product sets, the unit a catalog ad promotes. Pass the chosen set as `promotedObject.productSetId` on POST /v1/ads/create with `goal: catalog_sales`.
 
 ### Examples
 
@@ -541,7 +541,7 @@ end
 
 api_instance = Zernio::AdCreativesApi.new
 catalog_id = 'catalog_id_example' # String | Meta product catalog ID (from GET /v1/ads/catalogs)
-account_id = 'account_id_example' # String | A facebook, instagram, or metaads social account ID
+account_id = 'account_id_example' # String | A facebook, instagram, or metaads account ID
 
 begin
   # List a catalog's product sets
@@ -575,7 +575,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **catalog_id** | **String** | Meta product catalog ID (from GET /v1/ads/catalogs) |  |
-| **account_id** | **String** | A facebook, instagram, or metaads social account ID |  |
+| **account_id** | **String** | A facebook, instagram, or metaads account ID |  |
 
 ### Return type
 
@@ -597,7 +597,7 @@ end
 
 List Meta product catalogs
 
-Lists the Meta product catalogs reachable from an ad account (owned + agency-shared catalogs of the ad account's business), for Advantage+ catalog ads (`goal: catalog_sales` on POST /v1/ads/create — e.g. vehicle inventory catalogs). Read-only; uses scopes customers already granted (no reconnect needed). Catalog contents (items, feeds) are managed in Meta Commerce Manager, not through this API.
+Lists the Meta product catalogs reachable from an ad account (owned + agency-shared catalogs of the ad account's business), for Advantage+ catalog ads (`goal: catalog_sales` on POST /v1/ads/create, e.g. vehicle inventory catalogs). Read-only; uses scopes customers already granted (no reconnect needed). Catalog contents (items, feeds) are managed in Meta Commerce Manager, not through this API.
 
 ### Examples
 
@@ -611,7 +611,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdCreativesApi.new
-account_id = 'account_id_example' # String | A facebook, instagram, or metaads social account ID
+account_id = 'account_id_example' # String | A facebook, instagram, or metaads account ID
 ad_account_id = 'ad_account_id_example' # String | Meta ad account ID (act_...)
 
 begin
@@ -645,7 +645,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | A facebook, instagram, or metaads social account ID |  |
+| **account_id** | **String** | A facebook, instagram, or metaads account ID |  |
 | **ad_account_id** | **String** | Meta ad account ID (act_...) |  |
 
 ### Return type
@@ -826,7 +826,7 @@ end
 
 Ad video library
 
-Lists the ad account's video library (Meta's `/act_X/advideos`), rows returned verbatim. The default projection covers id, title, status, poster frames, length and `source` (the playable MP4); `fields` is a raw-passthrough override. Any `id` here is reusable as `video.id` on the create endpoints, so N ads that differ only in copy share one upload.  `source` lets you PLAY a video before picking it, which a poster frame alone can't settle when several videos share a first frame. It is a signed CDN URL that EXPIRES, so treat it as good for preview at selection time only — never persist it, re-list to get a fresh one.  This is the only way to reach a video uploaded OUTSIDE Zernio (Ads Manager, another tool); videos we uploaded also come back as `creative.videoId` on GET /v1/ads.  Meta transcodes asynchronously, so a row is only usable once `status.video_status` reads `ready`. Upload a new video via POST /v1/ads/videos, or inline via `video.url` on POST /v1/ads/create.
+Lists the ad account's video library (Meta's `/act_X/advideos`), rows returned verbatim. The default projection covers id, title, status, poster frames, length and `source` (the playable MP4); `fields` is a raw-passthrough override. Any `id` here is reusable as `video.id` on the create endpoints, so N ads that differ only in copy share one upload.  `source` lets you PLAY a video before picking it, which a poster frame alone can't settle when several videos share a first frame. It is a signed CDN URL that EXPIRES, so treat it as good for preview at selection time only. Never persist it; re-list to get a fresh one.  This is the only way to reach a video uploaded OUTSIDE Zernio (Ads Manager, another tool); videos we uploaded also come back as `creative.videoId` on GET /v1/ads.  Meta transcodes asynchronously, so a row is only usable once `status.video_status` reads `ready`. Upload a new video via POST /v1/ads/videos, or inline via `video.url` on POST /v1/ads/create.
 
 ### Examples
 
@@ -905,7 +905,7 @@ end
 
 Rename a creative
 
-Renames a creative. Creatives are immutable on Meta beyond `name` — for content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with `creative`).
+Renames a creative. Creatives are immutable on Meta beyond `name`. For content changes create a new creative (POST /v1/ads/creatives) and swap it onto the ad (PUT /v1/ads/{adId} with `creative`).
 
 ### Examples
 
@@ -976,7 +976,7 @@ end
 
 Upload an ad image from base64
 
-Uploads raw image bytes to the Meta ad account's image library — for callers whose creatives aren't hosted at a public URL. Returns the image `hash` (Meta's identifier for the asset) and the Meta-hosted `url`, which can be used directly as `imageUrl` on the create endpoints. Max 30 MB decoded.
+Uploads raw image bytes to the Meta ad account's image library, for callers whose creatives aren't hosted at a public URL. Returns the image `hash` (Meta's identifier for the asset) and the Meta-hosted `url`, which can be used directly as `imageUrl` on the create endpoints. Max 30 MB decoded.
 
 ### Examples
 
@@ -1045,7 +1045,7 @@ end
 
 Upload an ad video
 
-Standalone ad-video upload (parallel to POST /v1/ads/images), so a video creative can be rendered via POST /v1/ads/preview or attached via `video.id` on POST /v1/ads/create before an ad exists.  Accepts either an https `videoUrl` we download server-side (SSRF-guarded) or raw `videoBase64` bytes; exactly one is required. `videoBase64` is capped by Vercel's body limit — around 4.5 MB payload in practice, so larger videos must come via `videoUrl`.  Returns the Meta `video.id` (reusable wherever `video.id` is accepted) plus Meta's auto-generated poster URL when available. The endpoint waits until Meta reports the video ready (chunked upload + transcode can take minutes; the handler runs up to 800 s).
+Standalone ad-video upload (parallel to POST /v1/ads/images), so a video creative can be rendered via POST /v1/ads/preview or attached via `video.id` on POST /v1/ads/create before an ad exists.  Accepts either an https `videoUrl` we download server-side (SSRF-guarded) or raw `videoBase64` bytes; exactly one is required. `videoBase64` is capped by Vercel's body limit, around 4.5 MB payload in practice, so larger videos must come via `videoUrl`.  Returns the Meta `video.id` (reusable wherever `video.id` is accepted) plus Meta's auto-generated poster URL when available. The endpoint waits until Meta reports the video ready (chunked upload + transcode can take minutes; the handler runs up to 800 s).
 
 ### Examples
 

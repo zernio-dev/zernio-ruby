@@ -28,7 +28,7 @@ module Zernio
 
     attr_accessor :special_ad_categories
 
-    # Campaign-level (CBO) budget in WHOLE currency units (USD: 50 = $50.00), NOT cents — Meta's own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Requires budgetType.
+    # Campaign-level (CBO) budget in WHOLE currency units (USD: 50 = $50.00), NOT cents. Meta's own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Requires budgetType.
     attr_accessor :budget_amount
 
     attr_accessor :budget_type

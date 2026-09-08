@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Metronome users only. Current-period spend summary.
+  # Usage-based billing only. Current-period spend summary.
   class UsageStatsSpend < ApiModelBase
     # Total current-period spend in cents (all products combined).
     attr_accessor :current_period_cents
@@ -22,7 +22,7 @@ module Zernio
     # Free-tier credit remaining in cents. Applied before any charge.
     attr_accessor :credits_remaining_cents
 
-    # Current-period X/Twitter API spend in cents, summed from `xApiCallsByOperation` × per-operation prices. Tier-agnostic (covers every price including the $0.200 URL tier). Rounded up for conservative enforcement against `xSpendLimitCents`. 
+    # Current-period X API spend in cents, summed from `xApiCallsByOperation` × per-operation prices. Tier-agnostic (covers every price including the $0.200 URL tier). Rounded up for conservative enforcement against `xSpendLimitCents`. 
     attr_accessor :x_spend_cents
 
     # Monthly X spend cap set by the account owner, or null if no cap. When current X spend hits this cap, analytics and inbox sync are auto-paused for X accounts. Publishing is never blocked by this cap. 

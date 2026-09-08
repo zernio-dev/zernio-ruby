@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class GetLinkedInBidPricingRequest < ApiModelBase
-    # Zernio social account ID (LinkedIn).
+    # Zernio account ID (LinkedIn).
     attr_accessor :account_id
 
     # LinkedIn ad account ID (numeric).

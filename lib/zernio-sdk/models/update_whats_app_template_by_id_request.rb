@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UpdateWhatsAppTemplateByIdRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Updated template components. Optional when only message_send_ttl_seconds changes; at least one of the two is required.

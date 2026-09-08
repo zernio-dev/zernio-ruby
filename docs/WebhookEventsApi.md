@@ -14,6 +14,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**on_call_permission_request**](WebhookEventsApi.md#on_call_permission_request) | **POST** /call.permission_request | Call permission request reply event |
 | [**on_call_received**](WebhookEventsApi.md#on_call_received) | **POST** /call.received | Call received event |
 | [**on_comment_received**](WebhookEventsApi.md#on_comment_received) | **POST** /comment.received | Comment received event |
+| [**on_conversation_control_changed**](WebhookEventsApi.md#on_conversation_control_changed) | **POST** /conversation.control_changed | Conversation control changed event |
 | [**on_conversation_started**](WebhookEventsApi.md#on_conversation_started) | **POST** /conversation.started | Conversation started event |
 | [**on_lead_received**](WebhookEventsApi.md#on_lead_received) | **POST** /lead.received | Lead received event |
 | [**on_message_deleted**](WebhookEventsApi.md#on_message_deleted) | **POST** /message.deleted | Message deleted event |
@@ -132,7 +133,7 @@ nil (empty response body)
 
 Account connected event
 
-Fired when a social account is successfully connected.
+Fired when a account is successfully connected.
 
 ### Examples
 
@@ -200,7 +201,7 @@ nil (empty response body)
 
 Account disconnected event
 
-Fired when a connected social account becomes disconnected.
+Fired when a connected account becomes disconnected.
 
 ### Examples
 
@@ -268,7 +269,7 @@ nil (empty response body)
 
 Ad status changed event
 
-Fired when a campaign, ad set, or ad on a connected ad platform changes status. Currently emitted only for Meta (`metaads`).  Subscribed to two Meta `ad_account` webhook fields:   - `in_process_ad_objects` - the ad object finished processing and exited     the `IN_PROCESS` state. `status.raw` carries Meta's `status_name`     (e.g. `ACTIVE`, `PAUSED`, `ARCHIVED`, `DELETED`).   - `with_issues_ad_objects` - the ad object entered the `WITH_ISSUES`     state. `status.raw` is set to `WITH_ISSUES` and the `error` block is     populated from Meta's `error_code` / `error_summary` / `error_message`.  `adObject.level` mirrors Meta's `level` and is one of `CAMPAIGN`, `AD_SET`, or `AD`. Creative-level events are not forwarded.  Branch on `status.raw` to handle each transition; use `error.code` (when present) as the stable discriminator — `error.summary` and `error.message` are localized to the ad-account owner's Meta locale.  The `error` block is optional. It's present on most `WITH_ISSUES` events but can be absent (Meta does not always include diagnostics), and is never present on any other status. Always null-check `error` before reading `error.code`.  **Fan-out:** matching is keyed on `adObject.platformAdAccountId`. When multiple connected Zernio `metaads` accounts are linked to the same Meta ad account, each receives its own delivery. 
+Fired when a campaign, ad set, or ad on a connected ad platform changes status. Currently emitted only for Meta (`metaads`).  Subscribed to two Meta `ad_account` webhook fields:   - `in_process_ad_objects` - the ad object finished processing and exited     the `IN_PROCESS` state. `status.raw` carries Meta's `status_name`     (e.g. `ACTIVE`, `PAUSED`, `ARCHIVED`, `DELETED`).   - `with_issues_ad_objects` - the ad object entered the `WITH_ISSUES`     state. `status.raw` is set to `WITH_ISSUES` and the `error` block is     populated from Meta's `error_code` / `error_summary` / `error_message`.  `adObject.level` mirrors Meta's `level` and is one of `CAMPAIGN`, `AD_SET`, or `AD`. Creative-level events are not forwarded.  Branch on `status.raw` to handle each transition; use `error.code` (when present) as the stable discriminator, since `error.summary` and `error.message` are localized to the ad-account owner's Meta locale.  The `error` block is optional. It's present on most `WITH_ISSUES` events but can be absent (Meta does not always include diagnostics), and is never present on any other status. Always null-check `error` before reading `error.code`.  **Fan-out:** matching is keyed on `adObject.platformAdAccountId`. When multiple connected Zernio `metaads` accounts are linked to the same Meta ad account, each receives its own delivery. 
 
 ### Examples
 
@@ -738,13 +739,81 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## on_conversation_control_changed
+
+> on_conversation_control_changed(webhook_payload_conversation_control_changed)
+
+Conversation control changed event
+
+WhatsApp only. Fired when control of a conversation moves between Meta Business Agent and your app (Meta's `messaging_handovers`), or when the agent is first seen answering a thread. While `control.owner` is `ai_agent`, inbound messages arrive on `message.received` with `metadata.standby: true` and the agent's replies on `message.sent` with `source: meta_business_agent`. Sending any message takes control back; release it with `POST /v1/inbox/conversations/{conversationId}/thread-control`. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WebhookEventsApi.new
+webhook_payload_conversation_control_changed =  # WebhookPayloadConversationControlChanged | 
+
+begin
+  # Conversation control changed event
+  api_instance.on_conversation_control_changed(webhook_payload_conversation_control_changed)
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_conversation_control_changed: #{e}"
+end
+```
+
+#### Using the on_conversation_control_changed_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> on_conversation_control_changed_with_http_info(webhook_payload_conversation_control_changed)
+
+```ruby
+begin
+  # Conversation control changed event
+  data, status_code, headers = api_instance.on_conversation_control_changed_with_http_info(webhook_payload_conversation_control_changed)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue Zernio::ApiError => e
+  puts "Error when calling WebhookEventsApi->on_conversation_control_changed_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **webhook_payload_conversation_control_changed** | [**WebhookPayloadConversationControlChanged**](WebhookPayloadConversationControlChanged.md) |  |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+
 ## on_conversation_started
 
 > on_conversation_started(webhook_payload_conversation_started)
 
 Conversation started event
 
-Fired once when a new conversation begins between one of your connected accounts and a contact, in either direction. Works across every DM platform (Instagram, Messenger/Facebook, Telegram, WhatsApp, Twitter, Reddit, Bluesky). Naturally deduped — a given conversation only fires this event the very first time it appears. 
+Fired once when a new conversation begins between one of your connected accounts and a contact, in either direction. Works across every DM platform (Instagram, Messenger/Facebook, Telegram, WhatsApp, X, Reddit, Bluesky). Naturally deduped: a given conversation only fires this event the very first time it appears. 
 
 ### Examples
 
@@ -1900,7 +1969,7 @@ nil (empty response body)
 
 Post platform failed event
 
-Fired once per platform target inside a post as that platform fails permanently. Temporary/retryable failures do NOT fire this event — only permanent ones, so retry loops stay quiet. The envelope event (`post.failed` / `post.partial`) fires separately AFTER all platforms have terminated. 
+Fired once per platform target inside a post as that platform fails permanently. Temporary/retryable failures do NOT fire this event, only permanent ones do, so retry loops stay quiet. The envelope event (`post.failed` / `post.partial`) fires separately AFTER all platforms have terminated. 
 
 ### Examples
 
@@ -1968,7 +2037,7 @@ nil (empty response body)
 
 Post platform published event
 
-Fired once per platform target inside a post as that platform finishes publishing successfully. Does NOT wait for the post-level rollup — consumers building incremental UIs get notified immediately, even when other platforms on the same post are still processing. The envelope event (`post.published` / `post.partial`) fires separately AFTER all platforms have terminated. 
+Fired once per platform target inside a post as that platform finishes publishing successfully. Does NOT wait for the post-level rollup, so consumers building incremental UIs get notified immediately, even when other platforms on the same post are still processing. The envelope event (`post.published` / `post.partial`) fires separately AFTER all platforms have terminated. 
 
 ### Examples
 
@@ -2988,7 +3057,7 @@ nil (empty response body)
 
 WhatsApp number activated event
 
-Fired when a purchased WhatsApp number becomes active and usable — both the synchronous (Tier 1/2) path and the asynchronous regulated (Tier 3/4) path land here. Lets integrators react without polling GET /v1/phone-numbers. 
+Fired when a purchased WhatsApp number becomes active and usable. Both the synchronous (Tier 1/2) path and the asynchronous regulated (Tier 3/4) path land here. Lets integrators react without polling GET /v1/phone-numbers. 
 
 ### Examples
 

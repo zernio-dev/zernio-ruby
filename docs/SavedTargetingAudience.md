@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **type** | **String** |  |  |
-| **account_id** | **String** | Social account ID on the target ad platform. |  |
+| **account_id** | **String** | Account ID on the target ad platform. |  |
 | **name** | **String** |  |  |
 | **description** | **String** |  | [optional] |
 | **spec** | [**TargetingSpec**](TargetingSpec.md) | The targeting spec to store. |  |

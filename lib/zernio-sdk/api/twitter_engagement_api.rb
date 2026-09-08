@@ -88,7 +88,7 @@ module Zernio
     end
 
     # Follow a user
-    # Follow a user on X/Twitter. Requires the follows.write OAuth scope. For protected accounts, a follow request is sent instead (pending_follow will be true). 
+    # Follow a user on X. Requires the follows.write OAuth scope. For protected accounts, a follow request is sent instead (pending_follow will be true). 
     # @param follow_user_request [FollowUserRequest] 
     # @param [Hash] opts the optional parameters
     # @return [FollowUser200Response]
@@ -98,7 +98,7 @@ module Zernio
     end
 
     # Follow a user
-    # Follow a user on X/Twitter. Requires the follows.write OAuth scope. For protected accounts, a follow request is sent instead (pending_follow will be true). 
+    # Follow a user on X. Requires the follows.write OAuth scope. For protected accounts, a follow request is sent instead (pending_follow will be true). 
     # @param follow_user_request [FollowUserRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(FollowUser200Response, Integer, Hash)>] FollowUser200Response data, response status code and response headers
@@ -157,7 +157,7 @@ module Zernio
 
     # Look up a tweet
     # Resolve a single tweet by ID or URL into its text, author and public metrics.  Use this to render a post you are referencing, e.g. the tweet quoted by a quote-style post. Unlike `/v1/twitter/search` this is not limited to the last 7 days and works for any tweet visible to the connected account.  Billed as an X posts read ($0.005). Repeat lookups of the same tweet within the same UTC day are charged once. 
-    # @param account_id [String] The social account ID whose X token is used for the lookup
+    # @param account_id [String] The account ID whose X token is used for the lookup
     # @param id [String] Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
     # @param [Hash] opts the optional parameters
     # @return [GetTweet200Response]
@@ -168,7 +168,7 @@ module Zernio
 
     # Look up a tweet
     # Resolve a single tweet by ID or URL into its text, author and public metrics.  Use this to render a post you are referencing, e.g. the tweet quoted by a quote-style post. Unlike &#x60;/v1/twitter/search&#x60; this is not limited to the last 7 days and works for any tweet visible to the connected account.  Billed as an X posts read ($0.005). Repeat lookups of the same tweet within the same UTC day are charged once. 
-    # @param account_id [String] The social account ID whose X token is used for the lookup
+    # @param account_id [String] The account ID whose X token is used for the lookup
     # @param id [String] Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetTweet200Response, Integer, Hash)>] GetTweet200Response data, response status code and response headers
@@ -366,8 +366,8 @@ module Zernio
     end
 
     # Search recent tweets
-    # Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X's search operators (`from:user`, `-is:retweet`, `is:reply`, `lang:en`, `\"exact phrase\"`, `conversation_id:123`, boolean `OR`, ...). Note that standalone operators like `is:` / `has:` / `lang:` must be combined with a keyword or `from:` clause.  To reply to a found tweet, pass its `id` as the twitter platform entry's `platformSpecificData.replyToTweetId` when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
-    # @param account_id [String] The social account ID
+    # Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X's search operators (`from:user`, `-is:retweet`, `is:reply`, `lang:en`, `\"exact phrase\"`, `conversation_id:123`, boolean `OR`, ...). Standalone operators like `is:` / `has:` / `lang:` must be combined with a keyword or `from:` clause.  To reply to a found tweet, pass its `id` as the twitter platform entry's `platformSpecificData.replyToTweetId` when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
+    # @param account_id [String] The account ID
     # @param query [String] X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Results per page. X requires a minimum of 10; values below 10 are rejected. (default to 10)
@@ -384,8 +384,8 @@ module Zernio
     end
 
     # Search recent tweets
-    # Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X&#39;s search operators (&#x60;from:user&#x60;, &#x60;-is:retweet&#x60;, &#x60;is:reply&#x60;, &#x60;lang:en&#x60;, &#x60;\&quot;exact phrase\&quot;&#x60;, &#x60;conversation_id:123&#x60;, boolean &#x60;OR&#x60;, ...). Note that standalone operators like &#x60;is:&#x60; / &#x60;has:&#x60; / &#x60;lang:&#x60; must be combined with a keyword or &#x60;from:&#x60; clause.  To reply to a found tweet, pass its &#x60;id&#x60; as the twitter platform entry&#39;s &#x60;platformSpecificData.replyToTweetId&#x60; when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
-    # @param account_id [String] The social account ID
+    # Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X&#39;s search operators (&#x60;from:user&#x60;, &#x60;-is:retweet&#x60;, &#x60;is:reply&#x60;, &#x60;lang:en&#x60;, &#x60;\&quot;exact phrase\&quot;&#x60;, &#x60;conversation_id:123&#x60;, boolean &#x60;OR&#x60;, ...). Standalone operators like &#x60;is:&#x60; / &#x60;has:&#x60; / &#x60;lang:&#x60; must be combined with a keyword or &#x60;from:&#x60; clause.  To reply to a found tweet, pass its &#x60;id&#x60; as the twitter platform entry&#39;s &#x60;platformSpecificData.replyToTweetId&#x60; when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
+    # @param account_id [String] The account ID
     # @param query [String] X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Results per page. X requires a minimum of 10; values below 10 are rejected. (default to 10)
@@ -559,9 +559,9 @@ module Zernio
     end
 
     # Unfollow a user
-    # Unfollow a user on X/Twitter. 
+    # Unfollow a user on X. 
     # @param account_id [String] 
-    # @param target_user_id [String] The Twitter ID of the user to unfollow
+    # @param target_user_id [String] The X ID of the user to unfollow
     # @param [Hash] opts the optional parameters
     # @return [UnfollowUser200Response]
     def unfollow_user(account_id, target_user_id, opts = {})
@@ -570,9 +570,9 @@ module Zernio
     end
 
     # Unfollow a user
-    # Unfollow a user on X/Twitter. 
+    # Unfollow a user on X. 
     # @param account_id [String] 
-    # @param target_user_id [String] The Twitter ID of the user to unfollow
+    # @param target_user_id [String] The X ID of the user to unfollow
     # @param [Hash] opts the optional parameters
     # @return [Array<(UnfollowUser200Response, Integer, Hash)>] UnfollowUser200Response data, response status code and response headers
     def unfollow_user_with_http_info(account_id, target_user_id, opts = {})

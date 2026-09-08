@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Configure automatic post recycling (reposting at regular intervals). After the post is published, the system creates new scheduled copies at the specified interval until expiration conditions are met. Supports weekly or monthly intervals. Maximum 10 active recycling posts per account. YouTube and TikTok platforms are excluded from recycling. Content variations are recommended for Twitter and Pinterest to avoid duplicate flags. 
+  # Configure automatic post recycling (reposting at regular intervals). After the post is published, the system creates new scheduled copies at the specified interval until expiration conditions are met. Supports weekly or monthly intervals. Maximum 10 active recycling posts per account. YouTube and TikTok platforms are excluded from recycling. Content variations are recommended for X and Pinterest to avoid duplicate flags. 
   class RecyclingConfig < ApiModelBase
     # Set to false to disable recycling on this post
     attr_accessor :enabled
@@ -34,7 +34,7 @@ module Zernio
     # Stop recycling after this date, regardless of count. Send null on update to clear this limit.
     attr_accessor :expire_date
 
-    # Array of content variations for recycled copies. On each recycle, the next variation is used in round-robin order. Recommended for Twitter and Pinterest to avoid duplicate content flags. If omitted, the original post content is used for all recycled copies. Send an empty array [] to clear existing variations. Must have 2+ entries when setting variations. Platform-level customContent still overrides the base content per platform. 
+    # Array of content variations for recycled copies. On each recycle, the next variation is used in round-robin order. Recommended for X and Pinterest to avoid duplicate content flags. If omitted, the original post content is used for all recycled copies. Send an empty array [] to clear existing variations. Must have 2+ entries when setting variations. Platform-level customContent still overrides the base content per platform. 
     attr_accessor :content_variations
 
     class EnumAttributeValidator

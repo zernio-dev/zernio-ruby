@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Text and single image only (no videos). Supports STANDARD, EVENT, OFFER, and ALERT post types. Posts appear on GBP, Google Search, and Maps. Use locationId for multi-location posting. Schedule dates accept both ISO 8601 strings (e.g. '2026-04-15T09:00:00Z') and Google's native {year, month, day} objects.
+  # Text and single image only (no videos). Supports STANDARD, EVENT, OFFER, and ALERT post types. Posts appear on Google Business Profile, Google Search, and Maps. Use locationId for multi-location posting. Schedule dates accept both ISO 8601 strings (e.g. '2026-04-15T09:00:00Z') and Google's native {year, month, day} objects.
   class GoogleBusinessPlatformData < ApiModelBase
-    # Target GBP location ID (e.g. \"locations/123456789\"). If omitted, uses the default location. Use GET /v1/accounts/{id}/gmb-locations to list locations.
+    # Target Google Business Profile location ID (e.g. \"locations/123456789\"). If omitted, uses the default location. Use GET /v1/accounts/{id}/gmb-locations to list locations.
     attr_accessor :location_id
 
     # BCP 47 language code (e.g. \"en\", \"de\", \"es\"). Auto-detected if omitted. Set explicitly for short or mixed-language posts.

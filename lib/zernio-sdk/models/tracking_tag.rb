@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # A platform measurement tag — the thing you create, install on a website, send events to, and target ads against. On Meta this is a Pixel (`kind: pixel`). The shape is platform-neutral so other platforms (Pinterest Tag, LinkedIn Insight Tag, etc.) can be added without changing the contract; platform-specific fields are simply absent where a platform has no equivalent. Returned by `listTrackingTags`, `createTrackingTag`, `getTrackingTag`, and `updateTrackingTag`. 
+  # A platform measurement tag: the thing you create, install on a website, send events to, and target ads against. On Meta this is a Pixel (`kind: pixel`). The shape is platform-neutral so other platforms (Pinterest Tag, LinkedIn Insight Tag, etc.) can be added without changing the contract; platform-specific fields are absent where a platform has no equivalent. Returned by `listTrackingTags`, `createTrackingTag`, `getTrackingTag`, and `updateTrackingTag`. 
   class TrackingTag < ApiModelBase
     # Platform-native tag id. Meta: numeric pixel id, as a string.
     attr_accessor :id
@@ -38,13 +38,13 @@ module Zernio
     # Whether the tag is in a broken/unavailable state (Meta `is_unavailable`).
     attr_accessor :is_unavailable
 
-    # Convenience flag derived from `lastFiredTime` — has the tag ever fired.
+    # Convenience flag derived from `lastFiredTime`: has the tag ever fired.
     attr_accessor :installed
 
     # Unix seconds the tag was created.
     attr_accessor :creation_time
 
-    # Business Manager id that owns the tag, or `null` when the tag lives on a personal (non-BM) ad account — such tags can't be shared with other ad accounts. 
+    # Business Manager id that owns the tag, or `null` when the tag lives on a personal (non-BM) ad account. Such tags can't be shared with other ad accounts. 
     attr_accessor :owner_business_id
 
     # Ad account id (`act_...`) that owns the tag, when reported.

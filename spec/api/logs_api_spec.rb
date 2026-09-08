@@ -46,7 +46,7 @@ describe 'LogsApi' do
   # @option opts [Integer] :skip Number of logs to skip (for pagination)
   # @option opts [String] :account_id Filter by connected account ID
   # @option opts [String] :event Filter webhook logs by event (e.g. post.published, message.received)
-  # @option opts [String] :request_id Correlation ID — returns every log spawned by a single API request
+  # @option opts [String] :request_id Correlation ID. Returns every log spawned by a single API request
   # @option opts [Time] :from Precise start instant (ISO 8601); narrows within the day range
   # @option opts [Time] :to Precise end instant (ISO 8601)
   # @option opts [Integer] :status_code Filter by exact HTTP status code (api_request logs)

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
-| **account_id** | **String** | Social account the audience was created against. Returned for saved_targeting items. | [optional] |
+| **account_id** | **String** | Account the audience was created against. Returned for saved_targeting items. | [optional] |
 | **platform_audience_id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
 | **description** | **String** |  | [optional] |

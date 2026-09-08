@@ -17,7 +17,7 @@ module Zernio
   class ListAdAudiences200ResponseAudiencesInner < ApiModelBase
     attr_accessor :id
 
-    # Social account the audience was created against. Returned for saved_targeting items.
+    # Account the audience was created against. Returned for saved_targeting items.
     attr_accessor :account_id
 
     attr_accessor :platform_audience_id

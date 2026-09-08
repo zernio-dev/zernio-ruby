@@ -28,7 +28,7 @@ module Zernio
     # Human-readable location display name (e.g. \"Snap Fitness Dianella\"), NOT a resource name. Do not use it to build API paths.
     attr_accessor :selected_location_name
 
-    # Bare GBP location id (digits only). Combine with the GBP account id as accounts/{gbpAccountId}/locations/{selectedLocationId} to form the location resource names that gmb-reviews/batch expects in locationNames.
+    # Bare Google Business Profile location id (digits only). Combine with the Google Business Profile account id as accounts/{gbpAccountId}/locations/{selectedLocationId} to form the location resource names that gmb-reviews/batch expects in locationNames.
     attr_accessor :selected_location_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

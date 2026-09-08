@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # **Deprecated.** Legacy 3-tier aggregate. Operations outside the three historical prices ($0.005/$0.010/$0.015) — notably the $0.200 \"Posts with URL\" tier added April 2026 — are silently excluded from this shape. Use `xApiCallsByOperation` instead; it captures every tier and is the source of truth for per-operation call counts. 
+  # **Deprecated.** Legacy 3-tier aggregate. Operations outside the three historical prices ($0.005/$0.010/$0.015), notably the $0.200 \"Posts with URL\" tier added April 2026, are silently excluded from this shape. Use `xApiCallsByOperation` instead; it captures every tier and is the source of truth for per-operation call counts. 
   class UsageStatsUsageXApiCalls < ApiModelBase
     # Calls at $0.005 per call (reads, lists, bookmarks, content manage, etc.)
     attr_accessor :x_api_005

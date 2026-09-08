@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class LikePostRequest < ApiModelBase
-    # The social account acting as the liker
+    # The account acting as the liker
     attr_accessor :account_id
 
     # (LinkedIn only) Reaction to create. Defaults to LIKE; ignored on other platforms.

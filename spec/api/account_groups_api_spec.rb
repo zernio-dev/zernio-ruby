@@ -34,7 +34,7 @@ describe 'AccountGroupsApi' do
 
   # unit tests for create_account_group
   # Create group
-  # Creates a new account group with a name and a list of social account IDs. Accounts can belong to different profiles; the caller must have access to every account&#39;s profile. Group names must be unique per user. 
+  # Creates a new account group with a name and a list of account IDs. Accounts can belong to different profiles; the caller must have access to every account&#39;s profile. Group names must be unique per user. 
   # @param create_account_group_request 
   # @param [Hash] opts the optional parameters
   # @return [CreateAccountGroup201Response]

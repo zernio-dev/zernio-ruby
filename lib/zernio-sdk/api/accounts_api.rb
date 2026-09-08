@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Disconnect account
-    # Disconnects and removes a connected social account. Repeating the call for an account already disconnected returns 404, the account stays in its 1h grace window and the disconnect is not re-run.
+    # Disconnects and removes a connected account. Repeating the call for an account already disconnected returns 404, the account stays in its 1h grace window and the disconnect is not re-run.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [DeleteAccountGroup200Response]
@@ -30,7 +30,7 @@ module Zernio
     end
 
     # Disconnect account
-    # Disconnects and removes a connected social account. Repeating the call for an account already disconnected returns 404, the account stays in its 1h grace window and the disconnect is not re-run.
+    # Disconnects and removes a connected account. Repeating the call for an account already disconnected returns 404, the account stays in its 1h grace window and the disconnect is not re-run.
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeleteAccountGroup200Response, Integer, Hash)>] DeleteAccountGroup200Response data, response status code and response headers
@@ -346,7 +346,7 @@ module Zernio
     end
 
     # Get follower stats
-    # Returns follower count history and growth metrics for connected social accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
+    # Returns follower count history and growth metrics for connected accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :account_ids Comma-separated list of account IDs (optional, defaults to all user&#39;s accounts)
     # @option opts [String] :profile_id Filter by profile ID
@@ -360,7 +360,7 @@ module Zernio
     end
 
     # Get follower stats
-    # Returns follower count history and growth metrics for connected social accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
+    # Returns follower count history and growth metrics for connected accounts. Requires analytics add-on subscription. Follower counts are refreshed once per day. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :account_ids Comma-separated list of account IDs (optional, defaults to all user&#39;s accounts)
     # @option opts [String] :profile_id Filter by profile ID
@@ -627,7 +627,7 @@ module Zernio
     end
 
     # List accounts
-    # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). page and limit must be supplied together; out-of-range page/limit values are rejected with 400 rather than silently clamped. 
+    # Returns connected accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). page and limit must be supplied together; out-of-range page/limit values are rejected with 400 rather than silently clamped. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter accounts by profile ID. Must be a valid ObjectId.
     # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
@@ -642,7 +642,7 @@ module Zernio
     end
 
     # List accounts
-    # Returns connected social accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). page and limit must be supplied together; out-of-range page/limit values are rejected with 400 rather than silently clamped. 
+    # Returns connected accounts. Only includes accounts within the plan limit by default. Follower data requires analytics add-on. Supports optional server-side pagination via page/limit params. When omitted, returns all accounts (backward-compatible). page and limit must be supplied together; out-of-range page/limit values are rejected with 400 rather than silently clamped. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :profile_id Filter accounts by profile ID. Must be a valid ObjectId.
     # @option opts [String] :platform Filter accounts by platform (e.g. \&quot;instagram\&quot;, \&quot;twitter\&quot;).
@@ -718,7 +718,7 @@ module Zernio
     end
 
     # Move account to another profile
-    # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
+    # Moves a connected account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account's current profile AND the target profile must be in the key's allowed set. Calls with a target profile outside the key's scope return 403. 
     # @param account_id [String] 
     # @param move_account_to_profile_request [MoveAccountToProfileRequest] 
     # @param [Hash] opts the optional parameters
@@ -729,7 +729,7 @@ module Zernio
     end
 
     # Move account to another profile
-    # Moves a connected social account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 
+    # Moves a connected account to a different profile owned by the same user. The target profile must belong to the same user as the account.  For API keys restricted to specific profiles, BOTH the source account&#39;s current profile AND the target profile must be in the key&#39;s allowed set. Calls with a target profile outside the key&#39;s scope return 403. 
     # @param account_id [String] 
     # @param move_account_to_profile_request [MoveAccountToProfileRequest] 
     # @param [Hash] opts the optional parameters
@@ -792,7 +792,7 @@ module Zernio
     end
 
     # Update account
-    # Updates a connected social account's display name or username override.  For X/Twitter accounts on usage-based billing, also accepts an `xCapabilities` object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default `false`) — when off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting `xCapabilities` on a non-X account returns 400. 
+    # Updates a connected account's display name or username override.  For X accounts on usage-based billing, also accepts an `xCapabilities` object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default `false`). When off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting `xCapabilities` on a non-X account returns 400. 
     # @param account_id [String] 
     # @param update_account_request [UpdateAccountRequest] 
     # @param [Hash] opts the optional parameters
@@ -803,7 +803,7 @@ module Zernio
     end
 
     # Update account
-    # Updates a connected social account&#39;s display name or username override.  For X/Twitter accounts on usage-based billing, also accepts an &#x60;xCapabilities&#x60; object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default &#x60;false&#x60;) — when off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting &#x60;xCapabilities&#x60; on a non-X account returns 400. 
+    # Updates a connected account&#39;s display name or username override.  For X accounts on usage-based billing, also accepts an &#x60;xCapabilities&#x60; object to toggle background API operations that incur X API pass-through costs. Both fields are opt-in (default &#x60;false&#x60;). When off, no analytics syncs or DM polling are performed for that account, and no API call is metered for those operations. Publishing and deleting posts are always available regardless of these toggles. Setting &#x60;xCapabilities&#x60; on a non-X account returns 400. 
     # @param account_id [String] 
     # @param update_account_request [UpdateAccountRequest] 
     # @param [Hash] opts the optional parameters

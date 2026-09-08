@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UpdateWhatsAppTemplateRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Language code of the variant to edit (e.g. en_US, es, pt_BR). Required when the family has several languages. Body only: a language query parameter on PATCH is a 400.

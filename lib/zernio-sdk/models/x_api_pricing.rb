@@ -14,11 +14,11 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Canonical X/Twitter API pricing table. Zernio passes X API costs through at exact rates with zero markup, so every call you make has a known per-unit price. Use this payload alongside `/v1/usage-stats` (which returns per-operation call counts via `xApiCallsByOperation`) to compute exact cost attribution by X action. 
+  # Canonical X API pricing table. Zernio passes X API costs through at exact rates with zero markup, so every call you make has a known per-unit price. Use this payload alongside `/v1/usage-stats` (which returns per-operation call counts via `xApiCallsByOperation`) to compute exact cost attribution by X action. 
   class XApiPricing < ApiModelBase
     attr_accessor :currency
 
-    # Always 0% — Zernio does not mark up X API rates.
+    # Always 0%, because Zernio does not mark up X API rates.
     attr_accessor :markup
 
     attr_accessor :source

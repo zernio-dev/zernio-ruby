@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :is_usage_based
 
-    # True when the key belongs to an account with an active paid billing relationship (Stripe subscription, Metronome enrollment, or Shopify-managed billing).
+    # True when the key belongs to an account with an active paid billing relationship (Stripe subscription, usage-based billing, or Shopify-managed billing).
     attr_accessor :is_paid
 
     # Attribute mapping from ruby-style variable name to JSON key.

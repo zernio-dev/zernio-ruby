@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UpdateWhatsAppBusinessProfileRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Short business description (max 139 characters)

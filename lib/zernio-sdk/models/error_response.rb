@@ -28,7 +28,7 @@ module Zernio
     # The request field that caused the error, when applicable.
     attr_accessor :param
 
-    # Upstream platform (e.g. meta, google, tiktok) — present when type is platform_error.
+    # Upstream platform (e.g. meta, google, tiktok), present when type is platform_error.
     attr_accessor :platform
 
     # Raw error payload from the upstream platform, passed through verbatim so integrators can read provider-specific codes. For Meta this includes error_subcode, error_user_title, and error_user_msg. 

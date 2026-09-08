@@ -25,7 +25,7 @@ module Zernio
     # Total videos (YouTube, TikTok)
     attr_accessor :video_count
 
-    # Total tweets (X/Twitter)
+    # Total tweets (X)
     attr_accessor :tweet_count
 
     # Total posts (Bluesky)
@@ -43,7 +43,7 @@ module Zernio
     # Monthly profile views (Pinterest)
     attr_accessor :monthly_views
 
-    # Lists the user appears on (X/Twitter)
+    # Lists the user appears on (X)
     attr_accessor :listed_count
 
     # Total boards (Pinterest)

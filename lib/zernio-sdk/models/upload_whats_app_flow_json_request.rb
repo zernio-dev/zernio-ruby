@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UploadWhatsAppFlowJsonRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     attr_accessor :flow_json

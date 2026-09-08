@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class AppealSmsRegistrationRequest < ApiModelBase
-    # Goes verbatim to the carrier reviewer — address the decline reason directly.
+    # Goes verbatim to the carrier reviewer. Address the decline reason directly.
     attr_accessor :appeal_reason
 
     # Corrected opt-in flow; include a link to the opt-in page/form.

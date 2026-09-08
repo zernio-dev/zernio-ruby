@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # (Facebook/Instagram only) Present when this post has no organic comments but is a boosted post — the engagement lives on the ad. Use the ad-comments endpoint instead.
+  # (Facebook/Instagram only) Present when this post has no organic comments but is a boosted post: the engagement lives on the ad. Use the ad-comments endpoint instead.
   class GetInboxPostComments200ResponseMetaAdComments < ApiModelBase
     # Internal Zernio ad ID
     attr_accessor :ad_id

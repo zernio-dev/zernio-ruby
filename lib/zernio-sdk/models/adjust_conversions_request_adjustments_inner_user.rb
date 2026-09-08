@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # ENHANCEMENT only — first-party identifiers (hashed server-side). At least one of email/phone required.
+  # ENHANCEMENT only. First-party identifiers (hashed server-side). At least one of email/phone required.
   class AdjustConversionsRequestAdjustmentsInnerUser < ApiModelBase
     attr_accessor :email
 

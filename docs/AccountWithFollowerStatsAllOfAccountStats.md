@@ -7,13 +7,13 @@
 | **following_count** | **Float** | Number of accounts being followed | [optional] |
 | **media_count** | **Float** | Total media posts (Instagram) | [optional] |
 | **video_count** | **Float** | Total videos (YouTube, TikTok) | [optional] |
-| **tweet_count** | **Float** | Total tweets (X/Twitter) | [optional] |
+| **tweet_count** | **Float** | Total tweets (X) | [optional] |
 | **posts_count** | **Float** | Total posts (Bluesky) | [optional] |
 | **pin_count** | **Float** | Total pins (Pinterest) | [optional] |
 | **total_views** | **Float** | Total channel views (YouTube) | [optional] |
 | **likes_count** | **Float** | Total likes received (TikTok) | [optional] |
 | **monthly_views** | **Float** | Monthly profile views (Pinterest) | [optional] |
-| **listed_count** | **Float** | Lists the user appears on (X/Twitter) | [optional] |
+| **listed_count** | **Float** | Lists the user appears on (X) | [optional] |
 | **board_count** | **Float** | Total boards (Pinterest) | [optional] |
 
 ## Example

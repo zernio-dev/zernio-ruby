@@ -18,7 +18,7 @@ module Zernio
     # SocialAccount ID whose posts to sync. Must be connected to Zernio.
     attr_accessor :account_id
 
-    # The post URL to locate. Optional. Provide `url` or `postId` to return a specific post; omit both to just refresh and return the account's recent posts.
+    # The post URL to locate. Optional. Provide `url` or `postId` to return a specific post; omit both to refresh and return the account's recent posts.
     attr_accessor :url
 
     # The platform post/media/video id to locate, as an alternative to `url`. Optional.

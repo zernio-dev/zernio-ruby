@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **users** | **Array&lt;String&gt;** | Phone numbers (E.164, e.g. \&quot;+16505551234\&quot;) or WhatsApp user IDs to block. |  |
 
 ## Example

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Platform reviewer ID. Null when the platform does not expose it (common on Google Business anonymous reviews). |  |
+| **id** | **String** | Platform reviewer ID. Null when the platform does not expose it (common on Google Business Profile anonymous reviews). |  |
 | **name** | **String** |  |  |
 | **profile_image** | **String** |  |  |
 

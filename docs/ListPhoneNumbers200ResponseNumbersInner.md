@@ -8,16 +8,16 @@
 | **phone_number** | **String** |  | [optional] |
 | **country** | **String** |  | [optional] |
 | **status** | **String** |  | [optional] |
-| **registrant_name** | **String** | For regulated numbers, who it&#39;s registered for (company or person) — set from the submitted KYC. | [optional] |
+| **registrant_name** | **String** | For regulated numbers, who it&#39;s registered for (company or person), set from the submitted KYC. | [optional] |
 | **telnyx_order_id** | **String** | Present once the number order has been placed (i.e. the requirement group was approved). Absent while still in identity review. | [optional] |
 | **monthly_cents** | **Integer** | What this number bills each month, in cents. Stamped when the number was bought, so an existing number keeps its price when the rate card changes. | [optional] |
-| **hosted_by_zernio** | **Boolean** | False for numbers you brought yourself (connected via Meta embedded signup) — they live on your own carrier, so SMS/Calls can&#39;t be enabled on them. | [optional] |
+| **hosted_by_zernio** | **Boolean** | False for numbers you brought yourself (connected via Meta embedded signup). They live on your own carrier, so SMS/Calls can&#39;t be enabled on them. | [optional] |
 | **sip_trunk_id** | **String** | SIP trunk the number is attached to; null when not trunked. While attached, enabling Calls or WhatsApp calling, requesting WhatsApp verification, and releasing the number all return 409. | [optional] |
 | **profile_id** | **Object** |  | [optional] |
 | **provisioned_at** | **Time** |  | [optional] |
 | **meta_preverified_id** | **String** |  | [optional] |
 | **meta_verification_status** | **String** |  | [optional] |
-| **onfido_verification_url** | **String** | For regulated (Tier 3/4) numbers with an Onfido ID-verification step — the link to forward to the end user. Set once the order is placed; null otherwise. Poll this field after submitting KYC. | [optional] |
+| **onfido_verification_url** | **String** | For regulated (Tier 3/4) numbers with an Onfido ID-verification step: the link to forward to the end user. Set once the order is placed; null otherwise. Poll this field after submitting KYC. | [optional] |
 | **end_user_first_name** | **String** |  | [optional] |
 | **end_user_last_name** | **String** |  | [optional] |
 | **regulatory_decline_reason** | **String** | Reviewer rejection reason when status is regulatory_declined. | [optional] |

@@ -24,7 +24,7 @@ module Zernio
 
     attr_accessor :custom_event_type
 
-    # Meta's event_source_id — the pixel the rule reads from.
+    # Meta's event_source_id, the pixel the rule reads from.
     attr_accessor :pixel_id
 
     attr_accessor :is_archived

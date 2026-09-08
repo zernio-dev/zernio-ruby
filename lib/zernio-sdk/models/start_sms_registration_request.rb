@@ -30,7 +30,7 @@ module Zernio
     # Raw dashboard-wizard answers, stored only to prefill edit-and-resubmit. API integrators can omit.
     attr_accessor :wizard_values
 
-    # Resubmit a registration that was returned for changes — updates it in place instead of creating a new one.
+    # Resubmit a registration that was returned for changes. Updates it in place instead of creating a new one.
     attr_accessor :resubmit_request_id
 
     attr_accessor :toll_free

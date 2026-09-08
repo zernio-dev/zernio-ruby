@@ -48,7 +48,7 @@ describe 'GMBMediaApi' do
 
   # unit tests for delete_google_business_media
   # Delete photo
-  # Deletes a photo or media item from a GBP location.
+  # Deletes a photo or media item from a Google Business Profile location.
   # @param account_id 
   # @param media_id The media item ID to delete
   # @param [Hash] opts the optional parameters

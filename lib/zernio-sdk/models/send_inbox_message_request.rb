@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class SendInboxMessageRequest < ApiModelBase
-    # Social account ID
+    # Account ID
     attr_accessor :account_id
 
     # Message text
@@ -36,13 +36,13 @@ module Zernio
     # WhatsApp only. Display name for a document sent via attachmentUrl with attachmentType: file (e.g. \"Report.pdf\"). Maps to the recipient's file name; without it WhatsApp derives the name from the URL and shows \"Untitled\". Ignored for image/video/audio and for binary uploads (which use the uploaded file's name).
     attr_accessor :attachment_name
 
-    # WhatsApp only. When `true` on an audio attachment, the message is sent as a voice message (PTT) — the recipient sees the waveform + voice-note UI instead of a basic audio attachment. The audio file MUST be `.ogg` encoded with the OPUS codec (mono) per Meta's voice-message contract; other formats are rejected by WhatsApp. Ignored for non-audio attachments. 
+    # WhatsApp only. When `true` on an audio attachment, the message is sent as a voice message (PTT): the recipient sees the waveform + voice-note UI instead of a basic audio attachment. The audio file MUST be `.ogg` encoded with the OPUS codec (mono) per Meta's voice-message contract; other formats are rejected by WhatsApp. Ignored for non-audio attachments. 
     attr_accessor :voice_note
 
     # Quick reply buttons. Mutually exclusive with buttons. Max 13 items.
     attr_accessor :quick_replies
 
-    # Action buttons. Mutually exclusive with quickReplies. Max 3 items.  Instagram / Facebook: also mutually exclusive with `template`. A Meta message carries one body shape, so sending both is a 400 rather than a silent drop of the buttons.  WhatsApp: buttons always render as interactive reply buttons. Only `title` and `payload` are used — `type`, `url`, and `phone` are ignored (WhatsApp has no URL/phone button in this field; use the `interactive` field with `type: cta_url` for a link button). `payload` becomes the button reply ID delivered on the `message.received` webhook when the user taps. To send a simple reply-button message, provide `title` + `payload` and set `type: postback`, e.g. `{ \"type\": \"postback\", \"title\": \"Yes\", \"payload\": \"yes\" }`.  Combine `buttons` with `attachmentUrl` and `attachmentType` `image`, `video`, or `file` to render one WhatsApp message with a media header, body text, and reply buttons. Audio is not a supported interactive header and returns 400 when combined with buttons. 
+    # Action buttons. Mutually exclusive with quickReplies. Max 3 items.  Instagram / Facebook: also mutually exclusive with `template`. A Meta message carries one body shape, so sending both is a 400 rather than a silent drop of the buttons.  WhatsApp: buttons always render as interactive reply buttons. Only `title` and `payload` are used; `type`, `url`, and `phone` are ignored (WhatsApp has no URL/phone button in this field; use the `interactive` field with `type: cta_url` for a link button). `payload` becomes the button reply ID delivered on the `message.received` webhook when the user taps. To send a simple reply-button message, provide `title` + `payload` and set `type: postback`, e.g. `{ \"type\": \"postback\", \"title\": \"Yes\", \"payload\": \"yes\" }`.  Combine `buttons` with `attachmentUrl` and `attachmentType` `image`, `video`, or `file` to render one WhatsApp message with a media header, body text, and reply buttons. Audio is not a supported interactive header and returns 400 when combined with buttons. 
     attr_accessor :buttons
 
     attr_accessor :template

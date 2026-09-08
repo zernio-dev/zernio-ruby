@@ -107,6 +107,16 @@ describe Zernio::ListInboxConversations200ResponseDataInner do
     end
   end
 
+  describe 'test attribute "thread_control"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["app", "ai_agent", "other"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.thread_control = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "url"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

@@ -19,10 +19,10 @@ module Zernio
     # Internal operation key. Matches keys in `xApiCallsByOperation`.
     attr_accessor :operation
 
-    # Metronome `event_type` emitted when this operation runs.
+    # Metering `event_type` emitted when this operation runs.
     attr_accessor :event_type
 
-    # Human-readable label shown on Metronome invoices.
+    # Human-readable label shown on invoices.
     attr_accessor :display_name
 
     attr_accessor :price_per_call_usd

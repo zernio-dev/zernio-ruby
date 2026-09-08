@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class ReplyToMentionRequest < ApiModelBase
-    # The Instagram social account ID
+    # The Instagram account ID
     attr_accessor :account_id
 
     # The ID of the media the account was mentioned in

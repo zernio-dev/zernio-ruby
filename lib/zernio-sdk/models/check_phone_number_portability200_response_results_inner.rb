@@ -25,10 +25,10 @@ module Zernio
     # Line type when known (mobile, landline, voip…). A US/CA mobile number requires the transfer PIN at submit.
     attr_accessor :line_type
 
-    # ISO country of the number — pass it to GET /v1/phone-numbers/port-in/requirements for international numbers.
+    # ISO country of the number. Pass it to GET /v1/phone-numbers/port-in/requirements for international numbers.
     attr_accessor :country_code
 
-    # Carrier number-type classification (local, mobile, national, toll_free…) — the numberType for the requirements endpoint.
+    # Carrier number-type classification (local, mobile, national, toll_free…), the numberType for the requirements endpoint.
     attr_accessor :phone_number_type
 
     # Carrier reason when not portable; null when portable.

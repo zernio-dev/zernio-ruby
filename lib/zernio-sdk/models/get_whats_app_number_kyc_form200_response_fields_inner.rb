@@ -31,7 +31,7 @@ module Zernio
     # ISO country the value must be local to
     attr_accessor :local_to
 
-    # When set, the requirement applies ONLY to this end-user type — provide it for that type and OMIT it for the other (e.g. Brazil: \"Cartão CNPJ\" is business-only, \"CPF\" and \"ID/Passport Copy\" are personal-only). Submitting both sets makes the regulator ask whether the number is for personal or business use and stalls the review. Pass `entityType` on POST so the server drops the inapplicable set.
+    # When set, the requirement applies ONLY to this end-user type: provide it for that type and OMIT it for the other (e.g. Brazil: \"Cartão CNPJ\" is business-only, \"CPF\" and \"ID/Passport Copy\" are personal-only). Submitting both sets makes the regulator ask whether the number is for personal or business use and stalls the review. Pass `entityType` on POST so the server drops the inapplicable set.
     attr_accessor :audience
 
     class EnumAttributeValidator

@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class HideInboxCommentRequest < ApiModelBase
-    # The social account ID
+    # The account ID
     attr_accessor :account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

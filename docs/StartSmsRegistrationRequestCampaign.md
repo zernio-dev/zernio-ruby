@@ -7,7 +7,7 @@
 | **usecase** | **String** |  |  |
 | **sub_usecases** | **Array&lt;String&gt;** | The concrete kinds of messages a MIXED campaign sends (the carrier registry requires 2-5, and reviewers match them against the sample messages). Omitted: a default pair is applied for MIXED.  | [optional] |
 | **description** | **String** |  |  |
-| **message_flow** | **String** | How a recipient ends up receiving your messages (the opt-in flow). Include a link to the page or form where they opt in — carrier reviewers reject campaigns whose consent they can&#39;t verify. |  |
+| **message_flow** | **String** | How a recipient ends up receiving your messages (the opt-in flow). Include a link to the page or form where they opt in, because carrier reviewers reject campaigns whose consent they can&#39;t verify. |  |
 | **sample1** | **String** |  |  |
 | **sample2** | **String** | Second example message; carriers require two distinct samples, so it must differ from sample1. |  |
 | **help_message** | **String** |  | [optional] |

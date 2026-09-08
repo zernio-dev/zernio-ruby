@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Billed spend by product family over a window, from Metronome's invoice breakdown (the CHARGE view). Returned by `GET /v1/usage`. 
+  # Billed spend by product family over a window, from the usage-based invoice breakdown (the CHARGE view). Returned by `GET /v1/usage`. 
   class UsageMetering < ApiModelBase
-    # False for legacy Stripe accounts (no Metronome invoice to split); `days` and `totals` are then empty/zero.
+    # False for legacy Stripe accounts (no usage-based invoice to split); `days` and `totals` are then empty/zero.
     attr_accessor :supported
 
     attr_accessor :granularity

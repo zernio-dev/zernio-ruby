@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class SetWhatsappBusinessUsernameRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Desired username. Letters, digits, period, and underscore only. Must contain at least one letter. No leading, trailing, or consecutive periods. No www prefix. No domain TLD suffix. 

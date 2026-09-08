@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Plan and usage stats. The response shape depends on `billingSystem`:   * Stripe users (default): per-period counters like `usage.uploads` and     `usage.profiles` are returned, scoped by the plan's `limits`.   * Metronome users (usage-based): `limits` are unlimited (-1). The     `usage` block carries connected-account and per-X-operation counts,     and the `spend` block carries current-period costs plus the X cap. 
+  # Plan and usage stats. The response shape depends on `billingSystem`:   * Stripe users (default): per-period counters like `usage.uploads` and     `usage.profiles` are returned, scoped by the plan's `limits`.   * Usage-based billing users: `limits` are unlimited (-1). The     `usage` block carries connected-account and per-X-operation counts,     and the `spend` block carries current-period costs plus the X cap. 
   class UsageStats < ApiModelBase
     # Which billing system the account is on. Shape of `usage`/`spend` differs.
     attr_accessor :billing_system
@@ -37,7 +37,7 @@ module Zernio
     # True if this is a team member; limits/usage reflect the account owner.
     attr_accessor :is_invited_user
 
-    # Stripe-only. Always false for Metronome users.
+    # Stripe-only. Always false for accounts on usage-based billing.
     attr_accessor :auto_upgrade_enabled
 
     attr_accessor :limits

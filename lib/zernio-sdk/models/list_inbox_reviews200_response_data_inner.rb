@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class ListInboxReviews200ResponseDataInner < ApiModelBase
-    # Review identifier. For Google Business this is the full review resource name (accounts/{accountId}/locations/{locationId}/reviews/{reviewId}), so it also encodes the location.
+    # Review identifier. For Google Business Profile this is the full review resource name (accounts/{accountId}/locations/{locationId}/reviews/{reviewId}), so it also encodes the location.
     attr_accessor :id
 
     attr_accessor :platform
@@ -24,10 +24,10 @@ module Zernio
 
     attr_accessor :account_username
 
-    # Bare GBP location id the review belongs to. Google Business only; absent for other platforms.
+    # Bare Google Business Profile location id the review belongs to. Google Business Profile only; absent for other platforms.
     attr_accessor :location_id
 
-    # Human-readable GBP location display name. Google Business only; absent for other platforms.
+    # Human-readable Google Business Profile location display name. Google Business Profile only; absent for other platforms.
     attr_accessor :location_name
 
     attr_accessor :reviewer
@@ -40,13 +40,13 @@ module Zernio
 
     attr_accessor :has_reply
 
-    # Whether the review has at least one photo. Google Business only; always false for other platforms.
+    # Whether the review has at least one photo. Google Business Profile only; always false for other platforms.
     attr_accessor :has_photos
 
-    # Number of photos attached to the review (photos only; videos are not counted). Google Business only; 0 for other platforms.
+    # Number of photos attached to the review (photos only; videos are not counted). Google Business Profile only; 0 for other platforms.
     attr_accessor :photo_count
 
-    # Photos attached to the review. Google Business only; always an empty array for other platforms.
+    # Photos attached to the review. Google Business Profile only; always an empty array for other platforms.
     attr_accessor :photos
 
     attr_accessor :reply

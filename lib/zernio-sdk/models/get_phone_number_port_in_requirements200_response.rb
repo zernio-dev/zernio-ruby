@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :number_type
 
-    # false when the combination includes a step that can't be completed through the API (e.g. an in-person identity verification) — porting it needs support.
+    # false when the combination includes a step that can't be completed through the API (e.g. an in-person identity verification). Porting it needs support.
     attr_accessor :supported
 
     attr_accessor :fields

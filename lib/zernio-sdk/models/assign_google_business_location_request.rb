@@ -18,10 +18,10 @@ module Zernio
     # Target profile to connect the location onto.
     attr_accessor :profile_id
 
-    # The Google Business location ID to assign (e.g. \"locations/123\").
+    # The Google Business Profile location ID to assign (e.g. \"locations/123\").
     attr_accessor :selected_location_id
 
-    # Optional but recommended. The Google Business Account resource name (\"accounts/123\") that owns the location (from GET gmb-locations). When provided the location is resolved directly instead of by enumerating the account, required for accounts with many locations. 
+    # Optional but recommended. The Google Business Profile Account resource name (\"accounts/123\") that owns the location (from GET gmb-locations). When provided the location is resolved directly instead of by enumerating the account, required for accounts with many locations. 
     attr_accessor :google_account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

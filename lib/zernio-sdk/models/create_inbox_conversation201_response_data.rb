@@ -21,13 +21,13 @@ module Zernio
     # Platform conversation ID (dm_conversation_id). For WhatsApp, this is Zernio's internal conversation id (24-character hex) which matches the id returned by the list-conversations endpoint and the conversationId in the message.received and conversation.started webhooks; use it to correlate the created thread with inbound events.
     attr_accessor :conversation_id
 
-    # Twitter numeric user ID of the recipient
+    # X numeric user ID of the recipient
     attr_accessor :participant_id
 
     # Display name of the recipient
     attr_accessor :participant_name
 
-    # Twitter username of the recipient
+    # X username of the recipient
     attr_accessor :participant_username
 
     # Attribute mapping from ruby-style variable name to JSON key.

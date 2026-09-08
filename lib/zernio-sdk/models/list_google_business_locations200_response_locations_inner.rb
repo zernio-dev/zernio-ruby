@@ -21,7 +21,7 @@ module Zernio
     # Business name
     attr_accessor :name
 
-    # Google Business Account ID
+    # Google Business Profile Account ID
     attr_accessor :account_id
 
     # Account name

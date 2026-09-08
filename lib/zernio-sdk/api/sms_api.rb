@@ -94,7 +94,7 @@ module Zernio
     end
 
     # Create an alphanumeric sender ID
-    # Registers an alphanumeric sender ID (e.g. `ZERNIO`) — a branded `from` for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as `from` on `POST /v1/sms/messages`.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected. Names are not exclusive: the same sender ID can be registered by any number of workspaces. Creating the same sender ID again is a no-op (re-activates it after a delete). 
+    # Registers an alphanumeric sender ID (e.g. `ZERNIO`), a branded `from` for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as `from` on `POST /v1/sms/messages`.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected. Names are not exclusive: the same sender ID can be registered by any number of teams. Creating the same sender ID again is a no-op (re-activates it after a delete). 
     # @param create_sms_sender_id_request [CreateSmsSenderIdRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateSmsSenderId200Response]
@@ -104,7 +104,7 @@ module Zernio
     end
 
     # Create an alphanumeric sender ID
-    # Registers an alphanumeric sender ID (e.g. &#x60;ZERNIO&#x60;) — a branded &#x60;from&#x60; for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as &#x60;from&#x60; on &#x60;POST /v1/sms/messages&#x60;.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected. Names are not exclusive: the same sender ID can be registered by any number of workspaces. Creating the same sender ID again is a no-op (re-activates it after a delete). 
+    # Registers an alphanumeric sender ID (e.g. &#x60;ZERNIO&#x60;), a branded &#x60;from&#x60; for one-way international SMS. No phone number purchase or carrier registration is needed; once created, pass it as &#x60;from&#x60; on &#x60;POST /v1/sms/messages&#x60;.  Constraints: 3-11 characters (letters, digits, spaces; at least one letter). Sends cannot reach the US, Canada, or Puerto Rico, are text-only, and recipients cannot reply. Sender IDs that impersonate well-known brands or institutions are rejected. Names are not exclusive: the same sender ID can be registered by any number of teams. Creating the same sender ID again is a no-op (re-activates it after a delete). 
     # @param create_sms_sender_id_request [CreateSmsSenderIdRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateSmsSenderId200Response, Integer, Hash)>] CreateSmsSenderId200Response data, response status code and response headers
@@ -162,7 +162,7 @@ module Zernio
     end
 
     # Deactivate a brand/campaign registration
-    # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts — receiving is unaffected — until they're registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
+    # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts (receiving is unaffected) until they're registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @return [DeactivateSmsRegistration200Response]
@@ -172,7 +172,7 @@ module Zernio
     end
 
     # Deactivate a brand/campaign registration
-    # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts — receiving is unaffected — until they&#39;re registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
+    # Terminates the campaign with the carrier registry so the recurring monthly campaign fee stops (carriers bill the first 3 months of a campaign regardless). Numbers covered by it can no longer SEND texts (receiving is unaffected) until they&#39;re registered under a new brand. Irreversible: a deactivated campaign cannot be restored; texting again later requires a new registration (new one-time and review fees). Idempotent. 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeactivateSmsRegistration200Response, Integer, Hash)>] DeactivateSmsRegistration200Response data, response status code and response headers
@@ -288,7 +288,7 @@ module Zernio
     end
 
     # Disable SMS on a number
-    # Turns off SMS for the number (deactivates its SMS account). The carrier registration is untouched, so re-enabling later just reactivates it, with no re-registration. 
+    # Turns off SMS for the number (deactivates its SMS account). The carrier registration is untouched, so re-enabling later reactivates it, with no re-registration. 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @return [DisableSmsOnNumber200Response]
@@ -298,7 +298,7 @@ module Zernio
     end
 
     # Disable SMS on a number
-    # Turns off SMS for the number (deactivates its SMS account). The carrier registration is untouched, so re-enabling later just reactivates it, with no re-registration. 
+    # Turns off SMS for the number (deactivates its SMS account). The carrier registration is untouched, so re-enabling later reactivates it, with no re-registration. 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(DisableSmsOnNumber200Response, Integer, Hash)>] DisableSmsOnNumber200Response data, response status code and response headers
@@ -351,7 +351,7 @@ module Zernio
     end
 
     # Enable SMS on a number
-    # Turns on SMS for one of your numbers. The number's real carrier capability is checked first: some number types can't do SMS at all (`smsCapable: false`), and a number still provisioning at the carrier returns `notReady: true` (try again once provisioning finishes).  US numbers additionally need a carrier registration before messages deliver; the response tells you which path applies: - `alreadyRegistered: true`: a prior registration still covers this   number; SMS was simply reactivated. - `reusable` set: you have an approved registration this number can   join in one click via   `POST /v1/phone-numbers/{id}/sms/reuse-registration`   (no new brand/campaign, no extra carrier fee). - `needsRegistration: true` and no `reusable`: start one via   `POST /v1/sms/registrations`.  Idempotent: re-running re-attempts any carrier-side setup that failed. 
+    # Turns on SMS for one of your numbers. The number's real carrier capability is checked first: some number types can't do SMS at all (`smsCapable: false`), and a number still provisioning at the carrier returns `notReady: true` (try again once provisioning finishes).  US numbers additionally need a carrier registration before messages deliver; the response tells you which path applies: - `alreadyRegistered: true`: a prior registration still covers this   number; SMS was reactivated. - `reusable` set: you have an approved registration this number can   join in one click via   `POST /v1/phone-numbers/{id}/sms/reuse-registration`   (no new brand/campaign, no extra carrier fee). - `needsRegistration: true` and no `reusable`: start one via   `POST /v1/sms/registrations`.  Idempotent: re-running re-attempts any carrier-side setup that failed. 
     # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
     # @param [Hash] opts the optional parameters
     # @return [EnableSmsOnNumber200Response]
@@ -361,7 +361,7 @@ module Zernio
     end
 
     # Enable SMS on a number
-    # Turns on SMS for one of your numbers. The number&#39;s real carrier capability is checked first: some number types can&#39;t do SMS at all (&#x60;smsCapable: false&#x60;), and a number still provisioning at the carrier returns &#x60;notReady: true&#x60; (try again once provisioning finishes).  US numbers additionally need a carrier registration before messages deliver; the response tells you which path applies: - &#x60;alreadyRegistered: true&#x60;: a prior registration still covers this   number; SMS was simply reactivated. - &#x60;reusable&#x60; set: you have an approved registration this number can   join in one click via   &#x60;POST /v1/phone-numbers/{id}/sms/reuse-registration&#x60;   (no new brand/campaign, no extra carrier fee). - &#x60;needsRegistration: true&#x60; and no &#x60;reusable&#x60;: start one via   &#x60;POST /v1/sms/registrations&#x60;.  Idempotent: re-running re-attempts any carrier-side setup that failed. 
+    # Turns on SMS for one of your numbers. The number&#39;s real carrier capability is checked first: some number types can&#39;t do SMS at all (&#x60;smsCapable: false&#x60;), and a number still provisioning at the carrier returns &#x60;notReady: true&#x60; (try again once provisioning finishes).  US numbers additionally need a carrier registration before messages deliver; the response tells you which path applies: - &#x60;alreadyRegistered: true&#x60;: a prior registration still covers this   number; SMS was reactivated. - &#x60;reusable&#x60; set: you have an approved registration this number can   join in one click via   &#x60;POST /v1/phone-numbers/{id}/sms/reuse-registration&#x60;   (no new brand/campaign, no extra carrier fee). - &#x60;needsRegistration: true&#x60; and no &#x60;reusable&#x60;: start one via   &#x60;POST /v1/sms/registrations&#x60;.  Idempotent: re-running re-attempts any carrier-side setup that failed. 
     # @param id [String] Phone number record ID (from GET /v1/phone-numbers).
     # @param [Hash] opts the optional parameters
     # @return [Array<(EnableSmsOnNumber200Response, Integer, Hash)>] EnableSmsOnNumber200Response data, response status code and response headers
@@ -553,7 +553,7 @@ module Zernio
 
     # List carrier registrations
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :include_deactivated Deactivated (terminated) registrations are hidden by default — pass true to include them.
+    # @option opts [Boolean] :include_deactivated Deactivated (terminated) registrations are hidden by default. Pass true to include them.
     # @return [ListSmsRegistrations200Response]
     def list_sms_registrations(opts = {})
       data, _status_code, _headers = list_sms_registrations_with_http_info(opts)
@@ -562,7 +562,7 @@ module Zernio
 
     # List carrier registrations
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :include_deactivated Deactivated (terminated) registrations are hidden by default — pass true to include them.
+    # @option opts [Boolean] :include_deactivated Deactivated (terminated) registrations are hidden by default. Pass true to include them.
     # @return [Array<(ListSmsRegistrations200Response, Integer, Hash)>] ListSmsRegistrations200Response data, response status code and response headers
     def list_sms_registrations_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -801,7 +801,7 @@ module Zernio
     end
 
     # Request a higher sender ID daily limit
-    # Asks support to raise the workspace's daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
+    # Asks support to raise the team's daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
     # @param request_sms_sender_id_limit_increase_request [RequestSmsSenderIdLimitIncreaseRequest] 
     # @param [Hash] opts the optional parameters
     # @return [RequestSmsSenderIdLimitIncrease200Response]
@@ -811,7 +811,7 @@ module Zernio
     end
 
     # Request a higher sender ID daily limit
-    # Asks support to raise the workspace&#39;s daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
+    # Asks support to raise the team&#39;s daily sender-ID message cap. There is no self-serve raise: the request (desired cap + use case) is reviewed manually, usually within a business day. 
     # @param request_sms_sender_id_limit_increase_request [RequestSmsSenderIdLimitIncreaseRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(RequestSmsSenderIdLimitIncrease200Response, Integer, Hash)>] RequestSmsSenderIdLimitIncrease200Response data, response status code and response headers
@@ -869,7 +869,7 @@ module Zernio
     end
 
     # Re-send the sole-prop OTP
-    # Re-sends the sole-proprietor verification PIN to the brand's mobile number — use it when the original code expired or never arrived. Only valid while the registration is pending and awaiting its OTP; rate limited to one send per minute. 
+    # Re-sends the sole-proprietor verification PIN to the brand's mobile number. Use it when the original code expired or never arrived. Only valid while the registration is pending and awaiting its OTP; rate limited to one send per minute. 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @return [ResendSmsRegistrationOtp200Response]
@@ -879,7 +879,7 @@ module Zernio
     end
 
     # Re-send the sole-prop OTP
-    # Re-sends the sole-proprietor verification PIN to the brand&#39;s mobile number — use it when the original code expired or never arrived. Only valid while the registration is pending and awaiting its OTP; rate limited to one send per minute. 
+    # Re-sends the sole-proprietor verification PIN to the brand&#39;s mobile number. Use it when the original code expired or never arrived. Only valid while the registration is pending and awaiting its OTP; rate limited to one send per minute. 
     # @param id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ResendSmsRegistrationOtp200Response, Integer, Hash)>] ResendSmsRegistrationOtp200Response data, response status code and response headers
@@ -932,7 +932,7 @@ module Zernio
     end
 
     # Reply to a change request
-    # Replies to a reviewer change request on a registration in `changes_requested` state: a note, hosted document URLs (from `POST /v1/sms/opt-in-proof`), or both, sent together. The registration returns to `requested` (back in review) — no need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via `POST /v1/sms/registrations` with `resubmitRequestId` instead. 
+    # Replies to a reviewer change request on a registration in `changes_requested` state: a note, hosted document URLs (from `POST /v1/sms/opt-in-proof`), or both, sent together. The registration returns to `requested` (back in review), and you do not need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via `POST /v1/sms/registrations` with `resubmitRequestId` instead. 
     # @param id [String] 
     # @param respond_to_sms_registration_review_request [RespondToSmsRegistrationReviewRequest] 
     # @param [Hash] opts the optional parameters
@@ -943,7 +943,7 @@ module Zernio
     end
 
     # Reply to a change request
-    # Replies to a reviewer change request on a registration in &#x60;changes_requested&#x60; state: a note, hosted document URLs (from &#x60;POST /v1/sms/opt-in-proof&#x60;), or both, sent together. The registration returns to &#x60;requested&#x60; (back in review) — no need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via &#x60;POST /v1/sms/registrations&#x60; with &#x60;resubmitRequestId&#x60; instead. 
+    # Replies to a reviewer change request on a registration in &#x60;changes_requested&#x60; state: a note, hosted document URLs (from &#x60;POST /v1/sms/opt-in-proof&#x60;), or both, sent together. The registration returns to &#x60;requested&#x60; (back in review), and you do not need to resubmit the whole registration. To change the submitted brand/campaign fields themselves, resubmit via &#x60;POST /v1/sms/registrations&#x60; with &#x60;resubmitRequestId&#x60; instead. 
     # @param id [String] 
     # @param respond_to_sms_registration_review_request [RespondToSmsRegistrationReviewRequest] 
     # @param [Hash] opts the optional parameters
@@ -1280,7 +1280,7 @@ module Zernio
     end
 
     # Upload opt-in form proof for an appeal
-    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Carrier reviewers reject campaigns whose consent can't be verified and ask for a \"link/screenshot of the opt-in form\" — the registry has no attachment field, so include the returned URL inside the `messageFlow` you submit with the appeal (`POST /v1/sms/registrations/{id}/appeal`). 
+    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Carrier reviewers reject campaigns whose consent can't be verified and ask for a \"link/screenshot of the opt-in form\". The registry has no attachment field, so include the returned URL inside the `messageFlow` you submit with the appeal (`POST /v1/sms/registrations/{id}/appeal`). 
     # @param id [String] 
     # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
     # @param [Hash] opts the optional parameters
@@ -1291,7 +1291,7 @@ module Zernio
     end
 
     # Upload opt-in form proof for an appeal
-    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Carrier reviewers reject campaigns whose consent can&#39;t be verified and ask for a \&quot;link/screenshot of the opt-in form\&quot; — the registry has no attachment field, so include the returned URL inside the &#x60;messageFlow&#x60; you submit with the appeal (&#x60;POST /v1/sms/registrations/{id}/appeal&#x60;). 
+    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Carrier reviewers reject campaigns whose consent can&#39;t be verified and ask for a \&quot;link/screenshot of the opt-in form\&quot;. The registry has no attachment field, so include the returned URL inside the &#x60;messageFlow&#x60; you submit with the appeal (&#x60;POST /v1/sms/registrations/{id}/appeal&#x60;). 
     # @param id [String] 
     # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
     # @param [Hash] opts the optional parameters
@@ -1355,7 +1355,7 @@ module Zernio
     end
 
     # Upload opt-in form proof
-    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Include that URL in the campaign's `messageFlow` (the opt-in workflow text) — the carrier registry has no attachment field, so reviewers verify consent by opening links in that answer. Works before a registration exists (use it when registering) and for appeals. `/v1/sms/registrations/{id}/opt-in-proof` is an alias. 
+    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Include that URL in the campaign's `messageFlow` (the opt-in workflow text). The carrier registry has no attachment field, so reviewers verify consent by opening links in that answer. Works before a registration exists (use it when registering) and for appeals. `/v1/sms/registrations/{id}/opt-in-proof` is an alias. 
     # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
     # @param [Hash] opts the optional parameters
     # @return [UploadSmsOptInProofFile200Response]
@@ -1365,7 +1365,7 @@ module Zernio
     end
 
     # Upload opt-in form proof
-    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Include that URL in the campaign&#39;s &#x60;messageFlow&#x60; (the opt-in workflow text) — the carrier registry has no attachment field, so reviewers verify consent by opening links in that answer. Works before a registration exists (use it when registering) and for appeals. &#x60;/v1/sms/registrations/{id}/opt-in-proof&#x60; is an alias. 
+    # Hosts a screenshot (or PDF) of your SMS opt-in form and returns its public URL. Include that URL in the campaign&#39;s &#x60;messageFlow&#x60; (the opt-in workflow text). The carrier registry has no attachment field, so reviewers verify consent by opening links in that answer. Works before a registration exists (use it when registering) and for appeals. &#x60;/v1/sms/registrations/{id}/opt-in-proof&#x60; is an alias. 
     # @param file [File] PNG, JPG, WebP, GIF or PDF, max 4MB.
     # @param [Hash] opts the optional parameters
     # @return [Array<(UploadSmsOptInProofFile200Response, Integer, Hash)>] UploadSmsOptInProofFile200Response data, response status code and response headers

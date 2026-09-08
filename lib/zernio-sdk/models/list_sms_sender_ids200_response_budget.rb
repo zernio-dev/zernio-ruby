@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Workspace-wide daily sending budget, shared by every sender ID (resets midnight UTC).
+  # Team-wide daily sending budget, shared by every sender ID (resets midnight UTC).
   class ListSmsSenderIds200ResponseBudget < ApiModelBase
     # Daily message cap (raisable via `/v1/sms/sender-ids/limit-request`).
     attr_accessor :cap

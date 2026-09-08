@@ -27,7 +27,7 @@ module Zernio
 
     attr_accessor :meta_verification_status
 
-    # For a regulated number with an Onfido ID step — the link to forward to the end user. Appears once the order is placed; null otherwise.
+    # For a regulated number with an Onfido ID step: the link to forward to the end user. Appears once the order is placed; null otherwise.
     attr_accessor :onfido_verification_url
 
     attr_accessor :end_user_first_name

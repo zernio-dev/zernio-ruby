@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class EditInboxMessageRequest < ApiModelBase
-    # Social account ID
+    # Account ID
     attr_accessor :account_id
 
     # New message text

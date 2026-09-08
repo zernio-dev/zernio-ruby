@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Get food menus
-    # Returns food menus for a GBP location including sections, items, pricing, and dietary info. Only for locations with food menu support.
+    # Returns food menus for a Google Business Profile location including sections, items, pricing, and dietary info. Only for locations with food menu support.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
     # @param [Hash] opts the optional parameters
     # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
@@ -31,7 +31,7 @@ module Zernio
     end
 
     # Get food menus
-    # Returns food menus for a GBP location including sections, items, pricing, and dietary info. Only for locations with food menu support.
+    # Returns food menus for a Google Business Profile location including sections, items, pricing, and dietary info. Only for locations with food menu support.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
     # @param [Hash] opts the optional parameters
     # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
@@ -86,7 +86,7 @@ module Zernio
     end
 
     # Update food menus
-    # Updates food menus for a GBP location. Send the full menus array. Use updateMask for partial updates.
+    # Updates food menus for a Google Business Profile location. Send the full menus array. Use updateMask for partial updates.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
     # @param update_google_business_food_menus_request [UpdateGoogleBusinessFoodMenusRequest] 
     # @param [Hash] opts the optional parameters
@@ -98,7 +98,7 @@ module Zernio
     end
 
     # Update food menus
-    # Updates food menus for a GBP location. Send the full menus array. Use updateMask for partial updates.
+    # Updates food menus for a Google Business Profile location. Send the full menus array. Use updateMask for partial updates.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
     # @param update_google_business_food_menus_request [UpdateGoogleBusinessFoodMenusRequest] 
     # @param [Hash] opts the optional parameters

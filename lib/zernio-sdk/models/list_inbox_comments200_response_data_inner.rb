@@ -23,7 +23,7 @@ module Zernio
 
     attr_accessor :account_username
 
-    # The post text/caption. On ad rows (isAd: true) this is the AD NAME, not the underlying post's caption — the creative text isn't exposed here.
+    # The post text/caption. On ad rows (isAd: true) this is the AD NAME, not the underlying post's caption. The creative text isn't exposed here.
     attr_accessor :content
 
     # Post media thumbnail. On ad rows this is the ad creative thumbnail.
@@ -48,10 +48,10 @@ module Zernio
     # True when this row is an ad (boosted/dark post). `platform` is then the placement (facebook = the Page dark post / instagram = the IG media), `id` is `{adId}:{placement}`, and the thread is at GET /v1/ads/{adId}/comments?placement={placement}.
     attr_accessor :is_ad
 
-    # Internal Zernio ad id — only on ad rows.
+    # Internal Zernio ad id, only on ad rows.
     attr_accessor :ad_id
 
-    # Which side of the ad this row's comments are on — only on ad rows.
+    # Which side of the ad this row's comments are on, only on ad rows.
     attr_accessor :placement
 
     class EnumAttributeValidator

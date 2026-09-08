@@ -15,19 +15,19 @@ require 'time'
 
 module Zernio
   class CreateInboxConversationRequest < ApiModelBase
-    # The social account ID to send from
+    # The account ID to send from
     attr_accessor :account_id
 
     # Recipient identifier. For X this is the numeric user ID; for WhatsApp and SMS, the recipient phone number in international format (digits, country code included); for Slack, the workspace member id (e.g. U01ABCDEF). Provide either this or participantUsername.
     attr_accessor :participant_id
 
-    # Recipient handle/username — an X or Bluesky handle (with or without @) or a Reddit username (with or without u/). Resolved via lookup. Provide either this or participantId.
+    # Recipient handle/username, an X or Bluesky handle (with or without @) or a Reddit username (with or without u/). Resolved via lookup. Provide either this or participantId.
     attr_accessor :participant_username
 
     # Text content of the message. At least one of message, attachment, or (for WhatsApp) templateName is required. Required when category is set (a Direct Send utility message is a text message).
     attr_accessor :message
 
-    # X/Twitter only. Skip the receives_your_dm eligibility check before sending. Use if you have already verified the recipient accepts DMs.
+    # X only. Skip the receives_your_dm eligibility check before sending. Use if you have already verified the recipient accepts DMs.
     attr_accessor :skip_dm_check
 
     # WhatsApp only. Name of the approved template to start the conversation with. Required for WhatsApp unless category is used instead (Direct Send). Cannot be combined with category.

@@ -15,10 +15,10 @@ require 'time'
 
 module Zernio
   class FollowUserRequest < ApiModelBase
-    # The social account ID
+    # The account ID
     attr_accessor :account_id
 
-    # The Twitter ID of the user to follow
+    # The X ID of the user to follow
     attr_accessor :target_user_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -16,7 +16,7 @@ require 'time'
 module Zernio
   # Review data shared by review.new and review.updated payloads.
   class ReviewWebhookReview < ApiModelBase
-    # Platform review ID (e.g. \"accounts/123/locations/456/reviews/789\" for Google Business).
+    # Platform review ID (e.g. \"accounts/123/locations/456/reviews/789\" for Google Business Profile).
     attr_accessor :id
 
     # Platform the review originated on. Currently Google Business Profile only.

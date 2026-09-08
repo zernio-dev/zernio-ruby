@@ -25,7 +25,7 @@ module Zernio
 
     attr_accessor :is_owner
 
-    # X/Twitter verified badge type. Only present for Twitter/X comments.
+    # X verified badge type. Only present for X comments.
     attr_accessor :verified_type
 
     class EnumAttributeValidator

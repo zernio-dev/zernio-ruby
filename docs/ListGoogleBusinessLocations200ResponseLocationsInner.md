@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Location ID | [optional] |
 | **name** | **String** | Business name | [optional] |
-| **account_id** | **String** | Google Business Account ID | [optional] |
+| **account_id** | **String** | Google Business Profile Account ID | [optional] |
 | **account_name** | **String** | Account name | [optional] |
 | **address** | **String** | Business address | [optional] |
 | **category** | **String** | Business category | [optional] |

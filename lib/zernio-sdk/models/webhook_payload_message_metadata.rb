@@ -14,8 +14,11 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Platform-specific message context (present when the message is a quick reply tap, postback button tap, inline keyboard callback, or a quote-reply to an earlier message)
+  # Platform-specific message context (present when the message is a quick reply tap, postback button tap, inline keyboard callback, a quote-reply to an earlier message, or a WhatsApp inbound that Meta Business Agent is answering)
   class WebhookPayloadMessageMetadata < ApiModelBase
+    # WhatsApp only. true when this inbound arrived while Meta Business Agent held the conversation: the agent answers it, and Zernio only observes. Sending a reply takes control back. See conversation.control_changed.
+    attr_accessor :standby
+
     # Raw platform envelope id (WhatsApp `context.id`; Instagram and Facebook Messenger `reply_to.mid`) of the message this one is a quote-reply to, forwarded verbatim. It may not equal the stored id of that message (see `quotedMessage.platformMessageId`). On outgoing messages the same field appears on `message.sent`, but only on some surfaces: see WebhookPayloadMessageSent.metadata.quotedMessageId. 
     attr_accessor :quoted_message_id
 
@@ -70,7 +73,7 @@ module Zernio
 
     attr_accessor :unsupported
 
-    # Instagram / Facebook Messenger only. Set when the message carries nothing an integrator can render (a `template` attachment with no text and no parseable content, or Meta's own `is_unsupported` flag). Sibling of `unsupported` above (WhatsApp only, carries Meta's error code/title/details): this field has no error envelope, just the boolean. Absence means \"not flagged\", never \"checked and renderable\". 
+    # Instagram / Facebook Messenger only. Set when the message carries nothing an integrator can render (a `template` attachment with no text and no parseable content, or Meta's own `is_unsupported` flag). Sibling of `unsupported` above (WhatsApp only, carries Meta's error code/title/details): this field has no error envelope, only the boolean. Absence means \"not flagged\", never \"checked and renderable\". 
     attr_accessor :no_renderable_content
 
     class EnumAttributeValidator
@@ -98,6 +101,7 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'standby' => :'standby',
         :'quoted_message_id' => :'quotedMessageId',
         :'quoted_message' => :'quotedMessage',
         :'quick_reply_payload' => :'quickReplyPayload',
@@ -135,6 +139,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'standby' => :'Boolean',
         :'quoted_message_id' => :'String',
         :'quoted_message' => :'WebhookPayloadMessageMetadataQuotedMessage',
         :'quick_reply_payload' => :'String',
@@ -180,6 +185,10 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'standby')
+        self.standby = attributes[:'standby']
+      end
 
       if attributes.key?(:'quoted_message_id')
         self.quoted_message_id = attributes[:'quoted_message_id']
@@ -314,6 +323,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          standby == o.standby &&
           quoted_message_id == o.quoted_message_id &&
           quoted_message == o.quoted_message &&
           quick_reply_payload == o.quick_reply_payload &&
@@ -346,7 +356,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quoted_message_id, quoted_message, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, nfm_reply_name, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
+      [standby, quoted_message_id, quoted_message, quick_reply_payload, postback_payload, postback_title, callback_data, interactive_type, interactive_id, button_payload, flow_response_json, flow_response_data, nfm_reply_name, order, referred_product, contacts, contacts_origin, story_reply, is_story_mention, referral, unsupported, no_renderable_content].hash
     end
 
     # Builds the object from hash

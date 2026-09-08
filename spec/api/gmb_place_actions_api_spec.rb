@@ -48,7 +48,7 @@ describe 'GMBPlaceActionsApi' do
 
   # unit tests for delete_google_business_place_action
   # Delete action link
-  # Deletes a place action link (e.g. booking or ordering URL) from a GBP location.
+  # Deletes a place action link (e.g. booking or ordering URL) from a Google Business Profile location.
   # @param account_id 
   # @param name The resource name of the place action link (e.g. locations/123/placeActionLinks/456)
   # @param [Hash] opts the optional parameters

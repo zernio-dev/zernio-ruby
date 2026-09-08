@@ -17,7 +17,7 @@ module Zernio
   class WebhookPayloadReviewNewAccount < ApiModelBase
     attr_accessor :id
 
-    # Social account ID (same as id); canonical field for account filtering.
+    # Account ID (same as id); canonical field for account filtering.
     attr_accessor :account_id
 
     attr_accessor :platform

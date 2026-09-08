@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class RetweetPostRequest < ApiModelBase
-    # The social account ID
+    # The account ID
     attr_accessor :account_id
 
     # The ID of the tweet to retweet

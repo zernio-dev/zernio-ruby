@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class EstimateAdReachRequest < ApiModelBase
-    # Zernio social account ID on the target ad platform (the estimate runs against its platform).
+    # Zernio account ID on the target ad platform (the estimate runs against its platform).
     attr_accessor :account_id
 
     # Required. The platform ad-account ID the reach call runs against (Meta act_..., LinkedIn numeric sponsoredAccount ID, Pinterest ad-account ID, X account ID) - every backing reach API is scoped to one ad account. Get it from GET /v1/ads/accounts.

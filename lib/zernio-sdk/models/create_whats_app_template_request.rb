@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class CreateWhatsAppTemplateRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Template name (lowercase, letters/numbers/underscores, must start with a letter)

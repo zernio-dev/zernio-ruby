@@ -140,7 +140,7 @@ describe 'WhatsAppCallingApi' do
 
   # unit tests for get_whats_app_calling
   # Get calling config for a number
-  # The WhatsApp Business Calling configuration of this number, keyed the same way as the POST/PATCH/DELETE below (full read-write on one sub-resource). Encrypted secrets are never returned; only a boolean saying whether a SIP password is stored. The account-scoped read (&#x60;GET /v1/whatsapp/calling?accountId&#x3D;&#x60;) remains for callers that only know the social account id, and additionally carries account-level extras (billing eligibility, current-period spend). 
+  # The WhatsApp Business Calling configuration of this number, keyed the same way as the POST/PATCH/DELETE below (full read-write on one sub-resource). Encrypted secrets are never returned; only a boolean saying whether a SIP password is stored. The account-scoped read (&#x60;GET /v1/whatsapp/calling?accountId&#x3D;&#x60;) remains for callers that only know the account id, and additionally carries account-level extras (billing eligibility, current-period spend). 
   # @param id Phone number record ID (from GET /v1/phone-numbers).
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppCalling200Response]
@@ -153,7 +153,7 @@ describe 'WhatsAppCallingApi' do
   # unit tests for get_whats_app_calling_config
   # Get calling config for an account
   # Returns the local calling configuration snapshot for the connected WhatsApp account: whether calling is enabled, the forward-to destination URI, recording opt-in state, the phone number record id (use as &#x60;{id}&#x60; on the read-write calling sub-resource at /v1/phone-numbers/{id}/whatsapp/calling) and whether SIP digest credentials are stored (the encrypted password itself is never returned). Also carries account-level extras (billing eligibility, current-period spend) that the number-keyed GET does not. 
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppCallingConfig200Response]
   describe 'get_whats_app_calling_config test' do

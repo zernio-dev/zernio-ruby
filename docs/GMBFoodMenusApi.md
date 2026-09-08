@@ -14,7 +14,7 @@ All URIs are relative to *https://zernio.com/api*
 
 Get food menus
 
-Returns food menus for a GBP location including sections, items, pricing, and dietary info. Only for locations with food menu support.
+Returns food menus for a Google Business Profile location including sections, items, pricing, and dietary info. Only for locations with food menu support.
 
 ### Examples
 
@@ -87,7 +87,7 @@ end
 
 Update food menus
 
-Updates food menus for a GBP location. Send the full menus array. Use updateMask for partial updates.
+Updates food menus for a Google Business Profile location. Send the full menus array. Use updateMask for partial updates.
 
 ### Examples
 

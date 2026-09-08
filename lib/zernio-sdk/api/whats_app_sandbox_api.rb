@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Start a sandbox activation
-    # Creates (or refreshes) a pending sandbox session for the given phone and immediately fires the verified sandbox template from the shared sandbox number to that phone. The session activates when the phone owner replies to that WhatsApp message — the reply itself is proof of ownership.  One phone per user: if the caller already has a non-expired session for a DIFFERENT phone, the request is rejected with `invalid_field_value` (the message names the existing phone so it can be revoked first). Re-creating a session for the SAME phone is idempotent and refreshes the verification template.  If Meta rejects the template send (not a WhatsApp number, paused WABA, token issue), the pending row is rolled back and the Meta error message is returned in `error` so the caller knows why. 
+    # Creates (or refreshes) a pending sandbox session for the given phone and immediately fires the verified sandbox template from the shared sandbox number to that phone. The session activates when the phone owner replies to that WhatsApp message: the reply itself is proof of ownership.  One phone per user: if the caller already has a non-expired session for a DIFFERENT phone, the request is rejected with `invalid_field_value` (the message names the existing phone so it can be revoked first). Re-creating a session for the SAME phone is idempotent and refreshes the verification template.  If Meta rejects the template send (not a WhatsApp number, paused WABA, token issue), the pending row is rolled back and the Meta error message is returned in `error` so the caller knows why. 
     # @param create_whats_app_sandbox_session_request [CreateWhatsAppSandboxSessionRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateWhatsAppSandboxSession200Response]
@@ -30,7 +30,7 @@ module Zernio
     end
 
     # Start a sandbox activation
-    # Creates (or refreshes) a pending sandbox session for the given phone and immediately fires the verified sandbox template from the shared sandbox number to that phone. The session activates when the phone owner replies to that WhatsApp message — the reply itself is proof of ownership.  One phone per user: if the caller already has a non-expired session for a DIFFERENT phone, the request is rejected with &#x60;invalid_field_value&#x60; (the message names the existing phone so it can be revoked first). Re-creating a session for the SAME phone is idempotent and refreshes the verification template.  If Meta rejects the template send (not a WhatsApp number, paused WABA, token issue), the pending row is rolled back and the Meta error message is returned in &#x60;error&#x60; so the caller knows why. 
+    # Creates (or refreshes) a pending sandbox session for the given phone and immediately fires the verified sandbox template from the shared sandbox number to that phone. The session activates when the phone owner replies to that WhatsApp message: the reply itself is proof of ownership.  One phone per user: if the caller already has a non-expired session for a DIFFERENT phone, the request is rejected with &#x60;invalid_field_value&#x60; (the message names the existing phone so it can be revoked first). Re-creating a session for the SAME phone is idempotent and refreshes the verification template.  If Meta rejects the template send (not a WhatsApp number, paused WABA, token issue), the pending row is rolled back and the Meta error message is returned in &#x60;error&#x60; so the caller knows why. 
     # @param create_whats_app_sandbox_session_request [CreateWhatsAppSandboxSessionRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateWhatsAppSandboxSession200Response, Integer, Hash)>] CreateWhatsAppSandboxSession200Response data, response status code and response headers
@@ -88,7 +88,7 @@ module Zernio
     end
 
     # Revoke a sandbox session
-    # Hard-deletes the session. The user loses the ability to send to that phone via the sandbox until they re-activate it. Existing conversations and messages already exchanged with that phone are untouched — revocation only blocks FUTURE sends.  Sessions belonging to other users cannot be revoked; the response is the same 400 as \"session not found\" so existence isn't leaked. 
+    # Hard-deletes the session. The user loses the ability to send to that phone via the sandbox until they re-activate it. Existing conversations and messages already exchanged with that phone are untouched. Revocation only blocks FUTURE sends.  Sessions belonging to other users cannot be revoked; the response is the same 400 as \"session not found\" so existence isn't leaked. 
     # @param session_id [String] The session id returned by POST /v1/whatsapp/sandbox/sessions.
     # @param [Hash] opts the optional parameters
     # @return [UpdateYoutubeDefaultPlaylist200Response]
@@ -98,7 +98,7 @@ module Zernio
     end
 
     # Revoke a sandbox session
-    # Hard-deletes the session. The user loses the ability to send to that phone via the sandbox until they re-activate it. Existing conversations and messages already exchanged with that phone are untouched — revocation only blocks FUTURE sends.  Sessions belonging to other users cannot be revoked; the response is the same 400 as \&quot;session not found\&quot; so existence isn&#39;t leaked. 
+    # Hard-deletes the session. The user loses the ability to send to that phone via the sandbox until they re-activate it. Existing conversations and messages already exchanged with that phone are untouched. Revocation only blocks FUTURE sends.  Sessions belonging to other users cannot be revoked; the response is the same 400 as \&quot;session not found\&quot; so existence isn&#39;t leaked. 
     # @param session_id [String] The session id returned by POST /v1/whatsapp/sandbox/sessions.
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers

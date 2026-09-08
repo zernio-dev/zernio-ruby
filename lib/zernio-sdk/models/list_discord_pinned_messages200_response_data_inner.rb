@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Raw Discord Message object — see DiscordPlatformData for embed/attachment shapes.
+  # Raw Discord Message object. See DiscordPlatformData for embed/attachment shapes.
   class ListDiscordPinnedMessages200ResponseDataInner < ApiModelBase
     attr_accessor :id
 

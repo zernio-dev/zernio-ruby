@@ -14,18 +14,18 @@ require 'date'
 require 'time'
 
 module Zernio
-  # End-user / current-carrier account info that authorizes the port. The losing carrier matches every field against its records and rejects the whole port on a mismatch — enter values exactly as they appear on the carrier bill. 
+  # End-user / current-carrier account info that authorizes the port. The losing carrier matches every field against its records and rejects the whole port on a mismatch, so enter values exactly as they appear on the carrier bill. 
   class CreatePhoneNumberPortInRequestEndUser < ApiModelBase
     # Account holder / business name, as on the carrier account.
     attr_accessor :entity_name
 
-    # Full name (first + last) of the person authorizing the port — must match the LOA signature.
+    # Full name (first + last) of the person authorizing the port, which must match the LOA signature.
     attr_accessor :auth_person_name
 
     # Phone number on the losing carrier's bill. Defaults to the ported number itself on single-number orders. Validated as a real phone number when present.
     attr_accessor :billing_phone_number
 
-    # Account number with the losing carrier — required (carriers reject ports without it; on prepaid mobile plans it is often the phone number itself).
+    # Account number with the losing carrier. Required (carriers reject ports without it; on prepaid mobile plans it is often the phone number itself).
     attr_accessor :account_number
 
     # Transfer PIN. Required for US/CA mobile numbers (wireless carriers reject PIN-less ports). Forwarded to the carrier, never stored. International porting codes (e.g. the UK PAC) go through `requirements` instead.

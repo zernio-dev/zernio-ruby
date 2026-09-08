@@ -21,7 +21,7 @@ module Zernio
     # DM channel snowflake (Discord auto-creates one per recipient pair)
     attr_accessor :channel_id
 
-    # Direct link to the message — uses Discord's @me path for DMs
+    # Direct link to the message, using Discord's @me path for DMs
     attr_accessor :url
 
     attr_accessor :timestamp

@@ -17,7 +17,7 @@ module Zernio
   class AdKeyword < ApiModelBase
     attr_accessor :id
 
-    # Social account ID owning the sync
+    # Account ID owning the sync
     attr_accessor :account_id
 
     attr_accessor :profile_id

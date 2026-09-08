@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Get location details
-    # Returns detailed GBP location info (hours, description, phone, website, categories, services). Use readMask to request specific fields.
+    # Returns detailed Google Business Profile location info (hours, description, phone, website, categories, services). Use readMask to request specific fields.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
     # @param [Hash] opts the optional parameters
     # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
@@ -32,7 +32,7 @@ module Zernio
     end
 
     # Get location details
-    # Returns detailed GBP location info (hours, description, phone, website, categories, services). Use readMask to request specific fields.
+    # Returns detailed Google Business Profile location info (hours, description, phone, website, categories, services). Use readMask to request specific fields.
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
     # @param [Hash] opts the optional parameters
     # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
@@ -89,7 +89,7 @@ module Zernio
     end
 
     # Update location details
-    # Updates GBP location details. The updateMask field is required and specifies which fields to update. This endpoint proxies Google's Business Information API locations.patch, so any valid updateMask field is supported. Common fields: regularHours, specialHours, profile.description, websiteUri, phoneNumbers, categories, serviceItems. 
+    # Updates Google Business Profile location details. The updateMask field is required and specifies which fields to update. This endpoint proxies Google's Business Information API locations.patch, so any valid updateMask field is supported. Common fields: regularHours, specialHours, profile.description, websiteUri, phoneNumbers, categories, serviceItems. 
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
     # @param update_google_business_location_details_request [UpdateGoogleBusinessLocationDetailsRequest] 
     # @param [Hash] opts the optional parameters
@@ -101,7 +101,7 @@ module Zernio
     end
 
     # Update location details
-    # Updates GBP location details. The updateMask field is required and specifies which fields to update. This endpoint proxies Google&#39;s Business Information API locations.patch, so any valid updateMask field is supported. Common fields: regularHours, specialHours, profile.description, websiteUri, phoneNumbers, categories, serviceItems. 
+    # Updates Google Business Profile location details. The updateMask field is required and specifies which fields to update. This endpoint proxies Google&#39;s Business Information API locations.patch, so any valid updateMask field is supported. Common fields: regularHours, specialHours, profile.description, websiteUri, phoneNumbers, categories, serviceItems. 
     # @param account_id [String] The Zernio account ID (from /v1/accounts)
     # @param update_google_business_location_details_request [UpdateGoogleBusinessLocationDetailsRequest] 
     # @param [Hash] opts the optional parameters

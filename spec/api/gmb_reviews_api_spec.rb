@@ -47,7 +47,7 @@ describe 'GMBReviewsApi' do
 
   # unit tests for delete_google_business_review_reply
   # Delete a review reply
-  # Removes the business owner reply from a Google Business review. The review itself remains.
+  # Removes the business owner reply from a Google Business Profile review. The review itself remains.
   # @param account_id The Zernio account ID (from /v1/accounts)
   # @param review_id The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
   # @param [Hash] opts the optional parameters
@@ -60,7 +60,7 @@ describe 'GMBReviewsApi' do
 
   # unit tests for get_google_business_review
   # Get a review
-  # Returns one Google Business review, in the same shape as the entries of GET /v1/accounts/{accountId}/gmb-reviews. The review is read from the account&#39;s selected location unless locationId overrides it, and Google returns 404 for a review id that belongs to another location. Read the review before replying if a human may have answered it already: replies are overwritten in place and Google keeps no history. 
+  # Returns one Google Business Profile review, in the same shape as the entries of GET /v1/accounts/{accountId}/gmb-reviews. The review is read from the account&#39;s selected location unless locationId overrides it, and Google returns 404 for a review id that belongs to another location. Read the review before replying if a human may have answered it already: replies are overwritten in place and Google keeps no history. 
   # @param account_id The Zernio account ID (from /v1/accounts)
   # @param review_id The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
   # @param [Hash] opts the optional parameters
@@ -74,7 +74,7 @@ describe 'GMBReviewsApi' do
 
   # unit tests for get_google_business_reviews
   # Get reviews
-  # Returns reviews for a GBP account including ratings, comments, and owner replies. Use nextPageToken for pagination.
+  # Returns reviews for a Google Business Profile account including ratings, comments, and owner replies. Use nextPageToken for pagination.
   # @param account_id The Zernio account ID (from /v1/accounts)
   # @param [Hash] opts the optional parameters
   # @option opts [String] :location_id Override which location to query. If omitted, uses the account&#39;s selected location. Use GET /gmb-locations to list valid IDs.
@@ -89,7 +89,7 @@ describe 'GMBReviewsApi' do
 
   # unit tests for reply_to_google_business_review
   # Reply to a review
-  # Posts (or updates) the business owner reply to a Google Business review. The reply is associated with the account&#39;s currently selected location (set via /v1/accounts/{accountId}/gmb-locations). Calling this endpoint a second time on the same review overwrites the previous reply (PUT semantics on Google&#39;s side). Google keeps no history, so an automated retry silently replaces a reply someone edited by hand in the Google Business Profile UI. Read the review before retrying if a human may have answered it. 
+  # Posts (or updates) the business owner reply to a Google Business Profile review. The reply is associated with the account&#39;s currently selected location (set via /v1/accounts/{accountId}/gmb-locations). Calling this endpoint a second time on the same review overwrites the previous reply (PUT semantics on Google&#39;s side). Google keeps no history, so an automated retry silently replaces a reply someone edited by hand in the Google Business Profile UI. Read the review before retrying if a human may have answered it. 
   # @param account_id The Zernio account ID (from /v1/accounts)
   # @param review_id The review ID portion (e.g. \&quot;AIe9_BGx1234567890\&quot;), not the full resource name
   # @param reply_to_google_business_review_request 

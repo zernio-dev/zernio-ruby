@@ -17,7 +17,7 @@ module Zernio
   class SyncExternalPosts200Response < ApiModelBase
     attr_accessor :synced
 
-    # Present only when a locator (`url`/`postId`) was provided — whether the post was found.
+    # Present only when a locator (`url`/`postId`) was provided: whether the post was found.
     attr_accessor :found
 
     attr_accessor :post

@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Discord guild scheduled event. Returned by /v1/discord/guilds/{guildId}/events endpoints. Fields below are the subset Zernio consumes — Discord may return more (e.g. creator, image hash) which we pass through verbatim. 
+  # Discord guild scheduled event. Returned by /v1/discord/guilds/{guildId}/events endpoints. Fields below are the subset Zernio consumes. Discord may return more (e.g. creator, image hash) which we pass through verbatim. 
   class DiscordScheduledEvent < ApiModelBase
     # Event snowflake ID
     attr_accessor :id
@@ -35,7 +35,7 @@ module Zernio
     # Required for external events; optional for voice/stage.
     attr_accessor :scheduled_end_time
 
-    # Always 2 (GUILD_ONLY) — Discord deprecated PUBLIC events.
+    # Always 2 (GUILD_ONLY). Discord deprecated PUBLIC events.
     attr_accessor :privacy_level
 
     # 1=SCHEDULED, 2=ACTIVE, 3=COMPLETED, 4=CANCELED

@@ -27,7 +27,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppTemplatesApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 name = 'name_example' # String | Exact library template name
 opts = {
   language: 'language_example' # String | Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field.
@@ -64,7 +64,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **name** | **String** | Exact library template name |  |
 | **language** | **String** | Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field. | [optional] |
 

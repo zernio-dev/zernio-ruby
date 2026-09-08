@@ -20,7 +20,7 @@ module Zernio
       @api_client = api_client
     end
     # Check a verification code
-    # Verify the code the user typed. Wrong, expired, and exhausted codes answer 200 with `valid: false` and the settled `status` — only an unknown id is a 404. A correct code consumes the verification (single-use, `status: approved`) and fires the `verification.approved` webhook; the 5th wrong attempt settles it as `max_attempts_reached` and fires `verification.failed`. 
+    # Verify the code the user typed. Wrong, expired, and exhausted codes answer 200 with `valid: false` and the settled `status`. Only an unknown id is a 404. A correct code consumes the verification (single-use, `status: approved`) and fires the `verification.approved` webhook; the 5th wrong attempt settles it as `max_attempts_reached` and fires `verification.failed`. 
     # @param verification_id [String] 
     # @param check_verification_request [CheckVerificationRequest] 
     # @param [Hash] opts the optional parameters
@@ -31,7 +31,7 @@ module Zernio
     end
 
     # Check a verification code
-    # Verify the code the user typed. Wrong, expired, and exhausted codes answer 200 with &#x60;valid: false&#x60; and the settled &#x60;status&#x60; — only an unknown id is a 404. A correct code consumes the verification (single-use, &#x60;status: approved&#x60;) and fires the &#x60;verification.approved&#x60; webhook; the 5th wrong attempt settles it as &#x60;max_attempts_reached&#x60; and fires &#x60;verification.failed&#x60;. 
+    # Verify the code the user typed. Wrong, expired, and exhausted codes answer 200 with &#x60;valid: false&#x60; and the settled &#x60;status&#x60;. Only an unknown id is a 404. A correct code consumes the verification (single-use, &#x60;status: approved&#x60;) and fires the &#x60;verification.approved&#x60; webhook; the 5th wrong attempt settles it as &#x60;max_attempts_reached&#x60; and fires &#x60;verification.failed&#x60;. 
     # @param verification_id [String] 
     # @param check_verification_request [CheckVerificationRequest] 
     # @param [Hash] opts the optional parameters

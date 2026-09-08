@@ -23,7 +23,7 @@ module Zernio
     # Derived from child ad statuses
     attr_accessor :status
 
-    # Earliest `platformCreatedAt` (platform ad creation time; falls back to `createdAt`, Zernio's sync time, for ads synced before that field existed) across this ad set's ads. Not the ad set's own creation time on the platform — a proxy usable for sorting.
+    # Earliest `platformCreatedAt` (platform ad creation time; falls back to `createdAt`, Zernio's sync time, for ads synced before that field existed) across this ad set's ads. Not the ad set's own creation time on the platform, but a proxy usable for sorting.
     attr_accessor :created_time
 
     attr_accessor :ad_count

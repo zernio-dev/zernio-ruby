@@ -83,7 +83,7 @@ end
 
 List users
 
-Returns all users in the workspace including roles and profile access. Also returns the currentUserId of the caller.
+Returns all users in the team including roles and profile access. Also returns the currentUserId of the caller.
 
 ### Examples
 

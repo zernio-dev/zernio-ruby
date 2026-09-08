@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class EditInboxCommentRequest < ApiModelBase
-    # The social account ID
+    # The account ID
     attr_accessor :account_id
 
     # Only Reddit supports editing a comment

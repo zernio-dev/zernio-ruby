@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class CreateWhatsAppFlowRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Flow display name

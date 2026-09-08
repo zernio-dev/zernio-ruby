@@ -97,7 +97,7 @@ module Zernio
     end
 
     # Delete photo
-    # Deletes a photo or media item from a GBP location.
+    # Deletes a photo or media item from a Google Business Profile location.
     # @param account_id [String] 
     # @param media_id [String] The media item ID to delete
     # @param [Hash] opts the optional parameters
@@ -109,7 +109,7 @@ module Zernio
     end
 
     # Delete photo
-    # Deletes a photo or media item from a GBP location.
+    # Deletes a photo or media item from a Google Business Profile location.
     # @param account_id [String] 
     # @param media_id [String] The media item ID to delete
     # @param [Hash] opts the optional parameters

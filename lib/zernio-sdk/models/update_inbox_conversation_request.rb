@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UpdateInboxConversationRequest < ApiModelBase
-    # Social account ID
+    # Account ID
     attr_accessor :account_id
 
     attr_accessor :status

@@ -22,7 +22,7 @@ module Zernio
     # Reuse a video already uploaded to this ad account (list them with GET /v1/ads/videos) instead of re-uploading. Wins over `url`. Provide either `url` or `id`.
     attr_accessor :id
 
-    # OPTIONAL: when omitted, the poster is auto-generated from Meta's own preferred video thumbnail. When Meta produces no candidate the request fails with a 502 platform_error (reason: video_thumbnail_unavailable) — retry, or supply this field to control the poster frame exactly. 
+    # OPTIONAL: when omitted, the poster is auto-generated from Meta's own preferred video thumbnail. When Meta produces no candidate the request fails with a 502 platform_error (reason: video_thumbnail_unavailable). Retry, or supply this field to control the poster frame exactly. 
     attr_accessor :thumbnail_url
 
     # Attribute mapping from ruby-style variable name to JSON key.

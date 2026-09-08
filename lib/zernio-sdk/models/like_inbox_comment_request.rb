@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class LikeInboxCommentRequest < ApiModelBase
-    # The social account ID
+    # The account ID
     attr_accessor :account_id
 
     # (LinkedIn only) Reaction to create. Defaults to LIKE; ignored on other platforms.

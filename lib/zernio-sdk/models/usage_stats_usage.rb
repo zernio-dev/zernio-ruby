@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Per-period usage counts. Fields present depend on `billingSystem`: Stripe returns `uploads` / `profiles` / `lastReset`; Metronome returns `connectedAccounts` / `xApiCalls` / `xApiCallsByOperation`. 
+  # Per-period usage counts. Fields present depend on `billingSystem`: Stripe returns `uploads` / `profiles` / `lastReset`; usage-based billing returns `connectedAccounts` / `xApiCalls` / `xApiCallsByOperation`. 
   class UsageStatsUsage < ApiModelBase
     # Stripe users only. Uploads consumed in the current period.
     attr_accessor :uploads
@@ -25,12 +25,12 @@ module Zernio
     # Stripe users only.
     attr_accessor :last_reset
 
-    # Metronome users only. Accounts currently connected across the team.
+    # Usage-based billing only. Accounts currently connected across the team.
     attr_accessor :connected_accounts
 
     attr_accessor :x_api_calls
 
-    # Metronome users only. Per-operation X API call counts keyed by operation (e.g. `posts_read`, `content_create`, `content_create_with_url`). Resolve each key to price and metadata via `GET /v1/billing/x-pricing`. This is the canonical source — covers every price tier including the $0.200 URL tier that `xApiCalls` excludes. 
+    # Usage-based billing only. Per-operation X API call counts keyed by operation (e.g. `posts_read`, `content_create`, `content_create_with_url`). Resolve each key to price and metadata via `GET /v1/billing/x-pricing`. This is the canonical source: it covers every price tier including the $0.200 URL tier that `xApiCalls` excludes. 
     attr_accessor :x_api_calls_by_operation
 
     # Attribute mapping from ruby-style variable name to JSON key.

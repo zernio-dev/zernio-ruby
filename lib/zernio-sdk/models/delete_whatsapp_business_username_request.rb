@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class DeleteWhatsappBusinessUsernameRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

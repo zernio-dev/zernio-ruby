@@ -35,7 +35,7 @@ module Zernio
     # Failure detail; present on `node_failed` and `execution_exited`
     attr_accessor :error_message
 
-    # Per-node-type payload. Shape varies — see WorkflowNode `type`. Examples:   `send_message` → `{ messageType, text, recipient }`,   `webhook` → `{ url, method, statusCode, responseTimeMs, responsePreview }`,   `ai` → `{ model, provider, inputTokens, outputTokens, responsePreview }`,   `condition` → `{ matchedHandle, rulesEvaluated }`,   `a_b_split` → `{ percentage, chosen }`. 
+    # Per-node-type payload. Shape varies; see WorkflowNode `type`. Examples:   `send_message` → `{ messageType, text, recipient }`,   `webhook` → `{ url, method, statusCode, responseTimeMs, responsePreview }`,   `ai` → `{ model, provider, inputTokens, outputTokens, responsePreview }`,   `condition` → `{ matchedHandle, rulesEvaluated }`,   `a_b_split` → `{ percentage, chosen }`. 
     attr_accessor :meta
 
     # Event timestamp (UTC)

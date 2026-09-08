@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class AddMessageReactionRequest < ApiModelBase
-    # Social account ID
+    # Account ID
     attr_accessor :account_id
 
     # Emoji character (e.g. \"👍\", \"❤️\")

@@ -66,7 +66,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 add_whats_app_group_participants_request = Zernio::AddWhatsAppGroupParticipantsRequest.new({phone_numbers: ['phone_numbers_example']}) # AddWhatsAppGroupParticipantsRequest | 
 
 begin
@@ -101,7 +101,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **add_whats_app_group_participants_request** | [**AddWhatsAppGroupParticipantsRequest**](AddWhatsAppGroupParticipantsRequest.md) |  |  |
 
 ### Return type
@@ -139,7 +139,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 approve_whats_app_group_join_requests_request = Zernio::ApproveWhatsAppGroupJoinRequestsRequest.new({phone_numbers: ['phone_numbers_example']}) # ApproveWhatsAppGroupJoinRequestsRequest | 
 
 begin
@@ -174,7 +174,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **approve_whats_app_group_join_requests_request** | [**ApproveWhatsAppGroupJoinRequestsRequest**](ApproveWhatsAppGroupJoinRequestsRequest.md) |  |  |
 
 ### Return type
@@ -266,7 +266,7 @@ end
 
 Provision CTWA dataset
 
-Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as `metadata.metaCapiDatasetId`.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with `created: false`.  Requires the connected WhatsApp account's token to carry the `whatsapp_business_manage_events` permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
+Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as `metadata.metaCapiDatasetId`.  The call is GET-first idempotent: a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with `created: false`.  Requires the connected WhatsApp account's token to carry the `whatsapp_business_manage_events` permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
 
 ### Examples
 
@@ -419,7 +419,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Create invite link
@@ -453,7 +453,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -559,7 +559,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Delete group
@@ -593,7 +593,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -630,7 +630,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 template_name = 'template_name_example' # String | Template name (the family).
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   language: 'language_example' # String | Delete only this language variant (e.g. es). Omit to delete the whole family.
 }
@@ -667,7 +667,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **template_name** | **String** | Template name (the family). |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **language** | **String** | Delete only this language variant (e.g. es). Omit to delete the whole family. | [optional] |
 
 ### Return type
@@ -705,7 +705,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 template_id = 'template_id_example' # String | Meta template id (numeric).
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Delete template by id
@@ -739,7 +739,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **template_id** | **String** | Meta template id (numeric). |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -915,7 +915,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   limit: 56, # Integer | Page size.
   after: 'after_example' # String | Cursor from a previous response's `nextCursor`.
@@ -952,7 +952,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **limit** | **Integer** | Page size. | [optional] |
 | **after** | **String** | Cursor from a previous response&#39;s &#x60;nextCursor&#x60;. | [optional] |
 
@@ -990,7 +990,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get business profile
@@ -1023,7 +1023,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -1045,7 +1045,7 @@ end
 
 Get CTWA conversions dataset
 
-Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored `metadata.metaCapiDatasetId` — never hits Meta, never creates a dataset. Use this to detect whether `POST /v1/whatsapp/conversions` is configured for an account. 
+Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored `metadata.metaCapiDatasetId`, never hits Meta, never creates a dataset. Use this to detect whether `POST /v1/whatsapp/conversions` is configured for an account. 
 
 ### Examples
 
@@ -1059,7 +1059,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get CTWA conversions dataset
@@ -1092,7 +1092,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -1128,7 +1128,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get display name status
@@ -1161,7 +1161,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -1198,7 +1198,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get group info
@@ -1232,7 +1232,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -1340,7 +1340,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 template_name = 'template_name_example' # String | Template name (the family).
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   language: 'language_example' # String | Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages.
 }
@@ -1377,7 +1377,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **template_name** | **String** | Template name (the family). |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **language** | **String** | Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages. | [optional] |
 
 ### Return type
@@ -1415,7 +1415,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 template_id = 'template_id_example' # String | Meta template id (numeric).
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get template by id
@@ -1449,7 +1449,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **template_id** | **String** | Meta template id (numeric). |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -1485,7 +1485,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   name: 'name_example', # String | Exact template name; returns every language variant of that family.
   language: 'language_example', # String | Exact language code (e.g. en_US).
@@ -1523,7 +1523,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **name** | **String** | Exact template name; returns every language variant of that family. | [optional] |
 | **language** | **String** | Exact language code (e.g. en_US). | [optional] |
 | **status** | **String** |  | [optional] |
@@ -1562,7 +1562,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get business username
@@ -1595,7 +1595,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -1631,7 +1631,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # Get username suggestions
@@ -1664,7 +1664,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -1700,7 +1700,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   limit: 56 # Integer | Maximum events to return
 }
@@ -1736,7 +1736,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **limit** | **Integer** | Maximum events to return | [optional][default to 50] |
 
 ### Return type
@@ -1773,7 +1773,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   limit: 56 # Integer | Max events to return (1-200, default 50).
 }
@@ -1809,7 +1809,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **limit** | **Integer** | Max events to return (1-200, default 50). | [optional][default to 50] |
 
 ### Return type
@@ -1846,7 +1846,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 opts = {
   limit: 56, # Integer | Max groups to return
   after: 'after_example' # String | Pagination cursor
@@ -1883,7 +1883,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **limit** | **Integer** | Max groups to return | [optional][default to 25] |
 | **after** | **String** | Pagination cursor | [optional] |
 
@@ -1922,7 +1922,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 
 begin
   # List join requests
@@ -1956,7 +1956,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 
 ### Return type
 
@@ -2066,7 +2066,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 reject_whats_app_group_join_requests_request = Zernio::RejectWhatsAppGroupJoinRequestsRequest.new({phone_numbers: ['phone_numbers_example']}) # RejectWhatsAppGroupJoinRequestsRequest | 
 
 begin
@@ -2101,7 +2101,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **reject_whats_app_group_join_requests_request** | [**RejectWhatsAppGroupJoinRequestsRequest**](RejectWhatsAppGroupJoinRequestsRequest.md) |  |  |
 
 ### Return type
@@ -2139,7 +2139,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 remove_whats_app_group_participants_request = Zernio::RemoveWhatsAppGroupParticipantsRequest.new({phone_numbers: ['phone_numbers_example']}) # RemoveWhatsAppGroupParticipantsRequest | 
 
 begin
@@ -2174,7 +2174,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **remove_whats_app_group_participants_request** | [**RemoveWhatsAppGroupParticipantsRequest**](RemoveWhatsAppGroupParticipantsRequest.md) |  |  |
 
 ### Return type
@@ -2557,7 +2557,7 @@ end
 
 api_instance = Zernio::WhatsAppApi.new
 group_id = 'group_id_example' # String | Group ID
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 update_whats_app_group_chat_request = Zernio::UpdateWhatsAppGroupChatRequest.new # UpdateWhatsAppGroupChatRequest | 
 
 begin
@@ -2592,7 +2592,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **group_id** | **String** | Group ID |  |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **update_whats_app_group_chat_request** | [**UpdateWhatsAppGroupChatRequest**](UpdateWhatsAppGroupChatRequest.md) |  |  |
 
 ### Return type
@@ -2757,7 +2757,7 @@ end
 
 Upload profile picture
 
-Upload a new profile picture for the WhatsApp Business Profile. Uses Meta's resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle.  Provide the image either as a binary upload (`multipart/form-data` with `file`) or as a download URL (`application/json` with `url`) — with a URL we fetch the image server-side and upload the bytes for you. Meta's profile-photo API is bytes-only, so there is no direct URL passthrough. JPEG/PNG, max 5MB either way. 
+Upload a new profile picture for the WhatsApp Business Profile. Uses Meta's resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle.  Provide the image either as a binary upload (`multipart/form-data` with `file`) or as a download URL (`application/json` with `url`). With a URL we fetch the image server-side and upload the bytes for you. Meta's profile-photo API is bytes-only, so there is no direct URL passthrough. JPEG/PNG, max 5MB either way. 
 
 ### Examples
 
@@ -2771,7 +2771,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::WhatsAppApi.new
-account_id = 'account_id_example' # String | WhatsApp social account ID
+account_id = 'account_id_example' # String | WhatsApp account ID
 file = File.new('/path/to/some/file') # File | Image file (JPEG or PNG, max 5MB, recommended 640x640)
 
 begin
@@ -2805,7 +2805,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | WhatsApp social account ID |  |
+| **account_id** | **String** | WhatsApp account ID |  |
 | **file** | **File** | Image file (JPEG or PNG, max 5MB, recommended 640x640) |  |
 
 ### Return type

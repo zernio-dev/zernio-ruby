@@ -380,7 +380,7 @@ module Zernio
     end
 
     # Google Ads search terms report
-    # The actual search queries that triggered your ads, with matched-keyword status and spend metrics — the raw material for wasted-spend analysis and negative-keyword lists. Reads Google's `search_term_view`, cached for the quota window; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
+    # The actual search queries that triggered your ads, with matched-keyword status and spend metrics, the raw material for wasted-spend analysis and negative-keyword lists. Reads Google's `search_term_view`, cached for the quota window; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
     # @param account_id [String] Google ads SocialAccount id.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
@@ -396,7 +396,7 @@ module Zernio
     end
 
     # Google Ads search terms report
-    # The actual search queries that triggered your ads, with matched-keyword status and spend metrics — the raw material for wasted-spend analysis and negative-keyword lists. Reads Google&#39;s &#x60;search_term_view&#x60;, cached for the quota window; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
+    # The actual search queries that triggered your ads, with matched-keyword status and spend metrics, the raw material for wasted-spend analysis and negative-keyword lists. Reads Google&#39;s &#x60;search_term_view&#x60;, cached for the quota window; defaults to the last 30 days. Rows are ordered by cost, descending. Draws on the shared Google Ads operations budget. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
     # @param account_id [String] Google ads SocialAccount id.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
@@ -705,7 +705,7 @@ module Zernio
     # Live, flexible insights query. The account's platform picks the contract:  **Meta (facebook/instagram)**: forwards caller-chosen `fields`, `breakdowns` and `filtering` to any Meta insights node and returns Meta's rows verbatim. `objectId` (required) selects the node; `level` sets row granularity. Semantic validation is Meta's: an unknown field or invalid breakdown combination returns a 400 carrying Meta's message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).  **Google Ads (googleads)**: raw GAQL passthrough. Send any read-only GAQL SELECT via `query` (campaign/keyword/search-term/geo/demographic/asset/shopping resources, `change_event`, any `segments.*`) and rows come back verbatim (camelCase, counters as strings). Results are paged at a fixed 10,000 rows; follow `paging.nextPageToken` with `pageToken`. `customerId` is only needed when the connection has several Google Ads accounts. Semantic validation is Google's: an invalid query returns a 400 carrying Google's message (note: selecting `segments.date` requires a finite date filter). 
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id.
+    # @option opts [String] :object_id Meta only (required there): insights node (act_&lt;n&gt;, campaign id, ad set id or ad id).
     # @option opts [String] :query Google only (required there): the GAQL SELECT statement to run.
     # @option opts [String] :customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts.
     # @option opts [String] :page_token Google only: cursor from paging.nextPageToken of the previous page.
@@ -733,7 +733,7 @@ module Zernio
     # Live, flexible insights query. The account&#39;s platform picks the contract:  **Meta (facebook/instagram)**: forwards caller-chosen &#x60;fields&#x60;, &#x60;breakdowns&#x60; and &#x60;filtering&#x60; to any Meta insights node and returns Meta&#39;s rows verbatim. &#x60;objectId&#x60; (required) selects the node; &#x60;level&#x60; sets row granularity. Semantic validation is Meta&#39;s: an unknown field or invalid breakdown combination returns a 400 carrying Meta&#39;s message. For long ranges or agency-scale accounts prefer the async variant (POST /v1/ads/insights/reports).  **Google Ads (googleads)**: raw GAQL passthrough. Send any read-only GAQL SELECT via &#x60;query&#x60; (campaign/keyword/search-term/geo/demographic/asset/shopping resources, &#x60;change_event&#x60;, any &#x60;segments.*&#x60;) and rows come back verbatim (camelCase, counters as strings). Results are paged at a fixed 10,000 rows; follow &#x60;paging.nextPageToken&#x60; with &#x60;pageToken&#x60;. &#x60;customerId&#x60; is only needed when the connection has several Google Ads accounts. Semantic validation is Google&#39;s: an invalid query returns a 400 carrying Google&#39;s message (note: selecting &#x60;segments.date&#x60; requires a finite date filter). 
     # @param account_id [String] Zernio SocialAccount id (posting or ads variant); its platform selects the Meta or Google contract.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :object_id Meta only (required there): insights node — act_&lt;n&gt;, campaign id, ad set id or ad id.
+    # @option opts [String] :object_id Meta only (required there): insights node (act_&lt;n&gt;, campaign id, ad set id or ad id).
     # @option opts [String] :query Google only (required there): the GAQL SELECT statement to run.
     # @option opts [String] :customer_id Google only: numeric customer id (no dashes) when the connection has several Google Ads accounts.
     # @option opts [String] :page_token Google only: cursor from paging.nextPageToken of the previous page.

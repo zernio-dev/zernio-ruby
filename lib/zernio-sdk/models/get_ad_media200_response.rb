@@ -17,7 +17,7 @@ module Zernio
   class GetAdMedia200Response < ApiModelBase
     attr_accessor :ad_id
 
-    # 'facebook' or 'instagram' — only Meta is supported for now.
+    # 'facebook' or 'instagram'. Only Meta is supported for now.
     attr_accessor :platform
 
     attr_accessor :media

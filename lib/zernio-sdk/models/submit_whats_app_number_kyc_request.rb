@@ -31,7 +31,7 @@ module Zernio
     # Which reusable verification to use (GET reusable.options[].id). The unambiguous selection key. Omitted = the approved default. No match = 409.
     attr_accessor :reuse_option_id
 
-    # Legacy fallback for `reuseOptionId`: the source phone number (GET reusable.options[].fromPhoneNumber). Ambiguous when a number labels two verifications — prefer `reuseOptionId`. Omitted = the approved default. No match = 409.
+    # Legacy fallback for `reuseOptionId`: the source phone number (GET reusable.options[].fromPhoneNumber). Ambiguous when a number labels two verifications, so prefer `reuseOptionId`. Omitted = the approved default. No match = 409.
     attr_accessor :reuse_from
 
     # Area code (NDC) the number must be in. Hard constraint: an empty area pool fails with 409 code AREA_CODE_UNAVAILABLE instead of ordering from another area. Omit for any area. Options come from GET /v1/phone-numbers/availability (areaOptions); the purchase 202 kycUrl echoes the areaCode picked at purchase time so it can be passed here.

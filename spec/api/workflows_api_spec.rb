@@ -70,7 +70,7 @@ describe 'WorkflowsApi' do
 
   # unit tests for duplicate_workflow
   # Duplicate a workflow
-  # Create an independent copy of a workflow&#39;s graph, name, description, and account binding. The copy is created in &#x60;draft&#x60; status with fresh execution counters and a new id — execution history is NOT copied. Useful for branching off a known-good workflow before making experimental edits. 
+  # Create an independent copy of a workflow&#39;s graph, name, description, and account binding. The copy is created in &#x60;draft&#x60; status with fresh execution counters and a new id. Execution history is NOT copied. Useful for branching off a known-good workflow before making experimental edits. 
   # @param workflow_id 
   # @param [Hash] opts the optional parameters
   # @return [DuplicateWorkflow201Response]
@@ -135,7 +135,7 @@ describe 'WorkflowsApi' do
 
   # unit tests for list_workflow_versions
   # List a workflow&#39;s version history
-  # Returns the snapshot history. A new version is recorded automatically before every PATCH to &#x60;nodes&#x60; / &#x60;edges&#x60; / &#x60;entryNodeId&#x60;, and explicitly when a previous version is restored. Lightweight list — call &#x60;getWorkflowVersion&#x60; for the full snapshot graph. 
+  # Returns the snapshot history. A new version is recorded automatically before every PATCH to &#x60;nodes&#x60; / &#x60;edges&#x60; / &#x60;entryNodeId&#x60;, and explicitly when a previous version is restored. Lightweight list. Call &#x60;getWorkflowVersion&#x60; for the full snapshot graph. 
   # @param workflow_id 
   # @param [Hash] opts the optional parameters
   # @return [ListWorkflowVersions200Response]
@@ -187,7 +187,7 @@ describe 'WorkflowsApi' do
 
   # unit tests for trigger_workflow
   # Manually start a workflow run
-  # Kick off a run without waiting for an inbound message (useful for testing). Target an existing conversation by &#x60;conversationId&#x60;, or — WhatsApp only — a phone number via &#x60;to&#x60; (a conversation is found or created). &#x60;text&#x60; seeds the run&#39;s &#x60;lastMessage&#x60; variable. The graph must be runnable. 
+  # Kick off a run without waiting for an inbound message (useful for testing). Target an existing conversation by &#x60;conversationId&#x60;, or (WhatsApp only) a phone number via &#x60;to&#x60; (a conversation is found or created). &#x60;text&#x60; seeds the run&#39;s &#x60;lastMessage&#x60; variable. The graph must be runnable. 
   # @param workflow_id 
   # @param trigger_workflow_request 
   # @param [Hash] opts the optional parameters

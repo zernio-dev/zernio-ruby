@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Required for 10DLC. What you'll send and how recipients opt in/out. The opt-in/opt-out/help auto-responses (`optinMessage`, `optoutMessage`, `helpMessage`) are optional: when omitted, a compliant, brand-named template with the carrier-required disclosures is generated for you. If you do send them, they must name the registered brand and carry the disclosures — submissions that don't are rewritten to the compliant template before the campaign is filed. 
+  # Required for 10DLC. What you'll send and how recipients opt in/out. The opt-in/opt-out/help auto-responses (`optinMessage`, `optoutMessage`, `helpMessage`) are optional: when omitted, a compliant, brand-named template with the carrier-required disclosures is generated for you. If you do send them, they must name the registered brand and carry the disclosures. Submissions that don't are rewritten to the compliant template before the campaign is filed. 
   class StartSmsRegistrationRequestCampaign < ApiModelBase
     attr_accessor :usecase
 
@@ -23,7 +23,7 @@ module Zernio
 
     attr_accessor :description
 
-    # How a recipient ends up receiving your messages (the opt-in flow). Include a link to the page or form where they opt in — carrier reviewers reject campaigns whose consent they can't verify.
+    # How a recipient ends up receiving your messages (the opt-in flow). Include a link to the page or form where they opt in, because carrier reviewers reject campaigns whose consent they can't verify.
     attr_accessor :message_flow
 
     attr_accessor :sample1

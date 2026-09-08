@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Social account ID |  |
+| **account_id** | **String** | Account ID |  |
 | **emoji** | **String** | Emoji character (e.g. \&quot;👍\&quot;, \&quot;❤️\&quot;) |  |
 
 ## Example

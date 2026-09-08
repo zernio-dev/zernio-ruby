@@ -22,7 +22,7 @@ module Zernio
     # Add participants
     # Add participants to a WhatsApp group. Maximum 8 participants per request.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param add_whats_app_group_participants_request [AddWhatsAppGroupParticipantsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UnpublishPost200Response]
@@ -34,7 +34,7 @@ module Zernio
     # Add participants
     # Add participants to a WhatsApp group. Maximum 8 participants per request.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param add_whats_app_group_participants_request [AddWhatsAppGroupParticipantsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
@@ -103,7 +103,7 @@ module Zernio
     # Approve join requests
     # Approve pending join requests for a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param approve_whats_app_group_join_requests_request [ApproveWhatsAppGroupJoinRequestsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UnpublishPost200Response]
@@ -115,7 +115,7 @@ module Zernio
     # Approve join requests
     # Approve pending join requests for a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param approve_whats_app_group_join_requests_request [ApproveWhatsAppGroupJoinRequestsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
@@ -250,7 +250,7 @@ module Zernio
     end
 
     # Provision CTWA dataset
-    # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as `metadata.metaCapiDatasetId`.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with `created: false`.  Requires the connected WhatsApp account's token to carry the `whatsapp_business_manage_events` permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
+    # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as `metadata.metaCapiDatasetId`.  The call is GET-first idempotent: a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with `created: false`.  Requires the connected WhatsApp account's token to carry the `whatsapp_business_manage_events` permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
     # @param delete_whatsapp_business_username_request [DeleteWhatsappBusinessUsernameRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CreateWhatsAppDataset200Response]
@@ -260,7 +260,7 @@ module Zernio
     end
 
     # Provision CTWA dataset
-    # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as &#x60;metadata.metaCapiDatasetId&#x60;.  The call is GET-first idempotent — a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with &#x60;created: false&#x60;.  Requires the connected WhatsApp account&#39;s token to carry the &#x60;whatsapp_business_manage_events&#x60; permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
+    # Creates (or fetches, if one already exists) the Meta dataset that Click-to-WhatsApp ad events are reported against via the Conversions API, and persists its ID on the account as &#x60;metadata.metaCapiDatasetId&#x60;.  The call is GET-first idempotent: a WABA can only own one CTWA dataset, so a second call after a successful provision is a safe no-op that returns the same ID with &#x60;created: false&#x60;.  Requires the connected WhatsApp account&#39;s token to carry the &#x60;whatsapp_business_manage_events&#x60; permission. If the permission is missing the endpoint returns 422 with a message asking the user to reconnect the account. 
     # @param delete_whatsapp_business_username_request [DeleteWhatsappBusinessUsernameRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateWhatsAppDataset200Response, Integer, Hash)>] CreateWhatsAppDataset200Response data, response status code and response headers
@@ -388,7 +388,7 @@ module Zernio
     # Create invite link
     # Create a new invite link for a WhatsApp group. The previous link is revoked.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [CreateWhatsAppGroupInviteLink200Response]
     def create_whats_app_group_invite_link(group_id, account_id, opts = {})
@@ -399,7 +399,7 @@ module Zernio
     # Create invite link
     # Create a new invite link for a WhatsApp group. The previous link is revoked.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(CreateWhatsAppGroupInviteLink200Response, Integer, Hash)>] CreateWhatsAppGroupInviteLink200Response data, response status code and response headers
     def create_whats_app_group_invite_link_with_http_info(group_id, account_id, opts = {})
@@ -526,7 +526,7 @@ module Zernio
     # Delete group
     # Delete a WhatsApp group and remove all participants.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [UnpublishPost200Response]
     def delete_whats_app_group_chat(group_id, account_id, opts = {})
@@ -537,7 +537,7 @@ module Zernio
     # Delete group
     # Delete a WhatsApp group and remove all participants.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
     def delete_whats_app_group_chat_with_http_info(group_id, account_id, opts = {})
@@ -596,7 +596,7 @@ module Zernio
     # Delete template
     # Permanently delete a message template.  **Without `language` this deletes every language variant of the name** (Meta's own contract for deletion by name). Pass `language` to delete one variant only; the response `scope` says which happened. Meta keeps a deleted approved template in `PENDING_DELETION` for a while and the name cannot be reused for 30 days. 
     # @param template_name [String] Template name (the family).
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :language Delete only this language variant (e.g. es). Omit to delete the whole family.
     # @return [DeleteWhatsAppTemplate200Response]
@@ -608,7 +608,7 @@ module Zernio
     # Delete template
     # Permanently delete a message template.  **Without &#x60;language&#x60; this deletes every language variant of the name** (Meta&#39;s own contract for deletion by name). Pass &#x60;language&#x60; to delete one variant only; the response &#x60;scope&#x60; says which happened. Meta keeps a deleted approved template in &#x60;PENDING_DELETION&#x60; for a while and the name cannot be reused for 30 days. 
     # @param template_name [String] Template name (the family).
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :language Delete only this language variant (e.g. es). Omit to delete the whole family.
     # @return [Array<(DeleteWhatsAppTemplate200Response, Integer, Hash)>] DeleteWhatsAppTemplate200Response data, response status code and response headers
@@ -669,7 +669,7 @@ module Zernio
     # Delete template by id
     # Delete one language variant by its Meta id. Other languages of the same name are untouched. The name cannot be reused for 30 days once its last variant is deleted. 
     # @param template_id [String] Meta template id (numeric).
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [DeleteWhatsAppTemplateById200Response]
     def delete_whats_app_template_by_id(template_id, account_id, opts = {})
@@ -680,7 +680,7 @@ module Zernio
     # Delete template by id
     # Delete one language variant by its Meta id. Other languages of the same name are untouched. The name cannot be reused for 30 days once its last variant is deleted. 
     # @param template_id [String] Meta template id (numeric).
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeleteWhatsAppTemplateById200Response, Integer, Hash)>] DeleteWhatsAppTemplateById200Response data, response status code and response headers
     def delete_whats_app_template_by_id_with_http_info(template_id, account_id, opts = {})
@@ -877,7 +877,7 @@ module Zernio
 
     # List blocked users
     # List the WhatsApp users blocked on this number. Cursor-paginated; pass `nextCursor` back as `after` to fetch the next page. The blocklist holds up to 64,000 users. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Page size.
     # @option opts [String] :after Cursor from a previous response&#39;s &#x60;nextCursor&#x60;.
@@ -889,7 +889,7 @@ module Zernio
 
     # List blocked users
     # List the WhatsApp users blocked on this number. Cursor-paginated; pass &#x60;nextCursor&#x60; back as &#x60;after&#x60; to fetch the next page. The blocklist holds up to 64,000 users. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Page size.
     # @option opts [String] :after Cursor from a previous response&#39;s &#x60;nextCursor&#x60;.
@@ -955,7 +955,7 @@ module Zernio
 
     # Get business profile
     # Retrieve the WhatsApp Business profile for the account (about, address, description, email, websites, etc.). 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppBusinessProfile200Response]
     def get_whats_app_business_profile(account_id, opts = {})
@@ -965,7 +965,7 @@ module Zernio
 
     # Get business profile
     # Retrieve the WhatsApp Business profile for the account (about, address, description, email, websites, etc.). 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppBusinessProfile200Response, Integer, Hash)>] GetWhatsAppBusinessProfile200Response data, response status code and response headers
     def get_whats_app_business_profile_with_http_info(account_id, opts = {})
@@ -1018,8 +1018,8 @@ module Zernio
     end
 
     # Get CTWA conversions dataset
-    # Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored `metadata.metaCapiDatasetId` — never hits Meta, never creates a dataset. Use this to detect whether `POST /v1/whatsapp/conversions` is configured for an account. 
-    # @param account_id [String] WhatsApp social account ID
+    # Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored `metadata.metaCapiDatasetId`, never hits Meta, never creates a dataset. Use this to detect whether `POST /v1/whatsapp/conversions` is configured for an account. 
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppDataset200Response]
     def get_whats_app_dataset(account_id, opts = {})
@@ -1028,8 +1028,8 @@ module Zernio
     end
 
     # Get CTWA conversions dataset
-    # Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored &#x60;metadata.metaCapiDatasetId&#x60; — never hits Meta, never creates a dataset. Use this to detect whether &#x60;POST /v1/whatsapp/conversions&#x60; is configured for an account. 
-    # @param account_id [String] WhatsApp social account ID
+    # Returns the Meta Click-to-WhatsApp conversions dataset currently linked to the WhatsApp account, if one has been provisioned. Reads only from the stored &#x60;metadata.metaCapiDatasetId&#x60;, never hits Meta, never creates a dataset. Use this to detect whether &#x60;POST /v1/whatsapp/conversions&#x60; is configured for an account. 
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppDataset200Response, Integer, Hash)>] GetWhatsAppDataset200Response data, response status code and response headers
     def get_whats_app_dataset_with_http_info(account_id, opts = {})
@@ -1083,7 +1083,7 @@ module Zernio
 
     # Get display name status
     # Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppDisplayName200Response]
     def get_whats_app_display_name(account_id, opts = {})
@@ -1093,7 +1093,7 @@ module Zernio
 
     # Get display name status
     # Fetch the current display name and its Meta review status for a WhatsApp Business account. Display name changes require Meta approval and can take 1-3 business days. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppDisplayName200Response, Integer, Hash)>] GetWhatsAppDisplayName200Response data, response status code and response headers
     def get_whats_app_display_name_with_http_info(account_id, opts = {})
@@ -1148,7 +1148,7 @@ module Zernio
     # Get group info
     # Retrieve metadata about a WhatsApp group including subject, description, participants, and settings.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppGroupChat200Response]
     def get_whats_app_group_chat(group_id, account_id, opts = {})
@@ -1159,7 +1159,7 @@ module Zernio
     # Get group info
     # Retrieve metadata about a WhatsApp group including subject, description, participants, and settings.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppGroupChat200Response, Integer, Hash)>] GetWhatsAppGroupChat200Response data, response status code and response headers
     def get_whats_app_group_chat_with_http_info(group_id, account_id, opts = {})
@@ -1288,7 +1288,7 @@ module Zernio
     # Get template
     # Retrieve one message template variant by name.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass `language` to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns `409 ambiguous_template` with `details.languages`. A bare language (`es`) matches a single regional variant (`es_ES`); if the family has several regional variants for it, that is also a 409. A full code (`es_ES`) must match exactly. Variants in `PENDING_DELETION` are not part of the family. 
     # @param template_name [String] Template name (the family).
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages.
     # @return [GetWhatsAppTemplate200Response]
@@ -1300,7 +1300,7 @@ module Zernio
     # Get template
     # Retrieve one message template variant by name.  Meta stores one template per **name + language**, so a name identifies a family of variants, each with its own Meta id. Pass &#x60;language&#x60; to address one variant. Without it, a name with a single variant resolves to that variant; a name with several returns &#x60;409 ambiguous_template&#x60; with &#x60;details.languages&#x60;. A bare language (&#x60;es&#x60;) matches a single regional variant (&#x60;es_ES&#x60;); if the family has several regional variants for it, that is also a 409. A full code (&#x60;es_ES&#x60;) must match exactly. Variants in &#x60;PENDING_DELETION&#x60; are not part of the family. 
     # @param template_name [String] Template name (the family).
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :language Language code of the variant (e.g. en_US, es, pt_BR). Required when the family has several languages.
     # @return [Array<(GetWhatsAppTemplate200Response, Integer, Hash)>] GetWhatsAppTemplate200Response data, response status code and response headers
@@ -1361,7 +1361,7 @@ module Zernio
     # Get template by id
     # Retrieve one template variant by its Meta id, the id every variant of a family has on its own and the one the `whatsapp.template.status_updated` webhook carries. 
     # @param template_id [String] Meta template id (numeric).
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppTemplate200Response]
     def get_whats_app_template_by_id(template_id, account_id, opts = {})
@@ -1372,7 +1372,7 @@ module Zernio
     # Get template by id
     # Retrieve one template variant by its Meta id, the id every variant of a family has on its own and the one the &#x60;whatsapp.template.status_updated&#x60; webhook carries. 
     # @param template_id [String] Meta template id (numeric).
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppTemplate200Response, Integer, Hash)>] GetWhatsAppTemplate200Response data, response status code and response headers
     def get_whats_app_template_by_id_with_http_info(template_id, account_id, opts = {})
@@ -1430,7 +1430,7 @@ module Zernio
 
     # List templates
     # List message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. One entry per **name + language**: a multi-language template appears once per language, each with its own Meta `id`. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :name Exact template name; returns every language variant of that family.
     # @option opts [String] :language Exact language code (e.g. en_US).
@@ -1443,7 +1443,7 @@ module Zernio
 
     # List templates
     # List message templates for the WhatsApp Business Account (WABA) associated with the given account. Templates are fetched directly from the WhatsApp Cloud API. One entry per **name + language**: a multi-language template appears once per language, each with its own Meta &#x60;id&#x60;. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :name Exact template name; returns every language variant of that family.
     # @option opts [String] :language Exact language code (e.g. en_US).
@@ -1507,7 +1507,7 @@ module Zernio
 
     # Get business username
     # Fetch the current WhatsApp Business username and its approval status. Username status can be `approved` (active), `reserved` (pending activation), or `none` (no username set). 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsappBusinessUsername200Response]
     def get_whatsapp_business_username(account_id, opts = {})
@@ -1517,7 +1517,7 @@ module Zernio
 
     # Get business username
     # Fetch the current WhatsApp Business username and its approval status. Username status can be &#x60;approved&#x60; (active), &#x60;reserved&#x60; (pending activation), or &#x60;none&#x60; (no username set). 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsappBusinessUsername200Response, Integer, Hash)>] GetWhatsappBusinessUsername200Response data, response status code and response headers
     def get_whatsapp_business_username_with_http_info(account_id, opts = {})
@@ -1571,7 +1571,7 @@ module Zernio
 
     # Get username suggestions
     # Retrieve a list of available WhatsApp Business username suggestions based on the account's business profile name. Use these to help users discover valid, unclaimed usernames. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsappBusinessUsernameSuggestions200Response]
     def get_whatsapp_business_username_suggestions(account_id, opts = {})
@@ -1581,7 +1581,7 @@ module Zernio
 
     # Get username suggestions
     # Retrieve a list of available WhatsApp Business username suggestions based on the account&#39;s business profile name. Use these to help users discover valid, unclaimed usernames. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsappBusinessUsernameSuggestions200Response, Integer, Hash)>] GetWhatsappBusinessUsernameSuggestions200Response data, response status code and response headers
     def get_whatsapp_business_username_suggestions_with_http_info(account_id, opts = {})
@@ -1635,7 +1635,7 @@ module Zernio
 
     # List account notifications
     # Returns Meta-originated events recorded for a WhatsApp account, newest first: template review outcomes (approved, rejected, paused, category changes) and WABA status changes (restricted, disabled, reinstated, disconnected). Events are captured from Meta webhooks as they happen; the feed starts at the account's first recorded event and is not backfilled. Complements the push events `whatsapp.template.status_updated` and `account.disconnected` with a pollable history. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Maximum events to return (default to 50)
     # @return [ListWhatsAppAccountEvents200Response]
@@ -1646,7 +1646,7 @@ module Zernio
 
     # List account notifications
     # Returns Meta-originated events recorded for a WhatsApp account, newest first: template review outcomes (approved, rejected, paused, category changes) and WABA status changes (restricted, disabled, reinstated, disconnected). Events are captured from Meta webhooks as they happen; the feed starts at the account&#39;s first recorded event and is not backfilled. Complements the push events &#x60;whatsapp.template.status_updated&#x60; and &#x60;account.disconnected&#x60; with a pollable history. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Maximum events to return (default to 50)
     # @return [Array<(ListWhatsAppAccountEvents200Response, Integer, Hash)>] ListWhatsAppAccountEvents200Response data, response status code and response headers
@@ -1710,7 +1710,7 @@ module Zernio
 
     # List conversion events
     # Returns the most recent conversion events sent through `POST /v1/whatsapp/conversions` for the given WhatsApp account. Sourced from delivery logs (Axiom `late` dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \"recent activity\" panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: `eventName`, `conversationId`, `eventsReceived`, `eventsFailed`, `traceId`, `durationMs`, and the wall-clock `timestamp`. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Max events to return (1-200, default 50). (default to 50)
     # @return [ListWhatsAppConversions200Response]
@@ -1721,7 +1721,7 @@ module Zernio
 
     # List conversion events
     # Returns the most recent conversion events sent through &#x60;POST /v1/whatsapp/conversions&#x60; for the given WhatsApp account. Sourced from delivery logs (Axiom &#x60;late&#x60; dataset), so the visible window is bounded by log retention (about 30 days). Useful for rendering a \&quot;recent activity\&quot; panel on the conversions setup tab without standing up a parallel persistence layer.  Per-event payload mirrors the structured log we write on every successful send: &#x60;eventName&#x60;, &#x60;conversationId&#x60;, &#x60;eventsReceived&#x60;, &#x60;eventsFailed&#x60;, &#x60;traceId&#x60;, &#x60;durationMs&#x60;, and the wall-clock &#x60;timestamp&#x60;. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Max events to return (1-200, default 50). (default to 50)
     # @return [Array<(ListWhatsAppConversions200Response, Integer, Hash)>] ListWhatsAppConversions200Response data, response status code and response headers
@@ -1785,7 +1785,7 @@ module Zernio
 
     # List active groups
     # List active WhatsApp group chats for a business phone number. These are actual WhatsApp group conversations on the platform.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Max groups to return (default to 25)
     # @option opts [String] :after Pagination cursor
@@ -1797,7 +1797,7 @@ module Zernio
 
     # List active groups
     # List active WhatsApp group chats for a business phone number. These are actual WhatsApp group conversations on the platform.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Max groups to return (default to 25)
     # @option opts [String] :after Pagination cursor
@@ -1860,7 +1860,7 @@ module Zernio
     # List join requests
     # List pending join requests for a WhatsApp group (only for groups with approval_required mode).  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [ListWhatsAppGroupJoinRequests200Response]
     def list_whats_app_group_join_requests(group_id, account_id, opts = {})
@@ -1871,7 +1871,7 @@ module Zernio
     # List join requests
     # List pending join requests for a WhatsApp group (only for groups with approval_required mode).  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListWhatsAppGroupJoinRequests200Response, Integer, Hash)>] ListWhatsAppGroupJoinRequests200Response data, response status code and response headers
     def list_whats_app_group_join_requests_with_http_info(group_id, account_id, opts = {})
@@ -2000,7 +2000,7 @@ module Zernio
     # Reject join requests
     # Reject pending join requests for a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param reject_whats_app_group_join_requests_request [RejectWhatsAppGroupJoinRequestsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UnpublishPost200Response]
@@ -2012,7 +2012,7 @@ module Zernio
     # Reject join requests
     # Reject pending join requests for a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param reject_whats_app_group_join_requests_request [RejectWhatsAppGroupJoinRequestsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
@@ -2081,7 +2081,7 @@ module Zernio
     # Remove participants
     # Remove participants from a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param remove_whats_app_group_participants_request [RemoveWhatsAppGroupParticipantsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UnpublishPost200Response]
@@ -2093,7 +2093,7 @@ module Zernio
     # Remove participants
     # Remove participants from a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param remove_whats_app_group_participants_request [RemoveWhatsAppGroupParticipantsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
@@ -2502,7 +2502,7 @@ module Zernio
     # Update group settings
     # Update the subject, description, or join approval mode of a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param update_whats_app_group_chat_request [UpdateWhatsAppGroupChatRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UnpublishPost200Response]
@@ -2514,7 +2514,7 @@ module Zernio
     # Update group settings
     # Update the subject, description, or join approval mode of a WhatsApp group.  Not available on [Coexistence](/platforms/whatsapp/connection#whatsapp-business-app-coexistence) numbers. Requires a Cloud API-only number. 
     # @param group_id [String] Group ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param update_whats_app_group_chat_request [UpdateWhatsAppGroupChatRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers
@@ -2729,8 +2729,8 @@ module Zernio
     end
 
     # Upload profile picture
-    # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta's resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle.  Provide the image either as a binary upload (`multipart/form-data` with `file`) or as a download URL (`application/json` with `url`) — with a URL we fetch the image server-side and upload the bytes for you. Meta's profile-photo API is bytes-only, so there is no direct URL passthrough. JPEG/PNG, max 5MB either way. 
-    # @param account_id [String] WhatsApp social account ID
+    # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta's resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle.  Provide the image either as a binary upload (`multipart/form-data` with `file`) or as a download URL (`application/json` with `url`). With a URL we fetch the image server-side and upload the bytes for you. Meta's profile-photo API is bytes-only, so there is no direct URL passthrough. JPEG/PNG, max 5MB either way. 
+    # @param account_id [String] WhatsApp account ID
     # @param file [File] Image file (JPEG or PNG, max 5MB, recommended 640x640)
     # @param [Hash] opts the optional parameters
     # @return [UnpublishPost200Response]
@@ -2740,8 +2740,8 @@ module Zernio
     end
 
     # Upload profile picture
-    # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta&#39;s resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle.  Provide the image either as a binary upload (&#x60;multipart/form-data&#x60; with &#x60;file&#x60;) or as a download URL (&#x60;application/json&#x60; with &#x60;url&#x60;) — with a URL we fetch the image server-side and upload the bytes for you. Meta&#39;s profile-photo API is bytes-only, so there is no direct URL passthrough. JPEG/PNG, max 5MB either way. 
-    # @param account_id [String] WhatsApp social account ID
+    # Upload a new profile picture for the WhatsApp Business Profile. Uses Meta&#39;s resumable upload API under the hood: creates an upload session, uploads the image bytes, then updates the business profile with the resulting handle.  Provide the image either as a binary upload (&#x60;multipart/form-data&#x60; with &#x60;file&#x60;) or as a download URL (&#x60;application/json&#x60; with &#x60;url&#x60;). With a URL we fetch the image server-side and upload the bytes for you. Meta&#39;s profile-photo API is bytes-only, so there is no direct URL passthrough. JPEG/PNG, max 5MB either way. 
+    # @param account_id [String] WhatsApp account ID
     # @param file [File] Image file (JPEG or PNG, max 5MB, recommended 640x640)
     # @param [Hash] opts the optional parameters
     # @return [Array<(UnpublishPost200Response, Integer, Hash)>] UnpublishPost200Response data, response status code and response headers

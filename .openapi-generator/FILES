@@ -211,6 +211,7 @@ docs/ConnectedAccount.md
 docs/ConnectedApp.md
 docs/ConnectedAppsApi.md
 docs/ContactsApi.md
+docs/Conversation.md
 docs/ConversionAction.md
 docs/ConversionActionTagSnippetsInner.md
 docs/ConversionDestination.md
@@ -852,6 +853,7 @@ docs/GetWhatsAppNumberInfo200ResponseWaba.md
 docs/GetWhatsAppNumberKycForm200Response.md
 docs/GetWhatsAppNumberKycForm200ResponseFieldsInner.md
 docs/GetWhatsAppNumberRemediation200Response.md
+docs/GetWhatsAppSdkConfig200Response.md
 docs/GetWhatsAppTemplate200Response.md
 docs/GetWhatsAppTemplate200ResponseTemplate.md
 docs/GetWhatsAppTemplate409Response.md
@@ -1448,6 +1450,9 @@ docs/SendWhatsAppFlowMessageRequestHeader.md
 docs/SequencesApi.md
 docs/SetCommentModerationRequest.md
 docs/SetContactFieldValueRequest.md
+docs/SetConversationThreadControl200Response.md
+docs/SetConversationThreadControl200ResponseControl.md
+docs/SetConversationThreadControlRequest.md
 docs/SetInstagramIceBreakersRequest.md
 docs/SetInstagramIceBreakersRequestIceBreakersInner.md
 docs/SetMessengerMenuRequest.md
@@ -1788,6 +1793,8 @@ docs/WebhookPayloadCommentCommentAttachment.md
 docs/WebhookPayloadCommentCommentAuthor.md
 docs/WebhookPayloadCommentCommentAuthorInstagramProfile.md
 docs/WebhookPayloadCommentPost.md
+docs/WebhookPayloadConversationControlChanged.md
+docs/WebhookPayloadConversationControlChangedControl.md
 docs/WebhookPayloadConversationStarted.md
 docs/WebhookPayloadConversationStartedConversation.md
 docs/WebhookPayloadExternalPost.md
@@ -2173,6 +2180,7 @@ lib/zernio-sdk/models/connect_whats_app_embedded_signup_request.rb
 lib/zernio-sdk/models/connected.rb
 lib/zernio-sdk/models/connected_account.rb
 lib/zernio-sdk/models/connected_app.rb
+lib/zernio-sdk/models/conversation.rb
 lib/zernio-sdk/models/conversion_action.rb
 lib/zernio-sdk/models/conversion_action_tag_snippets_inner.rb
 lib/zernio-sdk/models/conversion_destination.rb
@@ -2803,6 +2811,7 @@ lib/zernio-sdk/models/get_whats_app_number_info200_response_waba.rb
 lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response.rb
 lib/zernio-sdk/models/get_whats_app_number_kyc_form200_response_fields_inner.rb
 lib/zernio-sdk/models/get_whats_app_number_remediation200_response.rb
+lib/zernio-sdk/models/get_whats_app_sdk_config200_response.rb
 lib/zernio-sdk/models/get_whats_app_template200_response.rb
 lib/zernio-sdk/models/get_whats_app_template200_response_template.rb
 lib/zernio-sdk/models/get_whats_app_template409_response.rb
@@ -3380,6 +3389,9 @@ lib/zernio-sdk/models/send_whats_app_flow_message_request_flow_action_payload.rb
 lib/zernio-sdk/models/send_whats_app_flow_message_request_header.rb
 lib/zernio-sdk/models/set_comment_moderation_request.rb
 lib/zernio-sdk/models/set_contact_field_value_request.rb
+lib/zernio-sdk/models/set_conversation_thread_control200_response.rb
+lib/zernio-sdk/models/set_conversation_thread_control200_response_control.rb
+lib/zernio-sdk/models/set_conversation_thread_control_request.rb
 lib/zernio-sdk/models/set_instagram_ice_breakers_request.rb
 lib/zernio-sdk/models/set_instagram_ice_breakers_request_ice_breakers_inner.rb
 lib/zernio-sdk/models/set_messenger_menu_request.rb
@@ -3711,6 +3723,8 @@ lib/zernio-sdk/models/webhook_payload_comment_comment_attachment.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_author.rb
 lib/zernio-sdk/models/webhook_payload_comment_comment_author_instagram_profile.rb
 lib/zernio-sdk/models/webhook_payload_comment_post.rb
+lib/zernio-sdk/models/webhook_payload_conversation_control_changed.rb
+lib/zernio-sdk/models/webhook_payload_conversation_control_changed_control.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started_conversation.rb
 lib/zernio-sdk/models/webhook_payload_external_post.rb
@@ -4082,6 +4096,7 @@ spec/models/connect_whats_app_embedded_signup_request_spec.rb
 spec/models/connected_account_spec.rb
 spec/models/connected_app_spec.rb
 spec/models/connected_spec.rb
+spec/models/conversation_spec.rb
 spec/models/conversion_action_spec.rb
 spec/models/conversion_action_tag_snippets_inner_spec.rb
 spec/models/conversion_destination_spec.rb
@@ -4712,6 +4727,7 @@ spec/models/get_whats_app_number_info200_response_waba_spec.rb
 spec/models/get_whats_app_number_kyc_form200_response_fields_inner_spec.rb
 spec/models/get_whats_app_number_kyc_form200_response_spec.rb
 spec/models/get_whats_app_number_remediation200_response_spec.rb
+spec/models/get_whats_app_sdk_config200_response_spec.rb
 spec/models/get_whats_app_template200_response_spec.rb
 spec/models/get_whats_app_template200_response_template_spec.rb
 spec/models/get_whats_app_template409_response_details_spec.rb
@@ -5289,6 +5305,9 @@ spec/models/send_whats_app_flow_message_request_header_spec.rb
 spec/models/send_whats_app_flow_message_request_spec.rb
 spec/models/set_comment_moderation_request_spec.rb
 spec/models/set_contact_field_value_request_spec.rb
+spec/models/set_conversation_thread_control200_response_control_spec.rb
+spec/models/set_conversation_thread_control200_response_spec.rb
+spec/models/set_conversation_thread_control_request_spec.rb
 spec/models/set_instagram_ice_breakers_request_ice_breakers_inner_spec.rb
 spec/models/set_instagram_ice_breakers_request_spec.rb
 spec/models/set_messenger_menu_request_spec.rb
@@ -5619,6 +5638,8 @@ spec/models/webhook_payload_comment_comment_author_spec.rb
 spec/models/webhook_payload_comment_comment_spec.rb
 spec/models/webhook_payload_comment_post_spec.rb
 spec/models/webhook_payload_comment_spec.rb
+spec/models/webhook_payload_conversation_control_changed_control_spec.rb
+spec/models/webhook_payload_conversation_control_changed_spec.rb
 spec/models/webhook_payload_conversation_started_conversation_spec.rb
 spec/models/webhook_payload_conversation_started_spec.rb
 spec/models/webhook_payload_external_post_spec.rb

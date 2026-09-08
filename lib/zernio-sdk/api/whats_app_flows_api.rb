@@ -90,7 +90,7 @@ module Zernio
     # Delete flow
     # Delete a DRAFT flow. This is irreversible. Only flows in DRAFT status can be deleted. 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [UpdateYoutubeDefaultPlaylist200Response]
     def delete_whats_app_flow(flow_id, account_id, opts = {})
@@ -101,7 +101,7 @@ module Zernio
     # Delete flow
     # Delete a DRAFT flow. This is irreversible. Only flows in DRAFT status can be deleted. 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(UpdateYoutubeDefaultPlaylist200Response, Integer, Hash)>] UpdateYoutubeDefaultPlaylist200Response data, response status code and response headers
     def delete_whats_app_flow_with_http_info(flow_id, account_id, opts = {})
@@ -234,7 +234,7 @@ module Zernio
     # Get flow
     # Get details for a specific flow, including status, categories, validation errors, and preview URL. 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :fields Comma-separated fields to return (default: id,name,status,categories,validation_errors,json_version,preview,data_api_version,endpoint_uri)
     # @return [GetWhatsAppFlow200Response]
@@ -246,7 +246,7 @@ module Zernio
     # Get flow
     # Get details for a specific flow, including status, categories, validation errors, and preview URL. 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :fields Comma-separated fields to return (default: id,name,status,categories,validation_errors,json_version,preview,data_api_version,endpoint_uri)
     # @return [Array<(GetWhatsAppFlow200Response, Integer, Hash)>] GetWhatsAppFlow200Response data, response status code and response headers
@@ -307,7 +307,7 @@ module Zernio
     # Get flow JSON asset
     # Get the flow JSON asset metadata, including a temporary download URL for the Flow JSON file. 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppFlowJson200Response]
     def get_whats_app_flow_json(flow_id, account_id, opts = {})
@@ -318,7 +318,7 @@ module Zernio
     # Get flow JSON asset
     # Get the flow JSON asset metadata, including a temporary download URL for the Flow JSON file. 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppFlowJson200Response, Integer, Hash)>] GetWhatsAppFlowJson200Response data, response status code and response headers
     def get_whats_app_flow_json_with_http_info(flow_id, account_id, opts = {})
@@ -377,7 +377,7 @@ module Zernio
     # Get flow preview URL
     # Get Meta's public web-preview URL for a flow (drafts included), embeddable as an interactive iframe. The link is reused across calls (valid ~30 days); pass invalidate=true to mint a fresh one (the previous link stops working). 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :invalidate Mint a fresh preview link (default false)
     # @return [GetWhatsAppFlowPreview200Response]
@@ -389,7 +389,7 @@ module Zernio
     # Get flow preview URL
     # Get Meta&#39;s public web-preview URL for a flow (drafts included), embeddable as an interactive iframe. The link is reused across calls (valid ~30 days); pass invalidate&#x3D;true to mint a fresh one (the previous link stops working). 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :invalidate Mint a fresh preview link (default false)
     # @return [Array<(GetWhatsAppFlowPreview200Response, Integer, Hash)>] GetWhatsAppFlowPreview200Response data, response status code and response headers
@@ -449,7 +449,7 @@ module Zernio
 
     # Get Flows encryption key status
     # Read the RSA business public key registered on the phone number for WhatsApp Flows endpoint encryption. Only one key is active per phone number at a time. Flows that use flow_action: data_exchange (an endpoint-backed flow) stop working at runtime until the endpoint serves the matching private key, and Meta rejects publish with error code 139002 (\"Missing Flows Signed Public Key\") when no key is registered. `registered` reflects whether a key is present, never `signatureStatus` alone: Meta reports an unregistered key as MISMATCH rather than a null/absent value. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [GetWhatsAppFlowsEncryptionKey200Response]
     def get_whats_app_flows_encryption_key(account_id, opts = {})
@@ -459,7 +459,7 @@ module Zernio
 
     # Get Flows encryption key status
     # Read the RSA business public key registered on the phone number for WhatsApp Flows endpoint encryption. Only one key is active per phone number at a time. Flows that use flow_action: data_exchange (an endpoint-backed flow) stop working at runtime until the endpoint serves the matching private key, and Meta rejects publish with error code 139002 (\&quot;Missing Flows Signed Public Key\&quot;) when no key is registered. &#x60;registered&#x60; reflects whether a key is present, never &#x60;signatureStatus&#x60; alone: Meta reports an unregistered key as MISMATCH rather than a null/absent value. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetWhatsAppFlowsEncryptionKey200Response, Integer, Hash)>] GetWhatsAppFlowsEncryptionKey200Response data, response status code and response headers
     def get_whats_app_flows_encryption_key_with_http_info(account_id, opts = {})
@@ -512,8 +512,8 @@ module Zernio
     end
 
     # List flow responses
-    # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with `flowId` — this matches responses whose flow_token carries the `<flowId>:` prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
-    # @param account_id [String] WhatsApp social account ID
+    # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with `flowId`, which matches responses whose flow_token carries the `<flowId>:` prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :flow_id Scope to responses for this flow
     # @option opts [Integer] :limit Max responses to return (default to 50)
@@ -524,8 +524,8 @@ module Zernio
     end
 
     # List flow responses
-    # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with &#x60;flowId&#x60; — this matches responses whose flow_token carries the &#x60;&lt;flowId&gt;:&#x60; prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
-    # @param account_id [String] WhatsApp social account ID
+    # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with &#x60;flowId&#x60;, which matches responses whose flow_token carries the &#x60;&lt;flowId&gt;:&#x60; prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @option opts [String] :flow_id Scope to responses for this flow
     # @option opts [Integer] :limit Max responses to return (default to 50)
@@ -586,9 +586,9 @@ module Zernio
     end
 
     # List flow versions
-    # List the flow's version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version's live name and status from Meta. A flow with no lineage returns just itself as version 1. 
+    # List the flow's version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version's live name and status from Meta. A flow with no lineage returns only itself as version 1. 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [ListWhatsAppFlowVersions200Response]
     def list_whats_app_flow_versions(flow_id, account_id, opts = {})
@@ -597,9 +597,9 @@ module Zernio
     end
 
     # List flow versions
-    # List the flow&#39;s version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version&#39;s live name and status from Meta. A flow with no lineage returns just itself as version 1. 
+    # List the flow&#39;s version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version&#39;s live name and status from Meta. A flow with no lineage returns only itself as version 1. 
     # @param flow_id [String] Flow ID
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListWhatsAppFlowVersions200Response, Integer, Hash)>] ListWhatsAppFlowVersions200Response data, response status code and response headers
     def list_whats_app_flow_versions_with_http_info(flow_id, account_id, opts = {})
@@ -657,7 +657,7 @@ module Zernio
 
     # List flows
     # List all WhatsApp Flows for the Business Account (WABA) associated with the given account. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [ListWhatsAppFlows200Response]
     def list_whats_app_flows(account_id, opts = {})
@@ -667,7 +667,7 @@ module Zernio
 
     # List flows
     # List all WhatsApp Flows for the Business Account (WABA) associated with the given account. 
-    # @param account_id [String] WhatsApp social account ID
+    # @param account_id [String] WhatsApp account ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListWhatsAppFlows200Response, Integer, Hash)>] ListWhatsAppFlows200Response data, response status code and response headers
     def list_whats_app_flows_with_http_info(account_id, opts = {})

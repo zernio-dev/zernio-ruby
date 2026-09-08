@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UnblockWhatsAppUsersRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Phone numbers (E.164) or WhatsApp user IDs to unblock.

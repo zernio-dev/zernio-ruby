@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Summary of the analytics sync cycle that just completed.
+  # Summary of the analytics sync cycle that completed.
   class WebhookPayloadAnalyticsSyncedSync < ApiModelBase
     # When the cycle COMPLETED. Not a join key for the delta feed: the rows a cycle produces carry a `syncedAt` stamped when the cycle STARTED, which is measured at around one second earlier at the median and up to a couple of minutes earlier in the tail. Correlate on `account.accountId`. 
     attr_accessor :synced_at

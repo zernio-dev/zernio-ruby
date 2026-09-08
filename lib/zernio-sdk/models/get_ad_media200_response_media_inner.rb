@@ -17,7 +17,7 @@ module Zernio
   class GetAdMedia200ResponseMediaInner < ApiModelBase
     attr_accessor :type
 
-    # Direct file URL (signed; short-lived — see description).
+    # Direct file URL (signed; short-lived, see description).
     attr_accessor :url
 
     # Video poster URL (videos only).

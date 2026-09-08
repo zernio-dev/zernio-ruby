@@ -48,7 +48,7 @@ describe 'WhatsAppFlowsApi' do
   # Delete flow
   # Delete a DRAFT flow. This is irreversible. Only flows in DRAFT status can be deleted. 
   # @param flow_id Flow ID
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @return [UpdateYoutubeDefaultPlaylist200Response]
   describe 'delete_whats_app_flow test' do
@@ -74,7 +74,7 @@ describe 'WhatsAppFlowsApi' do
   # Get flow
   # Get details for a specific flow, including status, categories, validation errors, and preview URL. 
   # @param flow_id Flow ID
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @option opts [String] :fields Comma-separated fields to return (default: id,name,status,categories,validation_errors,json_version,preview,data_api_version,endpoint_uri)
   # @return [GetWhatsAppFlow200Response]
@@ -88,7 +88,7 @@ describe 'WhatsAppFlowsApi' do
   # Get flow JSON asset
   # Get the flow JSON asset metadata, including a temporary download URL for the Flow JSON file. 
   # @param flow_id Flow ID
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppFlowJson200Response]
   describe 'get_whats_app_flow_json test' do
@@ -101,7 +101,7 @@ describe 'WhatsAppFlowsApi' do
   # Get flow preview URL
   # Get Meta&#39;s public web-preview URL for a flow (drafts included), embeddable as an interactive iframe. The link is reused across calls (valid ~30 days); pass invalidate&#x3D;true to mint a fresh one (the previous link stops working). 
   # @param flow_id Flow ID
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :invalidate Mint a fresh preview link (default false)
   # @return [GetWhatsAppFlowPreview200Response]
@@ -114,7 +114,7 @@ describe 'WhatsAppFlowsApi' do
   # unit tests for get_whats_app_flows_encryption_key
   # Get Flows encryption key status
   # Read the RSA business public key registered on the phone number for WhatsApp Flows endpoint encryption. Only one key is active per phone number at a time. Flows that use flow_action: data_exchange (an endpoint-backed flow) stop working at runtime until the endpoint serves the matching private key, and Meta rejects publish with error code 139002 (\&quot;Missing Flows Signed Public Key\&quot;) when no key is registered. &#x60;registered&#x60; reflects whether a key is present, never &#x60;signatureStatus&#x60; alone: Meta reports an unregistered key as MISMATCH rather than a null/absent value. 
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @return [GetWhatsAppFlowsEncryptionKey200Response]
   describe 'get_whats_app_flows_encryption_key test' do
@@ -125,8 +125,8 @@ describe 'WhatsAppFlowsApi' do
 
   # unit tests for list_whats_app_flow_responses
   # List flow responses
-  # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with &#x60;flowId&#x60; — this matches responses whose flow_token carries the &#x60;&lt;flowId&gt;:&#x60; prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
-  # @param account_id WhatsApp social account ID
+  # List the responses customers submitted when completing a flow (parsed from the nfm_reply messages received via webhook), newest first. Scope to a single flow with &#x60;flowId&#x60;, which matches responses whose flow_token carries the &#x60;&lt;flowId&gt;:&#x60; prefix that Zernio stamps on auto-generated tokens at send time. Responses sent with a custom integrator-supplied flow_token are not attributed to a flow. 
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @option opts [String] :flow_id Scope to responses for this flow
   # @option opts [Integer] :limit Max responses to return
@@ -139,9 +139,9 @@ describe 'WhatsAppFlowsApi' do
 
   # unit tests for list_whats_app_flow_versions
   # List flow versions
-  # List the flow&#39;s version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version&#39;s live name and status from Meta. A flow with no lineage returns just itself as version 1. 
+  # List the flow&#39;s version history (the clone lineage Zernio tracks, since Meta has no native versioning), newest version first. Each entry is enriched with the version&#39;s live name and status from Meta. A flow with no lineage returns only itself as version 1. 
   # @param flow_id Flow ID
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @return [ListWhatsAppFlowVersions200Response]
   describe 'list_whats_app_flow_versions test' do
@@ -153,7 +153,7 @@ describe 'WhatsAppFlowsApi' do
   # unit tests for list_whats_app_flows
   # List flows
   # List all WhatsApp Flows for the Business Account (WABA) associated with the given account. 
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param [Hash] opts the optional parameters
   # @return [ListWhatsAppFlows200Response]
   describe 'list_whats_app_flows test' do

@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # The connected social account the platform-write went through.
+  # The connected account the platform-write went through.
   class WebhookPayloadPostPlatformAccount < ApiModelBase
     attr_accessor :account_id
 

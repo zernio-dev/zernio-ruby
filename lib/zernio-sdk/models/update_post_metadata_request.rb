@@ -21,7 +21,7 @@ module Zernio
     # YouTube video ID (required for direct mode, ignored for post-based mode)
     attr_accessor :video_id
 
-    # Zernio social account ID (required for direct mode, ignored for post-based mode)
+    # Zernio account ID (required for direct mode, ignored for post-based mode)
     attr_accessor :account_id
 
     # New video title (max 100 characters for YouTube)

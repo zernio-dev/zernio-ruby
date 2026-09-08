@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **ad_id** | **String** |  | [optional] |
-| **platform** | **String** | &#39;facebook&#39; or &#39;instagram&#39; — only Meta is supported for now. | [optional] |
+| **platform** | **String** | &#39;facebook&#39; or &#39;instagram&#39;. Only Meta is supported for now. | [optional] |
 | **media** | [**Array&lt;GetAdMedia200ResponseMediaInner&gt;**](GetAdMedia200ResponseMediaInner.md) |  | [optional] |
 
 ## Example

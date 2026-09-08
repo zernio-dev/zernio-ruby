@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class SendWhatsAppFlowMessageRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Recipient phone number (E.164 format, e.g. +1234567890)

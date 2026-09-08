@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class SendTypingIndicatorRequest < ApiModelBase
-    # Social account ID
+    # Account ID
     attr_accessor :account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

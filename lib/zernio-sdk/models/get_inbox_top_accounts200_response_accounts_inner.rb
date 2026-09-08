@@ -34,7 +34,7 @@ module Zernio
 
     attr_accessor :median_response_seconds
 
-    # Distinguishes 'instant replies' from 'no replies at all' so a zero medianResponseSeconds with repliedCount=0 renders as '—' instead of '0s'
+    # Distinguishes 'instant replies' from 'no replies at all' so a zero medianResponseSeconds with repliedCount=0 renders as an em dash instead of '0s'
     attr_accessor :replied_count
 
     # Attribute mapping from ruby-style variable name to JSON key.

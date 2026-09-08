@@ -29,7 +29,7 @@ module Zernio
 
     attr_accessor :participant_id
 
-    # X/Twitter verified badge type. Only present for Twitter/X conversations.
+    # X verified badge type. Only present for X conversations.
     attr_accessor :participant_verified_type
 
     attr_accessor :last_message

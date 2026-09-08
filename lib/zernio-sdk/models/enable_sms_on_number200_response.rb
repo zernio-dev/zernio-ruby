@@ -17,7 +17,7 @@ module Zernio
   class EnableSmsOnNumber200Response < ApiModelBase
     attr_accessor :enabled
 
-    # The SMS social account ID (present when enabled).
+    # The SMS account ID (present when enabled).
     attr_accessor :id
 
     attr_accessor :phone_number

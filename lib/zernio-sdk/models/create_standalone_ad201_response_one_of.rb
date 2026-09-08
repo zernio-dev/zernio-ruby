@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Legacy + attach shapes — one ad returned.
+  # Legacy + attach shapes: one ad returned.
   class CreateStandaloneAd201ResponseOneOf < ApiModelBase
     attr_accessor :ad
 

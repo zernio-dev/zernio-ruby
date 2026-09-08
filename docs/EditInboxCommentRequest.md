@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The social account ID |  |
+| **account_id** | **String** | The account ID |  |
 | **platform** | **String** | Only Reddit supports editing a comment |  |
 | **content** | **String** | The new comment body |  |
 

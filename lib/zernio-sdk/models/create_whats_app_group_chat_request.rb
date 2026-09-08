@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class CreateWhatsAppGroupChatRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Group name (max 128 characters)

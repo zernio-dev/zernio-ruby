@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class AddAdKeywordsRequest < ApiModelBase
-    # Social account ID (Google Ads)
+    # Account ID (Google Ads)
     attr_accessor :account_id
 
     # Google ad group ID to add the keywords to

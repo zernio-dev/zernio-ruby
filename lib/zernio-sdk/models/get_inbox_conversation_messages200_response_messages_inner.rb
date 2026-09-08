@@ -30,7 +30,7 @@ module Zernio
 
     attr_accessor :sender_name
 
-    # X/Twitter verified badge type. Only present for Twitter/X messages.
+    # X verified badge type. Only present for X messages.
     attr_accessor :sender_verified_type
 
     attr_accessor :direction

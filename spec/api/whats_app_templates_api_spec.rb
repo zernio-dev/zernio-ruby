@@ -35,7 +35,7 @@ describe 'WhatsAppTemplatesApi' do
   # unit tests for get_whats_app_library_template
   # Look up a library template
   # Look up a single pre-approved Template Library template by its exact name, to introspect its structure before importing it. Most importantly it returns the template&#39;s &#x60;buttons&#x60;: a library template with &#x60;URL&#x60; / &#x60;PHONE_NUMBER&#x60; buttons must be created with a matching &#x60;library_template_button_inputs&#x60; array (see Create Template), or Meta rejects it. Use this to discover which inputs to collect. 
-  # @param account_id WhatsApp social account ID
+  # @param account_id WhatsApp account ID
   # @param name Exact library template name
   # @param [Hash] opts the optional parameters
   # @option opts [String] :language Desired language variant (e.g. es, en_US). If the template is not offered in it, the first available variant is returned and named in the response language field.

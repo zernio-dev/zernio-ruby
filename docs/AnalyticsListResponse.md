@@ -7,7 +7,7 @@
 | **overview** | [**AnalyticsOverview**](AnalyticsOverview.md) |  | [optional] |
 | **posts** | [**Array&lt;AnalyticsListResponsePostsInner&gt;**](AnalyticsListResponsePostsInner.md) |  | [optional] |
 | **pagination** | [**Pagination**](Pagination.md) |  | [optional] |
-| **accounts** | [**Array&lt;SocialAccount&gt;**](SocialAccount.md) | Connected social accounts (followerCount and followersLastUpdated only included if user has analytics add-on) | [optional] |
+| **accounts** | [**Array&lt;SocialAccount&gt;**](SocialAccount.md) | Connected accounts (followerCount and followersLastUpdated only included if user has analytics add-on) | [optional] |
 | **has_analytics_access** | **Boolean** | Whether user has analytics add-on access | [optional] |
 
 ## Example

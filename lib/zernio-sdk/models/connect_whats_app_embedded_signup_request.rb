@@ -15,17 +15,18 @@ require 'time'
 
 module Zernio
   class ConnectWhatsAppEmbeddedSignupRequest < ApiModelBase
-    # Authorization code from the WA_EMBEDDED_SIGNUP postMessage
+    # Authorization code from the FB.login response (authResponse.code)
     attr_accessor :code
 
     attr_accessor :profile_id
 
-    # WhatsApp Business Account id, when the SDK reported one
+    # waba_id from the WA_EMBEDDED_SIGNUP message event
     attr_accessor :waba_id
 
+    # phone_number_id from the WA_EMBEDDED_SIGNUP message event. With wabaId it skips the number picker.
     attr_accessor :phone_number_id
 
-    # Number is also live in the WhatsApp Business app
+    # Set when the popup ended with the FINISH_WHATSAPP_BUSINESS_APP_ONBOARDING event, so the number stays live in the WhatsApp Business app
     attr_accessor :is_coexistence
 
     # Rejects the connect when Meta returns a different number

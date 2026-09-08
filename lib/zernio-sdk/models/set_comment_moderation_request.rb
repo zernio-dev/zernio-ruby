@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class SetCommentModerationRequest < ApiModelBase
-    # The social account ID
+    # The account ID
     attr_accessor :account_id
 
     # Only YouTube supports comment moderation

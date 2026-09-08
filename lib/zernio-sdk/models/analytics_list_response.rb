@@ -21,7 +21,7 @@ module Zernio
 
     attr_accessor :pagination
 
-    # Connected social accounts (followerCount and followersLastUpdated only included if user has analytics add-on)
+    # Connected accounts (followerCount and followersLastUpdated only included if user has analytics add-on)
     attr_accessor :accounts
 
     # Whether user has analytics add-on access

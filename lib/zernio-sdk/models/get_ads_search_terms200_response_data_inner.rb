@@ -17,7 +17,7 @@ module Zernio
   class GetAdsSearchTerms200ResponseDataInner < ApiModelBase
     attr_accessor :search_term
 
-    # ADDED / EXCLUDED / ADDED_EXCLUDED / NONE — whether the term is already a keyword or a negative.
+    # ADDED / EXCLUDED / ADDED_EXCLUDED / NONE: whether the term is already a keyword or a negative.
     attr_accessor :status
 
     # How the term matched (BROAD, PHRASE, EXACT, NEAR_PHRASE, NEAR_EXACT).

@@ -27,16 +27,16 @@ module Zernio
 
     attr_accessor :picture
 
-    # WhatsApp only. Sender's phone number in E.164 format (with leading `+`).  **Nullable during the BSUID rollout (April 2026+).** WhatsApp users who adopt a username can message businesses without exposing a phone number — this field is omitted for them. Match by `businessScopedUserId` instead. See `docs/whatsapp-bsuid-migration.md`. 
+    # WhatsApp only. Sender's phone number in E.164 format (with leading `+`).  **Nullable during the BSUID rollout (April 2026+).** WhatsApp users who adopt a username can message businesses without exposing a phone number, so this field is omitted for them. Match by `businessScopedUserId` instead. See `docs/whatsapp-bsuid-migration.md`. 
     attr_accessor :phone_number
 
-    # WhatsApp only. Business-scoped user ID (BSUID) — Meta's canonical identifier for a WhatsApp user within your business. Present when Meta includes it in the inbound payload (rollout in progress since early April 2026). **Recommended primary identity anchor** going forward; fall back to `phoneNumber` only when this field is absent. 
+    # WhatsApp only. Business-scoped user ID (BSUID), Meta's canonical identifier for a WhatsApp user within your business. Present when Meta includes it in the inbound payload (rollout in progress since early April 2026). **Recommended primary identity anchor** going forward; fall back to `phoneNumber` only when this field is absent. 
     attr_accessor :business_scoped_user_id
 
     # WhatsApp only. Parent BSUID for businesses with linked business portfolios. Omitted for standalone portfolios. 
     attr_accessor :parent_business_scoped_user_id
 
-    # WhatsApp only. User's WhatsApp username (e.g. `@jane`). Not a stable identifier — users can change it. Useful for display, not recommended as an identity anchor. 
+    # WhatsApp only. User's WhatsApp username (e.g. `@jane`). Not a stable identifier, because users can change it. Useful for display, not recommended as an identity anchor. 
     attr_accessor :whatsapp_username
 
     attr_accessor :instagram_profile

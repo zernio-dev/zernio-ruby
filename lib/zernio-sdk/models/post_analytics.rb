@@ -25,7 +25,7 @@ module Zernio
 
     attr_accessor :shares
 
-    # Number of saves/bookmarks (Instagram, Pinterest, X/Twitter)
+    # Number of saves/bookmarks (Instagram, Pinterest, X)
     attr_accessor :saves
 
     attr_accessor :clicks

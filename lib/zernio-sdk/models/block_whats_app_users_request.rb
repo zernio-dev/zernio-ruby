@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class BlockWhatsAppUsersRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Phone numbers (E.164, e.g. \"+16505551234\") or WhatsApp user IDs to block.

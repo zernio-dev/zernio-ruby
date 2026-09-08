@@ -12,7 +12,7 @@
 | **has_access** | **Boolean** | True if the account is in good standing. False for past-due/unpaid/paused subscriptions. | [optional] |
 | **customer_id** | **String** | Stripe customer ID, when present. | [optional] |
 | **is_invited_user** | **Boolean** | True if this is a team member; limits/usage reflect the account owner. | [optional] |
-| **auto_upgrade_enabled** | **Boolean** | Stripe-only. Always false for Metronome users. | [optional] |
+| **auto_upgrade_enabled** | **Boolean** | Stripe-only. Always false for accounts on usage-based billing. | [optional] |
 | **limits** | [**UsageStatsLimits**](UsageStatsLimits.md) |  | [optional] |
 | **usage** | [**UsageStatsUsage**](UsageStatsUsage.md) |  | [optional] |
 | **spend** | [**UsageStatsSpend**](UsageStatsSpend.md) |  | [optional] |

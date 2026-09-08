@@ -16,7 +16,7 @@ require 'time'
 module Zernio
   # Status info. Branch on `status.raw` to handle each transition.
   class WebhookPayloadAdStatusChangedStatus < ApiModelBase
-    # Platform-native status string, forwarded verbatim. For Meta this is `status_name` from `in_process_ad_objects` (e.g. `ACTIVE`, `PAUSED`, `PENDING_REVIEW`, `ARCHIVED`, `DELETED`, `DISAPPROVED`), or `WITH_ISSUES` when sourced from `with_issues_ad_objects`. Not constrained by an `enum` — Meta may add new values. 
+    # Platform-native status string, forwarded verbatim. For Meta this is `status_name` from `in_process_ad_objects` (e.g. `ACTIVE`, `PAUSED`, `PENDING_REVIEW`, `ARCHIVED`, `DELETED`, `DISAPPROVED`), or `WITH_ISSUES` when sourced from `with_issues_ad_objects`. Not constrained by an `enum`, because Meta may add new values. 
     attr_accessor :raw
 
     # Attribute mapping from ruby-style variable name to JSON key.

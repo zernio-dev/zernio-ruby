@@ -38,7 +38,7 @@ opts = {
   skip: 56, # Integer | Number of logs to skip (for pagination)
   account_id: 'account_id_example', # String | Filter by connected account ID
   event: 'event_example', # String | Filter webhook logs by event (e.g. post.published, message.received)
-  request_id: 'request_id_example', # String | Correlation ID — returns every log spawned by a single API request
+  request_id: 'request_id_example', # String | Correlation ID. Returns every log spawned by a single API request
   from: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Precise start instant (ISO 8601); narrows within the day range
   to: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Precise end instant (ISO 8601)
   status_code: 56, # Integer | Filter by exact HTTP status code (api_request logs)
@@ -87,7 +87,7 @@ end
 | **skip** | **Integer** | Number of logs to skip (for pagination) | [optional][default to 0] |
 | **account_id** | **String** | Filter by connected account ID | [optional] |
 | **event** | **String** | Filter webhook logs by event (e.g. post.published, message.received) | [optional] |
-| **request_id** | **String** | Correlation ID — returns every log spawned by a single API request | [optional] |
+| **request_id** | **String** | Correlation ID. Returns every log spawned by a single API request | [optional] |
 | **from** | **Time** | Precise start instant (ISO 8601); narrows within the day range | [optional] |
 | **to** | **Time** | Precise end instant (ISO 8601) | [optional] |
 | **status_code** | **Integer** | Filter by exact HTTP status code (api_request logs) | [optional] |

@@ -19,7 +19,7 @@ module Zernio
 
     attr_accessor :value
 
-    # Present on document rows — the Telnyx document id. GET /v1/whatsapp/phone-numbers/kyc/document/{documentId} streams it (auth-scoped, inline PDF).
+    # Present on document rows: the Telnyx document id. GET /v1/whatsapp/phone-numbers/kyc/document/{documentId} streams it (auth-scoped, inline PDF).
     attr_accessor :document_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

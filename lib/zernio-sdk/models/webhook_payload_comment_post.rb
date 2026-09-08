@@ -21,7 +21,7 @@ module Zernio
     # Platform's post ID
     attr_accessor :platform_post_id
 
-    # Post text, from our synced copy — no platform call is made on the comment path, so null when the post was never synced.
+    # Post text, from our synced copy. No platform call is made on the comment path, so null when the post was never synced.
     attr_accessor :content
 
     # Post thumbnail or first media item URL. Platform CDN URLs expire, fetch promptly.

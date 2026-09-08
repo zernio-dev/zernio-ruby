@@ -232,7 +232,7 @@ nil (empty response body)
 
 Duplicate a workflow
 
-Create an independent copy of a workflow's graph, name, description, and account binding. The copy is created in `draft` status with fresh execution counters and a new id — execution history is NOT copied. Useful for branching off a known-good workflow before making experimental edits. 
+Create an independent copy of a workflow's graph, name, description, and account binding. The copy is created in `draft` status with fresh execution counters and a new id. Execution history is NOT copied. Useful for branching off a known-good workflow before making experimental edits. 
 
 ### Examples
 
@@ -589,7 +589,7 @@ end
 
 List a workflow's version history
 
-Returns the snapshot history. A new version is recorded automatically before every PATCH to `nodes` / `edges` / `entryNodeId`, and explicitly when a previous version is restored. Lightweight list — call `getWorkflowVersion` for the full snapshot graph. 
+Returns the snapshot history. A new version is recorded automatically before every PATCH to `nodes` / `edges` / `entryNodeId`, and explicitly when a previous version is restored. Lightweight list. Call `getWorkflowVersion` for the full snapshot graph. 
 
 ### Examples
 
@@ -875,7 +875,7 @@ end
 
 Manually start a workflow run
 
-Kick off a run without waiting for an inbound message (useful for testing). Target an existing conversation by `conversationId`, or — WhatsApp only — a phone number via `to` (a conversation is found or created). `text` seeds the run's `lastMessage` variable. The graph must be runnable. 
+Kick off a run without waiting for an inbound message (useful for testing). Target an existing conversation by `conversationId`, or (WhatsApp only) a phone number via `to` (a conversation is found or created). `text` seeds the run's `lastMessage` variable. The graph must be runnable. 
 
 ### Examples
 

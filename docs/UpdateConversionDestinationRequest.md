@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **ad_account_id** | **String** |  |  |
 | **name** | **String** |  | [optional] |
-| **enabled** | **Boolean** | Setting &#x60;false&#x60; is equivalent to calling DELETE — the rule will appear as &#x60;inactive&#x60; afterwards.  | [optional] |
+| **enabled** | **Boolean** | Setting &#x60;false&#x60; is equivalent to calling DELETE: the rule will appear as &#x60;inactive&#x60; afterwards.  | [optional] |
 | **attribution_type** | **String** |  | [optional] |
 | **post_click_attribution_window_size** | **Integer** | 365 only allowed for LEAD, PURCHASE, ADD_TO_CART, QUALIFIED_LEAD, SUBMIT_APPLICATION rule types.  | [optional] |
 | **view_through_attribution_window_size** | **Integer** | 365 only allowed for LEAD, PURCHASE, ADD_TO_CART, QUALIFIED_LEAD, SUBMIT_APPLICATION rule types.  | [optional] |

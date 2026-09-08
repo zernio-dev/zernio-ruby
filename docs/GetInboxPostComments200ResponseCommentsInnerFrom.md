@@ -9,7 +9,7 @@
 | **username** | **String** |  | [optional] |
 | **picture** | **String** |  | [optional] |
 | **is_owner** | **Boolean** |  | [optional] |
-| **verified_type** | **String** | X/Twitter verified badge type. Only present for Twitter/X comments. | [optional] |
+| **verified_type** | **String** | X verified badge type. Only present for X comments. | [optional] |
 
 ## Example
 

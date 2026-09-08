@@ -29,7 +29,7 @@ module Zernio
 
     attr_accessor :engagement
 
-    # Click-through rate as a percentage (0–100).
+    # Click-through rate as a percentage (0 to 100).
     attr_accessor :ctr
 
     # Cost per click in native currency.

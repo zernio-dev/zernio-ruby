@@ -8,7 +8,7 @@
 | **name** | **String** |  | [optional] |
 | **rule** | **Object** | Meta&#39;s rule, parsed back from the string Meta stores. | [optional] |
 | **custom_event_type** | **String** |  | [optional] |
-| **pixel_id** | **String** | Meta&#39;s event_source_id — the pixel the rule reads from. | [optional] |
+| **pixel_id** | **String** | Meta&#39;s event_source_id, the pixel the rule reads from. | [optional] |
 | **is_archived** | **Boolean** |  | [optional] |
 
 ## Example

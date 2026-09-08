@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class SetWhatsAppFlowsEncryptionKeyRequest < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # RSA public key in PEM format. Rejected if it is a private key or not a valid RSA public key PEM.

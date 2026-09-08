@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class UploadWhatsAppProfilePhotoRequest1 < ApiModelBase
-    # WhatsApp social account ID
+    # WhatsApp account ID
     attr_accessor :account_id
 
     # Publicly reachable https URL of the image (JPEG or PNG, max 5MB, recommended 640x640). Fetched server-side; must resolve directly without redirects.

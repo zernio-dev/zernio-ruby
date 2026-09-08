@@ -11,7 +11,7 @@
 | **status** | **String** |  | [optional] |
 | **participant_name** | **String** |  | [optional] |
 | **participant_id** | **String** |  | [optional] |
-| **participant_verified_type** | **String** | X/Twitter verified badge type. Only present for Twitter/X conversations. | [optional] |
+| **participant_verified_type** | **String** | X verified badge type. Only present for X conversations. | [optional] |
 | **last_message** | **String** |  | [optional] |
 | **last_message_at** | **Time** |  | [optional] |
 | **updated_time** | **Time** |  | [optional] |

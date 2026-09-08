@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Named conversion-funnel steps, resolved from the same data as `actions` so you never have to parse action-type strings yourself.  Meta reports one event under several action types at once (`offsite_conversion.fb_pixel_purchase`, `omni_purchase`, `purchase`, …). Each field below takes the FIRST family member present rather than summing them, which is what makes these counts safe to add up — summing the raw `actions` keys yourself double or triple counts. The same priority order backs `conversions`, so a purchase-optimised campaign reports the identical number in `conversions` and `funnel.purchases`.  Every field is 0 when that step never fired. Populated for Meta ads; other platforms report a different action taxonomy and generally leave these at 0 (read `actions` for those). At ad-set and campaign level each step is summed from its per-ad values. 
+  # Named conversion-funnel steps, resolved from the same data as `actions` so you never have to parse action-type strings yourself.  Meta reports one event under several action types at once (`offsite_conversion.fb_pixel_purchase`, `omni_purchase`, `purchase`, …). Each field below takes the FIRST family member present rather than summing them, which is what makes these counts safe to add up. Summing the raw `actions` keys yourself double or triple counts. The same priority order backs `conversions`, so a purchase-optimised campaign reports the identical number in `conversions` and `funnel.purchases`.  Every field is 0 when that step never fired. Populated for Meta ads; other platforms report a different action taxonomy and generally leave these at 0 (read `actions` for those). At ad-set and campaign level each step is summed from its per-ad values. 
   class AdFunnelCounts < ApiModelBase
-    # Landing page views — the visitor actually loaded the destination, unlike a link click. Meta `landing_page_view`.
+    # Landing page views: the visitor actually loaded the destination, unlike a link click. Meta `landing_page_view`.
     attr_accessor :landing_page_views
 
     # Content views (Meta `ViewContent` pixel event).
@@ -40,7 +40,7 @@ module Zernio
     # Purchases (Meta `Purchase` pixel event). Pair with `purchaseValue` for revenue.
     attr_accessor :purchases
 
-    # Leads, from either the website pixel or an instant form — whichever the ad uses.
+    # Leads, from either the website pixel or an instant form, whichever the ad uses.
     attr_accessor :leads
 
     # Completed registrations (Meta `CompleteRegistration` pixel event).
@@ -49,7 +49,7 @@ module Zernio
     # Mobile app installs attributed to the ad.
     attr_accessor :app_installs
 
-    # Messaging conversations started within 7 days — the headline metric for click-to-WhatsApp and click-to-Messenger ads.
+    # Messaging conversations started within 7 days, the headline metric for click-to-WhatsApp and click-to-Messenger ads.
     attr_accessor :messaging_conversations_started
 
     # Messaging threads where the person sent a first reply.

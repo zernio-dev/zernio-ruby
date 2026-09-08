@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Social account ID (the facebook account owning the Page) |  |
-| **account_id** | **String** | Social account ID (same as id); canonical field for account filtering. | [optional] |
+| **id** | **String** | Account ID (the facebook account owning the Page) |  |
+| **account_id** | **String** | Account ID (same as id); canonical field for account filtering. | [optional] |
 | **platform** | **String** |  |  |
 
 ## Example

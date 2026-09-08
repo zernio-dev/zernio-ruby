@@ -10,7 +10,7 @@
 | **display_name** | **String** |  | [optional] |
 | **is_active** | **Boolean** |  | [optional] |
 | **selected_location_name** | **String** | Human-readable location display name, NOT a resource name. Do not use it to build API paths. | [optional] |
-| **selected_location_id** | **String** | Bare GBP location id. Combine with the GBP account id as accounts/{gbpAccountId}/locations/{selectedLocationId} to form the location resource names that gmb-reviews/batch expects in locationNames. | [optional] |
+| **selected_location_id** | **String** | Bare Google Business Profile location id. Combine with the Google Business Profile account id as accounts/{gbpAccountId}/locations/{selectedLocationId} to form the location resource names that gmb-reviews/batch expects in locationNames. | [optional] |
 
 ## Example
 

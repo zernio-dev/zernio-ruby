@@ -17,7 +17,7 @@ module Zernio
   class ListSipTrunks200Response < ApiModelBase
     attr_accessor :trunks
 
-    # Whether this workspace can create SIP trunks. Managing existing trunks always works.
+    # Whether this team can create SIP trunks. Managing existing trunks always works.
     attr_accessor :enabled
 
     # Attribute mapping from ruby-style variable name to JSON key.

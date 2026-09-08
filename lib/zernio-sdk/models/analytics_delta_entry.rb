@@ -19,7 +19,7 @@ module Zernio
     # External post ID. The same identifier as `posts[]._id` in GET /v1/analytics.
     attr_accessor :post_id
 
-    # Social account this post was published through
+    # Account this post was published through
     attr_accessor :account_id
 
     # Profile the account belongs to

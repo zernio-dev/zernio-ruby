@@ -89,7 +89,7 @@ end
 
 Follow a user
 
-Follow a user on X/Twitter. Requires the follows.write OAuth scope. For protected accounts, a follow request is sent instead (pending_follow will be true). 
+Follow a user on X. Requires the follows.write OAuth scope. For protected accounts, a follow request is sent instead (pending_follow will be true). 
 
 ### Examples
 
@@ -172,7 +172,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::TwitterEngagementApi.new
-account_id = 'account_id_example' # String | The social account ID whose X token is used for the lookup
+account_id = 'account_id_example' # String | The account ID whose X token is used for the lookup
 id = 'id_example' # String | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...)
 
 begin
@@ -206,7 +206,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The social account ID whose X token is used for the lookup |  |
+| **account_id** | **String** | The account ID whose X token is used for the lookup |  |
 | **id** | **String** | Numeric tweet ID or a tweet URL (e.g. https://x.com/user/status/123...) |  |
 
 ### Return type
@@ -369,7 +369,7 @@ end
 
 Search recent tweets
 
-Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X's search operators (`from:user`, `-is:retweet`, `is:reply`, `lang:en`, `\"exact phrase\"`, `conversation_id:123`, boolean `OR`, ...). Note that standalone operators like `is:` / `has:` / `lang:` must be combined with a keyword or `from:` clause.  To reply to a found tweet, pass its `id` as the twitter platform entry's `platformSpecificData.replyToTweetId` when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
+Search public tweets from the last 7 days matching an X search query, e.g. to discover tweets to reply to. The query string is passed through to X unchanged and supports X's search operators (`from:user`, `-is:retweet`, `is:reply`, `lang:en`, `\"exact phrase\"`, `conversation_id:123`, boolean `OR`, ...). Standalone operators like `is:` / `has:` / `lang:` must be combined with a keyword or `from:` clause.  To reply to a found tweet, pass its `id` as the twitter platform entry's `platformSpecificData.replyToTweetId` when creating a post.  Rate limit: 300 requests per 15-min window per connected account. 
 
 ### Examples
 
@@ -383,7 +383,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::TwitterEngagementApi.new
-account_id = 'account_id_example' # String | The social account ID
+account_id = 'account_id_example' # String | The account ID
 query = 'query_example' # String | X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400.
 opts = {
   limit: 56, # Integer | Results per page. X requires a minimum of 10; values below 10 are rejected.
@@ -426,7 +426,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | The social account ID |  |
+| **account_id** | **String** | The account ID |  |
 | **query** | **String** | X search query, max 512 characters. Operators are passed through unchanged; X rejects malformed queries with a 400. |  |
 | **limit** | **Integer** | Results per page. X requires a minimum of 10; values below 10 are rejected. | [optional][default to 10] |
 | **since_id** | **String** | Only return tweets with an ID greater than (more recent than) this numeric tweet ID. Non-numeric values are rejected with 400. | [optional] |
@@ -527,7 +527,7 @@ end
 
 Unfollow a user
 
-Unfollow a user on X/Twitter. 
+Unfollow a user on X. 
 
 ### Examples
 
@@ -542,7 +542,7 @@ end
 
 api_instance = Zernio::TwitterEngagementApi.new
 account_id = 'account_id_example' # String | 
-target_user_id = 'target_user_id_example' # String | The Twitter ID of the user to unfollow
+target_user_id = 'target_user_id_example' # String | The X ID of the user to unfollow
 
 begin
   # Unfollow a user
@@ -576,7 +576,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **account_id** | **String** |  |  |
-| **target_user_id** | **String** | The Twitter ID of the user to unfollow |  |
+| **target_user_id** | **String** | The X ID of the user to unfollow |  |
 
 ### Return type
 

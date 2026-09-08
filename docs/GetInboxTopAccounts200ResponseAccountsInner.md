@@ -13,7 +13,7 @@
 | **total** | **Integer** |  | [optional] |
 | **conversations** | **Integer** |  | [optional] |
 | **median_response_seconds** | **Integer** |  | [optional] |
-| **replied_count** | **Integer** | Distinguishes &#39;instant replies&#39; from &#39;no replies at all&#39; so a zero medianResponseSeconds with repliedCount&#x3D;0 renders as &#39;—&#39; instead of &#39;0s&#39; | [optional] |
+| **replied_count** | **Integer** | Distinguishes &#39;instant replies&#39; from &#39;no replies at all&#39; so a zero medianResponseSeconds with repliedCount&#x3D;0 renders as an em dash instead of &#39;0s&#39; | [optional] |
 
 ## Example
 

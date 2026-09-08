@@ -20,7 +20,7 @@ module Zernio
 
     attr_accessor :name
 
-    # Setting `false` is equivalent to calling DELETE — the rule will appear as `inactive` afterwards. 
+    # Setting `false` is equivalent to calling DELETE: the rule will appear as `inactive` afterwards. 
     attr_accessor :enabled
 
     attr_accessor :attribution_type
