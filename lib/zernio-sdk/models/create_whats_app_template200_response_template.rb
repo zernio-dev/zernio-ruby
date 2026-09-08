@@ -26,6 +26,9 @@ module Zernio
 
     attr_accessor :language
 
+    # Echoed when supplied on the request.
+    attr_accessor :message_send_ttl_seconds
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -33,7 +36,8 @@ module Zernio
         :'name' => :'name',
         :'status' => :'status',
         :'category' => :'category',
-        :'language' => :'language'
+        :'language' => :'language',
+        :'message_send_ttl_seconds' => :'message_send_ttl_seconds'
       }
     end
 
@@ -54,7 +58,8 @@ module Zernio
         :'name' => :'String',
         :'status' => :'String',
         :'category' => :'String',
-        :'language' => :'String'
+        :'language' => :'String',
+        :'message_send_ttl_seconds' => :'Integer'
       }
     end
 
@@ -99,6 +104,10 @@ module Zernio
       if attributes.key?(:'language')
         self.language = attributes[:'language']
       end
+
+      if attributes.key?(:'message_send_ttl_seconds')
+        self.message_send_ttl_seconds = attributes[:'message_send_ttl_seconds']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -125,7 +134,8 @@ module Zernio
           name == o.name &&
           status == o.status &&
           category == o.category &&
-          language == o.language
+          language == o.language &&
+          message_send_ttl_seconds == o.message_send_ttl_seconds
     end
 
     # @see the `==` method
@@ -137,7 +147,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, status, category, language].hash
+      [id, name, status, category, language, message_send_ttl_seconds].hash
     end
 
     # Builds the object from hash

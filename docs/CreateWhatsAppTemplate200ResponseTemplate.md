@@ -9,6 +9,7 @@
 | **status** | **String** | APPROVED for library templates, PENDING for custom | [optional] |
 | **category** | **String** |  | [optional] |
 | **language** | **String** |  | [optional] |
+| **message_send_ttl_seconds** | **Integer** | Echoed when supplied on the request. | [optional] |
 
 ## Example
 
@@ -20,7 +21,8 @@ instance = Zernio::CreateWhatsAppTemplate200ResponseTemplate.new(
   name: null,
   status: null,
   category: null,
-  language: null
+  language: null,
+  message_send_ttl_seconds: null
 )
 ```
 

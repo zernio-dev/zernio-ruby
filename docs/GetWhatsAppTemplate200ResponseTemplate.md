@@ -10,6 +10,7 @@
 | **category** | **String** |  | [optional] |
 | **language** | **String** | The variant actually returned. | [optional] |
 | **components** | **Array&lt;Object&gt;** |  | [optional] |
+| **message_send_ttl_seconds** | **Integer** | Only when a custom TTL is set; absent while the category default applies. | [optional] |
 | **rejected_reason** | **String** | Only when status is REJECTED. | [optional] |
 | **quality_score** | **Object** | Post-approval quality (GREEN/YELLOW/RED), when Meta reports one. | [optional] |
 
@@ -25,6 +26,7 @@ instance = Zernio::GetWhatsAppTemplate200ResponseTemplate.new(
   category: null,
   language: null,
   components: null,
+  message_send_ttl_seconds: null,
   rejected_reason: null,
   quality_score: null
 )

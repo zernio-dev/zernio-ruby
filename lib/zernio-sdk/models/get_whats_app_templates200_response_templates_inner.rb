@@ -26,6 +26,9 @@ module Zernio
 
     attr_accessor :language
 
+    # Only when a custom TTL is set; absent while the category default applies.
+    attr_accessor :message_send_ttl_seconds
+
     attr_accessor :components
 
     class EnumAttributeValidator
@@ -58,6 +61,7 @@ module Zernio
         :'status' => :'status',
         :'category' => :'category',
         :'language' => :'language',
+        :'message_send_ttl_seconds' => :'message_send_ttl_seconds',
         :'components' => :'components'
       }
     end
@@ -80,6 +84,7 @@ module Zernio
         :'status' => :'String',
         :'category' => :'String',
         :'language' => :'String',
+        :'message_send_ttl_seconds' => :'Integer',
         :'components' => :'Array<Object>'
       }
     end
@@ -124,6 +129,10 @@ module Zernio
 
       if attributes.key?(:'language')
         self.language = attributes[:'language']
+      end
+
+      if attributes.key?(:'message_send_ttl_seconds')
+        self.message_send_ttl_seconds = attributes[:'message_send_ttl_seconds']
       end
 
       if attributes.key?(:'components')
@@ -182,6 +191,7 @@ module Zernio
           status == o.status &&
           category == o.category &&
           language == o.language &&
+          message_send_ttl_seconds == o.message_send_ttl_seconds &&
           components == o.components
     end
 
@@ -194,7 +204,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, status, category, language, components].hash
+      [id, name, status, category, language, message_send_ttl_seconds, components].hash
     end
 
     # Builds the object from hash

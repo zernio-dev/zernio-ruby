@@ -29,6 +29,9 @@ module Zernio
 
     attr_accessor :components
 
+    # Only when a custom TTL is set; absent while the category default applies.
+    attr_accessor :message_send_ttl_seconds
+
     # Only when status is REJECTED.
     attr_accessor :rejected_reason
 
@@ -44,6 +47,7 @@ module Zernio
         :'category' => :'category',
         :'language' => :'language',
         :'components' => :'components',
+        :'message_send_ttl_seconds' => :'message_send_ttl_seconds',
         :'rejected_reason' => :'rejected_reason',
         :'quality_score' => :'quality_score'
       }
@@ -68,6 +72,7 @@ module Zernio
         :'category' => :'String',
         :'language' => :'String',
         :'components' => :'Array<Object>',
+        :'message_send_ttl_seconds' => :'Integer',
         :'rejected_reason' => :'String',
         :'quality_score' => :'Object'
       }
@@ -121,6 +126,10 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'message_send_ttl_seconds')
+        self.message_send_ttl_seconds = attributes[:'message_send_ttl_seconds']
+      end
+
       if attributes.key?(:'rejected_reason')
         self.rejected_reason = attributes[:'rejected_reason']
       end
@@ -156,6 +165,7 @@ module Zernio
           category == o.category &&
           language == o.language &&
           components == o.components &&
+          message_send_ttl_seconds == o.message_send_ttl_seconds &&
           rejected_reason == o.rejected_reason &&
           quality_score == o.quality_score
     end
@@ -169,7 +179,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, status, category, language, components, rejected_reason, quality_score].hash
+      [id, name, status, category, language, components, message_send_ttl_seconds, rejected_reason, quality_score].hash
     end
 
     # Builds the object from hash

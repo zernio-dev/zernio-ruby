@@ -45,4 +45,10 @@ describe Zernio::UpdateWhatsAppTemplateRequest do
     end
   end
 
+  describe 'test attribute "message_send_ttl_seconds"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

@@ -18,14 +18,18 @@ module Zernio
     # WhatsApp social account ID
     attr_accessor :account_id
 
-    # Updated template components
+    # Updated template components. Optional when only message_send_ttl_seconds changes; at least one of the two is required.
     attr_accessor :components
+
+    # Delivery validity window in seconds: a message not delivered within it is dropped. Range depends on category: AUTHENTICATION 30 to 900, UTILITY 30 to 43200 (12h), MARKETING 43200 to 2592000 (30 days); -1 restores the 30-day default on AUTHENTICATION and UTILITY. Meta defaults to 600 for AUTHENTICATION and 30 days otherwise. If Meta later recategorises the template, it clears the TTL (read it back to check).
+    attr_accessor :message_send_ttl_seconds
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'account_id' => :'accountId',
-        :'components' => :'components'
+        :'components' => :'components',
+        :'message_send_ttl_seconds' => :'message_send_ttl_seconds'
       }
     end
 
@@ -43,7 +47,8 @@ module Zernio
     def self.openapi_types
       {
         :'account_id' => :'String',
-        :'components' => :'Array<WhatsAppTemplateComponent>'
+        :'components' => :'Array<WhatsAppTemplateComponent>',
+        :'message_send_ttl_seconds' => :'Integer'
       }
     end
 
@@ -79,8 +84,10 @@ module Zernio
         if (value = attributes[:'components']).is_a?(Array)
           self.components = value
         end
-      else
-        self.components = nil
+      end
+
+      if attributes.key?(:'message_send_ttl_seconds')
+        self.message_send_ttl_seconds = attributes[:'message_send_ttl_seconds']
       end
     end
 
@@ -93,11 +100,7 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
-      if @components.nil?
-        invalid_properties.push('invalid value for "components", components cannot be nil.')
-      end
-
-      if @components.length < 1
+      if !@components.nil? && @components.length < 1
         invalid_properties.push('invalid value for "components", number of items must be greater than or equal to 1.')
       end
 
@@ -109,8 +112,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
-      return false if @components.nil?
-      return false if @components.length < 1
+      return false if !@components.nil? && @components.length < 1
       true
     end
 
@@ -144,7 +146,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           account_id == o.account_id &&
-          components == o.components
+          components == o.components &&
+          message_send_ttl_seconds == o.message_send_ttl_seconds
     end
 
     # @see the `==` method
@@ -156,7 +159,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, components].hash
+      [account_id, components, message_send_ttl_seconds].hash
     end
 
     # Builds the object from hash
