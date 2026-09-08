@@ -14,10 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Platform-dependent template payload. Ignored on Telegram.  Instagram / Facebook: a generic template (carousel). Set `type: generic` and provide up to 10 `elements`, each with a `title` (required) and optional `subtitle`, `imageUrl`, and `buttons`. Mutually exclusive with the top-level `buttons` field (sending both is a 400); put the card's buttons on its `elements` instead.  WhatsApp: sends an approved WhatsApp template message, the only message type WhatsApp accepts when the 24-hour customer-service window is closed. Provide exactly one element carrying the template reference: `{ \"elements\": [{ \"name\": \"order_update\", \"language\": \"en_US\", \"components\": [...] }] }` (`type` is ignored on WhatsApp). `components` is optional and is forwarded unchanged as the `template.components` array of Meta's Cloud API send payload; use it to fill body/header variables and button parameters, e.g. `[{ \"type\": \"body\", \"parameters\": [{ \"type\": \"text\", \"text\": \"John\" }] }]`. Templates with media headers (image, video, document) must include the header component with its media link here at send time. To send a template to a phone number with no existing conversation, or to have media headers filled in automatically from the template definition, use the create-conversation endpoint (POST /v1/inbox/conversations) instead. 
+  # Platform-dependent template payload. Ignored on Telegram.  Instagram / Facebook: a generic template (carousel). Set `type: generic` and provide up to 10 `elements`, each with a `title` (required) and optional `subtitle`, `imageUrl`, and `buttons`. Mutually exclusive with the top-level `buttons` field (sending both is a 400); put the card's buttons on its `elements` instead. On Facebook, `imageAspectRatio` (`horizontal`, the default, or `square`) sets how Messenger renders the element images; Instagram has no such setting and rejects it.  WhatsApp: sends an approved WhatsApp template message, the only message type WhatsApp accepts when the 24-hour customer-service window is closed. Provide exactly one element carrying the template reference: `{ \"elements\": [{ \"name\": \"order_update\", \"language\": \"en_US\", \"components\": [...] }] }` (`type` is ignored on WhatsApp). `components` is optional and is forwarded unchanged as the `template.components` array of Meta's Cloud API send payload; use it to fill body/header variables and button parameters, e.g. `[{ \"type\": \"body\", \"parameters\": [{ \"type\": \"text\", \"text\": \"John\" }] }]`. Templates with media headers (image, video, document) must include the header component with its media link here at send time. To send a template to a phone number with no existing conversation, or to have media headers filled in automatically from the template definition, use the create-conversation endpoint (POST /v1/inbox/conversations) instead. 
   class SendInboxMessageRequestTemplate < ApiModelBase
     # Template type. Required for Instagram/Facebook generic templates; ignored on WhatsApp.
     attr_accessor :type
+
+    # Facebook only. Aspect ratio Messenger renders element images at: horizontal (1.91:1, default) or square (1:1). A 400 on Instagram.
+    attr_accessor :image_aspect_ratio
 
     attr_accessor :elements
 
@@ -47,6 +50,7 @@ module Zernio
     def self.attribute_map
       {
         :'type' => :'type',
+        :'image_aspect_ratio' => :'imageAspectRatio',
         :'elements' => :'elements'
       }
     end
@@ -65,6 +69,7 @@ module Zernio
     def self.openapi_types
       {
         :'type' => :'String',
+        :'image_aspect_ratio' => :'String',
         :'elements' => :'Array<SendInboxMessageRequestTemplateElementsInner>'
       }
     end
@@ -95,6 +100,10 @@ module Zernio
         self.type = attributes[:'type']
       end
 
+      if attributes.key?(:'image_aspect_ratio')
+        self.image_aspect_ratio = attributes[:'image_aspect_ratio']
+      end
+
       if attributes.key?(:'elements')
         if (value = attributes[:'elements']).is_a?(Array)
           self.elements = value
@@ -120,6 +129,8 @@ module Zernio
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["generic"])
       return false unless type_validator.valid?(@type)
+      image_aspect_ratio_validator = EnumAttributeValidator.new('String', ["horizontal", "square"])
+      return false unless image_aspect_ratio_validator.valid?(@image_aspect_ratio)
       return false if !@elements.nil? && @elements.length > 10
       true
     end
@@ -132,6 +143,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] image_aspect_ratio Object to be assigned
+    def image_aspect_ratio=(image_aspect_ratio)
+      validator = EnumAttributeValidator.new('String', ["horizontal", "square"])
+      unless validator.valid?(image_aspect_ratio)
+        fail ArgumentError, "invalid value for \"image_aspect_ratio\", must be one of #{validator.allowable_values}."
+      end
+      @image_aspect_ratio = image_aspect_ratio
     end
 
     # Custom attribute writer method with validation
@@ -154,6 +175,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
+          image_aspect_ratio == o.image_aspect_ratio &&
           elements == o.elements
     end
 
@@ -166,7 +188,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, elements].hash
+      [type, image_aspect_ratio, elements].hash
     end
 
     # Builds the object from hash

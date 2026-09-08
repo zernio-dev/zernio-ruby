@@ -18,6 +18,9 @@ module Zernio
   class CommentAutomationTemplate < ApiModelBase
     attr_accessor :type
 
+    # Facebook only. How Messenger renders each element imageUrl: horizontal (1.91:1, the default) or square (1:1). Instagram has no such setting, so an Instagram automation carrying it is a 400.
+    attr_accessor :image_aspect_ratio
+
     attr_accessor :elements
 
     class EnumAttributeValidator
@@ -46,6 +49,7 @@ module Zernio
     def self.attribute_map
       {
         :'type' => :'type',
+        :'image_aspect_ratio' => :'imageAspectRatio',
         :'elements' => :'elements'
       }
     end
@@ -64,6 +68,7 @@ module Zernio
     def self.openapi_types
       {
         :'type' => :'String',
+        :'image_aspect_ratio' => :'String',
         :'elements' => :'Array<CommentAutomationTemplateElement>'
       }
     end
@@ -94,6 +99,10 @@ module Zernio
         self.type = attributes[:'type']
       else
         self.type = nil
+      end
+
+      if attributes.key?(:'image_aspect_ratio')
+        self.image_aspect_ratio = attributes[:'image_aspect_ratio']
       end
 
       if attributes.key?(:'elements')
@@ -136,6 +145,8 @@ module Zernio
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["generic"])
       return false unless type_validator.valid?(@type)
+      image_aspect_ratio_validator = EnumAttributeValidator.new('String', ["horizontal", "square"])
+      return false unless image_aspect_ratio_validator.valid?(@image_aspect_ratio)
       return false if @elements.nil?
       return false if @elements.length > 10
       return false if @elements.length < 1
@@ -150,6 +161,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] image_aspect_ratio Object to be assigned
+    def image_aspect_ratio=(image_aspect_ratio)
+      validator = EnumAttributeValidator.new('String', ["horizontal", "square"])
+      unless validator.valid?(image_aspect_ratio)
+        fail ArgumentError, "invalid value for \"image_aspect_ratio\", must be one of #{validator.allowable_values}."
+      end
+      @image_aspect_ratio = image_aspect_ratio
     end
 
     # Custom attribute writer method with validation
@@ -176,6 +197,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
+          image_aspect_ratio == o.image_aspect_ratio &&
           elements == o.elements
     end
 
@@ -188,7 +210,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, elements].hash
+      [type, image_aspect_ratio, elements].hash
     end
 
     # Builds the object from hash

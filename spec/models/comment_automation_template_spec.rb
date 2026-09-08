@@ -37,6 +37,16 @@ describe Zernio::CommentAutomationTemplate do
     end
   end
 
+  describe 'test attribute "image_aspect_ratio"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["horizontal", "square"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.image_aspect_ratio = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "elements"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
