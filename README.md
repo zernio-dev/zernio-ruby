@@ -2217,6 +2217,7 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateCampaignTargeting200Response](docs/UpdateCampaignTargeting200Response.md)
  - [Zernio::UpdateCampaignTargeting200ResponseDevicesInner](docs/UpdateCampaignTargeting200ResponseDevicesInner.md)
  - [Zernio::UpdateCampaignTargeting200ResponseLanguagesInner](docs/UpdateCampaignTargeting200ResponseLanguagesInner.md)
+ - [Zernio::UpdateCampaignTargeting200ResponseLocationsInner](docs/UpdateCampaignTargeting200ResponseLocationsInner.md)
  - [Zernio::UpdateCampaignTargetingRequest](docs/UpdateCampaignTargetingRequest.md)
  - [Zernio::UpdateCampaignTargetingRequestTargeting](docs/UpdateCampaignTargetingRequestTargeting.md)
  - [Zernio::UpdateCampaignTargetingRequestTargetingDevicesInner](docs/UpdateCampaignTargetingRequestTargetingDevicesInner.md)

@@ -75,7 +75,7 @@ module Zernio
         :'campaign_id' => :'String',
         :'updated' => :'Array<String>',
         :'devices' => :'Array<UpdateCampaignTargeting200ResponseDevicesInner>',
-        :'locations' => :'Array<GetCampaignTargeting200ResponseLocationsInner>',
+        :'locations' => :'Array<UpdateCampaignTargeting200ResponseLocationsInner>',
         :'languages' => :'Array<UpdateCampaignTargeting200ResponseLanguagesInner>'
       }
     end

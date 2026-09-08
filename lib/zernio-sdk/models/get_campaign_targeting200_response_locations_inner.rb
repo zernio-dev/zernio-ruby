@@ -21,11 +21,27 @@ module Zernio
     # true = excluded location.
     attr_accessor :negative
 
+    # Google's geo_target_constant.name, e.g. \"United States\"; null when the id could not be resolved.
+    attr_accessor :name
+
+    # Google's geo_target_constant.canonical_name, e.g. \"California, United States\"; null when the id could not be resolved.
+    attr_accessor :canonical_name
+
+    # Google's geo_target_constant.target_type, e.g. \"Country\", \"Region\", \"City\"; null when the id could not be resolved.
+    attr_accessor :type
+
+    # Google's geo_target_constant.country_code, an ISO 3166-1 alpha-2 code; null when the id could not be resolved.
+    attr_accessor :country_code
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'geo_target_id' => :'geoTargetId',
-        :'negative' => :'negative'
+        :'negative' => :'negative',
+        :'name' => :'name',
+        :'canonical_name' => :'canonicalName',
+        :'type' => :'type',
+        :'country_code' => :'countryCode'
       }
     end
 
@@ -43,13 +59,21 @@ module Zernio
     def self.openapi_types
       {
         :'geo_target_id' => :'String',
-        :'negative' => :'Boolean'
+        :'negative' => :'Boolean',
+        :'name' => :'String',
+        :'canonical_name' => :'String',
+        :'type' => :'String',
+        :'country_code' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'canonical_name',
+        :'type',
+        :'country_code'
       ])
     end
 
@@ -76,6 +100,22 @@ module Zernio
       if attributes.key?(:'negative')
         self.negative = attributes[:'negative']
       end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'canonical_name')
+        self.canonical_name = attributes[:'canonical_name']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -99,7 +139,11 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           geo_target_id == o.geo_target_id &&
-          negative == o.negative
+          negative == o.negative &&
+          name == o.name &&
+          canonical_name == o.canonical_name &&
+          type == o.type &&
+          country_code == o.country_code
     end
 
     # @see the `==` method
@@ -111,7 +155,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [geo_target_id, negative].hash
+      [geo_target_id, negative, name, canonical_name, type, country_code].hash
     end
 
     # Builds the object from hash

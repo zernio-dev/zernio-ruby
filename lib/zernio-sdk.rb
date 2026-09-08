@@ -1535,6 +1535,7 @@ require 'zernio-sdk/models/update_broadcast_request_template_variable_mapping_va
 require 'zernio-sdk/models/update_campaign_targeting200_response'
 require 'zernio-sdk/models/update_campaign_targeting200_response_devices_inner'
 require 'zernio-sdk/models/update_campaign_targeting200_response_languages_inner'
+require 'zernio-sdk/models/update_campaign_targeting200_response_locations_inner'
 require 'zernio-sdk/models/update_campaign_targeting_request'
 require 'zernio-sdk/models/update_campaign_targeting_request_targeting'
 require 'zernio-sdk/models/update_campaign_targeting_request_targeting_devices_inner'
