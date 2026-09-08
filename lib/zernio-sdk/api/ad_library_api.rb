@@ -20,9 +20,10 @@ module Zernio
       @api_client = api_client
     end
     # Search the public Ad Library
-    # Competitor and market research over the platform's public ad archive, searched with the customer's own connected token (no extra scope): Meta's Ad Library (`GET /ads_archive`) for a `facebook` / `instagram` / `metaads` account, LinkedIn's Ad Library (`GET /rest/adLibrary`) for a `linkedin` / `linkedinads` account. Rows are returned in the platform's raw shape under `data`; `paging.after` is an opaque cursor on both (`null` when exhausted).  **Meta coverage.** Political and social-issue ads are searchable worldwide. Every other ad is in the archive only if it was delivered to the EU or UK within the last year, so a US-only commercial advertiser is invisible. Spend, impressions and demographics are political-only fields and are left out of the default projection; request them via `fields`. Meta serves the archive only to people who confirmed their identity and location at facebook.com/ID: until the Facebook user behind the connection has done so, the call fails with `meta_identity_confirmation_required` (403).  **LinkedIn coverage.** Ads served after June 1 2023, worldwide, kept for a year after their last impression. EU-delivered ads carry impression ranges and the disclosed targeting facets. Pages are capped at 25 ads (`limit` > 25 is a 400); `after` is the next offset.  Which params apply: `q`, `countries`, `since`, `until`, `limit`, `after` on both; `pageIds`, `adType`, `status`, `platforms`, `mediaType`, `languages`, `searchType`, `fields` are Meta-only; `advertiser` is LinkedIn-only. Passing a param the account's platform does not support is a 400 naming the param.
-    # @param account_id [String] Zernio SocialAccount id (facebook / instagram / metaads for Meta, linkedin / linkedinads for LinkedIn). Its token is the one that searches.
+    # Competitor and market research over the public ad archives. Meta's Ad Library (`GET /ads_archive`) is searched with Zernio's own developer access, so `platform=meta` needs no connected account at all. LinkedIn's Ad Library (`GET /rest/adLibrary`) runs on a connected `linkedin` / `linkedinads` account, passed as `accountId`. Passing a Meta account as `accountId` also selects Meta. Rows are returned in the platform's raw shape under `data`; `paging.after` is an opaque cursor on both (`null` when exhausted).  **Meta coverage.** Political and social-issue ads are searchable worldwide. Every other ad is in the archive only if it was delivered to the EU or UK within the last year, so a US-only commercial advertiser is invisible. Spend, impressions and demographics are political-only fields and are left out of the default projection; request them via `fields`. All customers share Zernio's Meta quota, so a `429` means back off for a minute.  **LinkedIn coverage.** Ads served after June 1 2023, worldwide, kept for a year after their last impression. EU-delivered ads carry impression ranges and the disclosed targeting facets. Pages are capped at 25 ads (`limit` > 25 is a 400); `after` is the next offset.  Which params apply: `q`, `countries`, `since`, `until`, `limit`, `after` on both; `pageIds`, `adType`, `status`, `platforms`, `mediaType`, `languages`, `searchType`, `fields` are Meta-only; `advertiser` is LinkedIn-only. Passing a param the account's platform does not support is a 400 naming the param.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Which archive to search. &#x60;meta&#x60; needs no accountId. Required unless accountId is given.
+    # @option opts [String] :account_id Zernio SocialAccount id. Required for LinkedIn (linkedin / linkedinads: its token searches). Optional for Meta, where any facebook / instagram / metaads account just selects the platform.
     # @option opts [String] :q Keyword search. Meta does not translate it, so write it in the ads&#39; language. Required unless pageIds (Meta) or advertiser (LinkedIn) is given.
     # @option opts [String] :page_ids Meta only. Comma-separated Facebook Page ids (max 10) whose ads to list.
     # @option opts [String] :advertiser LinkedIn only. Advertiser (Page) name to search.
@@ -39,15 +40,16 @@ module Zernio
     # @option opts [Integer] :limit Rows per page. LinkedIn accepts at most 25. (default to 25)
     # @option opts [String] :after paging.after of the previous page.
     # @return [SearchAdLibrary200Response]
-    def search_ad_library(account_id, opts = {})
-      data, _status_code, _headers = search_ad_library_with_http_info(account_id, opts)
+    def search_ad_library(opts = {})
+      data, _status_code, _headers = search_ad_library_with_http_info(opts)
       data
     end
 
     # Search the public Ad Library
-    # Competitor and market research over the platform&#39;s public ad archive, searched with the customer&#39;s own connected token (no extra scope): Meta&#39;s Ad Library (&#x60;GET /ads_archive&#x60;) for a &#x60;facebook&#x60; / &#x60;instagram&#x60; / &#x60;metaads&#x60; account, LinkedIn&#39;s Ad Library (&#x60;GET /rest/adLibrary&#x60;) for a &#x60;linkedin&#x60; / &#x60;linkedinads&#x60; account. Rows are returned in the platform&#39;s raw shape under &#x60;data&#x60;; &#x60;paging.after&#x60; is an opaque cursor on both (&#x60;null&#x60; when exhausted).  **Meta coverage.** Political and social-issue ads are searchable worldwide. Every other ad is in the archive only if it was delivered to the EU or UK within the last year, so a US-only commercial advertiser is invisible. Spend, impressions and demographics are political-only fields and are left out of the default projection; request them via &#x60;fields&#x60;. Meta serves the archive only to people who confirmed their identity and location at facebook.com/ID: until the Facebook user behind the connection has done so, the call fails with &#x60;meta_identity_confirmation_required&#x60; (403).  **LinkedIn coverage.** Ads served after June 1 2023, worldwide, kept for a year after their last impression. EU-delivered ads carry impression ranges and the disclosed targeting facets. Pages are capped at 25 ads (&#x60;limit&#x60; &gt; 25 is a 400); &#x60;after&#x60; is the next offset.  Which params apply: &#x60;q&#x60;, &#x60;countries&#x60;, &#x60;since&#x60;, &#x60;until&#x60;, &#x60;limit&#x60;, &#x60;after&#x60; on both; &#x60;pageIds&#x60;, &#x60;adType&#x60;, &#x60;status&#x60;, &#x60;platforms&#x60;, &#x60;mediaType&#x60;, &#x60;languages&#x60;, &#x60;searchType&#x60;, &#x60;fields&#x60; are Meta-only; &#x60;advertiser&#x60; is LinkedIn-only. Passing a param the account&#39;s platform does not support is a 400 naming the param.
-    # @param account_id [String] Zernio SocialAccount id (facebook / instagram / metaads for Meta, linkedin / linkedinads for LinkedIn). Its token is the one that searches.
+    # Competitor and market research over the public ad archives. Meta&#39;s Ad Library (&#x60;GET /ads_archive&#x60;) is searched with Zernio&#39;s own developer access, so &#x60;platform&#x3D;meta&#x60; needs no connected account at all. LinkedIn&#39;s Ad Library (&#x60;GET /rest/adLibrary&#x60;) runs on a connected &#x60;linkedin&#x60; / &#x60;linkedinads&#x60; account, passed as &#x60;accountId&#x60;. Passing a Meta account as &#x60;accountId&#x60; also selects Meta. Rows are returned in the platform&#39;s raw shape under &#x60;data&#x60;; &#x60;paging.after&#x60; is an opaque cursor on both (&#x60;null&#x60; when exhausted).  **Meta coverage.** Political and social-issue ads are searchable worldwide. Every other ad is in the archive only if it was delivered to the EU or UK within the last year, so a US-only commercial advertiser is invisible. Spend, impressions and demographics are political-only fields and are left out of the default projection; request them via &#x60;fields&#x60;. All customers share Zernio&#39;s Meta quota, so a &#x60;429&#x60; means back off for a minute.  **LinkedIn coverage.** Ads served after June 1 2023, worldwide, kept for a year after their last impression. EU-delivered ads carry impression ranges and the disclosed targeting facets. Pages are capped at 25 ads (&#x60;limit&#x60; &gt; 25 is a 400); &#x60;after&#x60; is the next offset.  Which params apply: &#x60;q&#x60;, &#x60;countries&#x60;, &#x60;since&#x60;, &#x60;until&#x60;, &#x60;limit&#x60;, &#x60;after&#x60; on both; &#x60;pageIds&#x60;, &#x60;adType&#x60;, &#x60;status&#x60;, &#x60;platforms&#x60;, &#x60;mediaType&#x60;, &#x60;languages&#x60;, &#x60;searchType&#x60;, &#x60;fields&#x60; are Meta-only; &#x60;advertiser&#x60; is LinkedIn-only. Passing a param the account&#39;s platform does not support is a 400 naming the param.
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform Which archive to search. &#x60;meta&#x60; needs no accountId. Required unless accountId is given.
+    # @option opts [String] :account_id Zernio SocialAccount id. Required for LinkedIn (linkedin / linkedinads: its token searches). Optional for Meta, where any facebook / instagram / metaads account just selects the platform.
     # @option opts [String] :q Keyword search. Meta does not translate it, so write it in the ads&#39; language. Required unless pageIds (Meta) or advertiser (LinkedIn) is given.
     # @option opts [String] :page_ids Meta only. Comma-separated Facebook Page ids (max 10) whose ads to list.
     # @option opts [String] :advertiser LinkedIn only. Advertiser (Page) name to search.
@@ -64,13 +66,13 @@ module Zernio
     # @option opts [Integer] :limit Rows per page. LinkedIn accepts at most 25. (default to 25)
     # @option opts [String] :after paging.after of the previous page.
     # @return [Array<(SearchAdLibrary200Response, Integer, Hash)>] SearchAdLibrary200Response data, response status code and response headers
-    def search_ad_library_with_http_info(account_id, opts = {})
+    def search_ad_library_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdLibraryApi.search_ad_library ...'
       end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdLibraryApi.search_ad_library"
+      allowable_values = ["meta", "linkedin"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
       end
       if @api_client.config.client_side_validation && !opts[:'q'].nil? && opts[:'q'].to_s.length > 100
         fail ArgumentError, 'invalid value for "opts[:"q"]" when calling AdLibraryApi.search_ad_library, the character length must be smaller than or equal to 100.'
@@ -109,7 +111,8 @@ module Zernio
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'accountId'] = account_id
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+      query_params[:'accountId'] = opts[:'account_id'] if !opts[:'account_id'].nil?
       query_params[:'q'] = opts[:'q'] if !opts[:'q'].nil?
       query_params[:'pageIds'] = opts[:'page_ids'] if !opts[:'page_ids'].nil?
       query_params[:'advertiser'] = opts[:'advertiser'] if !opts[:'advertiser'].nil?
