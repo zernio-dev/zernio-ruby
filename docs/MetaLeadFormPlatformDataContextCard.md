@@ -8,7 +8,7 @@
 | **content** | **Array&lt;String&gt;** |  | [optional] |
 | **style** | **String** |  | [optional] |
 | **button_text** | **String** |  | [optional] |
-| **cover_photo** | **String** |  | [optional] |
+| **cover_photo** | **String** | Direct public JPEG or PNG image URL, up to 5 MB. Redirects, Ad Image hashes and IDs are not supported. | [optional] |
 
 ## Example
 

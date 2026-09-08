@@ -2030,6 +2030,7 @@ Class | Method | HTTP request | Description
  - [Zernio::SendInboxMessage200ResponseDataAttachmentsInner](docs/SendInboxMessage200ResponseDataAttachmentsInner.md)
  - [Zernio::SendInboxMessage200ResponseDataPartialFailure](docs/SendInboxMessage200ResponseDataPartialFailure.md)
  - [Zernio::SendInboxMessage200ResponseDataPartialFailurePlatformError](docs/SendInboxMessage200ResponseDataPartialFailurePlatformError.md)
+ - [Zernio::SendInboxMessage200ResponseWarningsInner](docs/SendInboxMessage200ResponseWarningsInner.md)
  - [Zernio::SendInboxMessage400Response](docs/SendInboxMessage400Response.md)
  - [Zernio::SendInboxMessage400ResponsePlatformError](docs/SendInboxMessage400ResponsePlatformError.md)
  - [Zernio::SendInboxMessageRequest](docs/SendInboxMessageRequest.md)

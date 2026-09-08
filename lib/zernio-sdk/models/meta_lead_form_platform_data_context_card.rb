@@ -23,6 +23,7 @@ module Zernio
 
     attr_accessor :button_text
 
+    # Direct public JPEG or PNG image URL, up to 5 MB. Redirects, Ad Image hashes and IDs are not supported.
     attr_accessor :cover_photo
 
     class EnumAttributeValidator
