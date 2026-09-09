@@ -14,19 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Meta only. Attaches pixel measurement to the ad regardless of the optimization goal (the \"Website events\" tracking row in Ads Manager). `pixelId` becomes the ad's `tracking_specs` (offsite_conversion + fb_pixel); `urlTags` becomes the ad's `url_tags` (click-tracking query params). Applied on the legacy single-creative shape, every ad of the multi-creative shape, and the attach shape. NOTE: tracking lives on the AD object and is not inherited from the ad set, so pass it on EVERY attach call that should carry the pixel.
-  class CreateStandaloneAdRequestTracking < ApiModelBase
-    # Meta Pixel ID to attach for offsite-conversion measurement.
-    attr_accessor :pixel_id
-
-    # Click-URL params appended to the ad's destination as `url_tags` (e.g. utm_source). Meta dynamic macros ({{ad.id}}, {{campaign.id}}, {{placement}}, ...) are sent through unescaped so Meta expands them; every other character is percent-encoded.
-    attr_accessor :url_tags
+  class HideAdCommentRequest < ApiModelBase
+    # True to hide the comment; false to restore it.
+    attr_accessor :hidden
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'pixel_id' => :'pixelId',
-        :'url_tags' => :'urlTags'
+        :'hidden' => :'hidden'
       }
     end
 
@@ -43,8 +38,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'pixel_id' => :'String',
-        :'url_tags' => :'Array<UpdateAdTrackingTagsRequestUrlTagsInner>'
+        :'hidden' => :'Boolean'
       }
     end
 
@@ -58,26 +52,22 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateStandaloneAdRequestTracking` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::HideAdCommentRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateStandaloneAdRequestTracking`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::HideAdCommentRequest`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'pixel_id')
-        self.pixel_id = attributes[:'pixel_id']
-      end
-
-      if attributes.key?(:'url_tags')
-        if (value = attributes[:'url_tags']).is_a?(Array)
-          self.url_tags = value
-        end
+      if attributes.key?(:'hidden')
+        self.hidden = attributes[:'hidden']
+      else
+        self.hidden = nil
       end
     end
 
@@ -86,6 +76,10 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @hidden.nil?
+        invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -93,7 +87,18 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @hidden.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] hidden Value to be assigned
+    def hidden=(hidden)
+      if hidden.nil?
+        fail ArgumentError, 'hidden cannot be nil'
+      end
+
+      @hidden = hidden
     end
 
     # Checks equality by comparing each attribute.
@@ -101,8 +106,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          pixel_id == o.pixel_id &&
-          url_tags == o.url_tags
+          hidden == o.hidden
     end
 
     # @see the `==` method
@@ -114,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [pixel_id, url_tags].hash
+      [hidden].hash
     end
 
     # Builds the object from hash

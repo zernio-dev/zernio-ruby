@@ -365,6 +365,86 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Delete an ad comment
+    # Delete your own TikTok ad comment or reply. TikTok must return can_delete=true for the comment. Other users' comments can be hidden instead.  Requires Ads access. The ad is resolved within the caller's accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok's ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+    # @param ad_id [String] Internal Zernio ad ID or indexed platform ad ID.
+    # @param comment_id [String] TikTok comment ID from the ad comment listing.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+    # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+    # @return [ReplyToAdComment200Response]
+    def delete_ad_comment(ad_id, comment_id, opts = {})
+      data, _status_code, _headers = delete_ad_comment_with_http_info(ad_id, comment_id, opts)
+      data
+    end
+
+    # Delete an ad comment
+    # Delete your own TikTok ad comment or reply. TikTok must return can_delete&#x3D;true for the comment. Other users&#39; comments can be hidden instead.  Requires Ads access. The ad is resolved within the caller&#39;s accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok&#39;s ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+    # @param ad_id [String] Internal Zernio ad ID or indexed platform ad ID.
+    # @param comment_id [String] TikTok comment ID from the ad comment listing.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+    # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+    # @return [Array<(ReplyToAdComment200Response, Integer, Hash)>] ReplyToAdComment200Response data, response status code and response headers
+    def delete_ad_comment_with_http_info(ad_id, comment_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.delete_ad_comment ...'
+      end
+      # verify the required parameter 'ad_id' is set
+      if @api_client.config.client_side_validation && ad_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdAccountsApi.delete_ad_comment"
+      end
+      # verify the required parameter 'comment_id' is set
+      if @api_client.config.client_side_validation && comment_id.nil?
+        fail ArgumentError, "Missing the required parameter 'comment_id' when calling AdAccountsApi.delete_ad_comment"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && comment_id !~ pattern
+        fail ArgumentError, "invalid value for 'comment_id' when calling AdAccountsApi.delete_ad_comment, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/{adId}/comments/{commentId}'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s)).sub('{' + 'commentId' + '}', CGI.escape(comment_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplyToAdComment200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.delete_ad_comment",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#delete_ad_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Delete a negative keyword list
     # Removes the Google shared negative keyword list. Detach it from all campaigns first; an in-use list is rejected. Only NEGATIVE_KEYWORDS shared sets are supported.
     # @param list_id [String] 
@@ -602,11 +682,13 @@ module Zernio
     end
 
     # List comments on an ad
-    # Returns comments on an ad's underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular GET /v1/inbox/comments/{postId} endpoint cannot serve because dark posts are not in Zernio's post database.  An ad that runs on both Facebook feed and Instagram feed has two separate underlying posts with separate comment threads (the creative's effective_object_story_id and effective_instagram_media_id). Use the `placement` query param to pick one; with no param the Instagram side is returned when it exists, otherwise Facebook. The identifiers are read from the ad record (persisted during sync) with a Marketing-API fallback for ads that predate the field.  For Instagram-placed comments, the Instagram account that runs the ad must be connected to Zernio, because those comments are read through that account's token. If no connected Instagram account on the profile can read the ad's media, the call returns ads_connection_required (the Facebook side, if any, is still readable via ?placement=facebook).  Meta-only for now. Other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) are not wired to this endpoint and return feature_not_available.  Requires the Ads add-on. Response shape matches GET /v1/inbox/comments/{postId}.  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad: Zernio internal `_id` (24-char hex), Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`), or the creative's `effective_object_story_id` / `effective_instagram_media_id`. Caller doesn't need a translation step. 
-    # @param ad_id [String] Internal Zernio ad ID (ObjectId).
+    # Returns comments on an ad's underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular GET /v1/inbox/comments/{postId} endpoint cannot serve because dark posts are not in Zernio's post database.  An ad that runs on both Facebook feed and Instagram feed has two separate underlying posts with separate comment threads (the creative's effective_object_story_id and effective_instagram_media_id). Use the `placement` query param to pick one; with no param the Instagram side is returned when it exists, otherwise Facebook. The identifiers are read from the ad record (persisted during sync) with a Marketing-API fallback for ads that predate the field.  For Instagram-placed comments, the Instagram account that runs the ad must be connected to Zernio, because those comments are read through that account's token. If no connected Instagram account on the profile can read the ad's media, the call returns ads_connection_required (the Facebook side, if any, is still readable via ?placement=facebook).  TikTok uses the connected TikTok Ads advertiser token and supports both paid video ads and Spark Ads. `since` and `until` select a date window of at most 30 days; the default is the last 30 days. TikTok searches by ad group, so Zernio filters each page to this ad. A page can be empty while `pagination.hasMore` is true. Reuse `pagination.cursor` with the same `limit`; the cursor retains the date window. `placement` is Meta-only and returns a 400 for TikTok.  TikTok returns replies as separate comments with `parentId`; nested reply fetching is not supported. `canReply` requires a first-level comment and an identity with comment-management permission. `canDelete` reflects TikTok's own-comment deletion capability. `canHide` is supported and `canLike` is false. Use the ad comment reply, hide and delete operations below to moderate TikTok comments. Other platforms return feature_not_available.  Requires the Ads add-on. Response shape matches GET /v1/inbox/comments/{postId}.  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad: Zernio internal `_id` (24-char hex), the numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`), or the creative's `effective_object_story_id` / `effective_instagram_media_id`. Caller doesn't need a translation step. 
+    # @param ad_id [String] Internal Zernio ad ID or indexed platform ad/post ID.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :placement Which side of the ad to return comments for. Omit to default to the Instagram side when present, else Facebook. Returns ad_not_commentable if the ad has no such placement.
     # @option opts [Integer] :limit  (default to 25)
+    # @option opts [Date] :since TikTok-only start date. Defaults to 30 days before until. Maximum window is 30 days.
+    # @option opts [Date] :_until TikTok-only end date. Defaults to today in UTC.
     # @option opts [String] :cursor Pagination cursor from a previous response.
     # @return [GetAdComments200Response]
     def get_ad_comments(ad_id, opts = {})
@@ -615,11 +697,13 @@ module Zernio
     end
 
     # List comments on an ad
-    # Returns comments on an ad&#39;s underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular GET /v1/inbox/comments/{postId} endpoint cannot serve because dark posts are not in Zernio&#39;s post database.  An ad that runs on both Facebook feed and Instagram feed has two separate underlying posts with separate comment threads (the creative&#39;s effective_object_story_id and effective_instagram_media_id). Use the &#x60;placement&#x60; query param to pick one; with no param the Instagram side is returned when it exists, otherwise Facebook. The identifiers are read from the ad record (persisted during sync) with a Marketing-API fallback for ads that predate the field.  For Instagram-placed comments, the Instagram account that runs the ad must be connected to Zernio, because those comments are read through that account&#39;s token. If no connected Instagram account on the profile can read the ad&#39;s media, the call returns ads_connection_required (the Facebook side, if any, is still readable via ?placement&#x3D;facebook).  Meta-only for now. Other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) are not wired to this endpoint and return feature_not_available.  Requires the Ads add-on. Response shape matches GET /v1/inbox/comments/{postId}.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: Zernio internal &#x60;_id&#x60; (24-char hex), Meta&#39;s numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;), or the creative&#39;s &#x60;effective_object_story_id&#x60; / &#x60;effective_instagram_media_id&#x60;. Caller doesn&#39;t need a translation step. 
-    # @param ad_id [String] Internal Zernio ad ID (ObjectId).
+    # Returns comments on an ad&#39;s underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular GET /v1/inbox/comments/{postId} endpoint cannot serve because dark posts are not in Zernio&#39;s post database.  An ad that runs on both Facebook feed and Instagram feed has two separate underlying posts with separate comment threads (the creative&#39;s effective_object_story_id and effective_instagram_media_id). Use the &#x60;placement&#x60; query param to pick one; with no param the Instagram side is returned when it exists, otherwise Facebook. The identifiers are read from the ad record (persisted during sync) with a Marketing-API fallback for ads that predate the field.  For Instagram-placed comments, the Instagram account that runs the ad must be connected to Zernio, because those comments are read through that account&#39;s token. If no connected Instagram account on the profile can read the ad&#39;s media, the call returns ads_connection_required (the Facebook side, if any, is still readable via ?placement&#x3D;facebook).  TikTok uses the connected TikTok Ads advertiser token and supports both paid video ads and Spark Ads. &#x60;since&#x60; and &#x60;until&#x60; select a date window of at most 30 days; the default is the last 30 days. TikTok searches by ad group, so Zernio filters each page to this ad. A page can be empty while &#x60;pagination.hasMore&#x60; is true. Reuse &#x60;pagination.cursor&#x60; with the same &#x60;limit&#x60;; the cursor retains the date window. &#x60;placement&#x60; is Meta-only and returns a 400 for TikTok.  TikTok returns replies as separate comments with &#x60;parentId&#x60;; nested reply fetching is not supported. &#x60;canReply&#x60; requires a first-level comment and an identity with comment-management permission. &#x60;canDelete&#x60; reflects TikTok&#39;s own-comment deletion capability. &#x60;canHide&#x60; is supported and &#x60;canLike&#x60; is false. Use the ad comment reply, hide and delete operations below to moderate TikTok comments. Other platforms return feature_not_available.  Requires the Ads add-on. Response shape matches GET /v1/inbox/comments/{postId}.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: Zernio internal &#x60;_id&#x60; (24-char hex), the numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;), or the creative&#39;s &#x60;effective_object_story_id&#x60; / &#x60;effective_instagram_media_id&#x60;. Caller doesn&#39;t need a translation step. 
+    # @param ad_id [String] Internal Zernio ad ID or indexed platform ad/post ID.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :placement Which side of the ad to return comments for. Omit to default to the Instagram side when present, else Facebook. Returns ad_not_commentable if the ad has no such placement.
     # @option opts [Integer] :limit  (default to 25)
+    # @option opts [Date] :since TikTok-only start date. Defaults to 30 days before until. Maximum window is 30 days.
+    # @option opts [Date] :_until TikTok-only end date. Defaults to today in UTC.
     # @option opts [String] :cursor Pagination cursor from a previous response.
     # @return [Array<(GetAdComments200Response, Integer, Hash)>] GetAdComments200Response data, response status code and response headers
     def get_ad_comments_with_http_info(ad_id, opts = {})
@@ -649,6 +733,8 @@ module Zernio
       query_params = opts[:query_params] || {}
       query_params[:'placement'] = opts[:'placement'] if !opts[:'placement'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
       query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
 
       # header parameters
@@ -1016,6 +1102,94 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Get iOS 14 campaign limits
+    # Reads Meta iOS 14 campaign limits for an application on an ad account. applicationId is sent as Meta app_id. This read does not establish that the application is configured for iOS promotion.
+    # @param account_id [String] Zernio Meta Ads or Facebook SocialAccount ID.
+    # @param ad_account_id [String] Meta ad account ID including the act_ prefix.
+    # @param application_id [String] Meta application ID from advertisable-applications.
+    # @param [Hash] opts the optional parameters
+    # @return [GetIosFourteenCampaignLimits200Response]
+    def get_ios_fourteen_campaign_limits(account_id, ad_account_id, application_id, opts = {})
+      data, _status_code, _headers = get_ios_fourteen_campaign_limits_with_http_info(account_id, ad_account_id, application_id, opts)
+      data
+    end
+
+    # Get iOS 14 campaign limits
+    # Reads Meta iOS 14 campaign limits for an application on an ad account. applicationId is sent as Meta app_id. This read does not establish that the application is configured for iOS promotion.
+    # @param account_id [String] Zernio Meta Ads or Facebook SocialAccount ID.
+    # @param ad_account_id [String] Meta ad account ID including the act_ prefix.
+    # @param application_id [String] Meta application ID from advertisable-applications.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GetIosFourteenCampaignLimits200Response, Integer, Hash)>] GetIosFourteenCampaignLimits200Response data, response status code and response headers
+    def get_ios_fourteen_campaign_limits_with_http_info(account_id, ad_account_id, application_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.get_ios_fourteen_campaign_limits ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.get_ios_fourteen_campaign_limits"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdAccountsApi.get_ios_fourteen_campaign_limits"
+      end
+      pattern = Regexp.new(/^act_[0-9]+$/)
+      if @api_client.config.client_side_validation && ad_account_id !~ pattern
+        fail ArgumentError, "invalid value for 'ad_account_id' when calling AdAccountsApi.get_ios_fourteen_campaign_limits, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'application_id' is set
+      if @api_client.config.client_side_validation && application_id.nil?
+        fail ArgumentError, "Missing the required parameter 'application_id' when calling AdAccountsApi.get_ios_fourteen_campaign_limits"
+      end
+      pattern = Regexp.new(/^[0-9]+$/)
+      if @api_client.config.client_side_validation && application_id !~ pattern
+        fail ArgumentError, "invalid value for 'application_id' when calling AdAccountsApi.get_ios_fourteen_campaign_limits, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/ios-fourteen-campaign-limits'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+      query_params[:'applicationId'] = application_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetIosFourteenCampaignLimits200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.get_ios_fourteen_campaign_limits",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#get_ios_fourteen_campaign_limits\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Read a value rule set
     # Reads one value rule set including every nested rule id and criterion id. This is step one of any edit: `PUT` is a full replace, so you need the ids before you can keep the objects you are not changing.  Meta's own read returns `GENDER` values lowercase (`\"male\"`) while writes require `\"MALE\"`. Values are passed through untouched, so never case-compare a stored rule against a fetched one.
     # @param value_rule_set_id [String] Platform value rule set id.
@@ -1082,6 +1256,97 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#get_value_rule_set\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Hide or unhide an ad comment
+    # Hide or restore a TikTok ad comment. Send hidden=true to hide it or hidden=false to make it public again.  Requires Ads access. The ad is resolved within the caller's accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok's ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+    # @param ad_id [String] Internal Zernio ad ID or indexed platform ad ID.
+    # @param comment_id [String] TikTok comment ID from the ad comment listing.
+    # @param hide_ad_comment_request [HideAdCommentRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+    # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+    # @return [HideAdComment200Response]
+    def hide_ad_comment(ad_id, comment_id, hide_ad_comment_request, opts = {})
+      data, _status_code, _headers = hide_ad_comment_with_http_info(ad_id, comment_id, hide_ad_comment_request, opts)
+      data
+    end
+
+    # Hide or unhide an ad comment
+    # Hide or restore a TikTok ad comment. Send hidden&#x3D;true to hide it or hidden&#x3D;false to make it public again.  Requires Ads access. The ad is resolved within the caller&#39;s accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok&#39;s ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+    # @param ad_id [String] Internal Zernio ad ID or indexed platform ad ID.
+    # @param comment_id [String] TikTok comment ID from the ad comment listing.
+    # @param hide_ad_comment_request [HideAdCommentRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+    # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+    # @return [Array<(HideAdComment200Response, Integer, Hash)>] HideAdComment200Response data, response status code and response headers
+    def hide_ad_comment_with_http_info(ad_id, comment_id, hide_ad_comment_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.hide_ad_comment ...'
+      end
+      # verify the required parameter 'ad_id' is set
+      if @api_client.config.client_side_validation && ad_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdAccountsApi.hide_ad_comment"
+      end
+      # verify the required parameter 'comment_id' is set
+      if @api_client.config.client_side_validation && comment_id.nil?
+        fail ArgumentError, "Missing the required parameter 'comment_id' when calling AdAccountsApi.hide_ad_comment"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && comment_id !~ pattern
+        fail ArgumentError, "invalid value for 'comment_id' when calling AdAccountsApi.hide_ad_comment, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'hide_ad_comment_request' is set
+      if @api_client.config.client_side_validation && hide_ad_comment_request.nil?
+        fail ArgumentError, "Missing the required parameter 'hide_ad_comment_request' when calling AdAccountsApi.hide_ad_comment"
+      end
+      # resource path
+      local_var_path = '/v1/ads/{adId}/comments/{commentId}/hide'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s)).sub('{' + 'commentId' + '}', CGI.escape(comment_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(hide_ad_comment_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'HideAdComment200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.hide_ad_comment",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#hide_ad_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1552,6 +1817,158 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List Instagram ad identities
+    # Discovers identities through connected_instagram_accounts, Page linkage and Page-backed identities, with a best-effort business fallback. Business permission errors do not fail discovery. The resolved object uses the same profile-scoped resolver as ad creation; null means no identity was resolved. Format-specific observed-actor fallbacks at creative creation are not predicted.
+    # @param account_id [String] Zernio Meta Ads or Facebook SocialAccount ID.
+    # @param ad_account_id [String] Meta ad account ID including the act_ prefix.
+    # @param [Hash] opts the optional parameters
+    # @return [ListAdsInstagramAccounts200Response]
+    def list_ads_instagram_accounts(account_id, ad_account_id, opts = {})
+      data, _status_code, _headers = list_ads_instagram_accounts_with_http_info(account_id, ad_account_id, opts)
+      data
+    end
+
+    # List Instagram ad identities
+    # Discovers identities through connected_instagram_accounts, Page linkage and Page-backed identities, with a best-effort business fallback. Business permission errors do not fail discovery. The resolved object uses the same profile-scoped resolver as ad creation; null means no identity was resolved. Format-specific observed-actor fallbacks at creative creation are not predicted.
+    # @param account_id [String] Zernio Meta Ads or Facebook SocialAccount ID.
+    # @param ad_account_id [String] Meta ad account ID including the act_ prefix.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListAdsInstagramAccounts200Response, Integer, Hash)>] ListAdsInstagramAccounts200Response data, response status code and response headers
+    def list_ads_instagram_accounts_with_http_info(account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.list_ads_instagram_accounts ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_ads_instagram_accounts"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdAccountsApi.list_ads_instagram_accounts"
+      end
+      pattern = Regexp.new(/^act_[0-9]+$/)
+      if @api_client.config.client_side_validation && ad_account_id !~ pattern
+        fail ArgumentError, "invalid value for 'ad_account_id' when calling AdAccountsApi.list_ads_instagram_accounts, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/instagram-accounts'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdsInstagramAccounts200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.list_ads_instagram_accounts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#list_ads_instagram_accounts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List advertisable apps
+    # Lists applications available to a Meta ad account, their supported platforms and unmodified object store URLs. A listed app still needs a configured mobile platform and store URL to run install promotion.
+    # @param account_id [String] Zernio Meta Ads or Facebook SocialAccount ID.
+    # @param ad_account_id [String] Meta ad account ID including the act_ prefix.
+    # @param [Hash] opts the optional parameters
+    # @return [ListAdvertisableApplications200Response]
+    def list_advertisable_applications(account_id, ad_account_id, opts = {})
+      data, _status_code, _headers = list_advertisable_applications_with_http_info(account_id, ad_account_id, opts)
+      data
+    end
+
+    # List advertisable apps
+    # Lists applications available to a Meta ad account, their supported platforms and unmodified object store URLs. A listed app still needs a configured mobile platform and store URL to run install promotion.
+    # @param account_id [String] Zernio Meta Ads or Facebook SocialAccount ID.
+    # @param ad_account_id [String] Meta ad account ID including the act_ prefix.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListAdvertisableApplications200Response, Integer, Hash)>] ListAdvertisableApplications200Response data, response status code and response headers
+    def list_advertisable_applications_with_http_info(account_id, ad_account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.list_advertisable_applications ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_advertisable_applications"
+      end
+      # verify the required parameter 'ad_account_id' is set
+      if @api_client.config.client_side_validation && ad_account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_account_id' when calling AdAccountsApi.list_advertisable_applications"
+      end
+      pattern = Regexp.new(/^act_[0-9]+$/)
+      if @api_client.config.client_side_validation && ad_account_id !~ pattern
+        fail ArgumentError, "invalid value for 'ad_account_id' when calling AdAccountsApi.list_advertisable_applications, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/advertisable-applications'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'adAccountId'] = ad_account_id
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdvertisableApplications200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.list_advertisable_applications",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#list_advertisable_applications\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List custom conversions
     # The ad account's Meta custom conversions, including archived ones (`isArchived`).
     # @param account_id [String] Meta ads SocialAccount id.
@@ -2012,6 +2429,97 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#replace_ad_negative_keyword_list_keywords\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Reply to an ad comment
+    # Reply to a first-level TikTok ad comment. Requires a TT_USER or CUSTOMIZED_USER identity with comment-management permission. Replies to replies are rejected. The response commentId identifies the new reply. This operation is not idempotent; do not blindly retry an uncertain response.  Requires Ads access. The ad is resolved within the caller's accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok's ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+    # @param ad_id [String] Internal Zernio ad ID or indexed platform ad ID.
+    # @param comment_id [String] TikTok comment ID from the ad comment listing.
+    # @param reply_to_ad_comment_request [ReplyToAdCommentRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+    # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+    # @return [ReplyToAdComment200Response]
+    def reply_to_ad_comment(ad_id, comment_id, reply_to_ad_comment_request, opts = {})
+      data, _status_code, _headers = reply_to_ad_comment_with_http_info(ad_id, comment_id, reply_to_ad_comment_request, opts)
+      data
+    end
+
+    # Reply to an ad comment
+    # Reply to a first-level TikTok ad comment. Requires a TT_USER or CUSTOMIZED_USER identity with comment-management permission. Replies to replies are rejected. The response commentId identifies the new reply. This operation is not idempotent; do not blindly retry an uncertain response.  Requires Ads access. The ad is resolved within the caller&#39;s accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok&#39;s ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+    # @param ad_id [String] Internal Zernio ad ID or indexed platform ad ID.
+    # @param comment_id [String] TikTok comment ID from the ad comment listing.
+    # @param reply_to_ad_comment_request [ReplyToAdCommentRequest] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+    # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+    # @return [Array<(ReplyToAdComment200Response, Integer, Hash)>] ReplyToAdComment200Response data, response status code and response headers
+    def reply_to_ad_comment_with_http_info(ad_id, comment_id, reply_to_ad_comment_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.reply_to_ad_comment ...'
+      end
+      # verify the required parameter 'ad_id' is set
+      if @api_client.config.client_side_validation && ad_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_id' when calling AdAccountsApi.reply_to_ad_comment"
+      end
+      # verify the required parameter 'comment_id' is set
+      if @api_client.config.client_side_validation && comment_id.nil?
+        fail ArgumentError, "Missing the required parameter 'comment_id' when calling AdAccountsApi.reply_to_ad_comment"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && comment_id !~ pattern
+        fail ArgumentError, "invalid value for 'comment_id' when calling AdAccountsApi.reply_to_ad_comment, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'reply_to_ad_comment_request' is set
+      if @api_client.config.client_side_validation && reply_to_ad_comment_request.nil?
+        fail ArgumentError, "Missing the required parameter 'reply_to_ad_comment_request' when calling AdAccountsApi.reply_to_ad_comment"
+      end
+      # resource path
+      local_var_path = '/v1/ads/{adId}/comments/{commentId}/reply'.sub('{' + 'adId' + '}', CGI.escape(ad_id.to_s)).sub('{' + 'commentId' + '}', CGI.escape(comment_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'since'] = opts[:'since'] if !opts[:'since'].nil?
+      query_params[:'until'] = opts[:'_until'] if !opts[:'_until'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(reply_to_ad_comment_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplyToAdComment200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.reply_to_ad_comment",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#reply_to_ad_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

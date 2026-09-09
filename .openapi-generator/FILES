@@ -43,6 +43,7 @@ docs/AdReviewStatus.md
 docs/AdSchedule.md
 docs/AdStatus.md
 docs/AdTargetingApi.md
+docs/AdTracking.md
 docs/AdTreeAdSet.md
 docs/AdTreeAdSetAdSetBudget.md
 docs/AdTreeAdSetBudget.md
@@ -264,6 +265,7 @@ docs/CreateAccountGroup201ResponseGroup.md
 docs/CreateAccountGroupRequest.md
 docs/CreateAdAudience201Response.md
 docs/CreateAdAudienceRequest.md
+docs/CreateAdCampaign200Response.md
 docs/CreateAdCampaign201Response.md
 docs/CreateAdCampaignRequest.md
 docs/CreateAdCreative201Response.md
@@ -405,11 +407,9 @@ docs/CreateStandaloneAdRequestPlacementAssetsRulesInner.md
 docs/CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.md
 docs/CreateStandaloneAdRequestPlacements.md
 docs/CreateStandaloneAdRequestPlatformSpecificData.md
-docs/CreateStandaloneAdRequestPromotedObject.md
 docs/CreateStandaloneAdRequestRegionsInner.md
 docs/CreateStandaloneAdRequestSitelinksInner.md
 docs/CreateStandaloneAdRequestStructuredSnippetsInner.md
-docs/CreateStandaloneAdRequestTracking.md
 docs/CreateStandaloneAdRequestTranslationsInner.md
 docs/CreateStandaloneAdRequestVideo.md
 docs/CreateTestLead200Response.md
@@ -760,6 +760,8 @@ docs/GetInstagramPublishingLimit200Response.md
 docs/GetInstagramStoryInsights200Response.md
 docs/GetInstagramStoryInsights200ResponseData.md
 docs/GetInstagramStoryInsights200ResponseDataMetrics.md
+docs/GetIosFourteenCampaignLimits200Response.md
+docs/GetIosFourteenCampaignLimits200ResponseLimits.md
 docs/GetLeadForm200Response.md
 docs/GetLinkedInAggregateAnalytics200Response.md
 docs/GetLinkedInAggregateAnalytics400Response.md
@@ -936,6 +938,8 @@ docs/GoogleBusinessReview.md
 docs/GoogleBusinessReviewReviewReply.md
 docs/GoogleBusinessReviewReviewer.md
 docs/HandleOAuthCallbackRequest.md
+docs/HideAdComment200Response.md
+docs/HideAdCommentRequest.md
 docs/HideInboxComment200Response.md
 docs/HideInboxCommentRequest.md
 docs/InboxAnalyticsApi.md
@@ -1036,6 +1040,12 @@ docs/ListAdStudies200Response.md
 docs/ListAdVideos200Response.md
 docs/ListAds202Response.md
 docs/ListAdsBusinessCenters200Response.md
+docs/ListAdsInstagramAccounts200Response.md
+docs/ListAdsInstagramAccounts200ResponseAccountsInner.md
+docs/ListAdsInstagramAccounts200ResponsePagesInner.md
+docs/ListAdsInstagramAccounts200ResponseResolved.md
+docs/ListAdvertisableApplications200Response.md
+docs/ListAdvertisableApplications200ResponseApplicationsInner.md
 docs/ListApiKeys200Response.md
 docs/ListBidStrategies200Response.md
 docs/ListBlogArticles200Response.md
@@ -1228,6 +1238,7 @@ docs/MentionsApi.md
 docs/MessagesApi.md
 docs/MessagingAdsApi.md
 docs/MetaAdsPlatformData.md
+docs/MetaInstagramIdentityRef.md
 docs/MetaLeadFormPlatformData.md
 docs/MetaLeadFormPlatformDataContextCard.md
 docs/MetaPromotion.md
@@ -1345,6 +1356,8 @@ docs/ReplaceAdNegativeKeywordListKeywordsRequest.md
 docs/ReplaceCampaignNegativeKeywordListsRequest.md
 docs/ReplaceCampaignNegativeKeywords200Response.md
 docs/ReplaceCampaignNegativeKeywordsRequest.md
+docs/ReplyToAdComment200Response.md
+docs/ReplyToAdCommentRequest.md
 docs/ReplyToGoogleBusinessReview200Response.md
 docs/ReplyToGoogleBusinessReviewRequest.md
 docs/ReplyToInboxPost200Response.md
@@ -2118,6 +2131,7 @@ lib/zernio-sdk/models/ad_promoted_object.rb
 lib/zernio-sdk/models/ad_review_status.rb
 lib/zernio-sdk/models/ad_schedule.rb
 lib/zernio-sdk/models/ad_status.rb
+lib/zernio-sdk/models/ad_tracking.rb
 lib/zernio-sdk/models/ad_tree_ad_set.rb
 lib/zernio-sdk/models/ad_tree_ad_set_ad_set_budget.rb
 lib/zernio-sdk/models/ad_tree_ad_set_budget.rb
@@ -2328,6 +2342,7 @@ lib/zernio-sdk/models/create_account_group201_response_group.rb
 lib/zernio-sdk/models/create_account_group_request.rb
 lib/zernio-sdk/models/create_ad_audience201_response.rb
 lib/zernio-sdk/models/create_ad_audience_request.rb
+lib/zernio-sdk/models/create_ad_campaign200_response.rb
 lib/zernio-sdk/models/create_ad_campaign201_response.rb
 lib/zernio-sdk/models/create_ad_campaign_request.rb
 lib/zernio-sdk/models/create_ad_creative201_response.rb
@@ -2469,11 +2484,9 @@ lib/zernio-sdk/models/create_standalone_ad_request_placement_assets_rules_inner.
 lib/zernio-sdk/models/create_standalone_ad_request_placement_assets_rules_inner_placements.rb
 lib/zernio-sdk/models/create_standalone_ad_request_placements.rb
 lib/zernio-sdk/models/create_standalone_ad_request_platform_specific_data.rb
-lib/zernio-sdk/models/create_standalone_ad_request_promoted_object.rb
 lib/zernio-sdk/models/create_standalone_ad_request_regions_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_sitelinks_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_structured_snippets_inner.rb
-lib/zernio-sdk/models/create_standalone_ad_request_tracking.rb
 lib/zernio-sdk/models/create_standalone_ad_request_translations_inner.rb
 lib/zernio-sdk/models/create_standalone_ad_request_video.rb
 lib/zernio-sdk/models/create_test_lead200_response.rb
@@ -2814,6 +2827,8 @@ lib/zernio-sdk/models/get_instagram_publishing_limit200_response.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response_data.rb
 lib/zernio-sdk/models/get_instagram_story_insights200_response_data_metrics.rb
+lib/zernio-sdk/models/get_ios_fourteen_campaign_limits200_response.rb
+lib/zernio-sdk/models/get_ios_fourteen_campaign_limits200_response_limits.rb
 lib/zernio-sdk/models/get_lead_form200_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics200_response.rb
 lib/zernio-sdk/models/get_linked_in_aggregate_analytics400_response.rb
@@ -2990,6 +3005,8 @@ lib/zernio-sdk/models/google_business_review.rb
 lib/zernio-sdk/models/google_business_review_review_reply.rb
 lib/zernio-sdk/models/google_business_review_reviewer.rb
 lib/zernio-sdk/models/handle_o_auth_callback_request.rb
+lib/zernio-sdk/models/hide_ad_comment200_response.rb
+lib/zernio-sdk/models/hide_ad_comment_request.rb
 lib/zernio-sdk/models/hide_inbox_comment200_response.rb
 lib/zernio-sdk/models/hide_inbox_comment_request.rb
 lib/zernio-sdk/models/inbox_message_edit_attachment.rb
@@ -3085,6 +3102,12 @@ lib/zernio-sdk/models/list_ad_studies200_response.rb
 lib/zernio-sdk/models/list_ad_videos200_response.rb
 lib/zernio-sdk/models/list_ads202_response.rb
 lib/zernio-sdk/models/list_ads_business_centers200_response.rb
+lib/zernio-sdk/models/list_ads_instagram_accounts200_response.rb
+lib/zernio-sdk/models/list_ads_instagram_accounts200_response_accounts_inner.rb
+lib/zernio-sdk/models/list_ads_instagram_accounts200_response_pages_inner.rb
+lib/zernio-sdk/models/list_ads_instagram_accounts200_response_resolved.rb
+lib/zernio-sdk/models/list_advertisable_applications200_response.rb
+lib/zernio-sdk/models/list_advertisable_applications200_response_applications_inner.rb
 lib/zernio-sdk/models/list_api_keys200_response.rb
 lib/zernio-sdk/models/list_bid_strategies200_response.rb
 lib/zernio-sdk/models/list_blog_articles200_response.rb
@@ -3272,6 +3295,7 @@ lib/zernio-sdk/models/media_content_type.rb
 lib/zernio-sdk/models/media_item.rb
 lib/zernio-sdk/models/media_upload_response.rb
 lib/zernio-sdk/models/meta_ads_platform_data.rb
+lib/zernio-sdk/models/meta_instagram_identity_ref.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data.rb
 lib/zernio-sdk/models/meta_lead_form_platform_data_context_card.rb
 lib/zernio-sdk/models/meta_promotion.rb
@@ -3383,6 +3407,8 @@ lib/zernio-sdk/models/replace_ad_negative_keyword_list_keywords_request.rb
 lib/zernio-sdk/models/replace_campaign_negative_keyword_lists_request.rb
 lib/zernio-sdk/models/replace_campaign_negative_keywords200_response.rb
 lib/zernio-sdk/models/replace_campaign_negative_keywords_request.rb
+lib/zernio-sdk/models/reply_to_ad_comment200_response.rb
+lib/zernio-sdk/models/reply_to_ad_comment_request.rb
 lib/zernio-sdk/models/reply_to_google_business_review200_response.rb
 lib/zernio-sdk/models/reply_to_google_business_review_request.rb
 lib/zernio-sdk/models/reply_to_inbox_post200_response.rb
@@ -4130,6 +4156,7 @@ spec/models/ad_review_status_spec.rb
 spec/models/ad_schedule_spec.rb
 spec/models/ad_spec.rb
 spec/models/ad_status_spec.rb
+spec/models/ad_tracking_spec.rb
 spec/models/ad_tree_ad_set_ad_set_budget_spec.rb
 spec/models/ad_tree_ad_set_budget_spec.rb
 spec/models/ad_tree_ad_set_promoted_object_spec.rb
@@ -4340,6 +4367,7 @@ spec/models/create_account_group201_response_spec.rb
 spec/models/create_account_group_request_spec.rb
 spec/models/create_ad_audience201_response_spec.rb
 spec/models/create_ad_audience_request_spec.rb
+spec/models/create_ad_campaign200_response_spec.rb
 spec/models/create_ad_campaign201_response_spec.rb
 spec/models/create_ad_campaign_request_spec.rb
 spec/models/create_ad_creative201_response_spec.rb
@@ -4480,12 +4508,10 @@ spec/models/create_standalone_ad_request_placement_assets_rules_inner_spec.rb
 spec/models/create_standalone_ad_request_placement_assets_spec.rb
 spec/models/create_standalone_ad_request_placements_spec.rb
 spec/models/create_standalone_ad_request_platform_specific_data_spec.rb
-spec/models/create_standalone_ad_request_promoted_object_spec.rb
 spec/models/create_standalone_ad_request_regions_inner_spec.rb
 spec/models/create_standalone_ad_request_sitelinks_inner_spec.rb
 spec/models/create_standalone_ad_request_spec.rb
 spec/models/create_standalone_ad_request_structured_snippets_inner_spec.rb
-spec/models/create_standalone_ad_request_tracking_spec.rb
 spec/models/create_standalone_ad_request_translations_inner_spec.rb
 spec/models/create_standalone_ad_request_video_spec.rb
 spec/models/create_test_lead200_response_spec.rb
@@ -4826,6 +4852,8 @@ spec/models/get_instagram_publishing_limit200_response_spec.rb
 spec/models/get_instagram_story_insights200_response_data_metrics_spec.rb
 spec/models/get_instagram_story_insights200_response_data_spec.rb
 spec/models/get_instagram_story_insights200_response_spec.rb
+spec/models/get_ios_fourteen_campaign_limits200_response_limits_spec.rb
+spec/models/get_ios_fourteen_campaign_limits200_response_spec.rb
 spec/models/get_lead_form200_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics200_response_spec.rb
 spec/models/get_linked_in_aggregate_analytics400_response_spec.rb
@@ -5002,6 +5030,8 @@ spec/models/google_business_review_review_reply_spec.rb
 spec/models/google_business_review_reviewer_spec.rb
 spec/models/google_business_review_spec.rb
 spec/models/handle_o_auth_callback_request_spec.rb
+spec/models/hide_ad_comment200_response_spec.rb
+spec/models/hide_ad_comment_request_spec.rb
 spec/models/hide_inbox_comment200_response_spec.rb
 spec/models/hide_inbox_comment_request_spec.rb
 spec/models/inbox_message_edit_attachment_spec.rb
@@ -5097,6 +5127,12 @@ spec/models/list_ad_studies200_response_spec.rb
 spec/models/list_ad_videos200_response_spec.rb
 spec/models/list_ads202_response_spec.rb
 spec/models/list_ads_business_centers200_response_spec.rb
+spec/models/list_ads_instagram_accounts200_response_accounts_inner_spec.rb
+spec/models/list_ads_instagram_accounts200_response_pages_inner_spec.rb
+spec/models/list_ads_instagram_accounts200_response_resolved_spec.rb
+spec/models/list_ads_instagram_accounts200_response_spec.rb
+spec/models/list_advertisable_applications200_response_applications_inner_spec.rb
+spec/models/list_advertisable_applications200_response_spec.rb
 spec/models/list_api_keys200_response_spec.rb
 spec/models/list_bid_strategies200_response_spec.rb
 spec/models/list_blog_articles200_response_spec.rb
@@ -5284,6 +5320,7 @@ spec/models/media_content_type_spec.rb
 spec/models/media_item_spec.rb
 spec/models/media_upload_response_spec.rb
 spec/models/meta_ads_platform_data_spec.rb
+spec/models/meta_instagram_identity_ref_spec.rb
 spec/models/meta_lead_form_platform_data_context_card_spec.rb
 spec/models/meta_lead_form_platform_data_spec.rb
 spec/models/meta_promotion_spec.rb
@@ -5395,6 +5432,8 @@ spec/models/replace_ad_negative_keyword_list_keywords_request_spec.rb
 spec/models/replace_campaign_negative_keyword_lists_request_spec.rb
 spec/models/replace_campaign_negative_keywords200_response_spec.rb
 spec/models/replace_campaign_negative_keywords_request_spec.rb
+spec/models/reply_to_ad_comment200_response_spec.rb
+spec/models/reply_to_ad_comment_request_spec.rb
 spec/models/reply_to_google_business_review200_response_spec.rb
 spec/models/reply_to_google_business_review_request_spec.rb
 spec/models/reply_to_inbox_post200_response_data_spec.rb

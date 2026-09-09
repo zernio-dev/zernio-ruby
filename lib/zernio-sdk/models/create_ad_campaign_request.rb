@@ -26,6 +26,17 @@ module Zernio
     # Mapped to the ODAX objective (same mapping as POST /v1/ads/create).
     attr_accessor :goal
 
+    # Meta app promotion only. Immutable campaign flag. Set true for iOS 14+ SKAdNetwork campaigns and supply promotedObject.applicationId plus promotedObject.objectStoreUrl. The campaign receives promotedObject only when this flag is true. Cannot be changed on an existing campaign.
+    attr_accessor :is_skadnetwork_attribution
+
+    attr_accessor :promoted_object
+
+    # Meta only. SKAdNetwork app promotion requires AUCTION.
+    attr_accessor :buying_type
+
+    # Meta only. Runs campaign validation without creating or persisting a campaign; Idempotency-Key storage is bypassed. Returns HTTP 200 with validateOnly true and status VALIDATED.
+    attr_accessor :validate_only
+
     attr_accessor :special_ad_categories
 
     # Campaign-level (CBO) budget in WHOLE currency units (USD: 50 = $50.00), NOT cents. Meta's own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Requires budgetType.
@@ -76,6 +87,10 @@ module Zernio
         :'ad_account_id' => :'adAccountId',
         :'name' => :'name',
         :'goal' => :'goal',
+        :'is_skadnetwork_attribution' => :'isSkadnetworkAttribution',
+        :'promoted_object' => :'promotedObject',
+        :'buying_type' => :'buyingType',
+        :'validate_only' => :'validateOnly',
         :'special_ad_categories' => :'specialAdCategories',
         :'budget_amount' => :'budgetAmount',
         :'budget_type' => :'budgetType',
@@ -104,6 +119,10 @@ module Zernio
         :'ad_account_id' => :'String',
         :'name' => :'String',
         :'goal' => :'String',
+        :'is_skadnetwork_attribution' => :'Boolean',
+        :'promoted_object' => :'AdPromotedObject',
+        :'buying_type' => :'String',
+        :'validate_only' => :'Boolean',
         :'special_ad_categories' => :'Array<String>',
         :'budget_amount' => :'Float',
         :'budget_type' => :'String',
@@ -159,6 +178,22 @@ module Zernio
         self.goal = attributes[:'goal']
       else
         self.goal = nil
+      end
+
+      if attributes.key?(:'is_skadnetwork_attribution')
+        self.is_skadnetwork_attribution = attributes[:'is_skadnetwork_attribution']
+      end
+
+      if attributes.key?(:'promoted_object')
+        self.promoted_object = attributes[:'promoted_object']
+      end
+
+      if attributes.key?(:'buying_type')
+        self.buying_type = attributes[:'buying_type']
+      end
+
+      if attributes.key?(:'validate_only')
+        self.validate_only = attributes[:'validate_only']
       end
 
       if attributes.key?(:'special_ad_categories')
@@ -242,6 +277,8 @@ module Zernio
       return false if @goal.nil?
       goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "lead_conversion", "job_applicants", "conversions", "app_promotion", "catalog_sales", "page_likes"])
       return false unless goal_validator.valid?(@goal)
+      buying_type_validator = EnumAttributeValidator.new('String', ["AUCTION", "RESERVED"])
+      return false unless buying_type_validator.valid?(@buying_type)
       budget_type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless budget_type_validator.valid?(@budget_type)
       status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "PAUSED"])
@@ -294,6 +331,16 @@ module Zernio
         fail ArgumentError, "invalid value for \"goal\", must be one of #{validator.allowable_values}."
       end
       @goal = goal
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] buying_type Object to be assigned
+    def buying_type=(buying_type)
+      validator = EnumAttributeValidator.new('String', ["AUCTION", "RESERVED"])
+      unless validator.valid?(buying_type)
+        fail ArgumentError, "invalid value for \"buying_type\", must be one of #{validator.allowable_values}."
+      end
+      @buying_type = buying_type
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -350,6 +397,10 @@ module Zernio
           ad_account_id == o.ad_account_id &&
           name == o.name &&
           goal == o.goal &&
+          is_skadnetwork_attribution == o.is_skadnetwork_attribution &&
+          promoted_object == o.promoted_object &&
+          buying_type == o.buying_type &&
+          validate_only == o.validate_only &&
           special_ad_categories == o.special_ad_categories &&
           budget_amount == o.budget_amount &&
           budget_type == o.budget_type &&
@@ -369,7 +420,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, goal, special_ad_categories, budget_amount, budget_type, status, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id].hash
+      [account_id, ad_account_id, name, goal, is_skadnetwork_attribution, promoted_object, buying_type, validate_only, special_ad_categories, budget_amount, budget_type, status, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id].hash
     end
 
     # Builds the object from hash

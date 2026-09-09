@@ -93,6 +93,21 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for delete_ad_comment
+  # Delete an ad comment
+  # Delete your own TikTok ad comment or reply. TikTok must return can_delete&#x3D;true for the comment. Other users&#39; comments can be hidden instead.  Requires Ads access. The ad is resolved within the caller&#39;s accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok&#39;s ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+  # @param ad_id Internal Zernio ad ID or indexed platform ad ID.
+  # @param comment_id TikTok comment ID from the ad comment listing.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+  # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+  # @return [ReplyToAdComment200Response]
+  describe 'delete_ad_comment test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for delete_ad_negative_keyword_list
   # Delete a negative keyword list
   # Removes the Google shared negative keyword list. Detach it from all campaigns first; an in-use list is rejected. Only NEGATIVE_KEYWORDS shared sets are supported.
@@ -136,11 +151,13 @@ describe 'AdAccountsApi' do
 
   # unit tests for get_ad_comments
   # List comments on an ad
-  # Returns comments on an ad&#39;s underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular GET /v1/inbox/comments/{postId} endpoint cannot serve because dark posts are not in Zernio&#39;s post database.  An ad that runs on both Facebook feed and Instagram feed has two separate underlying posts with separate comment threads (the creative&#39;s effective_object_story_id and effective_instagram_media_id). Use the &#x60;placement&#x60; query param to pick one; with no param the Instagram side is returned when it exists, otherwise Facebook. The identifiers are read from the ad record (persisted during sync) with a Marketing-API fallback for ads that predate the field.  For Instagram-placed comments, the Instagram account that runs the ad must be connected to Zernio, because those comments are read through that account&#39;s token. If no connected Instagram account on the profile can read the ad&#39;s media, the call returns ads_connection_required (the Facebook side, if any, is still readable via ?placement&#x3D;facebook).  Meta-only for now. Other ad platforms (TikTok, LinkedIn, Pinterest, Google, X) are not wired to this endpoint and return feature_not_available.  Requires the Ads add-on. Response shape matches GET /v1/inbox/comments/{postId}.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: Zernio internal &#x60;_id&#x60; (24-char hex), Meta&#39;s numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;), or the creative&#39;s &#x60;effective_object_story_id&#x60; / &#x60;effective_instagram_media_id&#x60;. Caller doesn&#39;t need a translation step. 
-  # @param ad_id Internal Zernio ad ID (ObjectId).
+  # Returns comments on an ad&#39;s underlying creative post. Useful for moderating or analyzing engagement on dark posts (ad creatives that never went live organically), which the regular GET /v1/inbox/comments/{postId} endpoint cannot serve because dark posts are not in Zernio&#39;s post database.  An ad that runs on both Facebook feed and Instagram feed has two separate underlying posts with separate comment threads (the creative&#39;s effective_object_story_id and effective_instagram_media_id). Use the &#x60;placement&#x60; query param to pick one; with no param the Instagram side is returned when it exists, otherwise Facebook. The identifiers are read from the ad record (persisted during sync) with a Marketing-API fallback for ads that predate the field.  For Instagram-placed comments, the Instagram account that runs the ad must be connected to Zernio, because those comments are read through that account&#39;s token. If no connected Instagram account on the profile can read the ad&#39;s media, the call returns ads_connection_required (the Facebook side, if any, is still readable via ?placement&#x3D;facebook).  TikTok uses the connected TikTok Ads advertiser token and supports both paid video ads and Spark Ads. &#x60;since&#x60; and &#x60;until&#x60; select a date window of at most 30 days; the default is the last 30 days. TikTok searches by ad group, so Zernio filters each page to this ad. A page can be empty while &#x60;pagination.hasMore&#x60; is true. Reuse &#x60;pagination.cursor&#x60; with the same &#x60;limit&#x60;; the cursor retains the date window. &#x60;placement&#x60; is Meta-only and returns a 400 for TikTok.  TikTok returns replies as separate comments with &#x60;parentId&#x60;; nested reply fetching is not supported. &#x60;canReply&#x60; requires a first-level comment and an identity with comment-management permission. &#x60;canDelete&#x60; reflects TikTok&#39;s own-comment deletion capability. &#x60;canHide&#x60; is supported and &#x60;canLike&#x60; is false. Use the ad comment reply, hide and delete operations below to moderate TikTok comments. Other platforms return feature_not_available.  Requires the Ads add-on. Response shape matches GET /v1/inbox/comments/{postId}.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: Zernio internal &#x60;_id&#x60; (24-char hex), the numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;), or the creative&#39;s &#x60;effective_object_story_id&#x60; / &#x60;effective_instagram_media_id&#x60;. Caller doesn&#39;t need a translation step. 
+  # @param ad_id Internal Zernio ad ID or indexed platform ad/post ID.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :placement Which side of the ad to return comments for. Omit to default to the Instagram side when present, else Facebook. Returns ad_not_commentable if the ad has no such placement.
   # @option opts [Integer] :limit 
+  # @option opts [Date] :since TikTok-only start date. Defaults to 30 days before until. Maximum window is 30 days.
+  # @option opts [Date] :_until TikTok-only end date. Defaults to today in UTC.
   # @option opts [String] :cursor Pagination cursor from a previous response.
   # @return [GetAdComments200Response]
   describe 'get_ad_comments test' do
@@ -208,6 +225,20 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for get_ios_fourteen_campaign_limits
+  # Get iOS 14 campaign limits
+  # Reads Meta iOS 14 campaign limits for an application on an ad account. applicationId is sent as Meta app_id. This read does not establish that the application is configured for iOS promotion.
+  # @param account_id Zernio Meta Ads or Facebook SocialAccount ID.
+  # @param ad_account_id Meta ad account ID including the act_ prefix.
+  # @param application_id Meta application ID from advertisable-applications.
+  # @param [Hash] opts the optional parameters
+  # @return [GetIosFourteenCampaignLimits200Response]
+  describe 'get_ios_fourteen_campaign_limits test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for get_value_rule_set
   # Read a value rule set
   # Reads one value rule set including every nested rule id and criterion id. This is step one of any edit: &#x60;PUT&#x60; is a full replace, so you need the ids before you can keep the objects you are not changing.  Meta&#39;s own read returns &#x60;GENDER&#x60; values lowercase (&#x60;\&quot;male\&quot;&#x60;) while writes require &#x60;\&quot;MALE\&quot;&#x60;. Values are passed through untouched, so never case-compare a stored rule against a fetched one.
@@ -216,6 +247,22 @@ describe 'AdAccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [GetValueRuleSet200Response]
   describe 'get_value_rule_set test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for hide_ad_comment
+  # Hide or unhide an ad comment
+  # Hide or restore a TikTok ad comment. Send hidden&#x3D;true to hide it or hidden&#x3D;false to make it public again.  Requires Ads access. The ad is resolved within the caller&#39;s accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok&#39;s ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+  # @param ad_id Internal Zernio ad ID or indexed platform ad ID.
+  # @param comment_id TikTok comment ID from the ad comment listing.
+  # @param hide_ad_comment_request 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+  # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+  # @return [HideAdComment200Response]
+  describe 'hide_ad_comment test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -305,6 +352,32 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for list_ads_instagram_accounts
+  # List Instagram ad identities
+  # Discovers identities through connected_instagram_accounts, Page linkage and Page-backed identities, with a best-effort business fallback. Business permission errors do not fail discovery. The resolved object uses the same profile-scoped resolver as ad creation; null means no identity was resolved. Format-specific observed-actor fallbacks at creative creation are not predicted.
+  # @param account_id Zernio Meta Ads or Facebook SocialAccount ID.
+  # @param ad_account_id Meta ad account ID including the act_ prefix.
+  # @param [Hash] opts the optional parameters
+  # @return [ListAdsInstagramAccounts200Response]
+  describe 'list_ads_instagram_accounts test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_advertisable_applications
+  # List advertisable apps
+  # Lists applications available to a Meta ad account, their supported platforms and unmodified object store URLs. A listed app still needs a configured mobile platform and store URL to run install promotion.
+  # @param account_id Zernio Meta Ads or Facebook SocialAccount ID.
+  # @param ad_account_id Meta ad account ID including the act_ prefix.
+  # @param [Hash] opts the optional parameters
+  # @return [ListAdvertisableApplications200Response]
+  describe 'list_advertisable_applications test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_custom_conversions
   # List custom conversions
   # The ad account&#39;s Meta custom conversions, including archived ones (&#x60;isArchived&#x60;).
@@ -383,6 +456,22 @@ describe 'AdAccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [ReplaceAdNegativeKeywordListKeywords200Response]
   describe 'replace_ad_negative_keyword_list_keywords test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for reply_to_ad_comment
+  # Reply to an ad comment
+  # Reply to a first-level TikTok ad comment. Requires a TT_USER or CUSTOMIZED_USER identity with comment-management permission. Replies to replies are rejected. The response commentId identifies the new reply. This operation is not idempotent; do not blindly retry an uncertain response.  Requires Ads access. The ad is resolved within the caller&#39;s accessible profiles. Before moderation, Zernio verifies that the comment belongs to this ad using TikTok&#39;s ad-group comment listing. The default search window is the last 30 days. Use since/until for older comments, with at most 30 days between the dates. Lookups scan at most 2,000 ad-group comments; narrow the date window if exceeded. Meta returns 501 feature_not_available with guidance to use the existing inbox comment endpoints and the account/post IDs from GET /v1/ads/{adId}/comments. 
+  # @param ad_id Internal Zernio ad ID or indexed platform ad ID.
+  # @param comment_id TikTok comment ID from the ad comment listing.
+  # @param reply_to_ad_comment_request 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Date] :since Start date of the comment lookup window. Defaults to 30 days before until.
+  # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
+  # @return [ReplyToAdComment200Response]
+  describe 'reply_to_ad_comment test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

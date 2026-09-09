@@ -111,6 +111,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**create_custom_conversion**](docs/AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion
 *Zernio::AdAccountsApi* | [**create_high_demand_period**](docs/AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase
 *Zernio::AdAccountsApi* | [**create_value_rule_set**](docs/AdAccountsApi.md#create_value_rule_set) | **POST** /v1/ads/value-rule-sets | Create a value rule set
+*Zernio::AdAccountsApi* | [**delete_ad_comment**](docs/AdAccountsApi.md#delete_ad_comment) | **DELETE** /v1/ads/{adId}/comments/{commentId} | Delete an ad comment
 *Zernio::AdAccountsApi* | [**delete_ad_negative_keyword_list**](docs/AdAccountsApi.md#delete_ad_negative_keyword_list) | **DELETE** /v1/ads/accounts/negative-keyword-lists/{listId} | Delete a negative keyword list
 *Zernio::AdAccountsApi* | [**delete_value_rule_set**](docs/AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set
 *Zernio::AdAccountsApi* | [**get_ad_account_finance**](docs/AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances
@@ -119,19 +120,24 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**get_ads_activity_log**](docs/AdAccountsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log
 *Zernio::AdAccountsApi* | [**get_dsa_defaults**](docs/AdAccountsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults
 *Zernio::AdAccountsApi* | [**get_dsa_recommendations**](docs/AdAccountsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions
+*Zernio::AdAccountsApi* | [**get_ios_fourteen_campaign_limits**](docs/AdAccountsApi.md#get_ios_fourteen_campaign_limits) | **GET** /v1/ads/ios-fourteen-campaign-limits | Get iOS 14 campaign limits
 *Zernio::AdAccountsApi* | [**get_value_rule_set**](docs/AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set
+*Zernio::AdAccountsApi* | [**hide_ad_comment**](docs/AdAccountsApi.md#hide_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/hide | Hide or unhide an ad comment
 *Zernio::AdAccountsApi* | [**list_account_callouts**](docs/AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account-level callout extensions
 *Zernio::AdAccountsApi* | [**list_ad_accounts**](docs/AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdAccountsApi* | [**list_ad_labels**](docs/AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels
 *Zernio::AdAccountsApi* | [**list_ad_negative_keyword_lists**](docs/AdAccountsApi.md#list_ad_negative_keyword_lists) | **GET** /v1/ads/accounts/negative-keyword-lists | List negative keyword lists
 *Zernio::AdAccountsApi* | [**list_ad_studies**](docs/AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies
 *Zernio::AdAccountsApi* | [**list_ads_business_centers**](docs/AdAccountsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
+*Zernio::AdAccountsApi* | [**list_ads_instagram_accounts**](docs/AdAccountsApi.md#list_ads_instagram_accounts) | **GET** /v1/ads/instagram-accounts | List Instagram ad identities
+*Zernio::AdAccountsApi* | [**list_advertisable_applications**](docs/AdAccountsApi.md#list_advertisable_applications) | **GET** /v1/ads/advertisable-applications | List advertisable apps
 *Zernio::AdAccountsApi* | [**list_custom_conversions**](docs/AdAccountsApi.md#list_custom_conversions) | **GET** /v1/accounts/{accountId}/custom-conversions | List custom conversions
 *Zernio::AdAccountsApi* | [**list_high_demand_periods**](docs/AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules
 *Zernio::AdAccountsApi* | [**list_meta_businesses**](docs/AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list
 *Zernio::AdAccountsApi* | [**list_value_rule_sets**](docs/AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets
 *Zernio::AdAccountsApi* | [**remove_account_callout**](docs/AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove an account-level callout extension
 *Zernio::AdAccountsApi* | [**replace_ad_negative_keyword_list_keywords**](docs/AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords
+*Zernio::AdAccountsApi* | [**reply_to_ad_comment**](docs/AdAccountsApi.md#reply_to_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/reply | Reply to an ad comment
 *Zernio::AdAccountsApi* | [**update_ad_account**](docs/AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
 *Zernio::AdAccountsApi* | [**update_ad_negative_keyword_list**](docs/AdAccountsApi.md#update_ad_negative_keyword_list) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId} | Rename a negative keyword list
 *Zernio::AdAccountsApi* | [**update_value_rule_set**](docs/AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set
@@ -793,6 +799,7 @@ Class | Method | HTTP request | Description
  - [Zernio::AdReviewStatus](docs/AdReviewStatus.md)
  - [Zernio::AdSchedule](docs/AdSchedule.md)
  - [Zernio::AdStatus](docs/AdStatus.md)
+ - [Zernio::AdTracking](docs/AdTracking.md)
  - [Zernio::AdTreeAdSet](docs/AdTreeAdSet.md)
  - [Zernio::AdTreeAdSetAdSetBudget](docs/AdTreeAdSetAdSetBudget.md)
  - [Zernio::AdTreeAdSetBudget](docs/AdTreeAdSetBudget.md)
@@ -1003,6 +1010,7 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
  - [Zernio::CreateAdAudience201Response](docs/CreateAdAudience201Response.md)
  - [Zernio::CreateAdAudienceRequest](docs/CreateAdAudienceRequest.md)
+ - [Zernio::CreateAdCampaign200Response](docs/CreateAdCampaign200Response.md)
  - [Zernio::CreateAdCampaign201Response](docs/CreateAdCampaign201Response.md)
  - [Zernio::CreateAdCampaignRequest](docs/CreateAdCampaignRequest.md)
  - [Zernio::CreateAdCreative201Response](docs/CreateAdCreative201Response.md)
@@ -1144,11 +1152,9 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements](docs/CreateStandaloneAdRequestPlacementAssetsRulesInnerPlacements.md)
  - [Zernio::CreateStandaloneAdRequestPlacements](docs/CreateStandaloneAdRequestPlacements.md)
  - [Zernio::CreateStandaloneAdRequestPlatformSpecificData](docs/CreateStandaloneAdRequestPlatformSpecificData.md)
- - [Zernio::CreateStandaloneAdRequestPromotedObject](docs/CreateStandaloneAdRequestPromotedObject.md)
  - [Zernio::CreateStandaloneAdRequestRegionsInner](docs/CreateStandaloneAdRequestRegionsInner.md)
  - [Zernio::CreateStandaloneAdRequestSitelinksInner](docs/CreateStandaloneAdRequestSitelinksInner.md)
  - [Zernio::CreateStandaloneAdRequestStructuredSnippetsInner](docs/CreateStandaloneAdRequestStructuredSnippetsInner.md)
- - [Zernio::CreateStandaloneAdRequestTracking](docs/CreateStandaloneAdRequestTracking.md)
  - [Zernio::CreateStandaloneAdRequestTranslationsInner](docs/CreateStandaloneAdRequestTranslationsInner.md)
  - [Zernio::CreateStandaloneAdRequestVideo](docs/CreateStandaloneAdRequestVideo.md)
  - [Zernio::CreateTestLead200Response](docs/CreateTestLead200Response.md)
@@ -1489,6 +1495,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetInstagramStoryInsights200Response](docs/GetInstagramStoryInsights200Response.md)
  - [Zernio::GetInstagramStoryInsights200ResponseData](docs/GetInstagramStoryInsights200ResponseData.md)
  - [Zernio::GetInstagramStoryInsights200ResponseDataMetrics](docs/GetInstagramStoryInsights200ResponseDataMetrics.md)
+ - [Zernio::GetIosFourteenCampaignLimits200Response](docs/GetIosFourteenCampaignLimits200Response.md)
+ - [Zernio::GetIosFourteenCampaignLimits200ResponseLimits](docs/GetIosFourteenCampaignLimits200ResponseLimits.md)
  - [Zernio::GetLeadForm200Response](docs/GetLeadForm200Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics200Response](docs/GetLinkedInAggregateAnalytics200Response.md)
  - [Zernio::GetLinkedInAggregateAnalytics400Response](docs/GetLinkedInAggregateAnalytics400Response.md)
@@ -1665,6 +1673,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GoogleBusinessReviewReviewReply](docs/GoogleBusinessReviewReviewReply.md)
  - [Zernio::GoogleBusinessReviewReviewer](docs/GoogleBusinessReviewReviewer.md)
  - [Zernio::HandleOAuthCallbackRequest](docs/HandleOAuthCallbackRequest.md)
+ - [Zernio::HideAdComment200Response](docs/HideAdComment200Response.md)
+ - [Zernio::HideAdCommentRequest](docs/HideAdCommentRequest.md)
  - [Zernio::HideInboxComment200Response](docs/HideInboxComment200Response.md)
  - [Zernio::HideInboxCommentRequest](docs/HideInboxCommentRequest.md)
  - [Zernio::InboxMessageEditAttachment](docs/InboxMessageEditAttachment.md)
@@ -1760,6 +1770,12 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdVideos200Response](docs/ListAdVideos200Response.md)
  - [Zernio::ListAds202Response](docs/ListAds202Response.md)
  - [Zernio::ListAdsBusinessCenters200Response](docs/ListAdsBusinessCenters200Response.md)
+ - [Zernio::ListAdsInstagramAccounts200Response](docs/ListAdsInstagramAccounts200Response.md)
+ - [Zernio::ListAdsInstagramAccounts200ResponseAccountsInner](docs/ListAdsInstagramAccounts200ResponseAccountsInner.md)
+ - [Zernio::ListAdsInstagramAccounts200ResponsePagesInner](docs/ListAdsInstagramAccounts200ResponsePagesInner.md)
+ - [Zernio::ListAdsInstagramAccounts200ResponseResolved](docs/ListAdsInstagramAccounts200ResponseResolved.md)
+ - [Zernio::ListAdvertisableApplications200Response](docs/ListAdvertisableApplications200Response.md)
+ - [Zernio::ListAdvertisableApplications200ResponseApplicationsInner](docs/ListAdvertisableApplications200ResponseApplicationsInner.md)
  - [Zernio::ListApiKeys200Response](docs/ListApiKeys200Response.md)
  - [Zernio::ListBidStrategies200Response](docs/ListBidStrategies200Response.md)
  - [Zernio::ListBlogArticles200Response](docs/ListBlogArticles200Response.md)
@@ -1947,6 +1963,7 @@ Class | Method | HTTP request | Description
  - [Zernio::MediaItem](docs/MediaItem.md)
  - [Zernio::MediaUploadResponse](docs/MediaUploadResponse.md)
  - [Zernio::MetaAdsPlatformData](docs/MetaAdsPlatformData.md)
+ - [Zernio::MetaInstagramIdentityRef](docs/MetaInstagramIdentityRef.md)
  - [Zernio::MetaLeadFormPlatformData](docs/MetaLeadFormPlatformData.md)
  - [Zernio::MetaLeadFormPlatformDataContextCard](docs/MetaLeadFormPlatformDataContextCard.md)
  - [Zernio::MetaPromotion](docs/MetaPromotion.md)
@@ -2058,6 +2075,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplaceCampaignNegativeKeywordListsRequest](docs/ReplaceCampaignNegativeKeywordListsRequest.md)
  - [Zernio::ReplaceCampaignNegativeKeywords200Response](docs/ReplaceCampaignNegativeKeywords200Response.md)
  - [Zernio::ReplaceCampaignNegativeKeywordsRequest](docs/ReplaceCampaignNegativeKeywordsRequest.md)
+ - [Zernio::ReplyToAdComment200Response](docs/ReplyToAdComment200Response.md)
+ - [Zernio::ReplyToAdCommentRequest](docs/ReplyToAdCommentRequest.md)
  - [Zernio::ReplyToGoogleBusinessReview200Response](docs/ReplyToGoogleBusinessReview200Response.md)
  - [Zernio::ReplyToGoogleBusinessReviewRequest](docs/ReplyToGoogleBusinessReviewRequest.md)
  - [Zernio::ReplyToInboxPost200Response](docs/ReplyToInboxPost200Response.md)

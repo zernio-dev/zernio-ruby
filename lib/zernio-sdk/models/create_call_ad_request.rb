@@ -18,6 +18,8 @@ module Zernio
     # Meta enhancement settings for single or attached ads, and defaults for creatives[]. An item replaces the entire map, including with an empty object.
     attr_accessor :creative_features
 
+    attr_accessor :tracking
+
     # Facebook or Instagram SocialAccount ID.
     attr_accessor :account_id
 
@@ -161,6 +163,7 @@ module Zernio
     def self.attribute_map
       {
         :'creative_features' => :'creativeFeatures',
+        :'tracking' => :'tracking',
         :'account_id' => :'accountId',
         :'ad_account_id' => :'adAccountId',
         :'name' => :'name',
@@ -219,6 +222,7 @@ module Zernio
     def self.openapi_types
       {
         :'creative_features' => :'Hash<String, String>',
+        :'tracking' => :'AdTracking',
         :'account_id' => :'String',
         :'ad_account_id' => :'String',
         :'name' => :'String',
@@ -296,6 +300,10 @@ module Zernio
         if (value = attributes[:'creative_features']).is_a?(Hash)
           self.creative_features = value
         end
+      end
+
+      if attributes.key?(:'tracking')
+        self.tracking = attributes[:'tracking']
       end
 
       if attributes.key?(:'account_id')
@@ -937,6 +945,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           creative_features == o.creative_features &&
+          tracking == o.tracking &&
           account_id == o.account_id &&
           ad_account_id == o.ad_account_id &&
           name == o.name &&
@@ -989,7 +998,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [creative_features, account_id, ad_account_id, name, existing_post_id, object_story_id, whatsapp_phone_number, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, regional_regulation_identities, phone_number, link_url].hash
+      [creative_features, tracking, account_id, ad_account_id, name, existing_post_id, object_story_id, whatsapp_phone_number, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, regional_regulation_identities, phone_number, link_url].hash
     end
 
     # Builds the object from hash

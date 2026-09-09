@@ -8,6 +8,10 @@
 | **ad_account_id** | **String** | Platform ad account id (Meta act_&lt;n&gt;, Google customer id, LinkedIn account id, ...). |  |
 | **name** | **String** |  |  |
 | **goal** | **String** | Mapped to the ODAX objective (same mapping as POST /v1/ads/create). |  |
+| **is_skadnetwork_attribution** | **Boolean** | Meta app promotion only. Immutable campaign flag. Set true for iOS 14+ SKAdNetwork campaigns and supply promotedObject.applicationId plus promotedObject.objectStoreUrl. The campaign receives promotedObject only when this flag is true. Cannot be changed on an existing campaign. | [optional] |
+| **promoted_object** | [**AdPromotedObject**](AdPromotedObject.md) |  | [optional] |
+| **buying_type** | **String** | Meta only. SKAdNetwork app promotion requires AUCTION. | [optional] |
+| **validate_only** | **Boolean** | Meta only. Runs campaign validation without creating or persisting a campaign; Idempotency-Key storage is bypassed. Returns HTTP 200 with validateOnly true and status VALIDATED. | [optional] |
 | **special_ad_categories** | **Array&lt;String&gt;** |  | [optional] |
 | **budget_amount** | **Float** | Campaign-level (CBO) budget in WHOLE currency units (USD: 50 &#x3D; $50.00), NOT cents. Meta&#39;s own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Requires budgetType. | [optional] |
 | **budget_type** | **String** |  | [optional] |
@@ -27,6 +31,10 @@ instance = Zernio::CreateAdCampaignRequest.new(
   ad_account_id: null,
   name: null,
   goal: null,
+  is_skadnetwork_attribution: null,
+  promoted_object: null,
+  buying_type: null,
+  validate_only: null,
   special_ad_categories: null,
   budget_amount: null,
   budget_type: null,

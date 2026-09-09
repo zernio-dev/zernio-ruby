@@ -329,7 +329,7 @@ end
 
 ## create_ad_campaign
 
-> <CreateAdCampaign201Response> create_ad_campaign(create_ad_campaign_request, opts)
+> <CreateAdCampaign200Response> create_ad_campaign(create_ad_campaign_request, opts)
 
 Create a standalone campaign
 
@@ -365,7 +365,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateAdCampaign201Response>, Integer, Hash)> create_ad_campaign_with_http_info(create_ad_campaign_request, opts)
+> <Array(<CreateAdCampaign200Response>, Integer, Hash)> create_ad_campaign_with_http_info(create_ad_campaign_request, opts)
 
 ```ruby
 begin
@@ -373,7 +373,7 @@ begin
   data, status_code, headers = api_instance.create_ad_campaign_with_http_info(create_ad_campaign_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateAdCampaign201Response>
+  p data # => <CreateAdCampaign200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdCampaignsApi->create_ad_campaign_with_http_info: #{e}"
 end
@@ -388,7 +388,7 @@ end
 
 ### Return type
 
-[**CreateAdCampaign201Response**](CreateAdCampaign201Response.md)
+[**CreateAdCampaign200Response**](CreateAdCampaign200Response.md)
 
 ### Authorization
 

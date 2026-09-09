@@ -88,7 +88,7 @@ describe 'AdCampaignsApi' do
   # @param create_ad_campaign_request 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
-  # @return [CreateAdCampaign201Response]
+  # @return [CreateAdCampaign200Response]
   describe 'create_ad_campaign test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

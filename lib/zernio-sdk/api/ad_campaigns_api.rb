@@ -309,7 +309,7 @@ module Zernio
     # @param create_ad_campaign_request [CreateAdCampaignRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
-    # @return [CreateAdCampaign201Response]
+    # @return [CreateAdCampaign200Response]
     def create_ad_campaign(create_ad_campaign_request, opts = {})
       data, _status_code, _headers = create_ad_campaign_with_http_info(create_ad_campaign_request, opts)
       data
@@ -320,7 +320,7 @@ module Zernio
     # @param create_ad_campaign_request [CreateAdCampaignRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409. Only 2xx responses are stored, so a request that failed with a 4xx can be retried with a corrected body under the SAME key.
-    # @return [Array<(CreateAdCampaign201Response, Integer, Hash)>] CreateAdCampaign201Response data, response status code and response headers
+    # @return [Array<(CreateAdCampaign200Response, Integer, Hash)>] CreateAdCampaign200Response data, response status code and response headers
     def create_ad_campaign_with_http_info(create_ad_campaign_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AdCampaignsApi.create_ad_campaign ...'
@@ -357,7 +357,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(create_ad_campaign_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CreateAdCampaign201Response'
+      return_type = opts[:debug_return_type] || 'CreateAdCampaign200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

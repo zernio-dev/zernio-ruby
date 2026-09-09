@@ -15,7 +15,7 @@ require 'time'
 
 module Zernio
   class GetAdComments200ResponseMeta < ApiModelBase
-    # Which side these comments are on (same as `placement`).
+    # Platform of the comments.
     attr_accessor :platform
 
     # The placement these comments are for, useful when you didn't pass ?placement= and want to know which one you got.
@@ -24,11 +24,20 @@ module Zernio
     # Internal Zernio ad ID.
     attr_accessor :ad_id
 
-    # Meta ad ID.
+    # Platform ad ID.
     attr_accessor :platform_ad_id
 
     # Underlying post ID the comments belong to. effective_object_story_id for the Facebook side, effective_instagram_media_id for the Instagram side.
     attr_accessor :effective_story_id
+
+    # TikTok-only video item ID. Null when the ad and comments do not expose it.
+    attr_accessor :tiktok_item_id
+
+    # TikTok-only resolved start date.
+    attr_accessor :since
+
+    # TikTok-only resolved end date.
+    attr_accessor :_until
 
     # Facebook-only. The connected Facebook Page SocialAccount these comments were read through. Pass it as `accountId` (with `effectiveStoryId` as the postId) to /v1/inbox/comments to reply/hide/delete. Null when no connected Page was used (then moderation isn't possible).
     attr_accessor :facebook_account_id
@@ -77,6 +86,9 @@ module Zernio
         :'ad_id' => :'adId',
         :'platform_ad_id' => :'platformAdId',
         :'effective_story_id' => :'effectiveStoryId',
+        :'tiktok_item_id' => :'tiktokItemId',
+        :'since' => :'since',
+        :'_until' => :'until',
         :'facebook_account_id' => :'facebookAccountId',
         :'instagram_user_id' => :'instagramUserId',
         :'instagram_permalink' => :'instagramPermalink',
@@ -104,6 +116,9 @@ module Zernio
         :'ad_id' => :'String',
         :'platform_ad_id' => :'String',
         :'effective_story_id' => :'String',
+        :'tiktok_item_id' => :'String',
+        :'since' => :'Date',
+        :'_until' => :'Date',
         :'facebook_account_id' => :'String',
         :'instagram_user_id' => :'String',
         :'instagram_permalink' => :'String',
@@ -116,6 +131,7 @@ module Zernio
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'tiktok_item_id',
         :'facebook_account_id',
       ])
     end
@@ -144,8 +160,6 @@ module Zernio
 
       if attributes.key?(:'placement')
         self.placement = attributes[:'placement']
-      else
-        self.placement = nil
       end
 
       if attributes.key?(:'ad_id')
@@ -156,14 +170,22 @@ module Zernio
 
       if attributes.key?(:'platform_ad_id')
         self.platform_ad_id = attributes[:'platform_ad_id']
-      else
-        self.platform_ad_id = nil
       end
 
       if attributes.key?(:'effective_story_id')
         self.effective_story_id = attributes[:'effective_story_id']
-      else
-        self.effective_story_id = nil
+      end
+
+      if attributes.key?(:'tiktok_item_id')
+        self.tiktok_item_id = attributes[:'tiktok_item_id']
+      end
+
+      if attributes.key?(:'since')
+        self.since = attributes[:'since']
+      end
+
+      if attributes.key?(:'_until')
+        self._until = attributes[:'_until']
       end
 
       if attributes.key?(:'facebook_account_id')
@@ -204,20 +226,8 @@ module Zernio
         invalid_properties.push('invalid value for "platform", platform cannot be nil.')
       end
 
-      if @placement.nil?
-        invalid_properties.push('invalid value for "placement", placement cannot be nil.')
-      end
-
       if @ad_id.nil?
         invalid_properties.push('invalid value for "ad_id", ad_id cannot be nil.')
-      end
-
-      if @platform_ad_id.nil?
-        invalid_properties.push('invalid value for "platform_ad_id", platform_ad_id cannot be nil.')
-      end
-
-      if @effective_story_id.nil?
-        invalid_properties.push('invalid value for "effective_story_id", effective_story_id cannot be nil.')
       end
 
       if @account_id.nil?
@@ -236,14 +246,11 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @platform.nil?
-      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      platform_validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok"])
       return false unless platform_validator.valid?(@platform)
-      return false if @placement.nil?
       placement_validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
       return false unless placement_validator.valid?(@placement)
       return false if @ad_id.nil?
-      return false if @platform_ad_id.nil?
-      return false if @effective_story_id.nil?
       return false if @account_id.nil?
       return false if @last_updated.nil?
       true
@@ -252,7 +259,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] platform Object to be assigned
     def platform=(platform)
-      validator = EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      validator = EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok"])
       unless validator.valid?(platform)
         fail ArgumentError, "invalid value for \"platform\", must be one of #{validator.allowable_values}."
       end
@@ -277,26 +284,6 @@ module Zernio
       end
 
       @ad_id = ad_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] platform_ad_id Value to be assigned
-    def platform_ad_id=(platform_ad_id)
-      if platform_ad_id.nil?
-        fail ArgumentError, 'platform_ad_id cannot be nil'
-      end
-
-      @platform_ad_id = platform_ad_id
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] effective_story_id Value to be assigned
-    def effective_story_id=(effective_story_id)
-      if effective_story_id.nil?
-        fail ArgumentError, 'effective_story_id cannot be nil'
-      end
-
-      @effective_story_id = effective_story_id
     end
 
     # Custom attribute writer method with validation
@@ -329,6 +316,9 @@ module Zernio
           ad_id == o.ad_id &&
           platform_ad_id == o.platform_ad_id &&
           effective_story_id == o.effective_story_id &&
+          tiktok_item_id == o.tiktok_item_id &&
+          since == o.since &&
+          _until == o._until &&
           facebook_account_id == o.facebook_account_id &&
           instagram_user_id == o.instagram_user_id &&
           instagram_permalink == o.instagram_permalink &&
@@ -346,7 +336,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, placement, ad_id, platform_ad_id, effective_story_id, facebook_account_id, instagram_user_id, instagram_permalink, instagram_account_id, account_id, last_updated].hash
+      [platform, placement, ad_id, platform_ad_id, effective_story_id, tiktok_item_id, since, _until, facebook_account_id, instagram_user_id, instagram_permalink, instagram_account_id, account_id, last_updated].hash
     end
 
     # Builds the object from hash

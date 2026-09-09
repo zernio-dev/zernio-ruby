@@ -16,6 +16,12 @@ require 'time'
 module Zernio
   # Normalized, platform-agnostic ad-targeting spec. Every field is optional, an empty object targets the platform's default broadest audience. Field names are camelCase and identical across `POST /v1/ads/create` (the `targeting` object), `POST /v1/ads/targeting/reach-estimate`, and `saved_targeting` audiences, so a spec resolved once can be reused verbatim.  Entity ids (`regions[].key`, `cities[].key`, `zips[].key`, `metros[].key`, `interests[].id`, `behaviors[].id`) are the platform's opaque identifiers resolved via `GET /v1/ads/targeting/search`. A spec is therefore meaningful only for the platform it was built against, except the portable fields (`countries`, `ageMin`/`ageMax`, `gender`, `incomeTier`, `languages`) which carry across platforms. Fields a platform cannot honour are rejected at create time with `INVALID_FIELD_VALUE` naming the offending field (not silently dropped). 
   class TargetingSpec < ApiModelBase
+    # Meta only. Operating systems and version ranges, such as iOS_ver_14.0_and_above or Android. Emitted as user_os. May also be supplied inside targeting.
+    attr_accessor :user_os
+
+    # Meta only. Device models such as iPhone. Emitted as user_device. May also be supplied inside targeting.
+    attr_accessor :user_device
+
     # ISO 3166-1 alpha-2 country codes (e.g. ['US']).
     attr_accessor :countries
 
@@ -109,6 +115,8 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'user_os' => :'userOs',
+        :'user_device' => :'userDevice',
         :'countries' => :'countries',
         :'regions' => :'regions',
         :'cities' => :'cities',
@@ -148,6 +156,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'user_os' => :'Array<String>',
+        :'user_device' => :'Array<String>',
         :'countries' => :'Array<String>',
         :'regions' => :'Array<UpdateCampaignTargetingRequestTargetingLocationsOneOfRegionsInner>',
         :'cities' => :'Array<TargetingSpecCitiesInner>',
@@ -195,6 +205,18 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'user_os')
+        if (value = attributes[:'user_os']).is_a?(Array)
+          self.user_os = value
+        end
+      end
+
+      if attributes.key?(:'user_device')
+        if (value = attributes[:'user_device']).is_a?(Array)
+          self.user_device = value
+        end
+      end
 
       if attributes.key?(:'countries')
         if (value = attributes[:'countries']).is_a?(Array)
@@ -330,6 +352,14 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@user_os.nil? && @user_os.length < 1
+        invalid_properties.push('invalid value for "user_os", number of items must be greater than or equal to 1.')
+      end
+
+      if !@user_device.nil? && @user_device.length < 1
+        invalid_properties.push('invalid value for "user_device", number of items must be greater than or equal to 1.')
+      end
+
       if !@age_min.nil? && @age_min > 100
         invalid_properties.push('invalid value for "age_min", must be smaller than or equal to 100.')
       end
@@ -353,6 +383,8 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@user_os.nil? && @user_os.length < 1
+      return false if !@user_device.nil? && @user_device.length < 1
       return false if !@age_min.nil? && @age_min > 100
       return false if !@age_min.nil? && @age_min < 13
       return false if !@age_max.nil? && @age_max > 100
@@ -362,6 +394,34 @@ module Zernio
       income_tier_validator = EnumAttributeValidator.new('String', ["top_5", "top_10", "top_10_25", "top_25_50"])
       return false unless income_tier_validator.valid?(@income_tier)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] user_os Value to be assigned
+    def user_os=(user_os)
+      if user_os.nil?
+        fail ArgumentError, 'user_os cannot be nil'
+      end
+
+      if user_os.length < 1
+        fail ArgumentError, 'invalid value for "user_os", number of items must be greater than or equal to 1.'
+      end
+
+      @user_os = user_os
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] user_device Value to be assigned
+    def user_device=(user_device)
+      if user_device.nil?
+        fail ArgumentError, 'user_device cannot be nil'
+      end
+
+      if user_device.length < 1
+        fail ArgumentError, 'invalid value for "user_device", number of items must be greater than or equal to 1.'
+      end
+
+      @user_device = user_device
     end
 
     # Custom attribute writer method with validation
@@ -425,6 +485,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          user_os == o.user_os &&
+          user_device == o.user_device &&
           countries == o.countries &&
           regions == o.regions &&
           cities == o.cities &&
@@ -459,7 +521,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [countries, regions, cities, zips, metros, custom_locations, excluded_locations, age_min, age_max, gender, income_tier, languages, interests, behaviors, work_positions, work_employers, work_industries, industries, company_sizes, seniorities, job_functions, audience_include, audience_exclude].hash
+      [user_os, user_device, countries, regions, cities, zips, metros, custom_locations, excluded_locations, age_min, age_max, gender, income_tier, languages, interests, behaviors, work_positions, work_employers, work_industries, industries, company_sizes, seniorities, job_functions, audience_include, audience_exclude].hash
     end
 
     # Builds the object from hash

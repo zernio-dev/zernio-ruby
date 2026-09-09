@@ -30,7 +30,7 @@ describe Zernio::GetAdComments200ResponseMeta do
   describe 'test attribute "platform"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["facebook", "instagram"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["facebook", "instagram", "tiktok"])
       # validator.allowable_values.each do |value|
       #   expect { instance.platform = value }.not_to raise_error
       # end
@@ -60,6 +60,24 @@ describe Zernio::GetAdComments200ResponseMeta do
   end
 
   describe 'test attribute "effective_story_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "tiktok_item_id"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "since"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "_until"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

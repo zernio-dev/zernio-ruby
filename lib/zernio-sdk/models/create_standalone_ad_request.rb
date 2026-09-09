@@ -55,7 +55,7 @@ module Zernio
     # Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers' in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a `creativeFeatures` key, and Meta rejects it there.
     attr_accessor :multi_advertiser
 
-    # Meta only, single standalone shape only (no creatives[], adSetId, or RESERVED). Dry-run: each node runs Meta's execution_options validate_only and NOTHING is created or persisted. Children need real parents, so a fresh tree validates the campaign + creative (the ad set needs its campaign to exist, so pass existingCampaignId to validate it too; the ad itself is never validatable pre-create). A Meta validation failure returns the 400 verbatim; success returns 200 with per-node results instead of an ad.
+    # Meta only. Validates the complete inline campaign, ad set, creative and ad with execution_options validate_only. Nothing is uploaded or created, and validation bypasses Idempotency-Key storage. Supports a single image, existing video.id or existingCreativeId; media pools, new video uploads, creatives[], adSetId and RESERVED buying return 400. Existing campaign or creative nodes are marked skipped. Success returns 200 with per-node results; Meta rejection returns an error.
     attr_accessor :validate_only
 
     # Budget in WHOLE currency units (USD: 50 = $50.00), NOT cents. Meta's own Marketing API takes this same number in minor units, so it is an easy and expensive mix-up. Required on legacy + multi-creative shapes. Inherited on attach. OpenAI Ads requires a $1 minimum (its budget is lifetime-only, see budgetType).
@@ -295,6 +295,18 @@ module Zernio
     # TikTok only. Creates the ad as a TikTok Upgraded Smart+ campaign: TikTok automates targeting, bidding and delivery. Supports goals `conversions` (Smart+ Web Conversions), `lead_generation` (Smart+ Lead Generation with a website form on `linkUrl`; TikTok Instant Forms not supported) and `app_promotion` (Smart+ App installs; the ad's destination is the app store, so `linkUrl` is not used). The web goals require `promotedObject.pixelId` AND `promotedObject.customEventType`; `app_promotion` requires `promotedObject.applicationId` instead. Targeting works like on any TikTok ad (defaults to `countries: [\"US\"]` when omitted); TikTok automates delivery within it. The budget lives on the Smart+ campaign (Campaign Budget Optimization); a `lifetime` budget additionally requires `endDate`. Cannot be combined with `adSetId`. 
     attr_accessor :smart_plus
 
+    # Meta only. Operating systems and version ranges, such as iOS_ver_14.0_and_above or Android. Emitted as user_os. May also be supplied inside targeting.
+    attr_accessor :user_os
+
+    # Meta only. Device models such as iPhone. Emitted as user_device. May also be supplied inside targeting.
+    attr_accessor :user_device
+
+    # Meta app promotion only. Immutable campaign flag. Set true for iOS 14+ SKAdNetwork campaigns and supply promotedObject.applicationId plus promotedObject.objectStoreUrl. The campaign receives promotedObject only when this flag is true. Cannot be changed on an existing campaign.
+    attr_accessor :is_skadnetwork_attribution
+
+    # Meta ad-set attribution. Required as SKADNETWORK for iOS 14+ app promotion or a SKAdNetwork campaign. Requires AUCTION buying. Standalone Meta ad-set creation is not supported; use this field on /v1/ads/create.
+    attr_accessor :campaign_attribution
+
     attr_accessor :promoted_object
 
     class EnumAttributeValidator
@@ -420,6 +432,10 @@ module Zernio
         :'brand_identity' => :'brandIdentity',
         :'identity_type' => :'identityType',
         :'smart_plus' => :'smartPlus',
+        :'user_os' => :'userOs',
+        :'user_device' => :'userDevice',
+        :'is_skadnetwork_attribution' => :'isSkadnetworkAttribution',
+        :'campaign_attribution' => :'campaignAttribution',
         :'promoted_object' => :'promotedObject'
       }
     end
@@ -443,7 +459,7 @@ module Zernio
         :'campaign_name' => :'String',
         :'ad_set_name' => :'String',
         :'ad_name' => :'String',
-        :'tracking' => :'CreateStandaloneAdRequestTracking',
+        :'tracking' => :'AdTracking',
         :'goal' => :'String',
         :'optimization_goal' => :'String',
         :'billing_event' => :'String',
@@ -535,7 +551,11 @@ module Zernio
         :'brand_identity' => :'CreateStandaloneAdRequestBrandIdentity',
         :'identity_type' => :'String',
         :'smart_plus' => :'Boolean',
-        :'promoted_object' => :'CreateStandaloneAdRequestPromotedObject'
+        :'user_os' => :'Array<String>',
+        :'user_device' => :'Array<String>',
+        :'is_skadnetwork_attribution' => :'Boolean',
+        :'campaign_attribution' => :'String',
+        :'promoted_object' => :'AdPromotedObject'
       }
     end
 
@@ -1031,6 +1051,26 @@ module Zernio
         self.smart_plus = attributes[:'smart_plus']
       end
 
+      if attributes.key?(:'user_os')
+        if (value = attributes[:'user_os']).is_a?(Array)
+          self.user_os = value
+        end
+      end
+
+      if attributes.key?(:'user_device')
+        if (value = attributes[:'user_device']).is_a?(Array)
+          self.user_device = value
+        end
+      end
+
+      if attributes.key?(:'is_skadnetwork_attribution')
+        self.is_skadnetwork_attribution = attributes[:'is_skadnetwork_attribution']
+      end
+
+      if attributes.key?(:'campaign_attribution')
+        self.campaign_attribution = attributes[:'campaign_attribution']
+      end
+
       if attributes.key?(:'promoted_object')
         self.promoted_object = attributes[:'promoted_object']
       end
@@ -1211,6 +1251,14 @@ module Zernio
         invalid_properties.push('invalid value for "dsa_payor", the character length must be smaller than or equal to 100.')
       end
 
+      if !@user_os.nil? && @user_os.length < 1
+        invalid_properties.push('invalid value for "user_os", number of items must be greater than or equal to 1.')
+      end
+
+      if !@user_device.nil? && @user_device.length < 1
+        invalid_properties.push('invalid value for "user_device", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -1286,6 +1334,10 @@ module Zernio
       return false if !@dsa_payor.nil? && @dsa_payor.to_s.length > 100
       identity_type_validator = EnumAttributeValidator.new('String', ["TT_USER", "CUSTOMIZED_USER"])
       return false unless identity_type_validator.valid?(@identity_type)
+      return false if !@user_os.nil? && @user_os.length < 1
+      return false if !@user_device.nil? && @user_device.length < 1
+      campaign_attribution_validator = EnumAttributeValidator.new('String', ["AEM", "SKADNETWORK"])
+      return false unless campaign_attribution_validator.valid?(@campaign_attribution)
       true
     end
 
@@ -1867,6 +1919,44 @@ module Zernio
       @identity_type = identity_type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] user_os Value to be assigned
+    def user_os=(user_os)
+      if user_os.nil?
+        fail ArgumentError, 'user_os cannot be nil'
+      end
+
+      if user_os.length < 1
+        fail ArgumentError, 'invalid value for "user_os", number of items must be greater than or equal to 1.'
+      end
+
+      @user_os = user_os
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] user_device Value to be assigned
+    def user_device=(user_device)
+      if user_device.nil?
+        fail ArgumentError, 'user_device cannot be nil'
+      end
+
+      if user_device.length < 1
+        fail ArgumentError, 'invalid value for "user_device", number of items must be greater than or equal to 1.'
+      end
+
+      @user_device = user_device
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] campaign_attribution Object to be assigned
+    def campaign_attribution=(campaign_attribution)
+      validator = EnumAttributeValidator.new('String', ["AEM", "SKADNETWORK"])
+      unless validator.valid?(campaign_attribution)
+        fail ArgumentError, "invalid value for \"campaign_attribution\", must be one of #{validator.allowable_values}."
+      end
+      @campaign_attribution = campaign_attribution
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -1970,6 +2060,10 @@ module Zernio
           brand_identity == o.brand_identity &&
           identity_type == o.identity_type &&
           smart_plus == o.smart_plus &&
+          user_os == o.user_os &&
+          user_device == o.user_device &&
+          is_skadnetwork_attribution == o.is_skadnetwork_attribution &&
+          campaign_attribution == o.campaign_attribution &&
           promoted_object == o.promoted_object
     end
 
@@ -1982,7 +2076,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, promotion, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, promotion, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, user_os, user_device, is_skadnetwork_attribution, campaign_attribution, promoted_object].hash
     end
 
     # Builds the object from hash
