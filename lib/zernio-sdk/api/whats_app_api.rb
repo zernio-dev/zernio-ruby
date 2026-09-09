@@ -2159,6 +2159,76 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Request a Meta re-verification code for a BYO WhatsApp number
+    # For a bring-your-own WhatsApp number (its own WABA, migrated off another BSP) that Meta demoted to re-verification, this requests a new OTP from Meta. The code lands on the customer's own handset, so verifying it is necessarily self-service; call POST /v1/accounts/{accountId}/whatsapp/verify-code with the code once it arrives. Rate-limited to one request per 10 minutes per account, and Meta enforces its own cooldown on top of that. 
+    # @param account_id [String] The WhatsApp account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [RequestWhatsAppVerificationCodeRequest] :request_whats_app_verification_code_request 
+    # @return [RequestWhatsAppVerificationCode200Response]
+    def request_whats_app_verification_code(account_id, opts = {})
+      data, _status_code, _headers = request_whats_app_verification_code_with_http_info(account_id, opts)
+      data
+    end
+
+    # Request a Meta re-verification code for a BYO WhatsApp number
+    # For a bring-your-own WhatsApp number (its own WABA, migrated off another BSP) that Meta demoted to re-verification, this requests a new OTP from Meta. The code lands on the customer&#39;s own handset, so verifying it is necessarily self-service; call POST /v1/accounts/{accountId}/whatsapp/verify-code with the code once it arrives. Rate-limited to one request per 10 minutes per account, and Meta enforces its own cooldown on top of that. 
+    # @param account_id [String] The WhatsApp account ID
+    # @param [Hash] opts the optional parameters
+    # @option opts [RequestWhatsAppVerificationCodeRequest] :request_whats_app_verification_code_request 
+    # @return [Array<(RequestWhatsAppVerificationCode200Response, Integer, Hash)>] RequestWhatsAppVerificationCode200Response data, response status code and response headers
+    def request_whats_app_verification_code_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.request_whats_app_verification_code ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.request_whats_app_verification_code"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/whatsapp/request-code'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'request_whats_app_verification_code_request'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RequestWhatsAppVerificationCode200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.request_whats_app_verification_code",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#request_whats_app_verification_code\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Send WhatsApp conversion event
     # Forward a WhatsApp Business Messaging conversion event (`LeadSubmitted`, `Purchase`, `AddToCart`, `InitiateCheckout`, `ViewContent`) to Meta's Conversions API with `action_source = business_messaging` and `messaging_channel = whatsapp`. The endpoint looks up the originating CTWA click ID (`ctwa_clid`) captured on the first inbound message of the conversation and replays it on every event so Meta can attribute the conversion back to the Click-to-WhatsApp ad that drove the chat.  Configuration prerequisite on the WhatsApp account metadata:   - `metaCapiDatasetId`: the Meta dataset ID linked to the WABA.     Provision one with `POST /v1/whatsapp/dataset`.  The WABA ID (already set automatically at connect time) is forwarded as `user_data.whatsapp_business_account_id`, which is the per-channel attribution identifier Meta requires for WhatsApp events. No Facebook Page ID is needed (that field is the Messenger-branch identifier).  Identify the conversation by either `conversationId` (preferred) or `phoneE164` (digits only, no `+`). At least one is required. If the conversation has no captured `ctwa_clid`, the request returns 422 because there is nothing to attribute.  Token and dataset coupling: the WhatsApp account's accessToken must have access to the configured `metaCapiDatasetId`. By default a WABA's system-user token is scoped to the WABA's own Business Manager and cannot post to a pixel owned by a different Business; Meta returns code 100 in that case. Either share the dataset with the WhatsApp app's Business in BM, or use a dataset already in the same Business as the WABA. 
     # @param send_whats_app_conversion_request [SendWhatsAppConversionRequest] 
@@ -2800,6 +2870,80 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: WhatsAppApi#upload_whats_app_profile_photo\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Verify the Meta re-verification code for a BYO WhatsApp number
+    # Submits the OTP Meta sent in response to POST /v1/accounts/{accountId}/whatsapp/request-code. This only verifies the number with Meta; it does not register it on the Cloud API. Call POST /v1/accounts/{accountId}/whatsapp/register afterward to complete activation. 
+    # @param account_id [String] The WhatsApp account ID
+    # @param verify_whats_app_number_request [VerifyWhatsAppNumberRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [VerifyWhatsAppNumber200Response]
+    def verify_whats_app_number(account_id, verify_whats_app_number_request, opts = {})
+      data, _status_code, _headers = verify_whats_app_number_with_http_info(account_id, verify_whats_app_number_request, opts)
+      data
+    end
+
+    # Verify the Meta re-verification code for a BYO WhatsApp number
+    # Submits the OTP Meta sent in response to POST /v1/accounts/{accountId}/whatsapp/request-code. This only verifies the number with Meta; it does not register it on the Cloud API. Call POST /v1/accounts/{accountId}/whatsapp/register afterward to complete activation. 
+    # @param account_id [String] The WhatsApp account ID
+    # @param verify_whats_app_number_request [VerifyWhatsAppNumberRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(VerifyWhatsAppNumber200Response, Integer, Hash)>] VerifyWhatsAppNumber200Response data, response status code and response headers
+    def verify_whats_app_number_with_http_info(account_id, verify_whats_app_number_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: WhatsAppApi.verify_whats_app_number ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling WhatsAppApi.verify_whats_app_number"
+      end
+      # verify the required parameter 'verify_whats_app_number_request' is set
+      if @api_client.config.client_side_validation && verify_whats_app_number_request.nil?
+        fail ArgumentError, "Missing the required parameter 'verify_whats_app_number_request' when calling WhatsAppApi.verify_whats_app_number"
+      end
+      # resource path
+      local_var_path = '/v1/accounts/{accountId}/whatsapp/verify-code'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(verify_whats_app_number_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VerifyWhatsAppNumber200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"WhatsAppApi.verify_whats_app_number",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: WhatsAppApi#verify_whats_app_number\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -34,6 +34,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**register_whats_app_number**](WhatsAppApi.md#register_whats_app_number) | **POST** /v1/accounts/{accountId}/whatsapp/register | Register a connected WhatsApp number on the Cloud API |
 | [**reject_whats_app_group_join_requests**](WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests |
 | [**remove_whats_app_group_participants**](WhatsAppApi.md#remove_whats_app_group_participants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants |
+| [**request_whats_app_verification_code**](WhatsAppApi.md#request_whats_app_verification_code) | **POST** /v1/accounts/{accountId}/whatsapp/request-code | Request a Meta re-verification code for a BYO WhatsApp number |
 | [**send_whats_app_conversion**](WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event |
 | [**set_whatsapp_business_username**](WhatsAppApi.md#set_whatsapp_business_username) | **POST** /v1/whatsapp/business-profile/username | Set business username |
 | [**unblock_whats_app_users**](WhatsAppApi.md#unblock_whats_app_users) | **DELETE** /v1/whatsapp/block-users | Unblock users |
@@ -43,6 +44,7 @@ All URIs are relative to *https://zernio.com/api*
 | [**update_whats_app_template**](WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template |
 | [**update_whats_app_template_by_id**](WhatsAppApi.md#update_whats_app_template_by_id) | **PATCH** /v1/whatsapp/templates/id/{templateId} | Update template by id |
 | [**upload_whats_app_profile_photo**](WhatsAppApi.md#upload_whats_app_profile_photo) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture |
+| [**verify_whats_app_number**](WhatsAppApi.md#verify_whats_app_number) | **POST** /v1/accounts/{accountId}/whatsapp/verify-code | Verify the Meta re-verification code for a BYO WhatsApp number |
 
 
 ## add_whats_app_group_participants
@@ -2191,6 +2193,79 @@ end
 - **Accept**: application/json
 
 
+## request_whats_app_verification_code
+
+> <RequestWhatsAppVerificationCode200Response> request_whats_app_verification_code(account_id, opts)
+
+Request a Meta re-verification code for a BYO WhatsApp number
+
+For a bring-your-own WhatsApp number (its own WABA, migrated off another BSP) that Meta demoted to re-verification, this requests a new OTP from Meta. The code lands on the customer's own handset, so verifying it is necessarily self-service; call POST /v1/accounts/{accountId}/whatsapp/verify-code with the code once it arrives. Rate-limited to one request per 10 minutes per account, and Meta enforces its own cooldown on top of that. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | The WhatsApp account ID
+opts = {
+  request_whats_app_verification_code_request: Zernio::RequestWhatsAppVerificationCodeRequest.new # RequestWhatsAppVerificationCodeRequest | 
+}
+
+begin
+  # Request a Meta re-verification code for a BYO WhatsApp number
+  result = api_instance.request_whats_app_verification_code(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->request_whats_app_verification_code: #{e}"
+end
+```
+
+#### Using the request_whats_app_verification_code_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RequestWhatsAppVerificationCode200Response>, Integer, Hash)> request_whats_app_verification_code_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # Request a Meta re-verification code for a BYO WhatsApp number
+  data, status_code, headers = api_instance.request_whats_app_verification_code_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RequestWhatsAppVerificationCode200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->request_whats_app_verification_code_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The WhatsApp account ID |  |
+| **request_whats_app_verification_code_request** | [**RequestWhatsAppVerificationCodeRequest**](RequestWhatsAppVerificationCodeRequest.md) |  | [optional] |
+
+### Return type
+
+[**RequestWhatsAppVerificationCode200Response**](RequestWhatsAppVerificationCode200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## send_whats_app_conversion
 
 > <SendWhatsAppConversion200Response> send_whats_app_conversion(send_whats_app_conversion_request)
@@ -2819,5 +2894,76 @@ end
 ### HTTP request headers
 
 - **Content-Type**: multipart/form-data, application/json
+- **Accept**: application/json
+
+
+## verify_whats_app_number
+
+> <VerifyWhatsAppNumber200Response> verify_whats_app_number(account_id, verify_whats_app_number_request)
+
+Verify the Meta re-verification code for a BYO WhatsApp number
+
+Submits the OTP Meta sent in response to POST /v1/accounts/{accountId}/whatsapp/request-code. This only verifies the number with Meta; it does not register it on the Cloud API. Call POST /v1/accounts/{accountId}/whatsapp/register afterward to complete activation. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::WhatsAppApi.new
+account_id = 'account_id_example' # String | The WhatsApp account ID
+verify_whats_app_number_request = Zernio::VerifyWhatsAppNumberRequest.new({code: 'code_example'}) # VerifyWhatsAppNumberRequest | 
+
+begin
+  # Verify the Meta re-verification code for a BYO WhatsApp number
+  result = api_instance.verify_whats_app_number(account_id, verify_whats_app_number_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->verify_whats_app_number: #{e}"
+end
+```
+
+#### Using the verify_whats_app_number_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<VerifyWhatsAppNumber200Response>, Integer, Hash)> verify_whats_app_number_with_http_info(account_id, verify_whats_app_number_request)
+
+```ruby
+begin
+  # Verify the Meta re-verification code for a BYO WhatsApp number
+  data, status_code, headers = api_instance.verify_whats_app_number_with_http_info(account_id, verify_whats_app_number_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <VerifyWhatsAppNumber200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling WhatsAppApi->verify_whats_app_number_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** | The WhatsApp account ID |  |
+| **verify_whats_app_number_request** | [**VerifyWhatsAppNumberRequest**](VerifyWhatsAppNumberRequest.md) |  |  |
+
+### Return type
+
+[**VerifyWhatsAppNumber200Response**](VerifyWhatsAppNumber200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

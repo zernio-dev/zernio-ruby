@@ -422,6 +422,19 @@ describe 'WhatsAppApi' do
     end
   end
 
+  # unit tests for request_whats_app_verification_code
+  # Request a Meta re-verification code for a BYO WhatsApp number
+  # For a bring-your-own WhatsApp number (its own WABA, migrated off another BSP) that Meta demoted to re-verification, this requests a new OTP from Meta. The code lands on the customer&#39;s own handset, so verifying it is necessarily self-service; call POST /v1/accounts/{accountId}/whatsapp/verify-code with the code once it arrives. Rate-limited to one request per 10 minutes per account, and Meta enforces its own cooldown on top of that. 
+  # @param account_id The WhatsApp account ID
+  # @param [Hash] opts the optional parameters
+  # @option opts [RequestWhatsAppVerificationCodeRequest] :request_whats_app_verification_code_request 
+  # @return [RequestWhatsAppVerificationCode200Response]
+  describe 'request_whats_app_verification_code test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for send_whats_app_conversion
   # Send WhatsApp conversion event
   # Forward a WhatsApp Business Messaging conversion event (&#x60;LeadSubmitted&#x60;, &#x60;Purchase&#x60;, &#x60;AddToCart&#x60;, &#x60;InitiateCheckout&#x60;, &#x60;ViewContent&#x60;) to Meta&#39;s Conversions API with &#x60;action_source &#x3D; business_messaging&#x60; and &#x60;messaging_channel &#x3D; whatsapp&#x60;. The endpoint looks up the originating CTWA click ID (&#x60;ctwa_clid&#x60;) captured on the first inbound message of the conversation and replays it on every event so Meta can attribute the conversion back to the Click-to-WhatsApp ad that drove the chat.  Configuration prerequisite on the WhatsApp account metadata:   - &#x60;metaCapiDatasetId&#x60;: the Meta dataset ID linked to the WABA.     Provision one with &#x60;POST /v1/whatsapp/dataset&#x60;.  The WABA ID (already set automatically at connect time) is forwarded as &#x60;user_data.whatsapp_business_account_id&#x60;, which is the per-channel attribution identifier Meta requires for WhatsApp events. No Facebook Page ID is needed (that field is the Messenger-branch identifier).  Identify the conversation by either &#x60;conversationId&#x60; (preferred) or &#x60;phoneE164&#x60; (digits only, no &#x60;+&#x60;). At least one is required. If the conversation has no captured &#x60;ctwa_clid&#x60;, the request returns 422 because there is nothing to attribute.  Token and dataset coupling: the WhatsApp account&#39;s accessToken must have access to the configured &#x60;metaCapiDatasetId&#x60;. By default a WABA&#39;s system-user token is scoped to the WABA&#39;s own Business Manager and cannot post to a pixel owned by a different Business; Meta returns code 100 in that case. Either share the dataset with the WhatsApp app&#39;s Business in BM, or use a dataset already in the same Business as the WABA. 
@@ -530,6 +543,19 @@ describe 'WhatsAppApi' do
   # @param [Hash] opts the optional parameters
   # @return [UnpublishPost200Response]
   describe 'upload_whats_app_profile_photo test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for verify_whats_app_number
+  # Verify the Meta re-verification code for a BYO WhatsApp number
+  # Submits the OTP Meta sent in response to POST /v1/accounts/{accountId}/whatsapp/request-code. This only verifies the number with Meta; it does not register it on the Cloud API. Call POST /v1/accounts/{accountId}/whatsapp/register afterward to complete activation. 
+  # @param account_id The WhatsApp account ID
+  # @param verify_whats_app_number_request 
+  # @param [Hash] opts the optional parameters
+  # @return [VerifyWhatsAppNumber200Response]
+  describe 'verify_whats_app_number test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

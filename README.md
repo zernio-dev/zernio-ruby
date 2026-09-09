@@ -679,6 +679,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**register_whats_app_number**](docs/WhatsAppApi.md#register_whats_app_number) | **POST** /v1/accounts/{accountId}/whatsapp/register | Register a connected WhatsApp number on the Cloud API
 *Zernio::WhatsAppApi* | [**reject_whats_app_group_join_requests**](docs/WhatsAppApi.md#reject_whats_app_group_join_requests) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/join-requests | Reject join requests
 *Zernio::WhatsAppApi* | [**remove_whats_app_group_participants**](docs/WhatsAppApi.md#remove_whats_app_group_participants) | **DELETE** /v1/whatsapp/wa-groups/{groupId}/participants | Remove participants
+*Zernio::WhatsAppApi* | [**request_whats_app_verification_code**](docs/WhatsAppApi.md#request_whats_app_verification_code) | **POST** /v1/accounts/{accountId}/whatsapp/request-code | Request a Meta re-verification code for a BYO WhatsApp number
 *Zernio::WhatsAppApi* | [**send_whats_app_conversion**](docs/WhatsAppApi.md#send_whats_app_conversion) | **POST** /v1/whatsapp/conversions | Send WhatsApp conversion event
 *Zernio::WhatsAppApi* | [**set_whatsapp_business_username**](docs/WhatsAppApi.md#set_whatsapp_business_username) | **POST** /v1/whatsapp/business-profile/username | Set business username
 *Zernio::WhatsAppApi* | [**unblock_whats_app_users**](docs/WhatsAppApi.md#unblock_whats_app_users) | **DELETE** /v1/whatsapp/block-users | Unblock users
@@ -688,6 +689,7 @@ Class | Method | HTTP request | Description
 *Zernio::WhatsAppApi* | [**update_whats_app_template**](docs/WhatsAppApi.md#update_whats_app_template) | **PATCH** /v1/whatsapp/templates/{templateName} | Update template
 *Zernio::WhatsAppApi* | [**update_whats_app_template_by_id**](docs/WhatsAppApi.md#update_whats_app_template_by_id) | **PATCH** /v1/whatsapp/templates/id/{templateId} | Update template by id
 *Zernio::WhatsAppApi* | [**upload_whats_app_profile_photo**](docs/WhatsAppApi.md#upload_whats_app_profile_photo) | **POST** /v1/whatsapp/business-profile/photo | Upload profile picture
+*Zernio::WhatsAppApi* | [**verify_whats_app_number**](docs/WhatsAppApi.md#verify_whats_app_number) | **POST** /v1/accounts/{accountId}/whatsapp/verify-code | Verify the Meta re-verification code for a BYO WhatsApp number
 *Zernio::WhatsAppCallingApi* | [**disable_whats_app_calling**](docs/WhatsAppCallingApi.md#disable_whats_app_calling) | **DELETE** /v1/phone-numbers/{id}/whatsapp/calling | Disable calling on a number
 *Zernio::WhatsAppCallingApi* | [**disable_whats_app_calling_legacy**](docs/WhatsAppCallingApi.md#disable_whats_app_calling_legacy) | **DELETE** /v1/whatsapp/phone-numbers/{id}/calling | Disable calling on a number
 *Zernio::WhatsAppCallingApi* | [**enable_whats_app_calling**](docs/WhatsAppCallingApi.md#enable_whats_app_calling) | **POST** /v1/phone-numbers/{id}/whatsapp/calling | Enable calling on a number
@@ -2047,6 +2049,8 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplyToPhoneNumberReviewerRequestAttachmentsInner](docs/ReplyToPhoneNumberReviewerRequestAttachmentsInner.md)
  - [Zernio::RequestSmsSenderIdLimitIncrease200Response](docs/RequestSmsSenderIdLimitIncrease200Response.md)
  - [Zernio::RequestSmsSenderIdLimitIncreaseRequest](docs/RequestSmsSenderIdLimitIncreaseRequest.md)
+ - [Zernio::RequestWhatsAppVerificationCode200Response](docs/RequestWhatsAppVerificationCode200Response.md)
+ - [Zernio::RequestWhatsAppVerificationCodeRequest](docs/RequestWhatsAppVerificationCodeRequest.md)
  - [Zernio::ResendSmsRegistrationOtp200Response](docs/ResendSmsRegistrationOtp200Response.md)
  - [Zernio::ReserveRfPrediction201Response](docs/ReserveRfPrediction201Response.md)
  - [Zernio::ReserveRfPredictionRequest](docs/ReserveRfPredictionRequest.md)
@@ -2525,6 +2529,8 @@ Class | Method | HTTP request | Description
  - [Zernio::VerifySmsRegistrationOtp200Response](docs/VerifySmsRegistrationOtp200Response.md)
  - [Zernio::VerifySmsRegistrationOtpRequest](docs/VerifySmsRegistrationOtpRequest.md)
  - [Zernio::VerifyWhatsAppCallerIdRequest](docs/VerifyWhatsAppCallerIdRequest.md)
+ - [Zernio::VerifyWhatsAppNumber200Response](docs/VerifyWhatsAppNumber200Response.md)
+ - [Zernio::VerifyWhatsAppNumberRequest](docs/VerifyWhatsAppNumberRequest.md)
  - [Zernio::VoteRedditThingRequest](docs/VoteRedditThingRequest.md)
  - [Zernio::Webhook](docs/Webhook.md)
  - [Zernio::WebhookLog](docs/WebhookLog.md)
