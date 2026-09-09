@@ -18,7 +18,7 @@ module Zernio
     # Card image; uploaded to the ad account and referenced by hash.
     attr_accessor :image_url
 
-    # Card destination URL. Defaults to the top-level linkUrl.
+    # Card destination URL. Defaults to the top-level linkUrl, or Meta's lead-form link when leadGenFormId is set and neither is provided.
     attr_accessor :link_url
 
     # Card headline, shown below the card image.
