@@ -21,7 +21,7 @@ module Zernio
     end
     # Add users to audience
     # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request.  customer_list only. A LinkedIn `company_list` audience takes company rows, not people: send those to `POST /v1/ads/audiences/{audienceId}/companies`. This endpoint 422s for every other audience type. 
-    # @param audience_id [String] 
+    # @param audience_id [String] The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
     # @param add_users_to_ad_audience_request [AddUsersToAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AddUsersToAdAudience200Response]
@@ -32,7 +32,7 @@ module Zernio
 
     # Add users to audience
     # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request.  customer_list only. A LinkedIn &#x60;company_list&#x60; audience takes company rows, not people: send those to &#x60;POST /v1/ads/audiences/{audienceId}/companies&#x60;. This endpoint 422s for every other audience type. 
-    # @param audience_id [String] 
+    # @param audience_id [String] The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
     # @param add_users_to_ad_audience_request [AddUsersToAdAudienceRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AddUsersToAdAudience200Response, Integer, Hash)>] AddUsersToAdAudience200Response data, response status code and response headers
@@ -226,7 +226,7 @@ module Zernio
 
     # Get audience details
     # Returns the local audience record and fresh data from Meta (if available).
-    # @param audience_id [String] 
+    # @param audience_id [String] The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
     # @param [Hash] opts the optional parameters
     # @return [GetAdAudience200Response]
     def get_ad_audience(audience_id, opts = {})
@@ -236,7 +236,7 @@ module Zernio
 
     # Get audience details
     # Returns the local audience record and fresh data from Meta (if available).
-    # @param audience_id [String] 
+    # @param audience_id [String] The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GetAdAudience200Response, Integer, Hash)>] GetAdAudience200Response data, response status code and response headers
     def get_ad_audience_with_http_info(audience_id, opts = {})
@@ -374,7 +374,7 @@ module Zernio
 
     # Replace audience companies
     # Upload the company rows of a LinkedIn `company_list` audience (account-based marketing). LinkedIn-only, every other platform returns 422.  A LinkedIn audience segment holds exactly one uploaded list, so the list you send here REPLACES the segment's list instead of being appended to it: always send the full set of companies. LinkedIn returns only the identifier of the uploaded file, never its rows, so the merge cannot be done for you, keep the source list on your side.  How the matching behaves:  - Rows are plain text (not hashed), matched against LinkedIn's own company graph. - Matching is asynchronous: LinkedIn takes up to 48h for a new audience and up to 24h for a   later update, and the audience stays `processing` meanwhile. - LinkedIn does not document how quickly companies dropped from the list stop being targeted,   so treat removals as eventual rather than immediate. - LinkedIn recommends at least 1,000 companies for a usable match rate, and caps a list at   300,000.  The initial list is sent with `companies` on `POST /v1/ads/audiences`; this endpoint is for every change after that. 
-    # @param audience_id [String] 
+    # @param audience_id [String] The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
     # @param replace_ad_audience_companies_request [ReplaceAdAudienceCompaniesRequest] 
     # @param [Hash] opts the optional parameters
     # @return [ReplaceAdAudienceCompanies200Response]
@@ -385,7 +385,7 @@ module Zernio
 
     # Replace audience companies
     # Upload the company rows of a LinkedIn &#x60;company_list&#x60; audience (account-based marketing). LinkedIn-only, every other platform returns 422.  A LinkedIn audience segment holds exactly one uploaded list, so the list you send here REPLACES the segment&#39;s list instead of being appended to it: always send the full set of companies. LinkedIn returns only the identifier of the uploaded file, never its rows, so the merge cannot be done for you, keep the source list on your side.  How the matching behaves:  - Rows are plain text (not hashed), matched against LinkedIn&#39;s own company graph. - Matching is asynchronous: LinkedIn takes up to 48h for a new audience and up to 24h for a   later update, and the audience stays &#x60;processing&#x60; meanwhile. - LinkedIn does not document how quickly companies dropped from the list stop being targeted,   so treat removals as eventual rather than immediate. - LinkedIn recommends at least 1,000 companies for a usable match rate, and caps a list at   300,000.  The initial list is sent with &#x60;companies&#x60; on &#x60;POST /v1/ads/audiences&#x60;; this endpoint is for every change after that. 
-    # @param audience_id [String] 
+    # @param audience_id [String] The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
     # @param replace_ad_audience_companies_request [ReplaceAdAudienceCompaniesRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ReplaceAdAudienceCompanies200Response, Integer, Hash)>] ReplaceAdAudienceCompanies200Response data, response status code and response headers

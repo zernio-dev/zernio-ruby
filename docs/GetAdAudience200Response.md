@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **audience** | **Object** |  | [optional] |
-| **meta_data** | **Object** | Fresh data from Meta API | [optional] |
+| **platform_data** | **Object** | Fresh data from the platform API | [optional] |
 
 ## Example
 
@@ -14,7 +14,7 @@ require 'zernio-sdk'
 
 instance = Zernio::GetAdAudience200Response.new(
   audience: null,
-  meta_data: null
+  platform_data: null
 )
 ```
 

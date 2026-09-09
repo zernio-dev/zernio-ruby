@@ -35,7 +35,7 @@ describe 'AdAudiencesApi' do
   # unit tests for add_users_to_ad_audience
   # Add users to audience
   # Upload user data to a customer_list audience. Data is SHA256-hashed server-side before sending to the platform. Email is used on every platform; phone is used on Meta only (other platforms ignore it). On TikTok and Pinterest, the first upload also provisions the audience (deferred create). LinkedIn uploads are full-replace. Max 10,000 users per request.  customer_list only. A LinkedIn &#x60;company_list&#x60; audience takes company rows, not people: send those to &#x60;POST /v1/ads/audiences/{audienceId}/companies&#x60;. This endpoint 422s for every other audience type. 
-  # @param audience_id 
+  # @param audience_id The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
   # @param add_users_to_ad_audience_request 
   # @param [Hash] opts the optional parameters
   # @return [AddUsersToAdAudience200Response]
@@ -72,7 +72,7 @@ describe 'AdAudiencesApi' do
   # unit tests for get_ad_audience
   # Get audience details
   # Returns the local audience record and fresh data from Meta (if available).
-  # @param audience_id 
+  # @param audience_id The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
   # @param [Hash] opts the optional parameters
   # @return [GetAdAudience200Response]
   describe 'get_ad_audience test' do
@@ -99,7 +99,7 @@ describe 'AdAudiencesApi' do
   # unit tests for replace_ad_audience_companies
   # Replace audience companies
   # Upload the company rows of a LinkedIn &#x60;company_list&#x60; audience (account-based marketing). LinkedIn-only, every other platform returns 422.  A LinkedIn audience segment holds exactly one uploaded list, so the list you send here REPLACES the segment&#39;s list instead of being appended to it: always send the full set of companies. LinkedIn returns only the identifier of the uploaded file, never its rows, so the merge cannot be done for you, keep the source list on your side.  How the matching behaves:  - Rows are plain text (not hashed), matched against LinkedIn&#39;s own company graph. - Matching is asynchronous: LinkedIn takes up to 48h for a new audience and up to 24h for a   later update, and the audience stays &#x60;processing&#x60; meanwhile. - LinkedIn does not document how quickly companies dropped from the list stop being targeted,   so treat removals as eventual rather than immediate. - LinkedIn recommends at least 1,000 companies for a usable match rate, and caps a list at   300,000.  The initial list is sent with &#x60;companies&#x60; on &#x60;POST /v1/ads/audiences&#x60;; this endpoint is for every change after that. 
-  # @param audience_id 
+  # @param audience_id The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
   # @param replace_ad_audience_companies_request 
   # @param [Hash] opts the optional parameters
   # @return [ReplaceAdAudienceCompanies200Response]

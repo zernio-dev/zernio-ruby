@@ -15,6 +15,7 @@ require 'time'
 
 module Zernio
   class ListAdAudiences200ResponseAudiencesInner < ApiModelBase
+    # The Zernio audience id. Pass this as audienceId on GET /v1/ads/audiences/{audienceId} and the companies/users upload endpoints. Null when the audience was not created through Zernio.
     attr_accessor :id
 
     # Account the audience was created against. Returned for saved_targeting items.

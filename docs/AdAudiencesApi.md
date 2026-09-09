@@ -33,7 +33,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAudiencesApi.new
-audience_id = 'audience_id_example' # String | 
+audience_id = 'audience_id_example' # String | The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
 add_users_to_ad_audience_request = Zernio::AddUsersToAdAudienceRequest.new({users: [Zernio::AddUsersToAdAudienceRequestUsersInner.new]}) # AddUsersToAdAudienceRequest | 
 
 begin
@@ -67,7 +67,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **audience_id** | **String** |  |  |
+| **audience_id** | **String** | The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id. |  |
 | **add_users_to_ad_audience_request** | [**AddUsersToAdAudienceRequest**](AddUsersToAdAudienceRequest.md) |  |  |
 
 ### Return type
@@ -242,7 +242,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAudiencesApi.new
-audience_id = 'audience_id_example' # String | 
+audience_id = 'audience_id_example' # String | The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
 
 begin
   # Get audience details
@@ -275,7 +275,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **audience_id** | **String** |  |  |
+| **audience_id** | **String** | The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id. |  |
 
 ### Return type
 
@@ -388,7 +388,7 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAudiencesApi.new
-audience_id = 'audience_id_example' # String | 
+audience_id = 'audience_id_example' # String | The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id.
 replace_ad_audience_companies_request = Zernio::ReplaceAdAudienceCompaniesRequest.new({companies: [Zernio::ReplaceAdAudienceCompaniesRequestCompaniesInner.new]}) # ReplaceAdAudienceCompaniesRequest | 
 
 begin
@@ -422,7 +422,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **audience_id** | **String** |  |  |
+| **audience_id** | **String** | The Zernio audience id (the id field of GET /v1/ads/audiences), not the platform segment id. |  |
 | **replace_ad_audience_companies_request** | [**ReplaceAdAudienceCompaniesRequest**](ReplaceAdAudienceCompaniesRequest.md) |  |  |
 
 ### Return type
