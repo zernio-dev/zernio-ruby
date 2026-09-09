@@ -599,10 +599,10 @@ module Zernio
     # @param ad_id [String] 
     # @param update_ad_tracking_tags_request [UpdateAdTrackingTagsRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [UpdateAdTrackingTags200Response]
     def update_ad_tracking_tags(ad_id, update_ad_tracking_tags_request, opts = {})
-      update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request, opts)
-      nil
+      data, _status_code, _headers = update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request, opts)
+      data
     end
 
     # Set ad tracking tags
@@ -610,7 +610,7 @@ module Zernio
     # @param ad_id [String] 
     # @param update_ad_tracking_tags_request [UpdateAdTrackingTagsRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(UpdateAdTrackingTags200Response, Integer, Hash)>] UpdateAdTrackingTags200Response data, response status code and response headers
     def update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TrackingTagsApi.update_ad_tracking_tags ...'
@@ -646,7 +646,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_tracking_tags_request)
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'UpdateAdTrackingTags200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

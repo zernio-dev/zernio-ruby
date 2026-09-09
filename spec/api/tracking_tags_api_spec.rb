@@ -146,7 +146,7 @@ describe 'TrackingTagsApi' do
   # @param ad_id 
   # @param update_ad_tracking_tags_request 
   # @param [Hash] opts the optional parameters
-  # @return [nil]
+  # @return [UpdateAdTrackingTags200Response]
   describe 'update_ad_tracking_tags test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

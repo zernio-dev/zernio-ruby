@@ -1,4 +1,4 @@
-# Zernio::CreateCtwaAd201Response
+# Zernio::CreateMessagingAd201Response
 
 ## Class instance methods
 
@@ -11,7 +11,7 @@ Returns the list of classes defined in oneOf.
 ```ruby
 require 'zernio-sdk'
 
-Zernio::CreateCtwaAd201Response.openapi_one_of
+Zernio::CreateMessagingAd201Response.openapi_one_of
 # =>
 # [
 #   :'CtwaMultiResponse',
@@ -28,7 +28,7 @@ Returns the discriminator's property name.
 ```ruby
 require 'zernio-sdk'
 
-Zernio::CreateCtwaAd201Response.openapi_discriminator_name
+Zernio::CreateMessagingAd201Response.openapi_discriminator_name
 # => :'ad_type'
 ```
 
@@ -41,7 +41,7 @@ Returns the discriminator's mapping.
 ```ruby
 require 'zernio-sdk'
 
-Zernio::CreateCtwaAd201Response.openapi_discriminator_mapping
+Zernio::CreateMessagingAd201Response.openapi_discriminator_mapping
 # =>
 # {
 #   :'multi' => :'CtwaMultiResponse',
@@ -58,10 +58,10 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 ```ruby
 require 'zernio-sdk'
 
-Zernio::CreateCtwaAd201Response.build(data)
+Zernio::CreateMessagingAd201Response.build(data)
 # => #<CtwaMultiResponse:0x00007fdd4aab02a0>
 
-Zernio::CreateCtwaAd201Response.build(data_that_doesnt_match)
+Zernio::CreateMessagingAd201Response.build(data_that_doesnt_match)
 # => nil
 ```
 

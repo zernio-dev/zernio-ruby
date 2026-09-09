@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  module CreateCtwaAd201Response
+  module CreateMessagingAd201Response
     class << self
       # List of class defined in oneOf (OpenAPI v3)
       def openapi_one_of

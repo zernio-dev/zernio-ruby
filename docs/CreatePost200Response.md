@@ -1,22 +1,49 @@
 # Zernio::CreatePost200Response
 
-## Properties
+## Class instance methods
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **dry_run** | **Boolean** | Always true on this response |  |
-| **can_publish** | **Boolean** | True only when every evaluated TikTok account can publish now |  |
-| **tiktok** | [**Array&lt;CreatePost200ResponseTiktokInner&gt;**](CreatePost200ResponseTiktokInner.md) | One verdict per &#x60;tiktok&#x60; entry in the request, in request order |  |
+### `openapi_one_of`
 
-## Example
+Returns the list of classes defined in oneOf.
+
+#### Example
 
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreatePost200Response.new(
-  dry_run: null,
-  can_publish: null,
-  tiktok: null
-)
+Zernio::CreatePost200Response.openapi_one_of
+# =>
+# [
+#   :'PostCreateResponse',
+#   :'TikTokDryRunVerdict'
+# ]
 ```
+
+### build
+
+Find the appropriate object from the `openapi_one_of` list and casts the data into it.
+
+#### Example
+
+```ruby
+require 'zernio-sdk'
+
+Zernio::CreatePost200Response.build(data)
+# => #<PostCreateResponse:0x00007fdd4aab02a0>
+
+Zernio::CreatePost200Response.build(data_that_doesnt_match)
+# => nil
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| **data** | **Mixed** | data to be matched against the list of oneOf items |
+
+#### Return type
+
+- `PostCreateResponse`
+- `TikTokDryRunVerdict`
+- `nil` (if no type matches)
 

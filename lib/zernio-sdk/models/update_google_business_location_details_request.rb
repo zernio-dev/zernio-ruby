@@ -33,6 +33,28 @@ module Zernio
     # Services offered by the business. Use updateMask='serviceItems' to update.
     attr_accessor :service_items
 
+    # Business name. Use updateMask='title'.
+    attr_accessor :title
+
+    # External store identifier, unique within the account. Use updateMask='storeCode'.
+    attr_accessor :store_code
+
+    # Free-form, internal-only labels for grouping (1-255 characters each). Use updateMask='labels'.
+    attr_accessor :labels
+
+    attr_accessor :storefront_address
+
+    attr_accessor :service_area
+
+    attr_accessor :open_info
+
+    # Additional hours for specific services (delivery, drive-through, etc.). Use updateMask='moreHours'.
+    attr_accessor :more_hours
+
+    attr_accessor :latlng
+
+    attr_accessor :ad_words_location_extensions
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -43,7 +65,16 @@ module Zernio
         :'website_uri' => :'websiteUri',
         :'phone_numbers' => :'phoneNumbers',
         :'categories' => :'categories',
-        :'service_items' => :'serviceItems'
+        :'service_items' => :'serviceItems',
+        :'title' => :'title',
+        :'store_code' => :'storeCode',
+        :'labels' => :'labels',
+        :'storefront_address' => :'storefrontAddress',
+        :'service_area' => :'serviceArea',
+        :'open_info' => :'openInfo',
+        :'more_hours' => :'moreHours',
+        :'latlng' => :'latlng',
+        :'ad_words_location_extensions' => :'adWordsLocationExtensions'
       }
     end
 
@@ -67,7 +98,16 @@ module Zernio
         :'website_uri' => :'String',
         :'phone_numbers' => :'GetGoogleBusinessLocationDetails200ResponsePhoneNumbers',
         :'categories' => :'UpdateGoogleBusinessLocationDetailsRequestCategories',
-        :'service_items' => :'Array<UpdateGoogleBusinessLocationDetailsRequestServiceItemsInner>'
+        :'service_items' => :'Array<UpdateGoogleBusinessLocationDetailsRequestServiceItemsInner>',
+        :'title' => :'String',
+        :'store_code' => :'String',
+        :'labels' => :'Array<String>',
+        :'storefront_address' => :'UpdateGoogleBusinessLocationDetailsRequestStorefrontAddress',
+        :'service_area' => :'UpdateGoogleBusinessLocationDetailsRequestServiceArea',
+        :'open_info' => :'UpdateGoogleBusinessLocationDetailsRequestOpenInfo',
+        :'more_hours' => :'Array<UpdateGoogleBusinessLocationDetailsRequestMoreHoursInner>',
+        :'latlng' => :'UpdateGoogleBusinessLocationDetailsRequestLatlng',
+        :'ad_words_location_extensions' => :'UpdateGoogleBusinessLocationDetailsRequestAdWordsLocationExtensions'
       }
     end
 
@@ -128,6 +168,46 @@ module Zernio
           self.service_items = value
         end
       end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'store_code')
+        self.store_code = attributes[:'store_code']
+      end
+
+      if attributes.key?(:'labels')
+        if (value = attributes[:'labels']).is_a?(Array)
+          self.labels = value
+        end
+      end
+
+      if attributes.key?(:'storefront_address')
+        self.storefront_address = attributes[:'storefront_address']
+      end
+
+      if attributes.key?(:'service_area')
+        self.service_area = attributes[:'service_area']
+      end
+
+      if attributes.key?(:'open_info')
+        self.open_info = attributes[:'open_info']
+      end
+
+      if attributes.key?(:'more_hours')
+        if (value = attributes[:'more_hours']).is_a?(Array)
+          self.more_hours = value
+        end
+      end
+
+      if attributes.key?(:'latlng')
+        self.latlng = attributes[:'latlng']
+      end
+
+      if attributes.key?(:'ad_words_location_extensions')
+        self.ad_words_location_extensions = attributes[:'ad_words_location_extensions']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -172,7 +252,16 @@ module Zernio
           website_uri == o.website_uri &&
           phone_numbers == o.phone_numbers &&
           categories == o.categories &&
-          service_items == o.service_items
+          service_items == o.service_items &&
+          title == o.title &&
+          store_code == o.store_code &&
+          labels == o.labels &&
+          storefront_address == o.storefront_address &&
+          service_area == o.service_area &&
+          open_info == o.open_info &&
+          more_hours == o.more_hours &&
+          latlng == o.latlng &&
+          ad_words_location_extensions == o.ad_words_location_extensions
     end
 
     # @see the `==` method
@@ -184,7 +273,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [update_mask, regular_hours, special_hours, profile, website_uri, phone_numbers, categories, service_items].hash
+      [update_mask, regular_hours, special_hours, profile, website_uri, phone_numbers, categories, service_items, title, store_code, labels, storefront_address, service_area, open_info, more_hours, latlng, ad_words_location_extensions].hash
     end
 
     # Builds the object from hash

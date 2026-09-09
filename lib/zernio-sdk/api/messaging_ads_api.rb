@@ -23,17 +23,17 @@ module Zernio
     # Same shape and flow as POST /v1/ads/ctwa, but the CTA is CALL_NOW dialing `phoneNumber` via a tel: link. The ad set is destination_type PHONE_CALL optimizing QUALITY_CALL and the campaign objective defaults to OUTCOME_LEADS. Supports the same single-creative and multi-creative shapes as CTWA.
     # @param create_call_ad_request [CreateCallAdRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [CreateMessagingAd201Response]
     def create_call_ad(create_call_ad_request, opts = {})
-      create_call_ad_with_http_info(create_call_ad_request, opts)
-      nil
+      data, _status_code, _headers = create_call_ad_with_http_info(create_call_ad_request, opts)
+      data
     end
 
     # Create Click-to-Call ad
     # Same shape and flow as POST /v1/ads/ctwa, but the CTA is CALL_NOW dialing &#x60;phoneNumber&#x60; via a tel: link. The ad set is destination_type PHONE_CALL optimizing QUALITY_CALL and the campaign objective defaults to OUTCOME_LEADS. Supports the same single-creative and multi-creative shapes as CTWA.
     # @param create_call_ad_request [CreateCallAdRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(CreateMessagingAd201Response, Integer, Hash)>] CreateMessagingAd201Response data, response status code and response headers
     def create_call_ad_with_http_info(create_call_ad_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: MessagingAdsApi.create_call_ad ...'
@@ -65,7 +65,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(create_call_ad_request)
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'CreateMessagingAd201Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -91,7 +91,7 @@ module Zernio
     # Deprecated: use POST /v1/ads/messaging with `destination: whatsapp`. This endpoint stays available for back-compat; no removal planned.  Creates one or more Click-to-WhatsApp (CTWA) ads on Meta under a single campaign and ad set. When tapped, each ad opens a WhatsApp conversation with the business attached to the supplied Facebook Page. The full hierarchy (campaign, ad set, creative(s), ad(s)) is created and activated in one call. The CTA is locked to WHATSAPP_MESSAGE and the destination is hard-coded to api.whatsapp.com/send; Meta resolves the actual WhatsApp number from the Page-to-WA pairing configured in Page settings or Business Manager.  Supports two mutually-exclusive shapes:  - **Single-creative**: supply top-level `headline`, `body`, and one of `imageUrl` / `video`. Creates 1 campaign + 1 ad set + 1 ad.  - **Multi-creative**: supply a `creatives[]` array with N entries (each carrying its own headline, body, and image/video). Creates 1 campaign + 1 ad set + N ads sharing budget and targeting so Meta A/Bs the creatives inside a single auction instead of fragmenting budget across N parallel campaigns. Recommended when launching multiple creative variants for the same campaign.  **Attach shape.** Send `adSetId` (with either creative shape) to add the ads to an EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase, the way to refresh a CTWA creative without resetting delivery. The ad set then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests` and `audienceId` are rejected with a 400 alongside it rather than silently dropped. The target ad set's `destination_type` must match the ad's destination (a WhatsApp ad needs a `WHATSAPP` ad set), otherwise Meta would accept an ad that never delivers.  Prerequisites enforced by Meta (surfaced as platform_error on failure): the Facebook Page must be paired with a verified WhatsApp Business number, the WhatsApp Business Account must be business-verified, and the Meta access token must carry ads_management.
     # @param ctwa_ad_request_body [CtwaAdRequestBody] 
     # @param [Hash] opts the optional parameters
-    # @return [CreateCtwaAd201Response]
+    # @return [CreateMessagingAd201Response]
     def create_ctwa_ad(ctwa_ad_request_body, opts = {})
       data, _status_code, _headers = create_ctwa_ad_with_http_info(ctwa_ad_request_body, opts)
       data
@@ -101,7 +101,7 @@ module Zernio
     # Deprecated: use POST /v1/ads/messaging with &#x60;destination: whatsapp&#x60;. This endpoint stays available for back-compat; no removal planned.  Creates one or more Click-to-WhatsApp (CTWA) ads on Meta under a single campaign and ad set. When tapped, each ad opens a WhatsApp conversation with the business attached to the supplied Facebook Page. The full hierarchy (campaign, ad set, creative(s), ad(s)) is created and activated in one call. The CTA is locked to WHATSAPP_MESSAGE and the destination is hard-coded to api.whatsapp.com/send; Meta resolves the actual WhatsApp number from the Page-to-WA pairing configured in Page settings or Business Manager.  Supports two mutually-exclusive shapes:  - **Single-creative**: supply top-level &#x60;headline&#x60;, &#x60;body&#x60;, and one of &#x60;imageUrl&#x60; / &#x60;video&#x60;. Creates 1 campaign + 1 ad set + 1 ad.  - **Multi-creative**: supply a &#x60;creatives[]&#x60; array with N entries (each carrying its own headline, body, and image/video). Creates 1 campaign + 1 ad set + N ads sharing budget and targeting so Meta A/Bs the creatives inside a single auction instead of fragmenting budget across N parallel campaigns. Recommended when launching multiple creative variants for the same campaign.  **Attach shape.** Send &#x60;adSetId&#x60; (with either creative shape) to add the ads to an EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase, the way to refresh a CTWA creative without resetting delivery. The ad set then owns budget, targeting and schedule, so &#x60;budgetAmount&#x60;, &#x60;budgetType&#x60;, &#x60;endDate&#x60;, &#x60;objective&#x60;, &#x60;countries&#x60;, &#x60;interests&#x60; and &#x60;audienceId&#x60; are rejected with a 400 alongside it rather than silently dropped. The target ad set&#39;s &#x60;destination_type&#x60; must match the ad&#39;s destination (a WhatsApp ad needs a &#x60;WHATSAPP&#x60; ad set), otherwise Meta would accept an ad that never delivers.  Prerequisites enforced by Meta (surfaced as platform_error on failure): the Facebook Page must be paired with a verified WhatsApp Business number, the WhatsApp Business Account must be business-verified, and the Meta access token must carry ads_management.
     # @param ctwa_ad_request_body [CtwaAdRequestBody] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateCtwaAd201Response, Integer, Hash)>] CreateCtwaAd201Response data, response status code and response headers
+    # @return [Array<(CreateMessagingAd201Response, Integer, Hash)>] CreateMessagingAd201Response data, response status code and response headers
     def create_ctwa_ad_with_http_info(ctwa_ad_request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: MessagingAdsApi.create_ctwa_ad ...'
@@ -133,7 +133,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(ctwa_ad_request_body)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CreateCtwaAd201Response'
+      return_type = opts[:debug_return_type] || 'CreateMessagingAd201Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -159,17 +159,17 @@ module Zernio
     # Creates a click-to-message ad; `destination` selects where the tapped ad opens a conversation: WhatsApp, the Page's Messenger inbox or the linked Instagram account's Direct inbox. The ad set is created with the matching destination_type and CONVERSATIONS optimization; the campaign objective defaults to OUTCOME_ENGAGEMENT. Supports single-creative and multi-creative shapes. Supersedes POST /v1/ads/ctwa (deprecated, equivalent to `destination: whatsapp`).
     # @param create_messaging_ad_request [CreateMessagingAdRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @return [CreateMessagingAd201Response]
     def create_messaging_ad(create_messaging_ad_request, opts = {})
-      create_messaging_ad_with_http_info(create_messaging_ad_request, opts)
-      nil
+      data, _status_code, _headers = create_messaging_ad_with_http_info(create_messaging_ad_request, opts)
+      data
     end
 
     # Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)
     # Creates a click-to-message ad; &#x60;destination&#x60; selects where the tapped ad opens a conversation: WhatsApp, the Page&#39;s Messenger inbox or the linked Instagram account&#39;s Direct inbox. The ad set is created with the matching destination_type and CONVERSATIONS optimization; the campaign objective defaults to OUTCOME_ENGAGEMENT. Supports single-creative and multi-creative shapes. Supersedes POST /v1/ads/ctwa (deprecated, equivalent to &#x60;destination: whatsapp&#x60;).
     # @param create_messaging_ad_request [CreateMessagingAdRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @return [Array<(CreateMessagingAd201Response, Integer, Hash)>] CreateMessagingAd201Response data, response status code and response headers
     def create_messaging_ad_with_http_info(create_messaging_ad_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: MessagingAdsApi.create_messaging_ad ...'
@@ -201,7 +201,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(create_messaging_ad_request)
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'CreateMessagingAd201Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']

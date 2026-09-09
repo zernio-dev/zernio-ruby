@@ -599,7 +599,7 @@ nil (empty response body)
 
 ## update_ad_tracking_tags
 
-> update_ad_tracking_tags(ad_id, update_ad_tracking_tags_request)
+> <UpdateAdTrackingTags200Response> update_ad_tracking_tags(ad_id, update_ad_tracking_tags_request)
 
 Set ad tracking tags
 
@@ -622,7 +622,8 @@ update_ad_tracking_tags_request = Zernio::UpdateAdTrackingTagsRequest.new # Upda
 
 begin
   # Set ad tracking tags
-  api_instance.update_ad_tracking_tags(ad_id, update_ad_tracking_tags_request)
+  result = api_instance.update_ad_tracking_tags(ad_id, update_ad_tracking_tags_request)
+  p result
 rescue Zernio::ApiError => e
   puts "Error when calling TrackingTagsApi->update_ad_tracking_tags: #{e}"
 end
@@ -630,9 +631,9 @@ end
 
 #### Using the update_ad_tracking_tags_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request)
+> <Array(<UpdateAdTrackingTags200Response>, Integer, Hash)> update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request)
 
 ```ruby
 begin
@@ -640,7 +641,7 @@ begin
   data, status_code, headers = api_instance.update_ad_tracking_tags_with_http_info(ad_id, update_ad_tracking_tags_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <UpdateAdTrackingTags200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling TrackingTagsApi->update_ad_tracking_tags_with_http_info: #{e}"
 end
@@ -655,7 +656,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**UpdateAdTrackingTags200Response**](UpdateAdTrackingTags200Response.md)
 
 ### Authorization
 

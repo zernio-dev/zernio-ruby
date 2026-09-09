@@ -11,7 +11,7 @@ All URIs are relative to *https://zernio.com/api*
 
 ## create_call_ad
 
-> create_call_ad(create_call_ad_request)
+> <CreateMessagingAd201Response> create_call_ad(create_call_ad_request)
 
 Create Click-to-Call ad
 
@@ -33,7 +33,8 @@ create_call_ad_request = Zernio::CreateCallAdRequest.new({account_id: 'account_i
 
 begin
   # Create Click-to-Call ad
-  api_instance.create_call_ad(create_call_ad_request)
+  result = api_instance.create_call_ad(create_call_ad_request)
+  p result
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_call_ad: #{e}"
 end
@@ -41,9 +42,9 @@ end
 
 #### Using the create_call_ad_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> create_call_ad_with_http_info(create_call_ad_request)
+> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_call_ad_with_http_info(create_call_ad_request)
 
 ```ruby
 begin
@@ -51,7 +52,7 @@ begin
   data, status_code, headers = api_instance.create_call_ad_with_http_info(create_call_ad_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <CreateMessagingAd201Response>
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_call_ad_with_http_info: #{e}"
 end
@@ -65,7 +66,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**CreateMessagingAd201Response**](CreateMessagingAd201Response.md)
 
 ### Authorization
 
@@ -79,7 +80,7 @@ nil (empty response body)
 
 ## create_ctwa_ad
 
-> <CreateCtwaAd201Response> create_ctwa_ad(ctwa_ad_request_body)
+> <CreateMessagingAd201Response> create_ctwa_ad(ctwa_ad_request_body)
 
 Create Click-to-WhatsApp ad (deprecated)
 
@@ -112,7 +113,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CreateCtwaAd201Response>, Integer, Hash)> create_ctwa_ad_with_http_info(ctwa_ad_request_body)
+> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_ctwa_ad_with_http_info(ctwa_ad_request_body)
 
 ```ruby
 begin
@@ -120,7 +121,7 @@ begin
   data, status_code, headers = api_instance.create_ctwa_ad_with_http_info(ctwa_ad_request_body)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CreateCtwaAd201Response>
+  p data # => <CreateMessagingAd201Response>
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_ctwa_ad_with_http_info: #{e}"
 end
@@ -134,7 +135,7 @@ end
 
 ### Return type
 
-[**CreateCtwaAd201Response**](CreateCtwaAd201Response.md)
+[**CreateMessagingAd201Response**](CreateMessagingAd201Response.md)
 
 ### Authorization
 
@@ -148,7 +149,7 @@ end
 
 ## create_messaging_ad
 
-> create_messaging_ad(create_messaging_ad_request)
+> <CreateMessagingAd201Response> create_messaging_ad(create_messaging_ad_request)
 
 Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)
 
@@ -170,7 +171,8 @@ create_messaging_ad_request = Zernio::CreateMessagingAdRequest.new({account_id: 
 
 begin
   # Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)
-  api_instance.create_messaging_ad(create_messaging_ad_request)
+  result = api_instance.create_messaging_ad(create_messaging_ad_request)
+  p result
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_messaging_ad: #{e}"
 end
@@ -178,9 +180,9 @@ end
 
 #### Using the create_messaging_ad_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> create_messaging_ad_with_http_info(create_messaging_ad_request)
+> <Array(<CreateMessagingAd201Response>, Integer, Hash)> create_messaging_ad_with_http_info(create_messaging_ad_request)
 
 ```ruby
 begin
@@ -188,7 +190,7 @@ begin
   data, status_code, headers = api_instance.create_messaging_ad_with_http_info(create_messaging_ad_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <CreateMessagingAd201Response>
 rescue Zernio::ApiError => e
   puts "Error when calling MessagingAdsApi->create_messaging_ad_with_http_info: #{e}"
 end
@@ -202,7 +204,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**CreateMessagingAd201Response**](CreateMessagingAd201Response.md)
 
 ### Authorization
 

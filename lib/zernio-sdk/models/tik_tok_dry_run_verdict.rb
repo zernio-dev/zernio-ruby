@@ -14,24 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreatePost200ResponseTiktokInner < ApiModelBase
-    attr_accessor :account_id
+  class TikTokDryRunVerdict < ApiModelBase
+    # Always true on this response
+    attr_accessor :dry_run
 
+    # True only when every evaluated TikTok account can publish now
     attr_accessor :can_publish
 
-    # Whether this account already published a Direct Post today (an account that did can keep publishing). Absent for Creator Inbox drafts and when no per-user limit applies.
-    attr_accessor :already_posted_today
-
-    # Human-readable explanation of the verdict
-    attr_accessor :reason
+    # One verdict per `tiktok` entry in the request, in request order
+    attr_accessor :tiktok
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'accountId',
+        :'dry_run' => :'dryRun',
         :'can_publish' => :'canPublish',
-        :'already_posted_today' => :'alreadyPostedToday',
-        :'reason' => :'reason'
+        :'tiktok' => :'tiktok'
       }
     end
 
@@ -48,10 +46,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
+        :'dry_run' => :'Boolean',
         :'can_publish' => :'Boolean',
-        :'already_posted_today' => :'Boolean',
-        :'reason' => :'String'
+        :'tiktok' => :'Array<TikTokDryRunVerdictTiktokInner>'
       }
     end
 
@@ -65,22 +62,22 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreatePost200ResponseTiktokInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::TikTokDryRunVerdict` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreatePost200ResponseTiktokInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::TikTokDryRunVerdict`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
+      if attributes.key?(:'dry_run')
+        self.dry_run = attributes[:'dry_run']
       else
-        self.account_id = nil
+        self.dry_run = nil
       end
 
       if attributes.key?(:'can_publish')
@@ -89,14 +86,12 @@ module Zernio
         self.can_publish = nil
       end
 
-      if attributes.key?(:'already_posted_today')
-        self.already_posted_today = attributes[:'already_posted_today']
-      end
-
-      if attributes.key?(:'reason')
-        self.reason = attributes[:'reason']
+      if attributes.key?(:'tiktok')
+        if (value = attributes[:'tiktok']).is_a?(Array)
+          self.tiktok = value
+        end
       else
-        self.reason = nil
+        self.tiktok = nil
       end
     end
 
@@ -105,16 +100,16 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      if @dry_run.nil?
+        invalid_properties.push('invalid value for "dry_run", dry_run cannot be nil.')
       end
 
       if @can_publish.nil?
         invalid_properties.push('invalid value for "can_publish", can_publish cannot be nil.')
       end
 
-      if @reason.nil?
-        invalid_properties.push('invalid value for "reason", reason cannot be nil.')
+      if @tiktok.nil?
+        invalid_properties.push('invalid value for "tiktok", tiktok cannot be nil.')
       end
 
       invalid_properties
@@ -124,20 +119,20 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @account_id.nil?
+      return false if @dry_run.nil?
       return false if @can_publish.nil?
-      return false if @reason.nil?
+      return false if @tiktok.nil?
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
+    # @param [Object] dry_run Value to be assigned
+    def dry_run=(dry_run)
+      if dry_run.nil?
+        fail ArgumentError, 'dry_run cannot be nil'
       end
 
-      @account_id = account_id
+      @dry_run = dry_run
     end
 
     # Custom attribute writer method with validation
@@ -151,13 +146,13 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] reason Value to be assigned
-    def reason=(reason)
-      if reason.nil?
-        fail ArgumentError, 'reason cannot be nil'
+    # @param [Object] tiktok Value to be assigned
+    def tiktok=(tiktok)
+      if tiktok.nil?
+        fail ArgumentError, 'tiktok cannot be nil'
       end
 
-      @reason = reason
+      @tiktok = tiktok
     end
 
     # Checks equality by comparing each attribute.
@@ -165,10 +160,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
+          dry_run == o.dry_run &&
           can_publish == o.can_publish &&
-          already_posted_today == o.already_posted_today &&
-          reason == o.reason
+          tiktok == o.tiktok
     end
 
     # @see the `==` method
@@ -180,7 +174,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, can_publish, already_posted_today, reason].hash
+      [dry_run, can_publish, tiktok].hash
     end
 
     # Builds the object from hash

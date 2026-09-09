@@ -1,4 +1,4 @@
-# Zernio::CreatePost200ResponseTiktokInner
+# Zernio::TikTokDryRunVerdictTiktokInner
 
 ## Properties
 
@@ -14,7 +14,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::CreatePost200ResponseTiktokInner.new(
+instance = Zernio::TikTokDryRunVerdictTiktokInner.new(
   account_id: null,
   can_publish: null,
   already_posted_today: null,
