@@ -798,20 +798,22 @@ module Zernio
     end
 
     # Connect WhatsApp from Embedded Signup
-    # Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
+    # Exchange the authorization code Meta's Embedded Signup popup returned. This is the call the Zernio-hosted signup page makes after the popup closes (`GET /v1/connect/whatsapp?signup=hosted`), sending the `wabaId` and `phoneNumberId` Meta reported so exactly the chosen number is connected; when both are omitted the first number the token can see is used. The code never passes through a `redirect_uri`, so `POST /v1/connect/{platform}` cannot accept it. Authenticates with an API key, or with the connect token the hosted flow issues (`X-Connect-Token` header). 
     # @param connect_whats_app_embedded_signup_request [ConnectWhatsAppEmbeddedSignupRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [nil]
+    # @option opts [String] :x_connect_token Connect token issued by the hosted signup flow, accepted instead of an API key.
+    # @return [ConnectWhatsAppEmbeddedSignup200Response]
     def connect_whats_app_embedded_signup(connect_whats_app_embedded_signup_request, opts = {})
-      connect_whats_app_embedded_signup_with_http_info(connect_whats_app_embedded_signup_request, opts)
-      nil
+      data, _status_code, _headers = connect_whats_app_embedded_signup_with_http_info(connect_whats_app_embedded_signup_request, opts)
+      data
     end
 
     # Connect WhatsApp from Embedded Signup
-    # Exchange the authorization code Meta Embedded Signup returns to your browser SDK. This is the headless completion path for WhatsApp: the code never passes through a redirect_uri, so POST /v1/connect/{platform} cannot accept it.
+    # Exchange the authorization code Meta&#39;s Embedded Signup popup returned. This is the call the Zernio-hosted signup page makes after the popup closes (&#x60;GET /v1/connect/whatsapp?signup&#x3D;hosted&#x60;), sending the &#x60;wabaId&#x60; and &#x60;phoneNumberId&#x60; Meta reported so exactly the chosen number is connected; when both are omitted the first number the token can see is used. The code never passes through a &#x60;redirect_uri&#x60;, so &#x60;POST /v1/connect/{platform}&#x60; cannot accept it. Authenticates with an API key, or with the connect token the hosted flow issues (&#x60;X-Connect-Token&#x60; header). 
     # @param connect_whats_app_embedded_signup_request [ConnectWhatsAppEmbeddedSignupRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    # @option opts [String] :x_connect_token Connect token issued by the hosted signup flow, accepted instead of an API key.
+    # @return [Array<(ConnectWhatsAppEmbeddedSignup200Response, Integer, Hash)>] ConnectWhatsAppEmbeddedSignup200Response data, response status code and response headers
     def connect_whats_app_embedded_signup_with_http_info(connect_whats_app_embedded_signup_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConnectApi.connect_whats_app_embedded_signup ...'
@@ -835,6 +837,7 @@ module Zernio
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
+      header_params[:'X-Connect-Token'] = opts[:'x_connect_token'] if !opts[:'x_connect_token'].nil?
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -843,7 +846,7 @@ module Zernio
       post_body = opts[:debug_body] || @api_client.object_to_http_body(connect_whats_app_embedded_signup_request)
 
       # return_type
-      return_type = opts[:debug_return_type]
+      return_type = opts[:debug_return_type] || 'ConnectWhatsAppEmbeddedSignup200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['bearerAuth']
@@ -948,6 +951,10 @@ module Zernio
     # @option opts [Boolean] :headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (default to false)
     # @option opts [String] :login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; supports &#x60;headless&#x3D;true&#x60; like the other selection platforms: the callback redirects to your &#x60;redirect_url&#x60; with &#x60;profileId&#x60;, &#x60;tempToken&#x60;, &#x60;platform&#x3D;instagram&#x60;, &#x60;step&#x3D;select_account&#x60; and &#x60;connect_token&#x60;, which you pass into the select-account endpoints to finish. The default &#x60;instagram_login&#x60; has no selection step, so it connects the account directly.  (default to 'instagram_login')
     # @option opts [String] :onboarding WhatsApp only. Ignored for every other platform. Controls which screen Meta&#39;s Embedded Signup popup shows.  If omitted, the connection defaults to coexistence (same as &#x60;business_app&#x60; below), preserving existing behavior for numbers already on the WhatsApp Business app.  &#x60;api&#x60;: standard Embedded Signup, showing Meta&#39;s WABA/number picker. Use this to connect a phone number already on Cloud API elsewhere.  &#x60;business_app&#x60;: coexistence, i.e. &#39;Connect existing WhatsApp Business app&#39; (a number shared between Cloud API and the consumer WhatsApp Business app). 
+    # @option opts [String] :signup WhatsApp only. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; on any other platform.  &#x60;hosted&#x60;: &#x60;authUrl&#x60; points at a Zernio-hosted page on zernio.com instead of Meta&#39;s OAuth dialog, and the response carries &#x60;authUrl&#x60; only (no &#x60;state&#x60;). That page opens Meta&#39;s Embedded Signup popup itself, so it learns which WhatsApp Business Account and number the user picked inside the popup and connects exactly that one. Use it when your users&#39; Facebook logins manage several WhatsApp accounts: on the default redirect flow Meta only returns an authorization code, so when that login can see more than one number the user lands on Zernio&#39;s number picker and has to choose again. Nothing to embed on your side and no domain setup: send the user to &#x60;authUrl&#x60;, and they come back to &#x60;redirect_url&#x60; with the same params as the redirect flow. Success: &#x60;connected&#x3D;whatsapp&#x60;, &#x60;profileId&#x60;, &#x60;accountId&#x60;, &#x60;username&#x60; (plus &#x60;connect_token&#x60; for API-key callers). Failure: &#x60;error&#x60; and &#x60;platform&#x3D;whatsapp&#x60;, with the same values and extras as the redirect flow (&#x60;one_whatsapp_per_profile&#x60;, &#x60;whatsapp_number_already_connected&#x60; and &#x60;whatsapp_number_pinned_to_profile&#x60; with &#x60;is_user_fixable&#x3D;true&#x60;; &#x60;payment_required&#x60; with &#x60;reason&#x60; and &#x60;dashboard_url&#x60;; &#x60;whatsapp_error&#x60; with &#x60;error_message&#x60; when Meta reported one), plus two of its own: &#x60;connection_cancelled&#x60; when the popup was closed before finishing (&#x60;error_message&#x60; carries Meta&#39;s last reported step or error when there is one) and &#x60;session_expired&#x60; when the user took longer than the 60 minute window the hosted page is valid for; restart the flow with a new call in that case. &#x60;onboarding&#x60; is carried through and a pre-verified Zernio-provisioned number is attached like on the redirect flow. &#x60;headless&#x60; has no effect here because there is no selection step left to hand you. When a previously disconnected account for this profile can simply be re-enabled, this endpoint re-enables it and returns the account directly instead of a URL, exactly like the redirect flow. The page shows the same guidance as the Zernio dashboard: a pre-verified Zernio-provisioned number is called out by name (\&quot;choose it in Meta&#39;s list, no code will be asked\&quot;), coexistence and standard signups get their explainer video, and a step-by-step follow-along checklist stays visible while Meta&#39;s popup is open. Skin it with &#x60;brandName&#x60;, &#x60;primaryColor&#x60; and &#x60;language&#x60; below. 
+    # @option opts [String] :brand_name Hosted signup page only (&#x60;signup&#x3D;hosted&#x60;, WhatsApp): name shown in the page title (\&quot;Connect your WhatsApp number to &lt;brandName&gt;\&quot;) instead of Zernio. The Zernio logo stays: the page is co-branded, not white-label. Trimmed; 1 to 60 characters. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; without &#x60;signup&#x3D;hosted&#x60;. Stored on the signup session at issue time, so the page URL cannot change it.
+    # @option opts [String] :primary_color Hosted signup page only (&#x60;signup&#x3D;hosted&#x60;, WhatsApp): hex colour (&#x60;#RRGGBB&#x60;) for the primary button and step accents. Validated server-side; anything else is a 400 &#x60;INVALID_FIELD_VALUE&#x60;. Rejected without &#x60;signup&#x3D;hosted&#x60;.
+    # @option opts [String] :language Hosted signup page only (&#x60;signup&#x3D;hosted&#x60;, WhatsApp): language of the page and its follow-along guide. Explainer videos stay in English. Default &#x60;en&#x60;. Rejected without &#x60;signup&#x3D;hosted&#x60;.
     # @return [GetConnectUrl200Response]
     def get_connect_url(platform, profile_id, opts = {})
       data, _status_code, _headers = get_connect_url_with_http_info(platform, profile_id, opts)
@@ -963,6 +970,10 @@ module Zernio
     # @option opts [Boolean] :headless When true, the user is redirected to your redirect_url with raw OAuth data (code, state) instead of Zernio&#39;s default account selection UI. Use this to build a custom connect experience. (default to false)
     # @option opts [String] :login_method Instagram only. Which of the two Instagram connection methods to use. Ignored for every other platform.  &#x60;instagram_login&#x60; (the default, and what you get if you omit this): the Instagram Login dialog. The user authorizes their Instagram professional account directly, no Facebook Page required.  &#x60;facebook_login&#x60;: the Facebook Login dialog, i.e. \&quot;Instagram API with Facebook Login\&quot;. The user authorizes a Facebook Page that has a linked Instagram professional account, and every API call for that account then runs through the Page. Use this when the customer manages Instagram through a Page and expects the Facebook consent screen. Because the user has to pick which Page to connect, the callback continues at the account-selection step, &#x60;/v1/connect/instagram/select-account&#x60;.  &#x60;facebook_login&#x60; supports &#x60;headless&#x3D;true&#x60; like the other selection platforms: the callback redirects to your &#x60;redirect_url&#x60; with &#x60;profileId&#x60;, &#x60;tempToken&#x60;, &#x60;platform&#x3D;instagram&#x60;, &#x60;step&#x3D;select_account&#x60; and &#x60;connect_token&#x60;, which you pass into the select-account endpoints to finish. The default &#x60;instagram_login&#x60; has no selection step, so it connects the account directly.  (default to 'instagram_login')
     # @option opts [String] :onboarding WhatsApp only. Ignored for every other platform. Controls which screen Meta&#39;s Embedded Signup popup shows.  If omitted, the connection defaults to coexistence (same as &#x60;business_app&#x60; below), preserving existing behavior for numbers already on the WhatsApp Business app.  &#x60;api&#x60;: standard Embedded Signup, showing Meta&#39;s WABA/number picker. Use this to connect a phone number already on Cloud API elsewhere.  &#x60;business_app&#x60;: coexistence, i.e. &#39;Connect existing WhatsApp Business app&#39; (a number shared between Cloud API and the consumer WhatsApp Business app). 
+    # @option opts [String] :signup WhatsApp only. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; on any other platform.  &#x60;hosted&#x60;: &#x60;authUrl&#x60; points at a Zernio-hosted page on zernio.com instead of Meta&#39;s OAuth dialog, and the response carries &#x60;authUrl&#x60; only (no &#x60;state&#x60;). That page opens Meta&#39;s Embedded Signup popup itself, so it learns which WhatsApp Business Account and number the user picked inside the popup and connects exactly that one. Use it when your users&#39; Facebook logins manage several WhatsApp accounts: on the default redirect flow Meta only returns an authorization code, so when that login can see more than one number the user lands on Zernio&#39;s number picker and has to choose again. Nothing to embed on your side and no domain setup: send the user to &#x60;authUrl&#x60;, and they come back to &#x60;redirect_url&#x60; with the same params as the redirect flow. Success: &#x60;connected&#x3D;whatsapp&#x60;, &#x60;profileId&#x60;, &#x60;accountId&#x60;, &#x60;username&#x60; (plus &#x60;connect_token&#x60; for API-key callers). Failure: &#x60;error&#x60; and &#x60;platform&#x3D;whatsapp&#x60;, with the same values and extras as the redirect flow (&#x60;one_whatsapp_per_profile&#x60;, &#x60;whatsapp_number_already_connected&#x60; and &#x60;whatsapp_number_pinned_to_profile&#x60; with &#x60;is_user_fixable&#x3D;true&#x60;; &#x60;payment_required&#x60; with &#x60;reason&#x60; and &#x60;dashboard_url&#x60;; &#x60;whatsapp_error&#x60; with &#x60;error_message&#x60; when Meta reported one), plus two of its own: &#x60;connection_cancelled&#x60; when the popup was closed before finishing (&#x60;error_message&#x60; carries Meta&#39;s last reported step or error when there is one) and &#x60;session_expired&#x60; when the user took longer than the 60 minute window the hosted page is valid for; restart the flow with a new call in that case. &#x60;onboarding&#x60; is carried through and a pre-verified Zernio-provisioned number is attached like on the redirect flow. &#x60;headless&#x60; has no effect here because there is no selection step left to hand you. When a previously disconnected account for this profile can simply be re-enabled, this endpoint re-enables it and returns the account directly instead of a URL, exactly like the redirect flow. The page shows the same guidance as the Zernio dashboard: a pre-verified Zernio-provisioned number is called out by name (\&quot;choose it in Meta&#39;s list, no code will be asked\&quot;), coexistence and standard signups get their explainer video, and a step-by-step follow-along checklist stays visible while Meta&#39;s popup is open. Skin it with &#x60;brandName&#x60;, &#x60;primaryColor&#x60; and &#x60;language&#x60; below. 
+    # @option opts [String] :brand_name Hosted signup page only (&#x60;signup&#x3D;hosted&#x60;, WhatsApp): name shown in the page title (\&quot;Connect your WhatsApp number to &lt;brandName&gt;\&quot;) instead of Zernio. The Zernio logo stays: the page is co-branded, not white-label. Trimmed; 1 to 60 characters. Rejected with 400 &#x60;INVALID_FIELD_VALUE&#x60; without &#x60;signup&#x3D;hosted&#x60;. Stored on the signup session at issue time, so the page URL cannot change it.
+    # @option opts [String] :primary_color Hosted signup page only (&#x60;signup&#x3D;hosted&#x60;, WhatsApp): hex colour (&#x60;#RRGGBB&#x60;) for the primary button and step accents. Validated server-side; anything else is a 400 &#x60;INVALID_FIELD_VALUE&#x60;. Rejected without &#x60;signup&#x3D;hosted&#x60;.
+    # @option opts [String] :language Hosted signup page only (&#x60;signup&#x3D;hosted&#x60;, WhatsApp): language of the page and its follow-along guide. Explainer videos stay in English. Default &#x60;en&#x60;. Rejected without &#x60;signup&#x3D;hosted&#x60;.
     # @return [Array<(GetConnectUrl200Response, Integer, Hash)>] GetConnectUrl200Response data, response status code and response headers
     def get_connect_url_with_http_info(platform, profile_id, opts = {})
       if @api_client.config.debugging
@@ -989,6 +1000,27 @@ module Zernio
       if @api_client.config.client_side_validation && opts[:'onboarding'] && !allowable_values.include?(opts[:'onboarding'])
         fail ArgumentError, "invalid value for \"onboarding\", must be one of #{allowable_values}"
       end
+      allowable_values = ["hosted"]
+      if @api_client.config.client_side_validation && opts[:'signup'] && !allowable_values.include?(opts[:'signup'])
+        fail ArgumentError, "invalid value for \"signup\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'brand_name'].nil? && opts[:'brand_name'].to_s.length > 60
+        fail ArgumentError, 'invalid value for "opts[:"brand_name"]" when calling ConnectApi.get_connect_url, the character length must be smaller than or equal to 60.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'brand_name'].nil? && opts[:'brand_name'].to_s.length < 1
+        fail ArgumentError, 'invalid value for "opts[:"brand_name"]" when calling ConnectApi.get_connect_url, the character length must be greater than or equal to 1.'
+      end
+
+      pattern = Regexp.new(/^#[0-9a-fA-F]{6}$/)
+      if @api_client.config.client_side_validation && !opts[:'primary_color'].nil? && opts[:'primary_color'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"primary_color\"]' when calling ConnectApi.get_connect_url, must conform to the pattern #{pattern}."
+      end
+
+      allowable_values = ["en", "es"]
+      if @api_client.config.client_side_validation && opts[:'language'] && !allowable_values.include?(opts[:'language'])
+        fail ArgumentError, "invalid value for \"language\", must be one of #{allowable_values}"
+      end
       # resource path
       local_var_path = '/v1/connect/{platform}'.sub('{' + 'platform' + '}', CGI.escape(platform.to_s))
 
@@ -999,6 +1031,10 @@ module Zernio
       query_params[:'headless'] = opts[:'headless'] if !opts[:'headless'].nil?
       query_params[:'loginMethod'] = opts[:'login_method'] if !opts[:'login_method'].nil?
       query_params[:'onboarding'] = opts[:'onboarding'] if !opts[:'onboarding'].nil?
+      query_params[:'signup'] = opts[:'signup'] if !opts[:'signup'].nil?
+      query_params[:'brandName'] = opts[:'brand_name'] if !opts[:'brand_name'].nil?
+      query_params[:'primaryColor'] = opts[:'primary_color'] if !opts[:'primary_color'].nil?
+      query_params[:'language'] = opts[:'language'] if !opts[:'language'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1710,6 +1746,66 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectApi#get_telegram_connect_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get Embedded Signup SDK config
+    # The Meta app id and Embedded Signup configuration id the Zernio-hosted signup page uses to open Meta's popup. Integrators do not need this endpoint: start the hosted flow with `GET /v1/connect/whatsapp?signup=hosted` and send the user to the returned `authUrl`. Authenticates with an API key or with the connect token the hosted flow issues (`X-Connect-Token` header). 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :x_connect_token Connect token issued by the hosted signup flow, accepted instead of an API key.
+    # @return [GetWhatsAppSdkConfig200Response]
+    def get_whats_app_sdk_config(opts = {})
+      data, _status_code, _headers = get_whats_app_sdk_config_with_http_info(opts)
+      data
+    end
+
+    # Get Embedded Signup SDK config
+    # The Meta app id and Embedded Signup configuration id the Zernio-hosted signup page uses to open Meta&#39;s popup. Integrators do not need this endpoint: start the hosted flow with &#x60;GET /v1/connect/whatsapp?signup&#x3D;hosted&#x60; and send the user to the returned &#x60;authUrl&#x60;. Authenticates with an API key or with the connect token the hosted flow issues (&#x60;X-Connect-Token&#x60; header). 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :x_connect_token Connect token issued by the hosted signup flow, accepted instead of an API key.
+    # @return [Array<(GetWhatsAppSdkConfig200Response, Integer, Hash)>] GetWhatsAppSdkConfig200Response data, response status code and response headers
+    def get_whats_app_sdk_config_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectApi.get_whats_app_sdk_config ...'
+      end
+      # resource path
+      local_var_path = '/v1/connect/whatsapp/sdk-config'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      header_params[:'X-Connect-Token'] = opts[:'x_connect_token'] if !opts[:'x_connect_token'].nil?
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetWhatsAppSdkConfig200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"ConnectApi.get_whats_app_sdk_config",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectApi#get_whats_app_sdk_config\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
