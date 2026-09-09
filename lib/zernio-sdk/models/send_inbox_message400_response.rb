@@ -17,8 +17,14 @@ module Zernio
   class SendInboxMessage400Response < ApiModelBase
     attr_accessor :error
 
-    # Stable machine-readable reason. PLATFORM_LIMITATION covers a capability the platform does not offer (e.g. Bluesky and Reddit DMs reject media); MISSING_PARTICIPANT means the stored conversation has no recipient to send to; DIRECT_SEND_NOT_ELIGIBLE and DIRECT_SEND_BLOCKED mean the WhatsApp Business Account needs Meta to grant or restore Direct Send access; DIRECT_SEND_LIMITED is temporary, Meta lifts it on its own.
+    # Present on Meta pass-through rejections: platform_error when Meta rejected the send (see platform/platformError below), invalid_request_error for validation failures.
+    attr_accessor :type
+
+    # Stable machine-readable reason. PLATFORM_LIMITATION covers a capability the platform does not offer (e.g. Bluesky and Reddit DMs reject media); MISSING_PARTICIPANT means the stored conversation has no recipient to send to; DIRECT_SEND_NOT_ELIGIBLE and DIRECT_SEND_BLOCKED mean the WhatsApp Business Account needs Meta to grant or restore Direct Send access; DIRECT_SEND_LIMITED is temporary, Meta lifts it on its own; platform_api_error means Meta itself rejected the send (see platformError).
     attr_accessor :code
+
+    # Present alongside code platform_api_error. The platform that rejected the send (e.g. instagram, facebook).
+    attr_accessor :platform
 
     attr_accessor :platform_error
 
@@ -48,7 +54,9 @@ module Zernio
     def self.attribute_map
       {
         :'error' => :'error',
+        :'type' => :'type',
         :'code' => :'code',
+        :'platform' => :'platform',
         :'platform_error' => :'platformError'
       }
     end
@@ -67,7 +75,9 @@ module Zernio
     def self.openapi_types
       {
         :'error' => :'String',
+        :'type' => :'String',
         :'code' => :'String',
+        :'platform' => :'String',
         :'platform_error' => :'SendInboxMessage400ResponsePlatformError'
       }
     end
@@ -98,8 +108,16 @@ module Zernio
         self.error = attributes[:'error']
       end
 
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
       if attributes.key?(:'code')
         self.code = attributes[:'code']
+      end
+
+      if attributes.key?(:'platform')
+        self.platform = attributes[:'platform']
       end
 
       if attributes.key?(:'platform_error')
@@ -119,15 +137,27 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
+      type_validator = EnumAttributeValidator.new('String', ["platform_error", "invalid_request_error"])
+      return false unless type_validator.valid?(@type)
+      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED", "platform_api_error"])
       return false unless code_validator.valid?(@code)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["platform_error", "invalid_request_error"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code)
-      validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
+      validator = EnumAttributeValidator.new('String', ["PLATFORM_LIMITATION", "MISSING_PARTICIPANT", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED", "platform_api_error"])
       unless validator.valid?(code)
         fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
       end
@@ -140,7 +170,9 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           error == o.error &&
+          type == o.type &&
           code == o.code &&
+          platform == o.platform &&
           platform_error == o.platform_error
     end
 
@@ -153,7 +185,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, code, platform_error].hash
+      [error, type, code, platform, platform_error].hash
     end
 
     # Builds the object from hash
