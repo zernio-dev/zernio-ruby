@@ -25,7 +25,7 @@ module Zernio
     # URL for link posts. If provided (and forceSelf is not true), creates a link post instead of a text post.
     attr_accessor :url
 
-    # When true, creates a text/self post even when a URL or media is provided.
+    # When true, creates a text-only self post and skips native media uploads, even when media is provided. For native video with body text, omit forceSelf and supply content plus a video mediaItem.
     attr_accessor :force_self
 
     # Flair ID for the post. Required by some subreddits. Use GET /v1/accounts/{id}/reddit-flairs?subreddit=name to list flairs.
@@ -43,7 +43,7 @@ module Zernio
     # Whether to receive inbox replies for comments on this post. Set to false to opt out.
     attr_accessor :sendreplies
 
-    # Controls Reddit's native video upload flow. When true (default for video mediaItems), the video is uploaded to Reddit's CDN and submitted with kind=video so it renders as an embedded Reddit video player. Reddit transcodes server-side (1080p/30fps cap). Set to false to fall back to a legacy link post. If the subreddit blocks video posts, the upload falls back to a link post automatically. 
+    # Controls Reddit's native video upload flow. When true (default for video mediaItems), the video is uploaded to Reddit's CDN and submitted with kind=video so it renders as an embedded Reddit video player. Reddit transcodes server-side (1080p/30fps cap). Set to false to explicitly publish an external link instead. The post content (or Reddit customContent override) is included as Markdown body text on the native video. When body text is present, upload failures or subreddit video restrictions fail the post without falling back to a link. Automatic link fallback applies only without body text. 
     attr_accessor :native_video
 
     # When true (and nativeVideo is active), submits the video as a silent videogif (kind=videogif). Use for short looping clips without audio.
