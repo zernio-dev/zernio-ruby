@@ -27,6 +27,22 @@ describe Zernio::UpdateAdRequestCreative do
     end
   end
 
+  describe 'test attribute "promotion"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "creative_features"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Hash<String, String>', ["OPT_IN", "OPT_OUT"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.creative_features = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "headline"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

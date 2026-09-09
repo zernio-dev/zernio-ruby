@@ -15,7 +15,8 @@
 | **image_hash** | **String** | Existing library image hash (POST /v1/ads/images or GET /v1/ads/images). | [optional] |
 | **carousel_cards** | [**Array&lt;CreateAdCreativeRequestCarouselCardsInner&gt;**](CreateAdCreativeRequestCarouselCardsInner.md) |  | [optional] |
 | **url_tags** | **String** | Appended to every outbound URL (e.g. utm_source&#x3D;fb). | [optional] |
-| **creative_features** | **Hash&lt;String, String&gt;** | Advantage+ creative enhancements: partial map of Meta creative feature keys (snake_case) to enroll status, forwarded as degrees_of_freedom_spec.creative_features_spec. Unspecified features default to OPT_OUT. | [optional] |
+| **promotion** | [**MetaPromotion**](MetaPromotion.md) |  | [optional] |
+| **creative_features** | **Hash&lt;String, String&gt;** | Meta only. Applied to each new creative, including standalone and attach shapes. With creatives[], these are defaults; an item replaces the whole feature map, including an empty map. auto_promotion_tag is an enhancement; an explicit offer uses promotion. | [optional] |
 | **multi_advertiser** | **String** | Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers&#39; in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a &#x60;creativeFeatures&#x60; key, and Meta rejects it there. | [optional] |
 
 ## Example
@@ -35,7 +36,8 @@ instance = Zernio::CreateAdCreativeRequest.new(
   image_hash: null,
   carousel_cards: null,
   url_tags: null,
-  creative_features: null,
+  promotion: null,
+  creative_features: {auto_promotion_tag&#x3D;OPT_IN},
   multi_advertiser: null
 )
 ```

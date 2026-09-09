@@ -47,7 +47,9 @@ module Zernio
     # Meta only. The RESERVED prediction id the R&F ad set runs on (reserving mints a new id, so pass that one). Requires buyingType RESERVED.
     attr_accessor :rf_prediction_id
 
-    # Meta only. Advantage+ creative enhancements: a partial map of Meta creative feature keys (snake_case, e.g. enhance_cta, image_brightness_and_contrast, text_optimizations) to enroll status, forwarded as degrees_of_freedom_spec.creative_features_spec. Meta validates the keys; unspecified features default to OPT_OUT. The legacy standard_enhancements bundle is deprecated by Meta and rejected.
+    attr_accessor :promotion
+
+    # Meta only. Applied to each new creative, including standalone and attach shapes. With creatives[], these are defaults; an item replaces the whole feature map, including an empty map. auto_promotion_tag is an enhancement; an explicit offer uses promotion.
     attr_accessor :creative_features
 
     # Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers' in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a `creativeFeatures` key, and Meta rejects it there.
@@ -114,7 +116,7 @@ module Zernio
     # Meta-only. When present, switches to the multi-creative shape: creates 1 campaign + 1 ad set + N ads (one per entry here). Top-level `headline` / `body` / `imageUrl` / `linkUrl` / `callToAction` are ignored in this mode. Mutually exclusive with `adSetId`. 
     attr_accessor :creatives
 
-    # When present, switches to the attach shape: adds one new ad to this existing ad set without creating a new campaign. Budget, targeting, goal, schedule, AND bid strategy are inherited from the ad set on Meta, and passing `bidStrategy` in attach mode returns 400. To change an existing ad set's bid, use `PUT /v1/ads/ad-sets/{adSetId}`. Mutually exclusive with `creatives[]`.  The attached ad takes the full single-creative surface: `headline`/`body`/`description`/`callToAction` plus either `imageUrl`/`video` OR `placementAssets` (its own per-placement Feed/Story assets) OR `translations`/`defaultLocale` (its own per-locale asset feed, Meta only), and `leadGenFormId` when the target is a lead ad set (the parent must be ON_AD, true for ad sets created via goal `lead_generation`; Meta rejects a formless ad there, so pass the form on EVERY attached ad). This is the way to build N full ads sharing one ad set: create the first ad via the normal shape, then attach the rest one call each.  Supported on Meta (facebook, instagram), Google Ads, TikTok, and LinkedIn. On TikTok the `adSetId` is the ad group ID; the new ad inherits the ad group's bid + budget + targeting. On LinkedIn the `adSetId` is the LinkedIn Campaign ID (numeric); we attach a new Creative to that Campaign, so the Campaign's `platformSpecificData` bidding, targeting, budget and schedule are inherited (passing those fields returns 400).  On Google Ads the `adSetId` is the AD GROUP id. `goal` is still REQUIRED even though budget and targeting are inherited from the ad group. Send `campaignType: \"search\"` to attach into a Search ad group, including one created by `POST /v1/ads/ad-sets` (always SEARCH_STANDARD): without it the request is treated as Display and requires `images.landscape` + `images.square` + `businessName`, and the resulting display creative does not match a Search ad group. `budgetAmount`/`budgetType` and bidding fields (`bidStrategy`, `bidAmount`, `portfolioBidStrategyId`) return 400 on this shape; the ad group already owns them. 
+    # When present, switches to the attach shape: adds one new ad to this existing ad set without creating a new campaign. Budget, targeting, goal, schedule, AND bid strategy are inherited from the ad set on Meta, and passing `bidStrategy` in attach mode returns 400. To change an existing ad set's bid, use `PUT /v1/ads/ad-sets/{adSetId}`. Mutually exclusive with `creatives[]`. `dynamicCreative` returns 400 in attach mode: create a new dynamic ad set by omitting `adSetId` instead.  The attached ad takes the full single-creative surface: `headline`/`body`/`description`/`callToAction` plus either `imageUrl`/`video` OR `placementAssets` (its own per-placement Feed/Story assets) OR `translations`/`defaultLocale` (its own per-locale asset feed, Meta only), and `leadGenFormId` when the target is a lead ad set (the parent must be ON_AD, true for ad sets created via goal `lead_generation`; Meta rejects a formless ad there, so pass the form on EVERY attached ad). This is the way to build N full ads sharing one ad set: create the first ad via the normal shape, then attach the rest one call each.  Supported on Meta (facebook, instagram), Google Ads, TikTok, and LinkedIn. On TikTok the `adSetId` is the ad group ID; the new ad inherits the ad group's bid + budget + targeting. On LinkedIn the `adSetId` is the LinkedIn Campaign ID (numeric); we attach a new Creative to that Campaign, so the Campaign's `platformSpecificData` bidding, targeting, budget and schedule are inherited (passing those fields returns 400).  On Google Ads the `adSetId` is the AD GROUP id. `goal` is still REQUIRED even though budget and targeting are inherited from the ad group. Send `campaignType: \"search\"` to attach into a Search ad group, including one created by `POST /v1/ads/ad-sets` (always SEARCH_STANDARD): without it the request is treated as Display and requires `images.landscape` + `images.square` + `businessName`, and the resulting display creative does not match a Search ad group. `budgetAmount`/`budgetType` and bidding fields (`bidStrategy`, `bidAmount`, `portfolioBidStrategyId`) return 400 on this shape; the ad group already owns them. 
     attr_accessor :ad_set_id
 
     # Meta, Google Ads, and LinkedIn. On Meta: add the new ad set under this EXISTING campaign instead of creating a new one (multi-ad-set audience testing). The new ad set's budget is matched to the campaign's mode automatically: for a CBO campaign (campaign-level budget) omit `budgetAmount`/`budgetType`, since the campaign owns the budget; for an ABO campaign pass them (they go on the new ad set). On LinkedIn: create a new Campaign (and its Creative) under this EXISTING CampaignGroup. On Google Ads: create a new ad group under this EXISTING campaign; the new ad group inherits the campaign's budget, so omit `budgetAmount`/`budgetType` (and any bidding field), or the request returns 400. On failure only the entities we authored are cleaned up; the pre-existing parent is left untouched and is never (re)activated. Mutually exclusive with `adSetId` and `creatives[]`. 
@@ -332,6 +334,7 @@ module Zernio
         :'billing_event' => :'billingEvent',
         :'buying_type' => :'buyingType',
         :'rf_prediction_id' => :'rfPredictionId',
+        :'promotion' => :'promotion',
         :'creative_features' => :'creativeFeatures',
         :'multi_advertiser' => :'multiAdvertiser',
         :'validate_only' => :'validateOnly',
@@ -446,6 +449,7 @@ module Zernio
         :'billing_event' => :'String',
         :'buying_type' => :'String',
         :'rf_prediction_id' => :'String',
+        :'promotion' => :'MetaPromotion',
         :'creative_features' => :'Hash<String, String>',
         :'multi_advertiser' => :'String',
         :'validate_only' => :'Boolean',
@@ -609,6 +613,10 @@ module Zernio
 
       if attributes.key?(:'rf_prediction_id')
         self.rf_prediction_id = attributes[:'rf_prediction_id']
+      end
+
+      if attributes.key?(:'promotion')
+        self.promotion = attributes[:'promotion']
       end
 
       if attributes.key?(:'creative_features')
@@ -1876,6 +1884,7 @@ module Zernio
           billing_event == o.billing_event &&
           buying_type == o.buying_type &&
           rf_prediction_id == o.rf_prediction_id &&
+          promotion == o.promotion &&
           creative_features == o.creative_features &&
           multi_advertiser == o.multi_advertiser &&
           validate_only == o.validate_only &&
@@ -1973,7 +1982,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
+      [account_id, ad_account_id, name, campaign_name, ad_set_name, ad_name, tracking, goal, optimization_goal, billing_event, buying_type, rf_prediction_id, promotion, creative_features, multi_advertiser, validate_only, budget_amount, budget_type, status, campaign_status, budget_level, currency, headline, long_headline, body, description, bodies, headlines, descriptions, call_to_action, link_url, lead_gen_form_id, image_url, images, video, creatives, ad_set_id, existing_campaign_id, existing_creative_id, business_name, board_id, organization_id, targeting, countries, cities, regions, age_min, age_max, interests, zips, metros, custom_locations, behaviors, work_positions, work_employers, work_industries, income_tier, languages, placements, saved_targeting_id, raw_targeting, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, end_date, start_date, instagram_account_id, dynamic_creative, carousel_cards, default_locale, translations, placement_assets, audience_id, campaign_type, keywords, negative_keywords, campaign_negative_keywords, additional_headlines, additional_descriptions, sitelinks, callouts, structured_snippets, advantage_audience, attribution_spec, gender, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, value_rule_set_id, value_rules_applied, platform_specific_data, dsa_beneficiary, dsa_payor, brand_identity, identity_type, smart_plus, promoted_object].hash
     end
 
     # Builds the object from hash

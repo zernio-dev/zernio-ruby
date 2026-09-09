@@ -45,7 +45,9 @@ module Zernio
     # Appended to every outbound URL (e.g. utm_source=fb).
     attr_accessor :url_tags
 
-    # Advantage+ creative enhancements: partial map of Meta creative feature keys (snake_case) to enroll status, forwarded as degrees_of_freedom_spec.creative_features_spec. Unspecified features default to OPT_OUT.
+    attr_accessor :promotion
+
+    # Meta only. Applied to each new creative, including standalone and attach shapes. With creatives[], these are defaults; an item replaces the whole feature map, including an empty map. auto_promotion_tag is an enhancement; an explicit offer uses promotion.
     attr_accessor :creative_features
 
     # Meta only. Multi-advertiser ads: whether Meta may show this ad alongside other advertisers' in one unit. Meta auto-enrols since Aug 2024, so send OPT_OUT to leave. It is a top-level creative field, NOT a `creativeFeatures` key, and Meta rejects it there.
@@ -87,6 +89,7 @@ module Zernio
         :'image_hash' => :'imageHash',
         :'carousel_cards' => :'carouselCards',
         :'url_tags' => :'urlTags',
+        :'promotion' => :'promotion',
         :'creative_features' => :'creativeFeatures',
         :'multi_advertiser' => :'multiAdvertiser'
       }
@@ -116,6 +119,7 @@ module Zernio
         :'image_hash' => :'String',
         :'carousel_cards' => :'Array<CreateAdCreativeRequestCarouselCardsInner>',
         :'url_tags' => :'String',
+        :'promotion' => :'MetaPromotion',
         :'creative_features' => :'Hash<String, String>',
         :'multi_advertiser' => :'String'
       }
@@ -199,6 +203,10 @@ module Zernio
 
       if attributes.key?(:'url_tags')
         self.url_tags = attributes[:'url_tags']
+      end
+
+      if attributes.key?(:'promotion')
+        self.promotion = attributes[:'promotion']
       end
 
       if attributes.key?(:'creative_features')
@@ -386,6 +394,7 @@ module Zernio
           image_hash == o.image_hash &&
           carousel_cards == o.carousel_cards &&
           url_tags == o.url_tags &&
+          promotion == o.promotion &&
           creative_features == o.creative_features &&
           multi_advertiser == o.multi_advertiser
     end
@@ -399,7 +408,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, headline, body, description, call_to_action, link_url, image_url, image_hash, carousel_cards, url_tags, creative_features, multi_advertiser].hash
+      [account_id, ad_account_id, headline, body, description, call_to_action, link_url, image_url, image_hash, carousel_cards, url_tags, promotion, creative_features, multi_advertiser].hash
     end
 
     # Builds the object from hash

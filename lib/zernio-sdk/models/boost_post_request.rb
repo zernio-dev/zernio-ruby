@@ -15,6 +15,9 @@ require 'time'
 
 module Zernio
   class BoostPostRequest < ApiModelBase
+    # Meta Advantage+ creative enhancements. Map snake_case feature names to OPT_IN or OPT_OUT; Meta validates supported keys and unspecified features default to OPT_OUT. auto_promotion_tag is an enhancement; use the separate promotion field for an explicit offer. The deprecated standard_enhancements bundle is rejected by Meta.
+    attr_accessor :creative_features
+
     # Zernio post ID (provide this or platformPostId)
     attr_accessor :post_id
 
@@ -130,6 +133,7 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'creative_features' => :'creativeFeatures',
         :'post_id' => :'postId',
         :'platform_post_id' => :'platformPostId',
         :'account_id' => :'accountId',
@@ -178,6 +182,7 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'creative_features' => :'Hash<String, String>',
         :'post_id' => :'String',
         :'platform_post_id' => :'String',
         :'account_id' => :'String',
@@ -234,6 +239,12 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'creative_features')
+        if (value = attributes[:'creative_features']).is_a?(Hash)
+          self.creative_features = value
+        end
+      end
 
       if attributes.key?(:'post_id')
         self.post_id = attributes[:'post_id']
@@ -584,6 +595,7 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          creative_features == o.creative_features &&
           post_id == o.post_id &&
           platform_post_id == o.platform_post_id &&
           account_id == o.account_id &&
@@ -627,7 +639,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, whatsapp_phone_number, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
+      [creative_features, post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, whatsapp_phone_number, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
     end
 
     # Builds the object from hash

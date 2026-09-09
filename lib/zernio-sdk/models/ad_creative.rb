@@ -28,6 +28,11 @@ module Zernio
     # Public Facebook watch URL for VIDEO-type ads (https://www.facebook.com/watch/?v={videoId}). Null for non-video ads.
     attr_accessor :video_url
 
+    # Meta offer read from the live creative on creation or GET /v1/ads/{adId}. Null when metadata is not returned or cannot be read. Requested values are never echoed as applied.
+    attr_accessor :promotion
+
+    attr_accessor :promotion_status
+
     # Meta ad creative id backing this ad. Reusable via existingCreativeId on POST /v1/ads/create.
     attr_accessor :creative_id
 
@@ -82,6 +87,28 @@ module Zernio
 
     attr_accessor :pinterest_description
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -89,6 +116,8 @@ module Zernio
         :'image_url' => :'imageUrl',
         :'video_id' => :'videoId',
         :'video_url' => :'videoUrl',
+        :'promotion' => :'promotion',
+        :'promotion_status' => :'promotionStatus',
         :'creative_id' => :'creativeId',
         :'object_type' => :'objectType',
         :'object_story_id' => :'objectStoryId',
@@ -128,6 +157,8 @@ module Zernio
         :'image_url' => :'String',
         :'video_id' => :'String',
         :'video_url' => :'String',
+        :'promotion' => :'MetaPromotion',
+        :'promotion_status' => :'MetaPromotionStatus',
         :'creative_id' => :'String',
         :'object_type' => :'String',
         :'object_story_id' => :'String',
@@ -197,6 +228,14 @@ module Zernio
 
       if attributes.key?(:'video_url')
         self.video_url = attributes[:'video_url']
+      end
+
+      if attributes.key?(:'promotion')
+        self.promotion = attributes[:'promotion']
+      end
+
+      if attributes.key?(:'promotion_status')
+        self.promotion_status = attributes[:'promotion_status']
       end
 
       if attributes.key?(:'creative_id')
@@ -304,6 +343,8 @@ module Zernio
           image_url == o.image_url &&
           video_id == o.video_id &&
           video_url == o.video_url &&
+          promotion == o.promotion &&
+          promotion_status == o.promotion_status &&
           creative_id == o.creative_id &&
           object_type == o.object_type &&
           object_story_id == o.object_story_id &&
@@ -334,7 +375,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thumbnail_url, image_url, video_id, video_url, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, whatsapp_phone_number, pinterest_image_url, pinterest_title, pinterest_description].hash
+      [thumbnail_url, image_url, video_id, video_url, promotion, promotion_status, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, whatsapp_phone_number, pinterest_image_url, pinterest_title, pinterest_description].hash
     end
 
     # Builds the object from hash

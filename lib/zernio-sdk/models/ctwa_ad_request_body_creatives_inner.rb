@@ -22,6 +22,9 @@ module Zernio
     # Messaging and CTWA only. Raw Facebook pageId_postId reference, used as object_story_id even with an Instagram account. Mutually exclusive with existingPostId and fresh creative fields.
     attr_accessor :object_story_id
 
+    # Replaces the top-level creativeFeatures map for this item. Omit to inherit; an empty object clears inherited enrollment choices.
+    attr_accessor :creative_features
+
     attr_accessor :headline
 
     # Primary text shown above the image / video.
@@ -34,11 +37,34 @@ module Zernio
 
     attr_accessor :welcome_message
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'existing_post_id' => :'existingPostId',
         :'object_story_id' => :'objectStoryId',
+        :'creative_features' => :'creativeFeatures',
         :'headline' => :'headline',
         :'body' => :'body',
         :'image_url' => :'imageUrl',
@@ -62,6 +88,7 @@ module Zernio
       {
         :'existing_post_id' => :'String',
         :'object_story_id' => :'String',
+        :'creative_features' => :'Hash<String, String>',
         :'headline' => :'String',
         :'body' => :'String',
         :'image_url' => :'String',
@@ -98,6 +125,12 @@ module Zernio
 
       if attributes.key?(:'object_story_id')
         self.object_story_id = attributes[:'object_story_id']
+      end
+
+      if attributes.key?(:'creative_features')
+        if (value = attributes[:'creative_features']).is_a?(Hash)
+          self.creative_features = value
+        end
       end
 
       if attributes.key?(:'headline')
@@ -230,6 +263,7 @@ module Zernio
       self.class == o.class &&
           existing_post_id == o.existing_post_id &&
           object_story_id == o.object_story_id &&
+          creative_features == o.creative_features &&
           headline == o.headline &&
           body == o.body &&
           image_url == o.image_url &&
@@ -246,7 +280,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [existing_post_id, object_story_id, headline, body, image_url, video, welcome_message].hash
+      [existing_post_id, object_story_id, creative_features, headline, body, image_url, video, welcome_message].hash
     end
 
     # Builds the object from hash

@@ -14,8 +14,13 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Replace or patch the ad's creative. Meta, TikTok, and LinkedIn.  - **Meta**: patch-style. Pass any subset: fields you omit are preserved from the   live creative, including media (`image_hash`/`video_id` are reused, no re-upload)   and `url_tags`. Sending the full set (`headline`, `body`, `callToAction`,   `linkUrl`, `imageUrl`) rebuilds the creative from scratch instead. Partial   patching reads the live `object_story_spec`, which Meta strips on SHARE /   page-post / dark / asset_feed creatives. Those return 422 asking for the full   set. A `videoUrl`/`videoId` on an image creative is a type change and also   needs the full set. `existingCreativeId` repoints the ad at a creative from   GET /v1/ads/creatives and ignores every other field. Meta creatives are   immutable, so any change creates a new creative and repoints the ad; the old   creative is retained on the ad account for historical reporting. - **TikTok**: patch-style. Pass any subset; `headline` is ignored (TikTok creatives   have no headline slot). `body` becomes the in-feed `ad_text`; `linkUrl` becomes   `landing_page_url`; `videoUrl` triggers a fresh upload. `description`, `videoId`   and `existingCreativeId` are Meta-only and return 400. - **LinkedIn**: requires new media (image via `imageUrl` or video via `videoUrl`);   a text-only creative update returns 400. Uploads the media, creates a new inline   media creative on the same campaign, and pauses the old creative (best-effort).   The old creative is retained for historical reporting. `videoId` and   `existingCreativeId` are Meta-only and return 400. 
+  # Replace or patch the ad's creative. Meta, TikTok, and LinkedIn.  - **Meta**: patch-style. Pass any subset: fields you omit are preserved from the   live creative, including media (`image_hash`/`video_id` are reused, no re-upload)   and `url_tags`. Sending the full set (`headline`, `body`, `callToAction`,   `linkUrl`, `imageUrl`) rebuilds the creative from scratch instead. Partial   patching reads the live `object_story_spec`, which Meta strips on SHARE /   page-post / dark / asset_feed creatives. Those return 422 asking for the full   set. A `videoUrl`/`videoId` on an image creative is a type change and also   needs the full set. `existingCreativeId` repoints the ad at a creative from   GET /v1/ads/creatives and ignores every other field. Meta creatives are   immutable, so any change creates a new creative and repoints the ad; the old   creative is retained on the ad account for historical reporting.   `promotion` and `creativeFeatures` are Meta-only. Omitted settings are   preserved from the live creative, including full rebuilds. Send   `promotion: null` to remove the explicit offer from the replacement.   A supplied creativeFeatures map overrides individual existing keys. - **TikTok**: patch-style. Pass any subset; `headline` is ignored (TikTok creatives   have no headline slot). `body` becomes the in-feed `ad_text`; `linkUrl` becomes   `landing_page_url`; `videoUrl` triggers a fresh upload. `description`, `videoId`   and `existingCreativeId` are Meta-only and return 400. - **LinkedIn**: requires new media (image via `imageUrl` or video via `videoUrl`);   a text-only creative update returns 400. Uploads the media, creates a new inline   media creative on the same campaign, and pauses the old creative (best-effort).   The old creative is retained for historical reporting. `videoId` and   `existingCreativeId` are Meta-only and return 400. 
   class UpdateAdRequestCreative < ApiModelBase
+    attr_accessor :promotion
+
+    # Meta Advantage+ creative enhancements. Map snake_case feature names to OPT_IN or OPT_OUT; Meta validates supported keys and unspecified features default to OPT_OUT. auto_promotion_tag is an enhancement; use the separate promotion field for an explicit offer. The deprecated standard_enhancements bundle is rejected by Meta.
+    attr_accessor :creative_features
+
     # Meta and LinkedIn (TikTok has no headline slot)
     attr_accessor :headline
 
@@ -38,9 +43,33 @@ module Zernio
     # Meta only. Repoint the ad at an existing library creative (from GET /v1/ads/creatives); all other creative fields are ignored.
     attr_accessor :existing_creative_id
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'promotion' => :'promotion',
+        :'creative_features' => :'creativeFeatures',
         :'headline' => :'headline',
         :'body' => :'body',
         :'description' => :'description',
@@ -66,6 +95,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'promotion' => :'MetaPromotion',
+        :'creative_features' => :'Hash<String, String>',
         :'headline' => :'String',
         :'body' => :'String',
         :'description' => :'String',
@@ -99,6 +130,16 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'promotion')
+        self.promotion = attributes[:'promotion']
+      end
+
+      if attributes.key?(:'creative_features')
+        if (value = attributes[:'creative_features']).is_a?(Hash)
+          self.creative_features = value
+        end
+      end
 
       if attributes.key?(:'headline')
         self.headline = attributes[:'headline']
@@ -176,6 +217,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          promotion == o.promotion &&
+          creative_features == o.creative_features &&
           headline == o.headline &&
           body == o.body &&
           description == o.description &&
@@ -196,7 +239,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headline, body, description, call_to_action, link_url, image_url, video_url, video_id, existing_creative_id].hash
+      [promotion, creative_features, headline, body, description, call_to_action, link_url, image_url, video_url, video_id, existing_creative_id].hash
     end
 
     # Builds the object from hash
