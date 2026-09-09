@@ -84,7 +84,7 @@ module Zernio
     def self.openapi_types
       {
         :'updated' => :'Integer',
-        :'budget' => :'AdBudget',
+        :'budget' => :'AdCampaignBudget',
         :'budget_level' => :'String',
         :'bid_strategy' => :'BidStrategy',
         :'bid_amount' => :'Float',

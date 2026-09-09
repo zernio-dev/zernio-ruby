@@ -33,6 +33,9 @@ module Zernio
     # **Google only.** Attach an existing portfolio bid strategy (numeric id from GET /v1/ads/bid-strategies) instead of setting bidStrategy. Exclusive with bidStrategy.
     attr_accessor :portfolio_bid_strategy_id
 
+    # Google only. Explicitly allow changing a shared campaign budget, affecting every campaign that uses it. Does not bypass an unknown sharing state.
+    attr_accessor :allow_shared_budget_update
+
     attr_accessor :budget
 
     # **Meta only.** Rename the campaign.
@@ -71,6 +74,7 @@ module Zernio
         :'bid_amount' => :'bidAmount',
         :'roas_average_floor' => :'roasAverageFloor',
         :'portfolio_bid_strategy_id' => :'portfolioBidStrategyId',
+        :'allow_shared_budget_update' => :'allowSharedBudgetUpdate',
         :'budget' => :'budget',
         :'name' => :'name',
         :'platform_specific_data' => :'platformSpecificData'
@@ -96,6 +100,7 @@ module Zernio
         :'bid_amount' => :'Float',
         :'roas_average_floor' => :'Float',
         :'portfolio_bid_strategy_id' => :'String',
+        :'allow_shared_budget_update' => :'Boolean',
         :'budget' => :'UpdateAdCampaignRequestBudget',
         :'name' => :'String',
         :'platform_specific_data' => :'UpdateAdCampaignRequestPlatformSpecificData'
@@ -148,6 +153,12 @@ module Zernio
 
       if attributes.key?(:'portfolio_bid_strategy_id')
         self.portfolio_bid_strategy_id = attributes[:'portfolio_bid_strategy_id']
+      end
+
+      if attributes.key?(:'allow_shared_budget_update')
+        self.allow_shared_budget_update = attributes[:'allow_shared_budget_update']
+      else
+        self.allow_shared_budget_update = false
       end
 
       if attributes.key?(:'budget')
@@ -246,6 +257,7 @@ module Zernio
           bid_amount == o.bid_amount &&
           roas_average_floor == o.roas_average_floor &&
           portfolio_bid_strategy_id == o.portfolio_bid_strategy_id &&
+          allow_shared_budget_update == o.allow_shared_budget_update &&
           budget == o.budget &&
           name == o.name &&
           platform_specific_data == o.platform_specific_data
@@ -260,7 +272,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [platform, account_id, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, budget, name, platform_specific_data].hash
+      [platform, account_id, bid_strategy, bid_amount, roas_average_floor, portfolio_bid_strategy_id, allow_shared_budget_update, budget, name, platform_specific_data].hash
     end
 
     # Builds the object from hash

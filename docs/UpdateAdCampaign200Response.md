@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **updated** | **Integer** | Local Ad documents mirrored. 0 on the empty-campaign path. | [optional] |
-| **budget** | [**AdBudget**](AdBudget.md) |  | [optional] |
+| **budget** | [**AdCampaignBudget**](AdCampaignBudget.md) |  | [optional] |
 | **budget_level** | **String** |  | [optional] |
 | **bid_strategy** | [**BidStrategy**](BidStrategy.md) |  | [optional] |
 | **bid_amount** | **Float** |  | [optional] |

@@ -20,11 +20,11 @@ docs/Ad.md
 docs/AdAccountsApi.md
 docs/AdAnalyticsResponse.md
 docs/AdAnalyticsResponseAd.md
+docs/AdAnalyticsResponseAnalytics.md
 docs/AdAudiencesApi.md
 docs/AdBudget.md
 docs/AdCampaign.md
 docs/AdCampaignBudget.md
-docs/AdCampaignCampaignBudget.md
 docs/AdCampaignsApi.md
 docs/AdCreative.md
 docs/AdCreativesApi.md
@@ -36,6 +36,8 @@ docs/AdKeyword.md
 docs/AdKeywordMetrics.md
 docs/AdLibraryApi.md
 docs/AdMetrics.md
+docs/AdNegativeKeywordList.md
+docs/AdNegativeKeywordListKeyword.md
 docs/AdPromotedObject.md
 docs/AdReviewStatus.md
 docs/AdSchedule.md
@@ -193,6 +195,8 @@ docs/CallsApi.md
 docs/CampaignAnalyticsResponse.md
 docs/CampaignAnalyticsResponseAnalytics.md
 docs/CampaignAnalyticsResponseAnalyticsDailyInner.md
+docs/CampaignAnalyticsResponseAnalyticsImpressionShareCache.md
+docs/CampaignAnalyticsResponseAnalyticsSummary.md
 docs/CampaignAnalyticsResponseCampaign.md
 docs/CampaignBidding.md
 docs/CampaignBiddingBidSpec.md
@@ -269,6 +273,8 @@ docs/CreateAdInsightsReport202Response.md
 docs/CreateAdInsightsReportRequest.md
 docs/CreateAdInsightsReportRequestFilteringInner.md
 docs/CreateAdInsightsReportRequestTimeIncrement.md
+docs/CreateAdNegativeKeywordList201Response.md
+docs/CreateAdNegativeKeywordListRequest.md
 docs/CreateAdSet201Response.md
 docs/CreateAdSetRequest.md
 docs/CreateApiKey201Response.md
@@ -458,6 +464,7 @@ docs/DeleteAccountGroup200Response.md
 docs/DeleteAdCampaign200Response.md
 docs/DeleteAdCampaignRequest.md
 docs/DeleteAdCreative200Response.md
+docs/DeleteAdNegativeKeywordList200Response.md
 docs/DeleteAdSet200Response.md
 docs/DeleteAdVideo200Response.md
 docs/DeleteDiscordScheduledEvent200Response.md
@@ -596,6 +603,8 @@ docs/GetAdInsightsReport200Response.md
 docs/GetAdInsightsReport200ResponsePaging.md
 docs/GetAdMedia200Response.md
 docs/GetAdMedia200ResponseMediaInner.md
+docs/GetAdNegativeKeywordList200Response.md
+docs/GetAdNegativeKeywordList200ResponseList.md
 docs/GetAdPreviews200Response.md
 docs/GetAdSetDetails200Response.md
 docs/GetAdTrackingTags200Response.md
@@ -1020,6 +1029,7 @@ docs/ListAdCreatives200Response.md
 docs/ListAdImages200Response.md
 docs/ListAdKeywords200Response.md
 docs/ListAdLabels200Response.md
+docs/ListAdNegativeKeywordLists200Response.md
 docs/ListAdSets200Response.md
 docs/ListAdSets200ResponseAdSetsInner.md
 docs/ListAdStudies200Response.md
@@ -1328,6 +1338,9 @@ docs/RemoveWhatsAppGroupParticipantsRequest.md
 docs/ReplaceAdAudienceCompanies200Response.md
 docs/ReplaceAdAudienceCompaniesRequest.md
 docs/ReplaceAdAudienceCompaniesRequestCompaniesInner.md
+docs/ReplaceAdNegativeKeywordListKeywords200Response.md
+docs/ReplaceAdNegativeKeywordListKeywordsRequest.md
+docs/ReplaceCampaignNegativeKeywordListsRequest.md
 docs/ReplaceCampaignNegativeKeywords200Response.md
 docs/ReplaceCampaignNegativeKeywordsRequest.md
 docs/ReplyToGoogleBusinessReview200Response.md
@@ -1611,6 +1624,8 @@ docs/UpdateAdCreative200Response.md
 docs/UpdateAdCreativeRequest.md
 docs/UpdateAdKeyword200Response.md
 docs/UpdateAdKeywordRequest.md
+docs/UpdateAdNegativeKeywordList200Response.md
+docs/UpdateAdNegativeKeywordListRequest.md
 docs/UpdateAdRequest.md
 docs/UpdateAdRequestBudget.md
 docs/UpdateAdRequestCreative.md
@@ -2084,10 +2099,10 @@ lib/zernio-sdk/models/activate_workflow200_response_workflow.rb
 lib/zernio-sdk/models/ad.rb
 lib/zernio-sdk/models/ad_analytics_response.rb
 lib/zernio-sdk/models/ad_analytics_response_ad.rb
+lib/zernio-sdk/models/ad_analytics_response_analytics.rb
 lib/zernio-sdk/models/ad_budget.rb
 lib/zernio-sdk/models/ad_campaign.rb
 lib/zernio-sdk/models/ad_campaign_budget.rb
-lib/zernio-sdk/models/ad_campaign_campaign_budget.rb
 lib/zernio-sdk/models/ad_creative.rb
 lib/zernio-sdk/models/ad_daily_metrics.rb
 lib/zernio-sdk/models/ad_engagement_counts.rb
@@ -2095,6 +2110,8 @@ lib/zernio-sdk/models/ad_funnel_counts.rb
 lib/zernio-sdk/models/ad_keyword.rb
 lib/zernio-sdk/models/ad_keyword_metrics.rb
 lib/zernio-sdk/models/ad_metrics.rb
+lib/zernio-sdk/models/ad_negative_keyword_list.rb
+lib/zernio-sdk/models/ad_negative_keyword_list_keyword.rb
 lib/zernio-sdk/models/ad_promoted_object.rb
 lib/zernio-sdk/models/ad_review_status.rb
 lib/zernio-sdk/models/ad_schedule.rb
@@ -2246,6 +2263,8 @@ lib/zernio-sdk/models/call_record_transcript_inner.rb
 lib/zernio-sdk/models/campaign_analytics_response.rb
 lib/zernio-sdk/models/campaign_analytics_response_analytics.rb
 lib/zernio-sdk/models/campaign_analytics_response_analytics_daily_inner.rb
+lib/zernio-sdk/models/campaign_analytics_response_analytics_impression_share_cache.rb
+lib/zernio-sdk/models/campaign_analytics_response_analytics_summary.rb
 lib/zernio-sdk/models/campaign_analytics_response_campaign.rb
 lib/zernio-sdk/models/campaign_bidding.rb
 lib/zernio-sdk/models/campaign_bidding_bid_spec.rb
@@ -2316,6 +2335,8 @@ lib/zernio-sdk/models/create_ad_insights_report202_response.rb
 lib/zernio-sdk/models/create_ad_insights_report_request.rb
 lib/zernio-sdk/models/create_ad_insights_report_request_filtering_inner.rb
 lib/zernio-sdk/models/create_ad_insights_report_request_time_increment.rb
+lib/zernio-sdk/models/create_ad_negative_keyword_list201_response.rb
+lib/zernio-sdk/models/create_ad_negative_keyword_list_request.rb
 lib/zernio-sdk/models/create_ad_set201_response.rb
 lib/zernio-sdk/models/create_ad_set_request.rb
 lib/zernio-sdk/models/create_api_key201_response.rb
@@ -2504,6 +2525,7 @@ lib/zernio-sdk/models/delete_account_group200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign200_response.rb
 lib/zernio-sdk/models/delete_ad_campaign_request.rb
 lib/zernio-sdk/models/delete_ad_creative200_response.rb
+lib/zernio-sdk/models/delete_ad_negative_keyword_list200_response.rb
 lib/zernio-sdk/models/delete_ad_set200_response.rb
 lib/zernio-sdk/models/delete_ad_video200_response.rb
 lib/zernio-sdk/models/delete_discord_scheduled_event200_response.rb
@@ -2633,6 +2655,8 @@ lib/zernio-sdk/models/get_ad_insights_report200_response.rb
 lib/zernio-sdk/models/get_ad_insights_report200_response_paging.rb
 lib/zernio-sdk/models/get_ad_media200_response.rb
 lib/zernio-sdk/models/get_ad_media200_response_media_inner.rb
+lib/zernio-sdk/models/get_ad_negative_keyword_list200_response.rb
+lib/zernio-sdk/models/get_ad_negative_keyword_list200_response_list.rb
 lib/zernio-sdk/models/get_ad_previews200_response.rb
 lib/zernio-sdk/models/get_ad_set_details200_response.rb
 lib/zernio-sdk/models/get_ad_tracking_tags200_response.rb
@@ -3052,6 +3076,7 @@ lib/zernio-sdk/models/list_ad_creatives200_response.rb
 lib/zernio-sdk/models/list_ad_images200_response.rb
 lib/zernio-sdk/models/list_ad_keywords200_response.rb
 lib/zernio-sdk/models/list_ad_labels200_response.rb
+lib/zernio-sdk/models/list_ad_negative_keyword_lists200_response.rb
 lib/zernio-sdk/models/list_ad_sets200_response.rb
 lib/zernio-sdk/models/list_ad_sets200_response_ad_sets_inner.rb
 lib/zernio-sdk/models/list_ad_studies200_response.rb
@@ -3349,6 +3374,9 @@ lib/zernio-sdk/models/remove_whats_app_group_participants_request.rb
 lib/zernio-sdk/models/replace_ad_audience_companies200_response.rb
 lib/zernio-sdk/models/replace_ad_audience_companies_request.rb
 lib/zernio-sdk/models/replace_ad_audience_companies_request_companies_inner.rb
+lib/zernio-sdk/models/replace_ad_negative_keyword_list_keywords200_response.rb
+lib/zernio-sdk/models/replace_ad_negative_keyword_list_keywords_request.rb
+lib/zernio-sdk/models/replace_campaign_negative_keyword_lists_request.rb
 lib/zernio-sdk/models/replace_campaign_negative_keywords200_response.rb
 lib/zernio-sdk/models/replace_campaign_negative_keywords_request.rb
 lib/zernio-sdk/models/reply_to_google_business_review200_response.rb
@@ -3626,6 +3654,8 @@ lib/zernio-sdk/models/update_ad_creative200_response.rb
 lib/zernio-sdk/models/update_ad_creative_request.rb
 lib/zernio-sdk/models/update_ad_keyword200_response.rb
 lib/zernio-sdk/models/update_ad_keyword_request.rb
+lib/zernio-sdk/models/update_ad_negative_keyword_list200_response.rb
+lib/zernio-sdk/models/update_ad_negative_keyword_list_request.rb
 lib/zernio-sdk/models/update_ad_request.rb
 lib/zernio-sdk/models/update_ad_request_budget.rb
 lib/zernio-sdk/models/update_ad_request_creative.rb
@@ -4077,10 +4107,10 @@ spec/models/activate_sequence200_response_spec.rb
 spec/models/activate_workflow200_response_spec.rb
 spec/models/activate_workflow200_response_workflow_spec.rb
 spec/models/ad_analytics_response_ad_spec.rb
+spec/models/ad_analytics_response_analytics_spec.rb
 spec/models/ad_analytics_response_spec.rb
 spec/models/ad_budget_spec.rb
 spec/models/ad_campaign_budget_spec.rb
-spec/models/ad_campaign_campaign_budget_spec.rb
 spec/models/ad_campaign_spec.rb
 spec/models/ad_creative_spec.rb
 spec/models/ad_daily_metrics_spec.rb
@@ -4089,6 +4119,8 @@ spec/models/ad_funnel_counts_spec.rb
 spec/models/ad_keyword_metrics_spec.rb
 spec/models/ad_keyword_spec.rb
 spec/models/ad_metrics_spec.rb
+spec/models/ad_negative_keyword_list_keyword_spec.rb
+spec/models/ad_negative_keyword_list_spec.rb
 spec/models/ad_promoted_object_spec.rb
 spec/models/ad_review_status_spec.rb
 spec/models/ad_schedule_spec.rb
@@ -4239,7 +4271,9 @@ spec/models/call_record_call_errors_inner_spec.rb
 spec/models/call_record_spec.rb
 spec/models/call_record_transcript_inner_spec.rb
 spec/models/campaign_analytics_response_analytics_daily_inner_spec.rb
+spec/models/campaign_analytics_response_analytics_impression_share_cache_spec.rb
 spec/models/campaign_analytics_response_analytics_spec.rb
+spec/models/campaign_analytics_response_analytics_summary_spec.rb
 spec/models/campaign_analytics_response_campaign_spec.rb
 spec/models/campaign_analytics_response_spec.rb
 spec/models/campaign_bidding_bid_spec_spec.rb
@@ -4311,6 +4345,8 @@ spec/models/create_ad_insights_report202_response_spec.rb
 spec/models/create_ad_insights_report_request_filtering_inner_spec.rb
 spec/models/create_ad_insights_report_request_spec.rb
 spec/models/create_ad_insights_report_request_time_increment_spec.rb
+spec/models/create_ad_negative_keyword_list201_response_spec.rb
+spec/models/create_ad_negative_keyword_list_request_spec.rb
 spec/models/create_ad_set201_response_spec.rb
 spec/models/create_ad_set_request_spec.rb
 spec/models/create_api_key201_response_spec.rb
@@ -4499,6 +4535,7 @@ spec/models/delete_account_group200_response_spec.rb
 spec/models/delete_ad_campaign200_response_spec.rb
 spec/models/delete_ad_campaign_request_spec.rb
 spec/models/delete_ad_creative200_response_spec.rb
+spec/models/delete_ad_negative_keyword_list200_response_spec.rb
 spec/models/delete_ad_set200_response_spec.rb
 spec/models/delete_ad_video200_response_spec.rb
 spec/models/delete_discord_scheduled_event200_response_spec.rb
@@ -4628,6 +4665,8 @@ spec/models/get_ad_insights_report200_response_paging_spec.rb
 spec/models/get_ad_insights_report200_response_spec.rb
 spec/models/get_ad_media200_response_media_inner_spec.rb
 spec/models/get_ad_media200_response_spec.rb
+spec/models/get_ad_negative_keyword_list200_response_list_spec.rb
+spec/models/get_ad_negative_keyword_list200_response_spec.rb
 spec/models/get_ad_previews200_response_spec.rb
 spec/models/get_ad_set_details200_response_spec.rb
 spec/models/get_ad_tracking_tags200_response_spec.rb
@@ -5047,6 +5086,7 @@ spec/models/list_ad_creatives200_response_spec.rb
 spec/models/list_ad_images200_response_spec.rb
 spec/models/list_ad_keywords200_response_spec.rb
 spec/models/list_ad_labels200_response_spec.rb
+spec/models/list_ad_negative_keyword_lists200_response_spec.rb
 spec/models/list_ad_sets200_response_ad_sets_inner_spec.rb
 spec/models/list_ad_sets200_response_spec.rb
 spec/models/list_ad_studies200_response_spec.rb
@@ -5344,6 +5384,9 @@ spec/models/remove_whats_app_group_participants_request_spec.rb
 spec/models/replace_ad_audience_companies200_response_spec.rb
 spec/models/replace_ad_audience_companies_request_companies_inner_spec.rb
 spec/models/replace_ad_audience_companies_request_spec.rb
+spec/models/replace_ad_negative_keyword_list_keywords200_response_spec.rb
+spec/models/replace_ad_negative_keyword_list_keywords_request_spec.rb
+spec/models/replace_campaign_negative_keyword_lists_request_spec.rb
 spec/models/replace_campaign_negative_keywords200_response_spec.rb
 spec/models/replace_campaign_negative_keywords_request_spec.rb
 spec/models/reply_to_google_business_review200_response_spec.rb
@@ -5621,6 +5664,8 @@ spec/models/update_ad_creative200_response_spec.rb
 spec/models/update_ad_creative_request_spec.rb
 spec/models/update_ad_keyword200_response_spec.rb
 spec/models/update_ad_keyword_request_spec.rb
+spec/models/update_ad_negative_keyword_list200_response_spec.rb
+spec/models/update_ad_negative_keyword_list_request_spec.rb
 spec/models/update_ad_request_budget_spec.rb
 spec/models/update_ad_request_creative_spec.rb
 spec/models/update_ad_request_spec.rb

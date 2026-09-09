@@ -46,7 +46,7 @@ module Zernio
       {
         :'backfill_pending' => :'Boolean',
         :'ad' => :'AdAnalyticsResponseAd',
-        :'analytics' => :'CampaignAnalyticsResponseAnalytics'
+        :'analytics' => :'AdAnalyticsResponseAnalytics'
       }
     end
 

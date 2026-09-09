@@ -88,10 +88,16 @@ describe Zernio::BoostPostRequest do
   describe 'test attribute "destination_type"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP", "INSTAGRAM_DIRECT"])
       # validator.allowable_values.each do |value|
       #   expect { instance.destination_type = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "whatsapp_phone_number"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 

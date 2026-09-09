@@ -87,6 +87,74 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Create a negative keyword list
+    # Creates one Google Ads shared negative keyword list with optional initial keywords in a single atomic mutation. Daily quota is reserved for every mutate item, so large batches may return 429 before any change. This operation is not idempotent. The list is not attached to any campaign.
+    # @param create_ad_negative_keyword_list_request [CreateAdNegativeKeywordListRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateAdNegativeKeywordList201Response]
+    def create_ad_negative_keyword_list(create_ad_negative_keyword_list_request, opts = {})
+      data, _status_code, _headers = create_ad_negative_keyword_list_with_http_info(create_ad_negative_keyword_list_request, opts)
+      data
+    end
+
+    # Create a negative keyword list
+    # Creates one Google Ads shared negative keyword list with optional initial keywords in a single atomic mutation. Daily quota is reserved for every mutate item, so large batches may return 429 before any change. This operation is not idempotent. The list is not attached to any campaign.
+    # @param create_ad_negative_keyword_list_request [CreateAdNegativeKeywordListRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateAdNegativeKeywordList201Response, Integer, Hash)>] CreateAdNegativeKeywordList201Response data, response status code and response headers
+    def create_ad_negative_keyword_list_with_http_info(create_ad_negative_keyword_list_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.create_ad_negative_keyword_list ...'
+      end
+      # verify the required parameter 'create_ad_negative_keyword_list_request' is set
+      if @api_client.config.client_side_validation && create_ad_negative_keyword_list_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_ad_negative_keyword_list_request' when calling AdAccountsApi.create_ad_negative_keyword_list"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/negative-keyword-lists'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_ad_negative_keyword_list_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CreateAdNegativeKeywordList201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.create_ad_negative_keyword_list",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#create_ad_negative_keyword_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create or reuse a custom conversion
     # Provision the Meta custom conversion an ads flow optimises toward, and hand back the `customConversionId` for `promotedObject.customConversionId` on POST /v1/ads/create. Removes the manual \"create it in Ads Manager first\" step.  **Reuse is ours, not Meta's.** Meta's create is not idempotent, so a retried request would otherwise mint a duplicate carrying none of the original's optimisation history. A non-archived conversion with the same `name` on the same `pixelId` is returned instead of created, with `reused: true` and a 200 rather than a 201.  `rule` is forwarded verbatim in Meta's own grammar (e.g. `{\"url\": {\"i_contains\": \"thank-you\"}}`); Meta validates it and rejects a malformed one with \"A conversion rule is required at creation time\".
     # @param account_id [String] Meta ads SocialAccount id.
@@ -293,6 +361,101 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#create_value_rule_set\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete a negative keyword list
+    # Removes the Google shared negative keyword list. Detach it from all campaigns first; an in-use list is rejected. Only NEGATIVE_KEYWORDS shared sets are supported.
+    # @param list_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @option opts [String] :platform 
+    # @return [DeleteAdNegativeKeywordList200Response]
+    def delete_ad_negative_keyword_list(list_id, account_id, opts = {})
+      data, _status_code, _headers = delete_ad_negative_keyword_list_with_http_info(list_id, account_id, opts)
+      data
+    end
+
+    # Delete a negative keyword list
+    # Removes the Google shared negative keyword list. Detach it from all campaigns first; an in-use list is rejected. Only NEGATIVE_KEYWORDS shared sets are supported.
+    # @param list_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @option opts [String] :platform 
+    # @return [Array<(DeleteAdNegativeKeywordList200Response, Integer, Hash)>] DeleteAdNegativeKeywordList200Response data, response status code and response headers
+    def delete_ad_negative_keyword_list_with_http_info(list_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.delete_ad_negative_keyword_list ...'
+      end
+      # verify the required parameter 'list_id' is set
+      if @api_client.config.client_side_validation && list_id.nil?
+        fail ArgumentError, "Missing the required parameter 'list_id' when calling AdAccountsApi.delete_ad_negative_keyword_list"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && list_id !~ pattern
+        fail ArgumentError, "invalid value for 'list_id' when calling AdAccountsApi.delete_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.delete_ad_negative_keyword_list"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdAccountsApi.delete_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.delete_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/negative-keyword-lists/{listId}'.sub('{' + 'listId' + '}', CGI.escape(list_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteAdNegativeKeywordList200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.delete_ad_negative_keyword_list",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#delete_ad_negative_keyword_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -518,6 +681,101 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#get_ad_comments\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get a negative keyword list
+    # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale=true. Customer selection is limited to this connection and its account scope. Includes the keywords and their criterion ids.
+    # @param list_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @option opts [String] :platform 
+    # @return [GetAdNegativeKeywordList200Response]
+    def get_ad_negative_keyword_list(list_id, account_id, opts = {})
+      data, _status_code, _headers = get_ad_negative_keyword_list_with_http_info(list_id, account_id, opts)
+      data
+    end
+
+    # Get a negative keyword list
+    # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope. Includes the keywords and their criterion ids.
+    # @param list_id [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @option opts [String] :platform 
+    # @return [Array<(GetAdNegativeKeywordList200Response, Integer, Hash)>] GetAdNegativeKeywordList200Response data, response status code and response headers
+    def get_ad_negative_keyword_list_with_http_info(list_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.get_ad_negative_keyword_list ...'
+      end
+      # verify the required parameter 'list_id' is set
+      if @api_client.config.client_side_validation && list_id.nil?
+        fail ArgumentError, "Missing the required parameter 'list_id' when calling AdAccountsApi.get_ad_negative_keyword_list"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && list_id !~ pattern
+        fail ArgumentError, "invalid value for 'list_id' when calling AdAccountsApi.get_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.get_ad_negative_keyword_list"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdAccountsApi.get_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.get_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/negative-keyword-lists/{listId}'.sub('{' + 'listId' + '}', CGI.escape(list_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetAdNegativeKeywordList200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.get_ad_negative_keyword_list",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#get_ad_negative_keyword_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1054,6 +1312,90 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#list_ad_labels\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List negative keyword lists
+    # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale=true. Customer selection is limited to this connection and its account scope.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @option opts [String] :platform 
+    # @return [ListAdNegativeKeywordLists200Response]
+    def list_ad_negative_keyword_lists(account_id, opts = {})
+      data, _status_code, _headers = list_ad_negative_keyword_lists_with_http_info(account_id, opts)
+      data
+    end
+
+    # List negative keyword lists
+    # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @option opts [String] :platform 
+    # @return [Array<(ListAdNegativeKeywordLists200Response, Integer, Hash)>] ListAdNegativeKeywordLists200Response data, response status code and response headers
+    def list_ad_negative_keyword_lists_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.list_ad_negative_keyword_lists ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_ad_negative_keyword_lists"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdAccountsApi.list_ad_negative_keyword_lists, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_ad_negative_keyword_lists, must conform to the pattern #{pattern}."
+      end
+
+      allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/negative-keyword-lists'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdNegativeKeywordLists200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.list_ad_negative_keyword_lists",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#list_ad_negative_keyword_lists\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1595,6 +1937,85 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Replace negative list keywords
+    # Replaces the full desired keyword set. Existing keywords are diffed by normalized text and match type; creates and removals are applied atomically in one mutation. Unchanged criteria retain their ids. Send an empty keywords array to clear the list. Changes affect every campaign using this list. Each create or removal consumes one daily operation; the entire batch must fit the remaining quota.
+    # @param list_id [String] 
+    # @param replace_ad_negative_keyword_list_keywords_request [ReplaceAdNegativeKeywordListKeywordsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ReplaceAdNegativeKeywordListKeywords200Response]
+    def replace_ad_negative_keyword_list_keywords(list_id, replace_ad_negative_keyword_list_keywords_request, opts = {})
+      data, _status_code, _headers = replace_ad_negative_keyword_list_keywords_with_http_info(list_id, replace_ad_negative_keyword_list_keywords_request, opts)
+      data
+    end
+
+    # Replace negative list keywords
+    # Replaces the full desired keyword set. Existing keywords are diffed by normalized text and match type; creates and removals are applied atomically in one mutation. Unchanged criteria retain their ids. Send an empty keywords array to clear the list. Changes affect every campaign using this list. Each create or removal consumes one daily operation; the entire batch must fit the remaining quota.
+    # @param list_id [String] 
+    # @param replace_ad_negative_keyword_list_keywords_request [ReplaceAdNegativeKeywordListKeywordsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ReplaceAdNegativeKeywordListKeywords200Response, Integer, Hash)>] ReplaceAdNegativeKeywordListKeywords200Response data, response status code and response headers
+    def replace_ad_negative_keyword_list_keywords_with_http_info(list_id, replace_ad_negative_keyword_list_keywords_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.replace_ad_negative_keyword_list_keywords ...'
+      end
+      # verify the required parameter 'list_id' is set
+      if @api_client.config.client_side_validation && list_id.nil?
+        fail ArgumentError, "Missing the required parameter 'list_id' when calling AdAccountsApi.replace_ad_negative_keyword_list_keywords"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && list_id !~ pattern
+        fail ArgumentError, "invalid value for 'list_id' when calling AdAccountsApi.replace_ad_negative_keyword_list_keywords, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'replace_ad_negative_keyword_list_keywords_request' is set
+      if @api_client.config.client_side_validation && replace_ad_negative_keyword_list_keywords_request.nil?
+        fail ArgumentError, "Missing the required parameter 'replace_ad_negative_keyword_list_keywords_request' when calling AdAccountsApi.replace_ad_negative_keyword_list_keywords"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/negative-keyword-lists/{listId}/keywords'.sub('{' + 'listId' + '}', CGI.escape(list_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(replace_ad_negative_keyword_list_keywords_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplaceAdNegativeKeywordListKeywords200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.replace_ad_negative_keyword_list_keywords",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#replace_ad_negative_keyword_list_keywords\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update ad account settings
     # Sets the default DSA beneficiary and payor on a Meta ad account (EU DSA, Article 26). Set them once and every EU-targeted call to `/v1/ads/create`, `/v1/ads/boost` and `/v1/ads/ctwa` on that ad account can omit `dsaBeneficiary`/`dsaPayor`: Meta applies the defaults automatically.  The values are written to the ad account on Meta, the same setting Ads Manager edits. Nothing is stored in Zernio, and defaults already set in Ads Manager work identically. Zernio never guesses these values for you. Beneficiary and payor are legal disclosures shown to EU users, so you must provide the entity names explicitly. Use `GET /v1/ads/dsa-recommendations` to offer suggestions in your UI.  If `defaultDsaPayor` is omitted, the beneficiary is also set as the payor, which covers the common case where the same entity benefits from and pays for the ads. Read the current values back with `GET /v1/ads/dsa-defaults`.  Currently supported for Meta accounts only; other platforms return 400. 
     # @param update_ad_account_request [UpdateAdAccountRequest] 
@@ -1659,6 +2080,85 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#update_ad_account\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Rename a negative keyword list
+    # Renames a shared negative keyword list. Keywords and campaign associations are unchanged. Use the keywords endpoint to edit the desired keyword set.
+    # @param list_id [String] 
+    # @param update_ad_negative_keyword_list_request [UpdateAdNegativeKeywordListRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAdNegativeKeywordList200Response]
+    def update_ad_negative_keyword_list(list_id, update_ad_negative_keyword_list_request, opts = {})
+      data, _status_code, _headers = update_ad_negative_keyword_list_with_http_info(list_id, update_ad_negative_keyword_list_request, opts)
+      data
+    end
+
+    # Rename a negative keyword list
+    # Renames a shared negative keyword list. Keywords and campaign associations are unchanged. Use the keywords endpoint to edit the desired keyword set.
+    # @param list_id [String] 
+    # @param update_ad_negative_keyword_list_request [UpdateAdNegativeKeywordListRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAdNegativeKeywordList200Response, Integer, Hash)>] UpdateAdNegativeKeywordList200Response data, response status code and response headers
+    def update_ad_negative_keyword_list_with_http_info(list_id, update_ad_negative_keyword_list_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.update_ad_negative_keyword_list ...'
+      end
+      # verify the required parameter 'list_id' is set
+      if @api_client.config.client_side_validation && list_id.nil?
+        fail ArgumentError, "Missing the required parameter 'list_id' when calling AdAccountsApi.update_ad_negative_keyword_list"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && list_id !~ pattern
+        fail ArgumentError, "invalid value for 'list_id' when calling AdAccountsApi.update_ad_negative_keyword_list, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'update_ad_negative_keyword_list_request' is set
+      if @api_client.config.client_side_validation && update_ad_negative_keyword_list_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_ad_negative_keyword_list_request' when calling AdAccountsApi.update_ad_negative_keyword_list"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/negative-keyword-lists/{listId}'.sub('{' + 'listId' + '}', CGI.escape(list_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_ad_negative_keyword_list_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAdNegativeKeywordList200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.update_ad_negative_keyword_list",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#update_ad_negative_keyword_list\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

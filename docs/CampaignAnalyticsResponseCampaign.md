@@ -8,6 +8,7 @@
 | **name** | **String** |  | [optional] |
 | **platform** | **String** |  | [optional] |
 | **status** | **String** | Effective campaign status (ACTIVE when any child ad is active). | [optional] |
+| **budget** | [**AdCampaignBudget**](AdCampaignBudget.md) |  | [optional] |
 | **currency** | **String** | ISO 4217 code of the ad account (e.g. USD, THB). All money values in &#x60;summary&#x60; and &#x60;daily&#x60; are in this currency. | [optional] |
 
 ## Example
@@ -20,6 +21,7 @@ instance = Zernio::CampaignAnalyticsResponseCampaign.new(
   name: null,
   platform: null,
   status: null,
+  budget: null,
   currency: null
 )
 ```

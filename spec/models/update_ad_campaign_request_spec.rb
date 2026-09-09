@@ -67,6 +67,12 @@ describe Zernio::UpdateAdCampaignRequest do
     end
   end
 
+  describe 'test attribute "allow_shared_budget_update"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "budget"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

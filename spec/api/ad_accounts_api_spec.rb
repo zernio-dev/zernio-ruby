@@ -44,6 +44,18 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for create_ad_negative_keyword_list
+  # Create a negative keyword list
+  # Creates one Google Ads shared negative keyword list with optional initial keywords in a single atomic mutation. Daily quota is reserved for every mutate item, so large batches may return 429 before any change. This operation is not idempotent. The list is not attached to any campaign.
+  # @param create_ad_negative_keyword_list_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateAdNegativeKeywordList201Response]
+  describe 'create_ad_negative_keyword_list test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for create_custom_conversion
   # Create or reuse a custom conversion
   # Provision the Meta custom conversion an ads flow optimises toward, and hand back the &#x60;customConversionId&#x60; for &#x60;promotedObject.customConversionId&#x60; on POST /v1/ads/create. Removes the manual \&quot;create it in Ads Manager first\&quot; step.  **Reuse is ours, not Meta&#39;s.** Meta&#39;s create is not idempotent, so a retried request would otherwise mint a duplicate carrying none of the original&#39;s optimisation history. A non-archived conversion with the same &#x60;name&#x60; on the same &#x60;pixelId&#x60; is returned instead of created, with &#x60;reused: true&#x60; and a 200 rather than a 201.  &#x60;rule&#x60; is forwarded verbatim in Meta&#39;s own grammar (e.g. &#x60;{\&quot;url\&quot;: {\&quot;i_contains\&quot;: \&quot;thank-you\&quot;}}&#x60;); Meta validates it and rejects a malformed one with \&quot;A conversion rule is required at creation time\&quot;.
@@ -76,6 +88,21 @@ describe 'AdAccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [CreateValueRuleSet201Response]
   describe 'create_value_rule_set test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for delete_ad_negative_keyword_list
+  # Delete a negative keyword list
+  # Removes the Google shared negative keyword list. Detach it from all campaigns first; an in-use list is rejected. Only NEGATIVE_KEYWORDS shared sets are supported.
+  # @param list_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id 
+  # @option opts [String] :platform 
+  # @return [DeleteAdNegativeKeywordList200Response]
+  describe 'delete_ad_negative_keyword_list test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -117,6 +144,21 @@ describe 'AdAccountsApi' do
   # @option opts [String] :cursor Pagination cursor from a previous response.
   # @return [GetAdComments200Response]
   describe 'get_ad_comments test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for get_ad_negative_keyword_list
+  # Get a negative keyword list
+  # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope. Includes the keywords and their criterion ids.
+  # @param list_id 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id 
+  # @option opts [String] :platform 
+  # @return [GetAdNegativeKeywordList200Response]
+  describe 'get_ad_negative_keyword_list test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -221,6 +263,20 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for list_ad_negative_keyword_lists
+  # List negative keyword lists
+  # Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id 
+  # @option opts [String] :platform 
+  # @return [ListAdNegativeKeywordLists200Response]
+  describe 'list_ad_negative_keyword_lists test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_studies
   # A/B tests and lift studies
   # Lists the ad account&#39;s A/B tests and lift studies (Meta&#39;s &#x60;/act_X/ad_studies&#x60;), rows returned verbatim. The default projection covers id, name, type, timing and cells with split percentages; &#x60;fields&#x60; is a raw-passthrough override.
@@ -319,6 +375,19 @@ describe 'AdAccountsApi' do
     end
   end
 
+  # unit tests for replace_ad_negative_keyword_list_keywords
+  # Replace negative list keywords
+  # Replaces the full desired keyword set. Existing keywords are diffed by normalized text and match type; creates and removals are applied atomically in one mutation. Unchanged criteria retain their ids. Send an empty keywords array to clear the list. Changes affect every campaign using this list. Each create or removal consumes one daily operation; the entire batch must fit the remaining quota.
+  # @param list_id 
+  # @param replace_ad_negative_keyword_list_keywords_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ReplaceAdNegativeKeywordListKeywords200Response]
+  describe 'replace_ad_negative_keyword_list_keywords test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for update_ad_account
   # Update ad account settings
   # Sets the default DSA beneficiary and payor on a Meta ad account (EU DSA, Article 26). Set them once and every EU-targeted call to &#x60;/v1/ads/create&#x60;, &#x60;/v1/ads/boost&#x60; and &#x60;/v1/ads/ctwa&#x60; on that ad account can omit &#x60;dsaBeneficiary&#x60;/&#x60;dsaPayor&#x60;: Meta applies the defaults automatically.  The values are written to the ad account on Meta, the same setting Ads Manager edits. Nothing is stored in Zernio, and defaults already set in Ads Manager work identically. Zernio never guesses these values for you. Beneficiary and payor are legal disclosures shown to EU users, so you must provide the entity names explicitly. Use &#x60;GET /v1/ads/dsa-recommendations&#x60; to offer suggestions in your UI.  If &#x60;defaultDsaPayor&#x60; is omitted, the beneficiary is also set as the payor, which covers the common case where the same entity benefits from and pays for the ads. Read the current values back with &#x60;GET /v1/ads/dsa-defaults&#x60;.  Currently supported for Meta accounts only; other platforms return 400. 
@@ -326,6 +395,19 @@ describe 'AdAccountsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAdAccount200Response]
   describe 'update_ad_account test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_negative_keyword_list
+  # Rename a negative keyword list
+  # Renames a shared negative keyword list. Keywords and campaign associations are unchanged. Use the keywords endpoint to edit the desired keyword set.
+  # @param list_id 
+  # @param update_ad_negative_keyword_list_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAdNegativeKeywordList200Response]
+  describe 'update_ad_negative_keyword_list test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

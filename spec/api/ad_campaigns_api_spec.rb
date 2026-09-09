@@ -59,7 +59,7 @@ describe 'AdCampaignsApi' do
 
   # unit tests for boost_post
   # Boost post as ad
-  # Creates a paid ad from an existing published post, keeping the post&#39;s engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send &#x60;adSetId&#x60; to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns &#x60;budget&#x60;, &#x60;schedule&#x60; and &#x60;targeting&#x60;, and sending any of those alongside &#x60;adSetId&#x60; is a 400 rather than a silent drop. &#x60;budget&#x60; is required only without &#x60;adSetId&#x60;.  &#x60;instagramAccountId&#x60;, &#x60;destinationType&#x60; and &#x60;adSetId&#x60; are Meta-only and return 400 on other platforms.  **Retries.** Boosts are NOT idempotent and can take minutes when Meta requires re-hosting an Instagram video, so do not retry on client timeout. Send an Idempotency-Key header to make retries safe: same key and body replays the original 201, and distinct keys always create distinct ads. Without the header, an identical request is treated as a retry: while one is in flight it returns 409, and within 10 minutes of a completed boost it returns the already-created ad instead of creating another. To intentionally duplicate an ad, send distinct Idempotency-Keys (or vary the body, e.g. the name). 
+  # Creates a paid ad from an existing published post, keeping the post&#39;s engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send &#x60;adSetId&#x60; to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns &#x60;budget&#x60;, &#x60;schedule&#x60; and &#x60;targeting&#x60;, and sending any of those alongside &#x60;adSetId&#x60; is a 400 rather than a silent drop. &#x60;budget&#x60; is required only without &#x60;adSetId&#x60;.  &#x60;instagramAccountId&#x60;, &#x60;destinationType&#x60;, &#x60;whatsappPhoneNumber&#x60; and &#x60;adSetId&#x60; are Meta-only and return 400 on other platforms.  **Messaging boosts (Meta).** Use &#x60;goal: engagement&#x60; with &#x60;callToAction: WHATSAPP_MESSAGE&#x60;, &#x60;MESSAGE_PAGE&#x60;, or &#x60;INSTAGRAM_MESSAGE&#x60;. The CTA implies WHATSAPP, MESSENGER, or INSTAGRAM_DIRECT respectively; &#x60;destinationType&#x60; alone also selects the matching CTA. Omit &#x60;linkUrl&#x60;. The campaign uses OUTCOME_ENGAGEMENT and the ad set uses CONVERSATIONS with the promoted Page. Optional &#x60;whatsappPhoneNumber&#x60; selects a number already paired with that Page. Conflicting CTA/destination, instant form, goal, or optimizationGoal inputs return 400. Attach requires the target ad set destination to match. Existing post references preserve social proof; an Instagram reel rejected by Meta is not re-uploaded as a new post for a messaging boost.  **Retries.** Boosts are NOT idempotent and can take minutes when Meta requires re-hosting an Instagram video, so do not retry on client timeout. Send an Idempotency-Key header to make retries safe: same key and body replays the original 201, and distinct keys always create distinct ads. Without the header, an identical request is treated as a retry: while one is in flight it returns 409, and within 10 minutes of a completed boost it returns the already-created ad instead of creating another. To intentionally duplicate an ad, send distinct Idempotency-Keys (or vary the body, e.g. the name). 
   # @param boost_post_request 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
@@ -312,7 +312,7 @@ describe 'AdCampaignsApi' do
 
   # unit tests for list_ad_campaigns
   # List campaigns
-  # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active &gt; pending_review &gt; paused &gt; error &gt; completed &gt; cancelled &gt; rejected). 
+  # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active &gt; pending_review &gt; paused &gt; error &gt; completed &gt; cancelled &gt; rejected). Google campaign budgets include amountMicros, explicitlyShared, resourceName and deliveryMethod after the next successful sync. This endpoint does not fetch Google live. 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_empty Meta only. Campaign reads aggregate over ad documents, so a campaign with ZERO ads is normally invisible here, the state the two-step create (campaign, then ads via &#x60;existingCampaignId&#x60;) leaves behind whenever Meta rejects the ad step. Set true to list those too, with &#x60;adCount: 0&#x60; and zeroed metrics. Requires &#x60;accountId&#x60; and &#x60;adAccountId&#x60;, since an empty campaign has no ad row to resolve a token or ad account from.
   # @option opts [Integer] :page Page number (1-based)
@@ -413,6 +413,19 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for list_campaign_negative_keyword_lists
+  # List campaign negative lists
+  # Returns shared negative keyword lists attached to the campaign, separate from campaign-level negative keywords. Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope.
+  # @param campaign_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :platform 
+  # @return [ListAdNegativeKeywordLists200Response]
+  describe 'list_campaign_negative_keyword_lists test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_campaign_negative_keywords
   # List campaign-level negative keywords
   # Returns the campaign-level negative keywords (&#x60;campaign_criterion.negative&#x60;), distinct from the ad-group-level negatives under &#x60;GET /v1/ads/keywords&#x60;. Cached for the quota window (not synced to Postgres), and gated by the shared Google Ads operations budget like every other on-demand Google surface. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not &#x60;platform&#x60; was passed. 
@@ -433,6 +446,19 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @return [RemoveAdKeyword200Response]
   describe 'remove_ad_keyword test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for replace_campaign_negative_keyword_lists
+  # Replace campaign negative lists
+  # Sets the full desired set of shared negative keyword list associations on this campaign. Send listIds&#x3D;[] to detach all negative keyword lists. Only campaign_shared_set links are changed; the lists and their keywords are preserved. Every list must belong to the campaign customer and have type NEGATIVE_KEYWORDS.
+  # @param campaign_id 
+  # @param replace_campaign_negative_keyword_lists_request 
+  # @param [Hash] opts the optional parameters
+  # @return [ReplaceAdNegativeKeywordListKeywords200Response]
+  describe 'replace_campaign_negative_keyword_lists test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -466,7 +492,7 @@ describe 'AdCampaignsApi' do
 
   # unit tests for update_ad_campaign
   # Update a campaign
-  # Campaign-level edits. Send at least one of &#x60;budget&#x60;, &#x60;bidStrategy&#x60;, &#x60;portfolioBidStrategyId&#x60;, &#x60;name&#x60; or &#x60;platformSpecificData&#x60;. An unsupported field is always an error, never a silent drop.  | Body field | Meta | Google | Others | |---|---|---|---| | &#x60;bidStrategy&#x60; | Yes | Yes | 501 | | &#x60;bidAmount&#x60;, &#x60;roasAverageFloor&#x60; | 400 (ad-set level) | Yes | 400 | | &#x60;portfolioBidStrategyId&#x60; | 400 | Yes | 400 | | &#x60;budget&#x60; (CBO; ABO returns 409) | Yes | 501 | 501 | | &#x60;name&#x60; | Yes | 501 | 501 | | &#x60;platformSpecificData.spendCap&#x60; | Yes | 400 | 400 | | &#x60;accountId&#x60; (empty campaigns) | Yes | - | - |  On Google: &#x60;LOWEST_COST_WITHOUT_CAP&#x60; &#x3D; Maximize Conversions, &#x60;COST_CAP&#x60; + &#x60;bidAmount&#x60; &#x3D; Target CPA, &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60; + &#x60;roasAverageFloor&#x60; &#x3D; Target ROAS, &#x60;LOWEST_COST_WITH_BID_CAP&#x60; + &#x60;bidAmount&#x60; &#x3D; Maximize Clicks with a CPC ceiling; &#x60;portfolioBidStrategyId&#x60; attaches a portfolio strategy instead (exclusive with &#x60;bidStrategy&#x60;). Setting the standard triplet on a campaign that is currently on a PORTFOLIO strategy is rejected: detach it in Google Ads first, since it is shared across campaigns.  &#x60;accountId&#x60; forwards the update straight to Meta for a campaign with zero ads, which would otherwise 404; the response then carries &#x60;updated: 0&#x60;. 
+  # Campaign-level edits. Send at least one of &#x60;budget&#x60;, &#x60;bidStrategy&#x60;, &#x60;portfolioBidStrategyId&#x60;, &#x60;name&#x60; or &#x60;platformSpecificData&#x60;. An unsupported field is always an error, never a silent drop.  | Body field | Meta | Google | Others | |---|---|---|---| | &#x60;bidStrategy&#x60; | Yes | Yes | 501 | | &#x60;bidAmount&#x60;, &#x60;roasAverageFloor&#x60; | 400 (ad-set level) | Yes | 400 | | &#x60;portfolioBidStrategyId&#x60; | 400 | Yes | 400 | | &#x60;budget&#x60; (CBO; ABO returns 409) | Yes | Daily only | 501 | | &#x60;name&#x60; | Yes | 501 | 501 | | &#x60;platformSpecificData.spendCap&#x60; | Yes | 400 | 400 | | &#x60;accountId&#x60; (empty campaigns) | Yes | - | - |  On Google: &#x60;LOWEST_COST_WITHOUT_CAP&#x60; &#x3D; Maximize Conversions, &#x60;COST_CAP&#x60; + &#x60;bidAmount&#x60; &#x3D; Target CPA, &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60; + &#x60;roasAverageFloor&#x60; &#x3D; Target ROAS, &#x60;LOWEST_COST_WITH_BID_CAP&#x60; + &#x60;bidAmount&#x60; &#x3D; Maximize Clicks with a CPC ceiling; &#x60;portfolioBidStrategyId&#x60; attaches a portfolio strategy instead (exclusive with &#x60;bidStrategy&#x60;). Setting the standard triplet on a campaign that is currently on a PORTFOLIO strategy is rejected: detach it in Google Ads first, since it is shared across campaigns.  Google budget updates read the current budget before mutation. Shared budgets return 409 unless allowSharedBudgetUpdate&#x3D;true is explicitly supplied, because the change affects every campaign using that budget. Unknown sharing state also returns 409.  &#x60;accountId&#x60; forwards the update straight to Meta for a campaign with zero ads, which would otherwise 404; the response then carries &#x60;updated: 0&#x60;. 
   # @param campaign_id Platform campaign ID
   # @param update_ad_campaign_request 
   # @param [Hash] opts the optional parameters

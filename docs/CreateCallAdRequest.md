@@ -7,12 +7,15 @@
 | **account_id** | **String** | Facebook or Instagram SocialAccount ID. |  |
 | **ad_account_id** | **String** | Meta ad account ID, e.g. &#x60;act_123456789&#x60;. |  |
 | **name** | **String** | Ad display name. Used to derive campaign / ad set names. On the multi-creative shape, each ad&#39;s Meta name gets a \&quot; #N\&quot; suffix (1-indexed) so Ads Manager shows them as a numbered batch.  |  |
+| **existing_post_id** | **String** | Messaging and CTWA only. Platform post or reel ID, resolved like boost platformPostId. Facebook IDs become object_story_id; Instagram IDs become source_instagram_media_id using the connected Instagram identity. Mutually exclusive with objectStoryId and fresh creative fields. | [optional] |
+| **object_story_id** | **String** | Messaging and CTWA only. Raw Facebook pageId_postId reference, used as object_story_id even with an Instagram account. Mutually exclusive with existingPostId and fresh creative fields. | [optional] |
+| **whatsapp_phone_number** | **String** | WhatsApp only. Optional E.164 number already paired with the Facebook Page. Omit to let Meta select the paired number. Sent to the creative CTA and, when creating a new ad set, its promoted_object. Attach requests do not change the existing ad set. | [optional] |
 | **headline** | **String** | Single-creative shape only. Mutually exclusive with &#x60;creatives[]&#x60;.  | [optional] |
 | **body** | **String** | Primary text shown above the image / video. Single-creative shape only. Mutually exclusive with &#x60;creatives[]&#x60;.  | [optional] |
-| **image_url** | **String** | Image asset for single-creative shape. Mutually exclusive with &#x60;video&#x60; and with &#x60;creatives[]&#x60;. Required on the single-creative shape if &#x60;video&#x60; is not supplied.  | [optional] |
+| **image_url** | **String** | Image asset for single-creative shape. Mutually exclusive with &#x60;video&#x60; and with &#x60;creatives[]&#x60;. Required on the single-creative shape if neither &#x60;video&#x60; nor an existing post reference is supplied.  | [optional] |
 | **video** | [**CtwaAdRequestBodyVideo**](CtwaAdRequestBodyVideo.md) |  | [optional] |
 | **welcome_message** | [**CtwaAdRequestBodyWelcomeMessage**](CtwaAdRequestBodyWelcomeMessage.md) |  | [optional] |
-| **creatives** | [**Array&lt;CtwaAdRequestBodyCreativesInner&gt;**](CtwaAdRequestBodyCreativesInner.md) | Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (&#x60;headline&#x60; / &#x60;body&#x60; / &#x60;imageUrl&#x60; / &#x60;video&#x60;): setting both is a 400, unlike &#x60;POST /v1/ads/create&#x60; where the top-level fields are silently ignored in multi-creative mode. Each entry must supply its own headline, body, and exactly one of &#x60;imageUrl&#x60; / &#x60;video&#x60;.  | [optional] |
+| **creatives** | [**Array&lt;CtwaAdRequestBodyCreativesInner&gt;**](CtwaAdRequestBodyCreativesInner.md) | Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (&#x60;headline&#x60; / &#x60;body&#x60; / &#x60;imageUrl&#x60; / &#x60;video&#x60;): setting both is a 400, unlike &#x60;POST /v1/ads/create&#x60; where the top-level fields are silently ignored in multi-creative mode. Each entry supplies headline, body, and image/video, or an existingPostId or objectStoryId reference. Fresh and existing creatives can be mixed.  | [optional] |
 | **ad_set_id** | **String** | Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so &#x60;budgetAmount&#x60;, &#x60;budgetType&#x60;, &#x60;endDate&#x60;, &#x60;objective&#x60;, &#x60;countries&#x60;, &#x60;interests&#x60;, &#x60;audienceId&#x60; and &#x60;campaignStatus&#x60; are rejected with a 400 alongside it. Its &#x60;destination_type&#x60; must match the ad&#39;s destination.  | [optional] |
 | **budget_amount** | **Float** | Budget amount in the ad account&#39;s currency major units (e.g. dollars for USD, not cents). Must be &gt; 0. Required unless &#x60;adSetId&#x60; is set, where the ad set owns it.  | [optional] |
 | **budget_type** | **String** | Required unless &#x60;adSetId&#x60; is set. | [optional] |
@@ -52,6 +55,9 @@ instance = Zernio::CreateCallAdRequest.new(
   account_id: null,
   ad_account_id: null,
   name: null,
+  existing_post_id: null,
+  object_story_id: null,
+  whatsapp_phone_number: null,
   headline: null,
   body: null,
   image_url: null,

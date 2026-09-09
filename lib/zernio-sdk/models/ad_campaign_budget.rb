@@ -14,11 +14,22 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Effective budget (back-compat). Use `budgetLevel` to disambiguate CBO vs ABO.
   class AdCampaignBudget < ApiModelBase
     attr_accessor :amount
 
     attr_accessor :type
+
+    # Google only. Exact decimal micros; DAILY uses amount_micros and CUSTOM_PERIOD uses total_amount_micros.
+    attr_accessor :amount_micros
+
+    # Google only. True for a shared budget; null when unavailable. Shared writes require allowSharedBudgetUpdate=true; unknown sharing status cannot be overridden.
+    attr_accessor :explicitly_shared
+
+    # Google only. campaign_budget.resource_name, or null when unavailable.
+    attr_accessor :resource_name
+
+    # Google only. campaign_budget.delivery_method, typically STANDARD, or null when unavailable.
+    attr_accessor :delivery_method
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -46,7 +57,11 @@ module Zernio
     def self.attribute_map
       {
         :'amount' => :'amount',
-        :'type' => :'type'
+        :'type' => :'type',
+        :'amount_micros' => :'amountMicros',
+        :'explicitly_shared' => :'explicitlyShared',
+        :'resource_name' => :'resourceName',
+        :'delivery_method' => :'deliveryMethod'
       }
     end
 
@@ -64,14 +79,28 @@ module Zernio
     def self.openapi_types
       {
         :'amount' => :'Float',
-        :'type' => :'String'
+        :'type' => :'String',
+        :'amount_micros' => :'String',
+        :'explicitly_shared' => :'Boolean',
+        :'resource_name' => :'String',
+        :'delivery_method' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'explicitly_shared',
+        :'resource_name',
+        :'delivery_method'
       ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'AdBudget'
+      ]
     end
 
     # Initializes the object
@@ -92,10 +121,30 @@ module Zernio
 
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
+      else
+        self.amount = nil
       end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
+      else
+        self.type = nil
+      end
+
+      if attributes.key?(:'amount_micros')
+        self.amount_micros = attributes[:'amount_micros']
+      end
+
+      if attributes.key?(:'explicitly_shared')
+        self.explicitly_shared = attributes[:'explicitly_shared']
+      end
+
+      if attributes.key?(:'resource_name')
+        self.resource_name = attributes[:'resource_name']
+      end
+
+      if attributes.key?(:'delivery_method')
+        self.delivery_method = attributes[:'delivery_method']
       end
     end
 
@@ -104,6 +153,19 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @amount.nil?
+        invalid_properties.push('invalid value for "amount", amount cannot be nil.')
+      end
+
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if !@amount_micros.nil? && @amount_micros !~ pattern
+        invalid_properties.push("invalid value for \"amount_micros\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -111,9 +173,22 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @amount.nil?
+      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
       return false unless type_validator.valid?(@type)
+      return false if !@amount_micros.nil? && @amount_micros !~ Regexp.new(/^\d+$/)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] amount Value to be assigned
+    def amount=(amount)
+      if amount.nil?
+        fail ArgumentError, 'amount cannot be nil'
+      end
+
+      @amount = amount
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -126,13 +201,32 @@ module Zernio
       @type = type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] amount_micros Value to be assigned
+    def amount_micros=(amount_micros)
+      if amount_micros.nil?
+        fail ArgumentError, 'amount_micros cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if amount_micros !~ pattern
+        fail ArgumentError, "invalid value for \"amount_micros\", must conform to the pattern #{pattern}."
+      end
+
+      @amount_micros = amount_micros
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           amount == o.amount &&
-          type == o.type
+          type == o.type &&
+          amount_micros == o.amount_micros &&
+          explicitly_shared == o.explicitly_shared &&
+          resource_name == o.resource_name &&
+          delivery_method == o.delivery_method
     end
 
     # @see the `==` method
@@ -144,7 +238,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [amount, type].hash
+      [amount, type, amount_micros, explicitly_shared, resource_name, delivery_method].hash
     end
 
     # Builds the object from hash

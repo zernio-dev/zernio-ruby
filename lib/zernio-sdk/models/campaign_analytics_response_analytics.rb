@@ -17,6 +17,8 @@ module Zernio
   class CampaignAnalyticsResponseAnalytics < ApiModelBase
     attr_accessor :summary
 
+    attr_accessor :impression_share_cache
+
     attr_accessor :daily
 
     attr_accessor :breakdowns
@@ -25,6 +27,7 @@ module Zernio
     def self.attribute_map
       {
         :'summary' => :'summary',
+        :'impression_share_cache' => :'impressionShareCache',
         :'daily' => :'daily',
         :'breakdowns' => :'breakdowns'
       }
@@ -43,7 +46,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'summary' => :'AdMetrics',
+        :'summary' => :'CampaignAnalyticsResponseAnalyticsSummary',
+        :'impression_share_cache' => :'CampaignAnalyticsResponseAnalyticsImpressionShareCache',
         :'daily' => :'Array<CampaignAnalyticsResponseAnalyticsDailyInner>',
         :'breakdowns' => :'Hash<String, Array<Object>>'
       }
@@ -73,6 +77,10 @@ module Zernio
 
       if attributes.key?(:'summary')
         self.summary = attributes[:'summary']
+      end
+
+      if attributes.key?(:'impression_share_cache')
+        self.impression_share_cache = attributes[:'impression_share_cache']
       end
 
       if attributes.key?(:'daily')
@@ -109,6 +117,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           summary == o.summary &&
+          impression_share_cache == o.impression_share_cache &&
           daily == o.daily &&
           breakdowns == o.breakdowns
     end
@@ -122,7 +131,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [summary, daily, breakdowns].hash
+      [summary, impression_share_cache, daily, breakdowns].hash
     end
 
     # Builds the object from hash

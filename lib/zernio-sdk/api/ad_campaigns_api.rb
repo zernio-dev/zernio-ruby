@@ -162,7 +162,7 @@ module Zernio
     end
 
     # Boost post as ad
-    # Creates a paid ad from an existing published post, keeping the post's engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send `adSetId` to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns `budget`, `schedule` and `targeting`, and sending any of those alongside `adSetId` is a 400 rather than a silent drop. `budget` is required only without `adSetId`.  `instagramAccountId`, `destinationType` and `adSetId` are Meta-only and return 400 on other platforms.  **Retries.** Boosts are NOT idempotent and can take minutes when Meta requires re-hosting an Instagram video, so do not retry on client timeout. Send an Idempotency-Key header to make retries safe: same key and body replays the original 201, and distinct keys always create distinct ads. Without the header, an identical request is treated as a retry: while one is in flight it returns 409, and within 10 minutes of a completed boost it returns the already-created ad instead of creating another. To intentionally duplicate an ad, send distinct Idempotency-Keys (or vary the body, e.g. the name). 
+    # Creates a paid ad from an existing published post, keeping the post's engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send `adSetId` to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns `budget`, `schedule` and `targeting`, and sending any of those alongside `adSetId` is a 400 rather than a silent drop. `budget` is required only without `adSetId`.  `instagramAccountId`, `destinationType`, `whatsappPhoneNumber` and `adSetId` are Meta-only and return 400 on other platforms.  **Messaging boosts (Meta).** Use `goal: engagement` with `callToAction: WHATSAPP_MESSAGE`, `MESSAGE_PAGE`, or `INSTAGRAM_MESSAGE`. The CTA implies WHATSAPP, MESSENGER, or INSTAGRAM_DIRECT respectively; `destinationType` alone also selects the matching CTA. Omit `linkUrl`. The campaign uses OUTCOME_ENGAGEMENT and the ad set uses CONVERSATIONS with the promoted Page. Optional `whatsappPhoneNumber` selects a number already paired with that Page. Conflicting CTA/destination, instant form, goal, or optimizationGoal inputs return 400. Attach requires the target ad set destination to match. Existing post references preserve social proof; an Instagram reel rejected by Meta is not re-uploaded as a new post for a messaging boost.  **Retries.** Boosts are NOT idempotent and can take minutes when Meta requires re-hosting an Instagram video, so do not retry on client timeout. Send an Idempotency-Key header to make retries safe: same key and body replays the original 201, and distinct keys always create distinct ads. Without the header, an identical request is treated as a retry: while one is in flight it returns 409, and within 10 minutes of a completed boost it returns the already-created ad instead of creating another. To intentionally duplicate an ad, send distinct Idempotency-Keys (or vary the body, e.g. the name). 
     # @param boost_post_request [BoostPostRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
@@ -173,7 +173,7 @@ module Zernio
     end
 
     # Boost post as ad
-    # Creates a paid ad from an existing published post, keeping the post&#39;s engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send &#x60;adSetId&#x60; to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns &#x60;budget&#x60;, &#x60;schedule&#x60; and &#x60;targeting&#x60;, and sending any of those alongside &#x60;adSetId&#x60; is a 400 rather than a silent drop. &#x60;budget&#x60; is required only without &#x60;adSetId&#x60;.  &#x60;instagramAccountId&#x60;, &#x60;destinationType&#x60; and &#x60;adSetId&#x60; are Meta-only and return 400 on other platforms.  **Retries.** Boosts are NOT idempotent and can take minutes when Meta requires re-hosting an Instagram video, so do not retry on client timeout. Send an Idempotency-Key header to make retries safe: same key and body replays the original 201, and distinct keys always create distinct ads. Without the header, an identical request is treated as a retry: while one is in flight it returns 409, and within 10 minutes of a completed boost it returns the already-created ad instead of creating another. To intentionally duplicate an ad, send distinct Idempotency-Keys (or vary the body, e.g. the name). 
+    # Creates a paid ad from an existing published post, keeping the post&#39;s engagement. By default it provisions the whole hierarchy (campaign, ad set, ad).  **Attach shape (Meta).** Send &#x60;adSetId&#x60; to put the ad under an EXISTING ad set instead, so that ad set keeps its learning phase. It then owns &#x60;budget&#x60;, &#x60;schedule&#x60; and &#x60;targeting&#x60;, and sending any of those alongside &#x60;adSetId&#x60; is a 400 rather than a silent drop. &#x60;budget&#x60; is required only without &#x60;adSetId&#x60;.  &#x60;instagramAccountId&#x60;, &#x60;destinationType&#x60;, &#x60;whatsappPhoneNumber&#x60; and &#x60;adSetId&#x60; are Meta-only and return 400 on other platforms.  **Messaging boosts (Meta).** Use &#x60;goal: engagement&#x60; with &#x60;callToAction: WHATSAPP_MESSAGE&#x60;, &#x60;MESSAGE_PAGE&#x60;, or &#x60;INSTAGRAM_MESSAGE&#x60;. The CTA implies WHATSAPP, MESSENGER, or INSTAGRAM_DIRECT respectively; &#x60;destinationType&#x60; alone also selects the matching CTA. Omit &#x60;linkUrl&#x60;. The campaign uses OUTCOME_ENGAGEMENT and the ad set uses CONVERSATIONS with the promoted Page. Optional &#x60;whatsappPhoneNumber&#x60; selects a number already paired with that Page. Conflicting CTA/destination, instant form, goal, or optimizationGoal inputs return 400. Attach requires the target ad set destination to match. Existing post references preserve social proof; an Instagram reel rejected by Meta is not re-uploaded as a new post for a messaging boost.  **Retries.** Boosts are NOT idempotent and can take minutes when Meta requires re-hosting an Instagram video, so do not retry on client timeout. Send an Idempotency-Key header to make retries safe: same key and body replays the original 201, and distinct keys always create distinct ads. Without the header, an identical request is treated as a retry: while one is in flight it returns 409, and within 10 minutes of a completed boost it returns the already-created ad instead of creating another. To intentionally duplicate an ad, send distinct Idempotency-Keys (or vary the body, e.g. the name). 
     # @param boost_post_request [BoostPostRequest] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :idempotency_key Optional client-generated unique key (e.g. a UUID) that makes retries safe. Same key + same body replays the original response; same key + different body → 422; key still processing → 409.
@@ -1552,7 +1552,7 @@ module Zernio
     end
 
     # List campaigns
-    # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active > pending_review > paused > error > completed > cancelled > rejected). 
+    # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active > pending_review > paused > error > completed > cancelled > rejected). Google campaign budgets include amountMicros, explicitlyShared, resourceName and deliveryMethod after the next successful sync. This endpoint does not fetch Google live. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_empty Meta only. Campaign reads aggregate over ad documents, so a campaign with ZERO ads is normally invisible here, the state the two-step create (campaign, then ads via &#x60;existingCampaignId&#x60;) leaves behind whenever Meta rejects the ad step. Set true to list those too, with &#x60;adCount: 0&#x60; and zeroed metrics. Requires &#x60;accountId&#x60; and &#x60;adAccountId&#x60;, since an empty campaign has no ad row to resolve a token or ad account from.
     # @option opts [Integer] :page Page number (1-based) (default to 1)
@@ -1575,7 +1575,7 @@ module Zernio
     end
 
     # List campaigns
-    # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active &gt; pending_review &gt; paused &gt; error &gt; completed &gt; cancelled &gt; rejected). 
+    # Returns campaigns as virtual aggregations over ad documents grouped by platform campaign ID. Metrics (spend, impressions, clicks, etc.) are summed across all ads in each campaign. Campaign status is derived from child ad statuses (active &gt; pending_review &gt; paused &gt; error &gt; completed &gt; cancelled &gt; rejected). Google campaign budgets include amountMicros, explicitlyShared, resourceName and deliveryMethod after the next successful sync. This endpoint does not fetch Google live. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_empty Meta only. Campaign reads aggregate over ad documents, so a campaign with ZERO ads is normally invisible here, the state the two-step create (campaign, then ads via &#x60;existingCampaignId&#x60;) leaves behind whenever Meta rejects the ad step. Set true to list those too, with &#x60;adCount: 0&#x60; and zeroed metrics. Requires &#x60;accountId&#x60; and &#x60;adAccountId&#x60;, since an empty campaign has no ad row to resolve a token or ad account from.
     # @option opts [Integer] :page Page number (1-based) (default to 1)
@@ -2056,6 +2056,81 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List campaign negative lists
+    # Returns shared negative keyword lists attached to the campaign, separate from campaign-level negative keywords. Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale=true. Customer selection is limited to this connection and its account scope.
+    # @param campaign_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform 
+    # @return [ListAdNegativeKeywordLists200Response]
+    def list_campaign_negative_keyword_lists(campaign_id, opts = {})
+      data, _status_code, _headers = list_campaign_negative_keyword_lists_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List campaign negative lists
+    # Returns shared negative keyword lists attached to the campaign, separate from campaign-level negative keywords. Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope.
+    # @param campaign_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :platform 
+    # @return [Array<(ListAdNegativeKeywordLists200Response, Integer, Hash)>] ListAdNegativeKeywordLists200Response data, response status code and response headers
+    def list_campaign_negative_keyword_lists_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.list_campaign_negative_keyword_lists ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.list_campaign_negative_keyword_lists"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && campaign_id !~ pattern
+        fail ArgumentError, "invalid value for 'campaign_id' when calling AdCampaignsApi.list_campaign_negative_keyword_lists, must conform to the pattern #{pattern}."
+      end
+
+      allowable_values = ["facebook", "instagram", "tiktok", "linkedin", "pinterest", "google", "twitter", "openai"]
+      if @api_client.config.client_side_validation && opts[:'platform'] && !allowable_values.include?(opts[:'platform'])
+        fail ArgumentError, "invalid value for \"platform\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/negative-keyword-lists'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'platform'] = opts[:'platform'] if !opts[:'platform'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdNegativeKeywordLists200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.list_campaign_negative_keyword_lists",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#list_campaign_negative_keyword_lists\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List campaign-level negative keywords
     # Returns the campaign-level negative keywords (`campaign_criterion.negative`), distinct from the ad-group-level negatives under `GET /v1/ads/keywords`. Cached for the quota window (not synced to Postgres), and gated by the shared Google Ads operations budget like every other on-demand Google surface. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.  The platform is always discovered from the campaign itself; a non-Google campaign returns 501 rather than 404, whether or not `platform` was passed. 
     # @param campaign_id [String] Platform campaign ID
@@ -2185,6 +2260,85 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdCampaignsApi#remove_ad_keyword\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Replace campaign negative lists
+    # Sets the full desired set of shared negative keyword list associations on this campaign. Send listIds=[] to detach all negative keyword lists. Only campaign_shared_set links are changed; the lists and their keywords are preserved. Every list must belong to the campaign customer and have type NEGATIVE_KEYWORDS.
+    # @param campaign_id [String] 
+    # @param replace_campaign_negative_keyword_lists_request [ReplaceCampaignNegativeKeywordListsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [ReplaceAdNegativeKeywordListKeywords200Response]
+    def replace_campaign_negative_keyword_lists(campaign_id, replace_campaign_negative_keyword_lists_request, opts = {})
+      data, _status_code, _headers = replace_campaign_negative_keyword_lists_with_http_info(campaign_id, replace_campaign_negative_keyword_lists_request, opts)
+      data
+    end
+
+    # Replace campaign negative lists
+    # Sets the full desired set of shared negative keyword list associations on this campaign. Send listIds&#x3D;[] to detach all negative keyword lists. Only campaign_shared_set links are changed; the lists and their keywords are preserved. Every list must belong to the campaign customer and have type NEGATIVE_KEYWORDS.
+    # @param campaign_id [String] 
+    # @param replace_campaign_negative_keyword_lists_request [ReplaceCampaignNegativeKeywordListsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ReplaceAdNegativeKeywordListKeywords200Response, Integer, Hash)>] ReplaceAdNegativeKeywordListKeywords200Response data, response status code and response headers
+    def replace_campaign_negative_keyword_lists_with_http_info(campaign_id, replace_campaign_negative_keyword_lists_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.replace_campaign_negative_keyword_lists ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.replace_campaign_negative_keyword_lists"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && campaign_id !~ pattern
+        fail ArgumentError, "invalid value for 'campaign_id' when calling AdCampaignsApi.replace_campaign_negative_keyword_lists, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'replace_campaign_negative_keyword_lists_request' is set
+      if @api_client.config.client_side_validation && replace_campaign_negative_keyword_lists_request.nil?
+        fail ArgumentError, "Missing the required parameter 'replace_campaign_negative_keyword_lists_request' when calling AdCampaignsApi.replace_campaign_negative_keyword_lists"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/negative-keyword-lists'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(replace_campaign_negative_keyword_lists_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ReplaceAdNegativeKeywordListKeywords200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.replace_campaign_negative_keyword_lists",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#replace_campaign_negative_keyword_lists\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2338,7 +2492,7 @@ module Zernio
     end
 
     # Update a campaign
-    # Campaign-level edits. Send at least one of `budget`, `bidStrategy`, `portfolioBidStrategyId`, `name` or `platformSpecificData`. An unsupported field is always an error, never a silent drop.  | Body field | Meta | Google | Others | |---|---|---|---| | `bidStrategy` | Yes | Yes | 501 | | `bidAmount`, `roasAverageFloor` | 400 (ad-set level) | Yes | 400 | | `portfolioBidStrategyId` | 400 | Yes | 400 | | `budget` (CBO; ABO returns 409) | Yes | 501 | 501 | | `name` | Yes | 501 | 501 | | `platformSpecificData.spendCap` | Yes | 400 | 400 | | `accountId` (empty campaigns) | Yes | - | - |  On Google: `LOWEST_COST_WITHOUT_CAP` = Maximize Conversions, `COST_CAP` + `bidAmount` = Target CPA, `LOWEST_COST_WITH_MIN_ROAS` + `roasAverageFloor` = Target ROAS, `LOWEST_COST_WITH_BID_CAP` + `bidAmount` = Maximize Clicks with a CPC ceiling; `portfolioBidStrategyId` attaches a portfolio strategy instead (exclusive with `bidStrategy`). Setting the standard triplet on a campaign that is currently on a PORTFOLIO strategy is rejected: detach it in Google Ads first, since it is shared across campaigns.  `accountId` forwards the update straight to Meta for a campaign with zero ads, which would otherwise 404; the response then carries `updated: 0`. 
+    # Campaign-level edits. Send at least one of `budget`, `bidStrategy`, `portfolioBidStrategyId`, `name` or `platformSpecificData`. An unsupported field is always an error, never a silent drop.  | Body field | Meta | Google | Others | |---|---|---|---| | `bidStrategy` | Yes | Yes | 501 | | `bidAmount`, `roasAverageFloor` | 400 (ad-set level) | Yes | 400 | | `portfolioBidStrategyId` | 400 | Yes | 400 | | `budget` (CBO; ABO returns 409) | Yes | Daily only | 501 | | `name` | Yes | 501 | 501 | | `platformSpecificData.spendCap` | Yes | 400 | 400 | | `accountId` (empty campaigns) | Yes | - | - |  On Google: `LOWEST_COST_WITHOUT_CAP` = Maximize Conversions, `COST_CAP` + `bidAmount` = Target CPA, `LOWEST_COST_WITH_MIN_ROAS` + `roasAverageFloor` = Target ROAS, `LOWEST_COST_WITH_BID_CAP` + `bidAmount` = Maximize Clicks with a CPC ceiling; `portfolioBidStrategyId` attaches a portfolio strategy instead (exclusive with `bidStrategy`). Setting the standard triplet on a campaign that is currently on a PORTFOLIO strategy is rejected: detach it in Google Ads first, since it is shared across campaigns.  Google budget updates read the current budget before mutation. Shared budgets return 409 unless allowSharedBudgetUpdate=true is explicitly supplied, because the change affects every campaign using that budget. Unknown sharing state also returns 409.  `accountId` forwards the update straight to Meta for a campaign with zero ads, which would otherwise 404; the response then carries `updated: 0`. 
     # @param campaign_id [String] Platform campaign ID
     # @param update_ad_campaign_request [UpdateAdCampaignRequest] 
     # @param [Hash] opts the optional parameters
@@ -2349,7 +2503,7 @@ module Zernio
     end
 
     # Update a campaign
-    # Campaign-level edits. Send at least one of &#x60;budget&#x60;, &#x60;bidStrategy&#x60;, &#x60;portfolioBidStrategyId&#x60;, &#x60;name&#x60; or &#x60;platformSpecificData&#x60;. An unsupported field is always an error, never a silent drop.  | Body field | Meta | Google | Others | |---|---|---|---| | &#x60;bidStrategy&#x60; | Yes | Yes | 501 | | &#x60;bidAmount&#x60;, &#x60;roasAverageFloor&#x60; | 400 (ad-set level) | Yes | 400 | | &#x60;portfolioBidStrategyId&#x60; | 400 | Yes | 400 | | &#x60;budget&#x60; (CBO; ABO returns 409) | Yes | 501 | 501 | | &#x60;name&#x60; | Yes | 501 | 501 | | &#x60;platformSpecificData.spendCap&#x60; | Yes | 400 | 400 | | &#x60;accountId&#x60; (empty campaigns) | Yes | - | - |  On Google: &#x60;LOWEST_COST_WITHOUT_CAP&#x60; &#x3D; Maximize Conversions, &#x60;COST_CAP&#x60; + &#x60;bidAmount&#x60; &#x3D; Target CPA, &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60; + &#x60;roasAverageFloor&#x60; &#x3D; Target ROAS, &#x60;LOWEST_COST_WITH_BID_CAP&#x60; + &#x60;bidAmount&#x60; &#x3D; Maximize Clicks with a CPC ceiling; &#x60;portfolioBidStrategyId&#x60; attaches a portfolio strategy instead (exclusive with &#x60;bidStrategy&#x60;). Setting the standard triplet on a campaign that is currently on a PORTFOLIO strategy is rejected: detach it in Google Ads first, since it is shared across campaigns.  &#x60;accountId&#x60; forwards the update straight to Meta for a campaign with zero ads, which would otherwise 404; the response then carries &#x60;updated: 0&#x60;. 
+    # Campaign-level edits. Send at least one of &#x60;budget&#x60;, &#x60;bidStrategy&#x60;, &#x60;portfolioBidStrategyId&#x60;, &#x60;name&#x60; or &#x60;platformSpecificData&#x60;. An unsupported field is always an error, never a silent drop.  | Body field | Meta | Google | Others | |---|---|---|---| | &#x60;bidStrategy&#x60; | Yes | Yes | 501 | | &#x60;bidAmount&#x60;, &#x60;roasAverageFloor&#x60; | 400 (ad-set level) | Yes | 400 | | &#x60;portfolioBidStrategyId&#x60; | 400 | Yes | 400 | | &#x60;budget&#x60; (CBO; ABO returns 409) | Yes | Daily only | 501 | | &#x60;name&#x60; | Yes | 501 | 501 | | &#x60;platformSpecificData.spendCap&#x60; | Yes | 400 | 400 | | &#x60;accountId&#x60; (empty campaigns) | Yes | - | - |  On Google: &#x60;LOWEST_COST_WITHOUT_CAP&#x60; &#x3D; Maximize Conversions, &#x60;COST_CAP&#x60; + &#x60;bidAmount&#x60; &#x3D; Target CPA, &#x60;LOWEST_COST_WITH_MIN_ROAS&#x60; + &#x60;roasAverageFloor&#x60; &#x3D; Target ROAS, &#x60;LOWEST_COST_WITH_BID_CAP&#x60; + &#x60;bidAmount&#x60; &#x3D; Maximize Clicks with a CPC ceiling; &#x60;portfolioBidStrategyId&#x60; attaches a portfolio strategy instead (exclusive with &#x60;bidStrategy&#x60;). Setting the standard triplet on a campaign that is currently on a PORTFOLIO strategy is rejected: detach it in Google Ads first, since it is shared across campaigns.  Google budget updates read the current budget before mutation. Shared budgets return 409 unless allowSharedBudgetUpdate&#x3D;true is explicitly supplied, because the change affects every campaign using that budget. Unknown sharing state also returns 409.  &#x60;accountId&#x60; forwards the update straight to Meta for a campaign with zero ads, which would otherwise 404; the response then carries &#x60;updated: 0&#x60;. 
     # @param campaign_id [String] Platform campaign ID
     # @param update_ad_campaign_request [UpdateAdCampaignRequest] 
     # @param [Hash] opts the optional parameters

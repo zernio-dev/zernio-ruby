@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # **Meta only.** The CBO budget.
+  # Meta CBO or Google daily campaign budget, in whole currency units.
   class UpdateAdCampaignRequestBudget < ApiModelBase
     # Budget amount in the ad account's currency
     attr_accessor :amount

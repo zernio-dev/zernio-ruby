@@ -14,39 +14,33 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Campaign-level budget (CBO). Null for ABO campaigns.
-  class AdCampaignCampaignBudget < ApiModelBase
-    attr_accessor :amount
+  class GetAdNegativeKeywordList200ResponseList < ApiModelBase
+    # Google shared set id.
+    attr_accessor :id
 
-    attr_accessor :type
+    # Google shared set resource name.
+    attr_accessor :resource_name
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    # List name.
+    attr_accessor :name
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
+    # Number of keywords in the list.
+    attr_accessor :member_count
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Number of resources referencing the list.
+    attr_accessor :reference_count
+
+    attr_accessor :keywords
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'amount' => :'amount',
-        :'type' => :'type'
+        :'id' => :'id',
+        :'resource_name' => :'resourceName',
+        :'name' => :'name',
+        :'member_count' => :'memberCount',
+        :'reference_count' => :'referenceCount',
+        :'keywords' => :'keywords'
       }
     end
 
@@ -63,8 +57,12 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'amount' => :'Float',
-        :'type' => :'String'
+        :'id' => :'String',
+        :'resource_name' => :'String',
+        :'name' => :'String',
+        :'member_count' => :'Integer',
+        :'reference_count' => :'Integer',
+        :'keywords' => :'Array<AdNegativeKeywordListKeyword>'
       }
     end
 
@@ -74,28 +72,53 @@ module Zernio
       ])
     end
 
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'AdNegativeKeywordList'
+      ]
+    end
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::AdCampaignCampaignBudget` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GetAdNegativeKeywordList200ResponseList` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::AdCampaignCampaignBudget`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GetAdNegativeKeywordList200ResponseList`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'resource_name')
+        self.resource_name = attributes[:'resource_name']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'member_count')
+        self.member_count = attributes[:'member_count']
+      end
+
+      if attributes.key?(:'reference_count')
+        self.reference_count = attributes[:'reference_count']
+      end
+
+      if attributes.key?(:'keywords')
+        if (value = attributes[:'keywords']).is_a?(Array)
+          self.keywords = value
+        end
       end
     end
 
@@ -104,6 +127,11 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      pattern = Regexp.new(/^\d+$/)
+      if !@id.nil? && @id !~ pattern
+        invalid_properties.push("invalid value for \"id\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -111,19 +139,23 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
-      return false unless type_validator.valid?(@type)
+      return false if !@id.nil? && @id !~ Regexp.new(/^\d+$/)
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["daily", "lifetime"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] id Value to be assigned
+    def id=(id)
+      if id.nil?
+        fail ArgumentError, 'id cannot be nil'
       end
-      @type = type
+
+      pattern = Regexp.new(/^\d+$/)
+      if id !~ pattern
+        fail ArgumentError, "invalid value for \"id\", must conform to the pattern #{pattern}."
+      end
+
+      @id = id
     end
 
     # Checks equality by comparing each attribute.
@@ -131,8 +163,12 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          amount == o.amount &&
-          type == o.type
+          id == o.id &&
+          resource_name == o.resource_name &&
+          name == o.name &&
+          member_count == o.member_count &&
+          reference_count == o.reference_count &&
+          keywords == o.keywords
     end
 
     # @see the `==` method
@@ -144,7 +180,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [amount, type].hash
+      [id, resource_name, name, member_count, reference_count, keywords].hash
     end
 
     # Builds the object from hash

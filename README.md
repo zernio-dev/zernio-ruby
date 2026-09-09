@@ -107,12 +107,15 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**update_bluesky_settings**](docs/AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings
 *Zernio::AccountsApi* | [**update_slack_settings**](docs/AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
 *Zernio::AdAccountsApi* | [**add_account_callouts**](docs/AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account-level callout extensions
+*Zernio::AdAccountsApi* | [**create_ad_negative_keyword_list**](docs/AdAccountsApi.md#create_ad_negative_keyword_list) | **POST** /v1/ads/accounts/negative-keyword-lists | Create a negative keyword list
 *Zernio::AdAccountsApi* | [**create_custom_conversion**](docs/AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion
 *Zernio::AdAccountsApi* | [**create_high_demand_period**](docs/AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase
 *Zernio::AdAccountsApi* | [**create_value_rule_set**](docs/AdAccountsApi.md#create_value_rule_set) | **POST** /v1/ads/value-rule-sets | Create a value rule set
+*Zernio::AdAccountsApi* | [**delete_ad_negative_keyword_list**](docs/AdAccountsApi.md#delete_ad_negative_keyword_list) | **DELETE** /v1/ads/accounts/negative-keyword-lists/{listId} | Delete a negative keyword list
 *Zernio::AdAccountsApi* | [**delete_value_rule_set**](docs/AdAccountsApi.md#delete_value_rule_set) | **DELETE** /v1/ads/value-rule-sets/{valueRuleSetId} | Delete a value rule set
 *Zernio::AdAccountsApi* | [**get_ad_account_finance**](docs/AdAccountsApi.md#get_ad_account_finance) | **GET** /v1/ads/accounts/finance | Ad account finances
 *Zernio::AdAccountsApi* | [**get_ad_comments**](docs/AdAccountsApi.md#get_ad_comments) | **GET** /v1/ads/{adId}/comments | List comments on an ad
+*Zernio::AdAccountsApi* | [**get_ad_negative_keyword_list**](docs/AdAccountsApi.md#get_ad_negative_keyword_list) | **GET** /v1/ads/accounts/negative-keyword-lists/{listId} | Get a negative keyword list
 *Zernio::AdAccountsApi* | [**get_ads_activity_log**](docs/AdAccountsApi.md#get_ads_activity_log) | **GET** /v1/ads/activity | Ad account change / audit log
 *Zernio::AdAccountsApi* | [**get_dsa_defaults**](docs/AdAccountsApi.md#get_dsa_defaults) | **GET** /v1/ads/dsa-defaults | Get ad account DSA defaults
 *Zernio::AdAccountsApi* | [**get_dsa_recommendations**](docs/AdAccountsApi.md#get_dsa_recommendations) | **GET** /v1/ads/dsa-recommendations | List DSA beneficiary/payor suggestions
@@ -120,6 +123,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**list_account_callouts**](docs/AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account-level callout extensions
 *Zernio::AdAccountsApi* | [**list_ad_accounts**](docs/AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdAccountsApi* | [**list_ad_labels**](docs/AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels
+*Zernio::AdAccountsApi* | [**list_ad_negative_keyword_lists**](docs/AdAccountsApi.md#list_ad_negative_keyword_lists) | **GET** /v1/ads/accounts/negative-keyword-lists | List negative keyword lists
 *Zernio::AdAccountsApi* | [**list_ad_studies**](docs/AdAccountsApi.md#list_ad_studies) | **GET** /v1/ads/studies | A/B tests and lift studies
 *Zernio::AdAccountsApi* | [**list_ads_business_centers**](docs/AdAccountsApi.md#list_ads_business_centers) | **GET** /v1/ads/business-centers | List TikTok Business Centers
 *Zernio::AdAccountsApi* | [**list_custom_conversions**](docs/AdAccountsApi.md#list_custom_conversions) | **GET** /v1/accounts/{accountId}/custom-conversions | List custom conversions
@@ -127,7 +131,9 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**list_meta_businesses**](docs/AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list
 *Zernio::AdAccountsApi* | [**list_value_rule_sets**](docs/AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets
 *Zernio::AdAccountsApi* | [**remove_account_callout**](docs/AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove an account-level callout extension
+*Zernio::AdAccountsApi* | [**replace_ad_negative_keyword_list_keywords**](docs/AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords
 *Zernio::AdAccountsApi* | [**update_ad_account**](docs/AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
+*Zernio::AdAccountsApi* | [**update_ad_negative_keyword_list**](docs/AdAccountsApi.md#update_ad_negative_keyword_list) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId} | Rename a negative keyword list
 *Zernio::AdAccountsApi* | [**update_value_rule_set**](docs/AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set
 *Zernio::AdAudiencesApi* | [**add_users_to_ad_audience**](docs/AdAudiencesApi.md#add_users_to_ad_audience) | **POST** /v1/ads/audiences/{audienceId}/users | Add users to audience
 *Zernio::AdAudiencesApi* | [**create_ad_audience**](docs/AdAudiencesApi.md#create_ad_audience) | **POST** /v1/ads/audiences | Create custom audience
@@ -161,8 +167,10 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**list_ad_sets**](docs/AdCampaignsApi.md#list_ad_sets) | **GET** /v1/ads/ad-sets | List ad sets
 *Zernio::AdCampaignsApi* | [**list_ads**](docs/AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdCampaignsApi* | [**list_bid_strategies**](docs/AdCampaignsApi.md#list_bid_strategies) | **GET** /v1/ads/bid-strategies | List Google Ads portfolio bid strategies
+*Zernio::AdCampaignsApi* | [**list_campaign_negative_keyword_lists**](docs/AdCampaignsApi.md#list_campaign_negative_keyword_lists) | **GET** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | List campaign negative lists
 *Zernio::AdCampaignsApi* | [**list_campaign_negative_keywords**](docs/AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords
 *Zernio::AdCampaignsApi* | [**remove_ad_keyword**](docs/AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword
+*Zernio::AdCampaignsApi* | [**replace_campaign_negative_keyword_lists**](docs/AdCampaignsApi.md#replace_campaign_negative_keyword_lists) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | Replace campaign negative lists
 *Zernio::AdCampaignsApi* | [**replace_campaign_negative_keywords**](docs/AdCampaignsApi.md#replace_campaign_negative_keywords) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keywords | Replace campaign-level negative keywords
 *Zernio::AdCampaignsApi* | [**update_ad**](docs/AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Zernio::AdCampaignsApi* | [**update_ad_campaign**](docs/AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign
@@ -498,8 +506,8 @@ Class | Method | HTTP request | Description
 *Zernio::MessagesApi* | [**update_inbox_conversation**](docs/MessagesApi.md#update_inbox_conversation) | **PUT** /v1/inbox/conversations/{conversationId} | Update conversation status
 *Zernio::MessagesApi* | [**upload_media_direct**](docs/MessagesApi.md#upload_media_direct) | **POST** /v1/media/upload-direct | Upload media file
 *Zernio::MessagingAdsApi* | [**create_call_ad**](docs/MessagingAdsApi.md#create_call_ad) | **POST** /v1/ads/call | Create Click-to-Call ad
-*Zernio::MessagingAdsApi* | [**create_ctwa_ad**](docs/MessagingAdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create Click-to-WhatsApp ad (deprecated)
-*Zernio::MessagingAdsApi* | [**create_messaging_ad**](docs/MessagingAdsApi.md#create_messaging_ad) | **POST** /v1/ads/messaging | Create click-to-message ad (WhatsApp / Messenger / Instagram Direct)
+*Zernio::MessagingAdsApi* | [**create_ctwa_ad**](docs/MessagingAdsApi.md#create_ctwa_ad) | **POST** /v1/ads/ctwa | Create CTWA ad (deprecated)
+*Zernio::MessagingAdsApi* | [**create_messaging_ad**](docs/MessagingAdsApi.md#create_messaging_ad) | **POST** /v1/ads/messaging | Create messaging ad
 *Zernio::PhoneNumbersApi* | [**cancel_phone_number_port_in**](docs/PhoneNumbersApi.md#cancel_phone_number_port_in) | **DELETE** /v1/phone-numbers/port-in/{id} | Cancel a port-in
 *Zernio::PhoneNumbersApi* | [**check_phone_number_availability**](docs/PhoneNumbersApi.md#check_phone_number_availability) | **GET** /v1/phone-numbers/availability | Check country availability
 *Zernio::PhoneNumbersApi* | [**check_phone_number_portability**](docs/PhoneNumbersApi.md#check_phone_number_portability) | **POST** /v1/phone-numbers/port-in/check | Check portability
@@ -768,10 +776,10 @@ Class | Method | HTTP request | Description
  - [Zernio::Ad](docs/Ad.md)
  - [Zernio::AdAnalyticsResponse](docs/AdAnalyticsResponse.md)
  - [Zernio::AdAnalyticsResponseAd](docs/AdAnalyticsResponseAd.md)
+ - [Zernio::AdAnalyticsResponseAnalytics](docs/AdAnalyticsResponseAnalytics.md)
  - [Zernio::AdBudget](docs/AdBudget.md)
  - [Zernio::AdCampaign](docs/AdCampaign.md)
  - [Zernio::AdCampaignBudget](docs/AdCampaignBudget.md)
- - [Zernio::AdCampaignCampaignBudget](docs/AdCampaignCampaignBudget.md)
  - [Zernio::AdCreative](docs/AdCreative.md)
  - [Zernio::AdDailyMetrics](docs/AdDailyMetrics.md)
  - [Zernio::AdEngagementCounts](docs/AdEngagementCounts.md)
@@ -779,6 +787,8 @@ Class | Method | HTTP request | Description
  - [Zernio::AdKeyword](docs/AdKeyword.md)
  - [Zernio::AdKeywordMetrics](docs/AdKeywordMetrics.md)
  - [Zernio::AdMetrics](docs/AdMetrics.md)
+ - [Zernio::AdNegativeKeywordList](docs/AdNegativeKeywordList.md)
+ - [Zernio::AdNegativeKeywordListKeyword](docs/AdNegativeKeywordListKeyword.md)
  - [Zernio::AdPromotedObject](docs/AdPromotedObject.md)
  - [Zernio::AdReviewStatus](docs/AdReviewStatus.md)
  - [Zernio::AdSchedule](docs/AdSchedule.md)
@@ -930,6 +940,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CampaignAnalyticsResponse](docs/CampaignAnalyticsResponse.md)
  - [Zernio::CampaignAnalyticsResponseAnalytics](docs/CampaignAnalyticsResponseAnalytics.md)
  - [Zernio::CampaignAnalyticsResponseAnalyticsDailyInner](docs/CampaignAnalyticsResponseAnalyticsDailyInner.md)
+ - [Zernio::CampaignAnalyticsResponseAnalyticsImpressionShareCache](docs/CampaignAnalyticsResponseAnalyticsImpressionShareCache.md)
+ - [Zernio::CampaignAnalyticsResponseAnalyticsSummary](docs/CampaignAnalyticsResponseAnalyticsSummary.md)
  - [Zernio::CampaignAnalyticsResponseCampaign](docs/CampaignAnalyticsResponseCampaign.md)
  - [Zernio::CampaignBidding](docs/CampaignBidding.md)
  - [Zernio::CampaignBiddingBidSpec](docs/CampaignBiddingBidSpec.md)
@@ -1000,6 +1012,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAdInsightsReportRequest](docs/CreateAdInsightsReportRequest.md)
  - [Zernio::CreateAdInsightsReportRequestFilteringInner](docs/CreateAdInsightsReportRequestFilteringInner.md)
  - [Zernio::CreateAdInsightsReportRequestTimeIncrement](docs/CreateAdInsightsReportRequestTimeIncrement.md)
+ - [Zernio::CreateAdNegativeKeywordList201Response](docs/CreateAdNegativeKeywordList201Response.md)
+ - [Zernio::CreateAdNegativeKeywordListRequest](docs/CreateAdNegativeKeywordListRequest.md)
  - [Zernio::CreateAdSet201Response](docs/CreateAdSet201Response.md)
  - [Zernio::CreateAdSetRequest](docs/CreateAdSetRequest.md)
  - [Zernio::CreateApiKey201Response](docs/CreateApiKey201Response.md)
@@ -1188,6 +1202,7 @@ Class | Method | HTTP request | Description
  - [Zernio::DeleteAdCampaign200Response](docs/DeleteAdCampaign200Response.md)
  - [Zernio::DeleteAdCampaignRequest](docs/DeleteAdCampaignRequest.md)
  - [Zernio::DeleteAdCreative200Response](docs/DeleteAdCreative200Response.md)
+ - [Zernio::DeleteAdNegativeKeywordList200Response](docs/DeleteAdNegativeKeywordList200Response.md)
  - [Zernio::DeleteAdSet200Response](docs/DeleteAdSet200Response.md)
  - [Zernio::DeleteAdVideo200Response](docs/DeleteAdVideo200Response.md)
  - [Zernio::DeleteDiscordScheduledEvent200Response](docs/DeleteDiscordScheduledEvent200Response.md)
@@ -1317,6 +1332,8 @@ Class | Method | HTTP request | Description
  - [Zernio::GetAdInsightsReport200ResponsePaging](docs/GetAdInsightsReport200ResponsePaging.md)
  - [Zernio::GetAdMedia200Response](docs/GetAdMedia200Response.md)
  - [Zernio::GetAdMedia200ResponseMediaInner](docs/GetAdMedia200ResponseMediaInner.md)
+ - [Zernio::GetAdNegativeKeywordList200Response](docs/GetAdNegativeKeywordList200Response.md)
+ - [Zernio::GetAdNegativeKeywordList200ResponseList](docs/GetAdNegativeKeywordList200ResponseList.md)
  - [Zernio::GetAdPreviews200Response](docs/GetAdPreviews200Response.md)
  - [Zernio::GetAdSetDetails200Response](docs/GetAdSetDetails200Response.md)
  - [Zernio::GetAdTrackingTags200Response](docs/GetAdTrackingTags200Response.md)
@@ -1736,6 +1753,7 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdImages200Response](docs/ListAdImages200Response.md)
  - [Zernio::ListAdKeywords200Response](docs/ListAdKeywords200Response.md)
  - [Zernio::ListAdLabels200Response](docs/ListAdLabels200Response.md)
+ - [Zernio::ListAdNegativeKeywordLists200Response](docs/ListAdNegativeKeywordLists200Response.md)
  - [Zernio::ListAdSets200Response](docs/ListAdSets200Response.md)
  - [Zernio::ListAdSets200ResponseAdSetsInner](docs/ListAdSets200ResponseAdSetsInner.md)
  - [Zernio::ListAdStudies200Response](docs/ListAdStudies200Response.md)
@@ -2033,6 +2051,9 @@ Class | Method | HTTP request | Description
  - [Zernio::ReplaceAdAudienceCompanies200Response](docs/ReplaceAdAudienceCompanies200Response.md)
  - [Zernio::ReplaceAdAudienceCompaniesRequest](docs/ReplaceAdAudienceCompaniesRequest.md)
  - [Zernio::ReplaceAdAudienceCompaniesRequestCompaniesInner](docs/ReplaceAdAudienceCompaniesRequestCompaniesInner.md)
+ - [Zernio::ReplaceAdNegativeKeywordListKeywords200Response](docs/ReplaceAdNegativeKeywordListKeywords200Response.md)
+ - [Zernio::ReplaceAdNegativeKeywordListKeywordsRequest](docs/ReplaceAdNegativeKeywordListKeywordsRequest.md)
+ - [Zernio::ReplaceCampaignNegativeKeywordListsRequest](docs/ReplaceCampaignNegativeKeywordListsRequest.md)
  - [Zernio::ReplaceCampaignNegativeKeywords200Response](docs/ReplaceCampaignNegativeKeywords200Response.md)
  - [Zernio::ReplaceCampaignNegativeKeywordsRequest](docs/ReplaceCampaignNegativeKeywordsRequest.md)
  - [Zernio::ReplyToGoogleBusinessReview200Response](docs/ReplyToGoogleBusinessReview200Response.md)
@@ -2310,6 +2331,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateAdCreativeRequest](docs/UpdateAdCreativeRequest.md)
  - [Zernio::UpdateAdKeyword200Response](docs/UpdateAdKeyword200Response.md)
  - [Zernio::UpdateAdKeywordRequest](docs/UpdateAdKeywordRequest.md)
+ - [Zernio::UpdateAdNegativeKeywordList200Response](docs/UpdateAdNegativeKeywordList200Response.md)
+ - [Zernio::UpdateAdNegativeKeywordListRequest](docs/UpdateAdNegativeKeywordListRequest.md)
  - [Zernio::UpdateAdRequest](docs/UpdateAdRequest.md)
  - [Zernio::UpdateAdRequestBudget](docs/UpdateAdRequestBudget.md)
  - [Zernio::UpdateAdRequestCreative](docs/UpdateAdRequestCreative.md)

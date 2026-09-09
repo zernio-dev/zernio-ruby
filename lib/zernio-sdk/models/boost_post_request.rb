@@ -40,8 +40,11 @@ module Zernio
     # Meta only. Instagram identity the ad runs AS (creative.instagram_user_id), overriding the account linked to the Page. Live-verified against a Page-post creative.
     attr_accessor :instagram_account_id
 
-    # Meta only. Ad-set destination_type: where the click LANDS, as opposed to instagramAccountId which is who the ad runs as. Lead ads force ON_AD and ignore this.
+    # Meta only. Ad-set destination_type: where the click LANDS, as opposed to instagramAccountId which is who the ad runs as. Messaging destinations imply their matching CTA and require goal engagement. Lead ads use ON_AD; combining an instant form with a messaging destination is rejected.
     attr_accessor :destination_type
+
+    # Meta WhatsApp only. E.164 number already paired with the Page. Omit to use the default pairing. Requires WHATSAPP destinationType or WHATSAPP_MESSAGE callToAction.
+    attr_accessor :whatsapp_phone_number
 
     # ISO 4217 currency code matching the ad account's currency. Meta only. Optional: Zernio resolves it from the ad account when omitted. The value selects the minor-unit exponent Zernio converts budget/bid amounts by before calling Meta (most currencies are cents; zero-decimal currencies like JPY/KRW are sent as-is).
     attr_accessor :currency
@@ -78,10 +81,10 @@ module Zernio
     # Meta only. Beneficiary/payer entity IDs for regionalRegulatedCategories. Values are numeric IDs from Meta verification. Keys vary by category (e.g. universal_beneficiary / universal_payer for BRAZIL_REGULATION and THAILAND_UNIVERSAL). If omitted, Meta uses Ads Manager defaults when configured.
     attr_accessor :regional_regulation_identities
 
-    # Destination URL for the CTA button. Send it together with `callToAction`.  **Meta**: adds a top-level `call_to_action` to the post-reference creative. This is what gives a `traffic` boost a clickable destination without replacing the creative and losing the post's social proof. Ignored when `leadGenFormId` is set, which supplies its own destination. Live-verified against a Page-post creative.  **TikTok**: maps to `landing_page_url` on the Spark Ad creative (`AdcreateCreatives.landing_page_url`); Spark Ads have no clickable destination without it.  Ignored on LinkedIn / Pinterest / X / Google, which infer the destination from the boosted post. 
+    # Website URL for non-messaging CTA buttons. Send it with `callToAction`. Omit for messaging boosts.  **Meta**: adds a top-level `call_to_action` to the post-reference creative. This is what gives a `traffic` boost a clickable destination without replacing the creative and losing the post's social proof. Ignored when `leadGenFormId` is set, which supplies its own destination. Live-verified against a Page-post creative.  **TikTok**: maps to `landing_page_url` on the Spark Ad creative (`AdcreateCreatives.landing_page_url`); Spark Ads have no clickable destination without it.  Ignored on LinkedIn / Pinterest / X / Google, which infer the destination from the boosted post. 
     attr_accessor :link_url
 
-    # CTA button label. Send it together with `linkUrl`: a CTA without a destination produces a button that goes nowhere, so sending one alone is a 400.  **Meta**: the CTA enum of POST /v1/ads/create plus `VIEW_INSTAGRAM_PROFILE`, which is accepted on boost only. For that value `linkUrl` is typically the Instagram profile URL.  **TikTok**: pass-through to `call_to_action` on the Spark Ad creative; the platform validates the value. See TikTok's \"Enumeration - Call-to-Action\". 
+    # CTA button label. Non-messaging CTAs require `linkUrl`. WHATSAPP_MESSAGE, MESSAGE_PAGE, and INSTAGRAM_MESSAGE do not require a URL and reject linkUrl.  **Meta**: the CTA enum of POST /v1/ads/create plus `VIEW_INSTAGRAM_PROFILE`, `WHATSAPP_MESSAGE`, `MESSAGE_PAGE`, and `INSTAGRAM_MESSAGE`. VIEW_INSTAGRAM_PROFILE requires linkUrl; the messaging CTAs select their destination automatically.  **TikTok**: pass-through to `call_to_action` on the Spark Ad creative; the platform validates the value. See TikTok's \"Enumeration - Call-to-Action\". 
     attr_accessor :call_to_action
 
     # TikTok-only. Spark Code (creator's `auth_code`) authorizing cross-creator Spark Ads: the advertiser can boost a video owned by a DIFFERENT TikTok account. Without this, boosts are limited to videos owned by the same account running the ads (same-BC creators only). The creator generates the code in their TikTok app's Promote settings and shares it with the advertiser. Maps to `auth_code` on the creative entry of /v2/ad/create/. 
@@ -99,7 +102,7 @@ module Zernio
     # Meta, TikTok, and LinkedIn. Publish state of the created entities. Omitted or ACTIVE publishes live (default); PAUSED creates them paused so you can review before they spend. On LinkedIn the whole campaign group, campaign, and creative hierarchy stays PAUSED (intendedStatus PAUSED on each).
     attr_accessor :status
 
-    # Meta only. Explicit ad-set `optimization_goal` override. When omitted, defaults to the value derived from `goal`. The value must be compatible with the objective Meta derives from `goal`, not with the objective used by `POST /v1/ads/create` for the same `goal` name: boost maps `goal: \"engagement\"` to objective `OUTCOME_AWARENESS`, which accepts `REACH`, `IMPRESSIONS`, `AD_RECALL_LIFT`, or THRUPLAY-class values, and rejects `POST_ENGAGEMENT` (that value is only valid under `OUTCOME_ENGAGEMENT`, which create uses for the same goal name). 
+    # Meta only. Explicit ad-set `optimization_goal` override. When omitted, defaults to the value derived from `goal`. Messaging boosts always use CONVERSATIONS and reject another optimizationGoal. Otherwise the value must be compatible with the objective Meta derives from `goal`, not with the objective used by `POST /v1/ads/create` for the same `goal` name: boost maps `goal: \"engagement\"` to objective `OUTCOME_AWARENESS`, which accepts `REACH`, `IMPRESSIONS`, `AD_RECALL_LIFT`, or THRUPLAY-class values, and rejects `POST_ENGAGEMENT` (that value is only valid under `OUTCOME_ENGAGEMENT`, which create uses for the same goal name). 
     attr_accessor :optimization_goal
 
     class EnumAttributeValidator
@@ -137,6 +140,7 @@ module Zernio
         :'budget' => :'budget',
         :'instagram_account_id' => :'instagramAccountId',
         :'destination_type' => :'destinationType',
+        :'whatsapp_phone_number' => :'whatsappPhoneNumber',
         :'currency' => :'currency',
         :'schedule' => :'schedule',
         :'targeting' => :'targeting',
@@ -184,6 +188,7 @@ module Zernio
         :'budget' => :'BoostPostRequestBudget',
         :'instagram_account_id' => :'String',
         :'destination_type' => :'String',
+        :'whatsapp_phone_number' => :'String',
         :'currency' => :'String',
         :'schedule' => :'BoostPostRequestSchedule',
         :'targeting' => :'BoostPostRequestTargeting',
@@ -276,6 +281,10 @@ module Zernio
 
       if attributes.key?(:'destination_type')
         self.destination_type = attributes[:'destination_type']
+      end
+
+      if attributes.key?(:'whatsapp_phone_number')
+        self.whatsapp_phone_number = attributes[:'whatsapp_phone_number']
       end
 
       if attributes.key?(:'currency')
@@ -398,6 +407,11 @@ module Zernio
         invalid_properties.push('invalid value for "goal", goal cannot be nil.')
       end
 
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if !@whatsapp_phone_number.nil? && @whatsapp_phone_number !~ pattern
+        invalid_properties.push("invalid value for \"whatsapp_phone_number\", must conform to the pattern #{pattern}.")
+      end
+
       if !@currency.nil? && @currency.to_s.length > 3
         invalid_properties.push('invalid value for "currency", the character length must be smaller than or equal to 3.')
       end
@@ -428,8 +442,9 @@ module Zernio
       return false if @goal.nil?
       goal_validator = EnumAttributeValidator.new('String', ["engagement", "traffic", "awareness", "video_views", "lead_generation", "conversions", "app_promotion"])
       return false unless goal_validator.valid?(@goal)
-      destination_type_validator = EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP"])
+      destination_type_validator = EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP", "INSTAGRAM_DIRECT"])
       return false unless destination_type_validator.valid?(@destination_type)
+      return false if !@whatsapp_phone_number.nil? && @whatsapp_phone_number !~ Regexp.new(/^\+[1-9]\d{6,14}$/)
       return false if !@currency.nil? && @currency.to_s.length > 3
       return false if !@currency.nil? && @currency.to_s.length < 3
       return false if !@dsa_beneficiary.nil? && @dsa_beneficiary.to_s.length > 100
@@ -486,11 +501,26 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] destination_type Object to be assigned
     def destination_type=(destination_type)
-      validator = EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP"])
+      validator = EnumAttributeValidator.new('String', ["INSTAGRAM_PROFILE", "WEBSITE", "ON_AD", "MESSENGER", "WHATSAPP", "INSTAGRAM_DIRECT"])
       unless validator.valid?(destination_type)
         fail ArgumentError, "invalid value for \"destination_type\", must be one of #{validator.allowable_values}."
       end
       @destination_type = destination_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] whatsapp_phone_number Value to be assigned
+    def whatsapp_phone_number=(whatsapp_phone_number)
+      if whatsapp_phone_number.nil?
+        fail ArgumentError, 'whatsapp_phone_number cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if whatsapp_phone_number !~ pattern
+        fail ArgumentError, "invalid value for \"whatsapp_phone_number\", must conform to the pattern #{pattern}."
+      end
+
+      @whatsapp_phone_number = whatsapp_phone_number
     end
 
     # Custom attribute writer method with validation
@@ -564,6 +594,7 @@ module Zernio
           budget == o.budget &&
           instagram_account_id == o.instagram_account_id &&
           destination_type == o.destination_type &&
+          whatsapp_phone_number == o.whatsapp_phone_number &&
           currency == o.currency &&
           schedule == o.schedule &&
           targeting == o.targeting &&
@@ -596,7 +627,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
+      [post_id, platform_post_id, account_id, ad_account_id, name, goal, ad_set_id, budget, instagram_account_id, destination_type, whatsapp_phone_number, currency, schedule, targeting, raw_targeting, bid_strategy, bid_amount, roas_average_floor, platform_specific_data, tracking, special_ad_categories, special_ad_category_country, regional_regulated_categories, regional_regulation_identities, link_url, call_to_action, spark_auth_code, dsa_beneficiary, dsa_payor, lead_gen_form_id, status, optimization_goal].hash
     end
 
     # Builds the object from hash

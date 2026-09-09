@@ -24,6 +24,8 @@ module Zernio
     # Effective campaign status (ACTIVE when any child ad is active).
     attr_accessor :status
 
+    attr_accessor :budget
+
     # ISO 4217 code of the ad account (e.g. USD, THB). All money values in `summary` and `daily` are in this currency.
     attr_accessor :currency
 
@@ -34,6 +36,7 @@ module Zernio
         :'name' => :'name',
         :'platform' => :'platform',
         :'status' => :'status',
+        :'budget' => :'budget',
         :'currency' => :'currency'
       }
     end
@@ -55,6 +58,7 @@ module Zernio
         :'name' => :'String',
         :'platform' => :'String',
         :'status' => :'String',
+        :'budget' => :'AdCampaignBudget',
         :'currency' => :'String'
       }
     end
@@ -64,6 +68,7 @@ module Zernio
       Set.new([
         :'name',
         :'status',
+        :'budget',
         :'currency'
       ])
     end
@@ -100,6 +105,10 @@ module Zernio
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'budget')
+        self.budget = attributes[:'budget']
+      end
+
       if attributes.key?(:'currency')
         self.currency = attributes[:'currency']
       end
@@ -129,6 +138,7 @@ module Zernio
           name == o.name &&
           platform == o.platform &&
           status == o.status &&
+          budget == o.budget &&
           currency == o.currency
     end
 
@@ -141,7 +151,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, platform, status, currency].hash
+      [id, name, platform, status, budget, currency].hash
     end
 
     # Builds the object from hash

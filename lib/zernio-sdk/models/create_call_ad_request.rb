@@ -24,20 +24,29 @@ module Zernio
     # Ad display name. Used to derive campaign / ad set names. On the multi-creative shape, each ad's Meta name gets a \" #N\" suffix (1-indexed) so Ads Manager shows them as a numbered batch. 
     attr_accessor :name
 
+    # Messaging and CTWA only. Platform post or reel ID, resolved like boost platformPostId. Facebook IDs become object_story_id; Instagram IDs become source_instagram_media_id using the connected Instagram identity. Mutually exclusive with objectStoryId and fresh creative fields.
+    attr_accessor :existing_post_id
+
+    # Messaging and CTWA only. Raw Facebook pageId_postId reference, used as object_story_id even with an Instagram account. Mutually exclusive with existingPostId and fresh creative fields.
+    attr_accessor :object_story_id
+
+    # WhatsApp only. Optional E.164 number already paired with the Facebook Page. Omit to let Meta select the paired number. Sent to the creative CTA and, when creating a new ad set, its promoted_object. Attach requests do not change the existing ad set.
+    attr_accessor :whatsapp_phone_number
+
     # Single-creative shape only. Mutually exclusive with `creatives[]`. 
     attr_accessor :headline
 
     # Primary text shown above the image / video. Single-creative shape only. Mutually exclusive with `creatives[]`. 
     attr_accessor :body
 
-    # Image asset for single-creative shape. Mutually exclusive with `video` and with `creatives[]`. Required on the single-creative shape if `video` is not supplied. 
+    # Image asset for single-creative shape. Mutually exclusive with `video` and with `creatives[]`. Required on the single-creative shape if neither `video` nor an existing post reference is supplied. 
     attr_accessor :image_url
 
     attr_accessor :video
 
     attr_accessor :welcome_message
 
-    # Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (`headline` / `body` / `imageUrl` / `video`): setting both is a 400, unlike `POST /v1/ads/create` where the top-level fields are silently ignored in multi-creative mode. Each entry must supply its own headline, body, and exactly one of `imageUrl` / `video`. 
+    # Multi-creative shape: N CTWA ads under one campaign + one ad set, sharing budget and targeting. Mutually exclusive with the top-level single-creative fields (`headline` / `body` / `imageUrl` / `video`): setting both is a 400, unlike `POST /v1/ads/create` where the top-level fields are silently ignored in multi-creative mode. Each entry supplies headline, body, and image/video, or an existingPostId or objectStoryId reference. Fresh and existing creatives can be mixed. 
     attr_accessor :creatives
 
     # Attach the creatives to this EXISTING messaging ad set instead of building a campaign, so the ad set keeps its learning phase. It then owns budget, targeting and schedule, so `budgetAmount`, `budgetType`, `endDate`, `objective`, `countries`, `interests`, `audienceId` and `campaignStatus` are rejected with a 400 alongside it. Its `destination_type` must match the ad's destination. 
@@ -151,6 +160,9 @@ module Zernio
         :'account_id' => :'accountId',
         :'ad_account_id' => :'adAccountId',
         :'name' => :'name',
+        :'existing_post_id' => :'existingPostId',
+        :'object_story_id' => :'objectStoryId',
+        :'whatsapp_phone_number' => :'whatsappPhoneNumber',
         :'headline' => :'headline',
         :'body' => :'body',
         :'image_url' => :'imageUrl',
@@ -205,6 +217,9 @@ module Zernio
         :'account_id' => :'String',
         :'ad_account_id' => :'String',
         :'name' => :'String',
+        :'existing_post_id' => :'String',
+        :'object_story_id' => :'String',
+        :'whatsapp_phone_number' => :'String',
         :'headline' => :'String',
         :'body' => :'String',
         :'image_url' => :'String',
@@ -288,6 +303,18 @@ module Zernio
         self.name = attributes[:'name']
       else
         self.name = nil
+      end
+
+      if attributes.key?(:'existing_post_id')
+        self.existing_post_id = attributes[:'existing_post_id']
+      end
+
+      if attributes.key?(:'object_story_id')
+        self.object_story_id = attributes[:'object_story_id']
+      end
+
+      if attributes.key?(:'whatsapp_phone_number')
+        self.whatsapp_phone_number = attributes[:'whatsapp_phone_number']
       end
 
       if attributes.key?(:'headline')
@@ -484,6 +511,20 @@ module Zernio
         invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
       end
 
+      if !@existing_post_id.nil? && @existing_post_id.to_s.length < 1
+        invalid_properties.push('invalid value for "existing_post_id", the character length must be greater than or equal to 1.')
+      end
+
+      pattern = Regexp.new(/^\d+_\d+$/)
+      if !@object_story_id.nil? && @object_story_id !~ pattern
+        invalid_properties.push("invalid value for \"object_story_id\", must conform to the pattern #{pattern}.")
+      end
+
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if !@whatsapp_phone_number.nil? && @whatsapp_phone_number !~ pattern
+        invalid_properties.push("invalid value for \"whatsapp_phone_number\", must conform to the pattern #{pattern}.")
+      end
+
       if !@headline.nil? && @headline.to_s.length > 255
         invalid_properties.push('invalid value for "headline", the character length must be smaller than or equal to 255.')
       end
@@ -553,6 +594,9 @@ module Zernio
       return false if @ad_account_id.to_s.length < 1
       return false if @name.nil?
       return false if @name.to_s.length < 1
+      return false if !@existing_post_id.nil? && @existing_post_id.to_s.length < 1
+      return false if !@object_story_id.nil? && @object_story_id !~ Regexp.new(/^\d+_\d+$/)
+      return false if !@whatsapp_phone_number.nil? && @whatsapp_phone_number !~ Regexp.new(/^\+[1-9]\d{6,14}$/)
       return false if !@headline.nil? && @headline.to_s.length > 255
       return false if !@headline.nil? && @headline.to_s.length < 1
       return false if !@body.nil? && @body.to_s.length < 1
@@ -622,6 +666,50 @@ module Zernio
       end
 
       @name = name
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] existing_post_id Value to be assigned
+    def existing_post_id=(existing_post_id)
+      if existing_post_id.nil?
+        fail ArgumentError, 'existing_post_id cannot be nil'
+      end
+
+      if existing_post_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "existing_post_id", the character length must be greater than or equal to 1.'
+      end
+
+      @existing_post_id = existing_post_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] object_story_id Value to be assigned
+    def object_story_id=(object_story_id)
+      if object_story_id.nil?
+        fail ArgumentError, 'object_story_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+_\d+$/)
+      if object_story_id !~ pattern
+        fail ArgumentError, "invalid value for \"object_story_id\", must conform to the pattern #{pattern}."
+      end
+
+      @object_story_id = object_story_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] whatsapp_phone_number Value to be assigned
+    def whatsapp_phone_number=(whatsapp_phone_number)
+      if whatsapp_phone_number.nil?
+        fail ArgumentError, 'whatsapp_phone_number cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if whatsapp_phone_number !~ pattern
+        fail ArgumentError, "invalid value for \"whatsapp_phone_number\", must conform to the pattern #{pattern}."
+      end
+
+      @whatsapp_phone_number = whatsapp_phone_number
     end
 
     # Custom attribute writer method with validation
@@ -840,6 +928,9 @@ module Zernio
           account_id == o.account_id &&
           ad_account_id == o.ad_account_id &&
           name == o.name &&
+          existing_post_id == o.existing_post_id &&
+          object_story_id == o.object_story_id &&
+          whatsapp_phone_number == o.whatsapp_phone_number &&
           headline == o.headline &&
           body == o.body &&
           image_url == o.image_url &&
@@ -886,7 +977,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, ad_account_id, name, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, regional_regulation_identities, phone_number, link_url].hash
+      [account_id, ad_account_id, name, existing_post_id, object_story_id, whatsapp_phone_number, headline, body, image_url, video, welcome_message, creatives, ad_set_id, budget_amount, budget_type, currency, end_date, countries, cities, regions, zips, metros, custom_locations, age_min, age_max, interests, audience_id, placements, advantage_audience, objective, status, campaign_status, bid_strategy, bid_amount, roas_average_floor, dsa_beneficiary, dsa_payor, regional_regulated_categories, regional_regulation_identities, phone_number, link_url].hash
     end
 
     # Builds the object from hash

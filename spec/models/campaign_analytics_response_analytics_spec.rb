@@ -33,6 +33,12 @@ describe Zernio::CampaignAnalyticsResponseAnalytics do
     end
   end
 
+  describe 'test attribute "impression_share_cache"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   describe 'test attribute "daily"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/

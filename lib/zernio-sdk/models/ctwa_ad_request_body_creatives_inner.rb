@@ -14,14 +14,20 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Each entry must also include exactly one of `imageUrl` or `video`. 
+  # Supply headline, body, and image/video, or exactly one existing post reference. References cannot be combined with fresh creative fields.
   class CtwaAdRequestBodyCreativesInner < ApiModelBase
+    # Messaging and CTWA only. Platform post or reel ID, resolved like boost platformPostId. Facebook IDs become object_story_id; Instagram IDs become source_instagram_media_id using the connected Instagram identity. Mutually exclusive with objectStoryId and fresh creative fields.
+    attr_accessor :existing_post_id
+
+    # Messaging and CTWA only. Raw Facebook pageId_postId reference, used as object_story_id even with an Instagram account. Mutually exclusive with existingPostId and fresh creative fields.
+    attr_accessor :object_story_id
+
     attr_accessor :headline
 
     # Primary text shown above the image / video.
     attr_accessor :body
 
-    # Image asset. Mutually exclusive with this entry's `video`. Required if `video` is not supplied. 
+    # Image asset. Mutually exclusive with this entry's `video`. Required if neither `video` nor an existing post reference is supplied. 
     attr_accessor :image_url
 
     attr_accessor :video
@@ -31,6 +37,8 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'existing_post_id' => :'existingPostId',
+        :'object_story_id' => :'objectStoryId',
         :'headline' => :'headline',
         :'body' => :'body',
         :'image_url' => :'imageUrl',
@@ -52,6 +60,8 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'existing_post_id' => :'String',
+        :'object_story_id' => :'String',
         :'headline' => :'String',
         :'body' => :'String',
         :'image_url' => :'String',
@@ -82,16 +92,20 @@ module Zernio
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'existing_post_id')
+        self.existing_post_id = attributes[:'existing_post_id']
+      end
+
+      if attributes.key?(:'object_story_id')
+        self.object_story_id = attributes[:'object_story_id']
+      end
+
       if attributes.key?(:'headline')
         self.headline = attributes[:'headline']
-      else
-        self.headline = nil
       end
 
       if attributes.key?(:'body')
         self.body = attributes[:'body']
-      else
-        self.body = nil
       end
 
       if attributes.key?(:'image_url')
@@ -112,23 +126,24 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @headline.nil?
-        invalid_properties.push('invalid value for "headline", headline cannot be nil.')
+      if !@existing_post_id.nil? && @existing_post_id.to_s.length < 1
+        invalid_properties.push('invalid value for "existing_post_id", the character length must be greater than or equal to 1.')
       end
 
-      if @headline.to_s.length > 255
+      pattern = Regexp.new(/^\d+_\d+$/)
+      if !@object_story_id.nil? && @object_story_id !~ pattern
+        invalid_properties.push("invalid value for \"object_story_id\", must conform to the pattern #{pattern}.")
+      end
+
+      if !@headline.nil? && @headline.to_s.length > 255
         invalid_properties.push('invalid value for "headline", the character length must be smaller than or equal to 255.')
       end
 
-      if @headline.to_s.length < 1
+      if !@headline.nil? && @headline.to_s.length < 1
         invalid_properties.push('invalid value for "headline", the character length must be greater than or equal to 1.')
       end
 
-      if @body.nil?
-        invalid_properties.push('invalid value for "body", body cannot be nil.')
-      end
-
-      if @body.to_s.length < 1
+      if !@body.nil? && @body.to_s.length < 1
         invalid_properties.push('invalid value for "body", the character length must be greater than or equal to 1.')
       end
 
@@ -139,12 +154,41 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @headline.nil?
-      return false if @headline.to_s.length > 255
-      return false if @headline.to_s.length < 1
-      return false if @body.nil?
-      return false if @body.to_s.length < 1
+      return false if !@existing_post_id.nil? && @existing_post_id.to_s.length < 1
+      return false if !@object_story_id.nil? && @object_story_id !~ Regexp.new(/^\d+_\d+$/)
+      return false if !@headline.nil? && @headline.to_s.length > 255
+      return false if !@headline.nil? && @headline.to_s.length < 1
+      return false if !@body.nil? && @body.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] existing_post_id Value to be assigned
+    def existing_post_id=(existing_post_id)
+      if existing_post_id.nil?
+        fail ArgumentError, 'existing_post_id cannot be nil'
+      end
+
+      if existing_post_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "existing_post_id", the character length must be greater than or equal to 1.'
+      end
+
+      @existing_post_id = existing_post_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] object_story_id Value to be assigned
+    def object_story_id=(object_story_id)
+      if object_story_id.nil?
+        fail ArgumentError, 'object_story_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+_\d+$/)
+      if object_story_id !~ pattern
+        fail ArgumentError, "invalid value for \"object_story_id\", must conform to the pattern #{pattern}."
+      end
+
+      @object_story_id = object_story_id
     end
 
     # Custom attribute writer method with validation
@@ -184,6 +228,8 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          existing_post_id == o.existing_post_id &&
+          object_story_id == o.object_story_id &&
           headline == o.headline &&
           body == o.body &&
           image_url == o.image_url &&
@@ -200,7 +246,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [headline, body, image_url, video, welcome_message].hash
+      [existing_post_id, object_story_id, headline, body, image_url, video, welcome_message].hash
     end
 
     # Builds the object from hash

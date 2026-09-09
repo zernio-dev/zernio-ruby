@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Zernio
-  # Video creative. Mutually exclusive with this entry's `imageUrl`. Required if `imageUrl` is not supplied. 
+  # Video creative. Mutually exclusive with this entry's `imageUrl`. Required if neither `imageUrl` nor an existing post reference is supplied. 
   class CtwaAdRequestBodyCreativesInnerVideo < ApiModelBase
     # Public URL of the video to upload. Provide either `url` or `id`.
     attr_accessor :url
