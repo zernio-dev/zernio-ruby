@@ -23,6 +23,7 @@
 | **google_headline** | **String** | Google Ads headline | [optional] |
 | **google_description** | **String** | Google Ads description | [optional] |
 | **link_url** | **String** | Destination URL | [optional] |
+| **whatsapp_phone_number** | **String** | Explicit E.164 WhatsApp number supplied when creating a Meta boost or messaging ad. Absent when omitted by the caller or on older records. | [optional] |
 | **pinterest_image_url** | **String** |  | [optional] |
 | **pinterest_title** | **String** |  | [optional] |
 | **pinterest_description** | **String** |  | [optional] |
@@ -52,6 +53,7 @@ instance = Zernio::AdCreative.new(
   google_headline: null,
   google_description: null,
   link_url: null,
+  whatsapp_phone_number: +12025550123,
   pinterest_image_url: null,
   pinterest_title: null,
   pinterest_description: null

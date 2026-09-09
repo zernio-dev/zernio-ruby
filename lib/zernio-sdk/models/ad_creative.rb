@@ -73,6 +73,9 @@ module Zernio
     # Destination URL
     attr_accessor :link_url
 
+    # Explicit E.164 WhatsApp number supplied when creating a Meta boost or messaging ad. Absent when omitted by the caller or on older records.
+    attr_accessor :whatsapp_phone_number
+
     attr_accessor :pinterest_image_url
 
     attr_accessor :pinterest_title
@@ -101,6 +104,7 @@ module Zernio
         :'google_headline' => :'googleHeadline',
         :'google_description' => :'googleDescription',
         :'link_url' => :'linkUrl',
+        :'whatsapp_phone_number' => :'whatsappPhoneNumber',
         :'pinterest_image_url' => :'pinterestImageUrl',
         :'pinterest_title' => :'pinterestTitle',
         :'pinterest_description' => :'pinterestDescription'
@@ -139,6 +143,7 @@ module Zernio
         :'google_headline' => :'String',
         :'google_description' => :'String',
         :'link_url' => :'String',
+        :'whatsapp_phone_number' => :'String',
         :'pinterest_image_url' => :'String',
         :'pinterest_title' => :'String',
         :'pinterest_description' => :'String'
@@ -258,6 +263,10 @@ module Zernio
         self.link_url = attributes[:'link_url']
       end
 
+      if attributes.key?(:'whatsapp_phone_number')
+        self.whatsapp_phone_number = attributes[:'whatsapp_phone_number']
+      end
+
       if attributes.key?(:'pinterest_image_url')
         self.pinterest_image_url = attributes[:'pinterest_image_url']
       end
@@ -310,6 +319,7 @@ module Zernio
           google_headline == o.google_headline &&
           google_description == o.google_description &&
           link_url == o.link_url &&
+          whatsapp_phone_number == o.whatsapp_phone_number &&
           pinterest_image_url == o.pinterest_image_url &&
           pinterest_title == o.pinterest_title &&
           pinterest_description == o.pinterest_description
@@ -324,7 +334,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thumbnail_url, image_url, video_id, video_url, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, pinterest_image_url, pinterest_title, pinterest_description].hash
+      [thumbnail_url, image_url, video_id, video_url, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, whatsapp_phone_number, pinterest_image_url, pinterest_title, pinterest_description].hash
     end
 
     # Builds the object from hash

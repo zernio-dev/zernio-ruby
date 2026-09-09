@@ -30,7 +30,7 @@ module Zernio
     # Messaging and CTWA only. Raw Facebook pageId_postId reference, used as object_story_id even with an Instagram account. Mutually exclusive with existingPostId and fresh creative fields.
     attr_accessor :object_story_id
 
-    # WhatsApp only. Optional E.164 number already paired with the Facebook Page. Omit to let Meta select the paired number. Sent to the creative CTA and, when creating a new ad set, its promoted_object. Attach requests do not change the existing ad set.
+    # WhatsApp only. Optional E.164 number already paired with the Facebook Page. Omit to let Meta select the paired number. Sent to the creative CTA and, when creating a new ad set, its promoted_object. Attach requests do not change the existing ad set. Stored as creative.whatsappPhoneNumber on every created ad.
     attr_accessor :whatsapp_phone_number
 
     # Single-creative shape only. Mutually exclusive with `creatives[]`. 
