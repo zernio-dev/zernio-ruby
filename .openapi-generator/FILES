@@ -247,7 +247,6 @@ docs/ConnectedAccount.md
 docs/ConnectedApp.md
 docs/ConnectedAppsApi.md
 docs/ContactsApi.md
-docs/Conversation.md
 docs/ConversionAction.md
 docs/ConversionActionTagSnippetsInner.md
 docs/ConversionDestination.md
@@ -935,6 +934,7 @@ docs/InboxMessageEditAttachment.md
 docs/InboxMessageEditHistoryEntry.md
 docs/InboxWebhookAccount.md
 docs/InboxWebhookConversation.md
+docs/InboxWebhookConversationDetail.md
 docs/InboxWebhookMessage.md
 docs/InboxWebhookMessageAttachmentsInner.md
 docs/InboxWebhookMessageSender.md
@@ -1876,7 +1876,6 @@ docs/WebhookPayloadCommentPost.md
 docs/WebhookPayloadConversationControlChanged.md
 docs/WebhookPayloadConversationControlChangedControl.md
 docs/WebhookPayloadConversationStarted.md
-docs/WebhookPayloadConversationStartedConversation.md
 docs/WebhookPayloadExternalPost.md
 docs/WebhookPayloadLead.md
 docs/WebhookPayloadLeadAccount.md
@@ -2296,7 +2295,6 @@ lib/zernio-sdk/models/connect_whats_app_embedded_signup_request.rb
 lib/zernio-sdk/models/connected.rb
 lib/zernio-sdk/models/connected_account.rb
 lib/zernio-sdk/models/connected_app.rb
-lib/zernio-sdk/models/conversation.rb
 lib/zernio-sdk/models/conversion_action.rb
 lib/zernio-sdk/models/conversion_action_tag_snippets_inner.rb
 lib/zernio-sdk/models/conversion_destination.rb
@@ -2972,6 +2970,7 @@ lib/zernio-sdk/models/inbox_message_edit_attachment.rb
 lib/zernio-sdk/models/inbox_message_edit_history_entry.rb
 lib/zernio-sdk/models/inbox_webhook_account.rb
 lib/zernio-sdk/models/inbox_webhook_conversation.rb
+lib/zernio-sdk/models/inbox_webhook_conversation_detail.rb
 lib/zernio-sdk/models/inbox_webhook_message.rb
 lib/zernio-sdk/models/inbox_webhook_message_attachments_inner.rb
 lib/zernio-sdk/models/inbox_webhook_message_sender.rb
@@ -3886,7 +3885,6 @@ lib/zernio-sdk/models/webhook_payload_comment_post.rb
 lib/zernio-sdk/models/webhook_payload_conversation_control_changed.rb
 lib/zernio-sdk/models/webhook_payload_conversation_control_changed_control.rb
 lib/zernio-sdk/models/webhook_payload_conversation_started.rb
-lib/zernio-sdk/models/webhook_payload_conversation_started_conversation.rb
 lib/zernio-sdk/models/webhook_payload_external_post.rb
 lib/zernio-sdk/models/webhook_payload_lead.rb
 lib/zernio-sdk/models/webhook_payload_lead_account.rb
@@ -4292,7 +4290,6 @@ spec/models/connect_whats_app_embedded_signup_request_spec.rb
 spec/models/connected_account_spec.rb
 spec/models/connected_app_spec.rb
 spec/models/connected_spec.rb
-spec/models/conversation_spec.rb
 spec/models/conversion_action_spec.rb
 spec/models/conversion_action_tag_snippets_inner_spec.rb
 spec/models/conversion_destination_spec.rb
@@ -4967,6 +4964,7 @@ spec/models/hide_inbox_comment_request_spec.rb
 spec/models/inbox_message_edit_attachment_spec.rb
 spec/models/inbox_message_edit_history_entry_spec.rb
 spec/models/inbox_webhook_account_spec.rb
+spec/models/inbox_webhook_conversation_detail_spec.rb
 spec/models/inbox_webhook_conversation_spec.rb
 spec/models/inbox_webhook_message_attachments_inner_spec.rb
 spec/models/inbox_webhook_message_sender_instagram_profile_spec.rb
@@ -5880,7 +5878,6 @@ spec/models/webhook_payload_comment_post_spec.rb
 spec/models/webhook_payload_comment_spec.rb
 spec/models/webhook_payload_conversation_control_changed_control_spec.rb
 spec/models/webhook_payload_conversation_control_changed_spec.rb
-spec/models/webhook_payload_conversation_started_conversation_spec.rb
 spec/models/webhook_payload_conversation_started_spec.rb
 spec/models/webhook_payload_external_post_spec.rb
 spec/models/webhook_payload_lead_account_spec.rb

@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Stable webhook event ID |  |
 | **event** | **String** |  |  |
-| **conversation** | [**WebhookPayloadConversationStartedConversation**](WebhookPayloadConversationStartedConversation.md) |  |  |
+| **conversation** | [**InboxWebhookConversationDetail**](InboxWebhookConversationDetail.md) |  |  |
 | **account** | [**InboxWebhookAccount**](InboxWebhookAccount.md) |  |  |
 | **control** | [**WebhookPayloadConversationControlChangedControl**](WebhookPayloadConversationControlChangedControl.md) |  |  |
 | **changed_at** | **Time** |  |  |

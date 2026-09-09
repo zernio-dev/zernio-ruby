@@ -1,4 +1,4 @@
-# Zernio::WebhookPayloadConversationStartedConversation
+# Zernio::InboxWebhookConversationDetail
 
 ## Properties
 
@@ -19,7 +19,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::WebhookPayloadConversationStartedConversation.new(
+instance = Zernio::InboxWebhookConversationDetail.new(
   id: null,
   platform: null,
   platform_conversation_id: null,

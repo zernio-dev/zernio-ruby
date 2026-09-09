@@ -80,7 +80,7 @@ module Zernio
       {
         :'id' => :'String',
         :'event' => :'String',
-        :'conversation' => :'WebhookPayloadConversationStartedConversation',
+        :'conversation' => :'InboxWebhookConversationDetail',
         :'account' => :'InboxWebhookAccount',
         :'started_at' => :'Time',
         :'timestamp' => :'Time'
