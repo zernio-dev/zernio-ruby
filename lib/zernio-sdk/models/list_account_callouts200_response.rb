@@ -19,10 +19,10 @@ module Zernio
 
     attr_accessor :callouts
 
-    # When this list was fetched from Google. Null when it was never served from cache.
+    # Time of the cached Google read. Null when no cache was used.
     attr_accessor :cached_at
 
-    # True when Google's daily API quota was exhausted and this is the last successful fetch, not a live read.
+    # True when exhausted quota required returning the last successful read.
     attr_accessor :stale
 
     # Attribute mapping from ruby-style variable name to JSON key.

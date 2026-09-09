@@ -19,8 +19,8 @@ module Zernio
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Add account-level callout extensions
-    # Creates one asset plus one `customerAsset` link (field type CALLOUT) per callout text, in a single mutate. Google only; every other platform returns 501.
+    # Add account callouts
+    # Creates assets and customer_asset links for this Google customer. Links apply at account level.
     # @param add_account_callouts_request [AddAccountCalloutsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AddAccountCallouts201Response]
@@ -29,8 +29,8 @@ module Zernio
       data
     end
 
-    # Add account-level callout extensions
-    # Creates one asset plus one &#x60;customerAsset&#x60; link (field type CALLOUT) per callout text, in a single mutate. Google only; every other platform returns 501.
+    # Add account callouts
+    # Creates assets and customer_asset links for this Google customer. Links apply at account level.
     # @param add_account_callouts_request [AddAccountCalloutsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AddAccountCallouts201Response, Integer, Hash)>] AddAccountCallouts201Response data, response status code and response headers
@@ -83,6 +83,142 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#add_account_callouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Add account sitelinks
+    # Creates assets and customer_asset links for this Google customer. Links apply at account level.
+    # @param add_account_sitelinks_request [AddAccountSitelinksRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AddAccountSitelinks201Response]
+    def add_account_sitelinks(add_account_sitelinks_request, opts = {})
+      data, _status_code, _headers = add_account_sitelinks_with_http_info(add_account_sitelinks_request, opts)
+      data
+    end
+
+    # Add account sitelinks
+    # Creates assets and customer_asset links for this Google customer. Links apply at account level.
+    # @param add_account_sitelinks_request [AddAccountSitelinksRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AddAccountSitelinks201Response, Integer, Hash)>] AddAccountSitelinks201Response data, response status code and response headers
+    def add_account_sitelinks_with_http_info(add_account_sitelinks_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.add_account_sitelinks ...'
+      end
+      # verify the required parameter 'add_account_sitelinks_request' is set
+      if @api_client.config.client_side_validation && add_account_sitelinks_request.nil?
+        fail ArgumentError, "Missing the required parameter 'add_account_sitelinks_request' when calling AdAccountsApi.add_account_sitelinks"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/sitelinks'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(add_account_sitelinks_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AddAccountSitelinks201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.add_account_sitelinks",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#add_account_sitelinks\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Add account snippets
+    # Creates assets and customer_asset links for this Google customer. Links apply at account level.
+    # @param add_account_structured_snippets_request [AddAccountStructuredSnippetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AddAccountStructuredSnippets201Response]
+    def add_account_structured_snippets(add_account_structured_snippets_request, opts = {})
+      data, _status_code, _headers = add_account_structured_snippets_with_http_info(add_account_structured_snippets_request, opts)
+      data
+    end
+
+    # Add account snippets
+    # Creates assets and customer_asset links for this Google customer. Links apply at account level.
+    # @param add_account_structured_snippets_request [AddAccountStructuredSnippetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AddAccountStructuredSnippets201Response, Integer, Hash)>] AddAccountStructuredSnippets201Response data, response status code and response headers
+    def add_account_structured_snippets_with_http_info(add_account_structured_snippets_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.add_account_structured_snippets ...'
+      end
+      # verify the required parameter 'add_account_structured_snippets_request' is set
+      if @api_client.config.client_side_validation && add_account_structured_snippets_request.nil?
+        fail ArgumentError, "Missing the required parameter 'add_account_structured_snippets_request' when calling AdAccountsApi.add_account_structured_snippets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/structured-snippets'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(add_account_structured_snippets_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AddAccountStructuredSnippets201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.add_account_structured_snippets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#add_account_structured_snippets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1351,22 +1487,22 @@ module Zernio
       return data, status_code, headers
     end
 
-    # List account-level callout extensions
-    # Google Ads compliance row C.75: callout assets linked at the CUSTOMER level via `customer_asset` (not a campaign or ad group), so they serve fleet-wide across the account. Google only; every other platform returns 501. Cached for the quota window (10 minutes fresh, up to 7 days last-good), and gated by the shared Google Ads operations budget on a cache miss. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
-    # @param account_id [String] Google ads SocialAccount id.
+    # List account callouts
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included. Preserves Google RMF C.75 account-level callouts.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+    # @option opts [String] :customer_id 
     # @return [ListAccountCallouts200Response]
     def list_account_callouts(account_id, opts = {})
       data, _status_code, _headers = list_account_callouts_with_http_info(account_id, opts)
       data
     end
 
-    # List account-level callout extensions
-    # Google Ads compliance row C.75: callout assets linked at the CUSTOMER level via &#x60;customer_asset&#x60; (not a campaign or ad group), so they serve fleet-wide across the account. Google only; every other platform returns 501. Cached for the quota window (10 minutes fresh, up to 7 days last-good), and gated by the shared Google Ads operations budget on a cache miss. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
-    # @param account_id [String] Google ads SocialAccount id.
+    # List account callouts
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included. Preserves Google RMF C.75 account-level callouts.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+    # @option opts [String] :customer_id 
     # @return [Array<(ListAccountCallouts200Response, Integer, Hash)>] ListAccountCallouts200Response data, response status code and response headers
     def list_account_callouts_with_http_info(account_id, opts = {})
       if @api_client.config.debugging
@@ -1376,6 +1512,16 @@ module Zernio
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_account_callouts"
       end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdAccountsApi.list_account_callouts, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_account_callouts, must conform to the pattern #{pattern}."
+      end
+
       # resource path
       local_var_path = '/v1/ads/accounts/callouts'
 
@@ -1414,6 +1560,160 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#list_account_callouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List account sitelinks
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @return [ListAccountSitelinks200Response]
+    def list_account_sitelinks(account_id, opts = {})
+      data, _status_code, _headers = list_account_sitelinks_with_http_info(account_id, opts)
+      data
+    end
+
+    # List account sitelinks
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @return [Array<(ListAccountSitelinks200Response, Integer, Hash)>] ListAccountSitelinks200Response data, response status code and response headers
+    def list_account_sitelinks_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.list_account_sitelinks ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_account_sitelinks"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdAccountsApi.list_account_sitelinks, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_account_sitelinks, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/accounts/sitelinks'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAccountSitelinks200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.list_account_sitelinks",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#list_account_sitelinks\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List account snippets
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @return [ListAccountStructuredSnippets200Response]
+    def list_account_structured_snippets(account_id, opts = {})
+      data, _status_code, _headers = list_account_structured_snippets_with_http_info(account_id, opts)
+      data
+    end
+
+    # List account snippets
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @return [Array<(ListAccountStructuredSnippets200Response, Integer, Hash)>] ListAccountStructuredSnippets200Response data, response status code and response headers
+    def list_account_structured_snippets_with_http_info(account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.list_account_structured_snippets ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdAccountsApi.list_account_structured_snippets"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdAccountsApi.list_account_structured_snippets, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdAccountsApi.list_account_structured_snippets, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/accounts/structured-snippets'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAccountStructuredSnippets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.list_account_structured_snippets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#list_account_structured_snippets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2286,8 +2586,8 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Remove an account-level callout extension
-    # Removes the `customerAsset` link (`customers/{cid}/customerAssets/{assetId}~CALLOUT`). Google only; every other platform returns 501.
+    # Remove account callout
+    # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
     # @param remove_account_callout_request [RemoveAccountCalloutRequest] 
     # @param [Hash] opts the optional parameters
     # @return [RemoveAccountCallout200Response]
@@ -2296,8 +2596,8 @@ module Zernio
       data
     end
 
-    # Remove an account-level callout extension
-    # Removes the &#x60;customerAsset&#x60; link (&#x60;customers/{cid}/customerAssets/{assetId}~CALLOUT&#x60;). Google only; every other platform returns 501.
+    # Remove account callout
+    # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
     # @param remove_account_callout_request [RemoveAccountCalloutRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(RemoveAccountCallout200Response, Integer, Hash)>] RemoveAccountCallout200Response data, response status code and response headers
@@ -2350,6 +2650,142 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#remove_account_callout\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Remove account sitelink
+    # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+    # @param remove_account_callout_request [RemoveAccountCalloutRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [RemoveAccountCallout200Response]
+    def remove_account_sitelink(remove_account_callout_request, opts = {})
+      data, _status_code, _headers = remove_account_sitelink_with_http_info(remove_account_callout_request, opts)
+      data
+    end
+
+    # Remove account sitelink
+    # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+    # @param remove_account_callout_request [RemoveAccountCalloutRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RemoveAccountCallout200Response, Integer, Hash)>] RemoveAccountCallout200Response data, response status code and response headers
+    def remove_account_sitelink_with_http_info(remove_account_callout_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.remove_account_sitelink ...'
+      end
+      # verify the required parameter 'remove_account_callout_request' is set
+      if @api_client.config.client_side_validation && remove_account_callout_request.nil?
+        fail ArgumentError, "Missing the required parameter 'remove_account_callout_request' when calling AdAccountsApi.remove_account_sitelink"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/sitelinks'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(remove_account_callout_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveAccountCallout200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.remove_account_sitelink",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#remove_account_sitelink\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Remove account snippet
+    # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+    # @param remove_account_callout_request [RemoveAccountCalloutRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [RemoveAccountCallout200Response]
+    def remove_account_structured_snippet(remove_account_callout_request, opts = {})
+      data, _status_code, _headers = remove_account_structured_snippet_with_http_info(remove_account_callout_request, opts)
+      data
+    end
+
+    # Remove account snippet
+    # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+    # @param remove_account_callout_request [RemoveAccountCalloutRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RemoveAccountCallout200Response, Integer, Hash)>] RemoveAccountCallout200Response data, response status code and response headers
+    def remove_account_structured_snippet_with_http_info(remove_account_callout_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.remove_account_structured_snippet ...'
+      end
+      # verify the required parameter 'remove_account_callout_request' is set
+      if @api_client.config.client_side_validation && remove_account_callout_request.nil?
+        fail ArgumentError, "Missing the required parameter 'remove_account_callout_request' when calling AdAccountsApi.remove_account_structured_snippet"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/structured-snippets'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(remove_account_callout_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveAccountCallout200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.remove_account_structured_snippet",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#remove_account_structured_snippet\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2520,6 +2956,210 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdAccountsApi#reply_to_ad_comment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update account callouts
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param update_account_callouts_request [UpdateAccountCalloutsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAccountCallouts200Response]
+    def update_account_callouts(update_account_callouts_request, opts = {})
+      data, _status_code, _headers = update_account_callouts_with_http_info(update_account_callouts_request, opts)
+      data
+    end
+
+    # Update account callouts
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param update_account_callouts_request [UpdateAccountCalloutsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAccountCallouts200Response, Integer, Hash)>] UpdateAccountCallouts200Response data, response status code and response headers
+    def update_account_callouts_with_http_info(update_account_callouts_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.update_account_callouts ...'
+      end
+      # verify the required parameter 'update_account_callouts_request' is set
+      if @api_client.config.client_side_validation && update_account_callouts_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_account_callouts_request' when calling AdAccountsApi.update_account_callouts"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/callouts'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_account_callouts_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAccountCallouts200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.update_account_callouts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#update_account_callouts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update account sitelinks
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param update_account_sitelinks_request [UpdateAccountSitelinksRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAccountCallouts200Response]
+    def update_account_sitelinks(update_account_sitelinks_request, opts = {})
+      data, _status_code, _headers = update_account_sitelinks_with_http_info(update_account_sitelinks_request, opts)
+      data
+    end
+
+    # Update account sitelinks
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param update_account_sitelinks_request [UpdateAccountSitelinksRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAccountCallouts200Response, Integer, Hash)>] UpdateAccountCallouts200Response data, response status code and response headers
+    def update_account_sitelinks_with_http_info(update_account_sitelinks_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.update_account_sitelinks ...'
+      end
+      # verify the required parameter 'update_account_sitelinks_request' is set
+      if @api_client.config.client_side_validation && update_account_sitelinks_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_account_sitelinks_request' when calling AdAccountsApi.update_account_sitelinks"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/sitelinks'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_account_sitelinks_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAccountCallouts200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.update_account_sitelinks",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#update_account_sitelinks\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update account snippets
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param update_account_structured_snippets_request [UpdateAccountStructuredSnippetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateAccountCallouts200Response]
+    def update_account_structured_snippets(update_account_structured_snippets_request, opts = {})
+      data, _status_code, _headers = update_account_structured_snippets_with_http_info(update_account_structured_snippets_request, opts)
+      data
+    end
+
+    # Update account snippets
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param update_account_structured_snippets_request [UpdateAccountStructuredSnippetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateAccountCallouts200Response, Integer, Hash)>] UpdateAccountCallouts200Response data, response status code and response headers
+    def update_account_structured_snippets_with_http_info(update_account_structured_snippets_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdAccountsApi.update_account_structured_snippets ...'
+      end
+      # verify the required parameter 'update_account_structured_snippets_request' is set
+      if @api_client.config.client_side_validation && update_account_structured_snippets_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_account_structured_snippets_request' when calling AdAccountsApi.update_account_structured_snippets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/accounts/structured-snippets'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_account_structured_snippets_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateAccountCallouts200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdAccountsApi.update_account_structured_snippets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdAccountsApi#update_account_structured_snippets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

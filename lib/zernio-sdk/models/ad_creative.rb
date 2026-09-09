@@ -16,6 +16,15 @@ require 'time'
 module Zernio
   # Platform-specific creative data. Fields vary by platform.
   class AdCreative < ApiModelBase
+    # Google RSA only. Replaces the complete headline list. No padding or truncation on update.
+    attr_accessor :headlines
+
+    # Google RSA only. Replaces the complete description list. No padding or truncation on update.
+    attr_accessor :descriptions
+
+    # Google RSA only. Replaces final URLs. Omitted lists stay unchanged.
+    attr_accessor :final_urls
+
     # Primary thumbnail/image URL
     attr_accessor :thumbnail_url
 
@@ -112,6 +121,9 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'headlines' => :'headlines',
+        :'descriptions' => :'descriptions',
+        :'final_urls' => :'finalUrls',
         :'thumbnail_url' => :'thumbnailUrl',
         :'image_url' => :'imageUrl',
         :'video_id' => :'videoId',
@@ -153,6 +165,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'headlines' => :'Array<GoogleRsaHeadline>',
+        :'descriptions' => :'Array<GoogleRsaDescription>',
+        :'final_urls' => :'Array<String>',
         :'thumbnail_url' => :'String',
         :'image_url' => :'String',
         :'video_id' => :'String',
@@ -213,6 +228,24 @@ module Zernio
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'headlines')
+        if (value = attributes[:'headlines']).is_a?(Array)
+          self.headlines = value
+        end
+      end
+
+      if attributes.key?(:'descriptions')
+        if (value = attributes[:'descriptions']).is_a?(Array)
+          self.descriptions = value
+        end
+      end
+
+      if attributes.key?(:'final_urls')
+        if (value = attributes[:'final_urls']).is_a?(Array)
+          self.final_urls = value
+        end
+      end
 
       if attributes.key?(:'thumbnail_url')
         self.thumbnail_url = attributes[:'thumbnail_url']
@@ -324,6 +357,26 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@headlines.nil? && @headlines.length > 15
+        invalid_properties.push('invalid value for "headlines", number of items must be less than or equal to 15.')
+      end
+
+      if !@headlines.nil? && @headlines.length < 3
+        invalid_properties.push('invalid value for "headlines", number of items must be greater than or equal to 3.')
+      end
+
+      if !@descriptions.nil? && @descriptions.length > 4
+        invalid_properties.push('invalid value for "descriptions", number of items must be less than or equal to 4.')
+      end
+
+      if !@descriptions.nil? && @descriptions.length < 2
+        invalid_properties.push('invalid value for "descriptions", number of items must be greater than or equal to 2.')
+      end
+
+      if !@final_urls.nil? && @final_urls.length < 1
+        invalid_properties.push('invalid value for "final_urls", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -331,7 +384,62 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@headlines.nil? && @headlines.length > 15
+      return false if !@headlines.nil? && @headlines.length < 3
+      return false if !@descriptions.nil? && @descriptions.length > 4
+      return false if !@descriptions.nil? && @descriptions.length < 2
+      return false if !@final_urls.nil? && @final_urls.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] headlines Value to be assigned
+    def headlines=(headlines)
+      if headlines.nil?
+        fail ArgumentError, 'headlines cannot be nil'
+      end
+
+      if headlines.length > 15
+        fail ArgumentError, 'invalid value for "headlines", number of items must be less than or equal to 15.'
+      end
+
+      if headlines.length < 3
+        fail ArgumentError, 'invalid value for "headlines", number of items must be greater than or equal to 3.'
+      end
+
+      @headlines = headlines
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] descriptions Value to be assigned
+    def descriptions=(descriptions)
+      if descriptions.nil?
+        fail ArgumentError, 'descriptions cannot be nil'
+      end
+
+      if descriptions.length > 4
+        fail ArgumentError, 'invalid value for "descriptions", number of items must be less than or equal to 4.'
+      end
+
+      if descriptions.length < 2
+        fail ArgumentError, 'invalid value for "descriptions", number of items must be greater than or equal to 2.'
+      end
+
+      @descriptions = descriptions
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] final_urls Value to be assigned
+    def final_urls=(final_urls)
+      if final_urls.nil?
+        fail ArgumentError, 'final_urls cannot be nil'
+      end
+
+      if final_urls.length < 1
+        fail ArgumentError, 'invalid value for "final_urls", number of items must be greater than or equal to 1.'
+      end
+
+      @final_urls = final_urls
     end
 
     # Checks equality by comparing each attribute.
@@ -339,6 +447,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          headlines == o.headlines &&
+          descriptions == o.descriptions &&
+          final_urls == o.final_urls &&
           thumbnail_url == o.thumbnail_url &&
           image_url == o.image_url &&
           video_id == o.video_id &&
@@ -375,7 +486,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thumbnail_url, image_url, video_id, video_url, promotion, promotion_status, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, whatsapp_phone_number, pinterest_image_url, pinterest_title, pinterest_description].hash
+      [headlines, descriptions, final_urls, thumbnail_url, image_url, video_id, video_url, promotion, promotion_status, creative_id, object_type, object_story_id, effective_object_story_id, page_id, effective_instagram_media_id, instagram_user_id, instagram_permalink_url, media_urls, is_serving, serving_hold_reasons, body, google_headline, google_description, link_url, whatsapp_phone_number, pinterest_image_url, pinterest_title, pinterest_description].hash
     end
 
     # Builds the object from hash

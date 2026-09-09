@@ -82,8 +82,8 @@
 | **keywords** | [**Array&lt;KeywordEntry&gt;**](KeywordEntry.md) | Google Search only. Keywords on the new ad group; entries are strings (BROAD) or { text, matchType }. Editable later via PUT /v1/ads/{adId} targeting.keywords. | [optional] |
 | **negative_keywords** | [**Array&lt;KeywordEntry&gt;**](KeywordEntry.md) | Google Search only; other platforms return 400. Ad-group-level negative keywords on the new ad group. Editable later via PUT /v1/ads/{adId} targeting.negativeKeywords. | [optional] |
 | **campaign_negative_keywords** | [**Array&lt;KeywordEntry&gt;**](KeywordEntry.md) | Google Search only; other platforms return 400. Campaign-level negative keywords (campaign_criterion.negative), created alongside the ad group. Editable later via PUT /v1/ads/campaigns/{campaignId}/negative-keywords. | [optional] |
-| **additional_headlines** | **Array&lt;String&gt;** | Google Search RSA only. Extra headlines. | [optional] |
-| **additional_descriptions** | **Array&lt;String&gt;** | Google Search RSA only. Extra descriptions. | [optional] |
+| **additional_headlines** | [**Array&lt;CreateStandaloneAdRequestAdditionalHeadlinesInner&gt;**](CreateStandaloneAdRequestAdditionalHeadlinesInner.md) | Google Search RSA only. Extra text assets as strings or objects with text and optional pinnedField. Existing string input remains supported. The effective create lists, including primary text and deduplication, must contain 3-15 headlines and 2-4 descriptions; excess entries return 400. | [optional] |
+| **additional_descriptions** | [**Array&lt;CreateStandaloneAdRequestAdditionalDescriptionsInner&gt;**](CreateStandaloneAdRequestAdditionalDescriptionsInner.md) | Google Search RSA only. Extra text assets as strings or objects with text and optional pinnedField. Existing string input remains supported. The effective create lists, including primary text and deduplication, must contain 3-15 headlines and 2-4 descriptions; excess entries return 400. | [optional] |
 | **sitelinks** | [**Array&lt;CreateStandaloneAdRequestSitelinksInner&gt;**](CreateStandaloneAdRequestSitelinksInner.md) | Google Search only. Sitelink assets to create and attach at the campaign level. Each entry becomes an Asset (with sitelink_asset + Asset.final_urls) plus a CampaignAsset link (field_type SITELINK). Approval is async: Google reviews assets after creation; poll asset.policy_summary later to read the verdict. Google requires at least two sitelinks to surface them on an ad; four or more is Google&#39;s own recommendation for maximum visibility. The response&#39;s creative.sitelinks[] echoes each input plus its Google resourceName.  | [optional] |
 | **callouts** | **Array&lt;String&gt;** | Google Search only. Short callout texts (max 25 chars each) that appear as non-clickable annotations under the ad, e.g. \&quot;Free shipping\&quot;, \&quot;24/7 support\&quot;. Each becomes one Asset (&#x60;callout_asset&#x60;) plus a CampaignAsset link with field_type CALLOUT. Response&#39;s creative.callouts[] echoes each input plus its Google resourceName.  | [optional] |
 | **structured_snippets** | [**Array&lt;CreateStandaloneAdRequestStructuredSnippetsInner&gt;**](CreateStandaloneAdRequestStructuredSnippetsInner.md) | Google Search only. Structured snippets: one header from Google&#39;s predefined list plus 3-10 values (max 25 chars each). Each becomes one Asset (&#x60;structured_snippet_asset&#x60;) plus a CampaignAsset link with field_type STRUCTURED_SNIPPET.  | [optional] |
@@ -192,8 +192,8 @@ instance = Zernio::CreateStandaloneAdRequest.new(
   keywords: null,
   negative_keywords: null,
   campaign_negative_keywords: null,
-  additional_headlines: null,
-  additional_descriptions: null,
+  additional_headlines: [&quot;Schedule Your Posts&quot;,{&quot;text&quot;:&quot;Build With Zernio&quot;,&quot;pinnedField&quot;:&quot;HEADLINE_2&quot;}],
+  additional_descriptions: [&quot;Build social publishing into your application.&quot;,{&quot;text&quot;:&quot;Connect social accounts with one API.&quot;,&quot;pinnedField&quot;:&quot;DESCRIPTION_2&quot;}],
   sitelinks: null,
   callouts: null,
   structured_snippets: null,

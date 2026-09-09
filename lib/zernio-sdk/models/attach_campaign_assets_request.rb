@@ -14,14 +14,14 @@ require 'date'
 require 'time'
 
 module Zernio
+  # Provide at least one of sitelinks, callouts or structuredSnippets. Sitelink description1 and description2 must be supplied together.
   class AttachCampaignAssetsRequest < ApiModelBase
-    # Zernio Google Ads SocialAccount id. Resolves the customer id + refresh token.
+    # Zernio Google Ads connection id.
     attr_accessor :account_id
 
-    # Numeric Google Ads customer id. Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one.
+    # Google customer id without dashes. Required when the connection has multiple customers.
     attr_accessor :customer_id
 
-    # See POST /v1/ads/create sitelinks, same shape.
     attr_accessor :sitelinks
 
     attr_accessor :callouts
@@ -54,9 +54,9 @@ module Zernio
       {
         :'account_id' => :'String',
         :'customer_id' => :'String',
-        :'sitelinks' => :'Array<AttachCampaignAssetsRequestSitelinksInner>',
+        :'sitelinks' => :'Array<GoogleSitelink>',
         :'callouts' => :'Array<String>',
-        :'structured_snippets' => :'Array<AttachCampaignAssetsRequestStructuredSnippetsInner>'
+        :'structured_snippets' => :'Array<GoogleStructuredSnippet>'
       }
     end
 
@@ -120,6 +120,16 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @account_id !~ pattern
+        invalid_properties.push("invalid value for \"account_id\", must conform to the pattern #{pattern}.")
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if !@customer_id.nil? && @customer_id !~ pattern
+        invalid_properties.push("invalid value for \"customer_id\", must conform to the pattern #{pattern}.")
+      end
+
       if !@sitelinks.nil? && @sitelinks.length > 20
         invalid_properties.push('invalid value for "sitelinks", number of items must be less than or equal to 20.')
       end
@@ -152,6 +162,8 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
+      return false if @account_id !~ Regexp.new(/^[a-fA-F0-9]{24}$/)
+      return false if !@customer_id.nil? && @customer_id !~ Regexp.new(/^\d+$/)
       return false if !@sitelinks.nil? && @sitelinks.length > 20
       return false if !@sitelinks.nil? && @sitelinks.length < 2
       return false if !@callouts.nil? && @callouts.length > 20
@@ -168,7 +180,27 @@ module Zernio
         fail ArgumentError, 'account_id cannot be nil'
       end
 
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if account_id !~ pattern
+        fail ArgumentError, "invalid value for \"account_id\", must conform to the pattern #{pattern}."
+      end
+
       @account_id = account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_id Value to be assigned
+    def customer_id=(customer_id)
+      if customer_id.nil?
+        fail ArgumentError, 'customer_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if customer_id !~ pattern
+        fail ArgumentError, "invalid value for \"customer_id\", must conform to the pattern #{pattern}."
+      end
+
+      @customer_id = customer_id
     end
 
     # Custom attribute writer method with validation

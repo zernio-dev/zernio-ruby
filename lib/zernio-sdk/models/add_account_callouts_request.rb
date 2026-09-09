@@ -15,13 +15,12 @@ require 'time'
 
 module Zernio
   class AddAccountCalloutsRequest < ApiModelBase
-    # Zernio SocialAccount id owning the Google Ads connection.
+    # Zernio Google Ads connection id.
     attr_accessor :account_id
 
-    # Numeric Google Ads customer id. Only required when the connection has more than one.
+    # Google customer id without dashes. Required when the connection has multiple customers.
     attr_accessor :customer_id
 
-    # Callout text, 1-25 characters each; up to 20 per request (Google's CalloutAsset limits).
     attr_accessor :callouts
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -102,6 +101,16 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @account_id !~ pattern
+        invalid_properties.push("invalid value for \"account_id\", must conform to the pattern #{pattern}.")
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if !@customer_id.nil? && @customer_id !~ pattern
+        invalid_properties.push("invalid value for \"customer_id\", must conform to the pattern #{pattern}.")
+      end
+
       if @callouts.nil?
         invalid_properties.push('invalid value for "callouts", callouts cannot be nil.')
       end
@@ -122,6 +131,8 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
+      return false if @account_id !~ Regexp.new(/^[a-fA-F0-9]{24}$/)
+      return false if !@customer_id.nil? && @customer_id !~ Regexp.new(/^\d+$/)
       return false if @callouts.nil?
       return false if @callouts.length > 20
       return false if @callouts.length < 1
@@ -135,7 +146,27 @@ module Zernio
         fail ArgumentError, 'account_id cannot be nil'
       end
 
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if account_id !~ pattern
+        fail ArgumentError, "invalid value for \"account_id\", must conform to the pattern #{pattern}."
+      end
+
       @account_id = account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_id Value to be assigned
+    def customer_id=(customer_id)
+      if customer_id.nil?
+        fail ArgumentError, 'customer_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if customer_id !~ pattern
+        fail ArgumentError, "invalid value for \"customer_id\", must conform to the pattern #{pattern}."
+      end
+
+      @customer_id = customer_id
     end
 
     # Custom attribute writer method with validation

@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Zernio SocialAccount id owning the Google Ads connection. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id. Only required when the connection has more than one. | [optional] |
-| **asset_id** | **String** | Numeric asset id from GET /v1/ads/accounts/callouts. |  |
+| **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **customer_id** | **String** | Google customer id without dashes. Required when the connection has multiple customers. | [optional] |
+| **asset_id** | **String** |  |  |
 
 ## Example
 

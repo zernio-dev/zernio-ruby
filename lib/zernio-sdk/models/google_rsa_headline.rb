@@ -14,22 +14,39 @@ require 'date'
 require 'time'
 
 module Zernio
-  class AttachCampaignAssetsRequestSitelinksInner < ApiModelBase
+  class GoogleRsaHeadline < ApiModelBase
     attr_accessor :text
 
-    attr_accessor :link_url
+    # Optional fixed headline position. Omit to leave the asset unpinned.
+    attr_accessor :pinned_field
 
-    attr_accessor :description1
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    attr_accessor :description2
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'text' => :'text',
-        :'link_url' => :'linkUrl',
-        :'description1' => :'description1',
-        :'description2' => :'description2'
+        :'pinned_field' => :'pinnedField'
       }
     end
 
@@ -47,9 +64,7 @@ module Zernio
     def self.openapi_types
       {
         :'text' => :'String',
-        :'link_url' => :'String',
-        :'description1' => :'String',
-        :'description2' => :'String'
+        :'pinned_field' => :'String'
       }
     end
 
@@ -63,14 +78,14 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::AttachCampaignAssetsRequestSitelinksInner` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::GoogleRsaHeadline` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::AttachCampaignAssetsRequestSitelinksInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::GoogleRsaHeadline`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -81,18 +96,8 @@ module Zernio
         self.text = nil
       end
 
-      if attributes.key?(:'link_url')
-        self.link_url = attributes[:'link_url']
-      else
-        self.link_url = nil
-      end
-
-      if attributes.key?(:'description1')
-        self.description1 = attributes[:'description1']
-      end
-
-      if attributes.key?(:'description2')
-        self.description2 = attributes[:'description2']
+      if attributes.key?(:'pinned_field')
+        self.pinned_field = attributes[:'pinned_field']
       end
     end
 
@@ -105,32 +110,12 @@ module Zernio
         invalid_properties.push('invalid value for "text", text cannot be nil.')
       end
 
-      if @text.to_s.length > 25
-        invalid_properties.push('invalid value for "text", the character length must be smaller than or equal to 25.')
+      if @text.to_s.length > 30
+        invalid_properties.push('invalid value for "text", the character length must be smaller than or equal to 30.')
       end
 
       if @text.to_s.length < 1
         invalid_properties.push('invalid value for "text", the character length must be greater than or equal to 1.')
-      end
-
-      if @link_url.nil?
-        invalid_properties.push('invalid value for "link_url", link_url cannot be nil.')
-      end
-
-      if !@description1.nil? && @description1.to_s.length > 35
-        invalid_properties.push('invalid value for "description1", the character length must be smaller than or equal to 35.')
-      end
-
-      if !@description1.nil? && @description1.to_s.length < 1
-        invalid_properties.push('invalid value for "description1", the character length must be greater than or equal to 1.')
-      end
-
-      if !@description2.nil? && @description2.to_s.length > 35
-        invalid_properties.push('invalid value for "description2", the character length must be smaller than or equal to 35.')
-      end
-
-      if !@description2.nil? && @description2.to_s.length < 1
-        invalid_properties.push('invalid value for "description2", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -141,13 +126,10 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @text.nil?
-      return false if @text.to_s.length > 25
+      return false if @text.to_s.length > 30
       return false if @text.to_s.length < 1
-      return false if @link_url.nil?
-      return false if !@description1.nil? && @description1.to_s.length > 35
-      return false if !@description1.nil? && @description1.to_s.length < 1
-      return false if !@description2.nil? && @description2.to_s.length > 35
-      return false if !@description2.nil? && @description2.to_s.length < 1
+      pinned_field_validator = EnumAttributeValidator.new('String', ["HEADLINE_1", "HEADLINE_2", "HEADLINE_3"])
+      return false unless pinned_field_validator.valid?(@pinned_field)
       true
     end
 
@@ -158,8 +140,8 @@ module Zernio
         fail ArgumentError, 'text cannot be nil'
       end
 
-      if text.to_s.length > 25
-        fail ArgumentError, 'invalid value for "text", the character length must be smaller than or equal to 25.'
+      if text.to_s.length > 30
+        fail ArgumentError, 'invalid value for "text", the character length must be smaller than or equal to 30.'
       end
 
       if text.to_s.length < 1
@@ -169,50 +151,14 @@ module Zernio
       @text = text
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] link_url Value to be assigned
-    def link_url=(link_url)
-      if link_url.nil?
-        fail ArgumentError, 'link_url cannot be nil'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] pinned_field Object to be assigned
+    def pinned_field=(pinned_field)
+      validator = EnumAttributeValidator.new('String', ["HEADLINE_1", "HEADLINE_2", "HEADLINE_3"])
+      unless validator.valid?(pinned_field)
+        fail ArgumentError, "invalid value for \"pinned_field\", must be one of #{validator.allowable_values}."
       end
-
-      @link_url = link_url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description1 Value to be assigned
-    def description1=(description1)
-      if description1.nil?
-        fail ArgumentError, 'description1 cannot be nil'
-      end
-
-      if description1.to_s.length > 35
-        fail ArgumentError, 'invalid value for "description1", the character length must be smaller than or equal to 35.'
-      end
-
-      if description1.to_s.length < 1
-        fail ArgumentError, 'invalid value for "description1", the character length must be greater than or equal to 1.'
-      end
-
-      @description1 = description1
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] description2 Value to be assigned
-    def description2=(description2)
-      if description2.nil?
-        fail ArgumentError, 'description2 cannot be nil'
-      end
-
-      if description2.to_s.length > 35
-        fail ArgumentError, 'invalid value for "description2", the character length must be smaller than or equal to 35.'
-      end
-
-      if description2.to_s.length < 1
-        fail ArgumentError, 'invalid value for "description2", the character length must be greater than or equal to 1.'
-      end
-
-      @description2 = description2
+      @pinned_field = pinned_field
     end
 
     # Checks equality by comparing each attribute.
@@ -221,9 +167,7 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           text == o.text &&
-          link_url == o.link_url &&
-          description1 == o.description1 &&
-          description2 == o.description2
+          pinned_field == o.pinned_field
     end
 
     # @see the `==` method
@@ -235,7 +179,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [text, link_url, description1, description2].hash
+      [text, pinned_field].hash
     end
 
     # Builds the object from hash

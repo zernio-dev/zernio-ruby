@@ -237,10 +237,10 @@ module Zernio
     # Google Search only; other platforms return 400. Campaign-level negative keywords (campaign_criterion.negative), created alongside the ad group. Editable later via PUT /v1/ads/campaigns/{campaignId}/negative-keywords.
     attr_accessor :campaign_negative_keywords
 
-    # Google Search RSA only. Extra headlines.
+    # Google Search RSA only. Extra text assets as strings or objects with text and optional pinnedField. Existing string input remains supported. The effective create lists, including primary text and deduplication, must contain 3-15 headlines and 2-4 descriptions; excess entries return 400.
     attr_accessor :additional_headlines
 
-    # Google Search RSA only. Extra descriptions.
+    # Google Search RSA only. Extra text assets as strings or objects with text and optional pinnedField. Existing string input remains supported. The effective create lists, including primary text and deduplication, must contain 3-15 headlines and 2-4 descriptions; excess entries return 400.
     attr_accessor :additional_descriptions
 
     # Google Search only. Sitelink assets to create and attach at the campaign level. Each entry becomes an Asset (with sitelink_asset + Asset.final_urls) plus a CampaignAsset link (field_type SITELINK). Approval is async: Google reviews assets after creation; poll asset.policy_summary later to read the verdict. Google requires at least two sitelinks to surface them on an ad; four or more is Google's own recommendation for maximum visibility. The response's creative.sitelinks[] echoes each input plus its Google resourceName. 
@@ -531,8 +531,8 @@ module Zernio
         :'keywords' => :'Array<KeywordEntry>',
         :'negative_keywords' => :'Array<KeywordEntry>',
         :'campaign_negative_keywords' => :'Array<KeywordEntry>',
-        :'additional_headlines' => :'Array<String>',
-        :'additional_descriptions' => :'Array<String>',
+        :'additional_headlines' => :'Array<CreateStandaloneAdRequestAdditionalHeadlinesInner>',
+        :'additional_descriptions' => :'Array<CreateStandaloneAdRequestAdditionalDescriptionsInner>',
         :'sitelinks' => :'Array<CreateStandaloneAdRequestSitelinksInner>',
         :'callouts' => :'Array<String>',
         :'structured_snippets' => :'Array<CreateStandaloneAdRequestStructuredSnippetsInner>',

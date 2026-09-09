@@ -5,8 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **asset_id** | **String** |  | [optional] |
+| **status** | **String** |  | [optional] |
 | **text** | **String** |  | [optional] |
-| **status** | **String** | customer_asset.status, e.g. ENABLED, REMOVED, PAUSED. | [optional] |
 
 ## Example
 
@@ -15,8 +15,8 @@ require 'zernio-sdk'
 
 instance = Zernio::ListAccountCallouts200ResponseCalloutsInner.new(
   asset_id: null,
-  text: null,
-  status: null
+  status: null,
+  text: null
 )
 ```
 

@@ -44,10 +44,23 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for attach_ad_group_assets
+  # Attach ad-group assets
+  # Creates and attaches sitelinks, callouts and structured snippets in one Google mutation.
+  # @param ad_set_id Numeric Google platform id.
+  # @param attach_campaign_assets_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AttachAdGroupAssets201Response]
+  describe 'attach_ad_group_assets test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for attach_campaign_assets
-  # Attach extension assets to a Google Search campaign
-  # Attach sitelinks, callouts and/or structured snippets to an already-existing Google Search campaign. These are the same builders POST /v1/ads/create uses, but without rebuilding the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.  Google-only. Other platforms have no equivalent extension surface and return 501.  Approval status is Google-async; poll &#x60;asset.policy_summary&#x60; after review. Assets stay in the account library even if the campaign is later deleted.
-  # @param campaign_id Numeric Google platform campaign id.
+  # Attach campaign assets
+  # Creates and attaches sitelinks, callouts and structured snippets in one Google mutation.
+  # @param campaign_id Numeric Google platform id.
   # @param attach_campaign_assets_request 
   # @param [Hash] opts the optional parameters
   # @return [AttachCampaignAssets201Response]
@@ -214,7 +227,7 @@ describe 'AdCampaignsApi' do
 
   # unit tests for get_ad
   # Get ad details
-  # Returns an ad with its creative, targeting, status, and performance metrics.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal &#x60;_id&#x60; (24-char hex) - Meta&#39;s numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;) - the creative&#39;s &#x60;effective_object_story_id&#x60; (&#x60;{pageId}_{postId}&#x60; shape, Facebook side) - the creative&#39;s &#x60;effective_instagram_media_id&#x60; (Instagram side)  Any of the four resolve to the same ad. Caller doesn&#39;t need a translation step. By default, creative.promotion and creative.creativeFeatures contain stored requested settings, which do not confirm platform application. With &#x60;refreshPromotion&#x3D;true&#x60;, Meta promotion metadata is read live and exposed as &#x60;ad.creative.promotion&#x60; with &#x60;promotionStatus&#x60;. Only &#x60;applied&#x60; confirms an offer; &#x60;not_returned&#x60; means the creative read succeeded without promotion metadata, and &#x60;unavailable&#x60; means it failed. 
+  # Returns an ad with its creative, targeting, status, and performance metrics. Google Search ads include current creative.headlines, creative.descriptions and creative.finalUrls, preserving pinnedField. Top-level cachedAt and stale report cache freshness. Google mutations invalidate this read. RSA enrichment requires a stored advertisingChannelType of SEARCH. Ads with an unknown or other channel return their stored details without a Google read. If RSA enrichment fails, the stored ad is returned with HTTP 200 and without cache metadata.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal &#x60;_id&#x60; (24-char hex) - Meta&#39;s numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;) - the creative&#39;s &#x60;effective_object_story_id&#x60; (&#x60;{pageId}_{postId}&#x60; shape, Facebook side) - the creative&#39;s &#x60;effective_instagram_media_id&#x60; (Instagram side)  Any of the four resolve to the same ad. Caller doesn&#39;t need a translation step. By default, creative.promotion and creative.creativeFeatures contain stored requested settings, which do not confirm platform application. With &#x60;refreshPromotion&#x3D;true&#x60;, Meta promotion metadata is read live and exposed as &#x60;ad.creative.promotion&#x60; with &#x60;promotionStatus&#x60;. Only &#x60;applied&#x60; confirms an offer; &#x60;not_returned&#x60; means the creative read succeeded without promotion metadata, and &#x60;unavailable&#x60; means it failed. 
   # @param ad_id Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. See description for details. 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :refresh_promotion Meta only. Read current promotion metadata from Meta and include promotionStatus. Omit for stored creative settings with no promotion-specific Graph call.
@@ -336,6 +349,20 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for list_ad_group_assets
+  # List ad-group assets
+  # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
+  # @param ad_set_id Numeric Google platform id.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id 
+  # @return [ListAdGroupAssets200Response]
+  describe 'list_ad_group_assets test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_ad_keywords
   # List Search keywords
   # Returns the Google Search keyword criteria (positive and negative) synced from connected Google Ads accounts, one row per ad-group keyword. Refreshed about once a week per Google Ads customer (the keyword sweep rides the ads discovery pass on a slower slot, to stay inside Google&#39;s shared daily API quota), so keywords added on Google can take several days to appear. A customer synced for the first time is populated on the next discovery pass rather than waiting for its weekly slot, and connecting an account or triggering a manual sync refreshes it immediately. Campaign-level negative keywords are not included; only ad-group-level criteria are. 
@@ -414,6 +441,20 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for list_campaign_assets
+  # List campaign assets
+  # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
+  # @param campaign_id Numeric Google platform id.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id 
+  # @return [ListCampaignAssets200Response]
+  describe 'list_campaign_assets test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for list_campaign_negative_keyword_lists
   # List campaign negative lists
   # Returns shared negative keyword lists attached to the campaign, separate from campaign-level negative keywords. Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale&#x3D;true. Customer selection is limited to this connection and its account scope.
@@ -440,6 +481,19 @@ describe 'AdCampaignsApi' do
     end
   end
 
+  # unit tests for remove_ad_group_assets
+  # Remove ad-group assets
+  # Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+  # @param ad_set_id Numeric Google platform id.
+  # @param remove_ad_group_assets_request 
+  # @param [Hash] opts the optional parameters
+  # @return [RemoveCampaignAssets200Response]
+  describe 'remove_ad_group_assets test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
   # unit tests for remove_ad_keyword
   # Remove a Search keyword
   # Removes one keyword criterion (positive or negative) from its ad group (M.140).
@@ -447,6 +501,19 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @return [RemoveAdKeyword200Response]
   describe 'remove_ad_keyword test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for remove_campaign_assets
+  # Remove campaign assets
+  # Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+  # @param campaign_id Numeric Google platform id.
+  # @param remove_campaign_assets_request 
+  # @param [Hash] opts the optional parameters
+  # @return [RemoveCampaignAssets200Response]
+  describe 'remove_campaign_assets test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -480,7 +547,7 @@ describe 'AdCampaignsApi' do
 
   # unit tests for update_ad
   # Update ad
-  # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via &#x60;/v2/adgroup/update/&#x60;), and creative   (via &#x60;/v2/ad/update/&#x60; patch-style: &#x60;headline&#x60; is ignored, &#x60;body&#x60; becomes &#x60;ad_text&#x60;). - **Google**: status, budget, KEYWORD edits via &#x60;targeting.keywords&#x60; /   &#x60;targeting.negativeKeywords&#x60;, and DEVICE bid adjustments via &#x60;targeting.devices&#x60;.   Each list you send becomes the FULL new set of its kind (criteria not in the   list are removed); a kind left out is untouched. Any other &#x60;targeting&#x60; field   returns 400: Google cannot mutate broad targeting post-create without recreating   the campaign. &#x60;creative&#x60; returns 501. - **LinkedIn**: status, budget, targeting (countries or regions, excludedLocations (countries),   the B2B facets, and audience segments; applied to the LinkedIn Campaign via   PARTIAL_UPDATE, and REPLACES the campaign&#39;s entire targetingCriteria, not a merge),   and creative (uploads new media, creates a replacement inline creative on the same   campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   &#x60;targeting&#x60; or &#x60;creative&#x60; returns 501 with code &#x60;unsupported_platform_operation&#x60;.   OpenAI Ads budget is lifetime-only (see &#x60;budget.type&#x60; below).  **Google keyword replacement:** These edits affect the ad&#39;s entire ad group, including sibling ads. Positive (&#x60;targeting.keywords&#x60;) and negative (&#x60;targeting.negativeKeywords&#x60;) sets are independent: omit a field to leave that set unchanged, or send &#x60;[]&#x60; to remove every keyword of that kind.  Zernio compares each supplied set with Google&#39;s live criteria by case-insensitive keyword text and match type. A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally. Text comparison does not trim whitespace.  A bare string or an object without &#x60;matchType&#x60; means &#x60;broad&#x60;, not the existing criterion&#39;s match type. For example, resending an existing &#x60;{ \&quot;text\&quot;: \&quot;plumber\&quot;, \&quot;matchType\&quot;: \&quot;exact\&quot; }&#x60; preserves it; sending &#x60;\&quot;plumber\&quot;&#x60; instead removes that EXACT criterion and requests a BROAD one. Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria&#39;s bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). Use &#x60;PATCH /v1/ads/keywords/{keywordId}&#x60; to pause/enable one keyword, or &#x60;DELETE /v1/ads/keywords/{keywordId}&#x60; to remove it. 
+  # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via &#x60;/v2/adgroup/update/&#x60;), and creative   (via &#x60;/v2/ad/update/&#x60; patch-style: &#x60;headline&#x60; is ignored, &#x60;body&#x60; becomes &#x60;ad_text&#x60;). - **Google**: status, budget, KEYWORD edits via &#x60;targeting.keywords&#x60; /   &#x60;targeting.negativeKeywords&#x60;, and DEVICE bid adjustments via &#x60;targeting.devices&#x60;.   Each list you send becomes the FULL new set of its kind (criteria not in the   list are removed); a kind left out is untouched. Any other &#x60;targeting&#x60; field   returns 400: Google cannot mutate broad targeting post-create without recreating   the campaign. RSA text updates use top-level &#x60;headlines&#x60;, &#x60;descriptions&#x60; and &#x60;finalUrls&#x60;.   Each supplied array replaces the full list; omit a field to preserve it. Use 3-15 headlines   (1-30 characters) and 2-4 descriptions (1-90 characters). Omit an asset to remove it;   omit pinnedField on an included asset to unpin it. Updates do not pad or truncate text.   The legacy creative fields remain unsupported for Google. - **LinkedIn**: status, budget, targeting (countries or regions, excludedLocations (countries),   the B2B facets, and audience segments; applied to the LinkedIn Campaign via   PARTIAL_UPDATE, and REPLACES the campaign&#39;s entire targetingCriteria, not a merge),   and creative (uploads new media, creates a replacement inline creative on the same   campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   &#x60;targeting&#x60; or &#x60;creative&#x60; returns 501 with code &#x60;unsupported_platform_operation&#x60;.   OpenAI Ads budget is lifetime-only (see &#x60;budget.type&#x60; below).  **Google keyword replacement:** These edits affect the ad&#39;s entire ad group, including sibling ads. Positive (&#x60;targeting.keywords&#x60;) and negative (&#x60;targeting.negativeKeywords&#x60;) sets are independent: omit a field to leave that set unchanged, or send &#x60;[]&#x60; to remove every keyword of that kind.  Zernio compares each supplied set with Google&#39;s live criteria by case-insensitive keyword text and match type. A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally. Text comparison does not trim whitespace.  A bare string or an object without &#x60;matchType&#x60; means &#x60;broad&#x60;, not the existing criterion&#39;s match type. For example, resending an existing &#x60;{ \&quot;text\&quot;: \&quot;plumber\&quot;, \&quot;matchType\&quot;: \&quot;exact\&quot; }&#x60; preserves it; sending &#x60;\&quot;plumber\&quot;&#x60; instead removes that EXACT criterion and requests a BROAD one. Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria&#39;s bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). Use &#x60;PATCH /v1/ads/keywords/{keywordId}&#x60; to pause/enable one keyword, or &#x60;DELETE /v1/ads/keywords/{keywordId}&#x60; to remove it. 
   # @param ad_id 
   # @param update_ad_request 
   # @param [Hash] opts the optional parameters
@@ -512,6 +579,19 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateAdCampaignStatus200Response]
   describe 'update_ad_campaign_status test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_ad_group_assets
+  # Update ad-group assets
+  # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+  # @param ad_set_id Numeric Google platform id.
+  # @param update_campaign_assets_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateCampaignAssets200Response]
+  describe 'update_ad_group_assets test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -577,6 +657,19 @@ describe 'AdCampaignsApi' do
   # @param [Hash] opts the optional parameters
   # @return [UpdateBidStrategy200Response]
   describe 'update_bid_strategy test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_campaign_assets
+  # Update campaign assets
+  # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+  # @param campaign_id Numeric Google platform id.
+  # @param update_campaign_assets_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateCampaignAssets200Response]
+  describe 'update_campaign_assets test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

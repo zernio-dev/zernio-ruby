@@ -33,12 +33,36 @@ describe 'AdAccountsApi' do
   end
 
   # unit tests for add_account_callouts
-  # Add account-level callout extensions
-  # Creates one asset plus one &#x60;customerAsset&#x60; link (field type CALLOUT) per callout text, in a single mutate. Google only; every other platform returns 501.
+  # Add account callouts
+  # Creates assets and customer_asset links for this Google customer. Links apply at account level.
   # @param add_account_callouts_request 
   # @param [Hash] opts the optional parameters
   # @return [AddAccountCallouts201Response]
   describe 'add_account_callouts test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for add_account_sitelinks
+  # Add account sitelinks
+  # Creates assets and customer_asset links for this Google customer. Links apply at account level.
+  # @param add_account_sitelinks_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AddAccountSitelinks201Response]
+  describe 'add_account_sitelinks test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for add_account_structured_snippets
+  # Add account snippets
+  # Creates assets and customer_asset links for this Google customer. Links apply at account level.
+  # @param add_account_structured_snippets_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AddAccountStructuredSnippets201Response]
+  describe 'add_account_structured_snippets test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -269,13 +293,39 @@ describe 'AdAccountsApi' do
   end
 
   # unit tests for list_account_callouts
-  # List account-level callout extensions
-  # Google Ads compliance row C.75: callout assets linked at the CUSTOMER level via &#x60;customer_asset&#x60; (not a campaign or ad group), so they serve fleet-wide across the account. Google only; every other platform returns 501. Cached for the quota window (10 minutes fresh, up to 7 days last-good), and gated by the shared Google Ads operations budget on a cache miss. The response carries &#x60;cachedAt&#x60; and &#x60;stale&#x60;, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
-  # @param account_id Google ads SocialAccount id.
+  # List account callouts
+  # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included. Preserves Google RMF C.75 account-level callouts.
+  # @param account_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :customer_id Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer.
+  # @option opts [String] :customer_id 
   # @return [ListAccountCallouts200Response]
   describe 'list_account_callouts test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_account_sitelinks
+  # List account sitelinks
+  # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id 
+  # @return [ListAccountSitelinks200Response]
+  describe 'list_account_sitelinks test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for list_account_structured_snippets
+  # List account snippets
+  # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :customer_id 
+  # @return [ListAccountStructuredSnippets200Response]
+  describe 'list_account_structured_snippets test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -437,12 +487,36 @@ describe 'AdAccountsApi' do
   end
 
   # unit tests for remove_account_callout
-  # Remove an account-level callout extension
-  # Removes the &#x60;customerAsset&#x60; link (&#x60;customers/{cid}/customerAssets/{assetId}~CALLOUT&#x60;). Google only; every other platform returns 501.
+  # Remove account callout
+  # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
   # @param remove_account_callout_request 
   # @param [Hash] opts the optional parameters
   # @return [RemoveAccountCallout200Response]
   describe 'remove_account_callout test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for remove_account_sitelink
+  # Remove account sitelink
+  # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+  # @param remove_account_callout_request 
+  # @param [Hash] opts the optional parameters
+  # @return [RemoveAccountCallout200Response]
+  describe 'remove_account_sitelink test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for remove_account_structured_snippet
+  # Remove account snippet
+  # Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+  # @param remove_account_callout_request 
+  # @param [Hash] opts the optional parameters
+  # @return [RemoveAccountCallout200Response]
+  describe 'remove_account_structured_snippet test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -472,6 +546,42 @@ describe 'AdAccountsApi' do
   # @option opts [Date] :_until End date of the comment lookup window. Defaults to today in UTC.
   # @return [ReplyToAdComment200Response]
   describe 'reply_to_ad_comment test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_account_callouts
+  # Update account callouts
+  # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+  # @param update_account_callouts_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAccountCallouts200Response]
+  describe 'update_account_callouts test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_account_sitelinks
+  # Update account sitelinks
+  # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+  # @param update_account_sitelinks_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAccountCallouts200Response]
+  describe 'update_account_sitelinks test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for update_account_structured_snippets
+  # Update account snippets
+  # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+  # @param update_account_structured_snippets_request 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateAccountCallouts200Response]
+  describe 'update_account_structured_snippets test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

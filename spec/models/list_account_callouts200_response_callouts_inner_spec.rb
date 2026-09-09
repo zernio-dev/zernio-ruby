@@ -33,13 +33,13 @@ describe Zernio::ListAccountCallouts200ResponseCalloutsInner do
     end
   end
 
-  describe 'test attribute "text"' do
+  describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
   end
 
-  describe 'test attribute "status"' do
+  describe 'test attribute "text"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

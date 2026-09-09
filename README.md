@@ -106,7 +106,9 @@ Class | Method | HTTP request | Description
 *Zernio::AccountsApi* | [**update_account**](docs/AccountsApi.md#update_account) | **PUT** /v1/accounts/{accountId} | Update account
 *Zernio::AccountsApi* | [**update_bluesky_settings**](docs/AccountsApi.md#update_bluesky_settings) | **PATCH** /v1/accounts/{accountId}/bluesky-settings | Update Bluesky account settings
 *Zernio::AccountsApi* | [**update_slack_settings**](docs/AccountsApi.md#update_slack_settings) | **PATCH** /v1/accounts/{accountId}/slack-settings | Update Slack account settings
-*Zernio::AdAccountsApi* | [**add_account_callouts**](docs/AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account-level callout extensions
+*Zernio::AdAccountsApi* | [**add_account_callouts**](docs/AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account callouts
+*Zernio::AdAccountsApi* | [**add_account_sitelinks**](docs/AdAccountsApi.md#add_account_sitelinks) | **POST** /v1/ads/accounts/sitelinks | Add account sitelinks
+*Zernio::AdAccountsApi* | [**add_account_structured_snippets**](docs/AdAccountsApi.md#add_account_structured_snippets) | **POST** /v1/ads/accounts/structured-snippets | Add account snippets
 *Zernio::AdAccountsApi* | [**create_ad_negative_keyword_list**](docs/AdAccountsApi.md#create_ad_negative_keyword_list) | **POST** /v1/ads/accounts/negative-keyword-lists | Create a negative keyword list
 *Zernio::AdAccountsApi* | [**create_custom_conversion**](docs/AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion
 *Zernio::AdAccountsApi* | [**create_high_demand_period**](docs/AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase
@@ -123,7 +125,9 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**get_ios_fourteen_campaign_limits**](docs/AdAccountsApi.md#get_ios_fourteen_campaign_limits) | **GET** /v1/ads/ios-fourteen-campaign-limits | Get iOS 14 campaign limits
 *Zernio::AdAccountsApi* | [**get_value_rule_set**](docs/AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set
 *Zernio::AdAccountsApi* | [**hide_ad_comment**](docs/AdAccountsApi.md#hide_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/hide | Hide or unhide an ad comment
-*Zernio::AdAccountsApi* | [**list_account_callouts**](docs/AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account-level callout extensions
+*Zernio::AdAccountsApi* | [**list_account_callouts**](docs/AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account callouts
+*Zernio::AdAccountsApi* | [**list_account_sitelinks**](docs/AdAccountsApi.md#list_account_sitelinks) | **GET** /v1/ads/accounts/sitelinks | List account sitelinks
+*Zernio::AdAccountsApi* | [**list_account_structured_snippets**](docs/AdAccountsApi.md#list_account_structured_snippets) | **GET** /v1/ads/accounts/structured-snippets | List account snippets
 *Zernio::AdAccountsApi* | [**list_ad_accounts**](docs/AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts
 *Zernio::AdAccountsApi* | [**list_ad_labels**](docs/AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels
 *Zernio::AdAccountsApi* | [**list_ad_negative_keyword_lists**](docs/AdAccountsApi.md#list_ad_negative_keyword_lists) | **GET** /v1/ads/accounts/negative-keyword-lists | List negative keyword lists
@@ -135,9 +139,14 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**list_high_demand_periods**](docs/AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules
 *Zernio::AdAccountsApi* | [**list_meta_businesses**](docs/AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list
 *Zernio::AdAccountsApi* | [**list_value_rule_sets**](docs/AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets
-*Zernio::AdAccountsApi* | [**remove_account_callout**](docs/AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove an account-level callout extension
+*Zernio::AdAccountsApi* | [**remove_account_callout**](docs/AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove account callout
+*Zernio::AdAccountsApi* | [**remove_account_sitelink**](docs/AdAccountsApi.md#remove_account_sitelink) | **DELETE** /v1/ads/accounts/sitelinks | Remove account sitelink
+*Zernio::AdAccountsApi* | [**remove_account_structured_snippet**](docs/AdAccountsApi.md#remove_account_structured_snippet) | **DELETE** /v1/ads/accounts/structured-snippets | Remove account snippet
 *Zernio::AdAccountsApi* | [**replace_ad_negative_keyword_list_keywords**](docs/AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords
 *Zernio::AdAccountsApi* | [**reply_to_ad_comment**](docs/AdAccountsApi.md#reply_to_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/reply | Reply to an ad comment
+*Zernio::AdAccountsApi* | [**update_account_callouts**](docs/AdAccountsApi.md#update_account_callouts) | **PUT** /v1/ads/accounts/callouts | Update account callouts
+*Zernio::AdAccountsApi* | [**update_account_sitelinks**](docs/AdAccountsApi.md#update_account_sitelinks) | **PUT** /v1/ads/accounts/sitelinks | Update account sitelinks
+*Zernio::AdAccountsApi* | [**update_account_structured_snippets**](docs/AdAccountsApi.md#update_account_structured_snippets) | **PUT** /v1/ads/accounts/structured-snippets | Update account snippets
 *Zernio::AdAccountsApi* | [**update_ad_account**](docs/AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings
 *Zernio::AdAccountsApi* | [**update_ad_negative_keyword_list**](docs/AdAccountsApi.md#update_ad_negative_keyword_list) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId} | Rename a negative keyword list
 *Zernio::AdAccountsApi* | [**update_value_rule_set**](docs/AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set
@@ -149,7 +158,8 @@ Class | Method | HTTP request | Description
 *Zernio::AdAudiencesApi* | [**replace_ad_audience_companies**](docs/AdAudiencesApi.md#replace_ad_audience_companies) | **POST** /v1/ads/audiences/{audienceId}/companies | Replace audience companies
 *Zernio::AdAudiencesApi* | [**update_ad_audience**](docs/AdAudiencesApi.md#update_ad_audience) | **PUT** /v1/ads/audiences/{audienceId} | Update an audience
 *Zernio::AdCampaignsApi* | [**add_ad_keywords**](docs/AdCampaignsApi.md#add_ad_keywords) | **POST** /v1/ads/keywords | Add Search keywords to an ad group
-*Zernio::AdCampaignsApi* | [**attach_campaign_assets**](docs/AdCampaignsApi.md#attach_campaign_assets) | **POST** /v1/ads/campaigns/{campaignId}/assets | Attach extension assets to a Google Search campaign
+*Zernio::AdCampaignsApi* | [**attach_ad_group_assets**](docs/AdCampaignsApi.md#attach_ad_group_assets) | **POST** /v1/ads/ad-sets/{adSetId}/assets | Attach ad-group assets
+*Zernio::AdCampaignsApi* | [**attach_campaign_assets**](docs/AdCampaignsApi.md#attach_campaign_assets) | **POST** /v1/ads/campaigns/{campaignId}/assets | Attach campaign assets
 *Zernio::AdCampaignsApi* | [**boost_post**](docs/AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad
 *Zernio::AdCampaignsApi* | [**bulk_update_ad_campaign_status**](docs/AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns
 *Zernio::AdCampaignsApi* | [**create_ad_campaign**](docs/AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign
@@ -169,23 +179,29 @@ Class | Method | HTTP request | Description
 *Zernio::AdCampaignsApi* | [**get_campaign_bidding**](docs/AdCampaignsApi.md#get_campaign_bidding) | **GET** /v1/ads/campaigns/{campaignId}/bidding | Read a campaign's current bidding
 *Zernio::AdCampaignsApi* | [**get_campaign_targeting**](docs/AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign's device, location, and language targeting
 *Zernio::AdCampaignsApi* | [**list_ad_campaigns**](docs/AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns
+*Zernio::AdCampaignsApi* | [**list_ad_group_assets**](docs/AdCampaignsApi.md#list_ad_group_assets) | **GET** /v1/ads/ad-sets/{adSetId}/assets | List ad-group assets
 *Zernio::AdCampaignsApi* | [**list_ad_keywords**](docs/AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords
 *Zernio::AdCampaignsApi* | [**list_ad_sets**](docs/AdCampaignsApi.md#list_ad_sets) | **GET** /v1/ads/ad-sets | List ad sets
 *Zernio::AdCampaignsApi* | [**list_ads**](docs/AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads
 *Zernio::AdCampaignsApi* | [**list_bid_strategies**](docs/AdCampaignsApi.md#list_bid_strategies) | **GET** /v1/ads/bid-strategies | List Google Ads portfolio bid strategies
+*Zernio::AdCampaignsApi* | [**list_campaign_assets**](docs/AdCampaignsApi.md#list_campaign_assets) | **GET** /v1/ads/campaigns/{campaignId}/assets | List campaign assets
 *Zernio::AdCampaignsApi* | [**list_campaign_negative_keyword_lists**](docs/AdCampaignsApi.md#list_campaign_negative_keyword_lists) | **GET** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | List campaign negative lists
 *Zernio::AdCampaignsApi* | [**list_campaign_negative_keywords**](docs/AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords
+*Zernio::AdCampaignsApi* | [**remove_ad_group_assets**](docs/AdCampaignsApi.md#remove_ad_group_assets) | **DELETE** /v1/ads/ad-sets/{adSetId}/assets | Remove ad-group assets
 *Zernio::AdCampaignsApi* | [**remove_ad_keyword**](docs/AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword
+*Zernio::AdCampaignsApi* | [**remove_campaign_assets**](docs/AdCampaignsApi.md#remove_campaign_assets) | **DELETE** /v1/ads/campaigns/{campaignId}/assets | Remove campaign assets
 *Zernio::AdCampaignsApi* | [**replace_campaign_negative_keyword_lists**](docs/AdCampaignsApi.md#replace_campaign_negative_keyword_lists) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | Replace campaign negative lists
 *Zernio::AdCampaignsApi* | [**replace_campaign_negative_keywords**](docs/AdCampaignsApi.md#replace_campaign_negative_keywords) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keywords | Replace campaign-level negative keywords
 *Zernio::AdCampaignsApi* | [**update_ad**](docs/AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad
 *Zernio::AdCampaignsApi* | [**update_ad_campaign**](docs/AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign
 *Zernio::AdCampaignsApi* | [**update_ad_campaign_status**](docs/AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign
+*Zernio::AdCampaignsApi* | [**update_ad_group_assets**](docs/AdCampaignsApi.md#update_ad_group_assets) | **PUT** /v1/ads/ad-sets/{adSetId}/assets | Update ad-group assets
 *Zernio::AdCampaignsApi* | [**update_ad_keyword**](docs/AdCampaignsApi.md#update_ad_keyword) | **PATCH** /v1/ads/keywords/{keywordId} | Pause or enable a Search keyword
 *Zernio::AdCampaignsApi* | [**update_ad_set**](docs/AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set
 *Zernio::AdCampaignsApi* | [**update_ad_set_status**](docs/AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set
 *Zernio::AdCampaignsApi* | [**update_ad_status**](docs/AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad
 *Zernio::AdCampaignsApi* | [**update_bid_strategy**](docs/AdCampaignsApi.md#update_bid_strategy) | **PATCH** /v1/ads/bid-strategies/{strategyId} | Update a Google Ads portfolio bid strategy
+*Zernio::AdCampaignsApi* | [**update_campaign_assets**](docs/AdCampaignsApi.md#update_campaign_assets) | **PUT** /v1/ads/campaigns/{campaignId}/assets | Update campaign assets
 *Zernio::AdCampaignsApi* | [**update_campaign_targeting**](docs/AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign's device, location, or language targeting
 *Zernio::AdCreativesApi* | [**create_ad_creative**](docs/AdCreativesApi.md#create_ad_creative) | **POST** /v1/ads/creatives | Create a standalone creative
 *Zernio::AdCreativesApi* | [**delete_ad_creative**](docs/AdCreativesApi.md#delete_ad_creative) | **DELETE** /v1/ads/creatives/{creativeId} | Delete a creative
@@ -813,6 +829,12 @@ Class | Method | HTTP request | Description
  - [Zernio::AddAccountCallouts201Response](docs/AddAccountCallouts201Response.md)
  - [Zernio::AddAccountCallouts201ResponseCalloutsInner](docs/AddAccountCallouts201ResponseCalloutsInner.md)
  - [Zernio::AddAccountCalloutsRequest](docs/AddAccountCalloutsRequest.md)
+ - [Zernio::AddAccountSitelinks201Response](docs/AddAccountSitelinks201Response.md)
+ - [Zernio::AddAccountSitelinks201ResponseSitelinksInner](docs/AddAccountSitelinks201ResponseSitelinksInner.md)
+ - [Zernio::AddAccountSitelinksRequest](docs/AddAccountSitelinksRequest.md)
+ - [Zernio::AddAccountStructuredSnippets201Response](docs/AddAccountStructuredSnippets201Response.md)
+ - [Zernio::AddAccountStructuredSnippets201ResponseStructuredSnippetsInner](docs/AddAccountStructuredSnippets201ResponseStructuredSnippetsInner.md)
+ - [Zernio::AddAccountStructuredSnippetsRequest](docs/AddAccountStructuredSnippetsRequest.md)
  - [Zernio::AddAdKeywords201Response](docs/AddAdKeywords201Response.md)
  - [Zernio::AddAdKeywordsRequest](docs/AddAdKeywordsRequest.md)
  - [Zernio::AddAdKeywordsRequestKeywordsInner](docs/AddAdKeywordsRequestKeywordsInner.md)
@@ -859,10 +881,9 @@ Class | Method | HTTP request | Description
  - [Zernio::AssignGoogleBusinessLocation200Response](docs/AssignGoogleBusinessLocation200Response.md)
  - [Zernio::AssignGoogleBusinessLocation200ResponseAccount](docs/AssignGoogleBusinessLocation200ResponseAccount.md)
  - [Zernio::AssignGoogleBusinessLocationRequest](docs/AssignGoogleBusinessLocationRequest.md)
+ - [Zernio::AttachAdGroupAssets201Response](docs/AttachAdGroupAssets201Response.md)
  - [Zernio::AttachCampaignAssets201Response](docs/AttachCampaignAssets201Response.md)
  - [Zernio::AttachCampaignAssetsRequest](docs/AttachCampaignAssetsRequest.md)
- - [Zernio::AttachCampaignAssetsRequestSitelinksInner](docs/AttachCampaignAssetsRequestSitelinksInner.md)
- - [Zernio::AttachCampaignAssetsRequestStructuredSnippetsInner](docs/AttachCampaignAssetsRequestStructuredSnippetsInner.md)
  - [Zernio::AttachNumberToSipTrunk200Response](docs/AttachNumberToSipTrunk200Response.md)
  - [Zernio::AttachNumberToSipTrunkRequest](docs/AttachNumberToSipTrunkRequest.md)
  - [Zernio::BatchGetGoogleBusinessReviews200Response](docs/BatchGetGoogleBusinessReviews200Response.md)
@@ -1137,6 +1158,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateStandaloneAd201ResponseOneOf](docs/CreateStandaloneAd201ResponseOneOf.md)
  - [Zernio::CreateStandaloneAd201ResponseOneOf1](docs/CreateStandaloneAd201ResponseOneOf1.md)
  - [Zernio::CreateStandaloneAdRequest](docs/CreateStandaloneAdRequest.md)
+ - [Zernio::CreateStandaloneAdRequestAdditionalDescriptionsInner](docs/CreateStandaloneAdRequestAdditionalDescriptionsInner.md)
+ - [Zernio::CreateStandaloneAdRequestAdditionalHeadlinesInner](docs/CreateStandaloneAdRequestAdditionalHeadlinesInner.md)
  - [Zernio::CreateStandaloneAdRequestAttributionSpecInner](docs/CreateStandaloneAdRequestAttributionSpecInner.md)
  - [Zernio::CreateStandaloneAdRequestBehaviorsInner](docs/CreateStandaloneAdRequestBehaviorsInner.md)
  - [Zernio::CreateStandaloneAdRequestBrandIdentity](docs/CreateStandaloneAdRequestBrandIdentity.md)
@@ -1660,6 +1683,7 @@ Class | Method | HTTP request | Description
  - [Zernio::GetYoutubeCaptions200ResponseCuesInner](docs/GetYoutubeCaptions200ResponseCuesInner.md)
  - [Zernio::GetYoutubePlaylists200Response](docs/GetYoutubePlaylists200Response.md)
  - [Zernio::GetYoutubePlaylists200ResponsePlaylistsInner](docs/GetYoutubePlaylists200ResponsePlaylistsInner.md)
+ - [Zernio::GoogleAssetUpdate](docs/GoogleAssetUpdate.md)
  - [Zernio::GoogleBusinessPlatformData](docs/GoogleBusinessPlatformData.md)
  - [Zernio::GoogleBusinessPlatformDataCallToAction](docs/GoogleBusinessPlatformDataCallToAction.md)
  - [Zernio::GoogleBusinessPlatformDataEvent](docs/GoogleBusinessPlatformDataEvent.md)
@@ -1672,6 +1696,10 @@ Class | Method | HTTP request | Description
  - [Zernio::GoogleBusinessReview](docs/GoogleBusinessReview.md)
  - [Zernio::GoogleBusinessReviewReviewReply](docs/GoogleBusinessReviewReviewReply.md)
  - [Zernio::GoogleBusinessReviewReviewer](docs/GoogleBusinessReviewReviewer.md)
+ - [Zernio::GoogleRsaDescription](docs/GoogleRsaDescription.md)
+ - [Zernio::GoogleRsaHeadline](docs/GoogleRsaHeadline.md)
+ - [Zernio::GoogleSitelink](docs/GoogleSitelink.md)
+ - [Zernio::GoogleStructuredSnippet](docs/GoogleStructuredSnippet.md)
  - [Zernio::HandleOAuthCallbackRequest](docs/HandleOAuthCallbackRequest.md)
  - [Zernio::HideAdComment200Response](docs/HideAdComment200Response.md)
  - [Zernio::HideAdCommentRequest](docs/HideAdCommentRequest.md)
@@ -1750,6 +1778,10 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAccountCallouts200ResponseCalloutsInner](docs/ListAccountCallouts200ResponseCalloutsInner.md)
  - [Zernio::ListAccountGroups200Response](docs/ListAccountGroups200Response.md)
  - [Zernio::ListAccountGroups200ResponseGroupsInner](docs/ListAccountGroups200ResponseGroupsInner.md)
+ - [Zernio::ListAccountSitelinks200Response](docs/ListAccountSitelinks200Response.md)
+ - [Zernio::ListAccountSitelinks200ResponseSitelinksInner](docs/ListAccountSitelinks200ResponseSitelinksInner.md)
+ - [Zernio::ListAccountStructuredSnippets200Response](docs/ListAccountStructuredSnippets200Response.md)
+ - [Zernio::ListAccountStructuredSnippets200ResponseStructuredSnippetsInner](docs/ListAccountStructuredSnippets200ResponseStructuredSnippetsInner.md)
  - [Zernio::ListAdAccounts200Response](docs/ListAdAccounts200Response.md)
  - [Zernio::ListAdAccounts200ResponseAccountsInner](docs/ListAdAccounts200ResponseAccountsInner.md)
  - [Zernio::ListAdAudiences200Response](docs/ListAdAudiences200Response.md)
@@ -1760,6 +1792,10 @@ Class | Method | HTTP request | Description
  - [Zernio::ListAdCatalogs200Response](docs/ListAdCatalogs200Response.md)
  - [Zernio::ListAdCatalogs200ResponseCatalogsInner](docs/ListAdCatalogs200ResponseCatalogsInner.md)
  - [Zernio::ListAdCreatives200Response](docs/ListAdCreatives200Response.md)
+ - [Zernio::ListAdGroupAssets200Response](docs/ListAdGroupAssets200Response.md)
+ - [Zernio::ListAdGroupAssets200ResponseCalloutsInner](docs/ListAdGroupAssets200ResponseCalloutsInner.md)
+ - [Zernio::ListAdGroupAssets200ResponseSitelinksInner](docs/ListAdGroupAssets200ResponseSitelinksInner.md)
+ - [Zernio::ListAdGroupAssets200ResponseStructuredSnippetsInner](docs/ListAdGroupAssets200ResponseStructuredSnippetsInner.md)
  - [Zernio::ListAdImages200Response](docs/ListAdImages200Response.md)
  - [Zernio::ListAdKeywords200Response](docs/ListAdKeywords200Response.md)
  - [Zernio::ListAdLabels200Response](docs/ListAdLabels200Response.md)
@@ -1796,6 +1832,10 @@ Class | Method | HTTP request | Description
  - [Zernio::ListBusinessAgentWebsites200Response](docs/ListBusinessAgentWebsites200Response.md)
  - [Zernio::ListCalls200Response](docs/ListCalls200Response.md)
  - [Zernio::ListCalls200ResponseCallsInner](docs/ListCalls200ResponseCallsInner.md)
+ - [Zernio::ListCampaignAssets200Response](docs/ListCampaignAssets200Response.md)
+ - [Zernio::ListCampaignAssets200ResponseCalloutsInner](docs/ListCampaignAssets200ResponseCalloutsInner.md)
+ - [Zernio::ListCampaignAssets200ResponseSitelinksInner](docs/ListCampaignAssets200ResponseSitelinksInner.md)
+ - [Zernio::ListCampaignAssets200ResponseStructuredSnippetsInner](docs/ListCampaignAssets200ResponseStructuredSnippetsInner.md)
  - [Zernio::ListCampaignNegativeKeywords200Response](docs/ListCampaignNegativeKeywords200Response.md)
  - [Zernio::ListCampaignNegativeKeywords200ResponseKeywordsInner](docs/ListCampaignNegativeKeywords200ResponseKeywordsInner.md)
  - [Zernio::ListCommentAutomationLogs200Response](docs/ListCommentAutomationLogs200Response.md)
@@ -2061,8 +2101,11 @@ Class | Method | HTTP request | Description
  - [Zernio::RemediatePhoneNumberRequestDocumentsInnerOneOf](docs/RemediatePhoneNumberRequestDocumentsInnerOneOf.md)
  - [Zernio::RemoveAccountCallout200Response](docs/RemoveAccountCallout200Response.md)
  - [Zernio::RemoveAccountCalloutRequest](docs/RemoveAccountCalloutRequest.md)
+ - [Zernio::RemoveAdGroupAssetsRequest](docs/RemoveAdGroupAssetsRequest.md)
  - [Zernio::RemoveAdKeyword200Response](docs/RemoveAdKeyword200Response.md)
  - [Zernio::RemoveBookmark200Response](docs/RemoveBookmark200Response.md)
+ - [Zernio::RemoveCampaignAssets200Response](docs/RemoveCampaignAssets200Response.md)
+ - [Zernio::RemoveCampaignAssetsRequest](docs/RemoveCampaignAssetsRequest.md)
  - [Zernio::RemoveConversionAssociations200Response](docs/RemoveConversionAssociations200Response.md)
  - [Zernio::RemoveDiscordMemberRole200Response](docs/RemoveDiscordMemberRole200Response.md)
  - [Zernio::RemoveMessageReaction200Response](docs/RemoveMessageReaction200Response.md)
@@ -2333,10 +2376,19 @@ Class | Method | HTTP request | Description
  - [Zernio::UnpublishPostRequest](docs/UnpublishPostRequest.md)
  - [Zernio::UpdateAccount200Response](docs/UpdateAccount200Response.md)
  - [Zernio::UpdateAccount200ResponseXCapabilities](docs/UpdateAccount200ResponseXCapabilities.md)
+ - [Zernio::UpdateAccountCallouts200Response](docs/UpdateAccountCallouts200Response.md)
+ - [Zernio::UpdateAccountCalloutsRequest](docs/UpdateAccountCalloutsRequest.md)
+ - [Zernio::UpdateAccountCalloutsRequestUpdatesInner](docs/UpdateAccountCalloutsRequestUpdatesInner.md)
+ - [Zernio::UpdateAccountCalloutsRequestUpdatesInnerCalloutAsset](docs/UpdateAccountCalloutsRequestUpdatesInnerCalloutAsset.md)
  - [Zernio::UpdateAccountGroup200Response](docs/UpdateAccountGroup200Response.md)
  - [Zernio::UpdateAccountGroupRequest](docs/UpdateAccountGroupRequest.md)
  - [Zernio::UpdateAccountRequest](docs/UpdateAccountRequest.md)
  - [Zernio::UpdateAccountRequestXCapabilities](docs/UpdateAccountRequestXCapabilities.md)
+ - [Zernio::UpdateAccountSitelinksRequest](docs/UpdateAccountSitelinksRequest.md)
+ - [Zernio::UpdateAccountSitelinksRequestUpdatesInner](docs/UpdateAccountSitelinksRequestUpdatesInner.md)
+ - [Zernio::UpdateAccountSitelinksRequestUpdatesInnerSitelinkAsset](docs/UpdateAccountSitelinksRequestUpdatesInnerSitelinkAsset.md)
+ - [Zernio::UpdateAccountStructuredSnippetsRequest](docs/UpdateAccountStructuredSnippetsRequest.md)
+ - [Zernio::UpdateAccountStructuredSnippetsRequestUpdatesInner](docs/UpdateAccountStructuredSnippetsRequestUpdatesInner.md)
  - [Zernio::UpdateAd200Response](docs/UpdateAd200Response.md)
  - [Zernio::UpdateAdAccount200Response](docs/UpdateAdAccount200Response.md)
  - [Zernio::UpdateAdAccount200ResponseDsaDefaults](docs/UpdateAdAccount200ResponseDsaDefaults.md)
@@ -2390,6 +2442,8 @@ Class | Method | HTTP request | Description
  - [Zernio::UpdateBusinessAgentSettingsRequestFollowup](docs/UpdateBusinessAgentSettingsRequestFollowup.md)
  - [Zernio::UpdateBusinessAgentSettingsRequestHandoff](docs/UpdateBusinessAgentSettingsRequestHandoff.md)
  - [Zernio::UpdateBusinessAgentSettingsRequestRollout](docs/UpdateBusinessAgentSettingsRequestRollout.md)
+ - [Zernio::UpdateCampaignAssets200Response](docs/UpdateCampaignAssets200Response.md)
+ - [Zernio::UpdateCampaignAssetsRequest](docs/UpdateCampaignAssetsRequest.md)
  - [Zernio::UpdateCampaignTargeting200Response](docs/UpdateCampaignTargeting200Response.md)
  - [Zernio::UpdateCampaignTargeting200ResponseDevicesInner](docs/UpdateCampaignTargeting200ResponseDevicesInner.md)
  - [Zernio::UpdateCampaignTargeting200ResponseLanguagesInner](docs/UpdateCampaignTargeting200ResponseLanguagesInner.md)

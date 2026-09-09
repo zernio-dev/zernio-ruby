@@ -6,8 +6,8 @@
 | ---- | ---- | ----------- | ----- |
 | **customer_id** | **String** |  | [optional] |
 | **callouts** | [**Array&lt;ListAccountCallouts200ResponseCalloutsInner&gt;**](ListAccountCallouts200ResponseCalloutsInner.md) |  | [optional] |
-| **cached_at** | **Time** | When this list was fetched from Google. Null when it was never served from cache. | [optional] |
-| **stale** | **Boolean** | True when Google&#39;s daily API quota was exhausted and this is the last successful fetch, not a live read. | [optional] |
+| **cached_at** | **Time** | Time of the cached Google read. Null when no cache was used. | [optional] |
+| **stale** | **Boolean** | True when exhausted quota required returning the last successful read. | [optional] |
 
 ## Example
 

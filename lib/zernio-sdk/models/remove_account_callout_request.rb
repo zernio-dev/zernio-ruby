@@ -15,13 +15,12 @@ require 'time'
 
 module Zernio
   class RemoveAccountCalloutRequest < ApiModelBase
-    # Zernio SocialAccount id owning the Google Ads connection.
+    # Zernio Google Ads connection id.
     attr_accessor :account_id
 
-    # Numeric Google Ads customer id. Only required when the connection has more than one.
+    # Google customer id without dashes. Required when the connection has multiple customers.
     attr_accessor :customer_id
 
-    # Numeric asset id from GET /v1/ads/accounts/callouts.
     attr_accessor :asset_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -100,8 +99,23 @@ module Zernio
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @account_id !~ pattern
+        invalid_properties.push("invalid value for \"account_id\", must conform to the pattern #{pattern}.")
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if !@customer_id.nil? && @customer_id !~ pattern
+        invalid_properties.push("invalid value for \"customer_id\", must conform to the pattern #{pattern}.")
+      end
+
       if @asset_id.nil?
         invalid_properties.push('invalid value for "asset_id", asset_id cannot be nil.')
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @asset_id !~ pattern
+        invalid_properties.push("invalid value for \"asset_id\", must conform to the pattern #{pattern}.")
       end
 
       invalid_properties
@@ -112,7 +126,10 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @account_id.nil?
+      return false if @account_id !~ Regexp.new(/^[a-fA-F0-9]{24}$/)
+      return false if !@customer_id.nil? && @customer_id !~ Regexp.new(/^\d+$/)
       return false if @asset_id.nil?
+      return false if @asset_id !~ Regexp.new(/^\d+$/)
       true
     end
 
@@ -123,7 +140,27 @@ module Zernio
         fail ArgumentError, 'account_id cannot be nil'
       end
 
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if account_id !~ pattern
+        fail ArgumentError, "invalid value for \"account_id\", must conform to the pattern #{pattern}."
+      end
+
       @account_id = account_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] customer_id Value to be assigned
+    def customer_id=(customer_id)
+      if customer_id.nil?
+        fail ArgumentError, 'customer_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if customer_id !~ pattern
+        fail ArgumentError, "invalid value for \"customer_id\", must conform to the pattern #{pattern}."
+      end
+
+      @customer_id = customer_id
     end
 
     # Custom attribute writer method with validation
@@ -131,6 +168,11 @@ module Zernio
     def asset_id=(asset_id)
       if asset_id.nil?
         fail ArgumentError, 'asset_id cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if asset_id !~ pattern
+        fail ArgumentError, "invalid value for \"asset_id\", must conform to the pattern #{pattern}."
       end
 
       @asset_id = asset_id

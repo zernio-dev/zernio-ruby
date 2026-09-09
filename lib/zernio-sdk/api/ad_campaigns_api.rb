@@ -87,9 +87,88 @@ module Zernio
       return data, status_code, headers
     end
 
-    # Attach extension assets to a Google Search campaign
-    # Attach sitelinks, callouts and/or structured snippets to an already-existing Google Search campaign. These are the same builders POST /v1/ads/create uses, but without rebuilding the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.  Google-only. Other platforms have no equivalent extension surface and return 501.  Approval status is Google-async; poll `asset.policy_summary` after review. Assets stay in the account library even if the campaign is later deleted.
-    # @param campaign_id [String] Numeric Google platform campaign id.
+    # Attach ad-group assets
+    # Creates and attaches sitelinks, callouts and structured snippets in one Google mutation.
+    # @param ad_set_id [String] Numeric Google platform id.
+    # @param attach_campaign_assets_request [AttachCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AttachAdGroupAssets201Response]
+    def attach_ad_group_assets(ad_set_id, attach_campaign_assets_request, opts = {})
+      data, _status_code, _headers = attach_ad_group_assets_with_http_info(ad_set_id, attach_campaign_assets_request, opts)
+      data
+    end
+
+    # Attach ad-group assets
+    # Creates and attaches sitelinks, callouts and structured snippets in one Google mutation.
+    # @param ad_set_id [String] Numeric Google platform id.
+    # @param attach_campaign_assets_request [AttachCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AttachAdGroupAssets201Response, Integer, Hash)>] AttachAdGroupAssets201Response data, response status code and response headers
+    def attach_ad_group_assets_with_http_info(ad_set_id, attach_campaign_assets_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.attach_ad_group_assets ...'
+      end
+      # verify the required parameter 'ad_set_id' is set
+      if @api_client.config.client_side_validation && ad_set_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_set_id' when calling AdCampaignsApi.attach_ad_group_assets"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && ad_set_id !~ pattern
+        fail ArgumentError, "invalid value for 'ad_set_id' when calling AdCampaignsApi.attach_ad_group_assets, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'attach_campaign_assets_request' is set
+      if @api_client.config.client_side_validation && attach_campaign_assets_request.nil?
+        fail ArgumentError, "Missing the required parameter 'attach_campaign_assets_request' when calling AdCampaignsApi.attach_ad_group_assets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ad-sets/{adSetId}/assets'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(attach_campaign_assets_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AttachAdGroupAssets201Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.attach_ad_group_assets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#attach_ad_group_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Attach campaign assets
+    # Creates and attaches sitelinks, callouts and structured snippets in one Google mutation.
+    # @param campaign_id [String] Numeric Google platform id.
     # @param attach_campaign_assets_request [AttachCampaignAssetsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AttachCampaignAssets201Response]
@@ -98,9 +177,9 @@ module Zernio
       data
     end
 
-    # Attach extension assets to a Google Search campaign
-    # Attach sitelinks, callouts and/or structured snippets to an already-existing Google Search campaign. These are the same builders POST /v1/ads/create uses, but without rebuilding the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.  Google-only. Other platforms have no equivalent extension surface and return 501.  Approval status is Google-async; poll &#x60;asset.policy_summary&#x60; after review. Assets stay in the account library even if the campaign is later deleted.
-    # @param campaign_id [String] Numeric Google platform campaign id.
+    # Attach campaign assets
+    # Creates and attaches sitelinks, callouts and structured snippets in one Google mutation.
+    # @param campaign_id [String] Numeric Google platform id.
     # @param attach_campaign_assets_request [AttachCampaignAssetsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AttachCampaignAssets201Response, Integer, Hash)>] AttachCampaignAssets201Response data, response status code and response headers
@@ -112,6 +191,11 @@ module Zernio
       if @api_client.config.client_side_validation && campaign_id.nil?
         fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.attach_campaign_assets"
       end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && campaign_id !~ pattern
+        fail ArgumentError, "invalid value for 'campaign_id' when calling AdCampaignsApi.attach_campaign_assets, must conform to the pattern #{pattern}."
+      end
+
       # verify the required parameter 'attach_campaign_assets_request' is set
       if @api_client.config.client_side_validation && attach_campaign_assets_request.nil?
         fail ArgumentError, "Missing the required parameter 'attach_campaign_assets_request' when calling AdCampaignsApi.attach_campaign_assets"
@@ -1037,7 +1121,7 @@ module Zernio
     end
 
     # Get ad details
-    # Returns an ad with its creative, targeting, status, and performance metrics.  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal `_id` (24-char hex) - Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`) - the creative's `effective_object_story_id` (`{pageId}_{postId}` shape, Facebook side) - the creative's `effective_instagram_media_id` (Instagram side)  Any of the four resolve to the same ad. Caller doesn't need a translation step. By default, creative.promotion and creative.creativeFeatures contain stored requested settings, which do not confirm platform application. With `refreshPromotion=true`, Meta promotion metadata is read live and exposed as `ad.creative.promotion` with `promotionStatus`. Only `applied` confirms an offer; `not_returned` means the creative read succeeded without promotion metadata, and `unavailable` means it failed. 
+    # Returns an ad with its creative, targeting, status, and performance metrics. Google Search ads include current creative.headlines, creative.descriptions and creative.finalUrls, preserving pinnedField. Top-level cachedAt and stale report cache freshness. Google mutations invalidate this read. RSA enrichment requires a stored advertisingChannelType of SEARCH. Ads with an unknown or other channel return their stored details without a Google read. If RSA enrichment fails, the stored ad is returned with HTTP 200 and without cache metadata.  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal `_id` (24-char hex) - Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`) - the creative's `effective_object_story_id` (`{pageId}_{postId}` shape, Facebook side) - the creative's `effective_instagram_media_id` (Instagram side)  Any of the four resolve to the same ad. Caller doesn't need a translation step. By default, creative.promotion and creative.creativeFeatures contain stored requested settings, which do not confirm platform application. With `refreshPromotion=true`, Meta promotion metadata is read live and exposed as `ad.creative.promotion` with `promotionStatus`. Only `applied` confirms an offer; `not_returned` means the creative read succeeded without promotion metadata, and `unavailable` means it failed. 
     # @param ad_id [String] Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. See description for details. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :refresh_promotion Meta only. Read current promotion metadata from Meta and include promotionStatus. Omit for stored creative settings with no promotion-specific Graph call. (default to false)
@@ -1048,7 +1132,7 @@ module Zernio
     end
 
     # Get ad details
-    # Returns an ad with its creative, targeting, status, and performance metrics.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal &#x60;_id&#x60; (24-char hex) - Meta&#39;s numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;) - the creative&#39;s &#x60;effective_object_story_id&#x60; (&#x60;{pageId}_{postId}&#x60; shape, Facebook side) - the creative&#39;s &#x60;effective_instagram_media_id&#x60; (Instagram side)  Any of the four resolve to the same ad. Caller doesn&#39;t need a translation step. By default, creative.promotion and creative.creativeFeatures contain stored requested settings, which do not confirm platform application. With &#x60;refreshPromotion&#x3D;true&#x60;, Meta promotion metadata is read live and exposed as &#x60;ad.creative.promotion&#x60; with &#x60;promotionStatus&#x60;. Only &#x60;applied&#x60; confirms an offer; &#x60;not_returned&#x60; means the creative read succeeded without promotion metadata, and &#x60;unavailable&#x60; means it failed. 
+    # Returns an ad with its creative, targeting, status, and performance metrics. Google Search ads include current creative.headlines, creative.descriptions and creative.finalUrls, preserving pinnedField. Top-level cachedAt and stale report cache freshness. Google mutations invalidate this read. RSA enrichment requires a stored advertisingChannelType of SEARCH. Ads with an unknown or other channel return their stored details without a Google read. If RSA enrichment fails, the stored ad is returned with HTTP 200 and without cache metadata.  The &#x60;{adId}&#x60; path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal &#x60;_id&#x60; (24-char hex) - Meta&#39;s numeric &#x60;platformAdId&#x60; (the value shipped in &#x60;comment.received&#x60; webhooks as &#x60;comment.ad.id&#x60;) - the creative&#39;s &#x60;effective_object_story_id&#x60; (&#x60;{pageId}_{postId}&#x60; shape, Facebook side) - the creative&#39;s &#x60;effective_instagram_media_id&#x60; (Instagram side)  Any of the four resolve to the same ad. Caller doesn&#39;t need a translation step. By default, creative.promotion and creative.creativeFeatures contain stored requested settings, which do not confirm platform application. With &#x60;refreshPromotion&#x3D;true&#x60;, Meta promotion metadata is read live and exposed as &#x60;ad.creative.promotion&#x60; with &#x60;promotionStatus&#x60;. Only &#x60;applied&#x60; confirms an offer; &#x60;not_returned&#x60; means the creative read succeeded without promotion metadata, and &#x60;unavailable&#x60; means it failed. 
     # @param ad_id [String] Zernio &#x60;_id&#x60; (hex), Meta &#x60;platformAdId&#x60; (numeric), or one of the creative&#39;s effective story/media IDs. See description for details. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :refresh_promotion Meta only. Read current promotion metadata from Meta and include promotionStatus. Omit for stored creative settings with no promotion-specific Graph call. (default to false)
@@ -1677,6 +1761,94 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List ad-group assets
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
+    # @param ad_set_id [String] Numeric Google platform id.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @return [ListAdGroupAssets200Response]
+    def list_ad_group_assets(ad_set_id, account_id, opts = {})
+      data, _status_code, _headers = list_ad_group_assets_with_http_info(ad_set_id, account_id, opts)
+      data
+    end
+
+    # List ad-group assets
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
+    # @param ad_set_id [String] Numeric Google platform id.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @return [Array<(ListAdGroupAssets200Response, Integer, Hash)>] ListAdGroupAssets200Response data, response status code and response headers
+    def list_ad_group_assets_with_http_info(ad_set_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.list_ad_group_assets ...'
+      end
+      # verify the required parameter 'ad_set_id' is set
+      if @api_client.config.client_side_validation && ad_set_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_set_id' when calling AdCampaignsApi.list_ad_group_assets"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && ad_set_id !~ pattern
+        fail ArgumentError, "invalid value for 'ad_set_id' when calling AdCampaignsApi.list_ad_group_assets, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdCampaignsApi.list_ad_group_assets"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdCampaignsApi.list_ad_group_assets, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdCampaignsApi.list_ad_group_assets, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/ad-sets/{adSetId}/assets'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListAdGroupAssets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.list_ad_group_assets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#list_ad_group_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Search keywords
     # Returns the Google Search keyword criteria (positive and negative) synced from connected Google Ads accounts, one row per ad-group keyword. Refreshed about once a week per Google Ads customer (the keyword sweep rides the ads discovery pass on a slower slot, to stay inside Google's shared daily API quota), so keywords added on Google can take several days to appear. A customer synced for the first time is populated on the next discovery pass rather than waiting for its weekly slot, and connecting an account or triggering a manual sync refreshes it immediately. Campaign-level negative keywords are not included; only ad-group-level criteria are. 
     # @param [Hash] opts the optional parameters
@@ -2059,6 +2231,94 @@ module Zernio
       return data, status_code, headers
     end
 
+    # List campaign assets
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
+    # @param campaign_id [String] Numeric Google platform id.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @return [ListCampaignAssets200Response]
+    def list_campaign_assets(campaign_id, account_id, opts = {})
+      data, _status_code, _headers = list_campaign_assets_with_http_info(campaign_id, account_id, opts)
+      data
+    end
+
+    # List campaign assets
+    # Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale&#x3D;true. Inherited assets are not included.
+    # @param campaign_id [String] Numeric Google platform id.
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :customer_id 
+    # @return [Array<(ListCampaignAssets200Response, Integer, Hash)>] ListCampaignAssets200Response data, response status code and response headers
+    def list_campaign_assets_with_http_info(campaign_id, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.list_campaign_assets ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.list_campaign_assets"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && campaign_id !~ pattern
+        fail ArgumentError, "invalid value for 'campaign_id' when calling AdCampaignsApi.list_campaign_assets, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AdCampaignsApi.list_campaign_assets"
+      end
+      pattern = Regexp.new(/^[a-fA-F0-9]{24}$/)
+      if @api_client.config.client_side_validation && account_id !~ pattern
+        fail ArgumentError, "invalid value for 'account_id' when calling AdCampaignsApi.list_campaign_assets, must conform to the pattern #{pattern}."
+      end
+
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && !opts[:'customer_id'].nil? && opts[:'customer_id'] !~ pattern
+        fail ArgumentError, "invalid value for 'opts[:\"customer_id\"]' when calling AdCampaignsApi.list_campaign_assets, must conform to the pattern #{pattern}."
+      end
+
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/assets'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'accountId'] = account_id
+      query_params[:'customerId'] = opts[:'customer_id'] if !opts[:'customer_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListCampaignAssets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.list_campaign_assets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#list_campaign_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List campaign negative lists
     # Returns shared negative keyword lists attached to the campaign, separate from campaign-level negative keywords. Google Ads shared negative keyword lists (shared_set type NEGATIVE_KEYWORDS). Reads are cached for 10 minutes; quota exhaustion may return the last successful result for up to 7 days with stale=true. Customer selection is limited to this connection and its account scope.
     # @param campaign_id [String] 
@@ -2204,6 +2464,85 @@ module Zernio
       return data, status_code, headers
     end
 
+    # Remove ad-group assets
+    # Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+    # @param ad_set_id [String] Numeric Google platform id.
+    # @param remove_ad_group_assets_request [RemoveAdGroupAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [RemoveCampaignAssets200Response]
+    def remove_ad_group_assets(ad_set_id, remove_ad_group_assets_request, opts = {})
+      data, _status_code, _headers = remove_ad_group_assets_with_http_info(ad_set_id, remove_ad_group_assets_request, opts)
+      data
+    end
+
+    # Remove ad-group assets
+    # Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+    # @param ad_set_id [String] Numeric Google platform id.
+    # @param remove_ad_group_assets_request [RemoveAdGroupAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RemoveCampaignAssets200Response, Integer, Hash)>] RemoveCampaignAssets200Response data, response status code and response headers
+    def remove_ad_group_assets_with_http_info(ad_set_id, remove_ad_group_assets_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.remove_ad_group_assets ...'
+      end
+      # verify the required parameter 'ad_set_id' is set
+      if @api_client.config.client_side_validation && ad_set_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_set_id' when calling AdCampaignsApi.remove_ad_group_assets"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && ad_set_id !~ pattern
+        fail ArgumentError, "invalid value for 'ad_set_id' when calling AdCampaignsApi.remove_ad_group_assets, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'remove_ad_group_assets_request' is set
+      if @api_client.config.client_side_validation && remove_ad_group_assets_request.nil?
+        fail ArgumentError, "Missing the required parameter 'remove_ad_group_assets_request' when calling AdCampaignsApi.remove_ad_group_assets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ad-sets/{adSetId}/assets'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(remove_ad_group_assets_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveCampaignAssets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.remove_ad_group_assets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#remove_ad_group_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Remove a Search keyword
     # Removes one keyword criterion (positive or negative) from its ad group (M.140).
     # @param keyword_id [String] Zernio keyword ID (not the Google criterion ID)
@@ -2263,6 +2602,85 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdCampaignsApi#remove_ad_keyword\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Remove campaign assets
+    # Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+    # @param campaign_id [String] Numeric Google platform id.
+    # @param remove_campaign_assets_request [RemoveCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [RemoveCampaignAssets200Response]
+    def remove_campaign_assets(campaign_id, remove_campaign_assets_request, opts = {})
+      data, _status_code, _headers = remove_campaign_assets_with_http_info(campaign_id, remove_campaign_assets_request, opts)
+      data
+    end
+
+    # Remove campaign assets
+    # Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+    # @param campaign_id [String] Numeric Google platform id.
+    # @param remove_campaign_assets_request [RemoveCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(RemoveCampaignAssets200Response, Integer, Hash)>] RemoveCampaignAssets200Response data, response status code and response headers
+    def remove_campaign_assets_with_http_info(campaign_id, remove_campaign_assets_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.remove_campaign_assets ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.remove_campaign_assets"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && campaign_id !~ pattern
+        fail ArgumentError, "invalid value for 'campaign_id' when calling AdCampaignsApi.remove_campaign_assets, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'remove_campaign_assets_request' is set
+      if @api_client.config.client_side_validation && remove_campaign_assets_request.nil?
+        fail ArgumentError, "Missing the required parameter 'remove_campaign_assets_request' when calling AdCampaignsApi.remove_campaign_assets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/assets'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(remove_campaign_assets_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RemoveCampaignAssets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.remove_campaign_assets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#remove_campaign_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2421,7 +2839,7 @@ module Zernio
     end
 
     # Update ad
-    # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via `/v2/adgroup/update/`), and creative   (via `/v2/ad/update/` patch-style: `headline` is ignored, `body` becomes `ad_text`). - **Google**: status, budget, KEYWORD edits via `targeting.keywords` /   `targeting.negativeKeywords`, and DEVICE bid adjustments via `targeting.devices`.   Each list you send becomes the FULL new set of its kind (criteria not in the   list are removed); a kind left out is untouched. Any other `targeting` field   returns 400: Google cannot mutate broad targeting post-create without recreating   the campaign. `creative` returns 501. - **LinkedIn**: status, budget, targeting (countries or regions, excludedLocations (countries),   the B2B facets, and audience segments; applied to the LinkedIn Campaign via   PARTIAL_UPDATE, and REPLACES the campaign's entire targetingCriteria, not a merge),   and creative (uploads new media, creates a replacement inline creative on the same   campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   `targeting` or `creative` returns 501 with code `unsupported_platform_operation`.   OpenAI Ads budget is lifetime-only (see `budget.type` below).  **Google keyword replacement:** These edits affect the ad's entire ad group, including sibling ads. Positive (`targeting.keywords`) and negative (`targeting.negativeKeywords`) sets are independent: omit a field to leave that set unchanged, or send `[]` to remove every keyword of that kind.  Zernio compares each supplied set with Google's live criteria by case-insensitive keyword text and match type. A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally. Text comparison does not trim whitespace.  A bare string or an object without `matchType` means `broad`, not the existing criterion's match type. For example, resending an existing `{ \"text\": \"plumber\", \"matchType\": \"exact\" }` preserves it; sending `\"plumber\"` instead removes that EXACT criterion and requests a BROAD one. Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria's bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). Use `PATCH /v1/ads/keywords/{keywordId}` to pause/enable one keyword, or `DELETE /v1/ads/keywords/{keywordId}` to remove it. 
+    # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via `/v2/adgroup/update/`), and creative   (via `/v2/ad/update/` patch-style: `headline` is ignored, `body` becomes `ad_text`). - **Google**: status, budget, KEYWORD edits via `targeting.keywords` /   `targeting.negativeKeywords`, and DEVICE bid adjustments via `targeting.devices`.   Each list you send becomes the FULL new set of its kind (criteria not in the   list are removed); a kind left out is untouched. Any other `targeting` field   returns 400: Google cannot mutate broad targeting post-create without recreating   the campaign. RSA text updates use top-level `headlines`, `descriptions` and `finalUrls`.   Each supplied array replaces the full list; omit a field to preserve it. Use 3-15 headlines   (1-30 characters) and 2-4 descriptions (1-90 characters). Omit an asset to remove it;   omit pinnedField on an included asset to unpin it. Updates do not pad or truncate text.   The legacy creative fields remain unsupported for Google. - **LinkedIn**: status, budget, targeting (countries or regions, excludedLocations (countries),   the B2B facets, and audience segments; applied to the LinkedIn Campaign via   PARTIAL_UPDATE, and REPLACES the campaign's entire targetingCriteria, not a merge),   and creative (uploads new media, creates a replacement inline creative on the same   campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   `targeting` or `creative` returns 501 with code `unsupported_platform_operation`.   OpenAI Ads budget is lifetime-only (see `budget.type` below).  **Google keyword replacement:** These edits affect the ad's entire ad group, including sibling ads. Positive (`targeting.keywords`) and negative (`targeting.negativeKeywords`) sets are independent: omit a field to leave that set unchanged, or send `[]` to remove every keyword of that kind.  Zernio compares each supplied set with Google's live criteria by case-insensitive keyword text and match type. A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally. Text comparison does not trim whitespace.  A bare string or an object without `matchType` means `broad`, not the existing criterion's match type. For example, resending an existing `{ \"text\": \"plumber\", \"matchType\": \"exact\" }` preserves it; sending `\"plumber\"` instead removes that EXACT criterion and requests a BROAD one. Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria's bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). Use `PATCH /v1/ads/keywords/{keywordId}` to pause/enable one keyword, or `DELETE /v1/ads/keywords/{keywordId}` to remove it. 
     # @param ad_id [String] 
     # @param update_ad_request [UpdateAdRequest] 
     # @param [Hash] opts the optional parameters
@@ -2432,7 +2850,7 @@ module Zernio
     end
 
     # Update ad
-    # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via &#x60;/v2/adgroup/update/&#x60;), and creative   (via &#x60;/v2/ad/update/&#x60; patch-style: &#x60;headline&#x60; is ignored, &#x60;body&#x60; becomes &#x60;ad_text&#x60;). - **Google**: status, budget, KEYWORD edits via &#x60;targeting.keywords&#x60; /   &#x60;targeting.negativeKeywords&#x60;, and DEVICE bid adjustments via &#x60;targeting.devices&#x60;.   Each list you send becomes the FULL new set of its kind (criteria not in the   list are removed); a kind left out is untouched. Any other &#x60;targeting&#x60; field   returns 400: Google cannot mutate broad targeting post-create without recreating   the campaign. &#x60;creative&#x60; returns 501. - **LinkedIn**: status, budget, targeting (countries or regions, excludedLocations (countries),   the B2B facets, and audience segments; applied to the LinkedIn Campaign via   PARTIAL_UPDATE, and REPLACES the campaign&#39;s entire targetingCriteria, not a merge),   and creative (uploads new media, creates a replacement inline creative on the same   campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   &#x60;targeting&#x60; or &#x60;creative&#x60; returns 501 with code &#x60;unsupported_platform_operation&#x60;.   OpenAI Ads budget is lifetime-only (see &#x60;budget.type&#x60; below).  **Google keyword replacement:** These edits affect the ad&#39;s entire ad group, including sibling ads. Positive (&#x60;targeting.keywords&#x60;) and negative (&#x60;targeting.negativeKeywords&#x60;) sets are independent: omit a field to leave that set unchanged, or send &#x60;[]&#x60; to remove every keyword of that kind.  Zernio compares each supplied set with Google&#39;s live criteria by case-insensitive keyword text and match type. A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally. Text comparison does not trim whitespace.  A bare string or an object without &#x60;matchType&#x60; means &#x60;broad&#x60;, not the existing criterion&#39;s match type. For example, resending an existing &#x60;{ \&quot;text\&quot;: \&quot;plumber\&quot;, \&quot;matchType\&quot;: \&quot;exact\&quot; }&#x60; preserves it; sending &#x60;\&quot;plumber\&quot;&#x60; instead removes that EXACT criterion and requests a BROAD one. Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria&#39;s bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). Use &#x60;PATCH /v1/ads/keywords/{keywordId}&#x60; to pause/enable one keyword, or &#x60;DELETE /v1/ads/keywords/{keywordId}&#x60; to remove it. 
+    # Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via &#x60;/v2/adgroup/update/&#x60;), and creative   (via &#x60;/v2/ad/update/&#x60; patch-style: &#x60;headline&#x60; is ignored, &#x60;body&#x60; becomes &#x60;ad_text&#x60;). - **Google**: status, budget, KEYWORD edits via &#x60;targeting.keywords&#x60; /   &#x60;targeting.negativeKeywords&#x60;, and DEVICE bid adjustments via &#x60;targeting.devices&#x60;.   Each list you send becomes the FULL new set of its kind (criteria not in the   list are removed); a kind left out is untouched. Any other &#x60;targeting&#x60; field   returns 400: Google cannot mutate broad targeting post-create without recreating   the campaign. RSA text updates use top-level &#x60;headlines&#x60;, &#x60;descriptions&#x60; and &#x60;finalUrls&#x60;.   Each supplied array replaces the full list; omit a field to preserve it. Use 3-15 headlines   (1-30 characters) and 2-4 descriptions (1-90 characters). Omit an asset to remove it;   omit pinnedField on an included asset to unpin it. Updates do not pad or truncate text.   The legacy creative fields remain unsupported for Google. - **LinkedIn**: status, budget, targeting (countries or regions, excludedLocations (countries),   the B2B facets, and audience segments; applied to the LinkedIn Campaign via   PARTIAL_UPDATE, and REPLACES the campaign&#39;s entire targetingCriteria, not a merge),   and creative (uploads new media, creates a replacement inline creative on the same   campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   &#x60;targeting&#x60; or &#x60;creative&#x60; returns 501 with code &#x60;unsupported_platform_operation&#x60;.   OpenAI Ads budget is lifetime-only (see &#x60;budget.type&#x60; below).  **Google keyword replacement:** These edits affect the ad&#39;s entire ad group, including sibling ads. Positive (&#x60;targeting.keywords&#x60;) and negative (&#x60;targeting.negativeKeywords&#x60;) sets are independent: omit a field to leave that set unchanged, or send &#x60;[]&#x60; to remove every keyword of that kind.  Zernio compares each supplied set with Google&#39;s live criteria by case-insensitive keyword text and match type. A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally. Text comparison does not trim whitespace.  A bare string or an object without &#x60;matchType&#x60; means &#x60;broad&#x60;, not the existing criterion&#39;s match type. For example, resending an existing &#x60;{ \&quot;text\&quot;: \&quot;plumber\&quot;, \&quot;matchType\&quot;: \&quot;exact\&quot; }&#x60; preserves it; sending &#x60;\&quot;plumber\&quot;&#x60; instead removes that EXACT criterion and requests a BROAD one. Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria&#39;s bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). Use &#x60;PATCH /v1/ads/keywords/{keywordId}&#x60; to pause/enable one keyword, or &#x60;DELETE /v1/ads/keywords/{keywordId}&#x60; to remove it. 
     # @param ad_id [String] 
     # @param update_ad_request [UpdateAdRequest] 
     # @param [Hash] opts the optional parameters
@@ -2638,6 +3056,85 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdCampaignsApi#update_ad_campaign_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update ad-group assets
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param ad_set_id [String] Numeric Google platform id.
+    # @param update_campaign_assets_request [UpdateCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateCampaignAssets200Response]
+    def update_ad_group_assets(ad_set_id, update_campaign_assets_request, opts = {})
+      data, _status_code, _headers = update_ad_group_assets_with_http_info(ad_set_id, update_campaign_assets_request, opts)
+      data
+    end
+
+    # Update ad-group assets
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param ad_set_id [String] Numeric Google platform id.
+    # @param update_campaign_assets_request [UpdateCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateCampaignAssets200Response, Integer, Hash)>] UpdateCampaignAssets200Response data, response status code and response headers
+    def update_ad_group_assets_with_http_info(ad_set_id, update_campaign_assets_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_ad_group_assets ...'
+      end
+      # verify the required parameter 'ad_set_id' is set
+      if @api_client.config.client_side_validation && ad_set_id.nil?
+        fail ArgumentError, "Missing the required parameter 'ad_set_id' when calling AdCampaignsApi.update_ad_group_assets"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && ad_set_id !~ pattern
+        fail ArgumentError, "invalid value for 'ad_set_id' when calling AdCampaignsApi.update_ad_group_assets, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'update_campaign_assets_request' is set
+      if @api_client.config.client_side_validation && update_campaign_assets_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_campaign_assets_request' when calling AdCampaignsApi.update_ad_group_assets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/ad-sets/{adSetId}/assets'.sub('{' + 'adSetId' + '}', CGI.escape(ad_set_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_campaign_assets_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateCampaignAssets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.update_ad_group_assets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#update_ad_group_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -3008,6 +3505,85 @@ module Zernio
       data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AdCampaignsApi#update_bid_strategy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update campaign assets
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param campaign_id [String] Numeric Google platform id.
+    # @param update_campaign_assets_request [UpdateCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateCampaignAssets200Response]
+    def update_campaign_assets(campaign_id, update_campaign_assets_request, opts = {})
+      data, _status_code, _headers = update_campaign_assets_with_http_info(campaign_id, update_campaign_assets_request, opts)
+      data
+    end
+
+    # Update campaign assets
+    # Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+    # @param campaign_id [String] Numeric Google platform id.
+    # @param update_campaign_assets_request [UpdateCampaignAssetsRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateCampaignAssets200Response, Integer, Hash)>] UpdateCampaignAssets200Response data, response status code and response headers
+    def update_campaign_assets_with_http_info(campaign_id, update_campaign_assets_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AdCampaignsApi.update_campaign_assets ...'
+      end
+      # verify the required parameter 'campaign_id' is set
+      if @api_client.config.client_side_validation && campaign_id.nil?
+        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling AdCampaignsApi.update_campaign_assets"
+      end
+      pattern = Regexp.new(/^\d+$/)
+      if @api_client.config.client_side_validation && campaign_id !~ pattern
+        fail ArgumentError, "invalid value for 'campaign_id' when calling AdCampaignsApi.update_campaign_assets, must conform to the pattern #{pattern}."
+      end
+
+      # verify the required parameter 'update_campaign_assets_request' is set
+      if @api_client.config.client_side_validation && update_campaign_assets_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_campaign_assets_request' when calling AdCampaignsApi.update_campaign_assets"
+      end
+      # resource path
+      local_var_path = '/v1/ads/campaigns/{campaignId}/assets'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_campaign_assets_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'UpdateCampaignAssets200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AdCampaignsApi.update_campaign_assets",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AdCampaignsApi#update_campaign_assets\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -4,7 +4,9 @@ All URIs are relative to *https://zernio.com/api*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**add_account_callouts**](AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account-level callout extensions |
+| [**add_account_callouts**](AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account callouts |
+| [**add_account_sitelinks**](AdAccountsApi.md#add_account_sitelinks) | **POST** /v1/ads/accounts/sitelinks | Add account sitelinks |
+| [**add_account_structured_snippets**](AdAccountsApi.md#add_account_structured_snippets) | **POST** /v1/ads/accounts/structured-snippets | Add account snippets |
 | [**create_ad_negative_keyword_list**](AdAccountsApi.md#create_ad_negative_keyword_list) | **POST** /v1/ads/accounts/negative-keyword-lists | Create a negative keyword list |
 | [**create_custom_conversion**](AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion |
 | [**create_high_demand_period**](AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase |
@@ -21,7 +23,9 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_ios_fourteen_campaign_limits**](AdAccountsApi.md#get_ios_fourteen_campaign_limits) | **GET** /v1/ads/ios-fourteen-campaign-limits | Get iOS 14 campaign limits |
 | [**get_value_rule_set**](AdAccountsApi.md#get_value_rule_set) | **GET** /v1/ads/value-rule-sets/{valueRuleSetId} | Read a value rule set |
 | [**hide_ad_comment**](AdAccountsApi.md#hide_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/hide | Hide or unhide an ad comment |
-| [**list_account_callouts**](AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account-level callout extensions |
+| [**list_account_callouts**](AdAccountsApi.md#list_account_callouts) | **GET** /v1/ads/accounts/callouts | List account callouts |
+| [**list_account_sitelinks**](AdAccountsApi.md#list_account_sitelinks) | **GET** /v1/ads/accounts/sitelinks | List account sitelinks |
+| [**list_account_structured_snippets**](AdAccountsApi.md#list_account_structured_snippets) | **GET** /v1/ads/accounts/structured-snippets | List account snippets |
 | [**list_ad_accounts**](AdAccountsApi.md#list_ad_accounts) | **GET** /v1/ads/accounts | List ad accounts |
 | [**list_ad_labels**](AdAccountsApi.md#list_ad_labels) | **GET** /v1/ads/labels | Ad labels |
 | [**list_ad_negative_keyword_lists**](AdAccountsApi.md#list_ad_negative_keyword_lists) | **GET** /v1/ads/accounts/negative-keyword-lists | List negative keyword lists |
@@ -33,9 +37,14 @@ All URIs are relative to *https://zernio.com/api*
 | [**list_high_demand_periods**](AdAccountsApi.md#list_high_demand_periods) | **GET** /v1/ads/high-demand-periods | High demand periods / budget schedules |
 | [**list_meta_businesses**](AdAccountsApi.md#list_meta_businesses) | **GET** /v1/ads/businesses | Businesses list |
 | [**list_value_rule_sets**](AdAccountsApi.md#list_value_rule_sets) | **GET** /v1/ads/value-rule-sets | List value rule sets |
-| [**remove_account_callout**](AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove an account-level callout extension |
+| [**remove_account_callout**](AdAccountsApi.md#remove_account_callout) | **DELETE** /v1/ads/accounts/callouts | Remove account callout |
+| [**remove_account_sitelink**](AdAccountsApi.md#remove_account_sitelink) | **DELETE** /v1/ads/accounts/sitelinks | Remove account sitelink |
+| [**remove_account_structured_snippet**](AdAccountsApi.md#remove_account_structured_snippet) | **DELETE** /v1/ads/accounts/structured-snippets | Remove account snippet |
 | [**replace_ad_negative_keyword_list_keywords**](AdAccountsApi.md#replace_ad_negative_keyword_list_keywords) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId}/keywords | Replace negative list keywords |
 | [**reply_to_ad_comment**](AdAccountsApi.md#reply_to_ad_comment) | **POST** /v1/ads/{adId}/comments/{commentId}/reply | Reply to an ad comment |
+| [**update_account_callouts**](AdAccountsApi.md#update_account_callouts) | **PUT** /v1/ads/accounts/callouts | Update account callouts |
+| [**update_account_sitelinks**](AdAccountsApi.md#update_account_sitelinks) | **PUT** /v1/ads/accounts/sitelinks | Update account sitelinks |
+| [**update_account_structured_snippets**](AdAccountsApi.md#update_account_structured_snippets) | **PUT** /v1/ads/accounts/structured-snippets | Update account snippets |
 | [**update_ad_account**](AdAccountsApi.md#update_ad_account) | **PATCH** /v1/ads/accounts | Update ad account settings |
 | [**update_ad_negative_keyword_list**](AdAccountsApi.md#update_ad_negative_keyword_list) | **PUT** /v1/ads/accounts/negative-keyword-lists/{listId} | Rename a negative keyword list |
 | [**update_value_rule_set**](AdAccountsApi.md#update_value_rule_set) | **PUT** /v1/ads/value-rule-sets/{valueRuleSetId} | Replace a value rule set |
@@ -45,9 +54,9 @@ All URIs are relative to *https://zernio.com/api*
 
 > <AddAccountCallouts201Response> add_account_callouts(add_account_callouts_request)
 
-Add account-level callout extensions
+Add account callouts
 
-Creates one asset plus one `customerAsset` link (field type CALLOUT) per callout text, in a single mutate. Google only; every other platform returns 501.
+Creates assets and customer_asset links for this Google customer. Links apply at account level.
 
 ### Examples
 
@@ -64,7 +73,7 @@ api_instance = Zernio::AdAccountsApi.new
 add_account_callouts_request = Zernio::AddAccountCalloutsRequest.new({account_id: 'account_id_example', callouts: ['callouts_example']}) # AddAccountCalloutsRequest | 
 
 begin
-  # Add account-level callout extensions
+  # Add account callouts
   result = api_instance.add_account_callouts(add_account_callouts_request)
   p result
 rescue Zernio::ApiError => e
@@ -80,7 +89,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Add account-level callout extensions
+  # Add account callouts
   data, status_code, headers = api_instance.add_account_callouts_with_http_info(add_account_callouts_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -99,6 +108,144 @@ end
 ### Return type
 
 [**AddAccountCallouts201Response**](AddAccountCallouts201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## add_account_sitelinks
+
+> <AddAccountSitelinks201Response> add_account_sitelinks(add_account_sitelinks_request)
+
+Add account sitelinks
+
+Creates assets and customer_asset links for this Google customer. Links apply at account level.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+add_account_sitelinks_request = Zernio::AddAccountSitelinksRequest.new({account_id: 'account_id_example', sitelinks: [Zernio::GoogleSitelink.new({text: 'text_example', link_url: 'link_url_example'})]}) # AddAccountSitelinksRequest | 
+
+begin
+  # Add account sitelinks
+  result = api_instance.add_account_sitelinks(add_account_sitelinks_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->add_account_sitelinks: #{e}"
+end
+```
+
+#### Using the add_account_sitelinks_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AddAccountSitelinks201Response>, Integer, Hash)> add_account_sitelinks_with_http_info(add_account_sitelinks_request)
+
+```ruby
+begin
+  # Add account sitelinks
+  data, status_code, headers = api_instance.add_account_sitelinks_with_http_info(add_account_sitelinks_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AddAccountSitelinks201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->add_account_sitelinks_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **add_account_sitelinks_request** | [**AddAccountSitelinksRequest**](AddAccountSitelinksRequest.md) |  |  |
+
+### Return type
+
+[**AddAccountSitelinks201Response**](AddAccountSitelinks201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## add_account_structured_snippets
+
+> <AddAccountStructuredSnippets201Response> add_account_structured_snippets(add_account_structured_snippets_request)
+
+Add account snippets
+
+Creates assets and customer_asset links for this Google customer. Links apply at account level.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+add_account_structured_snippets_request = Zernio::AddAccountStructuredSnippetsRequest.new({account_id: 'account_id_example', structured_snippets: [Zernio::GoogleStructuredSnippet.new({header: 'Amenities', values: ['values_example']})]}) # AddAccountStructuredSnippetsRequest | 
+
+begin
+  # Add account snippets
+  result = api_instance.add_account_structured_snippets(add_account_structured_snippets_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->add_account_structured_snippets: #{e}"
+end
+```
+
+#### Using the add_account_structured_snippets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AddAccountStructuredSnippets201Response>, Integer, Hash)> add_account_structured_snippets_with_http_info(add_account_structured_snippets_request)
+
+```ruby
+begin
+  # Add account snippets
+  data, status_code, headers = api_instance.add_account_structured_snippets_with_http_info(add_account_structured_snippets_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AddAccountStructuredSnippets201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->add_account_structured_snippets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **add_account_structured_snippets_request** | [**AddAccountStructuredSnippetsRequest**](AddAccountStructuredSnippetsRequest.md) |  |  |
+
+### Return type
+
+[**AddAccountStructuredSnippets201Response**](AddAccountStructuredSnippets201Response.md)
 
 ### Authorization
 
@@ -1294,9 +1441,9 @@ end
 
 > <ListAccountCallouts200Response> list_account_callouts(account_id, opts)
 
-List account-level callout extensions
+List account callouts
 
-Google Ads compliance row C.75: callout assets linked at the CUSTOMER level via `customer_asset` (not a campaign or ad group), so they serve fleet-wide across the account. Google only; every other platform returns 501. Cached for the quota window (10 minutes fresh, up to 7 days last-good), and gated by the shared Google Ads operations budget on a cache miss. The response carries `cachedAt` and `stale`, set when a quota-exhausted call falls back to the last-good copy instead of a live read.
+Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included. Preserves Google RMF C.75 account-level callouts.
 
 ### Examples
 
@@ -1310,13 +1457,13 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdAccountsApi.new
-account_id = 'account_id_example' # String | Google ads SocialAccount id.
+account_id = 'account_id_example' # String | 
 opts = {
-  customer_id: 'customer_id_example' # String | Numeric Google Ads customer id (no dashes). Defaults to the account's connected customer.
+  customer_id: 'customer_id_example' # String | 
 }
 
 begin
-  # List account-level callout extensions
+  # List account callouts
   result = api_instance.list_account_callouts(account_id, opts)
   p result
 rescue Zernio::ApiError => e
@@ -1332,7 +1479,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List account-level callout extensions
+  # List account callouts
   data, status_code, headers = api_instance.list_account_callouts_with_http_info(account_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -1346,12 +1493,158 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Google ads SocialAccount id. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id (no dashes). Defaults to the account&#39;s connected customer. | [optional] |
+| **account_id** | **String** |  |  |
+| **customer_id** | **String** |  | [optional] |
 
 ### Return type
 
 [**ListAccountCallouts200Response**](ListAccountCallouts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_account_sitelinks
+
+> <ListAccountSitelinks200Response> list_account_sitelinks(account_id, opts)
+
+List account sitelinks
+
+Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | 
+opts = {
+  customer_id: 'customer_id_example' # String | 
+}
+
+begin
+  # List account sitelinks
+  result = api_instance.list_account_sitelinks(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_account_sitelinks: #{e}"
+end
+```
+
+#### Using the list_account_sitelinks_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAccountSitelinks200Response>, Integer, Hash)> list_account_sitelinks_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List account sitelinks
+  data, status_code, headers = api_instance.list_account_sitelinks_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAccountSitelinks200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_account_sitelinks_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **customer_id** | **String** |  | [optional] |
+
+### Return type
+
+[**ListAccountSitelinks200Response**](ListAccountSitelinks200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_account_structured_snippets
+
+> <ListAccountStructuredSnippets200Response> list_account_structured_snippets(account_id, opts)
+
+List account snippets
+
+Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+account_id = 'account_id_example' # String | 
+opts = {
+  customer_id: 'customer_id_example' # String | 
+}
+
+begin
+  # List account snippets
+  result = api_instance.list_account_structured_snippets(account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_account_structured_snippets: #{e}"
+end
+```
+
+#### Using the list_account_structured_snippets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAccountStructuredSnippets200Response>, Integer, Hash)> list_account_structured_snippets_with_http_info(account_id, opts)
+
+```ruby
+begin
+  # List account snippets
+  data, status_code, headers = api_instance.list_account_structured_snippets_with_http_info(account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAccountStructuredSnippets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->list_account_structured_snippets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **account_id** | **String** |  |  |
+| **customer_id** | **String** |  | [optional] |
+
+### Return type
+
+[**ListAccountStructuredSnippets200Response**](ListAccountStructuredSnippets200Response.md)
 
 ### Authorization
 
@@ -2186,9 +2479,9 @@ end
 
 > <RemoveAccountCallout200Response> remove_account_callout(remove_account_callout_request)
 
-Remove an account-level callout extension
+Remove account callout
 
-Removes the `customerAsset` link (`customers/{cid}/customerAssets/{assetId}~CALLOUT`). Google only; every other platform returns 501.
+Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
 
 ### Examples
 
@@ -2205,7 +2498,7 @@ api_instance = Zernio::AdAccountsApi.new
 remove_account_callout_request = Zernio::RemoveAccountCalloutRequest.new({account_id: 'account_id_example', asset_id: 'asset_id_example'}) # RemoveAccountCalloutRequest | 
 
 begin
-  # Remove an account-level callout extension
+  # Remove account callout
   result = api_instance.remove_account_callout(remove_account_callout_request)
   p result
 rescue Zernio::ApiError => e
@@ -2221,13 +2514,151 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Remove an account-level callout extension
+  # Remove account callout
   data, status_code, headers = api_instance.remove_account_callout_with_http_info(remove_account_callout_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <RemoveAccountCallout200Response>
 rescue Zernio::ApiError => e
   puts "Error when calling AdAccountsApi->remove_account_callout_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **remove_account_callout_request** | [**RemoveAccountCalloutRequest**](RemoveAccountCalloutRequest.md) |  |  |
+
+### Return type
+
+[**RemoveAccountCallout200Response**](RemoveAccountCallout200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## remove_account_sitelink
+
+> <RemoveAccountCallout200Response> remove_account_sitelink(remove_account_callout_request)
+
+Remove account sitelink
+
+Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+remove_account_callout_request = Zernio::RemoveAccountCalloutRequest.new({account_id: 'account_id_example', asset_id: 'asset_id_example'}) # RemoveAccountCalloutRequest | 
+
+begin
+  # Remove account sitelink
+  result = api_instance.remove_account_sitelink(remove_account_callout_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_account_sitelink: #{e}"
+end
+```
+
+#### Using the remove_account_sitelink_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_sitelink_with_http_info(remove_account_callout_request)
+
+```ruby
+begin
+  # Remove account sitelink
+  data, status_code, headers = api_instance.remove_account_sitelink_with_http_info(remove_account_callout_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveAccountCallout200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_account_sitelink_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **remove_account_callout_request** | [**RemoveAccountCalloutRequest**](RemoveAccountCalloutRequest.md) |  |  |
+
+### Return type
+
+[**RemoveAccountCallout200Response**](RemoveAccountCallout200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## remove_account_structured_snippet
+
+> <RemoveAccountCallout200Response> remove_account_structured_snippet(remove_account_callout_request)
+
+Remove account snippet
+
+Removes the customer_asset attachment only. The underlying shared asset and its campaign or ad-group attachments remain.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+remove_account_callout_request = Zernio::RemoveAccountCalloutRequest.new({account_id: 'account_id_example', asset_id: 'asset_id_example'}) # RemoveAccountCalloutRequest | 
+
+begin
+  # Remove account snippet
+  result = api_instance.remove_account_structured_snippet(remove_account_callout_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_account_structured_snippet: #{e}"
+end
+```
+
+#### Using the remove_account_structured_snippet_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveAccountCallout200Response>, Integer, Hash)> remove_account_structured_snippet_with_http_info(remove_account_callout_request)
+
+```ruby
+begin
+  # Remove account snippet
+  data, status_code, headers = api_instance.remove_account_structured_snippet_with_http_info(remove_account_callout_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveAccountCallout200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->remove_account_structured_snippet_with_http_info: #{e}"
 end
 ```
 
@@ -2390,6 +2821,213 @@ end
 ### Return type
 
 [**ReplyToAdComment200Response**](ReplyToAdComment200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_account_callouts
+
+> <UpdateAccountCallouts200Response> update_account_callouts(update_account_callouts_request)
+
+Update account callouts
+
+Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+update_account_callouts_request = Zernio::UpdateAccountCalloutsRequest.new({account_id: 'account_id_example', updates: [Zernio::UpdateAccountCalloutsRequestUpdatesInner.new({asset_resource_name: 'asset_resource_name_example'})]}) # UpdateAccountCalloutsRequest | 
+
+begin
+  # Update account callouts
+  result = api_instance.update_account_callouts(update_account_callouts_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_account_callouts: #{e}"
+end
+```
+
+#### Using the update_account_callouts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAccountCallouts200Response>, Integer, Hash)> update_account_callouts_with_http_info(update_account_callouts_request)
+
+```ruby
+begin
+  # Update account callouts
+  data, status_code, headers = api_instance.update_account_callouts_with_http_info(update_account_callouts_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAccountCallouts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_account_callouts_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_account_callouts_request** | [**UpdateAccountCalloutsRequest**](UpdateAccountCalloutsRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAccountCallouts200Response**](UpdateAccountCallouts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_account_sitelinks
+
+> <UpdateAccountCallouts200Response> update_account_sitelinks(update_account_sitelinks_request)
+
+Update account sitelinks
+
+Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+update_account_sitelinks_request = Zernio::UpdateAccountSitelinksRequest.new({account_id: 'account_id_example', updates: [Zernio::UpdateAccountSitelinksRequestUpdatesInner.new({asset_resource_name: 'asset_resource_name_example'})]}) # UpdateAccountSitelinksRequest | 
+
+begin
+  # Update account sitelinks
+  result = api_instance.update_account_sitelinks(update_account_sitelinks_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_account_sitelinks: #{e}"
+end
+```
+
+#### Using the update_account_sitelinks_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAccountCallouts200Response>, Integer, Hash)> update_account_sitelinks_with_http_info(update_account_sitelinks_request)
+
+```ruby
+begin
+  # Update account sitelinks
+  data, status_code, headers = api_instance.update_account_sitelinks_with_http_info(update_account_sitelinks_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAccountCallouts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_account_sitelinks_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_account_sitelinks_request** | [**UpdateAccountSitelinksRequest**](UpdateAccountSitelinksRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAccountCallouts200Response**](UpdateAccountCallouts200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_account_structured_snippets
+
+> <UpdateAccountCallouts200Response> update_account_structured_snippets(update_account_structured_snippets_request)
+
+Update account snippets
+
+Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdAccountsApi.new
+update_account_structured_snippets_request = Zernio::UpdateAccountStructuredSnippetsRequest.new({account_id: 'account_id_example', updates: [Zernio::UpdateAccountStructuredSnippetsRequestUpdatesInner.new({asset_resource_name: 'asset_resource_name_example'})]}) # UpdateAccountStructuredSnippetsRequest | 
+
+begin
+  # Update account snippets
+  result = api_instance.update_account_structured_snippets(update_account_structured_snippets_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_account_structured_snippets: #{e}"
+end
+```
+
+#### Using the update_account_structured_snippets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateAccountCallouts200Response>, Integer, Hash)> update_account_structured_snippets_with_http_info(update_account_structured_snippets_request)
+
+```ruby
+begin
+  # Update account snippets
+  data, status_code, headers = api_instance.update_account_structured_snippets_with_http_info(update_account_structured_snippets_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateAccountCallouts200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdAccountsApi->update_account_structured_snippets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_account_structured_snippets_request** | [**UpdateAccountStructuredSnippetsRequest**](UpdateAccountStructuredSnippetsRequest.md) |  |  |
+
+### Return type
+
+[**UpdateAccountCallouts200Response**](UpdateAccountCallouts200Response.md)
 
 ### Authorization
 

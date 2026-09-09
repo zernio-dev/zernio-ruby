@@ -1,4 +1,4 @@
-# Zernio::AttachCampaignAssetsRequestStructuredSnippetsInner
+# Zernio::GoogleStructuredSnippet
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'zernio-sdk'
 
-instance = Zernio::AttachCampaignAssetsRequestStructuredSnippetsInner.new(
+instance = Zernio::GoogleStructuredSnippet.new(
   header: null,
   values: null
 )

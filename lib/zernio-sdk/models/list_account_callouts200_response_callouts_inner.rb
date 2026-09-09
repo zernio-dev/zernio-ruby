@@ -17,17 +17,16 @@ module Zernio
   class ListAccountCallouts200ResponseCalloutsInner < ApiModelBase
     attr_accessor :asset_id
 
-    attr_accessor :text
-
-    # customer_asset.status, e.g. ENABLED, REMOVED, PAUSED.
     attr_accessor :status
+
+    attr_accessor :text
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'asset_id' => :'assetId',
-        :'text' => :'text',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'text' => :'text'
       }
     end
 
@@ -45,8 +44,8 @@ module Zernio
     def self.openapi_types
       {
         :'asset_id' => :'String',
-        :'text' => :'String',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'text' => :'String'
       }
     end
 
@@ -76,12 +75,12 @@ module Zernio
         self.asset_id = attributes[:'asset_id']
       end
 
-      if attributes.key?(:'text')
-        self.text = attributes[:'text']
-      end
-
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'text')
+        self.text = attributes[:'text']
       end
     end
 
@@ -106,8 +105,8 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           asset_id == o.asset_id &&
-          text == o.text &&
-          status == o.status
+          status == o.status &&
+          text == o.text
     end
 
     # @see the `==` method
@@ -119,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [asset_id, text, status].hash
+      [asset_id, status, text].hash
     end
 
     # Builds the object from hash

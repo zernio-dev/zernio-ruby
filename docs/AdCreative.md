@@ -4,6 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **headlines** | [**Array&lt;GoogleRsaHeadline&gt;**](GoogleRsaHeadline.md) | Google RSA only. Replaces the complete headline list. No padding or truncation on update. | [optional] |
+| **descriptions** | [**Array&lt;GoogleRsaDescription&gt;**](GoogleRsaDescription.md) | Google RSA only. Replaces the complete description list. No padding or truncation on update. | [optional] |
+| **final_urls** | **Array&lt;String&gt;** | Google RSA only. Replaces final URLs. Omitted lists stay unchanged. | [optional] |
 | **thumbnail_url** | **String** | Primary thumbnail/image URL | [optional] |
 | **image_url** | **String** | Alternative image URL | [optional] |
 | **video_id** | **String** | Meta video ID for VIDEO-type ads. Null for non-video ads. Callers that need an embeddable MP4 can call GET /{videoId}?fields&#x3D;source with the page access token. | [optional] |
@@ -36,6 +39,9 @@
 require 'zernio-sdk'
 
 instance = Zernio::AdCreative.new(
+  headlines: null,
+  descriptions: null,
+  final_urls: null,
   thumbnail_url: null,
   image_url: null,
   video_id: null,

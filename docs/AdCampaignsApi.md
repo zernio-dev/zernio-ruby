@@ -5,7 +5,8 @@ All URIs are relative to *https://zernio.com/api*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**add_ad_keywords**](AdCampaignsApi.md#add_ad_keywords) | **POST** /v1/ads/keywords | Add Search keywords to an ad group |
-| [**attach_campaign_assets**](AdCampaignsApi.md#attach_campaign_assets) | **POST** /v1/ads/campaigns/{campaignId}/assets | Attach extension assets to a Google Search campaign |
+| [**attach_ad_group_assets**](AdCampaignsApi.md#attach_ad_group_assets) | **POST** /v1/ads/ad-sets/{adSetId}/assets | Attach ad-group assets |
+| [**attach_campaign_assets**](AdCampaignsApi.md#attach_campaign_assets) | **POST** /v1/ads/campaigns/{campaignId}/assets | Attach campaign assets |
 | [**boost_post**](AdCampaignsApi.md#boost_post) | **POST** /v1/ads/boost | Boost post as ad |
 | [**bulk_update_ad_campaign_status**](AdCampaignsApi.md#bulk_update_ad_campaign_status) | **POST** /v1/ads/campaigns/bulk-status | Pause or resume many campaigns |
 | [**create_ad_campaign**](AdCampaignsApi.md#create_ad_campaign) | **POST** /v1/ads/campaigns | Create a standalone campaign |
@@ -25,23 +26,29 @@ All URIs are relative to *https://zernio.com/api*
 | [**get_campaign_bidding**](AdCampaignsApi.md#get_campaign_bidding) | **GET** /v1/ads/campaigns/{campaignId}/bidding | Read a campaign&#39;s current bidding |
 | [**get_campaign_targeting**](AdCampaignsApi.md#get_campaign_targeting) | **GET** /v1/ads/campaigns/{campaignId}/targeting | Read a Google campaign&#39;s device, location, and language targeting |
 | [**list_ad_campaigns**](AdCampaignsApi.md#list_ad_campaigns) | **GET** /v1/ads/campaigns | List campaigns |
+| [**list_ad_group_assets**](AdCampaignsApi.md#list_ad_group_assets) | **GET** /v1/ads/ad-sets/{adSetId}/assets | List ad-group assets |
 | [**list_ad_keywords**](AdCampaignsApi.md#list_ad_keywords) | **GET** /v1/ads/keywords | List Search keywords |
 | [**list_ad_sets**](AdCampaignsApi.md#list_ad_sets) | **GET** /v1/ads/ad-sets | List ad sets |
 | [**list_ads**](AdCampaignsApi.md#list_ads) | **GET** /v1/ads | List ads |
 | [**list_bid_strategies**](AdCampaignsApi.md#list_bid_strategies) | **GET** /v1/ads/bid-strategies | List Google Ads portfolio bid strategies |
+| [**list_campaign_assets**](AdCampaignsApi.md#list_campaign_assets) | **GET** /v1/ads/campaigns/{campaignId}/assets | List campaign assets |
 | [**list_campaign_negative_keyword_lists**](AdCampaignsApi.md#list_campaign_negative_keyword_lists) | **GET** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | List campaign negative lists |
 | [**list_campaign_negative_keywords**](AdCampaignsApi.md#list_campaign_negative_keywords) | **GET** /v1/ads/campaigns/{campaignId}/negative-keywords | List campaign-level negative keywords |
+| [**remove_ad_group_assets**](AdCampaignsApi.md#remove_ad_group_assets) | **DELETE** /v1/ads/ad-sets/{adSetId}/assets | Remove ad-group assets |
 | [**remove_ad_keyword**](AdCampaignsApi.md#remove_ad_keyword) | **DELETE** /v1/ads/keywords/{keywordId} | Remove a Search keyword |
+| [**remove_campaign_assets**](AdCampaignsApi.md#remove_campaign_assets) | **DELETE** /v1/ads/campaigns/{campaignId}/assets | Remove campaign assets |
 | [**replace_campaign_negative_keyword_lists**](AdCampaignsApi.md#replace_campaign_negative_keyword_lists) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keyword-lists | Replace campaign negative lists |
 | [**replace_campaign_negative_keywords**](AdCampaignsApi.md#replace_campaign_negative_keywords) | **PUT** /v1/ads/campaigns/{campaignId}/negative-keywords | Replace campaign-level negative keywords |
 | [**update_ad**](AdCampaignsApi.md#update_ad) | **PUT** /v1/ads/{adId} | Update ad |
 | [**update_ad_campaign**](AdCampaignsApi.md#update_ad_campaign) | **PUT** /v1/ads/campaigns/{campaignId} | Update a campaign |
 | [**update_ad_campaign_status**](AdCampaignsApi.md#update_ad_campaign_status) | **PUT** /v1/ads/campaigns/{campaignId}/status | Pause or resume a campaign |
+| [**update_ad_group_assets**](AdCampaignsApi.md#update_ad_group_assets) | **PUT** /v1/ads/ad-sets/{adSetId}/assets | Update ad-group assets |
 | [**update_ad_keyword**](AdCampaignsApi.md#update_ad_keyword) | **PATCH** /v1/ads/keywords/{keywordId} | Pause or enable a Search keyword |
 | [**update_ad_set**](AdCampaignsApi.md#update_ad_set) | **PUT** /v1/ads/ad-sets/{adSetId} | Update an ad set |
 | [**update_ad_set_status**](AdCampaignsApi.md#update_ad_set_status) | **PUT** /v1/ads/ad-sets/{adSetId}/status | Pause or resume a single ad set |
 | [**update_ad_status**](AdCampaignsApi.md#update_ad_status) | **PUT** /v1/ads/{adId}/status | Pause or resume a single ad |
 | [**update_bid_strategy**](AdCampaignsApi.md#update_bid_strategy) | **PATCH** /v1/ads/bid-strategies/{strategyId} | Update a Google Ads portfolio bid strategy |
+| [**update_campaign_assets**](AdCampaignsApi.md#update_campaign_assets) | **PUT** /v1/ads/campaigns/{campaignId}/assets | Update campaign assets |
 | [**update_campaign_targeting**](AdCampaignsApi.md#update_campaign_targeting) | **PUT** /v1/ads/campaigns/{campaignId}/targeting | Edit a Google campaign&#39;s device, location, or language targeting |
 
 
@@ -114,13 +121,13 @@ end
 - **Accept**: application/json
 
 
-## attach_campaign_assets
+## attach_ad_group_assets
 
-> <AttachCampaignAssets201Response> attach_campaign_assets(campaign_id, attach_campaign_assets_request)
+> <AttachAdGroupAssets201Response> attach_ad_group_assets(ad_set_id, attach_campaign_assets_request)
 
-Attach extension assets to a Google Search campaign
+Attach ad-group assets
 
-Attach sitelinks, callouts and/or structured snippets to an already-existing Google Search campaign. These are the same builders POST /v1/ads/create uses, but without rebuilding the hierarchy. At least one of sitelinks, callouts or structuredSnippets is required.  Google-only. Other platforms have no equivalent extension surface and return 501.  Approval status is Google-async; poll `asset.policy_summary` after review. Assets stay in the account library even if the campaign is later deleted.
+Creates and attaches sitelinks, callouts and structured snippets in one Google mutation.
 
 ### Examples
 
@@ -134,11 +141,82 @@ Zernio.configure do |config|
 end
 
 api_instance = Zernio::AdCampaignsApi.new
-campaign_id = 'campaign_id_example' # String | Numeric Google platform campaign id.
+ad_set_id = 'ad_set_id_example' # String | Numeric Google platform id.
 attach_campaign_assets_request = Zernio::AttachCampaignAssetsRequest.new({account_id: 'account_id_example'}) # AttachCampaignAssetsRequest | 
 
 begin
-  # Attach extension assets to a Google Search campaign
+  # Attach ad-group assets
+  result = api_instance.attach_ad_group_assets(ad_set_id, attach_campaign_assets_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->attach_ad_group_assets: #{e}"
+end
+```
+
+#### Using the attach_ad_group_assets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AttachAdGroupAssets201Response>, Integer, Hash)> attach_ad_group_assets_with_http_info(ad_set_id, attach_campaign_assets_request)
+
+```ruby
+begin
+  # Attach ad-group assets
+  data, status_code, headers = api_instance.attach_ad_group_assets_with_http_info(ad_set_id, attach_campaign_assets_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AttachAdGroupAssets201Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->attach_ad_group_assets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_set_id** | **String** | Numeric Google platform id. |  |
+| **attach_campaign_assets_request** | [**AttachCampaignAssetsRequest**](AttachCampaignAssetsRequest.md) |  |  |
+
+### Return type
+
+[**AttachAdGroupAssets201Response**](AttachAdGroupAssets201Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## attach_campaign_assets
+
+> <AttachCampaignAssets201Response> attach_campaign_assets(campaign_id, attach_campaign_assets_request)
+
+Attach campaign assets
+
+Creates and attaches sitelinks, callouts and structured snippets in one Google mutation.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Numeric Google platform id.
+attach_campaign_assets_request = Zernio::AttachCampaignAssetsRequest.new({account_id: 'account_id_example'}) # AttachCampaignAssetsRequest | 
+
+begin
+  # Attach campaign assets
   result = api_instance.attach_campaign_assets(campaign_id, attach_campaign_assets_request)
   p result
 rescue Zernio::ApiError => e
@@ -154,7 +232,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Attach extension assets to a Google Search campaign
+  # Attach campaign assets
   data, status_code, headers = api_instance.attach_campaign_assets_with_http_info(campaign_id, attach_campaign_assets_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -168,7 +246,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | Numeric Google platform campaign id. |  |
+| **campaign_id** | **String** | Numeric Google platform id. |  |
 | **attach_campaign_assets_request** | [**AttachCampaignAssetsRequest**](AttachCampaignAssetsRequest.md) |  |  |
 
 ### Return type
@@ -1055,7 +1133,7 @@ end
 
 Get ad details
 
-Returns an ad with its creative, targeting, status, and performance metrics.  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal `_id` (24-char hex) - Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`) - the creative's `effective_object_story_id` (`{pageId}_{postId}` shape, Facebook side) - the creative's `effective_instagram_media_id` (Instagram side)  Any of the four resolve to the same ad. Caller doesn't need a translation step. By default, creative.promotion and creative.creativeFeatures contain stored requested settings, which do not confirm platform application. With `refreshPromotion=true`, Meta promotion metadata is read live and exposed as `ad.creative.promotion` with `promotionStatus`. Only `applied` confirms an offer; `not_returned` means the creative read succeeded without promotion metadata, and `unavailable` means it failed. 
+Returns an ad with its creative, targeting, status, and performance metrics. Google Search ads include current creative.headlines, creative.descriptions and creative.finalUrls, preserving pinnedField. Top-level cachedAt and stale report cache freshness. Google mutations invalidate this read. RSA enrichment requires a stored advertisingChannelType of SEARCH. Ads with an unknown or other channel return their stored details without a Google read. If RSA enrichment fails, the stored ad is returned with HTTP 200 and without cache metadata.  The `{adId}` path segment accepts any identifier dialect Zernio indexes for the ad: - the Zernio internal `_id` (24-char hex) - Meta's numeric `platformAdId` (the value shipped in `comment.received` webhooks as `comment.ad.id`) - the creative's `effective_object_story_id` (`{pageId}_{postId}` shape, Facebook side) - the creative's `effective_instagram_media_id` (Instagram side)  Any of the four resolve to the same ad. Caller doesn't need a translation step. By default, creative.promotion and creative.creativeFeatures contain stored requested settings, which do not confirm platform application. With `refreshPromotion=true`, Meta promotion metadata is read live and exposed as `ad.creative.promotion` with `promotionStatus`. Only `applied` confirms an offer; `not_returned` means the creative read succeeded without promotion metadata, and `unavailable` means it failed. 
 
 ### Examples
 
@@ -1626,6 +1704,81 @@ end
 - **Accept**: application/json
 
 
+## list_ad_group_assets
+
+> <ListAdGroupAssets200Response> list_ad_group_assets(ad_set_id, account_id, opts)
+
+List ad-group assets
+
+Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_set_id = 'ad_set_id_example' # String | Numeric Google platform id.
+account_id = 'account_id_example' # String | 
+opts = {
+  customer_id: 'customer_id_example' # String | 
+}
+
+begin
+  # List ad-group assets
+  result = api_instance.list_ad_group_assets(ad_set_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ad_group_assets: #{e}"
+end
+```
+
+#### Using the list_ad_group_assets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListAdGroupAssets200Response>, Integer, Hash)> list_ad_group_assets_with_http_info(ad_set_id, account_id, opts)
+
+```ruby
+begin
+  # List ad-group assets
+  data, status_code, headers = api_instance.list_ad_group_assets_with_http_info(ad_set_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListAdGroupAssets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_ad_group_assets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_set_id** | **String** | Numeric Google platform id. |  |
+| **account_id** | **String** |  |  |
+| **customer_id** | **String** |  | [optional] |
+
+### Return type
+
+[**ListAdGroupAssets200Response**](ListAdGroupAssets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_ad_keywords
 
 > <ListAdKeywords200Response> list_ad_keywords(opts)
@@ -1970,6 +2123,81 @@ end
 - **Accept**: application/json
 
 
+## list_campaign_assets
+
+> <ListCampaignAssets200Response> list_campaign_assets(campaign_id, account_id, opts)
+
+List campaign assets
+
+Lists directly attached Google assets. Fresh reads are cached for 10 minutes; exhausted quota may return the last successful read with stale=true. Inherited assets are not included.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Numeric Google platform id.
+account_id = 'account_id_example' # String | 
+opts = {
+  customer_id: 'customer_id_example' # String | 
+}
+
+begin
+  # List campaign assets
+  result = api_instance.list_campaign_assets(campaign_id, account_id, opts)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_campaign_assets: #{e}"
+end
+```
+
+#### Using the list_campaign_assets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListCampaignAssets200Response>, Integer, Hash)> list_campaign_assets_with_http_info(campaign_id, account_id, opts)
+
+```ruby
+begin
+  # List campaign assets
+  data, status_code, headers = api_instance.list_campaign_assets_with_http_info(campaign_id, account_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListCampaignAssets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->list_campaign_assets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Numeric Google platform id. |  |
+| **account_id** | **String** |  |  |
+| **customer_id** | **String** |  | [optional] |
+
+### Return type
+
+[**ListCampaignAssets200Response**](ListCampaignAssets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_campaign_negative_keyword_lists
 
 > <ListAdNegativeKeywordLists200Response> list_campaign_negative_keyword_lists(campaign_id, opts)
@@ -2116,6 +2344,77 @@ end
 - **Accept**: application/json
 
 
+## remove_ad_group_assets
+
+> <RemoveCampaignAssets200Response> remove_ad_group_assets(ad_set_id, remove_ad_group_assets_request)
+
+Remove ad-group assets
+
+Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_set_id = 'ad_set_id_example' # String | Numeric Google platform id.
+remove_ad_group_assets_request = Zernio::RemoveAdGroupAssetsRequest.new({account_id: 'account_id_example', asset_resource_names: ['asset_resource_names_example'], ad_group_asset_resource_names: ['ad_group_asset_resource_names_example']}) # RemoveAdGroupAssetsRequest | 
+
+begin
+  # Remove ad-group assets
+  result = api_instance.remove_ad_group_assets(ad_set_id, remove_ad_group_assets_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->remove_ad_group_assets: #{e}"
+end
+```
+
+#### Using the remove_ad_group_assets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveCampaignAssets200Response>, Integer, Hash)> remove_ad_group_assets_with_http_info(ad_set_id, remove_ad_group_assets_request)
+
+```ruby
+begin
+  # Remove ad-group assets
+  data, status_code, headers = api_instance.remove_ad_group_assets_with_http_info(ad_set_id, remove_ad_group_assets_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveCampaignAssets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->remove_ad_group_assets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_set_id** | **String** | Numeric Google platform id. |  |
+| **remove_ad_group_assets_request** | [**RemoveAdGroupAssetsRequest**](RemoveAdGroupAssetsRequest.md) |  |  |
+
+### Return type
+
+[**RemoveCampaignAssets200Response**](RemoveCampaignAssets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## remove_ad_keyword
 
 > <RemoveAdKeyword200Response> remove_ad_keyword(keyword_id)
@@ -2182,6 +2481,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## remove_campaign_assets
+
+> <RemoveCampaignAssets200Response> remove_campaign_assets(campaign_id, remove_campaign_assets_request)
+
+Remove campaign assets
+
+Removes the specified attachments only. Google assets cannot be deleted. Other attachments remain. assetResourceNames is retained for compatibility.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Numeric Google platform id.
+remove_campaign_assets_request = Zernio::RemoveCampaignAssetsRequest.new({account_id: 'account_id_example', asset_resource_names: ['asset_resource_names_example'], campaign_asset_resource_names: ['campaign_asset_resource_names_example']}) # RemoveCampaignAssetsRequest | 
+
+begin
+  # Remove campaign assets
+  result = api_instance.remove_campaign_assets(campaign_id, remove_campaign_assets_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->remove_campaign_assets: #{e}"
+end
+```
+
+#### Using the remove_campaign_assets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<RemoveCampaignAssets200Response>, Integer, Hash)> remove_campaign_assets_with_http_info(campaign_id, remove_campaign_assets_request)
+
+```ruby
+begin
+  # Remove campaign assets
+  data, status_code, headers = api_instance.remove_campaign_assets_with_http_info(campaign_id, remove_campaign_assets_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <RemoveCampaignAssets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->remove_campaign_assets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Numeric Google platform id. |  |
+| **remove_campaign_assets_request** | [**RemoveCampaignAssetsRequest**](RemoveCampaignAssetsRequest.md) |  |  |
+
+### Return type
+
+[**RemoveCampaignAssets200Response**](RemoveCampaignAssets200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 
@@ -2333,7 +2703,7 @@ end
 
 Update ad
 
-Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via `/v2/adgroup/update/`), and creative   (via `/v2/ad/update/` patch-style: `headline` is ignored, `body` becomes `ad_text`). - **Google**: status, budget, KEYWORD edits via `targeting.keywords` /   `targeting.negativeKeywords`, and DEVICE bid adjustments via `targeting.devices`.   Each list you send becomes the FULL new set of its kind (criteria not in the   list are removed); a kind left out is untouched. Any other `targeting` field   returns 400: Google cannot mutate broad targeting post-create without recreating   the campaign. `creative` returns 501. - **LinkedIn**: status, budget, targeting (countries or regions, excludedLocations (countries),   the B2B facets, and audience segments; applied to the LinkedIn Campaign via   PARTIAL_UPDATE, and REPLACES the campaign's entire targetingCriteria, not a merge),   and creative (uploads new media, creates a replacement inline creative on the same   campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   `targeting` or `creative` returns 501 with code `unsupported_platform_operation`.   OpenAI Ads budget is lifetime-only (see `budget.type` below).  **Google keyword replacement:** These edits affect the ad's entire ad group, including sibling ads. Positive (`targeting.keywords`) and negative (`targeting.negativeKeywords`) sets are independent: omit a field to leave that set unchanged, or send `[]` to remove every keyword of that kind.  Zernio compares each supplied set with Google's live criteria by case-insensitive keyword text and match type. A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally. Text comparison does not trim whitespace.  A bare string or an object without `matchType` means `broad`, not the existing criterion's match type. For example, resending an existing `{ \"text\": \"plumber\", \"matchType\": \"exact\" }` preserves it; sending `\"plumber\"` instead removes that EXACT criterion and requests a BROAD one. Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria's bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). Use `PATCH /v1/ads/keywords/{keywordId}` to pause/enable one keyword, or `DELETE /v1/ads/keywords/{keywordId}` to remove it. 
+Patch one or more fields on an ad. Status, budget, targeting, and creative changes are propagated to the platform.  Per-platform support: - **Meta** (Facebook + Instagram): all fields supported. - **TikTok**: status, budget, targeting (via `/v2/adgroup/update/`), and creative   (via `/v2/ad/update/` patch-style: `headline` is ignored, `body` becomes `ad_text`). - **Google**: status, budget, KEYWORD edits via `targeting.keywords` /   `targeting.negativeKeywords`, and DEVICE bid adjustments via `targeting.devices`.   Each list you send becomes the FULL new set of its kind (criteria not in the   list are removed); a kind left out is untouched. Any other `targeting` field   returns 400: Google cannot mutate broad targeting post-create without recreating   the campaign. RSA text updates use top-level `headlines`, `descriptions` and `finalUrls`.   Each supplied array replaces the full list; omit a field to preserve it. Use 3-15 headlines   (1-30 characters) and 2-4 descriptions (1-90 characters). Omit an asset to remove it;   omit pinnedField on an included asset to unpin it. Updates do not pad or truncate text.   The legacy creative fields remain unsupported for Google. - **LinkedIn**: status, budget, targeting (countries or regions, excludedLocations (countries),   the B2B facets, and audience segments; applied to the LinkedIn Campaign via   PARTIAL_UPDATE, and REPLACES the campaign's entire targetingCriteria, not a merge),   and creative (uploads new media, creates a replacement inline creative on the same   campaign, pauses the old one). - **Pinterest / X / OpenAI Ads**: status + budget only. Sending   `targeting` or `creative` returns 501 with code `unsupported_platform_operation`.   OpenAI Ads budget is lifetime-only (see `budget.type` below).  **Google keyword replacement:** These edits affect the ad's entire ad group, including sibling ads. Positive (`targeting.keywords`) and negative (`targeting.negativeKeywords`) sets are independent: omit a field to leave that set unchanged, or send `[]` to remove every keyword of that kind.  Zernio compares each supplied set with Google's live criteria by case-insensitive keyword text and match type. A matching criterion is left untouched, retaining its criterion ID, enabled/paused status, keyword-level bid overrides, labels, and criterion-associated history/statistics. Zernio does not reset its quality score; Google continues to calculate scores and statistics normally. Text comparison does not trim whitespace.  A bare string or an object without `matchType` means `broad`, not the existing criterion's match type. For example, resending an existing `{ \"text\": \"plumber\", \"matchType\": \"exact\" }` preserves it; sending `\"plumber\"` instead removes that EXACT criterion and requests a BROAD one. Changing text or match type removes criteria no longer requested and creates any missing criteria. New criteria get new IDs and do not inherit removed criteria's bid overrides, labels, or history. Historical reporting for a removed criterion is not transferred to its replacement.  To add keywords without replacing a set, use [POST /v1/ads/keywords](https://docs.zernio.com/ad-campaigns/add-ad-keywords). Use `PATCH /v1/ads/keywords/{keywordId}` to pause/enable one keyword, or `DELETE /v1/ads/keywords/{keywordId}` to remove it. 
 
 ### Examples
 
@@ -2529,6 +2899,77 @@ end
 ### Return type
 
 [**UpdateAdCampaignStatus200Response**](UpdateAdCampaignStatus200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_ad_group_assets
+
+> <UpdateCampaignAssets200Response> update_ad_group_assets(ad_set_id, update_campaign_assets_request)
+
+Update ad-group assets
+
+Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+ad_set_id = 'ad_set_id_example' # String | Numeric Google platform id.
+update_campaign_assets_request = Zernio::UpdateCampaignAssetsRequest.new({account_id: 'account_id_example', updates: [Zernio::GoogleAssetUpdate.new({asset_resource_name: 'asset_resource_name_example'})]}) # UpdateCampaignAssetsRequest | 
+
+begin
+  # Update ad-group assets
+  result = api_instance.update_ad_group_assets(ad_set_id, update_campaign_assets_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_ad_group_assets: #{e}"
+end
+```
+
+#### Using the update_ad_group_assets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateCampaignAssets200Response>, Integer, Hash)> update_ad_group_assets_with_http_info(ad_set_id, update_campaign_assets_request)
+
+```ruby
+begin
+  # Update ad-group assets
+  data, status_code, headers = api_instance.update_ad_group_assets_with_http_info(ad_set_id, update_campaign_assets_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateCampaignAssets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_ad_group_assets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ad_set_id** | **String** | Numeric Google platform id. |  |
+| **update_campaign_assets_request** | [**UpdateCampaignAssetsRequest**](UpdateCampaignAssetsRequest.md) |  |  |
+
+### Return type
+
+[**UpdateCampaignAssets200Response**](UpdateCampaignAssets200Response.md)
 
 ### Authorization
 
@@ -2884,6 +3325,77 @@ end
 ### Return type
 
 [**UpdateBidStrategy200Response**](UpdateBidStrategy200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_campaign_assets
+
+> <UpdateCampaignAssets200Response> update_campaign_assets(campaign_id, update_campaign_assets_request)
+
+Update campaign assets
+
+Edits existing Google assets in place. Send updates with assetResourceName and the fields to change. An asset is shared: changes affect every attachment using it. Omitted fields stay unchanged. The operation consumes the Google operations budget and invalidates affected cached lists.
+
+### Examples
+
+```ruby
+require 'time'
+require 'zernio-sdk'
+# setup authorization
+Zernio.configure do |config|
+  # Configure Bearer authorization (JWT): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = Zernio::AdCampaignsApi.new
+campaign_id = 'campaign_id_example' # String | Numeric Google platform id.
+update_campaign_assets_request = Zernio::UpdateCampaignAssetsRequest.new({account_id: 'account_id_example', updates: [Zernio::GoogleAssetUpdate.new({asset_resource_name: 'asset_resource_name_example'})]}) # UpdateCampaignAssetsRequest | 
+
+begin
+  # Update campaign assets
+  result = api_instance.update_campaign_assets(campaign_id, update_campaign_assets_request)
+  p result
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_campaign_assets: #{e}"
+end
+```
+
+#### Using the update_campaign_assets_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<UpdateCampaignAssets200Response>, Integer, Hash)> update_campaign_assets_with_http_info(campaign_id, update_campaign_assets_request)
+
+```ruby
+begin
+  # Update campaign assets
+  data, status_code, headers = api_instance.update_campaign_assets_with_http_info(campaign_id, update_campaign_assets_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <UpdateCampaignAssets200Response>
+rescue Zernio::ApiError => e
+  puts "Error when calling AdCampaignsApi->update_campaign_assets_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Numeric Google platform id. |  |
+| **update_campaign_assets_request** | [**UpdateCampaignAssetsRequest**](UpdateCampaignAssetsRequest.md) |  |  |
+
+### Return type
+
+[**UpdateCampaignAssets200Response**](UpdateCampaignAssets200Response.md)
 
 ### Authorization
 

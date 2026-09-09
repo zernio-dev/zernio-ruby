@@ -4,11 +4,11 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **account_id** | **String** | Zernio Google Ads SocialAccount id. Resolves the customer id + refresh token. |  |
-| **customer_id** | **String** | Numeric Google Ads customer id. Required when the connection has multiple Google Ads accounts; optional (and inferred) when it has only one. | [optional] |
-| **sitelinks** | [**Array&lt;AttachCampaignAssetsRequestSitelinksInner&gt;**](AttachCampaignAssetsRequestSitelinksInner.md) | See POST /v1/ads/create sitelinks, same shape. | [optional] |
+| **account_id** | **String** | Zernio Google Ads connection id. |  |
+| **customer_id** | **String** | Google customer id without dashes. Required when the connection has multiple customers. | [optional] |
+| **sitelinks** | [**Array&lt;GoogleSitelink&gt;**](GoogleSitelink.md) |  | [optional] |
 | **callouts** | **Array&lt;String&gt;** |  | [optional] |
-| **structured_snippets** | [**Array&lt;AttachCampaignAssetsRequestStructuredSnippetsInner&gt;**](AttachCampaignAssetsRequestStructuredSnippetsInner.md) |  | [optional] |
+| **structured_snippets** | [**Array&lt;GoogleStructuredSnippet&gt;**](GoogleStructuredSnippet.md) |  | [optional] |
 
 ## Example
 

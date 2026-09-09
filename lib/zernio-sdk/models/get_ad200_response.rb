@@ -17,10 +17,18 @@ module Zernio
   class GetAd200Response < ApiModelBase
     attr_accessor :ad
 
+    # Google RSA details cache timestamp.
+    attr_accessor :cached_at
+
+    # Whether Google RSA details use the last successful cached response.
+    attr_accessor :stale
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'ad' => :'ad'
+        :'ad' => :'ad',
+        :'cached_at' => :'cachedAt',
+        :'stale' => :'stale'
       }
     end
 
@@ -37,13 +45,16 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ad' => :'Ad'
+        :'ad' => :'Ad',
+        :'cached_at' => :'Time',
+        :'stale' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'cached_at',
       ])
     end
 
@@ -65,6 +76,14 @@ module Zernio
 
       if attributes.key?(:'ad')
         self.ad = attributes[:'ad']
+      end
+
+      if attributes.key?(:'cached_at')
+        self.cached_at = attributes[:'cached_at']
+      end
+
+      if attributes.key?(:'stale')
+        self.stale = attributes[:'stale']
       end
     end
 
@@ -88,7 +107,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          ad == o.ad
+          ad == o.ad &&
+          cached_at == o.cached_at &&
+          stale == o.stale
     end
 
     # @see the `==` method
@@ -100,7 +121,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [ad].hash
+      [ad, cached_at, stale].hash
     end
 
     # Builds the object from hash
