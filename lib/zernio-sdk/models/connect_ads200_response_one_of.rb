@@ -26,8 +26,33 @@ module Zernio
 
     attr_accessor :display_name
 
+    # Present for an existing business-login connection.
+    attr_accessor :token_type
+
     # Echo of the persisted ad-account scope when the caller passed `adAccountId` / `adAccountIds`. Omitted when no scope is set. 
     attr_accessor :scoped_ad_account_ids
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -37,6 +62,7 @@ module Zernio
         :'platform' => :'platform',
         :'username' => :'username',
         :'display_name' => :'displayName',
+        :'token_type' => :'tokenType',
         :'scoped_ad_account_ids' => :'scopedAdAccountIds'
       }
     end
@@ -59,6 +85,7 @@ module Zernio
         :'platform' => :'String',
         :'username' => :'String',
         :'display_name' => :'String',
+        :'token_type' => :'String',
         :'scoped_ad_account_ids' => :'Array<String>'
       }
     end
@@ -105,6 +132,10 @@ module Zernio
         self.display_name = attributes[:'display_name']
       end
 
+      if attributes.key?(:'token_type')
+        self.token_type = attributes[:'token_type']
+      end
+
       if attributes.key?(:'scoped_ad_account_ids')
         if (value = attributes[:'scoped_ad_account_ids']).is_a?(Array)
           self.scoped_ad_account_ids = value
@@ -124,7 +155,19 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      token_type_validator = EnumAttributeValidator.new('String', ["system-user"])
+      return false unless token_type_validator.valid?(@token_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] token_type Object to be assigned
+    def token_type=(token_type)
+      validator = EnumAttributeValidator.new('String', ["system-user"])
+      unless validator.valid?(token_type)
+        fail ArgumentError, "invalid value for \"token_type\", must be one of #{validator.allowable_values}."
+      end
+      @token_type = token_type
     end
 
     # Checks equality by comparing each attribute.
@@ -137,6 +180,7 @@ module Zernio
           platform == o.platform &&
           username == o.username &&
           display_name == o.display_name &&
+          token_type == o.token_type &&
           scoped_ad_account_ids == o.scoped_ad_account_ids
     end
 
@@ -149,7 +193,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [already_connected, account_id, platform, username, display_name, scoped_ad_account_ids].hash
+      [already_connected, account_id, platform, username, display_name, token_type, scoped_ad_account_ids].hash
     end
 
     # Builds the object from hash

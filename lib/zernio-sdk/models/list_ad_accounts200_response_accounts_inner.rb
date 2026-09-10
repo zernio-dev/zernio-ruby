@@ -22,6 +22,12 @@ module Zernio
 
     attr_accessor :currency
 
+    # Meta only. Owning Business Manager ID when available on the grant.
+    attr_accessor :business_id
+
+    # Owning business name when supplied by the platform.
+    attr_accessor :business_name
+
     # LinkedIn only. LinkedIn's own ad account status. In practice always `ACTIVE`, because the LinkedIn query filters to active accounts. Meta, Google, TikTok and Pinterest report `accountStatus` instead; X reports `approvalStatus`.
     attr_accessor :status
 
@@ -54,6 +60,8 @@ module Zernio
         :'id' => :'id',
         :'name' => :'name',
         :'currency' => :'currency',
+        :'business_id' => :'businessId',
+        :'business_name' => :'businessName',
         :'status' => :'status',
         :'account_status' => :'accountStatus',
         :'approval_status' => :'approvalStatus',
@@ -82,6 +90,8 @@ module Zernio
         :'id' => :'String',
         :'name' => :'String',
         :'currency' => :'String',
+        :'business_id' => :'String',
+        :'business_name' => :'String',
         :'status' => :'String',
         :'account_status' => :'Object',
         :'approval_status' => :'String',
@@ -128,6 +138,14 @@ module Zernio
 
       if attributes.key?(:'currency')
         self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'business_id')
+        self.business_id = attributes[:'business_id']
+      end
+
+      if attributes.key?(:'business_name')
+        self.business_name = attributes[:'business_name']
       end
 
       if attributes.key?(:'status')
@@ -190,6 +208,8 @@ module Zernio
           id == o.id &&
           name == o.name &&
           currency == o.currency &&
+          business_id == o.business_id &&
+          business_name == o.business_name &&
           status == o.status &&
           account_status == o.account_status &&
           approval_status == o.approval_status &&
@@ -210,7 +230,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, currency, status, account_status, approval_status, disable_reason, timezone_name, timezone_offset_hours_utc, minimum_daily_budget, selectable, unusable_reason].hash
+      [id, name, currency, business_id, business_name, status, account_status, approval_status, disable_reason, timezone_name, timezone_offset_hours_utc, minimum_daily_budget, selectable, unusable_reason].hash
     end
 
     # Builds the object from hash

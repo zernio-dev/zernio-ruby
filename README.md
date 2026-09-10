@@ -360,6 +360,7 @@ Class | Method | HTTP request | Description
 *Zernio::CommentsApi* | [**unlike_inbox_comment**](docs/CommentsApi.md#unlike_inbox_comment) | **DELETE** /v1/inbox/comments/{postId}/{commentId}/like | Unlike comment
 *Zernio::CommentsApi* | [**unlike_post**](docs/CommentsApi.md#unlike_post) | **DELETE** /v1/inbox/posts/{postId}/like | Unlike post
 *Zernio::ConnectApi* | [**assign_google_business_location**](docs/ConnectApi.md#assign_google_business_location) | **POST** /v1/accounts/{accountId}/gmb-locations/assign | Assign Google Business Profile location to another profile
+*Zernio::ConnectApi* | [**complete_meta_ads_business_login**](docs/ConnectApi.md#complete_meta_ads_business_login) | **GET** /v1/connect/meta-ads/callback | Complete Meta business login
 *Zernio::ConnectApi* | [**complete_telegram_connect**](docs/ConnectApi.md#complete_telegram_connect) | **PATCH** /v1/connect/telegram | Check Telegram status
 *Zernio::ConnectApi* | [**complete_whats_app_phone_selection**](docs/ConnectApi.md#complete_whats_app_phone_selection) | **POST** /v1/connect/whatsapp/select-phone-number | Complete number selection
 *Zernio::ConnectApi* | [**configure_tik_tok_ads_brand_identity**](docs/ConnectApi.md#configure_tik_tok_ads_brand_identity) | **PATCH** /v1/connect/tiktok-ads | Set TikTok brand identity

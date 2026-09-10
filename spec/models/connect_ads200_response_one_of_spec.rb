@@ -57,6 +57,16 @@ describe Zernio::ConnectAds200ResponseOneOf do
     end
   end
 
+  describe 'test attribute "token_type"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["system-user"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.token_type = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "scoped_ad_account_ids"' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
