@@ -14,38 +14,25 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateInboxConversation400Response < ApiModelBase
-    attr_accessor :error
+  class CreateInboxConversationRequestTemplateCardsInner < ApiModelBase
+    # The card's card_index in the approved template.
+    attr_accessor :card_index
 
-    attr_accessor :code
+    # Values for this card's own body variables, in the card's own {{1}}, {{2}}, ... order (or named-slot order of appearance).
+    attr_accessor :params
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :header_media
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Values for this card's own buttons, each addressed by the button's index within the card.
+    attr_accessor :buttons
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error',
-        :'code' => :'code'
+        :'card_index' => :'cardIndex',
+        :'params' => :'params',
+        :'header_media' => :'headerMedia',
+        :'buttons' => :'buttons'
       }
     end
 
@@ -62,8 +49,10 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'String',
-        :'code' => :'String'
+        :'card_index' => :'Integer',
+        :'params' => :'Array<String>',
+        :'header_media' => :'CreateInboxConversationRequestTemplateCardsInnerHeaderMedia',
+        :'buttons' => :'Array<CreateInboxConversationRequestTemplateCardsInnerButtonsInner>'
       }
     end
 
@@ -77,24 +66,38 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateInboxConversation400Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateInboxConversationRequestTemplateCardsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateInboxConversation400Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateInboxConversationRequestTemplateCardsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.key?(:'card_index')
+        self.card_index = attributes[:'card_index']
+      else
+        self.card_index = nil
       end
 
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
+      if attributes.key?(:'params')
+        if (value = attributes[:'params']).is_a?(Array)
+          self.params = value
+        end
+      end
+
+      if attributes.key?(:'header_media')
+        self.header_media = attributes[:'header_media']
+      end
+
+      if attributes.key?(:'buttons')
+        if (value = attributes[:'buttons']).is_a?(Array)
+          self.buttons = value
+        end
       end
     end
 
@@ -103,6 +106,22 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @card_index.nil?
+        invalid_properties.push('invalid value for "card_index", card_index cannot be nil.')
+      end
+
+      if @card_index > 9
+        invalid_properties.push('invalid value for "card_index", must be smaller than or equal to 9.')
+      end
+
+      if @card_index < 0
+        invalid_properties.push('invalid value for "card_index", must be greater than or equal to 0.')
+      end
+
+      if !@buttons.nil? && @buttons.length > 2
+        invalid_properties.push('invalid value for "buttons", number of items must be less than or equal to 2.')
+      end
+
       invalid_properties
     end
 
@@ -110,19 +129,43 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED", "PLATFORM_LIMITATION", "TEMPLATE_REQUIRED", "INVALID_TEMPLATE_PARAMS", "INVALID_TEMPLATE_BUTTON_PARAM", "INVALID_TEMPLATE_CARD_PARAM", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
-      return false unless code_validator.valid?(@code)
+      return false if @card_index.nil?
+      return false if @card_index > 9
+      return false if @card_index < 0
+      return false if !@buttons.nil? && @buttons.length > 2
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] code Object to be assigned
-    def code=(code)
-      validator = EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED", "PLATFORM_LIMITATION", "TEMPLATE_REQUIRED", "INVALID_TEMPLATE_PARAMS", "INVALID_TEMPLATE_BUTTON_PARAM", "INVALID_TEMPLATE_CARD_PARAM", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
-      unless validator.valid?(code)
-        fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] card_index Value to be assigned
+    def card_index=(card_index)
+      if card_index.nil?
+        fail ArgumentError, 'card_index cannot be nil'
       end
-      @code = code
+
+      if card_index > 9
+        fail ArgumentError, 'invalid value for "card_index", must be smaller than or equal to 9.'
+      end
+
+      if card_index < 0
+        fail ArgumentError, 'invalid value for "card_index", must be greater than or equal to 0.'
+      end
+
+      @card_index = card_index
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] buttons Value to be assigned
+    def buttons=(buttons)
+      if buttons.nil?
+        fail ArgumentError, 'buttons cannot be nil'
+      end
+
+      if buttons.length > 2
+        fail ArgumentError, 'invalid value for "buttons", number of items must be less than or equal to 2.'
+      end
+
+      @buttons = buttons
     end
 
     # Checks equality by comparing each attribute.
@@ -130,8 +173,10 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error &&
-          code == o.code
+          card_index == o.card_index &&
+          params == o.params &&
+          header_media == o.header_media &&
+          buttons == o.buttons
     end
 
     # @see the `==` method
@@ -143,7 +188,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, code].hash
+      [card_index, params, header_media, buttons].hash
     end
 
     # Builds the object from hash

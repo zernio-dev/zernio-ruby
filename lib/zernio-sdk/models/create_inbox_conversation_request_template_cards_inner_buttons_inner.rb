@@ -14,10 +14,15 @@ require 'date'
 require 'time'
 
 module Zernio
-  class CreateInboxConversation400Response < ApiModelBase
-    attr_accessor :error
+  class CreateInboxConversationRequestTemplateCardsInnerButtonsInner < ApiModelBase
+    # Zero-based position of the button within the card's buttons.
+    attr_accessor :index
 
-    attr_accessor :code
+    # The button kind, which decides how the value is sent.
+    attr_accessor :sub_type
+
+    # The value to send (quick_reply payload, or the URL dynamic suffix).
+    attr_accessor :value
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -44,8 +49,9 @@ module Zernio
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error',
-        :'code' => :'code'
+        :'index' => :'index',
+        :'sub_type' => :'subType',
+        :'value' => :'value'
       }
     end
 
@@ -62,8 +68,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'String',
-        :'code' => :'String'
+        :'index' => :'Integer',
+        :'sub_type' => :'String',
+        :'value' => :'String'
       }
     end
 
@@ -77,24 +84,34 @@ module Zernio
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateInboxConversation400Response` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Zernio::CreateInboxConversationRequestTemplateCardsInnerButtonsInner` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateInboxConversation400Response`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Zernio::CreateInboxConversationRequestTemplateCardsInnerButtonsInner`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.key?(:'index')
+        self.index = attributes[:'index']
+      else
+        self.index = nil
       end
 
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
+      if attributes.key?(:'sub_type')
+        self.sub_type = attributes[:'sub_type']
+      else
+        self.sub_type = nil
+      end
+
+      if attributes.key?(:'value')
+        self.value = attributes[:'value']
+      else
+        self.value = nil
       end
     end
 
@@ -103,6 +120,30 @@ module Zernio
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @index.nil?
+        invalid_properties.push('invalid value for "index", index cannot be nil.')
+      end
+
+      if @index > 1
+        invalid_properties.push('invalid value for "index", must be smaller than or equal to 1.')
+      end
+
+      if @index < 0
+        invalid_properties.push('invalid value for "index", must be greater than or equal to 0.')
+      end
+
+      if @sub_type.nil?
+        invalid_properties.push('invalid value for "sub_type", sub_type cannot be nil.')
+      end
+
+      if @value.nil?
+        invalid_properties.push('invalid value for "value", value cannot be nil.')
+      end
+
+      if @value.to_s.length < 1
+        invalid_properties.push('invalid value for "value", the character length must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -110,19 +151,57 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED", "PLATFORM_LIMITATION", "TEMPLATE_REQUIRED", "INVALID_TEMPLATE_PARAMS", "INVALID_TEMPLATE_BUTTON_PARAM", "INVALID_TEMPLATE_CARD_PARAM", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
-      return false unless code_validator.valid?(@code)
+      return false if @index.nil?
+      return false if @index > 1
+      return false if @index < 0
+      return false if @sub_type.nil?
+      sub_type_validator = EnumAttributeValidator.new('String', ["quick_reply", "url"])
+      return false unless sub_type_validator.valid?(@sub_type)
+      return false if @value.nil?
+      return false if @value.to_s.length < 1
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] code Object to be assigned
-    def code=(code)
-      validator = EnumAttributeValidator.new('String', ["PLATFORM_NOT_SUPPORTED", "PLATFORM_LIMITATION", "TEMPLATE_REQUIRED", "INVALID_TEMPLATE_PARAMS", "INVALID_TEMPLATE_BUTTON_PARAM", "INVALID_TEMPLATE_CARD_PARAM", "DIRECT_SEND_NOT_ELIGIBLE", "DIRECT_SEND_LIMITED", "DIRECT_SEND_BLOCKED"])
-      unless validator.valid?(code)
-        fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] index Value to be assigned
+    def index=(index)
+      if index.nil?
+        fail ArgumentError, 'index cannot be nil'
       end
-      @code = code
+
+      if index > 1
+        fail ArgumentError, 'invalid value for "index", must be smaller than or equal to 1.'
+      end
+
+      if index < 0
+        fail ArgumentError, 'invalid value for "index", must be greater than or equal to 0.'
+      end
+
+      @index = index
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] sub_type Object to be assigned
+    def sub_type=(sub_type)
+      validator = EnumAttributeValidator.new('String', ["quick_reply", "url"])
+      unless validator.valid?(sub_type)
+        fail ArgumentError, "invalid value for \"sub_type\", must be one of #{validator.allowable_values}."
+      end
+      @sub_type = sub_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] value Value to be assigned
+    def value=(value)
+      if value.nil?
+        fail ArgumentError, 'value cannot be nil'
+      end
+
+      if value.to_s.length < 1
+        fail ArgumentError, 'invalid value for "value", the character length must be greater than or equal to 1.'
+      end
+
+      @value = value
     end
 
     # Checks equality by comparing each attribute.
@@ -130,8 +209,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error &&
-          code == o.code
+          index == o.index &&
+          sub_type == o.sub_type &&
+          value == o.value
     end
 
     # @see the `==` method
@@ -143,7 +223,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, code].hash
+      [index, sub_type, value].hash
     end
 
     # Builds the object from hash

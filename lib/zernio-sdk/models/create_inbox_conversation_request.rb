@@ -48,6 +48,9 @@ module Zernio
     # WhatsApp only. Values for template buttons that carry one at send time, each addressed by the button's position in the approved template. This is the only way to send a copy-code button's payload (a Pix payment code, a coupon) or a flow token, because templateParams is a flat array of text variables and covers dynamic URL buttons only. Supplying a button here overrides whatever templateParams would have derived for that same index, so the send never carries one button twice; repeating an index within this array is rejected with 400. Each index must name a button of the matching kind on the approved template, which is also checked before the send and returns 400 (INVALID_TEMPLATE_BUTTON_PARAM) rather than a Meta rejection.
     attr_accessor :template_button_params
 
+    # WhatsApp only. Per-card overrides for a CAROUSEL template, each addressed by the card's card_index. Carousel card body variables restart at {{1}} per card, so they cannot be expressed in the flat templateParams slot order; use this instead. A cardIndex naming a card the approved template does not have, a duplicate cardIndex, or a params count that does not match the card body's token count is rejected with 400 (INVALID_TEMPLATE_CARD_PARAM).
+    attr_accessor :template_cards
+
     attr_accessor :header_media
 
     attr_accessor :header_location
@@ -88,6 +91,7 @@ module Zernio
         :'template_language' => :'templateLanguage',
         :'template_params' => :'templateParams',
         :'template_button_params' => :'templateButtonParams',
+        :'template_cards' => :'templateCards',
         :'header_media' => :'headerMedia',
         :'header_location' => :'headerLocation'
       }
@@ -117,6 +121,7 @@ module Zernio
         :'template_language' => :'String',
         :'template_params' => :'Array<String>',
         :'template_button_params' => :'Array<CreateInboxConversationRequestTemplateButtonParamsInner>',
+        :'template_cards' => :'Array<CreateInboxConversationRequestTemplateCardsInner>',
         :'header_media' => :'CreateInboxConversationRequestHeaderMedia',
         :'header_location' => :'CreateInboxConversationRequestHeaderLocation'
       }
@@ -198,6 +203,12 @@ module Zernio
         end
       end
 
+      if attributes.key?(:'template_cards')
+        if (value = attributes[:'template_cards']).is_a?(Array)
+          self.template_cards = value
+        end
+      end
+
       if attributes.key?(:'header_media')
         self.header_media = attributes[:'header_media']
       end
@@ -220,6 +231,10 @@ module Zernio
         invalid_properties.push('invalid value for "template_button_params", number of items must be less than or equal to 10.')
       end
 
+      if !@template_cards.nil? && @template_cards.length > 10
+        invalid_properties.push('invalid value for "template_cards", number of items must be less than or equal to 10.')
+      end
+
       invalid_properties
     end
 
@@ -231,6 +246,7 @@ module Zernio
       category_validator = EnumAttributeValidator.new('String', ["utility"])
       return false unless category_validator.valid?(@category)
       return false if !@template_button_params.nil? && @template_button_params.length > 10
+      return false if !@template_cards.nil? && @template_cards.length > 10
       true
     end
 
@@ -268,6 +284,20 @@ module Zernio
       @template_button_params = template_button_params
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] template_cards Value to be assigned
+    def template_cards=(template_cards)
+      if template_cards.nil?
+        fail ArgumentError, 'template_cards cannot be nil'
+      end
+
+      if template_cards.length > 10
+        fail ArgumentError, 'invalid value for "template_cards", number of items must be less than or equal to 10.'
+      end
+
+      @template_cards = template_cards
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -284,6 +314,7 @@ module Zernio
           template_language == o.template_language &&
           template_params == o.template_params &&
           template_button_params == o.template_button_params &&
+          template_cards == o.template_cards &&
           header_media == o.header_media &&
           header_location == o.header_location
     end
@@ -297,7 +328,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, link_preview, template_language, template_params, template_button_params, header_media, header_location].hash
+      [account_id, participant_id, participant_username, message, skip_dm_check, template_name, category, link_preview, template_language, template_params, template_button_params, template_cards, header_media, header_location].hash
     end
 
     # Builds the object from hash
