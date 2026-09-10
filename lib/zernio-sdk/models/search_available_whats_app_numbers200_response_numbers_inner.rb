@@ -17,10 +17,16 @@ module Zernio
   class SearchAvailableWhatsAppNumbers200ResponseNumbersInner < ApiModelBase
     attr_accessor :phone_number
 
+    attr_accessor :locality
+
+    attr_accessor :best_effort
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'phone_number' => :'phoneNumber'
+        :'phone_number' => :'phoneNumber',
+        :'locality' => :'locality',
+        :'best_effort' => :'bestEffort'
       }
     end
 
@@ -37,7 +43,9 @@ module Zernio
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'phone_number' => :'String'
+        :'phone_number' => :'String',
+        :'locality' => :'String',
+        :'best_effort' => :'Boolean'
       }
     end
 
@@ -66,6 +74,14 @@ module Zernio
       if attributes.key?(:'phone_number')
         self.phone_number = attributes[:'phone_number']
       end
+
+      if attributes.key?(:'locality')
+        self.locality = attributes[:'locality']
+      end
+
+      if attributes.key?(:'best_effort')
+        self.best_effort = attributes[:'best_effort']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -88,7 +104,9 @@ module Zernio
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          phone_number == o.phone_number
+          phone_number == o.phone_number &&
+          locality == o.locality &&
+          best_effort == o.best_effort
     end
 
     # @see the `==` method
@@ -100,7 +118,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_number].hash
+      [phone_number, locality, best_effort].hash
     end
 
     # Builds the object from hash

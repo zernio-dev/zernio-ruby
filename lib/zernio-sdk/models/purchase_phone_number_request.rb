@@ -27,6 +27,9 @@ module Zernio
     # Area code (national destination code, e.g. 11 for Sao Paulo) the number must be in. Hard constraint: when the area has no deliverable inventory the purchase fails with 409 code AREA_CODE_UNAVAILABLE instead of assigning a number from another area, and later replacements stay in this area too. Omit for any area. Get live options from GET /v1/phone-numbers/availability (areaOptions). 
     attr_accessor :area_code
 
+    # One exact number to buy, in E.164, taken from GET /v1/phone-numbers/available. Hard constraint: when it is no longer available (bought by someone else, or WhatsApp's buy-time check rejects it) the purchase fails with 409 code PHONE_NUMBER_UNAVAILABLE instead of assigning another number; search again and pick another. Only for countries and types that activate instantly: a regulated one (202 kyc_required) returns 400 when phoneNumber is set. 
+    attr_accessor :phone_number
+
     # A phone number is the unit; WhatsApp is one optional feature. Pass false to buy a STANDALONE number (Calls/SMS only): provisioning skips the Meta pre-verify/OTP steps and the number activates immediately. Omitted defaults to the WhatsApp provisioning path. WhatsApp can be connected to a standalone number later from the connect flow. 
     attr_accessor :connect_whatsapp
 
@@ -71,6 +74,7 @@ module Zernio
         :'country' => :'country',
         :'number_type' => :'numberType',
         :'area_code' => :'areaCode',
+        :'phone_number' => :'phoneNumber',
         :'connect_whatsapp' => :'connectWhatsapp',
         :'wants_sms' => :'wantsSms',
         :'wants_whatsapp' => :'wantsWhatsapp',
@@ -96,6 +100,7 @@ module Zernio
         :'country' => :'String',
         :'number_type' => :'String',
         :'area_code' => :'String',
+        :'phone_number' => :'String',
         :'connect_whatsapp' => :'Boolean',
         :'wants_sms' => :'Boolean',
         :'wants_whatsapp' => :'Boolean',
@@ -146,6 +151,10 @@ module Zernio
         self.area_code = attributes[:'area_code']
       end
 
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
+      end
+
       if attributes.key?(:'connect_whatsapp')
         self.connect_whatsapp = attributes[:'connect_whatsapp']
       else
@@ -189,6 +198,11 @@ module Zernio
         invalid_properties.push("invalid value for \"area_code\", must conform to the pattern #{pattern}.")
       end
 
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if !@phone_number.nil? && @phone_number !~ pattern
+        invalid_properties.push("invalid value for \"phone_number\", must conform to the pattern #{pattern}.")
+      end
+
       if !@purchase_intent_id.nil? && @purchase_intent_id.to_s.length > 100
         invalid_properties.push('invalid value for "purchase_intent_id", the character length must be smaller than or equal to 100.')
       end
@@ -204,6 +218,7 @@ module Zernio
       number_type_validator = EnumAttributeValidator.new('String', ["local", "mobile", "national", "toll_free"])
       return false unless number_type_validator.valid?(@number_type)
       return false if !@area_code.nil? && @area_code !~ Regexp.new(/^\d{1,4}$/)
+      return false if !@phone_number.nil? && @phone_number !~ Regexp.new(/^\+[1-9]\d{6,14}$/)
       return false if !@purchase_intent_id.nil? && @purchase_intent_id.to_s.length > 100
       true
     end
@@ -244,6 +259,21 @@ module Zernio
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] phone_number Value to be assigned
+    def phone_number=(phone_number)
+      if phone_number.nil?
+        fail ArgumentError, 'phone_number cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if phone_number !~ pattern
+        fail ArgumentError, "invalid value for \"phone_number\", must conform to the pattern #{pattern}."
+      end
+
+      @phone_number = phone_number
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] purchase_intent_id Value to be assigned
     def purchase_intent_id=(purchase_intent_id)
       if purchase_intent_id.nil?
@@ -266,6 +296,7 @@ module Zernio
           country == o.country &&
           number_type == o.number_type &&
           area_code == o.area_code &&
+          phone_number == o.phone_number &&
           connect_whatsapp == o.connect_whatsapp &&
           wants_sms == o.wants_sms &&
           wants_whatsapp == o.wants_whatsapp &&
@@ -282,7 +313,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, number_type, area_code, connect_whatsapp, wants_sms, wants_whatsapp, purchase_intent_id, allow_multiple].hash
+      [profile_id, country, number_type, area_code, phone_number, connect_whatsapp, wants_sms, wants_whatsapp, purchase_intent_id, allow_multiple].hash
     end
 
     # Builds the object from hash

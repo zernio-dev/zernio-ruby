@@ -110,7 +110,7 @@ module Zernio
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      code_validator = EnumAttributeValidator.new('String', ["PURCHASE_VELOCITY", "AREA_CODE_UNAVAILABLE"])
+      code_validator = EnumAttributeValidator.new('String', ["PURCHASE_VELOCITY", "AREA_CODE_UNAVAILABLE", "PHONE_NUMBER_UNAVAILABLE"])
       return false unless code_validator.valid?(@code)
       true
     end
@@ -118,7 +118,7 @@ module Zernio
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] code Object to be assigned
     def code=(code)
-      validator = EnumAttributeValidator.new('String', ["PURCHASE_VELOCITY", "AREA_CODE_UNAVAILABLE"])
+      validator = EnumAttributeValidator.new('String', ["PURCHASE_VELOCITY", "AREA_CODE_UNAVAILABLE", "PHONE_NUMBER_UNAVAILABLE"])
       unless validator.valid?(code)
         fail ArgumentError, "invalid value for \"code\", must be one of #{validator.allowable_values}."
       end

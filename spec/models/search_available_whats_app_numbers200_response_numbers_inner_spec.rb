@@ -33,4 +33,16 @@ describe Zernio::SearchAvailableWhatsAppNumbers200ResponseNumbersInner do
     end
   end
 
+  describe 'test attribute "locality"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  describe 'test attribute "best_effort"' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
 end

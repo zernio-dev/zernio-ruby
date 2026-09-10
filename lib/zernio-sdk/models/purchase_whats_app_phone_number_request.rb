@@ -21,6 +21,9 @@ module Zernio
     # ISO 3166-1 alpha-2 country for the number (default US). International numbers require usage-based billing. Tier 3/4 countries return 202 { status: \"kyc_required\", kycUrl }. The customer must complete KYC at that URL before the number is ordered. See GET /v1/whatsapp/phone-numbers/countries. 
     attr_accessor :country
 
+    # One exact number to buy, in E.164, taken from GET /v1/phone-numbers/available. Fails with 409 code PHONE_NUMBER_UNAVAILABLE when it is no longer available. 
+    attr_accessor :phone_number
+
     # Optional idempotency key. Send the same value when retrying a purchase: if a number was already bought under this key, the API returns { status: \"already_purchased\", numberId, phoneNumber } instead of provisioning a second number. Generate a fresh key for each genuinely new purchase. 
     attr_accessor :purchase_intent_id
 
@@ -32,6 +35,7 @@ module Zernio
       {
         :'profile_id' => :'profileId',
         :'country' => :'country',
+        :'phone_number' => :'phoneNumber',
         :'purchase_intent_id' => :'purchaseIntentId',
         :'allow_multiple' => :'allowMultiple'
       }
@@ -52,6 +56,7 @@ module Zernio
       {
         :'profile_id' => :'String',
         :'country' => :'String',
+        :'phone_number' => :'String',
         :'purchase_intent_id' => :'String',
         :'allow_multiple' => :'Boolean'
       }
@@ -91,6 +96,10 @@ module Zernio
         self.country = 'US'
       end
 
+      if attributes.key?(:'phone_number')
+        self.phone_number = attributes[:'phone_number']
+      end
+
       if attributes.key?(:'purchase_intent_id')
         self.purchase_intent_id = attributes[:'purchase_intent_id']
       end
@@ -111,6 +120,11 @@ module Zernio
         invalid_properties.push('invalid value for "profile_id", profile_id cannot be nil.')
       end
 
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if !@phone_number.nil? && @phone_number !~ pattern
+        invalid_properties.push("invalid value for \"phone_number\", must conform to the pattern #{pattern}.")
+      end
+
       if !@purchase_intent_id.nil? && @purchase_intent_id.to_s.length > 100
         invalid_properties.push('invalid value for "purchase_intent_id", the character length must be smaller than or equal to 100.')
       end
@@ -123,6 +137,7 @@ module Zernio
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @profile_id.nil?
+      return false if !@phone_number.nil? && @phone_number !~ Regexp.new(/^\+[1-9]\d{6,14}$/)
       return false if !@purchase_intent_id.nil? && @purchase_intent_id.to_s.length > 100
       true
     end
@@ -135,6 +150,21 @@ module Zernio
       end
 
       @profile_id = profile_id
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] phone_number Value to be assigned
+    def phone_number=(phone_number)
+      if phone_number.nil?
+        fail ArgumentError, 'phone_number cannot be nil'
+      end
+
+      pattern = Regexp.new(/^\+[1-9]\d{6,14}$/)
+      if phone_number !~ pattern
+        fail ArgumentError, "invalid value for \"phone_number\", must conform to the pattern #{pattern}."
+      end
+
+      @phone_number = phone_number
     end
 
     # Custom attribute writer method with validation
@@ -158,6 +188,7 @@ module Zernio
       self.class == o.class &&
           profile_id == o.profile_id &&
           country == o.country &&
+          phone_number == o.phone_number &&
           purchase_intent_id == o.purchase_intent_id &&
           allow_multiple == o.allow_multiple
     end
@@ -171,7 +202,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [profile_id, country, purchase_intent_id, allow_multiple].hash
+      [profile_id, country, phone_number, purchase_intent_id, allow_multiple].hash
     end
 
     # Builds the object from hash

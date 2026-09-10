@@ -15,16 +15,25 @@ require 'time'
 
 module Zernio
   class SearchAvailablePhoneNumbers200ResponseNumbersInner < ApiModelBase
+    # E.164. Pass it as `phoneNumber` on POST /v1/phone-numbers/purchase to buy this exact number.
     attr_accessor :phone_number
 
     # Provider capability list for this number (e.g. voice, sms, mms).
     attr_accessor :features
 
+    # Town or rate center the number belongs to, as the carrier names it (e.g. WACO).
+    attr_accessor :locality
+
+    # true when the carrier added this number because too few matched your filters, so it may be outside the requested prefix or locality.
+    attr_accessor :best_effort
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'phone_number' => :'phoneNumber',
-        :'features' => :'features'
+        :'features' => :'features',
+        :'locality' => :'locality',
+        :'best_effort' => :'bestEffort'
       }
     end
 
@@ -42,7 +51,9 @@ module Zernio
     def self.openapi_types
       {
         :'phone_number' => :'String',
-        :'features' => :'Array<String>'
+        :'features' => :'Array<String>',
+        :'locality' => :'String',
+        :'best_effort' => :'Boolean'
       }
     end
 
@@ -77,6 +88,14 @@ module Zernio
           self.features = value
         end
       end
+
+      if attributes.key?(:'locality')
+        self.locality = attributes[:'locality']
+      end
+
+      if attributes.key?(:'best_effort')
+        self.best_effort = attributes[:'best_effort']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -100,7 +119,9 @@ module Zernio
       return true if self.equal?(o)
       self.class == o.class &&
           phone_number == o.phone_number &&
-          features == o.features
+          features == o.features &&
+          locality == o.locality &&
+          best_effort == o.best_effort
     end
 
     # @see the `==` method
@@ -112,7 +133,7 @@ module Zernio
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [phone_number, features].hash
+      [phone_number, features, locality, best_effort].hash
     end
 
     # Builds the object from hash
