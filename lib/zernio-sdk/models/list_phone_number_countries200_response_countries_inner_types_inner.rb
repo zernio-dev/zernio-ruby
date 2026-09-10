@@ -37,7 +37,7 @@ module Zernio
     # `request`: the carrier stocks this type nowhere and only sources it to order, so it is always a pre-order.
     attr_accessor :fulfilment
 
-    # Out of stock but orderable anyway. Submit KYC as usual (POST /v1/phone-numbers/kyc) and the carrier sources the number after review, usually about 3 weeks and never guaranteed. Only document tiers (3/4) qualify, and nothing is billed until the number is active.
+    # Out of stock but orderable anyway. Submit KYC as usual (POST /v1/phone-numbers/kyc): we buy regular stock the moment it returns, otherwise the carrier sources the number. Usually 2 to 4 weeks, never guaranteed. Only document tiers (3/4) qualify, and nothing is billed until the number is active.
     attr_accessor :pre_orderable
 
     class EnumAttributeValidator

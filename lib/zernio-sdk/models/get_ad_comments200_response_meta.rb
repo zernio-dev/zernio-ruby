@@ -30,7 +30,7 @@ module Zernio
     # Underlying post ID the comments belong to. effective_object_story_id for the Facebook side, effective_instagram_media_id for the Instagram side.
     attr_accessor :effective_story_id
 
-    # TikTok-only video item ID. Null when the ad and comments do not expose it.
+    # TikTok-only video item ID from stored ad fields or returned comments. Null does not prevent listing; ad details are not fetched to populate it.
     attr_accessor :tiktok_item_id
 
     # TikTok-only resolved start date.

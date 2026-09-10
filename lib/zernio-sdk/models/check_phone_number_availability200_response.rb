@@ -22,7 +22,7 @@ module Zernio
     # Whether deliverable voice inventory exists right now.
     attr_accessor :available
 
-    # Nothing deliverable now, but this pair can be pre-ordered: submit KYC as usual and the carrier sources the number after review (usually about 3 weeks, never guaranteed). Only document tiers (3/4) qualify.
+    # Nothing deliverable now, but this pair can be pre-ordered: submit KYC as usual and we buy regular stock the moment it returns, otherwise the carrier sources the number (usually 2 to 4 weeks, never guaranteed). Only document tiers (3/4) qualify.
     attr_accessor :pre_orderable
 
     attr_accessor :address_constraint
