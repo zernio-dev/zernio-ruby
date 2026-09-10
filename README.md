@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *Zernio::AdAccountsApi* | [**add_account_callouts**](docs/AdAccountsApi.md#add_account_callouts) | **POST** /v1/ads/accounts/callouts | Add account callouts
 *Zernio::AdAccountsApi* | [**add_account_sitelinks**](docs/AdAccountsApi.md#add_account_sitelinks) | **POST** /v1/ads/accounts/sitelinks | Add account sitelinks
 *Zernio::AdAccountsApi* | [**add_account_structured_snippets**](docs/AdAccountsApi.md#add_account_structured_snippets) | **POST** /v1/ads/accounts/structured-snippets | Add account snippets
+*Zernio::AdAccountsApi* | [**create_ad_account**](docs/AdAccountsApi.md#create_ad_account) | **POST** /v1/ads/accounts | Create Meta ad account
 *Zernio::AdAccountsApi* | [**create_ad_negative_keyword_list**](docs/AdAccountsApi.md#create_ad_negative_keyword_list) | **POST** /v1/ads/accounts/negative-keyword-lists | Create a negative keyword list
 *Zernio::AdAccountsApi* | [**create_custom_conversion**](docs/AdAccountsApi.md#create_custom_conversion) | **POST** /v1/accounts/{accountId}/custom-conversions | Create or reuse a custom conversion
 *Zernio::AdAccountsApi* | [**create_high_demand_period**](docs/AdAccountsApi.md#create_high_demand_period) | **POST** /v1/ads/high-demand-periods | Schedule a budget increase
@@ -1029,6 +1030,8 @@ Class | Method | HTTP request | Description
  - [Zernio::CreateAccountGroup201Response](docs/CreateAccountGroup201Response.md)
  - [Zernio::CreateAccountGroup201ResponseGroup](docs/CreateAccountGroup201ResponseGroup.md)
  - [Zernio::CreateAccountGroupRequest](docs/CreateAccountGroupRequest.md)
+ - [Zernio::CreateAdAccount201Response](docs/CreateAdAccount201Response.md)
+ - [Zernio::CreateAdAccountRequest](docs/CreateAdAccountRequest.md)
  - [Zernio::CreateAdAudience201Response](docs/CreateAdAudience201Response.md)
  - [Zernio::CreateAdAudienceRequest](docs/CreateAdAudienceRequest.md)
  - [Zernio::CreateAdCampaign200Response](docs/CreateAdCampaign200Response.md)
